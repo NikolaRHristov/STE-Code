@@ -1,40 +1,32 @@
-# STE-Code Extraction Progress
+# STE-Code Progress Tracker v2
 
-## Status: Batch 2 in progress
+## GATE 0: Environment ✓
+- [x] Paths verified
+- [x] Directories created
+- [x] State saved via git gcommit-hermes
 
-| Worker | Pages | Output File | Size | Status | Launched |
-|--------|-------|-------------|------|--------|----------|
-| W1 | 1–30 | w1-sec1-rules.md | 751L / 40KB | ✅ Done | Batch 1 |
-| W2 | 31–66 | w2-sec2-3-rules.md | ~42KB | ✅ Done | Batch 1 |
-| W3 | 67–94 | w3-sec3-5-rules.md | 901L / 39KB | ✅ Done | Batch 1 |
-| W4 | 95–114 | w4-sec6-8-rules.md | 622L / 36KB | ✅ Done | Batch 2 |
-| W5 | 115–128 | w5-sec9-gr-rules.md | 549L / 27KB | ✅ Done | Batch 2 |
-| W6 | 129–240 | w6-dict-a-f.md | — | 🟢 Running | Batch 2 |
-| W7 | 241–300 | w7-dict-g-p.md | — | ⬜ Ready | Batch 3 |
-| W8 | 301–360 | w8-dict-q-z.md | — | ⬜ Ready | Batch 3 |
-| W9 | 361–434 | w9-appendices.md | — | ⬜ Ready | Batch 3 |
+## Extraction — 4 pages per batch (~109 batches)
 
-## Artifact Status
+### Section 1 — Words (pages 1-66)
 
-| Artifact | Status | Notes |
-|----------|--------|-------|
-| ste-code-self-reading-manual.txt | ⚠️ V1 (pre-extraction) | Regenerate after W1-W9 complete |
-| ste-code-distilled-system-prompt.txt | ⚠️ V1 (pre-extraction) | Regenerate after W1-W9 complete |
-| ste-code-extraction-methodology.txt | ⚠️ V1 (pre-extraction) | Regenerate after W1-W9 complete |
-| ste-code-example-turn.txt | ⚠️ V1 (pre-extraction) | Regenerate after W1-W9 complete |
-| ste-code-deployment-guide.txt | ✅ Final | No spec dependency |
-| README.md | ⚠️ V1 (pre-extraction) | Update after regeneration |
+Batch 1 (pp 1-4):
+- [ ] W001: pages 1-4 → ste-code/workers/w001-p1-4.md
+- [ ] W002: pages 5-8 → ste-code/workers/w002-p5-8.md
+- [ ] W003: pages 9-12 → ste-code/workers/w003-p9-12.md
 
-## Skills Saved
+(expanding as we go — 434 pages ÷ 4 = ~109 workers)
 
-- `./.hermes/skills/spec-extraction/ste-code-workers/SKILL.md`
-- `./.hermes/skills/spec-extraction/ste-code-adaptation/SKILL.md`
-- `./.hermes/feedback/exchange.md`
+## GATE 1: Verify
+- [ ] All files have content > 20 lines
+- [ ] No truncated files
 
-## Next Steps
+## GATE 2: Merge
+- [ ] Master state assembled
 
-1. Wait for W6 to complete → verify no truncation
-2. Launch Batch 3 (W7, W8, W9) with --yolo
-3. Merge all 9 worker outputs
-4. Regenerate all 6 artifacts from merged extraction data
-5. Final review by reviewer agent
+## GATE 3: Adaptation
+- [ ] All 53 rules adapted
+- [ ] 19 categories remapped
+- [ ] Tables adapted
+
+## GATE 4: Artifacts
+- [ ] 6 artifact files written from extracted data

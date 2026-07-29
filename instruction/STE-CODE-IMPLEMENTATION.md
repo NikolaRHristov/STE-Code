@@ -1,17 +1,44 @@
-# STE-Code: Simplified Technical English for Code — Implementation Protocol v2
+# STE-Code: Simplified Technical English for Code — Implementation Protocol v3
 
-> **LESSONS FROM PREVIOUS ATTEMPT (READ FIRST)**
+> **v3 CORRECTIONS (READ FIRST — supersedes v2 lessons 1-2)**
 >
-> 1. `hermes -z` oneshot mode DOES NOT support file I/O tools (read_file, write_file).
->    Workers launched this way cannot read spec pages or write output files.
->    DO NOT use `hermes -z` for extraction workers.
+> 1. `hermes -z` DOES support file I/O (read_file, write_file) when launched with
+>    simple single-line prompts via `$(cat prompt.txt)`. Verified: W0 test wrote
+>    to file successfully. W1-W5 produced 151KB of real extraction using `hermes -z`.
+>    DO use `hermes -z` for extraction workers — it is the correct approach.
 >
-> 2. Instead, use INLINE BATCH EXTRACTION: read pages yourself and write
->    output files directly, batch by batch. This is the proven approach.
+> 2. DO NOT use inline extraction. The coordinator launches workers; workers
+>    do the extraction. Coordinator oversees, polls, verifies, merges.
+>    Inline extraction bloats the coordinator's context and defeats parallelization.
+>
+> 3. MAX 4 PAGES PER WORKER. Each `hermes -z` worker reads exactly 4 spec pages.
+>    This leaves >90% of the 1M context window free for the prompt + extraction,
+>    ensuring zero truncation and perfect fidelity. 434 pages ÷ 4 = 109 workers.
+>
+> 4. Workers launch in batches of 3 (never more). 109 ÷ 3 = 37 batches.
+>    Each batch: launch 3 workers → wait for all 3 → git gcommit-hermes → next batch.
+>
+> 5. Every worker uses: `hermes -z "$(cat prompt.txt)" -m deepseek-pro --yolo`
+>    Simple single-line prompt, no embedded quotes, no multi-line in shell.
+>
+> 6. Output format: `.md` files (user directive: "not JSON structured data").
+>    Files named: `ste-code/workers/wNNN-pPPPP-PPPP.md`
+>
+> 7. Feedback exchange: Orchestrator ↔ Reviewer communicate via
+>    `./.hermes/feedback/exchange.md` — markdown turns.
+>
+> 8. Skills saved to `./.hermes/skills/spec-extraction/` for reuse across sessions.
+>
+> 9. DO NOT write artifact files until ALL 109 workers complete and pass GATE 1.
+
+---
+
+## v2 HISTORY (preserved for reference — lessons 3-4 still apply)
+
+> **v2 LESSONS (still valid):**
 >
 > 3. DO NOT CLAIM completion when pages are unread. Track exactly which
 >    pages have been processed using PROGRESS.md checkboxes.
->
 > 4. DO NOT write artifact files until ALL extraction is complete and verified.
 >    Previous attempt fabricated 6 files from general knowledge instead of spec data.
 
@@ -249,3 +276,115 @@ GATE 4: Write 6 artifact files from adapted data
   ↓
 FINAL: Verify artifact quality
 ```
+
+---
+
+## EXISTING WORK: What W1-W5 Already Contain
+
+The previous extraction run successfully produced 5 worker files with
+**3,864 lines of genuine spec text**. These files are already complete
+and correct — do NOT re-extract them unless spot-checks find errors.
+
+| File | Lines | Content Verified |
+|------|-------|------------------|
+| `workers/w1-sec1-rules.md` | 751 | Copyright, highlights, TOC, subject-to-rule index, general introduction, Section 1 rules (1.1-1.6) with ALL STE/non-STE example pairs |
+| `workers/w2-sec2-3-rules.md` | 1,041 | Rules 1.7-1.14, all technical noun/verb rules, Sections 2-3 rules with ALL example pairs |
+| `workers/w3-sec3-5-rules.md` | 901 | Sections 3 (continued), 4, and 5 rules with ALL example pairs |
+| `workers/w4-sec6-8-rules.md` | 622 | Sections 6, 7, and 8 rules with ALL example pairs, safety instruction formats |
+| `workers/w5-sec9-gr-rules.md` | 549 | Section 9 rules (9.1-9.4), GR1-GR8, polysemy resolution, transformation examples |
+
+**Quality check**: W5 contains exact spec text for Rule 9.1 matching the original.
+W1 contains the complete general introduction with history, purpose, and reference
+documents. These files demonstrate the expected quality level for W6-W9.
+
+---
+
+## REMAINING WORK: What W6-W9 Must Extract
+
+Prompt templates for W6-W9 exist at `workers/w6-prompt.txt` through
+`workers/w9-prompt.txt`. These contain page ranges and extraction instructions.
+Use them as your guide. The remaining pages to extract:
+
+| Worker | Pages | What to Extract | Expected Size |
+|--------|-------|-----------------|---------------|
+| W6 | 181-240 | Dictionary entries A-F (approx 250 entries), Part 2 introduction, canonical synonym table, list of approved verbs, recurring errors list | 1,000+ lines |
+| W7 | 241-300 | Dictionary entries G-P (approx 250 entries), transformation examples | 1,000+ lines |
+| W8 | 301-360 | Dictionary entries Q-Z (approx 250 entries), remaining examples | 1,000+ lines |
+| W9 | 361-434 | Decision flowchart, change history (Issues 1-9), full 19-category enumeration, index, change form, reference documents list | 200+ lines |
+
+Dictionary entry format in the spec pages (example from page 201):
+```
+| **CONTAIN (v)** | , To have in something or EACH SURVIVAL KIT CONTAINS, hold in 
+                    something CONTAINS THESE CONTAINED, ITEMS: CONTAINED |
+```
+Each entry contains: WORD, POS, approved meaning, inflected forms, STE example,
+non-STE example — interleaved due to the 4-column PDF layout. Extract ALL of this
+text exactly as it appears. The interleaving is a known artifact of PDF extraction
+and should be PRESERVED (it will be cleaned up in the adaptation phase).
+
+---
+
+## EXISTING ARTIFACT FILES: Why They Need Regeneration
+
+The previous run produced 6 artifact files (`ste-code-distilled-system-prompt.txt`,
+`ste-code-self-reading-manual.txt`, etc.) BEFORE extraction was complete. These
+files contain generic/fabricated content, not spec-grounded adaptations. Key problems:
+
+1. The synonym table uses invented mappings (e.g., "do/perform → execute, run") —
+   not derived from the actual STE canonical synonym table in the spec.
+2. Claims "19 categories (adapted from STE's 22)" — STE has 19 categories, not 22.
+3. The 14 principles are generic summaries, not the actual P1-P14 with rule cross-references.
+4. No evidence that any of the 53 original rules were individually adapted.
+
+**These files must be regenerated from scratch** after all 9 worker files are
+complete and merged into master.md. Do NOT attempt to fix or patch them —
+replace them entirely with spec-grounded content.
+
+---
+
+## ANTI-PATTERNS: Concrete Examples of What to Avoid
+
+Based on the previous attempt, these specific behaviors produced bad output:
+
+**DON'T**: Write artifact files before extraction is complete.
+- Example: Previous run wrote 6 artifacts when only 5 of 9 workers had output
+  and 288 dictionary pages (136-424) were never read.
+
+**DON'T**: Fabricate data when extraction is incomplete.
+- Example: Previous synonym table invented "do/perform → execute" instead of
+  extracting the actual STE synonyms (START, STOP, REMOVE, MAKE SURE, etc.)
+
+**DON'T**: Make factual claims you cannot verify from extracted data.
+- Example: "19 categories (adapted from STE's 22)" — no worker file contains
+  the number 22. The correct number is 19.
+
+**DON'T**: Mark phases as complete when gates are not satisfied.
+- Example: PLAN.md says "Phase 1: ✅ Absorbed spec via direct page reading
+  (pages 1-135, 425-434)" — this admits 288 pages were never read.
+
+**DO**: Run the GATE verification commands. If they fail, STOP and fix.
+**DO**: Compare every adapted output against a specific worker file entry.
+**DO**: Track exact pages read in PROGRESS.md before claiming any phase complete.
+
+---
+
+## WORKER OUTPUT FORMAT: Matching the Existing Quality
+
+W1-W5 already established a consistent format. Match it for W6-W9:
+
+```
+# ASD-STE100 Issue 9 — <Section Description>
+
+## Source: pages <START>-<END> (<COUNT> pages read)
+
+[Content organized with ## and ### headings, preserving EXACT spec text]
+
+For dictionary pages, use this table format:
+| Word (POS) | Meaning & Examples |
+|------------|-------------------|
+| **WORD (POS)** | EXACT meaning text from spec, including interleaved STE/non-STE examples |
+```
+
+Look at `workers/w1-sec1-rules.md` and `workers/w5-sec9-gr-rules.md` for examples
+of the formatting standard to follow. W5 in particular demonstrates how to format
+rule text with blockquoted STE/non-STE example pairs.

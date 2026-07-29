@@ -1,44 +1,34 @@
 ================================================================================
-PASTE THIS INTO THE OTHER SESSION — GRANULAR COORDINATOR PROMPT
+PASTE THIS INTO THE OTHER SESSION
 ================================================================================
 
-MERGE these instructions with your current behavior. The file below takes
-priority for execution strategy. Your existing goals define WHAT to build —
-this file defines HOW to build it with hard verification gates.
-
-Read this file completely before taking any action:
+Read this file and MERGE it with your current behavior:
 
     instruction/STE-CODE-IMPLEMENTATION.md
 
-CRITICAL RULES (from the file — internalize these):
+KEY FACTS before you start:
 
-1. Every phase has a HARD GATE. You MUST verify file existence before
-   proceeding past a gate. No gate = no progress.
-2. You MUST NOT write any output artifact until the corresponding
-   worker JSON exists AND the gate check passes.
-3. If a worker fails or produces empty output, re-launch it.
-   Do not fabricate data.
-4. Track ALL progress in ste-code/PROGRESS.md — update it after
-   every single completed step. Checkboxes start as [ ] and become [x].
-5. All STE-Code output MUST cross-reference data from worker JSONs.
-   If the data isn't in a worker file, you don't have it yet.
+1. W1-W5 are ALREADY DONE — 3,864 lines of genuine spec extraction exist at:
+   ste-code/workers/w1-sec1-rules.md through w5-sec9-gr-rules.md
+   DO NOT re-extract these. Use them as your quality standard.
 
-EXECUTION ORDER (DO NOT SKIP STEPS):
+2. W6-W9 are MISSING — dictionary A-Z + appendices (254 pages remain).
+   Prompt templates at workers/w6-prompt.txt through w9-prompt.txt.
+   Extract these using inline batch reading (2-3 workers per response).
 
-Step 0: GATE 0 — Verify spec files, create directories, init PROGRESS.md
-Step 1: GATE 1 — Launch workers in 3 batches, verify each batch
-Step 2: GATE 2 — Merge to master.json, spot-check 10 pages
-Step 3: GATE 3 — Adapt every rule, category, synonym, polysemy entry
-Step 4: GATE 4 — Write 6 artifact files, verify token budgets
+3. The 6 artifact files in ste-code/ are FABRICATED — they contain invented
+   data (wrong facts, generic synonyms). Do NOT fix them. Replace entirely
+   AFTER all 9 worker files are complete and merged.
 
-At each gate, run the verification commands provided in the file.
-If a gate fails, STOP and fix the problem. Do not proceed.
+4. Read the ANTI-PATTERNS section in the instruction file — it documents
+   exactly what went wrong last time with concrete examples.
 
-ENHANCE WORKER PROMPTS:
-- For each worker, include page-specific hints about what to look for
-  (e.g., "W5: pages 121-180 contain the polysemy resolution table —
-  look for words like FOLLOW, TEST, REPLACE with their approved meanings")
-- Increase the worker prompt's specificity based on what you already
-  know about that section of the spec
+EXECUTION ORDER:
+  Step 0: Read instruction file. Note existing W1-W5 are done.
+  Step 1: Extract W6-W9 in batches (2-3 per response).
+  Step 2: Run GATE 1 verification on all 9 files.
+  Step 3: Merge to master.md.
+  Step 4: Adapt rules using PRESERVE/REPLACE from instruction.
+  Step 5: Write 6 artifact files (replace the old ones).
 
-START: Read the instruction file now. Begin at GATE 0.
+START: Read instruction/STE-CODE-IMPLEMENTATION.md now.
