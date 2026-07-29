@@ -1,0 +1,35 @@
+{
+  "$schema": "../../schemas/scoring.schema.json",
+  "version": "1.0.0",
+  "description": "Maps each violation type to its severity, CI behaviour, and auto-fix possibility.",
+  "severities": [
+    {
+      "level": "critical",
+      "definition": "Pipeline-level violation. Halts agent execution. Cannot be auto-fixed.",
+      "ci-behaviour": "fail build, block merge",
+      "auto-fixable": false,
+      "examples": ["fabrication", "truncation", "gate-blocked"]
+    },
+    {
+      "level": "blocking",
+      "definition": "Document-level violation. Must be fixed before commit. May be auto-fixed.",
+      "ci-behaviour": "fail build, block commit",
+      "auto-fixable": true,
+      "examples": ["unapproved synonym", "noun-as-verb", "sentence too long", "passive voice in procedure"]
+    },
+    {
+      "level": "warning",
+      "definition": "Style violation. Should be fixed. Does not block commit.",
+      "ci-behaviour": "warn, allow merge",
+      "auto-fixable": true,
+      "examples": ["American spelling", "ambiguous pronoun", "modal verb"]
+    },
+    {
+      "level": "advisory",
+      "definition": "Improvement suggestion. Purely informational.",
+      "ci-behaviour": "info only",
+      "auto-fixable": false,
+      "examples": ["shorter noun preferred", "more established term available"]
+    }
+  ]
+}

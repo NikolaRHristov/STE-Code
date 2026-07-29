@@ -1,0 +1,32 @@
+{
+  "$schema": "../../schemas/worker-contract.schema.json",
+  "version": "1.0.0",
+  "description": "Behavioral contract for all STE-Code pipeline workers. Load this alongside rails.json. Together they define what a worker must do, must not do, and how it reports state.",
+  "batch-size": 3,
+  "commit-after-every-batch": true,
+  "commit-message-format": "Batch {N}: W{start}-W{end} (pages {start_page}-{end_page})",
+  "must-do": [
+    "Read the prompt file for this worker before starting",
+    "Write output to the exact path specified in the prompt",
+    "Verify output file exists and is non-empty after writing",
+    "Report state in .hermes/exchange/ after each turn",
+    "Commit after every 3-worker batch using the specified message format"
+  ],
+  "must-not-do": [
+    "Summarize, paraphrase, or reorganize source content (extraction stage)",
+    "Invent examples, terms, or facts not present in source",
+    "Skip a worker and continue to the next batch silently",
+    "Commit a partial batch",
+    "Proceed to the next stage without gate verification",
+    "Use truncation markers (..., [...], etc.) as substitutes for omitted content"
+  ],
+  "state-report-format": {
+    "file": ".hermes/exchange/turn-{N}-state.md",
+    "required-fields": ["turn", "agent", "stage", "files-written", "files-missing", "gate-status", "next-action"]
+  },
+  "recovery-protocol": {
+    "on-worker-fail": "write audit/{worker-id}-recovery-needed.md with exact steps",
+    "on-gate-fail": "halt pipeline — do not start next stage — write audit/gate-{N}-blocked.md",
+    "on-fabrication": "halt immediately — write audit/R001-fabrication-{worker-id}.md"
+  }
+}

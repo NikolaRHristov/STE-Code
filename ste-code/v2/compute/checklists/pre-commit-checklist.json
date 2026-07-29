@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/checklist.schema.json",
+  "version": "1.0.0",
+  "description": "10-item boolean gate checklist. Run before every commit. All blocking items must pass.",
+  "items": [
+    { "id": "CC-01", "name": "vocab-check", "description": "All terms exist in data/vocabulary/ or core/categories/", "severity": "blocking", "principle": "P1" },
+    { "id": "CC-02", "name": "pos-check", "description": "No noun used as verb, no verb used as noun", "severity": "blocking", "principle": "P7, P13" },
+    { "id": "CC-03", "name": "synonym-check", "description": "No non-ste terms from synonym-table.json present in output", "severity": "blocking", "principle": "P1" },
+    { "id": "CC-04", "name": "sentence-length", "description": "No procedural sentence > 20 words, no descriptive sentence > 25 words", "severity": "blocking", "principle": "P12" },
+    { "id": "CC-05", "name": "active-voice", "description": "No passive voice in procedural sections", "severity": "blocking", "principle": "P12" },
+    { "id": "CC-06", "name": "one-term-per-concept", "description": "No synonym drift across the document", "severity": "blocking", "principle": "P11" },
+    { "id": "CC-07", "name": "code-block-lang", "description": "All code blocks have language identifiers", "severity": "blocking", "principle": "AP7" },
+    { "id": "CC-08", "name": "modal-verbs", "description": "No 'should', 'could', 'might' — use 'must' or 'can'", "severity": "warning", "principle": "AP8" },
+    { "id": "CC-09", "name": "pronoun-check", "description": "No ambiguous pronouns (it, this, that) without clear referents", "severity": "warning", "principle": "AP9" },
+    { "id": "CC-10", "name": "breaking-format", "description": "All BREAKING/DEPRECATED notices include version and migration path", "severity": "blocking", "principle": "AP10" }
+  ]
+}
