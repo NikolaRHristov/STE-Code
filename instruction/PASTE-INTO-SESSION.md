@@ -1,35 +1,44 @@
 ================================================================================
-PASTE THIS INTO THE OTHER SESSION — FULL COORDINATOR PROMPT
+PASTE THIS INTO THE OTHER SESSION — GRANULAR COORDINATOR PROMPT
 ================================================================================
 
-Read this file and MERGE it with your current instructions:
+MERGE these instructions with your current behavior. The file below takes
+priority for execution strategy. Your existing goals define WHAT to build —
+this file defines HOW to build it with hard verification gates.
+
+Read this file completely before taking any action:
 
     instruction/STE-CODE-IMPLEMENTATION.md
 
-If that file and your current instructions conflict, the file takes priority
-for execution strategy. Your existing instructions define WHAT to build;
-the file defines HOW to build it efficiently.
+CRITICAL RULES (from the file — internalize these):
 
-CRITICAL: Do NOT get confused by combined context. The file adds a parallel
-execution layer — it does not change your output goals, only how you get there.
+1. Every phase has a HARD GATE. You MUST verify file existence before
+   proceeding past a gate. No gate = no progress.
+2. You MUST NOT write any output artifact until the corresponding
+   worker JSON exists AND the gate check passes.
+3. If a worker fails or produces empty output, re-launch it.
+   Do not fabricate data.
+4. Track ALL progress in ste-code/PROGRESS.md — update it after
+   every single completed step. Checkboxes start as [ ] and become [x].
+5. All STE-Code output MUST cross-reference data from worker JSONs.
+   If the data isn't in a worker file, you don't have it yet.
 
-ENHANCE YOUR PROCESSING:
-- Before any action, read the file and internalize its 5-phase plan
-- For each worker you launch, enhance its prompt: add page-specific extraction
-  hints based on what you already know about that section of the spec
-- Batch your launches: 3 workers at a time, never more
-- After each batch completes, pause and verify output quality before launching
-  the next batch
-- Enhance your own merge phase: cross-reference worker outputs for consistency,
-  flag gaps, and launch correction workers for any missing data
+EXECUTION ORDER (DO NOT SKIP STEPS):
 
-ENHANCE YOUR THOUGHT PROCESS:
-- When deciding what to adapt (Phase 2), think aloud about each category
-  mapping before writing it
-- For each rule adaptation, verify the original text from a worker's JSON
-  before producing the STE-Code version
-- If you encounter ambiguity, re-read the relevant spec page directly
-  rather than guessing
+Step 0: GATE 0 — Verify spec files, create directories, init PROGRESS.md
+Step 1: GATE 1 — Launch workers in 3 batches, verify each batch
+Step 2: GATE 2 — Merge to master.json, spot-check 10 pages
+Step 3: GATE 3 — Adapt every rule, category, synonym, polysemy entry
+Step 4: GATE 4 — Write 6 artifact files, verify token budgets
 
-START IMMEDIATELY: Read the instruction file, create the ste-code/ and
-ste-code/workers/ directories, then launch Batch 1 of workers.
+At each gate, run the verification commands provided in the file.
+If a gate fails, STOP and fix the problem. Do not proceed.
+
+ENHANCE WORKER PROMPTS:
+- For each worker, include page-specific hints about what to look for
+  (e.g., "W5: pages 121-180 contain the polysemy resolution table —
+  look for words like FOLLOW, TEST, REPLACE with their approved meanings")
+- Increase the worker prompt's specificity based on what you already
+  know about that section of the spec
+
+START: Read the instruction file now. Begin at GATE 0.
