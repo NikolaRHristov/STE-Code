@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "description": "Organization and domain-level vocabulary extensions. Add approved terms here that are not in the base standard but are approved for a specific domain or organization.",
+  "extensions": [
+    {
+      "domain": "code",
+      "org": null,
+      "terms": [
+        { "term": "refactor", "type": "verb", "category-id": 1, "approved": true, "rationale": "Established industry term for structural code improvement without behavior change", "added": "2026-07-30" },
+        { "term": "scaffold", "type": "verb", "category-id": 1, "approved": true, "rationale": "Standard term for generating boilerplate project structure", "added": "2026-07-30" },
+        { "term": "stub", "type": "noun", "category-id": 6, "approved": true, "rationale": "Standard term for a placeholder implementation", "added": "2026-07-30" },
+        { "term": "mock", "type": "noun", "category-id": 6, "approved": true, "rationale": "Standard term for a test double with behavior verification", "added": "2026-07-30" },
+        { "term": "fixture", "type": "noun", "category-id": 6, "approved": true, "rationale": "Standard term for test setup data", "added": "2026-07-30" }
+      ]
+    }
+  ]
+}

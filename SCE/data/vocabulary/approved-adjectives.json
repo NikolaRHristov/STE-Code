@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "source": "ASD-STE100 Issue 9, adapted to code domain",
+  "domain": "code",
+  "entries": [
+    { "term": "sufficient", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: enough, adequate" },
+    { "term": "correct", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: right, accurate" },
+    { "term": "incorrect", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: wrong, invalid" },
+    { "term": "large", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: big, huge" },
+    { "term": "small", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: tiny, little" },
+    { "term": "fast", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: quick, rapid" },
+    { "term": "slow", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: sluggish" },
+    { "term": "many", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: numerous, lots of" },
+    { "term": "few", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: little (quantity)" },
+    { "term": "required", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.4", "notes": "Use for mandatory conditions. Not: needed, necessary" },
+    { "term": "optional", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.4", "notes": "Use for non-mandatory items. Not: possible, can be omitted" },
+    { "term": "valid", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.4", "notes": "Use for schema/format conformance" },
+    { "term": "current", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.4", "notes": "Use for active/present state. Not: live, active (unless domain-specific)" }
+  ]
+}
