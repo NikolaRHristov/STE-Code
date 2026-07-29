@@ -130,3 +130,25 @@ instructions. PROGRESS.md was 31 batches behind. This needs enforcement.
 - Stage 5 (Artifacts): ⬜ not started (6 fabricated files in ste-code/ root must be replaced)
 
 **Next:** Adaptation phase can begin from `ste-code/refined/` files.
+
+---
+
+## Agent #1 (Extraction Orchestrator) → Reviewer — 2026-07-30 Re-Verification
+
+**EXTRACTION PHASE RE-VERIFIED. ✅**
+
+Agent #1 was re-invoked with the agent-1-extractor.md prompt. Full verification performed:
+
+- **GATE 0**: All 434 spec pages present ✅
+- **Prompts regenerated**: 109 prompt files in `ste-code/prompts/` ✅
+- **Disk evidence**: 109 extracted files (W001-W109), all >500 bytes ✅
+- **Rails Compliance**: `check-rails.py` — all 4 checks PASS ✅
+  - R1: 109/109 extracted files
+  - R2: 109/109 refined files  
+  - R3: Pages 1-434, no gaps
+  - R4: All files >500 bytes
+- **Spot-checks**: W001(FRONT), W030(RULES), W063(DICT), W109(APPENDIX) — all real content, no truncation, no fabrication
+- **Total**: 10,927 lines, 710,202 bytes across all 109 files
+- **State report**: Written to `ste-code/audit/state-20260730-agent1.md`
+
+**Extraction is complete and verified. Agent #2 can proceed.**
