@@ -70,32 +70,55 @@ The table that follows includes all changes in this issue 9.
 **General changes**
 
 | Subject | Change |
+
 |---|---|
+
 | Page status | All pages changed to Issue 9. |
+
 | Page date | All pages have the latest issue date (2025-01-15). |
+
 | Typing, various editing and formatting errors | These are corrected, where known. |
+
 | General | STE terminology mostly aligns with ISO standards on terminology work (refer to the general introduction, reference documents). |
+
 | | Help (light bulb symbol) added to some rules in part 1 where applicable. |
+
 | | All texts in part 1 comply as much as possible with STE. |
 
 **Preliminary pages and general introduction**
 
 | Subject | Change |
+
 |---|---|
+
 | Title page | Positions for title and subtitle in the page changed. |
+
 | Subtitle | Changed to read: "Standard for technical documentation" |
+
 | Issue date | Changed. |
+
 | Date for ASD copyright | Changed. |
+
 | Copyright notices | Name of ASD changed. |
+
 | | Date for ASD copyright changed. |
+
 | | Reference to EU trademark added. |
+
 | | Special usage rights revised. |
+
 | | Disclaimer of liability revised. |
+
 | Highlights | New text to show the changes included in this issue. |
+
 | Table of contents | Some terms changed. |
+
 | Subject-to-rule index | Revised to align it with the contents of this issue 9. |
+
 | General introduction | Text revised or changed where applicable. |
+
 | | Change form revised. |
+
 | | List of reference documents added. |
 
 **Issue 9 Highlights** — Page HI-1
@@ -104,17 +127,29 @@ The table that follows includes all changes in this issue 9.
 **Part 1 – Writing rules**
 
 | Subject | Change |
+
 |---|---|
+
 | Section 1 – Words | |
+
 | Rule 1.1 | Wording for rule revised. Explanatory text revised to include the definitions of technical nouns (noun terms) and technical verbs (verb terms). The term "technical noun" fully replaces the previous term "technical name" in all parts of the document. Help added. |
+
 | Rule 1.2 | Wording for rule revised. Explanatory text revised or changed where necessary. Help added. |
+
 | Rule 1.3 | Explanatory texts changed or added where necessary. Texts and sequence of the examples revised or changed. |
+
 | Rule 1.4 | Explanatory text revised or changed where necessary. Summary tables (verbs and adjectives) revised. |
+
 | Rule 1.5 | Wording for rule revised. Explanatory text revised or changed where necessary. Category 21, Law and regulations, added. Category 22, Animals, plants, and other life forms, added. Category titles fully revised. Short explanatory text added for each category. New examples of technical nouns added in the applicable categories. Help added in category 17, Colors, to replace the previous note. Help added at the end of the rule. |
+
 | Rule 1.6 | Wording for rule revised. Explanatory text revised or changed where necessary. New explanatory text and related example added at the end. |
+
 | Rule 1.7 | Wording for rule revised. Explanatory text revised or changed where necessary. |
+
 | Rule 1.8 | Wording for rule revised. Explanatory text revised or changed where necessary. |
+
 | Rule 1.9 | Wording for rule revised. Explanatory text revised or changed where necessary. |
+
 | Rule 1.10 | Wording for rule revised. Explanatory text revised or changed where necessary. New examples added. |
 
 **Issue 9 Highlights** — Page HI-2
@@ -123,125 +158,245 @@ The table that follows includes all changes in this issue 9.
 ## Summary of Changes
 
 | Rule / Item | Reference | Description of Change |
+
 |---|---|---|
+
 | **Section 1 – Words** | | |
+
 | Rule 1.11 | | Wording for rule revised. |
+
 | | | Explanatory text revised or changed where necessary. |
+
 | Rule 1.12 | | Explanatory text fully revised. |
+
 | | | Category 3 changed to include subcategories for applicable subject fields. It fully replaces the previous category 4. |
+
 | | | New category 4 created. |
+
 | | | New examples of technical verbs added in the applicable categories. |
+
 | | | Help added. |
+
 | Rule 1.13 | | Explanatory text revised or changed where necessary. |
+
 | | | Example revised. |
+
 | Rule 1.14 | | Wording for rule revised. |
+
 | | | Explanatory text revised. |
+
 | | | Help added. |
+
 | **Section 2 – Multi-word nouns** | | |
+
 | | Title and subtitle | Changed to read: Multi-word nouns. |
+
 | Rule 2.1 | Rule 2.1 | Wording for rule revised. |
+
 | | | Explanatory text revised or changed where necessary. |
+
 | Rule 2.2 | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | | | New examples added. |
+
 | | Rule 2.3 | Removed from section 2 and moved to section 4 to become rule 4.5. |
+
 | **Section 3 – Verbs** | | |
+
 | | General | Subtitle before rule 3.1 revised. |
+
 | Rule 3.1 | Rule 3.1 | Wording for rule revised. |
+
 | | | Table removed. |
+
 | | | Help added. |
+
 | Rule 3.2 | | Wording for rule revised. |
+
 | | | Table revised. |
+
 | | | Explanatory text revised. |
+
 | Rule 3.3 | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | Rule 3.4 | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | Rule 3.5 | | Wording for rule revised. |
+
 | | | Explanatory text revised where necessary. |
+
 | Rule 3.6 | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | | | Graphic chart (passive and active voice) revised. |
+
 | Rule 3.7 | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | **Section 4 – Sentences** | | |
+
 | General | General | Subtitles before rules 4.1 and 4.4 revised. |
+
 | | | New subtitle before rule 4.5. |
+
 | | | Explanatory text before rule 4.1 revised. |
+
 | | Rule 4.1 | Explanatory text revised or changed where necessary. |
+
 | | Rule 4.2 | Explanatory text revised where necessary. |
+
 | Rule 4.3 | Rule 4.3 | Explanatory text revised or changed where necessary. |
+
 | | | New examples of vertical lists added. |
+
 | | | Help added. |
+
 | Rule 4.4 | | Subtitles revised. |
+
 | | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | Rule 4.5 | | New rule about articles and demonstrative adjectives added to this section (it was previously rule 2.3). |
+
 | | | Wording for rule revised. |
+
 | | | Explanatory text revised or changed where necessary. |
+
 | | | New examples added. |
+
 | | | Help added. |
+
 | **Section 5 – Procedural writing** | | |
+
 | | General | Subtitle before rule 5.3 revised. |
+
 | Rule 5.1 | Rule 5.1 | Explanatory text revised or changed where necessary. |
+
 | | | Help added. |
+
 | | Rule 5.2 | Explanatory text revised or changed where necessary. |
+
 | Rule 5.3 | Rule 5.3 | Explanatory text revised or changed where necessary. |
+
 | | | New examples added. |
+
 | Rule 5.4 | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | Rule 5.5 | | Explanatory text revised or changed where necessary. |
+
 | | | Explanatory text in the examples revised. |
+
 | | | New explanatory text and examples added. |
+
 | | | Help added. |
+
 | **Section 6 – Descriptive writing** | | |
+
 | | Content structure | Explanatory text revised. |
+
 | | Rule 6.1 | Explanatory text revised or changed where necessary. |
+
 | Rule 6.2 | Rule 6.2 | Wording for rule revised. |
+
 | | | Explanatory text revised or changed where necessary. |
+
 | | Rule 6.3 | Explanatory text revised or changed where necessary. |
+
 | | Rule 6.4 | Explanatory text revised or changed where necessary. |
+
 | | Rule 6.5 | Explanatory text revised or changed where necessary. |
+
 | | Rule 6.6 | Explanatory text revised or changed where necessary. |
+
 | **Section 7 – Safety instructions** | | |
+
 | Definitions | Definitions | Explanatory text added at the end. |
+
 | | | Help added. |
+
 | Rule 7.1 | | Explanatory text and related examples revised or changed where necessary. |
+
 | | | Help added. |
+
 | Rule 7.2 | | Wording for rule revised. |
+
 | | | Explanatory text revised or changed where necessary. |
+
 | Rule 7.3 | | Wording for rule revised. |
+
 | | | Explanatory text revised or changed where necessary. |
+
 | **Section 8 – Punctuation and word count** | | |
+
 | Punctuation | Punctuation | Explanatory text revised. |
+
 | | | Reference book added and information revised. |
+
 | Rule 8.1 | | Wording for rule revised. |
+
 | | | Explanatory text and related examples revised or changed where necessary. |
+
 | Rule 8.2 | | Wording for rule revised. |
+
 | | | Explanatory text revised where necessary. |
+
 | | | Help added. |
+
 | | Rule 8.3 | Wording for rule revised. |
+
 | Rule 8.4 | | Wording for rule revised. |
+
 | | | Explanatory text revised or changed where necessary. |
+
 | | Rule 8.5 | No changes. |
+
 | Rule 8.6 | Rule 8.6 | Wording for rule revised. |
+
 | | | Explanatory texts and related examples revised or changed where necessary. |
+
 | | | 8.6.1. Help added. |
+
 | | | 8.6.2. Changed to include a revised word count for numbers together with units of measurement. |
+
 | | | 8.6.3. Examples changed or added. |
+
 | | | 8.6.7. Proper nouns of individuals, groups, organizations, and geopolitical entities added. Related examples added. |
+
 | | Rule 8.7 | Explanatory text revised or changed where necessary. |
+
 | **Section 9 – Writing practices** | | |
+
 | | General | Subtitle before rules 9.2 revised. |
+
 | Rule 9.1 | Rule 9.1 | Wording for rule revised. |
+
 | | | Explanatory texts revised or changed where necessary. |
+
 | | | How to use a different sentence construction, first example changed. |
+
 | | Rule 9.2 | Explanatory text revised or changed where necessary. |
+
 | | Rule 9.3 | Explanatory text revised or changed where necessary. |
+
 | | Rule 9.4 | Explanatory text revised or changed where necessary. |
+
 | **General recommendations (GR)** | | |
+
 | GR-1 thru GR-6 | GR-1 thru GR-6 | Explanatory text and related examples revised or changed where necessary. |
+
 | | GR-7 | New general recommendation for "Inclusive language" added. |
+
 | | GR-8 | New general recommendation for "Possessive form" added. |
 
 ## Introduction
@@ -271,218 +426,427 @@ A word in lowercase letters is not approved in STE.
 NOTE: The word "revised" tells that only a small number of words are replaced or changed in the applicable texts. The word "changed" tells that the applicable text is fully changed or almost fully changed.
 
 | Word (POS) | Meaning & Examples |
+
 |---|---|
+
 | **abandon (v) — UNNAPROVED** | Approved alternatives inverted. For the second approved alternative STOP (v), STE and non-STE examples changed. |
+
 | **ABRASIVE (adj)** | STE example revised. |
+
 | **acceptable (adj) — UNNAPROVED** | Second and third STE examples revised. |
+
 | **ACCIDENT (n)** | STE example revised. |
+
 | **accomplish (v) — UNNAPROVED** | Help revised. Second STE and non-STE examples revised. |
+
 | **accumulation (n) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **act (v) — UNNAPROVED** | Approved meaning revised. Non-STE example revised. |
+
 | **action (n) — UNNAPROVED** | TASK (n) added as an approved alternative. Related STE and non-STE examples added. |
+
 | **activate (v) — UNNAPROVED** | Removed from the word list. |
+
 | **ACTIVATE (v)** | Added to the word list as approved. |
+
 | **active (adj) — UNNAPROVED** | Removed from the word list. |
+
 | **ACTIVE (adj)** | Added to the word list as approved. |
+
 | **activity (n) — UNNAPROVED** | TASK (n) and PROCEDURE (n) added as an approved alternative. Related STE and non-STE examples added. For the approved alternative WORK (n), STE and non-STE examples changed. |
+
 | **ADJACENT (adj)** | STE example revised. |
+
 | **adopt (v) — UNNAPROVED** | STE example revised. |
+
 | **adverse (adj) — UNNAPROVED** | STE and non-STE examples revised. Help revised. Related STE and non-STE examples added. |
+
 | **advisable (adj) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **advise (v) — UNNAPROVED** | First and second STE and non-STE examples revised. |
+
 | **affect (v) — UNNAPROVED** | Help revised. Related STE and non-STE examples added. |
+
 | **AFTER (conj)** | STE example revised. |
+
 | **AGREE (v)** | STE example revised. |
+
 | **AID (n)** | STE example revised. |
+
 | **alert (v) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **allocate (v) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **allowable (adj) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **already (adv) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **ALTERNATIVE (adj)** | STE example revised. |
+
 | **ALTERNATIVE (n)** | STE example revised. |
+
 | **alternatively (adv) — UNNAPROVED** | STE example revised. |
+
 | **amendment (n) — UNNAPROVED** | First STE example revised. |
+
 | **among (prep) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **annotation (n) — UNNAPROVED** | STE and non-STE examples revised. RECORD (v) added as an approved alternative. Related STE and non-STE examples added. |
+
 | **another (adj) — UNNAPROVED** | ADD (v) removed from the approved alternatives. First and third STE and non-STE examples revised. |
+
 | **appear (v) — UNNAPROVED** | Second and third STE examples revised. |
+
 | **APPLY (v)** | Second approved alternative added. Related STE examples aligned. |
+
 | **APPROVAL (n)** | STE example revised. |
+
 | **approve (v) — UNNAPROVED** | STE example revised. |
+
 | **AROUND (prep)** | Help added. Related STE and non-STE examples added. |
+
 | **arrest (v) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **AS … AS (conj)** | STE example revised. Help revised. |
+
 | **ask (v) — UNNAPROVED** | First STE and non-STE examples revised. |
+
 | **assistance (n) — UNNAPROVED** | HELP (v) added as an approved alternative. Related STE and non-STE examples added. For the approved alternative AID (n), STE and non-STE examples changed. |
+
 | **associated (adj) — UNNAPROVED** | Third and fourth approved alternatives revised. |
+
 | **assure (v) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **AT (prep)** | Third STE example revised. |
+
 | **at least (adv) — UNNAPROVED** | Removed from the word list. |
+
 | **attention (n) — UNNAPROVED** | First STE and non-STE examples revised. |
+
 | **audible (adj) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **AUTHORITY (n)** | STE example revised. |
+
 | **AUTOMATIC (adj)** | STE example revised. |
+
 | **avert (v) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **aware (adj) — UNNAPROVED** | First and second STE and non-STE examples changed. |
+
 | **AXIAL (adj)** | STE example revised. |
+
 | **BAD (v)** | Approved meaning revised. Second STE and non-STE examples revised. |
+
 | **BE (v)** | Help revised. |
+
 | **bear down (v) — UNNAPROVED** | Removed from the word list. |
+
 | **BECOME (v)** | Help added. |
+
 | **BEFORE (con)** | STE example revised. |
+
 | **below (adv) — UNNAPROVED** | Added to the word list. |
+
 | **beside (prep) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **big (adj) — UNNAPROVED** | Help added. |
+
 | **blank (v) — UNNAPROVED** | SEAL (v) added as an approved alternative. Related STE and non-STE examples added. |
+
 | **blank off (v) — UNNAPROVED** | Removed from the word list. |
+
 | **blank out (v) — UNNAPROVED** | Removed from the word list. |
+
 | **BLEED (v)** | STE example revised. |
+
 | **BLOCKAGE (n)** | STE example revised. |
+
 | **BLOW (v)** | STE example revised. |
+
 | **brightness (n) — UNNAPROVED** | Removed from the word list. |
+
 | **brilliance (n) — UNNAPROVED** | Second non-STE example revised. |
+
 | **bring (v) — UNNAPROVED** | Second STE example revised. |
+
 | **brush (v) — UNNAPROVED** | Examples inverted. |
+
 | **BUT (conj)** | STE example revised. |
+
 | **BY (prep)** | Help removed. |
+
 | **by means of (prep) — UNNAPROVED** | STE example revised. |
+
 | **calculation (n) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **call (v) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **CAN (v)** | Approved meaning revised. Help added. Related STE and non-STE examples added. |
+
 | **CANCEL (v)** | Second STE example revised. |
+
 | **CANNOT (v)** | Approved meaning revised. |
+
 | **capable (adj) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **care (n) — UNNAPROVED** | First STE example revised. |
+
 | **carry (v) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **carry out (v) — UNNAPROVED** | Help revised. |
+
 | **case (n) — UNNAPROVED** | Non-STE example revised. |
+
 | **centralize (v) — UNNAPROVED** | Second approved alternative removed. |
+
 | **chance (by chance) — UNNAPROVED** | (n) First STE and non-STE examples revised. |
+
 | **characteristic (n) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **check (v) — UNNAPROVED** | Second STE and non-STE examples revised. |
+
 | **CHEMICAL (adj)** | STE example revised. |
+
 | **chock (v) — UNNAPROVED** | STE example revised. |
+
 | **choose (v) — UNNAPROVED** | ALTERNATIVE (adj) added as an approved alternative. Related STE and non-STE examples added. |
+
 | **clamp (v) — UNNAPROVED** | Second approved alternative revised. |
+
 | **CLEAR (adj)** | Second approved meaning added. Related STE example added. |
+
 | **CLEARLY (adv)** | Approved meaning revised. |
+
 | **click (v) — UNNAPROVED** | Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
+
 | **close (adj) — UNNAPROVED** | STE and non-STE examples revised. |
+
 | **coincident (adj) — UNNAPROVED** | ALIGN (v) added as an approved alternative. Related STE and non-STE examples added. |
 
 ## Part 2 — Dictionary (Changes from Issue 8)
 
 | Word (POS) | Change Description |
+
 |---|---|
+
 | **collapse (v) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **COME (v)** | Help added. |
+
 | **COME ON (v)** | Help added. |
+
 | **communicate (v) — UNAPPROVED** | TELL (v) removed from the approved alternatives. For the approved alternative SPEAK (v), STE and non-STE examples revised. |
+
 | **CONTACT (v)** | HEAR (v), and COMMUNICATION (n) added as approved alternatives. Related STE and non-STE examples added. |
+
 | **communication (n) — UNAPPROVED** | Removed from the word list. |
+
 | **COMMUNICATION (n)** | Added to the word list as approved. |
+
 | **COMPATIBLE (adj)** | Second STE example revised. |
+
 | **compile (v) — UNAPPROVED** | Third STE and non-STE examples revised. |
+
 | **completely (adv) — UNAPPROVED** | STE example revised. |
+
 | **comply (v) — UNAPPROVED** | First STE and non-STE examples revised. Help revised. |
+
 | **COMPONENT (n)** | STE example revised. |
+
 | **compulsory (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **confirm (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **conclusion (n) — UNAPPROVED** | First STE example revised. |
+
 | **CONNECT (v)** | Second STE example revised. |
+
 | **consecutively (adv) — UNAPPROVED** | SEQUENCE (n) added as an approved alternative. Related STE and non-STE examples added. |
+
 | **consequence (n) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **contact (v) — UNAPPROVED** | Removed from the word list. |
+
 | **CONTACT (v)** | Added to the word list as approved. |
+
 | **cool (v) — UNAPPROVED** | Second STE example revised. |
+
 | **correspond (v) — UNAPPROVED** | Second STE example revised. |
+
 | **critical (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **cycle (v) — UNAPPROVED** | Approved alternative changed. |
+
 | **DAMAGE (n)** | STE example revised. |
+
 | **damp (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **danger (n) — UNAPPROVED** | Help revised. |
+
 | **deactivate (v) — UNAPPROVED** | Removed from the word list. |
+
 | **DEACTIVATE (v)** | Added to the word list as approved. |
+
 | **decrease (n) — UNAPPROVED** | STE example revised. |
+
 | **deep (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **DEEP (adj)** | Added to the word list as approved. |
+
 | **DEFLATE (v)** | First STE example revised. |
+
 | **de-ice (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **delay (n) — UNAPPROVED** | First STE example revised. |
+
 | **delete (v) — UNAPPROVED** | First STE and non-STE examples revised. Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
+
 | **demand (v) — UNAPPROVED** | MANDATORY (adj) removed as the approved alternative. NECESSARY (adj) added as the approved alternative. Related STE example changed. |
+
 | **DEPLOY (v)** | First STE example revised. |
+
 | **design (v) — UNAPPROVED** | Non-STE example revised. |
+
 | **destroy (v) — UNAPPROVED** | UNSERVICEABLE (adj) removed as the approved alternative. BREAK (v) added as the approved alternative. Related STE example changed. |
+
 | **dim (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **DIMENSION (n)** | STE example revised. |
+
 | **DISENGAGE (v)** | First STE example revised. |
+
 | **dispose of (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **disposition (n) — UNAPPROVED** | First STE example revised. |
+
 | **DISTANCE (n)** | STE example revised. |
+
 | **distinctly (adv) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **distort (v) — UNAPPROVED** | STE example revised. |
+
 | **disturb (v) — UNAPPROVED** | First STE example revised. |
+
 | **DO (v)** | Second approved meaning revised. |
+
 | **don (v) — UNAPPROVED** | First STE example revised. Second STE and non-STE examples revised. |
+
 | **double (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **drag (v) — UNAPPROVED** | Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
+
 | **dress (v) — UNAPPROVED** | First and second STE and non-STE examples changed. |
+
 | **DRINK (v)** | Help added. |
+
 | **DRY (v)** | Second STE example revised. |
+
 | **EACH (adj)** | STE example revised. |
+
 | **EAT (v)** | Help added. |
+
 | **either (conj) — UNAPPROVED** | ONE (TN) OF THE TWO (TN) removed as the approved alternative. OR (conj) added as the approved alternative. |
+
 | **either (pron) — UNAPPROVED** | Approved alternative changed. STE and non-STE examples revised. |
+
 | **ELECTRIC (adj)** | STE example revised. |
+
 | **ELECTROMAGNETIC (adj)** | STE example revised. |
+
 | **employ (v) — UNAPPROVED** | STE and non-STE examples revised. HAVE added as an approved alternative. Related STE and non-STE examples added. |
+
 | **entail (v) — UNAPPROVED** | Removed from the word list. |
+
 | **enter (v) — UNAPPROVED** | First STE and non-STE examples revised. Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
+
 | **entire (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **equal (v) — UNAPPROVED** | First and second STE examples revised. |
+
 | **erect (v) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **essential (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **establish (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **ESTIMATE (n)** | STE example revised. |
+
 | **except (prep) — UNAPPROVED** | Help revised. |
+
 | **exception (n) — UNAPPROVED** | Help revised. |
+
 | **exceptional (adj) — UNAPPROVED** | STE example revised. |
+
 | **excess (n) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **excessively (adv) — UNAPPROVED** | First and second STE and non-STE examples revised. |
+
 | **excluding (prep) — UNAPPROVED** | STE example revised. |
+
 | **exert (v) — UNAPPROVED** | STE and non-STE examples changed. PUT (v) added as an approved alternative. Related STE and non-STE examples added. |
+
 | **exhaust (v) — UNAPPROVED** | Second STE example revised. |
+
 | **explain (v) — UNAPPROVED** | STE example revised. |
+
 | **EXTERNALLY (adj)** | STE example revised. |
+
 | **EXTINGUISH (v)** | First, second, and third STE examples revised. |
+
 | **extremely (adv) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **exude (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **FACE (n)** | Help revised. |
+
 | **face (v) — UNAPPROVED** | Second STE example revised. |
+
 | **facility (n) — UNAPPROVED** | Help revised. |
+
 | **failure (n) — UNAPPROVED** | Help revised. |
+
 | **fear (v) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **feasible (adj) — UNAPPROVED** | First STE and non-STE examples revised. Second STE example revised. |
+
 | **few (adj) — UNAPPROVED** | Help revised. |
+
 | **fine (adj) — UNAPPROVED** | STE example revised. |
+
 | **flaw (n) — UNAPPROVED** | Help revised. |
+
 | **FLOW (n)** | STE example revised. |
+
 | **FLOW (v)** | Second STE example revised. |
+
 | **FOLD (v)** | Second STE example changed. |
+
 | **forbidden (adj) — UNAPPROVED** | DO NOT added as an approved alternative. Related STE and non-STE examples added. Second STE and non-STE examples for NOT PERMITTED changed. |
+
 | **force (v) — UNAPPROVED** | Second STE example revised. |
+
 | **forecast (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **foremost (adj) — UNAPPROVED** | Added to the word list. |
+
 | **FREE (adj)** | Help revised. |
+
 | **fuel (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **FUNCTION (n)** | Approved meaning revised. |
+
 | **fundamental (adj) — UNAPPROVED** | STE example revised. |
+
 | **furnish (v) — UNAPPROVED** | Removed from the word list. |
+
 | **further (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **gain (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **gap (n) — UNAPPROVED** | Third STE and non-STE examples revised. |
+
 | **garbled (adj) — UNAPPROVED** | Spelling corrected. Second STE and non-STE example changed. |
+
 | **gauge (v) — UNAPPROVED** | STE and non-STE examples revised. |
 
 > **Section:** Highlights — Dictionary Changes
@@ -490,628 +854,1001 @@ NOTE: The word "revised" tells that only a small number of words are replaced or
 ## Approved Words
 
 #### GET (v)
+
 - Help revised.
 
 #### GIVE (v)
+
 - STE example revised.
 
 #### GO (v)
+
 - Help added.
 
 #### GO OFF (v)
+
 - Help added.
 
 #### HAVE (v)
+
 - Help revised.
 
 #### IGNORE (v)
+
 - Second STE example revised.
 
 #### ILLUMINATE (v)
+
 - Approved meaning revised. STE example changed.
 
 #### IMMEDIATELY (adv)
+
 - STE example revised.
 
 #### IN (prep)
+
 - Third STE example revised.
 
 #### INVESTIGATION (n)
+
 - Approved meaning revised.
 
 #### IT (pron)
+
 - Approved meaning revised. Second approved meaning added. Related STE example added.
 
 #### LET (v)
+
 - Help added.
 
 #### LIGHT (adj)
+
 - Third STE and non-STE examples changed.
 
 #### LOCK (v)
+
 - Second STE example revised.
 
 #### LONG (adj)
+
 - Approved meaning changed. Second and third STE examples added.
 
 #### LOOSE (adj)
+
 - Second STE example revised.
 
 #### LUBRICATE (v)
+
 - STE example revised.
 
 #### MAGNETIC (adj)
+
 - STE example revised.
 
 #### MAGNETICALLY (adv)
+
 - STE example revised.
 
 #### MAINTENANCE (v)
+
 - STE example revised.
 
 #### MANDATORY (adj)
+
 - Help added. Related STE and non-STE examples added. Page HI-16 Highlights Issue 9
 
 #### MANUAL (adj)
+
 - STE example revised.
 
 #### MANUAL (n)
+
 - Approved meaning revised. STE example revised.
 
 #### MANY (adj)
+
 - Approved meaning revised. Help revised.
 
 #### MATERIAL (n)
+
 - Approved meaning revised to include the second part of the meaning.
 
 #### MINIMUM (adj)
+
 - STE example revised.
 
 #### MINUS (prep)
+
 - STE example revised.
 
 #### MIX (v)
+
 - Second STE example changed.
 
 #### MORE (adj)
+
 - Help removed and approved meaning added. STE example added.
 
 #### MORE (adv)
+
 - Added to the word list as approved.
 
 #### MOST (adj)
+
 - Help removed and approved meaning added. STE example added.
 
 #### MOST (adv)
+
 - Added to the word list as approved.
 
 #### MUST (v)
+
 - Approved meaning revised.
 
 #### NAME (n)
+
 - First and second STE and non-STE examples revised.
 
 #### NEAR (adj)
+
 - STE example revised.
 
 #### NEAR (prep)
+
 - Second STE example revised.
 
 #### NECESSARY (adj)
+
 - STE example revised.
 
 #### NEXT (adj)
+
 - STE example revised.
 
 #### NOT (adv)
+
 - STE example revised.
 
 #### ON (adv)
+
 - First STE example revised.
 
 #### ONE (pron)
+
 - Help revised.
 
 #### OVERLAP (n)
+
 - STE example revised.
 
 #### PARALLEL (adj)
+
 - STE example revised.
 
 #### PARK (v)
+
 - STE example revised.
 
 #### PART (n)
+
 - First approved meaning revised. Related STE example revised.
 
 #### PARTICLE (n)
+
 - STE example revised.
 
 #### PASTE (n)
+
 - STE example revised.
 
 #### PERFORMANCE (n)
+
 - First and second STE examples revised.
 
 #### PERMANENT (adj)
+
 - STE example revised.
 
 #### PERMANENTLY (adv)
+
 - STE example revised.
 
 #### PERSON (n)
+
 - STE example changed.
 
 #### PERSONNEL (n)
+
 - STE example changed.
 
 #### PLAY (n)
+
 - STE example revised.
 
 #### PLUS (prep)
+
 - STE example revised. Page HI-18 Highlights Issue 9
 
 ## Unapproved Words
 
 #### generally (adv)
+
 - STE and non-STE examples revised.
 
 #### generate (v)
+
 - Second STE example revised. Third STE and non-STE examples revised.
 
 #### generous (adj)
+
 - Help revised.
 
 #### generously (adv)
+
 - Help revised.
 
 #### gently (adv)
+
 - Second STE and non-STE examples revised.
 
 #### get away (v)
+
 - Part of speech removed in the approved alternative.
 
 #### get down (v)
+
 - Part of speech removed in the second approved alternative.
 
 #### get into (v)
+
 - Part of speech removed in the approved alternative.
 
 #### get off (v)
+
 - Part of speech removed in the approved alternative.
 
 #### get to (v)
+
 - First and second STE and non-STE examples changed.
 
 #### glitch (v)
+
 - First, second, and third STE examples revised.
 
 #### gradient (n)
+
 - STE and non-STE examples changed.
 
 #### graduated (adj)
+
 - Removed from the word list.
 
 #### great (adj)
+
 - Second STE example revised.
 
 #### gush (v)
+
 - STE example revised.
 
 #### handle (v)
+
 - USE (v) added as an approved alternative. Related STE and non-STE examples added.
 
 #### haul (v)
+
 - First and second STE and non-STE examples revised.
 
 #### have to (v)
+
 - MUST (v) removed as an approved alternative. Help included to replace MUST (v). Related STE and non-STE examples added.
 
 #### hazard (n)
+
 - Help added.
 
 #### hazardous (adj)
+
 - Help added.
 
 #### helpful (adj)
+
 - STE example revised.
 
 #### hoist (v)
+
 - STE and non-STE examples revised.
 
 #### however (adv)
+
 - STE and non-STE examples revised.
 
 #### hurt (v)
+
 - STE and non-STE examples revised.
 
 #### imperative (adj)
+
 - Removed from the word list.
 
 #### inactive (adj)
+
 - NOT ACTIVE added as the approved alternative. All previous alternatives removed.
 
 #### indicate (v)
+
 - SPECIFIED (adj) added as an approved alternative. Related STE and non-STE examples added.
 
 #### injure (v)
+
 - STE and non-STE examples revised.
 
 #### inside (prep)
+
 - Second STE and non-STE examples changed.
 
 #### interference (n)
+
 - Help revised.
 
 #### later (adv)
+
 - Help revised.
 
 #### left-hand (adj)
+
 - STE example revised.
 
 #### less (prep)
+
 - Removed from the word list.
 
 #### locate (v)
+
 - Third STE and non-STE examples revised.
 
 #### longer (no longer)
+
 - First approved alternative MAXIMUM LENGTH removed.
 
 #### magnetized (adj)
+
 - Removed from the word list.
 
 #### main (adj)
+
 - STE and non-STE examples revised.
 
 #### maintain (v)
+
 - Second STE example revised. Third STE and non-STE examples revised.
 
 #### metallic (adj)
+
 - Removed from the word list.
 
 #### modify (v)
+
 - First STE example revised. MODIFICATION (TN) added as an approved alternative. Related STE and non-STE examples added.
 
 #### need (v)
+
 - STE and non-STE examples revised.
 
 #### neutralize (v)
+
 - STE and non-STE examples revised.
 
 #### next to (prep)
+
 - STE and non-STE examples revised.
 
 #### noisy (adj)
+
 - STE and non-STE examples revised.
 
 #### normal (adj)
+
 - First and second STE examples revised.
 
 #### normally (adv)
+
 - First STE and non-STE examples revised
 
 #### note (v)
+
 - STE example revised.
 
 #### notify (v)
+
 - CONTACT (v) added as an approved alternative. Related STE and non-STE examples added.
 
 #### operable (adj)
+
 - Non-STE example revised.
 
 #### operational (adj)
+
 - Help added. Related STE example added.
 
 #### opportunity (n)
+
 - Help revised.
 
 #### option (n)
+
 - ALTERNATIVE (n) and CAN (v) added as approved alternatives. Related STE and non-STE examples added.
 
 #### over (prep)
+
 - Fourth STE example revised. Help and related examples added.
 
 #### part (v)
+
 - STE and non-STE examples revised.
 
 #### particularly (adv)
+
 - STE and non-STE examples revised.
 
 #### people (n)
+
 - First approved alternative revised. Help added.
 
 #### per (prep)
+
 - Second STE example revised.
 
 #### perform (v)
+
 - Help revised.
 
 #### MEASURE (v)
+
 - added as an approved alternative.
 
 #### periodically (adv)
+
 - STE and non-STE examples revised.
 
 #### persist (v)
+
 - STE and non-STE examples revised.
 
 #### pertinent (adj)
+
 - Added to the word list.
 
 #### picket (v)
+
 - STE and non-STE examples revised.
 
 #### placard (v)
+
 - STE example revised.
 
 #### place (n)
+
 - First STE example revised.
 
 ## Part 2 – Dictionary
 
 | Word (POS) | Description of Change |
+
 |---|---|
+
 | **PNEUMATICALLY (adv)** | STE example revised. |
+
 | **POINT (n)** | Second STE example revised. |
+
 | **POINT (v)** | Second STE example revised. |
+
 | **POISONOUS (adj)** | STE example revised. |
+
 | **poor (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **pop (v) — UNAPPROVED** | PROTRUDE (v) added as an approved alternative. Related STE and non-STE added. |
+
 | **portion (n) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **POSITION (n)** | Second STE example changed. |
+
 | **position (v) — UNAPPROVED** | Second STE example revised. |
+
 | **POSSIBLE (adj)** | STE example changed. |
+
 | **power (v) — UNAPPROVED** | STE and non-STE examples changed. |
+
 | **practice (n) — UNAPPROVED** | Removed from the word list. |
+
 | **precisely (adv) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **preferable (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **preferably (adv) — UNAPPROVED** | Approved alternative changed. STE and non-STE examples changed. |
+
 | **preload (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **PREPARE (v)** | Second STE example revised. |
+
 | **prescribed (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **present (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **PRESSURIZE (v)** | STE example revised. |
+
 | **preventive (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **previous (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **PREVIOUS (adj)** | Added to the word list as approved. |
+
 | **previously (adv) — UNAPPROVED** | Removed from the word list. |
+
 | **PREVIOUSLY (adv)** | Added to the word list as approved. |
+
 | **prime (v) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **principal (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **prior to (prep) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **priority (n) — UNAPPROVED** | STE example revised. |
+
 | **probability (n) — UNAPPROVED** | STE example revised. |
+
 | **probable (adj) — UNAPPROVED** | Part of speech removed from the approved alternative to read VERY POSSIBLE. First approved alternative revised. |
+
 | **probe (v) — UNAPPROVED** | STE example revised. |
+
 | **PROBLEM (n)** | STE example revised. |
+
 | **PROCEDURE (n)** | STE example revised. |
+
 | **process (n) — UNAPPROVED** | Help revised. STE and non-STE examples revised. |
+
 | **process (v) — UNAPPROVED** | Approved alternative changed. STE example revised. |
+
 | **produce (v) — UNAPPROVED** | First, second, and fourth STE and non-STE examples revised. Third STE examples revised. |
+
 | **product (n) — UNAPPROVED** | Help and new related examples added. MATERIAL (n) removed as the approved alternative. |
+
 | **prompt (adj) — UNAPPROVED** | STE example revised. |
+
 | **propagation (n) — UNAPPROVED** | Help revised. |
+
 | **PROPORTION (n)** | First STE example revised. |
+
 | **protect (v) — UNAPPROVED** | Non-STE example revised. |
+
 | **protrude (v) — UNAPPROVED** | Removed from the word list. |
+
 | **PROTRUDE (v)** | Added to the word list as approved. |
+
 | **provide (v) — UNAPPROVED** | First and second STE and non-STE examples revised. |
+
 | **provided (that) — UNAPPROVED** | (conj) STE and non-STE examples revised. |
+
 | **providing (that) — UNAPPROVED** | (conj) STE and non-STE examples revised. |
+
 | **proximity (n) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **pump (v) — UNAPPROVED** | Approved alternative revised. STE and non-STE examples revised. Second approved alternative added. Related STE and non-STE examples added. |
+
 | **purpose (n) — UNAPPROVED** | Removed from the word list. |
+
 | **PUT (v)** | Help added. |
+
 | **PUT ON (v)** | Help added. |
+
 | **QUALITY (n)** | STE example revised. |
+
 | **QUANTITY (n)** | First STE example revised. |
+
 | **raise (v) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **RANDOM (adj)** | STE example revised. |
+
 | **rapid (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **rapidly (adv) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **reactivate (v) — UNAPPROVED** | ACTIVATE (v) added as the approved alternative. OPERATE (v) and START (v) removed as approved alternatives. |
+
 | **readjust (v) — UNAPPROVED** | STE example revised. |
+
 | **real (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **rebuild (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **recoil (v) — UNAPPROVED** | Third STE and non-STE examples revised. |
+
 | **RECOMMEND (v)** | STE example revised. |
+
 | **recover (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **rectify (v) — UNAPPROVED** | STE example revised. |
+
 | **reduce (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **REFER (v)** | First STE example revised. |
+
 | **referenced (adj) — UNAPPROVED** | Approved alternative changed. STE and non-STE examples changed. |
+
 | **REFUEL (v)** | STE example revised. |
+
 | **reinstall (v) — UNAPPROVED** | STE example revised. |
+
 | **rejection (n) — UNAPPROVED** | STE example revised. |
+
 | **relay (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **relevant (adj) — UNAPPROVED** | Second and third approved alternatives revised. |
+
 | **REMAINING (adj)** | STE example revised. |
+
 | **REMOVAL (n)** | STE example revised. |
+
 | **renovate (v) — UNAPPROVED** | Second STE example revised. |
+
 | **REPAIR (n)** | STE example changed. |
+
 | **replenish (v) — UNAPPROVED** | Third STE and non-STE examples revised. |
+
 | **require (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **rest (n) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **rest (v) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **resume (v) — UNAPPROVED** | First STE and non-STE examples changed. |
+
 | **reuse (v) — UNAPPROVED** | STE example revised. |
+
 | **reverse (adj) — UNAPPROVED** | Help revised. |
+
 | **review (n) — UNAPPROVED** | EXAMINE (v) added as an approved alternative. Related STE and non-STE examples added. |
+
 | **rework (v) — UNAPPROVED** | Help revised. STE and non-STE example revised. |
+
 | **rise (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **SAFE (adj)** | STE example revised. |
+
 | **SAFETY (v)** | First STE example revised. |
+
 | **safety-clip (v) — UNAPPROVED** | Second STE example revised. |
+
 | **SAMPLE (n)** | STE example revised. |
+
 | **sample (v) — UNAPPROVED** | STE example revised. |
+
 | **scrape (v) — UNAPPROVED** | STE example revised. |
+
 | **SECONDARY (adj)** | STE example changed. |
+
 | **SEE (v)** | Second non-STE example revised. |
+
 | **SELECT (v)** | Third STE example revised. |
+
 | **separate (adj) — UNAPPROVED** | Sequence of the approved alternatives changed. DIFFERENT (adj) added as an approved alternative. Related STE and non-STE examples added. Part of speech for the first approved alternative changed. |
+
 | **separately (adv) — UNAPPROVED** | Added to the word list. |
+
 | **serve (v) — UNAPPROVED** | Help revised. |
+
 | **settle (v) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **severe (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **sharply (adv) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **SHORT (adj)** | Help revised. |
+
 | **shorten (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **should (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **SHOW (v)** | First STE example revised. |
+
 | **similar (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **simultaneous (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **single (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **situation (n) — UNAPPROVED** | Added to the word list. |
+
 | **size (n) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **skid (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **slip (v) — UNAPPROVED** | First and third STE and non-STE examples revised. |
+
 | **SLOPE (n)** | STE example revised. |
+
 | **SMALL (adj)** | STE example revised. |
+
 | **snap (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **soften (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **SOLID (n)** | STE example changed. |
+
 | **SOLUTION (n)** | Second STE example changed. |
+
 | **SOMETHING (pron)** | STE example revised. |
+
 | **SOURCE (n)** | First and second STE examples changed. |
 
 ## Part 2 – Dictionary
 
 | Word (POS) | Description of Change |
+
 |---|---|
+
 | **soon (adv) — UNAPPROVED** | Help revised. |
+
 | **spark (n) — UNAPPROVED** | STE example revised. |
+
 | **specific (adj) — UNAPPROVED** | APPROVED (adj) added as an approved alternative. Related STE and non-STE examples revised. |
+
 | **SPECIAL (adj)** | Removed from the approved alternatives. |
+
 | **SPEED (n)** | STE example changed. |
+
 | **spillage (n) — UNAPPROVED** | First STE example revised. |
+
 | **split (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **split (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **stability (n) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **stabilization (n) — UNAPPROVED** | STE example revised. |
+
 | **STABLE (adj)** | STE example revised. |
+
 | **stage (n) — UNAPPROVED** | STE example revised. |
+
 | **stained (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
+
 | **stamp (v) — UNAPPROVED** | Approved alternative revised. New approved alternative added. Related STE and non-STE examples added. |
+
 | **stationary (adj) — UNAPPROVED** | Second STE and non-STE examples changed. |
+
 | **STAY (v)** | Help added. STE example revised. |
+
 | **sticky (adj) — UNAPPROVED** | STE example revised. |
+
 | **store (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **strain (v) — UNAPPROVED** | First STE example revised. |
+
 | **strap (v) — UNAPPROVED** | STE example revised. |
+
 | **strike (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **STRONG (adj)** | STE example revised. |
+
 | **STRUCTURAL (adj)** | STE example changed. |
+
 | **subject (v) — UNAPPROVED** | Removed from the word list. |
+
 | **SUBSEQUENTLY (adv)** | Second STE example revised. |
+
 | **substance (n) — UNAPPROVED** | Non-STE example revised. |
+
 | **substitute (adj) — UNAPPROVED** | First STE example revised. |
+
 | **suck (v) — UNAPPROVED** | Approved alternative revised. STE example revised. |
+
 | **suitable (adj) — UNAPPROVED** | First STE example revised. |
+
 | **suitably (adv) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **SUPPLY (v)** | Second approved meaning added. Related STE example added. |
+
 | **support (n) — UNAPPROVED** | First and second STE and non-STE examples revised. |
+
 | **support (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **SURFACE (n)** | STE example revised. |
+
 | **suspect (adj) — UNAPPROVED** | STE example revised. |
+
 | **suspect (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **SWALLOW (v)** | STE example revised. |
+
 | **switch (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **switch off (v) — UNAPPROVED** | SET (v) included as an approved alternative to replace SWITCH (TN). STE example revised. |
+
 | **DE-ENERGIZE (v)** | Added as an approved alternative. Related STE and non-STE examples added. Existing STE and non-STE examples revised. |
+
 | **switch on (v) — UNAPPROVED** | SET (v) included as an approved alternative to replace SWITCH (TN). STE example revised. |
+
 | **ENERGIZE (v)** | Added as an approved alternative. Related STE and non-STE examples added. |
+
 | **SYMMETRICAL (adj)** | STE example revised. |
+
 | **SYNCHRONIZED (adj)** | Second STE example revised. |
+
 | **TAG (v)** | STE example revised. |
+
 | **take (v) — UNAPPROVED** | Second and fourth STE examples revised. Third STE and non-STE examples revised. |
+
 | **take care (v) — UNAPPROVED** | Second STE example revised. |
+
 | **tape (v) — UNAPPROVED** | STE example revised. |
+
 | **taped (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **TASK (n)** | STE example revised. |
+
 | **TELESCOPIC (adj)** | STE example changed. |
+
 | **TELL (v)** | First and second STE examples changed. |
+
 | **test (v) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **THAT (conj)** | Help added. |
+
 | **THEM (pron)** | STE example revised. |
+
 | **THEN (adv)** | STE example revised. |
+
 | **THERE (pron)** | STE example revised. |
+
 | **THESE (adj)** | STE example revised. |
+
 | **THICK (adj)** | Approved meaning revised. First STE example added. |
+
 | **THICKNESS (n)** | Approved meaning revised. STE example revised. |
+
 | **THIS (pron)** | Help added. STE example revised. |
+
 | **thorough (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **triple (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **TO (prep)** | First STE example revised. |
+
 | **TOTAL (adj)** | STE example revised. |
+
 | **TOW (v)** | STE example revised. |
+
 | **true (adj) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **turn off (v) — UNAPPROVED** | Added to the word list. |
+
 | **turn on (v) — UNAPPROVED** | Added to the word list. |
+
 | **turn over (v) — UNAPPROVED** | Added to the word list. |
+
 | **under (prep) — UNAPPROVED** | Second STE and non-STE examples revised. Third STE example revised. |
+
 | **undertake (v) — UNAPPROVED** | Help revised. START (v) added as an approved alternative. |
+
 | **uneven (adj) — UNAPPROVED** | Second STE example revised. |
+
 | **UNIT (n)** | First STE example revised. |
+
 | **UNLOCK (v)** | First STE example revised. |
+
 | **upon (prep) — UNAPPROVED** | Second STE example revised. |
+
 | **unrestricted (adj) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **unscrew (v) — UNAPPROVED** | Sequence of the approved alternatives changed. STE and non-STE examples for REMOVE (v) revised. |
+
 | **usage (n) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **using (v) — UNAPPROVED** | Removed from the word list. |
+
 | **use (n) — UNAPPROVED** | Second example revised. |
+
 | **USE (v)** | First and third STE examples revised. |
+
 | **USUALLY (adv)** | STE example revised. |
+
 | **utilize (v) — UNAPPROVED** | STE and non-STE examples changed. |
+
 | **valid (adj) — UNAPPROVED** | Help revised. Third STE example revised. |
+
 | **VALUE (n)** | STE example revised. |
+
 | **verbal (adj) — UNAPPROVED** | Removed from the word list. |
+
 | **verify (v) — UNAPPROVED** | Non-STE example revised. |
+
 | **visible (adj) — UNAPPROVED** | Second STE and non-STE examples revised. |
+
 | **VISUAL (adj)** | Approved meaning revised. STE example revised. |
+
 | **vital (adj) — UNAPPROVED** | IMPORTANT (adj) and NECESSARY (adj) removed from the approved alternatives. STE and non-STE examples for the approved alternative MANDATORY (adj) changed. |
+
 | **WARM (adj)** | STE example revised. |
+
 | **WE (pron)** | Approved meaning revised. |
+
 | **WEAR (v)** | Third STE example revised. |
+
 | **weep (n) — UNAPPROVED** | STE and non-STE examples revised. |
+
 | **WEIGH (v)** | Second STE example revised. |
+
 | **WEIGHT (n)** | STE example revised. |
+
 | **well (adv) — UNAPPROVED** | Third STE example revised. |
+
 | **whenever (pron) — UNAPPROVED** | STE example revised. |
+
 | **whichever (adj) — UNAPPROVED** | Added to the word list. |
+
 | **whichever (pron) — UNAPPROVED** | STE and non-STE examples changed. |
+
 | **WHO (pron)** | STE example revised. |
+
 | **WIDE (adj)** | Approved meaning revised. STE example revised. |
+
 | **WILL (v)** | Help revised. Approved meaning revised. |
+
 | **WITH (prep)** | Help added. |
+
 | **WITHOUT (prep)** | STE example revised. |
+
 | **wrong (adj) — UNAPPROVED** | STE example revised. |
+
 | **yet (conj) — UNAPPROVED** | Second approved alternative removed. |
+
 | **yet (adv) — UNAPPROVED** | Added to the word list. |
+
 | **YOU (pron)** | Second STE example added. |
 
 # Table of Contents
 
 | Subject | Page number |
+
 |---|---|
+
 | Title page | --- |
+
 | Copyright notices | --- |
+
 | Highlights | HI-1 |
+
 | Table of contents | TOC-1 |
+
 | Subject-to-rule index | SRI-1 |
+
 | General introduction | i |
+
 | Part 1 – Writing rules | 1-0-1 |
+
 | Section 1 – Words | 1-1-1 |
+
 | Section 2 – Multi-word nouns | 1-2-1 |
+
 | Section 3 – Verbs | 1-3-1 |
+
 | Section 4 – Sentences | 1-4-1 |
+
 | Section 5 – Procedural writing | 1-5-1 |
+
 | Section 6 – Descriptive writing | 1-6-1 |
+
 | Section 7 – Safety instructions | 1-7-1 |
+
 | Section 8 – Punctuation and word count | 1-8-1 |
+
 | Section 9 – Writing practices | 1-9-1 |
+
 | Part 2 – Dictionary | 2-0-1 |
+
 | Introduction | 2-0-3 |
+
 | Word list | 2-1-A1 |
 
 *Page TOC-2 is blank.*
@@ -1121,124 +1858,239 @@ NOTE: The word "revised" tells that only a small number of words are replaced or
 This index helps you find the applicable STE rules related to different subjects. The symbol # after the section number (for example, 7#) shows that the subject is applicable to all or most of the rules in that section.
 
 | Subject | Rule |
+
 |---|---|
+
 | Abbreviations | General introduction, 1.5, 2.2, 8.3, 8.5, 8.6 |
+
 | Acronyms | 8.6 |
+
 | Action | 3.7 |
+
 | Active voice | 3.6 |
+
 | Adjectives (how to use them) | 1.4, 1.7, 1.13, 2#, 3.2, 3.3 |
+
 | Adjectives (part of speech) | Part 2, Introduction |
+
 | Adverb (part of speech) | Part 2, Introduction |
+
 | American English spelling | General introduction, 1.14 |
+
 | Approved meaning | 1.3, 9.2 |
+
 | Approved words | 1.1, 1.2, 9.2 |
+
 | Articles (how to use them) | 4.5 |
+
 | Articles (part of speech) | Part 2, Introduction |
+
 | Authoring tools | General introduction |
+
 | Base form of a verb | 3#, Part 2, Introduction |
+
 | Cautions | 5.1, 7# |
+
 | Change form | General introduction |
+
 | Colons | 4.3, 8.4 |
+
 | Command form of the verb (Imperative form) | 3.2, 3.6, 5.3 |
+
 | Company glossary | 1# |
+
 | Comparative form of adjectives | 1.4 |
+
 | Computer processes and applications | 1.12 |
+
 | Conjunctions (part of speech) | Part 2, Introduction |
+
 | Connecting words and phrases | 4.4, 6.2 |
+
 | Consistent style | 9.4 |
+
 | Controlled natural language | General introduction |
+
 | Dashes | 4.3, 8.2 |
+
 | Demonstrative adjectives | 4.5 |
+
 | Descriptive writing | 3.6, 4.1, 6# |
+
 | Different sentence constructions | 1.2, 9.1 |
+
 | False friends | 9 – GR-5 |
+
 | Forms of adjectives | 1.4, Part 2, Introduction |
+
 | Future tense (simple) | 3.2, Part 2, Introduction |
+
 | Headings | 8.6 |
+
 | Help (light bulb symbol) | Part 1, all sections, Part 2, applicable entries |
+
 | Hyphens | 2.2, 8.2, 8.7 |
+
 | "-ing" form | 3.5 |
+
 | Imperative form (command form) | 3.2, 3.6, 5.3 |
+
 | Inclusive language | 9 – GR-7 |
+
 | Infinitive form (base form of the verb) | 3.2, Part 2, Introduction |
+
 | Initialisms | 8.6 |
+
 | Instructions | 5#, 7# |
+
 | Irregular verbs | 3.1, Part 2, Introduction |
+
 | Items (in a vertical list) | 4.3, 8.4 |
+
 | Jargon words | 1.10 |
+
 | Key phrases | 6.2 |
+
 | Key words | 6.2, 6.5 |
+
 | Latin abbreviations | 9 – GR-6 |
+
 | Law and regulations | 1.5, 1.12 |
+
 | Length of paragraphs | 6.6 |
+
 | Length of sentences | 4.1, 4.2, 4.3, 5.1, 6.3, 8.4 thru 8.7 |
+
 | List of approved verbs | Part 2, Introduction |
+
 | List of recurring errors | Part 2, Introduction |
+
 | Logic (descriptive writing) | 6# |
+
 | Manufacturing processes | 1.12 |
+
 | Meaning, one for each word | 1.3 |
+
 | Multi-word nouns | 2# |
+
 | Notes | 5.5 |
+
 | Nouns (part of speech) | Part 2, Introduction |
+
 | Nouns (how to use them) | All sections |
+
 | Noun terms | 1.1 |
+
 | Omission of words | 4.2 |
+
 | Oral communication | General introduction |
+
 | Paragraphs | 6.4, 6.5, 6.6 |
+
 | Parentheses ( ) | 8.3, 8.5 |
+
 | Parts of speech | 1.2, 3.7, 9.1, Part 2, Introduction |
+
 | Passive voice | 3.3, 3.4, 3.6 |
+
 | Past participle form (as an adjective) | 3.3 |
+
 | Placards | 1.5, 8.6 |
+
 | Possessive form (Saxon genitive) | 9 – GR-8 |
 
 # Subject-to-rule Index
 
 | Subject | Rule |
+
 | --- | --- |
+
 | Preposition (part of speech) | Part 2, Introduction |
+
 | Procedural writing (procedures) | 5# |
+
 | Pronouns (how to use them) | 9 – GR-3 |
+
 | Pronouns (part of speech) | Part 2, Introduction |
+
 | Proper nouns | 8.6 |
+
 | Punctuation | 8.1 thru 8.3 |
+
 | Quoted text | 1.5, 8.6 |
+
 | Reference documents | General introduction |
+
 | Regional words | 1.10 |
+
 | Regular verbs | 3.1, Part 2, Introduction |
+
 | Safety instructions | 7# |
+
 | Semicolons | 8.1 |
+
 | Sentences | 4#, 5#, 6# |
+
 | Simple future tense | 3.3 |
+
 | Simple past tense | 3.3 |
+
 | Simple present tense | 3.3 |
+
 | Slang words | 1.10 |
+
 | Spelling | 1.14 |
+
 | Subject fields | 1.1, 1.5, 1.12 |
+
 | Superlative forms of adjectives | 1.4 |
+
 | Technical nouns | 1.1, 1.5 thru 1.13, 2.2 |
+
 | Technical verbs | 1.1, 1.12, 1.13 |
+
 | Technical translation | General introduction |
+
 | Terminology database | 1# |
+
 | Text formatting | General introduction |
+
 | That (how to use) | 9 – GR-1 |
+
 | This (how to use) | 9 – GR-4 |
+
 | Titles | 8.6 |
+
 | Topic (subject of paragraph) | 6.5 |
+
 | Topics, one for each paragraph | 6# |
+
 | Topics, one for each sentence | 4.1 |
+
 | Training (in STE) | General introduction |
+
 | Units of measurement | General introduction, 1.5, 8.6 |
+
 | Verb forms | 1.4, 3.2, Part 2, Introduction |
+
 | Verb terms | 1.1 |
+
 | Verbs | 3#, Part 2, Introduction |
+
 | Vertical lists | 4.3, 8.4 |
+
 | Warnings | 7# |
+
 | With (how to use) | 9 – GR-2 |
+
 | Word count | 8.4 thru 8.7 |
+
 | Word-for-word replacement | 1.2, 9.1 |
+
 | Words | 1#, all sections |
+
 | Words (that are not approved) | 1.1, 1.2, 1.6, 9# |
+
 | Writing practices | 9# |
 
 # General introduction
@@ -1325,23 +2177,41 @@ For more information, refer to the STEMG website at www.asd-ste100.org.
 The first release of STE was as the AECMA Simplified English Guide, PSC-85-16598. This is the full list of all released issues, revisions, and changes.
 
 | Release date | Identification | Scope |
+
 |---|---|---|
+
 | 1986-02-15 | First release | The guide included writing rules (part 1) and the dictionary (part 2) |
+
 | 1986-09-15 | Change 1 | Guide revised |
+
 | 1987-06-01 | Change 2 | Examples of function words and nouns (part 3) added |
+
 | 1988-06-15 | Change 3 | Examples of verbs (part 3) added |
+
 | 1988-12-30 | Change 4 | Examples of adjectives and adverbs (part 3) added |
+
 | 1989-12-01 | Change 5 | Reformatted version of change 4. No changes to the content |
+
 | 1995-09-15 | Issue 1 | Guide fully revised. Original part 2 removed and part 3 became part 2 |
+
 | 1998-01-15 | Issue 1, Revision 1 | Updates and amendments |
+
 | 2001-01-15 | Issue 1, Revision 2 | Updates and amendments |
+
 | 2004-01-15 | Issue 2 | Guide fully revised |
+
 | 2005-01-15 | Issue 3 | New issue released as ASD-STE100. No changes to the content |
+
 | 2007-01-15 | Issue 4 | Specification revised |
+
 | 2010-04-15 | Issue 5 | Specification revised |
+
 | 2013-01-15 | Issue 6 | Specification revised |
+
 | 2017-01-25 | Issue 7 | Specification fully revised, primary focus on the writing rules (part 1) |
+
 | 2021-04-30 | Issue 8 | Specification revised, primary focus on the dictionary (part 2) |
+
 | 2025-01-15 | Issue 9 | New issue released as a standard. Primary focus on harmonization of terminology with ISO standards |
 
 ## Maintenance of ASD-STE100
@@ -1611,15 +2481,21 @@ The dictionary gives each approved verb together with its approved forms. The di
 Example — Verbs:
 
 | REMOVE (v), |           |
+
 |-------------|-----------|
+
 | REMOVES,    |           |
+
 | REMOVED,    |           |
+
 | REMOVED     |           |
 
 This word tells you that you can use the approved verb "remove" as follows:
 
 | Infinitive/Imperative forms | Simple present tense | Simple past tense | Past participle form (as an adjective) |
+
 |-----------------------------|----------------------|-------------------|----------------------------------------|
+
 | (To) Remove/Remove          | Remove(s)            | Removed           | Removed                                |
 
 The past participle form of the verb is usually the same as the simple past tense. Thus, the dictionary gives it two times.
@@ -1629,7 +2505,9 @@ The past participle form of the verb is usually the same as the simple past tens
 #### SLOW (adj)
 
 | Entry | Forms |
+
 |-------|-------|
+
 | SLOW (adj) | (SLOWER, SLOWEST) |
 
 This word tells you that you can use the approved adjective "slow" as follows:
@@ -2318,7 +3196,7 @@ The STE dictionary gives you the verb forms that you can use for each approved v
 
 Example:
 
-```
+```text
 REMOVE (v)
 REMOVES
 REMOVED,
@@ -2328,8 +3206,7 @@ GIVE (v)
 GIVES
 GAVE,
 GIVEN
-```
-
+```text
 > **Source:** Issue 9, Part 1 — Writing rules, Page 1-3-1, 2025-01-15
 
 The introduction to the dictionary in part 2 gives you more information about the verb forms and how to use the approved verbs.
@@ -2348,12 +3225,19 @@ Use only the verbs forms and the tenses of verbs that are approved.
 Examples:
 
 | Form | Regular verb (Adjust) | Irregular verb (Give) |
+
 |---|---|---|
+
 | Infinitive (base form) | (To) Adjust | (To) Give |
+
 | Imperative (command form) | Adjust + object | Give + object |
+
 | Simple present tense | You/we/they adjust<br>It adjusts | You/we/they give<br>It gives |
+
 | Simple past tense | You/we/they adjusted<br>It adjusted | You/we/they gave<br>It gave |
+
 | Simple future tense | You/we/they will adjust<br>It will adjust | You/we/they will give<br>It will give |
+
 | Past participle (as an adjective) | The adjusted linkage | The given information |
 
 Do not use other forms and tenses that are not approved, for example:
@@ -2432,7 +3316,9 @@ Opening a door can be dangerous.
 They can make long groups of modifiers, noun phrases, and dependent clauses.
 
 | A mechanic opening a door without obeying the specified safety precautions can easily cause |
+
 | --- |
+
 | injury to persons standing near the door. |
 
 These different functions for words that have an "-ing" form can frequently cause ambiguity or long, complex sentences. Thus, words that have an "-ing" form are usually not permitted.
@@ -2465,7 +3351,9 @@ You can also use the "-ing" form of a verb as a modifier in a technical noun. Th
 Examples:
 
 | Air-conditioning system, degreasing agent, grinding wheel, polishing disc, sanding machine, |
+
 | --- |
+
 | switching relay, welding torch |
 
 Approved words that have an "-ing" form
@@ -3096,10 +3984,13 @@ Do not use the verb "must" before the imperative form, unless the instruction is
 Example:
 
 | Do not write: | Before you remove the clamp, you must disconnect the hose. |
+
 | --- | --- |
+
 | WRITE: | Before you remove the clamp, disconnect the hose. |
 
 | STE: | WARNING: IF YOU MUST CUT THE WIRE, ALWAYS USE A PROTECTIVE MASK. PIECES OF WIRES CAN CAUSE INJURY. |
+
 | --- | --- |
 
 ## Descriptive statements in instructions
@@ -3111,7 +4002,9 @@ If a special condition is necessary for a work step, the reader must know the co
 Examples:
 
 | Do not write: | Before you remove the clamp, you must disconnect the hose. |
+
 | --- | --- |
+
 | WRITE: | Before you remove the clamp, disconnect the hose. |
 
 WRITE: If the Constant Speed Drive (CSD) does not operate correctly, disconnect it from the gearbox.
@@ -3119,6 +4012,7 @@ WRITE: If the Constant Speed Drive (CSD) does not operate correctly, disconnect 
 The comma is important. Be careful when you use it because the position of the comma can change the meaning of your sentence.
 
 | STE: | WARNING: IF YOU MUST CUT THE WIRE, ALWAYS USE A PROTECTIVE MASK. PIECES OF WIRES CAN CAUSE INJURY. |
+
 | --- | --- |
 
 If the Constant Speed Drive (CSD) does not operate, correctly disconnect it from the gearbox.
@@ -3136,6 +4030,7 @@ Notes must not give instructions, requirements, or limits.
 Examples in STE:
 
 | NOTE: | The gyroscope will become stable after approximately 15 seconds. |
+
 | --- | --- |
 
 A note can have one or more sentences. Each sentence in a note can have a maximum of 25 words.
@@ -3167,7 +4062,9 @@ If you include instructions in a note, it is possible that the reader will not s
 Examples:
 
 | Non-STE: | NOTE: When you connect the lines, do not bend them too much. If you bend the lines too much, you can cause damage to them. (This text is not a note. It is a safety instruction.) |
+
 | --- | --- |
+
 | STE: | CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM. |
 
 airflow to the compartment and therefore there is a risk of suffocation.
@@ -3181,7 +4078,9 @@ Do not use a note to give limits, tolerances, or results of a work step. This in
 Examples:
 
 | Non-STE: | NOTE: When you connect the lines, do not bend them too much. If you bend the lines too much, you can cause damage to them. (This text is not a note. It is a safety instruction.) |
+
 | --- | --- |
+
 | STE: | CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM. |
 
 ## How to use notes correctly
@@ -3568,11 +4467,15 @@ The semicolon (;) is not permitted in STE because it lets you write very long se
 Examples:
 
 | **Non-STE:** | (1) Examine the removed parts; replace the damaged ones. |
+
 | **STE:** | (1) Examine the removed parts for damage. |
+
 | | (2) Replace the damaged part(s). |
 
 | **Non-STE:** | (1) Examine the removed parts; replace the damaged ones. |
+
 | **STE:** | (1) Examine the removed parts for damage. |
+
 | | (2) Replace the damaged part(s). |
 
 replace it.
@@ -3644,8 +4547,11 @@ In STE, you can use parentheses as follows:
 5. To give the singular and plural forms of a noun at the same time
 
    | Example | Text |
+
    |---------|------|
+
    | A | Before you do the test(s), install the component(s). |
+
    | B | Do the applicable test(s). |
 
 6. To explain words or a part of a sentence
@@ -3696,7 +4602,9 @@ If there is an identifier in parentheses (a number, a letter, or an alphanumeric
 > **STE:** Installation of a Business Class (B/C) Seat (7 words)
 
 | Example | Text |
+
 |---------|------|
+
 |         | Hardware and Software Configuration Check of the In-Flight Entertainment (IFE) System (11 words) |
 
 ## Rule 8.6
@@ -4045,7 +4953,9 @@ To replace "depending," you must make an important change to the sentence. This 
 You can then write the first sentence as follows:
 
 | If you find cracks during this procedure, do the repair before the number of flight hours that |
+
 |---|
+
 | are applicable to the crack length. Refer to the table that follows: |
 
 But the first sentence has 23 words, and the technical meaning is not correct and not easy to understand. Also, part of the information is in the table. Thus, it is not necessary to give it two times. A good solution is to put the instruction in the table heading, as shown in the STE text.
@@ -4389,11 +5299,15 @@ The dictionary has four columns that give this information:
 Example:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |---|---|---|---|
+
 | AID (n) | Help that is given | IF YOU GET THIS CHEMICAL SOLUTION IN YOUR EYES, GET MEDICAL AID IMMEDIATELY. | |
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |---|---|---|---|
+
 | accuracy (n) — UNAPPROVED | PRECISION (n) | THE PRECISION OF THE ADJUSTMENT CAN CHANGE. | The accuracy of the adjustment can vary. |
 
 #### Column 1: Word (part of speech)
@@ -4405,7 +5319,9 @@ A word in UPPERCASE letters shows that you can use this word because it is appro
 Examples:
 
 | Word (part of speech) |
+
 |---|
+
 | ABRASIVE (adj) |
 
 material by friction
@@ -4417,8 +5333,11 @@ A word in lowercase letters shows that you cannot use this word because it is no
 Examples:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |---|---|---|---|
+
 | main (adj) — UNAPPROVED | PRIMARY (adj) | THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID. | The main cause of valve failure is contamination of the fluid. |
+
 | build (v) — UNAPPROVED | ASSEMBLE (v) | ASSEMBLE THE UNIT. | Build the unit. |
 
 The part of speech for each word is given in parentheses with its recognized abbreviation. Use an approved word only as the specified part of speech. Refer to part 1, section 1.
@@ -4456,7 +5375,9 @@ Nouns are given only in their singular form, but the plural form of countable no
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
+
 |---|---|---|---|
+
 | AGENT (n) | One of a group of materials made to do a specified task | | CLEANING AGENTS ON HOT SURFACES. |
 
 #### Verbs
@@ -4477,7 +5398,9 @@ Verbs that obey a constant pattern to make the simple past tense and the past pa
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
+
 |---|---|---|---|
+
 | ADAPT (v) | To change or adjust to that which is necessary | ADAPT THE PRESSURE CONNECTION TO THE PITOT HEAD. THE SYSTEM INTERFACE CIRCUITS ADAPT TO THE PHYSICAL PROPERTIES OF THE CONNECTED SYSTEMS. | |
 
 - Approved forms: ADAPTS, ADAPTED
@@ -4489,7 +5412,9 @@ Verbs that do not obey the standard rules for the simple past tense and the past
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
+
 |---|---|---|---|
+
 | GIVE (v) | To provide | THIS SECTION GIVES THE CLEANING PROCEDURES FOR THE DISASSEMBLED PARTS. | |
 
 - Approved forms: GIVES, GAVE, GIVEN
@@ -4501,8 +5426,11 @@ Auxiliary verbs that have unusual forms for tenses.
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
+
 |---|---|---|---|
+
 | BE (v) | 1. To occur, exist | IF THERE IS CORROSION ON THE PUMP VANES, REPLACE THE PUMP. | |
+
 | | 2. To have a property to be equal to | ACID SOLUTIONS ARE DANGEROUS. | |
 
 - Approved forms: IS, WAS (also ARE, WERE)
@@ -4515,8 +5443,11 @@ Modal verbs in which some verb forms are missing.
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
+
 |---|---|---|---|
+
 | CAN (v) | Auxiliary modal verb that means to be possible, to be able to, or to be permitted to | A MIXTURE OF FUEL AND OXYGEN CAN CAUSE AN EXPLOSION. YOU CAN CLEAN THE DRAIN HOLES WITH THE CLEANING TOOL. YOU CAN OPERATE THE VEHICLE AFTER THE INSPECTION IS COMPLETED. | |
+
 | WILL (v) | Auxiliary modal verb that shows simple future tense | WARNINGS AND CAUTIONS IN THIS MANUAL WILL HELP YOU TO DO THE WORK SAFELY AND CORRECTLY. | |
 
 - CAN: No other verb forms.
@@ -4534,7 +5465,9 @@ Adjectives are given in their base form, with their comparative and superlative 
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
+
 |---|---|---|---|
+
 | SLOW (adj) | At low speed | MAKE SURE THAT THE MOVEMENT OF THE ELEVATORS IS SLOW. | |
 
 - Comparative and superlative: SLOWER, SLOWEST
@@ -4546,8 +5479,11 @@ Frequently (but not always), you can make an adverb from an adjective when you a
 Examples:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
+
 |---|---|---|---|
+
 | SLOWLY (adv) | In a slow manner | TURN THE KNOB SLOWLY. | |
+
 | briskly (adv) — UNAPPROVED | QUICKLY (adv) | RUB THE SURFACE QUICKLY WITH A SOFT, DRY CLOTH. | Rub the surface briskly with a soft, dry cloth. |
 
 ## How to use the dictionary
@@ -4555,10 +5491,15 @@ Examples:
 The dictionary gives you the information that is necessary to write in STE. Each entry in the dictionary has four columns:
 
 | Column | Content |
+
 |--------|---------|
+
 | 1 | Word (part of speech) |
+
 | 2 | Approved meaning/ALTERNATIVES |
+
 | 3 | STE EXAMPLE |
+
 | 4 | Non-STE example |
 
 The first column in the dictionary does not include technical nouns or technical verbs. But the second column can include technical nouns or technical verbs as alternatives to words that are not approved. Then, the abbreviations TN and TV in parentheses identify these alternatives.
@@ -4572,7 +5513,9 @@ Column 2 of the dictionary entry can give an approved meaning. When column 2 giv
 Example:
 
 | Approved meaning/ALTERNATIVES |
+
 |---|
+
 | In a position at the rear of |
 
 with a meaning that is not approved. Thus, you must use a different word that has the meaning that you want.
@@ -4598,20 +5541,27 @@ Example:
 > **STE:** KEEP (v)
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |------------|-------------------------------|-------------|-----------------|
+
 | HOLD (v) | | TURN THE ROTATING TUBE 75 DEGREES. THEN, HOLD THE TUBE IN THIS POSITION. | Turn the rotating tube 75 degrees. Then, maintain the tube in this position. |
+
 | MAINTENANCE (n) | | DO MAINTENANCE ON THE WATER SUPPLY SYSTEM. | Maintain the water supply system. |
 
 Example:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |------------------------|-------------------------------|-------------|-----------------|
+
 | uncovered (v) — UNAPPROVED | COVER (TN) | DO NOT PUT A COVER ON THE CONTAINER. | Leave the container uncovered. |
 
 Example:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |------------------------|-------------------------------|-------------|-----------------|
+
 | simultaneously (adv) | AT THE SAME TIME | DO THESE TWO STEPS AT THE SAME TIME. | Do these two steps simultaneously. |
 
 ## Help
@@ -4627,13 +5577,17 @@ Examples:
 This category of help includes recommendations that give you more information or instructions about how to use the approved word correctly.
 
 | Approved meaning/ALTERNATIVES |
+
 |---|
+
 | 1. To apply a force to something to move it away from the source of the force |
 
 > **STE:** PUSH THE ROD INTO THE HOLE.
 
 | Approved meaning/ALTERNATIVES | |
+
 |---|---|
+
 | 2. To move with a force against something | Use this word together with a preposition or an adverb to show direction. |
 
 ### Category 2
@@ -4641,13 +5595,19 @@ This category of help includes recommendations that give you more information or
 This category of help tells you that some approved words, for example ABOUT (prep), have a restricted meaning. Thus, you must use the approved alternatives for other meanings. When the help refers to restricted meanings of approved words, the dictionary gives STE and non-STE examples in columns 3 and 4.
 
 | Approved meaning/ALTERNATIVES | |
+
 |---|---|
+
 | Concerned with | For other meanings, use: |
+
 | | APPROXIMATELY (adv) |
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |------------|-------------------------------|-------------|-----------------|
+
 | APPROXIMATELY (adv) | | DRAIN APPROXIMATELY 2 LITERS OF FUEL FROM THE TANK. | Drain about 2 liters of fuel from the tank. |
+
 | AROUND (prep) | | TURN THE SHAFT AROUND ITS AXIS. | Rotate the shaft about its axis. |
 
 ### Category 3
@@ -4655,7 +5615,9 @@ This category of help tells you that some approved words, for example ABOUT (pre
 This category of help tells you to be careful with the words that are approved for only one context. For example, the word SWALLOW (v) is only applicable to safety instructions. You must not use it in other contexts.
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 |------------|-------------------------------|-------------|-----------------|
+
 | SWALLOW (v) | To take through the mouth and esophagus into the stomach | IF YOU SWALLOW NITRIC ACID, DO NOT CAUSE VOMITING. GET MEDICAL AID IMMEDIATELY. | SWALLOWS, SWALLOWED, SWALLOWED |
 
 Use this word for safety instructions only.
@@ -4665,8 +5627,11 @@ Use this word for safety instructions only.
 This category of help gives you important information about the applicable listed words (also those that are not approved).
 
 | Approved meaning/ALTERNATIVES |
+
 | --- |
+
 | 1. To occur, exist |
+
 | 2. To have a property to be equal to |
 
 #### IS, WAS (also ARE, WERE)
@@ -4706,20 +5671,29 @@ Many of the given examples come from the subject field of aircraft maintenance. 
 ### Examples
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 | --- | --- | --- | --- |
+
 | A (art) | Function word: indefinite article | A FUEL PUMP IS INSTALLED IN ZONE 10. | |
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 | --- | --- | --- | --- |
+
 | **main (adj) — UNNAPROVED** | PRIMARY (adj) | THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID. | The main cause of valve failure is contamination of the fluid. |
+
 | **manufacture (v) — UNNAPROVED** | MAKE (v) | YOU CAN MAKE THE CLEARING TOOL LOCALLY. | The clearing tool can be manufactured locally. |
 
 OF THE VALVE FAILURE IS CONTAMINATION OF THE FLUID. failure is contamination of the fluid.
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+
 | --- | --- | --- | --- |
+
 | **A (art)** | Function word: indefinite article | A FUEL PUMP IS INSTALLED IN ZONE 10. | |
+
 | **ABOVE (prep)** | In (or to) a position farther up than something | LIFT THE CYLINDER ABOVE ITS INSTALLED POSITION. | |
+
 |  | For other meanings, use: MORE THAN | THE PRESSURE VALUE MUST BE MORE THAN 800 kPa. | The pressure value must be above 800 kPa. |
 
 ## How to Select Words Correctly
@@ -4732,45 +5706,85 @@ The table that follows gives you a list of the most frequently recurring errors 
 they use STE. If a word is not approved in the dictionary, do not use it.
 
 | Word (POS) | Meaning & Examples |
+
 |---|---|
+
 | **acceptable (adj) — UNNAPROVED** | PERMITTED (adj) |
+
 | **alternate (adj) — UNNAPROVED** | ALTERNATIVE (adj) |
+
 | **any (adj) — UNNAPROVED** | None or a different sentence construction |
+
 | **avoid (v) — UNNAPROVED** | PREVENT (v) |
+
 | **both (adj) — UNNAPROVED** | THE TWO (TN) |
+
 | **check (v) — UNNAPROVED** | CHECK (n) |
+
 | **cover (v) — UNNAPROVED** | COVER (TN) |
+
 | **complete (adj) — UNNAPROVED** | COMPLETED (adj) |
+
 | **damage (v) — UNNAPROVED** | DAMAGE (n) |
+
 | **ensure (v) — UNNAPROVED** | MAKE SURE (v) |
+
 | **fit (v) — UNNAPROVED** | INSTALL (v) |
+
 | **follow (v) — UNNAPROVED** | OBEY (v) |
+
 | **further (adj) — UNNAPROVED** | MORE (adj) |
+
 | **further (adv) — UNNAPROVED** | MORE (adv) |
+
 | **have to (v) — UNNAPROVED** | Use an action verb in the imperative form |
+
 | **however (adv) — UNNAPROVED** | BUT (conj) |
+
 | **insert (v) — UNNAPROVED** | PUT (v) |
+
 | **main (adj) — UNNAPROVED** | PRIMARY (adj) |
+
 | **may (v) — UNNAPROVED** | CAN (v) |
+
 | **need (v) — UNNAPROVED** | NECESSARY (adj) |
+
 | **now (adv) — UNNAPROVED** | AT THIS TIME |
+
 | **old (adj) — UNNAPROVED** | REMAINING (adj), USED (adj), EXPIRED (adj) |
+
 | **over (prep) — UNNAPROVED** | ABOVE (prep), ON (prep), ALONG (prep) |
+
 | **people (n) — UNNAPROVED** | PERSON (n), PERSONNEL (n) |
+
 | **perform (v) — UNNAPROVED** | DO (v) |
+
 | **portion (n) — UNNAPROVED** | PART (n) |
+
 | **press (v) — UNNAPROVED** | PUSH (v) |
+
 | **reach (v) — UNNAPROVED** | GET (v) |
+
 | **repeat (v) — UNNAPROVED** | DO (v) … AGAIN |
+
 | **required (v) — UNNAPROVED** | NECESSARY (adj) |
+
 | **rotate (v) — UNNAPROVED** | TURN (v) |
+
 | **secure (v) — UNNAPROVED** | ATTACH (v), SAFETY (v) |
+
 | **shall (v) — UNNAPROVED** | MUST (v) |
+
 | **should (v) — UNNAPROVED** | MUST (v) |
+
 | **since (conj) — UNNAPROVED** | BECAUSE (conj) |
+
 | **test (v) — UNNAPROVED** | TEST (n) |
+
 | **therefore (adv) — UNNAPROVED** | THUS (adv), AS A RESULT |
+
 | **under (prep) — UNNAPROVED** | BELOW (prep), IN (prep), LESS THAN |
+
 | **using (v) — UNNAPROVED** | USE (v), WITH (prep) |
 
 ## List of approved verbs
@@ -4779,53 +5793,101 @@ The table that follows gives you the list of the approved verbs in the dictionar
 quick-reference tool to find the approved verbs.
 
 | A–C | C–G | G–N | O–S | S–Z |
+
 |---|---|---|---|---|
+
 | A | CONTROL | GO | O | SMELL |
+
 | ABSORB | CORRECT | GO OFF | OBEY | SMOKE |
+
 | ACCEPT | COUNT | GROUND | OCCUR | SOAK |
+
 | ACTIVATE | CUT | H | OPEN | SPEAK |
+
 | ADAPT | D | HANG | OPERATE | SPILL |
+
 | ADD | DEACTIVATE | HAVE | OVERRIDE | SPRAY |
+
 | ADJUST | DECREASE | HEAR | P | START |
+
 | AGREE | DE-ENERGIZE | HELP | PAINT | STAY |
+
 | ALIGN | DEFLATE | HIT | PARK | STOP |
+
 | APPLY | DEFUEL | HOLD | POINT | STOW |
+
 | ARM | DEPLOY | I | POLISH | SUBTRACT |
+
 | ASSEMBLE | DISARM | IDENTIFY | PREPARE | SUPPLY |
+
 | ATTACH | DISCARD | IGNORE | PRESSURIZE | SWALLOW |
+
 | B | DISCONNECT | ILLUMINATE | PREVENT | T |
+
 | BALANCE | DISENGAGE | INCLUDE | PROTRUDE | TAG |
+
 | BE | DIVIDE | INCREASE | PULL | TAP |
+
 | BECOME | DO | INFLATE | PUSH | TELL |
+
 | BEND | DRAIN | INSTALL | PUT | THINK |
+
 | BLEED | DRINK | INTERCHANGE | PUT ON | TIGHTEN |
+
 | BLOW | DRY | ISOLATE | Q | TILT |
+
 | BOND | E | J | R | TORQUE |
+
 | BREAK | EAT | K | READ | TOUCH |
+
 | BREATHE | EJECT | KEEP | RECEIVE | TOW |
+
 | BURN | ENERGIZE | KILL | RECOMMEND | TRANSMIT |
+
 | BYPASS | ENGAGE | KNOW | RECORD | TRY |
+
 | C | ERASE | L | RECYCLE | TUNE |
+
 | CALCULATE | EXAMINE | LATCH | REFER | TURN |
+
 | CALIBRATE | EXPAND | LET | REFUEL | TWIST |
+
 | CAN | EXTEND | LIFT | REJECT | U |
+
 | CANCEL | EXTINGUISH | LISTEN | RELEASE | UNFOLD |
+
 | CANNOT | F | LOCK | REMOVE | UNLOCK |
+
 | CATCH | FALL | LOOK | REPAIR | UNWIND |
+
 | CAUSE | FEATHER | LOOSEN | REPLACE | USE |
+
 | CHANGE | FEEL | LOWER | RETRACT | V |
+
 | CHARGE | FILL | LUBRICATE | RUB | W |
+
 | CLEAN | FIND | M | S | WAIT |
+
 | CLOSE | FIRE | MAKE | SAFETY | WALK |
+
 | COLLECT | FLASH | MAKE SURE | SCHEDULE | WANT |
+
 | COME | FLOW | MEASURE | SEAL | WEAR |
+
 | COME ON | FLUSH | MELT | SEE | WEIGH |
+
 | COMPARE | FOLD | MIX | SELECT | WILL |
+
 | COMPLETE | FOLLOW | MONITOR | SEND | WIND |
+
 | COMPRESS | FREEZE | MOOR | SENSE | WRITE |
+
 | CONNECT | G | MOVE | SET | X, Y, Z |
+
 | CONTACT | GET | MULTIPLY | SHAKE | |
+
 | CONTAIN | GIVE | MUST | SHOW | |
+
 | CONTINUE | | N | SIMULATE | |
 
 *(Page 148 is intentionally blank.)*
@@ -7613,137 +8675,164 @@ You can also use a different construction:
 ### APPROVED Entries
 
 #### COIL (n)
+
 - **Meaning:** A sequence of loops
 > **STE:** MAKE SURE THAT THE COILS OF THE OXYGEN HOSE DO NOT RUB TOGETHER.
 
 #### ALIGN (v)
+
 - **Usage as alternative for "coincident"**
 > **STE:** MAKE SURE THAT THE TWO SURFACES ALIGN.
 > **Non-STE:** Make sure that the two surfaces are coincident.
 
 #### COLD (adj)
+
 - **Meaning:** At low temperature
 - **Forms:** COLDER, COLDEST
 > **STE:** MAKE SURE THAT COLD AIR COMES OUT OF THE OUTLETS.
 
 #### FALL (v)
+
 - **Usage as alternative for "collapse"**
 > **STE:** THE BOARDING BRIDGE FELL.
 > **Non-STE:** The boarding bridge collapsed.
 
 #### COLLECT (v)
+
 - **Meaning:** To come, or cause to, come together in one location
 - **Forms:** COLLECTS, COLLECTED, COLLECTED
 > **STE:** FLUID COLLECTS IN THE BOTTOM OF THE COWLING.
 > **STE:** COLLECT ALL LOOSE ITEMS AND PUT THEM IN THE CONTAINER.
 
 #### COLOR (n)
+
 - **Meaning:** A property of light
 > **STE:** THE COLOR CHANGES FROM BLUE TO RED.
 
 #### CODE (n)
+
 - **Usage as alternative for "color code" (v)**
 > **STE:** PUT A COLOR CODE ON EACH OF THE ASSEMBLIES.
 > **Non-STE:** Color code the assemblies.
 
 #### COME (v)
+
 - **Meaning:** To move to your location
 - **Forms:** COMES, CAME; No other verb forms.
 > **STE:** FUMES MUST NOT COME INTO THE CABIN.
 
 #### COME ON (v)
+
 - **Meaning:** To become bright with light when an internal power source is energized
 - **Forms:** COMES ON, CAME ON; No other verb forms.
 > **STE:** THE LIGHTS MUST COME ON.
 
 #### SPEAK (v)
+
 - **Usage as alternative for "communicate" (v)**
 > **STE:** USE A TELEPHONE TO SPEAK WITH THE LINE MANAGER.
 > **Non-STE:** Use a telephone to communicate with the line manager.
 
 #### HEAR (v)
+
 - **Usage as alternative for "communicate" (v)**
 > **STE:** MAKE SURE THAT AIR TRAFFIC CONTROL CAN HEAR YOU.
 > **Non-STE:** Make sure that you communicate with ATC.
 
 #### COMMUNICATION (n)
+
 - **Meaning:** The exchange of information through a common system of symbols, signs, or sounds
 > **STE:** MAKE SURE THAT THERE IS COMMUNICATION BETWEEN THE SERVER AND THE PC.
 > **Non-STE:** Make sure that the server and the PC can communicate.
 > **STE:** COMMUNICATION BETWEEN THESE TWO SYSTEMS IS ENCRYPTED.
 
 #### COMPARE (v)
+
 - **Meaning:** To examine for differences
 - **Forms:** COMPARES, COMPARED, COMPARED
 > **STE:** COMPARE THE TWO VALUES.
 
 #### COMPATIBLE (adj)
+
 - **Meaning:** That can operate together satisfactorily or be used together safely
 > **STE:** THIS SOFTWARE IS COMPATIBLE ONLY WITH THE SPECIFIED OPERATING SYSTEM.
 > **STE:** THE COOLANT IS COMPATIBLE WITH HIGH-PERFORMANCE ALLOYS.
 
 #### RECORD (v)
+
 - **Usage as alternative for "compile" (v)**
 > **STE:** RECORD THE AILERON MOVEMENTS ON FORM B.
 > **Non-STE:** Compile the aileron movements on Form B.
 
 #### COLLECT (v)
+
 - **Usage as alternative for "compile" (v)**
 > **STE:** COLLECT ALL INSPECTION RECORDS FOR THE COMPONENT.
 > **Non-STE:** Compile all inspection records for the component.
 
 #### ALL (adj)
+
 - **Usage as alternative for "complete" (adj)**
 > **STE:** SEND ALL THE TEST RESULTS TO THE MANUFACTURER.
 > **Non-STE:** The complete test results must be sent to the manufacturer.
 
 #### COMPLETED (adj)
+
 - **Usage as alternative for "complete" (adj)**
 > **STE:** THE GREEN INDICATION SHOWS THAT SERVICING IS COMPLETED.
 > **Non-STE:** The green indication shows that servicing is complete.
 
 #### COMPLETE (v)
+
 - **Meaning:** To bring to an end
 - **Forms:** COMPLETES, COMPLETED, COMPLETED
 > **STE:** COMPLETE THE FUNCTIONAL TEST.
 
 #### COMPLETED (adj)
+
 - **Meaning:** Successfully brought to an end
 > **STE:** SEND THE COMPLETED REPORT TO THE SUPERVISOR FOR APPROVAL.
 
 ### UNAPPROVED Entries
 
 #### coil (v)
+
 - **Alternative:** WIND (v)
 > **STE:** WIND THE CABLES CAREFULLY.
 > **Non-STE:** Coil the cables carefully.
 
 #### coincide (v)
+
 - **Alternative:** ALIGN (v)
 > **STE:** THE FASTENERS MUST ALIGN WITH THE HOLES IN THE TRACK.
 > **Non-STE:** The fasteners must coincide with the holes in the track.
 
 #### coincident (adj)
+
 - **Alternative:** SYNCHRONIZED (adj)
 > **STE:** MAKE SURE THAT THE MOVEMENT OF THE TWO SURFACES IS SYNCHRONIZED.
 > **Non-STE:** Make sure that the movement of the two surfaces is coincident.
 
 #### collapse (v)
+
 - **Alternative:** CLOSE (v)
 > **STE:** CLOSE THE BOX.
 > **Non-STE:** Collapse the box.
 
 #### color code (v)
+
 - **Alternative:** IDENTIFY (v)
 > **STE:** IDENTIFY THE ASSEMBLY WITH THE CORRECT COLOR.
 > **Non-STE:** The assembly must be color coded.
 
 #### colored (adj)
+
 - **Alternative:** COLOR (n)
 > **STE:** THE SCALE HAS TWO AREAS OF DIFFERENT COLOR.
 > **Non-STE:** The scale is divided into two colored areas.
 
 #### combine (v)
+
 - **Alternative:** MIX (v)
 > **STE:** MIX THE WATER AND THE GLYCOL.
 > **Non-STE:** Combine water and glycol.
@@ -7752,51 +8841,61 @@ You can also use a different construction:
 > **Non-STE:** Do not combine different HPT segments.
 
 #### combustible (adj)
+
 - **Alternative:** FLAMMABLE (adj)
 > **STE:** KEEP FLAMMABLE MATERIALS AT A MINIMUM DISTANCE OF 50 FEET FROM THE WORK AREA.
 > **Non-STE:** Keep combustible materials at a minimum distance of 50 feet from the work area.
 
 #### commence (v)
+
 - **Alternative:** START (v)
 > **STE:** THE WARNING STARTS AND THE INDICATORS FLASH.
 > **Non-STE:** The warning commences and the indicators flash.
 
 #### commencement (n)
+
 - **Alternative:** START (v)
 > **STE:** AFTER THE TEST STARTS, MONITOR THE RESULTS ON THE SCREEN.
 > **Non-STE:** After the test commencement, monitor the results on the screen.
 
 #### common (adj)
+
 - **Alternative:** SAME (adv)
 > **STE:** THE REMOVAL PROCEDURE IS THE SAME FOR THE TWO ITEMS.
 > **Non-STE:** The removal procedure is common to both items.
 
 #### communicate (v)
+
 - **Alternative:** CONTACT (v)
 > **STE:** FOR MORE INFORMATION, CONTACT THE MANUFACTURER.
 > **Non-STE:** For more information, communicate with the manufacturer.
 
 #### comparison (n)
+
 - **Alternative:** COMPARE (v)
 > **STE:** COMPARE THE TWO INDICATIONS.
 > **Non-STE:** Make a comparison of the two readings.
 
 #### compile (v)
+
 - **Alternative:** MAKE A LIST
 > **STE:** MAKE A LIST OF THE NECESSARY TOOLS.
 > **Non-STE:** Compile a list of the required tools.
 
 #### complete (adj)
+
 - **Alternative:** FULL (adj)
 > **STE:** EXTEND AND RETRACT THE ACTUATOR THROUGH THREE FULL CYCLES.
 > **Non-STE:** Extend and retract the actuator through three complete cycles.
 
 #### completely (adv)
+
 - **Alternative:** FULLY (adv)
 > **STE:** BEFORE YOU APPLY THE SECOND LAYER, LET THE FIRST LAYER OF PAINT DRY FULLY.
 > **Non-STE:** Allow the first layer of paint to dry completely before applying the second layer.
 
 #### completion (n)
+
 - **Alternative:** END (n)
 > **STE:** AT THE END OF THIS PROCEDURE, REFER TO 72-00-00, TEST 001.
 > **Non-STE:** See 72-00-00, Testing 001 upon completion of this procedure.
@@ -7805,11 +8904,13 @@ You can also use a different construction:
 > **Non-STE:** Completion of the task will require two hours.
 
 #### complicated (adj)
+
 - **Alternative:** NOT EASY
 > **STE:** THIS TEST PROCEDURE IS NOT EASY WITHOUT THE CORRECT EQUIPMENT.
 > **Non-STE:** This test procedure is complicated without the right equipment.
 
 #### comply (v)
+
 - **Alternative:** OBEY (v)
 > **STE:** WHEN YOU ASSEMBLE THE UNIT, OBEY THIS PROCEDURE.
 > **Non-STE:** When you assemble the unit, comply with this procedure.
@@ -9582,42 +10683,51 @@ You can also use a different construction:
 ## Approved Entries
 
 #### DRY (adj)
+
 - **Forms:** DRIER, DRIEST
 - **Meaning:** Without liquid or moisture
 - **STE:** MAKE SURE THAT THE SURFACE IS DRY.
 
 #### DRY (v)
+
 - **Forms:** DRIES, DRIED, DRIED
 - **Meaning:** To remove liquid or moisture, or to become dry
 - **STE:** DRY THE FILTER IN AN OVEN.
 - **STE:** LET THE PAINT DRY AT THE AMBIENT TEMPERATURE.
 
 #### DURING (prep)
+
 - **Meaning:** In or for a specified time
 - **STE:** MONITOR THE INDICATIONS DURING THE RETRACTION TEST.
 
 #### EACH (adj)
+
 - **Meaning:** Every one of two or more objects or persons, seen together as a group but identified separately
 - **STE:** MAKE SURE THAT THE SWITCH IN EACH PANEL IS SET TO "OFF."
 
 #### EACH (pron)
+
 - **Meaning:** Every one of two or more objects or persons, seen together as a group but identified separately
 - **STE:** INSTALL TWO SPACERS, EACH WITH A THICKNESS OF 3.5 mm.
 
 #### EACH OTHER (pron)
+
 - **Meaning:** Each of two or more in reciprocal action or relation
 - **STE:** WHEN YOU REMOVE THE PROBES, DO NOT LET THEM TOUCH EACH OTHER.
 
 #### EASILY (adv)
+
 - **Meaning:** Without difficulty
 - **STE:** OXIDATION OCCURS VERY EASILY.
 
 #### EASY (adj)
+
 - **Forms:** EASIER, EASIEST
 - **Meaning:** Without difficulty
 - **STE:** USE THE LEFT OPENING FOR EASY ACCESS.
 
 #### EAT (v)
+
 - **Forms:** EATS, ATE
 - **Meaning:** To consume food
 - **STE:** DO NOT EAT IN THE WORK AREA.
@@ -9626,16 +10736,19 @@ You can also use a different construction:
   - **Non-STE:** Do not eat the potting compound.
 
 #### EDGE (n)
+
 - **Meaning:** A line that is the intersection of two surfaces of a solid object
 - **STE:** THE DISTANCE BETWEEN THE EDGE OF THE PANEL AND THE PARTITION MUST NOT BE MORE THAN 0.05 mm.
 
 #### EFFECT (n)
+
 - **Meaning:** The result of a cause
 - **STE:** WHEN DUST MIXES WITH OIL, IT HAS AN ABRASIVE EFFECT.
 
 ## Unapproved Entries
 
 #### drop (v) — UNAPPROVED
+
 - **Alternative:** FALL (v)
   > **STE:** PARTICLES THAT FALL INTO THE INTAKE CAN CAUSE DAMAGE.
   > **Non-STE:** Particles that drop into the intake may cause damage.
@@ -9644,6 +10757,7 @@ You can also use a different construction:
   > **Non-STE:** The pressure drops as the tires cool.
 
 #### due to (prep) — UNAPPROVED
+
 - **Alternative:** BECAUSE OF (prep)
   > **STE:** BECAUSE OF THE SMALL DIAMETER OF THE HOLE, THE FLOW IS LOW.
   > **Non-STE:** Due to the small diameter of the hole, the flow is low.
@@ -9652,6 +10766,7 @@ You can also use a different construction:
   > **Non-STE:** The shaft moved due to the actuator action.
 
 #### dull (adj) — UNAPPROVED
+
 - **Alternative:** DIM (adj)
   > **STE:** THE LAMP COMES ON WITH A DIM LIGHT.
   > **Non-STE:** The lamp comes on with a dull light.
@@ -9660,31 +10775,37 @@ You can also use a different construction:
   > **Non-STE:** The letters will be dull black on a white background.
 
 #### duration (n) — UNAPPROVED
+
 - **Alternative:** DURING (prep)
   > **STE:** DO NOT MAKE ADJUSTMENTS DURING THIS TEST.
   > **Non-STE:** Do not make adjustments for the duration of this test.
 
 #### dust (v) — UNAPPROVED
+
 - **Alternative:** APPLY (v)
   > **STE:** APPLY TALCUM POWDER TO THE AREA.
   > **Non-STE:** Dust the area with talcum powder.
 
 #### early (adj) — UNAPPROVED
+
 - **Alternative:** SHORT (adj)
   > **STE:** IF THE FILTERS BECOME CLOGGED AFTER AN UNUSUALLY SHORT TIME, SEND THEM TO THE LABORATORY FOR ANALYSIS OF THE CONTAMINATION.
   > **Non-STE:** If the filters clog at an unusually early stage, send them to the laboratory for analysis of the contamination.
 
 #### earth (n) — UNAPPROVED
+
 - **Alternative:** GROUND (n)
   > **STE:** MAKE SURE THAT THE ELECTRICAL SUPPLY GOES TO GROUND.
   > **Non-STE:** Make sure the electric supply goes to earth.
 
 #### earth (v) — UNAPPROVED
+
 - **Alternative:** GROUND (v)
   > **STE:** MAKE SURE THAT THE FUEL TANKS ARE CORRECTLY GROUNDED.
   > **Non-STE:** Make sure the fuel tanks are correctly earthed.
 
 #### ease (n) — UNAPPROVED
+
 - **Alternative:** EASILY (adv)
   > **STE:** MAKE SURE THAT YOU CAN MOVE THE HANDLE EASILY.
   > **Non-STE:** The handle must move with ease.
@@ -9693,6 +10814,7 @@ You can also use a different construction:
   > **Non-STE:** The handle must move with ease.
 
 #### ease (v) — UNAPPROVED
+
 - **Alternative:** CAREFULLY REMOVE
   > **STE:** CAREFULLY REMOVE THE TRIM COVER FROM THE ADHESIVE TAPE.
   > **Non-STE:** Ease the trim cover from the adhesive tape.
@@ -9701,21 +10823,25 @@ You can also use a different construction:
   > **Non-STE:** Ease the pipe into the right position.
 
 #### effect (v) — UNAPPROVED
+
 - **Alternative:** DO (v)
   > **STE:** DO THE TIGHTENING PROCEDURE.
   > **Non-STE:** Effect the tightening procedure.
 
 #### effective (adj) — UNAPPROVED
+
 - **Alternative:** GOOD (adj)
   > **STE:** THIS MATERIAL GIVES GOOD PROTECTION FROM CORROSION.
   > **Non-STE:** This material provides effective protection from corrosion.
 
 #### efficacious (adj) — UNAPPROVED
+
 - **Alternative:** GOOD (adj)
   > **STE:** THIS IS A GOOD PROCEDURE TO REMOVE PAINT.
   > **Non-STE:** This is an efficacious way to remove paint.
 
 #### efficient (adj) — UNAPPROVED
+
 - **Alternative:** SATISFACTORY (adj)
   > **STE:** THE TRANSMISSION CONTROL PROTOCOL IS NOT SATISFACTORY FOR THE TRANSMISSION OF INTERACTIVE TRAFFIC.
   > **Non-STE:** The Transmission Control Protocol is not efficient for the transmission of interactive traffic.
@@ -9986,21 +11112,25 @@ You can also use a different construction:
 ## Dictionary Entries
 
 #### enough (adj) — UNAPPROVED
+
 - **Approved alternative:** SUFFICIENT (adj)
 > **STE:** MAKE SURE THAT THERE IS SUFFICIENT PRESSURE IN THE ACCUMULATOR.
 > **Non-STE:** Make sure that there is enough pressure in the accumulator.
 
 #### ensue (v) — UNAPPROVED
+
 - **Approved alternative:** CAUSE (v)
 > **STE:** INCORRECT INSTALLATION WILL CAUSE DAMAGE.
 > **Non-STE:** Damage will ensue from incorrect installation.
 
 #### ensure (v) — UNAPPROVED
+
 - **Approved alternative:** MAKE SURE (v)
 > **STE:** MAKE SURE THAT THE CORRECT SEALS ARE INSTALLED.
 > **Non-STE:** Ensure that the correct seals are installed.
 
 #### enter (v) — UNAPPROVED
+
 - **Approved alternative 1:** GO INTO
 > **STE:** DO NOT GO INTO THE LABORATORY WITHOUT APPROVAL.
 > **Non-STE:** Do not enter the laboratory without approval.
@@ -10012,6 +11142,7 @@ You can also use a different construction:
 > **Non-STE:** Enter in the logbook that you did the deactivation procedure.
 
 #### entire (adj) — UNAPPROVED
+
 - **Approved alternative 1:** FULL (adj)
 > **STE:** THE ANTENNA MAKES A SCAN OF THE FULL RANGE OF FREQUENCIES.
 > **Non-STE:** The antenna makes a scan of the entire range of frequencies.
@@ -10020,23 +11151,28 @@ You can also use a different construction:
 > **Non-STE:** Check the entire system to determine the cause of interference.
 
 #### entirely (adv) — UNAPPROVED
+
 - **Approved alternative:** FULLY (adv)
 > **STE:** THE SYSTEM IS FULLY AUTOMATIC.
 > **Non-STE:** The system is entirely automatic.
 
 #### ENTRANCE (n) — APPROVED
+
 - **Meaning:** An opening to go into a space
 > **STE:** PUT SAFETY BARRIERS AT THE ENTRANCE TO THE WORK AREA.
 
 #### ENTRY (n) — APPROVED
+
 - **Meaning:** A record of an occurrence
 > **STE:** MAKE AN ENTRY IN THE LOG CARD.
 
 #### EQUAL (adj) — APPROVED
+
 - **Meaning:** The same dimension, quality, quantity, or number
 > **STE:** MAKE SURE THAT THERE IS AN EQUAL DISTANCE BETWEEN THE HOLES.
 
 #### equal (v) — UNAPPROVED
+
 - **Approved alternative 1:** SAME (adj)
 > **STE:** DIMENSION "X" MUST BE THE SAME AS DIMENSION "Z."
 > **Non-STE:** Dimension X must equal dimension Z.
@@ -10045,37 +11181,45 @@ You can also use a different construction:
 > **Non-STE:** Dimension X must equal dimension Y.
 
 #### EQUALLY (adv) — APPROVED
+
 - **Meaning:** The same dimension, quality, quantity, or number
 > **STE:** ADJUST THE TURNBUCKLES EQUALLY.
 
 #### equip (v) — UNAPPROVED
+
 - **Approved alternative:** INSTALL (v)
 > **STE:** INSTALL THE SHUTOFF VALVES ON EACH HP MANIFOLD.
 > **Non-STE:** Equip each HP manifold with shutoff valves.
 
 #### EQUIPMENT (n) — APPROVED
+
 - **Meaning:** The objects or tools used for operation and maintenance
 > **STE:** REMOVE ALL THE EQUIPMENT FROM THE WORK AREA.
 
 #### equipped (adj) — UNAPPROVED
+
 - **Approved alternative:** HAVE (v)
 > **STE:** BE CAREFUL WHEN YOU MOVE JET PIPES OR EXHAUST CONES THAT HAVE INSULATING BLANKETS.
 > **Non-STE:** Be careful when handling jet pipes or exhaust cones equipped with insulating blankets.
 
 #### EQUIVALENT (adj) — APPROVED
+
 - **Meaning:** Has the same properties, functions, or values
 > **STE:** MATERIALS (REF. No. 2) AND (REF. No. 18) ARE EQUIVALENT.
 
 #### EQUIVALENT (n) — APPROVED
+
 - **Meaning:** Something that has the same properties, functions, or values
 > **STE:** USE CLEANING COMPOUND ARDROX 6025, OR AN EQUIVALENT.
 
 #### ERASE (v) — APPROVED
+
 - **Meaning:** To remove data from a medium
 - **Forms:** ERASES, ERASED, ERASED
 > **STE:** ERASE THE TAPE.
 
 #### erect (v) — UNAPPROVED
+
 - **Approved alternative 1:** ASSEMBLE (v)
 > **STE:** BEFORE YOU LIFT THE GEARBOX, ASSEMBLE THE MOVABLE HOIST.
 > **Non-STE:** Erect the movable hoist before lifting the gearbox.
@@ -10084,15 +11228,18 @@ You can also use a different construction:
 > **Non-STE:** Give the vertical gyro time to erect.
 
 #### erratic (adj) — UNAPPROVED
+
 - **Approved alternative:** IRREGULAR (adj)
 > **STE:** THE OPERATION OF THE COMPASS IS IRREGULAR.
 > **Non-STE:** The compass is erratic.
 
 #### ERROR (n) — APPROVED
+
 - **Meaning:** The difference from that which is correct or accurate
 > **STE:** IF THE ERROR IS MORE THAN 3 DEG., CALIBRATE THE COMPASS.
 
 #### escape (v) — UNAPPROVED
+
 - **Approved alternative 1:** DEFLATE (v)
 > **STE:** DEFLATE THE TIRE.
 > **Non-STE:** Let the air escape from the tire.
@@ -10101,20 +11248,24 @@ You can also use a different construction:
 > **Non-STE:** Allow all the nitrogen to escape.
 
 #### establish (v) — UNAPPROVED
+
 - **Approved alternative:** MAKE SURE (v)
 > **STE:** IN THE STEP THAT FOLLOWS, MAKE SURE THAT THE FUEL PUMP OPERATES CORRECTLY.
 > **Non-STE:** In the following step, establish the correct functioning of the fuel pump.
 
 #### ESTIMATE (n) — APPROVED
+
 - **Meaning:** A calculated, approximate result
 > **STE:** MAKE AN ESTIMATE OF THE NECESSARY QUANTITY OF PAINT.
 
 #### estimate (v) — UNAPPROVED
+
 - **Approved alternative:** ESTIMATE (n)
 > **STE:** MAKE AN ESTIMATE OF THE QUANTITY OF CLEANING FLUID THAT IS NECESSARY.
 > **Non-STE:** Estimate the amount of cleaning fluid that is necessary.
 
 #### evaluate (v) — UNAPPROVED
+
 - **Approved alternative 1:** EXAMINE (v)
 > **STE:** EXAMINE THE DAMAGE AFTER AN ACCIDENT.
 > **Non-STE:** Evaluate the damage after an accident.
@@ -10123,6 +11274,7 @@ You can also use a different construction:
 > **Non-STE:** Evaluate the test results.
 
 #### evaluation (n) — UNAPPROVED
+
 - **Approved alternative 1:** EXAMINE (v)
 > **STE:** EXAMINE THE DAMAGE.
 > **Non-STE:** Do an evaluation of the damage.
@@ -10131,11 +11283,13 @@ You can also use a different construction:
 > **Non-STE:** Do an evaluation of the test results.
 
 #### evaporate (v) — UNAPPROVED
+
 - **Approved alternative:** DRY (v)
 > **STE:** LET THE COMPOUND DRY.
 > **Non-STE:** Allow the solvent to evaporate from the compound.
 
 #### even (adj) — UNAPPROVED
+
 - **Approved alternative 1:** SMOOTH (adj)
 > **STE:** A GUIDE ROD IS ATTACHED TO THE METAL BELLOWS DISC FOR A SMOOTH MOVEMENT OF THE BELLOWS.
 > **Non-STE:** A guide rod is attached to the metal bellows disc for an even movement of the bellows.
@@ -10153,6 +11307,7 @@ You can also use a different construction:
 > **Non-STE:** Make sure that the mark on the bolt is even with the mark on the handle.
 
 #### evenly (adv) — UNAPPROVED
+
 - **Approved alternative 1:** GRADUALLY (adv)
 > **STE:** INCREASE THE TEMPERATURE GRADUALLY.
 > **Non-STE:** Increase the temperature evenly.
@@ -10161,11 +11316,13 @@ You can also use a different construction:
 > **Non-STE:** Apply the load evenly on the area.
 
 #### event (n) — UNAPPROVED
+
 - **Approved alternative:** IF (conj)
 > **STE:** IF THE PRESSURE DECREASES SUDDENLY, CLOSE THE VALVE.
 > **Non-STE:** In the event of a sudden dropping of pressure, close the valve.
 
 #### eventually (adv) — UNAPPROVED
+
 - **Approved alternative:** SOME TIME
 > **STE:** IF THE CABLE RUBS, IT WILL BREAK AFTER SOME TIME.
 > **Non-STE:** If the cable chafes, it will eventually break.
@@ -10673,33 +11830,40 @@ For lights or lamps, use:
 ## Approved Entries
 
 #### FACE (n)
+
 - **Meaning:** The front surface of an object. This word is a technical noun when it refers to a part of the body.
 - **STE:** CLEAN THE FACE OF THE INDICATOR.
 - **STE:** WHEN YOU DO MAINTENANCE ON THE WASTE WATER SYSTEM, DO NOT TOUCH YOUR FACE WITH YOUR GLOVES.
 
 #### FACT (n)
+
 - **Meaning:** Something that occurred or is correct
 - **STE:** GET ALL THE FACTS ABOUT THE INCIDENT FROM THE PILOT.
 
 #### FAILURE (TN)
+
 - **Meaning:** A performance error or loss of serviceability
 - **STE:** IF YOU DO NOT OBEY THE PROCEDURE CORRECTLY, FAILURE OF THE EMERGENCY FLOTATION GEAR CAN OCCUR.
 - **STE:** CONTAMINATION CAN CAUSE A FAILURE OF THE PUMP.
 
 #### UNSATISFACTORY (adj)
+
 - **STE:** IF THE TEST RESULTS ARE UNSATISFACTORY, DO THE FAULT ISOLATION PROCEDURE.
 
 #### FALL (v)
+
 - **Forms:** FALLS, FELL, FALLEN
 - **Meaning:** To move down by the force of gravity
 - **STE:** MAKE SURE THAT THE TOOLS DO NOT FALL INTO THE ENGINE.
 
 #### FAR (adj)
+
 - **Forms:** FARTHER, FARTHEST
 - **Meaning:** At or to a relatively large distance
 - **STE:** REMOVE THE BOLT THAT IS FARTHEST FROM THE CENTER.
 
 #### FAST (adj)
+
 - **Forms:** FASTER, FASTEST
 - **Meaning:** At high speed
 - **STE:** A FAST MOVEMENT OF THE THROTTLE WILL CAUSE A SURGE.
@@ -10707,11 +11871,13 @@ For lights or lamps, use:
 ## Unapproved Entries
 
 #### fabricate (v) — UNAPPROVED
+
 - **Alternative:** MAKE (v)
   > **STE:** USE COPPER TO MAKE THE CHILL BLOCK.
   > **Non-STE:** Use copper to fabricate the chill block.
 
 #### face (v) — UNAPPROVED
+
 - **Alternative:** POINT (v)
   > **STE:** WHEN YOU INSTALL THE PITOT HEAD, MAKE SURE THAT THE OPENING POINTS FORWARD.
   > **Non-STE:** When installing the pitot head, make sure that the opening is facing forward.
@@ -10720,6 +11886,7 @@ For lights or lamps, use:
   > **Non-STE:** Face away from the drain valve when pushing the valve stem down.
 
 #### facilitate (v) — UNAPPROVED
+
 - **Alternative:** HELP (v)
   > **STE:** IDENTIFY THE COMPONENT WITH A CODE TO HELP YOU TO CORRECTLY INSTALL IT AGAIN.
   > **Non-STE:** Mark the component with a code that will facilitate its correct reinstallation.
@@ -10728,21 +11895,25 @@ For lights or lamps, use:
   > **Non-STE:** This facilitates fault isolation.
 
 #### facility (n) — UNAPPROVED
+
 - **Alternative:** Be accurate. Use the name of the facility as a technical noun.
   > **STE:** WEIGH THE AIRCRAFT ON A WEIGHBRIDGE.
   > **Non-STE:** You need a special facility to weigh the aircraft.
 
 #### factor (n) — UNAPPROVED
+
 - **Alternative:** CAUSE (n)
   > **STE:** THERE CAN BE MANY CAUSES FOR CORROSION.
   > **Non-STE:** Corrosion can be caused by several factors.
 
 #### fail (v) — UNAPPROVED
+
 - **Alternative:** IF … NOT
   > **STE:** IF YOU DO NOT OBEY THESE INSTRUCTIONS, THERE IS A RISK OF INJURY.
   > **Non-STE:** If you fail to comply with these instructions, there is a risk of injury.
 
 #### failed (adj) — UNAPPROVED
+
 - **Alternative:** DEFECTIVE (adj)
   > **STE:** REPLACE THE DEFECTIVE PUMP.
   > **Non-STE:** Replace the failed pump.
@@ -10751,6 +11922,7 @@ For lights or lamps, use:
   > **Non-STE:** Replace the failed valve.
 
 #### failure (n) — UNAPPROVED
+
 - **Alternative:** IF … NOT
   > **STE:** IF YOU DO NOT OBEY THESE INSTRUCTIONS, THERE IS A RISK OF INJURY.
   > **Non-STE:** Failure to comply with these instructions, will result in a risk of injury.
@@ -10758,6 +11930,7 @@ For lights or lamps, use:
   > **STE:** CONTAMINATION CAN CAUSE A FAILURE OF THE PUMP.
 
 #### faint (adj) — UNAPPROVED
+
 - **Alternative:** DIM (adj)
   > **STE:** IF THE LIGHT IS TOO DIM, REPLACE THE BATTERY.
   > **Non-STE:** If the light is faint, replace the battery.
@@ -10767,16 +11940,19 @@ For lights or lamps, use:
 - **Note:** Refer also to BRIGHT (adj).
 
 #### fall (n) — UNAPPROVED
+
 - **Alternative:** DECREASE (v)
   > **STE:** WHEN THE PRESSURE DECREASES, THE INDICATOR SHOWS THAT THERE IS A LEAK.
   > **Non-STE:** When there is a fall in pressure, the indicator shows a leak.
 
 #### false (adj) — UNAPPROVED
+
 - **Alternative:** INCORRECT (adj)
   > **STE:** MAKE SURE THAT THERE ARE NO INCORRECT INDICATIONS ON THE INSTRUMENTS.
   > **Non-STE:** Make sure there are no false indications on the instruments.
 
 #### falter (v) — UNAPPROVED
+
 - **Alternative:** SMOOTHLY (adv)
   > **STE:** MAKE SURE THAT THE GENERATOR OPERATES SMOOTHLY.
   > **Non-STE:** Make sure that the generator does not falter.
@@ -10785,21 +11961,25 @@ For lights or lamps, use:
   > **Non-STE:** Make sure that the pressure does not falter.
 
 #### familiar (adj) — UNAPPROVED
+
 - **Alternative:** KNOW (v)
   > **STE:** ALL PERSONNEL MUST FULLY KNOW THE SAFETY PRECAUTIONS.
   > **Non-STE:** All personnel must be thoroughly familiar with the safety precautions.
 
 #### fashion (n) — UNAPPROVED
+
 - **Alternative:** PROCEDURE (n)
   > **STE:** USE THIS PROCEDURE TO DO THE TASK.
   > **Non-STE:** Carry out the task in this fashion.
 
 #### fast (adv) — UNAPPROVED
+
 - **Alternative:** QUICKLY (adv)
   > **STE:** DO NOT LET THE CABIN ALTITUDE CHANGE TOO QUICKLY.
   > **Non-STE:** Do not let the cabin altitude change too fast.
 
 #### fasten (v) — UNAPPROVED
+
 - **Alternative:** ATTACH (v)
   > **STE:** ATTACH THE TWO STRINGERS TOGETHER WITH RIVETS.
   > **Non-STE:** Fasten the two stringers together with rivets.
@@ -10808,11 +11988,13 @@ For lights or lamps, use:
   > **Non-STE:** Fasten the hose to the test equipment.
 
 #### fatal (adj) — UNAPPROVED
+
 - **Alternative:** KILL (v)
   > **STE:** HIGH VOLTAGE IN THE ELECTRONIC SYSTEM CAN KILL YOU.
   > **Non-STE:** High voltage in the electronic system can be fatal.
 
 #### faulty (adj) — UNAPPROVED
+
 - **Alternative:** DEFECTIVE (adj)
   > **STE:** REPLACE ALL DEFECTIVE ELECTRONIC COMPONENTS.
   > **Non-STE:** All faulty electronic components must be replaced.
@@ -10827,6 +12009,7 @@ For lights or lamps, use:
   > **Non-STE:** Faulty operation of the system can cause damage.
 
 #### fear (v) — UNAPPROVED
+
 - **Alternative:** THINK (v)
   > **STE:** IF YOU THINK THAT THERE IS A FAULT, DO THE FULL TEST PROCEDURE OF THE UNIT.
   > **Non-STE:** Fully test the unit if you fear that there is a fault.
@@ -10835,6 +12018,7 @@ For lights or lamps, use:
   > **Non-STE:** Test the unit if you fear that there is a problem with its operation.
 
 #### feasible (adj) — UNAPPROVED
+
 - **Alternative:** POSSIBLE (adj)
   > **STE:** IF IT IS NOT POSSIBLE TO USE THE AUTOMATIC CONTROL, DO THE PROCEDURE MANUALLY.
   > **Non-STE:** If it is not feasible to use the automatic control, do the manual procedure.
@@ -12199,53 +13383,64 @@ Refer to rule 1.5.
 ## Approved
 
 #### HAVE (v)
+
 - **Meaning:** To possess as a part or quality.
 - No other verb forms.
 > **STE:** THE SYSTEM HAS AN EMERGENCY WARNING DEVICE.
 > **Non-STE:** HAS, HAD
 
 #### HEAD (n)
+
 - **Meaning:** The top of something.
 > **STE:** MAKE SURE THAT THE HEAD OF THE BOLT IS DOWN.
 
 #### HEAR (v)
+
 - **Meaning:** To know by sound in the ear.
 - **Forms:** HEARS, HEARD, HEARD
 > **STE:** MAKE SURE THAT YOU HEAR THE AUDIO SIGNALS IN ALL THE CREW HEADSETS.
 
 #### HEAT (n)
+
 - **Meaning:** The condition or quality of being hot.
 > **STE:** USE HEAT TO CURE THE POLYSULPHIDE SEALANT.
 
 #### HEAVY (adj)
+
 - **Meaning:** That has a large mass, weight, or force.
 - **Forms:** HEAVIER, HEAVIEST
 > **STE:** A SUPPORT WILL BE NECESSARY BECAUSE THE CONTROL UNIT IS HEAVY.
 
 #### HEIGHT (n)
+
 - **Meaning:** The vertical distance.
 > **STE:** THE HEIGHT FROM THE GROUND TO THE TOP OF THE FIN CAN CHANGE.
 
 #### HELP (v)
+
 - **Meaning:** To make something easier or better.
 - **Forms:** HELPS, HELPED, HELPED
 > **STE:** PETROLATUM HELPS TO PREVENT CORROSION OF THE TERMINALS.
 
 #### HERE (adv)
+
 - **Meaning:** In this position.
 > **STE:** TO DOWNLOAD THE FILE, CLICK HERE.
 
 #### HIGH (adj)
+
 - **Meaning:** That is of large value.
 - **Forms:** HIGHER, HIGHEST
 > **STE:** USE THE SPECIAL PROTECTION FOR STORAGE IN HIGH TEMPERATURES.
 
 #### HIT (v)
+
 - **Meaning:** To touch suddenly and with much force.
 - **Forms:** HITS, HIT, HIT
 > **STE:** DO NOT HIT THE CARTRIDGE.
 
 #### HOLD (v)
+
 - **Meaning:**
   1. To continue to have in the hand or grip.
   2. To continue to have in a specified location, position, or condition.
@@ -12254,56 +13449,67 @@ Refer to rule 1.5.
 > **STE:** HOLD THE AIRSPEED INDICATION AT THE SAME VALUE FOR 2 MINUTES.
 
 #### HOLE (n)
+
 - **Meaning:** An empty space in a solid object.
 > **STE:** MAKE SURE THAT THE HOLES IN THE BUSHING ALIGN WITH THOSE IN THE HOUSING.
 
 #### HORIZONTAL (adj)
+
 - **Meaning:** Parallel to the horizon or a baseline.
 > **STE:** ADJUST THE SLING UNTIL THE FLAP IS HORIZONTAL.
 
 #### HORIZONTALLY (adv)
+
 - **Meaning:** In a horizontal position.
 > **STE:** THE VALVE IS INSTALLED HORIZONTALLY.
 
 #### HOT (adj)
+
 - **Meaning:** At a high temperature.
 - **Forms:** HOTTER, HOTTEST
 > **STE:** DRY THE SURFACE WITH HOT AIR.
 
 #### HOW (adv)
+
 - **Meaning:** By which manner.
 > **STE:** PARAGRAPH 7.0 TELLS YOU HOW TO INSTALL THE UNIT.
 
 ## Unapproved
 
 #### have to (v)
+
 - **Alternative:** Use a verb in the imperative form.
 > **STE:** WHEN ENGINES ARE IN OPERATION, PUT ON A HEARING PROTECTION DEVICE.
 > **Non-STE:** When engines are in operation, you have to put on a hearing protection device.
 
 #### hazard (n)
+
 - **Alternative:** DANGEROUS (adj)
 - **Note:** "hazard" can be part of safety regulations.
 > **STE:** TRICHLOROETHYLENE IS DANGEROUS.
 > **Non-STE:** Trichloroethylene is a health hazard.
 
 #### hazardous (adj)
+
 - **Alternative:** DANGEROUS (adj)
 - **Note:** "hazardous" can be part of safety regulations.
 > **STE:** ALL PERSONNEL WHO DO WORK WITH DANGEROUS MATERIALS MUST OBEY THE SAFETY INSTRUCTIONS THAT FOLLOW.
 > **Non-STE:** All personnel who work with hazardous materials must obey the following safety instructions.
 
 #### hazy (adj)
+
 - **Alternative:** HAZE (TN)
 > **STE:** IF THERE IS HAZE, DO NOT DO THE TEST.
 > **Non-STE:** If the weather is hazy, do not do the test.
 
 #### head (v)
+
 - **Alternative:** POINT (v)
 > **STE:** POINT THE AIRCRAFT INTO THE WIND.
 > **Non-STE:** Head the aircraft into the wind.
 
 #### heat (v)
+
 - **Alternative:** HEAT (n)
 > **STE:** USE HEAT TO INCREASE THE TEMPERATURE OF THE OIL TO 40 °C.
 > **Non-STE:** Heat the oil to 40 °C.
@@ -12312,21 +13518,25 @@ Refer to rule 1.5.
 > **Non-STE:** When you heat the oil, it flows freely.
 
 #### heighten (v)
+
 - **Alternative:** INCREASE (v)
 > **STE:** STRONG WINDS WILL INCREASE THE RISK OF DAMAGE.
 > **Non-STE:** Strong winds will heighten the risk of damage.
 
 #### help (n)
+
 - **Alternative:** AID (n)
 > **STE:** GET MEDICAL AID IMMEDIATELY.
 > **Non-STE:** You must get medical help immediately.
 
 #### helpful (adj)
+
 - **Alternative:** HELP (v)
 > **STE:** RECORD THE LOCKWIRE POSITIONS. THIS INFORMATION WILL HELP YOU DURING THE ASSEMBLY PROCEDURE.
 > **Non-STE:** Record the lockwire positions. This will be helpful during the assembly procedure.
 
 #### hesitation (n)
+
 - **Alternative:** SMOOTHLY (adv)
 > **STE:** MAKE SURE THAT THE SOLENOID OPERATES SMOOTHLY.
 > **Non-STE:** Make sure that the solenoid operates without hesitation.
@@ -12340,11 +13550,13 @@ Refer to rule 1.5.
 > **Non-STE:** When you open the circuit breaker, the light must come on without hesitation.
 
 #### highly (adv)
+
 - **Alternative:** VERY (adv)
 > **STE:** TOLUENE IS VERY FLAMMABLE.
 > **Non-STE:** Toluene is highly flammable.
 
 #### hinder (v)
+
 - **Alternative:** PREVENT (v)
 > **STE:** SCRATCHES CAN PREVENT THE FREE MOVEMENT OF THE PISTON IN THE SLEEVE.
 > **Non-STE:** Scratches can hinder the movement of the piston in the sleeve.
@@ -12362,51 +13574,61 @@ Refer to rule 1.5.
 > **Non-STE:** Make sure that there is nothing in the pipe to hinder airflow.
 
 #### hinge (v)
+
 - **Alternative:** TURN (v)
 > **STE:** THE PANELS TURN ON TWO NYLON STRAPS.
 > **Non-STE:** Panels hinge on two nylon straps.
 
 #### hitch (v)
+
 - **Alternative:** CONNECT (v)
 > **STE:** CONNECT THE TOWING ARM TO THE NOSEWHEEL.
 > **Non-STE:** Hitch the towing arm to the nosewheel.
 
 #### hoist (v)
+
 - **Alternative:** LIFT (v)
 > **STE:** LIFT THE MODULE.
 > **Non-STE:** Hoist the module.
 
 #### hold (n)
+
 - **Alternative:** HOLD (v)
 > **STE:** MAKE SURE THAT YOU HOLD THE ROD TIGHTLY.
 > **Non-STE:** Make sure that you have a tight hold on the rod.
 
 #### hold back (v)
+
 - **Alternative:** PREVENT (v)
 > **STE:** AT FULL THRUST, THE BRAKES MUST PREVENT MOVEMENT OF THE AIRCRAFT.
 > **Non-STE:** At full thrust, the brakes must hold the aircraft back.
 
 #### hold off (v)
+
 - **Alternative:** PREVENT (v)
 > **STE:** THE PROTECTIVE PAINT WILL PREVENT CORROSION FOR SIX MONTHS.
 > **Non-STE:** The protective paint will hold off corrosion for six months.
 
 #### hook (v)
+
 - **Alternative:** PUT (v)
 > **STE:** PUT THE SLING ON THE SHACKLE.
 > **Non-STE:** Hook the sling on the shackle.
 
 #### hook up (v)
+
 - **Alternative:** CONNECT (v)
 > **STE:** CONNECT THE TOWING ARM TO THE NOSE GEAR.
 > **Non-STE:** Hook the towing arm up to the nose gear.
 
 #### house (v)
+
 - **Alternative:** CONTAIN (v)
 > **STE:** THE MODULE CONTAINS FIVE COMPONENTS.
 > **Non-STE:** The module houses five components.
 
 #### however (adv)
+
 - **Alternative:** BUT (conj)
 > **STE:** THE DRYING TIME IS USUALLY 24 HOURS. BUT THE PROCEDURE IN THIS STEP WILL DECREASE THE DRYING TIME TO 12 HOURS.
 > **Non-STE:** The drying time is usually 24 hours. However, the procedure in this step will decrease the drying time to 12 hours.
@@ -13220,74 +14442,88 @@ This word can be a technical noun or part of a technical noun.
 ## APPROVED
 
 #### INTERMITTENT (adj)
+
 - **Meaning:** That stops and starts again, not continuous
 - **Example:**
   > **STE:** THIS CAUSES INTERMITTENT OPERATION OF THE WARNING LIGHTS.
 
 #### INTERMITTENTLY (adv)
+
 - **Meaning:** In an intermittent manner
 - **Example:**
   > **STE:** THE LIGHT COMES ON INTERMITTENTLY.
 
 #### INTERNAL (adj)
+
 - **Meaning:** Of, or on, the inner side and inner space
 - **Example:**
   > **STE:** MAKE SURE THAT FUEL COMES OUT OF THE INTERNAL EJECTORS.
 
 #### INTERNALLY (adv)
+
 - **Meaning:** Of, or on, the inner side and inner space
 - **Example:**
   > **STE:** USE A BORESCOPE TO EXAMINE THE COMBUSTOR INTERNALLY.
 
 #### INTERVAL (n)
+
 - **Meaning:** A distance or gap between two points in space or time
 - **Example:**
   > **STE:** DO THE TEST AT FIVE-MINUTE INTERVALS.
 
 #### INTO (prep)
+
 - **Meaning 1:** Movement to something and access to it
   > **STE:** IF AN OBJECT FALLS INTO THE OPENING, DAMAGE TO THE ENGINE CAN OCCUR.
 - **Meaning 2:** Function word that shows change, condition, result
   > **STE:** THE PARTS OF THE STRUCTURE ARE DIVIDED INTO THREE GROUPS.
 
 #### INVESTIGATION (n)
+
 - **Meaning:** An official and accurate inquiry or research
 - **Example:**
   > **STE:** THE TASK TEAM STARTED THE INVESTIGATION TO FIND THE CAUSE OF THE ACCIDENT.
 
 #### IRREGULAR (adj)
+
 - **Meaning:** Not regular
 - **Example:**
   > **STE:** IF THE SIGNALS ARE IRREGULAR, REPLACE THE UNIT.
 
 #### IRREGULARLY (adv)
+
 - **Meaning:** Not regularly
 - **Example:**
   > **STE:** IF THE UNIT RECEIVES THE SIGNALS IRREGULARLY, REPLACE IT.
 
 #### ISOLATE (v)
+
 - **Meaning:** To prevent a supply or connection to
 - **Forms:** ISOLATES, ISOLATED, ISOLATED
 - **Example:**
   > **STE:** ISOLATE THE ELECTRICAL POWER SUPPLY.
 
 #### IT (pron)
+
 - **Meaning 1:** That refers to a thing that was previously mentioned
   > **STE:** CAREFULLY MOVE THE DEFLECTOR UNIT DOWN UNTIL IT ENGAGES.
 - **Meaning 2:** That refers to an explicit or implicit state of affairs or circumstances
   > **STE:** IT IS IMPORTANT TO DO THIS ADJUSTMENT CORRECTLY.
 
 #### ITEM (n)
+
 - **Meaning:** A thing that is determined or specified
 - **Example:**
   > **STE:** LUBRICATE THESE ITEMS WITH GREASE.
 
 #### ITS (adj)
+
 - **Meaning:** Belonging to a thing
 - **Example:**
   > **STE:** REMOVE THE UNIT AND ITS WIRING.
 
 #### JOINT (n)
+
 - **Meaning:** The area at which two surfaces or edges touch or are attached
 - **Example:**
   > **STE:** SEAL THE JOINT WITH SEALING COMPOUND.
@@ -13295,36 +14531,42 @@ This word can be a technical noun or part of a technical noun.
 ## UNAPPROVED
 
 #### interrupt (v)
+
 - **Approved alternative:** STOP (v)
 - **Example:**
   > **STE:** DO NOT STOP THE TEST.
   > **Non-STE:** Do not interrupt the test.
 
 #### intersect (v)
+
 - **Approved alternative:** INTERSECTION (TN)
 - **Example:**
   > **STE:** DRILL A HOLE AT THE INTERSECTION OF THE TWO LINES.
   > **Non-STE:** Drill a hole where the two lines intersect.
 
 #### investigate (v)
+
 - **Approved alternative:** INVESTIGATION (n)
 - **Example:**
   > **STE:** DO AN INVESTIGATION TO FIND THE CAUSE OF THE FUEL LEAKAGE.
   > **Non-STE:** Investigate the cause of the fuel leakage.
 
 #### inward (adj)
+
 - **Approved alternative:** INNER (adj)
 - **Example:**
   > **STE:** MEASURE THE INNER DIAMETER OF THE HOLE.
   > **Non-STE:** Measure the inward diameter of the hole.
 
 #### inward (adv)
+
 - **Approved alternative:** IN (adv)
 - **Example:**
   > **STE:** MOVE THE DOOR IN AND REARWARD.
   > **Non-STE:** Move the door inward and rearward.
 
 #### irregularity (n)
+
 - **Approved alternatives:**
   - **DAMAGE (n)**
     > **STE:** THERE MUST BE NO DAMAGE TO THE SURFACE FINISH.
@@ -13340,24 +14582,28 @@ This word can be a technical noun or part of a technical noun.
     > **Non-STE:** If you get irregularities in the results, do the test again.
 
 #### isolation (n)
+
 - **Approved alternative:** ISOLATE (v)
 - **Example:**
   > **STE:** ISOLATE SYSTEM No. 1 TO DO THE LEAKAGE CHECKS.
   > **Non-STE:** Isolation of system No. 1 is necessary to do the leakage checks.
 
 #### jack (v)
+
 - **Approved alternative:** JACK (TN)
 - **Example:**
   > **STE:** DO NOT LIFT THE AIRCRAFT ON JACKS IF THE WIND SPEED IS MORE THAN 20 MPH.
   > **Non-STE:** Do not jack the aircraft if the wind speed exceeds 20 mph.
 
 #### jam (v)
+
 - **Approved alternative:** FREELY (adv)
 - **Example:**
   > **STE:** MAKE SURE THAT THE VALVE SPINDLE MOVES FREELY.
   > **Non-STE:** Check that the valve spindle does not bind or jam.
 
 #### job (n)
+
 - **Approved alternatives:**
   - **WORK (n)**
     > **STE:** DO THIS WORK IN A CLEAN AREA.
@@ -13367,6 +14613,7 @@ This word can be a technical noun or part of a technical noun.
     > **Non-STE:** Do this job in a clean area.
 
 #### join (v)
+
 - **Approved alternatives:**
   - **BOND (v)**
     > **STE:** USE ADHESIVE No. 35 TO BOND METAL TO METAL.
@@ -13379,6 +14626,7 @@ This word can be a technical noun or part of a technical noun.
     > **Non-STE:** Join the hose to the pipe with a clip.
 
 #### just (adv)
+
 - **Approved alternative:** IMMEDIATELY (adv)
 - **Example:**
   > **STE:** KEEP THE RING IMMEDIATELY ABOVE THE JACK COLLARS.
@@ -13393,65 +14641,79 @@ This word can be a technical noun or part of a technical noun.
 ### APPROVED
 
 #### KEEP (v)
+
 - **Meaning:** To continue to have or hold
 - **Forms:** KEEPS, KEPT, KEPT
 - **Example:** KEEP THE COMPOUND IN A CLOSED CONTAINER.
 
 #### KILL (v)
+
 - **Meaning:** To cause death
 - **Forms:** KILLS, KILLED, KILLED
 - **Example:** HIGH VOLTAGES CAN KILL YOU.
 
 #### KNOW (v)
+
 - **Meaning:** To be sure of data, to have data ready to use
 - **Forms:** KNOWS, KNEW, KNOWN
 - **Example:** IF YOU KNOW THE CLEARANCE, YOU CAN CALCULATE THE THICKNESS OF THE WASHER.
 
 #### LAMINATED (adj)
+
 - **Meaning:** Made of laminations
 - **Example:** THIS PANEL IS MADE OF LAMINATED CARBON FIBER.
 
 #### LAMINATION (n)
+
 - **Meaning:** Layers of one or more materials bonded together
 - **Example:** IF THE LAMINATION IS DAMAGED, REPLACE THE PANEL.
 
 #### LARGE (adj)
+
 - **Meaning:** More than average in dimension, quantity, or capacity
 - **Forms:** LARGER, LARGEST
 - **Example:** CLEAN YOUR SKIN WITH A LARGE QUANTITY OF CLEAN WATER.
 
 #### LAST (adj)
+
 - **Meaning:** That comes at the end
 - **Example:** IMMEDIATELY AFTER THE LAST FLIGHT OF THE DAY, INSTALL ALL COVERS.
 
 #### LAST (adv)
+
 - **Meaning:** After other persons or things
 - **Example:** FILL THE OUTER TANKS LAST.
 
 #### LATCH (v)
+
 - **Meaning:** To hold something in position with a latching device
 - **Forms:** LATCHES, LATCHED, LATCHED
 - **Example:** MAKE SURE THAT YOU LATCH THE DOOR CORRECTLY. MAKE SURE THAT THE DOOR LATCHES CORRECTLY.
 
 #### LATERAL (adj)
+
 - **Meaning:** Related to or on the side
 - **Example:** ADJUST THE LATERAL LEVEL.
 
 #### LATERALLY (adv)
+
 - **Meaning:** In a lateral direction
 - **Example:** PUSH THE UNIT OUT, AND THEN MOVE IT LATERALLY.
 
 #### LAYER (n)
+
 - **Meaning:** A material applied to a surface or put on, or below, a second material
 - **Example:** APPLY A THIN LAYER OF SEALING COMPOUND ON THE BARE METAL.
 
 #### LEAK (n)
+
 - **Meaning:** A crack, gap or hole which lets fluid or light go into or come out of something
 - **Example:** EXAMINE THE SWIVEL COUPLINGS FOR LEAKS.
 
 ### UNAPPROVED
 
 #### key (v)
+
 - **Approved alternatives:** REFER (v); KEY (TN)
 - **Examples:**
   > **STE:** THE ILLUSTRATION REFERS TO EACH STEP.
@@ -13460,24 +14722,28 @@ This word can be a technical noun or part of a technical noun.
   > **Non-STE:** The pulley must be keyed to the shaft.
 
 #### kind (n)
+
 - **Approved alternative:** TYPE (n)
 - **Example:**
   > **STE:** YOU CAN USE TWO TYPES OF SEALING COMPOUND.
   > **Non-STE:** Two kinds of sealing compound can be used.
 
 #### kink (v)
+
 - **Approved alternative:** KINK (TN)
 - **Example:**
   > **STE:** DO NOT MAKE KINKS IN THE CABLES.
   > **Non-STE:** Do not kink the cables.
 
 #### knock (v)
+
 - **Approved alternative:** HIT (v)
 - **Example:**
   > **STE:** HIT THE CLAMP ON THE RIGHT SIDE WITH A HAMMER.
   > **Non-STE:** Knock the clamp on the right side with a hammer.
 
 #### label (v)
+
 - **Approved alternatives:** IDENTIFY (v); LABEL (TN)
 - **Examples:**
   > **STE:** IDENTIFY THE COMPONENT WITH A CODE TO HELP YOU INSTALL IT AGAIN CORRECTLY.
@@ -13486,30 +14752,35 @@ This word can be a technical noun or part of a technical noun.
   > **Non-STE:** Label the relay assembly.
 
 #### lack (n)
+
 - **Approved alternative:** NOT SUFFICIENT
 - **Example:**
   > **STE:** DAMAGE CAN OCCUR TO THE PUMP IF THERE IS NOT SUFFICIENT OIL IN THE RESERVOIR.
   > **Non-STE:** Damage can occur to the pump if there is a lack of oil in the reservoir.
 
 #### land (v)
+
 - **Approved alternative:** LANDING (TN)
 - **Example:**
   > **STE:** AFTER A HEAVY LANDING, DO THE HEAVY LANDING INSPECTION.
   > **Non-STE:** If the aircraft landed heavily, do the Heavy Landing Inspection.
 
 #### last (v)
+
 - **Approved alternative:** CONTINUE (v)
 - **Example:**
   > **STE:** THE SIGNALS CONTINUE FOR 0.8 SECONDS.
   > **Non-STE:** The signals last for 0.8 seconds.
 
 #### later (adj)
+
 - **Approved alternative:** SUBSEQUENT (adj)
 - **Example:**
   > **STE:** A SUBSEQUENT REPAIR WILL BE FOR THE NEW CONFIGURATION.
   > **Non-STE:** A later repair will be for the new configuration.
 
 #### later (adv)
+
 - **Approved alternatives:** THEN (adv); SUBSEQUENTLY (adv); WHEN (conj); AFTER (prep)
 - **Examples:**
   > **STE:** DO THIS STEP FIRST. THEN, DISCONNECT THE CABLES.
@@ -13522,12 +14793,14 @@ This word can be a technical noun or part of a technical noun.
   > **Non-STE:** The bar moves down later.
 
 #### lay (v)
+
 - **Approved alternative:** PUT (v)
 - **Example:**
   > **STE:** PUT COVERS ON THE FLOOR.
   > **Non-STE:** Lay covers on the floor.
 
 #### lead (v)
+
 - **Approved alternative:** PUT (v)
 - **Example:**
   > **STE:** PUT THE TELEFLEX CABLE THROUGH THE BULKHEAD.
@@ -14464,50 +15737,61 @@ For other meanings of "light", use:
 ## APPROVED
 
 #### MOOR (v)
+
 - **Forms:** MOORS, MOORED, MOORED
 - **Meaning:** To hold something in position with ropes and cables
   > **STE:** IN BAD WEATHER CONDITIONS, MOOR THE BOAT.
 
 #### MORE (adj)
+
 - **Meaning:** A large quantity of
   > **STE:** ADD MORE SHIMS UNTIL YOU GET THE SPECIFIED CLEARANCE.
 
 #### MORE (adv)
+
 - **Meaning:** To a larger degree
   > **STE:** CORROSION CAN OCCUR MORE EASILY IN THIS AREA THAN IN OTHER AREAS.
 
 #### MOST (adj)
+
 - **Meaning:** To the largest quantity of
   > **STE:** MOST MANUFACTURERS RECOMMEND SYNTHETIC LUBRICANTS.
 
 #### MOST (adv)
+
 - **Meaning:** To the largest degree
   > **STE:** FAULT MESSAGES THAT SHOW IN RED ARE THE MOST IMPORTANT.
 
 #### MOVABLE (adj)
+
 - **Meaning:** That can move if necessary
   > **STE:** TURN THE MOVABLE HALF-COLLAR OF THE SUPPORT.
 
 #### MOVE (v)
+
 - **Forms:** MOVES, MOVED, MOVED
 - **Meaning:** To change or cause to change position or location
   > **STE:** MAKE SURE THAT THE POINTER MOVES FREELY.
   > **STE:** MOVE THE VALVE UNTIL IT ALIGNS WITH THE ACTUATOR SHAFT.
 
 #### MOVEMENT (n)
+
 - **Meaning:** A change of position or location
   > **STE:** SUDDEN OPERATION OF THE GYRO CAN CAUSE UNWANTED MOVEMENT OF THE HORIZONTAL STABILIZER.
 
 #### MUCH (adj)
+
 - **Forms:** MORE, MOST
 - **Meaning:** Of relatively large dimension, value, quantity, or volume
   > **STE:** DO NOT APPLY TOO MUCH PRESSURE.
 
 #### MUCH (adv)
+
 - **Meaning:** To a great degree or extent
   > **STE:** BE CAREFUL THAT YOU DO NOT TURN THE INNER RACES TOO MUCH.
 
 #### MULTIPLY (v)
+
 - **Forms:** MULTIPLIES, MULTIPLIED, MULTIPLIED
 - **Meaning:** To use multiplication to get a result
   > **STE:** MULTIPLY THE INDICATOR VALUE BY THE SCALE VALUE.
@@ -14516,67 +15800,81 @@ For other meanings of "light", use:
   > **Non-STE:** Cracks can multiply.
 
 #### MUST (v)
+
 - **Meaning:** Auxiliary modal verb that shows obligation
   > **STE:** THE BAT 1 SWITCH MUST BE IN THE ON POSITION.
 
 #### NAME (n)
+
 - **Meaning:** The identification you give to a person or an object
   > **STE:** PUSH THE BUTTON ADJACENT TO THE NAME OF THE SYSTEM.
   > **STE:** WRITE YOUR NAME ON THE REGISTRATION FORM.
 
 #### NEAR (adj)
+
 - **Forms:** NEARER, NEAREST
 - **Meaning:** At or to a relatively short distance
   > **STE:** PUT THE SYRINGE ON THE NEAREST SURFACE OF THE EXAMINATION TABLE.
 
 #### NEAR (prep)
+
 - **Meaning:** Approaching in space or condition
   > **STE:** BALANCE THE ELEVATOR NEAR ITS MAXIMUM LIMIT.
   > **STE:** MAKE SURE THAT THE COMPUTER SCREEN IS NOT NEAR THE WINDOW.
 
 #### NECESSARY (adj)
+
 - **Meaning:** That must be
   > **STE:** TWO HOURS ARE NECESSARY TO COMPLETE THE EXAM.
 
 #### NEUTRAL (adj)
+
 - **Meaning 1:** That has no effect
   > **STE:** MAKE SURE THAT THE CONTROLS ARE IN THE NEUTRAL POSITION.
 - **Meaning 2:** That is not acid or alkaline
   > **STE:** CLEAN THE SCREEN WITH A NEUTRAL SOLUTION.
 
 #### NEW (adj)
+
 - **Forms:** NEWER, NEWEST
 - **Meaning:** Not used before
   > **STE:** INSTALL A NEW GASKET ON THE FLANGE.
 
 #### NEXT (adj)
+
 - **Meaning:** The first occurrence that follows immediately after in time or sequence
   > **STE:** REMOVE THE UNIT BEFORE THE NEXT OPERATING CYCLE.
 
 #### NO (adj)
+
 - **Meaning:** Not any
   > **STE:** MAKE SURE THAT THERE IS NO FUEL LEAKAGE.
 
 #### NO (adv)
+
 - **Meaning:** Function word that shows the negative answer to a question
   > **STE:** DOES THE LIGHT COME ON? YES OR NO?
 
 #### NOISE (n)
+
 - **Meaning:** An unwanted sound
   > **STE:** WHILE THE ENGINE CONTINUES TO TURN, LISTEN FOR UNUSUAL NOISES.
 
 #### NONE (pron)
+
 - **Meaning:** Not one, not anyone
   > **STE:** IF NONE OF THE BRACKETS ARE DAMAGED, CONTINUE THE INSPECTION.
 
 ## UNAPPROVED
 
 #### motion (n) — UNAPPROVED
+
 - **Alternative:** MOVEMENT (n)
   > **STE:** MAKE SURE THAT THE STABILIZER MOVEMENT CONTINUES.
   > **Non-STE:** Check that the stabilizer motion continues.
 
 #### motor (v) — UNAPPROVED
+
 - **Alternative 1:** DRY-MOTOR (TV)
   > **STE:** DRY-MOTOR THE ENGINE.
   > **Non-STE:** Motor the engine without fuel.
@@ -14588,6 +15886,7 @@ For other meanings of "light", use:
   > **Non-STE:** Motor the engine.
 
 #### mount (v) — UNAPPROVED
+
 - **Alternative 1:** INSTALL (v)
   > **STE:** INSTALL THE MANIFOLD.
   > **Non-STE:** Mount the manifold.
@@ -14599,46 +15898,55 @@ For other meanings of "light", use:
   > **Non-STE:** Mount the wheel on the axle.
 
 #### nearly (adv) — UNAPPROVED
+
 - **Alternative:** ALMOST (adv)
   > **STE:** MOVE THE POINTER UNTIL IT IS ALMOST IN THE GREEN BAND.
   > **Non-STE:** Move the pointer until it is nearly in the green band.
 
 #### need (v) — UNAPPROVED
+
 - **Alternative:** NECESSARY (adj)
   > **STE:** DURING THIS PROCEDURE, IT IS NOT NECESSARY TO REPLACE THE BACKING RINGS.
   > **Non-STE:** The backing rings do not need to be replaced during this procedure.
 
 #### neither (adj) — UNAPPROVED
+
 - **Alternative:** TWO (TN) … NOT
   > **STE:** THE TWO UNITS MUST NOT OPERATE.
   > **Non-STE:** Neither unit must operate.
 
 #### neither (pron) — UNAPPROVED
+
 - **Alternative:** TWO (TN) … NOT
   > **STE:** THE TWO UNITS MUST NOT OPERATE.
   > **Non-STE:** Neither of the units must operate.
 
 #### neutralize (v) — UNAPPROVED
+
 - **Alternative:** NEUTRAL (adj)
   > **STE:** MAKE THE BASIC ELECTROLYTE NEUTRAL WITH VINEGAR OR BORIC ACID.
   > **Non-STE:** Neutralize the basic electrolyte with vinegar or boric acid.
 
 #### never (adv) — UNAPPROVED
+
 - **Alternative:** DO NOT
   > **STE:** DO NOT LET THE LEVEL IN THE TANK DECREASE TO LESS THAN HALF.
   > **Non-STE:** Never allow the level in the tank to drop below half.
 
 #### next (adv) — UNAPPROVED
+
 - **Alternative:** THEN (adv)
   > **STE:** HOLD THE FLANGE IN ITS POSITION. THEN, INSTALL THE BOLT.
   > **Non-STE:** Hold the flange in its position. Next, install the bolt.
 
 #### next to (prep) — UNAPPROVED
+
 - **Alternative:** ADJACENT TO (prep)
   > **STE:** THE PUMP IS ADJACENT TO THE CENTRAL RIB.
   > **Non-STE:** The pump is next to the central rib.
 
 #### noisy (adj) — UNAPPROVED
+
 - **Alternative:** NOISE (n)
   > **STE:** IF THERE IS NOISE WHEN THE PUMP OPERATES, EXAMINE THE FILTER FOR UNWANTED PARTICLES.
   > **Non-STE:** If pump operation is noisy, check the pump filter for unwanted particles.
@@ -17196,11 +18504,13 @@ For movement above land or water, use a technical noun:
 ## Approved Entries
 
 #### RESULT (n)
+
 - **Definition:** Something that occurs when you do something
 - **Example:**
   > **STE:** IF THESE TESTS DO NOT GIVE THE CORRECT RESULTS, REPLACE THE UNIT.
 
 #### RETRACT (v)
+
 - **Forms:** RETRACTS, RETRACTED, RETRACTED
 - **Meaning 1:** To pull in(to)
   > **STE:** THE NOSE LANDING GEAR RETRACTS INTO THE FUSELAGE.
@@ -17208,26 +18518,31 @@ For movement above land or water, use a technical noun:
   > **STE:** RETRACT THE LANDING GEAR.
 
 #### RETRACTION (n)
+
 - **Definition:** The result when something retracts
 - **Example:**
   > **STE:** DURING THE RETRACTION SEQUENCE, MAKE SURE THAT THE LANDING GEAR DOORS CLOSE.
 
 #### RIGHT (adj)
+
 - **Definition:** On the east side when you look north
 - **Example:**
   > **STE:** DO A FLOW CHECK OF THE PUMP IN THE RIGHT WING TANK.
 
 #### RIGID (adj)
+
 - **Definition:** That cannot easily bend or change shape
 - **Example:**
   > **STE:** REMOVE THE SCREWS FROM THE RIGID COVER.
 
 #### RISK (n)
+
 - **Definition:** The possibility that something that is dangerous occurs
 - **Example:**
   > **STE:** OBEY THE PRECAUTIONS TO PREVENT THE RISK OF FIRE.
 
 #### ROUGH (adj)
+
 - **Definition:** Not smooth (ROUGHER, ROUGHEST)
 - **Example:**
   > **STE:** CLEAN THE ROUGH SURFACES CAREFULLY.
@@ -17235,6 +18550,7 @@ For movement above land or water, use a technical noun:
 ## Unapproved Entries
 
 #### rest (v) — UNAPPROVED
+
 - **Alternative:** BE (v)
   > **STE:** THE VEHICLE MUST BE ON ITS WHEELS.
   > **Non-STE:** The vehicle must rest on its wheels.
@@ -17243,11 +18559,13 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Rest the removed part on a clean surface.
 
 #### restart (v) — UNAPPROVED
+
 - **Alternative:** START (v)
   > **STE:** START THE UNIT AGAIN.
   > **Non-STE:** Restart the unit.
 
 #### restore (v) — UNAPPROVED
+
 - **Alternative:** REPAIR (v)
   > **STE:** DO NOT REPAIR THE CHROMIC ACID ANODIZING ON THE SKIN PANEL.
   > **Non-STE:** Do not restore the chromic acid anodizing on the skin panel.
@@ -17256,6 +18574,7 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Restore the pins to their location.
 
 #### restrain (v) — UNAPPROVED
+
 - **Alternative:** HOLD (v)
   > **STE:** HOLD THE HOSES IN POSITION.
   > **Non-STE:** Restrain the hoses in position.
@@ -17270,6 +18589,7 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** The valve restrains the airflow.
 
 #### restrict (v) — UNAPPROVED
+
 - **Alternative:** DECREASE (v)
   > **STE:** THE METERING PLUG DECREASES THE FUEL FLOW.
   > **Non-STE:** The metering plug restricts the fuel flow.
@@ -17284,6 +18604,7 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** The valve restricts the airflow.
 
 #### result (v) — UNAPPROVED
+
 - **Alternative:** CAUSE (v)
   > **STE:** AN INCORRECT CONNECTION WILL CAUSE DAMAGE.
   > **Non-STE:** An incorrect connection will result in damage.
@@ -17292,6 +18613,7 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Repair any damage resulting from corrosion.
 
 #### resume (v) — UNAPPROVED
+
 - **Alternative:** START (v)
   > **STE:** INCREASE THE PRESSURE UNTIL THE FLOW STARTS AGAIN.
   > **Non-STE:** Increase the pressure until the flow resumes.
@@ -17300,16 +18622,19 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Resume the test.
 
 #### retain (v) — UNAPPROVED
+
 - **Alternative:** KEEP (v)
   > **STE:** KEEP THE PLUG.
   > **Non-STE:** Retain the plug.
 
 #### retorque (v) — UNAPPROVED
+
 - **Alternative:** TORQUE (v)
   > **STE:** TORQUE THE FITTING AGAIN.
   > **Non-STE:** Retorque the fitting.
 
 #### retouch (v) — UNAPPROVED
+
 - **Alternative:** APPLY (v)
   > **STE:** APPLY ENAMEL ON THE AREAS WHERE IT IS MISSING.
   > **Non-STE:** Retouch the missing enamel areas.
@@ -17318,36 +18643,43 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Retouch the damaged label letters.
 
 #### retractable (adj) — UNAPPROVED
+
 - **Alternative:** RETRACT (v)
   > **STE:** THE AIRCRAFT HAS A LANDING GEAR THAT RETRACTS.
   > **Non-STE:** The aircraft has a retractable landing gear.
 
 #### return (n) — UNAPPROVED
+
 - **Alternative:** GO (v)
   > **STE:** AFTER THE AILERONS GO BACK TO NEUTRAL, MAKE SURE THAT THEY ARE FLUSH WITH THE FLAPS.
   > **Non-STE:** After the return of the ailerons to neutral, check that they are flush with the flaps.
 
 #### return (v) — UNAPPROVED
+
 - **Alternative:** GO (v)
   > **STE:** THE PLUNGERS MUST GO BACK TO THE CLOSED POSITION.
   > **Non-STE:** Plungers must return to the closed position.
 
 #### reusable (adj) — UNAPPROVED
+
 - **Alternative:** USE (v)
   > **STE:** YOU CAN USE THE MIXTURE AGAIN.
   > **Non-STE:** The mixture is reusable.
 
 #### reuse (v) — UNAPPROVED
+
 - **Alternative:** USE (v)
   > **STE:** IF THE FABRIC IS NOT DAMAGED, USE IT AGAIN.
   > **Non-STE:** Reuse the fabric if it is not damaged.
 
 #### reveal (v) — UNAPPROVED
+
 - **Alternative:** SHOW (v)
   > **STE:** IF THE FUEL SAMPLE SHOWS FREE WATER, DRAIN THE SYSTEM.
   > **Non-STE:** If the fuel sample reveals free water, drain the system.
 
 #### reverse (adj) — UNAPPROVED
+
 - **Alternative:** OPPOSITE (adj)
   > **STE:** MOVE THE CONTROL IN THE OPPOSITE DIRECTION.
   > **Non-STE:** Move the control in the reverse direction.
@@ -17355,11 +18687,13 @@ For movement above land or water, use a technical noun:
   > **STE:** MANUALLY TURN THE PROPELLER BLADES TO THE FULL REVERSE POSITION.
 
 #### reverse (v) — UNAPPROVED
+
 - **Alternative:** OPPOSITE (adj)
   > **STE:** MOVE THE ROD IN THE OPPOSITE DIRECTION.
   > **Non-STE:** Reverse the movement of the rod.
 
 #### review (n) — UNAPPROVED
+
 - **Alternative:** INSPECTION (n)
   > **STE:** DO AN INSPECTION OF THE DAMAGED AREA.
   > **Non-STE:** Do a review of the damaged area.
@@ -17368,27 +18702,32 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Do a review of the damaged area.
 
 #### rewind (v) — UNAPPROVED
+
 - **Alternative:** WIND (v)
   > **STE:** WIND THE CABLE BACK ONTO ITS REEL.
   > **Non-STE:** Rewind the cable onto its reel.
 
 #### rework (v) — UNAPPROVED
+
 - **Note:** Refer to technical manufacturing processes.
 - **Example:**
   > **STE:** EXAMINE FOR SCRATCHES. THEN, LIGHTLY POLISH ALL DAMAGED AREAS.
   > **Non-STE:** Examine for scratches and rework all damaged areas.
 
 #### rig (v) — UNAPPROVED
+
 - **Alternative:** ADJUST (v)
   > **STE:** ADJUST THE SYSTEM.
   > **Non-STE:** Rig the system.
 
 #### right-hand (adj) — UNAPPROVED
+
 - **Alternative:** RIGHT (adj)
   > **STE:** THE FUEL CONNECTOR IS IN THE RIGHT WING.
   > **Non-STE:** The fuel connector is in the right-hand wing.
 
 #### rinse (v) — UNAPPROVED
+
 - **Alternative:** FLUSH (v)
   > **STE:** FLUSH THE FILTER WITH HOT WATER.
   > **Non-STE:** Rinse the filter in hot running water.
@@ -17400,46 +18739,55 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Rinse the window pane with a large quantity of water.
 
 #### ripped (adj) — UNAPPROVED
+
 - **Alternative:** DAMAGED (adj)
   > **STE:** IF THE SEAT COVER IS DAMAGED, REPLACE IT.
   > **Non-STE:** If the seat cover is ripped, replace it.
 
 #### rise (n) — UNAPPROVED
+
 - **Alternative:** INCREASE (v)
   > **STE:** WHEN A FIRE STARTS, THE TEMPERATURE INCREASES AND CAUSES THE DETECTOR TO OPERATE.
   > **Non-STE:** When a fire starts, the temperature rise causes the detector to operate.
 
 #### rise (v) — UNAPPROVED
+
 - **Alternative:** INCREASE (v)
   > **STE:** FILL THE STRUT WITH FLUID UNTIL THE PRESSURE INCREASES.
   > **Non-STE:** Fill the strut with fluid until the pressure rises.
 
 #### rope off (v) — UNAPPROVED
+
 - **Alternative:** ROPE (TN)
   > **STE:** PUT ROPES AROUND THE AREA.
   > **Non-STE:** Rope off the area.
 
 #### rotary (adj) — UNAPPROVED
+
 - **Alternative:** TURN (v)
   > **STE:** TURN THE GEARS TO ALIGN THEM.
   > **Non-STE:** Use a rotary movement to align the gears.
 
 #### rotate (v) — UNAPPROVED
+
 - **Alternative:** TURN (v)
   > **STE:** SLOWLY TURN THE VANE.
   > **Non-STE:** Slowly rotate the vane.
 
 #### rotation (n) — UNAPPROVED
+
 - **Alternative:** TURN (v)
   > **STE:** MAKE SURE THAT THE FAN TURNS FREELY.
   > **Non-STE:** Ensure the free rotation of the fan.
 
 #### rotational (adj) — UNAPPROVED
+
 - **Alternative:** TURN (v)
   > **STE:** TURN THE GEARS TO ALIGN THEM.
   > **Non-STE:** Use a rotational movement to align the gears.
 
 #### roughen (v) — UNAPPROVED
+
 - **Alternative:** ROUGH (adj)
   > **STE:** MAKE THE FAYING SURFACES ROUGH.
   > **Non-STE:** Roughen the faying surfaces.
@@ -19796,6 +21144,7 @@ For movement above land or water, use a technical noun:
 ### Approved Entries
 
 #### TILT (v)
+
 - **Forms:** TILTS, TILTED, TILTED
 - **Meaning:** To move at an angle or to put something at an angle between the vertical and the horizontal.
 - **Examples:**
@@ -19803,6 +21152,7 @@ For movement above land or water, use a technical noun:
   - IF THE SHAFT TILTS, STOP THE TEST PROCEDURE.
 
 #### TIME (n)
+
 - **Meanings:**
   1. A duration that you can measure
   2. An occurrence
@@ -19812,6 +21162,7 @@ For movement above land or water, use a technical noun:
   - DO NOT TIGHTEN THE NUTS AT THIS TIME.
 
 #### TO (prep)
+
 - **Meaning:** Function word that shows:
   - The direction of, point of arrival or time, connection, result, cause
   - That the word that follows is an infinitive
@@ -19823,6 +21174,7 @@ For movement above land or water, use a technical noun:
   - TRY TO LIFT THE COVER MANUALLY.
 
 #### TOGETHER (adv)
+
 - **Meaning:** In one group or position.
 - **Examples:**
   - USE TAPE TO ATTACH THE CABLES TOGETHER.
@@ -19831,70 +21183,83 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Disassemble the bypass valve and the dump valve together.
 
 #### TOLERANCE (n)
+
 - **Meaning:** A permitted difference from a standard.
 - **Example:**
   - THE TOLERANCE IS PLUS OR MINUS 0.2 mm.
 
 #### TOO (adv)
+
 - **Meaning:** More than is necessary or correct.
 - **Example:**
   - MAKE SURE THAT THE TEMPERATURE IS NOT TOO HIGH.
 
 #### TOOL (n)
+
 - **Meaning:** An object used to make or do something.
 - **Example:**
   - REMOVE ALL TOOLS AND EQUIPMENT.
 
 #### TOP (adj)
+
 - **Meaning:** That is uppermost.
 - **Example:**
   - A NUMBER IN THE TOP LEFT CORNER OF THE DISPLAY REFERS TO A RELATED PAGE.
 
 #### TOP (n)
+
 - **Meaning:** The uppermost position.
 - **Example:**
   - THE VERTICAL STABILIZER IS INSTALLED ON THE TOP OF THE FUSELAGE TAIL SECTION.
 
 #### TORQUE (v)
+
 - **Forms:** TORQUES, TORQUED, TORQUED
 - **Meaning:** To tighten to a specified torque.
 - **Example:**
   - TORQUE THE PLUG TO 6 Nm.
 
 #### TOTAL (adj)
+
 - **Meaning:** All of.
 - **Example:**
   - THE TOTAL QUANTITY OF FUEL IN THE CENTER TANK IS 5000 lb.
 
 #### TOTAL (n)
+
 - **Meaning:** The full quantity.
 - **Example:**
   - ADD THE VALUES. THE TOTAL MUST NOT BE MORE THAN 15 mm.
 
 #### TOUCH (v)
+
 - **Forms:** TOUCHES, TOUCHED, TOUCHED
 - **Meaning:** To be in contact.
 - **Example:**
   - MAKE SURE THAT THE LOCK NUT TOUCHES THE SPRING.
 
 #### TOW (v)
+
 - **Forms:** TOWS, TOWED, TOWED
 - **Meaning:** To pull something along.
 - **Example:**
   - BEFORE YOU TOW THE VEHICLE BACK TO ITS INITIAL POSITION, COMPLETE THE PROCEDURE.
 
 #### TRANSMIT (v)
+
 - **Forms:** TRANSMITS, TRANSMITTED, TRANSMITTED
 - **Meaning:** To send energy or a signal.
 - **Example:**
   - MAKE SURE THAT THE TRANSPONDER TRANSMITS THE SIGNAL CORRECTLY.
 
 #### TRANSPARENT (adj)
+
 - **Meaning:** Easy to see through.
 - **Example:**
   - PUT A TRANSPARENT SHEET OF PLASTIC ON THE SURFACE.
 
 #### TRAVEL (n)
+
 - **Meaning:** The movement of an item.
 - **Example:**
   - MAKE SURE THAT THE RANGE OF TRAVEL OF THE CONTROL SURFACES IS CLEAR.
@@ -19902,24 +21267,28 @@ For movement above land or water, use a technical noun:
 ### Unapproved Entries
 
 #### time (v)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** TIME (n)
   > **STE:** MEASURE THE TIME THAT IS NECESSARY FOR THE PRESSURE TO DECREASE.
   > **Non-STE:** Time the pressure decay.
 
 #### tip (n)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** POINT (n)
   > **STE:** BEFORE YOU MAKE THE HOLE, MAKE SURE THAT THE POINT OF THE DRILL BIT IS SHARP.
   > **Non-STE:** Before you make the hole, make sure the tip of the drill bit is sharp.
 
 #### tip (v)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** TILT (v)
   > **STE:** TO INSTALL THE INDICATOR, TILT IT REARWARD.
   > **Non-STE:** To install the indicator, tip it rearward.
 
 #### top off (v)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** FILL (v)
   > **STE:** FILL THE HYDRAULIC SYSTEM AS NECESSARY.
@@ -19929,6 +21298,7 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Top off the hydraulic reservoir as necessary.
 
 #### toward (prep)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** TO (prep)
   > **STE:** THE ARROW MUST POINT TO THE REAR.
@@ -19938,36 +21308,42 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Manually push the Ram Air Turbine toward the retracted position.
 
 #### toxic (adj)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** POISONOUS (adj)
   > **STE:** THIS COMPOUND IS POISONOUS.
   > **Non-STE:** This compound is toxic.
 
 #### trace (n)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** SIGN (n)
   > **STE:** EXAMINE THE AREA AROUND THE DRAIN HOLES FOR SIGNS OF CORROSION.
   > **Non-STE:** Check the area surrounding the drain holes for traces of corrosion.
 
 #### trace (v)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** FIND (v)
   > **STE:** FIND THE BROKEN WIRE.
   > **Non-STE:** Trace the broken wire.
 
 #### track (v)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** MONITOR (v)
   > **STE:** MONITOR THE TEMPERATURE.
   > **Non-STE:** Track the temperature.
 
 #### trained (adj)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** APPROVED (adj)
   > **STE:** ONLY APPROVED PERSONNEL CAN OPERATE THE BRAKES.
   > **Non-STE:** Only trained personnel can operate the brakes.
 
 #### transfer (n)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** MOVEMENT (n)
   > **STE:** MAKE SURE THAT THE RATE OF MOVEMENT OF FUEL FROM THE WING TANKS TO THE CENTER TANK IS EQUAL.
@@ -19977,6 +21353,7 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Make sure the rate of fuel transfer from the wing tanks to the center tank is equal.
 
 #### transfer (v)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** MOVE (v)
   > **STE:** MOVE THE COUPLINGS TO THE NEW UNIT.
@@ -19986,18 +21363,21 @@ For movement above land or water, use a technical noun:
   > **Non-STE:** Transfer the couplings to the new unit.
 
 #### transition (n)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** CHANGE (n)
   > **STE:** THE CHANGE FROM FULL-RATE OPERATION TO HALF-RATE OPERATION MUST OCCUR IMMEDIATELY.
   > **Non-STE:** The transition from full-rate operation to half-rate operation must occur immediately.
 
 #### transport (v)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** SEND (v)
   > **STE:** SEND THE PART TO THE OVERHAUL SHOP.
   > **Non-STE:** Transport the part to the overhaul shop.
 
 #### trapped (adj)
+
 - **Status:** UNAPPROVED
 - **Approved alternative:** CAUGHT (adj)
   > **STE:** MAKE SURE THAT THE CABLE IS NOT CAUGHT.
