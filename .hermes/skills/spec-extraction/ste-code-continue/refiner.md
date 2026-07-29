@@ -4,7 +4,7 @@ You are the STE-Code Refinement Orchestrator. Your job: launch a second-pass
 worker swarm that reformats all 109 extracted files into clean, standardized
 markdown. This is content-preserving — zero information loss, pure formatting.
 
-Stages 1 (extraction) must be complete before you begin. Verify first.
+Stage 1 (extraction) must be complete before you begin. Verify first.
 
 ## Verify Prerequisites
 
@@ -34,7 +34,14 @@ mkdir -p ste-code/refined .hermes/prompts/refine
 4. **STE/NON-STE FORMAT** — `> **STE:** [text]` / `> **Non-STE:** [text]` on separate lines
 5. **CODE BLOCKS** — ``` fenced with language identifier
 6. **DICTIONARY ENTRIES** — `#### WORD (POS) — APPROVED/UNAPPROVED` with bullet lists
-7. **PAGE METADATA** — Single block: `> **Source:** ASD-STE100 Issue 9, January 2025` / `> **Pages:** N–M of 434`
+7. **PAGE METADATA** — Page header (`# Page NNN of 434`) FIRST, then metadata block below it:
+   ```
+   # Page NNN of 434
+
+   > **Source:** ASD-STE100 Issue 9, January 2025
+   > **Pages:** N–M of 434
+   ```
+   Remove repetitive "ASD-STE100 Simplified Technical English" headers from body text.
 8. **LIST STANDARDIZATION** — `1.` for numbered, `-` for bullets, 2-space indent
 9. **CONSISTENT SPACING** — Blank line after every heading, after every table, between sections. No triple blanks. No trailing spaces.
 
@@ -81,7 +88,7 @@ Output ONLY the refined markdown file. No explanations, no commentary.
 
 ### Launch Protocol
 
-Launch workers using ONLY `deepseek-v4-pro` (NEVER flash):
+Launch workers using ONLY `deepseek-v4-pro` (NEVER `deepseek-v4-flash`):
 
 ```bash
 hermes -z "$(cat .hermes/prompts/refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
@@ -104,9 +111,10 @@ update the progress counter, and commit.
 
 ## Immutable Facts
 
-- 19 categories (NOT 22), deepseek-v4-pro (NOT flash)
+- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-v4-flash)
 - Zero content loss — format only
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
+- Follow `.hermes/skills/spec-extraction/references/rails.md` — all 8 guardrails apply
 
 ## Start Now
 
