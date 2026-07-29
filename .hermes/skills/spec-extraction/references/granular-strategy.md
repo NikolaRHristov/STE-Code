@@ -33,7 +33,7 @@ Time: ~36 × 30s = ~18 minutes (parallel batches)
 ### Worker launch template:
 
 ```bash
-hermes -z "Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/workers/wNNN.md. Do not summarize. Include every word. Output ONLY markdown." -m deepseek-pro --yolo
+hermes -z "Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/workers/wNNN.md. Do not summarize. Include every word. Output ONLY markdown." -m deepseek-v4-pro --yolo
 ```
 
 ### Incremental save protocol:

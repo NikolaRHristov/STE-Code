@@ -36,7 +36,7 @@ each processing exactly 4 pages. Coordinated in 37 batches of 3 workers.
 hermes -z "Read spec/issue-09-2025/page-<<START_PAGE>>.md through page-<<END_PAGE>>.md. 
 Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
 Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-pro --yolo
+Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 ```
 
 ## Launch Rules

@@ -18,7 +18,7 @@
 > 4. Workers launch in batches of 3 (never more). 109 ÷ 3 = 37 batches.
 >    Each batch: launch 3 workers → wait for all 3 → git gcommit-hermes → next batch.
 >
-> 5. Every worker uses: `hermes -z "$(cat prompt.txt)" -m deepseek-pro --yolo`
+> 5. Every worker uses: `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
 >    Simple single-line prompt, no embedded quotes, no multi-line in shell.
 >
 > 6. Output format: `.md` files (user directive: "not JSON structured data").
@@ -117,7 +117,7 @@ Use the following v3 protocol (109 workers, 4 pages each, 37 batches of 3):
 hermes -z "Read spec/issue-09-2025/page-<<START>>.md through page-<<END>>.md.
 Extract ALL content exactly into ste-code/workers/w<<NNN>>-p<<START>>-<<END>>.md.
 Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-pro --yolo
+Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 ```
 
 ### Batch Launch (3 workers at a time)

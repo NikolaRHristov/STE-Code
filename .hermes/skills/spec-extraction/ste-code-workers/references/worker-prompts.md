@@ -3,7 +3,7 @@
 These are the exact prompts used to extract the 434-page ASD-STE100 Issue 9 specification.
 Each prompt is written to `ste-code/workers/wN-prompt.txt` and launched via:
 ```bash
-hermes -z "$(cat ste-code/workers/wN-prompt.txt)" -m deepseek-pro --yolo
+hermes -z "$(cat ste-code/workers/wN-prompt.txt)" -m deepseek-v4-pro --yolo
 ```
 
 ---
