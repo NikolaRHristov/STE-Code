@@ -26,6 +26,11 @@ Launch the refinement worker swarm on all files in ste-code/extracted/.
 4 pages per worker, batches of 3. Output to ste-code/refined/.
 ```
 
+
+> **RAILS**: Before any action, validate against .
+> All 8 rails apply: stage isolation, naming, completion integrity, content fidelity,
+> formatting standards, factual correctness, progress tracking, error recovery.
+
 ## When to Use
 
 - After extraction phase is complete (all 109 raw files exist)
@@ -237,7 +242,7 @@ To update:
 **Progress: 12/109 workers (11%) — 48/434 pages**
 ```
 
-**Progress: 11/109 workers complete (batches 1-3 + r010-r011, pages 1-44)**
+**Progress: 30/109 workers complete (batches 1-9 + r028, r030, r032, pages 1-120)**
 
 ## Output Structure
 

@@ -17,6 +17,11 @@ metadata:
 After merge and validation, produce the 6 STE-Code artifact files by adapting
 the extracted spec data from `ste-code/merged/master.md`.
 
+
+> **RAILS**: Before any action, validate against .
+> All 8 rails apply: stage isolation, naming, completion integrity, content fidelity,
+> formatting standards, factual correctness, progress tracking, error recovery.
+
 ## Prerequisites
 
 - [ ] GATE 2 complete: `ste-code/merged/master.md` exists and validated
@@ -146,7 +151,7 @@ Generate artifacts in order (1→6). For each artifact:
 ## Verification After All Artifacts
 
 ```bash
-for f in ste-code/ste-code-*.txt; do
+for f in ste-code/artifacts/ste-code-*.txt; do
   chars=$(wc -c < "$f")
   echo "$(basename $f): $chars chars ~$((chars/4)) tokens"
 done

@@ -17,6 +17,11 @@ metadata:
 Systematic validation of worker extraction output. Run after each batch (every 3 workers)
 and after the full merge. Catches fabrication, truncation, and incompleteness.
 
+
+> **RAILS**: Before any action, validate against .
+> All 8 rails apply: stage isolation, naming, completion integrity, content fidelity,
+> formatting standards, factual correctness, progress tracking, error recovery.
+
 ## Per-Batch Validation (After Every 3 Workers)
 
 Run after launching and waiting for each batch of 3 workers.

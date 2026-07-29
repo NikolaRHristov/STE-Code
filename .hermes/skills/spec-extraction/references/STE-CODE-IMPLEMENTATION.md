@@ -185,7 +185,7 @@ READ these files sequentially:
 
 EXTRACT: <<TASK_DESCRIPTION>>
 
-OUTPUT: Write ONLY valid JSON to ste-code/workers/w<<N>>.json
+OUTPUT: Write ONLY valid JSON to ste-code/extracted/w<<N>>.json
 Use the schema below. Every field must contain EXACT text from the spec pages.
 If a page has no content matching a key, use an empty array [].
 
@@ -225,20 +225,20 @@ hermes -z --model deepseek-v4-pro "<W3_PROMPT>" &
 **Batch 1 — Verify (after workers complete):**
 ```bash
 # Check files exist
-test -f ste-code/workers/w1.json && echo "W1 OK" || echo "W1 MISSING — RE-LAUNCH"
-test -f ste-code/workers/w2.json && echo "W2 OK" || echo "W2 MISSING — RE-LAUNCH"
-test -f ste-code/workers/w3.json && echo "W3 OK" || echo "W3 MISSING — RE-LAUNCH"
+test -f ste-code/extracted/w1.json && echo "W1 OK" || echo "W1 MISSING — RE-LAUNCH"
+test -f ste-code/extracted/w2.json && echo "W2 OK" || echo "W2 MISSING — RE-LAUNCH"
+test -f ste-code/extracted/w3.json && echo "W3 OK" || echo "W3 MISSING — RE-LAUNCH"
 
 # Validate JSON
-python3 -c "import json; json.load(open('ste-code/workers/w1.json')); print('W1 valid')"
-python3 -c "import json; json.load(open('ste-code/workers/w2.json')); print('W2 valid')"
-python3 -c "import json; json.load(open('ste-code/workers/w3.json')); print('W3 valid')"
+python3 -c "import json; json.load(open('ste-code/extracted/w1.json')); print('W1 valid')"
+python3 -c "import json; json.load(open('ste-code/extracted/w2.json')); print('W2 valid')"
+python3 -c "import json; json.load(open('ste-code/extracted/w3.json')); print('W3 valid')"
 
 # Check content quality: each file must have actual entries
 python3 -c "
 import json
 for w in ['w1','w2','w3']:
-    d = json.load(open(f'ste-code/workers/{w}.json'))
+    d = json.load(open(f'ste-code/extracted/{w}.json'))
     rules = len(d.get('rules',[]))
     cats = len(d.get('categories',[]))
     entries = len(d.get('dictionary_entries',[]))
@@ -275,7 +275,7 @@ import json, os
 total_rules = 0
 total_entries = 0
 for i in range(1,10):
-    path = f'ste-code/workers/w{i}.json'
+    path = f'ste-code/extracted/w{i}.json'
     if not os.path.exists(path):
         print(f'MISSING: {path} — CANNOT PROCEED')
         exit(1)
@@ -297,7 +297,7 @@ if total_entries < 500:
 
 ### Merge into Master State
 
-Read all 9 worker JSONs. Merge into `ste-code/workers/master.json`:
+Read all 9 worker JSONs. Merge into `ste-code/extracted/master.json`:
 - Deduplicate rules by rule_number
 - Sort rules by section (1.1, 1.2, ..., 9.4, GR1-GR4)
 - Merge categories (should total exactly 19)
@@ -317,7 +317,7 @@ If ANY mismatch found, flag the worker responsible and re-extract those pages.
 
 ## GATE 3: Adaptation (Phase 2 from Original)
 
-**HARD GATE: `ste-code/workers/master.json` must exist and contain verified data.**
+**HARD GATE: `ste-code/extracted/master.json` must exist and contain verified data.**
 
 Only NOW do you begin adaptation. For each rule in the master state:
 
@@ -435,7 +435,7 @@ done
 # Verify all files reference master.json data
 python3 -c "
 import json
-master = json.load(open('ste-code/workers/master.json'))
+master = json.load(open('ste-code/extracted/master.json'))
 print(f'Master state: {len(master[\"rules\"])} rules, {len(master[\"dictionary_entries\"])} entries')
 print(f'Categories: {len(master[\"categories\"])}')
 print('All artifact files must exist in ste-code/artifacts/')

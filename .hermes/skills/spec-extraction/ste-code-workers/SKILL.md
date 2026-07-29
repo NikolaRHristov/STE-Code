@@ -21,8 +21,13 @@ each processing exactly 4 pages. Coordinated in 37 batches of 3 workers.
 - CORRECTED: `hermes -z` DOES support file I/O (verified with W0 test)
 - 4 pages per worker (not 30-112) — prevents truncation
 - 109 workers (not 9) — full parallelization
-- Output to `ste-code/extracted/` (not `ste-code/workers/`)
-- Prompts in `ste-code/prompts/` (separate from output)
+- Output to `ste-code/extracted/` (not `ste-code/extracted/`)
+- Prompts in `ste-code/prompts-refine/` (separate from output)
+
+
+> **RAILS**: Before any action, validate against .
+> All 8 rails apply: stage isolation, naming, completion integrity, content fidelity,
+> formatting standards, factual correctness, progress tracking, error recovery.
 
 ## When to Use
 
@@ -85,4 +90,4 @@ If any check fails, re-extract with the worker's page range split in half.
 Full grid at: `references/worker-grid.md`
 Section types at: `references/section-types.md`
 
-**Progress: 78/109 workers complete (batches 1-26, pages 1-312)**
+**Progress: 109/109 workers complete (ALL 37 batches, pages 1-434) ✨ EXTRACTION COMPLETE**

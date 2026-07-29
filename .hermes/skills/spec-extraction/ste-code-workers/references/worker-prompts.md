@@ -1,9 +1,9 @@
 # Worker Prompts — ASD-STE100 Issue 9 Extraction
 
 These are the exact prompts used to extract the 434-page ASD-STE100 Issue 9 specification.
-Each prompt is written to `ste-code/workers/wN-prompt.txt` and launched via:
+Each prompt is written to `ste-code/extracted/wN-prompt.txt` and launched via:
 ```bash
-hermes -z "$(cat ste-code/workers/wN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/extracted/wN-prompt.txt)" -m deepseek-v4-pro --yolo
 ```
 
 ---
@@ -15,7 +15,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0001.md through page-0030.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w1-sec1-rules.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w1-sec1-rules.md
 
 INCLUDE:
 - Front matter (title, copyright, highlights)
@@ -36,7 +36,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0031.md through page-0066.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w2-sec2-3-rules.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w2-sec2-3-rules.md
 
 INCLUDE:
 - Rules 1.7-1.14 FULL text with ALL example pairs
@@ -57,7 +57,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0067.md through page-0094.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w3-sec3-5-rules.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w3-sec3-5-rules.md
 
 INCLUDE:
 - Rules 3.3-3.7 FULL text with ALL example pairs
@@ -76,7 +76,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0095.md through page-0114.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w4-sec6-8-rules.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w4-sec6-8-rules.md
 
 INCLUDE:
 - Section 6: Rules 6.1-6.6 with ALL examples (descriptive writing, key words, paragraphs)
@@ -95,7 +95,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0115.md through page-0128.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w5-sec9-gr-rules.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w5-sec9-gr-rules.md
 
 INCLUDE:
 - Section 9: Rules 9.1-9.4 FULL text with ALL example pairs
@@ -114,7 +114,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0129.md through page-0240.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w6-dict-a-f.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w6-dict-a-f.md
 
 INCLUDE:
 - Part 2 Dictionary title and full introduction
@@ -134,7 +134,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0241.md through page-0300.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w7-dict-g-p.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w7-dict-g-p.md
 
 INCLUDE: EVERY dictionary entry G through P. Do not skip any.
 For each: word, POS, APPROVED/UNAPPROVED, meaning/alternatives, verb forms, examples.
@@ -151,7 +151,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0301.md through page-0360.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w8-dict-q-z.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w8-dict-q-z.md
 
 INCLUDE: EVERY dictionary entry Q through Z. Do not skip any.
 For each: word, POS, APPROVED/UNAPPROVED, meaning/alternatives, verb forms, examples.
@@ -168,7 +168,7 @@ EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
 
 PAGES: spec/issue-09-2025/page-0361.md through page-0434.md
 
-TASK: Read every page and extract ALL content into ste-code/workers/w9-appendices.md
+TASK: Read every page and extract ALL content into ste-code/extracted/w9-appendices.md
 
 INCLUDE: All appendices, index, issue evolution data, change form, reference documents.
 

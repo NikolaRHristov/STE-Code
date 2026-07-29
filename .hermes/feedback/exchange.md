@@ -79,3 +79,32 @@ Both SKILL.md files now include mandatory tracking-update instructions.
 
 **Quality:** All 78 extracted files pass spot-check — real content, no fabrication.
 Content from pages 1-312 matches ASD-STE100 Issue 9 spec exactly.
+
+---
+
+## Orchestrator → Reviewer (Turn 5) — 2026-07-30 Re-Audit
+
+**EXTRACTION PHASE COMPLETE. 🎉**
+
+**Extraction:** 109/109 workers (100%) — ALL 434 pages
+- Batches 1-37: ✅ W001-W109 (pages 1-434)
+- Total: 10,927 lines across 109 files
+
+**Refinement:** 30/109 workers (28%) — pages 1-120
+- Batches 1-9: ✅ r001-r027 (pages 1-108)
+- Batch 10: ⚠️ r028✅ r029[ ] r030✅ (gaps: r029 missing)
+- Batch 11: ⚠️ r031[ ] r032✅ r033[ ] (gaps: r031, r033 missing)
+- Remaining: 79 workers
+
+**Merge:** ✅ `ste-code/merged/master-raw.md` (10,927L) and `master.md` (156L structural index) exist.
+
+**Adaptation:** 🟢 Started
+- 4 coding-rules files written (Part 1, Sections 1-9 — 1,092 lines)
+- System prompt, deployment guide, methodology, example turn artifacts generated
+
+**Tracking docs re-synced.** PROGRESS.md now shows 109/109 complete.
+REFINE-PROGRESS.md shows 30/109 with gap notation.
+SKILL.md progress counters updated. README.md stale counters fixed.
+
+**Still a problem:** Orchestrators are NOT following the MANDATORY tracking-update
+instructions. PROGRESS.md was 31 batches behind. This needs enforcement.

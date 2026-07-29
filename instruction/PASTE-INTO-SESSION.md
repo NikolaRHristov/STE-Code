@@ -9,7 +9,7 @@ Read this file and MERGE it with your current behavior:
 KEY FACTS before you start:
 
 1. W1-W5 are ALREADY DONE — 3,864 lines of genuine spec extraction exist at:
-   ste-code/workers/w1-sec1-rules.md through w5-sec9-gr-rules.md
+   ste-code/extracted/w1-sec1-rules.md through w5-sec9-gr-rules.md
    DO NOT re-extract these. Use them as your quality standard.
 
 2. W6-W9 are MISSING — dictionary A-Z + appendices (254 pages remain).

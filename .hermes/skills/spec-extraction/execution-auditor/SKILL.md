@@ -23,6 +23,11 @@ executed what they claim to have executed.
 
 You are the **ground truth layer** between claims and evidence.
 
+
+> **RAILS**: Before any action, validate against .
+> All 8 rails apply: stage isolation, naming, completion integrity, content fidelity,
+> formatting standards, factual correctness, progress tracking, error recovery.
+
 ## Core Principle
 
 > Trust nothing. Verify everything against files on disk.
@@ -187,7 +192,7 @@ known fixable patterns, the auditor MAY apply fixes directly. This is the
 | `deepseek-pro` model reference | `patch` to `deepseek-v4-pro` | ✅ Safe — correct model |
 | `hermes -z DOES NOT support file I/O` | `patch` to correct | ✅ Safe — proven false |
 | `adapted from STE's 22` | `patch` to `adapted from STE's 19` | ✅ Safe — factual correction |
-| Empty directory `ste-code/workers/` | `rm -rf` if empty | ✅ Safe — superseded |
+| Empty directory `ste-code/extracted/` | `rm -rf` if empty | ✅ Safe — superseded |
 | Fabricated artifact files (6 .txt + PLAN.md + README.md) | `rm` individual files | ✅ Safe — must be regenerated anyway |
 | Stale `ste-code/prompts/` (old v1 prompts) | `rm -rf` entire directory | ✅ Safe — superseded by inline generation |
 
@@ -217,8 +222,8 @@ known fixable patterns, the auditor MAY apply fixes directly. This is the
 |---|------|---------------|-------------|--------|
 | 1 | ste-code/README.md:35 | "adapted from STE's 22" | Changed to 19 | ✅ |
 | 2 | ste-code/prompts/w2-prompt.txt:7 | "22 technical noun categories" | Changed to 19 | ✅ |
-| 3 | ste-code/workers/ | Empty directory | Removed | ✅ |
-| 4 | ste-code/ste-code-self-reading-manual.txt | Fabricated artifact | Deleted (30KB) | ✅ |
+| 3 | ste-code/extracted/ | Empty directory | Removed | ✅ |
+| 4 | ste-code/artifacts/ste-code-self-reading-manual.txt | Fabricated artifact | Deleted (30KB) | ✅ |
 ```
 
 ### Launch with Fix Mode

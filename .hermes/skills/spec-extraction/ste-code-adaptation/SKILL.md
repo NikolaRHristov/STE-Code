@@ -17,9 +17,14 @@ metadata:
 
 After 9 workers extract the full ASD-STE100 spec, the coordinator reads all worker output and produces STE-Code: the coding-domain adaptation preserving the exact architecture.
 
+
+> **RAILS**: Before any action, validate against .
+> All 8 rails apply: stage isolation, naming, completion integrity, content fidelity,
+> formatting standards, factual correctness, progress tracking, error recovery.
+
 ## Input
 
-All 9 worker `.md` files in `ste-code/workers/`:
+All 9 worker `.md` files in `ste-code/extracted/`:
 - `w1-sec1-rules.md` through `w9-appendices.md`
 
 ## Output Artifacts

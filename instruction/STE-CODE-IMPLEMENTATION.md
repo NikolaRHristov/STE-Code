@@ -115,7 +115,7 @@ Use the following v3 protocol (109 workers, 4 pages each, 37 batches of 3):
 
 ```bash
 hermes -z "Read spec/issue-09-2025/page-<<START>>.md through page-<<END>>.md.
-Extract ALL content exactly into ste-code/workers/w<<NNN>>-p<<START>>-<<END>>.md.
+Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
 Do not summarize. Include every word, every table, every example.
 Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 ```
@@ -140,7 +140,7 @@ Batch 02: W004(13-16), W005(17-20), W006(21-24)
 
 After all 9 files are written, run:
 ```bash
-for f in ste-code/workers/w[1-9]-*.md; do
+for f in ste-code/extracted/w[1-9]-*.md; do
   lines=$(wc -l < "$f")
   size=$(wc -c < "$f")
   if [ "$lines" -lt 20 ]; then
@@ -162,7 +162,7 @@ If any file is below minimum, re-extract that page range.
 
 ## GATE 2: Merge into Master State
 
-Read all 9 worker files. Create a consolidated master state document at `ste-code/workers/master.md` containing:
+Read all 9 worker files. Create a consolidated master state document at `ste-code/extracted/master.md` containing:
 - Complete rule listing (all 53 rules numbered, with text and examples)
 - Complete 19 categories enumerated
 - Complete synonym table
@@ -247,7 +247,7 @@ for f in ste-code/ste-code-*.txt; do
 done
 ```
 
-All files must reference specific data from `ste-code/workers/master.md`.
+All files must reference specific data from `ste-code/extracted/master.md`.
 No file should contain generic/fabricated content.
 
 ---

@@ -14,9 +14,14 @@ metadata:
 
 ## Overview
 
-After all 109 workers complete extraction, merge their output into `ste-code/workers/master.md`.
+After all 109 workers complete extraction, merge their output into `ste-code/extracted/master.md`.
 This phase handles duplicate content (same spec text appearing across page boundaries),
 organizes by section, and validates completeness.
+
+
+> **RAILS**: Before any action, validate against .
+> All 8 rails apply: stage isolation, naming, completion integrity, content fidelity,
+> formatting standards, factual correctness, progress tracking, error recovery.
 
 ## When to Use
 
@@ -48,7 +53,7 @@ Manual dedup is preferred over scripted — the coordinator should scan for patt
 
 ```bash
 # Find duplicate rule headers
-grep -n "^### Rule" ste-code/workers/master-raw.md | sort -t: -k2 | uniq -d -f1
+grep -n "^### Rule" ste-code/extracted/master-raw.md | sort -t: -k2 | uniq -d -f1
 ```
 
 ### Step 3: Organize by Section
@@ -94,17 +99,17 @@ Run these checks on master.md:
 
 ```bash
 # Count rules (should be 53 + 4 GR)
-grep -c "^#### Rule" ste-code/workers/master.md
+grep -c "^#### Rule" ste-code/extracted/master.md
 
 # Count categories (should be 19)
-grep -c "^### Category" ste-code/workers/master.md
+grep -c "^### Category" ste-code/extracted/master.md
 
 # Count dictionary entries (should be ~875 approved + ~1400 unapproved)
-grep -c "^#### " ste-code/workers/master.md | head -1
+grep -c "^#### " ste-code/extracted/master.md | head -1
 
 # Verify page coverage (should span 1-434)
-head -5 ste-code/workers/master.md
-tail -5 ste-code/workers/master.md
+head -5 ste-code/extracted/master.md
+tail -5 ste-code/extracted/master.md
 ```
 
 ### Step 5: Spot-Check Fidelity
