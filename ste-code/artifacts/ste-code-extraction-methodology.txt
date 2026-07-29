@@ -1,0 +1,200 @@
+# STE-Code Extraction Methodology v1.0
+
+> **Source:** Adapted from ASD-STE100 Issue 9, January 2025
+> **Stage:** 5 — Artifacts
+> **Model:** deepseek-v4-pro
+
+## Overview
+
+Six-pass transformation pipeline for processing any code documentation through STE-Code compliance checking. Each pass operates on the document state from the previous pass. State persists in memory between passes.
+
+---
+
+## Turn-by-Turn Protocol
+
+### Turn 0 — Initialization
+
+```
+INPUT: Raw document (README, API doc, comment block, commit message, error log)
+ACTION:
+  1. Read the full document
+  2. Identify document type
+  3. Extract title, headings, and table of contents
+  4. Count paragraphs, code blocks, and lists
+  5. Initialize state: {pass: 0, violations: [], fixes: []}
+OUTPUT: Document metadata summary
+```
+
+### Turn 1 — LEXICAL CHECK
+
+```
+ACTION:
+  1. Tokenize the document into words
+  2. Check each word against the STE-Code approved vocabulary
+  3. Flag unapproved words for the synonym table lookup
+  4. Flag technical nouns without a category
+  5. Flag technical verbs without a category
+OUTPUT: List of flagged words with line numbers
+STATE: {pass: 1, unknown_terms: [...], categorized: [...]}
+```
+
+### Turn 2 — CLASSIFICATION
+
+```
+ACTION:
+  1. Classify each technical noun into one of 19 categories
+  2. Classify each technical verb into one of 4 categories
+  3. Verify each term is used as its correct type (noun/verb/adjective)
+  4. Map unapproved terms to approved alternatives via synonym table
+OUTPUT: Classification table with recommended replacements
+STATE: {pass: 2, classifications: {...}, replacements: {...}}
+```
+
+### Turn 3 — POS LOCK
+
+```
+ACTION:
+  1. Lock each term to its approved part of speech
+  2. Flag nouns used as verbs (e.g., "Docker the app")
+  3. Flag verbs used as nouns (e.g., "run the deploy")
+  4. Verify adjective forms are positive degree only
+OUTPUT: POS violations with corrections
+STATE: {pass: 3, pos_violations: [...], pos_corrections: [...]}
+```
+
+### Turn 4 — MEANING CHECK
+
+```
+ACTION:
+  1. Verify each approved term is used with its approved meaning
+  2. Check for polysemy violations (one word, multiple meanings)
+  3. Check for synonym drift (multiple terms for same concept)
+  4. Verify consistency: one term per concept throughout document
+OUTPUT: Meaning violations with corrections
+STATE: {pass: 4, meaning_violations: [...], meaning_corrections: [...]}
+```
+
+### Turn 5 — GRAMMAR & STRUCTURE
+
+```
+ACTION:
+  1. Check sentence length: max 20 words (procedural), 25 words (descriptive)
+  2. Verify active voice in all sentences
+  3. Verify imperative mood in procedural steps
+  4. Check code block formatting (language identifiers present)
+  5. Verify heading hierarchy (# → ## → ### → ####)
+  6. Check list standardization (1. for numbered, - for bullets)
+  7. Verify BREAKING/DEPRECATED/NOTE format
+OUTPUT: Structure violations with corrections
+STATE: {pass: 5, structure_violations: [...], structure_corrections: [...]}
+```
+
+### Turn 6 — CONSISTENCY & OUTPUT
+
+```
+ACTION:
+  1. Cross-reference all 14 Principles (P1-P14) against the document
+  2. Verify no ambiguous pronouns without clear referents
+  3. Verify all abbreviations are expanded on first use
+  4. Check one blank line between sections
+  5. Assemble final compliance report
+  6. Output the corrected document
+OUTPUT: Final corrected document + compliance summary
+STATE: {pass: 6, complete: true, total_violations: N, total_fixes: N}
+```
+
+---
+
+## 5 Structural Extraction Types (Code Domain)
+
+### Type 1 — Classes & Modules
+```
+Extract: class name, parent class, implemented interfaces, public methods, properties
+Output: Mermaid class diagram
+```
+
+### Type 2 — Associations & Dependencies
+```
+Extract: import statements, dependency references, service injection points
+Output: Mermaid flowchart showing dependency graph
+```
+
+### Type 3 — Procedures & Workflows
+```
+Extract: numbered steps, conditional branches, loop constructs, error handlers
+Output: Mermaid flowchart with decision nodes
+```
+
+### Type 4 — Conditions & Guards
+```
+Extract: if/else blocks, try/catch blocks, guard clauses, validation checks
+Output: Decision table with outcomes
+```
+
+### Type 5 — Safety & Breaking Changes
+```
+Extract: BREAKING notices, DEPRECATED markers, migration paths, version requirements
+Output: Breaking change changelog format
+```
+
+---
+
+## State Persistence
+
+Between turns, the document state is preserved:
+- `current_pass`: which pass is active (1-6)
+- `violations`: accumulated list of all violations found
+- `fixes`: accumulated list of all fixes applied
+- `classifications`: term → category mapping
+- `replacements`: term → approved alternative mapping
+- `compliance_score`: running percentage of compliant lines
+
+---
+
+## UML Output Format
+
+After Turn 6, produce Mermaid diagrams:
+
+```mermaid
+classDiagram
+    class UserService {
+        +authenticate(token) bool
+        +authorize(user, resource) bool
+        +validate(credentials) Result
+    }
+```
+
+```mermaid
+flowchart TD
+    A[Receive Request] --> B{Validate Auth}
+    B -->|Valid| C[Process Request]
+    B -->|Invalid| D[Return 401]
+    C --> E[Return 200]
+```
+
+---
+
+## Final Turn — Consolidation
+
+```
+OUTPUT:
+  ## COMPLIANCE STATUS: N violations found, M fixed (X% compliant)
+
+  ### CORRECTED DOCUMENT
+  [Full corrected text]
+
+  ### CHANGES APPLIED
+  | Line | Pass | Original | Corrected | Principle |
+  |------|------|----------|-----------|-----------|
+
+  ### UML EXTRACTION
+  [Mermaid diagrams for classes, associations, procedures]
+
+  ### UNRESOLVED
+  [Any violations requiring human judgment]
+```
+
+---
+
+> **Reference:** 6-pass pipeline adapted from ASD-STE100 Issue 9's lexical → classification → POS lock → meaning → grammar → consistency architecture
+> **Model:** deepseek-v4-pro

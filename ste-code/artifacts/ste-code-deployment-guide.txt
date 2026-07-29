@@ -1,0 +1,156 @@
+# STE-Code Deployment Guide v1.0
+
+> **Source:** Adapted from ASD-STE100 Issue 9, January 2025
+> **Stage:** 5 — Artifacts
+> **Model:** deepseek-v4-pro
+
+## Overview
+
+STE-Code is deployed as a system prompt that constrains any LLM to produce compliant code documentation. Four deployment options are available, ordered from simplest to most flexible.
+
+---
+
+## Option A — Ollama Modelfile (Recommended)
+
+Create a Modelfile with the system prompt baked in:
+
+```dockerfile
+FROM deepseek-coder:latest
+
+SYSTEM """
+You are a STE-Code compliant technical writer. You produce code documentation
+following the 14 Principles of STE-Code. [FULL SYSTEM PROMPT HERE]
+"""
+
+PARAMETER temperature 0.3
+PARAMETER top_p 0.9
+PARAMETER num_ctx 8192
+```
+
+Build and run:
+
+```bash
+ollama create ste-code -f Modelfile
+ollama run ste-code
+```
+
+**Token budget:** System prompt uses ~1,200 tokens. With 8K context, ~6,800 tokens remain for the document and output.
+
+---
+
+## Option B — LM Studio (GUI)
+
+1. Open LM Studio → Settings → System Prompt
+2. Paste the full `ste-code-distilled-system-prompt.txt` contents
+3. Set temperature to 0.3
+4. Load any compatible model (deepseek-coder, qwen-coder, codestral)
+5. Start a new conversation — the system prompt is automatically prepended
+
+**Note:** LM Studio saves the system prompt per-model. Create a dedicated preset for STE-Code.
+
+---
+
+## Option C — Python + llama.cpp (Programmatic)
+
+```python
+from llama_cpp import Llama
+
+# Load model with system prompt
+llm = Llama(
+    model_path="models/deepseek-coder-6.7b.Q4_K_M.gguf",
+    n_ctx=8192,
+    n_threads=8,
+)
+
+# Read the system prompt
+with open("ste-code-artifacts/ste-code-distilled-system-prompt.txt") as f:
+    system_prompt = f.read()
+
+# Process a document
+def ste_code_check(document: str) -> str:
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": f"Check this code documentation for STE-Code compliance:\n\n{document}"},
+    ]
+    response = llm.create_chat_completion(
+        messages=messages,
+        temperature=0.3,
+        max_tokens=4096,
+    )
+    return response["choices"][0]["message"]["content"]
+
+# Usage
+result = ste_code_check(open("README.md").read())
+print(result)
+```
+
+**Token budget:** 1,200 (system) + document tokens + 4,096 (max output) = fit within 8K context.
+
+---
+
+## Option D — Full Conversation Export
+
+For batch processing of multiple files or large documents:
+
+```bash
+# Export context as a file for any LLM that accepts file input
+cat ste-code-distilled-system-prompt.txt > /tmp/ste-code-context.txt
+echo -e "\n\n---\n\n## DOCUMENT TO CHECK\n\n" >> /tmp/ste-code-context.txt
+cat my-readme.md >> /tmp/ste-code-context.txt
+
+# Feed to any LLM
+hermes -z "$(cat /tmp/ste-code-context.txt)" -m deepseek-v4-pro --yolo
+```
+
+**All 5 artifacts** can be concatenated into a single context file for full-manual mode:
+
+```bash
+cat ste-code/artifacts/ste-code-*.txt > ste-code-full-context.txt
+```
+
+---
+
+## Token Budget Breakdown
+
+| Component | Tokens | Notes |
+|---|---|---|
+| System prompt | ~1,200 | 14 principles, synonym table, 19 categories |
+| Document (typical) | ~2,000 | Average README or API doc page |
+| Instruction | ~100 | "Check this for STE-Code compliance" |
+| Output header | ~200 | Compliance status block |
+| Output corrections | ~2,500 | Corrected text + changes table |
+| **Total per document** | **~6,000** | Fits in 8K context with margin |
+| **Full manual** | **~12,400** | All 6 artifacts (self-reading mode) |
+
+---
+
+## Expected Output
+
+After processing, the LLM produces:
+
+1. **COMPLIANCE STATUS** — Number of violations found and fixed
+2. **CORRECTED TEXT** — The document rewritten in STE-Code compliant form
+3. **CHANGES TABLE** — Every change with line number, original text, corrected text, and principle reference
+4. **UML EXTRACTION** — Mermaid diagrams for classes, workflows, and dependencies
+5. **OPTIMIZATIONS** — Before/after metrics (word count, violations, clarity score)
+
+---
+
+## Verification
+
+After deployment, test with a known anti-pattern:
+
+```
+Input: "This function does a bunch of stuff and should be called with the user object."
+Expected: "Call this function with the user object."
+```
+
+If the output is not compliant, verify:
+- System prompt is correctly loaded (check for "14 CORE PRINCIPLES" in context)
+- Temperature is ≤ 0.3 (higher values produce creative deviations)
+- Model supports the context length (minimum 6K tokens)
+
+---
+
+> **Reference:** Deployed from ASD-STE100 Issue 9 — 53 rules + 4 GR, 19 categories, 434 pages
+> **Model:** deepseek-v4-pro

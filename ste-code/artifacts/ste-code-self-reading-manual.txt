@@ -1,0 +1,635 @@
+# STE-Code Self-Reading Manual v1.0
+
+> **Source:** Adapted from ASD-STE100 Issue 9, January 2025
+> **Stage:** 5 — Artifacts
+> **Model:** deepseek-v4-pro
+> **Pages:** 1–434 of 434 (Issue 9, January 2025)
+
+---
+
+## S0 — How to Use This Manual
+
+This manual operates on a recursive loop. To process any code document:
+
+```
+┌──────────────────────────────────────────────────┐
+│                                                  │
+│  S3 → Read the document                          │
+│   ↓                                              │
+│  S4 → Extract skills (5 structural patterns)     │
+│   ↓                                              │
+│  S1 → Apply 14 Core Principles                   │
+│   ↓                                              │
+│  S2 → Cross-reference knowledge base             │
+│   ↓                                              │
+│  S6 → Ask 13 recursive questions                 │
+│   ↓                                              │
+│  S7 → Output corrected document                  │
+│   ↓                                              │
+│  S8 → Manage context window                      │
+│   ↓                                              │
+│  Repeat for next section                         │
+│                                                  │
+└──────────────────────────────────────────────────┘
+```
+
+**Key rule:** Always read S3 first (document reading protocol), then loop through S4→S1→S2→S6→S7 per section. S8 runs continuously in the background.
+
+---
+
+## S1 — Core STE-Code Principles (14 Principles)
+
+### P1 — USE APPROVED VOCABULARY ONLY (Rule 1.1)
+
+Use only terms from the STE-Code approved vocabulary. Every term must belong to one of 19 noun categories or 4 verb categories.
+
+```javascript
+// ❌ Non-STE-Code: "We use a bunch of different tools to get the job done."
+// ✅ STE-Code: "We use webpack, eslint, and jest to build, lint, and test the application."
+```
+
+### P2 — USE TERMS ONLY AS THEIR SPECIFIED TYPE (Rule 1.2)
+
+Each term in the vocabulary has exactly one type. Use it only as that type.
+
+```python
+# ❌ Non-STE-Code: "Docker the application and then ship it."
+# ✅ STE-Code: "Containerize the application with Docker."
+# Explanation: "Docker" is a framework noun (Category 2), not a verb.
+```
+
+### P3 — USE TERMS ONLY WITH APPROVED MEANINGS (Rule 1.3)
+
+Each approved term has exactly one approved meaning.
+
+```
+# ❌ Non-STE-Code: "Cache the user data and use a cache to hide the latency."
+# ✅ STE-Code: "Store the user data in the cache."
+# Explanation: "cache" means a temporary store (noun). It does not mean "hide."
+```
+
+### P4 — USE ONLY APPROVED FORMS (Rule 1.4)
+
+Verbs use base form. Adjectives use positive degree.
+
+```
+# ❌ Non-STE-Code: "This is the most performant solution available."
+# ✅ STE-Code: "This solution is fast."
+# Explanation: "most performant" is superlative. Use "fast" (positive degree).
+```
+
+### P5 — TECHNICAL NOUNS MUST BELONG TO A CATEGORY (Rule 1.5)
+
+Every technical noun must fit into one of the 19 STE-Code categories.
+
+```
+# ✅ "PostgreSQL" → Category 2 (Frameworks & Runtimes)
+# ✅ "eslint" → Category 3 (Dev Tools & Build Systems)
+# ❌ "thingamajig" → No category → NOT APPROVED
+```
+
+### P6 — UNAPPROVED NOUNS MUST BE TECHNICAL (Rule 1.6)
+
+If a word is not in the approved vocabulary, it can only be used if it belongs to one of the 19 categories.
+
+```
+# ✅ "tailwindcss" is not in the vocabulary but belongs to Category 2 (Frameworks)
+# ❌ "cool-stuff" is not in the vocabulary and belongs to no category → NOT APPROVED
+```
+
+### P7 — TECHNICAL NOUNS ARE NOT VERBS (Rule 1.7)
+
+Never use a noun from categories 1-19 as a verb.
+
+```
+# ❌ "Kubernetes the deployment to the staging cluster."
+# ✅ "Deploy to the staging cluster with Kubernetes."
+```
+
+### P8 — USE ESTABLISHED TECHNICAL NOUNS (Rule 1.8)
+
+Use industry-standard names. Do not invent project-specific nicknames for standard tools.
+
+```
+# ❌ "Use the blue database for user data."
+# ✅ "Use PostgreSQL for user data."
+```
+
+### P9 — CHOOSE SHORT, CLEAR TECHNICAL NOUNS (Rule 1.9)
+
+When multiple terms exist for the same concept, use the shortest widely-understood option.
+
+```
+# ❌ "Continuous Integration and Continuous Deployment Pipeline"
+# ✅ "CI/CD pipeline"
+# ✅ First use: "CI/CD (Continuous Integration/Continuous Deployment) pipeline"
+```
+
+### P10 — NO SLANG OR JARGON AS TECHNICAL NOUNS (Rule 1.10)
+
+Never use internal slang, regional terms, or team-specific jargon.
+
+```
+# ❌ "The yolo-deploy script sends everything to prod."
+# ✅ "The deployment script sends all changes to production."
+```
+
+### P11 — ONE TERM PER CONCEPT (Rule 1.11)
+
+Use exactly one term for each concept throughout a document.
+
+```
+# ❌ Alternating between: "auth service", "authentication module", "login handler"
+# ✅ Consistent: "auth service" throughout
+```
+
+### P12 — TECHNICAL VERBS MUST BELONG TO A CATEGORY (Rule 1.12)
+
+Every technical verb must belong to one of the 4 verb categories.
+
+```
+# ✅ "build" → Category 1 (Development Operations)
+# ✅ "serialize" → Category 2 (Data Operations)
+# ✅ "authenticate" → Category 3 (Application Operations)
+# ✅ "publish" → Category 4 (Communication Operations)
+```
+
+### P13 — TECHNICAL VERBS ARE NOT NOUNS (Rule 1.13)
+
+Never use a verb from the 4 verb categories as a noun.
+
+```
+# ❌ "Run the deploy to staging."
+# ✅ "Deploy to staging."
+# Explanation: "deploy" is a verb, not a noun. Use it as an action.
+```
+
+### P14 — USE AMERICAN ENGLISH SPELLING (Rule 1.14)
+
+```
+# ✅ "initialize", "color", "center", "analyze"
+# ❌ "initialise", "colour", "centre", "analyse"
+```
+
+---
+
+## S2 — Knowledge Base
+
+### All 53 Writing Rules (Adapted)
+
+#### Section 1 — Words (Rules 1.1–1.14)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 1.1 | Use approved vocabulary | Every term must be in approved list or a 19-category technical noun |
+| 1.2 | Use as specified type | `React` is a framework (noun), not a verb |
+| 1.3 | Use with approved meaning | `cache` means temporary store, not "hide" |
+| 1.4 | Use approved forms only | Base verb forms, positive adjectives, no gerund nouns |
+| 1.5 | Nouns must have a category | Every technical noun fits categories 1-19 |
+| 1.6 | Unapproved nouns must be technical | Unknown terms allowed only if they fit a category |
+| 1.7 | Technical nouns are not verbs | `Docker` cannot be a verb |
+| 1.8 | Use established nouns | Prefer `PostgreSQL` over "the db" |
+| 1.9 | Choose short, clear nouns | Prefer `API` over "Application Programming Interface" after first use |
+| 1.10 | No slang or jargon | No "yolo-deploy", "hack", "kludge" |
+| 1.11 | One term per concept | Consistent naming throughout |
+| 1.12 | Verbs must have a category | Every technical verb fits categories 1-4 (verb) |
+| 1.13 | Technical verbs are not nouns | `deploy` is a verb, not a noun |
+| 1.14 | American English spelling | `initialize`, `color` |
+
+#### Section 2 — Noun Phrases (Rules 2.1–2.6)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 2.1 | Maximum 3 nouns in a phrase | `UserAuthServiceConfig` → split or hyphenate |
+| 2.2 | Use articles correctly | `the` for specific, `a` for general |
+| 2.3 | Avoid noun clusters | `authentication token validation` → `validate the authentication token` |
+| 2.4 | Compound nouns with hyphens | `runtime-error handler` |
+| 2.5 | Abbreviations explained first | `CI/CD (Continuous Integration/Continuous Deployment)` |
+| 2.6 | Consistent abbreviation usage | Once abbreviated, use that abbreviation consistently |
+
+#### Section 3 — Verbs (Rules 3.1–3.6)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 3.1 | Active voice only | "The function returns the value" not "The value is returned" |
+| 3.2 | Present tense | "The function reads the file" not "The function will read" |
+| 3.3 | Imperative mood in procedures | "Run the build command" not "You should run" |
+| 3.4 | One instruction per sentence | Split compound instructions |
+| 3.5 | Approved verb forms only | Base form (build), past participle (built) only in specific contexts |
+| 3.6 | No modal auxiliaries except "must"/"can" | Never "should", "could", "might" |
+
+#### Section 4 — Sentences (Rules 4.1–4.4)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 4.1 | Maximum 20 words (procedural) | Instructions: 20 words max |
+| 4.2 | Maximum 25 words (descriptive) | Explanations: 25 words max |
+| 4.3 | One topic per sentence | Do not combine setup and usage in one sentence |
+| 4.4 | Clear referents | No ambiguous "it", "this", "that" |
+
+#### Section 5 — Procedures (Rules 5.1–5.4)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 5.1 | Numbered steps | 1. Install dependencies. 2. Build the project. 3. Run the tests. |
+| 5.2 | One action per step | Each step does exactly one operation |
+| 5.3 | Steps in logical order | Chronological order only |
+| 5.4 | Conditional steps explicitly | "If the build fails, read the error log." |
+
+#### Section 6 — Descriptive Writing (Rules 6.1–6.4)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 6.1 | Topic sentence first | Start each paragraph with the main point |
+| 6.2 | Specific before general | Give the concrete example before the abstract principle |
+| 6.3 | Consistent terminology | Same terms throughout |
+| 6.4 | No redundancy | Do not repeat information across paragraphs |
+
+#### Section 7 — Safety Instructions (Rules 7.1–7.3)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 7.1 | BREAKING for data loss/security | `**BREAKING:** Version 3.0 removes the legacy API.` |
+| 7.2 | DEPRECATED for future removal | `**DEPRECATED:** useFetch will be removed in v4.0. Use useQuery.` |
+| 7.3 | NOTE for supplementary info | `**NOTE:** This endpoint requires admin privileges.` |
+
+#### Section 8 — Punctuation (Rules 8.1–8.3)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 8.1 | Standard punctuation | Periods, commas, colons per standard rules |
+| 8.2 | Code blocks with language | ` ```javascript ` not bare ` ``` ` |
+| 8.3 | Inline code for identifiers | Use backticks for `functionName`, `variableName` |
+
+#### Section 9 — Writing Practices (Rules 9.1–9.4 + GR1–GR4)
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| 9.1 | Logical paragraph structure | One idea per paragraph |
+| 9.2 | Consistent formatting | Same heading levels, list styles throughout |
+| 9.3 | Cross-references clear | Link to sections by heading, not page number |
+| 9.4 | Complete information | Do not assume reader knows prerequisites |
+
+**General Rules (GR1–GR4):**
+
+| Rule | Title | Code Domain Application |
+|------|-------|------------------------|
+| GR1 | Write for the target audience | Junior developer vs. senior architect → different detail levels |
+| GR2 | Use examples | Every abstract concept gets a concrete code example |
+| GR3 | Verify with the source | Cross-reference claims against actual code behavior |
+| GR4 | Review before publishing | Run STE-Code compliance check before merge |
+
+---
+
+### 19 Technical Code Noun Categories
+
+| # | Category | Examples | Count |
+|---|----------|----------|-------|
+| 1 | Language Keywords | `if`, `else`, `return`, `class`, `async`, `await`, `import`, `export`, `const`, `let`, `var`, `function`, `interface`, `type`, `enum` | 15+ |
+| 2 | Frameworks & Runtimes | `React`, `Node.js`, `Docker`, `Kubernetes`, `PostgreSQL`, `Redis`, `Deno`, `Bun`, `V8`, `JVM`, `.NET`, `LLVM` | 12+ |
+| 3 | Dev Tools & Build Systems | `webpack`, `esbuild`, `vite`, `prettier`, `eslint`, `git`, `npm`, `cargo`, `make`, `cmake`, `bazel` | 11+ |
+| 4 | Dependencies & Packages | `lodash`, `express`, `axios`, `pytest`, `serde`, `tokio`, `left-pad` (unapproved) | 7+ |
+| 5 | Deployment Targets | `staging`, `production`, `AWS`, `Vercel`, `Cloudflare`, `localhost`, `CI`, `CD`, `edge`, `region` | 10+ |
+| 6 | Modules, Classes & Services | `UserService`, `AuthModule`, `PaymentGateway`, `EventBus`, `DatabasePool`, `CacheLayer` | 6+ |
+| 7 | Algorithmic Terms | `hash`, `sort`, `bfs`, `dfs`, `O(n)`, `O(log n)`, `tree`, `graph`, `cache`, `memoize`, `idempotent` | 11+ |
+| 8 | Routing & State Management | `/api/users`, `/dashboard`, `useNavigate`, `Router`, `middleware`, `redirect`, `rewrite`, `proxy` | 8+ |
+| 9 | Data Sizes & Time Units | `500ms`, `2GB`, `200 OK`, `404 Not Found`, `64-bit`, `UTC`, `epoch`, `timeout`, `TTL` | 9+ |
+| 10 | String Literals & Logs | `"connection refused"`, `Error: timeout`, `console.log(...)`, `panic!(...)` | 4+ |
+| 11 | Roles, Teams & Services | `admin`, `moderator`, `viewer`, `OAuth provider`, `CI pipeline`, `CDN`, `auth service` | 7+ |
+| 12 | UI/UX & Accessibility | `button`, `modal`, `aria-label`, `focus`, `viewport`, `breakpoint`, `screen reader`, `keyboard nav` | 8+ |
+| 13 | Config & Preferences | `.env`, `.gitignore`, `tsconfig.json`, `settings.json`, `profile`, `rc file`, `dotfile` | 7+ |
+| 14 | Error States & Diagnostics | `NullPointerException`, `500`, `race condition`, `deadlock`, `livelock`, `OOM`, `stack overflow` | 7+ |
+| 15 | Spec Files & Manifests | `package.json`, `Dockerfile`, `openapi.yaml`, `Makefile`, `README.md`, `CHANGELOG.md`, `Cargo.toml` | 7+ |
+| 16 | Runtime Conditions | `cold start`, `warm cache`, `idle`, `under load`, `degraded`, `throttled`, `feature flag on`, `dark mode` | 8+ |
+| 17 | Terminal Colors & Themes | `red`, `green`, `cyan`, `magenta`, `bold`, `dim`, `256-color`, `truecolor`, `ANSI escape` | 9+ |
+| 18 | Bug & Defect Taxonomy | `crash`, `memory leak`, `race condition`, `XSS`, `SQL injection`, `DoS`, `data corruption`, `bit rot` | 8+ |
+| 19 | Network & Protocol | `HTTP/2`, `WebSocket`, `gRPC`, `TLS 1.3`, `DNS`, `TCP`, `UDP`, `REST`, `GraphQL`, `protobuf` | 10+ |
+
+---
+
+### 4 Technical Code Verb Categories
+
+| # | Category | Examples |
+|---|----------|----------|
+| 1 | Development Operations | `build`, `compile`, `test`, `lint`, `format`, `commit`, `push`, `deploy`, `rollback` |
+| 2 | Data Operations | `read`, `write`, `serialize`, `deserialize`, `parse`, `encode`, `decode`, `query`, `insert`, `migrate` |
+| 3 | Application Operations | `handle`, `route`, `authenticate`, `authorize`, `validate`, `schedule`, `dispatch`, `resolve` |
+| 4 | Communication Operations | `send`, `receive`, `publish`, `subscribe`, `stream`, `poll`, `broadcast`, `connect` |
+
+---
+
+### Canonical Synonym Table
+
+| Do Not Write | Write Instead | Type |
+|---|---|---|
+| do, perform, execute | run | verb (dev ops) |
+| get, obtain, fetch, retrieve | read | verb (data ops) |
+| set, configure, assign | write | verb (data ops) |
+| check, verify, validate, confirm | test | verb (dev ops) |
+| show, print, output | display | verb (app ops) |
+| start, begin, launch, initiate | start | verb (dev ops) |
+| stop, end, terminate, kill, abort | stop | verb (dev ops) |
+| make, create, generate, produce | build | verb (dev ops) |
+| change, update, modify, alter | update | verb (dev ops) |
+| send, transmit, dispatch, forward | send | verb (comm ops) |
+| receive, get back, accept | receive | verb (comm ops) |
+| connect, link, attach, join | connect | verb (comm ops) |
+| store, keep, save, persist, retain | store | verb (data ops) |
+| fix, correct, resolve, repair | repair | verb (dev ops) |
+| search, find, locate, discover | search | verb (data ops) |
+| move, transfer, shift, relocate | move | verb (data ops) |
+| delete, remove, erase, purge, wipe | delete | verb (data ops) |
+| enough, sufficient, adequate | sufficient | adjective |
+| correct, right, accurate, valid | correct | adjective |
+| incorrect, wrong, invalid | incorrect | adjective |
+| large, big, huge, massive | large | adjective |
+| small, tiny, little, compact | small | adjective |
+| fast, quick, rapid, swift | fast | adjective |
+| slow, sluggish, delayed | slow | adjective |
+| many, numerous, multiple, several | many | adjective |
+| few, little (quantity) | few | adjective |
+| must, need to, have to, should | must | modal |
+| can, able to, capable of | can | modal |
+| before (time), prior to | before | preposition |
+| after (time), following, subsequent to | after | preposition |
+| because of, due to, owing to | because of | preposition |
+| about, concerning, regarding, relating to | about | preposition |
+
+---
+
+### Polysemy Resolution Table
+
+| Term | Approved Meaning | Disallowed Meanings |
+|------|-----------------|-------------------|
+| cache | Temporary data store | To hide, to stockpile |
+| handle | Process (a request/event) | Door handle, username, nickname |
+| run | Execute (a program/command) | Physical running, campaign, tear in fabric |
+| build | Compile from source | Physical construction, physique |
+| test | Verify behavior/performance | Exam, challenge, trial |
+| deploy | Release to target environment | Military deployment, unfold |
+| stream | Continuous data flow | River, continuous broadcast |
+| route | Direct to destination | Road, path, course |
+| crash | Unexpected termination | Vehicle collision, loud noise |
+| leak | Unintended resource release | Physical liquid escape, disclose secrets |
+| race | Concurrent access conflict | Speed competition, ethnic group |
+| pool | Shared resource collection | Swimming pool, billiards |
+| thread | Unit of execution | Sewing thread, discussion thread |
+| pipe | Inter-process data channel | Smoking pipe, plumbing pipe |
+| fork | Create a copy (process/repo) | Eating utensil, branch in road |
+| mount | Attach a filesystem | Climb onto, fix in place |
+| shell | Command-line interpreter | Hard outer covering, explosive projectile |
+| kernel | Operating system core | Seed, essential part |
+| port | Network endpoint or adapt | Harbor, left side of ship |
+| root | Superuser or base directory | Plant root, source/origin, square root |
+| host | Computer on a network | Entertain guests, large number |
+| client | Service consumer | Customer, patron |
+| server | Service provider | Waiter, tray |
+| stack | LIFO data structure | Pile, chimney |
+| heap | Dynamic memory allocation | Pile, untidy mass |
+| tree | Hierarchical data structure | Plant with trunk, wooden object |
+| graph | Node-edge structure | Chart, diagram, plot |
+| table | Database relation | Furniture, chart |
+| key | Unique identifier | Metal opener, piano key, crucial |
+| value | Associated data | Worth, importance, moral principle |
+| object | Class instance | Physical thing, goal, oppose |
+| class | Blueprint for objects | Lesson, social rank, elegance |
+| method | Function in a class | Technique, procedure, approach |
+| property | Attribute of an object | Ownership, land, characteristic |
+| event | Occurrence that triggers handlers | Social occasion, sports competition |
+| promise | Future value (async result) | Assurance, pledge, potential |
+| stream | Sequence of data over time | River, flow, continuous broadcast |
+
+---
+
+## S3 — Page-Reading Protocol
+
+### Document State Tracking
+
+For each document processed:
+
+```
+{
+  "document_type": "README | API_DOC | COMMENT_BLOCK | COMMIT_MESSAGE | ERROR_LOG",
+  "total_lines": N,
+  "current_section": null,
+  "sections_completed": 0,
+  "violations_found": 0,
+  "fixes_applied": 0,
+  "compliance_percentage": 0
+}
+```
+
+### Page Classification (Code Documents)
+
+| Type | Signatures | Processing Priority |
+|------|-----------|-------------------|
+| README | Title line, installation section, usage section | Process S1-S6 sequentially |
+| API Doc | Function/method signatures, parameter tables, return types | Focus on S2 (knowledge base) first |
+| Comment Block | `//`, `/* */`, `#`, `--` prefixes | Short-circuit S5 (UML) |
+| Commit Message | `< 72 char` subject, bullet body | Run P1-P14 only |
+| Error Log | Timestamps, stack traces, error codes | Classification only |
+| CHANGELOG | Version headers, date stamps, bullet changes | S7 output format with tables |
+| Config File | Key-value pairs, comments, sections | P1 vocabulary check only |
+
+---
+
+## S4 — Skill Extraction Framework (5 Patterns)
+
+### Pattern 1 — Class/Module Extraction
+
+```
+INPUT: Class or module definition block
+EXTRACT:
+  - Class name
+  - Parent class / implemented interfaces
+  - Public methods (name, parameters, return type)
+  - Properties (name, type, default value)
+  - Constructor signature
+OUTPUT: Mermaid class diagram + structured table
+```
+
+### Pattern 2 — Association/Dependency Extraction
+
+```
+INPUT: Import statements, dependency injection, service references
+EXTRACT:
+  - Import source → dependency name
+  - Constructor parameters → injected services
+  - Function calls → dependencies used
+  - Package.json/Cargo.toml → external dependencies
+OUTPUT: Mermaid flowchart showing dependency graph
+```
+
+### Pattern 3 — Procedure/Workflow Extraction
+
+```
+INPUT: Numbered steps or sequential function calls
+EXTRACT:
+  - Step number and description
+  - Branching conditions (if/else)
+  - Loop constructs (for/while)
+  - Error handling paths (try/catch)
+  - Side effects (writes, network calls)
+OUTPUT: Mermaid flowchart with decision nodes
+```
+
+### Pattern 4 — Condition/Guard Extraction
+
+```
+INPUT: if/else blocks, validation logic, guard clauses
+EXTRACT:
+  - Condition expression
+  - True branch action
+  - False branch action
+  - Error thrown or value returned
+OUTPUT: Decision table
+```
+
+### Pattern 5 — Safety/Breaking Change Extraction
+
+```
+INPUT: BREAKING, DEPRECATED, NOTE markers
+EXTRACT:
+  - Severity level (BREAKING > DEPRECATED > NOTE)
+  - Affected API/interface
+  - Version of change
+  - Migration path
+  - Alternative to use
+OUTPUT: Breaking change table
+```
+
+---
+
+## S5 — UML Extraction (Code Domain)
+
+### Class Diagrams
+
+```mermaid
+classDiagram
+    class ServiceName {
+        +method1(param) ReturnType
+        +method2(param) ReturnType
+        -privateField: Type
+    }
+    ServiceName --|> ParentClass
+    ServiceName ..> DependencyService
+```
+
+### Sequence Diagrams (Procedure Flow)
+
+```mermaid
+sequenceDiagram
+    Client->>Service: request(args)
+    Service->>Database: query(args)
+    Database-->>Service: result
+    Service-->>Client: response
+```
+
+### Flowcharts (Decision Trees)
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Condition?}
+    B -->|Yes| C[Action A]
+    B -->|No| D[Action B]
+    C --> E[End]
+    D --> E
+```
+
+---
+
+## S6 — Recursive Questioning Protocol (13 Questions)
+
+For each section of the document, ask these 13 questions in order:
+
+1. **What type of document is this?** (README, API doc, comment, commit message, error, changelog, config)
+2. **What is the main purpose?** (instruct, explain, warn, document, report)
+3. **Which 19-category does each technical noun belong to?**
+4. **Which 4-category does each technical verb belong to?**
+5. **Are any unapproved terms used?** (check against synonym table)
+6. **Are any technical nouns used as verbs?** (P7 violation)
+7. **Are any technical verbs used as nouns?** (P13 violation)
+8. **Are sentences within length limits?** (20 words procedural, 25 words descriptive)
+9. **Is active voice used consistently?** (Rule 3.1)
+10. **Are code blocks properly formatted?** (language identifier, indentation)
+11. **Are BREAKING/DEPRECATED/NOTE markers present where needed?** (Rules 7.1-7.3)
+12. **Is terminology consistent throughout?** (P11 — one term per concept)
+13. **Can a new developer understand this without prior knowledge?** (GR1 — target audience)
+
+---
+
+## S7 — Output Format
+
+### Per-Turn Output
+
+After processing each section:
+
+```markdown
+## Section: [Heading] (Lines N–M)
+
+### Violations Found: X
+| # | Line | Type | Original | Correction | Principle |
+|---|------|------|----------|------------|-----------|
+
+### Corrected Text
+[The section rewritten in STE-Code compliant form]
+
+### UML Extracted
+[Any Mermaid diagrams from this section]
+```
+
+### Final Consolidated Output
+
+After processing all sections:
+
+```markdown
+# STE-Code Compliance Report
+
+## Document: [filename]
+## Total Violations: N found, M fixed (X% compliant)
+
+### Corrected Document
+[Full corrected text]
+
+### All Changes
+[Complete changes table]
+
+### UML Diagrams
+[All Mermaid diagrams]
+
+### Unresolved Items
+[Items requiring human judgment]
+```
+
+---
+
+## S8 — Context Window Management
+
+### Keep in Context (Always)
+- S0 (How to use this manual) — ~150 tokens
+- S1 (14 Principles) — ~2,500 tokens
+- Current document state — varies
+
+### Discard After Use (Per Section)
+- Raw document pages (after extraction)
+- Intermediate extraction notes
+- Previous section's raw text (keep corrected version)
+
+### Token Budget Strategy
+
+```
+Total context: 8,192 tokens
+├── Manual core (S0 + S1): ~2,650 tokens
+├── Current section (raw): ~1,500 tokens
+├── Working state: ~500 tokens
+├── Output buffer: ~3,000 tokens
+└── Margin: ~542 tokens
+```
+
+For large documents (>3,000 tokens), process in sections of ~1,500 tokens each. After each section, keep only the corrected output and discard the raw input.
+
+---
+
+> **Reference:** ASD-STE100 Issue 9, January 2025 — 53 writing rules + 4 GR rules, 19 technical noun categories, 434 pages
+> **Model:** deepseek-v4-pro
+> **Sections:** S0–S8 covering the complete STE-Code self-reading protocol
