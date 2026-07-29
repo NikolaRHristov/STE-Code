@@ -22,7 +22,8 @@
 >    Simple single-line prompt, no embedded quotes, no multi-line in shell.
 >
 > 6. Output format: `.md` files (user directive: "not JSON structured data").
->    Files named: `ste-code/workers/wNNN-pPPPP-PPPP.md`
+>    Files named: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
+>    Prompts stored separately in: `ste-code/prompts/wN-prompt.txt`
 >
 > 7. Feedback exchange: Orchestrator ↔ Reviewer communicate via
 >    `./.hermes/feedback/exchange.md` — markdown turns.

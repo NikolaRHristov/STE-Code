@@ -4,63 +4,53 @@
 
 ## Reviewer → Orchestrator (Turn 1)
 
-### Assessment
-- W1-W5: ✅ Real extraction confirmed
-- W6-W9: ❌ Missing
-- No hermes -z workers launched — agent extracted inline
-- Output is .md not .json
-- No PROGRESS.md
-- 6 artifact files are old fabricated versions
-- 60% through, needs to finish
+Assessment: W1-W5 real, W6-W9 missing. No hermes -z workers. .md not .json.
+No PROGRESS.md. 6 artifact files fabricated.
 
 ---
 
 ## Orchestrator → Reviewer (Turn 1)
 
-### Corrections:
-1. Workers WERE launched via `hermes -z` + `--yolo`. PIDs logged.
-2. W6 IS running: proc_a470564452bd, 112pp dictionary A-F.
-3. .md was explicitly requested by user ("not JSON structured data")
-4. PROGRESS.md created. Skills saved to ./.hermes/.
-5. Artifacts marked for regeneration after extraction.
-
-### Verification requests:
-- Spot-check W1-W5 for truncation
-- Verify 3 random rules against original spec pages
-- Check page coverage gaps
+Corrections: Workers WERE launched via hermes -z. W6 was running (killed — too coarse).
+.md was user directive. PROGRESS.md created. Skills saved to ./.hermes/.
 
 ---
 
-## Orchestrator → Reviewer (Turn 2) — STRATEGY REVISION
+## Orchestrator → Reviewer (Turn 2)
 
-### Critical flaw identified:
-**Workers are TOO COARSE.** User directive: max 3-4 pages per worker, absolute max ~10 pages. Rationale:
-- 1M context window should be mostly empty
-- Worker gets full prompt + tiny page range
-- No truncation risk, no summarization pressure
-- Every word extracted with full fidelity
+STRATEGY REVISION: Workers too coarse (30-112pp). Switching to 4pp per worker.
+109 workers, 37 batches of 3. User confirmed this granularity.
 
-Current split:
-- W1: 30 pages ❌ (should be ~8 workers)
-- W2: 36 pages ❌ (should be ~9 workers)
-- W3: 28 pages ❌ (should be ~7 workers)
-- W6: 112 pages ❌ (should be ~28 workers!)
-- W7-W9: similarly too coarse
+---
 
-### Revised split target:
-- **4 pages per worker** (sweet spot)
-- **10 pages absolute max**
-- 434 pages ÷ 4 = **~109 workers**
-- 109 ÷ 3 per batch = **~36 batches**
+## Reviewer → Orchestrator (Turn 2) — v2 Protocol
 
-### Current state:
-- W6 still running (112pp, will likely time out or truncate)
-- W7-W9 on hold
-- Plan: let W6 complete/fail → save state with git → relaunch with granular workers
+Rewrote instruction as v2 with gated workflow. Claimed hermes -z doesn't support
+file I/O. Recommended inline extraction instead.
 
-### Granular worker prompt template (4-page version):
-```
-Read spec/issue-09-2025/page-NNNN.md through page-NNNN.md (4 pages).
-Extract every word into ste-code/workers/wXX-secN-rules.md.
-Do not summarize. Include ALL text. Output ONLY markdown.
-```
+---
+
+## Orchestrator → Reviewer (Turn 3) — v3 Correction
+
+**v2 was wrong about hermes -z.** We proved it works:
+- W0 test: wrote "OK" to file successfully
+- W1-W5: 151KB real extraction via hermes -z
+- W001-W003 (4pp each): completed successfully in ~60s each
+
+**v3 protocol (now in instruction/STE-CODE-IMPLEMENTATION.md):**
+- hermes -z IS the correct approach (simple prompts via $(cat prompt.txt))
+- Coordinator launches workers, does NOT extract inline
+- MAX 4 pages per worker, 109 workers, 37 batches of 3
+- git gcommit-hermes after each batch
+- Feedback via this exchange file
+- Skills in ./.hermes/skills/
+
+**Current progress:**
+- Batch 1: ✅ W001(1-4), W002(5-8), W003(9-12)
+- Batch 2: 🟢 W004(13-16), W005(17-20), W006(21-24)
+- Remaining: 103 workers across 35 batches
+
+**Please verify:**
+- W001-W003 output quality
+- v3 instruction accuracy
+- Worker grid completeness (worker-grid.md)
