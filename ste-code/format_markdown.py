@@ -28,32 +28,32 @@ def fix_heading_spacing(text: str) -> str:
     return text
 
 def fix_table_spacing(text: str) -> str:
-    """Ensure blank lines before and after markdown tables."""
+    """Ensure blank lines before and after markdown table BLOCKS only — never between rows."""
     lines = text.split('\n')
     result = []
+    in_table = False
+    prev_was_table = False
+    
     for i, line in enumerate(lines):
         stripped = line.strip()
-        # Table row detection
         is_table_line = stripped.startswith('|') and stripped.endswith('|')
-        # Separator line
         is_sep = bool(re.match(r'^\|[\s\-:|]+\|$', stripped))
+        is_table_content = is_table_line or is_sep
         
-        prev_line = result[-1] if result else ''
-        prev_stripped = prev_line.strip() if prev_line else ''
-        
-        if (is_table_line or is_sep) and prev_stripped and prev_stripped:
-            # Ensure blank line before table
-            if prev_line != '':
+        if is_table_content:
+            if not prev_was_table and result and result[-1] != '':
+                # Starting a new table block — ensure blank line before
                 result.append('')
+            in_table = True
+        else:
+            if in_table and stripped:
+                # Table block just ended — ensure blank line after
+                result.append('')
+            in_table = False
         
         result.append(line)
-        
-        # After table ends, ensure blank line
-        if not is_table_line and not is_sep and prev_stripped and (
-            prev_stripped.startswith('|') or re.match(r'^\|[\s\-:|]+\|$', prev_stripped)
-        ):
-            if stripped:
-                result.insert(-1, '')  # Insert blank before current non-table line
+        prev_was_table = is_table_content
+    
     return '\n'.join(result)
 
 def remove_trailing_whitespace(text: str) -> str:

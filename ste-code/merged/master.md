@@ -70,55 +70,32 @@ The table that follows includes all changes in this issue 9.
 **General changes**
 
 | Subject | Change |
-
 |---|---|
-
 | Page status | All pages changed to Issue 9. |
-
 | Page date | All pages have the latest issue date (2025-01-15). |
-
 | Typing, various editing and formatting errors | These are corrected, where known. |
-
 | General | STE terminology mostly aligns with ISO standards on terminology work (refer to the general introduction, reference documents). |
-
 | | Help (light bulb symbol) added to some rules in part 1 where applicable. |
-
 | | All texts in part 1 comply as much as possible with STE. |
 
 **Preliminary pages and general introduction**
 
 | Subject | Change |
-
 |---|---|
-
 | Title page | Positions for title and subtitle in the page changed. |
-
 | Subtitle | Changed to read: "Standard for technical documentation" |
-
 | Issue date | Changed. |
-
 | Date for ASD copyright | Changed. |
-
 | Copyright notices | Name of ASD changed. |
-
 | | Date for ASD copyright changed. |
-
 | | Reference to EU trademark added. |
-
 | | Special usage rights revised. |
-
 | | Disclaimer of liability revised. |
-
 | Highlights | New text to show the changes included in this issue. |
-
 | Table of contents | Some terms changed. |
-
 | Subject-to-rule index | Revised to align it with the contents of this issue 9. |
-
 | General introduction | Text revised or changed where applicable. |
-
 | | Change form revised. |
-
 | | List of reference documents added. |
 
 **Issue 9 Highlights** — Page HI-1
@@ -127,29 +104,17 @@ The table that follows includes all changes in this issue 9.
 **Part 1 – Writing rules**
 
 | Subject | Change |
-
 |---|---|
-
 | Section 1 – Words | |
-
 | Rule 1.1 | Wording for rule revised. Explanatory text revised to include the definitions of technical nouns (noun terms) and technical verbs (verb terms). The term "technical noun" fully replaces the previous term "technical name" in all parts of the document. Help added. |
-
 | Rule 1.2 | Wording for rule revised. Explanatory text revised or changed where necessary. Help added. |
-
 | Rule 1.3 | Explanatory texts changed or added where necessary. Texts and sequence of the examples revised or changed. |
-
 | Rule 1.4 | Explanatory text revised or changed where necessary. Summary tables (verbs and adjectives) revised. |
-
 | Rule 1.5 | Wording for rule revised. Explanatory text revised or changed where necessary. Category 21, Law and regulations, added. Category 22, Animals, plants, and other life forms, added. Category titles fully revised. Short explanatory text added for each category. New examples of technical nouns added in the applicable categories. Help added in category 17, Colors, to replace the previous note. Help added at the end of the rule. |
-
 | Rule 1.6 | Wording for rule revised. Explanatory text revised or changed where necessary. New explanatory text and related example added at the end. |
-
 | Rule 1.7 | Wording for rule revised. Explanatory text revised or changed where necessary. |
-
 | Rule 1.8 | Wording for rule revised. Explanatory text revised or changed where necessary. |
-
 | Rule 1.9 | Wording for rule revised. Explanatory text revised or changed where necessary. |
-
 | Rule 1.10 | Wording for rule revised. Explanatory text revised or changed where necessary. New examples added. |
 
 **Issue 9 Highlights** — Page HI-2
@@ -158,245 +123,125 @@ The table that follows includes all changes in this issue 9.
 ## Summary of Changes
 
 | Rule / Item | Reference | Description of Change |
-
 |---|---|---|
-
 | **Section 1 – Words** | | |
-
 | Rule 1.11 | | Wording for rule revised. |
-
 | | | Explanatory text revised or changed where necessary. |
-
 | Rule 1.12 | | Explanatory text fully revised. |
-
 | | | Category 3 changed to include subcategories for applicable subject fields. It fully replaces the previous category 4. |
-
 | | | New category 4 created. |
-
 | | | New examples of technical verbs added in the applicable categories. |
-
 | | | Help added. |
-
 | Rule 1.13 | | Explanatory text revised or changed where necessary. |
-
 | | | Example revised. |
-
 | Rule 1.14 | | Wording for rule revised. |
-
 | | | Explanatory text revised. |
-
 | | | Help added. |
-
 | **Section 2 – Multi-word nouns** | | |
-
 | | Title and subtitle | Changed to read: Multi-word nouns. |
-
 | Rule 2.1 | Rule 2.1 | Wording for rule revised. |
-
 | | | Explanatory text revised or changed where necessary. |
-
 | Rule 2.2 | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | | | New examples added. |
-
 | | Rule 2.3 | Removed from section 2 and moved to section 4 to become rule 4.5. |
-
 | **Section 3 – Verbs** | | |
-
 | | General | Subtitle before rule 3.1 revised. |
-
 | Rule 3.1 | Rule 3.1 | Wording for rule revised. |
-
 | | | Table removed. |
-
 | | | Help added. |
-
 | Rule 3.2 | | Wording for rule revised. |
-
 | | | Table revised. |
-
 | | | Explanatory text revised. |
-
 | Rule 3.3 | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | Rule 3.4 | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | Rule 3.5 | | Wording for rule revised. |
-
 | | | Explanatory text revised where necessary. |
-
 | Rule 3.6 | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | | | Graphic chart (passive and active voice) revised. |
-
 | Rule 3.7 | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | **Section 4 – Sentences** | | |
-
 | General | General | Subtitles before rules 4.1 and 4.4 revised. |
-
 | | | New subtitle before rule 4.5. |
-
 | | | Explanatory text before rule 4.1 revised. |
-
 | | Rule 4.1 | Explanatory text revised or changed where necessary. |
-
 | | Rule 4.2 | Explanatory text revised where necessary. |
-
 | Rule 4.3 | Rule 4.3 | Explanatory text revised or changed where necessary. |
-
 | | | New examples of vertical lists added. |
-
 | | | Help added. |
-
 | Rule 4.4 | | Subtitles revised. |
-
 | | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | Rule 4.5 | | New rule about articles and demonstrative adjectives added to this section (it was previously rule 2.3). |
-
 | | | Wording for rule revised. |
-
 | | | Explanatory text revised or changed where necessary. |
-
 | | | New examples added. |
-
 | | | Help added. |
-
 | **Section 5 – Procedural writing** | | |
-
 | | General | Subtitle before rule 5.3 revised. |
-
 | Rule 5.1 | Rule 5.1 | Explanatory text revised or changed where necessary. |
-
 | | | Help added. |
-
 | | Rule 5.2 | Explanatory text revised or changed where necessary. |
-
 | Rule 5.3 | Rule 5.3 | Explanatory text revised or changed where necessary. |
-
 | | | New examples added. |
-
 | Rule 5.4 | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | Rule 5.5 | | Explanatory text revised or changed where necessary. |
-
 | | | Explanatory text in the examples revised. |
-
 | | | New explanatory text and examples added. |
-
 | | | Help added. |
-
 | **Section 6 – Descriptive writing** | | |
-
 | | Content structure | Explanatory text revised. |
-
 | | Rule 6.1 | Explanatory text revised or changed where necessary. |
-
 | Rule 6.2 | Rule 6.2 | Wording for rule revised. |
-
 | | | Explanatory text revised or changed where necessary. |
-
 | | Rule 6.3 | Explanatory text revised or changed where necessary. |
-
 | | Rule 6.4 | Explanatory text revised or changed where necessary. |
-
 | | Rule 6.5 | Explanatory text revised or changed where necessary. |
-
 | | Rule 6.6 | Explanatory text revised or changed where necessary. |
-
 | **Section 7 – Safety instructions** | | |
-
 | Definitions | Definitions | Explanatory text added at the end. |
-
 | | | Help added. |
-
 | Rule 7.1 | | Explanatory text and related examples revised or changed where necessary. |
-
 | | | Help added. |
-
 | Rule 7.2 | | Wording for rule revised. |
-
 | | | Explanatory text revised or changed where necessary. |
-
 | Rule 7.3 | | Wording for rule revised. |
-
 | | | Explanatory text revised or changed where necessary. |
-
 | **Section 8 – Punctuation and word count** | | |
-
 | Punctuation | Punctuation | Explanatory text revised. |
-
 | | | Reference book added and information revised. |
-
 | Rule 8.1 | | Wording for rule revised. |
-
 | | | Explanatory text and related examples revised or changed where necessary. |
-
 | Rule 8.2 | | Wording for rule revised. |
-
 | | | Explanatory text revised where necessary. |
-
 | | | Help added. |
-
 | | Rule 8.3 | Wording for rule revised. |
-
 | Rule 8.4 | | Wording for rule revised. |
-
 | | | Explanatory text revised or changed where necessary. |
-
 | | Rule 8.5 | No changes. |
-
 | Rule 8.6 | Rule 8.6 | Wording for rule revised. |
-
 | | | Explanatory texts and related examples revised or changed where necessary. |
-
 | | | 8.6.1. Help added. |
-
 | | | 8.6.2. Changed to include a revised word count for numbers together with units of measurement. |
-
 | | | 8.6.3. Examples changed or added. |
-
 | | | 8.6.7. Proper nouns of individuals, groups, organizations, and geopolitical entities added. Related examples added. |
-
 | | Rule 8.7 | Explanatory text revised or changed where necessary. |
-
 | **Section 9 – Writing practices** | | |
-
 | | General | Subtitle before rules 9.2 revised. |
-
 | Rule 9.1 | Rule 9.1 | Wording for rule revised. |
-
 | | | Explanatory texts revised or changed where necessary. |
-
 | | | How to use a different sentence construction, first example changed. |
-
 | | Rule 9.2 | Explanatory text revised or changed where necessary. |
-
 | | Rule 9.3 | Explanatory text revised or changed where necessary. |
-
 | | Rule 9.4 | Explanatory text revised or changed where necessary. |
-
 | **General recommendations (GR)** | | |
-
 | GR-1 thru GR-6 | GR-1 thru GR-6 | Explanatory text and related examples revised or changed where necessary. |
-
 | | GR-7 | New general recommendation for "Inclusive language" added. |
-
 | | GR-8 | New general recommendation for "Possessive form" added. |
 
 ## Introduction
@@ -426,427 +271,218 @@ A word in lowercase letters is not approved in STE.
 NOTE: The word "revised" tells that only a small number of words are replaced or changed in the applicable texts. The word "changed" tells that the applicable text is fully changed or almost fully changed.
 
 | Word (POS) | Meaning & Examples |
-
 |---|---|
-
 | **abandon (v) — UNNAPROVED** | Approved alternatives inverted. For the second approved alternative STOP (v), STE and non-STE examples changed. |
-
 | **ABRASIVE (adj)** | STE example revised. |
-
 | **acceptable (adj) — UNNAPROVED** | Second and third STE examples revised. |
-
 | **ACCIDENT (n)** | STE example revised. |
-
 | **accomplish (v) — UNNAPROVED** | Help revised. Second STE and non-STE examples revised. |
-
 | **accumulation (n) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **act (v) — UNNAPROVED** | Approved meaning revised. Non-STE example revised. |
-
 | **action (n) — UNNAPROVED** | TASK (n) added as an approved alternative. Related STE and non-STE examples added. |
-
 | **activate (v) — UNNAPROVED** | Removed from the word list. |
-
 | **ACTIVATE (v)** | Added to the word list as approved. |
-
 | **active (adj) — UNNAPROVED** | Removed from the word list. |
-
 | **ACTIVE (adj)** | Added to the word list as approved. |
-
 | **activity (n) — UNNAPROVED** | TASK (n) and PROCEDURE (n) added as an approved alternative. Related STE and non-STE examples added. For the approved alternative WORK (n), STE and non-STE examples changed. |
-
 | **ADJACENT (adj)** | STE example revised. |
-
 | **adopt (v) — UNNAPROVED** | STE example revised. |
-
 | **adverse (adj) — UNNAPROVED** | STE and non-STE examples revised. Help revised. Related STE and non-STE examples added. |
-
 | **advisable (adj) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **advise (v) — UNNAPROVED** | First and second STE and non-STE examples revised. |
-
 | **affect (v) — UNNAPROVED** | Help revised. Related STE and non-STE examples added. |
-
 | **AFTER (conj)** | STE example revised. |
-
 | **AGREE (v)** | STE example revised. |
-
 | **AID (n)** | STE example revised. |
-
 | **alert (v) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **allocate (v) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **allowable (adj) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **already (adv) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **ALTERNATIVE (adj)** | STE example revised. |
-
 | **ALTERNATIVE (n)** | STE example revised. |
-
 | **alternatively (adv) — UNNAPROVED** | STE example revised. |
-
 | **amendment (n) — UNNAPROVED** | First STE example revised. |
-
 | **among (prep) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **annotation (n) — UNNAPROVED** | STE and non-STE examples revised. RECORD (v) added as an approved alternative. Related STE and non-STE examples added. |
-
 | **another (adj) — UNNAPROVED** | ADD (v) removed from the approved alternatives. First and third STE and non-STE examples revised. |
-
 | **appear (v) — UNNAPROVED** | Second and third STE examples revised. |
-
 | **APPLY (v)** | Second approved alternative added. Related STE examples aligned. |
-
 | **APPROVAL (n)** | STE example revised. |
-
 | **approve (v) — UNNAPROVED** | STE example revised. |
-
 | **AROUND (prep)** | Help added. Related STE and non-STE examples added. |
-
 | **arrest (v) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **AS … AS (conj)** | STE example revised. Help revised. |
-
 | **ask (v) — UNNAPROVED** | First STE and non-STE examples revised. |
-
 | **assistance (n) — UNNAPROVED** | HELP (v) added as an approved alternative. Related STE and non-STE examples added. For the approved alternative AID (n), STE and non-STE examples changed. |
-
 | **associated (adj) — UNNAPROVED** | Third and fourth approved alternatives revised. |
-
 | **assure (v) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **AT (prep)** | Third STE example revised. |
-
 | **at least (adv) — UNNAPROVED** | Removed from the word list. |
-
 | **attention (n) — UNNAPROVED** | First STE and non-STE examples revised. |
-
 | **audible (adj) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **AUTHORITY (n)** | STE example revised. |
-
 | **AUTOMATIC (adj)** | STE example revised. |
-
 | **avert (v) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **aware (adj) — UNNAPROVED** | First and second STE and non-STE examples changed. |
-
 | **AXIAL (adj)** | STE example revised. |
-
 | **BAD (v)** | Approved meaning revised. Second STE and non-STE examples revised. |
-
 | **BE (v)** | Help revised. |
-
 | **bear down (v) — UNNAPROVED** | Removed from the word list. |
-
 | **BECOME (v)** | Help added. |
-
 | **BEFORE (con)** | STE example revised. |
-
 | **below (adv) — UNNAPROVED** | Added to the word list. |
-
 | **beside (prep) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **big (adj) — UNNAPROVED** | Help added. |
-
 | **blank (v) — UNNAPROVED** | SEAL (v) added as an approved alternative. Related STE and non-STE examples added. |
-
 | **blank off (v) — UNNAPROVED** | Removed from the word list. |
-
 | **blank out (v) — UNNAPROVED** | Removed from the word list. |
-
 | **BLEED (v)** | STE example revised. |
-
 | **BLOCKAGE (n)** | STE example revised. |
-
 | **BLOW (v)** | STE example revised. |
-
 | **brightness (n) — UNNAPROVED** | Removed from the word list. |
-
 | **brilliance (n) — UNNAPROVED** | Second non-STE example revised. |
-
 | **bring (v) — UNNAPROVED** | Second STE example revised. |
-
 | **brush (v) — UNNAPROVED** | Examples inverted. |
-
 | **BUT (conj)** | STE example revised. |
-
 | **BY (prep)** | Help removed. |
-
 | **by means of (prep) — UNNAPROVED** | STE example revised. |
-
 | **calculation (n) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **call (v) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **CAN (v)** | Approved meaning revised. Help added. Related STE and non-STE examples added. |
-
 | **CANCEL (v)** | Second STE example revised. |
-
 | **CANNOT (v)** | Approved meaning revised. |
-
 | **capable (adj) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **care (n) — UNNAPROVED** | First STE example revised. |
-
 | **carry (v) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **carry out (v) — UNNAPROVED** | Help revised. |
-
 | **case (n) — UNNAPROVED** | Non-STE example revised. |
-
 | **centralize (v) — UNNAPROVED** | Second approved alternative removed. |
-
 | **chance (by chance) — UNNAPROVED** | (n) First STE and non-STE examples revised. |
-
 | **characteristic (n) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **check (v) — UNNAPROVED** | Second STE and non-STE examples revised. |
-
 | **CHEMICAL (adj)** | STE example revised. |
-
 | **chock (v) — UNNAPROVED** | STE example revised. |
-
 | **choose (v) — UNNAPROVED** | ALTERNATIVE (adj) added as an approved alternative. Related STE and non-STE examples added. |
-
 | **clamp (v) — UNNAPROVED** | Second approved alternative revised. |
-
 | **CLEAR (adj)** | Second approved meaning added. Related STE example added. |
-
 | **CLEARLY (adv)** | Approved meaning revised. |
-
 | **click (v) — UNNAPROVED** | Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
-
 | **close (adj) — UNNAPROVED** | STE and non-STE examples revised. |
-
 | **coincident (adj) — UNNAPROVED** | ALIGN (v) added as an approved alternative. Related STE and non-STE examples added. |
 
 ## Part 2 — Dictionary (Changes from Issue 8)
 
 | Word (POS) | Change Description |
-
 |---|---|
-
 | **collapse (v) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **COME (v)** | Help added. |
-
 | **COME ON (v)** | Help added. |
-
 | **communicate (v) — UNAPPROVED** | TELL (v) removed from the approved alternatives. For the approved alternative SPEAK (v), STE and non-STE examples revised. |
-
 | **CONTACT (v)** | HEAR (v), and COMMUNICATION (n) added as approved alternatives. Related STE and non-STE examples added. |
-
 | **communication (n) — UNAPPROVED** | Removed from the word list. |
-
 | **COMMUNICATION (n)** | Added to the word list as approved. |
-
 | **COMPATIBLE (adj)** | Second STE example revised. |
-
 | **compile (v) — UNAPPROVED** | Third STE and non-STE examples revised. |
-
 | **completely (adv) — UNAPPROVED** | STE example revised. |
-
 | **comply (v) — UNAPPROVED** | First STE and non-STE examples revised. Help revised. |
-
 | **COMPONENT (n)** | STE example revised. |
-
 | **compulsory (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **confirm (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **conclusion (n) — UNAPPROVED** | First STE example revised. |
-
 | **CONNECT (v)** | Second STE example revised. |
-
 | **consecutively (adv) — UNAPPROVED** | SEQUENCE (n) added as an approved alternative. Related STE and non-STE examples added. |
-
 | **consequence (n) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **contact (v) — UNAPPROVED** | Removed from the word list. |
-
 | **CONTACT (v)** | Added to the word list as approved. |
-
 | **cool (v) — UNAPPROVED** | Second STE example revised. |
-
 | **correspond (v) — UNAPPROVED** | Second STE example revised. |
-
 | **critical (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **cycle (v) — UNAPPROVED** | Approved alternative changed. |
-
 | **DAMAGE (n)** | STE example revised. |
-
 | **damp (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **danger (n) — UNAPPROVED** | Help revised. |
-
 | **deactivate (v) — UNAPPROVED** | Removed from the word list. |
-
 | **DEACTIVATE (v)** | Added to the word list as approved. |
-
 | **decrease (n) — UNAPPROVED** | STE example revised. |
-
 | **deep (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **DEEP (adj)** | Added to the word list as approved. |
-
 | **DEFLATE (v)** | First STE example revised. |
-
 | **de-ice (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **delay (n) — UNAPPROVED** | First STE example revised. |
-
 | **delete (v) — UNAPPROVED** | First STE and non-STE examples revised. Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
-
 | **demand (v) — UNAPPROVED** | MANDATORY (adj) removed as the approved alternative. NECESSARY (adj) added as the approved alternative. Related STE example changed. |
-
 | **DEPLOY (v)** | First STE example revised. |
-
 | **design (v) — UNAPPROVED** | Non-STE example revised. |
-
 | **destroy (v) — UNAPPROVED** | UNSERVICEABLE (adj) removed as the approved alternative. BREAK (v) added as the approved alternative. Related STE example changed. |
-
 | **dim (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **DIMENSION (n)** | STE example revised. |
-
 | **DISENGAGE (v)** | First STE example revised. |
-
 | **dispose of (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **disposition (n) — UNAPPROVED** | First STE example revised. |
-
 | **DISTANCE (n)** | STE example revised. |
-
 | **distinctly (adv) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **distort (v) — UNAPPROVED** | STE example revised. |
-
 | **disturb (v) — UNAPPROVED** | First STE example revised. |
-
 | **DO (v)** | Second approved meaning revised. |
-
 | **don (v) — UNAPPROVED** | First STE example revised. Second STE and non-STE examples revised. |
-
 | **double (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **drag (v) — UNAPPROVED** | Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
-
 | **dress (v) — UNAPPROVED** | First and second STE and non-STE examples changed. |
-
 | **DRINK (v)** | Help added. |
-
 | **DRY (v)** | Second STE example revised. |
-
 | **EACH (adj)** | STE example revised. |
-
 | **EAT (v)** | Help added. |
-
 | **either (conj) — UNAPPROVED** | ONE (TN) OF THE TWO (TN) removed as the approved alternative. OR (conj) added as the approved alternative. |
-
 | **either (pron) — UNAPPROVED** | Approved alternative changed. STE and non-STE examples revised. |
-
 | **ELECTRIC (adj)** | STE example revised. |
-
 | **ELECTROMAGNETIC (adj)** | STE example revised. |
-
 | **employ (v) — UNAPPROVED** | STE and non-STE examples revised. HAVE added as an approved alternative. Related STE and non-STE examples added. |
-
 | **entail (v) — UNAPPROVED** | Removed from the word list. |
-
 | **enter (v) — UNAPPROVED** | First STE and non-STE examples revised. Help removed. Information about verbs that can be technical verbs are included in Rule 1.12. |
-
 | **entire (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **equal (v) — UNAPPROVED** | First and second STE examples revised. |
-
 | **erect (v) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **essential (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **establish (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **ESTIMATE (n)** | STE example revised. |
-
 | **except (prep) — UNAPPROVED** | Help revised. |
-
 | **exception (n) — UNAPPROVED** | Help revised. |
-
 | **exceptional (adj) — UNAPPROVED** | STE example revised. |
-
 | **excess (n) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **excessively (adv) — UNAPPROVED** | First and second STE and non-STE examples revised. |
-
 | **excluding (prep) — UNAPPROVED** | STE example revised. |
-
 | **exert (v) — UNAPPROVED** | STE and non-STE examples changed. PUT (v) added as an approved alternative. Related STE and non-STE examples added. |
-
 | **exhaust (v) — UNAPPROVED** | Second STE example revised. |
-
 | **explain (v) — UNAPPROVED** | STE example revised. |
-
 | **EXTERNALLY (adj)** | STE example revised. |
-
 | **EXTINGUISH (v)** | First, second, and third STE examples revised. |
-
 | **extremely (adv) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **exude (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **FACE (n)** | Help revised. |
-
 | **face (v) — UNAPPROVED** | Second STE example revised. |
-
 | **facility (n) — UNAPPROVED** | Help revised. |
-
 | **failure (n) — UNAPPROVED** | Help revised. |
-
 | **fear (v) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **feasible (adj) — UNAPPROVED** | First STE and non-STE examples revised. Second STE example revised. |
-
 | **few (adj) — UNAPPROVED** | Help revised. |
-
 | **fine (adj) — UNAPPROVED** | STE example revised. |
-
 | **flaw (n) — UNAPPROVED** | Help revised. |
-
 | **FLOW (n)** | STE example revised. |
-
 | **FLOW (v)** | Second STE example revised. |
-
 | **FOLD (v)** | Second STE example changed. |
-
 | **forbidden (adj) — UNAPPROVED** | DO NOT added as an approved alternative. Related STE and non-STE examples added. Second STE and non-STE examples for NOT PERMITTED changed. |
-
 | **force (v) — UNAPPROVED** | Second STE example revised. |
-
 | **forecast (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **foremost (adj) — UNAPPROVED** | Added to the word list. |
-
 | **FREE (adj)** | Help revised. |
-
 | **fuel (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **FUNCTION (n)** | Approved meaning revised. |
-
 | **fundamental (adj) — UNAPPROVED** | STE example revised. |
-
 | **furnish (v) — UNAPPROVED** | Removed from the word list. |
-
 | **further (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **gain (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **gap (n) — UNAPPROVED** | Third STE and non-STE examples revised. |
-
 | **garbled (adj) — UNAPPROVED** | Spelling corrected. Second STE and non-STE example changed. |
-
 | **gauge (v) — UNAPPROVED** | STE and non-STE examples revised. |
 
 > **Section:** Highlights — Dictionary Changes
@@ -1334,521 +970,267 @@ NOTE: The word "revised" tells that only a small number of words are replaced or
 ## Part 2 – Dictionary
 
 | Word (POS) | Description of Change |
-
 |---|---|
-
 | **PNEUMATICALLY (adv)** | STE example revised. |
-
 | **POINT (n)** | Second STE example revised. |
-
 | **POINT (v)** | Second STE example revised. |
-
 | **POISONOUS (adj)** | STE example revised. |
-
 | **poor (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **pop (v) — UNAPPROVED** | PROTRUDE (v) added as an approved alternative. Related STE and non-STE added. |
-
 | **portion (n) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **POSITION (n)** | Second STE example changed. |
-
 | **position (v) — UNAPPROVED** | Second STE example revised. |
-
 | **POSSIBLE (adj)** | STE example changed. |
-
 | **power (v) — UNAPPROVED** | STE and non-STE examples changed. |
-
 | **practice (n) — UNAPPROVED** | Removed from the word list. |
-
 | **precisely (adv) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **preferable (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **preferably (adv) — UNAPPROVED** | Approved alternative changed. STE and non-STE examples changed. |
-
 | **preload (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **PREPARE (v)** | Second STE example revised. |
-
 | **prescribed (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **present (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **PRESSURIZE (v)** | STE example revised. |
-
 | **preventive (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **previous (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **PREVIOUS (adj)** | Added to the word list as approved. |
-
 | **previously (adv) — UNAPPROVED** | Removed from the word list. |
-
 | **PREVIOUSLY (adv)** | Added to the word list as approved. |
-
 | **prime (v) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **principal (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **prior to (prep) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **priority (n) — UNAPPROVED** | STE example revised. |
-
 | **probability (n) — UNAPPROVED** | STE example revised. |
-
 | **probable (adj) — UNAPPROVED** | Part of speech removed from the approved alternative to read VERY POSSIBLE. First approved alternative revised. |
-
 | **probe (v) — UNAPPROVED** | STE example revised. |
-
 | **PROBLEM (n)** | STE example revised. |
-
 | **PROCEDURE (n)** | STE example revised. |
-
 | **process (n) — UNAPPROVED** | Help revised. STE and non-STE examples revised. |
-
 | **process (v) — UNAPPROVED** | Approved alternative changed. STE example revised. |
-
 | **produce (v) — UNAPPROVED** | First, second, and fourth STE and non-STE examples revised. Third STE examples revised. |
-
 | **product (n) — UNAPPROVED** | Help and new related examples added. MATERIAL (n) removed as the approved alternative. |
-
 | **prompt (adj) — UNAPPROVED** | STE example revised. |
-
 | **propagation (n) — UNAPPROVED** | Help revised. |
-
 | **PROPORTION (n)** | First STE example revised. |
-
 | **protect (v) — UNAPPROVED** | Non-STE example revised. |
-
 | **protrude (v) — UNAPPROVED** | Removed from the word list. |
-
 | **PROTRUDE (v)** | Added to the word list as approved. |
-
 | **provide (v) — UNAPPROVED** | First and second STE and non-STE examples revised. |
-
 | **provided (that) — UNAPPROVED** | (conj) STE and non-STE examples revised. |
-
 | **providing (that) — UNAPPROVED** | (conj) STE and non-STE examples revised. |
-
 | **proximity (n) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **pump (v) — UNAPPROVED** | Approved alternative revised. STE and non-STE examples revised. Second approved alternative added. Related STE and non-STE examples added. |
-
 | **purpose (n) — UNAPPROVED** | Removed from the word list. |
-
 | **PUT (v)** | Help added. |
-
 | **PUT ON (v)** | Help added. |
-
 | **QUALITY (n)** | STE example revised. |
-
 | **QUANTITY (n)** | First STE example revised. |
-
 | **raise (v) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **RANDOM (adj)** | STE example revised. |
-
 | **rapid (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **rapidly (adv) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **reactivate (v) — UNAPPROVED** | ACTIVATE (v) added as the approved alternative. OPERATE (v) and START (v) removed as approved alternatives. |
-
 | **readjust (v) — UNAPPROVED** | STE example revised. |
-
 | **real (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **rebuild (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **recoil (v) — UNAPPROVED** | Third STE and non-STE examples revised. |
-
 | **RECOMMEND (v)** | STE example revised. |
-
 | **recover (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **rectify (v) — UNAPPROVED** | STE example revised. |
-
 | **reduce (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **REFER (v)** | First STE example revised. |
-
 | **referenced (adj) — UNAPPROVED** | Approved alternative changed. STE and non-STE examples changed. |
-
 | **REFUEL (v)** | STE example revised. |
-
 | **reinstall (v) — UNAPPROVED** | STE example revised. |
-
 | **rejection (n) — UNAPPROVED** | STE example revised. |
-
 | **relay (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **relevant (adj) — UNAPPROVED** | Second and third approved alternatives revised. |
-
 | **REMAINING (adj)** | STE example revised. |
-
 | **REMOVAL (n)** | STE example revised. |
-
 | **renovate (v) — UNAPPROVED** | Second STE example revised. |
-
 | **REPAIR (n)** | STE example changed. |
-
 | **replenish (v) — UNAPPROVED** | Third STE and non-STE examples revised. |
-
 | **require (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **rest (n) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **rest (v) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **resume (v) — UNAPPROVED** | First STE and non-STE examples changed. |
-
 | **reuse (v) — UNAPPROVED** | STE example revised. |
-
 | **reverse (adj) — UNAPPROVED** | Help revised. |
-
 | **review (n) — UNAPPROVED** | EXAMINE (v) added as an approved alternative. Related STE and non-STE examples added. |
-
 | **rework (v) — UNAPPROVED** | Help revised. STE and non-STE example revised. |
-
 | **rise (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **SAFE (adj)** | STE example revised. |
-
 | **SAFETY (v)** | First STE example revised. |
-
 | **safety-clip (v) — UNAPPROVED** | Second STE example revised. |
-
 | **SAMPLE (n)** | STE example revised. |
-
 | **sample (v) — UNAPPROVED** | STE example revised. |
-
 | **scrape (v) — UNAPPROVED** | STE example revised. |
-
 | **SECONDARY (adj)** | STE example changed. |
-
 | **SEE (v)** | Second non-STE example revised. |
-
 | **SELECT (v)** | Third STE example revised. |
-
 | **separate (adj) — UNAPPROVED** | Sequence of the approved alternatives changed. DIFFERENT (adj) added as an approved alternative. Related STE and non-STE examples added. Part of speech for the first approved alternative changed. |
-
 | **separately (adv) — UNAPPROVED** | Added to the word list. |
-
 | **serve (v) — UNAPPROVED** | Help revised. |
-
 | **settle (v) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **severe (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **sharply (adv) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **SHORT (adj)** | Help revised. |
-
 | **shorten (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **should (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **SHOW (v)** | First STE example revised. |
-
 | **similar (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **simultaneous (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **single (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **situation (n) — UNAPPROVED** | Added to the word list. |
-
 | **size (n) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **skid (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **slip (v) — UNAPPROVED** | First and third STE and non-STE examples revised. |
-
 | **SLOPE (n)** | STE example revised. |
-
 | **SMALL (adj)** | STE example revised. |
-
 | **snap (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **soften (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **SOLID (n)** | STE example changed. |
-
 | **SOLUTION (n)** | Second STE example changed. |
-
 | **SOMETHING (pron)** | STE example revised. |
-
 | **SOURCE (n)** | First and second STE examples changed. |
 
 ## Part 2 – Dictionary
 
 | Word (POS) | Description of Change |
-
 |---|---|
-
 | **soon (adv) — UNAPPROVED** | Help revised. |
-
 | **spark (n) — UNAPPROVED** | STE example revised. |
-
 | **specific (adj) — UNAPPROVED** | APPROVED (adj) added as an approved alternative. Related STE and non-STE examples revised. |
-
 | **SPECIAL (adj)** | Removed from the approved alternatives. |
-
 | **SPEED (n)** | STE example changed. |
-
 | **spillage (n) — UNAPPROVED** | First STE example revised. |
-
 | **split (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **split (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **stability (n) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **stabilization (n) — UNAPPROVED** | STE example revised. |
-
 | **STABLE (adj)** | STE example revised. |
-
 | **stage (n) — UNAPPROVED** | STE example revised. |
-
 | **stained (adj) — UNAPPROVED** | First STE and non-STE examples revised. |
-
 | **stamp (v) — UNAPPROVED** | Approved alternative revised. New approved alternative added. Related STE and non-STE examples added. |
-
 | **stationary (adj) — UNAPPROVED** | Second STE and non-STE examples changed. |
-
 | **STAY (v)** | Help added. STE example revised. |
-
 | **sticky (adj) — UNAPPROVED** | STE example revised. |
-
 | **store (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **strain (v) — UNAPPROVED** | First STE example revised. |
-
 | **strap (v) — UNAPPROVED** | STE example revised. |
-
 | **strike (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **STRONG (adj)** | STE example revised. |
-
 | **STRUCTURAL (adj)** | STE example changed. |
-
 | **subject (v) — UNAPPROVED** | Removed from the word list. |
-
 | **SUBSEQUENTLY (adv)** | Second STE example revised. |
-
 | **substance (n) — UNAPPROVED** | Non-STE example revised. |
-
 | **substitute (adj) — UNAPPROVED** | First STE example revised. |
-
 | **suck (v) — UNAPPROVED** | Approved alternative revised. STE example revised. |
-
 | **suitable (adj) — UNAPPROVED** | First STE example revised. |
-
 | **suitably (adv) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **SUPPLY (v)** | Second approved meaning added. Related STE example added. |
-
 | **support (n) — UNAPPROVED** | First and second STE and non-STE examples revised. |
-
 | **support (v) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **SURFACE (n)** | STE example revised. |
-
 | **suspect (adj) — UNAPPROVED** | STE example revised. |
-
 | **suspect (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **SWALLOW (v)** | STE example revised. |
-
 | **switch (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **switch off (v) — UNAPPROVED** | SET (v) included as an approved alternative to replace SWITCH (TN). STE example revised. |
-
 | **DE-ENERGIZE (v)** | Added as an approved alternative. Related STE and non-STE examples added. Existing STE and non-STE examples revised. |
-
 | **switch on (v) — UNAPPROVED** | SET (v) included as an approved alternative to replace SWITCH (TN). STE example revised. |
-
 | **ENERGIZE (v)** | Added as an approved alternative. Related STE and non-STE examples added. |
-
 | **SYMMETRICAL (adj)** | STE example revised. |
-
 | **SYNCHRONIZED (adj)** | Second STE example revised. |
-
 | **TAG (v)** | STE example revised. |
-
 | **take (v) — UNAPPROVED** | Second and fourth STE examples revised. Third STE and non-STE examples revised. |
-
 | **take care (v) — UNAPPROVED** | Second STE example revised. |
-
 | **tape (v) — UNAPPROVED** | STE example revised. |
-
 | **taped (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **TASK (n)** | STE example revised. |
-
 | **TELESCOPIC (adj)** | STE example changed. |
-
 | **TELL (v)** | First and second STE examples changed. |
-
 | **test (v) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **THAT (conj)** | Help added. |
-
 | **THEM (pron)** | STE example revised. |
-
 | **THEN (adv)** | STE example revised. |
-
 | **THERE (pron)** | STE example revised. |
-
 | **THESE (adj)** | STE example revised. |
-
 | **THICK (adj)** | Approved meaning revised. First STE example added. |
-
 | **THICKNESS (n)** | Approved meaning revised. STE example revised. |
-
 | **THIS (pron)** | Help added. STE example revised. |
-
 | **thorough (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **triple (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **TO (prep)** | First STE example revised. |
-
 | **TOTAL (adj)** | STE example revised. |
-
 | **TOW (v)** | STE example revised. |
-
 | **true (adj) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **turn off (v) — UNAPPROVED** | Added to the word list. |
-
 | **turn on (v) — UNAPPROVED** | Added to the word list. |
-
 | **turn over (v) — UNAPPROVED** | Added to the word list. |
-
 | **under (prep) — UNAPPROVED** | Second STE and non-STE examples revised. Third STE example revised. |
-
 | **undertake (v) — UNAPPROVED** | Help revised. START (v) added as an approved alternative. |
-
 | **uneven (adj) — UNAPPROVED** | Second STE example revised. |
-
 | **UNIT (n)** | First STE example revised. |
-
 | **UNLOCK (v)** | First STE example revised. |
-
 | **upon (prep) — UNAPPROVED** | Second STE example revised. |
-
 | **unrestricted (adj) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **unscrew (v) — UNAPPROVED** | Sequence of the approved alternatives changed. STE and non-STE examples for REMOVE (v) revised. |
-
 | **usage (n) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **using (v) — UNAPPROVED** | Removed from the word list. |
-
 | **use (n) — UNAPPROVED** | Second example revised. |
-
 | **USE (v)** | First and third STE examples revised. |
-
 | **USUALLY (adv)** | STE example revised. |
-
 | **utilize (v) — UNAPPROVED** | STE and non-STE examples changed. |
-
 | **valid (adj) — UNAPPROVED** | Help revised. Third STE example revised. |
-
 | **VALUE (n)** | STE example revised. |
-
 | **verbal (adj) — UNAPPROVED** | Removed from the word list. |
-
 | **verify (v) — UNAPPROVED** | Non-STE example revised. |
-
 | **visible (adj) — UNAPPROVED** | Second STE and non-STE examples revised. |
-
 | **VISUAL (adj)** | Approved meaning revised. STE example revised. |
-
 | **vital (adj) — UNAPPROVED** | IMPORTANT (adj) and NECESSARY (adj) removed from the approved alternatives. STE and non-STE examples for the approved alternative MANDATORY (adj) changed. |
-
 | **WARM (adj)** | STE example revised. |
-
 | **WE (pron)** | Approved meaning revised. |
-
 | **WEAR (v)** | Third STE example revised. |
-
 | **weep (n) — UNAPPROVED** | STE and non-STE examples revised. |
-
 | **WEIGH (v)** | Second STE example revised. |
-
 | **WEIGHT (n)** | STE example revised. |
-
 | **well (adv) — UNAPPROVED** | Third STE example revised. |
-
 | **whenever (pron) — UNAPPROVED** | STE example revised. |
-
 | **whichever (adj) — UNAPPROVED** | Added to the word list. |
-
 | **whichever (pron) — UNAPPROVED** | STE and non-STE examples changed. |
-
 | **WHO (pron)** | STE example revised. |
-
 | **WIDE (adj)** | Approved meaning revised. STE example revised. |
-
 | **WILL (v)** | Help revised. Approved meaning revised. |
-
 | **WITH (prep)** | Help added. |
-
 | **WITHOUT (prep)** | STE example revised. |
-
 | **wrong (adj) — UNAPPROVED** | STE example revised. |
-
 | **yet (conj) — UNAPPROVED** | Second approved alternative removed. |
-
 | **yet (adv) — UNAPPROVED** | Added to the word list. |
-
 | **YOU (pron)** | Second STE example added. |
 
 # Table of Contents
 
 | Subject | Page number |
-
 |---|---|
-
 | Title page | --- |
-
 | Copyright notices | --- |
-
 | Highlights | HI-1 |
-
 | Table of contents | TOC-1 |
-
 | Subject-to-rule index | SRI-1 |
-
 | General introduction | i |
-
 | Part 1 – Writing rules | 1-0-1 |
-
 | Section 1 – Words | 1-1-1 |
-
 | Section 2 – Multi-word nouns | 1-2-1 |
-
 | Section 3 – Verbs | 1-3-1 |
-
 | Section 4 – Sentences | 1-4-1 |
-
 | Section 5 – Procedural writing | 1-5-1 |
-
 | Section 6 – Descriptive writing | 1-6-1 |
-
 | Section 7 – Safety instructions | 1-7-1 |
-
 | Section 8 – Punctuation and word count | 1-8-1 |
-
 | Section 9 – Writing practices | 1-9-1 |
-
 | Part 2 – Dictionary | 2-0-1 |
-
 | Introduction | 2-0-3 |
-
 | Word list | 2-1-A1 |
 
 *Page TOC-2 is blank.*
@@ -1858,239 +1240,124 @@ NOTE: The word "revised" tells that only a small number of words are replaced or
 This index helps you find the applicable STE rules related to different subjects. The symbol # after the section number (for example, 7#) shows that the subject is applicable to all or most of the rules in that section.
 
 | Subject | Rule |
-
 |---|---|
-
 | Abbreviations | General introduction, 1.5, 2.2, 8.3, 8.5, 8.6 |
-
 | Acronyms | 8.6 |
-
 | Action | 3.7 |
-
 | Active voice | 3.6 |
-
 | Adjectives (how to use them) | 1.4, 1.7, 1.13, 2#, 3.2, 3.3 |
-
 | Adjectives (part of speech) | Part 2, Introduction |
-
 | Adverb (part of speech) | Part 2, Introduction |
-
 | American English spelling | General introduction, 1.14 |
-
 | Approved meaning | 1.3, 9.2 |
-
 | Approved words | 1.1, 1.2, 9.2 |
-
 | Articles (how to use them) | 4.5 |
-
 | Articles (part of speech) | Part 2, Introduction |
-
 | Authoring tools | General introduction |
-
 | Base form of a verb | 3#, Part 2, Introduction |
-
 | Cautions | 5.1, 7# |
-
 | Change form | General introduction |
-
 | Colons | 4.3, 8.4 |
-
 | Command form of the verb (Imperative form) | 3.2, 3.6, 5.3 |
-
 | Company glossary | 1# |
-
 | Comparative form of adjectives | 1.4 |
-
 | Computer processes and applications | 1.12 |
-
 | Conjunctions (part of speech) | Part 2, Introduction |
-
 | Connecting words and phrases | 4.4, 6.2 |
-
 | Consistent style | 9.4 |
-
 | Controlled natural language | General introduction |
-
 | Dashes | 4.3, 8.2 |
-
 | Demonstrative adjectives | 4.5 |
-
 | Descriptive writing | 3.6, 4.1, 6# |
-
 | Different sentence constructions | 1.2, 9.1 |
-
 | False friends | 9 – GR-5 |
-
 | Forms of adjectives | 1.4, Part 2, Introduction |
-
 | Future tense (simple) | 3.2, Part 2, Introduction |
-
 | Headings | 8.6 |
-
 | Help (light bulb symbol) | Part 1, all sections, Part 2, applicable entries |
-
 | Hyphens | 2.2, 8.2, 8.7 |
-
 | "-ing" form | 3.5 |
-
 | Imperative form (command form) | 3.2, 3.6, 5.3 |
-
 | Inclusive language | 9 – GR-7 |
-
 | Infinitive form (base form of the verb) | 3.2, Part 2, Introduction |
-
 | Initialisms | 8.6 |
-
 | Instructions | 5#, 7# |
-
 | Irregular verbs | 3.1, Part 2, Introduction |
-
 | Items (in a vertical list) | 4.3, 8.4 |
-
 | Jargon words | 1.10 |
-
 | Key phrases | 6.2 |
-
 | Key words | 6.2, 6.5 |
-
 | Latin abbreviations | 9 – GR-6 |
-
 | Law and regulations | 1.5, 1.12 |
-
 | Length of paragraphs | 6.6 |
-
 | Length of sentences | 4.1, 4.2, 4.3, 5.1, 6.3, 8.4 thru 8.7 |
-
 | List of approved verbs | Part 2, Introduction |
-
 | List of recurring errors | Part 2, Introduction |
-
 | Logic (descriptive writing) | 6# |
-
 | Manufacturing processes | 1.12 |
-
 | Meaning, one for each word | 1.3 |
-
 | Multi-word nouns | 2# |
-
 | Notes | 5.5 |
-
 | Nouns (part of speech) | Part 2, Introduction |
-
 | Nouns (how to use them) | All sections |
-
 | Noun terms | 1.1 |
-
 | Omission of words | 4.2 |
-
 | Oral communication | General introduction |
-
 | Paragraphs | 6.4, 6.5, 6.6 |
-
 | Parentheses ( ) | 8.3, 8.5 |
-
 | Parts of speech | 1.2, 3.7, 9.1, Part 2, Introduction |
-
 | Passive voice | 3.3, 3.4, 3.6 |
-
 | Past participle form (as an adjective) | 3.3 |
-
 | Placards | 1.5, 8.6 |
-
 | Possessive form (Saxon genitive) | 9 – GR-8 |
 
 # Subject-to-rule Index
 
 | Subject | Rule |
-
 | --- | --- |
-
 | Preposition (part of speech) | Part 2, Introduction |
-
 | Procedural writing (procedures) | 5# |
-
 | Pronouns (how to use them) | 9 – GR-3 |
-
 | Pronouns (part of speech) | Part 2, Introduction |
-
 | Proper nouns | 8.6 |
-
 | Punctuation | 8.1 thru 8.3 |
-
 | Quoted text | 1.5, 8.6 |
-
 | Reference documents | General introduction |
-
 | Regional words | 1.10 |
-
 | Regular verbs | 3.1, Part 2, Introduction |
-
 | Safety instructions | 7# |
-
 | Semicolons | 8.1 |
-
 | Sentences | 4#, 5#, 6# |
-
 | Simple future tense | 3.3 |
-
 | Simple past tense | 3.3 |
-
 | Simple present tense | 3.3 |
-
 | Slang words | 1.10 |
-
 | Spelling | 1.14 |
-
 | Subject fields | 1.1, 1.5, 1.12 |
-
 | Superlative forms of adjectives | 1.4 |
-
 | Technical nouns | 1.1, 1.5 thru 1.13, 2.2 |
-
 | Technical verbs | 1.1, 1.12, 1.13 |
-
 | Technical translation | General introduction |
-
 | Terminology database | 1# |
-
 | Text formatting | General introduction |
-
 | That (how to use) | 9 – GR-1 |
-
 | This (how to use) | 9 – GR-4 |
-
 | Titles | 8.6 |
-
 | Topic (subject of paragraph) | 6.5 |
-
 | Topics, one for each paragraph | 6# |
-
 | Topics, one for each sentence | 4.1 |
-
 | Training (in STE) | General introduction |
-
 | Units of measurement | General introduction, 1.5, 8.6 |
-
 | Verb forms | 1.4, 3.2, Part 2, Introduction |
-
 | Verb terms | 1.1 |
-
 | Verbs | 3#, Part 2, Introduction |
-
 | Vertical lists | 4.3, 8.4 |
-
 | Warnings | 7# |
-
 | With (how to use) | 9 – GR-2 |
-
 | Word count | 8.4 thru 8.7 |
-
 | Word-for-word replacement | 1.2, 9.1 |
-
 | Words | 1#, all sections |
-
 | Words (that are not approved) | 1.1, 1.2, 1.6, 9# |
-
 | Writing practices | 9# |
 
 # General introduction
@@ -2177,41 +1444,23 @@ For more information, refer to the STEMG website at www.asd-ste100.org.
 The first release of STE was as the AECMA Simplified English Guide, PSC-85-16598. This is the full list of all released issues, revisions, and changes.
 
 | Release date | Identification | Scope |
-
 |---|---|---|
-
 | 1986-02-15 | First release | The guide included writing rules (part 1) and the dictionary (part 2) |
-
 | 1986-09-15 | Change 1 | Guide revised |
-
 | 1987-06-01 | Change 2 | Examples of function words and nouns (part 3) added |
-
 | 1988-06-15 | Change 3 | Examples of verbs (part 3) added |
-
 | 1988-12-30 | Change 4 | Examples of adjectives and adverbs (part 3) added |
-
 | 1989-12-01 | Change 5 | Reformatted version of change 4. No changes to the content |
-
 | 1995-09-15 | Issue 1 | Guide fully revised. Original part 2 removed and part 3 became part 2 |
-
 | 1998-01-15 | Issue 1, Revision 1 | Updates and amendments |
-
 | 2001-01-15 | Issue 1, Revision 2 | Updates and amendments |
-
 | 2004-01-15 | Issue 2 | Guide fully revised |
-
 | 2005-01-15 | Issue 3 | New issue released as ASD-STE100. No changes to the content |
-
 | 2007-01-15 | Issue 4 | Specification revised |
-
 | 2010-04-15 | Issue 5 | Specification revised |
-
 | 2013-01-15 | Issue 6 | Specification revised |
-
 | 2017-01-25 | Issue 7 | Specification fully revised, primary focus on the writing rules (part 1) |
-
 | 2021-04-30 | Issue 8 | Specification revised, primary focus on the dictionary (part 2) |
-
 | 2025-01-15 | Issue 9 | New issue released as a standard. Primary focus on harmonization of terminology with ISO standards |
 
 ## Maintenance of ASD-STE100
@@ -2481,21 +1730,15 @@ The dictionary gives each approved verb together with its approved forms. The di
 Example — Verbs:
 
 | REMOVE (v), |           |
-
 |-------------|-----------|
-
 | REMOVES,    |           |
-
 | REMOVED,    |           |
-
 | REMOVED     |           |
 
 This word tells you that you can use the approved verb "remove" as follows:
 
 | Infinitive/Imperative forms | Simple present tense | Simple past tense | Past participle form (as an adjective) |
-
 |-----------------------------|----------------------|-------------------|----------------------------------------|
-
 | (To) Remove/Remove          | Remove(s)            | Removed           | Removed                                |
 
 The past participle form of the verb is usually the same as the simple past tense. Thus, the dictionary gives it two times.
@@ -2505,9 +1748,7 @@ The past participle form of the verb is usually the same as the simple past tens
 #### SLOW (adj)
 
 | Entry | Forms |
-
 |-------|-------|
-
 | SLOW (adj) | (SLOWER, SLOWEST) |
 
 This word tells you that you can use the approved adjective "slow" as follows:
@@ -3225,19 +2466,12 @@ Use only the verbs forms and the tenses of verbs that are approved.
 Examples:
 
 | Form | Regular verb (Adjust) | Irregular verb (Give) |
-
 |---|---|---|
-
 | Infinitive (base form) | (To) Adjust | (To) Give |
-
 | Imperative (command form) | Adjust + object | Give + object |
-
 | Simple present tense | You/we/they adjust<br>It adjusts | You/we/they give<br>It gives |
-
 | Simple past tense | You/we/they adjusted<br>It adjusted | You/we/they gave<br>It gave |
-
 | Simple future tense | You/we/they will adjust<br>It will adjust | You/we/they will give<br>It will give |
-
 | Past participle (as an adjective) | The adjusted linkage | The given information |
 
 Do not use other forms and tenses that are not approved, for example:
@@ -3316,9 +2550,7 @@ Opening a door can be dangerous.
 They can make long groups of modifiers, noun phrases, and dependent clauses.
 
 | A mechanic opening a door without obeying the specified safety precautions can easily cause |
-
 | --- |
-
 | injury to persons standing near the door. |
 
 These different functions for words that have an "-ing" form can frequently cause ambiguity or long, complex sentences. Thus, words that have an "-ing" form are usually not permitted.
@@ -3351,9 +2583,7 @@ You can also use the "-ing" form of a verb as a modifier in a technical noun. Th
 Examples:
 
 | Air-conditioning system, degreasing agent, grinding wheel, polishing disc, sanding machine, |
-
 | --- |
-
 | switching relay, welding torch |
 
 Approved words that have an "-ing" form
@@ -3984,13 +3214,9 @@ Do not use the verb "must" before the imperative form, unless the instruction is
 Example:
 
 | Do not write: | Before you remove the clamp, you must disconnect the hose. |
-
 | --- | --- |
-
 | WRITE: | Before you remove the clamp, disconnect the hose. |
-
 | STE: | WARNING: IF YOU MUST CUT THE WIRE, ALWAYS USE A PROTECTIVE MASK. PIECES OF WIRES CAN CAUSE INJURY. |
-
 | --- | --- |
 
 ## Descriptive statements in instructions
@@ -4002,9 +3228,7 @@ If a special condition is necessary for a work step, the reader must know the co
 Examples:
 
 | Do not write: | Before you remove the clamp, you must disconnect the hose. |
-
 | --- | --- |
-
 | WRITE: | Before you remove the clamp, disconnect the hose. |
 
 WRITE: If the Constant Speed Drive (CSD) does not operate correctly, disconnect it from the gearbox.
@@ -4012,7 +3236,6 @@ WRITE: If the Constant Speed Drive (CSD) does not operate correctly, disconnect 
 The comma is important. Be careful when you use it because the position of the comma can change the meaning of your sentence.
 
 | STE: | WARNING: IF YOU MUST CUT THE WIRE, ALWAYS USE A PROTECTIVE MASK. PIECES OF WIRES CAN CAUSE INJURY. |
-
 | --- | --- |
 
 If the Constant Speed Drive (CSD) does not operate, correctly disconnect it from the gearbox.
@@ -4030,7 +3253,6 @@ Notes must not give instructions, requirements, or limits.
 Examples in STE:
 
 | NOTE: | The gyroscope will become stable after approximately 15 seconds. |
-
 | --- | --- |
 
 A note can have one or more sentences. Each sentence in a note can have a maximum of 25 words.
@@ -4062,9 +3284,7 @@ If you include instructions in a note, it is possible that the reader will not s
 Examples:
 
 | Non-STE: | NOTE: When you connect the lines, do not bend them too much. If you bend the lines too much, you can cause damage to them. (This text is not a note. It is a safety instruction.) |
-
 | --- | --- |
-
 | STE: | CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM. |
 
 airflow to the compartment and therefore there is a risk of suffocation.
@@ -4078,9 +3298,7 @@ Do not use a note to give limits, tolerances, or results of a work step. This in
 Examples:
 
 | Non-STE: | NOTE: When you connect the lines, do not bend them too much. If you bend the lines too much, you can cause damage to them. (This text is not a note. It is a safety instruction.) |
-
 | --- | --- |
-
 | STE: | CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM. |
 
 ## How to use notes correctly
@@ -4388,7 +3606,6 @@ Examples in STE:
 (Refer to the underlined command.)
 
 | **WARNING:** | DO NOT SWALLOW THE SOLVENT. ALWAYS MAKE SURE THAT YOU KNOW THE SAFETY PRECAUTIONS AND FIRST AID INSTRUCTIONS FOR SOLVENTS. SOLVENTS ARE POISONOUS AND CAN CAUSE INJURY OR DEATH. |
-
 | **CAUTION:** | DO NOT USE BLEACH OR CLEANSERS THAT CONTAIN CHLORINE TO CLEAN THE UNIT. THESE CLEANING AGENTS CAN CAUSE CORROSION. |
 
 If your reader must know about a condition before the start of a procedure or work step, give this condition first.
@@ -4410,9 +3627,7 @@ Examples:
 (Refer to the underlined risk or possible result.)
 
 | **WARNING:** | DO NOT SWALLOW THE SOLVENT. ALWAYS MAKE SURE THAT YOU KNOW THE SAFETY PRECAUTIONS AND FIRST AID INSTRUCTIONS FOR SOLVENTS. SOLVENTS ARE POISONOUS AND CAN CAUSE INJURY OR DEATH. |
-
 | **CAUTION:** | DO NOT USE BLEACH OR CLEANSERS THAT CONTAIN CHLORINE TO CLEAN THE UNIT. THESE CLEANING AGENTS CAN CAUSE CORROSION. |
-
 | **WARNING:** | DO NOT SWALLOW THE SOLVENT. ALWAYS MAKE SURE THAT YOU KNOW THE SAFETY PRECAUTIONS AND FIRST AID INSTRUCTIONS FOR SOLVENTS. SOLVENTS ARE POISONOUS AND CAN CAUSE INJURY OR DEATH. |
 
 IF THEY FALL, PERMANENT DAMAGE TO THE PARTS CAN OCCUR.
@@ -4467,15 +3682,10 @@ The semicolon (;) is not permitted in STE because it lets you write very long se
 Examples:
 
 | **Non-STE:** | (1) Examine the removed parts; replace the damaged ones. |
-
 | **STE:** | (1) Examine the removed parts for damage. |
-
 | | (2) Replace the damaged part(s). |
-
 | **Non-STE:** | (1) Examine the removed parts; replace the damaged ones. |
-
 | **STE:** | (1) Examine the removed parts for damage. |
-
 | | (2) Replace the damaged part(s). |
 
 replace it.
@@ -4547,11 +3757,8 @@ In STE, you can use parentheses as follows:
 5. To give the singular and plural forms of a noun at the same time
 
    | Example | Text |
-
    |---------|------|
-
    | A | Before you do the test(s), install the component(s). |
-
    | B | Do the applicable test(s). |
 
 6. To explain words or a part of a sentence
@@ -4602,9 +3809,7 @@ If there is an identifier in parentheses (a number, a letter, or an alphanumeric
 > **STE:** Installation of a Business Class (B/C) Seat (7 words)
 
 | Example | Text |
-
 |---------|------|
-
 |         | Hardware and Software Configuration Check of the In-Flight Entertainment (IFE) System (11 words) |
 
 ## Rule 8.6
@@ -4953,9 +4158,7 @@ To replace "depending," you must make an important change to the sentence. This 
 You can then write the first sentence as follows:
 
 | If you find cracks during this procedure, do the repair before the number of flight hours that |
-
 |---|
-
 | are applicable to the crack length. Refer to the table that follows: |
 
 But the first sentence has 23 words, and the technical meaning is not correct and not easy to understand. Also, part of the information is in the table. Thus, it is not necessary to give it two times. A good solution is to put the instruction in the table heading, as shown in the STE text.
@@ -5299,15 +4502,10 @@ The dictionary has four columns that give this information:
 Example:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |---|---|---|---|
-
 | AID (n) | Help that is given | IF YOU GET THIS CHEMICAL SOLUTION IN YOUR EYES, GET MEDICAL AID IMMEDIATELY. | |
-
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |---|---|---|---|
-
 | accuracy (n) — UNAPPROVED | PRECISION (n) | THE PRECISION OF THE ADJUSTMENT CAN CHANGE. | The accuracy of the adjustment can vary. |
 
 #### Column 1: Word (part of speech)
@@ -5319,9 +4517,7 @@ A word in UPPERCASE letters shows that you can use this word because it is appro
 Examples:
 
 | Word (part of speech) |
-
 |---|
-
 | ABRASIVE (adj) |
 
 material by friction
@@ -5333,11 +4529,8 @@ A word in lowercase letters shows that you cannot use this word because it is no
 Examples:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |---|---|---|---|
-
 | main (adj) — UNAPPROVED | PRIMARY (adj) | THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID. | The main cause of valve failure is contamination of the fluid. |
-
 | build (v) — UNAPPROVED | ASSEMBLE (v) | ASSEMBLE THE UNIT. | Build the unit. |
 
 The part of speech for each word is given in parentheses with its recognized abbreviation. Use an approved word only as the specified part of speech. Refer to part 1, section 1.
@@ -5375,9 +4568,7 @@ Nouns are given only in their singular form, but the plural form of countable no
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-
 |---|---|---|---|
-
 | AGENT (n) | One of a group of materials made to do a specified task | | CLEANING AGENTS ON HOT SURFACES. |
 
 #### Verbs
@@ -5398,9 +4589,7 @@ Verbs that obey a constant pattern to make the simple past tense and the past pa
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-
 |---|---|---|---|
-
 | ADAPT (v) | To change or adjust to that which is necessary | ADAPT THE PRESSURE CONNECTION TO THE PITOT HEAD. THE SYSTEM INTERFACE CIRCUITS ADAPT TO THE PHYSICAL PROPERTIES OF THE CONNECTED SYSTEMS. | |
 
 - Approved forms: ADAPTS, ADAPTED
@@ -5412,9 +4601,7 @@ Verbs that do not obey the standard rules for the simple past tense and the past
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-
 |---|---|---|---|
-
 | GIVE (v) | To provide | THIS SECTION GIVES THE CLEANING PROCEDURES FOR THE DISASSEMBLED PARTS. | |
 
 - Approved forms: GIVES, GAVE, GIVEN
@@ -5426,11 +4613,8 @@ Auxiliary verbs that have unusual forms for tenses.
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-
 |---|---|---|---|
-
 | BE (v) | 1. To occur, exist | IF THERE IS CORROSION ON THE PUMP VANES, REPLACE THE PUMP. | |
-
 | | 2. To have a property to be equal to | ACID SOLUTIONS ARE DANGEROUS. | |
 
 - Approved forms: IS, WAS (also ARE, WERE)
@@ -5443,11 +4627,8 @@ Modal verbs in which some verb forms are missing.
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-
 |---|---|---|---|
-
 | CAN (v) | Auxiliary modal verb that means to be possible, to be able to, or to be permitted to | A MIXTURE OF FUEL AND OXYGEN CAN CAUSE AN EXPLOSION. YOU CAN CLEAN THE DRAIN HOLES WITH THE CLEANING TOOL. YOU CAN OPERATE THE VEHICLE AFTER THE INSPECTION IS COMPLETED. | |
-
 | WILL (v) | Auxiliary modal verb that shows simple future tense | WARNINGS AND CAUTIONS IN THIS MANUAL WILL HELP YOU TO DO THE WORK SAFELY AND CORRECTLY. | |
 
 - CAN: No other verb forms.
@@ -5465,9 +4646,7 @@ Adjectives are given in their base form, with their comparative and superlative 
 Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-
 |---|---|---|---|
-
 | SLOW (adj) | At low speed | MAKE SURE THAT THE MOVEMENT OF THE ELEVATORS IS SLOW. | |
 
 - Comparative and superlative: SLOWER, SLOWEST
@@ -5479,11 +4658,8 @@ Frequently (but not always), you can make an adverb from an adjective when you a
 Examples:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-
 |---|---|---|---|
-
 | SLOWLY (adv) | In a slow manner | TURN THE KNOB SLOWLY. | |
-
 | briskly (adv) — UNAPPROVED | QUICKLY (adv) | RUB THE SURFACE QUICKLY WITH A SOFT, DRY CLOTH. | Rub the surface briskly with a soft, dry cloth. |
 
 ## How to use the dictionary
@@ -5491,15 +4667,10 @@ Examples:
 The dictionary gives you the information that is necessary to write in STE. Each entry in the dictionary has four columns:
 
 | Column | Content |
-
 |--------|---------|
-
 | 1 | Word (part of speech) |
-
 | 2 | Approved meaning/ALTERNATIVES |
-
 | 3 | STE EXAMPLE |
-
 | 4 | Non-STE example |
 
 The first column in the dictionary does not include technical nouns or technical verbs. But the second column can include technical nouns or technical verbs as alternatives to words that are not approved. Then, the abbreviations TN and TV in parentheses identify these alternatives.
@@ -5513,9 +4684,7 @@ Column 2 of the dictionary entry can give an approved meaning. When column 2 giv
 Example:
 
 | Approved meaning/ALTERNATIVES |
-
 |---|
-
 | In a position at the rear of |
 
 with a meaning that is not approved. Thus, you must use a different word that has the meaning that you want.
@@ -5541,27 +4710,20 @@ Example:
 > **STE:** KEEP (v)
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |------------|-------------------------------|-------------|-----------------|
-
 | HOLD (v) | | TURN THE ROTATING TUBE 75 DEGREES. THEN, HOLD THE TUBE IN THIS POSITION. | Turn the rotating tube 75 degrees. Then, maintain the tube in this position. |
-
 | MAINTENANCE (n) | | DO MAINTENANCE ON THE WATER SUPPLY SYSTEM. | Maintain the water supply system. |
 
 Example:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |------------------------|-------------------------------|-------------|-----------------|
-
 | uncovered (v) — UNAPPROVED | COVER (TN) | DO NOT PUT A COVER ON THE CONTAINER. | Leave the container uncovered. |
 
 Example:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |------------------------|-------------------------------|-------------|-----------------|
-
 | simultaneously (adv) | AT THE SAME TIME | DO THESE TWO STEPS AT THE SAME TIME. | Do these two steps simultaneously. |
 
 ## Help
@@ -5577,17 +4739,13 @@ Examples:
 This category of help includes recommendations that give you more information or instructions about how to use the approved word correctly.
 
 | Approved meaning/ALTERNATIVES |
-
 |---|
-
 | 1. To apply a force to something to move it away from the source of the force |
 
 > **STE:** PUSH THE ROD INTO THE HOLE.
 
 | Approved meaning/ALTERNATIVES | |
-
 |---|---|
-
 | 2. To move with a force against something | Use this word together with a preposition or an adverb to show direction. |
 
 ### Category 2
@@ -5595,19 +4753,12 @@ This category of help includes recommendations that give you more information or
 This category of help tells you that some approved words, for example ABOUT (prep), have a restricted meaning. Thus, you must use the approved alternatives for other meanings. When the help refers to restricted meanings of approved words, the dictionary gives STE and non-STE examples in columns 3 and 4.
 
 | Approved meaning/ALTERNATIVES | |
-
 |---|---|
-
 | Concerned with | For other meanings, use: |
-
 | | APPROXIMATELY (adv) |
-
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |------------|-------------------------------|-------------|-----------------|
-
 | APPROXIMATELY (adv) | | DRAIN APPROXIMATELY 2 LITERS OF FUEL FROM THE TANK. | Drain about 2 liters of fuel from the tank. |
-
 | AROUND (prep) | | TURN THE SHAFT AROUND ITS AXIS. | Rotate the shaft about its axis. |
 
 ### Category 3
@@ -5615,9 +4766,7 @@ This category of help tells you that some approved words, for example ABOUT (pre
 This category of help tells you to be careful with the words that are approved for only one context. For example, the word SWALLOW (v) is only applicable to safety instructions. You must not use it in other contexts.
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 |------------|-------------------------------|-------------|-----------------|
-
 | SWALLOW (v) | To take through the mouth and esophagus into the stomach | IF YOU SWALLOW NITRIC ACID, DO NOT CAUSE VOMITING. GET MEDICAL AID IMMEDIATELY. | SWALLOWS, SWALLOWED, SWALLOWED |
 
 Use this word for safety instructions only.
@@ -5627,11 +4776,8 @@ Use this word for safety instructions only.
 This category of help gives you important information about the applicable listed words (also those that are not approved).
 
 | Approved meaning/ALTERNATIVES |
-
 | --- |
-
 | 1. To occur, exist |
-
 | 2. To have a property to be equal to |
 
 #### IS, WAS (also ARE, WERE)
@@ -5671,29 +4817,19 @@ Many of the given examples come from the subject field of aircraft maintenance. 
 ### Examples
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 | --- | --- | --- | --- |
-
 | A (art) | Function word: indefinite article | A FUEL PUMP IS INSTALLED IN ZONE 10. | |
-
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 | --- | --- | --- | --- |
-
 | **main (adj) — UNNAPROVED** | PRIMARY (adj) | THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID. | The main cause of valve failure is contamination of the fluid. |
-
 | **manufacture (v) — UNNAPROVED** | MAKE (v) | YOU CAN MAKE THE CLEARING TOOL LOCALLY. | The clearing tool can be manufactured locally. |
 
 OF THE VALVE FAILURE IS CONTAMINATION OF THE FLUID. failure is contamination of the fluid.
 
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-
 | --- | --- | --- | --- |
-
 | **A (art)** | Function word: indefinite article | A FUEL PUMP IS INSTALLED IN ZONE 10. | |
-
 | **ABOVE (prep)** | In (or to) a position farther up than something | LIFT THE CYLINDER ABOVE ITS INSTALLED POSITION. | |
-
 |  | For other meanings, use: MORE THAN | THE PRESSURE VALUE MUST BE MORE THAN 800 kPa. | The pressure value must be above 800 kPa. |
 
 ## How to Select Words Correctly
@@ -5706,85 +4842,45 @@ The table that follows gives you a list of the most frequently recurring errors 
 they use STE. If a word is not approved in the dictionary, do not use it.
 
 | Word (POS) | Meaning & Examples |
-
 |---|---|
-
 | **acceptable (adj) — UNNAPROVED** | PERMITTED (adj) |
-
 | **alternate (adj) — UNNAPROVED** | ALTERNATIVE (adj) |
-
 | **any (adj) — UNNAPROVED** | None or a different sentence construction |
-
 | **avoid (v) — UNNAPROVED** | PREVENT (v) |
-
 | **both (adj) — UNNAPROVED** | THE TWO (TN) |
-
 | **check (v) — UNNAPROVED** | CHECK (n) |
-
 | **cover (v) — UNNAPROVED** | COVER (TN) |
-
 | **complete (adj) — UNNAPROVED** | COMPLETED (adj) |
-
 | **damage (v) — UNNAPROVED** | DAMAGE (n) |
-
 | **ensure (v) — UNNAPROVED** | MAKE SURE (v) |
-
 | **fit (v) — UNNAPROVED** | INSTALL (v) |
-
 | **follow (v) — UNNAPROVED** | OBEY (v) |
-
 | **further (adj) — UNNAPROVED** | MORE (adj) |
-
 | **further (adv) — UNNAPROVED** | MORE (adv) |
-
 | **have to (v) — UNNAPROVED** | Use an action verb in the imperative form |
-
 | **however (adv) — UNNAPROVED** | BUT (conj) |
-
 | **insert (v) — UNNAPROVED** | PUT (v) |
-
 | **main (adj) — UNNAPROVED** | PRIMARY (adj) |
-
 | **may (v) — UNNAPROVED** | CAN (v) |
-
 | **need (v) — UNNAPROVED** | NECESSARY (adj) |
-
 | **now (adv) — UNNAPROVED** | AT THIS TIME |
-
 | **old (adj) — UNNAPROVED** | REMAINING (adj), USED (adj), EXPIRED (adj) |
-
 | **over (prep) — UNNAPROVED** | ABOVE (prep), ON (prep), ALONG (prep) |
-
 | **people (n) — UNNAPROVED** | PERSON (n), PERSONNEL (n) |
-
 | **perform (v) — UNNAPROVED** | DO (v) |
-
 | **portion (n) — UNNAPROVED** | PART (n) |
-
 | **press (v) — UNNAPROVED** | PUSH (v) |
-
 | **reach (v) — UNNAPROVED** | GET (v) |
-
 | **repeat (v) — UNNAPROVED** | DO (v) … AGAIN |
-
 | **required (v) — UNNAPROVED** | NECESSARY (adj) |
-
 | **rotate (v) — UNNAPROVED** | TURN (v) |
-
 | **secure (v) — UNNAPROVED** | ATTACH (v), SAFETY (v) |
-
 | **shall (v) — UNNAPROVED** | MUST (v) |
-
 | **should (v) — UNNAPROVED** | MUST (v) |
-
 | **since (conj) — UNNAPROVED** | BECAUSE (conj) |
-
 | **test (v) — UNNAPROVED** | TEST (n) |
-
 | **therefore (adv) — UNNAPROVED** | THUS (adv), AS A RESULT |
-
 | **under (prep) — UNNAPROVED** | BELOW (prep), IN (prep), LESS THAN |
-
 | **using (v) — UNNAPROVED** | USE (v), WITH (prep) |
 
 ## List of approved verbs
@@ -5793,101 +4889,53 @@ The table that follows gives you the list of the approved verbs in the dictionar
 quick-reference tool to find the approved verbs.
 
 | A–C | C–G | G–N | O–S | S–Z |
-
 |---|---|---|---|---|
-
 | A | CONTROL | GO | O | SMELL |
-
 | ABSORB | CORRECT | GO OFF | OBEY | SMOKE |
-
 | ACCEPT | COUNT | GROUND | OCCUR | SOAK |
-
 | ACTIVATE | CUT | H | OPEN | SPEAK |
-
 | ADAPT | D | HANG | OPERATE | SPILL |
-
 | ADD | DEACTIVATE | HAVE | OVERRIDE | SPRAY |
-
 | ADJUST | DECREASE | HEAR | P | START |
-
 | AGREE | DE-ENERGIZE | HELP | PAINT | STAY |
-
 | ALIGN | DEFLATE | HIT | PARK | STOP |
-
 | APPLY | DEFUEL | HOLD | POINT | STOW |
-
 | ARM | DEPLOY | I | POLISH | SUBTRACT |
-
 | ASSEMBLE | DISARM | IDENTIFY | PREPARE | SUPPLY |
-
 | ATTACH | DISCARD | IGNORE | PRESSURIZE | SWALLOW |
-
 | B | DISCONNECT | ILLUMINATE | PREVENT | T |
-
 | BALANCE | DISENGAGE | INCLUDE | PROTRUDE | TAG |
-
 | BE | DIVIDE | INCREASE | PULL | TAP |
-
 | BECOME | DO | INFLATE | PUSH | TELL |
-
 | BEND | DRAIN | INSTALL | PUT | THINK |
-
 | BLEED | DRINK | INTERCHANGE | PUT ON | TIGHTEN |
-
 | BLOW | DRY | ISOLATE | Q | TILT |
-
 | BOND | E | J | R | TORQUE |
-
 | BREAK | EAT | K | READ | TOUCH |
-
 | BREATHE | EJECT | KEEP | RECEIVE | TOW |
-
 | BURN | ENERGIZE | KILL | RECOMMEND | TRANSMIT |
-
 | BYPASS | ENGAGE | KNOW | RECORD | TRY |
-
 | C | ERASE | L | RECYCLE | TUNE |
-
 | CALCULATE | EXAMINE | LATCH | REFER | TURN |
-
 | CALIBRATE | EXPAND | LET | REFUEL | TWIST |
-
 | CAN | EXTEND | LIFT | REJECT | U |
-
 | CANCEL | EXTINGUISH | LISTEN | RELEASE | UNFOLD |
-
 | CANNOT | F | LOCK | REMOVE | UNLOCK |
-
 | CATCH | FALL | LOOK | REPAIR | UNWIND |
-
 | CAUSE | FEATHER | LOOSEN | REPLACE | USE |
-
 | CHANGE | FEEL | LOWER | RETRACT | V |
-
 | CHARGE | FILL | LUBRICATE | RUB | W |
-
 | CLEAN | FIND | M | S | WAIT |
-
 | CLOSE | FIRE | MAKE | SAFETY | WALK |
-
 | COLLECT | FLASH | MAKE SURE | SCHEDULE | WANT |
-
 | COME | FLOW | MEASURE | SEAL | WEAR |
-
 | COME ON | FLUSH | MELT | SEE | WEIGH |
-
 | COMPARE | FOLD | MIX | SELECT | WILL |
-
 | COMPLETE | FOLLOW | MONITOR | SEND | WIND |
-
 | COMPRESS | FREEZE | MOOR | SENSE | WRITE |
-
 | CONNECT | G | MOVE | SET | X, Y, Z |
-
 | CONTACT | GET | MULTIPLY | SHAKE | |
-
 | CONTAIN | GIVE | MUST | SHOW | |
-
 | CONTINUE | | N | SIMULATE | |
 
 *(Page 148 is intentionally blank.)*
