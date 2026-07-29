@@ -15,11 +15,11 @@ metadata:
 ## Overview
 
 After merge and validation, produce the 6 STE-Code artifact files by adapting
-the extracted spec data from `ste-code/workers/master.md`.
+the extracted spec data from `ste-code/merged/master.md`.
 
 ## Prerequisites
 
-- [ ] GATE 2 complete: `ste-code/workers/master.md` exists and validated
+- [ ] GATE 2 complete: `ste-code/merged/master.md` exists and validated
 - [ ] All 53 rules present in master.md
 - [ ] All 19 categories enumerated
 - [ ] Dictionary entries available

@@ -31,7 +31,7 @@ Workers output in order (w001 covers pages 1-4, w109 covers 433-434).
 Simple concatenation in page order preserves document flow:
 
 ```bash
-cat ste-code/extracted/w*.md > ste-code/workers/master-raw.md
+cat ste-code/extracted/w*.md > ste-code/merged/master-raw.md
 ```
 
 ### Step 2: Deduplicate
@@ -118,8 +118,8 @@ If any mismatch found, flag the worker responsible and re-extract those pages.
 
 ## Output
 
-- `ste-code/workers/master-raw.md` — concatenated raw extraction (temporary)
-- `ste-code/workers/master.md` — deduplicated, organized master state (permanent)
+- `ste-code/merged/master-raw.md` — concatenated raw extraction (temporary)
+- `ste-code/merged/master.md` — deduplicated, organized master state (permanent)
 
 ## Verification Gates
 
