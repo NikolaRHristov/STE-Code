@@ -39,34 +39,56 @@ LAUNCH 3 workers (bg + notify_on_complete=true)
 8. **LISTS** — `1. 2. 3.` for numbered, `-` for bullets
 9. **SPACING** — single blank lines, no triple blanks, no trailing spaces
 
-## WORKER PROMPT TEMPLATE
+## WORKER PROMPT GENERATION
 
-Save to `ste-code/prompts-refine/rNNN-prompt.txt`:
+The Python script `ste-code/generate_refine_prompts.py` generates all 109 prompts with the full 9 rules expanded inline. Each prompt looks like:
 
 ```
-TASK: Reformat the extracted spec file into clean, standardized markdown.
+TASK: Reformat the extracted spec file into clean, standardized markdown following ALL 9 refinement rules below.
 
 INPUT: ste-code/extracted/wNNN-pPPPP-PPPP.md
 OUTPUT: ste-code/refined/rNNN-pPPPP-PPPP.md
 
-RULES: [all 9 rules from above]
+RULES (apply in order, do not skip any):
+
+1. PRESERVE ALL CONTENT...
+2. HEADINGS: Use # for page header...
+[... all 9 rules in full detail ...]
+7. METADATA: Replace repetitive page headers with a single metadata block...
+[... page-specific page range filled in ...]
 
 Output ONLY the refined markdown file. No explanations, no commentary.
 ```
 
-Launch: `hermes -z "$(cat ste-code/prompts-refine/rNNN-prompt.txt)" -m deepseek-v4-pro --yolo`
+Do NOT write prompts by hand — always use: `python3 ste-code/generate_refine_prompts.py`
+
+Launch each worker: `hermes -z "$(cat ste-code/prompts-refine/rNNN-prompt.txt)" -m deepseek-v4-pro --yolo`
 
 ## PROGRESS TRACKING
 
-Update `ste-code/REFINE-PROGRESS.md` after EVERY batch. Update `.hermes/feedback/exchange.md` after significant milestones.
+After each batch, update `ste-code/REFINE-PROGRESS.md`:
 
-## GENERATING PROMPTS
+```markdown
+Batch N: [x] rNNN (pages A-B), [x] rNNN (pages C-D), [x] rNNN (pages E-F)
+```
 
-Use `ste-code/generate_refine_prompts.py` to auto-generate all 109 prompts from the extracted files.
+Also update `.hermes/feedback/exchange.md` after significant milestones (every 10 batches).
+
+## FAILURE HANDLING
+
+If a worker times out or produces bad output:
+- Check if output file already exists on disk (may have written before hanging)
+- If missing: re-launch that specific worker with same prompt
+- If truncated (<30 lines): split page range in half, launch two sub-workers
 
 ## WHEN COMPLETE
 
-Write state report using `agent-state-report` skill. Signal completion in `.hermes/feedback/exchange.md`. The continuation orchestrator picks up stages 3-5 (merge → adapt → artifacts).
+1. Verify: `ls ste-code/refined/r*-p*.md | wc -l` must be 109
+2. Verify: no zero-byte files, no gaps in r001-r109
+3. Spot-check 3 random files for formatting quality
+4. Write state report using `.hermes/skills/spec-extraction/agent-state-report/SKILL.md`
+5. Signal completion in `.hermes/feedback/exchange.md`
+6. Stages 3-5 (merge → adapt → artifacts) continue from `.hermes/agent/agent-1-extractor.md`
 
 ## START NOW
 

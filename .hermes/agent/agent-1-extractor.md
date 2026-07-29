@@ -56,7 +56,7 @@ Batch N: [x] WNNN (pages A-B), [x] WNNN (pages C-D), [x] WNNN (pages E-F)
 ## WHEN COMPLETE
 
 1. Run `python3 ste-code/check-rails.py` — all 4 checks must pass
-2. Write state report to `.hermes/agent/extraction-orchestrator/state.md`
+2. Write state report
 3. Signal in `.hermes/feedback/exchange.md` that extraction is done
 4. Agent #2 (refinement orchestrator) picks up next
 

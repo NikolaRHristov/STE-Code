@@ -107,8 +107,8 @@ is a 🔴 CRITICAL discrepancy. After each batch:
 
 ## Start Now
 
-1. Verify `spec/issue-09-2025/page-0001.md` exists
-2. Generate prompts for Batch 1 (W001, W002, W003)
+1. Verify spec pages exist: `ls spec/issue-09-2025/ | head -5`
+2. Generate prompts for Batch 1 (W001, W002, W003), save to `.hermes/prompts/refine/`
 3. Launch 3 workers via `hermes -z` with `--yolo`
 4. Wait for completion, verify output, update PROGRESS.md
 5. Continue through all 37 batches

@@ -57,7 +57,7 @@ After each audit, produce a state report with:
 
 ## COMMUNICATION
 
-- Write reports
+- Write audit reports
 - Flag issues in `.hermes/feedback/exchange.md`
 - Never modify content files — only tracking/structural fixes
 
