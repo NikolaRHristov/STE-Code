@@ -263,7 +263,14 @@ def extract_page_to_markdown(pdf_path, page_number):
         md_lines.append(line.strip())
         i += 1
 
-    return '\n'.join(md_lines), raw_text
+    return collapse_blank_lines('\n'.join(md_lines)), raw_text
+
+
+def collapse_blank_lines(markdown):
+    """Collapse 3+ consecutive blank lines to max 2."""
+    while '\n\n\n\n' in markdown:
+        markdown = markdown.replace('\n\n\n\n', '\n\n\n')
+    return markdown
 
 
 if __name__ == '__main__':
