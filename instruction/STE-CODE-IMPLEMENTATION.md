@@ -108,39 +108,31 @@ EOF
 
 ## INLINE BATCH EXTRACTION PROTOCOL
 
-Extract by reading pages yourself and writing output files. Process in batches.
-After each batch, update PROGRESS.md.
+**The agent has proven that `hermes -z` workers DO support file I/O.**
+Use the following v3 protocol (109 workers, 4 pages each, 37 batches of 3):
 
-### Format for each worker output file
+### Worker Command Template
 
-```
-# ASD-STE100 Issue 9 — <Section Description>
-
-## Source: pages <START>-<END>
-
-[EXACT spec text from the pages, preserving:
-- ALL rule numbers and rule text
-- ALL STE examples and non-STE example pairs
-- ALL dictionary entries with word, POS, meaning, forms, alternatives
-- ALL category names, numbers, descriptions, and examples
-- ALL synonym mappings and polysemy resolutions
-- ALL pipeline step descriptions]
+```bash
+hermes -z "Read spec/issue-09-2025/page-<<START>>.md through page-<<END>>.md.
+Extract ALL content exactly into ste-code/workers/w<<NNN>>-p<<START>>-<<END>>.md.
+Do not summarize. Include every word, every table, every example.
+Output ONLY the markdown file." -m deepseek-pro --yolo
 ```
 
-### Batch Execution
+### Batch Launch (3 workers at a time)
 
-Process 2-3 worker files per response. For each:
-1. Read the spec pages using read_file
-2. Extract all content faithfully
-3. Write to ste-code/workers/w<N>-<description>.md
-4. Update PROGRESS.md: change [ ] to [x]
+Launch 3 workers simultaneously via terminal background. Wait for batch
+completion, verify output files exist and have content, then continue.
 
-### Quality Rules
-- Every rule must have at least one STE/non-STE example pair
-- Every dictionary entry must have word, POS, approved/unapproved status, meaning, forms
-- No summarization — extract EXACT text
-- If a page range has no content matching a category, note "None found in this range"
-- Verify each file exists AND has content before marking complete
+### Worker Grid
+
+434 pages ÷ 4 pages per worker = 109 workers, 37 batches of 3.
+Full grid documented at: `.hermes/skills/spec-extraction/references/worker-grid.md`
+
+Batch 01: W001(1-4), W002(5-8), W003(9-12)
+Batch 02: W004(13-16), W005(17-20), W006(21-24)
+... (103 more workers across 35 more batches)
 
 ---
 
