@@ -55,7 +55,7 @@ Batch 37: W109(433-434) — (2 pages only, last batch)
 ## Worker Prompt Template (per worker)
 
 ```bash
-hermes -z "Read spec/issue-09-2025/page-NNNN.md through page-NNNN.md. Extract ALL content exactly into ste-code/workers/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m deepseek-pro --yolo
+hermes -z "Read spec/issue-09-2025/page-NNNN.md through page-NNNN.md. Extract ALL content exactly into ste-code/workers/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 ```
 
 ## Launch Script

@@ -41,7 +41,7 @@ Output ONLY the markdown file." -m deepseek-pro --yolo
 
 ## Launch Rules
 
-- **Always** use `hermes -z "$(cat prompt.txt)" -m deepseek-pro --yolo`
+- **Always** use `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
 - **Always** launch exactly 3 workers per batch (never more)
 - **Always** verify output after each batch before launching next
 - **Never** use inline extraction — it defeats parallelization

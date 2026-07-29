@@ -118,11 +118,41 @@ every page). Replace with a single metadata block at file start:
 - Nested lists: 2-space indent
 - Multi-paragraph list items: 2-space indent on continuation lines
 
-### Rule 9: CONSISTENT SPACING
-- Exactly one blank line between sections
-- Exactly one blank line before and after tables
-- No trailing whitespace
-- No triple blank lines
+### Rule 9: CONSISTENT SPACING — HEADINGS, PARAGRAPHS, TABLES
+
+**CRITICAL: Never glue headings to text. Always separate with blank lines.**
+
+```
+❌ WRONG:
+### Rule 1.1
+Rule text starts immediately...
+
+❌ WRONG:
+| Header |
+|--------|
+| Cell |
+
+✅ CORRECT:
+### Rule 1.1
+
+Rule text on its own line, separated by a blank line from the heading above.
+
+| Header |
+|--------|
+| Cell |
+
+Next paragraph separated by a blank line from the table above.
+```
+
+**Spacing rules (non-negotiable):**
+- `### Heading` → blank line → content (paragraph, table, list, or blockquote)
+- Content end → blank line → next `### Heading`
+- Table end → blank line → next paragraph or heading
+- List end → blank line → next paragraph or heading
+- Blockquote end → blank line → next content
+- Exactly one blank line between sections (never two, never zero)
+- No trailing whitespace on any line
+- No triple blank lines anywhere
 
 ## Worker Setup
 
@@ -169,14 +199,14 @@ Output ONLY the refined markdown file. No explanations, no commentary.
 
 ### Launch Protocol
 
-Same as extraction: 3 workers per batch, verify after each batch.
+Launch workers using ONLY `deepseek-v4-pro` (the most reasoning-capable model — NEVER flash):
 
 ```bash
 # Single command to launch the entire refinement swarm:
 # (requires the coordinator to generate 109 prompts and launch in 37 batches)
-hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m deepseek-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m deepseek-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m deepseek-pro --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
 ```
 
 ## Verification
