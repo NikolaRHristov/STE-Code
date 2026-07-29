@@ -1,0 +1,398 @@
+## Page 11 of 38
+
+Impact on Code: From Controlled Language to Computable Text
+The specification's design has direct implications for code generation, automated processing,
+and AI/ML pipelines:
+Deterministic parsing. Because STE locks each word to one part of speech and one meaning, a
+parser can resolve lexical ambiguity without statistical methods. "Test" is always a noun, never
+a verb — so "Do the test" parses unambiguously. This contrasts with standard English where
+"test the system" requires POS-tagging.[36]
+Reduced translation table size. The one-to-one synonym mapping means a translation memory
+system needs far fewer entries. If "start" is the only word for "begin," the translation engine
+maps one source token to one target token — no disambiguation needed. Organizations report
+~25% reduction in text volume, directly reducing translation costs.[37]
+Structured procedural mapping. STE procedural writing (Section 5) maps closely to imperative
+code constructs: numbered steps become sequential statements, conditional instructions
+become if-then blocks, and the imperative verb form maps to function calls. "Remove the bolt
+from the flange" → remove(bolt, flange).
+Safety-critical reliability. In aerospace and defense, ambiguous documentation can cause
+catastrophic failure. STE's single-meaning constraint eliminates the "replace" problem — where
+"replace" could mean "substitute" or "put back" — by locking each word to one definition. This is
+the linguistic equivalent of defensive programming: eliminating undefined behavior at the
+language level.[37]
+AI data quality. As noted in recent analysis, STE provides the "clean data in" foundation for AI
+and information science — controlled vocabulary and grammar produce training data with
+minimal noise, improving NLP model accuracy downstream.[37]
+This is the end of Part 2. Say "continue" and I'll deliver Part 3: The complete rule-by-rule
+breakdown of Sections 2–9 (noun clusters, verbs, sentences, procedural writing, descriptive
+writing, safety instructions, punctuation, and writing practices) — with every rule's formal
+constraint, its code analogy, and its relationship to normal English.
+⁂
+continue
+I have the full specification content from our earlier retrieval. Here is Part 3: The Complete
+Rule-by-Rule Breakdown of Sections 2–9.
+Part 3 — Sections 2 Through 9: Every Rule, Every Constraint
+
+---
+
+## Page 12 of 38
+
+Section 2 — Noun Clusters (Rules 2.1–2.3)
+A noun cluster is a sequence of nouns where each noun modifies the next — standard English
+allows unlimited stacking, which creates parse ambiguity. STE constrains this tightly.
+Rule 2.1 — Maximum three words in a noun cluster. A noun cluster must not contain more than
+three words. Example: "engine fuel pump" (3 words) is permitted; "engine fuel pump pressure
+indicator" (5 words) must be rewritten as "the pressure indicator of the engine fuel pump". The
+code analogy is a nesting depth limit — like restricting expression depth to 3 levels in an AST to
+prevent stack overflow in parsing.[38]
+Rule 2.2 — Use prepositions to break long clusters. When a cluster exceeds three words, writers
+must insert a preposition (usually "of") to clarify the relationship. This is equivalent to explicit
+parenthesization in code — instead of relying on operator precedence (a * b * c * d * e), you
+write a * (b * (c * (d * e))) to make the evaluation order unambiguous.[38]
+Rule 2.3 — No noun clusters as verbs. A noun cluster must not be used as a verb. For example,
+you cannot write "troubleshoot the system" if "troubleshoot" is not an approved verb — you
+must write "Do the troubleshooting of the system" or use an approved verb like "examine". This
+enforces the type boundary between nouns and verbs — no implicit casting.[38]
+Section 3 — Verbs (Rules 3.1–3.7)
+Section 3 is the heart of STE's grammar engine — it restricts English's rich verb system to a
+minimal, deterministic subset.
+Rule 3.1 — Use approved verb forms only. Only verbs listed in the dictionary (or approved
+technical verbs) are permitted. Each verb has a fixed set of approved inflected forms —
+typically the base form, the -s form, the -ed form, and the past participle. This is the lexical
+equivalent of a fixed function signature — you cannot call a verb with an unapproved
+conjugation.[38]
+Rule 3.2 — Use the imperative for instructions. Procedural steps must use the imperative form:
+"Remove the bolt" — not "You must remove the bolt" or "The bolt should be removed". This
+maps directly to function calls in imperative programming: remove(bolt). The subject is
+implicit, just as the calling context is implicit in a procedure call.[38]
+Rule 3.3 — Use only approved tenses. STE permits exactly four tenses:[38]
+STE Tense Usage Code Analogy
+Simple present General facts, descriptions Constant declaration / type definition
+Simple past Completed actions Executed statement / logged event
+Past participle Passive voice (descriptive only) Returned value / state descriptor
+Future (will/shall) Future actions or requirements Forward declaration / scheduled task
+Tenses like present continuous ("is removing"), present perfect ("has removed"), and all
+conditional forms ("would remove," "could remove") are prohibited. This eliminates the need
+
+---
+
+## Page 13 of 38
+
+for temporal logic in parsing — the time reference is always explicit and unambiguous.[38]
+Rule 3.4 — Keep to one verb form per sentence. A sentence must not contain more than one
+verb form unless connected by an approved conjunction. "Remove the bolt and examine the
+flange" is acceptable (two imperatives joined by "and"); "Remove the bolt that holds the cover
+that protects the seal" is not (chained relative clauses). This is equivalent to limiting statements
+per basic block — one operation, one statement.[38]
+Rule 3.5 — Restrict the -ing form. Gerunds and present participles are heavily restricted
+because they create syntactic ambiguity: "Removing the bolt is necessary" could parse as a
+gerund (nominalized action) or a participle (adjective modifying "bolt"). STE generally requires
+rewriting: "It is necessary to remove the bolt". In code terms, this eliminates ambiguous
+grammar productions — the parser never encounters a token that could be a noun or a verb
+depending on context.[38]
+Rule 3.6 — Active voice mandatory in procedures. Procedural writing must use active voice:
+"Remove the bolt" — not "The bolt must be removed". Active voice makes the agent explicit,
+which is critical for safety — the reader must know who performs the action. In code terms, this
+is explicit invocation rather than implicit dispatch.[38]
+Rule 3.7 — Passive voice restricted to descriptive writing. Passive voice is permitted only in
+descriptive (non-procedural) text, and only when the agent is irrelevant or unknown. "The bolt
+is made of titanium" is acceptable (descriptive, agent = manufacturer, irrelevant); "The bolt is
+removed" in a procedure is not. This is like permitting read-only accessors in descriptive code
+while requiring explicit mutation calls in procedural code.[38]
+Section 4 — Sentences (Rules 4.1–4.4)
+Rule 4.1 — Sentence length limits. Procedural sentences: maximum 20 words. Descriptive
+sentences: maximum 25 words. This is a buffer size limit — it prevents sentences from
+becoming too complex to parse in a single cognitive or computational pass.[38]
+Rule 4.2 — No word omission. Words must not be omitted for brevity. Standard English permits
+"Clean and inspect the flange" (omitting the second "the"), but STE requires "Clean the flange
+and inspect the flange". This is the no-elision rule — every token must be explicit, like requiring
+fully qualified names in code rather than relying on scope resolution.[38]
+Rule 4.3 — Vertical lists. Vertical (bulleted or numbered) lists must be formatted consistently,
+with each item being a complete sentence or a parallel fragment. The list must be introduced
+by a lead-in sentence ending with a colon. This maps to array initialization syntax — each
+element follows the same type signature.[38]
+Rule 4.4 — Connecting words and phrases. Sentences must use approved connecting words
+(and, or, but, if, because, although, etc.) to show logical relationships. Lists of disconnected
+sentences are prohibited — the logical flow must be explicit. This is the control-flow annotation
+requirement — every transition between statements must be marked, like requiring break
+statements in a switch or explicit goto labels.[38]
+
+---
+
+## Page 14 of 38
+
+Section 5 — Procedural Writing (Rules 5.1–5.5)
+Section 5 defines the instruction grammar — the closest STE gets to executable code.
+Rule 5.1 — One instruction per sentence. Each procedural sentence must contain exactly one
+instruction. "Remove the bolt and examine the flange" is technically two instructions and must
+be split into two numbered steps. This is the single-responsibility principle applied to text —
+one sentence, one action.[38]
+Rule 5.2 — Numbered steps. Procedural steps must be numbered sequentially. This creates an
+ordered execution sequence — like line numbers in BASIC or sequential statements in a
+function body.[38]
+Rule 5.3 — Notes and cautions placement. Notes and cautions must appear before the step they
+relate to, not a er. This is the precondition assertion pattern — you state the warning before
+the operation, like a require or assert statement at the top of a function.[38]
+Rule 5.4 — Conditional instructions. Conditional steps must use "If" at the beginning and
+clearly identify the condition and the resulting action. "If the temperature is more than 80
+degrees Celsius, do the applicable steps in paragraph 3". This maps directly to an if-then block:
+[38]
+if temperature > 80°C:
+execute(paragraph_3_steps)
+Rule 5.5 — Referencing other procedures. Cross-references to other procedures must use
+standardized language: "Do the steps given in [reference]". This is the function call pattern —
+execute_procedure(reference) — with a standardized calling convention.[38]
+Section 6 — Descriptive Writing (Rules 6.1–6.6)
+Rule 6.1 — Paragraph length. Descriptive paragraphs must not exceed 6 sentences (some issues
+specify 7). This is a module size limit — preventing a descriptive block from becoming too large
+to comprehend in one pass.[38]
+Rule 6.2 — One topic per paragraph. Each paragraph must address exactly one topic. This is the
+single-responsibility principle for descriptive text — analogous to one class per file or one
+function per purpose.[38]
+Rule 6.3 — Key phrases as signposts. Descriptive text must use key phrases (e.g., "General,"
+"Description," "Function," "Location") to identify paragraph topics. This is the section header /
+docstring convention — each block is labeled with its semantic purpose.[38]
+Rule 6.4 — Logical flow with connecting words. Paragraphs must flow logically using approved
+connecting words. Like Rule 4.4, this requires explicit control-flow annotation.[38]
+Rule 6.5 — Simple sentence structure. Descriptive sentences must use simple, direct structure
+— no embedded clauses beyond one level. This limits AST depth to prevent parser complexity.
+
+---
+
+## Page 15 of 38
+
+[38]
+Rule 6.6 — No procedural language in descriptive text. Descriptive sections must not contain
+imperative instructions. This enforces the separation of concerns — descriptions are read-only
+(declarative), procedures are executable (imperative).[38]
+Section 7 — Safety Instructions (Rules 7.1–7.3)
+Rule 7.1 — Warnings and cautions format. Safety instructions must use a two-part structure: (1)
+a simple command identifying the hazard, then (2) an explanation of the consequence.
+"WARNING: DO NOT GET NEAR THE LEAK. THE FUEL IS FLAMMABLE". This is the exception
+specification pattern — like a typed exception with a message:[38]
+throw SafetyWarning(
+command="DO NOT GET NEAR THE LEAK",
+reason="THE FUEL IS FLAMMABLE"
+)
+Rule 7.2 — Placement before the related step. Warnings and cautions must appear before the
+procedural step they protect — never a er. This is the precondition guard — the safety check
+runs before the operation, like a @precondition annotation.[38]
+Rule 7.3 — Use approved safety vocabulary. Safety instructions must use approved words and
+must not be diluted with vague language. "Be careful" is unapproved; "WARNING: DO NOT
+TOUCH THE HOT SURFACE" is approved. This enforces a typed safety vocabulary — only
+specific, unambiguous tokens are permitted in safety-critical contexts.[38]
+Section 8 — Punctuation and Word Counts (Rules 8.1–8.7)
+Rule 8.1 — No semicolons. Semicolons are prohibited because they create compound sentences
+that are hard to parse. In code terms, this is like prohibiting the comma operator in C — it
+forces each statement to stand alone.[38]
+Rule 8.2 — Word count per sentence. Enforces the limits from Rule 4.1 (20 words procedural, 25
+descriptive). This is a redundant check — like a runtime assertion that validates the compile-
+time constraint.[38]
+Rule 8.3 — Period as the sentence terminator. Only the period may end a sentence — not
+exclamation marks or question marks in technical text. This standardizes the statement
+terminator to a single token, like mandating semicolons in C rather than relying on newlines as
+in Python.[38]
+Rule 8.4 — Colons only for lists. Colons are restricted to introducing vertical lists. They cannot
+join two independent clauses. This is the type-specific operator restriction — the colon token
+has one and only one valid production rule.[38]
+
+---
+
+## Page 16 of 38
+
+Rule 8.5 — Hyphens for compound words. Hyphens are permitted only in approved compound
+terms and must follow dictionary specifications. "le -hand" is approved; "le  hand" (without
+hyphen) is not when used as a compound modifier. This is the compound token rule — certain
+multi-word tokens are treated as single lexical units.[38]
+Rule 8.6 — Abbreviations and acronyms. Abbreviations must be defined on first use, using the
+format: full term (abbreviation). "Federal Aviation Administration (FAA)" on first use, then
+"FAA" therea er. This is the variable declaration pattern — const FAA = "Federal Aviation
+Administration" — define once, reference by symbol therea er.[38]
+Rule 8.7 — No unnecessary punctuation. Parentheses, brackets, and quotation marks are
+restricted to specific approved uses. Parentheses are allowed only for abbreviations (Rule 8.6)
+and for optional information in descriptive text. This prevents side-channel information
+embedding — every piece of information must appear in the main syntactic flow.[38]
+Section 9 — Writing Practices (Rules 9.1–9.4 + General Rules)
+Rule 9.1 — No word-for-word replacement without meaning check. You cannot simply swap an
+unapproved word for its approved alternative if the substitution changes the meaning. For
+example, "assemble" (unapproved) maps to "PUT TOGETHER" (approved), but "assemble a
+team" cannot become "put together a team" in a technical context — the meaning has shi ed.
+This is the semantic type checking rule — a syntactically valid substitution may fail semantic
+validation. It is the most important rule for preventing the "Bag of Parts Fallacy" — the idea that
+a dictionary alone makes text compliant.[39][38]
+Rule 9.2 — Use words correctly. Approved words must be used in their approved sense only.
+"Follow" means "to come a er," not "to obey" — so "Follow the procedure" is wrong; "Do the
+procedure" is right. This is the type safety enforcement — a word has one and only one
+semantic type, and using it in a different sense is a type error.[38]
+Rule 9.3 — Keep instructions in the correct order. Procedural steps must appear in the order
+they are to be performed. This is the execution order invariant — the text order must match the
+execution order, like requiring sequential statement ordering in a function body.[38]
+Rule 9.4 — Consistent style. The same word, format, and structure must be used consistently
+throughout a document. This is the style guide / linter rule — like enforcing consistent naming
+conventions across a codebase.[38]
+General Rules (GR1–GR4)
+These are cross-cutting constraints that apply throughout the specification:[38]
+GR1 — "That" usage. "That" is restricted to its demonstrative pronoun function ("that
+procedure") and as a relative pronoun in restrictive clauses. It must not be used as a
+conjunction meaning "so that" — "Adjust the valve that the pressure is correct" is wrong; "Adjust
+the valve to make sure that the pressure is correct" is right. This is the overloaded token
+resolution rule — "that" has a restricted type signature.[38]
+
+---
+
+## Page 17 of 38
+
+GR2 — "With" usage. "With" is restricted to meaning "together with" or "having". It must not
+mean "by means of" or "using" — "Tighten the bolt with a wrench" is wrong; "Use a wrench to
+tighten the bolt" is right. Again, this is type restriction on a polysemous word.[38]
+GR3 — Pronoun usage. Pronouns must refer clearly to their antecedent, and the antecedent
+must be unambiguous. "Remove the bolt and the nut. Discard it." — "it" is ambiguous (bolt or
+nut?). This is the dangling reference rule — like a linter flagging an ambiguous variable
+reference in code.[38]
+GR4 — "This" usage. "This" must always be followed by a noun — "this procedure," not "this"
+alone. This prevents the ambiguous pointer problem — "this" without a noun is like a void
+pointer with no type information.[38]
+Impact on Code: The Full Mapping Summary
+Across all 53 rules, STE enforces constraints that map to well-known so ware engineering
+principles:
+STE Rule(s) Code Principle Effect
+1.2, 1.3 Type safety (one POS, one meaning) Eliminates polymorphic ambiguity
+2.1–2.3 Nesting depth limit Prevents parser stack overflow
+3.1–3.5 Fixed function signatures Deterministic lexical resolution
+3.6–3.7 Explicit invocation vs. accessor Separates commands from queries (CQRS)
+4.1–4.2 Buffer size + no elision Bounded parse complexity
+5.1–5.5 Single-responsibility + ordered execution Procedural code mapping
+6.1–6.6 Module size + separation of concerns Declarative vs. imperative separation
+7.1–7.3 Precondition guards + typed exceptions Safety-critical runtime checks
+8.1–8.7 Token restrictions + statement terminators Deterministic tokenization
+9.1–9.4 Semantic type checking + linter rules Compile-time + runtime validation
+GR1–GR4 Overload resolution + dangling reference checks Static analysis
+This is the end of Part 3. Say "continue" and I'll deliver Part 4: The full relationship map
+between STE and standard English — polysemy resolution tables, synonym elimination pairs,
+the complete transformation grammar (how to convert non-STE text into STE), and the impact
+on machine translation, NLP pipelines, and code generation.
+⁂
+
+---
+
+## Page 18 of 38
+
+continue
+Here is Part 4: The Transformation Grammar — Converting Standard English to STE, Polysemy
+Resolution, Synonym Elimination, and Impact on Automated Processing.
+Part 4 — The Transformation Grammar
+The Core Transformation Pipeline
+Converting standard English into STE is not a word-for-word substitution — it is a multi-pass
+transformation pipeline that operates at the lexical, syntactic, and semantic levels. The
+specification itself includes a decision flowchart (added in Issue 8) that walks writers through
+the process of determining whether a word is approved, unapproved with an alternative, or
+qualifies as a technical name. The pipeline can be modeled as follows:[40][41]
+Pass 1 — Lexical lookup. Each word in the source text is checked against the STE dictionary. If
+the word is an approved word (uppercase entry), it passes. If it is an unapproved word
+(lowercase entry), the dictionary provides an approved alternative. If the word is not in the
+dictionary at all, proceed to Pass 2.[41]
+Pass 2 — Technical name/verb classification. If a word is not in the dictionary, check whether it
+qualifies as a technical name (one of 19 categories) or a technical verb (manufacturing, IT, or
+operational process). If yes, the word is permitted. If no, the writer must find an approved
+alternative or rephrase.[41]
+Pass 3 — Part-of-speech lock check. Even if a word is approved, verify it is used in its approved
+part of speech. "Test" is an approved noun but not an approved verb — "Test the system" fails
+this check and must be rewritten as "Do a test of the system".[41]
+Pass 4 — Meaning validation (Rule 9.1). Even if the word passes lexical and POS checks, verify
+that the approved meaning matches the intended sense. "Follow the procedure" uses "follow" in
+the sense of "obey," which is not its approved meaning ("come a er") — so it must be rewritten
+as "Do the procedure". This is the semantic type-checking pass that prevents the "Bag of Parts
+Fallacy".[42][41]
+Pass 5 — Grammar rule application. Apply all 53 writing rules: rewrite passive voice to active
+(Rule 3.6), break noun clusters over 3 words (Rule 2.1), split compound sentences (Rule 4.1),
+remove semicolons (Rule 8.1), enforce imperative form (Rule 3.2), and so on.[41]
+Pass 6 — Consistency check (Rule 9.4). Verify that the same term is used consistently
+throughout the document — no synonym variation.[41]
+
+---
+
+## Page 19 of 38
+
+Polysemy Resolution: One Word, One Meaning
+In standard English, polysemy — a single word carrying multiple meanings — is pervasive and
+is the primary source of ambiguity in technical text. STE resolves this by locking each
+approved word to exactly one meaning. Here is a representative set of polysemy resolutions
+from the specification:[43][41]
+STE Approved
+Word Standard English Meanings Rejected Meanings (Must Use Instead)
+Meaning
+FOLLOW (1) come a er, (2) obey, (3) track Come a er Obey → OBEY; track → TRACK
+(1) noun: examination, (2) verb: to
+TEST Noun only Verb sense → DO A TEST
+examine
+REPLACE (1) put back, (2) substitute Put back Substitute → use a different word
+(1) foundation, (2) bottom surface, (3) Unapproved as Foundation → BOTTOM; math/facility →
+BASE
+math term, (4) facility general word technical name
+(1) to adjust, (2) a group, (3) to harden, Adjust → ADJUST; group → GROUP; harden →
+SET To put (verb)
+(4) to put CURE
+(1) correct, (2) direction, (3) Direction → STARBOARD; entitlement →
+RIGHT Correct (adjective)
+entitlement APPROVED TECHNICAL NAME
+(1) not heavy, (2) illumination, (3) to Illumination → APPROVED TECHNICAL NAME;
+LIGHT Not heavy (adjective)
+ignite ignite → not approved
+(1) just, (2) weather condition, (3) Just → CORRECT; weather → weather
+FAIR Unapproved
+exhibition technical name
+(1) to pair, (2) a contest, (3) a small fire-
+MATCH To pair (verb) Contest/igniter → technical names
+starter
+(1) noise, (2) healthy, (3) to measure Unapproved as Noise → APPROVED NOUN; healthy →
+SOUND
+depth adjective CORRECT; measure → MEASURE
+This resolution has a profound effect on automated processing: a parser or NLP system
+processing STE text never needs word-sense disambiguation (WSD) because each word has
+exactly one sense. In standard English, WSD is one of the hardest problems in NLP — STE
+eliminates it entirely at the source.[43][41]
+Synonym Elimination: Canonical Forms
+Standard English offers multiple words for the same concept, which creates inconsistency in
+technical documentation and reduces translation memory match rates. STE selects exactly one
+canonical form per concept. Here is a representative set:[40][41]
+Concept Standard English Synonyms STE Canonical Form
+Begin an action start, begin, commence, initiate, originate START
+End an action stop, end, finish, terminate, conclude, halt STOP
+Remove from location remove, take out, extract, withdraw, detach REMOVE
+
+---
+
+## Page 20 of 38
+
+Concept Standard English Synonyms STE Canonical Form
+Make certain ensure, verify, ascertain, confirm, make sure MAKE SURE
+Display/show show, display, indicate, reveal, present SHOW
+Examine examine, inspect, check, review, look at EXAMINE
+Connect connect, attach, join, link, couple CONNECT
+Close close, shut, seal, secure CLOSE
+Open open, unseal, unfasten, release OPEN
+Put in place install, fit, mount, place, position INSTALL
+Observe observe, monitor, watch, view MONITOR (approved); observe → not approved
+Fasten tighten, fasten, secure, lock TIGHTEN
+Discard discard, dispose of, throw away, jettison DISCARD
+Stop/cease stop, cease, discontinue, suspend STOP
+Correct/accurate correct, accurate, right, exact, precise CORRECT
+The translation impact is direct: because there is exactly one source word per concept, a
+translation memory system stores one translation per source token. In uncontrolled English,
+the same instruction might be written five different ways across a manual, generating five
+different translation memory entries — or worse, five different translations. STE collapses these
+to one.[40]
+Transformation Examples: Non-STE → STE
+Here are full sentence-level transformations showing the pipeline in action:
+Example 1 — Polysemy + passive voice + compound sentence:
+Non-STE: "The bolts should be replaced and the flange needs to be examined prior to
+reassembly."
+Pass 1 (lexical): "replaced" → REMOVE (but "replace" means "put back," not "substitute"
+— meaning check fails in Pass 4)
+Pass 4 (meaning): Intended meaning is "substitute/remove old" — use REMOVE
+Pass 5 (grammar): Passive → active (Rule 3.6); compound sentence → split (Rule 4.1)
+STE: "Remove the bolts. Examine the flange. Then, install the new bolts."
+Example 2 — Noun cluster + gerund + word omission:
+
+---
+
