@@ -1,461 +1,251 @@
-# STE-Code: Simplified Technical English for Code — Implementation Protocol
+# STE-Code: Simplified Technical English for Code — Implementation Protocol v2
 
-> **CRITICAL: Anti-Fabrication Rules — READ BEFORE ANY ACTION**
+> **LESSONS FROM PREVIOUS ATTEMPT (READ FIRST)**
 >
-> 1. You MUST NOT write any output file until its prerequisite worker JSON exists on disk.
-> 2. Every phase has a HARD GATE — a file-existence check. Do not proceed past a gate.
-> 3. If a worker fails, re-launch it. Do not fabricate its data.
-> 4. All STE-Code content MUST cross-reference a worker JSON entry. No spec data = no output.
-> 5. Track progress in `ste-code/PROGRESS.md` — update it after EVERY completed step.
+> 1. `hermes -z` oneshot mode DOES NOT support file I/O tools (read_file, write_file).
+>    Workers launched this way cannot read spec pages or write output files.
+>    DO NOT use `hermes -z` for extraction workers.
+>
+> 2. Instead, use INLINE BATCH EXTRACTION: read pages yourself and write
+>    output files directly, batch by batch. This is the proven approach.
+>
+> 3. DO NOT CLAIM completion when pages are unread. Track exactly which
+>    pages have been processed using PROGRESS.md checkboxes.
+>
+> 4. DO NOT write artifact files until ALL extraction is complete and verified.
+>    Previous attempt fabricated 6 files from general knowledge instead of spec data.
 
 ---
 
-## GATE 0: Environment Setup
+## GATE 0: Environment Verification
 
-**Before any extraction, verify these paths exist and are readable:**
-
+Verify these paths exist:
 ```bash
-ls spec/issue-09-2025/page-0001.md   # Must return the file
-ls spec/issue-09-2025/page-0434.md   # Must return the file
-ls spec/issue-07-2017/page-0001.md   # Must return the file
+ls spec/issue-09-2025/page-0001.md
+ls spec/issue-09-2025/page-0434.md
 ```
 
-**Create output directories:**
-
+Create directories:
 ```bash
 mkdir -p ste-code/workers
-mkdir -p ste-code/artifacts
 ```
 
-**Initialize progress tracking:**
-
+Create PROGRESS.md tracker:
 ```bash
-cat > ste-code/PROGRESS.md << 'TRACKER'
+cat > ste-code/PROGRESS.md << 'EOF'
 # STE-Code Progress Tracker
 
-## Workers
-- [ ] W1: Front matter + Section 1 rules (pages 1-30) → workers/w1.json
-- [ ] W2: Sections 2-3 rules (pages 31-60) → workers/w2.json
-- [ ] W3: Sections 4-5 rules (pages 61-90) → workers/w3.json
-- [ ] W4: Sections 6-7 rules (pages 91-120) → workers/w4.json
-- [ ] W5: Sections 8-9 + GR rules (pages 121-180) → workers/w5.json
-- [ ] W6: Dictionary A-F (pages 181-240) → workers/w6.json
-- [ ] W7: Dictionary G-P (pages 241-300) → workers/w7.json
-- [ ] W8: Dictionary Q-Z (pages 301-360) → workers/w8.json
-- [ ] W9: Appendices + history (pages 361-434) → workers/w9.json
+## Extraction (434 pages total)
+- [ ] W1: pages 1-30 — Front matter, highlights, TOC, subject-to-rule index, general introduction, Section 1 rules (1.1-1.14)
+- [ ] W2: pages 31-60 — Sections 2-3 rules (2.1-2.3, 3.1-3.7), technical noun categories start
+- [ ] W3: pages 61-90 — Sections 4-5 rules (4.1-4.4, 5.1-5.5), technical noun categories continue
+- [ ] W4: pages 91-120 — Sections 6-7 rules (6.1-6.6, 7.1-7.3), technical noun categories complete
+- [ ] W5: pages 121-180 — Sections 8-9 rules (8.1-8.7, 9.1-9.4, GR1-GR8), polysemy resolution table
+- [ ] W6: pages 181-240 — Dictionary A-F, canonical synonym table, introduction to Part 2
+- [ ] W7: pages 241-300 — Dictionary G-P
+- [ ] W8: pages 301-360 — Dictionary Q-Z
+- [ ] W9: pages 361-434 — Appendices, index, change history, decision flowchart
 
 ## Merge
-- [ ] Master state merged from all 9 worker JSONs
-- [ ] Spot-check: 10 random pages verified against master state
+- [ ] All 9 files verified for content (not empty, not fabricated)
+- [ ] Master state assembled from all 9 files
+- [ ] 10 random pages spot-checked against master state
 
-## Adaptation (performed AFTER merge is complete)
-- [ ] Section 1 Rules (1.1-1.14) adapted for code
-- [ ] Section 2 Rules (2.1-2.3) adapted for code
-- [ ] Section 3 Rules (3.1-3.7) adapted for code
-- [ ] Section 4 Rules (4.1-4.4) adapted for code
-- [ ] Section 5 Rules (5.1-5.5) adapted for code
-- [ ] Section 6 Rules (6.1-6.6) adapted for code
-- [ ] Section 7 Rules (7.1-7.3) adapted for code
-- [ ] Section 8 Rules (8.1-8.7) adapted for code
-- [ ] Section 9 Rules (9.1-9.4 + GR1-GR4) adapted for code
+## Adaptation
+- [ ] Section 1 rules adapted (1.1-1.14)
+- [ ] Section 2 rules adapted (2.1-2.3)
+- [ ] Section 3 rules adapted (3.1-3.7)
+- [ ] Section 4 rules adapted (4.1-4.4)
+- [ ] Section 5 rules adapted (5.1-5.5)
+- [ ] Section 6 rules adapted (6.1-6.6)
+- [ ] Section 7 rules adapted (7.1-7.3)
+- [ ] Section 8 rules adapted (8.1-8.7)
+- [ ] Section 9 rules adapted (9.1-9.4, GR1-GR4)
 - [ ] 19 Technical Code Noun categories remapped
 - [ ] Canonical synonym table adapted
 - [ ] Polysemy resolution table adapted
-- [ ] 6-pass pipeline adapted
+- [ ] 6-pass transformation pipeline adapted
 
-## Output Artifacts (written AFTER all adaptation checkboxes above are checked)
-- [ ] ste-code-distilled-system-prompt.txt (short form)
-- [ ] ste-code-self-reading-manual.txt (long form)
+## Artifacts (WRITE ONLY AFTER ALL ABOVE ARE [x])
+- [ ] ste-code-distilled-system-prompt.txt
+- [ ] ste-code-self-reading-manual.txt
 - [ ] ste-code-extraction-methodology.txt
 - [ ] ste-code-example-turn.txt
 - [ ] ste-code-deployment-guide.txt
 - [ ] README.md
-TRACKER
-
-echo "GATE 0 PASSED: Environment ready"
+EOF
 ```
-
-**DO NOT proceed past GATE 0 until `ste-code/PROGRESS.md` exists and all spec paths are confirmed readable.**
 
 ---
 
-## GATE 1: Worker Extraction
+## INLINE BATCH EXTRACTION PROTOCOL
 
-### Worker Specification
+Extract by reading pages yourself and writing output files. Process in batches.
+After each batch, update PROGRESS.md.
 
-Each worker is a separate `hermes -z` session. All workers use `deepseek-pro` (NOT flash).
-Workers extract RAW spec text — they do NOT adapt or rewrite anything.
-
-### Worker Assignments
-
-| Worker | Pages | What to Extract | Output |
-|--------|-------|-----------------|--------|
-| W1 | 1–30 | Front matter, TOC, highlights, Section 1 rules (1.1–1.14) with ALL STE/non-STE example pairs, subject-to-rule index | `workers/w1.json` |
-| W2 | 31–60 | Section 2-3 rules (2.1–2.3, 3.1–3.7) with ALL example pairs. Technical noun categories start | `workers/w2.json` |
-| W3 | 61–90 | Section 4-5 rules (4.1–4.4, 5.1–5.5) with ALL example pairs. Technical noun categories continue | `workers/w3.json` |
-| W4 | 91–120 | Section 6-7 rules (6.1–6.6, 7.1–7.3) with ALL example pairs. Technical noun categories complete | `workers/w4.json` |
-| W5 | 121–180 | Section 8-9 rules (8.1–8.7, 9.1–9.4) + GR1–GR4 with ALL examples. Complete polysemy resolution table | `workers/w5.json` |
-| W6 | 181–240 | Dictionary A–F: every entry with WORD, POS, approved meaning, approved forms, alternatives. Complete canonical synonym table | `workers/w6.json` |
-| W7 | 241–300 | Dictionary G–P: every entry. All transformation examples with before/after text | `workers/w7.json` |
-| W8 | 301–360 | Dictionary Q–Z: every entry. Remaining transformation examples | `workers/w8.json` |
-| W9 | 361–434 | Appendices, change history (all issues 1-9), decision flowchart, index, 19 category enumeration | `workers/w9.json` |
-
-### Worker JSON Schema
-
-Every worker MUST output this exact JSON structure. No markdown wrapping.
-
-```json
-{
-  "worker_id": "W1",
-  "source_pages": "1-30",
-  "pages_actually_read": 30,
-  "extraction_timestamp": "ISO8601",
-  "rules": [
-    {
-      "rule_number": "1.1",
-      "section": "Words",
-      "rule_text": "EXACT TEXT FROM SPEC",
-      "ste_examples": ["EXACT STE EXAMPLE 1", "EXACT STE EXAMPLE 2"],
-      "non_ste_examples": ["EXACT NON-STE EXAMPLE 1", "EXACT NON-STE EXAMPLE 2"],
-      "explanatory_notes": "EXACT EXPLANATORY TEXT"
-    }
-  ],
-  "categories": [
-    {
-      "category_number": 1,
-      "category_name": "EXACT CATEGORY NAME",
-      "description": "EXACT DESCRIPTION",
-      "examples": ["example1", "example2"]
-    }
-  ],
-  "dictionary_entries": [
-    {
-      "word": "WORD",
-      "approved": true,
-      "part_of_speech": "v",
-      "approved_meaning": "EXACT MEANING",
-      "approved_forms": ["FORM1", "FORM2"],
-      "alternatives": []
-    }
-  ],
-  "synonyms": [
-    {
-      "canonical": "CANONICAL FORM",
-      "rejected": ["synonym1", "synonym2"],
-      "concept": "WHAT THE CONCEPT IS"
-    }
-  ],
-  "polysemy": [
-    {
-      "word": "WORD",
-      "approved_meaning": "THE ONE APPROVED MEANING",
-      "rejected_meanings": [
-        {"sense": "rejected sense 1", "use_instead": "ALTERNATIVE WORD"},
-        {"sense": "rejected sense 2", "use_instead": "ALTERNATIVE WORD"}
-      ]
-    }
-  ],
-  "pipeline_steps": [
-    {
-      "pass_number": 1,
-      "name": "EXACT PASS NAME",
-      "description": "EXACT DESCRIPTION",
-      "actions": ["action 1", "action 2"]
-    }
-  ],
-  "evolution_history": [
-    {
-      "issue": "Issue 1",
-      "year": 1986,
-      "key_changes": ["change 1", "change 2"]
-    }
-  ]
-}
-```
-
-### Worker Prompt Template
-
-For each worker, construct the prompt EXACTLY as follows (replace `<<PLACEHOLDERS>>`):
+### Format for each worker output file
 
 ```
-You are a spec extraction worker. Extract ONLY — do not adapt, summarize, or rewrite.
+# ASD-STE100 Issue 9 — <Section Description>
 
-READ these files sequentially:
-  spec/issue-09-2025/page-<<START_PAGE>>.md through page-<<END_PAGE>>.md
+## Source: pages <START>-<END>
 
-EXTRACT: <<TASK_DESCRIPTION>>
-
-OUTPUT: Write ONLY valid JSON to ste-code/workers/w<<N>>.json
-Use the schema below. Every field must contain EXACT text from the spec pages.
-If a page has no content matching a key, use an empty array [].
-
-{
-  "worker_id": "W<<N>>",
-  "source_pages": "<<START_PAGE>>-<<END_PAGE>>",
-  "pages_actually_read": <<PAGE_COUNT>>,
-  "rules": [ ... rule objects with EXACT rule_number, rule_text, ste_examples, non_ste_examples, explanatory_notes ... ],
-  "categories": [ ... category objects ... ],
-  "dictionary_entries": [ ... entry objects ... ],
-  "synonyms": [ ... synonym objects ... ],
-  "polysemy": [ ... polysemy objects ... ],
-  "pipeline_steps": [ ... step objects ... ],
-  "evolution_history": [ ... issue objects ... ]
-}
-
-RULES:
-1. Extract EXACT text. Do not paraphrase. Do not summarize.
-2. Include ALL example pairs — every STE example AND its non-STE counterpart.
-3. For dictionary entries, include every field: word, approved boolean, POS, meaning, forms, alternatives.
-4. If you cannot finish all pages, update "pages_actually_read" to the actual count.
-5. Write ONLY the JSON. No markdown fences, no explanations, no preamble, no postscript.
-6. Verify the JSON is valid before writing.
+[EXACT spec text from the pages, preserving:
+- ALL rule numbers and rule text
+- ALL STE examples and non-STE example pairs
+- ALL dictionary entries with word, POS, meaning, forms, alternatives
+- ALL category names, numbers, descriptions, and examples
+- ALL synonym mappings and polysemy resolutions
+- ALL pipeline step descriptions]
 ```
 
-### Worker Launch Protocol (Batch of 3)
+### Batch Execution
 
-**DO NOT launch more than 3 workers at once.** After each batch, verify the JSON files exist and are valid before launching the next batch.
+Process 2-3 worker files per response. For each:
+1. Read the spec pages using read_file
+2. Extract all content faithfully
+3. Write to ste-code/workers/w<N>-<description>.md
+4. Update PROGRESS.md: change [ ] to [x]
 
-**Batch 1 — Launch:**
-```bash
-hermes -z --model deepseek-pro "<W1_PROMPT>" &
-hermes -z --model deepseek-pro "<W2_PROMPT>" &
-hermes -z --model deepseek-pro "<W3_PROMPT>" &
-```
-
-**Batch 1 — Verify (after workers complete):**
-```bash
-# Check files exist
-test -f ste-code/workers/w1.json && echo "W1 OK" || echo "W1 MISSING — RE-LAUNCH"
-test -f ste-code/workers/w2.json && echo "W2 OK" || echo "W2 MISSING — RE-LAUNCH"
-test -f ste-code/workers/w3.json && echo "W3 OK" || echo "W3 MISSING — RE-LAUNCH"
-
-# Validate JSON
-python3 -c "import json; json.load(open('ste-code/workers/w1.json')); print('W1 valid')"
-python3 -c "import json; json.load(open('ste-code/workers/w2.json')); print('W2 valid')"
-python3 -c "import json; json.load(open('ste-code/workers/w3.json')); print('W3 valid')"
-
-# Check content quality: each file must have actual entries
-python3 -c "
-import json
-for w in ['w1','w2','w3']:
-    d = json.load(open(f'ste-code/workers/{w}.json'))
-    rules = len(d.get('rules',[]))
-    cats = len(d.get('categories',[]))
-    entries = len(d.get('dictionary_entries',[]))
-    print(f'{w}: {rules} rules, {cats} categories, {entries} dict entries')
-    if rules == 0 and cats == 0 and entries == 0:
-        print(f'  WARNING: {w} has zero extracted content — RE-LAUNCH')
-"
-```
-
-**Update PROGRESS.md** after each verified batch:
-```bash
-# In ste-code/PROGRESS.md, change [ ] to [x] for W1, W2, W3
-```
-
-**Batch 2 — W4, W5, W6** (launch only after Batch 1 fully verified)
-**Batch 3 — W7, W8, W9** (launch only after Batch 2 fully verified)
-
-### Worker Failure Protocol
-
-If ANY worker JSON is missing, has zero content, or fails JSON validation:
-1. Mark it `[!] FAILED` in PROGRESS.md
-2. Re-launch that specific worker with the SAME prompt
-3. If it fails twice, reduce its page range by half and launch two sub-workers
-4. Do NOT proceed past GATE 1 until all 9 worker files exist AND contain real content
+### Quality Rules
+- Every rule must have at least one STE/non-STE example pair
+- Every dictionary entry must have word, POS, approved/unapproved status, meaning, forms
+- No summarization — extract EXACT text
+- If a page range has no content matching a category, note "None found in this range"
+- Verify each file exists AND has content before marking complete
 
 ---
 
-## GATE 2: Merge and Validate
+## GATE 1: Verify Extraction Completeness
 
-**HARD GATE: All 9 worker JSON files must exist, be valid JSON, and contain non-empty extraction data.**
+After all 9 files are written, run:
 ```bash
-python3 -c "
-import json, os
-total_rules = 0
-total_entries = 0
-for i in range(1,10):
-    path = f'ste-code/workers/w{i}.json'
-    if not os.path.exists(path):
-        print(f'MISSING: {path} — CANNOT PROCEED')
-        exit(1)
-    d = json.load(open(path))
-    rules = len(d.get('rules',[]))
-    entries = len(d.get('dictionary_entries',[]))
-    total_rules += rules
-    total_entries += entries
-    print(f'W{i}: {rules} rules, {entries} dict entries — OK')
-print(f'TOTAL: {total_rules} rules, {total_entries} dict entries')
-if total_rules < 50:
-    print(f'WARNING: Only {total_rules} rules — expected ~53. Some may be missing.')
-if total_entries < 500:
-    print(f'WARNING: Only {total_entries} dict entries — expected ~875+.')
-"
+for f in ste-code/workers/w[1-9]-*.md; do
+  lines=$(wc -l < "$f")
+  size=$(wc -c < "$f")
+  if [ "$lines" -lt 20 ]; then
+    echo "SUSPICIOUS: $f has only $lines lines — may be incomplete"
+  else
+    echo "OK: $f — $lines lines, $size bytes"
+  fi
+done
 ```
 
-**If the gate fails, do not proceed. Fix missing workers first.**
+Minimum expected:
+- W1-W5: 500+ lines each (rule sections with examples)
+- W6-W8: 1000+ lines each (dictionary entries)
+- W9: 200+ lines
 
-### Merge into Master State
-
-Read all 9 worker JSONs. Merge into `ste-code/workers/master.json`:
-- Deduplicate rules by rule_number
-- Sort rules by section (1.1, 1.2, ..., 9.4, GR1-GR4)
-- Merge categories (should total exactly 19)
-- Merge dictionary entries, deduplicating by word
-- Merge synonyms and polysemy entries
-
-### Spot-Check Validation
-
-Pick 10 random page numbers from 1-434. For each:
-1. Read the original markdown page directly
-2. Find the rule/dictionary entry in your master state
-3. Verify the text matches EXACTLY
-
-If ANY mismatch found, flag the worker responsible and re-extract those pages.
+If any file is below minimum, re-extract that page range.
 
 ---
 
-## GATE 3: Adaptation (Phase 2 from Original)
+## GATE 2: Merge into Master State
 
-**HARD GATE: `ste-code/workers/master.json` must exist and contain verified data.**
-
-Only NOW do you begin adaptation. For each rule in the master state:
-
-### Adaptation Protocol (PER RULE)
-
-1. Read the rule's exact text from master.json
-2. Read the STE and non-STE example pairs
-3. Think: "What is the coding-domain equivalent of this constraint?"
-4. Write the adapted rule text preserving the original structure
-5. Write code-domain example pairs (non-STE-Code → STE-Code)
-6. Cross-reference: note which original rule number this maps to
-
-### Category Remapping (ALL 19)
-
-For each of the 19 categories, produce a table entry:
-
-| Original Category | STE-Code Category | Rationale |
-|-------------------|-------------------|-----------|
-| Exact name from master.json | Code-domain equivalent | 1-sentence justification |
-
-### Synonym Table Adaptation
-
-Take every canonical synonym pair from master.json. For each:
-- Keep the original canonical form if it works for code domain
-- OR adapt it to a code-domain equivalent
-- Document the mapping
+Read all 9 worker files. Create a consolidated master state document at `ste-code/workers/master.md` containing:
+- Complete rule listing (all 53 rules numbered, with text and examples)
+- Complete 19 categories enumerated
+- Complete synonym table
+- Complete polysemy table
+- Complete pipeline description
 
 ---
 
-## GATE 4: Output Artifacts
+## GATE 3: Adaptation
 
-**HARD GATE: All adaptation checkboxes in PROGRESS.md must be checked `[x]`.**
+For each rule in master.md, produce an STE-Code adaptation following the PRESERVE/REPLACE rules below.
 
-Only NOW write the output files. Each file MUST reference specific data from master.json.
+### PRESERVE (unchanged)
+- Rule numbers (1.1, 1.2, ..., 9.4, GR1-GR4)
+- Section organization (9 sections)
+- Rule structure (imperative statement + explanatory text + examples)
+- 6-pass pipeline architecture
+- Dictionary architecture (APPROVED/UNAPPROVED)
 
-### File 1: ste-code-distilled-system-prompt.txt
+### REPLACE (adapted for code)
+- Every STE/non-STE example → code documentation examples
+- 19 categories → code domain (see mapping below)
+- Approved vocabulary → code-domain approved words
+- Safety WARNING/CAUTION → BREAKING/DEPRECATED/NOTE
 
-Write to `ste-code/artifacts/ste-code-distilled-system-prompt.txt`
+### Category Remapping
 
-Structure:
-```
-# STE-Code Distilled System Prompt
-# Derived from ASD-STE100 Issue 9 (January 2025)
-# Adapted for code documentation, Issue 1, July 2026
+| # | Original | STE-Code |
+|---|----------|----------|
+| 1 | Parts information | Language keywords and reserved words |
+| 2 | Vehicles/machines | Frameworks, runtimes, and platforms |
+| 3 | Tools and support equipment | Development tools and build systems |
+| 4 | Materials and consumables | Dependencies, packages, and libraries |
+| 5 | Facilities and locations | Deployment targets and environments |
+| 6 | Systems and components | Modules, classes, components, services |
+| 7 | Mathematical/scientific terms | Algorithmic and computational terms |
+| 8 | Navigation and geographic terms | Routing, pathing, and state management |
+| 9 | Numbers, units, and time | Data sizes, time units, numeric formats |
+| 10 | Quoted text | String literals, error messages, log output |
+| 11 | Persons, groups, organizations | Roles, teams, services, and actors |
+| 12 | Parts of the body | UI/UX interaction and accessibility terms |
+| 13 | Common personal effects | Configuration and preference terms |
+| 14 | Medical terms | Error states, diagnostics, and health checks |
+| 15 | Official documents | Spec files, configs, manifests, schemas |
+| 16 | Environmental conditions | Runtime conditions, states, and flags |
+| 17 | Colors | Terminal colors, syntax highlighting themes |
+| 18 | Damage terms | Bug, defect, failure, and degradation taxonomy |
+| 19 | IT and telephony terms | Network, protocol, API, and I/O terms |
 
-## IDENTITY
-[1 paragraph — STE-Code agent identity]
+---
 
-## 14 CORE PRINCIPLES (P1-P14)
-P1. [Adapted from Rules 1.2, 1.3, 9.2 — original text: "EXACT QUOTE FROM MASTER"]
-P2. [Adapted from Rules 1.3, 9.4 — original text: "..."]
-... through P14
+## GATE 4: Write Artifact Files
 
-## CANONICAL SYNONYM TABLE
-| STE-Code | NOT | Original STE Mapping |
-|...|...|...|
+**ONLY after ALL adaptation checkboxes in PROGRESS.md are [x].**
 
-## APPROVED VOCABULARY POLICY
-[Adapted from master.json vocabulary architecture]
+### File 1: ste-code-distilled-system-prompt.txt (~1,200 tokens)
+System prompt constraining any LLM to STE-Code output.
 
-## DOCUMENT INTERACTION PROTOCOL
-[10-step protocol adapted for code documents]
+### File 2: ste-code-self-reading-manual.txt (~7,000 tokens)
+8-section self-reading manual (S0-S8) following SSRM structure.
 
-## OUTPUT FORMAT
-## COMPLIANCE STATUS / ## TECHNICAL OUTPUT / ## UML EXTRACTION / ## OPTIMIZATIONS
+### File 3: ste-code-extraction-methodology.txt (~1,400 tokens)
+Turn-by-turn protocol for code documents.
 
-## ANTI-PATTERNS
-[10 rules, adapted from original]
-```
-
-### File 2: ste-code-self-reading-manual.txt
-
-Write to `ste-code/artifacts/ste-code-self-reading-manual.txt`
-
-8 sections (S0-S8) following the exact structure of the original SSRM.
-Each section must reference data from master.json.
-
-### File 3: ste-code-extraction-methodology.txt
-
-Write to `ste-code/artifacts/ste-code-extraction-methodology.txt`
-
-Turn-by-turn protocol adapted for code documents.
-
-### File 4: ste-code-example-turn.txt
-
-Write to `ste-code/artifacts/ste-code-example-turn.txt`
-
-Single worked example with before/after transformation.
+### File 4: ste-code-example-turn.txt (~500 tokens)
+Worked example: non-STE code comment → STE-Code.
 
 ### File 5: ste-code-deployment-guide.txt
-
-Write to `ste-code/artifacts/ste-code-deployment-guide.txt`
-
 Deployment for Ollama, LM Studio, Python.
 
 ### File 6: README.md
-
-Write to `ste-code/README.md`
-
-Summary of the project.
+Project overview.
 
 ---
 
-## Final Verification
-
-After all 6 files are written, run:
+## FINAL VERIFICATION
 
 ```bash
-# Count tokens (approximate: chars/4)
-for f in ste-code/artifacts/*.txt; do
+for f in ste-code/ste-code-*.txt; do
   chars=$(wc -c < "$f")
   echo "$(basename $f): $chars chars ~$((chars/4)) tokens"
 done
-
-# Verify all files reference master.json data
-python3 -c "
-import json
-master = json.load(open('ste-code/workers/master.json'))
-print(f'Master state: {len(master[\"rules\"])} rules, {len(master[\"dictionary_entries\"])} entries')
-print(f'Categories: {len(master[\"categories\"])}')
-print('All artifact files must exist in ste-code/artifacts/')
-"
 ```
+
+All files must reference specific data from `ste-code/workers/master.md`.
+No file should contain generic/fabricated content.
 
 ---
 
-## Phase Flow Summary (with Hard Gates)
+## Flow Summary
 
 ```
-GATE 0:  Verify spec files exist, create directories, init PROGRESS.md
-  ↓ (gate passes: all files confirmed)
-GATE 1:  Launch 9 workers in 3 batches, verify JSON output
-  ↓ (gate passes: 9 valid JSON files with real content)
-GATE 2:  Merge into master.json, spot-check 10 random pages
-  ↓ (gate passes: master.json valid, spot-checks pass)
-GATE 3:  Adapt all 53 rules, 19 categories, synonyms, polysemy pipeline
-  ↓ (gate passes: all PROGRESS.md checkboxes checked)
-GATE 4:  Write 6 artifact files to ste-code/artifacts/
-  ↓ (gate passes: all files exist, token budgets met)
-  DONE
+GATE 0: Verify paths, create dirs, init PROGRESS.md
+  ↓
+INLINE: Extract W1-W9 in batches, update PROGRESS.md after each
+  ↓
+GATE 1: Verify all 9 files have sufficient content
+  ↓
+GATE 2: Merge into master.md
+  ↓
+GATE 3: Adapt all 53 rules, 19 categories, synonyms, polysemy, pipeline
+  ↓
+GATE 4: Write 6 artifact files from adapted data
+  ↓
+FINAL: Verify artifact quality
 ```
