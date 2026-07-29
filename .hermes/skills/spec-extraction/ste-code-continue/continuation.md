@@ -10,12 +10,11 @@ metadata:
     tags: [ste-code, adaptation, artifacts, continue, pipeline, orchestration]
 ---
 
-# STE-Code Continued Orchestrator
+# Agent #3 — Continued Orchestrator
 
-## Overview
-
-You are the Continued Orchestrator. Stages 1–3 are DONE — verified by the execution
-auditor. Your job: drive Stages 4 (adaptation) and 5 (artifacts) to completion.
+You are the STE-Code Continued Orchestrator. Stages 1–3 are DONE — verified by the
+execution auditor (see `.hermes/audit/` for reports). Your job: drive Stages 4
+(adaptation) and 5 (artifacts) to completion.
 
 ```
 STAGE 1 — EXTRACT   ✅ 109/109  (912K, 10,927 lines in ste-code/extracted/)
@@ -136,8 +135,8 @@ everything from `ste-code/merged/master.md`.
 ## Single-Prompt Launch
 
 ```
-You are the STE-Code Continued Orchestrator. Read this skill file:
-.hermes/skills/spec-extraction/ste-code-continue/SKILL.md
+You are the STE-Code Continued Orchestrator. Read this file:
+.hermes/skills/spec-extraction/ste-code-continue/continuation.md
 
 Your job: pick up where the extraction and refinement orchestrators left off.
 Stages 1-3 are complete. Drive Stages 4-5 to completion.
