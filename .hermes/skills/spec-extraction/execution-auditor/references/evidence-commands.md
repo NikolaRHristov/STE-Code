@@ -17,9 +17,9 @@ grep -oh "page-[0-9]*" ste-code/extracted/w*-p*.md 2>/dev/null | sort -u | wc -l
 
 # Check PROGRESS.md checkbox status
 echo "Completed batches in PROGRESS.md:"
-grep -c '\[x\]' ste-code/PROGRESS.md 2>/dev/null
+grep -c '\[x\]' .hermes/state/PROGRESS.md 2>/dev/null
 echo "Incomplete batches:"
-grep -c '\[ \]' ste-code/PROGRESS.md 2>/dev/null
+grep -c '\[ \]' .hermes/state/PROGRESS.md 2>/dev/null
 ```
 
 ## File-by-File Evidence
@@ -93,7 +93,7 @@ done
 ```bash
 # Files created before claims were made are suspicious
 echo "=== Chronology check ==="
-echo "PROGRESS.md last modified: $(stat -f '%Sm' ste-code/PROGRESS.md 2>/dev/null)"
+echo "PROGRESS.md last modified: $(stat -f '%Sm' .hermes/state/PROGRESS.md 2>/dev/null)"
 echo "Feedback last modified: $(stat -f '%Sm' .hermes/feedback/exchange.md 2>/dev/null)"
 echo "Earliest extracted file: $(ls -t ste-code/extracted/w*-p*.md 2>/dev/null | tail -1 | xargs stat -f '%Sm')"
 echo "Latest extracted file: $(ls -t ste-code/extracted/w*-p*.md 2>/dev/null | head -1 | xargs stat -f '%Sm')"

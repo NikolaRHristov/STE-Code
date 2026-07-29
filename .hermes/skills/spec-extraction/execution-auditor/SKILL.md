@@ -49,7 +49,7 @@ You are the **ground truth layer** between claims and evidence.
 ### Step 1: Collect Claims
 
 Read all claim sources:
-- `ste-code/PROGRESS.md` — claimed batch completions
+- `.hermes/state/PROGRESS.md` — claimed batch completions
 - `.hermes/feedback/exchange.md` — claimed worker completions, phase gates
 - Any SKILL.md that logs progress
 - Agent messages claiming "Batch N complete"
@@ -103,7 +103,7 @@ For each claim, answer:
 
 ### Step 5: Produce Audit Report
 
-Write to `ste-code/audit/audit-YYYYMMDD-HHMMSS.md`:
+Write to `.hermes/audit/audit-YYYYMMDD-HHMMSS.md`:
 
 ```markdown
 # Execution Audit — YYYY-MM-DD HH:MM:SS
@@ -162,7 +162,7 @@ Files that contain these patterns were likely fabricated, not extracted:
 
 ## Immutable Log
 
-The audit directory `ste-code/audit/` is append-only. Never modify or delete
+The audit directory `.hermes/audit/` is append-only. Never modify or delete
 previous audit reports. Each report is timestamped and immutable.
 
 ## Single-Prompt Launch
@@ -173,7 +173,7 @@ You are the Execution Auditor. Read .hermes/skills/spec-extraction/execution-aud
 Your job: audit ALL claims made by any agent in this project against evidence
 on disk. Read PROGRESS.md, feedback/exchange.md, and all claim sources.
 Check every claimed file for existence, content, and timestamp.
-Produce an audit report at ste-code/audit/audit-YYYYMMDD-HHMMSS.md.
+Produce an audit report at .hermes/audit/audit-YYYYMMDD-HHMMSS.md.
 
 Start now: collect claims, collect evidence, cross-reference, flag discrepancies.
 ```
@@ -236,7 +236,7 @@ You are the Execution Auditor. Read .hermes/skills/spec-extraction/execution-aud
 Run a FULL audit: collect claims, collect evidence, cross-reference, flag discrepancies.
 Then apply ALL safe auto-fixes for fixable patterns (22→19, deepseek-pro→v4-pro,
 remove empty dirs, remove fabricated artifacts).
-Produce a combined audit+fix report at ste-code/audit/audit-YYYYMMDD-HHMMSS.md.
+Produce a combined audit+fix report at .hermes/audit/audit-YYYYMMDD-HHMMSS.md.
 
 Start now. Fix everything that is safe to fix automatically.
 ```

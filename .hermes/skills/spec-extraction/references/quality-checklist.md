@@ -32,7 +32,7 @@ Red flags (if ANY checked, re-extract):
 - [ ] Exact text matches source when spot-checked
 
 ### State Management
-- [ ] `ste-code/PROGRESS.md` updated with [x] for this batch
+- [ ] `.hermes/state/PROGRESS.md` updated with [x] for this batch
 - [ ] `git gcommit-hermes "Batch N: workers W___-W___ (pages ___-___)"` executed
 - [ ] Feedback in `.hermes/feedback/exchange.md` if issues found
 

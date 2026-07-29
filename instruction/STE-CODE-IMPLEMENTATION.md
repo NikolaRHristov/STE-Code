@@ -60,7 +60,7 @@ mkdir -p ste-code/workers
 
 Create PROGRESS.md tracker:
 ```bash
-cat > ste-code/PROGRESS.md << 'EOF'
+cat > .hermes/state/PROGRESS.md << 'EOF'
 # STE-Code Progress Tracker
 
 ## Extraction (434 pages total)

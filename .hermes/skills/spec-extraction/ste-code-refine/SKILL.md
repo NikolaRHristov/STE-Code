@@ -215,9 +215,9 @@ Launch workers using ONLY `deepseek-v4-pro` (the most reasoning-capable model �
 ```bash
 # Single command to launch the entire refinement swarm:
 # (requires the coordinator to generate 109 prompts and launch in 37 batches)
-hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .hermes/prompts/refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .hermes/prompts/refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .hermes/prompts/refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
 ```
 
 ## Verification
@@ -248,7 +248,7 @@ To update:
 **Progress: 12/109 workers (11%) — 48/434 pages**
 ```
 
-**Progress: 30/109 workers complete (batches 1-9 + r028, r030, r032, pages 1-120)**
+**Progress: 109/109 workers complete (ALL 37 batches, pages 1-434) ✨ REFINEMENT COMPLETE**
 
 ## Output Structure
 
@@ -276,12 +276,12 @@ into clean, standardized markdown in ste-code/refined/.
 
 Steps:
 1. Generate 109 worker prompts using the template in this skill
-2. Save prompts to ste-code/prompts-refine/
+2. Save prompts to .hermes/prompts/refine/
 3. Launch workers in 37 batches of 3
 4. Verify each batch using the checks in this skill
 5. After all 109 complete, produce ste-code/refined-master.md
 
 Rules: Zero content loss. Format only. 4 pages per worker. Batches of 3.
-Start now: create ste-code/refined/ and ste-code/prompts-refine/ directories,
+Start now: create ste-code/refined/ and .hermes/prompts/refine/ directories,
 then generate and launch batch 1 (r001, r002, r003).
 ```

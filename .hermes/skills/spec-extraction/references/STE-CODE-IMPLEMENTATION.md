@@ -6,7 +6,7 @@
 > 2. Every phase has a HARD GATE — a file-existence check. Do not proceed past a gate.
 > 3. If a worker fails, re-launch it. Do not fabricate its data.
 > 4. All STE-Code content MUST cross-reference a worker JSON entry. No spec data = no output.
-> 5. Track progress in `ste-code/PROGRESS.md` — update it after EVERY completed step.
+> 5. Track progress in `.hermes/state/PROGRESS.md` — update it after EVERY completed step.
 
 ---
 
@@ -30,7 +30,7 @@ mkdir -p ste-code/artifacts
 **Initialize progress tracking:**
 
 ```bash
-cat > ste-code/PROGRESS.md << 'TRACKER'
+cat > .hermes/state/PROGRESS.md << 'TRACKER'
 # STE-Code Progress Tracker
 
 ## Workers
@@ -75,7 +75,7 @@ TRACKER
 echo "GATE 0 PASSED: Environment ready"
 ```
 
-**DO NOT proceed past GATE 0 until `ste-code/PROGRESS.md` exists and all spec paths are confirmed readable.**
+**DO NOT proceed past GATE 0 until `.hermes/state/PROGRESS.md` exists and all spec paths are confirmed readable.**
 
 ---
 
@@ -250,7 +250,7 @@ for w in ['w1','w2','w3']:
 
 **Update PROGRESS.md** after each verified batch:
 ```bash
-# In ste-code/PROGRESS.md, change [ ] to [x] for W1, W2, W3
+# In .hermes/state/PROGRESS.md, change [ ] to [x] for W1, W2, W3
 ```
 
 **Batch 2 — W4, W5, W6** (launch only after Batch 1 fully verified)

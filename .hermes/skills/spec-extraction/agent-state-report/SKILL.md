@@ -122,12 +122,12 @@ prompts-refine/: [count] files, [size]
 1. **Run shell commands** to populate counts — never estimate from memory.
 2. **Verify file existence** with `ls` or `test -f` — never trust PROGRESS.md alone.
 3. **Update PROGRESS.md** after producing this report if discrepancies found.
-4. **Write report** to `ste-code/audit/state-YYYYMMDD-HHMMSS.md`.
+4. **Write report** to `.hermes/audit/state-YYYYMMDD-HHMMSS.md`.
 5. **If any section cannot be filled**, write "UNKNOWN — needs investigation" — never leave blank.
 
 ## Quick Launch
 
 ```
 State report now. Full format. All sections. Verify against disk.
-Write to ste-code/audit/state-YYYYMMDD-HHMMSS.md.
+Write to .hermes/audit/state-YYYYMMDD-HHMMSS.md.
 ```

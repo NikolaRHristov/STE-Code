@@ -24,7 +24,7 @@ each processing exactly 4 pages. Coordinated in 37 batches of 3 workers.
 - 4 pages per worker (not 30-112) — prevents truncation
 - 109 workers (not 9) — full parallelization
 - Output to `ste-code/extracted/` (not `ste-code/extracted/`)
-- Prompts in `ste-code/prompts-refine/` (separate from output)
+- Prompts in `.hermes/prompts/refine/` (separate from output)
 
 
 > **RAILS**: Before any action, validate against .
@@ -57,14 +57,14 @@ Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 
 ## 🔴 MANDATORY: Progress Tracking
 
-**After EVERY batch, update `ste-code/PROGRESS.md` before launching the next batch.**
+**After EVERY batch, update `.hermes/state/PROGRESS.md` before launching the next batch.**
 This is NOT optional. The execution auditor cross-references PROGRESS.md against disk
 evidence. A stale PROGRESS.md is treated as a 🔴 CRITICAL tracking discrepancy.
 
 To update:
 1. Flip the batch's `[ ]` to `[x]` for all 3 workers in PROGRESS.md
 2. Update the progress counter line at the bottom
-3. Verify the update: `grep "\[x\]" ste-code/PROGRESS.md | wc -l` should match completed workers
+3. Verify the update: `grep "\[x\]" .hermes/state/PROGRESS.md | wc -l` should match completed workers
 
 ```markdown
 # Example: after completing Batch 27, change:
