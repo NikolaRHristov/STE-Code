@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "source": "ASD-STE100 Issue 9 synonym table, adapted to code domain",
+  "entries": [
+    { "non-ste": ["do", "perform", "execute"], "approved": "run", "type": "verb", "category": "development-operations" },
+    { "non-ste": ["get", "obtain", "fetch", "retrieve"], "approved": "read", "type": "verb", "category": "data-operations" },
+    { "non-ste": ["set", "configure", "assign"], "approved": "write", "type": "verb", "category": "data-operations" },
+    { "non-ste": ["check", "verify", "validate", "confirm"], "approved": "test", "type": "verb", "category": "development-operations" },
+    { "non-ste": ["show", "print", "output"], "approved": "display", "type": "verb", "category": "application-operations" },
+    { "non-ste": ["start", "begin", "launch"], "approved": "start", "type": "verb", "category": "development-operations" },
+    { "non-ste": ["stop", "end", "terminate", "kill"], "approved": "stop", "type": "verb", "category": "development-operations" },
+    { "non-ste": ["make", "create", "generate", "produce"], "approved": "build", "type": "verb", "category": "development-operations" },
+    { "non-ste": ["change", "update", "modify"], "approved": "update", "type": "verb", "category": "development-operations" },
+    { "non-ste": ["send", "transmit", "dispatch"], "approved": "send", "type": "verb", "category": "communication-operations" },
+    { "non-ste": ["get back", "receive"], "approved": "receive", "type": "verb", "category": "communication-operations" },
+    { "non-ste": ["talk to", "communicate with"], "approved": "connect", "type": "verb", "category": "communication-operations" },
+    { "non-ste": ["keep", "store", "save"], "approved": "store", "type": "verb", "category": "data-operations" },
+    { "non-ste": ["fix", "correct", "resolve"], "approved": "repair", "type": "verb", "category": "development-operations" },
+    { "non-ste": ["find", "locate", "discover"], "approved": "search", "type": "verb", "category": "data-operations" },
+    { "non-ste": ["move", "transfer", "shift"], "approved": "move", "type": "verb", "category": "data-operations" },
+    { "non-ste": ["remove", "delete", "erase"], "approved": "delete", "type": "verb", "category": "data-operations" },
+    { "non-ste": ["enough", "sufficient"], "approved": "sufficient", "type": "adjective", "category": null },
+    { "non-ste": ["correct", "right", "accurate"], "approved": "correct", "type": "adjective", "category": null },
+    { "non-ste": ["wrong", "incorrect", "invalid"], "approved": "incorrect", "type": "adjective", "category": null },
+    { "non-ste": ["big", "large", "huge"], "approved": "large", "type": "adjective", "category": null },
+    { "non-ste": ["small", "tiny", "little"], "approved": "small", "type": "adjective", "category": null },
+    { "non-ste": ["fast", "quick", "rapid"], "approved": "fast", "type": "adjective", "category": null },
+    { "non-ste": ["slow", "sluggish"], "approved": "slow", "type": "adjective", "category": null },
+    { "non-ste": ["many", "numerous", "lots of"], "approved": "many", "type": "adjective", "category": null },
+    { "non-ste": ["few", "little (quantity)"], "approved": "few", "type": "adjective", "category": null }
+  ]
+}
