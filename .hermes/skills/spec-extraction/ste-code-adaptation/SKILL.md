@@ -39,7 +39,7 @@ All 9 worker `.md` files in `ste-code/workers/`:
 - All 53 rules — same numbers, same 9-section organization
 - 6-pass transformation pipeline
 - Dictionary architecture (APPROVED/UNAPPROVED)
-- 19 Technical Code Noun categories (adapted from STE's 22)
+- 19 Technical Code Noun categories (adapted from STE's 19 — verified from Issue 9 spec pages 47-52)
 - 4 Technical Code Verb categories
 - Safety instruction format (WARNING/CAUTION → BREAKING/DEPRECATED)
 
@@ -51,7 +51,7 @@ All 9 worker `.md` files in `ste-code/workers/`:
 
 ## Category Mapping
 
-See `references/category-mapping.md` for the full 19-category adaptation from STE's 22 categories.
+See `references/category-mapping.md` for the full 19-category adaptation from STE's 19 categories.
 
 ## Verification
 

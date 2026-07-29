@@ -1,89 +1,75 @@
 ---
-name: ste-code-worker-orchestration
-description: "Launch parallel hermes -z workers to extract spec pages into markdown, batched in groups of 3."
-version: 1.0.0
+name: ste-code-workers
+description: "Launch parallel hermes -z workers to extract spec pages into markdown, batched in groups of 3. v3: 4 pages per worker, 109 workers total."
+version: 3.0.0
 author: Hermes Agent
 license: MIT
 platforms: [macos]
 metadata:
   hermes:
-    tags: [spec-extraction, workers, parallel, batch, ste-code, asd-ste100]
+    tags: [spec-extraction, workers, parallel, batch, ste-code]
 ---
 
-# STE-Code Worker Orchestration
+# STE-Code Worker Orchestration v3
 
 ## Overview
 
-Extract large specifications into structured markdown using parallel `hermes -z` worker sessions. Coordinator oversees; workers read pages and write output.
+Extract the 434-page ASD-STE100 Issue 9 spec using 109 parallel `hermes -z` workers,
+each processing exactly 4 pages. Coordinated in 37 batches of 3 workers.
 
-**Core principle:** Fresh `hermes -z` session per batch = clean context = high-fidelity extraction.
+**v3 changes from v2:**
+- CORRECTED: `hermes -z` DOES support file I/O (verified with W0 test)
+- 4 pages per worker (not 30-112) — prevents truncation
+- 109 workers (not 9) — full parallelization
+- Output to `ste-code/extracted/` (not `ste-code/workers/`)
+- Prompts in `ste-code/prompts/` (separate from output)
 
 ## When to Use
 
 - Extracting 100+ page specification documents
-- Parallel read-heavy extraction tasks
-- Building knowledge bases from structured documents
+- When extraction fidelity is critical (no summarization, no truncation)
+- When the coordinator should oversee rather than extract inline
 
-## Quick Start
+## Worker Command Template
 
 ```bash
-# 1. Create worker prompts
-# 2. Launch Batch 1 (3 workers)
-cd PROJECT_ROOT
-hermes -z "$(cat workers/w1-prompt.txt)" -m deepseek-pro --yolo &
-hermes -z "$(cat workers/w2-prompt.txt)" -m deepseek-pro --yolo &
-hermes -z "$(cat workers/w3-prompt.txt)" -m deepseek-pro --yolo &
-
-# 3. Wait for completion, verify outputs
-# 4. Launch Batch 2 (W4, W5, W6)
-# 5. Launch Batch 3 (W7, W8, W9)
-```
-
-## Worker Split (434-page spec)
-
-| Worker | Pages | Task | Output |
-|--------|-------|------|--------|
-| W1 | 1–30 | Front matter, TOC, Section 1.1-1.6 | w1-sec1-rules.md |
-| W2 | 31–66 | Rules 1.7-1.14, 22 TN categories, 4 TV categories, Sections 2-3 | w2-sec2-3-rules.md |
-| W3 | 67–94 | Sections 3-5 rules | w3-sec3-5-rules.md |
-| W4 | 95–114 | Sections 6-8 rules | w4-sec6-8-rules.md |
-| W5 | 115–128 | Section 9 + GR-1 to GR-8 | w5-sec9-gr-rules.md |
-| W6 | 129–240 | Dictionary A–F | w6-dict-a-f.md |
-| W7 | 241–300 | Dictionary G–P | w7-dict-g-p.md |
-| W8 | 301–360 | Dictionary Q–Z | w8-dict-q-z.md |
-| W9 | 361–434 | Appendices, index, history | w9-appendices.md |
-
-## Prompt Template
-
-```
-EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
-
-PAGES: spec/issue-09-2025/page-<START>.md through page-<END>.md
-
-TASK: Read every page and extract ALL content into <OUTPUT_FILE>
-
-INCLUDE: [specific targets]
-
-FORMAT: Markdown with ## headings. Quote examples as blockquotes.
-Preserve EXACT text. Output ONLY the markdown file.
+hermes -z "Read spec/issue-09-2025/page-<<START_PAGE>>.md through page-<<END_PAGE>>.md. 
+Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
+Do not summarize. Include every word, every table, every example.
+Output ONLY the markdown file." -m deepseek-pro --yolo
 ```
 
 ## Launch Rules
 
-- **Always** use `hermes -z "$(cat prompt.txt)"` — never inline multi-line prompts
-- **Always** add `--yolo` to skip approval prompts
-- **Always** use `-m deepseek-pro` (normalizes to deepseek-v4-flash)
-- **Never** use `hermes --cli` with stdin pipe (0 tool calls)
-- **Never** more than 3 workers simultaneously
-- **Always** verify output before launching next batch
+- **Always** use `hermes -z "$(cat prompt.txt)" -m deepseek-pro --yolo`
+- **Always** launch exactly 3 workers per batch (never more)
+- **Always** verify output after each batch before launching next
+- **Never** use inline extraction — it defeats parallelization
+- **Never** exceed 4 pages per worker (prevents truncation)
+- **Always** save state: `git gcommit-hermes "Batch N complete"` after each batch
 
-## Verification
+## Quality Checks (Per Batch)
 
-After each batch:
-1. Check output file size (>5KB per worker)
-2. Check last 10 lines for mid-sentence truncation
-3. If truncated, split worker into smaller page ranges
+After each batch of 3 workers completes:
 
-## Full Prompts
+1. **File check**: All 3 output files exist in `ste-code/extracted/`
+2. **Size check**: Each file > 3KB (>30 lines) for 4-page extraction
+3. **Truncation check**: Last 3 lines end cleanly (period, footer, or table row)
+4. **Content signal**: Expected keywords present (see section-types.md for per-range signals)
+5. **Fabrication check**: No commentary, no modern examples in spec extraction
 
-See `references/worker-prompts.md` for all 9 prompts used for ASD-STE100 Issue 9 extraction.
+If any check fails, re-extract with the worker's page range split in half.
+
+## Progress Tracking
+
+Update `ste-code/PROGRESS.md` after each batch:
+```markdown
+Batch N: [x] W### (pages A-B), [x] W### (pages C-D), [x] W### (pages E-F)
+```
+
+## Worker Grid
+
+Full grid at: `references/worker-grid.md`
+Section types at: `references/section-types.md`
+
+Currently: 12/109 workers complete (batches 1-4, pages 1-48)
