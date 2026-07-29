@@ -14,6 +14,8 @@ metadata:
 
 ## Overview
 
+> **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.
+
 After merge and validation, produce the 6 STE-Code artifact files by adapting
 the extracted spec data from `ste-code/merged/master.md`.
 

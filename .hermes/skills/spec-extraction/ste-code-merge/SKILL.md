@@ -14,7 +14,9 @@ metadata:
 
 ## Overview
 
-After all 109 workers complete extraction, merge their output into `ste-code/extracted/master.md`.
+> **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.
+
+After all 109 workers complete extraction, merge their output into `ste-code/merged/master.md`.
 This phase handles duplicate content (same spec text appearing across page boundaries),
 organizes by section, and validates completeness.
 

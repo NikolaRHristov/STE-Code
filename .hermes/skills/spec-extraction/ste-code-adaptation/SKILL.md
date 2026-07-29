@@ -15,6 +15,8 @@ metadata:
 
 ## Overview
 
+> **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.
+
 After 9 workers extract the full ASD-STE100 spec, the coordinator reads all worker output and produces STE-Code: the coding-domain adaptation preserving the exact architecture.
 
 

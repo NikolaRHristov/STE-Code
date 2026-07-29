@@ -14,6 +14,8 @@ metadata:
 
 ## Overview
 
+> **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.
+
 After the extraction phase, a second worker swarm reformats all extracted files
 into clean, highly legible, standardized markdown. This is a **content-preserving**
 transformation — zero information loss, pure formatting improvement.

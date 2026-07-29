@@ -14,6 +14,8 @@ metadata:
 
 ## Overview
 
+> **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.
+
 Systematic validation of worker extraction output. Run after each batch (every 3 workers)
 and after the full merge. Catches fabrication, truncation, and incompleteness.
 

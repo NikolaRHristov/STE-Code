@@ -14,6 +14,8 @@ metadata:
 
 ## Overview
 
+> **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.
+
 Extract the 434-page ASD-STE100 Issue 9 spec using 109 parallel `hermes -z` workers,
 each processing exactly 4 pages. Coordinated in 37 batches of 3 workers.
 
