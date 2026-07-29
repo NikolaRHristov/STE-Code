@@ -1,15 +1,3 @@
----
-name: ste-code-continue
-description: "Continued orchestrator. Picks up from Stages 1-3 (extraction + refinement + merge complete) and drives the pipeline through Stages 4-5 (adaptation + artifacts). Single-prompt launch."
-version: 1.0.0
-author: Execution Auditor (handoff)
-license: MIT
-platforms: [macos]
-metadata:
-  hermes:
-    tags: [ste-code, adaptation, artifacts, continue, pipeline, orchestration]
----
-
 # Agent #3 — Continued Orchestrator
 
 You are the STE-Code Continued Orchestrator. Stages 1–3 are DONE — verified by the
@@ -31,6 +19,7 @@ find ste-code/extracted -name 'w*-p*.md' -type f | wc -l   # Must be 109
 find ste-code/refined -name 'r*.md' -type f | wc -l         # Must be 109
 ls ste-code/merged/                                          # Must show master-raw.md + master.md
 head -5 ste-code/merged/master.md                            # Must show "ASD-STE100 Issue 9"
+mkdir -p ste-code/adapted ste-code/artifacts
 ```
 
 If any check fails, STOP. Report the discrepancy. Do not fabricate.
@@ -69,7 +58,7 @@ each rule, category, and dictionary entry. Produce adaptation files in `ste-code
 - Every category MUST match one of the 19 from master.md
 - Every example MUST be an adaptation of a real STE/non-STE pair from the extracted spec
 - No invented code terms without a master.md source
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro or deepseek-v4-flash)
 
 ## Stage 5 — Artifacts
 
@@ -106,9 +95,9 @@ The auditor had to fix PROGRESS.md 3 times. **Do not repeat this.**
 
 After every adaptation file:
 
-1. Update `.hermes/state/PROGRESS.md` — flip the rule's checkbox to `[x]`
+1. Update `.hermes/state/PROGRESS.md` — flip the rule's checkbox to `✅`
 2. `git add` and `git commit` with descriptive message
-3. Verify: `grep '\[x\]' .hermes/state/PROGRESS.md | wc -l` should increase
+3. Verify: `grep '✅' .hermes/state/PROGRESS.md | wc -l` should increase
 
 ## Validation
 
@@ -132,14 +121,10 @@ everything from `ste-code/merged/master.md`.
 - 434 pages in ASD-STE100 Issue 9
 - Output: .md for adaptation, .txt for artifacts
 
-## Single-Prompt Launch
+## Start Now
 
 ```
-You are the STE-Code Continued Orchestrator. Read this file:
-.hermes/skills/spec-extraction/ste-code-continue/continuation.md
-
-Your job: pick up where the extraction and refinement orchestrators left off.
-Stages 1-3 are complete. Drive Stages 4-5 to completion.
+Read .hermes/skills/spec-extraction/ste-code-continue/continuation.md and execute.
 
 1. Verify pipeline state (109 extracted, 109 refined, 2 merged)
 2. Read master.md, adapt all 53 rules + 19 categories + synonym/polysemy tables
@@ -147,5 +132,5 @@ Stages 1-3 are complete. Drive Stages 4-5 to completion.
 4. Generate 6 artifacts in ste-code/artifacts/
 5. Validate everything. No fabrication. Update tracking.
 
-Start now. Begin with Rule 1.1 adaptation.
+Start with Rule 1.1 adaptation.
 ```

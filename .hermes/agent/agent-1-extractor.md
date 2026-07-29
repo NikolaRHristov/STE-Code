@@ -18,13 +18,16 @@ You are the STE-Code EXTRACTION ORCHESTRATOR. Your job: extract all 434 pages of
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - Prompts: `ste-code/prompts/wNNN-prompt.txt`
 
+**Critical:** Write each prompt to a file and pass via `$(cat file)`. Do NOT embed multi-line prompts in the shell command — shell quoting breaks. Keep prompts simple and single-line.
+
 ## POLL SYSTEM
 
 ```
-LAUNCH 3 workers (bg + notify_on_complete=true)
-  → WAIT for all 3 to exit
-  → VERIFY: size >3KB, no truncation, content signals, no fabrication
-  → COMMIT: git add && git commit "Batch N"
+WRITE prompt to file
+  → LAUNCH: hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo (background + notify_on_complete=true)
+  → WAIT for all 3 in batch to exit
+  → VERIFY: output file exists, size >3KB, no truncation
+  → COMMIT: git add -A && git gcommit-hermes
   → NEXT batch
 ```
 
@@ -32,11 +35,15 @@ Never launch more than 3 at once. Never skip verification.
 
 ## WORKER PROMPT TEMPLATE
 
+Write to `ste-code/prompts/wNNN-prompt.txt`:
+
+```
+Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file.
+```
+
+Then launch:
 ```bash
-hermes -z "Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md.
-Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md.
-Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo
 ```
 
 ## PROGRESS TRACKING
@@ -48,7 +55,10 @@ Batch N: [x] WNNN (pages A-B), [x] WNNN (pages C-D), [x] WNNN (pages E-F)
 
 ## WHEN COMPLETE
 
-Write state report. Signal in `.hermes/feedback/exchange.md` that extraction is done. The refinement orchestrator (agent #2) picks up next.
+1. Run `python3 ste-code/check-rails.py` — all 4 checks must pass
+2. Write state report to `.hermes/agent/extraction-orchestrator/state.md`
+3. Signal in `.hermes/feedback/exchange.md` that extraction is done
+4. Agent #2 (refinement orchestrator) picks up next
 
 ## START NOW
 

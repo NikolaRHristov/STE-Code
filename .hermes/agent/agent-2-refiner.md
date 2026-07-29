@@ -70,4 +70,8 @@ Write state report using `agent-state-report` skill. Signal completion in `.herm
 
 ## START NOW
 
-Verify `ste-code/extracted/` has 109 files. Generate prompts. Launch Batch 1.
+1. Create directories: `mkdir -p ste-code/refined ste-code/prompts-refine`
+2. Verify `ste-code/extracted/` has 109 files
+3. Generate prompts: `python3 ste-code/generate_refine_prompts.py`
+4. Create `ste-code/REFINE-PROGRESS.md` tracker
+5. Launch Batch 1 (r001, r002, r003)
