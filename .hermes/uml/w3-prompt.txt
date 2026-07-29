@@ -1,0 +1,19 @@
+TASK: Create Mermaid diagrams documenting the STE-Code DATABASE LAYOUT — the complete file/folder schema with all directories, naming conventions, and relationships.
+
+Read for context:
+- ste-code/ directory structure (ls -R if needed)
+- .hermes/skills/spec-extraction/references/worker-grid.md
+- .hermes/skills/spec-extraction/references/section-types.md
+
+OUTPUT: Write to .hermes/uml/database-layout.md
+
+INCLUDE:
+1. DIRECTORY TREE: Full erDiagram showing all directories and their relationships
+2. FILE NAMING: wNNN-pPPPP-PPPP.md pattern explained, rNNN-pPPPP-PPPP.md refinement pattern
+3. DATA FLOW: How files progress through directories (extracted → refined → merged → adapted → artifacts)
+4. PROMPT STORAGE: prompts/ and prompts-refine/ directories, naming conventions
+5. METADATA FILES: PROGRESS.md, REFINE-PROGRESS.md, audit reports, state reports
+6. SKILL STORAGE: .hermes/skills/ hierarchy
+7. AGENT STORAGE: .hermes/agent/ hierarchy with agent-1 through agent-4
+
+Use mermaid erDiagram and graph. Make it the single source of truth for the project layout. Output ONLY the mermaid markdown file.

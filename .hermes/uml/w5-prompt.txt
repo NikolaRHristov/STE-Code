@@ -1,0 +1,19 @@
+TASK: Create Mermaid diagrams documenting ERROR RECOVERY and EDGE CASES for the STE-Code pipeline.
+
+Read for context:
+- .hermes/skills/spec-extraction/execution-auditor/SKILL.md
+- .hermes/skills/spec-extraction/execution-auditor/references/evidence-commands.md
+- .hermes/skills/spec-extraction/references/worker-grid.md
+
+OUTPUT: Write to .hermes/uml/error-recovery.md
+
+INCLUDE:
+1. FAILURE MODES: Worker timeout, shell quoting errors, model normalization, truncation, file corruption
+2. RECOVERY FLOWS: What happens when a worker in a batch fails (retry, skip, split)
+3. AUDIT DETECTION: How auditor finds discrepancies (file counts, size checks, gap detection, fabrication)
+4. AUTO-FIXES: What the auditor can fix automatically vs what requires agent intervention
+5. RAILS VIOLATIONS: Each of the 8 rails with detection method and recovery action
+6. BATCH RESTART: Complete flow for restarting a failed batch mid-pipeline
+7. GIT RECOVERY: Commit failures, sync conflicts, how to recover
+
+Use mermaid flowchart and stateDiagram. Include decision diamonds. Make it the definitive troubleshooting guide. Output ONLY the mermaid markdown file.

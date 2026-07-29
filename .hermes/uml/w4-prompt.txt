@@ -1,0 +1,19 @@
+TASK: Create Mermaid diagrams documenting AGENT COMMUNICATION — how the 4 agents coordinate through feedback exchange, state reports, and handoff protocols.
+
+Read for context:
+- .hermes/feedback/exchange.md
+- .hermes/agent/agent-1-extractor.md through agent-4-continuation.md
+- .hermes/agent/extraction-orchestrator/state.md
+- .hermes/agent/refinement-orchestrator/state-report.md
+
+OUTPUT: Write to .hermes/uml/agent-communication.md
+
+INCLUDE:
+1. AGENT ROLES: sequence diagram showing agent #1 → #2 → #3 → #4 handoff chain
+2. FEEDBACK PROTOCOL: How agents read/write .hermes/feedback/exchange.md turns
+3. STATE REPORTING: agent-state-report skill usage, report format, audit trail
+4. HANDOFF TRIGGERS: What signals agent #1 is done (extraction complete), agent #2 picks up (109 files verified)
+5. ERROR ESCALATION: How auditor (#3) flags issues, how other agents respond
+6. PARALLEL OPERATION: Which agents can run simultaneously (extraction + refinement can't overlap, but auditor can run anytime)
+
+Use mermaid sequenceDiagram and flowchart. Output ONLY the mermaid markdown file.

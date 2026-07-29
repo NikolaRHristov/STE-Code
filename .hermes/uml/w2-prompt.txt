@@ -1,0 +1,17 @@
+TASK: Create Mermaid diagrams documenting the WORKER LIFECYCLE — how individual hermes -z workers are launched, monitored, verified, and committed.
+
+Read for context:
+- .hermes/skills/spec-extraction/ste-code-workers/SKILL.md
+- .hermes/skills/spec-extraction/references/worker-grid.md
+- .hermes/agent/agent-1-extractor.md (poll system section)
+
+OUTPUT: Write to .hermes/uml/worker-lifecycle.md
+
+INCLUDE:
+1. WORKER LAUNCH SEQUENCE: Prompt file creation → hermes -z launch → background process → notify_on_complete
+2. BATCH PROTOCOL: Launch 3 → wait for all 3 → verify each → git commit → next batch
+3. WORKER STATES: idle → running → exited (success/failure) → verified → committed
+4. POLLING LOOP: How the coordinator polls, what it checks, retry logic
+5. ERROR RECOVERY: Worker timeout, shell quoting failure, model normalization, truncation detection
+
+Use mermaid stateDiagram-v2 and flowchart. Include the hermes -z command template with flags. Output ONLY the mermaid markdown file.
