@@ -7,7 +7,7 @@
 >    to file successfully. W1-W5 produced 151KB of real extraction using `hermes -z`.
 >    DO use `hermes -z` for extraction workers — it is the correct approach.
 >
-> 2. DO NOT use inline extraction. The coordinator launches workers; workers
+> 2. DO NOT use inline extraction unless workers fail. The coordinator launches workers;
 >    do the extraction. Coordinator oversees, polls, verifies, merges.
 >    Inline extraction bloats the coordinator's context and defeats parallelization.
 >

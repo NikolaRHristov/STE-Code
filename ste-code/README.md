@@ -32,7 +32,7 @@ STE-Code preserves the exact architecture of ASD-STE100:
 - **Part 1**: 53 writing rules in 9 sections (adapted for code)
 - **Part 2**: Controlled vocabulary (approved/unapproved words with alternatives)
 - **6-pass transformation pipeline** for converting non-compliant text
-- **19 Technical Code Noun categories** (adapted from STE's 22 categories)
+- **19 Technical Code Noun categories** (adapted from STE's 19 categories)
 - **4 Technical Code Verb categories**
 - **Safety instruction format** (BREAKING / DEPRECATED / NOTE)
 

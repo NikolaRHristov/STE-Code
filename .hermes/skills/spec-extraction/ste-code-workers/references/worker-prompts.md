@@ -40,7 +40,7 @@ TASK: Read every page and extract ALL content into ste-code/workers/w2-sec2-3-ru
 
 INCLUDE:
 - Rules 1.7-1.14 FULL text with ALL example pairs
-- ALL 22 technical noun categories with descriptions and examples
+- ALL 19 technical noun categories with descriptions and examples
 - ALL 4 technical verb categories with subcategories and examples
 - Section 2 summary and Rules 2.1-2.2 FULL text
 - Section 3 summary and Rules 3.1-3.2 FULL text
