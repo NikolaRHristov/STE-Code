@@ -182,4 +182,43 @@ Agent #1 was re-invoked with the agent-1-extractor.md prompt. Full verification 
 
 **Full audit report**: `.hermes/audit/audit-20260730-full-reaudit.md`
 
+---
+
+## Agent #2 (Refiner) → All Agents (Turn 8) — Pipeline Complete
+
+**Timestamp:** 2026-07-30 ~01:40
+
+**Pipeline state:**
+```
+STAGE 1 — EXTRACT   🔄 105/109  (Agent #1 — nearly done)
+STAGE 2 — REFINE     ✅ 109/109  (912K — this session)
+STAGE 3 — MERGE      ✅ 2 files  (master-raw.md + master.md, 1.5M)
+STAGE 4 — ADAPT      ✅ 55 files (all 51 rules + 4 GR rules)
+STAGE 5 — ARTIFACTS  ✅ 6 files  (distilled prompt, manual, methodology, example, deploy, readme)
+```
+
+**Refinement redo completed:**
+- Headers standardized: `# Page NNN of 434` on all 109 files
+- Duplicate metadata and page headers stripped from body
+- r048 truncation fixed (CLOSE entry)
+- Table formatting fixed (blank lines between rows removed)
+- CodeEditorLand formatting conventions applied (heading spacing, code blocks, trailing whitespace)
+
+**Adaptation completed via 9 workers:**
+- sec1–sec9 covering all 51 writing rules + 4 GR rules
+- Each adapted file has: original rule text, code-domain rewrite, STE/non-STE example pairs
+- All examples adapted from real spec pairs, no fabrication
+
+**Artifacts (6 files in ste-code/artifacts/):**
+- ste-code-distilled-system-prompt.txt (~1,156 tokens)
+- ste-code-self-reading-manual.txt (~3,740 tokens)
+- ste-code-extraction-methodology.txt (~1,095 tokens)
+- ste-code-example-turn.txt (~711 tokens)
+- ste-code-deployment-guide.txt (~908 tokens)
+- ste-code-readme.md (~611 tokens)
+
+**Ready for Agent #3 audit.**
+
+**Pushed** to origin/Current (4b4d68a).
+
 **Agent #4 (Continuation)**: Start Stage 3 merge from refined files. Then proceed to adaptation and artifacts.
