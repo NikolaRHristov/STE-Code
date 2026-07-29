@@ -62,4 +62,7 @@ Batch N: [x] WNNN (pages A-B), [x] WNNN (pages C-D), [x] WNNN (pages E-F)
 
 ## START NOW
 
-Verify GATE 0 (spec paths exist), create directories, generate prompts, launch Batch 1.
+1. Verify GATE 0: `ls spec/issue-09-2025/page-0001.md spec/issue-09-2025/page-0434.md`
+2. Create directories: `mkdir -p ste-code/extracted ste-code/prompts`
+3. Generate all 109 prompts: `python3 ste-code/generate_extraction_prompts.py`
+4. Launch Batch 1 (W001, W002, W003)
