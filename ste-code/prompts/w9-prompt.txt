@@ -1,9 +1,0 @@
-EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE. INCLUDE EVERY DETAIL.
-
-PAGES: spec/issue-09-2025/page-0361.md through page-0434.md
-
-TASK: Read every page and extract ALL content into ste-code/workers/w9-appendices.md
-
-INCLUDE: All appendices, index entries, issue evolution data, change form, reference documents list, any remaining dictionary entries or reference material.
-
-FORMAT: Markdown with ## headings. EXACT text. Output ONLY the markdown file.

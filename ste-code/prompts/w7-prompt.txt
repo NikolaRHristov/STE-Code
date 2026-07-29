@@ -1,9 +1,0 @@
-EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE. INCLUDE EVERY DETAIL.
-
-PAGES: spec/issue-09-2025/page-0241.md through page-0300.md
-
-TASK: Read every page and extract ALL content into ste-code/workers/w7-dict-g-p.md
-
-INCLUDE: EVERY dictionary entry from G through P. Do not skip a single entry. For each: word, POS, APPROVED/UNAPPROVED, approved meaning or ALL alternatives, verb forms, STE example, non-STE example.
-
-FORMAT: Markdown. ## for letter sections. ### for each entry. Blockquotes for examples. EXACT text. Output ONLY the markdown file.
