@@ -218,6 +218,27 @@ After each batch, verify:
 4. All STE/non-STE pairs use the `> **STE:**` format
 5. All tables have header rows and separator rows
 
+## 🔴 MANDATORY: Progress Tracking
+
+**After EVERY batch, update `ste-code/REFINE-PROGRESS.md` before launching the next batch.**
+This is NOT optional. The execution auditor cross-references REFINE-PROGRESS.md against disk
+evidence. A stale REFINE-PROGRESS.md is treated as a 🔴 CRITICAL tracking discrepancy.
+
+To update:
+1. Flip the batch's status to `✅` in REFINE-PROGRESS.md
+2. Update the progress counter line at the bottom
+3. Verify: `grep "✅" ste-code/REFINE-PROGRESS.md | wc -l` should reflect completed batches
+
+```markdown
+# Example: after completing Batch 4, change:
+| 4 | r010(37-40), r011(41-44), r012(45-48) | 37-48 | ✅ |
+
+# And update:
+**Progress: 12/109 workers (11%) — 48/434 pages**
+```
+
+**Progress: 11/109 workers complete (batches 1-3 + r010-r011, pages 1-44)**
+
 ## Output Structure
 
 ```

@@ -48,6 +48,25 @@ Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 - **Never** exceed 4 pages per worker (prevents truncation)
 - **Always** save state: `git gcommit-hermes "Batch N complete"` after each batch
 
+## 🔴 MANDATORY: Progress Tracking
+
+**After EVERY batch, update `ste-code/PROGRESS.md` before launching the next batch.**
+This is NOT optional. The execution auditor cross-references PROGRESS.md against disk
+evidence. A stale PROGRESS.md is treated as a 🔴 CRITICAL tracking discrepancy.
+
+To update:
+1. Flip the batch's `[ ]` to `[x]` for all 3 workers in PROGRESS.md
+2. Update the progress counter line at the bottom
+3. Verify the update: `grep "\[x\]" ste-code/PROGRESS.md | wc -l` should match completed workers
+
+```markdown
+# Example: after completing Batch 27, change:
+| 27 | W079(313-316), W080(317-320), W081(321-324) | 313-324 | [x] |
+
+# And update:
+**Progress: 81/109 workers (74%) — 324/434 pages**
+```
+
 ## Quality Checks (Per Batch)
 
 After each batch of 3 workers completes:
@@ -57,19 +76,13 @@ After each batch of 3 workers completes:
 3. **Truncation check**: Last 3 lines end cleanly (period, footer, or table row)
 4. **Content signal**: Expected keywords present (see section-types.md for per-range signals)
 5. **Fabrication check**: No commentary, no modern examples in spec extraction
+6. **Tracking check**: PROGRESS.md updated to reflect this batch ✅
 
 If any check fails, re-extract with the worker's page range split in half.
-
-## Progress Tracking
-
-Update `ste-code/PROGRESS.md` after each batch:
-```markdown
-Batch N: [x] W### (pages A-B), [x] W### (pages C-D), [x] W### (pages E-F)
-```
 
 ## Worker Grid
 
 Full grid at: `references/worker-grid.md`
 Section types at: `references/section-types.md`
 
-Currently: 12/109 workers complete (batches 1-4, pages 1-48)
+**Progress: 78/109 workers complete (batches 1-26, pages 1-312)**

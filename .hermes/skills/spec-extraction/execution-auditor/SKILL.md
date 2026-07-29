@@ -1,6 +1,6 @@
 ---
 name: execution-auditor
-description: "Hidden verification agent. Audits execution logs, cross-references claims against file evidence, and tracks all orchestrator/worker/reviewer activity. Never modifies content — only verifies execution."
+description: "Hidden verification agent. Audits execution logs, cross-references claims against file evidence, and auto-fixes safe pattern errors (22→19, model refs, stale files). In fix mode, remediates known issues while orchestrators work."
 version: 1.0.0
 author: Hermes Agent
 license: MIT
@@ -169,4 +169,67 @@ Check every claimed file for existence, content, and timestamp.
 Produce an audit report at ste-code/audit/audit-YYYYMMDD-HHMMSS.md.
 
 Start now: collect claims, collect evidence, cross-reference, flag discrepancies.
+```
+
+---
+
+## FIX MODE: Automatic Remediation
+
+When invoked with "audit and fix" or when discrepancies are found that match
+known fixable patterns, the auditor MAY apply fixes directly. This is the
+**only exception** to the read-only principle.
+
+### Fixable Patterns (auto-remediate)
+
+| Pattern Found | Fix Action | Safe? |
+|---------------|------------|-------|
+| `22 technical noun categories` | `patch` to 19 | ✅ Safe — factual correction |
+| `deepseek-pro` model reference | `patch` to `deepseek-v4-pro` | ✅ Safe — correct model |
+| `hermes -z DOES NOT support file I/O` | `patch` to correct | ✅ Safe — proven false |
+| `adapted from STE's 22` | `patch` to `adapted from STE's 19` | ✅ Safe — factual correction |
+| Empty directory `ste-code/workers/` | `rm -rf` if empty | ✅ Safe — superseded |
+| Fabricated artifact files (6 .txt + PLAN.md + README.md) | `rm` individual files | ✅ Safe — must be regenerated anyway |
+| Stale `ste-code/prompts/` (old v1 prompts) | `rm -rf` entire directory | ✅ Safe — superseded by inline generation |
+
+### Unfixable Patterns (flag only, do NOT touch)
+
+| Pattern Found | Why Not Fixable |
+|---------------|-----------------|
+| Missing worker output files | Workers must re-extract — auditor cannot generate content |
+| Truncated worker files | Workers must re-extract with smaller page range |
+| Fabricated worker content | Workers must re-extract from spec — auditor cannot fabricate spec text |
+| PROGRESS.md tracking errors | Claim-vs-evidence mismatch requires agent to correct its own tracking |
+
+### Fix Protocol
+
+1. Run audit (Steps 1-5)
+2. For each fixable pattern, apply the fix using `patch` or `terminal`
+3. Re-run audit to confirm fix was applied
+4. Log fix in audit report under `## Auto-Fixes Applied`
+5. If fix fails or creates new issues, revert and escalate to reviewer
+
+### Fix Report Format
+
+```markdown
+## Auto-Fixes Applied
+
+| # | File | Pattern Found | Fix Applied | Result |
+|---|------|---------------|-------------|--------|
+| 1 | ste-code/README.md:35 | "adapted from STE's 22" | Changed to 19 | ✅ |
+| 2 | ste-code/prompts/w2-prompt.txt:7 | "22 technical noun categories" | Changed to 19 | ✅ |
+| 3 | ste-code/workers/ | Empty directory | Removed | ✅ |
+| 4 | ste-code/ste-code-self-reading-manual.txt | Fabricated artifact | Deleted (30KB) | ✅ |
+```
+
+### Launch with Fix Mode
+
+```
+You are the Execution Auditor. Read .hermes/skills/spec-extraction/execution-auditor/SKILL.md.
+
+Run a FULL audit: collect claims, collect evidence, cross-reference, flag discrepancies.
+Then apply ALL safe auto-fixes for fixable patterns (22→19, deepseek-pro→v4-pro,
+remove empty dirs, remove fabricated artifacts).
+Produce a combined audit+fix report at ste-code/audit/audit-YYYYMMDD-HHMMSS.md.
+
+Start now. Fix everything that is safe to fix automatically.
 ```
