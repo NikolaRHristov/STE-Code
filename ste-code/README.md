@@ -4,35 +4,35 @@ Semantically separated stages. Each stage's output feeds the next.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ STAGE 1: EXTRACTION                  Session 2 (orchestrator) │
+| STAGE 1: EXTRACTION                  Session 2 (orchestrator) │
 │   Input:  spec/issue-09-2025/page-*.md (434 pages)           │
 │   Output: ste-code/extracted/w*-p*.md (109 files)             │
-│   Status: ✅ Complete — 109/109 workers done                    │
+│   Status: 🟠 18/109 on disk (w019-w109 missing)              │
 ├─────────────────────────────────────────────────────────────┤
 │ STAGE 2: REFINEMENT                  Session 3 (orchestrator) │
 │   Input:  ste-code/extracted/w*-p*.md                         │
 │   Output: ste-code/refined/r*-p*.md (109 files)               │
-│   Status: 🟢 Running — 30/109 workers done                    │
+│   Status: ✅ Complete — 109/109 workers done                  │
 ├─────────────────────────────────────────────────────────────┤
 │ STAGE 3: MERGE                      (after stages 1+2 done)   │
 │   Input:  ste-code/refined/r*-p*.md (or extracted if no refine)│
 │   Output: ste-code/merged/master.md                           │
-│   Status: ⬜ Pending                                           │
+│   Status: ⚠️ master-raw.md exists (10,927L), master.md is structural index (156L). Needs regeneration from refined files. │
 ├─────────────────────────────────────────────────────────────┤
 │ STAGE 4: ADAPTATION                 (after merge complete)     │
 │   Input:  ste-code/merged/master.md                           │
 │   Output: ste-code/adapted/ (rule-by-rule STE→STE-Code)       │
-│   Status: ⬜ Pending                                           │
+│   Status: ⬜ Not started                                       │
 ├─────────────────────────────────────────────────────────────┤
 │ STAGE 5: ARTIFACTS                  (after adaptation done)    │
 │   Input:  ste-code/adapted/                                   │
 │   Output: ste-code/artifacts/ (6 final .txt files)            │
-│   Status: ⬜ Pending                                           │
+│   Status: ⬜ Not started                                       │
 ├─────────────────────────────────────────────────────────────┤
 │ CROSS-CUTTING: AUDIT                Hidden agent              │
 │   Watches: All stages                                         │
 │   Output: ste-code/audit/audit-*.md                           │
-│   Status: ⬜ Ready to launch                                   │
+│   Status: ✅ Audit complete — see .hermes/audit/audit-20260730-full-reaudit.md │
 └─────────────────────────────────────────────────────────────┘
 ```
 

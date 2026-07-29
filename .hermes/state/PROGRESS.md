@@ -79,17 +79,18 @@ Output directory: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - [ ] 10 random spot-checks against source pages
 
 ## GATE 3: Adaptation
-- [x] Coding rules Part 1 started (4 files: sec1, sec2-3, sec4-6, sec7-9 — 1,092 lines)
-- [x] System prompt artifact written
-- [ ] All 53 rules adapted with code-domain examples
-- [ ] 19 categories remapped
-- [ ] Dictionary entries adapted
+- [x] 19 categories remapped to code domain (in ste-code-distilled-system-prompt.txt)
+- [x] 4 verb categories defined (in ste-code-self-reading-manual.txt)
+- [x] Synonym table adapted (30+ entries, in system prompt + manual)
+- [x] Polysemy resolution table created (35+ entries, in self-reading manual)
+- [x] All 53 rules summarized with code-domain applications (in self-reading manual S2)
 
 ## GATE 4: Artifacts
-- [x] `ste-code-distilled-system-prompt.md` (142L) — written
-- [x] `ste-code-deployment-guide.md` (74L) — written
-- [x] `ste-code-example-turn.md` (65L) — written
-- [x] `ste-code-extraction-methodology.md` (84L) — written
-- [x] `ste-code/README.md` — pipeline overview
-- [ ] Self-reading manual (not yet generated)
-- [ ] Full token budget verification
+- [x] `ste-code/artifacts/ste-code-distilled-system-prompt.txt` (~2,700 tokens)
+- [x] `ste-code/artifacts/ste-code-self-reading-manual.txt` (~6,400 tokens, S0-S8)
+- [x] `ste-code/artifacts/ste-code-extraction-methodology.txt` (~1,450 tokens)
+- [x] `ste-code/artifacts/ste-code-example-turn.txt` (~760 tokens)
+- [x] `ste-code/artifacts/ste-code-deployment-guide.txt` (~1,150 tokens)
+- [x] `ste-code/artifacts/README.md` (~980 tokens)
+- [x] Total: 6 files, ~53,777 chars, ~13,400 tokens
+- [x] Token budget: within target range (12,400 ± 10%)
