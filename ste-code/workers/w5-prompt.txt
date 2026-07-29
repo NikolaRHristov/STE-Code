@@ -1,10 +1,20 @@
-You are a spec extraction worker. Read these pages and produce markdown documentation.
+EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE. INCLUDE EVERY DETAIL.
 
 PAGES: spec/issue-09-2025/page-0115.md through page-0128.md
 
-EXTRACT into a markdown file saved at ste-code/workers/w5-sec9-gr-rules.md:
-- Section 9 summary and Rules 9.1-9.4 FULL text with ALL example pairs
-- General Recommendations GR-1 through GR-8 FULL text with ALL examples
-- Different sentence construction patterns and transformation guidelines
+TASK: Read every page and extract ALL content into ste-code/workers/w5-sec9-gr-rules.md
 
-FORMAT: Clean markdown with ## headings. ALL example pairs as tables. Exact text, no summarization. Output ONLY the markdown file.
+INCLUDE:
+- Section 9 Writing Practices: Rules 9.1 through 9.4 — every rule's full text, every example, every sentence construction pattern
+- General Recommendations GR-1 through GR-8 — FULL text of each with ALL examples
+- GR-1: The conjunction that
+- GR-2: The preposition with
+- GR-3: How to use pronouns
+- GR-4: The pronoun this
+- GR-5: False friends
+- GR-6: Latin abbreviations
+- GR-7: Inclusive language
+- GR-8: Possessive form
+- All word-for-word replacement examples and different sentence construction examples
+
+FORMAT: Markdown with ## for sections, ### for rules/sub-rules. Quote ALL examples as blockquotes. Preserve EXACT original text. Output ONLY the markdown file.

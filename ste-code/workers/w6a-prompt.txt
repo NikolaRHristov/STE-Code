@@ -1,0 +1,12 @@
+EXHAUSTIVE SPEC EXTRACTION — OUTPUT AS MUCH TEXT AS POSSIBLE. DO NOT TRUNCATE.
+
+PAGES: spec/issue-09-2025/page-0129.md through page-0180.md
+
+TASK: Read every page and extract ALL content into ste-code/workers/w6a-dict-a-c.md
+
+INCLUDE:
+- Part 2 Dictionary title and introduction
+- EVERY dictionary entry A through C — do not skip any
+- For each: word, POS, APPROVED/UNAPPROVED, meaning/alternatives, verb forms, STE example, non-STE example
+
+FORMAT: Markdown. ## for letters. ### for entries. Blockquotes for examples. Exact text. Output ONLY markdown.
