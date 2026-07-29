@@ -7,9 +7,9 @@ exactly 4 pages. Launch in 37 batches of 3.
 ## Verify Environment
 
 ```bash
-ls spec/issue-09-2025/page-0001.md   # Must exist
-ls spec/issue-09-2025/page-0434.md   # Must exist
-mkdir -p ste-code/extracted
+ls spec/issue-09-2025/ | head -5    # Must show page files
+ls spec/issue-09-2025/ | wc -l      # Must be 434+
+mkdir -p ste-code/extracted .hermes/prompts/refine
 ```
 
 ## Worker Command Template
@@ -23,12 +23,13 @@ Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 
 ## Launch Rules
 
-- Always use `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- Always use `hermes -z "$(cat .hermes/prompts/refine/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo`
 - Always launch exactly 3 workers per batch (never more)
 - Always verify output after each batch before launching next
 - Never use inline extraction — it defeats parallelization
 - Never exceed 4 pages per worker (prevents truncation)
 - Always save state: `git gcommit-hermes "Batch N complete"` after each batch
+- Save generated prompts to `.hermes/prompts/refine/wNNN-prompt.txt`
 
 ## Worker Grid (37 batches × 3 workers, 109 total)
 
@@ -92,16 +93,17 @@ If any check fails, re-extract with the worker's page range split in half.
 The execution auditor cross-references PROGRESS.md against disk. A stale PROGRESS.md
 is a 🔴 CRITICAL discrepancy. After each batch:
 
-1. Change the batch's `[ ]` to `[x]` in `.hermes/state/PROGRESS.md`
+1. Flip the batch's `[ ]` to `✅` in `.hermes/state/PROGRESS.md`
 2. Update the progress counter
 3. `git add` and `git commit`
 
 ## Immutable Facts
 
 - 19 technical noun categories (NOT 22)
-- deepseek-v4-pro model (NOT deepseek-pro or flash)
+- deepseek-v4-pro model (NOT deepseek-pro or deepseek-v4-flash)
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - 109 workers × 4 pages = 434 pages total
+- Follow `.hermes/skills/spec-extraction/references/rails.md` — all 8 guardrails apply
 
 ## Start Now
 
