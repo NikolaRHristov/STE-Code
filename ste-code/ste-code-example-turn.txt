@@ -1,0 +1,82 @@
+# STE-Code Worked Example
+# Single-turn extraction: transforming a non-STE code comment
+
+## INPUT (Non-STE-Code)
+
+```
+// This function does the validation of the incoming request body and
+// if it's all good, it'll hit the payment gateway and then update the
+// order status in the DB. Should work for most cases but might break
+// if the token's expired or something like that.
+```
+
+## TRANSFORMATION LOG
+
+### Pass 1 — Lexical Lookup
+
+Tokenized 52 words. Classification:
+- APPROVED: the, of, and, if, it, all, good, and, then, the, in, the, for, but, if, the, or, like, that (19)
+- UNAPPROVED: does, stuff, validation, hit, update, should, work, most, cases, might, break, something (12)
+- TECHNICAL_NOUN: request body, payment gateway, order status, DB, token (5)
+- TECHNICAL_VERB: (none in this pass)
+- UNKNOWN: this, function, incoming, it'll, status, expired, what (7)
+
+### Pass 2 — Classification
+
+Reclassifications:
+- "function" → TECHNICAL_NOUN (category 6: Modules, classes, and components)
+- "incoming" → TECHNICAL_NOUN (modifier for request body)
+- "status" → TECHNICAL_NOUN (category 6)
+- "expired" → TECHNICAL_NOUN (category 14: Error states — past participle as adjective)
+- "it'll" → Contraction of "it will" → split into "it" + "will" (APPROVED)
+- "what" → Remove (filler word)
+
+### Pass 3 — POS Lock
+
+Violations:
+- "validation" used as noun where verb is preferred → "validate" (Rule 3.7)
+- "update" is a verb but approved → OK
+- "break" → UNAPPROVED, needs replacement
+
+### Pass 4 — Meaning Validation
+
+- "does" → replace with appropriate verb
+- "hit" → replace with "call" (canonical synonym table)
+- "should" → replace with "returns" (descriptive, not normative)
+- "might break" → replace with "can fail" or "can return an error"
+- "something like that" → remove (vague)
+
+### Pass 5 — Grammar Enforcement
+
+- Sentence is 52 words — far exceeds 25-word descriptive limit.
+- Split into multiple sentences.
+- "it'll" → "it will" (no contractions, Rule 4.2)
+- "token's" → "the token is" (no contractions; avoid possessive for inanimate, GR-8)
+
+### Pass 6 — Consistency Check
+
+- "DB" → undefined abbreviation on first use → "database (DB)"
+- "payment gateway" → if this is the canonical name, use it consistently
+
+## STE-CODE OUTPUT
+
+```
+// This function validates the incoming request body.
+// If the validation succeeds, the function calls the payment gateway.
+// Then, the function updates the order status in the database.
+// The function returns an error if the token is expired.
+```
+
+Word counts: 9 + 10 + 9 + 10 = all under 25 ✓
+Active voice ✓ (except "the token is expired" — passive justified, agent unknown ✓)
+No phrasal verbs ✓
+No contractions ✓
+Articles before nouns ✓
+
+## COMPLIANCE STATUS: COMPLIANT
+
+## OPTIMIZATIONS
+
+- Consider adding type information: `validate(body: Request) -> Result`
+- Consider specifying the error type: "returns an `AuthError`"
+- Consider adding a reference to the payment gateway documentation

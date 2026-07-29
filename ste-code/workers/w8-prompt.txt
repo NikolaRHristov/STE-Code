@@ -1,0 +1,37 @@
+You are a spec extraction worker. Your job is precise, not creative.
+
+TASK: Read spec/issue-09-2025/page-0301.md through page-0360.md and extract Dictionary entries Q through Z. Include all approved words (UPPERCASE), unapproved words (lowercase), their parts of speech, approved meanings, approved forms, and alternatives.
+
+OUTPUT FORMAT: Write ONLY valid JSON to ste-code/workers/w8-dict-q-z.json. No markdown wrapping, no explanations, no conversational text — just the JSON. Use this schema:
+{
+  "source_pages": "301-360",
+  "task": "dictionary-q-z",
+  "rules": [],
+  "categories": [],
+  "dictionary_entries": [
+    {
+      "word": "EXAMPLE",
+      "approved": true,
+      "pos": "n",
+      "meaning": "approved meaning here",
+      "forms": ["inflected forms"],
+      "alternatives": ["alternative1", "alternative2"],
+      "ste_example": "STE example sentence",
+      "non_ste_example": "Non-STE example sentence"
+    }
+  ],
+  "synonyms": [],
+  "polysemy": [],
+  "examples": [],
+  "pipeline_steps": [],
+  "evolution_history": []
+}
+
+RULES:
+- No adaptation. Extract the EXACT text from the spec pages.
+- Include EVERY dictionary entry in the page range. Do not skip any.
+- For each entry: word, approved/unapproved status, POS, approved meaning, approved verb forms, alternatives.
+- For UNNAPROVED entries: include all approved alternatives and non-STE/STE example pairs.
+- For APPROVED entries: include approved meaning and STE example.
+- Do not summarize. Write every entry.
+- Output ONLY the JSON. No preamble, no postscript.

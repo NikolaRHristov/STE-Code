@@ -1,0 +1,32 @@
+You are a spec extraction worker. Your job is precise, not creative.
+
+TASK: Read spec/issue-09-2025/page-0361.md through page-0434.md and extract appendices, index, change history, issue evolution data, recurring errors list, approved verbs list, and any remaining reference data.
+
+OUTPUT FORMAT: Write ONLY valid JSON to ste-code/workers/w9-appendices.json. No markdown wrapping, no explanations, no conversational text — just the JSON. Use this schema:
+{
+  "source_pages": "361-434",
+  "task": "appendices-index-history",
+  "rules": [],
+  "categories": [],
+  "dictionary_entries": [],
+  "synonyms": [],
+  "polysemy": [],
+  "examples": [],
+  "pipeline_steps": [],
+  "evolution_history": [
+    {
+      "issue": "Issue 9",
+      "date": "2025-01-15",
+      "changes": ["list of changes from previous issues"]
+    }
+  ]
+}
+
+RULES:
+- No adaptation. Extract the EXACT text from the spec pages.
+- Extract ALL appendices, indexes, and reference data.
+- Include the list of approved verbs.
+- Include the list of recurring errors.
+- Include issue evolution data (changes from Issues 1-8 to Issue 9).
+- Do not summarize. Write every entry.
+- Output ONLY the JSON. No preamble, no postscript.

@@ -1,0 +1,165 @@
+# STE-Code Deployment Guide
+# How to deploy STE-Code as a system prompt for LLMs
+
+## Quick Start
+
+STE-Code is a system prompt that constrains any LLM to produce controlled,
+clear, and consistent software documentation. Deploy it as a system message
+before user messages in your LLM pipeline.
+
+### Option 1: Ollama (Local)
+
+Create a Modelfile:
+
+```dockerfile
+FROM llama3.2
+SYSTEM """
+[Paste the contents of ste-code-distilled-system-prompt.txt here]
+"""
+PARAMETER temperature 0.3
+PARAMETER top_p 0.9
+```
+
+Then build and run:
+
+```bash
+ollama create ste-code -f Modelfile
+ollama run ste-code
+```
+
+### Option 2: LM Studio
+
+1. Open LM Studio
+2. Load your model of choice
+3. In the "System Prompt" field, paste the contents of
+   `ste-code-distilled-system-prompt.txt`
+4. Set Temperature to 0.3 for consistent output
+5. Start chatting — the model will now produce STE-Code compliant output
+
+### Option 3: OpenAI API / Compatible API
+
+```python
+import openai
+
+client = openai.OpenAI(api_key="your-key")
+
+with open("ste-code-distilled-system-prompt.txt") as f:
+    system_prompt = f.read()
+
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": "Document this function that validates user input."}
+    ],
+    temperature=0.3
+)
+
+print(response.choices[0].message.content)
+```
+
+### Option 4: Anthropic Claude API
+
+```python
+import anthropic
+
+client = anthropic.Anthropic(api_key="your-key")
+
+with open("ste-code-distilled-system-prompt.txt") as f:
+    system_prompt = f.read()
+
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1000,
+    system=system_prompt,
+    messages=[
+        {"role": "user", "content": "Write a commit message for fixing a null pointer bug."}
+    ]
+)
+
+print(response.content[0].text)
+```
+
+### Option 5: Direct Prompt Injection
+
+For chat interfaces that don't support system prompts, prepend the short form
+to your message:
+
+```
+[STE-CODE RULES: <distilled prompt here>]
+
+Now, following these rules, document this API endpoint: ...
+```
+
+### Option 6: LangChain Integration
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+
+with open("ste-code-distilled-system-prompt.txt") as f:
+    ste_code_rules = f.read()
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", ste_code_rules),
+    ("user", "{input}")
+])
+
+model = ChatOpenAI(model="gpt-4", temperature=0.3)
+chain = prompt | model
+
+result = chain.invoke({
+    "input": "Write documentation for this React component."
+})
+```
+
+## Advanced: Self-Reading Manual Mode
+
+For complex documentation tasks, use the long-form self-reading manual:
+
+```python
+with open("ste-code-self-reading-manual.txt") as f:
+    manual = f.read()
+
+# Phase 1: Load the manual as system context
+# Phase 2: Ask the model to process a document section by section
+# Phase 3: The model self-references the manual for exact rules
+
+response = client.chat.completions.create(
+    model="claude-sonnet-4-20250514",  # Use a model with large context
+    messages=[
+        {"role": "system", "content": manual},
+        {"role": "user", "content": """
+        Process this README file using the STE-Code extraction methodology (S3).
+        Apply the 6-pass transformation pipeline (S2.10).
+        Output in the standard format (S7).
+
+        README:
+        [paste your README content here]
+        """}
+    ]
+)
+```
+
+## Token Budget Recommendations
+
+| Model Context | Recommended Form | Token Usage |
+|--------------|------------------|-------------|
+| 4K tokens | Short form only | ~1,200 tokens |
+| 8K tokens | Short form + key rules | ~2,500 tokens |
+| 32K tokens | Short form + S2 (Knowledge Base) | ~7,000 tokens |
+| 128K+ tokens | Full self-reading manual | ~9,000 tokens |
+
+## Best Practices
+
+1. **Temperature**: Use 0.1–0.3 for strict compliance. Higher temperatures
+   may produce violations.
+2. **Model Size**: 7B+ parameter models handle the constraints well.
+   Smaller models may struggle with the full rule set.
+3. **Iterative Refinement**: For long documents, process one section at a time
+   and feed output back as context for the next section.
+4. **Validation**: After generation, run a compliance check:
+   - Count words per sentence (max 20 procedural, 25 descriptive)
+   - Verify no phrasal verbs
+   - Verify active voice
+   - Verify no contractions or Latin abbreviations

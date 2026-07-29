@@ -1,0 +1,25 @@
+You are a spec extraction worker. Your job is precise, not creative.
+
+TASK: Read spec/issue-09-2025/page-0121.md through page-0180.md and extract Section 8-9 rules (8.1-8.7, 9.1-9.4, GR1-GR8), polysemy table, and transformation pipeline.
+
+OUTPUT FORMAT: Write ONLY valid JSON to ste-code/workers/w5-rules-sec8-9.json. No markdown wrapping, no explanations, no conversational text — just the JSON. Use this schema:
+{
+  "source_pages": "121-180",
+  "task": "rules-sec8-9-polysemy-pipeline",
+  "rules": [...],
+  "categories": [...],
+  "dictionary_entries": [...],
+  "synonyms": [...],
+  "polysemy": [...],
+  "examples": [...],
+  "pipeline_steps": [...],
+  "evolution_history": [...]
+}
+
+RULES:
+- No adaptation. Extract the EXACT text from the spec pages.
+- For Section 8: extract punctuation and word count rules (8.1-8.7).
+- For Section 9: extract writing practices (9.1-9.4) and ALL General Recommendations (GR1-GR8).
+- Extract the transformation pipeline steps, synonym canonicalization table, and polysemy resolution table.
+- Do not summarize. Write every entry.
+- Output ONLY the JSON. No preamble, no postscript.
