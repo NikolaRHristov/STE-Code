@@ -114,9 +114,13 @@ Each dictionary entry MUST be:
 ### Rule 7: PAGE METADATA
 Remove repetitive page headers ("ASD-STE100 Simplified Technical English" on
 every page). Replace with a single metadata block at file start:
-```markdown
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** N–M of 434
+7. METADATA: Add page header FIRST, then metadata block below it:
+   # Page NNN of 434
+   
+   > **Source:** ASD-STE100 Issue 9, January 2025
+   > **Pages:** NN–MM of 434
+   
+   Remove repetitive "ASD-STE100 Simplified Technical English" headers from body text.
 ```
 
 ### Rule 8: LIST STANDARDIZATION
