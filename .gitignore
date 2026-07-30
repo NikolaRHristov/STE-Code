@@ -29,6 +29,7 @@ ste-code/audit/
 .agents/tmp/*.txt
 .agents/rewrites/
 .agents/_scratch/
+.agents/audit/
 
 # === Benchmark runtime artifacts ===
 .agents/benchmark/results/**/*
