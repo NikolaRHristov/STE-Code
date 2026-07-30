@@ -90,7 +90,7 @@ Submit a PR against [`ste-code/artifacts/ste-code-deployment-guide.txt`](./ste-c
 ### Clone and Install
 
 ```bash
-git clone https://github.com/nikolawannabe/ste-code.git
+git clone https://github.com/NikolaRHristov/STE-Code.git
 cd ste-code
 ```
 
