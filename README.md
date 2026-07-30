@@ -1,16 +1,18 @@
-# STE-Code — Simplified Technical English for Code
+# STE-Code — Simplified Technical English for Code Documentation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Pipeline](https://img.shields.io/badge/pipeline-5%20stages-brightgreen)](https://github.com/NikolaRHristov/Manual)
 [![Version](https://img.shields.io/badge/version-1.0-blue)](https://github.com/NikolaRHristov/Manual)
-[![Model](https://img.shields.io/badge/model-deepseek--v4--pro-orange)](https://deepseek.com)
 [![Spec](https://img.shields.io/badge/source-ASD--STE100%20Issue%209-lightgrey)](https://asd-ste100.org)
+[![Benchmark](https://img.shields.io/badge/benchmark-96.6%25%20pass-success)](https://github.com/NikolaRHristov/Manual)
 
 ---
 
 ## What is STE-Code?
 
-STE-Code adapts the [ASD-STE100](https://asd-ste100.org) Simplified Technical English standard — originally developed for aerospace maintenance documentation — into the code documentation domain. It provides 53 writing rules, 19 technical noun categories, 4 technical verb categories, and a controlled vocabulary that eliminates ambiguity, jargon, and hedging from READMEs, API docs, comments, commit messages, and error messages. Every output is clear, unambiguous, and machine-readable.
+STE-Code is a **documentation standard** adapted from the [ASD-STE100](https://asd-ste100.org) aerospace specification into the code domain. It provides **53 writing rules**, **19 technical noun categories**, **4 technical verb categories**, and a **controlled vocabulary** that eliminates ambiguity, jargon, and hedging from every type of code documentation.
+
+The project ships as a set of **LLM system prompt templates** — drop them into any model with ≥4K context and it produces clear, unambiguous, machine-readable documentation for READMEs, API docs, docstrings, comments, commit messages, and error messages.
 
 ---
 
@@ -43,88 +45,103 @@ app.post('/api/users', async (req, res) => { ... });
 |--------|--------|-------|
 | Word count | 54 | 38 |
 | Ambiguous terms ("basically", "stuff", "everything") | 3 | 0 |
-| Conditional hedging ("if", "otherwise") | 2 | 0 |
+| Conditional hedging ("if...otherwise") | 2 | 0 |
 | Unapproved vocabulary ("make sure", "be careful") | 2 | 0 |
 
 ---
 
-## Pipeline Architecture
+## What You Get — The Artifacts
+
+Six deployable templates in [`ste-code/artifacts/`](ste-code/artifacts/):
+
+| File | Tokens | Use Case |
+|------|:------:|----------|
+| [`ste-code-distilled-system-prompt.txt`](ste-code/artifacts/ste-code-distilled-system-prompt.txt) | ~1,200 | **Primary template.** Drop into any LLM's system prompt field. Covers all 14 core principles + synonym table. Fits 4K+ context models. |
+| [`ste-code-self-reading-manual.txt`](ste-code/artifacts/ste-code-self-reading-manual.txt) | ~7,000 | Full manual with all 53 rules, dictionary excerpt, and examples. For models with 16K+ context. |
+| [`ste-code-extraction-methodology.txt`](ste-code/artifacts/ste-code-extraction-methodology.txt) | ~1,400 | How the standard was extracted from ASD-STE100. For transparency and reproducibility. |
+| [`ste-code-example-turn.txt`](ste-code/artifacts/ste-code-example-turn.txt) | ~500 | Single example turn showing the before/after transformation. For onboarding and evaluation. |
+| [`ste-code-deployment-guide.txt`](ste-code/artifacts/ste-code-deployment-guide.txt) | — | Deployment instructions for integrating STE-Code into documentation pipelines. |
+| [`README.md`](ste-code/artifacts/README.md) | — | Artifact index and usage notes. |
+
+### Usage
+
+Copy the system prompt into any LLM:
+
+```
+System: [contents of ste-code-distilled-system-prompt.txt]
+User:   Check this docstring for STE-Code compliance:
+        [your documentation here]
+```
+
+Works with any model that supports system prompts: ChatGPT, Claude, Gemini, DeepSeek, Llama, Mistral, and local models via LM Studio, Ollama, or llama.cpp.
+
+---
+
+## How It's Made — 5-Stage Pipeline
+
+The standard was extracted from ASD-STE100 Issue 9 (434 pages) through a 5-stage automated pipeline:
 
 ```
 ASD-STE100 Issue 9 (434 pages)
         │
         ▼
-┌─────────────────────────────────────────┐
-│ Stage 1: EXTRACTION  (Agent #1)         │
-│   109 workers → 109 raw markdown files  │
-│   Enrichment pass: metadata + structure │
-└────────────────┬────────────────────────┘
+┌───────────────────────────────────────┐
+│ Stage 1: EXTRACTION                   │
+│   109 parallel workers → 109 raw files│
+│   Enrichment: metadata + structure    │
+└────────────────┬──────────────────────┘
                  │
                  ▼
-┌─────────────────────────────────────────┐
-│ Stage 2: REFINEMENT  (Agent #2)         │
-│   42 section-aware v2 workers           │
-│   2,689 dictionary entries tagged       │
-│   100.0/100 quality audit score         │
-└────────────────┬────────────────────────┘
+┌───────────────────────────────────────┐
+│ Stage 2: REFINEMENT                   │
+│   Section-aware formatting            │
+│   2,689 dictionary entries tagged     │
+│   100.0/100 quality audit score       │
+└────────────────┬──────────────────────┘
                  │
                  ▼
-┌─────────────────────────────────────────┐
-│ Stage 3: MERGE                          │
-│   109 files → master.md (23,737 lines)  │
-│   Deduplication, cross-referencing      │
-└────────────────┬────────────────────────┘
+┌───────────────────────────────────────┐
+│ Stage 3: MERGE                        │
+│   109 files → master.md (23,737 lines)│
+│   Deduplication, cross-referencing    │
+└────────────────┬──────────────────────┘
                  │
                  ▼
-┌─────────────────────────────────────────┐
-│ Stage 4: ADAPTATION                     │
-│   Aerospace → Code domain               │
-│   57 adapted files (51 rules + 4 GR +   │
-│   dictionary + 19 categories)           │
-└────────────────┬────────────────────────┘
+┌───────────────────────────────────────┐
+│ Stage 4: ADAPTATION                   │
+│   Aerospace → Code domain             │
+│   57 adapted files: 51 rules + 4 GR + │
+│   dictionary + 19 categories          │
+└────────────────┬──────────────────────┘
                  │
                  ▼
-┌─────────────────────────────────────────┐
-│ Stage 5: ARTIFACTS                      │
-│   6 deployable files, ~72,000 chars     │
-│   System prompt, manual, methodology,   │
-│   example turn, deployment guide, README│
-└─────────────────────────────────────────┘
+┌───────────────────────────────────────┐
+│ Stage 5: ARTIFACTS                    │
+│   6 deployable system prompt templates│
+│   ~72,000 characters total            │
+└───────────────────────────────────────┘
 ```
+
+The pipeline is orchestrated by 9 specialized agents using 21 skills. See [`.agents/MASTER.md`](.agents/MASTER.md) for the full orchestration protocol.
 
 ---
 
-## Quick Start
+## Benchmark Results
 
-### Option A — Ollama (one-liner)
+STE-Code system prompt vs plain assistant on 59 tests across 14 documentation categories:
 
+| | STE-Code | Plain Assistant | Improvement |
+|---|----------|-----------------|-------------|
+| Pass rate | 96.6% (57/59) | 11.9% (7/59) | **+84.7%** |
+| Avg correctness | 0.919 | 0.471 | **+0.448** |
+
+Top 3 categories where STE-Code wins hardest: **comments** (+0.580), **error messages** (+0.560), **config files** (+0.520).
+
+Run the benchmark:
 ```bash
-ollama create ste-code -f Modelfile && ollama run ste-code
+python3 .agents/benchmark/orchestrator.py         # STE-Code
+python3 .agents/benchmark/orchestrator-control.py  # Plain assistant (control)
 ```
-
-### Option B — Python snippet
-
-```python
-from llama_cpp import Llama
-
-llm = Llama(model_path='models/deepseek-coder-6.7b.Q4_K_M.gguf', n_ctx=8192)
-with open('ste-code/artifacts/ste-code-distilled-system-prompt.txt') as f:
-    system_prompt = f.read()
-
-doc = open('README.md').read()
-response = llm.create_chat_completion(
-    messages=[
-        {'role': 'system', 'content': system_prompt},
-        {'role': 'user', 'content': f'Check for STE-Code compliance:\n\n{doc}'}
-    ],
-    temperature=0.3, max_tokens=4096
-)
-print(response['choices'][0]['message']['content'])
-```
-
-### Option C — Direct file usage (any LLM)
-
-Drop [`ste-code-distilled-system-prompt.txt`](ste-code/artifacts/ste-code-distilled-system-prompt.txt) into any LLM's system prompt field (LM Studio, Ollama, ChatGPT, Claude). The prompt is ~1,200 tokens and fits models with ≥4K context.
 
 ---
 
@@ -132,46 +149,32 @@ Drop [`ste-code-distilled-system-prompt.txt`](ste-code/artifacts/ste-code-distil
 
 ```
 Manual/
-├── README.md                  ← You are here
-├── LICENSE                    ← MIT License
-├── spec/                      ← ASD-STE100 Issue 9 source pages
-│   └── issue-09-2025/
+├── README.md                        ← You are here
+├── LICENSE                          ← MIT License
 ├── ste-code/
-│   ├── README.md              ← Pipeline overview
-│   ├── extracted/             ← Stage 1: raw extraction (109 files)
-│   ├── enriched/              ← Stage 1b: enriched extraction (109 files)
-│   ├── refined/               ← Stage 2: v2 formatted (109 files, 100.0 audit)
-│   ├── merged/                ← Stage 3: master.md (23,737 lines)
-│   ├── adapted/               ← Stage 4: 57 adapted files
-│   │   └── expanded/           ← Agent #4 expansion outputs
-│   ├── artifacts/             ← Stage 5: 6 deployable files
-│   └── audit_refinement.py    ← Automated quality scoring
-├── SCE/                       ← Structured STE-Code v2.0 (4 strata, 175 entries)
-├── .agents/                   ← Agent-agnostic: 9 agents, 21 skills, 59-test benchmark
-│   ├── agent/                 ← Agent definitions (#1-9)
-│   ├── skills/                ← 21 capability skills
-│   ├── benchmark/              ← 59 tests, 14 categories, orchestrator
-│   └── tools/                 ← Distributed worker tools (oneshot wrapper + launcher)
+│   ├── artifacts/                   ← ★ The 6 deployable templates
+│   ├── adapted/                     ← 57 adapted rule files (51 rules + 4 GR + dictionary + categories)
+│   ├── merged/                      ← master.md (23,737 lines)
+│   ├── refined/                     ← Formatted extraction (109 files, 100.0 audit)
+│   ├── extracted/                   ← Raw extraction (109 files)
+│   └── enriched/                    ← Enriched with metadata + structure
+├── SCE/                             ← Structured STE-Code v2.0 (4 strata, 175 entries)
+├── spec/                            ← ASD-STE100 Issue 9 source pages
+│   └── issue-09-2025/
+├── .agents/                         ← Pipeline orchestration
+│   ├── agent/                       ← 9 agent definitions
+│   ├── skills/                      ← 21 capability skills
+│   ├── benchmark/                   ← 59 tests, 14 categories, orchestrator
+│   ├── prompts/                     ← Worker prompts (maturity fixes, expansion)
+│   └── tools/                       ← Telemetry wrapper, batch launchers
+
 ```
-
----
-
-## Benchmark Results
-
-STE-Code system prompt vs plain assistant on 59 tests across 14 categories:
-
-| | STE-Code | Plain Assistant | Improvement |
-|---|----------|-----------------|-------------|
-| Pass rate | 96.6% (57/59) | 11.9% (7/59) | **+84.7%** |
-| Avg correctness | 0.919 | 0.471 | **+0.448** |
 
 ---
 
 ## Credits & Attribution
 
 STE-Code is an independent adaptation of **[ASD-STE100 Issue 9](https://asd-ste100.org)** (January 2025), published by the AeroSpace and Defence Industries Association of Europe (ASD), Brussels, Belgium.
-
-The original specification's text is:
 
 > © ASD, 2025 — All rights reserved
 
@@ -202,12 +205,3 @@ If you use STE-Code in academic work, please cite:
   note         = {Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe, Brussels}
 }
 ```
-
----
-
-## Links
-
-- **GitHub repository** — [github.com/NikolaRHristov/Manual](https://github.com/NikolaRHristov/Manual)
-- **ASD-STE100 source** — [asd-ste100.org](https://asd-ste100.org)
-- **ASD Europe** — [www.asd-europe.org](https://www.asd-europe.org)
-- **Model** — [deepseek-v4-pro](https://deepseek.com)
