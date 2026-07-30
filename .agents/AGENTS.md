@@ -131,6 +131,34 @@ python3 .agents/benchmark/orchestrator-control.py
 python3 .agents/tools/agent-runner.py --list
 ```
 
+## Contributing
+
+See [`.agents/GAPS.md`](GAPS.md) for the full domain coverage gap analysis.
+
+### Quick Start
+1. Pick a domain tag from GAPS.md (e.g., `[MOBILE]`, `[ML]`, `[SEC]`)
+2. Find the target rule file in `ste-code/adapted/a-secN-ruleX.Y.md`
+3. Add Non-STE/STE example pairs using canonical format:
+   ```
+   > [DOMAIN: mobile]  <!-- tracking placeholder -->
+   > **Non-STE:** [realistic code documentation from the domain]
+   > **STE:** [STE-Code compliant correction]
+   ```
+4. Submit a PR with the domain tag in the commit message.
+
+### Domain Placeholders
+Active placeholder tags in adapted files mark where domain content belongs:
+- `[CONTRIBUTE]` — General contribution welcome
+- `[MOBILE]`, `[ML]`, `[GAMEDEV]`, `[EMBEDDED]`, `[WEB3]` — Zero coverage domains
+- `[SEC]`, `[A11Y]`, `[I18N]`, `[PERF]`, `[TEST]`, `[DOCS]` — High-priority gaps
+
+### Batch Generation (Internal)
+```bash
+# Generate domain examples across rules
+python3 .agents/tools/fill-gaps.py --domain MOBILE --rule a-sec4-rule4.3
+python3 .agents/tools/fill-gaps.py --domain ML --all-rules --min-pairs 3
+```
+
 ## Skills Inventory
 
 | Skill | File | Description |

@@ -564,4 +564,44 @@ The technical nouns in their related categories are only examples. Rule 1.5 does
 
 ---
 
-*Adaptation complete. All 19 categories from ASD-STE100 Issue 9, Rule 1.5 (master.md lines 1698-1878) have been adapted from aerospace to code documentation domain. Related rules 1.6 through 1.11 (master.md lines 1883-2108) are included with adapted STE/non-STE code example pairs.*
+*Adaptation complete. All 22 categories from ASD-STE100 Issue 9, Rule 1.5 (master.md lines 1698-1878) have been adapted from aerospace to code documentation domain. Related rules 1.6 through 1.11 (master.md lines 1883-2108) are included with adapted STE/non-STE code example pairs.*
+
+---
+
+## Domain Extension Placeholders
+
+> [CONTRIBUTE] These sections are reserved for future domain-specific content.
+> See `.agents/GAPS.md` for the full gap analysis and contribution guide.
+
+> [MOBILE] Mobile development examples (Swift, Kotlin, Flutter, React Native)
+> — App lifecycle, push notifications, store guidelines. Target: Categories 1, 2, 5, 16.
+
+> [ML] Machine Learning & Data Science examples (PyTorch, pandas, MLOps)
+> — Model training, inference pipelines, experiment tracking. Target: Categories 7, 9, 14, 19.
+
+> [GAMEDEV] Game development examples (Unity, Unreal, Godot)
+> — Game loop, physics, shaders, ECS. Target: Categories 2, 6, 7, 18.
+
+> [EMBEDDED] Embedded/IoT examples (C, Rust, RTOS, firmware)
+> — Memory-mapped I/O, interrupts, bootloaders. Target: Categories 2, 6, 9, 16.
+
+> [WEB3] Blockchain/Web3 examples (Solidity, smart contracts, DeFi)
+> — Gas optimization, wallet integration, consensus. Target: Categories 6, 19, 21.
+
+> [SEC] Security engineering examples (OWASP, threat modeling, SAST)
+> — Vulnerability patterns, secure coding, incident response. Target: Categories 18, 21.
+
+> [A11Y] Accessibility examples (WCAG 2.2, ARIA, screen readers)
+> — Accessible UI patterns, color contrast, keyboard navigation. Target: Categories 12, 17.
+
+> [I18N] Internationalization examples (RTL, Unicode, ICU messages)
+> — Locale data, pluralization, date/time formatting. Target: Categories 10, 13, 16.
+
+> [PERF] Performance engineering examples (profiling, SIMD, cache optimization)
+> — Flame graphs, lock-free structures, allocation patterns. Target: Categories 7, 9, 18.
+
+> [TEST] Testing methodology examples (property-based, fuzzing, contract testing)
+> — TDD/BDD patterns, mutation testing, coverage. Target: Categories 3, 14, 22.
+
+> [DOCS] Documentation process examples (review, governance, versioning)
+> — Doc style guides, translation pipelines, doc CI. Target: Categories 15, 20.
