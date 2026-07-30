@@ -63,7 +63,10 @@ Then assemble the final prompt with this structure:
 [Read from ste-code/data/synonym-table.json — top 50 pairs]
 
 ## Dictionary Excerpt
-[Top 60 approved words with meanings from ste-code/adapted/a-dictionary.md — lines 1-200]
+[Minimum 60 approved words with meanings, code-domain examples, and usage notes.
+Read ste-code/adapted/a-dictionary.md — at least lines 1-800 (the file is 5,943 lines).
+For each word include: UPPERCASE word, part of speech, approved meaning, and a code-domain example sentence.
+This section should be ~15,000-20,000 tokens.]
 
 ## Output Rules
 [Active voice, sentence length, anti-patterns]
@@ -75,9 +78,11 @@ Then assemble the final prompt with this structure:
 
 CRITICAL:
 - Every Non-STE MUST have a complete STE correction
-- Target: 40,000–55,000 tokens
+- TARGET IS MANDATORY: 40,000–55,000 tokens (characters ÷ 4)
+- If output is below 40,000 tokens, ADD more dictionary entries (up to 120 approved words from lines 1-1500 of a-dictionary.md), ADD more synonym pairs (up to 100), and ADD a second Non-STE/STE example pair for rules that need it
 - Clean paragraph breaks, no mangled text
 - Use write_file to save to: {OUTPUT}
+- After writing the file, verify: if file size is below 160,000 chars (40K tokens), you have NOT completed the task — expand and rewrite
 
 Report: rule count, total tokens, example count.
 """
