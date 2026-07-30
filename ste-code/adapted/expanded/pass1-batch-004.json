@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 4,
+  "rule_file": "a-sec1-rule1.12",
+  "entries": [
+    {
+      "rule": "rule-1.12",
+      "principle": "P12",
+      "non_ste_example": "The build tool removes all the whitespace and shortens all the variable names in the JavaScript output.",
+      "ste_example": "The build tool minifies the JavaScript output.",
+      "explanation": "Minify is a code-domain technical verb (category 1a, write and modify code). P12 allows technical verbs when they are the correct term for the context. The non-STE version uses a long description instead of the precise code-domain technical verb. This is the same principle as the spec permitting 'enter' as a technical verb in the computer processes category."
+    },
+    {
+      "rule": "rule-1.12",
+      "principle": "P1",
+      "non_ste_example": "Execute the test suite across all three browser environments before you merge.",
+      "ste_example": "Run the test suite across all three browser environments before you merge.",
+      "explanation": "Execute is not approved in the controlled terminology. The approved verb run accurately gives the instruction. P1 requires approved verbs when they are sufficient - do not use a technical verb when an approved verb works. Just as the spec prefers 'find' over 'detect' in general contexts, STE-Code prefers 'run' over 'execute' when no domain-specific meaning is required."
+    },
+    {
+      "rule": "rule-1.12",
+      "principle": "P13",
+      "non_ste_example": "Perform the serialization of the request payload before you transmit it to the API gateway.",
+      "ste_example": "Serialize the request payload before you send it to the API gateway.",
+      "explanation": "Two violations corrected. First, serialization is a code-domain technical verb used as a noun - P13 prohibits using technical verbs as nouns. The correct form is the verb serialize. Second, transmit is not approved - use send per P1 and the synonym table (send → NOT transmit, dispatch). This follows the same pattern as the spec rule: just as you must not use 'clamp' or 'grease' as technical verbs when they are approved as nouns, you must not nominalize a technical verb when it can be used in its verb form."
+    },
+    {
+      "rule": "rule-1.12",
+      "principle": "P12",
+      "non_ste_example": "Git the latest changes from the upstream repository before you start work on the feature.",
+      "ste_example": "Get the latest changes from the upstream repository with Git before you start work on the feature.",
+      "explanation": "Git is a code-domain technical noun (category 3, dev tools and build systems). The non-STE version uses it as a verb. Just as the spec prohibits 'clamp,' 'grease,' and 'wire' as technical verbs because they are approved as technical nouns, STE-Code prohibits 'Git' as a technical verb. Use the approved verb get with the code-domain technical noun Git. P1 and P12 work together: prefer an approved verb paired with a technical noun over forcing the noun into a verb role."
+    },
+    {
+      "rule": "rule-1.12",
+      "principle": "P12",
+      "non_ste_example": "The ORM sends a structured question to the users table and returns only the rows where the active flag is true.",
+      "ste_example": "The ORM queries the users table and gets only the rows where the active flag is true.",
+      "explanation": "Query is a code-domain technical verb (category 3b, database and storage). It is the correct, precise term for sending a structured request to a database. The non-STE version uses a long description ('sends a structured question') instead of the established technical verb. P12 allows technical verbs when they are the correct term and no approved verb captures the domain meaning. Also, 'returns' is replaced with 'gets' - get is the approved verb for obtaining data, while return has the restricted meaning of sending a value from a function."
+    }
+  ]
+}
