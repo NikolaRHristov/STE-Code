@@ -32,7 +32,6 @@ The copyright for this document, in whole or in part, is fully owned by:
 
 Aerospace, Security and Defence Industries Association of Europe (ASD)
 Rue du Trône 100, 1050 Brussels, Belgium
-www.asd-europe.org
 
 © ASD, 2005, 2007, 2010, 2013, 2017, 2021, 2025
 (previously AECMA, 1986, 1987, 1988, 1989, 1995, 1998, 2001, 2004)
@@ -62,7 +61,6 @@ The purpose of this document, including its writing rules, dictionary entries, a
 
 2025-01-15
 
----
 
 ## Highlights
 
@@ -87,7 +85,6 @@ The table that follows includes all changes in this issue 9.
 | Issue date | Issue date changed. |
 | | Date for ASD copyright changed. |
 | Copyright notices | Name of ASD changed. |
-| | Date for ASD copyright changed. |
 | | Reference to EU trademark added. |
 | | Special usage rights revised. |
 | | Disclaimer of liability revised. |
@@ -100,11 +97,8 @@ The table that follows includes all changes in this issue 9.
 
 ### Issue 9 Highlights
 
-2025-01-15
 
----
 
-## Part 1 – Writing Rules
 
 ### Section 1 – Words
 
@@ -138,29 +132,23 @@ Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 1.8
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 1.9
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 1.10
 
 Wording for rule revised. Explanatory text revised or changed where necessary. New examples added.
 
-### Issue 9 Highlights
 
-2025-01-15
 # Page 5 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 5–8 of 434
 
 ## Part 1 – Writing Rules (continued)
 
 ### Rule 1.11
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 1.12
 
@@ -180,7 +168,6 @@ Title and subtitle changed to read: Multi-word nouns.
 
 ### Rule 2.1
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 2.2
 
@@ -208,13 +195,9 @@ Wording for rule revised. Explanatory text and related examples revised or chang
 
 ### Rule 3.4
 
-Wording for rule revised. Explanatory text and related examples revised or changed where necessary.
 
-### Issue 9 Highlights
 
-2025-01-15
 
----
 
 ## Highlights (continued)
 
@@ -228,7 +211,6 @@ Wording for rule revised. Explanatory text and related examples revised or chang
 
 ### Rule 3.7
 
-Wording for rule revised. Explanatory text and related examples revised or changed where necessary.
 
 ### Section 4 – Sentences
 
@@ -264,21 +246,16 @@ Explanatory text revised or changed where necessary. Help added.
 
 ### Rule 5.2
 
-Explanatory text revised or changed where necessary.
 
 ### Rule 5.3
 
 Explanatory text revised or changed where necessary. New examples added.
 
-### Issue 9 Highlights
 
-2025-01-15
 
----
 
 ### Rule 5.4
 
-Wording for rule revised. Explanatory text and related examples revised or changed where necessary.
 
 ### Rule 5.5
 
@@ -290,27 +267,21 @@ Content structure: Explanatory text revised.
 
 ### Rule 6.1
 
-Explanatory text revised or changed where necessary.
 
 ### Rule 6.2
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 6.3
 
-Explanatory text revised or changed where necessary.
 
 ### Rule 6.4
 
-Explanatory text revised or changed where necessary.
 
 ### Rule 6.5
 
-Explanatory text revised or changed where necessary.
 
 ### Rule 6.6
 
-Explanatory text revised or changed where necessary.
 
 ### Section 7 – Safety Instructions
 
@@ -322,11 +293,9 @@ Explanatory text and related examples revised or changed where necessary. Help a
 
 ### Rule 7.2
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 7.3
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Section 8 – Punctuation and Word Count
 
@@ -334,7 +303,6 @@ Punctuation: Explanatory text revised. Reference book added and information revi
 
 ### Rule 8.1
 
-Wording for rule revised. Explanatory text and related examples revised or changed where necessary.
 
 ### Rule 8.2
 
@@ -344,15 +312,11 @@ Wording for rule revised. Explanatory text revised where necessary. Help added.
 
 Wording for rule revised.
 
-### Issue 9 Highlights
 
-2025-01-15
 
----
 
 ### Rule 8.4
 
-Wording for rule revised. Explanatory text revised or changed where necessary.
 
 ### Rule 8.5
 
@@ -369,7 +333,6 @@ Wording for rule revised. Explanatory texts and related examples revised or chan
 
 ### Rule 8.7
 
-Explanatory text revised or changed where necessary.
 
 ### Section 9 – Writing Practices
 
@@ -381,15 +344,12 @@ Wording for rule revised. Explanatory texts revised or changed where necessary. 
 
 ### Rule 9.2
 
-Explanatory text revised or changed where necessary.
 
 ### Rule 9.3
 
-Explanatory text revised or changed where necessary.
 
 ### Rule 9.4
 
-Explanatory text revised or changed where necessary.
 
 ### General Recommendations (GR)
 
@@ -405,19 +365,15 @@ New general recommendation for "Inclusive language" added.
 
 New general recommendation for "Possessive form" added.
 
-### Issue 9 Highlights
 
-2025-01-15
 # Page 9 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 9–12 of 434
 
 ## Part 2 – Dictionary
 
 ### Introduction
 
-Explanatory text and related examples revised or changed where necessary.
 
 Column 1 (explanation). New explanatory text related to "Verbs" added to include regular, irregular, auxiliary and modal verbs. Related examples added.
 
@@ -451,7 +407,6 @@ Second and third STE examples revised.
 
 #### ACCIDENT (n) — APPROVED
 
-STE example revised.
 
 #### accomplish (v) — UNAPPROVED
 
@@ -479,13 +434,10 @@ Added to the word list as approved.
 
 #### active (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### ACTIVE (adj) — APPROVED
 
-Added to the word list as approved.
 
----
 
 ## Dictionary (continued)
 
@@ -495,11 +447,9 @@ TASK (n) and PROCEDURE (n) added as an approved alternative. Related STE and non
 
 #### ADJACENT (adj) — APPROVED
 
-STE example revised.
 
 #### adopt (v) — UNAPPROVED
 
-STE example revised.
 
 #### adverse (adj) — UNAPPROVED
 
@@ -519,43 +469,33 @@ Help revised. Related STE and non-STE examples added.
 
 #### AFTER (conj) — APPROVED
 
-STE example revised.
 
 #### AGREE (v) — APPROVED
 
-STE example revised.
 
 #### AID (n) — APPROVED
 
-STE example revised.
 
 #### alert (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### allocate (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### allowable (adj) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### already (adv) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### ALTERNATIVE (adj) — APPROVED
 
-STE example revised.
 
 #### ALTERNATIVE (n) — APPROVED
 
-STE example revised.
 
 #### alternatively (adv) — UNAPPROVED
 
-STE example revised.
 
 #### amendment (n) — UNAPPROVED
 
@@ -563,7 +503,6 @@ First STE example revised.
 
 #### among (prep) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### annotation (n) — UNAPPROVED
 
@@ -575,7 +514,6 @@ ADD (v) removed from the approved alternatives. First and third STE and non-STE 
 
 #### appear (v) — UNAPPROVED
 
-Second and third STE examples revised.
 
 #### APPLY (v) — APPROVED
 
@@ -583,11 +521,9 @@ Second approved alternative added. Related STE examples aligned.
 
 #### APPROVAL (n) — APPROVED
 
-STE example revised.
 
 #### approve (v) — UNAPPROVED
 
-STE example revised.
 
 #### AROUND (prep) — APPROVED
 
@@ -595,9 +531,7 @@ Help added. Related STE and non-STE examples added.
 
 #### arrest (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
----
 
 ### AS … AS (conj) — APPROVED
 
@@ -617,7 +551,6 @@ Third and fourth approved alternatives revised.
 
 #### assure (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### AT (prep) — APPROVED
 
@@ -625,27 +558,21 @@ Third STE example revised.
 
 #### at least (adv) — UNAPPROVED
 
-Removed from the word list.
 
 #### attention (n) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### audible (adj) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### AUTHORITY (n) — APPROVED
 
-STE example revised.
 
 #### AUTOMATIC (adj) — APPROVED
 
-STE example revised.
 
 #### avert (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### aware (adj) — UNAPPROVED
 
@@ -653,7 +580,6 @@ First and second STE and non-STE examples changed.
 
 #### AXIAL (adj) — APPROVED
 
-STE example revised.
 
 #### BAD (v) — APPROVED
 
@@ -665,7 +591,6 @@ Help revised.
 
 #### bear down (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### BECOME (v) — APPROVED
 
@@ -673,7 +598,6 @@ Help added.
 
 #### BEFORE (con) — APPROVED
 
-STE example revised.
 
 #### below (adv) — UNAPPROVED
 
@@ -681,11 +605,9 @@ Added to the word list.
 
 #### beside (prep) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### big (adj) — UNAPPROVED
 
-Help added.
 
 #### blank (v) — UNAPPROVED
 
@@ -693,29 +615,22 @@ SEAL (v) added as an approved alternative. Related STE and non-STE examples adde
 
 #### blank off (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### blank out (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### BLEED (v) — APPROVED
 
-STE example revised.
 
 #### BLOCKAGE (n) — APPROVED
 
-STE example revised.
 
 #### BLOW (v) — APPROVED
 
-STE example revised.
 
----
 
 #### brightness (n) — UNAPPROVED
 
-Removed from the word list.
 
 #### brilliance (n) — UNAPPROVED
 
@@ -731,7 +646,6 @@ Examples inverted.
 
 #### BUT (conj) — APPROVED
 
-STE example revised.
 
 #### BY (prep) — APPROVED
 
@@ -739,15 +653,12 @@ Help removed.
 
 #### by means of (prep) — UNAPPROVED
 
-STE example revised.
 
 #### calculation (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### call (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### CAN (v) — APPROVED
 
@@ -755,7 +666,6 @@ Approved meaning revised. Help added. Related STE and non-STE examples added.
 
 #### CANCEL (v) — APPROVED
 
-Second STE example revised.
 
 #### CANNOT (v) — APPROVED
 
@@ -763,19 +673,15 @@ Approved meaning revised.
 
 #### capable (adj) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### care (n) — UNAPPROVED
 
-First STE example revised.
 
 #### carry (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### carry out (v) — UNAPPROVED
 
-Help revised.
 
 #### case (n) — UNAPPROVED
 
@@ -787,23 +693,18 @@ Second approved alternative removed.
 
 #### chance (by chance) (n) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### characteristic (n) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### check (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### CHEMICAL (adj) — APPROVED
 
-STE example revised.
 
 #### chock (v) — UNAPPROVED
 
-STE example revised.
 
 #### choose (v) — UNAPPROVED
 
@@ -819,7 +720,6 @@ Second approved meaning added. Related STE example added.
 
 #### CLEARLY (adv) — APPROVED
 
-Approved meaning revised.
 
 #### click (v) — UNAPPROVED
 
@@ -827,27 +727,22 @@ Help removed. Information about verbs that can be technical verbs are included i
 
 #### close (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### coincident (adj) — UNAPPROVED
 
 ALIGN (v) added as an approved alternative. Related STE and non-STE examples added.
 # Page 13 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 13–16 of 434
 
 #### collapse (v) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### COME (v) — APPROVED
 
-Help added.
 
 #### COME ON (v) — APPROVED
 
-Help added.
 
 #### communicate (v) — UNAPPROVED
 
@@ -859,15 +754,12 @@ TELL (v) removed from the approved alternatives. For the approved alternative SP
 
 #### communication (n) — UNAPPROVED
 
-Removed from the word list.
 
 #### COMMUNICATION (n) — APPROVED
 
-Added to the word list as approved.
 
 #### COMPATIBLE (adj) — APPROVED
 
-Second STE example revised.
 
 #### compile (v) — UNAPPROVED
 
@@ -875,7 +767,6 @@ Third STE and non-STE examples revised.
 
 #### completely (adv) — UNAPPROVED
 
-STE example revised.
 
 #### comply (v) — UNAPPROVED
 
@@ -883,23 +774,18 @@ First STE and non-STE examples revised. Help revised.
 
 #### COMPONENT (n) — APPROVED
 
-STE example revised.
 
 #### compulsory (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### confirm (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### conclusion (n) — UNAPPROVED
 
-First STE example revised.
 
 #### CONNECT (v) — APPROVED
 
-Second STE example revised.
 
 #### consecutively (adv) — UNAPPROVED
 
@@ -907,27 +793,20 @@ SEQUENCE (n) added as an approved alternative. Related STE and non-STE examples 
 
 #### consequence (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### contact (v) — UNAPPROVED
 
-Removed from the word list.
 
-#### CONTACT (v) — APPROVED
 
-Added to the word list as approved.
 
 #### cool (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### correspond (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### critical (adj) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### cycle (v) — UNAPPROVED
 
@@ -935,47 +814,36 @@ Approved alternative changed.
 
 #### DAMAGE (n) — APPROVED
 
-STE example revised.
 
 #### damp (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### danger (n) — UNAPPROVED
 
-Help revised.
 
 #### deactivate (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### DEACTIVATE (v) — APPROVED
 
-Added to the word list as approved.
 
 #### decrease (n) — UNAPPROVED
 
-STE example revised.
 
 #### deep (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### DEEP (adj) — APPROVED
 
-Added to the word list as approved.
 
 #### DEFLATE (v) — APPROVED
 
-First STE example revised.
 
 #### de-ice (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### delay (n) — UNAPPROVED
 
-First STE example revised.
 
 #### delete (v) — UNAPPROVED
 
@@ -991,11 +859,9 @@ Added as the approved alternative. Related STE example changed.
 
 #### DEPLOY (v) — APPROVED
 
-First STE example revised.
 
 #### design (v) — UNAPPROVED
 
-Non-STE example revised.
 
 #### destroy (v) — UNAPPROVED
 
@@ -1003,43 +869,33 @@ UNSERVICEABLE (adj) removed as the approved alternative.
 
 #### BREAK (v) — APPROVED
 
-Added as the approved alternative. Related STE example changed.
 
 #### dim (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### DIMENSION (n) — APPROVED
 
-STE example revised.
 
 #### DISENGAGE (v) — APPROVED
 
-First STE example revised.
 
 #### dispose of (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### disposition (n) — UNAPPROVED
 
-First STE example revised.
 
 #### DISTANCE (n) — APPROVED
 
-STE example revised.
 
 #### distinctly (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### distort (v) — UNAPPROVED
 
-STE example revised.
 
 #### disturb (v) — UNAPPROVED
 
-First STE example revised.
 
 #### DO (v) — APPROVED
 
@@ -1051,31 +907,24 @@ First STE example revised. Second STE and non-STE examples revised.
 
 #### double (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### drag (v) — UNAPPROVED
 
-Help removed. Information about verbs that can be technical verbs are included in Rule 1.12.
 
 #### dress (v) — UNAPPROVED
 
-First and second STE and non-STE examples changed.
 
 #### DRINK (v) — APPROVED
 
-Help added.
 
 #### DRY (v) — APPROVED
 
-Second STE example revised.
 
 #### EACH (adj) — APPROVED
 
-STE example revised.
 
 #### EAT (v) — APPROVED
 
-Help added.
 
 #### either (conj) — UNAPPROVED
 
@@ -1099,15 +948,12 @@ STE and non-STE examples revised. HAVE added as an approved alternative. Related
 
 #### entail (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### enter (v) — UNAPPROVED
 
-First STE and non-STE examples revised. Help removed. Information about verbs that can be technical verbs are included in Rule 1.12.
 
 #### entire (adj) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### equal (v) — UNAPPROVED
 
@@ -1115,43 +961,33 @@ First and second STE examples revised.
 
 #### erect (v) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### essential (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### establish (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### ESTIMATE (n) — APPROVED
 
-STE example revised.
 
 #### except (prep) — UNAPPROVED
 
-Help revised.
 
 #### exception (n) — UNAPPROVED
 
-Help revised.
 
 #### exceptional (adj) — UNAPPROVED
 
-STE example revised.
 
 #### excess (n) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### excessively (adv) — UNAPPROVED
 
-First and second STE and non-STE examples revised.
 
 #### excluding (prep) — UNAPPROVED
 
-STE example revised.
 
 #### exert (v) — UNAPPROVED
 
@@ -1163,15 +999,12 @@ Added as an approved alternative. Related STE and non-STE examples added.
 
 #### exhaust (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### explain (v) — UNAPPROVED
 
-STE example revised.
 
 #### EXTERNALLY (adj) — APPROVED
 
-STE example revised.
 
 #### EXTINGUISH (v) — APPROVED
 
@@ -1179,31 +1012,24 @@ First, second, and third STE examples revised.
 
 #### extremely (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### exude (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### FACE (n) — APPROVED
 
-Help revised.
 
 #### face (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### facility (n) — UNAPPROVED
 
-Help revised.
 
 #### failure (n) — UNAPPROVED
 
-Help revised.
 
 #### fear (v) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### feasible (adj) — UNAPPROVED
 
@@ -1211,23 +1037,18 @@ First STE and non-STE examples revised. Second STE example revised.
 
 #### few (adj) — UNAPPROVED
 
-Help revised.
 
 #### fine (adj) — UNAPPROVED
 
-STE example revised.
 
 #### flaw (n) — UNAPPROVED
 
-Help revised.
 
 #### FLOW (n) — APPROVED
 
-STE example revised.
 
 #### FLOW (v) — APPROVED
 
-Second STE example revised.
 
 #### FOLD (v) — APPROVED
 
@@ -1239,47 +1060,36 @@ DO NOT added as an approved alternative. Related STE and non-STE examples added.
 
 #### force (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### forecast (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### foremost (adj) — UNAPPROVED
 
-Added to the word list.
 
 #### FREE (adj) — APPROVED
 
-Help revised.
 
 #### fuel (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### FUNCTION (n) — APPROVED
 
-Approved meaning revised.
 
 #### fundamental (adj) — UNAPPROVED
 
-STE example revised.
 
 #### furnish (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### further (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### gain (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### gap (n) — UNAPPROVED
 
-Third STE and non-STE examples revised.
 
 #### garbled (adj) — UNAPPROVED
 
@@ -1287,15 +1097,12 @@ Spelling corrected. Second STE and non-STE example changed.
 
 #### gauge (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 # Page 17 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 17–20 of 434
 
 #### generally (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### generate (v) — UNAPPROVED
 
@@ -1303,19 +1110,15 @@ Second STE example revised. Third STE and non-STE examples revised.
 
 #### generous (adj) — UNAPPROVED
 
-Help revised.
 
 #### generously (adv) — UNAPPROVED
 
-Help revised.
 
 #### gently (adv) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### GET (v) — APPROVED
 
-Help revised.
 
 #### get away (v) — UNAPPROVED
 
@@ -1327,47 +1130,36 @@ Part of speech removed in the second approved alternative.
 
 #### get into (v) — UNAPPROVED
 
-Part of speech removed in the approved alternative.
 
 #### get off (v) — UNAPPROVED
 
-Part of speech removed in the approved alternative.
 
 #### get to (v) — UNAPPROVED
 
-First and second STE and non-STE examples changed.
 
 #### GIVE (v) — APPROVED
 
-STE example revised.
 
 #### glitch (v) — UNAPPROVED
 
-First, second, and third STE examples revised.
 
 #### GO (v) — APPROVED
 
-Help added.
 
 #### GO OFF (v) — APPROVED
 
-Help added.
 
 #### gradient (n) — UNAPPROVED
 
-STE and non-STE examples changed.
 
 #### graduated (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### great (adj) — UNAPPROVED
 
-Second STE example revised.
 
 #### gush (v) — UNAPPROVED
 
-STE example revised.
 
 #### handle (v) — UNAPPROVED
 
@@ -1375,11 +1167,9 @@ USE (v) added as an approved alternative. Related STE and non-STE examples added
 
 #### haul (v) — UNAPPROVED
 
-First and second STE and non-STE examples revised.
 
 #### HAVE (v) — APPROVED
 
-Help revised.
 
 #### have to (v) — UNAPPROVED
 
@@ -1387,31 +1177,24 @@ MUST (v) removed as an approved alternative. Help included to replace MUST (v). 
 
 #### hazard (n) — UNAPPROVED
 
-Help added.
 
 #### hazardous (adj) — UNAPPROVED
 
-Help added.
 
 #### helpful (adj) — UNAPPROVED
 
-STE example revised.
 
 #### hoist (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### however (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### hurt (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### IGNORE (v) — APPROVED
 
-Second STE example revised.
 
 #### ILLUMINATE (v) — APPROVED
 
@@ -1419,15 +1202,12 @@ Approved meaning revised. STE example changed.
 
 #### IMMEDIATELY (adv) — APPROVED
 
-STE example revised.
 
 #### imperative (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### IN (prep) — APPROVED
 
-Third STE example revised.
 
 #### inactive (adj) — UNAPPROVED
 
@@ -1439,7 +1219,6 @@ SPECIFIED (adj) added as an approved alternative. Related STE and non-STE exampl
 
 #### injure (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### inside (prep) — UNAPPROVED
 
@@ -1447,11 +1226,9 @@ Second STE and non-STE examples changed.
 
 #### interference (n) — UNAPPROVED
 
-Help revised.
 
 #### INVESTIGATION (n) — APPROVED
 
-Approved meaning revised.
 
 #### IT (pron) — APPROVED
 
@@ -1459,19 +1236,15 @@ Approved meaning revised. Second approved meaning added. Related STE example add
 
 #### later (adv) — UNAPPROVED
 
-Help revised.
 
 #### left-hand (adj) — UNAPPROVED
 
-STE example revised.
 
 #### less (prep) — UNAPPROVED
 
-Removed from the word list.
 
 #### LET (v) — APPROVED
 
-Help added.
 
 #### LIGHT (adj) — APPROVED
 
@@ -1479,11 +1252,9 @@ Third STE and non-STE examples changed.
 
 #### locate (v) — UNAPPROVED
 
-Third STE and non-STE examples revised.
 
 #### LOCK (v) — APPROVED
 
-Second STE example revised.
 
 #### LONG (adj) — APPROVED
 
@@ -1495,43 +1266,33 @@ First approved alternative MAXIMUM LENGTH removed.
 
 #### LOOSE (adj) — APPROVED
 
-Second STE example revised.
 
 #### LUBRICATE (v) — APPROVED
 
-STE example revised.
 
 #### MAGNETIC (adj) — APPROVED
 
-STE example revised.
 
 #### MAGNETICALLY (adv) — APPROVED
 
-STE example revised.
 
 #### magnetized (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### main (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### maintain (v) — UNAPPROVED
 
-Second STE example revised. Third STE and non-STE examples revised.
 
 #### MAINTENANCE (v) — APPROVED
 
-STE example revised.
 
 #### MANDATORY (adj) — APPROVED
 
-Help added. Related STE and non-STE examples added.
 
 #### MANUAL (adj) — APPROVED
 
-STE example revised.
 
 #### MANUAL (n) — APPROVED
 
@@ -1547,19 +1308,15 @@ Approved meaning revised to include the second part of the meaning.
 
 #### metallic (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### MINIMUM (adj) — APPROVED
 
-STE example revised.
 
 #### MINUS (prep) — APPROVED
 
-STE example revised.
 
 #### MIX (v) — APPROVED
 
-Second STE example changed.
 
 #### modify (v) — UNAPPROVED
 
@@ -1571,59 +1328,44 @@ Help removed and approved meaning added. STE example added.
 
 #### MORE (adv) — APPROVED
 
-Added to the word list as approved.
 
 #### MOST (adj) — APPROVED
 
-Help removed and approved meaning added. STE example added.
 
 #### MOST (adv) — APPROVED
 
-Added to the word list as approved.
 
 #### MUST (v) — APPROVED
 
-Approved meaning revised.
 
 #### NAME (n) — APPROVED
 
-First and second STE and non-STE examples revised.
 
 #### NEAR (adj) — APPROVED
 
-STE example revised.
 
 #### NEAR (prep) — APPROVED
 
-Second STE example revised.
 
-#### NECESSARY (adj) — APPROVED
 
-STE example revised.
 
 #### need (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### neutralize (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### NEXT (adj) — APPROVED
 
-STE example revised.
 
 #### next to (prep) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### noisy (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### normal (adj) — UNAPPROVED
 
-First and second STE examples revised.
 
 #### normally (adv) — UNAPPROVED
 
@@ -1631,11 +1373,9 @@ First STE and non-STE examples revised
 
 #### NOT (adv) — APPROVED
 
-STE example revised.
 
 #### note (v) — UNAPPROVED
 
-STE example revised.
 
 #### notify (v) — UNAPPROVED
 
@@ -1643,15 +1383,12 @@ CONTACT (v) added as an approved alternative. Related STE and non-STE examples a
 
 #### ON (adv) — APPROVED
 
-First STE example revised.
 
 #### ONE (pron) — APPROVED
 
-Help revised.
 
 #### operable (adj) — UNAPPROVED
 
-Non-STE example revised.
 
 #### operational (adj) — UNAPPROVED
 
@@ -1659,7 +1396,6 @@ Help added. Related STE example added.
 
 #### opportunity (n) — UNAPPROVED
 
-Help revised.
 
 #### option (n) — UNAPPROVED
 
@@ -1667,7 +1403,6 @@ ALTERNATIVE (n) and CAN (v) added as approved alternatives. Related STE and non-
 
 #### OVER (prep) — APPROVED
 
-Removed from the word list.
 
 #### over (prep) — UNAPPROVED
 
@@ -1675,15 +1410,12 @@ Fourth STE example revised. Help and related examples added.
 
 #### OVERLAP (n) — APPROVED
 
-STE example revised.
 
 #### PARALLEL (adj) — APPROVED
 
-STE example revised.
 
 #### PARK (v) — APPROVED
 
-STE example revised.
 
 #### PART (n) — APPROVED
 
@@ -1691,19 +1423,15 @@ First approved meaning revised. Related STE example revised.
 
 #### part (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### PARTICLE (n) — APPROVED
 
-STE example revised.
 
 #### particularly (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### PASTE (n) — APPROVED
 
-STE example revised.
 
 #### people (n) — UNAPPROVED
 
@@ -1711,11 +1439,9 @@ First approved alternative revised. Help added.
 
 #### per (prep) — UNAPPROVED
 
-Second STE example revised.
 
 #### perform (v) — UNAPPROVED
 
-Help revised.
 
 #### MEASURE (v) — APPROVED
 
@@ -1723,23 +1449,18 @@ Added as an approved alternative.
 
 #### PERFORMANCE (n) — APPROVED
 
-First and second STE examples revised.
 
 #### periodically (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### PERMANENT (adj) — APPROVED
 
-STE example revised.
 
 #### PERMANENTLY (adv) — APPROVED
 
-STE example revised.
 
 #### persist (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### PERSON (n) — APPROVED
 
@@ -1747,55 +1468,42 @@ STE example changed.
 
 #### PERSONNEL (n) — APPROVED
 
-STE example changed.
 
 #### pertinent (adj) — UNAPPROVED
 
-Added to the word list.
 
 #### picket (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### placard (v) — UNAPPROVED
 
-STE example revised.
 
 #### place (n) — UNAPPROVED
 
-First STE example revised.
 
 #### PLAY (n) — APPROVED
 
-STE example revised.
 
 #### PLUS (prep) — APPROVED
 
-STE example revised.
 # Page 21 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 21–24 of 434
 
 #### PNEUMATICALLY (adv) — APPROVED
 
-STE example revised.
 
 #### POINT (n) — APPROVED
 
-Second STE example revised.
 
 #### POINT (v) — APPROVED
 
-Second STE example revised.
 
 #### POISONOUS (adj) — APPROVED
 
-STE example revised.
 
 #### poor (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### pop (v) — UNAPPROVED
 
@@ -1803,27 +1511,21 @@ PROTRUDE (v) added as an approved alternative. Related STE and non-STE added.
 
 #### portion (n) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### POSITION (n) — APPROVED
 
-Second STE example changed.
 
 #### position (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### POSSIBLE (adj) — APPROVED
 
-STE example changed.
 
 #### power (v) — UNAPPROVED
 
-STE and non-STE examples changed.
 
 #### practice (n) — UNAPPROVED
 
-Removed from the word list.
 
 #### precisely (adv) — UNAPPROVED
 
@@ -1831,7 +1533,6 @@ STE and non STE examples revised.
 
 #### preferable (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### preferably (adv) — UNAPPROVED
 
@@ -1839,63 +1540,48 @@ Approved alternative changed. STE and non-STE examples changed.
 
 #### preload (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### PREPARE (v) — APPROVED
 
-Second STE example revised.
 
 #### prescribed (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### present (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### PRESSURIZE (v) — APPROVED
 
-STE example revised.
 
 #### preventive (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### previous (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### PREVIOUS (adj) — APPROVED
 
-Added to the word list as approved.
 
 #### previously (adv) — UNAPPROVED
 
-Removed from the word list.
 
 #### PREVIOUSLY (adv) — APPROVED
 
-Added to the word list as approved.
 
 #### prime (v) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### principal (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### prior to (prep) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### priority (n) — UNAPPROVED
 
-STE example revised.
 
 #### probability (n) — UNAPPROVED
 
-STE example revised.
 
 #### probable (adj) — UNAPPROVED
 
@@ -1903,15 +1589,12 @@ Part of speech removed from the approved alternative to read VERY POSSIBLE. Firs
 
 #### probe (v) — UNAPPROVED
 
-STE example revised.
 
 #### PROBLEM (n) — APPROVED
 
-STE example revised.
 
 #### PROCEDURE (n) — APPROVED
 
-STE example revised.
 
 #### process (n) — UNAPPROVED
 
@@ -1929,49 +1612,38 @@ First, second, and fourth STE and non-STE examples revised. Third STE examples r
 
 Help and new related examples added.
 
-#### MATERIAL (n) — APPROVED
 
 Removed as the approved alternative.
 
 #### prompt (adj) — UNAPPROVED
 
-STE example revised.
 
 #### propagation (n) — UNAPPROVED
 
-Help revised.
 
 #### PROPORTION (n) — APPROVED
 
-First STE example revised.
 
 #### protect (v) — UNAPPROVED
 
-Non-STE example revised.
 
 #### protrude (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### PROTRUDE (v) — APPROVED
 
-Added to the word list as approved.
 
 #### provide (v) — UNAPPROVED
 
-First and second STE and non-STE examples revised.
 
 #### provided (that) (conj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### providing (that) (conj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### proximity (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### pump (v) — UNAPPROVED
 
@@ -1979,39 +1651,29 @@ Approved alternative revised. STE and non-STE examples revised. Second approved 
 
 #### purpose (n) — UNAPPROVED
 
-Removed from the word list.
 
-#### PUT (v) — APPROVED
 
-Help added.
 
 #### PUT ON (v) — APPROVED
 
-Help added.
 
 #### QUALITY (n) — APPROVED
 
-STE example revised.
 
 #### QUANTITY (n) — APPROVED
 
-First STE example revised.
 
 #### raise (v) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### RANDOM (adj) — APPROVED
 
-STE example revised.
 
 #### rapid (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### rapidly (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### reactivate (v) — UNAPPROVED
 
@@ -2023,59 +1685,45 @@ And START (v) removed as approved alternatives.
 
 #### readjust (v) — UNAPPROVED
 
-STE example revised.
 
 #### real (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### rebuild (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### recoil (v) — UNAPPROVED
 
-Third STE and non-STE examples revised.
 
 #### RECOMMEND (v) — APPROVED
 
-STE example revised.
 
 #### recover (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### rectify (v) — UNAPPROVED
 
-STE example revised.
 
 #### reduce (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### REFER (v) — APPROVED
 
-First STE example revised.
 
 #### referenced (adj) — UNAPPROVED
 
-Approved alternative changed. STE and non-STE examples changed.
 
 #### REFUEL (v) — APPROVED
 
-STE example revised.
 
 #### reinstall (v) — UNAPPROVED
 
-STE example revised.
 
 #### rejection (n) — UNAPPROVED
 
-STE example revised.
 
 #### relay (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### relevant (adj) — UNAPPROVED
 
@@ -2083,35 +1731,27 @@ Second and third approved alternatives revised.
 
 #### REMAINING (adj) — APPROVED
 
-STE example revised.
 
 #### REMOVAL (n) — APPROVED
 
-STE example revised.
 
 #### renovate (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### REPAIR (n) — APPROVED
 
-STE example changed.
 
 #### replenish (v) — UNAPPROVED
 
-Third STE and non-STE examples revised.
 
 #### require (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### rest (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### rest (v) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### resume (v) — UNAPPROVED
 
@@ -2119,11 +1759,9 @@ First STE and non-STE examples changed.
 
 #### reuse (v) — UNAPPROVED
 
-STE example revised.
 
 #### reverse (adj) — UNAPPROVED
 
-Help revised.
 
 #### review (n) — UNAPPROVED
 
@@ -2135,43 +1773,33 @@ Help revised. STE and non-STE example revised.
 
 #### rise (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### SAFE (adj) — APPROVED
 
-STE example revised.
 
 #### SAFETY (v) — APPROVED
 
-First STE example revised.
 
 #### safety-clip (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### SAMPLE (n) — APPROVED
 
-STE example revised.
 
 #### sample (v) — UNAPPROVED
 
-STE example revised.
 
 #### scrape (v) — UNAPPROVED
 
-STE example revised.
 
 #### SECONDARY (adj) — APPROVED
 
-STE example changed.
 
 #### SEE (v) — APPROVED
 
-Second non-STE example revised.
 
 #### SELECT (v) — APPROVED
 
-Third STE example revised.
 
 #### separate (adj) — UNAPPROVED
 
@@ -2183,63 +1811,48 @@ Added as an approved alternative. Related STE and non-STE examples added. Part o
 
 #### separately (adv) — UNAPPROVED
 
-Added to the word list.
 
 #### serve (v) — UNAPPROVED
 
-Help revised.
 
 #### settle (v) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### severe (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### sharply (adv) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### SHORT (adj) — APPROVED
 
-Help revised.
 
 #### shorten (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### should (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### SHOW (v) — APPROVED
 
-First STE example revised.
 
 #### similar (adj) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### simultaneous (adj) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### single (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### situation (n) — UNAPPROVED
 
-Added to the word list.
 
 #### size (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### skid (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### slip (v) — UNAPPROVED
 
@@ -2247,49 +1860,38 @@ First and third STE and non-STE examples revised.
 
 #### SLOPE (n) — APPROVED
 
-STE example revised.
 
 #### SMALL (adj) — APPROVED
 
-STE example revised.
 
 #### snap (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### soften (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### SOLID (n) — APPROVED
 
-STE example changed.
 
 #### SOLUTION (n) — APPROVED
 
-Second STE example changed.
 
 #### SOMETHING (pron) — APPROVED
 
-STE example revised.
 
 #### SOURCE (n) — APPROVED
 
 First and second STE examples changed.
 # Page 25 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 25–28 of 434
 
-## Highlights
 
 #### soon (adv) — UNAPPROVED
 
-Help revised.
 
 #### spark (n) — UNAPPROVED
 
-STE example revised.
 
 #### specific (adj) — UNAPPROVED
 
@@ -2301,39 +1903,30 @@ Removed from the approved alternatives.
 
 #### speed (n) — APPROVED
 
-STE example changed.
 
 #### spillage (n) — UNAPPROVED
 
-First STE example revised.
 
 #### split (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### split (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### stability (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### stabilization (n) — UNAPPROVED
 
-STE example revised.
 
 #### stable (adj) — APPROVED
 
-STE example revised.
 
 #### stage (n) — UNAPPROVED
 
-STE example revised.
 
 #### stained (adj) — UNAPPROVED
 
-First STE and non-STE examples revised.
 
 #### stamp (v) — UNAPPROVED
 
@@ -2341,7 +1934,6 @@ Approved alternative revised. New approved alternative added. Related STE and no
 
 #### stationary (adj) — UNAPPROVED
 
-Second STE and non-STE examples changed.
 
 #### stay (v) — APPROVED
 
@@ -2349,31 +1941,24 @@ Help added. STE example revised.
 
 #### sticky (adj) — UNAPPROVED
 
-STE example revised.
 
 #### store (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### strain (v) — UNAPPROVED
 
-First STE example revised.
 
 #### strap (v) — UNAPPROVED
 
-STE example revised.
 
 #### strike (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### strong (adj) — APPROVED
 
-STE example revised.
 
 #### structural (adj) — APPROVED
 
-STE example changed.
 
 #### subject (v) — UNAPPROVED
 
@@ -2381,11 +1966,9 @@ Removed from the word list. SUBSEQUENTLY Second STE example revised. (adv)
 
 #### substance (n) — UNAPPROVED
 
-Non-STE example revised.
 
 #### substitute (adj) — UNAPPROVED
 
-First STE example revised.
 
 #### suck (v) — UNAPPROVED
 
@@ -2393,43 +1976,33 @@ Approved alternative revised. STE example revised.
 
 #### suitable (adj) — UNAPPROVED
 
-First STE example revised.
 
 #### suitably (adv) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### supply (v) — APPROVED
 
-Second approved meaning added. Related STE example added.
 
 #### support (n) — UNAPPROVED
 
-First and second STE and non-STE examples revised.
 
 #### support (v) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### surface (n) — APPROVED
 
-STE example revised.
 
 #### suspect (adj) — UNAPPROVED
 
-STE example revised.
 
 #### suspect (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### swallow (v) — APPROVED
 
-STE example revised.
 
 #### switch (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### switch off (v) — UNAPPROVED
 
@@ -2441,23 +2014,18 @@ Added as an approved alternative. Related STE and non STE examples added. Existi
 
 #### switch on (v) — UNAPPROVED
 
-SET (v) included as an approved alternative to replace SWITCH (TN). STE example revised.
 
 #### energize (v) — APPROVED
 
-Added as an approved alternative. Related STE and non-STE examples added.
 
 #### symmetrical (adj) — APPROVED
 
-STE example revised.
 
 #### synchronized (adj) — APPROVED
 
-Second STE example revised.
 
 #### tag (v) — APPROVED
 
-STE example revised.
 
 #### take (v) — UNAPPROVED
 
@@ -2465,51 +2033,39 @@ Second and fourth STE examples revised. Third STE and non-STE examples revised.
 
 #### take care (v) — UNAPPROVED
 
-Second STE example revised.
 
 #### tape (v) — UNAPPROVED
 
-STE example revised.
 
 #### taped (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### task (n) — APPROVED
 
-STE example revised.
 
 #### telescopic (adj) — APPROVED
 
-STE example changed.
 
 #### tell (v) — APPROVED
 
-First and second STE examples changed.
 
 #### test (v) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### that (conj) — APPROVED
 
-Help added.
 
 #### them (pron) — APPROVED
 
-STE example revised.
 
 #### then (adv) — APPROVED
 
-STE example revised.
 
 #### there (pron) — APPROVED
 
-STE example revised.
 
 #### these (adj) — APPROVED
 
-STE example revised.
 
 #### thick (adj) — APPROVED
 
@@ -2519,47 +2075,36 @@ Approved meaning revised. First STE example added.
 
 #### thickness (n) — APPROVED
 
-Approved meaning revised. STE example revised.
 
 #### this (pron) — APPROVED
 
-Help added. STE example revised.
 
 #### thorough (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### triple (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### to (prep) — APPROVED
 
-First STE example revised.
 
 #### total (adj) — APPROVED
 
-STE example revised.
 
 #### tow (v) — APPROVED
 
-STE example revised.
 
 #### true (adj) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### turn off (v) — UNAPPROVED
 
-Added to the word list.
 
 #### turn on (v) — UNAPPROVED
 
-Added to the word list.
 
 #### turn over (v) — UNAPPROVED
 
-Added to the word list.
 
 #### under (prep) — UNAPPROVED
 
@@ -2567,31 +2112,24 @@ Second STE and non-STE examples revised. Third STE example revised.
 
 #### undertake (v) — UNAPPROVED
 
-Help revised.
 
 #### start (v) — APPROVED
 
-Added as an approved alternative.
 
 #### uneven (adj) — UNAPPROVED
 
-Second STE example revised.
 
 #### unit (n) — APPROVED
 
-First STE example revised.
 
 #### unlock (v) — APPROVED
 
-First STE example revised.
 
 #### upon (prep) — UNAPPROVED
 
-Second STE example revised.
 
 #### unrestricted (adj) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### unscrew (v) — UNAPPROVED
 
@@ -2599,11 +2137,9 @@ Sequence of the approved alternatives changed. STE and non-STE examples for REMO
 
 #### usage (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### using (v) — UNAPPROVED
 
-Removed from the word list.
 
 #### use (n) — UNAPPROVED
 
@@ -2615,11 +2151,9 @@ First and third STE examples revised.
 
 #### usually (adv) — APPROVED
 
-STE example revised.
 
 #### utilize (v) — UNAPPROVED
 
-STE and non-STE examples changed.
 
 #### valid (adj) — UNAPPROVED
 
@@ -2627,23 +2161,18 @@ Help revised. Third STE example revised.
 
 #### value (n) — APPROVED
 
-STE example revised.
 
 #### verbal (adj) — UNAPPROVED
 
-Removed from the word list.
 
 #### verify (v) — UNAPPROVED
 
-Non-STE example revised.
 
 #### visible (adj) — UNAPPROVED
 
-Second STE and non-STE examples revised.
 
 #### visual (adj) — APPROVED
 
-Approved meaning revised. STE example revised.
 
 #### vital (adj) — UNAPPROVED
 
@@ -2651,51 +2180,39 @@ IMPORTANT (adj) and NECESSARY (adj) removed from the approved alternatives. STE 
 
 #### warm (adj) — APPROVED
 
-STE example revised.
 
 #### we (pron) — APPROVED
 
-Approved meaning revised.
 
 #### wear (v) — APPROVED
 
-Third STE example revised.
 
 #### weep (n) — UNAPPROVED
 
-STE and non-STE examples revised.
 
 #### weigh (v) — APPROVED
 
-Second STE example revised.
 
 #### weight (n) — APPROVED
 
-STE example revised.
 
 #### well (adv) — UNAPPROVED
 
-Third STE example revised.
 
 #### whenever (pron) — UNAPPROVED
 
-STE example revised.
 
 #### whichever (adj) — UNAPPROVED
 
-Added to the word list.
 
 #### whichever (pron) — UNAPPROVED
 
-STE and non-STE examples changed.
 
 #### who (pron) — APPROVED
 
-STE example revised.
 
 #### wide (adj) — APPROVED
 
-Approved meaning revised. STE example revised.
 
 #### will (v) — APPROVED
 
@@ -2703,23 +2220,18 @@ Help revised. Approved meaning revised.
 
 #### with (prep) — APPROVED
 
-Help added.
 
 #### without (prep) — APPROVED
 
-STE example revised.
 
 #### wrong (adj) — UNAPPROVED
 
-STE example revised.
 
 #### yet (conj) — UNAPPROVED
 
-Second approved alternative removed.
 
 #### yet (adv) — UNAPPROVED
 
-Added to the word list.
 
 #### you (pron) — APPROVED
 
@@ -2728,7 +2240,6 @@ Second STE example added.
 > Page HI-26 Highlights Issue 9
 # Page 29 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 29–32 of 434
 
 ## Table of Contents
@@ -2761,7 +2272,6 @@ Second STE example added.
 *Page TOC-2 is blank.*
 
 > Page TOC-2 Table of Contents Issue 9
-> 2025-01-15
 
 ## Subject-to-Rule Index
 
@@ -2770,7 +2280,6 @@ This index helps you find the applicable STE rules related to different subjects
 The symbol # after the section number (for example, 7#) shows that the subject is applicable to all or most of the rules in that section.
 
 | Subject | Rule |
-|---|---|
 | Abbreviations | General introduction, 1,5, 2.2, 8.3, 8.5, 8.6 |
 | Acronyms | 8.6 |
 | Action | 3.7 |
@@ -2807,8 +2316,6 @@ The symbol # after the section number (for example, 7#) shows that the subject i
 > Issue 9 Subject-to-rule index Page SRI-1
 > 2024-04-30
 
-| Subject | Rule |
-|---|---|
 | Headings | 8.6 |
 | Help (light bulb symbol) | Part 1, all sections. Part 2, applicable entries |
 | Hyphens | 2.2, 8.2, 8.7 |
@@ -2848,16 +2355,11 @@ The symbol # after the section number (for example, 7#) shows that the subject i
 | Possessive form (Saxon genitive) | 9 – GR-8 |
 
 > Page SRI-2 Subject-to-rule Index Issue 9
-> 2024-04-30
 # Page 33 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 33–36 of 434
 
-## Subject-to-Rule Index
 
-| Subject | Rule |
-|---|---|
 | Preposition (part of speech) | Part 2, Introduction |
 | Procedural writing (procedures) | 5# |
 | Pronouns (how to use them) | 9 – GR-3 |
@@ -2896,10 +2398,7 @@ The symbol # after the section number (for example, 7#) shows that the subject i
 | Verbs | 3#, Part 2, Introduction |
 
 > Issue 9 Subject-to-rule index Page SRI-3
-> 2024-04-30
 
-| Subject | Rule |
-|---|---|
 | Vertical lists | 4.3, 8.4 |
 | Warnings | 7# |
 | With (how to use) | 9 – GR-2 |
@@ -2910,7 +2409,6 @@ The symbol # after the section number (for example, 7#) shows that the subject i
 | Writing practices | 9# |
 
 > Page SRI-4 Subject-to-rule Index Issue 9
-> 2024-04-30
 
 ## General Introduction
 
@@ -2939,7 +2437,6 @@ In 1987, the Air Transport Association of America (ATA) included the requirement
 Today, the success of STE is such that other industries use it beyond its original intended purpose of aerospace maintenance documentation. Interest in STE has also increased dramatically in the areas of language services, professional translation and interpreting, and in the academic world.
 
 > Issue 9 General introduction Page i
-> 2025-01-15
 
 #### What is the purpose of STE?
 
@@ -2974,10 +2471,8 @@ No. There are different methods to show units of measurement in a technical text
 No. It is intended to be used with other applicable specifications for technical publications, style guides, and official directives. A high standard of professionalism is necessary to use STE correctly.
 
 > Page ii General introduction Issue 9
-> 2025-01-15
 # Page 37 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 37–40 of 434
 
 ## General Introduction (continued)
@@ -3054,7 +2549,6 @@ The STEMG has records of all change forms and their assessments. The change form
 
 **Change form for ASD-STE100 Simplified Technical English**
 
-Use this change form to write your change request, comments, or recommendations. Then, send it to stemg@asd-ste100.org, to a national coordinator, or an associate expert of the STEMG. For more information, refer to www.asd-ste100.org.
 
 Writing rule or dictionary word:
 
@@ -3077,7 +2571,6 @@ Email:
 ASD STEMG assessment and decision: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date:
 # Page 41 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 41–44 of 434
 
 ## Acknowledgments and dedication
@@ -3142,7 +2635,6 @@ ASD-STE100 Simplified Technical English refers to the books, publications, and g
 Blank Page
 # Page 45 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 45–48 of 434
 
 ## Section 1 — Words
@@ -3194,14 +2686,9 @@ Blank Page
 
 **Rule 1.14** Use American English spelling unless other official directives tell you differently.
 
----
 
 ### Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
 
-**Rule 1.1** Use words that are:
-- Approved in the dictionary
-- Technical nouns
-- Technical verbs.
 
 Simplified Technical English (STE) has a controlled dictionary (part 2) that gives the words most frequently used in technical writing. You can also use words that are not in the dictionary if you can include them in the specified categories of technical nouns and technical verbs.
 
@@ -3221,15 +2708,12 @@ In the context of ISO 1087:2019, "subject fields" refer to specific domains or a
 
 Technical nouns and technical verbs are usually included in your company glossary or terminology database. Always refer to these sources, and to the specified rules in this section, for the correct selection of words.
 
----
 
 ### Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
 
-**Rule 1.2** Use approved words from the dictionary only as the specified part of speech.
 
 In the dictionary, each approved word has a specified part of speech. When you use an approved word, make sure that you use it only as the specified part of speech.
 
-Examples:
 
 "Test" is an approved noun, but not an approved verb.
 
@@ -3248,32 +2732,23 @@ or
 
 > **See:** Dictionary entry for DIM (adj).
 
-> **STE:** Do a test for leaks in the system.
 
-> **Non-STE:** Test the system for leaks.
-> **STE:** Do the leak test of the system.
 
 Some words are approved as more than one part of speech. For example, "clean" is an approved verb and an approved adjective. The position of the word in the sentence shows its function (and its meaning) because verbs and adjectives have different positions.
 
 > **See:** Dictionary entry for CLEAN (v), CLEAN (adj).
 
-> **STE:** Do a test for leaks in the system.
 
 ("Clean" is a verb here.)
 
-> **STE:** Do a test for leaks in the system.
 
 ("Clean" is an adjective here.)
 
 "Acceptable" is an adjective that is not approved. The dictionary gives three approved alternatives that have the same part of speech. You can use one of these alternatives to replace the word "acceptable" in the sentence with a word-for-word replacement.
 
-> **Non-STE:** Test the system for leaks.
-> **STE:** Do the leak test of the system.
 
 "Operable" is an adjective that is not approved. The dictionary gives an approved alternative that has a different part of speech: "operate" as a verb. Thus, you must use a different sentence construction.
 
-> **Non-STE:** Test the system for leaks.
-> **STE:** Do the leak test of the system.
 
 When you replace a word, always make sure that the approved alternative you select does not change the meaning of the sentence. If the meaning changes, select a different word or use a different sentence construction.
 
@@ -3284,15 +2759,12 @@ If a word that you want to use is not in the dictionary:
 2. Find which is the best synonym that is approved in the STE dictionary.
 3. Use the approved STE word or find a different sentence construction with other approved words.
 
----
 
 ### Rule 1.3 — Use Approved Words Only with Their Approved Meanings
 
-**Rule 1.3** Use approved words only with their approved meanings.
 
 Each approved word in the dictionary has a specified approved meaning. Some of these words can have more restricted meanings compared with their meanings in standard English. Always use the approved words only with their approved meanings.
 
-Examples:
 
 The approved meaning of the verb "follow" is "come after, go after."
 
@@ -3300,23 +2772,18 @@ The approved meaning of the verb "follow" is "come after, go after."
 
 > **STE:** Do the procedures that follow:
 
-> **STE:** Do the procedures that follow:
 
 You cannot use the verb "follow" with other meanings that are not approved.
 
-> **STE:** Do the procedures that follow:
 
 In this sentence, always use "obey" with the approved meaning "to do that which the procedures or instructions tell you."
 
 > **See:** Dictionary entry for OBEY (v).
 
-> **STE:** Do the procedures that follow:
 
----
 
 ### Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
 
-**Rule 1.4** Use only the approved forms of verbs and adjectives.
 
 The dictionary gives each approved verb together with its approved forms. The dictionary also gives the approved adjectives in their base form, together with their comparative and superlative forms in parentheses where applicable.
 
@@ -3337,7 +2804,6 @@ This word tells you that you can use the approved verb "remove" as follows:
 The past participle form of the verb is usually the same as the simple past tense. Thus, the dictionary gives it two times.
 # Page 49 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 49–52 of 434
 
 ## Dictionary Example — Adjectives
@@ -3360,7 +2826,6 @@ Adjectives that make their comparative and superlative forms with "more" and "mo
 
 ## Technical Nouns
 
-### Rule 1.5
 
 You can use words that you can include in a technical noun category.
 
@@ -3467,18 +2932,15 @@ You can use technical nouns in procedural and descriptive writing if you can inc
     bacteria, bird, cassowary, cat, conifer, cow, dog, emu, fern, ferret, fungi, horse, insect, leopard, monkey, moss, mouse, pocket gopher, rose, termite, wombat
 # Page 53 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 53–56 of 434
 
 The technical nouns in their related categories are only examples. Rule 1.5 does not give a full list of all possible technical nouns. The listed words in each category have uppercase letters only when it is necessary. For example, official identifications, titles, and abbreviations.
 
 ### Rule 1.6 — Use a word that is not approved in the dictionary, only when it is a technical noun or part of a technical noun.
 
-**Rule 1.6** Use a word that is not approved in the dictionary, only when it is a technical noun or part of a technical noun.
 
 The dictionary includes some words that you cannot use because they are not approved. But if you can put these words in an applicable category of technical nouns, you can use them as technical nouns in some contexts.
 
-Examples:
 
 The word "base" is not approved in the dictionary and its alternative is "bottom (n)."
 
@@ -3492,7 +2954,6 @@ The word "base" is not approved in the dictionary and its alternative is "bottom
 
 But you can use "base" as a technical noun.
 
-> **STE:** Make sure that the two spigots at the bottom of the unit engage.
 
 ("Base" is a technical noun, category 7, mathematical, scientific, engineering terms, and formulas.)
 
@@ -3500,7 +2961,6 @@ The same word "base" can go into different categories of technical nouns. This c
 
 Example:
 
-> **STE:** Make sure that the two spigots at the bottom of the unit engage.
 
 ("Base" is a technical noun, category 5, facilities, infrastructure, and logistic procedures.)
 
@@ -3508,25 +2968,20 @@ Example:
 
 > **See:** Dictionary entry for EMERGENCY (n), AUXILIARY (adj).
 
-Example:
 
-> **STE:** Make sure that the two spigots at the bottom of the unit engage.
 
 ("Backup" is a technical noun, category 19, computer science, information and communication technology.)
 
 "Backup" is a one-word technical noun. But you can also write "backup file," a two-word technical noun.
 
-Examples:
 
 > **STE:** Keep the backup file in a safe area.
 
 ("Backup file" is a technical noun, category 19, computer science, information and communication technology.)
 
-> **STE:** Keep the backup file in a safe area.
 
 ("Backup" is not permitted and you cannot use it in this context.)
 
-> **STE:** Keep the backup file in a safe area.
 
 (Different sentence construction)
 
@@ -3534,25 +2989,19 @@ Examples:
 
 > **See:** Dictionary entry for PRIMARY (adj).
 
-Examples:
 
-> **STE:** Keep the backup file in a safe area.
 
 ("Main part" is not a technical noun, and it is correct to replace "main" with "primary.")
 
-> **STE:** Keep the backup file in a safe area.
 
 But you can use "main" as part of a technical noun.
 
-> **STE:** Keep the backup file in a safe area.
 
 ("Main landing gear" is a technical noun. It is incorrect to replace "main" with "primary" here, because "primary landing gear" is not the technical noun that is approved in your company, industry, or subject field.)
 
 If a word is not in the dictionary, you can use it if it is part of a technical noun. In the example that follows, "angular" and "position" are approved but "relative" is not in the dictionary.
 
-Example:
 
-> **STE:** Keep the backup file in a safe area.
 
 power-turbine rotor disks.
 
@@ -3560,11 +3009,9 @@ power-turbine rotor disks.
 
 ### Rule 1.7 — Do not use words that are technical nouns as verbs.
 
-**Rule 1.7** Do not use words that are technical nouns as verbs.
 
 Use a technical noun only as a noun or as an adjective that is part of a different technical noun. Do not use the same word as a verb.
 
-Examples:
 
 "Oil" is a technical noun, category 4, materials, consumables, and unwanted material. Do not use "oil" as a verb. Use a different sentence construction that lets you use "oil" as a technical noun.
 
@@ -3573,8 +3020,6 @@ Examples:
 
 "Snow" is a technical noun, category 16, environmental and operational conditions. Do not use "snow" as a verb. Use a different sentence construction that lets you use "snow" as a technical noun.
 
-> **Non-STE:** Oil the steel surfaces.
-> **STE:** Apply oil to the steel surfaces.
 
 > **STE:** The front panel of the phone has a touchscreen and a home button.
 
@@ -3582,9 +3027,7 @@ Examples:
 
 In some contexts, the same word can be a technical noun and a technical verb. This condition occurs when you can put this word in a technical noun category (rule 1.5) and in a technical verb category (rule 1.12).
 
-> **STE:** The front panel of the phone has a touchscreen and a home button.
 
-("Touchscreen" and "home button" are technical nouns that are approved in your company, industry, or subject field.)
 
 location on them.)
 
@@ -3594,23 +3037,17 @@ Drill a hole at the intersection of the two lines.
 
 ### Rule 1.8 — Use technical nouns that are approved in your company, industry, or subject field.
 
-**Rule 1.8** Use technical nouns that are approved in your company, industry, or subject field.
 
 If your company, industry, or subject field, has an approved technical noun for a system, component, part, or process, use that technical noun. Usually, such technical nouns are included in official parts information and in company documentation.
 
-Example:
 
-> **STE:** The front panel of the phone has a touchscreen and a home button.
 
-("Touchscreen" and "home button" are technical nouns that are approved in your company, industry, or subject field.)
 
 ### Rule 1.9 — When you must select a technical noun, use one which is short and easy to understand.
 
-**Rule 1.9** When you must select a technical noun, use one which is short and easy to understand.
 
 When there is no technical noun that is approved in your company, industry, or subject field, select one that is short (not more than three words) and easy to understand.
 
-Example:
 
 > **Non-STE:** Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20).
 > **STE:** Remove the four screws (10) that attach the flange (15) to the cover (20).
@@ -3619,39 +3056,29 @@ In this example, it is sufficient to use the words "screws," "flange," and "cove
 
 ### Rule 1.10 — Do not use regional, slang, or jargon words as technical nouns.
 
-**Rule 1.10** Do not use regional, slang, or jargon words as technical nouns.
 
 There can be technical words that only persons in confined regions or geographical areas use. These words are not easy to understand for persons who are from a different region or area. When you select technical nouns, always use well-known words.
 
 This rule is also applicable to technical slang or jargon words. If only a small number of persons understand a word, it will cause confusion and non-effective communication.
 
-Examples:
 
-> **Non-STE:** Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20).
-> **STE:** Remove the four screws (10) that attach the flange (15) to the cover (20).
 
 transportation. It is a term used in some regions of North America and Canada, Northern Europe, and New Zealand. Its meaning is not immediately clear to the reader.)
 
 > **STE:** During logging operations, attach a cable to the heavy machinery to hold the logs in their position.
 
-> **Non-STE:** Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20).
-> **STE:** Remove the four screws (10) that attach the flange (15) to the cover (20).
 
-> **STE:** During logging operations, attach a cable to the heavy machinery to hold the logs in their position.
 
 ("Gear" is technical jargon that refers to tools and equipment, and its meaning is not immediately clear to the reader.)
 
-> **STE:** During logging operations, attach a cable to the heavy machinery to hold the logs in their position.
 # Page 57 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 57–60 of 434
 
 ### Rule 1.11 — Do not use different technical nouns for the same item.
 
 When you select a technical noun, do not use a different technical noun in other parts of your text to refer to the same item.
 
-Example:
 
 > **Non-STE:**
 > 1. Make sure that the servo control unit is in the open position.
@@ -3660,7 +3087,6 @@ Example:
 
 > **STE:**
 > 1. Make sure that the actuator is in the open position.
-> 2. Do the operational test of the actuator.
 > 3. Disconnect the actuator from the test rig.
 
 In the non-STE example, "servo control unit," "actuator," and "control unit" refer to the same item. Use the technical noun that is approved in your company, industry, or subject field. If, as in the example, the technical noun is "actuator," then always use this technical noun in your text.
@@ -3675,7 +3101,6 @@ The dictionary does not include technical verbs because there are too many, and 
 
 You can find many of these technical verbs in your company glossary or terminology database.
 
-STE gives you a list of categories, with examples, to help you:
 
 - Select technical verbs to put in your company glossary or terminology database.
 - Use technical verbs correctly.
@@ -3731,7 +3156,6 @@ The technical verbs in their related categories are only examples. Rule 1.12 doe
 
 If there is an approved verb in the dictionary that accurately gives the instruction or the information, use the approved verb. Do not use a technical verb if it is possible to write the same sentence with the words (verbs and other related words) that are approved in the dictionary.
 
-Examples:
 
 > **Non-STE:** If you detect broken wires, repair them.
 
@@ -3741,93 +3165,57 @@ Examples:
 
 But you can write:
 
-> **STE:** If you find broken wires, repair them.
 
 ("Detect" is the correct technical verb in this context.)
 
 If you must use technical verbs, use only technical verbs that are correct in your context. Do not use technical verbs that are general or not clear.
 
-Example:
 
-> **Non-STE:** If you detect broken wires, repair them.
 
-> **STE:** If you find broken wires, repair them.
 
 Do not use a technical verb if it is not necessary. If it is possible, use a verb that is approved in the dictionary and an applicable technical noun.
 
-Examples:
 
 "Clamp" is a technical noun, category 1, official parts information. Do not use "clamp" as a technical verb.
 
-> **Non-STE:** If you detect broken wires, repair them.
 
-> **STE:** If you find broken wires, repair them.
 
 "Grease" is a technical noun, category 4, materials, consumables, and unwanted material. Do not use "grease" as a technical verb.
 
-> **Non-STE:** If you detect broken wires, repair them.
 
-> **STE:** If you find broken wires, repair them.
 
 "Wire" is a technical noun, category 1, official parts information. Do not use "wire" as a technical verb.
 
-> **Non-STE:** If you detect broken wires, repair them.
 
-> **STE:** If you find broken wires, repair them.
 
 #### Words that are not approved but that can be technical verbs
 
 The dictionary includes some words that, although not approved, can be technical verbs if you can put them in the specified categories.
 
-Examples:
 
 > **STE:** Enter your password.
->
 > ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 
-> **STE:** Enter your password.
->
-> ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 
-> **STE:** Enter your password.
->
-> ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 
-> **STE:** Enter your password.
->
-> ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 
 ### Rule 1.13 — Do not use technical verbs as nouns.
 
 In English, words that look the same do not always have the same function in a sentence. Use technical verbs only as verbs, not as nouns.
 
-Example:
 
-> **STE:** Enter your password.
->
-> ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 
-Example:
 
-> **STE:** Enter your password.
->
-> ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 
 #### Words that can be technical verbs and technical nouns
 
 In some contexts, the same word can be a technical verb and a technical noun. This condition occurs when you can put this word in a technical verb category (rule 1.12) and in a technical noun category (rule 1.5).
 
-Examples:
 
-> **STE:** Enter your password.
->
-> ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 # Page 61 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 61–64 of 434
 
-## Part 1 – Writing Rules
 
 > **STE:** There are two methods to plate the ring nut (2).
 > *("Plate" is a technical verb, category 1 c), manufacturing processes, attach material.)*
@@ -3838,13 +3226,9 @@ Use the spelling specified in the STE dictionary (American English spelling). Us
 
 **Examples:**
 
-> **STE:** There are two methods to plate the ring nut (2).
-> *("Plate" is a technical verb, category 1 c), manufacturing processes, attach material.)*
 
 *("Fiber" is American English spelling.)*
 
-> **STE:** There are two methods to plate the ring nut (2).
-> *("Plate" is a technical verb, category 1 c), manufacturing processes, attach material.)*
 
 *("Color" is American English spelling.)*
 
@@ -3865,9 +3249,7 @@ Multi-word nouns
 - Give a shorter form of the technical noun.
 - Use hyphens (-) between words that you use as one unit.
 
-Multi-word nouns
 
-### Rule 2.1 — Write multi-word nouns of no more than three words.
 
 In English, you can use one or more words to describe or modify a noun. Technical texts can contain long groups of words that have the function of one part of speech in a sentence. Usually, these groups of words are made of nouns and/or adjectives and are the subject or the object in a sentence. Such groups of words are known as multi-word nouns.
 
@@ -3893,28 +3275,15 @@ To help your reader, keep multi-word nouns to a maximum of three words.
 
 To keep multi-word nouns short, you can use prepositions (for example, "of," "on," "in," and "for") and explain the multi-word nouns.
 
-**Examples:**
 
 > **Non-STE:** Runway light connection resistance calibration. (5 words)
 > **STE:** Calibration of the resistance of the runway light connection.
 > *(1 word, 1 word, and 3 words)*
 
-> **Non-STE:** Runway light connection resistance calibration. (5 words)
-> **STE:** Calibration of the resistance of the runway light connection.
-> *(1 word, 1 word, and 3 words)*
 
-> **Non-STE:** Runway light connection resistance calibration. (5 words)
-> **STE:** Calibration of the resistance of the runway light connection.
-> *(1 word, 1 word, and 3 words)*
 
-> **Non-STE:** Runway light connection resistance calibration. (5 words)
-> **STE:** Calibration of the resistance of the runway light connection.
-> *(1 word, 1 word, and 3 words)*
 
-### Rule 2.2 — When a technical noun has more than three words, write it in full. Then, you can use one of these methods to make the technical noun clear:
 
-- Give a shorter form of the technical noun.
-- Use hyphens (-) between words that you use as one unit.
 
 A long multi-word noun can be a long technical noun, or it can be a combination of shorter technical nouns. Frequently, it is not possible to divide technical nouns into smaller parts because they are the technical nouns that your company, industry, or subject field uses. Thus, you must write technical nouns as they are, in their approved form.
 
@@ -3929,7 +3298,6 @@ Before you do this procedure, engage the ramp service door safety connector pin 
 In this example, you write "ramp service door safety connector pin" in full. Then, after an explanation, you give a shorter technical noun: "safety connector pin." This shorter technical noun has three words and obeys rule 2.1.
 # Page 65 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 65–68 of 434
 
 # Part 1 — Writing Rules (continued)
@@ -3940,7 +3308,6 @@ In this example, the explanation is not necessary because the text gives all the
 
 If an approved technical noun includes three words or less, it is not necessary to use abbreviations.
 
-Example:
 
 > **Do not write:**
 > The primary parts of the valve are:
@@ -3948,9 +3315,7 @@ Example:
 > - The PVA (15)
 > - The BA (17)
 > - The VB (20).
->
 > **Write:**
-> The primary parts of the valve are:
 > - The diaphragm assembly (8)
 > - The poppet valve assembly (15)
 > - The bush assembly (17)
@@ -3958,21 +3323,7 @@ Example:
 
 You can use abbreviations that come from your official company documentation but be careful. A text full of abbreviations in a procedure, although shorter, is not easy to read.
 
-Example:
 
-> **Do not write:**
-> The primary parts of the valve are:
-> - The DA (8)
-> - The PVA (15)
-> - The BA (17)
-> - The VB (20).
->
-> **Write:**
-> The primary parts of the valve are:
-> - The diaphragm assembly (8)
-> - The poppet valve assembly (15)
-> - The bush assembly (17)
-> - The valve body (20).
 
 ### Method 2 — Hyphens (-) between the words that you use as one unit
 
@@ -3990,38 +3341,24 @@ If an approved technical noun includes hyphens, do not change it. If it is too l
 
 Do not use hyphens to make groups of more than three words. If you use hyphens for all the words, this multi-word noun will not be easy to read and understand.
 
-Example:
 
 > **Non-STE:** Move the main-gear-door-retraction-winch handle. (2 words, but not correct)
 > **STE:** Move the main-gear-door retraction-winch handle. (3 words)
 
 If an approved technical noun includes three words or less (for example "poppet valve assembly" and "diaphragm assembly"), it is not necessary to use hyphens.
 
-Example:
 
-> **Do not write:**
 > A. Remove the diaphragm-assembly (8) from the valve body (20).
 > B. Remove the poppet-valve assembly (15) from its seat.
->
-> **Write:**
 > A. Remove the diaphragm assembly (8) from the valve body (20).
 > B. Remove the poppet valve assembly (15) from its seat.
 
 But, if an approved technical noun includes a hyphen (for example "inward-outward valve"), do not remove the hyphen. Keep the technical noun that comes from your official company documentation.
 
-Example:
 
-> **Do not write:**
-> A. Remove the diaphragm-assembly (8) from the valve body (20).
-> B. Remove the poppet-valve assembly (15) from its seat.
->
-> **Write:**
-> A. Remove the diaphragm assembly (8) from the valve body (20).
-> B. Remove the poppet valve assembly (15) from its seat.
 
 ## Section 3 — Verbs
 
-### Summary of the rules
 
 Verb forms and tenses of verbs
 
@@ -4052,11 +3389,9 @@ Verb forms and tenses of verbs
 
 ## Verb forms and tenses of verbs
 
-### Rule 3.1 — Use only the verb forms that are given in the dictionary.
 
 The STE dictionary gives you the verb forms that you can use for each approved verb.
 
-Example:
 
 ```
 REMOVE (v)
@@ -4068,27 +3403,17 @@ GIVE (v)
 GIVES
 GAVE,
 GIVEN
-```
 
 > **Source:** Issue 9, Part 1 — Writing rules, Page 1-3-1, 2025-01-15
 
 The introduction to the dictionary in part 2 gives you more information about the verb forms and how to use the approved verbs.
 
-### Rule 3.2 — Use only these verb forms and tenses of verbs:
 
-- The infinitive form
-- The imperative form (command form)
-- The simple present tense
-- The simple past tense
-- The simple future tense
-- The past participle form (as an adjective).
 
 Use only the verbs forms and the tenses of verbs that are approved.
 
-Examples:
 
 | Form | Regular verb (Adjust) | Irregular verb (Give) |
-|---|---|---|
 | Infinitive (base form) | (To) Adjust | (To) Give |
 | Imperative (command form) | Adjust + object | Give + object |
 | Simple present tense | You/we/they adjust<br>It adjusts | You/we/they give<br>It gives |
@@ -4103,7 +3428,6 @@ Do not use other forms and tenses that are not approved, for example:
 - The present/past progressive (is/was adjusting)
 - And all other complex verb constructions.
 
-### Rule 3.3 — Use the past participle form as an adjective.
 
 When you use the past participle form as an adjective, it shows the condition of something. This is not passive voice. Use the past participle form of a verb as an adjective as follows:
 
@@ -4112,7 +3436,6 @@ When you use the past participle form as an adjective, it shows the condition of
 
 Do not use the past participle form if it is not in the dictionary.
 
-Examples:
 
 > **STE:** Examine all parts of the disassembled unit for damage.
 > ("Disassembled" is an adjective before the noun "unit." It shows the condition of the unit.)
@@ -4120,7 +3443,6 @@ Examples:
 > **Source:** Issue 9, Part 1 — Writing rules, Page 1-3-2, 2025-01-15
 # Page 69 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 69–72 of 434
 
 # Part 1 — Writing Rules
@@ -4135,27 +3457,19 @@ Examples:
 
 There are also approved adjectives in the dictionary that are the past participle form of verbs that are not approved. For example, "permitted," and "damaged." Their approved part of speech in the dictionary is "(adj)" and thus you can use them.
 
-### Rule 3.4 — Do not use auxiliary verbs to make complex verb constructions.
 
 Do not use the past participle form as a verb form together with the auxiliary verb "have." This construction will make a tense that is not approved.
 
-Example:
 
-> **STE:** When the unit is fully disassembled, clean all the parts.
 
-("Disassembled" is an adjective after the verb "to be" that shows the condition of the unit.)
 
 (The simple past tense is approved.)
 
 Some complex verb constructions include other auxiliary verbs with the past participle form as a verb. Sentences with these constructions become complex sentences in the passive voice.
 
-Examples:
 
-> **STE:** When the unit is fully disassembled, clean all the parts.
 
-("Disassembled" is an adjective after the verb "to be" that shows the condition of the unit.)
 
-### Rule 3.5 — Use the "-ing" form of a verb only as a technical noun or as a modifier in a technical noun.
 
 In English, words that have an "-ing" form can have different functions in a sentence (different parts of speech).
 
@@ -4181,35 +3495,29 @@ They can make long groups of modifiers, noun phrases, and dependent clauses.
 
 These different functions for words that have an "-ing" form can frequently cause ambiguity or long, complex sentences. Thus, words that have an "-ing" form are usually not permitted.
 
-Examples:
 
 > **Non-STE:** When you are doing this procedure, obey all the safety precautions.
 > **STE:** When you do this procedure, obey all the safety precautions.
 
 > **Non-STE:** [fragment] inappropriate tools without observing the manufacturer's instructions, are in danger of coming into contact with these materials and thus suffering from skin irritation and breathing problems.
 > **STE:** Before you use dangerous materials, obey these precautions:
->
 > 1. Read the manufacturer's instructions.
 > 2. Make sure that there is sufficient airflow in the work area.
 > 3. Put on a face mask and protective clothing.
 > 4. Get the correct tools to open the containers for these materials.
->
 > If you do not obey these precautions, injury to your skin and your lungs can occur.
 
 Words that have an "-ing" form and are technical nouns or parts of technical nouns
 
 You can use a word that has an "-ing" form as a technical noun (for example, in procedural titles or headings).
 
-Examples:
 
 Cleaning, Testing and Fault Isolation, Handling, Packaging, Shipping, Troubleshooting
 
 You can also use the "-ing" form of a verb as a modifier in a technical noun. This modifier is an adjective that is related to the function of a system, component, part, tool, material, or equipment.
 
-Examples:
 
 | Air-conditioning system, degreasing agent, grinding wheel, polishing disc, sanding machine, |
-| --- |
 | switching relay, welding torch |
 
 Approved words that have an "-ing" form
@@ -4233,7 +3541,6 @@ What is passive voice?
 
 In the passive voice, the subject of the sentence receives the action ("B" is done by "A"). Here, the grammatical subject is B, and the logical subject, or agent, is A.
 
-General examples:
 
 > **Active:** The manufacturer gives the safety procedures.
 > **Passive:** The safety procedures are given by the manufacturer.
@@ -4256,7 +3563,6 @@ The main gear leg is held in its position.
 
 A sentence in the active voice always has a grammatical subject (the agent), but in the passive sentence in the example below, the agent is unknown (and we do not know the cause of data corruption). In the active sentence, the agent ("transmission") is incorrect ("transmission" is not the cause of data corruption), and the meaning of the sentence is different. Thus, the active sentence becomes technically incorrect.
 
-Example:
 
 > **Passive:** During transmission, the data was corrupted. (Correct, the agent is unknown.)
 > **Active:** During transmission, something corrupted the data. (Correct, you do not know the identity of "something," but you can use it as the agent.)
@@ -4273,12 +3579,10 @@ Method 1
 When the sentence gives the agent (usually the object of the preposition "by"), put the agent at the start of the sentence. Then, use the agent as the subject. The subject must always be the noun that does the action in the sentence, as shown in the diagram that follows:
 # Page 73 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 73–76 of 434
 
 ### Rule 3.6 — Use the Active Voice (Methods 2–4)
 
-Example:
 
 > **Non-STE:** The circuits are connected by a switching relay. (Passive)
 > **STE:** A switching relay connects the circuits. (Active)
@@ -4287,10 +3591,7 @@ Example:
 
 Change an infinitive verb to an active verb.
 
-Example:
 
-> **Non-STE:** The circuits are connected by a switching relay. (Passive)
-> **STE:** A switching relay connects the circuits. (Active)
 
 > **STE:** The computer calculates the energy consumption from these values. (Active)
 
@@ -4300,55 +3601,33 @@ The construction "are used by" gives no important information here. Thus, you ca
 
 In procedural writing, change the verb to the imperative ("command") form.
 
-Examples:
 
-> **Non-STE:** The circuits are connected by a switching relay. (Passive)
-> **STE:** A switching relay connects the circuits. (Active)
 
-> **Non-STE:** The circuits are connected by a switching relay. (Passive)
-> **STE:** A switching relay connects the circuits. (Active)
 
 ### Method 4
 
 When the agent (the person or thing that does the action) is not given in the sentence, you can use the pronouns "you" or "we" as subjects in the active form. If the agent is the reader, use "you." If the agent is your company, or organization, use "we."
 
-Examples:
 
 > **Non-STE:** On the ground, the valve can be opened with the override handle. (Passive)
 > **STE:** On the ground, you can open the valve with the override handle. (Active)
 
-> **Non-STE:** On the ground, the valve can be opened with the override handle. (Passive)
-> **STE:** On the ground, you can open the valve with the override handle. (Active)
 
-or
 
 > **STE:** This type of fuel does not contain additives.
 
 When you find complex sentences in the passive voice that include auxiliary verbs, decide if you want to write a procedural sentence or a descriptive sentence.
 
-Examples:
 
-> **Non-STE:** On the ground, the valve can be opened with the override handle. (Passive)
-> **STE:** On the ground, you can open the valve with the override handle. (Active)
 
-> **STE:** This type of fuel does not contain additives.
 
-> **Non-STE:** On the ground, the valve can be opened with the override handle. (Passive)
-> **STE:** On the ground, you can open the valve with the override handle. (Active)
 
-> **STE:** This type of fuel does not contain additives.
 
 (Descriptive sentence)
 
-> **Non-STE:** On the ground, the valve can be opened with the override handle. (Passive)
-> **STE:** On the ground, you can open the valve with the override handle. (Active)
 
-> **STE:** This type of fuel does not contain additives.
 
-> **Non-STE:** On the ground, the valve can be opened with the override handle. (Passive)
-> **STE:** On the ground, you can open the valve with the override handle. (Active)
 
-> **STE:** This type of fuel does not contain additives.
 
 ### How to Describe an Action
 
@@ -4358,30 +3637,24 @@ Use an approved verb to describe an action, not a noun or other parts of speech.
 
 There can be different solutions to give the same information in STE. If there is an approved verb that describes an action, use the approved verb. Verbs describe actions more clearly than nouns or other parts of speech.
 
-Examples:
 
 > **Do not write:** The ohmmeter gives an indication of 450 ohms.
 > **WRITE:** The ohmmeter shows 450 ohms.
 
-> **Do not write:** The ohmmeter gives an indication of 450 ohms.
-> **WRITE:** The ohmmeter shows 450 ohms.
 
 In the examples, all sentences are in STE but those with direct verbs describe the action more clearly.
 
 If a word is not approved as a verb in the dictionary, do not use it as a verb. Use a different sentence construction to give the same information.
 
-Example:
 
 > **Non-STE:** Check the laptop battery.
 > **STE:** Do a check of the laptop battery.
 # Page 77 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 77–80 of 434
 
 ## Section 4 – Sentences
 
-### Summary of the rules
 
 ### Short sentences and clear sentence structures
 
@@ -4413,20 +3686,16 @@ In procedures, give short and clear instructions directly to the reader (imperat
 
 **Example:**
 
-> **STE:**
 > 1. Remove the cover assembly (9) as follows:
 >    A. Remove the four screws (10) that attach the cover (11) to the housing (12).
 >    B. Remove the cover (11) from the housing (12).
 >    C. Remove and discard the preformed packing (13).
->
 > **Non-STE:** To remove the cover assembly (9), first remove the four screws (10) that attach the cover (11) to the housing (12), and then, after taking the cover (11) off the housing (12), remove the preformed packing (13) and throw it away.
 
 In a descriptive text, make sure that each sentence has only one topic (subject or idea) and does not contain the imperative form. Then, in the sentences that follow, gradually give information about that topic.
 
-**Example:**
 
 > **STE:** The side stay assembly has two folding toggles. The folding toggles are attached together with hinges. These folding toggles are also attached with hinges between the main gear strut and the side stay bracket.
->
 > **Non-STE:** The side stay assembly has two folding toggles hinged together and attached with hinges between the main gear strut and the side stay bracket.
 
 (This sentence contains more than one topic. To make this information clearer, you can write a new sentence for each topic.)
@@ -4435,25 +3704,19 @@ In a descriptive text, make sure that each sentence has only one topic (subject 
 
 For the two types of writing, always make sure that your text is not abstract. Make sure that it clearly shows how to do a task or how a system operates. Be accurate. Do not give information that is not accurate or can have different meanings.
 
-**Examples:**
 
 > **STE:** Make sure that there are no leaks.
->
 > **Non-STE:** No leaks are permitted.
 
 (This sentence does not tell the reader about the action.)
 
 (This sentence directly tells the reader about the action.)
 
-> **STE:** Make sure that there are no leaks.
->
-> **Non-STE:** No leaks are permitted.
 
 (This is an abstract sentence because it contains no information about how the cure time changes.)
 
 (This sentence tells the reader the correct information about how the cure time changes. To make your writing more accurate, give the specified temperatures and the related cure times.)
 
-> **STE:** Make sure that there are no leaks.
 
 ### Rule 4.2 — Do not omit words or use contractions to make your sentences shorter.
 
@@ -4461,49 +3724,28 @@ Each sentence must have all its parts. When you write sentences, do not omit wor
 
 Do not omit nouns to make short sentences. It will not be easy for the reader to understand the meaning of the sentence.
 
-**Example:**
 
 > **STE:** Cracks can have a maximum length of five inches.
->
 > **Non-STE:** Can be a maximum of five inches long.
 
 Do not omit verbs because the reader will not understand the action.
 
-**Example:**
 
-> **STE:** Cracks can have a maximum length of five inches.
->
-> **Non-STE:** Can be a maximum of five inches long.
 
 Do not omit the subject because the reader will not understand the action.
 
-**Examples:**
 
-> **STE:** Cracks can have a maximum length of five inches.
->
-> **Non-STE:** Can be a maximum of five inches long.
 
-> **STE:** Cracks can have a maximum length of five inches.
->
-> **Non-STE:** Can be a maximum of five inches long.
 
 > **WARNING: MAKE SURE THAT THE POTABLE WATER SYSTEM IS NOT PRESSURIZED. A PRESSURIZED SYSTEM CAN CAUSE INJURY TO PERSONS.**
 
 Do not omit articles to make the sentence shorter because omitted articles can cause ambiguity.
 
-**Examples:**
 
-> **STE:** Cracks can have a maximum length of five inches.
->
-> **Non-STE:** Can be a maximum of five inches long.
 
 Do not omit parts of words to make contractions because contractions will not be easy to understand.
 
-**Example:**
 
-> **STE:** Cracks can have a maximum length of five inches.
->
-> **Non-STE:** Can be a maximum of five inches long.
 
 ### Rule 4.3 — Use a vertical list for complex text.
 
@@ -4526,7 +3768,6 @@ When you make a vertical list:
 
 To know which marks or symbols to use, refer to the applicable specifications for technical publications, style guides, and other official directives.
 
-**Examples:**
 
 In the two examples that follow, the vertical lists give a list of parts and documents. Dashes and bullet points identify each of these parts and documents.
 
@@ -4537,11 +3778,9 @@ In the two examples that follow, the vertical lists give a list of parts and doc
 > - The spoke fittings
 > - The valve
 > - The hub.
->
 > **Non-STE:** The wheel assembly comprises the tire, the tube, the spokes, the spoke fittings, the valve, and the hub.
 # Page 81 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 81–84 of 434
 
 ### Rule 4.3 — Vertical Lists (continued)
@@ -4554,14 +3793,12 @@ In the two examples that follow, the vertical lists give a procedure and a descr
 
 In safety instructions, include negative commands (DO NOT) where necessary for each item in the vertical list. This method will make the safety instruction more direct and easier to understand.
 
-Example:
 
 > **STE:** — DO NOT USE THE APU LINE AS A HANDLE.
 
 ### Example: Converting an Inline List to a Vertical List
 
 > **Non-STE:** The report must include each of the following: a completed REC-1 form, a three-view drawing of the unit, a photograph of the unit, a copy of the source data.
->
 > **STE:** The report must include:
 > - A completed REC-1 form
 > - A three-view drawing of the unit
@@ -4572,13 +3809,11 @@ Example:
 
 Always make sure that each item in the vertical list connects clearly and correctly to the first part of the vertical list (the text that is before the colon).
 
-Example:
 
 > **Non-STE:** Do not use acetone for cleaning these parts after the repair:
 > - the service cabinet,
 > - the toilet shrouds with the supports,
 > - parts made of polycarbonate.
->
 > **STE:** After the repair, do not use acetone to clean:
 > - The service cabinet
 > - The toilet shrouds
@@ -4589,38 +3824,23 @@ Example:
 
 Always make sure that the layout of your vertical list is easy to read. In the example that follows, there is a second vertical list included in the primary vertical list. Use the same level for all items in the vertical list.
 
-Example:
 
-> **Non-STE:** Do not use acetone for cleaning these parts after the repair:
-> - the service cabinet,
-> - the toilet shrouds with the supports,
-> - parts made of polycarbonate.
->
-> **STE:** After the repair, do not use acetone to clean:
-> - The service cabinet
-> - The toilet shrouds
-> - The toilet shroud supports
-> - Parts made of polycarbonate.
 
 ### Example: Items with Verbs but Not Full Sentences
 
 An item in a vertical list can contain a verb and not be a full sentence. Then, you do not use a period at the end of that item.
 
-Example:
 
 > **Non-STE:** The middle part of the reservoir has the components that follow:
 > - One check valve that prevents the backflow of fluid.
 > - One air relief valve that opens at a pressure of 25 psi.
 > - One transfer pipe connected to the pressurization manifold.
->
 > **STE:** The middle part of the reservoir has the components that follow:
 > - One check valve that prevents the backflow of fluid
 > - One air relief valve that opens at a pressure of 25 psi
-> - One transfer pipe connected to the pressurization manifold.
 
 ### Example: Assembly Components Vertical List
 
-> **STE:**
 > - The four screws (3)
 > - The four washers (4)
 > - The flange (2) (that includes the two O-rings (6) and the seals (7))
@@ -4649,7 +3869,6 @@ Some of the connecting words that are approved in the dictionary are "and," "but
 
 "As a result" and "at the same time" are examples of connecting phrases that you can use.
 
-Examples in STE:
 
 (Refer to the underlined connecting words and connecting phrases.)
 
@@ -4667,41 +3886,33 @@ You can also use demonstrative adjectives as connecting words to connect ideas i
 
 In procedures, you can use these connecting words when an explanation is necessary after a work step. Connecting words can also be necessary in safety instructions to connect related sentences or make the text clear.
 
-Examples in STE:
 
 (Refer to underlined connecting words.)
 
 > **STE:** Tag the disassembled parts. **This** method will help you during the subsequent procedures.
 
-> **STE:**
->
 > **WARNING:** ALWAYS USE PROTECTIVE EQUIPMENT IN THIS AREA. **THIS** PRECAUTION WILL PREVENT INJURY.
 
 ### Rule 4.5 — When applicable, use an article (the, a, an) or a demonstrative adjective (this, these) before a noun or a multi-word noun.
 
 Articles and demonstrative adjectives show the position of nouns and multi-word nouns in the sentence. Use articles and demonstrative adjectives correctly and do not omit them to make the text shorter.
 
-Examples:
 
 > **Non-STE:** Turn shaft assembly.
->
 > **STE:** Turn the shaft assembly.
 
 ### When Not to Use Articles
 
 It is not always correct English to put an article before a noun. Do not use articles in general statements or concepts.
 
-Examples:
 
 > **STE:** You can use equivalent alternatives for these items.
 
 (No articles before "solvents" or "paint." The context does not give a specified solvent or paint.)
 
-> **STE:** You can use equivalent alternatives for these items.
 
 (No article before "high efficiency." The sentence refers to a general concept.)
 
-> **STE:** You can use equivalent alternatives for these items.
 
 (No article before "performance" because it refers to an abstract quality.)
 
@@ -4709,20 +3920,16 @@ Examples:
 
 In short sentences, it can be clearer to use articles before all nouns.
 
-> **STE:** You can use equivalent alternatives for these items.
 
 But sentences that contain a long series of items are clearer when you use the article only before the first noun in the series.
 
-> **STE:** You can use equivalent alternatives for these items.
 
 When you use the article in a series of items, always make sure that adjectives do not cause ambiguity.
 
-> **STE:** You can use equivalent alternatives for these items.
 
 (The article in this instruction tells you that all items in the series are new.)
 # Page 85 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 85–88 of 434
 
 ## Articles (continued)
@@ -4733,7 +3940,6 @@ When you use the article in a series of items, always make sure that adjectives 
 
 A definite article is incorrect before a noun when an alphanumeric identifier comes after it. This is because the alphanumeric identifier shows that it is a proper noun.
 
-Example:
 
 > **Non-STE:** Tag the circuit breaker 36L7.
 > **STE:** Tag circuit breaker 36L7.
@@ -4744,7 +3950,6 @@ If you are not sure about how to use the articles correctly in your writing, ref
 
 ## Section 5 — Procedural writing
 
-### Summary of the rules
 
 **Sentences**
 
@@ -4773,7 +3978,6 @@ In STE, the maximum length of a sentence for procedures is 20 words.
 
 Warnings, cautions, and other safety instructions must also obey this rule.
 
-Examples in STE:
 
 > **STE:** Install the three auxiliary screws (2) in the flange of the motor assembly (9). (This sentence has 14 words.)
 
@@ -4792,15 +3996,12 @@ If there are too many instructions in a sentence, the sentence is not easy to re
 
 Write only one instruction in each sentence and clearly show (usually with numbers or letters) the sequence of the work steps. You can use as many work steps as you want in a procedure.
 
-Examples:
 
 > **STE:** (1) Set the TEST switch to the middle position.
 > **STE:** (2) Make sure that all the switches on the control panel are OFF.
 
 (Two work steps)
 
-> **Non-STE:** Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover. (25 words)
-> **STE:** Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)
 
 Examples of actions that occur at the same time:
 
@@ -4810,7 +4011,6 @@ Examples of actions that occur at the same time:
 - Remove and discard the seal.
 # Page 89 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 89–92 of 434
 
 ## Procedures
@@ -4820,7 +4020,6 @@ You can write more than one sentence in a work step:
 - When actions occur at the same time
 - When a result occurs immediately after an action.
 
-Examples in STE:
 
 Make sure that the locking torque of each of the four bolts (6) is a minimum of 0.30 Nm. Then, torque each of the four bolts (6) to 4.20 Nm.
 
@@ -4836,7 +4035,6 @@ Measure the leakage from the outlet port. The leakage must not be more than 0.5 
 
 An instruction tells the reader to do something. Write the verb in the imperative (command) form.
 
-Examples in STE:
 
 Set the switch to ON.
 Remove the four bolts.
@@ -4850,7 +4048,6 @@ The imperative form gives the reader a clear instruction. If you use other types
 - If a different person did the work step.
 - If a different person must do the work step in the future.
 
-Examples:
 
 > **Non-STE:** The test can be continued.
 > **STE:** Continue the test.
@@ -4860,7 +4057,6 @@ Examples:
 
 Do not use the verb "must" before the imperative form, unless the instruction is very important for safety (for example, in a safety instruction) or when you give an important condition.
 
-Example:
 
 > **Non-STE:** Before you remove the clamp, you must disconnect the hose.
 > **STE:** Before you remove the clamp, disconnect the hose.
@@ -4873,16 +4069,12 @@ Example:
 
 If a special condition is necessary for a work step, the reader must know the condition first. Write the condition first in the sentence, and then use a comma to show the end of the condition, and the start of the instruction.
 
-Examples:
 
-> **Non-STE:** Before you remove the clamp, you must disconnect the hose.
-> **STE:** Before you remove the clamp, disconnect the hose.
 
 > **STE:** If the Constant Speed Drive (CSD) does not operate correctly, disconnect it from the gearbox.
 
 The comma is important. Be careful when you use it because the position of the comma can change the meaning of your sentence.
 
-> **STE:** WARNING: IF YOU MUST CUT THE WIRE, ALWAYS USE A PROTECTIVE MASK. PIECES OF WIRES CAN CAUSE INJURY.
 
 > **STE:** If the Constant Speed Drive (CSD) does not operate, correctly disconnect it from the gearbox.
 
@@ -4896,13 +4088,11 @@ Notes only give information to help the reader during a procedure. They contain 
 
 Notes must not give instructions, requirements, or limits.
 
-Examples in STE:
 
 > **STE:** NOTE: The gyroscope will become stable after approximately 15 seconds.
 
 A note can have one or more sentences. Each sentence in a note can have a maximum of 25 words.
 
-Examples in STE:
 
 > **STE:** the CROSS FEED port is more than 5 cc/minute.
 
@@ -4914,7 +4104,6 @@ Examples in STE:
 
 Do not use the imperative form in a note. If you use the imperative form, the note becomes an instruction for a work step.
 
-Example:
 
 > **Non-STE:** correctly.
 
@@ -4926,7 +4115,6 @@ Example:
 
 If you include instructions in a note, it is possible that the reader will not see the information. If the information given in a note is important to prevent damage or injury, you must give such information in a safety instruction.
 
-Examples:
 
 > **Non-STE:** NOTE: When you connect the lines, do not bend them too much. If you bend the lines too much, you can cause damage to them. (This text is not a note. It is a safety instruction.)
 > **STE:** CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM.
@@ -4939,13 +4127,9 @@ Examples:
 
 Do not use a note to give limits, tolerances, or results of a work step. This information must come directly after the related action in the work step.
 
-Examples:
 
-> **Non-STE:** NOTE: When you connect the lines, do not bend them too much. If you bend the lines too much, you can cause damage to them. (This text is not a note. It is a safety instruction.)
-> **STE:** CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM.
 # Page 93 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 93–96 of 434
 
 ## How to use notes correctly
@@ -4970,14 +4154,12 @@ In STE, you use notes in procedures. You can write notes in descriptions only if
 
 ## Section 6 — Descriptive writing
 
-### Summary of the rules
 
 **Content structure**
 
 - Rule 6.1 Give information gradually.
 - Rule 6.2 Use key words and key phrases to give your text a logical structure.
 
-**Sentences**
 
 - Rule 6.3 Write short sentences. Use a maximum of 25 words in each sentence.
 
@@ -4999,7 +4181,6 @@ Descriptive writing can be:
 
 In a descriptive text, give information gradually and make sure that each sentence contains only one subject. If you give too much information too quickly, your text will not be easy to understand, and it will be necessary for the reader to read it again.
 
-Example:
 
 > **Non-STE:** During the approach to the runway, deviation pointers in the course indicators give commands to fly up or down and left or right. This information comes from the VHF transceivers, which are part of the Instrument Landing System. This helps the pilot during the landing approach. When the pilot responds to the commands, the aircraft can be flown over the runway centerline (localizer) and at a fixed angle (glideslope) to the runway threshold. The localizer signals are processed by the transceiver and data are transmitted to Air Traffic Control.
 
@@ -5021,17 +4202,12 @@ These key words and key phrases show how information in a text is related and gi
 
 You can also use connecting words and connecting phrases to help the reader understand the logical flow of ideas in the text. Connecting words and connecting phrases have the function of traffic signs, which tell the reader if the information is new, different, or a result of previous information. Examples of approved connecting words are: "and," "but," "then," "thus," and examples of connecting phrases are "as a result," and "at the same time."
 
-> **See:** Dictionary entry for AND (conj).
-> **See:** Dictionary entry for BUT (conj).
-> **See:** Dictionary entry for THEN (adv).
-> **See:** Dictionary entry for THUS (adv).
 
 The example that follows is the STE text of the example for rule 6.1. In the text, you can see how the underlined key words and key phrases connect sentences and their related ideas. This makes the text much easier to read and understand.
 
 When you use key words and key phrases, make sure that you do not change them in your text. The same terminology will keep your text clear and correct.
 # Page 97 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 97–100 of 434
 
 ### Rule 6.2 Example: Key words and key phrases
@@ -5047,7 +4223,6 @@ Sentence 2 uses the key words "system," "show," and "pilot" again to add more in
 
 Sentence 2 and Sentences 3 and 4:
 
-> Sentence 2: This system shows the pilot the deviations from the localizer course and the glideslope path.
 > Sentences 3 and 4: The localizer course aligns with the centerline of the runway. And the glideslope path is at a constant angle to the threshold of the runway.
 
 Sentences 3 and 4 use the key words "localizer course" and "glideslope path" again and add new information.
@@ -5061,28 +4236,18 @@ Sentences 3 and 4 also include the key word "runway," which refers back to sente
 
 Sentences 3 and 4 and Sentence 5:
 
-> Sentences 3 and 4: The localizer course aligns with the centerline of the runway. And the glideslope path is at a constant angle to the threshold of the runway.
 > Sentence 5: During the approach to the runway, deviation pointers in the course indicators show the pilot in which direction the aircraft must go:
-> - Left or right (for the localizer)
-> - Up or down (for the glideslope).
 
 Sentence 5 also connects to the previous sentences 3 and 4 with the key word "runway" again. Then, sentence 5 gives more information about the function of indicators for the localizer and the glideslope.
 
 Sentence 2 and Sentence 5:
 
-> Sentence 2: This system shows the pilot the deviations from the localizer course and the glideslope path.
-> Sentence 5: During the approach to the runway, deviation pointers in the course indicators show the pilot in which direction the aircraft must go:
-> - Left or right (for the localizer)
-> - Up or down (for the glideslope).
 
 Key words and key phrases (for example, "show(s) the pilot") give a logical connection between sentences 2 and 5.
 
 Sentence 1 and Sentence 5:
 
 > Sentence 1: The Instrument Landing System in the aircraft shows data that helps the pilot during the approach to the runway.
-> Sentence 5: During the approach to the runway, deviation pointers in the course indicators show the pilot in which direction the aircraft must go:
-> - Left or right (for the localizer)
-> - Up or down (for the glideslope).
 
 Sentences 1 and 5 are also connected to make a logical paragraph. Sentence 5 also uses the key phrase "during the approach to the runway" from sentence 1 again to refer to the initial sentence and give more information about it. When you use the same key words and key phrases again, the sentences have a logical connection. If you use different terminology, your text will not be easy to read.
 
@@ -5097,14 +4262,12 @@ Good technical writing uses short sentences for complex topics. Short sentences 
 
 In descriptive writing, the maximum sentence length is 25 words. This is because descriptive text is more complex than procedural text.
 
-Examples:
 
 > **STE:** During the approach to the runway, deviation pointers in the course indicators show the pilot in which direction the aircraft must go. (22 words)
 
 > **Non-STE:** ability to run software applications. (31 words)
 > **STE:** browser, and it can also operate software applications. (16 words)
 
-**Paragraphs**
 
 ### Rule 6.4 — Use paragraphs to show related information.
 
@@ -5114,14 +4277,9 @@ In STE, a paragraph starts with a "topic sentence" which tells the reader about 
 
 In the example, the underlined topic sentence at the start of each paragraph helps the reader understand the content of the paragraph and its topic. When a new paragraph starts, the reader knows that there will be a new topic or different information in that paragraph.
 
-Example:
 
-> **STE:**
->
 > 1. Lightning Strike
->
 > A. General
->
 > (1) A lightning strike can cause damage to the aircraft. The damage usually occurs at the attachment points. The attachment points include:
 > - The nose of the fuselage
 > - The tail section
@@ -5131,9 +4289,7 @@ Example:
 > - The trailing edge of the stabilizer
 > - The antennas
 > - The static dischargers.
->
 > (2) From the attachment points, the lightning strike usually goes aft through the structure of the aircraft. The high current of the lightning strike can cause damage to the mechanical systems of the aircraft. Thus, a permanent or a temporary malfunction of the electrical and electronic equipment and systems can occur.
->
 > (3) If a lightning strike occurs, it is necessary to do an inspection of the aircraft for damage. The maintenance personnel must do this inspection before the next flight.
 
 the reader to understand.
@@ -5151,54 +4307,37 @@ If you refer to the STE text in the example for rules 6.1 and 6.2 again, you can
 
 In the example that follows, the underlined topic sentence at the start of each paragraph helps the reader understand the content that the paragraph explains. More information then follows gradually and connects correctly to the information in the text.
 
-Example:
 
-> **STE:**
->
 > Instrument Landing System
->
 > The Instrument Landing System (the system) on the aircraft shows data that helps the pilot during the approach to the runway. This system shows the pilot the deviations from the localizer course and the glideslope path. The localizer course aligns with the centerline of the runway. And the glideslope path is at a constant angle to the threshold of the runway. During the approach to the runway, deviation pointers in the course indicators show the pilot in which direction the aircraft must go:
-> - Left or right (for the localizer)
-> - Up or down (for the glideslope).
->
-> This data about deviations from the localizer course and glideslope path comes from two VHF transceivers. These transceivers transmit this data to Air Traffic Control.
 # Page 101 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 101–104 of 434
 
 ### Rule 6.6 — Make sure that no paragraph has more than six sentences.
 
 Paragraphs divide a text into logical units and help keep the reader's attention. If paragraphs are too long, they cannot have this function. Do not put different topics in the same paragraph. If a paragraph has more than six sentences, divide it into two smaller paragraphs. This structure will make your text easier to read. [reader to understand.]
 
-Example:
 
 > **STE:** Description of the fuel manifold (refer to figure 10001)
->
 > The fuel manifold (1) has these primary parts:
 > - Two motorized fuel shut-off valves (referred to in this manual as a "shut-off valve")
 > - A pressure transducer (2)
 > - Three fittings (10), (13) and (15). (one paragraph, 1 sentence)
->
 > The shut-off valve operates in the valve body (21). The valve body (21) has:
 > - An aluminum alloy ball (27)
 > - A retaining ring (31)
 > - Two seals (26)
 > - A spring (25). (one paragraph, 2 sentences)
->
 > The spring (25) holds the ball (27) in position to prevent internal leakage. The preformed packings (18), (2) and (30) are installed on the seals (26), the shaft (28), and in the valve body. They prevent external leakage. One of the two seals (26), on which the spring (25) operates, has the function of a relief valve. It operates when the pressure applied in the opposite direction is more than a set value. (one paragraph, 5 sentences)
->
 > The actuator assembly (4) is of a rotary type. A DC motor, which has a permanent high-speed magnet, supplies power to the actuator. Micro-switches in the actuator de-energize it at the end of travel. They also send signals to the fuel control panel to show the operation condition of the valve. A micro-relay controls the direction of shaft rotation and an electrical connector connects the actuator assembly to the aircraft electrical supply. (one paragraph, 4 sentences)
->
 > The pressure transducer (2) is installed downstream of the shut-off valve (in the RH engine line). The fitting (10) connects the pressure transducer (2) to the fuel manifold (1). A lockwire safeties the pressure transducer (2). The pressure transducer (2) has an electrical connector that connects it to the Fuel Management System of the aircraft. (one paragraph, 4 sentences)
->
 > Three fittings (10), (13), and (15) connect the two shut-off valves and the pressure transducer (2). They attach the fuel manifold (1) to the aircraft structure. (one paragraph, 2 sentences)
 
 *(Page 102 is blank.)*
 
 ## Section 7 — Safety instructions
 
-### Summary of the rules
 
 **Definitions**
 
@@ -5223,17 +4362,12 @@ It is possible that other industries or domains use different words or categorie
 
 If you use different words (for example, "danger," "attention," or "notice") or graphical symbols, always make sure that the content obeys rules 7.1 thru 7.3. For more information, refer to:
 
-- International Organization for Standardization. (2018). Occupational health and safety management systems — Requirements with guidance for use (ISO 45001:2018).
-- American National Standards Institute. (2024). ANSI Z535 series.
-- International Organization for Standardization. (2024). Graphical symbols — Safety colours and safety signs — Parts 1 thru 4 (ISO 3864).
 
 ### How to write safety instructions
 
-### Rule 7.1 — Use an applicable word (for example, "warning" or "caution") to identify the level of risk.
 
 Use a word (for example, "warning" or "caution") or, when applicable, a symbol, to immediately show your reader the level of the related risk.
 
-**Examples in STE:**
 
 All examples in this section are in uppercase letters, but STE does not give rules for formatting. Refer to the applicable specifications for technical publications, style guides, and other official directives.
 
@@ -5245,27 +4379,21 @@ All examples in this section are in uppercase letters, but STE does not give rul
 - If there is a risk of damage to machines, tools, or equipment, use a "caution."
 - If there are the two levels of risk together, use a "warning."
 
-Examples:
 
 > **Non-STE:** CAUTION: EXTREME CLEANLINESS OF OXYGEN TUBES IS IMPERATIVE.
 
-> **STE:** WARNING: BEFORE YOU FILL THE LIQUID OXYGEN SYSTEM, PUT ON A FACE MASK AND PROTECTIVE CLOTHING. LIQUID OXYGEN CAN CAUSE IRRITATION OF THE RESPIRATORY TRACT AND EYE IRRITATION.
 
 In the non-STE example, the safety instruction is a caution. But if you know about oxygen systems, you also know that oxygen mixed with other materials can cause explosions. Because there is a risk of injury or death here, you must identify this safety instruction as a warning.
 
 Compare the wording in the two safety instructions. The non-STE safety instruction is an abstract sentence and only makes a general statement. The warning in STE gives clear and correct information about how to decrease the risk of explosion. The warning contains the words "explosion," "injury," and "death" to make the reader clearly understand how important this safety instruction is.
 # Page 105 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 105–108 of 434
 
-## Section 7 — Safety instructions
 
-### Rule 7.2 — Start a safety instruction with a clear and accurate command or condition.
 
 Start a safety instruction with a clear and accurate command or condition. Your reader must know how to prevent accidents and keep a high level of safety.
 
-Examples in STE:
 
 (Refer to the underlined command.)
 
@@ -5275,33 +4403,24 @@ Examples in STE:
 
 If your reader must know about a condition before the start of a procedure or work step, give this condition first.
 
-Examples in STE:
 
 (Refer to the underlined condition.)
 
-> **WARNING:** DO NOT SWALLOW THE SOLVENT. ALWAYS MAKE SURE THAT YOU KNOW THE SAFETY PRECAUTIONS AND FIRST AID INSTRUCTIONS FOR SOLVENTS. SOLVENTS ARE POISONOUS AND CAN CAUSE INJURY OR DEATH.
 
 IF THEY FALL, PERMANENT DAMAGE TO THE PARTS CAN OCCUR.
 
-### Rule 7.3 — Give an explanation to show the risk or possible result.
 
 If it is possible, always tell your reader about the problems that can occur if the reader does not obey the safety instruction. If there is a clear and specified risk, the person who does the task will understand the risk and be more careful. The examples that follow are those given in rule 7.2, in which the underlined explanation clearly shows the risk or possible result.
 
-Examples:
 
 (Refer to the underlined risk or possible result.)
 
-> **WARNING:** DO NOT SWALLOW THE SOLVENT. ALWAYS MAKE SURE THAT YOU KNOW THE SAFETY PRECAUTIONS AND FIRST AID INSTRUCTIONS FOR SOLVENTS. SOLVENTS ARE POISONOUS AND CAN CAUSE INJURY OR DEATH.
 
-> **CAUTION:** DO NOT USE BLEACH OR CLEANSERS THAT CONTAIN CHLORINE TO CLEAN THE UNIT. THESE CLEANING AGENTS CAN CAUSE CORROSION.
 
-> **WARNING:** DO NOT SWALLOW THE SOLVENT. ALWAYS MAKE SURE THAT YOU KNOW THE SAFETY PRECAUTIONS AND FIRST AID INSTRUCTIONS FOR SOLVENTS. SOLVENTS ARE POISONOUS AND CAN CAUSE INJURY OR DEATH.
 
-IF THEY FALL, PERMANENT DAMAGE TO THE PARTS CAN OCCUR.
 
 ## Section 8 — Punctuation and word count
 
-### Summary of the rules
 
 **Punctuation**
 
@@ -5330,29 +4449,20 @@ IF THEY FALL, PERMANENT DAMAGE TO THE PARTS CAN OCCUR.
   - Proper nouns of individuals, groups, organizations, and geopolitical entities.
 - Rule 8.7 Hyphenated words count as one word.
 
-**Punctuation**
 
 Correct punctuation is important because it prevents ambiguity and shows how the different parts of the text are related.
 
 STE does not give you rules about general punctuation. For more information, refer to official reference books. For example:
 
-- The Chicago Manual of Style. (2024). The Chicago manual of style (18th ed.).
-- Sabin, W. A. (2011). The Gregg reference manual: A manual of style, grammar, usage, and formatting (10th ed.).
-- U.S. Government Publishing Office. (2020). U.S. Government Publishing Office style manual.
-- Swan, M. (2017). Practical English usage (4th ed.).
-- Kirkman, J. (2006). Punctuation matters: Advice on punctuation for scientific and technical writing.
 
 ### Rule 8.1 — You can use all standard English punctuation marks but not the semicolon (;).
 
 The semicolon (;) is not permitted in STE because it lets you write very long sentences. It is also not easy to use correctly. As an alternative to the semicolon, always write two different sentences.
 
-Examples:
 
 > **Non-STE:** (1) Examine the removed parts; replace the damaged ones.
 > **STE:** (1) Examine the removed parts for damage. (2) Replace the damaged part(s).
 
-> **Non-STE:** (1) Examine the removed parts; replace the damaged ones.
-> **STE:** (1) Examine the removed parts for damage. (2) Replace the damaged part(s).
 
 replace it.
 
@@ -5385,7 +4495,6 @@ The examples that follow show how to use hyphens to connect words that are direc
 A hyphen is different from a dash, which divides ideas, shows a range, or gives a signal for a pause. A dash is usually longer than a hyphen, but it is at times shown as a hyphen with a space on each side.
 # Page 109 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 109–112 of 434
 
 ## Part 1 — Writing Rules
@@ -5394,13 +4503,6 @@ A hyphen is different from a dash, which divides ideas, shows a range, or gives 
 
 You can use parentheses:
 
-- To make references to illustrations or text
-- To include letters or numbers that identify items on an illustration or in a text
-- To identify the work steps in a procedure
-- To include abbreviations
-- To give the singular and plural forms of a noun at the same time
-- To explain words or a part of a sentence
-- To include an alternative.
 
 In STE, you can use parentheses as follows:
 
@@ -5438,7 +4540,6 @@ In STE, you can use parentheses as follows:
 
    > **STE:** Open the left (right) access panel L42 (R42).
 
-**Word count**
 
 ### Rule 8.4 — In a vertical list, a colon (:) has the same effect on word count as a period and shows the end of a sentence.
 
@@ -5453,7 +4554,6 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 - 25 words for descriptive sentences.
 
 > **STE:** To extinguish a possible fire, portable fire extinguishers are installed in these areas: (13 words)
->
 > - The cockpit (2 words)
 > - The cabin (2 words)
 > - The cabin sub-compartment (3 words)
@@ -5478,13 +4578,7 @@ If there is an identifier in parentheses (a number, a letter, or an alphanumeric
 
 Count each of these elements as one word:
 
-- Numbers
-- Numbers together with units of measurement
-- Abbreviations
-- Alphanumeric identifiers
-- Quoted text
 - Titles, headings, and text on placards and labels
-- Proper nouns of individuals, groups, organizations, and geopolitical entities.
 
 When you count words for sentence length, count each of these as one word:
 
@@ -5540,18 +4634,15 @@ When you count words for sentence length, count each of these as one word:
    ("36L7" is an alphanumeric identifier and counts as one word.)
 # Page 113 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 113–116 of 434
 
 ### Rule 8.6 (continued)
 
-Count each of these elements as one word:
 
 5. Quoted text
 
    Quoted text is usually given in quotation marks ("..."). Words between quotation marks count as one word in a sentence. In some sentences, or parts of the document, uppercase letters or differences in font can also show quoted text. Such text also counts as one word.
 
-   Examples in STE:
 
    > **STE:** Touch the "Service Overview" arrow to select the function page. (9 words)
 
@@ -5573,7 +4664,6 @@ Count each of these elements as one word:
    - Text on placards (for example, a warning notice in a work area or public place)
    - Text on labels (for example, warning and caution labels that are attached to objects).
 
-   Examples in STE:
 
    > **STE:** Before you start a repair, refer to the Structural Repair Manual for the applicable safety procedures and precautions. (16 words)
 
@@ -5607,7 +4697,6 @@ Count each of these elements as one word:
    - Groups or organizations (for example, World Health Organization)
    - Geopolitical entities (for example, Republic of Ireland).
 
-   Examples in STE:
 
    > **STE:** The first president of the United States of America was George Washington. (8 words)
 
@@ -5621,21 +4710,18 @@ Count each of these elements as one word:
 
 Groups of words that are not usually adjectives but have the function of an adjective before a noun are hyphenated. Such groups of words count as one word.
 
-Examples in STE:
 
 > **STE:** Clean the surface with a soap-and-water solution. (7 words)
 > **STE:** Use the trial-and-error method. (4 words)
 
 When you use hyphens in long technical nouns to make them clearer to the reader, a hyphenated group of words also counts as one word.
 
-Examples in STE:
 
 > **STE:** Cutoff-switch power connection (3 words)
 > **STE:** Main-gear-door retraction-winch handle (3 words)
 
 ## Section 9 — Writing practices
 
-### Summary of the rules
 
 **Different sentence constructions**
 
@@ -5667,7 +4753,6 @@ STE is a controlled natural language with a controlled dictionary.
 
 To help you use the approved words correctly, the dictionary gives approved alternatives for words that are not approved. If you find an alternative that has the same part of speech, you can use it to replace the word that is not permitted (a word-for-word replacement).
 
-Example:
 
 > **Non-STE:** A value of 2 mm is acceptable.
 > **STE:** A value of 2 mm is permitted.
@@ -5680,7 +4765,6 @@ A different sentence construction is necessary because:
 
 1. You must change the grammatical structure of the sentence to use the alternative that you selected. Usually, the STE examples show you how to do this.
 
-   Examples:
 
    > **Non-STE:** The oil level on the sight gauge must be visible during the test.
    > **STE:** During the test, make sure that you can see the oil level on the sight gauge.
@@ -5696,7 +4780,6 @@ A different sentence construction is necessary because:
 
 2. The word-for-word replacement of the word that is not approved gives a meaningless result.
 
-   Example:
 
    > **Non-STE:** Without this modification, the service life of the unit can be uncertain.
 
@@ -5706,37 +4789,31 @@ A different sentence construction is necessary because:
 
    > **Non-STE:** Without this modification, the service life of the unit cannot be sure.
 
-   or
 
    > **Non-STE:** Without this modification, the service life of the unit cannot be known.
 
    These sentences are not clear, and they are not good English. You must think about the meaning of the sentence and then use a different sentence construction.
 
-   > **Non-STE:** Without this modification, the service life of the unit can be uncertain.
    > **STE:** Without this modification, it is possible that the service life of this unit will be shorter than usual.
 
    The STE sentence uses approved words to give the same information clearly. Always make sure that you know the purpose of your communication and that the words that you use give the meaning that you want.
 # Page 117 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 117–120 of 434
 
 ## Section 9 — Writing rules (continued)
 
 3. The approved alternative that you find changes the meaning of the sentence.
 
-   Example:
 
    > **Non-STE:** Just apply very light pressure to the surface.
    > **STE:** Only apply very light pressure to the surface.
-   >
    > NOT: Immediately apply very light pressure to the surface.
 
    "Immediately" is the approved alternative for "just." But if you use the word "immediately" in this context, you will change the meaning of the instruction.
 
 4. The word that you must replace is not in the dictionary.
 
-   Example:
 
    > **Non-STE:** The incidence of water in fuel is dangerous.
    > **STE:** Water in fuel is dangerous.
@@ -5747,11 +4824,9 @@ A different sentence construction is necessary because:
 
 When you cannot do a word-for-word replacement, use different words to get the same result.
 
-Example:
 
 > **Non-STE:** Lift the seat so that it clears the track locks.
 > **STE:** Lift the seat until it is away from the track locks.
->
 > NOT: Lift the seat so that it cleans the track locks.
 
 In this example, "clear" is not an approved verb and its only alternative in the dictionary is "clean" as a verb. But "clean" as a verb does not have the meaning that you want.
@@ -5774,10 +4849,8 @@ In the examples, you saw:
 
 Frequently, you must select different words, use different verb forms, or write new sentence constructions. It is possible that you must divide long sentences into shorter ones, remove information that is not necessary, or get more information from an engineer. Frequently, you must make many changes to your text. Then, when you change one part of a text, you must make sure that it has no negative effects on other parts of the text.
 
-Example:
 
 > **Non-STE:** If cracks are detected during this procedure, the operator must perform the repair within a certain number of flight hours depending on crack length. Refer to following table:
->
 > | Crack length detected | Time before repair |
 > |---|---|
 > | L> ... | 1000 flight hours |
@@ -5785,12 +4858,7 @@ Example:
 > | L< ... | 3000 flight hours |
 
 > **STE:** If you find cracks, refer to the table that follows:
->
 > | If the crack is of this length | Do the repair before |
-> |---|---|
-> | L> ... | 1000 flight hours |
-> | L = ... | 2000 flight hours |
-> | L< ... | 3000 flight hours |
 
 In the non-STE example:
 
@@ -5850,7 +4918,6 @@ Before you use a word, read its definition in the approved meaning column of the
 
 Always make sure that the word that you select has the correct meaning in the applicable context.
 
-Examples:
 
 > **Non-STE:** Wear protective clothing.
 > **STE:** Use (or put on) protective clothing.
@@ -5859,8 +4926,6 @@ The word "wear" is approved as a verb, but with the meaning "to become damaged b
 
 > **See:** Dictionary entry for WEAR (v).
 
-> **Non-STE:** Wear protective clothing.
-> **STE:** Use (or put on) protective clothing.
 
 The verb "extend" has the approved meaning "to increase, or cause something to increase, in dimension or range." In the non-STE example, the verb "extend" does not agree with its approved meaning.
 
@@ -5874,29 +4939,20 @@ The verb "goes" together with the preposition "down" is a phrase that refers to 
 > **See:** Dictionary entry for GO (v).
 > **See:** Dictionary entry for DECREASE (v).
 
-> **Non-STE:** When the pressure goes down, lift the cover.
-> **STE:** When the pressure decreases, lift the cover.
 
 You can use the verb "go" together with the preposition "through" only for something that physically moves through something. You cannot use it to show a requirement or a condition.
 
-> **See:** Dictionary entry for GO (v).
 
-> **Non-STE:** When the pressure goes down, lift the cover.
-> **STE:** When the pressure decreases, lift the cover.
 
 You can use the verb "see" only for something that you can see with your eyes and not as a word for "come to know."
 
 > **See:** Dictionary entry for SEE (v).
 
-> **Non-STE:** When the pressure goes down, lift the cover.
-> **STE:** When the pressure decreases, lift the cover.
 
 You can use the verb "turn" only with the meaning "to move or cause to move around an axis or a point."
 
 > **See:** Dictionary entry for TURN (v).
 
-> **Non-STE:** When the pressure goes down, lift the cover.
-> **STE:** When the pressure decreases, lift the cover.
 
 The prepositions "above" and "below" are for physical positions only and not for limits.
 
@@ -5905,41 +4961,31 @@ The prepositions "above" and "below" are for physical positions only and not for
 
 Also, make sure that you use approved words as their approved part of speech. In English, words usually do not have different forms that immediately show their function in a sentence. Thus, readers can frequently think differently about the same word. To make sentences clearer, an approved word can usually only have one function (part of speech). In STE, use each approved word as the approved part of speech.
 
-Examples:
 
-> **Non-STE:** When the pressure goes down, lift the cover.
-> **STE:** When the pressure decreases, lift the cover.
 
 "Work" is approved as a noun, but not as a verb.
 
 > **See:** Dictionary entry for WORK (n).
 
-> **Non-STE:** When the pressure goes down, lift the cover.
-> **STE:** When the pressure decreases, lift the cover.
 
 "Help" is approved as a verb, but not as a noun.
 
 > **See:** Dictionary entry for HELP (v).
 # Page 121 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 121–124 of 434
 
-## Section 9 — Writing rules (continued)
 
 "Damage" is approved as a noun, but not as a verb.
 
 There are a small number of words that are approved as more than one part of speech and have more than one meaning. These words are important and frequently occur in technical English. The word "flush," for example, frequently occurs in technical texts as a verb (with the approved meaning "to remove something or to operate with a flow of liquid"). The same word can also occur as an adjective (when it refers to a condition where one surface fully touches a different surface).
 
-Examples:
 
 > **STE:** Flush the pipes with a disinfectant solution.
 
 > ("Flush" is a verb here.)
 
-> **STE:** Flush the pipes with a disinfectant solution.
 
-> ("Flush" is a verb here.)
 
 But because the verb and the adjective have different positions and contexts, it is easy to see their function.
 
@@ -5947,7 +4993,6 @@ But because the verb and the adjective have different positions and contexts, it
 
 In English, a verb and one or more prepositions can go together to form a "phrasal verb." This phrasal verb has a meaning that is different from the meanings of its parts. Phrasal verbs usually have two meanings: the original, more concrete meaning, and a more general and abstract meaning.
 
-General examples:
 
 Put out the cat.
 (Concrete meaning: "Put the cat outside of the house.")
@@ -5957,17 +5002,12 @@ Put out the fire.
 
 To prevent ambiguity, it is not permitted in STE to use approved words together to make a new phrase (phrasal verb).
 
-Examples:
 
-> **STE:** Flush the pipes with a disinfectant solution.
 
-> ("Flush" is a verb here.)
 
 "Put" and "out" are approved words in STE. In the example, "put out" has a different meaning from the approved meanings for "put" and "out" given in the dictionary. The word "extinguish" has the approved meaning "to stop burning" and it is the word that is most usual in technical documentation.
 
-> **STE:** Flush the pipes with a disinfectant solution.
 
-> ("Flush" is a verb here.)
 
 "Give" and "off" are approved words in STE. In the example, "give off" has a different meaning from the approved meaning for "give" and "off" given in the dictionary. Here you must think of a different word that has the same meaning. "Release" has the approved meaning "to make free," or "to let go." And it is also possible to use this word in this context as a replacement for "give off."
 
@@ -5981,7 +5021,6 @@ Consistent style
 
 In procedures, you will frequently give the same information again and again. For example, most procedures give instructions on how to remove or install components or parts. When you select terminology or wording for a work step, use the same terminology or wording each time that type of work step occurs. The reader will identify the terminology or wording and will quickly understand the action. Different terminology or wording can cause confusion and delays.
 
-Example:
 
 These two sentences each give the same instruction and each correctly obeys the rules of STE.
 
@@ -5991,9 +5030,7 @@ These two sentences each give the same instruction and each correctly obeys the 
 
 If you use these two sentences in different work steps to give the same instruction, you do not help the reader. Select one sentence or sentence style and then use it again and again when the context (and meaning) is the same.
 
-> **STE:** Lubricate the two bolts with a small quantity of oil.
 
-> **STE:** Apply a small quantity of oil to the threads of the two bolts.
 
 3. Install the two bolts (10) in the body (9).
 4. Torque-tighten the two bolts to 4 Nm.
@@ -6006,10 +5043,6 @@ STE: 1. Put the housing (8) in its installation position on the body assembly (9
 2. Apply a small quantity of oil to the threads of the two bolts (10).
 3. Install the two bolts (10) in the body assembly (9).
 4. Torque each of the two bolts to 4 Nm.
-5. Put the transducer (11) on the body assembly (9).
-6. Apply a small quantity of oil to the threads of the four bolts (12).
-7. Attach the transducer (11) to the body assembly (9) with the four bolts (12).
-8. Torque each of the four bolts (12) to 0.8 Nm.
 
 In the non-STE text, you can see that there are different wordings:
 
@@ -6033,7 +5066,6 @@ Native English speakers frequently do not use "that" when they speak, and this s
 
 This conjunction also helps with translation because, in many other languages, it is not possible to omit the equivalent word.
 
-Examples:
 
 > **Non-STE:** Make sure the valve is open.
 > **STE:** Make sure that the valve is open.
@@ -6056,7 +5088,6 @@ Usually, the context of the sentence will give the reader sufficient information
 
 But when you use the word "with," read your sentence again. Make sure that your sentence does not cause ambiguity, that there are no errors, and that the meaning of the sentence does not change.
 
-Examples:
 
 > **Non-STE:** Lift the aircraft at the maximum takeoff weight with passengers.
 > **STE:** Lift the aircraft at the maximum takeoff weight (passenger weight included).
@@ -6076,10 +5107,8 @@ When you want to use a different sentence construction to replace the word "with
 This sentence is clear because it gives the tool number. In STE, you must give the primary action verb which is "seal" and not "use."
 # Page 125 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 125–128 of 434
 
-## Section 9 — Writing rules (continued)
 
 ### GR-3 — How to use pronouns
 
@@ -6089,7 +5118,6 @@ In STE, the approved pronouns are in the dictionary. Do not use a pronoun if it 
 
 If a pronoun can refer to one or more nouns in a text, it can cause ambiguity in a sentence. If there is ambiguity, replace the pronoun with the word that it refers to. This will make the sentence clear and easier to read.
 
-Examples:
 
 > **Non-STE:** If you engage the pins incorrectly with the seats, they can become damaged.
 > **STE:** If you engage the pins incorrectly with the seats, the pins can become damaged.
@@ -6098,7 +5126,6 @@ Or:
 
 > **STE:** If you engage the pins incorrectly with the seats, the seats can become damaged.
 
-Or:
 
 > **STE:** If you engage the pins incorrectly with the seats, the pins and seats can become damaged.
 
@@ -6106,7 +5133,6 @@ Or:
 
 When you use the pronoun "this" in a sentence, make sure that the reader knows the item the pronoun refers to. If "this" can refer to more than one item, give the applicable context again.
 
-Examples:
 
 > **Non-STE:** Make sure that the cover is not locked. If it is, this can cause damage to the probe.
 
@@ -6114,7 +5140,6 @@ Examples:
 
 > **STE:** Make sure that the cover is not locked. If the cover is locked, this can cause damage to the probe.
 
-Or:
 
 > **STE:** If the cover is locked, damage to the probe can occur.
 
@@ -6124,7 +5149,6 @@ A false friend is a word or an expression that looks the same as one in a person
 
 If you are a non-native English speaker, when you use a word, make sure that this word has the correct meaning in English (not the meaning of the word that looks the same in your native language).
 
-Example:
 
 > **Non-STE:** Obey the dispositions of the manufacturer when you use this adhesive.
 
@@ -6136,7 +5160,6 @@ Example:
 
 In English texts, you can find some Latin abbreviations (for example, "e.g." for "for example," "i.e.," for "that is," and "etc." for "and so on"). STE recommends that you do not use Latin abbreviations because they can confuse your readers if they do not know them. Always use English words to make the text clear.
 
-Examples:
 
 > **Non-STE:** Remove the contamination from the surface, e.g., oil, grease, etc.
 
@@ -6144,17 +5167,13 @@ Examples:
 
 > **STE:** Remove the contamination, for example oil and grease, from the surface.
 
-(Remove them.)
 
-> **Non-STE:** Obey the dispositions of the manufacturer when you use this adhesive.
 
-> **STE:** When you use this adhesive, obey the manufacturer's instructions.
 
 or other colors.
 
 You can omit these abbreviations when they are not necessary.
 
-> **STE:** When you use this adhesive, obey the manufacturer's instructions.
 
 ### GR-7 — Inclusive language
 
@@ -6164,8 +5183,6 @@ STE does not include examples of inclusive language, but it fully complies with 
 
 For more information, refer to international, national, company, or industry-specific guidance documents. For example:
 
-- European Institute for Gender Equality. (2019). Toolkit on Gender-sensitive Communication.
-- United Nations. (2019). Disability-inclusive communications guidelines.
 
 ### GR-8 — Possessive form
 
@@ -6178,14 +5195,12 @@ Other languages do not have this type of possessive form or have a different alt
 Always refer to technical publication specifications, style guides, or other official directives for information and rules.
 # Page 129 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 129–132 of 434
 
 ## Part 2 — Dictionary
 
 > Kerouac, J. (1958). The Dharma Bums.
 
-### Introduction
 
 #### General
 
@@ -6206,13 +5221,11 @@ The dictionary has four columns that give this information:
 - Column 3 – STE EXAMPLE: Includes examples that contain correct words and constructions in STE
 - Column 4 – Non-STE example: Includes examples that contain words that are not approved and constructions that are not permitted in STE.
 
-Example:
 
 | Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
 |---|---|---|---|
 | AID (n) | Help that is given | IF YOU GET THIS CHEMICAL SOLUTION IN YOUR EYES, GET MEDICAL AID IMMEDIATELY. | |
 | Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-|---|---|---|---|
 | accuracy (n) — UNAPPROVED | PRECISION (n) | THE PRECISION OF THE ADJUSTMENT CAN CHANGE. | The accuracy of the adjustment can vary. |
 
 #### Column 1: Word (part of speech)
@@ -6221,7 +5234,6 @@ All words are in bold typeface.
 
 A word in UPPERCASE letters shows that you can use this word because it is approved in STE.
 
-Examples:
 
 | Word (part of speech) |
 |---|
@@ -6233,10 +5245,7 @@ material by friction
 
 A word in lowercase letters shows that you cannot use this word because it is not approved in STE. To replace this word in a text, you must use a different word or a different sentence construction.
 
-Examples:
 
-| Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-|---|---|---|---|
 | main (adj) — UNAPPROVED | PRIMARY (adj) | THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID. | The main cause of valve failure is contamination of the fluid. |
 | build (v) — UNAPPROVED | ASSEMBLE (v) | ASSEMBLE THE UNIT. | Build the unit. |
 
@@ -6255,7 +5264,6 @@ In the dictionary, there are eight parts of speech as follows:
 *Page 130 is intentionally blank.*
 # Page 133 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 133–136 of 434
 
 ## Introduction to the Dictionary (continued)
@@ -6276,10 +5284,8 @@ In the dictionary, there are eight parts of speech as follows:
 
 Nouns are given only in their singular form, but the plural form of countable nouns is permitted unless the help tells you differently. Some nouns in the dictionary, although not approved, can be technical nouns in some contexts. Rule 1.5 gives all the necessary information and conditions to use technical nouns correctly.
 
-Example:
 
 | Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-|---|---|---|---|
 | AGENT (n) | One of a group of materials made to do a specified task | | CLEANING AGENTS ON HOT SURFACES. |
 
 #### Verbs
@@ -6297,10 +5303,7 @@ Verbs in the dictionary can be:
 
 Verbs that obey a constant pattern to make the simple past tense and the past participle form. Usually, regular verbs add "-ed" to the base verb form to make the simple past tense and the past participle form. Do not use the past participle form if it is not in the dictionary.
 
-Example:
 
-| Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-|---|---|---|---|
 | ADAPT (v) | To change or adjust to that which is necessary | ADAPT THE PRESSURE CONNECTION TO THE PITOT HEAD. THE SYSTEM INTERFACE CIRCUITS ADAPT TO THE PHYSICAL PROPERTIES OF THE CONNECTED SYSTEMS. | |
 
 - Approved forms: ADAPTS, ADAPTED
@@ -6309,10 +5312,7 @@ Example:
 
 Verbs that do not obey the standard rules for the simple past tense and the past participle form.
 
-Example:
 
-| Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-|---|---|---|---|
 | GIVE (v) | To provide | THIS SECTION GIVES THE CLEANING PROCEDURES FOR THE DISASSEMBLED PARTS. | |
 
 - Approved forms: GIVES, GAVE, GIVEN
@@ -6321,10 +5321,7 @@ Example:
 
 Auxiliary verbs that have unusual forms for tenses.
 
-Example:
 
-| Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-|---|---|---|---|
 | BE (v) | 1. To occur, exist | IF THERE IS CORROSION ON THE PUMP VANES, REPLACE THE PUMP. | |
 | | 2. To have a property to be equal to | ACID SOLUTIONS ARE DANGEROUS. | |
 
@@ -6335,10 +5332,7 @@ Example:
 
 Modal verbs in which some verb forms are missing.
 
-Example:
 
-| Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-|---|---|---|---|
 | CAN (v) | Auxiliary modal verb that means to be possible, to be able to, or to be permitted to | A MIXTURE OF FUEL AND OXYGEN CAN CAUSE AN EXPLOSION. YOU CAN CLEAN THE DRAIN HOLES WITH THE CLEANING TOOL. YOU CAN OPERATE THE VEHICLE AFTER THE INSPECTION IS COMPLETED. | |
 | WILL (v) | Auxiliary modal verb that shows simple future tense | WARNINGS AND CAUTIONS IN THIS MANUAL WILL HELP YOU TO DO THE WORK SAFELY AND CORRECTLY. | |
 
@@ -6354,10 +5348,7 @@ Example:
 
 Adjectives are given in their base form, with their comparative and superlative forms in parentheses. Adjectives that make their comparative and superlative forms with "more" and "most" do not have these forms in the dictionary, because "more" and "most" are approved words.
 
-Example:
 
-| Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-|---|---|---|---|
 | SLOW (adj) | At low speed | MAKE SURE THAT THE MOVEMENT OF THE ELEVATORS IS SLOW. | |
 
 - Comparative and superlative: SLOWER, SLOWEST
@@ -6366,15 +5357,11 @@ Example:
 
 Frequently (but not always), you can make an adverb from an adjective when you attach an "-ly" at the end of the adjective. You can make the comparative form and superlative form with "more" and "most." These forms are not in the dictionary.
 
-Examples:
 
-| Word (POS) | Approved Meaning / Alternatives | STE Example | Non-STE Example |
-|---|---|---|---|
 | SLOWLY (adv) | In a slow manner | TURN THE KNOB SLOWLY. | |
 | briskly (adv) — UNAPPROVED | QUICKLY (adv) | RUB THE SURFACE QUICKLY WITH A SOFT, DRY CLOTH. | Rub the surface briskly with a soft, dry cloth. |
 # Page 137 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 137–140 of 434
 
 ## How to use the dictionary
@@ -6396,15 +5383,12 @@ The approved alternative for a word that is not approved can also be a phrase. T
 
 Column 2 of the dictionary entry can give an approved meaning. When column 2 gives an approved meaning, the word in column 1 is approved for that meaning only.
 
-Example:
 
 | Approved meaning/ALTERNATIVES |
-|---|
 | In a position at the rear of |
 
 with a meaning that is not approved. Thus, you must use a different word that has the meaning that you want.
 
-Example:
 
 > **STE:** THE HYDRAULIC MOTOR.
 
@@ -6412,67 +5396,50 @@ Example:
 
 For words that are not approved in the dictionary, this column gives approved alternatives that you can use to replace the words that are not approved. These alternatives are in uppercase letters and are only suggestions to help you.
 
-Example:
 
 > **Non-STE:** CLEARANCE, ADD shims, as necessary.
 > **STE:** SPECIAL SHIMS, AS NECESSARY.
 
 It is possible that the approved alternative for a word that is not approved has a different part of speech. Usually, the first approved alternative has the same part of speech as the word that is not approved.
 
-Example:
 
 > **Non-STE:** TEMPERATURE AT 70 °F.
 > **STE:** KEEP (v)
 
-| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
 |------------|-------------------------------|-------------|-----------------|
 | HOLD (v) | | TURN THE ROTATING TUBE 75 DEGREES. THEN, HOLD THE TUBE IN THIS POSITION. | Turn the rotating tube 75 degrees. Then, maintain the tube in this position. |
 | MAINTENANCE (n) | | DO MAINTENANCE ON THE WATER SUPPLY SYSTEM. | Maintain the water supply system. |
 
-Example:
 
-| Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
 |------------------------|-------------------------------|-------------|-----------------|
 | uncovered (v) — UNAPPROVED | COVER (TN) | DO NOT PUT A COVER ON THE CONTAINER. | Leave the container uncovered. |
 
-Example:
 
-| Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-|------------------------|-------------------------------|-------------|-----------------|
 | simultaneously (adv) | AT THE SAME TIME | DO THESE TWO STEPS AT THE SAME TIME. | Do these two steps simultaneously. |
 
-## Help
 
 For some words, there is a graphic symbol and related text that tells you to use a different approved alternative or a different sentence construction. This graphic symbol and its related text is referred to as "help."
 
 There are four categories of help. Refer to the examples that follow.
 
-Examples:
 
 ### Category 1
 
 This category of help includes recommendations that give you more information or instructions about how to use the approved word correctly.
 
-| Approved meaning/ALTERNATIVES |
-|---|
 | 1. To apply a force to something to move it away from the source of the force |
 
 > **STE:** PUSH THE ROD INTO THE HOLE.
 
 | Approved meaning/ALTERNATIVES | |
-|---|---|
 | 2. To move with a force against something | Use this word together with a preposition or an adverb to show direction. |
 
 ### Category 2
 
 This category of help tells you that some approved words, for example ABOUT (prep), have a restricted meaning. Thus, you must use the approved alternatives for other meanings. When the help refers to restricted meanings of approved words, the dictionary gives STE and non-STE examples in columns 3 and 4.
 
-| Approved meaning/ALTERNATIVES | |
-|---|---|
 | Concerned with | For other meanings, use: |
 | | APPROXIMATELY (adv) |
-| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-|------------|-------------------------------|-------------|-----------------|
 | APPROXIMATELY (adv) | | DRAIN APPROXIMATELY 2 LITERS OF FUEL FROM THE TANK. | Drain about 2 liters of fuel from the tank. |
 | AROUND (prep) | | TURN THE SHAFT AROUND ITS AXIS. | Rotate the shaft about its axis. |
 
@@ -6480,22 +5447,17 @@ This category of help tells you that some approved words, for example ABOUT (pre
 
 This category of help tells you to be careful with the words that are approved for only one context. For example, the word SWALLOW (v) is only applicable to safety instructions. You must not use it in other contexts.
 
-| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-|------------|-------------------------------|-------------|-----------------|
 | SWALLOW (v) | To take through the mouth and esophagus into the stomach | IF YOU SWALLOW NITRIC ACID, DO NOT CAUSE VOMITING. GET MEDICAL AID IMMEDIATELY. | SWALLOWS, SWALLOWED, SWALLOWED |
 
 Use this word for safety instructions only.
 # Page 141 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 141–144 of 434
 
 ### Category 4
 
 This category of help gives you important information about the applicable listed words (also those that are not approved).
 
-| Approved meaning/ALTERNATIVES |
-| --- |
 | 1. To occur, exist |
 | 2. To have a property to be equal to |
 
@@ -6535,12 +5497,8 @@ Many of the given examples come from the subject field of aircraft maintenance. 
 
 #### Examples
 
-| Word (part of speech) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
 | --- | --- | --- | --- |
 | A (art) | Function word: indefinite article | A FUEL PUMP IS INSTALLED IN ZONE 10. | |
-| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-| --- | --- | --- | --- |
-#### main (adj) — UNAPPROVED
 
 - **Approved alternative:** PRIMARY (adj)
 - **STE:** THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID.
@@ -6552,8 +5510,6 @@ Many of the given examples come from the subject field of aircraft maintenance. 
 - **STE:** YOU CAN MAKE THE CLEARING TOOL LOCALLY.
 - **Non-STE:** The clearing tool can be manufactured locally.
 
-| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
-| --- | --- | --- | --- |
 | **A (art)** | Function word: indefinite article | A FUEL PUMP IS INSTALLED IN ZONE 10. | |
 | **ABOVE (prep)** | In (or to) a position farther up than something | LIFT THE CYLINDER ABOVE ITS INSTALLED POSITION. | |
 |  | For other meanings, use: MORE THAN | THE PRESSURE VALUE MUST BE MORE THAN 800 kPa. | The pressure value must be above 800 kPa. |
@@ -6563,7 +5519,6 @@ Many of the given examples come from the subject field of aircraft maintenance. 
 STE is a controlled natural language with a restricted dictionary. As a result, it is not possible to use all the words that you want. If you are not sure about a word that you want to use, refer to this flowchart.
 # Page 145 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 145–148 of 434
 
 ## List of recurring errors
@@ -6571,7 +5526,6 @@ STE is a controlled natural language with a restricted dictionary. As a result, 
 The table that follows gives you a list of the most frequently recurring errors that writers make when
 they use STE. If a word is not approved in the dictionary, do not use it.
 
-#### acceptable (adj) — UNAPPROVED
 
 - **Approved alternative:** PERMITTED (adj)
 
@@ -6591,7 +5545,6 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 - **Approved alternative:** THE TWO (TN)
 
-#### check (v) — UNAPPROVED
 
 - **Approved alternative:** CHECK (n)
 
@@ -6619,7 +5572,6 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 - **Approved alternative:** OBEY (v)
 
-#### further (adj) — UNAPPROVED
 
 - **Approved alternative:** MORE (adj)
 
@@ -6627,11 +5579,9 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 - **Approved alternative:** MORE (adv)
 
-#### have to (v) — UNAPPROVED
 
 - **Approved alternative:** Use an action verb in the imperative form
 
-#### however (adv) — UNAPPROVED
 
 - **Approved alternative:** BUT (conj)
 
@@ -6639,15 +5589,12 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 - **Approved alternative:** PUT (v)
 
-#### main (adj) — UNAPPROVED
 
-- **Approved alternative:** PRIMARY (adj)
 
 #### may (v) — UNAPPROVED
 
 - **Approved alternative:** CAN (v)
 
-#### need (v) — UNAPPROVED
 
 - **Approved alternative:** NECESSARY (adj)
 
@@ -6659,19 +5606,15 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 - **Approved alternative:** REMAINING (adj), USED (adj), EXPIRED (adj)
 
-#### over (prep) — UNAPPROVED
 
 - **Approved alternative:** ABOVE (prep), ON (prep), ALONG (prep)
 
-#### people (n) — UNAPPROVED
 
 - **Approved alternative:** PERSON (n), PERSONNEL (n)
 
-#### perform (v) — UNAPPROVED
 
 - **Approved alternative:** DO (v)
 
-#### portion (n) — UNAPPROVED
 
 - **Approved alternative:** PART (n)
 
@@ -6689,7 +5632,6 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 #### required (v) — UNAPPROVED
 
-- **Approved alternative:** NECESSARY (adj)
 
 #### rotate (v) — UNAPPROVED
 
@@ -6703,15 +5645,12 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 - **Approved alternative:** MUST (v)
 
-#### should (v) — UNAPPROVED
 
-- **Approved alternative:** MUST (v)
 
 #### since (conj) — UNAPPROVED
 
 - **Approved alternative:** BECAUSE (conj)
 
-#### test (v) — UNAPPROVED
 
 - **Approved alternative:** TEST (n)
 
@@ -6719,11 +5658,9 @@ they use STE. If a word is not approved in the dictionary, do not use it.
 
 - **Approved alternative:** THUS (adv), AS A RESULT
 
-#### under (prep) — UNAPPROVED
 
 - **Approved alternative:** BELOW (prep), IN (prep), LESS THAN
 
-#### using (v) — UNAPPROVED
 
 - **Approved alternative:** USE (v), WITH (prep)
 
@@ -6785,7 +5722,6 @@ quick-reference tool to find the approved verbs.
 *(Page 148 is intentionally blank.)*
 # Page 149 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 149–152 of 434
 
 #### A (art) — APPROVED
@@ -6799,7 +5735,6 @@ quick-reference tool to find the approved verbs.
   > **STE:** THE CONTROL UNIT IS INSTALLED AFT OF THE FLIGHT COMPARTMENT.
   > **Non-STE:** The control unit is installed abaft the flight compartment.
 
-#### abandon (v) — UNAPPROVED
 
 - **Use instead:**
   - **GO (v)**
@@ -6823,13 +5758,11 @@ quick-reference tool to find the approved verbs.
 
 #### able (adj) — UNAPPROVED
 
-- **Use instead: CAN (v)**
   > **STE:** IF YOU CAN START THE ENGINE, DO THE APPLICABLE TESTS.
   > **Non-STE:** If you are able to start the engine, do the applicable tests.
 
 #### abnormal (adj) — UNAPPROVED
 
-- **Use instead:**
   - **UNUSUAL (adj)**
     > **STE:** LISTEN FOR UNUSUAL NOISES.
     > **Non-STE:** Listen for abnormal noises.
@@ -6863,14 +5796,12 @@ quick-reference tool to find the approved verbs.
   > **STE:** THE PRESSURE VALUE MUST BE MORE THAN 800 kPa.
   > **Non-STE:** The pressure value must be above 800 kPa.
 
-#### ABRASIVE (adj) — APPROVED
 
 - **Meaning:** That can remove material by friction.
 - **Approved example:** POLISH THE SURFACE WITH AN ABRASIVE PAPER.
 
 #### abrupt (adj) — UNAPPROVED
 
-- **Use instead:**
   - **SUDDEN (adj)**
     > **STE:** THE DAMPER PREVENTS SUDDEN MOVEMENT OF THE CONTROL.
     > **Non-STE:** The damper prevents abrupt movement of the control.
@@ -6880,25 +5811,20 @@ quick-reference tool to find the approved verbs.
 
 #### absence (n) — UNAPPROVED
 
-- **Use instead:**
   - **NONE (pron)**
     > **STE:** IF NONE OF THE BRACKETS ARE DAMAGED, CONTINUE THE PROCEDURE.
     > **Non-STE:** In the absence of damage to the brackets, continue the procedure.
   - **NOT (adv)**
     > **STE:** IF THE BRACKETS ARE NOT DAMAGED, CONTINUE THE PROCEDURE.
-    > **Non-STE:** In the absence of damage to the brackets, continue the procedure.
   - **NO (adj)**
     > **STE:** IF THERE IS NO CONTAMINATION IN THE FUEL SAMPLE, CONTINUE THE PROCEDURE.
     > **Non-STE:** In the absence of contamination in the fuel sample, continue the procedure.
 
 #### absent (adj) — UNAPPROVED
 
-- **Use instead:**
   - **MISSING (adj)**
     > **STE:** IF ONE OR MORE BLADES ARE MISSING, MAKE AN ENTRY IN THE ENGINE LOGBOOK.
     > **Non-STE:** If one or more blades are absent, make an entry in the engine logbook.
-  - **NO (adj)**
-    > **STE:** IF THERE IS NO CONTAMINATION IN THE FUEL SAMPLE, CONTINUE THE PROCEDURE.
     > **Non-STE:** If contamination is absent from the fuel sample, continue the procedure.
 
 #### absolutely (adv) — UNAPPROVED
@@ -6934,7 +5860,6 @@ quick-reference tool to find the approved verbs.
 
 #### accelerate (v) — UNAPPROVED
 
-- **Use instead:**
   - **INCREASE (v)**
     > **STE:** A HIGHER TEMPERATURE INCREASES THE SPEED OF EVAPORATION.
     > **Non-STE:** Evaporation is accelerated by a higher temperature.
@@ -6948,12 +5873,9 @@ quick-reference tool to find the approved verbs.
 - **Meaning:** To make a decision that something is satisfactory.
 - **Approved example:** ACCEPT THE RELAY IF IT IS SERVICEABLE.
 
-#### acceptable (adj) — UNAPPROVED
 
-- **Use instead:**
   - **PERMITTED (adj)**
     > **STE:** A VALUE OF 2 mm IS PERMITTED.
-    > **Non-STE:** A value of 2 mm is acceptable.
   - **SATISFACTORY (adj)**
     > **STE:** IF THE CONDITION OF THE CAP IS NOT SATISFACTORY, REPLACE IT.
     > **Non-STE:** Replace the cap if its condition is not acceptable.
@@ -6978,13 +5900,11 @@ quick-reference tool to find the approved verbs.
   > **STE:** TURN THE COVER UNTIL YOU CAN GET ACCESS TO THE JACKS THAT HAVE + AND - MARKS.
   > **Non-STE:** Rotate the cover until the jacks marked by + and - are accessible.
 
-#### ACCIDENT (n) — APPROVED
 
 - **Meaning:** An occurrence that causes injury or damage.
 - **Approved example:** TO PREVENT ACCIDENTS, MAKE SURE THAT THE PINS ARE INSTALLED.
 # Page 153 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 153–156 of 434
 
 ## Dictionary
@@ -7007,9 +5927,7 @@ quick-reference tool to find the approved verbs.
 - > **STE:** LET DIFFERENT LENGTHS OF STUDS LET YOU ATTACH DIFFERENT THICKNESSES OF SKIN.
 - > **Non-STE:** Studs are available in different lengths to accommodate different thicknesses of skin.
 
-#### accomplish (v) — UNAPPROVED
 
-- **Approved alternative:** DO (v)
 - > **STE:** DO THIS TASK FIRST.
 - > **Non-STE:** This task must be accomplished first.
 - **Note:** You can use a more accurate verb.
@@ -7025,7 +5943,6 @@ quick-reference tool to find the approved verbs.
 
 #### account for (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 - > **STE:** MAKE SURE THAT YOU REMOVE ALL TOOLS AND EQUIPMENT.
 - > **Non-STE:** All tools and equipment must be accounted for.
 
@@ -7035,12 +5952,10 @@ quick-reference tool to find the approved verbs.
 - > **STE:** IF WATER COLLECTS IN THE FILLER LINE, DRAIN IT.
 - > **Non-STE:** If water accumulates in the filler line, drain it.
 
-#### accumulation (n) — UNAPPROVED
 
 - **Approved alternative:** QUANTITY (n)
 - > **STE:** REMOVE LARGE QUANTITIES OF CONTAMINATION.
 - > **Non-STE:** Large accumulations of contamination must be removed.
-- **Approved alternative:** COLLECT (v)
 - > **STE:** IF FUEL COLLECTS FREQUENTLY, EXAMINE THE PIPE FOR LEAKS.
 - > **Non-STE:** If accumulation of fuel is frequent, examine the pipe for leaks.
 
@@ -7062,13 +5977,11 @@ quick-reference tool to find the approved verbs.
 
 #### achieve (v) — UNAPPROVED
 
-- **Approved alternative:** GET (v)
 - > **STE:** SET THE CONTROL TO GET MAXIMUM THRUST.
 - > **Non-STE:** Set the control to achieve maximum thrust.
 
 #### acquire (v) — UNAPPROVED
 
-- **Approved alternative:** GET (v)
 - > **STE:** THE COMPUTER GETS THIS DATA FROM FIVE SENSORS.
 - > **Non-STE:** The computer acquires this data from five sensors.
 
@@ -7083,13 +5996,11 @@ quick-reference tool to find the approved verbs.
 - **Meaning:** From one side to the other side
 - **STE:** SAFETY BLOCK THE CLAMP ACROSS THE CONTROL LEVER FORKS WITH SAFETY WIRE.
 
-#### act (v) — UNAPPROVED
 
 - **Approved alternative:** Use an accurate verb.
 - > **STE:** THE HYDRAULIC FLUID FLOW OPENS THE VALVE.
 - > **Non-STE:** The hydraulic fluid flow acts on the valve.
 
-#### action (n) — UNAPPROVED
 
 - **Approved alternative:** STEP (n)
 - > **STE:** DO THE STEPS THAT FOLLOW:
@@ -7101,26 +6012,20 @@ quick-reference tool to find the approved verbs.
 - > **STE:** DO THIS TASK OUTDOORS.
 - > **Non-STE:** Do this action outdoors.
 
-#### ACTIVATE (v) — APPROVED
 
 - **Meaning:** To make a system, function, or feature ready for operation
 - **STE:** THE AUTOPILOT ACTIVATES THE APPROACH MODE.
-- **For other meanings, use:**
   - **START (v)**
   - > **STE:** START THE MOTOR.
   - > **Non-STE:** Activate the motor.
 
-#### ACTIVE (adj) — APPROVED
 
 - **Meaning:** A system, function, or feature in a state of action
 - **STE:** DOWNLOAD THE EXPORT FILE FROM THE ACTIVE SERVER UNIT.
 
-#### activity (n) — UNAPPROVED
 
-- **Approved alternative:** TASK (n)
 - > **STE:** A SUBCONTRACTOR CAN DO THESE MAINTENANCE TASKS.
 - > **Non-STE:** These maintenance activities can be done by a subcontractor.
-- **Approved alternative:** PROCEDURE (n)
 - > **STE:** DO THIS PROCEDURE AT THE AMBIENT TEMPERATURE.
 - > **Non-STE:** Do this activity at the ambient temperature.
 - **Approved alternative:** WORK (n)
@@ -7130,12 +6035,10 @@ quick-reference tool to find the approved verbs.
 #### actuate (v) — UNAPPROVED
 
 - **Approved alternative:** START (v)
-- > **STE:** START THE MOTOR.
 - > **Non-STE:** Actuate the motor.
 - **Approved alternative:** OPERATE (v)
 - > **STE:** OPERATE THE HAND PUMP.
 - > **Non-STE:** Actuate the hand pump.
-- **Approved alternative:** PUSH (v)
 - > **STE:** PUSH THE PUSHBUTTON SWITCH.
 - > **Non-STE:** Actuate the pushbutton switch.
 
@@ -7166,7 +6069,6 @@ quick-reference tool to find the approved verbs.
 
 #### additional (adj) — UNAPPROVED
 
-- **Approved alternative:** MORE (adj)
 - > **STE:** THIS CHAPTER GIVES MORE INFORMATION ABOUT SAFETY.
 - > **Non-STE:** This chapter gives additional information about safety.
 
@@ -7181,7 +6083,6 @@ quick-reference tool to find the approved verbs.
 - **Approved alternative:** BOND (v)
 - > **STE:** THE SEAL MUST BOND CORRECTLY.
 - > **Non-STE:** The seal must adhere correctly.
-- **Approved alternative:** OBEY (v)
 - > **STE:** OBEY THE SAFETY INSTRUCTIONS.
 - > **Non-STE:** Adhere to the safety instructions.
 
@@ -7191,7 +6092,6 @@ quick-reference tool to find the approved verbs.
 - > **STE:** CLEAN THE SURFACE TO MAKE SURE THAT THE BOND IS SATISFACTORY.
 - > **Non-STE:** Clean the surface to ensure there will be good adhesion.
 
-#### ADJACENT (adj) — APPROVED
 
 - **Meaning:** That which is near to an object, with no other object of the same type between the two
 - **STE:** DO NOT OPERATE THE ADJACENT CONTROL.
@@ -7225,21 +6125,16 @@ quick-reference tool to find the approved verbs.
 - **STE:** MAKE SURE THAT THE ADJUSTMENT IS IN THE LIMITS GIVEN IN TABLE 1.
 # Page 157 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 157–160 of 434
 
-## Dictionary
 
-### A
 
 #### admit (v) — UNAPPROVED
 
-- **Approved alternative:** LET (v)
 
 > **STE:** OPEN THE VALVE TO LET NITROGEN GO INTO THE OLEO STRUT.
 > **Non-STE:** Open the valve to admit nitrogen into the oleo strut.
 
-#### adopt (v) — UNAPPROVED
 
 - **Approved alternative:** USE (v)
 
@@ -7265,7 +6160,6 @@ quick-reference tool to find the approved verbs.
 > **STE:** MOVE THE LEVER FORWARD.
 > **Non-STE:** Advance the lever.
 
-#### adverse (adj) — UNAPPROVED
 
 - **Approved alternative:** BAD (adj)
 
@@ -7277,35 +6171,29 @@ quick-reference tool to find the approved verbs.
 > **STE:** THIS MEDICATION CAN CAUSE DERMATITIS.
 > **Non-STE:** This medication can cause adverse reactions.
 
-#### advisable (adj) — UNAPPROVED
 
 - **Approved alternative:** RECOMMEND (v)
 
 > **STE:** THE DESIGN AUTHORITY RECOMMENDS THAT YOU TORQUE THE BOLTS AGAIN AT INTERVALS OF SIX MONTHS.
 > **Non-STE:** According to the Design Authority, it is advisable to retorque the bolts at intervals of six months.
 
-#### advise (v) — UNAPPROVED
 
 - **Approved alternative:** TELL (v)
 
 > **STE:** TELL THE RAMP AGENT THAT THE BRAKES ARE SET.
 > **Non-STE:** Advise the ramp agent that the brakes are set.
 
-#### RECOMMEND (v) — APPROVED
 
 > **STE:** THE SAFETY OFFICER RECOMMENDS THE APPLICABLE PERSONAL PROTECTIVE EQUIPMENT.
 > **Non-STE:** The safety officer advises on applicable personal protective equipment.
 
-#### affect (v) — UNAPPROVED
 
 - **Approved alternative:** EFFECT (n)
 
 > **STE:** MAGNETIC TOOLS HAVE AN UNWANTED EFFECT ON THE COMPASS SYSTEM.
 > **Non-STE:** Magnetic tools affect the compass system.
 
-*If it is possible, be accurate.*
 
-> **STE:** THIS MEDICATION CAN CAUSE DERMATITIS.
 > **Non-STE:** This medication can affect your skin.
 
 #### AFT (adj) — APPROVED
@@ -7320,7 +6208,6 @@ quick-reference tool to find the approved verbs.
 
 > **STE:** MOVE THE THROTTLE AFT.
 
-#### AFTER (conj) — APPROVED
 
 - **Meaning:** That follows a specified time, sequence, or operation.
 
@@ -7328,7 +6215,6 @@ quick-reference tool to find the approved verbs.
 
 #### AFTER (prep) — APPROVED
 
-- **Meaning:** That follows a specified time, sequence, or operation.
 
 > **STE:** THE BAR MOVES DOWN AFTER 20 SECONDS.
 
@@ -7336,7 +6222,6 @@ quick-reference tool to find the approved verbs.
 
 - **Meaning:** At a position nearer to the rear.
 
-> **STE:** THE CONTROL UNIT IS INSTALLED AFT OF THE FLIGHT COMPARTMENT.
 
 #### AGAIN (adv) — APPROVED
 
@@ -7372,12 +6257,10 @@ quick-reference tool to find the approved verbs.
 
 #### agitation (n) — UNAPPROVED
 
-- **Approved alternative:** SHAKE (v)
 
 > **STE:** IF YOU SHAKE THE SOLUTION, DO NOT USE IT FOR ONE HOUR.
 > **Non-STE:** After agitation, do not use the solution for one hour.
 
-#### AGREE (v) — APPROVED
 
 - **Forms:** AGREES, MUST AGREE WITH, AGREED
 - **Meaning:** To be consistent with.
@@ -7391,7 +6274,6 @@ quick-reference tool to find the approved verbs.
 > **STE:** WHEN YOU INSTALL THE ANTENNA, THE ALIGNMENT ARROW MUST POINT FORWARD.
 > **Non-STE:** When you install the antenna, the alignment arrow must point ahead.
 
-#### AID (n) — APPROVED
 
 - **Meaning:** Help that is given.
 
@@ -7430,9 +6312,7 @@ quick-reference tool to find the approved verbs.
 
 > **STE:** MAKE SURE THAT THE AIRFLOW IS NOT MORE THAN 10 LITERS/MINUTE.
 
-#### alert (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 
 > **STE:** TELL ALL PERSONS TO GO AWAY FROM THE AREA.
 > **Non-STE:** Alert all persons to go away from the area.
@@ -7459,7 +6339,6 @@ quick-reference tool to find the approved verbs.
 
 > **STE:** DRAIN ALL THE FLUIDS.
 
-#### allocate (v) — UNAPPROVED
 
 - **Approved alternative:** GIVE (v)
 
@@ -7468,14 +6347,11 @@ quick-reference tool to find the approved verbs.
 
 #### allow (v) — UNAPPROVED
 
-- **Approved alternative:** LET (v)
 
 > **STE:** DO NOT LET THE CABLE TOUCH THE FLOOR.
 > **Non-STE:** Do not allow the cable to touch the floor.
 
-#### allowable (adj) — UNAPPROVED
 
-- **Approved alternative:** PERMITTED (adj)
 
 > **STE:** THE MAXIMUM PERMITTED DIFFERENCE IS 5 mm.
 > **Non-STE:** The maximum allowable difference is 5 mm.
@@ -7497,7 +6373,6 @@ quick-reference tool to find the approved verbs.
 
 > **STE:** MOVE THE TENSIOMETER ALONG THE CABLE.
 
-#### already (adv) — UNAPPROVED
 
 - **Approved alternative:** IN PROGRESS (adv)
 
@@ -7505,12 +6380,9 @@ quick-reference tool to find the approved verbs.
 > **Non-STE:** The database is already synchronizing.
 
 > **STE:** YOU CAN DO THIS REPAIR PROCEDURE ONLY IF THERE IS NO OTHER DAMAGE.
-> **Non-STE:** Only do this repair procedure if there is not already damage.
 
 *Frequently, an alternative for this word is not necessary.*
 
-> **STE:** MAKE SURE THAT THE SOFTWARE IS INSTALLED IN THE REPOSITORY.
-> **Non-STE:** Make sure that the software is already installed in the repository.
 
 #### ALSO (adv) — APPROVED
 
@@ -7519,21 +6391,16 @@ quick-reference tool to find the approved verbs.
 > **STE:** ALSO DO THE APPLICABLE STEPS OF THIS PROCEDURE.
 # Page 161 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 161–164 of 434
 
-## Dictionary
 
-### A
 
-#### ALTERNATIVE (adj) — APPROVED
 
 - **Meaning:** That gives a choice
 - **STE:** YOU CAN USE ALTERNATIVE MATERIALS.
 - **STE:** THE INSTALLATION OF THE CONNECTOR PINS CHANGED THE ROUTING OF THE CABLE LOOM.
 - **Non-STE:** installation of the connector pins altered the routing of the cable loom.
 
-#### ALTERNATIVE (n) — APPROVED
 
 - **Meaning:** One of two or more objects or processes that have the same or almost the same properties or functions
 - **STE:** A BIO-BASED FUEL CAN BE AN ALTERNATIVE TO JET-A1 AND JET-A FUELS.
@@ -7585,9 +6452,7 @@ quick-reference tool to find the approved verbs.
 - **STE:** IF YOU CHANGE THIS REPAIR PROCEDURE, GET APPROVAL OF THE DESIGN AUTHORITY.
 - **Non-STE:** The alteration to this repair procedure must get approval of the Design Authority.
 
-#### alternate (adj) — UNAPPROVED
 
-- **Approved alternative:** ALTERNATIVE (adj)
 - **STE:** AN ALTERNATIVE REPAIR IS AVAILABLE.
 - **Non-STE:** An alternate repair is available.
 - **STE:** EACH SECOND SQUARE IS RED.
@@ -7604,10 +6469,7 @@ quick-reference tool to find the approved verbs.
 - **Approved alternative:** IN ONE (TN) … AND
 - **STE:** TO MAKE PIN REMOVAL EASIER, MANUALLY TURN THE CANOPY IN ONE DIRECTION AND THEN IN THE OTHER.
 - **Non-STE:** To make pin removal easier, manually turn the canopy alternately in the two directions.
-- **Approved alternative:** ALTERNATIVE (adj)
-- **STE:** YOU CAN USE ALTERNATIVE MATERIALS.
 
-#### alternatively (adv) — UNAPPROVED
 
 - **Approved alternative:** ALTERNATIVE (n)
 - **STE:** YOU CAN DO TEST B AS AN ALTERNATIVE.
@@ -7615,17 +6477,13 @@ quick-reference tool to find the approved verbs.
 
 #### amend (v) — UNAPPROVED
 
-- **Approved alternative:** CHANGE (v)
-- **STE:** IF IT IS NECESSARY TO CHANGE THE REPAIR SCHEME, GET THE APPROVAL OF THE DESIGN AUTHORITY.
 - **Non-STE:** If it is necessary to amend the Repair Scheme, get the approval of the Design Authority.
 
-#### amendment (n) — UNAPPROVED
 
 - **Approved alternative:** CHANGE (n)
 - **STE:** THE DESIGN AUTHORITY MUST GIVE APPROVAL TO THE CHANGES THAT YOU MAKE TO THE REPAIR SCHEME.
 - **Non-STE:** The Design Authority must approve the amendments that you make to the Repair Scheme.
 
-#### among (prep) — UNAPPROVED
 
 - **Approved alternative:** IN (prep)
 - **STE:** IF THERE ARE METAL PARTICLES IN THE SAMPLES, REPLACE THE PUMP.
@@ -7633,7 +6491,6 @@ quick-reference tool to find the approved verbs.
 
 #### amount (n) — UNAPPROVED
 
-- **Approved alternative:** QUANTITY (n)
 - **STE:** MAKE SURE THAT THE QUANTITY OF FUEL IN THE TANK IS NOT MORE THAN 500 LITERS.
 - **Non-STE:** Make sure that the amount of fuel in the tank is not more than 500 liters.
 
@@ -7658,14 +6515,12 @@ quick-reference tool to find the approved verbs.
 - **STE:** DO AN OPERATIONAL CHECK OF THE SECONDARY CONTROLS.
 - **Non-STE:** Do an operational check of the ancillary controls.
 
-#### annotation (n) — UNAPPROVED
 
 - **Approved alternative:** WRITE (v)
 - **STE:** WRITE THE TEMPERATURE VALUE ON THE ENGINE LOG CARD.
 - **Non-STE:** Make an annotation of the temperature on the Engine Log Card.
 - **Approved alternative:** RECORD (v)
 - **STE:** RECORD THE TEMPERATURE VALUE ON THE ENGINE LOG CARD.
-- **Non-STE:** Make an annotation of the temperature on the Engine Log Card.
 
 #### annunciate (v) — UNAPPROVED
 
@@ -7673,7 +6528,6 @@ quick-reference tool to find the approved verbs.
 - **STE:** THE DISPLAY SHOWS A FAULT MESSAGE.
 - **Non-STE:** The display annunciates a fault message.
 
-#### another (adj) — UNAPPROVED
 
 - **Approved alternative:** ONE (TN) MORE
 - **STE:** INSTALL ONE MORE WASHER BETWEEN THE NUT AND THE SURFACE.
@@ -7691,7 +6545,6 @@ quick-reference tool to find the approved verbs.
 - **STE:** TURN THE CAP COUNTERCLOCKWISE.
 - **Non-STE:** Turn the cap anticlockwise.
 
-#### any (adj) — UNAPPROVED
 
 - **Approved alternative:** Frequently, an alternative for this word is not necessary.
 - **STE:** IF YOU HAVE QUESTIONS ABOUT THIS DOCUMENT, SEND AN E-MAIL TO THE ADDRESS THAT FOLLOWS:
@@ -7724,9 +6577,7 @@ quick-reference tool to find the approved verbs.
 - **STE:** IF YOU FIND A CRACK, DO THE APPLICABLE REPAIR PROCEDURE.
 - **Non-STE:** If a crack is apparent, do the applicable repair procedure.
 
-#### appear (v) — UNAPPROVED
 
-- **Approved alternative:** SHOW (v)
 - **STE:** A WARNING FLAG SHOWS IN THE WINDOW.
 - **Non-STE:** A warning flag appears in the window.
 - **Approved alternative:** VIEW (n)
@@ -7740,10 +6591,8 @@ quick-reference tool to find the approved verbs.
 - **Non-STE:** If it appears that the temperature values are incorrect, decrease the power.
 # Page 165 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 165–168 of 434
 
-## Dictionary
 
 ### A (continued)
 
@@ -7758,7 +6607,6 @@ quick-reference tool to find the approved verbs.
 - **STE:** APPLY THE SEALANT WITH A WOODEN SPATULA.
 - **Non-STE:** The application of sealant must be carried out with a wooden spatula.
 
-#### APPLY (v) — APPROVED
 
 - **Meaning:**
   1. To put or spread something on
@@ -7769,7 +6617,6 @@ quick-reference tool to find the approved verbs.
 
 #### appoint (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 - **STE:** TELL TWO PERSONS TO BE PREPARED TO OPERATE THE FIRE EXTINGUISHERS.
 - **Non-STE:** Appoint two persons to be prepared to operate the fire extinguishers.
 
@@ -7785,18 +6632,15 @@ quick-reference tool to find the approved verbs.
 - **STE:** LOCK THE WASHER WITH THE APPLICABLE TABS.
 - **Non-STE:** Lock the washer with the appropriate tabs.
 
-#### APPROVAL (n) — APPROVED
 
 - **Meaning:** That which permits a person or a thing to do something
 - **STE:** BEFORE YOU REPAIR THIS UNIT, GET THE APPROVAL OF THE MANUFACTURER.
 
-#### approve (v) — UNAPPROVED
 
 - **Approved alternative:** APPROVAL (n)
 - **STE:** APPROVAL FROM THE DESIGN AUTHORITY IS MANDATORY FOR ALL MODIFICATIONS.
 - **Non-STE:** All modifications must be approved by the Design Authority.
 
-#### APPROVED (adj) — APPROVED
 
 - **Meaning:** Permitted by an authority
 - **STE:** DO THE PROCEDURE IN AN APPROVED AREA.
@@ -7808,7 +6652,6 @@ quick-reference tool to find the approved verbs.
 
 #### APPROXIMATELY (adv) — APPROVED
 
-- **Meaning:** Almost correct or accurate
 - **STE:** DRAIN APPROXIMATELY 2 LITERS OF FUEL.
 
 #### AREA (n) — APPROVED
@@ -7823,31 +6666,26 @@ quick-reference tool to find the approved verbs.
 - **Non-STE:** Shock loading of the engine can arise from a heavy landing.
 - **Approved alternative 2:** CAUSE (v)
 - **STE:** A HEAVY LANDING CAN CAUSE SHOCK LOADING OF THE ENGINE.
-- **Non-STE:** Shock loading of the engine can arise from a heavy landing.
 
 #### ARM (v) — APPROVED
 
-- **Meaning:**
   1. To install armaments
   2. To prepare for automatic operation
 - **Forms:** ARMS, ARMED, ARMED
 - **STE:** ARM THE AIRCRAFT.
 - **STE:** SET THE SWITCH TO "CLOSE" TO ARM THE CIRCUIT.
 
-#### AROUND (prep) — APPROVED
 
 - **Meaning:** On all sides of
 - **STE:** PUT THE STRAP CLAMPS AROUND THE CYLINDER.
 
 For other meanings, use:
 
-- **APPROXIMATELY (adv)**
 - **STE:** THE TEST BENCH IS APPROXIMATELY 10 FEET FROM THE DOOR.
 - **Non-STE:** The test bench is around 10 feet from the door.
 
 #### arrange (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 - **STE:** PUT THE COMPONENTS IN THIS SEQUENCE:
 - **Non-STE:** Arrange the components in this order.
 
@@ -7860,7 +6698,6 @@ For other meanings, use:
 - **STE:** PREPARE FOR THE LEAK TEST.
 - **Non-STE:** Make the arrangements for the leak test.
 
-#### arrest (v) — UNAPPROVED
 
 - **Approved alternative 1:** STOP (v)
 - **STE:** STOP THE FLOW FOR 10 SECONDS.
@@ -7871,7 +6708,6 @@ For other meanings, use:
 
 #### arrive (v) — UNAPPROVED
 
-- **Approved alternative:** GET (v)
 - **STE:** TO GET THE CORRECT VALUE, SET THE SWITCH TO POSITION 2.
 - **Non-STE:** To arrive at the correct value, set the switch to position 2.
 
@@ -7915,11 +6751,9 @@ For "as long as," refer to "long (as long as)."
 
 #### ascertain (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 - **STE:** MAKE SURE THAT THE LIGHT IS OFF.
 - **Non-STE:** Ascertain that the light is off.
 
-#### ask (v) — UNAPPROVED
 
 - **Approved alternative 1:** TELL (v)
 - **STE:** TELL THE DRIVER TO SET THE SWITCH TO OFF.
@@ -7932,7 +6766,6 @@ For "as long as," refer to "long (as long as)."
 
 - **Meaning:** To attach, connect, or put together the parts of something
 - **Forms:** ASSEMBLES, ASSEMBLED, ASSEMBLED
-- **STE:** ASSEMBLE THE VALVE AS FOLLOWS:
 
 #### ASSEMBLY (n) — APPROVED
 
@@ -7951,7 +6784,6 @@ For "as long as," refer to "long (as long as)."
 #### assessment (n) — UNAPPROVED
 
 - **Approved alternative 1:** ESTIMATE (n)
-- **STE:** MAKE AN ESTIMATE OF THE DAMAGE.
 - **Non-STE:** Carry out an assessment of the damage.
 - **Approved alternative 2:** CALCULATE (v)
 - **STE:** CALCULATE THE NUMBER OF SHIMS THAT ARE NECESSARY.
@@ -7959,17 +6791,14 @@ For "as long as," refer to "long (as long as)."
 
 #### assign (v) — UNAPPROVED
 
-- **Approved alternative:** GIVE (v)
 - **STE:** GIVE A CODE TO EACH CONNECTOR.
 - **Non-STE:** Assign a code to each connector.
 
 #### assist (v) — UNAPPROVED
 
-- **Approved alternative:** HELP (v)
 - **STE:** KEEP THE DATA TO HELP YOU WITH SUBSEQUENT PROCEDURES.
 - **Non-STE:** Keep the data to assist subsequent procedures.
 
-#### assistance (n) — UNAPPROVED
 
 - **Approved alternative 1:** AID (n)
 - **STE:** FOR THIS STEP, MAKE SURE THAT YOU HAVE THE AID OF ONE MORE PERSON.
@@ -7979,12 +6808,9 @@ For "as long as," refer to "long (as long as)."
 - **Non-STE:** For this step, you must have the assistance of one person.
 # Page 169 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 169–172 of 434
 
-## Dictionary
 
-#### associated (adj) — UNAPPROVED
 
 - **Approved alternatives:** CORRECT (adj), RELATED (adj), ITS (adj), THEIR (adj)
 - **STE:** INSTALL THE DUMP VALVE AND THE CORRECT GASKET.
@@ -7998,13 +6824,10 @@ For "as long as," refer to "long (as long as)."
 
 #### assume (v) — UNAPPROVED
 
-- **Approved alternative:** THINK (v)
 - **STE:** IF YOU THINK THAT YOU CAN REPAIR THE DAMAGE, REFER TO THE REPAIR SECTION.
 - **Non-STE:** If damage is assumed to be repairable, refer to the repair section.
 
-#### assure (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 - **STE:** USE A PLUMB LINE TO MAKE SURE THAT THE WALL IS VERTICAL.
 - **Non-STE:** Use a plumb line to assure that the wall is vertical.
 
@@ -8020,7 +6843,6 @@ For "as long as," refer to "long (as long as)."
 - **STE:** IF THE RESULT THAT YOU GET IS NOT SYMMETRICAL, DO A RIGGING TEST.
 - **Non-STE:** If you get an asymmetric result, do a rigging test.
 
-#### AT (prep) — APPROVED
 
 - **Meaning:** Function word that shows the location, position, direction, or time that something occurs.
 - **STE:** DISCONNECT THE HOSE AT THE PITOT HEAD.
@@ -8035,7 +6857,6 @@ For "as long as," refer to "long (as long as)."
 
 #### attachment (n) — UNAPPROVED
 
-- **Approved alternative:** ATTACH (v)
 - **STE:** MAKE SURE THAT THE DUCT IS CORRECTLY ATTACHED TO THE FILTER.
 - **Non-STE:** Make sure that the attachment of the duct to the filter is correct.
 
@@ -8045,9 +6866,7 @@ For "as long as," refer to "long (as long as)."
 - **STE:** WHEN THE VOLTMETER SHOWS 28 VOLTS DC, THE RELAY CLOSES.
 - **Non-STE:** When 28 volts DC is attained, the relay closes.
 - **STE:** WHEN THE VOLTAGE IS 28 VOLTS DC, THE RELAY CLOSES.
-- **Non-STE:** When 28 volts DC is attained, the relay closes.
 - **STE:** WHEN YOU GET 28 VOLTS DC, THE RELAY CLOSES.
-- **Non-STE:** When 28 volts DC is attained, the relay closes.
 
 #### attempt (n) — UNAPPROVED
 
@@ -8057,11 +6876,9 @@ For "as long as," refer to "long (as long as)."
 
 #### attempt (v) — UNAPPROVED
 
-- **Approved alternative:** TRY (v)
 - **STE:** TRY TO FIND THE DEFECT.
 - **Non-STE:** Attempt to find the defect.
 
-#### attention (n) — UNAPPROVED
 
 - **Approved alternatives:** AID (n), CAREFUL (adj), MONITOR (v)
 - **STE:** IF YOU GET PAINT SPRAY IN YOUR EYES, GET MEDICAL AID.
@@ -8071,7 +6888,6 @@ For "as long as," refer to "long (as long as)."
 - **STE:** MONITOR THE RESULTS.
 - **Non-STE:** Pay attention to the results.
 
-#### audible (adj) — UNAPPROVED
 
 - **Approved alternatives:** HEAR (v), LISTEN (v)
 - **STE:** IF YOU CANNOT HEAR THE ALARM, ADJUST THE VOLUME CONTROL.
@@ -8081,7 +6897,6 @@ For "as long as," refer to "long (as long as)."
 
 #### augment (v) — UNAPPROVED
 
-- **Approved alternative:** INCREASE (v)
 - **STE:** A MIXTURE OF WATER AND METHANOL INCREASES THE POWER OF THE ENGINE.
 - **Non-STE:** A mixture of water and methanol augments the power of the engine.
 
@@ -8099,7 +6914,6 @@ For "as long as," refer to "long (as long as)."
 - **STE:** IF THE ADJUSTMENT OF THE STOPS IS NOT CORRECT, THE RESULTS OF THE TEST WILL NOT BE ACCURATE.
 - **Non-STE:** If the adjustment of the stops is not correct, the results of the test will not be authentic.
 
-#### AUTHORITY (n) — APPROVED
 
 - **Meaning:** An official organization that gives approval to something.
 - **STE:** BEFORE YOU CHANGE THE PROCEDURE, GET THE APPROVAL OF THE DESIGN AUTHORITY.
@@ -8110,19 +6924,16 @@ For "as long as," refer to "long (as long as)."
 - **STE:** ONLY APPROVED PERSONS ARE PERMITTED TO STAY IN THIS AREA.
 - **Non-STE:** Only authorized persons are permitted to stay in this area.
 
-#### AUTOMATIC (adj) — APPROVED
 
 - **Meaning:** That operates without other input.
 - **STE:** THE AUTOMATIC SYSTEM WILL OPEN THE DOORS.
 
 #### AUTOMATICALLY (adv) — APPROVED
 
-- **Meaning:** That operates without other input.
 - **STE:** THE FUEL FLOW STOPS AUTOMATICALLY.
 
 #### AUXILIARY (adj) — APPROVED
 
-- **Meaning:**
   1. That operates in a secondary function.
   2. That gives help.
 - **STE:** LUBRICANTS FOR THE ENGINE AND THE AUXILIARY EQUIPMENT ARE THE SAME.
@@ -8133,21 +6944,16 @@ For "as long as," refer to "long (as long as)."
 - **Meaning:** Prepared or supplied for you to use.
 - **STE:** IF ELECTRICAL POWER IS AVAILABLE, DO A CONTINUITY CHECK.
 
-#### avert (v) — UNAPPROVED
 
-- **Approved alternative:** PREVENT (v)
 - **STE:** IF THE MICROSWITCH BECOMES UNSERVICEABLE, DEACTIVATE THE ACTUATOR TO PREVENT DAMAGE TO THE VALVE.
 - **Non-STE:** If the microswitch becomes unserviceable, deactivate the actuator to avert damage to the valve.
 
-#### avoid (v) — UNAPPROVED
 
-- **Approved alternative:** PREVENT (v)
 - **STE:** TURN THE CONTROLS SLOWLY TO PREVENT DAMAGE.
 - **Non-STE:** Turn the controls slowly to avoid damage.
 - **STE:** DO NOT PUSH ON THE SEALS.
 - **Non-STE:** Avoid pushing on the seals.
 
-#### aware (adj) — UNAPPROVED
 
 - **Approved alternatives:** KNOW (v), TELL (v)
 - **STE:** ALL PERSONNEL MUST KNOW THE HEALTH RISKS.
@@ -8160,21 +6966,17 @@ For "as long as," refer to "long (as long as)."
 - **Meaning:** In or to a different position or direction.
 - **STE:** DO THE WORK IN AN AREA AWAY FROM EQUIPMENT OR METAL FRAME BUILDINGS.
 
-#### AXIAL (adj) — APPROVED
 
 - **Meaning:** Related to an axis.
 - **STE:** DO STEPS 1 THRU 4 TO MAKE SURE THAT NO AXIAL LOAD IS ON THE ROD.
 
 #### AXIALLY (adv) — APPROVED
 
-- **Meaning:** Related to an axis.
 - **STE:** APPLY THE LOAD AXIALLY.
 # Page 173 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 173–176 of 434
 
-## Dictionary
 
 #### BACK (adv) — APPROVED
 
@@ -8207,8 +7009,6 @@ For "as long as," refer to "long (as long as)."
 - **Approved alternative:** EMERGENCY (n)
 - **STE:** IN AN EMERGENCY, THE ONE-SHOT BATTERY SUPPLIES DC POWER.
 - **Non-STE:** The one-shot battery is a backup for the DC electrical supply.
-- **Approved alternative:** AUXILIARY (adj)
-- **STE:** USE AUXILIARY SCREWS TO ASSEMBLE THE UNIT TEMPORARILY.
 - **Non-STE:** Use some screws as a backup to assemble the unit temporarily.
 
 #### backward (adv) — UNAPPROVED
@@ -8267,7 +7067,6 @@ For "as long as," refer to "long (as long as)."
 
 #### base (v) — UNAPPROVED
 
-- **Approved alternative:** USE (v)
 - **STE:** USE THE TORQUE VALUES GIVEN IN CHAPTER 10.
 - **Non-STE:** Base the torque values on those given in Chapter 10.
 
@@ -8276,7 +7075,6 @@ For "as long as," refer to "long (as long as)."
 - **Meaning:** Approved minimum
 - **STE:** THIS MODIFICATION CHANGES THE BASIC CONFIGURATION OF THE SYSTEM.
 
-#### BE (v) — APPROVED
 
 - **Forms:** IS, WAS, ARE, WERE (no other verb forms)
 - **Meaning 1:** To occur, exist
@@ -8291,10 +7089,8 @@ For "as long as," refer to "long (as long as)."
 
 #### BECAUSE OF (prep) — APPROVED
 
-- **Meaning:** As a result of
 - **STE:** IF YOU CANNOT REMOVE A BOLT BECAUSE OF CORROSION, APPLY PENETRATING OIL.
 
-#### BECOME (v) — APPROVED
 
 - **Forms:** BECOMES, BECAME (no other verb forms)
 - **Meaning:** To come to be
@@ -8307,12 +7103,10 @@ For "as long as," refer to "long (as long as)."
 
 #### BEFORE (prep) — APPROVED
 
-- **Meaning:** That precedes a specified time, sequence, or operation
 - **STE:** THE BAR MOVES DOWN BEFORE 20 SECONDS.
 
 #### begin (v) — UNAPPROVED
 
-- **Approved alternative:** START (v)
 - **STE:** INCREASE THE PRESSURE UNTIL THE FLOW STARTS AGAIN.
 - **Non-STE:** Increase pressure until the flow begins again.
 
@@ -8324,7 +7118,6 @@ For "as long as," refer to "long (as long as)."
 - **Approved alternative:** SOURCE (n)
 - **STE:** FIND THE SOURCE OF THE FUEL LEAKAGE.
 - **Non-STE:** Find the beginning of the fuel leak.
-- **Approved alternative:** START (v)
 - **STE:** WHEN THE LEVER STARTS TO MOVE, THE MICROSWITCH OPERATES.
 - **Non-STE:** At the beginning of the lever movement, the microswitch will operate.
 
@@ -8333,21 +7126,18 @@ For "as long as," refer to "long (as long as)."
 - **Meaning:** In a position at the rear of
 - **STE:** THE PUMP IS INSTALLED BEHIND THE HYDRAULIC MOTOR.
 
-#### below (adv) — UNAPPROVED
 
 - **Approved alternative:** FOLLOW (v)
 - **STE:** OBEY THE SAFETY PRECAUTIONS THAT FOLLOW:
 - **Non-STE:** Obey the safety precautions below:
 - **Approved alternative:** THESE (adj)
 - **STE:** OBEY THESE SAFETY PRECAUTIONS:
-- **Non-STE:** Obey the safety precautions below:
 
 #### BELOW (prep) — APPROVED
 
 - **Meaning:** In (or to) a position farther down than something
 - **STE:** THE DATE IS WRITTEN BELOW THE CYLINDER NECK.
 
-For other meanings, use:
 
 - **LESS THAN**
 - **STE:** MAKE SURE THAT THE DIAMETER OF THE HOLE IS LESS THAN THE SPECIFIED VALUE.
@@ -8372,14 +7162,11 @@ For other meanings, use:
 - **Non-STE:** Put the jack beneath the axle.
 # Page 177 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 177–180 of 434
 
-## Dictionary
 
 ### B
 
-#### beside (prep) — UNAPPROVED
 
 - **Approved alternative:** ADJACENT TO
 - **STE:** THE FUEL PUMP IS ADJACENT TO THE STRUCTURAL SUPPORT.
@@ -8402,7 +7189,6 @@ For other meanings, use:
 - **STE:** REPLACE ALL COMPONENTS THAT ARE WORN MORE THAN THE MAXIMUM LIMITS.
 - **Non-STE:** Replace all components that are worn beyond their maximum limits.
 
-#### big (adj) — UNAPPROVED
 
 - **Approved alternative:** LARGE (adj)
 - **STE:** INSTALL THE LARGER BOLTS.
@@ -8419,7 +7205,6 @@ For other meanings, use:
 - **STE:** WIND TWO LAYERS OF TAPE AROUND THE PIPE JOINTS.
 - **Non-STE:** Bind the pipe joints with two layers of tape.
 
-#### blank (v) — UNAPPROVED
 
 - **Approved alternative:** SEAL (v)
 - **STE:** SEAL THE HOSE.
@@ -8427,11 +7212,9 @@ For other meanings, use:
 - **Approved alternative:** CAP (TN)
 - **STE:** PUT A CAP ON THE CONNECTOR.
 - **Non-STE:** Blank the connector.
-- **Approved alternative:** COVER (TN)
 - **STE:** PUT A COVER ON THE OUTLET PORT.
 - **Non-STE:** Blank the outlet port.
 
-#### BLEED (v) — APPROVED
 
 - **Forms:** BLEEDS, BLED, BLED
 - **Meaning:** To let a gas out of
@@ -8449,7 +7232,6 @@ For other meanings, use:
 - **STE:** MAKE SURE THAT THE SEALANT DOES NOT CAUSE A BLOCKAGE OF THE DRAIN.
 - **Non-STE:** Check that the sealant does not block the drain.
 
-#### BLOCKAGE (n) — APPROVED
 
 - **Meaning:** That which prevents correct operation
 - **STE:** MAKE SURE THAT THERE IS NO BLOCKAGE OF THE PIPE.
@@ -8461,11 +7243,9 @@ For other meanings, use:
 
 #### blot (v) — UNAPPROVED
 
-- **Approved alternative:** DRY (v)
 - **STE:** DRY THE SURFACE WITH A TOWEL.
 - **Non-STE:** Blot the surface with a towel.
 
-#### BLOW (v) — APPROVED
 
 - **Forms:** BLOWS, BLEW, BLOWN
 - **Meaning:** To cause gas to move
@@ -8504,9 +7284,7 @@ For other meanings, use:
 - **STE:** IF THE FILLER BONDS TO THE TOOL, MAKE THE TOOL MOIST WITH COLD WATER.
 - **STE:** WHEN YOU BOND THE MATERIALS, APPLY A THIRD LAYER OF ADHESIVE.
 
-#### both (adj) — UNAPPROVED
 
-- **Approved alternative:** THE TWO (TN)
 - **STE:** ATTACH THE TWO ENDS OF THE HOSE.
 - **Non-STE:** Attach both ends of the hose.
 
@@ -8559,7 +7337,6 @@ For other meanings, use:
 - **STE:** IF THE TRANSMISSION STOPS, CANCEL THE TEST.
 - **Non-STE:** If there is a break in the transmission, cancel the test.
 
-#### BREAK (v) — APPROVED
 
 - **Forms:** BREAKS, BROKE, BROKEN
 - **Meaning:** To cause to separate or become separated into parts by force
@@ -8568,7 +7345,6 @@ For other meanings, use:
 
 #### breakdown (n) — UNAPPROVED
 
-- **Approved alternative:** STOP (v)
 - **STE:** IF THE PRESSURE SUPPLY STOPS, CANCEL THE TEST.
 - **Non-STE:** If there is a breakdown in the pressure supply, cancel the test.
 
@@ -8590,7 +7366,6 @@ For other meanings, use:
 - **Meaning:** In a bright manner
 - **STE:** THE LIGHTS COME ON BRIGHTLY.
 
-#### brilliance (n) — UNAPPROVED
 
 - **Approved alternative:** INTENSITY (n)
 - **STE:** SET THE INTENSITY TO THE MINIMUM.
@@ -8600,18 +7375,14 @@ For other meanings, use:
 - **Non-STE:** Turn the BRT CONTROL clockwise to increase the display brilliance.
 # Page 181 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 181–184 of 434
 
-## Dictionary
 
-#### bring (v) — UNAPPROVED
 
 - **Approved alternatives:** MOVE (v), PUT (v)
 - **STE:** MOVE THE PANEL INTO POSITION.
 - **Non-STE:** Bring the panel into place.
 - **STE:** PUT THE PANEL IN POSITION.
-- **Non-STE:** Bring the panel into place.
 
 #### briskly (adv) — UNAPPROVED
 
@@ -8625,17 +7396,14 @@ For other meanings, use:
 - **STE:** TRANSMIT THE DATA ON THE TWO CHANNELS.
 - **Non-STE:** Broadcast the data on both channels.
 
-#### brush (v) — UNAPPROVED
 
 - **Approved alternative:** BRUSH (TN)
 - **STE:** CLEAN THE FILTER ELEMENT WITH A BRUSH.
 - **Non-STE:** Brush the filter element to clean it.
 - **STE:** USE A BRUSH TO CLEAN THE FILTER ELEMENT.
-- **Non-STE:** Brush the filter element to clean it.
 
 #### brush on (v) — UNAPPROVED
 
-- **Approved alternative:** BRUSH (TN)
 - **STE:** APPLY THE PAINT WITH A BRUSH.
 - **Non-STE:** Brush the paint on.
 
@@ -8665,7 +7433,6 @@ For other meanings, use:
 #### BURN (v) — APPROVED
 
 - **Forms:** BURNS, BURNED, BURNED
-- **Meaning:**
   1. To cause or undergo combustion.
   2. To cause injury or damage through heat.
 - **STE:** THE TURBINE BURNS FUEL.
@@ -8678,24 +7445,20 @@ For other meanings, use:
 - **STE:** IF THE DISK BREAKS, STOP THE SUPPLY.
 - **Non-STE:** If the disk bursts, switch off the supply.
 
-#### BUT (conj) — APPROVED
 
 - **Meaning:** On the contrary.
 - **STE:** TIGHTEN THE NUTS, BUT DO NOT TORQUE THEM AT THIS TIME.
 
 #### butt (v) — UNAPPROVED
 
-- **Approved alternative:** TOUCH (v)
 - **STE:** THE WIRE MUST TOUCH THE REAR OF THE CONTACT.
 - **Non-STE:** The wire must butt against the rear of the contact.
 
-#### BY (prep) — APPROVED
 
 - **Meaning:** Mathematical function word.
 - **STE:** DIVIDE THE VALUE BY TWO.
 - **STE:** INCREASE THE TEMPERATURE BY 10 DEGREES.
 
-#### by means of (prep) — UNAPPROVED
 
 - **Approved alternative:** WITH (prep)
 - **STE:** PRESSURIZE THE SYSTEM TO 150 bar WITH THE HAND PUMP.
@@ -8713,7 +7476,6 @@ For other meanings, use:
 - **Meaning:** To find a result by mathematics.
 - **STE:** CALCULATE THE PERCENTAGE WITH THE APPLICABLE FORMULA.
 
-#### calculation (n) — UNAPPROVED
 
 - **Approved alternative:** CALCULATE (v)
 - **STE:** THE SYSTEM CALCULATES DATA THAT ARE APPLICABLE ONLY TO A TYPE B UNIT.
@@ -8730,13 +7492,10 @@ For other meanings, use:
 - **Meaning:** The procedure that calibrates.
 - **STE:** WRITE THE RESULTS OF THE CALIBRATION ON THE CORRECTION CHART.
 
-#### call (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 - **STE:** TELL THE RAMP AGENT TO REMOVE THE CHOCKS.
 - **Non-STE:** Call the ramp agent to remove the chocks.
 
-#### CAN (v) — APPROVED
 
 - **Meaning:** Auxiliary modal verb that means to be possible, to be able to, or to be permitted to. No other verb forms.
 - **STE:** A MIXTURE OF FUEL AND OXYGEN CAN CAUSE AN EXPLOSION.
@@ -8745,20 +7504,16 @@ For other meanings, use:
 
 #### could (v) — UNAPPROVED
 
-- **Approved alternative:** CAN (v)
 - **STE:** IF YOU DO NOT OBEY THIS WARNING, AN EXPLOSION CAN OCCUR.
 - **Non-STE:** If you do not obey this warning, an explosion could occur.
 
-#### CANCEL (v) — APPROVED
 
 - **Forms:** CANCELS, CANCELED, CANCELED
-- **Meaning:**
   1. To do the necessary steps to stop a process.
   2. To remove the validity of something.
 - **STE:** IF YOU ACCIDENTALLY PUSH THE SWITCH, CANCEL THE START SEQUENCE.
 - **STE:** THIS NEW REVISION AUTOMATICALLY CANCELS THE PREVIOUS ONE.
 
-#### CANNOT (v) — APPROVED
 
 - **Meaning:** Auxiliary modal verb that means to not be able to.
 - **STE:** THE WHEEL CANNOT MOVE WHEN THE LOCK IS ENGAGED.
@@ -8781,7 +7536,6 @@ For other meanings, use:
 - **STE:** THE COMPUTER CAN CALCULATE THE RESULT AUTOMATICALLY.
 - **Non-STE:** The computer has the capability to calculate the result automatically.
 
-#### capable (adj) — UNAPPROVED
 
 - **Approved alternatives:** APPROVED (adj), CAN (v)
 - **STE:** AN APPROVED PERSON MUST DO THE IMPORTANT CHECKS.
@@ -8795,12 +7549,9 @@ For other meanings, use:
 - **STE:** THE CAPACITY OF THE TANK IS 564 LITERS.
 # Page 185 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 185–188 of 434
 
-## Dictionary
 
-#### care (n) — UNAPPROVED
 
 - **Approved alternative:** PRECAUTION (n)
 - **STE:** WHEN YOU DO WORK WITH HIGH VOLTAGES, OBEY THE SAFETY PRECAUTIONS.
@@ -8820,18 +7571,14 @@ For other meanings, use:
 - **Non-STE:** Remove the gearbox with great care.
 - **STE:** CAREFULLY APPLY A BEAD OF SEALING COMPOUND.
 
-#### carry (v) — UNAPPROVED
 
-- **Approved alternative:** TRANSMIT (v)
 - **STE:** THE CABLE TRANSMITS THE ELECTRICAL ENERGY FROM THE IGNITION EXCITER TO THE IGNITER.
 - **Non-STE:** The cable carries the electrical energy from the ignition exciter to the igniter.
 - **Approved alternative:** TRANSPORT (TN)
 - **STE:** THIS VEHICLE IS FOR THE TRANSPORT OF FIVE PASSENGERS.
 - **Non-STE:** This vehicle is meant to carry five passengers.
 
-#### carry out (v) — UNAPPROVED
 
-- **Approved alternative:** DO (v)
 - **STE:** DO THE LEAK TEST.
 - **Non-STE:** Carry out the leak test.
 
@@ -8841,7 +7588,6 @@ For other meanings, use:
 - **STE:** MEASURE THE CLEARANCE OF THE IMPELLER.
 - **Non-STE:** Carry out the clearance measurement of the impeller.
 
-#### case (n) — UNAPPROVED
 
 - **Approved alternative:** CONDITION (n)
 - **STE:** FIGURE 1 SHOWS THE DATA FOR ALL OPERATIONAL CONDITIONS.
@@ -8859,7 +7605,6 @@ For other meanings, use:
 - **STE:** DO NOT LET THE TOOL CATCH ON THE PANEL.
 - **STE:** DRAWER.
 
-For other meanings, use:
 
 - **Non-STE:** Catch the leakage in a graduated beaker.
 - **Alternative:** GRADUATED BEAKER.
@@ -8883,7 +7628,6 @@ For other meanings, use:
 
 #### caution (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 - **STE:** TELL ALL PERSONNEL NOT TO SMOKE NEAR FUEL TANKS.
 - **Non-STE:** Caution all personnel not to smoke near fuel tanks.
 
@@ -8904,7 +7648,6 @@ For other meanings, use:
 
 #### cease (v) — UNAPPROVED
 
-- **Approved alternative:** STOP (v)
 - **STE:** THE WARNING STOPS AT 17 DEG.
 - **Non-STE:** The warning ceases at 17 deg.
 
@@ -8914,9 +7657,7 @@ For other meanings, use:
 - **STE:** ALIGN THE PISTON WITH THE CENTER OF THE SLEEVE.
 - **Non-STE:** Center the piston in the sleeve.
 
-#### centralize (v) — UNAPPROVED
 
-- **Approved alternative:** CENTER (TN)
 - **STE:** SET THE CONTROLS TO THE CENTER POSITION.
 - **Non-STE:** Centralize the controls.
 
@@ -8930,14 +7671,11 @@ For other meanings, use:
 - **Non-STE:** Certain functions are not available.
 - **Approved alternative:** SPECIFIED (adj)
 - **STE:** THE SPECIFIED FUNCTIONS ARE NOT AVAILABLE.
-- **Non-STE:** Certain functions are not available.
 
 #### certify (v) — UNAPPROVED
 
-- **Approved alternative:** WRITE (v)
 - **STE:** WRITE THE CHANGE IN THE LOGBOOK.
 - **Non-STE:** Certify the change in the logbook.
-- **Approved alternative:** APPROVAL (n)
 - **STE:** GET APPROVAL FROM YOUR SUPERVISOR FOR THE REPAIR.
 - **Non-STE:** Get the supervisor to certify the repair.
 
@@ -8970,14 +7708,12 @@ For other meanings, use:
 - **Meaning:** That which occurs when something changes
 - **STE:** THE COLOR CHANGE SHOWS THAT THE TEMPERATURE IS TOO HIGH.
 
-#### CHANGE (v) — APPROVED
 
 - **Forms:** CHANGES, CHANGED, CHANGED
 - **Meaning:** To become or to cause to become different
 - **STE:** IF THE HUMIDITY CHANGES FREQUENTLY, PUT A COVER ON THE UNIT.
 - **STE:** CHANGE THE COLOR OF THE DISPLAY.
 
-For other meanings, use:
 
 - **Alternative:** REPLACE (v)
 - **STE:** REPLACE THE DAMAGED VALVE.
@@ -8989,7 +7725,6 @@ For other meanings, use:
 - **STE:** INSTALL THE WIRES IN THE CHANNEL ALONG THE HOUSING.
 - **Non-STE:** Channel the wires along the housing.
 
-#### characteristic (n) — UNAPPROVED
 
 - **Approved alternative:** PROPERTY (n)
 - **STE:** THE PROPERTIES OF THESE SEALANTS PREVENT CORROSION.
@@ -9005,7 +7740,6 @@ For other meanings, use:
 - **STE:** CHARGE THE BATTERY.
 - **STE:** MAKE SURE THAT THE BATTERY CHARGES.
 
-For other meanings, use:
 
 - **Alternative:** FILL (v)
 - **STE:** FILL THE TANK WITH 10 LITERS OF METHANOL.
@@ -9021,12 +7755,9 @@ For other meanings, use:
 - **STE:** DO A CHECK FOR LOOSE FASTENERS.
 # Page 189 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 189–192 of 434
 
-## Dictionary
 
-#### check (v) — UNAPPROVED
 
 - **Approved alternatives:**
 - **MAKE SURE (v)**
@@ -9042,14 +7773,12 @@ For other meanings, use:
 - **STE:** Do a leakage check of the valve.
 - **Non-STE:** Check the valve for leakage.
 
-#### CHEMICAL (adj) — APPROVED
 
 - **Meaning:** Related to a chemical.
 - **STE:** Remove the corrosion with an approved chemical compound.
 
 #### CHEMICALLY (adv) — APPROVED
 
-- **Meaning:** Related to a chemical.
 - **STE:** Remove corrosion chemically.
 
 #### chip (n) — UNAPPROVED
@@ -9064,7 +7793,6 @@ For other meanings, use:
 - **STE:** If the enamel is damaged, replace the unit.
 - **Non-STE:** If the enamel is chipped, replace the unit.
 
-#### chock (v) — UNAPPROVED
 
 - **Approved alternative:** CHOCK (TN)
 - **STE:** Put chocks against the wheels.
@@ -9072,7 +7800,6 @@ For other meanings, use:
 
 #### choice (n) — UNAPPROVED
 
-- **Approved alternatives:**
 - **SELECTION (n)**
 - **STE:** Make a selection from the available shims to get the correct thickness.
 - **Non-STE:** Make a choice from the available shims to get the correct thickness.
@@ -9080,13 +7807,10 @@ For other meanings, use:
 - **STE:** Table 1 gives alternative adhesives which you can use.
 - **Non-STE:** In Table 1, there is a choice of adhesives which you are allowed to use.
 
-#### choose (v) — UNAPPROVED
 
-- **Approved alternatives:**
 - **SELECT (v)**
 - **STE:** Select the hydraulic system that you will pressurize.
 - **Non-STE:** Choose the hydraulic system that you will pressurize.
-- **ALTERNATIVE (adj)**
 - **STE:** Table 1 gives a list of alternative adhesives.
 - **Non-STE:** Table 1 lists the adhesives which you can choose.
 
@@ -9113,9 +7837,7 @@ For other meanings, use:
 - **STE:** Supply air at 24 °C to the area.
 - **Non-STE:** Circulate air at 24 °C in the area.
 
-#### clamp (v) — UNAPPROVED
 
-- **Approved alternatives:**
 - **ATTACH (v)** (WITH A CLAMP [TN] OR CLAMPS [TN])
 - **STE:** Attach the adjacent cables with clamps.
 - **Non-STE:** Clamp the adjoining cables together.
@@ -9125,13 +7847,11 @@ For other meanings, use:
 
 #### classification (n) — UNAPPROVED
 
-- **Approved alternatives:**
 - **CLASS (TN)**
 - **STE:** There are four general classes of fasteners.
 - **Non-STE:** Fasteners can be separated into four general classifications.
 - **CATEGORY (TN)**
 - **STE:** You can divide the fasteners into four general categories.
-- **Non-STE:** Fasteners can be separated into four general classifications.
 
 #### CLEAN (adj) — APPROVED
 
@@ -9153,15 +7873,12 @@ For other meanings, use:
 - A correct pressure
 - **Non-STE:** A satisfactory bond depends on the cleanliness of the surface, the temperature, and the pressure.
 
-#### CLEAR (adj) — APPROVED
 
-- **Meanings:**
   1. Without blockage or interference.
 - **STE:** Make sure that the pitot air inlet is clear.
   2. Easy to understand and without ambiguity.
 - **STE:** Always give clear instructions about safety.
 
-For other meanings, use:
 
 - **TRANSPARENT (adj)**
 - **STE:** Put the unit in a transparent plastic bag.
@@ -9183,7 +7900,6 @@ You can also use a different construction:
 - **Meaning:** The space between two objects that must be clear to make sure that they do not touch.
 - **STE:** Make sure that there is clearance between the lever and the roller.
 
-#### CLEARLY (adv) — APPROVED
 
 - **Meaning:** In a clear and not ambiguous manner.
 - **STE:** Make sure that you can hear the signals clearly at all stations.
@@ -9193,7 +7909,6 @@ You can also use a different construction:
 - **Meaning:** A short, sharp sound.
 - **STE:** Turn the adjuster five clicks clockwise.
 
-#### click (v) — UNAPPROVED
 
 - **Approved alternative:** CLICK (n)
 - **STE:** When the solenoid makes a click, the valve is open.
@@ -9201,7 +7916,6 @@ You can also use a different construction:
 
 #### clip (v) — UNAPPROVED
 
-- **Approved alternatives:**
 - **CUT (v)**
 - **STE:** Cut the wire to the correct length.
 - **Non-STE:** Clip the wire to the correct length.
@@ -9219,7 +7933,6 @@ You can also use a different construction:
 - **Meaning:** Blocked with unwanted material.
 - **STE:** If the filter is clogged, replace it.
 
-#### close (adj) — UNAPPROVED
 
 - **Approved alternative:** NEAR (prep)
 - **STE:** Do not use solvents near flames or sparks.
@@ -9227,7 +7940,6 @@ You can also use a different construction:
 
 #### CLOSE (v) — APPROVED
 
-- **Meanings:**
 - **Forms:** closes, closed, closed
   1. To move together, or to move to a position that stops or prevents materials from going in or out.
 - **STE:** CLOSE THE INSTRUMENT PANEL.
@@ -9238,13 +7950,11 @@ You can also use a different construction:
 
 #### closely (adv) — UNAPPROVED
 
-- **Approved alternative:** CAREFULLY (adv)
 - **STE:** Carefully monitor the operation of the system.
 - **Non-STE:** Closely monitor the operation of the system.
 
 #### close to (adv) — UNAPPROVED
 
-- **Approved alternative:** NEAR (prep)
 - **STE:** Put the clinometer near the fuselage centerline.
 - **Non-STE:** Put the clinometer close to the fuselage centerline.
 
@@ -9256,19 +7966,16 @@ You can also use a different construction:
 
 #### coat (v) — UNAPPROVED
 
-- **Approved alternative:** LAYER (n)
 - **STE:** Apply a layer of grease to the battery cables.
 - **Non-STE:** Coat the battery cables with grease.
 
 #### coating (n) — UNAPPROVED
 
-- **Approved alternative:** LAYER (n)
 - **STE:** The metal has a layer of plastic on it to prevent corrosion.
 - **Non-STE:** The metal has a coating of plastic on it to prevent corrosion.
 
 #### cock (v) — UNAPPROVED
 
-- **Approved alternative:** SET (v)
 - **STE:** Set the rack hooks.
 - **Non-STE:** Cock the rack hooks.
 
@@ -9279,26 +7986,21 @@ You can also use a different construction:
 
 #### code (v) — UNAPPROVED
 
-- **Approved alternatives:**
 - **IDENTIFY (v)**
 - **STE:** Identify the cables with a code.
 - **Non-STE:** Code the cables.
 - **CODE (n)**
 - **STE:** Put a code on the cables.
-- **Non-STE:** Code the cables.
 # Page 193 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 193–196 of 434
 
-## Dictionary
 
 #### COIL (n) — APPROVED
 
 - **Meaning:** A sequence of loops
 - **STE:** MAKE SURE THAT THE COILS OF THE OXYGEN HOSE DO NOT RUB TOGETHER.
 
-#### ALIGN (v) — APPROVED
 
 - **Usage as alternative for "coincident":**
 - **STE:** MAKE SURE THAT THE TWO SURFACES ALIGN.
@@ -9328,19 +8030,16 @@ You can also use a different construction:
 - **Meaning:** A property of light
 - **STE:** THE COLOR CHANGES FROM BLUE TO RED.
 
-#### CODE (n) — APPROVED
 
 - **Usage as alternative for "color code" (v):**
 - **STE:** PUT A COLOR CODE ON EACH OF THE ASSEMBLIES.
 - **Non-STE:** Color code the assemblies.
 
-#### COME (v) — APPROVED
 
 - **Meaning:** To move to your location
 - **Forms:** COMES, CAME; No other verb forms.
 - **STE:** FUMES MUST NOT COME INTO THE CABIN.
 
-#### COME ON (v) — APPROVED
 
 - **Meaning:** To become bright with light when an internal power source is energized
 - **Forms:** COMES ON, CAME ON; No other verb forms.
@@ -9354,11 +8053,9 @@ You can also use a different construction:
 
 #### HEAR (v) — APPROVED
 
-- **Usage as alternative for "communicate" (v):**
 - **STE:** MAKE SURE THAT AIR TRAFFIC CONTROL CAN HEAR YOU.
 - **Non-STE:** Make sure that you communicate with ATC.
 
-#### COMMUNICATION (n) — APPROVED
 
 - **Meaning:** The exchange of information through a common system of symbols, signs, or sounds
 - **STE:** MAKE SURE THAT THERE IS COMMUNICATION BETWEEN THE SERVER AND THE PC.
@@ -9371,7 +8068,6 @@ You can also use a different construction:
 - **Forms:** COMPARES, COMPARED, COMPARED
 - **STE:** COMPARE THE TWO VALUES.
 
-#### COMPATIBLE (adj) — APPROVED
 
 - **Meaning:** That can operate together satisfactorily or be used together safely
 - **STE:** THIS SOFTWARE IS COMPATIBLE ONLY WITH THE SPECIFIED OPERATING SYSTEM.
@@ -9383,13 +8079,10 @@ You can also use a different construction:
 - **STE:** RECORD THE AILERON MOVEMENTS ON FORM B.
 - **Non-STE:** Compile the aileron movements on Form B.
 
-#### COLLECT (v) — APPROVED
 
-- **Usage as alternative for "compile" (v):**
 - **STE:** COLLECT ALL INSPECTION RECORDS FOR THE COMPONENT.
 - **Non-STE:** Compile all inspection records for the component.
 
-#### ALL (adj) — APPROVED
 
 - **Usage as alternative for "complete" (adj):**
 - **STE:** SEND ALL THE TEST RESULTS TO THE MANUFACTURER.
@@ -9397,7 +8090,6 @@ You can also use a different construction:
 
 #### COMPLETED (adj) — APPROVED
 
-- **Usage as alternative for "complete" (adj):**
 - **STE:** THE GREEN INDICATION SHOWS THAT SERVICING IS COMPLETED.
 - **Non-STE:** The green indication shows that servicing is complete.
 
@@ -9407,7 +8099,6 @@ You can also use a different construction:
 - **Forms:** COMPLETES, COMPLETED, COMPLETED
 - **STE:** COMPLETE THE FUNCTIONAL TEST.
 
-#### COMPLETED (adj) — APPROVED
 
 - **Meaning:** Successfully brought to an end
 - **STE:** SEND THE COMPLETED REPORT TO THE SUPERVISOR FOR APPROVAL.
@@ -9424,13 +8115,11 @@ You can also use a different construction:
 - **STE:** THE FASTENERS MUST ALIGN WITH THE HOLES IN THE TRACK.
 - **Non-STE:** The fasteners must coincide with the holes in the track.
 
-#### coincident (adj) — UNAPPROVED
 
 - **Alternative:** SYNCHRONIZED (adj)
 - **STE:** MAKE SURE THAT THE MOVEMENT OF THE TWO SURFACES IS SYNCHRONIZED.
 - **Non-STE:** Make sure that the movement of the two surfaces is coincident.
 
-#### collapse (v) — UNAPPROVED
 
 - **Alternative:** CLOSE (v)
 - **STE:** CLOSE THE BOX.
@@ -9471,7 +8160,6 @@ You can also use a different construction:
 
 #### commencement (n) — UNAPPROVED
 
-- **Alternative:** START (v)
 - **STE:** AFTER THE TEST STARTS, MONITOR THE RESULTS ON THE SCREEN.
 - **Non-STE:** After the test commencement, monitor the results on the screen.
 
@@ -9481,7 +8169,6 @@ You can also use a different construction:
 - **STE:** THE REMOVAL PROCEDURE IS THE SAME FOR THE TWO ITEMS.
 - **Non-STE:** The removal procedure is common to both items.
 
-#### communicate (v) — UNAPPROVED
 
 - **Alternative:** CONTACT (v)
 - **STE:** FOR MORE INFORMATION, CONTACT THE MANUFACTURER.
@@ -9493,19 +8180,16 @@ You can also use a different construction:
 - **STE:** COMPARE THE TWO INDICATIONS.
 - **Non-STE:** Make a comparison of the two readings.
 
-#### compile (v) — UNAPPROVED
 
 - **Alternative:** MAKE A LIST
 - **STE:** MAKE A LIST OF THE NECESSARY TOOLS.
 - **Non-STE:** Compile a list of the required tools.
 
-#### complete (adj) — UNAPPROVED
 
 - **Alternative:** FULL (adj)
 - **STE:** EXTEND AND RETRACT THE ACTUATOR THROUGH THREE FULL CYCLES.
 - **Non-STE:** Extend and retract the actuator through three complete cycles.
 
-#### completely (adv) — UNAPPROVED
 
 - **Alternative:** FULLY (adv)
 - **STE:** BEFORE YOU APPLY THE SECOND LAYER, LET THE FIRST LAYER OF PAINT DRY FULLY.
@@ -9526,7 +8210,6 @@ You can also use a different construction:
 - **STE:** THIS TEST PROCEDURE IS NOT EASY WITHOUT THE CORRECT EQUIPMENT.
 - **Non-STE:** This test procedure is complicated without the right equipment.
 
-#### comply (v) — UNAPPROVED
 
 - **Alternative:** OBEY (v)
 - **STE:** WHEN YOU ASSEMBLE THE UNIT, OBEY THIS PROCEDURE.
@@ -9535,12 +8218,9 @@ You can also use a different construction:
 - **Non-STE:** THE SHIP CERTIFICATE MUST COMPLY WITH ALL THE REQUIREMENTS OF THE AUTHORITIES.
 # Page 197 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 197–200 of 434
 
-## Dictionary
 
-#### COMPONENT (n) — APPROVED
 
 - **Meaning:** A part, subassembly, or unit that has a specified function
 - **STE:** CLEAN THESE COMPONENTS WITH APPROVED SOLVENTS.
@@ -9569,7 +8249,6 @@ You can also use a different construction:
 - **STE:** EACH SURVIVAL KIT CONTAINS THESE ITEMS.
 - **Non-STE:** Each survival kit comprises these items.
 
-#### compulsory (adj) — UNAPPROVED
 
 - **Approved alternative:** MANDATORY (adj)
 - **STE:** BEFORE YOU INSTALL A NEW COMPONENT, IT IS MANDATORY TO REPLACE THE FILTER.
@@ -9577,7 +8256,6 @@ You can also use a different construction:
 
 #### compute (v) — UNAPPROVED
 
-- **Approved alternative:** CALCULATE (v)
 - **STE:** CALCULATE THE VOLTAGE IN THE CIRCUIT.
 - **Non-STE:** Compute the voltage in the circuit.
 
@@ -9599,13 +8277,10 @@ You can also use a different construction:
 
 #### concern (v) — UNAPPROVED
 
-- **Approved alternative:** APPLICABLE (adj)
 - **STE:** THIS PROCEDURE IS APPLICABLE ONLY TO A TYPE B UNIT.
 - **Non-STE:** This procedure only concerns a Type B unit.
 
-#### conclusion (n) — UNAPPROVED
 
-- **Approved alternatives:**
   - END (n)
   - RESULT (n)
 - **STE:** AT THE END OF THE TEST, SET THE SWITCH TO "NORMAL."
@@ -9626,7 +8301,6 @@ You can also use a different construction:
 
 #### CONDITION (n) — APPROVED
 
-- **Meanings:**
   1. Something that is necessary for what occurs
   2. The state of an item
 - **STE:** THESE INITIAL CONDITIONS ARE NECESSARY TO GET CORRECT RESULTS.
@@ -9637,8 +8311,6 @@ You can also use a different construction:
 
 #### conduct (v) — UNAPPROVED
 
-- **Approved alternative:** DO (v)
-- **STE:** DO THE LEAK TEST.
 - **Non-STE:** Conduct the leak test.
 
 #### confine to (v) — UNAPPROVED
@@ -9647,21 +8319,17 @@ You can also use a different construction:
 - **STE:** IF THE DAMAGE IS ONLY TO THE MIDDLE TREADS, THE TIRE IS SERVICEABLE.
 - **Non-STE:** If the damage is confined to the middle treads, the tire is serviceable.
 
-#### confirm (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 - **STE:** DO A GROUND RUN OF THE ENGINE TO MAKE SURE THAT YOU GET THE SAME INDICATIONS.
 - **Non-STE:** Do a ground run of the engine to confirm the indications.
 
 #### conflict (n) — UNAPPROVED
 
-- **Approved alternatives:**
   - DIFFERENT (adj)
   - AGREE (v)
 - **STE:** IF THE TWO INDICATIONS ARE DIFFERENT, DO THE TEST AGAIN.
 - **Non-STE:** If there is a conflict between the two indicators, repeat the test.
 - **STE:** IF THE TWO INDICATIONS DO NOT AGREE, DO THE TEST AGAIN.
-- **Non-STE:** If there is a conflict between the two indicators, repeat the test.
 
 #### conform (v) — UNAPPROVED
 
@@ -9671,17 +8339,14 @@ You can also use a different construction:
 
 #### conformance (n) — UNAPPROVED
 
-- **Approved alternative:** AGREE (v)
 - **STE:** THE INDICATIONS MUST AGREE WITH THOSE IN TABLE 2.
 - **Non-STE:** The indications must be in conformance with those in Table 2.
 
 #### conformity (n) — UNAPPROVED
 
-- **Approved alternative:** AGREE (v)
 - **STE:** THE PRECISION OF THE GAUGES MUST AGREE WITH THE APPLICABLE QUALITY STANDARD.
 - **Non-STE:** The accuracy of the gauges must be in conformity with the applicable quality standard.
 
-#### CONNECT (v) — APPROVED
 
 - **Forms:** CONNECTS, CONNECTED, CONNECTED
 - **Meaning:** To come together or cause to come together to make one unit or system
@@ -9699,9 +8364,7 @@ You can also use a different construction:
 - **STE:** DO NOT DO MORE THAN THREE STARTS, ONE AFTER THE OTHER.
 - **Non-STE:** Do not do more than three consecutive starts.
 
-#### consecutively (adv) — UNAPPROVED
 
-- **Approved alternative:** ONE (TN) AFTER THE OTHER
 - **STE:** DO THESE STEPS ONE AFTER THE OTHER.
 - **Non-STE:** These actions must be done consecutively.
 
@@ -9710,7 +8373,6 @@ You can also use a different construction:
 - **STE:** DO THE WORK STEPS IN SEQUENCE.
 - **Non-STE:** Do the work steps consecutively.
 
-#### consequence (n) — UNAPPROVED
 
 - **Approved alternative:** BECAUSE OF (prep)
 - **STE:** BECAUSE OF THIS DEFECT, THE UNIT WILL NOT OPERATE.
@@ -9718,13 +8380,11 @@ You can also use a different construction:
 
 #### consider (v) — UNAPPROVED
 
-- **Approved alternative:** THINK (v)
 - **STE:** IF YOU THINK THAT THE INDICATION IS NOT CORRECT, DO THE TEST AGAIN.
 - **Non-STE:** If you consider that the indication is not correct, do the test again.
 
 #### considerable (adj) — UNAPPROVED
 
-- **Approved alternatives:**
   - LARGE (adj)
   - IMPORTANT (adj)
   - DANGEROUS (adj)
@@ -9737,13 +8397,11 @@ You can also use a different construction:
 
 #### consist of (v) — UNAPPROVED
 
-- **Approved alternative:** HAVE (v)
 - **STE:** EACH ANTENNA HAS THREE PARTS.
 - **Non-STE:** Each antenna consists of three parts.
 
 #### consistent (adj) — UNAPPROVED
 
-- **Approved alternative:** AGREE (v)
 - **STE:** MAKE SURE THAT THE INDICATIONS AGREE WITH THE POSITION OF THE FLAPS.
 - **Non-STE:** Check that the indications are consistent with the position of the flaps.
 
@@ -9756,8 +8414,6 @@ You can also use a different construction:
 
 #### construct (v) — UNAPPROVED
 
-- **Approved alternative:** ASSEMBLE (v)
-- **STE:** ASSEMBLE THE UNIT.
 - **Non-STE:** Construct the unit.
 
 #### consult (v) — UNAPPROVED
@@ -9766,7 +8422,6 @@ You can also use a different construction:
 - **STE:** FOR MORE INFORMATION, REFER TO THE USER'S MANUAL.
 - **Non-STE:** For more information, consult the User's Manual.
 
-#### CONTACT (v) — APPROVED
 
 - **Forms:** CONTACTS, CONTACTED, CONTACTED
 - **Meaning:** To start communication
@@ -9775,12 +8430,10 @@ You can also use a different construction:
 - **STE:** TIGHTEN THE FIXTURE SCREW UNTIL IT TOUCHES THE SURFACE.
 # Page 201 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 201–204 of 434
 
 ## Approved Words
 
-#### CONTAIN (v) — APPROVED
 
 - **Approved meaning:** To have in something or hold in something
 - **Forms:** CONTAINS, CONTAINED, CONTAINED
@@ -9952,7 +8605,6 @@ You can also use a different construction:
 > **STE:** TELL THE INFORMATION TO YOUR MANAGER.
 > **Non-STE:** Convey the information to your manager.
 
-#### cool (v) — UNAPPROVED
 
 - **Alternative:** DECREASE (v)
 
@@ -9961,7 +8613,6 @@ You can also use a different construction:
 
 #### coordinate (v) — UNAPPROVED
 
-- **Alternative:** SYNCHRONIZED (adj)
 
 > **STE:** MAKE SURE THAT COMPASS SYSTEM 1 AND COMPASS SYSTEM 2 ARE SYNCHRONIZED.
 > **Non-STE:** Coordinate compass system 1 and compass system 2.
@@ -9981,7 +8632,6 @@ You can also use a different construction:
 - **Alternative 3:** RECORD (v)
 
 > **STE:** RECORD THE DATA THAT IS ON THE IDENTIFICATION PLATE.
-> **Non-STE:** Copy the data on the identification plate.
 
 #### correctness (n) — UNAPPROVED
 
@@ -9993,9 +8643,7 @@ You can also use a different construction:
 - **Alternative 2:** CORRECTLY (adv)
 
 > **STE:** IT IS IMPORTANT TO DO THIS ADJUSTMENT CORRECTLY.
-> **Non-STE:** The correctness of this adjustment is important.
 
-#### correspond (v) — UNAPPROVED
 
 - **Alternative 1:** AGREE (v)
 
@@ -10026,13 +8674,11 @@ You can also use a different construction:
 
 #### corrosive (adj) — UNAPPROVED
 
-- **Alternative:** CORROSION (TN)
 
 > **STE:** HYDRAULIC FLUID CAN CAUSE CORROSION.
 > **Non-STE:** Hydraulic fluid is corrosive.
 # Page 205 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 205–208 of 434
 
 ## Dictionary Entries
@@ -10056,9 +8702,7 @@ You can also use a different construction:
 > **Non-STE:** Couple the fueling nozzle to the aircraft.
 
 > **STE:** ATTACH THE FUELING NOZZLE TO THE AIRCRAFT.
-> **Non-STE:** Couple the fueling nozzle to the aircraft.
 
-#### cover (v) — UNAPPROVED
 
 - **Approved alternatives:** INCLUDE (v), HAVE (v), COVER (TN)
 
@@ -10091,7 +8735,6 @@ You can also use a different construction:
 > **STE:** VIBRATION CAN CAUSE CRACKS.
 > **Non-STE:** Vibration can create cracks.
 
-#### critical (adj) — UNAPPROVED
 
 - **Approved alternatives:** VERY IMPORTANT, CAREFUL (adj)
 
@@ -10149,21 +8792,17 @@ You can also use a different construction:
 - **Meaning:** One complete sequence of operation
 - **Example:** SET THE SWITCH TO THREE CYCLES A MINUTE.
 
-#### cycle (v) — UNAPPROVED
 
 - **Approved alternative:** CYCLE (n)
 
 > **STE:** OPERATE THE ACTUATOR THROUGH THREE CYCLES.
 > **Non-STE:** Cycle the actuator three times.
 
-#### DAMAGE (n) — APPROVED
 
 - **Meaning:** The result of an occurrence that causes deterioration of the condition of something
 - **Example:** EXAMINE THE SURFACE FOR DAMAGE.
 
-#### damage (v) — UNAPPROVED
 
-- **Approved alternative:** DAMAGE (n)
 
 > **STE:** DISCONNECT THE SPRING TO PREVENT DAMAGE TO THE ROD.
 > **Non-STE:** Disconnect the spring so as not to damage the rod.
@@ -10190,9 +8829,7 @@ You can also use a different construction:
 > **STE:** MAKE THE CLOTH MOIST WITH SOLVENT.
 > **Non-STE:** Dampen the cloth with solvent.
 
-#### danger (n) — UNAPPROVED
 
-- **Approved alternative:** RISK (n)
 
 > **STE:** THERE IS A RISK OF FIRE.
 > **Non-STE:** There is a danger of fire.
@@ -10209,7 +8846,6 @@ You can also use a different construction:
 
 #### dangerously (adv) — UNAPPROVED
 
-- **Approved alternative:** DANGEROUS (adj)
 
 > **STE:** DO NOT OPEN THE CARGO DOOR IN STRONG WINDS. STRONG WINDS ARE DANGEROUS.
 > **Non-STE:** Do not open the cargo door if the wind-speed is dangerously high.
@@ -10228,12 +8864,9 @@ You can also use a different construction:
 - **Meaning:** The time at which an event occurs
 - **Example:** ON THE LABEL, READ THE DATE OF THE LAST INSPECTION.
 
-#### DEACTIVATE (v) — APPROVED
 
 - **Meaning:** To make a system, function, or feature no longer ready for operation
 - **Example:** SET THE SWITCH TO THE STANDBY POSITION TO DEACTIVATE THE MONITORING BOX.
-- **For other meanings, use:**
-  - **STOP (v)**
 
 > **STE:** STOP THE MOTOR.
 > **Non-STE:** Deactivate the motor.
@@ -10266,14 +8899,11 @@ You can also use a different construction:
 > **Non-STE:** Dearm the fire bottles.
 # Page 209 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 209–212 of 434
 
-## Dictionary
 
 #### decay (v) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
 
 > **STE:** WHEN THE ENGINE SPEED DECREASES TO 500 RPM, STOP THE ENGINE.
 > **Non-STE:** When the engine speed decays to 500 rpm, stop the engine.
@@ -10313,9 +8943,7 @@ You can also use a different construction:
 > **STE:** CLEAN THE AIRCRAFT IN AN APPROVED AREA.
 > **Non-STE:** The decontamination of the aircraft shall be done in an authorized area.
 
-#### decrease (n) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
 
 > **STE:** THE PRESSURE MUST DECREASE BY MORE THAN 2 BAR.
 > **Non-STE:** There must be a decrease in pressure of more than 2 bar.
@@ -10347,7 +8975,6 @@ You can also use a different construction:
 
 > **STE:** DE-ENERGIZE THE AC AND DC BUSBARS.
 
-#### DEEP (adj) — APPROVED
 
 - **Meaning:** That has a specified depth.
 - **Forms:** DEEPER, DEEPEST
@@ -10373,7 +9000,6 @@ You can also use a different construction:
 > **STE:** THE FLAP ANGLES ARE SPECIFIED IN TABLE 1.
 > **Non-STE:** Table 1 defines the flap angles.
 
-#### DEFLATE (v) — APPROVED
 
 - **Meaning:** To make or become smaller as a result of depressurization.
 - **Forms:** DEFLATES, DEFLATED, DEFLATED
@@ -10400,7 +9026,6 @@ You can also use a different construction:
 > **Non-STE:** Ensure that deflection is 23 deg.
 
 > **STE:** MAKE SURE THAT THE TRAVEL IS 23 DEG.
-> **Non-STE:** Ensure that deflection is 23 deg.
 
 #### deformed (adj) — UNAPPROVED
 
@@ -10433,14 +9058,12 @@ You can also use a different construction:
 > **STE:** REMOVE ALL GREASE FROM THE FAYING SURFACE WITH SOLVENT.
 > **Non-STE:** Degrease the faying surface with solvent.
 
-#### de-ice (v) — UNAPPROVED
 
 - **Approved alternative:** ICE (TN)
 
 > **STE:** REMOVE THE ICE FROM THE WINDOW.
 > **Non-STE:** De-ice the window.
 
-#### delay (n) — UNAPPROVED
 
 - **Approved alternatives:** INTERVAL (n), IMMEDIATELY (adv)
 
@@ -10457,7 +9080,6 @@ You can also use a different construction:
 > **STE:** ONLY USE THE STARTER AFTER A PERIOD OF 20 MINUTES.
 > **Non-STE:** Use of the starter must be delayed for 20 minutes.
 
-#### delete (v) — UNAPPROVED
 
 - **Approved alternatives:** ERASE (v), REMOVE (v)
 
@@ -10476,41 +9098,33 @@ You can also use a different construction:
 
 #### deliver (v) — UNAPPROVED
 
-- **Approved alternative:** SUPPLY (v)
 
 > **STE:** SET THE RIG TO SUPPLY A PRESSURE OF 800 kPa.
 > **Non-STE:** Set the rig so that it delivers a pressure of 800 kPa.
 
 #### delivery (n) — UNAPPROVED
 
-- **Approved alternative:** SUPPLY (v)
 
 > **STE:** A CENTRIFUGAL PUMP SUPPLIES HYDRAULIC FLUID TO THE UNIT.
 > **Non-STE:** Hydraulic fluid delivery to the unit is ensured by a centrifugal pump.
 
-#### demand (v) — UNAPPROVED
 
-- **Approved alternative:** NECESSARY (adj)
 
 > **STE:** IN THIS CONFIGURATION, A DIFFERENT TEST PROCEDURE IS NECESSARY.
 > **Non-STE:** This configuration demands a different test procedure.
 
 #### denote (v) — UNAPPROVED
 
-- **Approved alternative:** SHOW (v)
 
 > **STE:** FIGURE 2 SHOWS THAT YOU CAN INSTALL AN ALTERNATIVE RELAY.
 > **Non-STE:** Figure 2 denotes that an alternative relay may be installed.
 # Page 213 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 213–216 of 434
 
-## Dictionary Entries
 
 ### Approved Words
 
-#### DEPLOY (v) — APPROVED
 
 - **Meaning:** To move or cause to move from a specified position of storage and into operation
 - **Approved forms:** DEPLOYS, DEPLOYED
@@ -10527,25 +9141,21 @@ You can also use a different construction:
 #### DETERIORATION (n) — APPROVED
 
 - **Meaning:** A worse condition
-- **STE example:**
   > **STE:** THIS CONDITION WILL CAUSE DETERIORATION OF THE SURFACE.
 
 #### DEVICE (n) — APPROVED
 
 - **Meaning:** Something used to do a task
-- **STE example:**
   > **STE:** INSTALL THE SAFETY DEVICES.
 
 #### DIAGONALLY (adv) — APPROVED
 
 - **Meaning:** In a diagonal direction
-- **STE example:**
   > **STE:** APPLY THE FIRST LAYER OF TAPE ACROSS THE CUTOUT AND THE SECOND AND THIRD LAYERS DIAGONALLY.
 
 #### DIFFERENCE (n) — APPROVED
 
 - **Meaning:** That which is different between two quantities, numbers, or functions
-- **STE example:**
   > **STE:** THE DIFFERENCE BETWEEN THE TWO DIMENSIONS MUST NOT BE MORE THAN 0.10 mm.
 
 ### Unapproved Words
@@ -10559,15 +9169,11 @@ You can also use a different construction:
 
 #### depend (v) — UNAPPROVED
 
-- **Approved alternative:** IF (conj)
-- **Examples:**
   > **STE:** THE TENSION IN THE CABLES DECREASES IF THE TEMPERATURE INCREASES.
   > **Non-STE:** Cable tension changes depending on the temperature.
 
 #### deplete (v) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
-- **Examples:**
   > **STE:** DO NOT OPERATE THE BRAKES TO DECREASE THE PRESSURE IN THE ACCUMULATORS.
   > **Non-STE:** Do not deplete accumulators by operating the brakes.
 
@@ -10582,36 +9188,27 @@ You can also use a different construction:
 
 #### depress (v) — UNAPPROVED
 
-- **Approved alternative:** PUSH (v)
-- **Examples:**
   > **STE:** PUSH THE BUTTON AND THEN RELEASE IT.
   > **Non-STE:** Depress and release the button.
 
 #### depressurize (v) — UNAPPROVED
 
 - **Approved alternative:** PRESSURE (TN)
-- **Examples:**
   > **STE:** RELEASE THE PRESSURE FROM THE HYDRAULIC SYSTEM.
   > **Non-STE:** Depressurize the hydraulic system.
 
 #### describe (v) — UNAPPROVED
 
-- **Approved alternative:** GIVE (v)
-- **Examples:**
   > **STE:** THIS SECTION GIVES THE PROCEDURES FOR THE LEAK TEST OF THE SYSTEM.
   > **Non-STE:** This section describes the procedures for testing the system for leaks.
 
 #### deselect (v) — UNAPPROVED
 
 - **Approved alternative:** CANCEL (v)
-- **Examples:**
   > **STE:** PUSH THE BUTTON TO CANCEL THE FREEZE MODE.
   > **Non-STE:** Press the button to deselect the freeze mode.
 
-#### design (v) — UNAPPROVED
 
-- **Approved alternative:** HAVE (v)
-- **Examples:**
   > **STE:** THE MAIN LANDING GEAR DOORS HAVE STEPS FOR ACCESS TO THE LANDING GEAR BAY.
   > **Non-STE:** The main landing gear doors are designed with steps for access to the landing gear bay.
 
@@ -10624,10 +9221,7 @@ You can also use a different construction:
   > **STE:** TIGHTEN THE TURNBUCKLE UNTIL THE TENSION IN THE CABLE IS CORRECT.
   > **Non-STE:** Tighten the turnbuckle until you have the desired tension in the cable.
 
-#### destroy (v) — UNAPPROVED
 
-- **Approved alternative:** BREAK (v)
-- **Examples:**
   > **STE:** BREAK THE CONTAINER TO MAKE SURE THAT YOU CANNOT USE IT AGAIN.
   > **Non-STE:** To prevent further use, destroy the container.
 
@@ -10646,7 +9240,6 @@ You can also use a different construction:
 #### detail (n) — UNAPPROVED
 
 - **Approved alternative:** INSTRUCTION (n)
-- **Examples:**
   > **STE:** THIS PROCEDURE GIVES THE INSTRUCTIONS TO ATTACH THE PYLON.
   > **Non-STE:** This procedure gives details on how to attach the pylon.
 
@@ -10660,7 +9253,6 @@ You can also use a different construction:
   > **Non-STE:** Do the leak test as detailed in paragraph 4.0.
 - **Approved alternative 3:** SPECIFIED (adj)
   > **STE:** DO THE LEAK TEST AS SPECIFIED IN PARAGRAPH 4.0.
-  > **Non-STE:** Do the leak test as detailed in paragraph 4.0.
 
 #### detect (v) — UNAPPROVED
 
@@ -10673,14 +9265,12 @@ You can also use a different construction:
 
 #### determine (v) — UNAPPROVED
 
-- **Approved alternative 1:** FIND (v)
   > **STE:** FIND THE DEFECTS IN THE SYSTEM.
   > **Non-STE:** Determine the defects in the system.
 - **Approved alternative 2:** GIVE (v)
   > **STE:** DIMENSIONS 1 AND 2 GIVE THE CORRECT POSITION.
   > **Non-STE:** The correct position is determined by dimensions 1 and 2.
 - **Approved alternative 3:** SELECT (v)
-  > **STE:** SELECT THE HYDRAULIC SYSTEM THAT YOU WILL PRESSURIZE.
   > **Non-STE:** Determine which hydraulic system you will pressurize.
 - **Approved alternative 4:** CALCULATE (v)
   > **STE:** CALCULATE THE DIMENSION OF THE SHIM WITH THIS FORMULA:
@@ -10689,7 +9279,6 @@ You can also use a different construction:
 #### detrimental (adj) — UNAPPROVED
 
 - **Approved alternative 1:** DANGEROUS (adj)
-  > **STE:** HYDRAULIC FLUID IS DANGEROUS FOR YOUR HEALTH.
   > **Non-STE:** Hydraulic fluid is detrimental to health.
 - **Approved alternative 2:** DAMAGE (n)
   > **STE:** SMALL QUANTITIES OF SURFACE BLOOMING, WHICH CAN OCCUR ON ITEMS IN STORAGE, DO NOT CAUSE DAMAGE TO THE COMPONENT.
@@ -10700,14 +9289,11 @@ You can also use a different construction:
 - **Approved alternative 1:** START (v)
   > **STE:** IF A FIRE STARTS, OPERATE THE FIRE SHUTOFF VALVE.
   > **Non-STE:** If a fire develops, operate the fire shutoff valve.
-- **Approved alternative 2:** CAUSE (v)
   > **STE:** DO NOT LET HYDRAULIC FLUID STAY ON YOUR SKIN. HYDRAULIC FLUID CAN CAUSE DERMATITIS.
   > **Non-STE:** Do not leave hydraulic fluid on your skin, as dermatitis could develop.
 
 #### deviate (v) — UNAPPROVED
 
-- **Approved alternative:** OBEY (v)
-- **Examples:**
   > **STE:** PERSONNEL MUST OBEY THIS PROCEDURE.
   > **Non-STE:** Personnel must not deviate from this procedure.
 
@@ -10722,32 +9308,24 @@ You can also use a different construction:
 
 #### diagnose (v) — UNAPPROVED
 
-- **Approved alternative:** FIND (v)
-- **Examples:**
   > **STE:** FIND THE CAUSE OF THE MALFUNCTION.
   > **Non-STE:** Diagnose the cause of the malfunction.
 
 #### diametrically (adv) — UNAPPROVED
 
 - **Approved alternative:** OPPOSITE (adj)
-- **Examples:**
   > **STE:** MAKE SURE THAT THE TWO OPPOSITE V-GROOVES ALIGN WITH THE RAILS.
   > **Non-STE:** Ensure the two diametrically opposed V-grooves are in line with the rails.
 
 #### differ (v) — UNAPPROVED
 
-- **Approved alternative:** DIFFERENT (adj)
-- **Examples:**
   > **STE:** IF THE VALUES ARE DIFFERENT, DO THIS TEST.
   > **Non-STE:** If the values differ, do the following test.
 # Page 217 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 217–220 of 434
 
-## Approved Words
 
-#### DIFFERENT (adj) — APPROVED
 
 - **Meaning:** Not the same
 - **STE:** IF THE INDICATIONS ARE DIFFERENT, DO THESE STEPS.
@@ -10772,7 +9350,6 @@ You can also use a different construction:
 - **Meaning:** Not bright (DIMMER, DIMMEST)
 - **STE:** DURING NIGHT OPERATION, MAKE SURE THAT THE PANEL LIGHTS ARE DIM.
 
-#### DIMENSION (n) — APPROVED
 
 - **Meaning:** The result when something is measured in one direction
 - **STE:** DIMENSION "A" MUST NOT BE MORE THAN 50 PERCENT OF DIMENSION "D."
@@ -10824,7 +9401,6 @@ You can also use a different construction:
 - **STE:** DISCONNECT THE POWER SUPPLY.
 - **STE:** WHEN YOU TOUCH THIS ICON, THE COMPUTER DISCONNECTS FROM THE INTERNET.
 
-#### DISENGAGE (v) — APPROVED
 
 - **Forms:** DISENGAGES, DISENGAGED, DISENGAGED
 - **Meaning:** To release or become released from something that engages
@@ -10836,7 +9412,6 @@ You can also use a different construction:
 - **Meaning:** A visual indication
 - **STE:** A NUMBER IN THE TOP LEFT CORNER OF THE DISPLAY REFERS TO THE RELATED PAGE.
 
-## Unapproved Words
 
 #### differentiate (v) — UNAPPROVED
 
@@ -10855,42 +9430,33 @@ You can also use a different construction:
 - **Approved alternative:** NOT EASILY
 
 > **STE:** IF YOU CANNOT INSTALL THE RIGGING PIN EASILY, ADJUST THE LENGTH OF THE ROD.
-> **Non-STE:** If the rigging pin is difficult to install, adjust the length of the rod.
 
 #### difficulty (n) — UNAPPROVED
 
-- **Approved alternative:** NOT EASY
 
 > **STE:** IF IT IS NOT EASY TO REMOVE THE BOLT, APPLY PENETRANT OIL.
 > **Non-STE:** If there is difficulty in removing the bolt, apply penetrant oil.
 
-- **Approved alternative:** NOT EASILY
 
 > **STE:** IF YOU CANNOT REMOVE THE BOLT EASILY, APPLY PENETRANT OIL.
-> **Non-STE:** If there is difficulty in removing the bolt, apply penetrant oil.
 
 #### dilute (v) — UNAPPROVED
 
-- **Approved alternative:** MIX (v)
 
 > **STE:** MIX THE PRIMER WITH SOLVENT.
 > **Non-STE:** Dilute the primer with solvent.
 
-- **Approved alternative:** ADD (v)
 
 > **STE:** DO NOT ADD MORE THAN AN EQUAL PART OF WATER TO THE ANTIFREEZE.
 > **Non-STE:** Do not dilute the antifreeze with more than an equal part of water.
 
-#### dim (v) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
 
 > **STE:** DECREASE THE LIGHT GRADUALLY.
 > **Non-STE:** Dim the light gradually.
 
 #### diminish (v) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
 
 > **STE:** IF THE HYDRAULIC PRESSURE DECREASES, CLOSE THE VALVE.
 > **Non-STE:** If the hydraulic pressure diminishes, close the valve.
@@ -10904,14 +9470,12 @@ You can also use a different construction:
 
 #### direct (v) — UNAPPROVED
 
-- **Approved alternative:** POINT (v)
 
 > **STE:** POINT THE OPEN END OF THE DRAIN HOSE AWAY FROM THE STRUCTURE.
 > **Non-STE:** Direct the open end of the drain hose away from the structure.
 
 #### disappear (v) — UNAPPROVED
 
-- **Approved alternative:** VIEW (n)
 
 > **STE:** THE HORIZONTAL BAR GOES OUT OF VIEW.
 > **Non-STE:** The horizontal bar disappears from the window.
@@ -10930,14 +9494,12 @@ You can also use a different construction:
 
 #### discontinue (v) — UNAPPROVED
 
-- **Approved alternative:** STOP (v)
 
 > **STE:** STOP THE TEST PROCEDURE.
 > **Non-STE:** Discontinue the test procedure.
 
 #### discover (v) — UNAPPROVED
 
-- **Approved alternative:** FIND (v)
 
 > **STE:** IF YOU FIND CORROSION DURING THE INSPECTION, REMOVE IT.
 > **Non-STE:** If you discover corrosion during the inspection, remove it.
@@ -10979,19 +9541,16 @@ You can also use a different construction:
 
 #### displace (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** THE PISTON MOVES THE FLUID.
 > **Non-STE:** Fluid is displaced by the piston.
 
 #### display (v) — UNAPPROVED
 
-- **Approved alternative:** SHOW (v)
 
 > **STE:** THE COMPASS INDICATORS SHOW THE HEADINGS.
 > **Non-STE:** The headings are displayed on the compass indicators.
 
-#### dispose of (v) — UNAPPROVED
 
 - **Approved alternative:** DISCARD (v)
 
@@ -10999,12 +9558,9 @@ You can also use a different construction:
 > **Non-STE:** Dispose of the used oil according to the applicable environmental regulations.
 # Page 221 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 221–224 of 434
 
-## Approved Words
 
-#### DISTANCE (n) — APPROVED
 
 - **Meaning:** The dimension between two points or objects
 - **STE:** MEASURE THE DISTANCE BETWEEN POINTS "A" AND "B."
@@ -11018,14 +9574,12 @@ You can also use a different construction:
 - **Meaning 2:** To do mathematical division
   - **STE:** TO FIND THE MIDDLE POINT, DIVIDE THE MEASURED CLEARANCE BY TWO.
 
-#### DO (v) — APPROVED
 
 - **Forms:** DOES, DID, DONE
 - **Meaning 1:** To complete a procedure, task, or step
   - **STE:** DO A FUNCTIONAL TEST.
 - **Meaning 2:** As an auxiliary verb
   - **2a.** As part of a negative command or statement
-    - **STE:** DO NOT BREATHE THE SOLVENT FUMES.
   - **2b.** As part of a question
     - **STE:** DOES THE LIGHT COME ON?
 
@@ -11041,7 +9595,6 @@ You can also use a different construction:
 
 #### DOWN (prep) — APPROVED
 
-- **Meaning:** To a position below
 - **STE:** LET THE SLEEVE MOVE DOWN THE GUIDE TUBE.
 
 #### DOWNSTREAM (adj) — APPROVED
@@ -11051,12 +9604,10 @@ You can also use a different construction:
 
 #### DOWNSTREAM (adv) — APPROVED
 
-- **Meaning:** In the direction of the flow
 - **STE:** MOVE THE PROBE DOWNSTREAM AND MONITOR THE TEMPERATURE AGAIN.
 
 #### DOWNSTREAM OF (prep) — APPROVED
 
-- **Meaning:** In the direction of the flow
 - **STE:** DISCONNECT THE CONNECTION WHICH IS DOWNSTREAM OF THE VALVE.
 
 #### DRAIN (v) — APPROVED
@@ -11065,7 +9616,6 @@ You can also use a different construction:
 - **Meaning:** To remove liquid
 - **STE:** DRAIN THE SYSTEM FULLY.
 
-#### DRINK (v) — APPROVED
 
 - **Forms:** DRINKS, DRANK
 - **Meaning:** To consume liquid
@@ -11079,15 +9629,12 @@ You can also use a different construction:
 - **Meaning:** A small quantity of liquid in a spherical shape
 - **STE:** MAKE SURE THAT NO DROPS OF ADHESIVE FALL ONTO THE MATERIAL.
 
-#### POSITION (n) — APPROVED
 
 - **Meaning:** A location or placement
 - **STE:** MAKE SURE THAT THE POSITION OF THE SWITCHES IS CORRECT.
 - **Non-STE:** Ensure that the switch disposition is correct.
 
-## Unapproved Words
 
-#### disposition (n) — UNAPPROVED
 
 - **Approved alternative:** LOCATION (n)
 
@@ -11108,14 +9655,12 @@ You can also use a different construction:
 > **STE:** MAKE SURE THAT THE SOUND IS CLEAR.
 > **Non-STE:** Ensure the sound is distinct.
 
-#### distinctly (adv) — UNAPPROVED
 
 - **Approved alternative:** CLEARLY (adv)
 
 > **STE:** ADJUST THE VOLUME UNTIL YOU HEAR THE SOUND CLEARLY.
 > **Non-STE:** You must adjust the volume until you hear the sound distinctly.
 
-#### distort (v) — UNAPPROVED
 
 - **Approved alternative:** TWIST (v)
 
@@ -11124,12 +9669,10 @@ You can also use a different construction:
 
 #### distribute (v) — UNAPPROVED
 
-- **Approved alternative:** APPLY (v)
 
 > **STE:** APPLY THE LOAD EQUALLY ON THE AREA.
 > **Non-STE:** Distribute the load evenly over the area.
 
-- **Approved alternative:** SUPPLY (v)
 
 > **STE:** THE SYSTEM SUPPLIES HYDRAULIC POWER.
 > **Non-STE:** The system distributes hydraulic power.
@@ -11141,21 +9684,16 @@ You can also use a different construction:
 > **STE:** THE FUEL SUPPLY IS FROM THE COLLECTOR TANKS.
 > **Non-STE:** The fuel distribution is from the collector tanks.
 
-#### disturb (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** WHEN YOU INSTALL THE DISTRIBUTOR, DO NOT MOVE THE TIMING.
 > **Non-STE:** Do not disturb the timing during the distributor installation.
 
-- **Approved alternative:** CHANGE (v)
 
 > **STE:** DO NOT CHANGE THE SEQUENCE OF THE WORK STEPS IN THE TEST.
 > **Non-STE:** Do not disturb the sequence of the work steps in the test.
 
-#### don (v) — UNAPPROVED
 
-- **Approved alternative:** USE (v)
 
 > **STE:** WHEN YOU DO WORK ON FIRE EXTINGUISHERS, USE PROTECTIVE GOGGLES.
 > **Non-STE:** You must don protective goggles when working on fire extinguishers.
@@ -11172,7 +9710,6 @@ You can also use a different construction:
 > **STE:** IF YOU ARE NOT SURE THAT THE UNIT IS SERVICEABLE, DISCARD IT.
 > **Non-STE:** If there are doubts about the serviceability of the unit, discard it.
 
-- **Approved alternative:** THINK (v)
 
 > **STE:** IF YOU THINK THAT THE RESULTS ARE INCORRECT, DO THE TEST AGAIN.
 > **Non-STE:** If you are in doubt about the results, repeat the test.
@@ -11184,7 +9721,6 @@ You can also use a different construction:
 > **STE:** MAKE SURE THAT THE AIR OUTLET POINTS DOWN.
 > **Non-STE:** Make sure that the air outlet is positioned downward.
 
-#### drag (v) — UNAPPROVED
 
 - **Approved alternative:** PULL (v)
 
@@ -11193,66 +9729,54 @@ You can also use a different construction:
 
 #### draw (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE (v)
 
 > **STE:** MAKE A LINE ON THE BLADE.
 > **Non-STE:** Draw a line on the blade.
 
-- **Approved alternative:** PULL (v)
 
 > **STE:** PULL THE WIRE OUT OF THE CONDUIT.
 > **Non-STE:** Draw the wire out of the conduit.
 
-#### dress (v) — UNAPPROVED
 
-- **Approved alternative:** USE (v)
 
 > **STE:** BEFORE YOU GO INTO THE WORK AREA, USE THE NECESSARY PROTECTIVE CLOTHING.
 > **Non-STE:** Dress suitably before going into the work area.
 
-- **Approved alternative:** PUT ON (v)
 
 > **STE:** BEFORE YOU GO NEAR THE TEST RIG, PUT ON THE NECESSARY PROTECTIVE CLOTHING.
 > **Non-STE:** Dress appropriately before going near the test rig.
 
 #### drift (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** THE HORIZON BAR CAN MOVE A SMALL DISTANCE.
 > **Non-STE:** The horizon bar may drift slightly.
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE PIN (WITH A DRIFT [TN]) FROM ITS HOLE. USE A DRIFT.
 > **Non-STE:** Drift the pin from its hole.
 
 #### drive (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** THE ACTUATOR MOVES TO ZERO.
 > **Non-STE:** The actuator is driven to zero.
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE LOCKBOLT FROM THE HOLE.
 > **Non-STE:** Drive the lockbolt out of the hole.
 
-- **Approved alternative:** OPERATE (v)
 
 > **STE:** A HYDRAULIC MOTOR OPERATES THE PUMP.
 > **Non-STE:** A hydraulic motor drives the pump.
 
 #### droop (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** IF YOU DO NOT INSTALL THE RIGGING PIN, THE ELEVATORS WILL MOVE DOWN WHEN THERE IS NO PRESSURE IN THE SYSTEM.
 > **Non-STE:** If you do not install the rigging pin, the elevators will droop when there is no pressure in the system.
 # Page 225 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 225–228 of 434
 
 ## Approved Entries
@@ -11263,7 +9787,6 @@ You can also use a different construction:
 - **Meaning:** Without liquid or moisture
 - **STE:** MAKE SURE THAT THE SURFACE IS DRY.
 
-#### DRY (v) — APPROVED
 
 - **Forms:** DRIES, DRIED, DRIED
 - **Meaning:** To remove liquid or moisture, or to become dry
@@ -11275,14 +9798,12 @@ You can also use a different construction:
 - **Meaning:** In or for a specified time
 - **STE:** MONITOR THE INDICATIONS DURING THE RETRACTION TEST.
 
-#### EACH (adj) — APPROVED
 
 - **Meaning:** Every one of two or more objects or persons, seen together as a group but identified separately
 - **STE:** MAKE SURE THAT THE SWITCH IN EACH PANEL IS SET TO "OFF."
 
 #### EACH (pron) — APPROVED
 
-- **Meaning:** Every one of two or more objects or persons, seen together as a group but identified separately
 - **STE:** INSTALL TWO SPACERS, EACH WITH A THICKNESS OF 3.5 mm.
 
 #### EACH OTHER (pron) — APPROVED
@@ -11298,15 +9819,12 @@ You can also use a different construction:
 #### EASY (adj) — APPROVED
 
 - **Forms:** EASIER, EASIEST
-- **Meaning:** Without difficulty
 - **STE:** USE THE LEFT OPENING FOR EASY ACCESS.
 
-#### EAT (v) — APPROVED
 
 - **Forms:** EATS, ATE
 - **Meaning:** To consume food
 - **STE:** DO NOT EAT IN THE WORK AREA.
-- **Note:** No other verb forms. For safety instructions, use SWALLOW (v):
   - **STE:** DO NOT SWALLOW THE POTTING COMPOUND.
   - **Non-STE:** Do not eat the potting compound.
 
@@ -11327,7 +9845,6 @@ You can also use a different construction:
 - **Alternative:** FALL (v)
   > **STE:** PARTICLES THAT FALL INTO THE INTAKE CAN CAUSE DAMAGE.
   > **Non-STE:** Particles that drop into the intake may cause damage.
-- **Alternative:** DECREASE (v)
   > **STE:** THE PRESSURE DECREASES WHILE THE TIRES BECOME COOL.
   > **Non-STE:** The pressure drops as the tires cool.
 
@@ -11386,7 +9903,6 @@ You can also use a different construction:
   > **Non-STE:** The handle must move with ease.
 - **Alternative:** EASY (adj)
   > **STE:** MAKE SURE THAT IT IS EASY TO MOVE THE HANDLE.
-  > **Non-STE:** The handle must move with ease.
 
 #### ease (v) — UNAPPROVED
 
@@ -11411,7 +9927,6 @@ You can also use a different construction:
 
 #### efficacious (adj) — UNAPPROVED
 
-- **Alternative:** GOOD (adj)
   > **STE:** THIS IS A GOOD PROCEDURE TO REMOVE PAINT.
   > **Non-STE:** This is an efficacious way to remove paint.
 
@@ -11422,10 +9937,8 @@ You can also use a different construction:
   > **Non-STE:** The Transmission Control Protocol is not efficient for the transmission of interactive traffic.
 # Page 229 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 229–232 of 434
 
-## Dictionary
 
 #### efficiently (adv) — UNAPPROVED
 
@@ -11459,14 +9972,12 @@ You can also use a different construction:
 > **STE:** IF THERE IS MERCURY CONTAMINATION IN ONE OF THE TWO COMPARTMENTS, CLEAN THE AREA IMMEDIATELY.
 > **Non-STE:** If there is mercury spillage in either compartment, clean the area immediately.
 
-#### either (conj) — UNAPPROVED
 
 - Approved alternative: **OR** (conj)
 
 > **STE:** YOU CAN USE A RED PEN OR A GREEN PEN.
 > **Non-STE:** You can use either a red pen or a green pen.
 
-#### either (pron) — UNAPPROVED
 
 - Approved alternative: **ONE** (TN) OR THE OTHER
 
@@ -11502,7 +10013,6 @@ You can also use a different construction:
 > **STE:** AT INTERVALS OF SIX MONTHS, DO THE CHECK OF THE OIL LEVEL.
 > **Non-STE:** When six months have elapsed, do the check of the oil level.
 
-#### ELECTRIC (adj) — APPROVED
 
 - Approved meaning: Operated by electricity
 
@@ -11528,7 +10038,6 @@ You can also use a different construction:
 
 #### ELECTROMAGNETICALLY (adv) — APPROVED
 
-- Approved meaning: Related to electromagnetism
 
 > **STE:** THE SYSTEM OPERATES ELECTROMAGNETICALLY.
 
@@ -11540,7 +10049,6 @@ You can also use a different construction:
 
 #### ELECTRONICALLY (adv) — APPROVED
 
-- Approved meaning: Related to or operated by electronics
 
 > **STE:** THIS UNIT IS ELECTRONICALLY CONTROLLED.
 
@@ -11557,7 +10065,6 @@ You can also use a different construction:
 > **Non-STE:** Put a bag of desiccant in the package to eliminate condensation.
 
 > **STE:** PUT A BAG OF DESICCANT IN THE PACKAGE TO PREVENT CONDENSATION.
-> **Non-STE:** Put a bag of desiccant in the package to eliminate condensation.
 
 #### EMERGENCY (n) — APPROVED
 
@@ -11572,7 +10079,6 @@ You can also use a different construction:
 > **STE:** THE VAPORS FROM THIS MATERIAL ARE DANGEROUS TO THE SKIN.
 > **Non-STE:** The vapors that this material emits are dangerous to the skin.
 
-#### employ (v) — UNAPPROVED
 
 - Approved alternative: **USE** (v)
 - Approved alternative: **HAVE** (v)
@@ -11591,7 +10097,6 @@ You can also use a different construction:
 
 #### empty (v) — UNAPPROVED
 
-- Approved alternative: **REMOVE** (v)
 
 > **STE:** REMOVE ALL FUEL FROM THE FUEL TANKS.
 > **Non-STE:** Empty the fuel tanks.
@@ -11626,7 +10131,6 @@ You can also use a different construction:
 > **Non-STE:** If rough spots are encountered, remove them with emery cloth.
 
 > **STE:** IF YOU FIND ROUGH AREAS, REMOVE THEM WITH EMERY CLOTH.
-> **Non-STE:** If rough spots are encountered, remove them with emery cloth.
 
 #### END (n) — APPROVED
 
@@ -11636,7 +10140,6 @@ You can also use a different construction:
 
 #### end (v) — UNAPPROVED
 
-- Approved alternative: **STOP** (v)
 - Approved alternative: **COMPLETE** (v)
 
 > **STE:** STOP THE TEST.
@@ -11646,7 +10149,6 @@ You can also use a different construction:
 > **Non-STE:** When the test has ended, remove the sensor.
 
 > **STE:** WHEN THE TEST IS COMPLETED, REMOVE THE SENSOR.
-> **Non-STE:** When the test has ended, remove the sensor.
 
 #### ENERGIZE (v) — APPROVED
 
@@ -11689,14 +10191,11 @@ You can also use a different construction:
 > **Non-STE:** Enlarge the holes.
 # Page 233 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 233–236 of 434
 
-## Dictionary Entries
 
 #### enough (adj) — UNAPPROVED
 
-- **Approved alternative:** SUFFICIENT (adj)
 > **STE:** MAKE SURE THAT THERE IS SUFFICIENT PRESSURE IN THE ACCUMULATOR.
 > **Non-STE:** Make sure that there is enough pressure in the accumulator.
 
@@ -11706,13 +10205,10 @@ You can also use a different construction:
 > **STE:** INCORRECT INSTALLATION WILL CAUSE DAMAGE.
 > **Non-STE:** Damage will ensue from incorrect installation.
 
-#### ensure (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 > **STE:** MAKE SURE THAT THE CORRECT SEALS ARE INSTALLED.
 > **Non-STE:** Ensure that the correct seals are installed.
 
-#### enter (v) — UNAPPROVED
 
 - **Approved alternative 1:** GO INTO
 > **STE:** DO NOT GO INTO THE LABORATORY WITHOUT APPROVAL.
@@ -11724,7 +10220,6 @@ You can also use a different construction:
 > **STE:** MAKE AN ENTRY IN THE LOGBOOK TO SHOW THAT YOU DID THE DEACTIVATION PROCEDURE.
 > **Non-STE:** Enter in the logbook that you did the deactivation procedure.
 
-#### entire (adj) — UNAPPROVED
 
 - **Approved alternative 1:** FULL (adj)
 > **STE:** THE ANTENNA MAKES A SCAN OF THE FULL RANGE OF FREQUENCIES.
@@ -11754,7 +10249,6 @@ You can also use a different construction:
 - **Meaning:** The same dimension, quality, quantity, or number
 > **STE:** MAKE SURE THAT THERE IS AN EQUAL DISTANCE BETWEEN THE HOLES.
 
-#### equal (v) — UNAPPROVED
 
 - **Approved alternative 1:** SAME (adj)
 > **STE:** DIMENSION "X" MUST BE THE SAME AS DIMENSION "Z."
@@ -11765,12 +10259,10 @@ You can also use a different construction:
 
 #### EQUALLY (adv) — APPROVED
 
-- **Meaning:** The same dimension, quality, quantity, or number
 > **STE:** ADJUST THE TURNBUCKLES EQUALLY.
 
 #### equip (v) — UNAPPROVED
 
-- **Approved alternative:** INSTALL (v)
 > **STE:** INSTALL THE SHUTOFF VALVES ON EACH HP MANIFOLD.
 > **Non-STE:** Equip each HP manifold with shutoff valves.
 
@@ -11781,7 +10273,6 @@ You can also use a different construction:
 
 #### equipped (adj) — UNAPPROVED
 
-- **Approved alternative:** HAVE (v)
 > **STE:** BE CAREFUL WHEN YOU MOVE JET PIPES OR EXHAUST CONES THAT HAVE INSULATING BLANKETS.
 > **Non-STE:** Be careful when handling jet pipes or exhaust cones equipped with insulating blankets.
 
@@ -11801,7 +10292,6 @@ You can also use a different construction:
 - **Forms:** ERASES, ERASED, ERASED
 > **STE:** ERASE THE TAPE.
 
-#### erect (v) — UNAPPROVED
 
 - **Approved alternative 1:** ASSEMBLE (v)
 > **STE:** BEFORE YOU LIFT THE GEARBOX, ASSEMBLE THE MOVABLE HOIST.
@@ -11830,13 +10320,10 @@ You can also use a different construction:
 > **STE:** RELEASE ALL THE NITROGEN.
 > **Non-STE:** Allow all the nitrogen to escape.
 
-#### establish (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 > **STE:** IN THE STEP THAT FOLLOWS, MAKE SURE THAT THE FUEL PUMP OPERATES CORRECTLY.
 > **Non-STE:** In the following step, establish the correct functioning of the fuel pump.
 
-#### ESTIMATE (n) — APPROVED
 
 - **Meaning:** A calculated, approximate result
 > **STE:** MAKE AN ESTIMATE OF THE NECESSARY QUANTITY OF PAINT.
@@ -11858,16 +10345,12 @@ You can also use a different construction:
 
 #### evaluation (n) — UNAPPROVED
 
-- **Approved alternative 1:** EXAMINE (v)
 > **STE:** EXAMINE THE DAMAGE.
 > **Non-STE:** Do an evaluation of the damage.
-- **Approved alternative 2:** ANALYSIS (TN)
-> **STE:** MAKE AN ANALYSIS OF THE TEST RESULTS.
 > **Non-STE:** Do an evaluation of the test results.
 
 #### evaporate (v) — UNAPPROVED
 
-- **Approved alternative:** DRY (v)
 > **STE:** LET THE COMPOUND DRY.
 > **Non-STE:** Allow the solvent to evaporate from the compound.
 
@@ -11895,12 +10378,10 @@ You can also use a different construction:
 > **STE:** INCREASE THE TEMPERATURE GRADUALLY.
 > **Non-STE:** Increase the temperature evenly.
 - **Approved alternative 2:** EQUALLY (adv)
-> **STE:** APPLY THE LOAD EQUALLY ON THE AREA.
 > **Non-STE:** Apply the load evenly on the area.
 
 #### event (n) — UNAPPROVED
 
-- **Approved alternative:** IF (conj)
 > **STE:** IF THE PRESSURE DECREASES SUDDENLY, CLOSE THE VALVE.
 > **Non-STE:** In the event of a sudden dropping of pressure, close the valve.
 
@@ -11911,10 +10392,8 @@ You can also use a different construction:
 > **Non-STE:** If the cable chafes, it will eventually break.
 # Page 237 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 237–240 of 434
 
-## Approved Words
 
 #### EXAMINE (v) — APPROVED
 
@@ -11927,11 +10406,9 @@ You can also use a different construction:
 - **Meaning:** Something from a group which has the same qualities as the group
 - **STE:** FIGURE 2 IS AN EXAMPLE OF A REPAIR PROCEDURE FOR A DAMAGED WEB.
 
-## Unapproved Words
 
 #### every (adj) — UNAPPROVED
 
-- **Approved alternative:** ALL (adj)
 
 > **STE:** REMOVE ALL SAFETY PINS BEFORE FLIGHT.
 > **Non-STE:** Every safety pin must be removed before flight.
@@ -11958,33 +10435,28 @@ You can also use a different construction:
 > **STE:** ONE SIGN OF A LEAK OF HOT AIR FROM A JOINT IS THAT THE TEMPERATURE INDICATION DECREASES.
 > **Non-STE:** Evidence of a leak of hot air from a joint is that the temperature reading drops.
 
-- **Approved alternative:** SHOW (v)
 
 > **STE:** REPLACE THE INSULATION BLANKETS THAT SHOW CHAFING.
 > **Non-STE:** Replace the insulation blankets with evidence of chafing.
 
 #### evidence (v) — UNAPPROVED
 
-- **Approved alternative:** SHOW (v)
 
 > **STE:** IF THE TEST SHOWS NO FAULT, CONTINUE THE PROCEDURE.
 > **Non-STE:** If no fault is evidenced by the test, continue the procedure.
 
-- **Approved alternative:** FIND (v)
 
 > **STE:** IF YOU DO NOT FIND DAMAGE DURING THE INSPECTION PROCEDURE, ASSEMBLE THE UNIT.
 > **Non-STE:** If the inspection does not evidence any damage, assemble the unit.
 
 #### evident (adj) — UNAPPROVED
 
-- **Approved alternative:** FIND (v)
 
 > **STE:** IF YOU DO NOT FIND DAMAGE, CONTINUE THE INSPECTION.
 > **Non-STE:** If no damage is evident, continue the inspection.
 
 #### exact (adj) — UNAPPROVED
 
-- **Approved alternative:** ACCURATE (adj)
 
 > **STE:** IF THE INDICATION IS NOT ACCURATE, DO THE TEST AGAIN.
 > **Non-STE:** If the indication is not exact, do the test again.
@@ -11992,7 +10464,6 @@ You can also use a different construction:
 - **Approved alternative:** CORRECT (adj)
 
 > **STE:** IF THE INDICATION IS NOT CORRECT, DO THE TEST AGAIN.
-> **Non-STE:** If the indication is not exact, do the test again.
 
 #### exactly (adv) — UNAPPROVED
 
@@ -12001,12 +10472,10 @@ You can also use a different construction:
 > **STE:** PUT THE REPAIR SHEET ACCURATELY ON THE DAMAGED AREA.
 > **Non-STE:** Put the repair sheet exactly on the damaged area.
 
-- **Approved alternative:** FULLY (adv)
 
 > **STE:** FIND THE BOLT HOLE THAT ALIGNS FULLY WITH ONE OF THE OUTER SLOTS.
 > **Non-STE:** Find the bolt hole that aligns exactly with one of the outer slots.
 
-- **Approved alternative:** CORRECT (adj)
 
 > **STE:** THE SEAL MUST BE OF THE CORRECT DIMENSION FOR THE GROOVE.
 > **Non-STE:** The seal must fit the groove exactly.
@@ -12018,19 +10487,16 @@ You can also use a different construction:
 > **STE:** EXAMINE THE BLADE FOR CRACKS.
 > **Non-STE:** Do an examination of the blades for cracks.
 
-- **Approved alternative:** FIND (v)
 
 > **STE:** IF YOU FIND CORROSION, REMOVE IT WITH THE SPECIFIED MATERIAL.
 > **Non-STE:** If the examination reveals corrosion, it must be removed with the specified material.
 
 #### exceed (v) — UNAPPROVED
 
-- **Approved alternative:** MORE THAN
 
 > **STE:** MAKE SURE THAT THE INDICATION IS NOT MORE THAN 400 KNOTS.
 > **Non-STE:** Ensure that the indication does not exceed 400 knots.
 
-#### except (prep) — UNAPPROVED
 
 - **Note:** To replace this word, use a different construction. Be accurate.
 
@@ -12040,17 +10506,12 @@ You can also use a different construction:
 > **STE:** REMOVE ALL SCREWS, BUT NOT THE ONE ON THE LEFT SIDE OF THE FLANGE.
 > **Non-STE:** Remove all screws except the one on the left side of the flange.
 
-#### exception (n) — UNAPPROVED
 
-- **Note:** To replace this word, use a different construction. Be accurate.
 
-> **STE:** KEEP ALL THE PARTS THAT ARE SERVICEABLE AND DISCARD THOSE THAT ARE BROKEN.
 > **Non-STE:** Keep all parts with the exception of those that are broken.
 
-> **STE:** REMOVE ALL SCREWS, BUT NOT THE ONE ON THE LEFT SIDE OF THE FLANGE.
 > **Non-STE:** Remove all screws with the exception of the one on the left side of the flange.
 
-#### exceptional (adj) — UNAPPROVED
 
 - **Approved alternative:** UNUSUAL (adj)
 
@@ -12071,7 +10532,6 @@ You can also use a different construction:
 > **STE:** DO NOT APPLY TOO MUCH ADHESIVE ON THE GASKET.
 > **Non-STE:** Do not apply excess adhesive on the gasket.
 
-- **Approved alternative:** MORE THAN
 
 > **STE:** DO NOT PUT MORE THAN THE PERMITTED WEIGHT ON THE TROLLEY.
 > **Non-STE:** Do not put excess weight on the trolley.
@@ -12086,38 +10546,30 @@ You can also use a different construction:
 > **STE:** REMOVE ALL REMAINING SEALANT THAT IS NOT NECESSARY.
 > **Non-STE:** Remove all the excess sealant.
 
-#### excess (n) — UNAPPROVED
 
-- **Approved alternative:** TOO MUCH
 
 > **STE:** IF YOU USE TOO MUCH PAINT, THE FINISH WILL BE UNSATISFACTORY.
 > **Non-STE:** An excess of paint will give a poor finish.
 
-- **Approved alternative:** MORE THAN
 
 > **STE:** THE HYDRAULIC PRESSURE MUST NOT BE MORE THAN 200 bar.
 > **Non-STE:** The hydraulic pressure must not be in excess of 200 bar.
 
 #### excessive (adj) — UNAPPROVED
 
-- **Approved alternative:** TOO MUCH
 
 > **STE:** TOO MUCH FORCE CAN CAUSE DAMAGE TO THE SEAL.
 > **Non-STE:** Excessive force can cause damage to the seal.
 
-- **Approved alternative:** MORE THAN
 
 > **STE:** IF THE PRESSURE IS MORE THAN 1000 kPa, STOP THE TEST.
 > **Non-STE:** If the pressure is excessive, stop the test.
 
-#### excessively (adv) — UNAPPROVED
 
-- **Approved alternative:** TOO MUCH
 
 > **STE:** BE CAREFUL NOT TO TURN THE INNER RACES TOO MUCH.
 > **Non-STE:** Be careful not to excessively rotate the inner races.
 
-- **Approved alternative:** MORE THAN
 
 > **STE:** IF THE OIL LEAKAGE IS MORE THAN FIVE DROPS A MINUTE, REJECT THE UNIT.
 > **Non-STE:** If oil leaks excessively, reject the unit.
@@ -12146,7 +10598,6 @@ You can also use a different construction:
 > **STE:** DO NOT USE OXYGEN.
 > **Non-STE:** Exclude the use of oxygen.
 
-#### excluding (prep) — UNAPPROVED
 
 - **Approved alternative:** WITHOUT (prep)
 
@@ -12155,7 +10606,6 @@ You can also use a different construction:
 
 #### execute (v) — UNAPPROVED
 
-- **Approved alternative:** DO (v)
 
 > **STE:** DO THESE STEPS.
 > **Non-STE:** Execute the following operations.
@@ -12173,10 +10623,8 @@ You can also use a different construction:
 > **Non-STE:** Ensure the seals are exempt from signs of deterioration.
 # Page 241 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 241–244 of 434
 
-## Dictionary
 
 #### exercise (v) — UNAPPROVED
 
@@ -12186,9 +10634,7 @@ You can also use a different construction:
 > **Non-STE:** Exercise caution not to allow acid to contact skin.
 
 > **STE:** BE CAREFUL THAT YOU DO NOT GET ACID ON YOUR SKIN.
-> **Non-STE:** Exercise caution not to allow acid to contact skin.
 
-#### exert (v) — UNAPPROVED
 
 - **Approved alternatives:** APPLY (v), PUT (v)
 
@@ -12211,7 +10657,6 @@ You can also use a different construction:
 
 > **STE:** THE EXHAUST FROM THE APU IS DANGEROUS.
 
-#### exhaust (v) — UNAPPROVED
 
 - **Approved alternatives:** REMOVE (v), DECREASE (v), RELEASE (v)
 
@@ -12258,7 +10703,6 @@ You can also use a different construction:
 
 #### expect (v) — UNAPPROVED
 
-- **Approved alternative:** POSSIBLE (adj)
 
 > **STE:** IF IT IS POSSIBLE THAT THE TEMPERATURE WILL DECREASE TO -20 DEGREES C, REMOVE THE BATTERIES.
 > **Non-STE:** If temperature is expected to drop to -20 degrees C, remove the batteries.
@@ -12282,9 +10726,7 @@ You can also use a different construction:
 
 > **STE:** MAKE SURE THAT THE SHELF LIFE IS NOT EXPIRED.
 
-#### explain (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 
 > **STE:** THE TECHNICIAN WILL TELL THE OPERATOR THE PROCEDURE FOR SENSOR CALIBRATION.
 > **Non-STE:** The technician will explain the sensor calibration procedure to the operator.
@@ -12303,7 +10745,6 @@ You can also use a different construction:
 
 #### expose (v) — UNAPPROVED
 
-- **Approved alternative:** GET (v)
 
 > **STE:** REMOVE THE COVER ASSEMBLY TO GET ACCESS TO THE LAMP ASSEMBLY.
 > **Non-STE:** Remove cover assembly to expose lamp assembly.
@@ -12335,10 +10776,8 @@ You can also use a different construction:
 > **Non-STE:** Measure the extent of the crack.
 
 > **STE:** MEASURE THE LENGTH OF THE CRACK.
-> **Non-STE:** Measure the extent of the crack.
 
 > **STE:** MEASURE THE WIDTH OF THE CRACK.
-> **Non-STE:** Measure the extent of the crack.
 
 #### exterior (n) — UNAPPROVED
 
@@ -12359,7 +10798,6 @@ You can also use a different construction:
 
 > **STE:** THE CONTROL BOX IS INSTALLED EXTERNALLY.
 
-#### EXTINGUISH (v) — APPROVED
 
 - **Meaning:** To stop burning.
 - **Forms:** EXTINGUISHES, EXTINGUISHED, EXTINGUISHED
@@ -12378,14 +10816,12 @@ For lights or lamps, use:
 
 #### extra (adj) — UNAPPROVED
 
-- **Approved alternative:** MORE (adj)
 
 > **STE:** THIS MATERIAL GIVES MORE PROTECTION.
 > **Non-STE:** This material provides extra protection.
 
 #### extract (v) — UNAPPROVED
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE BOLT.
 > **Non-STE:** Extract the bolt.
@@ -12406,14 +10842,12 @@ For lights or lamps, use:
 > **STE:** MAKE SURE THAT YOU KNOW THE RISKS RELATED TO VERY HOT TEMPERATURES.
 > **Non-STE:** Make sure that you know the risks related to extreme hot temperatures.
 
-#### extremely (adv) — UNAPPROVED
 
 - **Approved alternative:** VERY (adv)
 
 > **STE:** IT IS VERY IMPORTANT TO OBEY THE SAFETY PRECAUTIONS.
 > **Non-STE:** It is extremely important to observe the safety precautions.
 
-#### exude (v) — UNAPPROVED
 
 - **Approved alternative:** OUT OF (prep)
 
@@ -12421,12 +10855,9 @@ For lights or lamps, use:
 > **Non-STE:** Make sure grease exudes from the joint.
 # Page 245 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 245–248 of 434
 
-## Approved Entries
 
-#### FACE (n) — APPROVED
 
 - **Meaning:** The front surface of an object. This word is a technical noun when it refers to a part of the body.
 
@@ -12454,7 +10885,6 @@ For lights or lamps, use:
 
 > **STE:** IF THE TEST RESULTS ARE UNSATISFACTORY, DO THE FAULT ISOLATION PROCEDURE.
 
-#### FALL (v) — APPROVED
 
 - **Forms:** FALLS, FELL, FALLEN
 - **Meaning:** To move down by the force of gravity.
@@ -12475,30 +10905,24 @@ For lights or lamps, use:
 
 > **STE:** A FAST MOVEMENT OF THE THROTTLE WILL CAUSE A SURGE.
 
-## Unapproved Entries
 
 #### fabricate (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE (v)
 
 > **STE:** USE COPPER TO MAKE THE CHILL BLOCK.
 > **Non-STE:** Use copper to fabricate the chill block.
 
-#### face (v) — UNAPPROVED
 
-- **Approved alternative:** POINT (v)
 
 > **STE:** WHEN YOU INSTALL THE PITOT HEAD, MAKE SURE THAT THE OPENING POINTS FORWARD.
 > **Non-STE:** When installing the pitot head, make sure that the opening is facing forward.
 
-- **Approved alternative:** TURN (v)
 
 > **STE:** BEFORE YOU PUSH THE VALVE STEM DOWN, TURN YOUR FACE AWAY FROM THE DRAIN VALVE.
 > **Non-STE:** Face away from the drain valve when pushing the valve stem down.
 
 #### facilitate (v) — UNAPPROVED
 
-- **Approved alternative:** HELP (v)
 
 > **STE:** IDENTIFY THE COMPONENT WITH A CODE TO HELP YOU TO CORRECTLY INSTALL IT AGAIN.
 > **Non-STE:** Mark the component with a code that will facilitate its correct reinstallation.
@@ -12508,7 +10932,6 @@ For lights or lamps, use:
 > **STE:** THIS MAKES FAULT ISOLATION EASIER.
 > **Non-STE:** This facilitates fault isolation.
 
-#### facility (n) — UNAPPROVED
 
 - **Approved alternative:** Be accurate. Use the name of the facility as a technical noun.
 
@@ -12541,18 +10964,14 @@ For lights or lamps, use:
 > **STE:** REPLACE THE UNSERVICEABLE VALVE.
 > **Non-STE:** Replace the failed valve.
 
-#### failure (n) — UNAPPROVED
 
-- **Approved alternative:** IF … NOT
 
-> **STE:** IF YOU DO NOT OBEY THESE INSTRUCTIONS, THERE IS A RISK OF INJURY.
 > **Non-STE:** Failure to comply with these instructions, will result in a risk of injury.
 
 - **Note:** This word when it means a performance error or loss of serviceability is a technical noun.
 
 > **See:** Dictionary entry for FAILURE (TN).
 
-> **STE:** CONTAMINATION CAN CAUSE A FAILURE OF THE PUMP.
 
 #### faint (adj) — UNAPPROVED
 
@@ -12561,7 +10980,6 @@ For lights or lamps, use:
 > **STE:** IF THE LIGHT IS TOO DIM, REPLACE THE BATTERY.
 > **Non-STE:** If the light is faint, replace the battery.
 
-- **Approved alternative:** INTENSITY (n)
 
 > **STE:** TURN THE KNOB COUNTERCLOCKWISE TO DECREASE THE INTENSITY OF THE LIGHT.
 > **Non-STE:** Turn the knob anticlockwise to make the light fainter.
@@ -12572,7 +10990,6 @@ For lights or lamps, use:
 
 #### fall (n) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
 
 > **STE:** WHEN THE PRESSURE DECREASES, THE INDICATOR SHOWS THAT THERE IS A LEAK.
 > **Non-STE:** When there is a fall in pressure, the indicator shows a leak.
@@ -12605,21 +11022,18 @@ For lights or lamps, use:
 
 #### fashion (n) — UNAPPROVED
 
-- **Approved alternative:** PROCEDURE (n)
 
 > **STE:** USE THIS PROCEDURE TO DO THE TASK.
 > **Non-STE:** Carry out the task in this fashion.
 
 #### fast (adv) — UNAPPROVED
 
-- **Approved alternative:** QUICKLY (adv)
 
 > **STE:** DO NOT LET THE CABIN ALTITUDE CHANGE TOO QUICKLY.
 > **Non-STE:** Do not let the cabin altitude change too fast.
 
 #### fasten (v) — UNAPPROVED
 
-- **Approved alternative:** ATTACH (v)
 
 > **STE:** ATTACH THE TWO STRINGERS TOGETHER WITH RIVETS.
 > **Non-STE:** Fasten the two stringers together with rivets.
@@ -12631,24 +11045,20 @@ For lights or lamps, use:
 
 #### fatal (adj) — UNAPPROVED
 
-- **Approved alternative:** KILL (v)
 
 > **STE:** HIGH VOLTAGE IN THE ELECTRONIC SYSTEM CAN KILL YOU.
 > **Non-STE:** High voltage in the electronic system can be fatal.
 
 #### faulty (adj) — UNAPPROVED
 
-- **Approved alternative:** DEFECTIVE (adj)
 
 > **STE:** REPLACE ALL DEFECTIVE ELECTRONIC COMPONENTS.
 > **Non-STE:** All faulty electronic components must be replaced.
 
-- **Approved alternative:** INCORRECT (adj)
 
 > **STE:** AN INCORRECT ADJUSTMENT OF THE PRESSURE REGULATOR CAN BE DANGEROUS.
 > **Non-STE:** Faulty adjustment of the pressure regulator can be dangerous.
 
-- **Approved alternative:** UNSERVICEABLE (adj)
 
 > **STE:** REPLACE THE UNSERVICEABLE CONTROL UNIT.
 > **Non-STE:** Replace the faulty control unit.
@@ -12658,21 +11068,16 @@ For lights or lamps, use:
 > **STE:** UNSATISFACTORY OPERATION OF THE SYSTEM CAN CAUSE DAMAGE.
 > **Non-STE:** Faulty operation of the system can cause damage.
 
-#### fear (v) — UNAPPROVED
 
-- **Approved alternative:** THINK (v)
 
 > **STE:** IF YOU THINK THAT THERE IS A FAULT, DO THE FULL TEST PROCEDURE OF THE UNIT.
 > **Non-STE:** Fully test the unit if you fear that there is a fault.
 
-- **Approved alternative:** MAKE SURE (v)
 
 > **STE:** DO A TEST OF THE UNIT TO MAKE SURE THAT THERE IS NO PROBLEM WITH ITS OPERATION.
 > **Non-STE:** Test the unit if you fear that there is a problem with its operation.
 
-#### feasible (adj) — UNAPPROVED
 
-- **Approved alternative:** POSSIBLE (adj)
 
 > **STE:** IF IT IS NOT POSSIBLE TO USE THE AUTOMATIC CONTROL, DO THE PROCEDURE MANUALLY.
 > **Non-STE:** If it is not feasible to use the automatic control, do the manual procedure.
@@ -12683,10 +11088,8 @@ For lights or lamps, use:
 > **Non-STE:** If it is not feasible to remove the bolt, you must cut it.
 # Page 249 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 249–252 of 434
 
-## Approved Words
 
 #### FEATHER (v) — APPROVED
 
@@ -12808,23 +11211,19 @@ For lights or lamps, use:
 > **STE:** SUPPLY COOL AIR TO THE CABIN.
 > **Non-STE:** Feed cool air to the cabin.
 
-## Unapproved Words
 
 #### feature (v) — UNAPPROVED
 
-- **Approved alternative:** HAVE (v)
 
 > **STE:** THESE NUTS HAVE A FLAT FLANGE.
 > **Non-STE:** These nuts feature a flat flange.
 
 #### feed (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 
 > **STE:** PUT THE WIRE THROUGH THE CONDUIT.
 > **Non-STE:** Feed the wire through the conduit.
 
-#### few (adj) — UNAPPROVED
 
 - **Approved alternative:** SMALL NUMBER
 
@@ -12835,7 +11234,6 @@ For lights or lamps, use:
 
 #### few (a few) — UNAPPROVED
 
-- **Approved alternative:** SOME (adj)
 
 > **STE:** LET THE ENGINE OPERATE FOR SOME MINUTES.
 > **Non-STE:** Let the engine run for a few minutes.
@@ -12856,14 +11254,12 @@ For lights or lamps, use:
 
 #### filing (n) — UNAPPROVED
 
-- **Approved alternative:** PARTICLE (n)
 
 > **STE:** REMOVE ALL THE METAL PARTICLES.
 > **Non-STE:** Remove all the metal filings.
 
 #### film (n) — UNAPPROVED
 
-- **Approved alternative:** LAYER (n)
 
 > **STE:** APPLY A LAYER OF COMPOUND ON THE SURFACE OF THE DISC.
 > **Non-STE:** Spread a film of compound on the surface of the disc.
@@ -12889,7 +11285,6 @@ For lights or lamps, use:
 > **STE:** TELL THE QUALITY DEPARTMENT ABOUT THE RESULTS OF THE ANALYSIS.
 > **Non-STE:** Report the findings of the analysis to the quality department.
 
-#### fine (adj) — UNAPPROVED
 
 - **Approved alternative:** SMALL (adj)
 
@@ -12905,7 +11300,6 @@ For lights or lamps, use:
 
 #### finish (v) — UNAPPROVED
 
-- **Approved alternative:** COMPLETE (v)
 
 > **STE:** COMPLETE THE TEST.
 > **Non-STE:** Finish the test.
@@ -12917,31 +11311,25 @@ For lights or lamps, use:
 > **STE:** HOLD THE CYLINDER TIGHTLY.
 > **Non-STE:** Hold the cylinder firmly.
 
-#### fit (v) — UNAPPROVED
 
-- **Approved alternative:** INSTALL (v)
 
 > **STE:** INSTALL THE DUCT.
 > **Non-STE:** Fit the duct.
 
-- **Approved alternative:** ATTACH (v)
 
 > **STE:** ATTACH THE PANEL TO THE STRUCTURE WITH THE BOLTS.
 > **Non-STE:** Fit the panel to the structure with the bolts.
 
-- **Approved alternative:** CORRECT (adj)
 
 > **STE:** MAKE SURE THAT THE REPAIR PLUG HAS THE CORRECT DIMENSIONS.
 > **Non-STE:** Ensure the repair plug fits.
 
 #### fix (v) — UNAPPROVED
 
-- **Approved alternative:** ATTACH (v)
 
 > **STE:** ATTACH THE TRIM WITH DOUBLE-SIDED ADHESIVE TAPE.
 > **Non-STE:** Fix the trim with double-sided adhesive tape.
 
-- **Approved alternative:** SET (v)
 
 > **STE:** SET THE LENGTH OF THE CONTROL ROD AS NECESSARY.
 > **Non-STE:** Fix the length of the control rod as required.
@@ -12951,7 +11339,6 @@ For lights or lamps, use:
 > **STE:** REPAIR ALL LOOSE OR DAMAGED UPHOLSTERY.
 > **Non-STE:** Fix any loose or torn upholstery.
 
-- **Approved alternative:** INSTALL (v)
 
 > **STE:** INSTALL THE RETAINER BOLTS ON THE RETAINER.
 > **Non-STE:** Fix the retainer bolts to the retainer.
@@ -12967,24 +11354,18 @@ For lights or lamps, use:
 
 #### flatten (v) — UNAPPROVED
 
-- **Approved alternative:** FLAT (adj)
 
-> **See:** Dictionary entry for FLAT (adj).
 
 > **STE:** MAKE SURE THAT YOU DO NOT CAUSE THE TUBES TO BECOME FLAT.
 > **Non-STE:** Make sure that you do not flatten the tubes.
 
-#### flaw (n) — UNAPPROVED
 
-- **Approved alternative:** DAMAGE (n)
 
 > **STE:** MAKE SURE THAT THERE IS NO DAMAGE TO THE SURFACE FINISH.
 > **Non-STE:** Make sure that there are no flaws in the surface finish.
 
-- **Approved alternative:** DEFECTIVE (adj)
 
 > **STE:** MAKE SURE THAT THE SURFACE FINISH IS NOT DEFECTIVE.
-> **Non-STE:** Make sure that there are no flaws in the surface finish.
 
 - **Note:** If it is possible, be accurate.
 
@@ -13003,20 +11384,16 @@ For lights or lamps, use:
 > **Non-STE:** Do not flood the area with solvent.
 # Page 253 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 253–256 of 434
 
-## Dictionary
 
 ### F
 
-#### FLOW (n) — APPROVED
 
 - **Meaning:** A continuous movement of fluid.
 
 > **STE:** AN ARROW ON THE FUEL VALVE SHOWS THE DIRECTION OF THE FLOW.
 
-#### FLOW (v) — APPROVED
 
 - **Forms:** FLOWS, FLOWED, FLOWED
 - **Meaning:** To move as a fluid moves.
@@ -13027,9 +11404,7 @@ For lights or lamps, use:
 
 #### fluctuate (v) — UNAPPROVED
 
-- **Approved alternative:** CONSTANT (adj)
 
-> **STE:** MAKE SURE THAT THE PRESSURE STAYS CONSTANT.
 > **Non-STE:** Make sure that the pressure does not fluctuate.
 
 #### FLUID (n) — APPROVED
@@ -13069,7 +11444,6 @@ For lights or lamps, use:
 > **STE:** FOLD THE MATERIAL.
 > **Non-STE:** Make a fold in the material.
 
-#### FOLD (v) — APPROVED
 
 - **Forms:** FOLDS, FOLDED, FOLDED
 - **Meaning:** To double over or to cause to double over on itself.
@@ -13093,14 +11467,12 @@ For lights or lamps, use:
 
 - **Note:** For other meanings, use:
 
-> **See:** Dictionary entry for OBEY (v).
 
 > **STE:** WHEN YOU USE THIS MATERIAL, OBEY THE MANUFACTURER'S INSTRUCTIONS.
 > **Non-STE:** When you use this material, follow the manufacturer's instructions.
 
 #### following (adj) — UNAPPROVED
 
-- **Approved alternative:** THESE (adj)
 
 > **STE:** MAKE SURE THAT THESE CIRCUIT BREAKERS ARE CLOSED.
 > **Non-STE:** Make sure that the following circuit breakers are closed.
@@ -13117,7 +11489,6 @@ For lights or lamps, use:
 
 > **STE:** WHEN YOU REMOVE THE STUD, USE APPLICABLE TOOLS. FOR EXAMPLE, USE A PLASTIC MALLET AND A PUNCH.
 
-#### forbidden (adj) — UNAPPROVED
 
 - **Approved alternative:** DO NOT
 
@@ -13129,9 +11500,7 @@ For lights or lamps, use:
 > **STE:** SHARP OBJECTS ARE NOT PERMITTED IN THIS AREA.
 > **Non-STE:** Sharp objects are forbidden in this area.
 
-#### force (v) — UNAPPROVED
 
-- **Approved alternative:** PUSH (v)
 
 > **STE:** PUSH THE CLIP OUT TO REMOVE IT.
 > **Non-STE:** Clip may be removed by forcing it out.
@@ -13141,21 +11510,17 @@ For lights or lamps, use:
 > **STE:** DO NOT USE FORCE TO PUSH THE COVER INTO POSITION.
 > **Non-STE:** Do not attempt to force the cover into position.
 
-#### forecast (v) — UNAPPROVED
 
-- **Approved alternative:** POSSIBLE (adj)
 
 > **STE:** IF BAD WEATHER IS POSSIBLE, MOOR THE VESSEL SAFELY.
 > **Non-STE:** If unfavorable weather conditions are forecast, moor the vessel securely.
 
 #### foreign (adj) — UNAPPROVED
 
-- **Approved alternative:** UNWANTED (adj)
 
 > **STE:** THIS COVER WILL KEEP DIRT, PARTICLES, OR OTHER UNWANTED MATERIAL OUT OF THE SYSTEM.
 > **Non-STE:** This cover will prevent dirt, particles, or other foreign material from entering the system.
 
-#### foremost (adj) — UNAPPROVED
 
 - **Approved alternative:** FRONT (n)
 
@@ -13173,7 +11538,6 @@ For lights or lamps, use:
 
 #### form (v) — UNAPPROVED
 
-- **Approved alternative:** BE (v)
 
 > **STE:** IF THERE IS CONTAMINATION IN THE FUEL TANKS, REMOVE IT IMMEDIATELY.
 > **Non-STE:** If contamination has formed in the fuel tanks, remove it immediately.
@@ -13191,7 +11555,6 @@ For lights or lamps, use:
 
 > **STE:** THE CONTROL UNIT IS INSTALLED IN THE FORWARD PART OF THE CARGO COMPARTMENT.
 
-#### FORWARD (adv) — APPROVED
 
 - **Meaning:** In the direction of the front.
 
@@ -13210,12 +11573,10 @@ For lights or lamps, use:
 > **STE:** MAKE SURE THAT THE RODS CANNOT CATCH ON THE FLAPS.
 > **Non-STE:** Make sure that the rods cannot foul the flaps.
 
-- **Approved alternative:** HIT (v)
 
 > **STE:** IF YOU INSTALL THE UPPER DRAG STRUT INCORRECTLY, IT WILL HIT THE LOWER DRAG STRUT DURING RETRACTION.
 > **Non-STE:** Do not install the upper drag strut so that it fouls the gear retraction.
 
-- **Approved alternative:** TOUCH (v)
 
 > **STE:** IF THE BRACKET TOUCHES THE CAM, ADD A SHIM WASHER.
 > **Non-STE:** Should the bracket foul the cam, add a shim washer.
@@ -13237,19 +11598,16 @@ For lights or lamps, use:
 > **STE:** REMOVE ALL CLOGGED FILTER ELEMENTS.
 > **Non-STE:** Remove all fouled filter elements.
 
-- **Approved alternative:** CATCH (v)
 
 > **STE:** MAKE SURE THAT THE CABLES DO NOT CATCH ON THE LEVERS.
 > **Non-STE:** Make sure that the levers are not fouled by the cables.
 
 #### fragile (adj) — UNAPPROVED
 
-- **Approved alternative:** EASILY DAMAGED
 
 > **STE:** THE WATER QUANTITY TRANSMITTER IS EASILY DAMAGED.
 > **Non-STE:** The water quantity transmitter is fragile.
 
-#### FREE (adj) — APPROVED
 
 - **Meaning:** That can move easily.
 
@@ -13262,29 +11620,22 @@ For lights or lamps, use:
 
 #### free from (adj) — UNAPPROVED
 
-- **Approved alternative:** NO (adj)
 
-> **STE:** MAKE SURE THAT THERE IS NO DUST ON THE SURFACE.
 > **Non-STE:** Make sure that the surface is free from dust.
 # Page 257 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 257–260 of 434
 
-## Dictionary
 
-### F
 
 #### free (v) — UNAPPROVED
 
-- **Approved alternative:** RELEASE (v)
 
 > **STE:** REMOVE THE SLEEVE TO RELEASE THE SLIDING TUBE.
 > **Non-STE:** Remove the sleeve to free the sliding tube.
 
 #### FREELY (adv) — APPROVED
 
-- **Meaning:** That can move easily.
 
 > **STE:** OXYGEN MUST FLOW FREELY FROM THE END OF THE HOSE.
 
@@ -13309,7 +11660,6 @@ For lights or lamps, use:
 
 #### fresh (adj) — UNAPPROVED
 
-- **Approved alternative:** CLEAN (adj)
 
 > **STE:** FLUSH THE TUBES WITH CLEAN WATER.
 > **Non-STE:** Flush the tubes with fresh water.
@@ -13339,7 +11689,6 @@ For lights or lamps, use:
 
 > **STE:** CLEAN THE FRONT OF THE MOUNTING FLANGE WITH SOLVENT.
 
-#### fuel (v) — UNAPPROVED
 
 - **Approved alternative:** REFUEL (v)
 
@@ -13348,7 +11697,6 @@ For lights or lamps, use:
 
 #### fulfill (v) — UNAPPROVED
 
-- **Approved alternative:** OBEY (v)
 
 > **STE:** OBEY THE INSTRUCTIONS IN THE TEST PROCEDURE.
 > **Non-STE:** Fulfill the instructions in the test procedure.
@@ -13365,11 +11713,9 @@ For lights or lamps, use:
 
 #### FULLY (adv) — APPROVED
 
-- **Meaning:** At or related to maximum travel, length, quantity, or detail.
 
 > **STE:** TURN THE CONTROL TO THE FULLY CLOSED POSITION.
 
-#### FUNCTION (n) — APPROVED
 
 - **Meaning:** Action or activity that a person or thing does.
 
@@ -13377,33 +11723,26 @@ For lights or lamps, use:
 
 #### function (v) — UNAPPROVED
 
-- **Approved alternative:** OPERATE (v)
 
 > **STE:** THE ELEVATOR CONTROLS MUST OPERATE SMOOTHLY.
 > **Non-STE:** The elevator controls must function smoothly.
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** THE SYSTEM CONTROLS MUST MOVE FREELY.
 > **Non-STE:** The system controls must function freely.
 
-#### fundamental (adj) — UNAPPROVED
 
 - **Approved alternative:** IMPORTANT (adj)
 
 > **STE:** DURING THIS PROCEDURE, IT IS IMPORTANT TO KEEP ALL PARTS CLEAN.
 > **Non-STE:** Cleanliness of all parts is fundamental in this procedure.
 
-#### further (adj) — UNAPPROVED
 
-- **Approved alternative:** MORE (adj)
 
 > **STE:** IF YOU DO NOT GET THE CORRECT DIMENSION, ADD MORE GASKETS.
 > **Non-STE:** If you do not get the correct dimension, add further gaskets.
 
-#### further (adv) — UNAPPROVED
 
-- **Approved alternative:** MORE (adv)
 
 > **STE:** IF IT IS NECESSARY TO DECREASE THE CABLE TENSION MORE, USE THE TURNBUCKLE.
 > **Non-STE:** Cable tension can be further reduced if necessary by means of the turnbuckle.
@@ -13412,14 +11751,11 @@ For lights or lamps, use:
 
 #### gain (n) — UNAPPROVED
 
-- **Approved alternative:** INCREASE (v)
 
 > **STE:** AFTER THE LAST MODIFICATION, THE SYSTEM'S EFFICIENCY INCREASED.
 > **Non-STE:** The system's efficiency showed a gain after the last modification.
 
-#### gain (v) — UNAPPROVED
 
-- **Approved alternative:** GET (v)
 
 > **STE:** GET ACCESS TO THE CONNECTORS AT THE REAR OF THE INSTRUMENT.
 > **Non-STE:** Gain access to the connectors at the back of the instrument.
@@ -13431,9 +11767,7 @@ For lights or lamps, use:
 > **STE:** THERE MUST BE NO SCRATCHES OR GALLING ON THE SURFACE.
 > **Non-STE:** The surface must not be scratched or galled.
 
-#### gap (n) — UNAPPROVED
 
-- **Approved alternative:** CLEARANCE (n)
 
 > **STE:** MEASURE THE CLEARANCE BETWEEN THE IMPELLER AND THE BODY.
 > **Non-STE:** Measure the gap between the impeller and the body.
@@ -13443,26 +11777,21 @@ For lights or lamps, use:
 > **STE:** MEASURE THE DISTANCE BETWEEN THE ROTARY ACTUATOR AND THE STOP BOLT.
 > **Non-STE:** Measure the gap between the rotary actuator and the stop bolt.
 
-- **Approved alternative:** SPACE (n)
 
 > **STE:** PUT THE BLADE OF A SMALL SCREWDRIVER INTO THE SPACE BETWEEN THE COVER AND THE HOUSING.
 > **Non-STE:** Put the blade of a small screwdriver into the gap between the cover and the housing.
 
-#### garbled (adj) — UNAPPROVED
 
-- **Approved alternative:** CLEAR (adj)
 
 > **STE:** IF THE RADIO SIGNAL IS NOT CLEAR, ADJUST THE FREQUENCY.
 > **Non-STE:** If the radio signal is garbled, adjust the frequency.
 
-- **Approved alternative:** CLEARLY (adv)
 
 > **STE:** MAKE SURE THAT YOU TRANSMIT THE ANNOUNCEMENT CLEARLY.
 > **Non-STE:** Make sure that the announcement is not garbled.
 
 #### garner (v) — UNAPPROVED
 
-- **Approved alternative:** COLLECT (v)
 
 > **STE:** THESE COMPUTERS COLLECT DATA FROM THE VHF SYSTEM.
 > **Non-STE:** These computers garner data from the VHF system.
@@ -13487,14 +11816,12 @@ For lights or lamps, use:
 
 #### gash (v) — UNAPPROVED
 
-- **Approved alternative:** DAMAGED (adj)
 
 > **STE:** IF THE THERMAL BLANKET IS DAMAGED, DO REPAIR No. 9.
 > **Non-STE:** If the thermal blanket is gashed, do repair No. 9.
 
 #### gather (v) — UNAPPROVED
 
-- **Approved alternative:** COLLECT (v)
 
 > **STE:** ALL FLUIDS COLLECT AT THE LOWEST POINT IN THE COMPARTMENT.
 > **Non-STE:** All fluids gather at the lowest point in the compartment.
@@ -13502,9 +11829,7 @@ For lights or lamps, use:
 > **STE:** THREE COMPUTERS COLLECT DATA AND PARAMETERS FROM THE SYSTEMS AND PUT THEM TOGETHER ON THE DATA LINK TO THE DISPLAY UNIT.
 > **Non-STE:** Three computers gather data and parameters from the systems and put them together on the data link to the display unit.
 
-#### gauge (v) — UNAPPROVED
 
-- **Approved alternative:** MEASURE (v)
 
 > **STE:** MEASURE THE DISTANCE BETWEEN THE TOP EDGE AND THE BOTTOM SURFACE.
 > **Non-STE:** Gauge the width of the gap between the top edge and the bottom surface.
@@ -13516,14 +11841,10 @@ For lights or lamps, use:
 > **STE:** THIS SECTION GIVES GENERAL MAINTENANCE PROCEDURES.
 # Page 261 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 261–264 of 434
 
-## Dictionary
 
-## Approved Entries
 
-#### GET (v) — APPROVED
 
 - **Forms:** GETS, GOT (No other verb forms.)
 - **Meaning:** To obtain, to come into the state of having.
@@ -13532,10 +11853,8 @@ For lights or lamps, use:
 
 - **Note:** Do not use this word to mean BECOME, GO, DECREASE, INCREASE. Refer to rule 9.2 and the entries from "get" until "get to" that follow.
 
-#### GIVE (v) — APPROVED
 
 - **Forms:** GIVES, GAVE, GIVEN
-- **Meaning:** To provide.
 
 > **STE:** THIS SECTION GIVES THE CLEANING PROCEDURES FOR THE DISASSEMBLED PARTS.
 
@@ -13546,14 +11865,12 @@ For lights or lamps, use:
 
 > **STE:** APPLY THE PATCH WITH THE MATT SIDE AGAINST THE GLOSSY SURFACE.
 
-#### GO (v) — APPROVED
 
 - **Forms:** GOES, WENT (No other verb forms.)
 - **Meaning:** To move to or from something.
 
 > **STE:** MAKE SURE THAT THE POINTER GOES OUT OF VIEW.
 
-#### GO OFF (v) — APPROVED
 
 - **Forms:** GOES OFF, WENT OFF (No other verb forms.)
 - **Meaning:** To become dark when an internal power source is de-energized.
@@ -13565,18 +11882,14 @@ For lights or lamps, use:
 - **Forms:** BETTER, BEST
 - **Meaning:** That is satisfactory.
 
-> **STE:** THIS MATERIAL GIVES GOOD PROTECTION FROM CORROSION.
 
-## Unapproved Entries
 
-#### generally (adv) — UNAPPROVED
 
 - **Approved alternative:** USUALLY (adv)
 
 > **STE:** YOU USUALLY REPLACE MEMORY MODULES DURING MAINTENANCE.
 > **Non-STE:** Memory modules are generally replaced during maintenance.
 
-#### generate (v) — UNAPPROVED
 
 - **Approved alternatives:** BE (v), GIVE (v), SUPPLY (v)
 
@@ -13589,7 +11902,6 @@ For lights or lamps, use:
 > **STE:** THE BATTERIES SUPPLY 28 V DC.
 > **Non-STE:** The batteries generate 28 V DC.
 
-#### generous (adj) — UNAPPROVED
 
 - **Approved alternatives:** LARGE (adj), THICK (adj)
 
@@ -13599,14 +11911,11 @@ For lights or lamps, use:
 > **STE:** APPLY A THICK LAYER OF GREASE.
 > **Non-STE:** Apply a generous amount of grease. If it is possible, be accurate.
 
-#### generously (adv) — UNAPPROVED
 
-- **Approved alternatives:** LARGE (adj), THICK (adj)
 
 > **STE:** APPLY A LARGE QUANTITY OF SEALANT TO THE REPAIR PATCH.
 > **Non-STE:** Apply sealant generously to the repair patch.
 
-> **STE:** APPLY A THICK LAYER OF GREASE.
 > **Non-STE:** Apply grease generously. If it is possible, be accurate.
 
 #### gentle (adj) — UNAPPROVED
@@ -13619,9 +11928,7 @@ For lights or lamps, use:
 > **STE:** TAP THE SURFACE LIGHTLY.
 > **Non-STE:** Give the surface a gentle tap.
 
-#### gently (adv) — UNAPPROVED
 
-- **Approved alternatives:** CAREFULLY (adv), LIGHTLY (adv)
 
 > **STE:** CAREFULLY PULL THE ELECTRICAL WIRE OUT FROM THE RUBBER SEAL.
 > **Non-STE:** Gently pull out the electrical wire from the rubber seal.
@@ -13631,7 +11938,6 @@ For lights or lamps, use:
 
 #### genuine (adj) — UNAPPROVED
 
-- **Approved alternative:** CORRECT (adj)
 
 > **STE:** MAKE SURE THAT THE INDICATION ON THE GAUGE IS CORRECT.
 > **Non-STE:** Make sure that the reading on the gauge is genuine.
@@ -13645,14 +11951,12 @@ For lights or lamps, use:
 > **STE:** DO NOT LET THE HEATER BECOME TOO HOT.
 > **Non-STE:** Do not let the heater get too hot.
 
-#### get away (v) — UNAPPROVED
 
 - **Approved alternative:** GO AWAY
 
 > **STE:** BEFORE THE ENGINE STARTS, GO AWAY FROM THE EXHAUST AREA.
 > **Non-STE:** Get away from the exhaust area before the engine starts.
 
-#### get down (v) — UNAPPROVED
 
 - **Approved alternatives:** DECREASE (v), GO DOWN
 
@@ -13662,21 +11966,18 @@ For lights or lamps, use:
 > **STE:** BE CAREFUL WHEN YOU GO DOWN THE LADDER FROM THE COCKPIT TO THE AVIONICS COMPARTMENT.
 > **Non-STE:** Be careful when you get down the ladder from the cockpit into the avionics compartment.
 
-#### get into (v) — UNAPPROVED
 
 - **Approved alternative:** GO INTO
 
 > **STE:** INSTALL CAPS ON THE RECEPTACLES TO MAKE SURE THAT UNWANTED MATERIAL DOES NOT GO INTO THE RECEPTACLES.
 > **Non-STE:** Install caps to make sure that foreign objects do not get into the receptacles.
 
-#### get off (v) — UNAPPROVED
 
 - **Approved alternative:** MOVE OFF
 
 > **STE:** BEFORE YOU MOVE THE AILERONS, TELL ALL PERSONS TO MOVE OFF THE WINGS.
 > **Non-STE:** Before you move the ailerons, tell all persons to get off the wings.
 
-#### get to (v) — UNAPPROVED
 
 - **Approved alternatives:** BE (v), GO (v), INCREASE (v)
 
@@ -13707,18 +12008,15 @@ For lights or lamps, use:
 > **Non-STE:** If there is a glitch in the system, the screen shows: NO GO.
 
 > **STE:** IF THE SYSTEM IS UNSERVICEABLE, THE SCREEN SHOWS: "NO GO."
-> **Non-STE:** If there is a glitch in the system, the screen shows: NO GO.
 
 #### gloss (n) — UNAPPROVED
 
-- **Approved alternative:** SHINY (adj)
 
 > **STE:** POLISH THE SURFACE UNTIL IT IS VERY SHINY.
 > **Non-STE:** Polish the surface to a high gloss.
 
 #### glow (v) — UNAPPROVED
 
-- **Approved alternative:** BE (v)
 
 > **STE:** MAKE SURE THAT THE INDICATOR LIGHT IS ON.
 > **Non-STE:** Make sure that the indicator light glows.
@@ -13761,12 +12059,9 @@ For lights or lamps, use:
 > **Non-STE:** Grab the handle.
 # Page 265 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 265–268 of 434
 
-## Dictionary
 
-#### gradient (n) — UNAPPROVED
 
 - **Approved alternative:** SLOPE (n)
 
@@ -13797,16 +12092,13 @@ For lights or lamps, use:
 
 #### grasp (v) — UNAPPROVED
 
-- **Approved alternative:** HOLD (v)
 
 > **See:** Dictionary entry for HOLD (v).
 
-> **STE:** HOLD THE HANDLE.
 > **Non-STE:** Grasp the handle.
 
 #### grave (adj) — UNAPPROVED
 
-- **Approved alternative:** DANGEROUS (adj)
 
 > **STE:** HYDRAULIC FLUID IS DANGEROUS FOR YOUR SKIN.
 > **Non-STE:** Hydraulic fluid can cause grave skin problems.
@@ -13818,24 +12110,19 @@ For lights or lamps, use:
 > **STE:** BEFORE YOU INSTALL THE O-RING, LUBRICATE IT WITH GREASE.
 > **Non-STE:** Grease the O-ring before installation.
 
-- **Approved alternative:** GREASE (TN)
 
 > **STE:** APPLY GREASE TO THE FASTENERS.
 > **Non-STE:** Grease the fasteners.
 
-#### great (adj) — UNAPPROVED
 
-- **Approved alternative:** LARGE (adj)
 
 > **STE:** AN INDICATION OF A LARGE QUANTITY OF FUEL SHOWS AN INCORRECT ADJUSTMENT OF THE FLOAT SWITCH.
 > **Non-STE:** A great amount of fuel indicates incorrect setting of the float switch.
 
-- **Approved alternative:** MORE THAN
 
 > **STE:** IF THE PRESSURE IS MORE THAN 200 psi, CLOSE THE VALVE.
 > **Non-STE:** If the pressure is greater than 200 psi, close the valve.
 
-- **Approved alternative:** VERY (adv)
 
 > **STE:** BE VERY CAREFUL WHEN YOU RELEASE THE PRESSURE.
 > **Non-STE:** Take the greatest care when you release the pressure.
@@ -13849,18 +12136,14 @@ For lights or lamps, use:
 
 #### grip (n) — UNAPPROVED
 
-- **Approved alternative:** HOLD (v)
 
-> **See:** Dictionary entry for HOLD (v).
 
 > **STE:** HOLD THE JACK BODY TIGHTLY WHILE YOU TURN IT.
 > **Non-STE:** Make sure you have a tight grip of the jack body while turning it.
 
 #### grip (v) — UNAPPROVED
 
-- **Approved alternative:** HOLD (v)
 
-> **See:** Dictionary entry for HOLD (v).
 
 > **STE:** HOLD THE HANDLE LIGHTLY WITH ONE HAND.
 > **Non-STE:** Grip the handle lightly with one hand.
@@ -13892,7 +12175,6 @@ For lights or lamps, use:
 
 #### grow (v) — UNAPPROVED
 
-- **Approved alternative:** BECOME (v)
 
 > **STE:** IF THE BATTERY BECOMES TOO HOT, DISCONNECT IT.
 > **Non-STE:** If the battery grows too hot, disconnect it.
@@ -13906,17 +12188,14 @@ For lights or lamps, use:
 
 #### guide (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 
 > **STE:** PUT THE CABLE THROUGH THE GROMMET.
 > **Non-STE:** Guide the cable through the grommet.
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** WHILE YOU LOWER THE PUMP, MOVE IT ONTO THE MOUNTING BRACKET.
 > **Non-STE:** As you lower the pump, guide it onto the mounting bracket.
 
-#### gush (v) — UNAPPROVED
 
 - **Approved alternative:** FLOW (n)
 
@@ -13927,7 +12206,6 @@ For lights or lamps, use:
 
 #### halt (v) — UNAPPROVED
 
-- **Approved alternative:** STOP (v)
 
 > **STE:** IF YOU HEAR AN UNUSUAL NOISE, STOP THE PROCEDURE.
 > **Non-STE:** If you hear an unusual noise, halt the procedure.
@@ -13941,29 +12219,23 @@ For lights or lamps, use:
 
 #### hamper (v) — UNAPPROVED
 
-- **Approved alternative:** PREVENT (v)
 
 > **STE:** STRONG WINDS CAN PREVENT THE CORRECT DEPLOYMENT OF THE ESCAPE SLIDES.
 > **Non-STE:** Strong winds can hamper the correct deployment of the escape slides.
 
-#### handle (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** MOVE THE ACTUATOR WITH A HOIST.
 > **Non-STE:** Handle the actuator with a hoist.
 
-- **Approved alternative:** TOUCH (v)
 
 > **STE:** DO NOT TOUCH THE PRINTED CIRCUIT CARD.
 > **Non-STE:** Do not handle the printed circuit card.
 
-- **Approved alternative:** USE (v)
 
 > **STE:** BE CAREFUL WHEN YOU USE SOLVENTS.
 > **Non-STE:** Be careful when you handle solvents.
 
-- **Approved alternative:** CAREFUL (adj)
 
 > **STE:** BE CAREFUL WITH INSTRUMENTS.
 > **Non-STE:** Handle instruments with care.
@@ -13979,7 +12251,6 @@ For lights or lamps, use:
 
 #### hand-tighten (v) — UNAPPROVED
 
-- **Approved alternative:** TIGHTEN … WITH YOUR HAND
 
 > **STE:** TIGHTEN THE SWIVEL NUT WITH YOUR HAND.
 > **Non-STE:** Hand-tighten the swivel nut.
@@ -14039,47 +12310,37 @@ For lights or lamps, use:
 
 #### harmful (adj) — UNAPPROVED
 
-- **Approved alternative:** DANGEROUS (adj)
 
 > **STE:** SOLVENT FUMES ARE DANGEROUS.
 > **Non-STE:** Solvent fumes are harmful to your health.
 
-- **Approved alternative:** INJURY (n)
 
 > **STE:** THIS ADHESIVE COMPOUND CAN CAUSE INJURY TO YOUR SKIN.
 > **Non-STE:** This adhesive compound is harmful to your skin.
 
 #### harmonize (v) — UNAPPROVED
 
-- **Approved alternative:** AGREE (v)
 
 > **STE:** MAKE THE POSITIONS OF THE VALVES AGREE.
 > **Non-STE:** Harmonize the positions of the valves.
 
-- **Approved alternative:** ALIGN (v)
 
 > **STE:** ALIGN THE CENTERLINE ON THE FLUX VALVE.
 > **Non-STE:** Harmonize the centerline on the flux valve.
 
-#### haul (v) — UNAPPROVED
 
 - **Approved alternative:** TOW (v)
 
 > **STE:** BEFORE YOU START THE ENGINE, TOW THE HYDRAULIC CART AWAY FROM THE AIRCRAFT.
 > **Non-STE:** Haul the hydraulic cart away from the aircraft before you start the engine.
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** BEFORE YOU START THE ENGINE, MOVE THE HYDRAULIC CART AWAY FROM THE AIRCRAFT.
-> **Non-STE:** Haul the hydraulic cart away from the aircraft before you start the engine.
 # Page 269 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 269–272 of 434
 
-## Approved Entries
 
-#### HAVE (v) — APPROVED
 
 - **Meaning:** To possess as a part or quality.
 - **Forms:** HAS, HAD (No other verb forms.)
@@ -14092,7 +12353,6 @@ For lights or lamps, use:
 
 > **STE:** MAKE SURE THAT THE HEAD OF THE BOLT IS DOWN.
 
-#### HEAR (v) — APPROVED
 
 - **Meaning:** To know by sound in the ear.
 - **Forms:** HEARS, HEARD, HEARD
@@ -14147,7 +12407,6 @@ For lights or lamps, use:
 
 #### HOLD (v) — APPROVED
 
-- **Meaning:**
   1. To continue to have in the hand or grip.
   2. To continue to have in a specified location, position, or condition.
 - **Forms:** HOLDS, HELD, HELD
@@ -14187,27 +12446,21 @@ For lights or lamps, use:
 
 > **STE:** PARAGRAPH 7.0 TELLS YOU HOW TO INSTALL THE UNIT.
 
-## Unapproved Entries
 
-#### have to (v) — UNAPPROVED
 
 - **Approved alternative:** Use a verb in the imperative form.
 
 > **STE:** WHEN ENGINES ARE IN OPERATION, PUT ON A HEARING PROTECTION DEVICE.
 > **Non-STE:** When engines are in operation, you have to put on a hearing protection device.
 
-#### hazard (n) — UNAPPROVED
 
-- **Approved alternative:** DANGEROUS (adj)
 
 > **STE:** TRICHLOROETHYLENE IS DANGEROUS.
 > **Non-STE:** Trichloroethylene is a health hazard.
 
 - **Note:** "hazard" can be part of safety regulations.
 
-#### hazardous (adj) — UNAPPROVED
 
-- **Approved alternative:** DANGEROUS (adj)
 
 > **STE:** ALL PERSONNEL WHO DO WORK WITH DANGEROUS MATERIALS MUST OBEY THE SAFETY INSTRUCTIONS THAT FOLLOW.
 > **Non-STE:** All personnel who work with hazardous materials must obey the following safety instructions.
@@ -14223,7 +12476,6 @@ For lights or lamps, use:
 
 #### head (v) — UNAPPROVED
 
-- **Approved alternative:** POINT (v)
 
 > **STE:** POINT THE AIRCRAFT INTO THE WIND.
 > **Non-STE:** Head the aircraft into the wind.
@@ -14242,7 +12494,6 @@ For lights or lamps, use:
 
 #### heighten (v) — UNAPPROVED
 
-- **Approved alternative:** INCREASE (v)
 
 > **STE:** STRONG WINDS WILL INCREASE THE RISK OF DAMAGE.
 > **Non-STE:** Strong winds will heighten the risk of damage.
@@ -14254,18 +12505,14 @@ For lights or lamps, use:
 > **STE:** GET MEDICAL AID IMMEDIATELY.
 > **Non-STE:** You must get medical help immediately.
 
-#### helpful (adj) — UNAPPROVED
 
-- **Approved alternative:** HELP (v)
 
-> **See:** Dictionary entry for HELP (v).
 
 > **STE:** RECORD THE LOCKWIRE POSITIONS. THIS INFORMATION WILL HELP YOU DURING THE ASSEMBLY PROCEDURE.
 > **Non-STE:** Record the lockwire positions. This will be helpful during the assembly procedure.
 
 #### hesitation (n) — UNAPPROVED
 
-- **Approved alternative:** SMOOTHLY (adv)
 
 > **STE:** MAKE SURE THAT THE SOLENOID OPERATES SMOOTHLY.
 > **Non-STE:** Make sure that the solenoid operates without hesitation.
@@ -14282,19 +12529,16 @@ For lights or lamps, use:
 
 #### highly (adv) — UNAPPROVED
 
-- **Approved alternative:** VERY (adv)
 
 > **STE:** TOLUENE IS VERY FLAMMABLE.
 > **Non-STE:** Toluene is highly flammable.
 
 #### hinder (v) — UNAPPROVED
 
-- **Approved alternative:** PREVENT (v)
 
 > **STE:** SCRATCHES CAN PREVENT THE FREE MOVEMENT OF THE PISTON IN THE SLEEVE.
 > **Non-STE:** Scratches can hinder the movement of the piston in the sleeve.
 
-- **Approved alternative:** DECREASE (v)
 
 > **STE:** A CLOGGED DUCT WILL DECREASE AIRFLOW.
 > **Non-STE:** A clogged duct will hinder airflow.
@@ -14304,26 +12548,21 @@ For lights or lamps, use:
 > **STE:** MAKE SURE THAT THERE IS NO BLOCKAGE IN THE PIPE THAT PREVENTS AIRFLOW.
 > **Non-STE:** Make sure that there is nothing in the pipe to hinder airflow.
 
-- **Approved alternative:** CLOGGED (adj)
 
 > **STE:** MAKE SURE THAT THE PIPE IS NOT CLOGGED.
-> **Non-STE:** Make sure that there is nothing in the pipe to hinder airflow.
 
 #### hinge (v) — UNAPPROVED
 
-- **Approved alternative:** TURN (v)
 
 > **STE:** THE PANELS TURN ON TWO NYLON STRAPS.
 > **Non-STE:** Panels hinge on two nylon straps.
 
 #### hitch (v) — UNAPPROVED
 
-- **Approved alternative:** CONNECT (v)
 
 > **STE:** CONNECT THE TOWING ARM TO THE NOSEWHEEL.
 > **Non-STE:** Hitch the towing arm to the nosewheel.
 
-#### hoist (v) — UNAPPROVED
 
 - **Approved alternative:** LIFT (v)
 
@@ -14332,37 +12571,31 @@ For lights or lamps, use:
 
 #### hold (n) — UNAPPROVED
 
-- **Approved alternative:** HOLD (v)
 
-> **See:** Dictionary entry for HOLD (v).
 
 > **STE:** MAKE SURE THAT YOU HOLD THE ROD TIGHTLY.
 > **Non-STE:** Make sure that you have a tight hold on the rod.
 
 #### hold back (v) — UNAPPROVED
 
-- **Approved alternative:** PREVENT (v)
 
 > **STE:** AT FULL THRUST, THE BRAKES MUST PREVENT MOVEMENT OF THE AIRCRAFT.
 > **Non-STE:** At full thrust, the brakes must hold the aircraft back.
 
 #### hold off (v) — UNAPPROVED
 
-- **Approved alternative:** PREVENT (v)
 
 > **STE:** THE PROTECTIVE PAINT WILL PREVENT CORROSION FOR SIX MONTHS.
 > **Non-STE:** The protective paint will hold off corrosion for six months.
 
 #### hook (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 
 > **STE:** PUT THE SLING ON THE SHACKLE.
 > **Non-STE:** Hook the sling on the shackle.
 
 #### hook up (v) — UNAPPROVED
 
-- **Approved alternative:** CONNECT (v)
 
 > **STE:** CONNECT THE TOWING ARM TO THE NOSE GEAR.
 > **Non-STE:** Hook the towing arm up to the nose gear.
@@ -14374,20 +12607,16 @@ For lights or lamps, use:
 > **STE:** THE MODULE CONTAINS FIVE COMPONENTS.
 > **Non-STE:** The module houses five components.
 
-#### however (adv) — UNAPPROVED
 
-- **Approved alternative:** BUT (conj)
 
 > **STE:** THE DRYING TIME IS USUALLY 24 HOURS. BUT THE PROCEDURE IN THIS STEP WILL DECREASE THE DRYING TIME TO 12 HOURS.
 > **Non-STE:** The drying time is usually 24 hours. However, the procedure in this step will decrease the drying time to 12 hours.
 # Page 273 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 273–276 of 434
 
 *Page 274 is blank.*
 
-## Approved Words
 
 #### HYDRAULIC (adj) — APPROVED
 
@@ -14410,7 +12639,6 @@ For lights or lamps, use:
 #### IDENTIFY (v) — APPROVED
 
 - **Forms:** IDENTIFIES, IDENTIFIED, IDENTIFIED
-- **Meaning:**
   1. To use a specified code or marking to supply with an identity.
   2. To show an identity.
 
@@ -14429,7 +12657,6 @@ For lights or lamps, use:
 
 > **STE:** IF YOU USE A REPLACEMENT FAIRING PLATE, CUT IT UNTIL YOU GET THE CORRECT MATING DIMENSION.
 
-#### IGNORE (v) — APPROVED
 
 - **Forms:** IGNORES, IGNORED, IGNORED
 - **Meaning:** Not to think about something, not to do something about.
@@ -14438,7 +12665,6 @@ For lights or lamps, use:
 
 > **STE:** SELECT "CANCEL" TO IGNORE ALL CHANGES.
 
-#### ILLUMINATE (v) — APPROVED
 
 - **Forms:** ILLUMINATES, ILLUMINATED, ILLUMINATED
 - **Meaning:** To make something visible with an external light source.
@@ -14456,17 +12682,14 @@ For lights or lamps, use:
 > **STE:** MAKE SURE THAT THE LAMP IS ON.
 > **Non-STE:** Ensure the lamp is illuminated.
 
-#### IMMEDIATELY (adv) — APPROVED
 
 - **Meaning:** Without a gap of time or space.
 
 > **STE:** MAKE SURE THAT THE EMERGENCY LIGHT IMMEDIATELY GOES BACK TO "OFF."
 
-## Unapproved Words
 
 #### huge (adj) — UNAPPROVED
 
-- **Approved alternative:** LARGE (adj)
 
 > **STE:** TO REMOVE THE PAINT STRIPPER, FLUSH THE SURFACE WITH LARGE QUANTITIES OF WATER.
 > **Non-STE:** To remove the paint stripper, flush the surface with huge quantities of water.
@@ -14478,9 +12701,7 @@ For lights or lamps, use:
 > **STE:** ADJUST THE POTENTIOMETER UNTIL YOU DO NOT HEAR A HUM FROM THE LOUDSPEAKER.
 > **Non-STE:** Adjust the potentiometer until the loudspeaker no longer hums.
 
-#### hurt (v) — UNAPPROVED
 
-- **Approved alternative:** INJURY (n)
 
 > **STE:** BE CAREFUL WHEN YOU DO THIS PROCEDURE. IF THE UNIT FALLS, IT CAN CAUSE INJURY TO PERSONS.
 > **Non-STE:** Be careful when you do this procedure. If the unit falls, it can hurt persons.
@@ -14508,7 +12729,6 @@ For lights or lamps, use:
 
 #### immediate (adj) — UNAPPROVED
 
-- **Approved alternative:** IMMEDIATELY (adv)
 
 > **See:** Dictionary entry for IMMEDIATELY (adv).
 
@@ -14541,7 +12761,6 @@ For lights or lamps, use:
 
 #### impact (n) — UNAPPROVED
 
-- **Approved alternative:** HIT (v)
 
 > **See:** Dictionary entry for HIT (v).
 
@@ -14549,26 +12768,21 @@ For lights or lamps, use:
 > **Non-STE:** Avoid impact between metal objects and the mating surface.
 # Page 277 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 277–280 of 434
 
-## Dictionary
 
 #### impact (v) — UNAPPROVED
 
-- **Approved alternative:** HIT (v)
 
 > **STE:** DO NOT LET THE VIBRATOR TOOL HIT THE SURFACE OF THE SEAL.
 > **Non-STE:** Do not allow the vibrator tool to impact the surface of the seal.
 
-- **Approved alternative:** EFFECT (n)
 
 > **STE:** THESE REPAIRS HAVE AN EFFECT ON THE PERFORMANCE OF THE ENGINE.
 > **Non-STE:** These repairs impact performance of the engine.
 
 #### impair (v) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
 
 > **STE:** THE LIFE OF THE UNIT WILL DECREASE IF YOU LET THE UNIT BECOME DIRTY.
 > **Non-STE:** The life of the unit is impaired if the unit is allowed to get dirty.
@@ -14585,14 +12799,12 @@ For lights or lamps, use:
 
 #### implement (v) — UNAPPROVED
 
-- **Approved alternative:** DO (v)
 
 > **STE:** IF THE TEST DOES NOT GIVE SATISFACTORY RESULTS, DO THE FAULT ISOLATION PROCEDURE.
 > **Non-STE:** If the test does not give satisfactory results, implement the fault isolation procedure.
 
 #### implementation (n) — UNAPPROVED
 
-- **Approved alternative:** DO (v)
 
 > **STE:** IT IS MANDATORY TO DO THE PROCEDURE IN THIS SERVICE BULLETIN.
 > **Non-STE:** The implementation of the procedure in this Service Bulletin is mandatory.
@@ -14617,28 +12829,24 @@ For lights or lamps, use:
 
 #### impregnate (v) — UNAPPROVED
 
-- **Approved alternative:** SOAK (v)
 
 > **STE:** SOAK THE FILTER ELEMENTS IN OIL.
 > **Non-STE:** The filter elements must be impregnated with oil.
 
 #### impression (n) — UNAPPROVED
 
-- **Approved alternative:** THINK (v)
 
 > **STE:** IF YOU THINK THAT A TIRE HAS LOW PRESSURE, DO THE STEPS THAT FOLLOW:
 > **Non-STE:** If you have the impression that a tire has low pressure, do the steps that follow:
 
 #### improper (adj) — UNAPPROVED
 
-- **Approved alternative:** INCORRECT (adj)
 
 > **STE:** INCORRECT ADJUSTMENT OF THE STOP BOLTS ON THE RUDDER PEDALS CAN CAUSE DAMAGE.
 > **Non-STE:** Improper adjustment of the stop bolts on the rudder pedals can cause damage.
 
 #### improperly (adv) — UNAPPROVED
 
-- **Approved alternative:** INCORRECTLY (adv)
 
 > **STE:** IF THE HINGE IS INCORRECTLY ADJUSTED, YOU CANNOT CLOSE THE PANEL.
 > **Non-STE:** If the hinge is improperly adjusted, the panel will not close.
@@ -14668,7 +12876,6 @@ For lights or lamps, use:
 
 > **STE:** MAKE SURE THAT THE SWITCHES ARE PUSHED IN.
 
-#### IN (prep) — APPROVED
 
 - **Meaning:** Function word that shows location, position, condition, time, or limits.
 
@@ -14694,7 +12901,6 @@ For lights or lamps, use:
 
 > **STE:** IF AN INTERACTIVE SESSION IS IN PROGRESS, LET IT CONTINUE UNTIL IT IS FULLY COMPLETED.
 
-#### inactive (adj) — UNAPPROVED
 
 - **Approved alternative:** NOT ACTIVE
 
@@ -14710,7 +12916,6 @@ For lights or lamps, use:
 
 #### inadvertently (adv) — UNAPPROVED
 
-- **Approved alternative:** ACCIDENTALLY (adv)
 
 > **STE:** IF YOU ACCIDENTALLY PUT TOO MUCH FUEL IN THE TANK, OPEN THE DRAIN VALVE.
 > **Non-STE:** If the tank is inadvertently overfilled, open the drain valve.
@@ -14741,7 +12946,6 @@ For lights or lamps, use:
 
 #### incline (n) — UNAPPROVED
 
-- **Approved alternative:** SLOPE (n)
 
 > **STE:** YOU CAN ADJUST THE SLOPE OF THE RAMP.
 > **Non-STE:** You can adjust the incline of the ramp.
@@ -14760,7 +12964,6 @@ For lights or lamps, use:
 > **STE:** DO TESTS 4 THRU 8 AGAIN.
 > **Non-STE:** Repeat from test 4 up to and including test 8.
 
-- **Approved alternative:** WITH (prep)
 
 > **STE:** SEND THE DEFECTIVE COVER, WITH THE OIL SAMPLES, TO THE REPAIR CENTER.
 > **Non-STE:** Return the defective cover, including the oil samples, to the repair center.
@@ -14776,14 +12979,11 @@ For lights or lamps, use:
 > **Non-STE:** This coolant is incompatible with aluminum alloys.
 # Page 281 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 281–284 of 434
 
-## Dictionary
 
 ### I
 
-#### IDENTIFY (v) — APPROVED
 
 - > **STE:** A 406 MHz DIGITAL SIGNAL IDENTIFIES THE EMERGENCY LOCATOR TRANSMITTER AND ITS LOCATION.
 - > **Non-STE:** A 406 MHz digital signal indicates the emergency locator transmitter and its location.
@@ -14865,7 +13065,6 @@ For lights or lamps, use:
 - **Approved alternative:** NOT COMPLETED
 - > **STE:** IF THE ADJUSTMENT IS NOT COMPLETED, THE VALUES SHOWN ON THE INDICATOR WILL BE INCORRECT.
 - > **Non-STE:** If the adjustment is incomplete, the values shown on the indicator will be incorrect.
-- **Approved alternative:** ALL (adj)
 - > **STE:** IF YOU DO NOT HAVE ALL THE RESULTS, DO THE TEST AGAIN.
 - > **Non-STE:** If the results are incomplete, do the test again.
 
@@ -14874,25 +13073,21 @@ For lights or lamps, use:
 - **Approved alternative:** INCLUDE (v)
 - > **STE:** ALL MODELS INCLUDE A MICROPROCESSOR CONTROL UNIT.
 - > **Non-STE:** All models incorporate a microprocessor control unit.
-- **Approved alternative:** HAVE (v)
 - > **STE:** SOME RELAYS HAVE A POTENTIOMETER.
 - > **Non-STE:** Some relays incorporate a potentiometer.
 
 #### incorporation (n) — UNAPPROVED
 
-- **Approved alternative:** INCLUDE (v)
 - > **STE:** THE MANUFACTURER INCLUDED A SECOND DIODE TO INCREASE THE RELIABILITY OF THE MOTOR.
 - > **Non-STE:** Incorporation of a second diode increased the reliability of the motor.
 
 #### increase (n) — UNAPPROVED
 
-- **Approved alternative:** INCREASE (v)
 - > **STE:** THE TEMPERATURE MUST INCREASE.
 - > **Non-STE:** There must be an increase in temperature.
 
 #### incur (v) — UNAPPROVED
 
-- **Approved alternative:** CAUSE (v)
 - > **STE:** REMOVAL OF THE UNIT BEFORE 24 HOURS CAN CAUSE DAMAGE.
 - > **Non-STE:** Removal of the unit before 24 hours can incur damage.
 
@@ -14901,33 +13096,26 @@ For lights or lamps, use:
 - **Approved alternative:** INDEPENDENTLY (adv)
 - > **STE:** THIS UNIT OPERATES INDEPENDENTLY.
 - > **Non-STE:** The operation of this unit is independent.
-- **Approved alternative:** INDEPENDENTLY (adv)
 - **Meaning:** Without a relation with
 - **STE:** THE EMERGENCY SYSTEM IS CONTROLLED INDEPENDENTLY.
 
-#### indicate (v) — UNAPPROVED
 
-- **Approved alternative:** SHOW (v)
 - > **STE:** THE POINTER SHOWS ZERO FEET.
 - > **Non-STE:** The pointer indicates zero feet.
 
 #### induce (v) — UNAPPROVED
 
-- **Approved alternative:** CAUSE (v)
 - > **STE:** SCRATCHES IN THE WINDSCREEN CAN CAUSE CRACKS.
 - > **Non-STE:** Scratches in the windscreen may induce cracks.
 
 #### ineffective (adj) — UNAPPROVED
 
-- **Approved alternative:** UNSERVICEABLE (adj)
 - > **STE:** IF THE PUMP IS UNSERVICEABLE, REPLACE IT.
 - > **Non-STE:** If the pump is ineffective, replace it.
-- **Approved alternative:** UNSATISFACTORY (adj)
 - > **STE:** IF THE OPERATION OF THE PUMP IS UNSATISFACTORY, REPLACE IT.
 - > **Non-STE:** If the operation of the pump is ineffective, replace it.
 - **Approved alternative:** NOT OPERATE CORRECTLY
 - > **STE:** IF THE PUMP DOES NOT OPERATE CORRECTLY, REPLACE IT.
-- > **Non-STE:** If the pump is ineffective, replace it.
 
 #### inflammable (adj) — UNAPPROVED
 
@@ -14937,7 +13125,6 @@ For lights or lamps, use:
 
 #### inform (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 - > **STE:** TELL THE MANUFACTURER ABOUT THE PROBLEM.
 - > **Non-STE:** Inform the manufacturer about the problem.
 
@@ -14949,43 +13136,35 @@ For lights or lamps, use:
 
 #### ingress (n) — UNAPPROVED
 
-- **Approved alternative:** GO INTO
 - > **STE:** IF WATER GOES INTO THE COMPONENT, DAMAGE WILL OCCUR.
 - > **Non-STE:** Water ingress will damage the component.
 
 #### inhale (v) — UNAPPROVED
 
-- **Approved alternative:** BREATHE (v)
 - > **STE:** DO NOT BREATHE THE SOLVENT FUMES.
 - > **Non-STE:** Do not inhale the solvent fumes.
 
 #### inhibit (v) — UNAPPROVED
 
-- **Approved alternative:** PREVENT (v)
 - > **STE:** ALODINE PREVENTS CORROSION.
 - > **Non-STE:** Alodine inhibits corrosion.
 
 #### initiate (v) — UNAPPROVED
 
-- **Approved alternative:** START (v)
 - > **STE:** START THE TEST AT 2000 RPM.
 - > **Non-STE:** Initiate the test at 2000 rpm.
 
 #### inject (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 - > **STE:** PUT OIL INTO THE GEARBOX WITH A SYRINGE.
 - > **Non-STE:** Inject oil into the gearbox with a syringe.
 
 #### injection (n) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 - > **STE:** PUT THE CORROSION PREVENTIVE OIL INTO THE PUMP WITH A SYRINGE.
 - > **Non-STE:** The injection of the corrosion preventive oil into the pump must be done with a syringe.
 
-#### injure (v) — UNAPPROVED
 
-- **Approved alternative:** INJURY (n)
 - > **STE:** MAKE SURE THAT THE END OF THE SAFETY WIRE WILL NOT CAUSE INJURY TO PERSONS.
 - > **Non-STE:** Make sure that the end of the safety wire will not injure persons.
 
@@ -14999,16 +13178,11 @@ For lights or lamps, use:
 - > **Non-STE:** Make sure that the demisting system is inoperative.
 # Page 285 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 285–288 of 434
 
-## Dictionary
 
-### I
 
-#### insert (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 
 > **STE:** PUT THE SLEEVE INTO THE OPENING.
 > **Non-STE:** Insert the sleeve into the opening.
@@ -15027,14 +13201,11 @@ For lights or lamps, use:
 
 #### inside (n) — UNAPPROVED
 
-- **Approved alternative:** INNER (adj)
 
 > **STE:** PAINT THE INNER SURFACE OF THE PUMP ASSEMBLY.
 > **Non-STE:** Paint the inside surface of the pump assembly.
 
-#### inside (prep) — UNAPPROVED
 
-- **Approved alternative:** IN (prep)
 
 > **STE:** THERE MUST BE LUBRICANT IN THE HOLE.
 > **Non-STE:** There must be lubricant inside the hole.
@@ -15048,7 +13219,6 @@ For lights or lamps, use:
 
 #### inspect (v) — UNAPPROVED
 
-- **Approved alternative:** EXAMINE (v)
 
 > **STE:** EXAMINE ALL THE DRAIN HOLES.
 > **Non-STE:** Inspect all the drain holes.
@@ -15059,7 +13229,6 @@ For lights or lamps, use:
 
 > **STE:** USE A VOLTMETER TO DO THIS INSPECTION.
 
-- **Example:**
 
 > **STE:** DO AN INSPECTION OF THE WORK.
 > **Non-STE:** Inspect the work.
@@ -15079,14 +13248,12 @@ For lights or lamps, use:
 
 #### instead (adv) — UNAPPROVED
 
-- **Approved alternative:** ALTERNATIVE (n)
 
 > **STE:** USE A SPATULA AS AN ALTERNATIVE.
 > **Non-STE:** Use a spatula instead.
 
 #### instead of (prep) — UNAPPROVED
 
-- **Approved alternative:** ALTERNATIVE (n)
 
 > **STE:** YOU CAN USE A CLEAN PLASTIC BAG AS AN ALTERNATIVE TO THE SPECIFIED CONTAINER.
 > **Non-STE:** You can use a clean plastic bag instead of the specified container.
@@ -15118,7 +13285,6 @@ For lights or lamps, use:
 
 #### insure (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 
 > **STE:** MAKE SURE THAT THE WORK BENCH IS CLEAN.
 > **Non-STE:** Insure that the work bench is clean.
@@ -15132,7 +13298,6 @@ For lights or lamps, use:
 
 #### integral (adj) — UNAPPROVED
 
-- **Approved alternative:** PART (n)
 
 > **STE:** THE PIN IS A PART OF THE PUMP.
 > **Non-STE:** The pin is integral with the pump.
@@ -15148,7 +13313,6 @@ For lights or lamps, use:
 - **Meaning:** To put or use each of two things in the place of the other without change.
 - **Forms:** INTERCHANGES, INTERCHANGED, INTERCHANGED
 
-> **STE:** INTERCHANGE THE No. 1 AND No. 2 COMPUTERS. THEN DO THE TEST AGAIN.
 
 #### INTERCHANGEABLE (adj) — APPROVED
 
@@ -15158,7 +13322,6 @@ For lights or lamps, use:
 
 #### interconnect (v) — UNAPPROVED
 
-- **Approved alternative:** CONNECT (v)
 
 > **STE:** THE PIPES CONNECT SYSTEM A TO SYSTEM B.
 > **Non-STE:** The pipes interconnect system A and system B.
@@ -15171,17 +13334,13 @@ For lights or lamps, use:
 
 #### interfere (v) — UNAPPROVED
 
-- **Approved alternative:** HIT (v)
 
 > **STE:** IF YOU INSTALL THE UPPER DRAG STRUT WITH THE HEAD DOWN, IT WILL HIT THE LOWER DRAG STRUT DURING RETRACTION.
 > **Non-STE:** Placing the upper drag strut upside down makes it interfere with the lower drag strut.
 
-- **Approved alternative:** CATCH (v)
 
-> **STE:** MAKE SURE THAT THE RODS CANNOT CATCH ON THE FLAPS.
 > **Non-STE:** Make sure the rods cannot interfere with the flaps.
 
-- **Approved alternative:** TOUCH (v)
 
 > **STE:** IF THE BRACKET TOUCHES THE PLATE, REMOVE THE UNWANTED MATERIAL WITH A FILE.
 > **Non-STE:** Should the bracket interfere with the plate, remove surplus material with a file.
@@ -15193,19 +13352,13 @@ For lights or lamps, use:
 > **STE:** MAKE SURE THAT THERE IS NO INTERFERENCE BETWEEN THE RADAR AND THE TACTICAL AIR NAVIGATION SYSTEM (TACAN).
 > **Non-STE:** Ensure that the radar does not interfere with the Tactical Air Navigation System (TACAN).
 
-#### interference (n) — UNAPPROVED
 
-- **Approved alternative:** HIT (v)
 
-> **STE:** IF YOU INSTALL THE UPPER DRAG STRUT WITH THE HEAD DOWN, IT WILL HIT THE LOWER DRAG STRUT DURING RETRACTION.
 > **Non-STE:** Placing the upper drag strut upside down causes interference with the lower drag strut.
 
-- **Approved alternative:** CATCH (v)
 
-> **STE:** MAKE SURE THAT THE RODS CANNOT CATCH ON THE FLAPS.
 > **Non-STE:** Make sure that there is no interference between the rods and the flaps.
 
-- **Approved alternative:** TOUCH (v)
 
 > **STE:** MAKE SURE THAT THE LOCKING WIRE DOES NOT TOUCH THE LEVER.
 > **Non-STE:** Ensure that there is no interference between the locking wire and the lever.
@@ -15225,7 +13378,6 @@ This word can be a technical noun or part of a technical noun.
 
 #### INTERNAL (adj) — APPROVED
 
-- **Example:**
 
 > **STE:** APPLY A SMALL QUANTITY OF LUBRICANT TO THE INTERNAL SIDE OF THE VALVE HOUSING.
 > **Non-STE:** Apply a small quantity of lubricant to the interior of the valve housing.
@@ -15243,7 +13395,6 @@ This word can be a technical noun or part of a technical noun.
 > **Non-STE:** When the input lever is in an intermediate position, measure the piston extension. Give the limits.
 # Page 289 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 289–292 of 434
 
 ## APPROVED
@@ -15251,177 +13402,141 @@ This word can be a technical noun or part of a technical noun.
 #### INTERMITTENT (adj) — APPROVED
 
 - **Meaning:** That stops and starts again, not continuous
-- **Example:**
   > **STE:** THIS CAUSES INTERMITTENT OPERATION OF THE WARNING LIGHTS.
 
 #### INTERMITTENTLY (adv) — APPROVED
 
 - **Meaning:** In an intermittent manner
-- **Example:**
   > **STE:** THE LIGHT COMES ON INTERMITTENTLY.
 
-#### INTERNAL (adj) — APPROVED
 
 - **Meaning:** Of, or on, the inner side and inner space
-- **Example:**
   > **STE:** MAKE SURE THAT FUEL COMES OUT OF THE INTERNAL EJECTORS.
 
 #### INTERNALLY (adv) — APPROVED
 
-- **Meaning:** Of, or on, the inner side and inner space
-- **Example:**
   > **STE:** USE A BORESCOPE TO EXAMINE THE COMBUSTOR INTERNALLY.
 
 #### INTERVAL (n) — APPROVED
 
 - **Meaning:** A distance or gap between two points in space or time
-- **Example:**
   > **STE:** DO THE TEST AT FIVE-MINUTE INTERVALS.
 
-#### INTO (prep) — APPROVED
 
 - **Meaning 1:** Movement to something and access to it
   > **STE:** IF AN OBJECT FALLS INTO THE OPENING, DAMAGE TO THE ENGINE CAN OCCUR.
 - **Meaning 2:** Function word that shows change, condition, result
   > **STE:** THE PARTS OF THE STRUCTURE ARE DIVIDED INTO THREE GROUPS.
 
-#### INVESTIGATION (n) — APPROVED
 
 - **Meaning:** An official and accurate inquiry or research
-- **Example:**
   > **STE:** THE TASK TEAM STARTED THE INVESTIGATION TO FIND THE CAUSE OF THE ACCIDENT.
 
 #### IRREGULAR (adj) — APPROVED
 
 - **Meaning:** Not regular
-- **Example:**
   > **STE:** IF THE SIGNALS ARE IRREGULAR, REPLACE THE UNIT.
 
 #### IRREGULARLY (adv) — APPROVED
 
 - **Meaning:** Not regularly
-- **Example:**
   > **STE:** IF THE UNIT RECEIVES THE SIGNALS IRREGULARLY, REPLACE IT.
 
 #### ISOLATE (v) — APPROVED
 
 - **Meaning:** To prevent a supply or connection to
 - **Forms:** ISOLATES, ISOLATED, ISOLATED
-- **Example:**
   > **STE:** ISOLATE THE ELECTRICAL POWER SUPPLY.
 
-#### IT (pron) — APPROVED
 
 - **Meaning 1:** That refers to a thing that was previously mentioned
   > **STE:** CAREFULLY MOVE THE DEFLECTOR UNIT DOWN UNTIL IT ENGAGES.
 - **Meaning 2:** That refers to an explicit or implicit state of affairs or circumstances
-  > **STE:** IT IS IMPORTANT TO DO THIS ADJUSTMENT CORRECTLY.
 
 #### ITEM (n) — APPROVED
 
 - **Meaning:** A thing that is determined or specified
-- **Example:**
   > **STE:** LUBRICATE THESE ITEMS WITH GREASE.
 
 #### ITS (adj) — APPROVED
 
 - **Meaning:** Belonging to a thing
-- **Example:**
   > **STE:** REMOVE THE UNIT AND ITS WIRING.
 
 #### JOINT (n) — APPROVED
 
 - **Meaning:** The area at which two surfaces or edges touch or are attached
-- **Example:**
   > **STE:** SEAL THE JOINT WITH SEALING COMPOUND.
 
 ## UNAPPROVED
 
 #### interrupt (v) — UNAPPROVED
 
-- **Approved alternative:** STOP (v)
-- **Example:**
   > **STE:** DO NOT STOP THE TEST.
   > **Non-STE:** Do not interrupt the test.
 
 #### intersect (v) — UNAPPROVED
 
 - **Approved alternative:** INTERSECTION (TN)
-- **Example:**
   > **STE:** DRILL A HOLE AT THE INTERSECTION OF THE TWO LINES.
   > **Non-STE:** Drill a hole where the two lines intersect.
 
 #### investigate (v) — UNAPPROVED
 
 - **Approved alternative:** INVESTIGATION (n)
-- **Example:**
   > **STE:** DO AN INVESTIGATION TO FIND THE CAUSE OF THE FUEL LEAKAGE.
   > **Non-STE:** Investigate the cause of the fuel leakage.
 
 #### inward (adj) — UNAPPROVED
 
-- **Approved alternative:** INNER (adj)
-- **Example:**
   > **STE:** MEASURE THE INNER DIAMETER OF THE HOLE.
   > **Non-STE:** Measure the inward diameter of the hole.
 
 #### inward (adv) — UNAPPROVED
 
 - **Approved alternative:** IN (adv)
-- **Example:**
   > **STE:** MOVE THE DOOR IN AND REARWARD.
   > **Non-STE:** Move the door inward and rearward.
 
 #### irregularity (n) — UNAPPROVED
 
-- **Approved alternatives:**
   - **DAMAGE (n)**
     > **STE:** THERE MUST BE NO DAMAGE TO THE SURFACE FINISH.
     > **Non-STE:** There must be no irregularities in the surface finish.
   - **DEFECT (TN)**
     > **STE:** THERE MUST BE NO DEFECTS IN THE SURFACE FINISH.
-    > **Non-STE:** There must be no irregularities in the surface finish.
   - **IRREGULAR (adj)**
     > **STE:** IF YOU GET IRREGULAR RESULTS, DO THE TEST AGAIN.
     > **Non-STE:** If you get irregularities in the results, do the test again.
-  - **UNUSUAL (adj)**
     > **STE:** IF YOU GET UNUSUAL RESULTS, DO THE TEST AGAIN.
-    > **Non-STE:** If you get irregularities in the results, do the test again.
 
 #### isolation (n) — UNAPPROVED
 
 - **Approved alternative:** ISOLATE (v)
-- **Example:**
   > **STE:** ISOLATE SYSTEM No. 1 TO DO THE LEAKAGE CHECKS.
   > **Non-STE:** Isolation of system No. 1 is necessary to do the leakage checks.
 
 #### jack (v) — UNAPPROVED
 
 - **Approved alternative:** JACK (TN)
-- **Example:**
   > **STE:** DO NOT LIFT THE AIRCRAFT ON JACKS IF THE WIND SPEED IS MORE THAN 20 MPH.
   > **Non-STE:** Do not jack the aircraft if the wind speed exceeds 20 mph.
 
 #### jam (v) — UNAPPROVED
 
-- **Approved alternative:** FREELY (adv)
-- **Example:**
   > **STE:** MAKE SURE THAT THE VALVE SPINDLE MOVES FREELY.
   > **Non-STE:** Check that the valve spindle does not bind or jam.
 
 #### job (n) — UNAPPROVED
 
-- **Approved alternatives:**
   - **WORK (n)**
     > **STE:** DO THIS WORK IN A CLEAN AREA.
     > **Non-STE:** Do this job in a clean area.
   - **TASK (n)**
     > **STE:** DO THIS TASK IN A CLEAN AREA.
-    > **Non-STE:** Do this job in a clean area.
 
 #### join (v) — UNAPPROVED
 
-- **Approved alternatives:**
   - **BOND (v)**
     > **STE:** USE ADHESIVE No. 35 TO BOND METAL TO METAL.
     > **Non-STE:** Use adhesive No. 35 to join metal to metal.
@@ -15434,20 +13549,16 @@ This word can be a technical noun or part of a technical noun.
 
 #### just (adv) — UNAPPROVED
 
-- **Approved alternative:** IMMEDIATELY (adv)
-- **Example:**
   > **STE:** KEEP THE RING IMMEDIATELY ABOVE THE JACK COLLARS.
   > **Non-STE:** Keep the ring just above the jack collars.
 
 > **Note:** Page 292 is intentionally blank.
 # Page 293 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 293–296 of 434
 
 > **Note:** Page 294 is blank.
 
-## Dictionary
 
 ### APPROVED
 
@@ -15526,7 +13637,6 @@ This word can be a technical noun or part of a technical noun.
 #### key (v) — UNAPPROVED
 
 - **Approved alternatives:** REFER (v); KEY (TN)
-- **Examples:**
   > **STE:** THE ILLUSTRATION REFERS TO EACH STEP.
   > **Non-STE:** The illustration will be keyed to each of the steps.
   > **STE:** INSTALL THE KEY BETWEEN THE PULLEY AND THE SHAFT.
@@ -15535,28 +13645,23 @@ This word can be a technical noun or part of a technical noun.
 #### kind (n) — UNAPPROVED
 
 - **Approved alternative:** TYPE (n)
-- **Example:**
   > **STE:** YOU CAN USE TWO TYPES OF SEALING COMPOUND.
   > **Non-STE:** Two kinds of sealing compound can be used.
 
 #### kink (v) — UNAPPROVED
 
 - **Approved alternative:** KINK (TN)
-- **Example:**
   > **STE:** DO NOT MAKE KINKS IN THE CABLES.
   > **Non-STE:** Do not kink the cables.
 
 #### knock (v) — UNAPPROVED
 
-- **Approved alternative:** HIT (v)
-- **Example:**
   > **STE:** HIT THE CLAMP ON THE RIGHT SIDE WITH A HAMMER.
   > **Non-STE:** Knock the clamp on the right side with a hammer.
 
 #### label (v) — UNAPPROVED
 
 - **Approved alternatives:** IDENTIFY (v); LABEL (TN)
-- **Examples:**
   > **STE:** IDENTIFY THE COMPONENT WITH A CODE TO HELP YOU INSTALL IT AGAIN CORRECTLY.
   > **Non-STE:** Label the component with a code to help you install it again correctly.
   > **STE:** PUT A LABEL ON THE RELAY ASSEMBLY.
@@ -15564,68 +13669,52 @@ This word can be a technical noun or part of a technical noun.
 
 #### lack (n) — UNAPPROVED
 
-- **Approved alternative:** NOT SUFFICIENT
-- **Example:**
   > **STE:** DAMAGE CAN OCCUR TO THE PUMP IF THERE IS NOT SUFFICIENT OIL IN THE RESERVOIR.
   > **Non-STE:** Damage can occur to the pump if there is a lack of oil in the reservoir.
 
 #### land (v) — UNAPPROVED
 
 - **Approved alternative:** LANDING (TN)
-- **Example:**
   > **STE:** AFTER A HEAVY LANDING, DO THE HEAVY LANDING INSPECTION.
   > **Non-STE:** If the aircraft landed heavily, do the Heavy Landing Inspection.
 
 #### last (v) — UNAPPROVED
 
 - **Approved alternative:** CONTINUE (v)
-- **Example:**
   > **STE:** THE SIGNALS CONTINUE FOR 0.8 SECONDS.
   > **Non-STE:** The signals last for 0.8 seconds.
 
 #### later (adj) — UNAPPROVED
 
 - **Approved alternative:** SUBSEQUENT (adj)
-- **Example:**
   > **STE:** A SUBSEQUENT REPAIR WILL BE FOR THE NEW CONFIGURATION.
   > **Non-STE:** A later repair will be for the new configuration.
 
-#### later (adv) — UNAPPROVED
 
 - **Approved alternatives:** THEN (adv); SUBSEQUENTLY (adv); WHEN (conj); AFTER (prep)
-- **Examples:**
   > **STE:** DO THIS STEP FIRST. THEN, DISCONNECT THE CABLES.
   > **Non-STE:** Do this step first. At a later time, disconnect the cables.
   > **STE:** MAKE SURE THAT THE TOOL IS SUBSEQUENTLY AVAILABLE FOR THE INSTALLATION PROCEDURE.
   > **Non-STE:** Make sure that the tool is available later for the installation procedure.
   > **STE:** DO STEPS (3) THRU (5). DO STEP (6) WHEN THE AILERON MOVEMENT STOPS.
   > **Non-STE:** Do steps (3) to (5). Do step (6) later. If it is possible, give the condition or time.
-  > **STE:** THE BAR MOVES DOWN AFTER 20 SECONDS.
   > **Non-STE:** The bar moves down later.
 
 #### lay (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
-- **Example:**
   > **STE:** PUT COVERS ON THE FLOOR.
   > **Non-STE:** Lay covers on the floor.
 
 #### lead (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
-- **Example:**
   > **STE:** PUT THE TELEFLEX CABLE THROUGH THE BULKHEAD.
   > **Non-STE:** Lead the Teleflex cable through the bulkhead.
 # Page 297 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 297–300 of 434
 
-## Dictionary
 
-### APPROVED
 
-#### GO (v) — APPROVED
 
 - **Meaning:** To move or travel from one place to another.
 
@@ -15646,7 +13735,6 @@ This word can be a technical noun or part of a technical noun.
 
 #### LENGTH (n) — APPROVED
 
-- **Meaning:**
   1. The distance from one end to the other end.
   2. The longer or longest of the three dimensions of an object.
 
@@ -15663,7 +13751,6 @@ This word can be a technical noun or part of a technical noun.
 
 > **STE:** THE FLOW RATE MUST NOT BE LESS THAN 4.0 GPM.
 
-#### LET (v) — APPROVED
 
 - **Meaning:** To give opportunity.
 - **Forms:** LETS, LET. No other verb forms.
@@ -15695,7 +13782,6 @@ This word can be a technical noun or part of a technical noun.
 
 > **STE:** LIFT THE COVER CAREFULLY.
 
-#### LIGHT (adj) — APPROVED
 
 - **Meaning:** That has a small mass, weight, or force.
 - **Forms:** LIGHTER, LIGHTEST.
@@ -15740,7 +13826,6 @@ For other meanings of "light", use:
 
 #### LINEARLY (adv) — APPROVED
 
-- **Meaning:** In a straight line.
 
 > **STE:** INCREASE THE PRESSURE LINEARLY.
 
@@ -15770,7 +13855,6 @@ For other meanings of "light", use:
 > **STE:** DO STEPS 13 THRU 16 FOR A MINIMUM OF THREE TIMES.
 > **Non-STE:** Do steps 13 thru 16 at least three times.
 
-### UNAPPROVED
 
 #### leak (v) — UNAPPROVED
 
@@ -15801,9 +13885,7 @@ For other meanings of "light", use:
 > **Non-STE:** Leave the vent valves open.
 
 > **STE:** LET THE VENT VALVES STAY OPEN.
-> **Non-STE:** Leave the vent valves open.
 
-#### left-hand (adj) — UNAPPROVED
 
 - **Approved alternative:** LEFT (adj)
 
@@ -15819,14 +13901,12 @@ For other meanings of "light", use:
 
 #### lengthen (v) — UNAPPROVED
 
-- **Approved alternative:** INCREASE (v)
 
 > **STE:** DO NOT TRY TO INCREASE THE LENGTH OF THIS ROD.
 > **Non-STE:** Do not try to lengthen this rod.
 
 #### lethal (adj) — UNAPPROVED
 
-- **Approved alternative:** KILL (v)
 
 > **STE:** THE ELECTRICAL DISCHARGE FROM THESE POWER UNITS CAN KILL YOU.
 > **Non-STE:** The electrical discharge from these power units can be lethal.
@@ -15840,7 +13920,6 @@ For other meanings of "light", use:
 
 #### liberal (adj) — UNAPPROVED
 
-- **Approved alternatives:** LARGE (adj), THICK (adj)
 
 > **STE:** CLEAN THE WINDOW WITH LARGE QUANTITIES OF WATER AND SOAP.
 > **Non-STE:** Clean the window with liberal quantities of water and soap.
@@ -15850,17 +13929,14 @@ For other meanings of "light", use:
 
 #### liberally (adv) — UNAPPROVED
 
-- **Approved alternatives:** LARGE (adj), THICK (adj)
 
 > **STE:** APPLY A LARGE QUANTITY OF THE SOLUTION.
 > **Non-STE:** Apply the solution liberally.
 
-> **STE:** APPLY A THICK LAYER OF THE COMPOUND.
 > **Non-STE:** Apply the compound liberally.
 
 #### lie (v) — UNAPPROVED
 
-- **Approved alternative:** BE (v)
 
 > **STE:** THE OTHER PART OF THE CLIP IS ALONG THE BARREL.
 > **Non-STE:** The other part of the clip lies along the barrel.
@@ -15874,21 +13950,18 @@ For other meanings of "light", use:
 
 #### limitation (n) — UNAPPROVED
 
-- **Approved alternative:** LIMIT (n)
 
 > **STE:** WHEN YOU LIFT THE AIRCRAFT ON JACKS, KEEP THE CENTER OF GRAVITY BETWEEN THESE LIMITS:
 > **Non-STE:** When you lift the aircraft on jacks, observe these center of gravity limitations:
 
 #### limited (adj) — UNAPPROVED
 
-- **Approved alternative:** SMALL (adj)
 
 > **STE:** THERE IS ONLY A SMALL NUMBER OF REPAIRS THAT YOU CAN DO.
 > **Non-STE:** There is only a limited number of repairs that you can do.
 
 #### link (v) — UNAPPROVED
 
-- **Approved alternatives:** CONNECT (v), ATTACH (v)
 
 > **STE:** CONNECT THE CABLES.
 > **Non-STE:** Link the cables.
@@ -15910,12 +13983,9 @@ For other meanings of "light", use:
 > **Non-STE:** List the part numbers in numerical sequence.
 # Page 301 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 301–304 of 434
 
-## Dictionary
 
-### APPROVED
 
 #### LIVE (adj) — APPROVED
 
@@ -15932,7 +14002,6 @@ For other meanings of "light", use:
 
 #### LOCALLY (adv) — APPROVED
 
-- **Meaning:** Applicable to a given location or position
 - **STE:** YOU CAN ALSO DO THIS TEST WITH A LOCALLY MADE TOOL.
 
 #### LOCATION (n) — APPROVED
@@ -15940,7 +14009,6 @@ For other meanings of "light", use:
 - **Meaning:** A place or site that you can find
 - **STE:** FIGURES 1 THRU 4 SHOW THE LOCATIONS OF THE WALKWAYS.
 
-#### LOCK (v) — APPROVED
 
 - **Meaning:** To attach something, or hold it in position with a locking device
 - **Approved forms:** LOCKS, LOCKED, LOCKED
@@ -15948,7 +14016,6 @@ For other meanings of "light", use:
 - **STE:** AND REMOVE THE KEY.
 - **STE:** BEFORE YOU CONTINUE, MAKE SURE THAT THE SWITCH LOCKS.
 
-#### LONG (adj) — APPROVED
 
 - **Meaning:** That has a specified or large length, or a specified or large duration
 - **Approved forms:** LONGER, LONGEST
@@ -15977,12 +14044,10 @@ For other meanings of "light", use:
 - **Meaning:** A circular shape made in a flexible material
 - **STE:** MAKE A LOOP OF WIRE AROUND THE UNIT.
 
-#### LOOSE (adj) — APPROVED
 
 - **Meaning 1:** On, in, but not attached
   - **STE:** MAKE SURE THAT YOU REMOVE ALL TOOLS, EQUIPMENT, AND LOOSE OBJECTS FROM THE AIR INTAKE.
 - **Meaning 2:** Not tight
-  - **STE:** DO A CHECK FOR LOOSE FASTENERS.
 - For other meanings, use:
   > **STE:** MAKE SURE THAT THERE IS TENSION IN THE CABLES.
   > **Non-STE:** Make sure that the cables are not loose.
@@ -16010,13 +14075,11 @@ For other meanings of "light", use:
 - **Approved forms:** LOWERS, LOWERED, LOWERED
 - **STE:** LOWER THE ANTENNA TO GET ACCESS TO THE CABLE CONNECTOR.
 
-#### LUBRICATE (v) — APPROVED
 
 - **Meaning:** To apply lubricant
 - **Approved forms:** LUBRICATES, LUBRICATED, LUBRICATED
 - **STE:** LUBRICATE THE O-RINGS WITH HYDRAULIC FLUID.
 
-### UNAPPROVED
 
 #### little (adj) — UNAPPROVED
 
@@ -16038,7 +14101,6 @@ For other meanings of "light", use:
 
 #### little (a little) — as adverb — UNAPPROVED
 
-- **Approved alternative:** SMALL (adj)
   > **STE:** AFTER YOU REMOVE THE NUT, THE RIB CAN MOVE DOWN A SMALL DISTANCE.
   > **Non-STE:** After you remove the nut, the rib can move down a little.
 
@@ -16051,9 +14113,7 @@ For other meanings of "light", use:
   > **STE:** PUT THE LOAD ON THE SPRING BALANCE.
   > **Non-STE:** Load the spring balance.
 
-#### locate (v) — UNAPPROVED
 
-- **Approved alternative 1:** FIND (v)
   > **STE:** USE TALCUM POWDER TO FIND EXTERNAL LEAKS.
   > **Non-STE:** Use talcum powder to locate external leaks.
 - **Approved alternative 2:** ENGAGE (v)
@@ -16065,7 +14125,6 @@ For other meanings of "light", use:
 
 #### log (v) — UNAPPROVED
 
-- **Approved alternative:** RECORD (v)
   > **STE:** RECORD THE COMPASS CORRECTIONS ON THE CARD.
   > **Non-STE:** Log the compass corrections on the card.
 
@@ -16081,8 +14140,6 @@ For other meanings of "light", use:
   > **STE:** THIS PROCEDURE IS NOT APPLICABLE AT THIS TIME.
   > **Non-STE:** This procedure is no longer applicable.
 - **Approved alternative 2:** UNTIL … NOT
-  > **STE:** ADJUST THE POTENTIOMETER UNTIL YOU DO NOT HEAR A HUM FROM THE LOUDSPEAKER.
-  > **Non-STE:** Adjust the potentiometer until the loudspeaker no longer hums.
 
 #### loop (v) — UNAPPROVED
 
@@ -16092,7 +14149,6 @@ For other meanings of "light", use:
 
 #### lose (v) — UNAPPROVED
 
-- **Approved alternative:** DECREASE (v)
   > **STE:** THE EFFECT OF THE SOLVENT DECREASES QUICKLY.
   > **Non-STE:** The solvent loses its effectiveness quickly.
 
@@ -16118,19 +14174,14 @@ For other meanings of "light", use:
   > **Non-STE:** Soak the area with lukewarm water.
 # Page 305 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 305–308 of 434
 
-## Dictionary
 
-### APPROVED
 
-#### MAGNETIC (adj) — APPROVED
 
 - **Meaning:** Related to the properties of a magnet
 - **STE:** REMOVE THE MAGNETIC DRAIN PLUG FROM THE OIL RESERVOIR.
 
-#### MAGNETICALLY (adv) — APPROVED
 
 - **Meaning:** In a magnetic manner
 - **STE:** THE DOOR CLOSES MAGNETICALLY AND LOCKS.
@@ -16158,19 +14209,16 @@ For other meanings of "light", use:
 - **Meaning:** Incorrect operation
 - **STE:** REFER TO TABLE 104 TO CORRECT THE MALFUNCTION.
 
-#### MANDATORY (adj) — APPROVED
 
 - **Meaning:** That which you must do, use, or obey
 - **STE:** THIS SERVICE BULLETIN IS MANDATORY.
 - **STE:** BEFORE YOU GO INTO THE LABORATORY, PUT ON PROTECTIVE CLOTHING.
 - If you want to use this word in procedures, think about a necessary safety instruction.
 
-#### MANUAL (adj) — APPROVED
 
 - **Meaning:** Operated with the hands
 - **STE:** IF THE AUTOMATIC CONTROLS DO NOT OPERATE, USE THE MANUAL PROCEDURE.
 
-#### MANUAL (n) — APPROVED
 
 - **Meaning:** A publication that gives data related to a special subject
 - **STE:** THIS MANUAL GIVES PERFORMANCE DATA.
@@ -16180,7 +14228,6 @@ For other meanings of "light", use:
 - **Meaning:** With your hands
 - **STE:** MOVE THE LEVER MANUALLY.
 
-#### MANY (adj) — APPROVED
 
 - **Meaning:** (MORE, MOST) Of a large number
 - **STE:** CORROSION CAN HAVE MANY CAUSES.
@@ -16197,7 +14244,6 @@ For other meanings of "light", use:
 - **Meaning:** The quantity of matter that is in an object and relates to its weight. The equivalent of inertia.
 - **STE:** STRUCTURAL OR EQUIPMENT MODIFICATIONS CAN CHANGE THE BASIC MASS AND THE CENTER-OF-GRAVITY COORDINATES.
 
-#### MATERIAL (n) — APPROVED
 
 - **Meaning:** A substance from which an item is made, or an item that is necessary to do a task.
 - **STE:** BEFORE YOU INSTALL THE SEAL, REMOVE THE UNWANTED MATERIAL.
@@ -16223,32 +14269,23 @@ For other meanings of "light", use:
 - **Meaning:** The largest dimension, quantity, number, or value
 - **STE:** MOVE THE LEVER A MAXIMUM OF 45 DEG.
 
-### UNAPPROVED
 
-#### main (adj) — UNAPPROVED
 
-- **Approved alternative:** PRIMARY (adj)
-- **STE:** THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID.
-- **Non-STE:** The main cause of valve failure is contamination of the fluid.
 
-#### maintain (v) — UNAPPROVED
 
 - **Approved alternative:** KEEP (v)
 - **STE:** KEEP THE FLUID TEMPERATURE AT 70 °F.
 - **Non-STE:** Maintain the fluid temperature at 70 °F.
-- **Approved alternative:** HOLD (v)
 - **STE:** TURN THE ROTATING TUBE 75 DEGREES. THEN, HOLD THE TUBE IN THIS POSITION.
 - **Non-STE:** Turn the rotating tube 75 degrees. Then, maintain the tube in this position.
 
 #### major (adj) — UNAPPROVED
 
-- **Approved alternative:** PRIMARY (adj)
 - **STE:** THE PRIMARY FUNCTION OF THE POWER UNIT IS TO SUPPLY ELECTRICAL POWER.
 - **Non-STE:** The major function of the power unit is to supply electrical power.
 
 #### make certain (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 - **STE:** MAKE SURE THAT THE VALVE IS OPEN.
 - **Non-STE:** Make certain that the valve is open.
 
@@ -16260,46 +14297,34 @@ For other meanings of "light", use:
 
 #### manipulate (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 - **STE:** MOVE THE FLEXIBLE PIPE TO GET ACCESS TO THE BOTTOM BOLTS.
 - **Non-STE:** Manipulate the flexible pipe to get access to the bottom bolts.
 - **Approved alternative:** ADJUST (v)
 - **STE:** ADJUST THE FLEXIBLE PIPE TO GET ACCESS TO THE BOTTOM BOLTS.
-- **Non-STE:** Manipulate the flexible pipe to get access to the bottom bolts.
 
-#### manufacture (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE (v)
-- **STE:** YOU CAN MAKE THE CLEARING TOOL LOCALLY.
-- **Non-STE:** The clearing tool can be manufactured locally.
 
 #### mark (v) — UNAPPROVED
 
-- **Approved alternative:** IDENTIFY (v)
 - **STE:** IDENTIFY THE COMPONENT WITH A CODE TO HELP YOU INSTALL IT AGAIN CORRECTLY.
 - **Non-STE:** Mark the component with a code to help you install it again correctly.
 
 #### mask (v) — UNAPPROVED
 
-- **Approved alternative:** APPLY (v)
 - **STE:** APPLY MASKING TAPE TO THE TRANSPARENT PANEL.
 - **Non-STE:** Mask the transparent panel with masking tape.
 
 #### match (v) — UNAPPROVED
 
-- **Approved alternative:** ALIGN (v)
 - **STE:** FOLD THE GIRT ONTO THE CONTAINER UNTIL IT IS ALIGNED WITH THE VELCRO TAPE.
 - **Non-STE:** Fold the girt over the container so that the Velcro tape matches.
-- **Approved alternative:** AGREE (v)
 - **STE:** MAKE SURE THAT THE SEAL AGREES WITH THE SHAPE OF THE PANEL.
 - **Non-STE:** Ensure the seal matches the panel shape.
 
 #### mate (v) — UNAPPROVED
 
-- **Approved alternative:** CONNECT (v)
 - **STE:** CONNECT THE PLUG TO THE RECEPTACLE.
 - **Non-STE:** Mate the plug to the receptacle.
-- **Approved alternative:** ENGAGE (v)
 - **STE:** ENGAGE THE SPLINES ON THE SHAFT WITH THOSE IN THE GEARBOX.
 - **Non-STE:** Mate the splines on the shaft with those in the gearbox.
 - **Approved alternative:** TOGETHER (adv)
@@ -16313,18 +14338,13 @@ For other meanings of "light", use:
 - **Non-STE:** Remove the glossy matter from the surface of the blade.
 # Page 309 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 309–312 of 434
 
-## Dictionary
 
-### APPROVED
 
-#### MEASURE (v) — APPROVED
 
 - **Inflected forms:** MEASURES, MEASURED, MEASURED
 - **Meaning:** To find the dimensions, capacity, or quantity of something
-- **Example:**
   > **STE:** MEASURE THE LOAD.
 
 #### MECHANICAL (adj), MECHANICALLY (adv) — APPROVED
@@ -16337,91 +14357,72 @@ For other meanings of "light", use:
 #### MECHANISM (n) — APPROVED
 
 - **Meaning:** An assembly of mechanical parts that are made to operate together
-- **Example:**
   > **STE:** USE WHITE SPIRIT TO CLEAN A HINGE MECHANISM THAT HAS A GREASE NIPPLE.
 
 #### MEDICAL (adj) — APPROVED
 
 - **Meaning:** Related to medicine
-- **Example:**
   > **STE:** IF YOU GET HYDRAULIC FLUID IN YOUR EYES, FLUSH THEM WITH WATER AND GET MEDICAL AID.
 
 #### MELT (v) — APPROVED
 
 - **Inflected forms:** MELTS, MELTED, MELTED
 - **Meaning:** To change or to cause something to change from solid to liquid because of heat
-- **Examples:**
   > **STE:** THE FUSIBLE PLUGS MUST MELT IN 20 SECONDS OR LESS.
   > **STE:** DO NOT USE A FLAME TO MELT THE ICE.
 
 #### METHOD (n) — APPROVED
 
 - **Meaning:** A special type of procedure used to get a specified result
-- **Example:**
   > **STE:** THIS PROCEDURE GIVES TWO METHODS FOR THE TEMPORARY REPAIR OF THE WATER TUBES.
 
 #### MIDDLE (adj) — APPROVED
 
 - **Meaning:** At a point that is between two other points
-- **Example:**
   > **STE:** REMOVE THE MIDDLE BELLCRANK UNIT.
 
 #### MIDDLE (n) — APPROVED
 
 - **Meaning:** A point that is at or near the center
-- **Example:**
   > **STE:** LIFT THE SEAT TO THE MIDDLE OF THE TRAVEL.
 
-#### MINIMUM (adj) — APPROVED
 
 - **Meaning:** Related to the smallest dimension, quantity, number, or value
-- **Example:**
   > **STE:** MAKE SURE THAT THE FLUID IN THE RESERVOIR IS ABOVE THE MINIMUM LEVEL.
 
-#### MINIMUM (n) — APPROVED
 
 - **Meaning:** The smallest dimension, quantity, number, or value
-- **Example:**
   > **STE:** LET THE PAINT DRY FOR A MINIMUM OF 1 HOUR.
 
-#### MINUS (prep) — APPROVED
 
 - **Meaning:** With the subtraction of
-- **Example:**
   > **STE:** INCREASE THE PRESSURE IN THE SHOCK ABSORBER TO 85.5 bar, PLUS OR MINUS 2.7 bar.
 
 #### MISSING (adj) — APPROVED
 
 - **Meaning:** That is not there
-- **Example:**
   > **STE:** IF SEALS ARE MISSING, INSTALL NEW SEALS.
 
-#### MIX (v) — APPROVED
 
 - **Inflected forms:** MIXES, MIXED, MIXED
-- **Meanings:**
   1. To put together two or more materials to become one
   2. To become combined
-- **Examples:**
   > **STE:** MIX THE COMPOUND.
   > **STE:** IF FUEL AND WATER MIX, CONTAMINATION CAN OCCUR.
 
 #### MIXTURE (n) — APPROVED
 
 - **Meaning:** The result that you get when you mix materials
-- **Example:**
   > **STE:** DO NOT USE THIS MIXTURE WHEN THE TEMPERATURE IS LESS THAN 15 °C.
 
 #### MOBILE (adj) — APPROVED
 
 - **Meaning:** That is made to move easily
-- **Example:**
   > **STE:** CONNECT THE MOBILE GROUND POWER UNIT.
 
 #### MODE (n) — APPROVED
 
 - **Meaning:** A special condition of operation
-- **Example:**
   > **STE:** MAKE SURE THAT THE "HEADING SELECT" MODE OPERATES.
 
 #### MODERATE (adj), MODERATELY (adv) — APPROVED
@@ -16434,26 +14435,21 @@ For other meanings of "light", use:
 #### MOIST (adj) — APPROVED
 
 - **Meaning:** Moderately wet
-- **Example:**
   > **STE:** CLEAN THE PANEL WITH A MOIST CLOTH.
 
 #### MOMENTARILY (adv) — APPROVED
 
 - **Meaning:** For a short time
-- **Example:**
   > **STE:** STOP THE PUMP MOMENTARILY. THEN START IT AGAIN.
 
 #### MONITOR (v) — APPROVED
 
 - **Inflected forms:** MONITORS, MONITORED, MONITORED
 - **Meaning:** To do a check at something for a period of time to find if there is a change
-- **Examples:**
   > **STE:** MONITOR THE INDICATORS ON THE OVERHEAD PANEL.
   > **STE:** HEAT SENSORS MONITOR THE AMBIENT TEMPERATURE.
 
-### UNAPPROVED
 
-#### may (v) — UNAPPROVED
 
 - **Alternatives:**
   1. **CAN (v)**
@@ -16471,7 +14467,6 @@ For other meanings of "light", use:
 
 #### meet (v) — UNAPPROVED
 
-- **Alternatives:**
   1. **ENGAGE (v)**
      > **STE:** PUSH THE PIN IN UNTIL IT ENGAGES IN THE RETAINING CLIP.
      > **Non-STE:** Push the pin in until it meets with the retaining clip.
@@ -16523,7 +14518,6 @@ For other meanings of "light", use:
 
 #### miscellaneous (adj) — UNAPPROVED
 
-- **Alternatives:**
   1. **OTHER (adj)**
      > **STE:** REMOVE THE TOOLS AND THE OTHER RELATED ITEMS.
      > **Non-STE:** Remove the tools and the related miscellaneous items.
@@ -16543,9 +14537,7 @@ For other meanings of "light", use:
   > **STE:** THE POTLIFE OF THE MIXTURE IS APPROXIMATELY 4 HOURS.
   > **Non-STE:** The potlife of the mix is approximately 4 hours.
 
-#### modify (v) — UNAPPROVED
 
-- **Alternatives:**
   1. **CHANGE (v)**
      > **STE:** SERVICE BULLETIN No. 105 CHANGES THE BOLTS THAT ATTACH THE POWER CONTROL UNIT.
      > **Non-STE:** Service Bulletin No. 105 modifies the power control unit attachment bolts.
@@ -16556,7 +14548,6 @@ For other meanings of "light", use:
 #### moisten (v) — UNAPPROVED
 
 - **Alternative:** MOIST (adj)
-  > **STE:** MAKE THE CLOTH MOIST WITH SOLVENT.
   > **Non-STE:** Moisten the cloth with solvent.
 
 #### momentary (adj) — UNAPPROVED
@@ -16566,12 +14557,9 @@ For other meanings of "light", use:
   > **Non-STE:** Check for momentary increase in speed.
 # Page 313 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 313–316 of 434
 
-## Dictionary
 
-### APPROVED
 
 #### MOOR (v) — APPROVED
 
@@ -16579,22 +14567,18 @@ For other meanings of "light", use:
 - **Meaning:** To hold something in position with ropes and cables
   > **STE:** IN BAD WEATHER CONDITIONS, MOOR THE BOAT.
 
-#### MORE (adj) — APPROVED
 
 - **Meaning:** A large quantity of
   > **STE:** ADD MORE SHIMS UNTIL YOU GET THE SPECIFIED CLEARANCE.
 
-#### MORE (adv) — APPROVED
 
 - **Meaning:** To a larger degree
   > **STE:** CORROSION CAN OCCUR MORE EASILY IN THIS AREA THAN IN OTHER AREAS.
 
-#### MOST (adj) — APPROVED
 
 - **Meaning:** To the largest quantity of
   > **STE:** MOST MANUFACTURERS RECOMMEND SYNTHETIC LUBRICANTS.
 
-#### MOST (adv) — APPROVED
 
 - **Meaning:** To the largest degree
   > **STE:** FAULT MESSAGES THAT SHOW IN RED ARE THE MOST IMPORTANT.
@@ -16636,30 +14620,25 @@ For other meanings of "light", use:
   > **STE:** THE NUMBER OF CRACKS CAN INCREASE.
   > **Non-STE:** Cracks can multiply.
 
-#### MUST (v) — APPROVED
 
 - **Meaning:** Auxiliary modal verb that shows obligation
   > **STE:** THE BAT 1 SWITCH MUST BE IN THE ON POSITION.
 
-#### NAME (n) — APPROVED
 
 - **Meaning:** The identification you give to a person or an object
   > **STE:** PUSH THE BUTTON ADJACENT TO THE NAME OF THE SYSTEM.
   > **STE:** WRITE YOUR NAME ON THE REGISTRATION FORM.
 
-#### NEAR (adj) — APPROVED
 
 - **Forms:** NEARER, NEAREST
 - **Meaning:** At or to a relatively short distance
   > **STE:** PUT THE SYRINGE ON THE NEAREST SURFACE OF THE EXAMINATION TABLE.
 
-#### NEAR (prep) — APPROVED
 
 - **Meaning:** Approaching in space or condition
   > **STE:** BALANCE THE ELEVATOR NEAR ITS MAXIMUM LIMIT.
   > **STE:** MAKE SURE THAT THE COMPUTER SCREEN IS NOT NEAR THE WINDOW.
 
-#### NECESSARY (adj) — APPROVED
 
 - **Meaning:** That must be
   > **STE:** TWO HOURS ARE NECESSARY TO COMPLETE THE EXAM.
@@ -16677,7 +14656,6 @@ For other meanings of "light", use:
 - **Meaning:** Not used before
   > **STE:** INSTALL A NEW GASKET ON THE FLANGE.
 
-#### NEXT (adj) — APPROVED
 
 - **Meaning:** The first occurrence that follows immediately after in time or sequence
   > **STE:** REMOVE THE UNIT BEFORE THE NEXT OPERATING CYCLE.
@@ -16702,7 +14680,6 @@ For other meanings of "light", use:
 - **Meaning:** Not one, not anyone
   > **STE:** IF NONE OF THE BRACKETS ARE DAMAGED, CONTINUE THE INSPECTION.
 
-### UNAPPROVED
 
 #### motion (n) — UNAPPROVED
 
@@ -16740,7 +14717,6 @@ For other meanings of "light", use:
   > **STE:** MOVE THE POINTER UNTIL IT IS ALMOST IN THE GREEN BAND.
   > **Non-STE:** Move the pointer until it is nearly in the green band.
 
-#### need (v) — UNAPPROVED
 
 - **Alternative:** NECESSARY (adj)
   > **STE:** DURING THIS PROCEDURE, IT IS NOT NECESSARY TO REPLACE THE BACKING RINGS.
@@ -16754,11 +14730,8 @@ For other meanings of "light", use:
 
 #### neither (pron) — UNAPPROVED
 
-- **Alternative:** TWO (TN) … NOT
-  > **STE:** THE TWO UNITS MUST NOT OPERATE.
   > **Non-STE:** Neither of the units must operate.
 
-#### neutralize (v) — UNAPPROVED
 
 - **Alternative:** NEUTRAL (adj)
   > **STE:** MAKE THE BASIC ELECTROLYTE NEUTRAL WITH VINEGAR OR BORIC ACID.
@@ -16776,32 +14749,26 @@ For other meanings of "light", use:
   > **STE:** HOLD THE FLANGE IN ITS POSITION. THEN, INSTALL THE BOLT.
   > **Non-STE:** Hold the flange in its position. Next, install the bolt.
 
-#### next to (prep) — UNAPPROVED
 
 - **Alternative:** ADJACENT TO (prep)
   > **STE:** THE PUMP IS ADJACENT TO THE CENTRAL RIB.
   > **Non-STE:** The pump is next to the central rib.
 
-#### noisy (adj) — UNAPPROVED
 
 - **Alternative:** NOISE (n)
   > **STE:** IF THERE IS NOISE WHEN THE PUMP OPERATES, EXAMINE THE FILTER FOR UNWANTED PARTICLES.
   > **Non-STE:** If pump operation is noisy, check the pump filter for unwanted particles.
 # Page 317 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 317–320 of 434
 
-## Dictionary
 
-### APPROVED
 
 #### NOSE (n) — APPROVED
 
 - **Meaning:** The front end or part, a part that protrudes
 - **STE:** PULL THE TRANSPARENT PLASTIC COLLAR AWAY FROM THE NOSE OF THE ELECTRICAL LATCH.
 
-#### NOT (adv) — APPROVED
 
 - **Meaning:** Adverb of negation
 - **STE:** DO NOT LET THE PRESSURE INCREASE TO MORE THAN 3000 psi.
@@ -16846,7 +14813,6 @@ For other meanings of "light", use:
 
 #### OFF (adv) — APPROVED
 
-- **Meaning:** Not in operation
 - **STE:** MAKE SURE THAT THE WARNING LIGHT GOES OFF.
 - **Meaning:** Not in contact
 - **STE:** THE HANDLE MUST COME OFF EASILY.
@@ -16856,7 +14822,6 @@ For other meanings of "light", use:
 - **Meaning:** Not in contact with
 - **STE:** MAKE SURE THAT THE TIRE IS FULLY OFF THE GROUND.
 
-### UNAPPROVED
 
 #### nor (conj) — UNAPPROVED
 
@@ -16864,45 +14829,32 @@ For other meanings of "light", use:
 - **STE:** IN THESE CONDITIONS, THE MECHANICAL AND ELECTRICAL PITCH TRIM SYSTEMS WILL NOT OPERATE.
 - **Non-STE:** In these conditions, neither the mechanical nor the electrical pitch trim systems will operate.
 
-#### normal (adj) — UNAPPROVED
 
 - **Approved alternative:** USUAL (adj)
 - **STE:** THE "ARMED" POSITION IS THE USUAL POSITION OF THE SWITCH.
 - **Non-STE:** The ARMED position is the normal position of the switch.
-- **Approved alternative:** CORRECT (adj)
 - **STE:** THE CORRECT PRESSURE FOR OPERATION IS 3000 psi.
 - **Non-STE:** Normal operating pressure is 3000 psi.
 
-#### normally (adv) — UNAPPROVED
 
-- **Approved alternative:** USUALLY (adv)
 - **STE:** THE SWITCH IS USUALLY IN THE "STANDBY" POSITION.
 - **Non-STE:** The switch is normally in the STANDBY position.
-- **Approved alternative:** CORRECTLY (adv)
 - **STE:** IF THE SYSTEM DOES NOT OPERATE CORRECTLY, REFER TO THE FAULT ISOLATION PROCEDURE.
 - **Non-STE:** If the system does not operate normally, refer to the fault isolation procedure.
 
-#### note (v) — UNAPPROVED
 
-- **Approved alternative:** RECORD (v)
 - **STE:** RECORD DIMENSION "A."
 - **Non-STE:** Note dimension A.
 
-#### notify (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 - **STE:** IF YOU FIND CRACKS, TELL THE CHIEF INSPECTOR.
 - **Non-STE:** If cracks are found, notify the chief inspector.
 - **Approved alternative:** CONTACT (v)
 - **STE:** IF YOU FIND CRACKS, CONTACT THE CHIEF INSPECTOR.
-- **Non-STE:** If cracks are found, notify the chief inspector.
-- **Approved alternative:** WRITE (v)
 - **STE:** IF THE UNIT DOES NOT OPERATE CORRECTLY, WRITE TO THE MANUFACTURER.
 - **Non-STE:** If the unit does not operate correctly, notify the manufacturer.
 
-#### now (adv) — UNAPPROVED
 
-- **Approved alternative:** AT THIS TIME
 - **STE:** DO NOT TIGHTEN THE NUTS AT THIS TIME.
 - **Non-STE:** Do not tighten the nuts now.
 
@@ -16911,22 +14863,17 @@ For other meanings of "light", use:
 - **Approved alternative:** MONITOR (v)
 - **STE:** MONITOR THE RADIO ALTIMETER INDICATOR.
 - **Non-STE:** Observe the radio altimeter indicator.
-- **Approved alternative:** SEE (v)
 - **STE:** IF YOU SEE OIL IN THE DRAIN, STOP THE TEST.
 - **Non-STE:** If you observe oil in the drain, stop the test.
-- **Approved alternative:** OBEY (v)
 - **STE:** OBEY ALL SAFETY PRECAUTIONS.
 - **Non-STE:** Observe all safety precautions.
 
 #### obstruct (v) — UNAPPROVED
 
-- **Approved alternative:** CATCH (v)
 - **STE:** MAKE SURE THAT THE DRAG STRUTS DO NOT CATCH ON THE LANDING GEAR.
 - **Non-STE:** Make sure that the drag struts do not obstruct the landing gear.
-- **Approved alternative:** PREVENT (v)
 - **STE:** ADJUST THE LEVER ARMS IF THEY PREVENT MOVEMENT.
 - **Non-STE:** Adjust the lever arms if they obstruct movement.
-- **Approved alternative:** BLOCKAGE (n)
 - **STE:** REMOVE THE DIRT THAT CAUSES THE BLOCKAGE IN THE TUBE.
 - **Non-STE:** Remove the dirt obstructing the tube.
 
@@ -16935,19 +14882,16 @@ For other meanings of "light", use:
 - **Approved alternative:** BLOCKED (adj)
 - **STE:** IF THE DRAIN HOLE IS BLOCKED, REMOVE THE UNWANTED MATERIAL.
 - **Non-STE:** If the drain hole is obstructed, remove the unwanted material.
-- **Approved alternative:** CLOGGED (adj)
 - **STE:** IF THE DRAIN HOLE IS CLOGGED, CLEAN IT.
 - **Non-STE:** If the drain hole is obstructed, clean it.
 
 #### obstruction (n) — UNAPPROVED
 
-- **Approved alternative:** BLOCKAGE (n)
 - **STE:** EXAMINE THE DRAIN HOLES FOR BLOCKAGE.
 - **Non-STE:** Examine the drain holes for obstruction.
 
 #### obtain (v) — UNAPPROVED
 
-- **Approved alternative:** GET (v)
 - **STE:** ADD 0.05 mm TO GET THE CORRECT CLEARANCE FOR A STANDARD SPHERICAL COUPLING.
 - **Non-STE:** Add 0.05 mm to obtain the correct clearance for a standard spherical coupling.
 
@@ -16959,20 +14903,16 @@ For other meanings of "light", use:
 
 #### oil (v) — UNAPPROVED
 
-- **Approved alternative:** LUBRICATE (v)
 - **STE:** LUBRICATE THE LINKAGE WITH OIL.
 - **Non-STE:** Oil the linkage.
 - **Approved alternative:** OIL (TN)
 - **STE:** PUT OIL ON THE LINKAGE.
-- **Non-STE:** Oil the linkage.
 
 #### oil-free (adj) — UNAPPROVED
 
-- **Approved alternative:** OIL (TN)
 - **STE:** USE A SOLUTION THAT CONTAINS NO OIL.
 - **Non-STE:** Use an oil-free solution.
 
-#### old (adj) — UNAPPROVED
 
 - **Approved alternative:** REMAINING (adj)
 - **STE:** REMOVE THE REMAINING SEALANT.
@@ -16985,10 +14925,8 @@ For other meanings of "light", use:
 - **Non-STE:** Make sure that the material is not too old.
 # Page 321 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 321–324 of 434
 
-## UNAPPROVED
 
 #### omit (v) — UNAPPROVED
 
@@ -16996,21 +14934,16 @@ For other meanings of "light", use:
 > **STE:** DO NOT DO STEPS 3 THRU 5.
 > **Non-STE:** Omit steps 3 to 5.
 
----
 
-## APPROVED
 
-#### IGNORE (v) — APPROVED
 
 > **STE:** IGNORE STEPS 3 THRU 5.
-> **Non-STE:** Omit steps 3 to 5.
 
 #### ON (adj) — APPROVED
 
 - Meaning: In operation
 > **STE:** MAKE SURE THAT THE BATTERIES ARE ON.
 
-#### ON (adv) — APPROVED
 
 1. Meaning: In operation
 > **STE:** MAKE SURE THAT THE WARNING LIGHT STAYS ON.
@@ -17022,9 +14955,7 @@ For other meanings of "light", use:
 - Meaning: Function word that shows contact, support, direction
 > **STE:** PUT THE ASSEMBLED PARTS ON THE SUPPORT FITTING.
 
----
 
-## UNAPPROVED
 
 #### once (adv) — UNAPPROVED
 
@@ -17038,11 +14969,8 @@ For other meanings of "light", use:
 > **STE:** WHEN THE UNIT IS ON ITS MOUNTING, LOCK IT.
 > **Non-STE:** Once the unit is on its mounting, lock it.
 
----
 
-## APPROVED
 
-#### ONE (pron) — APPROVED
 
 - Meaning: That refers to a single person or object. You can also use this word as a technical noun.
 > **STE:** IF THE LABEL IS NOT THERE, ATTACH A NEW ONE.
@@ -17062,9 +14990,7 @@ For other meanings of "light", use:
 - Meaning: To a position on or upon
 > **STE:** WHEN YOU LOWER THE PUMP, MOVE IT ONTO THE MOUNTING BRACKETS.
 
----
 
-## UNAPPROVED
 
 #### opaque (adj) — UNAPPROVED
 
@@ -17072,9 +14998,7 @@ For other meanings of "light", use:
 > **STE:** CLEAN THE PLASTIC SURFACES THAT ARE NOT TRANSPARENT.
 > **Non-STE:** Clean the opaque plastic surfaces.
 
----
 
-## APPROVED
 
 #### OPEN (adj) — APPROVED
 
@@ -17086,7 +15010,6 @@ For other meanings of "light", use:
 - Forms: OPENS, OPENED, OPENED
 1. Meaning: To move or cause to move from the closed position
 > **STE:** OPEN THE PRESSURE VALVE.
-> **STE:** WHEN THE RELIEF VALVE OPENS, THE PRESSURE DECREASES.
 2. Meaning: To operate a circuit breaker to interrupt an electrical circuit
 > **STE:** OPEN THE CIRCUIT BREAKER.
 
@@ -17095,34 +15018,25 @@ For other meanings of "light", use:
 - Meaning: An aperture or hole in a surface
 > **STE:** MAKE SURE THAT THE OPENING IS CLEAR.
 
----
 
-## UNAPPROVED
 
-#### operable (adj) — UNAPPROVED
 
 - Approved alternative: OPERATE (v)
 > **STE:** MAKE SURE THAT THE VALVE CAN OPERATE.
-> **Non-STE:** Make sure that the valve is operable.
 > **STE:** MAKE SURE THAT YOU CAN OPERATE THE VALVE.
 > **Non-STE:** Check that the valve is operable.
 
-#### operational (adj) — UNAPPROVED
 
 - Approved alternative: SERVICEABLE (adj)
 > **STE:** MAKE SURE THAT THE OTHER MICROSWITCH IS SERVICEABLE.
 > **Non-STE:** Check that the other microswitch is operational.
-- Approved alternative: OPERATE (v)
 > **STE:** MAKE SURE THAT THE GROUND-PROXIMITY WARNING SYSTEM CAN OPERATE.
 > **Non-STE:** Check that the ground-proximity warning system is operational.
 - Note: This word can be part of a technical noun.
 > **STE:** DO AN OPERATIONAL TEST OF THE UNIT.
 
----
 
-## APPROVED
 
-#### OPERATE (v) — APPROVED
 
 - Forms: OPERATES, OPERATED, OPERATED
 - Meaning: To put, keep, or be in action
@@ -17134,24 +15048,18 @@ For other meanings of "light", use:
 - Meaning: That which occurs when something operates or is operated
 > **STE:** THIS PROCEDURE IS IMPORTANT FOR THE CORRECT OPERATION OF THE VALVE.
 
----
 
-## UNAPPROVED
 
-#### opportunity (n) — UNAPPROVED
 
 - Approved alternative: If it is possible, be accurate.
 > **STE:** REPLACE THE UNIT AT THE NEXT CHECK.
 > **Non-STE:** Replace the unit at the first opportunity.
 
----
 
-## APPROVED
 
 #### OPPOSITE (adj) — APPROVED
 
 1. Meaning: In the other direction
-> **STE:** THE RESET DEVICE OPERATES IN THE OPPOSITE DIRECTION.
 2. Meaning: Across from
 > **STE:** THE BOLTS ARE ON THE OPPOSITE SIDE OF THE FLANGE.
 
@@ -17160,11 +15068,8 @@ For other meanings of "light", use:
 - Meaning: Across from
 > **STE:** THE UNIT IS IN THE WHEEL BAY OPPOSITE THE LANDING GEAR.
 
----
 
-## UNAPPROVED
 
-#### option (n) — UNAPPROVED
 
 - Approved alternative: ALTERNATIVE (n)
 > **STE:** FOR THIS TASK, YOU HAVE THESE ALTERNATIVES:
@@ -17174,18 +15079,14 @@ For other meanings of "light", use:
 > **Non-STE:** If you have the option, do the inspection in daylight.
 - Approved alternative: CAN (v)
 > **STE:** IF YOU CAN, DO THE INSPECTION IN DAYLIGHT.
-> **Non-STE:** If you have the option, do the inspection in daylight.
 
----
 
-## APPROVED
 
 #### OPTIONAL (adj) — APPROVED
 
 - Meaning: Not mandatory
 > **STE:** THIS TOOL IS OPTIONAL.
 
-#### OR (conj) — APPROVED
 
 - Meaning: Function word that shows a choice
 > **STE:** DO NOT TOUCH THE HIGH TENSION LEADS OR THE IGNITER PLUGS.
@@ -17193,9 +15094,7 @@ For other meanings of "light", use:
 > **Non-STE:** Make sure that the L-shaped seal stays bonded, or a leak can occur.
 > **STE:** MAKE SURE THAT THE L-SHAPED SEAL STAYS BONDED. IF THE SEAL DOES NOT STAY BONDED, A LEAK CAN OCCUR.
 
----
 
-## UNAPPROVED
 
 #### order (n) — UNAPPROVED
 
@@ -17232,13 +15131,10 @@ For other meanings of "light", use:
 
 #### originate (v) — UNAPPROVED
 
-- Approved alternative: SOURCE (n)
 > **STE:** IF THE VALVE IS THE SOURCE OF THE FUEL LEAK, REPLACE THE VALVE SEALS.
 > **Non-STE:** If the fuel leak originates at the valve, replace the valve seals.
 
----
 
-## APPROVED
 
 #### OTHER (adj) — APPROVED
 
@@ -17250,9 +15146,7 @@ For other meanings of "light", use:
 - Meaning: That which is not the same as that given before
 > **STE:** CONNECT ONE PLUG, THEN CONNECT THE OTHER.
 
----
 
-## UNAPPROVED
 
 #### otherwise (adv) — UNAPPROVED
 
@@ -17263,9 +15157,7 @@ For other meanings of "light", use:
 > **STE:** UNLESS THE INSTRUCTIONS TELL YOU DIFFERENTLY, DO REPAIR SCHEME No. 4.
 > **Non-STE:** Unless the instructions tell you otherwise, do repair scheme No. 4.
 
----
 
-## APPROVED
 
 #### OUT (adj) — APPROVED
 
@@ -17285,10 +15177,8 @@ For other meanings of "light", use:
 > **STE:** KEEP THE COMPOUND OUT OF THE SUNLIGHT.
 # Page 325 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 325–328 of 434
 
-## APPROVED
 
 #### OUTBOARD (adj) — APPROVED
 
@@ -17325,7 +15215,6 @@ For other meanings of "light", use:
 - Meaning: Out of a vessel
 > **STE:** RELEASE THE AIR OVERBOARD.
 
-#### OVERLAP (n) — APPROVED
 
 - Meaning: The area in which a part of one surface is on a part of a second surface
 > **STE:** IF THE OVERLAP IS MORE THAN 0,01 mm, REPLACE THE PART.
@@ -17336,9 +15225,7 @@ For other meanings of "light", use:
 - Forms: OVERRIDES, OVERRODE, OVERRIDDEN
 > **STE:** MANUALLY OVERRIDE THE START SEQUENCE.
 
----
 
-## UNAPPROVED
 
 #### outline (v) — UNAPPROVED
 
@@ -17363,12 +15250,9 @@ For other meanings of "light", use:
 
 #### outside (n) — UNAPPROVED
 
-- Approved alternative: EXTERNAL (adj)
 > **STE:** FOLD THE EDGING AGAINST THE EXTERNAL SIDE OF THE INSULATION BLANKET.
 > **Non-STE:** Fold the edging against the outside of the insulation blankets.
-- Approved alternative: OUTER (adj)
 > **STE:** FOLD THE EDGING AGAINST THE OUTER SIDE OF THE INSULATION BLANKET.
-> **Non-STE:** Fold the edging against the outside of the insulation blankets.
 
 #### outside (prep) — UNAPPROVED
 
@@ -17382,7 +15266,6 @@ For other meanings of "light", use:
 > **STE:** MOVE THE DOOR OUT AND FORWARD.
 > **Non-STE:** Move the door outwards and forwards.
 
-#### over (prep) — UNAPPROVED
 
 - Approved alternative: ABOVE (prep)
 > **STE:** MAKE SURE THAT THE HYDRAULIC FLUID LEVEL IS NOT ABOVE THE "FULL" MARK.
@@ -17437,18 +15320,14 @@ For other meanings of "light", use:
 > **Non-STE:** Do not overtighten the fittings.
 - Approved alternative: TOO TIGHT
 > **STE:** DO NOT MAKE THE FITTINGS TOO TIGHT.
-> **Non-STE:** Do not overtighten the fittings.
 - Approved alternative: TOO TIGHTLY
 > **STE:** DO NOT INSTALL THE FITTINGS TOO TIGHTLY.
-> **Non-STE:** Do not overtighten the fittings.
 
 *Page 328 is blank.*
 # Page 329 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 329–332 of 434
 
-## UNAPPROVED
 
 #### pack (v) — UNAPPROVED
 
@@ -17459,9 +15338,7 @@ For other meanings of "light", use:
 > **STE:** FILL THE GROOVE WITH GREASE.
 > **Non-STE:** Pack grease into the groove.
 
----
 
-## APPROVED
 
 #### PAINT (v) — APPROVED
 
@@ -17474,29 +15351,23 @@ For other meanings of "light", use:
 - Meaning: Two objects that are the same or almost the same, and/or that you use together
 > **STE:** MEASURE THE DISTANCE BETWEEN EACH PAIR OF AXLES.
 
-#### PARALLEL (adj) — APPROVED
 
 - Meaning: Along lines that stay a constant distance apart at all points
 > **STE:** MAKE SURE THAT THE SURFACE IS PARALLEL TO THE AXIS OF THE SHAFT.
 
-#### PARK (v) — APPROVED
 
 - Meaning: To stop a vehicle and to let it stay in one position on the ground
 - Forms: PARKS, PARKED, PARKED
 > **STE:** PARK THE CAR IN THE PERMITTED AREA.
 
-#### PART (n) — APPROVED
 
 - Meaning 1: A constituent of an object, machine, component, assembly, or equipment
 > **STE:** REPLACE THE DEFECTIVE PARTS.
 - Meaning 2: A piece or section of a whole
 > **STE:** REFER TO PART 2 FOR THE APPLICABLE PROCEDURE.
 
----
 
-## UNAPPROVED
 
-#### part (v) — UNAPPROVED
 
 - Approved alternative: DISCONNECT (v)
 > **STE:** DISCONNECT THE PIPES.
@@ -17510,22 +15381,16 @@ For other meanings of "light", use:
 
 #### partially (adv) — UNAPPROVED
 
-- Approved alternative: NOT FULLY
 > **STE:** IF THE FLAPS DO NOT FULLY EXTEND, DO THE TEST AGAIN.
 > **Non-STE:** If the flaps only partially extend, do the test again.
 
----
 
-## APPROVED
 
-#### PARTICLE (n) — APPROVED
 
 - Meaning: A very small piece of material
 > **STE:** IF THERE ARE METAL PARTICLES IN THE DISASSEMBLED PUMP, FIND THE SOURCE OF CONTAMINATION.
 
----
 
-## UNAPPROVED
 
 #### particular (adj) — UNAPPROVED
 
@@ -17536,15 +15401,12 @@ For other meanings of "light", use:
 > **STE:** THIS STEP IS VERY IMPORTANT.
 > **Non-STE:** This step is of particular importance.
 
-#### particularly (adv) — UNAPPROVED
 
-- Approved alternative: VERY (adv)
 > **STE:** THIS PRECAUTION IS VERY IMPORTANT.
 > **Non-STE:** This precaution is particularly important.
 
 #### partly (adv) — UNAPPROVED
 
-- Approved alternative: NOT FULLY
 > **STE:** IF THE VALVE DOES NOT FULLY OPEN, EXAMINE THE POSITIONS OF THE END STOPS ON THE ACTUATOR.
 > **Non-STE:** If the valve opens only partly, examine the positions of the end stops on the actuator.
 
@@ -17556,7 +15418,6 @@ For other meanings of "light", use:
 - Approved alternative: THROUGH (prep)
 > **STE:** PUT THE ANTENNA CABLE THROUGH THE TOP SLOTS.
 > **Non-STE:** Pass the antenna cable through the top slots.
-- Approved alternative: GIVE (v)
 > **STE:** GIVE ONE END OF THE CABLE TO A SECOND PERSON.
 > **Non-STE:** Pass one end of the cable to another person.
 
@@ -17570,22 +15431,17 @@ For other meanings of "light", use:
 > **Non-STE:** Carefully put the tube through the passage.
 - Approved alternative: OPENING (n)
 > **STE:** CAREFULLY PUT THE TUBE THROUGH THE OPENING.
-> **Non-STE:** Carefully put the tube through the passage.
 
 #### past (prep) — UNAPPROVED
 
 - Approved alternative: AROUND (prep)
 > **STE:** IF YOU INSTALL THE SEAL INCORRECTLY, LEAKS CAN OCCUR AROUND THE VALVE.
 > **Non-STE:** If you install the seal incorrectly, leaks can occur past the valve.
-- Approved alternative: THROUGH (prep)
 > **STE:** IF YOU INSTALL THE SEAL INCORRECTLY, THE FLUID WILL GO THROUGH IT.
 > **Non-STE:** An incorrect installation of the seal will let fluid go past it.
 
----
 
-## APPROVED
 
-#### PASTE (n) — APPROVED
 
 - Meaning: A wet, flexible mixture or compound
 > **STE:** MIX THE MATERIALS UNTIL THEY MAKE A SOLID PASTE.
@@ -17595,9 +15451,7 @@ For other meanings of "light", use:
 - Meaning: A piece of material that you use to repair a surface or hole
 > **STE:** BOND THE PATCH TO THE TUBE WITH ADHESIVE.
 
----
 
-## UNAPPROVED
 
 #### penetrate (v) — UNAPPROVED
 
@@ -17608,7 +15462,6 @@ For other meanings of "light", use:
 > **STE:** MAKE SURE THAT THE HYDRAULIC FLUID DOES NOT GO INTO THE RECEPTACLES.
 > **Non-STE:** Make sure that the hydraulic fluid does not penetrate the receptacles.
 
-#### people (n) — UNAPPROVED
 
 - Approved alternative: PERSON (n)
 - Approved alternative: PERSONNEL (n)
@@ -17619,7 +15472,6 @@ For other meanings of "light", use:
 > **Non-STE:** Tell your people about these new regulations.
 > **See:** Dictionary entry for PERSON (n) and PERSONNEL (n).
 
-#### per (prep) — UNAPPROVED
 
 - Approved alternative: FOR EACH
 > **STE:** DO NOT USE MORE THAN TWO WASHERS FOR EACH BOLT.
@@ -17630,11 +15482,9 @@ For other meanings of "light", use:
 
 #### perforated (adj) — UNAPPROVED
 
-- Approved alternative: HOLE (n)
 > **STE:** MAKE SURE THAT THERE ARE NO HOLES IN THE MEMBRANE.
 > **Non-STE:** Make sure that the membrane is not perforated.
 
-#### perform (v) — UNAPPROVED
 
 - Approved alternative: DO (v)
 > **STE:** DO THE LEAK TEST.
@@ -17644,11 +15494,8 @@ For other meanings of "light", use:
 > **Non-STE:** Perform the voltage measurement between pins A and B.
 - Note: You can also use a more accurate verb.
 
----
 
-## APPROVED
 
-#### PERFORMANCE (n) — APPROVED
 
 - Meaning: The ability of a part, a mechanism, or system to do its necessary function when you compare it with a standard or specification
 > **STE:** THESE ADJUSTMENTS WILL INCREASE THE PERFORMANCE OF THE ENGINE.
@@ -17661,33 +15508,24 @@ For other meanings of "light", use:
 - Meaning: A quantity of time
 > **STE:** THE EMERGENCY LOCATOR TRANSMITTER HAS A STANDBY PERIOD OF 30 SECONDS.
 
----
 
-## UNAPPROVED
 
-#### periodically (adv) — UNAPPROVED
 
 - Approved alternative: INTERVAL (n)
 > **STE:** EXAMINE THE CONDITION OF HOSES AND SEALS AT INTERVALS OF TWO YEARS.
 > **Non-STE:** Examine the condition of hoses and seals periodically. Give the value.
 
----
 
-## APPROVED
 
-#### PERMANENT (adj) — APPROVED
 
 - Meaning: Without a limit in time
 > **STE:** MAKE SURE THAT THE PERMANENT INSTALLATION OF THE SYSTEM IS SAFE.
 
-#### PERMANENTLY (adv) — APPROVED
 
 - Meaning: In a permanent manner
 > **STE:** THE "NO SMOKING" SIGNS WILL STAY ON PERMANENTLY.
 
----
 
-## UNAPPROVED
 
 #### permissible (adj) — UNAPPROVED
 
@@ -17702,9 +15540,7 @@ For other meanings of "light", use:
 > **STE:** DO NOT LET THE FLUID TOUCH YOU.
 > **Non-STE:** Do not permit the fluid to touch you.
 
----
 
-## APPROVED
 
 #### PERMITTED (adj) — APPROVED
 
@@ -17717,35 +15553,27 @@ For other meanings of "light", use:
 > **STE:** MAKE SURE THAT THE TOOL AND FASTENER ARE PERPENDICULAR TO THE WORK SURFACE.
 # Page 333 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 333–336 of 434
 
-## APPROVED
 
-#### PERSON (n) — APPROVED
 
 - Meaning: A human being
 > **STE:** WHEN YOU DO WORK IN ISOLATED LOCATIONS, MAKE SURE THAT THERE IS ALWAYS A PERSON NEAR YOU.
 
-#### PERSONNEL (n) — APPROVED
 
 - Meaning: Persons employed in a group or organization
-> **STE:** TELL YOUR PERSONNEL ABOUT THESE NEW REGULATIONS.
 
 #### PIECE (n) — APPROVED
 
 - Meaning: A quantity or segment of a whole that you can use on its own, or that can operate as an individual item
 > **STE:** REMOVE ALL PIECES OF THE BROKEN SEAL.
 
-#### PLAY (n) — APPROVED
 
 - Meaning: Free movement, the length or dimension of this movement
 > **STE:** THE AXIAL PLAY BETWEEN THE TWO GEARS MUST BE LESS THAN 0.05 mm.
 
-#### PLUS (prep) — APPROVED
 
 - Meaning: With the addition of
-> **STE:** INCREASE THE PRESSURE IN THE SHOCK ABSORBER TO 85.5 bar, PLUS OR MINUS 2.7 bar.
 
 #### PNEUMATIC (adj) — APPROVED
 
@@ -17754,14 +15582,12 @@ For other meanings of "light", use:
 - Related form: PNEUMATICALLY (adv) — APPROVED
 > **STE:** SOME VALVES IN THE SYSTEM OPERATE PNEUMATICALLY.
 
-#### POINT (n) — APPROVED
 
 - Meaning 1: A sharp or tapered end
 > **STE:** PUT THE POINT OF THE TOOL IN THE SLOT.
 - Meaning 2: An accurate location
 > **STE:** ON THE FLANGE, MEASURE THE DISTANCE BETWEEN POINTS "A" AND "B."
 
-#### POINT (v) — APPROVED
 
 - Forms: POINTS, POINTED, POINTED
 - Meaning 1: To show the position or direction of
@@ -17769,7 +15595,6 @@ For other meanings of "light", use:
 - Meaning 2: To turn something in a specified direction
 > **STE:** DO NOT POINT THE COMPRESSED AIR NOZZLE AT YOUR SKIN.
 
-#### POISONOUS (adj) — APPROVED
 
 - Meaning: That contains poison
 > **STE:** DO NOT SWALLOW LUBRICATING OIL. IT IS POISONOUS.
@@ -17780,39 +15605,31 @@ For other meanings of "light", use:
 - Meaning: To make smooth or shiny
 > **STE:** POLISH THE WINDOW PANE WITH A SOFT CLOTH.
 
-#### POSITION (n) — APPROVED
 
 - Meaning: The attitude or setting of something that you can adjust, or the place or site where you put something
 > **STE:** SET THE SWITCH TO THE CORRECT POSITION.
 > **STE:** ON THE CENTER PEDESTAL, MAKE SURE THAT THE WARNING NOTICES ARE IN POSITION.
 
-#### POSSIBLE (adj) — APPROVED
 
 - Meaning: That can occur
 > **STE:** IF YOU DO NOT USE A PROTECTIVE COVER, DAMAGE TO THE SURFACE IS POSSIBLE.
 
 #### POSSIBLY (adv) — APPROVED
 
-- Meaning: That can occur
-> **STE:** IF YOU CANNOT ENGAGE THE ROD AND THE PISTON, THE LENGTH OF THE NEW ROD IS POSSIBLY INCORRECT.
 
 #### PRECAUTION (n) — APPROVED
 
 - Meaning: That which you do to prevent injury and/or damage
 > **STE:** OBEY THESE PRECAUTIONS.
 
----
 
-## UNAPPROVED
 
 #### precautionary (adj) — UNAPPROVED
 
 - Approved alternative: PRECAUTION (n)
-> **STE:** OBEY THESE PRECAUTIONS.
 > **Non-STE:** Take these precautionary measures.
 > **See:** Dictionary entry for PRECAUTION (n).
 
-#### persist (v) — UNAPPROVED
 
 - Approved alternative: CONTINUE (v)
 > **STE:** IF THE FAULT MESSAGE CONTINUES, PUSH THE AUDIO CANCEL SWITCH ON THE TEST PANEL.
@@ -17824,19 +15641,16 @@ For other meanings of "light", use:
 > **STE:** IF YOU HEAR CONTINUOUS BACKGROUND NOISE, FIND THE CAUSE.
 > **Non-STE:** If you hear persistent background noise, find the cause.
 
-#### pertinent (adj) — UNAPPROVED
 
 - Approved alternative: APPLICABLE (adj)
 > **STE:** MAKE SURE THAT YOU HAVE ALL THE APPLICABLE DOCUMENTS.
 > **Non-STE:** Make sure that you have all the pertinent documents.
 
-#### picket (v) — UNAPPROVED
 
 - Approved alternative: MOOR (v)
 > **STE:** IF STRONG WINDS OCCUR, MOOR THE VEHICLE.
 > **Non-STE:** Picket the vehicle in strong winds.
 
-#### place (n) — UNAPPROVED
 
 - Approved alternative: POSITION (n)
 > **STE:** MAKE SURE THAT ALL COVERS ARE IN THEIR POSITION.
@@ -17848,12 +15662,10 @@ For other meanings of "light", use:
 
 #### place (v) — UNAPPROVED
 
-- Approved alternative: PUT (v)
 > **STE:** PUT THE MANIFOLD IN POSITION.
 > **Non-STE:** Place the manifold in position.
 > **See:** Dictionary entry for PUT (v).
 
-#### placard (v) — UNAPPROVED
 
 - Approved alternative: PUT (v) (A PLACARD [TN])
 > **STE:** BEFORE YOU START THE TEST, PUT A PLACARD ON THE CONTROLS.
@@ -17874,7 +15686,6 @@ For other meanings of "light", use:
 > **STE:** SEAL THE TUBE WITH A PLUG.
 > **Non-STE:** Plug the tube.
 
-#### poor (adj) — UNAPPROVED
 
 - Approved alternative: UNSATISFACTORY (adj)
 > **STE:** IF SYSTEM PERFORMANCE IS UNSATISFACTORY, EXAMINE CIRCUIT A.
@@ -17886,7 +15697,6 @@ For other meanings of "light", use:
 > **STE:** IF THE PART IS UNSERVICEABLE, REPLACE IT.
 > **Non-STE:** If the condition of the part is poor, replace it.
 
-#### pop (v) — UNAPPROVED
 
 - Approved alternative: OPEN (v)
 > **STE:** IF THE CIRCUIT BREAKER OPENS, DE-ENERGIZE THE CIRCUIT.
@@ -17896,7 +15706,6 @@ For other meanings of "light", use:
 > **STE:** IF THE POP-OUT INDICATOR PROTRUDES, REPLACE THE FILTER ELEMENT.
 > **Non-STE:** If the pop-out indicator pops out, replace the filter element.
 > **See:** Dictionary entry for PROTRUDE (v).
-- Approved alternative: OUT (adv)
 > **STE:** IF THE INDICATOR BUTTON CAME OUT, REPLACE THE FILTER.
 > **Non-STE:** If the indicator button popped out, replace the filter.
 > **See:** Dictionary entry for OUT (adv).
@@ -17907,7 +15716,6 @@ For other meanings of "light", use:
 > **STE:** REMOVE THE WING TIP BRAKE FROM THE LEFT WING.
 > **Non-STE:** Remove the wing tip brake from the port wing.
 
-#### portion (n) — UNAPPROVED
 
 - Approved alternative: PIECE (n)
 > **STE:** REMOVE ALL THE PIECES OF THE DAMAGED INSULATION.
@@ -17918,31 +15726,24 @@ For other meanings of "light", use:
 > **Non-STE:** Isolate the defective portion of the circuit.
 > **See:** Dictionary entry for PART (n).
 
-#### position (v) — UNAPPROVED
 
-- Approved alternative: PUT (v)
 > **STE:** PUT THE BRACKET ON THE FRAME.
 > **Non-STE:** Position the bracket on the frame.
-> **See:** Dictionary entry for PUT (v).
 - Approved alternative: SET (v)
 > **STE:** SET THE SWITCH TO ON.
 > **Non-STE:** Position the switch to "ON."
 
 #### potential (adj) — UNAPPROVED
 
-- Approved alternative: POSSIBLE (adj)
 > **STE:** PUT BARRIERS AROUND ALL THE POSSIBLE DANGER AREAS.
 > **Non-STE:** Put barriers around all the potential danger areas.
 > **See:** Dictionary entry for POSSIBLE (adj).
 
 #### pour (v) — UNAPPROVED
 
-- Approved alternative: PUT (v)
 > **STE:** PUT THE MIXTURE INTO THE CYLINDER.
 > **Non-STE:** Pour the mixture into the cylinder.
-> **See:** Dictionary entry for PUT (v).
 
-#### power (v) — UNAPPROVED
 
 - Approved alternative: SUPPLY (v)
 > **STE:** THE BATTERY SUPPLIES POWER TO THE CIRCUITS.
@@ -17955,24 +15756,20 @@ For other meanings of "light", use:
 > **Non-STE:** Application of the tape must be preceded by cleaning of the surface.
 # Page 337 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 337–340 of 434
 
-## APPROVED
 
 #### PRECISION (n) — APPROVED
 
 - Meaning: The quality of being accurate
 > **STE:** THE TEMPERATURE OF THE OIL HAS AN EFFECT ON THE PRECISION OF THE OIL LEVEL INDICATOR.
 
-#### PREPARE (v) — APPROVED
 
 - Meaning: To make or become ready
 - Forms: PREPARES, PREPARED, PREPARED
 > **STE:** PREPARE THE TUBE FOR THE LEAK TEST.
 > **STE:** PREPARE FOR THE ELECTRICAL BONDING PROCEDURE.
 
-#### PRESSURIZE (v) — APPROVED
 
 - Meaning: To supply pressure
 - Forms: PRESSURIZES, PRESSURIZED, PRESSURIZED
@@ -17984,7 +15781,6 @@ For other meanings of "light", use:
 - Forms: PREVENTS, PREVENTED, PREVENTED
 > **STE:** PUT PROTECTIVE COVERS ON ALL OPENINGS.
 
-#### PREVIOUS (adj) — APPROVED
 
 - Meaning: That goes before in an unspecified time or sequence
 > **STE:** IF YOU SELECTED "YES" IN A PREVIOUS STEP, GO TO PARAGRAPH 7.5.
@@ -17993,7 +15789,6 @@ For other meanings of "light", use:
 > **Non-STE:** Do the previous inspection again.
 > **See:** Dictionary entry for LAST (adj).
 
-#### PREVIOUSLY (adv) — APPROVED
 
 - Meaning: Before, earlier, in the past
 > **STE:** THIS SOFTWARE FINDS TERMS FROM PREVIOUSLY TRANSLATED FILES.
@@ -18003,14 +15798,11 @@ For other meanings of "light", use:
 - Meaning: First in importance
 > **STE:** THE PRIMARY FUNCTION OF THE POWER UNIT IS TO SUPPLY ELECTRICAL POWER.
 
-#### PROBLEM (n) — APPROVED
 
 - Meaning: Something that is difficult and for which you must find the correct answer
 > **STE:** IF YOU FIND A PROBLEM DURING THE TEST, REFER TO THE FAULT ISOLATION TABLE.
 
----
 
-## UNAPPROVED
 
 #### precise (adj) — UNAPPROVED
 
@@ -18019,20 +15811,17 @@ For other meanings of "light", use:
 > **Non-STE:** The gyro requires precise adjustment.
 > **See:** Dictionary entry for ACCURATE (adj).
 
-#### precisely (adv) — UNAPPROVED
 
 - Approved alternative: ACCURATELY (adv)
 > **STE:** ADJUST THE ANGLE OF THE CAMERA ACCURATELY.
 > **Non-STE:** The angle of the camera must be adjusted precisely.
 
-#### preferable (adj) — UNAPPROVED
 
 - Approved alternative: RECOMMEND (v)
 > **STE:** IT IS POSSIBLE TO MIX APPROVED ENGINE OILS OF THE SAME TYPE, BUT THE STANDARD PRACTICES MANUAL RECOMMENDS THAT YOU ALWAYS USE THE SAME TYPE OF ENGINE OIL.
 > **Non-STE:** It is possible to mix approved engine oils of the same type, but according to the Standard Practices Manual, it is always preferable to use the same type of engine oil.
 > **See:** Dictionary entry for RECOMMEND (v).
 
-#### preferably (adv) — UNAPPROVED
 
 - Approved alternative: IF IT IS POSSIBLE
 > **STE:** IF IT IS POSSIBLE, APPLY THIS ADHESIVE OUTDOORS.
@@ -18044,7 +15833,6 @@ For other meanings of "light", use:
 > **STE:** BEFORE YOU START THIS PROCEDURE, APPLY HEAT TO THE AREA WITH A HEAT LAMP.
 > **Non-STE:** Preheat the area with a heat lamp.
 
-#### preload (v) — UNAPPROVED
 
 - Approved alternative: LOAD (TN)
 > **STE:** BEFORE YOU START THIS PROCEDURE, APPLY A LOAD OF 10 lb TO THE SPRING.
@@ -18052,14 +15840,11 @@ For other meanings of "light", use:
 
 #### premature (adj) — UNAPPROVED
 
-- Approved alternative: BEFORE (conj)
 > **STE:** IF THE VALVE OPENS BEFORE THE SET PRESSURE, STOP THE TEST.
 > **Non-STE:** If the valve opening is premature, stop the test.
 
 #### prematurely (adv) — UNAPPROVED
 
-- Approved alternative: BEFORE (conj)
-> **STE:** IF THE VALVE OPENS BEFORE THE SET PRESSURE, STOP THE TEST.
 > **Non-STE:** If the valve opens prematurely, stop the test.
 
 #### preparation (n) — UNAPPROVED
@@ -18069,7 +15854,6 @@ For other meanings of "light", use:
 > **Non-STE:** Mixture preparation must be accomplished 20 minutes before use.
 > **See:** Dictionary entry for PREPARE (v).
 
-#### prescribed (adj) — UNAPPROVED
 
 - Approved alternative: SPECIFIED (adj)
 > **STE:** FILL THE CONTAINER WITH THE SPECIFIED COOLANT FLUID.
@@ -18083,13 +15867,10 @@ For other meanings of "light", use:
 
 #### present (adj) — UNAPPROVED
 
-- Approved alternative: BE (v)
 > **STE:** IF THERE IS A VOLTAGE AT PIN C OF CONNECTOR F7, THE UNIT IS UNSERVICEABLE.
 > **Non-STE:** If a voltage is present at pin C of connector F7, the unit is faulty.
 
-#### present (v) — UNAPPROVED
 
-- Approved alternative: GIVE (v)
 > **STE:** THIS SECTION GIVES THE APPLICABLE TORQUE VALUES.
 > **Non-STE:** The applicable torque values are presented in this section.
 - Approved alternative: SHOW (v)
@@ -18104,11 +15885,9 @@ For other meanings of "light", use:
 
 #### preset (v) — UNAPPROVED
 
-- Approved alternative: SET (v)
 > **STE:** SET THE TENSION INDICATOR TO ZERO.
 > **Non-STE:** Preset the tension indicator to zero.
 
-#### press (v) — UNAPPROVED
 
 - Approved alternative: PUSH (v)
 > **STE:** PUSH AND HOLD THE TEST BUTTON.
@@ -18119,11 +15898,9 @@ For other meanings of "light", use:
 
 #### prevent (from) (v) — UNAPPROVED
 
-- Approved alternative: LET (v)
 > **STE:** DO NOT LET THE DOOR OPEN.
 > **Non-STE:** Prevent the door from opening.
 
-#### preventive (adj) — UNAPPROVED
 
 - Approved alternative: PREVENT (v)
 > **STE:** THIS COATING PREVENTS CORROSION.
@@ -18135,31 +15912,21 @@ For other meanings of "light", use:
 - Approved alternative: PRIMARY (adj)
 > **STE:** THE PRIMARY FUNCTION OF THE HYDRAULIC SYSTEM IS TO SUPPLY THE PRESSURE TO OPERATE THE FLIGHT CONTROLS.
 > **Non-STE:** The hydraulic system primarily supplies the pressure to operate the flight controls.
-> **See:** Dictionary entry for PRIMARY (adj).
 
-#### prime (v) — UNAPPROVED
 
-- Approved alternative: FILL (v)
 > **STE:** FILL THE FILLER HOSE WITH WATER.
 > **Non-STE:** Prime the filler hose with water.
-- Approved alternative: PUT (v)
 > **STE:** PUT FUEL IN THE FUEL PUMP.
 > **Non-STE:** Prime the fuel pump.
 
-#### principal (adj) — UNAPPROVED
 
-- Approved alternative: PRIMARY (adj)
 > **STE:** THE PRIMARY FUNCTION OF THE SYSTEM IS TO SUPPLY ELECTRICAL POWER TO THE CONTROL PANEL.
 > **Non-STE:** The principal function of the system is to supply electrical power to the control panel.
-> **See:** Dictionary entry for PRIMARY (adj).
 
-#### prior to (prep) — UNAPPROVED
 
-- Approved alternative: BEFORE (conj)
 > **STE:** BEFORE YOU DISCONNECT THE HOSES, DRAIN THE SYSTEM.
 > **Non-STE:** Drain the system prior to disconnecting the hoses.
 
-#### priority (n) — UNAPPROVED
 
 - Approved alternative: IMPORTANT (adj)
 > **STE:** THIS PROCEDURE IS VERY IMPORTANT.
@@ -18171,34 +15938,26 @@ For other meanings of "light", use:
 > **STE:** DURING THE PROCEDURE THAT FOLLOWS, REPAIR THE UPPER FLANGE FIRST.
 > **Non-STE:** During the following repair procedure, the upper flange has priority.
 
-#### probability (n) — UNAPPROVED
 
 - Approved alternative: RISK (n)
 > **STE:** TO DECREASE THE RISK OF FIRE, OBEY THE SAFETY PRECAUTIONS.
 > **Non-STE:** Obey the safety precautions to decrease the probability of fire.
 
-#### probable (adj) — UNAPPROVED
 
 - Approved alternative: VERY POSSIBLE
 > **STE:** IF YOU DO NOT SAFETY THE DOOR, IT IS VERY POSSIBLE THAT STRONG WINDS WILL CAUSE DAMAGE TO THE STRUCTURE.
 > **Non-STE:** If you do not safety the door, damage to the structure due to strong winds is probable.
-- Approved alternative: RISK (n)
 > **STE:** IF YOU DO NOT SAFETY THE DOOR, THERE IS A RISK THAT STRONG WINDS WILL CAUSE DAMAGE TO THE STRUCTURE.
-> **Non-STE:** If you do not safety the door, damage to the structure due to strong winds is probable.
 
-#### probe (v) — UNAPPROVED
 
 - Approved alternative: FIND (v) (WITH A PROBE [TN])
 > **STE:** FIND THE BLOCKAGE IN THE TUBE WITH AN APPLICABLE PROBE.
 > **Non-STE:** Probe the tube to find the blockage.
 # Page 341 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 341–344 of 434
 
-## APPROVED
 
-#### PROCEDURE (n) — APPROVED
 
 - Meaning: Steps that are in a sequence
 > **STE:** THIS SECTION GIVES THE PROCEDURE TO DISASSEMBLE THE COMPONENT FULLY.
@@ -18208,7 +15967,6 @@ For other meanings of "light", use:
 - Meaning: A characteristic or attribute of an object
 > **STE:** THE MAGNETIC PROPERTIES OF THIS METAL DECREASE AT HIGH TEMPERATURES.
 
-#### PROPORTION (n) — APPROVED
 
 - Meaning: The ratio of something to something else
 > **STE:** ALWAYS MIX CLEANING AGENTS WITH COLD WATER IN THE CORRECT PROPORTIONS.
@@ -18227,19 +15985,14 @@ For other meanings of "light", use:
 - Meaning: That gives protection
 > **STE:** REMOVE THE PROTECTIVE LAYER.
 
-#### PROTRUDE (v) — APPROVED
 
 - Meaning: To be farther forward or out from an adjacent surface
 - Forms: PROTRUDES, PROTRUDED, PROTRUDED
-> **STE:** IF THE POP-OUT INDICATOR PROTRUDES, REPLACE THE FILTER ELEMENT.
 
----
 
-## UNAPPROVED
 
 #### proceed (v) — UNAPPROVED
 
-- Approved alternative: CONTINUE (v)
 > **STE:** CONTINUE WITH THE ELECTRICAL TEST.
 > **Non-STE:** Proceed with the electrical test.
 - Approved alternative: DURING (prep) (for "in the process of" usage)
@@ -18247,9 +16000,7 @@ For other meanings of "light", use:
 > **Non-STE:** Apply sufficient heat to the unit in the process of doing this repair.
 - Approved alternative: WHILE (conj) (for "in the process of" usage)
 > **STE:** WHILE YOU DO THIS REPAIR, APPLY SUFFICIENT HEAT TO THE UNIT.
-> **Non-STE:** Apply sufficient heat to the unit in the process of doing this repair.
 
-#### process (n) — UNAPPROVED
 
 - Approved alternative: PROCEDURE (n)
 > **STE:** THESE TWO ASSEMBLY PROCEDURES ARE ALMOST THE SAME.
@@ -18258,31 +16009,23 @@ For other meanings of "light", use:
 - Note: This word is a technical noun when it means a sequence of changes that occur and cause a result.
 > **STE:** CORROSION IS AN ELECTROLYTIC PROCESS.
 
-#### process (v) — UNAPPROVED
 
-- Approved alternative: DO (v)
 > **STE:** PUT THE PARTS IN AN ELECTROLYTIC BATH.
 > **Non-STE:** Process the parts in an electrolytic bath.
-- Approved alternative: PROCEDURE (n)
 > **STE:** THEN, DO THE ELECTROPLATING PROCEDURE.
-> **See:** Dictionary entry for PROCEDURE (n).
 
-#### produce (v) — UNAPPROVED
 
 - Approved alternative: CAUSE (v)
 > **STE:** ELECTRICAL EQUIPMENT CAN CAUSE INTERFERENCE IN COMMUNICATION.
 > **Non-STE:** Electrical equipment can produce interference in communication.
-- Approved alternative: GIVE (v)
 > **STE:** A DILUTED SOLUTION WILL NOT GIVE YOU THE CORRECT RESULTS.
 > **Non-STE:** A diluted solution does not produce the correct results.
 - Approved alternative: MAKE (v)
 > **STE:** WHEN THE LEVER ENGAGES, IT MAKES A CLICK.
 > **Non-STE:** The lever produces a click when engaged.
-- Approved alternative: SUPPLY (v)
 > **STE:** THE POWER UNIT SUPPLIES THE SYSTEM WITH A VOLTAGE OF 28 V DC.
 > **Non-STE:** The power unit produces a voltage of 28 V DC.
 
-#### product (n) — UNAPPROVED
 
 - Note: Be accurate. If it is possible, use the name of the product.
 > **STE:** WHEN YOU CLEAN THIS UNIT, USE THE CORRECT SOLVENT.
@@ -18298,20 +16041,17 @@ For other meanings of "light", use:
 
 #### program (n) — UNAPPROVED
 
-- Approved alternative: SEQUENCE (n)
 > **STE:** DISASSEMBLE THE ROTOR IN THIS SEQUENCE:
 > **Non-STE:** Disassemble the rotor according to the following program:
 
 #### progress (n) — UNAPPROVED
 
-- Approved alternative: CONTINUE (v)
 > **STE:** MAKE SURE THAT THE TEST CONTINUES SATISFACTORILY.
 > **Non-STE:** Monitor the progress of the test.
 > **See:** Dictionary entry for IN PROGRESS (adv).
 
 #### progress (v) — UNAPPROVED
 
-- Approved alternative: CONTINUE (v)
 > **STE:** YOU CAN CONTINUE THE TEST.
 > **Non-STE:** You can progress with the test.
 
@@ -18323,16 +16063,13 @@ For other meanings of "light", use:
 
 #### progressively (adv) — UNAPPROVED
 
-- Approved alternative: GRADUALLY (adv)
 > **STE:** TORQUE THE BOLTS GRADUALLY.
 > **Non-STE:** Torque the bolts progressively.
 
 #### prohibit (v) — UNAPPROVED
 
-- Approved alternative: PREVENT (v)
 > **STE:** PUT A WARNING NOTICE ON THE PANEL TO PREVENT OPERATION OF THE CONTROLS.
 > **Non-STE:** Display a warning notice on the panel prohibiting operation of the controls.
-> **See:** Dictionary entry for PREVENT (v).
 - Approved alternative: TELL (NOT TO) (v)
 > **STE:** TELL THE PERSONNEL NOT TO USE ASBESTOS PARTS.
 > **Non-STE:** Prohibit the use of asbestos parts.
@@ -18343,13 +16080,11 @@ For other meanings of "light", use:
 > **STE:** OPERATION OF THE MOTOR FOR LONG PERIODS CAN CAUSE DAMAGE TO IT.
 > **Non-STE:** Prolonged motor operation can cause damage.
 
-#### prompt (adj) — UNAPPROVED
 
 - Approved alternative: IMMEDIATELY (adv)
 > **STE:** IF YOU SWALLOW SOLVENT, DO NOT CAUSE VOMITING. GET MEDICAL AID IMMEDIATELY.
 > **Non-STE:** Prompt action is required if you swallow solvent.
 
-#### propagation (n) — UNAPPROVED
 
 - Approved alternative: INCREASE (v)
 > **STE:** IF THE DIMENSION OF A CRACK INCREASES, THE PART CAN BREAK.
@@ -18358,7 +16093,6 @@ For other meanings of "light", use:
 > **STE:** IF THE DEPTH OF A CRACK IS MORE THAN 0.2 mm, REJECT THE PART.
 > **Non-STE:** Crack propagation can cause the rejection of the part.
 > **STE:** IF A CRACK IS LARGER THAN 0.2 mm, REJECT THE PART.
-> **Non-STE:** Crack propagation can cause the rejection of the part.
 
 #### proper (adj) — UNAPPROVED
 
@@ -18377,7 +16111,6 @@ For other meanings of "light", use:
 - Approved alternative: RELATION (n)
 > **STE:** THE CENTER OF GRAVITY MOVES IN RELATION TO THE LOADS ON THE WINGS.
 > **Non-STE:** Movement of the center of gravity is proportional to the loads on the wings.
-> **See:** Dictionary entry for RELATION (n).
 - Approved alternative: PROPORTION (n)
 > **STE:** MIX THE PIGMENT AND SOLVENT IN THE CORRECT PROPORTIONS.
 > **Non-STE:** Mix the correct quantity of pigment proportional to the quantity of solvent.
@@ -18385,38 +16118,27 @@ For other meanings of "light", use:
 
 #### proportionally (adv) — UNAPPROVED
 
-- Approved alternative: RELATION (n)
 > **STE:** THE CABLE TENSION CHANGES IN RELATION TO THE TEMPERATURE.
 > **Non-STE:** The cable tension changes proportionally with temperature.
-> **See:** Dictionary entry for RELATION (n).
 
-#### protect (v) — UNAPPROVED
 
-- Approved alternative: PREVENT (v)
 > **STE:** USE CELLOPHANE TO PREVENT DAMAGE TO THE SURFACE.
 > **Non-STE:** Use cellophane to protect the surface from damage.
-> **See:** Dictionary entry for PREVENT (v).
 
-#### provide (v) — UNAPPROVED
 
-- Approved alternative: GIVE (v)
 > **STE:** THIS SECTION GIVES THE PROCEDURES FOR THE STORAGE OF THE COMPONENT.
 > **Non-STE:** This section provides the procedures for the storage of the component.
-- Approved alternative: SUPPLY (v)
 > **STE:** THE HYDRAULIC SYSTEM SUPPLIES PRESSURE FOR THE OPERATION OF THE FLIGHT CONTROLS.
 > **Non-STE:** The hydraulic system provides pressure for operating the flight controls.
 
-#### provided (that) (conj) — UNAPPROVED
 
 - Approved alternative: IF (conj)
 > **STE:** IF A REPLACEMENT PART IS AVAILABLE, REPLACE THE DAMAGED SHIELD.
 > **Non-STE:** Provided that a replacement part is available, replace the damaged shield.
 # Page 345 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 345–348 of 434
 
-## APPROVED
 
 #### PULL (v) — APPROVED
 
@@ -18429,29 +16151,22 @@ For other meanings of "light", use:
 
 - Forms: PUSHES, PUSHED, PUSHED
 - Meaning: To apply a force to something to move it away from the source of the force
-- Note: Use this word together with a preposition or an adverb to show direction.
 > **STE:** THE SPRING UNIT PUSHES AGAINST THE BRAKE PEDAL.
 
-#### PUT (v) — APPROVED
 
 - Meaning: To place something in a position or condition
 - Note: No other verb forms.
-> **STE:** PUT THE ADAPTER IN POSITION AGAINST ITS SUPPORT.
 > **STE:** PUT THE LEVER BACK TO ITS INITIAL POSITION.
 
-#### PUT ON (v) — APPROVED
 
 - Forms: PUTS ON, PUT ON, PUT ON
 - Meaning: To cover your skin or face with clothing, or other items that give protection
-- Note: No other verb forms.
 > **STE:** PUT ON SAFETY GOGGLES AND PROTECTIVE CLOTHING.
 
-#### QUALITY (n) — APPROVED
 
 - Meaning: Condition, property, or type
 > **STE:** THIS MEDICAL EQUIPMENT MUST BE OF GOOD QUALITY.
 
-#### QUANTITY (n) — APPROVED
 
 - Meaning: A specified amount or number
 > **STE:** APPLY A SMALL QUANTITY OF LUBRICATING OIL ON THE THREADS OF THE BOLTS.
@@ -18464,23 +16179,16 @@ For other meanings of "light", use:
 - Meaning: In a fast manner
 > **STE:** MAKE SURE THAT THE PRESSURE DECREASES QUICKLY.
 
----
 
-## UNAPPROVED
 
-#### providing (that) (conj) — UNAPPROVED
 
-- Approved alternative: IF (conj)
 > **STE:** IF A NEW PART IS INSTALLED, YOU CAN CONTINUE THE OPERATION OF THE MACHINE.
 > **Non-STE:** Providing that a new part is installed, you can continue the operation of the machine.
 
-#### proximity (n) — UNAPPROVED
 
-- Approved alternative: NEAR (prep)
 > **STE:** DO NOT DO MAINTENANCE WORK NEAR AN ENGINE THAT IS IN OPERATION.
 > **Non-STE:** Do not do maintenance work in proximity to a running engine.
 
-#### pump (v) — UNAPPROVED
 
 - Approved alternative: REMOVE (v) (WITH A PUMP [TN])
 > **STE:** OPEN THE VALVE. THEN, REMOVE THE OIL FROM THE TANK WITH AN APPLICABLE PUMP.
@@ -18491,7 +16199,6 @@ For other meanings of "light", use:
 
 #### puncture (v) — UNAPPROVED
 
-- Approved alternative: HOLE (n)
 > **STE:** MAKE SURE THAT YOU DO NOT MAKE A HOLE IN THE BLADDER.
 > **Non-STE:** Take care not to puncture the bladder.
 > **See:** Dictionary entry for HOLE (n).
@@ -18516,7 +16223,6 @@ For other meanings of "light", use:
 
 #### quarterly (adv) — UNAPPROVED
 
-- Approved alternative: INTERVAL (n)
 > **STE:** SEND REPORTS TO THE AUTHORITIES AT INTERVALS OF THREE MONTHS.
 > **Non-STE:** Send reports to the authorities quarterly.
 
@@ -18535,7 +16241,6 @@ For other meanings of "light", use:
 
 #### quit (v) — UNAPPROVED
 
-- Approved alternative: GO (v)
 > **STE:** BEFORE YOU START THE ENGINE, MAKE SURE THAT ALL PERSONS GO AWAY FROM THE DANGER AREA.
 > **Non-STE:** Before you start the engine, make sure that all persons quit the danger area.
 - Approved alternative: STOP (v)
@@ -18544,15 +16249,12 @@ For other meanings of "light", use:
 
 #### quote (v) — UNAPPROVED
 
-- Approved alternative: GIVE (v)
 > **STE:** THE TABLE GIVES THE MAXIMUM TOLERANCE FOR THE HOLE.
 > **Non-STE:** The table quotes the maximum tolerance for the hole.
 # Page 349 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 349–352 of 434
 
-## APPROVED
 
 #### RADIAL (adj) — APPROVED
 
@@ -18561,7 +16263,6 @@ For other meanings of "light", use:
 
 #### RADIALLY (adv) — APPROVED
 
-- Meaning: Along a radius
 > **STE:** THE FAN BLADES ARE INSTALLED RADIALLY.
 
 #### RADIOACTIVE (adj) — APPROVED
@@ -18569,7 +16270,6 @@ For other meanings of "light", use:
 - Meaning: Related to radioactivity
 > **STE:** DO A CHECK FOR RADIOACTIVE CONTAMINATION.
 
-#### RANDOM (adj) — APPROVED
 
 - Meaning: Not regular
 > **STE:** DURING THIS PROCEDURE, DO RANDOM CHECKS OF THE TIRE PRESSURE.
@@ -18621,16 +16321,12 @@ For other meanings of "light", use:
 - Meaning: An indentation in a surface
 > **STE:** WHEN YOU CLEAN THE SURFACES, REMOVE THE STAINS FROM THE RECESSES.
 
----
 
-## UNAPPROVED
 
-#### raise (v) — UNAPPROVED
 
 - Approved alternative: LIFT (v)
 > **STE:** DO NOT LIFT THE COVER MORE THAN THE SPECIFIED CLEARANCE.
 > **Non-STE:** Do not raise the cover more than the specified clearance.
-- Approved alternative: INCREASE (v)
 > **STE:** INCREASE THE TEMPERATURE BY 10 DEG.
 > **Non-STE:** Raise the temperature 10 DEG.
 - Approved alternative: RETRACT (v)
@@ -18643,18 +16339,14 @@ For other meanings of "light", use:
 > **STE:** CHEMICAL AGENTS CAUSE FAST DETERIORATION OF PAINTED SURFACES.
 > **Non-STE:** Chemical agents cause rapid deterioration of painted surfaces.
 
-#### rapidly (adv) — UNAPPROVED
 
-- Approved alternative: QUICKLY (adv)
 > **STE:** QUICKLY TURN THE HANDLE CLOCKWISE.
 > **Non-STE:** Rapidly turn the handle clockwise.
-> **See:** Dictionary entry for QUICKLY (adv).
 
 #### re- (prefix) — UNAPPROVED
 
 - Note: In general, use the word AGAIN (adv) or BACK (adv) with the basic word to replace words that have "re-" as a prefix.
 
-#### reach (v) — UNAPPROVED
 
 - Approved alternative: GET (v)
 > **STE:** WHEN YOU GET THE CORRECT PRESSURE, CLOSE THE VALVE.
@@ -18662,11 +16354,9 @@ For other meanings of "light", use:
 - Approved alternative: TOUCH (v)
 > **STE:** MAKE SURE THAT THE EXTENSION BAR TOUCHES THE TARGET PLATE.
 > **Non-STE:** Make sure that the extension bar reaches the target plate.
-- Approved alternative: BE (v)
 > **STE:** WHEN THE FLAPS ARE AT THE 30 DEGREE POSITION, INSTALL THE RIGGING PIN.
 > **Non-STE:** When the flaps reach the 30 degree position, install the rigging pin.
 
-#### reactivate (v) — UNAPPROVED
 
 - Approved alternative: ACTIVATE (v)
 > **STE:** ACTIVATE THE MODE AGAIN.
@@ -18679,7 +16369,6 @@ For other meanings of "light", use:
 > **STE:** MAKE SURE THAT THE EXHAUST FROM THE GROUND CART DOES NOT CAUSE AN INCORRECT INDICATION.
 > **Non-STE:** Avoid an erroneous reading caused by exhaust from ground cart.
 
-#### readjust (v) — UNAPPROVED
 
 - Approved alternative: ADJUST (v)
 > **STE:** AFTER THE INSPECTION, ADJUST THE LINKAGE AGAIN.
@@ -18688,19 +16377,14 @@ For other meanings of "light", use:
 
 #### ready (adj) — UNAPPROVED
 
-- Approved alternative: PREPARE (v)
 > **STE:** MAKE SURE THAT THE CONTROL SYSTEM IS PREPARED FOR OPERATION.
 > **Non-STE:** Make sure that the control system is in an operational ready state.
-> **See:** Dictionary entry for PREPARE (v).
 
 #### ready (v) — UNAPPROVED
 
-- Approved alternative: PREPARE (v)
 > **STE:** PREPARE THE REMOVAL KIT FOR THE REMOVAL OF THE STRUT.
 > **Non-STE:** Ready the removal kit for the removal of the strut.
-> **See:** Dictionary entry for PREPARE (v).
 
-#### real (adj) — UNAPPROVED
 
 - Approved alternative: AGREE (v)
 > **STE:** MAKE SURE THAT THE INDICATION ON THE GAUGE AGREES WITH THE QUANTITY OF FUEL THAT IS IN THE TANK.
@@ -18713,7 +16397,6 @@ For other meanings of "light", use:
 > **Non-STE:** The pump is located on rib 3, rear of the front spar.
 - Approved alternative: BEHIND (prep)
 > **STE:** THE PUMP IS INSTALLED ON RIB 3, BEHIND THE FRONT SPAR.
-> **Non-STE:** The pump is located on rib 3, rear of the front spar.
 
 #### rearmost (adj) — UNAPPROVED
 
@@ -18738,12 +16421,9 @@ For other meanings of "light", use:
 > **Non-STE:** Reassemble the actuator.
 > **See:** Dictionary entry for ASSEMBLE (v).
 
-#### rebuild (v) — UNAPPROVED
 
-- Approved alternative: ASSEMBLE (v)
 > **STE:** ASSEMBLE THE UNIT AGAIN.
 > **Non-STE:** Rebuild the unit.
-> **See:** Dictionary entry for ASSEMBLE (v).
 
 #### recess (v) — UNAPPROVED
 
@@ -18760,7 +16440,6 @@ For other meanings of "light", use:
 > **STE:** CHARGE THE BATTERY AGAIN.
 > **Non-STE:** Recharge the battery.
 > **See:** Dictionary entry for CHARGE (v).
-- Approved alternative: FILL (v)
 > **STE:** FILL THE FLUID RESERVOIR.
 > **Non-STE:** Recharge the fluid reservoir.
 > **See:** Dictionary entry for FILL (v).
@@ -18771,7 +16450,6 @@ For other meanings of "light", use:
 
 #### recheck (v) — UNAPPROVED
 
-- Approved alternative: MEASURE (v)
 > **STE:** MEASURE THE DISTANCE BETWEEN THE FACES AGAIN.
 > **Non-STE:** Recheck the distance between the faces.
 - Approved alternative: EXAMINE (v)
@@ -18803,12 +16481,9 @@ For other meanings of "light", use:
 > **See:** Dictionary entry for CLOSE (v).
 # Page 353 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 353–356 of 434
 
-## UNAPPROVED
 
-#### recoil (v) — UNAPPROVED
 
 - Approved alternative: MOVE BACK
 - Approved alternative: WIND (v)
@@ -18820,45 +16495,34 @@ For other meanings of "light", use:
 > **STE:** THE GUN BARREL HAS A QUICK RECOIL.
 > **Non-STE:** The gun barrel recoils quickly.
 
----
 
-## APPROVED
 
-#### RECOMMEND (v) — APPROVED
 
 - Meaning: To advise that which is best
 - Forms: RECOMMENDS, RECOMMENDED, RECOMMENDED
 > **STE:** THE MANUFACTURER RECOMMENDS THAT YOU KEEP THE UNIT IN A DEDICATED AREA.
 
----
 
-## UNAPPROVED
 
 #### recondition (v) — UNAPPROVED
 
-- Approved alternative: REPAIR (v)
 - Approved Technical Name: OVERHAUL (TN)
 > **STE:** REPAIR THE SEATS.
 > **Non-STE:** Recondition the seats.
 > **STE:** DO AN OVERHAUL OF THE ENGINE.
 > **Non-STE:** Recondition the engine.
-> **See:** Dictionary entry for REPAIR (v).
 
 #### reconstruction (n) — UNAPPROVED
 
 - Approved alternative: REPAIR (n)
-- Approved alternative: REPAIR (v)
 > **STE:** RECORD ALL REPAIRS TO THE SKIN SURFACE.
 > **Non-STE:** Record all reconstruction of the skin surface.
 > **STE:** THIS PROCEDURE TELLS YOU HOW TO REPAIR THE SURFACE.
 > **Non-STE:** This procedure is for the reconstruction of the surface.
 > **See:** Dictionary entry for REPAIR (v) and REPAIR (n).
 
----
 
-## APPROVED
 
-#### RECORD (v) — APPROVED
 
 - Forms: RECORDS, RECORDED, RECORDED
 - Meaning 1: To make notes of and keep data to use subsequently
@@ -18866,17 +16530,13 @@ For other meanings of "light", use:
 - Meaning 2: To put data on a storage medium
 > **STE:** THE COCKPIT VOICE RECORDER RECORDS SIGNALS FROM FOUR AUDIO INPUTS DURING THE FLIGHT.
 
----
 
-## UNAPPROVED
 
-#### recover (v) — UNAPPROVED
 
 - Approved alternative: COLLECT (v)
 > **STE:** REMOVE THE NUT AND THE BOLT. THEN, COLLECT THE WASHER.
 > **Non-STE:** Remove the nut and the bolt. Then, recover the washer.
 
-#### rectify (v) — UNAPPROVED
 
 - Approved alternative: CORRECT (v)
 > **STE:** BEFORE YOU START THE PROCEDURE AGAIN, CORRECT THE DEFECT.
@@ -18890,9 +16550,7 @@ For other meanings of "light", use:
 > **Non-STE:** If the symptoms recur, do a system test.
 > **See:** Dictionary entry for OCCUR (v).
 
----
 
-## APPROVED
 
 #### RECYCLE (v) — APPROVED
 
@@ -18903,22 +16561,15 @@ For other meanings of "light", use:
 > **STE:** DO ONE MORE TEST CYCLE OF THE COMPONENT.
 > **Non-STE:** Recycle the component through a test.
 
----
 
-## UNAPPROVED
 
-#### reduce (v) — UNAPPROVED
 
 - Approved alternative: DECREASE (v)
 > **STE:** SLOWLY DECREASE THE SPEED.
 > **Non-STE:** Slowly reduce the speed.
-> **See:** Dictionary entry for DECREASE (v).
 
----
 
-## APPROVED
 
-#### REFER (v) — APPROVED
 
 - Forms: REFERS, REFERRED, REFERRED
 - Meaning 1: To tell a person where to find information
@@ -18926,29 +16577,22 @@ For other meanings of "light", use:
 - Meaning 2: To give information
 > **STE:** BEFORE YOU DO THIS PROCEDURE, ENGAGE THE RAMP SERVICE DOOR SAFETY CONNECTOR PIN (THE PIN THAT HOLDS THE RAMP SERVICE DOOR, REFERRED TO IN THIS PROCEDURE AS THE "SAFETY CONNECTOR PIN").
 
----
 
-## UNAPPROVED
 
 #### reference (n) — UNAPPROVED
 
-- Approved alternative: REFER (v)
 > **STE:** REFER TO CHAPTER 20 FOR THE STANDARD TORQUE VALUES.
 > **Non-STE:** Reference is made to Chapter 20 for the standard torque values.
 > **See:** Dictionary entry for REFER (v).
 
-#### referenced (adj) — UNAPPROVED
 
-- Approved alternative: SHOW (v)
 > **STE:** MAKE SURE THAT THE GRAPH SHOWS THIS POINT.
 > **Non-STE:** Make sure that this point is referenced on the graph.
 
 #### refill (v) — UNAPPROVED
 
-- Approved alternative: FILL (v)
 > **STE:** FILL THE CONTAINER AGAIN.
 > **Non-STE:** Refill the container.
-> **See:** Dictionary entry for FILL (v).
 
 #### refit (v) — UNAPPROVED
 
@@ -18956,10 +16600,8 @@ For other meanings of "light", use:
 > **STE:** INSTALL THE LINKAGE AGAIN.
 > **Non-STE:** Refit the linkage.
 > **See:** Dictionary entry for INSTALL (v).
-- Approved alternative: REPAIR (v)
 > **STE:** ON THE SUBMARINE, REPAIR ALL DAMAGE AND REPLACE ALL WORN PARTS.
 > **Non-STE:** Refit the submarine.
-> **See:** Dictionary entry for REPAIR (v).
 
 #### reflect (v) — UNAPPROVED
 
@@ -18968,28 +16610,21 @@ For other meanings of "light", use:
 > **Non-STE:** The reticle image reflects on the bottom surface of the glass.
 > **See:** Dictionary entry for REFLECTION (n).
 
----
 
-## APPROVED
 
 #### REFLECTION (n) — APPROVED
 
 - Meaning: Something that occurs when energy comes against a surface which sends it back
 > **STE:** A CLEAN SURFACE GIVES A BETTER REFLECTION.
 
-#### REFUEL (v) — APPROVED
 
 - Meaning: To supply with fuel
 - Forms: REFUELS, REFUELED, REFUELED
-> **STE:** REFUEL THE VEHICLE.
 
----
 
-## UNAPPROVED
 
 #### register (v) — UNAPPROVED
 
-- Approved alternative: SHOW (v)
 > **STE:** ADJUST THE "SET +40" CONTROL UNTIL THE POINTER SHOWS +40.
 > **Non-STE:** Adjust the "SET +40" control until the pointer registers +40.
 
@@ -19002,9 +16637,7 @@ For other meanings of "light", use:
 > **STE:** PUT MORE GREASE ON THE JOINT UNTIL YOU CAN MOVE IT.
 > **Non-STE:** Regrease the joint until you can move it.
 
----
 
-## APPROVED
 
 #### REGULAR (adj) — APPROVED
 
@@ -19016,16 +16649,13 @@ For other meanings of "light", use:
 - Meaning: In a regular manner
 > **STE:** IF THE FAILURE OCCURS REGULARLY, DO A SYSTEM TEST.
 
----
 
-## UNAPPROVED
 
 #### regulate (v) — UNAPPROVED
 
 - Approved alternative: CONTROL (v)
 > **STE:** CONTROL THE ELECTRICAL CURRENT.
 > **Non-STE:** Regulate the electrical current.
-- Approved alternative: ADJUST (v)
 > **STE:** ADJUST THE TIRE PRESSURE AS NECESSARY.
 > **Non-STE:** Regulate the tire pressure as necessary.
 > **See:** Dictionary entry for ADJUST (v) and CONTROL (v).
@@ -19037,8 +16667,6 @@ For other meanings of "light", use:
 > **Non-STE:** The regulation of temperature is automatic.
 - Approved alternative: CONTROL (n)
 > **STE:** THE TEMPERATURE CONTROL IS AUTOMATIC.
-> **Non-STE:** The regulation of temperature is automatic.
-- Approved alternative: CONTROL (v)
 > **STE:** A SENSOR CONTROLS THE TEMPERATURE IN THE COMPARTMENT.
 > **Non-STE:** The regulation of temperature in the compartment is effected by a sensor.
 
@@ -19055,12 +16683,9 @@ For other meanings of "light", use:
 > **STE:** DOUBLERS MAKE THE JOINT STRONGER.
 > **Non-STE:** Doublers reinforce the joint.
 
-#### reinstall (v) — UNAPPROVED
 
-- Approved alternative: INSTALL (v)
 > **STE:** AFTER YOU ADJUST THE UNIT, INSTALL THE COVER AGAIN.
 > **Non-STE:** Reinstall the cover after you adjust the unit.
-> **See:** Dictionary entry for INSTALL (v).
 
 #### reinstallation (n) — UNAPPROVED
 
@@ -19069,9 +16694,7 @@ For other meanings of "light", use:
 > **Non-STE:** This reinstallation must be performed by qualified personnel.
 > **See:** Dictionary entry for INSTALLATION (n).
 
----
 
-## APPROVED
 
 #### REJECT (v) — APPROVED
 
@@ -19079,11 +16702,8 @@ For other meanings of "light", use:
 - Forms: REJECTS, REJECTED, REJECTED
 > **STE:** REJECT THE PARTS THAT ARE DAMAGED.
 
----
 
-## UNAPPROVED
 
-#### rejection (n) — UNAPPROVED
 
 - Approved alternative: REJECT (v)
 > **STE:** IF THE TEST IS NOT SATISFACTORY, REJECT THE COMPONENT.
@@ -19097,9 +16717,7 @@ For other meanings of "light", use:
 > **Non-STE:** The procedures relate to the system test.
 > **See:** Dictionary entry for RELATED (adj).
 
----
 
-## APPROVED
 
 #### RELATED (adj) — APPROVED
 
@@ -19112,10 +16730,8 @@ For other meanings of "light", use:
 > **STE:** THE RELATION BETWEEN THE TWO CONTROL SYSTEMS KEEPS THE AIRCRAFT STABLE.
 # Page 357 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 357–360 of 434
 
-## APPROVED
 
 #### RELEASE (v) — APPROVED
 
@@ -19129,18 +16745,15 @@ For other meanings of "light", use:
 > **STE:** INSTALL THE BOLTS IN THEIR HOLES.
 > **Non-STE:** Install the bolts in the relevant holes.
 
-#### ITS (adj) — APPROVED
 
 - Meaning: Of or belonging to it. You can use this word to replace "relevant" when it refers to belonging.
 > **STE:** INSTALL THE COMPUTER IN ITS RACK.
 > **Non-STE:** Install the computer in the relevant rack.
 
-#### REMAINING (adj) — APPROVED
 
 - Meaning: That continues to stay
 > **STE:** REMOVE THE REMAINING SEALANT WITH SOLVENT.
 
-#### REMOVAL (n) — APPROVED
 
 - Meaning: A procedure which removes an object
 > **STE:** THE SUPERVISOR MUST GIVE THE APPLICABLE PROCEDURE FOR CORROSION REMOVAL.
@@ -19151,12 +16764,10 @@ For other meanings of "light", use:
 - Forms: REMOVES, REMOVED, REMOVED
 > **STE:** REMOVE THE INDICATOR FROM THE PANEL.
 
-#### NEW (adj) — APPROVED
 
 - Meaning: Not existing before; recently made, discovered, or created
 > **STE:** IF THE PAINT ON THE CONTROL BOX IS DAMAGED, APPLY NEW PAINT.
 
-#### REPAIR (n) — APPROVED
 
 - Meaning: The act of repairing or the result when something is repaired
 > **STE:** AFTER THE REPAIR, APPLY A PROTECTIVE LAYER OF GREASE TO ALL EXTERNAL SURFACES.
@@ -19188,22 +16799,16 @@ For other meanings of "light", use:
 - Meaning: That will help to prevent something
 > **STE:** THE MATERIAL OF THE SEATS IS RESISTANT TO FIRE.
 
----
 
-## UNAPPROVED
 
-#### relay (v) — UNAPPROVED
 
 - Approved alternative: SEND (v)
 > **STE:** SEND THE INFORMATION TO THE ENGINEERING DEPARTMENT.
 > **Non-STE:** Relay the information to the engineering department.
 
-#### relevant (adj) — UNAPPROVED
 
-- Approved alternative: RELATED (adj)
 > **STE:** REMOVE THE ROD END FROM THE RELATED PIVOT.
 > **Non-STE:** Withdraw the rod end from the relevant pivot.
-> **See:** Dictionary entry for RELATED (adj).
 
 #### relieve (v) — UNAPPROVED
 
@@ -19227,14 +16832,12 @@ For other meanings of "light", use:
 
 #### removable (adj) — UNAPPROVED
 
-- Approved alternative: REMOVE (v)
 > **STE:** FIND THE PART OF THE BARREL THAT YOU CAN REMOVE.
 > **Non-STE:** Find the removable part of the barrel.
 > **See:** Dictionary entry for REMOVE (v).
 
 #### render (v) — UNAPPROVED
 
-- Approved alternative: MAKE (v)
 > **STE:** MAKE THE SYSTEM ELECTRICALLY SAFE.
 > **Non-STE:** Render the system electrically safe.
 
@@ -19245,23 +16848,16 @@ For other meanings of "light", use:
 > **Non-STE:** Renew the adhesive tape.
 > **See:** Dictionary entry for NEW (adj).
 
-#### renovate (v) — UNAPPROVED
 
-- Approved alternative: REPAIR (v)
 > **STE:** REPAIR ALL WORN SURFACES.
 > **Non-STE:** Renovate all worn surfaces.
-> **See:** Dictionary entry for REPAIR (v).
 
 #### repack (v) — UNAPPROVED
 
-- Approved alternative: PUT (v)
 > **STE:** PUT THE ASSEMBLY BACK IN THE BOX.
 > **Non-STE:** Repack the assembly in the box.
-> **See:** Dictionary entry for PUT (v).
-- Approved alternative: FILL (v)
 > **STE:** FILL THE HOLE WITH GREASE AGAIN.
 > **Non-STE:** Repack the hole with grease.
-> **See:** Dictionary entry for FILL (v).
 
 #### repaint (v) — UNAPPROVED
 
@@ -19272,12 +16868,9 @@ For other meanings of "light", use:
 
 #### repairable (adj) — UNAPPROVED
 
-- Approved alternative: REPAIR (v)
 > **STE:** IT IS POSSIBLE TO REPAIR THIS DAMAGE.
 > **Non-STE:** This damage is repairable.
-> **See:** Dictionary entry for REPAIR (v).
 
-#### repeat (v) — UNAPPROVED
 
 - Approved alternative: AGAIN (adv)
 > **STE:** DO STEPS (10) THRU (14) AGAIN.
@@ -19291,21 +16884,16 @@ For other meanings of "light", use:
 
 #### repeatedly (adv) — UNAPPROVED
 
-- Approved alternative: AGAIN AND AGAIN
 > **STE:** IF THE VOLTAGE DECREASES AGAIN AND AGAIN, ADJUST THE VOLTAGE REGULATOR.
 > **Non-STE:** If voltage drops repeatedly, adjust the voltage regulator.
 
-#### replenish (v) — UNAPPROVED
 
-- Approved alternative: FILL (v)
 > **STE:** FILL THE ACCUMULATOR WITH OIL.
 > **Non-STE:** Replenish the accumulator with oil.
-> **See:** Dictionary entry for FILL (v).
 - Approved alternative: ADD (v)
 > **STE:** ADD OIL TO THE ACCUMULATOR.
 > **Non-STE:** Replenish the oil in the accumulator.
 - Approved alternative: REFUEL (v)
-> **STE:** REFUEL THE VEHICLE.
 > **Non-STE:** Replenish the vehicle with fuel.
 > **See:** Dictionary entry for REFUEL (v).
 
@@ -19314,31 +16902,22 @@ For other meanings of "light", use:
 - Approved alternative: MOVE (v)
 > **STE:** MOVE THE LEVER BACK TO ITS INITIAL POSITION.
 > **Non-STE:** Reposition the lever.
-- Approved alternative: PUT (v)
-> **STE:** PUT THE LEVER BACK TO ITS INITIAL POSITION.
-> **Non-STE:** Reposition the lever.
-> **See:** Dictionary entry for PUT (v).
-- Approved alternative: SET (v)
 > **STE:** SET THE SWITCH BACK TO THE OFF POSITION.
 > **Non-STE:** Reposition the switch to OFF.
 > **See:** Dictionary entry for SET (v).
 
 #### represent (v) — UNAPPROVED
 
-- Approved alternative: SHOW (v)
 > **STE:** THE SUCTION SHOWS AS AN ALTIMETER INDICATION.
 > **Non-STE:** The suction is represented by an altimeter reading.
 
 #### repressurize (v) — UNAPPROVED
 
-- Approved alternative: PRESSURIZE (v)
 > **STE:** PRESSURIZE THE TANK AGAIN.
 > **Non-STE:** Repressurize the tank.
-> **See:** Dictionary entry for PRESSURIZE (v).
 
 #### request (n) — UNAPPROVED
 
-- Approved alternative: TELL (v)
 > **STE:** TELL THE FIRE SERVICE TO HELP YOU.
 > **Non-STE:** Make a request for external fire support.
 - Approved alternative: WRITE (v)
@@ -19347,14 +16926,10 @@ For other meanings of "light", use:
 
 #### request (v) — UNAPPROVED
 
-- Approved alternative: TELL (v)
-> **STE:** TELL THE FIRE SERVICE TO HELP YOU.
 > **Non-STE:** Request external fire support.
-- Approved alternative: WRITE (v)
 > **STE:** WRITE TO THE MANUFACTURER FOR REPAIR INSTRUCTIONS.
 > **Non-STE:** Request repair instructions from the manufacturer.
 
-#### require (v) — UNAPPROVED
 
 - Approved alternative: NECESSARY (adj)
 > **STE:** DURING THIS PROCEDURE, CLEAN FILTERS ARE NECESSARY.
@@ -19369,41 +16944,30 @@ For other meanings of "light", use:
 
 #### reset (v) — UNAPPROVED
 
-- Approved alternative: SET (v)
 > **STE:** SET THE INDICATOR TO A NEW POSITION.
 > **Non-STE:** Reset the indicator to a new position.
-> **See:** Dictionary entry for SET (v).
 
 #### residual (adj) — UNAPPROVED
 
-- Approved alternative: REMAINING (adj)
 > **STE:** REMOVE ALL THE REMAINING GREASE.
 > **Non-STE:** Remove all residual grease.
-> **See:** Dictionary entry for REMAINING (adj).
 
 #### residue (n) — UNAPPROVED
 
-- Approved alternative: REMAINING (adj)
 > **STE:** REMOVE THE REMAINING GREASE.
 > **Non-STE:** Remove the grease residues.
-> **See:** Dictionary entry for REMAINING (adj).
 
 #### respective (adj) — UNAPPROVED
 
-- Approved alternative: RELATED (adj)
 > **STE:** ATTACH THE CABLES TO THEIR RELATED SHACKLES.
 > **Non-STE:** Attach the cables to their respective shackles.
-> **See:** Dictionary entry for RELATED (adj).
-- Approved alternative: CORRECT (adj)
 > **STE:** INSTALL THE BOLTS IN THEIR CORRECT POSITIONS.
 > **Non-STE:** Install the bolts in their respective positions.
 
 #### respectively (adv) — UNAPPROVED
 
-- Approved alternative: RELATED (adj)
 > **STE:** ENGINES 1 AND 2 SUPPLY HOT AIR TO THEIR RELATED WINGS.
 > **Non-STE:** Engines 1 and 2 supply hot air to the left and right wings respectively.
-> **See:** Dictionary entry for RELATED (adj).
 
 #### respond (v) — UNAPPROVED
 
@@ -19411,23 +16975,17 @@ For other meanings of "light", use:
 > **STE:** IF THE INSTRUMENT DOES NOT GIVE A RESULT, DO A TEST.
 > **Non-STE:** If the instrument fails to respond, do a test.
 
-#### rest (n) — UNAPPROVED
 
-- Approved alternative: REMAINING (adj)
 > **STE:** THE REMAINING INSTRUCTIONS ARE APPLICABLE ONLY TO APPROVED PERSONNEL.
 > **Non-STE:** The rest of these instructions only apply to approved personnel.
-> **See:** Dictionary entry for REMAINING (adj).
 # Page 361 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 361–364 of 434
 
-## Approved Entries
 
 #### RESULT (n) — APPROVED
 
 - **Definition:** Something that occurs when you do something
-- **Example:**
   > **STE:** IF THESE TESTS DO NOT GIVE THE CORRECT RESULTS, REPLACE THE UNIT.
 
 #### RETRACT (v) — APPROVED
@@ -19436,41 +16994,33 @@ For other meanings of "light", use:
 - **Meaning 1:** To pull in(to)
   > **STE:** THE NOSE LANDING GEAR RETRACTS INTO THE FUSELAGE.
 - **Meaning 2:** To move in(to)
-  > **STE:** RETRACT THE LANDING GEAR.
 
 #### RETRACTION (n) — APPROVED
 
 - **Definition:** The result when something retracts
-- **Example:**
   > **STE:** DURING THE RETRACTION SEQUENCE, MAKE SURE THAT THE LANDING GEAR DOORS CLOSE.
 
 #### RIGHT (adj) — APPROVED
 
 - **Definition:** On the east side when you look north
-- **Example:**
   > **STE:** DO A FLOW CHECK OF THE PUMP IN THE RIGHT WING TANK.
 
 #### RIGID (adj) — APPROVED
 
 - **Definition:** That cannot easily bend or change shape
-- **Example:**
   > **STE:** REMOVE THE SCREWS FROM THE RIGID COVER.
 
 #### RISK (n) — APPROVED
 
 - **Definition:** The possibility that something that is dangerous occurs
-- **Example:**
   > **STE:** OBEY THE PRECAUTIONS TO PREVENT THE RISK OF FIRE.
 
 #### ROUGH (adj) — APPROVED
 
 - **Definition:** Not smooth (ROUGHER, ROUGHEST)
-- **Example:**
   > **STE:** CLEAN THE ROUGH SURFACES CAREFULLY.
 
-## Unapproved Entries
 
-#### rest (v) — UNAPPROVED
 
 - **Alternative:** BE (v)
   > **STE:** THE VEHICLE MUST BE ON ITS WHEELS.
@@ -19481,7 +17031,6 @@ For other meanings of "light", use:
 
 #### restart (v) — UNAPPROVED
 
-- **Alternative:** START (v)
   > **STE:** START THE UNIT AGAIN.
   > **Non-STE:** Restart the unit.
 
@@ -19490,7 +17039,6 @@ For other meanings of "light", use:
 - **Alternative:** REPAIR (v)
   > **STE:** DO NOT REPAIR THE CHROMIC ACID ANODIZING ON THE SKIN PANEL.
   > **Non-STE:** Do not restore the chromic acid anodizing on the skin panel.
-- **Alternative:** PUT (v)
   > **STE:** PUT THE PINS BACK IN THEIR LOCATION.
   > **Non-STE:** Restore the pins to their location.
 
@@ -19511,17 +17059,12 @@ For other meanings of "light", use:
 
 #### restrict (v) — UNAPPROVED
 
-- **Alternative:** DECREASE (v)
   > **STE:** THE METERING PLUG DECREASES THE FUEL FLOW.
   > **Non-STE:** The metering plug restricts the fuel flow.
-- **Alternative:** PREVENT (v)
-  > **STE:** THE STOP PREVENTS THE MOVEMENT OF THE ROD.
   > **Non-STE:** The stop restricts the movement of the rod.
 - **Alternative:** ONLY (adv)
   > **STE:** USE THESE NUTS ONLY FOR THE TEST.
   > **Non-STE:** Restrict the use of these nuts to test only.
-- **Alternative:** LIMIT (n)
-  > **STE:** THE VALVE KEEPS THE AIRFLOW IN LIMITS.
   > **Non-STE:** The valve restricts the airflow.
 
 #### result (v) — UNAPPROVED
@@ -19533,13 +17076,10 @@ For other meanings of "light", use:
   > **STE:** REPAIR DAMAGE THAT IS THE RESULT OF CORROSION.
   > **Non-STE:** Repair any damage resulting from corrosion.
 
-#### resume (v) — UNAPPROVED
 
-- **Alternative:** START (v)
   > **STE:** INCREASE THE PRESSURE UNTIL THE FLOW STARTS AGAIN.
   > **Non-STE:** Increase the pressure until the flow resumes.
 - **Alternative:** CONTINUE (v)
-  > **STE:** CONTINUE THE TEST.
   > **Non-STE:** Resume the test.
 
 #### retain (v) — UNAPPROVED
@@ -19556,7 +17096,6 @@ For other meanings of "light", use:
 
 #### retouch (v) — UNAPPROVED
 
-- **Alternative:** APPLY (v)
   > **STE:** APPLY ENAMEL ON THE AREAS WHERE IT IS MISSING.
   > **Non-STE:** Retouch the missing enamel areas.
 - **Alternative:** PAINT (v)
@@ -19578,7 +17117,6 @@ For other meanings of "light", use:
 
 #### return (v) — UNAPPROVED
 
-- **Alternative:** GO (v)
   > **STE:** THE PLUNGERS MUST GO BACK TO THE CLOSED POSITION.
   > **Non-STE:** Plungers must return to the closed position.
 
@@ -19588,9 +17126,7 @@ For other meanings of "light", use:
   > **STE:** YOU CAN USE THE MIXTURE AGAIN.
   > **Non-STE:** The mixture is reusable.
 
-#### reuse (v) — UNAPPROVED
 
-- **Alternative:** USE (v)
   > **STE:** IF THE FABRIC IS NOT DAMAGED, USE IT AGAIN.
   > **Non-STE:** Reuse the fabric if it is not damaged.
 
@@ -19600,9 +17136,7 @@ For other meanings of "light", use:
   > **STE:** IF THE FUEL SAMPLE SHOWS FREE WATER, DRAIN THE SYSTEM.
   > **Non-STE:** If the fuel sample reveals free water, drain the system.
 
-#### reverse (adj) — UNAPPROVED
 
-- **Alternative:** OPPOSITE (adj)
   > **STE:** MOVE THE CONTROL IN THE OPPOSITE DIRECTION.
   > **Non-STE:** Move the control in the reverse direction.
 - **Note:** This word is part of a technical noun when it refers to rearward thrust.
@@ -19610,29 +17144,23 @@ For other meanings of "light", use:
 
 #### reverse (v) — UNAPPROVED
 
-- **Alternative:** OPPOSITE (adj)
   > **STE:** MOVE THE ROD IN THE OPPOSITE DIRECTION.
   > **Non-STE:** Reverse the movement of the rod.
 
-#### review (n) — UNAPPROVED
 
 - **Alternative:** INSPECTION (n)
   > **STE:** DO AN INSPECTION OF THE DAMAGED AREA.
   > **Non-STE:** Do a review of the damaged area.
 - **Alternative:** EXAMINE (v)
   > **STE:** EXAMINE THE DAMAGED AREA.
-  > **Non-STE:** Do a review of the damaged area.
 
 #### rewind (v) — UNAPPROVED
 
-- **Alternative:** WIND (v)
   > **STE:** WIND THE CABLE BACK ONTO ITS REEL.
   > **Non-STE:** Rewind the cable onto its reel.
 
-#### rework (v) — UNAPPROVED
 
 - **Note:** Refer to technical manufacturing processes.
-- **Example:**
   > **STE:** EXAMINE FOR SCRATCHES. THEN, LIGHTLY POLISH ALL DAMAGED AREAS.
   > **Non-STE:** Examine for scratches and rework all damaged areas.
 
@@ -19673,9 +17201,7 @@ For other meanings of "light", use:
   > **STE:** WHEN A FIRE STARTS, THE TEMPERATURE INCREASES AND CAUSES THE DETECTOR TO OPERATE.
   > **Non-STE:** When a fire starts, the temperature rise causes the detector to operate.
 
-#### rise (v) — UNAPPROVED
 
-- **Alternative:** INCREASE (v)
   > **STE:** FILL THE STRUT WITH FLUID UNTIL THE PRESSURE INCREASES.
   > **Non-STE:** Fill the strut with fluid until the pressure rises.
 
@@ -19691,22 +17217,17 @@ For other meanings of "light", use:
   > **STE:** TURN THE GEARS TO ALIGN THEM.
   > **Non-STE:** Use a rotary movement to align the gears.
 
-#### rotate (v) — UNAPPROVED
 
-- **Alternative:** TURN (v)
   > **STE:** SLOWLY TURN THE VANE.
   > **Non-STE:** Slowly rotate the vane.
 
 #### rotation (n) — UNAPPROVED
 
-- **Alternative:** TURN (v)
   > **STE:** MAKE SURE THAT THE FAN TURNS FREELY.
   > **Non-STE:** Ensure the free rotation of the fan.
 
 #### rotational (adj) — UNAPPROVED
 
-- **Alternative:** TURN (v)
-  > **STE:** TURN THE GEARS TO ALIGN THEM.
   > **Non-STE:** Use a rotational movement to align the gears.
 
 #### roughen (v) — UNAPPROVED
@@ -19717,7 +17238,6 @@ For other meanings of "light", use:
 - **See:** Dictionary entry for ROUGH (adj).
 # Page 365 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 365–368 of 434
 
 ## R
@@ -19729,7 +17249,6 @@ For other meanings of "light", use:
 > **STE:** MAKE SURE THAT THE AREA OF THE BOND IS SUFFICIENTLY ROUGH.
 > **Non-STE:** Make sure the area of the bond has sufficient roughness.
 
-- **See:** Dictionary entry for ROUGH (adj).
 
 #### round (adj) — UNAPPROVED
 
@@ -19755,7 +17274,6 @@ For other meanings of "light", use:
 
 #### route (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 
 > **STE:** PUT THE FUELING HOSE ALONG THE GROUND.
 > **Non-STE:** Route the fueling hose along the ground.
@@ -19771,7 +17289,6 @@ For other meanings of "light", use:
 
 #### routine (adj) — UNAPPROVED
 
-- **Approved alternative:** USUAL (adj)
 
 > **STE:** IF SUCH FAILURES BECOME USUAL, REPLACE THE UNIT.
 > **Non-STE:** If such failures become routine, replace the unit.
@@ -19792,7 +17309,6 @@ For other meanings of "light", use:
 
 #### run (v) — UNAPPROVED
 
-- **Approved alternative:** OPERATE (v)
 
 > **STE:** OPERATE THE ENGINE AT 100% THRUST.
 > **Non-STE:** Run the engine at 100% thrust.
@@ -19806,7 +17322,6 @@ For other meanings of "light", use:
 
 ## S
 
-#### SAFE (adj) — APPROVED
 
 - **Inflections:** SAFER, SAFEST
 - **Approved meaning:** Not dangerous, disarmed
@@ -19825,7 +17340,6 @@ For other meanings of "light", use:
 
 > **STE:** FOR YOUR SAFETY, ALWAYS USE A PROTECTIVE MASK.
 
-#### SAFETY (v) — APPROVED
 
 - **Inflections:** SAFETIES, SAFETIED, SAFETIED
 - **Approved meaning 1:** To prevent accidental operation
@@ -19834,7 +17348,6 @@ For other meanings of "light", use:
 > **STE:** OPEN AND TAG THE CIRCUIT BREAKERS. THEN, SAFETY THEM.
 > **STE:** SAFETY THE NUT WITH LOCKWIRE.
 
-#### safety-clip (v) — UNAPPROVED
 
 - **Approved alternative:** LOCK (v) (WITH A CLIP [TN] OR CLIPS [TN])
 
@@ -19866,17 +17379,14 @@ For other meanings of "light", use:
 
 #### SAME (pron) — APPROVED
 
-- **Approved meaning:** Agrees in all details
 
 > **STE:** THE ADJUSTMENT OF THE LEFT AND RIGHT ACTUATORS MUST BE THE SAME.
 
-#### SAMPLE (n) — APPROVED
 
 - **Approved meaning:** A piece or quantity of something that you use for an inspection or test procedure to show that it has specified qualities
 
 > **STE:** GET A SAMPLE OF THE FUEL. THEN, MEASURE ITS SPECIFIC GRAVITY.
 
-#### sample (v) — UNAPPROVED
 
 - **Approved alternative:** SAMPLE (n)
 
@@ -19899,7 +17409,6 @@ For other meanings of "light", use:
 
 #### saturate (v) — UNAPPROVED
 
-- **Approved alternative:** SOAK (v)
 
 > **STE:** SOAK THE ELEMENT FOR FOUR HOURS.
 > **Non-STE:** Saturate the element for four hours.
@@ -19908,14 +17417,12 @@ For other meanings of "light", use:
 
 #### save (v) — UNAPPROVED
 
-- **Approved alternative:** KEEP (v)
 
 > **STE:** KEEP THE O-RINGS FOR THE SUBSEQUENT PROCEDURES.
 > **Non-STE:** Save the O-rings for the subsequent procedures.
 
 #### scan (v) — UNAPPROVED
 
-- **Approved alternative:** EXAMINE (v)
 - **Technical Name:** SCAN (TN)
 
 > **STE:** EXAMINE THE SURFACE ALONG THE TRAILING EDGE.
@@ -19940,41 +17447,32 @@ For other meanings of "light", use:
 
 #### scrap (v) — UNAPPROVED
 
-- **Approved alternative:** DISCARD (v)
 
 > **STE:** DISCARD THE REMOVED SEAL.
 > **Non-STE:** Scrap the removed seal.
 # Page 369 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 369–372 of 434
 
-## Approved Words
 
 #### SEAL (n) — APPROVED
 
 - **Meaning:** Something that prevents access or leaks
-- **Example:**
   > **STE:** APPLY SEALANT TO THE FILLET SEALS.
 
 #### SEAL (v) — APPROVED
 
 - **Meaning:** To prevent access or leaks
 - **Forms:** SEALS, SEALED, SEALED
-- **Example:**
   > **STE:** SEAL THE OPENINGS WITH POLYETHYLENE.
 
-#### SECONDARY (adj) — APPROVED
 
 - **Meaning:** Second in importance
-- **Example:**
   > **STE:** THE SECONDARY FILTER REMOVES THE REMAINING CONTAMINATION.
 
-#### SEE (v) — APPROVED
 
 - **Meaning:** To know with the eyes
 - **Forms:** SEES, SAW, SEEN
-- **Example:**
   > **STE:** MAKE SURE THAT YOU CAN SEE THE CABLE THROUGH THE INSPECTION HOLE.
 - For other meanings, use REFER (v):
   > **STE:** REFER TO TABLE 8001 FOR THE APPLICABLE TORQUE VALUES.
@@ -19986,13 +17484,9 @@ For other meanings of "light", use:
   > **STE:** MOVE THE TUBE TO MAKE SURE THAT ITS INNER CONNECTION IS TIGHT.
   > **Non-STE:** Move the tube to see if its inner connection is tight.
 
-#### SELECT (v) — APPROVED
 
 - **Meaning:** To make a choice
 - **Forms:** SELECTS, SELECTED, SELECTED
-- **Example:**
-  > **STE:** SELECT THE HYDRAULIC SYSTEM THAT YOU WILL PRESSURIZE.
-- **Example:**
   > **STE:** SELECT A LANGUAGE FROM THE MENU.
 - Do not use this word as a synonym for SET:
   > **STE:** SET THE SWITCH TO "TEST."
@@ -20001,38 +17495,31 @@ For other meanings of "light", use:
 #### SELECTION (n) — APPROVED
 
 - **Meaning:** The action or result of choosing
-- **Example:**
   > **STE:** THE OPERATION OF THE INDICATOR DOES NOT PREVENT THE SELECTION OF SYSTEM 1.
 
 #### SEMICIRCULAR (adj) — APPROVED
 
 - **Meaning:** That has the shape of half a circle
-- **Example:**
   > **STE:** THE VALVE FLAPS ARE SEMICIRCULAR.
 
 #### SEND (v) — APPROVED
 
 - **Meaning:** To cause to go
 - **Forms:** SENDS, SENT, SENT
-- **Example:**
   > **STE:** SEND THE FILTER ELEMENT TO THE MAINTENANCE SHOP FOR THE NECESSARY INSPECTION.
 
 #### SENSE (v) — APPROVED
 
 - **Meaning:** To get an input automatically
 - **Forms:** SENSES, SENSED, SENSED
-- **Example:**
   > **STE:** THE TEMPERATURE BULB SENSES THE EXTERNAL AIR TEMPERATURE.
 
 #### SENSITIVE (adj) — APPROVED
 
 - **Meaning:** That can sense small changes
-- **Example:**
   > **STE:** THE CAPSULE IS SENSITIVE TO PRESSURE CHANGES.
 
-## Unapproved Words
 
-#### scrape (v) — UNAPPROVED
 
 - **Alternative:** REMOVE (v) (WITH A SCRAPER [TN])
   > **STE:** REMOVE THE REMAINING SEALANT WITH AN APPLICABLE SCRAPER.
@@ -20046,7 +17533,6 @@ For other meanings of "light", use:
 
 #### screw (v) — UNAPPROVED
 
-- **Alternative:** TURN (v)
   > **STE:** CONTINUE TO TURN THE END FITTING UNTIL IT IS IN THE CORRECT POSITION.
   > **Non-STE:** Continue screwing the end fitting until it is in the correct position.
 - **Alternative:** ATTACH (v) (WITH A SCREW [TN] OR SCREWS [TN])
@@ -20061,14 +17547,12 @@ For other meanings of "light", use:
 
 #### search (v) — UNAPPROVED
 
-- **Alternative:** EXAMINE (v)
   > **STE:** EXAMINE THE SURFACE FOR CRACKS.
   > **Non-STE:** Search the surface for cracks.
 
 #### seat (v) — UNAPPROVED
 
 - **Alternative:** INSTALL (v)
-  > **STE:** INSTALL THE O-RING IN ITS GROOVE ON THE PISTON.
   > **Non-STE:** Seat the O-ring in its groove on the piston.
 - **Alternative:** AGAINST (prep)
   > **STE:** MAKE SURE THAT THE VALVE IS IN ITS CORRECT POSITION AGAINST THE FRAME.
@@ -20086,7 +17570,6 @@ For other meanings of "light", use:
   > **STE:** MAKE SURE THAT THE BRACKETS ARE CORRECTLY ATTACHED.
   > **Non-STE:** Check the brackets for secure attachment.
 
-#### secure (v) — UNAPPROVED
 
 - **Alternative:** ATTACH (v)
   > **STE:** REMOVE THE BOLTS THAT ATTACH THE UNIT.
@@ -20098,26 +17581,20 @@ For other meanings of "light", use:
 
 #### securely (adv) — UNAPPROVED
 
-- **Alternative:** CORRECTLY (adv)
-  > **STE:** MAKE SURE THAT THE BRACKETS ARE CORRECTLY ATTACHED.
   > **Non-STE:** Make sure that the brackets are securely attached.
 - **Alternative:** SAFELY (adv)
   > **STE:** MAKE SURE THE LADDER IS SAFELY ATTACHED.
   > **Non-STE:** Make sure the ladder is securely attached.
-- **Alternative:** TIGHT (adj)
-  > **STE:** MAKE SURE THAT THE BOLTS ARE TIGHT.
   > **Non-STE:** Make sure that the bolts are securely installed.
 
 #### security (n) — UNAPPROVED
 
-- **Alternative:** CORRECTLY (adv)
   > **STE:** MAKE SURE THAT THE COMPONENTS ARE CORRECTLY ATTACHED.
   > **Non-STE:** Check the security of the components.
 
 #### seek (v) — UNAPPROVED
 
 - **Alternative:** GET (v)
-  > **STE:** GET MEDICAL AID IMMEDIATELY.
   > **Non-STE:** Seek medical attention immediately.
 
 #### seepage (n) — UNAPPROVED
@@ -20134,7 +17611,6 @@ For other meanings of "light", use:
 - **Alternative:** MOVE (v)
   > **STE:** IF YOU CANNOT MOVE THE BOLTS, APPLY SOME PENETRATING OIL.
   > **Non-STE:** If the bolts are seized, apply some penetrating oil.
-- **Alternative:** TURN (v)
   > **STE:** IF THE FLAP CONTROL MOTOR CANNOT TURN, USE THE ALTERNATIVE MODE.
   > **Non-STE:** If the flap control motor is seized, use the alternate mode.
 
@@ -20148,101 +17624,81 @@ For other meanings of "light", use:
   > **Non-STE:** These line fittings are separable.
 # Page 373 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 373–376 of 434
 
-## Approved Entries
 
 #### SEPARATION (n) — APPROVED
 
 - **Meaning:** The action or result of separating
-- **Example:**
   > **STE:** SEPARATION OF THESE PARTS IS NOT EASY.
 
-#### SEQUENCE (n) — APPROVED
 
 - **Meaning:** The relation of items that follow one after the other in a list or the relation of steps or events that occur one after the other in time
-- **Example:**
   > **STE:** TIGHTEN THE BOLTS IN THE SEQUENCE THAT IS GIVEN IN FIGURE 3.
 
 #### SERRATION (n) — APPROVED
 
 - **Meaning:** One or more notches or teeth as in a saw
-- **Example:**
   > **STE:** MAKE MARKS THAT SHOW THE LOCATION OF THE SERRATIONS.
 
 #### SERVICING (n) — APPROVED
 
 - **Meaning:** The steps necessary to prepare something for operation
-- **Example:**
   > **STE:** BEFORE YOU DO SERVICING OF THE HYDRAULIC SYSTEM, ISOLATE IT.
 
 #### SET (n) — APPROVED
 
 - **Meaning:** A group of related items that you use for the same purpose
-- **Example:**
   > **STE:** USE THE SET OF TOOLS THAT IS SUPPLIED WITH THE UNIT.
 
 #### SET (v) — APPROVED
 
 - **Meaning:** To put something into a given adjustment, condition, or mode
 - **Forms:** SETS, SET, SET
-- **Example:**
   > **STE:** SET THE ALTIMETER SCALE TO 1013 mbar.
 
 #### SHAKE (v) — APPROVED
 
 - **Meaning:** To move or cause to move quickly up and down or from side to side
 - **Forms:** SHAKES, SHOOK, SHAKEN
-- **Examples:**
   - **STE:** SHAKE THE CONTAINER.
   - **STE:** THE CONTROL COLUMN STARTS TO SHAKE BEFORE A STALL OCCURS.
 
 #### SHAPE (n) — APPROVED
 
 - **Meaning:** The contour of an object
-- **Example:**
   > **STE:** THE PATCH MUST BE THE SAME SHAPE AS THE CUTOUT.
 
 #### SHARP (adj) — APPROVED
 
 - **Meaning:** That can cut or make a hole
 - **Forms:** SHARPER, SHARPEST
-- **Example:**
   > **STE:** MAKE A HOLE WITH A SHARP TOOL.
 
 #### SHEET (n) — APPROVED
 
 - **Meaning:** A piece of material that is thin in relation to its length and width
-- **Example:**
   > **STE:** IF THE SHEETS HAVE DENTS WITH A DEPTH OF MORE THAN 0.5 mm, REMOVE THESE DENTS.
 
 #### SHINY (adj) — APPROVED
 
 - **Meaning:** That can cause a reflection of light
 - **Forms:** SHINIER, SHINIEST
-- **Example:**
   > **STE:** CLEAN THE SHINY AREA OF THE OLEO STRUT.
 
 #### SHOCK (n) — APPROVED
 
 - **Meaning:** The sudden effect of energy on a person or object
-- **Example:**
   > **STE:** SHOCKS CAN CAUSE DAMAGE TO THE GYROSCOPE.
 
-#### SHORT (adj) — APPROVED
 
 - **Meaning:** That has small length or duration
 - **Forms:** SHORTER, SHORTEST
-- **Example:**
   > **STE:** ATTACH THE SHORT ARM OF THE BELLCRANK TO THE ROD.
-- **Example:**
   > **STE:** AFTER YOU STOP THE POWER SUPPLY, THE TEMPERATURE DECREASES IN A SHORT TIME. THIS TIME MUST NOT BE MORE THAN 30 SECONDS.
 - **Usage note:** If it is possible, be accurate.
 
-## Unapproved Entries
 
-#### separate (adj) — UNAPPROVED
 
 - **Alternative:** ISOLATED (adj)
   > **STE:** EACH HYDRAULIC SYSTEM IS FULLY ISOLATED.
@@ -20259,14 +17715,12 @@ For other meanings of "light", use:
 
 #### separate (v) — UNAPPROVED
 
-- **Alternative:** DISCONNECT (v)
   > **STE:** DISCONNECT THE LINE FITTINGS.
   > **Non-STE:** Separate the line fittings.
 - **Alternative:** DIVIDE (v)
   > **STE:** YOU CAN DIVIDE THE DRAINS INTO THREE GROUPS.
   > **Non-STE:** You can separate the drains into three groups.
 
-#### separately (adv) — UNAPPROVED
 
 - **Alternative:** INDEPENDENTLY (adv)
   > **STE:** THE SYSTEM MONITORS THE CONDITION OF THE PARTS INDEPENDENTLY.
@@ -20288,7 +17742,6 @@ For other meanings of "light", use:
   > **Non-STE:** Use gloves when handling parts with serrated edges.
 - **See:** Dictionary entry for SERRATION (n).
 
-#### serve (v) — UNAPPROVED
 
 - **Instruction:** Use an accurate verb.
   > **STE:** THE RADIO MASTER SWITCH CONTROLS THE BUS BAR.
@@ -20306,7 +17759,6 @@ For other meanings of "light", use:
 - **Alternative:** SERVICEABLE (adj)
   > **STE:** THE TIRE IS SERVICEABLE IF THE CUTS ARE SMALLER THAN 10 mm.
   > **Non-STE:** The serviceability of the tire is not affected by any cut smaller than 10 mm.
-- **Alternative:** SERVICEABLE (adj)
   > **STE:** DO A VISUAL INSPECTION OF THE ADAPTER TO MAKE SURE THAT IT IS SERVICEABLE.
   > **Non-STE:** (Correct or satisfactory)
 
@@ -20323,7 +17775,6 @@ For other meanings of "light", use:
   > **Non-STE:** Setting of the rod length is achieved in the factory.
 - **See:** Dictionary entry for SET (v).
 
-#### settle (v) — UNAPPROVED
 
 - **Alternative:** COLLECT (v)
   > **STE:** LET THE SEDIMENT COLLECT AT THE BOTTOM OF THE CONTAINER.
@@ -20348,13 +17799,10 @@ For other meanings of "light", use:
   > **STE:** SOAK THE FILLER CAPS IN DISTILLED WATER FOR A MINIMUM OF EIGHT HOURS.
   > **Non-STE:** Soak the filler caps in distilled water for several hours.
 
-#### severe (adj) — UNAPPROVED
 
-- **Alternative:** DANGEROUS (adj)
   > **STE:** THIS ANTISEPTIC CAN BE DANGEROUS FOR YOUR SKIN.
   > **Non-STE:** This antiseptic can cause severe skin problems.
 
-#### shall (v) — UNAPPROVED
 
 - **Alternative:** MUST (v)
   > **STE:** HOLES MUST NOT HAVE SHARP EDGES.
@@ -20367,7 +17815,6 @@ For other meanings of "light", use:
   > **Non-STE:** Shape the patch to suit the cutout.
 - **See:** Dictionary entry for SHAPE (n).
 
-#### sharply (adv) — UNAPPROVED
 
 - **Alternative:** QUICKLY (adv)
   > **STE:** QUICKLY PULL THE CABLES TO DISENGAGE THEM.
@@ -20381,13 +17828,11 @@ For other meanings of "light", use:
 - **Alternative:** BREAK (v)
   > **STE:** TIGHTEN THE NUT. CONTINUE UNTIL THE NUT BREAKS.
   > **Non-STE:** Tighten the nut until it shears.
-- **Alternative:** CUT (v)
   > **STE:** DO NOT CUT THE WIRES.
   > **Non-STE:** Do not shear the wires.
 
 #### shield (v) — UNAPPROVED
 
-- **Alternative:** PREVENT (v)
   > **STE:** PUT ON GOGGLES TO PREVENT INJURY TO YOUR EYES.
   > **Non-STE:** Shield your eyes.
 - **Alternative:** PROTECTION (n)
@@ -20396,17 +17841,13 @@ For other meanings of "light", use:
 
 #### shift (v) — UNAPPROVED
 
-- **Alternative:** MOVE (v)
-  > **STE:** MOVE THE LEVER FORWARD.
   > **Non-STE:** Shift the lever forward.
 # Page 377 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 377–380 of 434
 
 ## Dictionary — Approved
 
-#### SHOW (v) — APPROVED
 
 - **Forms:** SHOWS, SHOWED, SHOWN
 - **Approved meaning 1:** To cause to be seen
@@ -20440,7 +17881,6 @@ For other meanings of "light", use:
   > **STE:** BE CAREFUL WHEN YOU USE ALODINE, BECAUSE IT IS A DANGEROUS MATERIAL.
   > **Non-STE:** Since Alodine is a dangerous material, be careful when you use it.
 
-#### SLOPE (n) — APPROVED
 
 - **Approved meaning:** A surface that is not level
   > **STE:** IF THE VEHICLE IS PARKED ON A SLOPE, MAKE SURE THAT WHEEL CHOCKS ARE IN POSITION.
@@ -20450,7 +17890,6 @@ For other meanings of "light", use:
 - **Approved meaning:** A long opening that is not wide
   > **STE:** PUSH THE CABLES THROUGH THE SLOT IN FRAME 8 AND ATTACH THEM TO THE CLIPS.
 
-#### SLOW (adj) — APPROVED
 
 - **Forms:** SLOWER, SLOWEST
 - **Approved meaning:** At low speed
@@ -20463,15 +17902,11 @@ For other meanings of "light", use:
 
 ## Dictionary — Unapproved
 
-#### shorten (v) — UNAPPROVED
 
-- **Alternative:** DECREASE (v)
   > **STE:** DO NOT DECREASE THE STERILIZATION TIME.
   > **Non-STE:** Do not shorten the sterilization time.
 
-#### should (v) — UNAPPROVED
 
-- **Alternative:** MUST (v)
   > **STE:** PERSONNEL MUST WEAR PROTECTIVE CLOTHING.
   > **Non-STE:** Personnel should wear protective clothing.
 - For conditional "should" meaning "if", use IF (conj):
@@ -20480,14 +17915,12 @@ For other meanings of "light", use:
 
 #### shut down (v) — UNAPPROVED
 
-- **Alternative:** STOP (v)
   > **STE:** STOP THE ENGINE.
   > **Non-STE:** Shut down the engine.
 
 #### sideways (adv) — UNAPPROVED
 
 - **Alternative:** SIDE (n)
-  > **STE:** PUSH THE UNIT OUT AND THEN MOVE IT TO THE LEFT SIDE.
   > **Non-STE:** Push the unit out and then move it sideways.
 - **See:** Dictionary entry for SIDE (n).
 
@@ -20505,17 +17938,14 @@ For other meanings of "light", use:
 
 #### significant (adj) — UNAPPROVED
 
-- **Alternative:** IMPORTANT (adj)
   > **STE:** THIS PROCEDURE IS IMPORTANT FOR THE CORRECT OPERATION OF THE UNIT.
   > **Non-STE:** This procedure is significant for the correct operation of the unit.
 
 #### silence (v) — UNAPPROVED
 
-- **Alternative:** STOP (v)
   > **STE:** STOP THE ALARM BELL.
   > **Non-STE:** Silence the alarm bell.
 
-#### similar (adj) — UNAPPROVED
 
 - **Alternative 1:** EQUIVALENT (adj)
   > **STE:** USE THE SPECIFIED MATERIAL OR AN EQUIVALENT ONE.
@@ -20524,7 +17954,6 @@ For other meanings of "light", use:
   > **STE:** THE TWO ITEMS HAVE ALMOST THE SAME SHAPE.
   > **Non-STE:** The two items are similar in shape.
 
-#### simultaneous (adj) — UNAPPROVED
 
 - **Alternative:** AT THE SAME TIME
   > **STE:** REMOVE THE FILTER ELEMENT AND THE FILTER HOUSING AT THE SAME TIME.
@@ -20532,32 +17961,26 @@ For other meanings of "light", use:
 
 #### simultaneously (adv) — UNAPPROVED
 
-- **Alternative:** AT THE SAME TIME
   > **STE:** DO THESE TWO STEPS AT THE SAME TIME.
   > **Non-STE:** Do these two steps simultaneously.
 
 #### situated (adj) — UNAPPROVED
 
-- **Alternative 1:** INSTALL (v)
   > **STE:** THE TRIM CONTROL KNOB IS INSTALLED ON THE CONTROL PEDESTAL.
   > **Non-STE:** The trim control knob is situated on the control pedestal.
 - **Alternative 2:** BE (v)
   > **STE:** THE TRIM CONTROL KNOB IS ON THE CONTROL PEDESTAL.
-  > **Non-STE:** The trim control knob is situated on the control pedestal.
 
-#### situation (n) — UNAPPROVED
 
 - **Alternative:** CONDITION (n) — use the plural form
   > **STE:** THE ALGORITHM ADAPTS TO THE NEW CONDITIONS.
   > **Non-STE:** The algorithm adapts to the new situation.
 
-#### size (n) — UNAPPROVED
 
 - **Alternative:** DIMENSION (n)
   > **STE:** THESE PARTS HAVE DIFFERENT DIMENSIONS.
   > **Non-STE:** These parts are of different sizes.
 
-#### skid (v) — UNAPPROVED
 
 - **Alternative:** SKID (TN)
   > **STE:** THIS INDICATOR SHOWS THAT THE CAR IS IN A SKID.
@@ -20571,19 +17994,15 @@ For other meanings of "light", use:
 
 #### slack (n) — UNAPPROVED
 
-- **Alternative:** TENSION (TN)
-  > **STE:** MAKE SURE THAT THE TENSION IN THE CONTROL CABLES IS CORRECT.
   > **Non-STE:** Check for slack in the control cables.
 
 #### slacken (v) — UNAPPROVED
 
-- **Alternative:** TENSION (TN)
   > **STE:** RELEASE THE TENSION IN THE CONTROL CABLES.
   > **Non-STE:** Slacken the control cables.
 
 #### slackness (n) — UNAPPROVED
 
-- **Alternative:** TENSION (TN)
   > **STE:** MAKE SURE THAT THE TENSION IN THE CABLES IS CORRECT.
   > **Non-STE:** Make sure there is no slackness in the cables.
 
@@ -20595,7 +18014,6 @@ For other meanings of "light", use:
 
 #### slide (v) — UNAPPROVED
 
-- **Alternative:** MOVE (v)
   > **STE:** MOVE THE COMPUTER HORIZONTALLY TO PREVENT DAMAGE.
   > **Non-STE:** Slide the computer horizontally to avoid damage.
 
@@ -20610,11 +18028,9 @@ For other meanings of "light", use:
 
 #### slightly (adv) — UNAPPROVED
 
-- **Alternative:** SMALL (adj)
   > **STE:** MOVE THE ADAPTER A SMALL DISTANCE FORWARD.
   > **Non-STE:** Move the adapter slightly forward.
 
-#### slip (v) — UNAPPROVED
 
 - **Alternative 1:** MOVE (v) — for the meaning "to slide or glide"
   > **STE:** MOVE THE CARRIAGE ALONG THE TRACK.
@@ -20631,7 +18047,6 @@ For other meanings of "light", use:
 
 #### slow down (v) — UNAPPROVED
 
-- **Alternative:** DECREASE (v)
   > **STE:** DECREASE THE SPEED OF THE SCREWING MACHINE TO PREVENT DAMAGE TO FASTENERS.
   > **Non-STE:** Slow down the screwing machine to prevent damage to fasteners.
 
@@ -20643,21 +18058,16 @@ For other meanings of "light", use:
 - **See:** Dictionary entry for SLOW (adj).
 # Page 381 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 381–384 of 434
 
-## S
 
-#### SMALL (adj) — APPROVED
 
 - **Inflections:** SMALLER, SMALLEST
 - **Meaning:** Less than average in dimension, quantity, quality, or capacity
-- **Example:**
   > **STE:** IF THE TEMPERATURE INCREASES SUDDENLY, ADD A SMALL QUANTITY OF REAGENT TO GET A STABLE REACTION.
 
 #### smear (v) — UNAPPROVED
 
-- **Approved alternative:** APPLY (v)
 - **STE:** APPLY GREASE TO THE TAPER SLEEVE.
 - **Non-STE:** Smear grease on the taper sleeve.
 
@@ -20665,31 +18075,25 @@ For other meanings of "light", use:
 
 - **Inflections:** SMELLS, SMELLED, SMELLED
 - **Meaning:** To sense with the nose
-- **Example:**
   > **STE:** IF YOU SMELL OIL IN THE COMPARTMENT, REPLACE THE RECIRCULATION FILTERS.
 
 #### SMOKE (n) — APPROVED
 
 - **Meaning:** A gas that has particles of burned material and that you can see
-- **Example:**
   > **STE:** WHEN THE CONCENTRATION OF SMOKE IS MORE THAN THE LIMIT, AN ALARM OPERATES.
 
 #### SMOKE (v) — APPROVED
 
 - **Inflections:** SMOKES, SMOKED, SMOKED
 - **Meaning:** To breathe the fumes of burning material and especially tobacco
-- **Example:**
   > **STE:** DO NOT SMOKE IN THE WORK AREA.
 
 #### SMOOTH (adj) — APPROVED
 
 - **Inflections:** SMOOTHER, SMOOTHEST
-- **Meanings:**
   1. That has a continuous uniform surface
-     - **Example:**
        > **STE:** MAKE SURE THAT THE PAINTED SURFACE IS SMOOTH.
   2. That has a constant rate of movement
-     - **Example:**
        > **STE:** EXAMINE THE LINKAGE FOR SMOOTH MOVEMENT.
 
 #### smooth (v) — UNAPPROVED
@@ -20702,24 +18106,19 @@ For other meanings of "light", use:
 #### SMOOTHLY (adv) — APPROVED
 
 - **Meaning:** In a smooth manner
-- **Example:**
   > **STE:** MAKE SURE THAT THE REDUCTION GEAR MOVES SMOOTHLY.
 
 #### snag (v) — UNAPPROVED
 
-- **Approved alternative:** CATCH (v)
 - **STE:** THE CLOTH WILL CATCH ON BROKEN WIRES.
 - **Non-STE:** The cloth will snag on broken wires.
 
 #### snap (n) — UNAPPROVED
 
-- **Approved alternative:** CLICK (n)
 - **STE:** WHEN YOU ATTACH THE SPRING CLIP, MAKE SURE THAT YOU HEAR A CLICK.
 - **Non-STE:** Ensure that there is a snap when you fit the spring clip.
 
-#### snap (v) — UNAPPROVED
 
-- **Approved alternatives:**
   1. MOVE QUICKLY
      - **STE:** THE RETAINING CLIP MUST MOVE QUICKLY INTO ITS POSITION.
      - **Non-STE:** The retaining clip must snap into its position.
@@ -20729,7 +18128,6 @@ For other meanings of "light", use:
 
 #### so (that) — UNAPPROVED
 
-- **Approved alternatives:**
   1. UNTIL (prep)
      - **STE:** ADJUST THE LENGTH OF THE ROD UNTIL YOU GET A MINIMUM CLEARANCE OF 0.1 in.
      - **Non-STE:** Adjust the length of rod so that a minimum gap of 0.1 in. is obtained.
@@ -20740,12 +18138,8 @@ For other meanings of "light", use:
 #### SOAK (v) — APPROVED
 
 - **Inflections:** SOAKS, SOAKED, SOAKED
-- **Meanings:**
   1. To put something into a liquid and keep it there until it is fully wet or soft
-     - **Example:**
-       > **STE:** SOAK THE FILTER IN THE CLEANING SOLUTION FOR 4 HOURS.
   2. To stay in liquid until fully wet or soft
-     - **Example:**
        > **STE:** THE COMPONENT MUST SOAK IN THE SOLUTION FOR A MINIMUM OF 2 HOURS.
 
 #### soapy (adj) — UNAPPROVED
@@ -20758,10 +18152,8 @@ For other meanings of "light", use:
 
 - **Inflections:** SOFTER, SOFTEST
 - **Meaning:** Flexible, not hard
-- **Example:**
   > **STE:** RUB THE SURFACE WITH A SOFT, DRY CLOTH.
 
-#### soften (v) — UNAPPROVED
 
 - **Approved alternative:** MAKE…SOFT
 - **STE:** PUT THE MATERIAL INTO THE SOLVENT TO MAKE THE COMPOUND SOFT.
@@ -20770,20 +18162,16 @@ For other meanings of "light", use:
 
 #### soiled (adj) — UNAPPROVED
 
-- **Approved alternative:** DIRTY (adj)
 - **STE:** DISCARD THE DIRTY RAGS.
 - **Non-STE:** Scrap the soiled rags.
 
 #### SOLID (adj) — APPROVED
 
 - **Meaning:** That has the properties of a solid
-- **Example:**
   > **STE:** THE RAILS ARE MADE FROM SOLID BARS.
 
-#### SOLID (n) — APPROVED
 
 - **Meaning:** Material that is not a gas or a liquid
-- **Example:**
   > **STE:** APPLY HEAT SLOWLY TO THE SOLID TO MONITOR ITS MELTING POINT.
 
 #### solidify (v) — UNAPPROVED
@@ -20793,14 +18181,10 @@ For other meanings of "light", use:
 - **Non-STE:** Do not let the foam to solidify.
 - **See:** Dictionary entry for SOLID (adj).
 
-#### SOLUTION (n) — APPROVED
 
-- **Meanings:**
   1. A liquid that includes a dissolved material
-     - **Example:**
        > **STE:** PREPARE THE SOLUTION IN A CONTAINER MADE OF CERAMIC MATERIAL.
   2. The answer to a problem
-     - **Example:**
        > **STE:** THE TEAM'S WORK WAS IMPORTANT FOR THE SOLUTION OF THE TECHNICAL PROBLEM.
 
 #### solve (v) — UNAPPROVED
@@ -20813,69 +18197,52 @@ For other meanings of "light", use:
 #### SOME (adj) — APPROVED
 
 - **Meaning:** Related to a quantity not specified
-- **Example:**
   > **STE:** SOME MODELS DO NOT HAVE THIS FUNCTION.
 
 #### SOME (pron) — APPROVED
 
-- **Meaning:** Related to a quantity not specified
-- **Example:**
   > **STE:** SOME MODELS HAVE THIS FUNCTION, BUT SOME DO NOT.
 
-#### SOMETHING (pron) — APPROVED
 
 - **Meaning:** A thing that is not determined or specified
-- **Example:**
   > **STE:** IF SOMETHING UNUSUAL OCCURS, DO THE NECESSARY CHECKS TO FIND THE CAUSE.
 
-#### soon (adv) — UNAPPROVED
 
 - **Approved alternative:** TIME (n)
-- **Examples:**
   1. Use a short time
      - **STE:** WHEN YOU STOP THE POWER SUPPLY, THE TEMPERATURE WILL DECREASE IN A SHORT TIME.
      - **Non-STE:** When you stop the power supply, the temperature will decrease soon.
   2. If it is possible, give the time
      - **STE:** WHEN YOU STOP THE POWER SUPPLY, THE TEMPERATURE WILL DECREASE IN APPROXIMATELY 1 MINUTE.
-     - **Non-STE:** When you stop the power supply, the temperature will decrease soon.
 
 #### SOUND (n) — APPROVED
 
 - **Meaning:** Something that you can hear
-- **Example:**
   > **STE:** INCREASE THE VOLUME OF THE SOUND.
 
 #### sound (v) — UNAPPROVED
 
-- **Approved alternative:** OPERATE (v)
 - **STE:** THE ALARM BELL OPERATES.
 - **Non-STE:** The alarm bell sounds.
 
-#### SOURCE (n) — APPROVED
 
-- **Meanings:**
   1. Something that supplies energy or data
-     - **Example:**
        > **STE:** THE SOLAR PANEL IS A SATISFACTORY SOURCE OF ENERGY.
   2. The point where something starts
-     - **Example:**
        > **STE:** FIND THE SOURCE OF THE LEAKAGE.
 
 #### SPACE (n) — APPROVED
 
 - **Meaning:** A distance, area, or volume
-- **Example:**
   > **STE:** PUT THE SEALANT INTO THE SPACE BEHIND THE FLANGE OF THE WATER INJECTOR.
 
 #### space (v) — UNAPPROVED
 
-- **Approved alternative:** DISTANCE (n)
 - **STE:** MAKE SURE THAT THERE IS AN EQUAL DISTANCE BETWEEN THE HOLES.
 - **Non-STE:** Make sure you space the holes equally.
 
 #### spacing (n) — UNAPPROVED
 
-- **Approved alternative:** DISTANCE (n)
 - **STE:** REFER TO FIG. 401 FOR THE DISTANCE BETWEEN RIVETS.
 - **Non-STE:** The rivet spacing is given in Fig. 401.
 
@@ -20887,14 +18254,12 @@ For other meanings of "light", use:
 
 #### sparingly (adv) — UNAPPROVED
 
-- **Approved alternative:** QUANTITY (n)
 - **STE:** APPLY A SMALL QUANTITY OF GREASE.
 - **Non-STE:** Apply grease sparingly.
 
 #### SPARK (n) — APPROVED
 
 - **Meaning:** A hot, bright particle of a material that burns
-- **Example:**
   > **STE:** DO NOT USE TEST EQUIPMENT THAT CAN CAUSE SPARKS.
 
 #### spark (v) — UNAPPROVED
@@ -20904,26 +18269,20 @@ For other meanings of "light", use:
 - **Non-STE:** Wear goggles when using electrical equipment that sparks.
 - **See:** Dictionary entry for SPARK (n).
 
-#### SPEAK (v) — APPROVED
 
 - **Inflections:** SPEAKS, SPOKE, SPOKEN
 - **Meaning:** To use a voice to make words
-- **Example:**
   > **STE:** SPEAK INTO THE MICROPHONE.
 
 #### SPECIAL (adj) — APPROVED
 
 - **Meaning:** For a specified function
-- **Example:**
   > **STE:** TIGHTEN THE SPECIAL NUT.
 # Page 385 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 385–388 of 434
 
-## Dictionary
 
-### Approved Words
 
 #### SPECIALLY (adv) — APPROVED
 
@@ -20931,7 +18290,6 @@ For other meanings of "light", use:
 
 > **STE:** THIS EXTRACTOR IS SPECIALLY MADE TO REMOVE THESE PINS.
 
-#### SPECIFIED (adj) — APPROVED
 
 - **Meaning:** Given in, identified in, or related to a specification, regulation, or procedure
 
@@ -20994,7 +18352,6 @@ For other meanings of "light", use:
 #### START (v) — APPROVED
 
 - **Inflections:** STARTS, STARTED, STARTED
-- **Meanings:**
   1. To begin a procedure, movement, or operation
 
   > **STE:** START THE ENGINE.
@@ -21003,11 +18360,8 @@ For other meanings of "light", use:
 
   > **STE:** MEASURE THE BEND RADIUS OF THE HOSE FROM THE POINT WHERE THE BEND STARTS.
 
-### Unapproved Words
 
-#### specific (adj) — UNAPPROVED
 
-- **Approved alternative:** APPROVED (adj)
 
 > **STE:** USE APPROVED TOOLS TO PREVENT POSSIBLE DAMAGE.
 > **Non-STE:** Use specific tools to preclude the possibility of damage.
@@ -21023,7 +18377,6 @@ For other meanings of "light", use:
 
 #### speck (n) — UNAPPROVED
 
-- **Approved alternative:** PARTICLE (n)
 
 > **STE:** REMOVE ALL PARTICLES OF DUST FROM THE LENS.
 > **Non-STE:** Remove all specks of dust from the lens.
@@ -21035,9 +18388,7 @@ For other meanings of "light", use:
 > **STE:** IF YOU CANNOT HEAR THE VOICE, REPLACE THE UNIT.
 > **Non-STE:** If the speech is not audible, replace the unit.
 
-#### spillage (n) — UNAPPROVED
 
-- **Approved alternatives:**
   1. CONTAMINATION (n)
 
   > **STE:** FIND THE AREA OF MERCURY CONTAMINATION.
@@ -21059,7 +18410,6 @@ For other meanings of "light", use:
 
 #### splash (v) — UNAPPROVED
 
-- **Approved alternative:** GET (v)
 
 > **STE:** IF YOU GET FLUID IN YOUR EYES, GET MEDICAL AID.
 > **Non-STE:** If fluid splashes into eyes, get medical aid.
@@ -21071,29 +18421,23 @@ For other meanings of "light", use:
 > **STE:** THE DRIVE SHAFT HAS SPLINES.
 > **Non-STE:** The drive shaft is splined.
 
-#### split (adj) — UNAPPROVED
 
-- **Approved alternative:** DAMAGED (adj)
 
 > **STE:** REPLACE DAMAGED COVERS.
 > **Non-STE:** Split covers must be replaced.
 
-#### split (v) — UNAPPROVED
 
-- **Approved alternatives:**
   1. DIVIDE (v)
 
   > **STE:** DIVIDE THE ELECTRICAL LOAD BETWEEN THE TWO BUS BARS.
   > **Non-STE:** Split the electrical load between the two bus bars.
 
-  2. BREAK (v)
 
   > **STE:** WHEN YOU APPLY THE MAXIMUM TEST PRESSURE, MAKE SURE THAT THE HOUSING DOES NOT BREAK.
   > **Non-STE:** Make sure that the housing does not split when you apply the maximum test pressure.
 
 #### spot (n) — UNAPPROVED
 
-- **Approved alternatives:**
   1. MARK (n)
 
   > **STE:** A RED MARK ON THE PIN IDENTIFIES THE LUBRICATION POINT.
@@ -21106,84 +18450,66 @@ For other meanings of "light", use:
 
 #### spot (v) — UNAPPROVED
 
-- **Approved alternative:** FIND (v)
 
 > **STE:** IF YOU FIND CORROSION IN THIS AREA, USE REPAIR SCHEME No. 3.
 > **Non-STE:** If you spot corrosion in this area, use repair scheme No. 3.
 
 #### spread (v) — UNAPPROVED
 
-- **Approved alternative:** APPLY (v)
 
 > **STE:** APPLY THE COMPOUND EQUALLY.
 > **Non-STE:** Spread compound evenly.
 
 #### spring (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** MAKE SURE THAT THE PINS DO NOT MOVE OUT OF THE NOTCH.
 > **Non-STE:** Make certain that the pins do not spring out of the notch.
 
 #### spurious (adj) — UNAPPROVED
 
-- **Approved alternative:** UNWANTED (adj)
 
 > **STE:** IF THERE ARE UNWANTED INDICATIONS, DO A TEST.
 > **Non-STE:** In the event of spurious indications, do a test.
 
-#### stability (n) — UNAPPROVED
 
 - **Approved alternative:** STABLE (adj)
 
 > **STE:** BEFORE YOU LIFT THE VEHICLE WITH JACKS, MAKE SURE THAT IT IS STABLE.
 > **Non-STE:** Before jacking up the vehicle, make sure that its stability is ensured.
 
-- **See:** Dictionary entry for STABLE (adj).
 
-#### stabilization (n) — UNAPPROVED
 
-- **Approved alternative:** STABLE (adj)
 
 > **STE:** WHEN THE TEMPERATURE IS STABLE, MAKE SURE THAT THE OIL PRESSURE DECREASES.
 > **Non-STE:** Check that oil pressure drops after stabilization of temperature.
 
-- **See:** Dictionary entry for STABLE (adj).
 
 #### stabilize (v) — UNAPPROVED
 
-- **Approved alternative:** STABLE (adj)
 
 > **STE:** LET THE V-BARS BECOME STABLE.
 > **Non-STE:** Allow V-bars to stabilize.
 
-- **See:** Dictionary entry for STABLE (adj).
 
-#### stage (n) — UNAPPROVED
 
-- **Approved alternative:** STEP (n)
 
 > **STE:** DURING THIS STEP, DO NOT REMOVE THE PIN.
 > **Non-STE:** Do not remove the pin at this stage.
 
 - **See:** Dictionary entry for STEP (n).
 
-#### stained (adj) — UNAPPROVED
 
-- **Approved alternatives:**
   1. DIRTY (adj)
 
   > **STE:** IF THE CARPET IS DIRTY, CLEAN IT WITH MATERIAL No. 8.
   > **Non-STE:** If the carpet is stained, clean it with Material No. 8.
 
-  2. STAIN (TN)
 
   > **STE:** IF THERE ARE HYDRAULIC FLUID STAINS ON THE COVER, EXAMINE THE LINE COUPLINGS.
   > **Non-STE:** If the cover is stained by hydraulic fluid, check line couplings.
 
-#### stamp (v) — UNAPPROVED
 
-- **Approved alternatives:**
   1. PUT (v) (WITH A STAMP [TN] OR STAMPS [TN])
 
   > **STE:** PUT THE TEST DATE ON THE CYLINDER NECK WITH THE APPLICABLE STAMP.
@@ -21208,18 +18534,15 @@ For other meanings of "light", use:
 > **STE:** ON THE RIGHT WING, MOVE THE AILERONS UP.
 > **Non-STE:** On the starboard wing, move the ailerons up.
 
-- **See:** Dictionary entry for RIGHT (adj).
 
 #### state (n) — UNAPPROVED
 
-- **Approved alternative:** CONDITION (n)
 
 > **STE:** EXAMINE THE CONDITION OF THE UNIT.
 > **Non-STE:** Examine the state of the unit.
 
 #### state (v) — UNAPPROVED
 
-- **Approved alternative:** TELL (v)
 
 > **STE:** UNLESS THE MANUFACTURER'S INSTRUCTIONS TELL YOU DIFFERENTLY, DO THE PROCEDURE THAT FOLLOWS.
 > **Non-STE:** Unless otherwise stated by the manufacturer, do the following procedure.
@@ -21228,41 +18551,32 @@ For other meanings of "light", use:
 
 #### station (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
 
 > **STE:** PUT A PERSON NEAR THE FUEL TANK.
 > **Non-STE:** Station a person near the fuel tank.
 # Page 389 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 389–392 of 434
 
-## S
 
 ### Approved
 
 #### STEP (n) — APPROVED
 
 - **Meaning:** A specified part of a procedure
-- **Example:**
   > **STE:** DO STEPS 13 THRU 16 A MINIMUM OF THREE TIMES.
 
 #### STOP (v) — APPROVED
 
 - **Inflections:** STOPS, STOPPED, STOPPED
-- **Meanings:**
   1. To cause the end of a procedure, movement, or an operation
-     - **Example:**
-       > **STE:** STOP THE ENGINE.
   2. To come to an end
-     - **Example:**
        > **STE:** WHEN THE FLOW STOPS, REMOVE THE DRAIN HOSE.
 
 #### STOW (v) — APPROVED
 
 - **Inflections:** STOWS, STOWED, STOWED
 - **Meaning:** To move or cause to move into a specified position of storage.
-- **Examples:**
   1. **STE:** STOW THE LIFE VEST SAFELY BELOW THE PASSENGER SEAT.
   2. **STE:** MAKE SURE THAT THE THRUST REVERSER STOWS WHEN YOU PUSH THE QUADRANT CONTROL FORWARD.
 
@@ -21270,60 +18584,48 @@ For other meanings of "light", use:
 
 - **Inflections:** STRAIGHTER, STRAIGHTEST
 - **Meaning:** Without curves or bends
-- **Example:**
   > **STE:** MAKE SURE THAT THE STRAIGHT PART OF THE RIGGING PIN IS SMOOTH.
 
 #### STRIP (n) — APPROVED
 
 - **Meaning:** A piece of material that is long and thin, but not wide
-- **Example:**
   > **STE:** PUT A STRIP OF ADHESIVE TAPE ALONG THE INSULATION BLANKET.
 
 #### STRIPE (n) — APPROVED
 
 - **Meaning:** A line on a surface which is a different color
-- **Example:**
   > **STE:** THE FLAG HAS RED AND WHITE STRIPES.
 
 #### STRONG (adj) — APPROVED
 
 - **Inflections:** STRONGER, STRONGEST
 - **Meaning:** With much strength, power, or concentration
-- **Example:**
   > **STE:** WHEN WINDS ARE STRONG, MOOR THE AIRCRAFT CAREFULLY.
 
 #### STRUCTURAL (adj) — APPROVED
 
 - **Meaning:** Related to the structure
-- **Example:**
   > **STE:** THE CHASSIS IS A STRUCTURAL COMPONENT OF THE VEHICLE.
 
 #### STRUCTURALLY (adv) — APPROVED
 
-- **Meaning:** Related to the structure
-- **Example:**
   > **STE:** THE LIST GIVES YOU STRUCTURALLY IMPORTANT ITEMS.
 
 #### STRUCTURE (n) — APPROVED
 
-- **Meanings:**
   1. A construction
-     - **Example:**
        > **STE:** ATTACH THE WIRES TO THE STRUCTURE.
   2. The arrangement of something
-     - **Example:**
        > **STE:** THE INTRODUCTION GIVES YOU THE STRUCTURE OF THE MAINTENANCE MANUAL.
 
 #### SUBASSEMBLY (n) — APPROVED
 
 - **Meaning:** An assembly that is a part of a larger assembly
-- **Example:**
   > **STE:** DO NOT CHANGE THE POSITION OF THE SUBASSEMBLIES.
 
 #### SUBSEQUENT (adj) — APPROVED
 
 - **Meaning:** Following in an unspecified time or sequence
-- **Example:**
   > **STE:** A SUBSEQUENT REPAIR WILL BE FOR THE NEW CONFIGURATION ONLY.
 - **Usage note:** Use NEXT (adj) for the first occurrence that follows immediately in time or sequence.
 - **Example (NEXT):**
@@ -21331,9 +18633,7 @@ For other meanings of "light", use:
 
 ### Unapproved
 
-#### stationary (adj) — UNAPPROVED
 
-- **Approved alternatives:**
   1. STABLE (adj)
      > **STE:** WHEN THE PRESSURE IS STABLE, CLOSE THE VALVE.
      > **Non-STE:** When the pressure is stationary, close the valve.
@@ -21346,7 +18646,6 @@ For other meanings of "light", use:
      - **Usage note:** No other verb forms.
      > **STE:** MAKE SURE THAT THE ASSEMBLED PARTS STAY ALIGNED.
 
-- **See:** Dictionary entry for STABLE (adj).
 
 #### steadily (adv) — UNAPPROVED
 
@@ -21356,14 +18655,11 @@ For other meanings of "light", use:
 
 #### steady (adj) — UNAPPROVED
 
-- **Approved alternative:** STABLE (adj)
   > **STE:** MAKE SURE THAT THE SYSTEM PRESSURE IS STABLE.
   > **Non-STE:** Make sure that the system pressure is steady.
-- **See:** Dictionary entry for STABLE (adj).
 
 #### stick (v) — UNAPPROVED
 
-- **Approved alternatives:**
   1. ATTACH (v)
      > **STE:** ATTACH THE LABEL TO THE SURFACE.
      > **Non-STE:** Stick the label to the surface.
@@ -21374,7 +18670,6 @@ For other meanings of "light", use:
      > **STE:** REMOVE ALL JEWELRY THAT CAN CATCH IN THE MACHINE.
      > **Non-STE:** Remove all jewelry that can get stuck in the machine.
 
-#### sticky (adj) — UNAPPROVED
 
 - **Approved alternative:** TACKY (adj)
   > **STE:** WHEN THE CEMENT IS TACKY, PUT THE PATCH ON THE SURFACE.
@@ -21383,13 +18678,11 @@ For other meanings of "light", use:
 
 #### stiff (adj) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
   > **STE:** IF THE PISTON DOES NOT MOVE EASILY IN THE SLEEVE, DO A DIMENSIONAL INSPECTION OF THE PARTS.
   > **Non-STE:** If the piston is stiff, check the dimensions of the piston and sleeve.
 
 #### still (adv) — UNAPPROVED
 
-- **Approved alternatives:**
   1. STAY (v)
      > **STE:** MAKE SURE THAT THE "OVHT" LIGHT STAYS ON.
      > **Non-STE:** Make sure that the "OVHT" light is still illuminated.
@@ -21399,19 +18692,15 @@ For other meanings of "light", use:
 
 #### stimulate (v) — UNAPPROVED
 
-- **Approved alternative:** INCREASE (v)
   > **STE:** INCREASE THE AIRFLOW.
   > **Non-STE:** Stimulate the airflow.
 
 #### stir (v) — UNAPPROVED
 
-- **Approved alternative:** MIX (v)
   > **STE:** MIX THE BONDING MATERIAL WITH A SPATULA.
   > **Non-STE:** Stir the bonding material with a spatula.
 
-#### store (v) — UNAPPROVED
 
-- **Approved alternatives:**
   1. KEEP (v)
      > **STE:** KEEP THE CARTRIDGES IN A SAFETY AREA.
      > **Non-STE:** Cartridges should be stored in a safety area.
@@ -21429,9 +18718,7 @@ For other meanings of "light", use:
   > **Non-STE:** Do not try to straighten the bends in the cable.
 - **See:** Dictionary entry for STRAIGHT (adj).
 
-#### strain (v) — UNAPPROVED
 
-- **Approved alternatives:**
   1. FILTER (TN)
      > **STE:** BEFORE YOU USE THE OIL, PUT IT THROUGH A FILTER.
      > **Non-STE:** Strain the oil before use.
@@ -21439,7 +18726,6 @@ For other meanings of "light", use:
      > **STE:** DO NOT PUT STRAIN ON THE BELLOWS.
      > **Non-STE:** Do not strain bellows.
 
-#### strap (v) — UNAPPROVED
 
 - **Approved alternative:** ATTACH (v) (WITH STRAPS [TN])
   > **STE:** ATTACH THE CABLES TO THE STRUCTURE WITH AN APPLICABLE STRAP.
@@ -21447,32 +18733,26 @@ For other meanings of "light", use:
 
 #### stress (v) — UNAPPROVED
 
-- **Approved alternative:** FORCE (TN)
   > **STE:** DO NOT PUT TOO MUCH FORCE ON THE DUCTING.
   > **Non-STE:** Do not stress the ducting unnecessarily.
 
 #### strictly (adv) — UNAPPROVED
 
-- **Approved alternative:** FULLY (adv)
   > **STE:** FULLY OBEY THE SAFETY PRECAUTIONS.
   > **Non-STE:** Strictly obey the safety precautions.
 
-#### strike (v) — UNAPPROVED
 
-- **Approved alternative:** HIT (v)
   > **STE:** MAKE SURE THAT THE SLING DOES NOT HIT THE SURFACE.
   > **Non-STE:** Make certain that the sling does not strike the surface.
 
 #### strip (v) — UNAPPROVED
 
-- **Approved alternative:** REMOVE (v)
   > **STE:** REMOVE THE INSULATION FROM THE WIRE.
   > **Non-STE:** Strip the insulation from the wire.
 
 #### striped (adj) — UNAPPROVED
 
 - **Approved alternative:** STRIPE (n)
-  > **STE:** THE FLAG HAS RED AND WHITE STRIPES.
   > **Non-STE:** The flag is striped red and white.
 - **See:** Dictionary entry for STRIPE (n).
 
@@ -21484,22 +18764,18 @@ For other meanings of "light", use:
 
 #### submerge (v) — UNAPPROVED
 
-- **Approved alternative:** PUT (v)
   > **STE:** PUT THE FILTER ELEMENT FULLY INTO THE FLUID.
   > **Non-STE:** Submerge the filter element in the fluid.
 
 #### submit (v) — UNAPPROVED
 
-- **Approved alternative:** SEND (v)
   > **STE:** SEND THE METAL PARTICLES TO A LABORATORY FOR ANALYSIS.
   > **Non-STE:** Submit the metal particles to a laboratory for analysis.
 - **See:** Dictionary entry for SEND (v).
 # Page 393 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 393–396 of 434
 
-## Dictionary
 
 ### S
 
@@ -21518,35 +18794,29 @@ For other meanings of "light", use:
 > **STE:** AFTER YOU INSTALL THE COMPONENT, REMOVE THE HANDLING TOOL.
 > **Non-STE:** Remove the handling tool subsequent to the installation of the component.
 
-#### substance (n) — UNAPPROVED
 
-- **Approved alternative:** MATERIAL (n)
 
 > **STE:** THE PRIMER CONTAINS A MATERIAL THAT PREVENTS CORROSION.
 > **Non-STE:** The primer contains a substance that prevents corrosion.
 
-#### substitute (adj) — UNAPPROVED
 
 - **Approved alternative:** EQUIVALENT (adj)
 
 > **STE:** IF THE SPECIFIED MATERIAL IS NOT AVAILABLE, YOU CAN USE AN EQUIVALENT ONE.
 > **Non-STE:** A substitute material may be used if the specified one is not available.
 
-- **Approved alternative:** ALTERNATIVE (adj)
 
 > **STE:** IF THIS SPECIAL TOOL IS NOT AVAILABLE, USE AN ALTERNATIVE METHOD.
 > **Non-STE:** If this special tool is not available, use a substitute method.
 
 #### substitute (n) — UNAPPROVED
 
-- **Approved alternative:** ALTERNATIVE (n)
 
 > **STE:** YOU CAN USE ALTERNATIVES FOR THESE ITEMS.
 > **Non-STE:** Equivalent substitutes may be used for these items.
 
 #### substitute (v) — UNAPPROVED
 
-- **Approved alternative:** REPLACE (v)
 
 > **STE:** DO NOT REPLACE THE SELF-LOCKING NUTS WITH PLAIN NUTS.
 > **Non-STE:** Do not substitute the self-locking nuts with plain nuts.
@@ -21560,7 +18830,6 @@ For other meanings of "light", use:
 
 #### successful (adj) — UNAPPROVED
 
-- **Approved alternative:** CORRECT (adj)
 
 > **STE:** IF THE TEST RESULTS ARE NOT CORRECT, REPLACE THE UNIT.
 > **Non-STE:** If the test is not successful, replace the unit.
@@ -21568,7 +18837,6 @@ For other meanings of "light", use:
 - **Approved alternative:** SATISFACTORY (adj)
 
 > **STE:** IF THE TEST RESULTS ARE NOT SATISFACTORY, REPLACE THE UNIT.
-> **Non-STE:** If the test is not successful, replace the unit.
 
 #### SUCH (adj) — APPROVED
 
@@ -21578,10 +18846,8 @@ For other meanings of "light", use:
 
 - **Usage note:** For "such as", use FOR EXAMPLE
 
-> **STE:** WHEN YOU REMOVE THE STUD, USE APPLICABLE TOOLS. FOR EXAMPLE, USE A PLASTIC MALLET AND A PUNCH.
 > **Non-STE:** When you remove the stud, use applicable tools such as a plastic mallet and a punch.
 
-#### suck (v) — UNAPPROVED
 
 - **Approved alternative:** REMOVE (v) (WITH SUCTION [TN])
 
@@ -21608,27 +18874,21 @@ For other meanings of "light", use:
 
 #### SUFFICIENTLY (adv) — APPROVED
 
-- **Meaning:** Not less (or more) than necessary
 
 > **STE:** WHEN THE PAINT IS SUFFICIENTLY SOFT, REMOVE IT WITH A PLASTIC SPATULA.
 
-#### suitable (adj) — UNAPPROVED
 
-- **Approved alternative:** APPLICABLE (adj)
 
 > **STE:** PUT AN APPLICABLE SCREWDRIVER IN THE SLOT.
 > **Non-STE:** Put a suitable screwdriver in the slot.
 
-- **Approved alternative:** CORRECT (adj)
 
 > **STE:** PUT THE CORRECT PLUGS ON THE DISCONNECTED LINES.
 > **Non-STE:** Put suitable plugs on the disconnected lines.
 
-#### suitably (adv) — UNAPPROVED
 
 - **Approved alternative:** SUFFICIENTLY (adv)
 
-> **STE:** WHEN THE PAINT IS SUFFICIENTLY SOFT, REMOVE IT WITH A PLASTIC SPATULA.
 > **Non-STE:** When the paint is suitably soft, remove it with a plastic spatula.
 
 - **See:** Dictionary entry for SUFFICIENTLY (adv).
@@ -21645,9 +18905,7 @@ For other meanings of "light", use:
 
 > **STE:** STOP THE ELECTRICAL POWER SUPPLY.
 
-#### SUPPLY (v) — APPROVED
 
-- **Meaning:**
   1. To give something that is necessary
   2. To make something available for use
 - **Forms:** SUPPLY, SUPPLIES, SUPPLIED, SUPPLIED
@@ -21655,26 +18913,21 @@ For other meanings of "light", use:
 > **STE:** SUPPLY ELECTRICAL POWER TO THE AUXILIARY SYSTEM.
 > **STE:** THE POWER UNIT SUPPLIES ELECTRICITY TO THE CONTROL SYSTEM.
 
-#### support (n) — UNAPPROVED
 
 - **Approved alternative:** SUPPORT (TN)
 
 > **STE:** BEFORE YOU DISCONNECT THE ITEM, PUT A SUPPORT BELOW IT.
 > **Non-STE:** Make certain there is adequate support for the item before disconnecting it.
 
-- **Approved alternative:** HOLD (v)
 
 > **STE:** WHILE YOU DISCONNECT THE COMPONENT, MAKE SURE THAT A PERSON HOLDS IT.
 > **Non-STE:** Make certain that someone provides adequate support during component disconnection.
 
-#### support (v) — UNAPPROVED
 
-- **Approved alternative:** HOLD (v)
 
 > **STE:** HOLD THE SWITCH AND REMOVE THE SCREWS.
 > **Non-STE:** Support the switch and remove the screws.
 
-- **Approved alternative:** SUPPORT (TN)
 
 > **STE:** PUT A SUPPORT BELOW THE PUMP. THEN, REMOVE IT FROM THE DRIVE SHAFT.
 > **Non-STE:** Support the pump, then remove it from the drive shaft.
@@ -21693,26 +18946,22 @@ For other meanings of "light", use:
 
 #### surplus (adj) — UNAPPROVED
 
-- **Approved alternative:** UNWANTED (adj)
 
 > **STE:** REMOVE THE UNWANTED GREASE.
 > **Non-STE:** Wipe off surplus grease.
 
 #### surrounding (adj) — UNAPPROVED
 
-- **Approved alternative:** ADJACENT (adj)
 
 > **STE:** CLEAN THE MOUNTING AND THE ADJACENT AREA.
 > **Non-STE:** Clean the mounting and the surrounding area.
 
-- **Approved alternative:** AROUND (prep)
 
 > **STE:** REMOVE ALL SEALANT THAT IS AROUND THE HOLE.
 > **Non-STE:** Remove all sealant surrounding the hole.
 
 #### survey (v) — UNAPPROVED
 
-- **Approved alternative:** EXAMINE (v)
 
 > **STE:** EXAMINE THE SURFACE.
 > **Non-STE:** Survey the surface.
@@ -21720,18 +18969,13 @@ For other meanings of "light", use:
 - **Approved alternative:** INSPECTION (n)
 
 > **STE:** DO AN INSPECTION OF THE SURFACE.
-> **Non-STE:** Survey the surface.
 
-#### suspect (adj) — UNAPPROVED
 
-- **Approved alternative:** THINK (v)
 
 > **STE:** IF YOU THINK THAT THE VALVE IS UNSERVICEABLE, REMOVE IT.
 > **Non-STE:** Remove the suspect valve.
 
-#### suspect (v) — UNAPPROVED
 
-- **Approved alternative:** THINK (v)
 
 > **STE:** IF YOU THINK THAT THE POWER UNIT DOES NOT OPERATE CORRECTLY, DO A SYSTEM CHECK.
 > **Non-STE:** If you suspect that the power unit does not operate correctly, do a system check.
@@ -21743,7 +18987,6 @@ For other meanings of "light", use:
 > **STE:** HANG THE ENGINE IN A FIREPROOF BAY.
 > **Non-STE:** Suspend the engine in a fireproof bay.
 
-- **Approved alternative:** STOP (v)
 
 > **STE:** IF THE CABLE CATCHES, STOP THE PROCEDURE.
 > **Non-STE:** If the cable catches, suspend all operations.
@@ -21758,7 +19001,6 @@ For other meanings of "light", use:
 
 #### swap (v) — UNAPPROVED
 
-- **Approved alternative:** INTERCHANGE (v)
 
 > **STE:** INTERCHANGE THE COMPUTERS 1 AND 2. THEN DO THE TEST AGAIN.
 > **Non-STE:** Swap computers 1 and 2. Then do the test again.
@@ -21771,16 +19013,12 @@ For other meanings of "light", use:
 > **Non-STE:** Sweep the frequency band.
 # Page 397 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 397–400 of 434
 
-## Dictionary
 
-### S
 
 #### swing (v) — UNAPPROVED
 
-- **Approved alternative:** MOVE (v)
 
 > **STE:** MOVE THE SHOCK ABSORBERS INTO THEIR CORRECT POSITIONS.
 > **Non-STE:** Swing the shock absorbers into their correct positions.
@@ -21790,21 +19028,16 @@ For other meanings of "light", use:
 > **STE:** YOU CAN CALIBRATE ALL THE COMPASS SYSTEMS AT THE SAME TIME.
 > **Non-STE:** All compass systems may be swung simultaneously.
 
-#### switch (v) — UNAPPROVED
 
-- **Approved alternative:** SET (v)
 
 > **STE:** SET THE SELECTOR TO "SYSTEM DISPLAY."
 > **Non-STE:** Switch the selector to "SYSTEM DISPLAY."
 
-#### switch off (v) — UNAPPROVED
 
-- **Approved alternative:** SET (v)
 
 > **STE:** SET THE NAV 1 SWITCH TO "OFF."
 > **Non-STE:** Switch off NAV 1.
 
-- **Approved alternative:** STOP (v)
 
 > **STE:** STOP THE UNIT AFTER 5 MINUTES.
 > **Non-STE:** Switch off the unit after 5 minutes.
@@ -21814,14 +19047,11 @@ For other meanings of "light", use:
 > **STE:** DE-ENERGIZE THE ELECTRICAL SYSTEM.
 > **Non-STE:** Switch the electrical system off.
 
-#### switch on (v) — UNAPPROVED
 
-- **Approved alternative:** SET (v)
 
 > **STE:** SET THE NAV 1 SWITCH TO "ON."
 > **Non-STE:** Switch on NAV 1.
 
-- **Approved alternative:** START (v)
 
 > **STE:** START THE UNIT.
 > **Non-STE:** Switch on the unit.
@@ -21857,14 +19087,12 @@ For other meanings of "light", use:
 
 #### synchronize (v) — UNAPPROVED
 
-- **Approved alternative:** ADJUST (v)
 
 > **STE:** ADJUST COMPASS SYSTEM 1 UNTIL IT AGREES WITH COMPASS SYSTEM 2.
 > **Non-STE:** Synchronize compass system 1 with compass system 2.
 
 #### SYNCHRONIZED (adj) — APPROVED
 
-- **Meaning:**
   1. That operates at the same time
   2. That agrees with
 
@@ -21892,38 +19120,29 @@ For other meanings of "light", use:
 - **Meaning:** To put a tag on
 - **Forms:** TAG, TAGS, TAGGED, TAGGED
 
-> **STE:** OPEN AND TAG THE CIRCUIT BREAKERS. THEN, SAFETY THEM.
 
-#### take (v) — UNAPPROVED
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE FILTER FROM THE SOLVENT.
 > **Non-STE:** Take the filter from the solvent.
 
-- **Approved alternative:** READ (v)
 
 > **STE:** BEFORE YOU READ THE INDICATIONS, LET THE DIAL BECOME STABLE.
 > **Non-STE:** Let the dial become stable before taking readings.
 
-- **Approved alternative:** GET (v)
 
 > **STE:** GET A SAMPLE OF THE SOLUTION.
 > **Non-STE:** Take a sample of the solution.
 
-- **Approved alternative:** NECESSARY (adj)
 
 > **STE:** TWO HOURS ARE NECESSARY TO COMPLETE THE PROCEDURE.
 > **Non-STE:** The procedure takes 2 hours to complete.
 
-#### take care (v) — UNAPPROVED
 
-- **Approved alternative:** MAKE SURE (v)
 
 > **STE:** DURING THIS STEP, MAKE SURE THAT YOU DO NOT CAUSE DAMAGE TO THE SURFACE.
 > **Non-STE:** During this step, take care not to cause damage to the surface.
 
-- **Approved alternative:** OBEY (v)
 
 > **STE:** WHEN YOU DO WORK WITH HIGH VOLTAGES, OBEY THE SAFETY PRECAUTIONS.
 > **Non-STE:** You must take care when you work with high voltages.
@@ -21933,7 +19152,6 @@ For other meanings of "light", use:
 > **STE:** DO NOT INTERCHANGE THE TWO UNITS.
 > **Non-STE:** Take care not to interchange the two units.
 
-- **Approved alternative:** CAREFUL (adj)
 
 > **STE:** BE CAREFUL WHEN YOU INSTALL THE ELECTRONIC BOARD.
 > **Non-STE:** Take care when installing the electronic board.
@@ -21942,7 +19160,6 @@ For other meanings of "light", use:
 
 - **Approved alternative:** SPEAK (v)
 
-> **STE:** SPEAK INTO THE MICROPHONE.
 > **Non-STE:** Talk into the microphone.
 
 - **See:** Dictionary entry for SPEAK (v).
@@ -21954,7 +19171,6 @@ For other meanings of "light", use:
 
 > **STE:** TAP THE BOLT WITH A MALLET.
 
-#### tape (v) — UNAPPROVED
 
 - **Approved alternative:** TAPE (TN)
 
@@ -21971,12 +19187,10 @@ For other meanings of "light", use:
 
 - **Approved alternative:** TENSION (TN)
 
-> **STE:** MAKE SURE THAT THE TENSION IN THE CABLES IS CORRECT.
 > **Non-STE:** Make sure the cables are taut.
 
 #### tear (v) — UNAPPROVED
 
-- **Approved alternative:** DAMAGE (n)
 
 > **STE:** BE CAREFUL THAT YOU DO NOT CAUSE DAMAGE TO THE BELLOWS.
 > **Non-STE:** Take care you do not tear the bellows.
@@ -22016,13 +19230,11 @@ For other meanings of "light", use:
 
 #### tension (v) — UNAPPROVED
 
-- **Approved alternative:** TENSION (TN)
 
 > **STE:** ADJUST THE TENSION IN THE CABLES TO THE CORRECT VALUE.
 > **Non-STE:** Tension cables to the correct value.
 # Page 401 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 401–404 of 434
 
 ## T
@@ -22038,133 +19250,104 @@ For other meanings of "light", use:
 #### TERTIARY (adj) — APPROVED
 
 - **Meaning:** Third in importance
-- **Example:**
   > **STE:** THERE ARE THREE CLASSES OF STRUCTURE: PRIMARY, SECONDARY, AND TERTIARY.
 
 #### TEST (n) — APPROVED
 
 - **Meaning:** The procedure where an object or system is operated to make sure that its performance and/or function is correct
-- **Example:**
   > **STE:** DISCONNECT ALL THE SYSTEMS WHICH ARE NOT NECESSARY FOR THE TEST.
 
 #### test (v) — unapproved
 
-- **Approved alternative:**
   - **TEST (n):**
     > **STE:** DO A FUNCTIONAL TEST OF THE SOFTWARE.
     > **Non-STE:** Functionally test the software.
-  > **See:** Dictionary entry for TEST (n).
 
 #### THAN (conj) — APPROVED
 
 - **Meaning:** Function word that you use with comparative adjectives or adverbs
-- **Examples:**
   > **STE:** MAKE SURE THAT THE TOTAL ANGLE IS SMALLER THAN 20 DEG.
-  > **STE:** CORROSION CAN OCCUR MORE EASILY IN THIS AREA THAN IN OTHER AREAS.
 
 #### THAT (conj) — APPROVED
 
 - **Meaning:** Function word that starts a subordinate clause
-- **Example:**
   > **STE:** MAKE SURE THAT THE SURFACE IS CLEAN.
 - Refer to section 9, GR-1.
 
 #### THAT (pron) — APPROVED
 
 - **Meaning:** Function word that shows the person or thing referred to
-- **Example:**
   > **STE:** EXAMINE THE UNIT TO SEE IF THAT IS THE PROBLEM.
 
 #### THE (art) — APPROVED
 
 - **Meaning:** Function word: definite article
-- **Example:**
   > **STE:** REMOVE THE SEVEN FLEXIBLE HOSES.
 
-#### THEIR (adj) — APPROVED
 
 - **Meaning:** Belonging to persons or things
-- **Example:**
   > **STE:** WRITE TO THE MANUFACTURERS FOR THEIR REPAIR SCHEMES.
 
 #### THEM (pron) — APPROVED
 
 - **Meaning:** Function word that shows the persons or things referred to
-- **Example:**
   > **STE:** IF THE SURFACES ARE DIRTY, CLEAN THEM.
 
 #### THEN (adv) — APPROVED
 
 - **Meaning:** Immediately after in time or sequence
-- **Example:**
-  > **STE:** LIFT THE COVER. THEN, PULL THE HANDLE.
 
 #### THERE (adv) — APPROVED
 
 - **Meaning:** In that position
-- **Example:**
-  > **STE:** IF THE LABEL IS NOT THERE, ATTACH A NEW ONE.
 
 #### THERE (pron) — APPROVED
 
 - **Meaning:** Function word that starts a sentence or a subordinate clause
-- **Examples:**
   > **STE:** THERE ARE THREE MEASUREMENT POINTS ON THE DIAGRAM.
   > **STE:** MAKE SURE THAT THERE ARE NO LOOSE OBJECTS.
 
 #### therefore (adv) — unapproved
 
-- **Approved alternatives:**
   - **THUS (adv):**
     > **STE:** THIS TORQUE SHAFT CANNOT MOVE INBOARD. THUS, BEFORE YOU REMOVE IT, REMOVE THE OUTBOARD TORQUE SHAFT.
     > **Non-STE:** This torque shaft cannot move inboard. Therefore, before you remove it, remove the outboard torque shaft.
   - **AS A RESULT:**
     > **STE:** THIS TORQUE SHAFT CANNOT MOVE INBOARD. AS A RESULT, BEFORE YOU REMOVE IT, REMOVE THE OUTBOARD TORQUE SHAFT.
-    > **Non-STE:** This torque shaft cannot move inboard. Therefore, before you remove it, remove the outboard torque shaft.
-  > **See:** Dictionary entry for THUS (adv).
 
 #### THESE (adj) — APPROVED
 
 - **Meaning:** Refers to specified persons or things
-- **Example:**
   > **STE:** REMOVE THESE PARTS FROM THEIR RELATED BOXES.
 
 #### THESE (pron) — APPROVED
 
-- **Meaning:** Function word that shows the persons or things referred to
-- **Example:**
   > **STE:** THESE ARE SPECIAL TOOLS.
 
 #### THEY (pron) — APPROVED
 
-- **Meaning:** Function word that shows the persons or things referred to
-- **Example:**
   > **STE:** DENTS ARE NOT PERMITTED IF THEY PREVENT CORRECT OPERATION OF THE PARTS.
 
 #### THICK (adj) — APPROVED
 
 - **Inflected forms:** THICKER, THICKEST
 - **Meaning:** That has a specified or large thickness
-- **Examples:**
   > **STE:** INSTALL A SHIM THAT IS 3.5 mm THICK.
   > **STE:** APPLY A THICK LAYER OF GREASE ON THE BARE METAL.
 
 #### THICKNESS (n) — APPROVED
 
 - **Meaning:** The smallest of the three dimensions
-- **Example:**
   > **STE:** THE THICKNESS OF THE PRIMER LAYER MUST BE BETWEEN 0.05 mm AND 0.06 mm.
 
 #### THIN (adj) — APPROVED
 
 - **Inflected forms:** THINNER, THINNEST
 - **Meaning:** That has a small thickness
-- **Example:**
   > **STE:** APPLY A THIN LAYER OF SEALING COMPOUND ON THE BARE METAL.
 
 #### thin (v) — unapproved
 
-- **Approved alternative:**
   - **LIQUID (adj):**
     > **STE:** ADD SOLVENT TO MAKE THE PAINT MORE LIQUID.
     > **Non-STE:** Add solvent to thin the paint.
@@ -22174,25 +19357,20 @@ For other meanings of "light", use:
 
 - **Inflected forms:** THINKS, THOUGHT, THOUGHT
 - **Meaning:** To have an opinion
-- **Example:**
   > **STE:** IF YOU THINK THAT THE WATER WILL FREEZE, ADD ANTIFREEZE.
 
 #### THIS (adj) — APPROVED
 
 - **Meaning:** Refers to a specified person or thing
-- **Example:**
   > **STE:** DO THIS TEST AT FULL VOLTAGE.
 
 #### THIS (pron) — APPROVED
 
-- **Meaning:** Function word that shows the person or thing referred to
-- **Example:**
   > **STE:** REFER TO THE FAULT ISOLATION TABLE. THIS TELLS YOU THE PARTS TO REPLACE.
 - Refer to section 9, GR-4.
 
 #### thorough (adj) — unapproved
 
-- **Approved alternative:**
   - **FULL (adj):**
     > **STE:** DO A FULL CHECK OF THE CONTROL SYSTEM.
     > **Non-STE:** Do a thorough check of the control system.
@@ -22200,7 +19378,6 @@ For other meanings of "light", use:
 
 #### thoroughly (adv) — unapproved
 
-- **Approved alternative:**
   - **FULLY (adv):**
     > **STE:** DRY THE SURFACE FULLY.
     > **Non-STE:** Dry the surface thoroughly.
@@ -22208,13 +19385,10 @@ For other meanings of "light", use:
 
 #### THOSE (pron) — APPROVED
 
-- **Meaning:** Function word that shows the persons or things referred to
-- **Example:**
   > **STE:** WHEN YOU EXAMINE THE PARTS, DISCARD THOSE THAT ARE DAMAGED.
 
 #### thread (v) — unapproved
 
-- **Approved alternatives:**
   - **PUT (v):**
     > **STE:** PUT TAPE ON THE ROLLER.
     > **Non-STE:** Thread tape on the roller.
@@ -22225,7 +19399,6 @@ For other meanings of "light", use:
 
 #### threaded (adj) — unapproved
 
-- **Approved alternative:**
   - **THREAD (TN):**
     > **STE:** PUT THE END OF THE ROD THAT HAS A THREAD IN THE FITTING.
     > **Non-STE:** Put the threaded end of the rod in the fitting.
@@ -22234,18 +19407,14 @@ For other meanings of "light", use:
 #### THROUGH (adv) — APPROVED
 
 - **Meaning:** Function word that shows movement into one end or side and out of the other
-- **Example:**
   > **STE:** IF FUMES COME THROUGH, DO THE EMERGENCY PROCEDURE.
 
 #### THROUGH (prep) — APPROVED
 
-- **Meaning:** Function word that shows movement into one end or side and out of the other
-- **Example:**
   > **STE:** MAKE SURE THAT THE FLUID THAT GOES THROUGH THE TUBE HAS NO BUBBLES.
 
 #### throughout (prep) — unapproved
 
-- **Approved alternative:**
   - **DURING (prep):**
     > **STE:** MAKE SURE THAT THE DOORS ARE CLOSED DURING THE TEST.
     > **Non-STE:** Make sure that the doors are closed throughout the test.
@@ -22254,35 +19423,27 @@ For other meanings of "light", use:
 #### THRU (prep) — APPROVED
 
 - **Meaning:** From a point in a sequence to another
-- **Example:**
   > **STE:** DO STEPS 4 THRU 10 AGAIN.
 
 #### THUS (adv) — APPROVED
 
 - **Meaning:** For that reason
-- **Example:**
   > **STE:** THIS BOILER CONTROLLER IS APPLICABLE TO ALL SYSTEMS. THUS, IT CAN ALSO CONTROL THERMAL OIL HEATERS.
-- **For other meanings, use:**
   - **FOLLOW (v):**
     > **STE:** CALCULATE THE THICKNESS OF THE SHIM AS FOLLOWS: T=X-Y.
     > **Non-STE:** The thickness of the shim is thus calculated: T=X-Y.
-  > **See:** Dictionary entry for FOLLOW (v).
 
 #### tie (v) — unapproved
 
-- **Approved alternative:**
   - **ATTACH (v):**
     > **STE:** ATTACH THE THREADING CORD TO THE NEW CABLE.
     > **Non-STE:** Tie the threading cord to the new cable.
-  > **See:** Dictionary entry for ATTACH (v).
 
 #### TIGHT (adj) — APPROVED
 
 - **Inflected forms:** TIGHTER, TIGHTEST
 - **Meaning:** Not free
-- **Example:**
   > **STE:** MAKE SURE THAT THE NUTS ARE TIGHT.
-- **For other meanings, use:**
   - **SEAL (v):**
     > **STE:** MAKE SURE THAT THE FUEL TANK IS SEALED.
     > **Non-STE:** Make sure that the fuel tank is tight.
@@ -22295,28 +19456,22 @@ For other meanings of "light", use:
 
 - **Inflected forms:** TIGHTENS, TIGHTENED, TIGHTENED
 - **Meaning:** To cause to be tight
-- **Example:**
   > **STE:** TIGHTEN THE SCREWS.
 
 #### TIGHTLY (adv) — APPROVED
 
 - **Meaning:** In a tight manner
-- **Example:**
-  > **STE:** HOLD THE CYLINDER TIGHTLY.
 
 #### till (conj) — unapproved
 
-- **Approved alternative:**
   - **UNTIL (conj):**
     > **STE:** MOVE THE LEVER UNTIL IT TOUCHES THE STOP.
     > **Non-STE:** Move the lever till it hits the stop.
   > **See:** Dictionary entry for UNTIL (conj).
 # Page 405 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 405–408 of 434
 
-## Dictionary
 
 ### Approved Entries
 
@@ -22324,16 +19479,13 @@ For other meanings of "light", use:
 
 - **Forms:** TILTS, TILTED, TILTED
 - **Meaning:** To move at an angle or to put something at an angle between the vertical and the horizontal.
-- **Examples:**
   - TO ALIGN THE BOLT, TILT IT TO THE LEFT SIDE.
   - IF THE SHAFT TILTS, STOP THE TEST PROCEDURE.
 
 #### TIME (n) — APPROVED
 
-- **Meanings:**
   1. A duration that you can measure
   2. An occurrence
-- **Examples:**
   - THE TIME BETWEEN CLICKS MUST BE 20 SECONDS.
   - DO STEP 2 THREE TIMES.
   - DO NOT TIGHTEN THE NUTS AT THIS TIME.
@@ -22343,7 +19495,6 @@ For other meanings of "light", use:
 - **Meaning:** Function word that shows:
   - The direction of, point of arrival or time, connection, result, cause
   - That the word that follows is an infinitive
-- **Examples:**
   - SET THE SWITCH TO "OFF".
   - THIS VALUE IS EQUIVALENT TO THE MAXIMUM.
   - ATTACH THE UNIONS TO THE VALVE.
@@ -22353,7 +19504,6 @@ For other meanings of "light", use:
 #### TOGETHER (adv) — APPROVED
 
 - **Meaning:** In one group or position.
-- **Examples:**
   - USE TAPE TO ATTACH THE CABLES TOGETHER.
 - **Other meanings — use AT THE SAME TIME:**
   > **STE:** DISASSEMBLE THE BYPASS VALVE AND THE DUMP VALVE AT THE SAME TIME.
@@ -22362,90 +19512,76 @@ For other meanings of "light", use:
 #### TOLERANCE (n) — APPROVED
 
 - **Meaning:** A permitted difference from a standard.
-- **Example:**
   - THE TOLERANCE IS PLUS OR MINUS 0.2 mm.
 
 #### TOO (adv) — APPROVED
 
 - **Meaning:** More than is necessary or correct.
-- **Example:**
   - MAKE SURE THAT THE TEMPERATURE IS NOT TOO HIGH.
 
 #### TOOL (n) — APPROVED
 
 - **Meaning:** An object used to make or do something.
-- **Example:**
   - REMOVE ALL TOOLS AND EQUIPMENT.
 
 #### TOP (adj) — APPROVED
 
 - **Meaning:** That is uppermost.
-- **Example:**
   - A NUMBER IN THE TOP LEFT CORNER OF THE DISPLAY REFERS TO A RELATED PAGE.
 
 #### TOP (n) — APPROVED
 
 - **Meaning:** The uppermost position.
-- **Example:**
   - THE VERTICAL STABILIZER IS INSTALLED ON THE TOP OF THE FUSELAGE TAIL SECTION.
 
 #### TORQUE (v) — APPROVED
 
 - **Forms:** TORQUES, TORQUED, TORQUED
 - **Meaning:** To tighten to a specified torque.
-- **Example:**
   - TORQUE THE PLUG TO 6 Nm.
 
 #### TOTAL (adj) — APPROVED
 
 - **Meaning:** All of.
-- **Example:**
   - THE TOTAL QUANTITY OF FUEL IN THE CENTER TANK IS 5000 lb.
 
 #### TOTAL (n) — APPROVED
 
 - **Meaning:** The full quantity.
-- **Example:**
   - ADD THE VALUES. THE TOTAL MUST NOT BE MORE THAN 15 mm.
 
 #### TOUCH (v) — APPROVED
 
 - **Forms:** TOUCHES, TOUCHED, TOUCHED
 - **Meaning:** To be in contact.
-- **Example:**
   - MAKE SURE THAT THE LOCK NUT TOUCHES THE SPRING.
 
 #### TOW (v) — APPROVED
 
 - **Forms:** TOWS, TOWED, TOWED
 - **Meaning:** To pull something along.
-- **Example:**
   - BEFORE YOU TOW THE VEHICLE BACK TO ITS INITIAL POSITION, COMPLETE THE PROCEDURE.
 
 #### TRANSMIT (v) — APPROVED
 
 - **Forms:** TRANSMITS, TRANSMITTED, TRANSMITTED
 - **Meaning:** To send energy or a signal.
-- **Example:**
   - MAKE SURE THAT THE TRANSPONDER TRANSMITS THE SIGNAL CORRECTLY.
 
 #### TRANSPARENT (adj) — APPROVED
 
 - **Meaning:** Easy to see through.
-- **Example:**
   - PUT A TRANSPARENT SHEET OF PLASTIC ON THE SURFACE.
 
 #### TRAVEL (n) — APPROVED
 
 - **Meaning:** The movement of an item.
-- **Example:**
   - MAKE SURE THAT THE RANGE OF TRAVEL OF THE CONTROL SURFACES IS CLEAR.
 
 ### Unapproved Entries
 
 #### time (v) — unapproved
 
-- **Approved alternative:** TIME (n)
   > **STE:** MEASURE THE TIME THAT IS NECESSARY FOR THE PRESSURE TO DECREASE.
   > **Non-STE:** Time the pressure decay.
   > **See:** Dictionary entry for TIME (n).
@@ -22469,7 +19605,6 @@ For other meanings of "light", use:
 - **Approved alternative:** FILL (v)
   > **STE:** FILL THE HYDRAULIC SYSTEM AS NECESSARY.
   > **Non-STE:** Top off the hydraulic system as necessary.
-- **Approved alternative:** ADD (v)
   > **STE:** ADD FLUID TO THE HYDRAULIC RESERVOIR AS NECESSARY.
   > **Non-STE:** Top off the hydraulic reservoir as necessary.
   > **See:** Dictionary entry for FILL (v); Dictionary entry for ADD (v).
@@ -22493,28 +19628,23 @@ For other meanings of "light", use:
 
 #### trace (n) — unapproved
 
-- **Approved alternative:** SIGN (n)
   > **STE:** EXAMINE THE AREA AROUND THE DRAIN HOLES FOR SIGNS OF CORROSION.
   > **Non-STE:** Check the area surrounding the drain holes for traces of corrosion.
   > **See:** Dictionary entry for SIGN (n).
 
 #### trace (v) — unapproved
 
-- **Approved alternative:** FIND (v)
   > **STE:** FIND THE BROKEN WIRE.
   > **Non-STE:** Trace the broken wire.
-  > **See:** Dictionary entry for FIND (v).
 
 #### track (v) — unapproved
 
-- **Approved alternative:** MONITOR (v)
   > **STE:** MONITOR THE TEMPERATURE.
   > **Non-STE:** Track the temperature.
   > **See:** Dictionary entry for MONITOR (v).
 
 #### trained (adj) — unapproved
 
-- **Approved alternative:** APPROVED (adj)
   > **STE:** ONLY APPROVED PERSONNEL CAN OPERATE THE BRAKES.
   > **Non-STE:** Only trained personnel can operate the brakes.
   > **See:** Dictionary entry for APPROVED (adj).
@@ -22524,31 +19654,25 @@ For other meanings of "light", use:
 - **Approved alternative:** MOVEMENT (n)
   > **STE:** MAKE SURE THAT THE RATE OF MOVEMENT OF FUEL FROM THE WING TANKS TO THE CENTER TANK IS EQUAL.
   > **Non-STE:** Make sure the rate of fuel transfer from the wing tanks to the center tank is equal.
-- **Approved alternative:** SUPPLY (n)
   > **STE:** MAKE SURE THAT THE RATE OF SUPPLY OF FUEL FROM THE WING TANKS TO THE CENTER TANK IS EQUAL.
-  > **Non-STE:** Make sure the rate of fuel transfer from the wing tanks to the center tank is equal.
   > **See:** Dictionary entry for MOVEMENT (n); Dictionary entry for SUPPLY (n).
 
 #### transfer (v) — unapproved
 
-- **Approved alternative:** MOVE (v)
   > **STE:** MOVE THE COUPLINGS TO THE NEW UNIT.
   > **Non-STE:** The couplings must be transferred to the new unit.
-- **Approved alternative:** INSTALL (v)
   > **STE:** INSTALL THE COUPLINGS ON THE NEW UNIT.
   > **Non-STE:** Transfer the couplings to the new unit.
   > **See:** Dictionary entry for MOVE (v); Dictionary entry for INSTALL (v).
 
 #### transition (n) — unapproved
 
-- **Approved alternative:** CHANGE (n)
   > **STE:** THE CHANGE FROM FULL-RATE OPERATION TO HALF-RATE OPERATION MUST OCCUR IMMEDIATELY.
   > **Non-STE:** The transition from full-rate operation to half-rate operation must occur immediately.
   > **See:** Dictionary entry for CHANGE (n).
 
 #### transport (v) — unapproved
 
-- **Approved alternative:** SEND (v)
   > **STE:** SEND THE PART TO THE OVERHAUL SHOP.
   > **Non-STE:** Transport the part to the overhaul shop.
   > **See:** Dictionary entry for SEND (v).
@@ -22561,10 +19685,8 @@ For other meanings of "light", use:
   > **See:** Dictionary entry for CAUGHT (adj).
 # Page 409 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 409–412 of 434
 
-## Unapproved Words
 
 #### travel (v) — unapproved
 
@@ -22606,7 +19728,6 @@ For other meanings of "light", use:
 #### trip (v) — unapproved
 
 - **OPEN (v):**
-  > **STE:** OPEN THE CIRCUIT BREAKER.
   > **Non-STE:** Trip the circuit breaker.
 - **RELEASE (v):**
   > **STE:** THE HOLD-ON SWITCH RELEASES.
@@ -22629,49 +19750,37 @@ For other meanings of "light", use:
   > **STE:** MAKE SURE THAT THE VALUE SHOWN ON THE INDICATOR IS CORRECT.
   > **Non-STE:** Make sure that the indicator reading is true.
 - **AGREE (v):**
-  > **STE:** MAKE SURE THAT THE INDICATION ON THE GAUGE AGREES WITH THE QUANTITY OF FUEL THAT IS IN THE TANK.
   > **Non-STE:** Make sure that the gauge shows the true quantity of fuel that is in the tank.
   > **See:** Dictionary entry for CORRECT (adj); Dictionary entry for AGREE (v).
 
 #### tuck (v) — unapproved
 
-- **PUT (v):**
   > **STE:** PUT THE HEADSTRAP INTO THE FACE PIECE.
   > **Non-STE:** Tuck the headstrap into the face piece.
-  > **See:** Dictionary entry for PUT (v).
 
 #### turn off (v) — unapproved
 
 - **SET (v):**
   > **STE:** SET THE COMPUTER TO "OFF."
   > **Non-STE:** Turn off the computer.
-- **STOP (v):**
   > **STE:** STOP THE COMPUTER.
-  > **Non-STE:** Turn off the computer.
 - **DE-ENERGIZE (v):**
-  > **STE:** DE-ENERGIZE THE ELECTRICAL SYSTEM.
   > **Non-STE:** Turn the electrical system off.
   > **See:** Dictionary entry for SET (v); Dictionary entry for STOP (v); Dictionary entry for DE-ENERGIZE (v).
 
 #### turn on (v) — unapproved
 
-- **SET (v):**
   > **STE:** SET THE POWER TO "ON."
   > **Non-STE:** Turn on the power.
-- **START (v):**
   > **STE:** START THE POWER.
-  > **Non-STE:** Turn on the power.
 - **ENERGIZE (v):**
-  > **STE:** ENERGIZE THE ELECTRICAL SYSTEM.
   > **Non-STE:** Turn the electrical system on.
   > **See:** Dictionary entry for SET (v); Dictionary entry for START (v); Dictionary entry for ENERGIZE (v).
 
 #### turn over (v) — unapproved
 
-- **TURN (v):**
   > **STE:** TURN THE DISPLAY PANEL UNTIL YOU HAVE ACCESS TO THE CABLE.
   > **Non-STE:** Turn the display panel over to access the cable.
-  > **See:** Dictionary entry for TURN (v).
 
 #### twice (adv) — unapproved
 
@@ -22680,71 +19789,58 @@ For other meanings of "light", use:
   > **Non-STE:** Do this procedure twice.
   > **See:** Dictionary entry for TWO (TN).
 
-## Approved Words
 
 #### TRY (v) — APPROVED
 
 - **Forms:** TRIES, TRIED, TRIED
 - **Meaning:** To make an effort to do something.
-- **Example:**
   > **STE:** TRY TO MOVE THE CONTROL COLUMN.
 
 #### TUNE (v) — APPROVED
 
 - **Forms:** TUNES, TUNED, TUNED
 - **Meaning:** To adjust equipment to the best performance.
-- **Example:**
   > **STE:** TUNE ADF 1 TO A KNOWN FREQUENCY.
 
 #### TURN (n) — APPROVED
 
 - **Meaning:** One full cycle of movement around an axis.
-- **Example:**
   > **STE:** LET THE PRESSURE BECOME STABLE AFTER EACH TURN OF THE ADJUSTMENT SCREW.
 
 #### TURN (v) — APPROVED
 
 - **Forms:** TURNS, TURNED, TURNED
 - **Meaning:** To move or cause to move around an axis or a point.
-- **Examples:**
   > **STE:** TURN THE CONTROL CLOCKWISE.
   > **STE:** THE BEARING TURNS AT 1500 RPM.
 
 #### TWIST (v) — APPROVED
 
 - **Forms:** TWISTS, TWISTED, TWISTED
-- **Meanings:**
   1. To use a force that turns something and causes a distortion.
   2. To turn or change shape as a result of torsion.
-- **Examples:**
   > **STE:** DO NOT TWIST THE CABLES.
   > **STE:** IF THE CABLE TWISTS, DISCONNECT THE TWO CONNECTORS.
 
 #### TYPE (n) — APPROVED
 
 - **Meaning:** A specified group.
-- **Example:**
   > **STE:** FIND THE TYPE AND DIMENSIONS OF THE DAMAGE.
 
 #### TYPICAL (adj) — APPROVED
 
 - **Meaning:** That has the important qualities of a group.
-- **Example:**
   > **STE:** THIS INSTALLATION PROCEDURE IS TYPICAL FOR THIS TYPE OF FASTENER.
 
----
 
 *Page 412 is intentionally blank (end of section 2-1-T14, Part 2 – Dictionary, Issue 9, 2025-01-15).*
 # Page 413 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 413–416 of 434
 
-## Dictionary
 
 #### unable (adj) — unapproved
 
-- **Approved alternative:** CANNOT (v)
 
 > **STE:** IF YOU CANNOT TURN THE PULLEY, MAKE SURE THAT THE PIN IS REMOVED.
 > **Non-STE:** If you are unable to turn the pulley, make sure that the pin is removed.
@@ -22760,21 +19856,17 @@ For other meanings of "light", use:
 
 #### uncap (v) — unapproved
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE CAPS (A CAP [TN] OR CAPS [TN]) FROM THE HOSES.
 > **Non-STE:** Uncap the hoses.
 
-> **See:** Dictionary entry for REMOVE (v).
 
 #### unclip (v) — unapproved
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE VISOR (FROM A CLIP [TN] OR FROM THE CLIPS [TN]).
 > **Non-STE:** Unclip the visor.
 
-> **See:** Dictionary entry for REMOVE (v).
 
 #### uncoil (v) — unapproved
 
@@ -22787,12 +19879,10 @@ For other meanings of "light", use:
 
 #### uncontaminated (adj) — unapproved
 
-- **Approved alternative:** CLEAN (adj)
 
 > **STE:** MAKE SURE THAT THE HYDRAULIC FLUID IS CLEAN.
 > **Non-STE:** Make sure that the hydraulic fluid is uncontaminated.
 
-- **Approved alternative:** CONTAMINATION (n)
 
 > **STE:** MAKE SURE THAT THERE IS NO CONTAMINATION IN THE FUEL TANKS.
 > **Non-STE:** Make sure that the fuel tanks are uncontaminated.
@@ -22810,7 +19900,6 @@ For other meanings of "light", use:
 
 #### uncovered (adj) — unapproved
 
-- **Approved alternative:** COVER (TN)
 
 > **STE:** DO NOT PUT A COVER ON THE CONTAINER.
 > **Non-STE:** Leave the container uncovered.
@@ -22819,7 +19908,6 @@ For other meanings of "light", use:
 
 #### undamaged (adj) — unapproved
 
-- **Approved alternative:** NOT DAMAGED
 
 > **STE:** MAKE SURE THAT THE SKIN IS NOT DAMAGED.
 > **Non-STE:** Make sure that the skin is undamaged.
@@ -22827,18 +19915,15 @@ For other meanings of "light", use:
 #### UNDEMANDED (adj) — APPROVED
 
 - **Meaning:** That occurs without an apparent cause
-- **Example:**
 
 > **STE:** IF YOU GET AN UNDEMANDED MOVEMENT, DO A TEST OF THE SYSTEM.
 
 #### under (prep) — unapproved
 
-- **Approved alternative:** BELOW (prep)
 
 > **STE:** INSTALL THE CABLE THROUGH THE GUIDE TUBE BELOW THE CABIN FLOOR.
 > **Non-STE:** Install the cable through the guide tube under the cabin floor.
 
-- **Approved alternative:** IN (prep)
 
 > **STE:** THIS RESULT CAN OCCUR IN DIFFERENT CONDITIONS.
 > **Non-STE:** This result can occur under different conditions.
@@ -22852,32 +19937,26 @@ For other meanings of "light", use:
 
 #### underneath (prep) — unapproved
 
-- **Approved alternative:** BELOW (prep)
 
 > **STE:** PUT THE CONTAINER BELOW THE DRAIN VALVE.
 > **Non-STE:** Place the container underneath the drain valve.
 
-> **See:** Dictionary entry for BELOW (prep).
 
 #### underside (n) — unapproved
 
-- **Approved alternative:** BOTTOM (n)
 
 > **STE:** EXAMINE THE FOUR ATTACHING HOLES ON THE BOTTOM.
 > **Non-STE:** Examine the four attaching holes on the underside.
 
-> **See:** Dictionary entry for BOTTOM (n).
 
 #### undertake (v) — unapproved
 
 *You can use a more accurate verb.*
 
-- **Approved alternative:** DO (v)
 
 > **STE:** DO THIS TASK IN AN AREA THAT HAS GOOD AIRFLOW.
 > **Non-STE:** Undertake this task in an area that has good airflow.
 
-- **Approved alternative:** START (v)
 
 > **STE:** DO NOT START THE TEST WITHOUT PRECAUTIONS.
 > **Non-STE:** Do not undertake the test without precautions.
@@ -22886,7 +19965,6 @@ For other meanings of "light", use:
 
 #### undo (v) — unapproved
 
-- **Approved alternative:** LOOSEN (v)
 
 > **STE:** LOOSEN THE BOLTS THAT ATTACH THE UNIT.
 > **Non-STE:** Undo the bolts that attach the unit.
@@ -22895,7 +19973,6 @@ For other meanings of "light", use:
 
 #### undue (adj) — unapproved
 
-- **Approved alternative:** UNWANTED (adj)
 
 > **STE:** TO PREVENT UNWANTED FRICTION, POLISH THE SURFACE.
 > **Non-STE:** To prevent undue friction, polish the surface.
@@ -22909,7 +19986,6 @@ For other meanings of "light", use:
 > **STE:** MAKE SURE THAT THE FUEL LOAD IS EQUAL ON EACH SIDE OF THE AIRCRAFT CENTERLINE.
 > **Non-STE:** Avoid uneven fuel load about the aircraft centerline.
 
-- **Approved alternative:** ROUGH (adj)
 
 > **STE:** IF THE SURFACE IS ROUGH, REPLACE THE SLIDE VALVE.
 > **Non-STE:** Replace the slide valve if its surface is uneven.
@@ -22920,19 +19996,16 @@ For other meanings of "light", use:
 
 - **Meaning:** To open or to straighten or to cause to open or to straighten from a folded position or condition
 - **Forms:** UNFOLDS, UNFOLDED, UNFOLDED
-- **Examples:**
 
 > **STE:** UNFOLD THE SHEETING
 > **STE:** MAKE SURE THAT THE INDICATOR LIGHT COMES ON WHEN THE BLADES UNFOLD.
 
 #### uniform (adj) — unapproved
 
-- **Approved alternative:** CONSTANT (adj)
 
 > **STE:** CURE THE SEALANT AT A CONSTANT TEMPERATURE.
 > **Non-STE:** Cure the sealant at a uniform temperature.
 
-- **Approved alternative:** EQUAL (adj)
 
 > **STE:** THE FUEL LOAD MUST BE EQUAL ON EACH SIDE OF THE AIRCRAFT CENTERLINE.
 > **Non-STE:** The fuel load must be uniform on each side of the aircraft centerline.
@@ -22950,7 +20023,6 @@ For other meanings of "light", use:
 
 #### unintentional (adj) — unapproved
 
-- **Approved alternative:** ACCIDENTAL (adj)
 
 > **STE:** A GUARD ON THE CONTROL SWITCH OF THE PUMP PREVENTS ACCIDENTAL OPERATION.
 > **Non-STE:** A guard on the control switch of the pump prevents unintentional operation.
@@ -22959,7 +20031,6 @@ For other meanings of "light", use:
 
 #### unintentionally (adv) — unapproved
 
-- **Approved alternative:** ACCIDENTALLY (adv)
 
 > **STE:** IF YOU ACCIDENTALLY SPRAY RAIN REPELLENT FLUID ONTO A DRY WINDSHIELD, REMOVE THE FLUID WITH SOLVENT.
 > **Non-STE:** If rain repellent fluid is unintentionally sprayed onto a dry windshield, remove the fluid with solvent.
@@ -22969,25 +20040,21 @@ For other meanings of "light", use:
 #### UNIT (n) — APPROVED
 
 - **Meaning 1:** Equipment that does a function
-- **Example:**
 
 > **STE:** YOU CAN REPLACE A LARGE NUMBER OF UNITS DURING THIS REPAIR PROCEDURE.
 
 - **Meaning 2:** A quantity that is a standard of measurement
-- **Example:**
 
 > **STE:** THIS MANUAL USES SI UNITS.
 
 #### UNKNOWN (adj) — APPROVED
 
 - **Meaning:** Not known
-- **Example:**
 
 > **STE:** DO NOT USE FUEL WITH UNKNOWN PROPERTIES.
 
 #### unlatch (v) — unapproved
 
-- **Approved alternative:** RELEASE (v)
 
 > **STE:** THE SWITCH MUST RELEASE.
 > **Non-STE:** Switch must unlatch.
@@ -22995,20 +20062,17 @@ For other meanings of "light", use:
 - **Approved alternative:** OPEN (v)
 
 > **STE:** THE SWITCH MUST OPEN.
-> **Non-STE:** Switch must unlatch.
 
 > **See:** Dictionary entry for RELEASE (v); Dictionary entry for OPEN (v).
 
 #### UNLESS (conj) — APPROVED
 
 - **Meaning:** Except if
-- **Example:**
 
 > **STE:** DO NOT REMOVE THE ADAPTER FROM THE STABILIZER UNLESS A REPAIR IS NECESSARY.
 
 #### unload (v) — unapproved
 
-- **Approved alternative:** RELEASE (v)
 
 > **STE:** RELEASE THE SPRING TENSION.
 > **Non-STE:** Unload the spring tension.
@@ -23024,26 +20088,22 @@ For other meanings of "light", use:
 
 - **Meaning:** To release or become released from a locked condition
 - **Forms:** UNLOCKS, UNLOCKED, UNLOCKED
-- **Examples:**
 
 > **STE:** BEFORE YOU UNLOCK THE DOOR, MAKE SURE THAT THE CABIN DIFFERENTIAL PRESSURE IS ZERO.
 > **STE:** IF THE LEVER UNLOCKS DURING THE TEST, SET THE LEVER TO THE LOCKED POSITION AGAIN.
 
 #### unnecessary (adj) — unapproved
 
-- **Approved alternative:** NOT NECESSARY
 
 > **STE:** REMOVE THE GROUND EQUIPMENT THAT IS NOT NECESSARY.
 > **Non-STE:** Remove the unnecessary ground equipment.
 
 #### unobstructed (adj) — unapproved
 
-- **Approved alternative:** CLOGGED (adj)
 
 > **STE:** MAKE SURE THAT THE DRAIN OPENINGS ARE NOT CLOGGED.
 > **Non-STE:** Make sure that the drain openings are unobstructed.
 
-- **Approved alternative:** CLEAR (adj)
 
 > **STE:** AN ATTENDANT MUST HAVE A CLEAR VIEW OF THE PERSON IN THE TANK.
 > **Non-STE:** An attendant must have an unobstructed view of the person in the tank.
@@ -23052,16 +20112,13 @@ For other meanings of "light", use:
 
 #### unpack (v) — unapproved
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE PARTS FROM THE SHIPPING CONTAINER.
 > **Non-STE:** Unpack the shipping container.
 
-> **See:** Dictionary entry for REMOVE (v).
 
 #### unpainted (adj) — unapproved
 
-- **Approved alternative:** BARE (adj)
 
 > **STE:** APPLY PROTECTIVE TREATMENT ON THE BARE SURFACES.
 > **Non-STE:** Protect the unpainted surfaces.
@@ -23069,14 +20126,11 @@ For other meanings of "light", use:
 > **See:** Dictionary entry for BARE (adj).
 # Page 417 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 417–420 of 434
 
-## Unapproved Words
 
 #### unplug (v) — unapproved
 
-- **Approved alternative:** DISCONNECT (v)
 
 > **STE:** DISCONNECT THE SOLDERING IRON.
 > **Non-STE:** Unplug the soldering iron.
@@ -23099,12 +20153,10 @@ For other meanings of "light", use:
 
 #### unreel (v) — unapproved
 
-- **Approved alternative:** UNWIND (v)
 
 > **STE:** UNWIND THE HOSE.
 > **Non-STE:** Unreel the hose.
 
-> **See:** Dictionary entry for UNWIND (v).
 
 #### unrestricted (adj) — unapproved
 
@@ -23117,7 +20169,6 @@ For other meanings of "light", use:
 
 #### unsafe (adj) — unapproved
 
-- **Approved alternative:** DANGEROUS (adj)
 
 > **STE:** IN THESE CONDITIONS, IT IS DANGEROUS TO REMOVE THE CARTRIDGES FROM THE FIRE EXTINGUISHER BOTTLE.
 > **Non-STE:** In these conditions, it is unsafe to remove the cartridges from the fire extinguisher bottle.
@@ -23126,17 +20177,14 @@ For other meanings of "light", use:
 
 #### unscrew (v) — unapproved
 
-- **Approved alternative:** LOOSEN (v)
 
 > **STE:** LOOSEN THE CAPTIVE BOLTS.
 > **Non-STE:** Unscrew the captive bolts.
 
-- **Approved alternative:** TURN (v)
 
 > **STE:** TURN THE END FITTING TO ALIGN THE RIGGING HOLES.
 > **Non-STE:** Unscrew the end fitting to align the rigging holes.
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE NUTS.
 > **Non-STE:** Unscrew the nuts.
@@ -23152,12 +20200,10 @@ For other meanings of "light", use:
 
 #### unused (adj) — unapproved
 
-- **Approved alternative:** NEW (adj)
 
 > **STE:** FILL THE TANK WITH NEW OIL.
 > **Non-STE:** Fill the tank with unused oil.
 
-> **See:** Dictionary entry for NEW (adj).
 
 #### upon (prep) — unapproved
 
@@ -23166,7 +20212,6 @@ For other meanings of "light", use:
 > **STE:** PUT THE OHMMETER ON A FLAT SURFACE.
 > **Non-STE:** Put the ohmmeter upon a flat surface.
 
-- **Approved alternative:** WHEN (conj)
 
 > **STE:** WHEN YOU SET THE LEVER TO "UP," THE HYDRAULIC PRESSURE MUST DECREASE.
 > **Non-STE:** Upon UP selection, the hydraulic pressure must decrease.
@@ -23198,12 +20243,9 @@ For other meanings of "light", use:
 
 #### uppermost (adv) — unapproved
 
-- **Approved alternative:** UP (adv)
 
-> **STE:** INSTALL THE BOLTS WITH THEIR HEADS UP.
 > **Non-STE:** Install the bolts with their heads uppermost.
 
-> **See:** Dictionary entry for UP (adv).
 
 #### up to (prep) — unapproved
 
@@ -23212,7 +20254,6 @@ For other meanings of "light", use:
 > **STE:** UNTIL THIS STEP, THE UNIT IGNORES ALL OUTPUT SIGNALS.
 > **Non-STE:** Up to this step the unit ignores all output signals.
 
-- **Approved alternative:** THRU (prep)
 
 > **STE:** DO STEPS 1 THRU 4.
 > **Non-STE:** Do all steps up to and including step 4.
@@ -23226,25 +20267,19 @@ For other meanings of "light", use:
 
 #### upward (adv) — unapproved
 
-- **Approved alternative:** UP (adv)
 
 > **STE:** MOVE THE LEVER UP.
 > **Non-STE:** Move the lever upward.
 
-> **See:** Dictionary entry for UP (adv).
 
 #### urgently (adv) — unapproved
 
-- **Approved alternative:** IMMEDIATELY (adv)
 
-> **STE:** GET MEDICAL AID IMMEDIATELY.
 > **Non-STE:** Seek medical aid urgently.
 
-> **See:** Dictionary entry for IMMEDIATELY (adv).
 
 #### usage (n) — unapproved
 
-- **Approved alternative:** USE (v)
 
 > **STE:** IF YOU USE INCORRECT THINNERS, PROBLEMS CAN OCCUR DURING OPERATION.
 > **Non-STE:** The usage of incorrect thinners can cause problems during operation.
@@ -23253,7 +20288,6 @@ For other meanings of "light", use:
 
 #### use (n) — unapproved
 
-- **Approved alternative:** OPERATION (n)
 
 > **STE:** WHEN THE MOTOR IS IN OPERATION, KEEP YOUR HANDS AWAY FROM THE BLADE.
 > **Non-STE:** Keep your hands away from the blade when the motor is in use.
@@ -23262,77 +20296,63 @@ For other meanings of "light", use:
 
 #### utilization (n) — unapproved
 
-- **Approved alternative:** USE (v)
 
 > **STE:** READ THE INSTRUCTIONS THAT TELL YOU HOW TO USE THE OXYGEN MASK.
 > **Non-STE:** Read the oxygen mask instructions for its utilization.
 
-> **See:** Dictionary entry for USE (v).
 
 #### utilize (v) — unapproved
 
-- **Approved alternative:** USE (v)
 
 > **STE:** THE SOFTWARE USES CACHING TECHNIQUES TO DECREASE DATA RETRIEVAL TIMES.
 > **Non-STE:** The software utilizes caching techniques to decrease data retrieval times.
 
-> **See:** Dictionary entry for USE (v).
 
-## Approved Words
 
 #### UNSATISFACTORILY (adv) — APPROVED
 
 - **Meaning:** In an unsatisfactory manner
-- **Example:**
 
 > **STE:** IF THE ELEVATORS OPERATE UNSATISFACTORILY, MOVE THE CONTROL COLUMN.
 
-#### UNSATISFACTORY (adj) — APPROVED
 
 - **Meaning:** Not satisfactory
-- **Example:**
 
 > **STE:** IF THE CONDITION OF THE FILTERS IS UNSATISFACTORY, REPLACE THEM.
 
 #### UNSERVICEABLE (adj) — APPROVED
 
 - **Meaning:** Not fit for its purpose
-- **Example:**
 
 > **STE:** REPLACE THE UNSERVICEABLE BUSHINGS.
 
 #### UNTIL (conj) — APPROVED
 
 - **Meaning:** Up to the time that
-- **Example:**
 
 > **STE:** MOVE THE LEVER UNTIL THE END OF THE LINK TOUCHES THE LOCK BAR.
 
 #### UNTIL (prep) — APPROVED
 
 - **Meaning:** Up to the time of
-- **Example:**
 
 > **STE:** KEEP THE FIRE BOTTLE ARMED UNTIL THE END OF THE TEST.
 
 #### UNUSUAL (adj) — APPROVED
 
 - **Meaning:** Not usual
-- **Example:**
 
 > **STE:** UNUSUAL LOADS CAN CAUSE TREAD SEPARATION IN THE TIRES.
 
 #### UNUSUALLY (adv) — APPROVED
 
 - **Meaning:** In an unusual manner
-- **Example:**
 
 > **STE:** THE VALVE OPERATES WHEN THERE IS AN UNUSUALLY LARGE FLOW OF FLUID.
 
 #### UNWANTED (adj) — APPROVED
 
 - **Meaning:** That must not be there
-- **Examples:**
 
 > **STE:** UNWANTED AIR GOES OUT THROUGH THE OVERFLOW PORT.
 > **STE:** IF THE DRAIN HOLE IS BLOCKED, REMOVE THE UNWANTED MATERIAL.
@@ -23341,7 +20361,6 @@ For other meanings of "light", use:
 
 - **Meaning:** To remove or become removed from around an object
 - **Forms:** UNWINDS, UNWOUND, UNWOUND
-- **Examples:**
 
 > **STE:** UNWIND THE CABLE.
 > **STE:** IF THE HOSE UNWINDS TOO QUICKLY FROM THE REEL, STOP THE TEST.
@@ -23349,42 +20368,33 @@ For other meanings of "light", use:
 #### UP (adj) — APPROVED
 
 - **Meaning:** In a position above
-- **Example:**
 
 > **STE:** MAKE SURE THAT THE ANCHOR IS UP.
 
 #### UP (adv) — APPROVED
 
 - **Meaning:** To a position above
-- **Example:**
 
 > **STE:** IF THE POINTER MOVES UP, DECREASE THE POWER.
 
 #### UP (prep) — APPROVED
 
-- **Meaning:** To a position above
-- **Example:**
 
 > **STE:** LET THE SLEEVE MOVE UP THE GUIDE TUBE.
 
 #### UPSTREAM (adj) — APPROVED
 
 - **Meaning:** In a direction opposite to the flow
-- **Example:**
 
 > **STE:** DISCONNECT THE UPSTREAM CONNECTION OF THE VALVE.
 
 #### UPSTREAM (adv) — APPROVED
 
-- **Meaning:** In a direction opposite to the flow
-- **Example:**
 
 > **STE:** MOVE THE PROBE UPSTREAM AND MONITOR THE TEMPERATURE AGAIN.
 
 #### UPSTREAM OF (prep) — APPROVED
 
-- **Meaning:** In a direction opposite to the flow
-- **Example:**
 
 > **STE:** DISCONNECT THE CONNECTION UPSTREAM OF THE VALVE.
 
@@ -23392,7 +20402,6 @@ For other meanings of "light", use:
 
 - **Meaning:** To make something do its specified function
 - **Forms:** USES, USED, USED
-- **Examples:**
 
 > **STE:** DURING THIS TASK, USE PROTECTIVE GLOVES.
 > **STE:** IN THIS STEP, USE AUXILIARY SCREWS.
@@ -23402,31 +20411,25 @@ For other meanings of "light", use:
 #### USUAL (adj) — APPROVED
 
 - **Meaning:** That you use or that occurs most frequently
-- **Example:**
 
 > **STE:** IF YOU DO NOT GET THE USUAL RESULTS, DO A SYSTEM TEST.
 
 #### USUALLY (adv) — APPROVED
 
 - **Meaning:** In a usual manner
-- **Example:**
 
 > **STE:** USUALLY, THE HYDRAULIC FLUID FLOWS INTO THE VALVE THROUGH PORT A.
 # Page 421 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 421–424 of 434
 
-## Dictionary
 
 #### valid (adj) — unapproved
 
-- **Approved alternative:** CORRECT (adj)
 
 > **STE:** MAKE SURE THAT THE TEST RESULTS ARE CORRECT.
 > **Non-STE:** Make sure that the test results are valid.
 
-- **Approved alternative:** APPLICABLE (adj)
 
 > **STE:** THIS PROCEDURE IS APPLICABLE ONLY IN DIGITAL MODE.
 > **Non-STE:** This procedure is only valid in digital mode.
@@ -23439,28 +20442,22 @@ For other meanings of "light", use:
 
 #### validity (n) — unapproved
 
-- **Approved alternative:** CORRECT (adj)
 
-> **STE:** MAKE SURE THAT THE TEST RESULTS ARE CORRECT.
 > **Non-STE:** Check the validity of the test results.
 
-- **Approved alternative:** APPLICABLE (adj)
 
 > **STE:** THIS STEP IS APPLICABLE ONLY WHEN YOU APPLY THE TOP LAYER OF PAINT.
 > **Non-STE:** The validity of this step is restricted to the application of the paint topcoat.
 
-> **See:** Dictionary entry for CORRECT (adj); Dictionary entry for APPLICABLE (adj).
 
 #### VALUE (n) — APPROVED
 
 - **Meaning:** A quantity that is calculated or given
-- **Example:**
 
 > **STE:** MAKE SURE THAT THE VALUES AGREE WITH THE SPECIFIED TOLERANCES.
 
 #### variable (adj) — unapproved
 
-- **Approved alternative:** CHANGE (v)
 
 > **STE:** IF THE HUMIDITY CHANGES FREQUENTLY, PUT A COVER ON THE UNIT.
 > **Non-STE:** If the humidity is variable, put a cover on the unit.
@@ -23469,7 +20466,6 @@ For other meanings of "light", use:
 
 #### various (adj) — unapproved
 
-- **Approved alternative:** DIFFERENT (adj)
 
 > **STE:** REFER TO TABLE 5 FOR THE DIFFERENT TORQUE VALUES THAT ARE APPLICABLE TO THE UNIT.
 > **Non-STE:** Refer to Table 5 for the various torque values that are applicable to the unit.
@@ -23478,16 +20474,13 @@ For other meanings of "light", use:
 
 #### vary (v) — unapproved
 
-- **Approved alternative:** CHANGE (v)
 
 > **STE:** CHANGE THE FREQUENCY AND RECORD THE RESULTS.
 > **Non-STE:** Vary the frequency and record the results.
 
-> **See:** Dictionary entry for CHANGE (v).
 
 #### vent (v) — unapproved
 
-- **Approved alternative:** RELEASE (v)
 
 > **STE:** RELEASE THE PRESSURE.
 > **Non-STE:** Vent the pressure.
@@ -23515,16 +20508,13 @@ For other meanings of "light", use:
 
 #### ventilation (n) — unapproved
 
-- **Approved alternative:** AIRFLOW (n)
 
 > **STE:** MAKE SURE THAT THE AIRFLOW IS SUFFICIENT.
 > **Non-STE:** Make sure that the ventilation is sufficient.
 
-> **See:** Dictionary entry for AIRFLOW (n).
 
 #### verify (v) — unapproved
 
-- **Approved alternative:** MAKE SURE (v)
 
 > **STE:** MAKE SURE THAT THE FITTINGS ARE TIGHT.
 > **Non-STE:** Verify the tightness of the fittings.
@@ -23534,21 +20524,17 @@ For other meanings of "light", use:
 #### VERTICAL (adj) — APPROVED
 
 - **Meaning:** At 90 degrees to the horizon
-- **Example:**
 
 > **STE:** MEASURE THE VERTICAL DISTANCE BETWEEN THE TWO POINTS ON THE GRAPH.
 
 #### VERTICALLY (adv) — APPROVED
 
-- **Meaning:** At 90 degrees to the horizon
-- **Example:**
 
 > **STE:** THE POINTER MOVES VERTICALLY ALONG THE SCALE.
 
 #### VERY (adv) — APPROVED
 
 - **Meaning:** To a high degree
-- **Example:**
 
 > **STE:** ADD THE OIL VERY SLOWLY.
 
@@ -23573,18 +20559,15 @@ For other meanings of "light", use:
 #### VIBRATION (n) — APPROVED
 
 - **Meaning:** Regular movement from a center position
-- **Example:**
 
 > **STE:** PRESSURE SURGES AND VIBRATION CAN CAUSE WEAR ON THE HOSES.
 
 #### vicinity (n) — unapproved
 
-- **Approved alternative:** NEAR (prep)
 
 > **STE:** MAKE SURE THAT SOLVENTS ARE NOT NEAR THE ENGINE EXHAUST.
 > **Non-STE:** Make sure that solvents are not in the vicinity of the engine exhaust.
 
-- **Approved alternative:** ADJACENT (adj)
 
 > **STE:** DO AN INSPECTION OF THE DAMAGE AND OF THE ADJACENT AREA.
 > **Non-STE:** Do an inspection of the damage and of the immediate vicinity.
@@ -23594,13 +20577,11 @@ For other meanings of "light", use:
 #### VIEW (n) — APPROVED
 
 - **Meaning:** The ability to see something
-- **Example:**
 
 > **STE:** MAKE SURE THAT YOU HAVE A SATISFACTORY VIEW OF ALL COMPONENTS.
 
 #### view (v) — unapproved
 
-- **Approved alternative:** SEE (v)
 
 > **STE:** THE BOLT WILL BE AT THE 2 O'CLOCK POSITION WHEN SEEN FROM THE REAR.
 > **Non-STE:** The bolt will be at 2 o'clock when viewed from the rear.
@@ -23608,13 +20589,11 @@ For other meanings of "light", use:
 - **Approved alternative:** LOOK (v)
 
 > **STE:** THE BOLT WILL BE AT THE 2 O'CLOCK POSITION WHEN YOU LOOK AT THE PUMP FROM THE REAR.
-> **Non-STE:** The bolt will be at 2 o'clock when viewed from the rear.
 
 > **See:** Dictionary entry for SEE (v); Dictionary entry for LOOK (v).
 
 #### vigorous (adj) — unapproved
 
-- **Approved alternative:** FORCE (TN)
 
 > **STE:** WHEN YOU CLEAN THE CARPET, DO NOT USE TOO MUCH FORCE ON THE BRUSH. TOO MUCH FORCE CAN CAUSE DAMAGE TO THE CARPET.
 > **Non-STE:** Vigorous cleaning with a brush can cause damage to the carpet.
@@ -23623,21 +20602,17 @@ For other meanings of "light", use:
 
 #### vigorously (adv) — unapproved
 
-- **Approved alternative:** FORCE (TN)
 
 > **STE:** WHEN YOU MOVE THE CONTROL WHEEL, DO NOT APPLY TOO MUCH FORCE.
 > **Non-STE:** Do not move the control wheel too vigorously.
 
-> **See:** Dictionary entry for FORCE (TN).
 
 #### visible (adj) — unapproved
 
-- **Approved alternative:** SEE (v)
 
 > **STE:** MAKE SURE THAT YOU CAN SEE THE OIL LEVEL THROUGH THE SIGHT GAUGE.
 > **Non-STE:** Make certain that the oil level is visible through the sight gauge.
 
-- **Approved alternative:** VIEW (n)
 
 > **STE:** WHEN THE INDICATOR COMES INTO VIEW, STOP THE TEST PROCEDURE.
 > **Non-STE:** When the indicator is visible, stop the test procedure.
@@ -23647,20 +20622,17 @@ For other meanings of "light", use:
 #### VISUAL (adj) — APPROVED
 
 - **Meaning:** That you can see
-- **Example:**
 
 > **STE:** MAKE SURE THAT THE VISUAL INDICATOR SHOWS THE CORRECT VALUE.
 
 #### VISUALLY (adv) — APPROVED
 
 - **Meaning:** With the eyes
-- **Example:**
 
 > **STE:** VISUALLY EXAMINE THE DUCT.
 
 #### vital (adj) — unapproved
 
-- **Approved alternative:** MANDATORY (adj)
 
 > **STE:** IT IS MANDATORY TO OBEY THE SUPPLIER'S MAINTENANCE INTERVALS.
 > **Non-STE:** It is vital to obey the supplier's maintenance intervals.
@@ -23670,7 +20642,6 @@ For other meanings of "light", use:
 #### VOICE (n) — APPROVED
 
 - **Meaning:** The sound you make when you speak
-- **Example:**
 
 > **STE:** SPEAK INTO THE MICROPHONE IN YOUR USUAL VOICE.
 
@@ -23684,20 +20655,16 @@ For other meanings of "light", use:
 #### VOLUME (n) — APPROVED
 
 - **Meaning 1:** The space that an object fills
-- **Example:**
 
 > **STE:** MEASURE THE VOLUME OF THE OIL CAREFULLY.
 
 - **Meaning 2:** How loud a sound is
-- **Example:**
 
 > **STE:** TO ADJUST THE VOLUME, USE THE BUTTONS ON THE SIDE OF THE PHONE.
 # Page 425 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 425–428 of 434
 
-## Dictionary
 
 ### W
 
@@ -23705,7 +20672,6 @@ For other meanings of "light", use:
 
 - **Meaning:** To stop doing something while another thing occurs
 - **Forms:** WAITS, WAITED
-- **Example:**
 
 > **STE:** IF THE STATUS OF THE FAULT IS "NOT CONFIRMED": (a) OPEN THE APPLICABLE CIRCUIT BREAKER. (b) WAIT FOR 4 MINUTES. (c) DO THE BITE TEST.
 
@@ -23713,7 +20679,6 @@ For other meanings of "light", use:
 
 - **Meaning:** To move on foot from one location to a different location
 - **Forms:** WALKS, WALKED, WALKED
-- **Example:**
 
 > **STE:** DO NOT WALK ON THIS AREA.
 
@@ -23721,7 +20686,6 @@ For other meanings of "light", use:
 
 - **Meaning:** To intend, to desire
 - **Forms:** WANTS, WANTED, WANTED
-- **Examples:**
 
 > **STE:** RECORD THE NAME OF THE FILE THAT YOU WANT TO DOWNLOAD.
 > **STE:** IF YOU WANT TO STOP THE PROCEDURE, RECORD THE NUMBER OF THE LAST COMPLETED STEP.
@@ -23729,13 +20693,11 @@ For other meanings of "light", use:
 #### WARM (adj) — APPROVED
 
 - **Meaning:** Moderately hot
-- **Example:**
 
 > **STE:** KEEP THE GASKETS IN A WARM, DRY AREA.
 
 #### warm (v) — unapproved
 
-- **Approved alternative:** WARM (adj)
 
 > **STE:** MAKE THE MIXTURE WARM BEFORE YOU USE IT.
 > **Non-STE:** Warm the mixture before use.
@@ -23744,7 +20706,6 @@ For other meanings of "light", use:
 
 #### warn (v) — unapproved
 
-- **Approved alternative:** TELL (v)
 
 > **STE:** TELL PERSONNEL TO STAY AWAY FROM THE CONVEYOR SYSTEM.
 > **Non-STE:** Warn personnel to stay away from the conveyor system.
@@ -23758,7 +20719,6 @@ For other meanings of "light", use:
 
 #### wash (v) — unapproved
 
-- **Approved alternative:** CLEAN (v)
 
 > **STE:** CLEAN YOUR HANDS WITH SOAP.
 > **Non-STE:** Wash your hands using soap.
@@ -23767,12 +20727,10 @@ For other meanings of "light", use:
 
 #### watch (v) — unapproved
 
-- **Approved alternative:** MONITOR (v)
 
 > **STE:** MONITOR THE SPEED INDICATION CONTINUOUSLY UNTIL THE END OF THE TEST.
 > **Non-STE:** Watch the speed indication for the duration of the test.
 
-- **Approved alternative:** LOOK (v)
 
 > **STE:** LOOK FOR AIR BUBBLES.
 > **Non-STE:** Watch for air bubbles.
@@ -23781,27 +20739,22 @@ For other meanings of "light", use:
 
 #### watertight (adj) — unapproved
 
-- **Approved alternative:** SEAL (v)
 
 > **STE:** MAKE SURE THAT THE TANK IS SEALED.
 > **Non-STE:** Check that the tank is watertight.
 
-> **See:** Dictionary entry for SEAL (v).
 
 #### way (n) — unapproved
 
-- **Approved alternative:** PROCEDURE (n)
 
 > **STE:** DO NOT USE OTHER PROCEDURES TO REPLACE THE UNIT.
 > **Non-STE:** Do not use other ways to replace the unit.
 
-> **See:** Dictionary entry for PROCEDURE (n).
 
 #### WE (pron) — APPROVED
 
 - **Meaning:** The manufacturer, company, or organization that releases the documentation
 - **Note:** Do not use this pronoun for other meanings.
-- **Example:**
 
 > **STE:** WE DO NOT RECOMMEND OTHER ALTERNATIVES.
 
@@ -23809,7 +20762,6 @@ For other meanings of "light", use:
 
 - **Meaning:** With small strength, power, or concentration
 - **Forms:** WEAKER, WEAKEST
-- **Example:**
 
 > **STE:** USE A WEAK CLEANING SOLUTION.
 
@@ -23826,17 +20778,13 @@ For other meanings of "light", use:
 
 - **Meaning:** To become damaged by friction
 - **Forms:** WEARS, WORE, WORN
-- **Example:**
 
 > **STE:** THE CABLE CAN WEAR QUICKLY IN THIS POSITION.
 
-- **Note:** For other meanings, use:
-  - **Approved alternative:** USE (v)
 
 > **STE:** DURING THE SOLDERING PROCEDURE, USE A PROTECTIVE SHIELD.
 > **Non-STE:** During the soldering procedure, wear a protective shield.
 
-  - **Approved alternative:** PUT ON (v)
 
 > **STE:** WHEN YOU USE THE SOLVENT, PUT ON PROTECTIVE CLOTHING.
 > **Non-STE:** Wear protective clothing when you use the solvent.
@@ -23846,7 +20794,6 @@ For other meanings of "light", use:
 #### WEATHER (n) — APPROVED
 
 - **Meaning:** Conditions of the atmosphere: temperature, moisture, winds, and clouds
-- **Example:**
 
 > **STE:** STEP 2 IS APPLICABLE ONLY IF THE WEATHER IS WET.
 
@@ -23861,11 +20808,9 @@ For other meanings of "light", use:
 
 #### WEIGH (v) — APPROVED
 
-- **Meanings:**
   1. To measure the weight of something
   2. To have a specified weight
 - **Forms:** WEIGHS, WEIGHED, WEIGHED
-- **Examples:**
 
 > **STE:** WEIGH THE TWO PARTS OF THE COMPOUND.
 > **STE:** THE UNIT WEIGHS 20 kg.
@@ -23873,13 +20818,11 @@ For other meanings of "light", use:
 #### WEIGHT (n) — APPROVED
 
 - **Meaning:** The force caused when gravity acts on the mass of an object
-- **Example:**
 
 > **STE:** THE BASIC WEIGHT OF THE UNIT DOES NOT INCLUDE THE PROTECTIVE COVERS.
 
 #### well (adv) — unapproved
 
-- **Approved alternative:** CORRECTLY (adv)
 
 > **STE:** MAKE SURE THAT THE BEARING IS CORRECTLY INSTALLED.
 > **Non-STE:** Make sure that the bearing is well seated.
@@ -23889,7 +20832,6 @@ For other meanings of "light", use:
 > **STE:** THERE MUST BE A GOOD AIRFLOW IN THE WORK AREA.
 > **Non-STE:** The work area must be well ventilated.
 
-- **Approved alternative:** FULLY (adv)
 
 > **STE:** MAKE SURE THAT ALL LABORATORY EQUIPMENT IS FULLY CLEAN.
 > **Non-STE:** All laboratory equipment must be well cleaned.
@@ -23900,20 +20842,17 @@ For other meanings of "light", use:
 
 - **Meaning:** That has liquid on it, in it, or absorbed into it
 - **Forms:** WETTER, WETTEST
-- **Example:**
 
 > **STE:** DRY THE WET SURFACES.
 
 #### WHEN (conj) — APPROVED
 
 - **Meaning:** At the time that or during
-- **Example:**
 
 > **STE:** WHEN THE PISTON MOVEMENT STOPS, MEASURE THE TRAVEL.
 
 #### whenever (conj) — unapproved
 
-- **Approved alternative:** WHEN (conj)
 
 > **STE:** WHEN THE PRESSURE IS MORE THAN 7000 kPa, STOP THE TEST.
 > **Non-STE:** Stop the test whenever the pressure is more than 7000 kPa.
@@ -23923,23 +20862,19 @@ For other meanings of "light", use:
 #### WHERE (conj) — APPROVED
 
 - **Meaning:** At, to, or in which location
-- **Example:**
 
 > **STE:** CLEAN THE AREA WHERE YOU APPLIED THE SEALANT.
 
 #### whether (conj) — unapproved
 
-- **Approved alternative:** IF (conj)
 
 > **STE:** THIS LIMIT IS APPLICABLE IF THE AIRCRAFT IS ON THE LANDING GEAR OR ON JACKS.
 > **Non-STE:** This limit applies whether the aircraft is on the landing gear or on jacks.
 
-> **See:** Dictionary entry for IF (conj).
 
 #### WHICH (pron) — APPROVED
 
 - **Meaning:** The thing or things that
-- **Example:**
 
 > **STE:** EXAMINE THE EMERGENCY FUEL PUMP, WHICH IS ON THE LEFT SIDE.
 
@@ -23954,23 +20889,19 @@ For other meanings of "light", use:
 
 #### whichever (pron) — unapproved
 
-- **Approved alternative:** THAT (pron)
 
 > **STE:** DIFFERENT ADHESIVES ARE PERMITTED. USE THE ONE THAT IS AVAILABLE.
 > **Non-STE:** Different adhesives are permitted. Use whichever is available.
 
-> **See:** Dictionary entry for THAT (pron).
 
 #### WHILE (conj) — APPROVED
 
 - **Meaning:** At the same time
-- **Example:**
 
 > **STE:** MAKE SURE THAT A PERSON HOLDS THE ITEM, WHILE YOU DISCONNECT IT.
 
 #### whilst (conj) — unapproved
 
-- **Approved alternative:** WHILE (conj)
 
 > **STE:** DO NOT OPEN THE HOUSING WHILE THE ELECTRICAL POWER IS CONNECTED.
 > **Non-STE:** Do not open the housing whilst the electrical power is connected.
@@ -23980,7 +20911,6 @@ For other meanings of "light", use:
 #### WHO (pron) — APPROVED
 
 - **Meaning:** The person or personnel that
-- **Example:**
 
 > **STE:** THE DECKHAND, WHO OPERATES THE REAR WINCH, MUST LOCK THE FIXTURE.
 
@@ -23995,12 +20925,10 @@ For other meanings of "light", use:
 
 #### whole (adj) — unapproved
 
-- **Approved alternative:** FULL (adj)
 
 > **STE:** DO THE FULL PROCEDURE.
 > **Non-STE:** The whole procedure must be done.
 
-- **Approved alternative:** ALL (adj)
 
 > **STE:** EXAMINE ALL OF THE SYSTEM TO FIND THE CAUSE OF INTERFERENCE.
 > **Non-STE:** Examine the whole system to find the cause of interference.
@@ -24009,33 +20937,25 @@ For other meanings of "light", use:
 
 #### wholly (adv) — unapproved
 
-- **Approved alternative:** FULLY (adv)
 
-> **STE:** THE SYSTEM IS FULLY AUTOMATIC.
 > **Non-STE:** The system is wholly automatic.
 
-> **See:** Dictionary entry for FULLY (adv).
 # Page 429 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 429–432 of 434
 
-## Dictionary Entries
 
-### APPROVED
 
 #### WIDE (adj) — APPROVED
 
 - **Forms:** WIDER, WIDEST
 - **Meaning:** That has a specified or large width
-- **Example:**
 
 > **STE:** REPAIR ALL CRACKS THAT ARE WIDER THAN 0,05 mm.
 
 #### WIDTH (n) — APPROVED
 
 - **Meaning:** The smaller of two dimensions, the second-largest of three dimensions
-- **Example:**
 
 > **STE:** MEASURE THE WIDTH OF THE CRACK AT THE WIDEST POINT.
 
@@ -24043,7 +20963,6 @@ For other meanings of "light", use:
 
 - **Meaning:** Auxiliary modal verb that shows simple future
 - **Usage:** No other verb tense forms.
-- **Example:**
 
 > **STE:** WARNINGS AND CAUTIONS IN THIS MANUAL WILL HELP YOU TO DO THE WORK SAFELY AND CORRECTLY.
 
@@ -24051,7 +20970,6 @@ For other meanings of "light", use:
 
 - **Forms:** WINDS, WOUND, WOUND
 - **Meaning:** To move around and around an object
-- **Example:**
 
 > **STE:** WIND THE TAPE ON THE REEL.
 
@@ -24059,7 +20977,6 @@ For other meanings of "light", use:
 
 - **Meaning:** Function word that shows association or relationship, help or sharing, a means or instrument
 - Reference: Refer to section 9, GR-2.
-- **Examples:**
 
 > **STE:** ALIGN THE MARK WITH THE LONGITUDINAL AXIS.
 > **STE:** ATTACH THE FLANGE (10) WITH THE FOUR BOLTS (15).
@@ -24068,14 +20985,12 @@ For other meanings of "light", use:
 #### WITHOUT (prep) — APPROVED
 
 - **Meaning:** Not with
-- **Example:**
 
 > **STE:** SMALL DAMAGE IS PERMITTED WITHOUT REPAIR. REFER TO TABLE 1 FOR THE APPLICABLE LIMITS.
 
 #### WORK (n) — APPROVED
 
 - **Meaning:** That which you do when you use physical strength, or mental power
-- **Example:**
 
 > **STE:** DO THE WORK IN A CLEAN AREA.
 
@@ -24083,11 +20998,9 @@ For other meanings of "light", use:
 
 - **Forms:** WRITES, WROTE, WRITTEN
 - **Meaning:** To record data or information as words, letters, or symbols
-- **Example:**
 
 > **STE:** WRITE THE TEST DATE ON THE CERTIFICATE.
 
-### UNAPPROVED
 
 #### whose (pron) — unapproved
 
@@ -24107,12 +21020,10 @@ For other meanings of "light", use:
 
 #### wipe (v) — unapproved
 
-- **Approved alternative:** CLEAN (v)
 
 > **STE:** BEFORE EACH CYCLE, CLEAN THE INDICATOR.
 > **Non-STE:** Wipe the indicator surfaces before each cycle.
 
-> **See:** Dictionary entry for CLEAN (v).
 
 #### wire (v) — unapproved
 
@@ -24125,7 +21036,6 @@ For other meanings of "light", use:
 
 #### wire-lock (v) — unapproved
 
-- **Approved alternative:** LOCK (v) (WITH LOCKWIRE [TN])
 
 > **STE:** LOCK THE FOUR BOLTS TO EACH OTHER WITH LOCKWIRE.
 > **Non-STE:** Wire-lock the four bolts to each other.
@@ -24133,22 +21043,18 @@ For other meanings of "light", use:
 - **Approved alternative:** SAFETY (v) (WITH SAFETY WIRE [TN])
 
 > **STE:** SAFETY THE FOUR BOLTS TO EACH OTHER WITH SAFETY WIRE.
-> **Non-STE:** Wire-lock the four bolts to each other.
 
 > **See:** Dictionary entry for LOCK (v); Dictionary entry for SAFETY (v).
 
 #### withdraw (v) — unapproved
 
-- **Approved alternative:** REMOVE (v)
 
 > **STE:** REMOVE THE INDICATOR FROM THE INSTRUMENT PANEL.
 > **Non-STE:** Withdraw the indicator from the instrument panel.
 
-> **See:** Dictionary entry for REMOVE (v).
 
 #### within (prep) — unapproved
 
-- **Approved alternative:** IN (prep)
 
 > **STE:** A FILTER PREVENTS CONTAMINATION OF THE COMPONENTS IN THE SYSTEM.
 > **Non-STE:** A filter prevents contamination of the components within the system.
@@ -24159,7 +21065,6 @@ For other meanings of "light", use:
 > **STE:** MAKE SURE THAT THE WARNING LIGHT COMES ON IN LESS THAN 3 SECONDS.
 > **Non-STE:** Make sure that the warning light illuminates within 3 seconds.
 
-> **See:** Dictionary entry for IN (prep).
 
 #### withstand (v) — unapproved
 
@@ -24172,16 +21077,13 @@ For other meanings of "light", use:
 
 #### work (v) — unapproved
 
-- **Approved alternative:** WORK (n)
 
 > **STE:** BE CAREFUL WHEN YOU DO WORK NEAR FUEL TANKS.
 > **Non-STE:** Be careful when you work near fuel tanks.
 
-> **See:** Dictionary entry for WORK (n).
 
 #### would (v) — unapproved
 
-- **Approved alternative:** CAN (v)
 
 > **STE:** SOLVENTS THAT STAY ON THE PART CAN CAUSE CORROSION.
 > **Non-STE:** Solvents left on the part would corrode the part.
@@ -24190,7 +21092,6 @@ For other meanings of "light", use:
 
 #### wrap (v) — unapproved
 
-- **Approved alternative:** PUT (v)
 
 > **STE:** PUT THE PART IN OILPAPER.
 > **Non-STE:** Wrap the part in oilpaper.
@@ -24204,7 +21105,6 @@ For other meanings of "light", use:
 
 #### wrong (adj) — unapproved
 
-- **Approved alternative:** INCORRECT (adj)
 
 > **STE:** IDENTIFY THE BELLCRANK AND SHAFT WITH MARKS. THESE MARKS WILL PREVENT AN INCORRECT INSTALLATION.
 > **Non-STE:** Mark the bellcrank and shaft to prevent wrong installation.
@@ -24213,35 +21113,28 @@ For other meanings of "light", use:
 
 #### wrongly (adv) — unapproved
 
-- **Approved alternative:** INCORRECTLY (adv)
 
 > **STE:** IF THE HOSES ARE INCORRECTLY INSTALLED, DAMAGE CAN OCCUR.
 > **Non-STE:** Damage can occur if hoses are wrongly installed.
 
 > **See:** Dictionary entry for INCORRECTLY (adv).
 
----
 
 *Page 2-1-W8 Part 2 – Dictionary Issue 9, 2025-01-15*
 # Page 433 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** 433–434 of 434
 
-## Unapproved Words
 
 #### yet (conj) — unapproved
 
-- **Approved alternative:** BUT (conj)
 
 > **STE:** TIGHTEN THE NUTS, BUT KEEP THEM SUFFICIENTLY LOOSE TO REMOVE THEM WITH YOUR HAND.
 > **Non-STE:** The nuts should be tightened, yet loose enough to remove by hand.
 
-> **See:** Dictionary entry for BUT (conj).
 
 #### yet (adv) — unapproved
 
-- **Approved alternative:** AT THIS TIME
 
 > **STE:** DO NOT REMOVE THE FIXTURE COVER AT THIS TIME.
 > **Non-STE:** Do not remove the fixture cover yet.
@@ -24264,30 +21157,23 @@ For other meanings of "light", use:
 
 > **See:** Dictionary entry for ZERO (TN).
 
-## Approved Words
 
 #### YES (adv) — APPROVED
 
 - **Meaning:** Function word that shows the positive answer to a question.
-- **Example:**
 
-> **STE:** DOES THE LIGHT COME ON? YES OR NO?
 
 #### YOU (pron) — APPROVED
 
 - **Meaning:** The reader or the user.
-- **Examples:**
 
-> **STE:** YOU CAN CONTINUE THE TEST.
 > **STE:** HOT SURFACES CAN BURN YOU.
 
 #### YOUR (adj) — APPROVED
 
 - **Meaning:** Related to the reader or the user.
-- **Example:**
 
 > **STE:** IF YOU GET SOLVENT IN YOUR EYES, FLUSH THEM IMMEDIATELY WITH WATER.
 
----
 
 *Page 434 is intentionally blank (end of Part 2 – Dictionary, Issue 9, 2025-01-15).*
