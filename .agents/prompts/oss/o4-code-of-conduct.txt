@@ -1,0 +1,16 @@
+TASK: Write CODE_OF_CONDUCT.md for the STE-Code open-source project.
+
+OUTPUT: <project-root>/CODE_OF_CONDUCT.md
+
+Use the Contributor Covenant v2.1 (standard open-source code of conduct). Adapt the contact email placeholder to a generic reference.
+
+SECTIONS:
+1. Our Pledge
+2. Our Standards (with code-domain examples: respectful code review, constructive PR feedback)
+3. Enforcement Responsibilities
+4. Scope
+5. Enforcement
+6. Enforcement Guidelines (correction, warning, temporary ban, permanent ban)
+7. Attribution — Contributor Covenant 2.1, link to https://www.contributor-covenant.org/version/2/1/code_of_conduct/
+
+Output ONLY the file content. No commentary.

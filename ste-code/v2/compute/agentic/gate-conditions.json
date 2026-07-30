@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schemas/gate-conditions.schema.json",
+  "version": "1.0.0",
+  "description": "GATE 0-4 pass conditions for the STE-Code 5-stage pipeline. Each gate must pass before the next stage starts.",
+  "gates": [
+    {
+      "id": "GATE-0",
+      "name": "Spec Present",
+      "precondition-for": "Stage 1 — Extraction",
+      "assertions": [
+        { "check": "directory-exists", "path": "spec/issue-09-2025/", "min-files": 434 },
+        { "check": "file-exists", "path": "spec/issue-09-2025/page-001.md" },
+        { "check": "file-exists", "path": "spec/issue-09-2025/page-434.md" }
+      ],
+      "pass-action": "proceed to Stage 1",
+      "fail-action": "halt — spec not available — do not start extraction"
+    },
+    {
+      "id": "GATE-1",
+      "name": "Extraction Verified",
+      "precondition-for": "Stage 2 — Refinement",
+      "assertions": [
+        { "check": "file-count", "path": "ste-code/extracted/", "expected": 109 },
+        { "check": "min-size-each", "path": "ste-code/extracted/", "min-bytes": 500, "exception": { "file": "w109-p433-434.md", "min-bytes": 200 } },
+        { "check": "no-truncation-marker", "path": "ste-code/extracted/", "pattern": "\\[\\.\.\\.]|^\.\\.\.\\s*$" },
+        { "check": "rails-compliance", "script": "ste-code/check-rails.py", "target": "ste-code/extracted/", "expected-exit": 0 }
+      ],
+      "pass-action": "proceed to Stage 2",
+      "fail-action": "run GATE1-RUNBOOK.md — repair failing workers before proceeding"
+    },
+    {
+      "id": "GATE-2",
+      "name": "Merge Complete",
+      "precondition-for": "Stage 4 — Adaptation",
+      "assertions": [
+        { "check": "file-exists", "path": "ste-code/merged/master-raw.md" },
+        { "check": "min-size", "path": "ste-code/merged/master-raw.md", "min-bytes": 500000 },
+        { "check": "file-count", "path": "ste-code/refined/", "expected": 109 }
+      ],
+      "pass-action": "proceed to Stage 4",
+      "fail-action": "complete refinement and re-run merge script"
+    },
+    {
+      "id": "GATE-3",
+      "name": "Adaptation Complete",
+      "precondition-for": "Stage 5 — Artifacts",
+      "assertions": [
+        { "check": "file-count", "path": "ste-code/adapted/", "min": 51, "note": "51 rules + up to 4 GR files" },
+        { "check": "sections-covered", "required-sections": ["sec1", "sec2", "sec3", "sec4", "sec5", "sec6", "sec7", "sec8", "sec9"] }
+      ],
+      "pass-action": "proceed to Stage 5",
+      "fail-action": "complete missing sections before artifact generation"
+    },
+    {
+      "id": "GATE-4",
+      "name": "Artifacts Complete",
+      "precondition-for": "Release tagging",
+      "assertions": [
+        { "check": "file-count", "path": "ste-code/artifacts/", "expected": 6 },
+        { "check": "file-exists", "path": "ste-code/artifacts/ste-code-distilled-system-prompt.txt" },
+        { "check": "file-exists", "path": "ste-code/artifacts/ste-code-self-reading-manual.txt" },
+        { "check": "min-size", "path": "ste-code/artifacts/ste-code-distilled-system-prompt.txt", "min-bytes": 5000 },
+        { "check": "min-size", "path": "ste-code/artifacts/ste-code-self-reading-manual.txt", "min-bytes": 20000 }
+      ],
+      "pass-action": "tag release — create GitHub pre-release",
+      "fail-action": "complete missing artifacts before tagging"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "description": "STE-Code agentic behavioral rails — load this file as the behavioral constraint layer for any pipeline agent",
+  "rails": [
+    {
+      "id": "R001",
+      "name": "No fabrication",
+      "rule": "Do not invent content not present in the source material. Every claim must trace to a source file or spec page.",
+      "severity": "blocking",
+      "detection": ["claims without source reference", "invented page numbers", "invented rule IDs"]
+    },
+    {
+      "id": "R002",
+      "name": "No truncation",
+      "rule": "Do not truncate output. If a task cannot complete in one turn, commit partial work and report state.",
+      "severity": "blocking",
+      "detection": ["[...]", "etc.", "and so on", "truncated for brevity"]
+    },
+    {
+      "id": "R003",
+      "name": "Commit before state change",
+      "rule": "Commit all completed work to git before beginning a new stage or batch.",
+      "severity": "blocking",
+      "detection": ["uncommitted changes at stage boundary"]
+    },
+    {
+      "id": "R004",
+      "name": "State report on every turn",
+      "rule": "Every agent turn must end with a structured state report: files written, files remaining, gate status.",
+      "severity": "warning",
+      "detection": ["turn ends without state report"]
+    },
+    {
+      "id": "R005",
+      "name": "One term per concept",
+      "rule": "Use exactly one technical noun for each concept within a document. Do not alternate synonyms.",
+      "severity": "blocking",
+      "detection": ["synonym alternation for same entity"]
+    },
+    {
+      "id": "R006",
+      "name": "Approved vocabulary only",
+      "rule": "Use only terms from the approved vocabulary. Check synonym-table.json before using any term.",
+      "severity": "blocking",
+      "detection": ["unapproved synonym", "jargon", "slang"]
+    },
+    {
+      "id": "R007",
+      "name": "Sentence length limit",
+      "rule": "Procedural sentences: max 20 words. Descriptive sentences: max 25 words.",
+      "severity": "warning",
+      "detection": ["sentence > 25 words"]
+    },
+    {
+      "id": "R008",
+      "name": "BREAKING/DEPRECATED/NOTE format",
+      "rule": "Safety-critical information must use BREAKING (data loss/security), DEPRECATED (removal planned), or NOTE (clarification) markers. BREAKING must include version and migration path.",
+      "severity": "blocking",
+      "detection": ["safety info without marker", "BREAKING without migration path"]
+    }
+  ]
+}

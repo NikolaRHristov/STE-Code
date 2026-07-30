@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/NikolaRHristov/Manual/SCE/compute/schemas/rule-frontmatter.schema.json",
+  "title": "STE-Code Rule Frontmatter",
+  "description": "Validates the YAML frontmatter of every rule file in SCE/core/rules/",
+  "type": "object",
+  "required": ["id", "section", "principle", "constraint-type", "scope", "severity", "agentic-load"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(rule-[1-9]\\.[0-9]{1,2}|gr-[1-4])$",
+      "description": "Rule identifier e.g. rule-1.1, rule-9.4, gr-1"
+    },
+    "section": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9
+    },
+    "principle": {
+      "type": "string",
+      "pattern": "^P[0-9]{1,2}$",
+      "description": "Principle identifier e.g. P1, P14"
+    },
+    "constraint-type": {
+      "type": "string",
+      "enum": ["vocabulary", "grammar", "structure", "format", "safety", "agentic"]
+    },
+    "scope": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["noun", "verb", "adjective", "sentence", "paragraph", "document", "agent"] },
+      "minItems": 1
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["blocking", "warning", "advisory"]
+    },
+    "agentic-load": {
+      "type": "string",
+      "enum": ["required", "optional", "conditional"]
+    },
+    "domain": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": ["code"]
+    }
+  },
+  "additionalProperties": false
+}

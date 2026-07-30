@@ -1,0 +1,29 @@
+[
+  {
+    "id": "bench-026", "category": "changelog",
+    "description": "Vague changelog entry",
+    "input": "## 2.1.0 — Various improvements and bug fixes",
+    "expected_principles": ["P1", "P14"],
+    "expected_keywords": ["version", "add", "fix", "update"],
+    "forbidden_keywords": ["Various improvements"],
+    "max_tokens": 200, "difficulty": "easy"
+  },
+  {
+    "id": "bench-027", "category": "changelog",
+    "description": "Breaking change without migration path",
+    "input": "## 3.0.0 — The old API was removed. Use the new one instead.",
+    "expected_principles": ["P4", "P14"],
+    "expected_keywords": ["BREAKING", "remove", "API", "migrate", "replacement"],
+    "forbidden_keywords": ["was removed", "the new one"],
+    "max_tokens": 250, "difficulty": "medium"
+  },
+  {
+    "id": "bench-028", "category": "changelog",
+    "description": "Full changelog with multiple issues",
+    "input": "## 1.5.0\n\n- Added a bunch of new features\n- Fixed some bugs that were causing problems\n- Made things faster\n- Deprecated the old config format (will be removed eventually)",
+    "expected_principles": ["P1", "P10", "P4", "P14"],
+    "expected_keywords": ["add", "fix", "improve", "DEPRECATED", "config", "version"],
+    "forbidden_keywords": ["bunch of", "some bugs", "causing problems", "Made things faster", "eventually"],
+    "max_tokens": 350, "difficulty": "hard"
+  }
+]

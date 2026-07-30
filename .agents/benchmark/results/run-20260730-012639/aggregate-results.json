@@ -1,0 +1,203 @@
+{
+  "benchmark_id": "ste-code-v1.0.0",
+  "timestamp": "2026-07-30T01:28:44Z",
+  "model": "deepseek-v4-pro",
+  "total_tests": 59,
+  "passed": 57,
+  "failed": 2,
+  "pass_rate_pct": 96.6,
+  "aggregates": {
+    "avg_correctness": 0.941,
+    "min_correctness": 0.6,
+    "max_correctness": 1.0,
+    "avg_latency_ms": 125205,
+    "min_latency_ms": 125170,
+    "max_latency_ms": 125223,
+    "avg_token_input": 56,
+    "avg_token_output": 124,
+    "total_tokens_input": 3299,
+    "total_tokens_output": 7295
+  },
+  "by_category": {
+    "api_doc": {
+      "passed": 4,
+      "failed": 1,
+      "total": 5,
+      "avg_correctness": 0.82,
+      "avg_latency_ms": 125214
+    },
+    "changelog": {
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "avg_correctness": 0.847,
+      "avg_latency_ms": 125187
+    },
+    "comment": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.966,
+      "avg_latency_ms": 125195
+    },
+    "commit": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 1.0,
+      "avg_latency_ms": 125208
+    },
+    "composite": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 0.902,
+      "avg_latency_ms": 125178
+    },
+    "config": {
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "avg_correctness": 0.923,
+      "avg_latency_ms": 125183
+    },
+    "error": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.954,
+      "avg_latency_ms": 125202
+    },
+    "gen_api_doc": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 0.998,
+      "avg_latency_ms": 125222
+    },
+    "gen_commit": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 0.9,
+      "avg_latency_ms": 125222
+    },
+    "gen_error": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 1.0,
+      "avg_latency_ms": 125219
+    },
+    "gen_function": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 1.0,
+      "avg_latency_ms": 125172
+    },
+    "gen_pr_review": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 0.905,
+      "avg_latency_ms": 125220
+    },
+    "gen_readme": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 1.0,
+      "avg_latency_ms": 125218
+    },
+    "readme": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.938,
+      "avg_latency_ms": 125218
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "passed": 18,
+      "failed": 0,
+      "total": 18,
+      "avg_correctness": 0.971
+    },
+    "medium": {
+      "passed": 24,
+      "failed": 1,
+      "total": 25,
+      "avg_correctness": 0.945
+    },
+    "hard": {
+      "passed": 15,
+      "failed": 1,
+      "total": 16,
+      "avg_correctness": 0.902
+    }
+  },
+  "failures": [
+    {
+      "test_id": "bench-010",
+      "category": "api_doc",
+      "description": "Complex API reference with multiple violations",
+      "input": "The authenticateUser function handles user authentication and authorization. It takes a credentials object which contains the username and password, performs validation, and returns a JWT token that can be utilized for subsequent requests. Make sure to call this function before accessing any protected endpoints.",
+      "test_type": "correction",
+      "output": "Here is the corrected text followed by the compliance summary.",
+      "compliance_summary": "| # | Original | Correction | Principle(s) | Reason |\n|---|----------|------------|--------------|--------|\n| 1 | handles | does | P3, P12 | \"Handle\" in STE means to touch/operate with hands, not to process. \"Do\" is the approved synonym for perform/execute. |\n| 2 | performs validation | checks | P1, Synonym table | \"Perform\" maps to \"do\"; \"validation\" maps to \"check.\" Restructured as a direct verb for clarity and brevity. |\n| 3 | utilized | used | Synonym table | \"Utilize\" is not approved; \"use\" is the canonical synonym. |\n| 4 | subsequent | later | P1, P3 | \"Subsequent\" is not in the STE-Code dictionary. \"Later\" is a simpler, approved alternative. |\n| 5 | Make sure to | (removed) | P1, Output format | \"Make sure\" is phrasal/jargon. Replaced with direct imperative mood as required by procedural output format. |\n| 6 | accessing | access | P4, Anti-patterns | \"-ing\" forms must not be used as main verbs in procedures. |\n| 7 | takes | gets | Synonym table | \"Get\" is the preferred synonym over retrieve/fetch/obtain for obtaining data. |\n| 8 | contains | has | P9 | \"Has\" is shorter and simpler per the preference for short, clear terms. |",
+      "expected_principles_satisfied": [
+        "P1"
+      ],
+      "expected_principles_missed": [
+        "P2",
+        "P5"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.6,
+      "latency_ms": 125211,
+      "token_count_input": 78,
+      "token_count_output": 15,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P2, P5",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-027",
+      "category": "changelog",
+      "description": "Breaking change without migration path",
+      "input": "## 3.0.0 \u2014 The old API was removed. Use the new one instead.",
+      "test_type": "correction",
+      "output": "## 3.0.0 \u2014 BREAKING: The old API was removed. Use the new API.",
+      "compliance_summary": "| Principle | Issue | Correction |\n|-----------|-------|------------|\n| P1 | \"instead\" is not an approved STE-Code word | Removed; rephrased without it |\n| P11 | \"one\" is a vague pronoun for \"API\" | Replaced \"one\" with \"API\" for consistency |\n| Output Format | Destructive change (removal) lacks BREAKING prefix | Added \"BREAKING:\" before the sentence |\n| P2/P3 | \"instead\" used as adverb outside approved parts of speech | Word removed entirely |\n| Sentence Length | Original: 4 + 5 words \u2014 already compliant | No change needed |",
+      "expected_principles_satisfied": [
+        "P4"
+      ],
+      "expected_principles_missed": [
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "was removed"
+      ],
+      "expected_keywords_found": [
+        "BREAKING",
+        "remove",
+        "API"
+      ],
+      "correctness_score": 0.61,
+      "latency_ms": 125188,
+      "token_count_input": 15,
+      "token_count_output": 15,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P14; Forbidden found: was removed; Keywords OK: 3/5",
+      "difficulty": "medium"
+    }
+  ],
+  "recommendations": [
+    "Latency above 5s average \u2014 consider flash model for simple cases"
+  ]
+}

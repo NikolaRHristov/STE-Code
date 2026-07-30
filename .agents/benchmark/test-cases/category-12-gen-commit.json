@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bench-048",
+    "category": "gen_commit",
+    "description": "Write a commit message for a bug fix",
+    "prompt": "You fixed a bug where the login form crashed when users entered an empty password. The fix adds a validation check before processing. Write a conventional commit message using STE-Code approved terms.",
+    "expected_principles": ["P1", "P4", "P10"],
+    "expected_keywords": ["fix", "login", "validate", "password", "empty", "crash"],
+    "forbidden_keywords": ["stuff", "thing", "should", "fixed a bug where", "oops", "made it work"],
+    "required_patterns": ["^(fix|feat|chore|refactor)(\\(.+\\))?: "],
+    "max_tokens": 200,
+    "difficulty": "easy"
+  },
+  {
+    "id": "bench-049",
+    "category": "gen_commit",
+    "description": "Write a breaking change commit message",
+    "prompt": "You removed the deprecated `UserService.create()` method. Users must migrate to `UserService.register()`. This is a breaking change. Write a conventional commit message with proper severity markers using STE-Code.",
+    "expected_principles": ["P4", "P14", "P1"],
+    "expected_keywords": ["BREAKING", "remove", "UserService.create", "UserService.register", "migrate"],
+    "forbidden_keywords": ["stuff", "old method", "got rid of", "should use", "just use"],
+    "required_patterns": ["BREAKING CHANGE"],
+    "max_tokens": 250,
+    "difficulty": "medium"
+  },
+  {
+    "id": "bench-050",
+    "category": "gen_commit",
+    "description": "Write a feature commit from a diff description",
+    "prompt": "You added pagination to the user list API endpoint. New query parameters: `page` and `limit`. Default page size is 20. Maximum is 100. Write a conventional commit message using STE-Code approved terms.",
+    "expected_principles": ["P1", "P10", "P4"],
+    "expected_keywords": ["feat", "add", "pagination", "user", "API", "page", "limit"],
+    "forbidden_keywords": ["stuff", "thing", "should", "bunch of", "added a new feature"],
+    "required_patterns": ["^feat(\\(.+\\))?: add"],
+    "max_tokens": 250,
+    "difficulty": "medium"
+  },
+  {
+    "id": "bench-051",
+    "category": "gen_commit",
+    "description": "Write a refactor commit with body",
+    "prompt": "You refactored the authentication middleware to use a strategy pattern instead of a monolithic `if/else` chain. The change improves testability and allows adding new auth methods without modifying existing code. Write a conventional commit with body using STE-Code.",
+    "expected_principles": ["P1", "P4", "P8", "P10"],
+    "expected_keywords": ["refactor", "authenticate", "middleware", "strategy", "pattern", "test"],
+    "forbidden_keywords": ["stuff", "thing", "overhauled", "made it better", "cleaned up a ton"],
+    "required_patterns": ["^refactor(\\(.+\\))?: "],
+    "max_tokens": 350,
+    "difficulty": "hard"
+  }
+]

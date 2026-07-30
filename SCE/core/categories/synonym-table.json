@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "source": "ASD-STE100 Issue 9 (January 2025), adapted to code domain",
+  "canonical": true,
+  "entries": [
+    { "approved": "use", "avoid": ["utilize", "leverage", "employ"], "type": "verb", "category": "general" },
+    { "approved": "start", "avoid": ["initiate", "commence", "bootstrap"], "type": "verb", "category": "development-operations" },
+    { "approved": "stop", "avoid": ["terminate", "halt", "kill"], "type": "verb", "category": "development-operations" },
+    { "approved": "show", "avoid": ["display", "render", "present"], "type": "verb", "category": "application-operations" },
+    { "approved": "make", "avoid": ["create", "generate", "produce"], "type": "verb", "category": "development-operations" },
+    { "approved": "get", "avoid": ["retrieve", "fetch", "obtain"], "type": "verb", "category": "data-operations" },
+    { "approved": "set", "avoid": ["configure", "assign", "establish"], "type": "verb", "category": "data-operations" },
+    { "approved": "check", "avoid": ["verify", "validate", "ensure"], "type": "verb", "category": "development-operations" },
+    { "approved": "do", "avoid": ["perform", "execute", "carry out"], "type": "verb", "category": "general" },
+    { "approved": "send", "avoid": ["transmit", "dispatch", "forward"], "type": "verb", "category": "communication-operations" },
+    { "approved": "remove", "avoid": ["delete", "eliminate", "purge"], "type": "verb", "category": "data-operations" },
+    { "approved": "keep", "avoid": ["retain", "preserve", "maintain"], "type": "verb", "category": "data-operations" }
+  ]
+}

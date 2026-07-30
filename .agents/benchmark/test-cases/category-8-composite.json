@@ -1,0 +1,38 @@
+[
+  {
+    "id": "bench-032", "category": "composite",
+    "description": "Full README section with mixed violations",
+    "input": "# MyCoolProject\n\nThis project is a really cool tool that helps developers do their work faster. It has a bunch of features that make development super easy.\n\n## Installation\n\nFirst, you need to install the dependencies. Run `npm install` to get everything set up.\n\n## Usage\n\n```javascript\nconst cool = require('my-cool-project');\nconst result = cool.doStuff({ option: true });\nconsole.log(result);\n```\n\n## Contributing\n\nIf you want to contribute, please make sure your code is clean and well-documented. We use ESLint and Prettier for code formatting.",
+    "expected_principles": ["P1", "P10", "P4", "P8"],
+    "expected_keywords": ["install", "dependency", "npm", "require", "ESLint", "Prettier", "contribute"],
+    "forbidden_keywords": ["really cool", "bunch of", "super easy", "do their work faster", "get everything set up", "doStuff", "make sure"],
+    "max_tokens": 600, "difficulty": "hard"
+  },
+  {
+    "id": "bench-033", "category": "composite",
+    "description": "API reference page with multiple violation types",
+    "input": "## User API\n\n### GET /api/users\n\nThis endpoint fetches all the users from the database. It should return a JSON array of user objects.\n\n**Parameters:**\n- `page` (optional) - The page number for pagination stuff\n- `limit` (optional) - How many users to fetch per page\n\n**Response:**\n```json\n{\n  \"users\": [...],\n  \"total\": 100\n}\n```\n\n### POST /api/users\n\nCreates a brand new user. You need to send a JSON body with the user data. The password will be hashed automatically.\n\n**Request Body:**\n- `username` (required) - The username for the new user\n- `email` (required) - The email address of the user\n- `password` (required) - The password (will be encrypted)\n\n### Error Codes\n\n- 400: You did something wrong\n- 401: You're not authenticated\n- 500: Something broke on our end",
+    "expected_principles": ["P1", "P4", "P10", "P11", "P14"],
+    "expected_keywords": ["read", "user", "create", "JSON", "authenticate", "error", "400", "401", "500"],
+    "forbidden_keywords": ["fetches", "should return", "stuff", "brand new", "You need to", "will be hashed automatically", "You did something wrong", "You're not", "Something broke on our end"],
+    "max_tokens": 800, "difficulty": "hard"
+  },
+  {
+    "id": "bench-034", "category": "composite",
+    "description": "Release notes with breaking changes",
+    "input": "## Release v2.0.0 — The Big One\n\nThis is a major release with lots of changes. We've completely overhauled the API, removed a bunch of deprecated stuff, and made everything way faster.\n\n### BREAKING CHANGES\n\n- The old `UserService.create()` method was removed. Use `UserService.register()` now.\n- The config file format changed from JSON to YAML. Old configs won't work anymore.\n- Docker the application using the new Dockerfile. The old one is gone.\n\n### New Features\n\n- Added support for WebSocket connections (real-time stuff!)\n- New admin dashboard with tons of cool widgets\n- Automated deployment pipeline that handles everything for you\n\n### Bug Fixes\n\n- Fixed that annoying bug where the app would crash randomly\n- The login page doesn't look ugly anymore\n- Various other fixes and improvements\n\n### Migration Guide\n\nTo upgrade from v1.x, you need to:\n1. Update your config files to YAML format\n2. Change all `UserService.create()` calls to `UserService.register()`\n3. Rebuild your Docker containers with the new Dockerfile\n4. Test everything thoroughly before deploying to production",
+    "expected_principles": ["P1", "P7", "P10", "P4", "P14"],
+    "expected_keywords": ["release", "BREAKING", "migrate", "update", "config", "Docker", "container", "register"],
+    "forbidden_keywords": ["The Big One", "lots of", "overhauled", "bunch of", "way faster", "won't work anymore", "Docker the", "stuff", "tons of", "cool", "handles everything for you", "annoying bug", "crash randomly", "doesn't look ugly anymore", "Various other"],
+    "max_tokens": 800, "difficulty": "hard"
+  },
+  {
+    "id": "bench-035", "category": "composite",
+    "description": "Code review comment thread",
+    "input": "@dev-team I looked at the PR and here's my feedback:\n\n1. The `processData` function is way too long. It does a bunch of things and should be split into smaller functions.\n\n2. You're using `var` instead of `const/let` everywhere. This is not good practice.\n\n3. The error handling is kind of messy. You're catching errors but not doing anything useful with them.\n\n4. I think we should add some tests for this because if something breaks it'll be really bad.\n\n5. The variable names could be better. `x`, `y`, `tmp` aren't very descriptive.\n\nOverall it looks okay but needs some work before we can merge it.",
+    "expected_principles": ["P1", "P10", "P4", "P14", "P8"],
+    "expected_keywords": ["review", "function", "split", "const", "let", "error", "test", "variable", "merge"],
+    "forbidden_keywords": ["way too long", "bunch of", "should be", "not good practice", "kind of messy", "I think", "really bad", "could be better", "aren't very", "looks okay", "needs some work"],
+    "max_tokens": 600, "difficulty": "hard"
+  }
+]

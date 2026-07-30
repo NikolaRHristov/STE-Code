@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bench-044",
+    "category": "gen_api_doc",
+    "description": "Document a simple GET endpoint",
+    "prompt": "Document this REST API endpoint using STE-Code principles. Use approved verbs (read/create/update/delete). Include parameters, response format, and error codes:\n\n```\nGET /api/users/:id\nReturns user profile data for the given ID.\n```\n\nWrite full API documentation in markdown.",
+    "expected_principles": ["P1", "P11", "P4"],
+    "expected_keywords": ["GET", "/api/users/:id", "Parameters", "Response", "Error", "read", "return"],
+    "forbidden_keywords": ["fetch", "get", "stuff", "utilize", "should return"],
+    "required_patterns": [],
+    "max_tokens": 400,
+    "difficulty": "easy"
+  },
+  {
+    "id": "bench-045",
+    "category": "gen_api_doc",
+    "description": "Document a POST endpoint with request body",
+    "prompt": "Document this API endpoint using STE-Code approved terms. Use severity markers where appropriate:\n\n```\nPOST /api/users\nCreates a new user account. Requires username, email, and password in the request body.\nReturns the created user object with a 201 status code.\n```\n\nWrite full documentation with request/response schemas.",
+    "expected_principles": ["P1", "P11", "P4"],
+    "expected_keywords": ["POST", "/api/users", "create", "Request Body", "Response", "201", "username", "email"],
+    "forbidden_keywords": ["fetch", "utilize", "stuff", "should be provided", "makes a new"],
+    "required_patterns": [],
+    "max_tokens": 500,
+    "difficulty": "medium"
+  },
+  {
+    "id": "bench-046",
+    "category": "gen_api_doc",
+    "description": "Document a DELETE endpoint with error states",
+    "prompt": "Document this API endpoint with full error documentation using STE-Code. Use the synonym table for verbs:\n\n```\nDELETE /api/users/:id\nRemoves a user account permanently. Requires admin authentication.\nReturns 204 on success, 403 if not admin, 404 if user not found.\n```\n\nWrite comprehensive API documentation.",
+    "expected_principles": ["P1", "P11", "P3", "P14"],
+    "expected_keywords": ["DELETE", "/api/users/:id", "remove", "204", "403", "404", "authenticate", "admin"],
+    "forbidden_keywords": ["fetch", "get rid of", "stuff", "utilize", "should be", "removes"],
+    "required_patterns": [],
+    "max_tokens": 450,
+    "difficulty": "medium"
+  },
+  {
+    "id": "bench-047",
+    "category": "gen_api_doc",
+    "description": "Document a full CRUD API surface",
+    "prompt": "Write STE-Code compliant API documentation for this user management service:\n\n```\nGET    /api/users       — List all users (paginated)\nPOST   /api/users       — Create a new user\nGET    /api/users/:id   — Get a single user\nPUT    /api/users/:id   — Update an existing user\nDELETE /api/users/:id   — Delete a user\n```\n\nInclude: endpoint descriptions, parameters, request/response formats, error codes, authentication requirements.",
+    "expected_principles": ["P1", "P11", "P4", "P14"],
+    "expected_keywords": ["GET", "POST", "PUT", "DELETE", "read", "create", "update", "remove", "Parameters", "Response", "Error", "authenticate"],
+    "forbidden_keywords": ["fetch", "get", "stuff", "utilize", "modify", "should", "basically"],
+    "required_patterns": ["GET", "POST", "PUT", "DELETE"],
+    "max_tokens": 800,
+    "difficulty": "hard"
+  }
+]

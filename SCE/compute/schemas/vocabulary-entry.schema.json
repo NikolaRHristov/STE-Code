@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/NikolaRHristov/Manual/SCE/compute/schemas/vocabulary-entry.schema.json",
+  "title": "STE-Code Vocabulary Entry",
+  "description": "Validates a single entry in SCE/data/vocabulary/*.json",
+  "type": "object",
+  "required": ["term", "type", "category-id", "domain", "approved"],
+  "properties": {
+    "term": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "enum": ["noun", "verb", "adjective", "preposition", "keyword"] },
+    "category-id": { "type": ["integer", "null"], "minimum": 1 },
+    "domain": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "approved": { "type": "boolean" },
+    "source": { "type": "string", "description": "Rule ID that governs this term e.g. rule-1.1" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,103 @@
+{
+  "benchmark_id": "ste-code-v1.0.0",
+  "timestamp": "2026-07-30T00:49:58Z",
+  "model": "deepseek-v4-pro",
+  "total_tests": 35,
+  "passed": 35,
+  "failed": 0,
+  "pass_rate_pct": 100.0,
+  "aggregates": {
+    "avg_correctness": 0.945,
+    "min_correctness": 0.7,
+    "max_correctness": 1.0,
+    "avg_latency_ms": 65329,
+    "min_latency_ms": 65086,
+    "max_latency_ms": 65362,
+    "avg_token_input": 50,
+    "avg_token_output": 50,
+    "total_tokens_input": 1753,
+    "total_tokens_output": 1742
+  },
+  "by_category": {
+    "api_doc": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.834,
+      "avg_latency_ms": 65360
+    },
+    "changelog": {
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "avg_correctness": 1.0,
+      "avg_latency_ms": 65314
+    },
+    "comment": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.92,
+      "avg_latency_ms": 65326
+    },
+    "commit": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.94,
+      "avg_latency_ms": 65351
+    },
+    "composite": {
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "avg_correctness": 0.992,
+      "avg_latency_ms": 65240
+    },
+    "config": {
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "avg_correctness": 0.977,
+      "avg_latency_ms": 65307
+    },
+    "error": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.954,
+      "avg_latency_ms": 65340
+    },
+    "readme": {
+      "passed": 5,
+      "failed": 0,
+      "total": 5,
+      "avg_correctness": 0.986,
+      "avg_latency_ms": 65361
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "passed": 12,
+      "failed": 0,
+      "total": 12,
+      "avg_correctness": 0.914
+    },
+    "medium": {
+      "passed": 13,
+      "failed": 0,
+      "total": 13,
+      "avg_correctness": 0.965
+    },
+    "hard": {
+      "passed": 10,
+      "failed": 0,
+      "total": 10,
+      "avg_correctness": 0.956
+    }
+  },
+  "failures": [],
+  "recommendations": [
+    "Latency above 5s average \u2014 consider flash model for simple cases"
+  ]
+}

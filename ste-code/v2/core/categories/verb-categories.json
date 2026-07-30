@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../compute/schemas/verb-categories.schema.json",
+  "version": "1.0.0",
+  "source": "ASD-STE100 Issue 9, September 2025 — adapted to code domain",
+  "categories": [
+    {
+      "id": 1,
+      "name": "Development Operations",
+      "domain": ["code"],
+      "approved": ["build", "compile", "test", "lint", "format", "commit", "push", "deploy", "rollback", "release", "tag", "branch", "merge", "rebase", "diff", "patch", "scaffold", "generate", "eject", "install", "uninstall", "upgrade", "run", "start", "stop", "restart", "reload", "watch", "debug", "profile", "benchmark"]
+    },
+    {
+      "id": 2,
+      "name": "Data Operations",
+      "domain": ["code"],
+      "approved": ["read", "write", "serialize", "deserialize", "parse", "encode", "decode", "query", "insert", "update", "delete", "migrate", "seed", "index", "aggregate", "filter", "map", "reduce", "sort", "paginate", "cache", "invalidate", "store", "load", "export", "import", "transform", "validate", "sanitize", "normalize"]
+    },
+    {
+      "id": 3,
+      "name": "Application Operations",
+      "domain": ["code"],
+      "approved": ["handle", "route", "authenticate", "authorize", "validate", "schedule", "dispatch", "render", "mount", "unmount", "hydrate", "initialize", "configure", "register", "inject", "resolve", "emit", "listen", "intercept", "middleware", "retry", "fallback", "abort", "cancel", "queue", "process", "execute", "evaluate", "compile", "transpile"]
+    },
+    {
+      "id": 4,
+      "name": "Communication Operations",
+      "domain": ["code"],
+      "approved": ["send", "receive", "publish", "subscribe", "stream", "poll", "broadcast", "connect", "disconnect", "ping", "fetch", "request", "respond", "redirect", "proxy", "forward", "relay", "acknowledge", "reject", "timeout", "handshake", "negotiate", "upgrade", "downgrade"]
+    }
+  ]
+}

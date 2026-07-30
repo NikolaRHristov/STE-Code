@@ -1,0 +1,16 @@
+TASK: Second-pass enrichment of the STE-Code extraction methodology. Read then enrich.
+
+INPUT: ste-code/artifacts/ste-code-extraction-methodology.txt
+OUTPUT: ste-code/artifacts/ste-code-extraction-methodology.txt (overwrite with enriched version)
+
+ENRICHMENT INSTRUCTIONS:
+1. PRESERVE the 6-pass pipeline and turn-by-turn protocol
+2. ADD a worked example for each turn (Turns 1-6) showing input → processing → output
+3. ADD a "State Machine Diagram" as a Mermaid flowchart showing all 6 passes with transitions
+4. EXPAND the 5 structural extraction types with concrete TypeScript/JavaScript examples
+5. ADD a "Failure Recovery" section: what to do when a pass fails (retry, escalate, skip)
+6. ADD a "Performance Benchmarks" section: expected tokens per pass, time per document type
+7. ADD a "Comparison Table" showing how STE's original 6-pass pipeline maps to STE-Code's adaptation
+8. ENSURE: deepseek-v4-pro, all rule references accurate
+
+Output ONLY the enriched markdown file. No commentary.

@@ -1,0 +1,1751 @@
+{
+  "benchmark_id": "ste-code-v1.0.0",
+  "timestamp": "2026-07-30T01:02:08Z",
+  "model": "deepseek-v4-pro",
+  "total_tests": 59,
+  "passed": 7,
+  "failed": 52,
+  "pass_rate_pct": 11.9,
+  "aggregates": {
+    "avg_correctness": 0.471,
+    "min_correctness": 0.13,
+    "max_correctness": 1.0,
+    "avg_latency_ms": 95668,
+    "min_latency_ms": 95140,
+    "max_latency_ms": 95765,
+    "avg_token_input": 56,
+    "avg_token_output": 157,
+    "total_tokens_input": 3299,
+    "total_tokens_output": 9239
+  },
+  "by_category": {
+    "api_doc": {
+      "passed": 0,
+      "failed": 5,
+      "total": 5,
+      "avg_correctness": 0.378,
+      "avg_latency_ms": 95721
+    },
+    "changelog": {
+      "passed": 0,
+      "failed": 3,
+      "total": 3,
+      "avg_correctness": 0.32,
+      "avg_latency_ms": 95647
+    },
+    "comment": {
+      "passed": 0,
+      "failed": 5,
+      "total": 5,
+      "avg_correctness": 0.42,
+      "avg_latency_ms": 95663
+    },
+    "commit": {
+      "passed": 1,
+      "failed": 4,
+      "total": 5,
+      "avg_correctness": 0.546,
+      "avg_latency_ms": 95701
+    },
+    "composite": {
+      "passed": 0,
+      "failed": 4,
+      "total": 4,
+      "avg_correctness": 0.448,
+      "avg_latency_ms": 95532
+    },
+    "config": {
+      "passed": 0,
+      "failed": 3,
+      "total": 3,
+      "avg_correctness": 0.48,
+      "avg_latency_ms": 95637
+    },
+    "error": {
+      "passed": 0,
+      "failed": 5,
+      "total": 5,
+      "avg_correctness": 0.314,
+      "avg_latency_ms": 95685
+    },
+    "gen_api_doc": {
+      "passed": 0,
+      "failed": 4,
+      "total": 4,
+      "avg_correctness": 0.507,
+      "avg_latency_ms": 95758
+    },
+    "gen_commit": {
+      "passed": 1,
+      "failed": 3,
+      "total": 4,
+      "avg_correctness": 0.407,
+      "avg_latency_ms": 95755
+    },
+    "gen_error": {
+      "passed": 1,
+      "failed": 3,
+      "total": 4,
+      "avg_correctness": 0.54,
+      "avg_latency_ms": 95749
+    },
+    "gen_function": {
+      "passed": 1,
+      "failed": 3,
+      "total": 4,
+      "avg_correctness": 0.595,
+      "avg_latency_ms": 95168
+    },
+    "gen_pr_review": {
+      "passed": 0,
+      "failed": 4,
+      "total": 4,
+      "avg_correctness": 0.55,
+      "avg_latency_ms": 95762
+    },
+    "gen_readme": {
+      "passed": 1,
+      "failed": 3,
+      "total": 4,
+      "avg_correctness": 0.573,
+      "avg_latency_ms": 95740
+    },
+    "readme": {
+      "passed": 2,
+      "failed": 3,
+      "total": 5,
+      "avg_correctness": 0.52,
+      "avg_latency_ms": 95764
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "passed": 0,
+      "failed": 18,
+      "total": 18,
+      "avg_correctness": 0.409
+    },
+    "medium": {
+      "passed": 4,
+      "failed": 21,
+      "total": 25,
+      "avg_correctness": 0.473
+    },
+    "hard": {
+      "passed": 3,
+      "failed": 13,
+      "total": 16,
+      "avg_correctness": 0.536
+    }
+  },
+  "failures": [
+    {
+      "test_id": "bench-001",
+      "category": "readme",
+      "description": "README introduction with jargon",
+      "input": "This library does a bunch of stuff and should be called with the user object to get everything set up properly.",
+      "test_type": "correction",
+      "output": "Here is the improved version:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P10"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P4"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.6,
+      "latency_ms": 95762,
+      "token_count_input": 27,
+      "token_count_output": 7,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P4",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-002",
+      "category": "readme",
+      "description": "README installation instructions",
+      "input": "To get started, you need to first install a bunch of dependencies and then run the setup script which will configure everything for you.",
+      "test_type": "correction",
+      "output": "Here is the improved version:\n\n**Original:**\nTo get started, you need to first install a bunch of dependencies and then run the setup script which will configure everything for you.\n\n**Improved:**\nTo get started, first install the required dependencies, then run the setup script to configure your environment.\n\n**What changed:**\n- \"a bunch of\" \u2192 \"the required\" (replaced informal phrasing with precise, professional language)\n- \"you need to first install\" \u2192 \"first install\" (removed unnecessary \"you need to\" for conciseness)\n- \"which will configure everything for you\" \u2192 \"to configure your environment\" (more specific and less hand-wavy; \"everything\" is vague)",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P10"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P5"
+      ],
+      "forbidden_keywords_found": [
+        "bunch",
+        "everything",
+        "you need to"
+      ],
+      "expected_keywords_found": [
+        "install",
+        "dependencies",
+        "run"
+      ],
+      "correctness_score": 0.4,
+      "latency_ms": 95765,
+      "token_count_input": 34,
+      "token_count_output": 165,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P5; Forbidden found: bunch, everything, you need to; Keywords OK: 3/3",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-004",
+      "category": "readme",
+      "description": "README architecture description with noun-verb confusion",
+      "input": "Docker the application first, then use Kubernetes to orchestrate the containers. The deploy process is fully automated.",
+      "test_type": "correction",
+      "output": "**Original:**\nDocker the application first, then use Kubernetes to orchestrate the containers. The deploy process is fully automated.\n\n**Improved:**\nContainerize the application with Docker, then use Kubernetes to orchestrate the containers. The entire deployment pipeline is fully automated.\n\n**Notes:** \"Docker\" is a product name and reads awkwardly as a verb in formal writing. \"Containerize\" is the proper term. \"Deploy process\" is acceptable, but \"deployment pipeline\" is more precise in a CI/CD context and pairs better with \"fully automated.\"",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P7",
+        "P13"
+      ],
+      "forbidden_keywords_found": [
+        "Docker the",
+        "the deploy"
+      ],
+      "expected_keywords_found": [
+        "containerize",
+        "Docker",
+        "Kubernetes",
+        "deploy"
+      ],
+      "correctness_score": 0.2,
+      "latency_ms": 95765,
+      "token_count_input": 29,
+      "token_count_output": 137,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P7, P13; Forbidden found: Docker the, the deploy; Keywords OK: 4/4",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-040",
+      "category": "gen_pr_review",
+      "description": "Review code with vague variable names",
+      "input": "Review this code and write feedback using STE-Code principles:\n\n```python\ndef process(x, y):\n    tmp = x + y\n    if tmp > 100:\n        return stuff(tmp)\n    return None\n```\n\nPoint out issues with clear, constructive language. No slang, no \"this is bad\" without explanation.",
+      "test_type": "generation",
+      "output": "**1. Undefined Symbol (Correctness \u2014 Critical)**\n\n`stuff` is called on line 4 but is neither defined in local scope nor imported. This will raise a `NameError` at runtime. If `stuff` is meant to be an external function, it must be imported. If it is meant to be defined elsewhere in the module, that definition is missing.\n\n**2. Non-Descriptive Identifiers (Expressiveness)**\n\nEvery name in this function is vague:\n\n- `process` \u2014 what is being processed? A verb alone gives no context.\n- `x`, `y` \u2014 what do these arguments represent?\n- `tmp` \u2014 what does this intermediate value mean? E.g., `total`, `sum_`, or `combined` would convey intent.\n- `stuff` \u2014 what transformation is being applied? A descriptive name documents the purpose.\n\n**3. Missing Type Annotations (Robustness / Tooling)**\n\nNo type hints are provided. Adding them would:\n\n- Allow static type checkers (mypy, pyright) to catch misuse.\n- Serve as inline documentation for callers.\n- Improve IDE autocomplete and refactoring support.\n\nSuggested signature shape: `def process(x: float, y: float) -> SomeType | None:`\n\n**4. Missing Docstring (Expressiveness)**\n\nThere is no explanation of behavior, preconditions, postconditions, or the meaning of the `100` threshold. A one-line summary and a note about the return value would significantly improve maintainability.\n\n**5. Magic Number (Maintainability)**\n\nThe literal `100` has no name or comment. It should be extracted to a named constant (e.g., `THRESHOLD = 100`) or made a parameter with a default value, so its purpose is clear and it can be changed in one place.\n\n**6. Explicit `return None` (Idiom \u2014 Minor)**\n\nReturning `None` explicitly is not wrong, but it is non-idiomatic in Python. When a function has no return value in some branch, the implicit `None` from falling off the end of the function is the standard convention. The explicit `return None` is only conventional when the function has early-exit branches and the author wants to make the `None` path obvious. In this two-branch case, the `if`/`return` guard already communicates the optional nature of the result, so the explicit `return None` is redundant noise.\n\n**7. No Input Validation (Robustness \u2014 Context-Dependent)**\n\nIf callers could pass non-numeric types, the `+` operator will raise a `TypeError` whose traceback may be confusing. Whether to add a guard depends on the calling context, but it is worth noting.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P10"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "stuff"
+      ],
+      "expected_keywords_found": [
+        "name",
+        "descriptive",
+        "function",
+        "return",
+        "suggest"
+      ],
+      "correctness_score": 0.63,
+      "latency_ms": 95764,
+      "token_count_input": 68,
+      "token_count_output": 601,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P14; Forbidden found: stuff; Keywords OK: 5/7",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-041",
+      "category": "gen_pr_review",
+      "description": "Review error handling with constructive feedback",
+      "input": "Review this error handling and write STE-Code compliant feedback:\n\n```javascript\ntry {\n    const data = await getStuffFromDB();\n    return data;\n} catch (e) {\n    console.log('something went wrong');\n    throw new Error('oops');\n}\n```\n\nFocus on: error message clarity, approved terms, actionable suggestions.",
+      "test_type": "generation",
+      "output": "## Code Under Review\n```javascript\ntry {\n    const data = await getStuffFromDB();\n    return data;\n} catch (e) {\n    console.log('something went wrong');\n    throw new Error('oops');\n}\n```",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P1"
+      ],
+      "expected_principles_missed": [
+        "P3",
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "stuff",
+        "something went wrong",
+        "oops"
+      ],
+      "expected_keywords_found": [
+        "error",
+        "log",
+        "catch"
+      ],
+      "correctness_score": 0.46,
+      "latency_ms": 95763,
+      "token_count_input": 77,
+      "token_count_output": 47,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P3, P14; Forbidden found: stuff, something went wrong, oops; Keywords OK: 3/7",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-042",
+      "category": "gen_pr_review",
+      "description": "Review naming and structure issues",
+      "input": "Review this React component for STE-Code compliance in its documentation and naming:\n\n```jsx\n// This component does the user stuff\nconst UserStuff = ({ data }) => {\n  // Fetch the things we need\n  const items = useMemo(() => data.map(d => d.item), [data]);\n  \n  // Show everything\n  return <div>{items.map(i => <p>{i}</p>)}</div>;\n};\n```\n\nWrite feedback on: naming, comments, clarity. Use approved terms.",
+      "test_type": "generation",
+      "output": "## STE-Code Compliance Review\n\n### 1. Naming \u2014 FAIL\n\n| Issue | Location | Detail |\n|-------|----------|--------|\n| Banned term | `UserStuff` | \"Stuff\" is a prohibited STE-Code term. Component names must be precise and domain-specific. |\n| Vague identifier | `data` | \"data\" is on the restricted list. Props must describe their contents, not their category. |\n| Generic alias | `items` | `items` doesn't clarify what the collection represents. Use a domain noun. |\n\n### 2. Comments \u2014 FAIL\n\n| Issue | Location | Detail |\n|-------|----------|--------|\n| Redundant restatement | `// This component does the user stuff` | Restates what the name already says. If the name were correct, this comment would be unnecessary. STE-Code forbids comments that paraphrase the identifier. |\n| Misleading | `// Fetch the things we need` | No fetch is occurring \u2014 it's a synchronous `useMemo`. The comment describes intent incorrectly. Plus \"things\" is a banned term. |\n| Low-value | `// Show everything` | Obvious from the `return` statement. Violates \"no captain-obvious comments\" rule. |\n\n### 3. Missing Documentation\n\n- **No JSDoc block.** Every exported component requires a `@param` description, `@returns` description, and a one-line summary of purpose.\n- **No prop shape defined.** The caller has no way to know what `data` should contain. STE-Code requires either TypeScript types or JSDoc `@typedef` for component props.\n\n### 4. Approved Rewrite (inline)\n\n```jsx\n/**\n * Renders a flat list of user display names extracted from\n * an array of user profile objects.\n *\n * @param {Object} props\n * @param {UserProfile[]} props.userProfiles - Array of user profile records.\n * @returns {JSX.Element} A container element listing each user's display name.\n */\nconst UserDisplayNameList = ({ userProfiles }) => {\n  const displayNames = useMemo(\n    () => userProfiles.map(profile => profile.displayName),\n    [userProfiles],\n  );\n\n  return (\n    <div>\n      {displayNames.map(displayName => (\n        <p key={displayName}>{displayName}</p>\n      ))}\n    </div>\n  );\n};\n```\n\n### Summary\n\n| Criterion | Status |\n|-----------|--------|\n| Naming | Non-compliant \u2014 \"stuff\", \"data\", \"items\" must be replaced with domain terms |\n| Comments | Non-compliant \u2014 all three comments violate STE-Code (redundant, misleading, or obvious) |\n| Documentation | Non-compliant \u2014 missing JSDoc and prop descriptions |\n| Clarity | Non-compliant \u2014 a reader cannot determine the component's contract without inspecting the implementation |",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P1",
+        "P10"
+      ],
+      "expected_principles_missed": [
+        "P11"
+      ],
+      "forbidden_keywords_found": [
+        "stuff",
+        "things",
+        "everything",
+        "does the"
+      ],
+      "expected_keywords_found": [
+        "component",
+        "name",
+        "comment",
+        "describe"
+      ],
+      "correctness_score": 0.63,
+      "latency_ms": 95762,
+      "token_count_input": 101,
+      "token_count_output": 625,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P11; Forbidden found: stuff, things, everything, does the; Keywords OK: 4/6",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-043",
+      "category": "gen_pr_review",
+      "description": "Full PR review with multiple file feedback",
+      "input": "Review this PR that adds a new API endpoint. Write comprehensive STE-Code compliant feedback covering:\n- Function naming and docstrings\n- Error handling clarity\n- API route naming\n\n```python\n@app.route('/api/v1/doStuff', methods=['POST'])\ndef handle_request():\n    \"\"\"Handles the request stuff\"\"\"\n    try:\n        data = request.get_json()\n        result = process_data(data)\n        return jsonify({'status': 'ok', 'data': result})\n    except:\n        return jsonify({'error': 'Something failed'}), 500\n```",
+      "test_type": "generation",
+      "output": "## PR Review: `/api/v1/doStuff` Endpoint\n\n### Summary\n\nThis endpoint has fundamental issues across all review dimensions. Below is a structured STE-Code compliant review covering naming, documentation, error handling, and API design.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P11"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P10",
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "stuff",
+        "doStuff"
+      ],
+      "expected_keywords_found": [
+        "endpoint",
+        "error"
+      ],
+      "correctness_score": 0.48,
+      "latency_ms": 95760,
+      "token_count_input": 126,
+      "token_count_output": 58,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10, P14; Forbidden found: stuff, doStuff; Keywords OK: 2/7",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-044",
+      "category": "gen_api_doc",
+      "description": "Document a simple GET endpoint",
+      "input": "Document this REST API endpoint using STE-Code principles. Use approved verbs (read/create/update/delete). Include parameters, response format, and error codes:\n\n```\nGET /api/users/:id\nReturns user profile data for the given ID.\n```\n\nWrite full API documentation in markdown.",
+      "test_type": "generation",
+      "output": "# API Documentation \u2014 User Profile",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P4"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P11"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.6,
+      "latency_ms": 95759,
+      "token_count_input": 68,
+      "token_count_output": 8,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P11",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-045",
+      "category": "gen_api_doc",
+      "description": "Document a POST endpoint with request body",
+      "input": "Document this API endpoint using STE-Code approved terms. Use severity markers where appropriate:\n\n```\nPOST /api/users\nCreates a new user account. Requires username, email, and password in the request body.\nReturns the created user object with a 201 status code.\n```\n\nWrite full documentation with request/response schemas.",
+      "test_type": "generation",
+      "output": "## POST /api/users \u2014 Create User\n\n### Summary\n\nCreates a new user account. On success the endpoint returns the newly\ncreated user resource with HTTP 201.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P11",
+        "P4"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "POST",
+        "/api/users",
+        "create",
+        "201"
+      ],
+      "correctness_score": 0.45,
+      "latency_ms": 95759,
+      "token_count_input": 80,
+      "token_count_output": 38,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P11, P4; Keywords OK: 4/8",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-046",
+      "category": "gen_api_doc",
+      "description": "Document a DELETE endpoint with error states",
+      "input": "Document this API endpoint with full error documentation using STE-Code. Use the synonym table for verbs:\n\n```\nDELETE /api/users/:id\nRemoves a user account permanently. Requires admin authentication.\nReturns 204 on success, 403 if not admin, 404 if user not found.\n```\n\nWrite comprehensive API documentation.",
+      "test_type": "generation",
+      "output": "# API Documentation: DELETE /api/users/:id",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P1"
+      ],
+      "expected_principles_missed": [
+        "P11",
+        "P3",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "DELETE",
+        "/api/users/:id"
+      ],
+      "correctness_score": 0.58,
+      "latency_ms": 95758,
+      "token_count_input": 77,
+      "token_count_output": 10,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P11, P3, P14; Keywords OK: 2/8",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-047",
+      "category": "gen_api_doc",
+      "description": "Document a full CRUD API surface",
+      "input": "Write STE-Code compliant API documentation for this user management service:\n\n```\nGET    /api/users       \u2014 List all users (paginated)\nPOST   /api/users       \u2014 Create a new user\nGET    /api/users/:id   \u2014 Get a single user\nPUT    /api/users/:id   \u2014 Update an existing user\nDELETE /api/users/:id   \u2014 Delete a user\n```\n\nInclude: endpoint descriptions, parameters, request/response formats, error codes, authentication requirements.",
+      "test_type": "generation",
+      "output": "# User Management API\n\n## Base URL\n\n```\nhttps://api.example.com/v1\n```\n\n## Authentication\n\nAll endpoints require an `Authorization` header with a valid Bearer token.\n\n```\nAuthorization: Bearer <token>\n```\n\nRequests without valid authentication receive `401 Unauthorized`.\nRequests with valid credentials but insufficient permissions receive `403 Forbidden`.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P11",
+        "P4",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.4,
+      "latency_ms": 95758,
+      "token_count_input": 107,
+      "token_count_output": 89,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P11, P4, P14",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-048",
+      "category": "gen_commit",
+      "description": "Write a commit message for a bug fix",
+      "input": "You fixed a bug where the login form crashed when users entered an empty password. The fix adds a validation check before processing. Write a conventional commit message using STE-Code approved terms.",
+      "test_type": "generation",
+      "output": "```\nfix(login): add empty-password guard clause to prevent form crash\n\nAdded an input-validation check that short-circuits the login handler\nwhen the password field is empty, preventing the downstream processing\npath from dereferencing a null or empty credential.\n```",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P4",
+        "P10"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "fix",
+        "login",
+        "password",
+        "empty",
+        "crash"
+      ],
+      "correctness_score": 0.28,
+      "latency_ms": 95757,
+      "token_count_input": 50,
+      "token_count_output": 66,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P4, P10; Keywords OK: 5/6; Patterns missed: ^(fix|feat|chore|refactor)(\\(.+\\))?: ",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-049",
+      "category": "gen_commit",
+      "description": "Write a breaking change commit message",
+      "input": "You removed the deprecated `UserService.create()` method. Users must migrate to `UserService.register()`. This is a breaking change. Write a conventional commit message with proper severity markers using STE-Code.",
+      "test_type": "generation",
+      "output": "Here's the conventional commit message:\n\n```\nfeat!(UserService): remove deprecated `create()` method\n\nBREAKING: `UserService.create()` has been removed.\nMigrate to `UserService.register()` instead.\n\n- Severity: CRITICAL \u2014 compilation/runtime failure for any caller\n  still using the removed method.\n- Target: UserService public API surface.\n- Event: method removal, previously deprecated.\n\nMigration guide:\n  Before:  await UserService.create({ email, password })\n  After:   await UserService.register({ email, password })\n\nThe `register()` method accepts the same parameters and returns an\nidentical shape; only the method name has changed.\n```\n\nThe three STE-Code anchors \u2014 Severity, Target, Event \u2014 make the impact unambiguous and tool-parseable. The `!` after `feat` satisfies conventional-commit breaking-change semantics, and the `BREAKING:` prefix in the footer gives additional emphasis. The migration snippet eliminates guesswork for anyone hitting this on upgrade.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4",
+        "P14",
+        "P1"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "BREAKING",
+        "remove",
+        "UserService.create",
+        "UserService.register",
+        "migrate"
+      ],
+      "correctness_score": 0.3,
+      "latency_ms": 95756,
+      "token_count_input": 53,
+      "token_count_output": 243,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4, P14, P1; Keywords OK: 5/5; Patterns missed: BREAKING CHANGE",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-051",
+      "category": "gen_commit",
+      "description": "Write a refactor commit with body",
+      "input": "You refactored the authentication middleware to use a strategy pattern instead of a monolithic `if/else` chain. The change improves testability and allows adding new auth methods without modifying existing code. Write a conventional commit with body using STE-Code.",
+      "test_type": "generation",
+      "output": "Here is the conventional commit with STE-Code body:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P4"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P8",
+        "P10"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.35,
+      "latency_ms": 95753,
+      "token_count_input": 66,
+      "token_count_output": 12,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P8, P10; Patterns missed: ^refactor(\\(.+\\))?: ",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-052",
+      "category": "gen_error",
+      "description": "Generate a validation error message",
+      "input": "Write a user-facing error message for when a form field is empty but required. Use STE-Code: clear, actionable, no slang. Include what went wrong and what to do.",
+      "test_type": "generation",
+      "output": "Here is a clear, actionable error message following STE-Code principles:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P3",
+        "P14",
+        "P4"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.4,
+      "latency_ms": 95751,
+      "token_count_input": 40,
+      "token_count_output": 18,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P3, P14, P4",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-053",
+      "category": "gen_error",
+      "description": "Generate a network error with recovery steps",
+      "input": "Write an error message for when the server cannot connect to the database. Include: what failed, why it matters, recovery steps. Use STE-Code approved terms and imperative mood for actions.",
+      "test_type": "generation",
+      "output": "Here is the database connection failure error message, formatted per STE-Code guidelines:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P3",
+        "P14",
+        "P4"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "database",
+        "connect",
+        "fail"
+      ],
+      "correctness_score": 0.44,
+      "latency_ms": 95750,
+      "token_count_input": 47,
+      "token_count_output": 22,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P3, P14, P4; Keywords OK: 3/7",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-054",
+      "category": "gen_error",
+      "description": "Generate a permission error",
+      "input": "Write a 403 Forbidden error message for when a user tries to access an admin-only endpoint. Use STE-Code: specific about what is denied, actionable about what to do. Include HTTP status code.",
+      "test_type": "generation",
+      "output": "Here is a 403 Forbidden error response for an admin-only endpoint, following STE-Code principles:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P3",
+        "P4",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "403",
+        "admin"
+      ],
+      "correctness_score": 0.43,
+      "latency_ms": 95749,
+      "token_count_input": 47,
+      "token_count_output": 24,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P3, P4, P14; Keywords OK: 2/6",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-056",
+      "category": "gen_readme",
+      "description": "Write an installation section",
+      "input": "Write an Installation section for a Python CLI tool called `ste-code-checker`. It requires Python 3.10+, uses pip for installation, and needs a config file. Use STE-Code: imperative mood, 20-word sentences, approved terms.",
+      "test_type": "generation",
+      "output": "## Installation\n\n### Prerequisites\n\nMake sure Python 3.10 or later is installed. Verify your Python version:\n\n```bash\npython --version\n```\n\nDownload Python from python.org if you do not have it.\n\n### Install the Package\n\nInstall ste-code-checker with pip:\n\n```bash\npip install ste-code-checker\n```\n\nThis command downloads the latest release. It also installs all required dependencies.\n\n### Set Up the Configuration File\n\nThe tool needs a configuration file to operate. Create the config file in your project root:\n\n```bash\nste-code-checker init\n```\n\nThis command writes `ste-config.yaml` to the current directory. You can modify this file for your project.\n\n### Verify the Installation\n\nConfirm the tool works correctly:\n\n```bash\nste-code-checker --version\n```\n\nThe command shows the installed version number. This output confirms a successful installation.\n\n### Troubleshooting\n\nIf the `ste-code-checker` command is not found, restart your terminal. Make sure the pip bin directory is in your `PATH`. Use `pip install --user ste-code-checker` if you do not have system permissions.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4",
+        "P1",
+        "P5",
+        "P10"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "Install",
+        "pip install",
+        "Python 3.10",
+        "config",
+        "require"
+      ],
+      "correctness_score": 0.5,
+      "latency_ms": 95745,
+      "token_count_input": 55,
+      "token_count_output": 270,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4, P1, P5, P10; Keywords OK: 5/5",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-057",
+      "category": "gen_readme",
+      "description": "Write a usage example section",
+      "input": "Write a Usage section for a code formatter tool. Show a command-line example and explain the output. Use STE-Code: code blocks are technical nouns (P5), imperative mood for instructions, no jargon.",
+      "test_type": "generation",
+      "output": "## Usage\n\nRun the formatter from the command line. Specify the input file and the desired output file.\n\n### Command-line example\n\n```\nformatter --input src/main.c --output src/main.c\n```\n\n### Explanation\n\nThe command above replaces the original file with a formatted copy.\n\n1.  **Input**. The `--input` flag tells the tool which file to read. Provide the path to the source code file.\n2.  **Output**. The `--output` flag tells the tool where to write the result. Use the same path as the input file to overwrite it. Use a different path to create a new file.\n3.  **Result**. The tool reads `src/main.c`, formats its contents, and writes the formatted code back to the same file.\n\n### Other flags\n\n| Flag | Purpose |\n|---|---|\n| `--input` | Path to the source file to format. |\n| `--output` | Path where the formatted file is written. |\n| `--check` | Report if the file needs formatting. Do not change the file. |\n| `--style` | Path to a custom style configuration file. |\n| `--indent` | Number of spaces per indentation level. Default: 4. |\n| `--line-width` | Maximum characters per line. Default: 100. |",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4",
+        "P5",
+        "P10"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "```",
+        "command",
+        "format",
+        "output",
+        "example",
+        "run"
+      ],
+      "correctness_score": 0.5,
+      "latency_ms": 95742,
+      "token_count_input": 49,
+      "token_count_output": 276,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4, P5, P10; Keywords OK: 6/6",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-059",
+      "category": "gen_readme",
+      "description": "Write a complete mini-README",
+      "input": "Write a complete README for a small open-source library called `validate-json`. It validates JSON against a schema, supports custom rules, and has a CLI and programmatic API. Include: description, install, usage, contributing. Use STE-Code throughout.",
+      "test_type": "generation",
+      "output": "# validate-json\n\nA lightweight JSON schema validator with custom rule support, CLI interface, and programmatic API.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P5",
+        "P8"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P4",
+        "P10",
+        "P11"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "validate",
+        "JSON",
+        "schema",
+        "CLI",
+        "API"
+      ],
+      "correctness_score": 0.59,
+      "latency_ms": 95735,
+      "token_count_input": 62,
+      "token_count_output": 28,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P4, P10, P11; Keywords OK: 5/8; Patterns missed: Usage",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-006",
+      "category": "api_doc",
+      "description": "Function docstring with ambiguous language",
+      "input": "This function does the authentication thing and returns a token if everything goes well. It might throw an error if something goes wrong.",
+      "test_type": "correction",
+      "output": "Here's the improved version:\n\n**Original:**\n> This function does the authentication thing and returns a token if everything goes well. It might throw an error if something goes wrong.\n\n**Improved:**\n\nAuthenticates the caller and returns a token on success. Throws an error on failure.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P3",
+        "P10"
+      ],
+      "forbidden_keywords_found": [
+        "does the",
+        "thing",
+        "might",
+        "something goes wrong",
+        "everything goes well"
+      ],
+      "expected_keywords_found": [
+        "authenticate",
+        "token",
+        "return",
+        "error"
+      ],
+      "correctness_score": 0.2,
+      "latency_ms": 95732,
+      "token_count_input": 34,
+      "token_count_output": 71,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P3, P10; Forbidden found: does the, thing, might, something goes wrong, everything goes well; Keywords OK: 4/4",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-007",
+      "category": "api_doc",
+      "description": "API parameter description with passive voice",
+      "input": "The userId parameter needs to be provided and it should be a valid UUID. The return value will be an object that contains the user data.",
+      "test_type": "correction",
+      "output": "Here is the improved version:\n\nThe `userId` parameter is required and must be a valid UUID. Returns an object containing the user data.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4",
+        "P2"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "userId",
+        "UUID",
+        "return",
+        "object",
+        "user data"
+      ],
+      "correctness_score": 0.5,
+      "latency_ms": 95725,
+      "token_count_input": 34,
+      "token_count_output": 33,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4, P2; Keywords OK: 5/5",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-008",
+      "category": "api_doc",
+      "description": "API endpoint description with synonym drift",
+      "input": "GET /api/users \u2014 fetches all users. POST /api/users \u2014 creates a new user. PUT /api/users/:id \u2014 modifies an existing user. DELETE /api/users/:id \u2014 removes a user.",
+      "test_type": "correction",
+      "output": "Here is the improved version:\n\n**GET /api/users** \u2014 Retrieves all users.\n\n**POST /api/users** \u2014 Creates a new user.\n\n**PUT /api/users/:id** \u2014 Replaces an existing user identified by `:id`.\n\n**DELETE /api/users/:id** \u2014 Deletes the user identified by `:id`.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P11"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "create",
+        "delete",
+        "user"
+      ],
+      "correctness_score": 0.46,
+      "latency_ms": 95721,
+      "token_count_input": 40,
+      "token_count_output": 63,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P11; Keywords OK: 3/5",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-009",
+      "category": "api_doc",
+      "description": "Rate limit documentation with unclear severity",
+      "input": "WARNING: If you exceed 100 requests per minute, your API key will be temporarily disabled. CAUTION: Responses might be slow during peak hours. NOTE: You can increase your limit by contacting support.",
+      "test_type": "correction",
+      "output": "Here's the improved version:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.4,
+      "latency_ms": 95714,
+      "token_count_input": 49,
+      "token_count_output": 7,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-010",
+      "category": "api_doc",
+      "description": "Complex API reference with multiple violations",
+      "input": "The authenticateUser function handles user authentication and authorization. It takes a credentials object which contains the username and password, performs validation, and returns a JWT token that can be utilized for subsequent requests. Make sure to call this function before accessing any protected endpoints.",
+      "test_type": "correction",
+      "output": "The `authenticateUser` function performs user authentication and authorization. It accepts a credentials object containing a username and password, validates the credentials, and returns a JWT token for use in subsequent requests. Call this function before accessing any protected endpoints.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "forbidden_keywords_found": [
+        "subsequent",
+        "performs"
+      ],
+      "expected_keywords_found": [
+        "authenticate",
+        "credentials",
+        "JWT",
+        "token",
+        "validate"
+      ],
+      "correctness_score": 0.33,
+      "latency_ms": 95713,
+      "token_count_input": 78,
+      "token_count_output": 72,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P2, P5; Forbidden found: subsequent, performs; Keywords OK: 5/6",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-011",
+      "category": "commit",
+      "description": "Vague commit message",
+      "input": "fixed stuff",
+      "test_type": "correction",
+      "output": "The original text \"fixed stuff\" is vague and unprofessional. Here are improved alternatives depending on context:\n\n**General / status update:**\n- \"Resolved several issues\"\n- \"Applied fixes across the codebase\"\n- \"Addressed outstanding defects\"\n\n**Git commit message:**\n- \"fix: resolve multiple issues\"\n- \"fix: apply miscellaneous corrections\"\n\n**Changelog entry:**\n- \"Fixed various bugs and stability issues\"\n- \"Miscellaneous bug fixes and improvements\"\n\n**More specific (if you know what was fixed):**\n- \"Fixed (what) by (how)\"\n- \"Resolved an issue where (symptom) caused by (root cause)\"\n\nThe key improvements: replace vague \"stuff\" with a concrete noun (issues, defects, bugs), and pair it with a precise verb (resolved, addressed, corrected).",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P10",
+        "P4"
+      ],
+      "expected_principles_missed": [
+        "P1"
+      ],
+      "forbidden_keywords_found": [
+        "stuff"
+      ],
+      "expected_keywords_found": [
+        "fix"
+      ],
+      "correctness_score": 0.6,
+      "latency_ms": 95708,
+      "token_count_input": 2,
+      "token_count_output": 186,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1; Forbidden found: stuff; Keywords OK: 1/1",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-012",
+      "category": "commit",
+      "description": "Commit with passive voice and ambiguity",
+      "input": "Changes were made to the authentication module to make it work better",
+      "test_type": "correction",
+      "output": "Here is the improved text:\n\n**Original:**\n> Changes were made to the authentication module to make it work better\n\n**Improved:**\n> The authentication module was updated to improve reliability and performance.\n\nIf you have more detail about what specifically was improved (e.g. faster login, fewer errors, better session handling), it would be even stronger, for example:\n\n> The authentication module was refactored to reduce login latency and fix intermittent session timeouts.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4",
+        "P1"
+      ],
+      "forbidden_keywords_found": [
+        "were made",
+        "make it work better"
+      ],
+      "expected_keywords_found": [
+        "update",
+        "authentication",
+        "module"
+      ],
+      "correctness_score": 0.2,
+      "latency_ms": 95704,
+      "token_count_input": 17,
+      "token_count_output": 119,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4, P1; Forbidden found: were made, make it work better; Keywords OK: 3/3",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-014",
+      "category": "commit",
+      "description": "Breaking change without severity marker",
+      "input": "chore: updated the API to use v2 endpoints, old ones removed",
+      "test_type": "correction",
+      "output": "Improved version:\n\n**chore: migrate API calls to v2 endpoints; remove deprecated v1 endpoints**\n\nThis is more precise (\"migrate API calls\" clarifies the action), uses standard technical terminology (\"deprecated\" instead of \"old ones\"), and makes clear both halves of the change: adoption of v2 and removal of v1.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "API",
+        "v2",
+        "remove"
+      ],
+      "correctness_score": 0.48,
+      "latency_ms": 95697,
+      "token_count_input": 15,
+      "token_count_output": 78,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4; Keywords OK: 3/4",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-015",
+      "category": "commit",
+      "description": "Multi-paragraph commit with jargon",
+      "input": "refactor: overhauled the entire data layer\n\nSwitched from MongoDB to PostgreSQL because Mongo was being flaky. Also cleaned up a ton of legacy code that was doing weird stuff with the connection pool.",
+      "test_type": "correction",
+      "output": "```\nrefactor: overhaul the entire data layer\n\nMigrate from MongoDB to PostgreSQL to resolve intermittent connection\ninstability. Remove legacy connection-pool management code and replace\nit with a standard pooled driver interface.\n```",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P8"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P10"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "migrate",
+        "MongoDB",
+        "PostgreSQL"
+      ],
+      "correctness_score": 0.68,
+      "latency_ms": 95695,
+      "token_count_input": 50,
+      "token_count_output": 58,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10; Keywords OK: 3/4",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-016",
+      "category": "error",
+      "description": "Cryptic error message",
+      "input": "Error: Something went wrong",
+      "test_type": "correction",
+      "output": "Here is the original text followed by an improved version:\n\n**Original:**\nError: Something went wrong\n\n**Improved:**\nError: An unexpected error occurred. Please try again or contact support if the issue persists.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P3",
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "Something went wrong"
+      ],
+      "expected_keywords_found": [
+        "Error"
+      ],
+      "correctness_score": 0.13,
+      "latency_ms": 95692,
+      "token_count_input": 6,
+      "token_count_output": 53,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P3, P14; Forbidden found: Something went wrong; Keywords OK: 1/3",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-017",
+      "category": "error",
+      "description": "Error with ambiguous pronoun",
+      "input": "TypeError: Cannot read property 'name' of undefined. This usually happens when it is not properly initialized.",
+      "test_type": "correction",
+      "output": "Here is the improved text:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P3"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.4,
+      "latency_ms": 95690,
+      "token_count_input": 27,
+      "token_count_output": 6,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P3",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-018",
+      "category": "error",
+      "description": "HTTP error without clear action",
+      "input": "500 Internal Server Error \u2014 please try again later",
+      "test_type": "correction",
+      "output": "Here's the improved version:\n\n**500 Internal Server Error \u2014 Please try again later.**\n\nChanges:\n- Capitalized \"Please\"\n- Added a period at the end for a complete, professional sentence\n\nAlternatively, if you want a slightly warmer tone:\n\n**500 Internal Server Error \u2014 Something went wrong on our end. Please try again later.**\n\nOr, if conciseness is the priority, the original with just the capitalization fix is ideal.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "please try again later"
+      ],
+      "expected_keywords_found": [
+        "500",
+        "Internal Server Error"
+      ],
+      "correctness_score": 0.14,
+      "latency_ms": 95684,
+      "token_count_input": 12,
+      "token_count_output": 104,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P14; Forbidden found: please try again later; Keywords OK: 2/5",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-019",
+      "category": "error",
+      "description": "Database error with jargon",
+      "input": "MongoError: connection pool is exhausted, the server is probably overloaded or something",
+      "test_type": "correction",
+      "output": "Here is the improved version:\n\nMongoError: The connection pool is exhausted. The server may be overloaded, or the application may be holding connections open longer than expected.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P10"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "connection pool",
+        "exhausted",
+        "server",
+        "overloaded"
+      ],
+      "correctness_score": 0.5,
+      "latency_ms": 95681,
+      "token_count_input": 22,
+      "token_count_output": 44,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10; Keywords OK: 4/4",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-020",
+      "category": "error",
+      "description": "Stack trace with unclear root cause",
+      "input": "FATAL: Process exited with code 1\n\nError: Failed to connect to database at localhost:5432\n    at ConnectionPool.connect (pool.js:42)\n    at Database.initialize (db.js:18)\n\nThe database might not be running. Try starting it with npm run db:start.",
+      "test_type": "correction",
+      "output": "Here is the improved text:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P4",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.4,
+      "latency_ms": 95678,
+      "token_count_input": 61,
+      "token_count_output": 6,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P4, P14",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-021",
+      "category": "comment",
+      "description": "Inline comment with unnecessary words",
+      "input": "// This function does a bunch of stuff to get the user data",
+      "test_type": "correction",
+      "output": "Here are improved alternatives, ordered from concise to more detailed:\n\n**Minimal:**\n```\n// Retrieve user data from the data source.\n```\n\n**Descriptive:**\n```\n// Fetch and assemble user profile data, including account details, preferences, and permissions.\n```\n\n**Structured (JSDoc-style):**\n```\n/**\n * Retrieve the full user data object for the current session.\n *\n * Pulls account metadata, application preferences, and access permissions,\n * merging them into a single normalized response.\n */\n```\n\n**Go/standard-doc style:**\n```\n// GetUserData fetches and returns the complete user profile, combining account\n// information, stored preferences, and role-based permissions into a unified\n// structure suitable for downstream consumers.\n```\n\nPick the style that matches the conventions already used in your codebase. Without seeing the function body I can't make it perfectly accurate \u2014 if you share the implementation, I can tailor it further.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P10",
+        "P1"
+      ],
+      "forbidden_keywords_found": [
+        "get"
+      ],
+      "expected_keywords_found": [
+        "read",
+        "user data"
+      ],
+      "correctness_score": 0.35,
+      "latency_ms": 95672,
+      "token_count_input": 14,
+      "token_count_output": 236,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P10, P1; Forbidden found: get; Keywords OK: 2/2",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-022",
+      "category": "comment",
+      "description": "TODO comment with placeholder",
+      "input": "// TODO: fix this later when we have time",
+      "test_type": "correction",
+      "output": "Here's the improved version:\n\n```\n// TODO: Fix the <describe what is broken / incomplete> \u2014 current behavior causes <symptom>.\n// Revisit when <condition / milestone>.\n```\n\nFor a concrete but generic fallback when the specifics aren't known:\n\n```\n// TODO: Address and resolve the underlying issue here.\n// Deferred due to time constraints; revisit in the next iteration.\n```\n\nThe original falls short because \"fix this later\" gives zero signal \u2014 no one knows what \"this\" is or what \"fixed\" looks like. A useful TODO names the problem and a condition for revisiting.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "TODO",
+        "fix"
+      ],
+      "correctness_score": 0.5,
+      "latency_ms": 95667,
+      "token_count_input": 10,
+      "token_count_output": 141,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P14; Keywords OK: 2/2",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-023",
+      "category": "comment",
+      "description": "Block comment with passive voice",
+      "input": "/* The authentication middleware is used to verify that the user has been properly authenticated. If the token is invalid, an error will be thrown. */",
+      "test_type": "correction",
+      "output": "The original is clear but slightly redundant. Here's a tighter version:\n\n```c\n/* Verifies the user is authenticated. Throws an error if the token is invalid. */\n```\n\nChanges:\n- Cut \"The authentication middleware is used to\" \u2014 that's self-evident from context (the comment sits on the middleware itself).\n- \"has been properly authenticated\" \u2192 \"is authenticated\" (active, shorter).\n- \"an error will be thrown\" \u2192 \"Throws an error\" (active voice, present tense).\n- Two short clauses instead of one compound sentence.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P4"
+      ],
+      "expected_principles_missed": [
+        "P1"
+      ],
+      "forbidden_keywords_found": [
+        "is used to",
+        "has been properly",
+        "will be thrown"
+      ],
+      "expected_keywords_found": [
+        "authenticate",
+        "middleware",
+        "token",
+        "error"
+      ],
+      "correctness_score": 0.48,
+      "latency_ms": 95664,
+      "token_count_input": 37,
+      "token_count_output": 128,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1; Forbidden found: is used to, has been properly, will be thrown; Keywords OK: 4/5",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-024",
+      "category": "comment",
+      "description": "JSDoc with synonym drift",
+      "input": "/**\n * Fetches user data from the database\n * @param {string} userId \u2014 The ID of the user to fetch\n * @returns {Object} The fetched user object\n */",
+      "test_type": "correction",
+      "output": "Here is the improved JSDoc:\n\n```\n/**\n * Retrieves a user record by its unique identifier.\n *\n * @param   {string}  userId  \u2014  The unique identifier of the user to retrieve.\n * @returns {Object|null}      The user record, or `null` if no matching user exists.\n */\n```\n\n**What changed and why:**\n\n- **Summary** \u2014 \"Fetches \u2026 from the database\" is an implementation detail. \"Retrieves a user record by its unique identifier\" describes *what* the function does without assuming a storage backend, making it more professional and future-proof.\n- **`@param`** \u2014 \"unique identifier\" is more precise than \"ID.\" Alignment whitespace keeps the tag block scannable.\n- **`@returns`** \u2014 `{Object}` alone tells the caller nothing about the contract for the not-found case. `{Object|null}` makes it explicit, and the description clarifies when each type is returned. This is the single most actionable improvement a consumer needs.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P11",
+        "P1"
+      ],
+      "forbidden_keywords_found": [
+        "Fetches",
+        "fetch"
+      ],
+      "expected_keywords_found": [
+        "user",
+        "database",
+        "userId",
+        "return"
+      ],
+      "correctness_score": 0.28,
+      "latency_ms": 95658,
+      "token_count_input": 36,
+      "token_count_output": 228,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P11, P1; Forbidden found: Fetches, fetch; Keywords OK: 4/5",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-025",
+      "category": "comment",
+      "description": "Complex function comment with multiple issues",
+      "input": "// This is a helper that basically does validation of the incoming request payload.\n// It checks a bunch of things like whether the required fields exist,\n// if the types are correct, and makes sure nothing weird slips through.\n// Returns true if everything is OK, otherwise throws.",
+      "test_type": "correction",
+      "output": "Here's the improved version:\n\n```\n// Validates the incoming request payload against the expected schema.\n// Checks that required fields are present, their types are correct, and\n// no unexpected or malformed data is accepted.\n// Returns true on success; throws on any validation failure.\n```",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P10",
+        "P4",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "validate",
+        "request",
+        "payload",
+        "field",
+        "type",
+        "return"
+      ],
+      "correctness_score": 0.49,
+      "latency_ms": 95654,
+      "token_count_input": 70,
+      "token_count_output": 72,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10, P4, P14; Keywords OK: 6/7",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-026",
+      "category": "changelog",
+      "description": "Vague changelog entry",
+      "input": "## 2.1.0 \u2014 Various improvements and bug fixes",
+      "test_type": "correction",
+      "output": "The text is already clear, professional, and follows standard changelog conventions. No changes needed.\n\nHere it is as-is:\n\n## 2.1.0 \u2014 Various improvements and bug fixes",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "Various improvements"
+      ],
+      "expected_keywords_found": [
+        "fix"
+      ],
+      "correctness_score": 0.13,
+      "latency_ms": 95651,
+      "token_count_input": 11,
+      "token_count_output": 42,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P14; Forbidden found: Various improvements; Keywords OK: 1/4",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-027",
+      "category": "changelog",
+      "description": "Breaking change without migration path",
+      "input": "## 3.0.0 \u2014 The old API was removed. Use the new one instead.",
+      "test_type": "correction",
+      "output": "Here are a few improved options, depending on the desired level of detail:\n\n**Minimal (keeping the same length):**\n## 3.0.0 \u2014 The legacy API has been removed. Please migrate to the new API.\n\n**Standard:**\n## 3.0.0 \u2014 **Breaking:** The legacy API is removed. Use the replacement API introduced in 2.x.\n\n**Detailed (best for a changelog):**\n## 3.0.0 \u2014 **Breaking:** The legacy API has been removed. All consumers must migrate to the new API. See the migration guide for details.\n\nPick whichever matches your project's changelog style. The key improvements are: replacing \"old\" with \"legacy\" (more professional), softening \"Use the new one instead\" to something less abrupt, and optionally flagging it explicitly as a breaking change given the major version bump.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4",
+        "P14"
+      ],
+      "forbidden_keywords_found": [
+        "the new one"
+      ],
+      "expected_keywords_found": [
+        "BREAKING",
+        "remove",
+        "API",
+        "migrate",
+        "replacement"
+      ],
+      "correctness_score": 0.35,
+      "latency_ms": 95647,
+      "token_count_input": 15,
+      "token_count_output": 189,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4, P14; Forbidden found: the new one; Keywords OK: 5/5",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-028",
+      "category": "changelog",
+      "description": "Full changelog with multiple issues",
+      "input": "## 1.5.0\n\n- Added a bunch of new features\n- Fixed some bugs that were causing problems\n- Made things faster\n- Deprecated the old config format (will be removed eventually)",
+      "test_type": "correction",
+      "output": "## 1.5.0\n\n- Added several new features\n- Fixed bugs that were affecting stability\n- Performance improvements\n- Deprecated the legacy configuration format (scheduled for removal in a future release)",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P10",
+        "P4",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "add",
+        "fix",
+        "improve",
+        "DEPRECATED",
+        "config"
+      ],
+      "correctness_score": 0.48,
+      "latency_ms": 95643,
+      "token_count_input": 42,
+      "token_count_output": 49,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10, P4, P14; Keywords OK: 5/6",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-029",
+      "category": "config",
+      "description": ".env file with unclear comments",
+      "input": "# This is the database URL, make sure it's correct\nDATABASE_URL=postgresql://localhost:5432/myapp\n# Secret key for JWT stuff\nJWT_SECRET=super-secret-key",
+      "test_type": "correction",
+      "output": "Here's the improved version:\n\n```\n# PostgreSQL connection string \u2014 update host, port, and database name to match your environment\nDATABASE_URL=postgresql://localhost:5432/myapp\n# Secret key used to sign and verify JSON Web Tokens; replace with a strong, randomly generated value\nJWT_SECRET=super-secret-key\n```",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P10"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "database",
+        "URL",
+        "PostgreSQL",
+        "JWT",
+        "secret",
+        "key"
+      ],
+      "correctness_score": 0.5,
+      "latency_ms": 95640,
+      "token_count_input": 38,
+      "token_count_output": 77,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10; Keywords OK: 6/6",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-030",
+      "category": "config",
+      "description": "Dockerfile with passive instructions",
+      "input": "# The application will be built using the Node.js image\nFROM node:18\n# Dependencies should be installed before copying the source code\nRUN npm install",
+      "test_type": "correction",
+      "output": "Here's the improved version:\n\n```\n# Use the official Node.js 18 image as the base\nFROM node:18\n\n# Copy package files and install dependencies (leverages Docker layer caching)\nCOPY package*.json ./\nRUN npm install\n```\n\nNotes:\n- The original `RUN npm install` would **fail** \u2014 no `package.json` exists in the image at that point. I added the missing `COPY package*.json ./` line to make it functional.\n- Tightened the comments: dropped the wordy future-tense phrasing (\"will be built using\") in favor of a direct imperative style standard in Dockerfiles.\n- The second comment now states *what* happens and *why*, not an aspirational remark about what \"should\" happen.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P4"
+      ],
+      "expected_principles_missed": [
+        "P1"
+      ],
+      "forbidden_keywords_found": [
+        "will be built"
+      ],
+      "expected_keywords_found": [
+        "Node.js",
+        "install",
+        "dependencies"
+      ],
+      "correctness_score": 0.61,
+      "latency_ms": 95637,
+      "token_count_input": 37,
+      "token_count_output": 166,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1; Forbidden found: will be built; Keywords OK: 3/5",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-031",
+      "category": "config",
+      "description": "CI config with ambiguous instructions",
+      "input": "# This job does the testing stuff\n# It runs all the tests and makes sure nothing is broken\n# If something fails, the build will be marked as red\ntest:\n  script: npm test",
+      "test_type": "correction",
+      "output": "Here is the improved version:\n\n```yaml\n# Runs the full test suite and reports any failures\ntest:\n  script: npm test\n```\n\nNotes on the changes:\n- Collapsed three redundant comment lines into one concise, professional statement.\n- Replaced the vague \"does the testing stuff\" with \"runs the full test suite.\"\n- Replaced the casual \"makes sure nothing is broken\" and colloquial \"marked as red\" with \"reports any failures,\" which is the standard CI terminology.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [
+        "P10"
+      ],
+      "expected_principles_missed": [
+        "P1",
+        "P14",
+        "P3"
+      ],
+      "forbidden_keywords_found": [
+        "stuff",
+        "makes sure",
+        "nothing is broken",
+        "marked as red"
+      ],
+      "expected_keywords_found": [
+        "test",
+        "run",
+        "fail"
+      ],
+      "correctness_score": 0.33,
+      "latency_ms": 95635,
+      "token_count_input": 42,
+      "token_count_output": 114,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P14, P3; Forbidden found: stuff, makes sure, nothing is broken, marked as red; Keywords OK: 3/4",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-032",
+      "category": "composite",
+      "description": "Full README section with mixed violations",
+      "input": "# MyCoolProject\n\nThis project is a really cool tool that helps developers do their work faster. It has a bunch of features that make development super easy.\n\n## Installation\n\nFirst, you need to install the dependencies. Run `npm install` to get everything set up.\n\n## Usage\n\n```javascript\nconst cool = require('my-cool-project');\nconst result = cool.doStuff({ option: true });\nconsole.log(result);\n```\n\n## Contributing\n\nIf you want to contribute, please make sure your code is clean and well-documented. We use ESLint and Prettier for code formatting.",
+      "test_type": "correction",
+      "output": "Here is an improved version of the text:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P10",
+        "P4",
+        "P8"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.4,
+      "latency_ms": 95631,
+      "token_count_input": 137,
+      "token_count_output": 10,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10, P4, P8",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-033",
+      "category": "composite",
+      "description": "API reference page with multiple violation types",
+      "input": "## User API\n\n### GET /api/users\n\nThis endpoint fetches all the users from the database. It should return a JSON array of user objects.\n\n**Parameters:**\n- `page` (optional) - The page number for pagination stuff\n- `limit` (optional) - How many users to fetch per page\n\n**Response:**\n```json\n{\n  \"users\": [...],\n  \"total\": 100\n}\n```\n\n### POST /api/users\n\nCreates a brand new user. You need to send a JSON body with the user data. The password will be hashed automatically.\n\n**Request Body:**\n- `username` (required) - The username for the new user\n- `email` (required) - The email address of the user\n- `password` (required) - The password (will be encrypted)\n\n### Error Codes\n\n- 400: You did something wrong\n- 401: You're not authenticated\n- 500: Something broke on our end",
+      "test_type": "correction",
+      "output": "## User API\n\n### GET /api/users\n\nRetrieves a paginated list of users from the database. Returns a JSON object containing an array of user objects and a total count.\n\n**Parameters:**\n- `page` (optional, integer) \u2014 The page number to retrieve. Defaults to `1`.\n- `limit` (optional, integer) \u2014 The maximum number of users per page. Defaults to a server-defined value.\n\n**Response:**\n```json\n{\n  \"users\": [...],\n  \"total\": 100\n}\n```\n\n### POST /api/users\n\nCreates a new user. The request body must be JSON, and the password is hashed before storage.\n\n**Request Body:**\n- `username` (required, string) \u2014 The desired username.\n- `email` (required, string) \u2014 The user's email address.\n- `password` (required, string) \u2014 The user's password (hashed server-side; never stored in plain text).\n\n**Response:** Returns the created user object with status `201 Created`.\n\n### Error Codes\n\n| Code | Meaning |\n|------|---------|\n| 400  | Bad Request \u2014 The request body is invalid or missing required fields. |\n| 401  | Unauthorized \u2014 Authentication is required and was not provided or is invalid. |\n| 409  | Conflict \u2014 A user with the given username or email already exists. |\n| 500  | Internal Server Error \u2014 An unexpected error occurred on the server. |",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P4",
+        "P10",
+        "P11",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "read",
+        "user",
+        "create",
+        "JSON",
+        "error",
+        "400",
+        "401",
+        "500"
+      ],
+      "correctness_score": 0.49,
+      "latency_ms": 95624,
+      "token_count_input": 193,
+      "token_count_output": 309,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P4, P10, P11, P14; Keywords OK: 8/9",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-034",
+      "category": "composite",
+      "description": "Release notes with breaking changes",
+      "input": "## Release v2.0.0 \u2014 The Big One\n\nThis is a major release with lots of changes. We've completely overhauled the API, removed a bunch of deprecated stuff, and made everything way faster.\n\n### BREAKING CHANGES\n\n- The old `UserService.create()` method was removed. Use `UserService.register()` now.\n- The config file format changed from JSON to YAML. Old configs won't work anymore.\n- Docker the application using the new Dockerfile. The old one is gone.\n\n### New Features\n\n- Added support for WebSocket connections (real-time stuff!)\n- New admin dashboard with tons of cool widgets\n- Automated deployment pipeline that handles everything for you\n\n### Bug Fixes\n\n- Fixed that annoying bug where the app would crash randomly\n- The login page doesn't look ugly anymore\n- Various other fixes and improvements\n\n### Migration Guide\n\nTo upgrade from v1.x, you need to:\n1. Update your config files to YAML format\n2. Change all `UserService.create()` calls to `UserService.register()`\n3. Rebuild your Docker containers with the new Dockerfile\n4. Test everything thoroughly before deploying to production",
+      "test_type": "correction",
+      "output": "## Release v2.0.0 \u2014 Major Release\n\nThis release introduces a comprehensive API overhaul, removes deprecated functionality, and delivers significant performance improvements across the board.\n\n### Breaking Changes\n\n- Removed `UserService.create()`. Use `UserService.register()` as the replacement.\n- Configuration format changed from JSON to YAML. Existing JSON-based configuration files are no longer supported and must be migrated.\n- Container images must be rebuilt using the updated Dockerfile. The previous Dockerfile has been removed.\n\n### New Features\n\n- Added WebSocket support for real-time communication.\n- Introduced an admin dashboard with customizable widgets for monitoring and management.\n- Added an automated deployment pipeline for streamlined CI/CD workflows.\n\n### Bug Fixes\n\n- Resolved an intermittent crash affecting application stability under load.\n- Redesigned the login page with improved layout and accessibility.\n- Applied various minor fixes and stability improvements throughout the codebase.\n\n### Migration Guide\n\nTo upgrade from v1.x:\n\n1. Convert your configuration files from JSON to YAML format.\n2. Replace all `UserService.create()` calls with `UserService.register()`.\n3. Rebuild your Docker containers using the new Dockerfile.\n4. Run a full test suite and validate behavior in a staging environment before deploying to production.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P7",
+        "P10",
+        "P4",
+        "P14"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "release",
+        "BREAKING",
+        "migrate",
+        "update",
+        "config",
+        "Docker",
+        "container",
+        "register"
+      ],
+      "correctness_score": 0.5,
+      "latency_ms": 95622,
+      "token_count_input": 272,
+      "token_count_output": 341,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P7, P10, P4, P14; Keywords OK: 8/8",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-035",
+      "category": "composite",
+      "description": "Code review comment thread",
+      "input": "@dev-team I looked at the PR and here's my feedback:\n\n1. The `processData` function is way too long. It does a bunch of things and should be split into smaller functions.\n\n2. You're using `var` instead of `const/let` everywhere. This is not good practice.\n\n3. The error handling is kind of messy. You're catching errors but not doing anything useful with them.\n\n4. I think we should add some tests for this because if something breaks it'll be really bad.\n\n5. The variable names could be better. `x`, `y`, `tmp` aren't very descriptive.\n\nOverall it looks okay but needs some work before we can merge it.",
+      "test_type": "correction",
+      "output": "Here's the improved version:",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P10",
+        "P4",
+        "P14",
+        "P8"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [],
+      "correctness_score": 0.4,
+      "latency_ms": 95252,
+      "token_count_input": 150,
+      "token_count_output": 7,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P10, P4, P14, P8",
+      "difficulty": "hard"
+    },
+    {
+      "test_id": "bench-036",
+      "category": "gen_function",
+      "description": "Write a function with docstring \u2014 validate email",
+      "input": "Write a Python function `validate_email(address)` that checks if an email address is valid. Include a complete docstring with Args and Returns sections. Use STE-Code principles: approved words, active voice, no jargon.",
+      "test_type": "generation",
+      "output": "Here is the function with its documentation:\n\n```python\nimport re\n\n# Pattern that matches typical email addresses.\n# It allows letters, digits, dots, hyphens, and underscores\n# before the @ sign, and a domain with at least one dot.\n_EMAIL_PATTERN = re.compile(\n    r'^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$'\n)\n\n\ndef validate_email(address):\n    \"\"\"Check if a string is a valid email address.\n\n    The function checks two things:\n    1. The address matches a standard email pattern\n       (local-part@domain.tld).\n    2. The address is not longer than 320 characters\n       (the maximum length defined by the email standard).\n\n    Args:\n        address (str): The email address to validate.\n\n    Returns:\n        bool:\n            True when the address is valid.\n            False when the address is not valid.\n\n    Examples:\n        >>> validate_email(\"user@example.com\")\n        True\n        >>> validate_email(\"invalid-email\")\n        False\n        >>> validate_email(\"\")\n        False\n\n    \"\"\"\n    if not isinstance(address, str):\n        return False\n\n    if len(address) > 320:\n        return False\n\n    return bool(_EMAIL_PATTERN.match(address))\n```\n\nKey design decisions:\n\n- **Pattern at module level** \u2014 the regex is compiled once and reused across calls. Avoids recompiling on every invocation.\n- **Length check before regex** \u2014 the 320-character limit comes from RFC 5321. Checking it early is cheaper than running the regex on excessively long strings.\n- **Type guard** \u2014 returns `False` for non-string input instead of raising an exception. This makes the function safe to use in data pipelines where unexpected types may appear.\n- **`bool()` wrapper** \u2014 converts the `re.Match` or `None` result into a plain `True`/`False`. The return type annotation is honored exactly.\n- **Docstring follows Google style** \u2014 short description, then numbered detail list, then Args/Returns blocks, then examples. The examples double as doctests.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P4",
+        "P10"
+      ],
+      "forbidden_keywords_found": [
+        "thing"
+      ],
+      "expected_keywords_found": [
+        "def validate_email",
+        "Args:",
+        "Returns:",
+        "address",
+        "check",
+        "valid",
+        "return"
+      ],
+      "correctness_score": 0.45,
+      "latency_ms": 95247,
+      "token_count_input": 54,
+      "token_count_output": 488,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P4, P10; Forbidden found: thing; Keywords OK: 7/7",
+      "difficulty": "easy"
+    },
+    {
+      "test_id": "bench-037",
+      "category": "gen_function",
+      "description": "Write a function that processes data with proper error handling",
+      "input": "Write a TypeScript function `processPayload(data: unknown)` that validates and transforms an API payload. Include JSDoc with @param and @returns. Use STE-Code: active voice, no slang, clear error descriptions.",
+      "test_type": "generation",
+      "output": "Here is the `processPayload` function with full JSDoc documentation:\n\n```typescript\n/**\n * Validates and transforms an incoming API payload into a normalized structure.\n *\n * The function performs three stages of processing:\n *  1. Guard \u2014 rejects null/undefined and non-object values immediately.\n *  2. Sanitization \u2014 strips unknown keys, coerces types, and applies defaults.\n *  3. Validation \u2014 returns a discriminated union so callers can inspect errors.\n *\n * @param data - The raw, untrusted input received from the API layer.  Must be\n *               an unknown type; the function narrows it internally.\n * @returns A result object.  On success the `ok` property is `true` and the\n *          `value` property holds the normalized {@link NormalizedPayload}.\n *          On failure `ok` is `false` and `errors` contains a human-readable\n *          message for each field that failed validation.\n *\n * @example\n * ```ts\n * const result = processPayload({ name: \"  Alice \", age: \"30\" });\n * if (result.ok) {\n *   console.log(result.value); // { name: \"Alice\", age: 30 }\n * } else {\n *   result.errors.forEach(e => console.error(e.field, e.message));\n * }\n * ```\n */\nfunction processPayload(data: unknown): ProcessResult {\n    // -- Stage 1: Structural guard ------------------------------------------------\n    if (data === null || data === undefined) {\n        return {\n            ok: false,\n            errors: [{ field: \"root\", message: \"Payload must not be null or undefined.\" }],\n        };\n    }\n\n    if (typeof data !== \"object\" || Array.isArray(data)) {\n        return {\n            ok: false,\n            errors: [{ field: \"root\", message: \"Payload must be a plain object, not an array or primitive.\" }],\n        };\n    }\n\n    const raw = data as Record<string, unknown>;\n    const errors: FieldError[] = [];\n\n    // -- Stage 2: Extract and coerce known fields ---------------------------------\n\n    const name = coerceTrimmedString(raw, \"name\", errors);         // required\n    const age = coercePositiveInteger(raw, \"age\", errors);         // required\n    const email = coerceTrimmedString(raw, \"email\", errors, true); // optional\n\n    // -- Stage 3: Return result ---------------------------------------------------\n    if (errors.length > 0) {\n        return { ok: false, errors };\n    }\n\n    return {\n        ok: true,\n        value: { name: name!, age: age!, email },\n    };\n}\n\n// ---------------------------------------------------------------------------\n// Types\n// ---------------------------------------------------------------------------\n\n/** A single field-level validation error. */\ninterface FieldError {\n    /** The dot-notation path to the field (e.g. \"name\" or \"address.city\"). */\n    field: string;\n    /** A clear, action-oriented description of what is wrong. */\n    message: string;\n}\n\n/** The payload shape returned on successful validation. */\ninterface NormalizedPayload {\n    /** The user's display name, trimmed of leading and trailing whitespace. */\n    name: string;\n    /** The user's age as a positive integer. */\n    age: number;\n    /** Optional contact email, trimmed.  `undefined` when omitted or empty. */\n    email?: string;\n}\n\n/** Discriminated result: either a valid payload or a list of field errors. */\ntype ProcessResult =\n    | { ok: true; value: NormalizedPayload }\n    | { ok: false; errors: FieldError[] };\n\n// ---------------------------------------------------------------------------\n// Internal helpers\n// ---------------------------------------------------------------------------\n\n/**\n * Extracts a trimmed string from the raw object.  Records an error when the\n * field is missing, not a string, or (if required) is empty after trimming.\n *\n * @param field - Key in the raw payload.\n * @param required - When `false`, missing/empty fields return `undefined`\n *                   without recording an error.\n */\nfunction coerceTrimmedString(\n    raw: Record<string, unknown>,\n    field: string,\n    errors: FieldError[],\n    required: boolean = true,\n): string | undefined {\n    const value = raw[field];\n\n    if (value === undefined || value === null) {\n        if (required) {\n            errors.push({ field, message: `Field \"${field}\" is required and must be a non-empty string.` });\n        }\n        return undefined;\n    }\n\n    if (typeof value !== \"string\") {\n        errors.push({ field, message: `Field \"${field}\" must be a string; received ${typeof value}.` });\n        return undefined;\n    }\n\n    const trimmed = value.trim();\n\n    if (required && trimmed.length === 0) {\n        errors.push({ field, message: `Field \"${field}\" must not be empty.` });\n        return undefined;\n    }\n\n    return trimmed;\n}\n\n/**\n * Extracts and coerces a positive integer from the raw object.  Accepts numeric\n * strings (e.g. `\"30\"`) but rejects floats, zero, and negative values.\n */\nfunction coercePositiveInteger(\n    raw: Record<string, unknown>,\n    field: string,\n    errors: FieldError[],\n): number | undefined {\n    const value = raw[field];\n\n    if (value === undefined || value === null) {\n        errors.push({ field, message: `Field \"${field}\" is required.` });\n        return undefined;\n    }\n\n    if (typeof value === \"number\") {\n        if (!Number.isFinite(value) || !Number.isInteger(value) || value <= 0) {\n            errors.push({ field, message: `Field \"${field}\" must be a positive integer.` });\n            return undefined;\n        }\n        return value;\n    }\n\n    if (typeof value === \"string\") {\n        const parsed = Number(value);\n        if (value.trim() === \"\" || !Number.isFinite(parsed) || !Number.isInteger(parsed) || parsed <= 0) {\n            errors.push({ field, message: `Field \"${field}\" must be a positive integer; received \"${value}\".` });\n            return undefined;\n        }\n        return parsed;\n    }\n\n    errors.push({ field, message: `Field \"${field}\" must be a number or numeric string; received ${typeof value}.` });\n    return undefined;\n}\n```\n\n**Key design decisions:**\n\n- **Return type is a discriminated union** \u2014 callers check `result.ok` and TypeScript narrows to either `result.value` or `result.errors` automatically. No try/catch required.\n- **Errors accumulate** \u2014 the function validates all fields before returning, so the consumer sees every problem in one round-trip instead of fixing errors one at a time.\n- **Active-voice messages** \u2014 every error tells the caller exactly what went wrong (`\"Field 'age' must be a positive integer\"`) rather than stating what the system did.\n- **Coercion is explicit** \u2014 string-to-number coercion is intentional and documented; unknown keys in the input object are silently dropped rather than passed through.\n- **Helpers are pure** \u2014 `coerceTrimmedString` and `coercePositiveInteger` accept the shared `errors` array and push into it, keeping the main function free of repetitive branching.",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P1",
+        "P3",
+        "P12"
+      ],
+      "forbidden_keywords_found": [],
+      "expected_keywords_found": [
+        "processPayload",
+        "@param",
+        "@returns",
+        "validate",
+        "transform",
+        "error"
+      ],
+      "correctness_score": 0.49,
+      "latency_ms": 95143,
+      "token_count_input": 52,
+      "token_count_output": 1714,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P1, P3, P12; Keywords OK: 6/7",
+      "difficulty": "medium"
+    },
+    {
+      "test_id": "bench-038",
+      "category": "gen_function",
+      "description": "Write an async function with clear error states documented",
+      "input": "Write a JavaScript async function `fetchUserData(userId)` that reads from an API. Document all error states in the JSDoc. Use STE-Code: one term per concept, no \"fetch\" \u2192 use \"read\", no passive voice.",
+      "test_type": "generation",
+      "output": "```js\n/**\n * Reads user data from the API for a given user ID.\n *\n * @async\n * @param {string|number} userId - Unique identifier of the user to read.\n * @returns {Promise<Object>} Resolves with the user data object when the API\n *   returns a successful response.\n *\n * @throws {TypeError} The `userId` argument is missing, null, or not a\n *   string or number.\n * @throws {RangeError} The `userId` argument is an empty string after\n *   trimming whitespace.\n * @throws {Error} The network request fails (DNS resolution failure,\n *   connection refused, or timeout). The original cause attaches as\n *   `error.cause`.\n * @throws {Error} The API responds with an HTTP status outside the 2xx\n *   range (4xx client error or 5xx server error). The error message\n *   includes the status code and status text; `error.status` carries the\n *   numeric status code, and `error.body` carries the raw response body\n *   string when available.\n * @throws {SyntaxError} The API response body is not valid JSON.\n */\nasync function fetchUserData(userId) {\n  if (userId == null) {\n    throw new TypeError(\n      \"userId is required and must be a string or number, received \" +\n        typeof userId\n    );\n  }\n\n  const coerced = String(userId).trim();\n  if (coerced === \"\") {\n    throw new RangeError(\"userId must not be an empty string\");\n  }\n\n  let response;\n  try {\n    response = await fetch(`https://api.example.com/users/${coerced}`, {\n      headers: { Accept: \"application/json\" },\n      signal: AbortSignal.timeout(10_000),\n    });\n  } catch (cause) {\n    throw new Error(\"Network request failed\", { cause });\n  }\n\n  if (!response.ok) {\n    const error = new Error(\n      `API returned ${response.status} ${response.statusText}`\n    );\n    error.status = response.status;\n    try {\n      error.body = await response.text();\n    } catch {\n      // Body read failed; continue without it.\n    }\n    throw error;\n  }\n\n  let data;\n  try {\n    data = await response.json();\n  } catch (cause) {\n    throw new SyntaxError(\"API response body is not valid JSON\", { cause });\n  }\n\n  return data;\n}\n```",
+      "compliance_summary": "",
+      "expected_principles_satisfied": [],
+      "expected_principles_missed": [
+        "P4",
+        "P11",
+        "P1"
+      ],
+      "forbidden_keywords_found": [
+        "fetch"
+      ],
+      "expected_keywords_found": [
+        "async function fetchUserData",
+        "@throws",
+        "userId",
+        "read",
+        "return",
+        "error",
+        "API"
+      ],
+      "correctness_score": 0.44,
+      "latency_ms": 95142,
+      "token_count_input": 50,
+      "token_count_output": 521,
+      "diff_ratio": 0.0,
+      "passed": false,
+      "notes": "Missed: P4, P11, P1; Forbidden found: fetch; Keywords OK: 7/7",
+      "difficulty": "medium"
+    }
+  ],
+  "recommendations": [
+    "System prompt needs improvement \u2014 avg correctness below 0.7",
+    "Latency above 5s average \u2014 consider flash model for simple cases",
+    "Category 'api_doc' underperforming (avg 0.378) \u2014 review test design or prompt coverage",
+    "Category 'changelog' underperforming (avg 0.32) \u2014 review test design or prompt coverage",
+    "Category 'comment' underperforming (avg 0.42) \u2014 review test design or prompt coverage",
+    "Category 'commit' underperforming (avg 0.546) \u2014 review test design or prompt coverage",
+    "Category 'composite' underperforming (avg 0.448) \u2014 review test design or prompt coverage",
+    "Category 'config' underperforming (avg 0.48) \u2014 review test design or prompt coverage",
+    "Category 'error' underperforming (avg 0.314) \u2014 review test design or prompt coverage",
+    "Category 'gen_api_doc' underperforming (avg 0.507) \u2014 review test design or prompt coverage",
+    "Category 'gen_commit' underperforming (avg 0.407) \u2014 review test design or prompt coverage",
+    "Category 'gen_error' underperforming (avg 0.54) \u2014 review test design or prompt coverage",
+    "Category 'gen_function' underperforming (avg 0.595) \u2014 review test design or prompt coverage",
+    "Category 'gen_pr_review' underperforming (avg 0.55) \u2014 review test design or prompt coverage",
+    "Category 'gen_readme' underperforming (avg 0.573) \u2014 review test design or prompt coverage",
+    "Category 'readme' underperforming (avg 0.52) \u2014 review test design or prompt coverage"
+  ]
+}

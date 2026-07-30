@@ -1,0 +1,47 @@
+[
+  {
+    "id": "bench-021", "category": "comment",
+    "description": "Inline comment with unnecessary words",
+    "input": "// This function does a bunch of stuff to get the user data",
+    "expected_principles": ["P10", "P1"],
+    "expected_keywords": ["read", "user data"],
+    "forbidden_keywords": ["does a bunch of stuff", "get"],
+    "max_tokens": 150, "difficulty": "easy"
+  },
+  {
+    "id": "bench-022", "category": "comment",
+    "description": "TODO comment with placeholder",
+    "input": "// TODO: fix this later when we have time",
+    "expected_principles": ["P1", "P14"],
+    "expected_keywords": ["TODO", "fix"],
+    "forbidden_keywords": ["when we have time"],
+    "max_tokens": 150, "difficulty": "easy"
+  },
+  {
+    "id": "bench-023", "category": "comment",
+    "description": "Block comment with passive voice",
+    "input": "/* The authentication middleware is used to verify that the user has been properly authenticated. If the token is invalid, an error will be thrown. */",
+    "expected_principles": ["P4", "P1"],
+    "expected_keywords": ["authenticate", "middleware", "verify", "token", "error"],
+    "forbidden_keywords": ["is used to", "has been properly", "will be thrown"],
+    "max_tokens": 250, "difficulty": "medium"
+  },
+  {
+    "id": "bench-024", "category": "comment",
+    "description": "JSDoc with synonym drift",
+    "input": "/**\n * Fetches user data from the database\n * @param {string} userId — The ID of the user to fetch\n * @returns {Object} The fetched user object\n */",
+    "expected_principles": ["P11", "P1"],
+    "expected_keywords": ["read", "user", "database", "userId", "return"],
+    "forbidden_keywords": ["Fetches", "fetch", "fetched"],
+    "max_tokens": 250, "difficulty": "medium"
+  },
+  {
+    "id": "bench-025", "category": "comment",
+    "description": "Complex function comment with multiple issues",
+    "input": "// This is a helper that basically does validation of the incoming request payload.\n// It checks a bunch of things like whether the required fields exist,\n// if the types are correct, and makes sure nothing weird slips through.\n// Returns true if everything is OK, otherwise throws.",
+    "expected_principles": ["P1", "P10", "P4", "P14"],
+    "expected_keywords": ["validate", "request", "payload", "field", "type", "return", "error"],
+    "forbidden_keywords": ["basically", "bunch of things", "weird", "slips through", "everything is OK", "makes sure"],
+    "max_tokens": 350, "difficulty": "hard"
+  }
+]

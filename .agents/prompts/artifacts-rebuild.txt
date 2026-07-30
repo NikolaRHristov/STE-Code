@@ -1,0 +1,28 @@
+TASK: Regenerate all 6 STE-Code artifact files from the freshly adapted, enriched content.
+
+Read ALL adapted files from ste-code/adapted/ (a-sec1-rule1.1.md through a-sec9-gr4.md). Then generate/overwrite these 6 files:
+
+1. ste-code/artifacts/ste-code-distilled-system-prompt.txt (~1,200 tokens)
+   — 14 core principles, synonym table, 19 categories, concise
+
+2. ste-code/artifacts/ste-code-self-reading-manual.txt (~7,000 tokens)  
+   — Full S0-S8 structure, all 53 rules with code-domain examples, 19 categories, quick reference
+
+3. ste-code/artifacts/ste-code-extraction-methodology.txt (~1,400 tokens)
+   — 6-pass pipeline, turn-by-turn protocol, integration points
+
+4. ste-code/artifacts/ste-code-example-turn.txt (~500 tokens)
+   — Single worked example: non-STE → STE-code with pass-by-pass breakdown
+
+5. ste-code/artifacts/ste-code-deployment-guide.txt (~1,800 tokens)
+   — Ollama, LM Studio, OpenAI, Claude, LangChain, CI/CD, editor integration
+
+6. ste-code/artifacts/README.md (~500 tokens)
+   — Overview, quick start, file listing, core rules
+
+RULES:
+- Every claim must reference specific adapted rule files
+- Every example must be code-domain (no aerospace)
+- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+- No fabrication — all content from adapted files
+- Output ONLY the 6 files. No commentary.

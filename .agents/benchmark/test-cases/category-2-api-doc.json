@@ -1,0 +1,47 @@
+[
+  {
+    "id": "bench-006", "category": "api_doc",
+    "description": "Function docstring with ambiguous language",
+    "input": "This function does the authentication thing and returns a token if everything goes well. It might throw an error if something goes wrong.",
+    "expected_principles": ["P1", "P3", "P10"],
+    "expected_keywords": ["authenticate", "token", "return", "error"],
+    "forbidden_keywords": ["does the", "thing", "might", "something goes wrong", "everything goes well"],
+    "max_tokens": 300, "difficulty": "easy"
+  },
+  {
+    "id": "bench-007", "category": "api_doc",
+    "description": "API parameter description with passive voice",
+    "input": "The userId parameter needs to be provided and it should be a valid UUID. The return value will be an object that contains the user data.",
+    "expected_principles": ["P4", "P2"],
+    "expected_keywords": ["userId", "UUID", "return", "object", "user data"],
+    "forbidden_keywords": ["needs to be", "should be", "will be"],
+    "max_tokens": 300, "difficulty": "easy"
+  },
+  {
+    "id": "bench-008", "category": "api_doc",
+    "description": "API endpoint description with synonym drift",
+    "input": "GET /api/users — fetches all users. POST /api/users — creates a new user. PUT /api/users/:id — modifies an existing user. DELETE /api/users/:id — removes a user.",
+    "expected_principles": ["P11"],
+    "expected_keywords": ["read", "create", "update", "delete", "user"],
+    "forbidden_keywords": ["fetches", "modifies", "removes"],
+    "max_tokens": 400, "difficulty": "medium"
+  },
+  {
+    "id": "bench-009", "category": "api_doc",
+    "description": "Rate limit documentation with unclear severity",
+    "input": "WARNING: If you exceed 100 requests per minute, your API key will be temporarily disabled. CAUTION: Responses might be slow during peak hours. NOTE: You can increase your limit by contacting support.",
+    "expected_principles": ["P4"],
+    "expected_keywords": ["BREAKING", "DEPRECATED", "NOTE", "100 requests", "rate limit"],
+    "forbidden_keywords": ["WARNING", "CAUTION", "might be"],
+    "max_tokens": 400, "difficulty": "medium"
+  },
+  {
+    "id": "bench-010", "category": "api_doc",
+    "description": "Complex API reference with multiple violations",
+    "input": "The authenticateUser function handles user authentication and authorization. It takes a credentials object which contains the username and password, performs validation, and returns a JWT token that can be utilized for subsequent requests. Make sure to call this function before accessing any protected endpoints.",
+    "expected_principles": ["P1", "P2", "P5"],
+    "expected_keywords": ["authenticate", "authorize", "credentials", "JWT", "token", "validate"],
+    "forbidden_keywords": ["utilized", "Make sure to", "subsequent", "performs"],
+    "max_tokens": 500, "difficulty": "hard"
+  }
+]

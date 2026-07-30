@@ -1,0 +1,60 @@
+# STE-Code Deployment Guide
+
+## Option A: Ollama Modelfile
+```
+FROM llama3.2
+SYSTEM '''
+You are STE-Code, a Simplified Technical English for Code documentation.
+[Full system prompt from ste-code-distilled-system-prompt.txt]
+'''
+PARAMETER temperature 0.3
+PARAMETER top_p 0.9
+```
+Then: `ollama create ste-code -f Modelfile`
+
+## Option B: LM Studio
+1. Download a model (llama3.2, mistral, etc.)
+2. In the chat interface, paste the distilled system prompt
+3. Save as preset "STE-Code"
+4. Set temperature to 0.3
+
+## Option C: Python + llama.cpp
+```python
+from llama_cpp import Llama
+
+llm = Llama(model_path="llama3.2.Q4_K_M.gguf")
+system_prompt = open("ste-code-distilled-system-prompt.txt").read()
+
+def ste_code_transform(text):
+    response = llm.create_chat_completion(
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"Transform to STE-Code:\n{text}"}
+        ],
+        temperature=0.3
+    )
+    return response["choices"][0]["message"]["content"]
+```
+
+## Option D: Full Conversation Export
+Export the entire conversation as additional context for the LLM:
+1. Run the self-reading manual through the model
+2. Follow the recursive protocol (S0 → S3 → S4 → S2)
+3. Process your code document turn by turn
+4. Export complete conversation as JSON for reproducibility
+
+## Token Budget
+| Component | Tokens |
+|-----------|--------|
+| System prompt | ~1,200 |
+| Self-reading manual | ~7,000 |
+| Per-turn state | ~500 |
+| Document chunk | ~2,000 |
+| **Total per turn** | ~10,700 |
+
+## Expected Output
+After processing, you get:
+- STE-Code compliant rewrite
+- Violation report with rule references
+- Before/after metrics
+- UML diagrams (Mermaid format)

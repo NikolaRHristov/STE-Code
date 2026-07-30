@@ -1,0 +1,54 @@
+# STE-Code Extraction Methodology
+
+## Overview
+6-pass transformation pipeline for processing any code document into STE-Code compliant output.
+
+## Pass 1 — Lexical Analysis
+- Tokenize document into words, punctuation, code blocks
+- Identify approved vs unapproved vocabulary
+- Flag non-approved words unless they are technical code nouns (Rule 1.5, 1.6)
+- Flag slang, jargon, regional terms (Rule 1.10)
+
+## Pass 2 — Structural Classification
+- Identify document type: README, API doc, commit message, code comment, issue, PR description
+- Extract: headings, paragraphs, lists, code blocks, inline code
+- Map sections: setup, usage, API reference, examples, troubleshooting
+- Classify each sentence: procedural (instruction) vs descriptive (explanation)
+
+## Pass 3 — Part-of-Speech Lock
+- Verify each word used as its approved part of speech (Rule 1.2)
+- Technical nouns not used as verbs (Rule 1.7)
+- Technical verbs not used as nouns (Rule 1.13)
+- Approved verb forms only (Rule 1.4)
+
+## Pass 4 — Meaning Verification
+- Each word used with its approved meaning only (Rule 1.3)
+- Consistent terminology: one term per concept (Rule 1.11)
+- No word-for-word replacement without meaning check (Rule 9.1)
+
+## Pass 5 — Grammar Transformation
+- Active voice in procedures (Rule 3.6)
+- Imperative mood for instructions (Rule 3.2)
+- Short sentences: 20 words procedural, 25 descriptive (Rule 4.1)
+- One instruction per sentence (Rule 5.1)
+- Vertical lists for 3+ items (Rule 4.3)
+- No semicolons (Rule 8.1)
+- No contractions (Rule 4.2)
+
+## Pass 6 — Consistency Finalization
+- American English spelling (Rule 1.14)
+- Consistent style throughout (Rule 9.4)
+- BREAKING/DEPRECATED/NOTE formatting (Rule 7.1-7.3)
+- Final validation against all 53 rules
+
+## Turn-by-Turn Protocol
+Turn 0: INITIALIZE — read document title, TOC, identify document type
+Turns 1+: READ → TOKENIZE → LEXICAL → CLASSIFY → POS LOCK → MEANING → GRAMMAR → CONSISTENCY → OUTPUT → ADVANCE
+Final turn: CONSOLIDATE — merge all outputs, verify completeness
+
+## State Persistence
+Between turns, preserve:
+- Current position in document
+- Accumulated vocabulary violations
+- Extracted UML structures
+- Adaptation decisions and their source rule references

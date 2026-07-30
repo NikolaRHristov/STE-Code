@@ -1,0 +1,1010 @@
+[
+  {
+    "test_id": "bench-001",
+    "category": "readme",
+    "description": "README introduction with jargon",
+    "input": "This library does a bunch of stuff and should be called with the user object to get everything set up properly.",
+    "output": "Corrected text:\n\nCall the library with the user object. The library sets the configuration.",
+    "compliance_summary": "",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10",
+      "P4"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "library",
+      "user object",
+      "call"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65357,
+    "token_count_input": 27,
+    "token_count_output": 22,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/3",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-002",
+    "category": "readme",
+    "description": "README installation instructions",
+    "input": "To get started, you need to first install a bunch of dependencies and then run the setup script which will configure everything for you.",
+    "output": "Install the dependencies. Then run the setup script. The script sets the configuration.",
+    "compliance_summary": "| # | Original | Issue | Correction | Rule |\n|---|----------|-------|------------|------|\n| 1 | To get started, you need to first | Not imperative mood; uses informal phrasal construction | Install the | Output Format (imperative); P10 |\n| 2 | a bunch of | Slang; informal quantifier | the | P10 |\n| 3 | which will configure | \"configure\" is a synonym-table target | sets | Synonym Table (set \u2192 configure) |\n| 4 | everything for you | Vague referent; informal tone | the configuration | P11 (one term per concept); P10 |\n\n---\n\n### Additional Checks\n\n| Rule | Status | Notes |\n|------|--------|-------|\n| P1 (approved words) | PASS | All words in corrected text are approved or technical |\n| P2 (part of speech) | PASS | \"install\", \"run\", \"sets\" used as verbs |\n| P3 (approved meanings) | PASS | \"set\" means configure per synonym table |\n| P4 (verb/adjective forms) | PASS | \"install\", \"run\", \"sets\" are approved forms |\n| P5 (technical code nouns) | PASS | \"dependencies\", \"script\", \"configuration\" are technical nouns |\n| P7 (no tech nouns as verbs) | PASS | No violations |\n| P12 (technical verbs) | PASS | \"install\", \"run\" are approved technical verbs |\n| P13 (no tech verbs as nouns) | PASS | \"setup\" removed as noun; replaced with \"sets the configuration\" |\n| P14 (American spelling) | PASS | All words use American English |\n| Max 20 words procedural | PASS | Longest sentence is 6 words |\n| One instruction per step | PASS | Each sentence is one instruction |\n| No contractions | PASS | No contractions present |\n| No semicolons | PASS | No semicolons used |",
+    "expected_principles_satisfied": [
+      "P1",
+      "P5",
+      "P10"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "install",
+      "dependencies",
+      "run"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65361,
+    "token_count_input": 34,
+    "token_count_output": 21,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/3",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-003",
+    "category": "readme",
+    "description": "README features list with passive voice",
+    "input": "Features include: data can be processed quickly, files are able to be converted automatically, and results will be displayed in real-time.",
+    "output": "**Corrected Text**\n\nFeatures include: the system processes data quickly, it converts files automatically, and it shows results in real-time.",
+    "compliance_summary": "| # | Original Phrase | Issue | Correction | Principle |\n|---|-----------------|-------|-------------|-----------|\n| 1 | `displayed` | Unapproved synonym; prefer \"show\" | `shows` | P3, Synonym Table |\n| 2 | `are able to be converted` | Unapproved modal construction; not an approved verb form | `converts` | P2, P4 |\n| 3 | `data can be processed` | Passive voice; prefer active voice with a clear agent | `the system processes data` | P4 |\n| 4 | `will be displayed` | Future tense auxiliary + passive + unapproved \"display\" | `shows` (active, present) | P3, P4 |\n\n**Notes:**\n- Removed `will be` (unnecessary future tense) \u2014 descriptive statements use simple present.\n- Replaced passive constructions with active voice throughout.\n- `real-time` kept as an approved technical noun (P5, P8).\n- `quickly` retained \u2014 not in the restricted synonym table and acceptable as a standard adverb.",
+    "expected_principles_satisfied": [
+      "P4",
+      "P2"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "process",
+      "convert",
+      "real-time"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65362,
+    "token_count_input": 34,
+    "token_count_output": 35,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/4",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-004",
+    "category": "readme",
+    "description": "README architecture description with noun-verb confusion",
+    "input": "Docker the application first, then use Kubernetes to orchestrate the containers. The deploy process is fully automated.",
+    "output": "```\nBuild the Docker image for the application first. Then use Kubernetes\nto manage the containers. The deployment process is fully automated.\n```",
+    "compliance_summary": "",
+    "expected_principles_satisfied": [
+      "P7",
+      "P13"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [
+      "the deploy"
+    ],
+    "expected_keywords_found": [
+      "Docker",
+      "Kubernetes",
+      "deploy"
+    ],
+    "correctness_score": 0.93,
+    "latency_ms": 65362,
+    "token_count_input": 29,
+    "token_count_output": 36,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Forbidden found: the deploy; Keywords OK: 3/4",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-005",
+    "category": "readme",
+    "description": "README full section with multiple violations",
+    "input": "This project utilizes a microservices architecture. We make use of Docker for containerization and Kubernetes for orchestration. The API endpoints should be accessed via HTTPS. For more info, check out our docs which contain lots of helpful tips and tricks.",
+    "output": "This project uses a microservices architecture. The project uses Docker for containerization and Kubernetes for orchestration. Access the API endpoints via HTTPS. For more information, see the documentation.",
+    "compliance_summary": "| # | Original Text | Issue | Principle(s) | Correction |\n|---|--------------|-------|--------------|------------|\n| 1 | utilizes | Unapproved word (synonym table: utilize \u2192 use) | P1, P2 | uses |\n| 2 | We make use of | Redundant phrasing; non-imperative; \"make\" used loosely | P1, P10 | The project uses |\n| 3 | should be accessed | Non-imperative modal verb; unclear obligation | P1, procedural rules | Access (imperative mood) |\n| 4 | info | Informal contraction of \"information\" | P1, P10 | information |\n| 5 | check out | Slang/jargon for \"look at\" (not the approved meaning of \"check\" = verify) | P1, P3, P10 | see |\n| 6 | docs | Informal contraction of \"documentation\" | P1, P10 | documentation |\n| 7 | lots of | Informal quantifier | P1, P10 | (removed \u2014 restructured sentence) |\n| 8 | tips and tricks | Slang/jargon | P1, P10 | (removed \u2014 folded into \"see the documentation\") |\n\n| Principle | Status | Notes |\n|-----------|--------|-------|\n| P1 (Approved words) | \u2705 Corrected | \"utilizes\" \u2192 \"uses\", \"info\" \u2192 \"information\", \"docs\" \u2192 \"documentation\" |\n| P2 (Part of speech) | \u2705 | All words used correctly after corrections |\n| P3 (Approved meanings) | \u2705 Corrected | \"check\" was used as slang (\u2192 \"see\") |\n| P4 (Verb/adjective forms) | \u2705 | No violations |\n| P5 (Technical nouns) | \u2705 | \"microservices\", \"Docker\", \"Kubernetes\", \"containerization\", \"orchestration\" allowed |\n| P6 (Non-approved \u2192 only technical) | \u2705 | No non-approved non-technical words remain |\n| P7 (Tech nouns as verbs) | \u2705 | No violations |\n| P8 (Standard tech nouns) | \u2705 | All used tech nouns are well-known |\n| P9 (Short, clear tech nouns) | \u2705 | All tech nouns are appropriate length |\n| P10 (No slang/jargon) | \u2705 Corrected | \"check out\", \"info\", \"docs\", \"lots of\", \"tips and tricks\" removed |\n| P11 (One term per concept) | \u2705 | Consistent terminology throughout |\n| P12 (Technical verbs) | \u2705 | Not applicable to this text |\n| P13 (Tech verbs as nouns) | \u2705 | No violations |\n| P14 (American English) | \u2705 | All spellings are American English |\n| Imperative mood | \u2705 Corrected | \"Access\" replaces \"should be accessed\" |\n| Sentence length (\u226420/25 words) | \u2705 | All corrected sentences: 7, 11, 8, 8 words |\n| Contractions | \u2705 | No contractions present |\n| Article usage | \u2705 | All articles present where needed |",
+    "expected_principles_satisfied": [
+      "P1",
+      "P2",
+      "P8",
+      "P10"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [
+      "info"
+    ],
+    "expected_keywords_found": [
+      "Docker",
+      "Kubernetes",
+      "API",
+      "HTTPS",
+      "documentation"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65362,
+    "token_count_input": 64,
+    "token_count_output": 51,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Forbidden found: info; Keywords OK: 5/5",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-006",
+    "category": "api_doc",
+    "description": "Function docstring with ambiguous language",
+    "input": "This function does the authentication thing and returns a token if everything goes well. It might throw an error if something goes wrong.",
+    "output": "This function performs authentication and returns a token on success. It throws an error on failure.",
+    "compliance_summary": "| # | Original Fragment | Issue | Principle(s) | Correction |\n|---|-------------------|-------|--------------|------------|\n| 1 | `does` | Unapproved synonym | P1 (Synonym Table: do \u2192 perform) | `performs` |\n| 2 | `thing` | Slang / vague filler word | P10 (no slang, jargon) | Removed |\n| 3 | `if everything goes well` | Informal phrasing, non-technical | P9 (prefer short, clear terms), P10 (no jargon) | `on success` |\n| 4 | `might throw` | Modal hedging; spec not procedural | P4 (approved verb forms), imperative mood | `throws` (simple present) |\n| 5 | `if something goes wrong` | Informal phrasing, non-technical | P9 (short, clear), P10 (no jargon) | `on failure` |\n| 6 | `does the authentication thing` | Abstract noun used as verb-object blob | P1.3 (approved meanings), P11 (one term per concept) | `performs authentication` |\n\n**Result**: 6 violations corrected. 0 violations remaining. Fully STE-Code compliant.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P3",
+      "P10"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "token",
+      "return",
+      "error"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65361,
+    "token_count_input": 34,
+    "token_count_output": 25,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/4",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-007",
+    "category": "api_doc",
+    "description": "API parameter description with passive voice",
+    "input": "The userId parameter needs to be provided and it should be a valid UUID. The return value will be an object that contains the user data.",
+    "output": "Corrected text and compliance summary below.",
+    "compliance_summary": "| Original | Issue | Principle | Correction |\n|---|---|---|---|\n| needs to be provided | Unapproved phrasing; not imperative | P6, P10 | must supply |\n| it should be | Ambiguous modal; not definitive | P1, P3 | must be |\n| return value | Technical verb used as noun | P13 | returns (verb form) |\n| will be | Future tense; prefer present | P1, P3 | (removed \u2014 restructured) |\n| that contains | Wordy; prefers short forms | P9 | with |\n| userId | Technical code noun \u2014 allowed | P5, P6 | (kept) |\n| UUID | Technical code noun \u2014 allowed | P5, P6 | (kept) |\n\nAll 14 principles checked. No contractions, no slang, no semicolons, no nested clauses beyond 2 levels, all sentences under 20 words.",
+    "expected_principles_satisfied": [
+      "P4"
+    ],
+    "expected_principles_missed": [
+      "P2"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [],
+    "correctness_score": 0.7,
+    "latency_ms": 65361,
+    "token_count_input": 34,
+    "token_count_output": 11,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P2",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-008",
+    "category": "api_doc",
+    "description": "API endpoint description with synonym drift",
+    "input": "GET /api/users \u2014 fetches all users. POST /api/users \u2014 creates a new user. PUT /api/users/:id \u2014 modifies an existing user. DELETE /api/users/:id \u2014 removes a user.",
+    "output": "GET /api/users \u2014 gets all users. POST /api/users \u2014 makes a new user. PUT /api/users/:id \u2014 changes an existing user. DELETE /api/users/:id \u2014 removes a user.",
+    "compliance_summary": "| # | Original Word | Location | Principle | Issue | Correction |\n|---|--------------|----------|-----------|-------|-------------|\n| 1 | fetches | GET line | P1, Synonym Table | \"fetch\" is in the Avoid column; use the preferred synonym | gets |\n| 2 | creates | POST line | P1, Synonym Table | \"create\" is in the Avoid column; use the preferred synonym | makes |\n| 3 | modifies | PUT line | P1 | \"modify\" is not an approved STE-Code word; use a simpler approved alternative | changes |\n\n### Principles Checked and Passed\n\n| Principle | Status | Notes |\n|-----------|--------|-------|\n| P1 (Approved words) | **Fixed** | 3 replacements applied |\n| P2 (Part of speech) | OK | All words used correctly |\n| P4 (Verb/adjective forms) | OK | All forms approved |\n| P5 (Technical nouns) | OK | GET, POST, PUT, DELETE are HTTP method keywords |\n| P6 (Non-approved as technical) | N/A | No non-approved technical nouns present |\n| P7 (Noun as verb) | OK | No technical nouns used as verbs |\n| P10 (No slang/jargon) | OK | No slang or jargon detected |\n| P11 (One term per concept) | OK | Consistent terminology throughout |\n| P13 (Verb as noun) | OK | No technical verbs used as nouns |\n| P14 (American spelling) | OK | American English used |\n\n### Additional Notes\n\n- **Sentence length**: All four sentences are well under the 25-word descriptive limit (longest: 9 words).\n- **No semicolons, no contractions, no \"-ing\" main verbs**: All rules satisfied.\n- **Imperative mood**: Not applicable \u2014 the text is descriptive endpoint documentation, not procedural instructions.\n- **Word count changed**: 29 \u2192 29 (no net change).",
+    "expected_principles_satisfied": [
+      "P11"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [
+      "removes"
+    ],
+    "expected_keywords_found": [
+      "delete",
+      "user"
+    ],
+    "correctness_score": 0.94,
+    "latency_ms": 65360,
+    "token_count_input": 40,
+    "token_count_output": 38,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Forbidden found: removes; Keywords OK: 2/5",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-009",
+    "category": "api_doc",
+    "description": "Rate limit documentation with unclear severity",
+    "input": "WARNING: If you exceed 100 requests per minute, your API key will be temporarily disabled. CAUTION: Responses might be slow during peak hours. NOTE: You can increase your limit by contacting support.",
+    "output": "WARNING: If you have more than 100 requests per minute, your API key will be disabled for a short time.\nCAUTION: Responses might be slow during periods of high use.\nNOTE: You can raise your limit. Contact support to do this.",
+    "compliance_summary": "| # | Original | Issue | Principle | Correction |\n|---|----------|-------|-----------|------------|\n| 1 | exceed | Complex word; not in approved dictionary | P1, P9 | have more than |\n| 2 | temporarily | Unapproved adverb form | P4 | for a short time |\n| 3 | peak hours | Domain jargon (telecom/ops) | P10 | periods of high use |\n| 4 | increase | Longer synonym available | P9 | raise |\n| 5 | by contacting | -ing form in a procedure | Anti-pattern | Split into two sentences; use imperative \"Contact\" |\n| 6 | ...limit by contacting... | Nested clause adds a second action in one sentence | Output format: one instruction per step | Separated into standalone step |\n\n### Notes on passed checks\n\n- **Signal words** (WARNING, CAUTION, NOTE) are used correctly per STE severity levels \u2014 WARNING for service loss, CAUTION for degraded performance, NOTE for non-critical information.\n- **\"Disabled\"** is retained \u2014 it is a standard technical state noun permitted under P5 (technical code nouns). The API domain uses \"disabled\" as a well-known state and replacing it would reduce clarity.\n- **\"Requests per minute\"** and **\"API key\"** are technical code nouns allowed under P5 and P8.\n- **\"Might\"** is retained as the approved STE modal for possibility.\n- **Sentence lengths** are 17, 12, 7, and 5 words \u2014 all within the 20-word procedural limit and 25-word descriptive limit.\n- **No contractions, semicolons, or deep nesting** remain.",
+    "expected_principles_satisfied": [
+      "P4"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [
+      "WARNING",
+      "CAUTION",
+      "might be"
+    ],
+    "expected_keywords_found": [
+      "NOTE",
+      "100 requests"
+    ],
+    "correctness_score": 0.74,
+    "latency_ms": 65359,
+    "token_count_input": 49,
+    "token_count_output": 56,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Forbidden found: WARNING, CAUTION, might be; Keywords OK: 2/5",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-010",
+    "category": "api_doc",
+    "description": "Complex API reference with multiple violations",
+    "input": "The authenticateUser function handles user authentication and authorization. It takes a credentials object which contains the username and password, performs validation, and returns a JWT token that can be utilized for subsequent requests. Make sure to call this function before accessing any protected endpoints.",
+    "output": "The authenticateUser function confirms user identity and checks user permissions.\nIt takes a credentials object.\nThe object contains the username and password.\nThe function checks the credentials.\nIt returns a JWT token.\nUse the token for subsequent requests.\nCall this function before you access protected endpoints.",
+    "compliance_summary": "| Principle | Issue Found | Original Text | Corrected Text |\n|-----------|-------------|---------------|-----------------|\n| **P1/P4** | Unapproved verb \"utilized\" | \"can be utilized for\" | \"Use the token for\" |\n| **P1/P4** | Unapproved verb \"performs\" | \"performs validation\" | \"checks the credentials\" |\n| **P13** | Technical verb \"validate\" used as noun (\"validation\") | \"performs validation\" | \"checks the credentials\" |\n| **P13** | Technical verbs \"authenticate\"/\"authorize\" used as nouns (\"authentication\"/\"authorization\") | \"handles user authentication and authorization\" | \"confirms user identity and checks user permissions\" |\n| **P1/P4** | \"handles\" not in approved dictionary; borderline jargon | \"handles user authentication\" | \"confirms user identity\" |\n| **Anti-Pattern** | Sentence exceeds 25-word descriptive limit (27 words) | \"It takes a credentials object which contains the username and password, performs validation, and returns a JWT token that can be utilized for subsequent requests.\" | Split into 5 short sentences (5\u20139 words each) |\n| **Anti-Pattern** | \"-ing\" form used as main verb in procedure | \"before accessing any protected endpoints\" | \"before you access protected endpoints\" |\n| **Anti-Pattern** | Informal phrasing in procedural instruction | \"Make sure to call this function\" | \"Call this function\" (imperative mood) |\n| **P14** | No issue \u2014 American spelling already used | \u2014 | \u2014 |\n| **P5/P6** | No issue \u2014 \"JWT\", \"credentials\", \"endpoints\" are allowed technical code nouns | \u2014 | \u2014 |\n| **P10** | No issue \u2014 no slang or regional terms (after corrections) | \u2014 | \u2014 |\n| **P11** | No issue \u2014 consistent terminology throughout | \u2014 | \u2014 |\n\n### Additional Notes\n\n- **Sentence structure**: Every sentence now conforms to the 20/25-word limits (longest is 9 words).\n- **Mood**: Procedural sentences use imperative mood (\"Use the token\", \"Call this function\").\n- **Clause depth**: No nested clauses exceed 2 levels.\n- **Contractions/semicolons**: None present.\n- **Articles**: All required articles are present and correct.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P5"
+    ],
+    "expected_principles_missed": [
+      "P2"
+    ],
+    "forbidden_keywords_found": [
+      "subsequent"
+    ],
+    "expected_keywords_found": [
+      "authenticate",
+      "credentials",
+      "JWT",
+      "token"
+    ],
+    "correctness_score": 0.79,
+    "latency_ms": 65357,
+    "token_count_input": 78,
+    "token_count_output": 79,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P2; Forbidden found: subsequent; Keywords OK: 4/6",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-011",
+    "category": "commit",
+    "description": "Vague commit message",
+    "input": "fixed stuff",
+    "output": "Corrected: **Correct defects**",
+    "compliance_summary": "",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10"
+    ],
+    "expected_principles_missed": [
+      "P4"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [],
+    "correctness_score": 0.8,
+    "latency_ms": 65354,
+    "token_count_input": 2,
+    "token_count_output": 7,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P4",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-012",
+    "category": "commit",
+    "description": "Commit with passive voice and ambiguity",
+    "input": "Changes were made to the authentication module to make it work better",
+    "output": "**STE-Code Corrected Text**\n\nWe updated the authentication module. The module now uses fewer resources and responds faster.",
+    "compliance_summary": "",
+    "expected_principles_satisfied": [
+      "P4",
+      "P1"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "update",
+      "authentication",
+      "module"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65353,
+    "token_count_input": 17,
+    "token_count_output": 30,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/3",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-013",
+    "category": "commit",
+    "description": "Conventional commit with unapproved terms",
+    "input": "feat: added a bunch of new endpoints for the user service",
+    "output": "```\nfeat: add endpoints for the user service\n```",
+    "compliance_summary": "| Principle | Issue | Original | Correction |\n|-----------|-------|----------|-------------|\n| P1 | Unapproved word | `bunch` | Removed \u2014 informal quantifier not in approved dictionary |\n| P4 | Wrong verb form (past tense) | `added` | `add` \u2014 imperative mood required per output format |\n| P10 | Slang / jargon | `a bunch of` | Removed \u2014 informal phrase prohibited |\n\n| Principle | Status | Notes |\n|-----------|--------|-------|\n| P5 | PASS | `endpoints`, `user`, `service` \u2014 valid technical code nouns |\n| P11 | PASS | Consistent terminology throughout |\n| P14 | PASS | American English spelling used |\n\n---\n\n**Changes made:**\n\n- **`added` \u2192 `add`**: Imperative mood (P4). Commit messages are procedural \u2014 state what the change *does*, not what was done.\n- **`a bunch of` \u2192 removed**: \"Bunch\" is informal/jargon (P1, P10). The word \"add\" already implies new items are introduced, making the quantifier redundant.\n- **`new` \u2192 removed**: Redundant with \"add\" \u2014 adding something always introduces it as new. STE-Code favors conciseness (P9).\n- **`the` \u2192 retained**: Articles are mandatory in STE-Code.",
+    "expected_principles_satisfied": [
+      "P10",
+      "P1"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "add",
+      "endpoint",
+      "user service"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65351,
+    "token_count_input": 14,
+    "token_count_output": 12,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/3",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-014",
+    "category": "commit",
+    "description": "Breaking change without severity marker",
+    "input": "chore: updated the API to use v2 endpoints, old ones removed",
+    "output": "**Corrected Text**\n\nUpdate the API to use v2 endpoints. Remove the old endpoints.",
+    "compliance_summary": "| # | Issue | Original | Corrected | Principle |\n|---|-------|----------|-----------|-----------|\n| 1 | Jargon prefix | `chore:` | *(removed)* | P10 \u2014 no slang, jargon, or regional terms |\n| 2 | Past tense in procedure | `updated` | `Update` | Output Format \u2014 use imperative mood for instructions |\n| 3 | Passive voice, vague pronoun | `old ones removed` | `Remove the old endpoints.` | Output Format \u2014 imperative mood; P3 \u2014 words only with approved meanings; P11 \u2014 be consistent (use `endpoints`, not `ones`) |\n| 4 | Comma splice / single sentence | `..., old ones removed` | Split into two sentences. | Output Format \u2014 one instruction per step; Anti-Patterns \u2014 no semicolons |\n\n**Passes (no violation found)**\n\n| Principle | Check |\n|-----------|-------|\n| P1\u2013P4 | All words are approved dictionary terms or technical nouns |\n| P5\u2013P6 | `API`, `v2`, `endpoints` are valid technical code nouns |\n| P7 | No technical noun used as a verb |\n| P8\u2013P9 | Technical nouns are standard, short, and clear |\n| P11 | `endpoints` used consistently (not mixed with `ones`) |\n| P12\u2013P13 | `use`, `remove` are approved; not used as nouns |\n| P14 | American English spelling throughout |",
+    "expected_principles_satisfied": [
+      "P4"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "API",
+      "v2",
+      "remove"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65350,
+    "token_count_input": 15,
+    "token_count_output": 20,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/4",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-015",
+    "category": "commit",
+    "description": "Multi-paragraph commit with jargon",
+    "input": "refactor: overhauled the entire data layer\n\nSwitched from MongoDB to PostgreSQL because Mongo was being flaky. Also cleaned up a ton of legacy code that was doing weird stuff with the connection pool.",
+    "output": "refactor: replaced the data layer\n\nMigrated from MongoDB to PostgreSQL because MongoDB was unreliable. Also removed legacy code that managed the connection pool incorrectly.",
+    "compliance_summary": "| # | Issue | Original | Correction | Rule(s) |\n|---|-------|----------|------------|---------|\n| 1 | Slang | \"flaky\" | \"unreliable\" | P10 |\n| 2 | Slang | \"a ton of\" | removed (redundant with \"removed\") | P10 |\n| 3 | Slang | \"weird stuff\" | \"incorrectly\" | P10 |\n| 4 | Jargon verb | \"overhauled\" | \"replaced\" | P1, P10 |\n| 5 | Jargon verb | \"cleaned up\" | \"removed\" | P1, P10 |\n| 6 | Continuous form | \"was being flaky\" | \"was unreliable\" | Anti-pattern (-ing) |\n| 7 | Continuous form | \"was doing weird stuff\" | \"managed ... incorrectly\" | Anti-pattern (-ing) |\n| 8 | Inconsistent term | \"Mongo\" then \"MongoDB\" | \"MongoDB\" throughout | P11 |\n| 9 | Ambiguous verb | \"Switched\" | \"Migrated\" | P1, P4 |\n\n**Technical nouns retained** (P5 compliant): refactor, MongoDB, PostgreSQL, data layer, legacy code, connection pool.\n\n**Result**: 9 violations corrected. All 14 principles now satisfied. No destructive or deprecated notices required.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10"
+    ],
+    "expected_principles_missed": [
+      "P8"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "migrate",
+      "MongoDB",
+      "PostgreSQL",
+      "connection pool"
+    ],
+    "correctness_score": 0.9,
+    "latency_ms": 65347,
+    "token_count_input": 50,
+    "token_count_output": 43,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P8; Keywords OK: 4/4",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-016",
+    "category": "error",
+    "description": "Cryptic error message",
+    "input": "Error: Something went wrong",
+    "output": "Corrected text:\n\n```\nError: The operation failed.\n```",
+    "compliance_summary": "",
+    "expected_principles_satisfied": [
+      "P1",
+      "P3"
+    ],
+    "expected_principles_missed": [
+      "P14"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "Error",
+      "failed"
+    ],
+    "correctness_score": 0.87,
+    "latency_ms": 65345,
+    "token_count_input": 6,
+    "token_count_output": 13,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P14; Keywords OK: 2/3",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-017",
+    "category": "error",
+    "description": "Error with ambiguous pronoun",
+    "input": "TypeError: Cannot read property 'name' of undefined. This usually happens when it is not properly initialized.",
+    "output": "**Corrected Text**\n\nTypeError: Cannot read property 'name' of undefined. This error occurs when the object is not initialized.",
+    "compliance_summary": "| Principle | Issue Found | Original | Correction | Reason |\n|-----------|-------------|----------|------------|--------|\n| P3 | Unapproved adverb | \"usually\" | (removed) | \"usually\" is not in the STE-Code dictionary; the statement is categorical without it |\n| P3 | Unapproved verb | \"happens\" | \"occurs\" | \"happen\" is not an approved STE verb; \"occur\" is the approved replacement |\n| P3 | Unapproved adverb | \"properly\" | (removed) | \"properly\" is not in the STE-Code dictionary; initialization implies correctness |\n| P8 | Ambiguous reference | \"it\" | \"the object\" | \"it\" lacks a clear antecedent; \"object\" is the standard technical noun that names what must be initialized |\n| P11 | Consistency and clarity | \"when it is not...\" | \"when the object is not...\" | One term per concept \u2014 the subject is now explicit and unambiguous |",
+    "expected_principles_satisfied": [
+      "P1",
+      "P3"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "TypeError",
+      "undefined",
+      "initialize",
+      "property"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65343,
+    "token_count_input": 27,
+    "token_count_output": 31,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 4/4",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-018",
+    "category": "error",
+    "description": "HTTP error without clear action",
+    "input": "500 Internal Server Error \u2014 please try again later",
+    "output": "500 Internal Server Error \u2014 try again later.",
+    "compliance_summary": "| # | Principle | Status | Detail |\n|---|-----------|--------|--------|\n| P1 | Approved words dictionary | CHECK | \"try\", \"again\", \"later\" are common words \u2014 verify they are in the project's STE-Code dictionary |\n| P2 | Words as specified part of speech | PASS | All words used as their standard part of speech |\n| P3 | Words with approved meanings | PASS | All words used with their standard meanings |\n| P4 | Approved verb / adjective forms | PASS | No irregular forms used |\n| P5 | Technical code nouns allowed | PASS | \"500\", \"Internal Server Error\" \u2014 standard HTTP status terms |\n| P6 | Non-approved words = technical nouns only | CHECK | N/A \u2014 all non-technical words should be dictionary-approved |\n| P7 | No technical nouns as verbs | PASS | No technical noun used as a verb |\n| P8 | Standard, well-known technical nouns | PASS | \"Internal Server Error\" is a standard W3C HTTP status phrase |\n| P9 | Short, clear technical nouns | PASS | \"500\" is the canonical short form |\n| P10 | No slang, jargon, or regional terms | PASS | No slang or regional terms present |\n| P11 | One term per concept | PASS | No competing terms for the same concept |\n| P12 | Technical verbs allowed | PASS | No technical verbs in this text |\n| P13 | No technical verbs as nouns | PASS | No technical verb used as a noun |\n| P14 | American English spelling | PASS | \"later\", \"again\" \u2014 American spelling confirmed |\n\n### Change Applied\n\n| Original | Corrected | Reason |\n|----------|-----------|--------|\n| please try again later | try again later | Imperative mood \u2014 remove politeness word. The output format rule states \"Use imperative mood for instructions.\" \"please\" softens the instruction into a request and is unnecessary for clarity. |\n\n### Notes\n\n- The text is short \u2014 only one correction needed.\n- If this is a user-facing error message, teams may weigh politeness against strict imperative mood. STE-Code prioritizes direct, unambiguous instruction.\n- P1 remains a CHECK because the full STE-Code dictionary is not provided. If \"try\" or \"later\" are not approved, consider: \"500 Internal Server Error \u2014 do the operation again after a short time.\"",
+    "expected_principles_satisfied": [
+      "P1",
+      "P14"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "500",
+      "Internal Server Error"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65341,
+    "token_count_input": 12,
+    "token_count_output": 11,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 2/5",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-019",
+    "category": "error",
+    "description": "Database error with jargon",
+    "input": "MongoError: connection pool is exhausted, the server is probably overloaded or something",
+    "output": "MongoError: the connection pool has no available connections. The server cannot accept more connections.",
+    "compliance_summary": "| # | Principle | Issue Found | Correction |\n|---|-----------|-------------|-------------|\n| P1 | Use approved words | \"exhausted\" is not an approved STE-Code word | Replaced \"is exhausted\" with \"has no available connections\" |\n| P1 | Use approved words | \"probably\" is not an approved STE-Code word | Replaced \"probably overloaded\" with \"cannot accept more connections\" |\n| P1 | Use approved words | \"overloaded\" is not an approved STE-Code word | Replaced with factual statement about server capacity |\n| P10 | No slang, jargon, or regional terms | \"or something\" is informal placeholder language | Removed entirely; replaced with precise meaning |\n| P11 | One term per concept \u2014 be consistent | \"connection pool\" used consistently with its technical meaning | No change needed |\n| P5/P6 | Technical code nouns allowed | \"MongoError\", \"connection pool\", \"server\" are valid technical nouns | Retained as-is |\n\n## Notes\n\n- The original text mixed diagnostic fact (\"connection pool is exhausted\") with speculation (\"probably overloaded or something\"). STE-Code correction splits this into two factual statements: one about the pool state, one about server capacity.\n- \"Cannot accept more connections\" is the observable consequence of both exhaustion and overload \u2014 it communicates the same operational meaning without unapproved vocabulary.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "connection pool",
+      "server"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65338,
+    "token_count_input": 22,
+    "token_count_output": 26,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 2/4",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-020",
+    "category": "error",
+    "description": "Stack trace with unclear root cause",
+    "input": "FATAL: Process exited with code 1\n\nError: Failed to connect to database at localhost:5432\n    at ConnectionPool.connect (pool.js:42)\n    at Database.initialize (db.js:18)\n\nThe database might not be running. Try starting it with npm run db:start.",
+    "output": "```\nCRITICAL: The process stopped with exit code 1\n\nError: Could not connect to the database at localhost:5432\n    at ConnectionPool.connect (pool.js:42)\n    at Database.initialize (db.js:18)\n\nThe database is not active. Start the database with this command:\nnpm run db:start\n```",
+    "compliance_summary": "| # | Issue | Original | Correction | Principle |\n|---|-------|----------|------------|-----------|\n| 1 | Jargon term | `FATAL` | `CRITICAL` | P10 \u2014 No slang, jargon, or regional terms. \"FATAL\" is informal computing jargon. \"CRITICAL\" is a standard approved adjective. |\n| 2 | Unclear noun | `code 1` | `exit code 1` | P11 \u2014 One term per concept. \"exit code\" is the standard technical noun. \"code\" alone is ambiguous. |\n| 3 | Non-approved verb | `Failed` | `Could not` | P1/P3 \u2014 \"Fail\" is not in the approved STE dictionary. Use \"could\" with negation for failed states. |\n| 4 | -ing form in clause | `might not be running` | `is not active` | P4 anti-pattern \u2014 No \"-ing\" forms as main verbs. \"Active\" is an approved adjective describing state. |\n| 5 | Uncertain / weak language | `might not be` | `is not` | P1/P3 \u2014 \"Might\" introduces ambiguity. STE documentation must be definite. State facts, not guesses. |\n| 6 | Weak procedural mood | `Try starting it with` | `Start the database with this command:` | Output Format \u2014 Use imperative mood for instructions. \"Try\" is not imperative and weakens the direction. |\n| 7 | Missing article + ambiguous pronoun | `Try starting it` | `Start the database` | Article rule \u2014 Do not omit \"the.\" Pronoun \"it\" is ambiguous. Repeat the noun for clarity. |\n| 8 | Inline command | `with npm run db:start.` | `with this command:\\nnpm run db:start` | Output Format \u2014 One instruction per step. The command deserves its own line for clarity and copy-paste safety. |\n\n---\n\n**Notes:**\n- `localhost:5432`, `pool.js`, `db.js`, `ConnectionPool.connect`, `Database.initialize`, and `npm run db:start` are all technical code nouns preserved under P5/P6.\n- `connect`, `initialize`, and `start` are approved technical verbs under P12.\n- The stack trace lines (`at ConnectionPool.connect (pool.js:42)`) are technical output \u2014 left unchanged under P5.\n- `Error:` is a standard technical label \u2014 preserved.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P4"
+    ],
+    "expected_principles_missed": [
+      "P14"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "connection",
+      "database",
+      "localhost:5432",
+      "start"
+    ],
+    "correctness_score": 0.9,
+    "latency_ms": 65335,
+    "token_count_input": 61,
+    "token_count_output": 69,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P14; Keywords OK: 4/4",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-021",
+    "category": "comment",
+    "description": "Inline comment with unnecessary words",
+    "input": "// This function does a bunch of stuff to get the user data",
+    "output": "```\n// This function gets the user data\n```",
+    "compliance_summary": "| Principle | Issue | Change |\n|-----------|-------|--------|\n| P1, P10 | \"bunch\" \u2014 unapproved slang word | Removed |\n| P1, P10 | \"stuff\" \u2014 unapproved vague word | Removed |\n| P3 | \"does\" used as a filler verb with no clear meaning | Replaced with direct verb \"gets\" |\n| P4 | \"does a bunch of stuff\" \u2014 informal multi-word verb phrase | Replaced with single approved verb \"gets\" |\n| P9 | Original was wordy and unclear (10 words, vague) | Shortened to clear statement (7 words) |\n\n**Violations found: 5. All resolved.**\n\n**NOTES:**\n- \"get\" \u2192 preferred over \"retrieve/fetch/obtain\" per Canonical Synonym Table \u2713\n- \"function\" is a technical code noun allowed under P5 \u2713\n- \"user data\" are standard technical nouns allowed under P5, P8 \u2713\n- The original comment described implementation (\"does a bunch of stuff\") instead of intent. Comments should state what the function achieves, not how it works internally.",
+    "expected_principles_satisfied": [
+      "P10",
+      "P1"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [
+      "get"
+    ],
+    "expected_keywords_found": [
+      "user data"
+    ],
+    "correctness_score": 0.9,
+    "latency_ms": 65332,
+    "token_count_input": 14,
+    "token_count_output": 10,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Forbidden found: get; Keywords OK: 1/2",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-022",
+    "category": "comment",
+    "description": "TODO comment with placeholder",
+    "input": "// TODO: fix this later when we have time",
+    "output": "Corrected text:\n\n```\n// NOTE: Correct the component in the next scheduled update.\n```",
+    "compliance_summary": "| Original | Issue | Principle | Correction |\n|----------|-------|-----------|------------|\n| TODO | Informal task marker; not an approved STE-Code marker | P1, P10 | NOTE |\n| fix | \"fix\" is not in the approved STE-Code word list; ambiguous | P1, P3 | Correct |\n| this | Vague pronoun with no clear referent | P3 (clarity) | the component |\n| later | Imprecise temporal reference; no actionable timeframe | P3 (clarity) | in the next scheduled update |\n| when we have time | Informal clause; uses personal pronoun \"we\"; subjective condition | P10, P3 (clarity) | removed (replaced with specific timeframe) |\n\nAdditional notes:\n\n- Sentence length: 8 words \u2014 within the 20-word procedural limit.\n- Imperative mood: \"Correct\" begins an implied directive \u2014 acceptable for code comments.\n- No contractions, semicolons, nested clauses, or \"-ing\" forms used.\n- \"NOTE\" is the approved STE-Code marker for important non-safety information (per the output format spec).\n- If the specific component or cycle is known, replace \"the component\" and \"scheduled update\" with the actual names for full P3 compliance.",
+    "expected_principles_satisfied": [
+      "P1"
+    ],
+    "expected_principles_missed": [
+      "P14"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [],
+    "correctness_score": 0.7,
+    "latency_ms": 65329,
+    "token_count_input": 10,
+    "token_count_output": 21,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P14",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-023",
+    "category": "comment",
+    "description": "Block comment with passive voice",
+    "input": "/* The authentication middleware is used to verify that the user has been properly authenticated. If the token is invalid, an error will be thrown. */",
+    "output": "```\n/* The authentication middleware checks that the user is authenticated. If the token is invalid, the middleware reports an error. */\n```",
+    "compliance_summary": "| # | Original | Corrected | Issue | Principle |\n|---|----------|-----------|-------|-----------|\n| 1 | is used to verify | checks | \"verify\" replaced with \"check\" per synonym table; passive voice removed | P1, synonym table (check \u2192 verify) |\n| 2 | has been properly authenticated | is authenticated | \"properly\" is a vague adverb with no approved meaning; unnecessary auxiliary verb \"has been\" removed | P3 (approved meanings only), conciseness rule |\n| 3 | an error will be thrown | the middleware reports an error | \"thrown\" is programming jargon; future passive (\"will be thrown\") replaced with active present tense; explicit subject added | P10 (no slang/jargon) |\n\n**Sentence length check:** Both sentences are under the descriptive limit (25 words). Sentence 1: 9 words. Sentence 2: 11 words. PASS.\n\n**Active voice:** Both sentences now use active voice with explicit subjects (\"The authentication middleware\", \"the middleware\"). PASS.",
+    "expected_principles_satisfied": [
+      "P4",
+      "P1"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "authenticate",
+      "middleware",
+      "token",
+      "error"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65326,
+    "token_count_input": 37,
+    "token_count_output": 35,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 4/5",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-024",
+    "category": "comment",
+    "description": "JSDoc with synonym drift",
+    "input": "/**\n * Fetches user data from the database\n * @param {string} userId \u2014 The ID of the user to fetch\n * @returns {Object} The fetched user object\n */",
+    "output": "```js\n/**\n * Get user data from the database.\n * @param {string} userId \u2014 The ID of the user to get.\n * @returns {Object} The user object.\n */\n```",
+    "compliance_summary": "| Location | Original | Corrected | Rule(s) | Reason |\n|---|---|---|---|---|\n| Line 2 | Fetches user data | Get user data | P1, Output Format | \"fetch\" \u2192 \"get\" per synonym table; imperative mood required for instructions |\n| Line 3 | the user to fetch | the user to get | P1 | \"fetch\" \u2192 \"get\" per synonym table |\n| Line 4 | The fetched user object | The user object | P1 | Removed unapproved adjective \"fetched\"; \"get\" is already stated in the description so redundancy is avoided |\n| Lines 2-4 | (no periods) | Added terminal periods | Output Format | Procedural/descriptive sentences require standard punctuation |\n\n**Additional notes:**\n- No contractions, semicolons, or nested clauses present \u2014 already compliant.\n- No slang, jargon, or regional terms detected.\n- American English spelling confirmed (no changes needed).\n- All sentence lengths are under the 20/25-word limits.\n- Technical noun \"database\" is allowed under P5 (standard technical code noun).",
+    "expected_principles_satisfied": [
+      "P11",
+      "P1"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "user",
+      "database",
+      "userId",
+      "return"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65324,
+    "token_count_input": 36,
+    "token_count_output": 36,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 4/5",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-025",
+    "category": "comment",
+    "description": "Complex function comment with multiple issues",
+    "input": "// This is a helper that basically does validation of the incoming request payload.\n// It checks a bunch of things like whether the required fields exist,\n// if the types are correct, and makes sure nothing weird slips through.\n// Returns true if everything is OK, otherwise throws.",
+    "output": "Corrected text:\n\n```\n// Checks the incoming request payload.\n// Checks that the required fields exist.\n// Checks that the types are correct.\n// Checks that no invalid data passes.\n// Returns true if the payload is valid.\n// Otherwise, throws an error.\n```",
+    "compliance_summary": "",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10",
+      "P4",
+      "P14"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "request",
+      "payload",
+      "field",
+      "type",
+      "return",
+      "error"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65320,
+    "token_count_input": 70,
+    "token_count_output": 63,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 6/7",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-026",
+    "category": "changelog",
+    "description": "Vague changelog entry",
+    "input": "## 2.1.0 \u2014 Various improvements and bug fixes",
+    "output": "```\n## 2.1.0 \u2014 Improvements and bug fixes\n```\n\n**Change applied:** Removed \"Various\" per P9 (prefer short, clear terms) \u2014 it adds no information and creates ambiguity about what was improved.",
+    "compliance_summary": "| Principle | Status | Notes |\n|-----------|--------|-------|\n| P1 | PASS | All remaining words are approved or technical |\n| P2 | PASS | \"improvements\" (noun), \"bug\" (noun), \"fixes\" (noun) used correctly |\n| P3 | PASS | No word used with unapproved meaning |\n| P4 | PASS | No unapproved verb/adjective forms present |\n| P5 | PASS | \"bug\" is a technical code noun \u2014 allowed |\n| P6 | PASS | \"bug\" is a standard technical code noun \u2014 allowed |\n| P7 | PASS | No technical noun used as a verb |\n| P8 | PASS | \"bug fixes\" and \"improvements\" are well-known terms |\n| P9 | **CORRECTED** | Removed \"Various\" \u2014 shorter and clearer without it |\n| P10 | PASS | No slang, jargon, or regional terms remain |\n| P11 | PASS | Consistent terminology (only one occurrence) |\n| P12 | PASS | \"fix\" is an allowed technical verb (used as noun here \u2014 see P13) |\n| P13 | **NOTE** | \"fixes\" is a noun form of the technical verb \"fix.\" The compound \"bug fixes\" is so standard in software that rephrasing would harm readability. Not corrected. |\n| P14 | PASS | American English spelling throughout |\n\n---\n\n**Result:** One correction applied. No STE-Code violations remain. P13 is flagged as an edge case where strict application of the rule would produce worse documentation than the established technical idiom.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P14"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "add",
+      "fix"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65317,
+    "token_count_input": 11,
+    "token_count_output": 47,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 2/4",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-027",
+    "category": "changelog",
+    "description": "Breaking change without migration path",
+    "input": "## 3.0.0 \u2014 The old API was removed. Use the new one instead.",
+    "output": "```\n## 3.0.0 \u2014 BREAKING: This release removes the old API. Use the new API.\n```",
+    "compliance_summary": "| Principle | Requirement | Original | Issue | Fix |\n|-----------|-------------|----------|-------|-----|\n| **P1** | Use approved words | \"removed\", \"use\", \"API\" | All words approved or technical code nouns (P5). No violation. | \u2014 |\n| **P2** | Words as specified part of speech | \"removed\" (verb, past participle) | Valid verb form for a change note. No violation. | \u2014 |\n| **P3** | Words with approved meanings | \"removed\" = taken away, \"use\" = employ | Approved meanings. No violation. | \u2014 |\n| **P4** | Approved verb/adjective forms | \"removed\" | Valid past-participle form of approved verb \"remove\". No violation. | \u2014 |\n| **P5** | Technical code nouns allowed | \"API\" | Allowed technical code noun. No violation. | \u2014 |\n| **P6** | Non-approved words \u2192 only technical nouns | N/A | No unapproved words present. | \u2014 |\n| **P7** | No technical nouns as verbs | \"API\" | Used only as a noun. No violation. | \u2014 |\n| **P8** | Standard technical nouns | \"API\" | Well-known, standard term. No violation. | \u2014 |\n| **P9** | Short, clear technical nouns | \"API\" | Three letters, unambiguous. No violation. | \u2014 |\n| **P10** | No slang/jargon/regional | \"old\", \"new\", \"instead\" | Standard English, no slang. No violation. | \u2014 |\n| **P11** | One term per concept | \"old API\" / \"new API\" | Consistent, no synonyms drifting. No violation. | \u2014 |\n| **P12** | Technical verbs allowed | \"removes\", \"use\" | Both are approved technical verbs. No violation. | \u2014 |\n| **P13** | No technical verbs as nouns | N/A | No verb-to-noun misuse. | \u2014 |\n| **P14** | American English | \"removes\", \"use\" | American spelling. No violation. | \u2014 |\n\n| Format Rule | Requirement | Original | Issue | Fix |\n|-------------|-------------|----------|-------|-----|\n| **BREAKING** | Mark destructive changes | *(missing)* | No BREAKING prefix before API removal. | Added `BREAKING:` |\n| **Imperative mood** | Use imperative for instructions | \"Use the new one\" | Second sentence is already imperative. No change needed to mood. | \u2014 |\n| **Sentence length** | Max 20 proc / 25 desc words | 12 words total | Within limits. No violation. | \u2014 |\n| **Article use** | Do not omit articles | \"the old API\" | Articles present. No violation. | \u2014 |\n\n| Style Edit | Original | Corrected | Reason |\n|------------|----------|-----------|--------|\n| Passive \u2192 active | \"was removed\" | \"this release removes\" | Active voice preferred; \"this release\" identifies the agent |\n| Ambiguous pronoun | \"the new one\" | \"the new API\" | \"one\" is an ambiguous pronoun; repeat the noun for clarity |\n| Filler word | \"instead\" | *(removed)* | \"Instead\" adds no meaning \u2014 \"Use the new API\" is complete |\n\n**Result: 2 style improvements + 1 format fix. No principle violations in the original.**",
+    "expected_principles_satisfied": [
+      "P4",
+      "P14"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "BREAKING",
+      "remove",
+      "API"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65314,
+    "token_count_input": 15,
+    "token_count_output": 19,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 3/5",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-028",
+    "category": "changelog",
+    "description": "Full changelog with multiple issues",
+    "input": "## 1.5.0\n\n- Added a bunch of new features\n- Fixed some bugs that were causing problems\n- Made things faster\n- Deprecated the old config format (will be removed eventually)",
+    "output": "```\n## 1.5.0\n\n- Added new features\n- Fixed bugs\n- Improved performance\n- DEPRECATED: the previous config format. It will be removed in a future release.\n```",
+    "compliance_summary": "| # | Principle | Line | Issue | Fix |\n|---|-----------|------|-------|-----|\n| P10 | No slang, jargon, or regional terms | 3 | \"a bunch of\" is informal slang | Removed; use \"new\" |\n| P10 | No slang, jargon, or regional terms | 5 | \"things\" is vague jargon | Replaced with \"performance\" |\n| P1 | Use approved words from dictionary | 5 | \"eventually\" is an unapproved adverb with no definite meaning | Replaced with \"in a future release\" |\n| P10 | No slang, jargon, or regional terms | 4 | \"some bugs that were causing problems\" is redundant and vague | Reduced to \"bugs\"; bugs are problems by definition |\n| P1 | Use approved words from dictionary | 6 | \"old\" is informal for configuration artifacts | Replaced with \"previous\" |\n| P5 | Technical nouns allowed | 6 | \"config format\" \u2014 valid technical noun phrase | Preserved; compliant as-is |\n| P12 | Technical verbs allowed | 3\u20136 | \"Added\", \"Fixed\", \"Improved\", \"DEPRECATED\" \u2014 all valid technical verbs | Preserved; compliant as-is |\n| P14 | American English spelling | All | No spelling violations found | N/A |\n\n**Overall assessment**: 5 violations fixed. The original text had informal slang, vague terms, and one unapproved adverb. All corrected instances now comply with STE-Code.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10",
+      "P4",
+      "P14"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "add",
+      "fix",
+      "improve",
+      "DEPRECATED",
+      "config"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65311,
+    "token_count_input": 42,
+    "token_count_output": 39,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 5/6",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-029",
+    "category": "config",
+    "description": ".env file with unclear comments",
+    "input": "# This is the database URL, make sure it's correct\nDATABASE_URL=postgresql://localhost:5432/myapp\n# Secret key for JWT stuff\nJWT_SECRET=super-secret-key",
+    "output": "```\n# This is the database URL. Check that it is correct.\nDATABASE_URL=postgresql://localhost:5432/myapp\n# Secret key for JWT authentication\nJWT_SECRET=super-secret-key\n```",
+    "compliance_summary": "| # | Principle | Violation | Location | Correction | Severity |\n|---|-----------|-----------|----------|------------|----------|\n| P1 | Use approved words | \"make sure\" is not an approved verb phrase | Line 1 | Replaced with \"Check\" (canonical synonym: check = verify, validate, ensure) | REQUIRED |\n| P10 | No slang, jargon, or regional terms | \"stuff\" is informal/slang | Line 3 | Replaced with \"authentication\" (precise technical noun, P5-allowed) | REQUIRED |\n| P14 | Use American English spelling; no contractions | \"it's\" is a contraction | Line 1 | Expanded to \"it is\" and split into a separate sentence | REQUIRED |\n| P11 | One term per concept \u2014 be consistent | \"make sure\" and implied \"check\" are two forms for same concept | Line 1 | Single verb \"Check\" now used consistently | ADVISORY |\n| P1 | Use approved words | \"correct\" is borderline (approved in STE dictionary as adjective, but \"verify\" or \"valid\" may be preferred) | Line 1 | Retained \u2014 \"correct\" is an approved adjective in the STE dictionary | OK |\n\n## Notes\n\n- **No sentence-length violations**: All corrected sentences are well under the 20/25 word limits.\n- **JWT** and **DATABASE_URL** are technical code nouns \u2014 retained per P5.\n- **Secret key** is a standard cryptographic technical noun \u2014 retained per P5/P6.\n- **postgresql://localhost:5432/myapp** is a connection URI, a technical literal \u2014 no change needed.\n- The original used one comment per logical line, which is already good structure. The correction only fixes word choice and grammar within those comments.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "database",
+      "URL",
+      "PostgreSQL",
+      "JWT",
+      "secret",
+      "key"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65309,
+    "token_count_input": 38,
+    "token_count_output": 43,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 6/6",
+    "difficulty": "easy"
+  },
+  {
+    "test_id": "bench-030",
+    "category": "config",
+    "description": "Dockerfile with passive instructions",
+    "input": "# The application will be built using the Node.js image\nFROM node:18\n# Dependencies should be installed before copying the source code\nRUN npm install",
+    "output": "```\n# Use the Node.js 18 image to build the application\nFROM node:18\n# Install the dependencies before you copy the source code\nRUN npm install\n```",
+    "compliance_summary": "| Principle | Issue Found | Correction Applied | Status |\n|-----------|-------------|--------------------|--------|\n| P1 (approved words) | \"using\" \u2014 not an approved word form; prefer \"use\" per synonym table | Replaced \"using\" with \"use\" | COMPLIANT |\n| P4 (approved verb forms) | \"will be built\" \u2014 passive voice, not an approved procedural form | Changed to active imperative \"build\" | COMPLIANT |\n| P4 (approved verb forms) | \"should be installed\" \u2014 passive/modal, not an approved procedural form | Changed to active imperative \"Install\" | COMPLIANT |\n| Anti-pattern (-ing) | \"using\" and \"copying\" \u2014 -ing forms where simple verbs are available | Replaced \"using\" \u2192 \"use\", \"copying\" \u2192 \"copy\" | COMPLIANT |\n| P5 (technical nouns) | `node:18`, `npm`, `FROM`, `RUN` \u2014 Dockerfile syntax | Retained as technical code nouns | COMPLIANT |\n| P10 (no slang) | No slang, jargon, or regional terms found | None needed | COMPLIANT |\n| P11 (consistency) | Terms used consistently across both comment lines | None needed | COMPLIANT |\n| P12 (technical verbs) | \"build\", \"install\", \"copy\" \u2014 all approved technical verbs | Retained | COMPLIANT |\n| P13 (verb-as-noun) | No technical verbs used as nouns | None needed | COMPLIANT |\n| P14 (American spelling) | All spellings already American English | None needed | COMPLIANT |\n\n**Summary**: 4 violations corrected across 2 comment lines. The two Dockerfile instructions (`FROM`, `RUN`) were already compliant as technical code nouns. All corrections follow the canonical synonym table (use, not utilize/leverage/employ) and enforce active imperative mood with no -ing forms.",
+    "expected_principles_satisfied": [
+      "P4",
+      "P1"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "build",
+      "Node.js",
+      "install",
+      "dependencies",
+      "source"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65307,
+    "token_count_input": 37,
+    "token_count_output": 36,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 5/5",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-031",
+    "category": "config",
+    "description": "CI config with ambiguous instructions",
+    "input": "# This job does the testing stuff\n# It runs all the tests and makes sure nothing is broken\n# If something fails, the build will be marked as red\ntest:\n  script: npm test",
+    "output": "```yaml\n# This job runs the tests\n# It checks that all tests pass\n# If a test fails, the pipeline reports a failure\ntest:\n  script: npm test\n```",
+    "compliance_summary": "| # | Original | Issue | Principle(s) | Correction |\n|---|----------|-------|--------------|------------|\n| 1 | `stuff` | Slang / informal jargon | P10 (no slang or jargon) | Removed; rephrased to `runs the tests` |\n| 2 | `does` | Vague verb outside approved set | P1 (use approved words), P11 (consistency) | Replaced with `runs` |\n| 3 | `makes sure` | Phrasal verb; synonym table maps to `check` | P1, P3 (approved meanings only) | `checks` |\n| 4 | `nothing is broken` | `broken` is informal idiom for test failure | P10 (no jargon), P11 (one term per concept) | `all tests pass` |\n| 5 | `something` | Vague, non-specific | P9 (prefer short, clear nouns) | `a test` |\n| 6 | `marked as red` | CI/CD slang idiom for pipeline failure | P10 (no jargon or regional terms) | `reports a failure` |\n| 7 | `testing` (adj.) | Unnecessary `-ing` form in comment | P4 (approved adjective forms) | `tests` (noun) |\n\nAll corrections align with the canonical synonym table (`check` for verify/ensure, `do` \u2192 `run` for procedural clarity) and enforce one term per concept (P11) by using `fail` / `failure` consistently instead of mixing `broken` and `red`.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10",
+      "P3"
+    ],
+    "expected_principles_missed": [
+      "P14"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "test",
+      "run",
+      "fail"
+    ],
+    "correctness_score": 0.93,
+    "latency_ms": 65306,
+    "token_count_input": 42,
+    "token_count_output": 36,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P14; Keywords OK: 3/4",
+    "difficulty": "medium"
+  },
+  {
+    "test_id": "bench-032",
+    "category": "composite",
+    "description": "Full README section with mixed violations",
+    "input": "# MyCoolProject\n\nThis project is a really cool tool that helps developers do their work faster. It has a bunch of features that make development super easy.\n\n## Installation\n\nFirst, you need to install the dependencies. Run `npm install` to get everything set up.\n\n## Usage\n\n```javascript\nconst cool = require('my-cool-project');\nconst result = cool.doStuff({ option: true });\nconsole.log(result);\n```\n\n## Contributing\n\nIf you want to contribute, please make sure your code is clean and well-documented. We use ESLint and Prettier for code formatting.",
+    "output": "# MyCoolProject\n\nThis project provides tools for development. It includes features that help developers do work faster.\n\n## Installation\n\nInstall the dependencies. Run `npm install` to set up the project.\n\n## Usage\n\n```javascript\nconst cool = require('my-cool-project');\nconst result = cool.doStuff({ option: true });\nconsole.log(result);\n```\n\n## Contributing\n\nTo contribute, check that your code uses ESLint and Prettier for formatting. Make sure the documentation is complete.",
+    "compliance_summary": "| Location | Original | Issue | Principle | Correction |\n|---|---|---|---|---|\n| Line 1 (desc) | \"really cool tool\" | Slang, unapproved words \"really\" / \"cool\" | P10, P1 | Removed; replaced with \"provides tools\" |\n| Line 1 (desc) | \"a bunch of features\" | Slang / jargon | P10 | \"includes features\" |\n| Line 1 (desc) | \"super easy\" | Slang \"super\"; vague \"easy\" | P10, P1 | Removed entirely |\n| Line 1 (desc) | \"make development super easy\" | \"make\" used vaguely | P1 (approved meaning) | Replaced with \"help developers do work faster\" |\n| Install | \"First, you need to install\" | Not imperative mood; \"need to\" is informal | Output Format (imperative) | \"Install the dependencies.\" |\n| Install | \"get everything set up\" | Vague pronoun \"everything\" | P11 (one term per concept) | \"set up the project\" |\n| Contrib | \"If you want to contribute\" | \"want to\" informal; not imperative | Output Format | \"To contribute\" |\n| Contrib | \"please make sure\" | \"please\" unnecessary in tech docs | Output Format | \"check that\" |\n| Contrib | \"clean and well-documented\" | \"clean\" is vague / imprecise | P1, P11 | Split into specific checks (ESLint, Prettier, documentation complete) |\n| Contrib | \"We use ESLint and Prettier\" | First-person \"We\" | Output Format | Changed to \"your code uses\" (second-person consistent) |\n\n## Principle-by-Principle Verdict\n\n| Principle | Status | Notes |\n|---|---|---|\n| P1 (approved words) | PASS | All non-code words are standard English; \"cool\" removed as adjective |\n| P2 (part of speech) | PASS | All words used in correct part of speech |\n| P3 (approved meanings) | PASS | No word used with unapproved meaning |\n| P4 (verb/adjective forms) | PASS | All verb forms are approved |\n| P5 (technical code nouns) | PASS | `npm`, `ESLint`, `Prettier`, `require`, `console.log` preserved |\n| P6 (non-approved = technical) | PASS | Code identifiers inside code blocks exempt |\n| P7 (no technical nouns as verbs) | PASS | No violations |\n| P8 (standard tech nouns) | PASS | All technical nouns are well-known |\n| P9 (short clear tech nouns) | PASS | No overly long technical nouns |\n| P10 (no slang/jargon) | FAIL \u2192 CORRECTED | \"really cool\", \"a bunch of\", \"super\" removed |\n| P11 (one term per concept) | PASS | Consistent terminology throughout |\n| P12 (technical verbs allowed) | PASS | \"install\", \"run\" preserved as approved technical verbs |\n| P13 (no tech verbs as nouns) | PASS | No violations |\n| P14 (American spelling) | PASS | All spellings are American English |\n\n**Result: 1 violation found and corrected (P10). All 14 principles now pass.**",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10",
+      "P4",
+      "P8"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [
+      "doStuff",
+      "make sure"
+    ],
+    "expected_keywords_found": [
+      "install",
+      "npm",
+      "require",
+      "ESLint",
+      "Prettier",
+      "contribute"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65303,
+    "token_count_input": 137,
+    "token_count_output": 119,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Forbidden found: doStuff, make sure; Keywords OK: 6/7",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-033",
+    "category": "composite",
+    "description": "API reference page with multiple violation types",
+    "input": "## User API\n\n### GET /api/users\n\nThis endpoint fetches all the users from the database. It should return a JSON array of user objects.\n\n**Parameters:**\n- `page` (optional) - The page number for pagination stuff\n- `limit` (optional) - How many users to fetch per page\n\n**Response:**\n```json\n{\n  \"users\": [...],\n  \"total\": 100\n}\n```\n\n### POST /api/users\n\nCreates a brand new user. You need to send a JSON body with the user data. The password will be hashed automatically.\n\n**Request Body:**\n- `username` (required) - The username for the new user\n- `email` (required) - The email address of the user\n- `password` (required) - The password (will be encrypted)\n\n### Error Codes\n\n- 400: You did something wrong\n- 401: You're not authenticated\n- 500: Something broke on our end",
+    "output": "## User API\n\n### GET /api/users\n\nThis endpoint gets all users from the database. It must return a JSON array of user objects.\n\n**Parameters:**\n- `page` (optional) - The page number for pagination\n- `limit` (optional) - The number of users to get per page\n\n**Response:**\n```json\n{\n  \"users\": [...],\n  \"total\": 100\n}\n```\n\n### POST /api/users\n\nMake a new user. Send a JSON body with the user data. The password is hashed automatically.\n\n**Request Body:**\n- `username` (required) - The username of the new user\n- `email` (required) - The email address of the user\n- `password` (required) - The password (hashed automatically)\n\n### Error Codes\n\n- 400: The request is not valid\n- 401: Authentication is required\n- 500: An internal server error occurred",
+    "compliance_summary": "| # | Violation | Location | Original | Correction | Principle |\n|---|-----------|----------|----------|------------|-----------|\n| 1 | Unapproved verb | GET endpoint | `fetches` | `gets` | P1, Synonym table (get \u2192 retrieve, fetch, obtain) |\n| 2 | Ambiguous modal | GET endpoint | `should return` | `must return` | P1 (use approved, unambiguous wording) |\n| 3 | Slang / jargon | `page` param | `pagination stuff` | `pagination` | P10 (no slang, jargon, or regional terms) |\n| 4 | Unapproved verb | `limit` param | `fetch` | `get` | P1, Synonym table |\n| 5 | Wordy phrasing | `limit` param | `How many users to fetch` | `The number of users to get` | P9 (prefer short, clear terms) |\n| 6 | Unapproved verb | POST endpoint | `Creates` | `Make` | P1, Synonym table (make \u2192 create, generate, produce) |\n| 7 | Slang / jargon | POST endpoint | `brand new` | `new` | P9, P10 (no slang; prefer short terms) |\n| 8 | Second person / non-imperative | POST endpoint | `You need to send` | `Send` | Anti-pattern (use imperative mood) |\n| 9 | Inconsistent terminology | POST body `password` | `encrypted` (parenthetical) | `hashed` | P11 (one term per concept \u2014 \"hashed\" already used) |\n| 10 | Slang / second person | Error 400 | `You did something wrong` | `The request is not valid` | P10, Anti-pattern (no second person) |\n| 11 | Contraction + second person | Error 401 | `You're not authenticated` | `Authentication is required` | Anti-pattern (no contractions; no second person) |\n| 12 | Slang / jargon | Error 500 | `Something broke on our end` | `An internal server error occurred` | P10 (no slang, jargon, or informal phrasing) |\n\n**Total violations found:** 12  \n**Total corrections applied:** 12  \n**Principles satisfied after correction:** All 14 (P1\u2013P14)  \n**Anti-patterns resolved:** 4 (contractions, second person, non-imperative mood, semicolons \u2014 none present after correction)",
+    "expected_principles_satisfied": [
+      "P1",
+      "P4",
+      "P10",
+      "P11",
+      "P14"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "user",
+      "JSON",
+      "error",
+      "400",
+      "401",
+      "500"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65294,
+    "token_count_input": 193,
+    "token_count_output": 186,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 6/9",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-034",
+    "category": "composite",
+    "description": "Release notes with breaking changes",
+    "input": "## Release v2.0.0 \u2014 The Big One\n\nThis is a major release with lots of changes. We've completely overhauled the API, removed a bunch of deprecated stuff, and made everything way faster.\n\n### BREAKING CHANGES\n\n- The old `UserService.create()` method was removed. Use `UserService.register()` now.\n- The config file format changed from JSON to YAML. Old configs won't work anymore.\n- Docker the application using the new Dockerfile. The old one is gone.\n\n### New Features\n\n- Added support for WebSocket connections (real-time stuff!)\n- New admin dashboard with tons of cool widgets\n- Automated deployment pipeline that handles everything for you\n\n### Bug Fixes\n\n- Fixed that annoying bug where the app would crash randomly\n- The login page doesn't look ugly anymore\n- Various other fixes and improvements\n\n### Migration Guide\n\nTo upgrade from v1.x, you need to:\n1. Update your config files to YAML format\n2. Change all `UserService.create()` calls to `UserService.register()`\n3. Rebuild your Docker containers with the new Dockerfile\n4. Test everything thoroughly before deploying to production",
+    "output": "```\n## Release v2.0.0 \u2014 Major Update\n\nThis is a major release with many changes. The API is updated, deprecated\nfeatures are removed, and the performance is improved.\n\n### BREAKING CHANGES\n\n- The `UserService.create()` method is removed. Use `UserService.register()`.\n- The config file format changed from JSON to YAML. Old config files are not\n  compatible.\n- Build the application Docker image with the new Dockerfile. The old\n  Dockerfile is removed.\n\n### New Features\n\n- Added support for WebSocket connections for real-time communication.\n- New admin dashboard with new widgets.\n- Automated deployment pipeline that manages the full deployment process.\n\n### Bug Fixes\n\n- Fixed a bug that caused the application to stop without warning.\n- Fixed the login page layout.\n- Other fixes and improvements are included.\n\n### Migration Guide\n\nTo upgrade from v1.x:\n1. Update your config files to the YAML format.\n2. Change all `UserService.create()` calls to `UserService.register()`.\n3. Rebuild your Docker containers with the new Dockerfile.\n4. Test the full application before you deploy to production.\n```",
+    "compliance_summary": "| # | Original | Issue | Principle | Correction |\n|---|----------|-------|-----------|------------|\n| 1 | \"The Big One\" | Slang/editorializing | P10 | \"Major Update\" |\n| 2 | \"lots of\" | Informal quantifier | P10 | \"many\" |\n| 3 | \"We've\" | Contraction | Anti-pattern | \"This is a major release\" |\n| 4 | \"completely overhauled\" | \"overhauled\" unapproved, \"completely\" filler | P1, P10 | \"updated\" |\n| 5 | \"a bunch of\" | Slang | P10 | Removed |\n| 6 | \"stuff\" | Slang | P10 | \"features\" |\n| 7 | \"way faster\" | Informal intensifier | P10 | \"the performance is improved\" |\n| 8 | \"won't work anymore\" | Contraction + informal | Anti-pattern, P10 | \"are not compatible\" |\n| 9 | \"Docker the application\" | Technical noun used as verb | P7 | \"Build the application Docker image\" |\n| 10 | \"gone\" | Informal | P10 | \"removed\" |\n| 11 | \"real-time stuff!\" | \"stuff\" slang, exclamation mark informal | P10 | \"real-time communication\" |\n| 12 | \"tons of\" | Slang | P10 | Removed |\n| 13 | \"cool\" | Slang | P10 | \"new\" |\n| 14 | \"handles everything for you\" | \"everything\" vague, \"for you\" informal | P10, P11 | \"manages the full deployment process\" |\n| 15 | \"annoying\" | Subjective adjective | P10 | Removed |\n| 16 | \"crash randomly\" | \"randomly\" imprecise for a defect | P10, P11 | \"stop without warning\" |\n| 17 | \"doesn't look ugly anymore\" | Contraction + \"ugly\" slang + informal \"anymore\" | Anti-pattern, P10 | \"Fixed the login page layout\" |\n| 18 | \"Various other fixes\" | \"Various\" filler, sentence fragment | P10 | \"Other fixes and improvements are included\" |",
+    "expected_principles_satisfied": [
+      "P1",
+      "P7",
+      "P10",
+      "P4"
+    ],
+    "expected_principles_missed": [
+      "P14"
+    ],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "release",
+      "BREAKING",
+      "update",
+      "config",
+      "Docker",
+      "container",
+      "register"
+    ],
+    "correctness_score": 0.97,
+    "latency_ms": 65279,
+    "token_count_input": 272,
+    "token_count_output": 276,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Missed: P14; Keywords OK: 7/8",
+    "difficulty": "hard"
+  },
+  {
+    "test_id": "bench-035",
+    "category": "composite",
+    "description": "Code review comment thread",
+    "input": "@dev-team I looked at the PR and here's my feedback:\n\n1. The `processData` function is way too long. It does a bunch of things and should be split into smaller functions.\n\n2. You're using `var` instead of `const/let` everywhere. This is not good practice.\n\n3. The error handling is kind of messy. You're catching errors but not doing anything useful with them.\n\n4. I think we should add some tests for this because if something breaks it'll be really bad.\n\n5. The variable names could be better. `x`, `y`, `tmp` aren't very descriptive.\n\nOverall it looks okay but needs some work before we can merge it.",
+    "output": "@dev-team I checked the PR. These are my comments:\n\n1. The `processData` function is too long. It does many tasks. Split it into smaller functions.\n\n2. You use `var` instead of `const` and `let`. This does not follow best practices.\n\n3. The error handling is not clear. You catch errors but do not give useful information about them.\n\n4. Add tests for this function. A failure without tests can cause serious problems.\n\n5. Make the variable names clearer. `x`, `y`, and `tmp` are not descriptive.\n\nThe PR is functional but needs changes before you can merge it.",
+    "compliance_summary": "| Principle | Violation Found | Correction Applied |\n|-----------|----------------|-------------------|\n| P1 (approved words) | \"looked at\", \"bunch of\", \"kind of\", \"messy\", \"really bad\", \"okay\", \"work\" (noun) | Replaced with \"checked\", \"many\", \"not clear\", \"serious problems\", \"functional\", \"changes\" |\n| P2 (part of speech) | \"needs some work\" \u2014 \"work\" as noun unapproved | Replaced with \"needs changes\" |\n| P3 (approved meanings) | No violations | \u2014 |\n| P4 (verb/adjective forms) | No violations | \u2014 |\n| P5 (technical nouns) | `processData`, `var`, `const`, `let`, `x`, `y`, `tmp` \u2014 all allowed | Retained as-is |\n| P6 (non-approved words) | No non-approved words used outside technical nouns | \u2014 |\n| P7 (noun as verb) | No violations | \u2014 |\n| P8 (standard technical nouns) | All technical nouns are standard | \u2014 |\n| P9 (short technical nouns) | All technical nouns are short and clear | \u2014 |\n| P10 (no slang/jargon) | \"way too\", \"a bunch of\", \"kind of\", \"messy\", \"really bad\", \"okay\" | Removed all informal language |\n| P11 (one term per concept) | No inconsistencies | \u2014 |\n| P12 (technical verbs) | \"split\", \"merge\" \u2014 both approved technical verbs | Retained |\n| P13 (verb as noun) | No violations | \u2014 |\n| P14 (American spelling) | All words use American spelling | \u2014 |\n\n## Anti-Pattern Compliance\n\n| Anti-Pattern | Violation Found | Correction Applied |\n|-------------|----------------|-------------------|\n| Contractions | \"You're\" (\u00d72), \"it'll\", \"aren't\" | Expanded to \"You are\", \"it will\", \"are not\" |\n| Semicolons | None | \u2014 |\n| Nested clauses >2 | None | \u2014 |\n| Missing articles | None | \u2014 |\n| \"-ing\" as main verb | None | \u2014 |\n\n## Sentence Length Check\n\nAll sentences: 4\u201312 words. Maximum allowed: 20 (procedural) / 25 (descriptive). All pass.",
+    "expected_principles_satisfied": [
+      "P1",
+      "P10",
+      "P4",
+      "P14",
+      "P8"
+    ],
+    "expected_principles_missed": [],
+    "forbidden_keywords_found": [],
+    "expected_keywords_found": [
+      "function",
+      "split",
+      "const",
+      "let",
+      "error",
+      "test",
+      "variable",
+      "merge"
+    ],
+    "correctness_score": 1.0,
+    "latency_ms": 65086,
+    "token_count_input": 150,
+    "token_count_output": 140,
+    "diff_ratio": 0.0,
+    "passed": true,
+    "notes": "Keywords OK: 8/9",
+    "difficulty": "hard"
+  }
+]

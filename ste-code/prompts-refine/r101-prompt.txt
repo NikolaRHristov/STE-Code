@@ -1,0 +1,31 @@
+TASK: Reformat the extracted spec file into clean, standardized markdown following ALL 9 refinement rules below.
+
+INPUT: ste-code/extracted/w101-p401-404.md
+OUTPUT: ste-code/refined/r101-p401-404.md
+
+RULES (apply in order, do not skip any):
+
+1. PRESERVE ALL CONTENT. Never delete a single word, number, example, or table cell.
+
+2. HEADINGS: Use # for page header, ## for sections, ### for rules, #### for dictionary entries. Remove ### from proper names like ASD-STE100.
+
+3. TABLES: Convert all tables to clean markdown format. Align columns. Add missing headers. Merge cells split by PDF extraction.
+
+4. STE/NON-STE: Format ALL example pairs as:
+   > **STE:** [text]
+   > **Non-STE:** [text]
+   Separate merged examples into individual pairs.
+
+5. CODE: Wrap code snippets in ```language fences.
+
+6. DICTIONARY: Format each entry with - list under #### heading. Separate APPROVED from UNAPPROVED entries clearly.
+
+7. METADATA: Replace repetitive page headers with a single metadata block:
+   > **Source:** ASD-STE100 Issue 9, January 2025
+   > **Pages:** 401–404 of 434
+
+8. LISTS: Standardize indentation. Use 1. 2. 3. for numbered, - for bullets.
+
+9. SPACING: One blank line between sections. No triple blanks. No trailing spaces.
+
+Output ONLY the refined markdown file. No explanations, no commentary.

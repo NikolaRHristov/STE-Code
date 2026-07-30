@@ -1,0 +1,101 @@
+# STE-Code Self-Reading Manual v1.0
+
+## S0 — How to Use This Manual
+This manual is recursive. Read it in order: S1 (principles) → S3 (reading protocol) → S4 (extraction) → S2 (rules reference). Apply S3 to any code document you process.
+
+## S1 — Core STE-Code Principles
+
+1. **One word, one meaning**: Each term means exactly one thing. `deploy` means push to production, not also install or configure.
+2. **Short sentences**: 20 words max for instructions, 25 for descriptions.
+3. **Active voice**: "Run the tests" not "The tests should be run."
+4. **Imperative mood**: "Set the timeout to 500ms" not "You should set the timeout."
+5. **No jargon**: Say "stop the server" not "kill the process."
+6. **Consistent terms**: Pick one name per concept. Don't mix `config` and `settings` for the same thing.
+7. **BREAKING/DEPRECATED**: Flag destructive changes before the related step.
+8. **Technical nouns**: Framework names (React), tools (webpack), languages (TypeScript), protocols (HTTP/2) are all allowed.
+9. **Approved verbs only**: `run`, `build`, `test`, `deploy`, `start`, `stop`, `check`, `set`, `get`, `show`, `make`, `do`, `send`, `remove`, `keep`.
+10. **No noun clusters**: Max 3 nouns together. "React component lifecycle method" → "method in the React component lifecycle."
+11. **One topic per paragraph**: Each paragraph covers exactly one concept.
+12. **Vertical lists**: Use bullet points for 3+ items. Consistent punctuation.
+13. **Define abbreviations**: Spell out on first use: "Continuous Integration (CI)."
+14. **Code examples**: Show both non-ideal and STE-Code versions. Mark clearly.
+
+## S2 — Knowledge Base
+
+### All 53 Rules (adapted for code domain)
+64 adapted rule files cover all 53 STE-Code rules across 9 sections plus 4 General Rules.
+Each rule preserves the original STE rule number and structure, adapted with code-domain examples.
+
+### 19 Technical Code Noun Categories
+1. Language keywords — if, else, return, class, async, await
+2. Frameworks and runtimes — React, Node.js, Docker, PostgreSQL
+3. Dev tools and build systems — webpack, eslint, git, npm, cargo
+4. Dependencies and packages — lodash, express, serde, tokio
+5. Deployment targets — staging, production, AWS, Vercel
+6. Modules, classes, services — UserService, AuthModule, PaymentGateway
+7. Algorithmic terms — hash, sort, O(n), cache, memoize
+8. Routing and state — Router, middleware, redirect, proxy
+9. Data sizes and time — 500ms, 2GB, 200 OK, timeout, TTL
+10. String literals and logs — "connection refused", Error: timeout
+11. Roles, teams, services — admin, moderator, OAuth provider
+12. UI/UX and accessibility — button, modal, aria-label, focus
+13. Configuration files — .env, .gitignore, tsconfig.json
+14. Error states — NullPointerException, 500, race condition
+15. Spec files — package.json, Dockerfile, openapi.yaml
+16. Runtime conditions — cold start, degraded, feature flag on
+17. Terminal colors — red, cyan, 256-color, truecolor
+18. Bug taxonomy — crash, memory leak, XSS, SQL injection
+19. Network terms — HTTP/2, WebSocket, gRPC, TLS 1.3
+
+## S3 — Page-Reading Protocol
+For any code document (README, API doc, commit message, comment):
+1. Classify the document type
+2. Identify sections (setup, usage, API reference, etc.)
+3. For each paragraph: check sentence length, active voice, approved vocabulary
+4. Extract structural elements: classes, functions, parameters, return values
+5. Flag violations with rule references
+
+## S4 — Skill Extraction Framework
+5 patterns for code documentation:
+1. **API reference pattern**: function signature → parameters → return value → example
+2. **Setup pattern**: prerequisites → install → configure → verify
+3. **Usage pattern**: import → instantiate → call → handle result
+4. **Error pattern**: condition → action → consequence
+5. **Deploy pattern**: build → test → stage → release
+
+## S5 — UML Extraction
+Generate Mermaid diagrams for:
+- Class relationships (inheritance, composition, dependency)
+- Sequence diagrams (API call flows)
+- Flowcharts (decision logic, error handling)
+
+## S6 — Recursive Questioning Protocol
+13 questions for every code document:
+1. Is the purpose stated in the first sentence?
+2. Are all abbreviations defined?
+3. Do sentences stay under 20/25 words?
+4. Is active voice used throughout?
+5. Are technical terms consistent?
+6. Are code examples real and runnable?
+7. Are BREAKING/DEPRECATED warnings placed before the action?
+8. Are error messages shown with solutions?
+9. Is the vocabulary from the approved list?
+10. Are noun clusters limited to 3 words?
+11. Are lists formatted consistently?
+12. Is there exactly one topic per paragraph?
+13. Can a new team member follow the instructions without asking?
+
+## S7 — Output Format
+Per-turn output:
+```
+## COMPLIANCE STATUS: N violations found
+## STE-CODE OUTPUT: [corrected text]
+## UML EXTRACTION: [Mermaid diagrams]
+## OPTIMIZATIONS: [before/after metrics]
+```
+
+## S8 — Context Window Management
+- Keep S1-S3 in context always
+- Load S2 (rule reference) on demand
+- Discard raw source pages after processing
+- Save state between turns

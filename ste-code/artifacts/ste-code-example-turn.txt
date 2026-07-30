@@ -1,0 +1,50 @@
+# STE-Code Example Turn
+
+## INPUT (Non-STE-Code)
+```
+// This function should be called with the user object and
+// the return value needs to be checked for null before proceeding.
+// It'll throw an error if something goes wrong.
+function processUserData(userObj) {
+    const result = doProcessing(userObj);
+    if (result == null) {
+        throw new Error("Processing failed!");
+    }
+    return result;
+}
+```
+
+## COMPLIANCE STATUS: 8 violations found
+
+| # | Violation | Rule |
+|---|-----------|------|
+| 1 | "should be called" — passive voice | 3.6 |
+| 2 | "needs to be checked" — passive voice | 3.6 |
+| 3 | "It'll" — contraction | 4.2 |
+| 4 | "something goes wrong" — vague | 1.1 |
+| 5 | "userObj" — inconsistent naming | 1.11 |
+| 6 | "doProcessing" — unapproved verb | 1.1 |
+| 7 | "!" in error message — unnecessary punctuation | 8.7 |
+| 8 | Comment precedes code — should be BREAKING if destructive | 7.1 |
+
+## STE-CODE OUTPUT
+```
+// NOTE: This function processes user data and returns the result.
+// If processing fails, it throws an error.
+function processUser(user) {
+    const result = transform(user);
+    if (result === null) {
+        throw new Error("Processing failed");
+    }
+    return result;
+}
+```
+
+## OPTIMIZATIONS
+| Metric | Before | After | Change |
+|--------|--------|-------|--------|
+| Words | 58 | 42 | -28% |
+| Passive constructions | 2 | 0 | -100% |
+| Contractions | 1 | 0 | -100% |
+| Vague terms | 1 | 0 | -100% |
+| Rule violations | 8 | 0 | -100% |

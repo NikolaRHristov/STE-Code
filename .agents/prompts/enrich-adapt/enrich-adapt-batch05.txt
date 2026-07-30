@@ -1,0 +1,42 @@
+TASK: Second-pass enrichment on ALL 55 adapted rule files in ste-code/adapted/.
+
+Read these specific files:
+- ste-code/adapted/a-sec7-rule7.3.md
+- ste-code/adapted/a-sec8-rule8.1.md
+- ste-code/adapted/a-sec8-rule8.2.md
+- ste-code/adapted/a-sec8-rule8.3.md
+- ste-code/adapted/a-sec8-rule8.4.md
+- ste-code/adapted/a-sec8-rule8.5.md
+- ste-code/adapted/a-sec8-rule8.6.md
+- ste-code/adapted/a-sec9-gr1.md
+- ste-code/adapted/a-sec9-gr2.md
+- ste-code/adapted/a-sec9-gr3.md For each file, apply these improvements:
+
+1. CROSS-REFERENCES: Where a rule mentions another rule number, add:
+   > **See also:** Rule X.Y — [title]
+   
+2. EXAMPLE COMPLETENESS: Every Non-STE/STE example pair must have both parts fully written. No "..." abbreviations. If an example pair is missing, add one adapted from the original spec pair referenced in the file.
+
+3. TRACEABILITY: Ensure every code-domain example has a comment tracing it back to the spec:
+   > *Adapted from spec pair: [original aerospace example]*
+
+4. FORMATTING CONSISTENCY: 
+   - `# Rule X.Y — Title` as first line
+   - `> **Source:** Adapted from ASD-STE100 Issue 9, Rule X.Y` as line 3
+   - `## Original Rule` section
+   - `## STE-Code Adaptation` section  
+   - `### Examples` section with Non-STE/STE pairs
+   - Blank line after every heading
+   - No trailing whitespace
+   - No triple blank lines
+
+5. QUALITY CHECK: For each adapted rule, verify:
+   - The code-domain rewrite preserves the original rule's intent
+   - Examples are genuinely code-domain (not aerospace)
+   - Technical terms are consistent across all 55 files
+   - 19 categories referenced (not 22)
+   - deepseek-v4-pro referenced (not deepseek-pro)
+
+6. CONTENT PRESERVATION: Never delete original rule text. Never delete existing examples. Only ADD missing structure and cross-references.
+
+Output: Overwrite each file with the enriched version. No commentary.

@@ -1,0 +1,30 @@
+__pycache__
+.venv
+
+!.agents
+!.agents/AGENTS.md
+
+# === BENCHMARK: keep only aggregate + per-test JSON ===
+.agents/benchmark/results/**/bench-*-prompt.txt
+.agents/benchmark/results/**/bench-*-output.txt
+.agents/benchmark/results/**/.cat_tracking
+.agents/benchmark/results/**/worker-*/
+# Control group
+.agents/benchmark/results-control/**/bench-*-prompt.txt
+.agents/benchmark/results-control/**/bench-*-output.txt
+.agents/benchmark/results-control/**/.cat_tracking
+.agents/benchmark/results-control/**/worker-*/
+
+# === REWRITES: temporary worker output ===
+.agents/rewrites/
+
+# === Generated code examples ===
+.agents/benchmark/examples/*.py
+.agents/benchmark/examples/*.js
+.agents/benchmark/examples/*.ts
+
+# === Root-level stray files ===
+/fetchUserData.js
+/processPayload.ts
+/user_service.py
+/validate_email.py

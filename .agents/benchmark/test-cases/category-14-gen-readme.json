@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bench-056",
+    "category": "gen_readme",
+    "description": "Write an installation section",
+    "prompt": "Write an Installation section for a Python CLI tool called `ste-code-checker`. It requires Python 3.10+, uses pip for installation, and needs a config file. Use STE-Code: imperative mood, 20-word sentences, approved terms.",
+    "expected_principles": ["P4", "P1", "P5", "P10"],
+    "expected_keywords": ["Install", "pip install", "Python 3.10", "config", "require"],
+    "forbidden_keywords": ["you need to", "should", "just run", "stuff", "first you have to"],
+    "required_patterns": ["pip install"],
+    "max_tokens": 350,
+    "difficulty": "easy"
+  },
+  {
+    "id": "bench-057",
+    "category": "gen_readme",
+    "description": "Write a usage example section",
+    "prompt": "Write a Usage section for a code formatter tool. Show a command-line example and explain the output. Use STE-Code: code blocks are technical nouns (P5), imperative mood for instructions, no jargon.",
+    "expected_principles": ["P4", "P5", "P10"],
+    "expected_keywords": ["```", "command", "format", "output", "example", "run"],
+    "forbidden_keywords": ["you can", "should look like", "stuff", "basically", "just do"],
+    "required_patterns": ["```"],
+    "max_tokens": 400,
+    "difficulty": "medium"
+  },
+  {
+    "id": "bench-058",
+    "category": "gen_readme",
+    "description": "Write a project description paragraph",
+    "prompt": "Write a one-paragraph project description for a tool that checks code documentation for STE-Code compliance. Explain what it does, who it helps, and its main benefit. Use STE-Code: active voice, approved words, no marketing fluff.",
+    "expected_principles": ["P1", "P4", "P8", "P10"],
+    "expected_keywords": ["check", "documentation", "STE-Code", "compliance", "tool", "developer"],
+    "forbidden_keywords": ["revolutionary", "game-changing", "utilize", "leverage", "robust", "seamless", "stuff"],
+    "required_patterns": [],
+    "max_tokens": 300,
+    "difficulty": "medium"
+  },
+  {
+    "id": "bench-059",
+    "category": "gen_readme",
+    "description": "Write a complete mini-README",
+    "prompt": "Write a complete README for a small open-source library called `validate-json`. It validates JSON against a schema, supports custom rules, and has a CLI and programmatic API. Include: description, install, usage, contributing. Use STE-Code throughout.",
+    "expected_principles": ["P1", "P4", "P5", "P8", "P10", "P11"],
+    "expected_keywords": ["validate", "JSON", "schema", "install", "usage", "contribute", "CLI", "API"],
+    "forbidden_keywords": ["stuff", "thing", "utilize", "leverage", "robust", "seamless", "should", "you can", "just"],
+    "required_patterns": ["Install", "Usage", "Contribut"],
+    "max_tokens": 700,
+    "difficulty": "hard"
+  }
+]
