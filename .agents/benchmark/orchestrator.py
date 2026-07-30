@@ -281,10 +281,21 @@ for tc in test_cases:
         pattern_penalty = 0.2 * len(patterns_missed) / len(required_patterns)
         correctness = round(max(0.0, correctness - pattern_penalty), 2)
     
-    # Token estimation (handle both input and prompt)
+    # Token estimation (full output, not just corrected text)
     task_text = tc.get("prompt", tc.get("input", ""))
     token_input = len(task_text) // 4
-    token_output = len(corrected) // 4
+    token_output = len(output) // 4  # Full output, not truncated corrected text
+    
+    # Compute actual diff ratio (input vs corrected output)
+    import difflib
+    if corrected and task_text:
+        diff_ratio = difflib.SequenceMatcher(None, task_text.lower(), corrected.lower()).ratio()
+        diff_ratio = round(1.0 - diff_ratio, 2)  # 0 = identical, 1 = completely different
+    else:
+        diff_ratio = 0.0
+    
+    # Detect truncated/stub output (worker timeout or crash)
+    is_truncated = len(output) < 20 or output.startswith("HERMES_ERROR")
     
     # Pass/fail threshold
     passed = correctness >= 0.7
@@ -316,7 +327,8 @@ for tc in test_cases:
         "latency_ms": latency_ms,
         "token_count_input": token_input,
         "token_count_output": token_output,
-        "diff_ratio": 0.0,  # Would need expected output text for real diff
+        "diff_ratio": diff_ratio,
+        "truncated": is_truncated,
         "passed": passed,
         "notes": "; ".join(notes_parts) if notes_parts else "All checks passed",
         "difficulty": tc.get("difficulty", "unknown"),

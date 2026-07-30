@@ -1,5 +1,0 @@
-Line 12 raw repr: '### Original (master.md line 1698-1709)\n'
-Stripped repr: '### Original (master.md line 1698-1709)'
-Starts with '###': True
-Starts with '### ': True
-Chars 0-5 ord: [35, 35, 35, 32, 79, 114]
