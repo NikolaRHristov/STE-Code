@@ -1,0 +1,10 @@
+Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
+
+1. .agents/skills/spec-extraction/execution-auditor/SKILL.md
+2. .agents/skills/spec-extraction/execution-auditor/references/evidence-commands.md
+3. .agents/skills/spec-extraction/agent-state-report/SKILL.md
+4. .agents/skills/spec-extraction/ste-code-continue/extractor.md
+5. .agents/skills/spec-extraction/ste-code-continue/refiner.md
+6. .agents/skills/spec-extraction/ste-code-continue/continuation.md
+
+For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchC-w3.md. Output ONLY the assessment file.

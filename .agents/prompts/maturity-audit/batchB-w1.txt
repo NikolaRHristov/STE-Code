@@ -1,0 +1,8 @@
+Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
+
+1. .agents/skills/extraction/SKILL.md
+2. .agents/skills/refinement/SKILL.md
+3. .agents/skills/merging/SKILL.md
+4. .agents/skills/adaptation/SKILL.md
+
+For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchB-w1.md. Output ONLY the assessment file — no preamble, no commentary.

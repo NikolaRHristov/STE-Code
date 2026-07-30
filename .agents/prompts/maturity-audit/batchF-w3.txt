@@ -1,0 +1,10 @@
+Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
+
+1. ste-code/v2/narratives/system-prompts/ste-code-user.md
+2. ste-code/v2/narratives/system-prompts/ste-code-micro.md
+3. ste-code/v2/narratives/system-prompts/ste-code-developer.md
+4. ste-code/v2/narratives/system-prompts/ste-code-agentic.md
+5. ste-code/v2/narratives/examples/example-readme.md
+6. ste-code/v2/narratives/examples/example-commit-message.md
+
+For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchF-w3.md. Output ONLY the assessment file.

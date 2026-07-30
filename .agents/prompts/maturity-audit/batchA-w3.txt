@@ -1,0 +1,7 @@
+Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
+
+1. .agents/agent/agent-7-level-worker.md
+2. .agents/agent/agent-8-extension-worker.md
+3. .agents/agent/agent-9-translations.md
+
+For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchA-w3.md. Output ONLY the assessment file — no preamble, no commentary.

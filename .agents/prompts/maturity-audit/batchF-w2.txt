@@ -1,0 +1,8 @@
+Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
+
+1. SCE/compute/prompts/rule-adaptation.prompt.md
+2. SCE/compute/prompts/compliance-check.prompt.md
+3. SCE/README.md
+4. SCE/core/README.md
+
+For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchF-w2.md. Output ONLY the assessment file.

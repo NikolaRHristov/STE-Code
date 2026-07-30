@@ -1,0 +1,48 @@
+```json
+{
+  "pass": "code-examples",
+  "batch": "test",
+  "entries": [
+    {
+      "term": "stop",
+      "type": "verb",
+      "code_example_ste": "Stop the deployment pipeline before you change the configuration.",
+      "code_example_non_ste": "Abandon the deployment pipeline before you change the configuration.",
+      "rule_ref": "abandon → STOP (Rule 1.3)",
+      "domain": "CI/CD"
+    },
+    {
+      "term": "start",
+      "type": "verb",
+      "code_example_ste": "Start the background worker to process the queue.",
+      "code_example_non_ste": "Activate the background worker to process the queue.",
+      "rule_ref": "activate → START (Rule 1.1, now APPROVED as ACTIVATE)",
+      "domain": "Services"
+    },
+    {
+      "term": "task",
+      "type": "noun",
+      "code_example_ste": "The scheduled task sends a report at midnight.",
+      "code_example_non_ste": "The scheduled action sends a report at midnight.",
+      "rule_ref": "action → TASK (Rule 1.11)",
+      "domain": "Automation"
+    },
+    {
+      "term": "complete",
+      "type": "verb",
+      "code_example_ste": "Complete the database migration before you deploy the new version.",
+      "code_example_non_ste": "Accomplish the database migration before you deploy the new version.",
+      "rule_ref": "accomplish → COMPLETE (Rule 1.3)",
+      "domain": "Operations"
+    },
+    {
+      "term": "procedure",
+      "type": "noun",
+      "code_example_ste": "Follow the procedure to reset the authentication token.",
+      "code_example_non_ste": "Follow the activity to reset the authentication token.",
+      "rule_ref": "activity → PROCEDURE (Rule 1.11)",
+      "domain": "Security"
+    }
+  ]
+}
+```

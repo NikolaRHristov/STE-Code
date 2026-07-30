@@ -1,0 +1,482 @@
+{
+  "pass": "code-examples",
+  "batch": 1,
+  "generated": "2025-07-30",
+  "entries": [
+    {
+      "rule": "R1.1 - Use approved words from the dictionary",
+      "ste_example": "Use the approved configuration file to set the server parameters.",
+      "non_ste_example": "Utilize the authorized config file to establish the server settings."
+    },
+    {
+      "rule": "R1.1 - Use approved words from the dictionary",
+      "ste_example": "Remove the old module before you install the new one.",
+      "non_ste_example": "Eradicate the deprecated module prior to incorporating the replacement."
+    },
+    {
+      "rule": "R1.1 - Use approved words from the dictionary",
+      "ste_example": "Make sure that the database connection is active.",
+      "non_ste_example": "Ascertain that the database connectivity is operational."
+    },
+    {
+      "rule": "R1.2 - Use approved words with their approved meanings only",
+      "ste_example": "Close the socket after the data transfer is complete.",
+      "non_ste_example": "Terminate the socket once the data transmission has concluded."
+    },
+    {
+      "rule": "R1.2 - Use approved words with their approved meanings only",
+      "ste_example": "Run the test for each function in the module.",
+      "non_ste_example": "Execute the examination across every capability inside the component."
+    },
+    {
+      "rule": "R1.2 - Use approved words with their approved meanings only",
+      "ste_example": "The function returns a value of type string.",
+      "non_ste_example": "The routine delivers a result that belongs to the string classification."
+    },
+    {
+      "rule": "R1.3 - Do not use words with more than one meaning if another approved word exists",
+      "ste_example": "Set the timeout to 30 seconds.",
+      "non_ste_example": "Configure the timeout duration to a period of 30 seconds."
+    },
+    {
+      "rule": "R1.3 - Do not use words with more than one meaning if another approved word exists",
+      "ste_example": "The API endpoint returns the user profile data.",
+      "non_ste_example": "The API endpoint comes back with the user profile details."
+    },
+    {
+      "rule": "R1.3 - Do not use words with more than one meaning if another approved word exists",
+      "ste_example": "Check the log file for error messages.",
+      "non_ste_example": "Inspect the log file to determine the presence of error notifications."
+    },
+    {
+      "rule": "R1.4 - Use only the approved forms of adjectives",
+      "ste_example": "This algorithm is faster than the previous one.",
+      "non_ste_example": "This algorithm is significantly more performant relative to its predecessor."
+    },
+    {
+      "rule": "R1.4 - Use only the approved forms of adjectives",
+      "ste_example": "The new caching layer makes queries much faster.",
+      "non_ste_example": "The novel caching layer renders queries exponentially speedier."
+    },
+    {
+      "rule": "R1.4 - Use only the approved forms of adjectives",
+      "ste_example": "This is the most efficient method to process the data.",
+      "non_ste_example": "This constitutes the supremely optimal methodology for data processing."
+    },
+    {
+      "rule": "R1.5 - Use technical names consistently; explain abbreviations on first use",
+      "ste_example": "The load balancer (LB) distributes traffic. The LB uses round-robin scheduling.",
+      "non_ste_example": "The LB distributes traffic using a round-robin mechanism without prior expansion."
+    },
+    {
+      "rule": "R1.5 - Use technical names consistently; explain abbreviations on first use",
+      "ste_example": "The Content Delivery Network (CDN) caches static assets. Configure the CDN in the dashboard.",
+      "non_ste_example": "The CDN caches static assets (undeclared) while you tweak the CDN via the panel."
+    },
+    {
+      "rule": "R1.5 - Use technical names consistently; explain abbreviations on first use",
+      "ste_example": "The application programming interface (API) accepts JSON requests. The API validates each request.",
+      "non_ste_example": "The API consumes JSON payloads; the API does validation on each incoming one."
+    },
+    {
+      "rule": "R1.6 - Do not use words that are not in the approved dictionary",
+      "ste_example": "Start the service after the configuration is complete.",
+      "non_ste_example": "Kick off the service subsequent to the config being finalized."
+    },
+    {
+      "rule": "R1.6 - Do not use words that are not in the approved dictionary",
+      "ste_example": "The system shows the error message in red text.",
+      "non_ste_example": "The framework surfaces the fault notification rendered in crimson text."
+    },
+    {
+      "rule": "R1.6 - Do not use words that are not in the approved dictionary",
+      "ste_example": "Get the latest version from the repository.",
+      "non_ste_example": "Fetch the most recent iteration out of the repo."
+    },
+    {
+      "rule": "R1.7 - Use adjectives to give clear descriptions; do not stack many adjectives",
+      "ste_example": "Use a secure connection to send sensitive data.",
+      "non_ste_example": "Employ a secure, encrypted, hardened, robust connection for sensitive data transmission."
+    },
+    {
+      "rule": "R1.7 - Use adjectives to give clear descriptions; do not stack many adjectives",
+      "ste_example": "The function accepts a required parameter.",
+      "non_ste_example": "The function takes a mandatory, essential, compulsory, requisite input argument."
+    },
+    {
+      "rule": "R1.7 - Use adjectives to give clear descriptions; do not stack many adjectives",
+      "ste_example": "Write clean, testable code for the new feature.",
+      "non_ste_example": "Author pristine, immaculate, spotless, verifiable code for the novel functionality."
+    },
+    {
+      "rule": "R1.10 - Do not use slang, jargon, or regional words",
+      "ste_example": "The deployment to the production environment is complete.",
+      "non_ste_example": "We've shipped the deploy to prod, mate - all sorted."
+    },
+    {
+      "rule": "R1.10 - Do not use slang, jargon, or regional words",
+      "ste_example": "The function is no longer available. Use the replacement function.",
+      "non_ste_example": "That function is baked - just use the new hotness instead."
+    },
+    {
+      "rule": "R1.10 - Do not use slang, jargon, or regional words",
+      "ste_example": "The build process failed. Read the error log for details.",
+      "non_ste_example": "Build's toast - check the logs to grok what went sideways."
+    },
+    {
+      "rule": "R1.11 - Write clearly; do not leave information implied",
+      "ste_example": "Set the environment variable DATABASE_URL before you start the server.",
+      "non_ste_example": "You'll wanna sort out the env vars prior to firing up the server."
+    },
+    {
+      "rule": "R1.11 - Write clearly; do not leave information implied",
+      "ste_example": "If the request fails with status code 500, retry the request after 5 seconds.",
+      "non_ste_example": "When it blows up, just give it another shot later."
+    },
+    {
+      "rule": "R1.11 - Write clearly; do not leave information implied",
+      "ste_example": "The callback function receives two arguments: an error object and a result object.",
+      "non_ste_example": "The callback gets the usual stuff - you know the drill."
+    },
+    {
+      "rule": "R1.12 - Technical verbs: use only approved technical verbs for the applicable subject field",
+      "ste_example": "The compiler parses the source file and generates bytecode.",
+      "non_ste_example": "The compiler munches the source file and spits out bytecode."
+    },
+    {
+      "rule": "R1.12 - Technical verbs: use only approved technical verbs for the applicable subject field",
+      "ste_example": "The garbage collector reclaims unused memory blocks.",
+      "non_ste_example": "The garbage collector gobbles up orphaned memory chunks."
+    },
+    {
+      "rule": "R1.12 - Technical verbs: use only approved technical verbs for the applicable subject field",
+      "ste_example": "The router forwards the HTTP request to the correct handler.",
+      "non_ste_example": "The router shoots the HTTP request over to the right handler."
+    },
+    {
+      "rule": "R1.14 - Use American English spelling consistently",
+      "ste_example": "Initialize the module and check the color property.",
+      "non_ste_example": "Initialise the module and check the colour property."
+    },
+    {
+      "rule": "R1.14 - Use American English spelling consistently",
+      "ste_example": "The behavior of the optimizer depends on the model configuration.",
+      "non_ste_example": "The behaviour of the optimiser depends on the model configuration."
+    },
+    {
+      "rule": "R1.14 - Use American English spelling consistently",
+      "ste_example": "The program cancels the request if the token is not valid.",
+      "non_ste_example": "The programme cancels the request if the token is not valid."
+    },
+    {
+      "rule": "R2.1 - Use multi-word nouns carefully; make sure the meaning is clear",
+      "ste_example": "The user authentication service validates login credentials.",
+      "non_ste_example": "The user authentication service login credential validation processor runs."
+    },
+    {
+      "rule": "R2.1 - Use multi-word nouns carefully; make sure the meaning is clear",
+      "ste_example": "The error recovery procedure restarts the failed worker process.",
+      "non_ste_example": "The error recovery procedure worker process restart mechanism triggers."
+    },
+    {
+      "rule": "R2.1 - Use multi-word nouns carefully; make sure the meaning is clear",
+      "ste_example": "Use the data migration script to transfer records to the new schema.",
+      "non_ste_example": "Employ the data migration script record transfer schema upgrade utility."
+    },
+    {
+      "rule": "R2.2 - Use hyphens in multi-word nouns only when necessary to prevent confusion",
+      "ste_example": "Set the read-only flag on the file before you share it.",
+      "non_ste_example": "Set the readonly flag on the file before you share it."
+    },
+    {
+      "rule": "R2.2 - Use hyphens in multi-word nouns only when necessary to prevent confusion",
+      "ste_example": "The built-in function handles edge cases automatically.",
+      "non_ste_example": "The builtin function handles edge cases automatically."
+    },
+    {
+      "rule": "R2.2 - Use hyphens in multi-word nouns only when necessary to prevent confusion",
+      "ste_example": "Enable the two-factor authentication for admin accounts.",
+      "non_ste_example": "Enable the two factor authentication for admin accounts."
+    },
+    {
+      "rule": "R3.1 - Use only regular and approved irregular verb forms",
+      "ste_example": "The server sent the response after it processed the query.",
+      "non_ste_example": "The server sended the response after it processed the query."
+    },
+    {
+      "rule": "R3.1 - Use only regular and approved irregular verb forms",
+      "ste_example": "The build script ran all tests and wrote the results to a file.",
+      "non_ste_example": "The build script runned all tests and writed the results to a file."
+    },
+    {
+      "rule": "R3.1 - Use only regular and approved irregular verb forms",
+      "ste_example": "The system kept the connection alive and read the incoming data stream.",
+      "non_ste_example": "The system keeped the connection alive and readed the incoming data stream."
+    },
+    {
+      "rule": "R3.2 - Use the verb forms approved in the dictionary (base form, imperative, simple tenses)",
+      "ste_example": "To connect to the database, use the connection string in the settings file.",
+      "non_ste_example": "For connecting to the database, you will be utilizing the connection string located within the settings file."
+    },
+    {
+      "rule": "R3.2 - Use the verb forms approved in the dictionary (base form, imperative, simple tenses)",
+      "ste_example": "Write the configuration file in YAML format.",
+      "non_ste_example": "You should be writing the configuration file utilizing the YAML formatting scheme."
+    },
+    {
+      "rule": "R3.2 - Use the verb forms approved in the dictionary (base form, imperative, simple tenses)",
+      "ste_example": "The system logs all requests to the access log.",
+      "non_ste_example": "The system is logging all of the requests into the access log."
+    },
+    {
+      "rule": "R3.3 - Use only the simple present, simple past, and simple future tenses",
+      "ste_example": "The service will restart after the update is complete.",
+      "non_ste_example": "The service will be restarting once the update has been completed."
+    },
+    {
+      "rule": "R3.3 - Use only the simple present, simple past, and simple future tenses",
+      "ste_example": "The API returned a 404 error. The resource does not exist.",
+      "non_ste_example": "The API had been returning a 404 error, and the resource was not existing."
+    },
+    {
+      "rule": "R3.3 - Use only the simple present, simple past, and simple future tenses",
+      "ste_example": "The function processes the input and returns the transformed output.",
+      "non_ste_example": "The function is processing the input and is returning the transformed output."
+    },
+    {
+      "rule": "R3.5 - Do not use the -ing form unless it is approved as a technical noun or adjective",
+      "ste_example": "The processing time depends on the size of the input data.",
+      "non_ste_example": "The running of the processing is depending on the sizing of the input data."
+    },
+    {
+      "rule": "R3.5 - Do not use the -ing form unless it is approved as a technical noun or adjective",
+      "ste_example": "Use the logging framework to record application events.",
+      "non_ste_example": "Be logging all happenings using the logging framework."
+    },
+    {
+      "rule": "R3.5 - Do not use the -ing form unless it is approved as a technical noun or adjective",
+      "ste_example": "The caching layer stores frequently accessed data in memory.",
+      "non_ste_example": "The caching of data is happening in memory for frequently accessing queries."
+    },
+    {
+      "rule": "R3.6 - Use the active voice. Use passive only when the action is more important than the actor",
+      "ste_example": "The function returns a promise that resolves to the user object.",
+      "non_ste_example": "A promise will be returned by the function that will be resolved to the user object."
+    },
+    {
+      "rule": "R3.6 - Use the active voice. Use passive only when the action is more important than the actor",
+      "ste_example": "The compiler throws an error if the syntax is not valid.",
+      "non_ste_example": "An error is thrown by the compiler if the syntax is determined to not be valid."
+    },
+    {
+      "rule": "R3.6 - Use the active voice. Use passive only when the action is more important than the actor",
+      "ste_example": "The middleware validates the token before it processes the request.",
+      "non_ste_example": "The token is validated by the middleware before the request is processed."
+    },
+    {
+      "rule": "R3.7 - Show clearly who or what does an action in a sentence",
+      "ste_example": "The developer must run the migration script before the deployment.",
+      "non_ste_example": "The migration script must be run before the deployment occurs."
+    },
+    {
+      "rule": "R3.7 - Show clearly who or what does an action in a sentence",
+      "ste_example": "The API gateway routes each request to the correct microservice.",
+      "non_ste_example": "Each request gets routed to the correct microservice."
+    },
+    {
+      "rule": "R3.7 - Show clearly who or what does an action in a sentence",
+      "ste_example": "The test runner executes all test suites and reports the results.",
+      "non_ste_example": "All test suites are executed and the results are reported."
+    },
+    {
+      "rule": "R4.1 - Write only one topic per sentence",
+      "ste_example": "The server listens on port 8080. It accepts HTTP requests on this port.",
+      "non_ste_example": "The server listens on port 8080, accepting HTTP requests, and it also handles WebSocket connections which are upgraded from standard HTTP traffic."
+    },
+    {
+      "rule": "R4.1 - Write only one topic per sentence",
+      "ste_example": "The authentication module validates credentials. It issues a JWT token for valid credentials.",
+      "non_ste_example": "The authentication module validates credentials and issues JWT tokens that contain user claims and expire after 24 hours unless refreshed."
+    },
+    {
+      "rule": "R4.1 - Write only one topic per sentence",
+      "ste_example": "The build pipeline compiles the source code. Then it runs the unit tests.",
+      "non_ste_example": "The build pipeline compiles the source code, executes unit tests, generates coverage reports, and deploys artifacts to the staging registry."
+    },
+    {
+      "rule": "R4.3 - Use vertical lists for complex information; use colons to introduce lists",
+      "ste_example": "The endpoint accepts these parameters: name (string), email (string), role (string).",
+      "non_ste_example": "The endpoint accepts parameters: name which is a string representing the user name, email which is a string representing the email address, and role which is a string representing the access role."
+    },
+    {
+      "rule": "R4.3 - Use vertical lists for complex information; use colons to introduce lists",
+      "ste_example": "To configure the service, you must install the dependencies, set the environment variables, and start the database.",
+      "non_ste_example": "To configure the service you must install the dependencies, then set the environment variables, and finally start the database."
+    },
+    {
+      "rule": "R4.3 - Use vertical lists for complex information; use colons to introduce lists",
+      "ste_example": "The system supports these file formats: JSON, YAML, and TOML.",
+      "non_ste_example": "The system supports these file formats - JSON, YAML, and TOML are all acceptable."
+    },
+    {
+      "rule": "R4.4 - Use connecting words to show the relationship between ideas clearly",
+      "ste_example": "The query returned no results because the index was not updated.",
+      "non_ste_example": "The query returned no results, the index was not updated."
+    },
+    {
+      "rule": "R4.4 - Use connecting words to show the relationship between ideas clearly",
+      "ste_example": "If the request fails, the client must retry with an exponential backoff.",
+      "non_ste_example": "The request fails, the client must retry with an exponential backoff."
+    },
+    {
+      "rule": "R4.4 - Use connecting words to show the relationship between ideas clearly",
+      "ste_example": "The service is not available when the database is offline.",
+      "non_ste_example": "The service is not available, the database is offline."
+    },
+    {
+      "rule": "R4.5 - Use articles and demonstrative adjectives correctly (a, an, the, this, that, these, those)",
+      "ste_example": "The configuration file contains the database connection settings. This file uses YAML format.",
+      "non_ste_example": "Configuration file contains database connection settings. File uses YAML format."
+    },
+    {
+      "rule": "R4.5 - Use articles and demonstrative adjectives correctly",
+      "ste_example": "An API key is necessary to authenticate a request. Store the key in a secure location.",
+      "non_ste_example": "API key is necessary to authenticate request. Store key in secure location."
+    },
+    {
+      "rule": "R4.5 - Use articles and demonstrative adjectives correctly",
+      "ste_example": "These endpoints require authentication. Those endpoints are public.",
+      "non_ste_example": "Endpoints require authentication. Endpoints are public."
+    },
+    {
+      "rule": "R5.1 - Use clear instructions in procedural writing; start each step with a verb",
+      "ste_example": "Build the Docker image. Push the image to the registry. Apply the Kubernetes manifest.",
+      "non_ste_example": "You will need to build the Docker image, then the image should be pushed to the registry, and finally the Kubernetes manifest needs to be applied."
+    },
+    {
+      "rule": "R5.1 - Use clear instructions in procedural writing; start each step with a verb",
+      "ste_example": "Open the login page. Click Forgot Password. Enter your email address.",
+      "non_ste_example": "The login page should be opened, then click on the Forgot Password link, after which your email address needs to be entered."
+    },
+    {
+      "rule": "R5.3 - Use the imperative (command) form for step-by-step instructions",
+      "ste_example": "Open the terminal. Run npm install. Wait for the installation to complete.",
+      "non_ste_example": "The terminal should be opened by the user, then they should run npm install, after which they will need to wait for the installation to be completed."
+    },
+    {
+      "rule": "R5.3 - Use the imperative (command) form for step-by-step instructions",
+      "ste_example": "Set the NODE_ENV variable to production. Start the server with npm start.",
+      "non_ste_example": "The NODE_ENV variable should be set to production by the developer, and then the server can be started by running npm start."
+    },
+    {
+      "rule": "R5.3 - Use the imperative (command) form for step-by-step instructions",
+      "ste_example": "Copy the configuration template. Edit the values. Save the file as config.yaml.",
+      "non_ste_example": "The configuration template needs to be copied, after which the values must be edited, and then the file should be saved under the name config.yaml."
+    },
+    {
+      "rule": "R6.2 - In descriptive writing, use connecting words to build logical flow",
+      "ste_example": "The system uses a microservice architecture. Each service has a single responsibility. Because the services are independent, you can deploy them separately.",
+      "non_ste_example": "The system uses a microservice architecture, each service has a single responsibility, the services are independent, you can deploy them separately."
+    },
+    {
+      "rule": "R6.2 - In descriptive writing, use connecting words to build logical flow",
+      "ste_example": "The rate limiter prevents abuse. When a client sends too many requests, the limiter blocks the client for 60 seconds.",
+      "non_ste_example": "The rate limiter prevents abuse, a client sends too many requests, the limiter blocks the client for 60 seconds."
+    },
+    {
+      "rule": "R6.5 - Write one topic per paragraph; start with the main idea",
+      "ste_example": "The authentication system uses JSON Web Tokens (JWT). When a user logs in, the server issues a signed JWT. The client includes this token in the Authorization header of each request.",
+      "non_ste_example": "The authentication system uses JWT, tokens are issued at login, they go in the Authorization header, they expire after 24 hours, and also the database uses connection pooling and the API is rate-limited."
+    },
+    {
+      "rule": "R6.5 - Write one topic per paragraph; start with the main idea",
+      "ste_example": "The caching layer improves response times. It stores frequently accessed data in Redis. When a request arrives, the system checks the cache before it queries the database.",
+      "non_ste_example": "The caching layer stores data in Redis with a 300-second TTL, and the API uses GraphQL which lets clients request only the fields they need, plus the monitoring stack uses Prometheus and Grafana."
+    },
+    {
+      "rule": "R8.3 - Use abbreviations consistently; explain them on first use",
+      "ste_example": "The Virtual Private Cloud (VPC) isolates resources. Create subnets in the VPC.",
+      "non_ste_example": "The VPC isolates resources. Create subnets in the VPC."
+    },
+    {
+      "rule": "R8.3 - Use abbreviations consistently; explain them on first use",
+      "ste_example": "The Continuous Integration (CI) pipeline runs on every commit. The CI pipeline includes linting and tests.",
+      "non_ste_example": "The CI pipeline runs on every commit. The CI pipeline includes linting and tests."
+    },
+    {
+      "rule": "R8.4 - Use colons to introduce lists; keep list items parallel",
+      "ste_example": "The database schema has these tables: users, orders, and products.",
+      "non_ste_example": "The database schema has these tables - users, which store account information, orders, and products."
+    },
+    {
+      "rule": "R8.6 - Write acronyms in uppercase; explain them at first use",
+      "ste_example": "The Representational State Transfer (REST) API uses standard HTTP methods. The REST API returns JSON.",
+      "non_ste_example": "The rest API uses standard HTTP methods. The rest API returns JSON."
+    },
+    {
+      "rule": "R8.6 - Write acronyms in uppercase; explain them at first use",
+      "ste_example": "The Structured Query Language (SQL) database stores relational data. Write SQL queries to access the data.",
+      "non_ste_example": "The sql database stores relational data. Write sql queries to access the data."
+    },
+    {
+      "rule": "R8.7 - Use hyphens to join words that function as a single adjective before a noun",
+      "ste_example": "Use a well-tested library for the encryption module.",
+      "non_ste_example": "Use a well tested library for the encryption module."
+    },
+    {
+      "rule": "R8.7 - Use hyphens to join words that function as a single adjective before a noun",
+      "ste_example": "The high-availability cluster can survive node failures.",
+      "non_ste_example": "The high availability cluster can survive node failures."
+    },
+    {
+      "rule": "R9.1 - Use different sentence constructions to keep the text interesting but always clear",
+      "ste_example": "The system sends a notification when an error occurs. If the error is critical, the system also pages the on-call engineer.",
+      "non_ste_example": "The system sends a notification when an error occurs. The system also pages the on-call engineer if the error is critical. The system logs all errors to a file."
+    },
+    {
+      "rule": "R9.2 - Always use approved words; do not invent synonyms for variety",
+      "ste_example": "Click the button to start the process. Click Stop to stop the process.",
+      "non_ste_example": "Click the button to initiate the process. Hit Stop to terminate the process."
+    },
+    {
+      "rule": "R9.2 - Always use approved words; do not invent synonyms for variety",
+      "ste_example": "The function returns the result. The caller must check the result.",
+      "non_ste_example": "The function yields the result. The caller must inspect the output."
+    },
+    {
+      "rule": "R9.2 - Always use approved words; do not invent synonyms for variety",
+      "ste_example": "The service is available on port 3000. Make sure the service is available before you send requests.",
+      "non_ste_example": "The service is reachable on port 3000. Ensure the service is up before you fire off requests."
+    },
+    {
+      "rule": "GR-1 - Use 'that' to introduce restrictive clauses; do not use 'which' without a comma",
+      "ste_example": "The function that processes payments must be thread-safe.",
+      "non_ste_example": "The function which processes payments must be thread-safe."
+    },
+    {
+      "rule": "GR-1 - Use 'that' to introduce restrictive clauses",
+      "ste_example": "Use the library that has the smallest bundle size.",
+      "non_ste_example": "Use the library which has the smallest bundle size."
+    },
+    {
+      "rule": "GR-3 - Use pronouns only when the antecedent is clear and close by",
+      "ste_example": "The API gateway validates the token. The gateway rejects invalid tokens.",
+      "non_ste_example": "The API gateway validates the token. It rejects invalid ones."
+    },
+    {
+      "rule": "GR-3 - Use pronouns only when the antecedent is clear and close by",
+      "ste_example": "The database and the cache store data differently. The database is persistent. The cache is temporary.",
+      "non_ste_example": "The database and the cache store data differently. It is persistent. It is temporary."
+    },
+    {
+      "rule": "GR-4 - Use 'this' only with a clear noun after it; do not use 'this' alone",
+      "ste_example": "The server crashed because of a memory leak. This problem is difficult to debug.",
+      "non_ste_example": "The server crashed because of a memory leak. This is difficult to debug."
+    },
+    {
+      "rule": "GR-4 - Use 'this' only with a clear noun after it; do not use 'this' alone",
+      "ste_example": "The build pipeline has three stages. This design makes it easy to add new stages.",
+      "non_ste_example": "The build pipeline has three stages. This makes it easy to add new stages."
+    }
+  ]
+}
