@@ -169,9 +169,11 @@ wait
 
 ## Key Facts (Immutable)
 - Model: deepseek-v4-pro
-- 19 categories (NOT 22)
-- 53 writing rules + 4 GR rules
+- 14 benchmark test categories (readme, api-docs, comments, commit-msgs, error-msgs, config, docstrings, gen-pr-review, gen-api-doc, gen-commit, gen-error, gen-config, gen-readme, gen-comments)
+- 51 writing rules + 4 GR rules (STE-Code adapted count)
 - Source: ASD-STE100 Issue 9, January 2025
+- Runtime: hermes CLI (local dependency — not committed)
+- Scoring: correctness = keywords_found/total_expected × (1 − forbidden_found/total_forbidden) when total_forbidden > 0; if total_forbidden = 0, factor is 1.0
 - System prompt: `ste-code/artifacts/ste-code-distilled-system-prompt.txt`
 - Benchmark dir: `.agents/benchmark/`
 

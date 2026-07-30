@@ -37,7 +37,7 @@ Extraction → Refinement → Merge → Adaptation → Artifacts
 | 2 | Refiner | Reformats extracted text into clean markdown |
 | 3 | Auditor | Verifies claims against disk evidence |
 | 4 | Continuator | Resumes partial/incomplete work |
-| 5 | SCE Populator | Generates STE-Code dictionary entries |
+| 5 | SCE Populator | Generates STE-Code structured data (vocabulary, templates, schemas) |
 | 6 | STE-Code Analysis | Paradigm-agnostic (OOP/FP/procedural/systems). Produces STE-Code compliant docs + self-audit |
 | 7 | Level Worker | Parameterized worker. Receives level (1-5) + action (test/rewrite/benchmark), loads rules at that depth |
 | 8 | Extension Worker | Generates code-domain gap fillers using batched poll workers. Dictionary entries, category examples, anti-patterns, domain extensions |

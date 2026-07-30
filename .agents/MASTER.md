@@ -45,8 +45,8 @@ All terms used throughout this project. Agents must use these exact terms.
 
 | Constant | Value | Never Claim |
 |----------|-------|-------------|
-| STE technical noun categories | 19 | "22 categories" |
-| STE writing rules | 53 + 4 GR | "65 rules" |
+| STE technical noun categories | 19 original → 17 code-domain extensions | "22 categories" |
+| STE writing rules | 53 original → 51 adapted + 4 GR |
 | Spec pages | 434 | — |
 | Spec version | Issue 9, January 2025 | — |
 | Worker model | `deepseek-v4-pro` | "deepseek-pro" or "flash" |
