@@ -60,8 +60,13 @@ This adapted file is a skeleton (~50-60 lines). Deepen it to 200-400 lines by ad
 
 6. **Grammar Notes** — If the original STE rule has grammatical justification, adapt it for code documentation grammar
 
-PRESERVE all existing content. Only ADD new sections. Use STE-Code approved vocabulary throughout.
-Be as rigorous and detailed as the original ASD-STE100 specification.
+PRESERVE ALL EXISTING CONTENT EXACTLY AS-IS. Do NOT delete, rewrite, or restructure any original text. Only ADD new sections AFTER existing content.
+
+CRITICAL: Keep the exact same ## heading hierarchy. Do not flatten, rename, or reorder existing sections. New sections go at the END of the file.
+
+CRITICAL: Keep ALL existing example pairs (Non-STE/STE) exactly as they are. Add NEW pairs after them. Never remove or rewrite an existing pair.
+
+Use STE-Code approved vocabulary throughout. Be as rigorous and detailed as the original ASD-STE100 specification.
 
 ## FORMATTING RULES (non-negotiable)
 
