@@ -1,4 +1,4 @@
-# STE-Code — Simplified Technical English for Code Documentation
+# STE-Code — Simplified Technical English for Code
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Pipeline](https://img.shields.io/badge/pipeline-5%20stages-brightgreen)](https://github.com/NikolaRHristov/Manual)
