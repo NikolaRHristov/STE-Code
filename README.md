@@ -157,8 +157,9 @@ Manual/
 │   ├── merged/                      ← master.md (23,737 lines)
 │   ├── refined/                     ← Formatted extraction (109 files, 100.0 audit)
 │   ├── extracted/                   ← Raw extraction (109 files)
-│   └── enriched/                    ← Enriched with metadata + structure
-├── SCE/                             ← Structured STE-Code v2.0 (4 strata, 175 entries)
+│   ├── enriched/                    ← Enriched with metadata + structure
+│   ├── data/                        ← Machine-readable vocabulary + synonyms (JSON)
+│   └── templates/                   ← 4 STE-Code system prompt templates
 ├── spec/                            ← ASD-STE100 Issue 9 source pages
 │   └── issue-09-2025/
 ├── .agents/                         ← Pipeline orchestration
