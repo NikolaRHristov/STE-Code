@@ -51,6 +51,7 @@ Every word, every number, every example, every table cell from the original extr
 ### Rule X.Y            ← Rule headings
 #### WORD (POS)         ← Dictionary entries
 ```
+
 Never use `###` for proper names like ASD-STE100. Proper names get `**bold**` treatment.
 
 **Why this rule exists:** Inconsistent heading depths caused merge failures when 109 files were concatenated in the merge stage. Extracted files used random mixtures of `#`, `##`, `###`, and bold text for the same heading levels. Automated table-of-contents generation was impossible without a fixed heading scheme.
@@ -62,6 +63,7 @@ All tables MUST use clean markdown with aligned columns, header row, and separat
 |----------|----------|----------|
 | Cell 1   | Cell 2   | Cell 3   |
 ```
+
 Merge cells that were split by PDF extraction. Escape pipe characters inside cells with `\|`.
 
 **Why this rule exists:** PDF extraction split single tables across page breaks, producing two or three partial tables. Misaligned columns caused 8% of adapted dictionary entries to reference the wrong column during the adaptation stage.
@@ -73,6 +75,7 @@ All example pairs MUST use this exact format, separated by blank lines:
 
 > **Non-STE:** [The non-compliant example text, fully written out, never abbreviated]
 ```
+
 Never merge STE and non-STE into the same line. Never abbreviate examples with "...".
 
 **Why this rule exists:** Merged examples (STE and non-STE on one line) caused 12% of auditor false positives during compliance checking. Workers abbreviated long examples with "...", losing critical context for downstream adaptation.
@@ -112,6 +115,7 @@ Every file MUST start with a page header, followed by a metadata block:
 > **Source:** ASD-STE100 Issue 9, January 2025
 > **Pages:** NN–MM of 434
 ```
+
 Remove all repetitive "ASD-STE100 Simplified Technical English" headers from the body text. They appear once in the metadata block and never again.
 
 **Why this rule exists:** Repetitive headers polluted 15% of extracted files with three to five duplicate "ASD-STE100 Simplified Technical English" lines per page. Source tracking was impossible without metadata blocks. The merge stage could not deduplicate headers without knowing the source page range.
