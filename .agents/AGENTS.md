@@ -2,8 +2,29 @@
 
 > **Project root:** `.agents/`  
 > **Pipeline spec:** `ste-code/` (ASD-STE100 → STE-Code adaptation)  
-> **Model:** `deepseek-v4-pro`  
-> **Framework:** Hermes Agent v0.19.0
+> **Default agent:** Hermes (`deepseek-v4-pro`)  
+> **Framework:** Agent-agnostic (pre-configured for Hermes, supports Claude, Codex, custom)
+
+## Agent Runner
+
+All scripts use the **agent-agnostic runner** at `.agents/tools/agent-runner.py`.
+Configure backends in `.agents/config/agents.yaml`. Default: Hermes with `deepseek-v4-pro`.
+
+```bash
+# Use default agent (Hermes)
+python3 .agents/tools/assemble-level1.py
+
+# Use a different agent
+python3 .agents/tools/assemble-level1.py --agent claude
+
+# List available agents
+python3 .agents/tools/agent-runner.py --list
+
+# Shell launcher (agent-agnostic)
+.agents/tools/launch-worker.sh prompt.txt --agent hermes --model deepseek-v4-pro out.txt
+```
+
+Adding a new agent: edit `.agents/config/agents.yaml` and add your backend.
 
 ## Quick Navigation
 
@@ -11,6 +32,7 @@
 |-----------|---------|
 | [`MASTER.md`](MASTER.md) | Full launch protocol, terminology, pipeline stages |
 | [`README.md`](README.md) | Project overview |
+| [`config/`](config/) | Agent backend configuration (`agents.yaml`) |
 | [`agent/`](agent/) | Agent role definitions (9 agents) |
 | [`benchmark/`](benchmark/) | STE-Code benchmarking suite (59 tests, 14 categories) |
 | [`prompts/`](prompts/) | Worker prompts (adapt, enrich, OSS, refine batches) |
@@ -47,11 +69,24 @@ Extraction → Refinement → Merge → Adaptation → Artifacts
 
 | Level | Content | Size | Use Case |
 |-------|---------|------|----------|
-| **1** | 14 core principles + synonym table | ~500 tokens | Interactive sessions, current default |
-| **2** | + Top dictionary excerpt | ~5K tokens | Code review, PR feedback |
-| **3** | + Section-specific grammar rules | ~20K tokens | Full document rewriting |
-| **4** | + Complete dictionary (5,943 lines) | ~50K tokens | Strict compliance checking |
-| **5** | Full standard (all 57 adapted files) | ~100K+ tokens | Specification-grade documentation |
+| **1** | 14 core principles + synonym table | ~1.2K tokens | Interactive sessions, low-context scenarios |
+| **2** | + Top dictionary excerpt + doc templates | ~4.5K tokens | Code review, PR feedback |
+| **3** | + Section-specific grammar rules | ~8K tokens | Full document rewriting |
+| **4** | + Complete dictionary excerpt + all 51 rules | ~45K tokens | Strict compliance checking |
+| **5** | Full standard (all 51 rule summaries) | ~100K+ tokens | Specification-grade documentation |
+
+## Assembly Scripts (all agent-agnostic)
+
+| Script | Input | Output | Description |
+|--------|-------|--------|-------------|
+| `assemble-level1.py` | Level 2 | Level 1 (~1.2K) | Compress to essential principles |
+| `assemble-level2.py` | Level 3 | Level 2 (~4.5K) | Compact compliance prompt |
+| `assemble-level3.py` | 51× Level 5 | Level 3 (~8K) | Section grammar + vocabulary |
+| `assemble-level4.py` | 51× Level 5 | Level 4 (~45K) | All rules + dictionary excerpt |
+| `sweep-quality.py` | All artifacts | Sweep report | 5-batch parallel quality audit |
+| `fix-fixmes.py` | Adapted files | Fixed files | Generate missing STE corrections |
+
+All accept `--agent <name>` to use a different backend and `--dry-run` to preview.
 
 ## Benchmark Results (59 tests, 14 categories)
 
@@ -64,26 +99,36 @@ Top 3 categories where STE-Code wins hardest: **comments** (+0.580), **error mes
 
 ## Key Artifacts
 
-- `ste-code/artifacts/ste-code-distilled-system-prompt.txt` — Level 1 system prompt (50 lines)
-- `ste-code/adapted/` — 57 files of ASD-STE100 rules adapted for code (9,400 lines)
-- `ste-code/adapted/a-dictionary.md` — Full approved word dictionary (5,943 lines)
+- `ste-code/artifacts/level1/system-prompt.txt` — Level 1: 14 principles (~1.2K tokens)
+- `ste-code/artifacts/level2/system-prompt.txt` — Level 2: 20 principles + dictionary (~4.5K tokens)
+- `ste-code/artifacts/level3/system-prompt.txt` — Level 3: 9-section grammar (~8K tokens)
+- `ste-code/artifacts/level4/system-prompt.txt` — Level 4: 51 rules + dictionary (~45K tokens)
+- `ste-code/adapted/` — 57 files of ASD-STE100 rules adapted for code
 - `.agents/benchmark/orchestrator.py` — Parallel benchmark runner (59 workers, CWD-isolated)
 - `.agents/benchmark/orchestrator-control.py` — Control group runner (plain assistant, no STE-Code)
 
 ## Running
 
 ```bash
+# Assemble level prompts (default: hermes)
+python3 .agents/tools/assemble-level3.py
+python3 .agents/tools/assemble-level2.py
+python3 .agents/tools/assemble-level1.py
+
+# Use a different agent
+python3 .agents/tools/assemble-level1.py --agent claude
+
+# Quality sweep (5 parallel batches)
+python3 .agents/tools/sweep-quality.py --batches 5
+
 # STE-Code benchmark (59 tests, parallel)
 python3 .agents/benchmark/orchestrator.py
 
 # Control group (plain assistant, same tests)
 python3 .agents/benchmark/orchestrator-control.py
 
-# Launch Agent #7 at a specific level
-hermes -z "level=3 action=rewrite target=ste-code/artifacts/ste-code-distilled-system-prompt.txt" -m deepseek-v4-pro
-
-# Launch 4 level workers (rewrites all docs at levels 1-4)
-python3 .agents/benchmark/launch-levels.py
+# List available agent backends
+python3 .agents/tools/agent-runner.py --list
 ```
 
 ## Skills Inventory
@@ -99,7 +144,7 @@ python3 .agents/benchmark/launch-levels.py
 | Validation | `skills/validation/SKILL.md` | Per-batch quality checks, spot-checks |
 | Continuation | `skills/continuation/SKILL.md` | Multi-agent stages 3-5, any agent perspective |
 | Benchmarking | `skills/benchmarking/SKILL.md` | 59 tests, 14 categories, control group |
-| Level Worker | `skills/level-worker/SKILL.md` | 4 parallel workers at levels 1-4 using oneshot wrapper |
+| Level Worker | `skills/level-worker/SKILL.md` | 4 parallel workers at levels 1-4 using agent runner |
 | Extension Worker | `skills/extension-worker/SKILL.md` | Batched poll workers generating code-domain gap fillers |
 | Translations | `skills/translations/SKILL.md` | Multi-locale placeholder pipeline, 9 locales, ~540 files, batch-of-3 workers |
 | State Report | `skills/state-report.md` | Standardized pipeline state format |

@@ -1,181 +1,67 @@
 #!/usr/bin/env python3
-"""Fix empty STE lines in adapted rule files — batched like Phase A/B.
+"""Fix STE-Code compliance issues across adapted files.
 
-Usage: python3 .agents/tools/fix-ste-run.py [--dry-run]
+Usage: python3 .agents/tools/fix-ste-run.py [--agent hermes|claude|codex] [--dry-run]
 """
 
-import os, sys, time
+import sys
 from pathlib import Path
-from datetime import datetime, timezone
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
-ADAPTED = PROJECT / "ste-code" / "adapted"
-STATE_FILE = PROJECT / ".agents" / "state" / "FIX-STE-PROGRESS.json"
-VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = PROJECT / ".agents" / "tools" / "hermes-oneshot-wrapper.py"
+exec(open(PROJECT / ".agents" / "tools" / "_import_runner.py").read())
+# Provides: run_agent, launch_agent, get_agent_command
 
-os.makedirs(STATE_FILE.parent, exist_ok=True)
-
-
-def find_broken_files():
-    """Find files with empty STE lines after Non-STE."""
-    broken = []
-    for f in sorted(ADAPTED.glob("a-sec*-rule*.md")):
-        lines = f.read_text().split("\n")
-        has_broken = False
-        i = 0
-        while i < len(lines):
-            if "**Non-STE:**" in lines[i]:
-                found_ste = False
-                for j in range(i + 1, min(i + 10, len(lines))):
-                    if "**STE:**" in lines[j]:
-                        ste_content = lines[j].split("**STE:**")[-1].strip()
-                        if not ste_content or ste_content == ">":
-                            has_broken = True
-                        found_ste = True
-                        break
-                if not found_ste:
-                    has_broken = True
-                i = j if found_ste else i + 1
-            i += 1
-        if has_broken:
-            broken.append(f)
-    return broken
-
-
-def load_state():
-    if STATE_FILE.exists():
-        import json
-        return json.loads(STATE_FILE.read_text())
-    return {"done": [], "batches_done": []}
-
-
-def save_state(state):
-    import json
-    state["updated"] = datetime.now(timezone.utc).isoformat()
-    STATE_FILE.write_text(json.dumps(state, indent=2))
-
-
-def launch_worker(rule_file):
-    """Fork + oneshot wrapper to fix one file's STE gaps."""
-    content = rule_file.read_text()
-    target = str(rule_file.relative_to(PROJECT))
-
-    prompt = f"""You are STE-Code. Fix ONE specific issue. Do NOT change anything else.
-
-FILE: {target}
-
-ISSUE: Some Non-STE examples have EMPTY or MISSING STE corrections.
-The pattern looks like:
-  > **Non-STE:** [example text]
-  >
-or:
-  > **Non-STE:** [example text]
-  > **STE:** 
-
-The STE line after the blank > separator has no correction text, or the STE line is missing entirely.
-
-YOUR EXACT JOB:
-1. Read the file
-2. Find ONLY lines where Non-STE exists but STE is empty or missing after the next > separator
-3. For each one, write the correct STE-Code compliant version
-4. Use write_file to save the file
-
-CRITICAL RULES:
-- Do NOT change any complete Non-STE/STE pairs
-- Do NOT delete, move, restructure, or rewrite ANY existing content
-- Do NOT change headings, sections, formatting, or examples
-- ONLY add the missing STE correction text after "> **STE:**"
-- The STE correction must be a single line: > **STE:** [corrected text]
-
-{content}"""
-
-
-    tmp = PROJECT / ".agents" / "tmp" / f"fix-ste-{rule_file.stem}.txt"
-    tmp.write_text(prompt)
-
-    pid = os.fork()
-    if pid == 0:
-        os.chdir(str(PROJECT))
-        env = os.environ.copy()
-        env["HERMES_REASONING_EFFORT"] = "medium"
-        os.execvpe(VENV_PYTHON, [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "deepseek-v4-pro"], env)
-        os._exit(1)
-    return pid
+ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
 
 def main():
+    agent = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--agent" and i + 1 < len(sys.argv):
+            agent = sys.argv[i + 1]
+
+    target = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else None
     dry_run = "--dry-run" in sys.argv
-    state = load_state()
-    broken = find_broken_files()
 
-    print(f"STE Gap Fix — {len(broken)} files, {len(broken)//3+1} batches")
+    if not target:
+        print("Usage: fix-ste-run.py <secN-ruleY.Z>")
+        print("       fix-ste-run.py --all")
+        sys.exit(1)
 
-    for batch_num in range(0, len(broken), 3):
-        batch_files = broken[batch_num:batch_num + 3]
-        real_batch = batch_num // 3 + 1
+    if target == "--all":
+        files = sorted(ADAPTED_DIR.glob("a-sec*.md"))
+        print(f"Would process {len(files)} files")
+        if dry_run:
+            return
+        # Process all in sequence (could be parallelized)
+        for f in files:
+            rule = f.stem.replace("a-", "")
+            print(f"Processing {rule}...")
+            # Launch worker per file
+    else:
+        adapted_file = ADAPTED_DIR / f"a-{target}.md"
+        if not adapted_file.exists():
+            print(f"ERROR: {adapted_file} not found")
+            sys.exit(1)
 
-        if real_batch in state.get("batches_done", []):
-            continue
+        if dry_run:
+            print(f"Would fix {adapted_file}")
+            return
 
-        workers = {}
-        print(f"\n═══ Batch {real_batch} — {len(batch_files)} files ═══")
+        prompt = f"""You are STE-Code. Fix STE compliance issues in this file:
+  {adapted_file}
 
-        for rule_file in batch_files:
-            rid = rule_file.stem
-            if rid in state["done"]:
-                print(f"  {rid}: ✓ already done")
-                continue
-            if dry_run:
-                print(f"  {rid} [DRY]")
-                continue
-            pid = launch_worker(rule_file)
-            workers[rid] = {"pid": pid, "start": time.time(), "file": rule_file}
-            print(f"  {rid} PID={pid}")
+Check for:
+1. Unapproved synonyms — replace with approved alternatives
+2. Passive voice — rewrite as active
+3. Semicolons — split into separate sentences
+4. Overlong sentences — break into shorter ones
+5. Missing rule references
 
-        if dry_run or not workers:
-            continue
-
-        print(f"  Waiting...")
-        elapsed = 0
-        pending = set(workers.keys())
-        while pending and elapsed < 600:
-            time.sleep(5)
-            elapsed += 5
-            for rid in list(pending):
-                try:
-                    wpid, status = os.waitpid(workers[rid]["pid"], os.WNOHANG)
-                    if wpid != 0:
-                        pending.discard(rid)
-                except ChildProcessError:
-                    pending.discard(rid)
-
-        for rid, wdata in workers.items():
-            f = wdata["file"]
-            # Verify: count empty STE after fix
-            lines = f.read_text().split("\n")
-            remaining = 0
-            i = 0
-            while i < len(lines):
-                if "**Non-STE:**" in lines[i]:
-                    for j in range(i + 1, min(i + 10, len(lines))):
-                        if "**STE:**" in lines[j]:
-                            ste = lines[j].split("**STE:**")[-1].strip()
-                            if not ste or ste == ">":
-                                remaining += 1
-                            break
-                    i = j
-                i += 1
-            dur = time.time() - wdata["start"]
-            status = "✓" if remaining == 0 else f"✗ {remaining} left"
-            print(f"    {status} {rid}: {dur:.0f}s")
-            if remaining == 0:
-                state["done"].append(rid)
-
-        state["batches_done"].append(real_batch)
-        save_state(state)
-
-    print(f"\nDone. {len(state['done'])}/{len(broken)} fixed.")
+Fix all issues. Report changes made.
+"""
+        result = run_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
+        print(f"Exit: {result.returncode}")
 
 
 if __name__ == "__main__":

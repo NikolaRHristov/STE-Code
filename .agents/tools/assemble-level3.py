@@ -4,20 +4,19 @@
 Reads Level 5 summaries, extracts grammar-focused content per section.
 Output: ste-code/artifacts/level3/system-prompt.txt
 
-Usage: python3 .agents/tools/assemble-level3.py [--dry-run]
+Usage: python3 .agents/tools/assemble-level3.py [--agent hermes|claude|codex] [--dry-run]
 """
 
-import os, sys
+import sys
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
+exec(open(PROJECT / ".agents" / "tools" / "_import_runner.py").read())
+# Provides: run_agent, launch_agent, get_agent_command
+
 LEVEL5_DIR = PROJECT / "ste-code" / "artifacts" / "level5"
 LEVEL3_DIR = PROJECT / "ste-code" / "artifacts" / "level3"
 OUTPUT = LEVEL3_DIR / "system-prompt.txt"
-VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = PROJECT / ".agents" / "tools" / "hermes-oneshot-wrapper.py"
-
-os.makedirs(LEVEL3_DIR, exist_ok=True)
 
 # Section descriptions for grammar context
 SECTION_GRAMMAR = {
@@ -38,9 +37,7 @@ def build_prompt():
     sections = {}
     for sf in summaries:
         sec = sf.parent.parent.name
-        if sec not in sections:
-            sections[sec] = []
-        sections[sec].append(str(sf.relative_to(PROJECT)))
+        sections.setdefault(sec, []).append(str(sf.relative_to(PROJECT)))
 
     input_list = ""
     for sec in sorted(sections):
@@ -83,7 +80,7 @@ Then assemble:
 
 ---
 
-> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. © ASD, 2025.
+> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. (c) ASD, 2025.
 > STE is EU Trade Mark 017966390. Independent adaptation.
 
 CRITICAL:
@@ -97,6 +94,11 @@ Report: section count, example count, estimated tokens.
 
 
 def main():
+    agent = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--agent" and i + 1 < len(sys.argv):
+            agent = sys.argv[i + 1]
+
     dry_run = "--dry-run" in sys.argv
     prompt = build_prompt()
     print(f"Level 3 prompt: {len(prompt)} chars (~{len(prompt)//4} tokens)")
@@ -105,15 +107,8 @@ def main():
         print(f"\nWould process {len(list(LEVEL5_DIR.glob('sec*/a-sec*/summary.md')))} summaries")
         return
 
-    tmp = PROJECT / ".agents" / "tmp" / "level3-assemble.txt"
-    tmp.write_text(prompt)
-
-    import subprocess
-    result = subprocess.run(
-        [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "deepseek-v4-pro"],
-        cwd=str(PROJECT), capture_output=True, text=True, timeout=600,
-        env={**os.environ, "HERMES_REASONING_EFFORT": "high"},
-    )
+    LEVEL3_DIR.mkdir(parents=True, exist_ok=True)
+    result = run_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
     print(f"Exit: {result.returncode}")
     if OUTPUT.exists():
         chars = OUTPUT.stat().st_size

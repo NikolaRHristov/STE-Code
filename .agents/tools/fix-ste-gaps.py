@@ -1,50 +1,54 @@
 #!/usr/bin/env python3
-"""Fix empty STE lines — fill in missing STE corrections for orphan Non-STE examples."""
+"""Fix STE-Code content gaps — target specific rule files with missing content.
 
-import os, sys, subprocess
+Usage: python3 .agents/tools/fix-ste-gaps.py [--agent hermes|claude|codex] [--dry-run]
+"""
+
+import sys
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
-VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = PROJECT / ".agents" / "tools" / "hermes-oneshot-wrapper.py"
+exec(open(PROJECT / ".agents" / "tools" / "_import_runner.py").read())
+# Provides: run_agent, launch_agent, get_agent_command
 
-FILES = [
-    "a-sec1-rule1.11.md", "a-sec1-rule1.8.md", "a-sec2-rule2.2.md",
-    "a-sec3-rule3.1.md", "a-sec3-rule3.7.md", "a-sec4-rule4.1.md",
-    "a-sec4-rule4.2.md", "a-sec4-rule4.4.md", "a-sec4-rule4.5.md",
-    "a-sec5-rule5.5.md", "a-sec6-rule6.4.md", "a-sec6-rule6.5.md",
-    "a-sec9-rule9.4.md",
-]
+ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
-for fname in FILES:
-    f = PROJECT / "ste-code" / "adapted" / fname
-    content = f.read_text()
-    
-    prompt = f"""You are STE-Code. Fix this rule file. Some Non-STE examples have empty STE corrections (just ">" with no content after "**STE:**").
 
-For EVERY Non-STE example that has a missing or empty STE line, write the correct STE-Code compliant version. Follow the same style as the other complete pairs in the file.
+def main():
+    agent = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--agent" and i + 1 < len(sys.argv):
+            agent = sys.argv[i + 1]
 
-Current file: ste-code/adapted/{fname}
+    target = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else None
+    dry_run = "--dry-run" in sys.argv
 
-{content}
+    if not target:
+        print("Usage: fix-ste-gaps.py <secN-ruleY.Z>")
+        sys.exit(1)
 
-## INSTRUCTIONS
-1. Find all Non-STE examples with empty/missing STE corrections
-2. Write the correct STE version for each one
-3. Use the write_file tool to save the complete fixed file to: ste-code/adapted/{fname}
-4. PRESERVE everything else exactly as-is. Only fill in the missing STE lines.
-5. Report how many STE lines you fixed.
+    adapted_file = ADAPTED_DIR / f"a-{target}.md"
+    if not adapted_file.exists():
+        print(f"ERROR: {adapted_file} not found")
+        sys.exit(1)
+
+    if dry_run:
+        print(f"Would fill gaps in {adapted_file}")
+        return
+
+    prompt = f"""You are STE-Code. Fill content gaps in this file:
+  {adapted_file}
+
+Read the file. Look for:
+1. Missing Non-STE/STE example pairs — generate complete pairs
+2. Truncated sections — complete them
+3. Placeholder text — replace with real content
+
+Fix all gaps. Report changes made.
 """
-    
-    tmp = PROJECT / ".agents" / "tmp" / f"fix-ste-{fname.replace('.md', '')}.txt"
-    tmp.write_text(prompt)
-    
-    print(f"Fixing {fname}...")
-    result = subprocess.run(
-        [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "deepseek-v4-pro"],
-        cwd=str(PROJECT), capture_output=True, text=True, timeout=300,
-        env={**os.environ, "HERMES_REASONING_EFFORT": "medium"},
-    )
-    print(f"  Exit: {result.returncode}")
+    result = run_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
+    print(f"Exit: {result.returncode}")
 
-print("\nDone fixing STE gaps.")
+
+if __name__ == "__main__":
+    main()

@@ -4,21 +4,24 @@
 Reads Level 2 system-prompt, produces the lightest-weight prompt suitable for
 interactive sessions and low-context scenarios.
 
-Usage: python3 .agents/tools/assemble-level1.py [--dry-run]
+Usage: python3 .agents/tools/assemble-level1.py [--agent hermes|claude|codex] [--dry-run]
 Output: ste-code/artifacts/level1/system-prompt.txt (~1.2K tokens)
 """
 
-import os, sys
+import sys
 from pathlib import Path
+import importlib.util
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
+_tools = PROJECT / ".agents" / "tools"
+_spec = importlib.util.spec_from_file_location("agent_runner", _tools / "agent-runner.py")
+_ar = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_ar)
+run_agent = _ar.run_agent
+
 LEVEL2_INPUT = PROJECT / "ste-code" / "artifacts" / "level2" / "system-prompt.txt"
 LEVEL1_DIR = PROJECT / "ste-code" / "artifacts" / "level1"
 OUTPUT = LEVEL1_DIR / "system-prompt.txt"
-VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = PROJECT / ".agents" / "tools" / "hermes-oneshot-wrapper.py"
-
-os.makedirs(LEVEL1_DIR, exist_ok=True)
 
 
 def build_prompt():
@@ -73,6 +76,11 @@ Report: principle count, estimated tokens.
 
 
 def main():
+    agent = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--agent" and i + 1 < len(sys.argv):
+            agent = sys.argv[i + 1]
+
     dry_run = "--dry-run" in sys.argv
 
     if not LEVEL2_INPUT.exists():
@@ -84,19 +92,11 @@ def main():
     print(f"Level 1 prompt: {len(prompt)} chars (~{len(prompt)//4} tokens)")
 
     if dry_run:
-        print(f"\\nWould compress {LEVEL2_INPUT} → {OUTPUT}")
+        print(f"\nWould compress {LEVEL2_INPUT} → {OUTPUT}")
         return
 
-    tmp = PROJECT / ".agents" / "tmp" / "level1-assemble.txt"
-    tmp.parent.mkdir(parents=True, exist_ok=True)
-    tmp.write_text(prompt)
-
-    import subprocess
-    result = subprocess.run(
-        [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "deepseek-v4-pro"],
-        cwd=str(PROJECT), capture_output=True, text=True, timeout=600,
-        env={**os.environ, "HERMES_REASONING_EFFORT": "high"},
-    )
+    LEVEL1_DIR.mkdir(parents=True, exist_ok=True)
+    result = run_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
     print(f"Exit: {result.returncode}")
 
     if OUTPUT.exists():

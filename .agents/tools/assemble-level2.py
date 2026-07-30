@@ -5,21 +5,20 @@ Reads Level 3 system-prompt, produces a mid-weight prompt suitable for code
 review and PR feedback. Heavier than Level 1 (~1.2K tokens), lighter than
 Level 3 (~8K tokens with full grammar sections).
 
-Usage: python3 .agents/tools/assemble-level2.py [--dry-run]
+Usage: python3 .agents/tools/assemble-level2.py [--agent hermes|claude|codex] [--dry-run]
 Output: ste-code/artifacts/level2/system-prompt.txt (~5K tokens)
 """
 
-import os, sys
+import sys
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
+exec(open(PROJECT / ".agents" / "tools" / "_import_runner.py").read())
+# Provides: run_agent, launch_agent, get_agent_command
+
 LEVEL3_INPUT = PROJECT / "ste-code" / "artifacts" / "level3" / "system-prompt.txt"
 LEVEL2_DIR = PROJECT / "ste-code" / "artifacts" / "level2"
 OUTPUT = LEVEL2_DIR / "system-prompt.txt"
-VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = PROJECT / ".agents" / "tools" / "hermes-oneshot-wrapper.py"
-
-os.makedirs(LEVEL2_DIR, exist_ok=True)
 
 
 def build_prompt():
@@ -42,7 +41,7 @@ Produce a Level 2 prompt with this structure:
 [1-paragraph identity + attribution]
 
 ## Core Principles (condensed from all 9 sections)
-[~12-15 principles, each 1-2 sentences. Cover: vocabulary gates, part-of-speech,
+[~15-18 principles, each 1-2 sentences. Cover: vocabulary gates, part-of-speech,
 noun chains, verb forms/tense, sentence length, active voice, procedure structure,
 description structure, warnings, punctuation, document consistency]
 
@@ -60,7 +59,7 @@ description structure, warnings, punctuation, document consistency]
 
 ---
 
-> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. © ASD, 2025.
+> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. (c) ASD, 2025.
 > STE is EU Trade Mark 017966390. Independent adaptation.
 
 CRITICAL:
@@ -76,6 +75,11 @@ Report: principle count, estimated tokens.
 
 
 def main():
+    agent = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--agent" and i + 1 < len(sys.argv):
+            agent = sys.argv[i + 1]
+
     dry_run = "--dry-run" in sys.argv
 
     if not LEVEL3_INPUT.exists():
@@ -87,19 +91,11 @@ def main():
     print(f"Level 2 prompt: {len(prompt)} chars (~{len(prompt)//4} tokens)")
 
     if dry_run:
-        print(f"\\nWould compress {LEVEL3_INPUT} → {OUTPUT}")
+        print(f"\nWould compress {LEVEL3_INPUT} → {OUTPUT}")
         return
 
-    tmp = PROJECT / ".agents" / "tmp" / "level2-assemble.txt"
-    tmp.parent.mkdir(parents=True, exist_ok=True)
-    tmp.write_text(prompt)
-
-    import subprocess
-    result = subprocess.run(
-        [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "deepseek-v4-pro"],
-        cwd=str(PROJECT), capture_output=True, text=True, timeout=600,
-        env={**os.environ, "HERMES_REASONING_EFFORT": "high"},
-    )
+    LEVEL2_DIR.mkdir(parents=True, exist_ok=True)
+    result = run_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
     print(f"Exit: {result.returncode}")
 
     if OUTPUT.exists():

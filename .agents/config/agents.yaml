@@ -1,0 +1,44 @@
+# Agent Backends Configuration
+# =============================
+# Add new agents here. The default_agent is used when no --agent flag is given.
+#
+# Each agent needs:
+#   For Hermes:  runtime (venv python path) + wrapper (oneshot script)
+#   For CLI agents: command + args + prompt_arg
+#
+# See agent-runner.py for full documentation.
+
+default_agent: hermes
+
+agents:
+  hermes:
+    runtime: ~/.hermes/hermes-agent/venv/bin/python3
+    wrapper: .agents/tools/hermes-oneshot-wrapper.py
+    default_model: deepseek-v4-pro
+    env:
+      HERMES_REASONING_EFFORT: high
+      HERMES_YOLO_MODE: "1"
+      HERMES_ACCEPT_HOOKS: "1"
+
+  # ── Stub backends (uncomment and configure when ready) ──────────
+
+  # claude:
+  #   command: claude
+  #   args: ["-p", "--print", "--output-format", "text"]
+  #   prompt_arg: null        # null = pass prompt via stdin
+  #   default_model: claude-sonnet-4-20250514
+  #   env: {}
+
+  # codex:
+  #   command: codex
+  #   args: ["exec"]
+  #   prompt_arg: "--prompt-file"
+  #   default_model: gpt-4o
+  #   env: {}
+
+  # generic:
+  #   command: /path/to/custom-agent
+  #   args: []
+  #   prompt_arg: "--prompt-file"
+  #   default_model: null
+  #   env: {}

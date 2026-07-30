@@ -1,30 +1,31 @@
 #!/usr/bin/env python3
 """Fix remaining FIXME markers by generating missing STE corrections.
 
-Targets 4 files with 34 FIXME content gaps. Launches one oneshot worker
-per file to read the file, generate STE corrections for all FIXMEs, and apply.
+Targets files with FIXME content gaps. Launches parallel agent workers
+to read each file, generate STE corrections for all FIXMEs, and apply them.
 
-Usage: python3 .agents/tools/fix-fixmes.py [--dry-run]
+Usage: python3 .agents/tools/fix-fixmes.py [--agent hermes|claude|codex] [--dry-run]
 """
 
-import os, sys, subprocess
+import sys
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
-VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = PROJECT / ".agents" / "tools" / "hermes-oneshot-wrapper.py"
+exec(open(PROJECT / ".agents" / "tools" / "_import_runner.py").read())
+# Provides: run_agent, launch_agent, get_agent_command
+
 TMP_DIR = PROJECT / ".agents" / "tmp" / "fixme"
 
+# Files known to have FIXME markers — edit this list as needed
 FILES_WITH_FIXMES = [
-    "ste-code/adapted/a-sec6-rule6.4.md",   # 15 FIXMEs
-    "ste-code/adapted/a-sec6-rule6.5.md",   # 7 FIXMEs
-    "ste-code/adapted/a-sec4-rule4.4.md",   # 7 FIXMEs
-    "ste-code/adapted/a-sec4-rule4.5.md",   # 1 FIXME
+    "ste-code/adapted/a-sec6-rule6.4.md",
+    "ste-code/adapted/a-sec6-rule6.5.md",
+    "ste-code/adapted/a-sec4-rule4.4.md",
+    "ste-code/adapted/a-sec4-rule4.5.md",
 ]
 
 
 def build_worker_prompt(relpath):
-    abspath = PROJECT / relpath
     return f"""You are STE-Code. Fix all FIXME placeholder markers in this file:
 
 FILE: {relpath}
@@ -54,8 +55,13 @@ Save the report to: {TMP_DIR}/{Path(relpath).stem}-fixme-report.md
 
 
 def main():
+    agent = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--agent" and i + 1 < len(sys.argv):
+            agent = sys.argv[i + 1]
+
     dry_run = "--dry-run" in sys.argv
-    os.makedirs(TMP_DIR, exist_ok=True)
+    TMP_DIR.mkdir(parents=True, exist_ok=True)
 
     if dry_run:
         print(f"Would process {len(FILES_WITH_FIXMES)} files:")
@@ -66,18 +72,7 @@ def main():
     processes = []
     for relpath in FILES_WITH_FIXMES:
         prompt = build_worker_prompt(relpath)
-        prompt_file = TMP_DIR / f"prompt-{Path(relpath).stem}.txt"
-        prompt_file.write_text(prompt)
-
-        proc = subprocess.Popen(
-            [VENV_PYTHON, str(WRAPPER), str(prompt_file),
-             "--model", "deepseek-v4-pro"],
-            cwd=str(PROJECT),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            env={**os.environ, "HERMES_REASONING_EFFORT": "high"},
-        )
+        proc = launch_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
         processes.append((relpath, proc))
         print(f"Launched: {relpath} (PID {proc.pid})")
 

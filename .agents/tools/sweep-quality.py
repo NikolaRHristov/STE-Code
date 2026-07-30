@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """Quality Sweep — parallel batch workers audit all STE-Code output files.
 
-Divides all deliverable files into batches, launches parallel oneshot workers
+Divides all deliverable files into batches, launches parallel agent workers
 to quality-check each batch for STE-Code compliance, formatting, and consistency.
 
-Usage: python3 .agents/tools/sweep-quality.py [--dry-run] [--batches N]
+Usage: python3 .agents/tools/sweep-quality.py [--agent hermes|claude|codex] [--dry-run] [--batches N]
 """
 
-import os, sys, subprocess, time
+import sys, time
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
-VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = PROJECT / ".agents" / "tools" / "hermes-oneshot-wrapper.py"
+exec(open(PROJECT / ".agents" / "tools" / "_import_runner.py").read())
+# Provides: run_agent, launch_agent, get_agent_command
+
 TMP_DIR = PROJECT / ".agents" / "tmp" / "sweep"
 SWEEP_REPORT = PROJECT / "ste-code" / "artifacts" / "sweep-report.md"
 
@@ -90,15 +91,19 @@ Include: batch number, files processed, files fixed, summary of fixes.
 
 
 def main():
+    agent = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--agent" and i + 1 < len(sys.argv):
+            agent = sys.argv[i + 1]
+
     dry_run = "--dry-run" in sys.argv
-    num_batches = 5  # default
+    num_batches = 5
     for i, arg in enumerate(sys.argv):
         if arg == "--batches" and i + 1 < len(sys.argv):
             num_batches = int(sys.argv[i + 1])
 
     all_files = ARTIFACT_FILES + ADAPTED_FILES
-    all_files = [f for f in all_files if f.exists() and f.is_file()]
-    all_files = sorted(set(all_files))
+    all_files = sorted(set(f for f in all_files if f.exists() and f.is_file()))
 
     print(f"Files to sweep: {len(all_files)}")
     print(f"Batches: {num_batches} (~{len(all_files)//num_batches} files each)")
@@ -118,24 +123,13 @@ def main():
         print("\nDry run complete. Use without --dry-run to execute.")
         return
 
-    os.makedirs(TMP_DIR, exist_ok=True)
+    TMP_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Launch all batches in parallel
+    # Launch all batches in parallel using agent_runner
     processes = []
     for i, batch in enumerate(batches):
         prompt = build_worker_prompt(batch, i + 1, num_batches)
-        prompt_file = TMP_DIR / f"prompt-batch-{i+1:02d}.txt"
-        prompt_file.write_text(prompt)
-
-        proc = subprocess.Popen(
-            [VENV_PYTHON, str(WRAPPER), str(prompt_file),
-             "--model", "deepseek-v4-pro"],
-            cwd=str(PROJECT),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            env={**os.environ, "HERMES_REASONING_EFFORT": "high"},
-        )
+        proc = launch_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
         processes.append((i + 1, proc))
         print(f"Launched batch {i+1}/{num_batches} (PID {proc.pid})")
 
@@ -167,7 +161,6 @@ def main():
     SWEEP_REPORT.write_text("\n".join(report_lines))
     print(f"\nSweep report: {SWEEP_REPORT}")
 
-    # Also dump individual batch reports if they exist
     print("\nBatch reports:")
     for report_file in sorted(TMP_DIR.glob("batch-*-report.md")):
         print(f"  {report_file}")
