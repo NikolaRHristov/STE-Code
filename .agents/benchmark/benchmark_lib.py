@@ -110,37 +110,18 @@ def extract_corrected_text(output: str) -> str:
 
 
 def extract_compliance_section(output: str) -> str:
-    """Extract compliance summary section from worker output."""
-    markers = [
-        "**Compliance Summary**",
-        "## Compliance Summary",
-        "COMPLIANCE SUMMARY",
-        "# Compliance Summary",
-        "Compliance Summary",
-    ]
-    for marker in markers:
-        escaped = re.escape(marker)
-        m = re.search(escaped + r'\s*\n(.*)', output, re.DOTALL | re.IGNORECASE)
-        if m and m.group(1).strip():
     """Extract compliance summary section from worker output.
 
-    Attempts several known heading markers in priority order.
+    Normalises bold markdown to plain text, then matches known headings.
     Returns empty string when no compliance section is found.
-
-    All markers use the same capture-group branch: match the heading,
-    then capture everything after it.  Bold markers (** **) are handled
-    by stripping bold syntax from the output before matching so the
-    same regex path applies uniformly.
     """
-    # Normalise bold markdown headings to plain text for matching.
-    # e.g. "**Compliance Summary**" -> "Compliance Summary"
     normalised = re.sub(r'\*\*([^*]+)\*\*', r'\1', output)
 
-    markers: List[str] = [
-        r'## Compliance Summary',
-        r'COMPLIANCE SUMMARY',
-        r'# Compliance Summary',
-        r'Compliance Summary',
+    markers = [
+        '## Compliance Summary',
+        'COMPLIANCE SUMMARY',
+        '# Compliance Summary',
+        'Compliance Summary',
     ]
     for marker in markers:
         m = re.search(
