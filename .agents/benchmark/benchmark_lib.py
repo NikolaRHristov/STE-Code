@@ -112,27 +112,19 @@ def extract_corrected_text(output: str) -> str:
 
 
 def extract_compliance_section(output: str) -> str:
-    """Extract compliance summary section from worker output.
-
-    Attempts several known heading markers.  Returns empty string when
-    no compliance section is found.
-    """
-    markers: List[str] = [
-        r'\*\*Compliance Summary\*\*',
-        r'## Compliance Summary',
-        r'COMPLIANCE SUMMARY',
-        r'# Compliance Summary',
-        r'Compliance Summary',
+    """Extract compliance summary section from worker output."""
+    markers = [
+        "**Compliance Summary**",
+        "## Compliance Summary",
+        "COMPLIANCE SUMMARY",
+        "# Compliance Summary",
+        "Compliance Summary",
     ]
     for marker in markers:
-        if '**' in marker:
-            m = re.search(re.escape(marker), output, re.DOTALL | re.IGNORECASE)
-        else:
-            m = re.search(
-                marker + r'\s*\n(.*)', output, re.DOTALL | re.IGNORECASE,
-            )
-        if m:
-            return m.group(1).strip() if m.lastindex else m.group(0)
+        escaped = re.escape(marker)
+        m = re.search(escaped + r'\s*\n(.*)', output, re.DOTALL | re.IGNORECASE)
+        if m and m.group(1).strip():
+            return m.group(1).strip()
     return ""
 
 
