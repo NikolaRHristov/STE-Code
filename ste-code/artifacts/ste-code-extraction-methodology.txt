@@ -1,54 +1,324 @@
-# STE-Code Extraction Methodology
+STE-Code Extraction Methodology
+================================
 
-## Overview
-6-pass transformation pipeline for processing any code document into STE-Code compliant output.
+Adaptation of ASD-STE100 Issue 9 (January 2025) for Code Documentation
 
-## Pass 1 — Lexical Analysis
-- Tokenize document into words, punctuation, code blocks
-- Identify approved vs unapproved vocabulary
-- Flag non-approved words unless they are technical code nouns (Rule 1.5, 1.6)
-- Flag slang, jargon, regional terms (Rule 1.10)
+> ASD-STE100 Issue 9 is published by the AeroSpace and Defence Industries
+> Association of Europe (ASD), Brussels, Belgium. (c) ASD, 2025. All rights
+> reserved. STE is a European Union Trade Mark (No. 017966390). STE-Code is
+> an independent adaptation not endorsed by ASD. For the authoritative
+> standard, visit asd-ste100.org.
 
-## Pass 2 — Structural Classification
-- Identify document type: README, API doc, commit message, code comment, issue, PR description
-- Extract: headings, paragraphs, lists, code blocks, inline code
-- Map sections: setup, usage, API reference, examples, troubleshooting
-- Classify each sentence: procedural (instruction) vs descriptive (explanation)
 
-## Pass 3 — Part-of-Speech Lock
-- Verify each word used as its approved part of speech (Rule 1.2)
-- Technical nouns not used as verbs (Rule 1.7)
-- Technical verbs not used as nouns (Rule 1.13)
-- Approved verb forms only (Rule 1.4)
+1. HOW STE-CODE WAS ADAPTED FROM ASD-STE100 ISSUE 9
+---------------------------------------------------
 
-## Pass 4 — Meaning Verification
-- Each word used with its approved meaning only (Rule 1.3)
-- Consistent terminology: one term per concept (Rule 1.11)
-- No word-for-word replacement without meaning check (Rule 9.1)
+STE-Code is a domain adaptation of Simplified Technical English for software
+documentation. The adaptation preserves the architecture of ASD-STE100 while
+replacing aerospace vocabulary with code-domain equivalents.
 
-## Pass 5 — Grammar Transformation
-- Active voice in procedures (Rule 3.6)
-- Imperative mood for instructions (Rule 3.2)
-- Short sentences: 20 words procedural, 25 descriptive (Rule 4.1)
-- One instruction per sentence (Rule 5.1)
-- Vertical lists for 3+ items (Rule 4.3)
-- No semicolons (Rule 8.1)
-- No contractions (Rule 4.2)
+The adaptation follows a PRESERVE/REPLACE contract:
 
-## Pass 6 — Consistency Finalization
-- American English spelling (Rule 1.14)
-- Consistent style throughout (Rule 9.4)
-- BREAKING/DEPRECATED/NOTE formatting (Rule 7.1-7.3)
-- Final validation against all 53 rules
+PRESERVE (unchanged structure):
+  - All 53 writing rule numbers, same 9-section organization
+  - Rule numbering hierarchy (Section 1 through 9, plus 4 General Rules)
+  - 19 technical noun categories (verified on Issue 9 pages 47-52)
+  - 4 technical verb categories
+  - Dictionary architecture (APPROVED/UNAPPROVED tables)
+  - Safety instruction format (WARNING/CAUTION becomes BREAKING/DEPRECATED)
+  - Two-level risk structure (breaking changes, deprecated features)
+  - 6-pass transformation pipeline for individual documents
 
-## Turn-by-Turn Protocol
-Turn 0: INITIALIZE — read document title, TOC, identify document type
-Turns 1+: READ → TOKENIZE → LEXICAL → CLASSIFY → POS LOCK → MEANING → GRAMMAR → CONSISTENCY → OUTPUT → ADVANCE
-Final turn: CONSOLIDATE — merge all outputs, verify completeness
+REPLACE (adapted for code domain):
+  - All aerospace example pairs replaced with code documentation examples
+  - Technical noun categories mapped via category-mapping.md
+  - Vocabulary replaced with code-domain approved words
+  - 12 canonical synonym pairs for the most frequent substitutions
 
-## State Persistence
-Between turns, preserve:
-- Current position in document
-- Accumulated vocabulary violations
-- Extracted UML structures
-- Adaptation decisions and their source rule references
+Every adapted rule preserves a citation trail back to the original aerospace
+example pair. The format is:
+
+  > *Adapted from spec pair: "original aerospace text" -> "original STE text"*
+
+Facts are immutable across the pipeline:
+  - 19 technical noun categories (not 22)
+  - 53 writing rules plus 4 General Rules (not 65)
+  - Model: deepseek-v4-pro
+  - 434 spec pages across 109 workers, 37 batches of 3
+
+
+2. THE 5-STAGE PIPELINE: EXTRACT -> REFINE -> MERGE -> ADAPT -> ARTIFACTS
+-------------------------------------------------------------------------
+
+The pipeline transforms raw ASD-STE100 specification pages into deployable
+STE-Code artifacts through five sequential stages. Each stage reads from the
+previous stage directory and writes to its own. Cross-contamination between
+stages is forbidden (Rail 1: Stage Isolation).
+
+STAGE 1 — EXTRACTION
+  Input: spec/issue-09-2025/page-0001.md through page-0434.md
+  Output: ste-code/extracted/wNNN-pPPPP-PPPP.md (109 files)
+  Method: Parallel workers read 4 pages each, extract every word verbatim
+  Workers: 109 workers, 37 batches of 3
+  Model: deepseek-v4-pro
+  Quality: Tier 1-3 gates (structural, content, integrity)
+  Recovery: 5-level escalation (retry, split, model switch, flag, stop)
+
+STAGE 2 — REFINEMENT
+  Input: ste-code/extracted/wNNN-pPPPP-PPPP.md
+  Output: ste-code/refined/rNNN-pPPPP-PPPP.md (109 files)
+  Method: 9 non-negotiable formatting rules applied in sequence
+  Rules: Content preservation, headings, tables, examples, code blocks,
+         dictionary entries, metadata, lists, spacing
+  Quality: 9 automated gates (G1-G9), scoring rubric (0-100 scale)
+  Recovery: Re-launch with stronger instructions, split pages, model switch
+
+STAGE 3 — MERGE
+  Input: ste-code/refined/rNNN-pPPPP-PPPP.md (109 files)
+  Output: ste-code/merged/master-raw.md, ste-code/merged/master.md
+  Method: Concatenate, deduplicate, organize by section
+  Quality: Page coverage audit, gap detection, deduplication pass
+
+STAGE 4 — ADAPTATION
+  Input: ste-code/merged/master.md
+  Output: ste-code/adapted/a-secN-ruleY.Z.md (53 files)
+  Method: For each rule, extract aerospace examples, find code-domain
+          analogues using the 10-concept mapping table, write adapted file
+  Quality: Quality gate checklist (adapted files, artifact files, cross-
+           reference integrity, rail compliance)
+  Key mappings:
+    | Aerospace Concept          | Code-Domain Analogue           |
+    |----------------------------|--------------------------------|
+    | mechanic / operator        | developer / engineer           |
+    | aircraft / system          | application / module / service |
+    | maintenance procedure      | build, deploy, or test         |
+    | leak / damage / failure    | bug / crash / exception        |
+    | safety precaution / warning| security advisory / BREAKING   |
+    | tool / equipment           | dependency / SDK / CLI tool    |
+    | manufacturer's instructions| API documentation / style guide|
+    | inspection / check         | test / lint / audit            |
+    | fluid / material           | data / input / payload         |
+    | door / hatch / panel       | endpoint / port / interface    |
+
+STAGE 5 — ARTIFACTS
+  Input: ste-code/adapted/a-secN-ruleY.Z.md (53 files)
+  Output: ste-code/artifacts/ (6 deployable files)
+  Artifacts:
+    1. ste-code-distilled-system-prompt.txt (Level 1, ~1,200 tokens)
+    2. ste-code-self-reading-manual.txt (Level 5, ~7,000 tokens)
+    3. ste-code-extraction-methodology.txt (this document, ~2,000 tokens)
+    4. ste-code-example-turn.txt (worked example)
+    5. ste-code-deployment-guide.txt (deployment instructions)
+    6. README.md (project overview)
+  Quality: 6 rail compliance checks, cross-reference verification
+
+
+3. HOW AEROSPACE TERMS WERE MAPPED TO CODE-DOMAIN EQUIVALENTS
+-------------------------------------------------------------
+
+The mapping from aerospace to code domain uses structural equivalence. Each
+aerospace concept identifies a code-domain analogue by function, not by
+literal meaning.
+
+Mapping methodology (per example pair):
+  1. Read the original aerospace example and identify the grammatical
+     structure and rule violation type
+  2. Find a code-domain scenario with the same structure and violation
+  3. Replace all aerospace nouns with terms from the 19 STE-Code
+     technical noun categories
+  4. Replace all verbs with code-domain approved verbs
+  5. Preserve the example structure exactly
+  6. Add a citation line tracing back to the original aerospace pair
+
+Edge case guidance:
+  - Rules about physical safety -> map to API breaking changes or
+    security vulnerabilities
+  - Mechanical assembly instructions -> map to build/deploy steps
+  - Equipment inspection -> map to test/lint/audit procedures
+  - Idiomatic aerospace phrases -> preserve grammatical structure,
+    replace vocabulary only
+  - Multiple valid adaptations -> prefer the most common developer
+    documentation scenario
+
+Dictionary words without code-domain meaning are omitted from the
+STE-Code dictionary. A NOTE in the adapted rule file records the
+omission.
+
+
+4. HOW THE 19 CATEGORIES WERE ADAPTED FOR CODE DOCUMENTATION
+------------------------------------------------------------
+
+ASD-STE100 Issue 9 defines 19 technical noun categories (verified on
+spec pages 47-52). Each STE category maps to one STE-Code category:
+
+  | # | STE Category                       | STE-Code Category                     |
+  |---|------------------------------------|---------------------------------------|
+  |  1| Official parts information         | Language keywords and reserved words  |
+  |  2| Vehicles, machines, locations      | Frameworks, runtimes, platforms       |
+  |  3| Tools and support equipment        | Development tools and build systems   |
+  |  4| Materials, consumables, waste      | Dependencies, packages, libraries     |
+  |  5| Facilities, infrastructure         | Deployment targets and environments   |
+  |  6| Systems, components, circuits      | Modules, classes, components, services|
+  |  7| Math, science, engineering         | Algorithmic and computational terms   |
+  |  8| Navigation and geographic          | Routing, pathing, state management    |
+  |  9| Numbers, units, time               | Data sizes, time units, numeric fmt   |
+  | 10| Quoted text, placards, labels      | String literals, error msgs, log      |
+  | 11| Persons, groups, organizations     | Roles, teams, services, actors        |
+  | 12| Parts of the body                  | UI/UX interaction and accessibility   |
+  | 13| Common personal effects            | Configuration and preference files    |
+  | 14| Medical terms                      | Error states, diagnostics, health     |
+  | 15| Official documents                 | Spec files, configs, manifests        |
+  | 16| Environmental/operational cond.    | Runtime conditions, states, flags     |
+  | 17| Colors                             | Terminal colors, syntax themes        |
+  | 18| Damage terms                       | Bug, defect, failure taxonomy         |
+  | 19| IT and telephony terms             | Network, protocol, API, I/O terms     |
+
+Four verb categories are also adapted:
+  1. Development operations (build, compile, test, deploy)
+  2. Data operations (read, write, serialize, parse)
+  3. Application operations (handle, route, authenticate, validate)
+  4. Communication operations (send, receive, publish, subscribe)
+
+A decision table (D1-D15) resolves ambiguous term classification. For
+example, a specific package name on a registry becomes Category 4
+(dependencies). A specific tool invoked from the command line becomes
+Category 3 (development tools). A protocol or API paradigm becomes
+Category 19 (network/protocol terms). Boundary cases with worked
+examples guide classification of terms that span multiple categories.
+
+The 19-category count is immutable. Terms without a clear STE analogue
+are documented as unclassified and deferred to extension workers in a
+later phase. No 20th category is created.
+
+
+5. QUALITY ASSURANCE PROCESS
+----------------------------
+
+Quality assurance operates at three levels: batch, stage, and pipeline.
+
+BATCH-LEVEL QUALITY (after every batch of 3 workers):
+  - Tier 1 structural gate (7 automated checks per output file)
+  - File existence, minimum size, page headings, separators, UTF-8
+  - Tier 2 content gate (spot-check on 1 file per batch)
+  - No fabrication signals, no truncation markers, sample comparison
+  - Tier 3 integrity gate (every 10th batch)
+  - Full page comparison, UNNAPROVED tag count, table row count
+
+STAGE-LEVEL QUALITY (before stage completion is declared):
+  - File count audit (example: 109/109 for extraction)
+  - Gap detection (all page ranges covered)
+  - Spot-check 3 random files for content fidelity
+  - Scoring rubric (0-100 scale, score below 70 requires re-launch)
+
+PIPELINE-LEVEL QUALITY (8 immutable guardrails):
+  R1 — Stage Isolation: no cross-contamination between stage directories
+  R2 — Naming Convention: wNNN-pPPPP-PPPP.md, rNNN-pPPPP-PPPP.md
+  R3 — Completion Integrity: never claim complete without disk evidence
+  R4 — Content Fidelity: zero fabrication, every claim grounded in source
+  R5 — Formatting Standards: 9 refinement rules, blank lines, tables
+  R6 — Factual Correctness: 19 categories, deepseek-v4-pro, 53 rules
+  R7 — Progress Tracking: PROGRESS.md matches disk reality
+  R8 — Error Recovery: fixes documented, stale files purged
+
+EXECUTION AUDITOR (hidden agent, Agent #3):
+  - Runs after each batch, every 10th batch, and before phase gates
+  - Verifies claims against disk evidence for all 8 rails
+  - 8 verification procedures with automated shell commands
+  - Rail dependency map traces cascade failures
+  - Fabrication detection: grep for modern software terms, commentary
+    language, placeholder markers, wrong factual claims
+
+The auditor is the ground truth layer between agent claims and evidence.
+It never produces content. It only verifies what other agents claim to
+have done against what exists on disk.
+
+
+6. BENCHMARK METHODOLOGY
+------------------------
+
+The benchmark measures STE-Code compliance against a control group.
+Both groups run identical test cases. One group uses the STE-Code
+system prompt. The other uses a plain assistant with no style guidance.
+
+TEST SUITE
+  59 test cases across 14 categories:
+    Category 1: README (5 tests)
+    Category 2: API documentation (5 tests)
+    Category 3: Commit messages (5 tests)
+    Category 4: Error messages (5 tests)
+    Category 5: Code comments (5 tests)
+    Category 6: CHANGELOG entries (3 tests)
+    Category 7: Config file comments (3 tests)
+    Category 8: Composite documents (4 tests)
+    Category 9: Generated functions (4 tests)
+    Category 10: Generated PR reviews (4 tests)
+    Category 11: Generated API docs (4 tests)
+    Category 12: Generated commit messages (4 tests)
+    Category 13: Generated error messages (4 tests)
+    Category 14: Generated README (4 tests)
+
+SCORING METHOD
+  Correctness score = (expected_keywords_found / total_expected) *
+                       (1 - forbidden_found / total_forbidden)
+  Compliance = principles_satisfied / total_expected_principles
+  Pass threshold: correctness score >= 0.70
+
+EXECUTION
+  Parallel workers in batches of 3, each processing one test case
+  Same model (deepseek-v4-pro) for both STE-Code and control groups
+  CWD-isolated execution prevents cross-contamination
+  Orchestrator: .agents/benchmark/orchestrator.py
+  Control: .agents/benchmark/orchestrator-control.py
+
+RESULTS (run-20260730-012639)
+  STE-Code: 96.6% pass rate (57/59), average correctness 0.941
+  Plain assistant: 11.9% pass rate (7/59), average correctness 0.471
+  Improvement: +84.7% pass rate, +0.448 average score
+
+  Top 3 categories where STE-Code provides the largest improvement:
+    Comments: +0.580 average score improvement
+    Error messages: +0.560 average score improvement
+    Config files: +0.520 average score improvement
+
+  Categories with perfect STE-Code scores:
+    Commit messages: 1.000 correctness (5/5 passed)
+    Generated README: 0.998 correctness (4/4 passed)
+    Generated API docs: 0.998 correctness (4/4 passed)
+
+STE-CODE 6-PASS DOCUMENT TRANSFORMATION
+---------------------------------------
+
+For transforming individual code documents into STE-Code compliant output,
+a 6-pass pipeline operates on each document:
+
+  Pass 1 — Lexical Analysis: tokenize, identify approved/unapproved
+           vocabulary, flag non-approved words, flag slang and jargon
+  Pass 2 — Structural Classification: identify document type, extract
+           structure, classify sentences as procedural or descriptive
+  Pass 3 — Part-of-Speech Lock: verify each word used as its approved
+           part of speech, no technical nouns as verbs
+  Pass 4 — Meaning Verification: each word with approved meaning only,
+           consistent terminology, one term per concept
+  Pass 5 — Grammar Transformation: active voice, imperative mood, short
+           sentences (20 words procedural, 25 descriptive), no -ing
+           forms as main verbs in procedures
+  Pass 6 — Consistency Finalization: American English spelling, consistent
+           style, BREAKING/DEPRECATED/NOTE formatting, final validation
+
+The 6-pass pipeline is complementary to the 5-stage adaptation pipeline.
+The 5-stage pipeline produces STE-Code artifacts from the ASD-STE100
+specification. The 6-pass pipeline transforms any code document into
+STE-Code compliant output using those artifacts as reference.
+
+
+IMMUTABLE FACTS
+---------------
+
+Source: ASD-STE100 Issue 9, January 2025 (434 pages)
+Model: deepseek-v4-pro
+Adaptation: 53 writing rules + 4 General Rules (57 adapted files)
+Categories: 19 technical noun categories + 4 verb categories
+Dictionary: 5,943 lines of approved/unapproved words
+Artifacts: 6 deployable files across 5 adaptation levels
+Benchmark: 59 tests, 14 categories, 96.6% pass rate
+Version: 3.0, 2026-07-30

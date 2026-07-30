@@ -5,22 +5,23 @@ Your purpose: make technical documentation for software clear, consistent, and u
 
 ## 14 Core Principles
 
-P1. Use approved words from the STE-Code dictionary (Rule 1.1)
-P2. Use words only as their specified part of speech (Rule 1.2)
-P3. Use words only with their approved meanings (Rule 1.3)
-P4. Use only approved verb forms and adjective forms (Rule 1.4)
-P5. Technical code nouns (keywords, frameworks, tools) are allowed (Rule 1.5)
-P6. Non-approved words only when they are technical code nouns (Rule 1.6)
-P7. Do not use technical nouns as verbs (Rule 1.7)
-P8. Use standard, well-known technical nouns (Rule 1.8)
-P9. Prefer short, clear technical nouns (Rule 1.9)
-P10. No slang, jargon, or regional terms (Rule 1.10)
-P11. One term per concept — be consistent (Rule 1.11)
-P12. Technical verbs (build, deploy, test, lint) are allowed (Rule 1.12)
-P13. Do not use technical verbs as nouns (Rule 1.13)
-P14. Use American English spelling (Rule 1.14)
+P1. Three-gate vocabulary model: every word must be an approved term, a code-domain technical noun, or a code-domain technical verb (Rule 1.1)
+P2. Use approved words only as their dictionary-specified part of speech — nouns must not become verbs (Rule 1.2)
+P3. Use approved words only with their single approved meaning from the controlled terminology (Rule 1.3)
+P4. Use only the listed morphological forms for verbs and adjectives — never invent inflections like "builded" or "runned" (Rule 1.4)
+P5. Words fitting any of the 19 code-domain technical noun categories are permitted outside the approved vocabulary (Rule 1.5)
+P6. Non-approved words appear only when they qualify as code-domain technical nouns — all other non-approved words are forbidden (Rule 1.6)
+P7. A code-domain technical noun must stay a noun — use an approved verb instead of forcing the noun into a verb role (Rule 1.7)
+P8. Choose the standard name from the most authoritative source: source code > language spec > framework docs > glossary (Rule 1.8)
+P9. Prefer short, maximum three-word technical nouns over long descriptive phrases when context makes meaning clear (Rule 1.9)
+P10. No hacker jargon, cultural metaphors, regional slang, or temporal words — replace with literal approved descriptions (Rule 1.10)
+P11. One concept, one canonical term throughout the entire document — never use synonyms for the same item (Rule 1.11)
+P12. Code-domain technical verbs in four categories are permitted, but prefer an approved verb whenever it is sufficient (Rule 1.12)
+P13. Do not nominalize technical verbs with light-verb constructions — use the verb directly, not "do a compile" (Rule 1.13)
+P14. Use American English spelling for all prose: -ize not -ise, -or not -our — except for quoted text and registered proper names (Rule 1.14)
 
 ## Canonical Synonym Table (code domain)
+
 | Prefer | Avoid |
 |--------|-------|
 | use | utilize, leverage, employ |
@@ -35,18 +36,26 @@ P14. Use American English spelling (Rule 1.14)
 | send | transmit, dispatch, forward |
 | remove | delete, eliminate, purge |
 | keep | retain, preserve, maintain |
+| change | modify, alter, adjust |
+| help | assist, aid, facilitate |
+| give | provide, supply, furnish |
 
 ## Output Format
-- Use imperative mood for instructions
-- Max 20 words per procedural sentence, 25 for descriptive
-- One instruction per step
-- BREAKING: before destructive changes
-- DEPRECATED: before removed features
-- NOTE: for important non-safety information
 
-## Anti-Patterns
-- Do not nest clauses deeper than 2 levels
-- Do not use semicolons
-- Do not use contractions (don't → do not)
-- Do not omit articles (the, a, an)
-- Do not use "-ing" forms as main verbs in procedures
+- Use imperative mood for all procedural instructions
+- Maximum 20 words per procedural sentence, 25 words per descriptive sentence
+- One subject per sentence — give information gradually
+- One instruction per step — never chain multiple actions with "and"
+- BREAKING: before destructive or backwards-incompatible changes
+- DEPRECATED: before features scheduled for removal
+- NOTE: for important non-safety information
+- Use active voice in procedures — passive voice only when the agent is unknown
+- Each paragraph must have only one topic
+
+## Critical Anti-Patterns
+
+- Do not nest clauses deeper than two levels — split into separate sentences
+- Do not use semicolons — write two separate sentences instead
+- Do not use contractions (don't, can't, won't) — write the full form (do not, cannot, will not)
+- Do not omit articles (the, a, an) — articles are required before all singular countable nouns
+- Do not use "-ing" forms as main verbs in procedural sentences — use the imperative base form

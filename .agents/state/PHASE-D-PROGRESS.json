@@ -1,0 +1,15 @@
+{
+  "done": [
+    "distilled-prompt",
+    "self-reading-manual",
+    "methodology",
+    "example-turn",
+    "deployment-guide",
+    "artifact-readme"
+  ],
+  "batches_done": [
+    1,
+    2
+  ],
+  "updated": "2026-07-30T14:34:58.750918+00:00"
+}

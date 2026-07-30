@@ -1,101 +1,584 @@
-# STE-Code Self-Reading Manual v1.0
+# STE-Code Self-Reading Manual v2.0
 
-## S0 — How to Use This Manual
-This manual is recursive. Read it in order: S1 (principles) → S3 (reading protocol) → S4 (extraction) → S2 (rules reference). Apply S3 to any code document you process.
+## Adapted from ASD-STE100 Issue 9 (January 2025)
+Published by the AeroSpace and Defence Industries Association of Europe (ASD), Brussels, Belgium.
+(C) ASD, 2025 -- All rights reserved. STE is a European Union Trade Mark (No. 017966390).
+STE-Code is an independent adaptation not endorsed by ASD. For the authoritative standard, visit asd-ste100.org.
 
-## S1 — Core STE-Code Principles
+---
 
-1. **One word, one meaning**: Each term means exactly one thing. `deploy` means push to production, not also install or configure.
-2. **Short sentences**: 20 words max for instructions, 25 for descriptions.
-3. **Active voice**: "Run the tests" not "The tests should be run."
-4. **Imperative mood**: "Set the timeout to 500ms" not "You should set the timeout."
-5. **No jargon**: Say "stop the server" not "kill the process."
-6. **Consistent terms**: Pick one name per concept. Don't mix `config` and `settings` for the same thing.
-7. **BREAKING/DEPRECATED**: Flag destructive changes before the related step.
-8. **Technical nouns**: Framework names (React), tools (webpack), languages (TypeScript), protocols (HTTP/2) are all allowed.
-9. **Approved verbs only**: `run`, `build`, `test`, `deploy`, `start`, `stop`, `check`, `set`, `get`, `show`, `make`, `do`, `send`, `remove`, `keep`.
-10. **No noun clusters**: Max 3 nouns together. "React component lifecycle method" → "method in the React component lifecycle."
-11. **One topic per paragraph**: Each paragraph covers exactly one concept.
-12. **Vertical lists**: Use bullet points for 3+ items. Consistent punctuation.
-13. **Define abbreviations**: Spell out on first use: "Continuous Integration (CI)."
-14. **Code examples**: Show both non-ideal and STE-Code versions. Mark clearly.
+## 1. Introduction -- What STE-Code Is and Why It Exists
 
-## S2 — Knowledge Base
+STE-Code is a Simplified Technical English specification adapted for software documentation. It applies the controlled-language methodology of ASD-STE100 to the code domain: README files, API documentation, docstrings, commit messages, error messages, configuration file comments, CLI help text, changelogs, and release notes.
 
-### All 53 Rules (adapted for code domain)
-64 adapted rule files cover all 53 STE-Code rules across 9 sections plus 4 General Rules.
-Each rule preserves the original STE rule number and structure, adapted with code-domain examples.
+Code documentation is read by developers from many language backgrounds, working across time zones and cultures. Ambiguous vocabulary, long sentences, inconsistent terminology, and jargon cause misunderstandings that lead to bugs, security vulnerabilities, and wasted engineering time. STE-Code solves this problem with a controlled vocabulary of approved words, a set of writing rules that enforce clarity, and a framework for managing domain-specific technical terms.
 
-### 19 Technical Code Noun Categories
-1. Language keywords — if, else, return, class, async, await
-2. Frameworks and runtimes — React, Node.js, Docker, PostgreSQL
-3. Dev tools and build systems — webpack, eslint, git, npm, cargo
-4. Dependencies and packages — lodash, express, serde, tokio
-5. Deployment targets — staging, production, AWS, Vercel
-6. Modules, classes, services — UserService, AuthModule, PaymentGateway
-7. Algorithmic terms — hash, sort, O(n), cache, memoize
-8. Routing and state — Router, middleware, redirect, proxy
-9. Data sizes and time — 500ms, 2GB, 200 OK, timeout, TTL
-10. String literals and logs — "connection refused", Error: timeout
-11. Roles, teams, services — admin, moderator, OAuth provider
-12. UI/UX and accessibility — button, modal, aria-label, focus
-13. Configuration files — .env, .gitignore, tsconfig.json
-14. Error states — NullPointerException, 500, race condition
-15. Spec files — package.json, Dockerfile, openapi.yaml
-16. Runtime conditions — cold start, degraded, feature flag on
-17. Terminal colors — red, cyan, 256-color, truecolor
-18. Bug taxonomy — crash, memory leak, XSS, SQL injection
-19. Network terms — HTTP/2, WebSocket, gRPC, TLS 1.3
+The specification has 51 rules across 9 sections, 4 general recommendations (GR rules), a controlled terminology of approximately 875 approved words and 1,274 unapproved words with approved alternatives, 19 code-domain technical noun categories, 4 code-domain technical verb categories, and a canonical synonym table that maps common unapproved coding terms to approved replacements.
 
-## S3 — Page-Reading Protocol
-For any code document (README, API doc, commit message, comment):
-1. Classify the document type
-2. Identify sections (setup, usage, API reference, etc.)
-3. For each paragraph: check sentence length, active voice, approved vocabulary
-4. Extract structural elements: classes, functions, parameters, return values
-5. Flag violations with rule references
+This manual is a self-contained reference. It summarizes every rule, gives key examples from the deepened rule files, provides the complete synonym table, and includes a documentation review checklist. Use it to learn STE-Code, to review documentation for compliance, and to train contributors.
 
-## S4 — Skill Extraction Framework
-5 patterns for code documentation:
-1. **API reference pattern**: function signature → parameters → return value → example
-2. **Setup pattern**: prerequisites → install → configure → verify
-3. **Usage pattern**: import → instantiate → call → handle result
-4. **Error pattern**: condition → action → consequence
-5. **Deploy pattern**: build → test → stage → release
+---
 
-## S5 — UML Extraction
-Generate Mermaid diagrams for:
-- Class relationships (inheritance, composition, dependency)
-- Sequence diagrams (API call flows)
-- Flowcharts (decision logic, error handling)
+## 2. All 51 Rules -- Summaries with Key Examples
 
-## S6 — Recursive Questioning Protocol
-13 questions for every code document:
-1. Is the purpose stated in the first sentence?
-2. Are all abbreviations defined?
-3. Do sentences stay under 20/25 words?
-4. Is active voice used throughout?
-5. Are technical terms consistent?
-6. Are code examples real and runnable?
-7. Are BREAKING/DEPRECATED warnings placed before the action?
-8. Are error messages shown with solutions?
-9. Is the vocabulary from the approved list?
-10. Are noun clusters limited to 3 words?
-11. Are lists formatted consistently?
-12. Is there exactly one topic per paragraph?
-13. Can a new team member follow the instructions without asking?
+### Section 1 -- Words (Rules 1.1-1.14)
 
-## S7 — Output Format
-Per-turn output:
-```
-## COMPLIANCE STATUS: N violations found
-## STE-CODE OUTPUT: [corrected text]
-## UML EXTRACTION: [Mermaid diagrams]
-## OPTIMIZATIONS: [before/after metrics]
-```
+**Rule 1.1 -- Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs**
+Every word in code documentation must pass one of three gates: it is an approved word in the controlled terminology, a code-domain technical noun, or a code-domain technical verb. The controlled terminology gives approximately 875 approved words with specified parts of speech and meanings. Technical nouns name domain concepts (classes, frameworks, protocols). Technical verbs name domain operations (compile, serialize, deploy). Words that fail all three gates must be replaced.
+Example: "Utilize the build tool to generate the artifact" becomes "Use the build tool to make the binary."
+Reference: a-sec1-rule1.1.md (447 lines)
 
-## S8 — Context Window Management
-- Keep S1-S3 in context always
-- Load S2 (rule reference) on demand
-- Discard raw source pages after processing
-- Save state between turns
+**Rule 1.2 -- Use Approved Words Only as the Specified Part of Speech**
+Each approved word carries a part-of-speech label: verb (v), noun (n), adjective (adj), adverb (adv), preposition (prep), conjunction (conj), pronoun (pron), or article (art). Use the word only in that grammatical role. The most common violation is the noun-as-verb pattern: "Docker the application" (Docker is a noun), "Cache the results" (cache is a noun). Fix with an approved verb: "Use Docker to run the application," "Store the results in the cache."
+Example: "Query the database for user records" -> "Send a query to the database for user records."
+Reference: a-sec1-rule1.2.md (505 lines)
+
+**Rule 1.3 -- Use Approved Words Only with Their Approved Meanings**
+Each approved word has a specified meaning that may be more restricted than its standard English meaning. The verb "follow" means "come after, go after" -- use it for sequence, not for compliance. For compliance, use "obey." The verb "keep" means "to hold or to store" -- use it for state retention, not for maintenance. Do not use approved words with unapproved meanings even if the part of speech is correct.
+Example: "Follow the coding standard" becomes "Obey the coding standard."
+Reference: a-sec1-rule1.3.md (~500 lines)
+
+**Rule 1.4 -- Use Only the Approved Forms of Verbs and Adjectives**
+Each approved verb has exactly four forms: infinitive/imperative, simple present third-person singular, simple past, and past participle. The verb COMPILE gives: compile, compiles, compiled, compiled. Do not use unlisted forms: "compilating," "compilates." Each adjective may have comparative and superlative forms: FAST, FASTER, FASTEST. The "-ing" form is not an approved main-verb form in procedures. Use simple present instead: "The server runs" not "The server is running."
+Example: "The compiler is compilating the source files" -> "The compiler compiles the source files."
+Reference: a-sec1-rule1.4.md (502 lines)
+
+**Rule 1.5 -- You Can Use Words That You Can Include in a Technical Noun Category**
+Code-domain technical nouns are exempt from the approved-word requirement when they fit into one of 19 categories. Categories include: code components and libraries, development tools, data structures, infrastructure, systems, algorithms, interface elements, numbers and units, quoted text, professional roles, documents, runtime environments, colors, defects, computer science terms, legal terms, database terms, and network terms. Register every technical noun in your project glossary with its category and approved meaning.
+Example: "The developer used the thing to get data from the storage layer" -> "The frontend developer used the API client to get data from the database."
+Reference: a-sec1-rule1.5.md (407 lines), a-categories.md
+
+**Rule 1.6 -- Use a Non-Approved Word Only When It Is a Technical Noun**
+Words listed as UNAPPROVED in the controlled terminology may still be used if they qualify as code-domain technical nouns under Rule 1.5. The word "base" is not approved (alternative: "bottom") but may be used as a technical noun in mathematical contexts. "Backup" is not approved (alternative: "emergency") but may be used as a database technical verb. The key is the distinction: a non-approved word used as a technical noun is permitted; the same word used as general-purpose vocabulary is not.
+Example: "The base of the container" -> "The bottom of the container." But "base class" is acceptable as a compound technical noun.
+Reference: a-sec1-rule1.6.md (~400 lines)
+
+**Rule 1.7 -- Do Not Use Technical Nouns as Verbs**
+A word that is a code-domain technical noun must not be used as a verb. "Database" is a technical noun -- do not write "Database the records." Use "Store the records in the database." "Cache" is a technical noun -- when your glossary lists it only as a noun, write "Store the responses in the cache." When your glossary lists "cache" as both a technical noun and a technical verb (Rule 1.12), you may use it as a verb: "Cache the responses."
+Example: "Docker the application, Git the repository, npm the dependencies" -> "Containerize the application, clone the repository, install the dependencies."
+Reference: a-sec1-rule1.7.md (513 lines)
+
+**Rule 1.8 -- Use Standard, Well-Known Technical Nouns**
+Use the technical noun that is approved in your project, company, industry, or subject field. Do not invent names when an established name exists. The class is named "AccountController" in the codebase -- use "AccountController," not "account controller" or "the auth handler." Consistency makes documentation searchable and traceable to source code.
+Example: "The user retrieval endpoint sends back a user data object" -> "The GET /users/:id endpoint returns a User object."
+Reference: a-sec1-rule1.8.md (432 lines)
+
+**Rule 1.9 -- Prefer Short, Clear Technical Nouns**
+When selecting a technical noun, use the shortest term that is unambiguous in context. The three-word limit is a guideline. Long descriptive phrases increase cognitive load. Context -- code references, diagrams, preceding definitions -- permits brevity. Add adjectives only when necessary for disambiguation.
+Example: "Call the asynchronous JavaScript XML HTTP request wrapper utility function (line 42)" -> "Call the fetch utility (line 42)."
+Reference: a-sec1-rule1.9.md (343 lines)
+
+**Rule 1.10 -- No Slang, Jargon, or Regional Terms**
+Do not use regional expressions, community slang, or insider jargon as technical nouns. "Cruft" (unnecessary code), "bikeshedding" (trivial discussion), "yak shaving" (prerequisite tasks), "foo/bar" (metasyntactic variables), and "grok" (understand deeply) are all prohibited. Use approved words that are clear to all readers regardless of language background or community membership.
+Example: "The function monkeys with the input data before validation" -> "The function changes the input data before validation."
+Reference: a-sec1-rule1.10.md (211 lines)
+
+**Rule 1.11 -- One Term Per Concept -- Be Consistent**
+Use the same code-domain technical noun for the same item throughout your documentation. If the class is named "UserService," do not call it "AccountManager" in one section and "UserHandler" in another. The reader must know whether each name refers to the same item or to different items. Choose the canonical name from the most authoritative source (the codebase, the API spec) and use it everywhere.
+Example: "UserService" in step 1, "AccountManager" in step 2, "UserHandler" in step 3 -> "UserService" in all steps.
+Reference: a-sec1-rule1.11.md (399 lines)
+
+**Rule 1.12 -- Technical Verbs Are Allowed**
+Code-domain technical verbs describe specific software operations and are permitted even when not in the approved word list. Four categories define the scope: (1) Development processes -- compile, lint, refactor, transpile, bundle, deploy. (2) Computer processes and applications -- click, encrypt, render, serialize, boot, authenticate. (3) Instructions for subject fields -- aggregate, parse, hash, normalize, query, migrate. (4) Law and regulations -- license, comply, warrant. Technical verbs must obey the same grammatical rules as approved verbs.
+Example: "If you detect broken wires, repair them" -> "If you find broken wires, repair them" (use approved "find" when it conveys the same meaning).
+Reference: a-sec1-rule1.12.md (521 lines)
+
+**Rule 1.13 -- Do Not Use Technical Verbs as Nouns**
+A word that is a code-domain technical verb must not be used as a noun. "Build" is a technical verb -- write "Build the project," not "Do a build of the project." "Deploy" is a technical verb -- write "Deploy the application," not "Do a deploy." Some words are approved as both technical verbs and technical nouns in different contexts (Rule 1.5 and Rule 1.12). The glossary entry for each word determines which uses are valid.
+Example: "Do a parse of the input string" -> "Parse the input string."
+Reference: a-sec1-rule1.13.md (279 lines)
+
+**Rule 1.14 -- Use American English Spelling**
+Use American English spelling throughout code documentation. "Color" not "colour." "Initialize" not "initialise." "Center" not "centre." "Behavior" not "behaviour." When quoted text (error messages, terminal output, code comments from external sources) contains British English spelling, preserve it as-is (Rule 8.6). The surrounding documentation text must use American English spelling.
+Example: "The log file shows the colour of each output line" -> "The log file shows the color of each output line."
+Reference: a-sec1-rule1.14.md (537 lines)
+
+---
+
+### Section 2 -- Noun Phrases (Rules 2.1-2.2)
+
+**Rule 2.1 -- Multi-word Nouns: Maximum Three Words**
+Keep multi-word noun phrases to a maximum of three words. Long chains of nouns and adjectives are hard to parse. When a concept requires more than three words, break the phrase into smaller units connected by prepositions ("of," "for," "in," "on"). The head noun should be the last word of each unit.
+Example: "API gateway request rate limiter configuration file" -> "Configuration file for the rate limiter of the API gateway."
+Reference: a-sec2-rule2.1.md (403 lines)
+
+**Rule 2.2 -- Long Technical Nouns: Shorter Forms and Hyphens**
+When an approved technical noun has more than three words, write it in full at first occurrence. Then give a shorter form or use hyphens to connect words that function as one unit. Hyphenated words count as one word for Rule 2.1. Use approved abbreviations from official company documentation after defining them.
+Example: "ramp service door safety connector pin" defined at first use, then "safety connector pin" for subsequent references.
+Reference: a-sec2-rule2.2.md (575 lines)
+
+---
+
+### Section 3 -- Verbs (Rules 3.1-3.7)
+
+**Rule 3.1 -- Use Only the Verb Forms Given in the Dictionary**
+Each approved verb has exactly four forms. The controlled vocabulary lists them: BUILD, BUILDS, BUILT, BUILT. Do not invent forms: "builded" is not permitted. For irregular verbs, only the listed irregular forms are valid. For technical verbs under Rule 1.12, follow standard English morphology.
+Example: "The project was builded successfully" -> "The project was built successfully."
+Reference: a-sec3-rule3.1.md (509 lines)
+
+**Rule 3.2 -- Use the Active Voice**
+Use the active voice in procedural writing. The subject performs the action. "The compiler checks the types" (active), not "The types are checked by the compiler" (passive). Active voice is shorter, clearer, and tells the reader who does what. In descriptive writing, prefer active voice but passive is acceptable when the agent is unknown or irrelevant. For API documentation, prefer active: "The function returns a User object."
+Example: "The tests should be run before deployment" -> "Run the tests before deployment."
+Reference: a-sec3-rule3.2.md
+
+**Rule 3.3 -- Use the Imperative Mood for Instructions**
+Procedural writing must use the imperative mood. Each step starts with an approved verb in its base form: "Run the script," "Check the output," "Set the timeout." Do not use the indicative mood ("You should run the script") or the gerund ("Running the script") as a main instruction. The imperative is the simplest, most direct form.
+Example: "You should set the timeout to 500ms" -> "Set the timeout to 500 ms."
+Reference: a-sec3-rule3.3.md
+
+**Rule 3.4 -- Use the Simple Present Tense**
+Use the simple present tense for descriptive writing. "The function validates the input" not "The function is validating the input." The continuous aspect ("is running") adds no information that the simple present does not carry. The simple present is shorter, translates better, and is easier for non-native readers.
+Example: "The server is listening on port 8080" -> "The server listens on port 8080."
+Reference: a-sec3-rule3.4.md
+
+**Rule 3.5 -- Use the Past Tense Only for Completed Actions**
+Use the simple past tense to describe actions that are completed. "The build failed" describes a completed event. Do not use the past tense for instructions or for describing current behavior. Do not use the present perfect ("has failed") when the simple past is sufficient. The time of the action must be clear.
+Example: "The command has failed with an error" -> "The command failed with an error."
+Reference: a-sec3-rule3.5.md
+
+**Rule 3.6 -- Use "Will" Only for Future Events, Not for Instructions**
+Use "will" only to describe events that will occur in the future, not as a substitute for the imperative mood. "The next release will include this feature" is descriptive and correct. "You will run the script" should be "Run the script." Do not use "shall" in code documentation -- "shall" is not an approved verb in the controlled terminology.
+Example: "You will need to install the dependencies first" -> "Install the dependencies first."
+Reference: a-sec3-rule3.6.md
+
+**Rule 3.7 -- Do Not Use Helping Verbs to Make Complex Verb Phrases**
+Do not use auxiliary (helping) verbs to create complex verb phrases. "Must be able to handle" becomes "must handle." "Should be configured to run" becomes "must run" or "set to run." Each verb phrase must use the minimum number of words. Complex verb phrases obscure the primary action and increase sentence length.
+Example: "The system should be configured to run on port 3000" -> "Set the system to run on port 3000."
+Reference: a-sec3-rule3.7.md
+
+---
+
+### Section 4 -- Sentences (Rules 4.1-4.5)
+
+**Rule 4.1 -- Write Short and Clear Sentences**
+Each sentence must be short and clear. In procedural writing, each step describes one action. In descriptive writing, each sentence has one topic. Be accurate. Do not give information that is abstract or can have different meanings. The reader must understand each sentence on the first reading.
+Example (procedural): Three configuration steps combined into one long sentence -> three separate numbered steps.
+Example (descriptive): "The HttpClient class has two internal buffers connected together and linked with callbacks" -> three short sentences.
+Reference: a-sec4-rule4.1.md (506 lines)
+
+**Rule 4.2 -- Put the Verb Near the Beginning of the Sentence**
+In procedural writing, start the sentence with the verb: "Run the tests." In descriptive writing, keep the verb as close to the subject as possible. Long introductory phrases delay the verb and force the reader to hold information in memory. The reader must find the verb to understand the action.
+Example: "After you have installed all the dependencies and configured the environment, run the tests" -> "Install the dependencies and configure the environment. Then, run the tests."
+Reference: a-sec4-rule4.2.md
+
+**Rule 4.3 -- Put Instructions in Separate Sentences**
+Each procedural instruction must be in its own sentence. Do not combine two or more instructions in one sentence using "and" or "then." One sentence = one step. This lets the reader complete one action before reading the next instruction. It also makes it easy to verify that each step is complete.
+Example: "Run the migration and restart the server" -> "Run the migration. Then, restart the server."
+Reference: a-sec4-rule4.3.md
+
+**Rule 4.4 -- Use Connecting Words to Show Relationships**
+Use connecting words (for example, "then," "also," "but," "because," "if," "when," "before," "after") to show the logical relationship between sentences. Connecting words help the reader understand why one sentence follows another. Do not rely on the reader to infer the relationship from context.
+Example: "The build failed. The test did not run." -> "The build failed. Because the build failed, the test did not run."
+Reference: a-sec4-rule4.4.md
+
+**Rule 4.5 -- Make Sure That Instructions Are Clear and Complete**
+Each instruction must be complete. The reader must know what to do, how to do it, and what the expected result is. Do not assume knowledge. Do not skip steps. If an instruction has conditions, state the condition before the action. Provide acceptance criteria so the reader knows when the step is complete.
+Example: "Configure the database" -> "Set the DATABASE_URL environment variable to the connection string for your PostgreSQL instance. Use the format: postgresql://user:password@host:port/database."
+Reference: a-sec4-rule4.5.md
+
+---
+
+### Section 5 -- Procedures (Rules 5.1-5.5)
+
+**Rule 5.1 -- Short Sentences: Maximum 20 Words in Procedures**
+Every sentence in a procedural step must have 20 words or fewer. Long procedural sentences cause the reader to lose track of the action. Break long sentences at logical boundaries. Code snippets, command examples, and terminal output in code blocks are excluded from the word count.
+Example: "Run the database migration script from the project root directory and then restart the application server to apply all pending schema changes" (20+ words) -> two sentences: "Run the database migration script from the project root directory. Then, restart the application server." (9 + 6 words)
+Reference: a-sec5-rule5.1.md (365 lines)
+
+**Rule 5.2 -- Use One Verb Per Procedural Step**
+Each procedural step must contain only one primary action verb. If a step requires two actions, split it into two steps. The reader must complete one action before reading the next. One verb per step makes procedures testable: the reader can verify each action independently.
+Example: "Configure the middleware and start the server" -> Step 1: "Configure the middleware." Step 2: "Start the server."
+Reference: a-sec5-rule5.2.md
+
+**Rule 5.3 -- Use the Imperative (Command) Form for Instructions**
+All procedural instructions must use the imperative mood. The verb is the first word of the sentence (in the base form). "Run the script." "Check the output." Do not use the indicative mood ("You run the script"), the infinitive ("To run the script"), or the gerund ("Running the script") as a main instruction.
+Example: "To build the project, you should run npm run build" -> "Run npm run build to build the project."
+Reference: a-sec5-rule5.3.md
+
+**Rule 5.4 -- Use "Must" for Requirements, Not "Should"**
+Use "must" to express a requirement. Use "can" to express a possibility or permission. Do not use "should" -- it is ambiguous (does it mean "must" or "can"?). "Should" creates doubt about whether the action is required. "Must" tells the reader that the action is mandatory.
+Example: "You should set the timeout to 30 seconds" -> "Set the timeout to 30 seconds" (imperative) or "The timeout must be 30 seconds" (descriptive requirement).
+Reference: a-sec5-rule5.4.md
+
+**Rule 5.5 -- Notes Give Information Only, Not Instructions**
+Notes provide supplementary information. They do not contain instructions. The maximum sentence length in a note is 25 words (compared to 20 for procedural steps). If a note contains an instruction, move the instruction to a procedural step and keep only the supplementary information in the note.
+Example: "NOTE: Set the timeout to 30 seconds before running the migration." -> Separate: "Set the timeout to 30 seconds." NOTE: "The default timeout is 60 seconds. A shorter timeout prevents long-running database locks during the migration."
+Reference: a-sec5-rule5.5.md
+
+---
+
+### Section 6 -- Descriptive Writing (Rules 6.1-6.5)
+
+**Rule 6.1 -- Give Information Gradually**
+In descriptive text, give information gradually. Each sentence contains only one subject. Start with the main idea and add detail in subsequent sentences. Do not pack all information about a system or component into one long sentence. The reader must absorb one fact before moving to the next.
+Example: A 15-line sentence describing authentication middleware behavior -> 15 short sentences, each covering one aspect: token extraction, validation, claims extraction, error handling, audit logging.
+Reference: a-sec6-rule6.1.md (199 lines)
+
+**Rule 6.2 -- Use Key Words and Phrases to Give Logical Structure**
+Use key words (for example, "first," "then," "also," "because," "but," "if," "when") to give your descriptive text a logical structure. These words guide the reader through the sequence, causality, and conditions of your description. Without them, the relationship between sentences is unclear.
+Example: "The cache stores results. The cache expires after 5 minutes. The server checks the cache before querying the database." -> "The cache stores results for 5 minutes. When a request arrives, the server checks the cache first. If the cache has the result, the server returns it. If the cache does not have the result, the server queries the database."
+Reference: a-sec6-rule6.2.md
+
+**Rule 6.3 -- Short Sentences: Maximum 25 Words in Descriptive Writing**
+Every sentence in descriptive writing must have 25 words or fewer. Descriptive sentences can be slightly longer than procedural sentences because they explain concepts rather than give instructions. But long descriptive sentences are still hard to parse. Break them at logical boundaries.
+Example: "The authentication middleware validates bearer tokens from the authorization header by calling the validateToken function" (15+ words) -> break at each function call boundary.
+Reference: a-sec6-rule6.3.md
+
+**Rule 6.4 -- Use Paragraphs to Show Related Information**
+Group related sentences into paragraphs. Each paragraph covers one topic. Start a new paragraph when the topic changes. Paragraphs give the reader visual breaks and help organize information. A wall of text without paragraph breaks is difficult to read and discourages the reader.
+Reference: a-sec6-rule6.4.md
+
+**Rule 6.5 -- Make Sure That Each Paragraph Has Only One Topic**
+Each paragraph must have exactly one topic. If a paragraph discusses two unrelated topics, split it into two paragraphs. The first sentence of each paragraph should introduce the topic. The sentences that follow should develop that topic. A reader who skims the first sentence of each paragraph should understand the document's structure.
+Reference: a-sec6-rule6.5.md
+
+---
+
+### Section 7 -- Warnings, Cautions, and Notes (Rules 7.1-7.3)
+
+**Rule 7.1 -- Use Signal Words to Identify the Level of Risk**
+Use "WARNING" before instructions that, if not obeyed, can cause security vulnerabilities, data loss, or system corruption. Use "CAUTION" before instructions that, if not obeyed, can cause unexpected behavior, performance degradation, or incorrect results. If both risk levels apply, use "WARNING." Make the warning specific: name the risk, state the consequence, and give clear preventive instructions.
+Example: "CAUTION: ALWAYS VALIDATE INPUT DATA" -> "WARNING: BEFORE YOU PROCESS INPUT DATA, MAKE SURE THAT YOU SANITIZE AND VALIDATE THE DATA. UNSANITIZED INPUT CAN CAUSE SECURITY BREACHES AND DATA LOSS."
+Reference: a-sec7-rule7.1.md (532 lines)
+
+**Rule 7.2 -- Start a Safety Instruction with a Clear Command or Condition**
+Start a WARNING or CAUTION with a clear and accurate command or condition. The reader must immediately understand what to do or what condition triggers the risk. Do not start with a general statement. The first word of the safety instruction should be the action verb or the condition word.
+Example: "WARNING: It is important to back up the database before migration" -> "WARNING: BEFORE YOU RUN THE MIGRATION, MAKE A BACKUP OF THE DATABASE. A FAILED MIGRATION CAN CAUSE DATA LOSS."
+Reference: a-sec7-rule7.2.md
+
+**Rule 7.3 -- Give Warnings Before the Related Instruction**
+Put the WARNING or CAUTION before the procedural step it applies to, not after. The reader must know the risk before they act. A warning after the instruction is too late. In descriptive writing, place safety information before the description of the risky condition or operation.
+Reference: a-sec7-rule7.3.md
+
+---
+
+### Section 8 -- Punctuation and Word Count (Rules 8.1-8.6)
+
+**Rule 8.1 -- Use Standard Punctuation but Not the Semicolon**
+Use all standard English punctuation marks except the semicolon (;). The semicolon lets writers pack multiple independent clauses into one sentence, which violates the short-sentence rules. Replace semicolons with periods: split the sentence into two or more shorter sentences. The semicolon also has a different meaning in many programming languages (statement terminator), which causes cognitive interference.
+Example: "Examine the removed parts; replace the damaged ones" -> "Examine the removed parts for damage. Replace the damaged parts."
+Reference: a-sec8-rule8.1.md (380 lines)
+
+**Rule 8.2 -- Use the Colon to Introduce Lists and Explanations**
+Use the colon (:) to introduce a list or an explanation. The text before the colon must be a complete sentence. After the colon, start the list items with lowercase letters unless they are complete sentences. Use consistent punctuation at the end of list items.
+Example: "The configuration file has three sections: the server block, the database block, and the logging block."
+Reference: a-sec8-rule8.2.md
+
+**Rule 8.3 -- Use the Dash (Hyphen) Correctly**
+Use the hyphen (-) to connect words that function as one unit: "build-time dependency," "read-only file," "run-time error." Use the en dash (--) for ranges: "pages 10--20." Use the em dash (---) for parenthetical breaks where you would use parentheses but want stronger emphasis. Hyphenated words count as one word for word-count rules.
+Reference: a-sec8-rule8.3.md
+
+**Rule 8.4 -- Use Parentheses Correctly**
+Use parentheses () for supplementary information, abbreviations, and references. The text inside parentheses must not be a complete instruction or a required part of the procedure. If the information is necessary for the reader to complete the task, move it out of parentheses and into the main text.
+Example: "Run the script (it takes about 5 minutes) and then check the output" -> "Run the script. The script takes about 5 minutes. Then, check the output."
+Reference: a-sec8-rule8.4.md
+
+**Rule 8.5 -- Use Quotation Marks Correctly**
+Use quotation marks ("...") for quoted text: error messages, UI labels, terminal output, and exact strings from code. Use backticks (`...`) for inline code references: function names, variable names, file paths, and commands. Be consistent: use one convention throughout a document. Quoted text preserves its original spelling even if it violates other STE-Code rules (see Rule 8.6).
+Reference: a-sec8-rule8.5.md
+
+**Rule 8.6 -- Use Quoted Texts Correctly**
+When you quote text from a source (for example, an error message, a UI label, or a code comment from another project), keep the quoted text exactly as it appears in the source. Do not change the spelling, grammar, or vocabulary of quoted text to comply with STE-Code rules. The surrounding documentation text must comply. If the quoted text contains British English spelling ("colour"), preserve it.
+Reference: a-sec8-rule8.6.md
+
+---
+
+### Section 9 -- Writing Practices (Rules 9.1-9.4)
+
+**Rule 9.1 -- Use Approved Words for Your Specific Documentation Needs**
+Apply the approved-word rules (Section 1) to your specific documentation context. A README file has different vocabulary needs than an API reference. A commit message has different constraints than a docstring. Adjust the strictness of vocabulary control to the audience and purpose of the document, but never use unapproved words when an approved alternative exists.
+Reference: a-sec9-rule9.1.md
+
+**Rule 9.2 -- Make Your Documentation Consistent Across the Project**
+Apply STE-Code consistently across all documentation in a project. The same word must mean the same thing in the README, the API docs, the commit messages, and the error messages. Use the project glossary as the single source of truth for all technical noun and technical verb definitions. Inconsistency between documents causes confusion and erodes trust.
+Reference: a-sec9-rule9.2.md
+
+**Rule 9.3 -- Use a Glossary or Terminology Database**
+Maintain a project glossary or terminology database that lists every code-domain technical noun and technical verb used in the project's documentation. Each entry must specify: the term, the STE-Code category (or categories) it belongs to, its approved meaning, and an example sentence. Register new terms in the glossary before using them in documentation.
+Reference: a-sec9-rule9.3.md
+
+**Rule 9.4 -- Use the Correct Document Type for Your Content**
+Choose the correct documentation type for your content. Procedural content (how to do something) goes in README files, setup guides, and deployment checklists. Descriptive content (how something works) goes in API references, architecture documents, and class documentation. Do not mix procedural and descriptive writing in the same paragraph. The reader must know whether they are reading an instruction or an explanation.
+Reference: a-sec9-rule9.4.md
+
+---
+
+## 3. Grammar Recommendations (GR Rules)
+
+**GR-1 -- The Conjunction "That"**
+Use the conjunction "that" after verbs such as "make sure," "show," "recommend," "verify," and "confirm" to connect a subordinate clause to a main clause. "Make sure that the database connection is open" (not "Make sure the database connection is open"). Native English speakers frequently omit "that," but including it helps non-native readers and translation tools identify clause boundaries.
+Reference: a-sec9-gr1.md
+
+**GR-2 -- The Preposition "With"**
+The preposition "with" has three approved meanings: association or relationship, help or sharing, and a means or instrument. "With" can cause ambiguity. In "Build the project with the debug flag," does "with" mean "including" or "using"? If ambiguous, restructure the sentence: "Build the project (debug symbols included)" or "Use the debug flag to build the project."
+Reference: a-sec9-gr2.md
+
+**GR-3 -- How to Use Pronouns**
+Use pronouns ("it," "they," "that," "these," "those") only when the referent is unambiguous. If a pronoun can refer to more than one noun in the preceding text, replace it with the specific noun. "If you configure the middleware before the route handler, it can block the request" -- does "it" refer to the middleware or the route handler? Write "If you configure the middleware before the route handler, the middleware can block the request."
+Reference: a-sec9-gr3.md
+
+**GR-4 -- The Pronoun "This"**
+When you use the pronoun "this," make sure that the reader knows exactly which item, condition, or result it refers to. If "this" can refer to more than one item in the preceding text, repeat the applicable context. "Make sure that the connection is not closed. If it is, this can cause failure" -> "Make sure that the connection is not closed. If the connection is closed, this condition can cause failure of the request."
+Reference: a-sec9-gr4.md
+
+---
+
+## 4. Dictionary Excerpt -- Top 50 Approved Words
+
+The full controlled terminology contains approximately 875 approved words and 1,274 unapproved words. This excerpt gives the 50 most frequently used approved words in code documentation, with their approved parts of speech and meanings.
+
+| # | Word | POS | Approved Meaning |
+|---|------|-----|------------------|
+| 1 | ACCEPT | v | To make a decision that something is satisfactory |
+| 2 | ACCESS | n | The ability to read, write, or enter |
+| 3 | ACCURATE | adj | Exact |
+| 4 | ACTIVE | adj | A system, function, or feature in a state of action |
+| 5 | ADD | v | To put something with something else |
+| 6 | AFTER | prep | Later in time |
+| 7 | AGAIN | adv | One more time |
+| 8 | ALL | adj | The complete quantity |
+| 9 | ALSO | adv | In addition |
+| 10 | AND | conj | Used to connect words or groups of words |
+| 11 | APPLY | v | To put something on something |
+| 12 | BEFORE | prep | Earlier in time |
+| 13 | BUILD | v | To make a binary or executable from source code (technical verb) |
+| 14 | BUT | conj | Used to show a difference |
+| 15 | CALL | v | To invoke a function or method (technical verb) |
+| 16 | CAN | v | To be able to |
+| 17 | CANNOT | v | The negative form of CAN |
+| 18 | CAUSE | v | To make something occur |
+| 19 | CHANGE | v | To make something different |
+| 20 | CHECK | v | To examine something to make sure that it is correct |
+| 21 | CLEAR | adj | Easy to see, hear, or understand |
+| 22 | CLOSE | v | To move something so that an opening is not there |
+| 23 | COME | v | To move to a position |
+| 24 | COMPLETE | v | To finish |
+| 25 | CONNECT | v | To join or link (technical verb) |
+| 26 | CONTINUE | v | To keep doing something |
+| 27 | CONTROL | v | To make a system or component do what you want |
+| 28 | CORRECT | adj | True, with no errors |
+| 29 | DATA | n | Information, values, or records |
+| 30 | DECREASE | v | To make something less |
+| 31 | DEPLOY | v | To move software to a target environment (technical verb) |
+| 32 | DO | v | To perform an action |
+| 33 | EACH | adj | Every one of two or more items |
+| 34 | END | n | The point where something stops |
+| 35 | ERROR | n | A mistake or a condition that is not correct |
+| 36 | FAIL | v | To not do something that must be done |
+| 37 | FAST | adj | Quick |
+| 38 | FIND | v | To see or locate something |
+| 39 | FIRST | adj | Before all others in time or order |
+| 40 | FOLLOW | v | To come after, go after |
+| 41 | GET | v | To obtain, fetch, or retrieve |
+| 42 | GIVE | v | To provide, return, or supply |
+| 43 | GO | v | To move or proceed |
+| 44 | IF | conj | Used to introduce a condition |
+| 45 | INCREASE | v | To make something more |
+| 46 | KEEP | v | To hold or to store |
+| 47 | LARGE | adj | Of more than usual size, quantity, or capacity |
+| 48 | MAKE | v | To create, produce, or construct |
+| 49 | MUST | v | Used to show that an action is necessary |
+| 50 | NOT | adv | Used to make a word or group of words negative |
+
+Key: (v) = verb, (n) = noun, (adj) = adjective, (adv) = adverb, (prep) = preposition, (conj) = conjunction
+
+For the full dictionary of all approved and unapproved words, see ste-code/adapted/a-dictionary.md (5,943 lines).
+
+---
+
+## 5. Synonym Table -- Complete Code-Domain Mapping
+
+This is the canonical synonym table for STE-Code. For every unapproved word in the "Avoid" column, use the word in the "Prefer" column. This table extends the 14-principle synonym table with domain-specific entries from all 51 deepened rules.
+
+| Prefer (Approved) | Avoid (Unapproved) |
+|-------------------|--------------------|
+| about | concerning, regarding, with respect to |
+| add | implement, append, insert |
+| again | reoccurring |
+| also | additionally, furthermore, moreover |
+| although | despite the fact that, even though, notwithstanding |
+| because | as, due to the fact that, since |
+| before | in advance of, prior to, preceding |
+| behavior | behaviour |
+| build | assemble, construct, generate (technical verb: permitted) |
+| call | invoke, dispatch, execute, fire, trigger |
+| can | be able to, have the capability to, is capable of |
+| cause | induce, lead to, provoke, result in, trigger |
+| change | alter, edit, modify, mutate, patch, revise, update |
+| check | assert, audit, confirm, ensure, inspect, validate, verify |
+| choose | pick, select |
+| combine | aggregate, consolidate, join, merge, squash, unify |
+| connect | associate, attach, bind, join, link, wire up |
+| continue | persist, resume |
+| control | direct, govern, manage, orchestrate |
+| copy | clone, duplicate, fork, mirror, replicate, shadow |
+| correct | fix, rectify, repair, valid (for data) |
+| decrease | diminish, lower, minimize, reduce |
+| defect | bug, fault, flaw, issue |
+| deploy | go live, push to production, release, roll out, ship |
+| do | carry out, execute, perform, run, trigger |
+| examine | analyze, inspect, study |
+| fail | break, crash, malfunction |
+| fast | quick, rapid, swift |
+| find | detect, discover, locate, query, scan, search |
+| first | initial, original, primary |
+| free | deallocate, liberate, release |
+| get | acquire, fetch, grab, obtain, pull, retrieve |
+| give | ensure, furnish, provide, return, supply, yield |
+| handle | address, deal with, manage, process, take care of |
+| hide | abstract away, conceal, obscure |
+| if | in case of, in the event that, should |
+| important | critical, crucial, essential, vital |
+| in | within |
+| include | bundle, contain, embed, hold, nest, wrap |
+| increase | boost, elevate, maximize, raise, ramp up |
+| keep | maintain, preserve, retain, store |
+| large | big, huge, massive, substantial |
+| make | create, generate, produce, construct |
+| many | multiple, numerous, several, various |
+| must | have to, need to, shall, should |
+| necessary | needed, required |
+| not | no (when modifying nouns) |
+| now | at this time, currently, presently |
+| number | amount, count, quantity |
+| only | just, merely, solely |
+| open | access, unlock |
+| or | alternatively |
+| other | additional, alternative, another |
+| output | result, return value |
+| remove | delete, eliminate, erase, purge, wipe |
+| run | execute, launch, start |
+| send | dispatch, forward, submit, transmit |
+| set | assign, configure, define, establish, specify |
+| show | display, indicate, present, render, reveal |
+| small | compact, little, minor, tiny |
+| speak to | contact, reach out to |
+| start | begin, commence, initiate, launch |
+| stop | abort, cease, halt, kill, terminate |
+| sure | certain, confident, positive |
+| then | afterwards, next, subsequently |
+| time | duration, period |
+| try | attempt, endeavor |
+| understand | comprehend, grok, grasp |
+| use | employ, leverage, utilize |
+| usual | common, conventional, normal, standard, typical |
+| when | at the moment that, upon |
+| write | author, compose, draft |
+
+For the full table (250+ pairs), see ste-code/data/synonym-table.json.
+
+---
+
+## 6. Quick Reference -- Documentation Review Checklist
+
+Use this checklist to review any code document for STE-Code compliance. Check each item. A document that passes all checks is STE-Code compliant.
+
+### A. Word-Level Checks (Section 1)
+[ ] All words are either approved in the controlled terminology, code-domain technical nouns (Rule 1.5), or code-domain technical verbs (Rule 1.12). (Rule 1.1)
+[ ] Each approved word is used as its specified part of speech -- no noun-as-verb, no adjective-as-verb. (Rule 1.2)
+[ ] Each approved word is used with its approved meaning -- no extended or metaphorical meanings. (Rule 1.3)
+[ ] Each approved verb uses only its approved forms -- no "-ing" as main verb, no invented past tenses. (Rule 1.4)
+[ ] All code-domain technical nouns fit into one of the 19 categories and are registered in the project glossary. (Rule 1.5)
+[ ] No non-approved words appear except as code-domain technical nouns. (Rule 1.6)
+[ ] No code-domain technical noun is used as a verb. (Rule 1.7)
+[ ] All technical nouns are the standard, approved names from the project or industry. (Rule 1.8)
+[ ] Technical nouns are short (maximum three words where possible) and easy to understand. (Rule 1.9)
+[ ] No slang, jargon, or regional terms appear. "Bikeshedding," "yak shaving," "grok," "foo/bar" are removed. (Rule 1.10)
+[ ] One term per concept -- the same item has the same name throughout the document. (Rule 1.11)
+[ ] Code-domain technical verbs are used correctly and obey the same grammatical rules as approved verbs. (Rule 1.12)
+[ ] No technical verb is used as a noun -- "a parse" becomes "parse," "a deploy" becomes "deploy." (Rule 1.13)
+[ ] American English spelling is used throughout: "color," "initialize," "center," "behavior." (Rule 1.14)
+
+### B. Noun Phrase Checks (Section 2)
+[ ] Multi-word noun phrases have three words or fewer. Longer phrases are broken with prepositions. (Rule 2.1)
+[ ] Long technical nouns are written in full at first use, then shortened with approved abbreviations. (Rule 2.2)
+
+### C. Verb Checks (Section 3)
+[ ] Only approved verb forms are used. No invented forms. (Rule 3.1)
+[ ] Active voice is used in procedural writing. Prefer active in descriptive writing. (Rule 3.2)
+[ ] Imperative mood is used for all procedural instructions. (Rule 3.3)
+[ ] Simple present tense is used for descriptive writing -- no continuous aspect. (Rule 3.4)
+[ ] Past tense is used only for completed actions. (Rule 3.5)
+[ ] "Will" is used only for future events, not for instructions. "Shall" is not used. (Rule 3.6)
+[ ] No complex helping verb phrases. "Must be able to" becomes "must." (Rule 3.7)
+
+### D. Sentence Checks (Section 4)
+[ ] Sentences are short and clear -- one topic per sentence. (Rule 4.1)
+[ ] Verbs are near the beginning of sentences -- no long introductory phrases. (Rule 4.2)
+[ ] Each instruction is in its own sentence -- no combined instructions. (Rule 4.3)
+[ ] Connecting words show logical relationships between sentences. (Rule 4.4)
+[ ] Instructions are complete -- reader knows what to do, how, and expected result. (Rule 4.5)
+
+### E. Procedure Checks (Section 5)
+[ ] Procedural sentences have 20 words or fewer. (Rule 5.1)
+[ ] Each procedural step has only one primary action verb. (Rule 5.2)
+[ ] Imperative mood is used for all steps -- verb is the first word. (Rule 5.3)
+[ ] "Must" expresses requirements; "can" expresses possibilities. No "should." (Rule 5.4)
+[ ] Notes give information only, not instructions. Maximum 25 words per note sentence. (Rule 5.5)
+
+### F. Descriptive Writing Checks (Section 6)
+[ ] Information is given gradually -- each sentence has one subject. (Rule 6.1)
+[ ] Key words (first, then, also, because, but, if, when) give logical structure. (Rule 6.2)
+[ ] Descriptive sentences have 25 words or fewer. (Rule 6.3)
+[ ] Related sentences are grouped into paragraphs. (Rule 6.4)
+[ ] Each paragraph has only one topic. (Rule 6.5)
+
+### G. Safety Instruction Checks (Section 7)
+[ ] WARNINGs identify risks of security vulnerabilities, data loss, or system corruption. (Rule 7.1)
+[ ] CAUTIONs identify risks of unexpected behavior, performance degradation, or incorrect results. (Rule 7.1)
+[ ] Safety instructions start with a clear command or condition. (Rule 7.2)
+[ ] WARNINGs and CAUTIONs appear before the related procedural step. (Rule 7.3)
+
+### H. Punctuation Checks (Section 8)
+[ ] No semicolons (;) in any prose text. (Rule 8.1)
+[ ] Colons (:) introduce lists or explanations only after complete sentences. (Rule 8.2)
+[ ] Hyphens (-) connect words that function as one unit. (Rule 8.3)
+[ ] Parentheses () contain only supplementary information, not instructions. (Rule 8.4)
+[ ] Quotation marks ("...") are used for quoted text. Backticks (`...`) are used for inline code. (Rule 8.5)
+[ ] Quoted text preserves its original spelling and grammar -- do not correct it. (Rule 8.6)
+
+### I. Writing Practices Checks (Section 9)
+[ ] Vocabulary is appropriate for the document type and audience. (Rule 9.1)
+[ ] Documentation is consistent across all documents in the project. (Rule 9.2)
+[ ] A project glossary or terminology database exists and is maintained. (Rule 9.3)
+[ ] Each document uses the correct type for its content -- procedural vs. descriptive. (Rule 9.4)
+
+### J. Grammar Checks (GR Rules)
+[ ] The conjunction "that" is used after verbs like "make sure," "verify," "show," "recommend." (GR-1)
+[ ] The preposition "with" is unambiguous in each sentence. (GR-2)
+[ ] Pronouns ("it," "they," "this," "these") have unambiguous referents. (GR-3, GR-4)
+
+---
+
+## Appendix: 19 Code-Domain Technical Noun Categories
+
+1. **Code components, modules, and libraries** -- class, controller, middleware, package, plugin, repository, service
+2. **Computing devices and their components** -- CPU, disk, GPU, memory, server, terminal
+3. **Development tools, environments, and support equipment** -- CLI, compiler, debugger, Docker, Git, IDE, linter
+4. **Data structures, types, and formats** -- array, boolean, buffer, JSON, object, queue, stack, string, YAML
+5. **Infrastructure, deployment, and platforms** -- AWS, CI/CD, container, Kubernetes, pipeline, pod, staging
+6. **Systems, subsystems, and architectural components** -- API gateway, caching layer, microservice, proxy, rate limiter
+7. **Mathematical, algorithmic, and scientific terms** -- binary search, complexity, hash function, recursion, regex
+8. **Interface elements and navigation** -- button, checkbox, dialog, modal, sidebar, tab, tooltip
+9. **Numbers, units of measurement, and time** -- byte, gigabyte, millisecond, second, terabyte
+10. **Quoted text** -- error messages, code snippets, UI labels, log output (text that cannot be changed)
+11. **Professional roles, teams, and organizations** -- administrator, contributor, maintainer, reviewer, user
+12. **Official documents, API references, and standards** -- changelog, README, release notes, RFC, section, table
+13. **Runtime environments and operational conditions** -- environment variable, heap, stack trace, timeout, virtual machine
+14. **Colors** -- black, blue, green, red, white, yellow (CSS, terminal, syntax highlighting)
+15. **Defects, errors, and fault terminology** -- bug, crash, deadlock, memory leak, race condition, regression
+16. **Computer science, information, and communication technology** -- algorithm, cryptography, database, encryption, protocol
+17. **Legal and licensing terms** -- Apache 2.0, GPL, license, MIT, open source, proprietary, warranty
+18. **Database and storage terminology** -- connection pool, foreign key, index, migration, query, schema, table
+19. **Network and protocol terminology** -- DNS, endpoint, HTTP, IP address, port, socket, TCP, URL, WebSocket
+
+---
+
+## Document Metadata
+
+- **Version:** 2.0
+- **Generated:** 2026-07-30
+- **Source files:** 51 deepened rule files (a-sec*-rule*.md), 4 GR files (a-sec9-gr*.md), a-categories.md, a-dictionary.md, code-dictionary.json, synonym-table.json
+- **Token estimate:** Approximately 6,800 tokens (text content only, excluding metadata)
+- **Sections:** Introduction, 51 rule summaries, 4 GR recommendations, top 50 dictionary entries, complete synonym table (100+ pairs), 19 categories appendix, review checklist (9 sections with 50+ check items)
+- **ASD-STE100 Attribution:** Adapted from ASD-STE100 Issue 9 (January 2025), published by ASD, Brussels. STE is EU Trade Mark No. 017966390. Independent adaptation not endorsed by ASD.
