@@ -46,7 +46,11 @@
     "a-sec8-rule8.3",
     "a-sec8-rule8.4",
     "a-sec8-rule8.5",
-    "a-sec8-rule8.6"
+    "a-sec8-rule8.6",
+    "a-sec9-rule9.1",
+    "a-sec9-rule9.2",
+    "a-sec9-rule9.3",
+    "a-sec9-rule9.4"
   ],
   "batches_done": [
     "sec1-1",
@@ -66,7 +70,9 @@
     "sec6-2",
     "sec7-1",
     "sec8-1",
-    "sec8-2"
+    "sec8-2",
+    "sec9-1",
+    "sec9-2"
   ],
-  "updated": "2026-07-30T16:55:17.804254+00:00"
+  "updated": "2026-07-30T16:58:22.932647+00:00"
 }
