@@ -265,6 +265,7 @@ Full details: `.agents/skills/references/rails.md`
 | `.agents/skills/references/quality-checklist.md` | Per-batch checklist |
 | `.agents/skills/references/category-mapping.md` | 19-category STE→STE-Code map |
 | `.agents/skills/references/rails.md` | 8 immutable guardrails |
+| `.agents/references/idempotency-baseline.md` | Worker idempotency standard — Tier 1/2/3 checks |
 | `.agents/feedback/exchange.md` | Orchestrator↔Reviewer communication |
 
 ---

@@ -26,6 +26,13 @@ Be creative, insightful, and thorough. Add your own edge cases, examples, and
 structural improvements. The suggested improvements are a floor, not a ceiling.
 Be bold. Be precise. Be creative.
 
+## PRE-FLIGHT CHECK (save tokens)
+
+Before doing any work:
+1. Read the target file from disk
+2. If it has >200 lines and is well-structured, SKIP — report "SKIPPED: already mature"
+3. Only regenerate if the file is MISSING, <200 lines, or clearly incomplete
+
 """
 
 os.makedirs(TMP_DIR, exist_ok=True)
