@@ -1,0 +1,98 @@
+### .agents/references/section-types.md
+- **Level:** 3
+- **Summary:** Defines 8 section types (FRONT, TOC, INDEX, INTRO, RULES, CATEGORIES, DICT, APPENDIX) with tailored extraction prompts and a page-range-to-worker lookup table for the extraction pipeline.
+- **Strengths:**
+  - Detailed per-type extraction prompts with exact formatting templates (e.g., RULES: "Rule X.Y" + STE/non-STE pairs; DICT: 7-field entry format)
+  - Page range quick lookup table maps 109 workers to their section types - directly actionable
+  - Classification table includes extraction priority, making triage decisions explicit
+  - Acknowledges real-world extraction challenge (4-column PDF interleaving in DICT type) with guidance to preserve all text
+  - Clear structure with overview → classification → per-type prompts → lookup table
+- **Gaps:**
+  - No version history or last-updated metadata - unknown whether this reflects the current spec issue
+  - No edge case handling: what to do when section boundaries blur (pages 43-66 are "RULES+CAT" - how to classify line-by-line?), overlapping page ranges, or workers that span two section types
+  - No failure recovery instructions for workers hitting truncation, missing pages, OCR garbling, or pages that don't match any type signature
+  - No cross-references to quality-checklist.md (which references section-types.md) or other pipeline docs
+  - Missing rationale: why these 8 types and not a different partition? Why 43-66 as combined RULES+CAT instead of separate?
+  - No gold-standard example outputs per type for workers to compare against
+  - No agentic-load specifications (expected tokens per type, worker throughput estimates, batch sizing rationale)
+  - No meta-instructions for self-updating when spec issue numbers change page ranges
+- **What Level 4 Would Add:**
+  - Edge case resolution rules: "If a page contains both a rule statement and a category list, extract as RULES type and flag as dual-type for auditor review"
+  - Failure recovery protocol: "If extraction returns fewer than 3 STE/non-STE pairs for a RULES page, re-extract with --preserve-columns flag and compare"
+  - Design rationale appendix explaining why section types were grouped this way vs. alternatives considered
+  - One gold-standard example output per type, annotated to show what correct extraction looks like for that type
+  - Explicit cross-reference section: "See quality-checklist.md for per-batch verification; see extraction/SKILL.md for worker launch parameters"
+  - Known limitations: "DICT 4-column interleaving causes word-merging errors in ~3% of entries; auditor must spot-check entry boundaries"
+  - Self-update instructions: "When Issue 10 is released, verify page ranges against new PDF TOC and update the Quick Lookup table; tag with [ISSUE-10]"
+- **Priority:** medium
+
+### .agents/references/quality-checklist.md
+- **Level:** 2
+- **Summary:** A template-driven per-batch quality verification checklist covering file integrity, truncation detection, content signal checks, fabrication detection, and state management for the extraction pipeline.
+- **Strengths:**
+  - Clean, scannable checklist format with clear checkbox semantics
+  - Concrete truncation red flags (mid-word ending, partial table row, missing footer) - specific and testable
+  - Fabrication detection rules are well-scoped and unambiguous (no modern software terms, no commentary language, reads like spec not summary)
+  - Integrates with state management workflow (PROGRESS.md update, git commit command, feedback exchange)
+- **Gaps:**
+  - Entire file is a template with blanks (`___`) - no filled-out example showing what a passing batch looks like; requires human interpretation to execute
+  - No automated verification path - every check is manual; no script, no grep command, no validation tool mentioned
+  - Single size threshold ("All sizes > 3KB") ignores per-section-type variance: FRONT pages are text-light, DICT pages are dense, RULES pages span wide ranges - a one-size-fits-all threshold will produce false positives and false negatives
+  - "Check 3 random lines per file" has no methodology: which lines? how to sample? what if lines are blank? no seed or reproducibility
+  - "Expected content type matches page range (check section-types.md)" - references section-types.md but section-types.md does not reference back; no guidance on how to perform this check
+  - No failure protocol beyond "re-extract": no escalation path after repeated failures, no partial-acceptance criteria, no skip-and-flag option for stubborn batches
+  - Missing: performance/speed considerations - how long should one batch check take? Is there a timeout?
+  - No version history or change log
+  - No agentic-load specification (how many human minutes per batch check?)
+- **What Level 3 Would Add:**
+  - One fully filled-out example checklist from a real batch (e.g., Batch 12, workers W034-W036) showing actual file sizes, actual line checks, and actual disposition
+  - Per-section-type size thresholds: "FRONT: > 2KB, RULES: > 5KB, DICT: > 8KB, APPENDIX: > 3KB" with rationale
+  - Spot-check methodology: "Use `shuf -n 3` on the file, skip blank lines; if any sampled line fails, expand to 5 more lines; if 3+ of 8 fail, flag for re-extraction"
+  - Escalation protocol: "If re-extraction fails twice for the same worker → log details in feedback/exchange.md, mark batch as DEGRADED in PROGRESS.md, and proceed. Auditor will triage degraded batches at pipeline end."
+  - Explicit cross-reference section linking to section-types.md, extraction/SKILL.md, and state/PROGRESS.md
+  - Acceptance criteria: "A batch is ACCEPTABLE if all 3 files pass file integrity AND 0 red flags in truncation check. Content signals and fabrication checks with 1-2 soft failures are WARN but do not block."
+  - Optional: a one-liner bash snippet to automate file-existence + size check
+- **Priority:** high
+
+### .agents/references/category-mapping.md
+- **Level:** 3
+- **Summary:** Maps all 19 ASD-STE100 Issue 9 technical noun categories (plus 4 additional verb categories) to STE-Code software-domain equivalents with concrete, recognizable examples for each category.
+- **Strengths:**
+  - Self-correcting: opens with an explicit correction note (19 categories, not 22) with provenance, demonstrating audit awareness
+  - All 19 noun categories mapped with 5-10 concrete software examples each - highly specific and recognizable (e.g., Category 1: `if`, `else`, `return`, `class`, `async`, `await`)
+  - 4 verb categories added as bonus coverage beyond the original 19 - thoroughness
+  - Verification notes trace categories to source extraction pages (page-0047.md through page-0052.md) - auditable
+  - Clean table format with five columns: original STE category, STE-Code category, and representative examples - scannable and referenceable
+  - Examples span multiple languages/ecosystems (JavaScript/TypeScript, Rust, Python, Go, infrastructure) - domain breadth
+- **Gaps:**
+  - No version history beyond "CORRECTED" note - when was the 22→19 correction made? Who authored it? What was the incorrect state?
+  - No cross-references to any other .agents/ file (adapted rules, extraction outputs, worker prompts, quality checklist)
+  - Missing category conflict resolution: what if a term fits multiple categories? (e.g., `Docker` appears in Category 2 "Frameworks" but could also fit Category 5 "Deployment targets" - which takes priority?)
+  - Only Category 4 has an "unapproved" annotation (`left-pad`, `is-odd`) - are there other unapproved terms in other categories? If not, why only Category 4?
+  - Verification notes mention extraction pages but don't hyperlink or provide grep commands to verify
+  - No usage instructions: which pipeline stage consults this file? During adaptation? During extraction? During auditing?
+  - Missing: common mapping anti-patterns workers make (e.g., confusing Category 7 "Algorithmic terms" with Category 19 "Network/protocol terms" for terms like `hash`)
+  - No rationale for the mapping approach - why these specific STE→STE-Code analogies and not alternatives?
+  - No agentic-load specification
+  - No meta-instructions for self-updating when Issue 10 changes category count, names, or ordering
+- **What Level 4 Would Add:**
+  - Category conflict resolution matrix: "If a term spans categories, assign to the most specific category. Example: `Docker` → Category 5 (deployment target) takes priority over Category 2 (framework) because deployment is its primary code-domain role."
+  - Known limitations section: "Some AWS service names (`S3`, `Lambda`, `EC2`) straddle categories 2, 5, and 19; classify under Category 5 if primarily a deployment concern, Category 19 if primarily a network protocol."
+  - Design rationale: "Category 4 includes `left-pad` and `is-odd` as unapproved examples to mirror STE's treatment of consumable materials that have approved alternatives - this pattern could extend to other categories but hasn't been applied yet."
+  - Cross-reference section: "See ste-code/adapted/a-categories.md for the full adapted rule text. See .agents/references/section-types.md for extraction instructions covering pages 47-52 (CATEGORIES type)."
+  - Common anti-patterns table with corrected examples: workers incorrectly map `queue` to Category 8 (Routing) instead of Category 19 (Network/I/O terms)
+  - Self-update protocol: "When Issue 10 is released: (1) diff pages 47-52 for category changes, (2) update count and names, (3) regenerate examples if categories were split/merged, (4) tag commit with [ISSUE-10]"
+  - Usage directive: "Consulted during Adaptation stage (stage 4) when mapping STE rules to code-domain equivalents. Also used by Extension Worker (Agent #8) for gap-filler generation."
+- **Priority:** low
+
+## Batch Summary
+- Files scored: 3
+- Level distribution: -2:0 -1:0 1:0 2:1 3:2 4:0 5:0
+- Highest priority: .agents/references/quality-checklist.md - Level 2 template with blanks; critical quality gate that is not fully executable without human interpretation
+- Pattern observations:
+  - **No version history anywhere.** All three files lack last-updated dates, change logs, or authorship metadata. This makes it impossible to know whether they reflect the current spec issue without manual verification.
+  - **Cross-references are one-way or missing.** quality-checklist.md mentions section-types.md, but section-types.md does not reference back. category-mapping.md has no cross-references at all. The three files form a reference cluster that should interlink but doesn't.
+  - **No edge case or failure recovery instructions.** None of the three files tells a worker what to do when the happy path breaks - truncated pages, ambiguous section boundaries, multi-category terms, repeated extraction failures.
+  - **No meta-instructions for self-updating.** When Issue 10 of ASD-STE100 is released, there are no instructions in any file for how to update it - page ranges, category counts, section types all need manual discovery.
+  - **No agentic-load specifications.** None of the files estimates token cost, worker count, batch sizing, or throughput expectations for the operations they describe.
+  - **quality-checklist.md is the weakest link.** At Level 2, it's a template rather than executable instruction. Its single-size-fits-all thresholds and missing methodology make it the highest-risk file in this batch - quality verification is only as good as the checklist driving it.

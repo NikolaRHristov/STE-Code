@@ -1,0 +1,89 @@
+### .agents/uml/database-layout.md
+- **Level:** 3
+- **Summary:** Complete project-wide database layout and file system map for the STE-Code pipeline. Documents 11 major sections including Mermaid entity-relationship diagrams, file naming conventions, 5-stage data flow, skill/agent/prompt storage hierarchies, a full filesystem tree (~489 files), and relationship graphs.
+- **Strengths:**
+  - Three distinct Mermaid diagram types (erDiagram, graph TD, graph LR) covering entity relationships, pipeline flow, and agent-skill bindings
+  - Exhaustive naming convention documentation with pattern breakdowns and concrete examples (wNNN-pPPPP-PPPP, rNNN-prompt.txt, audit-YYYYMMDD-HHMMSS.md)
+  - Complete recursive filesystem map spanning ste-code/ and .agents/ directories down to individual files
+  - File count summary table with per-directory tallies
+  - Agent ↔ skill binding relationship graph showing which agent reads which skill
+  - Naming convention reference card for quick lookup
+  - Explicit cross-references to agent files (.agents/prompts/agent-N-*.md), skill files (each SKILL.md), and reference documents
+  - Dated and versioned (2026-07-30)
+- **Gaps:**
+  - No HOW-TO guidance - describes layout but does not explain how to *use* the layout (e.g., "to find all workers for batch 12, look in...")
+  - No maintenance or self-updating instructions - when stages 3-5 complete, what sections must be updated? No meta-instructions for regeneration
+  - Missing rationale for architectural decisions: why 109 workers? why 4 pages each? why 37 batches of 3? why 434 source pages?
+  - No edge cases documented: what happens if a file violates naming conventions? what if extraction produces 110 files instead of 109?
+  - No performance considerations: 109 parallel workers generate 109 files - are directory listing bottlenecks discussed?
+  - No version history or changelog - only a single generation date
+  - No known limitations (e.g., "prompts/ directory is currently empty" is noted but not flagged as a limitation with workaround)
+  - Sections 4.2 and 4.3 both point to ste-code/prompts-refine/ with overlapping descriptions - internal vs. generated prompts are conflated
+  - Cross-referenced directories (adapted/, artifacts/) are documented as (pending) but no timeline or unblocking criteria given
+- **What Level 4 Would Add:** Rationale for each architectural decision (worker count, page size, batch grouping). Edge case handling (malformed filenames, directory overflow, naming collisions). Maintenance procedure with a checklist of sections to update when pipeline stages progress. Search recipes for common lookup tasks. Performance notes on large-directory navigation. A "how to read this document" section for first-time users. Resolution of the section 4.2/4.3 conflation.
+- **Priority:** low - functional as reference documentation; gaps are quality-of-life improvements, not blockers
+
+### SCE/narratives/system-prompts/ste-code-micro.md
+- **Level:** 2
+- **Summary:** Ultra-compressed (~500 token) STE-Code system prompt for context-constrained sessions. Covers vocabulary rules, a 12-pair canonical synonym table, sentence length limits, three safety markers, and a "never" block of prohibited patterns.
+- **Strengths:**
+  - Highly compressed - directly pasteable into sessions with <4096 token context windows
+  - Actionable synonym table with explicit prefer/avoid mappings
+  - Concrete sentence length limits (20 procedural, 25 descriptive) that can be mechanically checked
+  - Safety marker rules include required fields (BREAKING needs version + migration path)
+  - "Never" block is compact and comprehensive - 10 prohibitions in one section
+  - Versioned (2.0.0) with frontmatter metadata
+  - use-when guidance in frontmatter informs loading decision
+- **Gaps:**
+  - No examples - zero before/after sentence pairs demonstrating correct vs. incorrect STE-Code
+  - No cross-references - unlike ste-code-full.md, this file does not link to SCE/core/ or SCE/data/ stratum files for vocabulary expansion
+  - No edge case guidance: what if an approved term doesn't cover a needed concept? what if the synonym table is insufficient?
+  - No rationale: why 20/25 word limits? why these 12 synonym pairs and not others?
+  - No completeness indicator - an agent reading this prompt has no way to self-check compliance
+  - No failure modes documented (e.g., "if you cannot avoid a >25 word sentence, flag it with a NOTE marker")
+  - No version history or changelog explaining what changed from v1.x to v2.0
+  - Safety markers table from the full prompt is compressed to prose - loses the structured table format, making the BREAKING/DEPRECATED/NOTE distinction harder to scan
+  - Missing anti-patterns section (the full prompt has 5 explicit anti-patterns; this file folds some into "Never" but loses the explanatory format)
+  - Single-sentence descriptions for vocabulary and sentence rules sections - shallow compared to the full prompt's enumerated principles
+- **What Level 3 Would Add:** 2-3 concrete before/after example pairs showing incorrect vs. STE-Code-compliant sentences. A cross-reference to SCE/core/categories/synonym-table.json for the machine-readable canonical table. Edge case guidance for when approved vocabulary is insufficient. A minimal self-check checklist. The safety markers presented as a compact table rather than prose for scannability.
+- **Priority:** high - this is the default prompt for interactive sessions (per AGENTS.md Adaptation Levels table); its shallowness means the most common STE-Code usage mode has no examples or edge case handling
+
+### SCE/narratives/system-prompts/ste-code-full.md
+- **Level:** 3
+- **Summary:** Full STE-Code system prompt (~4,000 tokens) for standard agent context. Enumerates 14 core principles (P1-P14), a canonical synonym table, sentence rules, 3 safety markers with a structured table, 5 anti-patterns, a compliance output format template, and an 8-entry stratum reference table linking to SCE/ composable files.
+- **Strengths:**
+  - 14 principles explicitly enumerated and tagged (P1-P14) - each is executable and independently verifiable
+  - Synonym table with 12 prefer/avoid pairs in both inline markdown table and reference to machine-readable JSON
+  - Safety markers table with required fields column - actionable (BREAKING demands version + migration path)
+  - 5 anti-patterns with concrete corrections (e.g., "don't" → "do not")
+  - Compliance output format is a complete markdown template with violation/correction table
+  - Stratum reference table maps 8 needs to specific file paths - composable architecture is documented
+  - Benchmark citation (96.6% pass rate, 59 tests) with comparison data
+  - Versioned (2.0.0) with source attribution and architecture reference
+  - Frontmatter includes use-when guidance
+- **Gaps:**
+  - No per-principle examples - P1-P14 are stated as rules but none include a concrete before/after sentence pair demonstrating the violation and correction
+  - No edge case handling: what if a technical noun (P5/P6) conflicts with an approved word? what if the synonym table doesn't cover a needed concept? what if P4 (active voice) conflicts with a domain convention that uses passive voice (e.g., scientific computing)?
+  - No failure recovery: if an agent produces non-compliant output, what is the correction workflow?
+  - No rationale for design decisions: why 14 principles? why 20/25 word limits? why these 12 synonym pairs as canonical?
+  - No version history or changelog - "v2.0.0" implies prior versions but no diff from v1.x
+  - No measurable quality gates - the benchmark score (96.6%) is cited but the pass/fail criteria per test are not defined in this file
+  - No known limitations (e.g., "this prompt does not cover locale-specific documentation conventions")
+  - Stratum reference files (SCE/core/categories/synonym-table.json, SCE/data/vocabulary/code-dictionary.json, etc.) are cross-referenced but their existence and maturity are not verified within this audit
+  - Compliance output format shows only one row example - doesn't show a complete multi-violation correction round
+  - No self-audit or validation checklist for agents to verify their own output compliance
+  - No performance or token-budget discussion despite the ~4K token annotation in frontmatter
+- **What Level 4 Would Add:** One before/after example pair for each of the 14 principles. Edge case guidance covering: technical-noun-vs-approved-word conflicts, insufficient synonym coverage, domain conventions overriding P4, and multi-locale considerations. A self-audit checklist mapping each principle to a yes/no verification question. Rationale for the 14-principle design and word/sentence limits. Version history from v1.x to v2.0. Known limitations explicitly stated with workarounds. A full multi-violation compliance output example showing 3+ corrections in one round.
+- **Priority:** medium - already the strongest of the three files; gaps are depth/robustness improvements for production hardening
+
+## Batch Summary
+- Files scored: 3
+- Level distribution: -2:0 -1:0 1:0 2:1 3:2 4:0 5:0
+- Highest priority: SCE/narratives/system-prompts/ste-code-micro.md (level 2 - the default interactive-session prompt has no examples, no cross-references, and no edge case handling)
+- Pattern observations:
+  - **No file has examples of correct vs. incorrect output.** Both prompts state rules without demonstrating them. The database layout describes structure without showing queries.
+  - **No file has edge case or failure mode documentation.** All three assume happy-path usage - no guidance for what to do when rules are insufficient or when files don't match conventions.
+  - **No file has version history or changelogs.** All three carry version numbers but no record of what changed between versions.
+  - **Cross-references are asymmetric.** ste-code-full.md links to 8 SCE/ stratum files; ste-code-micro.md links to none. database-layout.md links to agent/skill/reference files but does not verify their existence. None of the cross-referenced targets were audited in this batch.
+  - **No file includes meta-instructions for self-improvement or regeneration.** Level 5's defining trait (self-rewriting instructions) is absent across the board.
+  - **Safety marker handling is inconsistent.** ste-code-full.md uses a structured table with required fields; ste-code-micro.md compresses the same information to prose, losing scannability.

@@ -1,0 +1,72 @@
+### .agents/uml/agent-communication.md
+- **Level:** 4
+- **Summary:** Comprehensive Mermaid-based architecture document covering the full 4-agent communication surface: handoff chain, feedback protocol, state reporting, error escalation, and concurrency rules. Serves as both a reference diagram and an operational specification for inter-agent coordination.
+- **Strengths:**
+  - 6 major sections with 5 distinct Mermaid diagram types (sequence, flowchart, state-like flow), each richly annotated with real data
+  - Real exchange turns from `.agents/feedback/exchange.md` are embedded directly, grounding the protocol in actual pipeline history
+  - Concurrency matrix is explicit and exhaustive - 4×4 agent grid with `❌`/`✅`/`3/batch`/`sequential`/`solo` categories, plus 5 enumerated parallelism rules with rationale
+  - Error escalation protocol maps severity levels (🔴🟠🟡🟢) to detection methods, responsible agents, and communication channels in a structured table
+  - Immutable audit trail concept is reinforced across sections - state reports are timestamped and append-only, audit reports are evidence-based
+  - State report format includes a filled example with real pipeline data (109 workers, 10,927 lines, 21,852 refined lines), not a bare template
+  - All diagrams include specific file paths, counts, and commands - nothing is abstract or hand-wavy
+- **Gaps:**
+  - No version history or changelog - impossible to know when sections were added or revised
+  - No known limitations section (e.g., exchange.md has no append-locking, two agents writing simultaneously could interleave turns; audit report storage grows unbounded)
+  - No meta-instructions for self-rewriting - document cannot guide an agent to update itself
+  - No measurable quality gates for the document itself (e.g., "every diagram must have a corresponding table summary")
+  - No agentic-load specifications - doesn't quantify the cognitive or token cost of loading this document for each agent
+  - Cross-references to external files (exchange.md, state-*.md, SKILL.md files) are by path only, with no content hash or version pin - a renamed or moved file silently breaks the reference
+  - No performance considerations for the communication channels themselves (e.g., exchange.md append latency, audit report storage growth rate)
+  - Handoff trigger summary table (line 279) duplicates information from the Mermaid diagram above it - no DRY note or cross-reference explaining the relationship
+- **What Level 5 Would Add:**
+  - Version history with dates for each section, documenting when the concurrency matrix was added, when the state report format was standardized, and when real exchange turns were embedded
+  - Known limitations section documenting: exchange.md append races under concurrent writes, audit report unbounded growth, reliance on Agent #3 being continuously available
+  - Meta-instructions for self-rewriting: rules for when to add a new section, how to update concurrency rules when a new agent joins, template for adding new exchange turn examples
+  - Measurable quality gates: "every communication path must appear in at least one diagram AND one table," "every file reference must resolve to an actual file on disk," "every agent pairing must have an entry in the concurrency matrix"
+  - Agentic-load specifications: token count breakdown per section, recommended load priority (Section 4 Handoff Triggers first for orchestrators, Section 2 Feedback Protocol first for reviewers), stale-check frequency
+  - Content hashes or version pins for all cross-referenced files, with a "last verified" timestamp per reference
+  - Performance model: expected exchange.md size growth per stage, audit report count projections, disk footprint of the full communication trail after a complete pipeline run
+- **Priority:** low - already at Level 4, the gaps are polish-tier for production-readiness rather than correctness or completeness issues
+
+### .agents/uml/worker-lifecycle.md
+- **Level:** 4
+- **Summary:** End-to-end operational specification for the 109-worker extraction pipeline, covering launch, batched execution, state transitions, coordinator-side polling, error recovery, and auditor integration. Every phase is expressed as both a Mermaid diagram and a structured table.
+- **Strengths:**
+  - 6 Mermaid diagrams spanning flowchart, state diagram, and summary - each targeting a distinct aspect of the lifecycle with no redundancy
+  - State diagram (Section 3) is particularly strong: models 12 distinct states with sub-states for `running` and `verifying`, plus inline notes for recovery rules and immutability guarantees
+  - 6-item per-batch quality checklist with exact shell commands (`test -f`, `wc -l`, content signal grep patterns), making it directly executable rather than conceptual
+  - Error recovery matrix (Section 5) maps 7 distinct error classes to detection signals, root causes, recovery actions, and retry limits - no generic "handle errors" hand-waving
+  - Anti-fabrication rules block is explicitly listed as immutable constraints appended to every worker prompt, closing the loop between document specification and runtime behavior
+  - State transition table (lines 172-185) is exhaustive - every edge in the state diagram has a corresponding row with trigger and action
+  - Scale numbers at the end (109 workers, 37 batches, ~20-37 minutes) provide concrete operational expectations
+  - Cross-references to 5 source documents at the top establish provenance and auditability
+- **Gaps:**
+  - No version history - unclear if the polling loop was revised after the v2→v3 protocol correction documented in agent-communication.md
+  - No known limitations: what happens when a worker hangs indefinitely beyond the 60s timeout? What if `git gcommit-hermes` fails mid-batch? What if the filesystem runs out of space during extraction?
+  - No meta-instructions for self-rewriting - if RAIL 8 recovery rules change, this document has no guidance on how to update itself
+  - No measurable quality gates for the document (e.g., "every state in the state diagram must have a row in the transition table," "every error class must appear in both the flowchart and the matrix")
+  - No agentic-load specifications - the document is long (390 lines) and processors loading it need to know which sections are critical vs. reference
+  - State diagram syntax (`--` separator for failure transitions inside the `verifying` sub-state at lines 138-143) is non-standard Mermaid and may not render in all viewers
+  - No discussion of worker output divergence - what if two workers extract overlapping page ranges and produce conflicting output? The document assumes perfect range partitioning
+  - Poll system protocol block (lines 242-249) is a verbatim text block that duplicates the flowchart above it - no explicit note that it's a summary rather than new information
+  - Error recovery actions for "re-launch" don't specify whether the coordinator should wait for existing workers to fully exit before re-launching, creating a potential race condition
+- **What Level 5 Would Add:**
+  - Version history tracking when each section was added: launch command template (v1), batch protocol with 6-item checklist (v2 after truncation issues), error recovery matrix (v3 after fabrication detected)
+  - Known limitations section: worker hang scenarios beyond timeout, git commit failure mid-batch recovery, filesystem-full handling, overlapping page range conflicts, what happens if `ste-code/prompts/` directory is deleted mid-run
+  - Meta-instructions for self-rewriting: rules for adding new error classes to the matrix, template for updating retry limits, procedure for adding a new verification check to the 6-item checklist
+  - Measurable quality gates: "state diagram node count must equal transition table row count," "every error class must have ≥1 detection signal, root cause, recovery action, and retry limit," "every diagram section must have a corresponding table summary"
+  - Agentic-load specifications: Section 3 (Worker States) is the highest-value section for understanding the lifecycle; Section 4 (Polling Loop) is the highest-value for execution; Section 5 (Error Recovery) is reference-only until errors occur
+  - Performance model: expected time distribution across 37 batches, memory footprint of 3 concurrent `hermes -z` processes, disk I/O patterns during verification, worst-case recovery time when all 3 workers in a batch fail
+  - Hash-pinned cross-references to the 5 source documents, with a "last verified" timestamp ensuring the lifecycle diagram hasn't drifted from the actual worker prompts
+- **Priority:** low - already at Level 4, gaps are production-hardening concerns; the document is functionally complete and executable
+
+## Batch Summary
+- Files scored: 2
+- Level distribution: -2:0 -1:0 1:0 2:0 3:0 4:2 5:0
+- Highest priority: none - both files scored at Level 4 (Expert), with only Level 5 polish-tier gaps
+- Pattern observations:
+  - Both UML documents share the same missing Level 5 attributes: version history, known limitations, meta-instructions for self-rewriting, measurable quality gates, and agentic-load specifications - this suggests a systematic gap in the project's documentation standards rather than file-specific weaknesses
+  - Both documents use the same structural pattern (Mermaid diagram → table/summary → prose rules), which is effective and consistent across the `uml/` directory
+  - Cross-references are strong within both files but are path-based rather than content-hashed - a rename or restructure of source files would silently break references in both documents
+  - Neither document addresses the human-vs-agent reader distinction - both are clearly written for agent consumption (structured, table-heavy, diagram-rich) but don't explicitly declare their intended audience or suggest loading priorities
+  - The `uml/` directory appears to be the most mature documentation tier in the project - both files are at Level 4 while other directories (prompts/, skills/) may contain lower-level files; a cross-directory maturity comparison would be valuable
