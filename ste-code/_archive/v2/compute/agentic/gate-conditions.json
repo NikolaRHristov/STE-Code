@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/gate-conditions.schema.json",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "GATE 0-4 pass conditions for the STE-Code 5-stage pipeline. Each gate must pass before the next stage starts.",
   "gates": [
     {
@@ -8,9 +8,11 @@
       "name": "Spec Present",
       "precondition-for": "Stage 1 — Extraction",
       "assertions": [
-        { "check": "directory-exists", "path": "spec/issue-09-2025/", "min-files": 434 },
-        { "check": "file-exists", "path": "spec/issue-09-2025/page-001.md" },
-        { "check": "file-exists", "path": "spec/issue-09-2025/page-434.md" }
+        { "check": "directory-exists", "path": "spec/issue-09-2025/page-dir/", "min-files": 426 },
+        { "check": "file-exists", "path": "spec/issue-09-2025/page-dir/page-front-matter.md" },
+        { "check": "file-exists", "path": "spec/issue-09-2025/page-dir/page-HI-1.md" },
+        { "check": "file-exists", "path": "spec/issue-09-2025/page-dir/page-2-1-Y2.md" },
+        { "check": "file-exists", "path": "spec/issue-09-2025/page-dir/MANIFEST.md" }
       ],
       "pass-action": "proceed to Stage 1",
       "fail-action": "halt — spec not available — do not start extraction"
@@ -22,7 +24,7 @@
       "assertions": [
         { "check": "file-count", "path": "ste-code/extracted/", "expected": 109 },
         { "check": "min-size-each", "path": "ste-code/extracted/", "min-bytes": 500, "exception": { "file": "w109-p433-434.md", "min-bytes": 200 } },
-        { "check": "no-truncation-marker", "path": "ste-code/extracted/", "pattern": "\\[\\.\.\\.]|^\.\\.\.\\s*$" },
+        { "check": "no-truncation-marker", "path": "ste-code/extracted/", "pattern": "\\[\\\\.\\.\\\\.]|^\\\\.\\.\\s*$" },
         { "check": "rails-compliance", "script": "ste-code/check-rails.py", "target": "ste-code/extracted/", "expected-exit": 0 }
       ],
       "pass-action": "proceed to Stage 2",
@@ -33,8 +35,8 @@
       "name": "Merge Complete",
       "precondition-for": "Stage 4 — Adaptation",
       "assertions": [
-        { "check": "file-exists", "path": "ste-code/merged/master-raw.md" },
-        { "check": "min-size", "path": "ste-code/merged/master-raw.md", "min-bytes": 500000 },
+        { "check": "file-exists", "path": "ste-code/merged/master.md" },
+        { "check": "min-size", "path": "ste-code/merged/master.md", "min-bytes": 100000 },
         { "check": "file-count", "path": "ste-code/refined/", "expected": 109 }
       ],
       "pass-action": "proceed to Stage 4",

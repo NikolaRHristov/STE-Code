@@ -21,7 +21,7 @@ for i in range(0, len(REMAINING), batch_size):
     procs = []
     for w in batch:
         prompt_file = f"{PROMPTS_DIR}/w{w:03d}-prompt.txt"
-        cmd = f'hermes -z "$(cat {prompt_file})" -m deepseek-v4-pro --yolo'
+        cmd = f'hermes -z "$(cat {prompt_file})" -m poolside/laguna-s-2.1:free --yolo'
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         procs.append((w, p, cmd))
         print(f"  W{w:03d} launched (pid {p.pid})")
