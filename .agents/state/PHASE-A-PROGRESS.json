@@ -44,7 +44,16 @@
     "fix-042--agents-references-worker-grid-md",
     "fix-043--agents-references-rails-md",
     "fix-044--agents-references-section-types-md",
-    "fix-045--agents-references-quality-checklist-md"
+    "fix-045--agents-references-quality-checklist-md",
+    "fix-046--agents-references-category-mapping-md",
+    "fix-047--agents-references-granular-strategy-md",
+    "fix-048--agents-references-STE-CODE-IMPLEMENTATI",
+    "fix-049--agents-references-translation-grid-md",
+    "fix-050--agents-uml-agent-communication-md",
+    "fix-051--agents-uml-worker-lifecycle-md",
+    "fix-052--agents-uml-pipeline-state-machine-md",
+    "fix-053--agents-uml-error-recovery-md",
+    "fix-054--agents-uml-database-layout-md"
   ],
   "batches_done": [
     1,
@@ -61,7 +70,10 @@
     12,
     13,
     14,
-    15
+    15,
+    16,
+    17,
+    18
   ],
-  "updated": "2026-07-30T12:19:40.529165+00:00"
+  "updated": "2026-07-30T12:35:53.793183+00:00"
 }
