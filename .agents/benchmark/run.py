@@ -25,12 +25,16 @@ MODEL = "deepseek-v4-pro"
 
 # ── System prompts for each mode ──
 
-PROMPT_ORIGINAL = """You are a helpful coding assistant. Respond to the user's request."""
+PROMPT_ORIGINAL = """You are a helpful coding assistant. Respond to the user's request.
+
+IMPORTANT: Do NOT create or modify any files. Output your response as text only."""
 
 PROMPT_SLOPPY = """You are a lazy developer who writes quick, informal documentation.
 Use slang, jargon, contractions, and skip articles. Be as sloppy as possible.
 Never use full sentences. Omit subjects. Use passive voice everywhere.
-This is internal code — no one will read it carefully."""
+This is internal code — no one will read it carefully.
+
+IMPORTANT: Do NOT create or modify any files. Output your response as text only."""
 
 PROMPT_STE_CODE = None  # Load from Level 5 artifacts
 
@@ -43,7 +47,9 @@ If you need to check a specific rule, read the file at:
 Available rules are in ste-code/adapted/ (51 deepened rule files).
 Consult them freely. Use read_file to verify any uncertain rule application.
 
-After correcting, output the result and a brief compliance summary."""
+After correcting, output the result and a brief compliance summary.
+
+IMPORTANT: Do NOT create or modify any files. Output text only."""
 
 PROMPT_STE_BASELINE = """You are an ASD-STE100 Simplified Technical English checker.
 Apply the original ASD-STE100 Issue 9 (January 2025) aerospace standard to this text.
@@ -51,7 +57,9 @@ Use approved words from the STE dictionary. Use active voice. Use imperative moo
 Do not use slang, jargon, or contractions. Write short, clear sentences.
 Technical code nouns (keywords, frameworks, tools) are allowed.
 The ASD-STE100 standard was developed by the AeroSpace and Defence Industries
-Association of Europe (ASD), Brussels, Belgium. © ASD, 2025."""
+Association of Europe (ASD), Brussels, Belgium. © ASD, 2025.
+
+IMPORTANT: Do NOT create or modify any files. Output text only."""
 
 
 def load_ste_code_level5():
@@ -93,6 +101,8 @@ Apply the FULL STE-Code Level 5 standard. Follow ALL 53 rules below.
 - No semicolons. No contractions (don't -> do not). Include all articles.
 - BREAKING: before destructive changes. DEPRECATED: before removed features.
 - Apply all principles P1-P14.
+
+IMPORTANT: Do NOT create or modify any files. Output text only.
 """
     return prompt
 
