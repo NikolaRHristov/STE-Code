@@ -140,7 +140,7 @@ Examples: `feat/add-orchestrate-synonym`, `fix/r3-page-gap-145`, `docs/vllm-depl
 
 ### PR Template
 
-All pull requests must use the template at [`https://github.com/NikolaRHristov/STE-Code/issues`](./https://github.com/NikolaRHristov/STE-Code/issues). The template requires:
+All pull requests must use the template at [GitHub Issues](https://github.com/NikolaRHristov/STE-Code/issues). The template requires:
 
 - A summary of the change.
 - Reference to the related issue.
@@ -263,7 +263,7 @@ grep -r "fabricate\|hallucinat\|guess" ste-code/artifacts/ && echo "FABRICATION 
 
 ## Issue Templates
 
-Issue templates are available in [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE/). Choose the template that matches your contribution:
+Issue templates are available in `.github/ISSUE_TEMPLATE/`. Choose the template that matches your contribution:
 
 - **Synonym Proposal** — suggest a new unapproved → approved pair.
 - **Category Proposal** — propose a new technical noun category.

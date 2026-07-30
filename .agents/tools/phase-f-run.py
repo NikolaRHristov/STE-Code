@@ -83,11 +83,14 @@ def run_checks():
     import re
     broken_refs = 0
     for f in PROJECT.rglob("*.md"):
-        if ".git/" in str(f): continue
+        if ".git/" in str(f) or ".venv/" in str(f): continue
         content = f.read_text()
         for ref in re.findall(r"\]\(([^)]+)\)", content):
-            if ref.startswith("http") or ref.startswith("#"): continue
-            if not (f.parent / ref).resolve().exists():
+            if ref.startswith("http") or ref.startswith("#") or ref in ("...", "path"): continue
+            target = (f.parent / ref).resolve()
+            if ref.startswith('.agents/') or ref.startswith('ste-code/'):
+                target = (Path('.') / ref).resolve()
+            if not target.exists():
                 broken_refs += 1
     results.append(check(broken_refs == 0, "Broken internal references", f"{broken_refs} broken" if broken_refs else "All valid"))
 
