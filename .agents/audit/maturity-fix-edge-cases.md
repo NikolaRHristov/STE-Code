@@ -1,4 +1,4 @@
-The patch applied correctly. Here is the new **EDGE CASE HANDLING** section inserted at `/Volumes/CORSAIR/Developer/macOS/Application/Manual/.agents/agent/agent-1-extractor.md:170-260`:
+The patch applied correctly. Here is the new **EDGE CASE HANDLING** section inserted at `<project-root>/.agents/agent/agent-1-extractor.md:170-260`:
 
 **4 edge cases covered with decision trees:**
 
