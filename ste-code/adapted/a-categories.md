@@ -500,7 +500,7 @@ The technical nouns in their related categories are only examples. Rule 1.5 does
 
 **Original:** Use a word that is not approved in the dictionary, only when it is a technical noun or part of a technical noun.
 
-**Adapted:** Use a word that is not approved in the standard documentation vocabulary, only when it is a technical noun (classified in one of the 22 categories above) or part of a technical noun.
+**Adapted:** Use a word that is not approved in the standard documentation vocabulary, only when it is a technical noun (classified in one of the 19 categories above) or part of a technical noun.
 
 | Non-STE | STE |
 |---------|-----|
@@ -564,4 +564,4 @@ The technical nouns in their related categories are only examples. Rule 1.5 does
 
 ---
 
-*Adaptation complete. All 22 categories from ASD-STE100 Issue 9, Rule 1.5 (master.md lines 1698-1878) have been adapted from aerospace to code documentation domain. Related rules 1.6 through 1.11 (master.md lines 1883-2108) are included with adapted STE/non-STE code example pairs.*
+*Adaptation complete. All 19 categories from ASD-STE100 Issue 9, Rule 1.5 (master.md lines 1698-1878) have been adapted from aerospace to code documentation domain. Related rules 1.6 through 1.11 (master.md lines 1883-2108) are included with adapted STE/non-STE code example pairs.*

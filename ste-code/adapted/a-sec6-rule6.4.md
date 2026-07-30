@@ -22,7 +22,7 @@ The topic sentence at the start of each paragraph helps the developer understand
 
 > **Non-STE:** The data pipeline processes incoming events through a sequence of stages. Each stage transforms the event payload and passes it to the next stage. The first stage is validation, which checks the event schema and rejects malformed events. The second stage is enrichment, which adds metadata such as timestamps, source identifiers, and geolocation data from an external lookup service. The third stage is transformation, which converts the event into the target format required by downstream consumers such as the analytics warehouse and the real-time dashboard. The final stage is persistence, which writes the transformed event to the primary data store and to the event log for audit purposes. Error handling is implemented at each stage to catch exceptions without breaking the entire pipeline. If a stage fails, the pipeline logs the error and routes the event to the dead-letter queue for manual inspection.
 
-> **STE:** [FIXME: generate STE correction for: The data pipeline processes incoming events through a sequen...]
+> **STE:** The data pipeline uses a sequence of stages to process events. Validation checks the event schema and rejects malformed events. Enrichment adds metadata to the event. Transformation converts the event into a target format. Persistence writes the event to the data store and the event log. Each stage has error handling. If a stage fails, the pipeline sends the event to the dead-letter queue.
 >
 > **1. Data Pipeline Overview**
 >
@@ -65,7 +65,7 @@ A README paragraph that mixes installation steps with configuration options is n
 
 > **Non-STE:** To install, run `pip install mylib` and then create a config file at `~/.mylib.toml` with your API key. The library supports Python 3.9 and above and requires a Redis instance for caching, which you can start with `redis-server`. You can also use SQLite for development without Redis.
 >
-> **STE:** [FIXME: generate STE correction for: To install, run `pip install mylib` and then create a config...]
+> **STE:** Install the library with `pip install mylib`. Create a configuration file at `~/.mylib.toml` with your API key. The library supports Python 3.9 and above. A Redis instance is necessary for caching. Start Redis with `redis-server`. For development, use SQLite without Redis.
 >
 > **Installation**
 >
@@ -94,7 +94,7 @@ Do not embed the authentication requirements inside the endpoint description. Gi
 
 > **Non-STE:** GET /api/users returns a paginated list of users with optional query parameters for filtering by role and status. You need a Bearer token in the Authorization header. The response includes a `users` array and a `pagination` object with `next` and `prev` cursors. Status 200 on success, 401 if the token is missing or expired, and 403 if the token lacks the `users:read` scope.
 >
-> **STE:** [FIXME: generate STE correction for: GET /api/users returns a paginated list of users with option...]
+> **STE:** The `GET /api/users` endpoint returns a paginated list of users. You can filter the results with `role` and `status` parameters. Include a Bearer token in the `Authorization` header. The response has a `users` array and a `pagination` object. The status codes are 200 for success, 401 for a missing token, and 403 for an invalid scope.
 >
 > **GET /api/users**
 >
@@ -134,7 +134,7 @@ Inline comments explain a single line or block of code. An inline comment is a o
 
 > **Non-STE:** `// Initialize the cache, then load the user profile from the database using the ORM, and if that fails fall back to the file cache, but first check the request signature using HMAC-SHA256 to make sure the request hasn't been tampered with.`
 >
-> **STE:** [FIXME: generate STE correction for: `// Initialize the cache, then load the user profile from th...]
+> **STE:** Check the request signature first. Then load the user profile from the cache. If the cache does not have the profile, load it from the database.
 >
 > ```
 > // Check the request signature.
@@ -161,7 +161,7 @@ Separate the motivation for the change from the implementation details. Use diff
 
 > **Non-STE:** Fix race condition in connection pool that was causing deadlocks under high load, changed the mutex to a read-write lock, also updated the retry logic to use exponential backoff with jitter, and added a metrics counter for connection timeouts so we can monitor it in production, also cleaned up some old debug logging.
 >
-> **STE:** [FIXME: generate STE correction for: Fix race condition in connection pool that was causing deadl...]
+> **STE:** Fix a race condition in the connection pool. The pool had deadlocks under high load. Replace the mutex with a read-write lock. Update the retry logic to use exponential backoff with jitter. Add a metrics counter for connection timeouts.
 >
 > ```
 > Fix race condition in connection pool under high load
@@ -190,7 +190,7 @@ Do not combine the error description, the stack trace, and the remediation advic
 
 > **Non-STE:** Connection refused to database at postgresql://db.internal:5432/app — make sure the database is running, check your network configuration, verify the hostname resolves, and ensure the TLS certificate is valid, stack trace: at ConnectionPool.connect (pool.js:42) at Database.init (db.js:15) at Server.start (server.js:88).
 >
-> **STE:** [FIXME: generate STE correction for: Connection refused to database at postgresql://db.internal:5...]
+> **STE:** The database server refused the connection. Check that the database is running. Check that the hostname resolves. Check that the network allows the connection. Check that the TLS certificate is valid.
 >
 > ```
 > Error: Could not connect to the database.
@@ -220,7 +220,7 @@ Class documentation must use paragraphs to separate the class purpose from the c
 
 > **Non-STE:** The `AuthenticationService` handles user login, session management, and token refresh, it uses the `UserRepository` for database access and the `TokenProvider` for JWT generation, the `login` method takes a username and password, validates them against the database, and returns a signed JWT, while `refreshToken` accepts an expired token and returns a new one if the refresh window is still open.
 >
-> **STE:** [FIXME: generate STE correction for: The `AuthenticationService` handles user login, session mana...]
+> **STE:** The `AuthenticationService` manages user authentication and sessions. It uses `UserRepository` for database access. It uses `TokenProvider` for JWT generation. The `login` method validates credentials and returns a signed JWT. The `refreshToken` method accepts an expired token and returns a new token if the refresh window is open.
 >
 > **AuthenticationService**
 >
@@ -246,7 +246,7 @@ Functional code emphasizes pure functions, immutability, and type signatures. Do
 
 > **Non-STE:** `validateInput :: Input -> Either ValidationError ValidatedInput` parses and validates raw user input, returning a `ValidatedInput` on success or a `ValidationError` with a list of field-level problems, it's pure and doesn't perform any I/O, composed internally from `parseField` and `checkConstraints` which are also pure.
 >
-> **STE:** [FIXME: generate STE correction for: `validateInput :: Input -> Either ValidationError ValidatedI...]
+> **STE:** `validateInput` parses and validates raw user input. It returns a `ValidatedInput` on success. It returns a `ValidationError` on failure. The function is pure and does not do I/O. It uses `parseField` and `checkConstraints` internally.
 >
 > **validateInput**
 >
@@ -276,7 +276,7 @@ Procedural code executes instructions in sequence. Documentation must separate t
 
 > **Non-STE:** The `processFiles` function scans a directory, opens each file, reads its contents line by line, applies a transformation, writes the output to a new file in the output directory, and then closes the file handle and logs the processing time for each file before moving to the next one, and finally prints a summary of how many files were processed and how long the whole operation took.
 >
-> **STE:** [FIXME: generate STE correction for: The `processFiles` function scans a directory, opens each fi...]
+> **STE:** The `processFiles` function transforms each file in a directory. It scans the input directory and opens each file. It reads the contents and applies a transformation. It writes the output and closes the file. It records the processing time. It prints a summary with the file count and the total time.
 >
 > **processFiles**
 >
@@ -308,7 +308,7 @@ Declarative code describes the desired state. Documentation must separate the re
 
 > **Non-STE:** This Terraform module creates an auto-scaling group with a launch template that provisions EC2 instances running Amazon Linux 2, attaches them to an application load balancer with a target group that health-checks the `/health` endpoint every 30 seconds, and creates security group rules to allow inbound traffic on port 443 from the load balancer and on port 22 from the bastion host CIDR `10.0.1.0/24`.
 >
-> **STE:** [FIXME: generate STE correction for: This Terraform module creates an auto-scaling group with a l...]
+> **STE:** This Terraform module creates an auto-scaling group. It uses a launch template with Amazon Linux 2. It attaches the instances to an application load balancer. The load balancer checks the `/health` endpoint every 30 seconds. The security rules permit inbound traffic on port 443 and port 22.
 >
 > **Auto-Scaling Group Module**
 >
@@ -338,7 +338,7 @@ Systems documentation explains ownership, lifetimes, and memory safety. These ar
 
 > **Non-STE:** The `SharedBuffer` struct holds a reference-counted pointer to a heap-allocated byte buffer that can be shared across threads because it uses `Arc<Mutex<Vec<u8>>>` internally, the `read` method acquires the lock, copies the data out, and releases the lock; the `write` method acquires the lock, appends to the buffer, and releases the lock; and the `Drop` implementation decrements the reference count and frees the buffer when the last reference is dropped, but callers must ensure they don't hold the lock across await points because the `Mutex` is from `std` not `tokio`.
 >
-> **STE:** [FIXME: generate STE correction for: The `SharedBuffer` struct holds a reference-counted pointer ...]
+> **STE:** The `SharedBuffer` struct holds a reference-counted pointer to a byte buffer. It uses `Arc<Mutex<Vec<u8>>>` for thread safety. The `read` method acquires the lock, copies the data, and releases the lock. The `write` method acquires the lock, appends data, and releases the lock. The `Drop` implementation frees the buffer when the last reference is dropped. Do not hold the lock across await points.
 >
 > **SharedBuffer**
 >
@@ -377,7 +377,7 @@ Some framework names are the same as unapproved STE words. The word `make` is an
 
 > **Non-STE:** Run `make` to make the build artifacts. Then make sure the output directory exists before you make the tarball with `make package`.
 >
-> **STE:** [FIXME: generate STE correction for: Run `make` to make the build artifacts. Then make sure the o...]
+> **STE:** Build the artifacts with the Make tool. Run `make` to compile the source files. Check that the `output/` directory exists. Run `make package` to create the tarball.
 >
 > **Build with Make**
 >
@@ -401,7 +401,7 @@ Use backticks to set code keywords apart from prose. Start a paragraph about con
 
 > **Non-STE:** The loop breaks when the sentinel value is found, and then we return the accumulated result; if it continues past the maximum iterations we throw an error instead.
 >
-> **STE:** [FIXME: generate STE correction for: The loop breaks when the sentinel value is found, and then w...]
+> **STE:** The loop uses `break` to exit when it finds the sentinel value. The function uses `return` to send the result to the caller. If the loop runs past the maximum iterations, the function throws an error.
 >
 > **Loop Termination**
 >
@@ -506,7 +506,7 @@ When many contributors write documentation, paragraph styles can become inconsis
 
 > **Non-STE:** The caching layer supports multiple backends including Redis, Memcached, and an in-memory store for development, each backend implements the `CacheBackend` interface which requires `get`, `set`, `delete`, and `clear` methods, the Redis backend is recommended for production because it supports persistence, replication, and clustering, the in-memory backend is acceptable for local development but it loses all data when the process restarts, Memcached is a good middle-ground for staging environments because it is simpler to operate than Redis while still providing network-accessible shared caching.
 >
-> **STE:** [FIXME: generate STE correction for: The caching layer supports multiple backends including Redis...]
+> **STE:** The caching layer supports Redis, Memcached, and an in-memory store. Each backend implements the `CacheBackend` interface. The interface requires `get`, `set`, `delete`, and `clear` methods. Use Redis for production. Redis supports persistence, replication, and clustering. Use Memcached for staging. Use the in-memory store only for development. The in-memory store loses data when the process restarts.
 >
 > **Caching Layer**
 >
@@ -546,7 +546,7 @@ Do not start a paragraph with a subordinate clause. Do not start with "Because..
 
 > **Non-STE:** Because the scheduler uses a work-stealing algorithm, tasks can migrate between threads, which improves load balancing but makes thread-local storage unreliable for task state.
 >
-> **STE:** [FIXME: generate STE correction for: Because the scheduler uses a work-stealing algorithm, tasks ...]
+> **STE:** The scheduler uses a work-stealing algorithm. Tasks can migrate between threads. This improves load balancing. Thread-local storage is not reliable for task state.
 >
 > The scheduler uses a work-stealing algorithm. Tasks can migrate between threads. This improves load balancing. However, thread-local storage is not reliable for task state.
 >

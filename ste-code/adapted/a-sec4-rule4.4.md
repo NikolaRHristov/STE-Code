@@ -143,8 +143,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word between the feature claim and the prerequisite. The "also" is vague.*
 
-**STE:** [FIXME: generate STE correction for: ...]
-> The image processing pipeline uses GPU acceleration for real-time transforms. **Thus**, you must install CUDA 11.8 or a newer version. **And** the pipeline includes a CPU fallback mode.
+> **STE:** The image processing pipeline uses GPU acceleration for real-time transforms. **Thus**, you must install CUDA 11.8 or a newer version. **And** the pipeline includes a CPU fallback mode.
 >
 > *Applied: P1 (approved connecting word "thus"), P1 (approved connecting word "and")*
 > *Fix: "Thus" shows the logical dependency between the feature and the prerequisite. "And" groups the two capability descriptions. "Leverages" replaced with "uses" per canonical synonym table.*
@@ -156,8 +155,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: The relationship between the 201 status and the response body is implicit. "And" is overloaded inside a single sentence instead of connecting separate sentences. "Utilized" is not an approved word.*
 
-**STE:** [FIXME: generate STE correction for: ...]
-> A POST request to `/users` makes a new user account. **As a result**, the API returns a 201 status code. **And** the response body contains the created user object with an auto-generated ID. You can use **this** ID in later requests to refer to the user.
+> **STE:** A POST request to `/users` makes a new user account. **As a result**, the API returns a 201 status code. **And** the response body contains the created user object with an auto-generated ID. You can use **this** ID in later requests to refer to the user.
 >
 > *Applied: P1 (connecting phrase "as a result"), P1 (connecting word "and"), P1 (demonstrative adjective "this"), canonical synonym table ("use" replaces "utilized")*
 > *Fix: "As a result" connects the POST action to the 201 response. "And" connects the status code to the body content. "This" refers back to the ID. The procedural "POST /users creates" was rewritten to a descriptive sentence.*
@@ -169,8 +167,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting words link the filter behavior to the return guarantee. The immutability note floats without connection. The predicate contract is isolated.*
 
-**STE:** [FIXME: generate STE correction for: ...]
-> The `filter` method removes items that do not match the predicate function. **Thus**, the method returns a new collection with only the matching items. **And** the original collection stays unchanged. **This** predicate function receives each item as its only argument.
+> **STE:** The `filter` method removes items that do not match the predicate function. **Thus**, the method returns a new collection with only the matching items. **And** the original collection stays unchanged. **This** predicate function receives each item as its only argument.
 >
 > *Applied: P1 (connecting word "thus"), P1 (connecting word "and"), P1 (demonstrative adjective "this")*
 > *Fix: "Thus" connects the filter operation to the return value. "And" connects the return value description to the immutability guarantee. "This" refers back to the predicate function to describe its contract. "Filters" changed to "removes" for clarity.*
@@ -182,8 +179,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word links the bug description to the fix description. The three sentences are a flat list with no logical structure.*
 
-**STE:** [FIXME: generate STE correction for: ...]
-> The `acquire()` method returned an already-closed connection when many callers used the pool at the same time. **As a result**, the caller received a stale connection and failed on the first write. **Thus**, this commit adds a state check before the method removes a connection from the wait queue.
+> **STE:** The `acquire()` method returned an already-closed connection when many callers used the pool at the same time. **As a result**, the caller received a stale connection and failed on the first write. **Thus**, this commit adds a state check before the method removes a connection from the wait queue.
 >
 > *Applied: P1 (connecting phrase "as a result"), P1 (connecting word "thus")*
 > *Fix: "As a result" connects the race condition to the observable failure. "Thus" connects the failure description to the fix rationale. The fix is now the logical conclusion of the problem description, not a separate fact.*
@@ -195,8 +191,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word links the error condition to the recovery action. The two sentences feel disconnected.*
 
-**STE:** [FIXME: generate STE correction for: ...]
-> The configuration file is not found. **Thus**, you must specify a path with the `--config` flag. **Or** you must set the `CONFIG_PATH` environment variable.
+> **STE:** The configuration file is not found. **Thus**, you must specify a path with the `--config` flag. **Or** you must set the `CONFIG_PATH` environment variable.
 >
 > *Applied: P1 (connecting word "thus"), P1 (connecting word "or")*
 > *Fix: "Thus" connects the detected error condition to the required action. "Or" presents the two alternative recovery paths clearly. The instruction changes from a suggestion to a requirement.*
@@ -208,8 +203,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word links the option purpose to the trade-off. The conditional advice floats without logical anchor.*
 
-**STE:** [FIXME: generate STE correction for: ...]
-> # Use this option to enable JIT compilation for query plans. **As a result**, the startup time increases. **But** the runtime performance improves. Set **this** option to `false` if your workload uses many short-lived connections.
+> **STE:** # Use this option to enable JIT compilation for query plans. **As a result**, the startup time increases. **But** the runtime performance improves. Set **this** option to `false` if your workload uses many short-lived connections.
 >
 > *Applied: P1 (connecting phrase "as a result"), P1 (connecting word "but"), P1 (demonstrative adjective "this")*
 > *Fix: "As a result" connects the option to its cost. "But" introduces the compensating benefit. "This" refers back to the option name. The trade-off is explicit and the conditional advice is anchored.*
@@ -272,9 +266,7 @@ Guidance: Do not use a connecting word at the very start of a new section to lin
 > ## Returns
 > Thus, the function returns a `Result` object with the parsed data.
 >
-> **STE:** [FIXME: generate STE correction for: ...]
-> ## Returns
-> The function returns a `Result` object with the parsed data.
+> **STE:** The function returns a `Result` object with the parsed data.
 
 ## Cross-References
 

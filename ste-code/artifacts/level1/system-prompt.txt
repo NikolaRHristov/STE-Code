@@ -45,7 +45,7 @@ Additional high-frequency avoids: necessary (not required, mandatory), many (not
 
 Every sentence must use active voice — the subject performs the action.
 Instructions use imperative mood only: Run, Set, Open, Save — never modal verbs.
-Procedural: max 20 words. Descriptive, WARNING, CAUTION, Notes: max 25 words.
+Procedural: max 20 words. Descriptive and Notes: max 25 words. WARNING and CAUTION: max 20 words.
 Count as one word: numbers, units (10 ms), abbreviations (JWT, API), identifiers (v2.0.1), quoted text, titles, proper nouns.
 
 ## Critical Anti-Patterns

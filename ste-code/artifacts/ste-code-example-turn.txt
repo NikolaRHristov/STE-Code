@@ -107,3 +107,8 @@
 
 Principles applied: 5/14 (P1, P6, P7, P10, P14) + 10 additional rules.
 Total rules enforced: 15.
+
+---
+
+> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. (c) ASD, 2025.
+> STE is EU Trade Mark 017966390. Independent adaptation for code documentation.

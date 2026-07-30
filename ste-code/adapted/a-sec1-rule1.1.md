@@ -387,7 +387,7 @@ This rule is the entry point to Section 1 (Words) of the STE-Code specification.
 | **Rule 1.2** | Use Approved Words Only as the Specified Part of Speech | Constrains approved words to their dictionary-listed part of speech. You must know a word is approved (Rule 1.1) before you can apply the part-of-speech constraint (Rule 1.2). |
 | **Rule 1.3** | Use Approved Words Only with Their Approved Meanings | Constrains approved words to their dictionary-listed meanings. A word that passes Rule 1.1 must also be used with its correct meaning per Rule 1.3. |
 | **Rule 1.4** | Use Only the Approved Verb Forms and Adjective Forms | Limits morphological variants of approved words. If a word passes Rule 1.1, you must use only its approved inflected forms per Rule 1.4. |
-| **Rule 1.5** | You Can Use Words That You Can Include in a Technical Noun Category | Defines the technical noun exception to Rule 1.1. Rule 1.5 gives the 22 categories that make a word a technical noun. |
+| **Rule 1.5** | You Can Use Words That You Can Include in a Technical Noun Category | Defines the technical noun exception to Rule 1.1. Rule 1.5 gives the 19 categories that make a word a technical noun. |
 | **Rule 1.6** | Use a Non-Approved Word Only When It Is a Technical Noun | Refines the technical noun exception. A word that would fail Rule 1.1 can still be used if Rule 1.6 applies. |
 | **Rule 1.7** | Do Not Use Technical Nouns as Verbs | Prevents a word that passed Rule 1.1 as a technical noun from being used as a verb. |
 | **Rule 1.8** | Use Standard, Well-Known Technical Nouns | Adds a quality constraint: a technical noun that passes Rule 1.1 must also be a standard term per Rule 1.8. |
@@ -442,6 +442,6 @@ Some words are technical terms in both the general STE dictionary and the softwa
 
 ### Historical Note: ASD-STE100 Precedent
 
-In ASD-STE100 Issue 9, Rule 1.1 is the foundation of the entire specification. It introduces the dictionary (Part 2 of the spec) and the concept of controlled vocabulary. The aerospace specification emphasizes that the dictionary is not a complete vocabulary — it is a selection of the most frequently used words, and technical terms fill the gaps. STE-Code follows the same philosophy: the controlled terminology gives the most frequently used words in code documentation, and the 22 categories of code-domain technical nouns (plus the code-domain technical verb provision) fill the gaps.
+In ASD-STE100 Issue 9, Rule 1.1 is the foundation of the entire specification. It introduces the dictionary (Part 2 of the spec) and the concept of controlled vocabulary. The aerospace specification emphasizes that the dictionary is not a complete vocabulary — it is a selection of the most frequently used words, and technical terms fill the gaps. STE-Code follows the same philosophy: the controlled terminology gives the most frequently used words in code documentation, and the 19 categories of code-domain technical nouns (plus the code-domain technical verb provision) fill the gaps.
 
 The original ASD-STE100 uses the term "dictionary." STE-Code uses "controlled terminology" to avoid confusion with programming language data structures (Python `dict`, JavaScript `Map`, etc.). Both serve the same function: a curated list of approved words with their parts of speech, meanings, and usage examples.
