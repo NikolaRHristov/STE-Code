@@ -140,7 +140,7 @@ Examples: `feat/add-orchestrate-synonym`, `fix/r3-page-gap-145`, `docs/vllm-depl
 
 ### PR Template
 
-All pull requests must use the template at [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md). The template requires:
+All pull requests must use the template at [`https://github.com/NikolaRHristov/STE-Code/issues`](./https://github.com/NikolaRHristov/STE-Code/issues). The template requires:
 
 - A summary of the change.
 - Reference to the related issue.
