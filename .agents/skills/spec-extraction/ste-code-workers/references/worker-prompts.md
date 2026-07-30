@@ -167,7 +167,7 @@ This table shows how each v2 worker's page range was redistributed across the v3
 | W8 | 301–360 | Dictionary Q–Z | W077–W091 | Batches 26–31 |
 | W9 | 361–434 | Appendices | W092–W109 | Batches 31–37 |
 
-NOTE: Batch boundaries are approximate. See [`worker-grid.md`](worker-grid.md) for
+NOTE: Batch boundaries are approximate. See [`worker-grid.md`](.agents/skills/spec-extraction/references/worker-grid.md) for
 the exact page-to-worker mapping.
 
 ---
@@ -195,14 +195,14 @@ the exact page-to-worker mapping.
 | Reference | Path | Description |
 |-----------|------|-------------|
 | Parent skill | [`../SKILL.md`](../SKILL.md) | v3 worker orchestration (109 workers, 37 batches) |
-| Worker grid | [`worker-grid.md`](worker-grid.md) | Full 109-worker page assignment table |
-| Section types | [`section-types.md`](section-types.md) | Content classification per page range |
-| Progress tracker | [`../../state/PROGRESS.md`](../../state/PROGRESS.md) | Per-batch completion status |
-| Rails | [`rails.md`](rails.md) | 8 immutable quality guardrails |
-| Extraction skill | [`../../extraction/SKILL.md`](../../extraction/SKILL.md) | Extraction stage definition |
-| Refinement skill | [`../../refinement/SKILL.md`](../../refinement/SKILL.md) | Post-extraction formatting rules |
-| Agent definitions | [`../../../agent/`](../../../agent/) | 9 agent role definitions |
-| Pipeline master | [`../../../MASTER.md`](../../../MASTER.md) | Full launch protocol and pipeline stages |
+| Worker grid | [`worker-grid.md`](.agents/skills/spec-extraction/references/worker-grid.md) | Full 109-worker page assignment table |
+| Section types | [`section-types.md`](.agents/skills/spec-extraction/references/section-types.md) | Content classification per page range |
+| Progress tracker | [`../../state/PROGRESS.md`](.agents/state/PROGRESS.md) | Per-batch completion status |
+| Rails | [`rails.md`](.agents/skills/spec-extraction/references/rails.md) | 8 immutable quality guardrails |
+| Extraction skill | [`../../extraction/SKILL.md`](.agents/skills/extraction/SKILL.md) | Extraction stage definition |
+| Refinement skill | [`../../refinement/SKILL.md`](.agents/skills/refinement/SKILL.md) | Post-extraction formatting rules |
+| Agent definitions | [`../../../agent/`](.agents/agent/) | 9 agent role definitions |
+| Pipeline master | [`../../../MASTER.md`](.agents/MASTER.md) | Full launch protocol and pipeline stages |
 
 ## How to Regenerate Prompts
 
@@ -235,7 +235,7 @@ Before you regenerate prompts, check these items:
    - The exact output file path (for example, `ste-code/extracted/w001-p0001-0004.md`)
    - The instruction: "Extract ALL content. Do not summarize. Output ONLY the markdown file."
 
-3. Update the worker grid at [`worker-grid.md`](worker-grid.md) with the new
+3. Update the worker grid at [`worker-grid.md`](.agents/skills/spec-extraction/references/worker-grid.md) with the new
    page-to-worker mapping.
 
 4. Update [`../SKILL.md`](../SKILL.md) to use the new worker count.
@@ -321,7 +321,7 @@ This is acceptable. A 2-page worker has zero truncation risk.
 ### Case 2: Dictionary Entry Spans a Page Boundary
 
 A dictionary entry that starts on page 240 and continues on page 241 will be split
-across v3 workers W061 and W062. The merge stage (see [`../../merging/SKILL.md`](../../merging/SKILL.md))
+across v3 workers W061 and W062. The merge stage (see [`../../merging/SKILL.md`](.agents/skills/merging/SKILL.md))
 handles this by concatenating adjacent files and removing duplicate entry headers.
 
 ### Case 3: Worker Output Is Empty or Corrupt
