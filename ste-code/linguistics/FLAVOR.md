@@ -78,6 +78,49 @@ python3 ste-code/linguistics/ste_code_lint.py sample-doc.md --flavor FLAVOR-1.0.
 | Version | Base | Changes |
 |---------|------|---------|
 | STANDARD-1.0.0 | — | 51 rules, 22 categories, 5 level prompts |
-| FLAVOR-1.0.0 | STANDARD-1.0.0 | 12 linguistic checking layers |
+| FLAVOR-1.0.0 | STANDARD-1.0.0 | 12 linguistic checking layers + 18 workflows |
 
 Future versions: MINIMAL-PAIRS-1.0.0 (corpus), DIACHRONIC-1.0.0 (temporal), GENERATIVE-1.0.0 (LLM contract).
+
+## Precedence Stack
+
+When multiple layers flag the same sentence, resolve in this order:
+
+```
+truth/identifiers
+  > safety (Warning/Prohibition)
+    > reference (SRR + discourse)
+      > negation
+        > intent/form
+          > semantic roles/domains
+            > verb frames
+              > quantifiers
+                > structure (scope)
+                  > register fit
+                    > consistency
+                      > brevity
+```
+
+## Master Roadmap
+
+See [`docs/roadmap/ROADMAP.md`](../../docs/roadmap/ROADMAP.md) for the 6-phase implementation plan:
+
+| Phase | Name | Deliverable |
+|:-----:|------|-------------|
+| 0 | State Reconciliation | STATE-RECONCILIATION.md |
+| 1 | Grounding | GROUNDING-REPORT.md |
+| 2 | Self-Conformance | SELF-CONFORMANCE.md + coverage metric |
+| 3 | Complete Specification | discourse.json + registers.json + specs |
+| 4 | Benchmark Integration | BENCHMARK-RESULTS.md |
+| 5 | Harden Checker | 5 linter fixes |
+| 6 | Living Standard Loop | Continuous graduation + lifecycle |
+
+## Exit Criteria
+
+- [ ] Phase 0 reconciliation committed
+- [ ] Grounding report: 0 unresolved contradictions
+- [ ] Coverage metric published; tracked per version
+- [ ] All 3 spec stores complete
+- [ ] Benchmark A/B/C run; minimal-pairs category live
+- [ ] Linter hardened through all 5 fixes
+- [ ] Graduation + lifecycle loop operational
