@@ -104,11 +104,8 @@ cat > /tmp/worker-prompt.txt << 'EOF'
 EOF
 
 # Launch via oneshot wrapper (session_db=None, no tools, no file leaks)
-~/.hermes/hermes-agent/venv/bin/python3 \
-  ~/.hermes/skills/hermes-shell-hooks/templates/hermes-oneshot-wrapper.py \
-  /tmp/worker-prompt.txt \
-  --model deepseek-v4-pro \
-  > output-file.json 2>&1
+# Launch via local tools launcher (auto-detects venv)
+.agents/tools/launch-worker.sh prompt.txt deepseek-v4-pro > output-file.json 2>&1
 ```
 
 - **Always** use the oneshot wrapper — NOT `hermes -z --yolo` via subprocess

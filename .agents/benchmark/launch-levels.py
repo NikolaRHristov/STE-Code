@@ -8,8 +8,10 @@ OUT = os.path.join(PROJECT, ".agents", "rewrites")
 MODEL = "deepseek-v4-pro"
 
 # Paths from hermes-background-workers skill
+# Local tools (distributed with the project)
+TOOLS_DIR = os.path.join(PROJECT, ".agents", "tools")
 VENV_PYTHON = os.path.expanduser("~/.hermes/hermes-agent/venv/bin/python3")
-WRAPPER = os.path.expanduser("~/.hermes/skills/hermes-shell-hooks/templates/hermes-oneshot-wrapper.py")
+WRAPPER = os.path.join(TOOLS_DIR, "hermes-oneshot-wrapper.py")
 
 if not os.path.exists(WRAPPER):
     print(f"ERROR: Wrapper not found at {WRAPPER}")

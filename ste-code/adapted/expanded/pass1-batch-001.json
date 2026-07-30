@@ -6,37 +6,37 @@
     {
       "rule": "rule-1.1",
       "principle": "P1",
-      "non_ste_example": "Utilize the Logger module to record error events.",
-      "ste_example": "Use the Logger module to record error events.",
-      "explanation": "P1 - \"utilize\" is not an approved word in the controlled terminology. Use \"use\" instead per the synonym table. The word \"Logger\" is a code-domain technical noun (category 6) and is allowed."
+      "non_ste_example": "Display the stack trace in the terminal after the build fails.",
+      "ste_example": "Show the stack trace in the terminal after the build fails.",
+      "explanation": "'Display' is not approved in the STE-Code controlled terminology. The approved synonym is 'show' (see synonym table: show → NOT display, render, present). This follows P1 which requires words approved in the dictionary. P14 also applies: use American English spelling for approved words."
     },
     {
       "rule": "rule-1.1",
       "principle": "P5",
-      "non_ste_example": "Install the frontend framework library before you build the user interface.",
-      "ste_example": "Install React before you build the user interface.",
-      "explanation": "P5 - \"frontend framework library\" is a descriptive phrase. Use the code-domain technical noun \"React\" (category 2: frameworks and runtimes) for the specific technology."
+      "non_ste_example": "Install the container orchestration platform before you deploy the backend services.",
+      "ste_example": "Install Kubernetes before you deploy the backend services.",
+      "explanation": "'Kubernetes' is a code-domain technical noun — it names a specific software tool in the container orchestration subject field. P5 allows technical code nouns (keywords, frameworks, tools) directly in STE-Code documentation. The descriptive phrase 'container orchestration platform' is longer, less precise, and unnecessary when the standard technical noun exists. P8 and P9 also apply: prefer short, well-known technical nouns."
     },
     {
       "rule": "rule-1.1",
       "principle": "P12",
-      "non_ste_example": "Perform an authentication operation on the client before you process the payment.",
-      "ste_example": "Authenticate the client before you process the payment.",
-      "explanation": "P12 - \"perform an authentication operation\" uses a general verb with a noun phrase. Use the code-domain technical verb \"authenticate\" (category 3: application operations) for the specific operation."
+      "non_ste_example": "Do a minification of the CSS bundle before you send it to the CDN.",
+      "ste_example": "Minify the CSS bundle before you send it to the CDN.",
+      "explanation": "'Minify' is a code-domain technical verb that describes a specific build process (removing whitespace and shortening identifiers). P12 allows technical verbs in STE-Code documentation. The non-STE version turns the technical verb into a noun ('do a minification of'), which violates P13 — do not use technical verbs as nouns. Use the technical verb in its verb form."
     },
     {
       "rule": "rule-1.1",
       "principle": "P6",
-      "non_ste_example": "Send a query to the data query language endpoint to get the user profile.",
-      "ste_example": "Send a query to the GraphQL endpoint to get the user profile.",
-      "explanation": "P6 - \"data query language endpoint\" is a description instead of a technical noun. Use the code-domain technical noun \"GraphQL\" (category 19: network and protocol terms) for the specific technology. Non-approved words are allowed only as technical nouns."
+      "non_ste_example": "The logging module transmits trace data to the application performance monitoring service.",
+      "ste_example": "The logging module sends trace data to Datadog.",
+      "explanation": "'Datadog' is not in the STE-Code controlled terminology but it is a code-domain technical noun — the name of a specific observability tool. P6 allows non-approved words when they are code-domain technical nouns. The STE version also replaces 'transmits' with 'sends' (P1: approved synonym per the table: send → NOT transmit, dispatch). The long descriptive phrase is replaced by the precise technical noun, following P9 (prefer short, clear technical nouns)."
     },
     {
       "rule": "rule-1.1",
-      "principle": "P1+P6",
-      "non_ste_example": "Leverage the connection manager component to acquire a database handle for the migration.",
-      "ste_example": "Use the DatabasePool to get a connection for the migration.",
-      "explanation": "P1 - \"leverage\" is not an approved word (use \"use\" per the synonym table). P1 - \"acquire\" is not an approved word (use \"get\" per the synonym table). P5+P6 - \"connection manager component\" is a description; use the code-domain technical noun \"DatabasePool\" (category 6: modules, classes, and services)."
+      "principle": "P1",
+      "non_ste_example": "Commence the relational database service before you initialize the web application.",
+      "ste_example": "Start PostgreSQL before you start the web application.",
+      "explanation": "Two P1 violations corrected. First, 'commence' and 'initialize' are not approved — the approved synonym is 'start' (see synonym table: start → NOT initiate, commence). Second, P5 allows the code-domain technical noun 'PostgreSQL' instead of the vague descriptive phrase 'relational database service.' The STE version uses precise technical nouns with approved verbs."
     }
   ]
 }
