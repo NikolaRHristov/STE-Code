@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 1,
+  "rule_file": "a-sec1-rule1.1",
+  "entries": [
+    {
+      "rule": "rule-1.1",
+      "principle": "P1",
+      "non_ste_example": "Utilize the Logger module to record error events.",
+      "ste_example": "Use the Logger module to record error events.",
+      "explanation": "P1 - \"utilize\" is not an approved word in the controlled terminology. Use \"use\" instead per the synonym table. The word \"Logger\" is a code-domain technical noun (category 6) and is allowed."
+    },
+    {
+      "rule": "rule-1.1",
+      "principle": "P5",
+      "non_ste_example": "Install the frontend framework library before you build the user interface.",
+      "ste_example": "Install React before you build the user interface.",
+      "explanation": "P5 - \"frontend framework library\" is a descriptive phrase. Use the code-domain technical noun \"React\" (category 2: frameworks and runtimes) for the specific technology."
+    },
+    {
+      "rule": "rule-1.1",
+      "principle": "P12",
+      "non_ste_example": "Perform an authentication operation on the client before you process the payment.",
+      "ste_example": "Authenticate the client before you process the payment.",
+      "explanation": "P12 - \"perform an authentication operation\" uses a general verb with a noun phrase. Use the code-domain technical verb \"authenticate\" (category 3: application operations) for the specific operation."
+    },
+    {
+      "rule": "rule-1.1",
+      "principle": "P6",
+      "non_ste_example": "Send a query to the data query language endpoint to get the user profile.",
+      "ste_example": "Send a query to the GraphQL endpoint to get the user profile.",
+      "explanation": "P6 - \"data query language endpoint\" is a description instead of a technical noun. Use the code-domain technical noun \"GraphQL\" (category 19: network and protocol terms) for the specific technology. Non-approved words are allowed only as technical nouns."
+    },
+    {
+      "rule": "rule-1.1",
+      "principle": "P1+P6",
+      "non_ste_example": "Leverage the connection manager component to acquire a database handle for the migration.",
+      "ste_example": "Use the DatabasePool to get a connection for the migration.",
+      "explanation": "P1 - \"leverage\" is not an approved word (use \"use\" per the synonym table). P1 - \"acquire\" is not an approved word (use \"get\" per the synonym table). P5+P6 - \"connection manager component\" is a description; use the code-domain technical noun \"DatabasePool\" (category 6: modules, classes, and services)."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 2,
+  "rule_file": "a-sec1-rule1.10",
+  "entries": [
+    {
+      "rule": "rule-1.10",
+      "principle": "P10",
+      "non_ste_example": "You must grok the async pipeline before you change the scheduler.",
+      "ste_example": "You must understand the async pipeline before you change the scheduler.",
+      "explanation": "\"Grok\" is hacker jargon from Robert Heinlein's 1961 novel Stranger in a Strange Land. It means \"to understand deeply and intuitively.\" Its meaning is not clear to developers who are not familiar with hacker culture, to junior developers, or to non-native English speakers. The STE version uses the approved verb \"understand.\" This follows Principle P10: no slang, jargon, or regional terms."
+    },
+    {
+      "rule": "rule-1.10",
+      "principle": "P10",
+      "non_ste_example": "I spent the morning yak shaving before I could start the main task.",
+      "ste_example": "I did necessary preparation tasks before I could start the main task.",
+      "explanation": "\"Yak shaving\" is programmer slang for doing a chain of seemingly unrelated tasks that must be completed before the main task. The term originated from a Ren & Stimpy episode and was popularized at the MIT AI Lab. Its meaning is not clear to developers outside specific subcultures or to non-native English speakers. The STE version uses the approved verb \"do\" and explicit description \"necessary preparation tasks.\" This follows Principle P10."
+    },
+    {
+      "rule": "rule-1.10",
+      "principle": "P10",
+      "non_ste_example": "The code review became bikeshedding about the variable names.",
+      "ste_example": "The code review spent too much time on minor details such as variable names.",
+      "explanation": "\"Bikeshedding\" (also known as Parkinson's Law of Triviality) is programmer jargon for spending disproportionate time on trivial details while ignoring more important issues. The term comes from C. Northcote Parkinson's 1957 observation that a committee approved a nuclear reactor in minutes but debated a bicycle shed for hours. Its meaning is not clear to developers unfamiliar with this cultural reference. The STE version uses explicit language to describe the problem. This follows Principle P10."
+    },
+    {
+      "rule": "rule-1.10",
+      "principle": "P10",
+      "non_ste_example": "The module includes cargo cult programming from an old tutorial.",
+      "ste_example": "The module includes code that was copied without understanding from an old tutorial.",
+      "explanation": "\"Cargo cult programming\" is programmer jargon for copying code patterns without understanding why they work. The term originates from Richard Feynman's 1974 Caltech commencement speech about cargo cults in Melanesia. Its meaning is not clear to developers outside specific communities, junior developers, or non-native English speakers. The STE version uses explicit description: \"code that was copied without understanding.\" This follows Principle P10."
+    },
+    {
+      "rule": "rule-1.10",
+      "principle": "P10",
+      "non_ste_example": "The heisenbug disappears when you add log statements to the function.",
+      "ste_example": "The defect disappears when you add log statements to the function.",
+      "explanation": "\"Heisenbug\" is programmer jargon for a software defect that changes its behavior or disappears when you try to observe or debug it. The term is a play on Werner Heisenberg's uncertainty principle in quantum mechanics. Its meaning is not clear to developers who are not familiar with physics references in hacker culture, to junior developers, or to non-native English speakers. The STE version uses the well-known technical noun \"defect.\" This follows Principle P10."
+    }
+  ]
+}

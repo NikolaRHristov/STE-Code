@@ -1,6 +1,3 @@
-Generated 5 new STE/non-STE code example pairs for Rule 1.11 (P11 — consistent technical nouns). Here is the output:
-
-```json
 {
   "pass": "rule-examples",
   "batch": 3,
@@ -9,54 +6,37 @@ Generated 5 new STE/non-STE code example pairs for Rule 1.11 (P11 — consistent
     {
       "rule": "rule-1.11",
       "principle": "P11",
-      "non_ste_example": "1. Connect to the users table to get customer data.\n2. Run a SELECT query on the accounts table.\n3. Update the customer_records table with the new email address.",
-      "ste_example": "1. Connect to the users table to get customer data.\n2. Run a SELECT query on the users table.\n3. Update the users table with the new email address.",
-      "explanation": "...users table / accounts table / customer_records table → users table (consistent)"
+      "non_ste_example": "1. Read the DATABASE_URL from the environment file.\n2. Use the DB_CONNECTION_STRING to connect to the database.\n3. The POSTGRES_URL must include the host, port, and database name.",
+      "ste_example": "1. Read the DATABASE_URL from the environment file.\n2. Use the DATABASE_URL to connect to the database.\n3. The DATABASE_URL must include the host, port, and database name.",
+      "explanation": "DATABASE_URL / DB_CONNECTION_STRING / POSTGRES_URL → DATABASE_URL (consistent technical noun per P11). Three different names refer to the same environment variable. The reader cannot tell if they are the same or different variables. Use the approved name DATABASE_URL in all three sentences."
     },
     {
       "rule": "rule-1.11",
       "principle": "P11",
-      "non_ste_example": "1. Set the redis_host value in the config file.\n2. The cache_server must point to a valid IP address.\n3. Restart the redis_server after you change the configuration.",
-      "ste_example": "1. Set the redis_host value in the config file.\n2. The redis_host must point to a valid IP address.\n3. Restart the redis_host after you change the configuration.",
-      "explanation": "...redis_host / cache_server / redis_server → redis_host (consistent)"
+      "non_ste_example": "1. Call the calculateTotal function with the order items.\n2. The computeSum method adds all line items.\n3. Return the result from the getGrandTotal function.",
+      "ste_example": "1. Call the calculateTotal function with the order items.\n2. The calculateTotal function adds all line items.\n3. Return the result from the calculateTotal function.",
+      "explanation": "calculateTotal / computeSum / getGrandTotal → calculateTotal (consistent technical noun per P11). Three different function names refer to the same operation in the codebase. The STE version uses the single approved name calculateTotal consistently, the same way the spec example uses actuator."
     },
     {
       "rule": "rule-1.11",
       "principle": "P11",
-      "non_ste_example": "1. Check out the main branch before you start work.\n2. Merge your feature into the master branch.\n3. The production branch must stay stable at all times.",
-      "ste_example": "1. Check out the main branch before you start work.\n2. Merge your feature into the main branch.\n3. The main branch must stay stable at all times.",
-      "explanation": "...main branch / master branch / production branch → main branch (consistent)"
+      "non_ste_example": "1. Add the connection settings to the [database] section.\n2. The [db_settings] block must contain the host and port.\n3. Restart the service after you change the [postgresql] section.",
+      "ste_example": "1. Add the connection settings to the [database] section.\n2. The [database] section must contain the host and port.\n3. Restart the service after you change the [database] section.",
+      "explanation": "[database] / [db_settings] / [postgresql] → [database] (consistent technical noun per P11). Three different section names in a configuration file refer to the same configuration block. The STE version uses [database] in all three steps."
     },
     {
       "rule": "rule-1.11",
       "principle": "P11",
-      "non_ste_example": "1. The API returns ERR_AUTH_001 when the credentials are invalid.\n2. Handle the AUTHENTICATION_ERROR in the catch block.\n3. Show the user a message when the LOGIN_FAILED code occurs.",
-      "ste_example": "1. The API returns ERR_AUTH_001 when the credentials are invalid.\n2. Handle the ERR_AUTH_001 error in the catch block.\n3. Show the user a message when the ERR_AUTH_001 error occurs.",
-      "explanation": "...ERR_AUTH_001 / AUTHENTICATION_ERROR / LOGIN_FAILED → ERR_AUTH_001 (consistent)"
+      "non_ste_example": "1. Build the web_app container with the updated Dockerfile.\n2. Push the frontend_container to the container registry.\n3. Restart the nginx_server after the deployment completes.",
+      "ste_example": "1. Build the web_app container with the updated Dockerfile.\n2. Push the web_app container to the container registry.\n3. Restart the web_app container after the deployment completes.",
+      "explanation": "web_app / frontend_container / nginx_server → web_app (consistent technical noun per P11). Three different container names refer to the same deployed service. The STE version uses the approved name web_app in all three sentences."
     },
     {
       "rule": "rule-1.11",
       "principle": "P11",
-      "non_ste_example": "1. Import the payment_gateway module into your application.\n2. Call the processTransaction method on the billing_service.\n3. The transaction_handler sends a confirmation to the user.",
-      "ste_example": "1. Import the payment_gateway module into your application.\n2. Call the processTransaction method on the payment_gateway.\n3. The payment_gateway sends a confirmation to the user.",
-      "explanation": "...payment_gateway / billing_service / transaction_handler → payment_gateway (consistent)"
+      "non_ste_example": "1. Use the --output-dir flag to set the build destination.\n2. The --destination argument accepts a relative or an absolute path.\n3. The tool writes all generated files to the --target-folder.",
+      "ste_example": "1. Use the --output-dir flag to set the build destination.\n2. The --output-dir flag accepts a relative or an absolute path.\n3. The tool writes all generated files to the --output-dir directory.",
+      "explanation": "--output-dir / --destination / --target-folder → --output-dir (consistent technical noun per P11). Three different CLI flag names refer to the same option. The STE version uses the approved flag --output-dir in all three sentences."
     }
   ]
 }
-```
-
-Summary of the 5 new examples — each covers a different code subdomain:
-
-| # | Domain | Inconsistent terms (non-STE) | Consistent term (STE) |
-|---|--------|------------------------------|-----------------------|
-| 1 | Database schema | users table, accounts table, customer_records table | users table |
-| 2 | Configuration keys | redis_host, cache_server, redis_server | redis_host |
-| 3 | Version control | main branch, master branch, production branch | main branch |
-| 4 | Error codes | ERR_AUTH_001, AUTHENTICATION_ERROR, LOGIN_FAILED | ERR_AUTH_001 |
-| 5 | Module imports | payment_gateway, billing_service, transaction_handler | payment_gateway |
-
-All examples:
-- Follow the synonym table (use → NOT utilize, set → NOT configure, check → NOT verify, show → NOT display, etc.)
-- Contain no blacklisted phrases
-- Mirror the original aerospace pattern: three different names → one consistent approved name
-- Reference principle P11 (one term per concept)
