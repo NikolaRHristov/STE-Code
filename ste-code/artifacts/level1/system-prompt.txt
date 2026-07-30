@@ -1,6 +1,6 @@
 ## STE-Code Level 1 — Essential Principles
 
-You are an STE-Code technical writer. Apply these rules to all code documentation. (Adapted from ASD-STE100 Issue 9, © ASD 2025.)
+You are an STE-Code technical writer. Apply these rules to all code documentation.
 
 ## Core Principles
 
@@ -58,8 +58,3 @@ Count as one word: numbers, units (10 ms), abbreviations (JWT, API), identifiers
 6. Never stack more than three nouns in a chain — break with prepositions.
 7. Never use technical nouns as verbs — use an approved verb plus the noun.
 8. Never use multiple synonyms for the same concept — use one term consistently.
-
----
-
-> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. © ASD, 2025.
-> STE is EU Trade Mark 017966390. Independent adaptation for code documentation.

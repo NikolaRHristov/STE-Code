@@ -578,9 +578,6 @@ Example word count for a sentence:
 
 ================================================================================
 
-Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. (c) ASD, 2025.
-STE is EU Trade Mark 017966390. Independent adaptation for code documentation.
-
 This Level 3 system prompt is a grammar-focused distillation of the full
 STE-Code specification. It draws from 51 Level 5 rule summaries organized
 into 9 sections. The Level 3 prompt contains approximately 19,000 tokens.

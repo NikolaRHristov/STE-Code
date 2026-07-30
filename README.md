@@ -136,16 +136,6 @@ Nine specialized agents orchestrated 109 parallel workers. The adaptation replac
 
 ---
 
-## Credits
-
-STE-Code is an independent adaptation of **[ASD-STE100 Issue 9](https://asd-ste100.org)** (January 2025), published by the AeroSpace and Defence Industries Association of Europe (ASD), Brussels, Belgium.
-
-> (c) ASD, 2025 — All rights reserved.
-
-STE-Code is not endorsed by or affiliated with ASD. **STE** is a European Union Trade Mark (No. 017966390).
-
----
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
@@ -161,3 +151,77 @@ MIT. See [LICENSE](LICENSE).
   note         = {Adapted from ASD-STE100 Issue 9 (January 2025)}
 }
 ```
+
+## Credits & References
+
+STE-Code stands on decades of controlled-language research, documentation
+theory, and verification tooling.
+
+### Primary Standard
+
+- **ASD-STE100 Simplified Technical English, Issue 9 (January 2025)** —
+  the foundational standard STE-Code adapts to the code domain. Owned by
+  **ASD — Aerospace, Security and Defence Industries Association of Europe**,
+  Brussels; maintained by the **Simplified Technical English Maintenance
+  Group (STEMG)**. Copyright and trademark of ASD.
+  <https://www.asd-ste100.org/>
+
+- **AECMA / AIA Simplified English lineage** — STE's origin: developed in the
+  late 1970s–1980s by the **European Association of Aerospace Industries
+  (AECMA, now ASD)** with the **Aerospace Industries Association of America
+  (AIA)**, at the request of the **Association of European Airlines (AEA)**.
+  Working group founded 30 June 1983, Amsterdam; first Guide release 1986;
+  became ASD-STE100 specification in 2005 and an international standard in
+  2025. Historical basis for STE-Code's core principle: enforceability
+  determines survival (Caterpillar Fundamental English, unenforced, died 1982).
+
+### Controlled Natural Language Theory
+
+- **Tobias Kuhn** — *A Survey and Classification of Controlled Natural
+  Languages* (Computational Linguistics, 2014; 636+ citations). Source of
+  the PENS classification (Precision, Expressiveness, Naturalness,
+  Simplicity) used to profile STE-Code rules.
+  <https://aclanthology.org/J14-1005.pdf>
+
+- **Norbert E. Fuchs & Rolf Schwitter** (University of Zurich) — *Attempto
+  Controlled English (ACE)* (1996). Precedent for machine-processable
+  controlled English and explicit quoting conventions for the use–mention
+  distinction.
+  <https://attempto.ifi.uzh.ch/>
+
+- **Rimay CNL research** — *On systematically building a controlled natural
+  language for functional requirements* (PubMed). Source of the coverage
+  methodology (88% of 460 real statements expressible).
+  <https://pubmed.ncbi.nlm.nih.gov/34776756/>
+
+### Documentation & Readability Research
+
+- **John M. Carroll** — *Minimalism* tradition in technical documentation
+  (ACM SIGDOC). Learning-theoretic basis for register stratification: users
+  act first and read at the moment of need.
+  <https://dl.acm.org/doi/10.1145/296336.296362>
+
+### Verification & Executable Documentation Tooling
+
+- **asciidoctest** (PyPI) — *Verifiable, stateful, and interactive
+  documentation with AsciiDoc*. Reference implementation for code-block
+  verification.
+  <https://libraries.io/pypi/asciidoctest>
+
+### Adjacent Standards & Catalogues
+
+- **Google Style Guides** — precedent for public, per-language style standards.
+  <https://google.github.io/styleguide/>
+- **Kristories/awesome-guidelines** — community catalogue of coding standards.
+  <https://github.com/Kristories/awesome-guidelines>
+- **github/codeql-coding-standards** — precedent for machine-enforceable
+  standards as executable queries.
+  <https://github.com/github/codeql-coding-standards>
+
+### Intellectual-Property Note
+
+ASD-STE100 is a copyright and trademark of ASD, Brussels. STE-Code adapts
+its *principles and rule categories* to the software domain; it does not
+reproduce the standard's dictionary or rule text. Users requiring the
+authoritative aerospace standard should obtain Issue 9 directly from ASD
+(free of charge via the official form): <https://www.asd-ste100.org/>.

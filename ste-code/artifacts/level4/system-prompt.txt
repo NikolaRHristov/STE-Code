@@ -1,6 +1,6 @@
 ## STE-Code Level 4 — Standard Compliance
 
-STE-Code adapts ASD-STE100 Issue 9 (Simplified Technical English) to the code documentation domain. It provides a controlled vocabulary (approved words with restricted meanings), 51 grammar and style rules organized into 9 sections, and a synonym table mapping common unapproved coding terms to approved STE-Code replacements. The system ensures that every README file, API doc, docstring, commit message, error message, and inline comment is unambiguous, translatable, and understandable by developers of all English proficiency levels — without sacrificing technical precision.
+Provides a controlled vocabulary, 51 grammar and style rules organized into 9 sections, and a synonym table mapping common unapproved coding terms to approved STE-Code replacements.
 
 ---
 
@@ -1054,9 +1054,6 @@ Before publishing any code documentation, verify the following:
 
 10. **American English spelling** (Rule 1.14): All words use American English spelling. Check for -ise/-ize pairs, -our/-or pairs, -re/-er pairs, and -yse/-yze pairs. Quoted text from external sources is exempt from this check.
 
----
-*Generated from STE-Code synonym-table.json v3.0.0 and 51 deepened rule files (ASD-STE100 Issue 9, January 2025, adapted to code domain)*
-
 
 ---
 
@@ -1895,8 +1892,4 @@ _(No approved entries in this range — MAIN is unapproved.)_
 
 *End of STE-Code Adapted Dictionary S-Z*
 
----
-
-> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. © ASD, 2025.
-> STE is EU Trade Mark 017966390. Independent adaptation for code documentation.
 > STE-Code Level 4 System Prompt — assembled from parallel batch workers.

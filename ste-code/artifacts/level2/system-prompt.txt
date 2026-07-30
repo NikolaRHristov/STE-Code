@@ -348,9 +348,6 @@ Error messages:
 
 ================================================================================
 
-Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. (c) ASD, 2025.
-STE is EU Trade Mark 017966390. Independent adaptation for code documentation.
-
 This Level 2 system prompt is a compact compliance layer distilled from the
 full STE-Code specification (51 rules, 9 sections). For section-by-section
 grammar breakdowns with full Non-STE/STE example pairs, consult the Level 3
