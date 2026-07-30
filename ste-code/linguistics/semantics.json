@@ -1,0 +1,203 @@
+{
+  "version": "FLAVOR-1.0.0",
+  "base_standard": "STANDARD-1.0.0",
+  "description": "Semantic roles, collision tables, epistemic markers, and quantifier precision for the STE-Code linguistic flavor.",
+
+  "semantic_roles": {
+    "description": "Every approved verb maps to a role class. Role violations are the most common STE-Code error class.",
+    "classes": {
+      "Action": {
+        "description": "Verbs that name an operation. Permitted in imperative position. Prohibited as nouns.",
+        "examples": ["deploy", "build", "compile", "test", "run", "execute", "install", "configure", "validate", "commit", "push", "merge", "rollback", "scale", "migrate", "provision"],
+        "rule": "Action terms must not appear as nouns. 'The deploy takes five minutes' → 'The deployment takes five minutes.'"
+      },
+      "Result": {
+        "description": "Nouns naming the outcome of an Action. Permitted as nouns. The canonical form for what an Action produces.",
+        "examples": ["deployment", "build (n)", "compilation", "test (n)", "execution", "installation", "configuration", "validation", "commit (n)", "migration (n)"],
+        "rule": "Use Result form when naming the output. 'After the build completes' → 'After the build process completes' or restructure."
+      },
+      "Entity": {
+        "description": "Nouns naming system components, data structures, or concepts. No Action/Result ambiguity.",
+        "examples": ["server", "database", "endpoint", "token", "request", "response", "cache", "queue", "log (n)", "config (n)"],
+        "rule": "Entities must not be verbed. 'Database the records' → 'Store the records in the database.'"
+      },
+      "Property": {
+        "description": "Adjectives or states describing Entities. Used attributively or predicatively.",
+        "examples": ["available", "ready", "active", "pending", "failed", "degraded", "healthy", "deprecated"],
+        "rule": "Properties are technical adjectives. Comparative forms prohibited — use specific state names."
+      }
+    },
+    "term_table": {
+      "deploy": {"class": "Action", "result": "deployment", "entity": null, "rule_refs": ["a-sec1-rule1.7.md", "a-sec1-rule1.13.md"]},
+      "build": {"class": "Action", "result": "build (n)", "entity": null, "rule_refs": ["a-sec1-rule1.7.md"]},
+      "compile": {"class": "Action", "result": "compilation", "entity": null, "rule_refs": ["a-sec1-rule1.9.md"]},
+      "test": {"class": "Action", "result": "test (n)", "entity": "test suite", "rule_refs": ["a-sec5-rule5.3.md"]},
+      "run": {"class": "Action", "result": "run (n)", "entity": null, "rule_refs": ["a-sec1-rule1.3.md"]},
+      "install": {"class": "Action", "result": "installation", "entity": null, "rule_refs": ["a-sec5-rule5.1.md"]},
+      "configure": {"class": "Action", "result": "configuration", "entity": "config file", "rule_refs": ["a-sec1-rule1.9.md"]},
+      "validate": {"class": "Action", "result": "validation", "entity": "validator", "rule_refs": ["a-sec3-rule3.7.md"]},
+      "commit": {"class": "Action", "result": "commit (n)", "entity": null, "rule_refs": ["a-sec1-rule1.7.md"]},
+      "migrate": {"class": "Action", "result": "migration", "entity": null, "rule_refs": ["a-sec5-rule5.4.md"]}
+    }
+  },
+
+  "single_referent_rule": {
+    "description": "Every noun phrase must resolve to exactly one entity within its scope. When a term names different things in different sections, the section heading provides the qualifier.",
+    "precedence": "Applied AFTER semantic role check, BEFORE scope bracketing.",
+    "qualification_rules": [
+      "When a head noun appears in multiple contexts, qualify on first use per section: 'the deployment pipeline' vs 'the deployment artifact'.",
+      "Qualifier resets at section boundary (### heading or higher).",
+      "Pronouns (it, they, this, these) must resolve within one sentence. Cross-sentence pronouns → violation."
+    ],
+    "domain_collisions": {
+      "description": "Head nouns that name different entities depending on context. Each entry lists the contexts and their qualifier members.",
+      "entries": {
+        "deployment": {
+          "contexts": [
+            {"context": "CI/CD pipeline", "qualifier": "pipeline deployment", "meaning": "the act of deploying"},
+            {"context": "Infrastructure", "qualifier": "deployment resource", "meaning": "the Kubernetes Deployment object"},
+            {"context": "Artifact", "qualifier": "deployment artifact", "meaning": "the built output"}
+          ],
+          "source": "a-sec1-rule1.3.md, ste-base-003"
+        },
+        "build": {
+          "contexts": [
+            {"context": "Process", "qualifier": "build process", "meaning": "the act of building"},
+            {"context": "Artifact", "qualifier": "build artifact", "meaning": "the compiled output"},
+            {"context": "CI", "qualifier": "build pipeline", "meaning": "the CI job that runs builds"}
+          ],
+          "source": "a-sec1-rule1.7.md"
+        },
+        "config": {
+          "contexts": [
+            {"context": "File", "qualifier": "config file", "meaning": "the configuration document"},
+            {"context": "Values", "qualifier": "configuration values", "meaning": "the settings themselves"},
+            {"context": "System", "qualifier": "configuration system", "meaning": "the subsystem that manages configs"}
+          ],
+          "source": "a-sec1-rule1.9.md"
+        },
+        "service": {
+          "contexts": [
+            {"context": "Microservice", "qualifier": "service instance", "meaning": "a running application"},
+            {"context": "API", "qualifier": "service endpoint", "meaning": "the network-accessible interface"},
+            {"context": "OS", "qualifier": "system service", "meaning": "an OS-level daemon"}
+          ],
+          "source": "a-sec2-rule2.1.md, sloppy-service-names"
+        },
+        "token": {
+          "contexts": [
+            {"context": "Auth", "qualifier": "auth token", "meaning": "authentication credential"},
+            {"context": "Parser", "qualifier": "syntax token", "meaning": "lexer output"},
+            {"context": "API", "qualifier": "API token", "meaning": "rate-limited access key"}
+          ],
+          "source": "a-sec1-rule1.3.md"
+        },
+        "cache": {
+          "contexts": [
+            {"context": "Storage", "qualifier": "cache store", "meaning": "the caching system"},
+            {"context": "Data", "qualifier": "cached data", "meaning": "the cached content"},
+            {"context": "Command", "qualifier": "cache command", "meaning": "the CLI operation"}
+          ],
+          "source": "a-sec1-rule1.2.md"
+        },
+        "log": {
+          "contexts": [
+            {"context": "Output", "qualifier": "log entry", "meaning": "a single log line"},
+            {"context": "File", "qualifier": "log file", "meaning": "the file containing logs"},
+            {"context": "System", "qualifier": "logging system", "meaning": "the logging infrastructure"}
+          ],
+          "source": "a-sec1-rule1.2.md"
+        },
+        "test": {
+          "contexts": [
+            {"context": "Verification", "qualifier": "test case", "meaning": "a single test"},
+            {"context": "Suite", "qualifier": "test suite", "meaning": "the collection of tests"},
+            {"context": "Action", "qualifier": "run tests", "meaning": "the act of testing"}
+          ],
+          "source": "a-sec5-rule5.3.md, ste-base-001"
+        },
+        "request": {
+          "contexts": [
+            {"context": "HTTP", "qualifier": "HTTP request", "meaning": "an HTTP message"},
+            {"context": "API", "qualifier": "API request", "meaning": "a call to an endpoint"},
+            {"context": "Queue", "qualifier": "work request", "meaning": "a queued job"}
+          ],
+          "source": "a-sec6-rule6.2.md"
+        },
+        "model": {
+          "contexts": [
+            {"context": "ML", "qualifier": "ML model", "meaning": "trained machine learning model"},
+            {"context": "ORM", "qualifier": "data model", "meaning": "database schema representation"},
+            {"context": "Architecture", "qualifier": "domain model", "meaning": "business logic abstraction"}
+          ],
+          "source": "a-sec1-rule1.3.md, [DOMAIN: ML]"
+        }
+      }
+    }
+  },
+
+  "epistemic": {
+    "description": "Every performance, reliability, or scale claim must be classified as Specified, Measured, or Expected.",
+    "classes": {
+      "Specified": {
+        "marker": "none (default)",
+        "form": "declarative present tense",
+        "example": "The endpoint returns a JSON object.",
+        "rule": "Permitted for functional behavior. Forbidden for performance/reliability/scale claims."
+      },
+      "Measured": {
+        "marker": "explicit evidence clause",
+        "form": "Claim + measurement + date + context",
+        "example": "p99 latency is 87 ms (load test, 2026-07, 10k rps).",
+        "rule": "Required for all performance claims. Must carry date or version. Expires after two major versions."
+      },
+      "Expected": {
+        "marker": "is expected to / is designed to",
+        "form": "Intent marker + specification",
+        "example": "The cache is designed to hold 10,000 entries.",
+        "rule": "Use for design targets. 'Should' is banned — use 'is designed to' or 'is expected to'."
+      }
+    },
+    "forbidden_modals": ["will (for system behavior)", "should", "may (for system behavior)", "might", "could (for system behavior)"],
+    "permitted_modals": {
+      "may": "User optionality only: 'You may omit the token.'",
+      "must": "Requirements and constraints",
+      "can": "Capability statements: 'The system can process 1000 requests per second.' (requires Measured if performance claim)"
+    },
+    "violation_examples": {
+      "bare_performance": {"bad": "The API is fast.", "good": "The API responds with p99 latency of 87 ms (load test, 2026-07, 10k rps).", "dim": "EPI"},
+      "bare_reliability": {"bad": "The system handles high load.", "good": "The system is designed to handle 10,000 concurrent connections.", "dim": "EPI"},
+      "modal_prediction": {"bad": "The server will retry the request.", "good": "The server retries the request.", "dim": "EPI"},
+      "bare_scale": {"bad": "The database scales well.", "good": "The database scales to 500 write transactions per second (benchmark, v3.2, 16 vCPU).", "dim": "EPI"}
+    }
+  },
+
+  "quantifiers": {
+    "description": "Vague quantifiers → precise alternatives.",
+    "table": {
+      "fast": {"replacement": "responds in <N> ms", "dim": "QUANT", "requires_measured": true},
+      "slow": {"replacement": "responds in <N> ms", "dim": "QUANT", "requires_measured": true},
+      "many": {"replacement": "<N> or more", "dim": "QUANT"},
+      "several": {"replacement": "<N> (specify count)", "dim": "QUANT"},
+      "large": {"replacement": "larger than <N>", "dim": "QUANT"},
+      "small": {"replacement": "smaller than <N>", "dim": "QUANT"},
+      "often": {"replacement": "in <N>% of cases", "dim": "QUANT"},
+      "rarely": {"replacement": "in fewer than <N>% of cases", "dim": "QUANT"},
+      "approximately": {"replacement": "about <N>", "dim": "QUANT"},
+      "significant": {"replacement": "statistically significant (p < 0.05) or <N>% difference", "dim": "QUANT"},
+      "high": {"replacement": "greater than <N>", "dim": "QUANT"},
+      "low": {"replacement": "less than <N>", "dim": "QUANT"}
+    }
+  },
+
+  "lifecycle": {
+    "description": "Term lifecycle tracking for deprecation and graduation.",
+    "states": {
+      "current": "Approved for use now. Default state.",
+      "deprecated": {"format": "deprecated:YYYY-MM", "behavior": "Warning with successor term"},
+      "obsolete": {"format": "obsolete:YYYY-MM", "behavior": "Violation with successor term"},
+      "emerging": "In use in corpus, not yet approved. Informational — candidate for graduation."
+    },
+    "entries": {}
+  }
+}

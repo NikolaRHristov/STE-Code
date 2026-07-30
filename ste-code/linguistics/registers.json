@@ -1,0 +1,102 @@
+{
+  "version": "FLAVOR-1.0.0",
+  "description": "Register profiles for STE-Code linguistic flavor. Each register defines sentence-length limits, article requirements, and permitted intents for a specific documentation text type.",
+  "registers": {
+    "error-message": {
+      "max_words": 12,
+      "articles": "droppable",
+      "intents": ["Note", "Warning"],
+      "special_rules": [
+        "Must name: what failed + what happens next.",
+        "Example: 'Connection failed. Retrying in 5 s.'"
+      ],
+      "violation_example": "Connection to the database server at postgresql://db.internal:5432 has failed due to a network timeout. The system will attempt to reconnect automatically after a delay of 30 seconds."
+    },
+    "commit-subject": {
+      "max_chars": 72,
+      "articles": "droppable",
+      "intents": ["Imperative"],
+      "special_rules": [
+        "Conventional-commit type prefix exempt from vocabulary rules.",
+        "Prefixes: feat:, fix:, docs:, refactor:, test:, chore:, ci:, perf:"
+      ],
+      "violation_example": "This commit adds a new feature for user authentication and also fixes the bug with password reset"
+    },
+    "readme-prose": {
+      "max_words": 25,
+      "articles": "required",
+      "intents": ["Imperative", "Note", "Assumption", "Warning"],
+      "special_rules": [
+        "Full linguistic layer applies.",
+        "One topic per paragraph."
+      ]
+    },
+    "api-description": {
+      "max_words": 20,
+      "articles": "required",
+      "intents": ["Note", "Assumption"],
+      "special_rules": [
+        "Parameter descriptions: 'The <name> of the <entity>.' frame.",
+        "Response descriptions: one field per sentence."
+      ]
+    },
+    "inline-comment": {
+      "max_words": 15,
+      "articles": "droppable",
+      "intents": ["Note"],
+      "special_rules": [
+        "Must contain reason clause when non-obvious: 'because', 'so that'.",
+        "Why over what."
+      ],
+      "violation_example": "// Set the flag to true"
+    },
+    "cli-help": {
+      "max_words": 10,
+      "articles": "droppable",
+      "intents": ["Note"],
+      "special_rules": [
+        "One behavior per flag.",
+        "No conditionals.",
+        "Flag format: '--flag  Description'"
+      ]
+    },
+    "tutorial-step": {
+      "max_words": 20,
+      "articles": "required",
+      "intents": ["Imperative", "Note"],
+      "special_rules": [
+        "One action per step.",
+        "Expected outcome after each step.",
+        "Example: 'Run npm install. You see Installing packages... in the terminal.'"
+      ]
+    },
+    "changelog-entry": {
+      "max_words": 25,
+      "articles": "droppable",
+      "intents": ["Note"],
+      "special_rules": [
+        "Category prefix: Added, Changed, Deprecated, Removed, Fixed, Security.",
+        "One entry per change."
+      ]
+    }
+  },
+  "inference_rules": {
+    "by_extension": {
+      ".md": "readme-prose",
+      ".mdx": "readme-prose",
+      ".rst": "readme-prose"
+    },
+    "by_path": {
+      "/docs/api/": "api-description",
+      "/docs/tutorials/": "tutorial-step",
+      "/CHANGELOG": "changelog-entry",
+      "error-messages/": "error-message",
+      "locales/": "error-message"
+    },
+    "by_header": {
+      "# ": "readme-prose",
+      "## API": "api-description",
+      "## Tutorial": "tutorial-step"
+    }
+  }
+}
