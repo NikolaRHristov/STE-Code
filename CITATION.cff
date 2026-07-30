@@ -13,8 +13,8 @@ authors:
     given-names: "Nikola R."
     orcid: ""
   - name: "STE-Code Contributors"
-repository-code: "https://github.com/NikolaRHristov/Manual"
-url: "https://github.com/NikolaRHristov/Manual"
+repository-code: "https://github.com/NikolaRHristov/STE-Code"
+url: "https://github.com/NikolaRHristov/STE-Code"
 license: MIT
 version: 1.0.0
 date-released: "2026-07-30"

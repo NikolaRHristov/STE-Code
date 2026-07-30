@@ -1,10 +1,10 @@
 # STE-Code — Simplified Technical English for Code Documentation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Pipeline](https://img.shields.io/badge/pipeline-5%20stages-brightgreen)](https://github.com/NikolaRHristov/Manual)
-[![Version](https://img.shields.io/badge/version-1.0-blue)](https://github.com/NikolaRHristov/Manual)
+[![Pipeline](https://img.shields.io/badge/pipeline-5%20stages-brightgreen)](https://github.com/NikolaRHristov/STE-Code)
+[![Version](https://img.shields.io/badge/version-1.0-blue)](https://github.com/NikolaRHristov/STE-Code)
 [![Spec](https://img.shields.io/badge/source-ASD--STE100%20Issue%209-lightgrey)](https://asd-ste100.org)
-[![Benchmark](https://img.shields.io/badge/benchmark-96.6%25%20pass-success)](https://github.com/NikolaRHristov/Manual)
+[![Benchmark](https://img.shields.io/badge/benchmark-96.6%25%20pass-success)](https://github.com/NikolaRHristov/STE-Code)
 
 ---
 
@@ -202,7 +202,7 @@ If you use STE-Code in academic work, please cite:
   title        = {{STE-Code}: Simplified Technical English for Code Documentation},
   author       = {{Nikola Hristov}},
   year         = {2025},
-  howpublished = {\url{https://github.com/NikolaRHristov/Manual}},
+  howpublished = {\\url{https://github.com/NikolaRHristov/STE-Code}},
   note         = {Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe, Brussels}
 }
 ```
