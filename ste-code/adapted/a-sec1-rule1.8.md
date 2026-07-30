@@ -389,11 +389,10 @@ When you refer to an approved technical noun that is a unique entity (a specific
 
 When the approved technical noun appears in a code block, it is part of the quoted text (Rule 1.5, category 10). When it appears in prose, it is a code-domain technical noun. In both cases, use the exact approved name. The formatting changes, but the name does not.
 
-> **STE:**
+> **STE:** The `UserService.findById` method returns a `User` object — the approved names are identical in code blocks and prose:
 > ```
 > const user = await UserService.findById(id);
 > ```
-> The `UserService.findById` method returns a `User` object.
 
 > *Explanation: `UserService`, `findById`, and `User` appear in both the code block and the prose. The formatting changes (code block vs. inline code), but the names are identical. A reader who sees `UserService.findById` in the prose can find it in the code block and in the source code.*
 
