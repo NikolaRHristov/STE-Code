@@ -57,7 +57,7 @@ Each test case is a JSON file:
 | 6 | CHANGELOG | 3 | Release note entries |
 | 7 | Config File | 3 | .env, .toml, .yaml comments |
 | 8 | Composite | 4 | Full document sections |
-| **Total** | | **35** | |
+| **Total** | **8 categories** | **35** | |
 
 ## Execution Protocol
 
@@ -89,20 +89,31 @@ LATENCY_MS=$(( (END_TIME - START_TIME) / 1000000 ))
 
 ### Phase 3: Scoring (per test case)
 
+Scoring is implemented in `benchmark_lib.py::calc_correctness`. The canonical formula is:
+
 ```
-CORRECTNESS SCORE = (expected_keywords_found / total_expected) × (1 - forbidden_found / total_forbidden)
-TOKEN_USAGE = extract from hermes output or estimate (chars / 4)
+base_score      = 0.4
+principle_bonus = 0.6 × (principles_satisfied / total_expected_principles)
+forbidden_pen   = 0.3 × (forbidden_found / total_forbidden)   [skipped when total_forbidden == 0]
+keyword_bonus   = 0.1 × (expected_keywords_found / total_expected_keywords)
+
+CORRECTNESS = clamp(base + principle_bonus − forbidden_pen + keyword_bonus, 0.0, 1.0)
+
+TOKEN_USAGE   = extract from hermes output, or estimate (chars / 4)
 COMPLIANCE % = principles_satisfied / total_expected_principles
-DIFF_RATIO = levenshtein_distance(output, expected) / max(len(output), len(expected))
+DIFF_RATIO    = SequenceMatcher ratio between output and prior run output (stability metric)
 ```
+
+> **Note:** `diff_ratio` measures output stability across runs, not distance from a ground-truth string.  
+> A `diff_ratio` near 0 means the output is nearly identical to the prior run; near 1 means it changed significantly.
 
 ### Phase 4: Aggregation
 
-Generate aggregate report:
+Generate aggregate report (example values — not a real result):
 ```json
 {
   "benchmark_id": "ste-code-v1.0.0",
-  "timestamp": "2026-07-30T02:30:00Z",
+  "timestamp": "<ISO-8601 timestamp of actual run>",
   "model": "deepseek-v4-pro",
   "total_tests": 35,
   "passed": 32,
@@ -169,11 +180,12 @@ wait
 
 ## Key Facts (Immutable)
 - Model: deepseek-v4-pro
-- 19 categories (NOT 22)
+- 8 evaluation categories, 35 total tests
 - 53 writing rules + 4 GR rules
 - Source: ASD-STE100 Issue 9, January 2025
 - System prompt: `ste-code/artifacts/ste-code-distilled-system-prompt.txt`
 - Benchmark dir: `.agents/benchmark/`
+- Scoring implementation: `benchmark_lib.py::calc_correctness`
 
 ## START NOW
 
