@@ -1,0 +1,153 @@
+### .agents/skills/spec-extraction/ste-code-merge/SKILL.md
+- **Level:** 3
+- **Summary:** Defines the merge protocol for combining 109 worker extraction files into a single master state document, including deduplication, section organization, and completeness validation.
+- **Strengths:**
+  - Clear 5-step protocol with concrete bash commands (cat, grep -c, sort/uniq for dedup detection)
+  - Covers deduplication patterns for four content types (rule statements, example pairs, category listings, dictionary entries)
+  - Includes validation gates with specific expected counts (53 rules, 19 categories, 500KB+, 10 random spot-checks)
+  - Section organization template is exhaustive - covers Front Matter through Appendices with every rule and category enumerated
+  - Cross-references `references/rails.md`
+  - Specifies exact output file paths and distinguishes temporary from permanent artifacts
+- **Gaps:**
+  - No failure recovery protocol - what to do if `grep -c` returns wrong counts, if spot-checks fail, or if master-raw.md is corrupted halfway through concatenation
+  - No edge case handling for boundary conditions (e.g., workers that partially overlap, missing worker files, empty worker outputs)
+  - Deduplication guidance is descriptive ("keep first occurrence") but lacks a concrete, reproducible procedure - "manual dedup is preferred over scripted" is a hand-wave, not a protocol
+  - No time estimates or resource requirements for the merge step (500KB+ output from 109 workers is non-trivial)
+  - References to `references/rails.md` and the 8 rails are present but never mapped to how each rail specifically constrains merge decisions
+  - No version history or known limitations section
+- **What Level 4 Would Add:**
+  - A failure recovery decision tree: "If grep -c Rule returns N ≠ 53: identify missing rule numbers by diffing against expected set, locate the worker page range, re-extract only those pages"
+  - Edge case catalog: what to do when two workers disagree on a boundary page, when a dictionary entry appears with conflicting POS tags, when page ranges have gaps
+  - Concrete dedup script or precise manual procedure with example diffs showing before/after
+  - Resource guidance: estimated wall-clock time, memory, disk space for the merge operation
+  - Per-rail mapping: "Rail 3 (completion integrity) → enforced by Step 4 validation checks; Rail 6 (factual correctness) → enforced by Step 5 spot-checks" for all 8 rails
+  - Rationale for design decisions (e.g., "why master-raw.md is kept as a temporary artifact instead of discarded immediately")
+- **Priority:** low
+
+### .agents/skills/spec-extraction/ste-code-adaptation/SKILL.md
+- **Level:** 2
+- **Summary:** Specifies how to adapt ASD-STE100 extracted rules from the aerospace domain into STE-Code artifacts for the coding domain, with preserve/replace rules and output artifact definitions.
+- **Strengths:**
+  - Clear preserve/replace framework that establishes the adaptation boundary - what stays structurally identical vs. what gets domain-swapped
+  - Output artifacts table with file names, target sizes, and descriptions is concrete
+  - Cross-references `references/category-mapping.md` for the full 19-category adaptation
+  - Verification section lists three specific checks (rule numbers, token counts, domain correctness)
+  - Recognizes the safety-instruction → BREAKING/DEPRECATED mapping
+- **Gaps:**
+  - No examples of an adapted rule - the file describes what to do but never shows a single before/after pair (e.g., "Rule 1.1 in aerospace form → Rule 1.1 in code-domain form")
+  - No explicit protocol or sequence of steps - the file lists inputs, outputs, and rules but gives no turn-by-turn or phase-by-phase workflow for an agent to execute
+  - The preserve/replace rules are declarative lists with no explanatory rationale for each decision
+  - No edge case handling: what if a rule has no obvious code-domain analogue? What if an aerospace example is idiomatic and resists adaptation?
+  - No cross-reference to merged/master.md or extracted/*.md as concrete input - only mentions the 9 worker files generically
+  - Output artifact descriptions are terse (1-line each); artifacts/SKILL.md has far more detail per artifact than this file does
+  - No quality gate checklist or pass/fail criteria beyond the three verification bullets
+  - No anti-fabrication rules (contrast with ste-code-artifacts/SKILL.md which has a dedicated section)
+- **What Level 3 Would Add:**
+  - At least one full worked example: "Rule 3.5 (Restrict the -ing form) → STE aerospace example pair → STE-Code code-domain example pair"
+  - A concrete execution protocol: "Step 1: Load master.md sections S1-S9. Step 2: For each rule, extract the aerospace example pair. Step 3: Identify the code-domain analogue. Step 4: Write adapted rule to ste-code/adapted/a-secN-rules.md. Step 5: Validate against verification checks."
+  - Rationale per preserve/replace decision: "Rule numbers preserved because downstream artifacts reference them by number; aerospace examples replaced because the target domain is code documentation"
+  - Edge case guidance: "If a rule concerns physical safety (e.g., Rule 7.1 two-part command+consequence), map to API breaking changes: 'If you remove this parameter, then update all callers'"
+  - Quality gate checklist for each adapted file produced
+  - Anti-fabrication rules matching the standard in ste-code-artifacts/SKILL.md
+- **Priority:** high
+
+### .agents/skills/spec-extraction/ste-code-adaptation/references/category-mapping.md
+- **Level:** 3
+- **Summary:** Maps all 19 ASD-STE100 technical noun categories and 4 technical verb categories to their STE-Code code-domain equivalents, with representative examples for each.
+- **Strengths:**
+  - Exhaustive coverage of all 19 STE categories with explicit 1:1 mappings to code-domain categories
+  - Each category has concrete, recognizable software development examples (e.g., `React`, `Node.js` for Cat 2; `XSS`, `race condition` for Cat 18)
+  - 4 technical verb categories synthesized from the original STE framework with operation-grouped examples
+  - Verification notes document the source (Issue 9 pages 47-52) and correct a previous error (22→19 categories) - shows self-correction
+  - Clear table format, easy to reference from other skills
+  - Correction note at top establishes reliability and audit trail
+- **Gaps:**
+  - No decision guidance - when would an agent use Cat 6 (modules/components) vs. Cat 7 (algorithmic terms) for a borderline term? No boundary cases or disambiguation rules
+  - No version history beyond the correction note - if category mappings evolve (e.g., new frameworks added), there's no changelog
+  - No usage instructions - the file is a pure reference; it doesn't tell an agent how to use the mapping during adaptation
+  - No cross-references back to the skills that depend on it (ste-code-adaptation/SKILL.md, ste-code-continuation/SKILL.md)
+  - No edge case handling: what if a term fits multiple categories? What if a new code-domain term has no clear STE analogue?
+  - Category examples are representative but not exhaustive - an agent encountering a term not listed has no guidance on how to classify it
+- **What Level 4 Would Add:**
+  - A decision flowchart or decision table for disambiguating borderline terms (e.g., "If a term is a specific library name, → Cat 4; if it's a generic algorithmic concept, → Cat 7")
+  - Usage protocol: "During adaptation, when replacing STE example terms, select a term from the matching STE-Code category column. If the term is not listed, classify it using the decision flowchart and add it."
+  - Version history: dates of category updates, rationale for corrections (beyond the 22→19 fix)
+  - Exhaustive example expansion: each category lists all known terms from Issue 9 source pages, not just representative samples
+  - Cross-references to ste-code-adaptation/SKILL.md line numbers where categories are consumed
+  - Boundary case examples: problematic terms that fit multiple categories, with resolution and rationale
+- **Priority:** medium
+
+### .agents/skills/spec-extraction/ste-code-artifacts/SKILL.md
+- **Level:** 3
+- **Summary:** Specifies the generation protocol for 6 STE-Code artifact files from the merged master extraction state, with per-artifact content requirements, quality gates, and anti-fabrication rules.
+- **Strengths:**
+  - Per-artifact specifications are detailed: target token/chars, purpose, required content blocks, and quality gates with checkbox format
+  - Dedicated Anti-Fabrication Rules section - every adapted rule, synonym, category, and example must trace to a master.md source (strong verifiability)
+  - Concrete generation protocol: sequential artifact generation (1→6), read-adapt-write-validate cycle per artifact
+  - Verification section includes a bash one-liner for checking output token counts against targets
+  - Prerequisites section gates artifact generation on master.md completeness
+  - Cross-references `references/rails.md` and `ste-code/merged/master.md`
+  - Artifact 2 (self-reading manual) specifies exact 8-section structure with recursive-loop requirement in S0
+- **Gaps:**
+  - No failure recovery - if Artifact 3 fails its quality gates, what rollback or fix procedure applies? If Artifact 5 succeeds but Artifact 6 fails, is partial output kept or discarded?
+  - No edge case handling: what if master.md has 52 rules instead of 53? What if dictionary entries are incomplete for certain letters?
+  - Quality gates are checkboxes with no associated repair actions - "if gate fails, fix before next artifact" is underspecified (fix how?)
+  - No cross-reference to ste-code-adaptation/SKILL.md for the adaptation rules that artifacts must follow
+  - Artifact 4 (example turn) specifies an example input but doesn't specify which real master.md content it should adapt - agent must fabricate a plausible example, which contradicts the anti-fabrication rules
+  - No time/resource estimates for generating 6 artifacts from a 500KB+ master.md
+  - No version history or known limitations
+- **What Level 4 Would Add:**
+  - Per-artifact failure recovery: "If Artifact N gates fail, log the failures, revert Artifact N, re-read relevant master.md sections, re-generate, re-validate. Do not proceed to Artifact N+1."
+  - Edge case decision matrix: "master.md rule count < 53 → abort generation, trigger re-extraction of missing pages. Dictionary letter gap → generate partial artifact, flag with TODO markers."
+  - Repair procedures for each quality gate: "If system prompt exceeds 4,800 chars by >10%, identify longest principle text and reduce word count. If anti-patterns are not code-specific, cross-reference against adapted rules in ste-code/adapted/."
+  - Cross-reference to ste-code-adaptation/SKILL.md for preserve/replace rules that artifacts must enforce
+  - A real worked example for Artifact 4 sourced from a specific master.md rule (e.g., "Adapt Rule 3.5's STE/non-STE pair from master.md:88-95")
+  - Time/resource budget per artifact
+  - Rationale for the artifact ordering (1→6): "System prompt first because it's the most constrained and sets vocabulary for subsequent artifacts"
+- **Priority:** medium
+
+### .agents/skills/spec-extraction/ste-code-continuation/SKILL.md
+- **Level:** 3
+- **Summary:** Multi-agent continuation skill usable by Agents #1, #2, or #3 to track and advance pipeline stages 3-5 (merge, adapt, artifacts) from their own perspective, including stage detection, agent-perspective input selection, and per-stage protocols.
+- **Strengths:**
+  - Agent perspective mapping table - explicitly handles the fact that different agents have different input sources for the same pipeline stages
+  - Stage detection via filesystem inspection with concrete bash commands and a decision tree
+  - Stage 3 (Merge) protocol is detailed: concatenation, dedup patterns, section organization template, validation checks
+  - Preserve/replace rules match the standard in ste-code-adaptation/SKILL.md
+  - Adaptation worker table covers all 9 sections + categories + dictionary with specific output filenames
+  - Progress tracking section specifies exact files to update (.agents/state/PROGRESS.md, .agents/feedback/exchange.md)
+  - "Immutable Facts" section prevents common errors (19 not 22 categories, 53+4 not 65 rules, 434 pages)
+  - anti-fabrication rules present for Stage 5
+- **Gaps:**
+  - Stage 4 (Adaptation) specifies an adaptation prompt template but gives no guidance on how to actually launch adaptation workers - the prompt template is shown but the orchestration is not described ("Launch in batches of 3, same pattern as extraction/refinement" - the pattern is not reproduced)
+  - Stage 5 (Artifacts) is thin - artifact table is present but per-artifact content requirements and quality gates are missing (contrast with ste-code-artifacts/SKILL.md which has extensive per-artifact detail)
+  - No failure recovery: if a stage fails partway through, how does the continuation agent resume? No checkpointing or state save/restore protocol
+  - No edge case handling: what if enriched/ has 50 files but extracted/ has 109? What if refined/ has stale timestamps? What if master.md exists but is incomplete?
+  - Stage detection decision tree has no handling for partially-completed stages (e.g., adapted/ has 5 of 11 files)
+  - No cross-references to the dedicated per-stage skills (ste-code-merge/SKILL.md, ste-code-adaptation/SKILL.md, ste-code-artifacts/SKILL.md) - should defer to those for deep detail rather than partially reproducing them
+  - No time/resource estimates for multi-stage continuation
+  - No version history
+- **What Level 4 Would Add:**
+  - Failure recovery per stage: "If merge fails validation: save partial master-raw.md, log which workers produced output, allow resume from last successful worker index. If adaptation worker a005 times out: retry with same prompt, if fail again, flag in exchange.md for manual review."
+  - Edge case matrix: "enriched/ has fewer files than extracted/ → use extracted/ and flag enrichment gap. adapted/ has 5 of 11 files → skip completed workers, resume from next."
+  - Stage detection refinement: check timestamps to detect staleness, check file sizes to detect truncation, not just existence
+  - Full orchestration protocol for Stage 4 workers: exact terminal commands, batch boundaries, retry logic
+  - Cross-references to ste-code-merge/SKILL.md, ste-code-adaptation/SKILL.md, ste-code-artifacts/SKILL.md for deep detail, with this file acting as the dispatcher
+  - Checkpoint file format: what state to persist so any agent can resume from any stage boundary
+  - Time/resource budget per stage
+  - Rationale for the agent-perspective design: "Why separate continuation skill instead of per-agent skills - allows single maintenance point for pipeline stages shared across agents"
+
+- **Priority:** medium
+
+## Batch Summary
+- Files scored: 5
+- Level distribution: -2:0 -1:0 1:0 2:1 3:4 4:0 5:0
+- Highest priority:
+  - `.agents/skills/spec-extraction/ste-code-adaptation/SKILL.md` (Level 2) - thinnest file at 69 lines, lacks any worked examples, execution protocol, edge cases, or anti-fabrication rules; this is the adaptation-phase entry point and it's the weakest link
+- Pattern observations:
+  - **RAILS references are present but unactionable**: all 4 skill files invoke `references/rails.md` and list the 8 rail names, but none map how each rail constrains the specific phase's decisions or what happens when a rail is violated during execution
+  - **No failure recovery anywhere**: all files describe the happy path; none specify what to do if a validation check fails, if a worker output is missing, if master.md is incomplete, or if a stage needs to be resumed
+  - **No version histories or known limitations**: all files are v1.0.0 with no changelog, no known-bugs section, no planned improvements - this blocks reaching Level 5
+  - **Adaptation/Artifacts duplication**: ste-code-continuation/SKILL.md partially reproduces Stage 4 and Stage 5 protocols from ste-code-adaptation/SKILL.md and ste-code-artifacts/SKILL.md without cross-referencing them - the continuation skill should defer to the dedicated skills rather than maintaining parallel copies
+  - **Imperative without rationale**: all files tell agents what to do but never explain why a design decision was made (e.g., "why 10 random spot-checks and not 20?", "why manual dedup over scripted?") - this blocks reaching Level 4
+  - **Cross-references are one-directional**: category-mapping.md is referenced by adaptation skills but doesn't link back to them; skills reference rails.md but rails.md doesn't reference the skills that consume it

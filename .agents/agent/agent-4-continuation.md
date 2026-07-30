@@ -39,20 +39,28 @@ hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
 
 Output: `ste-code/adapted/expanded/a-secX-ruleY-examples.json`
 
+**Dedup against:** `ste-code/adapted/a-sec1-rule1.1.md` through `a-sec9-gr4.md` (all existing code examples), `ste-code/merged/master.md` (all aerospace examples)
+
 ### Pass 2: Dictionary Depth (code-domain equivalents)
 For every aerospace dictionary entry, generate a code-domain equivalent where applicable. "Engine" → "Server", "Ream" → "Refactor", "Flange" → "Interface".
 
 Output: `ste-code/adapted/expanded/code-dictionary-mapping.json`
+
+**Dedup against:** `ste-code/adapted/a-dictionary.md` (all aerospace entries), `SCE/data/vocabulary/code-dictionary.json` (all existing code entries)
 
 ### Pass 3: Category Concrete Examples (10+ per category)
 The 19 categories have placeholder names. Fill each with 10-15 concrete code-domain terms, each with: term, definition, approved (bool), example usage.
 
 Output: `ste-code/adapted/expanded/category-entries.json`
 
+**Dedup against:** `SCE/core/categories/noun-categories.json` (existing examples), `SCE/core/categories/generated/nouns-batch-001.json` (190 terms)
+
 ### Pass 4: Anti-Pattern Expansion (15+ total)
 The current 5 anti-patterns are structural (nesting, semicolons). Add 10+ code-specific anti-patterns: passive API docs, vague errors, synonym drift, jargon comments, hedging commits, noun-as-verb, verb-as-noun, omitted articles, contractions, multi-instruction sentences.
 
 Output: `ste-code/adapted/expanded/anti-patterns.json`
+
+**Dedup against:** `SCE/compute/generated/anti-patterns-batch-001.json` (10 entries), existing 5 anti-patterns in system prompt
 
 ### Pass 5: Paradigm Examples
 Generate example pairs for each major paradigm:
@@ -64,6 +72,8 @@ Generate example pairs for each major paradigm:
 - Scripting: quick-reference comments
 
 Output: `ste-code/adapted/expanded/paradigm-examples.json`
+
+**Dedup against:** All existing code examples in `ste-code/adapted/`, `SCE/data/vocabulary/code-dictionary.json`, benchmark test cases
 
 ## EXPANSION PROTOCOL — Stage 5 Extended
 
@@ -79,6 +89,13 @@ After all Stage 4 passes complete, regenerate the 6 artifact files with expanded
 | 6 | `README.md` | ~1,000 tokens |
 
 ## WORKER PATTERN (proven — use this)
+
+**Every worker must deduplicate before output.** Before writing any example, check:
+1. Does it match an existing aerospace example in the original spec? → Skip
+2. Does it match a previously generated code example in `expanded/`? → Skip
+3. Does it use the same STE/non-STE pair already in the adapted files? → Skip
+
+Each pass prompt must include a list of already-used examples so workers can avoid duplicates.
 
 ```bash
 # Write prompt to file
