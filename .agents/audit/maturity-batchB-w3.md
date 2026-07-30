@@ -1,0 +1,245 @@
+### .agents/skills/benchmarking/SKILL.md
+- **Level:** 2
+- **Summary:** Defines the STE-Code benchmarking orchestrator - 59 test cases across 14 correction and generation categories, scored via a weighted formula and compared against a plain-assistant control group.
+- **Strengths:**
+  - Concrete architecture diagram showing the test → LLM → score pipeline
+  - Full 14-category table with test counts and types (correction vs. generation)
+  - Real benchmark results table with pass rates and score deltas
+  - Detailed scoring formula with explicit weights (base, principles, forbidden penalty, keyword bonus, pattern penalty)
+  - JSON test case schema with all fields explained
+  - Three distinct execution commands (STE-Code, control, re-score)
+  - Output paths specified for per-test JSON, aggregate JSON, and control group
+  - Versioned (2.0.0) with related-file frontmatter
+- **Gaps:**
+  - No inline cross-references to `orchestrator.py` or `orchestrator-control.py` - only listed in frontmatter; a reader cannot tell what each script does without opening it
+  - No example of a passing vs. failing test case - the schema is shown but no concrete input/output pair demonstrates how scoring actually plays out
+  - No edge-case handling: what happens when a worker times out, produces empty output, or returns truncated text
+  - No troubleshooting guidance for individual test failures or how to re-run a single category
+  - No performance characteristics - expected runtime for 59 parallel tests, memory/API-token budget considerations
+  - No rationale for the scoring weights (why 0.60 for principles, 0.30 penalty, 0.10 bonus, 0.20 pattern penalty)
+  - No discussion of how results regress over model/provider changes
+- **What Level 3 Would Add:**
+  - 2-3 concrete example test cases with input, expected output, and scored result
+  - Inline cross-references to `orchestrator.py` with a summary of its parallel-execution model
+  - Edge-case section: timeout handling, empty-output fallback, partial-run re-scoring
+  - A short troubleshooting table mapping common failure signals (score < 0.70, forbidden keywords leaked, patterns missed) to corrective actions
+  - A "results interpretation" subsection explaining what score deltas mean for practical documentation quality
+- **Priority:** medium
+
+### .agents/skills/level-worker/SKILL.md
+- **Level:** 2
+- **Summary:** Describes how to launch 4 parallel Agent #7 workers at STE-Code adaptation levels 1-4, each rewriting a fixed document set using a Hermes oneshot wrapper with session isolation.
+- **Strengths:**
+  - Clear directory-structure tree showing `rewrites/level-{1..4}/` output layout
+  - Concrete launch command referencing `launch-levels.py`
+  - Oneshot isolation detail: `session_db=None`, `tool_gen_callback=None`, no history pollution
+  - Parameter table specifying level range, document set, and model
+  - Results format explicitly defining 3 output sections per document (REWRITTEN, CHANGES, COMPLIANCE)
+  - Comparison-use description explaining how output differs by adaptation depth
+  - Key facts summary capturing the core architecture
+- **Gaps:**
+  - No example of actual output from any level - a reader cannot judge what "REWRITTEN / CHANGES / COMPLIANCE" looks like in practice
+  - No cross-references beyond frontmatter - no link to Agent #7 definition, the oneshot wrapper source, or the benchmark results that motivated this tool
+  - No edge cases: what happens when the oneshot wrapper fails, the Python venv is missing, or a level worker produces empty `output.txt`
+  - No troubleshooting or recovery procedure for failed workers
+  - Level 5 is acknowledged as "not yet implemented" but no discussion of feasibility or what it would require
+  - No performance data - expected wall-clock time per level, token consumption, whether workers run truly in parallel
+  - No example of how outputs differ between adjacent levels (e.g., level-1 vs. level-2 on the same document)
+- **What Level 3 Would Add:**
+  - One concrete output snippet per level for a shared document (e.g., README.md) showing how depth affects verbosity and formality
+  - Cross-reference to Agent #7 `agent-7-level-worker.md` with a summary of its role contract
+  - Troubleshooting table: missing venv, oneshot timeout, empty output, model unavailable
+  - Quantitative comparison data - line counts or token counts per level for a representative document - to ground the "more formal, potentially more verbose" claim
+  - Level 5 feasibility section explaining what blocks it (token budget? model context window? missing adapted files?)
+- **Priority:** medium
+
+### .agents/skills/extension-worker/SKILL.md
+- **Level:** 2
+- **Summary:** Orchestrates code-domain gap-filling for STE-Code vocabulary and category extensions using batched poll workers, with a quantified gap analysis across 6 areas.
+- **Strengths:**
+  - Concrete gap analysis table with target, current, and delta counts across 6 areas (approved verbs, adjectives, noun examples, verb examples, anti-patterns, domain extensions)
+  - Worker command template using `hermes -z` with output redirection and backgrounding
+  - Launch rules: 3 workers per batch, verify after each batch, commit after each batch, 20-entry cap per worker
+  - Output directory mapping per area (SCE/data/, SCE/core/, SCE/compute/)
+  - Entry schema cross-reference to Agent #8 definition
+  - State tracking reference to `.agents/state/EXTENSION-PROGRESS.md`
+- **Gaps:**
+  - The `generate` action launch command is explicitly incomplete: `# (to be adapted for extension)` - the file cannot be executed as written
+  - No actual worker prompt template - only the shell invocation; an operator cannot generate prompts without inventing the content
+  - No example generated entry for any gap area - the reader sees a gap count but not what a filled entry looks like
+  - No inline cross-references beyond frontmatter - Agent #8's JSON schemas are referenced by file path only, with zero summary
+  - No quality gates for generated output - what makes an entry valid vs. fabricated? How to detect duplicates?
+  - No failure recovery: what if a worker produces malformed JSON, invents code terms, or creates duplicates across batches
+  - The `enlarge` action is vague - "generates code-domain enrichments" with no specificity about transform rules or output schema
+  - No discussion of how extension interacts with the translation pipeline (duplicate terms across locales?)
+- **What Level 3 Would Add:**
+  - Completed `generate` launch command (not "to be adapted")
+  - Full worker prompt template with output schema constraints and anti-fabrication rails
+  - 2-3 example generated entries per area: one approved verb with code example, one noun category example, one anti-pattern
+  - Inline summary of Agent #8's JSON schemas so the reader doesn't need to open a second file
+  - Quality-gate checklist: valid JSON, traceable to master.md source, no invented terms, non-duplicate across batches
+  - Error-recovery procedure for malformed or duplicate generations
+- **Priority:** high - the launch command is explicitly incomplete, and without a worker prompt template the file cannot be executed
+
+### .agents/skills/translations/SKILL.md
+- **Level:** 3
+- **Summary:** Discovery-based translation pipeline that scaffolds blank placeholder files across 9 locales by scanning source directories, reasoning about translatability, and creating zero-byte files at mirrored paths - re-runnable after enrichment.
+- **Strengths:**
+  - Clear design rationale upfront: "Why discovery" - addresses the fixed-grid rotting problem explicitly
+  - Full 9-locale table with language, script, and RTL flag
+  - Placeholder format is precisely specified: zero-byte files, path carries locale and source-path information
+  - Translatability reasoning table with explicit include/skip rules and a "reasoning rule of thumb"
+  - Worker protocol specifies locale assignment (Worker 1: zh-CN/ja/ko, Worker 2: es/fr/de, Worker 3: pt-BR/ru/ar)
+  - 10 discovery targets in priority order with expected file counts
+  - 6 concrete quality checks with shell commands (`test -f`, `wc -c`, `dirname`)
+  - Progress tracking format with all required fields
+  - Re-discovery protocol explaining how post-enrichment scans find new files and skip existing ones
+  - Communication format for feedback exchange
+  - Key facts summary
+- **Gaps:**
+  - No actual worker prompt template - only the shell command `hermes -z "$(cat ...)"`; the operator must write prompts from scratch
+  - No example of a completed discovery report showing what a worker's output looks like
+  - No cross-references to Agent #9 definition beyond frontmatter - the reader cannot see the agent's role contract
+  - No edge-case handling: CJK/ Arabic encoding issues, path collisions when source files share names across directories, what happens when a new locale is added
+  - No `catalog.md` schema shown - the catalog is referenced as a tracking mechanism but never defined
+  - No performance estimates - how long discovery takes across 10 targets, token consumption for reasoning about ~80+ files
+  - No error recovery if workers create placeholders at wrong paths or skip files they should have included
+- **What Level 4 Would Add:**
+  - Full worker prompt template with the reasoning loop, include/skip decision format, and file-creation instructions
+  - One annotated discovery report example showing a worker's output for a real target directory
+  - Inline cross-reference to Agent #9's role definition with a summary of its contract
+  - Edge-case section: encoding (UTF-8 BOM for CJK, RTL marker considerations for Arabic), path disambiguation for same-named files in different source trees, adding a 10th locale
+  - `catalog.md` schema definition with field descriptions
+  - Performance data: expected worker runtime per target, token budget, parallelism constraints
+  - Error-recovery procedures: wrong-path fixup, missed-file re-scan, catalog repair
+- **Priority:** low - already well-structured and executable; polishing into Level 4 is valuable but not blocking
+
+### .agents/skills/state-report.md
+- **Level:** 2
+- **Summary:** Defines a standardized markdown template for pipeline state reports, covering role, pipeline status table, errors, rails compliance, verified disk counts, and prioritized next actions.
+- **Strengths:**
+  - Concrete markdown template with all sections stubbed out
+  - Pipeline status table with 5 stages, directories, expected/actual counts, percentages, and status indicators
+  - Execution rules are explicit: run shell commands for counts (never estimate), verify with `ls` or `test -f` (never trust PROGRESS.md alone), update PROGRESS.md if discrepancies found
+  - Specific output path convention: `.agents/audit/state-YYYYMMDD-HHMMSS.md`
+- **Gaps:**
+  - No example of a completed state report - the template is shown empty; a reader cannot see what a good report looks like
+  - No cross-references to the agents or skills that consume these reports (auditor, continuator, execution auditor)
+  - No guidance on interpreting discrepancies - if disk counts differ from PROGRESS.md, what action should the operator take?
+  - No status-emoji legend (✅/🟢/⬜ are used but never defined)
+  - Only 4 execution rules - no handling of edge cases: missing PROGRESS.md, corrupted audit directory, multiple state reports from the same timestamp
+  - No description of when to produce a state report (at pipeline start? after each batch? on error?)
+  - File is 46 lines with only ~15 lines of instructional prose - the template itself is most of the content
+- **What Level 3 Would Add:**
+  - One fully filled example state report for a real pipeline state (e.g., after extraction complete, refinement in progress)
+  - Cross-references to auditor SKILL.md, continuator orchestration, and execution auditor report format
+  - Discrepancy-resolution section: what to do when `Expected ≠ Actual`, when PROGRESS.md is stale, when a stage shows partial completion
+  - Status-emoji legend defining ✅ (complete), 🟢 (in progress), ⬜ (not started), and any error indicator
+  - Trigger rules: produce a state report at pipeline handoff points (extraction→refinement, refinement→merge, merge→adaptation)
+  - Error-blockers section with at least 3 common scenarios and their resolutions
+- **Priority:** medium - the template is sound but the thin instructional layer means operators must invent their own interpretation
+
+### .agents/skills/continuation/extractor.md
+- **Level:** 3
+- **Summary:** Extraction orchestrator for Stage 1 of the pipeline - reads 434-page ASD-STE100 spec using 109 parallel `hermes -z` workers across 37 batches of 3, each processing exactly 4 pages with content-preserving extraction.
+- **Strengths:**
+  - Full 37-batch worker grid explicitly laid out with page ranges (W001-W109)
+  - Worker command template with concrete variable substitution (`<<START>>`, `<<END>>`, `<<NNN>>`)
+  - 7 launch rules covering batch size, verification, parallelism, page limits, state saving, and prompt storage
+  - 6 quality checks per batch: file existence, size threshold (>3KB, >30 lines), truncation detection, content signal (keyword grep), fabrication detection, tracking update
+  - Recovery procedure: if a check fails, re-extract with page range split in half
+  - Environment verification commands with expected counts (434+ pages)
+  - Mandatory progress tracking with specific steps (flip checkbox, update counter, git add + commit)
+  - Immutable facts section grounding all numbers and conventions
+  - Cross-reference to `.agents/skills/references/worker-grid.md` and `.agents/skills/references/rails.md`
+- **Gaps:**
+  - No example of expected extraction output - the worker is told "Extract ALL content exactly" but no sample shows what good vs. bad output looks like
+  - No cross-reference to the refinement orchestrator as the next stage - the operator finishes extraction and has no pointer to Stage 2
+  - No performance estimates: expected wall-clock time per batch, total runtime for 37 batches, token consumption per worker
+  - No discussion of common failure modes beyond truncation: page numbering errors, PDF artifacts leaking into markdown, worker hallucinating commentary despite explicit instructions
+  - Quality check #5 ("Fabrication check: No commentary") lacks a concrete detection method - how does the operator grep for fabricated commentary?
+  - No guidance on what to do if the spec directory has more than 434 pages (e.g., Issue 10 released mid-pipeline)
+  - Immutable facts section asserts 19 categories but doesn't explain why this matters for extraction (it matters for adaptation, not extraction)
+- **What Level 4 Would Add:**
+  - A 10-line example of expected worker output showing the preservation format
+  - Cross-reference to `.agents/skills/continuation/refiner.md` as the explicit next stage with a one-sentence handoff
+  - Performance section: per-batch timing (~2-5 min), total pipeline duration (~2-3 hours), token budget per worker (~8K-12K)
+  - Common failure table: 4-5 known failure modes with detection commands and recovery actions
+  - Concrete fabrication-detection command (e.g., `grep -i "this page\|describes\|explains\|here we see" ste-code/extracted/wNNN*.md`)
+  - A note on scaling: what changes if the spec grows (Issue 10 has more pages, or page count changes)
+- **Priority:** low - already well-specified and executable; gaps are refinement polish
+
+### .agents/skills/continuation/refiner.md
+- **Level:** 3
+- **Summary:** Stage 2 refinement orchestrator - reformats 109 extracted ASD-STE100 files into clean, standardized markdown using 9 non-negotiable formatting rules with zero content loss.
+- **Strengths:**
+  - Excellent "What You Fix" table: 8 concrete extraction problems mapped to specific refined-output solutions with formatting details
+  - 9 refinement rules with explicit formatting specifications, including code-block examples for the metadata rule (#7)
+  - Full worker prompt template - not just a shell command, but the complete natural-language task specification with 9 ordered rules
+  - Launch protocol with concrete `hermes -z` commands for batch-of-3
+  - 5 verification checks per batch: line count, page numbers, heading hygiene, STE/non-STE format, table structure
+  - Verification includes quantitative checks (output line count >= input line count)
+  - Mandatory progress tracking referencing `.agents/state/REFINE-PROGRESS.md`
+  - Immutable facts section reinforcing conventions
+  - Prerequisite verification command (count 109 extracted files)
+- **Gaps:**
+  - No before/after example - the "What You Fix" table describes problems abstractly but doesn't show a concrete input snippet and its refined output
+  - No cross-reference to the continuation orchestrator or adaptation stage as the next pipeline step
+  - No edge-case handling: what if an input file is already well-formatted (refinement is a no-op), what if a worker produces broken markdown that passes line-count but is structurally invalid, what if the input file is truncated from extraction
+  - No performance data - expected runtime per 4-page refinement, total batch time, token consumption
+  - The "Verification" section describes 5 checks but none includes a concrete command (unlike the extractor's quality checks which include `grep` examples)
+  - No guidance on partial failures - if check #3 (heading hygiene) fails but checks #1/#2 pass, should the worker be re-run or can fixes be applied manually?
+- **What Level 4 Would Add:**
+  - One annotated before/after pair: 15-20 lines of raw extraction and its refined output, with marginal notes pointing to which rules were applied
+  - Cross-reference to the continuation orchestrator as the Stage 3-5 driver with a handoff note
+  - Edge-case section: already-formatted input (skip with verification), broken-markdown output (structural validation beyond line count), truncated input from extraction failure
+  - Concrete verification commands for each check (e.g., `grep -c '^#'` for heading count, `grep -c '> \*\*STE:\*\*'` for STE/non-STE format)
+  - Partial-failure decision matrix: which checks are blocking (re-run required) vs. advisory (manual fix acceptable)
+  - Performance table: per-batch timing, total refinement duration, token budget
+- **Priority:** low - already executable and well-structured; gaps are polish
+
+### .agents/skills/continuation/continuation.md
+- **Level:** 2
+- **Summary:** Continuation orchestrator for Stages 4-5 - drives adaptation of 53 writing rules + 19 categories + synonym/polysemy tables into code-domain files, then generates 6 deployable artifacts from the adapted content.
+- **Strengths:**
+  - Clear pipeline state diagram showing all 5 stages with completion status (✅/⬜)
+  - Prerequisite reading list of 6 files covering the full mission plan and all sub-protocols
+  - Explicit stage-4 output specification: 53 rules with naming convention (`a-secN-ruleY.Z.md`), 19 categories, synonym table, polysemy table
+  - 6 non-negotiable adaptation rules linking every output element back to master.md source data
+  - Stage-5 artifact table with 6 files, descriptive names, and token budgets
+  - 8 guardrails (R1-R8) covering write isolation, naming, fabrication prevention, heading conventions, and progress tracking
+  - Validation protocol with 3 tiers: per-file (>30 lines, no fabrication), spot-check (3 adaptations against spec), full sweep (all 53 rule numbers)
+  - Scratch warning explicitly forbidding reuse of premature adaptation files in `.agents/_scratch/`
+  - Immutable facts section and a "Start Now" execution block
+- **Gaps:**
+  - No worker prompt template or execution model - the continuation orchestrator is told to "Read ... continuation.md and execute" but the file itself describes what to do, not how to launch workers for the 53-rule adaptation (does the agent adapt them inline? launch sub-workers? use oneshot?)
+  - No example of a single adapted rule - the operator cannot see the output format for `a-secN-ruleY.Z.md`
+  - No edge-case handling: what if master.md has corrupt or missing entries for some rules, what if adaptation produces duplicate rule numbers, what if the synonym table is incomplete
+  - Cross-references to sub-skills (adaptation, artifacts, validation) are file paths in a reading list - no inline summaries of what each skill provides
+  - The 8 guardrails are listed but R3 ("Never claim a file complete until it EXISTS") lacks an enforcement mechanism - how does the agent verify this during execution?
+  - Validation describes checks but provides no commands - the operator must invent the validation script
+  - No traceability from adapted rule back to master.md beyond a rule-number reference - the format of that reference is unspecified
+  - The artifact token budgets are aspirational but no mechanism is described for measuring or enforcing them
+- **What Level 3 Would Add:**
+  - Execution model clarification: does the continuation agent adapt rules inline in a single session, or spawn 53 oneshot workers? If inline, what's the session structure?
+  - One fully worked example: `a-sec1-rule1.1.md` showing the complete format with original rule reference, code-domain examples, STE/non-STE pairs, and category mappings
+  - Inline summaries for each referenced sub-skill so the operator doesn't need to open 6 files before starting
+  - Edge-case section: missing master.md entries, rule number collisions, incomplete synonym/polysemy tables, category count mismatch
+  - Concrete validation commands: line-count check (`wc -l`), fabrication grep patterns, rule-number completeness check (`ls ste-code/adapted/ | sort` against expected list)
+  - Enforcement hooks for R3: explicit `test -f` before any status claim, `wc -l` threshold check
+  - Token-budget verification command for artifacts (`wc -c` with a conversion factor)
+- **Priority:** high - this is the pipeline's Stage 4-5 driver, and without a concrete execution model or output examples, an operator cannot begin adaptation from this file alone; they must read 6 sub-skills and invent the workflow
+
+## Batch Summary
+- Files scored: 8
+- Level distribution: -2:0 -1:0 1:0 2:5 3:3 4:0 5:0
+- Highest priority:
+  - `.agents/skills/extension-worker/SKILL.md` - launch command explicitly incomplete, no worker prompt template; file cannot be executed as-is
+  - `.agents/skills/continuation/continuation.md` - core pipeline driver for Stages 4-5 lacks an execution model, output examples, and concrete validation commands; operator must read 6 sub-skills and invent the workflow
+- Pattern observations:
+  - **Missing concrete examples is the most consistent gap.** Six of eight files at Level 2-3 lack even a single annotated input/output example. The refiners come closest (with their "What You Fix" table and prompt template), but even they don't show a real before/after file pair.
+  - **Cross-references are frontmatter-only.** Nearly every file has a `related` YAML frontmatter block, but almost none have inline cross-references in the body text. A reader must open 3-6 additional files to understand how any one skill connects to the pipeline.
+  - **Worker prompt templates are inconsistent.** The refiner has a full 87-line prompt template. The extractor has only a command template with variable placeholders. The extension and translation orchestrators have only a shell invocation - the operator must write prompts from scratch.
+  - **Edge cases and failure recovery are absent across the board.** Only the extractor mentions recovery ("re-extract with page range split in half"). No other file describes what to do when a worker fails, produces malformed output, times out, or encounters missing prerequisites.
+  - **Performance data is entirely absent.** No file provides expected runtime, token consumption, or parallelism constraints. Operators cannot plan batch timing or estimate completion.
+  - **State tracking is referenced but formats are inconsistent.** Some files reference `PROGRESS.md`, others `REFINE-PROGRESS.md`, others `EXTENSION-PROGRESS.md` or `TRANSLATIONS-PROGRESS.md`. The state-report template provides a unified format but no file uses it as its tracking mechanism.

@@ -1,0 +1,107 @@
+### .agents/skills/extraction/SKILL.md
+- **Level:** 2
+- **Summary:** Orchestrates 109 parallel hermes -z workers to extract 434 spec pages (4 pages/worker) into markdown, batched in groups of 3 across 37 batches. Agent-agnostic extraction stage 1 skill.
+- **Strengths:**
+  - Copy-pasteable worker command template with placeholder variables
+  - Five specific launch rules (batch size 3, page limit 4, verify-per-batch, no inline extraction, git-state save)
+  - Six measurable quality checks with concrete thresholds (>3KB, >30 lines, clean line endings)
+  - Failure recovery step: re-extract with page range split in half
+  - Frontmatter includes version (3.0.0) and cross-references to worker-grid.md and section-types.md (both exist on disk)
+- **Gaps:**
+  - No example of correct extraction output - reader must infer expected format from implied structure
+  - No examples of failure modes or what a corrupted extraction looks like
+  - No edge cases: multi-page tables spanning page boundaries, pages with images/diagrams, empty appendix pages, non-English characters
+  - "Expected keywords present" (quality check 4) is vague - no keyword list provided
+  - No rationale for design decisions: why 4 pages per worker? why batches of 3? why 109 workers for 434 pages?
+  - No performance estimates (total runtime, token budget per worker/batch, wall-clock time)
+  - No known limitations or workarounds beyond the single re-extract fallback
+  - Cross-references are file paths only - not annotated with what information to extract from them
+- **What Level 3 Would Add:** At least one annotated example of a correct extraction page showing expected heading structure, table format, and metadata. A table of common extraction failure patterns with screenshots/descriptions and corresponding recovery steps. Explicit keyword checklist for quality check 4. Rationale paragraph explaining batch size and page-per-worker choices. Worker-grid.md dependency pinned with expected format notes.
+- **Priority:** medium
+
+### .agents/skills/refinement/SKILL.md
+- **Level:** 3
+- **Summary:** Reformats 109 raw extraction files into clean standardized markdown using 9 non-negotiable formatting rules. Zero content loss - format only. Agent-agnostic stage 2 skill.
+- **Strengths:**
+  - "When to Use" section with four concrete triggers (post-extraction, PDF artifacts, heading inconsistency, STE/non-STE delineation)
+  - Problem/solution table: 9 raw extraction problems mapped to refined output patterns
+  - Nine individually documented rules, each with markdown code-block examples showing exact output format
+  - Rules cover headings, tables, STE/non-STE pairs, code blocks, dictionary entries, page metadata, list formatting, spacing - comprehensive formatting surface
+  - Output naming convention specified (rNNN-pPPPP-PPPP.md)
+  - Five verification checks per batch with specific, testable criteria
+  - Progress tracking mandate with file path (REFINE-PROGRESS.md) and audit enforcement
+  - Cross-references to rails.md and quality-checklist.md (both exist on disk)
+- **Gaps:**
+  - No before/after pairs showing incorrect raw extraction → correct refined output side by side (rules show target format only)
+  - No failure recovery: if verification check fails, what action to take? (re-refine? re-extract source pages? escalate?)
+  - No edge cases: corrupted or missing dictionary entries, tables spanning multiple raw extraction pages, ambiguous STE/non-STE boundaries, special characters in code examples
+  - No rationale for choosing 9 rules or why these specific formatting decisions were made
+  - No performance considerations (token usage per refinement pass, expected time per batch)
+  - No known limitations (e.g., "Rule 3 table detection may misidentify 3-column tables as 4-column when border characters are missing")
+  - Cross-references are named but not annotated - no description of what rails or quality checklist gates apply specifically to refinement
+  - No version history or changelog
+- **What Level 4 Would Add:** Side-by-side before/after examples for each of the 9 rules demonstrating raw extraction input vs. refined output. Edge case catalog: at least one documented edge case per rule with prescribed handling. Failure recovery matrix: which verification failures map to which recovery actions. Rationale section explaining design decisions (why blockquote format for STE/non-STE, why 2-space indent, why bold for proper names). Performance benchmark data from at least one full pipeline run.
+- **Priority:** low
+
+### .agents/skills/merging/SKILL.md
+- **Level:** 2
+- **Summary:** Concatenates 109 worker extraction files into a single master document with deduplication and section organization. Agent-agnostic stage 3 skill.
+- **Strengths:**
+  - Clear "When to Use" gate (GATE 1 passed, pre-adaptation)
+  - Five numbered sequential steps with concrete bash commands (cat, grep)
+  - Four deduplication item types (rule statements, example pairs, category listings, dictionary entries) with explicit "keep first occurrence" policy
+  - Detailed section organization template with all 9 rule sections, technical noun categories, dictionary A-Z, and appendices
+  - Validation commands with exact expected counts: 53 rules, 19 categories, ~875 approved + ~1400 unapproved dictionary entries
+  - Five-line head/tail verification for page 1..434 coverage
+  - Spot-check fidelity process with 10 random pages
+  - Seven-item verification gates checklist
+  - Output file specification (master-raw.md temporary, master.md permanent)
+- **Gaps:**
+  - No examples: what does a correctly merged rule section look like vs. an incorrectly duplicated one?
+  - No deduplication algorithm detail - "keep first occurrence" is stated but no mechanism described for detecting duplicates (exact match? fuzzy match? normalized whitespace?)
+  - No edge cases: boundary content where adjacent workers disagree on a page's content, rules appearing in multiple sections (cross-references within spec), dictionary entries duplicated with slightly different formatting, non-contiguous page ranges due to extraction failures
+  - No failure recovery: what if grep counts are wrong? what if spot-checks fail? what if master-raw.md <500KB?
+  - Cross-references are minimal - only rails.md listed, nothing else
+  - No rationale: why 10 random spot-checks instead of 5 or 20? why these specific deduplication categories?
+  - No performance considerations (filesystem I/O for 109 file concatenation, grep performance on >500KB file)
+  - No known limitations
+  - Dictionary entry counts in validation are approximate (~875, ~1400) - no tolerance threshold specified
+- **What Level 3 Would Add:** At least one annotated before/after example of a deduplicated section showing duplicate detection and removal. Deduplication algorithm pseudocode or decision tree. Edge case table covering boundary mismatches, missing pages, and cross-section duplicates. Recovery procedures for each verification gate failure. Tolerance thresholds for approximate counts (±5% specified). Cross-reference to refinement SKILL.md (since merge input is refined output) and adaptation SKILL.md (since merge output feeds adaptation).
+- **Priority:** high
+
+### .agents/skills/adaptation/SKILL.md
+- **Level:** 2
+- **Summary:** Transforms STE rules from merged master.md into STE-Code (code-domain adaptation) with category remapping. Agent-agnostic stage 4 skill.
+- **Strengths:**
+  - Clear input/output specification (master.md → adapted/ directory)
+  - PRESERVE/REPLACE dichotomy cleanly separates what stays unchanged from what transforms
+  - 19-category mapping table with concrete code-domain examples per category (keywords, frameworks, tools, deployment targets, etc.)
+  - Four non-negotiable traceability rules anchoring every adaptation to an original source
+  - Cross-reference to category-mapping.md (exists on disk)
+- **Gaps:**
+  - No adaptation examples - not a single before/after showing "here is an STE rule with its STE/non-STE pair → here is its STE-Code adaptation with code-domain example pair"
+  - No worker command template or launch instructions - how is this skill executed? (hermes -z? manual? script-driven?)
+  - "4 Technical Code Verb categories" mentioned in PRESERVE but never enumerated or defined
+  - "6-pass transformation pipeline" referenced but never explained (what are the 6 passes? what does each do?)
+  - No quality checks or verification gates for adapted output
+  - No failure recovery - what if a category has no matching code-domain equivalent? what if a rule resists mapping?
+  - No "When to Use" section - no gate conditions for entering adaptation
+  - No edge cases: rules that don't cleanly map to code domain, ambiguity between categories, rules with procedural steps that have no code equivalent
+  - No performance considerations
+  - Category mapping table has overlapping examples (e.g., "npm" appears in both dev tools #3 and packages #4 - no disambiguation rule)
+  - No version history
+- **What Level 3 Would Add:** At least three annotated before/after adaptation pairs spanning different rule sections (e.g., one from Section 1 Words, one from Section 3 Verbs, one from Section 8 Punctuation). Explanation of the 6-pass transformation pipeline with the role of each pass. Enumeration of the 4 Technical Code Verb categories with examples. Worker execution instructions. Verification gates with measurable checks (e.g., "grep -c adapted rule count = 53"). "When to Use" gate conditions. Category disambiguation rules for overlapping examples.
+- **Priority:** high
+
+## Batch Summary
+- Files scored: 4
+- Level distribution: -2:0 -1:0 1:0 2:3 3:1 4:0 5:0
+- Highest priority: merging (high - lacks deduplication algorithm, failure recovery, and cross-references despite being the critical consolidation step), adaptation (high - lacks execution instructions, examples, and fails to enumerate referenced components such as verb categories and 6-pass pipeline)
+- Pattern observations:
+  - **Universal gap: no before/after examples.** All four files describe what to produce but never show it. Refinement comes closest with target-format code blocks, but none show the transformation in action.
+  - **Universal gap: no edge case handling.** No file discusses what happens when input is malformed, boundaries are ambiguous, or content resists the prescribed transformation. The only recovery mechanism anywhere is extraction's "re-extract with half page range."
+  - **Universal gap: no rationale.** Design decisions (batch sizes, rule counts, formatting choices, deduplication categories) are stated as facts without explanation. This makes the skills brittle - a future maintainer cannot assess whether a constraint is load-bearing or arbitrary.
+  - **Universal gap: no performance data.** Token budgets, wall-clock estimates, and I/O costs are absent across all four files.
+  - **Cross-references are shallow.** All referenced files exist on disk, but no skill explains what information to extract from them or how they interact. They are listed, not integrated.
+  - **Versioning is inconsistent.** Extraction has version "3.0.0" in frontmatter; merging has "1.0.0"; refinement and adaptation have no version at all. No file has a changelog.
+  - **The pipeline stages are interdependent but the skills don't cross-reference each other.** Refinement receives extraction's output; merging receives refinement's output; adaptation receives merging's output. Only merging hints at its dependency (GATE 1). The others are siloed.

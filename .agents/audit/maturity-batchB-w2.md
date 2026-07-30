@@ -1,0 +1,127 @@
+### .agents/skills/artifacts/SKILL.md
+- **Level:** 2
+- **Summary:** Defines the 6 artifact files for Stage 5 output, with quality gates for the first two artifacts, anti-fabrication rules, and a token-size verification script.
+- **Strengths:**
+  - Clear 6-artifact table with target token sizes and purposes
+  - Concrete quality gates for Artifacts 1 and 2 with specific thresholds (4,800 chars, 13 questions in S6, all 14 principles must reference real STE rules)
+  - Strong anti-fabrication rules tied to master.md traceability
+  - Verification script is ready to run with expected output totals
+  - Prerequisites section gates execution correctly
+- **Gaps:**
+  - Quality gates defined for only 2 of 6 artifacts - Artifacts 3 through 6 have no quality criteria beyond token count
+  - No examples of correct artifact output anywhere (a reader cannot see what a passing artifact looks like)
+  - No failure recovery: what should an agent do if verification fails for a specific artifact?
+  - No cross-reference to the continuation skill (which also covers Stage 5) or the validation skill (for post-generation checks)
+  - No edge case handling: what if master.md is present but stale? what if dictionary entries are incomplete?
+  - S9 (Section 9) described as "optional" with no criteria for when to include or omit it
+  - No ordering guidance - are artifacts independent or must they be generated sequentially?
+- **What Level 3 Would Add:**
+  - Quality gates for all 6 artifacts with specific pass/fail criteria
+  - At least one worked example of a passing artifact (full or excerpted)
+  - Failure recovery instructions (e.g., "if Artifact 2 fails the S6 13-question check, re-read master.md Section 6 and regenerate")
+  - Cross-reference to `.agents/skills/continuation/SKILL.md` for the Stage 5 generation protocol
+  - Edge cases: incomplete master.md, missing dictionary entries, truncated adapted files
+  - Generation ordering guidance (sequential vs parallel for specific artifacts)
+- **Priority:** medium
+
+### .agents/skills/auditing/SKILL.md
+- **Level:** 2
+- **Summary:** Hidden verification skill that cross-references claims against disk evidence, detects fabrication patterns, and produces timestamped audit reports with severity flags.
+- **Strengths:**
+  - Strong, clear core principle ("Trust nothing. Verify everything against files on disk.")
+  - Concrete 5-step audit protocol from claim collection to report production
+  - Specific fabrication detection patterns (5 concrete heuristics: modern terms, commentary language, missing boilerplate, smooth prose, identical content)
+  - Auto-fix table with safe and explicitly unsafe fix categories
+  - Cross-references to rails.md and state-report.md
+- **Gaps:**
+  - No example of a completed audit report - agent cannot see what good output looks like
+  - The 5-step protocol is one line per step with no depth (Step 3 "Cross-Reference - Claim vs evidence for each file" has no guidance on what constitutes a match, near-match, or mismatch)
+  - Severity classification (🔴/🟠/🟡) has no definition - when is a discrepancy Critical vs Warning?
+  - No edge case handling: what if rails.md is missing? what if PROGRESS.md or exchange.md don't exist?
+  - Fabrication detection is described but no procedure for what to do after fabrication is detected (beyond the auto-fix table, which only covers safe patterns)
+  - No cross-reference to the validation skill for per-batch checks that complement full audits
+  - No mention of how to handle stale audit reports or audit report accumulation
+- **What Level 3 Would Add:**
+  - A complete example audit report showing structure, severity flags, and evidence citations
+  - Severity classification definitions with decision criteria (Critical = data loss or fabrication; Error = missing file; Warning = stale content)
+  - Edge case handling: missing rails.md (load from references/ and validate), missing PROGRESS.md (audit from exchange.md alone), empty directories
+  - Cross-reference to `.agents/skills/validation/SKILL.md` for complementary per-batch checks
+  - Guidance on audit cadence (after every batch? after every stage? on-demand?)
+  - What to do with audit reports: retention policy, how to signal results to other agents via exchange.md
+- **Priority:** medium
+
+### .agents/skills/validation/SKILL.md
+- **Level:** 3
+- **Summary:** Systematic validation protocol for worker extraction output, covering per-batch checks (file existence, content signals, truncation, fabrication), full-extraction audits (coverage, volume, rule completeness), and random spot-checks with a recording format.
+- **Strengths:**
+  - Three-tier validation structure (per-batch, full-extraction, spot-check) covers multiple risk surfaces
+  - Every check has concrete, copy-paste-ready bash commands with expected outputs
+  - Clear, quantified failure thresholds (30 lines = FAIL, 80 lines = WARN, 500KB floor, >2000 dictionary entries, 434 pages, 53 rules)
+  - Per-page-range content signal expectations are specific and grounded in the source document structure
+  - Truncation detection uses concrete red flags (mid-word cutoff, partial table row, missing footer)
+  - Fabrication detection heuristics are specific and paired with a diff-based verification command
+  - Spot-check protocol has a structured recording format with required fields
+  - Cross-references rails.md at the top level
+- **Gaps:**
+  - No examples of actual validation output - what does a passing batch report look like? what does a failing one look like?
+  - No edge case handling: what if a batch has fewer than 3 workers (last batch is a remainder)? what if page ranges cross content-signal boundaries?
+  - Failure recovery is shallow: "split the worker's page range in half and re-extract" is the only guidance, with no detail on how to do that (which worker to launch, how to split, how to assemble results)
+  - No cross-reference to the continuation skill for re-extraction workflows
+  - No guidance on validation-log.md retention, rotation, or how other agents consume it
+  - The rule completeness check hardcodes all 53 rules - fragile if rule numbering ever changes
+  - No pre-validation check: what if `ste-code/extracted/` doesn't exist yet?
+  - No performance considerations for the full 1-434 page gap scan (could take seconds on large filesets)
+- **What Level 4 Would Add:**
+  - A worked example of a batch validation run showing both PASS and FAIL output for different workers
+  - Edge case handling: remainder batches (1-2 workers), boundary-crossing page ranges, empty extraction directories
+  - Detailed re-extraction procedure: how to compute half-range splits, how to launch replacement workers, how to merge split results
+  - Cross-reference to `.agents/skills/continuation/SKILL.md` for re-extraction orchestration
+  - Validation-log.md lifecycle: append-only? rotate per-run? how does the auditor or continuator consume it?
+  - Performance note: the full gap scan is O(434 × worker_count) and should be run rarely or parallelized
+  - Rationale for threshold choices (why 30 lines = FAIL? empirical data from known truncation cases?)
+  - Pre-flight check: verify extracted/ directory exists and has files before running per-batch checks
+- **Priority:** low
+
+### .agents/skills/continuation/SKILL.md
+- **Level:** 3
+- **Summary:** Multi-agent continuation skill for pipeline Stages 3-5 (merge, adapt, artifacts), usable by any agent from its own perspective. Covers stage detection, input selection per agent role, detailed protocols for merging 109 files, adapting 53 rules to code domain, and generating 6 artifacts.
+- **Strengths:**
+  - Agent-perspective mapping table makes the skill reusable across Extractor, Refiner, and Auditor agents with different input sources
+  - Stage detection has concrete bash commands and a clear decision tree for which stage to activate
+  - Merge protocol is detailed: concatenation, deduplication (4 sub-rules), section organization (full outline), and 4-point validation
+  - Adaptation section has a complete 11-worker assignment table with specific rules, sections, and output filenames
+  - Preserve/Replace rules for adaptation are explicit and operationalized into two clear lists
+  - Anti-fabrication rules for artifact generation are specific and traceability-gated
+  - Immutable facts section hardens critical constants (19 categories, 53 rules, model name, 434 pages) against drift
+  - Cross-references to PROGRESS.md and exchange.md for inter-agent signaling
+- **Gaps:**
+  - No examples of correct merged, adapted, or artifact output - agent cannot see what good looks like for any stage
+  - No edge case handling: what if enriched/ has 108 files instead of 109? what if master.md exists but has 0 bytes? what if refined/ and extracted/ both exist but one is stale?
+  - No failure recovery: what to do if deduplication misses a duplicate? if validation counts fail (not 53 rules, not 19 categories)? if an adaptation worker produces aerospace examples?
+  - Merge deduplication rules are described but not operationalized - no grep/sort/uniq commands, no script
+  - Adaptation prompt template is a one-line description, not a worker prompt - how does the agent launch adaptation workers? same hermes command as extraction?
+  - Stage 5 (Artifacts) references "quality gate checklist" but doesn't define it - cross-reference to artifacts/SKILL.md is implied but not explicit
+  - Input selection logic uses `wc -l` with no handling of the edge case where both enriched and extracted are incomplete
+  - No performance guidance: concatenating 109 files into raw.md and then deduplicating a 500KB+ file - memory or time considerations?
+- **What Level 4 Would Add:**
+  - Worked examples for each stage: a fragment of merged/master.md showing section structure, an adapted rule showing original→code-domain transformation, an artifact excerpt
+  - Edge case handling: incomplete input directories, zero-byte master.md, stale vs fresh file detection (via timestamps), only 108 extracted files
+  - Failure recovery procedures: merge validation fails → re-check input files and re-concatenate; adaptation worker produces aerospace content → re-launch with stricter prompt; artifact quality gate fails → identify missing source data and regenerate
+  - Operationalized deduplication with actual commands or a script snippet
+  - Explicit cross-reference to `.agents/skills/artifacts/SKILL.md` for the artifact quality gate checklist
+  - Worker launch instructions for adaptation (hermes command format, batch size, timeout expectations)
+  - Performance note: concatenation of 109 files is cheap; deduplication on 500KB+ is O(n²) with naive diff - recommend sort+uniq approach
+  - Design rationale: why 3-worker batches? why 11 adaptation workers instead of different grouping?
+- **Priority:** low
+
+## Batch Summary
+- Files scored: 4
+- Level distribution: -2:0 -1:0 1:0 2:2 3:2 4:0 5:0
+- Highest priority: artifacts/SKILL.md (quality gates missing for 4/6 artifacts, no examples) and auditing/SKILL.md (thin, no report example, no severity definitions)
+- Pattern observations:
+  - **No positive examples anywhere:** All 4 files describe what to produce but none show a concrete example of correct output. An agent reading these skills has no reference for what "done right" looks like - only failure patterns and thresholds.
+  - **Edge case gap is uniform:** None of the 4 files address what happens when prerequisites are partially met (108/109 files, missing but non-empty master.md, empty directories, stale artifacts). Every file assumes ideal input state.
+  - **Failure recovery is shallow or absent:** Only validation/SKILL.md mentions recovery ("split and re-extract"), and even that is a one-liner. The other 3 files describe detection but not remediation.
+  - **Cross-references exist but are underutilized:** continuation/SKILL.md and artifacts/SKILL.md overlap on Stage 5 but don't reference each other. auditing/SKILL.md and validation/SKILL.md are complementary (full audit vs per-batch check) but don't cross-link. The pipeline stages are strongly sequential but skills don't chain to each other.
+  - **No meta-instructions or version history:** Consistent across all 4 files - no guidance on how to improve the skill itself, no known limitations section, no changelog. This caps the maximum achievable level at 3 across the board.
+  - **Bash commands are pragmatic but not resilient:** Scripts use hardcoded worker IDs, hardcoded rule lists, hardcoded paths. They work for the current pipeline but won't survive structural changes without manual edits.
