@@ -4,6 +4,10 @@ Batch orchestrator: extract all pages from a PDF to individual markdown files.
 Usage: python3 extract_pdf.py <pdf_path> <output_dir>
 
 Creates: output_dir/page-0001.md, page-0002.md, ...
+
+NOTE: For issue-09-2025, the combined markdown (issue-09-2025.md) is the
+preferred source. Use split_spec.py to split it into spec-page-id files
+(e.g., page-HI-1.md, page-1-1-1.md) in the page-dir/ subdirectory.
 """
 
 import sys

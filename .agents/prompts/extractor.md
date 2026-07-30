@@ -15,10 +15,13 @@ You take on the EXTRACTOR role. Your job: extract all 434 pages of the ASD-STE10
 - 434 pages ÷ 4 pages per worker = 109 workers
 - 109 workers ÷ 3 per batch = 37 batches
 - Each worker: `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- Input: `spec/issue-09-2025/page-dir/page-<spec-id>.md` (spec page identifiers)
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - Prompts: `ste-code/prompts/wNNN-prompt.txt`
 
 **Critical:** Write each prompt to a file and pass via `$(cat file)`. Do NOT embed multi-line prompts in the shell command — shell quoting breaks. Keep prompts simple and single-line.
+
+**Note:** The old `page-NNNN.md` files (sequential numbering) have been replaced by `page-dir/page-<spec-id>.md` files (spec page identifiers like HI-1, 1-1-1, 2-1-A1). Use `spec/issue-09-2025/split_spec.py` to regenerate if needed.
 
 ## POLL SYSTEM
 
@@ -38,7 +41,7 @@ Never launch more than 3 at once. Never skip verification.
 Write to `ste-code/prompts/wNNN-prompt.txt`:
 
 ```
-Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file.
+Read spec/issue-09-2025/page-dir/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file.
 ```
 
 Then launch:
@@ -62,7 +65,7 @@ Batch N: [x] WNNN (pages A-B), [x] WNNN (pages C-D), [x] WNNN (pages E-F)
 
 ## START NOW
 
-1. Verify GATE 0: `ls spec/issue-09-2025/page-0001.md spec/issue-09-2025/page-0434.md`
+1. Verify GATE 0: `ls spec/issue-09-2025/page-dir/page-front-matter.md spec/issue-09-2025/page-dir/page-2-1-Y2.md`
 2. Create directories: `mkdir -p ste-code/extracted ste-code/prompts`
 3. Generate all 109 prompts: `python3 ste-code/generate_extraction_prompts.py`
 4. Launch Batch 1 (W001, W002, W003)

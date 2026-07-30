@@ -1,0 +1,8 @@
+**Page HI-7** 
+
+**ASD-STE100 Simplified Technical English** 
+
+
+activity (n) TASK (n) and PROCEDURE (n) added as an approved alternative. Related STE and non-STE examples added. For the approved alternative WORK (n), STE and non-STE examples changed. 
+
+ADJACENT (adj) STE example revised. adopt (v) STE example revised. adverse (adj) STE and non-STE examples revised. Help revised. Related STE and non-STE examples added. advisable (adj) STE and non-STE examples revised. advise (v) First and second STE and non-STE examples revised. affect (v) Help revised. Related STE and non-STE examples added. AFTER (conj) STE example revised. AGREE (v) STE example revised. AID (n) STE example revised. alert (v) STE and non-STE examples revised. allocate (v) STE and non-STE examples revised. allowable (adj) Second STE and non-STE examples revised. already (adv) Second STE and non-STE examples revised. ALTERNATIVE (adj) STE example revised. ALTERNATIVE (n) STE example revised. alternatively (adv) STE example revised. amendment (n) First STE example revised. among (prep) STE and non-STE examples revised. annotation (n) STE and non-STE examples revised. RECORD (v) added as an approved alternative. Related STE and nonSTE examples added. another (adj) ADD (v) removed from the approved alternatives. First and third STE and non-STE examples revised. appear (v) Second and third STE examples revised. APPLY (v) Second approved alternative added. Related STE examples aligned. APPROVAL (n) STE example revised. approve (v) STE example revised. AROUND (prep) Help added. Related STE and non-STE examples added. arrest (v) Second STE and non-STE examples revised.

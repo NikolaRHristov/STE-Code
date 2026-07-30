@@ -5,7 +5,7 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │ STAGE 1: EXTRACTION                  Agent #1                    │
-│   Input:  spec/issue-09-2025/page-*.md (434 pages)              │
+│   Input:  spec/issue-09-2025/page-dir/page-*.md (426 pages)              │
 │   Output: ste-code/extracted/w*-p*.md (109 files)               │
 │   Status: ✅ Complete                                           │
 ├──────────────────────────────────────────────────────────────────┤
@@ -44,7 +44,7 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 
 | Directory | Stage | Contents |
 |-----------|-------|----------|
-| `extracted/` | 1 — Raw | 109 files from spec pages |
+| `extracted/` | 1 — Raw | 109 files from spec pages (page-dir/page-*.md) |
 | `refined/` | 2 — Formatted | 109 files, 100.0 audit score |
 | `merged/` | 3 — Consolidated | master.md (deduplicated) |
 | `adapted/` | 4 — Code-adapted | 57 adapted rule, dictionary, and category files |

@@ -56,7 +56,7 @@ previous stage directory and writes to its own. Cross-contamination between
 stages is forbidden (Rail 1: Stage Isolation).
 
 STAGE 1 — EXTRACTION
-  Input: spec/issue-09-2025/page-0001.md through page-0434.md
+  Input: spec/issue-09-2025/page-dir/page-<spec-id>.md (426 files)
   Output: ste-code/extracted/wNNN-pPPPP-PPPP.md (109 files)
   Method: Parallel workers read 4 pages each, extract every word verbatim
   Workers: 109 workers, 37 batches of 3
@@ -314,11 +314,12 @@ STE-Code compliant output using those artifacts as reference.
 IMMUTABLE FACTS
 ---------------
 
-Source: ASD-STE100 Issue 9, January 2025 (434 pages)
+Source: ASD-STE100 Issue 9, January 2025 (434 PDF pages, 426 spec pages)
 Model: deepseek-v4-pro
 Adaptation: 51 writing rules + 4 General Rules (55 adapted files)
 Categories: 19 technical noun categories + 4 verb categories
 Dictionary: 5,943 lines of approved/unapproved words
 Artifacts: 6 deployable files across 5 adaptation levels
 Benchmark: 59 tests, 14 categories, 96.6% pass rate
-Version: 3.0, 2026-07-30
+Version: 3.1, 2026-07-31
+Page files: spec/issue-09-2025/page-dir/page-<spec-id>.md (426 files split from combined markdown)
