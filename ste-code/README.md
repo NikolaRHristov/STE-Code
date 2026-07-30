@@ -70,7 +70,7 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 
 - 0 FIXME markers across all adapted and artifact files
 - 0 CRLF line endings
-- 0 stale references (53 rules, 22 categories)
+- 0 stale references (53 rules, 19 categories)
 - All rule cross-references verified
 - Two quality sweep passes over 65 files
 - Agent-agnostic tooling with configurable backends

@@ -117,7 +117,7 @@ ollama create ste-code -f Modelfile && ollama run ste-code
 cat ste-code/artifacts/ste-code-distilled-system-prompt.txt > /tmp/ste-code-context.txt
 echo -e "\n---\n" >> /tmp/ste-code-context.txt
 cat my-readme.md >> /tmp/ste-code-context.txt
-hermes -z "$(cat /tmp/ste-code-context.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat /tmp/ste-code-context.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 Full deployment instructions are in [`ste-code/artifacts/ste-code-deployment-guide.txt`](./ste-code/artifacts/ste-code-deployment-guide.txt).
