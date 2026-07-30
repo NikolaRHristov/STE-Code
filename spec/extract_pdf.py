@@ -8,6 +8,7 @@ Creates: output_dir/page-0001.md, page-0002.md, ...
 NOTE: For issue-09-2025, the combined markdown (issue-09-2025.md) is the
 preferred source. Use split_spec.py to split it into spec-page-id files
 (e.g., page-HI-1.md, page-1-1-1.md) in the page-dir/ subdirectory.
+The old page-NNNN.md sequential naming is deprecated.
 """
 
 import sys

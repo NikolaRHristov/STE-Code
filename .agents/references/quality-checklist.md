@@ -180,7 +180,7 @@ When 2 or 3 workers in the same batch fail validation, stop. A cascading failure
 1. Check that source pages exist and have content:
    ```bash
    for pg in $(seq START END); do
-     f="spec/issue-09-2025/page-$(printf '%04d' $pg).md"
+     f="spec/issue-09-2025/page-dir/page-$(printf '%04d' $pg).md"
      [ -f "$f" ] && echo "OK: $f ($(wc -l < "$f") lines)" || echo "MISSING: $f"
    done
    ```

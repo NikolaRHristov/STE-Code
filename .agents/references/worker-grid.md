@@ -143,7 +143,7 @@ NOTE: Worker rails W1-W10 are appended to every `hermes -z` prompt. The full inj
 ## Worker Prompt Template (per worker)
 
 ```bash
-hermes -z "Read spec/issue-09-2025/page-dir/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+hermes -z "Read spec/issue-09-2025/page-dir/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 NOTE: The full worker rails block (W1-W10 from `.agents/references/worker-rails.md`) is appended to this prompt. The launcher script handles the concatenation.
@@ -158,7 +158,7 @@ Run these checks before launching any batch:
 □ spec/issue-09-2025/page-dir/ directory exists with page-front-matter.md through page-2-1-Y2.md
 □ ste-code/extracted/ directory exists and is empty (or contains only prior successful extracts)
 □ .agents/state/PROGRESS.md is initialized with all 109 workers marked [ ]
-□ Model deepseek-v4-pro is available and responding
+□ Model poolside/laguna-s-2.1:free is available and responding
 □ API rate limit allows 3 concurrent requests
 □ Disk has >50MB free for 109 output files (~4-8KB each)
 □ git status is clean or shows only PROGRESS.md changes
@@ -205,7 +205,7 @@ A batch is NOT complete until all three gates pass.
 | All pages in range represented | Count `# Page N of 434` headers in output | If fewer than expected: truncated, split and retry |
 | Table row counts consistent | No single `|` orphan lines | If found: PDF interleaving artifact, re-extract |
 | Expected section type matches content | Cross-reference `.agents/references/section-types.md` | If wrong section type: wrong page range, re-extract with corrected range |
-| Spot-check 3 random lines against source | Compare output lines to `spec/issue-09-2025/page-NNNN.md` | If mismatch: fabrication risk, delete and re-extract |
+|| Spot-check 3 random lines against source | Compare output lines to `spec/issue-09-2025/page-dir/page-<spec-id>.md` | If mismatch: fabrication risk, delete and re-extract |
 
 ### Full Verification Procedure (per batch)
 

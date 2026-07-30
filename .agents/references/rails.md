@@ -224,7 +224,7 @@ BREAKING: Glued headings can cause downstream parsers to merge unrelated content
 | Fact | Wrong Claim (never make) |
 |------|--------------------------|
 | STE has 19 technical noun categories | "22 categories" |
-| Model is `deepseek-v4-pro` | "deepseek-pro" or "deepseek-v4-flash" |
+|| Model is `poolside/laguna-s-2.1:free` | "deepseek-pro" or "deepseek-v4-flash" |
 | `hermes -z` supports file I/O | "hermes -z does not support file I/O" |
 | 53 writing rules + 4 GR rules | 65 rules (Issue 6 count) |
 | Output is `.md` files | "JSON structured data" |
@@ -237,7 +237,7 @@ This rail contains hardcoded facts that MAY DRIFT when project constants change.
 | Fact | Source File | Update Trigger |
 |------|-------------|----------------|
 | 19 technical noun categories | `ste-code/adapted/a-sec1-rule1.5.md` | A new category is added or removed |
-| Model name `deepseek-v4-pro` | `.agents/AGENTS.md` — Model field | The model changes (update in AGENTS.md first, then here) |
+|| Model name `poolside/laguna-s-2.1:free` | `.agents/AGENTS.md` — Model field | The model changes (update in AGENTS.md first, then here) |
 | 53 writing rules + 4 GR rules | `ste-code/adapted/` — count of `a-secN-ruleY.Z.md` files | Rules are added, split, or merged |
 | Output format `.md` | Pipeline specification | A new output format is introduced |
 | Stage directory names | `ste-code/` directory structure | Pipeline stages are renamed or reorganized |

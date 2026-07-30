@@ -35,7 +35,7 @@ Original worker split (30-112 pages each) is too coarse. Workers need context he
 
 This section adds evidence for the 1M context window claim in the user directive.
 
-**Model:** `deepseek-v4-pro` (1,024,000 token context window)
+**Model:** `poolside/laguna-s-2.1:free` (1,024,000 token context window)
 
 **Token usage per 4-page worker:**
 
@@ -56,7 +56,7 @@ The directive's ">90% free" target is satisfied with a wide safety margin. Even 
 - v1 workers at 112 pages consumed ~28% of the context window (~287,000 tokens). Window exhaustion was not the failure cause. Truncation came from model output limits, not input limits.
 - v2 workers at 4 pages consume ~2.5% of the context window. Output truncation is eliminated because the model has ample output token budget to emit the full extraction.
 
-**Model output token limit:** `deepseek-v4-pro` has an effective output limit of approximately 32,000 tokens (32K). A 4-page extraction produces approximately 10,000-14,000 tokens of output. This fits within the output budget with a 2.3x-3.2x safety margin.
+**Model output token limit:** `poolside/laguna-s-2.1:free` has an effective output limit of approximately 32,000 tokens (32K). A 4-page extraction produces approximately 10,000-14,000 tokens of output. This fits within the output budget with a 2.3x-3.2x safety margin.
 
 ## Revised Split
 
@@ -290,7 +290,7 @@ Before launching any workers with this strategy, verify these conditions:
 - [ ] Spec page files exist: `spec/issue-09-2025/page-0001.md` through `spec/issue-09-2025/page-0434.md`
 - [ ] Output directory exists: `ste-code/extracted/`
 - [ ] Prompt directory exists: `ste-code/prompts/` (or prompts are generated inline)
-- [ ] Model available: `hermes config | grep deepseek-v4-pro`
+- [ ] Model available: `hermes config | grep poolside/laguna-s-2.1:free`
 - [ ] Git repository clean: `git status --porcelain` returns empty (or only expected files)
 - [ ] PROGRESS.md initialized: `.agents/state/PROGRESS.md`
 - [ ] Worker grid verified: `.agents/references/worker-grid.md` covers all 434 pages

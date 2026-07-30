@@ -92,8 +92,11 @@ issue-09-2025/
 # Split combined markdown into individual page files
 python3 issue-09-2025/split_spec.py
 
-# Extract one page
+# Extract one page (from PDF)
 python3 extract_page.py issue-09-2025.pdf 50 page-0050.md
+
+# For issue-09-2025, prefer splitting the combined markdown:
+python3 issue-09-2025/split_spec.py
 
 # Extract all pages from one PDF
 python3 extract_pdf.py issue-09-2025.pdf issue-09-2025/

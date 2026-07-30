@@ -48,7 +48,7 @@ The last worker (W109) processes only 2 pages (pages 433-434). This is correct. 
 hermes -z "Read spec/issue-09-2025/page-dir/page-<<START>>.md through page-<<END>>.md. \
 Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.\
 Do not summarize. Include every word, every table, every example.\
-Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 NOTE: Page files now use spec page identifiers (e.g., page-HI-1.md, page-1-1-1.md)
@@ -58,7 +58,7 @@ combined issue-09-2025.md.
 
 ## Launch Rules
 
-- **Always** use `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- **Always** use `hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - **Always** launch exactly 3 workers per batch. Do not launch more.
 - **Always** verify output after each batch before you launch the next batch.
 - **Never** use inline extraction. It defeats parallelization.

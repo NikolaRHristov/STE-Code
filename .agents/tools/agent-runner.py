@@ -44,8 +44,8 @@ _DEFAULT_CONFIG = {
     "agents": {
         "hermes": {
             "runtime": "~/.hermes/hermes-agent/venv/bin/python3",
-            "wrapper": ".agents/tools/hermes-oneshot-wrapper.py",
-            "default_model": "deepseek-v4-pro",
+            "wrapper": "tools/hermes-oneshot-wrapper.py",
+            "default_model": "poolside/laguna-s-2.1:free",
             "env": {
                 "HERMES_REASONING_EFFORT": "high",
                 "HERMES_YOLO_MODE": "1",
@@ -131,7 +131,7 @@ def _resolve_command(agent_cfg, prompt_file, model=None, cwd=None):
         # Hermes uses its venv + oneshot wrapper
         runtime = os.path.expanduser(str(agent_cfg["runtime"]))
         wrapper = str((cwd / agent_cfg["wrapper"]).resolve())
-        effective_model = model or agent_cfg.get("default_model", "deepseek-v4-pro")
+        effective_model = model or agent_cfg.get("default_model", "poolside/laguna-s-2.1:free")
         cmd = [runtime, wrapper, str(prompt_file), "--model", effective_model]
     else:
         # Generic agent CLI

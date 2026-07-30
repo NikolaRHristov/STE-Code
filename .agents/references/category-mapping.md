@@ -281,7 +281,7 @@ Do NOT mark a term as unapproved when:
 | Worker prompt: categories | `.agents/prompts/adapt-categories.md` | Prompt that guides workers through the 19-category mapping during adaptation. |
 | Quality checklist | `.agents/references/quality-checklist.md` | Rail 3 (Category Coverage) verifies all 19 categories appear in output. |
 | Audit report | `.agents/audit/execution-report.md` | Audit that discovered the 22→19 correction. |
-| Extraction source | `ste-code/extracted/page-0047.md` through `page-0052.md` | Raw extraction of spec pages containing the 19 category definitions. |
+|| Extraction source | `spec/issue-09-2025/page-dir/page-1-1-5.md` through `page-1-1-8.md` | Raw extraction of spec pages containing the 19 category definitions. |
 | Benchmark suite | `.agents/benchmark/` | 59 tests across 14 STE-Code categories, including category-mapping accuracy checks. |
 | Adapted dictionary | `ste-code/adapted/a-dictionary.md` | Full 5,943-line approved word dictionary. Use to verify non-technical nouns. |
 | Worker grid | `.agents/references/worker-grid.md` | Worker role assignments, batch sizes, and category coverage expectations. |
@@ -292,14 +292,14 @@ Do NOT mark a term as unapproved when:
 Use these commands to verify the category count and content:
 
 ```bash
-# Count unique category definitions in extracted pages
-grep -c "^### Category" ste-code/extracted/page-004*.md
+# Count unique category definitions in source page files
+grep -c "^### Category" spec/issue-09-2025/page-dir/page-1-1-5.md spec/issue-09-2025/page-dir/page-1-1-6.md spec/issue-09-2025/page-dir/page-1-1-7.md spec/issue-09-2025/page-dir/page-1-1-8.md
 
 # Verify all 19 categories appear in this mapping
 grep -c "^| [0-9]" .agents/references/category-mapping.md
 
-# Confirm no categories 20-22 exist in the extraction
-grep -rn "Category 2[0-2]" ste-code/extracted/ || echo "None found — correct"
+# Confirm no categories 20-22 exist in the source
+grep -rn "Category 2[0-2]" spec/issue-09-2025/page-dir/ || echo "None found — correct"
 
 # List all category headers from the adapted rules
 grep "^## Category" ste-code/adapted/a-categories.md

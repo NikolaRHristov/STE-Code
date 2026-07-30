@@ -2,13 +2,13 @@
 
 > **Project root:** `.agents/`  
 > **Pipeline spec:** `ste-code/` (ASD-STE100 → STE-Code adaptation)  
-> **Default agent:** Hermes (`deepseek-v4-pro`)  
+> **Default agent:** Hermes (`poolside/laguna-s-2.1:free`)  
 > **Framework:** Agent-agnostic (pre-configured for Hermes, supports Claude, Codex, custom)
 
 ## Agent Runner
 
 All scripts use the **agent-agnostic runner** at `.agents/tools/agent-runner.py`.
-Configure backends in `.agents/config/agents.yaml`. Default: Hermes with `deepseek-v4-pro`.
+Configure backends in `.agents/config/agents.yaml`. Default: Hermes with `poolside/laguna-s-2.1:free`.
 
 ```bash
 # Use default agent (Hermes)
@@ -21,7 +21,7 @@ python3 .agents/tools/assemble-level1.py --agent claude
 python3 .agents/tools/agent-runner.py --list
 
 # Shell launcher (agent-agnostic)
-.agents/tools/launch-worker.sh prompt.txt --agent hermes --model deepseek-v4-pro out.txt
+.agents/tools/launch-worker.sh prompt.txt --agent hermes --model poolside/laguna-s-2.1:free out.txt
 ```
 
 Adding a new agent: edit `.agents/config/agents.yaml` and add your backend.
