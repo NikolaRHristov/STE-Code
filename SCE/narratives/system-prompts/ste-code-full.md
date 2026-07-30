@@ -130,6 +130,7 @@ Additional: No slang/jargon (P10), no synonym drift (P11), no noun-as-verb (P7),
 | Verb categories | `SCE/core/categories/verb-categories.json` |
 | Approved verbs | `SCE/data/vocabulary/approved-verbs.json` |
 | Approved adjectives | `SCE/data/vocabulary/approved-adjectives.json` |
+| Code dictionary | `SCE/data/vocabulary/code-dictionary.json` (175 entries: 50 verbs, 20 adjectives, 19 categories, 20 concepts) |
 | Agentic rails | `SCE/compute/agentic/rails.json` |
 | Gate conditions | `SCE/compute/agentic/gate-conditions.json` |
 | Ultra-compressed | `SCE/narratives/system-prompts/ste-code-micro.md` |
