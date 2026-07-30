@@ -231,4 +231,4 @@ OUTPUT FORMAT (valid JSON only):
   {"rule": "rule-X.Y", "principle": "P#", "ste_example": "...", "non_ste_example": "...", "explanation": "..."}
 ]}
 
-Do NOT create files. Output JSON to stdout only.
+Write the complete JSON output to ste-code/adapted/expanded/pass1-batch-028.json using write_file. Output ONLY the JSON file — no explanations.
