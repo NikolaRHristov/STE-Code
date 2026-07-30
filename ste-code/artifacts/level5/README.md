@@ -1,12 +1,13 @@
-# Level 5 — Full Standard (Directory Structure)
+# Level 5 — Full Specification (51 Rule Summaries)
 
-Organized by ASD-STE100 section. Each rule has its own directory for section-specific content.
+Organized by ASD-STE100 section. Each rule has its own directory with a summary file.
 
 ## Structure
 
 ```
 level5/
 ├── sec1/   (14 rules — Words)
+│   └── a-sec1-rule1.1/summary.md  through  a-sec1-rule1.14/summary.md
 ├── sec2/   (2 rules — Noun Phrases)
 ├── sec3/   (7 rules — Verbs)
 ├── sec4/   (5 rules — Sentences)
@@ -15,17 +16,25 @@ level5/
 ├── sec7/   (3 rules — Warnings)
 ├── sec8/   (6 rules — Punctuation)
 ├── sec9/   (4 rules — Document Structure)
-├── gr/     (4 grammar rules)
-├── dictionary/  (Approved/unapproved vocabulary)
-└── templates/   (System prompt templates per level)
+└── README.md
 ```
+
+Total: 51 rule summaries in 51 directories across 9 sections.
+
+## Each Summary Contains
+
+- Rule number and title
+- What the rule requires
+- One Non-STE and STE example pair
 
 ## Usage
 
-Each rule directory can contain:
-- `summary.md` — Rule summary for LLM context
-- `examples.md` — Non-STE/STE example pairs
-- `paradigm.md` — Paradigm-specific guidance
-- `edge-cases.md` — Edge cases and exceptions
+Level 5 summaries are the input for Level 3 and Level 4 assembly. They are also the reference for specification-grade documentation.
 
-Source rules: `ste-code/adapted/a-secN-ruleX.Y.md`
+```bash
+# Assemble from Level 5 summaries
+python3 .agents/tools/assemble-level3.py   # → Level 3 (~8K tokens)
+python3 .agents/tools/assemble-level4.py   # → Level 4 (~45K tokens)
+```
+
+Source rules: `ste-code/adapted/a-secN-ruleY.Z.md`

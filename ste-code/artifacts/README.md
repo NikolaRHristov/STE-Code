@@ -1,71 +1,56 @@
 # STE-Code Artifacts
 
-Ready-to-use files for the STE-Code specification. STE-Code adapts ASD-STE100 Issue 9 (January 2025) for software documentation. It gives you 51 writing rules, 19 code-domain noun categories, and a controlled vocabulary.
+Ready-to-use system prompts for STE-Code. STE-Code adapts ASD-STE100 Issue 9 (January 2025) for software documentation. It gives you 51 writing rules, 19 code-domain noun categories, and a controlled vocabulary.
 
-> Adapted from ASD-STE100 Issue 9 (January 2025), published by the AeroSpace and Defence Industries Association of Europe (ASD), Brussels, Belgium. (C) ASD, 2025 -- All rights reserved. STE is a European Union Trade Mark (No. 017966390). STE-Code is an independent adaptation not endorsed by ASD. For the authoritative standard, visit asd-ste100.org.
+> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. (c) ASD, 2025.
+> STE is EU Trade Mark 017966390. Independent adaptation.
 
-## File Index (6 files, ~13,100 total tokens)
+## System Prompts (4 levels + full specification)
 
-| # | File | Tokens | Adaptation Level | Purpose |
-|---|------|--------|-----------------|---------|
-| 1 | ste-code-distilled-system-prompt.txt | ~1,200 | Level 1 | Concise LLM system prompt (14 principles, synonym table, anti-patterns) |
-| 2 | ste-code-self-reading-manual.txt | ~7,000 | Level 5 | Full reference manual (all 51 rules, 4 GR rules, top 50 dictionary entries, full synonym table, compliance checklist, 19 categories) |
-| 3 | ste-code-extraction-methodology.txt | ~2,000 | Meta | 5-stage pipeline documentation (extract, refine, merge, adapt, artifacts), quality assurance, benchmark results |
-| 4 | ste-code-example-turn.txt | ~500 | Level 2 | Worked before/after example with violation report and metrics |
-| 5 | ste-code-deployment-guide.txt | ~1,800 | Level 4 | Integration instructions for Ollama, LM Studio, Python/llama.cpp |
-| 6 | README.md | ~400 | Level 1 | This file -- artifact index and quick start |
+| Level | File | Tokens | Purpose |
+|:-----:|------|:------:|---------|
+| **1** | [`level1/system-prompt.txt`](level1/system-prompt.txt) | ~1.2K | 14 principles, synonym table, anti-patterns |
+| **2** | [`level2/system-prompt.txt`](level2/system-prompt.txt) | ~4.5K | 20 principles, dictionary excerpt, doc templates |
+| **3** | [`level3/system-prompt.txt`](level3/system-prompt.txt) | ~8K | 9-section grammar, vocabulary, synonym table |
+| **4** | [`level4/system-prompt.txt`](level4/system-prompt.txt) | ~45K | All 51 rules, dictionary excerpt, full synonym table |
+| **5** | [`level5/`](level5/) | ~100K | 51 rule summaries (full specification) |
 
-## Adaptation Levels
+## Supporting Artifacts
 
-Each level adds more STE-Code rules for stricter compliance:
-
-- **Level 1** (~1,200 tokens): 14 core principles, synonym table, output format, anti-patterns. Best for tight token budgets.
-- **Level 2** (~2,000 tokens): Level 1 plus rule summaries for Sections 1 through 5 (words, noun phrases, verbs, sentences, procedures).
-- **Level 3** (~3,000 tokens): Level 2 plus full all-section rule summaries and GR grammar recommendations.
-- **Level 4** (~4,500 tokens): Level 3 plus dictionary excerpt, full synonym table, and compliance checklist.
-- **Level 5** (~7,000 tokens): Complete specification: all 51 rules, 19 categories, dictionary, checklist, and appendix.
+| File | Purpose |
+|------|---------|
+| `ste-code-distilled-system-prompt.txt` | Legacy Level 1 prompt (14 principles) |
+| `ste-code-self-reading-manual.txt` | Full reference manual |
+| `ste-code-extraction-methodology.txt` | Pipeline documentation |
+| `ste-code-example-turn.txt` | Worked before-and-after example |
+| `ste-code-deployment-guide.txt` | Integration instructions |
+| `ste-code-level5-max.txt` | Maximum-size system prompt |
+| `sweep-report.md` | Quality sweep report (65 files, 2 passes) |
 
 ## Quick Start
 
-1. **Learn the rules.** Read `ste-code-self-reading-manual.txt` sections 1 through 4.
-2. **Load the prompt.** Copy `ste-code-distilled-system-prompt.txt` into your LLM system prompt field.
-3. **See an example.** Open `ste-code-example-turn.txt` for a worked before/after transformation.
-4. **Deploy.** Follow `ste-code-deployment-guide.txt` for your platform.
+1. Choose a level. Use Level 1 for tight token budgets. Use Level 4 for strict compliance.
+2. Copy the system prompt into the system prompt field of your LLM.
+3. Send your documentation. The model rewrites it in STE-Code.
 
-## Integration Guide
+## Level Details
 
-### OpenAI (ChatGPT, GPT-4, GPT-4o)
-Use the distilled system prompt from file 1 or the full manual from file 2. Paste the text into the system message of your chat completion API call. Set `temperature` to 0.3.
+**Level 1** (~1.2K tokens): 14 core principles, 15 synonym pairs, output rules, 8 anti-patterns. Best for interactive sessions.
 
-### Anthropic (Claude)
-Paste the distilled system prompt into the `system` parameter. For long documents, use the full manual in the first user message as context. Set `temperature` to 0.3.
+**Level 2** (~4.5K tokens): 20 principles with rule references, 25 synonym pairs, 25 approved verbs, output rules, document structure, documentation templates. Best for code review.
 
-### Google (Gemini)
-Use the `systemInstruction` field with the distilled prompt. For the full manual, split it across multiple turns.
+**Level 3** (~8K tokens): Full grammar breakdown across 9 sections with example pairs, 30 approved verbs, 20 synonym pairs, output rules, word-count rules. Best for full document rewriting.
 
-### Ollama
-Follow the Modelfile instructions in `ste-code-deployment-guide.txt`. Run `ollama create ste-code -f Modelfile`.
+**Level 4** (~45K tokens): All 51 rules with example pairs, dictionary excerpt, full synonym table, output rules. Best for strict compliance checking.
 
-### LM Studio
-Paste the distilled system prompt into the system prompt field. Save the configuration as a preset named "STE-Code."
+**Level 5** (~100K tokens): 51 individual rule summaries organized by section. Best for specification-grade reference.
 
-### llama.cpp / llama-cpp-python
-Use the Python example in `ste-code-deployment-guide.txt`. Load the system prompt from file and pass it to `create_chat_completion`.
+## Assembly
 
-### Hugging Face (Text Generation Inference)
-Add the distilled system prompt to the `parameters.system_prompt` field in your inference request.
+All levels are assembled by agent-agnostic scripts in `.agents/tools/`. See `.agents/AGENTS.md` for documentation.
 
-## File Dependencies
-
+```bash
+python3 .agents/tools/assemble-level3.py   # L5 → L3
+python3 .agents/tools/assemble-level2.py   # L3 → L2
+python3 .agents/tools/assemble-level1.py   # L2 → L1
 ```
-ste-code-distilled-system-prompt.txt  (standalone, Level 1)
-ste-code-example-turn.txt             (uses Level 2 rules)
-ste-code-extraction-methodology.txt   (standalone, meta-documentation)
-ste-code-deployment-guide.txt         (references files 1 and 2)
-ste-code-self-reading-manual.txt      (standalone, Level 5)
-README.md                             (this file)
-```
-
-## Version
-
-Generated: 2026-07-30. Source: 51 deepened rule files, 4 GR files, categories, dictionary, synonym table, and structured data files from ste-code/data/.
