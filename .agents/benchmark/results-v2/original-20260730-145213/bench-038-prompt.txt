@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Write a JavaScript async function `fetchUserData(userId)` that reads from an API. Document all error states in the JSDoc. Use STE-Code: one term per concept, no "fetch" → use "read", no passive voice.
+
+Output the corrected text, then a compliance summary.

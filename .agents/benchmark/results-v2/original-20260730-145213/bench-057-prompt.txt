@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Write a Usage section for a code formatter tool. Show a command-line example and explain the output. Use STE-Code: code blocks are technical nouns (P5), imperative mood for instructions, no jargon.
+
+Output the corrected text, then a compliance summary.

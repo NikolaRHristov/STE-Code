@@ -284,3 +284,14 @@ Full details: `.agents/skills/references/rails.md`
 - ❌ `hermes -z "$(cat file)"` in `terminal(background=true)` — opens TUI, does not process
 - ❌ `subprocess.Popen(["hermes", "-z", ...])` — unreliable stdout capture
 - ❌ Custom Python wrappers that call `hermes -z` via subprocess — use oneshot wrapper instead
+
+## AGENT RULE ACCESS
+
+All agents have `read_file` access. When applying STE-Code rules:
+
+1. **Consult the deepened rules directly:** `ste-code/adapted/a-secN-ruleX.Y.md` (51 files)
+2. **Check the dictionary:** `ste-code/adapted/a-dictionary.md` (198KB, 5,943 lines)
+3. **Verify synonyms:** `ste-code/data/synonym-table.json`
+4. **Reference templates:** `ste-code/templates/ste-code-*.md` (4 levels)
+
+Agents SHOULD read specific rule files when uncertain about rule application. The benchmark workers and all pipeline agents have this capability enabled.

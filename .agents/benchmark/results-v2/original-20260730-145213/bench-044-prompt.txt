@@ -1,0 +1,14 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Document this REST API endpoint using STE-Code principles. Use approved verbs (read/create/update/delete). Include parameters, response format, and error codes:
+
+```
+GET /api/users/:id
+Returns user profile data for the given ID.
+```
+
+Write full API documentation in markdown.
+
+Output the corrected text, then a compliance summary.

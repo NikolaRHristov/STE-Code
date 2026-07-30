@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+You added pagination to the user list API endpoint. New query parameters: `page` and `limit`. Default page size is 20. Maximum is 100. Write a conventional commit message using STE-Code approved terms.
+
+Output the corrected text, then a compliance summary.

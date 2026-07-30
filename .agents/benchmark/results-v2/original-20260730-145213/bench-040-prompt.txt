@@ -1,0 +1,17 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Review this code and write feedback using STE-Code principles:
+
+```python
+def process(x, y):
+    tmp = x + y
+    if tmp > 100:
+        return stuff(tmp)
+    return None
+```
+
+Point out issues with clear, constructive language. No slang, no "this is bad" without explanation.
+
+Output the corrected text, then a compliance summary.

@@ -1,0 +1,11 @@
+Corrected text:
+
+Features include: data can be processed quickly, files can be converted automatically, and results can be displayed in real-time.
+
+Compliance summary:
+
+- Parallel structure: Fixed. All three list items now use the same construction ("can be" + past participle + adverb), replacing the inconsistent mix of "can be," "are able to be," and "will be."
+- Concision: Improved. "are able to be converted" was reduced to "can be converted," matching the other items and eliminating wordiness.
+- Tense/voice: Consistent. All items now share passive voice with the same modal verb, which is appropriate for describing system capabilities.
+
+The original sentence violated parallel-structure rules by mixing three different modal constructions in a single list. The corrected version uses uniform phrasing throughout.

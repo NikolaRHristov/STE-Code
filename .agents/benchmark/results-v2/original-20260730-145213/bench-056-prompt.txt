@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Write an Installation section for a Python CLI tool called `ste-code-checker`. It requires Python 3.10+, uses pip for installation, and needs a config file. Use STE-Code: imperative mood, 20-word sentences, approved terms.
+
+Output the corrected text, then a compliance summary.

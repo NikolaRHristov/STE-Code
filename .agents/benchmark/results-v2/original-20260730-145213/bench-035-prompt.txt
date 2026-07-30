@@ -1,0 +1,19 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+@dev-team I looked at the PR and here's my feedback:
+
+1. The `processData` function is way too long. It does a bunch of things and should be split into smaller functions.
+
+2. You're using `var` instead of `const/let` everywhere. This is not good practice.
+
+3. The error handling is kind of messy. You're catching errors but not doing anything useful with them.
+
+4. I think we should add some tests for this because if something breaks it'll be really bad.
+
+5. The variable names could be better. `x`, `y`, `tmp` aren't very descriptive.
+
+Overall it looks okay but needs some work before we can merge it.
+
+Output the corrected text, then a compliance summary.

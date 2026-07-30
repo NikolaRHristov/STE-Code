@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Write a 403 Forbidden error message for when a user tries to access an admin-only endpoint. Use STE-Code: specific about what is denied, actionable about what to do. Include HTTP status code.
+
+Output the corrected text, then a compliance summary.

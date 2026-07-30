@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+To get started, you need to first install a bunch of dependencies and then run the setup script which will configure everything for you.
+
+Output the corrected text, then a compliance summary.

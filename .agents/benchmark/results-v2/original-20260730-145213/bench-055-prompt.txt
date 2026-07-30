@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Design a JSON error response format for a REST API. Include fields for: error code, message, details, and a recovery hint. Write the schema as STE-Code compliant documentation. Explain each field using approved terms.
+
+Output the corrected text, then a compliance summary.

@@ -1,0 +1,20 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Review this React component for STE-Code compliance in its documentation and naming:
+
+```jsx
+// This component does the user stuff
+const UserStuff = ({ data }) => {
+  // Fetch the things we need
+  const items = useMemo(() => data.map(d => d.item), [data]);
+  
+  // Show everything
+  return <div>{items.map(i => <p>{i}</p>)}</div>;
+};
+```
+
+Write feedback on: naming, comments, clarity. Use approved terms.
+
+Output the corrected text, then a compliance summary.

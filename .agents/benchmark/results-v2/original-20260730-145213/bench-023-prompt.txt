@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+/* The authentication middleware is used to verify that the user has been properly authenticated. If the token is invalid, an error will be thrown. */
+
+Output the corrected text, then a compliance summary.

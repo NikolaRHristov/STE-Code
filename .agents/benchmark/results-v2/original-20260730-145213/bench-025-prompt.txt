@@ -1,0 +1,10 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+// This is a helper that basically does validation of the incoming request payload.
+// It checks a bunch of things like whether the required fields exist,
+// if the types are correct, and makes sure nothing weird slips through.
+// Returns true if everything is OK, otherwise throws.
+
+Output the corrected text, then a compliance summary.

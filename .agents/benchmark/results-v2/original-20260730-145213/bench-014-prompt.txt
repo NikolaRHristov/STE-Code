@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+chore: updated the API to use v2 endpoints, old ones removed
+
+Output the corrected text, then a compliance summary.

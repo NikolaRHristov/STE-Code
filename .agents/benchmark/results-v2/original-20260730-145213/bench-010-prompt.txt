@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+The authenticateUser function handles user authentication and authorization. It takes a credentials object which contains the username and password, performs validation, and returns a JWT token that can be utilized for subsequent requests. Make sure to call this function before accessing any protected endpoints.
+
+Output the corrected text, then a compliance summary.

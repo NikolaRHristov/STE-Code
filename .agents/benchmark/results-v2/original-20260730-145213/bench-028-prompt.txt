@@ -1,0 +1,12 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+## 1.5.0
+
+- Added a bunch of new features
+- Fixed some bugs that were causing problems
+- Made things faster
+- Deprecated the old config format (will be removed eventually)
+
+Output the corrected text, then a compliance summary.

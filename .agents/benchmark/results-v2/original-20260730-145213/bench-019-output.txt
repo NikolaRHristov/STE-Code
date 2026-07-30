@@ -1,0 +1,23 @@
+**Corrected text:**
+
+```
+MongoError: connection pool is exhausted; the server is likely overloaded or unresponsive.
+```
+
+**Changes made:**
+
+- `,` → `;` — replaced comma splice with a semicolon to properly join two related independent clauses.
+- `probably` → `likely` — more formal and standard in diagnostic messages.
+- `or something` → `or unresponsive` — eliminated vague, colloquial phrasing and replaced it with a concrete, technically meaningful alternative.
+
+---
+
+**Compliance summary:**
+
+| Check | Status | Notes |
+|---|---|---|
+| Clarity | Fixed | "or something" was ambiguous and provided no actionable information. |
+| Professional tone | Fixed | "probably" and "or something" are conversational, not suitable for software error messages. |
+| Grammar | Fixed | Comma splice between two independent clauses corrected with a semicolon. |
+| Accuracy | Preserved | The technical meaning (pool exhaustion, server load) remains intact. |
+| Length | Preserved | Message kept concise — no unnecessary verbosity added. |

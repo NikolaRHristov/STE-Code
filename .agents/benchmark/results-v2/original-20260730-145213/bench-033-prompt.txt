@@ -1,0 +1,38 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+## User API
+
+### GET /api/users
+
+This endpoint fetches all the users from the database. It should return a JSON array of user objects.
+
+**Parameters:**
+- `page` (optional) - The page number for pagination stuff
+- `limit` (optional) - How many users to fetch per page
+
+**Response:**
+```json
+{
+  "users": [...],
+  "total": 100
+}
+```
+
+### POST /api/users
+
+Creates a brand new user. You need to send a JSON body with the user data. The password will be hashed automatically.
+
+**Request Body:**
+- `username` (required) - The username for the new user
+- `email` (required) - The email address of the user
+- `password` (required) - The password (will be encrypted)
+
+### Error Codes
+
+- 400: You did something wrong
+- 401: You're not authenticated
+- 500: Something broke on our end
+
+Output the corrected text, then a compliance summary.

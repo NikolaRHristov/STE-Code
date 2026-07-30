@@ -1,0 +1,15 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Document this API endpoint with full error documentation using STE-Code. Use the synonym table for verbs:
+
+```
+DELETE /api/users/:id
+Removes a user account permanently. Requires admin authentication.
+Returns 204 on success, 403 if not admin, 404 if user not found.
+```
+
+Write comprehensive API documentation.
+
+Output the corrected text, then a compliance summary.

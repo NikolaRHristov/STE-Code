@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+You fixed a bug where the login form crashed when users entered an empty password. The fix adds a validation check before processing. Write a conventional commit message using STE-Code approved terms.
+
+Output the corrected text, then a compliance summary.

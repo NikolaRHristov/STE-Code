@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Write a Python class `UserService` with methods `register`, `authenticate`, and `delete`. Each method needs a STE-Code compliant docstring. Use approved verbs from the STE-Code synonym table. Use imperative mood for summaries.
+
+Output the corrected text, then a compliance summary.

@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+## 2.1.0 — Various improvements and bug fixes
+
+Output the corrected text, then a compliance summary.

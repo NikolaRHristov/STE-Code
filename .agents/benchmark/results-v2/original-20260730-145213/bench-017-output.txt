@@ -1,0 +1,10 @@
+Corrected text:
+
+TypeError: Cannot read property 'name' of undefined. This error occurs when code attempts to access the 'name' property on a value that is undefined. Common causes include: a variable accessed before it is assigned, an object property that was never set, or an expected return value that resolved to undefined.
+
+Compliance summary:
+
+- Pronoun ambiguity: FIXED. Original "it" had no clear antecedent — replaced with explicit subjects ("a variable", "an object property", "an expected return value").
+- Actionability: IMPROVED. Original offered only the vague "not properly initialized." Corrected version lists concrete scenarios a developer can investigate (unassigned variable, missing property, undefined return).
+- Accuracy: PRESERVED. The error type and message are standard and unchanged.
+- Conciseness: MAINTAINED. The explanation remains a single sentence while being more specific.

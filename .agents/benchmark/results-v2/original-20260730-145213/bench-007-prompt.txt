@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+The userId parameter needs to be provided and it should be a valid UUID. The return value will be an object that contains the user data.
+
+Output the corrected text, then a compliance summary.

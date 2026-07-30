@@ -1,0 +1,17 @@
+**Corrected text:**
+
+500 Internal Server Error — please try again later
+
+**Compliance summary:**
+
+No issues found — the text is already compliant by common standards:
+
+1. **No sensitive exposure** — "500 Internal Server Error" is the standard, well-known HTTP status phrase; it does not reveal stack traces, server paths, database details, or any implementation internals.
+
+2. **User-friendly** — The message is polite, actionable ("please try again later"), and avoids technical jargon a non-technical user wouldn't understand.
+
+3. **Encoding-neutral** — The em dash (—, U+2014) is valid UTF-8 and widely supported in modern web and API contexts. If the delivery channel (e.g., a legacy ASCII-only system) would mangle it, replace with a hyphen (" - ") or double hyphen (" -- "), but no change is needed under standard compliance expectations.
+
+4. **Accessibility** — The phrasing is plain language; screen readers handle the em dash correctly.
+
+The text passes as-is. No correction required.

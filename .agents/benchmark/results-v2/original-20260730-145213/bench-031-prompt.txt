@@ -1,0 +1,11 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+# This job does the testing stuff
+# It runs all the tests and makes sure nothing is broken
+# If something fails, the build will be marked as red
+test:
+  script: npm test
+
+Output the corrected text, then a compliance summary.

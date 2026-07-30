@@ -1,0 +1,19 @@
+**Corrected text:**
+
+This project uses a microservices architecture. We use Docker for containerization and Kubernetes for orchestration. API endpoints must be accessed via HTTPS. For more information, see our documentation, which includes guidance and best practices.
+
+---
+
+**Compliance summary:**
+
+| # | Issue | Original | Correction | Reason |
+|---|-------|-----------|------------|--------|
+| 1 | Wordy verb | `utilizes` | `uses` | Prefer simple, direct language over unnecessarily complex verbs. |
+| 2 | Wordy phrase | `make use of` | `use` | "Make use of" is a roundabout way of saying "use" — three words where one suffices. |
+| 3 | Definite article | `The API endpoints` | `API endpoints` | "The" is unnecessary here; API endpoints in general are meant, not a specific set previously introduced. |
+| 4 | RFC 2119 weakness | `should be accessed` | `must be accessed` | "Should" implies recommendation. If HTTPS is a hard requirement (as it should be), use "must" per RFC 2119. If it genuinely is only a suggestion, keep "should" — but in security contexts, "must" is correct. |
+| 5 | Abbreviation | `info` | `information` | Avoid clipped abbreviations in formal technical documentation. "Info" is conversational. |
+| 6 | Informal phrasing | `check out our docs which contain lots of helpful tips and tricks` | `see our documentation, which includes guidance and best practices` | "Check out" is colloquial; "docs" is an informal abbreviation; "lots of" is imprecise and casual; "tips and tricks" is a cliché. Replaced with professional equivalents. |
+
+**Additional notes:**
+- "We use Docker… We use Kubernetes…" — the parallel structure is correct but could be tightened further if conciseness is the goal (e.g., "We use Docker and Kubernetes for containerization and orchestration respectively."). Left as-is since the repetition of "We use" isn't a compliance violation, just a style preference.

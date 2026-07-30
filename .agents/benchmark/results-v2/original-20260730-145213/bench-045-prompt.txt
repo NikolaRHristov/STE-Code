@@ -1,0 +1,15 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Document this API endpoint using STE-Code approved terms. Use severity markers where appropriate:
+
+```
+POST /api/users
+Creates a new user account. Requires username, email, and password in the request body.
+Returns the created user object with a 201 status code.
+```
+
+Write full documentation with request/response schemas.
+
+Output the corrected text, then a compliance summary.

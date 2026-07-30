@@ -1,0 +1,14 @@
+Corrected:
+
+```js
+/**
+ * Fetches user data from the database
+ * @param {string} userId - The ID of the user to fetch
+ * @returns {Object} The fetched user object
+ */
+```
+
+Compliance summary:
+
+- Fixed: `—` (em dash) replaced with `-` (hyphen) in the `@param` description. JSDoc convention uses a standard hyphen to separate the parameter name from its description. The em dash is non-standard and can break doc generators.
+- No other violations found. The `@param` type is correctly specified, the `@returns` tag and type are valid, and descriptions are present.

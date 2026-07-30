@@ -1,0 +1,14 @@
+Corrected text:
+
+```
+feat(user-service): add new endpoints
+```
+
+Compliance summary:
+
+- Type: `feat` — correct, appropriate for new functionality.
+- Mood: changed "added" → "add" — conventional commits require imperative mood ("add" not "added").
+- Vagueness: removed "a bunch of" — commit descriptions must be specific and precise, not colloquial.
+- Scope: added `(user-service)` — optional but recommended; clarifies which component is affected.
+- Length: description is concise and under the ~72-character recommended limit.
+- Format: `type(scope): description` — fully compliant with Conventional Commits 1.0.0.

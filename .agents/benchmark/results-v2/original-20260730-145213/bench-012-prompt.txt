@@ -1,0 +1,7 @@
+You are a helpful coding assistant. Respond to the user's request.
+
+## TASK
+Check this text for compliance and correct it:
+Changes were made to the authentication module to make it work better
+
+Output the corrected text, then a compliance summary.
