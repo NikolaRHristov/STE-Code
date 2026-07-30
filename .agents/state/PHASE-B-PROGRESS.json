@@ -14,14 +14,26 @@
     "a-sec1-rule1.7",
     "a-sec1-rule1.8",
     "a-sec1-rule1.9",
-    "a-sec2-rule2.1"
+    "a-sec2-rule2.1",
+    "a-sec2-rule2.2",
+    "a-sec3-rule3.1",
+    "a-sec3-rule3.2",
+    "a-sec3-rule3.3",
+    "a-sec3-rule3.4",
+    "a-sec3-rule3.5",
+    "a-sec3-rule3.6",
+    "a-sec3-rule3.7",
+    "a-sec4-rule4.1"
   ],
   "batches_done": [
     1,
     2,
     3,
     4,
-    5
+    5,
+    6,
+    7,
+    8
   ],
-  "updated": "2026-07-30T13:27:14.195980+00:00"
+  "updated": "2026-07-30T13:38:05.872954+00:00"
 }

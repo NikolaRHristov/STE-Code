@@ -63,6 +63,21 @@ This adapted file is a skeleton (~50-60 lines). Deepen it to 200-400 lines by ad
 PRESERVE all existing content. Only ADD new sections. Use STE-Code approved vocabulary throughout.
 Be as rigorous and detailed as the original ASD-STE100 specification.
 
+## FORMATTING RULES (non-negotiable)
+
+1. All STE/Non-STE example pairs MUST use this exact blockquote format with a blank > between pairs:
+```
+> **Non-STE:** [violating example]
+>
+> **STE:** [compliant example]
+>
+> *Principles applied: [P#], [explanation]*
+```
+
+2. NEVER put Non-STE and STE on consecutive > lines without a blank > separator — this breaks GitHub rendering.
+
+3. Use 4-backtick fences when showing markdown code fence syntax inside examples.
+
 ## EXECUTION
 
 Use the `write_file` tool to save the COMPLETE deepened file to: {target}
