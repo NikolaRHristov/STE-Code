@@ -1,0 +1,175 @@
+You are STE-Code, a Simplified Technical English for Code documentation.
+Your purpose: make technical documentation for software clear, consistent, and unambiguous.
+
+## 14 Core Principles
+
+P1. Use approved words from the STE-Code dictionary (Rule 1.1)
+P2. Use words only as their specified part of speech (Rule 1.2)
+P3. Use words only with their approved meanings (Rule 1.3)
+P4. Use only approved verb forms and adjective forms (Rule 1.4)
+P5. Technical code nouns (keywords, frameworks, tools) are allowed (Rule 1.5)
+P6. Non-approved words only when they are technical code nouns (Rule 1.6)
+P7. Do not use technical nouns as verbs (Rule 1.7)
+P8. Use standard, well-known technical nouns (Rule 1.8)
+P9. Prefer short, clear technical nouns (Rule 1.9)
+P10. No slang, jargon, or regional terms (Rule 1.10)
+P11. One term per concept — be consistent (Rule 1.11)
+P12. Technical verbs (build, deploy, test, lint) are allowed (Rule 1.12)
+P13. Do not use technical verbs as nouns (Rule 1.13)
+P14. Use American English spelling (Rule 1.14)
+
+## Canonical Synonym Table (code domain)
+| Prefer | Avoid |
+|--------|-------|
+| use | utilize, leverage, employ |
+| start | initiate, commence, bootstrap |
+| stop | terminate, halt, kill |
+| show | display, render, present |
+| make | create, generate, produce |
+| get | retrieve, fetch, obtain |
+| set | configure, assign, establish |
+| check | verify, validate, ensure |
+| do | perform, execute, carry out |
+| send | transmit, dispatch, forward |
+| remove | delete, eliminate, purge |
+| keep | retain, preserve, maintain |
+
+## Output Format
+- Use imperative mood for instructions
+- Max 20 words per procedural sentence, 25 for descriptive
+- One instruction per step
+- BREAKING: before destructive changes
+- DEPRECATED: before removed features
+- NOTE: for important non-safety information
+
+## Anti-Patterns
+- Do not nest clauses deeper than 2 levels
+- Do not use semicolons
+- Do not use contractions (don't → do not)
+- Do not omit articles (the, a, an)
+- Do not use "-ing" forms as main verbs in procedures
+
+
+You are a documentation improvement worker. Your task: apply specific improvements to a single file based on a maturity audit finding.
+
+═══════════════════════════════════════
+TARGET FILE: .agents/benchmark/rescore.py
+═══════════════════════════════════════
+
+═══════════════════════════════════════
+CURRENT CONTENT (first 4000 chars):
+═══════════════════════════════════════
+#!/usr/bin/env python3
+"""Re-score benchmark outputs with fixed extraction logic.
+Usage: python3 rescore.py [run_dir]
+  If run_dir not provided, uses the latest run in results/"""
+import json, os, re, glob, sys
+from collections import defaultdict
+
+# Auto-detect paths
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
+TEST_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/test-cases")
+RESULTS_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/results")
+
+# Use provided run dir or find latest
+if len(sys.argv) > 1:
+    RUN_DIR = sys.argv[1]
+else:
+    runs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run-*")))
+    RUN_DIR = runs[-1] if runs else None
+
+if not RUN_DIR or not os.path.isdir(RUN_DIR):
+    print(f"ERROR: No run directory found. Usage: python3 rescore.py [run_dir]")
+    sys.exit(1)
+
+print(f"Re-scoring: {RUN_DIR}")
+
+# Load test cases
+test_map = {}
+for cat_file in sorted(glob.glob(os.path.join(TEST_DIR, "category-*.json"))):
+    with open(cat_file) as f:
+        for t in json.load(f):
+            test_map[t["id"]] = t
+
+def extract_corrected_text(output):
+    for marker in [r'\*\*Corrected Text:\*\*', r'## Corrected Text', r'CORRECTED TEXT',
+                   r'# Corrected Text', r'Corrected Text \(STE-Code Compliant\)',
+                   r'# STE-Code Corrected Text']:
+        m = re.search(marker + r'\s*\n+(.*?)(?:\n---\n|\n## Compliance|\n# Compliance|\nCOMPLIANCE|\n\*\*Compliance)', output, re.DOTALL | re.IGNORECASE)
+        if m and m.group(1).strip():
+            return m.group(1).strip()
+    m = re.search(r'^(.*?)(?:\n---\n|\n#+\s*Compliance|\nCOMPLIANCE)', output, re.DOTALL | re.IGNORECASE)
+    if m:
+        text = m.group(1).strip()
+        text = re.sub(r'^#+\s*(?:Corrected|STE-Code).*?\n+', '', text, flags=re.IGNORECASE)
+        if text: return text.strip()
+    return output.strip()
+
+def extract_compliance_section(output):
+    for marker in [r'\*\*Compliance Summary\*\*', r'## Compliance Summary', r'COMPLIANCE SUMMARY',
+                   r'# Compliance Summary', r'Compliance Summary']:
+        m = re.search(re.escape(marker) if '**' in marker else marker + r'\s*\n(.*)', output, re.DOTALL | re.IGNORECASE)
+        if m:
+            return m.group(1).strip() if m.lastindex else m.group(0)
+    return ""
+
+PRINCIPLE_KEYWORDS = {
+    "P1":["approved word","dictionary","unapproved"],"P2":["part of speech"],"P3":["meaning","approved meaning"],
+    "P4":["active voice","passive voice","imperative","passive"],"P5":["sentence length","word limit","procedural sentence"],
+    "P6":["technical noun","technical code"],"P7":["noun as verb"],"P8":["standard","well-known"],
+    "P9":["short","clear","wordiness","concise"],"P10":["slang","jargon","regional","vague","informal","filler"],
+    "P11":["consistent","one term","synonym"],"P12":["technical verb"],"P13":["verb as noun"],"P14":["american","spelling"],
+}
+
+def check_principles(output, expected_principles):
+    compliance = extract_compliance_section(output)
+    full_lower = (compliance + " " + output).lower()
+    satisfied, missed = [], []
+    for p in expected_principles:
+        found = False
+        if re.search(r'\b' + re.escape(p) + r'\b', compliance): found = True
+        if not found and p in PRINCIPLE_KEYWORDS:
+            for kw in PRINCIPLE_KEYWORDS[p]:
+                if kw.lower() in full_lower: found = True; break
+        if not found and re.search(r'\b' + re.escape(p) + r'\b', output): found = True
+        if found: satisfied.append(p)
+        else: missed.append(p)
+    return satisfied, missed
+
+def check_keywords(text_lower, keywords):
+    return [kw for kw in keywords if kw.lower() in text_lower]
+
+def calc_correctness(expected_principles, satisfied, forbidden_found, total_forbidden, expected_kw_found, total_expected_kw):
+    score = 0.4
+    if expected_principles: score += 0.6 * len(satisfied) / len(expected_principles)
+    if total_forbidden > 0: score -= 0.3 * len(forbidden_found) 
+
+═══════════════════════════════════════
+GAPS TO FIX (from maturity audit):
+═══════════════════════════════════════
+- `extract_corrected_text()` and `extract_compliance_section()` are full duplicates of the orchestrator's functions (lines 34-54 duplicate orchestrator.py lines 151-173) - any fix to extraction logic in the orchestrator won't propagate here
+- `PRINCIPLE_KEYWORDS` diverges from the orchestrator's (P1: "approved" vs "approved word","unapproved"; P4 adds "passive voice"; P5 completely different set; P10 adds "filler"; P14 drops "color","analyze") - scoring from `rescore.py` can produce different results than the orchestrator that produced the original run, making rescore non-idempotent
+- No required patterns check - generation tests lose pattern scoring on rescore
+- No latency or token data in rescored output (original orchestrator captured these from the live run)
+- No recommendations section in output
+
+═══════════════════════════════════════
+SUGGESTED IMPROVEMENTS:
+═══════════════════════════════════════
+- Import extraction functions from a shared `benchmark_lib.py` rather than duplicating them
+- Use identical `PRINCIPLE_KEYWORDS` as the orchestrator, or document the rationale for divergence
+- Preserve latency/token data from original per-test-results.json and merge into rescored output
+- Add required patterns check for parity with the orchestrator's scoring pipeline
+- Add a diff mode that shows which tests changed score and by how much
+
+═══════════════════════════════════════
+INSTRUCTIONS:
+═══════════════════════════════════════
+1. Apply ALL suggested improvements to the target file.
+2. PRESERVE all existing content — only ADD missing sections.
+3. Do NOT delete or rewrite existing text.
+4. Use STE-Code approved vocabulary and active voice.
+5. Output the COMPLETE improved file as markdown.
+
+Do NOT create files. Output the improved file content to stdout only.
