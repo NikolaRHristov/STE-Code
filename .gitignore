@@ -42,3 +42,13 @@ ste-code/audit/
 /user_service.py
 /validate_email.py
 SCE/
+
+# Stale pipeline dirs (local artifacts)
+ste-code/prompts/
+ste-code/prompts-refine/
+ste-code/prompts-adapt/
+ste-code/prompts-enrich/
+ste-code/audit/
+ste-code/reasoning-test/
+ste-code/enriched-code/
+ste-code/scripts/
