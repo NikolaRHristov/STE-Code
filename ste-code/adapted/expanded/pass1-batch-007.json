@@ -1,0 +1,37 @@
+{"pass": "rule-examples", "batch": 7, "rule_file": "a-sec1-rule1.2", "entries": [
+  {
+    "rule": "rule-1.2",
+    "principle": "P2",
+    "non_ste_example": "Final the class declaration to prevent subclassing by external modules.",
+    "ste_example": "Make the class declaration final to prevent subclassing by external modules.",
+    "explanation": "P2: Use words only as their specified part of speech. 'Final' is an approved adjective (as in 'final class' in Java) but not an approved verb. This adapts the spec example where 'dim' is an approved adjective but not a verb: just as you cannot write 'dim the lights' in STE, you cannot write 'final the class' in STE-Code. The STE version uses the approved verb 'make' with the approved adjective 'final.'"
+  },
+  {
+    "rule": "rule-1.2",
+    "principle": "P2",
+    "non_ste_example": "Valid the user input before you write it to the database.",
+    "ste_example": "Check that the user input is valid before you write it to the database.",
+    "explanation": "P2: Use words only as their specified part of speech. 'Valid' is an approved adjective describing data that meets constraints, but it is not an approved verb. This adapts the spec example where 'dim' is an approved adjective but not a verb: just as you cannot use 'dim' as a verb in STE, you cannot use 'valid' as a verb in STE-Code. The STE version restructures the sentence to use the adjective 'valid' with the approved verb 'check.'"
+  },
+  {
+    "rule": "rule-1.2",
+    "principle": "P1",
+    "non_ste_example": "Leverage the caching layer to decrease database latency.",
+    "ste_example": "Use the caching layer to decrease database latency.",
+    "explanation": "P1/P2: Use approved words from the controlled terminology. 'Leverage' is not an approved verb in the STE-Code dictionary. The approved alternative 'use' has the same part of speech (verb), so a word-for-word replacement is possible. This adapts the spec example where 'acceptable' (non-approved adjective) is replaced with approved adjectives 'correct' or 'right' — a same-POS substitution. The synonym table mandates 'use' over 'leverage,' 'utilize,' and 'employ.'"
+  },
+  {
+    "rule": "rule-1.2",
+    "principle": "P1",
+    "non_ste_example": "The wrapper module facilitates error handling across all API endpoints.",
+    "ste_example": "The wrapper module helps with error handling across all API endpoints.",
+    "explanation": "P1/P2: Use approved words from the controlled terminology. 'Facilitate' is not an approved verb. The nearest approved alternative 'help' requires a different sentence construction (add 'with') because 'help' and 'facilitate' take different grammatical objects. This adapts the spec example where 'operable' (non-approved adjective) is replaced by 'operate' (approved verb) — a different-POS substitution requiring a new sentence structure. The STE version uses 'help' as a verb with the preposition 'with' to preserve the original meaning."
+  },
+  {
+    "rule": "rule-1.2",
+    "principle": "P2",
+    "non_ste_example": "Empty the output buffer before the next write operation starts.",
+    "ste_example": "Make the output buffer empty before the next write operation starts.",
+    "explanation": "P2: Use words only as their specified part of speech. 'Empty' is an approved adjective describing a container with no contents (as in 'an empty buffer') but it is not an approved verb. This adapts the spec example where 'dim' is an approved adjective but not a verb: just as you cannot say 'dim the display' in STE, you cannot say 'empty the buffer' in STE-Code. The STE version uses the approved verb 'make' with the approved adjective 'empty.' Note that 'empty' as a verb is common in programming but violates the POS lock — STE-Code requires the adjective form."
+  }
+]}

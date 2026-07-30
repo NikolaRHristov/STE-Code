@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 8,
+  "rule_file": "a-sec1-rule1.3",
+  "entries": [
+    {
+      "rule": "rule-1.3",
+      "principle": "P3",
+      "non_ste_example": "Check the Enable logging checkbox in the settings panel before you run the test suite.",
+      "ste_example": "Select the Enable logging checkbox in the settings panel before you run the test suite.",
+      "explanation": "'Check' has an approved meaning: 'to make sure that something is correct.' Using 'check' to mean 'select a checkbox element in a user interface' is not an approved meaning. The approved meaning of 'check' is about verification, not about UI interaction. The STE version uses 'select' for the UI action, reserving 'check' for its approved verification meaning. This follows Principle P3: use approved words only with their approved meanings."
+    },
+    {
+      "rule": "rule-1.3",
+      "principle": "P3",
+      "non_ste_example": "The DevOps engineer must run the production infrastructure across four geographic regions.",
+      "ste_example": "The DevOps engineer must manage the production infrastructure across four geographic regions.",
+      "explanation": "'Run' has an approved meaning in STE-Code: 'to execute a program or process.' Using 'run' to mean 'manage, operate, or oversee infrastructure' is not an approved meaning. Running a script is an approved use. Running a data center is not. The STE version uses 'manage' for the infrastructure operations meaning. This follows Principle P3: use approved words only with their approved meanings."
+    },
+    {
+      "rule": "rule-1.3",
+      "principle": "P3",
+      "non_ste_example": "Put the unique user identifiers into a set before you query the database for matching records.",
+      "ste_example": "Put the unique user identifiers into a collection before you query the database for matching records.",
+      "explanation": "'Set' is approved as a verb in STE-Code meaning 'to put something in a specified position or state.' Using 'set' as a noun to mean 'a data structure that stores unique values' is not the approved meaning. The noun sense of 'set' conflicts with the approved verb-only POS lock. The STE version uses 'collection' as a generic noun for the data structure. This follows Principle P3 with reinforcement from P2: words must be used only as their specified part of speech."
+    },
+    {
+      "rule": "rule-1.3",
+      "principle": "P3",
+      "non_ste_example": "Make sure that you get how the middleware pipeline transforms each HTTP request.",
+      "ste_example": "Make sure that you understand how the middleware pipeline transforms each HTTP request.",
+      "explanation": "'Get' has an approved meaning in STE-Code: 'to obtain or receive data from a source.' Using 'get' to mean 'understand a concept' is not an approved meaning. The approved meaning covers data retrieval (get the response body, get the configuration value). Understanding is a cognitive action, not a data operation. The STE version uses 'understand' for comprehension. This follows Principle P3: use approved words only with their approved meanings."
+    },
+    {
+      "rule": "rule-1.3",
+      "principle": "P3",
+      "non_ste_example": "Keep the session token in the Redis cache between user requests to prevent reauthentication.",
+      "ste_example": "Write the session token to the Redis cache between user requests to prevent reauthentication.",
+      "explanation": "'Keep' has an approved meaning: 'to continue to have or hold something without change.' Using 'keep' to mean 'write data to a persistent or external storage system' is not an approved meaning. Keeping a reference in memory is an approved use. Writing to an external cache is a data operation. The STE version uses 'write' for the persistence action. This follows Principle P3: use approved words only with their approved meanings."
+    }
+  ]
+}

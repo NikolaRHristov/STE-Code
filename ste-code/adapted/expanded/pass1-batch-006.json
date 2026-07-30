@@ -1,0 +1,37 @@
+{"pass": "rule-examples", "batch": 6, "rule_file": "a-sec1-rule1.14", "entries": [
+  {
+    "rule": "rule-1.14",
+    "principle": "P14",
+    "non_ste_example": "The endpoint catalogues all available microservices in the cluster.",
+    "ste_example": "The endpoint catalogs all available microservices in the cluster.",
+    "explanation": "P14: Use American English spelling. The non-STE version uses the British English spelling 'catalogues.' The STE version uses the American English spelling 'catalogs.' Just as the spec requires 'color' not 'colour,' STE-Code requires American spelling for all code documentation terms."
+  },
+  {
+    "rule": "rule-1.14",
+    "principle": "P14",
+    "non_ste_example": "The callback function controls the error handling behaviour of the middleware.",
+    "ste_example": "The callback function controls the error handling behavior of the middleware.",
+    "explanation": "P14: Use American English spelling. The non-STE version uses the British English spelling 'behaviour.' The STE version uses the American English spelling 'behavior.' Documentation for code APIs and frameworks must use consistent American spelling across all files."
+  },
+  {
+    "rule": "rule-1.14",
+    "principle": "P14",
+    "non_ste_example": "Organise the source files into modules by feature area.",
+    "ste_example": "Organize the source files into modules by feature area.",
+    "explanation": "P14: Use American English spelling. The non-STE version uses the British English spelling 'organise.' The STE version uses the American English spelling 'organize.' Procedural documentation follows the same American spelling requirement as descriptive documentation."
+  },
+  {
+    "rule": "rule-1.14",
+    "principle": "P14",
+    "non_ste_example": "The Rust compiler output shows \"Unrecognised parameter: colour_depth\".",
+    "ste_example": "The Rust compiler output shows \"Unrecognised parameter: colour_depth\".",
+    "explanation": "P14 + Rule 8.6: Quoted text with British English spelling must be preserved. The compiler error message contains British spellings 'unrecognised' and 'colour.' Per Rule 8.6, quoted text from tools, terminals, and user interfaces must not be altered. The surrounding documentation text must use American English spelling. The example is identical in both STE and non-STE because the quoted British text is correctly preserved — the rule is demonstrated by NOT changing the quoted content."
+  },
+  {
+    "rule": "rule-1.14",
+    "principle": "P14",
+    "non_ste_example": "The profiling tool analyses modelling overhead in the data pipeline.",
+    "ste_example": "The profiling tool analyzes modeling overhead in the data pipeline.",
+    "explanation": "P14: Use American English spelling. The non-STE version uses two British English spellings: 'analyses' and 'modelling.' The STE version uses the American English spellings 'analyzes' and 'modeling.' When multiple British spellings appear in a sentence, correct all of them consistently."
+  }
+]}

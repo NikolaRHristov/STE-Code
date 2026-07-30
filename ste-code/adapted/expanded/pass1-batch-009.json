@@ -1,0 +1,37 @@
+{"pass": "rule-examples", "batch": 9, "rule_file": "a-sec1-rule1.4", "entries": [
+  {
+    "rule": "rule-1.4",
+    "principle": "P4",
+    "non_ste_example": "The linter is linting the source files when it finds the unused import.",
+    "ste_example": "The linter lints the source files. It finds the unused import.",
+    "explanation": "P4: Use only approved verb forms. The approved verb 'lint' has only these forms: lint, lints, linted, linted. The progressive form 'is linting' is not approved — just as the spec prohibits 'is removing,' STE-Code prohibits 'is linting.' The STE version uses the simple present 'lints.' The compound sentence is split into two short sentences to avoid the progressive structure."
+  },
+  {
+    "rule": "rule-1.4",
+    "principle": "P4",
+    "non_ste_example": "You must have builded the Docker image before you push it to the container registry.",
+    "ste_example": "You must build the Docker image before you push it to the container registry.",
+    "explanation": "P4: Use only approved verb forms. The approved verb 'build' has only these forms: build, builds, built, built. 'Builded' is an invented past participle — just as the spec prohibits inventing forms like 'removated,' STE-Code prohibits 'builded.' The STE version uses the imperative 'build' after 'must' rather than the unapproved perfect construction."
+  },
+  {
+    "rule": "rule-1.4",
+    "principle": "P4",
+    "non_ste_example": "The array sort algorithm with the cache is more quick at large data sizes.",
+    "ste_example": "The array sort algorithm with the cache is quicker at large data sizes.",
+    "explanation": "P4: Use only approved adjective forms. The adjective 'quick' has the approved comparative form 'quicker.' You cannot use 'more quick' — this is the same violation as 'more fast' in the existing adaptation, and the same as the spec's 'more slow' prohibition. The approved comparative suffix '-er' must be used when the dictionary lists it."
+  },
+  {
+    "rule": "rule-1.4",
+    "principle": "P4",
+    "non_ste_example": "The serializer is deserializating the JSON payload incorrectly when the date field is null.",
+    "ste_example": "The serializer deserializes the JSON payload incorrectly when the date field is null.",
+    "explanation": "P4: Use only approved verb forms. The approved verb 'deserialize' has only these forms: deserialize, deserializes, deserialized, deserialized. 'Deserializating' is an invented form — just as the spec prohibits 'compilating' for 'compile,' STE-Code prohibits 'deserializating' for 'deserialize.' The STE version uses the simple present tense 'deserializes.' The progressive '-ing' form is not among the approved verb forms."
+  },
+  {
+    "rule": "rule-1.4",
+    "principle": "P4",
+    "non_ste_example": "The most clean solution for the race condition in the connection pool is to add a mutex lock.",
+    "ste_example": "The cleanest solution for the race condition in the connection pool is to add a mutex lock.",
+    "explanation": "P4: Use only approved adjective forms. The adjective 'clean' has the approved superlative form 'cleanest.' You cannot use 'most clean' — this is the same violation pattern as the spec's 'most slow' which must be 'slowest.' Adjectives that form their comparative and superlative with '-er' and '-est' must use those forms. 'More' and 'most' are only for adjectives that do not have '-er'/'-est' forms in the controlled terminology."
+  }
+]}
