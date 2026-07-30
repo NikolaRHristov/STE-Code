@@ -1,0 +1,29 @@
+{
+  "done": [
+    "a-sec1-rule1.1",
+    "a-sec1-rule1.10",
+    "a-sec1-rule1.11",
+    "a-sec1-rule1.12",
+    "a-sec1-rule1.13",
+    "a-sec1-rule1.14",
+    "a-sec1-rule1.2",
+    "a-sec1-rule1.3",
+    "a-sec1-rule1.4",
+    "a-sec1-rule1.5",
+    "a-sec1-rule1.6",
+    "a-sec1-rule1.7",
+    "a-sec1-rule1.8",
+    "a-sec1-rule1.9",
+    "a-sec2-rule2.1",
+    "a-sec2-rule2.2"
+  ],
+  "batches_done": [
+    "sec1-1",
+    "sec1-2",
+    "sec1-3",
+    "sec1-4",
+    "sec1-5",
+    "sec2-1"
+  ],
+  "updated": "2026-07-30T16:33:21.827231+00:00"
+}
