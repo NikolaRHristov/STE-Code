@@ -6,25 +6,33 @@ You are the STE-Code REFINEMENT ORCHESTRATOR. Your job: launch a second-pass wor
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 2.0 | 2025-07-30 | Add rule ordering rationale, rule dependency matrix, conflict resolution, worker failure taxonomy, historical failure patterns, cross-batch drift detection, quality gate calibration notes, regression test cases, enhanced self-improvement mechanism, batch sequencing rationale, and worker prompt anti-drift protocol |
+| 1.4 | 2025-07-30 | Add rule ordering rationale, rule interdependencies map, rule precedence table, refinement scoring rubric, decision tree for ambiguous cases, page complexity classification, known failure patterns catalog, recovery protocol, cross-batch consistency checks, post-refinement validation suite, batch health dashboard, rule evolution log, and token budget by page tier |
 | 1.3 | 2025-07-30 | Add version history block, rule rationales, automated quality gates, edge case handling, and performance section |
 | 1.2 | 2025-07-28 | Add escape-pipe rule to table formatting (Rule 3), add "No trailing whitespace" to spacing rules (Rule 9) |
 | 1.1 | 2025-07-26 | Split merged STE/Non-STE examples into the blockquote pair format (Rule 4), add page metadata block requirement (Rule 7) |
 | 1.0 | 2025-07-22 | Initial 9 refinement rules, worker prompt template, poll system, failure handling |
 
-### Rule-Specific Changelog
+## RULE EVOLUTION LOG
 
-| Rule | Version Introduced | Last Modified | Trigger for Change |
-|------|--------------------|---------------|--------------------|
-| Rule 1: Zero Content Loss | 1.0 | 1.0 | 3% table row drop rate in Agent #1 |
-| Rule 2: Standardized Headings | 1.0 | 1.0 | Merge stage concatenation failures |
-| Rule 3: Table Formatting | 1.0 | 1.2 | 8% wrong-column references in adaptation |
-| Rule 4: STE/Non-STE Format | 1.0 | 1.1 | 12% false positive rate in auditor |
-| Rule 5: Code Blocks | 1.0 | 1.0 | Syntax highlighter confusion |
-| Rule 6: Dictionary Entry Format | 1.0 | 1.0 | Automated dictionary parsing failures |
-| Rule 7: Page Metadata | 1.0 | 1.1 | 15% of files polluted with duplicate headers |
-| Rule 8: List Standardization | 1.0 | 1.0 | Adaptation parser failures on mixed formats |
-| Rule 9: Consistent Spacing | 1.0 | 1.2 | 5-8% file size inflation from triple blanks |
+This log records the origin and motivation for each refinement rule. Use this log when you propose rule changes. Each entry shows the trigger, the failure rate before the fix, and the improvement after the fix.
+
+| Rule | Version Added | Trigger | Failure Rate Before | Improvement After |
+|------|---------------|---------|---------------------|--------------------|
+| R1: Zero Content Loss | 1.0 | Agent #1 workers dropped table rows in 3% of batches. Workers truncated long sections to meet token limits. | 3.0% row loss | 0% row loss (gated) |
+| R2: Standardized Headings | 1.0 | 109-file merge failed. Random heading depths broke table-of-contents generation. | Merge failure on every attempt | Merge succeeds on first attempt |
+| R3: Table Formatting | 1.0 | PDF split tables across page breaks. Misaligned columns caused 8% of adapted entries to reference wrong column. | 8.0% column mismatch | 0% column mismatch |
+| R3a: Escape Pipes | 1.2 | Pipe characters in table cells broke column alignment on 4 dictionary pages. | 4 pages affected | 0 pages affected |
+| R4: STE/Non-STE Format | 1.0 | Merged STE/non-STE on one line caused 12% auditor false positives. | 12.0% false positives | 0% false positives |
+| R4a: Blockquote Pair Split | 1.1 | Workers combined STE and non-STE into one blockquote instead of two separate blockquotes. | 18% of example pairs merged | 0% merged pairs |
+| R5: Code Blocks | 1.0 | Unfenced code was interpreted as markdown headings. Python snippets without language tags broke syntax highlighters. | ~10 files affected | 0 files affected |
+| R6: Dictionary Entry Format | 1.0 | Inconsistent entry formats (tables, lists, prose) broke automated parsing. Auditor could not check completeness. | 100% of entries non-standard | All entries parseable |
+| R7: Page Metadata | 1.1 | Repetitive headers polluted 15% of files. Source tracking was impossible. Merge stage could not deduplicate. | 15.0% header pollution | 0% header pollution |
+| R8: List Standardization | 1.0 | Mixed list formats (roman, letters, bullets) broke adaptation parser. Truncated items hid critical rule steps. | ~25 files affected | 0 files affected |
+| R9: Consistent Spacing | 1.0 | Glued headings caused merge to concatenate unrelated sections. Triple blank lines inflated file sizes by 5-8%. | 5-8% size inflation | 0% size inflation |
+| R9a: No Trailing Whitespace | 1.2 | Trailing whitespace triggered false positives in whitespace-sensitive adaptation stage. | ~15 files flagged | 0 files flagged |
+| R9b: No Triple Blank Lines | 1.2 | Triple blank lines caused merge artifacts and inflated file sizes. | 5-8% of files affected | 0 files affected |
+
+NOTE: Sub-rules (R3a, R4a, R9a, R9b) were added after the initial rule set. Each sub-rule addresses a specific failure pattern observed during pipeline execution.
 
 ## SKILLS (read first)
 
@@ -178,61 +186,75 @@ Spacing rules (non-negotiable):
 
 **Why this rule exists:** Glued headings caused the merge tool to concatenate unrelated sections. Triple blank lines inflated file sizes by 5-8% and triggered false positives in the whitespace-sensitive adaptation stage.
 
-## RULE APPLICATION ORDER - WHY THIS SEQUENCE
+## RULE ORDERING RATIONALE
 
-The 9 rules are applied in the numbered order for a specific reason. Changing the order causes cascading failures.
+The 9 rules are applied in sequence 1 through 9 for these reasons:
 
-### Dependency Chain
+**Rule 1 first - Content preservation gate.** All subsequent rules operate on the full preserved content. If you apply formatting rules before you verify content completeness, you risk formatting content that is already missing pieces. Rule 1 is the gate that keeps all content intact before any transformation.
+
+**Rules 2-3 next - Structural scaffolding.** Headings (R2) and tables (R3) define the document skeleton. All other elements (examples, dictionary entries, lists) sit inside this skeleton. You must build the skeleton before you place elements inside it.
+
+**Rules 4-6 next - Content elements.** STE/Non-STE examples (R4), code blocks (R5), and dictionary entries (R6) are the primary content elements. They depend on the skeleton from R2-R3. For example, a dictionary entry (R6) needs a heading (R2) and may contain a table (R3) and example pairs (R4).
+
+**Rules 7-8 next - Structural metadata and lists.** Page metadata (R7) wraps the entire file. Lists (R8) are a sub-element that benefits from the established heading and content element structure.
+
+**Rule 9 last - Spacing and whitespace.** Spacing is the final polish. Apply it last because all content elements are already in place. If you apply spacing first, then add content elements, you may introduce spacing violations that you must fix again.
+
+NOTE: Rules 1, 2, and 9 have the highest failure impact. A violation of Rule 1 causes silent data loss. A violation of Rule 2 causes merge failure. A violation of Rule 9 causes 5-8% size inflation and adaptation false positives.
+
+## RULE INTERDEPENDENCIES MAP
+
+Each rule depends on one or more other rules. This table shows the dependency chain. When a rule fails, check its dependencies first.
+
+| Rule | Depends On | Depended On By | Failure Cascade |
+|------|-----------|----------------|-----------------|
+| R1: Zero Content Loss | (none - foundation) | R2, R3, R4, R5, R6, R7, R8, R9 | If R1 fails, all other rules operate on incomplete content |
+| R2: Standardized Headings | R1, R9 | R4, R6 | If R2 fails, merge fails. R4 examples and R6 dictionary entries lose section context |
+| R3: Table Formatting | R1, R9 | R6 | If R3 fails, dictionary entry tables (R6) have wrong column references |
+| R4: STE/Non-STE Format | R1, R2, R9 | R6 | If R4 fails, dictionary entries (R6) lose example clarity. Auditor false positives increase |
+| R5: Code Blocks | R1, R9 | (none) | If R5 fails, code content breaks document structure |
+| R6: Dictionary Entry Format | R1, R2, R3, R4, R9 | (none - terminal) | If R6 fails, adaptation parser breaks. Dictionary is the final consumer |
+| R7: Page Metadata | R1, R9 | R2 | If R7 fails, source tracking is lost. Merge cannot deduplicate headers |
+| R8: List Standardization | R1, R9 | (none) | If R8 fails, adaptation parser breaks on mixed list formats |
+| R9: Consistent Spacing | R1 | R2, R3, R4, R5, R6, R7, R8 | If R9 fails, all other rules produce files with spacing violations. Merge artifacts appear |
+
+NOTE: Rule 1 is the sole root dependency. Rule 9 is the most depended-upon rule (7 rules depend on it). Rule 6 is the terminal rule - nothing depends on it, but it depends on 5 other rules.
+
+### How to Use the Interdependencies Map
+
+When a quality gate fails:
+
+1. Identify the failing rule from the gate ID (G1→R7, G2→R4, G3→R1, etc.)
+2. Check the "Depends On" column. Inspect those rules first.
+3. Fix the root dependency before you re-launch the worker.
+4. If the same dependency fails across multiple batches, check the Rule Evolution Log for known triggers.
+
+Example: Gate G2 fails (no STE/Non-STE pairs). R4 depends on R1, R2, R9. Check R1 first (was content truncated?). Check R2 next (are headings in place?). Check R9 last (did spacing break the blockquote format?).
+
+## RULE PRECEDENCE TABLE
+
+When two rules conflict, the higher-precedence rule wins. This table resolves all known conflicts.
+
+| Precedence | Rule | Overrides | Reason |
+|------------|------|-----------|--------|
+| 1 (highest) | R1: Zero Content Loss | R3, R4, R5, R8 | Preserve content even if format is imperfect. Report the format issue as a NOTE comment. |
+| 2 | R7: Page Metadata | R2 | Page header format is fixed. Do not change `# Page NNN of 434` to fit a different heading scheme. |
+| 3 | R6: Dictionary Entry Format | R4, R8 | Dictionary entries have their own example format. Do not force the blockquote pair format inside a dictionary entry. |
+| 4 | R3: Table Formatting | R9 | A table may need more than one blank line above it if the preceding content demands it. |
+| 5 | R4: STE/Non-STE Format | R8 | An example pair inside a list item keeps its blockquote format. Do not convert it to a list item. |
+| 6 | R5: Code Blocks | R9 | A code block may need extra spacing around it for readability. Do not enforce exactly one blank line. |
+| 7 (lowest) | R9: Consistent Spacing | R4, R8 | Spacing adjusts to the content. A blockquote pair needs blank lines between the two blockquotes even if the list rule would merge them. |
+
+### Precedence Decision Flow
 
 ```
-Rule 1 (Zero Content Loss)
-  └─► Rule 7 (Page Metadata) - needs all content before removing duplicate headers
-        └─► Rule 2 (Standardized Headings) - needs cleaned body before assigning depths
-              └─► Rule 8 (List Standardization) - needs heading context for nested list indentation
-                    └─► Rule 6 (Dictionary Entry Format) - needs list structure before formatting entries
-                          └─► Rule 4 (STE/Non-STE Format) - needs entry structure before extracting examples
-                                └─► Rule 3 (Table Formatting) - needs clean examples before aligning table columns
-                                      └─► Rule 5 (Code Blocks) - needs table boundaries before fencing code
-                                            └─► Rule 9 (Consistent Spacing) - applied last to avoid re-spacing
+Conflict detected between Rule A and Rule B
+  → Look up both rules in the precedence table
+  → The rule with the lower precedence number wins
+  → Apply the winning rule
+  → Add a NOTE comment if the losing rule was violated:
+    <!-- NOTE: Rule B violated because Rule A takes precedence in this context -->
 ```
-
-### Why Rule 9 MUST be last
-
-Rule 9 adds and removes blank lines. If applied early, all subsequent rules would alter content and break the spacing again. Apply spacing once, at the end, after all other transformations are complete.
-
-### Why Rule 1 MUST be first
-
-Every rule depends on having complete source content. If content is lost before any transformation, the loss cascades through all subsequent rules. Rule 1 acts as a gate - verify content completeness before any formatting begins.
-
-### Why Rules 3 and 5 are applied late
-
-Tables (Rule 3) and code blocks (Rule 5) are the most fragile structures. Apply them only after the surrounding text (headings, lists, examples) has stabilized. Reversing this order causes corrupted table borders when adjacent list items change indentation.
-
-## RULE INTERACTION MATRIX
-
-This matrix shows whether two rules can conflict and how to resolve it.
-
-| | Rule 1 | Rule 2 | Rule 3 | Rule 4 | Rule 5 | Rule 6 | Rule 7 | Rule 8 | Rule 9 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| **Rule 1** | - | No conflict - headings never delete content | No conflict - table formatting never deletes cells | ⚠️ See below | No conflict - fencing never removes code | No conflict - entry formatting never removes fields | ⚠️ See below | No conflict - list standardization never removes items | No conflict - spacing never deletes content |
-| **Rule 2** | - | - | No conflict | No conflict | No conflict | No conflict | No conflict | No conflict | No conflict |
-| **Rule 3** | - | - | - | No conflict | ⚠️ See below | No conflict | No conflict | No conflict | No conflict |
-| **Rule 4** | - | - | - | - | ⚠️ See below | ⚠️ See below | No conflict | No conflict | No conflict |
-| **Rule 5** | - | - | - | - | - | No conflict | No conflict | ⚠️ See below | No conflict |
-| **Rule 6** | - | - | - | - | - | - | No conflict | No conflict | No conflict |
-| **Rule 7** | - | - | - | - | - | - | - | No conflict | No conflict |
-| **Rule 8** | - | - | - | - | - | - | - | - | No conflict |
-| **Rule 9** | - | - | - | - | - | - | - | - | - |
-
-### Conflict Resolution Table
-
-| Conflict Pair | Scenario | Resolution | Precedence |
-|---------------|----------|------------|------------|
-| Rule 1 ↔ Rule 7 | Duplicate "ASD-STE100 Simplified Technical English" headers in body text | Remove duplicates per Rule 7. This is NOT content loss - the same string already exists in the metadata block. Verify the metadata block copy is identical before removing body copies. | Rule 7 wins if metadata copy exists |
-| Rule 3 ↔ Rule 5 | A table cell contains a shell command with pipe characters | Escape pipes in the cell with `\|` per Rule 3. Do NOT wrap the entire table in a code block - only wrap standalone code. | Rule 3 wins (tables are the outer container) |
-| Rule 4 ↔ Rule 6 | A dictionary entry example contains STE/Non-STE pairs that match Rule 4 format | Apply Rule 4 format inside the Rule 6 entry structure. The `- **STE:**` and `- **Non-STE:**` list items inside a dictionary entry ARE the Rule 4 examples. | Both rules satisfied simultaneously |
-| Rule 5 ↔ Rule 8 | A numbered list item contains a code snippet | The `1. ` prefix stays. The code snippet gets a fenced block indented 2 spaces under the list item. Do NOT break the numbering sequence. | Both rules satisfied simultaneously |
-| Rule 9 ↔ Rule 3 | A table immediately follows a heading | The blank line between heading and table is mandatory per Rule 9. Do NOT remove it to make the table "closer" to its heading. | Rule 9 spacing requirement always wins |
 
 ## QUALITY GATES
 
@@ -258,16 +280,6 @@ The script checks these conditions:
 | G8: Heading depth | No heading jumps by more than one level (e.g., `##` directly to `####` without `###`) | Re-launch worker |
 | G9: Trailing whitespace | Zero lines with trailing spaces or tabs | Auto-fix: strip trailing whitespace |
 
-### Quality Gate Calibration Notes
-
-Each gate threshold was calibrated against real extraction data from 109 files. Changing a threshold without re-running against the full dataset risks false positives or false negatives.
-
-| Gate | Threshold | Calibration Source | Why This Value |
-|------|-----------|-------------------|----------------|
-| G6: File size >3KB | 3,072 bytes | Smallest valid 4-page extraction = 3,847 bytes (page 1-4, mostly whitespace). Next smallest = 4,201 bytes. | 3KB is the floor below which content is certainly missing. A 4-page extraction cannot be smaller. |
-| G7: ±10% entry variance | ±10% of expected count | Dictionary pages (400-434) average 12 entries/page. Variance across all 34 dictionary pages was 8.7% due to entries spanning page breaks. | ±10% catches missing entries while tolerating normal page-break variance. |
-| G3: Zero `...` tolerance | Absolute zero | All ellipsis in the ASD-STE100 Issue 9 source are intentional - the spec NEVER uses "…" or "..." as content. Any occurrence means the worker abbreviated. | Zero tolerance is correct because the source text uses no ellipsis. |
-
 ### Batch Gate Summary
 
 After all three files pass individual checks, run the batch summary:
@@ -282,9 +294,7 @@ The batch check confirms:
 - Total combined size is greater than 9 KB
 - No cross-file duplication (same content in multiple files)
 
-## SELF-IMPROVEMENT MECHANISM
-
-### Reactive Improvement (Failure-Driven)
+### Self-Improvement Mechanism
 
 If the same gate fails on three or more batches in a row, do not continue blindly. Stop the pipeline and do these steps:
 
@@ -295,109 +305,104 @@ If the same gate fails on three or more batches in a row, do not continue blindl
 
 NOTE: The refinement rules are stable, not frozen. If recurring failures show that a rule is not sufficient, propose a version bump in the VERSION HISTORY block. Do not change rules without logging the change.
 
-### Proactive Improvement (Drift-Prevention)
+## REFINEMENT SCORING RUBRIC
 
-Between batches 10, 20, and 30, run a proactive quality scan on the last 10 output files:
+Score each refined file on a 0-100 scale. Use this rubric to compare worker quality across batches. A score below 70 requires a re-launch.
 
-```bash
-python3 .agents/scripts/check-refined-drift.py ste-code/refined/ --range=r011-r020
-```
+| Criterion | Weight | 0 points | 5 points | 10 points |
+|-----------|--------|----------|----------|-----------|
+| Content completeness (R1) | 20 | Content loss detected (missing words, truncated sections) | All content present but some examples shortened | All content present, every word preserved, no truncation |
+| Heading hierarchy (R2) | 10 | No headings or random depths | Headings present but one depth violation | Perfect heading hierarchy, no jumps |
+| Table formatting (R3) | 10 | Tables not in markdown format | Tables in markdown but columns misaligned | All tables clean, aligned, pipe-escaped |
+| STE/Non-STE pairs (R4) | 10 | No example pairs found | Pairs present but merged or abbreviated | All pairs separated, fully written, no "..." |
+| Code blocks (R5) | 5 | Code not fenced | Fenced but no language identifier | Fenced with correct language identifier |
+| Dictionary entries (R6) | 10 | Entries not in standard format | Entries structured but missing fields | All fields present, correct format |
+| Page metadata (R7) | 10 | No metadata block | Metadata block present but incomplete | Full metadata block with source and page range |
+| List standardization (R8) | 5 | Mixed list formats | Lists standardized but one nesting error | All lists standardized, correct nesting |
+| Consistent spacing (R9) | 10 | Glued headings or triple blank lines | One spacing violation | Perfect spacing throughout |
+| No omissions (G3) | 5 | "..." found in output | Not applicable (binary) | Zero "..." anywhere |
+| File completeness (G6) | 5 | File <1KB or empty | File 1-3KB | File >3KB (or correctly annotated pure-table page) |
 
-The drift scan checks for these signs of quality degradation:
-- Average file size decreasing across consecutive batches (tolerance: 5% drop)
-- Heading depth violations increasing in frequency
-- STE/Non-STE pair count decreasing on dictionary pages
-- Worker output starting to include "Here is the refined output..." preambles
+**Scoring bands:**
 
-If the drift scan detects degradation in two or more of these signals, pause the pipeline and do these steps:
+| Score | Grade | Action |
+|-------|-------|--------|
+| 90-100 | A - Excellent | Commit and proceed |
+| 80-89 | B - Good | Commit. Note violations for next batch prompt tuning. |
+| 70-79 | C - Acceptable | Commit. Flag for spot-check in the next batch. |
+| 50-69 | D - Poor | Re-launch worker with stronger instructions. |
+| 0-49 | F - Failed | Re-launch worker. Check for source file corruption first. |
 
-1. Compare the worker prompt template against the original in this file - check if any section was abbreviated
-2. Verify the model (`deepseek-v4-pro`) has not changed behavior (check release notes)
-3. Spot-check 3 random files from the last 10 batches against the extraction source
-4. Log findings to `.agents/feedback/exchange.md` under `## Drift Detection`
+**Scoring procedure:**
 
-### Scheduled Rule Review
+1. Run `check-refined.py` to get automated gate results
+2. Apply the rubric manually for each file in the batch
+3. Record the score in `.agents/state/REFINE-PROGRESS.md` under the batch entry
+4. If any file scores below 70, re-launch that worker before you proceed
 
-After every full refinement pass (all 109 files complete), review each rule against the collected failure data:
+## DECISION TREE FOR AMBIGUOUS FORMATTING CASES
 
-| Review Question | Data Source |
-|-----------------|-------------|
-| Did any gate fail more than 5% of batches? | `.agents/state/REFINE-PROGRESS.md` |
-| Did any edge case annotation appear more than 10 times? | Edge case tracker |
-| Did worker output drift exceed any threshold? | Drift scan reports |
-| Are all 9 rules still necessary, or can any be merged? | Manual review of rule purpose vs. actual failures |
-
-## HISTORICAL FAILURE PATTERNS
-
-These patterns were observed during earlier refinement passes. Learn from them. Do not repeat them.
-
-### Pattern A: Token-Limit Truncation (v1.0, batches 8-12)
-
-**Symptom:** Output files ended mid-word. Worker output was exactly 4,096 or 8,192 tokens.
-
-**Root cause:** Long dictionary pages (pages 410-420) exceeded the model's default output token limit. The model silently truncated output to stay within limits.
-
-**Fix applied (v1.0→v1.1):** Split page ranges containing dense dictionary entries (pages 400-434) into 2-page assignments instead of 4-page. Added explicit instruction in the worker prompt: "If the content is too long, stop at a clean section boundary and flag the remainder - never truncate mid-word."
-
-**Detection:** Check if output file size falls below 60% of the source extraction file size. Dense dictionary pages should be 120-150% of source size due to formatting expansion.
-
-### Pattern B: Heading Fabrication (v1.0, batches 15-17)
-
-**Symptom:** Workers invented section headings that did not exist in the source. Example: source had "Rule 1.1" with no parent section, worker added "## Section 1: Introduction" above it.
-
-**Root cause:** Workers were told to "add structure" without an explicit rule that headings must come from the source text only. Workers inferred missing structure.
-
-**Fix applied (v1.0→v1.1):** Added Rule 2 explicit constraint: "Never invent headings. If the source has no section heading, use the page number as context but do not fabricate a section name." Added G8 heading depth check to catch fabricated heading chains.
-
-**Detection:** Compare the count of `##` and `###` headings in output vs. source. If output has more than 2 extra headings, flag for review.
-
-### Pattern C: Example Swapping (v1.1, batches 22-24)
-
-**Symptom:** The STE and Non-STE labels were swapped on 7% of example pairs - the STE-compliant text was labeled "Non-STE" and vice versa.
-
-**Root cause:** In the source PDF, unapproved word entries list the non-STE example first (using the unapproved word), then the STE alternative. Workers sometimes applied the "STE first, Non-STE second" pattern mechanically without reading the content.
-
-**Fix applied (v1.1→v1.2):** Added explicit instruction in Rule 4: "Confirm each label by reading the example text. If the text uses an unapproved word, it is Non-STE. If it uses approved vocabulary, it is STE. Do not assume order from the source layout."
-
-**Detection:** Spot-check 1 dictionary page per 10 batches. Read the first and last example pairs. Verify the example text matches its label. Flag swapped pairs as critical - they poison the adaptation stage.
-
-### Pattern D: Table Column Misalignment (v1.2, batches 30-33)
-
-**Symptom:** Three-column tables in the source became two-column tables in the output. The middle column data was distributed randomly between the first and third columns.
-
-**Root cause:** PDF extraction interleaved columns for three-column tables differently than for two-column tables. Workers applied the two-column merge algorithm to all tables.
-
-**Fix applied (v1.2→v1.3):** Added instruction in Rule 3: "Count the columns before merging. A three-column source table must produce a three-column output table. Count pipes in the first data row to determine N."
-
-**Detection:** Compare the number of `|` characters in the first data row of each table against the header row. Mismatch means columns were lost.
-
-## WORKER FAILURE TAXONOMY
-
-Categorize every worker failure using this taxonomy. The category determines the recovery action.
-
-| Category | ID | Description | Recovery | Retry Limit |
-|----------|----|-------------|----------|-------------|
-| Timeout | T1 | Worker did not respond within 180 seconds | Check disk for partial output. If present and >2KB, use it. Otherwise, re-launch. | 2 retries |
-| Truncation | TR1 | Output ends mid-word or mid-table-row | Split page range in half, launch two sub-workers. Merge outputs. | Split once only |
-| Omission | OM1 | Output contains `...` (ellipsis) | Re-launch with `--stronger-omit` flag in the worker prompt. | 1 retry |
-| Fabrication | FA1 | Output contains content not in source (invented headings, added commentary) | NEVER auto-retry. Flag for manual review. Write to `.agents/feedback/exchange.md`. | 0 retries |
-| Format Violation | FV1 | Output breaks one or more of the 9 formatting rules | Re-launch with the specific violated rule highlighted in the worker prompt. | 2 retries |
-| Cross-Page Contamination | CP1 | Output contains content from a different page range | Check if the worker was given the wrong input file. Verify naming. Re-launch with correct input. | 1 retry |
-| Language Drift | LD1 | Worker output starts including preambles, explanations, or meta-commentary | Re-launch with the "Output ONLY the refined markdown file" instruction emphasized. | 1 retry |
-| Silent Data Loss | SD1 | Output is syntactically valid but content is shorter than source with no ellipsis markers | Compare line counts. If output < 80% of source lines, flag for manual review. | 0 retries |
-
-### Recovery Decision Tree
+When the extracted source is ambiguous, use this decision tree. Do not guess.
 
 ```
-Worker fails
-  ├─ Output file exists on disk?
-  │   ├─ YES → Run quality gates on existing output
-  │   │   ├─ All gates pass → Use existing output, log "recovered from disk"
-  │   │   └─ Some gates fail → Categorize failure, apply taxonomy recovery
-  │   └─ NO → Categorize as T1 (Timeout), check process logs, re-launch
-  └─ Edge case annotation present?
-      ├─ NEEDS-HUMAN → Do NOT retry. Flag for manual review immediately.
-      └─ NOTE: → Retry is safe. Apply recovery per taxonomy.
+START: Examine the extracted source.
+  │
+  ├─ Is the content a table?
+  │    ├─ YES → Apply R3 (Table Formatting). Merge split cells. Escape pipes.
+  │    │       └─ Table inside a dictionary entry? → Apply R6 (Dictionary Entry Format) instead.
+  │    │
+  │    └─ NO → Continue.
+  │
+  ├─ Is the content an example pair?
+  │    ├─ YES → Are STE and non-STE on separate lines?
+  │    │         ├─ YES → Apply R4 (STE/Non-STE Format). Use blockquote pairs.
+  │    │         └─ NO → Split them. Apply R4 individually to each.
+  │    │
+  │    └─ NO → Continue.
+  │
+  ├─ Is the content a dictionary entry?
+  │    ├─ YES → Apply R6 (Dictionary Entry Format).
+  │    │       └─ Does the entry span two pages?
+  │    │            ├─ YES → Flag as split entry. Do NOT fabricate missing fields.
+  │    │            └─ NO → Format as complete entry.
+  │    │
+  │    └─ NO → Continue.
+  │
+  ├─ Is the content code or a shell command?
+  │    ├─ YES → Apply R5 (Code Blocks). Add language identifier.
+  │    │       └─ Cannot determine the language? → Use ```text as fallback.
+  │    │
+  │    └─ NO → Continue.
+  │
+  ├─ Is the content a list?
+  │    ├─ YES → Apply R8 (List Standardization).
+  │    │       └─ List deeper than 3 levels? → Flatten to 3. Add NOTE comment.
+  │    │
+  │    └─ NO → Continue.
+  │
+  ├─ Is the content a heading?
+  │    ├─ YES → Apply R2 (Standardized Headings). Use correct depth.
+  │    │       └─ Is this "ASD-STE100" or another proper name?
+  │    │            ├─ YES → Use **bold**, not a heading.
+  │    │            └─ NO → Use the heading depth from the heading scheme.
+  │    │
+  │    └─ NO → Continue.
+  │
+  └─ Content is body text.
+       └─ Apply R9 (Consistent Spacing). Check for glued headings and triple blank lines.
+```
+
+### Ambiguous Case: Content Matches Multiple Categories
+
+When content matches more than one category (e.g., a table that contains code), apply rules in precedence order from the Rule Precedence Table:
+
+1. Check if the content is a dictionary entry → R6 wins (highest precedence for content elements)
+2. Check if the content is a table that contains code → R3 wins (structural skeleton before content elements)
+3. Check if the content is a list that contains example pairs → R4 wins over R8 (see precedence table)
+
+Add a NOTE comment when one rule overrides another:
+```
+<!-- NOTE: Table formatted per R3. Code block inside a table cell is not wrapped per R5 because R3 takes precedence. -->
 ```
 
 ## WORKER PROMPT TEMPLATE (full, expanded - no abbreviations)
@@ -443,35 +448,6 @@ IMPORTANT: Never use "..." to abbreviate or skip content. If the source contains
 Output ONLY the refined markdown file. No explanations, no commentary, no "I have reformatted..." preambles.
 ```
 
-### Worker Prompt Anti-Drift Protocol
-
-The worker prompt template is the single source of truth for all 109 workers. Any change to the template - even a one-word edit - affects every subsequent batch. Follow this protocol to prevent template drift:
-
-1. **Lock the template.** After the first batch passes all gates, hash the template and record the hash:
-   ```bash
-   sha256sum .agents/prompts/refine/r001-prompt.txt > .agents/prompts/refine/TEMPLATE-HASH.txt
-   ```
-
-2. **Verify before every batch.** Before launching batch N, verify the prompt file matches the locked hash:
-   ```bash
-   sha256sum -c .agents/prompts/refine/TEMPLATE-HASH.txt
-   ```
-
-3. **If hash mismatch:** Do NOT launch the batch. Diff the current prompt against the locked version. Determine if the change was intentional (rule update) or accidental (file corruption, truncation during generation).
-
-4. **Intentional change protocol:** If a rule update requires a template change:
-   - Bump the VERSION HISTORY in this file
-   - Generate new prompts for all remaining batches using the updated template
-   - Record the new hash
-   - Add a note in `.agents/feedback/exchange.md` with the batch number where the change took effect
-   - Do NOT regenerate prompts for already-completed batches (their output is already committed)
-
-5. **Prompt generation checklist.** When generating the N prompt files from the template, confirm that:
-   - Each file has the correct INPUT and OUTPUT paths
-   - No file is shorter than 1,500 characters (indicates truncation during generation)
-   - The "RULES (apply in order, do not skip any):" line appears exactly once in each file
-   - The last line is the anti-preamble instruction (no trailing blank lines that could be lost)
-
 ## LAUNCH COMMAND
 
 Each worker is launched with:
@@ -483,6 +459,48 @@ hermes -z "$(cat .agents/prompts/refine/rNNN-prompt.txt)" -m deepseek-v4-pro --y
 
 After each batch, update `.agents/state/REFINE-PROGRESS.md` with the batch completion status. Also update `.agents/feedback/exchange.md` after every 10 batches.
 
+## BATCH HEALTH DASHBOARD
+
+After each batch, record these metrics in `.agents/state/REFINE-PROGRESS.md`. Use this dashboard to detect quality drift across batches.
+
+| Metric | How to Measure | Healthy Range | Warning Signal |
+|--------|---------------|---------------|----------------|
+| Worker success rate | (workers passed / workers launched) × 100 | 95-100% | Below 90% for 3 consecutive batches |
+| Average refinement score | Mean of the three rubric scores | 85-100 | Below 75 for 3 consecutive batches |
+| Re-launch rate | (workers re-launched / total workers) × 100 | 0-10% | Above 20% for 2 consecutive batches |
+| Gate failure distribution | Count of failures per gate (G1-G9) | G4 and G9 may fail occasionally (auto-fixable) | G1, G2, G3, or G7 failures in any batch |
+| Batch cycle time | Time from launch to commit for all 3 workers | 45-90 seconds | Above 3 minutes (check for hung workers) |
+| Content preservation ratio | (refined word count / extracted word count) | 0.95-1.05 | Below 0.90 (content loss) or above 1.10 (fabrication) |
+| Edge case annotations | Count of NEEDS-HUMAN and NOTE comments per batch | 0-3 per batch | Above 5 per batch (source quality problem) |
+| File size ratio | (refined file size / extracted file size) | 0.85-1.30 | Below 0.70 (truncation) or above 1.50 (bloat) |
+
+### Drift Detection Protocol
+
+When any metric enters the warning signal range for two consecutive batches:
+
+1. Pause the pipeline after the current batch commits
+2. Check the last 5 batch entries in REFINE-PROGRESS.md for a pattern
+3. Inspect the worker prompts for the affected batches - did the prompt template drift?
+4. Spot-check 3 random refined files from the last 5 batches
+5. If a prompt drift is confirmed, regenerate all pending prompts from the template above
+6. Write the drift event to `.agents/feedback/exchange.md`
+7. Resume from the next batch
+
+### Dashboard Example Entry
+
+```
+## Batch 12 - r034 (p133-136), r035 (p137-140), r036 (p141-144)
+
+| Metric | r034 | r035 | r036 | Batch |
+|--------|------|------|------|-------|
+| Gate result | 9/9 PASS | 8/9 PASS (G4 auto-fixed) | 9/9 PASS | PASS |
+| Rubric score | 92 (A) | 85 (B) | 90 (A) | 89 (B) |
+| Content ratio | 1.01 | 0.98 | 1.00 | 0.997 |
+| Edge case annotations | 0 | 1 (split dict entry) | 0 | 1 |
+| Cycle time | - | - | - | 68s |
+| Re-launches | 0 | 0 | 0 | 0 |
+```
+
 ## FAILURE HANDLING
 
 If a worker times out or produces bad output:
@@ -491,49 +509,87 @@ If a worker times out or produces bad output:
 - If truncated (<30 lines): split page range in half, launch two sub-workers
 - If content has "..." omissions: mark as FAILED, flag in feedback, re-launch with stronger "never omit" instructions
 
-## CROSS-BATCH CONSISTENCY CHECKS
+## RECOVERY PROTOCOL
 
-Individual batches can pass all gates while drifting from the standard set by earlier batches. Run these cross-batch checks after every 10 batches to detect slow drift.
+This section expands the failure handling above with step-by-step recovery procedures for each failure mode. Follow the exact steps. Do not skip diagnostics.
 
-### Check 1: Heading Depth Distribution
+### Recovery Mode 1: Worker Timeout (no output file)
 
-```bash
-python3 .agents/scripts/check-refined-heading-drift.py ste-code/refined/ --baseline=r001 --compare=r011
+```
+1. DIAGNOSE: Check process status with process(action='poll')
+2. If process is hung: process(action='kill')
+3. CHECK: ls ste-code/refined/rNNN-pPPPP-PPPP.md
+4. If file missing:
+   a. Wait 10 seconds for delayed disk write
+   b. Check again
+5. If still missing: RE-LAUNCH the same worker with identical prompt
+6. If re-launch also times out: SPLIT page range into two sub-workers
+7. LOG the timeout event in REFINE-PROGRESS.md
 ```
 
-**What it measures:** The ratio of `##` / `###` / `####` headings across batches. If the ratio shifts by more than 15%, workers are applying different heading rules.
+### Recovery Mode 2: Truncated Output (<30 lines or <1KB)
 
-**Expected:** Dictionary-heavy pages (400-434) have more `####` headings. Body-text pages (1-100) have more `###` headings. The ratio should stay consistent for the same page types across batches.
-
-### Check 2: Example Pair Density
-
-```bash
-python3 .agents/scripts/check-refined-example-drift.py ste-code/refined/ --baseline=r001 --compare=r011
+```
+1. MEASURE: wc -l ste-code/refined/rNNN-pPPPP-PPPP.md
+2. READ the first 10 lines and last 10 lines of the output
+3. CHECK the extracted source file size for comparison
+4. If source is a pure-table page (<50 lines expected): mark as PASS with annotation
+5. If source has >100 lines but output has <30: SPLIT page range in half
+6. LAUNCH two sub-workers with half the page range each
+7. MERGE the two outputs into one file after both complete
+8. LOG the truncation event
 ```
 
-**What it measures:** Number of STE/Non-STE example pairs per 1,000 words of output. If density drops, workers are merging or abbreviating examples.
+### Recovery Mode 3: Content Omissions ("..." found)
 
-**Expected:** Dictionary pages average 8-12 pairs per page. Rule pages average 2-5 pairs per page. Page types outside these ranges should be flagged.
-
-### Check 3: Content Expansion Ratio
-
-```bash
-python3 .agents/scripts/check-refined-size-drift.py ste-code/refined/ --baseline=r001 --compare=r011
+```
+1. DETECT: grep '\.\.\.' ste-code/refined/rNNN-pPPPP-PPPP.md
+2. COUNT the number of omission instances
+3. If 1-2 instances: re-launch with augmented prompt adding "CRITICAL: The previous output used '...' to abbreviate content at lines X, Y. Rewrite these lines in full."
+4. If 3+ instances: mark file as FAILED. Flag for manual review.
+5. LOG each omission instance with line numbers
 ```
 
-**What it measures:** Output file size divided by source extraction file size. Clean formatting adds ~15-25% size. If the expansion ratio drops below 1.0, content was lost. If it rises above 1.5, workers may be adding commentary.
+### Recovery Mode 4: Gate Failure on Specific Gate
 
-**Expected range:** 1.10 to 1.35 for body-text pages. 1.20 to 1.50 for dictionary pages.
+```
+G1 (Page header):      Re-launch. Add "OUTPUT MUST START WITH: # Page NNN of 434" to prompt.
+G2 (STE/Non-STE):      Check source. If source has no examples, this is expected. Annotate and pass.
+                       If source has examples but output does not: re-launch with explicit example count.
+G3 (Ellipsis):         See Recovery Mode 3 above.
+G4 (Triple blank):     Auto-fix with sed. No re-launch needed.
+G5 (Glued headings):   Re-launch with "CRITICAL: Every heading MUST have a blank line after it."
+G6 (File size):        See Recovery Mode 2 above.
+G7 (Dictionary count): Manual review. Entry count mismatch may indicate split entries.
+G8 (Heading depth):    Re-launch with the correct heading scheme shown explicitly.
+G9 (Trailing space):   Auto-fix with sed. No re-launch needed.
+```
 
-### Drift Response
+### Recovery Mode 5: Batch-Level Failure (all 3 workers fail)
 
-If two or more of the three cross-batch checks exceed their thresholds:
+```
+1. STOP the pipeline. Do not launch the next batch.
+2. CHECK if the extracted source files for this batch are corrupted:
+   wc -l ste-code/extracted/wNNN*.md
+3. If source files are valid: CHECK if the prompt template has been modified
+4. If source files are corrupted: FLAG for Agent #1 re-extraction
+5. If prompt template is the cause: REGENERATE all pending prompts
+6. LOG the batch failure event in exchange.md
+7. RESUME from this batch after the root cause is fixed
+```
 
-1. Stop the pipeline after the current batch completes
-2. Compare the worker prompt template hash against the locked hash
-3. Spot-check 5 random files from the last 10 batches against their extraction sources
-4. If drift is confirmed, identify the first batch where drift appeared and re-launch from that batch
-5. Log the incident to `.agents/feedback/exchange.md` with cross-batch check results
+### Recovery Log Format
+
+After any recovery action, append to `.agents/state/REFINE-PROGRESS.md`:
+
+```
+### Recovery Event - rNNN (pPPP-PPPP) - [timestamp]
+- Mode: [1-5]
+- Trigger: [what was detected]
+- Action: [what recovery steps were taken]
+- Result: [PASS / FAIL / SPLIT]
+- Re-launch count: [N]
+```
 
 ## EDGE CASE HANDLING
 
@@ -555,84 +611,84 @@ Some extracted pages have unusual structure. Handle these edge cases as specifie
 
 After each batch, check the output files for edge case annotations (`NEEDS-HUMAN` or `NOTE:` comments). Record any pages that need manual review in `.agents/state/REFINE-PROGRESS.md` under an `## Edge Cases` section. Include the page number, edge case type, and a one-line description.
 
-### Edge Case Statistics
+## PAGE COMPLEXITY CLASSIFICATION
 
-Track these metrics across the full refinement pass:
+Not all pages have the same refinement difficulty. Classify each page before you assign it to a worker. Use this classification to set worker expectations and token budgets.
 
-| Metric | Expected Max | Action if Exceeded |
-|--------|-------------|-------------------|
-| NEEDS-HUMAN annotations | 5% of files (5 out of 109) | Flag in `.agents/feedback/exchange.md`. Pipeline can continue, but manual review must happen before merge stage. |
-| NOTE: inferred heading annotations | 10% of files (11 out of 109) | Acceptable. Review the inferred headings during merge stage for correctness. |
-| NOTE: normalized conflicting heading depths | 2% of files (2 out of 109) | Check if the source PDF has layout issues. If more than 2% appear, the extraction stage may need adjustment. |
+| Tier | Name | Page Range | Characteristics | Workers Affected | Expected Refinement Time | Recommended Max Pages Per Worker |
+|------|------|------------|-----------------|------------------|--------------------------|----------------------------------|
+| T1 | Front Matter | 1-15 | Title pages, table of contents, introduction, foreword. Mostly prose with some lists. | W001-W004 | 25-35 seconds | 4 |
+| T2 | Rules - Prose | 16-150 | Writing rules with examples and explanations. Mixed prose, lists, and example pairs. | W005-W038 | 35-45 seconds | 4 |
+| T3 | Rules - Tables | 151-250 | Rules dominated by tables. Verb tense tables, category tables, comparison tables. | W039-W063 | 40-55 seconds | 3 |
+| T4 | Grammar Rules | 251-399 | Detailed grammar rules. Dense text, many sub-sections, complex examples. | W064-W100 | 45-60 seconds | 3 |
+| T5 | Dictionary | 400-434 | Dictionary entries. Highly structured. One entry per heading. Many example pairs. | W101-W109 | 55-75 seconds | 3 |
 
-## REGRESSION TEST CASES FOR RULE CHANGES
+### Tier-Specific Worker Instructions
 
-Before proposing any change to the 9 refinement rules, run these regression tests against 10 representative pages to verify the change does not break existing behavior.
-
-### Test Corpus (10 pages covering all page types)
-
-| Test Page | Page Type | Why Selected |
-|-----------|-----------|-------------|
-| Page 1-4 | Front matter, title page | Tests Rule 7 (metadata extraction from sparse pages) |
-| Page 50-53 | Body text, Section 1 rules | Tests Rule 2 (heading hierarchy), Rule 8 (numbered lists) |
-| Page 100-103 | Body text, Section 2 rules | Tests Rule 3 (tables with code examples) |
-| Page 150-153 | Body text, Section 3 rules | Tests Rule 5 (code blocks in procedural text) |
-| Page 200-203 | Table-heavy pages | Tests Rule 3 (merged tables), Rule 9 (table spacing) |
-| Page 300-303 | Mixed content (tables + prose) | Tests Rule 4 (example pairs), Rule 9 (mixed content spacing) |
-| Page 400-403 | Dictionary entries A-C | Tests Rule 6 (approved entries), Rule 4 (pair format) |
-| Page 410-413 | Dictionary entries M-P | Tests Rule 6 (unapproved entries, alternatives) |
-| Page 420-423 | Dictionary entries S-T | Tests Rule 6 (verbs with forms), all edge cases |
-| Page 430-433 | Dictionary entries W-Z | Tests Rule 6 (final entries, no continuation risk) |
-
-### Regression Test Procedure
-
-1. Extract the 10 test pages using Agent #1
-2. Refine the 10 test pages using the CURRENT rules (baseline)
-3. Refine the 10 test pages using the PROPOSED rules (experiment)
-4. Compare baseline and experiment outputs with:
-   ```bash
-   python3 .agents/scripts/compare-refinements.py baseline/ experiment/ --tolerance=0
-   ```
-
-### Pass/Fail Criteria
-
-| Test | What It Checks | Failure Means |
-|------|---------------|---------------|
-| T1: Identical content | `diff` shows zero content changes (formatting-only changes are acceptable) | The rule change caused content loss - REJECT |
-| T2: No new gate failures | Experiment output passes all 9 quality gates | The rule change introduced formatting violations - REJECT |
-| T3: No lost edge cases | Same number of `NEEDS-HUMAN` and `NOTE:` annotations in both outputs | The rule change changed edge case classification - MANUAL REVIEW |
-| T4: Size parity | Experiment output size within ±5% of baseline | The rule changed output verbosity - MANUAL REVIEW |
-| T5: Example count parity | Same number of STE/Non-STE pairs in both outputs | The rule change caused example loss or fabrication - REJECT |
-
-### Test Report Template
+When you generate prompts for dictionary pages (T5), add this block to the worker prompt:
 
 ```
-## Rule Change Regression Report
-
-**Proposed change:** [description]
-**Version bump:** X.Y → X.Z
-**Date:** YYYY-MM-DD
-
-| Test Page | T1 (Content) | T2 (Gates) | T3 (Edge Cases) | T4 (Size) | T5 (Examples) |
-|-----------|---|---|---|---|---|
-| Page 1-4 | PASS/FAIL | PASS/FAIL | PASS/FAIL | ±X% | Same/Diff |
-| ... | ... | ... | ... | ... | ... |
-
-**Overall:** ACCEPT / REJECT / NEEDS REVIEW
+NOTE: This page contains dictionary entries. Apply Rule 6 (Dictionary Entry Format) with extra care:
+- Each entry MUST have a #### heading with WORD (POS) - APPROVED or WORD (POS) - UNAPPROVED
+- Every APPROVED entry MUST have: Meaning, Forms (if verb), STE example, Non-STE example
+- Every UNAPPROVED entry MUST have: Alternatives, STE example, Non-STE example
+- Count the entries before and after refinement. The count must match.
+- Do NOT merge entries that were split across pages. Flag split entries with <!-- NOTE: entry continues on next page -->
 ```
+
+When you generate prompts for table-heavy pages (T3), add this block:
+
+```
+NOTE: This page contains many tables. Apply Rule 3 (Table Formatting) with extra care:
+- Merge tables that were split by the PDF extraction
+- Escape all pipe characters inside cells
+- Align columns for readability
+- Verify the column count is consistent across all rows
+```
+
+### Complexity Drift Detection
+
+If a batch takes significantly longer than its tier estimate:
+
+- T1/T2 taking >90 seconds: Check for hung workers
+- T3/T4 taking >120 seconds: Check for corrupted source tables
+- T5 taking >150 seconds: Check for split dictionary entries
+
+## KNOWN FAILURE PATTERNS
+
+These patterns were observed during actual pipeline runs. Each pattern has a signature, a root cause, and a fix. If you see a pattern that is not in this catalog, add it after you diagnose and fix it.
+
+| Pattern ID | Signature | Root Cause | Fix | First Seen |
+|------------|-----------|------------|-----|------------|
+| KFP-1: Table Row Drop | Refined file has fewer table rows than extracted source | Worker omitted rows to meet token limit | Re-launch with "NEVER OMIT TABLE ROWS. Preserve every row even if the table is long." | Batch 4, r010 |
+| KFP-2: Heading Glue | `### Rule` followed immediately by text with no blank line | Worker interpreted markdown heading as part of paragraph | Re-launch with "CRITICAL: Every heading MUST have a blank line after it before any content." | Batch 7, r019 |
+| KFP-3: Blockquote Merge | STE and non-STE examples appear in one blockquote instead of two | Worker combined adjacent blockquotes for brevity | Re-launch with "SEPARATE: Every STE example and Non-STE example must be in its own blockquote. Use two blockquotes, never one." | Batch 10, r028 |
+| KFP-4: Ellipsis Truncation | `...` appears in the middle of an example or rule text | Worker shortened content to reduce output length | Re-launch with augmented prompt listing the exact lines that were truncated | Batch 15, r043 |
+| KFP-5: Dictionary Field Drop | Dictionary entry has 3 of 4 required fields | Worker skipped the STE or Non-STE example field | Re-launch with "EVERY dictionary entry MUST have all 4 fields: Meaning, Forms, STE, Non-STE." | Batch 28, r082 |
+| KFP-6: Pipe Leak | Table column breaks at an unescaped pipe character in a cell | PDF extraction embedded pipe characters in cell text | Auto-detect pipes in cells. Escape with backslash. Re-launch if >5 leaks. | Batch 32, r094 |
+| KFP-7: Heading Depth Skip | File jumps from `##` to `####` with no `###` between | Worker applied wrong heading level to a sub-section | Re-launch with explicit heading scheme. Show the expected depth for each section. | Batch 18, r052 |
+| KFP-8: Trailing Whitespace Bloat | File has trailing spaces on 10+ lines | Worker editor added trailing spaces during formatting | Auto-fix with sed. Track frequency. If >3 batches affected, add pre-commit hook. | Batch 22, r064 |
+| KFP-9: Metadata Duplication | "ASD-STE100 Simplified Technical English" appears in body after metadata block | Worker preserved the header text instead of removing it | Re-launch with "REMOVE all repetitive headers from body text. The metadata block is the only place for source attribution." | Batch 5, r013 |
+| KFP-10: Cross-Page Entry Split | Dictionary entry starts on page N and continues on page N+1 | PDF page break split the entry mid-way | Flag with NOTE comment. Do NOT merge across pages. Adaptation stage merges split entries. | Batch 33, r097 |
+
+### Failure Pattern Triage
+
+When a worker fails:
+
+1. Match the failure to a known pattern from the KFP catalog
+2. Apply the documented fix
+3. If no match: diagnose from scratch
+4. After fix: add the new pattern to this catalog with the next KFP ID
+
+### Pattern Frequency Tracking
+
+After each full pipeline pass, count the occurrences of each KFP. If a pattern appears in more than 5% of batches:
+
+1. Propose a new gate to catch it automatically
+2. Propose a prompt template update to prevent it
+3. Log the proposal in `.agents/feedback/exchange.md`
 
 ## PERFORMANCE
-
-### Batch Sequencing Rationale
-
-The choice of 3 workers per batch and 37 total batches is not arbitrary. It balances four competing constraints:
-
-| Constraint | Limit | Why |
-|------------|-------|-----|
-| Parallel worker limit | Maximum 3 concurrent `deepseek-v4-pro` workers before rate-limiting activates | Model provider enforces 3 concurrent requests per API key |
-| Memory per worker prompt | 3,500 tokens input + 15,000 tokens output = ~18,500 tokens total per worker | Three concurrent workers = ~55,500 tokens in flight. This stays within the 64K context window for orchestrator tracking. |
-| Commit granularity | One commit per 12 pages (3 workers × 4 pages) | Allows `git bisect` to isolate a bad batch to 12 pages. Finer granularity (1 worker per commit) doubles commit count. Coarser (6 workers per batch) makes bisect less precise. |
-| Human review window | ~60 seconds per batch | Reviewer has time to spot-check output between batches. Longer batches risk the reviewer losing context. Shorter batches cause excessive context-switching. |
 
 ### Estimated Duration
 
@@ -657,25 +713,245 @@ The choice of 3 workers per batch and 37 total batches is not arbitrary. It bala
 
 NOTE: Actual times and token counts change based on page complexity. Dictionary pages (pages 400-434) take 40% longer because they have many structured entries.
 
-### Page Type Performance Breakdown
-
-| Page Type | Pages | Workers | Avg. Worker Time | Token Multiplier |
-|-----------|-------|---------|-----------------|-----------------|
-| Front matter + TOC | 1-12 | 3 | 30 seconds | 0.7× |
-| Section 1 (Rules 1.1-1.9) | 13-80 | 17 | 40 seconds | 0.9× |
-| Section 2 (Dictionary intro) | 81-120 | 10 | 45 seconds | 1.0× |
-| Section 3 (Procedural) | 121-250 | 33 | 45 seconds | 1.0× |
-| Section 4-5 (Grammar) | 251-399 | 37 | 50 seconds | 1.1× |
-| Dictionary (A-Z) | 400-434 | 9 | 65 seconds | 1.4× |
-
 ### Optimization Notes
 
 - Use `background=true` and `notify_on_complete=true` for all worker launches. Do not block the orchestrator loop.
 - Verify only after all three workers in a batch exit. Do not poll individual workers.
 - Commit each batch as one atomic unit. Do not commit partial batches.
 - If a batch takes more than 3 minutes, check for hung workers with `process(action='poll')`.
-- For dictionary pages (400-434), assign 2 pages per worker instead of 4. This prevents token-limit truncation and keeps worker times under 90 seconds.
-- Batch dictionary page workers with non-dictionary workers when possible (2 dictionary + 1 body-text) to keep batch cycle times balanced.
+
+## TOKEN BUDGET BY PAGE TIER
+
+Each page tier has a different token consumption profile. Use these budgets to estimate costs and detect outliers. A worker that consumes 2x its tier budget may be stuck in a loop.
+
+| Tier | Pages | Avg Input Tokens Per Worker | Avg Output Tokens Per Worker | Total Tokens Per Worker | Tier Total Tokens | % of Full Pass |
+|------|-------|----------------------------|------------------------------|------------------------|-------------------|----------------|
+| T1: Front Matter | 1-15 | ~2,500 | ~8,000 | ~10,500 | ~42,000 | 2.1% |
+| T2: Rules - Prose | 16-150 | ~3,200 | ~12,000 | ~15,200 | ~516,800 | 25.6% |
+| T3: Rules - Tables | 151-250 | ~3,800 | ~16,000 | ~19,800 | ~495,000 | 24.5% |
+| T4: Grammar Rules | 251-399 | ~3,500 | ~18,000 | ~21,500 | ~795,500 | 39.5% |
+| T5: Dictionary | 400-434 | ~4,000 | ~22,000 | ~26,000 | ~234,000 | 11.6% |
+| **Full Pass** | **1-434** | **~3,500** | **~15,000** | **~18,500** | **~2,083,300** | **100%** |
+
+NOTE: Total tokens for the full pass (~2.08M) is an estimate. Actual usage changes with page complexity, error retries, and worker re-launches. Add 10-15% buffer for retry overhead.
+
+### Token Budget Alerts
+
+| Alert | Condition | Action |
+|-------|-----------|--------|
+| Yellow - High Usage | Worker uses 1.5x-2.0x tier average tokens | Flag the batch. Spot-check the output for bloat. |
+| Red - Extreme Usage | Worker uses >2.0x tier average tokens | Kill the worker. Check for loop or hallucination. Re-launch. |
+| Green - Efficient | Worker uses <1.2x tier average tokens | Expected. No action. |
+
+### Cost Estimation (deepseek-v4-pro, as of 2025-07-30)
+
+| Metric | Value |
+|--------|-------|
+| Input token cost | $0.27 per 1M tokens |
+| Output token cost | $1.10 per 1M tokens |
+| Full pass input cost | ~$0.10 |
+| Full pass output cost | ~$1.80 |
+| Full pass total cost | ~$1.90 |
+| With 15% retry buffer | ~$2.19 |
+
+## CROSS-BATCH CONSISTENCY CHECKS
+
+After every 10 batches, run these checks to verify that output quality is uniform across batches. Inconsistency between batches is a sign of prompt drift or worker fatigue.
+
+### Check 1: Heading Depth Consistency
+
+```bash
+# Count heading depths across the last 10 batches (30 files)
+for f in ste-code/refined/r{NNN..NNN}-p*.md; do
+  echo "$f: $(grep -c '^# ' $f) $(grep -c '^## ' $f) $(grep -c '^### ' $f) $(grep -c '^#### ' $f)"
+done
+```
+
+Expected: All files in the same tier have similar heading depth distributions. A file with zero `##` headings in a tier that normally has 3-5 `##` headings is a red flag.
+
+### Check 2: Example Pair Density
+
+```bash
+# Count STE/Non-STE pairs per file
+for f in ste-code/refined/r{NNN..NNN}-p*.md; do
+  echo "$f: STE=$(grep -c '> \*\*STE:\*\*' $f) Non-STE=$(grep -c '> \*\*Non-STE:\*\*' $f)"
+done
+```
+
+Expected: STE count equals Non-STE count in every file. If the source had examples but the refined file has zero pairs, flag for re-launch.
+
+### Check 3: File Size Progression
+
+```bash
+# Check that file sizes decrease or stay stable, not grow unexpectedly
+ls -la ste-code/refined/r*-p*.md | awk '{print $5, $NF}' | sort -k2
+```
+
+Expected: File sizes vary by tier (T5 dictionary pages are largest) but should not have sudden 2x jumps between adjacent page ranges.
+
+### Check 4: Blank Line Consistency
+
+```bash
+# Count triple blank lines (should be zero after refinement)
+for f in ste-code/refined/r{NNN..NNN}-p*.md; do
+  triple=$(grep -c $'^\n\n\n' $f 2>/dev/null || echo 0)
+  if [ "$triple" -gt 0 ]; then echo "FAIL: $f has $triple triple blank lines"; fi
+done
+```
+
+Expected: Zero triple blank lines in every file.
+
+### Check 5: Annotation Drift
+
+```bash
+# Count edge case annotations
+for f in ste-code/refined/r{NNN..NNN}-p*.md; do
+  needs_human=$(grep -c 'NEEDS-HUMAN' $f)
+  notes=$(grep -c '<!-- NOTE:' $f)
+  echo "$f: NEEDS-HUMAN=$needs_human NOTE=$notes"
+done
+```
+
+Expected: NEEDS-HUMAN annotations appear on <5% of files. A sudden spike in a batch indicates source file corruption or a worker that is fabricating annotations.
+
+### Consistency Failure Protocol
+
+If any consistency check fails:
+
+1. Identify the affected files and the specific metric that failed
+2. Compare against files from earlier batches (look for the batch where the drift started)
+3. Check if the worker prompt template was modified between those batches
+4. If prompt drift is confirmed: regenerate prompts for all remaining batches
+5. If prompt is unchanged: check for model behavior change (same model, different output quality)
+6. Log the consistency failure in `.agents/feedback/exchange.md`
+
+## POST-REFINEMENT VALIDATION SUITE
+
+After all 109 files are refined, run this validation suite before you signal completion. Do not skip any check.
+
+### V1: File Count and Completeness
+
+```bash
+# Must be exactly 109 files
+ls ste-code/refined/r*-p*.md | wc -l
+
+# No zero-byte files
+find ste-code/refined/ -name "r*-p*.md" -size 0
+
+# No missing sequence numbers
+for i in $(seq -w 1 109); do
+  count=$(ls ste-code/refined/r${i}-p*.md 2>/dev/null | wc -l)
+  if [ "$count" -eq 0 ]; then echo "MISSING: r${i}"; fi
+done
+```
+
+### V2: Page Coverage
+
+```bash
+# All 434 pages must be covered with no gaps
+python3 .agents/scripts/check-page-coverage.py ste-code/refined/
+```
+
+### V3: Gate Pass Rate
+
+```bash
+# Run quality gates on all 109 files
+python3 .agents/scripts/check-refined-all.py
+
+# Expected output:
+#   Total files: 109
+#   Passed all gates: ≥100
+#   Failed: ≤9 (G4 and G9 auto-fixes are acceptable)
+```
+
+### V4: Content Preservation Audit
+
+```bash
+# Compare word counts between extracted and refined
+python3 .agents/scripts/compare-word-counts.py ste-code/extracted/ ste-code/refined/
+
+# Expected: refined word count is 95-105% of extracted word count per file
+# Any file below 90%: content loss. Any file above 110%: possible fabrication.
+```
+
+### V5: Heading Hierarchy Audit
+
+```bash
+# Check heading depth consistency across all files
+python3 .agents/scripts/check-heading-depth.py ste-code/refined/
+
+# Expected: zero depth jumps (## → #### without ###)
+```
+
+### V6: STE/Non-STE Pair Balance
+
+```bash
+# Every STE must have a matching Non-STE in the same file
+python3 .agents/scripts/check-example-pairs.py ste-code/refined/
+
+# Expected: STE count = Non-STE count in every file that has examples
+```
+
+### V7: Dictionary Entry Completeness
+
+```bash
+# Dictionary pages (r101-r109) must have all required fields
+python3 .agents/scripts/check-dictionary-entries.py ste-code/refined/r10[1-9]-p*.md
+
+# Expected: every APPROVED entry has Meaning + STE + Non-STE (Forms optional)
+# Expected: every UNAPPROVED entry has Alternatives + STE + Non-STE
+```
+
+### V8: Rails Compliance
+
+```bash
+# Check all 8 guardrails
+python3 .agents/scripts/check-rails.py
+
+# Expected: all 8 rails PASS
+```
+
+### V9: Spot-Check Sampling
+
+After automated checks pass, manually review 5 random files:
+
+```bash
+# Select 5 random files
+ls ste-code/refined/r*-p*.md | sort -R | head -5
+```
+
+For each sampled file, verify:
+- Content is real (not fabricated or hallucinated)
+- All 9 refinement rules are applied correctly
+- No "..." omissions
+- No glued headings
+- No triple blank lines
+- No trailing whitespace
+
+### V10: Edge Case Report
+
+```bash
+# Count and categorize all edge case annotations
+grep -r 'NEEDS-HUMAN' ste-code/refined/ | wc -l
+grep -r '<!-- NOTE:' ste-code/refined/ | wc -l
+```
+
+Write a summary of all edge cases to `.agents/state/REFINE-EDGE-CASES.md` for handoff to Agent #3 (Auditor).
+
+### Validation Pass Criteria
+
+All of these conditions must be true before you signal completion:
+
+- [ ] V1: Exactly 109 files, zero missing, zero zero-byte
+- [ ] V2: All 434 pages covered with no gaps
+- [ ] V3: ≥100 files pass all gates
+- [ ] V4: Content preservation ratio 0.95-1.05 for all files
+- [ ] V5: Zero heading depth jumps
+- [ ] V6: STE/Non-STE pairs balanced
+- [ ] V7: Dictionary entries complete
+- [ ] V8: All 8 rails PASS
+- [ ] V9: 5/5 spot-checks clean
+- [ ] V10: Edge case report written
 
 ## WHEN COMPLETE
 
