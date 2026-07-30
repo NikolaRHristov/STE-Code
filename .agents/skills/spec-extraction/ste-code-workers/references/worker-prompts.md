@@ -201,7 +201,7 @@ the exact page-to-worker mapping.
 | Rails | [`rails.md`](.agents/skills/spec-extraction/references/rails.md) | 8 immutable quality guardrails |
 | Extraction skill | [`../../extraction/SKILL.md`](.agents/skills/extraction/SKILL.md) | Extraction stage definition |
 | Refinement skill | [`../../refinement/SKILL.md`](.agents/skills/refinement/SKILL.md) | Post-extraction formatting rules |
-| Agent definitions | [`../../../agent/`](.agents/agent/) | 9 agent role definitions |
+| Agent definitions | [`../../../agent/`](.agents/agent) | 9 agent role definitions |
 | Pipeline master | [`../../../MASTER.md`](.agents/MASTER.md) | Full launch protocol and pipeline stages |
 
 ## How to Regenerate Prompts
