@@ -1,7 +1,7 @@
 ---
 name: ste-code-continuation
 description: "Multi-agent continuation skill for Stages 3-5 (merge, adapt, artifacts) — usable by Agents #1, #2, or #3 from their own perspective to track and advance pipeline stages."
-version: 1.1.0
+version: 1.2.0
 author: Hermes Agent
 license: MIT
 platforms: [macos]
@@ -151,6 +151,173 @@ FOR EACH STAGE (3→4→5) in sequence:
 | artifacts/ has 6 files but #2 is 3,000 chars (target ~28,000) | Regenerate only artifact #2. Flag truncation in exchange.md. |
 | No source directory has 109 files | Report to exchange.md: "INCOMPLETE: Stages 1-2 not finished. Awaiting extraction/refinement." Do not proceed. |
 | Two source directories available (e.g., extracted + refined) | Prefer refined (higher quality). Fall back to extracted if refined is incomplete. |
+| master-raw.md exists but master.md does not | Dedup failed or was interrupted. Re-run deduplication from master-raw.md. Do not re-concatenate. |
+| .stage-state says STAGE_4_COMPLETE but adapted/ has 5 files | Trust file system. Reset STAGE_4_COMPLETE state. Resume from first missing worker. |
+| .stage-state says STAGE_3_COMPLETE but master.md < 500KB | Trust file system. master.md is truncated. Re-run Stage 3. |
+| adapted/ has files from a previous run that use different naming | Stale output. Move to ste-code/adapted/.archive/. Re-run Stage 4 from Batch 1. |
+| artifacts/ has 6 files but one is 0 bytes | Delete the zero-byte file. Regenerate that artifact only. |
+| Two merged/ directories found (merged/ + merged-v2/) | Use the newest. If timestamps are the same, use the larger file. Flag ambiguity in exchange.md. |
+| master.md has 53 rules but 3 rules have no code examples | Flag in exchange.md. Adaptation worker may have skipped or truncated. Re-launch the section worker. |
+
+## Stage State Machine & Resume Protocol
+
+### State Machine Overview
+
+The continuation agent can enter the pipeline at any of these states. The flow is sequential: Stage 3 must complete before Stage 4, which must complete before Stage 5.
+
+```
+         ┌──────────────────────────────────┐
+         │        ENTRY POINT               │
+         │   Run Stage Detection (all 5     │
+         │   checks: count, timestamp,      │
+         │   size, partial, state file)     │
+         └──────────────┬───────────────────┘
+                        │
+         ┌──────────────┼──────────────────┐
+         ▼              ▼                   ▼
+   ┌──────────┐  ┌───────────┐     ┌──────────────┐
+   │ COMPLETE?│  │  PARTIAL? │     │   ABSENT?    │
+   │ all pass │  │ some exist│     │  none exist  │
+   └────┬─────┘  └─────┬─────┘     └──────┬───────┘
+        │              │                   │
+        ▼              ▼                   ▼
+   ┌──────────┐  ┌───────────┐     ┌──────────────┐
+   │ SKIP to  │  │  RESUME   │     │  RUN from    │
+   │ next gate│  │ from gap  │     │  start       │
+   └────┬─────┘  └─────┬─────┘     └──────┬───────┘
+        │              │                   │
+        └──────────────┼───────────────────┘
+                       │
+        ┌──────────────┼──────────────────┐
+        ▼              ▼                   ▼
+   ┌──────────┐  ┌───────────┐     ┌──────────────┐
+   │ STAGE 3  │  │ STAGE 4   │     │  STAGE 5     │
+   │  MERGE   │  │  ADAPT    │     │  ARTIFACTS   │
+   │          │  │           │     │              │
+   │ Input:   │  │ Input:    │     │ Input:       │
+   │extracted/│  │merged/    │     │adapted/ +    │
+   │refined/  │  │master.md  │     │master.md     │
+   │enriched/ │  │           │     │              │
+   │          │  │Output:    │     │Output:       │
+   │Output:   │  │11 files   │     │6 files       │
+   │master.md │  │           │     │              │
+   └────┬─────┘  └─────┬─────┘     └──────┬───────┘
+        │              │                   │
+        ▼              ▼                   ▼
+   ┌──────────┐  ┌───────────┐     ┌──────────────┐
+   │ VALIDATE │  │ VALIDATE  │     │  VALIDATE    │
+   │ 53 rules │  │ 11 files  │     │  6 files     │
+   │ 19 cats  │  │ >2KB each │     │  sizes ±30%  │
+   │ >500KB   │  │ 53 rules  │     │  all gates   │
+   │ 10 spot  │  │ total     │     │              │
+   └────┬─────┘  └─────┬─────┘     └──────┬───────┘
+        │              │                   │
+        ▼              ▼                   ▼
+   ┌──────────┐  ┌───────────┐     ┌──────────────┐
+   │  GATE    │  │   GATE    │     │    DONE      │
+   │ PASS→S4  │  │  PASS→S5  │     │  report +    │
+   │          │  │           │     │  exchange.md  │
+   └──────────┘  └───────────┘     └──────────────┘
+```
+
+### Validation Failures → Recovery Decision Flow
+
+When validation fails for any stage, follow this decision tree:
+
+```
+┌─────────────────────┐
+│  VALIDATION FAILS   │
+└──────────┬──────────┘
+           │
+     ┌─────┼─────┐
+     ▼     ▼     ▼
+┌────────┐┌──────┐┌──────────┐
+│SIZE    ││COUNT ││TIMESTAMP │
+│FAIL    ││FAIL  ││FAIL      │
+│output  ││rules ││output is │
+│too     ││or    ││stale     │
+│small   ││files ││          │
+└───┬────┘└──┬───┘└────┬─────┘
+    │        │          │
+    ▼        ▼          ▼
+┌────────┐┌────────┐┌───────────┐
+│RE-RUN  ││RE-RUN  ││DELETE old │
+│from    ││targeted││output.    │
+│start.  ││missing ││Re-run from│
+│Check   ││units   ││start with │
+│source  ││only.   ││fresh      │
+│health. ││Save    ││source.    │
+│        ││existing││           │
+└────────┘└────────┘└───────────┘
+```
+
+### State File Protocol
+
+The file `ste-code/.stage-state` tracks progress across agent invocations. Always read this file before making stage decisions.
+
+**State file format:**
+```bash
+# ste-code/.stage-state — Machine-readable pipeline progress
+STAGE_3_COMPLETE=true
+STAGE_3_TIMESTAMP=2025-07-30T14:22:00+00:00
+STAGE_3_SOURCE_DIR=ste-code/extracted
+STAGE_4_BATCH_1_DONE=true
+STAGE_4_BATCH_2_DONE=true
+STAGE_4_BATCH_3_DONE=false
+STAGE_4_BATCH_4_DONE=false
+STAGE_4_WORKER_A007_RETRIES=2
+STAGE_5_ARTIFACT_3_DONE=true
+STAGE_5_LAST_ARTIFACT=4
+```
+
+**Write state after each sub-step:**
+```bash
+# After Stage 3 completes:
+cat > ste-code/.stage-state << 'STATEEOF'
+STAGE_3_COMPLETE=true
+STAGE_3_TIMESTAMP=$(date -Iseconds)
+STAGE_3_SOURCE_DIR=$INPUT_DIR
+STATEEOF
+
+# After each adaptation batch:
+echo "STAGE_4_BATCH_${BATCH_NUM}_DONE=true" >> ste-code/.stage-state
+
+# After each artifact:
+echo "STAGE_5_ARTIFACT_${N}_DONE=true" >> ste-code/.stage-state
+echo "STAGE_5_LAST_ARTIFACT=${N}" >> ste-code/.stage-state
+```
+
+### Resume Protocol (on re-entry)
+
+When the continuation agent is re-invoked after interruption, follow this protocol:
+
+1. **Read the state file:**
+   ```bash
+   source ste-code/.stage-state 2>/dev/null
+   ```
+
+2. **Cross-check state file against file system.** If state says complete but files are missing, trust the file system. If state is absent but files exist, trust the file system.
+
+3. **Determine resume point:**
+   - No state file, no output files → Start at Stage 3, Batch 1, or Artifact 1 (run Stage Detection).
+   - State file says STAGE_4_BATCH_2_DONE, files confirm → Resume from Batch 3.
+   - State file says STAGE_4_BATCH_2_DONE, but a006.md is missing → Reset BATCH_2_DONE. Resume from Batch 2.
+   - State file says STAGE_5_ARTIFACT_3_DONE, files confirm → Resume from Artifact 4.
+   - State file says STAGE_5_COMPLETE + all 6 files pass → Report DONE. Do not re-run.
+
+4. **Resume from the first incomplete unit.** Do not re-execute completed units unless they fail validation.
+
+### Resume Edge Case Table
+
+| State File Says | File System Says | Action |
+|-----------------|------------------|--------|
+| STAGE_4_COMPLETE=true | adapted/ has 5 files | Trust file system. Reset STAGE_4_COMPLETE=false. Resume from first missing worker. |
+| STAGE_3_COMPLETE=true | master.md < 500KB | Trust file system. Re-run Stage 3. master.md is truncated. |
+| STAGE_5_ARTIFACT_4_DONE=true | artifacts/ has 3 files | Trust file system. Resume from Artifact #4. |
+| No state file | adapted/ has 11 files + master.md exists | Fresh entry. Run detection. Likely SKIP to Stage 5. |
+| State file corrupted (parse fails) | Some output exists | Discard state file. Run full detection. Treat as fresh entry with partial output. |
+| STAGE_4_BATCH_2_DONE=true | a005.md = 0 bytes | Trust file system. Reset BATCH_2_DONE=false. Re-launch Batch 2. |
+| STAGE_3_COMPLETE=true, timestamp is 7 days old | master.md passes validation | Accept. Timestamp is for tracking, not staleness (staleness is checked by comparing source files, not wall clock). |
 
 ---
 
@@ -352,6 +519,24 @@ For each rule: write original rule text, then code-domain rewrite, then STE/non-
 Write to ste-code/adapted/<<OUTPUT_FILE>>. Output ONLY the adaptation file.
 ```
 
+### Prompt Template Variable Map
+
+The template uses `<<SECTION>>` and `<<OUTPUT_FILE>>` placeholders. Each worker maps to these values:
+
+| Worker | `<<SECTION>>` | `<<OUTPUT_FILE>>` | Rules Covered |
+|--------|---------------|-------------------|---------------|
+| a001 | Section 1 — Words (Rules 1.1-1.14) | a-sec1-rules.md | 1.1–1.14 |
+| a002 | Section 2 — Noun Clusters (Rules 2.1-2.3) | a-sec2-rules.md | 2.1–2.3 |
+| a003 | Section 3 — Verbs (Rules 3.1-3.7) | a-sec3-rules.md | 3.1–3.7 |
+| a004 | Section 4 — Sentences (Rules 4.1-4.4) | a-sec4-rules.md | 4.1–4.4 |
+| a005 | Section 5 — Procedures (Rules 5.1-5.5) | a-sec5-rules.md | 5.1–5.5 |
+| a006 | Section 6 — Descriptive (Rules 6.1-6.6) | a-sec6-rules.md | 6.1–6.6 |
+| a007 | Section 7 — Safety (Rules 7.1-7.3) | a-sec7-rules.md | 7.1–7.3 |
+| a008 | Section 8 — Punctuation (Rules 8.1-8.7) | a-sec8-rules.md | 8.1–8.7 |
+| a009 | Section 9 — Practices (Rules 9.1-9.4 + GR1-GR4) | a-sec9-rules.md | 9.1–9.4, GR1–GR4 |
+| a010 | 19 Technical Noun Categories + 4 Technical Verb Categories | a-categories.md | Categories |
+| a011 | Part 2 — Dictionary (A-Z entries) + Appendices | a-dictionary.md | Dictionary |
+
 ### Worker Retry Protocol
 
 If any adaptation worker fails (timeout, truncated output, missing file):
@@ -401,6 +586,22 @@ If any adaptation worker fails (timeout, truncated output, missing file):
 - Every adapted rule references original rule number from master.md
 - All examples are code-domain (no aerospace examples)
 - 19 categories mapped per category-mapping.md
+
+### Stage 4 → Stage 5 Gate Checklist
+
+Before advancing from Stage 4 to Stage 5, confirm ALL of these:
+
+- [ ] 11 adaptation files exist: a-sec1-rules.md through a-sec9-rules.md, a-categories.md, a-dictionary.md
+- [ ] Each file exceeds 2KB minimum
+- [ ] `grep -c "^#### Rule" ste-code/adapted/*.md` totals 53 across all files
+- [ ] Zero aerospace examples: `grep -il "aircraft\|turbine\|fuselage\|landing gear\|aileron" ste-code/adapted/*.md` returns empty
+- [ ] 19 categories mapped: `grep -c "^### Category" ste-code/adapted/a-categories.md` = 19
+- [ ] All adapted files are newer than master.md timestamp
+- [ ] No `.tmp` files remain in `ste-code/adapted/`
+- [ ] exchange.md updated with Stage 4 completion notice
+- [ ] .stage-state updated: STAGE_4_BATCH_4_DONE=true
+
+If any check fails, do not proceed to Stage 5. Fix the failing check first.
 
 ### Adaptation Checkpoint
 
@@ -487,6 +688,66 @@ Generate 6 artifact files in `ste-code/artifacts/`:
 - [ ] References to ASD-STE100 Issue 9
 - [ ] Total ~2,000 chars (~500 tokens, within 30% tolerance)
 
+### Per-Artifact Generation Commands
+
+Each artifact is generated by a dedicated hermes worker. Launch them **sequentially** — each artifact depends on the previous one for accurate sizing. Verify output before launching the next artifact.
+
+```bash
+# Artifact 1: System Prompt (~4,800 chars)
+hermes -z "Read ste-code/merged/master.md Part 1 Writing Rules (P1-P14). Read ste-code/adapted/a-sec1-rules.md. Generate the file ste-code/artifacts/ste-code-distilled-system-prompt.txt with these sections: IDENTITY block (2-3 sentences), 14 CORE PRINCIPLES referencing specific rule numbers, CANONICAL SYNONYM TABLE from master.md source, APPROVED VOCABULARY POLICY, OUTPUT FORMAT with standardized sections, 10 ANTI-PATTERNS (code-specific, not aerospace). All principles must cite exact rule numbers. Synonyms must trace to master.md entries. Anti-patterns must apply to code documentation. Target ~4,800 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+
+# After Artifact 1, verify size:
+TARGET=4800; ACTUAL=$(wc -c < ste-code/artifacts/ste-code-distilled-system-prompt.txt)
+MIN=$(($TARGET * 70 / 100)); MAX=$(($TARGET * 130 / 100))
+[ $ACTUAL -ge $MIN ] && [ $ACTUAL -le $MAX ] || echo "SIZE FAIL: $ACTUAL chars (target $TARGET ±30%)"
+```
+
+```bash
+# Artifact 2: Self-Reading Manual (~28,000 chars)
+hermes -z "Read ste-code/merged/master.md in full (all 53 rules, 19 categories, synonym table, polysemy table, pipeline). Read all ste-code/adapted/ files. Generate ste-code/artifacts/ste-code-self-reading-manual.txt with 8 sections: S0 (how to use this manual + recursive loop diagram as Mermaid flowchart), S1 (14 core principles with code-domain examples), S2 (all 53 adapted rules with code-domain example pairs + 19 categories with code examples + synonym + polysemy + pipeline), S3 (page reading protocol for code docs), S4 (skill extraction framework — 5 patterns), S5 (UML extraction — class + sequence + flowchart), S6 (13 recursive questions adapted for code), S7 (output format — per-turn + consolidated), S8 (context window management). Every rule must have a code-domain example pair. S6 must have exactly 13 questions. Target ~28,000 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+
+# Verify Artifact 2 size + section count:
+wc -c ste-code/artifacts/ste-code-self-reading-manual.txt
+grep -c "^## S[0-8] " ste-code/artifacts/ste-code-self-reading-manual.txt
+# Expected: 8 sections
+```
+
+```bash
+# Artifact 3: Extraction Methodology (~5,600 chars)
+hermes -z "Read ste-code/merged/master.md pipeline section and structural extraction types section. Generate ste-code/artifacts/ste-code-extraction-methodology.txt with: Turn 0 initialization (read title, TOC, classify document type), Turns 1+ 7-step pipeline (READ→TOKENIZE→LEXICAL CHECK→EXTRACT STRUCTURAL DATA→OPTIMIZE→OUTPUT→ADVANCE), 5 structural extraction types adapted for code (classes/structs, associations/dependencies, procedures/functions, conditions/branches, safety/breaking changes), Final turn consolidation, Mermaid UML output format (class + flowchart), State persistence mechanism (write current state to ste-code/state/turn-N.json with position and unresolved references). Target ~5,600 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+
+# Verify Artifact 3 pipeline step count:
+grep "→" ste-code/artifacts/ste-code-extraction-methodology.txt | head -1 | tr '→' '\n' | wc -l
+# Expected: 7 pipeline steps in READ→...→ADVANCE chain
+```
+
+```bash
+# Artifact 4: Example Turn (~2,000 chars)
+hermes -z "Read ste-code/merged/master.md. Find a clear STE/non-STE pair (prefer Rule 3.5 Approved Verb Forms or Rule 1.7 Technical Names as Verbs). Adapt both the non-STE and STE text from aerospace to code documentation domain using ste-code-adaptation preserve/replace rules. Generate ste-code/artifacts/ste-code-example-turn.txt with: Non-STE-Code INPUT block citing exact source rule number and line range from master.md, COMPLIANCE STATUS with N violations count (minimum 3 violations shown), STE-CODE OUTPUT block with corrected text, UML EXTRACTION with at least one Mermaid class diagram and one Mermaid flowchart, OPTIMIZATIONS table with before/after metrics. Cite the source rule. Target ~2,000 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+
+# Verify Artifact 4 source citation:
+grep "master.md" ste-code/artifacts/ste-code-example-turn.txt
+# Must contain a source reference. If empty, the artifact is fabricated — regenerate with stronger directive.
+```
+
+```bash
+# Artifact 5: Deployment Guide (~7,200 chars)
+hermes -z "Read ste-code/artifacts/ files for actual byte sizes. Generate ste-code/artifacts/ste-code-deployment-guide.txt covering 4 deployment options: A) Ollama Modelfile (bake system prompt into Modelfile, provide example Modelfile content), B) LM Studio GUI (step-by-step, max 5 steps), C) Python + llama.cpp (programmatic loop with system prompt injection, provide Python code snippet), D) Full conversation export (include all 6 artifacts as context). Include token budget breakdown table using actual artifact sizes, realistic expected output examples after processing. Each option must have: prerequisites, step-by-step (max 20 words per step), verification command. Target ~7,200 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+
+# Verify Artifact 5 covers all 4 options:
+grep -c "Option [A-D]" ste-code/artifacts/ste-code-deployment-guide.txt
+# Expected: 4
+```
+
+```bash
+# Artifact 6: README.md (~2,000 chars)
+hermes -z "Read all ste-code/artifacts/ files for actual sizes and descriptions. Read ste-code-adaptation/SKILL.md for preserve/replace rules. Generate ste-code/artifacts/README.md with: What STE-Code is (2-3 concise sentences), File listing with actual byte sizes for all 6 artifacts, Quick start (exactly 3 steps: choose deployment option, load system prompt, run on code docs), Architecture summary (preserve original STE structure, replace aerospace with code domain), Design principles, Reference to ASD-STE100 Issue 9 as source material. Target ~2,000 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+
+# Verify Artifact 6 completeness:
+grep -c "^## " ste-code/artifacts/README.md
+# Expected: 5 or more sections (What, Files, Quick Start, Architecture, etc.)
+```
+
 ### Generation Protocol
 1. Read relevant sections from master.md + adapted files
 2. Apply preserve/replace rules
@@ -500,12 +761,69 @@ Generate 6 artifact files in `ste-code/artifacts/`:
    [ $ACTUAL -ge $MIN ] && [ $ACTUAL -le $MAX ] || echo "SIZE FAIL: $ACTUAL chars (target $TARGET ±30%)"
    ```
 
+### Artifact Atomic Write Protocol
+
+For resilience against interruption, write each artifact using an atomic rename pattern:
+
+```
+For each artifact N (1 to 6):
+  1. Generate to ste-code/artifacts/.tmp/artifact-N.txt
+  2. Run quality gate checks on the temp file
+  3. If all gates pass: mv .tmp/artifact-N.txt → ste-code/artifacts/final-name.txt
+  4. If any gate fails: delete .tmp/artifact-N.txt, log failure, begin per-artifact recovery
+  5. Copy successfully-moved file to ste-code/artifacts/.backup/artifact-N.txt
+```
+
+This prevents partially written files from polluting the output directory if generation is interrupted mid-write.
+
+```bash
+# Atomic write example for Artifact 1:
+mkdir -p ste-code/artifacts/.tmp ste-code/artifacts/.backup
+hermes -z "..." -m deepseek-v4-pro --yolo > ste-code/artifacts/.tmp/a1-system-prompt.txt
+# Validate temp file
+TARGET=4800; ACTUAL=$(wc -c < ste-code/artifacts/.tmp/a1-system-prompt.txt)
+MIN=$(($TARGET * 70 / 100)); MAX=$(($TARGET * 130 / 100))
+if [ $ACTUAL -ge $MIN ] && [ $ACTUAL -le $MAX ]; then
+  mv ste-code/artifacts/.tmp/a1-system-prompt.txt ste-code/artifacts/ste-code-distilled-system-prompt.txt
+  cp ste-code/artifacts/ste-code-distilled-system-prompt.txt ste-code/artifacts/.backup/
+  echo "Artifact 1: PASS ($ACTUAL chars)"
+else
+  echo "Artifact 1: SIZE FAIL ($ACTUAL chars)"
+  rm ste-code/artifacts/.tmp/a1-system-prompt.txt
+fi
+```
+
 ### Anti-Fabrication Rules
 - Every adapted rule MUST reference a specific rule_number from master.md
 - Every synonym MUST trace to master.md's synonym table
 - Every category MUST match one of the 19 from master.md
 - Every example MUST be an adaptation of a real STE/non-STE pair
 - No invented code terms without a master.md source
+
+### Per-Artifact Recovery Table
+
+If an artifact fails quality gates, follow the recovery actions below. For full per-artifact failure recovery protocols (including section-specific fixes, sourcing rules, and detailed recovery steps), refer to `.agents/skills/spec-extraction/ste-code-artifacts/SKILL.md`, which has complete per-artifact sections.
+
+| Artifact | Common Failure | Recovery Action |
+|----------|---------------|-----------------|
+| **1 — System Prompt** | Principles lack rule references | Re-read master.md P1-P14 section. Cross-check each principle against its Rule X.Y source. Regenerate the principles block only. |
+| **1 — System Prompt** | Synonym table has invented forms | Load master.md synonym table. Compare every entry pair-by-pair. Remove any pair not in the source. Regenerate the table only. |
+| **1 — System Prompt** | Anti-patterns not code-specific | Cross-reference against adapted code-domain examples. Replace generic patterns with code equivalents. |
+| **2 — Self-Reading Manual** | Rule count < 53 | Identify which rule numbers lack example pairs. For each gap, read the specific rule from master.md. Adapt its STE/non-STE pair. Append to the rule. |
+| **2 — Self-Reading Manual** | S6 not exactly 13 questions | Count current questions. If < 13, consult master.md recursive questioning section for missing questions. If > 13, merge redundant questions. |
+| **2 — Self-Reading Manual** | Recursive loop diagram missing | Generate Mermaid flowchart in S0: S0(orient)→S3(page protocol)→Document(text)→S4(extract)→S6(question)→S7(output)→S8(trim)→S0(next page). |
+| **3 — Extraction Methodology** | Pipeline steps < 7 | The 7-step pipeline is: READ→TOKENIZE→LEXICAL CHECK→EXTRACT→OPTIMIZE→OUTPUT→ADVANCE. Re-read master.md pipeline section. Insert the missing step. |
+| **3 — Extraction Methodology** | Turn 0 missing | Add: "Read document title, TOC, first 50 lines. Classify document type (README, API reference, inline comment, error message, config file)." |
+| **3 — Extraction Methodology** | State persistence unspecified | Add: "After each turn, write state to ste-code/state/turn-N.json: document position, extracted structures count, unresolved references, next-turn cursor." |
+| **4 — Example Turn** | No source rule citation | Do NOT fabricate. Re-read master.md. Find a clear STE/non-STE pair. Adapt to code. Cite the rule number and line range. |
+| **4 — Example Turn** | Fewer than 3 violations | Choose a different source pair or expand the example to include more non-STE-Code patterns. |
+| **4 — Example Turn** | UML diagrams missing | Generate at minimum: one Mermaid class diagram and one Mermaid flowchart. |
+| **5 — Deployment Guide** | Deployment option missing | Options A-D are: Ollama, LM Studio, Python+llama.cpp, Conversation Export. Write the missing option from the deployment template. |
+| **5 — Deployment Guide** | Token budget mismatch | Calculate budgets from Artifacts 1-4 and 6 actual sizes. Update the budget table to match reality. |
+| **5 — Deployment Guide** | Output examples unrealistic | Replace with output derived from Artifact 4's worked example. |
+| **6 — README** | File listing incomplete | Count files in ste-code/artifacts/. List all 6 with actual byte sizes. |
+| **6 — README** | Quick start not 3 steps | Steps: (1) Choose deployment option, (2) Load system prompt, (3) Run on code documentation. |
+| **6 — README** | ASD-STE100 citation missing | Add: "Based on ASD-STE100 Issue 9, adapted for software code documentation under the STE-Code protocol." |
 
 ### Artifact Checkpoint
 
@@ -628,6 +946,31 @@ Update `.agents/state/PROGRESS.md` after every completed stage. Signal in `.agen
 - Pipeline complete. Awaiting review.
 ```
 
+### Stage Completion Handshake
+
+After each stage completes and validates, perform these actions in order:
+
+1. **Save state file:**
+   ```bash
+   echo "STAGE_${N}_COMPLETE=true" >> ste-code/.stage-state
+   echo "STAGE_${N}_TIMESTAMP=$(date -Iseconds)" >> ste-code/.stage-state
+   ```
+
+2. **Git commit the output:**
+   ```bash
+   git add ste-code/merged/ ste-code/.stage-state && git gcommit-hermes "Stage 3 COMPLETE: master.md 523KB, 53 rules, 19 categories"
+   ```
+
+3. **Update exchange.md:**
+   ```markdown
+   ## Agent #N → Reviewer — Stage 3 Complete (Merge)
+   [metrics as shown above]
+   ```
+
+4. **Update PROGRESS.md** with the completed stage marker.
+
+5. **Proceed to Stage Detection** for the next stage before launching workers. Do not skip detection — the next stage's input may have appeared since the last check.
+
 ---
 
 ## Cross-References to Companion Skills
@@ -644,6 +987,99 @@ This file acts as the **dispatcher** for Stages 3-5. For deep detail on each sta
 | **Implementation** | `.agents/references/STE-CODE-IMPLEMENTATION.md` | Full pipeline spec, worker grid, gate definitions, retry logic |
 
 When a stage in this file references a protocol, the companion skill provides the complete, executable detail. Use this file to determine *which* stage to run and *how* to dispatch; use companion skills for *exactly what* to do inside each stage.
+
+---
+
+## Pipeline State Transition Diagram
+
+The following diagram shows the complete state machine for the continuation agent across all three stages. Use this as a reference when diagnosing where the pipeline stopped and where to resume.
+
+```
+                        ┌──────────────────────────────┐
+                        │     ENTRY — STAGE DETECTION   │
+                        │  (count + timestamp + size    │
+                        │   + partial + state file)     │
+                        └──────────────┬───────────────┘
+                                       │
+                        ┌──────────────┼──────────────┐
+                        ▼              ▼              ▼
+                  ┌───────────┐ ┌───────────┐ ┌───────────┐
+                  │ COMPLETE? │ │  PARTIAL? │ │  ABSENT?  │
+                  │ all checks│ │ some files│ │ no output │
+                  │ pass      │ │ exist     │ │ exists    │
+                  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘
+                        │              │              │
+                        ▼              ▼              ▼
+                  ┌───────────┐ ┌───────────┐ ┌───────────┐
+                  │ SKIP to   │ │ RESUME    │ │ RUN from  │
+                  │ next gate │ │ from gap  │ │ start     │
+                  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘
+                        │              │              │
+                        └──────────────┼──────────────┘
+                                       │
+           ┌───────────────────────────┼───────────────────────────┐
+           ▼                           ▼                           ▼
+    ┌──────────────┐           ┌──────────────┐           ┌──────────────┐
+    │   STAGE 3    │           │   STAGE 4    │           │   STAGE 5    │
+    │    MERGE     │           │    ADAPT     │           │  ARTIFACTS   │
+    │              │           │              │           │              │
+    │ Concatenate  │           │ 4 batches    │           │ 6 sequential │
+    │ 109 files    │           │ of 3 workers │           │ artifacts    │
+    │ → master-raw │           │ each         │           │              │
+    │              │           │              │           │              │
+    │ Deduplicate  │           │ For each     │           │ For each     │
+    │ + organize   │           │ batch:       │           │ artifact:    │
+    │ → master.md  │           │  launch 3    │           │  generate    │
+    │              │           │  wait        │           │  validate    │
+    │ Validate:    │           │  verify      │           │  size check  │
+    │  53 rules    │           │  checkpoint  │           │  gate check  │
+    │  19 cats     │           │              │           │  checkpoint  │
+    │  >500KB      │           │              │           │              │
+    │  10 spots    │           │              │           │              │
+    └──────┬───────┘           └──────┬───────┘           └──────┬───────┘
+           │                          │                          │
+           ▼                          ▼                          ▼
+    ┌──────────────┐           ┌──────────────┐           ┌──────────────┐
+    │   VALIDATE   │           │   VALIDATE   │           │   VALIDATE   │
+    │              │           │              │           │              │
+    │ PASS? → S4   │           │ PASS? → S5   │           │ PASS? → DONE │
+    │ FAIL? → fix  │           │ FAIL? → fix  │           │ FAIL? → fix  │
+    │ + retry      │           │ + retry      │           │ + retry      │
+    └──────────────┘           └──────────────┘           └──────────────┘
+```
+
+### Interruption Recovery Flow
+
+When the agent is re-invoked mid-pipeline, the recovery flow is:
+
+```
+┌─────────────────────────────────────┐
+│  Re-invoked (agent re-starts)       │
+└────────────────┬────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────┐
+│ 1. source ste-code/.stage-state     │
+│ 2. Run Stage Detection (all 5 checks)│
+│ 3. Cross-check state vs filesystem  │
+└────────────────┬────────────────────┘
+                 │
+        ┌────────┼────────┐
+        ▼        ▼        ▼
+   ┌─────────┐┌────────┐┌──────────┐
+   │State    ││State   ││No state  │
+   │matches  ││conflict││file      │
+   │FS       ││with FS ││exists    │
+   └────┬────┘└───┬────┘└────┬─────┘
+        │         │           │
+        ▼         ▼           ▼
+   ┌─────────┐┌────────┐┌──────────┐
+   │Resume   ││Trust FS││Trust FS  │
+   │from     ││Reset   ││Run full  │
+   │state    ││state   ││detection │
+   │marker   ││Resume  ││           │
+   └─────────┘└────────┘└──────────┘
+```
 
 ---
 

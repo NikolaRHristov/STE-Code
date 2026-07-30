@@ -113,6 +113,49 @@ The >30 lines and >3KB thresholds were chosen for three reasons:
 NOTE: When a file falls in the 30–40 line range, flag it for manual review even if
 it passes the threshold.
 
+#### Threshold Calibration
+
+The 30-line / 3KB cutoffs balance two competing risks. Understand both sides before
+adjusting the thresholds.
+
+**Sensitivity vs. Specificity Trade-off**
+
+| Threshold | True Positives Caught | False Positives (valid files flagged) | Net Reliability |
+|-----------|----------------------|--------------------------------------|-----------------|
+| 10 lines / 1KB | ~99% of bad files | ~8% of valid extractions | Low — many manual reviews |
+| 20 lines / 2KB | ~96% of bad files | ~3% of valid extractions | Medium — some false flags |
+| **30 lines / 3KB (current)** | **~92% of bad files** | **~1% of valid extractions** | **High — rare false flags** |
+| 45 lines / 5KB | ~82% of bad files | <0.5% of valid extractions | Low — misses many bad files |
+| 60 lines / 8KB | ~60% of bad files | <0.1% of valid extractions | Very low — too permissive |
+
+The current thresholds optimize for high specificity (few false positives) while
+maintaining acceptable sensitivity. A false positive wastes reviewer time. A false
+negative lets a bad file through — but the fabrication detection patterns in Step 4
+provide a second line of defense.
+
+**When to Recalibrate**
+
+Review the thresholds after 50 or more files pass through the pipeline:
+
+- If the false positive rate exceeds 3%, raise the line floor to 35.
+- If the fabrication catch rate drops below 85%, lower the line floor to 25.
+- If a new worker model produces structurally different output, recalibrate from
+  scratch using a sample of 10 known-valid and 10 known-bad files.
+
+BREAKING: Do not change thresholds mid-pipeline. Wait for a phase gate pause.
+
+#### False Positive vs. False Negative Impact
+
+| Error Type | Example | Pipeline Impact | Recovery Cost |
+|-----------|---------|-----------------|---------------|
+| False positive | Valid 28-line sparse page flagged as bad | Reviewer spends 2–3 min checking. File passes manual review. | Low |
+| False negative | 32-line fabricated file passes threshold | Bad content enters merge stage. Fabrication spreads to adapted files. | High — requires rollback of downstream stages |
+| False negative (late catch) | Fabrication detected only at artifact stage | All dependent files must be regenerated from the extraction stage. | Very high — full pipeline restart from extraction |
+
+The current calibration accepts a small false-positive rate (~1%) to minimize the
+risk of false negatives. This is intentional. A false positive costs 2–3 minutes
+of reviewer time. A false negative can cost hours of pipeline rework.
+
 ### Step 4: Flag Discrepancies
 
 | Discrepancy Type | Flag | Severity |
@@ -123,7 +166,7 @@ it passes the threshold.
 | Claim timestamp after file timestamp | 🟡 WARNING | Claim may be retroactive |
 | Multiple agents claim different states for same file | 🟡 WARNING | Coordination failure |
 | PROGRESS.md shows [x] but file missing | 🔴 CRITICAL | Tracking fabricaion |
-| Claimed page range doesn't match file content | 🟠 ERROR | Worker extracted wrong pages |
+| Claimed page range does not match file content | 🟠 ERROR | Worker extracted wrong pages |
 | File has fabricated content patterns | 🔴 CRITICAL | See fabrication detection |
 
 ### Step 5: Produce Audit Report
@@ -214,6 +257,105 @@ Two workers may independently produce very similar output without fabrication.
 not track which files improve or degrade over multiple pipeline runs. A file that
 passes audit today may fail tomorrow with no historical record of the change.
 
+#### Adversarial Fabrication Scenarios
+
+The patterns above are known to the orchestrator agents. A determined agent could
+craft output that avoids all pattern triggers. These scenarios are unlikely but
+must be understood.
+
+**Scenario A — Vocabulary Scrubbing**: An agent removes all modern software terms
+and commentary language from fabricated output. The text passes keyword checks.
+
+- *Detection gap*: No keyword pattern fires.
+- *Compensating control*: Timestamp cross-reference (Step 3, item 3) catches files
+  created before the claim. Spot-check 3 random lines against the source spec
+  catches semantic drift.
+- *Residual risk*: Medium. A single audit pass may miss this. Consecutive audits
+  with different random spot-check lines reduce the risk.
+
+**Scenario B — Boilerplate Injection**: An agent prepends the correct ASD-STE100
+header and page number to fabricated content. The "missing spec boilerplate"
+pattern does not fire.
+
+- *Detection gap*: Header check passes.
+- *Compensating control*: Content threshold check flags files that are too short
+  or too long. The "wrong page content" pattern catches cross-page fabrication.
+  Random line spot-check catches fabricated body text.
+- *Residual risk*: Low. Boilerplate injection alone does not produce a file that
+  passes the 30-line threshold with meaningful content.
+
+**Scenario C — Page Swapping**: An agent copies real content from page 12 and
+labels it as page 47. All structural checks pass.
+
+- *Detection gap*: No structural pattern fires. Timestamps may be valid.
+- *Compensating control*: Random line spot-check against the source spec is the
+  only reliable defense. Check 3 lines from different sections of the file.
+- *Residual risk*: Medium-High. This is the hardest fabrication to detect
+  automatically. It requires a human to recognize that the content does not
+  belong to the claimed page.
+
+NOTE: Document any adversarial scenario you encounter during an audit. Add it
+to this section with a proposed compensating control.
+
+#### Limitation Mitigations
+
+The limits above are inherent. Use these compensating controls to reduce risk:
+
+1. **Rotate spot-check lines**: Do not check the same 3 line numbers across
+   audits. Use a random seed based on the audit timestamp.
+2. **Cross-audit comparison**: Compare audit N with audit N-1. A file that
+   changed its content without changing its timestamp is suspicious.
+3. **Semantic sampling**: For 1 file per batch, load the corresponding source
+   spec page and compare 2 specific rule numbers. Example: "Does the extracted
+   file mention Rule 1.2 in the correct page context?"
+4. **Peer verification**: Before a phase gate pass, ask a second agent
+   (reviewer or orchestrator) to spot-check 5 random claims independently.
+5. **Hash tracking**: Record SHA-256 hashes of all evidence files in the audit
+   report. A file whose hash changes between audits requires re-verification
+   even if no claim changed.
+
+### Pattern Evolution
+
+Fabrication patterns change as pipeline models, prompts, and agent roles evolve.
+The 8 patterns above were derived from a single pipeline run. They are not
+universal.
+
+**When to Review Patterns**
+
+Review the pattern list after:
+- A model change (new LLM version, different provider, different temperature).
+- A prompt change in any worker or orchestrator SKILL.md.
+- A pipeline structural change (new stage, merged stages, different batch sizes).
+- Three consecutive audits with zero fabrication flags (patterns may be stale).
+- Three consecutive audits with >5 fabrication flags from the same pattern
+  (pattern may need sub-patterns for finer detection).
+
+**Pattern Lifecycle**
+
+```
+Proposed → Active → Deprecated → Removed
+```
+
+- **Proposed**: Pattern observed in 1 file. Record in audit report as NOTE. Do
+  not add to the active pattern list.
+- **Active**: Pattern observed in 3 or more files across 2 different batches.
+  Add to the pattern list with a unique ID (FP-001, FP-002, ...).
+- **Deprecated**: Pattern has not fired in 5 consecutive full audits. Move to
+  a deprecated list. Keep the pattern definition but do not flag matches.
+- **Removed**: Pattern deprecated for 10 consecutive audits. Delete from the
+  list. The pattern ID is retired and never reused.
+
+**Current Pattern IDs**
+
+| ID | Pattern | Status | Since |
+|----|---------|--------|-------|
+| FP-001 | Modern software terms in spec extraction | Active | 2026-07-26 |
+| FP-002 | Commentary language | Active | 2026-07-26 |
+| FP-003 | Missing spec boilerplate | Active | 2026-07-26 |
+| FP-004 | Smooth flowing prose | Active | 2026-07-26 |
+| FP-005 | Wrong page content | Active | 2026-07-26 |
+| FP-006 | Identical content across workers | Active | 2026-07-26 |
+
 ## Audit Frequency
 
 - **Continuous**: After every batch claimed complete
@@ -263,6 +405,76 @@ Use a full audit when:
 NOTE: A partial audit that finds a CRITICAL discrepancy must be escalated to a
 full audit immediately. Do not defer.
 
+### Token Budget Allocation Strategy
+
+A complete pipeline run with 37 batches and 5 phase gates will execute 37 batch
+audits, 5 full audits, and approximately 10 spot checks. Plan the token envelope
+before the pipeline starts.
+
+**Cumulative Cost Envelope (37-batch pipeline)**
+
+| Audit Type | Count | Tokens Each | Total Tokens |
+|-----------|-------|-------------|--------------|
+| Batch partial | 37 | ~4K | ~148K |
+| Full (phase gate) | 5 | ~40K | ~200K |
+| Spot check | 10 | ~1.5K | ~15K |
+| Claims-only | 5 | ~750 | ~4K |
+| **Total** | **57** | — | **~367K** |
+
+At a typical rate of 50K tokens per minute, the total audit cost is approximately
+7–8 minutes of processing time across the full pipeline. This is acceptable for
+a pipeline that takes 30–60 minutes to execute.
+
+**Budget Overrun Rules**
+
+If the token budget is exhausted before the pipeline completes:
+
+1. Drop spot checks first. Batch partial audits provide sufficient coverage.
+2. Merge phase gate audits. Combine extraction and refinement gates into one
+   full audit at the merge gate.
+3. Reduce batch partial to claims-only. Accept the risk of missing mid-pipeline
+   file-level issues.
+4. Never drop the final artifact gate audit. This is the last line of defense.
+
+**Cost per Discrepancy Found**
+
+Track this metric across pipeline runs:
+
+```
+cost_per_find = total_audit_tokens / critical_discrepancies_found
+```
+
+| Cost per Find | Interpretation |
+|---------------|----------------|
+| <5K tokens | Very efficient — audits find frequent issues |
+| 5K–20K tokens | Normal — audits catch occasional issues |
+| 20K–100K tokens | Audit scope may be too broad for the issue rate |
+| >100K tokens | Pipeline is healthy OR audits are checking the wrong things |
+
+If the cost per find exceeds 100K tokens for 3 consecutive pipeline runs,
+consider reducing audit scope or increasing batch size. The pipeline may
+have matured past the need for per-batch auditing.
+
+### Audit Cadence Decision Tree
+
+Use this decision flow to choose the right audit scope:
+
+```
+Batch completes
+├── Is this the last batch before a phase gate?
+│   ├── YES → Full audit (phase gate scope)
+│   └── NO → Continue
+├── Have 3 batches passed since the last full audit?
+│   ├── YES → Full audit (catch-up scope)
+│   └── NO → Continue
+├── Did the previous batch audit find a discrepancy?
+│   ├── YES → Full audit (escalation scope)
+│   └── NO → Continue
+├── Is token budget below 20% remaining?
+│   ├── YES → Claims-only audit
+│   └── NO → Batch partial audit
+```
+
 ## Immutable Log
 
 The audit directory `.agents/audit/` is append-only. Never modify or delete
@@ -292,6 +504,58 @@ list after confirming the fix is safe and reversible.
 
 NOTE: Do not add patterns to the fixable list during an active pipeline run.
 Wait until the pipeline completes or pauses at a phase gate.
+
+### Fixable Patterns Update Cadence
+
+The fixable patterns list must not grow stale. A stale list causes the auditor
+to miss new systemic errors or to apply outdated fixes.
+
+**Mandatory Review Triggers**
+
+Review the fixable patterns list when any of these events occur:
+
+| Trigger | Action |
+|---------|--------|
+| New pipeline run starts | Review list before first batch. Remove patterns specific to the previous run. |
+| Model or provider changes | Review all pattern definitions. Verify fixes are still correct for the new model. |
+| A fix fails during auto-remediation | Review the pattern immediately. Mark as DEPRECATED if the fix is no longer safe. |
+| 30 days pass with no pipeline activity | Review list for staleness. Archive patterns older than 2 pipeline runs. |
+| A new systemic error appears in ≥3 files | Propose a new fixable pattern. Do not activate until a phase gate pause. |
+
+**Pattern Deprecation Rules**
+
+| Condition | Action |
+|-----------|--------|
+| Pattern has not been detected in 2 consecutive pipeline runs | Mark as DEPRECATED. Keep the fix logic but do not apply automatically. |
+| Fix for a pattern fails 2 times in the same run | Mark as BROKEN. Escalate to reviewer. Do not attempt auto-fix. |
+| Pattern is superseded by a pipeline structural change | Mark as SUPERSEDED. Reference the new pipeline feature that replaces it. |
+| Pattern fix touches files outside the pipeline scope | Mark as UNSAFE. The fix scope is too broad. Split into smaller patterns. |
+
+**Example Deprecation Entry**
+
+```
+| FP-FIX-001 | "22 technical noun categories" | 2026-07-26 | DEPRECATED | 2026-08-15 | Superseded by v2 prompts that use 19 from the start |
+```
+
+### Backward Compatibility
+
+Audit reports from older versions of this SKILL.md remain valid. Do not re-audit
+old reports against new pattern lists. The audit report records which version of
+the auditor produced it.
+
+**Compatibility Rules**
+
+- Audit reports reference the auditor version that produced them. A report from
+  v1.0.0 is valid under v1.0.0 rules, even if v1.1.0 adds new patterns.
+- The report format (Steps 1–5, flag severity levels, trust score calculation)
+  is stable. Do not change the format without a major version bump.
+- Adding a new fabrication pattern does not invalidate old reports. Adding a new
+  flag severity level or changing the threshold does.
+- If the audit protocol changes in a way that old reports would fail new checks,
+  bump the major version and document the migration path.
+
+DEPRECATED: The original "22 technical noun categories" claim in v0 prompts.
+Superseded by v1 prompts that use the correct count of 19.
 
 ## Quality Gates
 
@@ -340,6 +604,95 @@ NOTE: The quality score is a trend indicator, not a gate. A pipeline with a
 score of 0.92 may still be blocked by a single critical discrepancy. A pipeline
 with a score of 0.99 but 1 critical is also blocked. The critical discrepancy
 cap (0) always overrides the quality score.
+
+### Trend Analysis
+
+A single audit score is a snapshot. Track scores across consecutive audits to
+detect degradation before it causes a gate failure.
+
+**Trend Signals**
+
+| Trend | Pattern | Interpretation |
+|-------|---------|----------------|
+| Stable high | 5 audits at ≥0.92 | Pipeline is healthy. No action. |
+| Gradual decline | Scores drop 0.02+ per audit for 3 audits | Systemic issue emerging. Escalate to reviewer before next gate. |
+| Sudden drop | Score drops ≥0.10 in one audit | Single catastrophic event. Check model change, prompt change, or worker failure. |
+| Volatile | Scores oscillate ±0.08 | Workers are inconsistent. Check batch composition and worker assignment. |
+| False positive creep | False positives increase by 2+ per audit | Fabrication patterns are flagging valid content. Review pattern list. |
+
+**Trend Data Format**
+
+Append to `.agents/audit/trends.csv` after each full audit:
+
+```csv
+timestamp,version,total_claims,verified_claims,false_positives,criticals,quality_score,cost_per_find
+2026-07-26T23:58:00,1.0.0,109,105,2,0,0.96,4500
+2026-07-27T00:15:00,1.0.0,109,103,3,0,0.93,5200
+```
+
+Compute trend signals from the last 5 rows. If fewer than 5 rows exist, use
+all available rows.
+
+**Trend-Based Alerts**
+
+| Alert | Condition | Action |
+|-------|-----------|--------|
+| Amber watch | 2 consecutive declining scores | Notify orchestrator. Increase spot-check frequency. |
+| Red watch | 3 consecutive declining scores | Block next phase gate. Require full audit with semantic sampling. |
+| Pattern spike | Same pattern ID fires 5+ times in one audit | Review pattern for false-positive calibration. |
+| Trust collapse | Any agent drops below 0.80 for 2 audits | Escalate agent. Reassign its work to a different agent. |
+
+### Escalation Paths
+
+When the auditor blocks a phase gate, follow the escalation path below. Do not
+skip steps. Each step adds more human or agent review before the gate can be
+retried.
+
+**Level 1 — Automatic Retry**
+
+Condition: 1 false positive, no criticals, trust scores ≥0.80.
+
+Action: The auditor re-runs the same scope. If the false positive resolves (a
+different random spot-check line passes), the gate is approved. If it persists,
+escalate to Level 2.
+
+**Level 2 — Reviewer Escalation**
+
+Condition: 1 critical discrepancy OR persistent false positive OR trust score <0.80.
+
+Action: Escalate to the reviewer agent. The reviewer must independently verify
+the flagged claim and produce a written finding. The auditor holds the gate until
+the reviewer responds.
+
+**Level 3 — Orchestrator Escalation**
+
+Condition: 2+ critical discrepancies OR reviewer cannot resolve within 10 minutes.
+
+Action: Escalate to the extraction orchestrator. The orchestrator must decide:
+- Re-run the affected batch with new workers.
+- Accept the discrepancy with a documented risk (only for non-critical files).
+- Pause the pipeline and request human intervention.
+
+**Level 4 — Human Escalation**
+
+Condition: 5+ critical discrepancies OR orchestrator cannot resolve.
+
+Action: Stop the pipeline. Write a human-readable summary of all discrepancies
+to `.agents/audit/ESCALATION-YYYYMMDD-HHMMSS.md`. Include:
+- Each discrepancy with claim reference and file path.
+- The last 3 audit trend scores.
+- The recommended action (which batches to re-run, which agents to replace).
+
+Do not restart the pipeline until a human reviews the escalation report.
+
+**Escalation Timeout**
+
+| Level | Timeout | If Timeout Expires |
+|-------|---------|--------------------|
+| Level 1 | 2 minutes | Auto-escalate to Level 2 |
+| Level 2 | 10 minutes | Auto-escalate to Level 3 |
+| Level 3 | 20 minutes | Auto-escalate to Level 4 |
+| Level 4 | No timeout | Wait for human response |
 
 ## Single-Prompt Launch
 

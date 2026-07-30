@@ -29,7 +29,22 @@
     "fix-027--agents-skills-spec-extraction-ste-code-",
     "fix-028--agents-skills-spec-extraction-ste-code-",
     "fix-029--agents-skills-spec-extraction-ste-code-",
-    "fix-030--agents-skills-spec-extraction-ste-code-"
+    "fix-030--agents-skills-spec-extraction-ste-code-",
+    "fix-031--agents-skills-spec-extraction-ste-code-",
+    "fix-032--agents-skills-spec-extraction-ste-code-",
+    "fix-033--agents-skills-spec-extraction-ste-code-",
+    "fix-034--agents-skills-spec-extraction-ste-code-",
+    "fix-035--agents-skills-spec-extraction-execution",
+    "fix-036--agents-skills-spec-extraction-execution",
+    "fix-037--agents-skills-spec-extraction-agent-sta",
+    "fix-038--agents-skills-spec-extraction-ste-code-",
+    "fix-039--agents-skills-spec-extraction-ste-code-",
+    "fix-040--agents-skills-spec-extraction-ste-code-",
+    "fix-041--agents-references-worker-rails-md",
+    "fix-042--agents-references-worker-grid-md",
+    "fix-043--agents-references-rails-md",
+    "fix-044--agents-references-section-types-md",
+    "fix-045--agents-references-quality-checklist-md"
   ],
   "batches_done": [
     1,
@@ -41,7 +56,12 @@
     7,
     8,
     9,
-    10
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
   ],
-  "updated": "2026-07-30T12:05:03.360056+00:00"
+  "updated": "2026-07-30T12:19:40.529165+00:00"
 }

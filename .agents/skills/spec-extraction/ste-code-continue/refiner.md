@@ -29,6 +29,7 @@ mkdir -p ste-code/refined .agents/prompts/refine
 ## Before/After Examples
 
 Each transformation rule has a concrete example. Workers must match these patterns.
+Examples 1–8 map directly to the 8 problem rows in the table above.
 
 ### Example 1: STE/Non-STE pair merging
 
@@ -123,6 +124,72 @@ STE: Make sure that the pin is locked. Non-STE: Verify that the pin is locked.
 | unapproved | ACCESS (v) |
 ```
 
+### Example 6: Proper names as headings
+
+**Before (raw extraction):**
+```
+### ASD-STE100
+
+ASD-STE100 is the European standard for Simplified Technical English.
+### ASD
+
+The ASD is the Aerospace, Security and Defence Industries Association of Europe.
+```
+
+**After (refined):**
+```
+**ASD-STE100** is the European standard for Simplified Technical English.
+
+**ASD** is the Aerospace, Security and Defence Industries Association of Europe.
+```
+
+NOTE: Never use `###`, `##`, or `#` for proper names. Use `**bold**` for inline emphasis of organization names, standard names, and product names. Headings (`#` through `####`) are only for document structure (pages, sections, rules, dictionary entries).
+
+### Example 7: Page footers
+
+**Before (raw extraction):**
+```
+### Rule 1.5 — Technical names
+
+Technical names are words that refer to a system or a part of a system.
+
+Issue 9
+2025-01-15
+```
+
+**After (refined):**
+```
+### Rule 1.5 — Technical names
+
+Technical names are words that refer to a system or a part of a system.
+
+> **Source:** ASD-STE100 Issue 9, January 2025
+```
+
+NOTE: Page footers in the source PDF repeat "Issue 9" and a date stamp on most pages. These are PDF printing artifacts, not content. Collapse ALL footer lines into a single metadata line. If the footer date varies across pages within a batch, use the earliest date found and note the range: `January–February 2025`.
+
+### Example 8: List indentation
+
+**Before (raw extraction):**
+```
+1. First item
+    - sub item one
+        * sub sub item
+2. Second item
+   - sub item two
+```
+
+**After (refined):**
+```
+1. First item
+   - sub item one
+     - sub sub item
+2. Second item
+   - sub item two
+```
+
+NOTE: Use 2-space indent for all list nesting. Replace `*` bullet markers with `-`. Do not mix numbered lists and bullet lists at the same nesting level — choose one style per level.
+
 ## 9 Refinement Rules (NON-NEGOTIABLE)
 
 1. **ZERO CONTENT LOSS** — Every word, number, example, table cell preserved. Redundant page headers (repeated "ASD-STE100 Simplified Technical English" text that appears on every page of the source PDF) are NOT content — they are PDF printing artifacts. Removing them is safe. Rule examples, dictionary entries, section text, table data, and rule numbers ARE content — never remove these.
@@ -142,6 +209,25 @@ STE: Make sure that the pin is locked. Non-STE: Verify that the pin is locked.
 8. **LIST STANDARDIZATION** — `1.` for numbered, `-` for bullets, 2-space indent
 9. **CONSISTENT SPACING** — Blank line after every heading, after every table, between sections. No triple blanks. No trailing spaces.
 
+### Rule 1 Boundary: Redundant vs. Content
+
+The boundary between "redundant PDF artifact" and "content" must be clear. Use this decision table when unsure:
+
+| Element | Classification | Action | Reason |
+|---------|---------------|--------|--------|
+| "ASD-STE100 Simplified Technical English" on every page | Redundant artifact | Remove from body, keep in metadata block | PDF header repeated 434 times. Source captured once in metadata. |
+| "Page N of 434" on every page | Redundant artifact | Collapse to page range in metadata block | Source captured as `# Page NNN–MMM of 434`. |
+| "Issue 9" / "2025-01-15" footer on every page | Redundant artifact | Collapse to single metadata line | PDF footer. Issue and date are constant across the spec. |
+| Rule text: "STE: Set the switch to ON." | Content | NEVER remove | Specification content. |
+| Dictionary entry: "ACCESS (n) — APPROVED" | Content | NEVER remove | Specification content. |
+| Table data: word lists, meanings, examples | Content | NEVER remove | Specification content. |
+| Section headings: "Section 2 — Dictionary" | Content | NEVER remove | Document structure. |
+| Page number in a cross-reference: "See page 23" | Content | Keep as-is in body text | This is part of the specification text, not a page artifact. It was written by the spec authors. |
+| Running header: "ASD-STE100" at the top of every page | Redundant artifact | Remove from body | Same text on 434 pages. Keep once in metadata. |
+| Distinct page content: a diagram caption, a unique footnote | Content | NEVER remove | Only appears once in the spec. |
+
+**Decision rule**: If the text repeats identically on 3+ consecutive pages and is not part of the specification body (rules, dictionary, examples), it is a PDF artifact. Remove it. If in doubt, keep it — content loss is worse than extra metadata.
+
 ## Rule Rationale and Priority
 
 The 9 rules address the 8 problem patterns from the extraction stage. They are ordered by priority:
@@ -156,7 +242,29 @@ The 9 rules address the 8 problem patterns from the extraction stage. They are o
 | **Medium** | Rule 6 — Dictionary Entries | Dictionary navigation. Consistent entry format enables the merge stage to deduplicate entries. |
 | **Medium** | Rule 7 — Page Metadata | Source traceability. Every refined page must link back to its source page range. |
 | **Low** | Rule 8 — List Standardization | Readability. Indentation noise from PDF extraction makes lists hard to parse. |
-| **Low** | Rule 9 — Consistent Spacing | Clean diff output. Extra blank lines cause noisy diffs in version control.
+| **Low** | Rule 9 — Consistent Spacing | Clean diff output. Extra blank lines cause noisy diffs in version control. |
+
+### Why 9 Rules, Not 8 or 10
+
+There are exactly 8 problem patterns (see "What You Fix" table above). Rules 1–8 each target one problem pattern. Rule 9 (Consistent Spacing) is a cross-cutting rule that affects all output — it does not map to one problem pattern but improves every file. The count is 8 problem-specific rules + 1 global formatting rule = 9.
+
+### Rules That Interact
+
+Some rules can conflict when applied to the same text. Apply them in this fixed order to prevent conflicts:
+
+**Transformation priority (apply in this exact order):**
+
+1. Rule 1 — Identify what to keep vs. remove (redundant artifact detection)
+2. Rule 7 — Build the page metadata block FIRST (sets the file header)
+3. Rule 2 — Normalize all headings (page, section, rule, dictionary levels)
+4. Rule 3 — Reformat tables (header rows, separator rows, aligned columns)
+5. Rule 4 — Convert STE/Non-STE pairs to blockquote format
+6. Rule 6 — Format dictionary entries (word headings + bullet lists)
+7. Rule 8 — Standardize list indentation
+8. Rule 5 — Wrap code blocks in fences
+9. Rule 9 — Apply consistent spacing (blank lines, no trailing spaces)
+
+Applying rules in this order prevents a later rule from undoing an earlier rule's work. For example: apply heading normalization (Rule 2) before STE/Non-STE formatting (Rule 4) so that `###` in "### ASD-STE100" is removed before the STE/Non-STE scanner tries to parse it.
 
 ## Worker Setup
 
@@ -238,6 +346,46 @@ If a line contains both STE and Non-STE text without a clear separator (e.g., me
 ```
 ```
 
+**Page number mismatch:**
+If the page numbers in the input filename (`wNNN-pPPPP-PPPP.md`) do not match the page numbers found in the extracted content, trust the FILENAME. The extraction worker may have read the correct pages but the PDF page numbers may differ from the spec's internal numbering (e.g., cover pages, table of contents). Set the page header from the filename and add a note:
+```
+> **Note:** Page numbers in content differ from filename range. Using filename range.
+```
+
+**Corrupted or mixed-encoding characters:**
+If the extracted file contains non-UTF-8 characters, replacement characters (`�`), or mixed encodings (common in PDF extraction of special characters like em-dashes, smart quotes, or diacritics):
+1. Replace `�` with the most likely ASCII equivalent based on context:
+   - `�` before a word → likely an em-dash → use `—`
+   - `�` around a word → likely a smart quote → use `"` or `'`
+   - `�` in a word → check the STE-Code dictionary for the expected word
+2. If the character cannot be resolved, keep `�` and add a warning line:
+   ```
+   > **Warning:** N unresolved replacement characters in this file.
+   ```
+
+**Duplicate dictionary entries across pages:**
+If the same dictionary entry (same word + part of speech) appears on two different pages in the same batch, keep the entry on the page where it FIRST appears. On subsequent pages, add a cross-reference note:
+```
+*See page [N] for full entry.*
+```
+Do not merge or deduplicate content across pages — that is the merge stage's job.
+
+**Nested transformation conflicts:**
+A single block of text can match multiple problem patterns. Example: a dictionary entry table (pattern 2: 4-column interleaving) that also contains merged STE/Non-STE pairs (pattern 1). Apply transformations in order: first split the 4-column interleaving into separate dictionary entries, then format the STE/Non-STE pairs within each entry. The transformation priority order in the "Rules That Interact" section above is authoritative.
+
+### Pre-Flight Checklist (Orchestrator Only)
+
+Before launching a batch of workers, check these items:
+
+- [ ] Input file exists: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
+- [ ] Input file is > 0 bytes (`wc -c` confirms non-empty, even if only whitespace)
+- [ ] Output directory exists: `ste-code/refined/`
+- [ ] Prompt file exists: `.agents/prompts/refine/rNNN-prompt.txt`
+- [ ] Prompt file references the correct input and output paths
+- [ ] Model is `deepseek-v4-pro` (NEVER `deepseek-v4-flash`)
+- [ ] No more than 3 workers launched simultaneously
+- [ ] Previous batch verification is complete (if not batch 1)
+
 ### Launch Protocol
 
 Launch workers using ONLY `deepseek-v4-pro` (NEVER `deepseek-v4-flash`):
@@ -255,6 +403,18 @@ hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m deepseek-v4-pro --y
 3. No "ASD-STE100 Simplified Technical English" repeated as headings
 4. All STE/non-STE pairs use `> **STE:**` format
 5. All tables have header rows and separator rows
+
+### Post-Refinement Sanity Check
+
+After verification passes, run these additional checks before marking a batch complete:
+
+- [ ] Output file is valid markdown (no broken fences, no unclosed code blocks)
+- [ ] Output file does not contain raw PDF artifacts: no "Issue 9" on its own line without metadata context, no orphaned dates
+- [ ] No heading level is skipped (e.g., `## Section` directly followed by `#### Entry` without an intervening `### Rule`)
+- [ ] The metadata block is the FIRST block after the `# Page NNN of 434` heading (nothing between them)
+- [ ] File ends with a trailing newline
+- [ ] No line exceeds 200 characters (signals a table row that was not split correctly by the PDF extractor)
+- [ ] The word count of the output is within 5% of the input word count (a difference > 5% signals content loss or fabrication)
 
 ### Failure Recovery
 
@@ -283,7 +443,24 @@ If any verification check fails, use this recovery procedure:
 1. If the table has 2+ columns but no separator row, the worker failed to add headers. Re-run with a prompt that lists the expected table columns explicitly.
 2. If the re-run fails, mark the file as `⚠️ TABLE` and note the missing headers in REFINE-PROGRESS.md.
 
+**Sanity check failures (post-verification):**
+- **Broken markdown fences**: If the output has an unclosed code fence, add the closing fence at the end of the file and note the fix.
+- **Heading level skip**: Add a bridging heading if the content warrants it. If the skip is from an original PDF structure quirk (e.g., a sub-sub-rule under a rule with no intervening section), mark the file as `⚠️ STRUCTURE`.
+- **Word count deviation > 5%**: This is a serious signal. Do not mark the batch complete. Run a diff between input and output to identify added or removed content. Re-extract the page range if necessary.
+- **Line > 200 characters**: Split the line manually at a logical column boundary. Mark the file as `⚠️ WIDE`.
+
 After recovery, increment the retry counter in REFINE-PROGRESS.md. After 3 retries for the same batch, escalate to the Auditor agent.
+
+### Common Failure Patterns and Their Root Causes
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Output is significantly shorter than input | Worker summarized instead of reformatting | Re-run with "CRITICAL: no summarization" prefix |
+| Table columns are misaligned after refinement | PDF extraction merged cells from adjacent pages | Split the page range and re-extract with 2 pages per worker |
+| STE/Non-STE pairs appear as a single blockquote line | PDF extracted two examples as one line | Re-run with explicit instruction to split at "Non-STE:" marker |
+| Dictionary entry has wrong part of speech | PDF page boundary split the entry across pages | Cross-reference with the previous page in the batch |
+| Metadata block appears mid-file instead of at top | Worker applied Rule 7 after processing content | Move block to top manually. The transformation order in "Rules That Interact" prevents this in correct execution. |
+| Consecutive runs produce different output for the same input | Model non-determinism | Accept the first run that passes all checks. Do not re-run for cosmetic differences. |
 
 ## 🔴 MANDATORY: Update REFINE-PROGRESS.md After Every Batch
 
@@ -296,6 +473,8 @@ update the progress counter, and commit.
 - Zero content loss — format only
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - Follow `.agents/skills/spec-extraction/references/rails.md` — all 8 guardrails apply
+- Particularly RAIL 4 — Content Fidelity: never fabricate, summarize, or adapt. Reformat only.
+- Particularly RAIL 5 — Formatting Standards: heading levels, spacing, tables, STE/Non-STE examples, dictionary entries must match the approved patterns.
 
 ## Start Now
 

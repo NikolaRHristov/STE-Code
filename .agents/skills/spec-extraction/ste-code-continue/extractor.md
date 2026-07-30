@@ -31,6 +31,77 @@ Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 - Always save state: `git gcommit-hermes "Batch N complete"` after each batch
 - Save generated prompts to `.agents/prompts/refine/wNNN-prompt.txt`
 
+## Batch Size Rationale
+
+The batch size of 3 workers comes from three constraints.
+
+### Constraint 1: Rate Limit
+
+The `hermes -z` launcher enforces a maximum of 3 concurrent worker processes.
+More than 3 workers in one batch causes a rate-limit rejection.
+Fewer than 3 workers underuses the available capacity.
+
+### Constraint 2: Throughput
+
+| Batch Size | Total Batches | Total Time |
+|------------|---------------|------------|
+| 1 worker   | 109 batches   | ~55-110 min |
+| 2 workers  | 55 batches    | ~28-55 min |
+| **3 workers** | **37 batches** | **~20-37 min** |
+| 4 workers  | not allowed   | rate-limited |
+
+At 2 workers per batch, the total wall-clock time nearly doubles.
+At 1 worker per batch, the extraction takes over an hour.
+Three workers per batch gives the fastest legal throughput.
+
+### Constraint 3: Cognitive Load
+
+Batching 3 workers keeps the per-batch quality check manageable.
+With 3 output files per batch, the operator can inspect all files
+before moving to the next batch. A batch of 5 or more workers
+makes the quality check too large for reliable manual inspection.
+
+### Constraint 4: Failure Isolation
+
+If one batch of 3 workers fails, only 12 pages need re-extraction.
+A larger batch size would increase the blast radius of a single failure.
+A smaller batch size wastes launch overhead.
+
+NOTE: The 37th batch has only 1 worker (W109, pages 433-434).
+This is correct — 434 pages modulo 4 leaves 2 pages for the final worker.
+
+## Performance Estimates
+
+### Wall-Clock Time
+
+| Metric | Estimate |
+|--------|----------|
+| Time per batch (3 workers) | 30-60 seconds |
+| Total batches | 37 |
+| Total wall-clock time | 20-37 minutes |
+| Time per page (amortized) | ~3-5 seconds |
+
+These estimates assume the model API responds within normal latency limits.
+Network congestion or API queue delays can increase total time by 10-50%.
+
+### Token Cost Estimate
+
+| Component | Per Worker | All 109 Workers |
+|-----------|-----------|-----------------|
+| Input tokens (4 pages) | ~14,000 | ~1,526,000 |
+| Output tokens (extracted text) | ~4,500 | ~490,500 |
+| Total tokens | ~18,500 | ~2,016,500 |
+
+NOTE: These are estimates. Actual token counts depend on page density.
+Pages with large tables use more tokens than pages with sparse text.
+
+### Disk Footprint
+
+| Output Directory | Expected Size |
+|------------------|---------------|
+| `ste-code/extracted/` (109 files) | ~4-8 MB |
+| `.agents/prompts/refine/` (109 prompt files) | ~200 KB |
+
 ## Worker Grid (37 batches × 3 workers, 109 total)
 
 ```
@@ -81,12 +152,143 @@ After each batch of 3 workers completes:
 
 1. **File check**: All 3 output files exist in `ste-code/extracted/`
 2. **Size check**: Each file > 3KB (>30 lines)
-3. **Truncation check**: Last 3 lines end cleanly (period, footer, or table row)
+3. **Truncation check**: Last 3 lines of each file end cleanly.
+   A clean ending is a period, a footer line, a table row, or a blank line.
+   A truncated ending is mid-word text, a broken sentence, or a code fence
+   that never closes.
 4. **Content signal**: Expected keywords present (`grep "ASD-STE100" ste-code/extracted/wNNN-p*.md`)
 5. **Fabrication check**: No commentary ("This page describes..."), no modern terms
 6. **Tracking check**: PROGRESS.md updated to reflect this batch ✅
 
-If any check fails, re-extract with the worker's page range split in half.
+If any check fails for any worker, re-extract only that worker.
+Use the protocol in "Partial Batch Failure" below.
+Do not re-extract workers that passed all checks.
+
+### Truncation Check Detail
+
+The truncation check (step 3) examines each worker independently.
+A batch is not binary pass/fail on truncation.
+Each worker passes or fails on its own.
+
+| Worker Status | Action |
+|---------------|--------|
+| All 3 pass | Continue to next batch |
+| 1 worker fails | Re-extract only the failed worker (split its 4-page range into 2×2) |
+| 2 workers fail | Re-extract both failed workers (split each into 2×2) |
+| All 3 fail | Check API health, then re-extract the full batch |
+
+After re-extraction, run the quality checks again on the new output.
+Do not mix old and new output files.
+Replace the old file only after the new file passes all checks.
+
+## Partial Batch Failure Protocol
+
+### Decision Tree
+
+```
+Batch N completes
+  │
+  ├── All 3 files exist + pass quality checks
+  │     └── Update PROGRESS.md → mark batch ✅ → next batch
+  │
+  ├── 1 file missing or failing
+  │     └── Identify the failed worker
+  │         Split its page range: 4 pages → two 2-page workers
+  │         Re-extract both halves
+  │         Validate both new files
+  │         Update PROGRESS.md with [!] → [✅] on recovery
+  │
+  ├── 2 files missing or failing
+  │     └── Identify both failed workers
+  │         Split each range: 4 pages → two 2-page workers (per worker)
+  │         Launch all re-extractions (up to 4 workers, batch of 2)
+  │         Validate new files
+  │         Update PROGRESS.md
+  │
+  └── All 3 files missing or failing
+        └── Check `hermes -z` health: `hermes status`
+        └── Check API status: try a single test worker with 1 page
+        └── If API is healthy, re-launch the full batch
+        └── If API is degraded, wait 2 minutes and retry
+```
+
+### Split Ranges for Re-Extraction
+
+When a 4-page worker fails, split it into two 2-page workers.
+
+| Original (failing) | Replacement A | Replacement B |
+|---------------------|---------------|---------------|
+| WNNN(pPPP-PPPP) 4 pages | WNNNa(pPPP-PPPP) 2 pages | WNNNb(pPPP-PPPP) 2 pages |
+
+Example: W042(p165-168) fails.
+- Launch W042a(p165-166)
+- Launch W042b(p167-168)
+- Save both as `ste-code/extracted/w042a-p165-166.md` and `w042b-p167-168.md`
+
+NOTE: The refinement stage will merge split files back into the original
+4-page groupings. Split files are acceptable at the extraction stage.
+
+### Crash Recovery
+
+If a worker process crashes (no output file, no error message):
+
+1. Check `process list` to confirm the worker is dead.
+2. Wait 10 seconds for any pending writes to flush.
+3. Re-launch the worker with the same page range.
+4. If the re-launch also crashes, split the range and use 2-page workers.
+
+### Stuck Worker Detection
+
+A worker that runs longer than 5 minutes is probably stuck.
+Check the worker with `process poll <session_id>`.
+If the output has not changed for 3 minutes, kill the worker and re-launch.
+A stuck worker is better killed early than left to waste time.
+
+## Extending the Worker Grid
+
+If the spec grows beyond 434 pages, extend the grid with this formula.
+
+### Extension Formula
+
+```
+new_total_pages = <count spec files>
+new_total_workers = ceil(new_total_pages / 4)
+new_total_batches = ceil(new_total_workers / 3)
+new_workers_to_add = new_total_workers - 109
+```
+
+### Example: 450 Pages
+
+```
+450 pages / 4 pages per worker = 112.5 → 113 workers
+113 workers / 3 per batch = 37.67 → 38 batches
+Workers to add: 113 - 109 = 4
+```
+
+New batches:
+
+```
+Batch 38: W110(435-438) W111(439-442) W112(443-446)
+Batch 39: W113(447-450) — last batch, 4 pages
+```
+
+### Extension Rules
+
+- Worker numbering continues from W110 onward (never reuse W001-W109).
+- Page ranges start at 435, immediately after the last existing page (434).
+- The final batch may have 1, 2, or 3 workers depending on the page count.
+- Add new batch rows to the Worker Grid section above.
+- Add new batch entries to PROGRESS.md.
+- Add new batch rows to `.agents/skills/spec-extraction/references/worker-grid.md`.
+
+### Edge Case: Spec Shrinks
+
+If the spec shrinks (pages removed), do not renumber existing workers.
+Remove only the batches that exceed the new page count.
+Example: spec shrinks to 420 pages.
+- W106 (421-424) is partially out of range → remove.
+- W107, W108, W109 are fully out of range → remove.
+- Total: 105 workers, 35 batches.
 
 ## 🔴 MANDATORY: Update PROGRESS.md After Every Batch
 
@@ -104,6 +306,86 @@ is a 🔴 CRITICAL discrepancy. After each batch:
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - 109 workers × 4 pages = 434 pages total
 - Follow `.agents/skills/spec-extraction/references/rails.md` — all 8 guardrails apply
+
+## Known Limitations
+
+### Formatting Variance
+
+Workers may produce slightly different markdown formatting.
+One worker may use `**bold**` while another uses `__bold__`.
+One worker may indent tables with 2 spaces while another indents with 4 spaces.
+This is expected. The refinement stage normalizes all formatting.
+
+### Page Boundary Artifacts
+
+Workers that receive pages ending mid-sentence or mid-table
+may produce output that ends mid-sentence or mid-table.
+This is not a truncation bug. It reflects the page break in the source spec.
+The merge stage stitches page-boundary breaks back together.
+
+### Last Batch Edge Case
+
+Batch 37 has only 1 worker (W109, 2 pages).
+The quality check expects 3 files per batch.
+For Batch 37, check only 1 file.
+Do not report a failure for the missing 2 files.
+
+### No Built-In Retry
+
+The extraction process has no automatic retry mechanism.
+If a worker fails, you must manually trigger the re-extraction
+using the Partial Batch Failure Protocol above.
+
+### Model Drift
+
+If the model provider updates `deepseek-v4-pro`, worker output
+may change between batches run on different days.
+To avoid drift, extract all 109 workers in a single session.
+If the session spans model updates, note the update in PROGRESS.md.
+
+### Concurrent Disk Writes
+
+When 3 workers write files at the same time, file system
+buffering may delay the appearance of output files by 1-2 seconds.
+Always wait 5 seconds after a batch completes before running
+the quality checks. This prevents false "file missing" errors.
+
+## Recovery Procedures
+
+### Procedure A: All Workers Produced Identical Output
+
+Cause: Bad prompt template — all workers received the same page range.
+Fix: Check the prompt files in `.agents/prompts/refine/`.
+Each prompt must reference a different page range.
+Regenerate prompts with correct ranges and re-launch the batch.
+
+### Procedure B: Worker Output Contains Only Headers
+
+Cause: The page file exists but has no content (blank page in spec).
+Fix: Check the source page file: `cat spec/issue-09-2025/page-NNNN.md`.
+If the page is genuinely blank, mark the worker as PASS with a note in PROGRESS.md.
+If the page has content, re-extract with the page range split in half.
+
+### Procedure C: Worker Produced a File With Wrong Name
+
+Cause: Worker did not follow the output path template.
+Fix: Rename the file to the correct pattern.
+Run quality checks on the renamed file.
+If checks pass, accept the file. If checks fail, re-extract.
+
+### Procedure D: Page File Missing From Spec
+
+Cause: The spec directory is incomplete.
+Fix: Count the actual page files: `ls spec/issue-09-2025/page-*.md | wc -l`.
+If less than 434, get the missing page files before proceeding.
+Do not skip the missing pages. A gap in the extraction is not acceptable.
+
+### Procedure E: Git Commit Conflict
+
+Cause: Another process modified PROGRESS.md while a batch was running.
+Fix: `git pull --rebase` before committing.
+If rebase fails, stash your PROGRESS.md change.
+Pull clean, apply your change, and commit.
 
 ## Start Now
 
