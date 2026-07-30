@@ -21,6 +21,7 @@
 | 1.9 | 2025-07-27 | Add git recovery flows (Section 7) | Commit failure |
 | 2.0 | 2025-07-28 | Add trust score calculation (Appendix C) | Audit v3 |
 | 2.1 | 2025-07-29 | Add quality gates, known limitations, extension guide, agentic-load specifications (Sections 9-11) | Maturity audit |
+| 2.2 | 2025-07-30 | Add recovery playbooks, failure impact matrix, self-healing triggers, concurrency failure modes, post-recovery verification, cascading failure prevention, worked extension example, additional known limitations (10e-10f), recovery cost model, anti-patterns (Sections 12-17, Appendices D-E) | Maturity audit v2 |
 
 ---
 
@@ -43,9 +44,16 @@ NOTE: Not every agent must read the full document. Each agent reads only the sec
 | 7. Git Recovery (with 7a, 7b) | 91 | 1,300 |
 | 8. Complete State Machine | 58 | 700 |
 | 9. Quality Gates | 35 | 300 |
-| 10. Known Limitations & Workarounds | 55 | 500 |
-| 11. How to Extend This Document | 75 | 600 |
+| 10. Known Limitations & Workarounds | 75 | 650 |
+| 11. How to Extend This Document | 95 | 800 |
+| 12. Recovery Playbooks | 120 | 1,400 |
+| 13. Failure Mode Impact Analysis | 55 | 600 |
+| 14. Self-Healing Triggers | 70 | 800 |
+| 15. Concurrency Failure Modes | 60 | 700 |
+| 16. Post-Recovery Verification Protocol | 50 | 500 |
+| 17. Cascading Failure Prevention | 55 | 600 |
 | Appendix A-C | 65 | 600 |
+| Appendix D-E | 70 | 700 |
 
 ### Recommended Subsets Per Agent Role
 
@@ -55,8 +63,9 @@ NOTE: Not every agent must read the full document. Each agent reads only the sec
 - Section 5: Rails Violations (self-validate against W1-W10 worker rails)
 - Section 6: Batch Restart (know restart procedure if extraction fails mid-pipeline)
 - Section 10: Known Limitations (understand split-strategy edge cases)
+- Section 17: Cascading Failure Prevention (avoid triggering cascades)
 
-Approximate load: 5,100 tokens.
+Approximate load: 5,700 tokens.
 
 **Refiner Agent** — Read these sections:
 - Section 2: Recovery Flows (recovery after refinement formatting failures)
@@ -73,16 +82,31 @@ Approximate load: 2,400 tokens.
 - Section 5: Rails Violations (check all 18 rails)
 - Section 6: Batch Restart (make restart decisions based on coverage)
 - Section 9: Quality Gates (enforce trust score thresholds)
+- Section 13: Failure Mode Impact Analysis (blast radius assessment)
+- Section 14: Self-Healing Triggers (know when to auto-recover)
+- Section 16: Post-Recovery Verification Protocol (validate fixes)
 - Appendix C: Trust Score (calculate and interpret scores)
+- Appendix D: Recovery Cost Model (choose cheapest effective path)
+- Appendix E: Anti-Patterns (avoid common recovery mistakes)
 
-Approximate load: 5,700 tokens.
+Approximate load: 8,600 tokens.
 
 **Continuator Agent** — Read these sections:
 - Section 6: Batch Restart (find last good batch, resume pipeline)
 - Section 7: Git Recovery (recover lost commits)
 - Section 8: Complete State Machine (understand full pipeline state)
+- Section 12: Recovery Playbooks (follow step-by-step disaster procedures)
+- Section 15: Concurrency Failure Modes (avoid race conditions during resume)
 
-Approximate load: 3,600 tokens.
+Approximate load: 5,500 tokens.
+
+**Orchestrator / Coordinator Agent** — Read these sections:
+- Section 2: Recovery Flows (batch-level decision making)
+- Section 13: Failure Mode Impact Analysis (assess blast radius before acting)
+- Section 15: Concurrency Failure Modes (coordinate multiple agents safely)
+- Section 17: Cascading Failure Prevention (design resilient batch launches)
+
+Approximate load: 2,800 tokens.
 
 ---
 
@@ -159,6 +183,25 @@ flowchart TD
     style FALLBACK fill:#ffa94d,stroke:#d9480f,color:#000
 ```
 
+### 1c. API Rate Limiting Failures
+
+```mermaid
+flowchart LR
+    subgraph RATELIMIT["API Rate Limit Failures"]
+        RL1["❌ HTTP 429 — Too Many Requests<br/>Burst of 3 parallel workers<br/>exceeds API tier limit"]
+        RL2["❌ Exponential backoff exhaustion<br/>Worker retries 5 times,<br/>each wait doubles, gives up"]
+        RL3["⚠️ Silent throttling<br/>API accepts request but<br/>queues it for 30+ seconds<br/>→ notify_on_complete never fires"]
+    end
+
+    RL1 --> FIX_RL1["FIX: Stagger launches by 5s.<br/>Add random jitter ±2s.<br/>Reduce parallelism to 2."]
+    RL2 --> FIX_RL2["FIX: Reset backoff counter.<br/>Wait 60s cooldown.<br/>Re-launch with longer initial delay."]
+    RL3 --> FIX_RL3["FIX: Set per-worker timeout to 180s.<br/>Use process(action='poll') after<br/>expected completion window.<br/>If silent, kill and re-launch."]
+
+    style RL1 fill:#ff6b6b,stroke:#c92a2a,color:#000
+    style RL2 fill:#ffa94d,stroke:#d9480f,color:#000
+    style RL3 fill:#ffa94d,stroke:#d9480f,color:#000
+```
+
 ---
 
 ## 2. RECOVERY FLOWS — Per-Failure Response Matrix
@@ -225,6 +268,22 @@ flowchart LR
 
     style TRUNC fill:#ffa94d,stroke:#d9480f,color:#000
     style DONE fill:#51cf66,stroke:#2b8a3e,color:#000
+```
+
+### 2c. Partial Output Salvage Strategy
+
+```mermaid
+flowchart TD
+    TRUNC_FILE["Truncated file found<br/>w042-p165-168.md: 45 lines<br/>Missing pages 167-168 content"] --> SALVAGE{"Can pages<br/>165-166 be<br/>salvaged?"}
+
+    SALVAGE -->|"Yes — content is clean"| EXTRACT_TAIL["Extract only missing pages:<br/>Launch new worker for<br/>pages 167-168 only.<br/>Do NOT re-extract 165-166."]
+    SALVAGE -->|"No — mid-paragraph cutoff"| FULL_SPLIT["Full split required:<br/>Cannot determine boundary.<br/>Delete and re-extract all."]
+
+    EXTRACT_TAIL --> MERGE_SALVAGE["Append new output to<br/>existing file. Update header<br/>to reflect merged source."]
+    MERGE_SALVAGE --> VERIFY_MERGE["Check: correct page count,<br/>no duplicates, clean headers"]
+
+    style SALVAGE fill:#ffa94d,stroke:#d9480f,color:#000
+    style VERIFY_MERGE fill:#51cf66,stroke:#2b8a3e,color:#000
 ```
 
 ---
@@ -420,6 +479,28 @@ flowchart TD
     style W8 fill:#fff3e0,stroke:#d9480f
     style W9 fill:#ffebee,stroke:#c92a2a
     style W10 fill:#e8f5e9,stroke:#2b8a3e
+```
+
+### 5c. Split-Depth Tracking (Emergent Rail)
+
+When a worker is split, its descendants carry a split-depth counter. This is not a formal rail (yet) but an operational tracking mechanism.
+
+```mermaid
+flowchart TD
+    W["Original worker<br/>split-depth=0<br/>pages 165-168"] -->|"Split 1"| WA["W042a<br/>split-depth=1<br/>pages 165-166"]
+    W -->|"Split 1"| WB["W042b<br/>split-depth=1<br/>pages 167-168"]
+
+    WA -->|"Split 2"| WA1["W042a1<br/>split-depth=2<br/>page 165 only"]
+    WA -->|"Split 2"| WA2["W042a2<br/>split-depth=2<br/>page 166 only"]
+
+    WA1 -->|"Split 3<br/>⚠️ ESCALATE"| FALLBACK["MANUAL EXTRACTION<br/>split-depth=3 triggers<br/>human-in-the-loop.<br/>A single page still<br/>truncates → underlying<br/>issue (image, table,<br/>unusual formatting)."]
+
+    style W fill:#e3f2fd,stroke:#1565c0
+    style WA fill:#fff3e0,stroke:#d9480f
+    style WB fill:#fff3e0,stroke:#d9480f
+    style WA1 fill:#ffa94d,stroke:#d9480f,color:#000
+    style WA2 fill:#ffa94d,stroke:#d9480f,color:#000
+    style FALLBACK fill:#ff6b6b,stroke:#c92a2a,color:#000
 ```
 
 ---
@@ -740,6 +821,16 @@ flowchart TD
 
 NOTE: The Auditor enforces these gates automatically during each audit run. The pipeline does not advance past a PAUSE or HALT gate until a re-audit confirms the trust score meets the threshold.
 
+### Gate Timing & Cooldown
+
+The Auditor checks gates at these points:
+
+- After each batch completes (GATE CHECK: per-batch trust)
+- After a full pipeline stage finishes (GATE CHECK: stage-level trust)
+- On manual `audit now` command (GATE CHECK: full pipeline trust)
+
+If a gate triggers PAUSE, the cooldown is 60 seconds before the next audit. This cooldown prevents audit-storm loops. If a gate triggers HALT, the cooldown is 300 seconds. The system waits for all running workers to complete or time out before the next audit.
+
 ---
 
 ## 10. Known Limitations & Workarounds
@@ -767,6 +858,27 @@ NOTE: The Auditor enforces these gates automatically during each audit run. The 
 **Limitation**: The `notify_on_complete` flag for background workers can fail under high API load. A worker may finish. The notification may not arrive. The orchestrator then waits indefinitely.
 
 **Workaround**: Set a timeout-based polling fallback. After you start a batch of workers, wait for the expected completion time plus a buffer (for example, 120 seconds plus 60 seconds). If no notification arrives in that window, use `process(action='poll')` to check worker status directly. If the worker is done but silent, collect its output manually. If the worker is still running, extend the timeout.
+
+### 10e. Trust Score Calculation Uses Simple Verified/Total Ratio
+
+**Limitation**: The trust score (Appendix C) divides verified claims by total claims. This treats a 30-line truncated file the same as a missing file if both fail verification. The score does not account for partial correctness or degradation severity.
+
+**Workaround**: Use the Severity Classification Reference (Appendix A) as a companion metric. A trust score of 0.80 with all CRITICAL gaps fixed is safer than a trust score of 0.80 with 2 CRITICAL gaps still open. Always read the audit report before making a gate decision based on the score alone. The gate rules in Section 9 account for this by requiring all CRITICAL and ERROR fixes in PAUSE mode.
+
+### 10f. No Recovery Journal for Pattern Learning
+
+**Limitation**: The pipeline does not keep a recovery journal. It does not track which recovery strategies worked for which failure patterns in the past. Each failure triggers the same decision tree with no learning from history.
+
+**Workaround**: Keep a manual recovery log in `.agents/state/recovery-log.md` with this format:
+
+```
+| Date | Worker | Failure | Strategy | Result | Notes |
+|------|--------|---------|----------|--------|-------|
+| 2025-07-30 | W042 | TRUNCATION | Split 2+2 | ✅ Success | Pages 165-166 heavy tables |
+| 2025-07-30 | W015 | TIMEOUT | Retry same | ❌ Failed | API throttled, waited 300s |
+```
+
+Review this log before deciding a recovery strategy for a recurring failure. If the same worker fails 3 times with the same strategy, escalate to manual extraction.
 
 ---
 
@@ -831,6 +943,439 @@ Check if the new failure mode affects these documents:
 | `.agents/skills/SKILL.md` (execution-auditor) | New detection method or auto-fix |
 | `.agents/skills/SKILL.md` (extraction) | New extraction failure mode |
 | `.agents/references/worker-grid.md` | Changes to worker page assignment |
+
+### Step 7: Worked Example — Adding a New Failure Mode End-to-End
+
+This example shows how to add a new failure mode: "API returns stale cached response."
+
+**Scenario**: During extraction, a worker receives a cached response from a previous request instead of a fresh extraction. The output passes the size check but contains outdated content from a different page range.
+
+**Step 1 — Classify**: This is a runtime output failure. Insert a new branch under the CONTENT node in Section 1. Name the node `CACHE_STALE`.
+
+**Step 2 — Severity**: 🔴 CRITICAL. The output is a fabrication — wrong page content, not from the requested pages.
+
+**Step 3 — Recovery command**:
+```
+FAILURE: Stale cached API response
+  DETECT: Compare output page headers to requested page range.
+          Page header mismatch = stale cache.
+          grep "^# Page" in output → compare to expected pages.
+  FIX: Add cache-busting parameter to prompt (timestamp or UUID).
+       Re-launch worker with unique prompt suffix.
+```
+
+**Step 4 — Version history**: Add row `2.X | 2025-07-31 | Add stale cache failure (Section 1c) | Extraction Batch 22`.
+
+**Step 5 — Agentic-load**: Add 15 lines, ~200 tokens to Section 1. Update per-section sizes table.
+
+**Step 6 — Cross-references**: No rail changes. Update execution-auditor SKILL.md with the page-header mismatch detection rule.
+
+**Step 7 — Decision tree update**: Add a new branch to the Section 2a batch recovery tree: under DIAG_PARTIAL, add `CACHE_STALE → ADD_CACHE_BUSTER → RELAUNCH`.
+
+---
+
+## 12. Recovery Playbooks
+
+Step-by-step procedures for the most common disaster scenarios. Follow these playbooks in order. Do not skip steps.
+
+### Playbook A: All Workers in a Batch Hang (0/3, No Output)
+
+**Symptom**: You launched Batch N (3 workers). After 180 seconds, zero workers produced output. No files exist in `ste-code/extracted/` for this batch.
+
+```
+STEP 1 — Check API health.
+  Run: hermes status
+  If proxy is DOWN: Wait 60s. Retry. If still DOWN, skip to STEP 5.
+
+STEP 2 — Check for shell quoting errors.
+  Read the prompt file for the first worker:
+    cat ste-code/prompts/wNNN-prompt.txt
+  Check for unescaped quotes, backticks, dollar signs.
+  If found: Fix the prompt template. All workers in this batch share the same template bug.
+
+STEP 3 — Check disk space.
+  Run: df -h .
+  If < 1GB free: Free space. Remove old audit reports or stale files.
+  Retry batch after freeing space.
+
+STEP 4 — Check for API rate limiting.
+  If you launched > 3 concurrent batches: Stagger launches.
+  Wait 120s cooldown. Re-launch with 5s delay between workers.
+
+STEP 5 — Escalate to single-worker test.
+  Launch ONE worker from the batch with a simple test prompt.
+  If single worker also hangs: Systemic API issue. Wait for resolution.
+  If single worker succeeds: Re-launch full batch with stagger.
+```
+
+### Playbook B: Recurring Truncation on Same Worker (3+ Splits)
+
+**Symptom**: Worker W042 was split 4→2+2. One of the 2-page sub-workers truncated again. It was split 2→1+1. The single-page worker still produces < 30 lines.
+
+```
+STEP 1 — Check the source page content.
+  Read the spec page directly:
+    cat spec/issue-09-2025/page-0165.md
+  Look for: heavy tables, images, complex formatting, non-Latin characters.
+
+STEP 2 — Classify the page type.
+  If page contains an image: Worker cannot extract images. Mark page as SKIPPED-IMAGE.
+  If page contains a table with > 20 rows: Split the table extraction.
+    Use prompt: "Extract ONLY the table on page 165. Ignore surrounding text."
+  If page contains non-Latin characters: Add encoding instruction to prompt.
+    Use prompt: "The page contains Unicode. Preserve all characters exactly."
+
+STEP 3 — Escalate to manual extraction.
+  If STEPS 1-2 do not resolve: Use an interactive agent session.
+  Run: hermes -z "Read spec/issue-09-2025/page-0165.md. Extract all content."
+  Verify output manually. Write to ste-code/extracted/w042-p165.md by hand.
+
+STEP 4 — Log the page as a known problematic page.
+  Add to .agents/state/problematic-pages.md:
+    | Page | Issue | Resolution |
+    | 165  | Heavy nested table, 3 splits failed | Manual extraction |
+  Future pipeline runs skip this page in the parallel worker grid.
+```
+
+### Playbook C: Git Push Rejected — Remote Diverged
+
+**Symptom**: `git push origin Current` fails with "rejected, remote has diverged."
+
+```
+STEP 1 — Do NOT force push.
+  Force push can destroy other agents' work.
+
+STEP 2 — Fetch and inspect.
+  Run: git fetch origin
+  Run: git log origin/Current --oneline -10
+  Identify which commits exist on the remote but not locally.
+
+STEP 3 — Rebase your work.
+  Run: git rebase origin/Current
+  If conflict in PROGRESS.md: Resolve by keeping both sets of [x] marks.
+    Batch numbers are disjoint. Two agents should not claim the same batch.
+  If conflict in extracted/ files: Keep the larger file (more complete extraction).
+
+STEP 4 — Re-run audit after rebase.
+  The rebase may change file timestamps.
+  Run: hermes -z "Audit claims vs disk. Report discrepancies."
+  Fix any new discrepancies before pushing.
+
+STEP 5 — Push.
+  Run: git push origin Current
+```
+
+### Playbook D: Disk Full During Extraction
+
+**Symptom**: Workers start failing with "No space left on device" errors. Existing files may be truncated or zero-byte.
+
+```
+STEP 1 — Stop all workers immediately.
+  Run: process(action='kill') for each active worker session.
+  Do NOT launch new workers. They will also fail.
+
+STEP 2 — Identify large consumers.
+  Run: du -sh ste-code/extracted/ ste-code/refined/ .agents/audit/
+  Run: du -sh ~/Library/Caches/ ~/.hermes/
+  Find the largest directories.
+
+STEP 3 — Safe cleanup (do NOT delete extracted/ files).
+  Remove old audit reports: rm .agents/audit/audit-2025-07-*.md (keep latest 5)
+  Remove stale prompts: rm ste-code/prompts/w*-prompt.txt
+  Clear model caches: hermes cache clear (if available)
+
+STEP 4 — Verify integrity of existing extractions.
+  After freeing space, run:
+    for f in ste-code/extracted/w*-p*.md; do
+      [ -s "$f" ] || echo "CORRUPT: $f is empty"
+    done
+  Any empty file is a corruption victim. Delete and mark for re-extraction.
+
+STEP 5 — Resume from the last fully-verified batch.
+  Check PROGRESS.md for the last batch where all 3 files are non-empty on disk.
+  Resume from (last_good + 1).
+```
+
+### Playbook E: Model Degradation Detected Mid-Pipeline
+
+**Symptom**: Audit detects increasing fabrication or truncation rates across consecutive batches. Batch 20 was clean. Batch 21 had 1 truncation. Batch 22 had 2 fabrications. Batch 23 had all 3 workers truncate.
+
+```
+STEP 1 — Stop the pipeline at the current batch boundary.
+  Do NOT launch Batch 24. Let Batch 23 finish or time out.
+
+STEP 2 — Run a model health probe.
+  Launch a single worker with a known-good page range:
+    hermes -z "Read spec/issue-09-2025/page-0001.md through page-0004.md.
+    Extract all content. Write to ste-code/extracted/probe-p1-4.md."
+    -m deepseek-v4-pro --yolo
+  If the probe also truncates or fabricates: Model is degraded. Wait for API recovery.
+
+STEP 3 — Check if the proxy changed routing.
+  Run: hermes status
+  Confirm the model routing matches deepseek-v4-pro.
+
+STEP 4 — Escalate if degradation persists.
+  After 3 failed probes (with 120s wait between each): Escalate to manual pipeline pause.
+  Log the incident in .agents/state/incidents.md.
+  Resume when the next probe succeeds.
+```
+
+---
+
+## 13. Failure Mode Impact Analysis
+
+Cross-reference each failure mode against pipeline stages, recovery cost, and blast radius.
+
+### Impact Matrix
+
+| Failure Mode | Stages Affected | Recovery Time (est.) | Blast Radius | Auto-Fixable? |
+|-------------|-----------------|---------------------|--------------|---------------|
+| TIMEOUT (worker never starts) | Extraction only | 120s (retry) | 1 worker | No — re-launch |
+| FILE CORRUPTION (crashed mid-write) | Extraction only | 120s (re-extract) | 1 worker | No — re-extract |
+| TRUNCATION (partial output) | Extraction only | 240s (split + 2 sub-workers) | 1 worker, expands to 2 | No — split |
+| FABRICATION (wrong content) | Extraction only | 120s (re-extract) | 1 worker | No — re-extract |
+| Shell quoting error | Extraction (all workers in batch) | 60s (fix template) | 3 workers (entire batch) | Yes — fix prompt file |
+| Model misroute | Extraction, Refinement, all stages | 120s per affected worker | All workers since misroute started | Yes — add explicit -m flag |
+| git commit failure | All stages (blocks progress tracking) | 60-300s | 0 files (progress not saved) | Yes — git fix commands |
+| Disk full | All stages (blocks all writes) | 300-600s (cleanup + verify) | All files written during outage | No — manual cleanup |
+| notify_on_complete silent | Extraction, Refinement (blocks orchestration) | 60s (poll fallback) | 1-3 workers | Yes — poll fallback |
+| API rate limit (429) | Extraction, Refinement | 60-300s (backoff) | 1-3 workers | Yes — stagger + wait |
+| Stale cache response | Extraction | 120s (re-extract with cache bust) | 1 worker | Yes — add cache buster |
+| Model degradation (progressive) | Extraction, Refinement | 600s+ (wait for API recovery) | All future workers | No — pause pipeline |
+
+### Blast Radius Categories
+
+| Category | Definition | Example |
+|----------|-----------|---------|
+| **Single worker** | Only one output file is affected | Truncation, timeout of W042 |
+| **Single batch** | Multiple workers in one batch are affected | Shell quoting error in batch template |
+| **All workers since trigger** | Every worker after a systemic change is affected | Model misroute, disk full |
+| **All future workers** | Pipeline cannot continue until resolved | Model degradation, API outage |
+
+Use this matrix before you choose a recovery strategy. If the blast radius is "All future workers," pause the pipeline immediately. Do not wait for more failures.
+
+---
+
+## 14. Self-Healing Triggers
+
+The system can auto-detect and auto-recover from these patterns without agent intervention. The Auditor checks these triggers during each audit run.
+
+### Trigger Rules
+
+```
+TRIGGER 1: Empty directory in output path
+  DETECT: test -d ste-code/extracted/ && [ -z "$(ls -A ste-code/extracted/)" ]
+  ACTION:  Remove empty directory (AF4). Log warning.
+
+TRIGGER 2: All 3 workers in a batch have < 30 lines
+  DETECT: wc -l for batch N shows < 30 for all 3 files
+  ACTION:  Do NOT auto-fix. Escalate to agent.
+           Systemic issue requires root cause diagnosis.
+
+TRIGGER 3: Consecutive identical failures across 3+ batches
+  DETECT: Same failure type (TRUNCATION) on batches N, N+1, N+2
+  ACTION:  Escalate. Pattern suggests model degradation or page complexity issue.
+           Do not continue splitting indefinitely.
+
+TRIGGER 4: PROGRESS.md [x] count exceeds disk file count by > 5
+  DETECT: grep '\[x\]' PROGRESS.md | wc -l vs ls ste-code/extracted/w*.md | wc -l
+  ACTION:  Auto-audit. The gap > 5 means systemic tracking corruption.
+           Revert all [x] for batches that lack disk evidence.
+
+TRIGGER 5: File timestamp older than 24 hours in active directory
+  DETECT: find ste-code/extracted/ -name 'w*.md' -mtime +1
+  ACTION:  Log warning. Do not delete. The file may be valid but old.
+           Flag for re-audit on next pass.
+
+TRIGGER 6: Worker output file references wrong model name
+  DETECT: grep -l 'deepseek-v4-flash' ste-code/extracted/*.md
+  ACTION:  Auto-fix (AF2): patch to 'deepseek-v4-pro'. Re-audit.
+
+TRIGGER 7: Split depth = 3 for any worker
+  DETECT: Filename matches wNNNa[a-d][1-2]-p*.md (three suffix levels)
+  ACTION:  Escalate to manual extraction. Stop splitting.
+           Log the page in problematic-pages.md.
+
+TRIGGER 8: Duplicate output files (same page range, different worker IDs)
+  DETECT: Two files claim the same page range (e.g., w001-p1-4.md and w042-p1-4.md)
+  ACTION:  Keep the file with the larger line count. Remove the shorter duplicate.
+           Log the collision.
+```
+
+NOTE: Triggers 2, 3, and 7 always escalate to agent intervention. They indicate systemic problems that auto-fixes cannot resolve safely.
+
+---
+
+## 15. Concurrency Failure Modes
+
+When multiple agents or recovery processes run at the same time, these race conditions can occur.
+
+```mermaid
+flowchart TD
+    subgraph RACE["Concurrency Race Conditions"]
+        RC1["SPLIT COLLISION: Agent A splits W042 into<br/>W042a + W042b. Agent B also detects<br/>W042 truncation and splits it into<br/>W042x + W042y. Result: 4 split workers<br/>for the same page range."]
+        RC2["PROGRESS WRITE RACE: Agent A writes<br/>[x] for Batch 17. Agent B simultaneously<br/>reverts Batch 17 to [ ] after audit.<br/>Final state depends on write order."]
+        RC3["GIT REBASE COLLISION: Agent A commits<br/>Batch 17. Agent B rebases and<br/>force-pushes. Agent A's commit is<br/>orphaned or lost."]
+        RC4["AUTO-FIX COLLISION: Auditor fixes a file.<br/>Extractor simultaneously re-extracts<br/>the same file. The last write wins.<br/>Content may be inconsistent."]
+    end
+
+    RC1 --> PREVENT1["PREVENTION: Before splitting, check if<br/>split files already exist on disk.<br/>If w042a-p165-166.md exists, skip split."]
+    RC2 --> PREVENT2["PREVENTION: Use atomic write pattern.<br/>Write to PROGRESS.md.tmp, then mv.<br/>mv is atomic on the same filesystem."]
+    RC3 --> PREVENT3["PREVENTION: Always pull --rebase before<br/>committing. If rebase conflict,<br/>abort and coordinate with other agent."]
+    RC4 --> PREVENT4["PREVENTION: Auditor only fixes files<br/>older than 60 seconds. Active extraction<br/>files (< 60s old) are skipped."]
+
+    style RC1 fill:#ff6b6b,stroke:#c92a2a,color:#000
+    style RC2 fill:#ffa94d,stroke:#d9480f,color:#000
+    style RC3 fill:#ff6b6b,stroke:#c92a2a,color:#000
+    style RC4 fill:#ffa94d,stroke:#d9480f,color:#000
+```
+
+### Concurrency Safety Rules
+
+```
+RULE C1: ONE RECOVERY AGENT AT A TIME
+  Only one agent (or auditor in fix mode) may modify files in ste-code/extracted/.
+  If you detect another agent is active, wait 60s and check again.
+
+RULE C2: CHECK DISK BEFORE ACTING
+  Before you create a split worker, check if the split output file already exists.
+  If it exists and has > 30 lines, the split was already done. Skip.
+
+RULE C3: ATOMIC PROGRESS UPDATES
+  Write PROGRESS.md changes to a temp file, then use mv to replace.
+  Do not append. Do not edit in place.
+
+RULE C4: STALE FILE GRACE PERIOD
+  Do not modify files modified less than 60 seconds ago.
+  These files may be mid-write by an active worker.
+
+RULE C5: GIT PULL BEFORE GIT PUSH
+  Always run git fetch && git rebase origin/Current before git push.
+  If rebase fails with conflict, abort and investigate.
+```
+
+---
+
+## 16. Post-Recovery Verification Protocol
+
+After you apply any recovery action, complete this checklist before you mark the issue as resolved.
+
+### Verification Checklist
+
+```
+☐ 1. FILE EXISTS
+     test -f ste-code/extracted/wNNN-pPPPP-PPPP.md
+
+☐ 2. FILE HAS CONTENT
+     [ $(wc -l < ste-code/extracted/wNNN-pPPPP-PPPP.md) -gt 30 ]
+
+☐ 3. CLEAN ENDING
+     tail -3 ste-code/extracted/wNNN-pPPPP-PPPP.md
+     Last lines must end with a complete sentence or table row.
+     No mid-word cutoff.
+
+☐ 4. CORRECT PAGE RANGE
+     head -1 ste-code/extracted/wNNN-pPPPP-PPPP.md
+     Must match: "# Page NNNN of 434 — ASD-STE100 Issue 9"
+
+☐ 5. NO FABRICATION SIGNALS
+     grep -c -i 'react\|docker\|npm\|this page describes' ste-code/extracted/wNNN-pPPPP-PPPP.md
+     Must return 0 for all patterns.
+
+☐ 6. NO FORMATTING ERRORS
+     grep -c '^###[^ ]' ste-code/extracted/wNNN-pPPPP-PPPP.md
+     Must return 0 (no glued headings).
+
+☐ 7. PROGRESS.md UPDATED
+     grep 'wNNN' .agents/state/PROGRESS.md
+     Must show [x] for this worker.
+
+☐ 8. PARENT BATCH CONSISTENT
+     If this worker was part of a split, the original unsplit file must NOT exist.
+     test ! -f ste-code/extracted/wNNN-pPPPP-PPPP.md (original range)
+     Or the original must have been merged from split parts.
+
+☐ 9. GIT STAGED
+     git status ste-code/extracted/wNNN-pPPPP-PPPP.md
+     File must be staged or committed.
+
+☐ 10. CROSS-CHECK WITH AUDITOR
+      Run auditor on this single file:
+      hermes -z "Audit ste-code/extracted/wNNN-pPPPP-PPPP.md only."
+      Must return CLEAN.
+```
+
+BREAKING: If any check in items 1-6 fails, the recovery action failed. Do not mark the batch as complete. Restart the recovery from Section 2.
+
+NOTE: Checks 7-10 are operational hygiene. A failure in these checks does not invalidate the file content. Fix the tracking issue and continue.
+
+---
+
+## 17. Cascading Failure Prevention
+
+One worker's failure can trigger a chain of failures if you do not isolate the blast radius. Use these patterns to prevent cascades.
+
+```mermaid
+flowchart TD
+    subgraph CIRCUIT["Circuit Breaker Pattern"]
+        CB_CLOSED["CLOSED: Normal operation.<br/>Failures < 2 per 5 batches."]
+        CB_OPEN["OPEN: Failure threshold exceeded.<br/>Stop launching new workers.<br/>Diagnose root cause."]
+        CB_HALF["HALF-OPEN: Probe with 1 worker.<br/>If probe succeeds → CLOSED.<br/>If probe fails → OPEN."]
+
+        CB_CLOSED -->|"3+ failures<br/>in 5 batches"| CB_OPEN
+        CB_OPEN -->|"120s cooldown<br/>+ probe"| CB_HALF
+        CB_HALF -->|"Probe OK"| CB_CLOSED
+        CB_HALF -->|"Probe fails"| CB_OPEN
+    end
+
+    subgraph BULKHEAD["Bulkhead Pattern"]
+        B1["Batch Group A<br/>(batches 1-12)<br/>Independent retry pool"]
+        B2["Batch Group B<br/>(batches 13-24)<br/>Independent retry pool"]
+        B3["Batch Group C<br/>(batches 25-37)<br/>Independent retry pool"]
+
+        B1 -.->|"Failure in Group A<br/>does not block Group B"| B2
+        B2 -.->|"Failure in Group B<br/>does not block Group C"| B3
+    end
+
+    style CB_OPEN fill:#ff6b6b,stroke:#c92a2a,color:#000
+    style CB_CLOSED fill:#51cf66,stroke:#2b8a3e,color:#000
+    style CB_HALF fill:#ffd43b,stroke:#fab005,color:#000
+```
+
+### Prevention Rules
+
+```
+RULE P1: CIRCUIT BREAKER ON CONSECUTIVE FAILURES
+  If 3 or more workers in 5 consecutive batches fail with the same error type:
+    → OPEN the circuit. Stop launching new batches.
+    → Wait 120 seconds.
+    → Launch 1 probe worker (a simple, known-good page range).
+    → If probe succeeds → CLOSE circuit, resume.
+    → If probe fails → keep OPEN, wait another 300 seconds.
+
+RULE P2: BULKHEAD BY BATCH GROUPS
+  Split the 37 batches into 3 independent groups (A: 1-12, B: 13-24, C: 25-37).
+  A failure in Group A (e.g., API slowdown) does not prevent Groups B and C from
+  continuing if their workers are on a different API key or session.
+
+RULE P3: MAXIMUM RETRY CAP PER WORKER
+  A single worker (same page range, same worker ID) may retry at most 3 times.
+  After 3 failures, escalate to manual extraction.
+  Do not retry indefinitely — this wastes tokens and delays the pipeline.
+
+RULE P4: EXPONENTIAL BACKOFF WITH JITTER
+  Between retries of the same worker:
+    Retry 1: wait 10s + random(0-5s)
+    Retry 2: wait 30s + random(0-10s)
+    Retry 3: wait 90s + random(0-20s)
+  This prevents thundering herd on API recovery.
+
+RULE P5: ISOLATE SYSTEMIC FROM LOCAL FAILURES
+  If only 1 worker in a batch fails: local failure → apply Sections 1-2 recovery.
+  If all 3 workers in a batch fail: check for systemic cause BEFORE retrying.
+  Do not retry all 3 without diagnosing the root cause.
+```
 
 ---
 
@@ -898,4 +1443,114 @@ flowchart LR
     style B fill:#ffd43b,stroke:#fab005,color:#000
     style C fill:#ffa94d,stroke:#d9480f,color:#000
     style D fill:#ff6b6b,stroke:#c92a2a,color:#000
+```
+
+---
+
+## Appendix D: Recovery Cost Model
+
+Choose the least expensive effective recovery path. Costs are expressed in approximate tokens and wall-clock time.
+
+### Recovery Path Costs
+
+| Recovery Path | Token Cost (est.) | Time Cost (est.) | When to Use |
+|--------------|-------------------|------------------|-------------|
+| Auto-fix (AF1-AF7) | ~200 tokens | < 10s | Safe, known patterns only |
+| Retry same worker | ~2,000 tokens | 60-120s | TIMEOUT, transient API issues |
+| Split 4→2+2 | ~4,000 tokens | 120-240s | TRUNCATION on 4-page worker |
+| Split 2→1+1 | ~2,000 tokens | 60-120s | Truncation persists after first split |
+| Manual extraction (1 page) | ~1,000 tokens | 60-120s | Split depth=3, complex pages |
+| Re-extract (fabrication) | ~2,000 tokens | 60-120s | FABRICATION detected |
+| Full batch re-launch | ~6,000 tokens | 180-360s | Systemic batch failure |
+| Full pipeline restart | ~218,000 tokens | 1-2 hours | < 30% coverage |
+| Audit + fix mode | ~500 tokens | 30-60s | After any recovery action |
+
+### Cost Optimization Rules
+
+```
+COST RULE 1: CHECK DISK BEFORE RETRYING
+  Before you re-launch a worker, check if the output file already exists and is valid.
+  A file may have been created by a parallel recovery agent (see Section 15).
+  If the file is valid, skip re-launch. Cost: ~0 tokens saved.
+
+COST RULE 2: SALVAGE PARTIAL OUTPUT
+  If a 4-page worker produced clean output for pages 1-2 and truncated at page 3,
+  salvage pages 1-2. Only re-extract pages 3-4. See Section 2c.
+  Cost saved: ~2,000 tokens per salvage.
+
+COST RULE 3: BATCH RETRIES BEFORE FULL RESTART
+  A full pipeline restart costs ~218,000 tokens. A batch retry costs ~6,000.
+  Always exhaust batch-level recovery before you consider a full restart.
+  Exception: if coverage < 30%, full restart is cheaper than fixing 70%+ gaps.
+
+COST RULE 4: ESCALATE AFTER 3 RETRIES
+  Retrying the same worker more than 3 times has diminishing returns.
+  Token cost of 3 retries: ~6,000 tokens.
+  Manual extraction cost: ~1,000 tokens.
+  After 3 retries, manual extraction is both cheaper and more reliable.
+```
+
+---
+
+## Appendix E: Anti-Patterns in Recovery
+
+Common mistakes that agents make during recovery. Avoid these patterns.
+
+```
+ANTI-PATTERN 1: SPLITTING A TIMEOUT
+  Mistake: Worker timed out → agent splits page range.
+  Why wrong: Timeout is a dispatch or API issue, not a content size issue.
+             Splitting doubles the number of workers. If the API is slow,
+             both sub-workers will also time out.
+  Correct: Retry the same worker. If it times out again, wait and retry.
+           If it times out 3 times, check API health. Do not split.
+
+ANTI-PATTERN 2: RETRYING WITHOUT DIAGNOSIS
+  Mistake: Worker failed → agent immediately retries with same parameters.
+  Why wrong: If the failure is deterministic (bad prompt, wrong page range),
+             retrying produces the same failure.
+  Correct: Diagnose the failure type first (see Section 1).
+           Apply the specific recovery for that type.
+           Only retry if the failure type is transient (TIMEOUT, 429).
+
+ANTI-PATTERN 3: FIXING SYMPTOMS, NOT ROOT CAUSE
+  Mistake: All workers in a batch produce glued headings → agent patches each file.
+  Why wrong: The root cause is a prompt template that does not instruct workers
+             to add blank lines after headings. The next batch will have the same bug.
+  Correct: Fix the prompt template first. Then fix the affected output files.
+           Always fix the process before you fix the product.
+
+ANTI-PATTERN 4: IGNORING THE BLAST RADIUS
+  Mistake: Worker failed with FABRICATION → agent re-extracts only that worker.
+  Why wrong: If the model was misrouted, ALL workers in the same time window
+             may have fabricated output. Fixing one worker leaves others broken.
+  Correct: Check the blast radius (see Section 13). If the failure is systemic,
+           audit all workers launched in the same time window.
+
+ANTI-PATTERN 5: FORCE-PUSHING TO RESOLVE GIT CONFLICTS
+  Mistake: git push rejected → agent runs git push --force.
+  Why wrong: Force push destroys other agents' work on the remote.
+             The pipeline is collaborative. Force push breaks collaboration.
+  Correct: Always rebase (see Playbook C). If rebase fails, coordinate with
+           the other agent. Never force push unless you are certain no other
+           agent has pushed work.
+
+ANTI-PATTERN 6: REMOVING VALID FILES DURING CLEANUP
+  Mistake: Disk full → agent runs rm -rf ste-code/extracted/*.md.
+  Why wrong: This destroys valid extraction work. Recovery cost is 218,000+ tokens.
+  Correct: Identify large non-essential consumers first (audit reports, caches).
+           Only remove extracted files if they are confirmed corrupted (zero-byte).
+
+ANTI-PATTERN 7: RUNNING MULTIPLE AUDITORS IN PARALLEL
+  Mistake: Two auditors run "audit now" at the same time.
+  Why wrong: Both auditors may apply auto-fixes simultaneously, causing race
+             conditions (see Section 15). The audit reports may conflict.
+  Correct: Only one auditor runs at a time. If an audit is in progress,
+           wait for the audit report before starting another.
+
+ANTI-PATTERN 8: TRUSTING PROGRESS.md WITHOUT VERIFICATION
+  Mistake: Agent reads PROGRESS.md [x] and assumes the work is done.
+  Why wrong: PROGRESS.md is a claim, not evidence. Claims can be false (see Section 6b).
+  Correct: Always check disk evidence before trusting a progress claim.
+           The Auditor's core principle: "Trust nothing. Verify everything."
 ```

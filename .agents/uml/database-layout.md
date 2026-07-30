@@ -553,6 +553,109 @@ Use the naming convention table in Section 2 to decode file names.
 3. Check batch completion: open `ste-code/PROGRESS.md` and count `[x]` checkboxes.
 4. Run the verification script: `python3 ste-code/check-rails.py`.
 
+### 12.5 Find All Unprocessed Workers
+
+Use these commands to find workers that have extraction but no refinement, or the reverse:
+
+- Find extracted workers without refined output:
+  ```
+  for f in ste-code/extracted/w*.md; do
+    num=$(basename "$f" | grep -o '^w[0-9]*')
+    rfile="ste-code/refined/r${num#w}-"*.md
+    ls $rfile >/dev/null 2>&1 || echo "Missing refined: $num"
+  done
+  ```
+
+- Find refined workers without extraction source:
+  ```
+  for f in ste-code/refined/r*.md; do
+    num=$(basename "$f" | grep -o '^r[0-9]*')
+    wfile="ste-code/extracted/w${num#r}-"*.md
+    ls $wfile >/dev/null 2>&1 || echo "Missing extracted: $num"
+  done
+  ```
+
+### 12.6 Re-run a Failed Batch
+
+To re-run a failed batch, use the worker-to-batch formula:
+
+1. Find the batch number B that contains the failed worker N: `B = ceil(N / 3)`.
+2. Check `ste-code/PROGRESS.md` for the batch status.
+3. Set the batch checkbox to `[ ]` if it was marked `[x]`.
+4. Restart the extraction or refinement agent for that batch.
+
+Example: worker 50 failed → batch = ceil(50/3) = 17. Re-run batch 17.
+
+### 12.7 Verify a Single Worker Output
+
+To check if a worker output is valid:
+
+1. Check the file exists and has content:
+   ```
+   wc -c ste-code/extracted/w042-p165-168.md
+   ```
+2. Check the file has the expected section type (cross-reference with `worker-grid.md`).
+3. Check the file does not contain error markers:
+   ```
+   grep -i "error\|failed\|timeout\|truncated" ste-code/extracted/w042-p165-168.md
+   ```
+4. If the file has fewer than 100 bytes, it is empty or truncated. Re-run the worker.
+
+### 12.8 Trace Content from Source to Artifact
+
+Use this chain to trace a specific rule or word through all pipeline stages:
+
+| Stage | Lookup | Example |
+|-------|--------|---------|
+| Source page | `spec/issue-09-2025/page-NNNN.md` | Page containing the rule text |
+| Extracted | `ste-code/extracted/wNNN-p*.md` | Worker that processed that page range |
+| Refined | `ste-code/refined/rNNN-p*.md` | Refined output for the same pages |
+| Merged | `ste-code/merged/master.md` | Organized consolidated output |
+| Adapted | `ste-code/adapted/<category>/` | Category-specific adapted rule |
+| Artifact | `ste-code/artifacts/*.txt` | Final deployable artifact |
+
+### 12.9 Quick Worker-to-Batch Reference
+
+| Workers | Batch | Pages |
+|---------|-------|-------|
+| w001–w003 | Batch 1 | p1–p12 |
+| w004–w006 | Batch 2 | p13–p24 |
+| w007–w009 | Batch 3 | p25–p36 |
+| w010–w012 | Batch 4 | p37–p48 |
+| w013–w015 | Batch 5 | p49–p60 |
+| w016–w018 | Batch 6 | p61–p72 |
+| w019–w021 | Batch 7 | p73–p84 |
+| w022–w024 | Batch 8 | p85–p96 |
+| w025–w027 | Batch 9 | p97–p108 |
+| w028–w030 | Batch 10 | p109–p120 |
+| w031–w033 | Batch 11 | p121–p132 |
+| w034–w036 | Batch 12 | p133–p144 |
+| w037–w039 | Batch 13 | p145–p156 |
+| w040–w042 | Batch 14 | p157–p168 |
+| w043–w045 | Batch 15 | p169–p180 |
+| w046–w048 | Batch 16 | p181–p192 |
+| w049–w051 | Batch 17 | p193–p204 |
+| w052–w054 | Batch 18 | p205–p216 |
+| w055–w057 | Batch 19 | p217–p228 |
+| w058–w060 | Batch 20 | p229–p240 |
+| w061–w063 | Batch 21 | p241–p252 |
+| w064–w066 | Batch 22 | p253–p264 |
+| w067–w069 | Batch 23 | p265–p276 |
+| w070–w072 | Batch 24 | p277–p288 |
+| w073–w075 | Batch 25 | p289–p300 |
+| w076–w078 | Batch 26 | p301–p312 |
+| w079–w081 | Batch 27 | p313–p324 |
+| w082–w084 | Batch 28 | p325–p336 |
+| w085–w087 | Batch 29 | p337–p348 |
+| w088–w090 | Batch 30 | p349–p360 |
+| w091–w093 | Batch 31 | p361–p372 |
+| w094–w096 | Batch 32 | p373–p384 |
+| w097–w099 | Batch 33 | p385–p396 |
+| w100–w102 | Batch 34 | p397–p408 |
+| w103–w105 | Batch 35 | p409–p420 |
+| w106–w108 | Batch 36 | p421–p432 |
+| w109 | Batch 37 | p433–p434 |
+
 ---
 
 ## 13. Maintenance Instructions
@@ -593,6 +696,63 @@ Use this checklist after any pipeline structure change:
 - [ ] Section 1: erDiagram includes all new directories.
 - [ ] Section 3: data flow diagram is correct for all active stages.
 
+### 13.6 Automated Regeneration Script
+
+Use the script `ste-code/check-rails.py` to validate the current directory state against this layout. Run it after any structural change:
+
+```
+python3 ste-code/check-rails.py
+```
+
+The script checks:
+- Extraction directory has exactly 109 files matching `wNNN-p*.md`.
+- Refinement directory has exactly 109 files matching `rNNN-p*.md`.
+- No file name violates the naming conventions in Section 2.
+- File sizes are within expected ranges (not empty, not truncated).
+
+To regenerate file counts for Section 9 after a pipeline stage completes, use:
+
+```
+echo "=== Section 9 Auto-Counts ==="
+echo "extracted: $(ls ste-code/extracted/w*.md 2>/dev/null | wc -l)"
+echo "refined: $(ls ste-code/refined/r*.md 2>/dev/null | wc -l)"
+echo "merged: $(ls ste-code/merged/*.md 2>/dev/null | wc -l)"
+echo "adapted: $(find ste-code/adapted -type f 2>/dev/null | wc -l)"
+echo "artifacts: $(ls ste-code/artifacts/*.txt 2>/dev/null | wc -l)"
+echo "audit: $(ls ste-code/audit/*.md 2>/dev/null | wc -l)"
+echo "prompts-refine: $(ls ste-code/prompts-refine/r*-prompt.txt 2>/dev/null | wc -l)"
+echo "agent-prompts: $(ls .agents/prompts/agent-*.md 2>/dev/null | wc -l)"
+echo "audit-reports: $(ls .agents/audit/audit-*.md 2>/dev/null | wc -l)"
+```
+
+Copy the output into Section 9 and adjust the table values.
+
+### 13.7 Meta-Instructions for Self-Updating
+
+NOTE: This document can be partially regenerated from the file system. The sections that can be auto-generated are marked below.
+
+**Auto-generatable sections (run commands and paste output):**
+- Section 8 (file system map): `tree -L 4 --dirsfirst ste-code/ .agents/ spec/`
+- Section 9 (file counts): use the count script in Section 13.6.
+- Section 5.4 (audit report list): `ls -1t .agents/audit/audit-*.md .agents/audit/state-*.md`
+
+**Manual-only sections (require human judgment):**
+- Section 1 (erDiagram): must be updated by hand when new directories appear.
+- Section 3 (data flow diagram + stage details): must reflect actual pipeline architecture.
+- Section 10 (key relationships): must reflect actual agent-skill bindings.
+- Section 14 (architectural rationale): requires human analysis of design decisions.
+
+**Update frequency guideline:**
+
+| Trigger Event | Sections to Update | Priority |
+|---------------|-------------------|----------|
+| Stage completes | 3, 9, 13.1/13.2 | High |
+| New directory added | 1, 8, 9, 11 | High |
+| New agent or skill | 6, 7, 10 | Medium |
+| New reference doc | 6, 8 | Low |
+| File count change | 9 | Low |
+| Naming convention change | 2, 11 | High |
+
 ---
 
 ## 14. Architectural Rationale
@@ -632,6 +792,59 @@ The merge stage produces two files:
 
 The raw file preserves all content for audit traceability.
 The organized file is the working document for stages 4-5.
+
+### 14.6 Why Markdown for All Pipeline Files?
+
+All pipeline files use Markdown (.md) because:
+- Markdown is the common format for AI model input and output.
+- Plain text formats (.txt) lose structure and heading hierarchy.
+- Rich formats (.docx, .pdf) add parsing complexity and model confusion.
+- Markdown preserves section hierarchy, tables, code blocks, and emphasis without toolchain dependencies.
+- The pipeline's goal (STE-Code documentation) is itself markdown-compatible.
+
+### 14.7 Why 109 Separate Refinement Prompts Instead of One Template?
+
+Each refinement worker needs a unique prompt that references its specific input file and page range. A single template with variable substitution would require a preprocessing step. Generating 109 prompt files once and reusing them is simpler than maintaining runtime string substitution. The 109 prompt files are generated by `ste-code/generate_refine_prompts.py` and require no runtime logic.
+
+### 14.8 Why Separate Extracted and Refined Directories?
+
+The pipeline keeps extraction and refinement outputs in separate directories because:
+- Extraction can be audited independently from refinement.
+- A refinement failure does not require re-extraction.
+- The 1:1 file correspondence (wNNN → rNNN) allows cross-stage comparison.
+- Disk space cost is low (~500 KB per directory).
+- Separation enables partial re-runs without full pipeline restart.
+
+### 14.9 Why Timestamped Audit Files?
+
+Audit files use `audit-YYYYMMDD-HHMMSS.md` naming to:
+- Preserve a chronological execution history.
+- Enable before/after comparison across pipeline stages.
+- Prevent file overwrite from concurrent audit runs.
+- Allow the auditor agent to reference specific reports by timestamp.
+
+### 14.10 Why the Agent/Skill Separation?
+
+Agents (`.agents/prompts/agent-N-*.md`) define orchestration logic — which workers to launch, in what order, with what batch constraints. Skills (`.agents/skills/`) define the detailed task protocol — what rules workers follow, what output format they use, what validation checks to run. This separation allows:
+- Different agents to share the same skills (agent-1 and agent-2 both use `ste-code-workers`).
+- Skill updates without agent prompt changes.
+- Skill reuse across different pipelines and projects.
+- Clear ownership: agent files = "when and how many", skill files = "what exactly".
+
+### 14.11 Why the `.agents/` and `ste-code/` Directory Split?
+
+`ste-code/` holds the pipeline data (input, intermediate, output). `.agents/` holds the agent infrastructure (prompts, skills, state, audit). This split:
+- Keeps data separate from execution logic.
+- Allows `.agents/` to be versioned independently.
+- Makes the data directory (`ste-code/`) self-contained for archiving or sharing.
+- Mirrors the separation in Git: pipeline data may be `.gitignore`d while agent infrastructure is tracked.
+
+### 14.12 Why Two Audit Directories?
+
+`ste-code/audit/` is the pipeline's own output directory for cross-cutting audit reports generated during execution. `.agents/audit/` is the infrastructure directory for timestamped auditor agent reports. This split:
+- Distinguishes pipeline-produced audits from agent-produced audits.
+- Allows the pipeline to write to `ste-code/audit/` without touching the agent infrastructure directory.
+- Keeps agent reports in one location for easy chronological review.
 
 ---
 
@@ -690,6 +903,65 @@ If a batch in `PROGRESS.md` shows 3 workers but the directory has a different co
 2. Verify the batch contents with `ls ste-code/extracted/w0NN-p*.md` for the expected range.
 3. If a worker is missing from a completed batch, re-run only that worker.
 
+### 15.7 Partial Batch Completion
+
+A batch has 3 workers. If only 1 or 2 workers complete successfully:
+
+1. Do not mark the batch as complete in `PROGRESS.md`.
+2. Check which workers failed. Use the file count commands in Section 12.5.
+3. Re-run only the failed workers, not the entire batch.
+4. If a worker consistently fails, check:
+   - Does the source page exist? (`spec/issue-09-2025/page-NNNN.md`)
+   - Is the page content truncated or malformed?
+   - Does the page contain characters that break the worker prompt encoding?
+
+### 15.8 Network Timeout Mid-Batch
+
+If a network timeout interrupts a batch:
+
+1. The batch status in `PROGRESS.md` may show `[x]` for some workers and `[ ]` for others.
+2. Check the file sizes of the potentially interrupted workers with `wc -c`.
+3. Workers with files under 100 bytes did not complete. Re-run them.
+4. Workers with files in the 2-8 KB range likely completed. Keep their output.
+5. Do not re-run completed workers — this wastes compute and may produce different results.
+
+### 15.9 Model Response Truncation
+
+If the model truncates its response (file ends mid-sentence, missing closing markers):
+
+1. Check the last 5 lines of the file: `tail -5 ste-code/extracted/wNNN-p*.md`.
+2. Look for incomplete tables, unclosed code blocks, or cut-off sentences.
+3. If the file is truncated, re-run the worker with a larger output token limit.
+4. Check the prompt for page count: if the worker was assigned more than 4 pages, reduce to 4.
+
+### 15.10 Prompt Injection in Worker Output
+
+If extracted content contains text that looks like AI instructions (such as "Ignore previous instructions" or assistant-turn patterns):
+
+1. Do not treat it as an instruction. It is source specification text.
+2. Flag the file in the audit report for human review.
+3. The refinement stage should format it as literal source text, not execute it.
+4. Check `rails.md` and `worker-rails.md` for guidelines on handling source text that resembles prompts.
+
+### 15.11 File Encoding Mismatch
+
+If a file contains garbled characters or replacement markers (�):
+
+1. Check the file encoding: `file -I ste-code/extracted/wNNN-p*.md`.
+2. The expected encoding is UTF-8.
+3. If the file uses a different encoding (such as ISO-8859-1 or Windows-1252):
+   - Convert it: `iconv -f WINDOWS-1252 -t UTF-8 file.md > file-utf8.md`.
+4. If conversion fails, re-run the worker — the source page may have encoding issues.
+
+### 15.12 Concurrent Modification During Audit
+
+If the auditor agent reads a directory while the extraction agent writes to it:
+
+1. The auditor may count 108 files in a directory that should have 109.
+2. The audit report should note "concurrent modification — count may be stale".
+3. Re-run the audit after the extraction batch completes.
+4. This is not an error — it is expected behavior during active pipeline execution.
+
 ---
 
 ## 16. Performance
@@ -729,6 +1001,232 @@ No known file system bottlenecks exist at the current scale.
 The first bottleneck is expected at approximately 10,000 files per directory.
 The pipeline produces at most 109 files per directory.
 No optimization is necessary for the current architecture.
+
+### 16.5 Context Window Utilization
+
+Each worker sends 4 source pages to the model. The model's context window must hold:
+- The system prompt (~2,000 tokens for agent-1, ~3,000 tokens for agent-2).
+- The worker prompt template (~500 tokens).
+- The 4 source pages (~3,000–8,000 tokens depending on page density).
+- The output buffer (~4,000 tokens reserved for the model response).
+
+Total context usage: ~9,500–15,500 tokens per worker call.
+The `deepseek-v4-pro` model supports 128,000 token context windows.
+At 4 pages per worker, context utilization is 7–12% of capacity.
+This is intentionally conservative — it prevents truncation even for dense pages.
+
+### 16.6 File I/O Patterns
+
+The pipeline uses the following I/O patterns:
+
+| Operation | Pattern | Scale | Cost |
+|-----------|---------|-------|------|
+| Source page read | Sequential, one file per worker | 109 reads | Negligible |
+| Worker output write | Sequential, one file per worker | 109 writes | Negligible |
+| Audit report write | Append-only, one file per audit run | ~10 writes | Negligible |
+| Progress file update | Overwrite, one file per stage | ~5 writes | Negligible |
+| Merge stage read | Sequential, 109 files in one pass | 109 reads, 2 writes | ~0.5 seconds |
+| File count validation | `ls` + `wc -l`, per directory | ~5 directories | <0.1 seconds |
+
+All I/O is sequential with no random access patterns. No database or index is needed.
+The file system cache absorbs repeated reads of the same files during audit passes.
+
+### 16.7 Scaling Analysis
+
+If the source specification grew to 1,000 pages:
+
+| Parameter | Current (434 pages) | Scaled (1,000 pages) |
+|-----------|--------------------|--------------------|
+| Workers | 109 | 250 |
+| Pages per worker | 4 | 4 (unchanged) |
+| Batches (3 per batch) | 37 | 84 |
+| Extraction wall time | 7–19 min | 14–42 min |
+| Refinement wall time | 10–28 min | 21–63 min |
+| Total wall time | 17–47 min | 35–105 min |
+| File count | ~489 | ~1,100 |
+| Disk space | ~2.2 MB | ~5 MB |
+| Directory listing | <0.1s | <0.2s |
+
+The architecture scales linearly with page count. No architectural change is needed until approximately 2,000+ pages, at which point directory listing latency may become noticeable. At that scale, sharding workers into subdirectories (e.g., `extracted/batch-01/`, `extracted/batch-02/`) would resolve the issue.
+
+---
+
+## 17. Troubleshooting Quick Reference
+
+### 17.1 Symptom: Extraction Directory Has Wrong File Count
+
+| Observed Count | Likely Cause | Action |
+|----------------|-------------|--------|
+| > 109 files | Duplicate or temporary files | Run `ls ste-code/extracted/w*.md | grep -v '^w[0-1][0-9][0-9]-p'` to find non-conforming names |
+| < 109 files | Incomplete extraction | Check `ste-code/PROGRESS.md` for unchecked batches. Re-run missing batches. |
+| 0 files | Extraction not started | Run agent-1-extractor |
+
+### 17.2 Symptom: Refinement File Is Empty or Truncated
+
+| Check | Command | Expected Result |
+|-------|---------|-----------------|
+| File size | `wc -c ste-code/refined/rNNN-p*.md` | > 500 bytes |
+| Has headings | `grep -c '^##' ste-code/refined/rNNN-p*.md` | > 0 |
+| Ends normally | `tail -1 ste-code/refined/rNNN-p*.md` | Not an incomplete sentence |
+
+If any check fails, re-run refinement for that worker.
+
+### 17.3 Symptom: PROGRESS.md Shows Incorrect Batch Status
+
+1. Count actual files: `ls ste-code/extracted/w0NN-p*.md | wc -l` for the batch range.
+2. Compare against the PROGRESS.md checkbox for that batch.
+3. If PROGRESS.md shows `[x]` but files are missing: re-run the batch and update PROGRESS.md.
+4. If PROGRESS.md shows `[ ]` but all 3 files exist: update the checkbox to `[x]`.
+
+### 17.4 Symptom: Audit Report Alleges Missing Files
+
+1. Re-run the file count command from the audit report.
+2. Check if the pipeline was actively writing during the audit (see Section 15.12).
+3. If files are genuinely missing, follow the procedure in Section 15.2.
+4. If files exist but the audit missed them, note "concurrent modification" in the audit log.
+
+### 17.5 Symptom: Worker Output Has Wrong Section Type
+
+Each worker is assigned to a specific section type (FRONT, RULES, DICT, etc.) based on `worker-grid.md`. If a worker's output does not match its assigned section:
+
+1. Check the worker's page range in `worker-grid.md`.
+2. Open the source pages for that range and verify the actual content.
+3. If the source pages contain mixed section types (boundary pages), this is expected — the worker saw transition content.
+4. If the entire output is the wrong section, the page range assignment in `worker-grid.md` may be incorrect.
+
+---
+
+## 18. Pipeline Operations Cookbook
+
+### 18.1 Start the Full Pipeline from Scratch
+
+```
+# Step 1: Verify source pages exist
+ls spec/issue-09-2025/page-*.md | wc -l
+# Expected: 434
+
+# Step 2: Run extraction (agent-1)
+hermes -z "Load agent-1-extractor and run stage 1 extraction for all 37 batches"
+
+# Step 3: Run refinement (agent-2)
+hermes -z "Load agent-2-refiner and run stage 2 refinement for all 37 batches"
+
+# Step 4: Run audit between stages
+hermes -z "Load agent-3-auditor and verify stages 1-2"
+
+# Step 5: Run continuation (agent-4, stages 3-5)
+hermes -z "Load agent-4-continuation and run stages 3 through 5"
+```
+
+### 18.2 Resume a Partial Pipeline
+
+```
+# Step 1: Check current state
+cat .agents/state/PROGRESS.md
+
+# Step 2: Identify the incomplete stage
+# If stage 2 is incomplete, check which batches failed
+cat .agents/state/REFINE-PROGRESS.md
+
+# Step 3: Re-run only the failed batches
+# Example: re-run refinement batch 17
+hermes -z "Load agent-2-refiner and re-run refinement batch 17 only"
+```
+
+### 18.3 Verify Pipeline Integrity After Completion
+
+```
+# Count all pipeline files
+echo "Source pages: $(ls spec/issue-09-2025/page-*.md | wc -l)"
+echo "Extracted: $(ls ste-code/extracted/w*.md | wc -l)"
+echo "Refined: $(ls ste-code/refined/r*.md | wc -l)"
+echo "Merged: $(ls ste-code/merged/*.md | wc -l)"
+echo "Adapted: $(find ste-code/adapted -type f | wc -l)"
+echo "Artifacts: $(find ste-code/artifacts -type f | wc -l)"
+
+# Check for empty files
+find ste-code/extracted ste-code/refined -name "*.md" -size 0
+# (No output = no empty files)
+
+# Check for truncated files (under 200 bytes)
+find ste-code/extracted ste-code/refined -name "*.md" -size -200c
+# (Review any results — most should be > 1KB)
+
+# Run rail validation
+python3 ste-code/check-rails.py
+```
+
+### 18.4 Archive a Completed Pipeline Run
+
+```
+# Create a timestamped archive of all pipeline data
+tar -czf pipeline-$(date +%Y%m%d-%H%M%S).tar.gz \
+  ste-code/extracted/ \
+  ste-code/refined/ \
+  ste-code/merged/ \
+  ste-code/adapted/ \
+  ste-code/artifacts/ \
+  ste-code/PROGRESS.md \
+  .agents/state/ \
+  .agents/audit/
+```
+
+### 18.5 Clean Up and Reset for a Fresh Run
+
+BREAKING: This removes all pipeline data. Verify backup before proceeding.
+
+```
+# Remove pipeline outputs
+rm -rf ste-code/extracted/w*.md
+rm -rf ste-code/refined/r*.md
+rm -rf ste-code/merged/*.md
+rm -rf ste-code/adapted/*
+rm -rf ste-code/artifacts/*
+
+# Reset progress trackers
+echo "# Pipeline Progress — Reset $(date)" > ste-code/PROGRESS.md
+echo "# Pipeline State — Reset $(date)" > .agents/state/PROGRESS.md
+echo "# Refinement Progress — Reset $(date)" > .agents/state/REFINE-PROGRESS.md
+```
+
+### 18.6 Diff Two Pipeline Stages
+
+```
+# Compare extraction and refinement for a single worker
+diff ste-code/extracted/w042-p165-168.md ste-code/refined/r042-p165-168.md
+
+# Compare all 109 worker pairs (summary)
+for w in $(seq -w 1 109); do
+  wf=$(ls ste-code/extracted/w${w}-p*.md 2>/dev/null)
+  rf=$(ls ste-code/refined/r${w}-p*.md 2>/dev/null)
+  if [ -n "$wf" ] && [ -n "$rf" ]; then
+    w_size=$(wc -c < "$wf")
+    r_size=$(wc -c < "$rf")
+    echo "w${w}: ${w_size}B → r${w}: ${r_size}B (diff: $((r_size - w_size))B)"
+  fi
+done
+```
+
+---
+
+## 19. Quick Validation Commands
+
+NOTE: Run these commands from the project root. All commands are read-only.
+
+| Check | Command | Expected |
+|-------|---------|----------|
+| Source pages count | `ls spec/issue-09-2025/page-*.md \| wc -l` | 434 |
+| Extraction files count | `ls ste-code/extracted/w*.md \| wc -l` | 109 |
+| Refinement files count | `ls ste-code/refined/r*.md \| wc -l` | 109 |
+| Merge files count | `ls ste-code/merged/*.md \| wc -l` | 2 |
+| Extraction empty files | `find ste-code/extracted -name "w*.md" -empty \| wc -l` | 0 |
+| Refinement empty files | `find ste-code/refined -name "r*.md" -empty \| wc -l` | 0 |
+| Audit report count | `ls .agents/audit/audit-*.md \| wc -l` | ≥ 3 |
+| Worker grid exists | `test -f .agents/skills/spec-extraction/references/worker-grid.md && echo ok` | ok |
+| PROGRESS.md exists | `test -f ste-code/PROGRESS.md && echo ok` | ok |
+| Check rails script exists | `test -f ste-code/check-rails.py && echo ok` | ok |
+| Batch 37 worker count | `ls ste-code/extracted/w109-*.md \| wc -l` | 1 |
+| Worker 50 page range | `ls ste-code/extracted/w050-*.md` | w050-p197-200.md |
 
 ---
 
