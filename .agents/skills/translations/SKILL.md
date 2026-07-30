@@ -10,6 +10,22 @@ Set up a multi-locale translation pipeline by **discovering** translatable conte
 
 **Why discovery:** Enrichment is ad-hoc across sessions — new words, rules, categories, and examples get added at different times by different agents. A fixed file grid rots immediately. Discovery workers find whatever is on disk right now. Re-run after enrichment to catch new files.
 
+## Agent Contract (Agent #9)
+
+This skill is the operational protocol for **Agent #9 — Translation Orchestrator**. The agent's role definition lives in `.agents/agent/agent-9-translations.md`.
+
+**Agent #9 contract summary:**
+
+- **Role:** Discovery + scaffolding. The agent explores source directories, reasons about translatability, and creates blank placeholder files for all 9 locales.
+- **Architecture:** Discovery loop — EXPLORE → CATALOG → CREATE PLACEHOLDERS → COMMIT → NEXT.
+- **Worker pattern:** Poll system with 3 parallel workers per batch. Each worker handles 3 locales. Use `background=true` and `notify_on_complete=true`.
+- **Scope:** 10 discovery targets in priority order. Re-scans after enrichment find new files automatically.
+- **Model:** `deepseek-v4-pro` exclusively.
+- **Output:** Blank placeholder files at correct paths. The catalog (`translations/catalog.md`) tracks all discoveries.
+- **Communication:** Batch completions go to `.agents/feedback/exchange.md`. State updates go to `.agents/state/TRANSLATIONS-PROGRESS.md`.
+
+See `.agents/agent/agent-9-translations.md` for the full role definition including the poll system, failure handling, and step-by-step launch instructions.
+
 ## Target Locales (9)
 
 | Locale | Language | Script | RTL |
@@ -75,6 +91,101 @@ hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m deep
 - Worker 3: locales pt-BR, ru, ar
 
 All 3 workers discover the same source directory but create placeholders for different locale subsets.
+
+## Worker Prompt Template
+
+Write the prompt to `.agents/prompts/translations/discovery-NNN-prompt.txt` before each batch. Replace `<SOURCE_DIR>`, `<LOCALE_1>`, `<LOCALE_2>`, and `<LOCALE_3>` for the current target.
+
+```text
+You are a translation discovery worker. Your job: explore a source directory, reason about translatability, and create blank placeholder files.
+
+## Discovery Target
+Directory: <SOURCE_DIR>
+
+## Assigned Locales
+Create blank placeholders for these 3 locales only:
+- <LOCALE_1>
+- <LOCALE_2>
+- <LOCALE_3>
+
+## Reasoning Loop
+For each file in <SOURCE_DIR>, follow this decision path:
+
+1. LIST all files in the directory. Use `ls` or `find` to get the complete list.
+2. For each file, ask: "Does a human developer read this file and extract meaning from the words?"
+3. If YES → TRANSLATABLE. Create a blank placeholder for each assigned locale.
+4. If NO → SKIP. The file is structural (schema, config, generated data, script).
+
+## Include / Skip Reference
+
+| Include | Skip |
+|---------|------|
+| `.md` rule files | `.schema.json` |
+| `.md` README files | `.py` scripts |
+| `.md` narrative examples | `.json` config files without prose |
+| `.txt` system prompts and artifacts | `worker-contract.json`, `rails.json`, `gate-conditions.json` |
+| `.prompt.md` compute prompts | Generated `.json` data (`*-batch-*.json`) unless it contains descriptive definitions |
+| `.json` vocabulary files with `"definition"` fields — translate the definitions | Scoring/compliance `.json` |
+
+## File Creation
+For each translatable file found at `<SOURCE_DIR>/<relative-path>/<filename>`:
+- Create the directory: `mkdir -p translations/<locale>/<relative-path>/`
+- Create a blank file: `touch translations/<locale>/<relative-path>/<filename>`
+- Do this for all 3 assigned locales.
+- Result: each placeholder is a zero-byte file with no content.
+
+## Report Format
+After creating all placeholders, produce this exact report:
+
+```
+DISCOVERED: <N> files in <SOURCE_DIR>
+TRANSLATABLE: <N> files
+  - <file1> (reason: <why translatable>)
+  - <file2> (reason: <why translatable>)
+SKIPPED: <N> files
+  - <file1> (reason: <why skipped>)
+  - <file2> (reason: <why skipped>)
+CREATED: <N> blank placeholders across <3> locales
+```
+
+Submit only blank files on disk plus this report. Do not write any content into the placeholder files.
+```
+
+## Example Discovery Report
+
+The example below shows the output from a worker that explored `ste-code/artifacts/` for locales `zh-CN`, `ja`, `ko`.
+
+```
+DISCOVERED: 6 files in ste-code/artifacts/
+TRANSLATABLE: 5 files
+  - README.md (reason: user-facing documentation with prose)
+  - ste-code-distilled-system-prompt.txt (reason: system prompt used by end users)
+  - ste-code-self-reading-manual.txt (reason: manual with procedural instructions)
+  - ste-code-extraction-methodology.txt (reason: methodology document with narrative)
+  - ste-code-deployment-guide.txt (reason: deployment steps with prose)
+SKIPPED: 1 files
+  - ste-code-example-turn.txt (reason: generated example turn data, not prose — skip)
+CREATED: 15 blank placeholders across 3 locales
+
+Placeholder paths created:
+  translations/zh-CN/ste-code/artifacts/README.md
+  translations/zh-CN/ste-code/artifacts/ste-code-distilled-system-prompt.txt
+  translations/zh-CN/ste-code/artifacts/ste-code-self-reading-manual.txt
+  translations/zh-CN/ste-code/artifacts/ste-code-extraction-methodology.txt
+  translations/zh-CN/ste-code/artifacts/ste-code-deployment-guide.txt
+  translations/ja/ste-code/artifacts/README.md
+  translations/ja/ste-code/artifacts/ste-code-distilled-system-prompt.txt
+  translations/ja/ste-code/artifacts/ste-code-self-reading-manual.txt
+  translations/ja/ste-code/artifacts/ste-code-extraction-methodology.txt
+  translations/ja/ste-code/artifacts/ste-code-deployment-guide.txt
+  translations/ko/ste-code/artifacts/README.md
+  translations/ko/ste-code/artifacts/ste-code-distilled-system-prompt.txt
+  translations/ko/ste-code/artifacts/ste-code-self-reading-manual.txt
+  translations/ko/ste-code/artifacts/ste-code-extraction-methodology.txt
+  translations/ko/ste-code/artifacts/ste-code-deployment-guide.txt
+```
+
+NOTE: The `ste-code-example-turn.txt` file is skipped in this example. An auditor may later flag it as translatable if it contains readable prose. The discovery model tolerates false negatives — re-scans catch them.
 
 ## Discovery Targets (10)
 

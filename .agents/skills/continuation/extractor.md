@@ -21,6 +21,35 @@ Do not summarize. Include every word, every table, every example.
 Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 ```
 
+## Expected Output Example
+
+A correct worker output preserves every word from the source pages.
+The file must contain only raw markdown from the spec. No commentary.
+
+```markdown
+# ASD-STE100 Issue 9 — Pages 1-4
+
+## Page 1
+
+### Section 1 — General
+
+**Rule 1.1** Use approved words from the dictionary.
+
+**Rule 1.2** Use words only as the part of speech given.
+
+**Rule 1.3** Use words only with their approved meaning.
+
+```
+
+An incorrect output adds commentary or summaries:
+
+```markdown
+This page describes the first three rules of the STE standard.
+The rules explain how to use approved words correctly.
+```
+
+NOTE: Commentary or summary text is a fabrication. Discard the output.
+
 ## Launch Rules
 
 - Always use `hermes -z "$(cat ste-code/prompts-refine/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo`
@@ -30,6 +59,23 @@ Output ONLY the markdown file." -m deepseek-v4-pro --yolo
 - Never exceed 4 pages per worker (prevents truncation)
 - Always save state: `git gcommit-hermes "Batch N complete"` after each batch
 - Save generated prompts to `ste-code/prompts-refine/wNNN-prompt.txt`
+
+## Performance Estimates
+
+| Metric | Value |
+|--------|-------|
+| Time per batch (3 workers) | 2 to 5 minutes |
+| Total pipeline duration | 2 to 3 hours |
+| Token budget per worker | 8K to 12K tokens |
+| Output per worker | 4 pages of raw markdown |
+| Total workers | 109 |
+| Total batches | 37 |
+
+The fastest path uses a high-concurrency API tier.
+The slowest path includes retries from rate limits or failures.
+
+NOTE: These estimates use the `deepseek-v4-pro` model. Other models
+may produce different timing and token counts.
 
 ## Worker Grid (37 batches × 3 workers, 109 total)
 
@@ -83,10 +129,27 @@ After each batch of 3 workers completes:
 2. **Size check**: Each file > 3KB (>30 lines)
 3. **Truncation check**: Last 3 lines end cleanly (period, footer, or table row)
 4. **Content signal**: Expected keywords present (`grep "ASD-STE100" ste-code/extracted/wNNN-p*.md`)
-5. **Fabrication check**: No commentary ("This page describes..."), no modern terms
+5. **Fabrication check**: No commentary, no modern terms. Run this command:
+   ```bash
+   grep -iE "this page|describes|explains|here we see|in this section|as shown|the following|we can see|note that|it is important" ste-code/extracted/wNNN-p*.md
+   ```
+   If the command returns any lines, the worker fabricated commentary. Discard the output.
 6. **Tracking check**: PROGRESS.md updated to reflect this batch ✅
 
 If any check fails, re-extract with the worker's page range split in half.
+
+## Common Failure Modes
+
+| Failure | Detection | Recovery |
+|---------|-----------|----------|
+| Page numbering errors | `grep -c "^## Page" ste-code/extracted/wNNN*.md` returns < 4 | Check the source page file names. Re-extract with correct page numbers. |
+| PDF artifacts in markdown | `grep -i "ocr\|artifact\|garbled\|unreadable" ste-code/extracted/wNNN*.md` | Use a cleaner PDF-to-markdown converter. Re-extract the source pages. |
+| Worker hallucinates commentary | Fabrication check grep returns lines | Split the page range in half. Re-extract each half separately. |
+| Truncated output (missing end) | File size is correct but last section is incomplete | Check the last 10 lines. Re-extract the last page alone. |
+| Worker times out or crashes | Output file does not exist or is empty | Restart the worker. Use the same page range and prompt. |
+
+NOTE: Most failures come from source page quality, not from the worker.
+Check the source markdown before you retry extraction.
 
 ## 🔴 MANDATORY: Update PROGRESS.md After Every Batch
 
