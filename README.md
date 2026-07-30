@@ -143,10 +143,15 @@ Manual/
 │   ├── refined/               ← Stage 2: v2 formatted (109 files, 100.0 audit)
 │   ├── merged/                ← Stage 3: master.md (23,737 lines)
 │   ├── adapted/               ← Stage 4: 57 adapted files
+│   │   └── expanded/           ← Agent #4 expansion outputs
 │   ├── artifacts/             ← Stage 5: 6 deployable files
 │   └── audit_refinement.py    ← Automated quality scoring
-├── .hermes/                   ← Agent prompts, skills, state
-└── .agents/                   ← Agent-agnostic prompts + skills
+├── SCE/                       ← Structured STE-Code v2.0 (4 strata, 175 entries)
+├── .agents/                   ← Agent-agnostic: 9 agents, 21 skills, 59-test benchmark
+│   ├── agent/                 ← Agent definitions (#1-9)
+│   ├── skills/                ← 21 capability skills
+│   ├── benchmark/              ← 59 tests, 14 categories, orchestrator
+│   └── tools/                 ← Distributed worker tools (oneshot wrapper + launcher)
 ```
 
 ---

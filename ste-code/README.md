@@ -33,9 +33,12 @@ All 5 stages complete. Multi-agent system: extraction, refinement, auditing, ben
 │   Output: ste-code/artifacts/ (6 files, ~72K chars)             │
 │   Status: ✅ Complete                                           │
 ├──────────────────────────────────────────────────────────────────┤
-│ BENCHMARKING                       Agent #4 (defined, pending)   │
-│   35 test cases, 8 categories                                    │
-│   Status: ⬜ Ready to execute                                    │
+│ BENCHMARKING + EXPANSION              Agents #4, #8               │
+│   Benchmark: 59 tests, 14 categories                              │
+│   Result: 96.6% STE-Code vs 11.9% plain assistant                │
+│   Expansion: 55 prompts, 3/55 launched (Pass 1 in progress)       │
+│   SCE: v2.0, 4 strata, 175-entry code dictionary                  │
+│   Status: 🔄 Expansion underway                                   │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -46,9 +49,25 @@ All 5 stages complete. Multi-agent system: extraction, refinement, auditing, ben
 | `extracted/` | 1 — Raw | 109 files from spec pages |
 | `enriched/` | 1b — Enriched | 109 files with metadata + structure |
 | `refined/` | 2 — Formatted | 109 files, 100.0 audit, all entries tagged |
-| `merged/` | 3 — Consolidated | master.md (23,737 lines) |
+| `merged/` | 3 — Consolidated | master.md (20,794 lines, deduplicated) |
 | `adapted/` | 4 — Code-adapted | 57 adapted rule/dictionary files |
+| `adapted/expanded/` | 4b — Expanded | Agent #4 expansion outputs |
 | `artifacts/` | 5 — Final output | 6 deployable files |
+| `enriched-code/` | — Enrichments | Code-domain enrichments from refined content |
+
+## Agents
+
+| # | Agent | Status |
+|---|-------|--------|
+| 1 | Extractor | ✅ 109 workers complete |
+| 2 | Refiner | ✅ 100.0 audit score |
+| 3 | Auditor | ✅ Full pipeline verified |
+| 4 | Continuator | 🔄 5 expansion passes defined |
+| 5 | SCE Populator | ✅ Dictionary generation |
+| 6 | STE-Code Analysis | ✅ Paradigm-agnostic |
+| 7 | Level Worker | ✅ Parameterized (levels 1-5) |
+| 8 | Extension Worker | ✅ Code-domain gap fillers |
+| 9 | Translation Orchestrator | 🔄 Scaffolding in progress |
 
 ## Quality
 
