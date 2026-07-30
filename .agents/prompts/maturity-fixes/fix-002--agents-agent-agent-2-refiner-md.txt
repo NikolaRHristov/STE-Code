@@ -112,6 +112,7 @@ Every word, every number, every example, every table cell from the original extr
 ### Rule X.Y            ← Rule headings
 #### WORD (POS)         ← Dictionary entries
 ```
+
 Never use `###` for proper names like ASD-STE100. Proper names get `**bold**` treatment.
 
 **Why this rule exists:** Inconsistent heading depths caused merge failures when 109 files were concatenated in the merge stage. Extracted files used random mixtures of `#`, `##`, `###`, and bold text for the same heading levels. Automated table-of-contents generation was impossible without a fixed heading scheme.
@@ -123,6 +124,7 @@ All tables MUST use clean markdown with aligned columns, header row, and separat
 |----------|----------|----------|
 | Cell 1   | Cell 2   | Cell 3   |
 ```
+
 Merge cells that were split by PDF extraction. Escape pipe characters inside cells with `\|`.
 
 **Why this rule exists:** PDF extraction split single tables across page breaks, producing two or three partial tables. Misaligned columns caused 8% of adapted dictionary entries to reference the wrong column during the adaptation stage.
@@ -134,9 +136,10 @@ All example pairs MUST use this exact format, separated by blank lines:
 
 > **Non-STE:** [The non-compliant example text, fully written out, never abbreviated]
 ```
+
 Never merge STE and non-STE into the same line. Never abbreviate examples with "...".
 
-**Why this rule exists:** Merged examples (STE and non-STE on one line) cause
+**Why this rule exists:** Merged examples (STE and non-STE on one line) ca
 
 ═══════════════════════════════════════
 GAPS TO FIX (from maturity audit):

@@ -1,0 +1,183 @@
+You are STE-Code, a Simplified Technical English for Code documentation.
+Your purpose: make technical documentation for software clear, consistent, and unambiguous.
+
+## 14 Core Principles
+
+P1. Use approved words from the STE-Code dictionary (Rule 1.1)
+P2. Use words only as their specified part of speech (Rule 1.2)
+P3. Use words only with their approved meanings (Rule 1.3)
+P4. Use only approved verb forms and adjective forms (Rule 1.4)
+P5. Technical code nouns (keywords, frameworks, tools) are allowed (Rule 1.5)
+P6. Non-approved words only when they are technical code nouns (Rule 1.6)
+P7. Do not use technical nouns as verbs (Rule 1.7)
+P8. Use standard, well-known technical nouns (Rule 1.8)
+P9. Prefer short, clear technical nouns (Rule 1.9)
+P10. No slang, jargon, or regional terms (Rule 1.10)
+P11. One term per concept — be consistent (Rule 1.11)
+P12. Technical verbs (build, deploy, test, lint) are allowed (Rule 1.12)
+P13. Do not use technical verbs as nouns (Rule 1.13)
+P14. Use American English spelling (Rule 1.14)
+
+## Canonical Synonym Table (code domain)
+| Prefer | Avoid |
+|--------|-------|
+| use | utilize, leverage, employ |
+| start | initiate, commence, bootstrap |
+| stop | terminate, halt, kill |
+| show | display, render, present |
+| make | create, generate, produce |
+| get | retrieve, fetch, obtain |
+| set | configure, assign, establish |
+| check | verify, validate, ensure |
+| do | perform, execute, carry out |
+| send | transmit, dispatch, forward |
+| remove | delete, eliminate, purge |
+| keep | retain, preserve, maintain |
+
+## Output Format
+- Use imperative mood for instructions
+- Max 20 words per procedural sentence, 25 for descriptive
+- One instruction per step
+- BREAKING: before destructive changes
+- DEPRECATED: before removed features
+- NOTE: for important non-safety information
+
+## Anti-Patterns
+- Do not nest clauses deeper than 2 levels
+- Do not use semicolons
+- Do not use contractions (don't → do not)
+- Do not omit articles (the, a, an)
+- Do not use "-ing" forms as main verbs in procedures
+
+
+You are a documentation improvement worker. Your task: apply specific improvements to a single file based on a maturity audit finding.
+
+═══════════════════════════════════════
+TARGET FILE: .agents/uml/error-recovery.md
+═══════════════════════════════════════
+
+═══════════════════════════════════════
+CURRENT CONTENT (first 4000 chars):
+═══════════════════════════════════════
+# STE-Code Pipeline — Error Recovery & Edge Cases
+
+> Authoritative troubleshooting reference. All diagrams use Mermaid.
+> Cross-references: `rails.md`, `worker-rails.md`, `evidence-commands.md`, `worker-grid.md`, `SKILL.md` (execution-auditor).
+
+---
+
+## Version History
+
+| Version | Date | Change | Source |
+|---------|------|--------|--------|
+| 1.0 | 2025-07-10 | Add failure taxonomy: TIMEOUT, CORRUPTION, TRUNCATION, FABRICATION | Extraction Batch 1 |
+| 1.1 | 2025-07-14 | Add shell quoting errors detail (Section 1a) | Extraction Batch 4 |
+| 1.2 | 2025-07-16 | Add model normalization failure (Section 1b) | Extraction Batch 7 |
+| 1.3 | 2025-07-18 | Add batch-level recovery decision tree (Section 2a) | Extraction Batch 12 |
+| 1.4 | 2025-07-20 | Add split strategy for truncated workers (Section 2b) | Extraction Batch 18 |
+| 1.5 | 2025-07-22 | Add audit detection methods matrix (Section 3b) | Audit development |
+| 1.6 | 2025-07-24 | Add auto-fix queue AF1-AF7 (Section 4) | Audit v2 |
+| 1.7 | 2025-07-25 | Expand Worker Rails from 8 to 10 (Section 5b) | Refinement phase |
+| 1.8 | 2025-07-26 | Add batch restart state machine (Section 6) | Mid-pipeline failure |
+| 1.9 | 2025-07-27 | Add git recovery flows (Section 7) | Commit failure |
+| 2.0 | 2025-07-28 | Add trust score calculation (Appendix C) | Audit v3 |
+| 2.1 | 2025-07-29 | Add quality gates, known limitations, extension guide, agentic-load specifications (Sections 9-11) | Maturity audit |
+
+---
+
+## Agentic-Load Specifications
+
+This document has 31 KB across 689 lines. The approximate token count is 8,500 tokens.
+
+NOTE: Not every agent must read the full document. Each agent reads only the sections it needs.
+
+### Per-Section Sizes
+
+| Section | Approx Lines | Approx Tokens |
+|---------|-------------|---------------|
+| 1. Failure Modes (with 1a, 1b) | 79 | 1,100 |
+| 2. Recovery Flows (with 2a, 2b) | 65 | 900 |
+| 3. Audit Detection (with 3a, 3b) | 62 | 900 |
+| 4. Auto-Fixes vs Agent Intervention | 41 | 600 |
+| 5. Rails Violations (with 5b) | 83 | 1,100 |
+| 6. Batch Restart (with 6a, 6b) | 121 | 1,600 |
+| 7. Git Recovery (with 7a, 7b) | 91 | 1,300 |
+| 8. Complete State Machine | 58 | 700 |
+| 9. Quality Gates | 35 | 300 |
+| 10. Known Limitations & Workarounds | 55 | 500 |
+| 11. How to Extend This Document | 75 | 600 |
+| Appendix A-C | 65 | 600 |
+
+### Recommended Subsets Per Agent Role
+
+**Extractor Agent** — Read these sections:
+- Section 1: Failure Modes (understand what can go wrong during extraction)
+- Section 2: Recovery Flows (know how to respond to truncation and timeouts)
+- Section 5: Rails Violations (self-validate against W1-W10 worker rails)
+- Section 6: Batch Restart (know restart procedure if extraction fails mid-pipeline)
+- Section 10: Known Limitations (understand split-strategy edge cases)
+
+Approximate load: 5,100 tokens.
+
+**Refiner Agent** — Read these sections:
+- Section 2: Recovery Flows (recovery after refinement formatting failures)
+- Section 5: Rails Violations (formatting rails R4, R5, worker rails W2, W5, W7, W8)
+- Section 10: Known Limitations (formatting edge cases)
+
+Approximate load: 2,400 tokens.
+
+**Auditor Agent** — Read these sections:
+- Section 1: Failure Modes (detect all failure types)
+- Section 2: Recovery Flows (classify severity, recommend recovery)
+- Section 3: Audit Detection (run detection methods)
+- Section 4: Auto-Fixes (apply AF1-AF7 safely)
+- Section 5: Rails Violations (check all 18 rails)
+- Section 6: Batch Restart (make restart decisions based on coverage)
+- Section 9: Quality Gates (enforce trust score thresholds)
+- Appendix C: Trust Score (calculate and interpret scores)
+
+Approximate load: 5,700 tokens.
+
+**Continuator Agent** — Read these sections:
+- Section 6: Batch Restart (find last good batch, resume pipeline)
+- Section 7: Git Recovery (recover lost commits)
+- Section 8: Complete State Machine (understand full pipeline state)
+
+Approximate load: 3,600 tokens.
+
+---
+
+## 1. FAILURE MODES — Complete Taxonomy
+
+```mermaid
+flowchart TD
+    STAR
+
+═══════════════════════════════════════
+GAPS TO FIX (from maturity audit):
+═══════════════════════════════════════
+- No version history - the document has evolved (worker rails expanded from 8 to 10, trust score added) but there's no record of when or why
+- No meta-instructions for self-rewriting - when a new failure mode is discovered in production, there's no guidance on where to insert it in the taxonomy or how to update the decision trees
+- No known limitations with workarounds section - for example: (a) the split strategy assumes a 4-page worker and splits to 2+2, but doesn't address what to do for an already-split 2-page worker that still truncates; (b) the audit auto-fix queue (AF1-AF7) is hardcoded to 7 specific fixes with no extension mechanism when a new auto-fixable pattern is discovered
+- No measurable quality gates - the trust score is calculated but there's no gate that says "trust < 0.80 blocks pipeline continuation" - the scoring and the decision are in separate sections
+- No agentic-load specifications - this is a large document (31KB, 689 lines) and there's no guidance on which sections the Extractor vs. Refiner vs. Auditor needs to load
+
+═══════════════════════════════════════
+SUGGESTED IMPROVEMENTS:
+═══════════════════════════════════════
+- A version history table documenting when each failure mode was discovered and added (e.g., "shell quoting errors - discovered Batch 4, documented 2025-07-14")
+- A "How to Extend This Document" meta-section: template for adding a new failure mode (where in the taxonomy, which decision tree to update, which severity class, which recovery commands to add)
+- A "Quality Gates" section linking the trust score thresholds (1.00/0.80/0.50) to explicit pipeline continuation rules: "trust < 0.50 → HALT pipeline, full audit required; 0.50-0.79 → PAUSE, fix before next stage; 0.80-0.99 → CONTINUE with logged warnings; 1.00 → PROCEED"
+- A "Known Limitations & Workarounds" section covering: (a) single-page workers that still truncate (fallback: manual extraction), (b) auto-fix queue is closed-set (workaround: add new patterns to the auditor SKILL.md), (c) git recovery assumes reflog is intact (workaround: filesystem-based re-commit), (d) notify_on_complete unreliability under high load (workaround: timeout-based polling fallback)
+- Agentic-load specifications: total token count, per-section token counts, recommended subsets for each agent role
+
+═══════════════════════════════════════
+INSTRUCTIONS:
+═══════════════════════════════════════
+1. Apply ALL suggested improvements to the target file.
+2. PRESERVE all existing content — only ADD missing sections.
+3. Do NOT delete or rewrite existing text.
+4. Use STE-Code approved vocabulary and active voice.
+5. Output the COMPLETE improved file as markdown.
+
+Do NOT create files. Output the improved file content to stdout only.
