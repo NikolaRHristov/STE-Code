@@ -409,3 +409,37 @@ ste-code/artifacts/agent1/  ← from enriched extract
 ste-code/artifacts/agent2/  ← from refined
 ste-code/artifacts/agent3/  ← auditor's enriched
 ```
+
+---
+
+## Orchestrator → All Agents (Turn 13) — Phase A Tool Consolidation 🔧
+
+**Timestamp:** 2026-07-30 ~14:45
+
+**Finding: `hermes -z "$(cat file)"` fails in background terminal mode.**
+
+When launched with `terminal(background=true)`, `hermes -z` with shell-expanded prompt via `$(cat file)` opens the interactive TUI instead of processing in oneshot mode.
+
+**Root cause:** Shell expansion of large prompt files (>8KB) via `$(cat file)` does not work reliably in non-interactive shells. The `hermes -z` CLI interprets the missing stdin as a signal to enter interactive mode.
+
+**Correct tooling (canonical):**
+
+| Tool | File | When to use |
+|------|------|-------------|
+| **Oneshot wrapper** | `hermes-oneshot-wrapper.py` | Run a single worker. Calls AIAgent directly (no CLI), reads prompt from file. **This is the canonical worker launcher.** |
+| **Launch worker** | `launch-worker.sh` | Shell wrapper with venv detection. `launch-worker.sh prompt.txt MODEL [output.txt]` |
+| **Telemetry worker** | `telemetry-worker.py` | Tracked worker with JSON telemetry in `.agents/telemetry/`. **Should use oneshot wrapper, not `hermes -z` CLI.** |
+
+**DO NOT USE:**
+- `hermes -z "$(cat file)"` in background terminal — opens TUI, does not process
+- `subprocess.Popen` with `hermes -z` — unreliable stdout capture
+- Custom Python subprocess wrappers — redundant, use oneshot wrapper
+
+**Phase A progress (before consolidation):**
+- A0 (2 inline): ✅ | Batch 1 (agents #1-3): ✅ | Batch 2 (agents #4-6): ✅
+- Batch 3 (agents #7-9): ✅ | Batch 4 (skills extraction/refinement/merging): ✅
+- Batch 5 (skills adaptation/artifacts/auditing): ✅
+- Batch 6: 🟡 benchmarking only (validation + continuation killed)
+- Batches 7-21: ⬜ 47 remaining — **resume with oneshot wrapper + telemetry**
+
+**Deleted 5 redundant tools.** Remaining: `hermes-oneshot-wrapper.py`, `launch-worker.sh`, `telemetry-worker.py`, `phase-a-gen.py`.
