@@ -41,7 +41,7 @@ Extraction → Refinement → Merge → Adaptation → Artifacts
 | 6 | STE-Code Analysis | Paradigm-agnostic (OOP/FP/procedural/systems). Produces STE-Code compliant docs + self-audit |
 | 7 | Level Worker | Parameterized worker. Receives level (1-5) + action (test/rewrite/benchmark), loads rules at that depth |
 | 8 | Extension Worker | Generates code-domain gap fillers using batched poll workers. Dictionary entries, category examples, anti-patterns, domain extensions |
-| 9 | Translation Orchestrator | Multi-locale translation pipeline for STE-Code docs. Placeholders only for now — sub-worker polled |
+| 9 | Translation Orchestrator | Discovery-based locale scaffolding. Blank placeholders for all translatable content across 9 locales |
 
 ## Adaptation Levels
 

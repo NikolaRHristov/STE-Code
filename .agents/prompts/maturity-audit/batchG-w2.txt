@@ -1,0 +1,10 @@
+Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
+
+1. ste-code/v2/core/rules/rule-1.1.md
+2. ste-code/v2/core/rules/rule-1.11.md
+3. ste-code/v2/core/rules/rule-1.12.md
+4. ste-code/v2/core/rules/README.md
+5. ste-code/v2/data/vocabulary/README.md
+6. ste-code/v2/README.md
+
+For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchG-w2.md. Output ONLY the assessment file.
