@@ -3,6 +3,7 @@ id: ste-code-developer
 version: 2.0.0
 tokens: ~2000
 use-when: extending the standard, adding domain support, building tooling
+source: Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe, Brussels. © ASD, 2025. STE is EU Trade Mark 017966390. Independent adaptation not endorsed by ASD. asd-ste100.org
 ---
 
 # STE-Code Developer Guide

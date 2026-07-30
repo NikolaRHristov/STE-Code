@@ -3,6 +3,7 @@ id: ste-code-micro
 version: 2.0.0
 tokens: ~500
 use-when: context-window < 4096 tokens
+source: Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe, Brussels. © ASD, 2025. STE is EU Trade Mark 017966390. Independent adaptation not endorsed by ASD. asd-ste100.org
 ---
 
 # STE-Code Micro — Minimal System Prompt v2.0

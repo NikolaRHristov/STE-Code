@@ -3,6 +3,7 @@ id: ste-code-agentic
 version: 1.0.0
 tokens: ~800
 use-when: pipeline agent context
+source: Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe, Brussels. © ASD, 2025. STE is EU Trade Mark 017966390. Independent adaptation not endorsed by ASD. asd-ste100.org
 ---
 
 # STE-Code Agentic — Agent Behavioral Layer
