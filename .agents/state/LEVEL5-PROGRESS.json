@@ -35,7 +35,18 @@
     "a-sec5-rule5.5",
     "a-sec6-rule6.1",
     "a-sec6-rule6.2",
-    "a-sec6-rule6.3"
+    "a-sec6-rule6.3",
+    "a-sec6-rule6.4",
+    "a-sec6-rule6.5",
+    "a-sec7-rule7.1",
+    "a-sec7-rule7.2",
+    "a-sec7-rule7.3",
+    "a-sec8-rule8.1",
+    "a-sec8-rule8.2",
+    "a-sec8-rule8.3",
+    "a-sec8-rule8.4",
+    "a-sec8-rule8.5",
+    "a-sec8-rule8.6"
   ],
   "batches_done": [
     "sec1-1",
@@ -51,7 +62,11 @@
     "sec4-2",
     "sec5-1",
     "sec5-2",
-    "sec6-1"
+    "sec6-1",
+    "sec6-2",
+    "sec7-1",
+    "sec8-1",
+    "sec8-2"
   ],
-  "updated": "2026-07-30T16:48:02.461788+00:00"
+  "updated": "2026-07-30T16:55:17.804254+00:00"
 }
