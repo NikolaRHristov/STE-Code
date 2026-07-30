@@ -475,3 +475,205 @@ flowchart LR
     class SR state
     class PR progress
 ```
+
+---
+
+## 7. VERSION HISTORY
+
+| Date | Section | Change | Author |
+|------|---------|--------|--------|
+| 2026-07-29 | All | Initial document created. Sections 1-6 written. | Agent #1, #3 |
+| 2026-07-29 | 1. Agent Roles | Handoff chain diagram added with all 5 stages and gates. | Agent #1 |
+| 2026-07-29 | 2. Feedback Protocol | Exchange file turn protocol added with real exchange turns embedded. | Agent #3 |
+| 2026-07-29 | 3. State Reporting | State report skill diagram and filled example added. | Agent #1 |
+| 2026-07-29 | 4. Handoff Triggers | Stage transition signal diagram and trigger summary table added. | Agent #2 |
+| 2026-07-29 | 5. Error Escalation | Auditor detection flowchart, protocol table, and trust scores added. | Agent #3 |
+| 2026-07-29 | 6. Parallel Operation | Concurrency matrix and parallelism rules added. | Agent #3 |
+| 2026-07-30 | — | Complete communication map added (summary diagram). | Agent #2 |
+| 2026-07-30 | 7. Version History | This section added to satisfy maturity audit. | Agent #3 |
+| 2026-07-30 | 8. Known Limitations | Known limitations documented per maturity audit. | Agent #3 |
+| 2026-07-30 | 9. Meta-Instructions | Self-rewriting rules added per maturity audit. | Agent #3 |
+| 2026-07-30 | 10. Quality Gates | Document quality gates added per maturity audit. | Agent #3 |
+| 2026-07-30 | 11. Agentic-Load | Agentic-load specifications added per maturity audit. | Agent #3 |
+
+---
+
+## 8. KNOWN LIMITATIONS
+
+### L1 — Exchange File APPEND Races
+
+The `exchange.md` file has no append-locking mechanism.
+Two agents that write to `exchange.md` at the same time can interleave their turns.
+This causes the exchange file to become unreadable.
+The current workaround: only one agent writes at a time.
+A file-level lock (for example, `flock` or a `.lock` file) is not yet in use.
+
+### L2 — Audit Report Storage Growth
+
+Audit reports in `.agents/audit/audit-*.md` grow without bound.
+There is no automatic cleanup or archiving of old audit reports.
+Long-running pipelines produce many audit reports.
+The current workaround: manual deletion of old reports when disk space is low.
+A rotation or archival policy is not yet defined.
+
+### L3 — Agent #3 Single Point of Failure
+
+The auditor (Agent #3) checks all claims against disk evidence.
+No backup auditor exists.
+If the auditor is not available, fabrication or tracker desync can go undetected.
+The current workaround: the user acts as a backup auditor.
+
+### L4 — No Concurrency Lock for Progress Files
+
+`PROGRESS.md` and `REFINE-PROGRESS.md` have no write lock.
+The auditor and an orchestrator can write to the same progress file at the same time.
+This can cause data loss or corruption.
+The current workaround: agents are run one at a time in sequence.
+
+### L5 — Exchange File Not Machine-Parseable
+
+The `exchange.md` file uses free-form markdown turns.
+There is no structured format (JSON, YAML, or strict schema) for turns.
+Automated tools cannot reliably parse exchange turns.
+The current workaround: human review of all exchange turns.
+
+---
+
+## 9. META-INSTRUCTIONS — Self-Rewriting Rules
+
+NOTE: These rules tell an agent how to update this document safely.
+
+### When to Add a New Section
+
+Add a new section when:
+- A new agent joins the pipeline.
+- A new communication channel is introduced.
+- A new protocol or handoff pattern is established.
+- The existing sections do not cover a documented behavior.
+- The maturity audit identifies a structural gap.
+
+### How to Add a New Section
+
+1. Read the full current document before you make changes.
+2. Add the new section after the last existing section.
+3. Use the same heading level (`## N. TITLE — Short Description`).
+4. Include at least one Mermaid diagram per section.
+5. Include a summary table below each diagram.
+6. Update Section 7 (Version History) with the new entry.
+7. Update Section 11 (Agentic-Load) with new token counts.
+8. Check that all references in the new section resolve to real files.
+9. Run the quality gates in Section 10 after the edit.
+
+### How to Update Concurrency Rules When a New Agent Joins
+
+1. Add the new agent to the Concurrency Matrix table in Section 6.
+2. Add a new row and a new column with the agent name.
+3. Mark each cell: `✅` (can overlap) or `❌` (cannot overlap).
+4. Add a new parallelism rule for the agent.
+5. Update the concurrency timeline diagram.
+6. Update Section 7 (Version History).
+
+### Template for New Exchange Turn Examples
+
+When you add a new exchange turn example to Section 2:
+
+```
+A->>EX: Turn N: [AGENT ROLE] — [BRIEF SUMMARY]<br/>[Key fact 1], [key fact 2],<br/>[key fact 3]
+```
+
+Rules for turn examples:
+- Use real data from actual `exchange.md` turns.
+- Do not fabricate turn content.
+- Keep each turn to 3 lines maximum.
+- Include a unique turn number.
+- The summary tag must describe the action or finding.
+
+### General Self-Rewriting Rules
+
+- Do not delete existing sections without approval.
+- Do not rewrite diagrams from memory; check the actual pipeline state first.
+- Keep the STE-Code approved vocabulary in all prose.
+- Use imperative mood for all procedural steps.
+- Each procedural sentence must not exceed 20 words.
+- Each descriptive sentence must not exceed 25 words.
+
+---
+
+## 10. QUALITY GATES — Document Validation
+
+NOTE: These gates apply to this document. Run them after every edit.
+
+| Gate | Rule | Check Method |
+|------|------|-------------|
+| QG1 | Every communication path must appear in at least one diagram. | Count paths in tables, verify each has a matching Mermaid arrow. |
+| QG2 | Every diagram must have a matching summary table. | Count `sequenceDiagram`/`flowchart` blocks, verify equal number of tables. |
+| QG3 | Every file reference must resolve to an actual file on disk. | For each `.md` path in the document, run `ls <path>` and confirm it exists. |
+| QG4 | Every agent pairing must have an entry in the Concurrency Matrix. | For N agents, the matrix must be N×N with no empty cells. |
+| QG5 | Every section heading must appear in the Version History table. | Count `## N.` headings, verify equal count of version entries. |
+| QG6 | No fabricated exchange turns. Every turn example must match a real turn in `exchange.md`. | Diff turn examples against the source file. |
+| QG7 | All Mermaid diagrams must have a render check. | Open each diagram in a Mermaid viewer or use `mmdc` to validate syntax. |
+| QG8 | The document must pass a spell check with STE-Code dictionary. | Use `aspell` or equivalent with the STE-Code approved word list. |
+
+### Quality Gate Runbook
+
+1. Run QG3 first: `for f in $(grep -oP '\.agents/[^\s)\]]+' agent-communication.md | sort -u); do ls "$f" > /dev/null 2>&1 || echo "MISSING: $f"; done`
+2. Run QG4: count agents in Section 1, verify the matrix in Section 6 is N×N.
+3. Run QG1-QG2: manual inspection of diagram-to-table pairing.
+4. Run QG6: `grep 'Turn [0-9]' agent-communication.md` and compare with `exchange.md`.
+5. Run QG5: compare `grep '^## [0-9]'` count with Version History entries.
+6. If any gate fails, fix the issue before considering the edit complete.
+
+---
+
+## 11. AGENTIC-LOAD SPECIFICATIONS
+
+NOTE: Agentic load is the cognitive and token cost of loading this document for an agent.
+
+### Token Count Breakdown
+
+| Section | Title | Approx. Tokens | Priority | Primary Audience |
+|---------|-------|---------------|----------|-----------------|
+| 4 | Handoff Triggers | 450 | P1 — Highest | All orchestrators |
+| 2 | Feedback Protocol | 520 | P1 — Highest | Reviewer, all agents |
+| 1 | Agent Roles | 680 | P2 — High | New agents, onboarding |
+| 6 | Parallel Operation | 480 | P2 — High | Orchestrators launching workers |
+| 5 | Error Escalation | 620 | P2 — High | Auditor, all agents on error |
+| 3 | State Reporting | 540 | P3 — Medium | Agents responding to "status" |
+| 10 | Quality Gates | 320 | P3 — Medium | Agents editing this document |
+| 9 | Meta-Instructions | 380 | P3 — Medium | Agents editing this document |
+| 8 | Known Limitations | 340 | P4 — Low | Reviewer, pipeline designers |
+| 7 | Version History | 240 | P4 — Low | Reviewer, document maintainers |
+| 11 | Agentic-Load | 350 | P4 — Low | Pipeline designers, optimizers |
+| — | Communication Map (summary) | 400 | P5 — Lowest | Overview reference |
+| **Total** | **All sections** | **~5,320** | — | All agents (full document) |
+
+### Load Priority Guide
+
+**For orchestrators (Agents #1, #2, #4):**
+Load Section 4 (Handoff Triggers) first.
+This section tells you when to start and stop your work.
+Then load Section 2 (Feedback Protocol) to learn how to signal completion.
+Skip Sections 8-11 unless you need to edit this document.
+
+**For the auditor (Agent #3):**
+Load Section 5 (Error Escalation) first.
+This section defines your detection and response duties.
+Then load Section 2 (Feedback Protocol) for communication rules.
+Then load Section 6 (Parallel Operation) for safe concurrency rules.
+
+**For the reviewer (user):**
+Load Section 2 (Feedback Protocol) first.
+This section tells you how to read and write exchange turns.
+Then load Section 4 (Handoff Triggers) to understand stage transitions.
+Then load Section 8 (Known Limitations) to understand pipeline risks.
+
+### Stale-Check Frequency
+
+Check this document for staleness:
+- After every pipeline run (all 5 stages complete).
+- Before starting a new extraction pipeline.
+- After any agent role definition changes.
+- When a new agent joins the pipeline.
+- When the maturity audit identifies a documentation gap.
+
+If this document was last updated more than 7 days ago and the pipeline has run since, mark it as potentially stale and run the quality gates (Section 10).

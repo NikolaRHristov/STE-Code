@@ -5,6 +5,87 @@
 
 ---
 
+## Version History
+
+| Version | Date | Change | Source |
+|---------|------|--------|--------|
+| 1.0 | 2025-07-10 | Add failure taxonomy: TIMEOUT, CORRUPTION, TRUNCATION, FABRICATION | Extraction Batch 1 |
+| 1.1 | 2025-07-14 | Add shell quoting errors detail (Section 1a) | Extraction Batch 4 |
+| 1.2 | 2025-07-16 | Add model normalization failure (Section 1b) | Extraction Batch 7 |
+| 1.3 | 2025-07-18 | Add batch-level recovery decision tree (Section 2a) | Extraction Batch 12 |
+| 1.4 | 2025-07-20 | Add split strategy for truncated workers (Section 2b) | Extraction Batch 18 |
+| 1.5 | 2025-07-22 | Add audit detection methods matrix (Section 3b) | Audit development |
+| 1.6 | 2025-07-24 | Add auto-fix queue AF1-AF7 (Section 4) | Audit v2 |
+| 1.7 | 2025-07-25 | Expand Worker Rails from 8 to 10 (Section 5b) | Refinement phase |
+| 1.8 | 2025-07-26 | Add batch restart state machine (Section 6) | Mid-pipeline failure |
+| 1.9 | 2025-07-27 | Add git recovery flows (Section 7) | Commit failure |
+| 2.0 | 2025-07-28 | Add trust score calculation (Appendix C) | Audit v3 |
+| 2.1 | 2025-07-29 | Add quality gates, known limitations, extension guide, agentic-load specifications (Sections 9-11) | Maturity audit |
+
+---
+
+## Agentic-Load Specifications
+
+This document has 31 KB across 689 lines. The approximate token count is 8,500 tokens.
+
+NOTE: Not every agent must read the full document. Each agent reads only the sections it needs.
+
+### Per-Section Sizes
+
+| Section | Approx Lines | Approx Tokens |
+|---------|-------------|---------------|
+| 1. Failure Modes (with 1a, 1b) | 79 | 1,100 |
+| 2. Recovery Flows (with 2a, 2b) | 65 | 900 |
+| 3. Audit Detection (with 3a, 3b) | 62 | 900 |
+| 4. Auto-Fixes vs Agent Intervention | 41 | 600 |
+| 5. Rails Violations (with 5b) | 83 | 1,100 |
+| 6. Batch Restart (with 6a, 6b) | 121 | 1,600 |
+| 7. Git Recovery (with 7a, 7b) | 91 | 1,300 |
+| 8. Complete State Machine | 58 | 700 |
+| 9. Quality Gates | 35 | 300 |
+| 10. Known Limitations & Workarounds | 55 | 500 |
+| 11. How to Extend This Document | 75 | 600 |
+| Appendix A-C | 65 | 600 |
+
+### Recommended Subsets Per Agent Role
+
+**Extractor Agent** — Read these sections:
+- Section 1: Failure Modes (understand what can go wrong during extraction)
+- Section 2: Recovery Flows (know how to respond to truncation and timeouts)
+- Section 5: Rails Violations (self-validate against W1-W10 worker rails)
+- Section 6: Batch Restart (know restart procedure if extraction fails mid-pipeline)
+- Section 10: Known Limitations (understand split-strategy edge cases)
+
+Approximate load: 5,100 tokens.
+
+**Refiner Agent** — Read these sections:
+- Section 2: Recovery Flows (recovery after refinement formatting failures)
+- Section 5: Rails Violations (formatting rails R4, R5, worker rails W2, W5, W7, W8)
+- Section 10: Known Limitations (formatting edge cases)
+
+Approximate load: 2,400 tokens.
+
+**Auditor Agent** — Read these sections:
+- Section 1: Failure Modes (detect all failure types)
+- Section 2: Recovery Flows (classify severity, recommend recovery)
+- Section 3: Audit Detection (run detection methods)
+- Section 4: Auto-Fixes (apply AF1-AF7 safely)
+- Section 5: Rails Violations (check all 18 rails)
+- Section 6: Batch Restart (make restart decisions based on coverage)
+- Section 9: Quality Gates (enforce trust score thresholds)
+- Appendix C: Trust Score (calculate and interpret scores)
+
+Approximate load: 5,700 tokens.
+
+**Continuator Agent** — Read these sections:
+- Section 6: Batch Restart (find last good batch, resume pipeline)
+- Section 7: Git Recovery (recover lost commits)
+- Section 8: Complete State Machine (understand full pipeline state)
+
+Approximate load: 3,600 tokens.
+
+---
+
 ## 1. FAILURE MODES — Complete Taxonomy
 
 ```mermaid
@@ -191,7 +272,7 @@ flowchart LR
         M1["FILE COUNTS<br/>ls extracted/w*-p*.md | wc -l<br/>Expect: 109 files<br/>Actual vs expected gap"]
         M2["SIZE CHECKS<br/>for f in extracted/w*-p*.md<br/>  lines=$(wc -l < $f)<br/>  [ $lines -lt 30 ] → SUSPICIOUS<br/>  [ $lines -lt 80 ] → LIGHT"]
         M3["GAP DETECTION<br/>for pg in $(seq 1 434)<br/>  grep -rq page-$pg extracted/<br/>  missing pages accumulate"]
-        M4["FABRICATION SWEEP<br/>grep -rl 'React\|Docker\|npm' extracted/<br/>grep -rl 'This page describes' extracted/<br/>grep -L 'ASD-STE100' extracted/"]
+        M4["FABRICATION SWEEP<br/>grep -rl 'React\\|Docker\\|npm' extracted/<br/>grep -rl 'This page describes' extracted/<br/>grep -L 'ASD-STE100' extracted/"]
         M5["TIMESTAMP AUDIT<br/>PROGRESS.md mod time<br/>vs extracted/ file mod times<br/>→ claim after file = retroactive"]
         M6["DUPLICATE CHECK<br/>diff w001-p1-4.md w042-p165-168.md<br/>→ identical output = fabrication"]
     end
@@ -619,6 +700,137 @@ stateDiagram-v2
     PushOK --> Idle: Ready for Batch N+1
     CommitOK --> Idle: Ready for Batch N+1 (local only)
 ```
+
+---
+
+## 9. Quality Gates — Trust Score Thresholds & Pipeline Rules
+
+The trust score from Appendix C controls pipeline continuation. Each threshold maps to a specific gate action.
+
+```mermaid
+flowchart TD
+    SCORE["Auditor calculates<br/>trust = verified / total"] --> GATE{"Trust Score"}
+
+    GATE -->|"1.00"| PROCEED["PROCEED<br/>All claims verified.<br/>Continue to next stage."]
+    GATE -->|"0.80 - 0.99"| CONTINUE["CONTINUE WITH WARNINGS<br/>Auditor logs the gaps.<br/>Pipeline continues to next stage.<br/>Fix gaps in parallel if possible."]
+    GATE -->|"0.50 - 0.79"| PAUSE["PAUSE PIPELINE<br/>Do not start next stage.<br/>Fix all ERROR and CRITICAL gaps.<br/>Re-audit after fixes applied."]
+    GATE -->|"< 0.50"| HALT["HALT PIPELINE<br/>Stop all active workers.<br/>Run full audit with fix mode.<br/>Re-extract missing or fabricated files.<br/>Do not continue until trust ≥ 0.80."]
+
+    PROCEED --> NEXT["Next pipeline stage"]
+    CONTINUE --> NEXT
+    PAUSE --> FIX["Fix loop: audit → fix → re-audit"]
+    FIX --> SCORE
+    HALT --> FULL["Full audit + fix + re-extract"]
+    FULL --> SCORE
+
+    style PROCEED fill:#51cf66,stroke:#2b8a3e,color:#000
+    style CONTINUE fill:#ffd43b,stroke:#fab005,color:#000
+    style PAUSE fill:#ffa94d,stroke:#d9480f,color:#000
+    style HALT fill:#ff6b6b,stroke:#c92a2a,color:#000
+```
+
+### Gate Rules Summary
+
+| Trust Score | Gate Action | Pipeline Effect | Required Fixes |
+|-------------|-------------|-----------------|----------------|
+| 1.00 | PROCEED | Continue to next stage with no restrictions | None |
+| 0.80 - 0.99 | CONTINUE | Continue to next stage. Log all gaps. | Fix gaps in parallel if resources permit |
+| 0.50 - 0.79 | PAUSE | Stop pipeline before next stage | Fix all ERROR and CRITICAL gaps. Re-audit. |
+| < 0.50 | HALT | Stop all workers immediately | Full audit with fix mode. Re-extract missing files. |
+
+NOTE: The Auditor enforces these gates automatically during each audit run. The pipeline does not advance past a PAUSE or HALT gate until a re-audit confirms the trust score meets the threshold.
+
+---
+
+## 10. Known Limitations & Workarounds
+
+### 10a. Single-Page Worker Truncation
+
+**Limitation**: The split strategy (Section 2b) assumes a 4-page worker. It splits 4 pages into 2+2. The strategy does not address a 2-page worker that still truncates after a split.
+
+**Workaround**: If a 2-page worker truncates, use a manual extraction. Use one agent to read a single page and write the output. Do not use the parallel worker pipeline for single-page extractions. Mark the page as manually extracted in PROGRESS.md with a note.
+
+### 10b. Closed-Set Auto-Fix Queue
+
+**Limitation**: The auto-fix queue (Section 4, AF1-AF7) is hardcoded to 7 specific fixes. The queue has no mechanism to add an 8th auto-fix pattern at runtime.
+
+**Workaround**: Add new auto-fixable patterns to the execution-auditor SKILL.md file. Update the auditor skill with the new detection rule and the fix command. The auditor reads its skill file before each run. It uses the latest rules. You do not need to change this document to add a new auto-fix.
+
+### 10c. Git Recovery Assumes Intact Reflog
+
+**Limitation**: The emergency git recovery flow (Section 7b) checks `git reflog` to find lost commits. If the reflog is empty (for example, after `git gc` or in a fresh clone), this method fails.
+
+**Workaround**: If the reflog is empty, fall back to filesystem-based recovery. Check if the extracted/ and refined/ files exist on disk. If they exist, use `git add -A` followed by `git commit` to create new commits. These commits preserve the work. The commit history will differ from the original. The file content will be the same.
+
+### 10d. notify_on_complete Reliability Under Load
+
+**Limitation**: The `notify_on_complete` flag for background workers can fail under high API load. A worker may finish. The notification may not arrive. The orchestrator then waits indefinitely.
+
+**Workaround**: Set a timeout-based polling fallback. After you start a batch of workers, wait for the expected completion time plus a buffer (for example, 120 seconds plus 60 seconds). If no notification arrives in that window, use `process(action='poll')` to check worker status directly. If the worker is done but silent, collect its output manually. If the worker is still running, extend the timeout.
+
+---
+
+## 11. How to Extend This Document
+
+Use this section as a guide when you discover a new failure mode in production. Complete the steps in order.
+
+### Step 1: Classify the New Failure Mode
+
+Find the correct location in the taxonomy.
+
+| Failure Type | Insert Location | Example |
+|-------------|-----------------|---------|
+| Worker dispatch failure | Section 1 — add a new node to the DISPATCH decision tree | Shell quoting error |
+| Runtime output failure | Section 1 — add a new branch under CHECK or SIZE | Model misroute |
+| Recovery strategy | Section 2 — add a new recovery branch in the batch decision tree | New split variant |
+| Audit detection method | Section 3b — add a new detection method node | New fabrication pattern |
+| Auto-fix pattern | Section 4 — add a new AF node in the auto-fix queue | New text replacement |
+| Rail violation | Section 5 or 5b — add a new rail or worker rail | New formatting check |
+| System-level failure | Section 8 — add a new state to the state machine | New pipeline deadlock |
+
+### Step 2: Assign a Severity Class
+
+| Severity | When to Use | Color in Mermaid |
+|----------|------------|------------------|
+| 🔴 CRITICAL | Data loss, false claims, fabrication, file corruption | `fill:#ff6b6b,stroke:#c92a2a,color:#000` |
+| 🟠 ERROR | Wrong format, wrong page range, naming errors | `fill:#ffa94d,stroke:#d9480f,color:#000` |
+| 🟡 WARNING | Tracking gaps, timing issues, minor inconsistencies | `fill:#ffd43b,stroke:#fab005,color:#000` |
+
+### Step 3: Write the Recovery Command
+
+For each new failure mode, write a recovery command. Use this template:
+
+```
+FAILURE: [short name]
+  DETECT: [method to find this failure]
+  FIX: [recovery action]
+```
+
+Add the recovery command to Appendix B if it is a standalone command. Add it to the relevant decision tree in Section 2 if it is part of a batch workflow.
+
+### Step 4: Update the Version History
+
+Add a row to the Version History table with:
+- The date you added the failure mode
+- A short description of the change
+- The source (which batch or event triggered the discovery)
+- The new version number (increment the minor version)
+
+### Step 5: Update Agentic-Load Specifications
+
+If the new section is large (more than 200 words), update the Agentic-Load Specifications table. Add the new section to the per-section sizes table. Update the recommended subsets for each agent role if the new section is relevant to that role.
+
+### Step 6: Check Cross-References
+
+Check if the new failure mode affects these documents:
+
+| Document | When to Update |
+|----------|---------------|
+| `.agents/uml/worker-rails.md` | New worker rail (W11 or higher) |
+| `.agents/uml/rails.md` | New process rail (R9 or higher) |
+| `.agents/skills/SKILL.md` (execution-auditor) | New detection method or auto-fix |
+| `.agents/skills/SKILL.md` (extraction) | New extraction failure mode |
+| `.agents/references/worker-grid.md` | Changes to worker page assignment |
 
 ---
 

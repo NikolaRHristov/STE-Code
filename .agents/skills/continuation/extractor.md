@@ -160,6 +160,15 @@ is a 🔴 CRITICAL discrepancy. After each batch:
 2. Update the progress counter
 3. `git add` and `git commit`
 
+## Next Stage: Refinement
+
+When all 37 batches complete, move to the refinement stage.
+The refinement orchestrator is at `.agents/skills/continuation/refiner.md`.
+It takes the 109 extracted files from `ste-code/extracted/` and reformats
+them into clean, section-aware markdown in `ste-code/refined/`.
+
+Do not start refinement until all extraction batch checks pass.
+
 ## Immutable Facts
 
 - 19 technical noun categories (NOT 22)

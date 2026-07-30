@@ -9,6 +9,16 @@
 
 ---
 
+## Version History
+
+| Version | Sections Added | Trigger |
+|---------|---------------|---------|
+| v1 | Section 1 (Worker Launch Sequence): launch command template, flag table | Initial pipeline design |
+| v2 | Section 2 (Batch Protocol): 3-worker cycles, 6-item quality checklist; Section 4 (Polling Loop): coordinator-side flowchart | Truncation issues found during extraction |
+| v3 | Section 3 (Worker States): state diagram and transition table; Section 5 (Error Recovery): error recovery matrix, Execution Auditor integration | Fabrication detected in worker output; v2 to v3 protocol correction from `agent-communication.md` applied to Polling Loop |
+
+---
+
 ## 1. WORKER LAUNCH SEQUENCE
 
 ```mermaid
@@ -336,6 +346,38 @@ flowchart LR
 
 ---
 
+## 6. KNOWN LIMITATIONS
+
+### Worker Hang Beyond Timeout
+
+If a worker does not exit after the 60s timeout and `notify_on_complete` does not fire, the coordinator blocks indefinitely. The current protocol has no deadman timer. The operator must manually check `process(action='list')` and kill stuck workers.
+
+### Git Commit Failure Mid-Batch
+
+If `git gcommit-hermes` fails (merge conflict, pre-commit hook failure, or authentication error), the batch is in a partial state. PROGRESS.md may show `[x]` but the commit did not land. Recovery: re-run `git gcommit-hermes` after fixing the root cause. If the commit succeeded but PROGRESS.md update failed, update PROGRESS.md manually and continue.
+
+### Filesystem Full During Extraction
+
+If the disk is full, worker output files are truncated or empty. The 6-item checklist catches undersized files but cannot recover without freeing space. The coordinator must stop all batches, free disk space, and re-launch failed workers.
+
+### Overlapping Page Range Conflicts
+
+If two coordinators run at the same time or page range assignments overlap, workers overwrite each other's output files. The output from the second worker replaces the first. This causes silent data loss. Prevent this with a PID lock file in `ste-code/.coordinator-lock`.
+
+### Prompt Directory Deleted Mid-Run
+
+If the `ste-code/prompts/` directory is deleted while workers run, already-launched workers are not affected. New worker launches fail because the prompt file does not exist. Recovery: recreate the directory and regenerate prompt files from the worker grid.
+
+### Notification Signal Loss
+
+If the Hermes runtime crashes between worker exit and `notify_on_complete` delivery, the coordinator never learns the worker finished. The process enters a silent deadlock. The operator must check `process(action='poll')` on all worker sessions and manually advance the batch.
+
+### Maximum Retry Depth Exhausted
+
+If a single-page extraction (after two splits of a 4-page range) still fails, the protocol has no further fallback. The page range is flagged for manual review. The coordinator records the failure in exchange.md and continues with the next batch.
+
+---
+
 ## Summary: End-to-End Worker Lifecycle
 
 ```mermaid
@@ -388,3 +430,104 @@ flowchart TD
 - 109 workers ÷ 3 per batch = **37 batches**
 - ~30–60 seconds per worker → **~20–37 minutes** total extraction time
 - 6 verification checks per batch, 8 error recovery patterns, 10 worker rails
+
+---
+
+## Meta-Instructions for Self-Rewriting
+
+Use these instructions to update this document.
+
+### Add a New Error Class
+
+1. Add the new error class to the Error Recovery flowchart (Section 5). Use the pattern: `CLASSIFY -->|"description"| CODE["RECOVERY NAME"]`.
+2. Add a row to the Error Recovery Matrix. Fill all 5 columns: Error, Detection Signal, Root Cause, Recovery Action, Retry Limit.
+3. Add a recovery path node to the Polling Loop flowchart (Section 4). Connect the new error to the SPLIT node.
+4. If the new error class introduces a new verification check, add it to the Per-Batch Quality Checklist (Section 2).
+5. Run Quality Gate G2: verify the error class count in the flowchart equals the matrix row count.
+
+### Update Retry Limits
+
+1. Find the error class row in the Error Recovery Matrix.
+2. Change the Retry Limit value.
+3. Update the ESCALATE path description in the Error Recovery flowchart if the limit changes the fallback behavior.
+4. Run Quality Gate G3: verify the row has all 5 columns filled.
+
+### Add a New Verification Check
+
+1. Add a numbered row to the Per-Batch Quality Checklist (Section 2). Use the next available number.
+2. Add a check node to the Batch Protocol flowchart (Section 2). Use the pattern: `V{N}{"Description"}`.
+3. Add a check state to the verifying substate in the Worker States diagram (Section 3). Use the pattern: `check_new --> [*]` for the pass path.
+4. Add a check branch to the Polling Loop flowchart (Section 4). Use the pattern: `CHK{N}{"Description"}`.
+5. Update the state transition table: add rows for the new check pass and fail transitions.
+6. Run Quality Gate G5: verify the checklist item count equals the V-node count in the flowchart.
+
+### Remove a Deprecated Error Class
+
+1. Remove the error class branch from the Error Recovery flowchart.
+2. Remove the row from the Error Recovery Matrix.
+3. Remove the recovery path node from the Polling Loop flowchart.
+4. Run Quality Gates G2 and G3.
+
+### General Rules
+
+- Use the STE-Code synonym table for all procedural text.
+- Use American English spelling.
+- Keep each procedural sentence at 20 words or fewer.
+- Keep each descriptive sentence at 25 words or fewer.
+- Do not use contractions.
+- Do not use "-ing" forms as main verbs in procedures.
+
+---
+
+## Measurable Quality Gates
+
+This document must pass these quality gates after each update.
+
+| Gate | Rule | Check Method |
+|------|------|-------------|
+| G1 | State diagram node count (Section 3) must equal transition table row count | Count states in the `stateDiagram-v2` block. Count rows in the transition table. The two counts must be equal. |
+| G2 | Every error class in the Error Recovery flowchart must have a matching row in the Error Recovery Matrix | Count `CLASSIFY -->|` branches in the flowchart. Count rows in the matrix. The two counts must be equal. |
+| G3 | Every error class row must have all 5 columns: Detection Signal, Root Cause, Recovery Action, Retry Limit | Scan matrix rows. Flag rows with empty cells. No row may have missing columns. |
+| G4 | Every diagram section must have a corresponding table or list summary | Verify each ` ```mermaid ` block is followed by a table or bullet list within 20 lines. Flag sections that have no summary. |
+| G5 | Checklist item count (Section 2) must equal verification check nodes in the Batch Protocol flowchart | Count checklist rows. Count V-nodes in the flowchart. The two counts must be equal. |
+| G6 | No unapproved words outside of code nouns | Run `ste-code/check-rails.py` on this document. The script must report 0 violations. |
+
+---
+
+## Agentic-Load Specifications
+
+Processors that load this document can use this load map to optimize token use.
+
+### Critical Sections (load first, ~150 lines)
+
+| Section | Lines (approx.) | Value | Use |
+|---------|-----------------|-------|-----|
+| 3. Worker States | 65 | Highest value for understanding | The state diagram and transition table are the authoritative reference for all worker behavior. Load this first. |
+| 4. Polling Loop | 70 | Highest value for execution | The coordinator-side flowchart is the step-by-step protocol for running batches. Load this when operating the pipeline. |
+
+### Reference Sections (load on demand, ~180 lines)
+
+| Section | Lines (approx.) | Value | Use |
+|---------|-----------------|-------|-----|
+| 1. Worker Launch Sequence | 40 | Reference | The exact launch command and flag meanings. Load only when you debug launch failures. |
+| 2. Batch Protocol | 50 | Reference | The 3-worker cycle and 6-item checklist. Load when you design new batch workflows. |
+| 5. Error Recovery | 90 | Reference only | The matrix tells you which recovery action to take. Load only when a worker fails. |
+
+### Metadata Sections (load for auditing, ~120 lines)
+
+| Section | Lines (approx.) | Value | Use |
+|---------|-----------------|-------|-----|
+| Version History | 10 | Audit trail | Shows which sections were revised and when. Load before auditing document changes. |
+| Known Limitations | 30 | Operational awareness | Required reading before running the pipeline at scale. Load once before batch operations. |
+| Meta-Instructions | 40 | Contributor guidance | Required for contributors who modify this document. Load before editing. |
+| Quality Gates | 20 | Compliance check | Run after each document update. Load after editing. |
+
+### Summary Section (~50 lines)
+
+| Section | Lines (approx.) | Value | Use |
+|---------|-----------------|-------|-----|
+| End-to-End Summary | 50 | Quick recall | A compressed version of the full lifecycle. Good for quick recall. Not sufficient for execution. |
+
+### Load Strategy
+
+For first-time understanding, load in this order: Section 3, Section 4, End-to-End Summary, Known Limitations. Total: ~215 lines. For execution, load Section 4 and Known Limitations. Total: ~100 lines. For debugging a failed worker, load Section 5 and Version History. Total: ~100 lines.

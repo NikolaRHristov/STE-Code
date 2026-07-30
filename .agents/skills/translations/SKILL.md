@@ -213,6 +213,50 @@ In priority order:
 5. No false positives: skips are justified with reasons
 6. No false negatives: all readable prose/markdown files are included
 
+## Catalog Schema
+
+File: `translations/catalog.md`
+
+The catalog is an auto-generated inventory of all discovered files. Workers and the orchestrator update it after each batch. It tracks what was found, where it came from, and which skip reasons apply.
+
+### Schema Definition
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `last_discovery` | datetime | Timestamp of the most recent discovery scan. Format: `YYYY-MM-DD HH:MM`. |
+| `locales` | list | All active target locales. Format: comma-separated BCP-47 tags. Example: `zh-CN, ja, ko, es, fr, de, pt-BR, ru, ar`. |
+| `total_placeholders` | integer | Total placeholder files on disk. Formula: `translatable_files × locale_count`. |
+| `sections` | map | One section per source directory. Key is the source path. Value is a list of discovered files. |
+| `discovered_file` | object | A single translatable file entry with fields: `path` (source-relative), `type` (file extension), `reason` (why translatable). |
+| `skipped` | list | Files that were examined but skipped. Each entry has `path` and `reason`. |
+
+### Catalog Template
+
+```markdown
+# Translation Catalog — Auto-Generated
+
+> Last discovery: YYYY-MM-DD HH:MM
+> Locales: zh-CN, ja, ko, es, fr, de, pt-BR, ru, ar (9 total)
+> Total placeholders: N files × 9 locales = 9N placeholder files
+
+## Discovered Files
+
+### <source-directory> (N translatable)
+- <filename> — <reason translatable>
+- <filename> — <reason translatable>
+
+### <source-directory> (N translatable)
+- <filename> — <reason translatable>
+
+## Skipped Files
+
+### <source-directory> (N skipped)
+- <filename> — <reason skipped>
+- <filename> — <reason skipped>
+```
+
+NOTE: The catalog is a living document. Re-scans add new sections without overwriting old ones. A skipped file that moves to translatable in a later scan gets a new entry — do not delete the old skip entry.
+
 ## Progress Tracking
 
 File: `.agents/state/TRANSLATIONS-PROGRESS.md`
@@ -237,6 +281,57 @@ After any enrichment session adds files, re-run discovery on the affected target
 - Previously discovered files (skip — already have placeholders)
 
 The catalog prevents duplicate work. A re-scan that finds nothing new completes instantly.
+
+## Edge Cases
+
+### Encoding: CJK Locales (zh-CN, ja, ko)
+
+Placeholder files for CJK locales are blank — they contain no text. Encoding issues do not affect empty files. However, when translation content gets added later:
+
+- Use UTF-8 without BOM for all locale files. BOM can break text processing tools on macOS and Linux.
+- Filenames that contain CJK characters must be valid UTF-8. Avoid non-ASCII characters in filenames. Use ASCII filenames only.
+- The directory path segment `zh-CN/`, `ja/`, `ko/` uses ASCII identifiers. No encoding concerns.
+
+### Encoding: Arabic (ar) and RTL
+
+The `ar` locale uses Arabic script (Arab) and is right-to-left (RTL). Placeholder files are blank, so RTL has no effect during scaffolding. When translation content gets added later:
+
+- Do not add Unicode RTL markers (U+200F) or bidirectional overrides (U+202A–U+202E) to blank placeholder files.
+- File content for `ar` translations must use UTF-8 encoding.
+- Directory paths remain LTR (`translations/ar/...`). The locale tag `ar` is ASCII.
+
+### Path Collisions: Same File Name in Different Source Trees
+
+A file name can appear in more than one source directory. Example: `README.md` exists in `ste-code/artifacts/` and `SCE/core/rules/`. The placeholder path includes the source-relative directory, so these files get distinct paths:
+
+```
+translations/zh-CN/ste-code/artifacts/README.md
+translations/zh-CN/SCE/core/rules/README.md
+```
+
+No collision occurs. The path structure mirrors the source tree exactly. Workers must use the full source-relative path when creating placeholders — never flatten directory structures.
+
+### Adding a New Locale (10th Locale)
+
+To add a locale after the initial discovery:
+
+1. Create the locale directory: `mkdir -p translations/<new-locale>/`
+2. Add the locale to the catalog metadata under `locales` and update `total_placeholders`.
+3. Run discovery on all 10 targets again. Workers create blank placeholders under `translations/<new-locale>/` for all already-discovered files.
+4. Update the locale table in this document and in the Agent #9 contract.
+5. Update `translations/catalog.md` header to reflect the new locale count.
+
+New placeholders for the added locale mirror the existing path structure. No changes are needed for the other 9 locales.
+
+NOTE: Adding a locale after translations have started means the new locale starts with blank placeholders only. It is behind the other locales. Plan for a dedicated translation pass to catch up.
+
+### Source File Deleted After Discovery
+
+If a source file is deleted after placeholders were created:
+
+- The placeholder remains on disk. It is a valid path but orphans from the source.
+- A re-scan does NOT delete placeholder files. The orchestrator only adds placeholders, never removes them.
+- To clean up orphaned placeholders, run a manual audit: compare `translations/catalog.md` entries against current disk state. Remove placeholder files with no matching source file.
 
 ## Communication
 

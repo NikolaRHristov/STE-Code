@@ -88,6 +88,31 @@ For each claim, answer:
 4. Does its content match what was claimed? (spot-check 3 random lines)
 5. Is the same file claimed by multiple agents consistently? (YES/NO)
 
+#### Content Threshold Rationale
+
+The >30 lines and >3KB thresholds were chosen for three reasons:
+
+- **Minimum viable extraction**: Each worker extracts 4 spec pages. A valid extraction
+  produces 35–80 lines of structured content. A file below 30 lines is almost certainly
+  truncated, empty, or contains only header boilerplate.
+- **Fabrication floor**: Fabricated files tend to be short (<15 lines of commentary) or
+  excessively long (>200 lines of prose for 4 pages). The 30-line floor catches the
+  former; the 3KB floor catches the latter for dense format files.
+- **Practical cut point**: Below 30 lines, no meaningful cross-reference check is
+  possible — there is too little content to spot-check 3 random lines against the spec.
+
+**Edge cases the threshold may miss**:
+
+- A valid extraction of a sparse page (e.g., a page with only a single rule table)
+  may fall below 30 lines. These files need manual spot-check.
+- A fabricated file padded to exactly 31 lines of repeating text passes the line count
+  but fails the fabrication detection patterns.
+- Binary or encoded files may report high byte counts (3KB+) with no visible content.
+  Check file type with `file` before applying the 3KB rule.
+
+NOTE: When a file falls in the 30–40 line range, flag it for manual review even if
+it passes the threshold.
+
 ### Step 4: Flag Discrepancies
 
 | Discrepancy Type | Flag | Severity |
@@ -154,16 +179,167 @@ Files that contain these patterns were likely fabricated, not extracted:
 | Wrong page content | Page N contains content that belongs on a different page |
 | Identical content across workers | Two workers producing byte-identical output |
 
+### Known Limitations
+
+The fabrication detection system has the limits below. These limits are by design
+and cannot be overcome without human review.
+
+**Keyword-based detection is not exhaustive.** The 8 patterns above catch common
+fabrication styles but cannot detect all fabricated content. Specifically:
+
+- AI-generated spec text that uses proper STE vocabulary and avoids the listed
+  keyword patterns will pass fabrication checks undetected.
+- A sophisticated fabrication that mimics the exact formatting, boilerplate, and
+  terse style of real spec pages cannot be detected by pattern matching alone.
+- The system cannot verify semantic accuracy — a file may contain real-looking
+  content about the wrong page number without triggering any pattern.
+
+**Content verification is structural, not semantic.** The auditor checks that
+files exist, have content, and pass pattern filters. It does not verify that:
+
+- Rule R1.2 on page 47 of the extraction actually matches the published spec.
+- Technical noun categories are correctly listed and not hallucinated.
+- Page ranges are contiguous with no gaps or overlaps between workers.
+
+**False positive risk.** The "modern software terms" pattern may flag legitimate
+content if the spec itself discusses software tools. For example, the ASD-STE100
+specification includes a dictionary entry for "software" and mentions "computer"
+— these are not fabrication signals.
+
+**Cross-worker duplicate detection uses byte-identical comparison.** Near-duplicate
+files (same content with different whitespace or minor rewording) are not detected.
+Two workers may independently produce very similar output without fabrication.
+
+**No longitudinal tracking.** Each audit is a point-in-time check. The system does
+not track which files improve or degrade over multiple pipeline runs. A file that
+passes audit today may fail tomorrow with no historical record of the change.
+
 ## Audit Frequency
 
 - **Continuous**: After every batch claimed complete
 - **Gate-level**: Before any phase gate is declared passed
 - **On-demand**: When any agent requests verification
 
+## Performance Considerations
+
+A full audit of all claims and evidence files has a cost. Use these guides to
+decide when a full audit is necessary and when a partial audit is sufficient.
+
+### Cost Model
+
+| Audit Scope | Estimated Files | Token Cost | Runtime | When to Use |
+|-------------|-----------------|------------|---------|-------------|
+| **Full** | 109 extraction files + all artifacts + state files | ~30K-50K tokens | 5–10 min | Phase gate passes, final artifact acceptance |
+| **Partial — batch** | 3 workers (12 files) + batch claim record | ~3K-5K tokens | <1 min | After each batch completion |
+| **Partial — spot** | 3–5 random files across all batches | ~1K-2K tokens | <30 sec | Mid-pipeline health checks |
+| **Claims-only** | PROGRESS.md + exchange.md (no file checks) | ~500-1K tokens | <10 sec | Quick sanity check before a full audit |
+
+### When to Use Partial Audit
+
+Use a partial (batch-level) audit when:
+
+- A single batch of 3 workers completes and the orchestrator reports success.
+- The pipeline is mid-execution and you need a quick health signal.
+- Token budget is constrained and full audit is scheduled later.
+
+Use a full audit when:
+
+- A phase gate is declared passed and the next stage depends on it.
+- An artifact file is about to be shipped or accepted as final.
+- A partial audit found discrepancies that need broad verification.
+- The pipeline has not been audited for more than 5 batches.
+
+### Optimization Rules
+
+1. **Skip known-clean files**: Files that passed 2 consecutive audits with no
+   changes do not need re-checking. Track clean-file hashes in the audit report.
+2. **Prioritize by risk**: Check files from new workers first. Check files from
+   workers with prior fabrication flags second. Check stable workers last.
+3. **Batch parallel checks**: When auditing on disk, check file existence for all
+   files in one pass before checking content. This is faster than interleaving.
+4. **Reuse audit data**: The claims ledger from a partial audit can seed a full
+   audit. Do not rebuild the ledger from scratch if the state files have not changed.
+
+NOTE: A partial audit that finds a CRITICAL discrepancy must be escalated to a
+full audit immediately. Do not defer.
+
 ## Immutable Log
 
 The audit directory `.agents/audit/` is append-only. Never modify or delete
 previous audit reports. Each report is timestamped and immutable.
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0.0 | 2026-07-26 | Initial release. 5-step audit protocol, 8 fabrication detection patterns, 7 auto-fixable patterns, 4 unfixable patterns. |
+
+### Fixable Patterns Last Updated
+
+The fixable patterns list in the FIX MODE section was last reviewed on 2026-07-26.
+It covers known systemic errors from the initial pipeline run:
+
+- Corrected: 22 → 19 technical noun categories (factual error propagated from v1 prompts)
+- Corrected: deepseek-pro → deepseek-v4-pro (model name change mid-pipeline)
+- Corrected: hermes -z file I/O claims (proven false by tool demonstrations)
+- Removed: empty extracted/ directory (superseded by inline worker output)
+- Removed: 6 fabricated artifact files (PLAN.md, README.md, 4 .txt files)
+- Removed: stale prompts/ directory (v1 prompts superseded by inline generation)
+
+The list must be reviewed after any pipeline run that introduces new systemic
+error patterns. If a pattern appears in 3 or more files, add it to the fixable
+list after confirming the fix is safe and reversible.
+
+NOTE: Do not add patterns to the fixable list during an active pipeline run.
+Wait until the pipeline completes or pauses at a phase gate.
+
+## Quality Gates
+
+Each audit must meet the measurable gates below before a phase gate can be
+declared passed. An audit that fails any gate requires corrective action and
+a re-audit.
+
+### Per-Audit Gates
+
+| Gate | Threshold | Measurement |
+|------|-----------|-------------|
+| Claim coverage | 100% of claimed files checked | `files_checked / files_claimed` |
+| False positive cap | ≤ 3 false positives per 100 claims | False positives flagged as "not fabrication on review" |
+| Critical discrepancy cap | 0 critical discrepancies | Count of 🔴 flags in audit report |
+| Agent trust floor | ≥ 0.80 trust score per agent | `verified_claims / total_claims` per agent |
+| Report completeness | All 5 audit steps executed | Steps 1-5 present in report header |
+
+### Gate Decision Matrix
+
+| Condition | Action |
+|-----------|--------|
+| All gates pass | Phase gate approved. Proceed to next stage. |
+| 1-2 false positives (no criticals) | Phase gate approved with NOTE. Flag patterns for review. |
+| 1 critical discrepancy | Phase gate BLOCKED. Fix the discrepancy, then re-audit. |
+| Any agent trust score < 0.80 | Phase gate BLOCKED. Escalate agent to reviewer for remediation. |
+| Missing coverage (files not checked) | Audit INCOMPLETE. Re-run with full scope before gate decision. |
+
+### Audit Quality Score
+
+After each full audit, compute a quality score:
+
+```
+quality_score = (verified_claims / total_claims) × 0.6
+              + (1.0 - (false_positives / total_claims)) × 0.2
+              + (1.0 if no_criticals else 0.0) × 0.2
+```
+
+| Score Range | Quality |
+|-------------|---------|
+| ≥ 0.95 | Excellent — pipeline is healthy |
+| 0.85–0.94 | Good — minor issues, monitor |
+| 0.70–0.84 | Fair — systemic issues, investigate |
+| < 0.70 | Poor — pipeline needs remediation before continuing |
+
+NOTE: The quality score is a trend indicator, not a gate. A pipeline with a
+score of 0.92 may still be blocked by a single critical discrepancy. A pipeline
+with a score of 0.99 but 1 critical is also blocked. The critical discrepancy
+cap (0) always overrides the quality score.
 
 ## Single-Prompt Launch
 

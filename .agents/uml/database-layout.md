@@ -512,4 +512,224 @@ graph LR
 
 ---
 
+## 12. How to Use This Layout
+
+### 12.1 Find Files for a Batch
+
+Each batch has 3 workers. Batch B uses workers (B−1)×3+1 through B×3.
+Worker N processes pages (N−1)×4+1 through N×4.
+
+**Examples:**
+- Batch 12 → workers w034, w035, w036.
+- Worker 50 → pages 197–200.
+
+Use the naming convention table in Section 2 to decode file names.
+
+### 12.2 Track Pipeline Progress
+
+| To Check | Look At |
+|----------|---------|
+| Extraction stage state | `ste-code/PROGRESS.md` |
+| All 5 pipeline stages | `.agents/state/PROGRESS.md` |
+| Refinement stage state | `.agents/state/REFINE-PROGRESS.md` |
+| Verification reports | `.agents/audit/audit-*.md` |
+
+### 12.3 Locate Specific Content
+
+| To Find | Look In |
+|---------|---------|
+| Approved words (full dictionary) | `ste-code/adapted/a-dictionary.md` |
+| A specific adapted rule | `ste-code/adapted/` (rule-by-rule files) |
+| Worker raw extraction | `ste-code/extracted/wNNN-p*.md` |
+| Worker refined output | `ste-code/refined/rNNN-p*.md` |
+| Worker refinement prompt | `ste-code/prompts-refine/rNNN-prompt.txt` |
+| Agent orchestration prompt | `.agents/agent/agent-N-role.md` |
+| Skill definition | `.agents/skills/spec-extraction/<skill-name>/SKILL.md` |
+
+### 12.4 Validate the Pipeline
+
+1. Count extraction files: `ls ste-code/extracted/w*.md | wc -l`. The result must be 109.
+2. Count refinement files: `ls ste-code/refined/r*.md | wc -l`. The result must be 109.
+3. Check batch completion: open `ste-code/PROGRESS.md` and count `[x]` checkboxes.
+4. Run the verification script: `python3 ste-code/check-rails.py`.
+
+---
+
+## 13. Maintenance Instructions
+
+NOTE: This file is the single source of truth for the database layout.
+Update it when the pipeline structure changes.
+
+### 13.1 When Stage 3 (Merge) Completes
+
+- Update Section 3, Stage Details table: change Stage 3 "Status" from "Pending" to "Complete".
+- Update Section 9, File Count Summary: set `ste-code/merged/` count to the actual number of files.
+- Add example merged file names if they differ from `master-raw.md` and `master.md`.
+
+### 13.2 When Stages 4-5 (Adaptation and Artifacts) Complete
+
+- Update Section 3, Stage Details table: change Stages 4-5 "Status" from "Pending" to "Complete".
+- Update Section 9, File Count Summary: set `ste-code/adapted/` and `ste-code/artifacts/` counts.
+- List the 6 artifact file names in Section 9.
+
+### 13.3 When Reference Documents Are Added
+
+- Update Section 6 reference documents table (add rows).
+- Update Section 8 file system map (add paths under `references/`).
+
+### 13.4 When Agents or Skills Change
+
+- Update Section 7 agent role summary (add, remove, or change rows).
+- Update Section 6 skill directory map (add, remove, or change rows).
+- Update Section 10 key relationships diagram if agent-skill bindings change.
+
+### 13.5 Regeneration Checklist
+
+Use this checklist after any pipeline structure change:
+
+- [ ] Section 9: all file counts are correct.
+- [ ] Section 11: naming convention patterns match all current files.
+- [ ] Section 8: file system tree shows all current directories and key files.
+- [ ] Section 1: erDiagram includes all new directories.
+- [ ] Section 3: data flow diagram is correct for all active stages.
+
+---
+
+## 14. Architectural Rationale
+
+### 14.1 Why 109 Workers?
+
+The source specification (ASD-STE100 Issue 9) has 434 pages.
+Each worker processes 4 pages: 434 ÷ 4 = 108.5 workers.
+Rounded up to the nearest integer: **109 workers**.
+Worker 109 processes only 2 pages (pages 433–434).
+
+### 14.2 Why 4 Pages Per Worker?
+
+Four pages is the largest safe page count that fits in a single worker context window.
+Larger page ranges cause truncation or omission by the AI model.
+Smaller page ranges are safe but increase total worker count and pipeline duration.
+Four pages gives the best balance of throughput and completeness.
+
+### 14.3 Why 37 Batches of 3 Workers Each?
+
+The runtime allows at most 3 parallel workers per batch.
+Rate limits and context fragmentation prevent larger batch sizes.
+109 workers ÷ 3 per batch = 36.33 batches.
+Rounded up: **37 batches**.
+Batches 1–36 each have 3 workers. Batch 37 has 1 worker (worker 109).
+
+### 14.4 Why 434 Source Pages?
+
+The source specification (ASD-STE100 Issue 9, January 2025) is 434 pages.
+This is a fixed external input and not a design choice.
+
+### 14.5 Why 2 Merge Output Files?
+
+The merge stage produces two files:
+- `master-raw.md` (710 KB): full concatenation of all 109 refined files, no deduplication.
+- `master.md` (9.4 KB): organized output with duplicates removed and sections grouped by type.
+
+The raw file preserves all content for audit traceability.
+The organized file is the working document for stages 4-5.
+
+---
+
+## 15. Edge Cases
+
+NOTE: The pipeline expects 109 extraction files and 109 refinement files.
+Handle deviations as follows.
+
+### 15.1 Extra Files in Extraction Directory
+
+If `ste-code/extracted/` has more than 109 `w*.md` files:
+
+1. Count the files: `ls ste-code/extracted/w*.md | wc -l`.
+2. Check for duplicate worker numbers. Two files with the same page range but different extensions are duplicates.
+3. Check for temporary files (with `~`, `.bak`, `.tmp`, or `.swp` suffixes).
+4. Remove non-conforming files after audit confirms they are safe to remove.
+
+### 15.2 Missing Files in Extraction Directory
+
+If `ste-code/extracted/` has fewer than 109 `w*.md` files:
+
+1. Look for gaps in the worker number sequence (001–109).
+2. Check `ste-code/PROGRESS.md` for failed batches.
+3. Re-run extraction for the missing worker numbers only.
+
+### 15.3 Files That Violate Naming Conventions
+
+If a file in a pipeline directory does not match its expected pattern:
+
+1. Do not process the file automatically.
+2. Check if it is a metadata file (such as `README.md` or `.gitkeep`) or a pipeline artifact.
+3. Rename or remove the file after audit confirms its purpose.
+4. If extraction produced a non-conforming file name, fix the worker prompt that generated it.
+
+### 15.4 Refinement-Extraction Mismatch
+
+If `rNNN-p*.md` exists but `wNNN-p*.md` does not (or the reverse):
+
+- For missing refined file: re-run refinement for that worker number.
+- For missing extraction file: re-run extraction for that worker, then refinement.
+
+### 15.5 Corrupted or Empty Files
+
+If a worker file exists but has zero size or contains only error messages:
+
+1. Check the file size: `wc -c ste-code/extracted/wNNN-p*.md`.
+2. Compare against the expected size (2–8 KB for most workers).
+3. If the file is empty or has fewer than 100 bytes, re-run the worker.
+4. Check the worker prompt for errors in the input file path.
+
+### 15.6 Batch Boundary Inconsistency
+
+If a batch in `PROGRESS.md` shows 3 workers but the directory has a different count:
+
+1. Check the batch number against the worker-to-batch formula: batch = ⌈worker/3⌉.
+2. Verify the batch contents with `ls ste-code/extracted/w0NN-p*.md` for the expected range.
+3. If a worker is missing from a completed batch, re-run only that worker.
+
+---
+
+## 16. Performance
+
+### 16.1 Directory Listing
+
+The pipeline has at most 109 files per directory in stages 1-2.
+Directory listing with `ls` completes in under 0.1 seconds on APFS and HFS+.
+Modern file systems handle up to 10,000 files per directory without delay.
+The pipeline stays well below all known thresholds.
+
+### 16.2 Parallel Worker Throughput
+
+| Stage | Workers Per Batch | Total Batches | Time Per Worker | Total Wall Time |
+|-------|-------------------|---------------|-----------------|-----------------|
+| Extraction | 3 | 37 | 10–30 seconds | 7–19 minutes |
+| Refinement | 3 | 37 | 15–45 seconds | 10–28 minutes |
+| **Combined** | — | — | — | **17–47 minutes** |
+
+NOTE: Times are estimates based on `deepseek-v4-pro` model latency.
+Actual times change with model load and network conditions.
+
+### 16.3 Disk Space
+
+| Directory | Files | Size Per File | Total Size |
+|-----------|-------|---------------|------------|
+| `ste-code/extracted/` | 109 | 2–8 KB | ~500 KB |
+| `ste-code/refined/` | 109 | 2–8 KB | ~500 KB |
+| `ste-code/merged/` | 2 | 720 KB | ~720 KB |
+| `ste-code/prompts-refine/` | 109 | 1–3 KB | ~200 KB |
+| `.agents/` (all) | ~60 | — | ~300 KB |
+| **Full pipeline** | **~389** | — | **~2.2 MB** |
+
+### 16.4 Known Bottlenecks
+
+No known file system bottlenecks exist at the current scale.
+The first bottleneck is expected at approximately 10,000 files per directory.
+The pipeline produces at most 109 files per directory.
+No optimization is necessary for the current architecture.
+
+---
+
 *End of STE-Code Database Layout — Single Source of Truth*
