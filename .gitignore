@@ -28,3 +28,5 @@ __pycache__
 /processPayload.ts
 /user_service.py
 /validate_email.py
+
+.agents/tmp/*.txt
