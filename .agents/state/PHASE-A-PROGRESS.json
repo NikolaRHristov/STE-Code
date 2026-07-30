@@ -53,7 +53,14 @@
     "fix-051--agents-uml-worker-lifecycle-md",
     "fix-052--agents-uml-pipeline-state-machine-md",
     "fix-053--agents-uml-error-recovery-md",
-    "fix-054--agents-uml-database-layout-md"
+    "fix-054--agents-uml-database-layout-md",
+    "fix-055--agents-benchmark-orchestrator-py",
+    "fix-056--agents-benchmark-orchestrator-control-p",
+    "fix-057--agents-benchmark-launch-levels-py",
+    "fix-058--agents-benchmark-rescore-py",
+    "fix-059--agents-benchmark-run-benchmark-sh",
+    "fix-060--agents-scripts-check-rails-py",
+    "fix-061--agents-scripts-generate_refine_prompts-"
   ],
   "batches_done": [
     1,
@@ -73,7 +80,10 @@
     15,
     16,
     17,
-    18
+    18,
+    19,
+    20,
+    21
   ],
-  "updated": "2026-07-30T12:35:53.793183+00:00"
+  "updated": "2026-07-30T12:47:00.636108+00:00"
 }
