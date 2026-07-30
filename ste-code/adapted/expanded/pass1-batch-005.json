@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 5,
+  "rule_file": "a-sec1-rule1.13",
+  "entries": [
+    {
+      "rule": "rule-1.13",
+      "principle": "P13",
+      "non_ste_example": "Do a push of the commits to the remote repository before you start the code review.",
+      "ste_example": "Push the commits to the remote repository before you start the code review.",
+      "explanation": "Push is a code-domain technical verb (category 1c, development processes, build and package). P13 prohibits using technical verbs as nouns. The non-STE version uses push as a noun in the structure 'do a push of' — the same violation pattern as 'do a compile of' which the spec prohibits. The STE version uses push correctly as a verb. This adapts the spec principle directly: just as STE requires 'Enter your password' (verb) rather than 'Do an enter of your password,' STE-Code requires 'Push the commits' (verb) rather than 'Do a push of the commits.' The synonym table also applies: prefer the precise technical verb over a generic verb-noun combination."
+    },
+    {
+      "rule": "rule-1.13",
+      "principle": "P13",
+      "non_ste_example": "The dependency injection container does an injection of the configuration values at application startup.",
+      "ste_example": "The dependency injection container injects the configuration values at application startup.",
+      "explanation": "Inject is a code-domain technical verb (category 3c, data processing, dependency management). P13 prohibits using technical verbs as nouns. The non-STE version nominalizes inject into 'an injection of' and pairs it with the dummy verb 'does' — two problems: (1) inject becomes a noun in violation of P13, and (2) 'does an injection of' is wordy when the single verb 'injects' carries the same meaning. The STE version uses the verb form directly. This follows the same pattern as the spec's canonical example: just as 'Enter your password' is correct STE, 'Inject the values' is correct STE-Code."
+    },
+    {
+      "rule": "rule-1.13",
+      "principle": "P13",
+      "non_ste_example": "The import of the CSV data fails when the file encoding is UTF-16 instead of UTF-8.",
+      "ste_example": "The import operation for the CSV data fails when the file encoding is UTF-16 instead of UTF-8.",
+      "explanation": "Import is a code-domain technical verb (category 3a, data processing and transformation). P13 prohibits using technical verbs as nouns. The non-STE version uses import as a noun in 'the import of' — the same structural violation as 'the compile of' or 'the merge of.' The STE version uses import as an adjective that modifies the code-domain technical noun 'operation,' following the same pattern as the existing adapted example 'The merge operation of the feature branch caused a conflict.' This adapts the spec approach: when a noun that names the process is necessary, use a compound technical noun such as 'import operation' or 'import process' rather than the bare verb as a noun."
+    },
+    {
+      "rule": "rule-1.13",
+      "principle": "P13",
+      "non_ste_example": "The framework does a load of the service definitions from the YAML configuration during initialization.",
+      "ste_example": "The framework loads the service definitions from the YAML configuration during startup.",
+      "explanation": "Load is a code-domain technical verb (category 3a, data processing and transformation). P13 prohibits using technical verbs as nouns. The non-STE version uses load as a noun in 'does a load of' — the same pattern as 'do a compile of.' The STE version uses 'loads' as the verb. Load is also a code-domain technical noun (category 5, infrastructure and deployment — as in 'CPU load' or 'the load balancer'), so per P13's dual-use provision, load is allowed as a noun when it fits a technical noun category. The example 'The load on the server is high' is valid STE-Code because load names a measurable system metric, not an action. This adapts the spec's 'plate' example where the same word belongs to both category systems. Note that 'initialization' is replaced with 'startup' per P1 (start → NOT initiate — use startup for the noun form of start)."
+    },
+    {
+      "rule": "rule-1.13",
+      "principle": "P13",
+      "non_ste_example": "Run a debug of the failing end-to-end test to find the root cause of the timeout.",
+      "ste_example": "Debug the failing end-to-end test to find the root cause of the timeout.",
+      "explanation": "Debug is a code-domain technical verb (category 1b, development processes, test and debug). P13 prohibits using technical verbs as nouns. The non-STE version uses debug as a noun in 'run a debug of' — the same violation pattern as 'run a compile of' or 'run a lint of.' The STE version uses debug as the imperative verb directly. Per the synonym table, the generic verb 'run' is unnecessary when a specific technical verb like 'debug' is available. STE-Code prefers the precise technical verb over a verb-noun combination. This adapts the spec principle: just as STE forbids 'Do an enter of your password' in favor of 'Enter your password,' STE-Code forbids 'Run a debug of the test' in favor of 'Debug the test.'"
+    }
+  ]
+}
