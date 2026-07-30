@@ -1,0 +1,29 @@
+Here is the analysis and corrected text.
+
+---
+
+**CORRECTED TEXT:**
+
+```
+refactor(data): replace MongoDB with PostgreSQL in data layer
+
+Replace MongoDB with PostgreSQL. MongoDB connections were unreliable.
+Remove legacy code that incorrectly managed the connection pool.
+```
+
+---
+
+**COMPLIANCE SUMMARY**
+
+| Rule | Violation in Original | Fix |
+|------|-----------------------|-----|
+| **Conventional Commits** (CONTRIBUTING.md L199–213) | Missing scope in type prefix; subject uses past tense "overhauled" instead of imperative | Added `(data)` scope; changed to imperative "replace" |
+| **Rule 1.13 — imperative mood** (a-sec1-rule1.13.md L49) | Subject "overhauled" (past tense), body "Switched," "cleaned up" (past tense) | All verbs changed to imperative: "replace," "Replace," "Remove" |
+| **No slang/jargon** (CONTRIBUTING.md L194) | "flaky," "weird stuff," "a ton of," "Mongo" | → "unreliable," "incorrectly managed," removed quantifier, "MongoDB" |
+| **Active voice** (CONTRIBUTING.md L187) | "was being flaky" (passive), "was doing weird stuff" (passive) | → "were unreliable" (active), "incorrectly managed" (active) |
+| **Consistent terminology** (Rule 9.4; CONTRIBUTING.md L193) | "MongoDB" in subject, "Mongo" in body | "MongoDB" used consistently throughout |
+| **Short sentences ≤ 20 words** (CONTRIBUTING.md L189) | Second body sentence is 17 words and packs two actions | Split into two sentences: 4 words + 9 words |
+| **One instruction per sentence** (CONTRIBUTING.md L191) | "Also cleaned up a ton of legacy code that was doing weird stuff with the connection pool" — combines removal action + causation in one sentence | Separated into: reason sentence + action sentence |
+| **Approved vocabulary** (CONTRIBUTING.md L188) | "overhauled" (non-STE verb — metaphorical), "cleaned up" (phrasal verb), "stuff" (informal) | → "replace," "remove" |
+
+The corrected version passes all 8 checks: conventional commit format with scope, imperative mood, active voice, approved vocabulary only, consistent terminology, short sentences (≤ 20 words each), one action per sentence, and no hedging or slang.

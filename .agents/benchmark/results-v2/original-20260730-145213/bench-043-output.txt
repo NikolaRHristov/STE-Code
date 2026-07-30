@@ -1,0 +1,51 @@
+The term "STE-Code" does not appear anywhere in this repository — no references, docs, or config files. I'll proceed with a compliance review based on standard Python/Flask best practices (PEP 8, Flask conventions, general clean-code principles) and note the gap.
+
+Here is the corrected text and a compliance summary.
+
+---
+
+## Corrected PR Review
+
+Review this PR that adds a new API endpoint. Write comprehensive code-review feedback covering:
+- Function naming and docstrings
+- Error handling clarity
+- API route naming
+
+```python
+@app.route('/api/v1/process', methods=['POST'])
+def process_request():
+    """Process incoming JSON payload and return the result.
+
+    Returns:
+        JSON response with 'status' and 'data' on success,
+        or 'error' and 'message' on failure.
+    """
+    try:
+        data = request.get_json()
+        if data is None:
+            return jsonify({'error': 'Request body must be valid JSON'}), 400
+        result = process_data(data)
+        return jsonify({'status': 'ok', 'data': result}), 200
+    except ValueError as exc:
+        return jsonify({'error': str(exc)}), 400
+    except Exception as exc:
+        # Log the full traceback server-side; never leak it to the client.
+        app.logger.exception('Unhandled error in process_request')
+        return jsonify({'error': 'Internal server error'}), 500
+```
+
+---
+
+## Compliance Summary (standard Python/Flask best practices)
+
+| Category | Issue Found | Fix Applied | Severity |
+|---|---|---|---|
+| **API route naming** | `/doStuff` is camelCase, vague, and violates REST conventions. | Changed to `/process` — lowercase, resource-oriented, descriptive. | HIGH |
+| **Function naming** | `handle_request()` is too generic; conflicts with Flask internals and says nothing about the endpoint's purpose. | Renamed to `process_request()` — verb-first, matches the route intent. | HIGH |
+| **Docstring** | `"""Handles the request stuff"""` is a tautology. It repeats the function name and adds no information about inputs, outputs, or side effects. | Replaced with a proper triple-quote docstring describing behaviour and return shape. | MEDIUM |
+| **Bare except** | `except:` catches *everything* including `KeyboardInterrupt` and `SystemExit`, swallowing critical signals and masking the real error. | Split into `except ValueError` (client errors) and `except Exception` (server errors), with logging on the server side. | HIGH |
+| **Error message opacity** | `'Something failed'` tells the client nothing actionable and leaks no detail to logs either. | Client sees a safe generic message; the real traceback is logged server-side via `app.logger.exception`. | MEDIUM |
+| **Missing JSON validation** | `request.get_json()` returns `None` on non-JSON input; the code passes `None` straight to `process_data()` causing an opaque `AttributeError`. | Added an explicit `None` check returning 400. | HIGH |
+| **Missing HTTP status code on success** | `return jsonify(...)` defaults to 200, which is correct but implicit. | Made explicit: `return jsonify(...), 200`. | LOW |
+
+**Note:** No project-level "STE-Code" standard was found in the repository. If this is an internal document (wiki, style guide, or team charter), please share it and I'll re-audit against it.

@@ -1,0 +1,34 @@
+Now I have the STE-Code standard loaded. Let me analyze the provided text against the rules.
+
+Text to check:
+> You added pagination to the user list API endpoint. New query parameters: `page` and `limit`. Default page size is 20. Maximum is 100. Write a conventional commit message using STE-Code approved terms.
+
+Here are the violations I found:
+
+1. "You added" — second-person pronoun "You," past tense. Commit-context descriptions should use imperative mood (Rule 3.3, 5.3).
+2. "user list API endpoint" — 4-word noun phrase, exceeds the 3-word maximum (Rule 2.1). Restructure to "API endpoint for the user list."
+3. "Default page size is 20." — missing article before singular countable noun. Must be "The default page size is 20." (anti-pattern: do not omit articles).
+4. "Maximum is 100." — same article omission. Must be "The maximum is 100."
+5. "using STE-Code approved terms" — "-ing" participle form; split into a separate sentence with imperative "Use" (anti-pattern: do not use -ing forms; Rule 4.3: one instruction per sentence).
+
+---
+
+**Corrected text:**
+
+```
+Add pagination to the API endpoint for the user list. New query parameters: `page` and `limit`. The default page size is 20. The maximum is 100. Write a conventional commit message. Use STE-Code approved terms.
+```
+
+---
+
+**Compliance summary:**
+
+| # | Rule | Issue | Correction |
+|---|------|-------|-------------|
+| 1 | Rule 3.3 / 5.3 (imperative mood) | "You added" is second-person past tense; commit descriptions use imperative | "Add pagination" |
+| 2 | Rule 2.1 (max 3-word noun phrases) | "user list API endpoint" is 4 words | "API endpoint for the user list" |
+| 3 | Anti-pattern (articles required) | "Default page size" missing article | "The default page size" |
+| 4 | Anti-pattern (articles required) | "Maximum is 100" missing article | "The maximum is 100" |
+| 5 | Anti-pattern (-ing forms) / Rule 4.3 | "using" gerund chains two instructions in one sentence | Split: "Write a commit message. Use STE-Code terms." |
+
+All 5 violations resolved. No unapproved vocabulary, no slang/jargon, no contractions, American English spelling confirmed. The corrected text passes STE-Code compliance.

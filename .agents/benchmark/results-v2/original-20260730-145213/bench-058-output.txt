@@ -1,0 +1,21 @@
+Let me produce the description and then audit it sentence by sentence.
+
+---
+
+**Corrected Project Description**
+
+CodeDoc Checker examines code documentation for STE-Code compliance. The tool identifies passive voice, unapproved words, and marketing language. Developers and technical writers use CodeDoc Checker to write clear documentation. The tool ensures that documentation follows STE-Code rules. This process decreases ambiguity and makes technical texts clearer.
+
+---
+
+**Compliance Summary**
+
+| # | Sentence | Active Voice | Approved Words | No Fluff | Notes |
+|---|----------|:---:|:---:|:---:|---|
+| 1 | *CodeDoc Checker examines code documentation for STE-Code compliance.* | ✓ | ✓ | ✓ | "compliance" is a borderline STE word; "conformance" is the preferred alternative, but the phrase "STE-Code compliance" is a fixed technical term and acceptable as a proper name. |
+| 2 | *The tool identifies passive voice, unapproved words, and marketing language.* | ✓ | ✓ | ✓ | All verbs and nouns are STE-approved. |
+| 3 | *Developers and technical writers use CodeDoc Checker to write clear documentation.* | ✓ | ✓ | ✓ | "use" and "write" are approved; no intensifiers or promotional adjectives. |
+| 4 | *The tool ensures that documentation follows STE-Code rules.* | ✓ | ✓ | ✓ | "ensures" is approved; "follows" is approved. |
+| 5 | *This process decreases ambiguity and makes technical texts clearer.* | ✓ | ✓ | ✓ | "decreases" replaces the unapproved "reduces"; "makes … clearer" replaces the unapproved "improves." |
+
+All five sentences use active voice exclusively. Every verb and noun maps to the STE approved-word list (with the noted exception of "compliance," which is retained as part of a proper technical term). No marketing fluff — no adverbs like "seamlessly," no adjectives like "powerful" or "innovative," no vague benefit claims like "helps teams." Each sentence carries one idea and uses short, direct construction.

@@ -1,0 +1,30 @@
+Here is the STE-Code compliant review.
+
+---
+
+**Corrected code:**
+
+```javascript
+try {
+    const data = await getDataFromDatabase();
+    return data;
+} catch (error) {
+    console.error('Failed to retrieve data from the database:', error.message);
+    throw new Error('Database retrieval failed. Check the database connection and try again.');
+}
+```
+
+---
+
+**Compliance summary**
+
+| Issue | Original | Correction | STE Rule |
+|-------|----------|------------|----------|
+| Vague function name | `getStuffFromDB()` | `getDataFromDatabase()` | Rule 1.6: Use approved, specific words. "Stuff" is not approved. |
+| Single-letter variable | `e` | `error` | Rule 1.2: Use descriptive names. Single-letter identifiers hide meaning. |
+| Uninformative log message | `'something went wrong'` | `'Failed to retrieve data from the database:', error.message` | Rule 3.2: Error messages must state the operation and the failure. |
+| Unprofessional throw message | `'oops'` | `'Database retrieval failed.'` | Rule 3.1: Error text must be clear and technical. Slang is forbidden. |
+| Missing recovery guidance | No next step given | `Check the database connection and try again.` | Rule 3.6: Actionable feedback tells the user what to do next. |
+| Wrong severity method | `console.log()` | `console.error()` | Rule 3.4: Use the correct severity level. Errors go to stderr, not stdout. |
+
+All six violations are resolved. The corrected code uses approved vocabulary, gives specific failure context, includes a remedial action, and routes errors to the correct output channel.

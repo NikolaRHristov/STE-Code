@@ -1,0 +1,42 @@
+Good. `active` is an approved adjective. Now I have everything I need. Here is the analysis and corrected output.
+
+---
+
+CORRECTED TEXT:
+```
+FATAL: Process exited with code 1
+
+Error: Failed to connect to database at localhost:5432
+    at ConnectionPool.connect (pool.js:42)
+    at Database.initialize (db.js:18)
+
+The database is not active. Start the database with npm run db:start.
+```
+
+---
+
+COMPLIANCE SUMMARY
+
+Three violations found and corrected in the original third paragraph ("The database might not be running. Try starting it with npm run db:start."):
+
+1. P1 / P10 — UNAPPROVED WORD + HEDGING: "might"
+   "might" is not in the approved vocabulary, not a code-domain technical noun, and not a code-domain technical verb. It is also hedging language, prohibited by P10 ("No slang or jargon — replace with literal approved descriptions"). Replaced with the definite copula "is" ("The database is not active").
+
+2. P1 — UNAPPROVED FORM: "running"
+   "running" is listed as unapproved (unapproved-entries.json:2328). The approved base verb is "run", and the -ing form violates P4 (use only listed morphological forms) and the anti-pattern ("Do not use -ing forms as main verbs"). Replaced with the approved adjective "active" (approved-adjectives.json:32) in the predicate "is not active".
+
+3. OUTPUT FORMAT — NON-IMPERATIVE CONSTRUCTION: "Try starting"
+   While "try" is individually an approved verb (approved-verbs.json:3759), the gerund "starting" weakens the instruction and the overall tone is tentative rather than procedural. STE-Code requires imperative mood for procedural instructions. Replaced with the direct imperative "Start the database with...".
+
+Lines preserved as-is (no violations):
+- "FATAL:" — severity label, not prose
+- "Process" — code-domain technical noun
+- "exited" — standard morphological form of approved verb "exit"
+- "code" — code-domain technical noun
+- "Error:" — diagnostic label
+- "Failed" — past tense of approved verb "fail"
+- "connect" — approved verb (synonym table)
+- "database" / "ConnectionPool" / "Database" — code-domain technical nouns
+- "pool.js:42" / "db.js:18" — file references, technical nouns
+- "initialize" — approved verb
+- "npm run db:start" — tool invocation syntax; "run" here is the npm subcommand, not ST English prose

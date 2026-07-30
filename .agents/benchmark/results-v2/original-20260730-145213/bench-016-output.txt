@@ -1,0 +1,17 @@
+Now I have all the information I need. Let me compile the compliance analysis.
+
+---
+
+**Corrected text:** `Error: The operation failed.`
+
+**Compliance Summary**
+
+Issues found in "Error: Something went wrong":
+
+1. **"wrong" — UNAPPROVED** (STE Dictionary, master-raw.md:2227). The word "wrong" is an UNAPPROVED adjective. The approved alternative is "incorrect". However, simply substituting "incorrect" would yield "Something went incorrect" — which is unidiomatic and still vague.
+
+2. **"went wrong" — idiomatic phrase** (violates Rule 1.10: no slang or jargon). The phrasal construction "go wrong" is an idiom that does not translate literally and is prohibited in STE. Error messages must use precise, literal language.
+
+3. **Vagueness** (weak on Rule 4.1: write short and clear sentences). "Something" is a permitted pronoun for unknown agents in STE (master-raw.md:3568), but paired with "went wrong" it communicates nothing actionable.
+
+The correction replaces the unapproved "wrong" and the idiomatic "went wrong" with specific approved vocabulary: "The operation failed." All four words are approved — "the" (article), "operation" (noun), "failed" (past tense of FAIL, a technical verb per Rule 1.12). The message now tells the reader _what_ happened (an operation) and _what the outcome was_ (it failed), in a 4-word sentence well within the 20-word procedural and 25-word descriptive limits.

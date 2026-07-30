@@ -1,0 +1,59 @@
+Now I have a thorough understanding of STE-Code (based on ASD-STE100 Issue 9, January 2025). Let me perform the compliance check on the component.
+
+---
+
+Analysis of violations found in this React component:
+
+**Comment 1: `// This component does the user stuff`**
+- "stuff" — Rule 1.10 (slang/jargon), Rule 1.1 (unapproved word). Replace with "items."
+- "does" — vague. Rule 4.1 requires clear, unambiguous information.
+- Missing article — Rule 6.5: always include "a," "an," or "the."
+- The comment does not give accurate information (Rule 4.1).
+
+**Comment 2: `// Fetch the things we need`**
+- "Fetch" — Rule 1.1 / synonym table: prefer "get" over "fetch."
+- "things" — Rule 1.10 (vague jargon). Replace with a specific noun.
+- "we" — informal. STE-Code uses impersonal, precise language.
+
+**Comment 3: `// Show everything`**
+- "everything" — Rule 1.10 (imprecise, informal). Replace with a specific noun.
+
+**Component name: `UserStuff`**
+- "Stuff" — Rule 1.10 (slang), Rule 1.9 (clear technical nouns require precision). The name does not tell the reader what the component does.
+
+---
+
+Corrected text:
+
+```jsx
+// This component renders a list of user items.
+const UserItemList = ({ data }) => {
+  // Get the items from the data array.
+  const items = useMemo(() => data.map(d => d.item), [data]);
+
+  // Render each item as a paragraph.
+  return <div>{items.map(i => <p>{i}</p>)}</div>;
+};
+```
+
+---
+
+Compliance Summary
+
+| Rule | Violation | Correction |
+|------|-----------|------------|
+| 1.10 | "stuff" — slang/jargon (comment + component name) | Replaced with "items" in comment; renamed to "UserItemList" |
+| 1.10 | "things" — vague jargon | Replaced with "items." |
+| 1.10 | "everything" — informal/imprecise | Replaced with "each item." |
+| 1.1 | "fetch" — not an approved word (synonym table: "get") | Changed to "get." |
+| 1.9 | "UserStuff" — unclear technical noun | Renamed to "UserItemList" (3 words, precise) |
+| 4.1 | Comment "does the user stuff" — not clear or accurate | Rewritten to describe the component's actual function. |
+| 6.5 | Missing articles in comments ("does the user stuff," "fetch the things") | Added articles: "a list," "the data array," "the items." |
+
+Gate Status
+
+| Gate | Status | Details |
+|------|--------|---------|
+| GATE-1 (Vocabulary) | FAIL → PASS | 5 violations found and corrected |
+| GATE-2 (Structure) | PASS | All sentences within limits |
+| GATE-4 (Consistency) | PASS | One term per concept throughout |

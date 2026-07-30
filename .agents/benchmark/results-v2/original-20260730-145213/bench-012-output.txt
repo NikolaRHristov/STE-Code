@@ -1,0 +1,16 @@
+Corrected text:
+
+    Refactored the authentication module to improve performance
+    and reliability.
+
+---
+
+Compliance summary:
+
+| Check | Status | Note |
+|---|---|---|
+| Passive voice | Fixed | "were made" → "Refactored" (active) |
+| Vagueness | Fixed | "make it work better" → "improve performance and reliability" (measurable dimensions) |
+| Specificity | Partial | Still generic — the actual technical change (e.g. token caching, deduplication, retry logic) should replace "Refactored" and the improvement should cite real metrics |
+
+The original fails on passive voice and meaningless qualifiers. The corrected version uses active voice and names dimensions of improvement, but would need the actual technical detail substituted in for full compliance.

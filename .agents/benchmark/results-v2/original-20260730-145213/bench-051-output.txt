@@ -1,0 +1,31 @@
+Now I have all the data I need. Let me compile the analysis and produce the output.
+
+---
+
+**Corrected text:**
+
+You refactored the authentication middleware to use a strategy pattern instead of a single `if`/`else` chain. The change makes it simple to do tests and lets you add new authentication methods without changing existing code.
+
+---
+
+**Conventional commit with body (STE-Code compliant):**
+
+```
+refactor(auth): use strategy pattern for authentication middleware
+
+Replace the single if/else chain with a strategy pattern. This change
+makes it simple to do tests. You can add new authentication methods
+without changing existing code.
+```
+
+---
+
+**Compliance summary (5 violations found, 5 fixed):**
+
+| # | Original | Violation | Rule | Fix |
+|---|----------|-----------|------|-----|
+| 1 | `monolithic` | Architectural jargon; not in approved dictionary | 1.10 (no slang/jargon) | `single` — approved adjective in the controlled terminology |
+| 2 | `testability` | Nominalized technical verb via unapproved suffix "-ability" ("ability" is unapproved in dictionary; "test" as verb is unapproved per dictionary) | 1.13 (technical verbs as nouns), 1.1 (approved words only) | `makes it simple to do tests` — uses approved adjective "simple," approved verb "make," and approved noun "test" with "do" |
+| 3 | `allows` | Not in approved dictionary | 1.1 (approved words only) | `lets` — approved verb (LET) in the controlled terminology |
+| 4 | `auth` / `authentication` | Two different terms for the same concept in adjacent sentences | 1.11 (one term per concept) | `authentication` — consistent code-domain technical noun used throughout |
+| 5 | `modifying` | Unapproved verb (MODIFY is UNNAPROVED in dictionary) | 1.1 (approved words only) | `changing` — approved verb (CHANGE) in the controlled terminology |

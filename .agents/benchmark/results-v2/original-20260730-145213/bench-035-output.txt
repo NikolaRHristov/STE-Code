@@ -1,0 +1,32 @@
+Corrected text:
+
+---
+
+@dev-team I reviewed the PR and here's my feedback:
+
+1. **`processData` is too long.** It currently handles data fetching, transformation, validation, and persistence in a single function. Consider breaking it into smaller, single-responsibility functions such as `fetchData`, `transformData`, `validateData`, and `persistData`. This will improve readability and testability.
+
+2. **Use `const` and `let` instead of `var`.** `var` has function scope and hoisting behavior that can lead to subtle bugs. `const` should be the default for values that don't change, and `let` for those that do. This aligns with modern JavaScript best practices.
+
+3. **Error handling needs improvement.** Several catch blocks swallow errors silently or only log them without recovery or user feedback. Each catch block should either recover gracefully, provide a meaningful message to the user, or re-throw if the caller is better positioned to handle it.
+
+4. **Tests are missing.** This code touches data processing and persistence — regressions here could corrupt user data or cause silent failures. Please add unit tests covering the happy path, edge cases (empty input, malformed data), and error paths before we merge.
+
+5. **Variable names should be more descriptive.** `x`, `y`, and `tmp` don't convey intent. Rename them to reflect what they represent — for example, `x` → `itemIndex`, `y` → `processedItem`, `tmp` → `intermediateResult` (or whatever is contextually accurate).
+
+Overall the direction is solid, but these changes are needed before we can merge. Happy to discuss any of these points further.
+
+---
+
+Compliance summary:
+
+| # | Issue | Severity | How corrected |
+|---|-------|----------|---------------|
+| 1 | "way too long" / "a bunch of things" | Medium | Replaced vague criticism with specific diagnosis and concrete suggestions (named functions, single-responsibility principle). |
+| 2 | "not good practice" | Low | Replaced with a brief explanation of *why* `var` is problematic (scope, hoisting) and a clear recommendation. |
+| 3 | "kind of messy" / "not doing anything useful" | Medium | Replaced with specific feedback: silent catch blocks, missing recovery/user feedback, and actionable alternatives (recover, message, re-throw). |
+| 4 | "I think we should" / "it'll be really bad" | Medium | Replaced weak hedging with a direct request tied to concrete risk (data corruption, silent failures) and a specific ask (happy path, edge cases, error paths). |
+| 5 | "could be better" / "aren't very descriptive" | Low | Replaced with concrete rename suggestions anchored to what the variables represent. |
+| 6 | "looks okay" / "needs some work" | Medium | Replaced lukewarm closing with a supportive but firm stance ("direction is solid, but these changes are needed") and an invitation to discuss — keeps the relationship constructive while holding the bar. |
+
+Tone shift: From informal, vague, and dismissive → specific, constructive, and professional. Every piece of feedback now includes the **what**, the **why**, and a **concrete suggestion**.

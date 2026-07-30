@@ -1,0 +1,22 @@
+Here is the corrected text:
+
+```
+# Database connection URL — include credentials and correct dialect prefix
+DATABASE_URL=postgresql://user:password@localhost:5432/myapp
+# JWT signing secret — must be a strong random value (≥256 bits) and never committed to version control
+JWT_SECRET=replace-with-a-cryptographically-random-secret
+```
+
+---
+
+**Compliance summary**
+
+| # | Issue | Severity | Fix applied |
+|---|-------|----------|-------------|
+| 1 | `DATABASE_URL` was missing the `user:password@` component — most ORMs and frameworks (SQLAlchemy, Prisma, Django, etc.) require credentials in the connection string. | Medium | Added `user:password@` placeholders; replace with real credentials. |
+| 2 | `JWT_SECRET=super-secret-key` is a hardcoded, guessable placeholder. This is a security finding under OWASP, SOC 2, and any auditor-reviewable config. | **High** | Replaced with a clear placeholder and a comment mandating a cryptographically random value. |
+| 3 | Comment language was informal (`"for JWT stuff"`) and offered no guidance. | Low | Rewrote comments to be precise, actionable, and audit-ready. |
+
+**Additional recommendations**
+- Never commit real secrets to this file. Keep this as a template (e.g., `.env.example`) and let each environment supply real values through a secret manager or CI/CD variables.
+- Generate a real JWT secret with: `openssl rand -base64 64`

@@ -1,0 +1,19 @@
+Corrected text:
+
+Write a Python function `validate_email(address)` that makes sure an email address is correct. Add a full docstring with Arguments and Returns sections. Obey STE-Code rules: use only approved words, write in the active voice, and do not use non-approved technical terms.
+
+---
+
+Compliance summary — 7 changes applied:
+
+| Original | Corrected | Reason |
+|---|---|---|
+| checks | makes sure | "check" (verb) is not an STE-approved word; "make sure" is the approved replacement |
+| valid | correct | "valid" is not STE-approved; "correct" is |
+| Include | Add | Both are approved; "Add" is shorter and more direct |
+| complete | full | Both are approved; "full" is the simpler word |
+| Args | Arguments | Abbreviation spelled out — STE requires standard terms |
+| principles | rules | "principle" is not STE-approved; "rule" is |
+| no jargon | do not use non-approved technical terms | "jargon" is not STE-approved; rewritten with only approved words |
+
+All sentences remain in active voice. The colon-delimited list was restructured to avoid listing a non-approved word as an example of what to avoid — a direct self-violation in the original.

@@ -1,0 +1,26 @@
+Now I have the full STE-Code ruleset. Let me apply the compliance check against the original text systematically.
+
+---
+
+CORRECTED TEXT
+
+This function authenticates the user. It gives a token when authentication succeeds. It gives an error when authentication fails.
+
+---
+
+COMPLIANCE SUMMARY
+
+Original text: *"This function does the authentication thing and returns a token if everything goes well. It might throw an error if something goes wrong."*
+
+6 violations found, all corrected:
+
+| # | Original | Violation | Rule | Fix |
+|---|----------|-----------|------|-----|
+| 1 | "does the authentication thing" | Vague jargon. "thing" is not an approved word and not a code-domain technical noun. Informal construction. | P1, P10, Rule 1.5 | "authenticates the user" |
+| 2 | "and returns a token" | Two actions chained with "and" in one sentence (authentication + return). | Output Format: one instruction per sentence | Split into separate sentence |
+| 3 | "returns" | "return" does not appear in the approved synonym table. Examples consistently replace it with "gives." | P1 | "gives" |
+| 4 | "if everything goes well" | Hedging; "everything" is a vague pronoun; "goes well" is informal. | P1, P10, Style Guide (avoid hedging) | "when authentication succeeds" |
+| 5 | "might throw" | "might" is hedging; "throw" is not an approved verb — use "give." | P1, Style Guide (avoid hedging) | "gives" |
+| 6 | "if something goes wrong" | "something" is a vague pronoun; "goes wrong" is informal. | P1, P10 | "when authentication fails" |
+
+Result: 6/6 violations resolved. 3 sentences, each under 20 words, active voice, all vocabulary approved or code-domain technical nouns ("authentication", "token", "user" are code-domain technical nouns per Rule 1.5 categories 16 and 11).
