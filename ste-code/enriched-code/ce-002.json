@@ -1,0 +1,21 @@
+The JSON was compressed by the CCR engine (large output). Let me provide a clean summary instead:
+
+Enrichment pass "code-examples" batch 2 complete:
+
+  Rules covered: 26 (1.1–1.14, 2.1–2.2, 3.3–3.7, 4.1–4.5)
+  Total entries: 78 (3 STE/non-STE pairs per rule)
+  File: /tmp/ext-code-examples-batch2.json (validated, 20,541 bytes)
+
+All aerospace terms replaced with code-domain equivalents:
+  valve → endpoint/API       engine → server/service
+  aircraft → application     ream → refactor
+  bolt/screw → module/dep    fuel → data/requests
+  landing gear → auth module
+
+Example entry (Rule 3.6 — Active Voice):
+  STE:   "The load balancer distributes requests across three servers."
+  Non:   "Requests are distributed across three servers by the load balancer."
+
+Example entry (Rule 1.11 — Consistent technical nouns):
+  STE:   "Make sure that the API gateway is online. Send a test request to the API gateway."
+  Non:   "Make sure the API gateway is online. Do a health check on the reverse proxy."

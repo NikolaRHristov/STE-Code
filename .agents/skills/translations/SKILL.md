@@ -1,12 +1,14 @@
 ---
-description: "Translation orchestration — set up multi-locale placeholder structure for STE-Code documentation using parallel hermes -z workers. Placeholders only, no translation content yet."
-version: "1.0.0"
+description: "Translation discovery + scaffolding — explore pipeline output, reason about translatability, create fully blank placeholders across 9 locales. Discovery-based, not fixed-grid. Re-scans find new enrichment automatically."
+version: "2.0.0"
 related: [".agents/references/translation-grid.md", ".agents/references/worker-rails.md", ".agents/agent/agent-9-translations.md"]
 ---
 
-# Translation Orchestration
+# Translation Discovery + Scaffolding
 
-Set up a multi-language translation pipeline for STE-Code documentation into 9 target developer languages. This skill handles infrastructure setup and placeholder population — actual translation content comes later.
+Set up a multi-locale translation pipeline by **discovering** translatable content, not following a fixed inventory. Workers explore source directories, reason about what's worth translating, and create fully blank placeholder files at the correct paths for all 9 target locales.
+
+**Why discovery:** Enrichment is ad-hoc across sessions — new words, rules, categories, and examples get added at different times by different agents. A fixed file grid rots immediately. Discovery workers find whatever is on disk right now. Re-run after enrichment to catch new files.
 
 ## Target Locales (9)
 
@@ -22,90 +24,126 @@ Set up a multi-language translation pipeline for STE-Code documentation into 9 t
 | `ru` | Russian | Cyrl | No |
 | `ar` | Arabic | Arab | Yes |
 
-## Directory Layout
-
-Each locale gets a mirror of the STE-Code source structure:
-
-```
-translations/<locale>/
-├── README.md                    # Locale metadata + status
-├── artifacts/                   # 6 artifact files
-├── adapted/                     # 57 adapted rule files
-├── rules/                       # SCE core/rules/ mirror
-├── dictionary/                  # JSON vocabulary files
-└── system-prompts/              # SCE system prompts
-```
-
 ## Placeholder Format
 
-Every placeholder file starts with a YAML frontmatter metadata block:
-
-```yaml
----
-locale: <ISO-639-1>
-language: <Language Name>
-script: <Script Code>
-rtl: <true|false>
-source: ste-code/<original-path>
-status: placeholder
-translated: false
-last_updated: null
----
-```
-
-Followed by the placeholder body:
+**Fully blank.** No YAML frontmatter, no metadata headers, no placeholder text, no locale markers. Just an empty file at the correct path:
 
 ```
-[TRANSLATION PENDING — placeholder only]
+translations/<locale>/<source-relative-path>/<filename>
 ```
+
+The path itself carries the information:
+- `<locale>` tells you the target language
+- `<source-relative-path>` mirrors the original source directory
+- `<filename>` matches the source filename
+
+The catalog (`translations/catalog.md`) tracks what exists and where it came from.
+
+## What's Translatable?
+
+Workers reason about each file:
+
+| Include | Skip |
+|---------|------|
+| `.md` rule files (adapted rules, core rules) | `.schema.json` (JSON schemas) |
+| `.txt` system prompts and artifacts | `.py` scripts |
+| `.md` README files | Config files (`.json` without prose) |
+| `.md` narrative examples | Generated `.json` data (nouns-batch-*.json, verbs-batch-*.json — unless they contain descriptive definitions) |
+| `.md` narrative system prompts | `worker-contract.json`, `rails.json`, `gate-conditions.json` |
+| `.json` vocabulary files (approved-verbs.json, approved-adjectives.json, synonym-table.json) — translate definitions | Scoring/compliance `.json` |
+| `.prompt.md` compute prompts | |
+
+**Reasoning rule of thumb:** If a human developer would read this file and extract meaning from the words, it's translatable. If it's purely structural (schema, config, generated data), skip it.
 
 ## Worker Protocol
 
-Same batch-of-3 pattern as other pipeline agents:
+Batch of 3 workers, each handling 3 locales:
 
 ```bash
-hermes -z "$(cat .agents/prompts/translations/trNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m deepseek-v4-pro --yolo
 ```
 
-**Rules:**
-- Always write prompt to file, pass via `$(cat file)` — never embed multi-line in shell
-- 3 workers per batch, background + notify_on_complete=true
-- Verify after each batch: file exists, metadata header present, placeholder marker present
-- Commit after each batch: `git gcommit-hermes "translations: Batch N — <locale>"`
+**Worker task:**
+1. List all files in the assigned discovery target directory
+2. For each file, reason: translatable or not? (include reasoning in report)
+3. For each translatable file, create a blank placeholder at `translations/<locale>/<source-relative>/<filename>` for all 3 assigned locales
+4. Report discoveries (list every file, decision, created paths)
+
+**Per batch:**
+- Worker 1: locales zh-CN, ja, ko
+- Worker 2: locales es, fr, de
+- Worker 3: locales pt-BR, ru, ar
+
+All 3 workers discover the same source directory but create placeholders for different locale subsets.
+
+## Discovery Targets (10)
+
+In priority order:
+
+| # | Source Directory | Expected Size |
+|---|-----------------|:---:|
+| 1 | `ste-code/artifacts/` | 6 files |
+| 2 | `ste-code/adapted/` | 57 files |
+| 3 | `SCE/narratives/system-prompts/` | 4 files |
+| 4 | `SCE/narratives/examples/` | 2 files |
+| 5 | `SCE/core/rules/` | growing (1+ files) |
+| 6 | `ste-code/v2/narratives/system-prompts/` | 4 files |
+| 7 | `ste-code/v2/narratives/examples/` | 2 files |
+| 8 | `ste-code/v2/core/rules/` | growing (3+ files) |
+| 9 | `SCE/compute/prompts/` | 2 files |
+| 10 | `ste-code/v2/compute/prompts/` | 4 files |
 
 ## Quality Checks (Per Batch)
 
-1. Output file exists: `test -f translations/<locale>/<path>`
-2. Non-empty: `wc -c` > 0
-3. Metadata header present: contains `locale:` in first 5 lines
-4. Placeholder marker: contains `[TRANSLATION PENDING — placeholder only]`
-5. No premature translation: does NOT contain translated STE-Code rule text
-
-## Phase Plan
-
-1. **Infrastructure** — directories, READMEs, references, this skill
-2. **Placeholders** — ~540 empty files across 9 locales (~81 workers, ~27 batches)
-3. **Translation** (future) — actual content by locale-specific translation workers
+1. For each claimed placeholder: `test -f translations/<locale>/<path>` → exists
+2. Each placeholder: `wc -c translations/<locale>/<path>` → 0 (fully blank)
+3. Path correctness: `dirname translations/<locale>/<path>` matches the source directory structure
+4. Catalog consistency: `translations/catalog.md` includes all discoveries from this batch
+5. No false positives: skips are justified with reasons
+6. No false negatives: all readable prose/markdown files are included
 
 ## Progress Tracking
 
 File: `.agents/state/TRANSLATIONS-PROGRESS.md`
 
-After each batch, update with: batch number, locale, worker IDs, files written, next actions. Never let tracking fall behind — the auditor cross-references against disk.
+Format after each batch:
+```markdown
+## Batch N — YYYY-MM-DD HH:MM
+- Target: <source_directory>
+- Workers: 3/3 complete
+- Discovered: <count> translatable files
+- Locales processed: <locale subsets per worker>
+- Placeholders created: <count> (files × 9 locales)
+- Skipped: <count> files (list with reasons)
+- Catalog: updated
+- Next: Batch N+1 (<next_target>)
+```
+
+## Re-Discovery (Post-Enrichment)
+
+After any enrichment session adds files, re-run discovery on the affected target(s). Workers will find:
+- Net-new files (create new placeholders)
+- Previously discovered files (skip — already have placeholders)
+
+The catalog prevents duplicate work. A re-scan that finds nothing new completes instantly.
 
 ## Communication
 
-Signal phase completions in `.agents/feedback/exchange.md`:
+Signal batch completions in `.agents/feedback/exchange.md`:
+
 ```markdown
 ## Agent #9 (Translation Orchestrator) → All Agents — YYYY-MM-DD
-- Phase 1 complete: directories, READMEs, references
-- Phase 2 started: N/540 placeholder files (X%)
+- Discovery: ste-code/artifacts/ (6 translatable, 6 skipped)
+- Placeholders: 54 created (6 × 9 locales)
+- Catalog: 54 entries tracked
+- Next: ste-code/adapted/ (57 files expected)
 ```
 
 ## Key Facts
 
-- 9 locales, ~60 files each, ~540 total placeholders
-- Placeholder only — no translation content
+- 9 locales, discovery-based (not fixed-grid)
+- Placeholders are fully blank (zero bytes)
+- 3 workers per batch, each handles 3 locales
+- 10 discovery targets, re-scannable after enrichment
+- Catalog tracks all discoveries in `translations/catalog.md`
 - deepseek-v4-pro exclusively
-- Batch size: 3, commit per batch
-- Source: STE-Code pipeline output (ste-code/*, SCE/*)

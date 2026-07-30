@@ -11,7 +11,7 @@
 |-----------|---------|
 | [`MASTER.md`](MASTER.md) | Full launch protocol, terminology, pipeline stages |
 | [`README.md`](README.md) | Project overview |
-| [`agent/`](agent/) | Agent role definitions (7 agents) |
+| [`agent/`](agent/) | Agent role definitions (9 agents) |
 | [`benchmark/`](benchmark/) | STE-Code benchmarking suite (59 tests, 14 categories) |
 | [`prompts/`](prompts/) | Worker prompts (adapt, enrich, OSS, refine batches) |
 | [`skills/`](skills/) | Agent skill definitions (extraction, refinement, adaptation, etc.) |
@@ -40,9 +40,8 @@ Extraction → Refinement → Merge → Adaptation → Artifacts
 | 5 | SCE Populator | Generates STE-Code dictionary entries |
 | 6 | STE-Code Analysis | Paradigm-agnostic (OOP/FP/procedural/systems). Produces STE-Code compliant docs + self-audit |
 | 7 | Level Worker | Parameterized worker. Receives level (1-5) + action (test/rewrite/benchmark), loads rules at that depth |
-| 8 | Extension Worker | Generates code-domain extensions (verbs, adjectives, noun categories, anti-patterns) |
-| 9 | Translation Orchestrator | Multi-locale translation pipeline for STE-Code docs. Placeholders only for now — sub-worker polled |
 | 8 | Extension Worker | Generates code-domain gap fillers using batched poll workers. Dictionary entries, category examples, anti-patterns, domain extensions |
+| 9 | Translation Orchestrator | Multi-locale translation pipeline for STE-Code docs. Placeholders only for now — sub-worker polled |
 
 ## Adaptation Levels
 
@@ -102,4 +101,5 @@ python3 .agents/benchmark/launch-levels.py
 | Benchmarking | `skills/benchmarking/SKILL.md` | 59 tests, 14 categories, control group |
 | Level Worker | `skills/level-worker/SKILL.md` | 4 parallel workers at levels 1-4 using oneshot wrapper |
 | Extension Worker | `skills/extension-worker/SKILL.md` | Batched poll workers generating code-domain gap fillers |
+| Translations | `skills/translations/SKILL.md` | Multi-locale placeholder pipeline, 9 locales, ~540 files, batch-of-3 workers |
 | State Report | `skills/state-report.md` | Standardized pipeline state format |
