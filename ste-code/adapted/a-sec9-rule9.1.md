@@ -37,30 +37,35 @@ When you cannot do a word-for-word replacement, think about the purpose of the s
 ### Examples
 
 > **Non-STE:** A timeout value of 5000 ms is acceptable for this endpoint.
+>
 > **STE:** A timeout value of 5000 ms is permitted for this endpoint.
 
 ("Acceptable" is not approved. The approved adjective "permitted" has the same part of speech and does not change the meaning, so a word-for-word replacement is sufficient.)
 *Adapted from spec pair: "A value of 2 mm is acceptable." / "A value of 2 mm is permitted."*
 
 > **Non-STE:** The stack trace in the console must be visible during the debugging session.
+>
 > **STE:** During the debugging session, make sure that you can see the stack trace in the console.
 
 (The approved verb "see" replaces the adjective "visible." To use the verb "see," replace "must be" with "make sure that you can.")
 *Adapted from spec pair: "The oil level on the sight gauge must be visible during the test." / "During the test, make sure that you can see the oil level on the sight gauge."*
 
 > **Non-STE:** Loop the function twice to remove null values from the array.
+>
 > **STE:** Run the function for two iterations to remove null values from the array.
 
 (The approved noun "iteration" together with the approved verb "run" replaces the verb "loop." The technical noun "two" replaces the adverb "twice.")
 *Adapted from spec pair: "Cycle the unit twice to remove air from the lines." / "Operate the unit for two cycles to remove air from the lines."*
 
 > **Non-STE:** Without this configuration change, the behavior of the function can be uncertain.
+>
 > **STE:** Without this configuration change, it is possible that the function will not behave as expected.
 
 ("Uncertain" is not in the controlled terminology. A word-for-word replacement such as "cannot be sure" or "cannot be known" gives a meaningless result. You must think about the meaning and write a new sentence.)
 *Adapted from spec pair: "Without this modification, the service life of the unit can be uncertain." / "Without this modification, it is possible that the service life of this unit will be shorter than usual."*
 
 > **Non-STE:** Just add a single log statement to the method.
+>
 > **STE:** Only add a single log statement to the method.
 >
 > NOT: Immediately add a single log statement to the method.
@@ -69,12 +74,14 @@ When you cannot do a word-for-word replacement, think about the purpose of the s
 *Adapted from spec pair: "Just apply very light pressure to the surface." / "Only apply very light pressure to the surface." NOT: "Immediately apply very light pressure to the surface."*
 
 > **Non-STE:** The occurrence of type errors in the build output is a serious problem.
+>
 > **STE:** Type errors in the build output are a serious problem.
 
 ("Occurrence" is not in the controlled terminology. You must think of a different construction that keeps the same meaning without the unapproved word.)
 *Adapted from spec pair: "The incidence of water in fuel is dangerous." / "Water in fuel is dangerous."*
 
 > **Non-STE:** Scroll the editor pane so that it clears the minimap overlay.
+>
 > **STE:** Scroll the editor pane until it is away from the minimap overlay.
 >
 > NOT: Scroll the editor pane so that it cleans the minimap overlay.

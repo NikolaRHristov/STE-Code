@@ -100,6 +100,7 @@ To verify correct note usage, read the procedure without the notes. If the reade
 (Two sentences, 8 words and 19 words. Descriptive information only, no instructions.)
 
 > **Non-STE:** NOTE: When you update the dependencies, run the command `npm audit fix` to resolve known vulnerabilities. If you skip this step, your application may have security issues.
+>
 > **STE:** (5) Run the command `npm audit fix` to resolve known vulnerabilities.
 >
 > *Adapted from spec: note with imperative form — "Make sure that the avionics ventilation system continues to operate correctly" became work step (6), not a note.*
@@ -107,6 +108,7 @@ To verify correct note usage, read the procedure without the notes. If the reade
 (Do not put instructions in a note. The instruction to run a command is a work step.)
 
 > **Non-STE:** NOTE: The response time must be less than 200 milliseconds under normal load conditions. If the response time is higher, investigate the database query performance.
+>
 > **STE:** The response time must be less than 200 milliseconds under normal load conditions.
 >
 > *Adapted from spec: notes must not give limits, tolerances, or results — this information belongs directly in the work step.*
@@ -120,6 +122,7 @@ To verify correct note usage, read the procedure without the notes. If the reade
 > *Adapted from spec pair: "NOTE: When you connect the lines, do not bend them too much." → "CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH." — a note containing safety information must be moved to a safety instruction.*
 
 > **Non-STE:** NOTE: Do not run the migration script on the production database without first creating a full backup. Running the migration without a backup can cause irreversible data loss.
+>
 > **STE:** WARNING: DO NOT RUN THE MIGRATION SCRIPT ON THE PRODUCTION DATABASE WITHOUT A FULL BACKUP. RUNNING THE MIGRATION WITHOUT A BACKUP CAN CAUSE IRREVERSIBLE DATA LOSS.
 >
 > *Adapted from spec: "WARNING: BEFORE YOU CLOSE THE HATCH, MAKE SURE THAT NO PERSONS ARE IN THE CREW REST COMPARTMENT." — critical safety information belongs in a WARNING, not a note.*

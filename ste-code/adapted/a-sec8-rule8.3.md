@@ -103,11 +103,13 @@ In STE, you can use parentheses as follows:
 ### Examples
 
 > **Non-STE:** A Representational State Transfer Application Programming Interface, or REST API, is an architectural style for designing networked applications relying on stateless, client-server communication.
+>
 > **STE:** A Representational State Transfer Application Programming Interface (REST API) is an architectural style for designing networked applications that uses stateless, client-server communication.
 >
 > *Adapted from spec pattern: abbreviation in parentheses — "A Liquid Crystal Display (LCD) is a flat-panel display..."*
 
 > **Non-STE:** Run the migration on all database shard servers, the primary and all replica instances, before you deploy.
+>
 > **STE:** Run the migration on all database shard(s) before you deploy.
 >
 > *Adapted from spec pattern: singular/plural in parentheses — "Before you do the test(s), install the component(s)."*

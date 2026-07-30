@@ -269,6 +269,7 @@ When you count words for sentence length, count each of these as one word:
 ### Examples
 
 > **Non-STE:** The JSON Web Token authentication middleware must validate the signature of each incoming request using the public key obtained from the OpenID Connect identity provider, and the token must have an expiry time of not more than three hundred and sixty seconds to be valid for processing.
+>
 > **STE:** The JWT authentication middleware must validate the signature of each incoming request. The token must have an expiry time of not more than 360 seconds to be valid for processing. (11 words each)
 >
 > *Adapted from spec pattern: abbreviation counts as one word — "During this safety check, obey NASA protocols." — and number with unit counts as one word — "Make sure that the temperature in the room is 10 °C."*
@@ -276,6 +277,7 @@ When you count words for sentence length, count each of these as one word:
 ("JWT" is an abbreviation and counts as one word. "360 seconds" is a number together with a unit of measurement and counts as one word.)
 
 > **Non-STE:** Before you run the database migration script, refer to the document titled Migration Procedures and Rollback Strategies for PostgreSQL Version 15 Cluster Deployments for the applicable safety procedures and precautionary measures.
+>
 > **STE:** Before you run the migration, refer to the Migration Procedures and Rollback Strategies for the applicable safety procedures. (16 words)
 >
 > *Adapted from spec pair: "Before you start a repair, refer to the Structural Repair Manual for the applicable safety procedures and precautions." — document title counts as one word.*

@@ -65,11 +65,13 @@ A hyphen is different from a dash, which divides ideas, shows a range, or gives 
 ### Examples
 
 > **Non-STE:** The high priority task must acquire the write lock before it can modify the shared data structure.
+>
 > **STE:** The high-priority task must get the write lock before it can change the shared data structure.
 >
 > *Adapted from spec pattern: compound adjectives before nouns — "low-altitude flight," "high-pressure chamber."*
 
 > **Non-STE:** Use a read only file descriptor to open the configuration for parsing.
+>
 > **STE:** Use a read-only file descriptor to open the configuration for parsing.
 >
 > *Adapted from spec pattern: compound adjectives before nouns — "quick-release fastener," "fire-resistant material."*

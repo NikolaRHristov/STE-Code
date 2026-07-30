@@ -23,26 +23,31 @@ This conjunction also helps with translation and with readers whose first langua
 ### Examples
 
 > **Non-STE:** Make sure the database connection is open before you run the query.
+>
 > **STE:** Make sure that the database connection is open before you run the query.
 >
 > *Adapted from spec pattern: "that" after "make sure" — the spec recommends using "that" after verbs such as "make sure," "show," and "recommend."*
 
 > **Non-STE:** The API documentation recommends you set the timeout to 30 seconds.
+>
 > **STE:** The API documentation recommends that you set the timeout to 30 seconds.
 >
 > *Adapted from spec pattern: "that" after "recommend" — same verb class as the spec's "recommend."*
 
 > **Non-STE:** The terminal output shows the build completed without errors.
+>
 > **STE:** The terminal output shows that the build completed without errors.
 >
 > *Adapted from spec pattern: "that" after "show" — same verb class as the spec's "show."*
 
 > **Non-STE:** Verify the environment variable is set correctly.
+>
 > **STE:** Verify that the environment variable is set correctly.
 >
 > *Adapted from spec pattern: "that" after verification verbs — extends the spec's pattern to "verify" and similar verbs.*
 
 > **Non-STE:** Confirm the user has write permissions to the target directory.
+>
 > **STE:** Confirm that the user has write permissions to the target directory.
 >
 > *Adapted from spec pattern: "that" after confirmation verbs — extends the spec's pattern to "confirm" and similar verbs.*

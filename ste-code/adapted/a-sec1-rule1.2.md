@@ -15,6 +15,7 @@ Examples:
 > **STE:** Test B is an alternative to test A.
 
 > **Non-STE:** Test the system for leaks.
+>
 > **STE:** Do the leak test of the system.
 
 or
@@ -60,11 +61,13 @@ If a word that you want to use is not in the controlled terminology:
 ### Examples
 
 > **Non-STE:** Query the database for user records.
+>
 > **STE:** Send a query to the database for user records.
 
 > *Adapted from spec pair: "Test the system for leaks" → "Do the leak test of the system." Just as "test" is only an approved noun in STE and cannot be used as a verb, "query" is only an approved noun in STE-Code. The STE version uses the approved verb "send" with the approved noun "query."*
 
 > **Non-STE:** Static the variable to prevent modification.
+>
 > **STE:** Make the variable static to prevent modification.
 
 > *Adapted from spec example: "dim" is an approved adjective but not a verb. Just as you cannot use "dim" as a verb in STE, you cannot use "static" as a verb in STE-Code. The STE version uses the approved verb "make" with the approved adjective "static."*
@@ -84,6 +87,7 @@ The most common violation pattern is noun-as-verb: using a code-domain technical
 Another frequent pattern is adjective-as-verb: using a property name like "secure," "empty," or "silent" as a verb. "Secure the endpoint" is a Rule 1.2 violation because "secure" is an approved adjective, not an approved verb. The STE-Code construction uses "make" with the adjective: "Make the endpoint secure."
 
 > **Non-STE:** Docker the app and deploy to production. If it fails, rollback.
+>
 > **STE:** Use Docker to make a container for the application. Deploy the container to production. If the deployment fails, roll back to the previous version.
 > *(P2 applied: "Docker" is a noun, not a verb → "Use Docker." P2 applied: "rollback" as a verb → "roll back" using the approved verb "roll" with the adverb "back.")*
 
@@ -96,6 +100,7 @@ A common violation is using a code-domain technical noun like "cache," "map," or
 Status-code and error-condition descriptions also trigger Rule 1.2 when writers use adjectives as verbs: "Errors if the token is missing" uses "errors" as a verb. The correct form uses the approved noun "error" with an approved verb: "Gives an error if the token is not present."
 
 > **Non-STE:** POST /api/users — Creates a user. Caches the profile. Errors on duplicate email.
+>
 > **STE:** POST /api/users — Makes a new user record. Keeps the profile in the cache. Gives an error on a duplicate email address.
 > *(P2 applied: "Creates" → "Makes"; "Caches" → "Keeps in the cache"; "Errors" → "Gives an error.")*
 
@@ -108,6 +113,7 @@ In Python docstrings, the word "param" is a code-domain technical noun (short fo
 In inline comments, abbreviations like "init" (for "initialization") are code-domain technical nouns. "Init the connection" is a violation. The correct form uses an approved verb: "Start the connection" or "Make the connection ready."
 
 > **Non-STE:** # init the pool, then cache the results, finally error if null
+>
 > **STE:** # Start the connection pool. Keep the results in the cache. Give an error when the value is null.
 > *(P2 applied: "init" as a verb → "Start"; "cache" as a verb → "Keep in the cache"; "error" as a verb → "Give an error.")*
 
@@ -120,6 +126,7 @@ The description must use approved verbs in their approved imperative form. "Cach
 When a commit message describes a refactor, the word "refactor" is a code-domain technical verb (permitted under Rule 1.12). But if the change is simple, prefer an approved verb: "fix" instead of "refactor to correct."
 
 > **Non-STE:** fix: cache the query results to speed up the dashboard
+>
 > **STE:** fix: add a cache for query results to make the dashboard faster
 > *(P2 applied: "cache" as a verb → "add a cache." "Speed up" is a phrasal verb using "speed" as a verb — restructured to "make faster" using the approved adjective.)*
 
@@ -132,6 +139,7 @@ The word "fail" is an approved verb in the controlled terminology. "The connecti
 The word "timeout" is a code-domain technical noun. "The request timed out" uses "timed out" as a verb phrase derived from the noun. This is a Rule 1.2 violation. The STE-Code version uses an approved verb: "The request did not complete within the timeout period."
 
 > **Non-STE:** Error: Connection timeout. The server timed out after 30s.
+>
 > **STE:** Error: Connection did not complete. The server did not answer within the 30-second timeout.
 > *(P2 applied: "timed out" as a verb → "did not answer within the timeout.")*
 
@@ -152,6 +160,7 @@ Similarly, "Singleton the instance" is a violation. Use "Make the instance a sin
 Inheritance descriptions also trigger Rule 1.2 when writers use the base class name as a verb: "The Admin class Users the base class" is a violation. Use "The Admin class extends the User base class" or "The Admin class gets properties from the User base class."
 
 > **Non-STE:** The `UserService` singletons the connection pool and factories the query builders.
+>
 > **STE:** The `UserService` class uses a singleton pattern for the connection pool. It makes query builders with a factory method.
 > *(P2 applied: "singletons" as a verb → "uses a singleton pattern"; "factories" as a verb → "makes with a factory method.")*
 
@@ -164,6 +173,7 @@ The word "map" is a code-domain technical verb meaning "transform each element o
 The word "apply" has two valid uses: (1) as an approved general English verb meaning "put something on something" and (2) as a code-domain technical verb meaning "give arguments to a function." Both uses are valid under different rules, and Rule 1.2 does not conflict because "apply" is approved as a verb in the controlled terminology.
 
 > **Non-STE:** Map the values through the transformer, then pipe the result into the reducer.
+>
 > **STE:** Apply the `map` function to change each value. Then apply the `pipe` function to send the result into the `reduce` function.
 > *(P2 applied: "pipe" as a verb → "apply the `pipe` function." "Map" remains valid as a technical verb. "Reducer" restructured to "`reduce` function" for clarity.)*
 
@@ -178,6 +188,7 @@ In Go documentation, "goroutine" is a code-domain technical noun. "Goroutine the
 In Bash documentation, commands are code-domain technical nouns (category 3, dev tools). "Grep the file" is a Rule 1.2 violation if "grep" is treated as a verb. Use "Use `grep` to find the text in the file."
 
 > **Non-STE:** Malloc a struct, memset it to zero, then free it when done.
+>
 > **STE:** Make a struct with `malloc`. Set all bytes to zero with `memset`. Free the struct when the operation is complete.
 > *(P2 applied: "Malloc" as a verb → "Make with `malloc`"; "memset" as a verb → "Set with `memset`." The function names remain code-domain technical nouns. "Free" is a code-domain technical verb and is permitted.)*
 
@@ -192,6 +203,7 @@ SQL keywords (SELECT, INSERT, UPDATE, DELETE) are code-domain technical verbs. W
 In Terraform documentation, resource names like "aws_instance" are code-domain technical nouns. "Terraform the infrastructure" is a Rule 1.2 violation — "Terraform" is a technical noun, not a verb. Use "Use Terraform to make the infrastructure."
 
 > **Non-STE:** Terraform the VPC, then Kubectl the pods into the cluster.
+>
 > **STE:** Use Terraform to make the VPC. Use `kubectl` to apply the pod configuration to the cluster.
 > *(P2 applied: "Terraform" as a verb → "Use Terraform"; "Kubectl" as a verb → "Use `kubectl`.")*
 
@@ -204,6 +216,7 @@ In Rust documentation, "borrow," "own," and "move" are code-domain technical ver
 "Unsafe" is an approved adjective in the controlled terminology (meaning "not safe"). In Rust, "unsafe" is also a keyword and a code-domain technical noun (an `unsafe` block). When used as a keyword, mark it with backticks. When used as a descriptive adjective, it follows Rule 1.2 as an adjective.
 
 > **Non-STE:** The function unsafes the pointer access and drops the guard afterwards.
+>
 > **STE:** The function uses `unsafe` for the pointer access. It runs the `Drop` implementation for the guard afterwards.
 > *(P2 applied: "unsafes" as a verb → "uses `unsafe`"; "drops" as a verb without marking → "runs the `Drop` implementation.")*
 
@@ -216,6 +229,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 1 — README: Build and Run Instructions
 
 > **Non-STE:** Clone the repo, then npm install to dependency the project. Webpack the bundle and express the server on port 3000.
+>
 > **STE:** Clone the repository. Run `npm install` to get the dependencies. Use `webpack` to make the bundle. Start the Express server on port 3000.
 
 > **Principles applied:** P2 (use approved part of speech: "dependency" is a noun → "get the dependencies"; "Webpack" is a noun → "Use `webpack`"; "express" is a noun → "Start the Express server").
@@ -242,6 +256,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 3 — Commit Message: Repository Pattern Refactor
 
 > **Non-STE:** refactor: interface the user repository and factory the database connection
+>
 > **STE:** refactor: add an interface to the user repository and use a factory for the database connection
 
 > **Principles applied:** P2 (use approved part of speech: "interface" is a noun → "add an interface"; "factory" is a noun → "use a factory"); P1 (use approved words: "add" and "use" are approved verbs).
@@ -250,6 +265,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 4 — Error Message: Database Connection Failure
 
 > **Non-STE:** FATAL: Could not database the connection. The pool is empty. Retry the operation or contact your admin.
+>
 > **STE:** FATAL: Could not connect to the database. The connection pool has no available connections. Try the operation again or speak to your administrator.
 
 > **Principles applied:** P2 (use approved part of speech: "database" is a noun → "connect to the database"; "empty" used without a verb → "has no available connections"); P1 (use approved words: "retry" → "try again"; "contact" → "speak to"; "admin" → "administrator").
@@ -302,6 +318,7 @@ The following scenarios show where the boundary between approved parts of speech
 **Guidance:** When a word is approved as more than one part of speech, the context must make the role clear. If the same word appears multiple times in one sentence with different roles, restructure the sentence to use different approved words. For "commit," use "commit" as the verb and "change set" as the noun when both roles must appear in the same sentence.
 
 > **Non-STE:** The commit committed the files to the commit history.
+>
 > **STE:** The `git commit` command added the files to the change history.
 > *(P11 applied: one term per concept — use "change history" instead of "commit history" to avoid the double "commit.")*
 
@@ -312,6 +329,7 @@ The following scenarios show where the boundary between approved parts of speech
 **Guidance:** The tool name is a code-domain technical noun. When writing prose documentation, always introduce an approved verb before the tool name: "Use Docker to start the containers" instead of "Docker the containers." When quoting a CLI command literally inside a code block, the command is quoted text (Rule 1.5, category 10) and Rule 1.2 does not apply. The distinction is between prose (must follow Rule 1.2) and code blocks (exempt).
 
 > **Non-STE:** Kubectl the deployment into the cluster.
+>
 > **STE:** Use `kubectl apply` to send the deployment to the cluster.
 > *(P2 applied: "Kubectl" as a verb → "Use `kubectl apply`." The CLI command `kubectl apply` is a compound technical noun.)*
 
@@ -322,6 +340,7 @@ The following scenarios show where the boundary between approved parts of speech
 **Guidance:** These are jargon (violation of Rule 1.10) and part-of-speech violations (Rule 1.2). They are not permitted in STE-Code regardless of how common they are. Use approved constructions: "Make the build pass," "Mark the test as flaky," "Cause the deployment to fail." Color-based status terminology is especially problematic for accessibility and translation — avoid it entirely.
 
 > **Non-STE:** We need to green the CI before we can ship.
+>
 > **STE:** We must make the CI pipeline pass before we can deploy.
 > *(P2 applied: "green" as a verb → "make pass"; P10 applied: "ship" is slang → "deploy.")*
 
@@ -332,6 +351,7 @@ The following scenarios show where the boundary between approved parts of speech
 **Guidance:** When used as a verb in prose without backticks, the word must be an approved verb in the controlled terminology. "Return" is approved as a verb (meaning "send a value back from a function") — "Return the value" is correct. "Import" is not an approved verb in the controlled terminology — "Import the module" is a Rule 1.2 violation. Use "Add the module with `import`" or "Use `import` to add the module." "Export" is not an approved verb — use "Make the function available with `export`."
 
 > **Non-STE:** Import the helper, export the main function, and return the result.
+>
 > **STE:** Use `import` to add the helper. Use `export` to make the main function available. Return the result.
 > *(P2 applied: "Import" as a verb without backticks → "Use `import`"; "Export" as a verb without backticks → "Use `export`." "Return" is an approved verb and remains unchanged.)*
 
@@ -344,6 +364,7 @@ The following scenarios show where the boundary between approved parts of speech
 For "input" and "output" — these are code-domain technical verbs. Their past participles follow domain convention. For approved verbs like "run" (ran, running) or "set" (set, setting), only the forms listed in the controlled terminology are permitted.
 
 > **Non-STE:** The user inputted the data and the system outputted the report.
+>
 > **STE:** The user gave the data as input. The system wrote the report as output.
 > *(P2 applied: "inputted" and "outputted" are rare and awkward forms. The STE version uses the approved nouns "input" and "output" with approved verbs "gave" and "wrote.")*
 

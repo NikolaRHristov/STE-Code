@@ -118,6 +118,7 @@ The code-domain technical nouns in their related categories are only examples. R
 ### Examples
 
 > **Non-STE:** The developer used the thing to get data from the storage layer and put it on the screen.
+>
 > **STE:** The frontend developer used the API client to get data from the database and show it on the UI.
 
 > *Adapted from spec concept: technical nouns give precision to documentation. Just as STE uses categories like "Vehicles or machines" and "Tools and support equipment" to classify aerospace nouns, STE-Code uses categories like "Professional roles" (frontend developer), "Computer science" (API client, database), and "Interface elements" (UI) to classify code-domain nouns. The non-STE version uses imprecise words ("thing," "storage layer," "screen") that are not clearly identified as technical nouns.*
@@ -224,6 +225,7 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 ### Example Group 1: API Documentation
 
 > **Non-STE:** The endpoint leverages the middleware to authenticate the request and then kicks off a background job to crunch the data.
+>
 > **STE:** The endpoint uses the authentication middleware to check the request. The endpoint then starts a background job to process the data.
 
 - **Principle applied:** P1 (use approved words: "use" instead of "leverage", "check" instead of "authenticate", "start" instead of "kicks off", "process" instead of "crunch")
@@ -233,6 +235,7 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 ### Example Group 2: README Installation Instructions
 
 > **Non-STE:** First, snag the repo and then cd into it. After that, fire up the dev server.
+>
 > **STE:** First, clone the repository. Then, change to the repository directory. After that, start the development server.
 
 - **Principle applied:** P1 (use approved words: "clone" is a technical verb per P12, "change" instead of "cd", "start" instead of "fire up"), P10 (no slang: "snag" is informal)
@@ -242,6 +245,7 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 ### Example Group 3: Commit Message
 
 > **Non-STE:** Bumped deps and fixed the wonky timeout thing that was breaking prod.
+>
 > **STE:** Update dependencies. Fix a timeout defect in the connection pool that caused a crash in production.
 
 - **Principle applied:** P1 (use approved words: "update" instead of "bumped"), P10 (no jargon: "wonky" is informal, "prod" is informal), P11 (one term per concept: "defect" instead of "thing")
@@ -251,6 +255,7 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 ### Example Group 4: Error Message
 
 > **Non-STE:** Oops! Something went sideways when the DB tried to do its thing.
+>
 > **STE:** Error: The PostgreSQL connection pool could not get a connection. The TCP socket timed out after 30 seconds.
 
 - **Principle applied:** P1 (use approved words), P10 (no slang: "went sideways", "do its thing"), P11 (one term per concept: name the specific component)
@@ -260,6 +265,7 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 ### Example Group 5: Docstring for a Function
 
 > **Non-STE:** This guy walks the tree and yanks out all the nodes that match the predicate.
+>
 > **STE:** Traverse the binary search tree. Return a list of nodes that match the predicate function.
 
 - **Principle applied:** P1 (use approved words: "return" instead of "yanks out"), P10 (no slang: "this guy", "walks", "yanks out"), P11 (one term per concept: "traverse" is the standard term for tree navigation)
@@ -269,6 +275,7 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 ### Example Group 6: Configuration File Comment
 
 > **Non-STE:** Tweak this knob if you want the thing to go faster but be careful not to blow up the memory.
+>
 > **STE:** Increase this value to reduce the response time. WARNING: Large values can cause a memory leak.
 
 - **Principle applied:** P1 (use approved words: "increase" instead of "tweak"), P10 (no slang: "knob", "blow up"), P11 (one term per concept: "response time" instead of "go faster")

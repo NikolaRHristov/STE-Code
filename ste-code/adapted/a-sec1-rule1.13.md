@@ -110,11 +110,13 @@ Rust documentation has an approved exception: the borrow checker is a named syst
 ### Examples
 
 > **Non-STE:** Do a compile of the source files.
+>
 > **STE:** Compile the source files.
 
 > *Adapted from spec example: "Enter your password" — "enter" must be used only as a verb. Just as you cannot use "enter" as a noun in STE, you cannot use "compile" as a noun in STE-Code. "Compile" is a code-domain technical verb (category 1 a), development processes, write and modify code). The non-STE version uses "compile" as a noun, which is not permitted. The STE version uses "compile" correctly as a verb.*
 
 > **Non-STE:** The merge of the feature branch caused a conflict.
+>
 > **STE:** The merge operation of the feature branch caused a conflict.
 
 > *Adapted from spec principle: technical verbs must be used only as verbs. "Merge" is a code-domain technical verb (category 1 c), development processes, build and package). The non-STE example uses "merge" as a noun. The STE version uses "merge" as an adjective that is part of the code-domain technical noun "merge operation."*
@@ -128,16 +130,19 @@ Rust documentation has an approved exception: the borrow checker is a named syst
 > *Adapted from spec example: "There are two methods to plate the ring nut (2)" — "plate" can be both a technical verb and a technical noun. Just as "plate" in the spec can be a technical verb (category 1 c), attach material) and also a technical noun (a different context), "deploy" can be both a code-domain technical verb (category 1 c), build and package) and a code-domain technical noun (category 5, infrastructure, deployment, and platforms). In the second example, "deploy" refers to a deployment event or process as a noun — it fits into a code-domain technical noun category in the same way "plate" fits into a technical noun category in the spec.*
 
 > **Non-STE:** Execute a rollback of the migration.
+>
 > **STE:** Roll back the migration.
 
 > *Principle applied: P13 — Do not use technical verbs as nouns. "Rollback" is a code-domain technical verb (category 3 b), database and storage). The non-STE version nominalizes "rollback" with a light verb "Execute." The STE version uses "roll back" as the main verb of the sentence — the approved verb "roll" plus the particle "back." If the project uses "rollback" as a compound noun (category 18, database and storage), the STE version "Run the rollback of the migration" is also correct because "rollback" then fits a technical noun category.*
 
 > **Non-STE:** The import of the module takes approximately ten seconds.
+>
 > **STE:** The import operation for the module takes approximately ten seconds.
 
 > *Principle applied: P13 — Do not use technical verbs as nouns, P1 — Use approved words from the STE-Code dictionary. "Import" is a code-domain technical verb (category 1 a), development processes, write and modify code). In the non-STE version, "import" is used as a noun. The STE version replaces it with the approved noun "operation" modified by "import" as an adjective. An alternative STE version "Importing the module takes approximately ten seconds" uses the gerund form — gerunds are permitted in descriptive text when they describe an ongoing process, but avoid them as main verbs in procedural sentences (refer to Section 3 grammar rules).*
 
 > **Non-STE:** Make a commit of your changes before you switch branches.
+>
 > **STE:** Commit your changes before you switch branches.
 
 > *Principle applied: P13 — Do not use technical verbs as nouns, P4 — Use only approved verb forms. "Commit" is a code-domain technical verb (category 2 c), system operations). The non-STE version wraps "commit" in a light verb construction "Make a commit." The STE version uses "commit" directly as the main imperative verb. In Git documentation, "a commit" as a noun (referring to a snapshot object) is correct because it is a code-domain technical noun (category 4, data structures) — this is the dual-category exception from rule 1.5 and rule 1.12.*

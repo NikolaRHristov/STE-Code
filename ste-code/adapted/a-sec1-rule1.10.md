@@ -33,31 +33,37 @@ This rule is also applicable to technical slang or jargon words. If only a small
 ### Examples
 
 > **Non-STE:** Remove all the cruft from the legacy module.
+>
 > **STE:** Remove all the unnecessary code from the legacy module.
 
 > *Adapted from spec example: "Gear" is technical jargon for "tools and equipment" — its meaning is not immediately clear to the reader. Just as "gear" is unclear to readers outside a specific community, "cruft" is hacker jargon that means "poorly designed or unnecessary code." Its meaning is not immediately clear to readers who are not familiar with the jargon. The STE version uses the approved words "unnecessary code," just as the spec example replaces "gear" with the clearer phrase "tools and equipment."*
 
 > **Non-STE:** The function monkeys with the input data before validation.
+>
 > **STE:** The function changes the input data before validation.
 
 > *Adapted from spec example: "Skid road" is a regional term not understood by readers from other areas. Just as "skid road" is a forestry term used only in specific regions, "monkey with" is slang used only in certain developer communities. Its meaning ("to tamper with or change in an uncontrolled way") is not clear to non-native English readers or developers from other backgrounds. The STE version uses the approved verb "change."*
 
 > **Non-STE:** Bikeshedding delayed the API design by two weeks.
+>
 > **STE:** Unnecessary discussion about small details delayed the API design by two weeks.
 
 > *Principle: P10. "Bikeshedding" is jargon from Parkinson's Law of Triviality. It means "spending disproportionate time on trivial details." Only developers familiar with the history of this term understand it. The STE version uses the approved adjective "unnecessary" with the noun "discussion."*
 
 > **Non-STE:** I spent the morning yak shaving before I could write the test.
+>
 > **STE:** I spent the morning completing unrelated prerequisite tasks before I could write the test.
 
 > *Principle: P10. "Yak shaving" is hacker jargon that describes a chain of small, seemingly unrelated tasks that must be completed before the main task. Its meaning is opaque to any reader not familiar with the Ren and Stimpy reference. The STE version describes the actual activity without metaphor.*
 
 > **Non-STE:** Replace the foo and bar placeholders with real values.
+>
 > **STE:** Replace the example and placeholder values with real values.
 
 > *Principle: P10. "Foo" and "bar" are metasyntactic variables from early hacker culture. While widely used in code examples, they have no semantic meaning and confuse readers who are not familiar with the convention. Use "example" or "placeholder" to make the purpose clear.*
 
 > **Non-STE:** Take time to grok the authentication module before making changes.
+>
 > **STE:** Take time to understand the authentication module before making changes.
 
 > *Principle: P1, P10. "Grok" is a term from Robert Heinlein's 1961 novel "Stranger in a Strange Land." It entered hacker vocabulary through early computing culture. It means "to understand deeply and intuitively." The approved verb "understand" is clear to all readers.*
@@ -99,6 +105,7 @@ Each example below shows a common code-documentation scenario where slang or jar
 **Example 1: Hacker Jargon in Code Review Comments**
 
 > **Non-STE:** This regex is a dumpster fire. Nuke it from orbit.
+>
 > **STE:** This regular expression is too complex and unreliable. Remove it and write a new one.
 
 > *Principle: P10, P6. "Dumpster fire" is American slang for a complete failure. "Nuke it from orbit" is a movie reference (Aliens, 1986). Neither phrase is clear to a global audience. The STE version states the problem and the required action in approved words.*
@@ -106,6 +113,7 @@ Each example below shows a common code-documentation scenario where slang or jar
 **Example 2: Gaming Slang in Performance Documentation**
 
 > **Non-STE:** The garbage collector is totally nerfed in v2.4.
+>
 > **STE:** The garbage collector has decreased performance in version 2.4.
 
 > *Principle: P10. "Nerfed" comes from online gaming culture. It means "made weaker or less effective." A developer who does not play online games does not understand this word. The STE version uses "decreased performance," which is clear to all readers.*
@@ -113,6 +121,7 @@ Each example below shows a common code-documentation scenario where slang or jar
 **Example 3: Cultural Metaphor in Architecture Docs**
 
 > **Non-STE:** The monolith is our Gordian knot. We need a strangle pattern.
+>
 > **STE:** The monolithic application has many tightly connected parts. Use a gradual replacement pattern.
 
 > *Principle: P10. "Gordian knot" is a reference to Greek mythology. "Strangle pattern" (short for "strangler fig pattern") is a metaphor from botany. Both assume cultural and domain knowledge. The STE version describes the architecture without metaphor.*
@@ -120,6 +129,7 @@ Each example below shows a common code-documentation scenario where slang or jar
 **Example 4: Community Nickname in API Docs**
 
 > **Non-STE:** The v2 endpoint is the shiny new hotness.
+>
 > **STE:** The version 2 endpoint is the current interface. Use it for all new integrations.
 
 > *Principle: P10, P1. "Shiny new hotness" is informal English with no technical meaning. It does not tell the reader what to do or why version 2 matters. The STE version uses approved words and gives a clear instruction.*
@@ -127,6 +137,7 @@ Each example below shows a common code-documentation scenario where slang or jar
 **Example 5: Regional Idiom in Error Messages**
 
 > **Non-STE:** The upload went pear-shaped halfway through.
+>
 > **STE:** The upload failed at 50 percent. Check your network connection and try again.
 
 > *Principle: P10. "Went pear-shaped" is a British idiom meaning "went wrong." American and Asian readers may not know this expression. The STE version states the failure point precisely and gives a recovery action.*
@@ -134,6 +145,7 @@ Each example below shows a common code-documentation scenario where slang or jar
 **Example 6: Slang Verb in Commit Messages**
 
 > **Non-STE:** Yeet the deprecated config parser.
+>
 > **STE:** Remove the deprecated configuration parser.
 
 > *Principle: P10. "Yeet" is recent internet slang meaning "to discard forcefully." Its meaning is unknown to most professional developers and will age poorly. The approved verb "remove" is timeless and clear.*

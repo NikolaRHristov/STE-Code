@@ -33,11 +33,13 @@ When an approved word has only one approved meaning in the controlled terminolog
 ### Examples
 
 > **Non-STE:** Follow the configuration steps to set up the server.
+>
 > **STE:** Obey the configuration instructions to set up the server.
 
 > *Adapted from spec concept: "follow" (approved meaning: "come after, go after") is misused to mean "act in accordance with." In the spec, you must use "obey" when you mean "comply with instructions." The same distinction applies in STE-Code: use "follow" only for sequence ("Do the steps that follow") and use "obey" for compliance ("Obey the instructions").*
 
 > **Non-STE:** The function will return you to the login screen.
+>
 > **STE:** The function will go back to the login screen.
 
 > *Adapted from spec concept: each approved word has a specified approved meaning that limits its use. In STE-Code, the approved meaning of "return" is "to send a value back from a function to its caller." Using "return" to mean "go back" is not an approved meaning. The STE version uses the approved phrase "go back."*
@@ -62,6 +64,7 @@ README files use a small set of approved verbs with precise approved meanings. T
 Example — README project description:
 
 > **Non-STE:** This tool runs your CI pipeline. It runs on any platform and runs 24/7 without supervision.
+>
 > **STE:** This tool executes your CI pipeline. It operates on any platform and operates continuously without supervision.
 > *(P3 applied: first "runs" = execute (approved meaning, correct); second "runs" = operates (wrong approved meaning, replaced with "operates"); third "runs" = operates (wrong approved meaning, replaced))*
 
@@ -80,6 +83,7 @@ API documentation describes functions, methods, endpoints, parameters, and retur
 Example — API endpoint description:
 
 > **Non-STE:** GET /users returns a list of users. It gets the data from the cache first. If the cache misses, it gets the data from the database.
+>
 > **STE:** GET /users gives a list of users. It gets the data from the cache first. If the cache does not have the data, it gets the data from the database.
 > *(P3 applied: "returns" → "gives" — the endpoint gives data to the client, the function returns a value; "misses" → "does not have" — "miss" is not an approved verb in this context)*
 
@@ -97,6 +101,7 @@ Docstrings and inline comments explain what code does. The most common Rule 1.3 
 Example — Python docstring:
 
 > **Non-STE:** Raises the value by 10% and passes it through the pipeline. Checks the result before returning.
+>
 > **STE:** Increases the value by 10% and sends it through the pipeline. Examines the result before it goes back.
 > *(P3 applied: "raises" → "increases" — "raise" means "cause an exception," not "increase"; "passes" → "sends" — "pass" means "give as argument," not "send through"; "checks" → "examines" — "check" is approved but "examines" is more precise; "returning" → "goes back" — "return" means "send a value back," not "go back")*
 
@@ -115,6 +120,7 @@ Commit messages use a constrained vocabulary where each approved verb has exactl
 Example — commit message:
 
 > **Non-STE:** fix: set the timeout to stop connections from running forever
+>
 > **STE:** fix: set the timeout to stop connections that do not complete
 > *(P3 applied: "running" → "that do not complete" — "run" means "execute," not "continue indefinitely")*
 
@@ -132,6 +138,7 @@ Error messages appear at runtime and must be understood quickly by users and dev
 Example — error message:
 
 > **Non-STE:** Connection failed: the server refused to negotiate the handshake. The operation timed out after 30s.
+>
 > **STE:** Connection did not complete: the server refused the handshake. The operation stopped after 30 seconds.
 > *(P3 applied: "failed" → "did not complete" — "fail" means "did not complete successfully"; "negotiate" → removed — "negotiate" is not approved in this sense; "timed out" → "stopped after 30 seconds" — "timeout" is a noun, and the approved meaning is "time limit exceeded," but restructured to avoid the noun-as-verb issue)*
 
@@ -161,6 +168,7 @@ Object-oriented documentation uses a set of approved words that have narrow, par
 Example — class hierarchy documentation:
 
 > **Non-STE:** The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before running its own checks.
+>
 > **STE:** The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before it does its own checks.
 > *(P3 applied: "running" → "does" — "run" means "execute a program," not "perform checks"; the OOP-specific uses of "extends," "overrides," and "calls" all use their approved OOP meanings correctly)*
 
@@ -184,6 +192,7 @@ Functional documentation uses approved words with meanings that are often more m
 Example — module documentation:
 
 > **Non-STE:** This module composes pure functions that map, filter, and reduce collections without mutating state.
+>
 > **STE:** This module composes pure functions that map, filter, and reduce collections without changing state.
 > *(P3 applied: "mutating" → "changing" — "mutate" is a code-domain technical verb with a specific approved meaning ("change state destructively"), and here it is used in its general English sense; "changing" is the approved alternative)*
 
@@ -207,6 +216,7 @@ Procedural documentation uses a lean set of approved verbs, each with exactly on
 Example — C function documentation:
 
 > **Non-STE:** The function allocates a buffer, passes it to the handler, and breaks if the handler returns an error.
+>
 > **STE:** The function allocates a buffer, gives it to the handler, and stops if the handler gives an error.
 > *(P3 applied: "passes" → "gives" — "pass" means "give as argument," not "hand over"; "breaks" → "stops" — "break" means "exit a loop," not "stop executing"; "returns" → "gives" — "return" means "send a value back from a function," and "gives" is clearer in this context)*
 
@@ -230,6 +240,7 @@ Declarative documentation describes desired state. The approved words in declara
 Example — Terraform documentation:
 
 > **Non-STE:** Apply the configuration to provision the resources. The plan will create three instances and join them to the load balancer.
+>
 > **STE:** Apply the configuration to make the resources. The plan will create three instances and connect them to the load balancer.
 > *(P3 applied: "provision" → "make" — "provision" as a general verb is not approved; "join" → "connect" — "join" as a SQL keyword means "combine rows," and in prose it should use "connect" for the general sense)*
 
@@ -253,6 +264,7 @@ Systems documentation uses approved words that have been given highly specific m
 Example — Rust ownership documentation:
 
 > **Non-STE:** When you move a value, the original owner can no longer use it. You can borrow a reference to read the value without taking ownership.
+>
 > **STE:** When you move a value, the first owner can no longer use it. You can borrow a reference to read the value without taking ownership.
 > *(P3 applied: "original" → "first" — "original" is an approved adjective meaning "existing from the beginning," but "first" is more precise; the systems-specific uses of "move," "borrow," "own," and "reference" all use their approved systems meanings correctly)*
 
@@ -265,6 +277,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 1 — API Reference: Return Value Description
 
 > **Non-STE:** Returns the authenticated user object. If authentication fails, returns null and logs the error.
+>
 > **STE:** Gives the authenticated `User` object. If authentication does not complete, gives `null` and writes the error to the log.
 
 > **Principle applied:** P3 (use approved words only with their approved meanings: "returns" → "gives" — the function gives a value to the caller; "fails" → "does not complete" — "fail" means "did not complete successfully," used correctly but restructured for clarity); P1 (use approved words: "logs" → "writes to the log")
@@ -273,6 +286,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 2 — README: Project Feature Description
 
 > **Non-STE:** This library runs on Node.js and runs in the browser. It runs your transformations in parallel to maximize throughput.
+>
 > **STE:** This library operates on Node.js and operates in the browser. It runs your transformations together to increase throughput.
 
 > **Principle applied:** P3 (use approved words only with their approved meanings: first two "runs" → "operates" — "run" means "execute a program," not "function on a platform"; third "runs" → "runs" — correct, it executes the transformations); P1 ("maximize" → "increase" — "maximize" is not approved)
@@ -281,6 +295,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 3 — Docstring: Exception Handling
 
 > **Non-STE:** This method raises an error when the input is empty. Catch the error and return a default value to prevent the application from crashing.
+>
 > **STE:** This method raises an error when the input is empty. Catch the error and give a default value to prevent the application from stopping.
 
 > **Principle applied:** P3 (use approved words only with their approved meanings: "return" → "give" — "return" means "send a value back from a function," but the prose describes what to do with the caught error, not a function return; "crashing" → "stopping" — "crash" is a code-domain technical noun meaning "abnormal program termination," and "stopping" is more precise here); P1 ("prevent" → "prevent" — correct, "prevent" is approved)
@@ -289,6 +304,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 4 — CLI Error Message
 
 > **Non-STE:** Error: Could not connect to the server. The connection timed out. Check your network and try running the command again.
+>
 > **STE:** Error: Cannot connect to the server. The connection stopped after 30 seconds. Check your network and try the command again.
 
 > **Principle applied:** P3 (use approved words only with their approved meanings: "timed out" → "stopped after 30 seconds" — "timeout" is an approved noun meaning "time limit exceeded," but using it as a verb violates Rule 1.13); P1 ("could not" → "cannot" — "cannot" is the approved modal; "running" → removed — redundant next to "try")
@@ -297,6 +313,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 5 — Commit Message: Refactoring
 
 > **Non-STE:** refactor: break the UserService into smaller classes to improve testability
+>
 > **STE:** refactor: split the `UserService` into smaller classes to make testing easier
 
 > **Principle applied:** P3 (use approved words only with their approved meanings: "break" → "split" — "break" means "exit a loop," not "divide into parts"); P1 ("improve testability" → "make testing easier" — "improve" is an approved verb but "testability" is not an approved noun)
@@ -327,6 +344,7 @@ The following scenarios show where the boundary of an approved meaning requires 
 **Guidance:** Framework names are code-domain technical nouns (Rule 1.5, category 3) and are exempt from Rule 1.3 meaning restrictions. The approved word "express" (verb, "show or state clearly") and the technical noun "Express" (proper noun, the framework) are different words that happen to share spelling. Always capitalize the framework name to distinguish it. Do not use the framework name as a verb.
 
 > **Non-STE:** Express your API using Express.
+>
 > **STE:** Use Express to make your API.
 
 > In the non-STE version, "Express" appears twice with two different meanings: first as a verb (approved meaning: "show or state"), second as a proper noun (framework name). The STE version avoids the verb use entirely.
@@ -340,6 +358,7 @@ The following scenarios show where the boundary of an approved meaning requires 
 **Guidance:** When the keyword appears in a code block (backtick-quoted), it is quoted text (Rule 1.5, category 10) and is exempt from Rule 1.3. When you document what the keyword does, use the approved meaning in your prose and let the code block carry the language-specific semantics. The reader sees the keyword in context and understands its behavior from the code, not from your adjective choice.
 
 > **Non-STE:** The `static` variable keeps its value between function calls. It is static.
+>
 > **STE:** The `static` variable keeps its value between function calls. The variable does not change between calls.
 
 > The non-STE version uses "static" twice: first as a quoted keyword (exempt), second as an adjective in prose. The prose adjective "static" carries the approved meaning "not moving." The rewrite avoids the adjective and uses a clause that describes the behavior precisely.
@@ -351,6 +370,7 @@ The following scenarios show where the boundary of an approved meaning requires 
 **Guidance:** When a word has multiple approved meanings, all of them are valid under Rule 1.3. The part of speech disambiguates. "Call the function" uses the verb meaning (invoke). "The function call" uses the noun meaning (invocation). Do not use "call" to mean "name" ("we call this X") — this is not an approved meaning for either the verb or noun form.
 
 > **Non-STE:** Call the function `getUser`. We call this pattern the Repository Pattern.
+>
 > **STE:** Call the function `getUser`. We name this pattern the Repository Pattern.
 
 > "Call" in the first sentence uses the approved verb meaning "invoke." "Call" in the second sentence means "name," which is not an approved meaning. "Name" is the approved replacement.
@@ -382,6 +402,7 @@ The following scenarios show where the boundary of an approved meaning requires 
 **Guidance:** When a word is both an approved word in the controlled terminology and a code-domain technical noun, use the more specific meaning for the context. In software documentation, the code-domain technical noun meaning takes priority. If the context is ambiguous, add a modifier: "Kubernetes liveness probe" or "measurement probe." This follows the same principle as Rule 1.8 (use standard, well-known technical nouns).
 
 > **Non-STE:** The probe checks if the container is alive.
+>
 > **STE:** The liveness probe checks if the container is alive.
 
 > "Liveness probe" is a compound code-domain technical noun. Adding the modifier "liveness" disambiguates between the general approved noun "probe" and the domain-specific technical noun.

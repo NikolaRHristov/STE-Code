@@ -64,6 +64,7 @@ Do not use hyphens to make groups of more than three words. If you use hyphens f
 Example:
 
 > **Non-STE:** Move the main-gear-door-retraction-winch handle. (2 words, but not correct)
+>
 > **STE:** Move the main-gear-door retraction-winch handle. (3 words)
 
 If an approved technical noun includes three words or less (for example "poppet valve assembly" and "diaphragm assembly"), it is not necessary to use hyphens.
@@ -97,6 +98,7 @@ Use hyphens to group related words that function as a single unit within a multi
 **Method 1 – Shorter form with explanation:**
 
 > **Non-STE:** Before you run this script, configure the HTTP request pipeline middleware authentication handler.
+>
 > **STE:** Before you run this script, configure the HTTP request pipeline middleware authentication handler (the component that authenticates requests in the middleware pipeline, referred to in this document as the "authentication handler").
 
 In this example, you write "HTTP request pipeline middleware authentication handler" in full. Then, after an explanation, you give a shorter technical noun: "authentication handler." This shorter technical noun has three words and obeys rule 2.1.
@@ -106,6 +108,7 @@ In this example, you write "HTTP request pipeline middleware authentication hand
 **Method 1 – Shorter form with official abbreviation:**
 
 > **Non-STE:** Before you run this script, configure the HTTP request pipeline middleware authentication handler.
+>
 > **STE:** Before you run this script, configure the HTTP request pipeline middleware authentication handler (the component that authenticates requests in the middleware pipeline, referred to in this document as the "authentication handler").
 >
 > The Object Relational Mapping (ORM) layer is a middleware component that includes a Query Builder (QB) and a Unit of Work (UoW) manager. The ORM layer operates in the data access pipeline and manages persistence for the domain model. The QB constructs database queries from the domain object graph. The UoW manager tracks changes to entities during a transaction.
@@ -133,6 +136,7 @@ This shorter technical noun has three words and obeys rule 2.1.
 **Method 2 – Hyphens between related words:**
 
 > **Non-STE:** Move the data-access-layer-query-builder interface. (2 words, but not correct)
+>
 > **STE:** Move the data-access-layer query-builder interface. (3 words)
 
 **Method 2 – Do not add hyphens to short approved technical nouns:**
@@ -224,6 +228,7 @@ Configuration documentation describes settings that operators tune. When a group
 Hyphens clarify compound adjectives that describe system properties. Use them sparingly to avoid visual clutter but apply them when the adjective pair would otherwise be ambiguous.
 
 > **Non-STE:** The system provides real time data processing capabilities.
+>
 > **STE:** The system provides real-time data-processing capabilities.
 
 > **Principle applied:** P4 — "real-time" and "data-processing" are hyphenated compound adjectives. Each counts as one word.
@@ -251,6 +256,7 @@ Hyphens in docstrings help when a function parameter name combines two concepts.
 Hyphens in error messages group error categories for log parsing tools.
 
 > **Non-STE:** ERROR: [auth] token validation failure
+>
 > **STE:** ERROR: [auth] token-validation failure
 
 > **Principle applied:** P2 — "token-validation" acts as one compound noun describing the type of failure.
@@ -275,11 +281,13 @@ Different programming paradigms produce different types of long technical nouns.
 OOP documentation contains design pattern names, inheritance chain descriptors, and interface composition names. These frequently exceed three words and are official technical nouns.
 
 > **Non-STE:** The AbstractFactoryMethodPatternImplementationRegistryBuilder constructs the registry.
+>
 > **STE:** The Abstract Factory Method Pattern Implementation Registry Builder (referred to in this document as the "registry builder") constructs the registry.
 
 Design pattern names such as "Abstract Factory Method Pattern" are official technical nouns from the Gang of Four catalog. Write them in full the first time. After explanation, use the shorter form "registry builder."
 
 > **Non-STE:** Inject the UserRepositoryInterfaceDependencyInjectionContainerBinding into the controller.
+>
 > **STE:** Inject the binding of the dependency injection container for the user repository interface (referred to in this class as the "repository binding") into the controller.
 
 > **Principle applied:** P1, P7 — "binding" is used as a noun. The long official class name is restructured with prepositions and shortened for reuse.
@@ -287,6 +295,7 @@ Design pattern names such as "Abstract Factory Method Pattern" are official tech
 For hyphen usage in OOP documentation:
 
 > **Non-STE:** The single responsibility principle violation detection mechanism runs during static analysis.
+>
 > **STE:** The single-responsibility-principle violation-detection mechanism runs during static analysis.
 
 > **Principle applied:** P4 — "single-responsibility-principle" groups the three words of the principle name into one hyphenated unit. "violation-detection" groups the action pair. Together the multi-word noun has 2 words instead of 5.
@@ -296,11 +305,13 @@ For hyphen usage in OOP documentation:
 Functional documentation describes monadic transformer stacks, function composition chains, and algebraic data type hierarchies. These create technical nouns with many modifiers.
 
 > **Non-STE:** The monadic error handling pipeline transformer composition chain evaluates the input.
+>
 > **STE:** The monadic error-handling pipeline transformer composition chain (referred to in this section as the "transformer chain") evaluates the input.
 
 > **Principle applied:** P1, P4 — "error-handling" is hyphenated to count as one word. The shorter form "transformer chain" is then used throughout the section.
 
 > **Non-STE:** Apply the higher order function currying partial application optimization.
+>
 > **STE:** Apply the higher-order function currying partial-application optimization (referred to as the "currying optimization").
 
 > **Principle applied:** P4 — "higher-order" and "partial-application" use hyphens to group the modifiers. The shorter form makes the remaining explanation scannable.
@@ -310,11 +321,13 @@ Functional documentation describes monadic transformer stacks, function composit
 Procedural documentation names system calls, buffer chains, and handler sequences. These names are often official names from man pages or kernel documentation.
 
 > **Non-STE:** The file descriptor read buffer allocation failure handler signals the caller.
+>
 > **STE:** The file-descriptor read-buffer allocation-failure handler (referred to as the "failure handler") signals the caller.
 
 > **Principle applied:** P4 — hyphens group "file-descriptor" (one concept), "read-buffer" (one concept), and "allocation-failure" (one concept). The multi-word noun reduces from 6 words to 3.
 
 > **Non-STE:** Execute the memory arena deallocation safety check routine.
+>
 > **STE:** Execute the memory-arena deallocation safety-check routine (referred to as the "safety check").
 
 > **Principle applied:** P5, P9 — "memory-arena" is a technical code noun from systems programming. "safety-check" groups the action pair into one word.
@@ -324,11 +337,13 @@ Procedural documentation names system calls, buffer chains, and handler sequence
 Declarative documentation describes resource specifications, policy definitions, and query structures. These often come from official provider documentation or language specifications.
 
 > **Non-STE:** The Kubernetes pod resource limit specification defines the maximum memory.
+>
 > **STE:** The Kubernetes pod resource-limit specification (referred to in this manifest as the "limit spec") defines the maximum memory.
 
 > **Principle applied:** P5 — "Kubernetes" and "pod" are technical code nouns. "resource-limit" is hyphenated as one modifier. The shorter form "limit spec" is then used in the remaining resource descriptions.
 
 > **Non-STE:** The Terraform module output variable dependency graph resolution algorithm runs before apply.
+>
 > **STE:** The Terraform module output-variable dependency-graph resolution algorithm (referred to as the "graph resolver") runs before the apply step.
 
 > **Principle applied:** P4, P9 — hyphens in "output-variable" and "dependency-graph" reduce the word count. The shorter form "graph resolver" is used in the remaining plan documentation.
@@ -338,11 +353,13 @@ Declarative documentation describes resource specifications, policy definitions,
 Systems documentation describes ownership models, lifetime annotations, and memory layout specifications. These are dense technical nouns that frequently exceed three words.
 
 > **Non-STE:** The heap allocated reference counted thread safe pointer dereference operation returns the value.
+>
 > **STE:** The heap-allocated reference-counted thread-safe pointer dereference operation (referred to as the "smart-pointer dereference") returns the value.
 
 > **Principle applied:** P4, P1 — "heap-allocated," "reference-counted," and "thread-safe" are hyphenated compound adjectives (one word each). After the full technical noun appears once, the shorter form "smart-pointer dereference" is used.
 
 > **Non-STE:** The stack frame return address overflow protection mechanism prevents attacks.
+>
 > **STE:** The stack-frame return-address overflow-protection mechanism (referred to as the "stack protector") prevents attacks.
 
 > **Principle applied:** P4 — each hyphenated pair counts as one word. The shorter form "stack protector" then replaces the long technical noun.
@@ -356,6 +373,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, the method
 ### Example 1 — README Architecture Section (Method 1: Shorter Form)
 
 > **Non-STE:** The project uses the Command Query Responsibility Segregation pattern with a separate read model.
+>
 > **STE:** The project uses the Command Query Responsibility Segregation (CQRS) pattern with a separate read model. The CQRS pattern separates the command model from the query model.
 
 **Method applied:** Method 1 — official abbreviation. **Principle applied:** P1, P5 — "Command Query Responsibility Segregation" is an official design pattern name (technical code noun). The abbreviation "CQRS" is the industry-standard short form. After the first full mention, "CQRS" is used throughout the README.
@@ -365,6 +383,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, the method
 ### Example 2 — API Documentation (Method 1: Shorter Form with Explanation)
 
 > **Non-STE:** The `POST /webhooks/payment-gateway/transaction/rollback/failure/recovery` endpoint initiates the payment gateway transaction rollback failure recovery procedure.
+>
 > **STE:** The `POST /webhooks/payment-gateway/transaction/rollback/failure/recovery` endpoint initiates the payment gateway transaction rollback failure recovery procedure (the sequence for recovery after a rollback fails, referred to in this reference as the "recovery procedure").
 
 **Method applied:** Method 1 — shorter form with explanation. **Principle applied:** P1, P9 — "recovery procedure" uses canonical STE-Code words. The shorter form has 2 words.
@@ -374,6 +393,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, the method
 ### Example 3 — Error Message (Method 2: Hyphens)
 
 > **Non-STE:** ERROR: database connection pool timeout configuration value is out of range.
+>
 > **STE:** ERROR: Database-connection-pool timeout-configuration value is out of range.
 
 **Method applied:** Method 2 — hyphens. **Principle applied:** P4 — "database-connection-pool" groups three words into one hyphenated unit. "timeout-configuration" groups the action pair. The multi-word noun has 2 hyphenated words.
@@ -383,6 +403,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, the method
 ### Example 4 — Docstring (Method 2: Selective Hyphens)
 
 > **Non-STE:** Handles the Redis cache key expiration event notification dispatch.
+>
 > **STE:** Handles the Redis cache-key expiration-event notification dispatch (referred to in this module as "event dispatch").
 
 **Method applied:** Method 2 — hyphens, with Method 1 — shorter form. **Principle applied:** P4, P9 — "cache-key" and "expiration-event" use hyphens to group modifiers. Then "event dispatch" is established as the shorter form.
@@ -392,6 +413,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, the method
 ### Example 5 — Commit Message (Method 1: Project-Established Shorter Form)
 
 > **Non-STE:** feat: add retry policy to payment gateway transaction rollback failure recovery procedure
+>
 > **STE:** feat: add retry policy to the recovery procedure
 
 **Method applied:** Method 1 — shorter form (using the project README's established term). **Principle applied:** P9, P11 — the shorter form matches the established project terminology. The commit message is scannable.
@@ -428,6 +450,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, the method
 Some framework names contain words that are not approved in STE-Code. The framework name itself is a technical code noun under Rule 1.5 and Rule 1.6. When introducing a long framework-based technical noun, apply Method 1 (shorter form) or Method 2 (hyphens) to the surrounding prose, not to the framework name.
 
 > **Non-STE:** Configure the Spring Boot auto configuration bean post processor registry before the application context starts.
+>
 > **STE:** Configure the Spring Boot auto-configuration bean post-processor registry (referred to in this document as the "post-processor registry") before the application context starts.
 
 "Spring" and "Boot" are not approved STE words individually, but "Spring Boot" is a framework name (technical code noun, Rule 1.5). The hyphens in "auto-configuration" and "post-processor" follow Method 2 to reduce the word count. The shorter form "post-processor registry" follows Method 1.
@@ -437,6 +460,7 @@ Some framework names contain words that are not approved in STE-Code. The framew
 When a code keyword (reserved word) appears as part of a long descriptive technical noun, the keyword itself is not subject to this rule. Apply hyphens or shorter forms to the surrounding prose words only. Keep the keyword in backticks.
 
 > **Non-STE:** The `finally` block cleanup resource deallocation handler runs after the try-catch.
+>
 > **STE:** The `finally` block cleanup resource-deallocation handler (referred to as the "cleanup handler") runs after the try-catch statement.
 
 > **Principle applied:** P5 — `finally` is a reserved word in Java, Python, and JavaScript. It appears in backticks to indicate code. The hyphen in "resource-deallocation" applies Method 2 to the prose words. The shorter form "cleanup handler" applies Method 1.

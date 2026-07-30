@@ -31,11 +31,13 @@ If there is quoted text that has British English spelling, for example in an err
 ### Examples
 
 > **Non-STE:** The log file shows the colour of each output line.
+>
 > **STE:** The log file shows the color of each output line.
 
 > *Adapted from spec example: "Color" is American English spelling, and the spec explicitly lists it as an example. The non-STE version uses the British English spelling "colour," which is not permitted. The STE version uses the American English spelling "color."*
 
 > **Non-STE:** Initialise the variable before you use it in the loop.
+>
 > **STE:** Initialize the variable before you use it in the loop.
 
 > *Adapted from spec example: "Fiber" is American English spelling. Just as the spec requires American English spelling for all technical documentation, STE-Code requires it for code documentation. "Initialize" is American English spelling. The non-STE version uses the British English spelling "initialise," which is not permitted.*
@@ -61,6 +63,7 @@ Common README violations involve the -ise/-ize suffix pair. Words that end in "-
 Example — README installation section:
 
 > **Non-STE:** Organise your environment variables in a `.env` file. The application analyses this file at startup.
+>
 > **STE:** Organize your environment variables in a `.env` file. The application analyzes this file at startup.
 > *(P14 applied: "organise" → "organize"; "analyse" → "analyze")*
 
@@ -73,6 +76,7 @@ Parameter names and endpoint paths are code-domain technical nouns (Rule 1.5, ca
 Example — OpenAPI description:
 
 > **Non-STE:** `colour_scheme` — The colour scheme to apply to the dashboard. Accepted values: "light", "dark".
+>
 > **STE:** `colour_scheme` — The color scheme to use for the dashboard. Accepted values: "light", "dark".
 > *(P14 applied: "colour" → "color" in prose; parameter name `colour_scheme` preserved as quoted text)*
 
@@ -85,6 +89,7 @@ British English spellings in docstrings often come from developers whose locale 
 Example — Python docstring:
 
 > **Non-STE:** """Centre the text in the terminal window. Returns the centred string."""
+>
 > **STE:** """Center the text in the terminal window. Gives the centered string."""
 > *(P14 applied: "centre" → "center"; "centred" → "centered"; P1 also applied: "returns" → "gives")*
 
@@ -106,6 +111,7 @@ Common commit message violations:
 Example — commit message:
 
 > **Non-STE:** fix: correct colour parsing behaviour in the analytics module
+>
 > **STE:** fix: correct color parsing behavior in the analytics module
 > *(P14 applied: "colour" → "color"; "behaviour" → "behavior")*
 
@@ -118,6 +124,7 @@ When you write error messages for your own software, apply Rule 1.14 consistentl
 Example — application error message:
 
 > **Non-STE:** Error: The licence key is not recognised. Please contact your administrator.
+>
 > **STE:** Error: The license key is not recognized. Speak to your administrator.
 > *(P14 applied: "licence" (noun) → "license"; "recognised" → "recognized"; P1 applied: "contact" → "speak to")*
 
@@ -150,6 +157,7 @@ Object-oriented documentation uses many words that end in -or/-our and -ize/-ise
 Example — Java class documentation:
 
 > **Non-STE:** The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.
+>
 > **STE:** The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.
 > *(P14 applied: "initialisation" → "initialization"; "serialisation" → "serialization"; "optimises" → "optimizes"; "customisable" → "customizable"; "behaviour" → "behavior")*
 
@@ -167,6 +175,7 @@ Functional programming documentation has fewer spelling violations than OOP docu
 Example — Elixir module documentation:
 
 > **Non-STE:** This module defines a custom behaviour for plug initialisation. Modules that implement this behaviour must provide an `init/1` callback.
+>
 > **STE:** This module defines a custom `@behaviour` for plug initialization. Modules that implement this `@behaviour` must give an `init/1` callback.
 > *(P14 applied: "initialisation" → "initialization"; `@behaviour` preserved as code keyword; P1 applied: "provide" → "give")*
 
@@ -186,6 +195,7 @@ Procedural documentation has the fewest British English spelling violations beca
 Example — C library documentation:
 
 > **Non-STE:** The licence key must be validated before the defence mechanisms are initialised.
+>
 > **STE:** The license key must be checked before the defense mechanisms are initialized.
 > *(P14 applied: "licence" → "license"; "defence" → "defense"; "initialised" → "initialized"; P1 applied: "validated" → "checked")*
 
@@ -203,6 +213,7 @@ Declarative documentation often includes British English spellings because many 
 Example — Terraform module documentation:
 
 > **Non-STE:** This module centralises the organisation of network policies. It also synchronises security groups across regions.
+>
 > **STE:** This module centralizes the organization of network policies. It also synchronizes security groups across regions.
 > *(P14 applied: "centralises" → "centralizes"; "organisation" → "organization"; "synchronises" → "synchronizes")*
 
@@ -223,6 +234,7 @@ Systems documentation has a vocabulary of spelling-sensitive words related to me
 Example — Rust systems documentation:
 
 > **Non-STE:** The memory metre shows the current heap usage. The defence mechanisms prevent double-free errors and cancelled allocations from corrupting the heap.
+>
 > **STE:** The memory meter shows the current heap usage. The defense mechanisms prevent double-free errors and canceled allocations from corrupting the heap.
 > *(P14 applied: "metre" → "meter"; "defence" → "defense"; "cancelled" → "canceled")*
 
@@ -235,6 +247,7 @@ Each example pair below shows a real code documentation scenario with a British 
 ### Example 1 — API Reference: Parameter Description
 
 > **Non-STE:** @param {string} colour — The colour of the notification badge. Accepts any valid CSS colour value.
+>
 > **STE:** @param {string} color — The color of the notification badge. Accepts any valid CSS color value.
 >
 > **Principle applied:** P14 (use American English spelling: "colour" → "color")
@@ -244,6 +257,7 @@ Each example pair below shows a real code documentation scenario with a British 
 ### Example 2 — README: Architecture Overview
 
 > **Non-STE:** The service-oriented architecture centralises request handling through a single API gateway. This organisation minimises latency and maximises throughput.
+>
 > **STE:** The service-oriented architecture centralizes request handling through a single API gateway. This organization minimizes latency and maximizes throughput.
 >
 > **Principle applied:** P14 (use American English spelling: "centralises" → "centralizes"; "organisation" → "organization"; "minimises" → "minimizes"; "maximises" → "maximizes")
@@ -252,6 +266,7 @@ Each example pair below shows a real code documentation scenario with a British 
 ### Example 3 — Docstring: Function Behavior Description
 
 > **Non-STE:** /** Analyses the input data and recognises patterns. Returns an object modelling the recognised patterns. */
+>
 > **STE:** /** Analyzes the input data and recognizes patterns. Gives an object that models the recognized patterns. */
 >
 > **Principle applied:** P14 (use American English spelling: "analyses" (verb) → "analyzes"; "recognises" → "recognizes"; "recognised" → "recognized"); P1 (use approved words: "returns" → "gives")
@@ -260,6 +275,7 @@ Each example pair below shows a real code documentation scenario with a British 
 ### Example 4 — Commit Message: Configuration Change
 
 > **Non-STE:** chore: standardise ESLint configuration across all packages and synchronise with the monorepo
+>
 > **STE:** chore: standardize ESLint configuration across all packages and synchronize with the monorepo
 >
 > **Principle applied:** P14 (use American English spelling: "standardise" → "standardize"; "synchronise" → "synchronize")
@@ -268,6 +284,7 @@ Each example pair below shows a real code documentation scenario with a British 
 ### Example 5 — Error Message: User-Facing Validation
 
 > **Non-STE:** Validation error: The programme cannot recognise the file format. The file may have been cancelled during transfer.
+>
 > **STE:** Validation error: The program cannot recognize the file format. The file may have been canceled during transfer.
 >
 > **Principle applied:** P14 (use American English spelling: "programme" → "program"; "recognise" → "recognize"; "cancelled" → "canceled")
@@ -305,6 +322,7 @@ The following scenarios show where the rigid application of Rule 1.14 requires c
 When you write prose about a framework that uses British English spelling in its name, the prose must use American English spelling:
 
 > **Non-STE:** The `ColourPicker` component uses the `colour` library for colour space conversions.
+>
 > **STE:** The `ColourPicker` component uses the `colour` library for color space conversions.
 > *(Framework names preserved; prose uses American English spelling)*
 
@@ -322,6 +340,7 @@ This creates a visual inconsistency, but it is the correct approach. The inconsi
 **Guidance:** When the British English spelling is part of the code (a keyword, a function name, a class name), it is code-domain technical text. Preserve it exactly as it appears in the code. The surrounding documentation prose must use American English spelling.
 
 > **Non-STE:** The `@behaviour` callback initialises the module's state.
+>
 > **STE:** The `@behaviour` callback initializes the module state.
 > *(P14 applied: "initialises" → "initializes"; `@behaviour` preserved as code keyword)*
 

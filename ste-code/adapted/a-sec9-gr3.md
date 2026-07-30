@@ -21,6 +21,7 @@ If a pronoun can refer to one or more nouns in a text, it can cause ambiguity. I
 ### Examples
 
 > **Non-STE:** If you configure the middleware before the route handler, it can block the request.
+>
 > **STE:** If you configure the middleware before the route handler, the middleware can block the request.
 >
 > *Adapted from spec rule: "If a pronoun can refer to one or more nouns in a text, it can cause ambiguity... replace the pronoun with the word that it refers to." — "it" replaced by "the middleware."*
@@ -36,6 +37,7 @@ Or:
 > **STE:** If you configure the middleware before the route handler, the middleware and the route handler can block the request.
 
 > **Non-STE:** If you pass the socket to the handler function before it is initialized, it can fail.
+>
 > **STE:** If you pass the socket to the handler function before the socket is initialized, the handler function can fail.
 >
 > *Adapted from spec rule: "replace the pronoun with the word that it refers to" — both ambiguous "it" pronouns are resolved to their specific referents.*

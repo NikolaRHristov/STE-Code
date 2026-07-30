@@ -11,6 +11,7 @@ When there is no technical noun that is approved in your company, industry, or s
 Example:
 
 > **Non-STE:** Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20).
+>
 > **STE:** Remove the four screws (10) that attach the flange (15) to the cover (20).
 
 In this example, it is sufficient to use the words "screws," "flange," and "cover." This is because these parts have index numbers, and the related illustration clearly identifies them. Differently, add one or two adjectives to the noun to help your reader understand.
@@ -26,6 +27,7 @@ Do not use long descriptive phrases when a shorter term is sufficient. If the co
 ### Examples
 
 > **Non-STE:** Call the asynchronous JavaScript XML HTTP request wrapper utility function (line 42) to get the serialized JSON payload from the remote application programming interface endpoint.
+>
 > **STE:** Call the fetch utility (line 42) to get the JSON data from the API endpoint.
 
 This adapts the spec pair: "Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20)" becomes "Remove the four screws (10) that attach the flange (15) to the cover (20)." In the spec, the long descriptive phrase "stainless steel pan head machine screws" is reduced to "screws" because the index number (10) and the illustration identify the part. In STE-Code, the long phrase "asynchronous JavaScript XML HTTP request wrapper utility function" is reduced to "fetch utility" because the line number (42) and the code snippet identify the function. "JSON payload" becomes "JSON data" and "remote application programming interface endpoint" becomes "API endpoint" — both follow the spec principle of using the shortest unambiguous term.
@@ -165,6 +167,7 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 ### Example Group 1: README Project Description
 
 > **Non-STE:** This is a high-performance, event-driven, non-blocking I/O model JavaScript runtime environment built on Chrome's V8 JavaScript engine that uses an asynchronous, single-threaded event loop architecture for building scalable network applications.
+>
 > **STE:** Node.js is a JavaScript runtime. It uses an event-driven, non-blocking I/O model. Use it to build scalable network applications.
 
 - **Principle applied:** P9 (use short technical nouns: "Node.js" is 2 words, "JavaScript runtime" is 2 words)
@@ -173,6 +176,7 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 ### Example Group 2: API Documentation Parameter Description
 
 > **Non-STE:** The request body must contain a JSON object with a required string field named "emailAddress" that must match the standard internet electronic mail address format as defined by RFC 5322, an optional string field named "displayName" with a maximum length of 100 Unicode characters, and a required boolean field named "subscribeToNewsletter" that defaults to false if not provided.
+>
 > **STE:** The request body is a JSON object with these fields:
 > - `emailAddress` (string, required) — a valid email address
 > - `displayName` (string, optional, max 100 characters)
@@ -184,6 +188,7 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 ### Example Group 3: Docstring for a Function
 
 > **Non-STE:** This public static factory method constructs and returns a newly created, fully initialized, thread-safe instance of the UserService class with all of its required collaborator dependencies injected and its internal state properly configured for the current runtime environment.
+>
 > **STE:** Create and return a new `UserService` instance with the given dependencies.
 
 - **Principle applied:** P9 (use short technical nouns: "UserService instance" is 2 words, "dependencies" is 1 word)
@@ -192,6 +197,7 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 ### Example Group 4: Commit Message Subject Line
 
 > **Non-STE:** Refactor the authentication and authorization middleware layer to extract the JSON Web Token validation and user permission role resolution logic into separate composable utility functions.
+>
 > **STE:** Refactor auth middleware: extract JWT validation and role resolution into separate utilities.
 
 - **Principle applied:** P9 (use short technical nouns: "auth middleware" is 2 words, "JWT validation" is 2 words, "role resolution" is 2 words)
@@ -200,6 +206,7 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 ### Example Group 5: Error Message
 
 > **Non-STE:** The operation to establish a connection to the primary relational database management system server instance located at the network address 192.168.1.100 on the default Transmission Control Protocol port number 5432 has failed due to a network timeout condition after waiting for the configured connection timeout duration of 30 seconds.
+>
 > **STE:** Connection to the primary database at 192.168.1.100:5432 timed out after 30 seconds.
 
 - **Principle applied:** P9 (use short technical nouns: "primary database" is 2 words, "timed out" is a technical verb per P12)
@@ -208,6 +215,7 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 ### Example Group 6: CLI Help Text
 
 > **Non-STE:** Specifies the maximum permitted quantity of simultaneously executing concurrent parallel worker subprocess threads that the application is permitted to spawn and manage for the purpose of processing items from the background job queue.
+>
 > **STE:** Maximum number of worker threads for the job queue.
 
 - **Principle applied:** P9 (use short technical nouns: "worker threads" is 2 words, "job queue" is 2 words)

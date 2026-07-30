@@ -29,6 +29,7 @@ Do not invent your own names for items that already have established names in yo
 This adapts the spec example: "The front panel of the phone has a touchscreen and a home button." Just as "touchscreen" and "home button" are technical nouns approved in the industry, "UserTable" and "FilterPanel" are code-domain technical nouns approved in the project. The reader recognizes these exact names from the codebase.
 
 > **Non-STE:** The account controller manages login and user profile operations.
+>
 > **STE:** The AccountController manages authentication and user profile operations.
 
 This adapts the spec principle that you must use the approved term. "AccountController" is the code-domain technical noun that is approved in the project (the actual class name in the codebase). The non-STE version uses "account controller," which is not the approved name. Just as you would not replace "touchscreen" with "finger screen" in the spec example, you must not replace "AccountController" with an invented name.
@@ -44,6 +45,7 @@ Rule 1.8 requires that you use the standard, approved technical noun for each co
 README files introduce a project to new users. The project glossary, API docs, and codebase define the approved technical nouns. Use those exact names. Do not substitute descriptive phrases for the approved class names, module names, or component names.
 
 > **Non-STE:** The data display widget shows user information in a table format.
+>
 > **STE:** The UserTable component shows user information.
 
 > *Principles applied: P8 (use standard, well-known technical nouns), P11 (one term per concept). "UserTable" is the approved code-domain technical noun from the codebase. "Data display widget" is an invented description that no reader can map to the code. The STE version uses the exact class name so readers can find it in the source code.*
@@ -53,6 +55,7 @@ README files introduce a project to new users. The project glossary, API docs, a
 API documentation describes endpoints, parameters, return types, and error codes. The API spec and the source code define the approved names. Use the names from the spec — never substitute your own variant even if it seems clearer.
 
 > **Non-STE:** The user retrieval endpoint sends back a user data object.
+>
 > **STE:** The `GET /users/:id` endpoint returns a `User` object.
 
 > *Principles applied: P8, P11, P5 (technical code nouns are allowed). `GET /users/:id` and `User` are the approved technical nouns from the API spec and the type system. "User retrieval endpoint" and "user data object" are invented phrases that do not match the spec. Readers who search for "user retrieval" will not find the endpoint. Use the exact names.*
@@ -62,6 +65,7 @@ API documentation describes endpoints, parameters, return types, and error codes
 Docstrings explain what a function, class, or module does. Use the approved names from the codebase and the project glossary. When a standard industry term exists (for example, "observer pattern"), use it rather than a homegrown description.
 
 > **Non-STE:** This class listens to changes on the data holder and runs callback functions when the data changes.
+>
 > **STE:** This class implements the observer pattern. It watches a `Subject` and notifies registered `Observer` instances.
 
 > *Principles applied: P8, P11. "Observer pattern," "Subject," and "Observer" are approved technical nouns from the design pattern literature and the codebase. "Listens to changes" and "data holder" are non-standard descriptions. Use the industry-approved name so readers recognize the design pattern immediately.*
@@ -71,6 +75,7 @@ Docstrings explain what a function, class, or module does. Use the approved name
 Commit messages record changes to the codebase. Use the approved names for files, classes, functions, and components exactly as they appear in the source tree. A commit message that invents names for code elements is not traceable.
 
 > **Non-STE:** Refactor the auth helper to use the new token validator.
+>
 > **STE:** Refactor `AuthService` to use `JwtValidator`.
 
 > *Principles applied: P8, P11, P5. `AuthService` and `JwtValidator` are the approved file and class names from the project. "Auth helper" and "token validator" are imprecise descriptions. A developer reading the commit log must be able to map the message to the actual code change. Exact names make that possible.*
@@ -80,6 +85,7 @@ Commit messages record changes to the codebase. Use the approved names for files
 Error messages report failures to users and developers. Use the approved component names, not generic descriptions. When a system component fails, the error message must name the component that failed.
 
 > **Non-STE:** Error: The storage system could not process the request.
+>
 > **STE:** Error: `PostgreSQLConnectionPool` could not execute the query. The pool is exhausted.
 
 > *Principles applied: P8, P11. `PostgreSQLConnectionPool` is the approved component name from the configuration and source code. "Storage system" could mean the database, the cache, the file system, or the object store. The STE version gives the exact component name so the operations team knows which system failed and which configuration to check.*
@@ -102,6 +108,7 @@ OOP documentation has many names for the same concept: class names, interface na
 | An interface for data access | data layer, DB interface, storage contract | `IRepository<T>` | Source code (interface name) |
 
 > **Non-STE:** The user maker class is a singleton. The display part uses a watcher to update the screen when the data part changes.
+>
 > **STE:** The `UserFactory` class is a Singleton. The `View` uses an `Observer` to update the UI when the `Model` changes.
 
 > *Principles applied: P8, P11. "UserFactory" is the approved class name (source code). "Singleton," "View," "Observer," and "Model" are approved technical nouns from design pattern literature and MVC terminology. "User maker," "display part," "watcher," and "data part" are invented names. The STE version uses the standard terms that every OOP developer recognizes.*
@@ -120,6 +127,7 @@ Functional programming documentation uses mathematical and type-theoretic names.
 | Higher-order function | function parameter, callback function | Higher-order function | Mathematical terminology |
 
 > **Non-STE:** The maybe-type holds an optional value. You can chain functions on it without checking for empty values.
+>
 > **STE:** The `Option` monad holds an optional value. You can compose functions on it without checking for `None`.
 
 > *Principles applied: P8, P11, P5. `Option` and `None` are the approved type and variant names from the language standard library. "Monad" is the approved technical noun from category theory and functional programming. "Maybe-type," "chain functions," and "empty values" are informal descriptions. Use the exact names from the language, the library, and the mathematical foundation.*
@@ -138,6 +146,7 @@ Procedural documentation uses names for memory structures, system calls, and sta
 | Environment variables | config vars, system settings, shell vars | Environment variables | POSIX standard |
 
 > **Non-STE:** The C program uses heap allocation to get memory for the data record. It then uses a memory address to pass the record to the processing function.
+>
 > **STE:** The C program uses `malloc` to allocate memory for the `struct`. It then uses a `pointer` to pass the `struct` to the processing function.
 
 > *Principles applied: P8, P11, P5. `malloc`, `struct`, and `pointer` are approved technical nouns from the C language specification. "Heap allocation," "data record," and "memory address" are descriptions — they are not wrong, but they are not the standard names. Use the standard names that appear in the source code and in the language documentation.*
@@ -156,6 +165,7 @@ Declarative documentation uses resource type names, keyword names, and configura
 | A Kubernetes namespace | isolation zone, project space, resource group | `Namespace` | Kubernetes API reference |
 
 > **Non-STE:** The Terraform config declares a compute instance in the AWS cloud. It then exports the IP number.
+>
 > **STE:** The Terraform configuration declares an `aws_instance` resource. It then exports the `public_ip` with an `output` block.
 
 > *Principles applied: P8, P11, P5. `aws_instance`, `public_ip`, and `output` are approved technical nouns from the Terraform provider documentation and the HCL language specification. "Compute instance," "AWS cloud," "IP number," and "exports" are descriptions that do not match the actual resource type names or attribute names. Users who copy "compute instance" into a Terraform file will get a syntax error. Use the exact resource type name.*
@@ -174,6 +184,7 @@ Systems documentation uses names for memory regions, hardware components, and ow
 | An interrupt service routine | interrupt function, handler code, ISR function | `ISR` (Interrupt Service Routine) | Hardware reference manual |
 
 > **Non-STE:** Rust moves ownership when you give a value to another variable. You can also lend a reference without giving ownership.
+>
 > **STE:** Rust applies `move` semantics when you assign a value to another binding. You can also `borrow` a reference without transferring ownership.
 
 > *Principles applied: P8, P11, P5. `move` and `borrow` are the approved technical nouns from the Rust language reference. "Give a value" and "lend a reference" are English paraphrases that do not match the language specification. Readers who learn Rust from the official documentation expect the terms "move" and "borrow." Use these terms so your documentation matches the language reference.*
@@ -185,6 +196,7 @@ Systems documentation uses names for memory regions, hardware components, and ow
 ### Example Group A: Class Name vs. Descriptive Phrase
 
 > **Non-STE:** The payment processing handler checks the card information and talks to the bank system to complete the transaction.
+>
 > **STE:** The `PaymentProcessor` validates the `CardDetails` and sends a request to the `BankGateway` to complete the `Transaction`.
 
 > *Principles applied: P8 (use standard, well-known technical nouns), P11 (one term per concept), P5 (technical code nouns). `PaymentProcessor`, `CardDetails`, `BankGateway`, and `Transaction` are the approved class names from the source code. "Payment processing handler," "card information," "bank system," and "the transaction" are descriptions. The STE version uses the exact class names so every reader can find these classes in the codebase.*
@@ -192,6 +204,7 @@ Systems documentation uses names for memory regions, hardware components, and ow
 ### Example Group B: Pattern Name vs. Homemade Description
 
 > **Non-STE:** The class uses a setup where one object notifies many waiting objects when its state changes.
+>
 > **STE:** The class implements the Observer pattern. The `Subject` notifies all registered `Observer` instances when its state changes.
 
 > *Principles applied: P8, P11, P9 (prefer short, clear technical nouns). "Observer pattern" is the industry-approved name from the Gang of Four design patterns. "Subject" and "Observer" are the approved role names from the pattern. "A setup where one object notifies many waiting objects" is a long description that no reader will recognize as the Observer pattern. The STE version uses the standard name so readers immediately understand the design.*
@@ -199,6 +212,7 @@ Systems documentation uses names for memory regions, hardware components, and ow
 ### Example Group C: Protocol Name vs. Generic Description
 
 > **Non-STE:** The service uses secure web communication to send data between the client and the server.
+>
 > **STE:** The service uses HTTPS to send data between the client and the server.
 
 > *Principles applied: P8, P9. "HTTPS" is the approved technical noun from the IETF standards. "Secure web communication" is a description that could refer to HTTPS, TLS, SSH, or a VPN. The STE version uses the exact protocol name so readers know which standard applies and can refer to the RFC.*
@@ -206,6 +220,7 @@ Systems documentation uses names for memory regions, hardware components, and ow
 ### Example Group D: Framework Feature Name vs. Informal Description
 
 > **Non-STE:** React's function that manages state and side effects runs after the component draws on the screen.
+>
 > **STE:** React's `useEffect` hook runs after the component renders.
 
 > *Principles applied: P8, P11, P5. `useEffect` is the approved API name from the React documentation. "Hook" is the approved category name for this type of function. "Render" is the approved term for the drawing phase. "Function that manages state and side effects" and "draws on the screen" are informal descriptions. Use the exact API names and React terminology.*
@@ -213,6 +228,7 @@ Systems documentation uses names for memory regions, hardware components, and ow
 ### Example Group E: Algorithm Name vs. Plain-Language Description
 
 > **Non-STE:** The search function splits the sorted list in half again and again until it finds the target value or runs out of items.
+>
 > **STE:** The `binarySearch` function applies the binary search algorithm to the sorted array. It returns the index of the target value or `-1` if the value is not present.
 
 > *Principles applied: P8, P11, P9. "Binary search algorithm" is the approved technical noun from computer science literature. "Splits the sorted list in half again and again" is a description of how binary search works, but it does not name the algorithm. A reader who knows binary search will recognize the name immediately. A reader who does not can look up "binary search" in any algorithms textbook. A description cannot be searched for as easily as a standard name.*
@@ -220,6 +236,7 @@ Systems documentation uses names for memory regions, hardware components, and ow
 ### Example Group F: Configuration Key vs. Generic Description
 
 > **Non-STE:** Set the database location setting to point to your local database server address.
+>
 > **STE:** Set the `DATABASE_URL` environment variable to your local PostgreSQL connection string.
 
 > *Principles applied: P8, P11, P5. `DATABASE_URL` is the approved configuration key name from the project's `.env.example` file. "Database location setting" is a description that does not tell the user which key to set. The STE version uses the exact key name so the user can copy it directly into their configuration file. "PostgreSQL" is the approved database name (not "database server"). "Connection string" is the approved technical noun for the value format.*
@@ -245,6 +262,7 @@ Some concepts have two accepted names from different communities. For example, "
 RULE: Choose one name and use it consistently (Rule 1.11). Register your choice in the project glossary. Prefer the name that matches your language ecosystem: Java projects use "map," Python projects use "dictionary," JavaScript projects use "object" or "Map."
 
 > **Non-STE:** The callback handler receives the event and passes it to the listener function.
+>
 > **STE:** The `EventHandler` callback receives the event and passes it to the registered listener.
 
 > *Principles applied: P11, P8. The non-STE version uses "callback," "handler," and "listener" interchangeably. The STE version assigns each term a distinct meaning: `EventHandler` is a class, "callback" is the function type, and "listener" is the registered consumer. Register these distinctions in the project glossary.*
@@ -258,6 +276,7 @@ Many standard technical nouns are acronyms or initialisms: API, JSON, SQL, HTML,
 > *Principles applied: P8, P11. Define each acronym at first use. After the definition, use only the acronym. Do not alternate between the full form and the acronym — that suggests two different concepts (violates P11).*
 
 > **Non-STE:** The application programming interface returns JSON. The API also sends a JWT (JSON Web Token).
+>
 > **STE:** The API returns JSON. The API also sends a JWT.
 
 > *Principles applied: P11. After the first definition, use only the acronym. "Application programming interface" and "API" refer to the same concept — using both suggests a distinction that does not exist.*
@@ -269,6 +288,7 @@ Frameworks sometimes rename standard concepts with project-specific vocabulary. 
 RULE: In documentation for a specific framework, use the framework's approved name. In general documentation (not framework-specific), use the most widely recognized name and mention the framework variant if necessary.
 
 > **Non-STE:** (Django documentation) The component renders the HTML and the controller handles the request.
+>
 > **STE:** (Django documentation) The view renders the HTML and the view handles the request.
 
 > *Principles applied: P8, P11. Django uses "view" for both the rendering function and the request handler. Using "component" and "controller" (terms from other frameworks) in Django documentation confuses Django developers. Use the framework's own terminology.*
@@ -294,6 +314,7 @@ The same package may have different names in different package registries. For e
 RULE: In documentation for a specific ecosystem, use the name from that ecosystem's registry. Include the registry-qualified name (for example, `pip install python-dotenv`) in installation instructions. In general documentation, use the most common name and note ecosystem variants.
 
 > **Non-STE:** Install the dotenv package to load environment variables.
+>
 > **STE:** Install the `python-dotenv` package with `pip` to load environment variables.
 
 > *Principles applied: P8, P11. "Dotenv package" is ambiguous — it could be the npm package, the PyPI package, or the Ruby gem. The STE version gives the exact PyPI package name (`python-dotenv`) and the exact tool (`pip`). This instruction can be copied directly into a terminal.*

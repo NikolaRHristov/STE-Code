@@ -35,6 +35,7 @@ Do not use a definite article before a noun when a code identifier (function nam
 **Using an article before a noun in a short instruction:**
 
 > **Non-STE:** Call callback function.
+>
 > **STE:** Call the callback function.
 >
 > *Adapted from original rule principle — in short sentences, use articles before all nouns; no direct spec pair*
@@ -64,11 +65,13 @@ Do not use a definite article before a noun when a code identifier (function nam
 **No article before a noun with a code identifier:**
 
 > **Non-STE:** Call the function `validateInput`.
+>
 > **STE:** Call function `validateInput`.
 >
 > *Adapted from original rule principle — a definite article is incorrect before a noun when an alphanumeric identifier comes after it; no direct spec pair*
 
 > **Non-STE:** Configure the module `AuthService`.
+>
 > **STE:** Configure module `AuthService`.
 >
 > *Adapted from original rule principle — a definite article is incorrect before a noun when an alphanumeric identifier comes after it; no direct spec pair*

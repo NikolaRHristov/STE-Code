@@ -55,6 +55,7 @@ The controlled terminology includes some words that you cannot use because they 
 "Handler" is not approved in the controlled terminology and its alternative is "function (n)." This adapts the spec example where "base" is not approved and its alternative is "bottom." Just as you must use "bottom" instead of "base" when referring to a surface, you must use "function" instead of "handler" when referring to a general processing function.
 
 > **Non-STE:** The handler processes each incoming event.
+>
 > **STE:** The function processes each incoming event.
 
 > *Adapted from spec pair: "Make sure that the two spigots at the base of the unit engage" / "Make sure that the two spigots at the bottom of the unit engage."* Just as "base" (unapproved) must be replaced with "bottom" (approved) when referring to a surface, "handler" (unapproved) must be replaced with "function" (approved) when referring to a general processing function.
@@ -70,6 +71,7 @@ But you can use "handler" as part of a code-domain technical noun. This is the s
 "Main" is not approved in the controlled terminology and its alternative is "primary (adj)." This adapts the spec example directly: "main" is the same word with the same alternative in both STE and STE-Code.
 
 > **Non-STE:** The main branch of the repository has the latest code.
+>
 > **STE:** The primary branch of the repository has the latest code.
 
 > *Adapted from spec pair: "main" is not approved and its alternative is "primary (adj)."* The same word "main" with the same alternative "primary" appears in both STE and STE-Code. When "main" is used as a general adjective, it must be replaced with "primary."
@@ -85,11 +87,13 @@ But you can use "main" as part of a code-domain technical noun. This adapts the 
 ### Examples
 
 > **Non-STE:** Make sure that the two connectors at the base of the chassis engage.
+>
 > **STE:** Make sure that the two connectors at the bottom of the chassis engage.
 
 This adapts the spec pair directly: "base" → "bottom" when referring to a physical surface. Just as in the aerospace example, "base" is not permitted when it refers to a surface location. The STE version uses the approved alternative "bottom."
 
 > **Non-STE:** The auxiliary function handles the error recovery.
+>
 > **STE:** The auxiliary function processes the error recovery.
 
 This adapts the spec example where "backup" is not approved and its alternatives include "auxiliary (adj)." In the spec, "backup" can be a technical noun in computer science (category 19). In STE-Code, "handler" is not approved as a general verb, but "handler" as part of a code-domain technical noun is permitted, just as "backup" is permitted as a technical noun.
@@ -109,6 +113,7 @@ The most common violation pattern in README files is using an unapproved word in
 When a README refers to a project name, a library name, or a tool name that contains an unapproved word, the entire compound term is a technical noun. "React Router" contains "router" (unapproved), but "React Router" is a package name — a code-domain technical noun (category 3). The compound is permitted as a whole. You must not extract the unapproved word and treat it separately.
 
 > **Non-STE:** The base setup leverages Express for the main API and MongoDB for the database backend.
+>
 > **STE:** The primary setup uses Express for the main API and MongoDB for the database backend.
 > *(P6 applied: "base" → "primary" when used as a general adjective. "leverages" → "uses" per P1 synonym table. "Express," "main API," "MongoDB," and "database backend" are code-domain technical nouns and remain unchanged.)*
 
@@ -121,6 +126,7 @@ Rule 1.6 interacts with API documentation in a specific way: the names of API re
 Authentication scheme names like "OAuth2," "JWT," and "API key" are technical nouns (category 16, computer science). Their descriptions must follow the rule. "The API key authenticates the request" uses "authenticates" — check the controlled terminology. If "authenticate" is not approved, use the approved alternative.
 
 > **Non-STE:** POST /api/v1/backup — Backups the database and returns a backup ID.
+>
 > **STE:** POST /api/v1/backup — Makes an auxiliary copy of the database. Returns a backup ID.
 > *(P6 applied: "Backups" as a verb → "Makes an auxiliary copy." The endpoint path `/api/v1/backup` and the field name "backup ID" are code-domain technical nouns and remain unchanged. "Backup ID" is a compound technical noun, category 18, database and storage terminology.)*
 
@@ -133,6 +139,7 @@ A Python docstring that says "Handles the request and returns a response" violat
 Inline comments that refer to variable names, class names, or function names treat those names as quoted text (category 10). The comment itself must use approved words. A comment that says "// base case: handler returns null" uses "base" (unapproved) when "primary" is the alternative. But "base case" is itself a code-domain technical noun (category 7, algorithmic terms) — the recursive base case of a function. When "base case" is the established term for the termination condition of a recursive function, Rule 1.6 permits it.
 
 > **Non-STE:** # Handles the edge case where the base URL is null and the handler times out.
+>
 > **STE:** # Processes the edge case where the base URL is null and the event handler runs longer than the timeout.
 > *(P6 applied: "Handles" as a verb → "Processes." "base URL" is a compound technical noun — "base" is permitted here as part of the term. "handler" alone → "event handler" as a technical noun. "times out" → "runs longer than the timeout" replaces an unapproved phrasal verb with approved words.)*
 
@@ -145,6 +152,7 @@ A commit message like "fix: backup the config before the main migration" uses "b
 But if "backup" is part of a recognized technical noun — for example, "backup script" — the compound is permitted: "fix: run the backup script before the primary migration." The distinction is whether the unapproved word stands alone in a general role or is embedded in a code-domain technical noun.
 
 > **Non-STE:** feat: add handler for the backup endpoint and the main config loader
+>
 > **STE:** feat: add an event handler for the auxiliary-copy endpoint and the primary config loader
 > *(P6 applied: "handler" alone → "event handler" (TN). "backup" as standalone adjective → "auxiliary" (approved). "backup endpoint" → "auxiliary-copy endpoint" because "backup" is not part of a recognized technical noun here. "main config loader" → "primary config loader" because "main" is a general adjective, not part of a recognized compound. If "main config" were a named configuration file in the project, then "main config" would be a technical noun and "main" would be permitted.)*
 
@@ -157,6 +165,7 @@ An error message like "Backup failed: handler timed out" contains two violations
 Error codes and error type names like `ENOENT`, `ETIMEDOUT`, `NullPointerException` are technical nouns (category 15, defects and errors). They are permitted regardless of their component words. But the prose that accompanies them must use approved words.
 
 > **Non-STE:** Error: base config file not found. The backup handler will exit.
+>
 > **STE:** Error: primary config file not found. The event handler for auxiliary copies will stop.
 > *(P6 applied: "base" → "primary"; "backup handler" → "event handler for auxiliary copies." The words "config file" and "event handler" are code-domain technical nouns. "Auxiliary copies" uses the approved adjective "auxiliary.")*
 
@@ -177,6 +186,7 @@ Design pattern names like "Singleton," "Factory," "Observer," and "Strategy" are
 Inheritance hierarchy descriptions also intersect with Rule 1.6. A class named `BaseController` contains "base" (unapproved). As a class name, it is a technical noun and is permitted. But the prose description must use approved alternatives: "The BaseController class is the primary controller for all pages."
 
 > **Non-STE:** The `BaseService` class handlers requests and backups data. It factories new instances via the `MainFactory`.
+>
 > **STE:** The `BaseService` class processes requests and makes auxiliary copies of data. It makes new instances with the `MainFactory` class.
 > *(P6 applied: "handlers" as a verb → "processes"; "backups" as a verb → "makes auxiliary copies." `BaseService` and `MainFactory` are class names — code-domain technical nouns — and remain unchanged. "factories" as a verb → "makes.")*
 
@@ -189,6 +199,7 @@ The word "base" appears in functional documentation in contexts like "base case"
 Monad transformer names like `ReaderT`, `StateT`, and `ExceptT` are technical nouns. Their documentation must use approved vocabulary: "The `ReaderT` transformer adds a read-only environment to the primary monad" not "The `ReaderT` transformer adds a read-only environment to the base monad" (unless "base monad" is the established term in the library's own vocabulary — then it is a technical noun and permitted).
 
 > **Non-STE:** The `ReaderT` transformer wraps the base monad. It handlers the environment and backups the state.
+>
 > **STE:** The `ReaderT` transformer wraps the underlying monad. It supplies the environment to each function and makes an auxiliary copy of the state.
 > *(P6 applied: "handlers" → "supplies"; "backups" → "makes an auxiliary copy." "base monad" → "underlying monad" when "base monad" is not the established library term. If the library documentation consistently uses "base monad," the term is a technical noun and is permitted.)*
 
@@ -201,6 +212,7 @@ In C documentation, `main()` is a function name — a code-domain technical noun
 In Go documentation, package names like `main`, `http`, `json`, and `sql` are technical nouns. When the documentation says "The `main` package," the word "main" is part of a technical noun (the package name). When the documentation says "the main goroutine," the word "main" is a general adjective and must become "primary" — unless the project's convention treats "main goroutine" as a technical noun.
 
 > **Non-STE:** The `main` function calls the `backup` routine and then the `handler` for each file.
+>
 > **STE:** The `main` function calls the backup routine and then the file handler for each file.
 > *(P6 applied: `main` is a function name — permitted. "backup routine" and "file handler" are code-domain technical nouns — permitted. The version already follows the rule. The only change: `handler` for each file → "file handler" to make the technical noun explicit.)*
 
@@ -213,6 +225,7 @@ SQL table names like `backup_logs` and column names like `main_status` are techn
 Kubernetes resource names like `Deployment`, `Service`, `ConfigMap`, and `Ingress` are technical nouns (category 5, infrastructure). YAML keys that name these resources are permitted. The inline comments in a Kubernetes manifest must follow Rule 1.6: "# The primary container image for the deployment" not "# The main container image for the deployment."
 
 > **Non-STE:** # This ConfigMap holds the base settings. The handler deployment backups the data.
+>
 > **STE:** # This ConfigMap holds the primary settings. The handler Deployment makes auxiliary copies of the data.
 > *(P6 applied: "base" → "primary"; "backups" → "makes auxiliary copies." "ConfigMap" and "handler Deployment" are code-domain technical nouns and remain unchanged. "handler" is part of the Deployment name — if the Deployment is literally named "handler," it is a technical noun.)*
 
@@ -225,6 +238,7 @@ In Rust, "unsafe" is a keyword and a code-domain technical noun (the `unsafe` bl
 The Rust concept of "raw pointer" is a code-domain technical noun (category 6, architectural components). "Raw" is unapproved in the controlled terminology. But "raw pointer" as a compound is permitted under Rule 1.6. Similarly, "dangling pointer" is a compound technical noun and "dangling" is permitted within it.
 
 > **Non-STE:** The `main` function uses an unsafe block to access the raw pointer. The handler drops the base allocation.
+>
 > **STE:** The `main` function uses an `unsafe` block to access the raw pointer. The drop handler frees the primary allocation.
 > *(P6 applied: `main` function name → permitted; `unsafe` block → permitted as a Rust keyword (TN); "raw pointer" → permitted as a compound TN (category 6); "handler" → "drop handler" to form an explicit TN; "base allocation" → "primary allocation" because "base" is a general adjective here.)*
 
@@ -237,6 +251,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 1 — README: Project Architecture Overview
 
 > **Non-STE:** The base repository hosts three main services. Each service handlers its own data and backups to a central store.
+>
 > **STE:** The primary repository hosts three services. Each service processes its own data and makes auxiliary copies to a central data store.
 
 > **Principles applied:** P6 (use unapproved words only as technical nouns: "base" → "primary" since it is a general adjective; "handlers" → "processes" since "handler" is unapproved as a verb; "backups" → "makes auxiliary copies" since "backup" is unapproved as a verb). P1 (use approved words: "leverages" → "uses" per synonym table; "repository" and "service" are code-domain technical nouns under Rule 1.5).
@@ -261,6 +276,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 3 — Commit Message: Multi-Service Architecture Change
 
 > **Non-STE:** feat: add backup handler for the main API service and the base worker pool
+>
 > **STE:** feat: add an auxiliary-copy handler for the primary API service and the primary worker pool
 
 > **Principles applied:** P6 (use unapproved words only as technical nouns: "backup handler" as standalone → component words are individually unapproved; when "handler" is part of the compound "auxiliary-copy handler" it becomes a TN). P1 ("main" → "primary"; "base" → "primary"). The scope "API service" and "worker pool" are code-domain technical nouns (category 1, category 6).
@@ -269,6 +285,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 4 — Error Message: CI Pipeline Failure
 
 > **Non-STE:** Build failed: the main config loader timed out. The backup handler did not start.
+>
 > **STE:** Build failed: the primary config loader ran longer than the timeout. The auxiliary-copy handler did not start.
 
 > **Principles applied:** P6 (unapproved words as technical nouns: "timed out" → "ran longer than the timeout" — "timeout" is a TN (category 13), but "timed out" uses it as a phrasal verb). P1 ("main" → "primary"). "backup handler" → "auxiliary-copy handler" — "handler" becomes part of a technical noun compound. "config loader" is a code-domain technical noun (category 1) and remains unchanged.
@@ -317,6 +334,7 @@ The following scenarios show where the boundary between unapproved word and perm
 **Guidance:** When the word is used to refer to the framework, library, or tool by its proper name, it is a code-domain technical noun (category 3, dev tools). Capitalize it according to the tool's official capitalization ("Express," not "express") to signal that it is a proper noun. When the word is used with its general English meaning, it is unapproved and must be replaced. Context is the deciding factor.
 
 > **Non-STE:** Use pandas to data-frame the CSV. Then express the results as JSON.
+>
 > **STE:** Use `pandas` to load the CSV file into a data frame. Then use Express to send the results as JSON.
 > *(P6 applied: "pandas" as library name → TN permitted. "data-frame" as verb → restructured. "express" as general verb → replaced. "Express" as framework name → TN permitted.)*
 
@@ -327,6 +345,7 @@ The following scenarios show where the boundary between unapproved word and perm
 **Guidance:** When the word appears as a keyword inside a code block (backtick-quoted), it is quoted text and is not governed by Rule 1.6. When the word appears in prose, its role determines the rule. If the prose is describing the keyword itself — "The `class` keyword defines a new type" — the keyword is a code-domain technical noun (category 10, quoted text) and is permitted. If the prose uses the word with its general English meaning — "A class of functions" — it is unapproved and must be replaced ("A category of functions").
 
 > **Non-STE:** The class of objects that return a value from the function must not block the main thread.
+>
 > **STE:** The category of objects that `return` a value from the function must not block the primary thread.
 > *(P6 applied: "class" as general noun → "category"; `return` as keyword → backtick-quoted TN; "main" → "primary.")*
 
@@ -337,6 +356,7 @@ The following scenarios show where the boundary between unapproved word and perm
 **Guidance:** For a compound to qualify as a code-domain technical noun under Rule 1.6, it must be recognized in at least one of these sources: (a) the project glossary, (b) the official documentation of the framework or library, (c) an industry-standard reference (RFC, W3C spec, etc.), or (d) one of the 19 STE-Code categories with clear category alignment. If none of these sources recognize the compound, it is not a technical noun. The unapproved words within it must be replaced or the compound must be restructured using approved words.
 
 > **Non-STE:** The handler pipeline integrates with the backup orchestrator via the main dispatcher.
+>
 > **STE:** The processing pipeline integrates with the auxiliary-copy service through the primary dispatcher.
 > *(P6 applied: "handler pipeline" → "processing pipeline" [not a recognized TN]; "backup orchestrator" → "auxiliary-copy service" [not a recognized TN]; "main dispatcher" → "primary dispatcher" [not a recognized TN]. All three compounds were restructured using approved words because none were recognized technical nouns.)*
 
@@ -357,6 +377,7 @@ The following scenarios show where the boundary between unapproved word and perm
 **Guidance:** The project name is always a technical noun (category 3 or category 11). References to the project must use the exact, official capitalization. Descriptive phrases that are not the project name — for example, "the base setup" when "Base" is the project name — are subject to normal Rule 1.6 review. The fact that a word appears in a project name does not make every use of that word a technical noun.
 
 > **Non-STE:** Use Homebrew to install the base packages. Then webpack the main bundle.
+>
 > **STE:** Use Homebrew to install the primary packages. Then use `webpack` to make the primary bundle.
 > *(P6 applied: "Homebrew" is a project name → TN permitted. "base" as general adjective → "primary." "webpack" as a verb → "use `webpack` to make." "main" as general adjective → "primary.")*
 

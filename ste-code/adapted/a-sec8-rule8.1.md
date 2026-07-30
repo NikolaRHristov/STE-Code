@@ -25,11 +25,13 @@ The semicolon (;) is not permitted in STE-Code because it lets you write very lo
 ### Examples
 
 > **Non-STE:** Call the function to parse the response data; handle any errors that occur.
+>
 > **STE:** Call the function to parse the response data. Handle any errors that occur.
 >
 > *Adapted from spec pair: "Examine the removed parts; replace the damaged ones." → split into two sentences.*
 
 > **Non-STE:** The cache is invalid after a write operation; you must flush it before the next read.
+>
 > **STE:** The cache is invalid after a write operation. You must flush it before the next read.
 >
 > *Adapted from spec pair: "Examine the removed parts; replace the damaged ones." → split into two sentences.*

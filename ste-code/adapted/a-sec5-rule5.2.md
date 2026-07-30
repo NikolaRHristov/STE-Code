@@ -18,6 +18,7 @@ Examples:
 (Two work steps)
 
 > **Non-STE:** Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover. (25 words)
+>
 > **STE:** Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)
 
 Examples of actions that occur at the same time:
@@ -60,6 +61,7 @@ You may write more than one sentence in a single work step when:
 ### Examples
 
 > **Non-STE:** Open the configuration file in a text editor and locate the database section and change the connection string to point to the staging server and then save the file and close the editor. (37 words, 5 instructions)
+>
 > **STE:** (1) Open the configuration file in a text editor. (2) Locate the database section. (3) Change the connection string to point to the staging server. (4) Save the file. (5) Close the editor.
 >
 > (Each instruction is a separate work step.)
@@ -67,6 +69,7 @@ You may write more than one sentence in a single work step when:
 > *Adapted from spec pair: "Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover." / "Put preservation oil into the unit through the vent hole. Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover."*
 
 > **Non-STE:** Run the test suite with the coverage flag enabled and verify that the total line coverage is above 80 percent across all modules in the project. (27 words)
+>
 > **STE:** Run the test suite with the coverage flag enabled. (9 words) The total line coverage must be more than 80 percent across all project modules. (14 words)
 >
 > (The second sentence states the result limit. The work step is one action and cannot be divided into two separate work steps.)
@@ -74,6 +77,7 @@ You may write more than one sentence in a single work step when:
 > *Adapted from spec pair: "Measure the leakage from the outlet port. The leakage must not be more than 0.5 cc/minute." (result immediately after action)*
 
 > **Non-STE:** Make sure the environment variable DATABASE_URL is set correctly and then execute the initialization script to create the required database tables and populate them with the seed data. (31 words)
+>
 > **STE:** Make sure that the environment variable DATABASE_URL is set correctly. Then, execute the initialization script. The script creates the required database tables and populates them with the seed data.
 >
 > (The check and the execution form one continuous work step. The third sentence explains what the script does.)
@@ -88,6 +92,7 @@ Actions that occur at the same time:
 - Download and extract the archive to the target directory.
 
 > **Non-STE:** Set the logging level to debug mode and then restart the application server and after that monitor the log output in the terminal for any error messages that appear during the startup sequence. (35 words)
+>
 > **STE:** (1) Set the logging level to debug. (2) Restart the application server. (3) Monitor the terminal log output for error messages during the startup sequence.
 >
 > (Three separate instructions, three work steps.)

@@ -25,9 +25,11 @@ The imperative form gives the reader a clear instruction. If you use other types
 Examples:
 
 > **Non-STE:** The test can be continued.
+>
 > **STE:** Continue the test.
 
 > **Non-STE:** Oil and grease are to be removed with a degreasing agent.
+>
 > **STE:** Remove oil and grease with a degreasing agent.
 
 Do not use the verb "must" before the imperative form, unless the instruction is very important for safety (for example, in a safety instruction) or when you give an important condition.
@@ -58,21 +60,25 @@ Save the configuration file.
 Restart the application server.
 
 > **Non-STE:** The unit tests can be executed with the command `npm test`.
+>
 > **STE:** Execute the unit tests with the command `npm test`.
 >
 > *Adapted from spec pair: "The test can be continued." → "Continue the test."*
 
 > **Non-STE:** The old log files are to be removed before the new deployment.
+>
 > **STE:** Remove the old log files before the new deployment.
 >
 > *Adapted from spec pair: "Oil and grease are to be removed with a degreasing agent." → "Remove oil and grease with a degreasing agent."*
 
 > **Non-STE:** The configuration file should be validated against the schema before the application is started.
+>
 > **STE:** Validate the configuration file against the schema before you start the application.
 >
 > *Adapted from spec: modal verb guidance — replace "should," "can," "could," "may," "might" with the direct imperative form.*
 
 > **Non-STE:** The SSL certificate must be renewed and then the web server must be restarted to apply the changes.
+>
 > **STE:** Renew the SSL certificate. Then, restart the web server to apply the changes.
 >
 > *Adapted from spec: "must" guidance — do not use "must" before the imperative form in standard instructions.*
@@ -80,6 +86,7 @@ Restart the application server.
 (No "must" is necessary because certificate renewal is a standard procedure, not a safety-critical instruction.)
 
 > **Non-STE:** It is recommended that you create a backup of the database before running the migration script.
+>
 > **STE:** Create a backup of the database before you run the migration script.
 >
 > *Adapted from spec: indirect phrasing guidance — replace "it is recommended that" with the direct imperative form.*

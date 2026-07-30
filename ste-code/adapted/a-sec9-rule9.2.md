@@ -31,30 +31,35 @@ A small number of words are approved as more than one part of speech and have mo
 ### Examples
 
 > **Non-STE:** Execute the initialization script before you start the server.
+>
 > **STE:** Run the initialization script before you start the server.
 
 (The word "execute" has the restricted meaning "to carry out a death sentence" in standard English. In the controlled terminology, "execute" is not approved. Use "run" for this context.)
 *Adapted from spec pair: "Wear protective clothing." / "Use (or put on) protective clothing." — "wear" is approved only with the meaning "to become damaged by friction," not "to have on one's body."*
 
 > **Non-STE:** When the error count goes down, restart the service.
+>
 > **STE:** When the error count decreases, restart the service.
 
 (The verb "goes" together with the preposition "down" is a phrase that refers to a physical movement. "Decrease" is better because it refers to the error count, not to a physical indicator that monitors the count.)
 *Adapted from spec pair: "When the pressure goes down, lift the cover." / "When the pressure decreases, lift the cover."*
 
 > **Non-STE:** Log the exception details to the output stream.
+>
 > **STE:** Write the exception details to the log.
 
 (The word "log" is approved as a noun, but not as a verb. Use the approved noun "log" with the approved verb "write.")
 *Adapted from spec pair about part of speech: use each word only in its approved part of speech. "Log" as a verb is not approved; use the approved noun form.*
 
 > **Non-STE:** The config help shows all available command-line options.
+>
 > **STE:** The configuration help text shows all available command-line options.
 
 (The word "help" is approved as a verb, but not as a noun. Use the approved noun "help text" or rewrite the sentence.)
 *Adapted from spec pair about part of speech: "help" is approved as a verb, not as a noun.*
 
 > **Non-STE:** The recursive call damaged the call stack.
+>
 > **STE:** The recursive call caused damage to the call stack.
 
 (The word "damage" is approved as a noun, but not as a verb. Use "cause damage" or "do damage" instead of the verb form.)

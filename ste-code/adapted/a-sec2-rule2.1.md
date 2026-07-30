@@ -33,6 +33,7 @@ To keep multi-word nouns short, you can use prepositions (for example, "of," "on
 Examples:
 
 > **Non-STE:** Runway light connection resistance calibration. (5 words)
+>
 > **STE:** Calibration of the resistance of the runway light connection.
 > *(1 word, 1 word, and 3 words)*
 
@@ -61,6 +62,7 @@ This rule applies to documentation prose, not to code identifiers (variable name
 ### Examples
 
 > **Non-STE:** Database connection pool timeout configuration. (5 words)
+>
 > **STE:** Configuration of the timeout of the database connection pool.
 > *(1 word, 1 word, and 3 words)*
 
@@ -137,11 +139,13 @@ Different programming paradigms produce different types of multi-word nouns. The
 OOP documentation frequently chains class names, design pattern names, and architectural layer names. These chains often exceed three words.
 
 > **Non-STE:** The AbstractFactoryMethodPatternImplementationRegistryBuilder constructs the registry.
+>
 > **STE:** The builder for the registry of the implementation of the abstract factory method pattern constructs the registry.
 
 Design pattern names such as "abstract factory method pattern" are official technical nouns. Write them in full the first time. After explanation, use a shorter form (see Rule 2.2).
 
 > **Non-STE:** Inject the UserRepositoryInterfaceDependencyInjectionContainerBinding.
+>
 > **STE:** Inject the binding of the container for dependency injection of the interface of the user repository.
 
 "UserRepositoryInterface" and "DependencyInjectionContainer" are class names in code. In documentation prose, break them into their semantic parts with prepositions.
@@ -151,11 +155,13 @@ Design pattern names such as "abstract factory method pattern" are official tech
 Functional documentation describes monadic chains, transformer stacks, and pure function compositions. These create deeply nested noun modifiers.
 
 > **Non-STE:** The monadic error handling pipeline transformer composition chain evaluates the input.
+>
 > **STE:** The chain of composition of the transformer of the pipeline for monadic error handling evaluates the input.
 
 > **Principle applied:** P7 — "chain" is used as a noun, not as a verb ("to chain"). The technical nouns "monadic," "pipeline," "transformer," and "composition" are preserved.
 
 > **Non-STE:** Apply the higher order function currying partial application optimization.
+>
 > **STE:** Apply the optimization of the partial application of the currying of the higher-order function.
 
 ### Procedural Programming (C, Go, Bash)
@@ -163,11 +169,13 @@ Functional documentation describes monadic chains, transformer stacks, and pure 
 Procedural code documents sequences of operations, memory management, and system calls. Multi-word nouns describe buffers, handlers, and procedures.
 
 > **Non-STE:** The file descriptor read buffer allocation failure handler signals the caller.
+>
 > **STE:** The handler for failure of allocation of the read buffer of the file descriptor signals the caller.
 
 > **Principle applied:** P12 — "handler," "buffer," and "allocation" are approved technical verbs used as nouns here (which is correct — Rule 1.13 applies when technical verbs are used as nouns incorrectly).
 
 > **Non-STE:** Execute the memory arena deallocation safety check routine.
+>
 > **STE:** Execute the routine for the safety check of the deallocation of the memory arena.
 
 ### Declarative Programming (SQL, Terraform, Kubernetes YAML)
@@ -175,11 +183,13 @@ Procedural code documents sequences of operations, memory management, and system
 Declarative documentation describes resource specifications, policy definitions, and query structures.
 
 > **Non-STE:** The Kubernetes pod resource limit specification defines the maximum memory.
+>
 > **STE:** The specification of the resource limit of the Kubernetes pod defines the maximum memory.
 
 > **Principle applied:** P5 — "Kubernetes" and "pod" are technical code nouns. "Resource limit" is a three-word multi-word noun that stays within the limit.
 
 > **Non-STE:** The Terraform module output variable dependency graph resolution algorithm runs before apply.
+>
 > **STE:** The algorithm for resolution of the graph of dependency of the output variable of the Terraform module runs before the apply step.
 
 ### Systems Programming (Rust Ownership, C Memory)
@@ -187,11 +197,13 @@ Declarative documentation describes resource specifications, policy definitions,
 Systems documentation describes ownership models, lifetime annotations, and memory layouts. These concepts naturally stack many modifiers.
 
 > **Non-STE:** The heap allocated reference counted thread safe pointer dereference operation returns the value.
+>
 > **STE:** The operation of dereference of the pointer that is heap-allocated, reference-counted, and thread-safe returns the value.
 
 > **Principle applied:** P1, P4 — hyphens in "heap-allocated," "reference-counted," and "thread-safe" create adjective compounds. Each hyphenated compound counts as one word.
 
 > **Non-STE:** The stack frame return address overflow protection mechanism prevents attacks.
+>
 > **STE:** The mechanism for protection against overflow of the return address of the stack frame prevents attacks.
 
 ---
@@ -203,6 +215,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, and the pr
 ### Example 1 — Configuration Documentation
 
 > **Non-STE:** Set the load balancer health check interval threshold multiplier to 2.
+>
 > **STE:** Set the multiplier of the threshold of the interval of the health check of the load balancer to 2.
 
 **Principle applied:** P1, P11 — "health check" and "load balancer" are canonical terms. The preposition "of" shows the ownership chain: multiplier → threshold → interval → health check → load balancer.
@@ -212,6 +225,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, and the pr
 ### Example 2 — Commit Message
 
 > **Non-STE:** feat: add GraphQL query response cache eviction strategy configuration
+>
 > **STE:** feat: add configuration of the strategy for eviction of the cache of the GraphQL query response
 
 **Principle applied:** P9, P5 — "GraphQL" is a technical code noun. The shorter, clearer form uses prepositions to show the relations.
@@ -221,6 +235,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, and the pr
 ### Example 3 — Error Message
 
 > **Non-STE:** ERROR: Authentication token validation failure recovery procedure initialization failed.
+>
 > **STE:** ERROR: Initialization of the procedure for recovery from failure of the validation of the authentication token failed.
 
 **Principle applied:** P2, P3 — "recovery" (noun, approved), "validation" (noun, approved), "authentication" (noun, approved). No word is used as an incorrect part of speech.
@@ -230,6 +245,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, and the pr
 ### Example 4 — API Documentation (Return Value)
 
 > **Non-STE:** Returns the user profile image upload progress percentage completion status.
+>
 > **STE:** Returns the status of completion of the percentage of progress of the upload of the user profile image.
 
 **Principle applied:** P1 — "completion," "percentage," "progress," "upload," "image," and "status" are all approved nouns from the STE-Code dictionary.
@@ -239,6 +255,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, and the pr
 ### Example 5 — README Architecture Section
 
 > **Non-STE:** The system uses a microservice inter-service communication message broker routing table.
+>
 > **STE:** The system uses a table for routing of messages in the broker for communication between the microservices.
 
 **Principle applied:** P8, P9 — "microservice," "broker," and "routing" are standard, well-known technical nouns. The shorter, clearer prepositions replace the noun chain.
@@ -248,6 +265,7 @@ Each pair shows a real code-documentation scenario, the STE-Code fix, and the pr
 ### Example 6 — Inline Code Comment
 
 > **Non-STE:** // Trigger the CI/CD pipeline artifact retention policy enforcement job.
+>
 > **STE:** // Trigger the job for enforcement of the policy for retention of the artifacts of the CI/CD pipeline.
 
 **Principle applied:** P1, P7 — "enforcement" is a noun (not used as a verb). "CI/CD" is a technical code noun.
@@ -277,11 +295,13 @@ Some framework names contain words that are not approved in STE-Code. The framew
 Some code keywords (reserved words in programming languages) appear in documentation prose. These keywords are technical code nouns and are not subject to the multi-word noun limit when used as code identifiers. However, the surrounding prose must still follow the rule.
 
 > **Non-STE:** The `finally` block cleanup resource deallocation handler runs after the try-catch.
+>
 > **STE:** The handler for deallocation of the resource of the cleanup of the `finally` block runs after the try-catch statement.
 
 The keyword `finally` is a reserved word in Java, Python, and JavaScript. It appears in backticks to indicate code. The multi-word noun rule applies to the prose around it, not to the keyword itself.
 
 > **Non-STE:** The `yield` keyword generator state preservation mechanism differs in Python and JavaScript.
+>
 > **STE:** The mechanism for preservation of the state of the generator of the `yield` keyword is different in Python and in JavaScript.
 
 ### Edge Case 3 — Relaxation for Auto-Generated Documentation
@@ -300,6 +320,7 @@ Auto-generated documentation (JSDoc output, Sphinx autodoc, Swagger/OpenAPI gene
 Technical terms that include slashes (read/write, input/output, create/read/update/delete) count as one word for the purpose of this rule. The slash binds the words into a single semantic unit.
 
 > **Non-STE:** The read/write lock timeout configuration parameter controls contention.
+>
 > **STE:** The parameter for configuration of the timeout of the read/write lock controls contention.
 
 "read/write" counts as one word. "Read/write lock" is a 2-word multi-word noun. "Read/write lock timeout configuration parameter" is 4 words and must be broken.

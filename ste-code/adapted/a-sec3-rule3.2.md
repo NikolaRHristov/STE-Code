@@ -55,16 +55,19 @@ Do not use complex verb constructions that are not approved. Specifically, never
 ### Examples
 
 > **Non-STE:** The linter has found three errors in the source file.
+>
 > **STE:** The linter found three errors in the source file.
 
 > *Adapted from spec pair: present perfect "have/has adjusted" is prohibited in STE.* Just as STE does not permit "has adjusted," STE-Code does not permit "has found." The simple past tense "found" is the approved form.
 
 > **Non-STE:** The server was processing the request when the timeout occurred.
+>
 > **STE:** The server processed the request. Then the timeout occurred.
 
 > *Adapted from spec pair: past progressive "was adjusting" is prohibited in STE.* Just as STE does not permit "was adjusting," STE-Code does not permit "was processing." Use the simple past tense and break into separate sentences when necessary.
 
 > **Non-STE:** The framework had already initialized the connection pool before the query started.
+>
 > **STE:** The framework initialized the connection pool. Then the query started.
 
 > *Adapted from spec pair: past perfect "had adjusted" is prohibited in STE.* Just as STE does not permit "had adjusted," STE-Code does not permit "had initialized." Use the simple past tense and sequence events with "Then."
@@ -156,6 +159,7 @@ Safety documentation uses the imperative mood in the "Safety" section: "The call
 ### Example 1 — Present Perfect in README
 
 > **Non-STE:** The build system has cached all the intermediate artifacts, so subsequent builds are much faster.
+>
 > **STE:** The build system caches all intermediate artifacts. Subsequent builds are faster.
 
 > *Principle P3 (approved meanings) + Rule 3.2:* "has cached" is the present perfect tense. Use the simple present "caches." Break the compound sentence into two simple sentences.
@@ -163,6 +167,7 @@ Safety documentation uses the imperative mood in the "Safety" section: "The call
 ### Example 2 — Past Progressive in Error Documentation
 
 > **Non-STE:** When the crash occurred, the worker thread was processing a large payload and the connection pool was draining.
+>
 > **STE:** When the crash occurred, the worker thread processed a large payload. The connection pool drained at the same time.
 
 > *Principle P3 + Rule 3.2:* "was processing" and "was draining" are past progressive forms. Use the simple past "processed" and "drained." Break into separate sentences.
@@ -170,6 +175,7 @@ Safety documentation uses the imperative mood in the "Safety" section: "The call
 ### Example 3 — Present Perfect in API Docs
 
 > **Non-STE:** This endpoint has returned a 200 OK for every valid request since version 2.1.
+>
 > **STE:** This endpoint returns a 200 OK for every valid request. This behavior applies from version 2.1.
 
 > *Principle P3 + Rule 3.2:* "has returned" is the present perfect. Use the simple present "returns." Move the version qualification to a separate sentence.
@@ -177,6 +183,7 @@ Safety documentation uses the imperative mood in the "Safety" section: "The call
 ### Example 4 — Future Perfect in Release Notes
 
 > **Non-STE:** By the time version 3.0 ships, the team will have migrated all legacy endpoints to the new router.
+>
 > **STE:** Version 3.0 will include a migration of all legacy endpoints to the new router.
 
 > *Principle P3 + Rule 3.2:* "will have migrated" is the future perfect tense, which is not approved. Use the simple future "will include" with a technical noun "migration."
@@ -184,6 +191,7 @@ Safety documentation uses the imperative mood in the "Safety" section: "The call
 ### Example 5 — Past Perfect in Commit Messages
 
 > **Non-STE:** Fixed a bug where the parser had already consumed the token before the validator checked the schema.
+>
 > **STE:** Fix a bug where the parser consumed the token before the validator checked the schema.
 
 > *Principle P3 + P12 (approved technical verbs) + Rule 3.2:* "had consumed" is the past perfect. Use the simple past "consumed." Also change "Fixed" to the imperative "Fix" for commit message convention.
@@ -191,6 +199,7 @@ Safety documentation uses the imperative mood in the "Safety" section: "The call
 ### Example 6 — Present Progressive in Docstrings
 
 > **Non-STE:** This method is iterating over the collection and is building an index for each element.
+>
 > **STE:** This method iterates over the collection and builds an index for each element.
 
 > *Principle P3 + Rule 3.2:* "is iterating" and "is building" are present progressive forms. Use the simple present "iterates" and "builds." The method does this every time it is called.

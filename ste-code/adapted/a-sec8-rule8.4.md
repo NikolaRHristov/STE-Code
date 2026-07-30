@@ -40,6 +40,7 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 ### Examples
 
 > **Non-STE:** To handle all possible error conditions, the following exception types must be caught and processed by the error handler: database connection timeouts which occur when the primary node is unreachable, authentication failures caused by expired or invalid tokens, and validation errors due to malformed request payloads.
+>
 > **STE:** To handle possible error conditions, the error handler catches these exception types:
 >
 > - Database connection timeout (3 words)
@@ -49,6 +50,7 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 > *Adapted from spec pair: "To extinguish a possible fire, portable fire extinguishers are installed in these areas:" followed by a vertical list of locations with word counts.*
 
 > **Non-STE:** The configuration file, which is located in the project root, supports these environment profiles that you can use for deployment: a development profile for local testing and debugging, a staging profile for pre-production integration verification, and a production profile for the live customer-facing environment.
+>
 > **STE:** The configuration file supports these environment profiles:
 >
 > - Development (1 word)

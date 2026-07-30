@@ -42,6 +42,7 @@ Or:
 *Adapted from spec pattern: repeat the applicable context to disambiguate "this."*
 
 > **Non-STE:** Verify that the function returns a non-null value. If it does not, this can cause a runtime error in the caller.
+>
 > **STE:** Verify that the function returns a non-null value. If the function returns a null value, this null value can cause a runtime error in the caller.
 
 *Adapted from spec pattern: replace the pronoun with the explicit referent to remove ambiguity.*

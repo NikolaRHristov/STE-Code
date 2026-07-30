@@ -29,18 +29,21 @@ Only a small number of phrasal verbs are approved. They all have a restricted me
 ### Examples
 
 > **Non-STE:** The compiler puts out a warning when the type annotation is missing.
+>
 > **STE:** The compiler emits a warning when the type annotation is missing.
 
 ("Put" and "out" are approved words individually. Together, "put out" forms a phrasal verb with a meaning different from the approved meanings of "put" and "out." The approved verb "emit" has the meaning "to send out" and is the word that is most usual in code documentation.)
 *Adapted from spec pair: "Put out the fire." (abstract) / "Extinguish the fire." — "put" and "out" are approved individually, but together they form a phrasal verb; the approved verb "extinguish" replaces it.*
 
 > **Non-STE:** The function gives off an error code when the input is not valid.
+>
 > **STE:** The function returns an error code when the input is not valid.
 
 ("Give" and "off" are approved words individually. Together, "give off" forms a phrasal verb with a meaning different from the approved meanings of "give" and "off." The approved verb "return" has the meaning "to send back a value" and is the correct word for this context in code documentation.)
 *Adapted from spec pair: "Give off gas." / "Release gas." — "give" and "off" are approved individually, but together they form a phrasal verb; the approved verb "release" replaces it.*
 
 > **Non-STE:** The cleanup task carries out the memory deallocation after each request.
+>
 > **STE:** The cleanup task does the memory deallocation after each request.
 
 ("Carry" and "out" are approved words individually. Together, "carry out" forms a phrasal verb. The approved verb "do" replaces the phrasal verb and keeps the same meaning.)

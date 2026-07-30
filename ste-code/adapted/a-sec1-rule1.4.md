@@ -69,11 +69,13 @@ Adjectives that make their comparative and superlative forms with "more" and "mo
 ### Examples
 
 > **Non-STE:** The compiler is compilating the source files.
+>
 > **STE:** The compiler compiles the source files.
 
 > *Adapted from spec concept: only approved verb forms are permitted. Just as you cannot invent verb forms for "remove" beyond removes/removed/removed in STE, you cannot use "compilating" in STE-Code. The only approved simple present form of "compile" is "compiles."*
 
 > **Non-STE:** This algorithm is more fast than the previous one.
+>
 > **STE:** This algorithm is faster than the previous one.
 
 > *Adapted from spec example: "slow" (adj) (SLOWER, SLOWEST). Just as "slow" has the approved comparative form "slower" and you cannot use "more slow," "fast" has the approved comparative form "faster" and you cannot use "more fast." The approved comparative and superlative forms from the controlled terminology must be used.*
@@ -97,6 +99,7 @@ Do not use the "-ing" form as a main verb in procedural writing. This is an anti
 Example — README procedural section:
 
 > **Non-STE:** After installing the dependencies, you can start compiling the project by running the build script. The compiler will be generating the output in the dist directory.
+>
 > **STE:** After you install the dependencies, compile the project with the build script. The compiler makes the output in the dist directory.
 > *(P4 applied: "compiling" → "compile"; "will be generating" → "makes")*
 
@@ -111,6 +114,7 @@ The past participle form (GIVEN) serves as an adjective for describing state. "T
 Example — API return value description:
 
 > **Non-STE:** This method is returning a sorted list of users. It is accepting an optional filter parameter.
+>
 > **STE:** This method gives a sorted list of users. It accepts an optional filter parameter.
 > *(P4 applied: "is returning" → "gives"; "is accepting" → "accepts")*
 
@@ -123,6 +127,7 @@ When a docstring describes what a function does, use the third-person singular f
 Example — Python docstring:
 
 > **Non-STE:** Checked the input data and returning a boolean. Raises ValueError if the data is invalidating the schema.
+>
 > **STE:** Check the input data and give a boolean. Raise ValueError when the data is not correct.
 > *(P4 applied: "Checked" → "Check" (imperative); "returning" → "give"; "invalidating" → "not correct")*
 
@@ -135,6 +140,7 @@ Do not use the past tense in commit message subject lines. "Added" is not correc
 Example — commit message:
 
 > **Non-STE:** Fixed memory leak in connection pool and adding timeout configuration
+>
 > **STE:** Fix memory leak in connection pool and add timeout configuration
 > *(P4 applied: "Fixed" → "Fix"; "adding" → "add")*
 
@@ -147,6 +153,7 @@ Do not use continuous forms ("is running," "is starting") in error messages unle
 Example — error message:
 
 > **Non-STE:** Connection failed: the database is not running. Please verify your configuration and retrying.
+>
 > **STE:** Connection failed: the database does not run. Check your configuration and try again.
 > *(P4 applied: "is not running" → "does not run"; "verify" → "check"; "retrying" → "try again")*
 
@@ -180,6 +187,7 @@ When you describe the state of an object or the result of an operation, use the 
 Example — class documentation:
 
 > **Non-STE:** The `CacheManager` is responsible for maintaining cached data and invalidating entries when they become stale. It's leveraging a TTL-based eviction policy.
+>
 > **STE:** The `CacheManager` class keeps cached data and removes old entries. It uses a TTL-based eviction policy.
 > *(P4 applied: "maintaining" → "keeps"; "invalidating" → "removes"; "is leveraging" → "uses")*
 
@@ -200,6 +208,7 @@ Functional programming has many technical verbs that describe transformations: "
 Example — module documentation:
 
 > **Non-STE:** This module provides functions for transforming lists. The `sortBy` function is ordering elements using a comparator. The `groupBy` function is grouping elements by a key function.
+>
 > **STE:** This module gives functions that change lists. The `sortBy` function orders elements with a comparator. The `groupBy` function groups elements by a key function.
 > *(P4 applied: "is ordering" → "orders"; "is grouping" → "groups"; P1 applied: "provides" → "gives"; "transforming" → "change")*
 
@@ -220,6 +229,7 @@ Procedural code often deals with memory, pointers, and system resources. The tec
 Example — C function documentation:
 
 > **Non-STE:** Allocating a buffer on the heap. The caller is deallocating the buffer when it's no longer needed. The function is returning a pointer to the allocated memory.
+>
 > **STE:** Make a buffer on the heap. The caller frees the buffer when the buffer is no longer necessary. The function gives a pointer to the allocated memory.
 > *(P4 applied: "Allocating" → "Make" (imperative); "is deallocating" → "frees"; "is returning" → "gives")*
 
@@ -240,6 +250,7 @@ Declarative tools introduce many technical verbs that describe infrastructure op
 Example — Terraform module documentation:
 
 > **Non-STE:** This module is provisioning an EC2 instance and configuring security groups. After applying, the instance will be running and accessible.
+>
 > **STE:** This module makes an EC2 instance and sets the security groups. After you apply the configuration, the instance runs and you can connect.
 > *(P4 applied: "is provisioning" → "makes"; "configuring" → "sets"; "will be running" → "runs")*
 
@@ -260,6 +271,7 @@ These technical verbs follow standard English morphology but some are irregular.
 Example — Rust documentation:
 
 > **Non-STE:** The borrow checker is ensuring that references aren't outliving the data they refer to. When a value is moved, the original binding is becoming invalid. The compiler is preventing use-after-move errors.
+>
 > **STE:** The borrow checker makes sure that references do not live longer than the data they point to. When you move a value, the original binding becomes not valid. The compiler prevents use-after-move errors.
 > *(P4 applied: "is ensuring" → "makes sure"; "aren't outliving" → "do not live longer than"; "is becoming" → "becomes"; "is preventing" → "prevents")*
 
@@ -272,6 +284,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 1 — README: Build Instructions
 
 > **Non-STE:** After cloning the repository, you can start building the project by executing the build script. The compiler will be transpiling TypeScript files and outputting JavaScript bundles in the dist directory.
+>
 > **STE:** After you clone the repository, build the project with the build script. The compiler transpiles TypeScript files and makes JavaScript bundles in the dist directory.
 
 > **Principle applied:** P4 (use only approved verb forms: "start building" → "build"; "will be transpiling" → "transpiles"; "outputting" → "makes"); P1 (use approved words: "executing" → "with")
@@ -280,6 +293,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 2 — API Reference: Method Description
 
 > **Non-STE:** The `authenticate` method is verifying user credentials and is returning a JWT token upon success. It is throwing an `AuthenticationError` if the credentials are invalidating the check.
+>
 > **STE:** The `authenticate` method checks user credentials and gives a JWT token when the check succeeds. It gives an `AuthenticationError` when the credentials are not correct.
 
 > **Principle applied:** P4 (use only approved verb forms: "is verifying" → "checks"; "is returning" → "gives"; "is throwing" → "gives"; "are invalidating" → "are not correct")
@@ -308,6 +322,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 4 — Commit Message: Feature Addition
 
 > **Non-STE:** feat: adding user authentication middleware and updated the login endpoint
+>
 > **STE:** feat: add user authentication middleware and update the login endpoint
 
 > **Principle applied:** P4 (use only approved verb forms: "adding" → "add"; "updated" → "update")
@@ -328,6 +343,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 6 — Error Message: Database Connection
 
 > **Non-STE:** Connection timeout: the database server wasn't responding within the allocated timeframe. Please check your network configuration and try reconnecting.
+>
 > **STE:** Connection timeout: the database server did not respond in the given time. Check your network configuration and try to connect again.
 
 > **Principle applied:** P4 (use only approved verb forms: "wasn't responding" → "did not respond"; "reconnecting" → "to connect again"); P1 (use approved words: "within" → "in"; "allocated timeframe" → "given time"; "check" is approved; "network" and "configuration" are technical nouns)
@@ -346,6 +362,7 @@ The following scenarios show where the boundary between approved forms and techn
 **Guidance:** When the "-ing" form is a code-domain technical noun, it is permitted under Rule 1.5 and Rule 1.6. "Logging" as a noun ("the logging module") is a code-domain technical noun. "Logging" as a main verb ("the system is logging events") is not permitted because the "-ing" form is not an approved form of the verb "log." The distinction depends on grammatical function: noun use is permitted, main-verb use is not.
 
 > **Non-STE:** The system is logging errors to the console. The logging module is handling all output.
+>
 > **STE:** The system logs errors to the console. The logging module handles all output.
 >
 > In the first sentence, "is logging" uses "-ing" as a main verb — not permitted. Replace with "logs." In the second sentence, "logging" is a noun modifier — permitted.
@@ -357,6 +374,7 @@ The following scenarios show where the boundary between approved forms and techn
 **Guidance:** Follow the most widely accepted form in the software domain. For "input" and "output," both "input" and "inputted" appear in technical writing but "input" as the past tense is more common and follows the irregular pattern (like "set" → "set" and "cut" → "cut"). For "broadcast," "broadcast" as the past tense is standard. For "cast" (type casting), "cast" as the past tense is standard. For "set," "set" is the only correct past form — "setted" is never correct.
 
 > **Non-STE:** The user inputted the data and the system outputted the result. The value was setted correctly.
+>
 > **STE:** The user input the data and the system output the result. The value was set correctly.
 
 ### Edge Case 3: Framework Names That Look Like Verb Forms
@@ -366,6 +384,7 @@ The following scenarios show where the boundary between approved forms and techn
 **Guidance:** Framework and library names are code-domain technical nouns (category 3, development tools) and are permitted as proper nouns under Rule 1.5. The fact that "running" is not an approved verb form does not affect the use of "Running" as a proper noun. Always write the framework name with its correct capitalization. When you describe what the framework does, use approved verb forms in the prose.
 
 > **Non-STE:** React is rendering the component tree and updating the DOM efficiently.
+>
 > **STE:** React renders the component tree and updates the DOM quickly.
 >
 > "React" as a proper noun is unchanged. "Is rendering" uses the "-ing" form - replaced with "renders" (technical verb, follows standard morphology). "Updating" uses the "-ing" form — replaced with "updates." "Efficiently" is not an approved adverb — use "quickly" (approved).
@@ -377,6 +396,7 @@ The following scenarios show where the boundary between approved forms and techn
 **Guidance:** Use the past participle as an adjective when you describe the state of something. Use the active voice with an approved verb when you describe who or what performs an action. The passive voice with a past participle is grammatically correct but the active voice is clearer. Prefer active voice.
 
 > **Non-STE:** The source files were compiled by the build system and the compiled output was deployed to the server.
+>
 > **STE:** The build system compiled the source files and deployed the compiled output to the server.
 >
 > Both sentences use approved forms ("compiled" is an approved past participle form of "compile"). The STE version uses the active voice, which is clearer and uses fewer words.
@@ -390,6 +410,7 @@ The following scenarios show where the boundary between approved forms and techn
 In the code domain, "good" and "bad" are rarely used in technical documentation. Prefer more precise adjectives: "correct," "incorrect," "fast," "slow," "large," "small." These have regular comparative forms ("faster," "slower," "larger," "smaller") and avoid the irregular-comparative problem entirely.
 
 > **Non-STE:** This algorithm gives good results but the other algorithm gives better results. The worst case is bad.
+>
 > **STE:** This algorithm gives correct results. The other algorithm gives more correct results for large inputs. The slowest case takes 10 seconds.
 >
 > "Good" and "bad" are replaced with more precise, approved adjectives. "Better" (comparative of "good") is replaced with "more correct" (using the approved "more" + base form pattern). "Worst" (superlative of "bad") is replaced with "slowest" (approved superlative of "slow").

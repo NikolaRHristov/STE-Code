@@ -19,6 +19,7 @@ Examples in STE:
 > **CAUTION:** WHEN YOU REMOVE THE SHROUD (26), BE CAREFUL NOT TO CAUSE DAMAGE TO THE SURFACE OF THE FLANGE ASSEMBLY (22). (This sentence has 20 words.)
 
 > **Non-STE:** Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover. (25 words)
+>
 > **STE:** Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)
 
 Note: Section 8 gives all the rules about word count.
@@ -40,16 +41,19 @@ This rule applies to sentences in procedural documentation text. Code snippets, 
 ### Examples
 
 > **Non-STE:** Run the database migration script from the project root directory and then restart the application server to apply all pending schema changes to the production environment. (27 words)
+>
 > **STE:** Run the database migration script from the project root directory. (9 words) Then, restart the application server to apply all pending schema changes. (13 words)
 >
 > *Adapted from spec pair: "Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover." (25 words) / "Put preservation oil into the unit through the vent hole." (10 words) "Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover." (16 words)*
 
 > **Non-STE:** The initialization process will automatically create the required directory structure and populate it with default configuration files before the application starts. (22 words)
+>
 > **STE:** The initialization process automatically creates the required directory structure. (8 words) Then, it populates the directory with default configuration files. (10 words)
 >
 > *Additional code-domain example — no direct spec pair*
 
 > **Non-STE:** Set the environment variable HTTP_TIMEOUT to the value 30000 which represents the maximum number of milliseconds that the client will wait for a response from the upstream server. (30 words)
+>
 > **STE:** Set the environment variable HTTP_TIMEOUT to 30000. (8 words) This value is the maximum wait time in milliseconds for a response from the upstream server. (17 words)
 >
 > *Additional code-domain example — no direct spec pair*

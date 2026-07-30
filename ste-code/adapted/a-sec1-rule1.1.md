@@ -54,6 +54,7 @@ The word "serialize" is a code-domain technical verb. This adapts the spec examp
 > *Adapted from spec example: "The word 'ream' is a technical verb."*
 
 > **Non-STE:** Execute the script to do the task.
+>
 > **STE:** Run the script to do the task.
 
 > *Adapted from spec concept: the STE dictionary lists non-approved words with approved alternatives. Just as the spec restricts vocabulary to the dictionary, STE-Code restricts vocabulary to the controlled terminology.*
@@ -75,6 +76,7 @@ Descriptive sections explain what the project does or how it works. Here, Rule 1
 Example — README setup section:
 
 > **Non-STE:** Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.
+>
 > **STE:** Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.
 > *(P1 applied: "utilize" → "use"; "generate" → "make"; "execute" → "run"; "bootstrap" → "start"; "configure" → "set")*
 
@@ -87,6 +89,7 @@ Return value descriptions, parameter explanations, and error condition notes mus
 Example — JSDoc parameter description:
 
 > **Non-STE:** @param {number} timeout — The duration in milliseconds the client shall await a response prior to terminating the connection attempt.
+>
 > **STE:** @param {number} timeout — The time in milliseconds that the client waits for a response before it stops the connection.
 > *(P1 applied: "duration" → "time"; "shall await" → "waits"; "prior to" → "before"; "terminating" → "stops")*
 
@@ -99,6 +102,7 @@ For docstrings, prefer approved verbs: "do" instead of "perform," "check" instea
 Example — Python docstring:
 
 > **Non-STE:** Perform validation on the input data to ensure it conforms to the expected schema. Returns a boolean indicating whether the data is valid.
+>
 > **STE:** Check the input data against the schema. Gives `true` when the data is correct and `false` when the data is not correct.
 > *(P1 applied: "perform" → "do"; "validation" restructured to "check"; "ensure" → "when"; "conforms to" → "against"; "indicating whether" restructured)*
 
@@ -111,10 +115,12 @@ Use approved imperative verbs: "add," "fix," "remove," "update," "set," "make," 
 Example — conventional commit:
 
 > **Non-STE:** feat: implement JWT authentication middleware for API routes
+>
 > **STE:** feat: add JWT authentication middleware for API routes
 > *(P1 applied: "implement" → "add")*
 
 > **Non-STE:** perf: optimize database query performance in user listing endpoint
+>
 > **STE:** perf: make the database query faster in the user listing endpoint
 > *(P1 applied: "optimize" → "make faster"; "performance" removed as redundant)*
 
@@ -127,6 +133,7 @@ Use "cannot" (approved) instead of "unable to" (not approved). Use "incorrect" (
 Example — CLI error message:
 
 > **Non-STE:** Error: Unable to establish connection to the database. Please verify your credentials and retry.
+>
 > **STE:** Error: Cannot connect to the database. Check your credentials and try again.
 > *(P1 applied: "unable to" → "cannot"; "establish connection" → "connect"; "verify" → "check"; "retry" → "try again")*
 
@@ -153,6 +160,7 @@ Object-oriented documentation uses class names, method names, interface names, a
 Example — class documentation:
 
 > **Non-STE:** The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.
+>
 > **STE:** The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.
 > *(P1 applied: "persisting" → "keeps"; "retrieving" → "gets"; "leverages" → "uses"; "abstract away" → "hide")*
 
@@ -170,6 +178,7 @@ Functional documentation uses terms like "pure function," "immutable," "monad," 
 Example — module documentation:
 
 > **Non-STE:** This module furnishes a collection of pure utility functions for transforming and combining data structures in a declarative fashion.
+>
 > **STE:** This module gives a set of pure utility functions for changing and joining data structures.
 > *(P1 applied: "furnishes" → "gives"; "collection" → "set"; "transforming" → "changing"; "combining" → "joining"; clause "in a declarative fashion" removed as unnecessary)*
 
@@ -188,6 +197,7 @@ Procedural documentation tends to be direct and imperative. Rule 1.1 reinforces 
 Example — C function documentation:
 
 > **Non-STE:** Allocate a buffer of the specified size on the heap. The caller is responsible for deallocating the buffer when it is no longer needed.
+>
 > **STE:** Make a buffer of the given size on the heap. The caller must free the buffer when the buffer is no longer necessary.
 > *(P1 applied: "allocate" → "make"; "specified" → "given"; "is responsible for deallocating" → "must free"; "needed" → "necessary")*
 
@@ -207,6 +217,7 @@ Declarative documentation describes configuration, state, and desired outcomes r
 Example — Terraform module documentation:
 
 > **Non-STE:** This module provisions an auto-scaling group with a launch template. It orchestrates the deployment of EC2 instances across multiple availability zones to ensure high availability.
+>
 > **STE:** This module makes an auto-scaling group with a launch template. It controls the deployment of EC2 instances across many availability zones to give high availability.
 > *(P1 applied: "provisions" → "makes"; "orchestrates" → "controls"; "multiple" → "many"; "ensure" → "give")*
 
@@ -224,6 +235,7 @@ Systems documentation explains ownership, lifetimes, memory layout, and concurre
 Example — Rust documentation:
 
 > **Non-STE:** The borrow checker ensures that references do not outlive the data they refer to, preventing dangling pointers and use-after-free bugs at compile time.
+>
 > **STE:** The borrow checker makes sure that references do not live longer than the data they point to. This prevents dangling pointers and use-after-free defects at compile time.
 > *(P1 applied: "ensures" → "makes sure"; "outlive" → "live longer than"; "bugs" → "defects")*
 
@@ -236,6 +248,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 1 — API Reference: Return Value Description
 
 > **Non-STE:** Returns a promise that resolves to an array of User objects, or rejects with an ApiError if the request fails.
+>
 > **STE:** Gives a `Promise` that completes with a list of `User` objects. If the request does not complete, the `Promise` gives an `ApiError`.
 >
 > **Principle applied:** P1 (use approved words: "resolve" → "complete," "reject" → "gives an error")
@@ -244,6 +257,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 2 — README: Feature Description
 
 > **Non-STE:** The application leverages machine learning algorithms to analyze user behavior patterns and generate personalized recommendations in real time.
+>
 > **STE:** The application uses machine learning to examine user behavior and make personal recommendations immediately.
 >
 > **Principle applied:** P1 (use approved words: "leverage" → "use," "analyze" → "examine," "generate" → "make," "personalized" → "personal"); P9 (prefer short technical nouns: "algorithms" removed as redundant next to "machine learning"); P8 (use standard technical nouns: "real time" → "immediately")
@@ -274,6 +288,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 4 — Error Message: User-Facing
 
 > **Non-STE:** Unable to process your request at this time. Please verify your input and try again. If the problem persists, contact support.
+>
 > **STE:** Cannot process your request now. Check your input and try again. If the problem continues, speak to support.
 >
 > **Principle applied:** P1 (use approved words: "unable to" → "cannot," "at this time" → "now," "verify" → "check," "persists" → "continues," "contact" → "speak to")
@@ -282,6 +297,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 5 — Commit Message: Bug Fix
 
 > **Non-STE:** fix: rectify race condition in connection pool that caused intermittent failures under load
+>
 > **STE:** fix: correct race condition in connection pool that caused failures under load
 >
 > **Principle applied:** P1 (use approved words: "rectify" → "correct"); P9 (prefer short terms: "intermittent" removed as unnecessary — the fix implies it was intermittent)
@@ -311,6 +327,7 @@ The following scenarios show where the boundary between approved words, technica
 **Guidance:** Framework names are code-domain technical nouns (category 3, development tools and environments) and are permitted under Rule 1.5. The fact that "express" as a verb is not approved does not affect the use of "Express" as a proper noun. Always write the framework name with its correct capitalization and treat it as a technical noun.
 
 > **Non-STE:** Express your API using Express's routing capabilities.
+>
 > **STE:** Use Express routing to make your API endpoints.
 >
 > In the first sentence, "Express" as a verb (meaning "to show or state") conflicts with the framework name. The second sentence uses "Express" only as a technical noun and uses the approved verb "use" for the action.
@@ -322,6 +339,7 @@ The following scenarios show where the boundary between approved words, technica
 **Guidance:** When the keyword appears in a code block, it is quoted text (Rule 1.5, category 10) and does not need to follow Rule 1.1. When the keyword appears in prose documentation, treat it as a code-domain technical noun (use backticks: `` `yield` ``). If you must describe what `yield` does, use the approved verb "give" in the prose and mark the keyword with backticks.
 
 > **Non-STE:** The `yield` keyword yields control back to the caller.
+>
 > **STE:** The `yield` keyword gives control back to the caller.
 >
 > `` `yield` `` is a code-domain technical noun. "Gives" is the approved verb that replaces the unapproved "yields" in the prose.
@@ -341,6 +359,7 @@ The following scenarios show where the boundary between approved words, technica
 **Guidance:** Rule 1.13 states that you must not use technical verbs as nouns. But when a technical verb is part of a compound code-domain technical noun, the compound as a whole is a noun. "Build system" is a code-domain technical noun (category 3, development tools). The word "build" inside the compound is not functioning as a standalone noun — it is part of a recognized technical term. This is permitted under Rule 1.5 and Rule 1.6.
 
 > **Non-STE:** The build took 45 minutes to complete.
+>
 > **STE:** The build procedure took 45 minutes.
 >
 > "Build" used alone as a noun violates Rule 1.13. Adding "procedure" makes it a compound technical noun that is acceptable. Alternatively, restructure: "The system built in 45 minutes."
@@ -352,6 +371,7 @@ The following scenarios show where the boundary between approved words, technica
 **Guidance:** These words are code-domain technical nouns when they name a specific algorithm, protocol, or pattern. "Rendezvous" as part of "rendezvous protocol" is a technical noun. "Naïve Bayes" is a technical noun. When used outside of a technical term, replace with an approved English word. "De facto" in prose should be replaced with "usual" or "primary."
 
 > **Non-STE:** This is the de facto standard for serialization in the ecosystem.
+>
 > **STE:** This is the usual standard for serialization in the ecosystem.
 >
 > "De facto" is not an approved phrase. "Usual" is the approved adjective.

@@ -49,11 +49,13 @@ Only these listed forms are permitted. Never invent a past tense or past partici
 ### Examples
 
 > **Non-STE:** The compiler has builded the project with the new configuration.
+>
 > **STE:** The compiler built the project with the new configuration.
 
 > *Adapted from spec pair: the STE dictionary gives verb forms such as REMOVE/REMOVES/REMOVED/REMOVED.* Just as STE only permits the listed verb forms for each approved verb, STE-Code only permits the listed forms. "Builded" is not an approved past tense of "build" — only "built" is permitted.
 
 > **Non-STE:** The function writed the output to the log file.
+>
 > **STE:** The function wrote the output to the log file.
 
 > *Adapted from spec pair: the STE dictionary gives verb forms such as GIVE/GIVES/GAVE/GIVEN.* Just as STE only permits "gave" (not "gived") as the past tense of "give," STE-Code only permits "wrote" (not "writed") as the past tense of "write."
@@ -73,6 +75,7 @@ The most common Rule 3.1 violation in README files is inventing a past tense for
 Another frequent violation is inventing a "-ing" form where the controlled terminology does not list one. The verb-form convention in STE-Code does not include the "-ing" form as a listed form. Use the simple present instead of the continuous aspect: "The server runs on port 3000" not "The server is running on port 3000."
 
 > **Non-STE:** After you have runned the setup script, the server will be running on port 8080. You can then beginned testing the endpoints.
+>
 > **STE:** After you run the setup script, the server runs on port 8080. You can then begin testing the endpoints.
 > *(Rule 3.1 applied: "runned" → "run" — only RAN is the past tense of RUN. "Beginned" → "begin" — only BEGAN is the past tense of BEGIN. "Will be running" → "runs" — the simple present replaces the continuous.)*
 
@@ -85,6 +88,7 @@ Rule 3.1 affects API documentation most when describing state transitions or com
 When an API method returns a Promise or Future, the documentation describes what happens when the asynchronous operation completes. Use the approved past participle form (the fourth listed form) for describing the completed state: "The Promise gives the built response." BUILT is the listed past participle of BUILD.
 
 > **Non-STE:** POST /api/build — Triggers a build. The endpoint returns 202 Accepted and the builded artifact is available at GET /api/build/:id.
+>
 > **STE:** POST /api/build — Starts a build. The endpoint gives a 202 Accepted status. The built artifact is available at GET /api/build/:id.
 > *(Rule 3.1 applied: "builded" → "built" — only BUILT is the listed past participle of BUILD. "Triggers" → "Starts" — P1 applied. "Returns" → "gives" — P1 applied.)*
 
@@ -115,6 +119,7 @@ The past tense in a commit message subject line is a Rule 3.1 violation. "Fixed 
 Some approved verbs have irregular forms where the base form and the past tense are identical: SET (v), SETS, SET, SET. "Set" is both the imperative and the past tense. In a commit message, "Set the timeout to 30 seconds" uses the imperative form, which is identical to the base form — this is correct.
 
 > **Non-STE:** Fixed the race condition and added a timeout. The build pass and the tests runned successfully.
+>
 > **STE:** Fix the race condition and add a timeout. Make the build pass and make the tests run.
 > *(Rule 3.1 applied: "Fixed" → "Fix" (imperative); "added" → "add" (imperative); "pass" used as past tense → "Make the build pass" (restructured); "runned" → "run" — RUN is both base and past participle, but "runned" is never correct.)*
 
@@ -127,6 +132,7 @@ The most common Rule 3.1 violation in error messages is inventing a past tense f
 Error messages written by non-native English speakers often apply regular "-ed" patterns to all verbs. Rule 3.1 prevents this by requiring the writer to check the controlled terminology for each verb's listed forms.
 
 > **Non-STE:** ERROR: The server catched a fatal signal and shuts down. The child process runned for 0 seconds.
+>
 > **STE:** ERROR: The server caught a fatal signal and shut down. The child process ran for 0 seconds.
 > *(Rule 3.1 applied: "catched" → "caught" — CATCH, CATCHES, CAUGHT, CAUGHT. "Shuts" (present tense mismatch with past context) → "shut" — SHUT is both base and past. "Runned" → "ran" — RUN, RUNS, RAN, RUN.)*
 
@@ -155,6 +161,7 @@ Object-oriented documentation uses approved verbs that describe class relationsh
 The verb "get" has a special constraint: GOT is the listed past tense, but GOT is not listed as a past participle in the controlled terminology. Use "got" only for completed past actions: "The function got the data." For descriptive state, restructure: "The data is available" instead of "The data is gotten."
 
 > **Non-STE:** The `UserRepository` finded the user record and setted the cache entry. The service keeped the connection and sended the response. The user getted the data.
+>
 > **STE:** The `UserRepository` found the user record and set the cache entry. The service kept the connection and sent the response. The user got the data.
 > *(Rule 3.1 applied: "finded" → "found"; "setted" → "set"; "keeped" → "kept"; "sended" → "sent"; "getted" → "got".)*
 
@@ -167,6 +174,7 @@ Code-domain technical verbs in functional programming ("map," "filter," "fold," 
 However, functional documentation does use approved verbs with irregular forms when describing what functions do: "give," "take," "do," "run," "hold," "find." These retain their irregular patterns from the controlled terminology.
 
 > **Non-STE:** The `foldl` function taked the accumulator and the list, applyed the function to each element, and gived the final value.
+>
 > **STE:** The `foldl` function takes the accumulator and the list, applies the function to each element, and gives the final value.
 > *(Rule 3.1 applied: "taked" → "takes" (simple present, not past); "applyed" → "applies"; "gived" → "gives". The functional description uses simple present tense because pure functions do not describe past events.)*
 
@@ -181,6 +189,7 @@ Another common violation is inventing a past tense for "build" when describing c
 In C documentation, technical verbs like "malloc," "free," "dereference," and "link" follow standard English morphology. But the surrounding prose still uses approved verbs that must follow their listed forms.
 
 > **Non-STE:** You runned the script and it builded the binary. The linker linkt the object files and putted the binary in the build directory.
+>
 > **STE:** You ran the script and it built the binary. The linker linked the object files and put the binary in the build directory.
 > *(Rule 3.1 applied: "runned" → "ran"; "builded" → "built"; "linkt" → "linked"; "putted" → "put" — PUT is irregular: PUT, PUTS, PUT, PUT.)*
 
@@ -193,6 +202,7 @@ Infrastructure-as-code tools introduce technical verbs like "apply," "deploy," "
 But when these same concepts are described with approved verbs in the prose, Rule 3.1 applies fully. Use "make" instead of "provision" — MADE is the listed past tense of MAKE. Use "set" instead of "configure" — SET is both the base and the past form. Use "run" instead of "execute" — RAN is the listed past tense of RUN.
 
 > **Non-STE:** After you applyed the Terraform configuration, it builded the VPC and setted up the subnets. The deploy step runned and putted the containers in the cluster.
+>
 > **STE:** After you applied the Terraform configuration, it built the VPC and set up the subnets. The deploy step ran and put the containers in the cluster.
 > *(Rule 3.1 applied: "applyed" → "applied" (technical verb, regular); "builded" → "built"; "setted" → "set"; "runned" → "ran"; "putted" → "put".)*
 
@@ -205,6 +215,7 @@ The approved verbs in systems documentation that most frequently trigger Rule 3.
 In Rust documentation, the verb "drop" is a code-domain technical verb with forms DROP, DROPS, DROPPED, DROPPED. The double "p" in "dropped" follows standard English spelling rules for consonant doubling before "-ed." The verb "panic" follows: PANIC, PANICS, PANICKED, PANICKED — the "k" is added before "-ed" per standard English spelling.
 
 > **Non-STE:** The borrow checker holded the reference until the scope ended. The thread spended 5 seconds in the critical section. The runtime catched the panic and writed the stack trace.
+>
 > **STE:** The borrow checker held the reference until the scope ended. The thread spent 5 seconds in the critical section. The runtime caught the panic and wrote the stack trace.
 > *(Rule 3.1 applied: "holded" → "held"; "spended" → "spent"; "catched" → "caught"; "writed" → "wrote".)*
 
@@ -217,6 +228,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 1 — README: Installation and First Run
 
 > **Non-STE:** The build process has taked approximately 3 minutes on a standard machine. Once you have runned the installer, you can beginned the configuration wizard. The installer setted up all necessary files and putted them in the correct locations.
+>
 > **STE:** The build process takes approximately 3 minutes on a standard machine. After you run the installer, you can begin the configuration wizard. The installer set up all necessary files and put them in the correct locations.
 
 > **Principle applied:** Rule 3.1 (use only listed verb forms: "taked" → "takes" / "took"; "runned" → "run" / "ran"; "beginned" → "begin" / "began"; "setted" → "set"; "putted" → "put"); P4 (use approved verb forms).
@@ -225,6 +237,7 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 ### Example 2 — API Reference: Asynchronous Operation Description
 
 > **Non-STE:** The `buildProject` method trigged the CI pipeline and retourned a Job ID. After the job completed, the result was writed to the artifact store. The client catched the completion event and feched the download URL.
+>
 > **STE:** The `buildProject` method triggers the CI pipeline and gives a Job ID. After the job completes, the system writes the result to the artifact store. The client catches the completion event and gets the download URL.
 
 > **Principle applied:** Rule 3.1 (use only listed verb forms: "trigged" → "triggers" — the simple present is correct for API descriptions; "retourned" is not a word — use "gives"; "writed" → "writes"; "catched" → "catches"; "feched" → "gets").
@@ -319,6 +332,7 @@ The following scenarios show where the boundary between listed forms and accepta
 Never spell the past tense as "red" (the color). "Red" is an approved adjective meaning the color, not a verb form. "The function red the file" is incorrect. Use "The function read the file."
 
 > **Non-STE:** The parser red the input and reds each line into memory. It red the entire file before processing.
+>
 > **STE:** The parser read the input and reads each line into memory. It read the entire file before processing.
 > *(Rule 3.1 applied: "red" and "reds" are not listed forms of READ. The listed forms are READ, READS, READ, READ.)*
 
@@ -329,6 +343,7 @@ Never spell the past tense as "red" (the color). "Red" is an approved adjective 
 **Guidance:** When the same spelling serves as both an approved verb and a technical verb with different irregular patterns, follow the convention of the subject field for the technical use and the controlled terminology for the approved use. For "hang" in the sense of a frozen process, most style guides in the software domain prefer "hung" (consistent with the approved verb): "The process hung." When the domain convention clearly differs and is widely established, the technical convention takes priority over the controlled terminology for the technical use only.
 
 > **Non-STE:** The process hanged at 45% and did not respond. The debugger catched the hang condition.
+>
 > **STE:** The process hung at 45% and did not respond. The debugger caught the hang condition.
 > *(Rule 3.1 applied: Both the approved verb HANG and the technical verb "hang" use HUNG as the past tense. "Hanged" is not correct in either context. "Catched" → "caught" per CATCH, CATCHES, CAUGHT, CAUGHT.)*
 
@@ -341,6 +356,7 @@ Never spell the past tense as "red" (the color). "Red" is an approved adjective 
 Other verbs with distinct simple-past and past-participle forms include: WRITE (WROTE vs. WRITTEN), GIVE (GAVE vs. GIVEN), SEE (SAW vs. SEEN), TAKE (TOOK vs. TAKEN), BREAK (BROKE vs. BROKEN), SPEAK (SPOKE vs. SPOKEN), CHOOSE (CHOSE vs. CHOSEN).
 
 > **Non-STE:** The deployment has began and the script has wrote the configuration. The operator had spoke to the team before the change took effect.
+>
 > **STE:** The deployment has begun and the script has written the configuration. The operator had spoken to the team before the change took effect.
 > *(Rule 3.1 applied: "has began" uses the simple past BEGAN with an auxiliary — must use past participle BEGUN. "Has wrote" uses the simple past WROTE with an auxiliary — must use WRITTEN. "Had spoke" uses the simple past SPOKE — must use SPOKEN.)*
 
@@ -353,6 +369,7 @@ Other verbs with distinct simple-past and past-participle forms include: WRITE (
 The test: can you replace the "-ing" form with a listed verb form without losing technical meaning? If yes, it is a verb use — replace it. If the "-ing" form is the name of a concept, module, or feature, it is a noun use — it stays.
 
 > **Non-STE:** The logging module is logging all requests. The caching layer is caching database results.
+>
 > **STE:** The logging module logs all requests. The caching layer caches database results.
 > *(Rule 3.1 applied: "is logging" as a verb phrase → "logs" (simple present). "Logging" as a noun modifier in "logging module" → permitted. "Is caching" as a verb phrase → "caches." "Caching" as a noun modifier in "caching layer" → permitted.)*
 
@@ -365,6 +382,7 @@ The test: can you replace the "-ing" form with a listed verb form without losing
 For verbs like "get" where the American past participle differs (GOTTEN in American English vs. GOT in British English): the controlled terminology lists GOT as the only past form and does not list GOTTEN. Use "got" for simple past only. For past participle constructions, restructure the sentence to avoid the need for "gotten": "The data was obtained" is not STE. Use "The system got the data" (simple past) or "The data is available."
 
 > **Non-STE:** The model learnt the patterns and burnt through the dataset. The developer had gotten the results and spilt the coffee.
+>
 > **STE:** The model learned the patterns and burned through the dataset. The developer got the results.
 > *(Rule 3.1 applied: "learnt" → "learned"; "burnt" → "burned"; "had gotten" → "got" (simple past restructured); "spilt" → not applicable — remove the non-technical detail.)*
 

@@ -31,6 +31,7 @@ When you want to use a different sentence construction to replace "with," make s
 ### Examples
 
 > **Non-STE:** Compile the project at the maximum optimization level with debug symbols.
+>
 > **STE:** Compile the project at the maximum optimization level (debug symbols included).
 >
 > *Adapted from spec pair: "Install the panel with the green fasteners" — ambiguous "with" replaced by a clarifying construction using parentheses.*
@@ -38,6 +39,7 @@ When you want to use a different sentence construction to replace "with," make s
 > (The context tells you that you will not ask the debug symbols to help you compile the project. But because the sentence can have two different meanings, one interpretation makes it ambiguous. Use parentheses to clarify that debug symbols are included, not that they are the means.)
 
 > **Non-STE:** Make sure that the function does not modify the global state with the write flag enabled.
+>
 > **STE:** When you enable the write flag, make sure that the function does not modify the global state.
 >
 > *Adapted from spec pattern: ambiguous "with" resolved by restructuring the sentence to place the condition first — as recommended in the spec: "make sure that you show the primary action verb in the work step."*
@@ -45,6 +47,7 @@ When you want to use a different sentence construction to replace "with," make s
 > (Write the condition first to remove the ambiguity about what "with" refers to.)
 
 > **Non-STE:** Use the linter to check the source code for style violations.
+>
 > **STE:** Check the source code for style violations with the linter.
 >
 > *Adapted from spec pattern: "with" in the approved meaning of "a means or instrument" — the spec recommends showing the primary action verb ("check") rather than "use."*

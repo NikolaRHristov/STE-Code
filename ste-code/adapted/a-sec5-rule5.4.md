@@ -36,6 +36,7 @@ The comma is critical for correct meaning. The position of the comma determines 
 ### Examples
 
 > **Non-STE:** Before you change the database schema you must shut down the application server and stop all background worker processes that are connected to the database.
+>
 > **STE:** Before you change the database schema, shut down the application server and stop all background worker processes that connect to the database.
 >
 > *Adapted from spec pair: "Before you remove the clamp, you must disconnect the hose." → "Before you remove the clamp, disconnect the hose."*
@@ -43,6 +44,7 @@ The comma is critical for correct meaning. The position of the comma determines 
 (The comma separates the condition from the instruction. The reader evaluates the condition first.)
 
 > **Non-STE:** You should disconnect the active client sessions first if the connection pool has reached its maximum capacity and new connections are being rejected by the server.
+>
 > **STE:** If the connection pool has reached its maximum capacity, disconnect the active client sessions.
 >
 > *Adapted from spec: "If the Constant Speed Drive (CSD) does not operate correctly, disconnect it from the gearbox." — condition first, comma, then command.*
@@ -58,6 +60,7 @@ The comma is critical for correct meaning. The position of the comma determines 
 (The comma after "load" is necessary to show where the condition ends and the main clause begins.)
 
 > **Non-STE:** Run the cleanup script to remove temporary build artifacts after the test suite completes successfully and all test results have been written to the output directory.
+>
 > **STE:** After the test suite completes successfully, run the cleanup script to remove temporary build artifacts.
 >
 > *Adapted from spec: condition-before-command principle — write the condition first, then the instruction.*
