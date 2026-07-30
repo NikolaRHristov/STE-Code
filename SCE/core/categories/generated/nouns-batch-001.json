@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "batch": 1,
+  "area": "noun-category-examples",
+  "generated_by": "agent-8-extension-worker",
+  "entries": [
+    {"category-id": 1, "category": "Language Keywords", "terms": ["try", "catch", "finally", "throw", "extends", "implements", "interface", "abstract", "static", "final", "const", "let", "var", "function", "arrow"]},
+    {"category-id": 2, "category": "Frameworks & Runtimes", "terms": ["Next.js", "Svelte", "Vue", "Angular", "Django", "Flask", "Spring Boot", "Express.js", "Deno", "Bun", "GraphQL", "tRPC"]},
+    {"category-id": 3, "category": "Dev Tools & Build Systems", "terms": ["Vite", "esbuild", "SWC", "Turbopack", "pnpm", "yarn", "bun install", "prettier", "husky", "lint-staged", "nx", "turbo"]},
+    {"category-id": 4, "category": "Dependencies & Packages", "terms": ["zod", "yup", "prisma", "drizzle", "mongoose", "typeorm", "swr", "tanstack-query", "zustand", "jotai"]},
+    {"category-id": 5, "category": "Deployment Targets", "terms": ["Netlify", "Render", "Fly.io", "Railway", "Heroku", "DigitalOcean", "GCP", "Azure", "Lambda", "ECS", "GKE", "EKS"]},
+    {"category-id": 6, "category": "Modules, Classes & Services", "terms": ["RateLimiter", "CircuitBreaker", "CacheManager", "QueueWorker", "WebhookHandler", "FileUploader", "EmailSender", "NotificationService", "SearchIndexer", "LogAggregator"]},
+    {"category-id": 7, "category": "Algorithmic Terms", "terms": ["binary search", "depth-first", "breadth-first", "Dijkstra", "LRU cache", "bloom filter", "consistent hashing", "raft consensus", "two-phase commit", "backpressure"]},
+    {"category-id": 8, "category": "Routing & State", "terms": ["LoadBalancer", "ReverseProxy", "APIGateway", "CDN edge", "Ingress", "Service Mesh", "Sidecar", "Ambassador", "TLS termination", "CORS"]},
+    {"category-id": 9, "category": "Data Sizes & Time", "terms": ["nanosecond", "microsecond", "millisecond", "kilobyte", "megabyte", "gigabyte", "terabyte", "IOPS", "throughput", "latency percentile"]},
+    {"category-id": 10, "category": "String Literals & Logs", "terms": ["stdout", "stderr", "syslog", "trace ID", "span ID", "log level", "structured logging", "correlation ID", "audit log", "access log"]},
+    {"category-id": 11, "category": "Roles & Teams", "terms": ["superadmin", "viewer", "editor", "reviewer", "approver", "service account", "bot user", "API consumer", "tenant", "organization"]},
+    {"category-id": 12, "category": "UI/UX Terms", "terms": ["tooltip", "toast", "drawer", "dropdown", "autocomplete", "carousel", "infinite scroll", "lazy load", "skeleton screen", "responsive breakpoint"]},
+    {"category-id": 13, "category": "Config & Preferences", "terms": ["environment variable", "feature flag", "secrets manager", "config map", "Helm values", "terraform.tfvars", "ansible inventory", "dotenv", "ini file"]},
+    {"category-id": 14, "category": "Error States & Diagnostics", "terms": ["stack overflow", "deadlock", "livelock", "thrashing", "split brain", "data corruption", "thundering herd", "cascading failure", "backpressure", "circuit open"]},
+    {"category-id": 15, "category": "Spec Files & Manifests", "terms": ["docker-compose.yml", "k8s deployment.yaml", "terraform main.tf", "ansible playbook.yml", "github actions workflow", "gitlab-ci.yml", "Jenkinsfile", "Makefile"]},
+    {"category-id": 16, "category": "Runtime Conditions", "terms": ["warm start", "connection pool exhausted", "GC pause", "CPU throttled", "disk full", "out of memory", "network partition", "read-only mode", "maintenance window"]},
+    {"category-id": 17, "category": "Terminal Colors", "terms": ["ANSI escape", "8-bit color", "24-bit color", "NO COLOR", "bold", "dim", "underline", "inverse", "strikethrough"]},
+    {"category-id": 18, "category": "Bug & Defect Taxonomy", "terms": ["use-after-free", "buffer overflow", "integer overflow", "off-by-one", "TOCTOU", "dependency confusion", "prototype pollution", "CSRF", "SSRF", "path traversal"]},
+    {"category-id": 19, "category": "Network & Protocol", "terms": ["QUIC", "HTTP/3", "mTLS", "OAuth 2.0", "OIDC", "SAML", "JWT", "WebRTC", "SSE", "AMQP", "MQTT", "SMTP"]}
+  ]
+}
