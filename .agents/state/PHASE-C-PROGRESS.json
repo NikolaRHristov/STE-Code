@@ -1,0 +1,15 @@
+{
+  "done": [
+    "vocab-approved",
+    "vocab-unapproved",
+    "synonym-table",
+    "templates-regenerate",
+    "data-code-dictionary",
+    "domain-extensions"
+  ],
+  "batches_done": [
+    1,
+    2
+  ],
+  "updated": "2026-07-30T14:27:08.307669+00:00"
+}

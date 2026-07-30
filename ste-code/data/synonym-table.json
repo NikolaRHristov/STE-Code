@@ -1,39 +1,1087 @@
 {
-  "version": "2.0.0",
-  "source": "ASD-STE100 Issue 9 (January 2025), adapted to code domain",
+  "version": "3.0.0",
+  "source": "ASD-STE100 Issue 9 (January 2025), adapted to code domain \u2014 regenerated from all deepened rules",
   "domain": "code",
   "canonical": true,
-  "description": "Complete code-domain synonym table — every common unapproved coding term mapped to an approved STE-Code replacement.",
+  "description": "Complete code-domain synonym table \u2014 every common unapproved coding term mapped to an approved STE-Code replacement. Regenerated from 51 deepened rule files (a-sec*-rule*.md) plus the canonical 14-principle synonym table.",
   "pairs": [
-    {"approved": "use", "avoid": ["utilize", "leverage", "employ", "harness"], "context": "general"},
-    {"approved": "start", "avoid": ["initiate", "commence", "bootstrap", "spin up", "fire up"], "context": "processes, servers, services"},
-    {"approved": "stop", "avoid": ["terminate", "halt", "kill", "abort", "shut down", "nuke"], "context": "processes, servers, services"},
-    {"approved": "show", "avoid": ["display", "render", "present", "output", "dump", "print"], "context": "UI, CLI, logs"},
-    {"approved": "make", "avoid": ["create", "generate", "produce", "fabricate", "instantiate", "spin up"], "context": "objects, files, data structures"},
-    {"approved": "get", "avoid": ["retrieve", "fetch", "obtain", "pull", "grab", "acquire"], "context": "data, API responses, files"},
-    {"approved": "set", "avoid": ["configure", "assign", "establish", "specify", "define", "declare"], "context": "configuration, variables, options"},
-    {"approved": "check", "avoid": ["verify", "validate", "ensure", "confirm", "assert", "audit", "inspect"], "context": "data validity, conditions, state"},
-    {"approved": "do", "avoid": ["perform", "execute", "carry out", "run", "invoke", "trigger"], "context": "operations, actions, tasks"},
-    {"approved": "send", "avoid": ["transmit", "dispatch", "forward", "push", "post", "submit"], "context": "network, HTTP, messages"},
-    {"approved": "remove", "avoid": ["delete", "eliminate", "purge", "erase", "wipe", "destroy", "drop"], "context": "data, files, records, database"},
-    {"approved": "keep", "avoid": ["retain", "preserve", "maintain", "store", "persist", "save", "cache"], "context": "data persistence, state"},
-    {"approved": "read", "avoid": ["fetch", "retrieve", "obtain", "load", "pull", "import"], "context": "files, database, API GET"},
-    {"approved": "write", "avoid": ["set", "configure", "assign", "save", "persist", "commit", "flush"], "context": "files, database, API POST/PUT"},
-    {"approved": "build", "avoid": ["make", "create", "generate", "compile", "assemble", "construct"], "context": "binaries, packages, artifacts"},
-    {"approved": "test", "avoid": ["check", "verify", "validate", "confirm", "prove", "exercise"], "context": "unit tests, integration, QA"},
-    {"approved": "deploy", "avoid": ["release", "ship", "roll out", "push to production", "go live"], "context": "CI/CD, production releases"},
-    {"approved": "connect", "avoid": ["attach", "link", "bind", "associate", "join", "wire up"], "context": "network, database, services"},
-    {"approved": "copy", "avoid": ["clone", "duplicate", "replicate", "mirror", "fork", "shadow"], "context": "data, repositories, files"},
-    {"approved": "move", "avoid": ["transfer", "shift", "migrate", "relocate", "port", "rename"], "context": "data, files, services between environments"},
-    {"approved": "find", "avoid": ["search", "locate", "discover", "detect", "scan", "query"], "context": "data lookup, file search"},
-    {"approved": "call", "avoid": ["invoke", "execute", "trigger", "fire", "run", "dispatch"], "context": "functions, APIs, endpoints"},
-    {"approved": "return", "avoid": ["output", "yield", "produce", "send back", "respond with"], "context": "function returns, API responses"},
-    {"approved": "handle", "avoid": ["process", "manage", "deal with", "take care of", "address"], "context": "errors, events, requests"},
-    {"approved": "change", "avoid": ["modify", "update", "alter", "mutate", "edit", "revise", "patch"], "context": "code, configuration, data"},
-    {"approved": "combine", "avoid": ["merge", "unify", "consolidate", "join", "aggregate", "squash"], "context": "data, branches, files"},
-    {"approved": "split", "avoid": ["divide", "separate", "partition", "break apart", "shard", "chunk"], "context": "data, files, services"},
-    {"approved": "include", "avoid": ["contain", "hold", "embed", "nest", "wrap", "bundle"], "context": "dependencies, modules, files"},
-    {"approved": "cause", "avoid": ["trigger", "induce", "provoke", "result in", "lead to"], "context": "errors, events, side effects"},
-    {"approved": "prevent", "avoid": ["block", "stop", "prohibit", "disallow", "forbid", "reject"], "context": "errors, access, data loss"}
+    {
+      "approved": "about",
+      "avoid": [
+        "concerning",
+        "regarding",
+        "with respect to"
+      ]
+    },
+    {
+      "approved": "add",
+      "avoid": [
+        "added",
+        "adding",
+        "implement"
+      ]
+    },
+    {
+      "approved": "administrator",
+      "avoid": [
+        "admin",
+        "root",
+        "sysadmin"
+      ]
+    },
+    {
+      "approved": "again",
+      "avoid": [
+        "reoccurring"
+      ]
+    },
+    {
+      "approved": "although",
+      "avoid": [
+        "despite the fact that",
+        "even though",
+        "notwithstanding"
+      ]
+    },
+    {
+      "approved": "analyze",
+      "avoid": [
+        "analyse"
+      ]
+    },
+    {
+      "approved": "because",
+      "avoid": [
+        "as",
+        "due to the fact that",
+        "since"
+      ]
+    },
+    {
+      "approved": "before",
+      "avoid": [
+        "in advance of",
+        "preceding",
+        "prior to"
+      ]
+    },
+    {
+      "approved": "behavior",
+      "avoid": [
+        "behaviour"
+      ]
+    },
+    {
+      "approved": "bottom",
+      "avoid": [
+        "base"
+      ]
+    },
+    {
+      "approved": "build",
+      "avoid": [
+        "assemble",
+        "compile",
+        "construct",
+        "create",
+        "generate",
+        "make"
+      ]
+    },
+    {
+      "approved": "call",
+      "avoid": [
+        "dispatch",
+        "execute",
+        "fire",
+        "invoke",
+        "run",
+        "trigger"
+      ]
+    },
+    {
+      "approved": "can",
+      "avoid": [
+        "be able to",
+        "have the capability to",
+        "is capable of"
+      ]
+    },
+    {
+      "approved": "canceled",
+      "avoid": [
+        "cancelled"
+      ]
+    },
+    {
+      "approved": "cause",
+      "avoid": [
+        "induce",
+        "lead to",
+        "provoke",
+        "result in",
+        "trigger"
+      ]
+    },
+    {
+      "approved": "center",
+      "avoid": [
+        "centre"
+      ]
+    },
+    {
+      "approved": "centralize",
+      "avoid": [
+        "centralise"
+      ]
+    },
+    {
+      "approved": "centralizes",
+      "avoid": [
+        "centralises"
+      ]
+    },
+    {
+      "approved": "change",
+      "avoid": [
+        "alter",
+        "edit",
+        "modify",
+        "mutate",
+        "patch",
+        "revise",
+        "transforming",
+        "update"
+      ]
+    },
+    {
+      "approved": "changing",
+      "avoid": [
+        "mutating",
+        "transforming"
+      ]
+    },
+    {
+      "approved": "check",
+      "avoid": [
+        "assert",
+        "audit",
+        "confirm",
+        "ensure",
+        "inspect",
+        "validate",
+        "verify"
+      ]
+    },
+    {
+      "approved": "checked",
+      "avoid": [
+        "validated"
+      ]
+    },
+    {
+      "approved": "color",
+      "avoid": [
+        "colour"
+      ]
+    },
+    {
+      "approved": "combine",
+      "avoid": [
+        "aggregate",
+        "consolidate",
+        "join",
+        "merge",
+        "squash",
+        "unify"
+      ]
+    },
+    {
+      "approved": "compile",
+      "avoid": [
+        "compiling"
+      ]
+    },
+    {
+      "approved": "connect",
+      "avoid": [
+        "associate",
+        "attach",
+        "bind",
+        "join",
+        "link",
+        "wire up"
+      ]
+    },
+    {
+      "approved": "control",
+      "avoid": [
+        "direct",
+        "govern",
+        "manage",
+        "orchestrate"
+      ]
+    },
+    {
+      "approved": "controls",
+      "avoid": [
+        "determines",
+        "orchestrates"
+      ]
+    },
+    {
+      "approved": "copies",
+      "avoid": [
+        "backups"
+      ]
+    },
+    {
+      "approved": "copy",
+      "avoid": [
+        "clone",
+        "duplicate",
+        "fork",
+        "mirror",
+        "replicate",
+        "shadow"
+      ]
+    },
+    {
+      "approved": "correct",
+      "avoid": [
+        "fix",
+        "rectify",
+        "repair"
+      ]
+    },
+    {
+      "approved": "customizable",
+      "avoid": [
+        "customisable"
+      ]
+    },
+    {
+      "approved": "customize",
+      "avoid": [
+        "customise"
+      ]
+    },
+    {
+      "approved": "decrease",
+      "avoid": [
+        "diminish",
+        "lower",
+        "minimize",
+        "reduce"
+      ]
+    },
+    {
+      "approved": "decreases",
+      "avoid": [
+        "impacts"
+      ]
+    },
+    {
+      "approved": "defect",
+      "avoid": [
+        "bug",
+        "fault",
+        "flaw",
+        "issue"
+      ]
+    },
+    {
+      "approved": "defects",
+      "avoid": [
+        "bugs"
+      ]
+    },
+    {
+      "approved": "defense",
+      "avoid": [
+        "defence"
+      ]
+    },
+    {
+      "approved": "deploy",
+      "avoid": [
+        "go live",
+        "push to production",
+        "release",
+        "roll out",
+        "ship"
+      ]
+    },
+    {
+      "approved": "detailed",
+      "avoid": [
+        "comprehensive",
+        "exhaustive",
+        "verbose"
+      ]
+    },
+    {
+      "approved": "do",
+      "avoid": [
+        "carry out",
+        "execute",
+        "invoke",
+        "perform",
+        "run",
+        "trigger"
+      ]
+    },
+    {
+      "approved": "does",
+      "avoid": [
+        "running"
+      ]
+    },
+    {
+      "approved": "duplicate",
+      "avoid": [
+        "duplicated"
+      ]
+    },
+    {
+      "approved": "examine",
+      "avoid": [
+        "analyse",
+        "analyze",
+        "inspect",
+        "study"
+      ]
+    },
+    {
+      "approved": "examines",
+      "avoid": [
+        "checks"
+      ]
+    },
+    {
+      "approved": "fail",
+      "avoid": [
+        "break",
+        "crash",
+        "malfunction"
+      ]
+    },
+    {
+      "approved": "find",
+      "avoid": [
+        "detect",
+        "discover",
+        "locate",
+        "query",
+        "scan",
+        "search"
+      ]
+    },
+    {
+      "approved": "first",
+      "avoid": [
+        "initial",
+        "original",
+        "primary"
+      ]
+    },
+    {
+      "approved": "free",
+      "avoid": [
+        "deallocate",
+        "liberate",
+        "release"
+      ]
+    },
+    {
+      "approved": "get",
+      "avoid": [
+        "acquire",
+        "fetch",
+        "grab",
+        "obtain",
+        "pull",
+        "retrieve"
+      ]
+    },
+    {
+      "approved": "gets",
+      "avoid": [
+        "retrieving"
+      ]
+    },
+    {
+      "approved": "give",
+      "avoid": [
+        "ensure",
+        "furnish",
+        "hand over",
+        "provide",
+        "retourned",
+        "return",
+        "returning",
+        "supply",
+        "yield"
+      ]
+    },
+    {
+      "approved": "gives an error",
+      "avoid": [
+        "reject"
+      ]
+    },
+    {
+      "approved": "handle",
+      "avoid": [
+        "address",
+        "deal with",
+        "manage",
+        "process",
+        "take care of"
+      ]
+    },
+    {
+      "approved": "hide",
+      "avoid": [
+        "abstract away",
+        "conceal",
+        "obscure"
+      ]
+    },
+    {
+      "approved": "if",
+      "avoid": [
+        "in case of",
+        "in the event that",
+        "should it happen that"
+      ]
+    },
+    {
+      "approved": "in",
+      "avoid": [
+        "within"
+      ]
+    },
+    {
+      "approved": "include",
+      "avoid": [
+        "bundle",
+        "contain",
+        "embed",
+        "hold",
+        "nest",
+        "wrap"
+      ]
+    },
+    {
+      "approved": "increase",
+      "avoid": [
+        "boost",
+        "elevate",
+        "maximize",
+        "raise",
+        "ramp up"
+      ]
+    },
+    {
+      "approved": "increases",
+      "avoid": [
+        "raises"
+      ]
+    },
+    {
+      "approved": "initialization",
+      "avoid": [
+        "initialisation"
+      ]
+    },
+    {
+      "approved": "initialize",
+      "avoid": [
+        "initialise"
+      ]
+    },
+    {
+      "approved": "initialized",
+      "avoid": [
+        "initialised"
+      ]
+    },
+    {
+      "approved": "initializes",
+      "avoid": [
+        "initialises"
+      ]
+    },
+    {
+      "approved": "join",
+      "avoid": [
+        "combine"
+      ]
+    },
+    {
+      "approved": "joining",
+      "avoid": [
+        "combining"
+      ]
+    },
+    {
+      "approved": "keep",
+      "avoid": [
+        "cache",
+        "maintain",
+        "persist",
+        "preserve",
+        "retain",
+        "save",
+        "store"
+      ]
+    },
+    {
+      "approved": "keeps",
+      "avoid": [
+        "keeped",
+        "maintaining",
+        "persisting",
+        "stores"
+      ]
+    },
+    {
+      "approved": "largest",
+      "avoid": [
+        "biggest",
+        "greatest",
+        "maximum"
+      ]
+    },
+    {
+      "approved": "license",
+      "avoid": [
+        "licence"
+      ]
+    },
+    {
+      "approved": "live longer than",
+      "avoid": [
+        "outlive"
+      ]
+    },
+    {
+      "approved": "log in",
+      "avoid": [
+        "login"
+      ]
+    },
+    {
+      "approved": "make",
+      "avoid": [
+        "allocate",
+        "create",
+        "fabricate",
+        "generate",
+        "instantiate",
+        "produce",
+        "provision",
+        "spin up"
+      ]
+    },
+    {
+      "approved": "make faster",
+      "avoid": [
+        "optimize"
+      ]
+    },
+    {
+      "approved": "make sure",
+      "avoid": [
+        "assure",
+        "ensure",
+        "guarantee",
+        "insure"
+      ]
+    },
+    {
+      "approved": "makes",
+      "avoid": [
+        "outputting",
+        "provisions"
+      ]
+    },
+    {
+      "approved": "makes sure",
+      "avoid": [
+        "ensures"
+      ]
+    },
+    {
+      "approved": "many",
+      "avoid": [
+        "multiple",
+        "numerous",
+        "several",
+        "various"
+      ]
+    },
+    {
+      "approved": "maximize",
+      "avoid": [
+        "maximise"
+      ]
+    },
+    {
+      "approved": "maximizes",
+      "avoid": [
+        "maximises"
+      ]
+    },
+    {
+      "approved": "meter",
+      "avoid": [
+        "metre"
+      ]
+    },
+    {
+      "approved": "minimize",
+      "avoid": [
+        "minimise"
+      ]
+    },
+    {
+      "approved": "minimizes",
+      "avoid": [
+        "minimises"
+      ]
+    },
+    {
+      "approved": "move",
+      "avoid": [
+        "migrate",
+        "port",
+        "relocate",
+        "rename",
+        "shift",
+        "transfer"
+      ]
+    },
+    {
+      "approved": "must",
+      "avoid": [
+        "needs to",
+        "ought to",
+        "shall",
+        "should"
+      ]
+    },
+    {
+      "approved": "necessary",
+      "avoid": [
+        "essential",
+        "mandatory",
+        "needed",
+        "required"
+      ]
+    },
+    {
+      "approved": "new",
+      "avoid": [
+        "additional",
+        "extra",
+        "further"
+      ]
+    },
+    {
+      "approved": "not correct",
+      "avoid": [
+        "invalid",
+        "invalidating",
+        "malformed"
+      ]
+    },
+    {
+      "approved": "operates",
+      "avoid": [
+        "runs"
+      ]
+    },
+    {
+      "approved": "optimize",
+      "avoid": [
+        "optimise"
+      ]
+    },
+    {
+      "approved": "optimizes",
+      "avoid": [
+        "optimises"
+      ]
+    },
+    {
+      "approved": "organization",
+      "avoid": [
+        "organisation"
+      ]
+    },
+    {
+      "approved": "organize",
+      "avoid": [
+        "organise"
+      ]
+    },
+    {
+      "approved": "personal",
+      "avoid": [
+        "customized",
+        "personalized"
+      ]
+    },
+    {
+      "approved": "prevent",
+      "avoid": [
+        "block",
+        "disallow",
+        "forbid",
+        "prohibit",
+        "reject",
+        "stop"
+      ]
+    },
+    {
+      "approved": "primary",
+      "avoid": [
+        "base",
+        "main"
+      ]
+    },
+    {
+      "approved": "processes",
+      "avoid": [
+        "handlers"
+      ]
+    },
+    {
+      "approved": "program",
+      "avoid": [
+        "programme"
+      ]
+    },
+    {
+      "approved": "read",
+      "avoid": [
+        "fetch",
+        "import",
+        "load",
+        "obtain",
+        "pull",
+        "retrieve"
+      ]
+    },
+    {
+      "approved": "recognize",
+      "avoid": [
+        "recognise"
+      ]
+    },
+    {
+      "approved": "recognized",
+      "avoid": [
+        "recognised"
+      ]
+    },
+    {
+      "approved": "recognizes",
+      "avoid": [
+        "recognises"
+      ]
+    },
+    {
+      "approved": "remove",
+      "avoid": [
+        "delete",
+        "destroy",
+        "drop",
+        "eliminate",
+        "erase",
+        "purge",
+        "wipe"
+      ]
+    },
+    {
+      "approved": "removes",
+      "avoid": [
+        "invalidating"
+      ]
+    },
+    {
+      "approved": "return",
+      "avoid": [
+        "output",
+        "produce",
+        "respond with",
+        "send back",
+        "yield"
+      ]
+    },
+    {
+      "approved": "run",
+      "avoid": [
+        "carry out",
+        "execute",
+        "perform",
+        "runned"
+      ]
+    },
+    {
+      "approved": "send",
+      "avoid": [
+        "dispatch",
+        "forward",
+        "post",
+        "push",
+        "submit",
+        "transmit"
+      ]
+    },
+    {
+      "approved": "sends",
+      "avoid": [
+        "passes"
+      ]
+    },
+    {
+      "approved": "serialization",
+      "avoid": [
+        "serialisation"
+      ]
+    },
+    {
+      "approved": "serialize",
+      "avoid": [
+        "serialise"
+      ]
+    },
+    {
+      "approved": "set",
+      "avoid": [
+        "assign",
+        "collection",
+        "configure",
+        "declare",
+        "define",
+        "establish",
+        "setted",
+        "specify"
+      ]
+    },
+    {
+      "approved": "sets",
+      "avoid": [
+        "configuring"
+      ]
+    },
+    {
+      "approved": "show",
+      "avoid": [
+        "display",
+        "dump",
+        "output",
+        "present",
+        "print",
+        "render"
+      ]
+    },
+    {
+      "approved": "speak to",
+      "avoid": [
+        "contact",
+        "get in touch with",
+        "reach out to"
+      ]
+    },
+    {
+      "approved": "split",
+      "avoid": [
+        "break",
+        "break apart",
+        "chunk",
+        "divide",
+        "partition",
+        "separate",
+        "shard"
+      ]
+    },
+    {
+      "approved": "standardize",
+      "avoid": [
+        "standardise"
+      ]
+    },
+    {
+      "approved": "start",
+      "avoid": [
+        "bootstrap",
+        "commence",
+        "fire up",
+        "initiate",
+        "spin up"
+      ]
+    },
+    {
+      "approved": "stop",
+      "avoid": [
+        "abort",
+        "crash",
+        "halt",
+        "kill",
+        "nuke",
+        "shut down",
+        "terminate"
+      ]
+    },
+    {
+      "approved": "stopping",
+      "avoid": [
+        "crashing"
+      ]
+    },
+    {
+      "approved": "stops",
+      "avoid": [
+        "breaks",
+        "terminating"
+      ]
+    },
+    {
+      "approved": "supplies",
+      "avoid": [
+        "handlers"
+      ]
+    },
+    {
+      "approved": "synchronize",
+      "avoid": [
+        "synchronise"
+      ]
+    },
+    {
+      "approved": "synchronizes",
+      "avoid": [
+        "synchronises"
+      ]
+    },
+    {
+      "approved": "test",
+      "avoid": [
+        "check",
+        "confirm",
+        "exercise",
+        "prove",
+        "validate",
+        "verify"
+      ]
+    },
+    {
+      "approved": "time",
+      "avoid": [
+        "duration",
+        "interval",
+        "period"
+      ]
+    },
+    {
+      "approved": "to connect again",
+      "avoid": [
+        "reconnecting"
+      ]
+    },
+    {
+      "approved": "try again",
+      "avoid": [
+        "reattempt",
+        "retry",
+        "retrying"
+      ]
+    },
+    {
+      "approved": "turn on",
+      "avoid": [
+        "activate",
+        "enable",
+        "switch on"
+      ]
+    },
+    {
+      "approved": "understand",
+      "avoid": [
+        "comprehend",
+        "grasp",
+        "grok"
+      ]
+    },
+    {
+      "approved": "unnecessary",
+      "avoid": [
+        "bloat",
+        "cruft",
+        "dead code"
+      ]
+    },
+    {
+      "approved": "update",
+      "avoid": [
+        "updated"
+      ]
+    },
+    {
+      "approved": "usage",
+      "avoid": [
+        "utilisation"
+      ]
+    },
+    {
+      "approved": "use",
+      "avoid": [
+        "employ",
+        "harness",
+        "leverage",
+        "utilize"
+      ]
+    },
+    {
+      "approved": "uses",
+      "avoid": [
+        "leverages"
+      ]
+    },
+    {
+      "approved": "when",
+      "avoid": [
+        "ensure"
+      ]
+    },
+    {
+      "approved": "with",
+      "avoid": [
+        "containing",
+        "executing"
+      ]
+    },
+    {
+      "approved": "write",
+      "avoid": [
+        "assign",
+        "commit",
+        "configure",
+        "flush",
+        "persist",
+        "save",
+        "set"
+      ]
+    },
+    {
+      "approved": "writes to the log",
+      "avoid": [
+        "logs"
+      ]
+    }
   ]
 }

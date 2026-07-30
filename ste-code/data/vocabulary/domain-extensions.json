@@ -1,17 +1,588 @@
 {
-  "version": "1.0.0",
-  "description": "Organization and domain-level vocabulary extensions. Add approved terms here that are not in the base standard but are approved for a specific domain or organization.",
   "extensions": [
     {
-      "domain": "code",
-      "org": null,
-      "terms": [
-        { "term": "refactor", "type": "verb", "category-id": 1, "approved": true, "rationale": "Established industry term for structural code improvement without behavior change", "added": "2026-07-30" },
-        { "term": "scaffold", "type": "verb", "category-id": 1, "approved": true, "rationale": "Standard term for generating boilerplate project structure", "added": "2026-07-30" },
-        { "term": "stub", "type": "noun", "category-id": 6, "approved": true, "rationale": "Standard term for a placeholder implementation", "added": "2026-07-30" },
-        { "term": "mock", "type": "noun", "category-id": 6, "approved": true, "rationale": "Standard term for a test double with behavior verification", "added": "2026-07-30" },
-        { "term": "fixture", "type": "noun", "category-id": 6, "approved": true, "rationale": "Standard term for test setup data", "added": "2026-07-30" }
-      ]
+      "category": "Build and Package",
+      "description": "Operations for compiling, assembling, bundling, and distributing software artifacts.",
+      "approved": [
+        "build",
+        "compile",
+        "bundle",
+        "package",
+        "deploy",
+        "publish",
+        "release",
+        "tag",
+        "version",
+        "transpile",
+        "minify",
+        "polyfill",
+        "ship"
+      ],
+      "unapproved_alternatives": [
+        "make a build of → build",
+        "perform compilation → compile",
+        "create a bundle → bundle",
+        "generate the artifact → build",
+        "assemble → build",
+        "construct → build",
+        "fabricate → build"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.13",
+        "Rule 1.1",
+        "Rule 1.7"
+      ],
+      "example": "STE: Build the Docker image. Then deploy the container to the registry. | Non-STE: Perform a build of the Docker image and then do a deployment to the registry."
+    },
+    {
+      "category": "Testing and Quality Assurance",
+      "description": "Operations for verifying code correctness, measuring performance, and ensuring quality.",
+      "approved": [
+        "test",
+        "assert",
+        "mock",
+        "stub",
+        "spy",
+        "benchmark",
+        "profile",
+        "instrument",
+        "debug",
+        "unit-test",
+        "lint",
+        "check"
+      ],
+      "unapproved_alternatives": [
+        "validate → check",
+        "verify → check",
+        "ensure → make sure",
+        "run validation → check",
+        "perform testing → test",
+        "execute tests → run tests",
+        "carry out verification → check"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.1",
+        "Rule 1.5",
+        "Rule 4.1"
+      ],
+      "example": "STE: Run the test suite. Check that the coverage is above 80 percent. | Non-STE: Execute the test suite and verify that coverage exceeds 80%."
+    },
+    {
+      "category": "Dependency Management",
+      "description": "Operations for installing, updating, locking, and resolving software dependencies.",
+      "approved": [
+        "install",
+        "update",
+        "upgrade",
+        "pin",
+        "lock",
+        "link",
+        "hoist",
+        "resolve",
+        "uninstall",
+        "add",
+        "remove"
+      ],
+      "unapproved_alternatives": [
+        "fetch dependencies → install",
+        "retrieve packages → install",
+        "pull down → install",
+        "bump → update",
+        "snag → install",
+        "grab → get"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.1",
+        "Rule 1.10",
+        "Rule 1.11"
+      ],
+      "example": "STE: Install the dependencies with npm install. Pin the versions in the lock file. | Non-STE: Snag the deps and bump the versions."
+    },
+    {
+      "category": "Version Control",
+      "description": "Operations for tracking changes, branching, merging, and collaborating on source code.",
+      "approved": [
+        "commit",
+        "branch",
+        "merge",
+        "rebase",
+        "tag",
+        "push",
+        "pull",
+        "clone",
+        "fork",
+        "checkout",
+        "revert",
+        "cherry-pick",
+        "stash",
+        "stage",
+        "reset"
+      ],
+      "unapproved_alternatives": [
+        "save changes → commit",
+        "upload → push",
+        "download → pull/clone",
+        "combine → merge",
+        "split off → branch"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.7",
+        "Rule 1.13",
+        "Rule 1.1"
+      ],
+      "example": "STE: Commit the changes. Then push the branch to the remote repository. | Non-STE: Git the changes and then push them up. (Uses Git as a verb, Rule 1.7 violation)"
+    },
+    {
+      "category": "Security",
+      "description": "Operations for authentication, authorization, encryption, and protecting systems from threats.",
+      "approved": [
+        "authenticate",
+        "authorize",
+        "encrypt",
+        "decrypt",
+        "hash",
+        "salt",
+        "sanitize",
+        "validate",
+        "sign",
+        "revoke",
+        "audit",
+        "escape"
+      ],
+      "unapproved_alternatives": [
+        "secure → encrypt/protect",
+        "lock down → restrict",
+        "harden → make secure",
+        "obfuscate → hide"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 7.1",
+        "Rule 1.5",
+        "Rule 1.1"
+      ],
+      "example": "STE: WARNING: Sanitize all user input before you process it. Unsanitized input can cause SQL injection attacks. | Non-STE: CAUTION: Always clean your inputs."
+    },
+    {
+      "category": "Logging and Monitoring",
+      "description": "Operations for recording events, measuring system health, and observing runtime behavior.",
+      "approved": [
+        "log",
+        "monitor",
+        "trace",
+        "instrument",
+        "observe",
+        "alert",
+        "report",
+        "record"
+      ],
+      "unapproved_alternatives": [
+        "write to log → log",
+        "keep track of → monitor",
+        "watch → monitor",
+        "spy on → observe",
+        "output → write/log"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.1",
+        "Rule 1.5",
+        "Rule 5.1"
+      ],
+      "example": "STE: Log the error details to the error file. Monitor the CPU usage. | Non-STE: Do a logging of the exception. Keep an eye on the CPU."
+    },
+    {
+      "category": "API Design",
+      "description": "Concepts for designing, documenting, and consuming application programming interfaces.",
+      "approved": [
+        "endpoint",
+        "route",
+        "handler",
+        "middleware",
+        "controller",
+        "request",
+        "response",
+        "payload",
+        "header",
+        "status code",
+        "rate limit",
+        "query parameter",
+        "path parameter",
+        "body",
+        "schema"
+      ],
+      "unapproved_alternatives": [
+        "URL path → endpoint",
+        "API method → endpoint",
+        "args → parameters",
+        "params → parameters",
+        "data → payload/body",
+        "return value → response"
+      ],
+      "rules": [
+        "Rule 1.5",
+        "Rule 1.11",
+        "Rule 1.8",
+        "Rule 4.1"
+      ],
+      "example": "STE: The endpoint returns a JSON object. The object contains a user list and a pagination token. | Non-STE: The API method gives you back a JSON with the users and a next-page thing."
+    },
+    {
+      "category": "Configuration Management",
+      "description": "Operations for setting up, managing, and maintaining system and application configuration.",
+      "approved": [
+        "configure",
+        "set",
+        "initialize",
+        "bootstrap",
+        "provision",
+        "override",
+        "default",
+        "environment variable",
+        "config file",
+        "dotenv",
+        "settings"
+      ],
+      "unapproved_alternatives": [
+        "tweak → set/change",
+        "dial in → configure",
+        "set up → configure/initialize",
+        "wire up → configure/connect",
+        "spin up → start/initialize"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.1",
+        "Rule 1.10",
+        "Rule 5.4"
+      ],
+      "example": "STE: Set the DATABASE_URL environment variable in the .env file. | Non-STE: Tweak the DATABASE_URL knob in the dotenv thing."
+    },
+    {
+      "category": "Object-Oriented Design",
+      "description": "Concepts and operations specific to object-oriented programming paradigms.",
+      "approved": [
+        "instantiate",
+        "inherit",
+        "override",
+        "extend",
+        "implement",
+        "encapsulate",
+        "delegate",
+        "inject",
+        "compose",
+        "abstract class",
+        "interface",
+        "constructor",
+        "method",
+        "property",
+        "polymorphism"
+      ],
+      "unapproved_alternatives": [
+        "make an instance → instantiate",
+        "new up → instantiate",
+        "subclass → extend/inherit",
+        "hide → encapsulate",
+        "pass → delegate"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.5",
+        "Rule 1.7",
+        "Rule 1.13"
+      ],
+      "example": "STE: The UserRepository class extends BaseRepository. It implements the IAuditable interface. Inject the Database dependency through the constructor. | Non-STE: The repo subclasses the base and hides the data. Pass the DB in via the ctor."
+    },
+    {
+      "category": "Functional Programming",
+      "description": "Concepts and operations specific to functional programming paradigms.",
+      "approved": [
+        "compose",
+        "curry",
+        "map",
+        "reduce",
+        "fold",
+        "filter",
+        "recurse",
+        "memoize",
+        "lift",
+        "pattern match",
+        "pure function",
+        "immutable",
+        "closure",
+        "higher-order function",
+        "monad",
+        "functor",
+        "applicative"
+      ],
+      "unapproved_alternatives": [
+        "chain → compose",
+        "loop over → map",
+        "combine → reduce/fold",
+        "cache results → memoize",
+        "call itself → recurse"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.5",
+        "Rule 1.1",
+        "Rule 1.11"
+      ],
+      "example": "STE: Map the transformation over the list. Then fold the results with the sum function. | Non-STE: Loop over the array applying the transform and then add everything up."
+    },
+    {
+      "category": "Systems Programming",
+      "description": "Concepts and operations for memory management, ownership, lifetimes, and low-level system access.",
+      "approved": [
+        "allocate",
+        "deallocate",
+        "borrow",
+        "own",
+        "drop",
+        "move",
+        "pin",
+        "acquire",
+        "release",
+        "dereference",
+        "lifetime",
+        "ownership",
+        "stack",
+        "heap",
+        "undefined behavior",
+        "dangling pointer",
+        "segmentation fault",
+        "mutex",
+        "atomic"
+      ],
+      "unapproved_alternatives": [
+        "free → deallocate",
+        "malloc → allocate",
+        "clean up → deallocate/drop",
+        "grab a lock → acquire",
+        "let go → release",
+        "shooting yourself in the foot → undefined behavior"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.5",
+        "Rule 1.10",
+        "Rule 7.1"
+      ],
+      "example": "STE: Allocate a buffer on the heap. Deallocate the buffer before the function returns. The borrow checker prevents dangling pointers. | Non-STE: Malloc a chunk of memory and free it when you are done. Rust's thingy stops you from shooting yourself in the foot."
+    },
+    {
+      "category": "Declarative Configuration",
+      "description": "Concepts for describing desired system state through configuration files and infrastructure-as-code.",
+      "approved": [
+        "provision",
+        "converge",
+        "reconcile",
+        "apply",
+        "destroy",
+        "declare",
+        "resource",
+        "provider",
+        "module",
+        "state",
+        "plan",
+        "namespace",
+        "pod",
+        "deployment",
+        "service"
+      ],
+      "unapproved_alternatives": [
+        "spin up → provision/start",
+        "tear down → destroy",
+        "make → provision",
+        "run → apply",
+        "set up → provision"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.5",
+        "Rule 1.1",
+        "Rule 4.1"
+      ],
+      "example": "STE: The Terraform resource provisions an AWS EC2 instance. Apply the configuration to converge the infrastructure. | Non-STE: Terraform spins up an EC2 box when you run the apply command."
+    },
+    {
+      "category": "Risk and Safety Documentation",
+      "description": "Signal words and conventions for documenting security risks, breaking changes, and important notes in code.",
+      "approved": [
+        "WARNING",
+        "CAUTION",
+        "BREAKING",
+        "DEPRECATED",
+        "NOTE",
+        "FIXME",
+        "TODO",
+        "HACK",
+        "XXX"
+      ],
+      "unapproved_alternatives": [
+        "DANGER → WARNING",
+        "IMPORTANT → NOTE/WARNING",
+        "BE CAREFUL → CAUTION",
+        "ATTENTION → NOTE",
+        "heads up → NOTE",
+        "watch out → CAUTION"
+      ],
+      "rules": [
+        "Rule 7.1",
+        "Rule 7.2",
+        "Rule 7.3",
+        "Rule 1.1"
+      ],
+      "example": "STE: WARNING: DO NOT COMMIT THE API KEY. AN EXPOSED KEY CAN CAUSE UNAUTHORIZED ACCESS. | Non-STE: heads up: don't check in the secret key or bad things happen."
+    },
+    {
+      "category": "Commit Message Conventions",
+      "description": "Standardized terms and formats for writing clear, consistent commit messages.",
+      "approved": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "ci",
+        "build",
+        "revert",
+        "add",
+        "remove",
+        "update",
+        "change"
+      ],
+      "unapproved_alternatives": [
+        "implemented → feat/add",
+        "added → add/feat",
+        "fixed → fix",
+        "changed → update/change",
+        "removed → remove",
+        "bumped → update",
+        "patched → fix"
+      ],
+      "rules": [
+        "Rule 1.1",
+        "Rule 4.1",
+        "Rule 5.1",
+        "Rule 1.11"
+      ],
+      "example": "STE: feat: Add JWT authentication middleware for API routes. | Non-STE: Implemented JWT auth middleware for the API endpoints."
+    },
+    {
+      "category": "Continuous Integration and Delivery",
+      "description": "Operations and concepts for automated build, test, and deployment pipelines.",
+      "approved": [
+        "pipeline",
+        "workflow",
+        "job",
+        "stage",
+        "runner",
+        "artifact",
+        "trigger",
+        "checkout",
+        "cache",
+        "matrix",
+        "environment",
+        "deploy",
+        "rollback",
+        "approval",
+        "gate"
+      ],
+      "unapproved_alternatives": [
+        "CI → pipeline/workflow",
+        "CD → deployment pipeline",
+        "build step → job/stage",
+        "CI runner → runner",
+        "kick off → trigger/start",
+        "fire → trigger"
+      ],
+      "rules": [
+        "Rule 1.5",
+        "Rule 1.12",
+        "Rule 1.8",
+        "Rule 5.2"
+      ],
+      "example": "STE: The pipeline has three stages: build, test, and deploy. Trigger the workflow on every push to the main branch. | Non-STE: The CI kicks off when you push to main and runs the build, test, and deploy stuff."
+    },
+    {
+      "category": "Database Operations",
+      "description": "Operations for querying, migrating, backing up, and managing database systems.",
+      "approved": [
+        "query",
+        "migrate",
+        "seed",
+        "backup",
+        "restore",
+        "roll back",
+        "replicate",
+        "shard",
+        "index",
+        "vacuum",
+        "compact",
+        "flush",
+        "persist",
+        "transaction",
+        "schema"
+      ],
+      "unapproved_alternatives": [
+        "run a query → query",
+        "do a migration → migrate",
+        "populate the DB → seed",
+        "dump → backup",
+        "snapshot → backup",
+        "write to disk → persist/flush"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.13",
+        "Rule 1.5",
+        "Rule 1.11"
+      ],
+      "example": "STE: Migrate the database schema to version 3. Seed the development database with test data. | Non-STE: Run the migration script to update the DB and populate it with fake data."
+    },
+    {
+      "category": "User Interface Documentation",
+      "description": "Terms for documenting UI components, interactions, and interface behavior.",
+      "approved": [
+        "click",
+        "type",
+        "scroll",
+        "select",
+        "drag",
+        "drop",
+        "toggle",
+        "zoom in",
+        "zoom out",
+        "navigate",
+        "press",
+        "tap",
+        "swipe",
+        "hover",
+        "focus"
+      ],
+      "unapproved_alternatives": [
+        "hit → click/press",
+        "push → click/press",
+        "enter → type",
+        "choose → select",
+        "flip → toggle",
+        "go to → navigate"
+      ],
+      "rules": [
+        "Rule 1.12",
+        "Rule 1.5",
+        "Rule 1.1",
+        "Rule 5.2"
+      ],
+      "example": "STE: Click the Submit button. Type your password in the text field. | Non-STE: Hit the submit thing and enter your pwd in the box."
     }
   ]
 }

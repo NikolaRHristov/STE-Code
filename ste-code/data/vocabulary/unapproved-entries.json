@@ -1,0 +1,2807 @@
+[
+  {
+    "unapproved": "abandon",
+    "approved": [
+      "terminate",
+      "stop",
+      "if the build fails",
+      "stop the deployment pipeline",
+      "if the values are incorrect",
+      "terminate the test run"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: TERMINATE, STOP, IF THE BUILD FAILS, STOP THE DEPLOYMENT PIPELINE, IF THE VALUES ARE INCORRECT, TERMINATE THE TEST RUN.",
+    "example_non_ste": "If the build fails, abandon the deployment pipeline.",
+    "example_ste": "If the build fails, stop the deployment pipeline.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "ability",
+    "approved": [
+      "can",
+      "one configuration can handle requests for all the endpoints"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: CAN, ONE CONFIGURATION CAN HANDLE REQUESTS FOR ALL THE ENDPOINTS.",
+    "example_non_ste": "One configuration has the ability to handle requests for all the endpoints.",
+    "example_ste": "One configuration can handle requests for all the endpoints.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "able",
+    "approved": [
+      "can",
+      "if you can run the script",
+      "do the applicable checks"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: CAN, IF YOU CAN RUN THE SCRIPT, DO THE APPLICABLE CHECKS.",
+    "example_non_ste": "If you are able to run the script, do the applicable checks.",
+    "example_ste": "If you can run the script, do the applicable checks.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "abnormal",
+    "approved": [
+      "unusual",
+      "incorrect",
+      "watch for unusual log entries",
+      "if you find an incorrect value in the output",
+      "do",
+      "debug run"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: UNUSUAL, INCORRECT, WATCH FOR UNUSUAL LOG ENTRIES, IF YOU FIND AN INCORRECT VALUE IN THE OUTPUT, DO, DEBUG RUN.",
+    "example_non_ste": "Watch for abnormal log entries.",
+    "example_ste": "Watch for unusual log entries.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "abnormality",
+    "approved": [
+      "bug",
+      "tn",
+      "examine the reported stack trace for bugs"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: BUG, TN, EXAMINE THE REPORTED STACK TRACE FOR BUGS.",
+    "example_non_ste": "Examine the reported stack trace for abnormalities.",
+    "example_ste": "Examine the reported stack trace for bugs.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "abrupt",
+    "approved": [
+      "sudden",
+      "suddenly",
+      "the watchdog prevents sudden shutdown of the service",
+      "if the process stops suddenly",
+      "examine the logs"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: SUDDEN, SUDDENLY, THE WATCHDOG PREVENTS SUDDEN SHUTDOWN OF THE SERVICE, IF THE PROCESS STOPS SUDDENLY, EXAMINE THE LOGS.",
+    "example_non_ste": "The watchdog prevents abrupt shutdown of the service.",
+    "example_ste": "The watchdog prevents sudden shutdown of the service.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "absence",
+    "approved": [
+      "none",
+      "not",
+      "no",
+      "if none of the tests fail",
+      "continue the deployment"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: NONE, NOT, NO, IF NONE OF THE TESTS FAIL, CONTINUE THE DEPLOYMENT.",
+    "example_non_ste": "In the absence of test failures, continue the deployment.",
+    "example_ste": "If none of the tests fail, continue the deployment.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "absent",
+    "approved": [
+      "missing",
+      "no",
+      "if one or more files are missing",
+      "add an entry in the changelog"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MISSING, NO, IF ONE OR MORE FILES ARE MISSING, ADD AN ENTRY IN THE CHANGELOG.",
+    "example_non_ste": "If one or more files are absent, add an entry in the changelog.",
+    "example_ste": "If one or more files are missing, add an entry in the changelog.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "absolutely",
+    "approved": [
+      "fully",
+      "make sure that the connection is fully established"
+    ],
+    "pos": "adverb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: FULLY, MAKE SURE THAT THE CONNECTION IS FULLY ESTABLISHED.",
+    "example_non_ste": "Make sure that the connection is absolutely established.",
+    "example_ste": "Make sure that the connection is fully established.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "absorption",
+    "approved": [
+      "absorb",
+      "measure the time that is necessary for the log system to absorb the incoming events"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ABSORB, MEASURE THE TIME THAT IS NECESSARY FOR THE LOG SYSTEM TO ABSORB THE INCOMING EVENTS.",
+    "example_non_ste": "Measure the rate of absorption of incoming events by the log system.",
+    "example_ste": "Measure the time that is necessary for the log system to absorb the incoming events.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "abundant",
+    "approved": [
+      "large",
+      "log the errors with",
+      "large quantity of context data"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: LARGE, LOG THE ERRORS WITH, LARGE QUANTITY OF CONTEXT DATA.",
+    "example_non_ste": "Log the errors with abundant context data.",
+    "example_ste": "Log the errors with a large quantity of context data.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "abut",
+    "approved": [
+      "touch",
+      "the widget touches the boundary of the container"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: TOUCH, THE WIDGET TOUCHES THE BOUNDARY OF THE CONTAINER.",
+    "example_non_ste": "The widget abuts the boundary of the container.",
+    "example_ste": "The widget touches the boundary of the container.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "accelerate",
+    "approved": [
+      "increase",
+      "faster",
+      "larger buffer size increases the speed of data transfer"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: INCREASE, FASTER, LARGER BUFFER SIZE INCREASES THE SPEED OF DATA TRANSFER.",
+    "example_non_ste": "A larger buffer size accelerates data transfer.",
+    "example_ste": "A larger buffer size increases the speed of data transfer.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "acceptable",
+    "approved": [
+      "permitted",
+      "satisfactory",
+      "ready",
+      "response time of",
+      "is permitted"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: PERMITTED, SATISFACTORY, READY, RESPONSE TIME OF, IS PERMITTED.",
+    "example_non_ste": "A response time of 200 ms is acceptable.",
+    "example_ste": "A response time of 200 ms is permitted.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "acceptance",
+    "approved": [
+      "accept",
+      "before you accept the merge request",
+      "do the specified review checklist"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ACCEPT, BEFORE YOU ACCEPT THE MERGE REQUEST, DO THE SPECIFIED REVIEW CHECKLIST.",
+    "example_non_ste": "Before acceptance of the merge request, do the specified review checklist.",
+    "example_ste": "Before you accept the merge request, do the specified review checklist.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "accessible",
+    "approved": [
+      "access",
+      "scroll the view until you can get access to the functions that have public annotations"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ACCESS, SCROLL THE VIEW UNTIL YOU CAN GET ACCESS TO THE FUNCTIONS THAT HAVE PUBLIC ANNOTATIONS.",
+    "example_non_ste": "Scroll the view until the functions with public annotations are accessible.",
+    "example_ste": "Scroll the view until you can get access to the functions that have public annotations.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "accommodate",
+    "approved": [
+      "let",
+      "different configurations let you handle different types of input"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: LET, DIFFERENT CONFIGURATIONS LET YOU HANDLE DIFFERENT TYPES OF INPUT.",
+    "example_non_ste": "Different configurations accommodate different types of input.",
+    "example_ste": "Different configurations let you handle different types of input.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "accomplish",
+    "approved": [
+      "do",
+      "complete",
+      "do this build step first",
+      "the pipeline must complete this stage in",
+      "minutes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: DO, COMPLETE, DO THIS BUILD STEP FIRST, THE PIPELINE MUST COMPLETE THIS STAGE IN, MINUTES.",
+    "example_non_ste": "Accomplish this build step first.",
+    "example_ste": "Do this build step first.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "accumulate",
+    "approved": [
+      "collect",
+      "if logs collect in the buffer",
+      "flush them"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: COLLECT, IF LOGS COLLECT IN THE BUFFER, FLUSH THEM.",
+    "example_non_ste": "If logs accumulate in the buffer, flush them.",
+    "example_ste": "If logs collect in the buffer, flush them.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "accumulation",
+    "approved": [
+      "quantity",
+      "collect",
+      "remove large quantities of obsolete logs",
+      "if errors collect frequently",
+      "examine the connection for issues"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: QUANTITY, COLLECT, REMOVE LARGE QUANTITIES OF OBSOLETE LOGS, IF ERRORS COLLECT FREQUENTLY, EXAMINE THE CONNECTION FOR ISSUES.",
+    "example_non_ste": "Remove large accumulations of obsolete logs.",
+    "example_ste": "Remove large quantities of obsolete logs.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "accuracy",
+    "approved": [
+      "precision",
+      "the precision of the calculation can change"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: PRECISION, THE PRECISION OF THE CALCULATION CAN CHANGE.",
+    "example_non_ste": "The accuracy of the calculation can change.",
+    "example_ste": "The precision of the calculation can change.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "achieve",
+    "approved": [
+      "get",
+      "set the flag to get maximum performance"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: GET, SET THE FLAG TO GET MAXIMUM PERFORMANCE.",
+    "example_non_ste": "Set the flag to achieve maximum performance.",
+    "example_ste": "Set the flag to get maximum performance.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "acquire",
+    "approved": [
+      "get",
+      "the module gets this data from three endpoints"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: GET, THE MODULE GETS THIS DATA FROM THREE ENDPOINTS.",
+    "example_non_ste": "The module acquires this data from three endpoints.",
+    "example_ste": "The module gets this data from three endpoints.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "acrid",
+    "approved": [],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology.",
+    "example_non_ste": "",
+    "example_ste": "",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "act",
+    "approved": [
+      "the event trigger invokes the handler"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: THE EVENT TRIGGER INVOKES THE HANDLER.",
+    "example_non_ste": "The event trigger acts on the handler.",
+    "example_ste": "The event trigger invokes the handler.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "action",
+    "approved": [
+      "step",
+      "procedure",
+      "task",
+      "do the steps that follow"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: STEP, PROCEDURE, TASK, DO THE STEPS THAT FOLLOW.",
+    "example_non_ste": "Do the following actions.",
+    "example_ste": "Do the steps that follow.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "activity",
+    "approved": [
+      "task",
+      "procedure",
+      "work",
+      "contributor can do these review tasks"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: TASK, PROCEDURE, WORK, CONTRIBUTOR CAN DO THESE REVIEW TASKS.",
+    "example_non_ste": "A contributor can do these review activities.",
+    "example_ste": "A contributor can do these review tasks.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "actuate",
+    "approved": [
+      "start",
+      "run",
+      "push",
+      "start the server",
+      "run the script",
+      "push the commit button"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: START, RUN, PUSH, START THE SERVER, RUN THE SCRIPT, PUSH THE COMMIT BUTTON.",
+    "example_non_ste": "Actuate the server.",
+    "example_ste": "Start the server.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "actuation",
+    "approved": [
+      "operation",
+      "monitor the operation of the background worker"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: OPERATION, MONITOR THE OPERATION OF THE BACKGROUND WORKER.",
+    "example_non_ste": "Monitor the actuation of the background worker.",
+    "example_ste": "Monitor the operation of the background worker.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "addition",
+    "approved": [
+      "add",
+      "to get the correct behavior",
+      "add special flags",
+      "as necessary"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ADD, TO GET THE CORRECT BEHAVIOR, ADD SPECIAL FLAGS, AS NECESSARY.",
+    "example_non_ste": "To get the correct behavior through the addition of special flags, as necessary.",
+    "example_ste": "To get the correct behavior, add special flags, as necessary.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "additional",
+    "approved": [
+      "more",
+      "this section gives more information about deployment",
+      "new"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MORE, THIS SECTION GIVES MORE INFORMATION ABOUT DEPLOYMENT.",
+    "example_non_ste": "This section gives additional information about deployment.",
+    "example_ste": "This section gives more information about deployment.",
+    "source": "a-dictionary.md + rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "adequate",
+    "approved": [
+      "sufficient",
+      "make sure that buffers have sufficient capacity and throughput"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: SUFFICIENT, MAKE SURE THAT BUFFERS HAVE SUFFICIENT CAPACITY AND THROUGHPUT.",
+    "example_non_ste": "Make sure that buffers have adequate capacity and throughput.",
+    "example_ste": "Make sure that buffers have sufficient capacity and throughput.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "adhere",
+    "approved": [
+      "attach",
+      "obey",
+      "the patch must attach correctly",
+      "obey the coding standards"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ATTACH, OBEY, THE PATCH MUST ATTACH CORRECTLY, OBEY THE CODING STANDARDS.",
+    "example_non_ste": "The patch must adhere correctly.",
+    "example_ste": "The patch must attach correctly.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "adhesion",
+    "approved": [],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology.",
+    "example_non_ste": "",
+    "example_ste": "",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "adjoining",
+    "approved": [
+      "adjacent",
+      "align the imports with the adjacent modules"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ADJACENT, ALIGN THE IMPORTS WITH THE ADJACENT MODULES.",
+    "example_non_ste": "Align the imports with the adjoining modules.",
+    "example_ste": "Align the imports with the adjacent modules.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "admin",
+    "approved": [
+      "administrator"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'administrator' instead.",
+    "example_non_ste": "FATAL: Could not connect to the database. The connection pool has no available connections. Try the operation again or speak to your administrator.",
+    "example_ste": "FATAL: Could not database the connection. The pool is empty. Retry the operation or contact your admin.",
+    "source": "rule-files/a-sec1-rule1.2.md"
+  },
+  {
+    "unapproved": "admit",
+    "approved": [
+      "let",
+      "open the port to let traffic go into the container"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: LET, OPEN THE PORT TO LET TRAFFIC GO INTO THE CONTAINER.",
+    "example_non_ste": "Open the port to admit traffic into the container.",
+    "example_ste": "Open the port to let traffic go into the container.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "adopt",
+    "approved": [
+      "use",
+      "if the build fails",
+      "use this fallback script"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: USE, IF THE BUILD FAILS, USE THIS FALLBACK SCRIPT.",
+    "example_non_ste": "Adopt this fallback script if the build fails.",
+    "example_ste": "If the build fails, use this fallback script.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "advance",
+    "approved": [
+      "forward",
+      "the forward movement of the iterator must be sequential",
+      "set",
+      "set the pointer to the next node",
+      "move the cursor forward"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: FORWARD, THE FORWARD MOVEMENT OF THE ITERATOR MUST BE SEQUENTIAL.",
+    "example_non_ste": "The advance of the iterator must be sequential.",
+    "example_ste": "The forward movement of the iterator must be sequential.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "adverse",
+    "approved": [
+      "bad",
+      "refer to section",
+      "for instructions about how to handle bad network conditions"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: BAD, REFER TO SECTION, FOR INSTRUCTIONS ABOUT HOW TO HANDLE BAD NETWORK CONDITIONS.",
+    "example_non_ste": "Refer to Section 6 for instructions about how to handle adverse network conditions.",
+    "example_ste": "Refer to Section 6 for instructions about how to handle bad network conditions.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "advisable",
+    "approved": [
+      "recommend",
+      "the technical lead recommends that you rebuild the containers at intervals of two weeks"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: RECOMMEND, THE TECHNICAL LEAD RECOMMENDS THAT YOU REBUILD THE CONTAINERS AT INTERVALS OF TWO WEEKS.",
+    "example_non_ste": "It is advisable to rebuild the containers at intervals of two weeks.",
+    "example_ste": "The technical lead recommends that you rebuild the containers at intervals of two weeks.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "advise",
+    "approved": [
+      "tell",
+      "recommend",
+      "tell the reviewer that the changes are ready",
+      "the security officer recommends the applicable authentication protocol"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: TELL, RECOMMEND, TELL THE REVIEWER THAT THE CHANGES ARE READY, THE SECURITY OFFICER RECOMMENDS THE APPLICABLE AUTHENTICATION PROTOCOL.",
+    "example_non_ste": "Advise the reviewer that the changes are ready.",
+    "example_ste": "Tell the reviewer that the changes are ready.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "affect",
+    "approved": [
+      "effect",
+      "thread locks have an unwanted effect on the scheduler"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: EFFECT, THREAD LOCKS HAVE AN UNWANTED EFFECT ON THE SCHEDULER.",
+    "example_non_ste": "Thread locks affect the scheduler.",
+    "example_ste": "Thread locks have an unwanted effect on the scheduler.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "allocate",
+    "approved": [
+      "make"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'make' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "analyse",
+    "approved": [
+      "analyze"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'analyze' instead.",
+    "example_non_ste": "# The log level controls the verbosity of output. Set to \"debug\" to",
+    "example_ste": "# The log level controls the verbosity of output. Set to \"debug\" to\n> # analyse the full request/response lifecycle, including serialisation\n> # behaviour and connection pool utilisation.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "assign",
+    "approved": [
+      "set"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'set' as the approved alternative (Principle P1).",
+    "example_non_ste": "Assign the return value to a variable.",
+    "example_ste": "Set the return value to a variable.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "backups",
+    "approved": [
+      "makes auxiliary copies",
+      "copies"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'makes auxiliary copies' instead.",
+    "example_non_ste": "# This compose file defines the primary services:",
+    "example_ste": "# This compose file defines the base services:\n> # - The main API (handlers HTTP requests)\n> # - The backup worker (backups the database nightly)\n> # - The cache handler (keeps hot data in memory)",
+    "source": "rule-files/a-sec1-rule1.6.md"
+  },
+  {
+    "unapproved": "base",
+    "approved": [
+      "foundation",
+      "root",
+      "bottom",
+      "primary"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: FOUNDATION, ROOT.",
+    "example_non_ste": "The base of the architecture is the data layer.",
+    "example_ste": "The foundation of the architecture is the data layer.",
+    "source": "a-dictionary.md + rule-files/a-sec1-rule1.6.md"
+  },
+  {
+    "unapproved": "behaviour",
+    "approved": [
+      "behavior"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'behavior' instead.",
+    "example_non_ste": "# The log level controls the verbosity of output. Set to \"debug\" to",
+    "example_ste": "# The log level controls the verbosity of output. Set to \"debug\" to\n> # analyse the full request/response lifecycle, including serialisation\n> # behaviour and connection pool utilisation.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "bootstrap",
+    "approved": [
+      "start"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'start' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "break",
+    "approved": [
+      "split"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'split' instead.",
+    "example_non_ste": "refactor: split the `UserService` into smaller classes to make testing easier",
+    "example_ste": "refactor: break the UserService into smaller classes to improve testability",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "breaks",
+    "approved": [
+      "stops"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'stops' instead.",
+    "example_non_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before it does its own checks.",
+    "example_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before running its own checks.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "bring",
+    "approved": [
+      "get",
+      "move",
+      "get the dependencies into the container"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: GET, MOVE, GET THE DEPENDENCIES INTO THE CONTAINER.",
+    "example_non_ste": "Bring the dependencies into the container.",
+    "example_ste": "Get the dependencies into the container.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "broad",
+    "approved": [
+      "wide",
+      "wide test coverage"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: WIDE, WIDE TEST COVERAGE.",
+    "example_non_ste": "Broad test coverage.",
+    "example_ste": "Wide test coverage.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "bug",
+    "approved": [
+      "defect"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'defect' instead.",
+    "example_non_ste": "The CI pipeline caught a segmentation fault in the worker process.",
+    "example_ste": "The CI pipeline catched a segmentation fault in the worker process.\n> The core dump showed that a pointer was freement after it was alredy\n> setted to null. The bug was introduce in commit a3f8c2.\n>\n> The fix adds a check before the free() call. The test suite runned\n> 500 iterations without the fault reoccurring.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "bugs",
+    "approved": [
+      "defects"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'defects' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "build",
+    "approved": [
+      "compile",
+      "make",
+      "compile the project",
+      "make the target"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: COMPILE, MAKE, COMPILE THE PROJECT, MAKE THE TARGET.",
+    "example_non_ste": "Build the project.",
+    "example_ste": "Compile the project.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "call",
+    "approved": [
+      "name",
+      "refer",
+      "name the function",
+      "invoke",
+      "tv",
+      "to"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: NAME, REFER, NAME THE FUNCTION, INVOKE, TV, TO.",
+    "example_non_ste": "Call the function \"init.\"",
+    "example_ste": "Name the function \"init.\"",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "cancelled",
+    "approved": [
+      "canceled"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'canceled' instead.",
+    "example_non_ste": "Validation error: The program cannot recognize the file format. The file may have been canceled during transfer.",
+    "example_ste": "Validation error: The programme cannot recognise the file format. The file may have been cancelled during transfer.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "capable",
+    "approved": [
+      "can",
+      "the service can recover from failures automatically"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: CAN, THE SERVICE CAN RECOVER FROM FAILURES AUTOMATICALLY.",
+    "example_non_ste": "The service is capable of recovering from failures automatically.",
+    "example_ste": "The service can recover from failures automatically.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "care",
+    "approved": [
+      "caution",
+      "be careful",
+      "be careful when you change the configuration"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: CAUTION, BE CAREFUL, BE CAREFUL WHEN YOU CHANGE THE CONFIGURATION.",
+    "example_non_ste": "Take care when changing the configuration.",
+    "example_ste": "Be careful when you change the configuration.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "carry",
+    "approved": [
+      "move",
+      "transmit",
+      "move the data to the cache"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MOVE, TRANSMIT, MOVE THE DATA TO THE CACHE.",
+    "example_non_ste": "Carry the data to the cache.",
+    "example_ste": "Move the data to the cache.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "case",
+    "approved": [
+      "if",
+      "switch case"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: IF, SWITCH CASE.",
+    "example_non_ste": "In case the flag is true, log the event.",
+    "example_ste": "If the flag is true, log the event.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "causing",
+    "approved": [
+      "can cause"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'can cause' instead.",
+    "example_non_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE. API KEYS IN SOURCE CODE CAN CAUSE UNAUTHORIZED ACCESS AND DATA BREACHES.",
+    "example_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE.",
+    "source": "rule-files/a-sec7-rule7.3.md"
+  },
+  {
+    "unapproved": "centralises",
+    "approved": [
+      "centralizes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'centralizes' instead.",
+    "example_non_ste": "The service-oriented architecture centralizes request handling through a single API gateway. This organization minimizes latency and maximizes throughput.",
+    "example_ste": "The service-oriented architecture centralises request handling through a single API gateway. This organisation minimises latency and maximises throughput.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "centre",
+    "approved": [
+      "center"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'center' instead.",
+    "example_non_ste": "Organize your environment variables in a `.env` file. The application analyzes this file at startup.",
+    "example_ste": "Organise your environment variables in a `.env` file. The application analyses this file at startup.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "centred",
+    "approved": [
+      "centered"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'centered' instead.",
+    "example_non_ste": "Organize your environment variables in a `.env` file. The application analyzes this file at startup.",
+    "example_ste": "Organise your environment variables in a `.env` file. The application analyses this file at startup.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "check",
+    "approved": [
+      "verify",
+      "check",
+      "do"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: VERIFY, CHECK, DO.",
+    "example_non_ste": "Check the values.",
+    "example_ste": "Do a check of the values.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "checks",
+    "approved": [
+      "examines"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'examines' instead.",
+    "example_non_ste": "This tool executes your CI pipeline. It operates on any platform and operates continuously without supervision.",
+    "example_ste": "This tool runs your CI pipeline. It runs on any platform and runs 24/7 without supervision.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "choose",
+    "approved": [
+      "select",
+      "alternative",
+      "select the correct configuration",
+      "use an alternative implementation"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: SELECT, ALTERNATIVE, SELECT THE CORRECT CONFIGURATION, USE AN ALTERNATIVE IMPLEMENTATION.",
+    "example_non_ste": "Choose the correct configuration.",
+    "example_ste": "Select the correct configuration.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "collection",
+    "approved": [
+      "set"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'set' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "colour",
+    "approved": [
+      "color"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'color' instead.",
+    "example_non_ste": "@param {string} color — The color of the notification badge. Accepts any valid CSS color value.",
+    "example_ste": "@param {string} colour — The colour of the notification badge. Accepts any valid CSS colour value.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "combining",
+    "approved": [
+      "joining"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'joining' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "commence",
+    "approved": [
+      "start"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'start' as the approved alternative (Principle P1).",
+    "example_non_ste": "The build will commence after tests pass.",
+    "example_ste": "The build will start after tests pass.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "compile",
+    "approved": [
+      "tv",
+      "compile the source files"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: TV, COMPILE THE SOURCE FILES.",
+    "example_non_ste": "Build the source files.",
+    "example_ste": "Compile the source files.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "configure",
+    "approved": [
+      "set"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'set' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "confirm",
+    "approved": [
+      "make sure",
+      "make sure that the build is successful"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MAKE SURE, MAKE SURE THAT THE BUILD IS SUCCESSFUL.",
+    "example_non_ste": "Confirm that the build is successful.",
+    "example_ste": "Make sure that the build is successful.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "contact",
+    "approved": [
+      "speak to"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'speak to' instead.",
+    "example_non_ste": "Organize your environment variables in a `.env` file. The application analyzes this file at startup.",
+    "example_ste": "Organise your environment variables in a `.env` file. The application analyses this file at startup.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "create",
+    "approved": [
+      "make"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'make' as the approved alternative (Principle P1).",
+    "example_non_ste": "Create a new file in the directory.",
+    "example_ste": "Make a new file in the directory.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "customisable",
+    "approved": [
+      "customizable"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'customizable' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "danger",
+    "approved": [
+      "risk",
+      "this operation has",
+      "risk of data loss"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: RISK, THIS OPERATION HAS, RISK OF DATA LOSS.",
+    "example_non_ste": "There is a danger of data loss with this operation.",
+    "example_ste": "This operation has a risk of data loss.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "defence",
+    "approved": [
+      "defense"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'defense' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "delete",
+    "approved": [
+      "remove",
+      "remove the file from the directory"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: REMOVE, REMOVE THE FILE FROM THE DIRECTORY.",
+    "example_non_ste": "Delete the file from the directory.",
+    "example_ste": "Remove the file from the directory.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "destroy",
+    "approved": [
+      "break",
+      "remove",
+      "break the old session",
+      "remove the obsolete data"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: BREAK, REMOVE, BREAK THE OLD SESSION, REMOVE THE OBSOLETE DATA.",
+    "example_non_ste": "Destroy the old session.",
+    "example_ste": "Break the old session.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "determines",
+    "approved": [
+      "controls"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'controls' instead.",
+    "example_non_ste": "# This setting controls the largest number of threads that the server",
+    "example_ste": "# This setting determines the maximum number of threads the server\n> # will be utilizing. Higher values are resulting in better throughput but\n> # are also increasing memory usage.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "dispatch",
+    "approved": [
+      "send"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'send' as the approved alternative (Principle P1).",
+    "example_non_ste": "Dispatch the event to all registered listeners.",
+    "example_ste": "Send the event to all registered listeners.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "display",
+    "approved": [
+      "show"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'show' as the approved alternative (Principle P1).",
+    "example_non_ste": "The command displays the configuration.",
+    "example_ste": "The command shows the configuration.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "dump",
+    "approved": [
+      "writes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'writes' instead.",
+    "example_non_ste": "# Set this flag to `true` to turn on debug mode. When debug mode is on,",
+    "example_ste": "# Set this flag to \"true\" to enable debug mode. When enabled, the server\n> # will dump verbose logs to stdout. Setting this flag impacts performance\n> # significantly, so do not enable it in production.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "duplicated",
+    "approved": [
+      "duplicate"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'duplicate' instead.",
+    "example_non_ste": "/**",
+    "example_ste": "/**\n>  * Processed the input array and returning a new array with duplicated elements removed.\n>  * The function is iterating over each element and checking if it was seen before.\n>  *\n>  * @param {Array} items - The array to deduplicate.\n>  * @returns {Array} A new array containing unique elements.\n>  */",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "duration",
+    "approved": [
+      "time"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'time' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "eliminate",
+    "approved": [
+      "remove"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'remove' as the approved alternative (Principle P1).",
+    "example_non_ste": "Eliminate duplicate code from the module.",
+    "example_ste": "Remove duplicate code from the module.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "employ",
+    "approved": [
+      "use"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'use' as the approved alternative (Principle P1).",
+    "example_non_ste": "Employ a caching layer for performance.",
+    "example_ste": "Use a caching layer for performance.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "enable",
+    "approved": [
+      "turn on"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'turn on' instead.",
+    "example_non_ste": "# Set this flag to `true` to turn on debug mode. When debug mode is on,",
+    "example_ste": "# Set this flag to \"true\" to enable debug mode. When enabled, the server\n> # will dump verbose logs to stdout. Setting this flag impacts performance\n> # significantly, so do not enable it in production.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "ensure",
+    "approved": [
+      "make sure",
+      "make sure that the database is connected",
+      "when",
+      "give"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MAKE SURE, MAKE SURE THAT THE DATABASE IS CONNECTED.",
+    "example_non_ste": "Ensure that the database is connected.",
+    "example_ste": "Make sure that the database is connected.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "ensures",
+    "approved": [
+      "makes sure"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'makes sure' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "enter",
+    "approved": [
+      "put",
+      "type",
+      "type your password"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: PUT, TYPE, TYPE YOUR PASSWORD.",
+    "example_non_ste": "Enter your password.",
+    "example_ste": "Type your password.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "establish",
+    "approved": [
+      "make",
+      "start",
+      "connection",
+      "session"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MAKE, START, CONNECTION, SESSION.",
+    "example_non_ste": "Establish a connection.",
+    "example_ste": "Make a connection.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "except",
+    "approved": [
+      "but not",
+      "other than",
+      "all modules except the database are available"
+    ],
+    "pos": "preposition",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: BUT NOT, OTHER THAN, ALL MODULES EXCEPT THE DATABASE ARE AVAILABLE.",
+    "example_non_ste": "All modules other than the database module are available.",
+    "example_ste": "All modules except the database module are available.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "execute",
+    "approved": [
+      "run"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'run' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "executing",
+    "approved": [
+      "with"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'with' instead.",
+    "example_non_ste": "After you clone the repository, build the project with the build script. The compiler transpiles TypeScript files and makes JavaScript bundles in the dist directory.",
+    "example_ste": "After cloning the repository, you can start building the project by executing the build script. The compiler will be transpiling TypeScript files and outputting JavaScript bundles in the dist directory.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "explain",
+    "approved": [
+      "describe",
+      "tell",
+      "describe the error condition"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: DESCRIBE, TELL, DESCRIBE THE ERROR CONDITION.",
+    "example_non_ste": "Explain the error condition.",
+    "example_ste": "Describe the error condition.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "failed",
+    "approved": [
+      "did not complete"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'did not complete' instead.",
+    "example_non_ste": "This tool executes your CI pipeline. It operates on any platform and operates continuously without supervision.",
+    "example_ste": "This tool runs your CI pipeline. It runs on any platform and runs 24/7 without supervision.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "fails",
+    "approved": [
+      "does not complete"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'does not complete' instead.",
+    "example_non_ste": "Gives the authenticated `User` object. If authentication does not complete, gives `null` and writes the error to the log.",
+    "example_ste": "Returns the authenticated user object. If authentication fails, returns null and logs the error.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "failure",
+    "approved": [
+      "does not work",
+      "stops",
+      "if the service stops",
+      "restart it"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: DOES NOT WORK, STOPS, IF THE SERVICE STOPS, RESTART IT.",
+    "example_non_ste": "In case of service failure, restart it.",
+    "example_ste": "If the service stops, restart it.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "fetch",
+    "approved": [
+      "get"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'get' as the approved alternative (Principle P1).",
+    "example_non_ste": "Fetch the remote data before rendering the page.",
+    "example_ste": "Get the remote data before rendering the page.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "fit",
+    "approved": [
+      "install",
+      "add",
+      "install the package"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: INSTALL, ADD, INSTALL THE PACKAGE.",
+    "example_non_ste": "Fit the package into the project.",
+    "example_ste": "Install the package.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "follow",
+    "approved": [
+      "obey",
+      "obey the coding guidelines"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: OBEY, OBEY THE CODING GUIDELINES.",
+    "example_non_ste": "Follow the coding guidelines.",
+    "example_ste": "Obey the coding guidelines.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "forward",
+    "approved": [
+      "send"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'send' as the approved alternative (Principle P1).",
+    "example_non_ste": "Forward the request to the upstream service.",
+    "example_ste": "Send the request to the upstream service.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "furnishes",
+    "approved": [
+      "gives"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'gives' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "generate",
+    "approved": [
+      "make"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'make' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "halt",
+    "approved": [
+      "stop"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'stop' as the approved alternative (Principle P1).",
+    "example_non_ste": "Halt the deployment if errors occur.",
+    "example_ste": "Stop the deployment if errors occur.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "handle",
+    "approved": [
+      "process",
+      "manage",
+      "process the exception",
+      "manage the request"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: PROCESS, MANAGE, PROCESS THE EXCEPTION, MANAGE THE REQUEST.",
+    "example_non_ste": "Handle the exception.",
+    "example_ste": "Process the exception.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "handler",
+    "approved": [
+      "drop handler"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'drop handler' instead.",
+    "example_non_ste": "The `BaseService` class processes requests and makes auxiliary copies of data. It makes new instances with the `MainFactory` class.",
+    "example_ste": "The `BaseService` class handlers requests and backups data. It factories new instances via the `MainFactory`.",
+    "source": "rule-files/a-sec1-rule1.6.md"
+  },
+  {
+    "unapproved": "happen",
+    "approved": [
+      "occur",
+      "an exception occurred during initialization"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: OCCUR, AN EXCEPTION OCCURRED DURING INITIALIZATION.",
+    "example_non_ste": "An exception happened during initialization.",
+    "example_ste": "An exception occurred during initialization.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "holded",
+    "approved": [
+      "held"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'held' instead.",
+    "example_non_ste": "The `UserRepository` found the user record and set the cache entry. The service kept the connection and sent the response. The user got the data.",
+    "example_ste": "The `UserRepository` finded the user record and setted the cache entry. The service keeped the connection and sended the response. The user getted the data.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "impacts",
+    "approved": [
+      "decreases"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'decreases' instead.",
+    "example_non_ste": "# Set this flag to `true` to turn on debug mode. When debug mode is on,",
+    "example_ste": "# Set this flag to \"true\" to enable debug mode. When enabled, the server\n> # will dump verbose logs to stdout. Setting this flag impacts performance\n> # significantly, so do not enable it in production.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "implement",
+    "approved": [
+      "add"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'add' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "indicate",
+    "approved": [
+      "show",
+      "the log shows the error type"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: SHOW, THE LOG SHOWS THE ERROR TYPE.",
+    "example_non_ste": "The log indicates the error type.",
+    "example_ste": "The log shows the error type.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "initialisation",
+    "approved": [
+      "initialization"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'initialization' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "initialised",
+    "approved": [
+      "initialized"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'initialized' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "initialises",
+    "approved": [
+      "initializes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'initializes' instead.",
+    "example_non_ste": "The `ColourPicker` component uses the `colour` library for color space conversions.",
+    "example_ste": "The `ColourPicker` component uses the `colour` library for colour space conversions.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "initiate",
+    "approved": [
+      "start"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'start' as the approved alternative (Principle P1).",
+    "example_non_ste": "Initiate the deployment process.",
+    "example_ste": "Start the deployment process.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "insert",
+    "approved": [
+      "put",
+      "add",
+      "put the record into the database"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: PUT, ADD, PUT THE RECORD INTO THE DATABASE.",
+    "example_non_ste": "Insert the record into the database.",
+    "example_ste": "Put the record into the database.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "inspect",
+    "approved": [
+      "examine",
+      "review",
+      "review the code for vulnerabilities"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: EXAMINE, REVIEW, REVIEW THE CODE FOR VULNERABILITIES.",
+    "example_non_ste": "Inspect the code for vulnerabilities.",
+    "example_ste": "Review the code for vulnerabilities.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "invalid",
+    "approved": [
+      "not correct"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'not correct' instead.",
+    "example_non_ste": "/**",
+    "example_ste": "/**\n>  * Validates the provided configuration object against the schema\n>  * and populates default values for any missing fields.\n>  *\n>  * @param {Object} config - The configuration object to validate.\n>  * @returns {Object} The validated and populated configuration.\n>  * @throws {ValidationError} If the configuration is invalid.\n>  */",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "join",
+    "approved": [
+      "connect"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'connect' instead.",
+    "example_non_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before it does its own checks.",
+    "example_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before running its own checks.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "kill",
+    "approved": [
+      "stop"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'stop' as the approved alternative (Principle P1).",
+    "example_non_ste": "Kill the process to free the port.",
+    "example_ste": "Stop the process to free the port.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "learn",
+    "approved": [
+      "learned"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'learned' instead.",
+    "example_non_ste": "The parser read the input and reads each line into memory. It read the entire file before processing.",
+    "example_ste": "The parser red the input and reds each line into memory. It red the entire file before processing.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "learnt",
+    "approved": [
+      "learned"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'learned' instead.",
+    "example_non_ste": "The parser read the input and reads each line into memory. It read the entire file before processing.",
+    "example_ste": "The parser red the input and reds each line into memory. It red the entire file before processing.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "leverage",
+    "approved": [
+      "use"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'use' as the approved alternative (Principle P1).",
+    "example_non_ste": "The application leverages machine learning algorithms.",
+    "example_ste": "The application uses machine learning.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "leverages",
+    "approved": [
+      "uses"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'uses' instead.",
+    "example_non_ste": "The primary setup uses Express for the main API and MongoDB for the database backend.",
+    "example_ste": "The base setup leverages Express for the main API and MongoDB for the database backend.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "licence",
+    "approved": [
+      "license"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'license' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "linkt",
+    "approved": [
+      "linked"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'linked' instead.",
+    "example_non_ste": "The `UserRepository` found the user record and set the cache entry. The service kept the connection and sent the response. The user got the data.",
+    "example_ste": "The `UserRepository` finded the user record and setted the cache entry. The service keeped the connection and sended the response. The user getted the data.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "locate",
+    "approved": [
+      "find",
+      "find the error in the logs"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: FIND, FIND THE ERROR IN THE LOGS.",
+    "example_non_ste": "Locate the error in the logs.",
+    "example_ste": "Find the error in the logs.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "login",
+    "approved": [
+      "log in"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'log in' instead.",
+    "example_non_ste": "# The session timeout (in seconds). If a user does not send a request",
+    "example_ste": "# The session timeout (in seconds). If a user has not send a request\n> # within this period, the session is considered expired and the user\n> # must login again. The default value was choosed based on load testing\n> # that showen the average user session lasts 15 minutes.\n> # SESSION_TIMEOUT=900",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "logs",
+    "approved": [
+      "writes to the log"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'writes to the log' instead.",
+    "example_non_ste": "Gives the authenticated `User` object. If authentication does not complete, gives `null` and writes the error to the log.",
+    "example_ste": "Returns the authenticated user object. If authentication fails, returns null and logs the error.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "main",
+    "approved": [
+      "primary",
+      "the primary cause of the crash is",
+      "null pointer"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: PRIMARY, THE PRIMARY CAUSE OF THE CRASH IS, NULL POINTER.",
+    "example_non_ste": "The main cause of the crash is a null pointer.",
+    "example_ste": "The primary cause of the crash is a null pointer.",
+    "source": "a-dictionary.md + rule-files/a-sec1-rule1.6.md"
+  },
+  {
+    "unapproved": "maintain",
+    "approved": [
+      "keep"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'keep' as the approved alternative (Principle P1).",
+    "example_non_ste": "The service maintains a pool of database connections.",
+    "example_ste": "The service keeps a pool of database connections.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "maintaining",
+    "approved": [
+      "keeps"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'keeps' instead.",
+    "example_non_ste": "The `CacheManager` class keeps cached data and removes old entries. It uses a TTL-based eviction policy.",
+    "example_ste": "The `CacheManager` is responsible for maintaining cached data and invalidating entries when they become stale. It's leveraging a TTL-based eviction policy.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "maximises",
+    "approved": [
+      "maximizes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'maximizes' instead.",
+    "example_non_ste": "The service-oriented architecture centralizes request handling through a single API gateway. This organization minimizes latency and maximizes throughput.",
+    "example_ste": "The service-oriented architecture centralises request handling through a single API gateway. This organisation minimises latency and maximises throughput.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "maximize",
+    "approved": [
+      "increase"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'increase' instead.",
+    "example_non_ste": "This library operates on Node.js and operates in the browser. It runs your transformations together to increase throughput.",
+    "example_ste": "This library runs on Node.js and runs in the browser. It runs your transformations in parallel to maximize throughput.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "maximum",
+    "approved": [
+      "largest"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'largest' instead.",
+    "example_non_ste": "# This setting controls the largest number of threads that the server",
+    "example_ste": "# This setting determines the maximum number of threads the server\n> # will be utilizing. Higher values are resulting in better throughput but\n> # are also increasing memory usage.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "metre",
+    "approved": [
+      "meter"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'meter' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "minimises",
+    "approved": [
+      "minimizes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'minimizes' instead.",
+    "example_non_ste": "The service-oriented architecture centralizes request handling through a single API gateway. This organization minimizes latency and maximizes throughput.",
+    "example_ste": "The service-oriented architecture centralises request handling through a single API gateway. This organisation minimises latency and maximises throughput.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "misses",
+    "approved": [
+      "does not have"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'does not have' instead.",
+    "example_non_ste": "This tool executes your CI pipeline. It operates on any platform and operates continuously without supervision.",
+    "example_ste": "This tool runs your CI pipeline. It runs on any platform and runs 24/7 without supervision.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "modify",
+    "approved": [
+      "change",
+      "change the file permissions"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: CHANGE, CHANGE THE FILE PERMISSIONS.",
+    "example_non_ste": "Modify the file permissions.",
+    "example_ste": "Change the file permissions.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "multiple",
+    "approved": [
+      "many"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'many' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "mutating",
+    "approved": [
+      "changing"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'changing' instead.",
+    "example_non_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before it does its own checks.",
+    "example_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before running its own checks.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "need",
+    "approved": [
+      "must",
+      "necessary",
+      "you must install the dependencies"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MUST, NECESSARY, YOU MUST INSTALL THE DEPENDENCIES.",
+    "example_non_ste": "You need to install the dependencies.",
+    "example_ste": "You must install the dependencies.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "needed",
+    "approved": [
+      "necessary"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'necessary' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "normal",
+    "approved": [
+      "usual",
+      "the usual behavior is to return zero"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: USUAL, THE USUAL BEHAVIOR IS TO RETURN ZERO.",
+    "example_non_ste": "The normal behavior is to return zero.",
+    "example_ste": "The usual behavior is to return zero.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "obtain",
+    "approved": [
+      "get"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'get' as the approved alternative (Principle P1).",
+    "example_non_ste": "Obtain a lock on the shared resource.",
+    "example_ste": "Get a lock on the shared resource.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "optimises",
+    "approved": [
+      "optimizes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'optimizes' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "optimize",
+    "approved": [
+      "make faster"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'make faster' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "option",
+    "approved": [
+      "alternative",
+      "can",
+      "you can use an alternative configuration"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ALTERNATIVE, CAN, YOU CAN USE AN ALTERNATIVE CONFIGURATION.",
+    "example_non_ste": "You have the option to use another configuration.",
+    "example_ste": "You can use an alternative configuration.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "orchestrates",
+    "approved": [
+      "controls"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'controls' instead.",
+    "example_non_ste": "# This compose file controls three services:",
+    "example_ste": "# This compose file orchestrates three services:\n> # - The API server, which endpoints the HTTP traffic\n> # - The worker, which queues the background jobs\n> # - The database, which stores the persistent data",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "organisation",
+    "approved": [
+      "organization"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'organization' instead.",
+    "example_non_ste": "The service-oriented architecture centralizes request handling through a single API gateway. This organization minimizes latency and maximizes throughput.",
+    "example_ste": "The service-oriented architecture centralises request handling through a single API gateway. This organisation minimises latency and maximises throughput.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "organise",
+    "approved": [
+      "organize"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'organize' instead.",
+    "example_non_ste": "Organize your environment variables in a `.env` file. The application analyzes this file at startup.",
+    "example_ste": "Organise your environment variables in a `.env` file. The application analyses this file at startup.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "original",
+    "approved": [
+      "first"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'first' instead.",
+    "example_non_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before it does its own checks.",
+    "example_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before running its own checks.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "outlive",
+    "approved": [
+      "live longer than"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'live longer than' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "over",
+    "approved": [
+      "more than",
+      "above",
+      "more than the threshold"
+    ],
+    "pos": "preposition",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MORE THAN, ABOVE, MORE THAN THE THRESHOLD.",
+    "example_non_ste": "Over the threshold.",
+    "example_ste": "More than the threshold.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "passes",
+    "approved": [
+      "sends",
+      "gives"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'sends' instead.",
+    "example_non_ste": "This tool executes your CI pipeline. It operates on any platform and operates continuously without supervision.",
+    "example_ste": "This tool runs your CI pipeline. It runs on any platform and runs 24/7 without supervision.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "perform",
+    "approved": [
+      "do",
+      "do the build"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: DO, DO THE BUILD.",
+    "example_non_ste": "Perform the build.",
+    "example_ste": "Do the build.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "permit",
+    "approved": [
+      "let",
+      "allow",
+      "the api lets you send",
+      "requests per minute"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: LET, ALLOW, THE API LETS YOU SEND, REQUESTS PER MINUTE.",
+    "example_non_ste": "The API permits 100 requests per minute.",
+    "example_ste": "The API lets you send 100 requests per minute.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "persisting",
+    "approved": [
+      "keeps"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'keeps' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "personalized",
+    "approved": [
+      "personal"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'personal' instead.",
+    "example_non_ste": "The application uses machine learning to examine user behavior and make personal recommendations immediately.",
+    "example_ste": "The application leverages machine learning algorithms to analyze user behavior patterns and generate personalized recommendations in real time.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "present",
+    "approved": [
+      "show"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'show' as the approved alternative (Principle P1).",
+    "example_non_ste": "The dashboard presents the metrics in a chart.",
+    "example_ste": "The dashboard shows the metrics in a chart.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "preserve",
+    "approved": [
+      "keep"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'keep' as the approved alternative (Principle P1).",
+    "example_non_ste": "Preserve the order of elements during sorting.",
+    "example_ste": "Keep the order of elements during sorting.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "produce",
+    "approved": [
+      "make"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'make' as the approved alternative (Principle P1).",
+    "example_non_ste": "The factory produces instances of the class.",
+    "example_ste": "The factory makes instances of the class.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "programme",
+    "approved": [
+      "program"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'program' instead.",
+    "example_non_ste": "Validation error: The program cannot recognize the file format. The file may have been canceled during transfer.",
+    "example_ste": "Validation error: The programme cannot recognise the file format. The file may have been cancelled during transfer.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "provide",
+    "approved": [
+      "give",
+      "return",
+      "return the result"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: GIVE, RETURN, RETURN THE RESULT.",
+    "example_non_ste": "The function provides the result.",
+    "example_ste": "The function returns the result.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "provided",
+    "approved": [
+      "given"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'given' instead.",
+    "example_non_ste": "def __init__(self, config: dict) -> None:",
+    "example_ste": "def __init__(self, config: dict) -> None:\n>     \"\"\"\n>     Constructs a new CacheManager instance.\n>\n>     Configs the Redis client with the provided settings.\n>     Defaults the TTL to 3600 seconds when no TTL is specified.\n>     \"\"\"",
+    "source": "rule-files/a-sec1-rule1.2.md"
+  },
+  {
+    "unapproved": "provides",
+    "approved": [
+      "gives"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'gives' instead.",
+    "example_non_ste": "The `CacheManager` class keeps cached data and removes old entries. It uses a TTL-based eviction policy.",
+    "example_ste": "The `CacheManager` is responsible for maintaining cached data and invalidating entries when they become stale. It's leveraging a TTL-based eviction policy.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "provision",
+    "approved": [
+      "make"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'make' instead.",
+    "example_non_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before it does its own checks.",
+    "example_ste": "The `AdminUser` class extends `User` and overrides the `authenticate` method. It calls the parent method before running its own checks.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "provisions",
+    "approved": [
+      "makes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'makes' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "purge",
+    "approved": [
+      "remove"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'remove' as the approved alternative (Principle P1).",
+    "example_non_ste": "Purge the cache before deploying the new version.",
+    "example_ste": "Remove all data from the cache before you deploy the new version.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "raises",
+    "approved": [
+      "increases"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'increases' instead.",
+    "example_non_ste": "This tool executes your CI pipeline. It operates on any platform and operates continuously without supervision.",
+    "example_ste": "This tool runs your CI pipeline. It runs on any platform and runs 24/7 without supervision.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "recognise",
+    "approved": [
+      "recognize"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'recognize' instead.",
+    "example_non_ste": "Validation error: The program cannot recognize the file format. The file may have been canceled during transfer.",
+    "example_ste": "Validation error: The programme cannot recognise the file format. The file may have been cancelled during transfer.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "recognised",
+    "approved": [
+      "recognized"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'recognized' instead.",
+    "example_non_ste": "Organize your environment variables in a `.env` file. The application analyzes this file at startup.",
+    "example_ste": "Organise your environment variables in a `.env` file. The application analyses this file at startup.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "recognises",
+    "approved": [
+      "recognizes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'recognizes' instead.",
+    "example_non_ste": "/** Analyzes the input data and recognizes patterns. Gives an object that models the recognized patterns. */",
+    "example_ste": "/** Analyses the input data and recognises patterns. Returns an object modelling the recognised patterns. */",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "reconnecting",
+    "approved": [
+      "to connect again"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'to connect again' instead.",
+    "example_non_ste": "Connection timeout: the database server did not respond in the given time. Check your network configuration and try to connect again.",
+    "example_ste": "Connection timeout: the database server wasn't responding within the allocated timeframe. Please check your network configuration and try reconnecting.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "rectify",
+    "approved": [
+      "correct"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'correct' instead.",
+    "example_non_ste": "fix: correct race condition in connection pool that caused failures under load",
+    "example_ste": "fix: rectify race condition in connection pool that caused intermittent failures under load",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "reduce",
+    "approved": [
+      "decrease",
+      "decrease the memory usage"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: DECREASE, DECREASE THE MEMORY USAGE.",
+    "example_non_ste": "Reduce the memory usage.",
+    "example_ste": "Decrease the memory usage.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "reject",
+    "approved": [
+      "gives an error"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'gives an error' instead.",
+    "example_non_ste": "Gives a `Promise` that completes with a list of `User` objects. If the request does not complete, the `Promise` gives an `ApiError`.",
+    "example_ste": "Returns a promise that resolves to an array of User objects, or rejects with an ApiError if the request fails.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "render",
+    "approved": [
+      "show"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'show' as the approved alternative (Principle P1).",
+    "example_non_ste": "The template renders the user data in HTML.",
+    "example_ste": "The template shows the user data in HTML.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "reoccurring",
+    "approved": [
+      "again"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'again' instead.",
+    "example_non_ste": "The CI pipeline caught a segmentation fault in the worker process.",
+    "example_ste": "The CI pipeline catched a segmentation fault in the worker process.\n> The core dump showed that a pointer was freement after it was alredy\n> setted to null. The bug was introduce in commit a3f8c2.\n>\n> The fix adds a check before the free() call. The test suite runned\n> 500 iterations without the fault reoccurring.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "require",
+    "approved": [
+      "must",
+      "you must install node",
+      "js"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MUST, YOU MUST INSTALL NODE, JS.",
+    "example_non_ste": "The project requires Node.js.",
+    "example_ste": "You must install Node.js.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "retain",
+    "approved": [
+      "keep"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'keep' as the approved alternative (Principle P1).",
+    "example_non_ste": "Retain the original file permissions after the update.",
+    "example_ste": "Keep the original file permissions after the update.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "retourned",
+    "approved": [
+      "give"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'give' instead.",
+    "example_non_ste": "def process(self, items: list) -> dict:",
+    "example_ste": "def process(self, items: list) -> dict:\n>     \"\"\"\n>     Procesed the input list and retourned a grouped dictionary.\n>\n>     The method splitted the items by category, countted the items\n>     in each group, and builded a result dictionary. It keeped\n>     the original order of the first appearance of each category.\n>\n>     If the input list is empty, the method gived an empty dictionary.\n>     \"\"\"",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "retrieve",
+    "approved": [
+      "get"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'get' instead.",
+    "example_non_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE. API KEYS IN SOURCE CODE CAN CAUSE UNAUTHORIZED ACCESS AND DATA BREACHES.",
+    "example_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE.",
+    "source": "rule-files/a-sec7-rule7.3.md"
+  },
+  {
+    "unapproved": "retrieving",
+    "approved": [
+      "gets"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'gets' instead.",
+    "example_non_ste": "The `UserRepository` class keeps `User` records in the database and gets `User` records from the database. It uses an ORM to hide the SQL queries.",
+    "example_ste": "The `UserRepository` class is responsible for persisting and retrieving `User` entities from the database. It leverages an ORM to abstract away the underlying SQL queries.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "retry",
+    "approved": [
+      "try again"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'try again' instead.",
+    "example_non_ste": "FATAL: The database daemon could not start. The initialization",
+    "example_ste": "FATAL: The database daemon could not be start. The initialization\n> script finded an error in the configuration and stoppped before it\n> could complete. The log file was writed to /var/log/init.log.\n> Please correct the configuration and retry the startup.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "retrying",
+    "approved": [
+      "try again"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'try again' instead.",
+    "example_non_ste": "After you install the dependencies, compile the project with the build script. The compiler makes the output in the dist directory.",
+    "example_ste": "After installing the dependencies, you can start compiling the project by running the build script. The compiler will be generating the output in the dist directory.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "return",
+    "approved": [
+      "give"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'give' instead.",
+    "example_non_ste": "This method raises an error when the input is empty. Catch the error and give a default value to prevent the application from stopping.",
+    "example_ste": "This method raises an error when the input is empty. Catch the error and return a default value to prevent the application from crashing.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "returns",
+    "approved": [
+      "gives"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'gives' instead.",
+    "example_non_ste": "Organize your environment variables in a `.env` file. The application analyzes this file at startup.",
+    "example_ste": "Organise your environment variables in a `.env` file. The application analyses this file at startup.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "review",
+    "approved": [
+      "examine",
+      "examine the code for issues"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: EXAMINE, EXAMINE THE CODE FOR ISSUES.",
+    "example_non_ste": "Review the code for issues.",
+    "example_ste": "Examine the code for issues.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "running",
+    "approved": [
+      "that do not complete",
+      "does"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'that do not complete' instead.",
+    "example_non_ste": "This tool executes your CI pipeline. It operates on any platform and operates continuously without supervision.",
+    "example_ste": "This tool runs your CI pipeline. It runs on any platform and runs 24/7 without supervision.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "runs",
+    "approved": [
+      "operates"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'operates' instead.",
+    "example_non_ste": "This library operates on Node.js and operates in the browser. It runs your transformations together to increase throughput.",
+    "example_ste": "This library runs on Node.js and runs in the browser. It runs your transformations in parallel to maximize throughput.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "separate",
+    "approved": [
+      "isolated",
+      "different",
+      "not connected",
+      "keep the modules isolated"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ISOLATED, DIFFERENT, NOT CONNECTED, KEEP THE MODULES ISOLATED.",
+    "example_non_ste": "Keep the modules separate from each other.",
+    "example_ste": "Keep the modules isolated from each other.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "serialisation",
+    "approved": [
+      "serialization"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'serialization' instead.",
+    "example_non_ste": "# The log level controls the verbosity of output. Set to \"debug\" to",
+    "example_ste": "# The log level controls the verbosity of output. Set to \"debug\" to\n> # analyse the full request/response lifecycle, including serialisation\n> # behaviour and connection pool utilisation.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "showen",
+    "approved": [
+      "showed"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'showed' instead.",
+    "example_non_ste": "# The session timeout (in seconds). If a user does not send a request",
+    "example_ste": "# The session timeout (in seconds). If a user has not send a request\n> # within this period, the session is considered expired and the user\n> # must login again. The default value was choosed based on load testing\n> # that showen the average user session lasts 15 minutes.\n> # SESSION_TIMEOUT=900",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "specified",
+    "approved": [
+      "given"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'given' instead.",
+    "example_non_ste": "def __init__(self, config: dict) -> None:",
+    "example_ste": "def __init__(self, config: dict) -> None:\n>     \"\"\"\n>     Constructs a new CacheManager instance.\n>\n>     Configs the Redis client with the provided settings.\n>     Defaults the TTL to 3600 seconds when no TTL is specified.\n>     \"\"\"",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "spended",
+    "approved": [
+      "spent"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'spent' instead.",
+    "example_non_ste": "The `UserRepository` found the user record and set the cache entry. The service kept the connection and sent the response. The user got the data.",
+    "example_ste": "The `UserRepository` finded the user record and setted the cache entry. The service keeped the connection and sended the response. The user getted the data.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "splitted",
+    "approved": [
+      "splits"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'splits' instead.",
+    "example_non_ste": "def process(self, items: list) -> dict:",
+    "example_ste": "def process(self, items: list) -> dict:\n>     \"\"\"\n>     Procesed the input list and retourned a grouped dictionary.\n>\n>     The method splitted the items by category, countted the items\n>     in each group, and builded a result dictionary. It keeped\n>     the original order of the first appearance of each category.\n>\n>     If the input list is empty, the method gived an empty dictionary.\n>     \"\"\"",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "stage",
+    "approved": [
+      "step",
+      "during this step",
+      "do not merge the branch"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: STEP, DURING THIS STEP, DO NOT MERGE THE BRANCH.",
+    "example_non_ste": "At this stage, do not merge the branch.",
+    "example_ste": "During this step, do not merge the branch.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "standardise",
+    "approved": [
+      "standardize"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'standardize' instead.",
+    "example_non_ste": "chore: standardize ESLint configuration across all packages and synchronize with the monorepo",
+    "example_ste": "chore: standardise ESLint configuration across all packages and synchronise with the monorepo",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "state",
+    "approved": [
+      "condition",
+      "examine the condition of the system"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: CONDITION, EXAMINE THE CONDITION OF THE SYSTEM.",
+    "example_non_ste": "Examine the state of the system.",
+    "example_ste": "Examine the condition of the system.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "stoppped",
+    "approved": [
+      "stopped"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'stopped' instead.",
+    "example_non_ste": "FATAL: The database daemon could not start. The initialization",
+    "example_ste": "FATAL: The database daemon could not be start. The initialization\n> script finded an error in the configuration and stoppped before it\n> could complete. The log file was writed to /var/log/init.log.\n> Please correct the configuration and retry the startup.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "store",
+    "approved": [
+      "keep",
+      "save",
+      "keep the config files in version control"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: KEEP, SAVE, KEEP THE CONFIG FILES IN VERSION CONTROL.",
+    "example_non_ste": "Store the config files in version control.",
+    "example_ste": "Keep the config files in version control.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "stores",
+    "approved": [
+      "keeps"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'keeps' instead.",
+    "example_non_ste": "# This compose file controls three services:",
+    "example_ste": "# This compose file orchestrates three services:\n> # - The API server, which endpoints the HTTP traffic\n> # - The worker, which queues the background jobs\n> # - The database, which stores the persistent data",
+    "source": "rule-files/a-sec1-rule1.2.md"
+  },
+  {
+    "unapproved": "synchronise",
+    "approved": [
+      "synchronize"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'synchronize' instead.",
+    "example_non_ste": "chore: standardize ESLint configuration across all packages and synchronize with the monorepo",
+    "example_ste": "chore: standardise ESLint configuration across all packages and synchronise with the monorepo",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "synchronises",
+    "approved": [
+      "synchronizes"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'synchronizes' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "take",
+    "approved": [
+      "fetch",
+      "consume",
+      "require"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: FETCH, CONSUME, REQUIRE.",
+    "example_non_ste": "The query takes 100 ms.",
+    "example_ste": "The query consumes 100 ms.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "terminate",
+    "approved": [
+      "stop"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'stop' instead.",
+    "example_non_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE. API KEYS IN SOURCE CODE CAN CAUSE UNAUTHORIZED ACCESS AND DATA BREACHES.",
+    "example_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE.",
+    "source": "rule-files/a-sec7-rule7.3.md"
+  },
+  {
+    "unapproved": "terminating",
+    "approved": [
+      "stops"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'stops' instead.",
+    "example_non_ste": "Use the build tool to make the binary. Run the binary to start the service. Use environment variables to set the runtime behavior.",
+    "example_ste": "Utilize the build tool to generate the artifact. Execute the binary to bootstrap the service. Utilize environment variables to configure runtime behavior.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "test",
+    "approved": [
+      "test",
+      "do",
+      "test of the module"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: TEST, DO, TEST OF THE MODULE.",
+    "example_non_ste": "Test the module.",
+    "example_ste": "Do a test of the module.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "transforming",
+    "approved": [
+      "changing",
+      "change"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'changing' instead.",
+    "example_non_ste": "The `CacheManager` class keeps cached data and removes old entries. It uses a TTL-based eviction policy.",
+    "example_ste": "The `CacheManager` is responsible for maintaining cached data and invalidating entries when they become stale. It's leveraging a TTL-based eviction policy.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "transmit",
+    "approved": [
+      "send"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'send' as the approved alternative (Principle P1).",
+    "example_non_ste": "Transmit the data packet to the remote server.",
+    "example_ste": "Send the data packet to the remote server.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "trigged",
+    "approved": [
+      "triggers"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'triggers' instead.",
+    "example_non_ste": "The `buildProject` method triggers the CI pipeline and gives a Job ID. After the job completes, the system writes the result to the artifact store. The client catches the completion event and gets the download URL.",
+    "example_ste": "The `buildProject` method trigged the CI pipeline and retourned a Job ID. After the job completed, the result was writed to the artifact store. The client catched the completion event and feched the download URL.",
+    "source": "rule-files/a-sec3-rule3.1.md"
+  },
+  {
+    "unapproved": "true",
+    "approved": [
+      "the condition is true"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: THE CONDITION IS TRUE.",
+    "example_non_ste": "The condition evaluates to truth.",
+    "example_ste": "The condition is true.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "under",
+    "approved": [
+      "below",
+      "less than",
+      "below the threshold"
+    ],
+    "pos": "preposition",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: BELOW, LESS THAN, BELOW THE THRESHOLD.",
+    "example_non_ste": "Under the threshold.",
+    "example_ste": "Below the threshold.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "updated",
+    "approved": [
+      "update"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'update' instead.",
+    "example_non_ste": "feat: add user authentication middleware and update the login endpoint",
+    "example_ste": "feat: adding user authentication middleware and updated the login endpoint",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "utilisation",
+    "approved": [
+      "usage"
+    ],
+    "pos": "noun",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'usage' instead.",
+    "example_non_ste": "# The log level controls the verbosity of output. Set to \"debug\" to",
+    "example_ste": "# The log level controls the verbosity of output. Set to \"debug\" to\n> # analyse the full request/response lifecycle, including serialisation\n> # behaviour and connection pool utilisation.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "utilise",
+    "approved": [
+      "use"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'use' as the approved alternative (Principle P1).",
+    "example_non_ste": "Utilise the build tool to generate the artifact.",
+    "example_ste": "Use the build tool to make the binary.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "utilize",
+    "approved": [
+      "use"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'use' instead.",
+    "example_non_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE. API KEYS IN SOURCE CODE CAN CAUSE UNAUTHORIZED ACCESS AND DATA BREACHES.",
+    "example_ste": "WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE.",
+    "source": "rule-files/a-sec1-rule1.1.md"
+  },
+  {
+    "unapproved": "valid",
+    "approved": [
+      "correct",
+      "make sure that the input is correct"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: CORRECT, MAKE SURE THAT THE INPUT IS CORRECT.",
+    "example_non_ste": "Make sure that the input is valid.",
+    "example_ste": "Make sure that the input is correct.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "validate",
+    "approved": [
+      "check"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. The canonical synonym table gives 'check' as the approved alternative (Principle P1).",
+    "example_non_ste": "Validate the configuration against the schema.",
+    "example_ste": "Check the configuration against the schema.",
+    "source": "canonical-synonym-table"
+  },
+  {
+    "unapproved": "validated",
+    "approved": [
+      "checked"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'checked' instead.",
+    "example_non_ste": "The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.",
+    "example_ste": "The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.",
+    "source": "rule-files/a-sec1-rule1.14.md"
+  },
+  {
+    "unapproved": "verbose",
+    "approved": [
+      "detailed"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'detailed' instead.",
+    "example_non_ste": "# Set this flag to `true` to turn on debug mode. When debug mode is on,",
+    "example_ste": "# Set this flag to \"true\" to enable debug mode. When enabled, the server\n> # will dump verbose logs to stdout. Setting this flag impacts performance\n> # significantly, so do not enable it in production.",
+    "source": "rule-files/a-sec1-rule1.3.md"
+  },
+  {
+    "unapproved": "verify",
+    "approved": [
+      "make sure",
+      "make sure that the signature is correct",
+      "check"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MAKE SURE, MAKE SURE THAT THE SIGNATURE IS CORRECT.",
+    "example_non_ste": "Verify the signature.",
+    "example_ste": "Make sure that the signature is correct.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "via",
+    "approved": [
+      "through",
+      "by",
+      "authenticate through oauth"
+    ],
+    "pos": "preposition",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: THROUGH, BY, AUTHENTICATE THROUGH OAUTH.",
+    "example_non_ste": "Authenticate via OAuth.",
+    "example_ste": "Authenticate through OAuth.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "visible",
+    "approved": [
+      "see",
+      "make sure that you can see the output in the terminal"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: SEE, MAKE SURE THAT YOU CAN SEE THE OUTPUT IN THE TERMINAL.",
+    "example_non_ste": "Make sure that the output is visible in the terminal.",
+    "example_ste": "Make sure that you can see the output in the terminal.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "watch",
+    "approved": [
+      "monitor",
+      "monitor the log output"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: MONITOR, MONITOR THE LOG OUTPUT.",
+    "example_non_ste": "Watch the log output for errors.",
+    "example_ste": "Monitor the log output for errors.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "whole",
+    "approved": [
+      "entire",
+      "examine all of the codebase"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: ENTIRE, EXAMINE ALL OF THE CODEBASE.",
+    "example_non_ste": "Examine the whole codebase.",
+    "example_ste": "Examine all of the codebase.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "within",
+    "approved": [
+      "in"
+    ],
+    "pos": "verb",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use 'in' instead.",
+    "example_non_ste": "Connection timeout: the database server did not respond in the given time. Check your network configuration and try to connect again.",
+    "example_ste": "Connection timeout: the database server wasn't responding within the allocated timeframe. Please check your network configuration and try reconnecting.",
+    "source": "rule-files/a-sec1-rule1.4.md"
+  },
+  {
+    "unapproved": "wrong",
+    "approved": [
+      "incorrect",
+      "mark the variable to prevent incorrect usage"
+    ],
+    "pos": "adjective",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: INCORRECT, MARK THE VARIABLE TO PREVENT INCORRECT USAGE.",
+    "example_non_ste": "Mark the variable as private to prevent wrong usage.",
+    "example_ste": "Mark the variable as private to prevent incorrect usage.",
+    "source": "a-dictionary.md"
+  },
+  {
+    "unapproved": "yet",
+    "approved": [
+      "but",
+      "compile the project",
+      "but skip the tests",
+      "at this time",
+      "do not deploy the feature at this time"
+    ],
+    "pos": "conjunction",
+    "reason": "Not an approved word in the STE-Code controlled terminology. Use: BUT, COMPILE THE PROJECT, BUT SKIP THE TESTS.",
+    "example_non_ste": "Compile the project, yet skip the tests.",
+    "example_ste": "Compile the project, but skip the tests.",
+    "source": "a-dictionary.md"
+  }
+]
