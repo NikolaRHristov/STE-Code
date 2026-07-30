@@ -136,7 +136,7 @@ Fix findings before advancing to next phase.
 
 | Phase | Workers | Batches | Status |
 |-------|:------:|:------:|:------:|
-| A0 | 2 | 1 inline | ⬜ |
+| A0 | 2 | 1 inline | ✅ |
 | A | 61 | 21 | ⬜ (prompts ready) |
 | B1 | 51 | 17 | 🟢 4/55 done |
 | B2 | 30 | 10 | ⬜ (needs prompts) |

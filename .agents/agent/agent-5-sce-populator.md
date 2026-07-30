@@ -6,8 +6,8 @@ You are the SCE POPULATOR. Your job: regenerate the SCE product directory from t
 
 1. `ste-code/README.md` — Current pipeline state
 2. `SCE/README.md` — SCE architecture (4 strata)
-3. `SCE/compute/schemas/rule-frontmatter.schema.json` — Required frontmatter format
-4. `SCE/compute/schemas/vocabulary-entry.schema.json` — Vocabulary entry format
+3. `ste-code/v2/compute/schemas/rule-frontmatter.schema.json` — Required frontmatter format
+4. `ste-code/v2/compute/schemas/vocabulary-entry.schema.json` — Vocabulary entry format
 
 ## SOURCE (all complete, enriched)
 
@@ -75,6 +75,85 @@ Run every generated file against its schema. Fix any violations. Ensure:
 - All frontmatter properties present and valid
 - Vocabulary entries conform to schema
 - No stale content from pre-enrichment era
+
+## Populated Rule Example (reference)
+
+Complete example of a populated `SCE/core/rules/rule-1.1.md`:
+
+```markdown
+---
+id: rule-1.1
+section: 1
+principle: P1
+title: Use Approved Words, Technical Nouns, or Technical Verbs
+constraint-type: vocabulary
+scope: [noun, verb, adjective]
+severity: blocking
+agentic-load: required
+domain: [documentation, comments, error-messages, commit-messages]
+related-rules: [rule-1.2, rule-1.3, rule-1.4, rule-1.5, rule-1.6]
+anti-patterns:
+  - Using unapproved synonyms (leverage → use, utilize → use)
+  - Misclassifying technical nouns as unapproved words
+  - Using obsolete dictionary entries
+synonym-table: true
+---
+
+# Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+
+## Original Rule
+
+**Rule 1.1** Use words that are:
+- Approved in the dictionary
+- Technical nouns
+- Technical verbs.
+
+## STE-Code Adaptation
+
+In code documentation, apply this rule to:
+- **Docstrings**: All words must be approved or technical code nouns/verbs
+- **README files**: Use approved vocabulary for procedural instructions
+- **Error messages**: All words must be approved (no slang in error text)
+- **Commit messages**: Approved words for the subject line and body
+- **Comments**: Inline and block comments follow approved vocabulary
+
+### Examples
+
+**Non-compliant:**
+```
+// This helper basically leverages the cache to speed things up
+function getCached(key) { ... }
+```
+
+**STE-Code compliant:**
+```
+// Uses the cache to get the value faster.
+// Falls back to the database if the key is not in the cache.
+function getCached(key) { ... }
+```
+
+### Edge Cases
+
+| Edge Case | Resolution |
+|-----------|------------|
+| Framework method name is unapproved word (e.g., `fetch`) | Use as-is in code; in documentation, prefer approved synonym ("get") |
+| Domain-specific acronym (e.g., REST, JWT) | Classify as technical noun; document on first use |
+| Word is APPROVED in STE but uncommon in code domain | Prefer the more common code-domain synonym; document the choice |
+| Third-party library name uses banned word | Use the library name as-is (technical noun); do not rename |
+| Approved word has different meaning in code context | Add a domain-specific entry in the vocabulary JSON with context notes |
+```
+
+## Edge Cases (Pipeline-Wide)
+
+| Edge Case | Resolution |
+|-----------|------------|
+| Adapted rule file exists but is empty (0 bytes) | Skip with warning; log to `SCE/compute/logs/skip-empty-<id>.json` |
+| Frontmatter field `principle` cannot be inferred from rule text | Default to `P1`; flag with `inferred: true` in output |
+| Dictionary entry has conflicting APPROVED/UNAPPROVED tags | Resolve from `ste-code/refined/` (100.0 audit) as source of truth |
+| Rule ID pattern doesn't match schema regex | Normalize: `Rule 1.1` → `rule-1.1`, `GR-1` → `gr-1` |
+| Vocabulary entry is missing `meaning` field | Look up in `ste-code/merged/master.md`; if absent, add `meaning: "TBD"` |
+| Synonym table entry maps to itself (no-op) | Skip and log; do not create self-referencing entries |
+| System prompt exceeds target token count | Truncate least-common entries with `priority: low` annotation |
 
 ## KEY FACTS
 - 19 categories (NOT 22)
