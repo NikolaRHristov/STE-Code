@@ -12,10 +12,11 @@ Usage:
   python3 .agents/benchmark/run.py --compare  (run all 4 and compare)
 """
 
-import os, sys, json, time, re, subprocess, tempfile
+import os, sys, json, time, re
 from pathlib import Path
 from datetime import datetime, timezone
-from collections import defaultdict
+
+from benchmark_lib import PRINCIPLE_KEYWORDS, calc_correctness
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
 BENCHMARK_DIR = Path(__file__).resolve().parent
@@ -71,20 +72,16 @@ def load_ste_code_level5():
 Apply the FULL STE-Code Level 5 standard. Follow ALL 53 rules below.
 
 """
-    # Load rule titles + first key sentence from each rule
     for r in rules:
         lines = r.read_text().split("\n")
-        # First line is the rule title
         title = lines[0].strip("# ").strip() if lines else r.stem
         prompt += f"## {title}\n"
-        # Find first substantive paragraph (skip metadata lines)
         for line in lines[1:]:
             s = line.strip()
             if s and not s.startswith(">") and not s.startswith("##") and len(s) > 30:
                 prompt += f"{s}\n\n"
                 break
     
-    # Add synonym table
     synonym_file = PROJECT / "ste-code" / "data" / "synonym-table.json"
     if synonym_file.exists():
         data = json.loads(synonym_file.read_text())
@@ -107,10 +104,7 @@ IMPORTANT: Do NOT create or modify any files. Output text only.
     return prompt
 
 
-# ── Test case generators for each mode ──
-
 def generate_sloppy_tests():
-    """Generate intentionally sloppy documentation test cases."""
     return [
         {
             "id": "sloppy-001", "category": "sloppy-docs",
@@ -161,7 +155,6 @@ def generate_sloppy_tests():
 
 
 def generate_ste_baseline_tests():
-    """Test how original ASD-STE100 handles code documentation."""
     return [
         {
             "id": "ste-base-001", "category": "ste-baseline",
@@ -211,10 +204,7 @@ def generate_ste_baseline_tests():
     ]
 
 
-# ── Load existing tests ──
-
 def load_existing_tests():
-    """Load all existing test cases for the 'original' mode."""
     tests = []
     for cat_file in sorted(TEST_DIR.glob("category-*.json")):
         with open(cat_file) as f:
@@ -225,12 +215,8 @@ def load_existing_tests():
     return tests
 
 
-# ── Run one worker ──
-
 def run_worker(test_case, system_prompt, mode_name, run_dir):
-    """Run one benchmark worker. Returns output text."""
     is_sloppy = "sloppy" in test_case.get("category", "")
-    is_baseline = "ste-base" in test_case.get("id", "")
     
     if is_sloppy:
         full_prompt = f"""{system_prompt}
@@ -249,7 +235,6 @@ Check this text for compliance and correct it:
 
 Output the corrected text, then a compliance summary."""
     
-    # Write prompt to temp file
     prompt_file = run_dir / f"{test_case['id']}-prompt.txt"
     prompt_file.write_text(full_prompt)
     
@@ -267,30 +252,10 @@ Output the corrected text, then a compliance summary."""
     return pid
 
 
-# ── Scoring (same as original orchestrator) ──
-
-PRINCIPLE_KEYWORDS = {
-    "P1": ["approved", "dictionary"],
-    "P2": ["part of speech"],
-    "P3": ["meaning"],
-    "P4": ["verb", "active voice", "passive", "imperative"],
-    "P5": ["technical", "noun", "keyword", "framework"],
-    "P6": ["non-approved"],
-    "P7": ["noun as verb", "technical noun"],
-    "P8": ["standard", "well-known"],
-    "P9": ["short", "clear"],
-    "P10": ["slang", "jargon", "regional", "vague", "informal"],
-    "P11": ["consistent", "one term", "synonym"],
-    "P12": ["technical verb", "build", "deploy", "test"],
-    "P13": ["verb as noun"],
-    "P14": ["american", "spelling"],
-}
-
 def calc_score(test_case, output):
-    """Calculate correctness score 0-1."""
+    """Calculate correctness score 0-1 using benchmark_lib as the canonical source."""
     output_lower = output.lower()
     
-    # Check principles
     satisfied = []
     for p in test_case.get("expected_principles", []):
         if p in PRINCIPLE_KEYWORDS:
@@ -298,29 +263,23 @@ def calc_score(test_case, output):
             if found or re.search(r'\b' + re.escape(p) + r'\b', output):
                 satisfied.append(p)
     
-    # Check forbidden
     forbidden = test_case.get("forbidden_keywords", [])
     forbidden_found = [kw for kw in forbidden if kw.lower() in output_lower]
     
-    # Check expected
     expected = test_case.get("expected_keywords", [])
     expected_found = [kw for kw in expected if kw.lower() in output_lower]
     
-    # Score formula
-    score = 0.4
-    expected_principles = test_case.get("expected_principles", [])
-    if expected_principles:
-        score += 0.6 * len(satisfied) / len(expected_principles)
-    if forbidden:
-        score -= 0.3 * len(forbidden_found) / len(forbidden)
-    if expected:
-        score += 0.1 * len(expected_found) / len(expected)
-    
-    return round(max(0.0, min(1.0, score)), 2)
+    return calc_correctness(
+        test_case.get("expected_principles", []),
+        satisfied,
+        forbidden_found,
+        len(forbidden),
+        expected_found,
+        len(expected),
+    )
 
 
 def run_mode(mode_name, system_prompt, test_cases, dry_run=False):
-    """Run all tests for one mode."""
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     run_dir = RESULTS_DIR / f"{mode_name}-{timestamp}"
     os.makedirs(run_dir, exist_ok=True)
@@ -334,7 +293,6 @@ def run_mode(mode_name, system_prompt, test_cases, dry_run=False):
             print(f"  [{mode_name}] {tc['id']}: {tc['description']}")
         return None
     
-    # Launch all workers
     workers = {}
     for tc in test_cases:
         pid = run_worker(tc, system_prompt, mode_name, run_dir)
@@ -342,7 +300,6 @@ def run_mode(mode_name, system_prompt, test_cases, dry_run=False):
     
     print(f"  Launched {len(workers)} workers. Waiting...")
     
-    # Wait for all
     MAX_WAIT = 600
     elapsed = 0
     pending = set(workers.keys())
@@ -354,20 +311,19 @@ def run_mode(mode_name, system_prompt, test_cases, dry_run=False):
                 wpid, status = os.waitpid(workers[tid]["pid"], os.WNOHANG)
                 if wpid != 0:
                     pending.discard(tid)
-            except ChildProcessError:
+            except OSError:
                 pending.discard(tid)
         if elapsed % 30 == 0 and pending:
             print(f"    ... {len(pending)} remaining ({elapsed}s)")
     
-    # Score
     results = []
     for tid, wdata in workers.items():
         tc = wdata["tc"]
         out_file = run_dir / f"{tid}-output.txt"
         try:
             output = out_file.read_text()
-        except:
-            output = "OUTPUT_MISSING"
+        except OSError as e:
+            output = f"OUTPUT_MISSING: {e}"
         
         score = calc_score(tc, output)
         passed = score >= 0.7
@@ -379,10 +335,7 @@ def run_mode(mode_name, system_prompt, test_cases, dry_run=False):
             "passed": passed,
             "latency_ms": int((time.time() - wdata["start"]) * 1000),
         })
-        
-        status = "PASS" if passed else "FAIL"
-        
-    # Aggregate
+    
     passed = sum(1 for r in results if r["passed"])
     scores = [r["score"] for r in results]
     avg_score = sum(scores) / len(scores) if scores else 0
@@ -390,7 +343,6 @@ def run_mode(mode_name, system_prompt, test_cases, dry_run=False):
     print(f"\n  {mode_name}: {passed}/{len(results)} passed ({passed/len(results)*100:.1f}%)")
     print(f"  Avg score: {avg_score:.3f}")
     
-    # Save
     aggregate = {
         "mode": mode_name,
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -414,17 +366,14 @@ def main():
         if arg == "--mode" and i + 1 < len(sys.argv):
             mode_filter = sys.argv[i + 1]
     
-    # Load Level 5 prompt
     global PROMPT_STE_CODE
     PROMPT_STE_CODE = load_ste_code_level5()
     print(f"Level 5 prompt: {len(PROMPT_STE_CODE)} chars")
     
-    # Test cases
     existing = load_existing_tests()
     sloppy = generate_sloppy_tests()
     ste_base = generate_ste_baseline_tests()
     
-    # Modes to run
     modes = []
     if compare or not mode_filter:
         modes = [
@@ -448,7 +397,6 @@ def main():
         if r:
             results[mode_name] = r
     
-    # Comparison
     if len(results) >= 2:
         print(f"\n{'='*60}")
         print(f"  COMPARISON")
