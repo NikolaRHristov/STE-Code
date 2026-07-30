@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 13,
+  "rule_file": "a-sec1-rule1.8",
+  "entries": [
+    {
+      "rule": "rule-1.8",
+      "principle": "P8",
+      "non_ste_example": "The data storage component uses the thing that holds temporary query results to make reads faster.",
+      "ste_example": "The database uses the cache layer to make reads faster.",
+      "explanation": "\"thing that holds temporary query results\" is a descriptive phrase, not a technical noun. \"cache layer\" is a standard, well-known code-domain technical noun (category 7, Algorithmic terms). P8 requires using approved technical nouns instead of invented descriptions. The reader recognizes \"cache layer\" as a precise term with an established meaning across all code domains."
+    },
+    {
+      "rule": "rule-1.8",
+      "principle": "P11",
+      "non_ste_example": "The API gateway validates the auth token. If the session credential is expired, the gateway rejects the request. The access key must include the correct permissions.",
+      "ste_example": "The API gateway validates the access token. If the access token is expired, the gateway rejects the request. The access token must include the correct permissions.",
+      "explanation": "\"auth token,\" \"session credential,\" and \"access key\" all refer to the same concept. P11 requires one term per concept — use the approved term consistently. \"access token\" is the standard code-domain technical noun (category 19, Network/I/O terms). Mixing three different names for one thing causes confusion and makes the documentation harder to search."
+    },
+    {
+      "rule": "rule-1.8",
+      "principle": "P9",
+      "non_ste_example": "The continuous integration and continuous deployment pipeline workflow process failed at the step where it verifies the code quality.",
+      "ste_example": "The CI/CD pipeline failed at the lint step.",
+      "explanation": "\"continuous integration and continuous deployment pipeline workflow process\" is a long descriptive phrase when the approved abbreviation \"CI/CD pipeline\" is standard (category 5, Deployment targets). \"the step where it verifies the code quality\" is a descriptive clause when \"lint step\" is the approved technical noun (category 3, Dev tools). P9 prefers short, clear technical nouns over long descriptions."
+    },
+    {
+      "rule": "rule-1.8",
+      "principle": "P8",
+      "non_ste_example": "The thing that processes payments did not get a response from the external bank connector.",
+      "ste_example": "The PaymentProcessor did not get a response from the BankGateway.",
+      "explanation": "\"the thing that processes payments\" and \"external bank connector\" are invented descriptions. \"PaymentProcessor\" and \"BankGateway\" are code-domain technical nouns approved in the project (category 6, Modules and services). P8 requires using the approved class names from the codebase. Just as aerospace documentation uses official part names, code documentation must use the exact names that appear in the source code."
+    },
+    {
+      "rule": "rule-1.8",
+      "principle": "P10",
+      "non_ste_example": "The codebase has a god object that handles all the plumbing between the various moving parts of the app.",
+      "ste_example": "The codebase has a large class that manages all the connections between the modules of the application.",
+      "explanation": "\"god object\" is programming jargon for an anti-pattern, not a standard technical noun. \"plumbing\" and \"moving parts\" are informal metaphors that do not belong in any of the 19 code-domain categories. P10 forbids jargon, slang, and regional terms. The STE version uses standard approved nouns with clear, literal meanings that any reader can understand without domain-specific slang knowledge."
+    }
+  ]
+}

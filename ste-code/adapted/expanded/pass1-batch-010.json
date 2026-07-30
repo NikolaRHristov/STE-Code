@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 10,
+  "rule_file": "a-sec1-rule1.5",
+  "entries": [
+    {
+      "rule": "rule-1.5",
+      "principle": "P5",
+      "non_ste_example": "Use the thing to manage different versions of the source code.",
+      "ste_example": "Use Git to track different versions of the source code.",
+      "explanation": "'thing' is not a code-domain technical noun in any STE-Code category. 'Git' is a well-known code-domain technical noun in category 3 (Development tools, environments, and support equipment). P5 allows technical code nouns directly in documentation. P8 also applies: prefer standard, well-known technical nouns over vague descriptions."
+    },
+    {
+      "rule": "rule-1.5",
+      "principle": "P11",
+      "non_ste_example": "The link between the user records and the order records is missing from the data storage.",
+      "ste_example": "The foreign key between the user table and the order table is missing from the schema.",
+      "explanation": "'link' and 'records' are not precise code-domain technical nouns — they are ambiguous terms with multiple meanings. 'foreign key' and 'table' are code-domain technical nouns in category 18 (Database and storage terminology). P11 requires one term per concept: the standard database term is 'foreign key,' not 'link.' P5 permits these category-approved technical nouns."
+    },
+    {
+      "rule": "rule-1.5",
+      "principle": "P5",
+      "non_ste_example": "The small window that shows an alert to the user has a close thing at the top.",
+      "ste_example": "The modal that shows an alert to the user has a close button at the top.",
+      "explanation": "'small window' and 'thing' are not code-domain technical nouns — they are everyday descriptions that lack precision. 'modal' and 'button' are both code-domain technical nouns in category 8 (Interface elements and navigation). P5 allows these terms because they fit an approved code-domain category. The STE version communicates exactly which UI component is referenced."
+    },
+    {
+      "rule": "rule-1.5",
+      "principle": "P5",
+      "non_ste_example": "The system that handles incoming web traffic uses the specified network point.",
+      "ste_example": "The load balancer uses the specified port.",
+      "explanation": "'system that handles incoming web traffic' and 'network point' are long descriptive phrases, not technical nouns. 'load balancer' is a code-domain technical noun in category 6 (Systems, subsystems, and architectural components), and 'port' is in category 19 (Network and protocol terminology). P5 and P9 both apply: prefer short, clear technical nouns that fit approved categories."
+    },
+    {
+      "rule": "rule-1.5",
+      "principle": "P11",
+      "non_ste_example": "The approach for finding a value in the sorted list looks at the middle item first.",
+      "ste_example": "The binary search for finding a value in the sorted array looks at the middle item first.",
+      "explanation": "'approach' is not a code-domain technical noun — it is a general-purpose word that does not fit any of the 19 categories. 'binary search' is a code-domain technical noun in category 7 (Mathematical, algorithmic, and scientific terms). P11 requires one term per concept: the standard algorithmic term is 'binary search,' not 'approach.' P5 allows technical nouns from approved categories."
+    }
+  ]
+}

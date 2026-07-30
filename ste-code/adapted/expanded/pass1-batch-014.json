@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 14,
+  "rule_file": "a-sec1-rule1.9",
+  "entries": [
+    {
+      "rule": "rule-1.9",
+      "principle": "P9",
+      "non_ste_example": "Build the Docker container image from the multi-stage Dockerfile configuration specification that defines the runtime environment.",
+      "ste_example": "Build the image from the Dockerfile (line 1).",
+      "explanation": "P9: Prefer short, clear technical nouns. 'Docker container image' is reduced to 'image' because the Dockerfile context and line number identify the item. 'Multi-stage Dockerfile configuration specification' is reduced to 'Dockerfile' — the shortest unambiguous term. This follows the spec pattern where 'four stainless steel pan head machine screws (10)' becomes 'four screws (10)' because the index number and illustration identify the part."
+    },
+    {
+      "rule": "rule-1.9",
+      "principle": "P9",
+      "non_ste_example": "Install the Node.js package manager distributed open-source utility library that supplies common helper functions for array and object manipulation.",
+      "ste_example": "Install the lodash package.",
+      "explanation": "P9: Prefer short, clear technical nouns. The long descriptive phrase 'Node.js package manager distributed open-source utility library that supplies common helper functions for array and object manipulation' is replaced with the specific technical noun 'lodash package' — a two-word compound that is short, unambiguous, and fits Category 4 (Dependencies, packages, and libraries). P8 also applies: use standard, well-known technical nouns over descriptive phrases."
+    },
+    {
+      "rule": "rule-1.9",
+      "principle": "P9",
+      "non_ste_example": "Set the environment configuration variable that contains the database uniform resource locator connection string.",
+      "ste_example": "Set the DATABASE_URL variable.",
+      "explanation": "P9: Prefer short, clear technical nouns. 'Environment configuration variable that contains the database uniform resource locator connection string' is reduced to the specific variable name 'DATABASE_URL' — a single technical noun that is both short and unambiguous. The expanded form 'uniform resource locator' is replaced with the standard abbreviation 'URL.' P1 (use approved words) and P9 (short technical nouns) both apply. If the variable name is not sufficient context, add one adjective: 'the DATABASE_URL connection variable.'"
+    },
+    {
+      "rule": "rule-1.9",
+      "principle": "P9",
+      "non_ste_example": "The TypeScript generic type parameter that constrains the reducer action payload shape must extend the base interface definition.",
+      "ste_example": "The action type must extend the base interface.",
+      "explanation": "P9: Prefer short, clear technical nouns. 'TypeScript generic type parameter that constrains the reducer action payload shape' is a long noun cluster of six words. 'Action type' is a two-word technical noun that is unambiguous in the context of a reducer definition. The code snippet or type definition provides the remaining context — just as the spec illustration identifies the screw. P11 (one term per concept) also applies: the standard Redux term is 'action type,' not a full generic description."
+    },
+    {
+      "rule": "rule-1.9",
+      "principle": "P9",
+      "non_ste_example": "The continuous integration and delivery automated build verification pipeline checks all source code changes before the merge operation to the main development branch.",
+      "ste_example": "The CI pipeline checks all changes before the merge.",
+      "explanation": "P9: Prefer short, clear technical nouns. 'Continuous integration and delivery automated build verification pipeline' (9 words) is reduced to 'CI pipeline' (2 words) — the standard abbreviation and modifier. 'Source code changes' is reduced to 'changes' because the pipeline context is clear. 'Main development branch' is reduced to 'merge' (the operation, not the branch) because a merge into main is the implied destination. The spec pattern applies: remove all adjectives from the noun cluster that the context already supplies."
+    }
+  ]
+}

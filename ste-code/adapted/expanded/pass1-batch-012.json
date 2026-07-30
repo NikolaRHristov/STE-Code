@@ -1,0 +1,42 @@
+{
+  "pass": "rule-examples",
+  "batch": 12,
+  "rule_file": "a-sec1-rule1.7",
+  "entries": [
+    {
+      "rule": "rule-1.7",
+      "principle": "P13",
+      "non_ste_example": "Queue the image processing tasks before the worker starts.",
+      "ste_example": "Add the image processing tasks to the queue before the worker starts.",
+      "explanation": "\"Queue\" is a code-domain technical noun (category 18, infrastructure and messaging). P13 forbids using technical nouns as verbs. The STE version uses the approved verb \"add\" (per P12 synonym table: add) and keeps \"queue\" as a code-domain technical noun in a prepositional phrase."
+    },
+    {
+      "rule": "rule-1.7",
+      "principle": "P13",
+      "non_ste_example": "Archive the log files that are older than 30 days.",
+      "ste_example": "Move the log files that are older than 30 days to the archive.",
+      "explanation": "\"Archive\" is a code-domain technical noun (category 18, database and storage terminology). P13 forbids using technical nouns as verbs. The STE version uses the approved verb \"move\" and keeps \"archive\" as a code-domain technical noun in a prepositional phrase, paralleling the spec pattern where \"oil\" must remain a noun."
+    },
+    {
+      "rule": "rule-1.7",
+      "principle": "P13",
+      "non_ste_example": "The authentication module interfaces with the external OAuth provider.",
+      "ste_example": "The authentication module connects to the external OAuth provider through an interface.",
+      "explanation": "\"Interface\" is a code-domain technical noun (category 17, software architecture and design patterns). P13 forbids using technical nouns as verbs. The STE version uses the approved verb \"connect\" (per P12 synonym table: connect) and keeps \"interface\" as a code-domain technical noun. This adapts the spec pattern where technical nouns may not be verbed even in common usage."
+    },
+    {
+      "rule": "rule-1.7",
+      "principle": "P13",
+      "non_ste_example": "Flag the user accounts that have not verified their email address.",
+      "ste_example": "Set a flag for the user accounts that have not verified their email address.",
+      "explanation": "\"Flag\" is a code-domain technical noun (category 18, configuration and metadata). P13 forbids using technical nouns as verbs. The STE version uses the approved verb \"set\" (per P12 synonym table: set) and keeps \"flag\" as a code-domain technical noun with an article. This adapts the spec \"oil\" pattern — the action is expressed through a general-purpose approved verb."
+    },
+    {
+      "rule": "rule-1.7",
+      "principle": "P13",
+      "non_ste_example": "Thread the parsing operation to reduce the total execution time.",
+      "ste_example": "Run the parsing operation in a thread to reduce the total execution time.",
+      "explanation": "\"Thread\" is a code-domain technical noun (category 16, computer science and concurrency). P13 forbids using technical nouns as verbs. However, like \"drill\" in the original spec, \"thread\" can also be a code-domain technical verb (rule 1.12, category 2c, system operations) when it refers to the act of creating a thread. Both usages are valid in their correct part-of-speech category. The STE version uses the noun form clearly in a prepositional phrase, paralleling the spec \"log\" dual-category example."
+    }
+  ]
+}

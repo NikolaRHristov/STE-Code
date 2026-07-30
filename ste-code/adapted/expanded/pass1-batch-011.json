@@ -1,0 +1,37 @@
+{"pass": "rule-examples", "batch": 11, "rule_file": "a-sec1-rule1.6", "entries": [
+  {
+    "rule": "rule-1.6",
+    "principle": "P6",
+    "non_ste_example": "Transmit each HTTP request through the gateway to the suitable microservice for processing.",
+    "ste_example": "Send each HTTP request through the entry point to the correct microservice for processing.",
+    "explanation": "P6: Non-approved words only when they are technical nouns. 'Gateway' is not approved in the controlled terminology and its alternative is 'entry point (n).' Just as the spec requires 'bottom' instead of 'base' when referring to a surface, you must use 'entry point' instead of 'gateway' when referring to a general network entry. But you can use 'gateway' as part of a code-domain technical noun: 'API gateway' is a technical noun (Category 19 — Network, protocol, API, and I/O terms). In that context, 'Send each HTTP request through the API gateway to the correct microservice' is STE-compliant because 'API gateway' is the approved technical name in the subject field."
+  },
+  {
+    "rule": "rule-1.6",
+    "principle": "P6",
+    "non_ste_example": "Initiate the worker to retrieve tasks from the message queue and execute each one.",
+    "ste_example": "Start the process to get tasks from the message queue and do each one.",
+    "explanation": "P6: Non-approved words only when they are technical nouns. 'Worker' is not approved in the controlled terminology and its alternative is 'process (n).' This adapts the spec pattern where 'base' is not approved and its alternative is 'bottom.' Just as you must use 'bottom' instead of 'base' for a surface, you must use 'process' instead of 'worker' for a general execution unit. But you can use 'worker' as part of a code-domain technical noun: 'background worker' is a technical noun (Category 6 — Modules, classes, components, and services). 'Start the background worker' is STE-compliant because the two-word compound is the approved technical name."
+  },
+  {
+    "rule": "rule-1.6",
+    "principle": "P6",
+    "non_ste_example": "The system leverages the token to verify the identity of each API consumer.",
+    "ste_example": "The system uses the symbol to check the identity of each API consumer.",
+    "explanation": "P6: Non-approved words only when they are technical nouns. 'Token' is not approved in the controlled terminology and its alternative is 'symbol (n).' Just as 'backup' is not approved in the spec and its alternative is 'emergency (n),' 'token' is not approved in STE-Code and its alternative is 'symbol.' But you can use 'token' as part of a code-domain technical noun: 'access token' is a technical noun (Category 19 — Network, protocol, API, and I/O terms). 'The system uses the access token to check the identity' is STE-compliant — just as 'backup file' is STE-compliant in the spec."
+  },
+  {
+    "rule": "rule-1.6",
+    "principle": "P6",
+    "non_ste_example": "Configure the hook to validate all staged files prior to the commit operation.",
+    "ste_example": "Set the callback to check all staged files before the commit.",
+    "explanation": "P6: Non-approved words only when they are technical nouns. 'Hook' is not approved in the controlled terminology and its alternative is 'callback (n).' Just as 'main' is not approved and its alternative is 'primary (adj)' in the spec, 'hook' is not approved and its alternative is 'callback.' But you can use 'hook' as part of a code-domain technical noun: 'pre-commit hook' is a technical noun (Category 3 — Development tools and build systems). 'Set the pre-commit hook to check all staged files' is STE-compliant — just as 'main landing gear' is STE-compliant in the spec, and it would be incorrect to say 'primary landing gear.'"
+  },
+  {
+    "rule": "rule-1.6",
+    "principle": "P6",
+    "non_ste_example": "Employ the pipe to forward the output of the compiler to the test runner.",
+    "ste_example": "Use the channel to send the output of the compiler to the test runner.",
+    "explanation": "P6: Non-approved words only when they are technical nouns. 'Pipe' is not approved in the controlled terminology and its alternative is 'channel (n).' This adapts the spec pattern where 'relative' is not in the dictionary but you can use it as part of 'relative angular position' (Category 7). Similarly, 'pipe' is not approved, but you can use it as part of a code-domain technical noun: 'named pipe' is a technical noun (Category 19 — Network, protocol, API, and I/O terms). 'Use the named pipe to send the output' is STE-compliant because the two-word compound is an approved technical name in the operating system subject field."
+  }
+]}
