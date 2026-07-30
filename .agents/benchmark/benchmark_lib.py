@@ -7,11 +7,8 @@ Rationale:
   All three scripts need identical extraction and scoring logic to produce
   comparable results. Duplication caused divergence in PRINCIPLE_KEYWORDS
   and extraction regexes across files. This library eliminates that.
-
-Canonical source: orchestrator.py (lines 226-338).
 """
 
-import difflib
 import json
 import os
 import re
@@ -29,8 +26,9 @@ from typing import Dict, List, Optional, Tuple
 # These keywords are designed to catch explicit discussion of each
 # principle, which is the primary signal in this benchmark.
 #
-# SOURCE OF TRUTH: orchestrator.py lines 226-241.
-# When updating, change HERE and all consumers pick up the update.
+# CANONICAL SOURCE: this file (benchmark_lib.py).
+# orchestrator.py, rescore.py, and orchestrator-control.py all import
+# PRINCIPLE_KEYWORDS from here. Update here only.
 PRINCIPLE_KEYWORDS: Dict[str, List[str]] = {
     "P1":  ["approved word", "dictionary", "approved term", "approved vocabulary"],
     "P2":  ["part of speech", "noun", "verb", "adjective", "adverb", "preposition", "conjunction"],
@@ -124,6 +122,32 @@ def extract_compliance_section(output: str) -> str:
         escaped = re.escape(marker)
         m = re.search(escaped + r'\s*\n(.*)', output, re.DOTALL | re.IGNORECASE)
         if m and m.group(1).strip():
+    """Extract compliance summary section from worker output.
+
+    Attempts several known heading markers in priority order.
+    Returns empty string when no compliance section is found.
+
+    All markers use the same capture-group branch: match the heading,
+    then capture everything after it.  Bold markers (** **) are handled
+    by stripping bold syntax from the output before matching so the
+    same regex path applies uniformly.
+    """
+    # Normalise bold markdown headings to plain text for matching.
+    # e.g. "**Compliance Summary**" -> "Compliance Summary"
+    normalised = re.sub(r'\*\*([^*]+)\*\*', r'\1', output)
+
+    markers: List[str] = [
+        r'## Compliance Summary',
+        r'COMPLIANCE SUMMARY',
+        r'# Compliance Summary',
+        r'Compliance Summary',
+    ]
+    for marker in markers:
+        m = re.search(
+            marker + r'\s*\n(.*)',
+            normalised, re.DOTALL | re.IGNORECASE,
+        )
+        if m:
             return m.group(1).strip()
     return ""
 
@@ -193,7 +217,7 @@ def calc_correctness(
                            expected principles.
       forbidden   =-0.3   Maximum penalty for forbidden keywords. Capped so
                            one bad word cannot zero out an otherwise good
-                           response.
+                           response.  Skipped when total_forbidden == 0.
       expected    =+0.1   Small bonus for using approved vocabulary.
                            Deliberately low because a worker may choose
                            different but equally valid terms.
