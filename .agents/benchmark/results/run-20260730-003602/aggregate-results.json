@@ -1,8 +1,0 @@
-{
-  "benchmark_id": "ste-code-v1.0.0",
-  "timestamp": "2026-07-30T00:36:02Z",
-  "model": "deepseek-v4-pro",
-  "total_tests": 35,
-  "results": [
-    {"test_id": "bench-001", "category": "readme", "correctness_score": 0.5, "latency_ms": 35565, "passed": false, "principles_found": "P1,P10,P4", "principles_missed": "", "forbidden_found": "bunch,stuff,should,everything,properly"},
-    {"test_id": "bench-002", "category": "readme", "correctness_score": 0.5, "latency_ms": 36085, "passed": false, "principles_found": "P1,P5,P10", "principles_missed": "", "forbidden_found": "bunch,everything,you,need,to"}

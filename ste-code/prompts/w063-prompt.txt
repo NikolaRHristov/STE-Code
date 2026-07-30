@@ -1,1 +1,0 @@
-Read spec/issue-09-2025/page-0249.md through page-0252.md. Extract ALL content exactly into ste-code/extracted/w063-p249-252.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file.

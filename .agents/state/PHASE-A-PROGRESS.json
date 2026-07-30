@@ -1,0 +1,27 @@
+{
+  "done": [
+    "fix-001--agents-agent-agent-1-extractor-md",
+    "fix-002--agents-agent-agent-2-refiner-md",
+    "fix-003--agents-agent-agent-3-auditor-md",
+    "fix-004--agents-agent-agent-4-continuation-md",
+    "fix-005--agents-agent-agent-5-sce-populator-md",
+    "fix-006--agents-agent-agent-6-phi-sce-md",
+    "fix-007--agents-agent-agent-7-level-worker-md",
+    "fix-008--agents-agent-agent-8-extension-worker-m",
+    "fix-009--agents-agent-agent-9-translations-md",
+    "fix-010--agents-skills-extraction-SKILL-md",
+    "fix-011--agents-skills-refinement-SKILL-md",
+    "fix-012--agents-skills-merging-SKILL-md",
+    "fix-013--agents-skills-adaptation-SKILL-md",
+    "fix-014--agents-skills-artifacts-SKILL-md",
+    "fix-015--agents-skills-auditing-SKILL-md",
+    "fix-018--agents-skills-benchmarking-SKILL-md"
+  ],
+  "batches_done": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}
