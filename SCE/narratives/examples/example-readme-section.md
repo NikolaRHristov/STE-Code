@@ -9,13 +9,13 @@ rules-demonstrated: [P1, P5, P7, P9, P11, P14]
 
 ## Non-STE (Violations)
 
-```markdown
+````markdown
 ## Getting Started
 
 To get things going, you'll want to grab the dependencies and then kick off
 the dev server. Make sure you've got Node.js installed (we recommend the LTS
 version) before you do anything.
-```
+````
 
 **Violations:**
 - `get things going` → unapproved jargon (P10)
@@ -26,7 +26,7 @@ version) before you do anything.
 
 ## STE-Code Compliant
 
-```markdown
+````markdown
 ## Quick Start
 
 **NOTE:** Install Node.js LTS before you run these steps.
@@ -39,6 +39,6 @@ version) before you do anything.
    ```bash
    npm run dev
    ```
-```
+````
 
 **Compliance:** 0 violations. Steps are imperative and sequential. No ambiguous pronouns. All verbs are approved (`install`, `run`, `start`). Sentences are under 20 words.

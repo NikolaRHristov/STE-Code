@@ -15,13 +15,33 @@
     "fix-013--agents-skills-adaptation-SKILL-md",
     "fix-014--agents-skills-artifacts-SKILL-md",
     "fix-015--agents-skills-auditing-SKILL-md",
-    "fix-018--agents-skills-benchmarking-SKILL-md"
+    "fix-018--agents-skills-benchmarking-SKILL-md",
+    "fix-016--agents-skills-validation-SKILL-md",
+    "fix-017--agents-skills-continuation-SKILL-md",
+    "fix-019--agents-skills-level-worker-SKILL-md",
+    "fix-020--agents-skills-extension-worker-SKILL-md",
+    "fix-021--agents-skills-translations-SKILL-md",
+    "fix-022--agents-skills-state-report-md",
+    "fix-023--agents-skills-continuation-extractor-md",
+    "fix-024--agents-skills-continuation-refiner-md",
+    "fix-025--agents-skills-continuation-continuation",
+    "fix-026--agents-skills-spec-extraction-ste-code-",
+    "fix-027--agents-skills-spec-extraction-ste-code-",
+    "fix-028--agents-skills-spec-extraction-ste-code-",
+    "fix-029--agents-skills-spec-extraction-ste-code-",
+    "fix-030--agents-skills-spec-extraction-ste-code-"
   ],
   "batches_done": [
     1,
     2,
     3,
     4,
-    5
-  ]
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "updated": "2026-07-30T12:05:03.360056+00:00"
 }

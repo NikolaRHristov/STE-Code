@@ -105,11 +105,11 @@ Never merge STE and non-STE into the same line. Never abbreviate examples with "
 
 ### Rule 5: CODE BLOCKS
 Any code-like content (pipeline steps, shell commands, Python snippets) must be in fenced code blocks with a language identifier:
-```
+````
 ```bash
 hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
 ```
-```
+````
 
 **Why this rule exists:** Unfenced code was interpreted as markdown headings and lists, breaking document structure. Python snippets without language identifiers confused syntax highlighters during review and adaptation.
 
