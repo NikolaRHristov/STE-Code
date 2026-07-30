@@ -31,6 +31,21 @@ hermes -z "$(cat /tmp/ext-worker-prompt.txt)" -m deepseek-v4-pro --yolo > OUTPUT
 - `git gcommit-hermes "Extension batch N: <area>"` after each batch
 - Never exceed 20 entries per worker
 
+## Actions
+
+### `generate` — Fill SCE gap areas
+```bash
+python3 .agents/benchmark/launch-levels.py  # (to be adapted for extension)
+```
+Output: `SCE/data/vocabulary/generated/`, `SCE/core/categories/generated/`, `SCE/compute/generated/`
+
+### `enlarge` — Expand ste-code from refined content
+```bash
+python3 .agents/benchmark/enlarge-ste-code.py
+```
+Takes `ste-code/refined/` as input, generates code-domain enrichments in `ste-code/enriched-code/`.
+Areas: code-examples (STE/non-STE pairs), dictionary-expand (code-domain terms), domain-adapt (category mappings).
+
 ## Output Directories
 - Verbs: `SCE/data/vocabulary/generated/`
 - Adjectives: `SCE/data/vocabulary/generated/`
