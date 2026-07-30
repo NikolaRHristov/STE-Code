@@ -1,0 +1,311 @@
+{
+  "pass": "code-examples",
+  "batch": 3,
+  "entries": [
+    {
+      "rule": "4.3-Vertical Lists: Connecting items to introductory text",
+      "ste_example": "After the deployment, do not restart these services:\n- The authentication service\n- The payment gateway\n- The logging daemon",
+      "non_ste_example": "Do not restart the services after deploying if they are:\n- the auth service,\n- the payment gateway with its dependencies,\n- the logging daemon."
+    },
+    {
+      "rule": "4.3-Vertical Lists: Converting inline lists",
+      "ste_example": "The API response must include:\n- A status code\n- A response body\n- A request identifier\n- A timestamp",
+      "non_ste_example": "The API response must include each of the following: a status code, a response body, some kind of request identifier, and a timestamp."
+    },
+    {
+      "rule": "4.3-Vertical Lists: Avoiding nested vertical lists",
+      "ste_example": "The configuration file specifies:\n- The database host\n- The database port\n- The database name\n- The connection pool size",
+      "non_ste_example": "The configuration file specifies:\n- The database parameters:\n  - The host\n  - The port\n  - The name\n- The connection pool size"
+    },
+    {
+      "rule": "4.3-Vertical Lists: Items with verbs but not full sentences (no period)",
+      "ste_example": "The middleware pipeline contains the components that follow:\n- One rate limiter that blocks excessive requests\n- One authentication handler that validates JWT tokens\n- One logging interceptor that records each request",
+      "non_ste_example": "The middleware pipeline has the components that follow:\n- One rate limiter that blocks excessive requests.\n- One authentication handler that validates JWT tokens.\n- One logging interceptor that records each request."
+    },
+    {
+      "rule": "Articles: Definite article before noun with alphanumeric identifier",
+      "ste_example": "Tag endpoint GET /users/{id}.",
+      "non_ste_example": "Tag the endpoint GET /users/{id}."
+    },
+    {
+      "rule": "Articles: Article indicates scope (only the specified items are new)",
+      "ste_example": "Update the new environment variables (DB_HOST), the secrets (API_KEY), and the feature flags (ENABLE_CACHE).",
+      "non_ste_example": "Update new environment variables (DB_HOST), secrets (API_KEY), and feature flags (ENABLE_CACHE)."
+    },
+    {
+      "rule": "Articles: Correct article usage for clarity",
+      "ste_example": "Deploy a new container instance to the staging cluster.",
+      "non_ste_example": "Deploy new container instance to staging cluster."
+    },
+    {
+      "rule": "5.1-Short sentences: Max 20 words in procedures",
+      "ste_example": "Set the timeout value in the configuration file. (7 words)\nContinue until the timeout is 30 seconds. (7 words)",
+      "non_ste_example": "Set the timeout value in the configuration file and then continue to increase it until the timeout is set to approximately 30 seconds. (25 words)"
+    },
+    {
+      "rule": "5.1-Short sentences: Safety instructions also obey 20-word limit",
+      "ste_example": "CAUTION: WHEN YOU EDIT THE PRODUCTION DATABASE, PREVENT ACCIDENTAL DELETION OF RECORDS. (12 words)",
+      "non_ste_example": "CAUTION: WHEN YOU ARE EDITING THE PRODUCTION DATABASE YOU SHOULD BE VERY CAREFUL TO ENSURE THAT YOU DO NOT ACCIDENTALLY DELETE ANY OF THE RECORDS. (26 words)"
+    },
+    {
+      "rule": "5.1-Short sentences: Notes have 25-word maximum",
+      "ste_example": "Note: The database migration locks the users table for approximately 60 seconds during execution. (14 words)",
+      "non_ste_example": "Note: The database migration that runs as part of this deployment will apply a lock on the users table for approximately 60 seconds while it is being executed. (27 words)"
+    },
+    {
+      "rule": "5.2-One instruction per sentence: Simultaneous actions allowed",
+      "ste_example": "Make sure that the response status of each endpoint is 200. Then, validate each response body against the schema.",
+      "non_ste_example": "Make sure that the response status of each endpoint is 200 and validate each response body against the schema at the same time."
+    },
+    {
+      "rule": "5.2-One instruction per sentence: Immediate result after action",
+      "ste_example": "Send a health check to the load balancer. The load balancer must return a 200 status.",
+      "non_ste_example": "Send a health check to the load balancer and verify that the load balancer returns a 200 status."
+    },
+    {
+      "rule": "5.2-One instruction per sentence: Divide compound instructions",
+      "ste_example": "Restart the application server. Wait for the startup sequence to complete. Then, verify the health endpoint.",
+      "non_ste_example": "Restart the application server, wait for it to finish starting up, and then verify the health endpoint to make sure everything is working."
+    },
+    {
+      "rule": "5.3-Imperative form: Convert passive to command",
+      "ste_example": "Run the integration tests.",
+      "non_ste_example": "The integration tests can be run."
+    },
+    {
+      "rule": "5.3-Imperative form: Convert gerund/descriptive to command",
+      "ste_example": "Remove temporary files with a cleanup script.",
+      "non_ste_example": "Temporary files are to be removed with a cleanup script."
+    },
+    {
+      "rule": "5.3-Imperative form: Remove unnecessary 'must' before command",
+      "ste_example": "Before you stop the database, create a backup.",
+      "non_ste_example": "Before you stop the database, you must create a backup."
+    },
+    {
+      "rule": "5.4-Condition first: Descriptive statement before command with comma",
+      "ste_example": "Before you deploy the service, stop the running instance.",
+      "non_ste_example": "Stop the running instance before you deploy the service."
+    },
+    {
+      "rule": "5.4-Condition first: If-condition before command",
+      "ste_example": "If the API gateway does not respond, restart it from the control panel.",
+      "non_ste_example": "Restart the API gateway from the control panel if it does not respond."
+    },
+    {
+      "rule": "5.4-Condition first: Comma position changes meaning",
+      "ste_example": "When the build fails, check the error log for the failing module.",
+      "non_ste_example": "Check the error log for the failing module when the build fails."
+    },
+    {
+      "rule": "5.5-Notes: Information only, not instructions",
+      "ste_example": "Note: The cache warm-up process takes approximately 3 minutes after deployment.",
+      "non_ste_example": "Note: Run the cache warm-up script after deployment and wait for it to finish."
+    },
+    {
+      "rule": "5.5-Notes: Procedure must work without notes",
+      "ste_example": "Step 5: Run the database migration.\n(Note removed - instructions live in the work step.)",
+      "non_ste_example": "Step 5: Run the database migration.\nNote: You must also run the seed script after the migration."
+    },
+    {
+      "rule": "5.5-Notes: Move important info from notes into work steps",
+      "ste_example": "Step 3: Set the environment variable NODE_ENV to 'production'.\nStep 4: Set the environment variable LOG_LEVEL to 'error'.",
+      "non_ste_example": "Step 3: Set the environment variables.\nNote: Set NODE_ENV to 'production' and LOG_LEVEL to 'error'."
+    },
+    {
+      "rule": "6.1-Give information gradually: One subject per sentence",
+      "ste_example": "The authentication service validates user credentials. This service uses JWT tokens. The tokens expire after 24 hours. When a token expires, the client must request a new token.",
+      "non_ste_example": "The authentication service validates user credentials using JWT tokens that expire after 24 hours, at which point the client must request a new token from the refresh endpoint that is provided by the same service."
+    },
+    {
+      "rule": "6.1-Give information gradually: Break dense descriptions",
+      "ste_example": "The API gateway routes requests to microservices. It also handles rate limiting. Rate limiting prevents abuse of the endpoints. Each client can make 100 requests per minute.",
+      "non_ste_example": "The API gateway routes requests to microservices and also handles rate limiting which prevents abuse of the endpoints by limiting each client to 100 requests per minute."
+    },
+    {
+      "rule": "6.1-Give information gradually: Build understanding step by step",
+      "ste_example": "The cache layer stores frequently accessed data. It uses Redis as the storage backend. Redis keeps all data in memory. This makes read operations very fast.",
+      "non_ste_example": "The cache layer stores frequently accessed data using Redis as the storage backend which keeps all data in memory for very fast read operations."
+    },
+    {
+      "rule": "6.2-Key words/phrases: Reuse terms to connect sentences",
+      "ste_example": "The deployment pipeline builds the application. This pipeline runs automated tests. The pipeline also creates a container image. After the image is ready, the pipeline deploys it to staging.",
+      "non_ste_example": "The deployment pipeline builds the application. Automated tests are then executed. A container image is subsequently created. After this, it gets deployed to the staging environment."
+    },
+    {
+      "rule": "6.2-Key words/phrases: Logical connection with repeated key phrases",
+      "ste_example": "The rate limiter tracks request counts. The rate limiter enforces a limit of 100 requests per minute. When a client exceeds the limit, the rate limiter returns a 429 status.",
+      "non_ste_example": "Request counts are tracked by the system. A limit of 100 requests per minute is enforced. Clients that exceed this get a 429 status in response."
+    },
+    {
+      "rule": "6.2-Key words/phrases: Link sentences within a paragraph",
+      "ste_example": "The error handler catches unhandled exceptions. This error handler logs the stack trace. The error handler returns a standardized error response. The response includes an error code and a message.",
+      "non_ste_example": "Unhandled exceptions get caught. The stack trace is logged. A standardized error response is returned which includes an error code and a message for the client."
+    },
+    {
+      "rule": "6.6-Max six sentences per paragraph: Divide long paragraphs",
+      "ste_example": "The configuration service manages application settings. It reads values from a central repository. The repository stores settings as key-value pairs.\n\nApplications fetch their configuration at startup. They cache the configuration locally. The cache refreshes every 60 seconds.",
+      "non_ste_example": "The configuration service manages application settings by reading values from a central repository that stores settings as key-value pairs. Applications fetch their configuration at startup and cache it locally with a refresh interval of 60 seconds. When settings change in the repository the service publishes an event. Applications subscribe to this event and update their local cache. If an application cannot reach the repository it uses the last known configuration. A health check monitors the connection to the repository. The health check alerts the operations team on failure."
+    },
+    {
+      "rule": "6.6-Max six sentences per paragraph: One topic per paragraph",
+      "ste_example": "The load balancer distributes traffic across instances.\n\nEach instance runs the same version of the application. The instances share no state between them. This design makes horizontal scaling easy.",
+      "non_ste_example": "The load balancer distributes traffic across instances and each instance runs the same version of the application. The instances share no state between them which makes horizontal scaling easy."
+    },
+    {
+      "rule": "6.6-Max six sentences per paragraph: Split at topic boundaries",
+      "ste_example": "The logging system collects application logs. It forwards logs to a central aggregator. The aggregator indexes the logs for search.\n\nThe metrics system collects performance data. It stores time-series data in a database. Dashboards display the metrics in real time.",
+      "non_ste_example": "The logging system collects application logs and forwards them to a central aggregator that indexes the logs for search while the metrics system collects performance data and stores time-series data in a database with dashboards displaying the metrics in real time."
+    },
+    {
+      "rule": "7.1-Safety: Use WARNING/CAUTION to identify risk level",
+      "ste_example": "WARNING: DO NOT EXPOSE THE API KEY IN CLIENT-SIDE CODE. THE API KEY CAN BE USED TO ACCESS SENSITIVE USER DATA.",
+      "non_ste_example": "Make sure you do not expose the API key in client-side code because it could be used to access sensitive user data."
+    },
+    {
+      "rule": "7.1-Safety: CAUTION for equipment/data damage risk",
+      "ste_example": "CAUTION: DO NOT RUN DATABASE MIGRATIONS DURING PEAK TRAFFIC. MIGRATIONS CAN CAUSE TABLE LOCKS AND SERVICE INTERRUPTIONS.",
+      "non_ste_example": "It is not recommended to run database migrations during peak traffic since they can cause table locks and service interruptions."
+    },
+    {
+      "rule": "7.1-Safety: WARNING for security/integrity risks",
+      "ste_example": "WARNING: DO NOT DISABLE INPUT VALIDATION IN PRODUCTION. MALFORMED INPUT CAN CAUSE DATA CORRUPTION OR SECURITY VULNERABILITIES.",
+      "non_ste_example": "Input validation should not be disabled in production as malformed input could potentially lead to data corruption or security vulnerabilities."
+    },
+    {
+      "rule": "7.2-Safety: Start with clear command",
+      "ste_example": "WARNING: DO NOT COMMIT SECRETS TO THE REPOSITORY. ALWAYS USE ENVIRONMENT VARIABLES FOR SENSITIVE VALUES. SECRETS IN VERSION CONTROL CAN BE ACCESSED BY UNAUTHORIZED USERS.",
+      "non_ste_example": "WARNING: IT IS IMPORTANT THAT SECRETS ARE NOT COMMITTED TO THE REPOSITORY. ALWAYS MAKE SURE THAT ENVIRONMENT VARIABLES ARE USED FOR SENSITIVE VALUES. SECRETS IN VERSION CONTROL CAN BE ACCESSED BY UNAUTHORIZED USERS."
+    },
+    {
+      "rule": "7.2-Safety: Condition first when reader must know context",
+      "ste_example": "WARNING: IF THE SSL CERTIFICATE EXPIRES, CLIENTS CANNOT CONNECT SECURELY. RENEW THE CERTIFICATE BEFORE THE EXPIRATION DATE.",
+      "non_ste_example": "WARNING: RENEW THE SSL CERTIFICATE BEFORE IT EXPIRES. IF IT EXPIRES, CLIENTS CANNOT CONNECT SECURELY."
+    },
+    {
+      "rule": "7.2-Safety: Imperative command in safety instructions",
+      "ste_example": "CAUTION: DO NOT USE DEFAULT PASSWORDS IN PRODUCTION CONFIGURATIONS. DEFAULT CREDENTIALS ARE PUBLICLY KNOWN.",
+      "non_ste_example": "CAUTION: DEFAULT PASSWORDS SHOULD NOT BE USED IN PRODUCTION CONFIGURATIONS AS DEFAULT CREDENTIALS ARE PUBLICLY KNOWN."
+    },
+    {
+      "rule": "7.3-Safety: Explain risk or possible result",
+      "ste_example": "WARNING: DO NOT DELETE THE PRODUCTION DATABASE. PERMANENT DATA LOSS CAN OCCUR AND SERVICE RECOVERY CAN TAKE HOURS.",
+      "non_ste_example": "WARNING: DO NOT DELETE THE PRODUCTION DATABASE."
+    },
+    {
+      "rule": "7.3-Safety: Tell reader the consequence of non-compliance",
+      "ste_example": "CAUTION: DO NOT EXCEED THE API RATE LIMIT. THE SERVICE WILL BLOCK YOUR REQUESTS FOR 15 MINUTES.",
+      "non_ste_example": "CAUTION: MAKE SURE YOU STAY WITHIN THE API RATE LIMIT."
+    },
+    {
+      "rule": "7.3-Safety: Make risk specific and tangible",
+      "ste_example": "WARNING: DO NOT RUN UNREVIEWED SQL QUERIES ON THE PRODUCTION DATABASE. A BAD QUERY CAN CORRUPT DATA ACROSS MULTIPLE TABLES.",
+      "non_ste_example": "WARNING: DO NOT RUN UNREVIEWED SQL QUERIES ON THE PRODUCTION DATABASE. BAD THINGS CAN HAPPEN."
+    },
+    {
+      "rule": "8.1-Punctuation: No semicolons; use periods instead",
+      "ste_example": "The service is unreachable. Restart the container.",
+      "non_ste_example": "The service is unreachable; restart the container."
+    },
+    {
+      "rule": "8.1-Punctuation: Replace semicolon-separated lists with vertical lists",
+      "ste_example": "The deployment requires:\n- A valid API token\n- Access to the container registry\n- The correct environment tag",
+      "non_ste_example": "The deployment requires a valid API token; access to the container registry; and the correct environment tag."
+    },
+    {
+      "rule": "8.1-Punctuation: Standard punctuation only",
+      "ste_example": "The function accepts three parameters: a request object, a response object, and a callback.",
+      "non_ste_example": "The function accepts three parameters - a request object, a response object, and a callback - and returns a promise."
+    },
+    {
+      "rule": "8.2-Hyphens: Connect directly related words",
+      "ste_example": "Enable rate-limiting on the API gateway.",
+      "non_ste_example": "Enable rate limiting on the API gateway."
+    },
+    {
+      "rule": "8.2-Hyphens: Compound modifiers before nouns",
+      "ste_example": "Use a multi-threaded server for high-traffic endpoints.",
+      "non_ste_example": "Use a multi threaded server for high traffic endpoints."
+    },
+    {
+      "rule": "8.2-Hyphens: Clarify relationships between words",
+      "ste_example": "The build-and-deploy pipeline runs on every merge to main.",
+      "non_ste_example": "The build and deploy pipeline runs on every merge to main."
+    },
+    {
+      "rule": "8.3-Parentheses: References to illustrations or text",
+      "ste_example": "Update the configuration file (refer to Section 3).",
+      "non_ste_example": "Update the configuration file, refer to Section 3 for details."
+    },
+    {
+      "rule": "8.3-Parentheses: Include abbreviations",
+      "ste_example": "A Content Delivery Network (CDN) caches static assets at edge locations.",
+      "non_ste_example": "A CDN or Content Delivery Network caches static assets at edge locations."
+    },
+    {
+      "rule": "8.3-Parentheses: Singular and plural forms",
+      "ste_example": "Before you run the migration(s), back up the database(s).",
+      "non_ste_example": "Before you run the migration or migrations, back up the database or databases."
+    },
+    {
+      "rule": "8.4-Word count: Colon in vertical lists acts as sentence end",
+      "ste_example": "The CI pipeline runs these checks: (5 words)\n- Linting (1 word)\n- Unit tests (2 words)\n- Integration tests (2 words)\n- Security scan. (2 words)",
+      "non_ste_example": "The CI pipeline runs a series of automated checks including linting, unit tests, integration tests, and a security scan. (18 words - harder to scan)"
+    },
+    {
+      "rule": "8.4-Word count: Each list item is a new sentence for word counting",
+      "ste_example": "The API supports these HTTP methods for the resource: (8 words)\n- GET to retrieve data (4 words)\n- POST to create data (4 words)\n- PUT to update data (4 words)\n- DELETE to remove data. (4 words)",
+      "non_ste_example": "The API supports GET for retrieving data, POST for creating data, PUT for updating data, and DELETE for removing data from the resource. (22 words - harder to scan)"
+    },
+    {
+      "rule": "8.4-Word count: Procedural max 20 words before colon",
+      "ste_example": "To start the application, set these environment variables: (7 words)\n- DATABASE_URL (1 word)\n- REDIS_URL (1 word)\n- SECRET_KEY. (1 word)",
+      "non_ste_example": "To start the application you need to set the following required environment variables before proceeding: (15 words - still okay, but longer is worse)"
+    },
+    {
+      "rule": "8.5-Word count: Text in parentheses counts as one word",
+      "ste_example": "Run the smoke tests (see Appendix A for the full list) after each deployment. (12 words)",
+      "non_ste_example": "Run the smoke tests, see Appendix A for the full list, after each deployment. (15 words - counts each word separately)"
+    },
+    {
+      "rule": "8.5-Word count: Item identifiers in parentheses count as one word",
+      "ste_example": "Set the environment variables (DB_HOST) and (REDIS_HOST) before startup. (7 words)",
+      "non_ste_example": "Set the environment variables DB_HOST and REDIS_HOST before startup. (11 words)"
+    },
+    {
+      "rule": "8.5-Word count: Explanations in parentheses count as one word",
+      "ste_example": "Increase the timeout slowly (not more than 5 seconds each attempt). (10 words)",
+      "non_ste_example": "Increase the timeout slowly, not more than 5 seconds each attempt. (12 words)"
+    },
+    {
+      "rule": "8.6-Word count: Quoted text counts as one word",
+      "ste_example": "Click the 'Deploy' button to start the release. (6 words)",
+      "non_ste_example": "Click the Deploy button to start the release. (8 words - 'Deploy' could be ambiguous)"
+    },
+    {
+      "rule": "8.6-Word count: Document titles count as one word",
+      "ste_example": "Before you deploy, read the API Reference Manual for the breaking changes. (10 words)",
+      "non_ste_example": "Before you deploy, read the API Reference Manual for the breaking changes. (13 words - each word in title counted)"
+    },
+    {
+      "rule": "8.6-Word count: Labels and placard text counts as one word",
+      "ste_example": "Make sure that the 'ACTIVE' indicator is green on the dashboard. (9 words)",
+      "non_ste_example": "Make sure that the ACTIVE indicator is green on the dashboard. (11 words)"
+    },
+    {
+      "rule": "9-Approved alternatives: Word not in dictionary - use different construction",
+      "ste_example": "Water in the configuration file causes errors.\n(Instead of 'The presence of water in the configuration file is dangerous.')",
+      "non_ste_example": "The incidence of water in the configuration file is dangerous."
+    },
+    {
+      "rule": "9-Approved alternatives: Unapproved verb with wrong alternative",
+      "ste_example": "Move the service until it is away from the load balancer pool.\n(Instead of 'clear' → 'clean' which is wrong.)",
+      "non_ste_example": "Remove the service so that it clears the load balancer pool."
+    },
+    {
+      "rule": "9-Approved alternatives: Rewrite sentence when word-for-word fails",
+      "ste_example": "Use only the approved libraries from the registry. Add dependencies one at a time to identify conflicts.",
+      "non_ste_example": "Just add the approved libraries from the registry, and merely include dependencies one at a time to identify conflicts."
+    }
+  ]
+}
