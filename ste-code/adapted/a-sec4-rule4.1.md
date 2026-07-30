@@ -28,7 +28,7 @@ Always make sure that your documentation is not abstract. Make sure that it clea
 
 > **Non-STE:** To call the `initialize` method, first pass the three configuration parameters that set up the connection to the database, and then, after calling the method, check the return value for a success code or an error object.
 >
-> **STE:** [FIXME: generate STE correction for: To call the `initialize` method, first pass the three config...]
+> **STE:**
 > 1. Call the `initialize` method as follows:
 >    A. Pass the three configuration parameters that set the connection to the database.
 >    B. Call the method.
@@ -66,7 +66,7 @@ A README file uses both procedural and descriptive writing. Use procedural writi
 
 > **Non-STE:** After you run the build command, you should then deploy the container to the registry and finally run the integration tests against the staging environment.
 >
-> **STE:** [FIXME: generate STE correction for: After you run the build command, you should then deploy the ...]
+> **STE:**
 > 1. Run the build command.
 > 2. Deploy the container to the registry.
 > 3. Run the integration tests against the staging environment.
@@ -97,7 +97,7 @@ API reference docs use descriptive writing for endpoint and type summaries. They
 
 > **Non-STE:** If the API returns a 429 status code, you need to check the Retry-After header and wait for the specified number of seconds before sending the request again.
 >
-> **STE:** [FIXME: generate STE correction for: If the API returns a 429 status code, you need to check the ...]
+> **STE:**
 > 1. Check the status code of the response.
 > 2. If the status code is 429, read the `Retry-After` header.
 > 3. Wait for the specified number of seconds.
@@ -145,7 +145,7 @@ Commit messages use the imperative mood. A commit message has two parts: a short
 
 > **Non-STE:** This commit fixes the bug where the login page crashes when a user enters a password that contains special characters and the password validation library throws an error that is not caught by the controller.
 >
-> **STE:** [FIXME: generate STE correction for: This commit fixes the bug where the login page crashes when ...]
+> **STE:**
 > ```
 > Fix crash on login with special-character passwords
 >
@@ -186,7 +186,7 @@ Class and interface documentation uses descriptive writing. Method documentation
 
 > **Non-STE:** Call the `save` method with a User object and it will either insert a new record if the user has no ID or update the existing record if the user does have an ID, returning the saved User object.
 >
-> **STE:** [FIXME: generate STE correction for: Call the `save` method with a User object and it will either...]
+> **STE:**
 > 1. Call the `save` method with a User object.
 > 2. The method inserts a new record if the user has no ID.
 > 3. The method updates the record if the user has an ID.
@@ -210,7 +210,7 @@ Functional code documentation uses descriptive writing for type signatures and p
 
 > **Non-STE:** To read the file at the given path and return its contents as a string, call `readConfigFile` with the path and it will return an IO action that reads the file.
 >
-> **STE:** [FIXME: generate STE correction for: To read the file at the given path and return its contents a...]
+> **STE:**
 > 1. Call `readConfigFile` with a file path.
 > 2. The function returns an IO action.
 > 3. The IO action reads the file.
@@ -226,7 +226,7 @@ Procedural code documentation uses procedural writing heavily. Each function des
 
 > **Non-STE:** The `process_buffer` function takes a pointer to a buffer and its size, iterates over the buffer to find all occurrences of the null byte and replaces them with spaces, returning the number of replacements that were made.
 >
-> **STE:** [FIXME: generate STE correction for: The `process_buffer` function takes a pointer to a buffer an...]
+> **STE:**
 > 1. Call `process_buffer` with a buffer pointer and a buffer size.
 > 2. The function finds all null bytes in the buffer.
 > 3. The function replaces each null byte with a space character.
@@ -278,7 +278,7 @@ Systems documentation describes ownership, lifetimes, and memory behavior. Use d
 
 > **Non-STE:** Before dereferencing the raw pointer, make sure that the pointer is not null, that it points to a valid memory region of the correct size, and that no other thread is writing to that memory region at the same time.
 >
-> **STE:** [FIXME: generate STE correction for: Before dereferencing the raw pointer, make sure that the poi...]
+> **STE:**
 > 1. Check that the raw pointer is not null.
 > 2. Check that the pointer points to a valid memory region.
 > 3. Check that the memory region has the correct size.
@@ -324,7 +324,7 @@ Systems documentation describes ownership, lifetimes, and memory behavior. Use d
 
 > **Non-STE:** First you need to install the dependencies with `npm install` and then you should configure the environment variables in the `.env` file before starting the development server which will be available at `http://localhost:3000`.
 >
-> **STE:** [FIXME: generate STE correction for: First you need to install the dependencies with `npm install...]
+> **STE:**
 > 1. Install the dependencies: `npm install`
 > 2. Set the environment variables in the `.env` file.
 > 3. Start the development server: `npm run dev`
@@ -337,7 +337,7 @@ Systems documentation describes ownership, lifetimes, and memory behavior. Use d
 
 > **Non-STE:** Refactor the authentication middleware to extract the token validation logic into a separate module and add unit tests for the token parser and the validation functions.
 >
-> **STE:** [FIXME: generate STE correction for: Refactor the authentication middleware to extract the token ...]
+> **STE:**
 > ```
 > Refactor authentication middleware
 >

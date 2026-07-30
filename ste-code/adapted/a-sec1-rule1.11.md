@@ -15,7 +15,7 @@ Example:
 > 2. Do the operational test of the actuator.
 > 3. Disconnect the control unit from the test rig.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. Make sure that the actuator is in the open position.
 > 2. Do the operational test of the actuator.
 > 3. Disconnect the actuator from the test rig.
@@ -37,7 +37,7 @@ Changing the name of the same item in different sections of the documentation ca
 > 2. Call the authenticate method on the AccountManager.
 > 3. The UserHandler returns a session token.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. Initialize the UserService class.
 > 2. Call the authenticate method on the UserService.
 > 3. The UserService returns a session token.
@@ -49,7 +49,7 @@ Changing the name of the same item in different sections of the documentation ca
 > 2. The authentication route returns a JSON Web Token.
 > 3. Include the token from the login endpoint in subsequent requests.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. Send a request to the /api/login endpoint.
 > 2. The /api/login endpoint returns a JSON Web Token.
 > 3. Include the token from the /api/login endpoint in subsequent requests.
@@ -169,7 +169,7 @@ When the concept does not map to a single code identifier, create a glossary ent
 > 2. Query the accounts relation to find active sessions.
 > 3. The user table has a foreign key to the roles table.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. The user_accounts table stores authentication data.
 > 2. Query the user_accounts table to find active sessions.
 > 3. The user_accounts table has a foreign key to the roles table.
@@ -183,7 +183,7 @@ When the concept does not map to a single code identifier, create a glossary ent
 > 2. The DB timeout parameter controls how long the driver waits.
 > 3. Increase the connection deadline if you see timeout errors.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. Set the database_connection_timeout value in your configuration file.
 > 2. The database_connection_timeout parameter controls how long the driver waits.
 > 3. Increase the database_connection_timeout value if you see timeout errors.
@@ -197,7 +197,7 @@ When the concept does not map to a single code identifier, create a glossary ent
 > 2. The build system outputs artifacts to the dist/ directory.
 > 3. Use the compiler's --watch flag for development.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. Run the project-builder tool to compile your source files.
 > 2. The project-builder tool outputs artifacts to the dist/ directory.
 > 3. Use the project-builder tool's --watch flag for development.
@@ -211,7 +211,7 @@ When the concept does not map to a single code identifier, create a glossary ent
 > 2. Catch the InputError to show a user-friendly message.
 > 3. The validation exception includes a list of field errors.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. The function throws a ValidationError when the input is invalid.
 > 2. Catch the ValidationError to show a user-friendly message.
 > 3. The ValidationError includes a list of field errors.
@@ -225,7 +225,7 @@ When the concept does not map to a single code identifier, create a glossary ent
 > 2. The service reads its auth token from the environment.
 > 3. If the secret key is not set, the process exits with code 1.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. Set the API_KEY environment variable before you start the server.
 > 2. The service reads the API_KEY environment variable at startup.
 > 3. If the API_KEY environment variable is not set, the process exits with code 1.
@@ -239,7 +239,7 @@ When the concept does not map to a single code identifier, create a glossary ent
 > 2. Push your topic branch to the remote repository.
 > 3. Merge the development line back into master.
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. Create a feature branch from the main branch.
 > 2. Push your feature branch to the remote repository.
 > 3. Merge the feature branch back into the main branch.
@@ -351,7 +351,7 @@ Pronouns (it, they, them, its, their) refer back to the most recent noun phrase 
 
 The pronoun "it" could refer to "UserService" (singular) or the nearest plural "authentication modules" (treated as a singular system). The reader must guess. The STE version eliminates this ambiguity by using one noun consistently:
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > The UserService processes login requests. The UserService validates credentials. The UserService returns a token on success.
 
 ### Compound Nouns and Head Nouns
@@ -369,7 +369,7 @@ When documentation alternates between the full compound noun and a shortened for
 
 Three different head nouns — "service," "system," and "service" — appear. The reader cannot know whether the second and third sentences describe the same component or different components. The STE version uses one compound noun with one head noun:
 
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > 1. The user authentication service handles login.
 > 2. The user authentication service validates tokens.
 > 3. The user authentication service manages profiles.

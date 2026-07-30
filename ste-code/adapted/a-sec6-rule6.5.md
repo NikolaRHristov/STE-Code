@@ -213,7 +213,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 >
 > *Principles applied: P1, P8. The Non-STE version covers payment processing, provider adapters, refund policy, receipt generation, transaction logging, and compliance in one paragraph. The STE version gives each concern its own paragraph.*
 
-### Example 5 — Error Message
+### Example 6 — Error Message
 
 > **Non-STE:** Connection refused — the database is probably down or the credentials are wrong, check your `.env` file and make sure the `DATABASE_URL` is correct, also make sure the VPN is connected if you are working remotely, and verify that the database server is running on the specified port, you can check this with `pg_isready` if you are using PostgreSQL, otherwise use the equivalent tool for your database.
 
@@ -230,7 +230,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 >
 > *Principles applied: P1, P3, P10. The Non-STE error message mixes symptoms, causes, and solutions with informal language ("probably", "also make sure"). The STE version separates the description, the causes, and the fix steps into distinct paragraphs.*
 
-### Example 6 — Configuration Documentation
+### Example 7 — Configuration Documentation
 
 > **Non-STE:** The cache module supports Redis for production and an in-memory store for development, you configure it by setting `CACHE_DRIVER` to either `redis` or `memory`, and when using Redis you also need to set `REDIS_URL` and `REDIS_PREFIX` and optional `REDIS_TIMEOUT` in milliseconds which defaults to 5000, and the in-memory store has a `MAX_ITEMS` setting that defaults to 1000, and if you exceed that limit it evicts the least recently used items, also Redis supports clustering by setting multiple URLs in `REDIS_CLUSTER_URLS` as a comma-separated list.
 

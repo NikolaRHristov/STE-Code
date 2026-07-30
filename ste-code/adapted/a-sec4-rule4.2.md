@@ -170,7 +170,7 @@ Docstrings are part of the source code. Writers often omit verbs and articles in
 >     Returns:
 >         A new Connection object.
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```python
 >     Returns:
 >         The method returns a new Connection object.
@@ -191,7 +191,7 @@ Commit messages have strict length limits. The summary line allows a maximum of 
 > Connection pool didn't have timeout set. Added default 30s timeout.
 > Connections now close after timeout expires.
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```
 > Fix timeout in database connection pool
 >
@@ -245,7 +245,7 @@ Object-oriented documentation uses class and method descriptions. Method return 
 >  */
 > public List<T> sort() { ... }
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```java
 > /**
 >  * @return The method returns a sorted copy of the list.
@@ -276,7 +276,7 @@ Functional code documentation describes type signatures and pure functions. Patt
 > -- Right cfg — Successful parse.
 > parseConfig :: String -> Either String Config
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```haskell
 > -- | Parse a configuration string.
 > -- Left err means that the parse failed. The err value is an error message.
@@ -305,7 +305,7 @@ Procedural code documentation often uses headlinese. Function synopses in C head
 > /* parse_config: reads config file, returns Config struct */
 > Config parse_config(const char *path);
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```c
 > /* The parse_config function reads a configuration file. The function returns a Config struct. */
 > Config parse_config(const char *path);
@@ -320,7 +320,7 @@ Procedural code documentation often uses headlinese. Function synopses in C head
 > // NewServer creates a new HTTP server with the provided handler.
 > func NewServer(h http.Handler) *Server { ... }
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```go
 > // The NewServer function creates a new HTTP server. The server uses the provided handler.
 > func NewServer(h http.Handler) *Server { ... }
@@ -341,7 +341,7 @@ Declarative documentation describes resources and configurations. Comment lines 
 >   instance_type = "t3.micro"               # small instance for dev
 > }
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```hcl
 > resource "aws_instance" "web" {
 >   ami           = "ami-0c55b159cbfafe1f0"  # This is the Amazon Linux 2 AMI.
@@ -360,7 +360,7 @@ Declarative documentation describes resources and configurations. Comment lines 
 >   status VARCHAR(20)      -- order status
 > );
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```sql
 > CREATE TABLE orders (
 >   id SERIAL PRIMARY KEY,  -- The id column is a unique order identifier.
@@ -383,7 +383,7 @@ Systems documentation describes ownership, lifetimes, and memory behavior. Incom
 > /// Must not outlive the parent struct.
 > pub unsafe fn as_ptr(&self) -> *const u8 { ... }
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```rust
 > /// The method returns a raw pointer to the internal buffer.
 > /// # Safety
@@ -428,7 +428,7 @@ Systems documentation describes ownership, lifetimes, and memory behavior. Incom
 > - Request timed out.
 > - Rate limit exceeded.
 > - Permission denied.
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > - The access token is not valid.
 > - The request timed out.
 > - The rate limit is exceeded.
@@ -460,7 +460,7 @@ Systems documentation describes ownership, lifetimes, and memory behavior. Incom
 > Connection pool: ready.
 > Cache: warm.
 > ```
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > ```
 > The migration status is pending.
 > The connection pool is ready.

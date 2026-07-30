@@ -9,7 +9,7 @@ License: MIT
 
 ## 1. LLM Integration — How to Use STE-Code with Different Models
 
-STE-Code ships as a system prompt. Copy the prompt text into any LLM that supports system messages. The model then produces documentation that obeys the 14 core principles and 53 writing rules.
+STE-Code ships as a system prompt. Copy the prompt text into any LLM that supports system messages. The model then produces documentation that obeys the 14 core principles and 51 writing rules.
 
 ### ChatGPT (OpenAI)
 
@@ -150,7 +150,7 @@ STE-Code provides 6 artifact files. Each file serves a different integration pat
 
 **Method C: Modelfile (Persistent).** Create an Ollama Modelfile with the system prompt. Build the model once. All future runs use the same system prompt. Works offline.
 
-**Method D: Full Context Load (Maximum Accuracy).** For models with 16K+ context, load the self-reading manual (~7,000 tokens) alongside the system prompt. The model references the full 53 rules, synonym table, and category definitions during each compliance check.
+**Method D: Full Context Load (Maximum Accuracy).** For models with 16K+ context, load the self-reading manual (~7,000 tokens) alongside the system prompt. The model references the full 51 rules, synonym table, and category definitions during each compliance check.
 
 ---
 
@@ -166,7 +166,7 @@ STE-Code provides 8 loading levels. Each level is a different system prompt file
 | 1 | ste-code-distilled-system-prompt.txt | ~1,200 | 4K+ | **Primary template.** All 14 principles + synonym table. Drop-in for most LLMs. |
 | 2 | ste-code-developer.md | ~900 | 4K+ | Standard extension. Rules for adding vocabulary, adapting to new domains, building tooling. |
 | 3 | compliance-check.prompt.md | ~500 | 4K+ | CI/CD linter. Parameterized template. Accepts document type, domain, rule subset variables. |
-| 4 | ste-code-full.md | ~3,000 | 8K+ | Maximum rules. All 53 rules loaded. Best for thorough compliance audits. |
+| 4 | ste-code-full.md | ~3,000 | 8K+ | Maximum rules. All 51 rules loaded. Best for thorough compliance audits. |
 | 5 | ste-code-self-reading-manual.txt | ~7,000 | 16K+ | **Complete reference.** Full manual with all rules, dictionary excerpt, synonym table, examples, and checklist. |
 
 ### When to Use Each Level
@@ -183,7 +183,7 @@ STE-Code provides 8 loading levels. Each level is a different system prompt file
 
 **Level 3 (Compliance):** Use in CI/CD pipelines. A parameterized template with variables for document_type, target_domain, rule_subset, and context_size. Loads the synonym table and compliance rubric. Outputs a structured compliance report.
 
-**Level 4 (Full):** Use for thorough audits. Loads all 53 rules plus the complete synonym table. Requires 8K+ context. Best for final review before a major release.
+**Level 4 (Full):** Use for thorough audits. Loads all 51 rules plus the complete synonym table. Requires 8K+ context. Best for final review before a major release.
 
 **Level 5 (Manual):** Use for 16K+ context models. The complete self-reading manual. Includes all rule summaries with examples, the dictionary excerpt, the full synonym table, 19 category definitions, and the review checklist.
 

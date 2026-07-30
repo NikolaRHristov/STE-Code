@@ -10,7 +10,7 @@ P1: Use approved words from the controlled terminology
 P2: Use approved words only as the specified part of speech
 P3: Use approved words only with their approved meanings
 P4: Use only approved verb and adjective forms
-P5: Use code-domain technical nouns from the 22 categories
+P5: Use code-domain technical nouns from the 19 categories
 P6: Use non-approved words only when they are technical nouns
 P7: Do not use technical nouns as verbs
 P8: Use standard, well-known technical nouns

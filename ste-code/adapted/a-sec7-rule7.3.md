@@ -40,7 +40,9 @@
 >
 > *Adapted from spec pattern: consequence statement — "IF THEY FALL, PERMANENT DAMAGE TO THE PARTS CAN OCCUR."*
 
-### Code-Domain Explanation
+---
+
+## Code-Domain Explanation
 
 Rule 7.3 addresses a fundamental gap in software documentation: instructions that tell the reader _what_ to avoid but not _why_ the avoidance matters. In aerospace, a mechanic who understands that a solvent is poisonous will handle it more carefully. In code, a developer who understands that an omitted timeout causes data loss will take the instruction seriously.
 
@@ -60,7 +62,7 @@ The rule applies differently across documentation types:
 
 **The risk explanation must match the signal word level.** The original ASD-STE100 defines two severity levels: WARNING (risk of injury or death) and CAUTION (risk of equipment damage). In code documentation, WARNING maps to data loss, security breach, or system unavailability. CAUTION maps to incorrect results, degraded performance, or build failures. A risk explanation under a WARNING must describe a severe outcome. A risk explanation under a CAUTION must describe a moderate outcome. Do not use WARNING for a build failure. Do not use CAUTION for a data breach. Mismatched severity erodes trust in all safety instructions in the document.
 
-### Paradigm-Specific Guidance
+## Paradigm-Specific Guidance
 
 **Object-Oriented (Java, C++, C#, Python classes).** In OOP, risk explanations often involve state corruption and inheritance contracts. A warning about a mutable field must explain that subclasses can modify the field in unexpected ways. A caution about a non-final method must explain that overriding can violate the base class invariant.
 
@@ -102,7 +104,7 @@ The rule applies differently across documentation types:
 >
 > *Principles applied: P2 (alias → refer to, specified part of speech), P8 (standard technical nouns: undefined behavior). Risk connects aliasing to compiler optimization to undefined behavior.*
 
-### Extended Examples
+## Extended Examples
 
 > **Non-STE:** WARNING: DO NOT USE `eval()`.
 >
@@ -140,7 +142,7 @@ The rule applies differently across documentation types:
 >
 > *Principles applied: P5 (secrets as technical noun), P3 (part of → become part of). Risk traces from hardcoded secrets to full infrastructure access.*
 
-### Edge Cases
+## Edge Cases
 
 **When a framework name is also an "unapproved" word.** Some framework names overlap with everyday English words that STE restricts. For example, the React framework `Suspense` is both a technical noun and an ordinary English word. A warning that says "DO NOT NEST SUSPENSE BOUNDARIES" could confuse readers who interpret Suspense as an emotion, not a component. The risk explanation must anchor the word in its technical meaning: "IF YOU NEST `Suspense` COMPONENTS, THE INNER SUSPENSE BOUNDARY CAN CAPTURE THE FALLBACK OF THE OUTER BOUNDARY. CAPTURED FALLBACKS CAN CAUSE INFINITE LOADING STATES AND UNRESPONSIVE PAGES." The code-formatted backticks and the repeated technical context disambiguate the term.
 
@@ -156,7 +158,7 @@ The rule applies differently across documentation types:
 
 **When the risk affects a different team than the reader.** In large organizations, the person who reads the documentation is often not the person who suffers the consequence. An infrastructure engineer reading an application warning may not feel the urgency. The risk explanation must bridge the organizational gap: "DO NOT DEPLOY WITHOUT CONTACTING THE DATABASE TEAM FIRST. THE DATABASE TEAM MUST LOCK THE SCHEMA BEFORE DEPLOYMENT. IF YOU DEPLOY WITHOUT A SCHEMA LOCK, THE MIGRATION CAN CONFLICT WITH ANOTHER DEPLOYMENT. SCHEMA CONFLICTS CAN CAUSE DATA CORRUPTION THAT AFFECTS ALL TEAMS USING THE DATABASE." The phrase "affects all teams using the database" connects the reader's action to consequences beyond their immediate team.
 
-### Cross-References
+## Cross-References
 
 - **Rule 1.1 (Use approved words):** The words in your risk explanation must come from the STE-Code dictionary. See the Canonical Synonym Table for substitutes: "retrieve" → "get", "terminate" → "stop", "utilize" → "use".
 - **Rule 1.6 (Non-approved words only as technical nouns):** When a risk explanation must include a non-approved word (for example, `deadlock`, `thrashing`, `replay attack`), present it as a technical code noun and define it on first use.
@@ -166,7 +168,7 @@ The rule applies differently across documentation types:
 - **Rule 7.4 (Use imperative mood for instructions):** The instruction part of a Rule 7.3 warning must use imperative mood ("DO NOT USE"), not descriptive ("using this is not recommended"). The risk explanation part may use descriptive mood to state the consequence.
 - **Section 1 (Words):** All words in risk explanations follow the noun-verb-adjective rules of Section 1. A risk sentence like "This initiates a cascade failure" violates Rule 1.2 (initiate → start) and Rule 1.3 (cascade as unapproved modifier). The STE version: "This can start a sequence of failures."
 
-### Grammar Notes
+## Grammar Notes
 
 The original ASD-STE100 Rule 7.3 carries grammatical justification that adapts directly to code documentation.
 
@@ -188,7 +190,7 @@ The original ASD-STE100 Rule 7.3 carries grammatical justification that adapts d
 
 **Imperative versus declarative mood in compound warnings.** A complete Rule 7.3 instruction has two grammatical moods. The instruction is imperative: "DO NOT DISABLE TLS VERIFICATION." The risk explanation is declarative: "Without TLS verification, an attacker can decrypt the traffic." Do not mix moods within a single sentence. Do not write: "Do not disable TLS verification because an attacker can decrypt the traffic." The conjunction "because" weakens the imperative by making the instruction sound like a suggestion. Use a period and start a new sentence for the risk explanation. The pause between the command and the consequence gives the reader a moment to register the instruction before processing its justification.
 
-### Practical Application
+## Practical Application
 
 Apply Rule 7.3 during documentation review with this checklist:
 

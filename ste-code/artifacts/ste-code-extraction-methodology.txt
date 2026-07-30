@@ -20,7 +20,7 @@ replacing aerospace vocabulary with code-domain equivalents.
 The adaptation follows a PRESERVE/REPLACE contract:
 
 PRESERVE (unchanged structure):
-  - All 53 writing rule numbers, same 9-section organization
+  - All 51 writing rule numbers, same 9-section organization
   - Rule numbering hierarchy (Section 1 through 9, plus 4 General Rules)
   - 19 technical noun categories (verified on Issue 9 pages 47-52)
   - 4 technical verb categories
@@ -42,7 +42,7 @@ example pair. The format is:
 
 Facts are immutable across the pipeline:
   - 19 technical noun categories (not 22)
-  - 53 writing rules plus 4 General Rules (not 65)
+  - 51 writing rules plus 4 General Rules (not 65)
   - Model: deepseek-v4-pro
   - 434 spec pages across 109 workers, 37 batches of 3
 
@@ -216,7 +216,7 @@ PIPELINE-LEVEL QUALITY (8 immutable guardrails):
   R3 — Completion Integrity: never claim complete without disk evidence
   R4 — Content Fidelity: zero fabrication, every claim grounded in source
   R5 — Formatting Standards: 9 refinement rules, blank lines, tables
-  R6 — Factual Correctness: 19 categories, deepseek-v4-pro, 53 rules
+  R6 — Factual Correctness: 19 categories, deepseek-v4-pro, 51 rules
   R7 — Progress Tracking: PROGRESS.md matches disk reality
   R8 — Error Recovery: fixes documented, stale files purged
 
@@ -316,7 +316,7 @@ IMMUTABLE FACTS
 
 Source: ASD-STE100 Issue 9, January 2025 (434 pages)
 Model: deepseek-v4-pro
-Adaptation: 53 writing rules + 4 General Rules (57 adapted files)
+Adaptation: 51 writing rules + 4 General Rules (55 adapted files)
 Categories: 19 technical noun categories + 4 verb categories
 Dictionary: 5,943 lines of approved/unapproved words
 Artifacts: 6 deployable files across 5 adaptation levels

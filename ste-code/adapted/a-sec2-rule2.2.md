@@ -122,7 +122,7 @@ In this example, you write "HTTP request pipeline middleware authentication hand
 > - The CR (17)
 > - The DTL (20).
 >
-> **STE:** [FIXME: generate STE correction for: ...]
+> **STE:**
 > The primary parts of the system are:
 > - The cache manager (8)
 > - The event bus (15)

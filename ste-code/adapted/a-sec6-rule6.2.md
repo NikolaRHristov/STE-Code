@@ -342,4 +342,4 @@ A dangling key word is a term introduced once and never repeated. The reader see
 >
 > **STE (resolved):** The build system compiles TypeScript and bundles static assets. The build system writes the output to the `dist/` directory. The deploy system copies the `dist/` directory into a Docker container.
 >
-> *Grammar note: In the Non-STE version, "static assets" and "output" appear once and disappear. The reader does not know if "output" refers to "static assets," "TypeScript," or both. In the STE version, "build system" and "dist/` directory" are the key words repeated across sentences.*
+> *Grammar note: In the Non-STE version, "static assets" and "output" appear once and disappear. The reader does not know if "output" refers to "static assets," "TypeScript," or both. In the STE version, "build system" and the `dist/` directory are the key words repeated across sentences.*

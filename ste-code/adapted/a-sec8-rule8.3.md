@@ -433,11 +433,11 @@ This rule interacts with several other STE-Code rules:
 
 - **Rule 6.3 (Procedural Steps):** When parentheses identify work steps, each step number must have its own line. Do not list multiple steps inside one set of parentheses.
 
-- **Rule 7.1 (Punctuation — General):** Parentheses are the only permitted brackets in STE. Do not use square brackets `[ ]` for parenthetical information. Square brackets are reserved for optional parameters in code syntax.
+- **Bracket usage:** Parentheses are the only permitted brackets in STE. Do not use square brackets `[ ]` for parenthetical information. Square brackets are reserved for optional parameters in code syntax.
 
-- **Rule 8.1 (Commas):** Do not use a comma before an opening parenthesis unless the parenthetical is an alternative at the end of a list (for example, "the staging server (node 3), and the production server (node 1)").
+- **Comma usage with parentheses:** Do not use a comma before an opening parenthesis unless the parenthetical is an alternative at the end of a list (for example, "the staging server (node 3), and the production server (node 1)").
 
-- **Rule 8.4 (Hyphens):** Do not confuse parentheses with hyphens when listing compound adjectives. Parentheses explain; hyphens join words into a single modifier.
+- **Rule 8.2 (Hyphens):** Do not confuse parentheses with hyphens when listing compound adjectives. Parentheses explain. Hyphens join words into a single modifier.
 
 ## Grammar Notes
 
