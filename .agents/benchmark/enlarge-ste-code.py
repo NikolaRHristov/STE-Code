@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 """Agent #8 — Enlarge ste-code from refined content using BATCHED POLL WORKERS.
-Same pattern as Agent #1: 3 workers per batch, poll for completion, verify, save state."""
+Same pattern as Agent #1: 3 workers per batch, poll for completion, verify, save state.
+
+This agent runs three enrichment passes (code-examples, dictionary-expand,
+domain-adapt) over the refined STE-Code markdown files produced by earlier
+agents and writes structured JSON to ste-code/enriched-code/.
+"""
 import subprocess, os, tempfile, time, sys, json, glob
 
 PROJECT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 REFINED_DIR = os.path.join(PROJECT, "ste-code", "refined")
 OUT_DIR = os.path.join(PROJECT, "ste-code", "enriched-code")
+PROMPT_DIR = os.path.join(OUT_DIR, "prompts")  # keep prompts separate from JSON outputs
 STATE_FILE = os.path.join(PROJECT, ".agents", "state", "ENLARGE-PROGRESS.md")
 MODEL = "deepseek-v4-pro"
 BATCH_SIZE = 3
 
 os.makedirs(OUT_DIR, exist_ok=True)
+os.makedirs(PROMPT_DIR, exist_ok=True)
 
 # Load the extension worker agent prompt
 with open(os.path.join(PROJECT, ".agents/agent/agent-8-extension-worker.md")) as f:
@@ -18,6 +25,10 @@ with open(os.path.join(PROJECT, ".agents/agent/agent-8-extension-worker.md")) as
 
 # Get refined files, group by section
 refined_files = sorted([f for f in os.listdir(REFINED_DIR) if f.endswith('.md')])
+
+if not refined_files:
+    print(f"ERROR: No .md files found in {REFINED_DIR}. Nothing to process.", file=sys.stderr)
+    sys.exit(1)
 
 # Enrichment passes — each pass processes a set of refined files in batches
 PASSES = [
@@ -66,8 +77,8 @@ Write ONLY valid JSON to stdout. Format:
 {{"pass": "{pass_name}", "batch": {batch_num}, "entries": [...]}}
 """
     
-    # Write prompt to temp file
-    prompt_file = os.path.join(OUT_DIR, f"prompt-{pass_name}-{batch_num:03d}.txt")
+    # Write prompt to dedicated prompts subdir (not mixed with JSON output)
+    prompt_file = os.path.join(PROMPT_DIR, f"prompt-{pass_name}-{batch_num:03d}.txt")
     with open(prompt_file, 'w') as f:
         f.write(worker_prompt)
     
@@ -93,7 +104,8 @@ def wait_for_workers(pids, timeout=180):
                 wpid, status = os.waitpid(pid, os.WNOHANG)
                 if wpid != 0:
                     done.append(pid)
-            except ChildProcessError:
+            except OSError:
+                # Covers ChildProcessError (Linux) and ProcessLookupError (macOS)
                 done.append(pid)
         for pid in done:
             remaining.discard(pid)
@@ -102,21 +114,34 @@ def wait_for_workers(pids, timeout=180):
     return len(remaining) == 0
 
 def verify_output(out_file):
-    """Check if output file contains valid JSON."""
-    if not os.path.exists(out_file) or os.path.getsize(out_file) < 10:
-        return False, "empty or missing"
+    """Check if output file contains valid JSON.
+    
+    Returns (ok: bool, message: str). Distinguishes between:
+      - missing/empty file
+      - OS error reading the file
+      - content present but no JSON found
+      - content present but JSON is malformed
+      - valid JSON
+    """
     try:
+        if not os.path.exists(out_file):
+            return False, "missing"
+        size = os.path.getsize(out_file)
+        if size < 10:
+            return False, f"empty ({size} bytes)"
         with open(out_file) as f:
             content = f.read()
-            # Find JSON in output (hermes may add text around it)
-            start = content.find('{')
-            end = content.rfind('}') + 1
-            if start >= 0 and end > start:
-                json.loads(content[start:end])
-                return True, f"{len(content)} chars"
-            return False, "no JSON found"
+        # Find JSON in output (hermes may add text around it)
+        start = content.find('{')
+        end = content.rfind('}') + 1
+        if start >= 0 and end > start:
+            json.loads(content[start:end])
+            return True, f"{len(content)} chars"
+        return False, "no JSON found"
+    except OSError as e:
+        return False, f"OS error: {e}"
     except json.JSONDecodeError as e:
-        return False, str(e)
+        return False, f"invalid JSON: {e}"
 
 # Build batches for each pass
 all_batches = []
@@ -157,7 +182,7 @@ for i in range(0, total_batches, BATCH_SIZE):
     all_verified = True
     for pid, (pass_name, batch_num, out_file) in pids.items():
         ok, msg = verify_output(out_file)
-        status = "✅" if ok else "❌"
+        status = "\u2705" if ok else "\u274c"
         print(f"  {pass_name}-{batch_num:03d}: {status} {msg}")
         if not ok:
             all_verified = False
@@ -171,7 +196,7 @@ for i in range(0, total_batches, BATCH_SIZE):
         f.write(f"- Workers: {len(pids)} launched\n\n")
     
     if not all_verified:
-        print("  ⚠️ Some outputs failed verification. Continuing with next group.")
+        print("  \u26a0\ufe0f Some outputs failed verification. Continuing with next group.")
     
     print()
 
