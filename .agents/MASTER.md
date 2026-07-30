@@ -258,7 +258,6 @@ Full details: `.agents/skills/references/rails.md`
 
 | File | Content |
 |------|---------|
-| `instruction/STE-CODE-IMPLEMENTATION.md` | Original implementation protocol (v3) |
 | `.agents/skills/references/worker-grid.md` | 109-worker batch grid |
 | `.agents/skills/references/section-types.md` | Page type classification |
 | `.agents/skills/references/worker-rails.md` | Worker-level self-checks |
