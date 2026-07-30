@@ -18,7 +18,7 @@ From the topic sentences, the developer will understand the contents of your doc
 
 > **Non-STE:** The authentication middleware validates each request and the logging system records all validation failures to the audit trail while the response pipeline returns JSON error bodies with error codes and the database connection pool maintains idle connections for reuse and the configuration module reloads settings when the manifest file changes on disk.
 
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: The authentication middleware validates each request and the...]
 >
 > The authentication middleware validates each incoming request. The middleware reads the bearer token from the `Authorization` header. It sends the token to the `validateToken` function in the `security` module. The `validateToken` function decodes the JWT payload using the `HS256` algorithm from the `jwt-signer` library. Then it compares the `exp` claim with the current server time. If the token is not expired and not malformed, the function gets the `sub` and `role` claims and attaches them to the `request.auth` object.
 >
@@ -155,7 +155,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 
 > **Non-STE:** The `POST /users` endpoint creates a new user in the database, sends a welcome email via the `EmailService`, hashes the password using bcrypt with a cost factor of 12, returns a `201 Created` response with the user's public profile in JSON format, and if the email is already taken it returns a `409 Conflict` with an error message while also rate-limiting requests to 10 per minute per IP address using the token bucket algorithm implemented in the `RateLimiter` middleware.
 
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: The `POST /users` endpoint creates a new user in the databas...]
 >
 > The `POST /users` endpoint creates a new user account. The endpoint accepts a JSON body with `email`, `password`, and `name` fields. It hashes the password using bcrypt with a cost factor of 12. It stores the user record in the `users` table of the primary database. On success, the endpoint returns a `201 Created` response. The response body contains the user's public profile as a JSON object.
 >
@@ -171,7 +171,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 
 > **Non-STE:** To install this project, clone the repository and run `npm install` which downloads all dependencies including `express` for the server, `pg` for the PostgreSQL client, and `redis` for caching, then copy `.env.example` to `.env` and fill in your database credentials and API keys, and finally run `npm run migrate` to set up the database schema and `npm run seed` to populate it with sample data, after which you can start the development server with `npm run dev` which starts on port 3000 by default but you can change it with the `PORT` environment variable and it also starts a WebSocket server on the same port for real-time features.
 
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: To install this project, clone the repository and run `npm i...]
 >
 > To install the project, clone the repository and run `npm install`. This command downloads all Node.js dependencies.
 >
@@ -187,7 +187,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 
 > **Non-STE:** Fix the login bug where users could not authenticate after password reset, also refactored the user service to use the new repository pattern, and updated the dependencies to latest versions because there was a security vulnerability in the old express version, plus added a loading spinner to the login page.
 
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: Fix the login bug where users could not authenticate after p...]
 >
 > Fix authentication failure after password reset
 >
@@ -199,7 +199,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 
 > **Non-STE:** The `PaymentProcessor` class handles all payment operations including credit card validation through the Stripe API, PayPal integration, refund processing which requires a 24-hour waiting period, receipt generation as a PDF, and it also manages the transaction log for audit purposes while maintaining compliance with PCI-DSS standards and logging all operations to the audit trail.
 
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: The `PaymentProcessor` class handles all payment operations ...]
 >
 > The `PaymentProcessor` class handles payment transactions. It validates payment methods, processes charges, and issues refunds.
 >
@@ -217,7 +217,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 
 > **Non-STE:** Connection refused — the database is probably down or the credentials are wrong, check your `.env` file and make sure the `DATABASE_URL` is correct, also make sure the VPN is connected if you are working remotely, and verify that the database server is running on the specified port, you can check this with `pg_isready` if you are using PostgreSQL, otherwise use the equivalent tool for your database.
 
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: Connection refused — the database is probably down or the cr...]
 >
 > Connection refused: the database server did not accept the connection.
 >
@@ -234,7 +234,7 @@ Do not document both the allocation and the deallocation of a resource in one pa
 
 > **Non-STE:** The cache module supports Redis for production and an in-memory store for development, you configure it by setting `CACHE_DRIVER` to either `redis` or `memory`, and when using Redis you also need to set `REDIS_URL` and `REDIS_PREFIX` and optional `REDIS_TIMEOUT` in milliseconds which defaults to 5000, and the in-memory store has a `MAX_ITEMS` setting that defaults to 1000, and if you exceed that limit it evicts the least recently used items, also Redis supports clustering by setting multiple URLs in `REDIS_CLUSTER_URLS` as a comma-separated list.
 
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: The cache module supports Redis for production and an in-mem...]
 >
 > The cache module supports two drivers: Redis and in-memory. Set the `CACHE_DRIVER` environment variable to `redis` or `memory`.
 >

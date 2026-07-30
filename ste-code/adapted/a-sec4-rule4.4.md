@@ -143,7 +143,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word between the feature claim and the prerequisite. The "also" is vague.*
 
-**STE:**
+**STE:** [FIXME: generate STE correction for: ...]
 > The image processing pipeline uses GPU acceleration for real-time transforms. **Thus**, you must install CUDA 11.8 or a newer version. **And** the pipeline includes a CPU fallback mode.
 >
 > *Applied: P1 (approved connecting word "thus"), P1 (approved connecting word "and")*
@@ -156,7 +156,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: The relationship between the 201 status and the response body is implicit. "And" is overloaded inside a single sentence instead of connecting separate sentences. "Utilized" is not an approved word.*
 
-**STE:**
+**STE:** [FIXME: generate STE correction for: ...]
 > A POST request to `/users` makes a new user account. **As a result**, the API returns a 201 status code. **And** the response body contains the created user object with an auto-generated ID. You can use **this** ID in later requests to refer to the user.
 >
 > *Applied: P1 (connecting phrase "as a result"), P1 (connecting word "and"), P1 (demonstrative adjective "this"), canonical synonym table ("use" replaces "utilized")*
@@ -169,7 +169,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting words link the filter behavior to the return guarantee. The immutability note floats without connection. The predicate contract is isolated.*
 
-**STE:**
+**STE:** [FIXME: generate STE correction for: ...]
 > The `filter` method removes items that do not match the predicate function. **Thus**, the method returns a new collection with only the matching items. **And** the original collection stays unchanged. **This** predicate function receives each item as its only argument.
 >
 > *Applied: P1 (connecting word "thus"), P1 (connecting word "and"), P1 (demonstrative adjective "this")*
@@ -182,7 +182,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word links the bug description to the fix description. The three sentences are a flat list with no logical structure.*
 
-**STE:**
+**STE:** [FIXME: generate STE correction for: ...]
 > The `acquire()` method returned an already-closed connection when many callers used the pool at the same time. **As a result**, the caller received a stale connection and failed on the first write. **Thus**, this commit adds a state check before the method removes a connection from the wait queue.
 >
 > *Applied: P1 (connecting phrase "as a result"), P1 (connecting word "thus")*
@@ -195,7 +195,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word links the error condition to the recovery action. The two sentences feel disconnected.*
 
-**STE:**
+**STE:** [FIXME: generate STE correction for: ...]
 > The configuration file is not found. **Thus**, you must specify a path with the `--config` flag. **Or** you must set the `CONFIG_PATH` environment variable.
 >
 > *Applied: P1 (connecting word "thus"), P1 (connecting word "or")*
@@ -208,7 +208,7 @@ Example flow: "The `Box<T>` type owns its heap-allocated data. **Thus**, the dat
 
 *Problem: No connecting word links the option purpose to the trade-off. The conditional advice floats without logical anchor.*
 
-**STE:**
+**STE:** [FIXME: generate STE correction for: ...]
 > # Use this option to enable JIT compilation for query plans. **As a result**, the startup time increases. **But** the runtime performance improves. Set **this** option to `false` if your workload uses many short-lived connections.
 >
 > *Applied: P1 (connecting phrase "as a result"), P1 (connecting word "but"), P1 (demonstrative adjective "this")*
@@ -272,7 +272,7 @@ Guidance: Do not use a connecting word at the very start of a new section to lin
 > ## Returns
 > Thus, the function returns a `Result` object with the parsed data.
 >
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: ...]
 > ## Returns
 > The function returns a `Result` object with the parsed data.
 

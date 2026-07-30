@@ -128,7 +128,7 @@ Docstrings combine the two rules: no article before a noun followed by a code id
 >     """Find user by ID and return User object or None if not found."""
 > ```
 >
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: ...]
 > ```python
 > def find(id: int) -> User:
 >     """Find a user by the given ID.

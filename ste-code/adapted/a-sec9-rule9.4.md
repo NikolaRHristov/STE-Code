@@ -170,7 +170,7 @@ In Rust, "ownership," "borrow," and "lifetime" are terms of art with precise mea
 > - `GET /items/:id` — Gets item by ID.
 > - `DELETE /items/:id` — Removes the specified item.
 >
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: ...]
 > - `GET /items` — Returns all items.
 > - `POST /items` — Creates a new item.
 > - `GET /items/:id` — Returns the item with the specified ID.
@@ -205,7 +205,7 @@ In Rust, "ownership," "borrow," and "lifetime" are terms of art with precise mea
 > - Service B: "Cannot establish link to remote"
 > - Service C: "Failed to connect to upstream server"
 >
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: ...]
 > - Service A: "Cannot connect to the remote host"
 > - Service B: "Cannot connect to the remote host"
 > - Service C: "Cannot connect to the remote host"
@@ -219,7 +219,7 @@ In Rust, "ownership," "borrow," and "lifetime" are terms of art with precise mea
 > `--quiet` — Suppress all logging
 > `--debug` — Turns on debug-level messages
 >
-> **STE:**
+> **STE:** [FIXME: generate STE correction for: ...]
 > `--verbose` — Enables verbose output
 > `--quiet` — Disables all output
 > `--debug` — Enables debug output
