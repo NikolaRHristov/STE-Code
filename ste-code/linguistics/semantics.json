@@ -28,16 +28,16 @@
       }
     },
     "term_table": {
-      "deploy": {"class": "Action", "result": "deployment", "entity": null, "rule_refs": ["a-sec1-rule1.7.md", "a-sec1-rule1.13.md"]},
-      "build": {"class": "Action", "result": "build (n)", "entity": null, "rule_refs": ["a-sec1-rule1.7.md"]},
-      "compile": {"class": "Action", "result": "compilation", "entity": null, "rule_refs": ["a-sec1-rule1.9.md"]},
-      "test": {"class": "Action", "result": "test (n)", "entity": "test suite", "rule_refs": ["a-sec5-rule5.3.md"]},
-      "run": {"class": "Action", "result": "run (n)", "entity": null, "rule_refs": ["a-sec1-rule1.3.md"]},
-      "install": {"class": "Action", "result": "installation", "entity": null, "rule_refs": ["a-sec5-rule5.1.md"]},
-      "configure": {"class": "Action", "result": "configuration", "entity": "config file", "rule_refs": ["a-sec1-rule1.9.md"]},
-      "validate": {"class": "Action", "result": "validation", "entity": "validator", "rule_refs": ["a-sec3-rule3.7.md"]},
-      "commit": {"class": "Action", "result": "commit (n)", "entity": null, "rule_refs": ["a-sec1-rule1.7.md"]},
-      "migrate": {"class": "Action", "result": "migration", "entity": null, "rule_refs": ["a-sec5-rule5.4.md"]}
+      "build": {"class": "Action", "result": "build (n)", "entity": "build artifact", "rule_refs": ["a-sec1-rule1.13.md"], "grounding_note": "Dual-category term per Rule 1.13:258. Previous ref to 1.7 was wrong — 1.7 has 0 mentions of 'build'."},
+      "compile": {"class": "Action", "result": null, "entity": null, "rule_refs": ["a-sec1-rule1.13.md"], "grounding_note": "CONTRADICTION RESOLVED: Rule 1.13:248,276 explicitly states 'compile' is NOT a dual-category word and has no approved noun form. Previous 'compilation' result form removed."},
+      "test": {"class": "Action", "result": "test (n)", "entity": "test suite", "rule_refs": ["a-sec1-rule1.13.md", "a-sec5-rule5.3.md"], "grounding_note": "Dual-category per Rule 1.13:260. Rule 5.3 uses in compound nouns but doesn't classify."},
+      "run": {"class": "Action", "result": "run (n)", "entity": null, "rule_refs": ["a-sec1-rule1.3.md"], "grounding_note": "Confirmed at Rule 1.3:59 — 'execute a program or command'."},
+      "install": {"class": "Action", "result": "installation", "entity": null, "rule_refs": ["a-sec5-rule5.1.md", "a-sec5-rule5.3.md"], "grounding_note": "Rule 5.1 uses 'installation' as noun. Imperative form confirmed at Rule 5.3:48."},
+      "configure": {"class": "Action", "result": "configuration", "entity": "config file", "rule_refs": ["a-sec5-rule5.3.md"], "grounding_note": "Previous ref to 1.9 was wrong — 1.9 only has 'configuration' as noun. Verb 'configure' confirmed at Rule 5.3:48."},
+      "validate": {"class": "Action", "result": "validation", "entity": "validator", "rule_refs": [], "grounding_note": "NOVEL — no counterpart found in any adapted rule. Previous ref to 3.7 was wrong (0 mentions)."},
+      "commit": {"class": "Action", "result": "commit (n)", "entity": null, "rule_refs": ["a-sec1-rule1.7.md"], "grounding_note": "Used as verb in Rule 1.7 examples (lines 245, 449) but not explicitly classified as Action term."},
+      "migrate": {"class": "Action", "result": "migration", "entity": null, "rule_refs": ["a-sec5-rule5.4.md"], "grounding_note": "Only noun form 'migration' appears in rule 5.4. Verb 'migrate' implied but never explicitly used."},
+      "deploy": {"class": "Action", "result": "deploy (n)", "entity": "deployment resource", "rule_refs": ["a-sec1-rule1.7.md", "a-sec1-rule1.13.md"], "grounding_note": "CONTRADICTION RESOLVED: Rules use 'deploy' as noun form (Rule 1.13:248 'the deploy is correct'). Previous 'deployment' result form changed to 'deploy (n)' to match rules."}
     }
   },
 
