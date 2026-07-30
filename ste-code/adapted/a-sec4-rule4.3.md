@@ -153,8 +153,8 @@ For Rust ownership and C memory documentation, use vertical lists to describe th
 
 ### Example 1: Configuration Options (Inline to Vertical)
 
-> **Non-STE (P11 violation):** The server supports logging in JSON format, text format, and syslog format, and can write to stdout, stderr, a file on disk, or a remote syslog daemon.
-> **STE-Code:** The server supports these log formats:
+> **Non-STE:** The server supports logging in JSON format, text format, and syslog format, and can write to stdout, stderr, a file on disk, or a remote syslog daemon.
+> **STE:** The server supports these log formats:
 > - The JSON format
 > - The text format
 > - The syslog format.
@@ -169,8 +169,8 @@ For Rust ownership and C memory documentation, use vertical lists to describe th
 
 ### Example 2: Error Code Reference
 
-> **Non-STE (P11, P2 violation):** The API returns 400 for validation issues, 401 when the token is expired or missing, 403 if permissions aren't sufficient to access the resource, 404 obviously when the resource can't be located, and 500 for any unhandled internal failure.
-> **STE-Code:** The API returns these error codes:
+> **Non-STE:** The API returns 400 for validation issues, 401 when the token is expired or missing, 403 if permissions aren't sufficient to access the resource, 404 obviously when the resource can't be located, and 500 for any unhandled internal failure.
+> **STE:** The API returns these error codes:
 > - `400 Bad Request` for a failed input validation
 > - `401 Unauthorized` for an expired or missing token
 > - `403 Forbidden` for insufficient permissions
@@ -181,12 +181,12 @@ For Rust ownership and C memory documentation, use vertical lists to describe th
 
 ### Example 3: Procedural Steps (Mixed Types)
 
-> **Non-STE (Rule 4.3 violation — mixed procedural/descriptive):** To deploy the application:
+> **Non-STE:** To deploy the application:
 > - Set the `DATABASE_URL` environment variable.
 > - The `MIGRATIONS_DIR` points to the SQL files.
 > - Run the `apply-migrations` command.
 > - The server binds to port 8080 after startup.
-> **STE-Code:** To deploy the application, do these steps:
+> **STE:** To deploy the application, do these steps:
 > - Set the `DATABASE_URL` environment variable.
 > - Set the `MIGRATIONS_DIR` to the SQL files path.
 > - Run the `apply-migrations` command.
@@ -196,11 +196,11 @@ For Rust ownership and C memory documentation, use vertical lists to describe th
 
 ### Example 4: Method Return Value with Connected Structure
 
-> **Non-STE (Rule 4.3 violation — items do not connect to intro):** The `findUser` method returns these things:
+> **Non-STE:** The `findUser` method returns these things:
 > - `null` when the query finds no matching record.
 > - Returns a `User` object with all profile fields populated from the database.
 > - Throws `DatabaseError` if the connection pool is exhausted.
-> **STE-Code:** The `findUser` method returns:
+> **STE:** The `findUser` method returns:
 > - A `User` object when the query finds a matching record
 > - `null` when the query finds no matching record.
 >
@@ -210,8 +210,8 @@ For Rust ownership and C memory documentation, use vertical lists to describe th
 
 ### Example 5: Dependencies in a Package Manifest
 
-> **Non-STE (P11, P1 violation):** This project leverages express for HTTP routing, utilizes pg for database connections, employs redis for caching, and makes use of winston for structured logging.
-> **STE-Code:** The project uses these dependencies:
+> **Non-STE:** This project leverages express for HTTP routing, utilizes pg for database connections, employs redis for caching, and makes use of winston for structured logging.
+> **STE:** The project uses these dependencies:
 > - `express` for HTTP routing
 > - `pg` for PostgreSQL database connections
 > - `redis` for cache storage
@@ -221,8 +221,8 @@ For Rust ownership and C memory documentation, use vertical lists to describe th
 
 ### Example 6: API Endpoint Documentation
 
-> **Non-STE (P11, Rule 4.3 violation — wall of text):** POST /api/orders accepts a JSON body with customerId (string, required, must be a valid UUID), items (array of objects with productId string and quantity integer, must not be empty), shippingAddress (object with street, city, zip, country strings, optional, defaults to the customer's default address), and paymentMethod (string enum of "card", "paypal", "invoice", required).
-> **STE-Code:** The `POST /api/orders` endpoint accepts a JSON body with these fields:
+> **Non-STE:** POST /api/orders accepts a JSON body with customerId (string, required, must be a valid UUID), items (array of objects with productId string and quantity integer, must not be empty), shippingAddress (object with street, city, zip, country strings, optional, defaults to the customer's default address), and paymentMethod (string enum of "card", "paypal", "invoice", required).
+> **STE:** The `POST /api/orders` endpoint accepts a JSON body with these fields:
 > - The `customerId` (string, required) that must be a valid UUID
 > - The `items` (array, required) that must not be empty. Each item contains:
 >   - A `productId` string

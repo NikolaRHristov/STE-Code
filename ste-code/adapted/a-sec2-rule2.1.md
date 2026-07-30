@@ -78,7 +78,7 @@ This rule applies to all forms of code documentation. The specific application v
 
 README files introduce a project to new users. Long multi-word nouns in the opening paragraphs create a barrier to understanding. Keep the project description accessible by using short multi-word nouns.
 
-> **Non-STE (README introduction):** The project implements a distributed event sourcing aggregate root snapshot storage strategy.
+> **Non-STE:** The project implements a distributed event sourcing aggregate root snapshot storage strategy.
 > **STE (README introduction):** The project implements a strategy for storage of snapshots of the aggregate roots in a distributed event sourcing system.
 
 > **Principle applied:** P1, P5 — "event sourcing," "aggregate root," and "distributed" are approved technical nouns. The multi-word noun is restructured from 7 words into a chain of short units (1 word, 1 word, 1 word, and 3 words).
@@ -87,7 +87,7 @@ README files introduce a project to new users. Long multi-word nouns in the open
 
 API reference documentation describes parameters, return types, and behavior. Long multi-word nouns in parameter descriptions cause confusion about which noun modifies which.
 
-> **Non-STE (API parameter):** `timeout` — The database connection pool acquisition timeout duration in milliseconds.
+> **Non-STE:** `timeout` — The database connection pool acquisition timeout duration in milliseconds.
 > **STE (API parameter):** `timeout` — The duration of the timeout for acquisition of the database connection pool, in milliseconds.
 
 > **Principle applied:** P11 — the consistent use of "acquisition" instead of its synonyms ("fetch," "retrieval") keeps the documentation predictable.
@@ -96,7 +96,7 @@ API reference documentation describes parameters, return types, and behavior. Lo
 
 Docstrings are read by developers who need fast understanding. Short multi-word nouns help them scan the documentation quickly.
 
-> **Non-STE (Python docstring):** Handles the Redis cache key expiration event notification dispatch.
+> **Non-STE:** Handles the Redis cache key expiration event notification dispatch.
 > **STE (Python docstring):** Handles dispatch of the notification of the event of expiration of the Redis cache key.
 
 > **Principle applied:** P4 — "handles" and "dispatch" are approved verb and noun forms. The long multi-word noun is broken with "of" prepositions.
@@ -105,7 +105,7 @@ Docstrings are read by developers who need fast understanding. Short multi-word 
 
 Commit messages must be scannable in a git log. Multi-word nouns longer than three words make the subject line too dense.
 
-> **Non-STE (commit subject):** fix: user authentication token refresh race condition handling
+> **Non-STE:** fix: user authentication token refresh race condition handling
 > **STE (commit subject):** fix: handling of the race condition in the refresh of the user authentication token
 
 > **Principle applied:** P9 — the shorter, clearer structure uses "of" and "in" to show the relations between the nouns.
@@ -114,7 +114,7 @@ Commit messages must be scannable in a git log. Multi-word nouns longer than thr
 
 Error messages appear in logs and terminal output. The reader must understand the error immediately. Long multi-word nouns delay comprehension.
 
-> **Non-STE (error message):** ERROR: Payment gateway transaction rollback failure recovery attempt limit exceeded.
+> **Non-STE:** ERROR: Payment gateway transaction rollback failure recovery attempt limit exceeded.
 > **STE (error message):** ERROR: The limit of attempts for recovery from failure of the rollback of a transaction in the payment gateway is exceeded.
 
 > **Principle applied:** P2, P3 — "recovery" is used only as a noun. "Failure" is used only with its approved meaning.
@@ -123,7 +123,7 @@ Error messages appear in logs and terminal output. The reader must understand th
 
 Configuration documentation must be unambiguous. When a multi-word noun names a setting, the description must show the exact relation between the parts.
 
-> **Non-STE (env var description):** `CACHE_TTL` — Redis cluster node connection pool maximum idle time seconds.
+> **Non-STE:** `CACHE_TTL` — Redis cluster node connection pool maximum idle time seconds.
 > **STE (env var description):** `CACHE_TTL` — The maximum idle time, in seconds, for the connection pool of the node of the Redis cluster.
 
 > **Principle applied:** P1 — "maximum" and "idle" are approved words from the STE-Code dictionary. The unit ("seconds") is placed after the value it modifies.
@@ -312,7 +312,7 @@ Auto-generated documentation (JSDoc output, Sphinx autodoc, Swagger/OpenAPI gene
 > *(This is a function name from source code, generated verbatim. Not subject to the rule.)*
 
 > **Must be corrected in the source docstring:**
-> **Non-STE (docstring):** Gets the user profile image upload progress percentage completion status.
+> **Non-STE:** Gets the user profile image upload progress percentage completion status.
 > **STE (docstring):** Gets the status of completion of the percentage of progress of the upload of the user profile image.
 
 ### Edge Case 4 — Compound Terms With Slashes
@@ -329,7 +329,7 @@ Technical terms that include slashes (read/write, input/output, create/read/upda
 
 The goal of this rule is clarity, not minimal word count. A broken multi-word noun with prepositions will always have more total words than the original noun chain. This is acceptable because clarity is the primary goal.
 
-> **Non-STE (8 total words):** The API gateway request rate limiter configuration is complex.
+> **Non-STE:** The API gateway request rate limiter configuration is complex.
 > **STE (14 total words):** The configuration of the limiter of the rate of the requests to the API gateway is complex.
 
 The STE version uses more total words (14 vs. 8) but each multi-word noun unit is at most 3 words. The reader can process each unit independently.

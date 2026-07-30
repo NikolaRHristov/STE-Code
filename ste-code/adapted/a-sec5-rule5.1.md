@@ -62,7 +62,7 @@ This rule applies to sentences in procedural documentation text. Code snippets, 
 >
 > *Adapted from spec example: "WHEN YOU REMOVE THE SHROUD (26), BE CAREFUL NOT TO CAUSE DAMAGE TO THE SURFACE OF THE FLANGE ASSEMBLY (22)." (20 words)*
 
-> **Non-STE (note):** For more detailed information about the supported authentication methods and their respective configuration parameters in this release, please refer to the official authentication module documentation page. (27 words)
+> **Non-STE:** For more detailed information about the supported authentication methods and their respective configuration parameters in this release, please refer to the official authentication module documentation page. (27 words)
 > **STE (note):** For more information about the supported authentication methods, refer to the authentication module documentation. (15 words)
 >
 > *Adapted from original rule — notes have a maximum sentence length of 25 words; no direct spec pair*
@@ -85,7 +85,7 @@ README files contain installation procedures, configuration steps, and quick-sta
 
 API reference pages describe endpoints, parameters, return types, and error codes. Procedural sentences in API docs include setup instructions, authentication flows, and request sequencing. Parameter descriptions in tables are descriptive, not procedural. Use the 25-word limit for descriptive sentences in API parameter tables. Apply the 20-word limit to sentences that tell the reader to perform an action.
 
-> **Non-STE (descriptive):** The `page` query parameter accepts a positive integer value that specifies which page of results the server should return in the paginated response to this endpoint. (28 words)
+> **Non-STE:** The `page` query parameter accepts a positive integer value that specifies which page of results the server should return in the paginated response to this endpoint. (28 words)
 >
 > **STE (descriptive):** The `page` query parameter accepts a positive integer. (8 words) It specifies which page of results to return. (9 words) This is for paginated responses. (6 words)
 >
@@ -105,7 +105,7 @@ Docstrings for functions and methods often contain procedural instructions for c
 
 A commit message subject line is a short summary of the change. Keep the subject line to 72 characters or fewer. This is a separate constraint from the word count rule. The commit message body contains procedural or descriptive sentences. Apply the 20-word limit to procedural sentences in the body. Apply the 25-word limit to descriptive sentences.
 
-> **Non-STE (body):** Refactored the authentication middleware to extract the token validation logic into a separate utility function so that it can be reused by the WebSocket upgrade handler and the GraphQL subscription resolver as well. (35 words)
+> **Non-STE:** Refactored the authentication middleware to extract the token validation logic into a separate utility function so that it can be reused by the WebSocket upgrade handler and the GraphQL subscription resolver as well. (35 words)
 >
 > **STE (body):** Refactored the authentication middleware. (4 words) Extracted the token validation logic into a separate utility function. (11 words) The WebSocket upgrade handler and the GraphQL subscription resolver now reuse this function. (15 words)
 >
@@ -235,7 +235,7 @@ Some technical names are unavoidably long. "Amazon Web Services Elastic Kubernet
 
 **Guidance:** Use the shortest accepted form of the name on first use. Define an abbreviation. Then, use the abbreviation in later sentences. This is consistent with Rule 1.9 (prefer short, clear technical nouns). The abbreviation itself counts as one word.
 
-> **Non-STE (packed name):** Create a new cluster in Amazon Web Services Elastic Kubernetes Service using the eksctl command-line tool with the provided cluster configuration YAML file that specifies three worker nodes of type t3.medium. (30 words)
+> **Non-STE:** Create a new cluster in Amazon Web Services Elastic Kubernetes Service using the eksctl command-line tool with the provided cluster configuration YAML file that specifies three worker nodes of type t3.medium. (30 words)
 >
 > **STE:** Create a new cluster in Amazon EKS. (7 words) Use the eksctl command-line tool. (6 words) Use the provided cluster configuration YAML file. (8 words) The file must specify three worker nodes of type t3.medium. (13 words)
 
@@ -245,7 +245,7 @@ Some code keyword sequences form long noun phrases that consume many word-count 
 
 **Guidance:** Code elements inside backticks count as one word each, regardless of their character length. This aligns with the principle that code identifiers are opaque tokens, not prose words. Apply this rule consistently: `Result<T, E>` is one word, `async fn` is two words. Do not expand generics or type parameters into prose words.
 
-> **Non-STE (ambiguous counting):** The function signature `pub async fn fetch_user(id: UserId) -> Result<User, Error>` specifies that the function is public and asynchronous and returns a Result type that wraps either a User value or an Error value. (33 words under prose counting rules)
+> **Non-STE:** The function signature `pub async fn fetch_user(id: UserId) -> Result<User, Error>` specifies that the function is public and asynchronous and returns a Result type that wraps either a User value or an Error value. (33 words under prose counting rules)
 >
 > **STE:** The function signature is `pub async fn fetch_user(id: UserId) -> Result<User, Error>`. (8 words) The function is public and asynchronous. (6 words) It returns a Result type. (6 words) The Result wraps a User value or an Error value. (11 words)
 >

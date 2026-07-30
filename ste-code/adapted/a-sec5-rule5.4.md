@@ -79,13 +79,13 @@ For error response documentation, state the condition that triggers the error be
 
 Docstrings describe function behavior, parameters, and return values. When a function has preconditions, the docstring must state them before describing the action. The condition-before-command pattern in docstrings maps to precondition-before-behavior.
 
-> **Non-STE (Python docstring):** Deletes the specified file from the filesystem. A FileNotFoundError will be raised if the file does not exist at the given path.
+> **Non-STE:** Deletes the specified file from the filesystem. A FileNotFoundError will be raised if the file does not exist at the given path.
 >
 > **STE (Python docstring):** Remove the file at `path` from the filesystem. If the file does not exist, this function raises `FileNotFoundError`.
 >
 > *Principle applied: P1 ("remove" replaces "deletes"), P8 (Python exception name as technical noun). The behavior comes first as a command. The precondition "If the file does not exist" comes before the result clause.*
 
-> **Non-STE (JavaScript JSDoc):** Processes the items in the provided array by applying the transformer function to each one and then collecting the results into a new array, but if the array is null or undefined it'll return an empty array right away.
+> **Non-STE:** Processes the items in the provided array by applying the transformer function to each one and then collecting the results into a new array, but if the array is null or undefined it'll return an empty array right away.
 >
 > **STE (JavaScript JSDoc):** Apply `transformer` to each item in `items`. Return a new array with the results. If `items` is `null` or `undefined`, return an empty array.
 >
@@ -243,7 +243,7 @@ State the precondition before the method call instruction. If a method mutates o
 
 For constructor documentation, state the preconditions that must be true before object creation.
 
-> **Non-STE (Java):** Constructs a new HttpClient instance with the provided configuration. The configuration object must not be null and must have at least a base URL set otherwise an IllegalStateException will be thrown at construction time.
+> **Non-STE:** Constructs a new HttpClient instance with the provided configuration. The configuration object must not be null and must have at least a base URL set otherwise an IllegalStateException will be thrown at construction time.
 >
 > **STE (Java):** Make a new `HttpClient` instance with the specified configuration. If the configuration is `null`, the constructor throws `IllegalStateException`. If the base URL is not set, the constructor throws `IllegalStateException`.
 >
@@ -255,13 +255,13 @@ Functional documentation describes pure functions, type signatures, and data tra
 
 State the input condition before describing the transformation. Use the condition-before-command pattern even when the "command" is a descriptive statement about function behavior.
 
-> **Non-STE (Haskell):** The function returns the head of the list if the list is non-empty and returns Nothing when given an empty list.
+> **Non-STE:** The function returns the head of the list if the list is non-empty and returns Nothing when given an empty list.
 >
 > **STE (Haskell):** If the list is not empty, the function returns `Just (head list)`. If the list is empty, the function returns `Nothing`.
 >
 > *Principle applied: P1, P5 (Haskell types as technical nouns). Each case is a condition-before-result pair. The comma separates the condition from the result clause.*
 
-> **Non-STE (Rust):** unwrap_or() returns the contained Some value or a provided default if the Option is None and panics if called on a None value with unwrap() instead of unwrap_or().
+> **Non-STE:** unwrap_or() returns the contained Some value or a provided default if the Option is None and panics if called on a None value with unwrap() instead of unwrap_or().
 >
 > **STE (Rust):** If the `Option` is `Some(value)`, `unwrap_or(default)` returns `value`. If the `Option` is `None`, `unwrap_or(default)` returns `default`. NOTE: Do not use `unwrap()` on a `None` value. `unwrap()` causes a panic on `None`.
 >
@@ -273,13 +273,13 @@ Procedural documentation describes sequences of steps, resource lifecycle, and e
 
 State the system-state condition before the action. In Bash scripts and Makefiles, the condition-before-command pattern maps directly to shell constructs, but documentation should still use natural-language condition clauses.
 
-> **Non-STE (Go):** The function reads the entire contents of the file at the given path into memory and returns it as a byte slice but callers must ensure the file exists and is readable before calling this function otherwise it returns an error.
+> **Non-STE:** The function reads the entire contents of the file at the given path into memory and returns it as a byte slice but callers must ensure the file exists and is readable before calling this function otherwise it returns an error.
 >
 > **STE (Go):** Read the file at `path` into memory. Return the contents as a `[]byte`. If the file does not exist, the function returns an error. If the file is not readable, the function returns an error.
 >
 > *Principle applied: P1 ("read" instead of "reads"), P5 (Go type notation as technical noun). The precondition "If the file does not exist" comes before the result clause.*
 
-> **Non-STE (Bash script comment):** Kill the process using the PID from the lockfile after checking that the process is actually still running and the PID hasn't been reused by the operating system for a different process.
+> **Non-STE:** Kill the process using the PID from the lockfile after checking that the process is actually still running and the PID hasn't been reused by the operating system for a different process.
 >
 > **STE (Bash script comment):** If the process is still running, stop it. Use the PID from the lockfile. Before you stop the process, make sure that the PID is correct.
 >
@@ -309,13 +309,13 @@ Systems documentation describes memory models, ownership semantics, and safety i
 
 State the safety condition before the operation. Use WARNING or BREAKING prefixes when the consequence of violating the condition is severe.
 
-> **Non-STE (Rust):** You can call unsafe functions but only after manually verifying that all the safety invariants documented in the function's safety section are upheld by the calling code.
+> **Non-STE:** You can call unsafe functions but only after manually verifying that all the safety invariants documented in the function's safety section are upheld by the calling code.
 >
 > **STE (Rust):** Before you call an `unsafe` function, read its safety documentation. Make sure that your code upholds all documented safety invariants. WARNING: IF YOUR CODE DOES NOT UPHOLD THE SAFETY INVARIANTS, THE PROGRAM CAN HAVE UNDEFINED BEHAVIOR.
 >
 > *Principle applied: P5 (Rust keyword as technical noun), P8. The condition "Before you call an `unsafe` function" comes first. The WARNING uses the condition-before-command pattern inside a safety instruction (see Rule 7.2).*
 
-> **Non-STE (C):** Call free() on the pointer to release the dynamically allocated memory back to the heap after making absolutely sure that no other part of the program still holds a reference to that memory because use-after-free is a critical security vulnerability.
+> **Non-STE:** Call free() on the pointer to release the dynamically allocated memory back to the heap after making absolutely sure that no other part of the program still holds a reference to that memory because use-after-free is a critical security vulnerability.
 >
 > **STE (C):** Before you call `free(ptr)`, make sure that no other code uses `ptr`. WARNING: IF YOU CALL `free(ptr)` AND OTHER CODE STILL USES `ptr`, THE PROGRAM CAN HAVE A USE-AFTER-FREE VULNERABILITY. AFTER YOU CALL `free(ptr)`, DO NOT USE `ptr`.
 >
@@ -397,7 +397,7 @@ Generated documentation (from tools like Sphinx, JSDoc, godoc, or rustdoc) canno
 
 When you write generator templates that produce human-readable documentation (README generators, CLI help text templates), apply Rule 5.4 to the template text, not to the generated variable substitutions.
 
-> **Non-STE (template):** Run {{command}} to {{action}} after you {{condition}}.
+> **Non-STE:** Run {{command}} to {{action}} after you {{condition}}.
 >
 > **STE (template):** After you {{condition}}, run {{command}} to {{action}}.
 >

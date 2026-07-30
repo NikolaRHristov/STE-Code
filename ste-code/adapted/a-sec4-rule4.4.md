@@ -248,7 +248,7 @@ A chain of three or more connected sentences can overwhelm the reader. Each conn
 
 Guidance: Limit connecting-word chains to two or three sentences. If the explanation needs more sentences, restructure into a list or a table. This aligns with Rule 4.1 (sentence length) and Rule 3.1 (simple sentences).
 
-> **Non-STE (chain too long):** The cache eviction policy runs every 60 seconds. Thus, expired entries are removed. And the eviction log is written to disk. As a result, the cache has free capacity. But the eviction process locks the cache for the duration. And concurrent reads must wait.
+> **Non-STE:** The cache eviction policy runs every 60 seconds. Thus, expired entries are removed. And the eviction log is written to disk. As a result, the cache has free capacity. But the eviction process locks the cache for the duration. And concurrent reads must wait.
 >
 > **STE (restructured):** The cache eviction policy runs every 60 seconds:
 > - Expired entries are removed from the cache.

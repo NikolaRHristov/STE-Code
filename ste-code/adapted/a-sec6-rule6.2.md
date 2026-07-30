@@ -317,7 +317,7 @@ There are three types of cohesive ties that Rule 6.2 uses:
 
 In English grammar, most sentences have a topic (what the sentence is about) and a comment (what is said about the topic). In code documentation, the key word is the topic. Each sentence in a documentation block should have the same topic (the same key word) in subject position.
 
-> **Non-STE (topic shifts):** The parser reads the input stream. Invalid tokens are detected by the lexer. An error is returned to the caller.
+> **Non-STE:** The parser reads the input stream. Invalid tokens are detected by the lexer. An error is returned to the caller.
 >
 > **STE (stable topic):** The parser reads the input stream. The parser detects invalid tokens. The parser returns an error to the caller.
 >
@@ -338,7 +338,7 @@ Use connecting words at the start of sentences, not buried in the middle. The re
 
 A dangling key word is a term introduced once and never repeated. The reader sees the term, expects it to be important, and then never encounters it again. This breaks the logical structure.
 
-> **Non-STE (dangling):** The build system compiles TypeScript and bundles static assets. The output goes to the `dist/` directory. Deployment uses a Docker container.
+> **Non-STE:** The build system compiles TypeScript and bundles static assets. The output goes to the `dist/` directory. Deployment uses a Docker container.
 >
 > **STE (resolved):** The build system compiles TypeScript and bundles static assets. The build system writes the output to the `dist/` directory. The deploy system copies the `dist/` directory into a Docker container.
 >

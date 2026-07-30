@@ -128,7 +128,7 @@ Example — application error message:
 > **STE:** Error: The license key is not recognized. Speak to your administrator.
 > *(P14 applied: "licence" (noun) → "license"; "recognised" → "recognized"; P1 applied: "contact" → "speak to")*
 
-> **Non-STE (third-party):** OSError: [Errno 2] No such file or directory: '/etc/program/colour_profiles.cfg'
+> **Non-STE:** OSError: [Errno 2] No such file or directory: '/etc/program/colour_profiles.cfg'
 > **STE (third-party):** OSError: [Errno 2] No such file or directory: '/etc/program/colour_profiles.cfg'
 > *(No change: the error message is quoted text from the operating system. The British spelling "colour" is preserved exactly as the system produces it.)*
 

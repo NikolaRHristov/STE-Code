@@ -78,7 +78,7 @@ Endpoint descriptions can use the third person ("Returns a list of users") becau
 
 Do not mix imperative instructions with endpoint descriptions in the same paragraph.
 
-> **Non-STE (API doc):** You can authenticate by sending a POST request to `/auth/login` with your credentials, and you should include the returned token in the Authorization header.
+> **Non-STE:** You can authenticate by sending a POST request to `/auth/login` with your credentials, and you should include the returned token in the Authorization header.
 >
 > **STE (API doc):** Send a POST request to `/auth/login` with your credentials. Include the returned token in the `Authorization` header.
 
@@ -88,7 +88,7 @@ Function and method docstrings describe what the code does, not what the reader 
 
 Exception: Shell script headers and Makefile targets that document usage can use the imperative form because the reader executes them directly.
 
-> **Non-STE (Python docstring):** Call this function with a user ID and it will return the profile data.
+> **Non-STE:** Call this function with a user ID and it will return the profile data.
 >
 > **STE (Python docstring):** This function returns the profile data for the given user ID.
 
@@ -114,11 +114,11 @@ Error messages report what went wrong to the user. Do not use the imperative for
 
 A well-formed error message tells the user what happened and then gives a recovery instruction. Separate the error description from the recovery instruction with a period or a newline.
 
-> **Non-STE (error message):** Port is already in use.
+> **Non-STE:** Port is already in use.
 >
 > **STE (error message):** The port 8080 is already in use. Set a different port with the `--port` option.
 
-> **Non-STE (error message):** Invalid configuration file. Check the schema.
+> **Non-STE:** Invalid configuration file. Check the schema.
 >
 > **STE (error message):** The configuration file failed schema validation. Check the `config.schema.json` file for required fields.
 
@@ -164,7 +164,7 @@ Different programming paradigms produce different types of code documentation. T
 
 Class documentation, constructor guides, and factory method descriptions often document instantiation patterns. The imperative form applies to setup and configuration instructions. Descriptive forms apply to class invariants, inheritance hierarchies, and design rationale.
 
-> **Non-STE (OOP doc):** An instance of the DatabaseConnection class can be created by calling the static factory method `create`, and you should pass a valid connection string.
+> **Non-STE:** An instance of the DatabaseConnection class can be created by calling the static factory method `create`, and you should pass a valid connection string.
 >
 > **STE (OOP doc):** Create an instance of the `DatabaseConnection` class with the static factory method `create`. Pass a valid connection string.
 
@@ -172,7 +172,7 @@ Class documentation, constructor guides, and factory method descriptions often d
 
 Functional documentation emphasizes pure functions, data flow, and immutability. The imperative form applies to project setup, build tool usage, and REPL interactions. Function descriptions use declarative forms because they describe transformations, not commands to the reader.
 
-> **Non-STE (Functional doc):** You should apply `map` to transform the list and then you can pipe the result into `filter`.
+> **Non-STE:** You should apply `map` to transform the list and then you can pipe the result into `filter`.
 >
 > **STE (Functional doc):** Apply `map` to transform the list. Then, pipe the result into `filter`.
 
@@ -182,7 +182,7 @@ NOTE: When documenting a function that the reader must call, the imperative form
 
 Procedural code often appears in scripts, system tools, and command-line utilities. The documentation for these tools is inherently instructional. The imperative form dominates: build steps, compile flags, linking instructions, and runtime configuration are all actions the reader performs.
 
-> **Non-STE (Procedural doc):** The binary can be compiled with `gcc -O2 -Wall main.c -o tool` and then you are to place it in `/usr/local/bin`.
+> **Non-STE:** The binary can be compiled with `gcc -O2 -Wall main.c -o tool` and then you are to place it in `/usr/local/bin`.
 >
 > **STE (Procedural doc):** Compile the binary with `gcc -O2 -Wall main.c -o tool`. Place the binary in `/usr/local/bin`.
 
@@ -190,7 +190,7 @@ Procedural code often appears in scripts, system tools, and command-line utiliti
 
 Declarative documentation describes desired state, not step-by-step procedures. Schema references, resource definitions, and query syntax are descriptive. The imperative form applies only to the tooling that applies the declarative configuration: CLI commands, pipeline steps, and operator workflows.
 
-> **Non-STE (Declarative doc):** The deployment can be applied with `kubectl apply -f deployment.yaml` and you should verify the pods are running afterward.
+> **Non-STE:** The deployment can be applied with `kubectl apply -f deployment.yaml` and you should verify the pods are running afterward.
 >
 > **STE (Declarative doc):** Apply the deployment with `kubectl apply -f deployment.yaml`. Verify that the pods are running.
 
@@ -198,7 +198,7 @@ Declarative documentation describes desired state, not step-by-step procedures. 
 
 Systems documentation explains resource lifetimes, ownership models, and memory safety invariants. These are inherently descriptive because they explain constraints, not actions. The imperative form appears in "how to comply" sections: how to structure code to satisfy the borrow checker, how to free memory correctly, or how to use unsafe blocks safely.
 
-> **Non-STE (Systems doc):** The memory should be freed with `free()` after the pointer is no longer needed, and you can use `valgrind` to check for leaks.
+> **Non-STE:** The memory should be freed with `free()` after the pointer is no longer needed, and you can use `valgrind` to check for leaks.
 >
 > **STE (Systems doc):** Free the memory with `free()` when the pointer is no longer needed. Use `valgrind` to check for leaks.
 

@@ -254,7 +254,7 @@ Do not modify a third-party quote to make it STE-Code compliant. Either quote it
 
 Postmortem documents describe a sequence of past events. The simple past tense is the primary narrative tense. Do not use the past perfect to sequence events relative to each other. Use the simple past with explicit sequencing words instead.
 
-> **Non-STE (past perfect sequencing):** The load balancer had removed the unhealthy instance before the health check had reported the failure.
+> **Non-STE:** The load balancer had removed the unhealthy instance before the health check had reported the failure.
 > **STE (simple past with sequencing):** The health check reported the failure. Then the load balancer removed the unhealthy instance.
 
 The simple past with "Then" reorders the events into chronological sequence. The reader does not need to decode a two-level temporal relationship.

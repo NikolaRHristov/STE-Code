@@ -509,7 +509,7 @@ Some code tokens look like contractions. For example, a Python variable named `d
 
 An inline comment sits on the same line as a code statement. The line length limit creates pressure to omit words. Write the comment as a full sentence when possible. If the line is too long, move the comment to the line above the code.
 
-> **Non-STE (cramped):**
+> **Non-STE:**
 > ```python
 > timeout = value if value > 0 else 30  # fallback to default
 > ```

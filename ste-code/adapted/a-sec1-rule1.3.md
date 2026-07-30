@@ -390,7 +390,7 @@ The following scenarios show where the boundary of an approved meaning requires 
 
 **Guidance:** Use the approved meaning consistently across all documentation types. If the approved meaning does not fit the context, use a different approved word. Do not stretch an approved meaning to cover a different concept just because the word is approved and familiar.
 
-> **Non-STE (README):** If the installation fails, return to step 2 and check your configuration.
+> **Non-STE:** If the installation fails, return to step 2 and check your configuration.
 > **STE (README):** If the installation does not complete, go back to step 2 and check your configuration.
 
 > "Return" has the approved meaning "send a value from a function to its caller." The README context uses "return" to mean "go back," which is not approved. "Go back" is the approved phrase.
