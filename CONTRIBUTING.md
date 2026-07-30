@@ -65,7 +65,7 @@ Open a **Bug Report** issue. Include the specific file, line number (if known), 
 
 ### Improve Deployment Guides
 
-The deployment guide covers Ollama, LM Studio, Python (llama.cpp), OpenAI API, Claude API, LangChain, and batch processing. If you:
+The deployment guide covers ChatGPT, Claude, Gemini, local models (Ollama, LM Studio, llama.cpp), and CI/CD integration. If you:
 
 - Use STE-Code with a platform not yet documented (e.g. vLLM, Groq, Together AI, AWS Bedrock).
 - Discover a simpler setup flow for an existing platform.
@@ -242,7 +242,7 @@ A non-zero exit code indicates at least one rail failure. The checker reports th
 All 6 artifacts in `ste-code/artifacts/` must be consistent:
 
 1. **System prompt** (`ste-code-distilled-system-prompt.txt`): ~1,200 tokens. Must contain all 14 principles.
-2. **Self-reading manual** (`ste-code-self-reading-manual.txt`): Must contain all 53 rules (Sections S0–S8), 19 categories, and the synonym table.
+2. **Self-reading manual** (`ste-code-self-reading-manual.txt`): Must contain all 51 adapted rules (9 sections), 17 domain extensions, and the synonym table.
 3. **Extraction methodology** (`ste-code-extraction-methodology.txt`): Must describe the 6-pass pipeline with turn-by-turn protocol.
 4. **Example turn** (`ste-code-example-turn.txt`): Must include a before/after pair with a changes table and metrics.
 5. **Deployment guide** (`ste-code-deployment-guide.txt`): Must cover at least 7 deployment options.
