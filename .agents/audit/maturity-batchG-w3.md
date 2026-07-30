@@ -1,0 +1,218 @@
+### .agents/benchmark/orchestrator.py
+- **Level:** 3
+- **Summary:** Parallel benchmark orchestrator that forks 59 workers running `hermes -z` with the STE-Code system prompt, then scores outputs across 4 dimensions (principle compliance, forbidden keywords, expected keywords, required patterns) and produces aggregate JSON reports with category/difficulty breakdowns.
+- **Strengths:**
+  - Clear 5-phase structure with labeled sections (Launch, Wait, Score, Aggregate, Report)
+  - Proper worker isolation via `os.fork()` + `os.chdir(worker_dir)` to prevent root file leaks
+  - Multi-format output extraction supports 6 marker patterns for corrected text and 5 for compliance summaries
+  - Weighted scoring formula with explicit base/penalty/bonus coefficients (0.4 / 0.6 / 0.3 / 0.1)
+  - Timeout handling (MAX_WAIT=600s) with periodic progress reporting
+  - Writes both aggregate-results.json and per-test-results.json for downstream consumption
+  - Category and difficulty breakdowns in aggregate output
+  - Auto-generated recommendations on low correctness/high latency/underperforming categories
+  - Auto-detected PROJECT_ROOT from `__file__` - portable across machines
+  - Docstrings on all 4 scoring functions
+  - Handles both correction tests (has `input`) and generation tests (has `prompt`)
+- **Gaps:**
+  - No signal handler - orphaned child processes persist if orchestrator is killed mid-run
+  - No retry logic for individual worker failures; `OUTPUT_FILE_MISSING` silently enters scoring pipeline
+  - `poll_interval=5` and `MAX_WAIT=600` are hardcoded magic numbers with no CLI overrides
+  - No argument parsing - model, test dir, results dir, and timeout are all hardcoded
+  - `PRINCIPLE_KEYWORDS` dictionary is heuristic and not validated against any canonical source; keyword sets for P3 ("meaning"), P9 ("short","clear"), and P13 ("verb as noun") are too sparse to reliably detect compliance
+  - No logging framework - all output is `print()` with no timestamped log file for the orchestrator itself
+  - Text extraction regexes match STE-Code-specific markers; no abstraction for different system prompt formats
+  - `diff_ratio` field is hardcoded to 0.0 with a comment acknowledging the gap rather than implementing it
+  - `task_text` is assigned twice (lines 238 and 285) with identical logic - dead assignment
+  - No cross-reference to `run-benchmark.sh` (the sequential bash equivalent) or `orchestrator-control.py` (the control group variant)
+- **What Level 4 Would Add:**
+  - Signal handlers for SIGTERM/SIGINT to kill child processes and write partial results
+  - Retry logic with configurable max attempts for workers that produce empty/missing output
+  - CLI interface via `argparse` exposing model, test-dir, results-dir, timeout, poll-interval, max-workers
+  - Worker-level progress persistence - resume an interrupted run by skipping workers with existing output files
+  - Design rationale comments explaining the 0.4/0.6/0.3/0.1 weight choices and the 0.7 pass threshold
+  - Performance notes documenting expected latency per worker and total wall-clock time at different worker counts
+  - Principle keywords validated by cross-referencing `ste-code/adapted/` content
+  - Proper diff ratio computed via `difflib.SequenceMatcher` against expected output when available
+  - Reference to `orchestrator-control.py` explaining the control-group design and why the code is duplicated rather than shared
+- **Priority:** medium
+
+### .agents/benchmark/orchestrator-control.py
+- **Level:** 2
+- **Summary:** Control-group variant of the benchmark orchestrator that runs the same 59 tests with a plain coding assistant prompt (no STE-Code rules), then applies the identical scoring pipeline to measure the baseline performance delta.
+- **Strengths:**
+  - Same 5-phase structure, worker isolation, timeout handling, and scoring logic as the main orchestrator
+  - Different results directory (`results-control`) prevents overwriting STE-Code results
+  - Plain system prompt is a clean, minimal baseline with no STE-Code contamination
+  - Correctly eliminates STE-Code-specific language from task prompts ("clarity and professionalism" instead of "STE-Code compliance")
+- **Gaps:**
+  - ~90% code duplication with `orchestrator.py` - lines 128-484 are essentially identical; every bug fix to the main orchestrator must be manually replicated here
+  - Same hardcoded model, no CLI, no signal handling, no retry logic as the main orchestrator
+  - Control group still uses STE-Code principle keywords for scoring (lines 129-144) - this measures principle compliance against content that was never instructed to follow those principles, which produces meaningful comparison data but the design choice is not documented
+  - No cross-reference back to `orchestrator.py` explaining the relationship or shared scoring rationale
+  - No automated diff/comparison step - must manually compare aggregate JSON files from both runs
+- **What Level 3 Would Add:**
+  - Extract shared orchestration logic into a common module (e.g., `benchmark_lib.py`) with `orchestrator.py` and `orchestrator-control.py` as thin wrappers differing only in system prompt and results directory
+  - Document why the control group uses STE-Code principle keywords for scoring (it measures "accidental compliance")
+  - Add a post-run comparison step that loads both aggregate JSON files and prints a side-by-side delta report
+  - CLI that accepts `--control` flag to switch modes instead of requiring a separate script
+- **Priority:** high
+
+### .agents/benchmark/launch-levels.py
+- **Level:** 2
+- **Summary:** Launches 4 Agent #7 workers at adaptation levels 1-4 via the Hermes oneshot wrapper, each rewriting 4 project docs (README, CONTRIBUTING, CODE_OF_CONDUCT, RELEASE-NOTES) using only their level's rule subset.
+- **Strengths:**
+  - Uses the hermetic oneshot wrapper (`hermes-oneshot-wrapper.py`) avoiding session pollution
+  - `start_new_session=True` for fire-and-forget process group isolation
+  - `HERMES_ACCEPT_HOOKS=1` env var passed for hook acceptance
+  - Reads system prompt and all doc content into memory for prompt construction
+  - Reports output file sizes on completion for quick sanity check
+  - Clear, linear flow: launch 4 workers → wait sequentially → report
+- **Gaps:**
+  - `except:` bare except at line 81 swallows all error types - a worker crash, OOM, or permission error all produce the same unhelpful "error" message
+  - No timeout - `os.waitpid(pid, 0)` blocks indefinitely if a worker hangs
+  - Temp files created via `NamedTemporaryFile(delete=False)` are never cleaned up; wrapper is expected to delete them but if it crashes they remain in `/tmp`
+  - `DOCS` list is hardcoded - adding a new project doc requires editing the script
+  - `MODEL` is hardcoded
+  - No CLI argument parsing - level range, model, docs list, and output dir are all hardcoded
+  - Reads entire system prompt + 4 full docs into a single prompt string with no token budget check - could silently exceed model context limits at higher levels
+  - No cross-reference to `orchestrator.py` or the Level Worker skill definition explaining how Agent #7 differs from Agent #6
+  - Sequential `waitpid` loop means workers are not truly parallel in the wait phase - they could finish out of order but the script only notices them in order
+- **What Level 3 Would Add:**
+  - `argparse` CLI for `--levels`, `--docs`, `--model`, `--output-dir`
+  - Timeout per worker with `subprocess.wait(timeout=N)` and SIGTERM on timeout
+  - Temp file cleanup in a `finally` block or `atexit` handler
+  - Token budget estimation before launch and a warning if total prompt exceeds model context
+  - Specific exception handling: distinguish `FileNotFoundError`, `PermissionError`, `OSError`, `TimeoutExpired`
+  - Concurrent wait using `os.waitpid(-1, os.WNOHANG)` in a poll loop so workers are detected as they finish
+  - Cross-reference to the Level Worker skill and adaptation level definitions in `MASTER.md`
+- **Priority:** medium
+
+### .agents/benchmark/rescore.py
+- **Level:** 2
+- **Summary:** Re-applies scoring to an existing benchmark run's output files using updated extraction logic, accepting an optional run directory argument or defaulting to the latest run.
+- **Strengths:**
+  - Accepts optional CLI argument for run directory with sensible default (latest run)
+  - Graceful skip of missing output files with `SKIP` message
+  - Sorted processing by test ID for deterministic output
+  - Writes `rescored-results.json` alongside existing results without overwriting originals
+  - Slightly expanded `PRINCIPLE_KEYWORDS` vs the orchestrator (P1 adds "unapproved", P5 adds "sentence length" and "word limit", P10 adds "filler")
+- **Gaps:**
+  - `extract_corrected_text()` and `extract_compliance_section()` are full duplicates of the orchestrator's functions (lines 34-54 duplicate orchestrator.py lines 151-173) - any fix to extraction logic in the orchestrator won't propagate here
+  - `PRINCIPLE_KEYWORDS` diverges from the orchestrator's (P1: "approved" vs "approved word","unapproved"; P4 adds "passive voice"; P5 completely different set; P10 adds "filler"; P14 drops "color","analyze") - scoring from `rescore.py` can produce different results than the orchestrator that produced the original run, making rescore non-idempotent
+  - No required patterns check - generation tests lose pattern scoring on rescore
+  - No latency or token data in rescored output (original orchestrator captured these from the live run)
+  - No recommendations section in output
+  - `diff_ratio` field omitted entirely rather than preserved from original results
+  - No validation that the run directory actually contains benchmark output files (just checks if dir exists)
+  - No cross-reference to `orchestrator.py` explaining what extraction logic was "fixed" and why rescoring is needed
+- **What Level 3 Would Add:**
+  - Import extraction functions from a shared `benchmark_lib.py` rather than duplicating them
+  - Use identical `PRINCIPLE_KEYWORDS` as the orchestrator, or document the rationale for divergence
+  - Preserve latency/token data from original per-test-results.json and merge into rescored output
+  - Add required patterns check for parity with the orchestrator's scoring pipeline
+  - Add a diff mode that shows which tests changed score and by how much
+  - Document in docstring what extraction bugs were fixed (e.g., "v1.1: handles ``` code fences inside corrected text")
+- **Priority:** high
+
+### .agents/benchmark/run-benchmark.sh
+- **Level:** 2
+- **Summary:** Bash-based sequential benchmark runner that iterates through test cases one at a time, invoking `hermes -z` for each and scoring with simple grep-based heuristics, producing a hand-constructed aggregate JSON.
+- **Strengths:**
+  - Color-coded pass/fail output for immediate readability
+  - Timestamped run directories matching the Python orchestrator convention
+  - Pulls test data inline via Python one-liners (no external JSON parser needed)
+  - Per-category tracking via temp file aggregated at end
+  - Clean output formatting with aligned columns for per-test detail
+- **Gaps:**
+  - Advertised CLI flags (`--category`, `--test`) in the usage comment but never implemented - they are dead documentation
+  - Sequential execution only - 59 hermes invocations run one at a time vs the Python orchestrator's parallel fork model; wall-clock time is ~59x worse
+  - Hand-constructed JSON via `echo` with manual comma tracking (`FIRST=true` flag) is fragile - any output containing double quotes or backslashes will produce invalid JSON
+  - Principle checking uses `grep -qi "$p"` which matches the literal principle ID (P1-P14) in the output - this is both too strict (requires explicit mention) and too loose (P1 matches anywhere in the word, e.g. "P10", "P11")
+  - Forbidden keyword checking has the same greedy `grep` problem - `grep -qi "a"` would match any text containing "a"
+  - Scoring subtracts a uniform `1/N` per missed principle regardless of principle weight or test-specific importance - much coarser than the orchestrator's weighted formula
+  - No required patterns check, no expected keywords bonus, no difficulty tracking
+  - No forbidden keyword penalty multiplier - fixed 0.1 deduction vs orchestrator's 0.3 proportion
+  - Output includes full hermes stderr mixed into `OUTPUT` variable (2>&1) - error messages get scored as if they were corrected text
+  - `SCRIPT_DIR` path detection relies on bash resolving symlinks differently on macOS vs Linux
+  - No cross-reference to `orchestrator.py` as the preferred parallel runner
+- **What Level 3 Would Add:**
+  - Implement the `--category` and `--test` CLI flags for targeted runs
+  - Replace hand-rolled JSON construction with `jq` or inline Python for valid output
+  - Use word-boundary grep (`grep -wi`) or delegate all scoring to a Python helper for parity with the orchestrator
+  - Add a warning at the top that this is the slow/sequential runner and point users to `orchestrator.py` for parallel execution
+  - Separate stdout from stderr in hermes output capture
+  - Adopt the same weighted scoring formula as the Python orchestrator to make results comparable
+- **Priority:** medium
+
+### .agents/scripts/check-rails.py
+- **Level:** 2
+- **Summary:** Scans extracted and refined markdown files against 8 quality rails (naming conventions, formatting rules, fabrication signals, factual accuracy) and reports violations with severity indicators (🔴/🟡).
+- **Strengths:**
+  - Named, documented rails with clear descriptions making violations self-explanatory
+  - Lambda-based check functions allow easy addition of new rails
+  - Count-based reporting (e.g., "Boilerplate header repeated 6x") gives actionable detail
+  - Distinguishes between structural issues (🔴 naming) and content issues (🟡 formatting)
+  - Returns exit code matching issue count for CI integration (`sys.exit(check_all())`)
+  - Modular per-file pass/fail tracking with `file_ok` flag
+- **Gaps:**
+  - `ROOT = '<project-root>'` is a literal placeholder string - the script cannot run without manual editing; should auto-detect from `__file__` like the benchmark scripts do
+  - Rail numbering has gaps: defines R1, R2, R4 (Fabrication), R5 (Headings/Blanks/Boilerplate/STE-Format/Page-Header), R6 but no R3, R7, R8 - unclear if these are not yet implemented or were intentionally skipped
+  - R1 (`Stage-Isolation`) is a permanent no-op - `lambda: True` always passes, providing no value
+  - R5-Headings regex `r'### [^\n]+\n[^\n#\s|`>-]'` uses a character class `[^\n#\s|`>-]` with an unescaped backtick that may behave unexpectedly in the bracket expression
+  - `R6-Facts` check is a single hardcoded assertion about "22 categories" - not extensible to other factual claims
+  - Only checks `extracted/` and `refined/` directories - `merged/`, `adapted/`, and `artifacts/` are excluded with no documented reason
+  - No CLI argument parsing - directory list, file pattern, and rail selection are all hardcoded
+  - Error on file read is silently swallowed (`except: continue`) - a corrupted file is skipped with no warning
+  - No cross-reference to the Audit skill or rail definition document explaining what each rail means and why it matters
+- **What Level 3 Would Add:**
+  - Auto-detect `PROJECT_ROOT` from `__file__` (matching the benchmark scripts' convention)
+  - Implement the missing rails (R3, R7, R8) or document why they're skipped
+  - Make R1 actually check stage directory membership
+  - Parameterize fact checks (e.g., load expected values from a config file rather than hardcoding "19 categories")
+  - `argparse` CLI for `--stages`, `--rails`, `--root`, `--format`
+  - Log skipped/corrupt files to stderr instead of silently continuing
+  - Cross-reference to `references/` for rail definitions and the Audit skill for the broader auditing workflow
+- **Priority:** high
+
+### .agents/scripts/generate_refine_prompts.py
+- **Level:** 2
+- **Summary:** Generates one refinement worker prompt file per extracted spec file, embedding 9 formatting rules and page-range metadata into a structured template suitable for batch submission to the Refiner agent.
+- **Strengths:**
+  - Clear, well-ordered 9-rule prompt template that matches the refinement skill's documented rules
+  - Parses filename convention (`wNNN-pPPPP-PPPP.md`) to extract worker number and page range
+  - Sorted processing ensures deterministic prompt file ordering
+  - Outputs `r{worker_num}-prompt.txt` naming matching the `r`-prefix convention for refined files
+  - Reports generated count for verification
+  - Single-purpose script with no side effects beyond prompt file creation
+- **Gaps:**
+  - `EXTRACTED_DIR = '<project-root>/ste-code/extracted'` and `PROMPTS_DIR = '<project-root>/ste-code/prompts-refine'` are literal placeholder strings - script cannot run without manual editing; should auto-detect from `__file__`
+  - No check that `EXTRACTED_DIR` exists before listing - `os.listdir()` on nonexistent dir raises `FileNotFoundError` with no friendly message
+  - No check that `PROMPTS_DIR` exists before writing - `open(prompt_path, 'w')` raises `FileNotFoundError` if the directory doesn't exist
+  - File filter `f.startswith('w') and '-p' in f` is fragile - matches any file starting with 'w' containing '-p', which could include temp files, backup files (`w001-p1-2.md.bak`), or unrelated files
+  - Sorting by `int(x.split('-')[0][1:])` will crash if any filename doesn't match the expected pattern (e.g., `w001.md` without `-p`)
+  - No argument parsing - input dir, output dir, and file pattern are all hardcoded
+  - No idempotency - rerunning overwrites prompt files silently; no `--force` flag or timestamp check
+  - Rule 4 mentions "Merge merged examples" - should be "Merge split examples" (typo or copy-paste artifact from refinement docs)
+  - No cross-reference to the Refinement skill definition or the Refiner agent role
+- **What Level 3 Would Add:**
+  - Auto-detect project root from `__file__` and construct paths relative to it
+  - Validate that input and output directories exist with clear error messages before processing
+  - Use a stricter filename regex (e.g., `r'^w\d{3}-p\d{1,4}-\d{1,4}\.md$'`) to avoid matching non-conforming files
+  - `argparse` CLI for `--input-dir`, `--output-dir`, `--pattern`, `--force`
+  - Idempotency: skip prompt files that already exist unless `--force` is passed
+  - Fix rule 4 wording: "Separate merged examples" → "Separate split examples" (or whichever correction is accurate)
+  - Cross-reference to the Refinement skill at `.agents/skills/refinement/SKILL.md` and explain how generated prompts map to the skill's batch workflow
+- **Priority:** medium
+
+## Batch Summary
+- Files scored: 7
+- Level distribution: -2:0 -1:0 1:0 2:5 3:2 4:0 5:0
+- Highest priority: `.agents/benchmark/orchestrator-control.py` (90% code duplication - every fix to the main orchestrator must be manually replicated), `.agents/scripts/check-rails.py` (non-executable due to placeholder path - literally cannot run without editing the source), `.agents/benchmark/rescore.py` (duplicated extraction logic and divergent keyword sets produce non-idempotent rescoring)
+- Pattern observations:
+  - **Code duplication is endemic**: `orchestrator-control.py` duplicates ~300 lines from `orchestrator.py`; `rescore.py` duplicates extraction functions from the same source; no shared library exists despite 3 of 7 files sharing the same scoring/extraction core
+  - **No CLI argument parsing anywhere**: all 7 files hardcode paths, models, timeouts, and directories. Model name `deepseek-v4-pro` appears as a string literal in 5 files with no central configuration
+  - **Placeholder paths block execution**: 2 scripts (`check-rails.py`, `generate_refine_prompts.py`) contain literal `<project-root>` strings that prevent running without manual edits, while 5 other scripts correctly auto-detect the project root via `os.path.dirname(__file__)`
+  - **No error recovery patterns**: bare `except:` in `launch-levels.py`, silent `try/except: continue` in `check-rails.py`, no retry logic in any orchestrator variant - transient failures become permanent
+  - **Scoring divergence**: `orchestrator.py`, `orchestrator-control.py`, `rescore.py`, and `run-benchmark.sh` each implement their own scoring with different keyword sets and formulas - comparing results across runners is misleading
+  - **No cross-references between sibling scripts**: `run-benchmark.sh` doesn't mention `orchestrator.py` exists; `orchestrator-control.py` doesn't document its relationship to the main orchestrator; `rescore.py` doesn't explain which extraction bugs it fixes
+  - **No tests exist for any of these scripts**: the benchmark suite tests the model's STE-Code compliance but has no tests for the benchmark infrastructure itself
