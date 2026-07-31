@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-061--agents-scripts-generate_refine_prompts-",
+  "batch": 21,
+  "target": ".agents/scripts/generate_refine_prompts.py",
+  "duration_s": 69.1,
+  "output_ok": true,
+  "output_size": 14772,
+  "output_lines": 408,
+  "timestamp": "2026-07-30T12:47:00.635103+00:00"
+}

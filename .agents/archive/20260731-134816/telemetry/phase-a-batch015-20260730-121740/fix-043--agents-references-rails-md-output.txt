@@ -1,0 +1,30 @@
+  ┊ 📖 read      rails.md  0.2s
+  ┊ 🔎 find      worker-rails.md  0.2s
+  ┊ 📖 read      worker-rails.md  0.1s
+  ┊ 📖 read      worker-grid.md  0.1s
+File saved: 482 lines (was 183 lines, +299 lines added).
+
+**Summary of all improvements applied:**
+
+**From the maturity audit (all 5 gaps fixed):**
+
+1. **Version History** — Added at the bottom of the file (v1.0 → v1.3), documenting when each rail was added and how the document evolved.
+
+2. **Measurable Quality Gates** — Added a "Quality Gate" subsection to every rail (R1-R8) with numeric thresholds (e.g., R5: ≤0 glued headings, ≤0 triple blanks, 100% STE/Non-STE blockquote format). Each gate specifies the check, threshold, and verification method.
+
+3. **Known Limitations** — Added a full section covering:
+   - Glued heading detection false positives/negatives across grep implementations (GNU vs BSD vs BusyBox)
+   - Line count threshold edge cases (table-heavy pages, front matter, diagram pages, 2-page final batch)
+   - Fact table drift risk
+   - Cross-stage verification gaps (semantic correctness, inter-file consistency, pipeline state corruption)
+
+4. **Rail 6 Meta-Instruction** — Added a "Keeping Facts Current" subsection with a source-to-fact mapping table, update procedure, and a drift check script. Each fact now traces back to its authoritative source file.
+
+5. **Cross-reference to worker-rails.md** — Added a "Related Documents" section with a rail overlap map (which process rails are extended by which worker rails), a "Relationship to Worker Rails" section with a hierarchical diagram, and a "When to Use Which" decision table.
+
+**Beyond the audit (creative additions):**
+
+- **Quick Reference Card** — Upgraded the simple self-check list to a full reference card with gates, self-check items, and reference pointers in a compact format.
+- **Design Rationale** — Explained why 8 rails (not 6, not 12), why rails are non-negotiable, why numeric thresholds matter, and why this document is separate from worker-rails.md.
+- **Rail Overlap Map** — Shows exactly which W-rails extend which R-rails, eliminating ambiguity.
+- **Self-Check Checklist** — Now includes Rail 8 (error recovery) and maps each check to its parent rail.

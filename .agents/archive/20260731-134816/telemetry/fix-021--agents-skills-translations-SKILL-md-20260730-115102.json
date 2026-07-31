@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-021--agents-skills-translations-SKILL-md",
+  "batch": 7,
+  "target": ".agents/skills/translations/SKILL.md",
+  "duration_s": 336.4,
+  "output_ok": true,
+  "output_size": 38174,
+  "output_lines": 746,
+  "timestamp": "2026-07-30T11:56:38.716412+00:00"
+}

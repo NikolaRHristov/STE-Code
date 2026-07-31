@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-024--agents-skills-continuation-refiner-md",
+  "batch": 8,
+  "target": ".agents/skills/continuation/refiner.md",
+  "duration_s": 165.2,
+  "output_ok": true,
+  "output_size": 26545,
+  "output_lines": 562,
+  "timestamp": "2026-07-30T11:59:23.935157+00:00"
+}

@@ -1,0 +1,33 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      agent-7-level-worker.md  0.2s
+  ┊ 📖 read      hermes-oneshot-wrapper.py  0.2s
+  ┊ 📖 read      launch-levels.py  0.2s
+  ┊ 📖 read      agent-7-level-worker.md L501  0.2s
+  ┊ 📖 read      worker-rails.md  0.2s
+Done. File written: 566 lines (up from 201, +365 lines).
+
+Here is what changed:
+
+**Preserved (all original content intact):**
+- Architecture, Agent #7 Role Contract, Launch, Parameters, Results Format
+- Output Examples — Multi-Level Comparison (all 4 levels)
+- Quantitative Comparison table with real benchmark data
+- Comparison Use, Troubleshooting table (8 rows), Level 5 Feasibility
+
+**Added (gap fixes from audit):**
+
+| Gap | Section Added | Lines |
+|-----|---------------|-------|
+| No complete output example | Complete Output Example — Level 3 Rewrite of README.md | Full REWRITTEN/CHANGES/COMPLIANCE format with real data |
+| No edge cases | Edge Cases (EC1–EC11) | 11 scenarios: temp file failure, missing venv, import errors, empty output, missing headers, hung workers, concurrent runs, API rate limits, token budget exceeded, disk full, stderr-only output |
+| Weak cross-references | Cross-References (4 tables) | Core components, benchmark pipeline, quality assurance, STE-Code source files — all with paths and roles |
+| No pre-flight validation | Pre-Flight Checks | 8-item checklist + token budget table |
+| No output verification | Post-Execution Verification | Quick verification script, section completeness check, quality gate table, regression detection |
+
+**Beyond audit (creative additions):**
+- Quick Start section with one-command launch and result-check commands
+- Agent #7 Capability Summary table (5 capabilities)
+- CLI flags reference table for `launch-levels.py`
+- Extended Troubleshooting table (+2 rows for concurrent runs and timeout)
+- Token budget breakdown table showing all 4 levels fit within context window
+- Section completeness verification script (`grep` command per level)

@@ -1,0 +1,15 @@
+Pass 1, Batch 12 complete. Wrote 5 new STE/non-STE example pairs for Rule 1.7 to:
+
+/Volumes/CORSAIR/Developer/macOS/Application/Manual/ste-code/adapted/expanded/pass1-batch-012.json
+
+Summary of generated entries:
+
+| # | Technical Noun (misused as verb) | Category | STE Fix |
+|---|----------------------------------|----------|---------|
+| 1 | queue | 18 — infrastructure/messaging | Add ... to the queue |
+| 2 | archive | 18 — database/storage | Move ... to the archive |
+| 3 | interface | 17 — architecture/patterns | Connect ... through an interface |
+| 4 | flag | 18 — configuration/metadata | Set a flag for ... |
+| 5 | thread | 16 — CS/concurrency | Run ... in a thread (dual-category note like "drill") |
+
+All entries avoid the 19-item dedup blacklist, use only approved synonym-table verbs, and follow the original spec pattern (P13: technical noun → approved verb + noun in prepositional phrase).

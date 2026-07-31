@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-055--agents-benchmark-orchestrator-py",
+  "batch": 19,
+  "target": ".agents/benchmark/orchestrator.py",
+  "duration_s": 222.3,
+  "output_ok": true,
+  "output_size": 45475,
+  "output_lines": 1094,
+  "timestamp": "2026-07-30T12:39:36.067734+00:00"
+}

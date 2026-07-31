@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-058--agents-benchmark-rescore-py",
+  "batch": 20,
+  "target": ".agents/benchmark/rescore.py",
+  "duration_s": 375.5,
+  "output_ok": true,
+  "output_size": 26631,
+  "output_lines": 684,
+  "timestamp": "2026-07-30T12:45:51.551216+00:00"
+}

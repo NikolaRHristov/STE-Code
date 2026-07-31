@@ -1,0 +1,33 @@
+  ┊ 📖 read      evidence-commands.md  0.2s
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      rails.md  0.2s [File not found: rails.md]
+  ┊ 🔎 find      rails.md  0.1s
+  ┊ 📖 read      SKILL.md L51  0.1s
+File saved successfully.
+
+**evidence-commands.md** — 855 lines (was 220, +635 net additions)
+
+All original content preserved. Here is what was added:
+
+**New Sections:**
+- **Cross-Reference Map** — table mapping each command section to SKILL.md steps, specific RAIL numbers, and report output fields
+- **Prerequisites** — 4 environment checks plus macOS/Linux platform note before running any command
+- **Pre-Flight Readiness Check** — bash script + interpretation table that checks working directory, extracted/ dir, PROGRESS.md, exchange.md, and platform before any evidence commands run
+- **When a LIGHT File Is Acceptable** — 5 explicit conditions; LIGHT files that fail any condition must be treated as SUSPICIOUS
+- **When an OK File Still Needs Review** — 3 edge cases (padded content, wrong pages, binary corruption) that pass line thresholds but need follow-up checks
+- **Coverage Calculation Example** — worked numeric example showing how to interpret missing pages
+- **Fabrication Signal Cross-Reference** — table mapping the 3 automated signals to SKILL.md's 6 total patterns; flags the 3 that require manual verification
+- **Duplicate Page Coverage check** — bash script to detect overlapping worker page ranges
+- **False Positive Guide** — table of terms that may look like fabrication but are legitimate in context
+- **Interpreting the Quick Sweep** — output-to-action decision table with normal ranges and cross-references
+- **Interpreting the File-by-File Loop** — 6 output patterns with specific actions + error handling documentation for each fallback
+- **Interpreting the Page Coverage Audit** — 5 output ranges mapped to actions, plus contiguous-vs-scattered gap analysis
+- **Interpreting the Fabrication Sweep** — 4 output patterns with actions and severity levels
+- **Interpreting the Timestamp Check** — 5 output patterns + chronology anomaly detection rules (normal/suspicious/critical)
+- **How to Compute Trust Score Manually** — 5-step procedure with worked example
+- **Trust Score per Agent** — bash script for per-agent claim counting
+- **Using Expected Ranges to Detect Anomalies** — 6 anomaly types with causes and investigation steps
+- **Empty Output Diagnostic Script** — comprehensive bash diagnostic that checks directories, state files, file counts, claim counts, and produces a diagnosis with specific recommendations
+- **Recovery Procedures A-E** — 5 procedures (No Files, Suspicious/Light, Fabrication, Tracking Error, Coverage Gap), each with trigger condition, severity, numbered steps, and cross-references
+- **Output Integration Guide** — report section mapping table + minimal report template + audit quality score formula
+- **Version History** — 1.1.0 entry documenting all additions

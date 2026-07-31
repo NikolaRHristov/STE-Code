@@ -1,0 +1,29 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 🔎 find      references/rails.md  0.2s
+Done. The file is now 771 lines (35KB), up from 419 lines (18KB). All original content is preserved. Here is what was added:
+
+**Filling the 5 audit gaps:**
+
+1. **Threshold Calibration** (line 116) — Sensitivity/specificity trade-off table showing why 30 lines/3KB was chosen over alternatives (92% catch rate vs 1% false-positive rate). Includes recalibration triggers and a mistake table.
+
+2. **False Positive vs. False Negative Impact** (line 147) — Quantifies the asymmetric cost: a false positive wastes 2–3 min of reviewer time, a false negative can cost hours of pipeline rework. Explains why the calibration accepts ~1% false positives.
+
+3. **Token Budget Allocation Strategy** (line 408) — Full cumulative cost envelope for a 37-batch pipeline (~367K tokens, ~8 min). Budget overrun rules (what to drop first). Cost-per-discrepancy-found metric with interpretation bands.
+
+4. **Adversarial Fabrication Scenarios** (line 260) — Three scenarios (vocabulary scrubbing, boilerplate injection, page swapping) with detection gaps, compensating controls, and residual risk ratings.
+
+5. **Pattern Evolution** (line 317) — Lifecycle management for fabrication patterns (Proposed → Active → Deprecated → Removed). Patterns get unique IDs (FP-001 through FP-006). Review triggers for model/prompt/pipeline changes.
+
+6. **Trend Analysis** (line 608) — Longitudinal tracking across audits via `trends.csv`. Five trend signal types (stable high, gradual decline, sudden drop, volatile, false-positive creep). Trend-based alert system (amber watch, red watch, pattern spike, trust collapse).
+
+7. **Escalation Paths** (line 645) — Four levels: automatic retry, reviewer escalation, orchestrator escalation, human escalation. Each has conditions, actions, and timeouts.
+
+**Creative additions beyond gaps:**
+
+8. **Limitation Mitigations** (line 300) — Five compensating controls: rotate spot-check lines, cross-audit comparison, semantic sampling, peer verification, hash tracking.
+
+9. **Audit Cadence Decision Tree** (line 458) — ASCII decision flow for choosing full/partial/claims-only scope at each batch completion.
+
+10. **Fixable Patterns Update Cadence** (line 508) — Mandatory review triggers (new run, model change, fix failure, 30-day staleness) and deprecation rules with example entry.
+
+11. **Backward Compatibility** (line 540) — Report versioning rules. When a major version bump is required. Migration path documentation.

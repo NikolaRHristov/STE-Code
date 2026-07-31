@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-020--agents-skills-extension-worker-SKILL-md",
+  "batch": 7,
+  "target": ".agents/skills/extension-worker/SKILL.md",
+  "duration_s": 336.4,
+  "output_ok": true,
+  "output_size": 22750,
+  "output_lines": 608,
+  "timestamp": "2026-07-30T11:56:38.714550+00:00"
+}

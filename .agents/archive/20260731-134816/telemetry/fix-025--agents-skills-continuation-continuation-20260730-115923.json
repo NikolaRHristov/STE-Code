@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-025--agents-skills-continuation-continuation",
+  "batch": 9,
+  "target": ".agents/skills/continuation/continuation.md",
+  "duration_s": 174.2,
+  "output_ok": true,
+  "output_size": 35019,
+  "output_lines": 861,
+  "timestamp": "2026-07-30T12:02:18.141948+00:00"
+}

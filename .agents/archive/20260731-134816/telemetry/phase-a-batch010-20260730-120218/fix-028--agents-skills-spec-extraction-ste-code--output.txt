@@ -1,0 +1,27 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 🔎 find      *.md  0.1s
+  ┊ 📖 read      SKILL.md  0.1s
+  ┊ 📖 read      rails.md  0.2s
+  ┊ 📖 read      quality-checklist.md  0.1s
+File saved successfully. Here is the summary:
+
+**File**: `.agents/skills/spec-extraction/ste-code-validate/SKILL.md`
+**Version**: 1.0.0 → 1.1.0
+**Lines**: 164 → 538 (+374 lines)
+
+**All 5 audit gaps addressed, plus creative additions:**
+
+| Gap | Added Section | Lines |
+|-----|--------------|-------|
+| Edge case handling | Edge Case Catalog (E1-E6): full batch failure, timeout, file system errors, wrong content, fabrication confirmed, partial failure | 6 scenarios with detection, root cause analysis, and step-by-step recovery |
+| Recovery beyond "split in half" | Recovery Decision Tree — flow chart mapping every failure mode to its recovery procedure; fabrication gets a 6-step hardened re-extraction protocol with escalation to manual extraction | Full decision tree + E5 detailed procedure |
+| Cross-reference to extraction SKILL.md | Cross-Reference table linking to 5 related documents (orchestrator, rails, quality checklist, worker grid, section types, prompts) + integration description in Overview | 6-row reference table |
+| Threshold rationale | Threshold Rationale section with 4 tables explaining every numeric value (30L FAIL, 80L PASS, 500KB, 2000 entries, >5 content signals) with empirical justification | 4 tables, 9 threshold justifications |
+| Known limitations | Known Limitations (L1-L5): grep false negatives, subtle paraphrasing detection gaps, tail-3 blind spots, calibration tied to Issue 9, no semantic correctness checking | 5 limitations with mitigations |
+
+**Creative additions beyond the audit:**
+
+- Validation Log Entry Format — 3 templates (normal batch, edge case, spot-check) for consistent record-keeping
+- Quick Reference Card — ASCII box summarizing all checks, edge cases, and thresholds for rapid field use
+- E4 "Wrong Content" recovery — detecting when output passes size checks but has entirely wrong page content
+- Escalation path in E5 — hardened prompt → spot-check → flag for manual extraction if fabrication recurs

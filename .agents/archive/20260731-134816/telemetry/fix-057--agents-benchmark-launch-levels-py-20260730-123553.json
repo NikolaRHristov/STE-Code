@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-057--agents-benchmark-launch-levels-py",
+  "batch": 19,
+  "target": ".agents/benchmark/launch-levels.py",
+  "duration_s": 222.3,
+  "output_ok": true,
+  "output_size": 29840,
+  "output_lines": 824,
+  "timestamp": "2026-07-30T12:39:36.069268+00:00"
+}

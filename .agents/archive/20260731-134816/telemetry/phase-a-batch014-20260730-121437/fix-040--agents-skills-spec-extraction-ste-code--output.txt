@@ -1,0 +1,36 @@
+  ┊ 🔎 find      SKILL.md  0.1s
+  ┊ 📖 read      category-mapping.md  0.2s
+File saved successfully. Summary:
+
+- **Original:** 370 lines
+- **Improved:** 623 lines (+253 lines, +68%)
+
+All original content preserved. New sections added:
+
+**Polysemy Resolution Table File** (lines 206–243) — Complete template showing original polysemy table format, STE-Code resolution table, resolution patterns (verb restriction, domain split, context signal), and unresolved entries tracking.
+
+**Dictionary Entry File** (lines 246–275) — Template for `a-dictionary.md` showing the 5,943-line structure with reading guide and example word entry ("accept").
+
+**Expanded Output Example** (lines 101–132) — Added `####` heading level examples for dictionary entries (`#### Code-Domain Example 3` and `#### Word: "use"`) showing the complete 4-level hierarchy that was missing.
+
+**File Naming Convention** (lines 56–64) — Explicit naming rules for all 6 file types: rules, GR rules, categories, synonym table, polysemy table, dictionary.
+
+**Expanded Stage 4 Failure Modes** (lines 286–307) — Added 5 new failure modes: context window exhaustion mid-rule, circular rule reference, semantic fabrication, heading structure deviation, dictionary entry without code-domain equivalent. Original 9 failure modes preserved.
+
+**Adaptation Batch Strategy** (lines 309–337) — 12-batch sequence with risk levels, bottleneck scheduling guidance, and timeout recommendations.
+
+**Resume Protocol** (lines 339–350) — 6-step checkpoint/resume procedure for interrupted adaptation runs.
+
+**Expanded Stage 5 Failure Modes** (lines 367–386) — Added 4 new failure modes: cross-artifact terminology mismatch, artifact ordering dependency failure, system prompt parse failure, artifact token count miscalculation. Original 8 failure modes preserved.
+
+**Cross-Artifact Consistency Checks** (lines 412–423) — 6 verification checks for rule count, category count, model name, terminology alignment, cross-reference validity, and level consistency across all 6 artifacts.
+
+**Memory and Context Window Constraints** (lines 469–491) — Token estimates per rule with risk levels, split protocol for rules exceeding 25K tokens, and dictionary segmentation strategy.
+
+**Token Budget Optimization** (lines 493–501) — 6 strategies for staying within artifact token budgets including splitting into primary/appendix files.
+
+**Semantic Quality Checks** (lines 543–552) — 6 checks beyond structure: source tracing, terminology consistency, example direction, category assignment, dictionary entry completeness, and speculative entry detection.
+
+**Cross-Referencing Protocol** (lines 554–563) — 4 checks for cross-file consistency: rule inter-reference, category back-reference, synonym cross-link, and polysemy cross-link.
+
+**Expanded Known Limitations** (lines 565–593) — Added 5 new limitations (context window exhaustion, model-specific tokenization, no l10n support, manual polysemy resolution, adaptation order effects) to the original 8.

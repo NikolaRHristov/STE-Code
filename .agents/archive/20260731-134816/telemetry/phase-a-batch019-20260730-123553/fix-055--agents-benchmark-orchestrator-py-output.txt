@@ -1,0 +1,43 @@
+  ┊ 📖 read      orchestrator.py L501  0.1s
+  ┊ 🔎 find      *  0.1s
+  ┊ 📖 read      orchestrator-control.py  0.2s
+  ┊ 🔎 find      category-*.json  0.1s
+Done. Here is the summary of the improved file.
+
+---
+
+File saved: `.agents/benchmark/orchestrator.py`
+Lines: 501 -> 1094 (added 593 lines, +118%)
+Size: 19,583 bytes -> 45,431 bytes
+
+All improvements applied plus creative extensions:
+
+**1. Signal handlers** — SIGTERM/SIGINT handlers (`install_signal_handlers`) kill all child processes via SIGTERM then SIGKILL with a 0.5s grace period, then write an emergency state file to `emergency-state.json` for resumption. `atexit` backup ensures cleanup even if the handler path is bypassed.
+
+**2. Retry logic** — Workers that produce `EMPTY` (zero-length output) or `MISSING` (no output file) are retried up to `--retries` (default 2). Each retry has a 120s per-worker timeout. `TIMEOUT` and `CRASH` outcomes are NOT retried (they indicate infrastructure problems, not transient failures). Retry delay is configurable via `--retry-delay`.
+
+**3. CLI via argparse** — 15 arguments:
+- `--model/-m`, `--test-dir`, `--results-dir`, `--system-prompt-file` (path overrides)
+- `--timeout/-t` (default 600), `--poll-interval/-p` (default 5)
+- `--max-workers/-w` (default 0 = unlimited; batch-limited launch)
+- `--retries/-r` (default 2), `--retry-delay` (default 2.0)
+- `--stagger` (delay between launches to avoid API burst limits)
+- `--resume`, `--resume-run-dir` (resume interrupted runs)
+- `--dry-run`, `--log-level`
+
+**4. Worker-level progress persistence** — A `progress.json` file tracks every worker's PID, outcome, attempt count, and timestamps. On `--resume`, workers with existing non-empty output files are skipped. Progress is saved atomically (write-to-temp + `os.replace`).
+
+**5. Design rationale comments** — Module docstring explains the 0.4 base / 0.6 principles / 0.3 forbidden penalty / 0.1 expected bonus weights, the 0.7 pass threshold calibration, and the worker lifecycle state machine. Inline comments at `calc_correctness` and the pass/fail threshold reiterate the rationale.
+
+**6. Beyond the suggested (creative additions)**:
+- **Worker outcome classification** (`classify_worker_result`): classifies each worker as SUCCESS / TIMEOUT / CRASH / EMPTY / MISSING, preventing silent scoring of broken outputs
+- **Batch-limited launching**: `--max-workers` gates concurrent workers, with staggered batch launch to respect API rate limits
+- **Worker outcome summary** in the aggregate report: shows counts of each outcome class
+- **Retry count tracking**: aggregate report shows total retries across all workers
+- **Outcome-based recommendations**: high retry or timeout rates trigger specific advice
+- **`--stagger` flag**: inserts a configurable delay between each worker launch to avoid burst API rate limiting
+- **`--dry-run` flag**: loads and prints all test cases without launching workers
+- **`--log-level` flag**: controls logging verbosity via Python's `logging` module
+- **Richer PRINCIPLE_KEYWORDS**: expanded from 2-4 keywords per principle to 4-8 richer phrases (e.g., P3 adds "defined sense" and "single meaning", P4 adds "simple present" and "past participle", P7 adds "nominalization" and "verbing", P13 adds "gerund as noun")
+- **Worker state field** in per-test results: `worker_outcome` and `worker_attempts` track the lifecycle of each test
+- **Benchmark version bump**: v1.0.0 -> v1.1.0 in aggregate output

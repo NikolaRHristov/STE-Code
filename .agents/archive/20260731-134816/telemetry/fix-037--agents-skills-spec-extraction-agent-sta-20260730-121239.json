@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-037--agents-skills-spec-extraction-agent-sta",
+  "batch": 13,
+  "target": ".agents/skills/spec-extraction/agent-state-report/SKILL.md",
+  "duration_s": 117.2,
+  "output_ok": true,
+  "output_size": 18493,
+  "output_lines": 494,
+  "timestamp": "2026-07-30T12:14:37.086968+00:00"
+}

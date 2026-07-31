@@ -1,0 +1,25 @@
+All original content is preserved. Here is the summary:
+
+File saved: `.agents/uml/database-layout.md`
+- Lines: 735 → 1,233 (498 new lines added)
+- Sections: 16 → 19
+
+What was added:
+
+**Enhanced existing sections:**
+
+| Section | Original | Added |
+|---------|----------|-------|
+| 12 — How to Use | 4 subsections (12.1–12.4) | +5 subsections: find unprocessed workers (12.5), re-run failed batch (12.6), verify single worker output (12.7), trace content source-to-artifact (12.8), quick worker-to-batch reference table for all 37 batches (12.9) |
+| 13 — Maintenance | 5 subsections (13.1–13.5) | +2 subsections: automated regeneration script with shell commands (13.6), meta-instructions for self-updating with auto-generatable vs manual sections map and update frequency table (13.7) |
+| 14 — Rationale | 5 decisions (14.1–14.5) | +7 decisions: why markdown (14.6), why 109 separate prompts (14.7), why separate extracted/refined dirs (14.8), why timestamped audits (14.9), why agent/skill split (14.10), why .agents/ vs ste-code/ split (14.11), why two audit directories (14.12) |
+| 15 — Edge Cases | 6 cases (15.1–15.6) | +6 cases: partial batch completion (15.7), network timeout mid-batch (15.8), model response truncation (15.9), prompt injection in worker output (15.10), file encoding mismatch (15.11), concurrent modification during audit (15.12) |
+| 16 — Performance | 4 subsections (16.1–16.4) | +3 subsections: context window utilization analysis per worker call (16.5), file I/O patterns table (16.6), scaling analysis for 1,000-page spec with full comparison table (16.7) |
+
+**New sections:**
+
+| Section | Content |
+|---------|---------|
+| 17 — Troubleshooting Quick Reference | 5 symptom→cause→action triples: wrong file count, empty/truncated files, incorrect PROGRESS.md status, audit alleges missing files, wrong section type output |
+| 18 — Pipeline Operations Cookbook | 6 recipes with concrete shell commands: start full pipeline, resume partial, verify integrity, archive completed run, clean up and reset (with BREAKING marker), diff two pipeline stages |
+| 19 — Quick Validation Commands | 12 read-only validation commands with expected outputs in a single reference table |

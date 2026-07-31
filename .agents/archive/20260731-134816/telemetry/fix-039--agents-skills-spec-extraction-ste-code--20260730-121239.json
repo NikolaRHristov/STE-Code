@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-039--agents-skills-spec-extraction-ste-code-",
+  "batch": 13,
+  "target": ".agents/skills/spec-extraction/ste-code-continue/refiner.md",
+  "duration_s": 117.2,
+  "output_ok": true,
+  "output_size": 23291,
+  "output_lines": 485,
+  "timestamp": "2026-07-30T12:14:37.090955+00:00"
+}

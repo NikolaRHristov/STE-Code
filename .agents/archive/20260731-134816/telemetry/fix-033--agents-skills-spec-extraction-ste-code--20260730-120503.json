@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-033--agents-skills-spec-extraction-ste-code-",
+  "batch": 11,
+  "target": ".agents/skills/spec-extraction/ste-code-artifacts/SKILL.md",
+  "duration_s": 198.2,
+  "output_ok": true,
+  "output_size": 23354,
+  "output_lines": 492,
+  "timestamp": "2026-07-30T12:08:21.605450+00:00"
+}

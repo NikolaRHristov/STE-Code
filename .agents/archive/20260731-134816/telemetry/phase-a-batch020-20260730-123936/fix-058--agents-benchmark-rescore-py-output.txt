@@ -1,0 +1,49 @@
+  ┊ 📖 read      rescore.py  0.2s
+  ┊ 🔎 grep      orchestrator*.py  0.2s
+  ┊ 🔎 find      benchmark_lib*  0.2s
+  ┊ 📖 read      orchestrator.py  0.2s
+  ┊ 📖 read      orchestrator-control.py  0.2s
+  ┊ 📖 read      orchestrator.py L1001  0.2s
+  ┊ 🔎 find      category-*.json  0.1s
+  ┊ 🔎 grep      required_patterns  0.1s
+  ┊ 🔎 find      per-test-results  0.1s
+Here is the summary of everything applied.
+
+---
+
+**New file: `.agents/benchmark/benchmark_lib.py`** (308 lines)
+
+Shared library — single source of truth extracted from orchestrator.py (the canonical source). Contains:
+
+- `PRINCIPLE_KEYWORDS` — orchestrator's exact P1–P14 mapping (fixes rescore divergence)
+- `extract_corrected_text()` / `extract_compliance_section()` — no more duplication
+- `check_principles()` / `check_keywords()` / `calc_correctness()` — identical scoring
+- `build_recommendations()` — rule-based recommendation engine
+- `load_test_cases()` / `load_previous_results()` — I/O helpers
+- `resolve_project_root()` / `resolve_path()` — path resolution
+
+---
+
+**Rewritten: `.agents/benchmark/rescore.py`** (684 lines, was 156)
+
+All 5 audit gaps are fixed:
+
+1. **Duplication eliminated** — `extract_corrected_text()` and `extract_compliance_section()` now imported from `benchmark_lib.py`. Any fix to extraction logic in the orchestrator now automatically applies here.
+
+2. **Canonical PRINCIPLE_KEYWORDS** — uses orchestrator's exact keywords. Previously diverged on P1 (missing "approved term", "approved vocabulary"), P5 (completely different set), P10 (added a non-standard "filler"), P14 (missing "color", "analyze").
+
+3. **Required patterns check** — `check_required_patterns()` function applies a 0.2 max penalty for missing patterns in generation tests, matching orchestrator Phase 3 behavior exactly.
+
+4. **Latency/token preservation** — `load_previous_results()` reads the existing `per-test-results.json` and `score_one_test()` merges `latency_ms`, `token_count_input`, `token_count_output` into each rescored result.
+
+5. **Diff mode** — `--diff` flag runs `compute_diffs()` which categorizes every test as same/changed/flip/new/removed, shows per-test score deltas, and highlights pass/fail flips with reasons.
+
+6. **Recommendations** — `build_recommendations()` produces actionable output: low correctness warnings, high latency suggestions, underperforming category alerts, retry-rate concerns, truncated-output warnings.
+
+Additional improvements beyond the audit:
+- `argparse` CLI: `--output summary|report|json`, `--out-file`, `--test-dir`
+- Three output files per rescore: `rescored-results.json` (aggregate), `rescored-per-test.json` (per-test), `rescored-deltas.json` (diffs)
+- `rescored_at` timestamp on every per-test result
+- Expanded result schema matches orchestrator output: `test_type`, `pattern_penalty`, `required_patterns_found`/`missed`
+- Terminal report with category + difficulty breakdown tables, per-test detail table
+- Smoke-tested: scoring formula verified (2/2 principles = 1.0, 1/2 = 0.7)
