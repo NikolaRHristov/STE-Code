@@ -6,8 +6,19 @@
 
 Transform STE rules into STE-Code (coding domain). Agent-agnostic.
 
-## Input: `ste-code/grouped/master.md`
+## Input: `ste-code/grouped/*.md` (all grouped group files; the orchestrator
+concatenates them and slices each rule section by its canonical title)
 ## Output: `ste-code/adapted/` (rule-by-rule STE→STE-Code)
+
+## Orchestration & prompts
+- **`.agents/tools/adaptation/adapt_batch.py`** launches one LLM worker per rule
+  section (1-9 + GR), embeds THIS skill as the authoritative protocol, and commits
+  each section only after its deterministic gate passes (verify-adaptation.py).
+- Worker prompts are externalized to **`.agents/tools/adaptation/templates/`**
+  (edit those `.md` files to change wording — not the `.py`). The embedded skill
+  text below is the single source of truth for behavior.
+- Refuses to launch until `ste-code/grouped/` exists and is non-trivial.
+- Checkpoint + `--resume` + per-section git commit (crash-safe, like refine_batch.py).
 
 ## PRESERVE (unchanged)
 - All 53 rule numbers and 9-section organization
