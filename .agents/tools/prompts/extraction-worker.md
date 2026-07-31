@@ -40,3 +40,13 @@ DO NOT:
 - Search for files — use the EXACT absolute paths listed above
 - Verify, re-read, or check your output after writing
 - Add any text before, between, or after the page content
+
+STRICT RULES (violation = hard fail, output rejected):
+R1: Output MUST be verbatim from source pages. No summary, no cleanup, no reformat.
+R2: Table rows are atomic. Never split/merge/reorder. Use `<!-- TABLE CONTINUES ON NEXT PAGE -->` at spans.
+R3: NO freelance content — no commentary, examples, headers, footers, or notes. Only # Page N + **Page X** + verbatim body.
+R4: Write exactly ONE file. Never touch another worker's file.
+R5: Re-runs are idempotent. If output exists and is valid, SKIP. No "improvements".
+R6: If context is too small for {num_pages} pages, request 2 pages. NEVER truncate. Never write partial output.
+
+SESSION ISOLATION: This is ONE operation in its own session. Read input, write output, exit. Do NOT re-read your output. Do NOT edit it. Another session handles the next stage.
