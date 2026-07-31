@@ -31,7 +31,7 @@ RULES:
 - Every adapted rule MUST reference its original rule number from master.md
 - Every example MUST be an adaptation of a real STE/non-STE pair from the spec
 - No invented code terms without a master.md source
-- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro)
+- 19 categories (NOT 22), tencent/hy3:free (NOT deepseek-pro)
 - Never use "..." to abbreviate
 - Output format:
   # Rule X.Y — [Title]

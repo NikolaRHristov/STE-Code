@@ -30,7 +30,7 @@ for batch_idx in range(0, len(remaining), batch_size):
     procs = []
     for w in batch:
         prompt_file = f"{PROMPTS_DIR}/w{w:03d}-enrich.txt"
-        cmd = f'hermes -z "$(cat {prompt_file})" -m poolside/laguna-s-2.1:free --yolo'
+        cmd = f'hermes -z "$(cat {prompt_file})" -m tencent/hy3:free --yolo'
         print(f"  Launching W{w:03d}...")
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         procs.append((w, p))

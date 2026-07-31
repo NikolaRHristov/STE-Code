@@ -22,7 +22,7 @@ for i in range(0, len(workers), batch_size):
     procs = []
     for w in batch:
         pf = f"{PROMPTS_DIR}/{w}-prompt.txt"
-        cmd = f'hermes -z "$(cat {pf})" -m poolside/laguna-s-2.1:free --yolo'
+        cmd = f'hermes -z "$(cat {pf})" -m tencent/hy3:free --yolo'
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         procs.append((w, p))
         print(f"  {w} launched (pid {p.pid})")

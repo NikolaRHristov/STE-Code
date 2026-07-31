@@ -4,7 +4,7 @@ import os, subprocess, sys, time
 from pathlib import Path
 
 PROMPTS_DIR = ".agents/prompts/refine"
-MODEL = "poolside/laguna-s-2.1:free"
+MODEL = "tencent/hy3:free"
 BATCH_SIZE = 3
 
 def get_batches():
