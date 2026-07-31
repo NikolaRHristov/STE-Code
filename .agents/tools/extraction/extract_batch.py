@@ -90,6 +90,12 @@ _spec = _ilu.spec_from_file_location(
 skill_prompt = _ilu.module_from_spec(_spec)
 _spec.loader.exec_module(skill_prompt)
 
+# Shared template loader ({{placeholder}} syntax — see lib/templater.py).
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import render_template
+_EXTRACTION_PROMPT_PATH = PROJECT / ".agents" / "tools" / "prompts" / "extraction-worker.md"
+
 
 def parse_manifest():
     """Parse MANIFEST.md: position (1-434) → (page_id, filename)."""
@@ -136,26 +142,16 @@ def build_prompt(worker_num, start_pos, end_pos, mapping):
     # Full absolute path for write_file
     output_path = str(EXTRACTED_DIR / f"w{worker_num:03d}-p{start_pos}-{end_pos}.md")
 
-    # Load prompt template from .md file for dynamic editing
-    # The .md file has a header section (before ---) and the actual prompt (after ---)
-    prompt_template_path = PROJECT / ".agents" / "tools" / "prompts" / "extraction-worker.md"
-    template_content = prompt_template_path.read_text(encoding="utf-8")
-    # Strip header — everything before the first --- separator
-    if "---" in template_content:
-        template = template_content.split("---", 1)[1].strip()
-    else:
-        template = template_content
+    # Load prompt template from .md file for dynamic editing.
+    # The template uses {{placeholder}} syntax (see lib/templater.py) and now
+    # lives under prompts/ as extraction-worker.md — edit it to change wording
+    # without touching this script.
 
-    # Pre-compute page positions for template
-    page_positions = ", ".join(str(p) for p in [start_pos + i for i in range(len(pages))])
-
-    # Apply replacements
-    prompt = template.format(
+    prompt = render_template(
+        _EXTRACTION_PROMPT_PATH,
         num_pages=len(pages),
         file_refs=file_refs,
         start_pos=start_pos,
-        end_pos=end_pos,
-        page_positions=page_positions,
         pages_first_id=pages[0][1] if pages else "",
         output_path=output_path,
     )
