@@ -75,6 +75,12 @@ engine = _load_module(
     "group_engine", PROJECT / ".agents" / "tools" / "grouping" / "group_engine.py")
 pipeline_core = _load_module(
     "pipeline_core", PROJECT / ".agents" / "tools" / "lib" / "pipeline_core.py")
+_templater_mod = _load_module(
+    "templater", PROJECT / ".agents" / "tools" / "lib" / "templater.py")
+
+# External markdown templates live in grouping/templates/*.md (edit those, not
+# the f-strings here) — see .agents/tools/grouping/templates/README.md.
+TPL = _templater_mod.Templater(__file__)
 
 GROUPED_DIR = PROJECT / "ste-code" / "grouped"
 STATE_DIR = PROJECT / ".agents" / "state"
@@ -310,18 +316,17 @@ def assemble_group(group, idx, id2pos) -> tuple[str | None, dict]:
     merged = merge_page_tables(page_bodies)
 
     pages = group.pages
-    header = (
-        f"<!-- GROUP: {group.gid} -->\n"
-        f"<!-- PAGES: {pages[0]}-{pages[-1]} -->\n"
-        f"<!-- SECTION: {group.section} -->\n"
-        f"<!-- KEY: {group.key or ''} -->\n"
-        f"<!-- WORKERS: {', '.join(workers)} -->\n"
-        f"<!-- PAGE_COUNT: {len(pages)} -->\n\n"
-        f"# {group.label.replace('-', ' ').title()}\n\n"
-        f"> **Source:** ASD-STE100 Issue 9, January 2025\n"
-        f"> **Section:** {group.section}"
-        f"{f' ({group.key})' if group.key else ''}\n"
-        f"> **Pages:** {pages[0]}-{pages[-1]} of 434 ({len(pages)} pages)\n\n"
+    header = TPL.render(
+        "group_header",
+        gid=group.gid,
+        page_start=pages[0],
+        page_end=pages[-1],
+        section=group.section,
+        key=group.key or "",
+        key_suffix=f" ({group.key})" if group.key else "",
+        workers=", ".join(workers),
+        page_count=len(pages),
+        title=group.label.replace("-", " ").title(),
     )
     text = header + merged
 

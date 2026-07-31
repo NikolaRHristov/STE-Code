@@ -204,10 +204,42 @@ def t_exact_parity():
           "beta" in missing2 and "second" in missing2, f"missing={dict(missing2)}")
 
 
+def t_template_header():
+    print("T9 external group_header template renders correctly")
+    # The assembler must produce the same metadata block via the template.
+    man = engine.parse_manifest()
+    id2pos = engine.id_to_position(man)
+    idx = engine.index_refined()
+    plan = engine.build_plan(man)
+    # front-matter group is sliceable now; assemble it and check header fields.
+    g = next(x for x in plan if x.gid.endswith("front-matter"))
+    text, stats = gb.assemble_group(g, idx, id2pos)
+    if text is None:
+        check("front-matter sliceable (skip if refiner mid-run)", True,
+              "not sliceable yet — template still unit-tested below")
+    else:
+        check("template emits GROUP comment", f"<!-- GROUP: {g.gid} -->" in text)
+        check("template emits PAGES comment",
+              f"<!-- PAGES: {g.pages[0]}-{g.pages[-1]} -->" in text)
+        check("template emits Source line", "> **Source:** ASD-STE100" in text)
+    # Direct template render + strict validation.
+    rendered = gb.TPL.render("group_header", gid="001-x", page_start=1, page_end=4,
+                             section="FRONT", key="", key_suffix="",
+                             workers="R001", page_count=4, title="X")
+    check("rendered header has title", "# X" in rendered)
+    check("no leftover placeholders", "{{" not in rendered)
+    # strict: missing var must raise
+    try:
+        gb.TPL.render("group_header", gid="only")
+        check("strict missing-var raises", False, "did not raise")
+    except KeyError:
+        check("strict missing-var raises", True)
+
+
 def main():
     for t in (t_dict_merge, t_rules_passthrough, t_picture_span,
               t_picture_inline_end, t_parity, t_plan_coverage, t_slicer_formats,
-              t_exact_parity):
+              t_exact_parity, t_template_header):
         t()
     print(f"\n{'='*50}\n{_passed} passed, {_failed} failed\n{'='*50}")
     sys.exit(1 if _failed else 0)
