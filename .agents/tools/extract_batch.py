@@ -1,35 +1,37 @@
 #!/usr/bin/env python3
 """
-STE-Code Extraction Orchestrator — launches hermes -z workers for spec page extraction.
+STE-Code Extraction Orchestrator — batch pipeline v2.
 
-Follows existing project patterns:
-- Uses _import_runner.py to get run_agent/launch_agent from agent-runner.py
-- Telemetry logging like telemetry-worker.py
-- Path resolution like launch-worker.sh (PROJECT from __file__)
-- Batch processing with git commits like extract_batch scripts
+Launches hermes -z workers (via the oneshot wrapper) to extract spec pages
+from spec/issue-09-2025/page-dir/ into ste-code/extracted/.
+
+Pipeline:
+  1. Read MANIFEST.md → position→(page_id, filename) mapping
+  2. For each worker (109 total, 4 pages each), build a prompt that tells the
+     agent to read each spec page file and write a combined markdown file.
+  3. Run via run_agent() → hermes-oneshot-wrapper.py → AIAgent (no TUI)
+  4. Verify output (size, page headers, no commentary)
+  5. Retry up to 3 times on failure
+  6. Commit each passed batch via git
+  7. Update PROGRESS.md
 
 Usage:
   python3 .agents/tools/extract_batch.py [start_batch] [num_batches]
 
-The orchestrator launches 3 workers per batch (W001-W003, W004-W006, etc.),
-each extracting 4 consecutive pages from spec/issue-09-2025/page-dir/.
-Workers use hermes -z with --yolo to read spec pages and write extraction output.
-Git commits after each verified batch.
-
-Workers read spec pages using their read_file tool and write output via write_file.
-No content is embedded in the prompt — the model reads files directly.
+Environment:
+  Read .agents/tools/.env if present for MODEL, MAX_WORKERS, etc.
 """
 
 import os
 import sys
-import subprocess
 import time
 import re
 import json
+import subprocess
 from pathlib import Path
 from datetime import datetime, timezone
 
-# ── Resolve project root from script location ──────────────────────────
+# ── Resolve project root from script location (no hardcoded paths) ──────────
 PROJECT = Path(__file__).resolve().parent.parent.parent
 PAGE_DIR = PROJECT / "spec" / "issue-09-2025" / "page-dir"
 EXTRACTED_DIR = PROJECT / "ste-code" / "extracted"
@@ -39,19 +41,31 @@ TELEMETRY_DIR = PROJECT / ".agents" / "telemetry"
 LOG_DIR = PROJECT / ".agents" / "tmp" / "extraction-logs"
 FEEDBACK_PATH = PROJECT / ".agents" / "feedback" / "exchange.md"
 
-MODEL = "poolside/laguna-s-2.1:free"
-MAX_WORKERS = 109
-PAGES_PER_WORKER = 4
-WORKERS_PER_BATCH = 3
-TOTAL_PAGES = 434
+# ── Load .env (optional) ────────────────────────────────────────────────────
+_env_path = Path(__file__).resolve().parent / ".env"
+if _env_path.exists():
+    for line in _env_path.read_text().splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip())
 
-# ── Import agent runner (standard project pattern) ──────────────────────
+# ── Config ───────────────────────────────────────────────────────────────────
+MODEL = os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free")
+MAX_WORKERS = int(os.environ.get("STE_MAX_WORKERS", "109"))
+PAGES_PER_WORKER = int(os.environ.get("STE_PAGES_PER_WORKER", "4"))
+WORKERS_PER_BATCH = int(os.environ.get("STE_WORKERS_PER_BATCH", "3"))
+TOTAL_PAGES = int(os.environ.get("STE_TOTAL_PAGES", "434"))
+MAX_ATTEMPTS = 3
+TIMEOUT_SECONDS = 600
+
+# ── Import agent runner (standard project pattern) ───────────────────────────
 exec(open(PROJECT / ".agents" / "tools" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
 
 def parse_manifest():
-    """Parse MANIFEST.md: position (1-434) -> (page_id, filename)"""
+    """Parse MANIFEST.md: position (1-434) → (page_id, filename)."""
     mapping = {}
     with open(MANIFEST_PATH) as f:
         for line in f:
@@ -67,17 +81,17 @@ def parse_manifest():
 
 
 def worker_page_range(worker_num):
-    """Get (start_pos, end_pos) for a worker number"""
+    """Get (start_pos, end_pos) for a worker number."""
     start_pos = (worker_num - 1) * PAGES_PER_WORKER + 1
     end_pos = min(worker_num * PAGES_PER_WORKER, TOTAL_PAGES)
     return start_pos, end_pos
 
 
 def build_prompt(worker_num, start_pos, end_pos, mapping):
-    """Build hermes -z prompt for extraction.
+    """Build the hermes -z prompt.
 
-    Tells the agent to read spec page files and write the extraction output.
-    No content is embedded in the prompt — the agent reads files via its tools.
+    The agent reads spec page files via its read_file tool and writes the
+    extraction output via write_file. No content is embedded in the prompt.
     """
     pages = []
     for pos in range(start_pos, end_pos + 1):
@@ -86,36 +100,52 @@ def build_prompt(worker_num, start_pos, end_pos, mapping):
             pages.append((pos, page_id, filename))
 
     file_refs = "\n".join(
-        f"- Page {pos} ({page_id}): spec/issue-09-2025/page-dir/{filename}"
+        f"  {pos}. {page_id} → spec/issue-09-2025/page-dir/{filename}"
         for pos, page_id, filename in pages
     )
 
-    output_path = f"ste-code/extracted/w{worker_num:03d}-p{start_pos}-{end_pos}.md"
+    # Full absolute path for write_file
+    output_path = str(EXTRACTED_DIR / f"w{worker_num:03d}-p{start_pos}-{end_pos}.md")
 
-    prompt = f"""Extract ALL content from these {len(pages)} spec pages and write to a markdown file.
+    prompt = f"""Extract ALL content from these {len(pages)} spec pages and write a single markdown file.
+
+You are Agent #1 (Extractor). Your job is to read the raw spec page files and produce a clean, verbatim extraction.
 
 STEPS:
-1. Read each of these files:
+1. Read each of these files (using read_file):
 {file_refs}
 
-2. Extract every word, table, list, and example verbatim into:
+2. Extract every word, table, list, and example VERBATIM into:
    {output_path}
 
-3. Start the file with `# Page {start_pos} of 434`
-4. For each page boundary, add `# Page N of 434` heading
-5. Output ONLY raw markdown — no commentary, no preamble, no summaries
-6. Preserve all formatting exactly
-7. If a table spans pages, add `<!-- TABLE CONTINUES ON NEXT PAGE -->`
+3. The output file must start with exactly: `# Page {start_pos} of 434`
 
-Do not add "This page describes" or "In summary" or any meta-commentary.
-Just read the files and write the output. Use write_file to save."""
+4. For each page boundary, add a heading: `# Page N of 434` (where N is the
+   sequential page position, e.g. {start_pos}, {start_pos+1}, ..., {end_pos})
 
-    return prompt
+5. After the page heading, include the page-id line: `**Page {pages[0][1]}**`
+
+6. Output ONLY raw markdown — no commentary, no preamble, no summaries,
+   no meta-commentary about what you are doing.
+
+7. Preserve all formatting exactly — tables, lists, bold, examples.
+
+8. If a table spans pages, add `<!-- TABLE CONTINUES ON NEXT PAGE -->`
+
+9. Use write_file to save the output file.
+
+Do NOT include phrases like "Here is the extraction", "This page describes",
+"I will now", "Let me check", "shutting down", or any meta-commentary.
+Just read the files and write the output.
+
+Write to: {output_path}"""
+
+    return prompt, output_path
 
 
-def verify_output(worker_num, start_pos, end_pos):
+def verify_output(worker_num, start_pos, end_pos, output_path):
     """Run quality gates on extracted file. Returns (ok, message)."""
-    output_file = EXTRACTED_DIR / f"w{worker_num:03d}-p{start_pos}-{end_pos}.md"
+    output_file = Path(output_path)
 
     if not output_file.exists():
         return False, "File does not exist"
@@ -126,19 +156,33 @@ def verify_output(worker_num, start_pos, end_pos):
         return False, f"Read error: {e}"
 
     size = output_file.stat().st_size
-    lines = len(content.splitlines())
+    lines = content.splitlines()
 
-    # Strip TUI banner lines for analysis
+    # Gate 1: Size — must have meaningful content
+    is_last = (worker_num == MAX_WORKERS)
+    min_size = 200 if is_last else 600
+    if size < min_size:
+        return False, f"Size {size}B below {min_size}B minimum"
+
+    # Gate 2: First page header
+    first_content = lines[0].strip() if lines else ""
+    expected = f"# Page {start_pos} of 434"
+    if expected not in first_content:
+        return False, f"Header wrong: expected '{expected}', got '{first_content[:80]}'"
+
+    # Gate 3: All expected page headers present
+    for pos in range(start_pos, end_pos + 1):
+        expected_header = f"# Page {pos} of 434"
+        if expected_header not in content:
+            return False, f"Missing header: {expected_header}"
+
+    # Gate 4: No commentary / meta-text
     content_lines = [l for l in content.splitlines()
                      if not (l.startswith("╭") or l.startswith("╰") or l.startswith("│")
                              or l.startswith("\x1b[") or "Hermes Agent v" in l
                              or "Available Tools" in l or "Welcome to" in l
                              or "The boulder" in l or "Session:" in l)]
 
-    if not content_lines:
-        return False, "Only banner output — no extraction content"
-
-    # Gate 2: No commentary in last 5 content lines
     bad_patterns = [
         "i've written", "the file contains", "output file:",
         "here is", "here's", "saved to", "i saved",
@@ -146,55 +190,34 @@ def verify_output(worker_num, start_pos, end_pos):
         "let me check", "i will now extract", "wait, actually",
         "shutting down", "the boulder",
     ]
-    last_5 = "\n".join(content_lines[-5:]).lower()
+    last_lines = "\n".join(content_lines[-10:]).lower()
     for pattern in bad_patterns:
-        if pattern in last_5:
+        if pattern in last_lines:
             return False, f"Commentary: '{pattern}' in last lines"
 
-    # Gate 2: Page header
-    first_content = content_lines[0].strip()
-    expected = f"# Page {start_pos} of 434"
-    if expected not in first_content:
-        return False, f"Header wrong: expected '{expected}', got '{first_content[:80]}'"
-
-    # Gate 1: Size
-    is_last = (worker_num == MAX_WORKERS)
-    min_size = 200 if is_last else 600
-
-    if size < min_size:
-        return False, f"Size {size}B below {min_size}B"
-
-    return True, f"OK - {size}B, {lines} lines"
+    return True, f"OK — {size}B, {len(lines)} lines"
 
 
-def run_worker_telemetry(worker_num, start_pos, end_pos, mapping, attempt=1):
-    """Run a single extraction worker with telemetry logging.
+def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
+    """Run a single extraction worker with telemetry logging."""
+    prompt, output_path = build_prompt(worker_num, start_pos, end_pos, mapping)
 
-    Uses run_agent() from agent-runner.py, which calls hermes-oneshot-wrapper.py
-    via the Hermes Python API (no TUI banner issues).
-    """
-    output_file = EXTRACTED_DIR / f"w{worker_num:03d}-p{start_pos}-{end_pos}.md"
-
-    # Clean up any previous failed attempt
+    # Clean up any previous failed attempt for this worker
+    output_file = Path(output_path)
     if output_file.exists():
-        ok, msg = verify_output(worker_num, start_pos, end_pos)
+        ok, msg = verify_output(worker_num, start_pos, end_pos, output_path)
         if ok:
-            return True, msg, True  # already extracted
+            return True, msg, True  # already extracted, skip
         output_file.unlink()
 
-    prompt = build_prompt(worker_num, start_pos, end_pos, mapping)
-
-    # Clean up old prompt files
-    for old_prompt in Path("/tmp").glob(f"w{worker_num:03d}-p*.txt"):
-        old_prompt.unlink(missing_ok=True)
-
-    # Telemetry
     TELEMETRY_DIR.mkdir(parents=True, exist_ok=True)
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     telemetry_path = TELEMETRY_DIR / f"w{worker_num:03d}-{timestamp}.json"
 
     start_time = time.time()
-    print(f"  W{worker_num:03d} (attempt {attempt}): Extracting {start_pos}-{end_pos}...", flush=True)
+    print(f"  W{worker_num:03d} (attempt {attempt}): Extracting "
+          f"{start_pos}-{end_pos}...", flush=True)
 
     telemetry = {
         "worker_id": f"W{worker_num:03d}",
@@ -218,13 +241,12 @@ def run_worker_telemetry(worker_num, start_pos, end_pos, mapping, attempt=1):
     }
 
     try:
-        # Use run_agent from agent-runner.py — calls hermes-oneshot-wrapper.py
         result = run_agent(
             prompt,
             agent="hermes",
             model=MODEL,
-            cwd=PROJECT,
-            timeout=600,
+            cwd=str(PROJECT),
+            timeout=TIMEOUT_SECONDS,
         )
 
         duration = time.time() - start_time
@@ -238,12 +260,12 @@ def run_worker_telemetry(worker_num, start_pos, end_pos, mapping, attempt=1):
             if "error" in stderr_lower or "timeout" in stderr_lower:
                 telemetry["errors"].append(result.stderr[:200])
 
-        # Check stdout for error patterns
         if result.stdout:
             stdout_lower = result.stdout.lower()
-            if "error" in stdout_lower:
+            if "http 400" in stdout_lower or "error" in stdout_lower:
                 errors = [l for l in result.stdout.split("\n")
-                          if "error" in l.lower() or "traceback" in l.lower()]
+                           if "error" in l.lower() or "traceback" in l.lower()
+                           or "http 400" in l.lower()]
                 if errors:
                     telemetry["errors"].extend(errors[:5])
 
@@ -251,28 +273,34 @@ def run_worker_telemetry(worker_num, start_pos, end_pos, mapping, attempt=1):
         if output_file.exists():
             telemetry["output_exists"] = True
             telemetry["output_size_bytes"] = output_file.stat().st_size
-            telemetry["output_lines"] = len(output_file.read_text(encoding="utf-8").splitlines())
-            ok, msg = verify_output(worker_num, start_pos, end_pos)
+            telemetry["output_lines"] = len(
+                output_file.read_text(encoding="utf-8").splitlines()
+            )
+            ok, msg = verify_output(worker_num, start_pos, end_pos, output_path)
             telemetry["verification_status"] = "PASS" if ok else "FAIL"
             telemetry["verification_message"] = msg
 
             if ok:
-                print(f"  W{worker_num:03d}: [PASS] {msg} ({duration:.1f}s)", flush=True)
+                print(f"  W{worker_num:03d}: [PASS] {msg} ({duration:.1f}s)",
+                      flush=True)
                 _save_telemetry(telemetry_path, telemetry)
                 return True, msg, False
             else:
-                print(f"  W{worker_num:03d}: [FAIL] {msg} — retrying", flush=True)
+                print(f"  W{worker_num:03d}: [FAIL] {msg} — retrying",
+                      flush=True)
                 # Save bad output for debugging
-                log_file = LOG_DIR / f"w{worker_num:03d}-bad.txt"
-                LOG_DIR.mkdir(parents=True, exist_ok=True)
-                log_file.write_text(output_file.read_text(encoding="utf-8")[:500], encoding="utf-8")
+                bad_log = LOG_DIR / f"w{worker_num:03d}-bad.txt"
+                bad_log.write_text(
+                    output_file.read_text(encoding="utf-8")[:500],
+                    encoding="utf-8"
+                )
                 output_file.unlink()
         else:
-            print(f"  W{worker_num:03d}: [FAIL] No output file created — retrying", flush=True)
+            print(f"  W{worker_num:03d}: [FAIL] No output file — retrying",
+                  flush=True)
             telemetry["errors"].append("Output file not created by agent")
             # Save stdout for debugging
             if result.stdout:
-                LOG_DIR.mkdir(parents=True, exist_ok=True)
                 debug_file = LOG_DIR / f"w{worker_num:03d}-stdout.txt"
                 debug_file.write_text(result.stdout[:1000], encoding="utf-8")
 
@@ -282,7 +310,8 @@ def run_worker_telemetry(worker_num, start_pos, end_pos, mapping, attempt=1):
         telemetry["end_time"] = datetime.now(timezone.utc).isoformat()
         telemetry["errors"].append(f"TIMEOUT after {duration:.0f}s")
         telemetry["exit_code"] = -1
-        print(f"  W{worker_num:03d}: [TIMEOUT] after {duration:.0f}s — retrying", flush=True)
+        print(f"  W{worker_num:03d}: [TIMEOUT] after {duration:.0f}s — retrying",
+              flush=True)
 
     except Exception as e:
         duration = time.time() - start_time
@@ -297,13 +326,16 @@ def run_worker_telemetry(worker_num, start_pos, end_pos, mapping, attempt=1):
 
 
 def _save_telemetry(path, data):
-    """Save telemetry JSON"""
-    with open(path, "w") as f:
-        json.dump(data, f, indent=2)
+    """Save telemetry JSON."""
+    try:
+        with open(path, "w") as f:
+            json.dump(data, f, indent=2)
+    except Exception:
+        pass
 
 
 def process_batch(batch_num, start_worker, mapping):
-    """Process a batch of up to 3 workers."""
+    """Process a batch of up to WORKERS_PER_BATCH workers."""
     workers = []
     for i in range(WORKERS_PER_BATCH):
         worker_num = start_worker + i
@@ -320,7 +352,8 @@ def process_batch(batch_num, start_worker, mapping):
     worker_ids = [f"W{w:03d}" for w, _, _ in workers]
 
     print(f"\n{'='*60}", flush=True)
-    print(f"Batch {batch_num:02d} — {', '.join(worker_ids)} (pages {batch_start}-{batch_end})", flush=True)
+    print(f"Batch {batch_num:02d} — {', '.join(worker_ids)} "
+          f"(pages {batch_start}-{batch_end})", flush=True)
     print(f"{'='*60}", flush=True)
 
     # Process workers sequentially (shared model backend)
@@ -329,8 +362,8 @@ def process_batch(batch_num, start_worker, mapping):
         ok = False
         msg = ""
         skipped = False
-        for attempt in range(1, 4):
-            ok, msg, skipped = run_worker_telemetry(
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            ok, msg, skipped = run_worker(
                 worker_num, start_pos, end_pos, mapping, attempt
             )
             if ok:
@@ -341,21 +374,38 @@ def process_batch(batch_num, start_worker, mapping):
     all_passed = all(r[3] for r in results)
     passed = sum(1 for r in results if r[3])
 
-    # Commit
+    # Git commit passed workers
     for worker_num, start_pos, end_pos, ok in results:
         if ok:
             f = EXTRACTED_DIR / f"w{worker_num:03d}-p{start_pos}-{end_pos}.md"
-            subprocess.run(["git", "add", str(f.relative_to(PROJECT))],
-                         capture_output=True, text=True, cwd=str(PROJECT))
+            subprocess.run(
+                ["git", "add", str(f.relative_to(PROJECT))],
+                capture_output=True, text=True, cwd=str(PROJECT)
+            )
+
+    # Collect any passed worker files for this commit
+    passed_files = [
+        str(EXTRACTED_DIR / f"w{w:03d}-p{s}-{e}.md").replace(str(PROJECT) + "/", "")
+        for w, s, e, ok in results if ok
+    ]
 
     status_str = "PASS" if all_passed else f"PARTIAL ({passed}/{len(workers)})"
-    commit_msg = f"Batch {batch_num:02d} - {status_str} - Workers {', '.join(worker_ids)} (pages {batch_start}-{batch_end})"
-    result = subprocess.run(["git", "commit", "-m", commit_msg],
-                            capture_output=True, text=True, cwd=str(PROJECT))
-    if result.returncode == 0:
-        print(f"  ✓ Committed: {commit_msg}", flush=True)
+    commit_msg = (
+        f"Batch {batch_num:02d} - {status_str} - "
+        f"Workers {', '.join(worker_ids)} (pages {batch_start}-{batch_end})"
+    )
+
+    if passed_files:
+        result = subprocess.run(
+            ["git", "commit", "-m", commit_msg] + passed_files,
+            capture_output=True, text=True, cwd=str(PROJECT)
+        )
+        if result.returncode == 0:
+            print(f"  ✓ Committed: {commit_msg}", flush=True)
+        else:
+            print(f"  ✗ Commit failed: {result.stderr[:200]}", flush=True)
     else:
-        print(f"  ✗ Commit failed: {result.stderr[:200]}", flush=True)
+        print(f"  ✗ No files to commit", flush=True)
 
     # Update PROGRESS.md
     _update_progress(batch_num, results)
@@ -385,29 +435,13 @@ def _update_progress(batch_num, results):
     PROGRESS_PATH.write_text("\n".join(lines), encoding="utf-8")
 
 
-def _write_feedback(batch_num, issue):
-    """Write failure info to feedback exchange log."""
-    FEEDBACK_PATH.parent.mkdir(parents=True, exist_ok=True)
-    if not FEEDBACK_PATH.exists():
-        FEEDBACK_PATH.write_text("# Feedback Exchange Log\n\n", encoding="utf-8")
-
-    timestamp = datetime.now(timezone.utc).isoformat()
-    entry = f"\n## Batch {batch_num:02d} - {timestamp}\n"
-    entry += f"- **Issue:** {issue}\n"
-    entry += f"- **Action:** Check telemetry logs in .agents/telemetry/\n\n"
-
-    content = FEEDBACK_PATH.read_text(encoding="utf-8")
-    content += entry
-    FEEDBACK_PATH.write_text(content, encoding="utf-8")
-
-
 def main():
     start_batch = int(sys.argv[1]) if len(sys.argv) > 1 else 1
     num_batches = int(sys.argv[2]) if len(sys.argv) > 2 else 37
 
-    print(f"STE-Code Batch Extraction Pipeline", flush=True)
+    print(f"STE-Code Batch Extraction Pipeline v2", flush=True)
     print(f"Model: {MODEL}", flush=True)
-    print(f"Starting batch: {start_batch}, batches: {num_batches}", flush=True)
+    print(f"Batches: {num_batches} (workers {start_batch}-{start_batch + num_batches - 1})", flush=True)
     print(f"Project: {PROJECT}", flush=True)
 
     mapping = parse_manifest()
@@ -417,19 +451,30 @@ def main():
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     TELEMETRY_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Check existing
+    # Report existing files
     existing = sorted(EXTRACTED_DIR.glob("w*.md"))
     if existing:
-        last_w = max(int(f.stem.split("-")[0][1:]) for f in existing)
-        print(f"  Existing last: W{last_w:03d}", flush=True)
+        last_w = max(
+            int(f.stem.split("-")[0][1:]) for f in existing
+            if f.stem.startswith("w") and f.stem[1:].split("-")[0].isdigit()
+        )
+        print(f"  Existing last: W{last_w:03d} ({len(existing)} files)", flush=True)
 
+    total_workers = 0
+    total_passed = 0
     for batch_num in range(start_batch, min(start_batch + num_batches, 38)):
         start_worker = (batch_num - 1) * WORKERS_PER_BATCH + 1
         if start_worker > MAX_WORKERS:
             print(f"\nAll {MAX_WORKERS} workers complete!", flush=True)
             break
 
-        process_batch(batch_num, start_worker, mapping)
+        batch_passed = process_batch(batch_num, start_worker, mapping)
+        workers_in_batch = min(WORKERS_PER_BATCH, MAX_WORKERS - start_worker + 1)
+        total_workers += workers_in_batch
+        total_passed += sum(
+            1 for w in range(start_worker, start_worker + workers_in_batch)
+            if (EXTRACTED_DIR / f"w{w:03d}-p{(w-1)*4+1}-{min(w*4, TOTAL_PAGES)}.md").exists()
+        )
 
     final_count = len(list(EXTRACTED_DIR.glob("w*.md")))
     print(f"\n{'='*60}", flush=True)
