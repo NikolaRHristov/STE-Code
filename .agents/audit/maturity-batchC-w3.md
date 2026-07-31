@@ -68,7 +68,7 @@
   - Failure recovery specified: "If any check fails, re-extract with the worker's page range split in half"
   - Launch rules are specific and non-negotiable (exactly 3 per batch, never inline, never exceed 4 pages)
   - Cross-references to rails.md and worker-grid.md - both exist on disk
-  - Immutable facts section prevents common errors (19 not 22 categories, deepseek-v4-pro not deepseek-pro)
+  - Immutable facts section prevents common errors (19 not 22 categories, poolside/laguna-s-2.1:free not deepseek-pro)
 - **Gaps:**
   - No rationale for the batch size of 3 - why not 2 or 5? Is this a rate-limit constraint, a model context constraint, or an empirical optimum?
   - No performance considerations - what's the estimated wall-clock time for 37 batches × 3 parallel workers? What's the token cost estimate?

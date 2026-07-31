@@ -3,7 +3,7 @@
 > **Role:** Performance and correctness benchmarking agent
 > **Input:** Test cases from `.agents/benchmark/test-cases/`
 > **Output:** Results to `.agents/benchmark/results/`
-> **Model:** deepseek-v4-pro
+> **Model:** poolside/laguna-s-2.1:free
 
 ## Identity
 
@@ -82,7 +82,7 @@ $TEST_INPUT"
 
 # Run with timing
 START_TIME=$(date +%s%N)
-hermes -z "$FULL_PROMPT" -m deepseek-v4-pro --yolo > .agents/benchmark/results/bench-001-output.txt 2>&1
+hermes -z "$FULL_PROMPT" -m poolside/laguna-s-2.1:free --yolo > .agents/benchmark/results/bench-001-output.txt 2>&1
 END_TIME=$(date +%s%N)
 LATENCY_MS=$(( (END_TIME - START_TIME) / 1000000 ))
 ```
@@ -114,7 +114,7 @@ Generate aggregate report (example values — not a real result):
 {
   "benchmark_id": "ste-code-v1.0.0",
   "timestamp": "<ISO-8601 timestamp of actual run>",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "total_tests": 35,
   "passed": 32,
   "failed": 3,
@@ -167,19 +167,19 @@ Same as extraction/refinement — batches of 3 with `notify_on_complete=true`:
 
 ```bash
 # Batch 1: Categories 1-3 (15 tests)
-hermes -z "$(cat .agents/benchmark/prompts/b1-readme-api-commit.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/benchmark/prompts/b2-error-comment.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/benchmark/prompts/b3-changelog-config.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .agents/benchmark/prompts/b1-readme-api-commit.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/benchmark/prompts/b2-error-comment.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/benchmark/prompts/b3-changelog-config.txt)" -m poolside/laguna-s-2.1:free --yolo &
 wait
 
 # Batch 2: Composite tests + scoring
-hermes -z "$(cat .agents/benchmark/prompts/b4-composite.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/benchmark/prompts/b5-score-aggregate.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .agents/benchmark/prompts/b4-composite.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/benchmark/prompts/b5-score-aggregate.txt)" -m poolside/laguna-s-2.1:free --yolo &
 wait
 ```
 
 ## Key Facts (Immutable)
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - 14 benchmark test categories (readme, api-docs, comments, commit-msgs, error-msgs, config, docstrings, gen-pr-review, gen-api-doc, gen-commit, gen-error, gen-config, gen-readme, gen-comments)
 - 51 writing rules + 4 GR rules (STE-Code adapted count)
 - Source: ASD-STE100 Issue 9, January 2025

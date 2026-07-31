@@ -35,7 +35,7 @@
   - Known limitations are absent: what happens if spec pages are malformed markdown, if spec/issue-09-2025/ has fewer than 434 pages, if the 1M context window isn't available on the target model
   - No measurable quality gates - verification is binary (file exists, JSON parses, non-empty arrays) but there's no quantitative threshold for extraction completeness (e.g., "at least 95% of expected rule numbers present")
   - The worker prompt template is embedded but never cross-referenced to the actual worker skill files in .agents/skills/ - if the prompt changes, no link ensures the skill file is updated
-- **What Level 4 Would Add:** Explicit cross-reference map to all dependent files (granular-strategy.md, translation-grid.md, agent definitions, skill files), a rationale section explaining WHY batch-of-3, WHY 4pp workers, WHY deepseek-v4-pro, known limitations with workarounds (e.g., "if spec pages are fragmented, pre-merge adjacent pages before extraction"), measurable quality gates with numeric thresholds (expected rule count: 53, expected dictionary entries: ~875), and performance considerations with actual extraction throughput measurements.
+- **What Level 4 Would Add:** Explicit cross-reference map to all dependent files (granular-strategy.md, translation-grid.md, agent definitions, skill files), a rationale section explaining WHY batch-of-3, WHY 4pp workers, WHY poolside/laguna-s-2.1:free, known limitations with workarounds (e.g., "if spec pages are fragmented, pre-merge adjacent pages before extraction"), measurable quality gates with numeric thresholds (expected rule count: 53, expected dictionary entries: ~875), and performance considerations with actual extraction throughput measurements.
 - **Priority:** high
 
 ---

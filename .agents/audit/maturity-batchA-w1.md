@@ -37,7 +37,7 @@
   - Worker prompt template is complete and explicit - no "..." placeholders; the full rules text is embedded
   - Failure handling is specific with 3 scenarios: missing output → re-launch, truncated → split pages in half, "..." omissions → flag as FAILED and re-launch with stronger instructions
   - Completion verification is multi-step: count check (109 files), zero-byte check, gap check, rails check, spot-check of 3 random files for "..." omissions
-  - Concrete launch command with model lock (`deepseek-v4-pro` exclusively)
+  - Concrete launch command with model lock (`poolside/laguna-s-2.1:free` exclusively)
   - Cross-references 5 skill/reference files
   - Spacing rule (Rule 9) is exceptionally detailed with wrong/right visual examples and 8 non-negotiable sub-rules
 - **Gaps:**
@@ -68,7 +68,7 @@
   - 8-point audit checklist with specific shell commands (find, wc, grep)
   - Rails defined in a table with short rule descriptions (R1-R8)
   - Auto-fixes section is specific about what structural corrections are safe to make
-  - Key facts are enumerated as "immutable" with explicit corrections (19 not 22 categories, deepseek-v4-pro not deepseek-pro)
+  - Key facts are enumerated as "immutable" with explicit corrections (19 not 22 categories, poolside/laguna-s-2.1:free not deepseek-pro)
   - Cross-references agent #1 and #2 role files plus 2 skills
   - Reporting format is outlined with 6 required sections
 - **Gaps:**

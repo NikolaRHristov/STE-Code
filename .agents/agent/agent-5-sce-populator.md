@@ -537,7 +537,7 @@ Make sure that the database connection is open before you run the query.
 ## KEY FACTS
 - 19 categories (NOT 22)
 - 53 rules + 4 GR (NOT 65)
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - Source: ASD-STE100 Issue 9, January 2025
 
 ## OUTPUT

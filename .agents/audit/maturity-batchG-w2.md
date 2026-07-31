@@ -1,6 +1,6 @@
 # Maturity Audit - Batch G, Wave 2
 
-> Auditor: deepseek-v4-pro
+> Auditor: poolside/laguna-s-2.1:free
 > Date: 2026-07-30
 > Template: `.agents/prompts/maturity-audit/worker-template.txt`
 > Files: 6 (3 rule files, 2 READMEs, 1 top-level README)

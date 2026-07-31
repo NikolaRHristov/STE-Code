@@ -185,7 +185,7 @@ Your output is the blank files on disk plus this report. Do NOT put any content 
 
 Then launch:
 ```bash
-hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## DISCOVERY TARGETS (in order of priority)
@@ -586,7 +586,7 @@ The `ste-code/adapted/a-dictionary.md` file is 5,943 lines. A worker that encoun
 - 3 workers per batch, notify_on_complete=true
 - Catalog tracked in `translations/catalog.md`
 - Re-scan after enrichment - discovery never "finishes"
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - Communication via `.agents/feedback/exchange.md`
 
 ## STATE TRACKING

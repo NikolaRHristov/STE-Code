@@ -56,12 +56,12 @@ The ASD-STE100 Issue 9 dictionary classifies approved and non-approved words int
 Agent #1 (Extractor) tested batch sizes of 2, 3, 4, and 5 workers. Three workers per batch delivered the optimal balance:
 - 2 workers: under-utilizes available parallelism, increases wall-clock time by ~40%
 - 3 workers: saturates the model API rate limit (3 concurrent calls) without queue buildup
-- 4 workers: triggers rate-limit throttling on deepseek-v4-pro, adds ~15% retry overhead
+- 4 workers: triggers rate-limit throttling on poolside/laguna-s-2.1:free, adds ~15% retry overhead
 - 5 workers: causes frequent 429 errors, net throughput drops below the 3-worker baseline
 
-### Why deepseek-v4-pro?
+### Why poolside/laguna-s-2.1:free?
 
-All STE-Code agents use deepseek-v4-pro as the base model. Cross-model consistency prevents rule interpretation drift - if Agent #1 used a different model than Agent #4, they might interpret the same ASD-STE100 rule differently. The model was selected for the initial extraction pass and is locked for all continuation passes.
+All STE-Code agents use poolside/laguna-s-2.1:free as the base model. Cross-model consistency prevents rule interpretation drift - if Agent #1 used a different model than Agent #4, they might interpret the same ASD-STE100 rule differently. The model was selected for the initial extraction pass and is locked for all continuation passes.
 
 ### Decision Log
 
@@ -278,7 +278,7 @@ For each adapted rule in `ste-code/adapted/`, generate additional STE/non-STE co
 
 ```bash
 # Launch 3 workers per batch (same as Agent #1)
-hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 Output: `ste-code/adapted/expanded/a-secX-ruleY-examples.json`
@@ -598,7 +598,7 @@ Every worker JSON output must conform to this structure. Validate before merging
   "pass": 1,
   "rule_id": "a-sec1-rule1.1",
   "generated_at": "2026-07-30T12:00:00Z",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "examples": [
     {
       "language": "python",
@@ -617,7 +617,7 @@ REQUIRED: 3-5 entries in `examples` array. `paradigm` must be one of: OOP, FP, P
 {
   "pass": 2,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "entries": [
     {
       "aerospace_term": "...",
@@ -638,7 +638,7 @@ REQUIRED: `mapping_rationale` must be at least 20 characters.
 {
   "pass": 3,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "categories": [
     {
       "category_id": 1,
@@ -662,7 +662,7 @@ REQUIRED: 10-15 entries per category. `category_id` must be 1-19.
 {
   "pass": 4,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "anti_patterns": [
     {
       "id": "AP-001",
@@ -682,7 +682,7 @@ REQUIRED: 15+ entries. `detection_rule` must be a grep-compatible regex or a pla
 {
   "pass": 5,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "paradigms": [
     {
       "paradigm": "OOP",
@@ -708,7 +708,7 @@ EOF
 
 # Launch via oneshot wrapper (session_db=None, no tools, no file leaks)
 # Launch via local tools launcher (auto-detects venv)
-.agents/tools/launch-worker.sh prompt.txt deepseek-v4-pro > output-file.json 2>&1
+.agents/tools/launch-worker.sh prompt.txt poolside/laguna-s-2.1:free > output-file.json 2>&1
 ```
 
 - **Always** use the oneshot wrapper - NOT `hermes -z --yolo` via subprocess
@@ -774,7 +774,7 @@ Use these as targets. If actual values are within 10% of target, the pass is suc
 ## KEY FACTS (immutable)
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - 434 pages in ASD-STE100 Issue 9, January 2025
 - Expand, never compress - code domain is larger than aerospace
 - Use oneshot wrapper pattern (proven reliable)

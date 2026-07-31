@@ -56,8 +56,8 @@ def parse_args():
     )
     p.add_argument(
         "--model", "-m",
-        default="deepseek-v4-pro",
-        help="Model name passed to hermes (default: deepseek-v4-pro)"
+        default="poolside/laguna-s-2.1:free",
+        help="Model name passed to hermes (default: poolside/laguna-s-2.1:free)"
     )
     p.add_argument(
         "--test-dir",

@@ -21,7 +21,7 @@ Run disk-verified audits - never trust claims, never trust PROGRESS.md alone.
 4. **Gap check**: iterate 1-109, verify every wNNN and rNNN file exists
 5. **Fabrication check**: grep for "TODO", "TBD", "placeholder", modern terms in extracted files
 6. **Tracking sync**: compare PROGRESS.md against actual disk state - flag any discrepancy
-7. **Factual correctness**: verify "19 categories" (not 22), "deepseek-v4-pro" (not deepseek-pro)
+7. **Factual correctness**: verify "19 categories" (not 22), "poolside/laguna-s-2.1:free" (not deepseek-pro)
 8. **Rails compliance**: check all 8 rails (R1-R8)
 
 ### Audit Cadence and Timing
@@ -264,7 +264,7 @@ Verify that immutable facts are correct across all pipeline files. These facts m
    # Scan for wrong category count (must return zero matches)
    grep -rn "22 categor" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/merged/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
 
-   # Scan for wrong model name (must return zero matches - allow "deepseek-v4-pro" only)
+   # Scan for wrong model name (must return zero matches - allow "poolside/laguna-s-2.1:free" only)
    grep -rn "deepseek-pro[^-]" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/merged/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
 
    # Scan for wrong rule count (must return zero matches)
@@ -279,8 +279,8 @@ Verify that immutable facts are correct across all pipeline files. These facts m
    # "19 categories" must appear in README.md, AGENTS.md, and at least one adapted file
    grep -l "19.*categor" ste-code/README.md .agents/AGENTS.md ste-code/adapted/*.md 2>/dev/null
 
-   # "deepseek-v4-pro" must appear in README.md and AGENTS.md
-   grep -l "deepseek-v4-pro" ste-code/README.md .agents/AGENTS.md 2>/dev/null
+   # "poolside/laguna-s-2.1:free" must appear in README.md and AGENTS.md
+   grep -l "poolside/laguna-s-2.1:free" ste-code/README.md .agents/AGENTS.md 2>/dev/null
 
    # "53 writing rules" or "53 rules" must appear in at least one adapted file
    grep -rl "53.*rule" ste-code/adapted/ 2>/dev/null | head -3
@@ -292,7 +292,7 @@ Verify that immutable facts are correct across all pipeline files. These facts m
    for doc in ste-code/README.md .agents/AGENTS.md .agents/MASTER.md; do
      [ -f "$doc" ] || continue
      grep -q "19" "$doc" || echo "R6 DRIFT: $doc - missing category count"
-     grep -q "deepseek-v4-pro" "$doc" || echo "R6 DRIFT: $doc - missing model name"
+     grep -q "poolside/laguna-s-2.1:free" "$doc" || echo "R6 DRIFT: $doc - missing model name"
      grep -q "53" "$doc" || echo "R6 DRIFT: $doc - missing rule count"
    done
    ```
@@ -420,7 +420,7 @@ R7 (Progress Tracking)
 | R3 - Completion Integrity | Never claim completion without disk proof |
 | R4 - Content Fidelity | Zero fabrication - every word from spec |
 | R5 - Formatting Standards | 9 refinement rules applied |
-| R6 - Factual Correctness | 19 categories, 53+4 rules, deepseek-v4-pro |
+| R6 - Factual Correctness | 19 categories, 53+4 rules, poolside/laguna-s-2.1:free |
 | R7 - Progress Tracking | PROGRESS.md matches disk |
 | R8 - Error Recovery | Fixes documented, stale files purged |
 
@@ -514,7 +514,7 @@ Source: `.agents/state/PROGRESS.md`, `.agents/feedback/exchange.md` (Turn 5-9), 
 | 5 | Artifacts: 6 files, 253KB total | `du -sh ste-code/artifacts/` → 253K |
 | 6 | No fabrication signals in refined/ | grep for "TODO\|TBD\|placeholder" → 0 matches |
 | 7 | Fact check: "19 categories" used consistently | grep "22 categories" across all stages → 0 matches |
-| 8 | Fact check: "deepseek-v4-pro" used consistently | grep "deepseek-pro[^-]" across all stages → 0 matches |
+| 8 | Fact check: "poolside/laguna-s-2.1:free" used consistently | grep "deepseek-pro[^-]" across all stages → 0 matches |
 
 ## Pipeline Dashboard
 
@@ -535,7 +535,7 @@ Source: `.agents/state/PROGRESS.md`, `.agents/feedback/exchange.md` (Turn 5-9), 
 | R3 - Completion Integrity | 🔴 FAIL | PROGRESS.md claims W079 complete - file missing on disk |
 | R4 - Content Fidelity | ✅ PASS | 5-file sample clean; zero fabrication signals in grep scan |
 | R5 - Formatting Standards | ✅ PASS | 3-file spot-check: all 9 refinement rules applied; no glued headings |
-| R6 - Factual Correctness | ✅ PASS | 19 categories, deepseek-v4-pro confirmed across all files |
+| R6 - Factual Correctness | ✅ PASS | 19 categories, poolside/laguna-s-2.1:free confirmed across all files |
 | R7 - Progress Tracking | 🔴 FAIL | PROGRESS.md shows 109/109 extract; disk shows 107/109 |
 | R8 - Error Recovery | 🟠 PARTIAL | r048 is zero-byte - no re-extraction attempt found in feedback history |
 
@@ -563,7 +563,7 @@ ste-code/_scratch/:     0 files (clean)
 | # | File | Pattern Found | Fix Applied | Result |
 |---|------|---------------|-------------|--------|
 | 1 | `ste-code/README.md:35` | "22 categories" | Changed to 19 | ✅ |
-| 2 | `ste-code/artifacts/ste-code-deployment-guide.txt:142` | "deepseek-pro" | Changed to `deepseek-v4-pro` | ✅ |
+| 2 | `ste-code/artifacts/ste-code-deployment-guide.txt:142` | "deepseek-pro" | Changed to `poolside/laguna-s-2.1:free` | ✅ |
 
 ## Next Actions (prioritized)
 
@@ -646,7 +646,7 @@ Resolution: restart extraction from Batch 1 after source files are confirmed.
 - Move premature/fabricated files to `_scratch/`
 - Sync PROGRESS.md with disk reality
 - Update stale README.md counts
-- Correct "22 categories" → 19, "deepseek-pro" → deepseek-v4-pro
+- Correct "22 categories" → 19, "deepseek-pro" → poolside/laguna-s-2.1:free
 
 ### Edge Case Decision Table
 
@@ -825,7 +825,7 @@ NOTE: A meta-audit that finds the original audit unreliable is itself a 🟠 MED
 
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules
-- Model: deepseek-v4-pro (NOT deepseek-pro)
+- Model: poolside/laguna-s-2.1:free (NOT deepseek-pro)
 - 434 pages in ASD-STE100 Issue 9
 - Stages: extracted/ → refined/ → merged/ → adapted/ → artifacts/
 

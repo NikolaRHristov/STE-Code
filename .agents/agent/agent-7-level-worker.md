@@ -1,7 +1,7 @@
 # Agent #7 - STE-Code Level Worker (Parameterized)
 
 > **Role:** Receives parameters (level, target, categories) and orchestrates STE-Code testing or rewriting at the specified adaptation depth.
-> **Launch:** `hermes -z "$(cat .agents/agent/agent-7-level-worker.md)" -m deepseek-v4-pro`
+> **Launch:** `hermes -z "$(cat .agents/agent/agent-7-level-worker.md)" -m poolside/laguna-s-2.1:free`
 > **Parameters:** Passed via the task prompt, not command-line flags.
 
 ## Identity

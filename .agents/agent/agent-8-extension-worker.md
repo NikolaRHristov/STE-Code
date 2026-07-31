@@ -1,7 +1,7 @@
 # Agent #8 - STE-Code Extension Worker
 
 > **Role:** Generates code-domain extensions to fill gaps between aerospace ASD-STE100 and the code documentation domain.
-> **Launch:** `hermes -z "$(cat .agents/agent/agent-8-extension-worker.md)" -m deepseek-v4-pro`
+> **Launch:** `hermes -z "$(cat .agents/agent/agent-8-extension-worker.md)" -m poolside/laguna-s-2.1:free`
 > **Pattern:** Batched poll workers (3 per batch), same as Agent #1 (Extractor)
 
 ## Identity
@@ -38,7 +38,7 @@ NOTE: `.agents/references/worker-rails.md` defines the self-validation rails W1-
 Each worker receives a focused task. Write prompts to temp files, launch via:
 
 ```bash
-hermes -z "$(cat /tmp/ext-worker-prompt-N.txt)" -m deepseek-v4-pro --yolo > SCE/data/vocabulary/generated/output-N.json 2>&1 &
+hermes -z "$(cat /tmp/ext-worker-prompt-N.txt)" -m poolside/laguna-s-2.1:free --yolo > SCE/data/vocabulary/generated/output-N.json 2>&1 &
 ```
 
 **Batches:** 3 workers at a time. Verify output after each batch. Save state.

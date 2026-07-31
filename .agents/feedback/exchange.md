@@ -279,7 +279,7 @@ STAGE 5 — ARTIFACTS ✅ 6 files
 - R3 Completion Integrity: ✅ Disk-verified, all 109 present
 - R4 Content Fidelity: ✅ Zero fabrication signals, 15-file spot-check clean
 - R5 Formatting: ✅ 9 refinement rules applied, 15-file spot-check clean
-- R6 Factual Correctness: ✅ 19 categories, deepseek-v4-pro, 53+4 rules
+- R6 Factual Correctness: ✅ 19 categories, poolside/laguna-s-2.1:free, 53+4 rules
 - R7 Progress Tracking: ✅ Synced to disk
 - R8 Error Recovery: ✅ Stale files purged, _scratch/ cleaned
 

@@ -13,7 +13,7 @@ REFINED_DIR = os.path.join(PROJECT, "ste-code", "refined")
 OUT_DIR = os.path.join(PROJECT, "ste-code", "enriched-code")
 PROMPT_DIR = os.path.join(OUT_DIR, "prompts")  # keep prompts separate from JSON outputs
 STATE_FILE = os.path.join(PROJECT, ".agents", "state", "ENLARGE-PROGRESS.md")
-MODEL = "deepseek-v4-pro"
+MODEL = "poolside/laguna-s-2.1:free"
 BATCH_SIZE = 3
 
 os.makedirs(OUT_DIR, exist_ok=True)

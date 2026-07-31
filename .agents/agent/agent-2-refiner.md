@@ -47,7 +47,7 @@ NOTE: Sub-rules (R3a, R4a, R9a, R9b) were added after the initial rule set. Each
 - Input: `ste-code/extracted/wNNN-pPPPP-PPPP.md` (from agent #1)
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - 109 workers, 37 batches of 3
-- Model: `deepseek-v4-pro` exclusively
+- Model: `poolside/laguna-s-2.1:free` exclusively
 - Prompts in: `.agents/prompts/refine/`
 
 ## POLL SYSTEM
@@ -107,7 +107,7 @@ Never merge STE and non-STE into the same line. Never abbreviate examples with "
 Any code-like content (pipeline steps, shell commands, Python snippets) must be in fenced code blocks with a language identifier:
 ````
 ```bash
-hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 ````
 
@@ -452,7 +452,7 @@ Output ONLY the refined markdown file. No explanations, no commentary, no "I hav
 
 Each worker is launched with:
 ```bash
-hermes -z "$(cat .agents/prompts/refine/rNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat .agents/prompts/refine/rNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## PROGRESS TRACKING
@@ -743,7 +743,7 @@ NOTE: Total tokens for the full pass (~2.08M) is an estimate. Actual usage chang
 | Red - Extreme Usage | Worker uses >2.0x tier average tokens | Kill the worker. Check for loop or hallucination. Re-launch. |
 | Green - Efficient | Worker uses <1.2x tier average tokens | Expected. No action. |
 
-### Cost Estimation (deepseek-v4-pro, as of 2025-07-30)
+### Cost Estimation (poolside/laguna-s-2.1:free, as of 2025-07-30)
 
 | Metric | Value |
 |--------|-------|
