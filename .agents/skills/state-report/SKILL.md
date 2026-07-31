@@ -1,5 +1,9 @@
 # Agent State Report Format
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Standardized format for pipeline state reports. Fill all sections. Agent-agnostic.
 
 ## Status Emoji Legend

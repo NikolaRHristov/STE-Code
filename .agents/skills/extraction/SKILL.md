@@ -6,6 +6,10 @@ related: [".agents/references/worker-grid.md", ".agents/references/section-types
 
 # Extraction Worker Orchestration
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Extract the 434-page ASD-STE100 Issue 9 spec using 109 parallel `hermes -z` workers. Each worker processes exactly 4 pages. Coordinate the workers in 37 batches of 3. This skill is agent-agnostic. Any agent can use it.
 
 ## Design Rationale

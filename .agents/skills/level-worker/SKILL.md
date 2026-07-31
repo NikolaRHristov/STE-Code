@@ -6,6 +6,10 @@ related: [".agents/agent/agent-7-level-worker.md", ".agents/benchmark/launch-lev
 
 # Level Worker Launcher — Agent-Agnostic
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Launch 4 parallel Agent #7 workers, each at a different STE-Code adaptation level (1-4). Workers use the Hermes oneshot wrapper (`session_db=None`, no history pollution, no tool access). Each worker rewrites the same set of documents and outputs to its own isolated directory.
 
 ## Architecture

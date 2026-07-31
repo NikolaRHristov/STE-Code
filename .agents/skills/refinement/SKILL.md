@@ -1,5 +1,9 @@
 # Refinement Protocol - 9 Rules (Full Protocol)
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Reformat extracted spec files into clean, standardized markdown. Zero content loss - format only. Agent-agnostic.
 
 ## When to Use

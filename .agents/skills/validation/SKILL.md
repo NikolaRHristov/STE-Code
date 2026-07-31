@@ -12,6 +12,10 @@ metadata:
 
 # STE-Code Validation Protocol
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 ## Overview
 
 > **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.

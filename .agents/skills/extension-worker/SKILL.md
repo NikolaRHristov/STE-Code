@@ -6,6 +6,10 @@ related: [".agents/agent/agent-8-extension-worker.md", "SCE/core/categories/syno
 
 # Extension Worker Orchestration — Agent-Agnostic
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Generate code-domain extensions to fill gaps between aerospace ASD-STE100 and the code documentation domain. Uses the same batched poll worker pattern as Agent #1 (Extractor).
 
 ## Gap Areas

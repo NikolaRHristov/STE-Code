@@ -1,5 +1,9 @@
 # Adaptation Protocol - Stage 4
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Transform STE rules into STE-Code (coding domain). Agent-agnostic.
 
 ## Input: `ste-code/grouped/master.md`

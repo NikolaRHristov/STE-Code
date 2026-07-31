@@ -1,5 +1,9 @@
 # Artifact Generation Protocol - Stage 5
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Generate 6 final STE-Code artifact files from adapted content. Agent-agnostic.
 
 ## Prerequisites

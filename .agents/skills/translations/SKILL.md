@@ -6,6 +6,10 @@ related: [".agents/references/translation-grid.md", ".agents/references/worker-r
 
 # Translation Discovery + Scaffolding
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Set up a multi-locale translation pipeline by **discovering** translatable content, not following a fixed inventory. Workers explore source directories, reason about what's worth translating, and create fully blank placeholder files at the correct paths for all 9 target locales.
 
 **Why discovery:** Enrichment is ad-hoc across sessions — new words, rules, categories, and examples get added at different times by different agents. A fixed file grid rots immediately. Discovery workers find whatever is on disk right now. Re-run after enrichment to catch new files.

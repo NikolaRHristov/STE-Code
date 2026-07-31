@@ -1,5 +1,9 @@
 # Grouping & Semantic Chunk Assembly
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 ## Overview
 Reads all 109 extracted worker outputs (`ste-code/extracted/wNNN-p*.md`), classifies each page by section type using the section-types reference, and re-groups pages into semantically coherent chunks for downstream refinement and adaptation agents.
 

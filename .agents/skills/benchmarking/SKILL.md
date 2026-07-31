@@ -6,6 +6,10 @@ related: [".agents/benchmark/orchestrator.py", ".agents/benchmark/orchestrator-c
 
 # Benchmarking Orchestrator - Agent-Agnostic
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Measure STE-Code correctness and performance against a defined test suite. Run pre-defined test cases through `hermes -z` with the STE-Code system prompt, compare outputs against expected results, and produce structured benchmark reports. A control group runs the same tests with a plain assistant prompt for comparison.
 
 ## Architecture
