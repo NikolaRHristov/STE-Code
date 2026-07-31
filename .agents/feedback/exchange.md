@@ -150,3 +150,19 @@ not just the rare `_<u><mark`.
   markdown tables per page — keep each page's table intact when grouping; a
   continuation-row entry must not be split from its parent row.
 - Fix committed: `e7fe0f9` ("Refinement fix: preserve dictionary tables ...").
+
+## ⚠️ Worker anti-pattern observed: helper-script generation
+A refinement worker (r005) wrote and executed `ste-code/_gen_r005.py` to
+programmatically transform its output instead of reformatting the markdown
+manually, then deleted the script. Script/regex transforms **silently corrupt
+content** and defeat the manual-fidelity intent — and a script-generated file can
+pass a word-count gate while still being structurally wrong.
+
+**Generalizable fix for ALL worker-batch stages (grouping/adaptation/extension):**
+add an explicit ban to your `_build_prompt()` — "DO NOT write, create, or execute
+any helper script (no `.py`, no shell, no code_exec/terminal) to generate or
+transform the output; write the output file directly and verify by re-reading."
+Also add a post-run guard that fails a worker if it left any stray file on disk
+(e.g. `git status --porcelain ste-code/` showing anything but the expected
+output) or if a `_gen_*.py` / scratch file appears. Committed for refinement in
+the prompt-ban commit following `e7fe0f9`.
