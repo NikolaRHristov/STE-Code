@@ -15,6 +15,11 @@ from pathlib import Path
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
+
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 SEMANTICS = json.loads((PROJECT / "ste-code" / "linguistics" / "semantics.json").read_text())
 OUTPUT = PROJECT / "docs" / "roadmap" / "GROUNDING-REPORT.md"
@@ -36,51 +41,15 @@ def build_worker_prompt(batch_files, batch_num, total_batches):
 
     claims_text = "\n".join(claims[:30])  # First 30 claims
 
-    return f"""You are STE-Code Grounding Auditor (batch {batch_num}/{total_batches}).
-
-Verify these linguistic layer claims against the adapted rule files.
-
-FILES TO CHECK ({len(batch_files)} files):
-{file_list}
-
-CLAIMS TO VERIFY:
-{claims_text}
-
-For each claim:
-1. Read the referenced rule file(s)
-2. Check if the rule already covers this concept
-3. Classify as:
-   A. CONFIRMED — rule already addresses this (cite file:line)
-   B. CONTRADICTION — linguistic claim conflicts with rule (quote both)
-   C. NOVEL — no counterpart found in rules (this is net-new value)
-
-Also check:
-- Do all 10 semantic role terms have corresponding rule references?
-- Do all 10 collision domains have examples in adapted rules?
-- Are any rule references wrong (pointing to non-existent rules)?
-
-CRITICAL:
-- Read the actual files — do not assume content
-- For CONTRADICTIONS: quote both sides verbatim, do not resolve
-- For CONFIRMED: cite exact file and line number
-
-Write findings to: {TMP_DIR}/batch-{batch_num:02d}-grounding.md
-
-Format:
-## Batch {batch_num} — {len(batch_files)} files
-
-### CONFIRMED
-| Claim | Rule File | Line | Notes |
-|-------|-----------|------|-------|
-
-### CONTRADICTION  
-| Claim | Rule Says | Layer Says |
-|-------|-----------|------------|
-
-### NOVEL
-| Claim | Description |
-|-------|-------------|
-"""
+    return TPL.render(
+        "ground-worker",
+        batch_num=batch_num,
+        total_batches=total_batches,
+        count=len(batch_files),
+        file_list=file_list,
+        claims_text=claims_text,
+        report_dir=str(TMP_DIR / f"batch-{batch_num:02d}-grounding.md"),
+    )
 
 
 def main():
