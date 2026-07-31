@@ -18,7 +18,7 @@ output_file = Path(output_path)
 if output_file.exists():
     output_file.unlink()
 
-model = "poolside/laguna-s-2.1:free"
+model = "tencent/hy3:free"
 venv_python = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 wrapper = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
 

@@ -9,7 +9,7 @@ Usage:
     from agent_runner import run_agent, launch_agent, get_agent_config
 
     # Synchronous (blocks until done)
-    result = run_agent(prompt, agent="hermes", model="poolside/laguna-s-2.1:free")
+    result = run_agent(prompt, agent="hermes", model="tencent/hy3:free")
     print(result.stdout)
 
     # Async (returns Popen)
@@ -51,7 +51,7 @@ _DEFAULT_CONFIG = {
         "hermes": {
             "runtime": "~/.hermes/hermes-agent/venv/bin/python3",
             "wrapper": "lib/hermes-oneshot-wrapper.py",
-            "default_model": "poolside/laguna-s-2.1:free",
+            "default_model": "tencent/hy3:free",
             "env": {
                 "HERMES_REASONING_EFFORT": "high",
                 "HERMES_YOLO_MODE": "1",
@@ -138,7 +138,7 @@ def _resolve_command(agent_cfg, prompt_file, model=None, cwd=None):
         runtime = os.path.expanduser(str(agent_cfg["runtime"]))
         # Wrapper path in config is relative to .agents/tools/
         wrapper = str((_TOOLS / agent_cfg["wrapper"]).resolve())
-        effective_model = model or agent_cfg.get("default_model", "poolside/laguna-s-2.1:free")
+        effective_model = model or agent_cfg.get("default_model", "tencent/hy3:free")
         cmd = [runtime, wrapper, str(prompt_file), "--model", effective_model]
     else:
         # Generic agent CLI

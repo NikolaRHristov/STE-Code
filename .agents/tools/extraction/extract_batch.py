@@ -62,7 +62,7 @@ if _env_path.exists():
             os.environ.setdefault(k.strip(), v.strip())
 
 # ── Config ────────────────────────────────────────────────────────────────────
-MODEL = os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free")
+MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
 MAX_WORKERS = int(os.environ.get("STE_MAX_WORKERS", "109"))
 PAGES_PER_WORKER = int(os.environ.get("STE_PAGES_PER_WORKER", "4"))
 WORKERS_PER_BATCH = int(os.environ.get("STE_WORKERS_PER_BATCH", "3"))

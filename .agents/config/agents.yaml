@@ -14,7 +14,7 @@ agents:
   hermes:
     runtime: ~/.hermes/hermes-agent/venv/bin/python3
     wrapper: lib/hermes-oneshot-wrapper.py
-    default_model: poolside/laguna-s-2.1:free
+    default_model: tencent/hy3:free
     env:
       HERMES_REASONING_EFFORT: high
       HERMES_YOLO_MODE: "1"

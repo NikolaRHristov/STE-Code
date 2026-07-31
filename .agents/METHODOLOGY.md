@@ -27,7 +27,7 @@ if pid == 0:
     os.chdir(str(PROJECT))
     env = os.environ.copy()
     env["HERMES_REASONING_EFFORT"] = "medium"  # or "high"
-    os.execvpe(VENV_PYTHON, [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "poolside/laguna-s-2.1:free"], env)
+    os.execvpe(VENV_PYTHON, [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "tencent/hy3:free"], env)
     os._exit(1)
 ```
 
@@ -251,7 +251,7 @@ Level 4: ASSEMBLY    Assembly script ready, pending execution        🔄 Ready
 
 ```bash
 # Run a single worker
-python3 .agents/tools/lib/hermes-oneshot-wrapper.py prompt.txt --model poolside/laguna-s-2.1:free
+python3 .agents/tools/lib/hermes-oneshot-wrapper.py prompt.txt --model tencent/hy3:free
 
 # Run Phase A (maturity fixes)
 python3 .agents/tools/runners/phase-a-run.py

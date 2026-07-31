@@ -95,7 +95,7 @@ python3 .agents/tools/extraction/extract_batch.py [start_batch] [num_batches]
 
 ### Environment Variables
 Copy `.env.example` to `.env` to override defaults:
-- `STE_MODEL` — model name (default: `poolside/laguna-s-2.1:free`)
+- `STE_MODEL` — model name (default: `tencent/hy3:free`)
 - `STE_MAX_WORKERS` — total workers (default: 109)
 - `STE_PAGES_PER_WORKER` — pages per worker (default: 4)
 - `STE_WORKERS_PER_BATCH` — workers per batch (default: 3)
