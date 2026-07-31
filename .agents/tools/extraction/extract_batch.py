@@ -78,6 +78,18 @@ CHECKPOINT_PATH = STATE_DIR / "extraction-checkpoint.json"
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
+# ── Skill embedding: inject the extraction SKILL.md into every worker prompt ──
+# The oneshot wrapper sub-agents do not auto-load the STE-Code profile skills,
+# so we embed the authoritative skill text directly. This keeps the prompt and
+# the skill in lockstep (edit the SKILL.md, not the baked prompt).
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location(
+    "skill_prompt",
+    str(PROJECT / ".agents" / "tools" / "lib" / "skill_prompt.py"),
+)
+skill_prompt = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(skill_prompt)
+
 
 def parse_manifest():
     """Parse MANIFEST.md: position (1-434) → (page_id, filename)."""
@@ -147,6 +159,11 @@ def build_prompt(worker_num, start_pos, end_pos, mapping):
         pages_first_id=pages[0][1] if pages else "",
         output_path=output_path,
     )
+
+    # Embed the authoritative extraction skill so the worker honors the pipeline
+    # rules (verbatim extraction, R1-R6, quality gates) in lockstep with the
+    # skill definition. Edit the SKILL.md to change behavior, not this script.
+    prompt += skill_prompt.skill_section("extraction")
 
     return prompt, output_path
 

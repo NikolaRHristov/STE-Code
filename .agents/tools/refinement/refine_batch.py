@@ -47,50 +47,75 @@ WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py
 
 FILENAME_RE = re.compile(r"^w(?P<worker>\d{3})-p(?P<start>\d{1,4})-(?P<end>\d{1,4})\.md$")
 
+# ── Skill embedding: inject the refinement SKILL.md into every worker prompt ──
+# The oneshot wrapper sub-agents do not auto-load the STE-Code profile skills,
+# so the authoritative skill text is embedded. Edit the SKILL.md (not this
+# script) to change refinement behavior.
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location(
+    "skill_prompt",
+    str(PROJECT / ".agents" / "tools" / "lib" / "skill_prompt.py"),
+)
+skill_prompt = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(skill_prompt)
+
+
+def _word_count(text):
+    """Count meaningful words (alphanumeric tokens >=2 chars), case-insensitive."""
+    return len(re.findall(r"[A-Za-z0-9_]{2,}", text.lower()))
+
 
 def _build_prompt(input_filename, output_filename, start_page, end_page):
-    """9-rule refinement prompt (canonical, from generate_refine_prompts.py)."""
-    return f"""TASK: Reformat the extracted spec file into clean, standardized markdown following ALL 9 refinement rules below.
+    """Refinement worker prompt = tight wrapper + the authoritative refinement SKILL.md.
 
-INPUT: ste-code/extracted/{input_filename}
+    The SKILL.md (rules 1-9, before/after examples, failure recovery) is the
+    single source of truth. We embed it so the worker honors the exact protocol
+    and we only have to edit the SKILL, not this script.
+    """
+    wrapper = f"""TASK: Reformat the extracted spec file into clean, standardized markdown.
+
+INPUT:  ste-code/extracted/{input_filename}
 OUTPUT: ste-code/refined/{output_filename}
 
-RULES (apply in order, do not skip any):
+You are the Refinement Worker. You read the raw extraction and rewrite it with
+BETTER STRUCTURE ONLY. You do NOT change, adapt, translate, summarize, or delete
+any words. Every word, number, example, table cell, and the `_<u><mark>` /
+`<br>` annotations from the source MUST appear in your output.
 
-1. PRESERVE ALL CONTENT. Never delete a single word, number, example, or table cell.
+MANDATORY OUTPUT SKELETON — the file MUST start EXACTLY with:
 
-2. HEADINGS: Use # for page header, ## for sections, ### for rules, #### for dictionary entries. Remove ### from proper names like ASD-STE100.
+# Page {start_page}–{end_page} of 434
 
-3. TABLES: Convert all tables to clean markdown format. Align columns. Add missing headers. Merge cells split by PDF extraction.
+> **Source:** ASD-STE100 Issue 9, January 2025
+> **Pages:** {start_page}–{end_page} of 434
 
-4. STE/NON-STE: Format ALL example pairs as:
-   > **STE:** [text]
-   > **Non-STE:** [text]
-   Separate merged examples into individual pairs.
+Then the reformatted body. Keep every `# Page N of 434` header that appears in
+the source (one per source page, in order), each immediately followed by that
+page's body. Collapse ONLY the repeated per-page stamps (`**Page X-Y-Z**`,
+`**Issue 9 2025-01-15**`, `**ASD-STE100 ...**`) into the single metadata block
+above — do not drop the content those stamps sat next to.
 
-5. CODE: Wrap code snippets in ```language fences.
+STE / NON-STE EXAMPLES: ALWAYS split each pair into two separate blockquotes:
+> **STE:** <full STE example text>
+> **Non-STE:** <full non-STE example text>
+Never merge STE and Non-STE onto one line or into one blockquote. Never truncate
+the example text.
 
-6. DICTIONARY: Format each entry with - list under #### heading. Separate APPROVED from UNAPPROVED entries clearly.
+ZERO CONTENT LOSS — HARD SELF-CHECK (do this before you finish):
+1. Count the meaningful words in the source file.
+2. Count the meaningful words in your output.
+3. Your output word count MUST be >= the source word count (same words, just
+   restructured). If it is lower, you deleted content — rewrite and include it.
+4. Every `_<u><mark>...</mark></u>_` annotation from the source must be present.
+5. Every example sentence (especially phrasal-verb examples like
+   "Put out the cat." / "Put out the fire.") must be present verbatim.
 
-7. METADATA: Replace repetitive page headers with a single metadata block:
-   > **Source:** ASD-STE100 Issue 9, January 2025
-   > **Pages:** {start_page}–{end_page} of 434
+The authoritative protocol (9 rules, before/after examples, failure recovery)
+follows. Follow it exactly.
 
-8. LISTS: Standardize indentation. Use 1. 2. 3. for numbered, - for bullets.
-
-9. SPACING: One blank line between sections. No triple blanks. No trailing spaces.
-
-ABSOLUTE CONSTRAINT — NO MECHANICAL EDITS:
-- You MUST reformat by reading and rewriting the content yourself. Do NOT apply
-  regex, sed, find-replace, or any scripted character/line transformation to the
-  input. The reformatting is a reasoning task performed by you, not a text
-  substitution.
-- PRESERVE EVERY WORD, NUMBER, TABLE CELL, and `<br>` tag from the source exactly.
-  Only change STRUCTURE (headings, table alignment, spacing, STE/Non-STE pairing,
-  metadata block). Never alter, translate, summarize, or drop source wording.
-
-Output ONLY the refined markdown file. No explanations, no commentary.
 """
+    skill = skill_prompt.skill_section("refinement")
+    return wrapper + skill + "\n\nOutput ONLY the refined markdown file. No explanations, no commentary.\n"
 
 
 def _load_checkpoint():
@@ -128,8 +153,35 @@ def find_workers():
     return dict(sorted(workers.items()))
 
 
+def git_commit_locked(files, msg):
+    """Serialize git commits across parallel batches via a lock dir."""
+    import time as _time
+    lock = STATE_DIR / "refine-git-lock"
+    deadline = _time.time() + 120
+    while _time.time() < deadline:
+        try:
+            lock.mkdir(exist_ok=False)
+            break
+        except FileExistsError:
+            _time.sleep(1)
+    else:
+        return False
+    try:
+        subprocess.run(["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT))
+        r = subprocess.run(["git", "commit", "-m", msg, *files],
+                           capture_output=True, text=True, cwd=str(PROJECT))
+        return r.returncode == 0
+    finally:
+        import shutil
+        shutil.rmtree(lock, ignore_errors=True)
+
+
 def run_worker(worker_num, src_path, start, end):
-    """Run a single refinement worker (foreground, returns True/False)."""
+    """Run a single refinement worker (foreground, returns True/False).
+
+    Retries on transient failures (API 429 / rate-limit / no output) with
+    exponential backoff, since the oneshot wrapper exits fast on rejection.
+    """
     output_name = f"r{worker_num:03d}-p{start}-{end}.md"
     output_path = REFINED_DIR / output_name
 
@@ -148,38 +200,67 @@ def run_worker(worker_num, src_path, start, end):
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "120", "STE_MODEL": MODEL}
     cmd = [VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL]
 
-    start_t = time.time()
-    print(f"  R{worker_num:03d}: Refining {src_path.name} → {output_name}...", flush=True)
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True,
-                                timeout=TIMEOUT_SECONDS, env=env, cwd=str(PROJECT))
-        dur = time.time() - start_t
-        if result.stderr:
-            sl = result.stderr.lower()
-            if "error" in sl or "traceback" in sl:
-                print(f"  R{worker_num:03d}: [stderr] {result.stderr[:300]}", flush=True)
-    except subprocess.TimeoutExpired:
-        print(f"  R{worker_num:03d}: [TIMEOUT] after {TIMEOUT_SECONDS}s", flush=True)
-        return False
-    except Exception as e:
-        print(f"  R{worker_num:03d}: [ERROR] {e}", flush=True)
-        return False
-
-    if output_path.exists():
-        sz = output_path.stat().st_size
-        ok = sz >= 400  # refined must be substantial
-        if ok:
-            _checkpoint[str(worker_num)] = {"passed": True, "output_size": sz,
-                                            "duration": round(dur, 1)}
-            _save_checkpoint(_checkpoint)
-            print(f"  R{worker_num:03d}: [PASS] {sz}B ({dur:.1f}s)", flush=True)
-            return True
-        else:
-            print(f"  R{worker_num:03d}: [FAIL] output too small ({sz}B)", flush=True)
+    max_attempts = 4
+    for attempt in range(1, max_attempts + 1):
+        start_t = time.time()
+        print(f"  R{worker_num:03d}: Refining {src_path.name} → {output_name} (attempt {attempt})...", flush=True)
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True,
+                                    timeout=TIMEOUT_SECONDS, env=env, cwd=str(PROJECT))
+            dur = time.time() - start_t
+            if result.stderr:
+                sl = result.stderr.lower()
+                if "error" in sl or "traceback" in sl:
+                    print(f"  R{worker_num:03d}: [stderr] {result.stderr[:300]}", flush=True)
+        except subprocess.TimeoutExpired:
+            print(f"  R{worker_num:03d}: [TIMEOUT] after {TIMEOUT_SECONDS}s", flush=True)
             return False
-    else:
-        print(f"  R{worker_num:03d}: [FAIL] no output file", flush=True)
-        return False
+        except Exception as e:
+            print(f"  R{worker_num:03d}: [ERROR] {e}", flush=True)
+            return False
+
+        if output_path.exists():
+            sz = output_path.stat().st_size
+            txt = output_path.read_text(encoding="utf-8")
+            ok_size = sz >= 400
+            ok_skel = txt.lstrip().startswith(f"# Page {start}")
+
+            # ── AUTOMATED CONTENT-PARITY GATE ──
+            # Hard backstop for the user's zero-content-loss requirement: the
+            # refined file must not have lost words or dropped the source's
+            # annotated examples (e.g. _<u><mark>Put out the cat.</mark></u>_).
+            src_txt = src_path.read_text(encoding="utf-8", errors="ignore")
+            src_words = _word_count(src_txt)
+            out_words = _word_count(txt)
+            ok_parity = out_words >= int(src_words * 0.98)  # allow ≤2% token drift
+            src_marks = src_txt.count("_<u><mark")
+            out_marks = txt.count("_<u><mark")
+            ok_marks = out_marks >= src_marks
+
+            if ok_size and ok_skel and ok_parity and ok_marks:
+                _checkpoint[str(worker_num)] = {"passed": True, "output_size": sz,
+                                                "duration": round(dur, 1)}
+                _save_checkpoint(_checkpoint)
+                print(f"  R{worker_num:03d}: [PASS] {sz}B ({dur:.1f}s) "
+                      f"words {out_words}/{src_words} marks {out_marks}/{src_marks}", flush=True)
+                return True
+            else:
+                reasons = []
+                if not ok_size: reasons.append(f"size={sz}B")
+                if not ok_skel: reasons.append("skeleton_missing")
+                if not ok_parity: reasons.append(f"word_loss {out_words}/{src_words}")
+                if not ok_marks: reasons.append(f"marks_lost {out_marks}/{src_marks}")
+                print(f"  R{worker_num:03d}: [FAIL] {'; '.join(reasons)} — retrying", flush=True)
+        else:
+            print(f"  R{worker_num:03d}: [FAIL] no output file — likely rate-limited, retrying", flush=True)
+
+        # Backoff before retry (covers 429 / transient API rejection)
+        backoff = 20 * attempt
+        print(f"  R{worker_num:03d}: sleeping {backoff}s before retry...", flush=True)
+        time.sleep(backoff)
+
+    print(f"  R{worker_num:03d}: [GIVEUP] after {max_attempts} attempts", flush=True)
+    return False
 
 
 def process_batch(batch_num, workers_map):
@@ -199,21 +280,19 @@ def process_batch(batch_num, workers_map):
         if not ok:
             all_ok = False
 
-    # git commit passed worker outputs
+    # git commit passed worker outputs (serialized across parallel batches)
     passed_files = []
     for w, (src, s, e) in members:
         out = REFINED_DIR / f"r{w:03d}-p{s}-{e}.md"
         if out.exists():
             passed_files.append(str(out.relative_to(PROJECT)))
     if passed_files:
-        subprocess.run(["git", "add", *passed_files], capture_output=True, text=True, cwd=str(PROJECT))
         msg = f"Refine Batch {batch_num:02d} - {'PASS' if all_ok else 'PARTIAL'} - {ids}"
-        r = subprocess.run(["git", "commit", "-m", msg, *passed_files],
-                           capture_output=True, text=True, cwd=str(PROJECT))
-        if r.returncode == 0:
+        ok = git_commit_locked(passed_files, msg)
+        if ok:
             print(f"  ✓ Committed: {msg}", flush=True)
         else:
-            print(f"  ✗ Commit failed: {r.stderr[:200]}", flush=True)
+            print(f"  ✗ Commit failed: {msg}", flush=True)
     return all_ok
 
 
