@@ -361,6 +361,8 @@ def process_batch(batch_num, start_worker, mapping):
             )
             if ok:
                 break
+            # If commentary failed and not the last attempt, retry
+            # (the model sometimes adds meta-commentary on retry attempts)
 
         results.append((worker_num, start_pos, end_pos, ok))
 
