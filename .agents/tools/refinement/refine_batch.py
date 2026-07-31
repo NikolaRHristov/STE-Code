@@ -80,6 +80,15 @@ RULES (apply in order, do not skip any):
 
 9. SPACING: One blank line between sections. No triple blanks. No trailing spaces.
 
+ABSOLUTE CONSTRAINT — NO MECHANICAL EDITS:
+- You MUST reformat by reading and rewriting the content yourself. Do NOT apply
+  regex, sed, find-replace, or any scripted character/line transformation to the
+  input. The reformatting is a reasoning task performed by you, not a text
+  substitution.
+- PRESERVE EVERY WORD, NUMBER, TABLE CELL, and `<br>` tag from the source exactly.
+  Only change STRUCTURE (headings, table alignment, spacing, STE/Non-STE pairing,
+  metadata block). Never alter, translate, summarize, or drop source wording.
+
 Output ONLY the refined markdown file. No explanations, no commentary.
 """
 
