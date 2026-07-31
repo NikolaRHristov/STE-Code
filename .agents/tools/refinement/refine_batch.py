@@ -86,6 +86,7 @@ _BOILERPLATE_RE = re.compile(
     r"|Simplified\s+Technical\s+English"
     r"|Issue\s+9(\s*[-,]?\s*(2025-01-15|January\s+2025))?"
     r"|Part\s+\d+\s*[-–]\s*Dictionary"
+    r"|Part\s+\d+\s*[-–]\s*Writing\s+rules"            # repeated running header
     r"|Subject[-\s]?to[-\s]?rule\s+index"               # repeated index running-header
     r"|Table\s+of\s+contents"
     r"|\d{4}-\d{2}-\d{2}"                                # date stamps (2024-04-30, ...)
