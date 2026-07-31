@@ -3,17 +3,19 @@
 Hermes oneshot stdin wrapper — reference implementation.
 
 Calling convention:
-    <venv-python3> hermes-oneshot-wrapper.py <prompt_file> [--model M] [--provider P] [--toolsets T]
+    <venv-python3> hermes-oneshot-wrapper.py <prompt_file> [--model M] [--provider P] [--toolsets T] [--debug]
 
 Reads the prompt from a file (not CLI arg), calls AIAgent directly with
 session_db=None to avoid polluting Hermes's session history, and writes
 the response to stdout.
 
 Fixes applied:
-- Set HERMES_REQUEST_TIMEOUT to prevent silent hangs on rate-limited API calls
+- Set HERMES_REQUEST_TIMEOUT to prevent silent hangs
 - Capture agent diagnostics to stderr for debugging failures
 - Flush stdout immediately to prevent buffering issues
 - Explicit agent cleanup
+- --debug flag saves full trajectory to .agents/tmp/oneshot-debug/ for inspection
+- save_trajectories=True when debugging to inspect tool calls and model responses
 """
 import sys
 import os
@@ -52,6 +54,7 @@ def run() -> int:
 
     # Parse optional flags from remaining args
     model = provider = toolsets = None
+    debug = False
     argv = sys.argv[2:]
     i = 0
     while i < len(argv):
@@ -61,6 +64,8 @@ def run() -> int:
             provider = argv[i + 1]; i += 2
         elif argv[i] == "--toolsets" and i + 1 < len(argv):
             toolsets = argv[i + 1]; i += 2
+        elif argv[i] == "--debug":
+            debug = True; i += 1
         else:
             i += 1
 
@@ -117,6 +122,9 @@ def run() -> int:
     _fb = get_fallback_chain(cfg)
 
     # ═══ KEY: no session_db → nothing saved to Hermes history ═══
+    # When --debug is active, save trajectory for inspection
+    save_traj = debug
+
     agent = AIAgent(
         api_key=runtime.get("api_key"),
         base_url=runtime.get("base_url"),
@@ -127,7 +135,7 @@ def run() -> int:
         quiet_mode=True,
         platform="cli",
         session_db=None,
-        save_trajectories=False,
+        save_trajectories=save_traj,
         credential_pool=runtime.get("credential_pool"),
         fallback_model=_fb or None,
         clarify_callback=_oneshot_clarify_callback,

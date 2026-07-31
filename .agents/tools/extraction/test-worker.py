@@ -26,7 +26,7 @@ tmp.mkdir(parents=True, exist_ok=True)
 prompt_file = tmp / f"diag-prompt-{os.getpid()}.txt"
 prompt_file.write_text(prompt)
 
-cmd = [venv_python, wrapper, str(prompt_file), "--model", model]
+cmd = [venv_python, wrapper, str(prompt_file), "--model", model, "--debug"]
 env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "300"}
 
 print(f"Worker: W{worker_num:03d}  Pages: {start_pos}-{end_pos}", flush=True)
