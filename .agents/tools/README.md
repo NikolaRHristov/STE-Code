@@ -36,7 +36,9 @@ Hierarchical organization of all agent orchestration scripts.
 │   ├── assemble-level4-parallel.py  # Parallel version of level4
 │   ├── populate-level5.py     # Generate Level 5 summaries
 │   ├── regenerate-level5.py   # Regenerate Level 5 summaries
-│   └── generate-max-prompt.py # Generate max-size system prompt
+│   ├── generate-max-prompt.py # Generate max-size system prompt
+│   ├── generate_expansion_prompts.py # Generate expansion worker prompts
+│   └── generate_refinement_prompts.py # Generate refinement worker prompts
 │
 ├── maintenance/  # Content fixes and gap filling
 │   ├── fix-fixmes.py          # Fix FIXME placeholder markers
@@ -45,13 +47,19 @@ Hierarchical organization of all agent orchestration scripts.
 │   ├── fix-nested-fences.py   # Fix nested code fence issues
 │   ├── fill-gaps.py           # Generate missing Non-STE/STE pairs
 │   ├── standardize-markers.py # Standardize example pair markers
-│   └── scan-fences.py         # Scan for nested fence issues
+│   ├── scan-fences.py         # Scan for nested fence issues
+│   └── generate_maturity_fix_prompts.py # Generate maturity fix prompts
 │
 ├── quality/      # Quality auditing and verification
 │   ├── check-tables.py        # Table integrity checker
+│   ├── check-rails.py         # 8-rail quality compliance checker
 │   ├── dogfood-audit.py       # Audit our docs against STE-Code
 │   ├── ground-phase1.py       # Phase 1 grounding auditor
-│   └── sweep-quality.py       # Parallel quality sweep
+│   ├── sweep-quality.py       # Parallel quality sweep
+│   ├── verify-batch.sh        # Batch verification script
+│   ├── _check_md.py           # Markdown format checker (basic)
+│   ├── _check_md2.py          # Markdown format checker (heading check)
+│   └── _check_md3.py          # Markdown format checker (tables)
 │
 ├── benchmark/    # Benchmark execution
 │   └── bench-run.py           # Lightweight benchmark runner
@@ -59,6 +67,9 @@ Hierarchical organization of all agent orchestration scripts.
 ├── .env.example  # Environment variable template
 └── README.md     # This file
 ```
+
+> **Note:** Scripts previously in `.agents/scripts/` have been moved into the
+> appropriate subdirectories above. The `scripts/` directory has been retired.
 
 ## Common Patterns
 
