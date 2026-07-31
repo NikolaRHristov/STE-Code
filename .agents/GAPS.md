@@ -126,10 +126,10 @@ To generate domain content in batch:
 
 ```bash
 # Generate domain-specific examples for one rule file
-python3 .agents/tools/fill-gaps.py --domain MOBILE --rule a-sec4-rule4.3
+python3 .agents/tools/maintenance/fill-gaps.py --domain MOBILE --rule a-sec4-rule4.3
 
 # Batch generate across all rules for one domain
-python3 .agents/tools/fill-gaps.py --domain ML --all-rules --min-pairs 3
+python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pairs 3
 ```
 
 ## Tracking

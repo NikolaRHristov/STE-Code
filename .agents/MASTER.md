@@ -275,10 +275,10 @@ Full details: `.agents/skills/references/rails.md`
 
 | Tool | Path | Purpose |
 |------|------|---------|
-| Oneshot wrapper | `.agents/tools/hermes-oneshot-wrapper.py` | Calls AIAgent directly. Reads prompt from file, deletes it after. No CLI, no TUI. |
-| Launch worker | `.agents/tools/launch-worker.sh` | Shell wrapper: auto-detects hermes venv, calls oneshot wrapper. Supports background with output capture. |
-| Telemetry worker | `.agents/tools/telemetry-worker.py` | Per-worker JSON telemetry in `.agents/telemetry/`. **Note: currently uses `hermes -z` CLI — migrate to oneshot wrapper.** |
-| Prompt generator | `.agents/tools/phase-a-gen.py` | Generates enhanced prompts from maturity-fix templates. |
+| Oneshot wrapper | `.agents/tools/lib/hermes-oneshot-wrapper.py` | Calls AIAgent directly. Reads prompt from file, deletes it after. No CLI, no TUI. |
+| Launch worker | `.agents/tools/shared/launch-worker.sh` | Shell wrapper: auto-detects hermes venv, calls oneshot wrapper. Supports background with output capture. |
+| Telemetry worker | `.agents/tools/shared/telemetry-worker.py` | Per-worker JSON telemetry in `.agents/telemetry/`. **Note: currently uses `hermes -z` CLI — migrate to oneshot wrapper.** |
+| Prompt generator | `.agents/tools/runners/phase-a-gen.py` | Generates enhanced prompts from maturity-fix templates. |
 
 **Anti-patterns (DO NOT USE):**
 - ❌ `hermes -z "$(cat file)"` in `terminal(background=true)` — opens TUI, does not process

@@ -708,7 +708,7 @@ EOF
 
 # Launch via oneshot wrapper (session_db=None, no tools, no file leaks)
 # Launch via local tools launcher (auto-detects venv)
-.agents/tools/launch-worker.sh prompt.txt poolside/laguna-s-2.1:free > output-file.json 2>&1
+.agents/tools/shared/launch-worker.sh prompt.txt poolside/laguna-s-2.1:free > output-file.json 2>&1
 ```
 
 - **Always** use the oneshot wrapper - NOT `hermes -z --yolo` via subprocess

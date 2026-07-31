@@ -7,21 +7,21 @@
 
 ## Agent Runner
 
-All scripts use the **agent-agnostic runner** at `.agents/tools/agent-runner.py`.
+All scripts use the **agent-agnostic runner** at `.agents/tools/lib/agent-runner.py`.
 Configure backends in `.agents/config/agents.yaml`. Default: Hermes with `poolside/laguna-s-2.1:free`.
 
 ```bash
 # Use default agent (Hermes)
-python3 .agents/tools/assemble-level1.py
+python3 .agents/tools/refinement/assemble-level1.py
 
 # Use a different agent
-python3 .agents/tools/assemble-level1.py --agent claude
+python3 .agents/tools/refinement/assemble-level1.py --agent claude
 
 # List available agents
-python3 .agents/tools/agent-runner.py --list
+python3 .agents/tools/lib/agent-runner.py --list
 
 # Shell launcher (agent-agnostic)
-.agents/tools/launch-worker.sh prompt.txt --agent hermes --model poolside/laguna-s-2.1:free out.txt
+.agents/tools/shared/launch-worker.sh prompt.txt --agent hermes --model poolside/laguna-s-2.1:free out.txt
 ```
 
 Adding a new agent: edit `.agents/config/agents.yaml` and add your backend.
@@ -111,15 +111,15 @@ Top 3 categories where STE-Code wins hardest: **comments** (+0.580), **error mes
 
 ```bash
 # Assemble level prompts (default: hermes)
-python3 .agents/tools/assemble-level3.py
-python3 .agents/tools/assemble-level2.py
-python3 .agents/tools/assemble-level1.py
+python3 .agents/tools/refinement/assemble-level3.py
+python3 .agents/tools/refinement/assemble-level2.py
+python3 .agents/tools/refinement/assemble-level1.py
 
 # Use a different agent
-python3 .agents/tools/assemble-level1.py --agent claude
+python3 .agents/tools/refinement/assemble-level1.py --agent claude
 
 # Quality sweep (5 parallel batches)
-python3 .agents/tools/sweep-quality.py --batches 5
+python3 .agents/tools/quality/sweep-quality.py --batches 5
 
 # STE-Code benchmark (59 tests, parallel)
 python3 .agents/benchmark/orchestrator.py
@@ -128,7 +128,7 @@ python3 .agents/benchmark/orchestrator.py
 python3 .agents/benchmark/orchestrator-control.py
 
 # List available agent backends
-python3 .agents/tools/agent-runner.py --list
+python3 .agents/tools/lib/agent-runner.py --list
 ```
 
 ## Contributing
@@ -155,8 +155,8 @@ Active placeholder tags in adapted files mark where domain content belongs:
 ### Batch Generation (Internal)
 ```bash
 # Generate domain examples across rules
-python3 .agents/tools/fill-gaps.py --domain MOBILE --rule a-sec4-rule4.3
-python3 .agents/tools/fill-gaps.py --domain ML --all-rules --min-pairs 3
+python3 .agents/tools/maintenance/fill-gaps.py --domain MOBILE --rule a-sec4-rule4.3
+python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pairs 3
 ```
 
 ## Skills Inventory

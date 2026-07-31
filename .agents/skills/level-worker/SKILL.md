@@ -49,7 +49,7 @@ Key facts about the agent:
 - The agent can rewrite its own Level 1 system prompt using Level 3 rules.
 - Source files: `ste-code/artifacts/ste-code-distilled-system-prompt.txt` (Level 1), `ste-code/adapted/a-dictionary.md` (Levels 2+4), and `ste-code/adapted/a-sec1-*` through `a-sec9-*` (Levels 3+).
 
-The level worker launcher wraps Agent #7 in a Hermes oneshot subprocess. The wrapper is at [`.agents/tools/hermes-oneshot-wrapper.py`](../../tools/hermes-oneshot-wrapper.py). The wrapper:
+The level worker launcher wraps Agent #7 in a Hermes oneshot subprocess. The wrapper is at [`.agents/tools/lib/hermes-oneshot-wrapper.py`](../../tools/hermes-oneshot-wrapper.py). The wrapper:
 - Reads a prompt from a temp file and deletes it after reading.
 - Creates `AIAgent` with `session_db=None` and `tool_gen_callback=None`.
 - Writes the LLM response to stdout, which the launcher captures into `output.txt`.
@@ -273,7 +273,7 @@ Run these checks before you launch the workers. If any check fails, stop and fix
 
 ```
 □ Venv Python exists:       [ -x ~/.hermes/hermes-agent/venv/bin/python3 ]
-□ Wrapper script exists:    [ -f .agents/tools/hermes-oneshot-wrapper.py ]
+□ Wrapper script exists:    [ -f .agents/tools/lib/hermes-oneshot-wrapper.py ]
 □ Rules file exists:        [ -f ste-code/artifacts/ste-code-distilled-system-prompt.txt ]
 □ Target documents exist:   Check each document path resolves
 □ Output directory writable: mkdir -p .agents/rewrites && [ -w .agents/rewrites ]
@@ -525,7 +525,7 @@ Level 5 is defined in the Agent #7 contract and the adaptation levels table. The
 | Component | Path | Role |
 |-----------|------|------|
 | Agent #7 definition | [`.agents/agent/agent-7-level-worker.md`](../../agent/agent-7-level-worker.md) | Worker identity, levels, task parameters, execution protocol, edge cases, pre-flight checklist |
-| Oneshot wrapper | [`.agents/tools/hermes-oneshot-wrapper.py`](../../tools/hermes-oneshot-wrapper.py) | Hermes AIAgent caller with `session_db=None`, no tool access |
+| Oneshot wrapper | [`.agents/tools/lib/hermes-oneshot-wrapper.py`](../../tools/hermes-oneshot-wrapper.py) | Hermes AIAgent caller with `session_db=None`, no tool access |
 | Launcher script | [`.agents/benchmark/launch-levels.py`](../../benchmark/launch-levels.py) | Parallel worker launcher with token budget checks, temp file cleanup, timeout handling |
 
 ### Benchmark Pipeline

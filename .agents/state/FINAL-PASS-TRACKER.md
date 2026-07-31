@@ -1,7 +1,7 @@
 # STE-Code Final Pass — Single-Session Orchestration
 
 > **Launch from one session. Track every worker. Self-audit every phase.**
-> Model: `poolside/laguna-s-2.1:free` | Reasoning: `high` | Batch: 3 | Telemetry: `.agents/tools/telemetry-worker.py`
+> Model: `poolside/laguna-s-2.1:free` | Reasoning: `high` | Batch: 3 | Telemetry: `.agents/tools/shared/telemetry-worker.py`
 
 ---
 
@@ -10,7 +10,7 @@
 ```
 PER BATCH (3 workers):
   1. Pick next 3 workers from tracker below
-  2. Launch: python3 .agents/tools/telemetry-worker.py <id> <prompt> --output <file> (bg + notify)
+  2. Launch: python3 .agents/tools/shared/telemetry-worker.py <id> <prompt> --output <file> (bg + notify)
   3. Wait for all 3 → verify telemetry shows PASS
   4. Flip [ ] → [x] in tracker
   5. git add -A && git gcommit-hermes "phase:<letter> batch:<N>"
@@ -57,7 +57,7 @@ PER BATCH (3 workers):
 **Prompts:** `.agents/prompts/expansion-pass1/pass1-batch-NNN.txt`
 **Done:** batches 001-004 [x]
 ```bash
-python3 .agents/tools/telemetry-worker.py b1-NNN \
+python3 .agents/tools/shared/telemetry-worker.py b1-NNN \
   .agents/prompts/expansion-pass1/pass1-batch-NNN.txt \
   --output ste-code/adapted/expanded/pass1-batch-NNN.json
 ```

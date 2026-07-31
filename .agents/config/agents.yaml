@@ -13,7 +13,7 @@ default_agent: hermes
 agents:
   hermes:
     runtime: ~/.hermes/hermes-agent/venv/bin/python3
-    wrapper: tools/hermes-oneshot-wrapper.py
+    wrapper: lib/hermes-oneshot-wrapper.py
     default_model: poolside/laguna-s-2.1:free
     env:
       HERMES_REASONING_EFFORT: high

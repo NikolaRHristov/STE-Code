@@ -251,32 +251,32 @@ Level 4: ASSEMBLY    Assembly script ready, pending execution        🔄 Ready
 
 ```bash
 # Run a single worker
-python3 .agents/tools/hermes-oneshot-wrapper.py prompt.txt --model poolside/laguna-s-2.1:free
+python3 .agents/tools/lib/hermes-oneshot-wrapper.py prompt.txt --model poolside/laguna-s-2.1:free
 
 # Run Phase A (maturity fixes)
-python3 .agents/tools/phase-a-run.py
+python3 .agents/tools/runners/phase-a-run.py
 
 # Run Phase B (rule deepening)
-python3 .agents/tools/phase-b-run.py
+python3 .agents/tools/runners/phase-b-run.py
 
 # Run benchmark (all 4 modes)
 python3 .agents/benchmark/run.py --compare
 
 # Run final audit
-python3 .agents/tools/phase-f-run.py
+python3 .agents/tools/runners/phase-f-run.py
 
 # Populate Level 5 summaries
-python3 .agents/tools/populate-level5.py
+python3 .agents/tools/refinement/populate-level5.py
 
 # Assemble Level 4 prompt
-python3 .agents/tools/assemble-level4.py
+python3 .agents/tools/refinement/assemble-level4.py
 
 # Check table integrity
-python3 .agents/tools/check-tables.py
+python3 .agents/tools/quality/check-tables.py
 
 # Scan for nested code fences
-python3 .agents/tools/scan-fences.py
+python3 .agents/tools/maintenance/scan-fences.py
 
 # Self-audit STE-Code compliance
-python3 .agents/tools/dogfood-audit.py
+python3 .agents/tools/quality/dogfood-audit.py
 ```
