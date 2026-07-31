@@ -102,8 +102,15 @@ def _mark_text_coverage(src_txt, out_txt):
     total = 0
     missing = 0
     for span in src_spans:
-        words = [w for w in norm(span).split() if w not in ("ste", "non")]
+        n = norm(span)
+        words = [w for w in n.split() if w not in ("ste", "non")]
         if len(words) < 2:
+            continue
+        # Skip dictionary column-HEADER labels ("Column 3: STE EXAMPLE",
+        # "Column 4: Non-STE example"). These are preserved as the real
+        # | STE example | Non-STE example | table header, so their literal
+        # shingle intentionally won't match — not content loss.
+        if "column" in words and ("example" in words or "ste" in words):
             continue
         total += 1
         shingle = " ".join(words[:6])
