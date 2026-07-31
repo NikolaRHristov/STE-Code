@@ -138,9 +138,12 @@ def run() -> int:
 
     try:
         response = agent.chat(prompt) or ""
-        sys.stdout.write(response)
-        if not response.endswith("\n"):
-            sys.stdout.write("\n")
+        # Only write non-empty response to stdout — empty responses
+        # are normal when the agent just calls tools without final text
+        if response.strip():
+            sys.stdout.write(response)
+            if not response.endswith("\n"):
+                sys.stdout.write("\n")
         sys.stdout.flush()
     except Exception as e:
         sys.stderr.write(f"oneshot-wrapper error: {e}\n")
