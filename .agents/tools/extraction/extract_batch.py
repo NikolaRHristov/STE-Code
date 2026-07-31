@@ -92,6 +92,8 @@ def build_prompt(worker_num, start_pos, end_pos, mapping):
 
     The agent reads spec page files via its read_file tool and writes the
     extraction output via write_file. No content is embedded in the prompt.
+    The prompt template is read from .agents/prompts/extraction-worker.md
+    so it can be edited on-the-fly without modifying this script.
     """
     pages = []
     for pos in range(start_pos, end_pos + 1):
@@ -107,40 +109,29 @@ def build_prompt(worker_num, start_pos, end_pos, mapping):
     # Full absolute path for write_file
     output_path = str(EXTRACTED_DIR / f"w{worker_num:03d}-p{start_pos}-{end_pos}.md")
 
-    prompt = f"""Extract ALL content from these {len(pages)} spec pages and write a single markdown file.
+    # Load prompt template from .md file for dynamic editing
+    # The .md file has a header section (before ---) and the actual prompt (after ---)
+    prompt_template_path = PROJECT / ".agents" / "tools" / "prompts" / "extraction-worker.md"
+    template_content = prompt_template_path.read_text(encoding="utf-8")
+    # Strip header — everything before the first --- separator
+    if "---" in template_content:
+        template = template_content.split("---", 1)[1].strip()
+    else:
+        template = template_content
 
-You are Agent #1 (Extractor). Your job is to read the raw spec page files and produce a clean, verbatim extraction.
+    # Pre-compute page positions for template
+    page_positions = ", ".join(str(p) for p in [start_pos + i for i in range(len(pages))])
 
-STEPS:
-1. Read each of these files (using read_file):
-{file_refs}
-
-2. Extract every word, table, list, and example VERBATIM.
-
-3. The output file must start with exactly: `# Page {start_pos} of 434`
-
-4. For each page boundary, add a heading: `# Page N of 434` (where N is the
-   sequential page position, e.g. {start_pos}, {start_pos+1}, ..., {end_pos})
-
-5. After the page heading, include the page-id line: `**Page {pages[0][1]}**`
-
-6. Write ONLY raw markdown content to the file. The file must contain
-   ONLY the extracted page content — nothing else. Do NOT include any
-   preamble, commentary, summaries, or meta-commentary.
-
-7. Preserve all formatting exactly — tables, lists, bold, examples.
-
-8. If a table spans pages, add `<!-- TABLE CONTINUES ON NEXT PAGE -->`
-
-9. Use write_file to save the output to: {output_path}
-
-CRITICAL: The write_file content parameter must contain ONLY the raw
-markdown page content. Do NOT prepend phrases like "Here is the
-extraction", "This page describes", "I will now", "Let me check",
-"shutting down", or any meta-commentary. Do NOT append any text
-after the last page's content. The file should be pure markdown
-starting with `# Page {start_pos} of 434` and ending with the last
-page's content."""
+    # Apply replacements
+    prompt = template.format(
+        num_pages=len(pages),
+        file_refs=file_refs,
+        start_pos=start_pos,
+        end_pos=end_pos,
+        page_positions=page_positions,
+        pages_first_id=pages[0][1] if pages else "",
+        output_path=output_path,
+    )
 
     return prompt, output_path
 
