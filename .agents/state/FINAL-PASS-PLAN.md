@@ -1,7 +1,7 @@
 # STE-Code Final Pass — Single-Session Orchestration
 
 > **Launch from one session. Track every worker. Self-audit every phase.**
-> Model: `deepseek-v4-pro` | Reasoning: `high` | Batch: 3 | Telemetry: `.agents/tools/telemetry-worker.py`
+> Model: `poolside/laguna-s-2.1:free` | Reasoning: `high` | Batch: 3 | Telemetry: `.agents/tools/telemetry-worker.py`
 
 ---
 

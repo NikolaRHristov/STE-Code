@@ -3,7 +3,7 @@
 **File:** `ste-code/adapted/a-sec6-rule6.4.md`  
 **Rule:** Rule 6.4 — Use Paragraphs to Show Related Information  
 **Date:** 2026-07-30  
-**Agent:** STE-Code (deepseek-v4-pro)
+**Agent:** STE-Code (poolside/laguna-s-2.1:free)
 
 ## Summary
 

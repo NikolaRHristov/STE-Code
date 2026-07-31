@@ -40,8 +40,8 @@ for root, dirs, files in os.walk('.'):
 ```python
 # Replace hermes -z "$(cat ...)" patterns with agent-agnostic form
 patterns = [
-    (r'hermes -z "\$\(cat ([^)]+)\)" -m deepseek-v4-pro --yolo',
-     r'agent run "\1" --model deepseek-v4-pro'),
+    (r'hermes -z "\$\(cat ([^)]+)\)" -m poolside/laguna-s-2.1:free --yolo',
+     r'agent run "\1" --model poolside/laguna-s-2.1:free'),
     (r'hermes -z "\$\(cat ([^)]+)\)"',
      r'agent run "\1"'),
 ]

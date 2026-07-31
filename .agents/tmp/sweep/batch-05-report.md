@@ -50,7 +50,7 @@ The correct count is 51 writing rules (Rules 1.1–9.4) plus 4 General Recommend
 Corrected "53" to "51" across 5 locations:
 - PRESERVE contract: "All 53 writing rule numbers" → "51 writing rule numbers"
 - Immutable facts: "53 writing rules plus 4 General Rules (not 65)" → "51"
-- Rail R6: "19 categories, deepseek-v4-pro, 53 rules" → "51 rules"
+- Rail R6: "19 categories, poolside/laguna-s-2.1:free, 53 rules" → "51 rules"
 - Immutable facts footer: "53 writing rules + 4 General Rules (57 adapted files)" → "51 writing rules + 4 General Rules (55 adapted files)"
 - (also the PRESERVE item at line 23)
 
