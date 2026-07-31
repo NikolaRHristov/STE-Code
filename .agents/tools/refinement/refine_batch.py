@@ -154,6 +154,18 @@ ZERO CONTENT LOSS — SELF-CHECK before you finish:
    against truncation — the most common failure).
 4. No example sentence is dropped or shortened.
 
+HOW YOU MUST WORK — MANUAL REFORMATTING ONLY:
+- Read the source file, then WRITE the refined file directly with your file-write
+  tool. That is the ONLY allowed method.
+- DO NOT write, create, or execute any helper script (no `.py`, no shell, no
+  `_gen_*.py`, no code_exec / terminal / python one-liners) to generate or
+  transform the output. Mechanical/regex transforms silently corrupt content and
+  are forbidden.
+- DO NOT verify your work by running a script. Re-read your written file with
+  your eyes and confirm the 4 self-check items above manually.
+- The refined file is your ONLY output artifact. Do not leave any other file on
+  disk.
+
 The authoritative protocol (9 rules, before/after examples, failure recovery)
 follows. Follow it exactly.
 
