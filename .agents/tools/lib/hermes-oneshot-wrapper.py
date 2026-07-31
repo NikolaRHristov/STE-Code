@@ -38,8 +38,8 @@ logging.disable(logging.CRITICAL)
 # ---------------------------------------------------------------------------
 
 # How long to wait without API responsiveness before killing the wrapper.
-# Default: 180 seconds. Override via HERMES_HEALTH_PROBE_TIMEOUT env var.
-HEALTH_PROBE_TIMEOUT = int(os.environ.get("HERMES_HEALTH_PROBE_TIMEOUT", "120"))
+# Default: 600 seconds. Override via HERMES_HEALTH_PROBE_TIMEOUT env var.
+HEALTH_PROBE_TIMEOUT = int(os.environ.get("HERMES_HEALTH_PROBE_TIMEOUT", "600"))
 
 # How often to probe the API (seconds).
 HEALTH_PROBE_INTERVAL = int(os.environ.get("HERMES_HEALTH_PROBE_INTERVAL", "30"))

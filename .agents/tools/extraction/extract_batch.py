@@ -25,7 +25,7 @@ Fast failover:
   the next run can resume with --resume to skip already-completed workers.
   Signal handlers (SIGTERM, SIGINT) also save the checkpoint on exit.
   The oneshot wrapper includes a health probe watchdog that self-terminates
-  if the API is unresponsive for HERMES_HEALTH_PROBE_TIMEOUT (default 180s).
+  if the API is unresponsive for HERMES_HEALTH_PROBE_TIMEOUT (default 600s).
 
 Environment:
   Read .agents/tools/.env if present for MODEL, MAX_WORKERS, etc.
@@ -68,7 +68,7 @@ PAGES_PER_WORKER = int(os.environ.get("STE_PAGES_PER_WORKER", "4"))
 WORKERS_PER_BATCH = int(os.environ.get("STE_WORKERS_PER_BATCH", "3"))
 TOTAL_PAGES = int(os.environ.get("STE_TOTAL_PAGES", "434"))
 MAX_ATTEMPTS = 2
-TIMEOUT_SECONDS = 600
+TIMEOUT_SECONDS = 300
 
 # ── State / checkpoint paths ──────────────────────────────────────────────────
 STATE_DIR = PROJECT / ".agents" / "state"

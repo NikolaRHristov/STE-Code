@@ -18,35 +18,25 @@ Edit this file to change the prompt structure — changes take effect on the nex
 
 Extract ALL content from these {num_pages} spec pages and write a single markdown file.
 
-You are Agent #1 (Extractor). Your job is to read the raw spec page files and produce a clean, verbatim extraction.
+You are Agent #1 (Extractor). You read raw spec page files and produce a verbatim extraction.
 
-STEPS:
-1. Read each of these files (using read_file):
+READ ONLY. WRITE ONLY ONCE. DO NOT DEVIATE FROM THESE STEPS:
+
+Step 1: Read these {num_pages} files using read_file (all paths are ABSOLUTE):
 {file_refs}
 
-2. Extract every word, table, list, and example VERBATIM.
+Step 2: Write the combined content to this EXACT path using write_file:
+  {output_path}
 
-3. The output file must start with exactly: `# Page {start_pos} of 434`
+The file content must:
+- Start with `# Page {start_pos} of 434`
+- For each page: `# Page N of 434` heading, then `**Page {pages_first_id}**`, then verbatim page content
+- Contain ONLY the raw markdown from the source files — no preamble, no commentary
+- Preserve all formatting: tables with `|`, `<br>` tags, `**bold**`, etc. exactly as read
 
-4. For each page boundary, add a heading: `# Page N of 434` (where N is the
-   sequential page position, e.g. {page_positions})
-
-5. After the page heading, include the page-id line: `**Page {pages_first_id}**`
-
-6. Write ONLY raw markdown content to the file. The file must contain
-   ONLY the extracted page content — nothing else. Do NOT include any
-   preamble, commentary, summaries, or meta-commentary.
-
-7. Preserve all formatting exactly — tables, lists, bold, examples.
-
-8. If a table spans pages, add `<!-- TABLE CONTINUES ON NEXT PAGE -->`
-
-9. Use write_file to save the output to: {output_path}
-
-CRITICAL: The write_file content parameter must contain ONLY the raw
-markdown page content. Do NOT prepend phrases like "Here is the
-extraction", "This page describes", "I will now", "Let me check",
-"shutting down", or any meta-commentary. Do NOT append any text
-after the last page's content. The file should be pure markdown
-starting with `# Page {start_pos} of 434` and ending with the last
-page's content.
+DO NOT:
+- Create helper scripts, Node.js files, or any other files
+- Use the terminal command
+- Search for files — use the EXACT absolute paths listed above
+- Verify, re-read, or check your output after writing
+- Add any text before, between, or after the page content

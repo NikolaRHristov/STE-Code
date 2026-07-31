@@ -35,7 +35,7 @@ print(f"Running oneshot wrapper...", flush=True)
 
 start = time.time()
 try:
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=150, env=env, cwd=str(PROJECT))
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=600, env=env, cwd=str(PROJECT))
     duration = time.time() - start
     print(f"\nDone in {duration:.1f}s  Exit: {result.returncode}", flush=True)
     print(f"Stdout: {len(result.stdout)} chars  Stderr: {len(result.stderr)} chars", flush=True)
