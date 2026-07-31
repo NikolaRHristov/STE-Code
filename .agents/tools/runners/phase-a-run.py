@@ -29,7 +29,7 @@ Follow the extraction methodology in .agents/skills/extraction/SKILL.md
     tmp.parent.mkdir(parents=True, exist_ok=True)
     tmp.write_text(prompt)
 
-    cmd, env = get_agent_command(agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"),
+    cmd, env = get_agent_command(agent=agent, model=os.environ.get("STE_MODEL", "tencent/hy3:free"),
                                   cwd=PROJECT, prompt_file=tmp)
     os.execvpe(cmd[0], cmd, env)
 
