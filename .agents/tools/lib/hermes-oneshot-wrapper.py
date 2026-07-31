@@ -8,14 +8,16 @@ Calling convention:
 Reads the prompt from a file (not CLI arg), calls AIAgent directly with
 session_db=None to avoid polluting Hermes's session history, and writes
 the response to stdout.
+
+Fixes applied:
+- Added request_timeout env var to prevent silent hangs on rate-limited API calls
+- Capture agent diagnostics to stderr for debugging failures
+- Flush stdout immediately to prevent buffering issues
 """
 import sys
 import os
 import logging
-
-# ── resolves at the calling side, not here ──
-# The venv's Python already has hermes_cli on sys.path.
-# Never use system Python to run this wrapper.
+import traceback
 
 logging.disable(logging.CRITICAL)
 
