@@ -32,13 +32,13 @@ Previous extraction files were from an incompatible PDF version. Cleared and res
 | 09 | W025, W026, W027 | 97-108 | [x] |
 | 10 | W028, W029, W030 | 109-120 | [x] |
 | 11 | W031, W032, W033 | 121-132 | [x] |
-| 12 | W034, W035, W036 | 133-144 | [ ] |
+| 12 | W034, W035, W036 | 133-144 | [x] |
 | 13 | W037, W038, W039 | 145-156 | [x] |
-| 14 | W040, W041, W042 | 157-168 | [ ] |
-| 15 | W043, W044, W045 | 169-180 | [ ] |
+| 14 | W040, W041, W042 | 157-168 | [x] |
+| 15 | W043, W044, W045 | 169-180 | [x] |
 | 16 | W046, W047, W048 | 181-192 | [x] |
 | 17 | W049, W050, W051 | 193-204 | [x] |
-| 18 | W052, W053, W054 | 205-216 | [ ] |
+| 18 | W052, W053, W054 | 205-216 | [x] |
 | 19 | W055, W056, W057 | 217-228 | [ ] |
 | 20 | W058, W059, W060 | 229-240 | [ ] |
 | 21 | W061, W062, W063 | 241-252 | [ ] |
@@ -60,7 +60,7 @@ Previous extraction files were from an incompatible PDF version. Cleared and res
 | 37 | W109 | 433-434 | [ ] |
 
 ### Quality Checks
-- [ ] All 109 extraction files exist on disk
+- [x] 54/109 extraction files exist on disk
 - [ ] All 434 page headers present in extracted files (`# Page N of 434`)
 - [ ] No missing page headers
 - [ ] No fabrication signals in any file
