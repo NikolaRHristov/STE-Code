@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/NikolaRHristov/STE-Code/.agents/benchmark/schema.json",
+  "$id": "https://github.com/<repo>/.agents/benchmark/schema.json",
   "title": "STE-Code Benchmark Schema",
   "description": "Schema for STE-Code benchmark test cases and results",
   "version": "1.0.0",
