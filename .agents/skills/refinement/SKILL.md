@@ -52,9 +52,14 @@ Align columns. Escape pipe chars with `\|`. Merge split cells.
 ### Rule 4: STE/NON-STE EXAMPLE FORMAT
 ```
 > **STE:** [The STE-compliant example text, fully written]
+>
 > **Non-STE:** [The non-compliant example text, fully written]
 ```
-Separated by blank line. Never merge STE/non-STE into same line.
+Each labeled example is its own quoted paragraph. Put a quoted-blank line (a line
+containing only `>`) BETWEEN consecutive examples — otherwise GitHub and VSCode
+soft-wrap the two `>` lines into a single rendered line. Never merge STE/non-STE
+onto the same physical line. When several examples appear in a row (e.g. two
+`> **STE:**` lines), separate EACH pair with a `>` line.
 
 ### Rule 5: CODE BLOCKS
 Fenced with language identifier. Never bare ```.
@@ -164,9 +169,13 @@ Example: "Start the engine" (STE) / "Commence engine operation" (non-STE)
 **✅ Refined Output (separated):**
 ```
 > **STE:** Start the engine.
+>
 > **Non-STE:** Commence engine operation.
 ```
-NOTE: The `/` separator in raw extraction is the delimiter signal. Split on it. Keep each example on its own `>` blockquote line. End each example with a period.
+NOTE: The `/` separator in raw extraction is the delimiter signal. Split on it.
+Keep each example on its own `>` blockquote line, and put a quoted-blank `>` line
+between consecutive examples so GitHub/VSCode render them on separate lines. End
+each example with a period.
 
 ### Rule 6 Example: Dictionary Table Preservation
 
@@ -262,7 +271,7 @@ If a verification check fails, follow this decision path. Do not skip steps or g
 **Root cause:** Rule 4 was not applied to those pairs.
 **Recovery:**
 1. Search the refined file for `/` characters between examples.
-2. For each hit, split into separate `> **STE:**` and `> **Non-STE:**` lines.
+2. For each hit, split into separate `> **STE:**` and `> **Non-STE:**` lines, with a quoted-blank `>` line between them (see Rule 4 / Pitfall 3).
 3. If the boundary between STE and non-STE is ambiguous, use this heuristic: the example BEFORE `/` is STE, the example AFTER `/` is non-STE.
 4. Re-run verification.
 
@@ -471,10 +480,16 @@ At approximate API pricing, the full refinement pipeline costs roughly:
 **Fix:** Insert the missing `##` level. If no natural section title exists, use `## Continuation` as a placeholder heading.
 **Detection:** Parse the file for heading levels. Any gap of 2+ levels (e.g., `#` → `###`) is a skip.
 
-### Pitfall 3: Blank Line Between Blockquote Lines
-**Problem:** Worker inserts a blank line between `> **STE:**` and `> **Non-STE:**`.
-**Fix:** Remove the blank line. These two lines form a pair and must be adjacent.
-**Detection:** Search for `> \*\*STE:\*\*.*\n\n> \*\*Non-STE:\*\*` - if found, a blank line separates the pair.
+### Pitfall 3: Consecutive Blockquote Lines Soft-Wrap Into One
+**Problem:** Two adjacent `> ` lines with no quoted-blank between them (e.g.
+`> **STE:** ...` directly followed by `> **Non-STE:** ...` or a second
+`> **STE:** ...`) render as ONE line in GitHub and VSCode.
+**Fix:** Put a quoted-blank line (a line containing only `>`) between each
+consecutive labeled example so each is its own paragraph within the blockquote.
+**Detection:** Search for `>\s*\*\*(STE|Non-STE):\*\*.*\n>\s*\*\*` — two labeled
+blockquote lines with no `>`-only line between them need a separator inserted.
+**Do NOT** use a fully blank line (empty, not `>`) — that BREAKS the blockquote
+into two separate blocks. The separator must be `>` (quoted-blank).
 
 ### Pitfall 4: Trailing Whitespace in Tables
 **Problem:** Table cells have trailing spaces that cause alignment issues in some renderers.

@@ -137,9 +137,14 @@ FORMAT BY CONTENT TYPE — this is the critical part:
      continuation of the entry directly above it — fold its cells into that entry.
 
 2. RULE / WRITING pages — prose with STE / Non-STE examples:
-   - Put each pair on SEPARATE blockquote lines:
+   - Put each labeled example on its own blockquote line, with a quoted-blank
+     line (a line containing only `>`) BETWEEN consecutive examples:
      > **STE:** <full STE example text>
+     >
      > **Non-STE:** <full non-STE example text>
+   - The `>`-only separator is REQUIRED — without it GitHub/VSCode soft-wrap the
+     two lines into one rendered line. Use `>` (quoted-blank), never a fully
+     empty line (an empty line splits the blockquote into two blocks).
    - Never merge STE and Non-STE onto one line. Preserve every `<mark>` / `<u>`
      annotation verbatim (e.g. `_<u><mark>Put out the cat.</mark></u>_`).
 
