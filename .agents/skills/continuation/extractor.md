@@ -239,7 +239,7 @@ Batch 36: W106(421-424) W107(425-428) W108(429-432)
 Batch 37: W109(433-434) — 2 pages only, last batch
 ```
 
-Full grid also at: `.agents/skills/references/worker-grid.md`
+Full grid also at: `.agents/references/worker-grid.md`
 
 ## Quality Checks (Per Batch)
 
@@ -514,7 +514,7 @@ Do not start refinement until all extraction batch checks pass.
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - 109 workers × 4 pages = 434 pages total
 - 3 workers per batch maximum (API rate limit ceiling)
-- Follow `.agents/skills/references/rails.md` — all 8 guardrails apply
+- Follow `.agents/references/rails.md` — all 8 guardrails apply
 
 ## Start Now
 

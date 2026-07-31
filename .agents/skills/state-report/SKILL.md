@@ -396,7 +396,7 @@ Reads state reports to establish a baseline before running a forensic audit. The
 - Timestamps of all file counts (to compare against audit timestamps)
 - PROGRESS.md sync status with explicit match/mismatch flags
 
-Reference: `.agents/skills/spec-extraction/execution-auditor/SKILL.md`
+Reference: `.agents/skills/execution-auditor/SKILL.md`
 
 ### Agent #2 — Refiner
 

@@ -1,4 +1,4 @@
-### .agents/skills/spec-extraction/ste-code-merge/SKILL.md
+### .agents/skills/merging/SKILL.md
 - **Level:** 3
 - **Summary:** Defines the merge protocol for combining 109 worker extraction files into a single master state document, including deduplication, section organization, and completeness validation.
 - **Strengths:**
@@ -24,7 +24,7 @@
   - Rationale for design decisions (e.g., "why master-raw.md is kept as a temporary artifact instead of discarded immediately")
 - **Priority:** low
 
-### .agents/skills/spec-extraction/ste-code-adaptation/SKILL.md
+### .agents/skills/adaptation/SKILL.md
 - **Level:** 2
 - **Summary:** Specifies how to adapt ASD-STE100 extracted rules from the aerospace domain into STE-Code artifacts for the coding domain, with preserve/replace rules and output artifact definitions.
 - **Strengths:**
@@ -51,7 +51,7 @@
   - Anti-fabrication rules matching the standard in ste-code-artifacts/SKILL.md
 - **Priority:** high
 
-### .agents/skills/spec-extraction/ste-code-adaptation/references/category-mapping.md
+### .agents/skills/adaptation/references/category-mapping.md
 - **Level:** 3
 - **Summary:** Maps all 19 ASD-STE100 technical noun categories and 4 technical verb categories to their STE-Code code-domain equivalents, with representative examples for each.
 - **Strengths:**
@@ -77,7 +77,7 @@
   - Boundary case examples: problematic terms that fit multiple categories, with resolution and rationale
 - **Priority:** medium
 
-### .agents/skills/spec-extraction/ste-code-artifacts/SKILL.md
+### .agents/skills/artifacts/SKILL.md
 - **Level:** 3
 - **Summary:** Specifies the generation protocol for 6 STE-Code artifact files from the merged master extraction state, with per-artifact content requirements, quality gates, and anti-fabrication rules.
 - **Strengths:**
@@ -106,7 +106,7 @@
   - Rationale for the artifact ordering (1→6): "System prompt first because it's the most constrained and sets vocabulary for subsequent artifacts"
 - **Priority:** medium
 
-### .agents/skills/spec-extraction/ste-code-continuation/SKILL.md
+### .agents/skills/continuation/SKILL.md
 - **Level:** 3
 - **Summary:** Multi-agent continuation skill usable by Agents #1, #2, or #3 to track and advance pipeline stages 3-5 (merge, adapt, artifacts) from their own perspective, including stage detection, agent-perspective input selection, and per-stage protocols.
 - **Strengths:**
@@ -143,7 +143,7 @@
 - Files scored: 5
 - Level distribution: -2:0 -1:0 1:0 2:1 3:4 4:0 5:0
 - Highest priority:
-  - `.agents/skills/spec-extraction/ste-code-adaptation/SKILL.md` (Level 2) - thinnest file at 69 lines, lacks any worked examples, execution protocol, edge cases, or anti-fabrication rules; this is the adaptation-phase entry point and it's the weakest link
+  - `.agents/skills/adaptation/SKILL.md` (Level 2) - thinnest file at 69 lines, lacks any worked examples, execution protocol, edge cases, or anti-fabrication rules; this is the adaptation-phase entry point and it's the weakest link
 - Pattern observations:
   - **RAILS references are present but unactionable**: all 4 skill files invoke `references/rails.md` and list the 8 rail names, but none map how each rail constrains the specific phase's decisions or what happens when a rail is violated during execution
   - **No failure recovery anywhere**: all files describe the happy path; none specify what to do if a validation check fails, if a worker output is missing, if master.md is incomplete, or if a stage needs to be resumed

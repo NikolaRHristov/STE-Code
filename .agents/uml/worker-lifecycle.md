@@ -2,9 +2,9 @@
 
 > Source documents:
 > - `.agents/skills/ste-code-workers/SKILL.md`
-> - `.agents/skills/references/worker-grid.md`
-> - `.agents/skills/references/rails.md`
-> - `.agents/skills/references/worker-rails.md`
+> - `.agents/references/worker-grid.md`
+> - `.agents/references/rails.md`
+> - `.agents/references/worker-rails.md`
 > - `.agents/prompts/agent-1-extractor.md`
 
 ---
@@ -394,7 +394,7 @@ Run these checks before you launch any batch. A check that fails must be fixed b
 | 7 | Disk space sufficient | `df -h . | tail -1 | awk '{print $4}'` | At least 500MB free |
 | 8 | Model available | `hermes status 2>&1 | grep -c poolside/laguna-s-2.1:free` | Returns 1 or more |
 | 9 | No stale worker sessions | `hermes process list 2>&1 | grep -c 'session_id'` | Returns 0 |
-| 10 | Worker grid up-to-date | `test .agents/skills/references/worker-grid.md -nt .agents/state/PROGRESS.md` | Grid is newer than progress |
+| 10 | Worker grid up-to-date | `test .agents/references/worker-grid.md -nt .agents/state/PROGRESS.md` | Grid is newer than progress |
 
 NOTE: After all 10 checks pass, create the coordinator lock: `touch ste-code/.coordinator-lock`.
 

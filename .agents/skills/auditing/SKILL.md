@@ -244,7 +244,7 @@ If PROGRESS.md does not exist:
 1. Record the absence as 🟠 Error. A missing PROGRESS.md means no claims exist to audit against.
 2. Run the audit from exchange.md alone. Check file existence and content fidelity against the exchange log claims.
 3. Report that the audit scope is reduced to exchange.md only.
-4. After the audit, request that PROGRESS.md be regenerated from the state report skill (`.agents/skills/state-report.md`).
+4. After the audit, request that PROGRESS.md be regenerated from the state report skill (`.agents/skills/state-report/SKILL.md`).
 
 ### Missing exchange.md
 
@@ -436,7 +436,7 @@ Below is a complete example audit report. Use this as a template for all audit o
 ## Cross-Reference
 
 - Validation log: `ste-code/validation-log.md` shows 3 WARN entries for batch 28. This audit confirms 2 of 3 were false positives.
-- State report: `.agents/skills/state-report.md` shows Stage 1 at 98% before audit. After audit: Stage 1 at 98% (1 file missing).
+- State report: `.agents/skills/state-report/SKILL.md` shows Stage 1 at 98% before audit. After audit: Stage 1 at 98% (1 file missing).
 
 ---
 
@@ -536,7 +536,7 @@ Update INDEX.md after every audit report is written. The index gives agents a qu
 ## References
 
 - `.agents/references/rails.md` - 8 immutable guardrails (audit measurement standard)
-- `.agents/skills/state-report.md` - Standardized pipeline state format
+- `.agents/skills/state-report/SKILL.md` - Standardized pipeline state format
 - `.agents/skills/validation/SKILL.md` - Per-batch validation checks (complementary, higher frequency)
 - `.agents/audit/` - Audit report output directory
 - `.agents/audit/INDEX.md` - Audit report index for quick pipeline health overview

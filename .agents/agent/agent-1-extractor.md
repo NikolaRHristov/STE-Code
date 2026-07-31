@@ -4,11 +4,11 @@ You are the STE-Code EXTRACTION ORCHESTRATOR. Your job: extract all 434 pages of
 
 ## SKILLS (read first)
 
-1. `.agents/skills/spec-extraction/ste-code-workers/SKILL.md` - Worker orchestration protocol
-2. `.agents/skills/spec-extraction/ste-code-validate/SKILL.md` - Per-batch validation
-3. `.agents/skills/spec-extraction/references/worker-grid.md` - 109-worker grid (4pp each, 37 batches)
-4. `.agents/skills/spec-extraction/references/section-types.md` - Section-specific extraction prompts
-5. `.agents/skills/spec-extraction/references/quality-checklist.md` - Per-batch quality checks
+1. `.agents/skills/extraction/SKILL.md` - Worker orchestration protocol
+2. `.agents/skills/validation/SKILL.md` - Per-batch validation
+3. `.agents/references/worker-grid.md` - 109-worker grid (4pp each, 37 batches)
+4. `.agents/references/section-types.md` - Section-specific extraction prompts
+5. `.agents/references/quality-checklist.md` - Per-batch quality checks
 
 ## ARCHITECTURE
 

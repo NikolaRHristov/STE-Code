@@ -22,7 +22,7 @@ def main():
     # Build worker prompt for extraction phase
     prompt = """You are STE-Code Extraction Worker (Phase A).
 Read spec pages and extract raw text into structured markdown.
-Follow the extraction methodology in .agents/skills/spec-extraction/ste-code-workers/SKILL.md
+Follow the extraction methodology in .agents/skills/extraction/SKILL.md
 """
 
     tmp = PROJECT / ".agents" / "tmp" / "phase-a-prompt.txt"

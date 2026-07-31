@@ -36,11 +36,11 @@ NOTE: Sub-rules (R3a, R4a, R9a, R9b) were added after the initial rule set. Each
 
 ## SKILLS (read first)
 
-1. `.agents/skills/spec-extraction/ste-code-refine/SKILL.md` - Refinement protocol (9 rules)
-2. `.agents/skills/spec-extraction/ste-code-workers/SKILL.md` - Worker orchestration (same architecture)
-3. `.agents/skills/spec-extraction/references/worker-grid.md` - 109-worker grid
-4. `.agents/skills/spec-extraction/references/quality-checklist.md` - Per-batch checks
-5. `.agents/skills/spec-extraction/references/rails.md` - 8 immutable guardrails
+1. `.agents/skills/refinement/SKILL.md` - Refinement protocol (9 rules)
+2. `.agents/skills/extraction/SKILL.md` - Worker orchestration (same architecture)
+3. `.agents/references/worker-grid.md` - 109-worker grid
+4. `.agents/references/quality-checklist.md` - Per-batch checks
+5. `.agents/references/rails.md` - 8 immutable guardrails
 
 ## ARCHITECTURE
 
@@ -960,7 +960,7 @@ All of these conditions must be true before you signal completion:
 3. Run rails compliance check: `python3 .agents/tools/quality/check-rails.py`
 4. Run quality gate batch check on all 109 files: `python3 .agents/tools/quality/check-refined-all.py`
 5. Spot-check 3 random files for formatting quality and absence of "..." omissions
-6. Write state report using `.agents/skills/spec-extraction/agent-state-report/SKILL.md`
+6. Write state report using `.agents/skills/state-report/SKILL.md`
 7. Signal completion in `.agents/feedback/exchange.md`
 
 ## START NOW

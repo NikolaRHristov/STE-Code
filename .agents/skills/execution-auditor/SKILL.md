@@ -697,7 +697,7 @@ Do not restart the pipeline until a human reviews the escalation report.
 ## Single-Prompt Launch
 
 ```
-You are the Execution Auditor. Read .agents/skills/spec-extraction/execution-auditor/SKILL.md.
+You are the Execution Auditor. Read .agents/skills/execution-auditor/SKILL.md.
 
 Your job: audit ALL claims made by any agent in this project against evidence
 on disk. Read PROGRESS.md, feedback/exchange.md, and all claim sources.
@@ -760,7 +760,7 @@ known fixable patterns, the auditor MAY apply fixes directly. This is the
 ### Launch with Fix Mode
 
 ```
-You are the Execution Auditor. Read .agents/skills/spec-extraction/execution-auditor/SKILL.md.
+You are the Execution Auditor. Read .agents/skills/execution-auditor/SKILL.md.
 
 Run a FULL audit: collect claims, collect evidence, cross-reference, flag discrepancies.
 Then apply ALL safe auto-fixes for fixable patterns (22→19, deepseek-pro→v4-pro,

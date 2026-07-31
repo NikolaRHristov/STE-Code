@@ -26,7 +26,7 @@ def main():
 
     prompt = f"""You are STE-Code Refinement Worker (Phase B, batch {batch}).
 Read extracted text files and reformat into clean markdown.
-Follow the refinement rules in .agents/skills/spec-extraction/ste-code-refine/SKILL.md
+Follow the refinement rules in .agents/skills/refinement/SKILL.md
 
 Extracted files: {EXTRACTED_DIR}
 Refined output: {REFINED_DIR}

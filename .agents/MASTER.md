@@ -250,7 +250,7 @@ python3 .agents/tools/quality/check-rails.py
 | R7 | Progress Tracking | PROGRESS.md not reflecting reality |
 | R8 | Error Recovery | Hiding instead of fixing mistakes |
 
-Full details: `.agents/skills/references/rails.md`
+Full details: `.agents/references/rails.md`
 
 ---
 
@@ -258,12 +258,12 @@ Full details: `.agents/skills/references/rails.md`
 
 | File | Content |
 |------|---------|
-| `.agents/skills/references/worker-grid.md` | 109-worker batch grid |
-| `.agents/skills/references/section-types.md` | Page type classification |
-| `.agents/skills/references/worker-rails.md` | Worker-level self-checks |
-| `.agents/skills/references/quality-checklist.md` | Per-batch checklist |
-| `.agents/skills/references/category-mapping.md` | 19-category STE→STE-Code map |
-| `.agents/skills/references/rails.md` | 8 immutable guardrails |
+| `.agents/references/worker-grid.md` | 109-worker batch grid |
+| `.agents/references/section-types.md` | Page type classification |
+| `.agents/references/worker-rails.md` | Worker-level self-checks |
+| `.agents/references/quality-checklist.md` | Per-batch checklist |
+| `.agents/references/category-mapping.md` | 19-category STE→STE-Code map |
+| `.agents/references/rails.md` | 8 immutable guardrails |
 | `.agents/references/idempotency-baseline.md` | Worker idempotency standard — Tier 1/2/3 checks |
 | `.agents/feedback/exchange.md` | Orchestrator↔Reviewer communication |
 

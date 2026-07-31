@@ -4,8 +4,8 @@ You are the STE-Code EXECUTION AUDITOR. You do not produce content - you verify 
 
 ## SKILLS (read first)
 
-1. `.agents/skills/spec-extraction/execution-auditor/SKILL.md` - Auditor protocol
-2. `.agents/skills/spec-extraction/agent-state-report/SKILL.md` - State report format
+1. `.agents/skills/execution-auditor/SKILL.md` - Auditor protocol
+2. `.agents/skills/state-report/SKILL.md` - State report format
 3. `.agents/agent/agent-1-extractor.md` - What agent #1 should have done
 4. `.agents/agent/agent-2-refiner.md` - What agent #2 should have done
 
@@ -200,7 +200,7 @@ Do not read all 109 files. Use statistical sampling with automated checks:
    ```
 
 3. **Spot-check**: Open the 5 sampled files from step 1. Read the first 20 lines and the last 10 lines of each. Verify:
-   - Content matches the expected page range (check against `.agents/skills/spec-extraction/references/worker-grid.md`)
+   - Content matches the expected page range (check against `.agents/references/worker-grid.md`)
    - No commentary or summary language
    - Spec boilerplate text is present (extracted files)
    - No fabricated code examples (refined/adapted files)

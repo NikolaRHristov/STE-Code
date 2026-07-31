@@ -114,7 +114,7 @@
   - Error-recovery procedures: wrong-path fixup, missed-file re-scan, catalog repair
 - **Priority:** low - already well-structured and executable; polishing into Level 4 is valuable but not blocking
 
-### .agents/skills/state-report.md
+### .agents/skills/state-report/SKILL.md
 - **Level:** 2
 - **Summary:** Defines a standardized markdown template for pipeline state reports, covering role, pipeline status table, errors, rails compliance, verified disk counts, and prioritized next actions.
 - **Strengths:**
@@ -151,7 +151,7 @@
   - Environment verification commands with expected counts (434+ pages)
   - Mandatory progress tracking with specific steps (flip checkbox, update counter, git add + commit)
   - Immutable facts section grounding all numbers and conventions
-  - Cross-reference to `.agents/skills/references/worker-grid.md` and `.agents/skills/references/rails.md`
+  - Cross-reference to `.agents/references/worker-grid.md` and `.agents/references/rails.md`
 - **Gaps:**
   - No example of expected extraction output - the worker is told "Extract ALL content exactly" but no sample shows what good vs. bad output looks like
   - No cross-reference to the refinement orchestrator as the next stage - the operator finishes extraction and has no pointer to Stage 2

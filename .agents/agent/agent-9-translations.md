@@ -17,7 +17,7 @@ Enrichment is ad-hoc and per-category. Different sessions add different things -
 ## SKILLS (read first)
 
 1. `.agents/skills/translations/SKILL.md` - Discovery + scaffolding protocol
-2. `.agents/skills/spec-extraction/ste-code-workers/SKILL.md` - Worker orchestration (batch-of-3 pattern)
+2. `.agents/skills/extraction/SKILL.md` - Worker orchestration (batch-of-3 pattern)
 3. `.agents/references/worker-rails.md` - Worker self-validation rails
 4. `.agents/agent/agent-3-auditor.md` - How the auditor verifies claims against disk
 

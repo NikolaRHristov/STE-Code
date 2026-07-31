@@ -406,7 +406,7 @@ PROJECT_ROOT/
 │   │   └── exchange.md
 │   ├── prompts/                       # Internal prompt templates
 │   │   └── refine/                    #   111 refinement prompt templates
-│   ├── scripts/                       # Helper scripts
+│   ├── tools/                      ← Orchestration scripts (hermes agents, quality checks)
 │   │   ├── check-rails.py
 │   │   ├── generate_refine_prompts.py
 │   │   └── verify-batch.sh
@@ -544,7 +544,7 @@ Use the naming convention table in Section 2 to decode file names.
 | Worker refined output | `ste-code/refined/rNNN-p*.md` |
 | Worker refinement prompt | `ste-code/prompts-refine/rNNN-prompt.txt` |
 | Agent orchestration prompt | `.agents/agent/agent-N-role.md` |
-| Skill definition | `.agents/skills/spec-extraction/<skill-name>/SKILL.md` |
+| Skill definition | `.agents/skills/<skill-name>/SKILL.md` |
 
 ### 12.4 Validate the Pipeline
 
@@ -1222,7 +1222,7 @@ NOTE: Run these commands from the project root. All commands are read-only.
 | Extraction empty files | `find ste-code/extracted -name "w*.md" -empty \| wc -l` | 0 |
 | Refinement empty files | `find ste-code/refined -name "r*.md" -empty \| wc -l` | 0 |
 | Audit report count | `ls .agents/audit/audit-*.md \| wc -l` | ≥ 3 |
-| Worker grid exists | `test -f .agents/skills/spec-extraction/references/worker-grid.md && echo ok` | ok |
+| Worker grid exists | `test -f .agents/references/worker-grid.md && echo ok` | ok |
 | PROGRESS.md exists | `test -f ste-code/PROGRESS.md && echo ok` | ok |
 | Check rails script exists | `test -f ste-code/check-rails.py && echo ok` | ok |
 | Batch 37 worker count | `ls ste-code/extracted/w109-*.md \| wc -l` | 1 |

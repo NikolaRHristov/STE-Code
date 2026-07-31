@@ -46,9 +46,11 @@ Role-based, self-contained skills for the STE-Code pipeline. Any agent can read 
 │   ├── artifacts/SKILL.md
 │   ├── benchmarking/SKILL.md
 │   ├── validation/SKILL.md
-│   ├── continuation/
-│   └── spec-extraction/          ← Full extraction pipeline skills
-├── references/                   ← Shared reference data
+│   ├── continuation/             ← Multi-file continuation orchestrator
+│   ├── execution-auditor/        ← Hidden state-report auditor
+│   ├── state-report/             ← State report format standard
+│   └── extension-worker/         ← Extension worker skill
+├── references/                   ← Shared reference data (shared across skills + agents)
 │   ├── worker-grid.md
 │   ├── section-types.md
 │   ├── quality-checklist.md
@@ -58,7 +60,15 @@ Role-based, self-contained skills for the STE-Code pipeline. Any agent can read 
 ├── uml/                          ← Pipeline diagrams
 ├── state/                        ← Progress tracking
 ├── audit/                        ← Auditor reports
-├── scripts/                      ← Utility scripts
+├── tools/                      ← Orchestration scripts (hermes agents, quality checks)
+│   ├── lib/                    # Core infrastructure
+│   ├── shared/                 # Shared utilities
+│   ├── runners/                # Pipeline phase runners
+│   ├── extraction/             # Spec page extraction pipeline
+│   ├── refinement/             # Level assembly + content generation
+│   ├── maintenance/            # Content fixes and gap filling
+│   ├── quality/                # Quality auditing and verification
+│   ├── benchmark/              # Benchmark execution
 └── feedback/                     ← Inter-agent communication
 ```
 

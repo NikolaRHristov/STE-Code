@@ -119,7 +119,7 @@ Full pipeline specification: 5 stages, 9 agents, adaptation levels 1-5, 59-test
 benchmark suite. Defines terminology, directory layout, and the adaptation level
 system (Level 1 = 500 tokens, Level 5 = 100K+ tokens).
 
-### 2. `.agents/skills/references/rails.md` — 8 guardrails (do not skip)
+### 2. `.agents/references/rails.md` — 8 guardrails (do not skip)
 
 Non-negotiable quality rules that apply to every orchestrator and worker:
 
