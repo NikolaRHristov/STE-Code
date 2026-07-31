@@ -14,6 +14,11 @@ exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
+
 
 def main():
     agent = None
@@ -21,11 +26,9 @@ def main():
         if arg == "--agent" and i + 1 < len(sys.argv):
             agent = sys.argv[i + 1]
 
-    prompt = f"""You are STE-Code Artifact Generator (Phase F).
-Read all adapted rule files from {ADAPTED_DIR}.
-Generate final deployable artifacts.
-Save to {ARTIFACTS_DIR}/.
-"""
+    prompt = TPL.render("phase-f-worker",
+                        adapted_dir=ADAPTED_DIR,
+                        artifacts_dir=ARTIFACTS_DIR)
 
     tmp = PROJECT / ".agents" / "tmp" / "phase-f-prompt.txt"
     tmp.parent.mkdir(parents=True, exist_ok=True)

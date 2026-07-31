@@ -13,6 +13,11 @@ exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 GROUPED_DIR = PROJECT / "ste-code" / "grouped"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
+
 
 def main():
     agent = None
@@ -21,11 +26,11 @@ def main():
             agent = sys.argv[i + 1]
 
     rule = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else None
-    prompt = f"""You are STE-Code Adaptation Worker (Phase D).
-Read the grouped document at {GROUPED_DIR}/groups-manifest.json and the group files.
-{f'Adapt rule {rule}.' if rule else 'Adapt all rules from aerospace to code domain.'}
-Save adapted rule files to {ADAPTED_DIR}/.
-"""
+    adapt_instruction = f"Adapt rule {rule}." if rule else "Adapt all rules from aerospace to code domain."
+    prompt = TPL.render("phase-d-worker",
+                        grouped_dir=GROUPED_DIR,
+                        adapted_dir=ADAPTED_DIR,
+                        adapt_instruction=adapt_instruction)
     tmp = PROJECT / ".agents" / "tmp" / f"phase-d{'-'+rule if rule else ''}.txt"
     tmp.parent.mkdir(parents=True, exist_ok=True)
     tmp.write_text(prompt)

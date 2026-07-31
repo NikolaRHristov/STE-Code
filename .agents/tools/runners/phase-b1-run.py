@@ -11,6 +11,11 @@ PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
+
 
 def main():
     agent = None
@@ -18,9 +23,7 @@ def main():
         if arg == "--agent" and i + 1 < len(sys.argv):
             agent = sys.argv[i + 1]
 
-    prompt = """You are STE-Code Continuation Refinement Worker (Phase B1).
-Continue refining extracted text from where previous workers left off.
-"""
+    prompt = TPL.render("phase-b1-worker")
 
     tmp = PROJECT / ".agents" / "tmp" / "phase-b1-prompt.txt"
     tmp.parent.mkdir(parents=True, exist_ok=True)

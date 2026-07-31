@@ -12,6 +12,11 @@ PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
+
 EXTRACTED_DIR = PROJECT / "ste-code" / "extracted"
 REFINED_DIR = PROJECT / "ste-code" / "refined"
 
@@ -24,13 +29,10 @@ def main():
 
     batch = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else "1"
 
-    prompt = f"""You are STE-Code Refinement Worker (Phase B, batch {batch}).
-Read extracted text files and reformat into clean markdown.
-Follow the refinement rules in .agents/skills/refinement/SKILL.md
-
-Extracted files: {EXTRACTED_DIR}
-Refined output: {REFINED_DIR}
-"""
+    prompt = TPL.render("phase-b-worker",
+                        batch=batch,
+                        extracted_dir=EXTRACTED_DIR,
+                        refined_dir=REFINED_DIR)
 
     tmp = PROJECT / ".agents" / "tmp" / f"phase-b-{batch}.txt"
     tmp.parent.mkdir(parents=True, exist_ok=True)
