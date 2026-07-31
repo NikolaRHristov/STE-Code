@@ -9,7 +9,7 @@ import json, subprocess, sys, time
 from pathlib import Path
 from datetime import datetime, timezone
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 TEST_DIR = PROJECT / ".agents" / "benchmark" / "test-cases"
 RESULTS_DIR = PROJECT / ".agents" / "benchmark" / "results-v3"
 

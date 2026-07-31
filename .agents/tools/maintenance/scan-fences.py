@@ -3,7 +3,7 @@
 import re
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 
 for f in sorted(PROJECT.rglob("*.md")):
     if ".git/" in str(f) or "spec/" in str(f) or "__pycache__" in str(f):

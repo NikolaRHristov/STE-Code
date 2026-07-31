@@ -14,7 +14,7 @@ import sys, re
 from pathlib import Path
 from collections import defaultdict
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 REFINED = PROJECT / "ste-code" / "refined"
 
 

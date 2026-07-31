@@ -16,7 +16,7 @@ Usage: python3 .agents/tools/maintenance/standardize-markers.py [--dry-run]
 import re, sys
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
 

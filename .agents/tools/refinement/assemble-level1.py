@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 import importlib.util
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 _tools = PROJECT / ".agents" / "tools"
 _spec = importlib.util.spec_from_file_location("agent_runner", _tools / "lib" / "agent-runner.py")
 _ar = importlib.util.module_from_spec(_spec)
