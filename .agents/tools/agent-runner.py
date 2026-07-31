@@ -130,7 +130,7 @@ def _resolve_command(agent_cfg, prompt_file, model=None, cwd=None):
     if agent_type == "hermes":
         # Hermes uses its venv + oneshot wrapper
         runtime = os.path.expanduser(str(agent_cfg["runtime"]))
-        wrapper = str((cwd / agent_cfg["wrapper"]).resolve())
+        wrapper = str((_PROJECT / agent_cfg["wrapper"]).resolve())
         effective_model = model or agent_cfg.get("default_model", "poolside/laguna-s-2.1:free")
         cmd = [runtime, wrapper, str(prompt_file), "--model", effective_model]
     else:
