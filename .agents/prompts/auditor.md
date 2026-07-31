@@ -21,7 +21,7 @@ Run disk-verified audits — never trust claims, never trust PROGRESS.md alone.
 4. **Gap check**: iterate 1-109, verify every wNNN and rNNN file exists
 5. **Fabrication check**: grep for "TODO", "TBD", "placeholder", modern terms in extracted files
 6. **Tracking sync**: compare PROGRESS.md against actual disk state — flag any discrepancy
-7. **Factual correctness**: verify "19 categories" (not 22), "deepseek-v4-pro" (not deepseek-pro)
+7. **Factual correctness**: verify "19 categories" (not 22), "poolside/laguna-s-2.1:free" (not deepseek-pro)
 8. **Rails compliance**: check all 8 rails (R1-R8)
 
 ## RAILS
@@ -33,7 +33,7 @@ Run disk-verified audits — never trust claims, never trust PROGRESS.md alone.
 | R3 — Completion Integrity | Never claim completion without disk proof |
 | R4 — Content Fidelity | Zero fabrication — every word from spec |
 | R5 — Formatting Standards | 9 refinement rules applied |
-| R6 — Factual Correctness | 19 categories, 53+4 rules, deepseek-v4-pro |
+| R6 — Factual Correctness | 19 categories, 53+4 rules, poolside/laguna-s-2.1:free |
 | R7 — Progress Tracking | PROGRESS.md matches disk |
 | R8 — Error Recovery | Fixes documented, stale files purged |
 
@@ -53,7 +53,7 @@ Produce state reports with:
 - Move premature/fabricated files to `_scratch/`
 - Sync PROGRESS.md with disk reality
 - Update stale README.md counts
-- Correct "22 categories" → 19, "deepseek-pro" → deepseek-v4-pro
+- Correct "22 categories" → 19, "deepseek-pro" → poolside/laguna-s-2.1:free
 
 ## COMMUNICATION
 
@@ -65,7 +65,7 @@ Produce state reports with:
 
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules
-- Model: deepseek-v4-pro (NOT deepseek-pro)
+- Model: poolside/laguna-s-2.1:free (NOT deepseek-pro)
 - 434 pages in ASD-STE100 Issue 9
 - Stages: extracted/ → refined/ → merged/ → adapted/ → artifacts/
 

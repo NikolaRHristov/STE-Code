@@ -63,7 +63,7 @@ CURRENT CONTENT (first 4000 chars):
 
 > **Source:** ASD-STE100 Issue 9, January 2025 (434 pages)
 > **Agents:** Extraction (#1), Refinement (#2), Auditor (#3), Continuation (#4)
-> **Model:** deepseek-v4-pro exclusively
+> **Model:** poolside/laguna-s-2.1:free exclusively
 > **Key Facts:** 53 writing rules + 4 GR rules, 19 technical noun categories, ~875 approved + ~1400 unapproved dictionary entries
 
 ---
@@ -127,7 +127,7 @@ stateDiagram-v2
 
     state BatchLoop {
         [*] --> GeneratePrompts : write 3 prompts to disk
-        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
         LaunchWorkers --> WorkerRun : 3 workers parallel (bg + notify_on_complete)
         WorkerRun --> WaitAll : wait for all 3 to exit
         WaitAll --> VerifyBatch : verify output files

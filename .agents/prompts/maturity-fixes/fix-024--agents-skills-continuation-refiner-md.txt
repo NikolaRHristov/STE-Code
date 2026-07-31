@@ -149,12 +149,12 @@ Output ONLY the refined markdown file. No explanations, no commentary.
 
 ### Launch Protocol
 
-Launch workers using ONLY `deepseek-v4-pro` (NEVER `deepseek-v4-flash`):
+Launch workers using ONLY `poolside/laguna-s-2.1:free` (NEVER `deepseek-v4-flash`):
 
 ```bash
-hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 ```
 
 ## Verification (Per Batch)

@@ -144,7 +144,7 @@ echo "GATE 0 PASSED: Environment ready"
 
 ### Worker Specification
 
-Each worker is a separate `hermes -z` session. All workers use `deepseek-v4-pro` (full reasoning capability).
+Each worker is a separate `hermes -z` session. All workers use `poolside/laguna-s-2.1:free` (full reasoning capability).
 Workers extract RAW spec text — they do NOT adapt or rewrite anything.
 
 ### Worker Assignments

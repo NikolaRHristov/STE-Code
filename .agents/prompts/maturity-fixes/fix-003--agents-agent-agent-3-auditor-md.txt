@@ -82,7 +82,7 @@ Run disk-verified audits — never trust claims, never trust PROGRESS.md alone.
 4. **Gap check**: iterate 1-109, verify every wNNN and rNNN file exists
 5. **Fabrication check**: grep for "TODO", "TBD", "placeholder", modern terms in extracted files
 6. **Tracking sync**: compare PROGRESS.md against actual disk state — flag any discrepancy
-7. **Factual correctness**: verify "19 categories" (not 22), "deepseek-v4-pro" (not deepseek-pro)
+7. **Factual correctness**: verify "19 categories" (not 22), "poolside/laguna-s-2.1:free" (not deepseek-pro)
 8. **Rails compliance**: check all 8 rails (R1-R8)
 
 ### Audit Verification Procedures

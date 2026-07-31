@@ -70,7 +70,7 @@ from datetime import datetime, timezone
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 TEST_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/test-cases")
 RESULTS_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/results-control")
-MODEL = "deepseek-v4-pro"
+MODEL = "poolside/laguna-s-2.1:free"
 
 # Plain system prompt — no STE-Code rules
 SYSTEM_PROMPT = """You are a helpful coding assistant. Write clear, professional code documentation.

@@ -119,7 +119,7 @@ each rule, category, and dictionary entry. Produce adaptation files in `ste-code
 - Every category MUST match one of the 19 from master.md
 - Every example MUST be an adaptation of a real STE/non-STE pair from the extracted spec
 - No invented code terms without a master.md source
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro or deepseek-v4-flash)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro or deepseek-v4-flash)
 
 ## Stage 5 — Artifacts
 
@@ -145,7 +145,7 @@ Full specs in `ste-code-artifacts/SKILL.md`.
 | R3 | NEVER claim a file complete until it EXISTS on disk with real content (>30 lines) |
 | R4 | Every claim backed by source data from master.md. No fabrication. |
 | R5 | `#` page, `##` section, `###` rule, `####` dictionary. Blank line after every heading. |
-| R6 | 19 categories, deepseek-v4-pro, 53 rules + 4 GR. Never claim otherwise. |
+| R6 | 19 categories, poolside/laguna-s-2.1:free, 53 rules + 4 GR. Never claim otherwise. |
 | R7 | Update `.agents/state/PROGRESS.md` after EVERY completed file. |
 | R8 | Fix mistakes immediately. Document what happened. |
 

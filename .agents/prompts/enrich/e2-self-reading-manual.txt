@@ -11,6 +11,6 @@ ENRICHMENT INSTRUCTIONS:
 5. ADD a "Migration Path" section (S9) showing how to transition an existing codebase from non-STE-Code to STE-Code in 5 phases
 6. EXPAND S6 (13 questions) with 2 follow-up sub-questions per question
 7. ADD Mermaid diagrams to S5 showing the recursive reading loop as a flowchart
-8. ENSURE consistently: deepseek-v4-pro, 19 categories (NOT 22), 53+4 rules
+8. ENSURE consistently: poolside/laguna-s-2.1:free, 19 categories (NOT 22), 53+4 rules
 
 Output ONLY the enriched markdown file. No commentary.

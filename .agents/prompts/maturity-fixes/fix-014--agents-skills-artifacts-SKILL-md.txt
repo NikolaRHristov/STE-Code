@@ -96,7 +96,7 @@ Generate 6 final STE-Code artifact files from adapted content. Agent-agnostic.
 - Every adapted rule references master.md rule number
 - Every synonym traces to master.md synonym table
 - Every example adapts a real STE/non-STE pair
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro)
 
 ## Verification
 ```bash

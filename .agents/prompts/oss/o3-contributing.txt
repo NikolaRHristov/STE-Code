@@ -25,6 +25,6 @@ REQUIRED SECTIONS:
 8. **Code of Conduct** — link to CODE_OF_CONDUCT.md
 9. **Recognition** — contributors list, all-contributors spec
 
-FACTS: 19 categories, deepseek-v4-pro, MIT license, ASD-STE100 Issue 9 source
+FACTS: 19 categories, poolside/laguna-s-2.1:free, MIT license, ASD-STE100 Issue 9 source
 
 Output ONLY the CONTRIBUTING.md content. No commentary.

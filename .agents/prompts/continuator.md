@@ -57,13 +57,13 @@ Only after ALL adaptation is complete. Write to `ste-code/artifacts/`:
 4. Every example MUST be an adaptation of a real STE/non-STE pair
 5. No invented code terms without a master.md source
 6. Write artifacts ONLY after all adaptation checkboxes pass
-7. 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+7. 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro)
 
 ## KEY FACTS (immutable)
 
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - 434 pages in ASD-STE100 Issue 9, January 2025
 
 ## START NOW

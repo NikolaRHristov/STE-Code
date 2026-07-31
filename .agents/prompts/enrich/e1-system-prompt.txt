@@ -10,7 +10,7 @@ ENRICHMENT INSTRUCTIONS:
 4. ADD a 20-entry "Code-Specific Synonym Table" section with terms unique to software (instantiate, hydrate, marshall, bootstrap, scaffold, transpile, polyfill, shim, monkey-patch, hot-reload, tree-shake, dead-code-eliminate, memoize, debounce, throttle)
 5. EXPAND each of 19 categories with 5-8 examples instead of 3-5
 6. ADD a "Rule Reference Index" mapping each of the 14 principles to the exact 53 rule numbers (1.1-9.4, GR1-GR4) they derive from
-7. ENSURE model ref is deepseek-v4-pro, 19 categories (NOT 22)
+7. ENSURE model ref is poolside/laguna-s-2.1:free, 19 categories (NOT 22)
 8. IMPROVE formatting: consistent blank lines after headings, aligned table columns
 
 Output ONLY the enriched markdown file. No commentary, no "I have improved..." preambles.

@@ -15,7 +15,7 @@ You take on the REFINER role. Your job: launch a second-pass worker swarm that r
 - Input: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - 109 workers, 37 batches of 3
-- Model: `deepseek-v4-pro` exclusively
+- Model: `poolside/laguna-s-2.1:free` exclusively
 - Prompts in: `ste-code/prompts-refine/`
 
 ## POLL SYSTEM
@@ -43,7 +43,7 @@ LAUNCH 3 workers (bg + notify_on_complete=true)
 ## 🔴 MANDATORY: Update REFINE-PROGRESS.md After Every Batch
 
 ## KEY FACTS (immutable)
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-v4-flash)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-v4-flash)
 - Zero content loss — format only
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - Follow `.agents/references/rails.md` — all 8 guardrails

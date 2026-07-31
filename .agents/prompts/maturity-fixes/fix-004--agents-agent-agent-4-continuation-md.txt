@@ -95,7 +95,7 @@ For each adapted rule in `ste-code/adapted/`, generate additional STE/non-STE co
 
 ```bash
 # Launch 3 workers per batch (same as Agent #1)
-hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 Output: `ste-code/adapted/expanded/a-secX-ruleY-examples.json`

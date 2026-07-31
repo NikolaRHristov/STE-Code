@@ -79,7 +79,7 @@ mkdir -p ste-code/extracted .agents/prompts/refine
 hermes -z "Read spec/issue-09-2025/page-<<START>>.md through page-<<END>>.md.
 Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
 Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## Expected Output Example
@@ -113,7 +113,7 @@ NOTE: Commentary or summary text is a fabrication. Discard the output.
 
 ## Launch Rules
 
-- Always use `hermes -z "$(cat ste-code/prompts-refine/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo`
+- Always use `hermes -z "$(cat ste-code/prompts-refine/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - Always launch exactly 3 workers per batch (never more)
 - Always verify output after each batch before launching next
 - Never use inline extraction — it defeats parallelization
@@ -135,7 +135,7 @@ NOTE: Commentary or summary text is a fabrication. Discard the output.
 The fastest path uses a high-concurrency API tier.
 The slowest path includes retries from rate limits or failures.
 
-NOTE: These estimates use the `deepseek-v4-pro` model. Other models
+NOTE: These estimates use the `poolside/laguna-s-2.1:free` model. Other models
 may produce different timing and token counts.
 
 ## Worker Grid (37 batches × 3 workers, 109 total)

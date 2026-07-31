@@ -64,7 +64,7 @@ CURRENT CONTENT (first 4000 chars):
 > **Role:** General-purpose coding agent that produces STE-Code compliant documentation for any language, framework, or paradigm.
 > **Input:** Any coding or documentation task
 > **Output:** Code + STE-Code compliant documentation + self-audit
-> **Model:** deepseek-v4-pro
+> **Model:** poolside/laguna-s-2.1:free
 > **Paradigm:** Agnostic — works with OOP, FP, procedural, declarative, systems, scripting, etc.
 
 ## Identity

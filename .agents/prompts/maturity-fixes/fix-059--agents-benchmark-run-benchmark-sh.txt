@@ -78,7 +78,7 @@ RUN_DIR="$RESULTS_DIR/run-$TIMESTAMP"
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 
 echo "=== STE-Code Benchmark Runner ==="
-echo "Model: deepseek-v4-pro"
+echo "Model: poolside/laguna-s-2.1:free"
 echo "Timestamp: $TIMESTAMP"
 echo ""
 
@@ -106,7 +106,7 @@ RESULTS_JSON="$RUN_DIR/aggregate-results.json"
 echo "{" > "$RESULTS_JSON"
 echo "  \"benchmark_id\": \"ste-code-v1.0.0\"," >> "$RESULTS_JSON"
 echo "  \"timestamp\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"," >> "$RESULTS_JSON"
-echo "  \"model\": \"deepseek-v4-pro\"," >> "$RESULTS_JSON"
+echo "  \"model\": \"poolside/laguna-s-2.1:free\"," >> "$RESULTS_JSON"
 echo "  \"total_tests\": $TOTAL_TESTS," >> "$RESULTS_JSON"
 echo "  \"results\": [" >> "$RESULTS_JSON"
 
@@ -148,7 +148,7 @@ $INPUT"
 
         # Run benchmark
         START_NS=$(python3 -c "import time; print(int(time.time() * 1e9))")
-        OUTPUT=$(hermes -z "$FULL_PROMPT" -m deepseek-v4-pro --yolo 2>&1 || echo "HERMES_ERROR")
+        OUTPUT=$(hermes -z "$FULL_PROMPT" -m poolside/laguna-s-2.1:free --yolo 2>&1 || echo "HERMES_ERROR")
         END_NS=$(python3 -c "import time; print(int(time.time() * 1e9))")
         LATENCY_MS=$(( (END_NS - START_NS) / 1000000 ))
 

@@ -49,7 +49,7 @@ All terms used throughout this project. Agents must use these exact terms.
 | STE writing rules | 53 original → 51 adapted + 4 GR |
 | Spec pages | 434 | — |
 | Spec version | Issue 9, January 2025 | — |
-| Worker model | `deepseek-v4-pro` | "deepseek-pro" or "flash" |
+| Worker model | `poolside/laguna-s-2.1:free` | "deepseek-pro" or "flash" |
 | Workers per batch | 3 | — |
 | Pages per worker | 4 | — |
 | Total workers | 109 | — |
@@ -98,7 +98,7 @@ All terms used throughout this project. Agents must use these exact terms.
 
 - **Error**: Agent fabricated 6 artifact files before extraction complete
 - **Error**: Claimed "22 categories" — corrected to 19
-- **Error**: Claimed "deepseek-pro normalizes to flash" — corrected to `deepseek-v4-pro`
+- **Error**: Claimed "deepseek-pro normalizes to flash" — corrected to `poolside/laguna-s-2.1:free`
 - **Error**: Agent claimed "CORE ARTIFACTS COMPLETE" with 288 pages unread
 - **Correction**: Created v2/v3 protocol with hard gates and verification
 
@@ -145,7 +145,7 @@ ls spec/issue-09-2025/page-0001.md  # Must exist
 ls spec/issue-09-2025/page-0434.md  # Must exist
 
 # Verify model available
-hermes config | grep default  # Should be deepseek-v4-pro
+hermes config | grep default  # Should be poolside/laguna-s-2.1:free
 ```
 
 ### Step 1: Directory Setup
@@ -160,9 +160,9 @@ mkdir -p .agents/{state,audit,prompts/refine,scripts,feedback,_scratch}
 ```bash
 # Generate 109 worker prompts (each: read 4 spec pages, write to extracted/)
 # Launch in batches of 3:
-hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 
 # After each batch:
 bash .agents/scripts/verify-batch.sh extracted w w001 w002 w003

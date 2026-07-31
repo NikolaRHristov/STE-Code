@@ -83,7 +83,7 @@ Generate code-domain extensions to fill gaps between aerospace ASD-STE100 and th
 ## Worker Command Template
 
 ```bash
-hermes -z "$(cat /tmp/ext-worker-prompt.txt)" -m deepseek-v4-pro --yolo > OUTPUT_FILE 2>&1 &
+hermes -z "$(cat /tmp/ext-worker-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo > OUTPUT_FILE 2>&1 &
 ```
 
 ## Launch Rules

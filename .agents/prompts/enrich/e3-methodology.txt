@@ -11,6 +11,6 @@ ENRICHMENT INSTRUCTIONS:
 5. ADD a "Failure Recovery" section: what to do when a pass fails (retry, escalate, skip)
 6. ADD a "Performance Benchmarks" section: expected tokens per pass, time per document type
 7. ADD a "Comparison Table" showing how STE's original 6-pass pipeline maps to STE-Code's adaptation
-8. ENSURE: deepseek-v4-pro, all rule references accurate
+8. ENSURE: poolside/laguna-s-2.1:free, all rule references accurate
 
 Output ONLY the enriched markdown file. No commentary.

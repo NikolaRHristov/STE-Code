@@ -85,7 +85,7 @@ You are the STE-Code REFINEMENT ORCHESTRATOR. Your job: launch a second-pass wor
 - Input: `ste-code/extracted/wNNN-pPPPP-PPPP.md` (from agent #1)
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - 109 workers, 37 batches of 3
-- Model: `deepseek-v4-pro` exclusively
+- Model: `poolside/laguna-s-2.1:free` exclusively
 - Prompts in: `.agents/prompts/refine/`
 
 ## POLL SYSTEM

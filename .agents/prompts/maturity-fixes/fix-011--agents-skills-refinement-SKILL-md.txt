@@ -158,9 +158,9 @@ Remove repetitive "ASD-STE100 Simplified Technical English" headers from body.
 
 ### Launch Protocol
 ```bash
-hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 ```
-Use ONLY deepseek-v4-pro. 3 workers per batch.
+Use ONLY poolside/laguna-s-2.1:free. 3 workers per batch.
 
 ## Verification (Per Batch)
 1. Output line count >= input line count

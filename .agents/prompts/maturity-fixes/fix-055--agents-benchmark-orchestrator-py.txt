@@ -71,7 +71,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 TEST_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/test-cases")
 RESULTS_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/results")
 SYSTEM_PROMPT_FILE = os.path.join(PROJECT_ROOT, "ste-code/artifacts/ste-code-distilled-system-prompt.txt")
-MODEL = "deepseek-v4-pro"
+MODEL = "poolside/laguna-s-2.1:free"
 
 # Load system prompt
 with open(SYSTEM_PROMPT_FILE) as f:

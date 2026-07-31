@@ -81,7 +81,7 @@ import time
 PROJECT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DEFAULT_DOCS = ["README.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "RELEASE-NOTES.md"]
 DEFAULT_OUT = os.path.join(PROJECT, ".agents", "rewrites")
-DEFAULT_MODEL = "deepseek-v4-pro"
+DEFAULT_MODEL = "poolside/laguna-s-2.1:free"
 
 DEFAULT_LEVELS = {
     1: "14 core principles only",

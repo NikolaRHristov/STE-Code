@@ -108,7 +108,7 @@ python3 .agents/benchmark/launch-levels.py
 
 This uses the canonical Hermes oneshot wrapper pattern:
 1. Writes prompt to temp file
-2. Launches `~/.hermes/hermes-agent/venv/bin/python3 hermes-oneshot-wrapper.py <prompt_file> --model deepseek-v4-pro`
+2. Launches `~/.hermes/hermes-agent/venv/bin/python3 hermes-oneshot-wrapper.py <prompt_file> --model poolside/laguna-s-2.1:free`
 3. Workers run with `session_db=None` — no session pollution
 4. Workers have `tool_gen_callback=None` — no file creation tools
 5. Output captured to `output.txt` in each level directory
@@ -119,7 +119,7 @@ This uses the canonical Hermes oneshot wrapper pattern:
 |-----------|--------|-------------|
 | Level | 1-4 | Adaptation depth (5 not yet implemented) |
 | Documents | README.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md, RELEASE-NOTES.md | Which docs to rewrite |
-| Model | deepseek-v4-pro | LLM model |
+| Model | poolside/laguna-s-2.1:free | LLM model |
 
 ## Results Format
 

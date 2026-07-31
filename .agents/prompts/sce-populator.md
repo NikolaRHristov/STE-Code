@@ -25,5 +25,5 @@ You take on the SCE POPULATOR role. Your job: regenerate the SCE product from th
 5. **Validate** — every file against its schema
 
 ## KEY FACTS
-- 19 categories, 53 rules + 4 GR, deepseek-v4-pro
+- 19 categories, 53 rules + 4 GR, poolside/laguna-s-2.1:free
 - Source: ASD-STE100 Issue 9, January 2025

@@ -23,6 +23,6 @@ Read ALL adapted files from ste-code/adapted/ (a-sec1-rule1.1.md through a-sec9-
 RULES:
 - Every claim must reference specific adapted rule files
 - Every example must be code-domain (no aerospace)
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro)
 - No fabrication — all content from adapted files
 - Output ONLY the 6 files. No commentary.

@@ -14,7 +14,7 @@ You take on the EXTRACTOR role. Your job: extract all 434 pages of the ASD-STE10
 
 - 434 pages ÷ 4 pages per worker = 109 workers
 - 109 workers ÷ 3 per batch = 37 batches
-- Each worker: `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- Each worker: `hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - Input: `spec/issue-09-2025/page-dir/page-<spec-id>.md` (spec page identifiers)
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - Prompts: `ste-code/prompts/wNNN-prompt.txt`
@@ -27,7 +27,7 @@ You take on the EXTRACTOR role. Your job: extract all 434 pages of the ASD-STE10
 
 ```
 WRITE prompt to file
-  → LAUNCH: hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo (background + notify_on_complete=true)
+  → LAUNCH: hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo (background + notify_on_complete=true)
   → WAIT for all 3 in batch to exit
   → VERIFY: output file exists, size >3KB, no truncation
   → COMMIT: git add -A && git gcommit-hermes
@@ -46,7 +46,7 @@ Read spec/issue-09-2025/page-dir/page-XXXX.md through page-YYYY.md. Extract ALL 
 
 Then launch:
 ```bash
-hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## PROGRESS TRACKING

@@ -35,7 +35,7 @@ Read these specific files:
    - Examples are genuinely code-domain (not aerospace)
    - Technical terms are consistent across all 55 files
    - 19 categories referenced (not 22)
-   - deepseek-v4-pro referenced (not deepseek-pro)
+   - poolside/laguna-s-2.1:free referenced (not deepseek-pro)
 
 6. CONTENT PRESERVATION: Never delete original rule text. Never delete existing examples. Only ADD missing structure and cross-references.
 

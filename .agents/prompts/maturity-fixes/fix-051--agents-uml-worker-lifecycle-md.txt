@@ -105,14 +105,14 @@ flowchart TD
 ### Launch Command Template
 
 ```
-hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 **Flags:**
 | Flag | Meaning |
 |------|---------|
 | `-z` | One-shot mode: execute prompt, write output, exit |
-| `-m deepseek-v4-pro` | Model selection (RAIL 6: immutable) |
+| `-m poolside/laguna-s-2.1:free` | Model selection (RAIL 6: immutable) |
 | `--yolo` | Skip confirmation prompts for file writes |
 | `background=true` | Launched via Hermes terminal with bg tracking |
 | `notify_on_complete=true` | Coordinator gets automatic exit notification |

@@ -75,7 +75,7 @@ You are the STE-Code EXTRACTION ORCHESTRATOR. Your job: extract all 434 pages of
 
 - 434 pages ÷ 4 pages per worker = 109 workers
 - 109 workers ÷ 3 per batch = 37 batches
-- Each worker: `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- Each worker: `hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - Prompts: `ste-code/prompts/wNNN-prompt.txt`
 
@@ -85,7 +85,7 @@ You are the STE-Code EXTRACTION ORCHESTRATOR. Your job: extract all 434 pages of
 
 ```
 WRITE prompt to file
-  → LAUNCH: hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo (background + notify_on_complete=true)
+  → LAUNCH: hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo (background + notify_on_complete=true)
   → WAIT for all 3 in batch to exit
   → VERIFY: output file exists, size >3KB, no truncation
   → COMMIT: git add -A && git gcommit-hermes
@@ -104,7 +104,7 @@ Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content e
 
 Then launch:
 ```bash
-hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## SAMPLE OUTPUT — w001-p1-4.md (title + highlights pages)

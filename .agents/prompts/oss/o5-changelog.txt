@@ -31,7 +31,7 @@ SECTIONS:
 ### Attribution
 - Adapted from ASD-STE100 Issue 9 (January 2025)
 - © ASD, 2025 — All rights reserved (original specification)
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 
 3. Keep a [Unreleased] section at top for future changes.
 4. Footer with version comparison links: [1.0.0]: https://github.com/NikolaRHristov/Manual/releases/tag/v1.0.0

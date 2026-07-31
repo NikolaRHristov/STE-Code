@@ -45,6 +45,6 @@ Code adaptation: "> **Non-STE:** Check if the API returns valid data and doesn't
 STE original: "> **STE:** Do the leak test of the system."
 Code adaptation: "> **STE:** Run the API validation test."
 
-KEY FACTS: 19 categories, deepseek-v4-pro, 53 rules + 4 GR, 434 pages Issue 9.
+KEY FACTS: 19 categories, poolside/laguna-s-2.1:free, 53 rules + 4 GR, 434 pages Issue 9.
 
 Output ONLY the adapted markdown file. No commentary.

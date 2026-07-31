@@ -81,7 +81,7 @@ This skill is the operational protocol for **Agent #9 — Translation Orchestrat
 - **Architecture:** Discovery loop — EXPLORE → CATALOG → CREATE PLACEHOLDERS → COMMIT → NEXT.
 - **Worker pattern:** Poll system with 3 parallel workers per batch. Each worker handles 3 locales. Use `background=true` and `notify_on_complete=true`.
 - **Scope:** 10 discovery targets in priority order. Re-scans after enrichment find new files automatically.
-- **Model:** `deepseek-v4-pro` exclusively.
+- **Model:** `poolside/laguna-s-2.1:free` exclusively.
 - **Output:** Blank placeholder files at correct paths. The catalog (`translations/catalog.md`) tracks all discoveries.
 - **Communication:** Batch completions go to `.agents/feedback/exchange.md`. State updates go to `.agents/state/TRANSLATIONS-PROGRESS.md`.
 

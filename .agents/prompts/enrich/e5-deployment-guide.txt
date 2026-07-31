@@ -12,6 +12,6 @@ ENRICHMENT INSTRUCTIONS:
 6. ADD a "Model Compatibility Matrix" table showing which models work best (deepseek-coder, qwen-coder, codestral, gpt-4, claude) with token limits
 7. ADD a "Troubleshooting" section: 5 common deployment issues + fixes
 8. ADD a "Benchmark Results" section: expected accuracy, latency, and token usage per model
-9. ENSURE: deepseek-v4-pro reference accurate, 19 categories reference
+9. ENSURE: poolside/laguna-s-2.1:free reference accurate, 19 categories reference
 
 Output ONLY the enriched markdown file. No commentary.

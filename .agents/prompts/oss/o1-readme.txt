@@ -17,12 +17,12 @@ REQUIRED SECTIONS:
 7. **Credits & Attribution** — credit ASD-STE100, ASD Europe, the original Issue 9 authors. Link to www.asd-europe.org. Note that STE-Code is an independent adaptation.
 8. **License** — MIT License reference
 9. **Citation** — BibTeX entry for academic use
-10. **Links** — GitHub repo, ASD-STE100 source, deepseek-v4-pro
+10. **Links** — GitHub repo, ASD-STE100 source, poolside/laguna-s-2.1:free
 
 CRITICAL FACTS:
 - 19 categories (NOT 22)
 - 53 writing rules + 4 GR rules
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - Source: ASD-STE100 Issue 9, January 2025, ASD Europe, Brussels
 - 434 pages adapted
 - Original STE trademark: European Union Trade Mark No. 017966390
