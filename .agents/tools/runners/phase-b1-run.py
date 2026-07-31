@@ -1,37 +1,43 @@
 #!/usr/bin/env python3
-"""Phase B1 Runner — continuation refinement worker.
+"""Phase B1 Runner — continuation / redo refinement (orchestrated).
 
-Usage: python3 .agents/tools/runners/phase-b1-run.py [--agent hermes|claude|codex]
+Delegates to .agents/tools/continuation/continue_batch.py, which re-processes
+specific refined pages from an explicit queue (produced by verify_continuation.py)
+using a checkpoint + per-item git commit. B1 writes into ste-code/refined/, which
+the Refinement agent also owns, so it REQUIRES an explicit --queue and must not
+run while the Refinement agent is actively writing.
+
+Usage:
+  python3 phase-b1-run.py                         # prints usage (needs --queue)
+  python3 phase-b1-run.py --queue Q.json [--resume]
+  python3 phase-b1-run.py --scan                  # run verify_continuation.py
 """
-
-import os, sys
+import os
+import sys
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent
-exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
-# Provides: run_agent, launch_agent, get_agent_command
-
-import sys as _sys
-_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
-from templater import Templater
-TPL = Templater(__file__)
+CONT_DIR = PROJECT / ".agents" / "tools" / "continuation"
+CONTINUE_BATCH = CONT_DIR / "continue_batch.py"
+VERIFY = CONT_DIR / "verify_continuation.py"
+VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 
 
 def main():
-    agent = None
-    for i, arg in enumerate(sys.argv):
-        if arg == "--agent" and i + 1 < len(sys.argv):
-            agent = sys.argv[i + 1]
-
-    prompt = TPL.render("phase-b1-worker")
-
-    tmp = PROJECT / ".agents" / "tmp" / "phase-b1-prompt.txt"
-    tmp.parent.mkdir(parents=True, exist_ok=True)
-    tmp.write_text(prompt)
-
-    cmd, env = get_agent_command(agent=agent, model=os.environ.get("STE_MODEL", "tencent/hy3:free"),
-                                  cwd=PROJECT, prompt_file=tmp)
-    os.execvpe(cmd[0], cmd, env)
+    args = sys.argv[1:]
+    if "--scan" in args:
+        os.execv(VENV, [VENV, str(VERIFY)])
+        return
+    if not any(a.startswith("--queue") for a in args):
+        sys.stdout.write(
+            "Phase B1 (continuation) needs an explicit redo queue.\n"
+            "  1) python3 phase-b1-run.py --scan          # build queue from refined/\n"
+            "  2) review ste-code/extensions/.continue-queue.json\n"
+            "  3) python3 phase-b1-run.py --queue <q>.json [--resume]\n"
+            "Do NOT run while the Refinement agent is writing refined/.\n"
+        )
+        sys.exit(2)
+    os.execv(VENV, [VENV, str(CONTINUE_BATCH), *args])
 
 
 if __name__ == "__main__":
