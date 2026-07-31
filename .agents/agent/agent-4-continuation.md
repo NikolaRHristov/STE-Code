@@ -11,12 +11,12 @@ These 7 skill files define the protocols, category mappings, worker patterns, an
 | 1 | `.agents/skills/continuation/SKILL.md` | Multi-agent continuation protocol | ✅ |
 | 2 | `.agents/skills/adaptation/SKILL.md` | 19-category mapping and code-domain adaptation rules | ✅ |
 | 3 | `.agents/skills/extension-worker/SKILL.md` | Code-domain gap filling with batched poll workers | ✅ |
-| 4 | `.agents/skills/merging/SKILL.md` | Stage 3 merge protocol: concatenate, deduplicate, organize | ✅ |
+| 4 | `.agents/skills/grouping/SKILL.md` | Stage 3 grouping protocol: concatenate, deduplicate, organize | ✅ |
 | 5 | `.agents/skills/artifacts/SKILL.md` | Stage 5 artifact generation: 6 deployable files, quality gates | ✅ |
 | 6 | `.agents/references/category-mapping.md` | Full 19-category reference with aerospace-to-code mappings | ✅ |
 | 7 | `.agents/references/quality-checklist.md` | Quality gates for every stage output | ✅ |
 
-NOTE: Skills #4 (merging) and #5 (artifacts) were not present in the original agent definition. They are added here because Stages 3 and 5 depend on their protocols. If master.md requires re-merge or artifacts require regeneration, consult these files first.
+NOTE: Skills #4 (grouping) and #5 (artifacts) were not present in the original agent definition. They are added here because Stages 3 and 5 depend on their protocols. If master.md requires re-merge or artifacts require regeneration, consult these files first.
 
 ## CURRENT STATE (build on, do not delete)
 
@@ -118,15 +118,15 @@ After merge and dedup, run the 53-rule grep check:
 
 ```bash
 # Count unique rule headers in master.md
-grep -c "^## Rule " ste-code/merged/master.md
+grep -c "^## Rule " ste-code/grouped/master.md
 # Expected: 53
 
 # Count guided rule headers
-grep -c "^## GR[1-4]" ste-code/merged/master.md
+grep -c "^## GR[1-4]" ste-code/grouped/master.md
 # Expected: 4
 
 # Total rule entries
-echo $(( $(grep -c "^## Rule " ste-code/merged/master.md) + $(grep -c "^## GR[1-4]" ste-code/merged/master.md) ))
+echo $(( $(grep -c "^## Rule " ste-code/grouped/master.md) + $(grep -c "^## GR[1-4]" ste-code/grouped/master.md) ))
 # Expected: 57
 ```
 
@@ -283,7 +283,7 @@ hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 
 Output: `ste-code/adapted/expanded/a-secX-ruleY-examples.json`
 
-**Dedup against:** `ste-code/adapted/a-sec1-rule1.1.md` through `a-sec9-gr4.md` (all existing code examples), `ste-code/merged/master.md` (all aerospace examples)
+**Dedup against:** `ste-code/adapted/a-sec1-rule1.1.md` through `a-sec9-gr4.md` (all existing code examples), `ste-code/grouped/master.md` (all aerospace examples)
 
 ### Pass 2: Dictionary Depth (code-domain equivalents)
 For every aerospace dictionary entry, generate a code-domain equivalent where applicable. "Engine" → "Server", "Ream" → "Refactor", "Flange" → "Interface".
@@ -334,7 +334,7 @@ Output: `ste-code/adapted/expanded/locale-placeholders/`
 
 **Detection:** The dedup sliding window (4 lines) finds a header match but the body text differs by more than 20% (Levenshtein distance threshold).
 
-**Resolution:** Keep the FIRST occurrence. Log the conflict to `ste-code/merged/conflicts.log` with both file paths, both full rule texts, and a `MANUAL_REVIEW` flag. The log format:
+**Resolution:** Keep the FIRST occurrence. Log the conflict to `ste-code/grouped/conflicts.log` with both file paths, both full rule texts, and a `MANUAL_REVIEW` flag. The log format:
 
 ```
 CONFLICT rule=1.1 source_a=file-027.md source_b=file-028.md distance=0.34 action=KEEP_FIRST flag=MANUAL_REVIEW
@@ -351,7 +351,7 @@ After all passes complete, review `conflicts.log` and resolve each flagged entry
 - File contains no `## Rule ` or `## GR` header
 - File contains only whitespace characters
 
-**Resolution:** Skip the corrupt file. Write an error entry to `ste-code/merged/errors.log`:
+**Resolution:** Skip the corrupt file. Write an error entry to `ste-code/grouped/errors.log`:
 
 ```
 ERROR file=refined-042.md reason=EMPTY action=SKIPPED stage=merge
@@ -590,7 +590,7 @@ Each pass prompt must include a list of already-used examples so workers can avo
 
 ### Worker Output Validation Schema
 
-Every worker JSON output must conform to this structure. Validate before merging:
+Every worker JSON output must conform to this structure. Validate before grouping:
 
 **Pass 1 - Rule Examples:**
 ```json

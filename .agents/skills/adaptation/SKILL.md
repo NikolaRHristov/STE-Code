@@ -2,7 +2,7 @@
 
 Transform STE rules into STE-Code (coding domain). Agent-agnostic.
 
-## Input: `ste-code/merged/master.md`
+## Input: `ste-code/grouped/master.md`
 ## Output: `ste-code/adapted/` (rule-by-rule STE→STE-Code)
 
 ## PRESERVE (unchanged)
@@ -233,7 +233,7 @@ hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m poolside/laguna
 
 ### Prerequisites
 
-- `ste-code/merged/master.md` must exist and pass all merge verification gates
+- `ste-code/grouped/master.md` must exist and pass all merge verification gates
 - All 53 rules must be present and numbered correctly
 - All 19 categories must be enumerated
 - Dictionary entries must cover A-Z
@@ -285,7 +285,7 @@ grep -l "Non-STE:" ste-code/adapted/a-sec*-rule*.md | wc -l
 ### Gate 4 - Adaptation Fidelity (Spot Check)
 
 Pick 5 random adapted rules. For each:
-1. Read the original rule text in `ste-code/merged/master.md`
+1. Read the original rule text in `ste-code/grouped/master.md`
 2. Read the adapted rule in `ste-code/adapted/a-secN-ruleX.Y.md`
 3. Verify that the adaptation:
    - Preserves the rule number and core instruction

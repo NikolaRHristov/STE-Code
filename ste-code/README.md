@@ -17,11 +17,11 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 ├──────────────────────────────────────────────────────────────────┤
 │ STAGE 3: MERGE                                                  │
 │   Input:  ste-code/refined/r*-p*.md                             │
-│   Output: ste-code/merged/master.md (23,737 lines, 780KB)       │
+│   Output: ste-code/grouped/master.md (23,737 lines, 780KB)       │
 │   Status: ✅ Complete                                           │
 ├──────────────────────────────────────────────────────────────────┤
 │ STAGE 4: ADAPTATION                                              │
-│   Input:  ste-code/merged/master.md                             │
+│   Input:  ste-code/grouped/master.md                             │
 │   Output: ste-code/adapted/ (57 files: 51 rules + 4 GR +        │
 │           dictionary + categories)                               │
 │   Status: ✅ Complete                                           │

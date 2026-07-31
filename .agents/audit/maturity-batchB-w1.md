@@ -43,7 +43,7 @@
 - **What Level 4 Would Add:** Side-by-side before/after examples for each of the 9 rules demonstrating raw extraction input vs. refined output. Edge case catalog: at least one documented edge case per rule with prescribed handling. Failure recovery matrix: which verification failures map to which recovery actions. Rationale section explaining design decisions (why blockquote format for STE/non-STE, why 2-space indent, why bold for proper names). Performance benchmark data from at least one full pipeline run.
 - **Priority:** low
 
-### .agents/skills/merging/SKILL.md
+### .agents/skills/grouping/SKILL.md
 - **Level:** 2
 - **Summary:** Concatenates 109 worker extraction files into a single master document with deduplication and section organization. Agent-agnostic stage 3 skill.
 - **Strengths:**
@@ -96,12 +96,12 @@
 ## Batch Summary
 - Files scored: 4
 - Level distribution: -2:0 -1:0 1:0 2:3 3:1 4:0 5:0
-- Highest priority: merging (high - lacks deduplication algorithm, failure recovery, and cross-references despite being the critical consolidation step), adaptation (high - lacks execution instructions, examples, and fails to enumerate referenced components such as verb categories and 6-pass pipeline)
+- Highest priority: grouping (high - lacks deduplication algorithm, failure recovery, and cross-references despite being the critical consolidation step), adaptation (high - lacks execution instructions, examples, and fails to enumerate referenced components such as verb categories and 6-pass pipeline)
 - Pattern observations:
   - **Universal gap: no before/after examples.** All four files describe what to produce but never show it. Refinement comes closest with target-format code blocks, but none show the transformation in action.
   - **Universal gap: no edge case handling.** No file discusses what happens when input is malformed, boundaries are ambiguous, or content resists the prescribed transformation. The only recovery mechanism anywhere is extraction's "re-extract with half page range."
   - **Universal gap: no rationale.** Design decisions (batch sizes, rule counts, formatting choices, deduplication categories) are stated as facts without explanation. This makes the skills brittle - a future maintainer cannot assess whether a constraint is load-bearing or arbitrary.
   - **Universal gap: no performance data.** Token budgets, wall-clock estimates, and I/O costs are absent across all four files.
   - **Cross-references are shallow.** All referenced files exist on disk, but no skill explains what information to extract from them or how they interact. They are listed, not integrated.
-  - **Versioning is inconsistent.** Extraction has version "3.0.0" in frontmatter; merging has "1.0.0"; refinement and adaptation have no version at all. No file has a changelog.
-  - **The pipeline stages are interdependent but the skills don't cross-reference each other.** Refinement receives extraction's output; merging receives refinement's output; adaptation receives merging's output. Only merging hints at its dependency (GATE 1). The others are siloed.
+  - **Versioning is inconsistent.** Extraction has version "3.0.0" in frontmatter; grouping has "1.0.0"; refinement and adaptation have no version at all. No file has a changelog.
+  - **The pipeline stages are interdependent but the skills don't cross-reference each other.** Refinement receives extraction's output; grouping receives refinement's output; adaptation receives grouping's output. Only grouping hints at its dependency (GATE 1). The others are siloed.

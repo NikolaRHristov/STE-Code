@@ -50,19 +50,19 @@ Verify that no stage directory contains files that belong to a different stage. 
 1. **Stage directory inventory**:
    ```bash
    # List all directories under ste-code/ - only expected stage dirs should exist
-   ls -d ste-code/*/ 2>/dev/null | grep -v "ste-code/extracted/\|ste-code/refined/\|ste-code/merged/\|ste-code/adapted/\|ste-code/artifacts/\|ste-code/audit/\|ste-code/_scratch/\|ste-code/prompts/"
+   ls -d ste-code/*/ 2>/dev/null | grep -v "ste-code/extracted/\|ste-code/refined/\|ste-code/grouped/\|ste-code/adapted/\|ste-code/artifacts/\|ste-code/audit/\|ste-code/_scratch/\|ste-code/prompts/"
    ```
 
 2. **Cross-contamination check - extracted files in wrong directories**:
    ```bash
    # wNNN files must ONLY be in extracted/ - flag any elsewhere
-   find ste-code/refined/ ste-code/merged/ ste-code/adapted/ ste-code/artifacts/ -name "w*-p*.md" 2>/dev/null
+   find ste-code/refined/ ste-code/grouped/ ste-code/adapted/ ste-code/artifacts/ -name "w*-p*.md" 2>/dev/null
    ```
 
 3. **Cross-contamination check - refined files in wrong directories**:
    ```bash
    # rNNN files must ONLY be in refined/ - flag any elsewhere
-   find ste-code/extracted/ ste-code/merged/ ste-code/adapted/ ste-code/artifacts/ -name "r*-p*.md" 2>/dev/null
+   find ste-code/extracted/ ste-code/grouped/ ste-code/adapted/ ste-code/artifacts/ -name "r*-p*.md" 2>/dev/null
    ```
 
 4. **Timestamp ordering check**:
@@ -196,7 +196,7 @@ Do not read all 109 files. Use statistical sampling with automated checks:
    grep -ril "TODO\|TBD\|placeholder\|FIXME\|...to be completed" ste-code/extracted/ ste-code/refined/
 
    # Wrong factual claims (must return zero matches)
-   grep -ril "22 categories\|deepseek-pro[^-]\|65 rules\|Issue 6" ste-code/ ste-code/refined/ ste-code/adapted/ ste-code/merged/ ste-code/artifacts/
+   grep -ril "22 categories\|deepseek-pro[^-]\|65 rules\|Issue 6" ste-code/ ste-code/refined/ ste-code/adapted/ ste-code/grouped/ ste-code/artifacts/
    ```
 
 3. **Spot-check**: Open the 5 sampled files from step 1. Read the first 20 lines and the last 10 lines of each. Verify:
@@ -262,13 +262,13 @@ Verify that immutable facts are correct across all pipeline files. These facts m
 1. **Primary fact scan** - run on all pipeline directories:
    ```bash
    # Scan for wrong category count (must return zero matches)
-   grep -rn "22 categor" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/merged/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
+   grep -rn "22 categor" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/grouped/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
 
    # Scan for wrong model name (must return zero matches - allow "poolside/laguna-s-2.1:free" only)
-   grep -rn "deepseek-pro[^-]" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/merged/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
+   grep -rn "deepseek-pro[^-]" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/grouped/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
 
    # Scan for wrong rule count (must return zero matches)
-   grep -rn "65 rules\|Issue 6" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/merged/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
+   grep -rn "65 rules\|Issue 6" ste-code/ ste-code/extracted/ ste-code/refined/ ste-code/grouped/ ste-code/adapted/ ste-code/artifacts/ 2>/dev/null
 
    # Scan for wrong output format claims (must return zero matches)
    grep -rn "JSON structured\|output.*JSON\|output.*json" ste-code/ ste-code/extracted/ ste-code/refined/ 2>/dev/null
@@ -317,7 +317,7 @@ Verify that PROGRESS.md reflects disk reality. This is the bridge between agent 
    echo "Disk reality:"
    echo "Extracted: $(find ste-code/extracted -name 'w*-p*.md' 2>/dev/null | wc -l | tr -d ' ') files"
    echo "Refined:   $(find ste-code/refined -name 'r*-p*.md' 2>/dev/null | wc -l | tr -d ' ') files"
-   echo "Merged:    $(find ste-code/merged -name '*.md' 2>/dev/null | wc -l | tr -d ' ') files"
+   echo "Merged:    $(find ste-code/grouped -name '*.md' 2>/dev/null | wc -l | tr -d ' ') files"
    echo "Adapted:   $(find ste-code/adapted -name '*.md' 2>/dev/null | wc -l | tr -d ' ') files"
    echo "Artifacts: $(find ste-code/artifacts -name '*.txt' 2>/dev/null | wc -l | tr -d ' ') files"
    ```
@@ -501,7 +501,7 @@ Source: `.agents/state/PROGRESS.md`, `.agents/feedback/exchange.md` (Turn 5-9), 
 
 | # | Claim | Evidence | Discrepancy |
 |---|-------|----------|-------------|
-| 4 | `ste-code/merged/master-raw.md` timestamp: 01:15 | `ste-code/refined/r109-p433-434.md` timestamp: 01:42 | Merge file created BEFORE refinement completed - may use stale input |
+| 4 | `ste-code/grouped/master-raw.md` timestamp: 01:15 | `ste-code/refined/r109-p433-434.md` timestamp: 01:42 | Merge file created BEFORE refinement completed - may use stale input |
 
 ## Verified Claims (✅)
 
@@ -544,7 +544,7 @@ Source: `.agents/state/PROGRESS.md`, `.agents/feedback/exchange.md` (Turn 5-9), 
 ```
 ste-code/extracted/:  107 files, 698 KB  (expected: 109)
 ste-code/refined/:    109 files, 912 KB  (expected: 109)
-ste-code/merged/:       2 files, 1.5 MB  (expected: 2)
+ste-code/grouped/:       2 files, 1.5 MB  (expected: 2)
 ste-code/adapted/:     55 files, 547 KB  (expected: 55)
 ste-code/artifacts/:    6 files, 253 KB  (expected: 6)
 ste-code/audit/:        3 files,  17 KB
@@ -837,7 +837,7 @@ Run these commands for a 30-second pipeline health check. If any command returns
 # 1. File existence (expected: 109, 109, 2, 55, 6)
 echo "Extracted: $(find ste-code/extracted -name 'w*-p*.md' 2>/dev/null | wc -l | tr -d ' ')"
 echo "Refined:   $(find ste-code/refined -name 'r*-p*.md' 2>/dev/null | wc -l | tr -d ' ')"
-echo "Merged:    $(find ste-code/merged -name '*.md' 2>/dev/null | wc -l | tr -d ' ')"
+echo "Merged:    $(find ste-code/grouped -name '*.md' 2>/dev/null | wc -l | tr -d ' ')"
 echo "Adapted:   $(find ste-code/adapted -name '*.md' 2>/dev/null | wc -l | tr -d ' ')"
 echo "Artifacts: $(find ste-code/artifacts -name '*.txt' 2>/dev/null | wc -l | tr -d ' ')"
 

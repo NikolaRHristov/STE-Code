@@ -520,7 +520,7 @@ CHECK: Does a table row split across pages?
   NO  → No action needed.
   YES → The worker output preserves each page table separately.
          This is correct behavior. Do not try to merge rows.
-         The refinement stage (Agent #2) handles row merging.
+         The refinement stage (Agent #2) handles row grouping.
 ```
 
 NOTE: Approximately 15 dictionary tables split across page boundaries. Do not flag these as extraction errors.

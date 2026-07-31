@@ -762,7 +762,7 @@ stateDiagram-v2
 |-------|-------|-------|--------|---------|-------|------|
 | 1 — Extract | #1 | 434 spec pages | `ste-code/extracted/` | 109 (37×3) | 109 | GATE 0 → GATE 1 |
 | 2 — Refine | #2 | `extracted/` | `ste-code/refined/` | 109 (37×3) | 109 | GATE 1 → GATE 2 |
-| 3 — Merge | #4 | `refined/` | `ste-code/merged/` | 1 (sequential) | 2 | GATE 2 → GATE 3 |
+| 3 — Merge | #4 | `refined/` | `ste-code/grouped/` | 1 (sequential) | 2 | GATE 2 → GATE 3 |
 | 4 — Adapt | #4 | `merged/` | `ste-code/adapted/` | 1 (sequential) | ≥10 | GATE 3 → GATE 4 |
 | 5 — Artifacts | #4 | `adapted/` | `ste-code/artifacts/` | 1 (sequential) | 6 | GATE 4 → FINAL |
 
@@ -1139,7 +1139,7 @@ checks:
     fail_action: "fix paths and retry"
   - id: G0-02
     description: "ste-code/ directory structure created"
-    command: "test -d ste-code/extracted && test -d ste-code/refined && test -d ste-code/merged && test -d ste-code/adapted && test -d ste-code/artifacts"
+    command: "test -d ste-code/extracted && test -d ste-code/refined && test -d ste-code/grouped && test -d ste-code/adapted && test -d ste-code/artifacts"
     expected: "exit 0"
     severity: critical
     fail_action: "mkdir -p for missing directories"
@@ -1295,43 +1295,43 @@ description: "Verify the merged master document is complete and correct"
 checks:
   - id: G3-01
     description: "master-raw.md exists"
-    command: "test -f ste-code/merged/master-raw.md"
+    command: "test -f ste-code/grouped/master-raw.md"
     expected: "exit 0"
     severity: critical
     fail_action: "redo concatenation from refined files"
   - id: G3-02
     description: "master.md exists (deduplicated)"
-    command: "test -f ste-code/merged/master.md"
+    command: "test -f ste-code/grouped/master.md"
     expected: "exit 0"
     severity: critical
     fail_action: "redo deduplication and organization pass"
   - id: G3-03
     description: "Exactly 53 rules present"
-    command: "grep -c '^#### Rule' ste-code/merged/master.md"
+    command: "grep -c '^#### Rule' ste-code/grouped/master.md"
     expected: "53"
     severity: critical
     fail_action: "redo merge; check for missing or duplicated rules"
   - id: G3-04
     description: "19 technical noun categories present"
-    command: "grep -c '^### Category' ste-code/merged/master.md"
+    command: "grep -c '^### Category' ste-code/grouped/master.md"
     expected: "19"
     severity: critical
     fail_action: "redo merge; check category boundary deduplication"
   - id: G3-05
     description: "Approximately 875 APPROVED dictionary entries"
-    command: "grep -c 'APPROVED' ste-code/merged/master.md"
+    command: "grep -c 'APPROVED' ste-code/grouped/master.md"
     expected: ">= 800 AND <= 950"
     severity: warning
     fail_action: "investigate discrepancy; may indicate boundary merge errors"
   - id: G3-06
     description: "Approximately 1400 UNAPPROVED dictionary entries"
-    command: "grep -c 'UNAPPROVED' ste-code/merged/master.md"
+    command: "grep -c 'UNAPPROVED' ste-code/grouped/master.md"
     expected: ">= 1300 AND <= 1500"
     severity: warning
     fail_action: "investigate discrepancy; may indicate boundary merge errors"
   - id: G3-07
     description: "Section organization correct"
-    command: "grep '^## ' ste-code/merged/master.md"
+    command: "grep '^## ' ste-code/grouped/master.md"
     expected: "Front matter, Part 1, Categories, Part 2, Appendices (in order)"
     severity: critical
     fail_action: "reorganize sections"

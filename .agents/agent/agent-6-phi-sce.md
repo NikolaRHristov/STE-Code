@@ -325,7 +325,7 @@ This agent operates within the STE-Code pipeline. Refer to these sources:
 | `ste-code/adapted/a-dictionary.md` (5,943 lines) | Complete approved/unapproved word dictionary - consult for P1-P3 compliance |
 | `ste-code/adapted/` (57 files, 9,400 lines) | All 53 adapted ASD-STE100 rules for the code domain - consult for P4-P14 deep reference |
 | `ste-code/artifacts/ste-code-distilled-system-prompt.txt` | Level 1 system prompt (~1,200 tokens) - use as quick-reference for the 14 principles |
-| `ste-code/merged/master.md` (23,737 lines) | Full merged standard - canonical source for all rules and dictionary entries |
+| `ste-code/grouped/master.md` (23,737 lines) | Full merged standard - canonical source for all rules and dictionary entries |
 | `.agents/agent/agent-1-extractor.md` | Extractor agent - extracts raw text from spec pages (stage 1 of pipeline) |
 | `.agents/agent/agent-2-refiner.md` | Refiner agent - reformats extracted text into clean markdown (stage 2) |
 | `.agents/agent/agent-3-auditor.md` | Auditor agent - verifies claims against disk evidence |

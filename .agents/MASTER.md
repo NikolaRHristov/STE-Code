@@ -16,7 +16,7 @@ All terms used throughout this project. Agents must use these exact terms.
 |------|-----------|------------|
 | **Extraction** | `ste-code/extracted/` | Stage 1: Raw text extraction from ASD-STE100 spec pages |
 | **Refinement** | `ste-code/refined/` | Stage 2: Formatting raw extraction into clean markdown |
-| **Merge** | `ste-code/merged/` | Stage 3: Concatenate, deduplicate, organize into master.md |
+| **Merge** | `ste-code/grouped/` | Stage 3: Concatenate, deduplicate, organize into master.md |
 | **Adaptation** | `ste-code/adapted/` | Stage 4: Transform STE rules into STE-Code (coding domain) |
 | **Artifacts** | `ste-code/artifacts/` | Stage 5: Generate 6 final .txt output files |
 
@@ -61,7 +61,7 @@ All terms used throughout this project. Agents must use these exact terms.
 |------|------|----------|
 | `ste-code/extracted/` | Data | 109 raw extraction .md files |
 | `ste-code/refined/` | Data | 109 formatted .md files |
-| `ste-code/merged/` | Data | master-raw.md, master.md |
+| `ste-code/grouped/` | Data | master-raw.md, master.md |
 | `ste-code/adapted/` | Data | Per-rule adaptation .md files |
 | `ste-code/artifacts/` | Data | 6 final .txt artifact files |
 | `ste-code/README.md` | Data | Pipeline documentation |
@@ -181,9 +181,9 @@ bash .agents/tools/quality/verify-batch.sh refined r r001 r002 r003
 ### Step 4: Merge
 
 ```bash
-cat ste-code/refined/r*-p*.md > ste-code/merged/master-raw.md
+cat ste-code/refined/r*-p*.md > ste-code/grouped/master-raw.md
 # Deduplicate, organize by section, validate completeness
-# Output: ste-code/merged/master.md
+# Output: ste-code/grouped/master.md
 ```
 
 ### Step 5: Adapt

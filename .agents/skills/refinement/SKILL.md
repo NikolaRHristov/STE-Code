@@ -354,7 +354,7 @@ The 9 rules address the 9 distinct classes of formatting degradation observed du
 | R1 | Content loss | Worker truncation or premature output end |
 | R2 | Heading chaos | PDF heading extraction without level metadata |
 | R3 | Table fragmentation | 4-column PDF grid misaligned with 2-column logical table |
-| R4 | Example merging | `/` delimiter in prose not recognized as boundary |
+| R4 | Example grouping | `/` delimiter in prose not recognized as boundary |
 | R5 | Bare code fences | Language metadata lost in text extraction |
 | R6 | Dictionary flattening | Key-value structure flattened to prose during PDF parse |
 | R7 | Header repetition | PDF page headers extracted as body content |

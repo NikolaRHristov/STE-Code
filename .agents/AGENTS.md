@@ -171,7 +171,7 @@ python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pai
 |-------|------|-------------|
 | Extraction | `skills/extraction/SKILL.md` | 109 parallel workers, 4 pages each, 37 batches |
 | Refinement | `skills/refinement/SKILL.md` | 9 formatting rules, section-aware v2 workers |
-| Merging | `skills/merging/SKILL.md` | Concatenate, deduplicate, organize 109 files |
+| Merging | `skills/grouping/SKILL.md` | Concatenate, deduplicate, organize 109 files |
 | Adaptation | `skills/adaptation/SKILL.md` | 53 rules → code domain, 19 categories |
 | Artifacts | `skills/artifacts/SKILL.md` | 6 deployable files, quality gates |
 | Auditing | `skills/auditing/SKILL.md` | 8-rail verification, fabrication detection |

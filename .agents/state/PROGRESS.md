@@ -5,7 +5,7 @@
 
 ## GATE 0: Environment ✓
 - [x] Paths verified
-- [x] Directories created (`ste-code/extracted/`, `ste-code/refined/`, `ste-code/audit/`, `ste-code/merged/`)
+- [x] Directories created (`ste-code/extracted/`, `ste-code/refined/`, `ste-code/audit/`, `ste-code/grouped/`)
 - [x] Model configured: `poolside/laguna-s-2.1:free` (corrected from invalid model name)
 - [x] State saved via git
 
@@ -21,11 +21,11 @@ Previous extraction files were from an incompatible PDF version. Cleared and res
 
 | Batch | Workers | Pages | Status |
 |-------|---------|-------|--------|
-| 01 | W001, W002, W003 | 1-12 | [ ] |
-| 02 | W004, W005, W006 | 13-24 | [ ] |
-| 03 | W007, W008, W009 | 25-36 | [ ] |
-| 04 | W010, W011, W012 | 37-48 | [ ] |
-| 05 | W013, W014, W015 | 49-60 | [ ] |
+| 01 | W001, W002, W003 | 1-12 | [x] |
+| 02 | W004, W005, W006 | 13-24 | [x] |
+| 03 | W007, W008, W009 | 25-36 | [x] |
+| 04 | W010, W011, W012 | 37-48 | [x] |
+| 05 | W013, W014, W015 | 49-60 | [x] |
 | 06 | W016, W017, W018 | 61-72 | [ ] |
 | 07 | W019, W020, W021 | 73-84 | [ ] |
 | 08 | W022, W023, W024 | 85-96 | [ ] |
@@ -76,7 +76,7 @@ Previous extraction files were from an incompatible PDF version. Cleared and res
 ---
 
 ## GATE 2: Merge (PENDING)
-- [ ] `ste-code/merged/master.md` — regenerate from fresh extracted files
+- [ ] `ste-code/grouped/master.md` — regenerate from fresh extracted files
 - [ ] All 434 page headers present (`# Page N of 434`)
 
 ## GATE 3: Adaptation (PENDING)

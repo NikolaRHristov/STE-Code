@@ -681,7 +681,7 @@ When a section is no longer relevant:
 
 When two agents propose edits to the same section:
 1. The agent that detects the conflict must flag it in exchange.md.
-2. The reviewer resolves the conflict by choosing one edit or merging both.
+2. The reviewer resolves the conflict by choosing one edit or grouping both.
 3. No agent should overwrite another agent's unacknowledged edit.
 4. If an edit has been in the document for less than 1 pipeline run, treat it as "fresh" and do not overwrite it.
 
@@ -1193,7 +1193,7 @@ NOTE: These patterns describe communication behaviors that degrade pipeline reli
 
 **Risk:** The pipeline amplifies a small initial error into a large final error. The fabricated content passes through all quality gates because each gate assumes the previous stage was correct.
 
-**Remedy:** Every agent must independently verify the previous stage's output before starting work. Agent #2 must `find extracted/*.md | wc -l` before launching refinement. Agent #4 must count refined files before merging. Trust no claim without verification.
+**Remedy:** Every agent must independently verify the previous stage's output before starting work. Agent #2 must `find extracted/*.md | wc -l` before launching refinement. Agent #4 must count refined files before grouping. Trust no claim without verification.
 
 #### AP7 — Trust-Me
 

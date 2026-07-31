@@ -122,7 +122,7 @@ Before output, verify:
 │   ↓ refined by Agent #2 (109 workers, 9 formatting rules)   │
 │ ste-code/refined/r001-p1-4.md ... r109-p433-434.md          │
 │   ↓ merged by Agent #4 Stage 3                              │
-│ ste-code/merged/master.md (20,794 lines, deduplicated)      │
+│ ste-code/grouped/master.md (20,794 lines, deduplicated)      │
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐

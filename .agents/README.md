@@ -41,7 +41,7 @@ Role-based, self-contained skills for the STE-Code pipeline. Any agent can read 
 │   ├── extraction/SKILL.md
 │   ├── refinement/SKILL.md
 │   ├── auditing/SKILL.md
-│   ├── merging/SKILL.md
+│   ├── grouping/SKILL.md
 │   ├── adaptation/SKILL.md
 │   ├── artifacts/SKILL.md
 │   ├── benchmarking/SKILL.md

@@ -272,7 +272,7 @@ ste-code/extracted/w042b-p167-168.md
 cat w042a-p165-166.md w042b-p167-168.md > w042-p165-168.md
 ```
 
-NOTE: Split sub-workers use the same prompt template with adjusted page ranges. The worker rails (W1-W10) still apply. After merging, verify the combined file passes all 3 gates before committing.
+NOTE: Split sub-workers use the same prompt template with adjusted page ranges. The worker rails (W1-W10) still apply. After grouping, verify the combined file passes all 3 gates before committing.
 
 ### Escalation Criteria
 

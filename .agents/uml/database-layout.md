@@ -130,7 +130,7 @@ graph TD
 
     EXTRACTED -->|"Stage 2: Refinement<br/>109 parallel workers<br/>9 formatting rules"| REFINED["ste-code/refined/<br/>r001-p1-4.md ... r109-p433-434.md<br/>(109 clean markdown files)"]
 
-    REFINED -->|"Stage 3: Merge<br/>Concatenate + deduplicate<br/>organize by section type"| MERGED["ste-code/merged/<br/>master-raw.md (710KB concat)<br/>master.md (9.4KB organized)"]
+    REFINED -->|"Stage 3: Merge<br/>Concatenate + deduplicate<br/>organize by section type"| MERGED["ste-code/grouped/<br/>master-raw.md (710KB concat)<br/>master.md (9.4KB organized)"]
 
     MERGED -->|"Stage 4: Adaptation<br/>Rule-by-rule STE→STE-Code<br/>19-category mapping"| ADAPTED["ste-code/adapted/<br/>(rule-by-rule transformed files)"]
 
@@ -445,7 +445,7 @@ PROJECT_ROOT/
 |----------|-------|------|
 | `ste-code/extracted/` | 109 | Raw extraction .md |
 | `ste-code/refined/` | 109 | Refined .md |
-| `ste-code/merged/` | 2 | master-raw.md + master.md |
+| `ste-code/grouped/` | 2 | master-raw.md + master.md |
 | `ste-code/adapted/` | 0 | (pending) |
 | `ste-code/artifacts/` | 0 | (pending) |
 | `ste-code/audit/` | 0 | (pending) |
@@ -503,7 +503,7 @@ graph LR
 | `wNNN-pPPPP-PPPP.md` | `ste-code/extracted/` | `w001-p1-4.md` | Extraction worker NNN, pages PPPP–PPPP |
 | `rNNN-pPPPP-PPPP.md` | `ste-code/refined/` | `r001-p1-4.md` | Refinement worker NNN, pages PPPP–PPPP |
 | `rNNN-prompt.txt` | `ste-code/prompts-refine/` | `r001-prompt.txt` | Refinement prompt for worker NNN |
-| `master*.md` | `ste-code/merged/` | `master.md` | Consolidated spec (organized) |
+| `master*.md` | `ste-code/grouped/` | `master.md` | Consolidated spec (organized) |
 | `audit-YYYYMMDD-HHMMSS.md` | `.agents/audit/` | `audit-20260729-211611.md` | Timestamped audit report |
 | `state-YYYYMMDD-HHMMSS.md` | `.agents/audit/` | `state-20260729-214707.md` | Timestamped state snapshot |
 | `agent-N-role.md` | `.agents/prompts/` | `agent-1-extractor.md` | Agent N orchestration prompt |
@@ -610,7 +610,7 @@ Use this chain to trace a specific rule or word through all pipeline stages:
 | Source page | `spec/issue-09-2025/page-NNNN.md` | Page containing the rule text |
 | Extracted | `ste-code/extracted/wNNN-p*.md` | Worker that processed that page range |
 | Refined | `ste-code/refined/rNNN-p*.md` | Refined output for the same pages |
-| Merged | `ste-code/merged/master.md` | Organized consolidated output |
+| Merged | `ste-code/grouped/master.md` | Organized consolidated output |
 | Adapted | `ste-code/adapted/<category>/` | Category-specific adapted rule |
 | Artifact | `ste-code/artifacts/*.txt` | Final deployable artifact |
 
@@ -666,7 +666,7 @@ Update it when the pipeline structure changes.
 ### 13.1 When Stage 3 (Merge) Completes
 
 - Update Section 3, Stage Details table: change Stage 3 "Status" from "Pending" to "Complete".
-- Update Section 9, File Count Summary: set `ste-code/merged/` count to the actual number of files.
+- Update Section 9, File Count Summary: set `ste-code/grouped/` count to the actual number of files.
 - Add example merged file names if they differ from `master-raw.md` and `master.md`.
 
 ### 13.2 When Stages 4-5 (Adaptation and Artifacts) Complete
@@ -716,7 +716,7 @@ To regenerate file counts for Section 9 after a pipeline stage completes, use:
 echo "=== Section 9 Auto-Counts ==="
 echo "extracted: $(ls ste-code/extracted/w*.md 2>/dev/null | wc -l)"
 echo "refined: $(ls ste-code/refined/r*.md 2>/dev/null | wc -l)"
-echo "merged: $(ls ste-code/merged/*.md 2>/dev/null | wc -l)"
+echo "merged: $(ls ste-code/grouped/*.md 2>/dev/null | wc -l)"
 echo "adapted: $(find ste-code/adapted -type f 2>/dev/null | wc -l)"
 echo "artifacts: $(ls ste-code/artifacts/*.txt 2>/dev/null | wc -l)"
 echo "audit: $(ls ste-code/audit/*.md 2>/dev/null | wc -l)"
@@ -990,7 +990,7 @@ Actual times change with model load and network conditions.
 |-----------|-------|---------------|------------|
 | `ste-code/extracted/` | 109 | 2–8 KB | ~500 KB |
 | `ste-code/refined/` | 109 | 2–8 KB | ~500 KB |
-| `ste-code/merged/` | 2 | 720 KB | ~720 KB |
+| `ste-code/grouped/` | 2 | 720 KB | ~720 KB |
 | `ste-code/prompts-refine/` | 109 | 1–3 KB | ~200 KB |
 | `.agents/` (all) | ~60 | — | ~300 KB |
 | **Full pipeline** | **~389** | — | **~2.2 MB** |
@@ -1140,7 +1140,7 @@ hermes -z "Load agent-2-refiner and re-run refinement batch 17 only"
 echo "Source pages: $(ls spec/issue-09-2025/page-*.md | wc -l)"
 echo "Extracted: $(ls ste-code/extracted/w*.md | wc -l)"
 echo "Refined: $(ls ste-code/refined/r*.md | wc -l)"
-echo "Merged: $(ls ste-code/merged/*.md | wc -l)"
+echo "Merged: $(ls ste-code/grouped/*.md | wc -l)"
 echo "Adapted: $(find ste-code/adapted -type f | wc -l)"
 echo "Artifacts: $(find ste-code/artifacts -type f | wc -l)"
 
@@ -1163,7 +1163,7 @@ python3 ste-code/check-rails.py
 tar -czf pipeline-$(date +%Y%m%d-%H%M%S).tar.gz \
   ste-code/extracted/ \
   ste-code/refined/ \
-  ste-code/merged/ \
+  ste-code/grouped/ \
   ste-code/adapted/ \
   ste-code/artifacts/ \
   ste-code/PROGRESS.md \
@@ -1179,7 +1179,7 @@ BREAKING: This removes all pipeline data. Verify backup before proceeding.
 # Remove pipeline outputs
 rm -rf ste-code/extracted/w*.md
 rm -rf ste-code/refined/r*.md
-rm -rf ste-code/merged/*.md
+rm -rf ste-code/grouped/*.md
 rm -rf ste-code/adapted/*
 rm -rf ste-code/artifacts/*
 
@@ -1218,7 +1218,7 @@ NOTE: Run these commands from the project root. All commands are read-only.
 | Source pages count | `ls spec/issue-09-2025/page-*.md \| wc -l` | 434 |
 | Extraction files count | `ls ste-code/extracted/w*.md \| wc -l` | 109 |
 | Refinement files count | `ls ste-code/refined/r*.md \| wc -l` | 109 |
-| Merge files count | `ls ste-code/merged/*.md \| wc -l` | 2 |
+| Merge files count | `ls ste-code/grouped/*.md \| wc -l` | 2 |
 | Extraction empty files | `find ste-code/extracted -name "w*.md" -empty \| wc -l` | 0 |
 | Refinement empty files | `find ste-code/refined -name "r*.md" -empty \| wc -l` | 0 |
 | Audit report count | `ls .agents/audit/audit-*.md \| wc -l` | ≥ 3 |

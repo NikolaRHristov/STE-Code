@@ -552,7 +552,7 @@ Level 5 is defined in the Agent #7 contract and the adaptation levels table. The
 | Distilled prompt | `ste-code/artifacts/ste-code-distilled-system-prompt.txt` | 50 | Level 1 system prompt |
 | Full dictionary | `ste-code/adapted/a-dictionary.md` | 5,943 | Approved word dictionary |
 | Section rules | `ste-code/adapted/a-sec1-*` through `a-sec9-*` | ~3,400 | Grammar rules per ASD-STE100 section |
-| Merged master | `ste-code/merged/master.md` | — | Complete standard, all sections merged |
+| Merged master | `ste-code/grouped/master.md` | — | Complete standard, all sections merged |
 
 ## Key Facts
 - Uses Hermes oneshot wrapper (venv Python, no session DB, no tools)

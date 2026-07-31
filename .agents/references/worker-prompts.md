@@ -321,7 +321,7 @@ This is acceptable. A 2-page worker has zero truncation risk.
 ### Case 2: Dictionary Entry Spans a Page Boundary
 
 A dictionary entry that starts on page 240 and continues on page 241 will be split
-across v3 workers W061 and W062. The merge stage (see [`../../merging/SKILL.md`](../../../../skills/merging/SKILL.md))
+across v3 workers W061 and W062. The merge stage (see [`../../grouping/SKILL.md`](../../../../skills/grouping/SKILL.md))
 handles this by concatenating adjacent files and removing duplicate entry headers.
 
 ### Case 3: Worker Output Is Empty or Corrupt

@@ -72,7 +72,7 @@ This protocol does not exist in isolation. The table below lists every document 
 |----------|------|-----------|------|
 | Progress Tracker | `.agents/state/PROGRESS.md` | GATE 0 init script | GATE 0 |
 | 109 Extraction Files | `ste-code/extracted/wNNN-pPPPP-PPPP.md` | GATE 1 workers | GATE 1 |
-| Master State | `ste-code/merged/master.md` | GATE 2 merge script | GATE 2 |
+| Master State | `ste-code/grouped/master.md` | GATE 2 merge script | GATE 2 |
 | 6 Output Artifacts | `ste-code/artifacts/*.txt` + `ste-code/README.md` | GATE 4 artifact writers | GATE 4 |
 
 ---
@@ -121,7 +121,7 @@ test -f spec/issue-09-2025/issue-09-2025.md && echo "Combined markdown: OK"
 ```bash
 mkdir -p ste-code/extracted
 mkdir -p ste-code/refined
-mkdir -p ste-code/merged
+mkdir -p ste-code/grouped
 mkdir -p ste-code/adapted
 mkdir -p ste-code/artifacts
 ```
@@ -413,7 +413,7 @@ print('PASS: All 109 extraction files present.')
 
 ### Merge into Master State
 
-Concatenate all 109 refined files into `ste-code/merged/master.md`:
+Concatenate all 109 refined files into `ste-code/grouped/master.md`:
 - Deduplicate content at page boundaries
 - Sort by spec page order (use MANIFEST.md for ordering)
 - Preserve all content verbatim — no summarization
@@ -422,7 +422,7 @@ Concatenate all 109 refined files into `ste-code/merged/master.md`:
 
 Pick 10 random page numbers from 1-434. For each:
 1. Read the original markdown page from `spec/issue-09-2025/page-dir/`
-2. Find the corresponding content in `ste-code/merged/master.md`
+2. Find the corresponding content in `ste-code/grouped/master.md`
 3. Verify the text matches EXACTLY
 
 If ANY mismatch found, flag the worker responsible and re-extract those pages.
@@ -431,7 +431,7 @@ If ANY mismatch found, flag the worker responsible and re-extract those pages.
 
 ## GATE 3: Adaptation (Phase 2 from Original)
 
-**HARD GATE: `ste-code/merged/master.md` must exist and contain verified data.**
+**HARD GATE: `ste-code/grouped/master.md` must exist and contain verified data.**
 
 Only NOW do you begin adaptation. For each rule in the master state:
 
@@ -549,7 +549,7 @@ done
 # Verify all files reference master.md data
 python3 -c "
 import os
-master_size = os.path.getsize('ste-code/merged/master.md')
+master_size = os.path.getsize('ste-code/grouped/master.md')
 print(f'Master state: {master_size:,} chars')
 print('All artifact files must exist in ste-code/artifacts/')
 for f in os.listdir('ste-code/artifacts/'):
@@ -867,7 +867,7 @@ NOTE: These estimates assume the model API is responsive and no worker failures 
 | **Worker** | A single `hermes -z` session that reads a range of spec page files and writes a markdown output file. Workers are stateless. They do not communicate with each other. |
 | **Batch** | A group of up to 3 workers launched simultaneously. Batches are serialized: Batch 2 does not start until Batch 1 is verified. |
 | **Gate** | A hard checkpoint in the pipeline. Progress past a gate is impossible until its conditions are met. Gates enforce sequential execution and prevent data fabrication. |
-| **Master State** | The merged markdown file (`ste-code/merged/master.md`) that combines all 109 worker outputs into a single authoritative document. All adaptation and artifact generation reads from master state. |
+| **Master State** | The merged markdown file (`ste-code/grouped/master.md`) that combines all 109 worker outputs into a single authoritative document. All adaptation and artifact generation reads from master state. |
 | **Adaptation** | The process of transforming aerospace-domain STE rules into code-domain STE-Code rules. This is NOT summarization. Every adapted rule preserves the original structure and intent. |
 | **Artifact** | One of 6 output files written in GATE 4. Artifacts are deployable documents (system prompts, manuals, guides) that can be used independently of this pipeline. |
 | **Quality Gate** | A quantitative threshold that must be met before proceeding. Unlike binary gates (file exists), quality gates measure completeness (file size, content signals, fabrication detection). |

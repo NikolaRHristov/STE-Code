@@ -64,7 +64,7 @@ Output directory: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - [x] Body duplicate page headers removed (3 per file from PDF page breaks)
 - [x] r048 truncation fixed (CLOSE entry — "Close the..." → "CLOSE THE INSTRUMENT PANEL.")
 - [x] refined-master.md concatenated from all 109 files (21,337 lines, 745K)
-- [x] master-raw.md and master.md written to ste-code/merged/
+- [x] master-raw.md and master.md written to ste-code/grouped/
 - [ ] `check-rails.py` run across all refined files (not executed — script not found)
 - [ ] git gcommit-hermes for final refinement state
 - [x] Artifacts generated: 6 files in ste-code/artifacts/

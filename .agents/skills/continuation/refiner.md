@@ -528,7 +528,7 @@ After refinement completes (all 109 files verified, REFINE-PROGRESS.md shows
 100%), the pipeline continues:
 
 - **Stage 3 (Merge):** The continuation orchestrator reads from
-  `ste-code/refined/` and produces `ste-code/merged/master.md`. See
+  `ste-code/refined/` and produces `ste-code/grouped/master.md`. See
   `.agents/skills/continuation/SKILL.md` (lines 75-79 for the decision tree,
   lines 138-260 for merge operations and deduplication).
 - **Stage 4 (Adaptation):** Transforms 53 rules from `master.md` into code

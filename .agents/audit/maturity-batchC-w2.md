@@ -1,4 +1,4 @@
-### .agents/skills/merging/SKILL.md
+### .agents/skills/grouping/SKILL.md
 - **Level:** 3
 - **Summary:** Defines the merge protocol for combining 109 worker extraction files into a single master state document, including deduplication, section organization, and completeness validation.
 - **Strengths:**
@@ -86,7 +86,7 @@
   - Concrete generation protocol: sequential artifact generation (1→6), read-adapt-write-validate cycle per artifact
   - Verification section includes a bash one-liner for checking output token counts against targets
   - Prerequisites section gates artifact generation on master.md completeness
-  - Cross-references `references/rails.md` and `ste-code/merged/master.md`
+  - Cross-references `references/rails.md` and `ste-code/grouped/master.md`
   - Artifact 2 (self-reading manual) specifies exact 8-section structure with recursive-loop requirement in S0
 - **Gaps:**
   - No failure recovery - if Artifact 3 fails its quality gates, what rollback or fix procedure applies? If Artifact 5 succeeds but Artifact 6 fails, is partial output kept or discarded?

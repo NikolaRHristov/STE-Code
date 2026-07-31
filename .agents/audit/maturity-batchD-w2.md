@@ -22,7 +22,7 @@
   - Design rationale appendix explaining why section types were grouped this way vs. alternatives considered
   - One gold-standard example output per type, annotated to show what correct extraction looks like for that type
   - Explicit cross-reference section: "See quality-checklist.md for per-batch verification; see extraction/SKILL.md for worker launch parameters"
-  - Known limitations: "DICT 4-column interleaving causes word-merging errors in ~3% of entries; auditor must spot-check entry boundaries"
+  - Known limitations: "DICT 4-column interleaving causes word-grouping errors in ~3% of entries; auditor must spot-check entry boundaries"
   - Self-update instructions: "When Issue 10 is released, verify page ranges against new PDF TOC and update the Quick Lookup table; tag with [ISSUE-10]"
 - **Priority:** medium
 

@@ -57,7 +57,7 @@ patterns = [
 - Replace `.agents/` → `.agents/` in exchange.md
 
 ## Files NOT touched
-- `ste-code/extracted/`, `ste-code/refined/`, `ste-code/merged/`, `ste-code/adapted/`, `ste-code/artifacts/` — content files, no agent references
+- `ste-code/extracted/`, `ste-code/refined/`, `ste-code/grouped/`, `ste-code/adapted/`, `ste-code/artifacts/` — content files, no agent references
 - `.git/` — never touched
 
 ## Agent #4 Benchmarking (Agent #3 is setting up)

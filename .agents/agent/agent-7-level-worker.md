@@ -29,7 +29,7 @@ Load: Level 3 + full `ste-code/adapted/a-dictionary.md` (all 5,943 lines)
 Adds: Complete approved word dictionary with all definitions and examples.
 
 ### Level 5 - Full Standard (~100K+ tokens)
-Load: All `ste-code/adapted/*.md` files + `ste-code/merged/master.md`
+Load: All `ste-code/adapted/*.md` files + `ste-code/grouped/master.md`
 Adds: Every rule, every example, every dictionary entry from ASD-STE100 Issue 9 adapted for code.
 
 ## Task Parameters

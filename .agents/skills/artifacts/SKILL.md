@@ -51,9 +51,9 @@ Do not reorder. Artifact 4 depends on Artifact 1 for its approved vocabulary. Ar
 
 Run these checks before you generate any artifact. Stop if any check fails.
 
-- [ ] `ste-code/merged/master.md` file size > 500KB
-- [ ] `grep -c "^#### Rule" ste-code/merged/master.md` returns exactly 53
-- [ ] `grep -c "^### Category" ste-code/merged/master.md` returns exactly 19
+- [ ] `ste-code/grouped/master.md` file size > 500KB
+- [ ] `grep -c "^#### Rule" ste-code/grouped/master.md` returns exactly 53
+- [ ] `grep -c "^### Category" ste-code/grouped/master.md` returns exactly 19
 - [ ] `ls ste-code/adapted/a-*.md | wc -l` returns at least 11
 - [ ] `grep -c "^### Rule" ste-code/adapted/a-sec1-rules.md` returns at least 14 (Section 1 has 14 rules)
 - [ ] `grep -c "APPROVED" ste-code/adapted/a-dictionary.md` returns > 800
@@ -408,7 +408,7 @@ If `ste-code/artifacts/` does not exist or has no files:
 If disk space drops below 100MB during generation:
 
 - **Symptom**: `df -h .` shows <100MB available.
-- **Action**: Remove temporary files from earlier stages (`ste-code/merged/master-raw.md`, old worker output in `ste-code/extracted/` that passed validation). Do not delete adapted files or master.md. If still low, stop and report.
+- **Action**: Remove temporary files from earlier stages (`ste-code/grouped/master-raw.md`, old worker output in `ste-code/extracted/` that passed validation). Do not delete adapted files or master.md. If still low, stop and report.
 
 ### Regeneration After Partial Run
 

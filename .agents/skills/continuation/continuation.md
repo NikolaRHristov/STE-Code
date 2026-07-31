@@ -7,7 +7,7 @@ execution auditor (see `.agents/audit/` for reports). Your job: drive Stages 4
 ```
 STAGE 1 — EXTRACT   ✅ 109/109  (912K, 10,927 lines in ste-code/extracted/)
 STAGE 2 — REFINE     ✅ 109/109  (916K, 21,852 lines in ste-code/refined/)
-STAGE 3 — MERGE      ✅ Ready    (ste-code/merged/master-raw.md + master.md, 708K)
+STAGE 3 — MERGE      ✅ Ready    (ste-code/grouped/master-raw.md + master.md, 708K)
 STAGE 4 — ADAPT      ⬜ 0 files  (ste-code/adapted/ is empty — YOU START HERE)
 STAGE 5 — ARTIFACTS  ⬜ 0 files  (ste-code/artifacts/ is empty — after adaptation)
 ```
@@ -17,8 +17,8 @@ STAGE 5 — ARTIFACTS  ⬜ 0 files  (ste-code/artifacts/ is empty — after adap
 ```bash
 find ste-code/extracted -name 'w*-p*.md' -type f | wc -l   # Must be 109
 find ste-code/refined -name 'r*.md' -type f | wc -l         # Must be 109
-ls ste-code/merged/                                          # Must show master-raw.md + master.md
-head -5 ste-code/merged/master.md                            # Must show "ASD-STE100 Issue 9"
+ls ste-code/grouped/                                          # Must show master-raw.md + master.md
+head -5 ste-code/grouped/master.md                            # Must show "ASD-STE100 Issue 9"
 mkdir -p ste-code/adapted ste-code/artifacts
 ```
 
@@ -29,7 +29,7 @@ If any check fails, STOP. Report the discrepancy. Do not fabricate.
 You are a coordinator, not an inline adapter. You do not adapt rules yourself.
 You launch sub-workers that adapt one section each. The workflow is:
 
-1. **Read** `ste-code/merged/master.md` one section at a time.
+1. **Read** `ste-code/grouped/master.md` one section at a time.
 2. **Launch** one `hermes -z` sub-worker per section with the section-specific
    adaptation prompt from `.agents/prompts/adapt/adapt-secN.txt`.
 3. **Wait** for each sub-worker to complete. The sub-worker writes adapted files
@@ -125,7 +125,7 @@ Non-negotiable quality rules that apply to every orchestrator and worker:
 
 - **R1 (Stage Isolation)**: Write only to your stage directory. Stage 4 writes
   to `ste-code/adapted/`. Stage 5 writes to `ste-code/artifacts/`. Never touch
-  `ste-code/extracted/`, `ste-code/refined/`, or `ste-code/merged/`.
+  `ste-code/extracted/`, `ste-code/refined/`, or `ste-code/grouped/`.
 - **R2 (Naming)**: `a-secN-ruleY.Z.md` for adaptation,
   `ste-code-<name>.txt` for artifacts.
 - **R3 (Completion Integrity)**: Never claim a file complete until it exists on
@@ -179,7 +179,7 @@ anti-patterns (e.g., `proxy` → Category 19, not Category 8).
 
 ## Stage 4 — Adaptation
 
-Read `ste-code/merged/master.md` (structural index). Use it to find which files contain
+Read `ste-code/grouped/master.md` (structural index). Use it to find which files contain
 each rule, category, and dictionary entry. Produce adaptation files in `ste-code/adapted/`.
 
 ### Output
@@ -458,7 +458,7 @@ pairs are missing the "Prefer" or "Avoid" column. Some rows have only one term.
 **Detection**:
 ```bash
 # Count synonym rows in master.md
-grep -c "^| " ste-code/merged/master.md  # approximate — adjust for table format
+grep -c "^| " ste-code/grouped/master.md  # approximate — adjust for table format
 # If <12 rows, the table is incomplete
 ```
 
@@ -493,7 +493,7 @@ categories because it used an older Issue of ASD-STE100.
 **Detection**:
 ```bash
 # Count unique category definitions in master.md
-grep -c "^### Category" ste-code/merged/master.md
+grep -c "^### Category" ste-code/grouped/master.md
 # Must return 19
 ```
 
@@ -637,8 +637,8 @@ Run these checks before generating any artifact. Stop if any check fails.
 
 ```bash
 # master.md must be healthy
-test -f ste-code/merged/master.md || { echo "FAIL: master.md missing"; exit 1; }
-master_bytes=$(wc -c < ste-code/merged/master.md)
+test -f ste-code/grouped/master.md || { echo "FAIL: master.md missing"; exit 1; }
+master_bytes=$(wc -c < ste-code/grouped/master.md)
 [ "$master_bytes" -gt 500000 ] || { echo "FAIL: master.md too small ($master_bytes bytes, need >500KB)"; exit 1; }
 
 # All 53 adapted rule files must exist
@@ -778,7 +778,7 @@ echo "=== $PASS passed, $FAIL failed ==="
 Pick 3 adapted rules at random. For each:
 
 1. Open the adapted file (`ste-code/adapted/a-secN-ruleY.Z.md`).
-2. Find the original rule in `ste-code/merged/master.md` using the source
+2. Find the original rule in `ste-code/grouped/master.md` using the source
    backlink.
 3. Verify:
    - The rule number matches.
@@ -815,7 +815,7 @@ fi
 
 Premature adaptation files exist in `.agents/_scratch/`. They were created before
 extraction completed and moved there by RAILS. **Do NOT reuse them.** Regenerate
-everything from `ste-code/merged/master.md`.
+everything from `ste-code/grouped/master.md`.
 
 ## Immutable Facts
 

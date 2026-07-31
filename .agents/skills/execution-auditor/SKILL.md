@@ -615,7 +615,7 @@ detect degradation before it causes a gate failure.
 | Trend | Pattern | Interpretation |
 |-------|---------|----------------|
 | Stable high | 5 audits at ≥0.92 | Pipeline is healthy. No action. |
-| Gradual decline | Scores drop 0.02+ per audit for 3 audits | Systemic issue emerging. Escalate to reviewer before next gate. |
+| Gradual decline | Scores drop 0.02+ per audit for 3 audits | Systemic issue egrouping. Escalate to reviewer before next gate. |
 | Sudden drop | Score drops ≥0.10 in one audit | Single catastrophic event. Check model change, prompt change, or worker failure. |
 | Volatile | Scores oscillate ±0.08 | Workers are inconsistent. Check batch composition and worker assignment. |
 | False positive creep | False positives increase by 2+ per audit | Fabrication patterns are flagging valid content. Review pattern list. |

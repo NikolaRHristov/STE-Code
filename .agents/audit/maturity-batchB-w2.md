@@ -84,7 +84,7 @@
 
 ### .agents/skills/continuation/SKILL.md
 - **Level:** 3
-- **Summary:** Multi-agent continuation skill for pipeline Stages 3-5 (merge, adapt, artifacts), usable by any agent from its own perspective. Covers stage detection, input selection per agent role, detailed protocols for merging 109 files, adapting 53 rules to code domain, and generating 6 artifacts.
+- **Summary:** Multi-agent continuation skill for pipeline Stages 3-5 (merge, adapt, artifacts), usable by any agent from its own perspective. Covers stage detection, input selection per agent role, detailed protocols for grouping 109 files, adapting 53 rules to code domain, and generating 6 artifacts.
 - **Strengths:**
   - Agent-perspective mapping table makes the skill reusable across Extractor, Refiner, and Auditor agents with different input sources
   - Stage detection has concrete bash commands and a clear decision tree for which stage to activate

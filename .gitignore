@@ -26,7 +26,7 @@ venv/
 .agents/audit/
 .agents/rewrites/
 .agents/telemetry/
-.agents/tmp/*.txt
+.agents/tmp/**/*.txt
 ste-code/audit/
 
 # === Benchmark runtime artifacts ===
