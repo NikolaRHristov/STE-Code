@@ -76,6 +76,42 @@ def _word_count(text):
     return len(re.findall(r"[A-Za-z0-9]{2,}", t.lower()))
 
 
+def _mark_text_coverage(src_txt, out_txt):
+    """Return (missing_count, total_source_marks) measuring whether the TEXT
+    inside <mark>…</mark> spans is preserved, not whether the raw <mark> tag
+    counts match.
+
+    Why: the PDF extraction often splits one annotated sentence into two <mark>
+    spans (e.g. a lone `<mark>Non-STE:</mark>` label fragment followed by
+    `<mark>_the sentence_</mark>`). A correct worker MERGES those into one clean
+    `<mark>` span — preserving 100% of the marked words while REDUCING the raw
+    tag count. The old `out_marks >= src_marks` check failed those correct files.
+
+    We instead take each source mark's significant word-shingle and confirm it
+    appears in the output's tag-stripped text. Pure label fragments ("STE:",
+    "Non-STE:") carry no unique content and are skipped — their text always
+    survives on the paired example line.
+    """
+    def norm(s):
+        s = re.sub(r"<[^>]+>", " ", s)
+        s = re.sub(r"[^a-z0-9 ]", " ", s.lower())
+        return re.sub(r"\s+", " ", s).strip()
+
+    src_spans = re.findall(r"<mark>(.*?)</mark>", src_txt, re.S)
+    out_all = norm(out_txt)
+    total = 0
+    missing = 0
+    for span in src_spans:
+        words = [w for w in norm(span).split() if w not in ("ste", "non")]
+        if len(words) < 2:
+            continue
+        total += 1
+        shingle = " ".join(words[:6])
+        if shingle not in out_all:
+            missing += 1
+    return missing, total
+
+
 # HTML-ish structural tags (<br>, <u>, <mark>, </mark>, ...): formatting, not content.
 _MARKUP_TAG_RE = re.compile(r"</?[a-zA-Z][^>]*>")
 
@@ -406,26 +442,28 @@ def run_worker(worker_num, src_path, start, end):
             src_words = _word_count(src_txt)
             out_words = _word_count(txt)
             ok_parity = out_words >= int(src_words * 0.98)  # allow ≤2% content drift
-            # Count ALL <mark> annotations (source uses <mark>, _<mark>, and
-            # _<u><mark> variants — 258 across 38 files), not just the rare
-            # _<u><mark> form the old gate looked for.
-            src_marks = src_txt.count("<mark")
-            out_marks = txt.count("<mark")
-            ok_marks = out_marks >= src_marks
+            # Verify the <mark> annotated EXAMPLE TEXT survives, by content —
+            # not by raw tag count. Workers legitimately MERGE PDF-split mark
+            # fragments (a lone `<mark>Non-STE:</mark>` + `<mark>_text_</mark>`)
+            # into one clean span, preserving all words while reducing the tag
+            # count. _mark_text_coverage checks each source mark's word-shingle
+            # appears in the output; label-only fragments are skipped.
+            missing_marks, total_marks = _mark_text_coverage(src_txt, txt)
+            ok_marks = missing_marks == 0
 
             if ok_size and ok_skel and ok_parity and ok_marks:
                 _checkpoint[str(worker_num)] = {"passed": True, "output_size": sz,
                                                 "duration": round(dur, 1)}
                 _save_checkpoint(_checkpoint)
                 print(f"  R{worker_num:03d}: [PASS] {sz}B ({dur:.1f}s) "
-                      f"words {out_words}/{src_words} marks {out_marks}/{src_marks}", flush=True)
+                      f"words {out_words}/{src_words} marks {total_marks-missing_marks}/{total_marks}", flush=True)
                 return True
             else:
                 reasons = []
                 if not ok_size: reasons.append(f"size={sz}B")
                 if not ok_skel: reasons.append("skeleton_missing")
                 if not ok_parity: reasons.append(f"word_loss {out_words}/{src_words}")
-                if not ok_marks: reasons.append(f"marks_lost {out_marks}/{src_marks}")
+                if not ok_marks: reasons.append(f"marks_lost {missing_marks}/{total_marks}")
                 print(f"  R{worker_num:03d}: [FAIL] {'; '.join(reasons)} — retrying", flush=True)
         else:
             print(f"  R{worker_num:03d}: [FAIL] no output file — likely rate-limited, retrying", flush=True)
