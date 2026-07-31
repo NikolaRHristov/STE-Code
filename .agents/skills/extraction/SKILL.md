@@ -58,12 +58,22 @@ combined issue-09-2025.md.
 
 ## Launch Rules
 
-- **Always** use `hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
+- **ALWAYS PRESERVE** existing extracted files. Never `rm` or overwrite files in `ste-code/extracted/` that already exist. If a file already exists and passes quality checks, skip it. If it exists but fails, delete only that one file and re-extract.
+- **Always** use `hermes -z` with the oneshot wrapper (via agent-runner)
 - **Always** launch exactly 3 workers per batch. Do not launch more.
 - **Always** verify output after each batch before you launch the next batch.
 - **Never** use inline extraction. It defeats parallelization.
 - **Never** exceed 4 pages per worker. This prevents truncation.
-- **Always** save state. Use `git gcommit-hermes "Batch N complete"` after each batch.
+- **Always** save state. Use `git gcommit-hermes` after each batch.
+- If running in a new session with existing extracted files from a previous run, **check what already exists** and skip already-extracted worker ranges. Resume from the first missing worker.
+
+## Concurrent Session Handling
+
+If multiple sessions launch `extract_batch.py`:
+- Each checks existing files and skips already-completed workers
+- Worker output files use deterministic names (`wNNN-pSTART-END.md`) — the same worker will produce the same filename
+- If a file already exists and passes quality gates, the worker is skipped (marked "already extracted")
+- **Never** clear the entire `ste-code/extracted/` directory — only delete individual files that fail verification
 
 ## Expected Output Format
 
