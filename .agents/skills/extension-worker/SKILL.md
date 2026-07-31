@@ -23,40 +23,32 @@ Generate code-domain extensions to fill gaps between aerospace ASD-STE100 and th
 | 5 | Code Anti-Patterns | 15 | 5 | 10 |
 | 6 | Domain Extensions | 50 | ~3 | 47 |
 
-## Worker Command Template
+## How to run (markdown-first — replaces the old JSON-era flow)
+
+> **IMPORTANT:** JSON generation was an RCE-artifact remnant. Workers now emit
+> **MARKDOWN ONLY** (`ste-code/extensions/<area>.md`). JSON is derived
+> deterministically by `.agents/tools/extension/md_to_json.py` (no LLM, no
+> eval/exec). Do NOT ask workers to emit JSON.
 
 ```bash
-hermes -z "$(cat /tmp/ext-worker-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo > OUTPUT_FILE 2>&1 &
+# Run one gap area (or all six): verbs adjectives nouns verb-examples anti-patterns domains
+python3 .agents/tools/runners/phase-e-run.py verbs
+python3 .agents/tools/runners/phase-e-run.py            # all areas
+python3 .agents/tools/runners/phase-e-run.py --resume   # skip passed areas
+python3 .agents/tools/extension/verify_extensions.py    # Gate 1-6 after a run
 ```
 
-## Launch Rules
-- 3 workers per batch (never more)
-- Verify output after each batch
-- `git gcommit-hermes "Extension batch N: <area>"` after each batch
-- Never exceed 20 entries per worker
+- 3 workers per batch max (the orchestrator enforces this).
+- Each area commits only after `verify_extensions.py` passes (Gate 1-6).
+- Per-area git commit is automatic (crash-safe, like the other stages).
+- Output: `ste-code/extensions/<area>.md` (+ derived `<area>.json`).
 
-## Pre-Flight Checks
+## Worker Prompt Template (now externalized)
 
-Run these checks before the first batch and after every 5 batches:
-
-```bash
-# Verify output directories exist and are writable
-test -d SCE/data/vocabulary/generated/ || mkdir -p SCE/data/vocabulary/generated/
-test -d SCE/core/categories/generated/ || mkdir -p SCE/core/categories/generated/
-test -d SCE/compute/generated/ || mkdir -p SCE/compute/generated/
-
-# Verify reference files are available
-test -f SCE/core/categories/synonym-table.json || echo "MISSING: synonym-table.json"
-test -f SCE/data/vocabulary/approved-verbs.json || echo "MISSING: approved-verbs.json"
-
-# Verify worker rails file exists
-test -f .agents/references/worker-rails.md || echo "MISSING: worker-rails.md"
-
-# Check available model
-hermes status 2>/dev/null | grep -q poolside/laguna-s-2.1:free || echo "WARNING: model may not be available"
-```
-
-NOTE: A missing reference file causes workers to fabricate terms. Do not launch workers until all references exist.
+The worker prompt is externalized to `.agents/tools/extension/templates/extend-area.md`
+and rendered by `extend_batch.py` with the embedded SKILL section appended. Edit
+the template to change wording; edit this SKILL to change behavior. The embedded
+protocol below (Entry Schemas, Quality Gates) is the single source of truth.
 
 ## Worker Prompt Template
 
