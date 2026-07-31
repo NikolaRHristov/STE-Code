@@ -33,10 +33,13 @@ import os, sys, subprocess, json
 from pathlib import Path
 
 # ── Resolve paths ───────────────────────────────────────────────
-# _AGENTS = .agents/ directory (parent of tools/)
+# File is at: .agents/tools/lib/agent-runner.py
+# _TOOLS = .agents/tools/ (parent of lib/)
+# _AGENTS = .agents/ (parent of tools/)
 # _PROJECT = STE-Code root (parent of .agents/)
-_AGENTS = Path(__file__).resolve().parent.parent  # tools/lib → .agents/
-_PROJECT = _AGENTS.parent  # STE-Code root
+_TOOLS = Path(__file__).resolve().parent.parent  # tools/lib → tools/
+_AGENTS = _TOOLS.parent  # tools/ → .agents/
+_PROJECT = _AGENTS.parent  # .agents/ → STE-Code root
 _CONFIG_DIR = _AGENTS / "config"
 _CONFIG_FILE = _CONFIG_DIR / "agents.yaml"
 _TMP_DIR = _AGENTS / "tmp"
@@ -133,7 +136,8 @@ def _resolve_command(agent_cfg, prompt_file, model=None, cwd=None):
     if agent_type == "hermes":
         # Hermes uses its venv + oneshot wrapper
         runtime = os.path.expanduser(str(agent_cfg["runtime"]))
-        wrapper = str((_PROJECT / agent_cfg["wrapper"]).resolve())
+        # Wrapper path in config is relative to .agents/tools/
+        wrapper = str((_TOOLS / agent_cfg["wrapper"]).resolve())
         effective_model = model or agent_cfg.get("default_model", "poolside/laguna-s-2.1:free")
         cmd = [runtime, wrapper, str(prompt_file), "--model", effective_model]
     else:
