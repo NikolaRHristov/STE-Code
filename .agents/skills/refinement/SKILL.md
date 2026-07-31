@@ -18,7 +18,7 @@ Reformat extracted spec files into clean, standardized markdown. Zero content lo
 | Problem in Raw Extraction | Refined Output |
 |---------------------------|----------------|
 | STE examples merged with non-STE in dictionary tables | `**STE:**` / `**Non-STE:**` line separation |
-| 4-column PDF interleaving in dictionary entries | Clean 2-column layout |
+| 4-column PDF interleaving in dictionary entries | Clean markdown table, continuation rows folded |
 | `###` used for proper names ("ASD-STE100") | `**bold**` for names, `###` only for real headings |
 | Page headers repeated | Collapsed to once per section |
 | Rule examples inconsistent | Standardized blockquote format |
@@ -37,8 +37,8 @@ Every word, number, example, table cell from the original extraction MUST appear
 # Page N of M          ← Every file starts with this
 ## Section Title        ← Major sections (Section 1, Part 2, etc.)
 ### Rule X.Y            ← Rule headings
-#### WORD (POS)         ← Dictionary entries
 ```
+Dictionary entries are NOT headings — they are rows in a markdown table (Rule 6).
 
 ### Rule 3: TABLE FORMATTING
 Clean markdown with header row + separator row:
@@ -60,18 +60,28 @@ Separated by blank line. Never merge STE/non-STE into same line.
 Fenced with language identifier. Never bare ```.
 
 ### Rule 6: DICTIONARY ENTRY FORMAT
-```
-#### WORD (POS) - APPROVED
-- **Meaning:** [exact approved meaning]
-- **Forms:** [form1, form2, form3]
-- **STE:** [example]
-- **Non-STE:** [example]
 
-#### word (POS) - UNAPPROVED
-- **Alternatives:** [alternative1 (POS), alternative2 (POS)]
-- **STE:** [example using alternative]
-- **Non-STE:** [example using unapproved word]
+Dictionary pages arrive from extraction as a 4-column table
+(`Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example`).
+**KEEP THEM AS A MARKDOWN TABLE.** Do NOT explode each row into `####` headings
+plus bullet lists — that triples the output length and makes the worker truncate
+on dense pages (real content loss, a Rule 1 violation).
+
 ```
+| Word (POS) | Approved meaning / ALTERNATIVES | STE example | Non-STE example |
+|------------|--------------------------------|-------------|-----------------|
+| CONTAIN (v), CONTAINS, CONTAINED, CONTAINED | To have in something or hold in something | EACH SURVIVAL KIT CONTAINS THESE ITEMS: | |
+| contaminant (n) — UNAPPROVED | CONTAMINATION (n) | THIS FILTER REMOVES ALL CONTAMINATION FROM THE AIR SUPPLY. | This filter removes all contaminants from the air supply. |
+```
+
+- Emit the header row and the `|---|---|---|---|` separator once per page's table.
+- Preserve EVERY cell verbatim. In-cell `<br>` line breaks may stay (GFM renders
+  them inside the cell) or be collapsed to a space — either is lossless. Never
+  drop the words around them.
+- Escape any literal `|` inside a cell as `\|`.
+- Merge PDF continuation rows: a row whose FIRST cell is empty continues the
+  entry directly above it — fold its cells into that entry's row.
+- The `— APPROVED` / `— UNAPPROVED` status stays in the `Word (POS)` cell.
 
 ### Rule 7: PAGE METADATA
 ```
@@ -122,6 +132,10 @@ NOTE: `**ASD-STE100**` moves to page metadata. Only structural headings get `#`/
 
 ### Rule 3 Example: 4-Column PDF Interleaving
 
+Applies to NON-dictionary tables (dictionary tables follow Rule 6, which keeps
+the full 4 columns). For a generic PDF table whose logical rows were split
+across physical rows:
+
 **❌ Raw Extraction (4-column artifact):**
 ```
 | Word | POS | Meaning | Example |
@@ -154,22 +168,28 @@ Example: "Start the engine" (STE) / "Commence engine operation" (non-STE)
 ```
 NOTE: The `/` separator in raw extraction is the delimiter signal. Split on it. Keep each example on its own `>` blockquote line. End each example with a period.
 
-### Rule 6 Example: Dictionary Entry Cleanup
+### Rule 6 Example: Dictionary Table Preservation
 
-**❌ Raw Extraction (no structure):**
+**❌ Raw Extraction (4-column table with `<br>` cell wraps + a continuation row):**
 ```
-ABOUT (adv) - APPROVED
-Concerned with. "The manual is about safety." (STE) / "The manual concerns safety procedures." (non-STE)
+|**Word**<br>**(part of speech)**|**Approved meaning/**<br>**ALTERNATIVES**|**STE EXAMPLE**|**Non-STE example**|
+|---|---|---|---|
+|**convey (v) — UNNAPPROVED**|MOVE (v)|MOVE THE<br>EQUIPMENT TO A<br>SAFE AREA.|Convey the equipment to<br>a safe area.|
+|||TELL (v)|TELL THE<br>INFORMATION TO<br>YOUR MANAGER.|Convey the information to<br>your manager.|
 ```
 
-**✅ Refined Output (structured):**
+**✅ Refined Output (clean table, continuation row folded, cells preserved):**
 ```
-#### ABOUT (adv) - APPROVED
-- **Meaning:** Concerned with
-- **STE:** The manual is about safety.
-- **Non-STE:** The manual concerns safety procedures.
+| Word (POS) | Approved meaning / ALTERNATIVES | STE example | Non-STE example |
+|------------|--------------------------------|-------------|-----------------|
+| convey (v) — UNAPPROVED | MOVE (v) | MOVE THE EQUIPMENT TO A SAFE AREA. | Convey the equipment to a safe area. |
+| convey (v) — UNAPPROVED | TELL (v) | TELL THE INFORMATION TO YOUR MANAGER. | Convey the information to your manager. |
 ```
-NOTE: Extract meaning, STE example, and non-STE example into separate list items. Drop the `/` delimiter. Capitalize the word entry in the heading.
+NOTE: Keep it a TABLE — do not explode into `####` blocks. The second source row
+has an empty first cell: it is a second alternative for `convey`, so repeat the
+word in the folded row (or leave the first cell blank — both are lossless). The
+in-cell `<br>` wraps were cosmetic PDF line breaks; collapsing them to spaces
+drops zero words.
 
 ### Rule 7 Example: Page Header Collapse
 
@@ -377,14 +397,18 @@ The `> **STE:**` format was chosen over alternatives for three reasons:
 ### Why 2-Space Indent for Nested Lists
 Commonmark and GitHub Flavored Markdown both treat 2-space indent as a list continuation. 4-space indent creates a code block in some parsers. 2-space indent is the minimum unambiguous indent that works across all major renderers.
 
-### Why `#### WORD (POS)` for Dictionary Entries
-The `####` (h4) level was chosen because:
-- `#` = page-level metadata
-- `##` = section-level grouping
-- `###` = rule-level heading
-- `####` = individual entry
+### Why Dictionary Entries Stay as Table Rows
+Dictionary pages are the densest content in the spec (15-20 entries/page, 4
+columns each). Two formats were tried:
+- **Exploded `#### WORD (POS)` + bullets:** readable per-entry, but tripled the
+  output length. On the free-tier model this overran the output budget and the
+  worker truncated mid-page — irreversible content loss (a Rule 1 violation).
+- **Preserved markdown table:** output length ≈ source length, so no truncation;
+  renders cleanly on GitHub; and word-count parity becomes a reliable zero-loss
+  gate. This is the required format.
 
-This 4-level hierarchy matches the logical structure of the spec: page → section → rule → entry. Using `####` also enables table-of-contents generation that drills down to individual words.
+The heading hierarchy is therefore only 3 levels: `#` page → `##` section →
+`###` rule. Dictionary entries live inside tables, not headings.
 
 ### Why 4 Pages per Worker
 The source PDF has 434 pages. At 4 pages per worker, that is 109 workers (108 × 4 + 1 × 2). This was chosen because:
