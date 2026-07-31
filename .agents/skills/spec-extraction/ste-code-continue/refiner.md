@@ -382,18 +382,18 @@ Before launching a batch of workers, check these items:
 - [ ] Output directory exists: `ste-code/refined/`
 - [ ] Prompt file exists: `.agents/prompts/refine/rNNN-prompt.txt`
 - [ ] Prompt file references the correct input and output paths
-- [ ] Model is `deepseek-v4-pro` (NEVER `deepseek-v4-flash`)
+- [ ] Model is `poolside/laguna-s-2.1:free` (NEVER `deepseek-v4-flash`)
 - [ ] No more than 3 workers launched simultaneously
 - [ ] Previous batch verification is complete (if not batch 1)
 
 ### Launch Protocol
 
-Launch workers using ONLY `deepseek-v4-pro` (NEVER `deepseek-v4-flash`):
+Launch workers using ONLY `poolside/laguna-s-2.1:free` (NEVER `deepseek-v4-flash`):
 
 ```bash
-hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 ```
 
 ## Verification (Per Batch)
@@ -469,7 +469,7 @@ update the progress counter, and commit.
 
 ## Immutable Facts
 
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-v4-flash)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-v4-flash)
 - Zero content loss — format only
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - Follow `.agents/skills/spec-extraction/references/rails.md` — all 8 guardrails apply

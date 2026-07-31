@@ -18,12 +18,12 @@ mkdir -p ste-code/extracted .agents/prompts/refine
 hermes -z "Read spec/issue-09-2025/page-<<START>>.md through page-<<END>>.md.
 Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
 Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## Launch Rules
 
-- Always use `hermes -z "$(cat .agents/prompts/refine/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo`
+- Always use `hermes -z "$(cat .agents/prompts/refine/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - Always launch exactly 3 workers per batch (never more)
 - Always verify output after each batch before launching next
 - Never use inline extraction — it defeats parallelization
@@ -302,7 +302,7 @@ is a 🔴 CRITICAL discrepancy. After each batch:
 ## Immutable Facts
 
 - 19 technical noun categories (NOT 22)
-- deepseek-v4-pro model (NOT deepseek-pro or deepseek-v4-flash)
+- poolside/laguna-s-2.1:free model (NOT deepseek-pro or deepseek-v4-flash)
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - 109 workers × 4 pages = 434 pages total
 - Follow `.agents/skills/spec-extraction/references/rails.md` — all 8 guardrails apply
@@ -338,7 +338,7 @@ using the Partial Batch Failure Protocol above.
 
 ### Model Drift
 
-If the model provider updates `deepseek-v4-pro`, worker output
+If the model provider updates `poolside/laguna-s-2.1:free`, worker output
 may change between batches run on different days.
 To avoid drift, extract all 109 workers in a single session.
 If the session spans model updates, note the update in PROGRESS.md.

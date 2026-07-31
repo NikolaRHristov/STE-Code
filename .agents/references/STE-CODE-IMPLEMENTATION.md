@@ -19,7 +19,7 @@
 | 1.2 | 2025-07-28 | Agent #3 (Auditor) | Added anti-fabrication rules block at document top. Added spot-check validation in GATE 2. | Audit found fabricated rule text in 3 of 9 worker JSONs |
 | 1.3 | 2025-07-29 | Agent #1 (Extractor) | Updated worker table to match 109-worker grid (granular-strategy.md). Documented 4pp sweet spot. | Original 9-worker split was too coarse; workers missed content |
 | 1.4 | 2025-07-30 | Hermes (maturity audit) | Added cross-reference index, known limitations, measurable quality gates, schema evolution protocol, recovery protocols, environment dependencies, timing budget, decision consequences, and glossary. | Maturity audit identified 5 structural gaps. This release fills all 5 plus adds 7 proactive sections. |
-| 1.5 | 2026-07-31 | Hermes (operator) | Updated GATE 0 to use page-dir/ naming. Updated GATE 1 to use 109-worker markdown pipeline. Updated model references to poolside/laguna-s-2.1:free. Removed JSON-based worker schema in favor of markdown extraction. | Page files now use spec page identifiers in page-dir/. Model is poolside/laguna-s-2.1:free, not deepseek-v4-pro. Workers output .md files, not .json files. |
+| 1.5 | 2026-07-31 | Hermes (operator) | Updated GATE 0 to use page-dir/ naming. Updated GATE 1 to use 109-worker markdown pipeline. Updated model references to poolside/laguna-s-2.1:free. Removed JSON-based worker schema in favor of markdown extraction. | Page files now use spec page identifiers in page-dir/. Model is poolside/laguna-s-2.1:free, not poolside/laguna-s-2.1:free. Workers output .md files, not .json files. |
 
 ### How to Update This Version Table
 

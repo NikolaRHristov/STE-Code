@@ -410,9 +410,9 @@ Use the same `hermes` command pattern as extraction workers. Each worker reads m
 
 ```bash
 # Launch adaptation workers in background with notification
-hermes -z "Read ste-code/merged/master.md. Focus on Section 1 — Words (Rules 1.1-1.14). Adapt every rule from aerospace to code documentation domain. PRESERVE rule numbers and section structure. REPLACE aerospace examples with code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Output ONLY the adaptation. Write to ste-code/adapted/a-sec1-rules.md." -m deepseek-v4-pro &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 1 — Words (Rules 1.1-1.14). Adapt every rule from aerospace to code documentation domain. PRESERVE rule numbers and section structure. REPLACE aerospace examples with code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Output ONLY the adaptation. Write to ste-code/adapted/a-sec1-rules.md." -m poolside/laguna-s-2.1:free &
 
-hermes -z "Read ste-code/merged/master.md. Focus on Section 2 — Noun Clusters (Rules 2.1-2.3). Adapt every rule from aerospace to code documentation domain. ..." -m deepseek-v4-pro &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 2 — Noun Clusters (Rules 2.1-2.3). Adapt every rule from aerospace to code documentation domain. ..." -m poolside/laguna-s-2.1:free &
 
 # Continue for all 11 workers (a001 through a011)
 ```
@@ -711,7 +711,7 @@ If artifact generation fails, diagnose and recover using the quality gate tables
 | Artifact 4 has fewer than 3 rule citations | Transformation is too simple | Add a Step line for each transformation action. Each Step must cite at least one rule number. |
 | Artifact 5 is missing a deployment target | Worker skipped a section | Check that Ollama, LM Studio, and Python each have a dedicated section. Add any missing section. |
 | Aerospace terms found in any artifact | `grep -i "aircraft\|flight\|wing\|engine" ste-code/artifacts/*.txt` returns results | The adapted source files still have aerospace content. Go back to Stage 4 and fix the adaptation before regenerating artifacts. |
-| Artifact 6 mentions wrong model name | Agent invented "deepseek-pro" or similar | Search artifacts for "deepseek". Replace any variant with `deepseek-v4-pro`. |
+| Artifact 6 mentions wrong model name | Agent invented "deepseek-pro" or similar | Search artifacts for "deepseek". Replace any variant with `poolside/laguna-s-2.1:free`. |
 
 ---
 
@@ -765,7 +765,7 @@ After completing any stage (3, 4, or 5), run this cross-check before declaring t
 
 ### After Stage 5 (Artifacts)
 - [ ] All 6 artifact files exist
-- [ ] Model name is correct everywhere: `grep -rh "deepseek" ste-code/artifacts/ | sort -u` returns only `deepseek-v4-pro`
+- [ ] Model name is correct everywhere: `grep -rh "deepseek" ste-code/artifacts/ | sort -u` returns only `poolside/laguna-s-2.1:free`
 - [ ] Full verification script from `.agents/skills/artifacts/SKILL.md` passes all checks
 - [ ] Integration test from `.agents/skills/artifacts/SKILL.md` passes all 5 consistency checks
 - [ ] PROGRESS.md updated with final artifact counts and timestamps
@@ -831,7 +831,7 @@ See Stage 3 Edge Case above for the full recovery procedure.
 ## Immutable Facts
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules (NOT 65)
-- Model: deepseek-v4-pro (NOT deepseek-pro or v4-flash)
+- Model: poolside/laguna-s-2.1:free (NOT deepseek-pro or v4-flash)
 - 434 pages in ASD-STE100 Issue 9
 - 109 extraction workers (pages 1-434, 4 pages each)
 - 11 adaptation workers (9 sections + categories + dictionary)

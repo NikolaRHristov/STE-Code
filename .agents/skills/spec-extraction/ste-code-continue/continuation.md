@@ -281,7 +281,7 @@ Each entry has this structure:
 - Every category MUST match one of the 19 from master.md
 - Every example MUST be an adaptation of a real STE/non-STE pair from the extracted spec
 - No invented code terms without a master.md source
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro or deepseek-v4-flash)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro or deepseek-v4-flash)
 
 ### Stage 4 Failure Modes
 
@@ -381,7 +381,7 @@ These failures can occur during artifact generation.
 | Cross-artifact terminology mismatch | Artifact 1 uses "code-domain technical nouns" but Artifact 2 uses "technical code nouns" for the same concept. Or artifact token estimates disagree with each other. | Standardize on the terminology from this continuation document. Search all 6 artifacts for the inconsistent term with `search_files`. Fix all occurrences to match. |
 | Artifact ordering dependency failure | Artifact 2 (manual) references Artifact 1 (system prompt) for its S0 section, but Artifact 1 has not been generated yet. | Generate artifacts in order: 1 → 2 → 3 → 4 → 5 → 6. Each artifact may reference earlier artifacts. Never reference a later artifact from an earlier one. If Artifact 6 (README) must reference all artifacts, generate it last. |
 | System prompt parse failure | Artifact 1 (system prompt) uses markdown code fences that would break when embedded in a larger prompt. Or it contains unescaped special characters. | Test the system prompt by embedding it in a test prompt. If parsing fails, replace triple-backtick code fences with indented code blocks. Escape any `>` characters that appear at line starts. |
-| Artifact token count miscalculation | The artifact's token count was estimated with a generic 4 chars/token rule but deepseek-v4-pro tokenization produces 15% more tokens for the same text. | After all artifacts are written, run them through a token counter: `wc -c` gives char count. Multiply by 0.29 for a conservative deepseek-v4-pro token estimate. Re-trim if needed. |
+| Artifact token count miscalculation | The artifact's token count was estimated with a generic 4 chars/token rule but poolside/laguna-s-2.1:free tokenization produces 15% more tokens for the same text. | After all artifacts are written, run them through a token counter: `wc -c` gives char count. Multiply by 0.29 for a conservative poolside/laguna-s-2.1:free token estimate. Re-trim if needed. |
 
 BREAKING: Do not generate artifacts if fewer than 57 adaptation files exist. The artifact quality depends on complete adaptation coverage.
 
@@ -415,7 +415,7 @@ After all 6 artifacts pass individual verification, run these cross-artifact che
 
 1. **Rule count consistency.** Every artifact that mentions a rule count must say "53 writing rules + 4 GR rules." Search with: `grep -n 'rule' ste-code/artifacts/*.txt ste-code/artifacts/README.md`.
 2. **Category count consistency.** Every artifact must cite "19 categories." Search with: `grep -n 'categor' ste-code/artifacts/*.txt ste-code/artifacts/README.md`.
-3. **Model name consistency.** Every artifact must use "deepseek-v4-pro." Search with: `grep -n 'deepseek' ste-code/artifacts/*.txt ste-code/artifacts/README.md`.
+3. **Model name consistency.** Every artifact must use "poolside/laguna-s-2.1:free." Search with: `grep -n 'deepseek' ste-code/artifacts/*.txt ste-code/artifacts/README.md`.
 4. **Terminology alignment.** The terms "code-domain technical noun," "code-domain technical verb," and "project controlled terminology" must be used consistently. Search for variants like "technical code noun" or "code technical noun" and fix them.
 5. **Cross-reference validity.** If Artifact 2 says "see Section 3.1 of the system prompt," verify that Artifact 1 actually has a Section 3.1 with that content.
 6. **Level consistency.** If any artifact mentions adaptation levels (1–5), verify the level descriptions match the definitions in `.agents/AGENTS.md`.
@@ -435,7 +435,7 @@ Adaptation and artifact generation are compute-intensive. Plan for these estimat
 | Tokens (output) | ~1,500 | ~85,000 |
 | Tokens (total) | ~4,500 | ~255,000 |
 
-NOTE: These are estimates for deepseek-v4-pro. Actual performance depends on rule complexity. Rules with many sub-sections (Section 1, Section 3) take longer than simple rules (Section 9, GR rules).
+NOTE: These are estimates for poolside/laguna-s-2.1:free. Actual performance depends on rule complexity. Rules with many sub-sections (Section 1, Section 3) take longer than simple rules (Section 9, GR rules).
 
 ### Stage 5 Estimates
 
@@ -468,7 +468,7 @@ Schedule these rules early in the batch sequence. Do not leave them for the end.
 
 ### Memory and Context Window Constraints
 
-deepseek-v4-pro has a 128K token context window. Some rules need special handling because the source material plus the adaptation output approaches this limit.
+poolside/laguna-s-2.1:free has a 128K token context window. Some rules need special handling because the source material plus the adaptation output approaches this limit.
 
 | Rule | Estimated Input Tokens | Output Tokens | Total | Risk |
 |------|----------------------|---------------|-------|------|
@@ -510,7 +510,7 @@ To stay within token budgets for artifacts:
 | R3 | NEVER claim a file complete until it EXISTS on disk with real content (>30 lines) |
 | R4 | Every claim backed by source data from master.md. No fabrication. |
 | R5 | `#` page, `##` section, `###` rule, `####` dictionary. Blank line after every heading. |
-| R6 | 19 categories, deepseek-v4-pro, 53 rules + 4 GR. Never claim otherwise. |
+| R6 | 19 categories, poolside/laguna-s-2.1:free, 53 rules + 4 GR. Never claim otherwise. |
 | R7 | Update `.agents/state/PROGRESS.md` after EVERY completed file. |
 | R8 | Fix mistakes immediately. Document what happened. |
 
@@ -574,7 +574,7 @@ These limitations are inherent to the pipeline. They are not bugs.
 
 4. **Dictionary adaptation is partial.** The full ASD-STE100 dictionary has 5,943 lines. Only approved words with direct code-domain equivalents are adapted. Words like "aircraft," "fuselage," and "landing gear" have no code-domain analog and are not adapted.
 
-5. **Token budgets are approximate.** Actual token counts vary by model tokenizer. deepseek-v4-pro tokenization differs from GPT-4 or Claude tokenization. Budgets are guidelines, not hard limits. Validate with the target model when precision matters.
+5. **Token budgets are approximate.** Actual token counts vary by model tokenizer. poolside/laguna-s-2.1:free tokenization differs from GPT-4 or Claude tokenization. Budgets are guidelines, not hard limits. Validate with the target model when precision matters.
 
 6. **The pipeline produces Level 4 output (~50K tokens).** Lower levels (1–3) are extracted subsets of the Level 4 output. Higher levels (5) require extension workers to fill code-domain gaps. This orchestrator produces Level 4 only.
 
@@ -582,9 +582,9 @@ These limitations are inherent to the pipeline. They are not bugs.
 
 8. **Single-pass adaptation. No iterative refinement.** Each rule is adapted once from its master.md source. If the adaptation produces a poor result, the orchestrator fixes it immediately (R8) but does not re-read and re-adapt the rule from scratch. Complex rules may need manual review.
 
-9. **Context window exhaustion risk for large rules.** Section 4 (procedural writing) and the dictionary file approach deepseek-v4-pro's 128K context limit. Split adaptation into segments as described in "Memory and Context Window Constraints." If a rule cannot be split (tightly coupled content), the adaptation quality will degrade toward the end of the file as context compression increases.
+9. **Context window exhaustion risk for large rules.** Section 4 (procedural writing) and the dictionary file approach poolside/laguna-s-2.1:free's 128K context limit. Split adaptation into segments as described in "Memory and Context Window Constraints." If a rule cannot be split (tightly coupled content), the adaptation quality will degrade toward the end of the file as context compression increases.
 
-10. **Model-specific tokenization differences.** The token budgets in this document use a 4 chars/token estimate. deepseek-v4-pro's actual tokenizer produces approximately 3.5 chars/token for English prose and 2.8 chars/token for code-heavy text. Artifacts with many code examples will have more tokens than the char-based estimate suggests. Use the conservative 0.29 multiplier for final token verification.
+10. **Model-specific tokenization differences.** The token budgets in this document use a 4 chars/token estimate. poolside/laguna-s-2.1:free's actual tokenizer produces approximately 3.5 chars/token for English prose and 2.8 chars/token for code-heavy text. Artifacts with many code examples will have more tokens than the char-based estimate suggests. Use the conservative 0.29 multiplier for final token verification.
 
 11. **No l10n/i18n support.** All adapted content is produced in English (American spelling per Rule 1.14). The translation pipeline is a separate phase managed by the Translation Orchestrator (Agent #9). Do not attempt to adapt rules into other languages during Stage 4.
 
@@ -602,11 +602,11 @@ everything from `ste-code/merged/master.md`.
 
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules (NOT 65)
-- Model: deepseek-v4-pro (NOT deepseek-pro or deepseek-v4-flash)
+- Model: poolside/laguna-s-2.1:free (NOT deepseek-pro or deepseek-v4-flash)
 - 434 pages in ASD-STE100 Issue 9
 - Output: .md for adaptation, .txt for artifacts
-- 128K token context window (deepseek-v4-pro)
-- Token multiplier for deepseek-v4-pro: 0.29 (chars × 0.29 ≈ tokens)
+- 128K token context window (poolside/laguna-s-2.1:free)
+- Token multiplier for poolside/laguna-s-2.1:free: 0.29 (chars × 0.29 ≈ tokens)
 
 ## Start Now
 

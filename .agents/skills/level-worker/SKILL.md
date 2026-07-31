@@ -74,7 +74,7 @@ python3 .agents/benchmark/launch-levels.py
 
 This uses the canonical Hermes oneshot wrapper pattern:
 1. Writes prompt to temp file
-2. Launches `~/.hermes/hermes-agent/venv/bin/python3 hermes-oneshot-wrapper.py <prompt_file> --model deepseek-v4-pro`
+2. Launches `~/.hermes/hermes-agent/venv/bin/python3 hermes-oneshot-wrapper.py <prompt_file> --model poolside/laguna-s-2.1:free`
 3. Workers run with `session_db=None` — no session pollution
 4. Workers have `tool_gen_callback=None` — no file creation tools
 5. Output captured to `output.txt` in each level directory
@@ -85,7 +85,7 @@ The launcher accepts these CLI flags:
 python3 .agents/benchmark/launch-levels.py \
   --levels 1,2,3,4 \
   --docs README.md CONTRIBUTING.md \
-  --model deepseek-v4-pro \
+  --model poolside/laguna-s-2.1:free \
   --output-dir .agents/rewrites \
   --timeout 900
 ```
@@ -94,7 +94,7 @@ python3 .agents/benchmark/launch-levels.py \
 |------|---------|-------------|
 | `--levels` | `1,2,3,4` | Comma-separated level numbers to run |
 | `--docs` | README.md CONTRIBUTING.md CODE_OF_CONDUCT.md RELEASE-NOTES.md | Documents to rewrite |
-| `--model` | `deepseek-v4-pro` | LLM model name |
+| `--model` | `poolside/laguna-s-2.1:free` | LLM model name |
 | `--output-dir` | `.agents/rewrites` | Output root directory |
 | `--timeout` | `900` | Timeout per worker in seconds |
 
@@ -104,7 +104,7 @@ python3 .agents/benchmark/launch-levels.py \
 |-----------|--------|-------------|
 | Level | 1-4 | Adaptation depth (5 not yet implemented) |
 | Documents | README.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md, RELEASE-NOTES.md | Which docs to rewrite |
-| Model | deepseek-v4-pro | LLM model |
+| Model | poolside/laguna-s-2.1:free | LLM model |
 
 ## Results Format
 
@@ -279,7 +279,7 @@ Run these checks before you launch the workers. If any check fails, stop and fix
 □ Output directory writable: mkdir -p .agents/rewrites && [ -w .agents/rewrites ]
 □ No stale workers running: ps aux | grep oneshot | grep -v grep
 □ Disk space available:     df -h .agents/rewrites (at least 1 GB recommended)
-□ Model configured:         hermes status (check that deepseek-v4-pro is listed)
+□ Model configured:         hermes status (check that poolside/laguna-s-2.1:free is listed)
 ```
 
 The launcher script (`launch-levels.py`) runs some of these checks automatically. The manual checks above catch environment problems before the script starts.
@@ -431,7 +431,7 @@ The launcher will exit with an error message. No workers will start.
 | Symptom | Likely Cause | Recovery |
 |---------|--------------|----------|
 | `ERROR: Wrapper not found at ...` | The `hermes-oneshot-wrapper.py` file is missing from `.agents/tools/`. | Run `git status` in the project root. If the tools directory is missing, check out the `Current` branch. The wrapper ships with the project. |
-| Worker exits with code 1, `output.txt` is empty | The Hermes venv Python is missing or the model is not available. | Check that `~/.hermes/hermes-agent/venv/bin/python3` exists. If it does not exist, reinstall Hermes Agent. Check that the model `deepseek-v4-pro` is configured in your Hermes profile. |
+| Worker exits with code 1, `output.txt` is empty | The Hermes venv Python is missing or the model is not available. | Check that `~/.hermes/hermes-agent/venv/bin/python3` exists. If it does not exist, reinstall Hermes Agent. Check that the model `poolside/laguna-s-2.1:free` is configured in your Hermes profile. |
 | Worker exits with code 1, `output.txt` has a Python traceback | A Python import error in the oneshot wrapper (missing `hermes_cli` modules). | The venv Python must be used. Do not use system Python. The wrapper imports `run_agent.AIAgent` and other `hermes_cli` modules that exist only inside the Hermes venv. |
 | Worker runs but `output.txt` has only a partial response | The LLM hit a token limit or the API timed out. | The oneshot wrapper has no retry logic. Run the launcher again. If the problem continues, the prompt may be too long for the model context window. Check the prompt file in the level directory. |
 | Worker produces `output.txt` with no `### REWRITTEN:` headers | The LLM did not follow the output format instructions. | This is a prompt adherence failure. The launcher prompt includes explicit output format instructions. Run the worker again. If the problem continues on the same level, reduce the document count or increase the model capacity. |
@@ -501,7 +501,7 @@ Level 5 loads the full standard: all 57 adapted files from `ste-code/adapted/*.m
 
 | Blocker | Details |
 |---------|---------|
-| Token budget | The full standard is ~100K tokens. With 4 target documents (~4K words total), the prompt exceeds 100K tokens. The model `deepseek-v4-pro` has a large context window, but the output may degrade with very long system prompts. |
+| Token budget | The full standard is ~100K tokens. With 4 target documents (~4K words total), the prompt exceeds 100K tokens. The model `poolside/laguna-s-2.1:free` has a large context window, but the output may degrade with very long system prompts. |
 | Prompt construction | Level 5 needs to load all 57 adapted files. The current `launch-levels.py` script loads only the Level 1 prompt file plus the target documents. Loading 57 files needs a new prompt assembly step. |
 | Output volume | At Level 3, one document produces ~1,200 lines of output (rewritten text, change log, compliance table). Four documents at Level 5 may produce 5,000+ lines. This may exceed the model output token limit. |
 | Cost | A 100K token prompt with 4 documents costs approximately 4× more than Level 4. Running all 4 levels in parallel at Level 5 increases cost further. |

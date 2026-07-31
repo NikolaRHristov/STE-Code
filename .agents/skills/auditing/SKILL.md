@@ -98,7 +98,7 @@ Use this ordered decision tree for each file. Stop at the first rule that matche
 
 7. Does the file content match the expected factual baseline?
    - Category count: 19 (not 22)
-   - Model name: deepseek-v4-pro
+   - Model name: poolside/laguna-s-2.1:free
    - Rule count: 53 writing rules + 4 GR rules
    NO  → NEAR-MATCH (RAIL 6: Factual Correctness)
    YES → MATCH
@@ -210,7 +210,7 @@ When a fabrication signal has a legitimate explanation, do not delete the file. 
 | Pattern | Fix |
 |---------|-----|
 | `22 categories` | → 19 |
-| `deepseek-pro` | → deepseek-v4-pro |
+| `deepseek-pro` | → poolside/laguna-s-2.1:free |
 | Empty stale directories | Remove |
 | Fabricated artifact files | Delete (must be regenerated) |
 

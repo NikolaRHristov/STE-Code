@@ -22,7 +22,7 @@ Generate code-domain extensions to fill gaps between aerospace ASD-STE100 and th
 ## Worker Command Template
 
 ```bash
-hermes -z "$(cat /tmp/ext-worker-prompt.txt)" -m deepseek-v4-pro --yolo > OUTPUT_FILE 2>&1 &
+hermes -z "$(cat /tmp/ext-worker-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo > OUTPUT_FILE 2>&1 &
 ```
 
 ## Launch Rules
@@ -49,7 +49,7 @@ test -f SCE/data/vocabulary/approved-verbs.json || echo "MISSING: approved-verbs
 test -f .agents/references/worker-rails.md || echo "MISSING: worker-rails.md"
 
 # Check available model
-hermes status 2>/dev/null | grep -q deepseek-v4-pro || echo "WARNING: model may not be available"
+hermes status 2>/dev/null | grep -q poolside/laguna-s-2.1:free || echo "WARNING: model may not be available"
 ```
 
 NOTE: A missing reference file causes workers to fabricate terms. Do not launch workers until all references exist.
@@ -69,7 +69,7 @@ for the [GAP_AREA] gap area.
 Output area: [GAP_AREA_NAME]
 Maximum entries: [COUNT]
 Output file: [EXACT_FILE_PATH]
-Model: deepseek-v4-pro
+Model: poolside/laguna-s-2.1:free
 
 Each entry must follow the schema in Section 3 below.
 ```

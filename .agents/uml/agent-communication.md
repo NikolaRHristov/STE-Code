@@ -180,7 +180,7 @@ flowchart TD
 
 ## Agent Identity
 - Role: refinement-orchestrator
-- Session: Hermes TUI, deepseek-v4-pro
+- Session: Hermes TUI, poolside/laguna-s-2.1:free
 - Last action: Completed all 109 refinement workers
 - Time since last batch: <1 minute (pipeline complete)
 

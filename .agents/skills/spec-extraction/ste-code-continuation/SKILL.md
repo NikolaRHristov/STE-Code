@@ -468,9 +468,9 @@ Verify output after each batch before launching the next batch.
 
 ```bash
 # Batch 1: Sections 1-3 (Rules 1.1 through 3.7)
-hermes -z "Read ste-code/merged/master.md. Focus on Section 1 (Rules 1.1-1.14), Section 2 (Rules 2.1-2.3), Section 3 (Rules 3.1-3.7). Adapt every rule, category, and example from aerospace to code documentation domain. PRESERVE: rule numbers, section structure, STE/non-STE pair format. REPLACE: aerospace examples → code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Write to ste-code/adapted/a-sec1-rules.md. Output ONLY the adaptation file." -m deepseek-v4-pro --yolo &
-hermes -z "Read ste-code/merged/master.md. Focus on Section 2 (Rules 2.1-2.3). Adapt every rule, category, and example from aerospace to code documentation domain. PRESERVE: rule numbers, section structure, STE/non-STE pair format. REPLACE: aerospace examples → code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Write to ste-code/adapted/a-sec2-rules.md. Output ONLY the adaptation file." -m deepseek-v4-pro --yolo &
-hermes -z "Read ste-code/merged/master.md. Focus on Section 3 (Rules 3.1-3.7). Adapt every rule, category, and example from aerospace to code documentation domain. PRESERVE: rule numbers, section structure, STE/non-STE pair format. REPLACE: aerospace examples → code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Write to ste-code/adapted/a-sec3-rules.md. Output ONLY the adaptation file." -m deepseek-v4-pro --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 1 (Rules 1.1-1.14), Section 2 (Rules 2.1-2.3), Section 3 (Rules 3.1-3.7). Adapt every rule, category, and example from aerospace to code documentation domain. PRESERVE: rule numbers, section structure, STE/non-STE pair format. REPLACE: aerospace examples → code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Write to ste-code/adapted/a-sec1-rules.md. Output ONLY the adaptation file." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 2 (Rules 2.1-2.3). Adapt every rule, category, and example from aerospace to code documentation domain. PRESERVE: rule numbers, section structure, STE/non-STE pair format. REPLACE: aerospace examples → code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Write to ste-code/adapted/a-sec2-rules.md. Output ONLY the adaptation file." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 3 (Rules 3.1-3.7). Adapt every rule, category, and example from aerospace to code documentation domain. PRESERVE: rule numbers, section structure, STE/non-STE pair format. REPLACE: aerospace examples → code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Write to ste-code/adapted/a-sec3-rules.md. Output ONLY the adaptation file." -m poolside/laguna-s-2.1:free --yolo &
 wait
 ```
 
@@ -489,20 +489,20 @@ grep -c "^#### Rule" ste-code/adapted/a-sec1-rules.md ste-code/adapted/a-sec2-ru
 
 ```bash
 # Batch 2: Sections 4-6 (Rules 4.1 through 6.6)
-hermes -z "Read ste-code/merged/master.md. Focus on Section 4 (Rules 4.1-4.4). Adapt every rule... Write to ste-code/adapted/a-sec4-rules.md." -m deepseek-v4-pro --yolo &
-hermes -z "Read ste-code/merged/master.md. Focus on Section 5 (Rules 5.1-5.5). Adapt every rule... Write to ste-code/adapted/a-sec5-rules.md." -m deepseek-v4-pro --yolo &
-hermes -z "Read ste-code/merged/master.md. Focus on Section 6 (Rules 6.1-6.6). Adapt every rule... Write to ste-code/adapted/a-sec6-rules.md." -m deepseek-v4-pro --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 4 (Rules 4.1-4.4). Adapt every rule... Write to ste-code/adapted/a-sec4-rules.md." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 5 (Rules 5.1-5.5). Adapt every rule... Write to ste-code/adapted/a-sec5-rules.md." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 6 (Rules 6.1-6.6). Adapt every rule... Write to ste-code/adapted/a-sec6-rules.md." -m poolside/laguna-s-2.1:free --yolo &
 wait
 
 # Batch 3: Sections 7-9 (Rules 7.1 through GR4)
-hermes -z "Read ste-code/merged/master.md. Focus on Section 7 (Rules 7.1-7.3). Adapt every rule... Write to ste-code/adapted/a-sec7-rules.md." -m deepseek-v4-pro --yolo &
-hermes -z "Read ste-code/merged/master.md. Focus on Section 8 (Rules 8.1-8.7). Adapt every rule... Write to ste-code/adapted/a-sec8-rules.md." -m deepseek-v4-pro --yolo &
-hermes -z "Read ste-code/merged/master.md. Focus on Section 9 (Rules 9.1-9.4 + GR1-GR4). Adapt every rule... Write to ste-code/adapted/a-sec9-rules.md." -m deepseek-v4-pro --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 7 (Rules 7.1-7.3). Adapt every rule... Write to ste-code/adapted/a-sec7-rules.md." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 8 (Rules 8.1-8.7). Adapt every rule... Write to ste-code/adapted/a-sec8-rules.md." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Section 9 (Rules 9.1-9.4 + GR1-GR4). Adapt every rule... Write to ste-code/adapted/a-sec9-rules.md." -m poolside/laguna-s-2.1:free --yolo &
 wait
 
 # Batch 4: Categories + Dictionary
-hermes -z "Read ste-code/merged/master.md. Focus on the 19 technical noun categories and 4 technical verb categories. Adapt all category names, descriptions, and examples from aerospace to code domain. Map per references/category-mapping.md. Write to ste-code/adapted/a-categories.md." -m deepseek-v4-pro --yolo &
-hermes -z "Read ste-code/merged/master.md. Focus on Part 2 — Dictionary (pages 129-360) and Appendices (pages 361-434). Adapt every dictionary entry and appendix section from aerospace to code domain. PRESERVE: APPROVED/UNAPPROVED structure, part-of-speech tags, alternative word mappings. REPLACE: aerospace examples → code documentation examples. Write to ste-code/adapted/a-dictionary.md." -m deepseek-v4-pro --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on the 19 technical noun categories and 4 technical verb categories. Adapt all category names, descriptions, and examples from aerospace to code domain. Map per references/category-mapping.md. Write to ste-code/adapted/a-categories.md." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read ste-code/merged/master.md. Focus on Part 2 — Dictionary (pages 129-360) and Appendices (pages 361-434). Adapt every dictionary entry and appendix section from aerospace to code domain. PRESERVE: APPROVED/UNAPPROVED structure, part-of-speech tags, alternative word mappings. REPLACE: aerospace examples → code documentation examples. Write to ste-code/adapted/a-dictionary.md." -m poolside/laguna-s-2.1:free --yolo &
 wait
 ```
 
@@ -543,16 +543,16 @@ If any adaptation worker fails (timeout, truncated output, missing file):
 
 1. **First failure:** Retry the same worker with the same prompt.
    ```bash
-   hermes -z "$(cat .agents/prompts/adapt/a005-prompt.txt)" -m deepseek-v4-pro --yolo
+   hermes -z "$(cat .agents/prompts/adapt/a005-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
    ```
 
 2. **Second failure (same worker):** Reduce scope. Split the section into two sub-workers.
    Example for worker a005 (Rules 5.1–5.5, 5 rules):
    ```bash
    # Sub-worker A: Rules 5.1-5.3
-   hermes -z "Read ste-code/merged/master.md. Focus on Section 5 (Rules 5.1-5.3 only). Adapt... Write to ste-code/adapted/a-sec5-rules-part1.md." -m deepseek-v4-pro --yolo &
+   hermes -z "Read ste-code/merged/master.md. Focus on Section 5 (Rules 5.1-5.3 only). Adapt... Write to ste-code/adapted/a-sec5-rules-part1.md." -m poolside/laguna-s-2.1:free --yolo &
    # Sub-worker B: Rules 5.4-5.5
-   hermes -z "Read ste-code/merged/master.md. Focus on Section 5 (Rules 5.4-5.5 only). Adapt... Write to ste-code/adapted/a-sec5-rules-part2.md." -m deepseek-v4-pro --yolo &
+   hermes -z "Read ste-code/merged/master.md. Focus on Section 5 (Rules 5.4-5.5 only). Adapt... Write to ste-code/adapted/a-sec5-rules-part2.md." -m poolside/laguna-s-2.1:free --yolo &
    wait
    # Combine results
    cat ste-code/adapted/a-sec5-rules-part1.md ste-code/adapted/a-sec5-rules-part2.md > ste-code/adapted/a-sec5-rules.md
@@ -694,7 +694,7 @@ Each artifact is generated by a dedicated hermes worker. Launch them **sequentia
 
 ```bash
 # Artifact 1: System Prompt (~4,800 chars)
-hermes -z "Read ste-code/merged/master.md Part 1 Writing Rules (P1-P14). Read ste-code/adapted/a-sec1-rules.md. Generate the file ste-code/artifacts/ste-code-distilled-system-prompt.txt with these sections: IDENTITY block (2-3 sentences), 14 CORE PRINCIPLES referencing specific rule numbers, CANONICAL SYNONYM TABLE from master.md source, APPROVED VOCABULARY POLICY, OUTPUT FORMAT with standardized sections, 10 ANTI-PATTERNS (code-specific, not aerospace). All principles must cite exact rule numbers. Synonyms must trace to master.md entries. Anti-patterns must apply to code documentation. Target ~4,800 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+hermes -z "Read ste-code/merged/master.md Part 1 Writing Rules (P1-P14). Read ste-code/adapted/a-sec1-rules.md. Generate the file ste-code/artifacts/ste-code-distilled-system-prompt.txt with these sections: IDENTITY block (2-3 sentences), 14 CORE PRINCIPLES referencing specific rule numbers, CANONICAL SYNONYM TABLE from master.md source, APPROVED VOCABULARY POLICY, OUTPUT FORMAT with standardized sections, 10 ANTI-PATTERNS (code-specific, not aerospace). All principles must cite exact rule numbers. Synonyms must trace to master.md entries. Anti-patterns must apply to code documentation. Target ~4,800 chars (±30%). Output ONLY the artifact file." -m poolside/laguna-s-2.1:free --yolo
 
 # After Artifact 1, verify size:
 TARGET=4800; ACTUAL=$(wc -c < ste-code/artifacts/ste-code-distilled-system-prompt.txt)
@@ -704,7 +704,7 @@ MIN=$(($TARGET * 70 / 100)); MAX=$(($TARGET * 130 / 100))
 
 ```bash
 # Artifact 2: Self-Reading Manual (~28,000 chars)
-hermes -z "Read ste-code/merged/master.md in full (all 53 rules, 19 categories, synonym table, polysemy table, pipeline). Read all ste-code/adapted/ files. Generate ste-code/artifacts/ste-code-self-reading-manual.txt with 8 sections: S0 (how to use this manual + recursive loop diagram as Mermaid flowchart), S1 (14 core principles with code-domain examples), S2 (all 53 adapted rules with code-domain example pairs + 19 categories with code examples + synonym + polysemy + pipeline), S3 (page reading protocol for code docs), S4 (skill extraction framework — 5 patterns), S5 (UML extraction — class + sequence + flowchart), S6 (13 recursive questions adapted for code), S7 (output format — per-turn + consolidated), S8 (context window management). Every rule must have a code-domain example pair. S6 must have exactly 13 questions. Target ~28,000 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+hermes -z "Read ste-code/merged/master.md in full (all 53 rules, 19 categories, synonym table, polysemy table, pipeline). Read all ste-code/adapted/ files. Generate ste-code/artifacts/ste-code-self-reading-manual.txt with 8 sections: S0 (how to use this manual + recursive loop diagram as Mermaid flowchart), S1 (14 core principles with code-domain examples), S2 (all 53 adapted rules with code-domain example pairs + 19 categories with code examples + synonym + polysemy + pipeline), S3 (page reading protocol for code docs), S4 (skill extraction framework — 5 patterns), S5 (UML extraction — class + sequence + flowchart), S6 (13 recursive questions adapted for code), S7 (output format — per-turn + consolidated), S8 (context window management). Every rule must have a code-domain example pair. S6 must have exactly 13 questions. Target ~28,000 chars (±30%). Output ONLY the artifact file." -m poolside/laguna-s-2.1:free --yolo
 
 # Verify Artifact 2 size + section count:
 wc -c ste-code/artifacts/ste-code-self-reading-manual.txt
@@ -714,7 +714,7 @@ grep -c "^## S[0-8] " ste-code/artifacts/ste-code-self-reading-manual.txt
 
 ```bash
 # Artifact 3: Extraction Methodology (~5,600 chars)
-hermes -z "Read ste-code/merged/master.md pipeline section and structural extraction types section. Generate ste-code/artifacts/ste-code-extraction-methodology.txt with: Turn 0 initialization (read title, TOC, classify document type), Turns 1+ 7-step pipeline (READ→TOKENIZE→LEXICAL CHECK→EXTRACT STRUCTURAL DATA→OPTIMIZE→OUTPUT→ADVANCE), 5 structural extraction types adapted for code (classes/structs, associations/dependencies, procedures/functions, conditions/branches, safety/breaking changes), Final turn consolidation, Mermaid UML output format (class + flowchart), State persistence mechanism (write current state to ste-code/state/turn-N.json with position and unresolved references). Target ~5,600 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+hermes -z "Read ste-code/merged/master.md pipeline section and structural extraction types section. Generate ste-code/artifacts/ste-code-extraction-methodology.txt with: Turn 0 initialization (read title, TOC, classify document type), Turns 1+ 7-step pipeline (READ→TOKENIZE→LEXICAL CHECK→EXTRACT STRUCTURAL DATA→OPTIMIZE→OUTPUT→ADVANCE), 5 structural extraction types adapted for code (classes/structs, associations/dependencies, procedures/functions, conditions/branches, safety/breaking changes), Final turn consolidation, Mermaid UML output format (class + flowchart), State persistence mechanism (write current state to ste-code/state/turn-N.json with position and unresolved references). Target ~5,600 chars (±30%). Output ONLY the artifact file." -m poolside/laguna-s-2.1:free --yolo
 
 # Verify Artifact 3 pipeline step count:
 grep "→" ste-code/artifacts/ste-code-extraction-methodology.txt | head -1 | tr '→' '\n' | wc -l
@@ -723,7 +723,7 @@ grep "→" ste-code/artifacts/ste-code-extraction-methodology.txt | head -1 | tr
 
 ```bash
 # Artifact 4: Example Turn (~2,000 chars)
-hermes -z "Read ste-code/merged/master.md. Find a clear STE/non-STE pair (prefer Rule 3.5 Approved Verb Forms or Rule 1.7 Technical Names as Verbs). Adapt both the non-STE and STE text from aerospace to code documentation domain using ste-code-adaptation preserve/replace rules. Generate ste-code/artifacts/ste-code-example-turn.txt with: Non-STE-Code INPUT block citing exact source rule number and line range from master.md, COMPLIANCE STATUS with N violations count (minimum 3 violations shown), STE-CODE OUTPUT block with corrected text, UML EXTRACTION with at least one Mermaid class diagram and one Mermaid flowchart, OPTIMIZATIONS table with before/after metrics. Cite the source rule. Target ~2,000 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+hermes -z "Read ste-code/merged/master.md. Find a clear STE/non-STE pair (prefer Rule 3.5 Approved Verb Forms or Rule 1.7 Technical Names as Verbs). Adapt both the non-STE and STE text from aerospace to code documentation domain using ste-code-adaptation preserve/replace rules. Generate ste-code/artifacts/ste-code-example-turn.txt with: Non-STE-Code INPUT block citing exact source rule number and line range from master.md, COMPLIANCE STATUS with N violations count (minimum 3 violations shown), STE-CODE OUTPUT block with corrected text, UML EXTRACTION with at least one Mermaid class diagram and one Mermaid flowchart, OPTIMIZATIONS table with before/after metrics. Cite the source rule. Target ~2,000 chars (±30%). Output ONLY the artifact file." -m poolside/laguna-s-2.1:free --yolo
 
 # Verify Artifact 4 source citation:
 grep "master.md" ste-code/artifacts/ste-code-example-turn.txt
@@ -732,7 +732,7 @@ grep "master.md" ste-code/artifacts/ste-code-example-turn.txt
 
 ```bash
 # Artifact 5: Deployment Guide (~7,200 chars)
-hermes -z "Read ste-code/artifacts/ files for actual byte sizes. Generate ste-code/artifacts/ste-code-deployment-guide.txt covering 4 deployment options: A) Ollama Modelfile (bake system prompt into Modelfile, provide example Modelfile content), B) LM Studio GUI (step-by-step, max 5 steps), C) Python + llama.cpp (programmatic loop with system prompt injection, provide Python code snippet), D) Full conversation export (include all 6 artifacts as context). Include token budget breakdown table using actual artifact sizes, realistic expected output examples after processing. Each option must have: prerequisites, step-by-step (max 20 words per step), verification command. Target ~7,200 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+hermes -z "Read ste-code/artifacts/ files for actual byte sizes. Generate ste-code/artifacts/ste-code-deployment-guide.txt covering 4 deployment options: A) Ollama Modelfile (bake system prompt into Modelfile, provide example Modelfile content), B) LM Studio GUI (step-by-step, max 5 steps), C) Python + llama.cpp (programmatic loop with system prompt injection, provide Python code snippet), D) Full conversation export (include all 6 artifacts as context). Include token budget breakdown table using actual artifact sizes, realistic expected output examples after processing. Each option must have: prerequisites, step-by-step (max 20 words per step), verification command. Target ~7,200 chars (±30%). Output ONLY the artifact file." -m poolside/laguna-s-2.1:free --yolo
 
 # Verify Artifact 5 covers all 4 options:
 grep -c "Option [A-D]" ste-code/artifacts/ste-code-deployment-guide.txt
@@ -741,7 +741,7 @@ grep -c "Option [A-D]" ste-code/artifacts/ste-code-deployment-guide.txt
 
 ```bash
 # Artifact 6: README.md (~2,000 chars)
-hermes -z "Read all ste-code/artifacts/ files for actual sizes and descriptions. Read ste-code-adaptation/SKILL.md for preserve/replace rules. Generate ste-code/artifacts/README.md with: What STE-Code is (2-3 concise sentences), File listing with actual byte sizes for all 6 artifacts, Quick start (exactly 3 steps: choose deployment option, load system prompt, run on code docs), Architecture summary (preserve original STE structure, replace aerospace with code domain), Design principles, Reference to ASD-STE100 Issue 9 as source material. Target ~2,000 chars (±30%). Output ONLY the artifact file." -m deepseek-v4-pro --yolo
+hermes -z "Read all ste-code/artifacts/ files for actual sizes and descriptions. Read ste-code-adaptation/SKILL.md for preserve/replace rules. Generate ste-code/artifacts/README.md with: What STE-Code is (2-3 concise sentences), File listing with actual byte sizes for all 6 artifacts, Quick start (exactly 3 steps: choose deployment option, load system prompt, run on code docs), Architecture summary (preserve original STE structure, replace aerospace with code domain), Design principles, Reference to ASD-STE100 Issue 9 as source material. Target ~2,000 chars (±30%). Output ONLY the artifact file." -m poolside/laguna-s-2.1:free --yolo
 
 # Verify Artifact 6 completeness:
 grep -c "^## " ste-code/artifacts/README.md
@@ -779,7 +779,7 @@ This prevents partially written files from polluting the output directory if gen
 ```bash
 # Atomic write example for Artifact 1:
 mkdir -p ste-code/artifacts/.tmp ste-code/artifacts/.backup
-hermes -z "..." -m deepseek-v4-pro --yolo > ste-code/artifacts/.tmp/a1-system-prompt.txt
+hermes -z "..." -m poolside/laguna-s-2.1:free --yolo > ste-code/artifacts/.tmp/a1-system-prompt.txt
 # Validate temp file
 TARGET=4800; ACTUAL=$(wc -c < ste-code/artifacts/.tmp/a1-system-prompt.txt)
 MIN=$(($TARGET * 70 / 100)); MAX=$(($TARGET * 130 / 100))
@@ -1086,5 +1086,5 @@ When the agent is re-invoked mid-pipeline, the recovery flow is:
 ## Immutable Facts
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules (NOT 65)
-- Model: deepseek-v4-pro (NOT deepseek-pro or v4-flash)
+- Model: poolside/laguna-s-2.1:free (NOT deepseek-pro or v4-flash)
 - 434 pages in ASD-STE100 Issue 9

@@ -2,7 +2,7 @@
 
 > **Source:** ASD-STE100 Issue 9, January 2025 (434 pages)
 > **Agents:** Extraction (#1), Refinement (#2), Auditor (#3), Continuation (#4)
-> **Model:** deepseek-v4-pro exclusively
+> **Model:** poolside/laguna-s-2.1:free exclusively
 > **Key Facts:** 53 writing rules + 4 GR rules, 19 technical noun categories, ~875 approved + ~1400 unapproved dictionary entries
 
 ---
@@ -99,7 +99,7 @@ stateDiagram-v2
 
     state BatchLoop {
         [*] --> GeneratePrompts : write 3 prompts to disk
-        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
         LaunchWorkers --> WorkerRun : 3 workers parallel (bg + notify_on_complete)
         WorkerRun --> WaitAll : wait for all 3 to exit
         WaitAll --> VerifyBatch : verify output files
@@ -161,7 +161,7 @@ stateDiagram-v2
 
     state BatchLoop {
         [*] --> GeneratePrompts : write 3 full prompts (no abbreviation)
-        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat ste-code/prompts-refine/rNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat ste-code/prompts-refine/rNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
         LaunchWorkers --> WorkerRun : 3 workers parallel (bg + notify_on_complete)
         WorkerRun --> WaitAll : wait for all 3 to exit
         WaitAll --> VerifyBatch : verify output files
@@ -470,7 +470,7 @@ stateDiagram-v2
         G4_3 --> G4_4 : anti-patterns are code-specific (not aerospace)
         G4_4 --> G4_5 : every claim cross-references master.md entry
         G4_5 --> G4_6 : anti-fabrication rules 1-7 verified
-        G4_6 --> G4_7 : 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+        G4_6 --> G4_7 : 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro)
         G4_7 --> G4_PASS : GATE 4 ✅
     }
 
@@ -497,7 +497,7 @@ stateDiagram-v2
 
     state "Batch Scheduler\n(Orchestrator Loop)" as Scheduler {
         [*] --> WritePrompts : write 3 prompt files to disk
-        WritePrompts --> Launch : hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+        WritePrompts --> Launch : hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
         Launch --> Fork
 
         state Fork {
@@ -650,7 +650,7 @@ stateDiagram-v2
     }
 
     state "R6 — Factual Correctness" as R6 {
-        note: 19 categories (NOT 22)\n53+4 rules (NOT 65)\ndeepseek-v4-pro (NOT deepseek-pro)\n434 pages (Issue 9, Jan 2025)
+        note: 19 categories (NOT 22)\n53+4 rules (NOT 65)\npoolside/laguna-s-2.1:free (NOT deepseek-pro)\n434 pages (Issue 9, Jan 2025)
     }
 
     state "R7 — Progress Tracking" as R7 {
@@ -768,7 +768,7 @@ stateDiagram-v2
 
 **Agent #3 (Auditor)** operates across all stages — disk-verified, never trusts claims, enforces R1-R8 rails.
 
-**Model:** deepseek-v4-pro exclusively. **Key facts:** 53 writing rules + 4 GR rules, 19 categories (NOT 22), 434 pages.
+**Model:** poolside/laguna-s-2.1:free exclusively. **Key facts:** 53 writing rules + 4 GR rules, 19 categories (NOT 22), 434 pages.
 
 ---
 
@@ -818,7 +818,7 @@ The batch count formula: `batches = ceil(worker_count / 3)`. For 109 workers: `c
 
 ### 13.4 Scenario: Changing the Model Name
 
-When you switch from `deepseek-v4-pro` to a different model:
+When you switch from `poolside/laguna-s-2.1:free` to a different model:
 
 | Section | Action |
 |---------|--------|
@@ -874,7 +874,7 @@ When artifacts change (add, remove, rename):
 **Limitation:** The pipeline hardcodes a maximum of 3 concurrent workers per batch. This limit exists for three reasons:
 1. Hermes Agent runs on a single process; more than 3 parallel `hermes -z` invocations risk context-window memory pressure.
 2. The `notify_on_complete` channel has not been tested at scale beyond 3 concurrent signals.
-3. `deepseek-v4-pro` API rate limits may trigger if 4+ workers submit prompts simultaneously.
+3. `poolside/laguna-s-2.1:free` API rate limits may trigger if 4+ workers submit prompts simultaneously.
 
 **What happens if violated:** Launching 4+ workers may cause:
 - Silent notification drops (one or more workers complete but the coordinator never learns).
@@ -915,7 +915,7 @@ When artifacts change (add, remove, rename):
 
 ### 14.6 Memory Pressure at Scale
 
-**Limitation:** Each `hermes -z` worker loads the full system prompt (~18K tokens) plus the worker prompt (~2K tokens) into context. With deepseek-v4-pro's context window, this is well within limits for a single worker. However, running 3 workers concurrently on a single host consumes ~3× context memory. On constrained systems, this may cause swapping.
+**Limitation:** Each `hermes -z` worker loads the full system prompt (~18K tokens) plus the worker prompt (~2K tokens) into context. With poolside/laguna-s-2.1:free's context window, this is well within limits for a single worker. However, running 3 workers concurrently on a single host consumes ~3× context memory. On constrained systems, this may cause swapping.
 
 **Workaround:** Reduce batch size to 2 or 1 on low-memory hosts. This increases pipeline wall-clock time but avoids OOM conditions.
 
@@ -945,7 +945,7 @@ When artifacts change (add, remove, rename):
 | `git` | Commit steps (all stages) | ≥ 2.30 | Cannot commit batches; pipeline stalls |
 | `git gcommit-hermes` alias | Commit steps | Custom alias | Commit fails; fall back to raw `git commit` |
 | `hermes` CLI | Worker launch (Stages 1–2) | v0.19.0+ | Cannot launch workers; pipeline cannot start |
-| `deepseek-v4-pro` API | All worker and orchestrator agents | Model endpoint | Workers fail on API errors (429, 503, timeout) |
+| `poolside/laguna-s-2.1:free` API | All worker and orchestrator agents | Model endpoint | Workers fail on API errors (429, 503, timeout) |
 | `python3` | Scripts (`check-rails.py`, prompt generators) | ≥ 3.9 | Gate checks cannot run; rails unverified |
 | `bash` | Shell commands in pipeline steps | ≥ 4.0 | Command execution fails |
 | `grep`, `find`, `wc`, `ls` | Gate verification checks | POSIX standard | Individual gate sub-checks fail |
@@ -975,7 +975,7 @@ GATE 0 checks:
   Is git installed?              → NO → pipeline cannot commit
   Is hermes on PATH?             → NO → pipeline cannot launch workers
   Is python3 on PATH?            → NO → check-rails.py cannot run
-  Is deepseek-v4-pro reachable?  → NO → workers fail after launch
+  Is poolside/laguna-s-2.1:free reachable?  → NO → workers fail after launch
   Does gcommit-hermes alias exist? → NO → fall back to raw git commit
 ```
 
@@ -1007,7 +1007,7 @@ These conditions must always be true across all pipeline runs. The Auditor (Agen
 
 - **I10 — Single Agent Per Stage:** Stages 1–2 each have one dedicated agent. Stages 3–5 share Agent #4.
 - **I11 — Auditor Cross-Cutting:** Agent #3 audits all stages but never modifies stage output directly. It moves files only to `_scratch/` for quarantine.
-- **I12 — Model Immutability:** All agents use `deepseek-v4-pro`. No model switching mid-pipeline.
+- **I12 — Model Immutability:** All agents use `poolside/laguna-s-2.1:free`. No model switching mid-pipeline.
 
 ### 16.5 Progress Tracking Invariants
 
@@ -1387,8 +1387,8 @@ checks:
     fail_action: "quarantine and regenerate affected files"
   - id: G4-07
     description: "Correct category count and model name"
-    command: "grep -c '19 categories' ste-code/adapted/*.md && grep -c 'deepseek-v4-pro' ste-code/adapted/*.md"
-    expected: "19 referenced, deepseek-v4-pro referenced (not 22, not deepseek-pro)"
+    command: "grep -c '19 categories' ste-code/adapted/*.md && grep -c 'poolside/laguna-s-2.1:free' ste-code/adapted/*.md"
+    expected: "19 referenced, poolside/laguna-s-2.1:free referenced (not 22, not deepseek-pro)"
     severity: critical
     fail_action: "correct category count or model name"
 ```
@@ -1458,7 +1458,7 @@ checks:
 ┌─────────────────────────────────────────────────────────────┐
 │            STE-CODE PIPELINE — QUICK REFERENCE              │
 ├─────────────────────────────────────────────────────────────┤
-│ MODEL: deepseek-v4-pro   SPEC: ASD-STE100 Issue 9 (434 pp) │
+│ MODEL: poolside/laguna-s-2.1:free   SPEC: ASD-STE100 Issue 9 (434 pp) │
 │ AGENTS: #1 Extract  #2 Refine  #3 Audit  #4 Continue       │
 ├──────────┬──────────┬──────────┬──────────┬────────────────┤
 │ STAGE 1  │ STAGE 2  │ STAGE 3  │ STAGE 4  │ STAGE 5        │
@@ -1470,7 +1470,7 @@ checks:
 │ RAILS (R1-R8): Isolation • Naming • Completion • Fidelity  │
 │                Formatting • Correctness • Progress • Errors │
 ├─────────────────────────────────────────────────────────────┤
-│ LAUNCH: hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro   │
+│ LAUNCH: hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free   │
 │         --yolo bg=true notify_on_complete=true              │
 ├─────────────────────────────────────────────────────────────┤
 │ COMMIT: git add -A && git gcommit-hermes "Batch N: …"     │

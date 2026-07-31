@@ -564,7 +564,7 @@ When only a few workers need re-extraction, you do not need to rebuild the entir
 
 ```bash
 # 1. Re-extract the failing workers to a temp location
-hermes -z "Read spec/issue-09-2025/page-169.md through page-172.md. Extract into ste-code/merged/_fix/w043-fix.md" -m deepseek-v4-pro --yolo
+hermes -z "Read spec/issue-09-2025/page-169.md through page-172.md. Extract into ste-code/merged/_fix/w043-fix.md" -m poolside/laguna-s-2.1:free --yolo
 
 # 2. Extract the affected section from master-raw.md
 # Find the line numbers where the old worker content starts and ends

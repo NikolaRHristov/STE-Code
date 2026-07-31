@@ -428,7 +428,7 @@ Keeping them separate prevents worker-specific details from cluttering the proce
 │  R3  │ Completion Integrity — verify before claiming complete    │
 │  R4  │ Content Fidelity — no fabrication, no commentary          │
 │  R5  │ Formatting Standards — blank lines, tables, STE format    │
-│  R6  │ Factual Correctness — 19 categories, deepseek-v4-pro, 53  │
+│  R6  │ Factual Correctness — 19 categories, poolside/laguna-s-2.1:free, 53  │
 │  R7  │ Progress Tracking — PROGRESS.md reflects reality          │
 │  R8  │ Error Recovery — fix mistakes, do not hide them           │
 ├──────┼───────────────────────────────────────────────────────────┤
@@ -446,7 +446,7 @@ Keeping them separate prevents worker-specific details from cluttering the proce
 │      │ □ Did I verify before claiming complete?                  │
 │      │ □ Is my content backed by source data (not fabricated)?   │
 │      │ □ Are my headings separated from text by blank lines?     │
-│      │ □ Are my facts correct (19 categories, deepseek-v4-pro)?  │
+│      │ □ Are my facts correct (19 categories, poolside/laguna-s-2.1:free)?  │
 │      │ □ Did I update PROGRESS.md with the real status?          │
 ├──────┼───────────────────────────────────────────────────────────┤
 │ REFS │ worker-rails.md — 10 worker output rails (W1-W10)         │
@@ -465,7 +465,7 @@ Keeping them separate prevents worker-specific details from cluttering the proce
 □ Did I verify before claiming complete?                 [Rail 3]
 □ Is my content backed by source data (not fabricated)?  [Rail 4]
 □ Are my headings separated from text by blank lines?    [Rail 5]
-□ Are my facts correct (19 categories, deepseek-v4-pro, 53 rules)?  [Rail 6]
+□ Are my facts correct (19 categories, poolside/laguna-s-2.1:free, 53 rules)?  [Rail 6]
 □ Did I update PROGRESS.md with the real status?         [Rail 7]
 □ If I found a mistake, did I fix it (not hide it)?      [Rail 8]
 ```

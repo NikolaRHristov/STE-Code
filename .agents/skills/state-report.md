@@ -178,7 +178,7 @@ NOTE: Stages 4-5 completed in a prior pipeline run. Stage 1 is the current focus
 | R3 — Completion Integrity | PASS | All [x] claims verified on disk |
 | R4 — Content Fidelity | PASS | Zero fabrication signals in spot-checked files (batches 1-19) |
 | R5 — Formatting Standards | PASS | No glued headings or format violations |
-| R6 — Factual Correctness | PASS | "19 categories" and "deepseek-v4-pro" confirmed in all docs |
+| R6 — Factual Correctness | PASS | "19 categories" and "poolside/laguna-s-2.1:free" confirmed in all docs |
 | R7 — Progress Tracking | PASS | PROGRESS.md matches disk counts (66 files on disk, 66 [x] markers) |
 | R8 — Error Recovery | PASS | W055 re-extraction documented in exchange.md |
 

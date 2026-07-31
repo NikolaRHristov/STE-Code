@@ -382,7 +382,7 @@ Run this checklist after all 53 adapted rule files are written and the 6 artifac
 - [ ] RAIL 3: Verification pass completed before marking stage complete
 - [ ] RAIL 4: Every adapted claim is grounded in master.md source text
 - [ ] RAIL 5: Headings have blank lines, tables have separators, example pairs use blockquote format
-- [ ] RAIL 6: Facts are correct (19 categories, 53 rules, deepseek-v4-pro)
+- [ ] RAIL 6: Facts are correct (19 categories, 53 rules, poolside/laguna-s-2.1:free)
 - [ ] RAIL 7: PROGRESS.md reflects actual status
 - [ ] RAIL 8: Errors are fixed or reported, not hidden
 

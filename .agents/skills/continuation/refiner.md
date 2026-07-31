@@ -478,12 +478,12 @@ Output ONLY the refined markdown file. No explanations, no commentary.
 
 ### Launch Protocol
 
-Launch workers using ONLY `deepseek-v4-pro` (NEVER `deepseek-v4-flash`):
+Launch workers using ONLY `poolside/laguna-s-2.1:free` (NEVER `deepseek-v4-flash`):
 
 ```bash
-hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 ```
 
 ## Verification (Per Batch)
@@ -517,7 +517,7 @@ Use these status markers:
 
 ## Immutable Facts
 
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-v4-flash)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-v4-flash)
 - Zero content loss — format only
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - Follow `.agents/references/rails.md` — all 8 guardrails apply

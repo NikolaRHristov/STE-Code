@@ -245,7 +245,7 @@ procedure.
    ```
 3. Run a single diagnostic worker on the first page of the failed range:
    ```bash
-   hermes -z "Read spec/issue-09-2025/page-XXXX.md. Write first 10 lines to ste-code/extracted/diag-test.md." -m deepseek-v4-pro --yolo
+   hermes -z "Read spec/issue-09-2025/page-XXXX.md. Write first 10 lines to ste-code/extracted/diag-test.md." -m poolside/laguna-s-2.1:free --yolo
    ```
 4. If the diagnostic worker succeeds, re-launch the full batch.
 5. If the diagnostic worker fails, the problem is systemic (API or environment).

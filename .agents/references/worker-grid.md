@@ -116,7 +116,7 @@ These rails apply to the launch script and orchestrator:
 - **R3 — Completion Integrity**: Never claim a batch is complete before verification. See "Verification Gates" below.
 - **R4 — Content Fidelity**: Workers extract exact text. Zero fabrication, zero commentary, zero summarization.
 - **R5 — Formatting Standards**: Output must follow the 9 refinement rules (blank lines after headings, clean tables, proper STE/Non-STE format).
-- **R6 — Factual Correctness**: Use the canonical facts (19 categories, deepseek-v4-pro, 53 rules).
+- **R6 — Factual Correctness**: Use the canonical facts (19 categories, poolside/laguna-s-2.1:free, 53 rules).
 - **R7 — Progress Tracking**: Update `.agents/state/PROGRESS.md` after verification, not before.
 - **R8 — Error Recovery**: When a mistake is detected, fix it. Do not hide it. Document the fix in `.agents/feedback/exchange.md`.
 

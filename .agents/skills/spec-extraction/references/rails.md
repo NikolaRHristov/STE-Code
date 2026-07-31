@@ -140,7 +140,7 @@
 | Fact | Wrong Claim (never make) |
 |------|--------------------------|
 | STE has 19 technical noun categories | "22 categories" |
-| Model is `deepseek-v4-pro` | "deepseek-pro" or "deepseek-v4-flash" |
+| Model is `poolside/laguna-s-2.1:free` | "deepseek-pro" or "deepseek-v4-flash" |
 | `hermes -z` supports file I/O | "hermes -z does not support file I/O" |
 | 53 writing rules + 4 GR rules | 65 rules (Issue 6 count) |
 | Output is `.md` files | "JSON structured data" |
@@ -178,6 +178,6 @@
 □ Did I verify before claiming complete?
 □ Is my content backed by source data (not fabricated)?
 □ Are my headings separated from text by blank lines?
-□ Are my facts correct (19 categories, deepseek-v4-pro, 53 rules)?
+□ Are my facts correct (19 categories, poolside/laguna-s-2.1:free, 53 rules)?
 □ Did I update PROGRESS.md with the real status?
 ```

@@ -43,12 +43,12 @@ each processing exactly 4 pages. Coordinated in 37 batches of 3 workers.
 hermes -z "Read spec/issue-09-2025/page-<<START_PAGE>>.md through page-<<END_PAGE>>.md. 
 Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
 Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## Launch Rules
 
-- **Always** use `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- **Always** use `hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - **Always** launch exactly 3 workers per batch (never more)
 - **Always** verify output after each batch before launching next
 - **Never** use inline extraction — it defeats parallelization
@@ -279,7 +279,7 @@ PROGRESS.md does not reflect their completion.
 | **Total per batch** | **75-150 seconds** | End-to-end cycle |
 | **Total extraction run (37 batches)** | **45-90 minutes** | Full 109 workers |
 
-NOTE: Times are estimates for the `deepseek-v4-pro` model. Other models may differ
+NOTE: Times are estimates for the `poolside/laguna-s-2.1:free` model. Other models may differ
 by a factor of 2-3 in either direction.
 
 ### Token Consumption
@@ -296,7 +296,7 @@ NOTE: These estimates assume 4 pages of ASD-STE100 spec text. Dictionary pages
 
 ### Rate Limit Considerations
 
-The `deepseek-v4-pro` model has rate limits that affect parallel execution.
+The `poolside/laguna-s-2.1:free` model has rate limits that affect parallel execution.
 
 - **3 concurrent workers** stay below typical rate limits for most API tiers.
 - **4 concurrent workers** may trigger rate limiting on lower tiers.
@@ -386,7 +386,7 @@ Follow these steps to improve or adapt the skill for new use cases.
 ### When to Update This Skill
 
 - A new issue of ASD-STE100 is published (for example, Issue 10).
-- The extraction model changes (for example, from `deepseek-v4-pro` to a
+- The extraction model changes (for example, from `poolside/laguna-s-2.1:free` to a
   new model with different output limits).
 - A recurring edge case is discovered that is not documented in this file.
 - The page count changes (the spec grows or shrinks).

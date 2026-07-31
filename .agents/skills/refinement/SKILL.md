@@ -410,10 +410,10 @@ The source PDF has 434 pages. At 4 pages per worker, that is 109 workers (108 ×
 | Batch of 3 workers (parallel) | 60-120 seconds |
 | Full pipeline (37 batches) | 40-75 minutes |
 
-NOTE: Times are estimates for `deepseek-v4-pro` under normal API load. Peak hours may add 20-40% latency. Workers run in parallel within a batch, so the batch time is the slowest worker, not the sum.
+NOTE: Times are estimates for `poolside/laguna-s-2.1:free` under normal API load. Peak hours may add 20-40% latency. Workers run in parallel within a batch, so the batch time is the slowest worker, not the sum.
 
 ### Context Window Safety
-`deepseek-v4-pro` has a large context window. At ~12,400 input tokens per worker, we use approximately 10% of available context. This leaves ample room for:
+`poolside/laguna-s-2.1:free` has a large context window. At ~12,400 input tokens per worker, we use approximately 10% of available context. This leaves ample room for:
 - The 9 rules embedded in the prompt (~1,500 tokens)
 - Multi-turn corrections if verification fails (~3,000 tokens per correction round)
 - Dense pages with unusually large tables (up to 3× normal token count)
@@ -493,9 +493,9 @@ After each batch, pick 1 random file and apply these 30-second checks:
 
 ### Launch Protocol
 ```bash
-hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 ```
-Use ONLY deepseek-v4-pro. 3 workers per batch.
+Use ONLY poolside/laguna-s-2.1:free. 3 workers per batch.
 
 ## Verification (Per Batch)
 1. Output line count >= input line count

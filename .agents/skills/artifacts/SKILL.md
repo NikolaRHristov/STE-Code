@@ -209,7 +209,7 @@ Artifact 5 covers three deployment targets: Ollama, LM Studio, and Python. Each 
 | LM Studio section | Contains preset configuration or import instructions | LM Studio section is missing or empty |
 | Python section | Contains a `pip install` command and a working Python code block that loads and uses the prompt | Python code block is missing or would not run |
 | File paths | All artifact file paths in the guide match actual artifact output filenames | Paths are wrong or reference files that do not exist |
-| Model reference | Uses `deepseek-v4-pro` (NOT deepseek-pro) | Wrong model name |
+| Model reference | Uses `poolside/laguna-s-2.1:free` (NOT deepseek-pro) | Wrong model name |
 | Minimum versions | States minimum versions for Ollama (≥0.1.0) and Python (≥3.10) | No version requirements stated |
 | Character budget | 6,800 - 7,800 chars (~1,800 tokens) | <6,400 or >8,200 chars |
 
@@ -225,14 +225,14 @@ Artifact 6 is the project README. It is the entry point for new users. Generate 
 | Artifact listing | Lists all 6 artifact files with one-line descriptions | Any artifact file missing from the list |
 | Quick start | Gives a 3-step quick-start path (download prompt → load into LLM → use) | No quick-start section or steps are not actionable |
 | Benchmark results | Includes pass rate and improvement percentage from `.agents/benchmark/` | No benchmark results or fabricated numbers |
-| Model stated | Names the model used: `deepseek-v4-pro` | Wrong model name or omitted |
+| Model stated | Names the model used: `poolside/laguna-s-2.1:free` | Wrong model name or omitted |
 | Character budget | 1,800 - 2,200 chars (~500 tokens) | <1,600 or >2,500 chars |
 
 ## Anti-Fabrication
 - Every adapted rule references master.md rule number
 - Every synonym traces to master.md synonym table
 - Every example adapts a real STE/non-STE pair
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro)
 
 ## Token Budget Tracking
 
@@ -323,7 +323,7 @@ f="$ARTIFACTS/ste-code-deployment-guide.txt"
 grep -qi "Ollama\|Modelfile" "$f" 2>/dev/null && echo "PASS: Ollama/Modelfile section" && PASS=$((PASS+1)) || { echo "FAIL: no Ollama section"; FAIL=$((FAIL+1)); }
 grep -qi "LM Studio" "$f" 2>/dev/null && echo "PASS: LM Studio section" && PASS=$((PASS+1)) || { echo "FAIL: no LM Studio section"; FAIL=$((FAIL+1)); }
 grep -qi "pip install\|from openai\|import" "$f" 2>/dev/null && echo "PASS: Python section" && PASS=$((PASS+1)) || { echo "FAIL: no Python section"; FAIL=$((FAIL+1)); }
-grep -q "deepseek-v4-pro" "$f" 2>/dev/null && echo "PASS: correct model name" && PASS=$((PASS+1)) || { echo "FAIL: wrong or missing model name (must be deepseek-v4-pro)"; FAIL=$((FAIL+1)); }
+grep -q "poolside/laguna-s-2.1:free" "$f" 2>/dev/null && echo "PASS: correct model name" && PASS=$((PASS+1)) || { echo "FAIL: wrong or missing model name (must be poolside/laguna-s-2.1:free)"; FAIL=$((FAIL+1)); }
 echo
 
 # --- Artifact 6 ---
@@ -332,7 +332,7 @@ f="$ARTIFACTS/README.md"
 [ -f "$f" ] || { echo "FAIL: file missing"; FAIL=$((FAIL+1)); }
 grep -q "STE-Code" "$f" 2>/dev/null && echo "PASS: project name present" && PASS=$((PASS+1)) || { echo "FAIL: project name missing"; FAIL=$((FAIL+1)); }
 grep -qi "quick.start\|getting started" "$f" 2>/dev/null && echo "PASS: quick-start section" && PASS=$((PASS+1)) || { echo "FAIL: no quick-start section"; FAIL=$((FAIL+1)); }
-grep -q "deepseek-v4-pro" "$f" 2>/dev/null && echo "PASS: correct model name" && PASS=$((PASS+1)) || { echo "FAIL: wrong or missing model name"; FAIL=$((FAIL+1)); }
+grep -q "poolside/laguna-s-2.1:free" "$f" 2>/dev/null && echo "PASS: correct model name" && PASS=$((PASS+1)) || { echo "FAIL: wrong or missing model name"; FAIL=$((FAIL+1)); }
 echo
 
 echo "=== Summary: $PASS passed, $FAIL failed ==="
@@ -346,7 +346,7 @@ If an artifact fails a quality gate, do not continue to the next artifact. Fix t
 |----------|---------------|------------|-----------------|
 | 1 - P count < 14 | Missing principle | Adapted Section 1 file incomplete | Re-read `ste-code/adapted/a-sec1-rules.md`. Check that Rules 1.1-1.14 are all present. If fewer than 14 rules, the adaptation stage is incomplete. Run Stage 4 again for Section 1. |
 | 1 - Synonym rows < 10 | Synonym table too short | master.md synonym extraction missed rows | Re-read master.md synonym table. Cross-check against `ste-code/adapted/a-sec1-rules.md` synonym section. |
-| 1 - Wrong model in text | Fabricated model name | Agent invented "deepseek-pro" or similar | Search the artifact for "deepseek". Replace any variant other than `deepseek-v4-pro`. |
+| 1 - Wrong model in text | Fabricated model name | Agent invented "deepseek-pro" or similar | Search the artifact for "deepseek". Replace any variant other than `poolside/laguna-s-2.1:free`. |
 | 2 - Missing section (S0-S8) | Adapted file for that section missing | Adaptation worker failed or produced truncated output | Find the adapted file for the missing section (e.g., `a-sec6-rules.md` for S6). If the file is missing or <100 lines, re-run the adaptation worker for that section. See Stage 4 protocol in `.agents/skills/continuation/SKILL.md`. |
 | 2 - S6 question count ≠ 13 | Questions miscounted or fabricated | Agent added invented questions or dropped real ones | Re-read master.md Section 6. Extract exactly the 13 questions listed there. Do not add, remove, or reword questions. |
 | 2 - Rule count ≠ 53 | Rules missing or fabricated | Adapted files are incomplete or agent invented extra rules | Count rules per adapted file: `grep -c "^### Rule" ste-code/adapted/a-sec*.md`. Sum must be 53. If not, find which section is off and regenerate that adapted file. |
@@ -420,7 +420,7 @@ If 3 of 6 artifacts were generated before a crash or interruption:
 
 ### Model or Provider Change
 
-If the generation model changes from `deepseek-v4-pro` to another model:
+If the generation model changes from `poolside/laguna-s-2.1:free` to another model:
 
 - All artifacts must use the new model name.
 - Update the Anti-Fabrication section to list the new model name.
@@ -443,7 +443,7 @@ This skill is Stage 5 of the 5-stage pipeline. Other skills provide input and va
 
 After all 6 artifacts pass individual verification, run this integration test to confirm cross-artifact consistency.
 
-1. **Model name consistency**: `grep -rh "deepseek" ste-code/artifacts/ | sort -u` - must return exactly one line: `deepseek-v4-pro`.
+1. **Model name consistency**: `grep -rh "deepseek" ste-code/artifacts/ | sort -u` - must return exactly one line: `poolside/laguna-s-2.1:free`.
 2. **Rule number cross-reference**: Every rule number in Artifact 1 must appear in Artifact 2. Every rule number in Artifact 2 must appear in adapted files.
 3. **Synonym table consistency**: Every synonym pair in Artifact 1 must match the same pair in Artifact 2. No pair may appear with reversed columns.
 4. **Artifact 5 file paths**: Every file path in Artifact 5 (the deployment guide) must resolve to a real file in `ste-code/artifacts/`. Run `grep -oP 'ste-code/artifacts/[^ )]+' ste-code/artifacts/ste-code-deployment-guide.txt | while read f; do [ -f "$f" ] || echo "MISSING: $f"; done`.

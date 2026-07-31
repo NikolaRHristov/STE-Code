@@ -83,7 +83,7 @@ echo "GATE 0 PASSED: Environment ready"
 
 ### Worker Specification
 
-Each worker is a separate `hermes -z` session. All workers use `deepseek-v4-pro` (full reasoning capability).
+Each worker is a separate `hermes -z` session. All workers use `poolside/laguna-s-2.1:free` (full reasoning capability).
 Workers extract RAW spec text — they do NOT adapt or rewrite anything.
 
 ### Worker Assignments
@@ -217,9 +217,9 @@ RULES:
 
 **Batch 1 — Launch:**
 ```bash
-hermes -z --model deepseek-v4-pro "<W1_PROMPT>" &
-hermes -z --model deepseek-v4-pro "<W2_PROMPT>" &
-hermes -z --model deepseek-v4-pro "<W3_PROMPT>" &
+hermes -z --model poolside/laguna-s-2.1:free "<W1_PROMPT>" &
+hermes -z --model poolside/laguna-s-2.1:free "<W2_PROMPT>" &
+hermes -z --model poolside/laguna-s-2.1:free "<W3_PROMPT>" &
 ```
 
 **Batch 1 — Verify (after workers complete):**

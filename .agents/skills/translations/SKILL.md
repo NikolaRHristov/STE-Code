@@ -44,7 +44,7 @@ This skill is the operational protocol for **Agent #9 — Translation Orchestrat
 - **Architecture:** Discovery loop — EXPLORE → CATALOG → CREATE PLACEHOLDERS → COMMIT → NEXT.
 - **Worker pattern:** Poll system with 3 parallel workers per batch. Each worker handles 3 locales. Use `background=true` and `notify_on_complete=true`.
 - **Scope:** 10 discovery targets in priority order. Re-scans after enrichment find new files automatically.
-- **Model:** `deepseek-v4-pro` exclusively.
+- **Model:** `poolside/laguna-s-2.1:free` exclusively.
 - **Output:** Blank placeholder files at correct paths. The catalog (`translations/catalog.md`) tracks all discoveries.
 - **Communication:** Batch completions go to `.agents/feedback/exchange.md`. State updates go to `.agents/state/TRANSLATIONS-PROGRESS.md`.
 
@@ -154,7 +154,7 @@ NOTE: The decision tree tolerates false negatives. A file skipped today may be f
 Batch of 3 workers, each handling 3 locales:
 
 ```bash
-hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 **Worker task:**
@@ -647,7 +647,7 @@ The orchestrator must not blindly overwrite files that already have translation 
 1. Run the per-locale count check (see Validation Commands).
 2. Identify which locale is short.
 3. Re-launch a single worker targeting only the missing locale and the specific source directory.
-4. Use the command: `hermes -z "Create blank placeholders for locale <LOCALE> for files in <SOURCE_DIR>. Files: <list>" -m deepseek-v4-pro --yolo`
+4. Use the command: `hermes -z "Create blank placeholders for locale <LOCALE> for files in <SOURCE_DIR>. Files: <list>" -m poolside/laguna-s-2.1:free --yolo`
 
 ### Symptom: Catalog Count Does Not Match Disk Count
 
@@ -743,4 +743,4 @@ Signal batch completions in `.agents/feedback/exchange.md`:
 - 3 workers per batch, each handles 3 locales
 - 10 discovery targets, re-scannable after enrichment
 - Catalog tracks all discoveries in `translations/catalog.md`
-- deepseek-v4-pro exclusively
+- poolside/laguna-s-2.1:free exclusively

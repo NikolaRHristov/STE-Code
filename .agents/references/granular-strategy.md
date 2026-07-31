@@ -81,7 +81,7 @@ Time: ~36 × 30s = ~18 minutes (parallel batches)
 ### Worker launch template:
 
 ```bash
-hermes -z "Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN.md. Do not summarize. Include every word. Output ONLY markdown." -m deepseek-v4-pro --yolo
+hermes -z "Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN.md. Do not summarize. Include every word. Output ONLY markdown." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ### Incremental save protocol:
@@ -508,7 +508,7 @@ Use this checklist when executing the strategy from scratch.
 
 - [ ] Verify source pages exist (all 434)
 - [ ] Create output directory: `mkdir -p ste-code/extracted/`
-- [ ] Verify model: `hermes config | grep deepseek-v4-pro`
+- [ ] Verify model: `hermes config | grep poolside/laguna-s-2.1:free`
 - [ ] Init PROGRESS.md with 109 worker checkboxes, all `[ ]`
 - [ ] Verify worker grid covers all 434 pages
 

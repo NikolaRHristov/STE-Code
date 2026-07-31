@@ -188,31 +188,31 @@ Launch one worker per section. Each worker reads the merged master.md and adapts
 
 ```bash
 # Section 1 - Words (Rules 1.1-1.14)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec1.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec1.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 2 - Multi-word Nouns (Rules 2.1-2.3)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec2.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec2.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 3 - Verbs (Rules 3.1-3.7)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec3.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec3.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 4 - Sentences (Rules 4.1-4.5)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec4.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec4.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 5 - Procedural Writing (Rules 5.1-5.5)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec5.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec5.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 6 - Descriptive Writing (Rules 6.1-6.6)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec6.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec6.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 7 - Safety Instructions (Rules 7.1-7.3)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec7.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec7.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 8 - Punctuation (Rules 8.1-8.7)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec8.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec8.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 9 - Writing Practices (Rules 9.1-9.4 + GR1-GR4)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m poolside/laguna-s-2.1:free
 ```
 
 ### Launch All at Once
@@ -220,7 +220,7 @@ hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m deepseek-v4-pro
 Use the combined prompt that adapts all 9 sections plus categories and synonyms:
 
 ```bash
-hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m poolside/laguna-s-2.1:free
 ```
 
 ### Naming Convention

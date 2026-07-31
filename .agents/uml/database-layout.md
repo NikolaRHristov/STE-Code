@@ -981,7 +981,7 @@ The pipeline stays well below all known thresholds.
 | Refinement | 3 | 37 | 15–45 seconds | 10–28 minutes |
 | **Combined** | — | — | — | **17–47 minutes** |
 
-NOTE: Times are estimates based on `deepseek-v4-pro` model latency.
+NOTE: Times are estimates based on `poolside/laguna-s-2.1:free` model latency.
 Actual times change with model load and network conditions.
 
 ### 16.3 Disk Space
@@ -1011,7 +1011,7 @@ Each worker sends 4 source pages to the model. The model's context window must h
 - The output buffer (~4,000 tokens reserved for the model response).
 
 Total context usage: ~9,500–15,500 tokens per worker call.
-The `deepseek-v4-pro` model supports 128,000 token context windows.
+The `poolside/laguna-s-2.1:free` model supports 128,000 token context windows.
 At 4 pages per worker, context utilization is 7–12% of capacity.
 This is intentionally conservative — it prevents truncation even for dense pages.
 

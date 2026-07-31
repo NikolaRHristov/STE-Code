@@ -30,7 +30,7 @@
 These are the exact prompts used to extract the 434-page ASD-STE100 Issue 9 specification.
 Each prompt is written to `ste-code/extracted/wN-prompt.txt` and launched via:
 ```bash
-hermes -z "$(cat ste-code/extracted/wN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/extracted/wN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 This file is a **historical archive**. It documents the v2 extraction strategy (9 workers,

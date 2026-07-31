@@ -492,7 +492,7 @@ The fixable patterns list in the FIX MODE section was last reviewed on 2026-07-2
 It covers known systemic errors from the initial pipeline run:
 
 - Corrected: 22 → 19 technical noun categories (factual error propagated from v1 prompts)
-- Corrected: deepseek-pro → deepseek-v4-pro (model name change mid-pipeline)
+- Corrected: deepseek-pro → poolside/laguna-s-2.1:free (model name change mid-pipeline)
 - Corrected: hermes -z file I/O claims (proven false by tool demonstrations)
 - Removed: empty extracted/ directory (superseded by inline worker output)
 - Removed: 6 fabricated artifact files (PLAN.md, README.md, 4 .txt files)
@@ -720,7 +720,7 @@ known fixable patterns, the auditor MAY apply fixes directly. This is the
 | Pattern Found | Fix Action | Safe? |
 |---------------|------------|-------|
 | `22 technical noun categories` | `patch` to 19 | ✅ Safe — factual correction |
-| `deepseek-pro` model reference | `patch` to `deepseek-v4-pro` | ✅ Safe — correct model |
+| `deepseek-pro` model reference | `patch` to `poolside/laguna-s-2.1:free` | ✅ Safe — correct model |
 | `hermes -z DOES NOT support file I/O` | `patch` to correct | ✅ Safe — proven false |
 | `adapted from STE's 22` | `patch` to `adapted from STE's 19` | ✅ Safe — factual correction |
 | Empty directory `ste-code/extracted/` | `rm -rf` if empty | ✅ Safe — superseded |

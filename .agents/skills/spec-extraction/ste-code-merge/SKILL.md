@@ -35,7 +35,7 @@ Each of the 8 rails constrains specific merge decisions. Use this map to apply t
 | **Rail 3 — Completion Integrity** | Never claim merge complete until all 5 checks in Step 4 pass and all 10 spot-checks in Step 5 pass. | Step 4 validation, Step 5 spot-checks, Verification Gates |
 | **Rail 4 — Content Fidelity** | Merge must NOT introduce commentary, summaries, or fabricated content. Every word in master.md must trace to a worker file, which traces to a spec page. Deduplication removes exact duplicates only — never rewrites content. | Step 2 dedup rules, Step 5 spot-check fidelity |
 | **Rail 5 — Formatting Standards** | master.md must follow heading hierarchy, blank-line spacing, STE/Non-STE blockquote format, and table standards from `references/rails.md` Section 5. | Step 3 organization template, Step 4 format audit |
-| **Rail 6 — Factual Correctness** | Verify immutable facts: 53 Rules + 4 GR, 19 categories, 434 pages, Model is `deepseek-v4-pro`. Never claim different counts. | Step 4 counts, Step 5 spot-checks |
+| **Rail 6 — Factual Correctness** | Verify immutable facts: 53 Rules + 4 GR, 19 categories, 434 pages, Model is `poolside/laguna-s-2.1:free`. Never claim different counts. | Step 4 counts, Step 5 spot-checks |
 | **Rail 7 — Progress Tracking** | Update PROGRESS.md only after merge verification passes. Mark merge as `[x]` only when master.md passes all checks. If merge fails mid-way, mark `[!]` and log the failure reason. | Post-merge PROGRESS.md update |
 | **Rail 8 — Error Recovery** | When any check in Step 4 or Step 5 fails, use the Failure Recovery Protocol (Section "Recovery") to diagnose and fix. Never hide failures. | Recovery Protocol decision tree |
 

@@ -259,14 +259,14 @@ with `<!-- NOTE: possible source error -->` but do not change the text.
 
 ### Model-Dependent Quality
 
-Refinement quality varies by model. Use only `deepseek-v4-pro` for refinement
+Refinement quality varies by model. Use only `poolside/laguna-s-2.1:free` for refinement
 workers. Weaker models (flash variants, smaller reasoning models) produce
 significantly more table alignment errors and STE/non-STE merging failures.
 Observed error rates:
 
 | Model | Table Errors per 100 Pages | Pairing Errors per 100 Pages | Acceptable? |
 |-------|---------------------------|------------------------------|-------------|
-| `deepseek-v4-pro` | 0.5-1.0 | 0.2-0.5 | Yes |
+| `poolside/laguna-s-2.1:free` | 0.5-1.0 | 0.2-0.5 | Yes |
 | `deepseek-v3` | 2.0-4.0 | 1.0-2.0 | No — use for non-tabular pages only |
 | Flash variants | 5.0-12.0 | 3.0-8.0 | No — never use for refinement |
 
@@ -355,7 +355,7 @@ before the merge phase:
 
 ### Token Cost Comparison
 
-| Phase | Total Input Tokens | Total Output Tokens | Approximate Cost (deepseek-v4-pro) |
+| Phase | Total Input Tokens | Total Output Tokens | Approximate Cost (poolside/laguna-s-2.1:free) |
 |-------|-------------------|---------------------|-------------------------------------|
 | Extraction (109 workers) | ~1,200,000 | ~900,000 | Baseline |
 | Refinement (109 workers) | ~700,000 | ~600,000 | ~55 % of extraction cost |
@@ -411,14 +411,14 @@ Output ONLY the refined markdown file. No explanations, no commentary.
 
 ### Launch Protocol
 
-Launch workers using ONLY `deepseek-v4-pro` (the most reasoning-capable model — NEVER flash):
+Launch workers using ONLY `poolside/laguna-s-2.1:free` (the most reasoning-capable model — NEVER flash):
 
 ```bash
 # Single command to launch the entire refinement swarm:
 # (requires the coordinator to generate 109 prompts and launch in 37 batches)
-hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 ```
 
 ## Verification
