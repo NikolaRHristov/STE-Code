@@ -119,6 +119,18 @@ For each group, create a file in `ste-code/grouped/`:
 
 Output the group files and manifest. Do NOT create commentary — just read the files and write the grouped output."""
 
+    # Embed the authoritative grouping skill so the worker honors the pipeline
+    # rules (edit the SKILL.md to change behavior, not this runner).
+    try:
+        import importlib.util as _ilu
+        _sp = _ilu.spec_from_file_location(
+            "skill_prompt", str(PROJECT / ".agents" / "tools" / "lib" / "skill_prompt.py"))
+        _m = _ilu.module_from_spec(_sp)
+        _sp.loader.exec_module(_m)
+        prompt += _m.skill_section("grouping")
+    except Exception:
+        pass
+
     return prompt, GROUPED_DIR
 
 
