@@ -1,7 +1,7 @@
 #!/bin/bash
 # Batch Verification Script — Run after each batch of 3 workers
-# Usage: bash verify-batch.sh <directory> <prefix> <worker1> <worker2> <worker3>
-# Example: bash verify-batch.sh extracted w w007 w008 w009
+# Usage: bash .agents/tools/quality/verify-batch.sh <directory> <prefix> <worker1> <worker2> <worker3>
+# Example: bash .agents/tools/quality/verify-batch.sh extracted w w007 w008 w009
 
 DIR="${1:-extracted}"
 PREFIX="${2:-w}"

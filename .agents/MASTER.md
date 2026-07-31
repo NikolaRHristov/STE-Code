@@ -68,7 +68,7 @@ All terms used throughout this project. Agents must use these exact terms.
 | `.agents/state/` | Workflow | PROGRESS.md, REFINE-PROGRESS.md |
 | `.agents/audit/` | Workflow | Audit reports, state snapshots |
 | `.agents/prompts/refine/` | Workflow | 109 refinement worker prompts |
-| `.agents/scripts/` | Workflow | verify-batch.sh, check-rails.py |
+| `.agents/tools/quality/` | Workflow | verify-batch.sh, check-rails.py |
 | `.agents/feedback/` | Workflow | exchange.md (orchestrator↔reviewer) |
 | `.agents/skills/` | Workflow | 8 SKILL.md files + references |
 | `.agents/_scratch/` | Workflow | Quarantined premature files |
@@ -165,7 +165,7 @@ hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m poolside/laguna-s-2
 hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 
 # After each batch:
-bash .agents/scripts/verify-batch.sh extracted w w001 w002 w003
+bash .agents/tools/quality/verify-batch.sh extracted w w001 w002 w003
 # Update .agents/state/PROGRESS.md
 ```
 
@@ -175,7 +175,7 @@ bash .agents/scripts/verify-batch.sh extracted w w001 w002 w003
 # Generate 109 refinement prompts (each: read extracted/NNN, write refined/NNN)
 # Launch same batch pattern as extraction
 # After each batch:
-bash .agents/scripts/verify-batch.sh refined r r001 r002 r003
+bash .agents/tools/quality/verify-batch.sh refined r r001 r002 r003
 ```
 
 ### Step 4: Merge
@@ -211,7 +211,7 @@ cat ste-code/refined/r*-p*.md > ste-code/merged/master-raw.md
 
 ```bash
 # Rails compliance
-python3 .agents/scripts/check-rails.py
+python3 .agents/tools/quality/check-rails.py
 
 # State report
 # Trigger any agent: "state" → writes to .agents/audit/state-YYYYMMDD-HHMMSS.md

@@ -41,7 +41,13 @@ Adding a new agent: edit `.agents/config/agents.yaml` and add your backend.
 | [`uml/`](uml/) | Pipeline state machines, worker lifecycle diagrams |
 | [`state/`](state/) | Progress tracking, migration plans |
 | [`audit/`](audit/) | Execution auditor reports |
-| [`scripts/`](scripts/) | Utility scripts (verification, prompt generation) |
+| `tools/quality/` | Quality checking (rails, tables, verification) |
+| `tools/refinement/` | Level assembly (prompts, levels 1-4) |
+| `tools/maintenance/` | Content fixes and gap filling |
+| `tools/benchmark/` | Benchmark execution |
+| `tools/runners/` | Pipeline phase runners |
+| `tools/lib/` | Core infrastructure |
+| `tools/shared/` | Shared utilities |
 | [`feedback/`](feedback/) | Inter-agent communication |
 
 ## Pipeline Stages (5-stage)
