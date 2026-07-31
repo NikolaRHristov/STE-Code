@@ -9,7 +9,7 @@ Usage:
     from agent_runner import run_agent, launch_agent, get_agent_config
 
     # Synchronous (blocks until done)
-    result = run_agent(prompt, agent="hermes", model="deepseek-v4-pro")
+    result = run_agent(prompt, agent="hermes", model="poolside/laguna-s-2.1:free")
     print(result.stdout)
 
     # Async (returns Popen)

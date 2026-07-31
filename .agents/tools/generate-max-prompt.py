@@ -36,7 +36,7 @@ all dictionary entries, all synonym pairs, and all example pairs.
 Save to: {OUTPUT}
 Use write_file. Report token count.
 """
-    result = run_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
+    result = run_agent(prompt, agent=agent, model="poolside/laguna-s-2.1:free", cwd=PROJECT)
     print(f"Exit: {result.returncode}")
     if OUTPUT.exists():
         print(f"Output: {OUTPUT.stat().st_size:,} chars")

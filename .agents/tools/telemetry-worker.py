@@ -10,10 +10,10 @@ Writes telemetry to `.agents/telemetry/<worker-id>-<timestamp>.json`.
 Output:
   {
     "worker_id": "b1-004",
-    "invocation": "hermes -z $(cat .agents/prompts/expansion-pass1/pass1-batch-004.txt) -m deepseek-v4-pro --yolo",
+    "invocation": "hermes -z $(cat .agents/prompts/expansion-pass1/pass1-batch-004.txt) -m poolside/laguna-s-2.1:free --yolo",
     "prompt_file": ".agents/prompts/expansion-pass1/pass1-batch-004.txt",
     "prompt_size_bytes": 11973,
-    "model": "deepseek-v4-pro",
+    "model": "poolside/laguna-s-2.1:free",
     "reasoning_effort": "high",
     "start_time": "2026-07-30T07:15:00Z",
     "end_time": "2026-07-30T07:15:45Z",
@@ -89,7 +89,7 @@ def main():
 
     worker_id = sys.argv[1]
     prompt_file = sys.argv[2]
-    model = "deepseek-v4-pro"
+    model = "poolside/laguna-s-2.1:free"
     output_file = None
 
     i = 3

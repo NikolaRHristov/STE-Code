@@ -4,7 +4,7 @@
 # Usage: .agents/tools/launch-worker.sh <prompt_file> [--agent AGENT] [--model MODEL] [output_file]
 #
 # Agents are configured in .agents/config/agents.yaml.
-# Default: hermes with deepseek-v4-pro.
+# Default: hermes with poolside/laguna-s-2.1:free.
 # If output_file is provided, captures stdout to that file and backgrounds.
 #
 # Examples:

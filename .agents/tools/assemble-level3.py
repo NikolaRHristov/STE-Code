@@ -108,7 +108,7 @@ def main():
         return
 
     LEVEL3_DIR.mkdir(parents=True, exist_ok=True)
-    result = run_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
+    result = run_agent(prompt, agent=agent, model="poolside/laguna-s-2.1:free", cwd=PROJECT)
     print(f"Exit: {result.returncode}")
     if OUTPUT.exists():
         chars = OUTPUT.stat().st_size

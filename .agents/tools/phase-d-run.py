@@ -33,7 +33,7 @@ Save adapted rule files to {ADAPTED_DIR}/.
     tmp.parent.mkdir(parents=True, exist_ok=True)
     tmp.write_text(prompt)
 
-    cmd, env = get_agent_command(agent=agent, model="deepseek-v4-pro",
+    cmd, env = get_agent_command(agent=agent, model="poolside/laguna-s-2.1:free",
                                   cwd=PROJECT, prompt_file=tmp)
     os.execvpe(cmd[0], cmd, env)
 

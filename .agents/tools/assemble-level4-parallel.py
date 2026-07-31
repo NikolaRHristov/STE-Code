@@ -64,7 +64,7 @@ def main():
     processes = []
     for name, files, out, instructions in tasks:
         prompt = build_worker_prompt(name, files, out, instructions)
-        proc = launch_agent(prompt, agent=agent, model="deepseek-v4-pro", cwd=PROJECT)
+        proc = launch_agent(prompt, agent=agent, model="poolside/laguna-s-2.1:free", cwd=PROJECT)
         processes.append((name, proc))
         print(f"Launched {name} ({len(files)} files, PID {proc.pid})")
 

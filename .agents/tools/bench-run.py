@@ -32,7 +32,7 @@ def load_tests():
     return tests
 
 
-def run_test(tc, system_prompt, model="deepseek-v4-pro"):
+def run_test(tc, system_prompt, model="poolside/laguna-s-2.1:free"):
     """Run one test case. Returns (output, elapsed, exit_code)."""
     full_prompt = f"""{system_prompt}
 
