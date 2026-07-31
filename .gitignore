@@ -44,3 +44,5 @@ ste-code/audit/
 /user_service.py
 /validate_email.py
 SCE/
+
+trajectory_samples.jsonl

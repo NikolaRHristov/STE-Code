@@ -28,14 +28,14 @@ prompt_file = tmp / f"diag-prompt-{os.getpid()}.txt"
 prompt_file.write_text(prompt)
 
 cmd = [venv_python, wrapper, str(prompt_file), "--model", model]
-env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "300"}
+env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "120"}
 
 print(f"W{worker_num:03d}  Pages: {start_pos}-{end_pos}  Prompt: {len(prompt)}B", flush=True)
 print(f"Running oneshot wrapper...", flush=True)
 
 start = time.time()
 try:
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300, env=env, cwd=str(PROJECT))
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=150, env=env, cwd=str(PROJECT))
     duration = time.time() - start
     print(f"\nDone in {duration:.1f}s  Exit: {result.returncode}", flush=True)
     print(f"Stdout: {len(result.stdout)} chars  Stderr: {len(result.stderr)} chars", flush=True)

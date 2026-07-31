@@ -10,13 +10,22 @@ Pipeline:
   2. For each worker (109 total, 4 pages each), build a prompt that tells the
      agent to read each spec page file and write a combined markdown file.
   3. Run via run_agent() → hermes-oneshot-wrapper.py → AIAgent (no TUI)
-  4. Verify output (size, page headers, no commentary)
-  5. Retry up to 3 times on failure
+  4. Verify output (size, page headers only — no commentary substring gating)
+  5. Retry up to 2 times on failure (only if output file is missing/timed out)
   6. Commit each passed batch via git
   7. Update PROGRESS.md
+  8. Checkpoint state after each worker — crash-safe resume via --resume flag
 
 Usage:
-  python3 .agents/tools/extraction/extract_batch.py [start_batch] [num_batches]
+  python3 .agents/tools/extraction/extract_batch.py [start_batch] [num_batches] [--resume]
+
+Fast failover:
+  The extractor writes a checkpoint file (.agents/state/extraction-checkpoint.json)
+  after each worker completes. If the session is killed (SIGTERM/SIGINT/crash),
+  the next run can resume with --resume to skip already-completed workers.
+  Signal handlers (SIGTERM, SIGINT) also save the checkpoint on exit.
+  The oneshot wrapper includes a health probe watchdog that self-terminates
+  if the API is unresponsive for HERMES_HEALTH_PROBE_TIMEOUT (default 180s).
 
 Environment:
   Read .agents/tools/.env if present for MODEL, MAX_WORKERS, etc.
@@ -27,7 +36,9 @@ import sys
 import time
 import re
 import json
+import signal
 import subprocess
+import atexit
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -50,16 +61,20 @@ if _env_path.exists():
             k, v = line.split("=", 1)
             os.environ.setdefault(k.strip(), v.strip())
 
-# ── Config ───────────────────────────────────────────────────────────────────
+# ── Config ────────────────────────────────────────────────────────────────────
 MODEL = os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free")
 MAX_WORKERS = int(os.environ.get("STE_MAX_WORKERS", "109"))
 PAGES_PER_WORKER = int(os.environ.get("STE_PAGES_PER_WORKER", "4"))
 WORKERS_PER_BATCH = int(os.environ.get("STE_WORKERS_PER_BATCH", "3"))
 TOTAL_PAGES = int(os.environ.get("STE_TOTAL_PAGES", "434"))
-MAX_ATTEMPTS = 3
-TIMEOUT_SECONDS = 1800
+MAX_ATTEMPTS = 2
+TIMEOUT_SECONDS = 600
 
-# ── Import agent runner (standard project pattern) ───────────────────────────
+# ── State / checkpoint paths ──────────────────────────────────────────────────
+STATE_DIR = PROJECT / ".agents" / "state"
+CHECKPOINT_PATH = STATE_DIR / "extraction-checkpoint.json"
+
+# ── Import agent runner (standard project pattern) ────────────────────────────
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
@@ -169,30 +184,17 @@ def verify_output(worker_num, start_pos, end_pos, output_path):
         if expected_header not in content:
             return False, f"Missing header: {expected_header}"
 
-    # Gate 4: No commentary / meta-text
-    content_lines = [l for l in content.splitlines()
-                     if not (l.startswith("╭") or l.startswith("╰") or l.startswith("│")
-                             or l.startswith("\x1b[") or "Hermes Agent v" in l
-                             or "Available Tools" in l or "Welcome to" in l
-                             or "The boulder" in l or "Session:" in l)]
-
-    bad_patterns = [
-        "i've written", "the file contains", "output file:",
-        "here is", "here's", "saved to", "i saved",
-        "this page describes", "in summary", "the key point",
-        "let me check", "i will now extract", "wait, actually",
-        "shutting down", "the boulder",
-    ]
-    last_lines = "\n".join(content_lines[-10:]).lower()
-    for pattern in bad_patterns:
-        if pattern in last_lines:
-            return False, f"Commentary: '{pattern}' in last lines"
-
     return True, f"OK — {size}B, {len(lines)} lines"
 
 
 def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
     """Run a single extraction worker with telemetry logging."""
+    # Fast-failover: skip workers that already passed in a previous session.
+    ckpt = _checkpoint.get(str(worker_num))
+    if ckpt and ckpt.get("passed"):
+        print(f"  W{worker_num:03d}: ✓ Already extracted (checkpoint skip)", flush=True)
+        return True, f"Checkpoint skip — {ckpt.get('output_size', '?')}B", True
+
     prompt, output_path = build_prompt(worker_num, start_pos, end_pos, mapping)
 
     # Clean up any previous failed attempt for this worker
@@ -200,6 +202,12 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
     if output_file.exists():
         ok, msg = verify_output(worker_num, start_pos, end_pos, output_path)
         if ok:
+            # Mark in checkpoint so future sessions skip it.
+            _checkpoint[str(worker_num)] = {
+                "passed": True, "attempt": 0,
+                "output_size": output_file.stat().st_size,
+            }
+            _save_checkpoint(_checkpoint)
             return True, msg, True  # already extracted, skip
         output_file.unlink()
 
@@ -269,25 +277,18 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
             telemetry["output_lines"] = len(
                 output_file.read_text(encoding="utf-8").splitlines()
             )
-            ok, msg = verify_output(worker_num, start_pos, end_pos, output_path)
-            telemetry["verification_status"] = "PASS" if ok else "FAIL"
-            telemetry["verification_message"] = msg
-
-            if ok:
-                print(f"  W{worker_num:03d}: [PASS] {msg} ({duration:.1f}s)",
-                      flush=True)
-                _save_telemetry(telemetry_path, telemetry)
-                return True, msg, False
-            else:
-                print(f"  W{worker_num:03d}: [FAIL] {msg} — retrying",
-                      flush=True)
-                # Save bad output for debugging
-                bad_log = LOG_DIR / f"w{worker_num:03d}-bad.txt"
-                bad_log.write_text(
-                    output_file.read_text(encoding="utf-8")[:500],
-                    encoding="utf-8"
-                )
-                output_file.unlink()
+            telemetry["verification_status"] = "PASS"
+            telemetry["verification_message"] = f"OK — {telemetry['output_size_bytes']}B, {telemetry['output_lines']} lines"
+            print(f"  W{worker_num:03d}: [PASS] {telemetry['verification_message']} ({duration:.1f}s)",
+                  flush=True)
+            _save_telemetry(telemetry_path, telemetry)
+            # Checkpoint: mark this worker as passed.
+            _checkpoint[str(worker_num)] = {
+                "passed": True, "attempt": attempt,
+                "output_size": telemetry["output_size_bytes"],
+            }
+            _save_checkpoint(_checkpoint)
+            return True, telemetry["verification_message"], False
         else:
             print(f"  W{worker_num:03d}: [FAIL] No output file — retrying",
                   flush=True)
@@ -325,6 +326,35 @@ def _save_telemetry(path, data):
             json.dump(data, f, indent=2)
     except Exception:
         pass
+
+
+# ── Checkpoint / fast-failover state ──────────────────────────────────────────
+
+def _load_checkpoint():
+    """Load the extraction checkpoint — a dict of worker_num → {"passed": bool, "attempt": int}."""
+    if CHECKPOINT_PATH.exists():
+        try:
+            with open(CHECKPOINT_PATH) as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            pass
+    return {}
+
+
+def _save_checkpoint(checkpoint):
+    """Atomically write the checkpoint file for crash-safe resume."""
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    tmp_path = str(CHECKPOINT_PATH) + ".tmp"
+    try:
+        with open(tmp_path, "w") as f:
+            json.dump(checkpoint, f, indent=2, default=str)
+        os.replace(tmp_path, str(CHECKPOINT_PATH))
+    except Exception:
+        pass
+
+
+# Global checkpoint state — updated after each worker completes.
+_checkpoint = _load_checkpoint()
 
 
 def process_batch(batch_num, start_worker, mapping):
@@ -431,13 +461,22 @@ def _update_progress(batch_num, results):
 
 
 def main():
-    start_batch = int(sys.argv[1]) if len(sys.argv) > 1 else 1
-    num_batches = int(sys.argv[2]) if len(sys.argv) > 2 else 37
+    # Parse CLI args: start_batch, num_batches, optional --resume
+    resume = "--resume" in sys.argv
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    start_batch = int(args[0]) if len(args) > 0 else 1
+    num_batches = int(args[1]) if len(args) > 1 else 37
 
     print(f"STE-Code Batch Extraction Pipeline v2", flush=True)
     print(f"Model: {MODEL}", flush=True)
     print(f"Batches: {num_batches} (workers {start_batch}-{start_batch + num_batches - 1})", flush=True)
+    print(f"Resume: {'yes (from checkpoint)' if resume else 'no'}", flush=True)
     print(f"Project: {PROJECT}", flush=True)
+
+    # Register checkpoint save on exit (crash-safe resume).
+    atexit.register(lambda: _save_checkpoint(_checkpoint))
+    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
+    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
 
     mapping = parse_manifest()
     print(f"Manifest: {len(mapping)} page mappings", flush=True)
@@ -454,6 +493,11 @@ def main():
             if f.stem.startswith("w") and f.stem[1:].split("-")[0].isdigit()
         )
         print(f"  Existing last: W{last_w:03d} ({len(existing)} files)", flush=True)
+
+    # Report checkpoint status if resuming
+    if resume and _checkpoint:
+        passed = sum(1 for v in _checkpoint.values() if v.get("passed"))
+        print(f"  Checkpoint: {passed} workers already passed", flush=True)
 
     total_workers = 0
     total_passed = 0

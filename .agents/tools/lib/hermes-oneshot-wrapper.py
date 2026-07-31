@@ -16,13 +16,67 @@ Fixes applied:
 - Explicit agent cleanup
 - --debug flag saves full trajectory to .agents/tmp/oneshot-debug/ for inspection
 - save_trajectories=True when debugging to inspect tool calls and model responses
+- Health probe watchdog: background thread that periodically probes the API
+  endpoint. If the API is unresponsive for more than HEALTH_PROBE_TIMEOUT seconds,
+  the wrapper sends SIGTERM to itself, preventing indefinite hangs when the
+  API drops the connection without closing it.
 """
 import sys
 import os
 import logging
 import traceback
+import threading
+import signal
+import time
+import urllib.request
+import urllib.error
 
 logging.disable(logging.CRITICAL)
+
+# ---------------------------------------------------------------------------
+# Health probe watchdog — kills the wrapper if the API is unresponsive.
+# ---------------------------------------------------------------------------
+
+# How long to wait without API responsiveness before killing the wrapper.
+# Default: 180 seconds. Override via HERMES_HEALTH_PROBE_TIMEOUT env var.
+HEALTH_PROBE_TIMEOUT = int(os.environ.get("HERMES_HEALTH_PROBE_TIMEOUT", "120"))
+
+# How often to probe the API (seconds).
+HEALTH_PROBE_INTERVAL = int(os.environ.get("HERMES_HEALTH_PROBE_INTERVAL", "30"))
+
+# Last successful API contact timestamp (updated by the probe thread).
+_api_last_responsive = time.time()
+_api_base_url = None  # set in run()
+
+
+def _probe_api_health():
+    """Background thread: periodically check if the API is responsive.
+
+    Sends a lightweight HTTP HEAD request to the API base URL. If the API
+    hasn't responded to a probe for HEALTH_PROBE_TIMEOUT seconds, sends
+    SIGTERM to the current process to unstick the wrapper.
+    """
+    global _api_last_responsive
+    while True:
+        time.sleep(HEALTH_PROBE_INTERVAL)
+        url = _api_base_url or "https://inference-api.nousresearch.com/v1"
+        try:
+            req = urllib.request.Request(url, method="HEAD")
+            resp = urllib.request.urlopen(req, timeout=10)
+            resp.read()
+            _api_last_responsive = time.time()
+        except Exception:
+            # API probe failed — check if we've been unresponsive too long
+            unresponsive_secs = time.time() - _api_last_responsive
+            if unresponsive_secs > HEALTH_PROBE_TIMEOUT:
+                # The API is unresponsive — kill ourselves
+                pid = os.getpid()
+                sys.stderr.write(
+                    f"HEALTH PROBE: API unresponsive for {unresponsive_secs:.0f}s "
+                    f"(timeout={HEALTH_PROBE_TIMEOUT}s). Sending SIGTERM to PID {pid}.\n"
+                )
+                sys.stderr.flush()
+                os.kill(pid, signal.SIGTERM)
 
 from hermes_cli.config import load_config
 from hermes_cli.models import detect_provider_for_model
@@ -72,7 +126,7 @@ def run() -> int:
     # ── Build agent (mirrors _run_agent but without session_db) ──
     os.environ["HERMES_YOLO_MODE"] = "true"
     os.environ["HERMES_ACCEPT_HOOKS"] = "1"
-    os.environ.setdefault("HERMES_REQUEST_TIMEOUT", "300")
+    os.environ.setdefault("HERMES_REQUEST_TIMEOUT", "120")
 
     cfg = load_config()
     model_cfg = cfg.get("model") or {}
@@ -124,6 +178,13 @@ def run() -> int:
     # ═══ KEY: no session_db → nothing saved to Hermes history ═══
     # When --debug is active, save trajectory for inspection
     save_traj = debug
+
+    global _api_base_url
+    _api_base_url = runtime.get("base_url") or "https://inference-api.nousresearch.com/v1"
+
+    # Start health probe watchdog thread (daemon so it doesn't block exit).
+    probe_thread = threading.Thread(target=_probe_api_health, daemon=True)
+    probe_thread.start()
 
     agent = AIAgent(
         api_key=runtime.get("api_key"),
