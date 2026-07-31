@@ -40,7 +40,7 @@ CHECKPOINT_PATH = STATE_DIR / "refine-checkpoint.json"
 MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
 WORKERS_PER_BATCH = int(os.environ.get("REFINE_WORKERS_PER_BATCH", "3"))
 TOTAL_WORKERS = 109
-TIMEOUT_SECONDS = 300
+TIMEOUT_SECONDS = 600
 
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
