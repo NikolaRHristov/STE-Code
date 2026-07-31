@@ -4,7 +4,7 @@ from pathlib import Path
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 
 def __import_agent_runner():
-    """Import agent_runner module from .agents/tools/"""
+    """Import agent_runner module from .agents/tools/lib/"""
     p = PROJECT / ".agents" / "tools" / "lib" / "agent-runner.py"
     spec = importlib.util.spec_from_file_location("agent_runner", p)
     m = importlib.util.module_from_spec(spec)
