@@ -4,12 +4,18 @@
 Usage: python3 .agents/tools/maintenance/fix-ste-run.py [--agent hermes|claude|codex] [--dry-run]
 """
 
+import os
 import sys
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
+
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
 
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
@@ -48,18 +54,7 @@ def main():
             print(f"Would fix {adapted_file}")
             return
 
-        prompt = f"""You are STE-Code. Fix STE compliance issues in this file:
-  {adapted_file}
-
-Check for:
-1. Unapproved synonyms — replace with approved alternatives
-2. Passive voice — rewrite as active
-3. Semicolons — split into separate sentences
-4. Overlong sentences — break into shorter ones
-5. Missing rule references
-
-Fix all issues. Report changes made.
-"""
+        prompt = TPL.render("fix-ste-worker", adapted_file=adapted_file)
         result = run_agent(prompt, agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"), cwd=PROJECT)
         print(f"Exit: {result.returncode}")
 

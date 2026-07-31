@@ -13,6 +13,12 @@ os.makedirs(PROMPTS_DIR, exist_ok=True)
 with open(os.path.join(PROJECT, "ste-code", "artifacts", "ste-code-distilled-system-prompt.txt")) as f:
     SYSTEM_PROMPT = f.read()
 
+# Template loader for the per-worker prompt body ({{placeholder}} syntax).
+import sys as _sys
+_sys.path.insert(0, os.path.join(PROJECT, ".agents", "tools", "lib"))
+from templater import Templater
+TPL = Templater(os.path.join(PROJECT, ".agents", "tools", "maintenance"))
+
 # Read all maturity audit files
 maturity_files = sorted(glob.glob(os.path.join(AUDIT_DIR, "maturity-batch*-w*.md")))
 print(f"Found {len(maturity_files)} maturity audit files")
@@ -78,41 +84,14 @@ for mf in maturity_files:
         prompt_count += 1
         gaps_text = "\n".join(gaps[:5])
         improvements_text = "\n".join(improvements[:5])
-        
-        prompt = f"""{SYSTEM_PROMPT}
 
-You are a documentation improvement worker. Your task: apply specific improvements to a single file based on a maturity audit finding.
-
-═══════════════════════════════════════
-TARGET FILE: {target_file}
-═══════════════════════════════════════
-
-═══════════════════════════════════════
-CURRENT CONTENT (first 4000 chars):
-═══════════════════════════════════════
-{target_content}
-
-═══════════════════════════════════════
-GAPS TO FIX (from maturity audit):
-═══════════════════════════════════════
-{gaps_text}
-
-═══════════════════════════════════════
-SUGGESTED IMPROVEMENTS:
-═══════════════════════════════════════
-{improvements_text}
-
-═══════════════════════════════════════
-INSTRUCTIONS:
-═══════════════════════════════════════
-1. Apply ALL suggested improvements to the target file.
-2. PRESERVE all existing content — only ADD missing sections.
-3. Do NOT delete or rewrite existing text.
-4. Use STE-Code approved vocabulary and active voice.
-5. Output the COMPLETE improved file as markdown.
-
-Do NOT create files. Output the improved file content to stdout only.
-"""
+        prompt = SYSTEM_PROMPT + "\n\n" + TPL.render(
+            "maturity-fix-worker",
+            target_file=target_file,
+            target_content=target_content,
+            gaps_text=gaps_text,
+            improvements_text=improvements_text,
+        )
         safe_name = target_file.replace("/", "-").replace(".", "-")
         prompt_file = os.path.join(PROMPTS_DIR, f"fix-{prompt_count:03d}-{safe_name[:40]}.txt")
         with open(prompt_file, "w") as f:

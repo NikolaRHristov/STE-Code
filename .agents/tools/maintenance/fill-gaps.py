@@ -7,11 +7,17 @@ and launches parallel workers to generate additional pairs.
 Usage: python3 .agents/tools/maintenance/fill-gaps.py [--agent hermes|claude|codex] [--dry-run] [--min-pairs N]
 """
 
+import os
 import sys
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
+
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
 
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 TMP_DIR = PROJECT / ".agents" / "tmp" / "gaps"
@@ -35,50 +41,24 @@ def find_gaps(min_pairs=MIN_PAIRS):
 
 
 def build_worker_prompt(filepath, current_pairs, target_pairs):
-    """Build prompt for a worker to generate example pairs."""
+    """Build prompt for a worker to generate example pairs.
+
+    NOTE: previously this function returned rule_preview (a copy-paste bug);
+    it now returns the rendered worker prompt.
+    """
     rule_text = filepath.read_text()
     rule_name = filepath.stem.replace("a-", "")
     # Truncate rule text to keep prompt manageable (first 150 lines)
     rule_preview = "\n".join(rule_text.split("\n")[:150])
 
-    return f"""You are STE-Code. Generate additional Non-STE/STE example pairs for this rule.
-
-RULE: {rule_name}
-CURRENT PAIRS: {current_pairs}
-TARGET: Generate {target_pairs - current_pairs} more pairs
-
-RULE CONTENT (first 150 lines):
-```
-{rule_preview}
-```
-
-TASK:
-1. Read the full file at: {filepath}
-2. Understand the rule's requirements
-3. Generate {target_pairs - current_pairs} new Non-STE/STE example pairs
-4. Each pair must have:
-   - A Non-STE version (realistic code documentation that violates the rule)
-   - An STE version (the corrected, compliant version)
-5. Insert the new pairs into the Examples section using patch
-6. If an Examples section does not exist, create one
-
-EXAMPLE PAIR FORMAT:
-> **Non-STE:** [The non-compliant code documentation text]
-> **STE:** [The STE-Code compliant correction]
-
-CRITICAL:
-- Each Non-STE must be a REALISTIC example from code documentation
-- Each STE must be a COMPLETE, grammatically correct correction
-- Use approved STE-Code vocabulary (prefer: use, start, stop, show, make, get, set, check, do)
-- Follow sentence length limits (20 procedural, 25 descriptive)
-- Use active voice, no semicolons, no contractions
-- Cover different documentation types: README, API docs, docstrings, commit messages, error messages
-- If you cannot generate a good example for a specific scenario, use:
-  > [PLACEHOLDER: <scenario description>]
-
-After generating pairs, report: how many pairs were added, file state.
-"""
-    return rule_preview  # Return just the prompt
+    return TPL.render(
+        "fill-gaps-worker",
+        rule_name=rule_name,
+        current_pairs=current_pairs,
+        needed=target_pairs - current_pairs,
+        rule_preview=rule_preview,
+        filepath=filepath,
+    )
 
 
 def main():
@@ -114,29 +94,13 @@ def main():
         batch_files = [f for f, _ in batch]
         file_list = "\n".join(f"  {f.stem} (current: {p} pairs)" for f, p in batch)
 
-        prompt = f"""You are STE-Code Gap Filler (batch {i+1}/{len(batches)}).
-
-Generate additional Non-STE/STE example pairs for these {len(batch)} rule files:
-{file_list}
-
-For each file:
-1. Read the file with read_file
-2. Find where examples are or where they should go
-3. Generate 5-10 new Non-STE/STE example pairs for each rule
-4. Use patch to insert them into the file
-5. Format each pair as:
-   > **Non-STE:** [realistic code doc that violates the rule]
-   > **STE:** [STE-Code compliant correction]
-
-CRITICAL:
-- Use approved vocabulary, active voice, sentence length limits
-- Cover different doc types: README, API, docstrings, commits, errors
-- If you cannot generate a good example, use: [PLACEHOLDER: description]
-  (leave these for later training — do NOT fabricate)
-- Only add pairs where you are confident the correction is correct
-
-Report for each file: pairs added, any placeholders used.
-"""
+        prompt = TPL.render(
+            "fill-gaps-batch",
+            batch_num=i + 1,
+            total_batches=len(batches),
+            count=len(batch),
+            file_list=file_list,
+        )
 
         proc = launch_agent(prompt, agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"), cwd=PROJECT)
         processes.append((i + 1, proc))

@@ -14,6 +14,11 @@ PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import Templater
+TPL = Templater(__file__)
+
 TMP_DIR = PROJECT / ".agents" / "tmp" / "fixme"
 
 # Files known to have FIXME markers — edit this list as needed
@@ -26,32 +31,11 @@ FILES_WITH_FIXMES = [
 
 
 def build_worker_prompt(relpath):
-    return f"""You are STE-Code. Fix all FIXME placeholder markers in this file:
-
-FILE: {relpath}
-
-Your task:
-1. Read the file with read_file
-2. Find all lines containing "[FIXME: generate STE correction for: ...]"
-3. For each FIXME, the text after "generate STE correction for:" is the Non-STE
-   text that needs an STE-compliant correction
-4. Generate the correct STE version for each one following STE-Code rules:
-   - Active voice, approved vocabulary, max 20/25 word sentences
-   - No semicolons, no contractions, no -ing as verb
-   - One topic per sentence, consistent terminology
-5. Use patch to replace each "[FIXME: generate STE correction for: ...]"
-   with the actual STE correction text
-
-CRITICAL:
-- Generate REAL STE corrections — do NOT just remove the FIXME marker
-- Each STE correction must be a complete, grammatically correct sentence
-- Follow the sentence length limits (20 procedural, 25 descriptive)
-- Use approved vocabulary (prefer: use/start/stop/show/make/get/set/check/do)
-- If the Non-STE text is truncated with "...", infer the full meaning from context
-
-After fixing all FIXMEs, report: how many FIXMEs were found and fixed.
-Save the report to: {TMP_DIR}/{Path(relpath).stem}-fixme-report.md
-"""
+    return TPL.render(
+        "fix-fixmes-worker",
+        relpath=relpath,
+        report_path=str(TMP_DIR / f"{Path(relpath).stem}-fixme-report.md"),
+    )
 
 
 def main():
