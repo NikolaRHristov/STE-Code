@@ -162,7 +162,7 @@ def _resolve_command(agent_cfg, prompt_file, model=None, cwd=None):
     return cmd, agent_cfg.get("env", {})
 
 
-def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600):
+def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600, skill=None):
     """
     Run a prompt through an agent synchronously.
 
@@ -172,11 +172,30 @@ def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600):
         model: Model override (default from agent config)
         cwd: Working directory (default: project root)
         timeout: Max seconds to wait
+        skill: Optional STE-Code pipeline skill name (e.g. "grouping",
+               "adaptation"). When provided, the authoritative SKILL.md text is
+               embedded into the prompt so the worker honors the pipeline rules
+               even though the oneshot wrapper sub-agents do not auto-load the
+               STE-Code profile skills. Edit the SKILL.md (not callers) to
+               change behavior.
 
     Returns:
         subprocess.CompletedProcess with .stdout and .stderr
     """
     cwd = Path(cwd) if cwd else _PROJECT
+
+    # Embed the authoritative skill text (keeps prompt + skill in lockstep).
+    if skill:
+        try:
+            import importlib.util as _ilu
+            _sp = _ilu.spec_from_file_location(
+                "skill_prompt", str(_TOOLS / "lib" / "skill_prompt.py"))
+            _m = _ilu.module_from_spec(_sp)
+            _sp.loader.exec_module(_m)
+            prompt = prompt + _m.skill_section(skill)
+        except Exception:
+            pass  # skill embedding is best-effort; prompt still runs
+
     agent_cfg = get_agent_config(agent)
     _TMP_DIR.mkdir(parents=True, exist_ok=True)
 
