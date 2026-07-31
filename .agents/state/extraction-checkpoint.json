@@ -1,4 +1,454 @@
 {
+  "61": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7070
+  },
+  "62": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7285
+  },
+  "63": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7451
+  },
+  "64": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7735
+  },
+  "65": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7277
+  },
+  "66": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7027
+  },
+  "67": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 5530
+  },
+  "68": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 6641
+  },
+  "69": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7670
+  },
+  "70": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 6858
+  },
+  "71": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 5097
+  },
+  "72": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 5956
+  },
+  "73": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 6799
+  },
+  "74": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 6253
+  },
+  "75": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7335
+  },
+  "76": {
+    "passed": true,
+    "attempt": 2,
+    "output_size": 7213
+  },
+  "77": {
+    "passed": true,
+    "attempt": 2,
+    "output_size": 6417
+  },
+  "78": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 6562
+  },
+  "79": {
+    "passed": true,
+    "attempt": 2,
+    "output_size": 7349
+  },
+  "80": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 5801
+  },
+  "81": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7632
+  },
+  "82": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 6880
+  },
+  "83": {
+    "passed": true,
+    "attempt": 2,
+    "output_size": 7857
+  },
+  "84": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7452
+  },
+  "86": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7601
+  },
+  "87": {
+    "passed": true,
+    "attempt": 2,
+    "output_size": 7482
+  },
+  "88": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7696
+  },
+  "89": {
+    "passed": true,
+    "attempt": 2,
+    "output_size": 8380
+  },
+  "90": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 5636
+  },
+  "91": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 6405
+  },
+  "92": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7834
+  },
+  "93": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7380
+  },
+  "95": {
+    "passed": true,
+    "attempt": 2,
+    "output_size": 7738
+  },
+  "1": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 9173
+  },
+  "2": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6620
+  },
+  "3": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6306
+  },
+  "4": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6167
+  },
+  "5": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6401
+  },
+  "6": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6295
+  },
+  "7": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 3506
+  },
+  "8": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 4595
+  },
+  "9": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 8281
+  },
+  "10": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 5076
+  },
+  "11": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7529
+  },
+  "12": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 13147
+  },
+  "13": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 8790
+  },
+  "14": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 9074
+  },
+  "15": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6440
+  },
+  "16": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7719
+  },
+  "17": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 8655
+  },
+  "18": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 5599
+  },
+  "19": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 8513
+  },
+  "20": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7078
+  },
+  "21": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6059
+  },
+  "22": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6656
+  },
+  "23": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6668
+  },
+  "24": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 9562
+  },
+  "25": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 5783
+  },
+  "26": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7878
+  },
+  "27": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 8170
+  },
+  "28": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 8847
+  },
+  "29": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 9623
+  },
+  "30": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 9314
+  },
+  "31": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 4448
+  },
+  "32": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7873
+  },
+  "33": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6247
+  },
+  "34": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6030
+  },
+  "35": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 3663
+  },
+  "36": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7130
+  },
+  "37": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7603
+  },
+  "38": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7026
+  },
+  "39": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7944
+  },
+  "40": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7610
+  },
+  "41": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7695
+  },
+  "42": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 5987
+  },
+  "43": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6186
+  },
+  "44": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 5708
+  },
+  "45": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6656
+  },
+  "46": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7296
+  },
+  "47": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6561
+  },
+  "48": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 8185
+  },
+  "49": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7149
+  },
+  "50": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6358
+  },
+  "51": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6610
+  },
+  "52": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7787
+  },
+  "53": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7511
+  },
+  "54": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 6492
+  },
+  "55": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 5823
+  },
+  "56": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7082
+  },
+  "57": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7230
+  },
   "58": {
     "passed": true,
     "attempt": 0,
@@ -8,5 +458,25 @@
     "passed": true,
     "attempt": 0,
     "output_size": 6378
+  },
+  "60": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7712
+  },
+  "85": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 4924
+  },
+  "94": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7302
+  },
+  "96": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7490
   }
 }
