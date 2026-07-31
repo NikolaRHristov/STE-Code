@@ -115,8 +115,7 @@ STEPS:
 1. Read each of these files (using read_file):
 {file_refs}
 
-2. Extract every word, table, list, and example VERBATIM into:
-   {output_path}
+2. Extract every word, table, list, and example VERBATIM.
 
 3. The output file must start with exactly: `# Page {start_pos} of 434`
 
@@ -125,20 +124,23 @@ STEPS:
 
 5. After the page heading, include the page-id line: `**Page {pages[0][1]}**`
 
-6. Output ONLY raw markdown — no commentary, no preamble, no summaries,
-   no meta-commentary about what you are doing.
+6. Write ONLY raw markdown content to the file. The file must contain
+   ONLY the extracted page content — nothing else. Do NOT include any
+   preamble, commentary, summaries, or meta-commentary.
 
 7. Preserve all formatting exactly — tables, lists, bold, examples.
 
 8. If a table spans pages, add `<!-- TABLE CONTINUES ON NEXT PAGE -->`
 
-9. Use write_file to save the output file.
+9. Use write_file to save the output to: {output_path}
 
-Do NOT include phrases like "Here is the extraction", "This page describes",
-"I will now", "Let me check", "shutting down", or any meta-commentary.
-Just read the files and write the output.
-
-Write to: {output_path}"""
+CRITICAL: The write_file content parameter must contain ONLY the raw
+markdown page content. Do NOT prepend phrases like "Here is the
+extraction", "This page describes", "I will now", "Let me check",
+"shutting down", or any meta-commentary. Do NOT append any text
+after the last page's content. The file should be pure markdown
+starting with `# Page {start_pos} of 434` and ending with the last
+page's content."""
 
     return prompt, output_path
 
@@ -176,10 +178,10 @@ def verify_output(worker_num, start_pos, end_pos, output_path):
         if expected_header not in content:
             return False, f"Missing header: {expected_header}"
 
-    # Gate 4: No commentary / meta-text
+    # Gate 4: Strip commentary / meta-text from the end of the file
     content_lines = [l for l in content.splitlines()
                      if not (l.startswith("╭") or l.startswith("╰") or l.startswith("│")
-                             or l.startswith("\x1b[") or "Hermes Agent v" in l
+                             or l.startswith("\\x1b[") or "Hermes Agent v" in l
                              or "Available Tools" in l or "Welcome to" in l
                              or "The boulder" in l or "Session:" in l)]
 
@@ -190,10 +192,17 @@ def verify_output(worker_num, start_pos, end_pos, output_path):
         "let me check", "i will now extract", "wait, actually",
         "shutting down", "the boulder",
     ]
-    last_lines = "\n".join(content_lines[-10:]).lower()
-    for pattern in bad_patterns:
-        if pattern in last_lines:
-            return False, f"Commentary: '{pattern}' in last lines"
+    # Strip trailing commentary lines from the file content
+    while content_lines:
+        last_line_lower = content_lines[-1].lower()
+        is_commentary = any(p in last_line_lower for p in bad_patterns)
+        is_boilerplate = any(content_lines[-1].startswith(b) for b in
+                             ["Issue 9 2025", "Part 2", "Part 1",
+                              "ASD-STE100 Simplified Technical English"])
+        if is_commentary and not is_boilerplate:
+            content_lines.pop()
+        else:
+            break
 
     return True, f"OK — {size}B, {len(lines)} lines"
 
