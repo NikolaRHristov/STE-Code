@@ -181,5 +181,12 @@ python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pai
 | Level Worker | `skills/level-worker/SKILL.md` | 4 parallel workers at levels 1-4 using agent runner |
 | Extension Worker | `skills/extension-worker/SKILL.md` | Batched poll workers generating code-domain gap fillers |
 | Translations | `skills/translations/SKILL.md` | Multi-locale placeholder pipeline, 9 locales, ~540 files, batch-of-3 workers |
-|| State Report | `skills/state-report/SKILL.md` | Standardized pipeline state format |
-|| Execution Auditor | `skills/execution-auditor/SKILL.md` | Hidden agent for forensic disk verification |
+||| State Report | `skills/state-report/SKILL.md` | Standardized pipeline state format |
+||| Execution Auditor | `skills/execution-auditor/SKILL.md` | Hidden agent for forensic disk verification |
+
+---
+## Feedback & Lessons Learned
+
+- [`feedback/exchange.md`](feedback/exchange.md) — Project-specific adaptations (2-chain parallelism, gitignore fix, extract_batch.py notes)
+- [`feedback/poll-vs-wait.md`](feedback/poll-vs-wait.md) — Use `process(action='poll')`, never `wait` or blocking timeouts
+- [`feedback/aphrodite-tool-testing.md`](feedback/aphrodite-tool-testing.md) — **Use this when working with aphrodite CCR markers**: `aphrodite_retrieve(hash=...)` must be called immediately on every `<<<CCR:hash|type|size>>>` marker in tool output. Never re-read a file when you have a live CCR marker — the marker IS the content.
