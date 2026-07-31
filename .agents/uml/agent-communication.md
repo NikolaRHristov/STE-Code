@@ -1084,7 +1084,7 @@ NOTE: This playbook tells an agent how to recover from common pipeline failures.
 **Symptoms:** Worker output files are truncated or empty. Git commits fail. State reports cannot be written. Error messages contain "No space left on device."
 
 **Diagnosis:**
-1. Check disk space: `df -h /Volumes/CORSAIR/`
+1. Check disk space: `df -h`
 2. Identify large directories: `du -sh .agents/audit/ ste-code/extracted/ ste-code/refined/`
 3. Check for unbounded growth: `ls -lt .agents/audit/ | head -20`
 

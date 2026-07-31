@@ -64,5 +64,5 @@ This process was tested end-to-end in this session:
 ## Related
 - Full skill: `~/.hermes/skills/aphrodite-tool-testing/SKILL.md`
 - Global feedback: `~/.hermes/feedback.md` (Aphrodite Tool Testing section)
-- Engine config: `/Users/nikola/.hermes/aphrodite.toml` (hot-reloads on save)
+- Engine config: `$HOME/.hermes/aphrodite.toml` (hot-reloads on save)
 - CCR database: `~/.hermes/aphrodite/ccr.db` (shared SQLite)
