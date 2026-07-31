@@ -72,7 +72,7 @@ def main():
     processes = []
     for relpath in FILES_WITH_FIXMES:
         prompt = build_worker_prompt(relpath)
-        proc = launch_agent(prompt, agent=agent, model="poolside/laguna-s-2.1:free", cwd=PROJECT)
+        proc = launch_agent(prompt, agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"), cwd=PROJECT)
         processes.append((relpath, proc))
         print(f"Launched: {relpath} (PID {proc.pid})")
 

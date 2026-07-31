@@ -138,7 +138,7 @@ CRITICAL:
 Report for each file: pairs added, any placeholders used.
 """
 
-        proc = launch_agent(prompt, agent=agent, model="poolside/laguna-s-2.1:free", cwd=PROJECT)
+        proc = launch_agent(prompt, agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"), cwd=PROJECT)
         processes.append((i + 1, proc))
         print(f"Launched batch {i+1}/{len(batches)} ({len(batch)} files, PID {proc.pid})")
 

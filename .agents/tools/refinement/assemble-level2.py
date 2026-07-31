@@ -95,7 +95,7 @@ def main():
         return
 
     LEVEL2_DIR.mkdir(parents=True, exist_ok=True)
-    result = run_agent(prompt, agent=agent, model="poolside/laguna-s-2.1:free", cwd=PROJECT)
+    result = run_agent(prompt, agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"), cwd=PROJECT)
     print(f"Exit: {result.returncode}")
 
     if OUTPUT.exists():
