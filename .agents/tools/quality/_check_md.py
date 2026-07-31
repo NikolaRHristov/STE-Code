@@ -1,7 +1,20 @@
 #!/usr/bin/env python3
-import sys
+"""Markdown format checker — validates formatting consistency in adapted files.
 
-with open('ste-code/adapted/a-categories.md', 'r') as f:
+Checks for: trailing whitespace, headings without space after #, missing blank lines before headings,
+table column count consistency.
+
+Usage: python3 .agents/tools/quality/_check_md.py [relative-path-from-project-root]
+"""
+import sys
+from pathlib import Path
+
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+
+target = sys.argv[1] if len(sys.argv) > 1 else "ste-code/adapted/a-categories.md"
+filepath = PROJECT / target
+
+with open(filepath, 'r') as f:
     lines = f.readlines()
 
 issues = []

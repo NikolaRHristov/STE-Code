@@ -3,7 +3,7 @@
 Each prompt: target file + gap description + improvement instructions."""
 import os, glob
 
-PROJECT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+PROJECT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
 PROMPTS_DIR = os.path.join(PROJECT, ".agents", "prompts", "maturity-fixes")
 AUDIT_DIR = os.path.join(PROJECT, ".agents", "audit")
 

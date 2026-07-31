@@ -39,8 +39,8 @@ def resolve_root(cli_root: Optional[str] = None) -> str:
             sys.exit(2)
         return root
 
-    # check-rails.py lives at .agents/scripts/  → two levels up is project root
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    # check-rails.py lives at .agents/tools/quality/ → four levels up is project root
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
 
 
 def ste_code_dir(root: str) -> str:

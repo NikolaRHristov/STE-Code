@@ -10,7 +10,7 @@ Usage: python3 .agents/tools/refinement/assemble-level3.py [--agent hermes|claud
 import sys
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 

@@ -11,7 +11,7 @@ Fixes: upgrades outer fence backtick count when inner fences detected.
 import re
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
 
 def scan_file(filepath):
     """Find nested fence issues. Returns list of (line_num, description)."""

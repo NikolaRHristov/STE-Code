@@ -10,7 +10,7 @@ Generates enhanced prompt files in .agents/tmp/phase-a-<worker-id>.txt
 import sys, re
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
 PROMPTS_DIR = PROJECT / ".agents" / "prompts" / "maturity-fixes"
 TMP_DIR = PROJECT / ".agents" / "tmp"
 

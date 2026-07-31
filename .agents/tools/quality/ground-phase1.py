@@ -12,7 +12,7 @@ Output: docs/roadmap/GROUNDING-REPORT.md
 import sys, json
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"

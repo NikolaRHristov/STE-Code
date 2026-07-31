@@ -15,7 +15,7 @@ import re
 from pathlib import Path
 from collections import Counter
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
 
 # STE-Code synonym table — prefer these, avoid those
 SYNONYMS = {
