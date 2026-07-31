@@ -26,11 +26,11 @@ Previous extraction files were from an incompatible PDF version. Cleared and res
 | 03 | W007, W008, W009 | 25-36 | [x] |
 | 04 | W010, W011, W012 | 37-48 | [x] |
 | 05 | W013, W014, W015 | 49-60 | [x] |
-| 06 | W016, W017, W018 | 61-72 | [ ] |
-| 07 | W019, W020, W021 | 73-84 | [ ] |
+| 06 | W016, W017, W018 | 61-72 | [x] |
+| 07 | W019, W020, W021 | 73-84 | [x] |
 | 08 | W022, W023, W024 | 85-96 | [ ] |
-| 09 | W025, W026, W027 | 97-108 | [ ] |
-| 10 | W028, W029, W30 | 109-120 | [ ] |
+| 09 | W025, W026, W027 | 97-108 | [x] |
+| 10 | W028, W029, W030 | 109-120 | [x] |
 | 11 | W031, W032, W033 | 121-132 | [ ] |
 | 12 | W034, W035, W036 | 133-144 | [ ] |
 | 13 | W037, W038, W039 | 145-156 | [ ] |
@@ -75,15 +75,16 @@ Previous extraction files were from an incompatible PDF version. Cleared and res
 
 ---
 
-## GATE 2: Merge (PENDING)
-- [ ] `ste-code/grouped/master.md` — regenerate from fresh extracted files
-- [ ] All 434 page headers present (`# Page N of 434`)
+## GATE 2: Grouping (PENDING)
+|- [ ] `ste-code/grouped/` created with semantic group files |
+|- [ ] groups-manifest.json written with all 434 pages accounted for |
+|- [ ] No broken dictionary entries or rule pairs across group boundaries |
 
 ## GATE 3: Adaptation (PENDING)
-- [ ] 19 categories remapped to code domain
-- [ ] 4 verb categories defined
-- [ ] Synonym table adapted
-- [ ] All 53 rules + 4 GR rules summarized with code-domain applications
+|- [ ] 19 categories remapped to code domain |
+|- [ ] 4 verb categories defined |
+|- [ ] Synonym table adapted |
+|- [ ] All 53 rules + 4 GR rules summarized with code-domain applications |
 
 ## GATE 4: Artifacts (PENDING)
 - [ ] 6 deployable artifacts generated
@@ -96,7 +97,7 @@ Previous extraction files were from an incompatible PDF version. Cleared and res
 |-------|--------|-------|-------|
 | GATE 0 (Environment) | ✅ Pass | — | Model: poolside/laguna-s-2.1:free |
 | GATE 1 (Extraction) | ⏳ In Progress | 0/109 | Re-extracting from page-dir/ |
-| GATE 2 (Merge) | ⏸️ Pending | — | Will regenerate after extraction |
-| GATE 3 (Adaptation) | ✅ Pass | 57 | From archive, verified correct |
-| GATE 4 (Artifacts) | ✅ Pass | 7+32 | From archive, verified correct |
+|| GATE 2 (Grouping) | ⏸️ Pending | — | Renamed from Merge — semantic page grouping |
+|| GATE 3 (Adaptation) | ⏸️ Pending | — | Depends on grouping stage |
+|| GATE 4 (Artifacts) | ⏸️ Pending | — | Depends on adaptation |
 | Enrichment | ⏭️ Skipped | — | User: skip — only adds cosmetic metadata comments |
