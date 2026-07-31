@@ -10,9 +10,10 @@ session_db=None to avoid polluting Hermes's session history, and writes
 the response to stdout.
 
 Fixes applied:
-- Added request_timeout env var to prevent silent hangs on rate-limited API calls
+- Set HERMES_REQUEST_TIMEOUT to prevent silent hangs on rate-limited API calls
 - Capture agent diagnostics to stderr for debugging failures
 - Flush stdout immediately to prevent buffering issues
+- Explicit agent cleanup
 """
 import sys
 import os
@@ -64,8 +65,9 @@ def run() -> int:
             i += 1
 
     # ── Build agent (mirrors _run_agent but without session_db) ──
-    os.environ["HERMES_YOLO_MODE"] = "1"
+    os.environ["HERMES_YOLO_MODE"] = "true"
     os.environ["HERMES_ACCEPT_HOOKS"] = "1"
+    os.environ.setdefault("HERMES_REQUEST_TIMEOUT", "300")
 
     cfg = load_config()
     model_cfg = cfg.get("model") or {}
@@ -134,11 +136,25 @@ def run() -> int:
     agent.stream_delta_callback = None
     agent.tool_gen_callback = None
 
-    response = agent.chat(prompt) or ""
-    sys.stdout.write(response)
-    if not response.endswith("\n"):
-        sys.stdout.write("\n")
-    sys.stdout.flush()
+    try:
+        response = agent.chat(prompt) or ""
+        sys.stdout.write(response)
+        if not response.endswith("\n"):
+            sys.stdout.write("\n")
+        sys.stdout.flush()
+    except Exception as e:
+        sys.stderr.write(f"oneshot-wrapper error: {e}\n")
+        sys.stderr.write(traceback.format_exc())
+        sys.stderr.flush()
+        sys.stdout.write(f"ERROR: {e}\n")
+        sys.stdout.flush()
+        return 1
+    finally:
+        try:
+            agent.close()
+        except Exception:
+            pass
+
     return 0
 
 
