@@ -173,13 +173,13 @@ Areas: code-examples (STE/non-STE pairs), dictionary-expand (code-domain terms),
 
 ```bash
 # Validate a single batch file
-python3 .agents/scripts/check-rails.py SCE/data/vocabulary/generated/output-N.json
+python3 .agents/tools/quality/check-rails.py SCE/data/vocabulary/generated/output-N.json
 
 # Validate all generated files
-python3 .agents/scripts/check-rails.py SCE/data/vocabulary/generated/*.json
+python3 .agents/tools/quality/check-rails.py SCE/data/vocabulary/generated/*.json
 
 # Check for duplicates across all batches
-python3 .agents/scripts/detect-duplicates.py SCE/data/vocabulary/generated/
+python3 .agents/tools/quality/detect-duplicates.py SCE/data/vocabulary/generated/
 ```
 
 ## Output Directories
@@ -552,7 +552,7 @@ else:
 Check new entries against all previously generated batch files for duplicate `term` + `type` pairs.
 
 ```bash
-python3 .agents/scripts/detect-duplicates.py SCE/data/vocabulary/generated/
+python3 .agents/tools/quality/detect-duplicates.py SCE/data/vocabulary/generated/
 ```
 
 A duplicate is acceptable only when the `type` or `category` field differs between the two entries. Same `term` + same `type` = reject and quarantine the newer entry.

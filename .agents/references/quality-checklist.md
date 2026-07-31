@@ -373,6 +373,6 @@ fi
 echo "=== End $WORKER ==="
 ```
 
-Save this script as `.agents/scripts/verify-worker.sh`. Make it executable. Run it on each worker in the batch before filling out the manual checklist above.
+Save this script as `.agents/tools/quality/verify-worker.sh`. Make it executable. Run it on each worker in the batch before filling out the manual checklist above.
 
 NOTE: The script automates checks 1, 3, and 4. Check 2 (content signals) still requires human judgment — the script prints the sampled lines for manual review. Full automation of content signal matching is unreliable because it depends on section-type context and boundary-crossing detection.

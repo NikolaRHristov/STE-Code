@@ -199,7 +199,7 @@ stateDiagram-v2
         [*] --> G2_Count : ls ste-code/refined/r*-p*.md | wc -l → 109
         G2_Count --> G2_ZeroByte : find ste-code/refined -size 0 → empty
         G2_ZeroByte --> G2_Gaps : iterate r001-r109, all present
-        G2_Gaps --> G2_Rails : python3 .agents/scripts/check-rails.py
+        G2_Gaps --> G2_Rails : python3 .agents/tools/quality/check-rails.py
         G2_Rails --> G2_SpotCheck : spot-check 3 random files (formatting, no "...")
         G2_SpotCheck --> G2_Pass : ALL CHECKS PASS
         G2_SpotCheck --> G2_Fail : any check fails
@@ -783,7 +783,7 @@ This section gives meta-instructions for agents and humans who must change this 
 3. Increment the minor version for additions (`1.X` → `1.X+1`).
 4. Increment the major version for breaking changes (`1.X` → `2.0`).
 5. Do not delete any existing section unless it is deprecated. Mark deprecated sections with `**DEPRECATED:** reason` at the top.
-6. Run `python3 .agents/scripts/check-rails.py` after any change to verify data consistency.
+6. Run `python3 .agents/tools/quality/check-rails.py` after any change to verify data consistency.
 
 ### 13.2 Scenario: Adding Stage 6 to the Pipeline
 
@@ -955,9 +955,9 @@ When artifacts change (add, remove, rename):
 
 | Script | Used At | Purpose |
 |--------|---------|---------|
-| `.agents/scripts/check-rails.py` | GATE 1, GATE 2 | Validates R1–R8 compliance on extracted/refined files |
-| `.agents/scripts/generate_refine_prompts.py` | Stage 2 setup | Generates 109 refinement prompts from extracted files |
-| `.agents/scripts/generate_expansion_prompts.py` | Extension phase | Generates gap-filler prompts for dictionary/categories |
+| `.agents/tools/quality/check-rails.py` | GATE 1, GATE 2 | Validates R1–R8 compliance on extracted/refined files |
+| `.agents/tools/refinement/generate_refinement_prompts.py` | Stage 2 setup | Generates 109 refinement prompts from extracted files |
+| `.agents/tools/refinement/generate_expansion_prompts.py` | Extension phase | Generates gap-filler prompts for dictionary/categories |
 
 ### 15.3 State Files
 
@@ -1151,7 +1151,7 @@ checks:
     fail_action: "regenerate worker grid"
   - id: G0-04
     description: "Prompt generation infrastructure ready"
-    command: "test -f .agents/scripts/generate_refine_prompts.py"
+    command: "test -f .agents/tools/refinement/generate_refinement_prompts.py"
     expected: "file exists"
     severity: warning
     fail_action: "locate or create prompt generator"
@@ -1195,7 +1195,7 @@ checks:
     fail_action: "re-launch specific missing workers"
   - id: G1-05
     description: "check-rails.py passes all checks"
-    command: "python3 .agents/scripts/check-rails.py ste-code/extracted/"
+    command: "python3 .agents/tools/quality/check-rails.py ste-code/extracted/"
     expected: "exit 0"
     severity: critical
     fail_action: "inspect rail violations; fix or re-extract"
@@ -1474,7 +1474,7 @@ checks:
 │         --yolo bg=true notify_on_complete=true              │
 ├─────────────────────────────────────────────────────────────┤
 │ COMMIT: git add -A && git gcommit-hermes "Batch N: …"     │
-│ GATE:   python3 .agents/scripts/check-rails.py              │
+│ GATE:   python3 .agents/tools/quality/check-rails.py              │
 │ AUDIT:  "state" → Agent #3 state report                     │
 ├─────────────────────────────────────────────────────────────┤
 │ INVARIANTS: 109 files • >3KB • no gaps • no fabrication     │

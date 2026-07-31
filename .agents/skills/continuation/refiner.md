@@ -316,7 +316,7 @@ awk '
 
 ### Quick Batch Verification Script
 
-Save this as `.agents/scripts/verify-refine-batch.sh`:
+Save this as `.agents/tools/quality/verify-refine-batch.sh`:
 
 ```bash
 #!/bin/bash
@@ -499,7 +499,7 @@ hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m poolside/laguna-s-
 
 Checks 1-5 are basic. Checks 6-8 are structural. See the "Verification —
 Concrete Commands" section above for the exact `grep`, `awk`, and `wc` commands
-that run each check. Use `bash .agents/scripts/verify-refine-batch.sh r001
+that run each check. Use `bash .agents/tools/quality/verify-refine-batch.sh r001
 r002 r003` for automated batch verification.
 
 ## 🔴 MANDATORY: Update REFINE-PROGRESS.md After Every Batch
@@ -550,7 +550,7 @@ find ste-code/refined -name 'r*-p*.md' -type f | wc -l  # Must be 109
 grep -c 'BLOCKED' .agents/state/REFINE-PROGRESS.md      # Must be 0
 
 # Rail compliance
-python3 .agents/scripts/check-rails.py                   # Must pass
+python3 .agents/tools/quality/check-rails.py                   # Must pass
 ```
 
 ## Start Now

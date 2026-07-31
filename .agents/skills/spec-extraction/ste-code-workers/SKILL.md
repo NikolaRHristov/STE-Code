@@ -172,13 +172,13 @@ The worker creates a directory at the expected output path instead of a markdown
 The output file exists and has content but the markdown structure is broken:
 unclosed code fences, orphaned table rows, or nested headings with invalid hierarchy.
 
-**Detection**: Run `python3 .agents/scripts/check-rails.py --file <path>`.
+**Detection**: Run `python3 .agents/tools/quality/check-rails.py --file <path>`.
 The script detects unclosed fences, heading glue, and table structure violations.
 
 **Recovery**:
 1. Identify the corruption type (unclosed fence, table damage, heading glue).
 2. If fewer than 3 distinct corruption types exist, attempt automated repair:
-   `python3 .agents/scripts/repair-markdown.py --file <path>`
+   `python3 .agents/tools/maintenance/repair-markdown.py --file <path>`
 3. If repair fails or corruption is severe, split the page range in half and
    re-extract both halves.
 4. Mark the original corrupted file as `_corrupted` and keep it for diagnosis.

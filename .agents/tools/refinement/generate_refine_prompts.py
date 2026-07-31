@@ -51,13 +51,13 @@ def _resolve_project_root() -> Path:
     """Auto-detect the project root directory from the location of this script.
 
     Returns:
-        Path to the project root (two levels up from .agents/scripts/).
+        Path to the project root (four levels up from .agents/tools/refinement/).
 
     Raises:
         RuntimeError: If the expected directory structure is not found.
     """
-    script_dir = Path(__file__).resolve().parent          # .agents/scripts/
-    project_root = script_dir.parent.parent               # project root
+    script_dir = Path(__file__).resolve().parent          # .agents/tools/refinement/
+    project_root = script_dir.parent.parent.parent        # project root
 
     # Sanity check: the root should contain these known directories.
     expected_markers = ["ste-code", ".agents"]

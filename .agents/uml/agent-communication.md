@@ -815,12 +815,12 @@ NOTE: These gates apply to this document. Run them after every edit.
 
 ### Automated Validation Script
 
-Save this script to `.agents/scripts/validate-agent-communication.sh`:
+Save this script to `.agents/tools/quality/validate-agent-communication.sh`:
 
 ```bash
 #!/bin/bash
 # Quality Gate validation for agent-communication.md
-# Run: bash .agents/scripts/validate-agent-communication.sh
+# Run: bash .agents/tools/quality/validate-agent-communication.sh
 DOC=".agents/uml/agent-communication.md"
 PASS=0; FAIL=0
 

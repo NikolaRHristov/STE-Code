@@ -529,7 +529,7 @@ For each batch:
 - [ ] Degraded workers documented in `.agents/feedback/exchange.md`
 - [ ] All 109 output files exist in `ste-code/extracted/`
 - [ ] Spot-check 5 random workers against source pages
-- [ ] Run full rails compliance check: `python3 .agents/scripts/check-rails.py`
+- [ ] Run full rails compliance check: `python3 .agents/tools/quality/check-rails.py`
 - [ ] Report final extraction statistics (total lines, total bytes, failure rate)
 
 ### Phase 3: Handoff to GATE 1

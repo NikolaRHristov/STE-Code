@@ -224,7 +224,7 @@ Before you regenerate prompts, check these items:
 
 1. Split the new spec into 4-page chunks. Use a script:
    ```bash
-   python3 .agents/scripts/split-pages.py \
+   python3 .agents/tools/maintenance/split-pages.py \
      --input spec/issue-XX-YYYY/ \
      --pages-per-worker 4 \
      --output .agents/prompts/refine/

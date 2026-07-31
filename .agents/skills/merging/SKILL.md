@@ -571,7 +571,7 @@ hermes -z "Read spec/issue-09-2025/page-169.md through page-172.md. Extract into
 grep -n "Page 169" ste-code/merged/master-raw.md
 
 # 3. Use a script to replace the old content with the new
-python3 .agents/scripts/patch-master.py \
+python3 .agents/tools/maintenance/patch-master.py \
   --master ste-code/merged/master-raw.md \
   --replace w043 \
   --with ste-code/merged/_fix/w043-fix.md \
@@ -584,7 +584,7 @@ python3 .agents/scripts/patch-master.py \
 
 ## Merge Diagnostics Script
 
-Save this diagnostic script as `.agents/scripts/merge-diagnostics.sh`. Run it after each merge attempt:
+Save this diagnostic script as `.agents/tools/maintenance/merge-diagnostics.sh`. Run it after each merge attempt:
 
 ```bash
 #!/bin/bash

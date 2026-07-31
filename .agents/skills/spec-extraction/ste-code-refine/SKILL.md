@@ -441,19 +441,19 @@ Identify which of the 5 verification checks failed for which worker:
 
 ```
 # Check 1: Content loss detection
-python3 .agents/scripts/verify-content-integrity.py ste-code/extracted/wNNN-pPPPP-PPPP.md ste-code/refined/rNNN-pPPPP-PPPP.md
+python3 .agents/tools/quality/verify-content-integrity.py ste-code/extracted/wNNN-pPPPP-PPPP.md ste-code/refined/rNNN-pPPPP-PPPP.md
 
 # Check 2: Page number coverage
-python3 .agents/scripts/verify-page-numbers.py ste-code/refined/rNNN-pPPPP-PPPP.md
+python3 .agents/tools/quality/verify-page-numbers.py ste-code/refined/rNNN-pPPPP-PPPP.md
 
 # Check 3: Header repetition
-python3 .agents/scripts/verify-headers.py ste-code/refined/rNNN-pPPPP-PPPP.md
+python3 .agents/tools/quality/verify-headers.py ste-code/refined/rNNN-pPPPP-PPPP.md
 
 # Check 4: STE/non-STE formatting
-python3 .agents/scripts/verify-ste-pairs.py ste-code/refined/rNNN-pPPPP-PPPP.md
+python3 .agents/tools/quality/verify-ste-pairs.py ste-code/refined/rNNN-pPPPP-PPPP.md
 
 # Check 5: Table structure
-python3 .agents/scripts/verify-tables.py ste-code/refined/rNNN-pPPPP-PPPP.md
+python3 .agents/tools/quality/verify-tables.py ste-code/refined/rNNN-pPPPP-PPPP.md
 ```
 
 ### Step 2: Classify the Failure
