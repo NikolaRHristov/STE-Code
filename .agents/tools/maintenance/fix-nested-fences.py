@@ -11,7 +11,7 @@ Fixes: upgrades outer fence backtick count when inner fences detected.
 import re
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 
 def scan_file(filepath):
     """Find nested fence issues. Returns list of (line_num, description)."""
@@ -86,6 +86,16 @@ def scan_file(filepath):
     return issues
 
 
+def _upgrade_fence(line, new_bt):
+    """Upgrade the backtick count of a fence marker line."""
+    match = re.match(r'^(\s*)(`{3,})(\S*)\s*$', line.strip())
+    if match:
+        indent = match.group(1)
+        rest = match.group(3)
+        return indent + '`' * new_bt + rest
+    return line
+
+
 def fix_file(filepath):
     """Fix nested fence issues by upgrading outer fence backtick count."""
     issues = scan_file(filepath)
@@ -96,7 +106,6 @@ def fix_file(filepath):
     lines = content.split('\n')
     
     # Group issues by outer fence and determine needed upgrade
-    # For each fenced block, find max inner backtick count and upgrade outer
     fixes = {}
     for issue in issues:
         outer_line = issue['outer_fence_line']
@@ -108,20 +117,18 @@ def fix_file(filepath):
     for outer_line in sorted(fixes.keys(), reverse=True):
         idx = outer_line - 1  # 0-indexed
         
+        new_bt = fixes[outer_line]
+        
         # Fix opening fence
         old_open = lines[idx]
-        new_bt = fixes[outer_line]
-        new_open = re.sub(r'^(\s*)(`{3,})', f'\\1{\"`\" * new_bt}', old_open)
-        lines[idx] = new_open
+        lines[idx] = _upgrade_fence(old_open, new_bt)
         
         # Find and fix closing fence
         fence_open_bt = len(re.match(r'^(\s*)(`{3,})', old_open).group(2))
         for j in range(idx + 1, len(lines)):
             close_match = re.match(r'^(\s*)(`{3,})\s*$', lines[j])
             if close_match and len(close_match.group(2)) == fence_open_bt:
-                old_close = lines[j]
-                new_close = re.sub(r'^(\s*)(`{3,})', f'\\1{\"`\" * new_bt}', old_close)
-                lines[j] = new_close
+                lines[j] = _upgrade_fence(lines[j], new_bt)
                 break
     
     filepath.write_text('\n'.join(lines))
@@ -149,7 +156,9 @@ def main():
         if dry_run:
             print(f"\n{f.relative_to(PROJECT)}: {len(issues)} issue(s)")
             for iss in issues:
-                print(f"  L{iss['line']}: inner `{'>'*iss['inner_bt']}` inside outer `{'>'*iss['outer_bt']}` (L{iss['outer_fence_line']})")
+                inner_ticks = '`' * iss['inner_bt']
+                outer_ticks = '`' * iss['outer_bt']
+                print(f"  L{iss['line']}: inner {inner_ticks} inside outer {outer_ticks} (L{iss['outer_fence_line']})")
         else:
             n = fix_file(f)
             if n:
