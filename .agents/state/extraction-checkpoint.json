@@ -478,5 +478,30 @@
     "passed": true,
     "attempt": 0,
     "output_size": 7490
+  },
+  "97": {
+    "passed": true,
+    "attempt": 0,
+    "output_size": 7535
+  },
+  "98": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 5896
+  },
+  "100": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7079
+  },
+  "101": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 4657
+  },
+  "102": {
+    "passed": true,
+    "attempt": 1,
+    "output_size": 7580
   }
 }
