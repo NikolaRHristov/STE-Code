@@ -169,10 +169,10 @@ def verify_output(worker_num, start_pos, end_pos, output_path):
         if expected_header not in content:
             return False, f"Missing header: {expected_header}"
 
-    # Gate 4: Strip commentary / meta-text from the end of the file
+    # Gate 4: No commentary / meta-text
     content_lines = [l for l in content.splitlines()
                      if not (l.startswith("╭") or l.startswith("╰") or l.startswith("│")
-                             or l.startswith("\\x1b[") or "Hermes Agent v" in l
+                             or l.startswith("\x1b[") or "Hermes Agent v" in l
                              or "Available Tools" in l or "Welcome to" in l
                              or "The boulder" in l or "Session:" in l)]
 
@@ -183,17 +183,10 @@ def verify_output(worker_num, start_pos, end_pos, output_path):
         "let me check", "i will now extract", "wait, actually",
         "shutting down", "the boulder",
     ]
-    # Strip trailing commentary lines from the file content
-    while content_lines:
-        last_line_lower = content_lines[-1].lower()
-        is_commentary = any(p in last_line_lower for p in bad_patterns)
-        is_boilerplate = any(content_lines[-1].startswith(b) for b in
-                             ["Issue 9 2025", "Part 2", "Part 1",
-                              "ASD-STE100 Simplified Technical English"])
-        if is_commentary and not is_boilerplate:
-            content_lines.pop()
-        else:
-            break
+    last_lines = "\n".join(content_lines[-10:]).lower()
+    for pattern in bad_patterns:
+        if pattern in last_lines:
+            return False, f"Commentary: '{pattern}' in last lines"
 
     return True, f"OK — {size}B, {len(lines)} lines"
 
