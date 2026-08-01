@@ -28,6 +28,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import anonymize as _anon  # noqa: E402
 from harness_config import (  # noqa: E402
     HarnessConfig,
     add_common_arguments,
@@ -416,5 +417,69 @@ def render_markdown(report: dict) -> str:
     add(f"- convergence: {white['convergence']}")
     add("")
     return "\n".join(out)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Stitch RED / BLUE / WHITE handshake artifacts into one report.")
+    cfg_preview = load_config()
+    add_common_arguments(parser, config=cfg_preview)
+    _anon.add_arguments(parser)
+    parser.add_argument("--out", default=None,
+                        help="report path override (default: <base>/<stitch_report>)")
+    parser.add_argument("--markdown", default=None,
+                        help="markdown path override (default: <base>/report.md)")
+    parser.add_argument("--raw-out", default=None,
+                        help="also write the UNREDACTED report to this path (local use only)")
+    parser.add_argument("--quiet", action="store_true")
+    args = parser.parse_args()
+
+    cfg = load_config(args.profile)
+    base = Path(args.base) if args.base else default_base(cfg)
+    if not base.exists():
+        print(f"stitch: base does not exist yet: {base}", file=sys.stderr)
+        return 2
+
+    variants = cfg.parse_variants(args.variants)
+    stitcher = Stitcher(cfg, base, variants, args.rounds)
+    raw_report = stitcher.build_report()
+
+    anon = _anon.from_args(args, root=cfg.root,
+                           extra_terms=[cfg.profile_id, cfg.display_name])
+    report = anon.report(raw_report)
+
+    out = Path(args.out) if args.out else base / cfg.handshake.stitch_report
+    md = Path(args.markdown) if args.markdown else base / "report.md"
+    _write_atomic(out, json.dumps(report, indent=2))
+    _write_atomic(md, anon.markdown(render_markdown(report)))
+    if args.raw_out:
+        _write_atomic(Path(args.raw_out), json.dumps(raw_report, indent=2))
+
+    if not args.quiet:
+        cov = report["coverage"]
+        print(f"stitched {cov['cells_with_data']}/{cov['planned_cells']} cells "
+              f"({cov['coverage_pct']}%) from {anon.path(base)}")
+        print(f"  anonymization: {anon.level}")
+        for row in report["variant_ranking"]:
+            print(f"  variant {str(row['variant']):>3} ({row['label']}): "
+                  f"escapes={row['total_escapes']} "
+                  f"resistance={row['blue_resistance_pct']} "
+                  f"durable={row['durability']['durable']}")
+        top = report["by_technique"][:5]
+        if top:
+            print("  top techniques:", ", ".join(
+                f"{r['technique']}={r['escapes']}" for r in top))
+        top_p = report["by_placement"][:5]
+        if top_p:
+            print("  top placements:", ", ".join(
+                f"{r['placement']}={r['escapes']}" for r in top_p))
+        print(f"  wrote {anon.path(out)}")
+        print(f"  wrote {anon.path(md)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
 
 
