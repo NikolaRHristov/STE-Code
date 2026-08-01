@@ -13,212 +13,39 @@
 
 # Page 429 of 434
 
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 429–432 of 434
-
-## Dictionary Entries
-
-### APPROVED
-
-#### WIDE (adj) — APPROVED
-
-- **Forms:** WIDER, WIDEST
-- **Meaning:** That has a specified or large width
-- **Example:**
-
-> **STE:** REPAIR ALL CRACKS THAT ARE WIDER THAN 0,05 mm.
-
-#### WIDTH (n) — APPROVED
-
-- **Meaning:** The smaller of two dimensions, the second-largest of three dimensions
-- **Example:**
-
-> **STE:** MEASURE THE WIDTH OF THE CRACK AT THE WIDEST POINT.
-
-#### WILL (v) — APPROVED
-
-- **Meaning:** Auxiliary modal verb that shows simple future
-- **Usage:** No other verb tense forms.
-- **Example:**
-
-> **STE:** WARNINGS AND CAUTIONS IN THIS MANUAL WILL HELP YOU TO DO THE WORK SAFELY AND CORRECTLY.
-
-#### WIND (v) — APPROVED
-
-- **Forms:** WINDS, WOUND, WOUND
-- **Meaning:** To move around and around an object
-- **Example:**
-
-> **STE:** WIND THE TAPE ON THE REEL.
-
-#### WITH (prep) — APPROVED
-
-- **Meaning:** Function word that shows association or relationship, help or sharing, a means or instrument
-- Reference: Refer to section 9, GR-2.
-- **Examples:**
-
-> **STE:** ALIGN THE MARK WITH THE LONGITUDINAL AXIS.
-> **STE:** ATTACH THE FLANGE (10) WITH THE FOUR BOLTS (15).
-> **STE:** REMOVE THE VALVE (2) WITH THE EXTRACTOR.
-
-#### WITHOUT (prep) — APPROVED
-
-- **Meaning:** Not with
-- **Example:**
-
-> **STE:** SMALL DAMAGE IS PERMITTED WITHOUT REPAIR. REFER TO TABLE 1 FOR THE APPLICABLE LIMITS.
-
-#### WORK (n) — APPROVED
-
-- **Meaning:** That which you do when you use physical strength, or mental power
-- **Example:**
-
-> **STE:** DO THE WORK IN A CLEAN AREA.
-
-#### WRITE (v) — APPROVED
-
-- **Forms:** WRITES, WROTE, WRITTEN
-- **Meaning:** To record data or information as words, letters, or symbols
-- **Example:**
-
-> **STE:** WRITE THE TEST DATE ON THE CERTIFICATE.
-
-### UNAPPROVED
-
-#### whose (pron) — unapproved
-
-- **Approved alternative:** Use a different construction.
-
-> **STE:** THE GENERATORS SUPPLY A THREE-PHASE VOLTAGE. THE FREQUENCY OF THIS VOLTAGE INCREASES WHEN THE GENERATOR ROTOR SPEED INCREASES.
-> **Non-STE:** The generators produce a three-phase voltage whose frequency is proportional to the generator rotor speed.
-
-#### windy (adj) — unapproved
-
-- **Approved alternative:** WIND (TN)
-
-> **STE:** WHEN THERE ARE STRONG WINDS, OBEY THESE SPECIAL PRECAUTIONS.
-> **Non-STE:** Take special precautions in very windy conditions.
-
-> **See:** Dictionary entry for WIND (TN).
-
-#### wipe (v) — unapproved
-
-- **Approved alternative:** CLEAN (v)
-
-> **STE:** BEFORE EACH CYCLE, CLEAN THE INDICATOR.
-> **Non-STE:** Wipe the indicator surfaces before each cycle.
-
-> **See:** Dictionary entry for CLEAN (v).
-
-#### wire (v) — unapproved
-
-- **Approved alternative:** ATTACH (v) (WITH WIRE [TN])
-
-> **STE:** ATTACH THE HOSE TO THE FIXTURE WITH WIRE.
-> **Non-STE:** Wire the hose to the fixture.
-
-> **See:** Dictionary entry for ATTACH (v); Dictionary entry for WIRE (TN).
-
-#### wire-lock (v) — unapproved
-
-- **Approved alternative:** LOCK (v) (WITH LOCKWIRE [TN])
-
-> **STE:** LOCK THE FOUR BOLTS TO EACH OTHER WITH LOCKWIRE.
-> **Non-STE:** Wire-lock the four bolts to each other.
-
-- **Approved alternative:** SAFETY (v) (WITH SAFETY WIRE [TN])
-
-> **STE:** SAFETY THE FOUR BOLTS TO EACH OTHER WITH SAFETY WIRE.
-> **Non-STE:** Wire-lock the four bolts to each other.
-
-> **See:** Dictionary entry for LOCK (v); Dictionary entry for SAFETY (v).
-
-#### withdraw (v) — unapproved
-
-- **Approved alternative:** REMOVE (v)
-
-> **STE:** REMOVE THE INDICATOR FROM THE INSTRUMENT PANEL.
-> **Non-STE:** Withdraw the indicator from the instrument panel.
-
-> **See:** Dictionary entry for REMOVE (v).
-
-#### within (prep) — unapproved
-
-- **Approved alternative:** IN (prep)
-
-> **STE:** A FILTER PREVENTS CONTAMINATION OF THE COMPONENTS IN THE SYSTEM.
-> **Non-STE:** A filter prevents contamination of the components within the system.
-
-> **STE:** LIGHT L4 COMES ON IN 5 SECONDS OR LESS.
-> **Non-STE:** Light L4 illuminates within 5 seconds.
-
-> **STE:** MAKE SURE THAT THE WARNING LIGHT COMES ON IN LESS THAN 3 SECONDS.
-> **Non-STE:** Make sure that the warning light illuminates within 3 seconds.
-
-> **See:** Dictionary entry for IN (prep).
-
-#### withstand (v) — unapproved
-
-- **Approved alternative:** RESISTANT (adj)
-
-> **STE:** THIS MATERIAL IS RESISTANT TO FIRE.
-> **Non-STE:** This material can withstand fire.
-
-> **See:** Dictionary entry for RESISTANT (adj).
-
-#### work (v) — unapproved
-
-- **Approved alternative:** WORK (n)
-
-> **STE:** BE CAREFUL WHEN YOU DO WORK NEAR FUEL TANKS.
-> **Non-STE:** Be careful when you work near fuel tanks.
-
-> **See:** Dictionary entry for WORK (n).
-
-#### would (v) — unapproved
-
-- **Approved alternative:** CAN (v)
-
-> **STE:** SOLVENTS THAT STAY ON THE PART CAN CAUSE CORROSION.
-> **Non-STE:** Solvents left on the part would corrode the part.
-
-> **See:** Dictionary entry for CAN (v).
-
-#### wrap (v) — unapproved
-
-- **Approved alternative:** PUT (v)
-
-> **STE:** PUT THE PART IN OILPAPER.
-> **Non-STE:** Wrap the part in oilpaper.
-
-- **Approved alternative:** WIND (v)
-
-> **STE:** WIND MASKING TAPE AROUND THE PART.
-> **Non-STE:** Wrap masking tape around the part.
-
-> **See:** Dictionary entry for PUT (v); Dictionary entry for WIND (v).
-
-#### wrong (adj) — unapproved
-
-- **Approved alternative:** INCORRECT (adj)
-
-> **STE:** IDENTIFY THE BELLCRANK AND SHAFT WITH MARKS. THESE MARKS WILL PREVENT AN INCORRECT INSTALLATION.
-> **Non-STE:** Mark the bellcrank and shaft to prevent wrong installation.
-
-> **See:** Dictionary entry for INCORRECT (adj).
-
-#### wrongly (adv) — unapproved
-
-- **Approved alternative:** INCORRECTLY (adv)
-
-> **STE:** IF THE HOSES ARE INCORRECTLY INSTALLED, DAMAGE CAN OCCUR.
-> **Non-STE:** Damage can occur if hoses are wrongly installed.
-
-> **See:** Dictionary entry for INCORRECTLY (adv).
-
----
-
-*Page 2-1-W8 Part 2 – Dictionary Issue 9, 2025-01-15*
+| Word (POS) | Meaning & Examples |
+|------------|-------------------|
+| **whose (pron) — UNNAPROVED** | Use a different THE GENERATORS The generators produce construction. SUPPLY A THREE- a three-phase voltage PHASE VOLTAGE. THE whose frequency is FREQUENCY OF THIS proportional to the VOLTAGE INCREASES generator rotor speed. WHEN THE GENERATOR ROTOR SPEED INCREASES. |
+| **WIDE (adj)** | That has a specified or REPAIR ALL CRACKS (WIDER, large width THAT ARE WIDER WIDEST) THAN 0,05 mm. |
+| **WIDTH (n)** | The smaller of two MEASURE THE WIDTH dimensions, the second- OF THE CRACK AT largest of three THE WIDEST POINT. dimensions |
+| **WILL (v)** | Auxiliary modal verb that WARNINGS AND shows simple future CAUTIONS IN THIS No other verb tense MANUAL WILL HELP forms. YOU TO DO THE WORK SAFELY AND CORRECTLY. |
+| **WIND (v)** | , To move around and WIND THE TAPE ON WINDS, around an object THE REEL. WOUND, WOUND |
+| **windy (adj) — UNNAPROVED** | WIND (TN) WHEN THERE ARE Take special precautions STRONG WINDS, in very windy conditions. OBEY THESE SPECIAL PRECAUTIONS. |
+| **wipe (v) — UNNAPROVED** | CLEAN (v) BEFORE EACH CYCLE, Wipe the indicator CLEAN THE surfaces before each INDICATOR. cycle. |
+| **wire (v) — UNNAPROVED** | ATTACH (v) ATTACH THE HOSE TO Wire the hose to the (WITH WIRE [TN]) THE FIXTURE WITH fixture. WIRE. |
+| **wire-lock (v) — UNNAPROVED** | LOCK (v) LOCK THE FOUR Wire-lock the four bolts (WITH LOCKWIRE [TN]) BOLTS TO EACH to each other. OTHER WITH LOCKWIRE. |
+| **SAFETY (v)** | SAFETY THE FOUR Wire-lock the four bolts (WITH SAFETY WIRE BOLTS TO EACH to each other. [TN]) OTHER WITH SAFETY WIRE. |
+
+<!-- Page 430 of 434 -->
+| **WITH (prep)** | Function word that ALIGN THE MARK shows association or WITH THE relationship, help or LONGITUDINAL AXIS. sharing, a means or instrument Refer to ATTACH THE FLANGE section 9, GR-2. (10) WITH THE FOUR BOLTS (15). REMOVE THE VALVE (2) WITH THE EXTRACTOR. |
+| **withdraw (v) — UNNAPROVED** | REMOVE (v) REMOVE THE Withdraw the indicator INDICATOR FROM THE from the instrument INSTRUMENT PANEL. panel. |
+| **within (prep) — UNNAPROVED** | IN (prep) A FILTER PREVENTS A filter prevents CONTAMINATION OF contamination of the THE COMPONENTS IN components within the THE SYSTEM. system. IN ... OR LESS LIGHT L4 COMES ON Light L4 illuminates IN 5 SECONDS OR within 5 seconds. LESS. IN LESS THAN MAKE SURE THAT THE Make sure that the WARNING LIGHT warning light illuminates COMES ON IN LESS within 3 seconds. THAN 3 SECONDS. |
+| **WITHOUT (prep)** | Not with SMALL DAMAGE IS PERMITTED WITHOUT REPAIR. REFER TO TABLE 1 FOR THE APPLICABLE LIMITS. |
+| **withstand (v) — UNNAPROVED** | RESISTANT (adj) THIS MATERIAL IS This material can RESISTANT TO FIRE. withstand fire. |
+| **WORK (n)** | That which you do when DO THE WORK IN A you use physical CLEAN AREA. strength, or mental power |
+| **work (v) — UNNAPROVED** | WORK (n) BE CAREFUL WHEN Be careful when you YOU DO WORK NEAR work near fuel tanks. FUEL TANKS. |
+| **would (v) — UNNAPROVED** | CAN (v) SOLVENTS THAT STAY Solvents left on the part ON THE PART CAN would corrode the part. CAUSE CORROSION. |
+
+<!-- Page 431 of 434 -->
+| **wrap (v) — UNNAPROVED** | PUT (v) PUT THE PART IN Wrap the part in OILPAPER. oilpaper. |
+| **WIND (v)** | WIND MASKING TAPE Wrap masking tape AROUND THE PART. around the part. |
+| **WRITE (v)** | , To record data or WRITE THE TEST WRITES, information as words, DATE ON THE WROTE, letters, or symbols CERTIFICATE. WRITTEN |
+| **wrong (adj) — UNNAPROVED** | INCORRECT (adj) IDENTIFY THE Mark the bellcrank and BELLCRANK AND shaft to prevent wrong SHAFT WITH MARKS. installation. THESE MARKS WILL PREVENT AN INCORRECT INSTALLATION. |
+| **wrongly (adv) — UNNAPROVED** | INCORRECTLY (adv) IF THE HOSES ARE Damage can occur if INCORRECTLY hoses are wrongly INSTALLED, DAMAGE installed. CAN OCCUR. |
+
+# Page 432 of 434
+
+Blank Page
 
 # Page 433 of 434
 

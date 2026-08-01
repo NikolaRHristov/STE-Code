@@ -1,5 +1,5 @@
 <!-- GROUP: 022-dict-s -->
-<!-- PAGES: 359-390 -->
+<!-- PAGES: 358-389 -->
 <!-- SECTION: DICT -->
 <!-- KEY: S -->
 <!-- WORKERS: R090, R091, R092, R093, R094, R095, R096, R097, R098 -->
@@ -9,2218 +9,394 @@
 
 > **Source:** ASD-STE100 Issue 9, January 2025
 > **Section:** DICT (S)
-> **Pages:** 359-390 of 434 (32 pages)
-
-#### THEIR (adj) — APPROVED
-
-- Meaning: Of or belonging to them. You can use this word to replace "relevant" when it refers to belonging.
-> **STE:** INSTALL THE BOLTS IN THEIR HOLES.
-> **Non-STE:** Install the bolts in the relevant holes.
-
-#### ITS (adj) — APPROVED
-
-- Meaning: Of or belonging to it. You can use this word to replace "relevant" when it refers to belonging.
-> **STE:** INSTALL THE COMPUTER IN ITS RACK.
-> **Non-STE:** Install the computer in the relevant rack.
-
-#### REMAINING (adj) — APPROVED
-
-- Meaning: That continues to stay
-> **STE:** REMOVE THE REMAINING SEALANT WITH SOLVENT.
-
-#### REMOVAL (n) — APPROVED
-
-- Meaning: A procedure which removes an object
-> **STE:** THE SUPERVISOR MUST GIVE THE APPLICABLE PROCEDURE FOR CORROSION REMOVAL.
-
-#### REMOVE (v) — APPROVED
-
-- Meaning: To take or move something away from its initial position
-- Forms: REMOVES, REMOVED, REMOVED
-> **STE:** REMOVE THE INDICATOR FROM THE PANEL.
-
-#### NEW (adj) — APPROVED
-
-- Meaning: Not existing before; recently made, discovered, or created
-> **STE:** IF THE PAINT ON THE CONTROL BOX IS DAMAGED, APPLY NEW PAINT.
-
-#### REPAIR (n) — APPROVED
-
-- Meaning: The act of repairing or the result when something is repaired
-> **STE:** AFTER THE REPAIR, APPLY A PROTECTIVE LAYER OF GREASE TO ALL EXTERNAL SURFACES.
-
-#### REPAIR (v) — APPROVED
-
-- Meaning: To make an item serviceable
-- Forms: REPAIRS, REPAIRED, REPAIRED
-> **STE:** REPAIR THE DEFECTIVE WIRING.
-
-#### REPLACE (v) — APPROVED
-
-- Meaning: To remove an item and to install a new or serviceable item of the same type
-- Forms: REPLACES, REPLACED, REPLACED
-> **STE:** REPLACE THE RELAY.
-
-#### REPLACEMENT (n) — APPROVED
-
-- Meaning: The item you install when you replace an item
-> **STE:** MAKE SURE THAT THE REPLACEMENT HAS THE CORRECT DIMENSIONS.
-
-#### REPORT (n) — APPROVED
-
-- Meaning: The information that is recorded about a subject or occurrence
-> **STE:** IF THERE IS A REPORT OF DAMAGE, DO AN ACCURATE INSPECTION.
-
-#### RESISTANT (adj) — APPROVED
-
-- Meaning: That will help to prevent something
-> **STE:** THE MATERIAL OF THE SEATS IS RESISTANT TO FIRE.
-
----
-
-## UNAPPROVED
-
-#### relay (v) — UNAPPROVED
-
-- Approved alternative: SEND (v)
-> **STE:** SEND THE INFORMATION TO THE ENGINEERING DEPARTMENT.
-> **Non-STE:** Relay the information to the engineering department.
-
-#### relevant (adj) — UNAPPROVED
-
-- Approved alternative: RELATED (adj)
-> **STE:** REMOVE THE ROD END FROM THE RELATED PIVOT.
-> **Non-STE:** Withdraw the rod end from the relevant pivot.
-> **See:** Dictionary entry for RELATED (adj).
-
-#### relieve (v) — UNAPPROVED
-
-- Approved alternative: RELEASE (v)
-> **STE:** RELEASE THE TENSION IN THE CABLE.
-> **Non-STE:** Relieve the tension in the cable.
-> **See:** Dictionary entry for RELEASE (v).
-
-#### remain (v) — UNAPPROVED
-
-- Approved alternative: STAY (v)
-> **STE:** THE FLAGS MUST STAY OUT OF VIEW.
-> **Non-STE:** The flags must remain out of view.
-
-#### remnant (n) — UNAPPROVED
-
-- Approved alternative: REMAINING (adj)
-> **STE:** REMOVE THE REMAINING SEALANT FROM THE FLOOR COVERING.
-> **Non-STE:** Remove sealant remnants from the floor covering.
-> **See:** Dictionary entry for REMAINING (adj).
-
-#### removable (adj) — UNAPPROVED
-
-- Approved alternative: REMOVE (v)
-> **STE:** FIND THE PART OF THE BARREL THAT YOU CAN REMOVE.
-> **Non-STE:** Find the removable part of the barrel.
-> **See:** Dictionary entry for REMOVE (v).
-
-#### render (v) — UNAPPROVED
-
-- Approved alternative: MAKE (v)
-> **STE:** MAKE THE SYSTEM ELECTRICALLY SAFE.
-> **Non-STE:** Render the system electrically safe.
-
-#### renew (v) — UNAPPROVED
-
-- Approved alternative: NEW (adj)
-> **STE:** USE NEW ADHESIVE TAPE.
-> **Non-STE:** Renew the adhesive tape.
-> **See:** Dictionary entry for NEW (adj).
-
-#### renovate (v) — UNAPPROVED
-
-- Approved alternative: REPAIR (v)
-> **STE:** REPAIR ALL WORN SURFACES.
-> **Non-STE:** Renovate all worn surfaces.
-> **See:** Dictionary entry for REPAIR (v).
-
-#### repack (v) — UNAPPROVED
-
-- Approved alternative: PUT (v)
-> **STE:** PUT THE ASSEMBLY BACK IN THE BOX.
-> **Non-STE:** Repack the assembly in the box.
-> **See:** Dictionary entry for PUT (v).
-- Approved alternative: FILL (v)
-> **STE:** FILL THE HOLE WITH GREASE AGAIN.
-> **Non-STE:** Repack the hole with grease.
-> **See:** Dictionary entry for FILL (v).
-
-#### repaint (v) — UNAPPROVED
-
-- Approved alternative: PAINT (v)
-> **STE:** PAINT ALL THE SURFACES AGAIN.
-> **Non-STE:** Repaint all the surfaces.
-> **See:** Dictionary entry for PAINT (v).
-
-#### repairable (adj) — UNAPPROVED
-
-- Approved alternative: REPAIR (v)
-> **STE:** IT IS POSSIBLE TO REPAIR THIS DAMAGE.
-> **Non-STE:** This damage is repairable.
-> **See:** Dictionary entry for REPAIR (v).
-
-#### repeat (v) — UNAPPROVED
-
-- Approved alternative: AGAIN (adv)
-> **STE:** DO STEPS (10) THRU (14) AGAIN.
-> **Non-STE:** Repeat steps (10) to (14).
-
-#### repeated (adj) — UNAPPROVED
-
-- Approved alternative: AGAIN AND AGAIN
-> **STE:** IF YOU HEAR SIGNALS AGAIN AND AGAIN, DO A CHECK OF THE "AP ENGAGE" BUTTON ON THE FLIGHT MODE PANEL.
-> **Non-STE:** If repeated signals are heard, check the AP ENGAGE button on the flight mode panel.
-
-#### repeatedly (adv) — UNAPPROVED
-
-- Approved alternative: AGAIN AND AGAIN
-> **STE:** IF THE VOLTAGE DECREASES AGAIN AND AGAIN, ADJUST THE VOLTAGE REGULATOR.
-> **Non-STE:** If voltage drops repeatedly, adjust the voltage regulator.
-
-#### replenish (v) — UNAPPROVED
-
-- Approved alternative: FILL (v)
-> **STE:** FILL THE ACCUMULATOR WITH OIL.
-> **Non-STE:** Replenish the accumulator with oil.
-> **See:** Dictionary entry for FILL (v).
-- Approved alternative: ADD (v)
-> **STE:** ADD OIL TO THE ACCUMULATOR.
-> **Non-STE:** Replenish the oil in the accumulator.
-- Approved alternative: REFUEL (v)
-> **STE:** REFUEL THE VEHICLE.
-> **Non-STE:** Replenish the vehicle with fuel.
-> **See:** Dictionary entry for REFUEL (v).
-
-#### reposition (v) — UNAPPROVED
-
-- Approved alternative: MOVE (v)
-> **STE:** MOVE THE LEVER BACK TO ITS INITIAL POSITION.
-> **Non-STE:** Reposition the lever.
-- Approved alternative: PUT (v)
-> **STE:** PUT THE LEVER BACK TO ITS INITIAL POSITION.
-> **Non-STE:** Reposition the lever.
-> **See:** Dictionary entry for PUT (v).
-- Approved alternative: SET (v)
-> **STE:** SET THE SWITCH BACK TO THE OFF POSITION.
-> **Non-STE:** Reposition the switch to OFF.
-> **See:** Dictionary entry for SET (v).
-
-#### represent (v) — UNAPPROVED
-
-- Approved alternative: SHOW (v)
-> **STE:** THE SUCTION SHOWS AS AN ALTIMETER INDICATION.
-> **Non-STE:** The suction is represented by an altimeter reading.
-
-#### repressurize (v) — UNAPPROVED
-
-- Approved alternative: PRESSURIZE (v)
-> **STE:** PRESSURIZE THE TANK AGAIN.
-> **Non-STE:** Repressurize the tank.
-> **See:** Dictionary entry for PRESSURIZE (v).
-
-#### request (n) — UNAPPROVED
-
-- Approved alternative: TELL (v)
-> **STE:** TELL THE FIRE SERVICE TO HELP YOU.
-> **Non-STE:** Make a request for external fire support.
-- Approved alternative: WRITE (v)
-> **STE:** IF AID IS NECESSARY, WRITE TO THE MANUFACTURER.
-> **Non-STE:** Any request for assistance should be addressed to the manufacturer.
-
-#### request (v) — UNAPPROVED
-
-- Approved alternative: TELL (v)
-> **STE:** TELL THE FIRE SERVICE TO HELP YOU.
-> **Non-STE:** Request external fire support.
-- Approved alternative: WRITE (v)
-> **STE:** WRITE TO THE MANUFACTURER FOR REPAIR INSTRUCTIONS.
-> **Non-STE:** Request repair instructions from the manufacturer.
-
-#### require (v) — UNAPPROVED
-
-- Approved alternative: NECESSARY (adj)
-> **STE:** DURING THIS PROCEDURE, CLEAN FILTERS ARE NECESSARY.
-> **Non-STE:** During this procedure, clean filters are required.
-
-#### reseal (v) — UNAPPROVED
-
-- Approved alternative: SEAL (v)
-> **STE:** SEAL THE CONTAINER AGAIN.
-> **Non-STE:** Reseal the container.
-> **See:** Dictionary entry for SEAL (v).
-
-#### reset (v) — UNAPPROVED
-
-- Approved alternative: SET (v)
-> **STE:** SET THE INDICATOR TO A NEW POSITION.
-> **Non-STE:** Reset the indicator to a new position.
-> **See:** Dictionary entry for SET (v).
-
-#### residual (adj) — UNAPPROVED
-
-- Approved alternative: REMAINING (adj)
-> **STE:** REMOVE ALL THE REMAINING GREASE.
-> **Non-STE:** Remove all residual grease.
-> **See:** Dictionary entry for REMAINING (adj).
-
-#### residue (n) — UNAPPROVED
-
-- Approved alternative: REMAINING (adj)
-> **STE:** REMOVE THE REMAINING GREASE.
-> **Non-STE:** Remove the grease residues.
-> **See:** Dictionary entry for REMAINING (adj).
-
-#### respective (adj) — UNAPPROVED
-
-- Approved alternative: RELATED (adj)
-> **STE:** ATTACH THE CABLES TO THEIR RELATED SHACKLES.
-> **Non-STE:** Attach the cables to their respective shackles.
-> **See:** Dictionary entry for RELATED (adj).
-- Approved alternative: CORRECT (adj)
-> **STE:** INSTALL THE BOLTS IN THEIR CORRECT POSITIONS.
-> **Non-STE:** Install the bolts in their respective positions.
-
-#### respectively (adv) — UNAPPROVED
-
-- Approved alternative: RELATED (adj)
-> **STE:** ENGINES 1 AND 2 SUPPLY HOT AIR TO THEIR RELATED WINGS.
-> **Non-STE:** Engines 1 and 2 supply hot air to the left and right wings respectively.
-> **See:** Dictionary entry for RELATED (adj).
-
-#### respond (v) — UNAPPROVED
-
-- Approved alternative: RESULT (n)
-> **STE:** IF THE INSTRUMENT DOES NOT GIVE A RESULT, DO A TEST.
-> **Non-STE:** If the instrument fails to respond, do a test.
-
-#### rest (n) — UNAPPROVED
-
-- Approved alternative: REMAINING (adj)
-> **STE:** THE REMAINING INSTRUCTIONS ARE APPLICABLE ONLY TO APPROVED PERSONNEL.
-> **Non-STE:** The rest of these instructions only apply to approved personnel.
-> **See:** Dictionary entry for REMAINING (adj).
-
-# Page 361 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 361–364 of 434
-
-## Approved Entries
-
-#### RESULT (n) — APPROVED
-
-- **Definition:** Something that occurs when you do something
-- **Example:**
-  > **STE:** IF THESE TESTS DO NOT GIVE THE CORRECT RESULTS, REPLACE THE UNIT.
-
-#### RETRACT (v) — APPROVED
-
-- **Forms:** RETRACTS, RETRACTED, RETRACTED
-- **Meaning 1:** To pull in(to)
-  > **STE:** THE NOSE LANDING GEAR RETRACTS INTO THE FUSELAGE.
-- **Meaning 2:** To move in(to)
-  > **STE:** RETRACT THE LANDING GEAR.
-
-#### RETRACTION (n) — APPROVED
-
-- **Definition:** The result when something retracts
-- **Example:**
-  > **STE:** DURING THE RETRACTION SEQUENCE, MAKE SURE THAT THE LANDING GEAR DOORS CLOSE.
-
-#### RIGHT (adj) — APPROVED
-
-- **Definition:** On the east side when you look north
-- **Example:**
-  > **STE:** DO A FLOW CHECK OF THE PUMP IN THE RIGHT WING TANK.
-
-#### RIGID (adj) — APPROVED
-
-- **Definition:** That cannot easily bend or change shape
-- **Example:**
-  > **STE:** REMOVE THE SCREWS FROM THE RIGID COVER.
-
-#### RISK (n) — APPROVED
-
-- **Definition:** The possibility that something that is dangerous occurs
-- **Example:**
-  > **STE:** OBEY THE PRECAUTIONS TO PREVENT THE RISK OF FIRE.
-
-#### ROUGH (adj) — APPROVED
-
-- **Definition:** Not smooth (ROUGHER, ROUGHEST)
-- **Example:**
-  > **STE:** CLEAN THE ROUGH SURFACES CAREFULLY.
-
-## Unapproved Entries
-
-#### rest (v) — UNAPPROVED
-
-- **Alternative:** BE (v)
-  > **STE:** THE VEHICLE MUST BE ON ITS WHEELS.
-  > **Non-STE:** The vehicle must rest on its wheels.
-- **Alternative:** PUT (v)
-  > **STE:** PUT THE REMOVED PART ON A CLEAN SURFACE.
-  > **Non-STE:** Rest the removed part on a clean surface.
-
-#### restart (v) — UNAPPROVED
-
-- **Alternative:** START (v)
-  > **STE:** START THE UNIT AGAIN.
-  > **Non-STE:** Restart the unit.
-
-#### restore (v) — UNAPPROVED
-
-- **Alternative:** REPAIR (v)
-  > **STE:** DO NOT REPAIR THE CHROMIC ACID ANODIZING ON THE SKIN PANEL.
-  > **Non-STE:** Do not restore the chromic acid anodizing on the skin panel.
-- **Alternative:** PUT (v)
-  > **STE:** PUT THE PINS BACK IN THEIR LOCATION.
-  > **Non-STE:** Restore the pins to their location.
-
-#### restrain (v) — UNAPPROVED
-
-- **Alternative:** HOLD (v)
-  > **STE:** HOLD THE HOSES IN POSITION.
-  > **Non-STE:** Restrain the hoses in position.
-- **Alternative:** STOP (v)
-  > **STE:** STOP THE FLUID FLOW.
-  > **Non-STE:** Restrain all fluid flow.
-- **Alternative:** PREVENT (v)
-  > **STE:** THE STOP PREVENTS THE MOVEMENT OF THE ROD.
-  > **Non-STE:** The stop restrains the movement of the rod.
-- **Alternative:** LIMIT (n)
-  > **STE:** THE VALVE KEEPS THE AIRFLOW IN LIMITS.
-  > **Non-STE:** The valve restrains the airflow.
-
-#### restrict (v) — UNAPPROVED
-
-- **Alternative:** DECREASE (v)
-  > **STE:** THE METERING PLUG DECREASES THE FUEL FLOW.
-  > **Non-STE:** The metering plug restricts the fuel flow.
-- **Alternative:** PREVENT (v)
-  > **STE:** THE STOP PREVENTS THE MOVEMENT OF THE ROD.
-  > **Non-STE:** The stop restricts the movement of the rod.
-- **Alternative:** ONLY (adv)
-  > **STE:** USE THESE NUTS ONLY FOR THE TEST.
-  > **Non-STE:** Restrict the use of these nuts to test only.
-- **Alternative:** LIMIT (n)
-  > **STE:** THE VALVE KEEPS THE AIRFLOW IN LIMITS.
-  > **Non-STE:** The valve restricts the airflow.
-
-#### result (v) — UNAPPROVED
-
-- **Alternative:** CAUSE (v)
-  > **STE:** AN INCORRECT CONNECTION WILL CAUSE DAMAGE.
-  > **Non-STE:** An incorrect connection will result in damage.
-- **Alternative:** RESULT (n)
-  > **STE:** REPAIR DAMAGE THAT IS THE RESULT OF CORROSION.
-  > **Non-STE:** Repair any damage resulting from corrosion.
-
-#### resume (v) — UNAPPROVED
-
-- **Alternative:** START (v)
-  > **STE:** INCREASE THE PRESSURE UNTIL THE FLOW STARTS AGAIN.
-  > **Non-STE:** Increase the pressure until the flow resumes.
-- **Alternative:** CONTINUE (v)
-  > **STE:** CONTINUE THE TEST.
-  > **Non-STE:** Resume the test.
-
-#### retain (v) — UNAPPROVED
-
-- **Alternative:** KEEP (v)
-  > **STE:** KEEP THE PLUG.
-  > **Non-STE:** Retain the plug.
-
-#### retorque (v) — UNAPPROVED
-
-- **Alternative:** TORQUE (v)
-  > **STE:** TORQUE THE FITTING AGAIN.
-  > **Non-STE:** Retorque the fitting.
-
-#### retouch (v) — UNAPPROVED
-
-- **Alternative:** APPLY (v)
-  > **STE:** APPLY ENAMEL ON THE AREAS WHERE IT IS MISSING.
-  > **Non-STE:** Retouch the missing enamel areas.
-- **Alternative:** PAINT (v)
-  > **STE:** PAINT THE DAMAGED LETTERS ON THE LABEL.
-  > **Non-STE:** Retouch the damaged label letters.
-
-#### retractable (adj) — UNAPPROVED
-
-- **Alternative:** RETRACT (v)
-  > **STE:** THE AIRCRAFT HAS A LANDING GEAR THAT RETRACTS.
-  > **Non-STE:** The aircraft has a retractable landing gear.
-- **See:** Dictionary entry for RETRACT (v).
-
-#### return (n) — UNAPPROVED
-
-- **Alternative:** GO (v)
-  > **STE:** AFTER THE AILERONS GO BACK TO NEUTRAL, MAKE SURE THAT THEY ARE FLUSH WITH THE FLAPS.
-  > **Non-STE:** After the return of the ailerons to neutral, check that they are flush with the flaps.
-
-#### return (v) — UNAPPROVED
-
-- **Alternative:** GO (v)
-  > **STE:** THE PLUNGERS MUST GO BACK TO THE CLOSED POSITION.
-  > **Non-STE:** Plungers must return to the closed position.
-
-#### reusable (adj) — UNAPPROVED
-
-- **Alternative:** USE (v)
-  > **STE:** YOU CAN USE THE MIXTURE AGAIN.
-  > **Non-STE:** The mixture is reusable.
-
-#### reuse (v) — UNAPPROVED
-
-- **Alternative:** USE (v)
-  > **STE:** IF THE FABRIC IS NOT DAMAGED, USE IT AGAIN.
-  > **Non-STE:** Reuse the fabric if it is not damaged.
-
-#### reveal (v) — UNAPPROVED
-
-- **Alternative:** SHOW (v)
-  > **STE:** IF THE FUEL SAMPLE SHOWS FREE WATER, DRAIN THE SYSTEM.
-  > **Non-STE:** If the fuel sample reveals free water, drain the system.
-
-#### reverse (adj) — UNAPPROVED
-
-- **Alternative:** OPPOSITE (adj)
-  > **STE:** MOVE THE CONTROL IN THE OPPOSITE DIRECTION.
-  > **Non-STE:** Move the control in the reverse direction.
-- **Note:** This word is part of a technical noun when it refers to rearward thrust.
-  > **STE:** MANUALLY TURN THE PROPELLER BLADES TO THE FULL REVERSE POSITION.
-
-#### reverse (v) — UNAPPROVED
-
-- **Alternative:** OPPOSITE (adj)
-  > **STE:** MOVE THE ROD IN THE OPPOSITE DIRECTION.
-  > **Non-STE:** Reverse the movement of the rod.
-
-#### review (n) — UNAPPROVED
-
-- **Alternative:** INSPECTION (n)
-  > **STE:** DO AN INSPECTION OF THE DAMAGED AREA.
-  > **Non-STE:** Do a review of the damaged area.
-- **Alternative:** EXAMINE (v)
-  > **STE:** EXAMINE THE DAMAGED AREA.
-  > **Non-STE:** Do a review of the damaged area.
-
-#### rewind (v) — UNAPPROVED
-
-- **Alternative:** WIND (v)
-  > **STE:** WIND THE CABLE BACK ONTO ITS REEL.
-  > **Non-STE:** Rewind the cable onto its reel.
-
-#### rework (v) — UNAPPROVED
-
-- **Note:** Refer to technical manufacturing processes.
-- **Example:**
-  > **STE:** EXAMINE FOR SCRATCHES. THEN, LIGHTLY POLISH ALL DAMAGED AREAS.
-  > **Non-STE:** Examine for scratches and rework all damaged areas.
-
-#### rig (v) — UNAPPROVED
-
-- **Alternative:** ADJUST (v)
-  > **STE:** ADJUST THE SYSTEM.
-  > **Non-STE:** Rig the system.
-
-#### right-hand (adj) — UNAPPROVED
-
-- **Alternative:** RIGHT (adj)
-  > **STE:** THE FUEL CONNECTOR IS IN THE RIGHT WING.
-  > **Non-STE:** The fuel connector is in the right-hand wing.
-- **See:** Dictionary entry for RIGHT (adj).
-
-#### rinse (v) — UNAPPROVED
-
-- **Alternative:** FLUSH (v)
-  > **STE:** FLUSH THE FILTER WITH HOT WATER.
-  > **Non-STE:** Rinse the filter in hot running water.
-- **Alternative:** REMOVE (v)
-  > **STE:** REMOVE THE CLEANING AGENT FROM THE SURFACE.
-  > **Non-STE:** Rinse the cleaning agent from the surface.
-- **Alternative:** CLEAN (v)
-  > **STE:** CLEAN THE WINDOW PANE WITH A LARGE QUANTITY OF WATER.
-  > **Non-STE:** Rinse the window pane with a large quantity of water.
-
-#### ripped (adj) — UNAPPROVED
-
-- **Alternative:** DAMAGED (adj)
-  > **STE:** IF THE SEAT COVER IS DAMAGED, REPLACE IT.
-  > **Non-STE:** If the seat cover is ripped, replace it.
-
-#### rise (n) — UNAPPROVED
-
-- **Alternative:** INCREASE (v)
-  > **STE:** WHEN A FIRE STARTS, THE TEMPERATURE INCREASES AND CAUSES THE DETECTOR TO OPERATE.
-  > **Non-STE:** When a fire starts, the temperature rise causes the detector to operate.
-
-#### rise (v) — UNAPPROVED
-
-- **Alternative:** INCREASE (v)
-  > **STE:** FILL THE STRUT WITH FLUID UNTIL THE PRESSURE INCREASES.
-  > **Non-STE:** Fill the strut with fluid until the pressure rises.
-
-#### rope off (v) — UNAPPROVED
-
-- **Alternative:** ROPE (TN)
-  > **STE:** PUT ROPES AROUND THE AREA.
-  > **Non-STE:** Rope off the area.
-
-#### rotary (adj) — UNAPPROVED
-
-- **Alternative:** TURN (v)
-  > **STE:** TURN THE GEARS TO ALIGN THEM.
-  > **Non-STE:** Use a rotary movement to align the gears.
-
-#### rotate (v) — UNAPPROVED
-
-- **Alternative:** TURN (v)
-  > **STE:** SLOWLY TURN THE VANE.
-  > **Non-STE:** Slowly rotate the vane.
-
-#### rotation (n) — UNAPPROVED
-
-- **Alternative:** TURN (v)
-  > **STE:** MAKE SURE THAT THE FAN TURNS FREELY.
-  > **Non-STE:** Ensure the free rotation of the fan.
-
-#### rotational (adj) — UNAPPROVED
-
-- **Alternative:** TURN (v)
-  > **STE:** TURN THE GEARS TO ALIGN THEM.
-  > **Non-STE:** Use a rotational movement to align the gears.
-
-#### roughen (v) — UNAPPROVED
-
-- **Alternative:** ROUGH (adj)
-  > **STE:** MAKE THE FAYING SURFACES ROUGH.
-  > **Non-STE:** Roughen the faying surfaces.
-- **See:** Dictionary entry for ROUGH (adj).
-
-# Page 365 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 365–368 of 434
-
-## R
-
-#### roughness (n) — UNAPPROVED
-
-- **Approved alternative:** ROUGH (adj)
-
-> **STE:** MAKE SURE THAT THE AREA OF THE BOND IS SUFFICIENTLY ROUGH.
-> **Non-STE:** Make sure the area of the bond has sufficient roughness.
-
-- **See:** Dictionary entry for ROUGH (adj).
-
-#### round (adj) — UNAPPROVED
-
-- **Approved alternative:** CIRCULAR (adj)
-
-> **STE:** REPAIR THE DAMAGE WITH A CIRCULAR PATCH.
-> **Non-STE:** Repair the damage with a round patch.
-
-#### ROUNDED (adj) — APPROVED
-
-- **Approved meaning:** Not angular
-
-> **STE:** WHEN YOU INSTALL THE PART, MAKE SURE THAT THE ROUNDED EDGE IS AGAINST THE STRUCTURE.
-
-#### route (n) — UNAPPROVED
-
-- **Approved alternative:** ROUTING (n)
-
-> **STE:** MAKE SURE THAT YOU DO NOT CHANGE THE WIRE ROUTING.
-> **Non-STE:** Make sure you do not change the wire routes.
-
-- **See:** Dictionary entry for ROUTING (n).
-
-#### route (v) — UNAPPROVED
-
-- **Approved alternative:** PUT (v)
-
-> **STE:** PUT THE FUELING HOSE ALONG THE GROUND.
-> **Non-STE:** Route the fueling hose along the ground.
-
-#### ROUTING (n) — APPROVED
-
-- **Approved meaning:** The specified direction that cables, pipes, wires, and other parts of a system must go along
-
-> **STE:** MAKE SURE THAT THE ROUTING OF THE WIRE IS CORRECT.
-> **Non-STE:** Make sure that the wiring is correctly routed.
-
-> **STE:** DO NOT CHANGE THE ROUTING OF THE PIPE.
-
-#### routine (adj) — UNAPPROVED
-
-- **Approved alternative:** USUAL (adj)
-
-> **STE:** IF SUCH FAILURES BECOME USUAL, REPLACE THE UNIT.
-> **Non-STE:** If such failures become routine, replace the unit.
-
-#### ROW (n) — APPROVED
-
-- **Approved meaning:** A number of objects in a line
-
-> **STE:** THE PANELS ARE INSTALLED IN ROWS.
-
-#### RUB (v) — APPROVED
-
-- **Inflections:** RUBS, RUBBED, RUBBED
-- **Approved meaning:** To move or cause something to move with pressure and friction along a surface
-
-> **STE:** RUB THE SURFACE WITH A CLEAN CLOTH.
-> **STE:** MAKE SURE THAT THE COILS OF THE OXYGEN HOSE DO NOT RUB TOGETHER.
-
-#### run (v) — UNAPPROVED
-
-- **Approved alternative:** OPERATE (v)
-
-> **STE:** OPERATE THE ENGINE AT 100% THRUST.
-> **Non-STE:** Run the engine at 100% thrust.
-
-#### running (adj) — UNAPPROVED
-
-- **Approved alternative:** FLUSH (v)
-
-> **STE:** FLUSH THE PIPES WITH WATER.
-> **Non-STE:** Clean the pipes with running water.
-
-## S
-
-#### SAFE (adj) — APPROVED
-
-- **Inflections:** SAFER, SAFEST
-- **Approved meaning:** Not dangerous, disarmed
-
-> **STE:** BEFORE YOU CONTINUE THE WORK, MAKE THE AREA SAFE.
-
-#### SAFELY (adv) — APPROVED
-
-- **Approved meaning:** In a safe manner
-
-> **STE:** MAKE SURE THAT THE LADDER IS SAFELY ATTACHED.
-
-#### SAFETY (n) — APPROVED
-
-- **Approved meaning:** A condition that is safe
-
-> **STE:** FOR YOUR SAFETY, ALWAYS USE A PROTECTIVE MASK.
-
-#### SAFETY (v) — APPROVED
-
-- **Inflections:** SAFETIES, SAFETIED, SAFETIED
-- **Approved meaning 1:** To prevent accidental operation
-- **Approved meaning 2:** To make sure that something does not become loose
-
-> **STE:** OPEN AND TAG THE CIRCUIT BREAKERS. THEN, SAFETY THEM.
-> **STE:** SAFETY THE NUT WITH LOCKWIRE.
-
-#### safety-clip (v) — UNAPPROVED
-
-- **Approved alternative:** LOCK (v) (WITH A CLIP [TN] OR CLIPS [TN])
-
-> **STE:** LOCK THE TURNBUCKLE ON THE CONTROL ROD WITH A CLIP.
-> **Non-STE:** Safety-clip the turnbuckle on the control rod.
-
-#### SAFETY (v) (WITH A CLIP [TN] OR CLIPS [TN]) — APPROVED
-
-> **STE:** OPEN AND TAG THE CIRCUIT BREAKER. THEN, SAFETY IT WITH A CLIP.
-> **Non-STE:** Open, tag, and safety-clip the circuit breaker.
-
-#### safety-wire (v) — UNAPPROVED
-
-- **Approved alternative:** LOCK (v) (WITH LOCKWIRE [TN])
-
-> **STE:** LOCK THE COVER TO THE FIRE EXTINGUISHER SWITCH WITH LOCKWIRE.
-> **Non-STE:** Safety-wire the cover to the fire extinguisher switch.
-
-#### SAFETY (v) (WITH SAFETY WIRE [TN]) — APPROVED
-
-> **STE:** SAFETY THE NUT WITH SAFETY WIRE.
-> **Non-STE:** Safety-wire the nut.
-
-#### SAME (adj) — APPROVED
-
-- **Approved meaning:** Agrees in all details
-
-> **STE:** THE SAME PROCEDURE IS APPLICABLE TO THE TWO UNITS.
-
-#### SAME (pron) — APPROVED
-
-- **Approved meaning:** Agrees in all details
-
-> **STE:** THE ADJUSTMENT OF THE LEFT AND RIGHT ACTUATORS MUST BE THE SAME.
-
-#### SAMPLE (n) — APPROVED
-
-- **Approved meaning:** A piece or quantity of something that you use for an inspection or test procedure to show that it has specified qualities
-
-> **STE:** GET A SAMPLE OF THE FUEL. THEN, MEASURE ITS SPECIFIC GRAVITY.
-
-#### sample (v) — UNAPPROVED
-
-- **Approved alternative:** SAMPLE (n)
-
-> **STE:** GET A SAMPLE OF FUEL. THEN, DO A TEST FOR WATER CONTAMINATION.
-> **Non-STE:** Sample and test the fuel for water contamination.
-
-- **See:** Dictionary entry for SAMPLE (n).
-
-#### SATISFACTORILY (adv) — APPROVED
-
-- **Approved meaning:** In a satisfactory manner
-
-> **STE:** MAKE SURE THAT THE MICROSWITCHES OPERATE SATISFACTORILY.
-
-#### SATISFACTORY (adj) — APPROVED
-
-- **Approved meaning:** Agrees with all that is necessary
-
-> **STE:** A CLEARANCE OF 3 mm IS SATISFACTORY.
-
-#### saturate (v) — UNAPPROVED
-
-- **Approved alternative:** SOAK (v)
-
-> **STE:** SOAK THE ELEMENT FOR FOUR HOURS.
-> **Non-STE:** Saturate the element for four hours.
-
-- **See:** Dictionary entry for SOAK (v).
-
-#### save (v) — UNAPPROVED
-
-- **Approved alternative:** KEEP (v)
-
-> **STE:** KEEP THE O-RINGS FOR THE SUBSEQUENT PROCEDURES.
-> **Non-STE:** Save the O-rings for the subsequent procedures.
-
-#### scan (v) — UNAPPROVED
-
-- **Approved alternative:** EXAMINE (v)
-- **Technical Name:** SCAN (TN)
-
-> **STE:** EXAMINE THE SURFACE ALONG THE TRAILING EDGE.
-> **Non-STE:** Scan the surface along the trailing edge.
-
-> **STE:** THE ANTENNA DOES A SCAN THROUGH 80 DEG.
-> **Non-STE:** Antenna scans through 80 deg.
-
-#### SCHEDULE (v) — APPROVED
-
-- **Inflections:** SCHEDULES, SCHEDULED, SCHEDULED
-- **Approved meaning:** To plan something in a time or a sequence
-
-> **STE:** SCHEDULE THE CHECKS OF THE TIRES AT REGULAR INTERVALS.
-
-#### scored (adj) — UNAPPROVED
-
-- **Approved alternative:** SCORE (TN)
-
-> **STE:** IF THE BEARING RACE HAS SCORES, REPLACE IT.
-> **Non-STE:** If the bearing race is scored, replace it.
-
-#### scrap (v) — UNAPPROVED
-
-- **Approved alternative:** DISCARD (v)
-
-> **STE:** DISCARD THE REMOVED SEAL.
-> **Non-STE:** Scrap the removed seal.
-
-# Page 369 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 369–372 of 434
-
-## Approved Words
-
-#### SEAL (n) — APPROVED
-
-- **Meaning:** Something that prevents access or leaks
-- **Example:**
-  > **STE:** APPLY SEALANT TO THE FILLET SEALS.
-
-#### SEAL (v) — APPROVED
-
-- **Meaning:** To prevent access or leaks
-- **Forms:** SEALS, SEALED, SEALED
-- **Example:**
-  > **STE:** SEAL THE OPENINGS WITH POLYETHYLENE.
-
-#### SECONDARY (adj) — APPROVED
-
-- **Meaning:** Second in importance
-- **Example:**
-  > **STE:** THE SECONDARY FILTER REMOVES THE REMAINING CONTAMINATION.
-
-#### SEE (v) — APPROVED
-
-- **Meaning:** To know with the eyes
-- **Forms:** SEES, SAW, SEEN
-- **Example:**
-  > **STE:** MAKE SURE THAT YOU CAN SEE THE CABLE THROUGH THE INSPECTION HOLE.
-- For other meanings, use REFER (v):
-  > **STE:** REFER TO TABLE 8001 FOR THE APPLICABLE TORQUE VALUES.
-  > **Non-STE:** See Table 8001 for the applicable torque values.
-- For other meanings, use EXAMINE (v):
-  > **STE:** EXAMINE THE MEMBRANE FOR HOLES.
-  > **Non-STE:** Check the membrane to see if there are holes.
-- For other meanings, use MAKE SURE (v):
-  > **STE:** MOVE THE TUBE TO MAKE SURE THAT ITS INNER CONNECTION IS TIGHT.
-  > **Non-STE:** Move the tube to see if its inner connection is tight.
-
-#### SELECT (v) — APPROVED
-
-- **Meaning:** To make a choice
-- **Forms:** SELECTS, SELECTED, SELECTED
-- **Example:**
-  > **STE:** SELECT THE HYDRAULIC SYSTEM THAT YOU WILL PRESSURIZE.
-- **Example:**
-  > **STE:** SELECT A LANGUAGE FROM THE MENU.
-- Do not use this word as a synonym for SET:
-  > **STE:** SET THE SWITCH TO "TEST."
-  > **Non-STE:** Select the switch to "TEST."
-
-#### SELECTION (n) — APPROVED
-
-- **Meaning:** The action or result of choosing
-- **Example:**
-  > **STE:** THE OPERATION OF THE INDICATOR DOES NOT PREVENT THE SELECTION OF SYSTEM 1.
-
-#### SEMICIRCULAR (adj) — APPROVED
-
-- **Meaning:** That has the shape of half a circle
-- **Example:**
-  > **STE:** THE VALVE FLAPS ARE SEMICIRCULAR.
-
-#### SEND (v) — APPROVED
-
-- **Meaning:** To cause to go
-- **Forms:** SENDS, SENT, SENT
-- **Example:**
-  > **STE:** SEND THE FILTER ELEMENT TO THE MAINTENANCE SHOP FOR THE NECESSARY INSPECTION.
-
-#### SENSE (v) — APPROVED
-
-- **Meaning:** To get an input automatically
-- **Forms:** SENSES, SENSED, SENSED
-- **Example:**
-  > **STE:** THE TEMPERATURE BULB SENSES THE EXTERNAL AIR TEMPERATURE.
-
-#### SENSITIVE (adj) — APPROVED
-
-- **Meaning:** That can sense small changes
-- **Example:**
-  > **STE:** THE CAPSULE IS SENSITIVE TO PRESSURE CHANGES.
-
-## Unapproved Words
-
-#### scrape (v) — UNAPPROVED
-
-- **Alternative:** REMOVE (v) (WITH A SCRAPER [TN])
-  > **STE:** REMOVE THE REMAINING SEALANT WITH AN APPLICABLE SCRAPER.
-  > **Non-STE:** Scrape off the old sealant.
-
-#### scratched (adj) — UNAPPROVED
-
-- **Alternative:** SCRATCH (TN)
-  > **STE:** REPAIR THE SURFACES THAT HAVE SCRATCHES.
-  > **Non-STE:** Repair the scratched surfaces.
-
-#### screw (v) — UNAPPROVED
-
-- **Alternative:** TURN (v)
-  > **STE:** CONTINUE TO TURN THE END FITTING UNTIL IT IS IN THE CORRECT POSITION.
-  > **Non-STE:** Continue screwing the end fitting until it is in the correct position.
-- **Alternative:** ATTACH (v) (WITH A SCREW [TN] OR SCREWS [TN])
-  > **STE:** ATTACH THE STRAPS TO THE PANELS WITH SCREWS.
-  > **Non-STE:** Screw the straps to the panels.
-
-#### scrub (v) — UNAPPROVED
-
-- **Alternative:** CLEAN (v) (WITH A BRUSH [TN])
-  > **STE:** CLEAN THE METAL PARTS WITH A BRUSH.
-  > **Non-STE:** Scrub all metal parts.
-
-#### search (v) — UNAPPROVED
-
-- **Alternative:** EXAMINE (v)
-  > **STE:** EXAMINE THE SURFACE FOR CRACKS.
-  > **Non-STE:** Search the surface for cracks.
-
-#### seat (v) — UNAPPROVED
-
-- **Alternative:** INSTALL (v)
-  > **STE:** INSTALL THE O-RING IN ITS GROOVE ON THE PISTON.
-  > **Non-STE:** Seat the O-ring in its groove on the piston.
-- **Alternative:** AGAINST (prep)
-  > **STE:** MAKE SURE THAT THE VALVE IS IN ITS CORRECT POSITION AGAINST THE FRAME.
-  > **Non-STE:** Make sure that the valve is seated on the frame.
-
-#### secure (adj) — UNAPPROVED
-
-- **Alternative:** TIGHT (adj)
-  > **STE:** MAKE SURE THAT THE BOLTS ARE TIGHT.
-  > **Non-STE:** Make sure that the bolts are secure.
-- **Alternative:** SAFE (adj)
-  > **STE:** BEFORE YOU LIFT THE PLATFORM, MAKE SURE THAT IT IS SAFE.
-  > **Non-STE:** Make sure that the platform is secure before you lift it.
-- **Alternative:** CORRECTLY (adv)
-  > **STE:** MAKE SURE THAT THE BRACKETS ARE CORRECTLY ATTACHED.
-  > **Non-STE:** Check the brackets for secure attachment.
-
-#### secure (v) — UNAPPROVED
-
-- **Alternative:** ATTACH (v)
-  > **STE:** REMOVE THE BOLTS THAT ATTACH THE UNIT.
-  > **Non-STE:** Remove the bolts that secure the unit.
-- **Alternative:** SAFETY (v)
-  > **STE:** SAFETY THE PULLEY GUARD PINS WITH SPLIT PINS.
-  > **Non-STE:** Secure the pulley guard pins with split pins.
-- **See:** Dictionary entry for SAFETY (v).
-
-#### securely (adv) — UNAPPROVED
-
-- **Alternative:** CORRECTLY (adv)
-  > **STE:** MAKE SURE THAT THE BRACKETS ARE CORRECTLY ATTACHED.
-  > **Non-STE:** Make sure that the brackets are securely attached.
-- **Alternative:** SAFELY (adv)
-  > **STE:** MAKE SURE THE LADDER IS SAFELY ATTACHED.
-  > **Non-STE:** Make sure the ladder is securely attached.
-- **Alternative:** TIGHT (adj)
-  > **STE:** MAKE SURE THAT THE BOLTS ARE TIGHT.
-  > **Non-STE:** Make sure that the bolts are securely installed.
-
-#### security (n) — UNAPPROVED
-
-- **Alternative:** CORRECTLY (adv)
-  > **STE:** MAKE SURE THAT THE COMPONENTS ARE CORRECTLY ATTACHED.
-  > **Non-STE:** Check the security of the components.
-
-#### seek (v) — UNAPPROVED
-
-- **Alternative:** GET (v)
-  > **STE:** GET MEDICAL AID IMMEDIATELY.
-  > **Non-STE:** Seek medical attention immediately.
-
-#### seepage (n) — UNAPPROVED
-
-- **Alternative:** LEAKAGE (n)
-  > **STE:** CLEAN THE AREAS WHERE THERE IS HYDRAULIC FLUID LEAKAGE.
-  > **Non-STE:** Clean the areas where there is hydraulic fluid seepage.
-
-#### seized (adj) — UNAPPROVED
-
-- **Alternative:** CATCH (v)
-  > **STE:** IF THE CONTROL CABLE IS CAUGHT IN THE PULLEY, RELEASE THE CABLE TENSION.
-  > **Non-STE:** If the control cable is seized in the pulley, release the cable tension.
-- **Alternative:** MOVE (v)
-  > **STE:** IF YOU CANNOT MOVE THE BOLTS, APPLY SOME PENETRATING OIL.
-  > **Non-STE:** If the bolts are seized, apply some penetrating oil.
-- **Alternative:** TURN (v)
-  > **STE:** IF THE FLAP CONTROL MOTOR CANNOT TURN, USE THE ALTERNATIVE MODE.
-  > **Non-STE:** If the flap control motor is seized, use the alternate mode.
-
-#### separable (adj) — UNAPPROVED
-
-- **Alternative:** DISASSEMBLE (v)
-  > **STE:** YOU CAN DISASSEMBLE THIS UNIT INTO TWO PARTS.
-  > **Non-STE:** This unit is separable into two parts.
-- **Alternative:** DISCONNECT (v)
-  > **STE:** YOU CAN DISCONNECT THESE LINE FITTINGS.
-  > **Non-STE:** These line fittings are separable.
-
-# Page 373 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 373–376 of 434
-
-## Approved Entries
-
-#### SEPARATION (n) — APPROVED
-
-- **Meaning:** The action or result of separating
-- **Example:**
-  > **STE:** SEPARATION OF THESE PARTS IS NOT EASY.
-
-#### SEQUENCE (n) — APPROVED
-
-- **Meaning:** The relation of items that follow one after the other in a list or the relation of steps or events that occur one after the other in time
-- **Example:**
-  > **STE:** TIGHTEN THE BOLTS IN THE SEQUENCE THAT IS GIVEN IN FIGURE 3.
-
-#### SERRATION (n) — APPROVED
-
-- **Meaning:** One or more notches or teeth as in a saw
-- **Example:**
-  > **STE:** MAKE MARKS THAT SHOW THE LOCATION OF THE SERRATIONS.
-
-#### SERVICING (n) — APPROVED
-
-- **Meaning:** The steps necessary to prepare something for operation
-- **Example:**
-  > **STE:** BEFORE YOU DO SERVICING OF THE HYDRAULIC SYSTEM, ISOLATE IT.
-
-#### SET (n) — APPROVED
-
-- **Meaning:** A group of related items that you use for the same purpose
-- **Example:**
-  > **STE:** USE THE SET OF TOOLS THAT IS SUPPLIED WITH THE UNIT.
-
-#### SET (v) — APPROVED
-
-- **Meaning:** To put something into a given adjustment, condition, or mode
-- **Forms:** SETS, SET, SET
-- **Example:**
-  > **STE:** SET THE ALTIMETER SCALE TO 1013 mbar.
-
-#### SHAKE (v) — APPROVED
-
-- **Meaning:** To move or cause to move quickly up and down or from side to side
-- **Forms:** SHAKES, SHOOK, SHAKEN
-- **Examples:**
-  - **STE:** SHAKE THE CONTAINER.
-  - **STE:** THE CONTROL COLUMN STARTS TO SHAKE BEFORE A STALL OCCURS.
-
-#### SHAPE (n) — APPROVED
-
-- **Meaning:** The contour of an object
-- **Example:**
-  > **STE:** THE PATCH MUST BE THE SAME SHAPE AS THE CUTOUT.
-
-#### SHARP (adj) — APPROVED
-
-- **Meaning:** That can cut or make a hole
-- **Forms:** SHARPER, SHARPEST
-- **Example:**
-  > **STE:** MAKE A HOLE WITH A SHARP TOOL.
-
-#### SHEET (n) — APPROVED
-
-- **Meaning:** A piece of material that is thin in relation to its length and width
-- **Example:**
-  > **STE:** IF THE SHEETS HAVE DENTS WITH A DEPTH OF MORE THAN 0.5 mm, REMOVE THESE DENTS.
-
-#### SHINY (adj) — APPROVED
-
-- **Meaning:** That can cause a reflection of light
-- **Forms:** SHINIER, SHINIEST
-- **Example:**
-  > **STE:** CLEAN THE SHINY AREA OF THE OLEO STRUT.
-
-#### SHOCK (n) — APPROVED
-
-- **Meaning:** The sudden effect of energy on a person or object
-- **Example:**
-  > **STE:** SHOCKS CAN CAUSE DAMAGE TO THE GYROSCOPE.
-
-#### SHORT (adj) — APPROVED
-
-- **Meaning:** That has small length or duration
-- **Forms:** SHORTER, SHORTEST
-- **Example:**
-  > **STE:** ATTACH THE SHORT ARM OF THE BELLCRANK TO THE ROD.
-- **Example:**
-  > **STE:** AFTER YOU STOP THE POWER SUPPLY, THE TEMPERATURE DECREASES IN A SHORT TIME. THIS TIME MUST NOT BE MORE THAN 30 SECONDS.
-- **Usage note:** If it is possible, be accurate.
-
-## Unapproved Entries
-
-#### separate (adj) — UNAPPROVED
-
-- **Alternative:** ISOLATED (adj)
-  > **STE:** EACH HYDRAULIC SYSTEM IS FULLY ISOLATED.
-  > **Non-STE:** All hydraulic systems are completely separate.
-- **Alternative:** DIFFERENT (adj)
-  > **STE:** PUT THE REMAINING PARTS IN A DIFFERENT CONTAINER.
-  > **Non-STE:** Put the remaining parts in a separate container.
-- **Alternative:** NOT CONNECTED
-  > **STE:** THESE TWO TRACKS ARE NOT CONNECTED TO THE OTHER TWO.
-  > **Non-STE:** These two tracks are separate from the other two.
-- **Alternative:** NOT ATTACHED
-  > **STE:** THE CAP IS NOT ATTACHED TO THE COUPLING.
-  > **Non-STE:** The cap is separate from the coupling.
-
-#### separate (v) — UNAPPROVED
-
-- **Alternative:** DISCONNECT (v)
-  > **STE:** DISCONNECT THE LINE FITTINGS.
-  > **Non-STE:** Separate the line fittings.
-- **Alternative:** DIVIDE (v)
-  > **STE:** YOU CAN DIVIDE THE DRAINS INTO THREE GROUPS.
-  > **Non-STE:** You can separate the drains into three groups.
-
-#### separately (adv) — UNAPPROVED
-
-- **Alternative:** INDEPENDENTLY (adv)
-  > **STE:** THE SYSTEM MONITORS THE CONDITION OF THE PARTS INDEPENDENTLY.
-  > **Non-STE:** The system monitors the condition of the parts separately.
-
-#### serious (adj) — UNAPPROVED
-
-- **Alternative:** IMPORTANT (adj)
-  > **STE:** VIRUS CONTAMINATION IS AN IMPORTANT PROBLEM.
-  > **Non-STE:** Virus contamination is a serious problem.
-- **Alternative:** DANGEROUS (adj)
-  > **STE:** HYDRAULIC FLUID IS DANGEROUS FOR YOUR EYES.
-  > **Non-STE:** Hydraulic fluid can cause serious eye injury.
-
-#### serrated (adj) — UNAPPROVED
-
-- **Alternative:** SERRATION (n)
-  > **STE:** USE GLOVES WHEN YOU TOUCH PARTS WITH EDGE SERRATIONS.
-  > **Non-STE:** Use gloves when handling parts with serrated edges.
-- **See:** Dictionary entry for SERRATION (n).
-
-#### serve (v) — UNAPPROVED
-
-- **Instruction:** Use an accurate verb.
-  > **STE:** THE RADIO MASTER SWITCH CONTROLS THE BUS BAR.
-  > **Non-STE:** The radio master switch serves to control the bus bar.
-
-#### service (v) — UNAPPROVED
-
-- **Alternative:** SERVICING (n)
-  > **STE:** DO THE SERVICING OF THE FIRE EXTINGUISHERS.
-  > **Non-STE:** Service the fire extinguishers.
-- **See:** Dictionary entry for SERVICING (n).
-
-#### serviceability (n) — UNAPPROVED
-
-- **Alternative:** SERVICEABLE (adj)
-  > **STE:** THE TIRE IS SERVICEABLE IF THE CUTS ARE SMALLER THAN 10 mm.
-  > **Non-STE:** The serviceability of the tire is not affected by any cut smaller than 10 mm.
-- **Alternative:** SERVICEABLE (adj)
-  > **STE:** DO A VISUAL INSPECTION OF THE ADAPTER TO MAKE SURE THAT IT IS SERVICEABLE.
-  > **Non-STE:** (Correct or satisfactory)
-
-#### setting (n) — UNAPPROVED
-
-- **Alternative:** ADJUSTMENT (n)
-  > **STE:** DO NOT CHANGE THE ADJUSTMENT OF THE SWITCHES.
-  > **Non-STE:** Do not change the setting of the switches.
-- **Alternative:** POSITION (n)
-  > **STE:** MAKE SURE THAT THE POSITION OF THE FLAPS IS EIGHT DEG.
-  > **Non-STE:** Check flaps for eight deg. setting.
-- **Alternative:** SET (v)
-  > **STE:** THE MANUFACTURER SETS THE LENGTH OF THE ROD IN THE FACTORY.
-  > **Non-STE:** Setting of the rod length is achieved in the factory.
-- **See:** Dictionary entry for SET (v).
-
-#### settle (v) — UNAPPROVED
-
-- **Alternative:** COLLECT (v)
-  > **STE:** LET THE SEDIMENT COLLECT AT THE BOTTOM OF THE CONTAINER.
-  > **Non-STE:** Let the sediment settle at the bottom of the container.
-- **Alternative:** STABLE (adj)
-  > **STE:** LET THE INDICATIONS BECOME STABLE.
-  > **Non-STE:** Let the indications settle.
-- **See:** Dictionary entry for STABLE (adj).
-
-#### sever (v) — UNAPPROVED
-
-- **Alternative:** CUT (v)
-  > **STE:** MAKE SURE THAT YOU DO NOT CUT THE CONTROL CABLE.
-  > **Non-STE:** Make sure you do not sever the control cable.
-
-#### several (adj) — UNAPPROVED
-
-- **Alternative:** SOME (adj)
-  > **STE:** SOME FUNCTIONS ARE NOT AVAILABLE.
-  > **Non-STE:** Several functions are not available.
-- **Instruction:** If this alternative is not sufficient, give the range, quantity, number, or minimum value.
-  > **STE:** SOAK THE FILLER CAPS IN DISTILLED WATER FOR A MINIMUM OF EIGHT HOURS.
-  > **Non-STE:** Soak the filler caps in distilled water for several hours.
-
-#### severe (adj) — UNAPPROVED
-
-- **Alternative:** DANGEROUS (adj)
-  > **STE:** THIS ANTISEPTIC CAN BE DANGEROUS FOR YOUR SKIN.
-  > **Non-STE:** This antiseptic can cause severe skin problems.
-
-#### shall (v) — UNAPPROVED
-
-- **Alternative:** MUST (v)
-  > **STE:** HOLES MUST NOT HAVE SHARP EDGES.
-  > **Non-STE:** Holes shall not have sharp edges.
-
-#### shape (v) — UNAPPROVED
-
-- **Alternative:** SHAPE (n)
-  > **STE:** MAKE THE PATCH THE SAME SHAPE AS THE CUTOUT.
-  > **Non-STE:** Shape the patch to suit the cutout.
-- **See:** Dictionary entry for SHAPE (n).
-
-#### sharply (adv) — UNAPPROVED
-
-- **Alternative:** QUICKLY (adv)
-  > **STE:** QUICKLY PULL THE CABLES TO DISENGAGE THEM.
-  > **Non-STE:** Sharply pull the cables to disengage them.
-- **Alternative:** SUDDENLY (adv)
-  > **STE:** MOVE THE CONTROL COLUMN FORWARD SUDDENLY.
-  > **Non-STE:** Move the control column forward sharply.
-
-#### shear (v) — UNAPPROVED
-
-- **Alternative:** BREAK (v)
-  > **STE:** TIGHTEN THE NUT. CONTINUE UNTIL THE NUT BREAKS.
-  > **Non-STE:** Tighten the nut until it shears.
-- **Alternative:** CUT (v)
-  > **STE:** DO NOT CUT THE WIRES.
-  > **Non-STE:** Do not shear the wires.
-
-#### shield (v) — UNAPPROVED
-
-- **Alternative:** PREVENT (v)
-  > **STE:** PUT ON GOGGLES TO PREVENT INJURY TO YOUR EYES.
-  > **Non-STE:** Shield your eyes.
-- **Alternative:** PROTECTION (n)
-  > **STE:** GIVE THE CONTROL UNIT PROTECTION FROM DAMAGE.
-  > **Non-STE:** Shield the control unit from damage.
-
-#### shift (v) — UNAPPROVED
-
-- **Alternative:** MOVE (v)
-  > **STE:** MOVE THE LEVER FORWARD.
-  > **Non-STE:** Shift the lever forward.
-
-# Page 377 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 377–380 of 434
-
-## Dictionary — Approved
-
-#### SHOW (v) — APPROVED
-
-- **Forms:** SHOWS, SHOWED, SHOWN
-- **Approved meaning 1:** To cause to be seen
-  > **STE:** THE INDICATOR SHOWS THE LEVEL OF BATTERY CHARGE.
-- **Approved meaning 2:** To be in view or come into view
-  > **STE:** THE SYMBOL SHOWS ON THE SCREEN.
-
-#### SIDE (n) — APPROVED
-
-- **Approved meaning 1:** The specified surface or area of an object
-  > **STE:** LUBRICATE ONE SIDE OF THE WASHER.
-- **Approved meaning 2:** A location or direction that has a relationship to a center or a line of division
-  > **STE:** PUSH THE UNIT OUT AND THEN MOVE IT TO THE LEFT SIDE.
-
-#### SIGN (n) — APPROVED
-
-- **Approved meaning:** The indication of a possible condition
-  > **STE:** EXAMINE THE SURFACE FOR SIGNS OF INTERNAL DAMAGE.
-
-#### SIMULATE (v) — APPROVED
-
-- **Forms:** SIMULATES, SIMULATED, SIMULATED
-- **Approved meaning:** To make a condition that is the same as one that can occur in operation
-  > **STE:** SIMULATE A WHEEL SPEED OF 80 KNOTS.
-
-#### SINCE (conj) — APPROVED
-
-- **Approved meaning:** Function word that shows "from some time in the past until a later time or now"
-  > **STE:** IF IT IS MORE THAN TWO HOURS SINCE YOU MIXED THE COMPOUND, DO NOT USE IT.
-- For other meanings (causal), use BECAUSE (conj):
-  > **STE:** BE CAREFUL WHEN YOU USE ALODINE, BECAUSE IT IS A DANGEROUS MATERIAL.
-  > **Non-STE:** Since Alodine is a dangerous material, be careful when you use it.
-
-#### SLOPE (n) — APPROVED
-
-- **Approved meaning:** A surface that is not level
-  > **STE:** IF THE VEHICLE IS PARKED ON A SLOPE, MAKE SURE THAT WHEEL CHOCKS ARE IN POSITION.
-
-#### SLOT (n) — APPROVED
-
-- **Approved meaning:** A long opening that is not wide
-  > **STE:** PUSH THE CABLES THROUGH THE SLOT IN FRAME 8 AND ATTACH THEM TO THE CLIPS.
-
-#### SLOW (adj) — APPROVED
-
-- **Forms:** SLOWER, SLOWEST
-- **Approved meaning:** At low speed
-  > **STE:** MAKE SURE THAT THE MOVEMENT OF THE ELEVATORS IS SLOW.
-
-#### SLOWLY (adv) — APPROVED
-
-- **Approved meaning:** In a slow manner
-  > **STE:** TURN THE KNOB SLOWLY.
-
-## Dictionary — Unapproved
-
-#### shorten (v) — UNAPPROVED
-
-- **Alternative:** DECREASE (v)
-  > **STE:** DO NOT DECREASE THE STERILIZATION TIME.
-  > **Non-STE:** Do not shorten the sterilization time.
-
-#### should (v) — UNAPPROVED
-
-- **Alternative:** MUST (v)
-  > **STE:** PERSONNEL MUST WEAR PROTECTIVE CLOTHING.
-  > **Non-STE:** Personnel should wear protective clothing.
-- For conditional "should" meaning "if", use IF (conj):
-  > **STE:** IF A SYSTEM FAILURE OCCURS, STOP OPERATION IMMEDIATELY.
-  > **Non-STE:** Should a system failure occur, stop operation immediately.
-
-#### shut down (v) — UNAPPROVED
-
-- **Alternative:** STOP (v)
-  > **STE:** STOP THE ENGINE.
-  > **Non-STE:** Shut down the engine.
-
-#### sideways (adv) — UNAPPROVED
-
-- **Alternative:** SIDE (n)
-  > **STE:** PUSH THE UNIT OUT AND THEN MOVE IT TO THE LEFT SIDE.
-  > **Non-STE:** Push the unit out and then move it sideways.
-- **See:** Dictionary entry for SIDE (n).
-
-#### sight (n) — UNAPPROVED
-
-- **Alternative:** VIEW (n)
-  > **STE:** TURN THE KNOB TO MAKE THE DISPLAY GO OUT OF VIEW.
-  > **Non-STE:** Turn the knob to make the display go out of sight.
-
-#### sight (v) — UNAPPROVED
-
-- **Alternative:** LOOK (v)
-  > **STE:** LOOK ALONG THE SKIN.
-  > **Non-STE:** Sight along the skin.
-
-#### significant (adj) — UNAPPROVED
-
-- **Alternative:** IMPORTANT (adj)
-  > **STE:** THIS PROCEDURE IS IMPORTANT FOR THE CORRECT OPERATION OF THE UNIT.
-  > **Non-STE:** This procedure is significant for the correct operation of the unit.
-
-#### silence (v) — UNAPPROVED
-
-- **Alternative:** STOP (v)
-  > **STE:** STOP THE ALARM BELL.
-  > **Non-STE:** Silence the alarm bell.
-
-#### similar (adj) — UNAPPROVED
-
-- **Alternative 1:** EQUIVALENT (adj)
-  > **STE:** USE THE SPECIFIED MATERIAL OR AN EQUIVALENT ONE.
-  > **Non-STE:** Use the specified material or a similar one.
-- **Alternative 2:** ALMOST THE SAME
-  > **STE:** THE TWO ITEMS HAVE ALMOST THE SAME SHAPE.
-  > **Non-STE:** The two items are similar in shape.
-
-#### simultaneous (adj) — UNAPPROVED
-
-- **Alternative:** AT THE SAME TIME
-  > **STE:** REMOVE THE FILTER ELEMENT AND THE FILTER HOUSING AT THE SAME TIME.
-  > **Non-STE:** Simultaneous removal of the filter element and the filter housing is obligatory.
-
-#### simultaneously (adv) — UNAPPROVED
-
-- **Alternative:** AT THE SAME TIME
-  > **STE:** DO THESE TWO STEPS AT THE SAME TIME.
-  > **Non-STE:** Do these two steps simultaneously.
-
-#### situated (adj) — UNAPPROVED
-
-- **Alternative 1:** INSTALL (v)
-  > **STE:** THE TRIM CONTROL KNOB IS INSTALLED ON THE CONTROL PEDESTAL.
-  > **Non-STE:** The trim control knob is situated on the control pedestal.
-- **Alternative 2:** BE (v)
-  > **STE:** THE TRIM CONTROL KNOB IS ON THE CONTROL PEDESTAL.
-  > **Non-STE:** The trim control knob is situated on the control pedestal.
-
-#### situation (n) — UNAPPROVED
-
-- **Alternative:** CONDITION (n) — use the plural form
-  > **STE:** THE ALGORITHM ADAPTS TO THE NEW CONDITIONS.
-  > **Non-STE:** The algorithm adapts to the new situation.
-
-#### size (n) — UNAPPROVED
-
-- **Alternative:** DIMENSION (n)
-  > **STE:** THESE PARTS HAVE DIFFERENT DIMENSIONS.
-  > **Non-STE:** These parts are of different sizes.
-
-#### skid (v) — UNAPPROVED
-
-- **Alternative:** SKID (TN)
-  > **STE:** THIS INDICATOR SHOWS THAT THE CAR IS IN A SKID.
-  > **Non-STE:** This indicator indicates that the car is skidding.
-
-#### slack (adj) — UNAPPROVED
-
-- **Alternative:** TENSION (TN)
-  > **STE:** MAKE SURE THAT THE TENSION IN THE CONTROL CABLES IS CORRECT.
-  > **Non-STE:** Check for slack control cables.
-
-#### slack (n) — UNAPPROVED
-
-- **Alternative:** TENSION (TN)
-  > **STE:** MAKE SURE THAT THE TENSION IN THE CONTROL CABLES IS CORRECT.
-  > **Non-STE:** Check for slack in the control cables.
-
-#### slacken (v) — UNAPPROVED
-
-- **Alternative:** TENSION (TN)
-  > **STE:** RELEASE THE TENSION IN THE CONTROL CABLES.
-  > **Non-STE:** Slacken the control cables.
-
-#### slackness (n) — UNAPPROVED
-
-- **Alternative:** TENSION (TN)
-  > **STE:** MAKE SURE THAT THE TENSION IN THE CABLES IS CORRECT.
-  > **Non-STE:** Make sure there is no slackness in the cables.
-
-#### slave (v) — UNAPPROVED
-
-- **Alternative:** CONTROL (v)
-  > **STE:** THE PILOT'S INDICATORS CONTROL THE COPILOT'S INDICATORS.
-  > **Non-STE:** The copilot's indicators are slaved to the pilot's indicators.
-
-#### slide (v) — UNAPPROVED
-
-- **Alternative:** MOVE (v)
-  > **STE:** MOVE THE COMPUTER HORIZONTALLY TO PREVENT DAMAGE.
-  > **Non-STE:** Slide the computer horizontally to avoid damage.
-
-#### slight (adj) — UNAPPROVED
-
-- **Alternative 1:** SMALL (adj)
-  > **STE:** IF THE LEAKAGE IS SMALL, TORQUE THE CONNECTION TO 4.0 Nm. THEN, DO THE TEST AGAIN.
-  > **Non-STE:** If slight leakage is found, torque the connection to 4.0 Nm. Then repeat the test.
-- **Alternative 2:** LIGHT (adj)
-  > **STE:** APPLY A LIGHT FORCE TO COMPRESS THE SPRING.
-  > **Non-STE:** Apply a slight force to compress the spring.
-
-#### slightly (adv) — UNAPPROVED
-
-- **Alternative:** SMALL (adj)
-  > **STE:** MOVE THE ADAPTER A SMALL DISTANCE FORWARD.
-  > **Non-STE:** Move the adapter slightly forward.
-
-#### slip (v) — UNAPPROVED
-
-- **Alternative 1:** MOVE (v) — for the meaning "to slide or glide"
-  > **STE:** MOVE THE CARRIAGE ALONG THE TRACK.
-  > **Non-STE:** Slip the carriage along the track.
-- **Alternative 2:** REMOVE (v) — for the meaning "to take off or detach"
-  > **STE:** REMOVE THE CLAMP FROM THE CABLE.
-  > **Non-STE:** Slip the clamp from the cable.
-- **Alternative 3:** CAUSE TO FALL — for the meaning "to lose footing"
-  > **STE:** IF OIL SPILLS, CLEAN THE AREA IMMEDIATELY. A WET SURFACE IS DANGEROUS AND CAN CAUSE YOU TO FALL.
-  > **Non-STE:** If oil spills, clean the area immediately. You can slip and fall.
-- **Alternative 4:** MOVE ACCIDENTALLY — for the meaning "to move unintentionally"
-  > **STE:** MAKE SURE THAT THE CLUTCH DOES NOT MOVE ACCIDENTALLY.
-  > **Non-STE:** Make sure that the clutch does not slip.
-
-#### slow down (v) — UNAPPROVED
-
-- **Alternative:** DECREASE (v)
-  > **STE:** DECREASE THE SPEED OF THE SCREWING MACHINE TO PREVENT DAMAGE TO FASTENERS.
-  > **Non-STE:** Slow down the screwing machine to prevent damage to fasteners.
-
-#### sluggish (adj) — UNAPPROVED
-
-- **Alternative:** SLOW (adj)
-  > **STE:** IF THE MOVEMENT OF THE NEEDLE IS TOO SLOW, REPLACE THE SENSOR.
-  > **Non-STE:** If the movement of the needle is sluggish, replace the sensor.
-- **See:** Dictionary entry for SLOW (adj).
-
-# Page 381 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 381–384 of 434
-
-## S
-
-#### SMALL (adj) — APPROVED
-
-- **Inflections:** SMALLER, SMALLEST
-- **Meaning:** Less than average in dimension, quantity, quality, or capacity
-- **Example:**
-  > **STE:** IF THE TEMPERATURE INCREASES SUDDENLY, ADD A SMALL QUANTITY OF REAGENT TO GET A STABLE REACTION.
-
-#### smear (v) — UNAPPROVED
-
-- **Approved alternative:** APPLY (v)
-- **STE:** APPLY GREASE TO THE TAPER SLEEVE.
-- **Non-STE:** Smear grease on the taper sleeve.
-
-#### SMELL (v) — APPROVED
-
-- **Inflections:** SMELLS, SMELLED, SMELLED
-- **Meaning:** To sense with the nose
-- **Example:**
-  > **STE:** IF YOU SMELL OIL IN THE COMPARTMENT, REPLACE THE RECIRCULATION FILTERS.
-
-#### SMOKE (n) — APPROVED
-
-- **Meaning:** A gas that has particles of burned material and that you can see
-- **Example:**
-  > **STE:** WHEN THE CONCENTRATION OF SMOKE IS MORE THAN THE LIMIT, AN ALARM OPERATES.
-
-#### SMOKE (v) — APPROVED
-
-- **Inflections:** SMOKES, SMOKED, SMOKED
-- **Meaning:** To breathe the fumes of burning material and especially tobacco
-- **Example:**
-  > **STE:** DO NOT SMOKE IN THE WORK AREA.
-
-#### SMOOTH (adj) — APPROVED
-
-- **Inflections:** SMOOTHER, SMOOTHEST
-- **Meanings:**
-  1. That has a continuous uniform surface
-     - **Example:**
-       > **STE:** MAKE SURE THAT THE PAINTED SURFACE IS SMOOTH.
-  2. That has a constant rate of movement
-     - **Example:**
-       > **STE:** EXAMINE THE LINKAGE FOR SMOOTH MOVEMENT.
-
-#### smooth (v) — UNAPPROVED
-
-- **Approved alternative:** SMOOTH (adj)
-- **STE:** MAKE THE TAPE SMOOTH.
-- **Non-STE:** Smooth the tape out.
-- **See:** Dictionary entry for SMOOTH (adj).
-
-#### SMOOTHLY (adv) — APPROVED
-
-- **Meaning:** In a smooth manner
-- **Example:**
-  > **STE:** MAKE SURE THAT THE REDUCTION GEAR MOVES SMOOTHLY.
-
-#### snag (v) — UNAPPROVED
-
-- **Approved alternative:** CATCH (v)
-- **STE:** THE CLOTH WILL CATCH ON BROKEN WIRES.
-- **Non-STE:** The cloth will snag on broken wires.
-
-#### snap (n) — UNAPPROVED
-
-- **Approved alternative:** CLICK (n)
-- **STE:** WHEN YOU ATTACH THE SPRING CLIP, MAKE SURE THAT YOU HEAR A CLICK.
-- **Non-STE:** Ensure that there is a snap when you fit the spring clip.
-
-#### snap (v) — UNAPPROVED
-
-- **Approved alternatives:**
-  1. MOVE QUICKLY
-     - **STE:** THE RETAINING CLIP MUST MOVE QUICKLY INTO ITS POSITION.
-     - **Non-STE:** The retaining clip must snap into its position.
-  2. BREAK (v)
-     - **STE:** IF YOU BEND THIS PART TOO MUCH, IT WILL BREAK.
-     - **Non-STE:** If you bend this part too much, it will snap.
-
-#### so (that) — UNAPPROVED
-
-- **Approved alternatives:**
-  1. UNTIL (prep)
-     - **STE:** ADJUST THE LENGTH OF THE ROD UNTIL YOU GET A MINIMUM CLEARANCE OF 0.1 in.
-     - **Non-STE:** Adjust the length of rod so that a minimum gap of 0.1 in. is obtained.
-  2. Use PREVENT (v) with different sentence structure
-     - **STE:** LOCK THE WHEEL TO PREVENT MOVEMENT.
-     - **Non-STE:** Lock the wheel so that it does not move.
-
-#### SOAK (v) — APPROVED
-
-- **Inflections:** SOAKS, SOAKED, SOAKED
-- **Meanings:**
-  1. To put something into a liquid and keep it there until it is fully wet or soft
-     - **Example:**
-       > **STE:** SOAK THE FILTER IN THE CLEANING SOLUTION FOR 4 HOURS.
-  2. To stay in liquid until fully wet or soft
-     - **Example:**
-       > **STE:** THE COMPONENT MUST SOAK IN THE SOLUTION FOR A MINIMUM OF 2 HOURS.
-
-#### soapy (adj) — UNAPPROVED
-
-- **Approved alternative:** SOAP (TN)
-- **STE:** CLEAN THE SURFACE WITH A SOLUTION OF SOAP AND WATER.
-- **Non-STE:** Clean the surface using soapy water.
-
-#### SOFT (adj) — APPROVED
-
-- **Inflections:** SOFTER, SOFTEST
-- **Meaning:** Flexible, not hard
-- **Example:**
-  > **STE:** RUB THE SURFACE WITH A SOFT, DRY CLOTH.
-
-#### soften (v) — UNAPPROVED
-
-- **Approved alternative:** MAKE…SOFT
-- **STE:** PUT THE MATERIAL INTO THE SOLVENT TO MAKE THE COMPOUND SOFT.
-- **Non-STE:** Put the material into the solvent to soften the compound.
-- **See:** Dictionary entry for SOFT (adj).
-
-#### soiled (adj) — UNAPPROVED
-
-- **Approved alternative:** DIRTY (adj)
-- **STE:** DISCARD THE DIRTY RAGS.
-- **Non-STE:** Scrap the soiled rags.
-
-#### SOLID (adj) — APPROVED
-
-- **Meaning:** That has the properties of a solid
-- **Example:**
-  > **STE:** THE RAILS ARE MADE FROM SOLID BARS.
-
-#### SOLID (n) — APPROVED
-
-- **Meaning:** Material that is not a gas or a liquid
-- **Example:**
-  > **STE:** APPLY HEAT SLOWLY TO THE SOLID TO MONITOR ITS MELTING POINT.
-
-#### solidify (v) — UNAPPROVED
-
-- **Approved alternative:** SOLID (adj)
-- **STE:** DO NOT LET THE FOAM BECOME SOLID.
-- **Non-STE:** Do not let the foam to solidify.
-- **See:** Dictionary entry for SOLID (adj).
-
-#### SOLUTION (n) — APPROVED
-
-- **Meanings:**
-  1. A liquid that includes a dissolved material
-     - **Example:**
-       > **STE:** PREPARE THE SOLUTION IN A CONTAINER MADE OF CERAMIC MATERIAL.
-  2. The answer to a problem
-     - **Example:**
-       > **STE:** THE TEAM'S WORK WAS IMPORTANT FOR THE SOLUTION OF THE TECHNICAL PROBLEM.
-
-#### solve (v) — UNAPPROVED
-
-- **Approved alternative:** SOLUTION (n)
-- **STE:** IF THE REMOVAL OF THE VALVE WAS NOT THE SOLUTION TO THE PROBLEM, REPLACE THE UNIT.
-- **Non-STE:** If the removal of the valve did not solve the problem, replace the unit.
-- **See:** Dictionary entry for SOLUTION (n).
-
-#### SOME (adj) — APPROVED
-
-- **Meaning:** Related to a quantity not specified
-- **Example:**
-  > **STE:** SOME MODELS DO NOT HAVE THIS FUNCTION.
-
-#### SOME (pron) — APPROVED
-
-- **Meaning:** Related to a quantity not specified
-- **Example:**
-  > **STE:** SOME MODELS HAVE THIS FUNCTION, BUT SOME DO NOT.
-
-#### SOMETHING (pron) — APPROVED
-
-- **Meaning:** A thing that is not determined or specified
-- **Example:**
-  > **STE:** IF SOMETHING UNUSUAL OCCURS, DO THE NECESSARY CHECKS TO FIND THE CAUSE.
-
-#### soon (adv) — UNAPPROVED
-
-- **Approved alternative:** TIME (n)
-- **Examples:**
-  1. Use a short time
-     - **STE:** WHEN YOU STOP THE POWER SUPPLY, THE TEMPERATURE WILL DECREASE IN A SHORT TIME.
-     - **Non-STE:** When you stop the power supply, the temperature will decrease soon.
-  2. If it is possible, give the time
-     - **STE:** WHEN YOU STOP THE POWER SUPPLY, THE TEMPERATURE WILL DECREASE IN APPROXIMATELY 1 MINUTE.
-     - **Non-STE:** When you stop the power supply, the temperature will decrease soon.
-
-#### SOUND (n) — APPROVED
-
-- **Meaning:** Something that you can hear
-- **Example:**
-  > **STE:** INCREASE THE VOLUME OF THE SOUND.
-
-#### sound (v) — UNAPPROVED
-
-- **Approved alternative:** OPERATE (v)
-- **STE:** THE ALARM BELL OPERATES.
-- **Non-STE:** The alarm bell sounds.
-
-#### SOURCE (n) — APPROVED
-
-- **Meanings:**
-  1. Something that supplies energy or data
-     - **Example:**
-       > **STE:** THE SOLAR PANEL IS A SATISFACTORY SOURCE OF ENERGY.
-  2. The point where something starts
-     - **Example:**
-       > **STE:** FIND THE SOURCE OF THE LEAKAGE.
-
-#### SPACE (n) — APPROVED
-
-- **Meaning:** A distance, area, or volume
-- **Example:**
-  > **STE:** PUT THE SEALANT INTO THE SPACE BEHIND THE FLANGE OF THE WATER INJECTOR.
-
-#### space (v) — UNAPPROVED
-
-- **Approved alternative:** DISTANCE (n)
-- **STE:** MAKE SURE THAT THERE IS AN EQUAL DISTANCE BETWEEN THE HOLES.
-- **Non-STE:** Make sure you space the holes equally.
-
-#### spacing (n) — UNAPPROVED
-
-- **Approved alternative:** DISTANCE (n)
-- **STE:** REFER TO FIG. 401 FOR THE DISTANCE BETWEEN RIVETS.
-- **Non-STE:** The rivet spacing is given in Fig. 401.
-
-#### spanwise (adj) — UNAPPROVED
-
-- **Approved alternative:** SPAN (TN)
-- **STE:** MAKE SURE THAT THERE ARE NO SIGNS OF MOVEMENT ALONG THE SPAN.
-- **Non-STE:** Check for signs of spanwise movement.
-
-#### sparingly (adv) — UNAPPROVED
-
-- **Approved alternative:** QUANTITY (n)
-- **STE:** APPLY A SMALL QUANTITY OF GREASE.
-- **Non-STE:** Apply grease sparingly.
-
-#### SPARK (n) — APPROVED
-
-- **Meaning:** A hot, bright particle of a material that burns
-- **Example:**
-  > **STE:** DO NOT USE TEST EQUIPMENT THAT CAN CAUSE SPARKS.
-
-#### spark (v) — UNAPPROVED
-
-- **Approved alternative:** SPARK (n)
-- **STE:** WHEN YOU USE ELECTRICAL EQUIPMENT THAT MAKES SPARKS, USE GOGGLES.
-- **Non-STE:** Wear goggles when using electrical equipment that sparks.
-- **See:** Dictionary entry for SPARK (n).
-
-#### SPEAK (v) — APPROVED
-
-- **Inflections:** SPEAKS, SPOKE, SPOKEN
-- **Meaning:** To use a voice to make words
-- **Example:**
-  > **STE:** SPEAK INTO THE MICROPHONE.
-
-#### SPECIAL (adj) — APPROVED
-
-- **Meaning:** For a specified function
-- **Example:**
-  > **STE:** TIGHTEN THE SPECIAL NUT.
-
-# Page 385 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 385–388 of 434
-
-## Dictionary
-
-### Approved Words
-
-#### SPECIALLY (adv) — APPROVED
-
-- **Meaning:** In a special manner
-
-> **STE:** THIS EXTRACTOR IS SPECIALLY MADE TO REMOVE THESE PINS.
-
-#### SPECIFIED (adj) — APPROVED
-
-- **Meaning:** Given in, identified in, or related to a specification, regulation, or procedure
-
-> **STE:** THESE AREAS HAVE SPECIFIED DAMAGE LIMITS.
-> **Non-STE:** These areas have specific damage limits.
-
-> **STE:** INFLATE THE TIRE WITH NITROGEN TO THE SPECIFIED PRESSURE.
-
-#### SPEED (n) — APPROVED
-
-- **Meaning:** The rate of movement
-
-> **STE:** ON THIS ROAD, THE MAXIMUM PERMITTED SPEED IS 30 MPH.
-
-#### SPHERICAL (adj) — APPROVED
-
-- **Meaning:** That has the shape of a sphere
-
-> **STE:** THE ACCUMULATORS ARE SPHERICAL AND HAVE BLADDERS.
-
-#### SPILL (v) — APPROVED
-
-- **Inflections:** SPILLS, SPILLED, SPILLED
-- **Meaning:** To accidentally flow, or cause to flow, out of a container
-
-> **STE:** IF THE ELECTROLYTE SPILLS, REMOVE IT IMMEDIATELY.
-> **STE:** IF YOU SPILL THE ELECTROLYTE, REMOVE IT IMMEDIATELY.
-
-#### SPRAY (n) — APPROVED
-
-- **Meaning:** A jet of very small drops of liquid
-
-> **STE:** THE SEALANT IS RESISTANT TO SALT SPRAY.
-
-#### SPRAY (v) — APPROVED
-
-- **Inflections:** SPRAYS, SPRAYED, SPRAYED
-- **Meaning:** To apply as a spray
-
-> **STE:** DO NOT SPRAY DISINFECTANTS DIRECTLY ONTO THE CARPETS OR INSTRUMENT PANELS.
-
-#### STABLE (adj) — APPROVED
-
-- **Meaning:** That does not change or move
-
-> **STE:** MAKE SURE THAT THE TEMPERATURE INDICATIONS ARE STABLE.
-
-#### STANDARD (adj) — APPROVED
-
-- **Meaning:** Related to equipment and procedures that are normally used
-
-> **STE:** IN THIS PROCEDURE, USE STANDARD TOOLS.
-
-#### START (n) — APPROVED
-
-- **Meaning:** The beginning of a movement or operation
-
-> **STE:** MOVEMENT CAN BE SLOW AT THE START.
-
-#### START (v) — APPROVED
-
-- **Inflections:** STARTS, STARTED, STARTED
-- **Meanings:**
-  1. To begin a procedure, movement, or operation
-
-  > **STE:** START THE ENGINE.
-
-  2. To come into being, activity, or operation
-
-  > **STE:** MEASURE THE BEND RADIUS OF THE HOSE FROM THE POINT WHERE THE BEND STARTS.
-
-### Unapproved Words
-
-#### specific (adj) — UNAPPROVED
-
-- **Approved alternative:** APPROVED (adj)
-
-> **STE:** USE APPROVED TOOLS TO PREVENT POSSIBLE DAMAGE.
-> **Non-STE:** Use specific tools to preclude the possibility of damage.
-
-#### specifically (adv) — UNAPPROVED
-
-- **Approved alternative:** SPECIALLY (adv)
-
-> **STE:** THESE MATERIALS ARE SPECIALLY MADE FOR PLASTIC SURFACES.
-> **Non-STE:** These materials are specifically designed for plastic surfaces.
-
-- **See:** Dictionary entry for SPECIALLY (adv).
-
-#### speck (n) — UNAPPROVED
-
-- **Approved alternative:** PARTICLE (n)
-
-> **STE:** REMOVE ALL PARTICLES OF DUST FROM THE LENS.
-> **Non-STE:** Remove all specks of dust from the lens.
-
-#### speech (n) — UNAPPROVED
-
-- **Approved alternative:** VOICE (n)
-
-> **STE:** IF YOU CANNOT HEAR THE VOICE, REPLACE THE UNIT.
-> **Non-STE:** If the speech is not audible, replace the unit.
-
-#### spillage (n) — UNAPPROVED
-
-- **Approved alternatives:**
-  1. CONTAMINATION (n)
-
-  > **STE:** FIND THE AREA OF MERCURY CONTAMINATION.
-  > **Non-STE:** Find the area of the mercury spillage.
-
-  2. SPILL (v)
-
-  > **STE:** IF ACID SPILLS, CLEAN THE AREA.
-  > **Non-STE:** After acid spillage, clean the area.
-
-- **See:** Dictionary entry for SPILL (v).
-
-#### spin (v) — UNAPPROVED
-
-- **Approved alternative:** TURN … QUICKLY
-
-> **STE:** TURN THE WHEEL QUICKLY WITH YOUR HAND.
-> **Non-STE:** Spin the wheel by hand.
-
-#### splash (v) — UNAPPROVED
-
-- **Approved alternative:** GET (v)
-
-> **STE:** IF YOU GET FLUID IN YOUR EYES, GET MEDICAL AID.
-> **Non-STE:** If fluid splashes into eyes, get medical aid.
-
-#### splined (adj) — UNAPPROVED
-
-- **Approved alternative:** SPLINE (TN)
-
-> **STE:** THE DRIVE SHAFT HAS SPLINES.
-> **Non-STE:** The drive shaft is splined.
-
-#### split (adj) — UNAPPROVED
-
-- **Approved alternative:** DAMAGED (adj)
-
-> **STE:** REPLACE DAMAGED COVERS.
-> **Non-STE:** Split covers must be replaced.
-
-#### split (v) — UNAPPROVED
-
-- **Approved alternatives:**
-  1. DIVIDE (v)
-
-  > **STE:** DIVIDE THE ELECTRICAL LOAD BETWEEN THE TWO BUS BARS.
-  > **Non-STE:** Split the electrical load between the two bus bars.
-
-  2. BREAK (v)
-
-  > **STE:** WHEN YOU APPLY THE MAXIMUM TEST PRESSURE, MAKE SURE THAT THE HOUSING DOES NOT BREAK.
-  > **Non-STE:** Make sure that the housing does not split when you apply the maximum test pressure.
-
-#### spot (n) — UNAPPROVED
-
-- **Approved alternatives:**
-  1. MARK (n)
-
-  > **STE:** A RED MARK ON THE PIN IDENTIFIES THE LUBRICATION POINT.
-  > **Non-STE:** A red spot on the pin identifies the lubrication point.
-
-  2. STAIN (TN)
-
-  > **STE:** REMOVE ALL STAINS FROM THE CARPET WITH SOAP AND WARM WATER.
-  > **Non-STE:** Remove any spots from the carpet with soap and warm water.
-
-#### spot (v) — UNAPPROVED
-
-- **Approved alternative:** FIND (v)
-
-> **STE:** IF YOU FIND CORROSION IN THIS AREA, USE REPAIR SCHEME No. 3.
-> **Non-STE:** If you spot corrosion in this area, use repair scheme No. 3.
-
-#### spread (v) — UNAPPROVED
-
-- **Approved alternative:** APPLY (v)
-
-> **STE:** APPLY THE COMPOUND EQUALLY.
-> **Non-STE:** Spread compound evenly.
-
-#### spring (v) — UNAPPROVED
-
-- **Approved alternative:** MOVE (v)
-
-> **STE:** MAKE SURE THAT THE PINS DO NOT MOVE OUT OF THE NOTCH.
-> **Non-STE:** Make certain that the pins do not spring out of the notch.
-
-#### spurious (adj) — UNAPPROVED
-
-- **Approved alternative:** UNWANTED (adj)
-
-> **STE:** IF THERE ARE UNWANTED INDICATIONS, DO A TEST.
-> **Non-STE:** In the event of spurious indications, do a test.
-
-#### stability (n) — UNAPPROVED
-
-- **Approved alternative:** STABLE (adj)
-
-> **STE:** BEFORE YOU LIFT THE VEHICLE WITH JACKS, MAKE SURE THAT IT IS STABLE.
-> **Non-STE:** Before jacking up the vehicle, make sure that its stability is ensured.
-
-- **See:** Dictionary entry for STABLE (adj).
-
-#### stabilization (n) — UNAPPROVED
-
-- **Approved alternative:** STABLE (adj)
-
-> **STE:** WHEN THE TEMPERATURE IS STABLE, MAKE SURE THAT THE OIL PRESSURE DECREASES.
-> **Non-STE:** Check that oil pressure drops after stabilization of temperature.
-
-- **See:** Dictionary entry for STABLE (adj).
-
-#### stabilize (v) — UNAPPROVED
-
-- **Approved alternative:** STABLE (adj)
-
-> **STE:** LET THE V-BARS BECOME STABLE.
-> **Non-STE:** Allow V-bars to stabilize.
-
-- **See:** Dictionary entry for STABLE (adj).
-
-#### stage (n) — UNAPPROVED
-
-- **Approved alternative:** STEP (n)
-
-> **STE:** DURING THIS STEP, DO NOT REMOVE THE PIN.
-> **Non-STE:** Do not remove the pin at this stage.
-
-- **See:** Dictionary entry for STEP (n).
-
-#### stained (adj) — UNAPPROVED
-
-- **Approved alternatives:**
-  1. DIRTY (adj)
-
-  > **STE:** IF THE CARPET IS DIRTY, CLEAN IT WITH MATERIAL No. 8.
-  > **Non-STE:** If the carpet is stained, clean it with Material No. 8.
-
-  2. STAIN (TN)
-
-  > **STE:** IF THERE ARE HYDRAULIC FLUID STAINS ON THE COVER, EXAMINE THE LINE COUPLINGS.
-  > **Non-STE:** If the cover is stained by hydraulic fluid, check line couplings.
-
-#### stamp (v) — UNAPPROVED
-
-- **Approved alternatives:**
-  1. PUT (v) (WITH A STAMP [TN] OR STAMPS [TN])
-
-  > **STE:** PUT THE TEST DATE ON THE CYLINDER NECK WITH THE APPLICABLE STAMP.
-  > **Non-STE:** Stamp the test date on the cylinder neck.
-
-  2. IDENTIFY (v) (WITH A STAMP [TN] OR STAMPS [TN])
-
-  > **STE:** IDENTIFY THE MANUFACTURING DATE ON THE NAMEPLATE WITH THE APPLICABLE STAMP.
-  > **Non-STE:** Stamp the manufacturing date on the nameplate.
-
-#### stand (v) — UNAPPROVED
-
-- **Approved alternative:** STAY (v)
-
-> **STE:** STAY AWAY FROM SURFACES THAT MOVE.
-> **Non-STE:** Do not stand near moving surfaces.
-
-#### starboard (adj) — UNAPPROVED
-
-- **Approved alternative:** RIGHT (adj)
-
-> **STE:** ON THE RIGHT WING, MOVE THE AILERONS UP.
-> **Non-STE:** On the starboard wing, move the ailerons up.
-
-- **See:** Dictionary entry for RIGHT (adj).
-
-#### state (n) — UNAPPROVED
-
-- **Approved alternative:** CONDITION (n)
-
-> **STE:** EXAMINE THE CONDITION OF THE UNIT.
-> **Non-STE:** Examine the state of the unit.
-
-#### state (v) — UNAPPROVED
-
-- **Approved alternative:** TELL (v)
-
-> **STE:** UNLESS THE MANUFACTURER'S INSTRUCTIONS TELL YOU DIFFERENTLY, DO THE PROCEDURE THAT FOLLOWS.
-> **Non-STE:** Unless otherwise stated by the manufacturer, do the following procedure.
-
-- **See:** Dictionary entry for TELL (v).
-
-#### station (v) — UNAPPROVED
-
-- **Approved alternative:** PUT (v)
-
-> **STE:** PUT A PERSON NEAR THE FUEL TANK.
-> **Non-STE:** Station a person near the fuel tank.
-
-# Page 389 of 434
-
-> **Source:** ASD-STE100 Issue 9, January 2025
-> **Pages:** 389–392 of 434
-
-## S
-
-### Approved
-
-#### STEP (n) — APPROVED
-
-- **Meaning:** A specified part of a procedure
-- **Example:**
-  > **STE:** DO STEPS 13 THRU 16 A MINIMUM OF THREE TIMES.
-
-#### STOP (v) — APPROVED
-
-- **Inflections:** STOPS, STOPPED, STOPPED
-- **Meanings:**
-  1. To cause the end of a procedure, movement, or an operation
-     - **Example:**
-       > **STE:** STOP THE ENGINE.
-  2. To come to an end
-     - **Example:**
-       > **STE:** WHEN THE FLOW STOPS, REMOVE THE DRAIN HOSE.
-
-#### STOW (v) — APPROVED
-
-- **Inflections:** STOWS, STOWED, STOWED
-- **Meaning:** To move or cause to move into a specified position of storage.
-- **Examples:**
-  1. **STE:** STOW THE LIFE VEST SAFELY BELOW THE PASSENGER SEAT.
-  2. **STE:** MAKE SURE THAT THE THRUST REVERSER STOWS WHEN YOU PUSH THE QUADRANT CONTROL FORWARD.
-
-#### STRAIGHT (adj) — APPROVED
-
-- **Inflections:** STRAIGHTER, STRAIGHTEST
-- **Meaning:** Without curves or bends
-- **Example:**
-  > **STE:** MAKE SURE THAT THE STRAIGHT PART OF THE RIGGING PIN IS SMOOTH.
-
-#### STRIP (n) — APPROVED
-
-- **Meaning:** A piece of material that is long and thin, but not wide
-- **Example:**
-  > **STE:** PUT A STRIP OF ADHESIVE TAPE ALONG THE INSULATION BLANKET.
-
-#### STRIPE (n) — APPROVED
-
-- **Meaning:** A line on a surface which is a different color
-- **Example:**
-  > **STE:** THE FLAG HAS RED AND WHITE STRIPES.
-
-#### STRONG (adj) — APPROVED
-
-- **Inflections:** STRONGER, STRONGEST
-- **Meaning:** With much strength, power, or concentration
-- **Example:**
-  > **STE:** WHEN WINDS ARE STRONG, MOOR THE AIRCRAFT CAREFULLY.
-
-#### STRUCTURAL (adj) — APPROVED
-
-- **Meaning:** Related to the structure
-- **Example:**
-  > **STE:** THE CHASSIS IS A STRUCTURAL COMPONENT OF THE VEHICLE.
-
-#### STRUCTURALLY (adv) — APPROVED
-
-- **Meaning:** Related to the structure
-- **Example:**
-  > **STE:** THE LIST GIVES YOU STRUCTURALLY IMPORTANT ITEMS.
-
-#### STRUCTURE (n) — APPROVED
-
-- **Meanings:**
-  1. A construction
-     - **Example:**
-       > **STE:** ATTACH THE WIRES TO THE STRUCTURE.
-  2. The arrangement of something
-     - **Example:**
-       > **STE:** THE INTRODUCTION GIVES YOU THE STRUCTURE OF THE MAINTENANCE MANUAL.
-
-#### SUBASSEMBLY (n) — APPROVED
-
-- **Meaning:** An assembly that is a part of a larger assembly
-- **Example:**
-  > **STE:** DO NOT CHANGE THE POSITION OF THE SUBASSEMBLIES.
-
-#### SUBSEQUENT (adj) — APPROVED
-
-- **Meaning:** Following in an unspecified time or sequence
-- **Example:**
-  > **STE:** A SUBSEQUENT REPAIR WILL BE FOR THE NEW CONFIGURATION ONLY.
-- **Usage note:** Use NEXT (adj) for the first occurrence that follows immediately in time or sequence.
-- **Example (NEXT):**
-  > **STE:** DO THE NEXT INSPECTION.
+> **Pages:** 358-389 of 434 (32 pages)
+
+<!-- Page 358 of 434 -->
+
+| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |
+|---|---|---|---|
+| SAFE (adj) (SAFER, SAFEST) | Not dangerous, disarmed | BEFORE YOU CONTINUE THE BRATION BREAK WORK, MAKE THE AREA SAFE. |  |
+| SAFELY (adv) | In a safe manner | MAKE SURE THAT THE LADDER IS SAFELY ATTACHED. |  |
+| SAFETY (n) | A condition that is safe | FOR YOUR SAFETY, ALWAYS USE A PROTECTIVE MASK. |  |
+| SAFETY (v), SAFETIES, SAFETIED, SAFETIED | 1. To prevent accidental operation 2. To make sure that something does not become loose | OPEN AND TAG THE CIRCUIT BREAKERS. THEN, SAFETY THEM. SAFETY THE NUT WITH LOCKWIRE. |  |
+| safety-clip (v) — UNNAPPROVED | LOCK (v) (WITH A CLIP [TN] OR CLIPS [TN]) SAFETY (v) (WITH A CLIP [TN] OR CLIPS [TN]) | LOCK THE TURNBUCKLE ON THE CONTROL ROD WITH A CLIP. OPEN AND TAG THE CIRCUIT BREAKER. THEN, SAFETY IT WITH A CLIP. | Safety-clip the turnbuckle on the control rod. Open, tag, and safety-clip the circuit breaker. |
+| safety-wire (v) — UNNAPPROVED | LOCK (v) (WITH LOCKWIRE [TN]) SAFETY (v) (WITH SAFETY WIRE [TN]) | LOCK THE COVER TO THE FIRE EXTINGUISHER SWITCH WITH LOCKWIRE. SAFETY THE NUT WITH SAFETY WIRE. | Safety-wire the cover to the fire extinguisher switch. Safety-wire the nut. |
+| SAME (adj) | Agrees in all details | THE SAME PROCEDURE IS APPLICABLE TO THE TWO UNITS. |  |
+
+<!-- Page 359 of 434 -->
+|---|---|---|---|
+| SAME (pron) | Agrees in all details | THE ADJUSTMENT OF THE LEFT AND RIGHT ACTUATORS MUST BE THE SAME. |  |
+| SAMPLE (n) | A piece or quantity of something that you use for an inspection or test procedure to show that it has specified qualities | GET A SAMPLE OF THE FUEL. THEN, MEASURE ITS SPECIFIC GRAVITY. |  |
+| sample (v) — UNNAPPROVED | SAMPLE (n) | GET A SAMPLE OF FUEL. THEN, DO A TEST FOR WATER CONTAMINATION. | Sample and test the fuel for water contamination. |
+| SATISFACTORILY (adv) | In a satisfactory manner | MAKE SURE THAT THE MICROSWITCHES OPERATE SATISFACTORILY. |  |
+| SATISFACTORY (adj) | Agrees with all that is necessary | A CLEARANCE OF 3 mm IS SATISFACTORY. |  |
+| saturate (v) — UNNAPPROVED | SOAK (v) | SOAK THE ELEMENT FOR FOUR HOURS. | Saturate the element for four hours. |
+| save (v) — UNNAPPROVED | KEEP (v) | KEEP THE O-RINGS FOR THE SUBSEQUENT PROCEDURES. | Save the O-rings for the subsequent procedures. |
+| scan (v) — UNNAPPROVED | EXAMINE (v) SCAN (TN) | EXAMINE THE SURFACE ALONG THE TRAILING EDGE. THE ANTENNA DOES A SCAN THROUGH 80 DEG. | Scan the surface along the trailing edge. Antenna scans through 80 deg. |
+| SCHEDULE (v), SCHEDULES, SCHEDULED, SCHEDULED | To plan something in a time or a sequence | SCHEDULE THE CHECKS OF THE TIRES AT REGULAR INTERVALS. |  |
+| scored (adj) — UNNAPPROVED | SCORE (TN) | IF THE BEARING RACE HAS SCORES, REPLACE IT. | If the bearing race is scored, replace it. |
+| scrap (v) — UNNAPPROVED | DISCARD (v) | DISCARD THE REMOVED SEAL. | Scrap the removed seal. |
+
+<!-- Page 360 of 434 -->
+|---|---|---|---|
+| scrape (v) — UNNAPPROVED | REMOVE (v) (WITH A SCRAPER [TN]) | REMOVE THE REMAINING SEALANT WITH AN APPLICABLE SCRAPER. | Scrape off the old sealant. |
+| scratched (adj) — UNNAPPROVED | SCRATCH (TN) | REPAIR THE SURFACES THAT HAVE SCRATCHES. | Repair the scratched surfaces. |
+| screw (v) — UNNAPPROVED | TURN (v) ATTACH (v) (WITH A SCREW [TN] OR SCREWS [TN]) | CONTINUE TO TURN THE END FITTING UNTIL IT IS IN THE CORRECT POSITION. ATTACH THE STRAPS TO THE PANELS WITH SCREWS. | Continue screwing the end fitting until it is in the correct position. Screw the straps to the panels. |
+| scrub (v) — UNNAPPROVED | CLEAN (v) (WITH A BRUSH [TN]) | CLEAN THE METAL PARTS WITH A BRUSH. | Scrub all metal parts. |
+| SEAL (n) | Something that prevents access or leaks | APPLY SEALANT TO THE FILLET SEALS. |  |
+| SEAL (v), SEALS, SEALED, SEALED | To prevent access or leaks | SEAL THE OPENINGS WITH POLYETHYLENE. |  |
+| search (v) — UNNAPPROVED | EXAMINE (v) | EXAMINE THE SURFACE FOR CRACKS. | Search the surface for cracks. |
+| seat (v) — UNNAPPROVED | INSTALL (v) AGAINST (prep) | INSTALL THE O-RING IN ITS GROOVE ON THE PISTON. MAKE SURE THAT THE VALVE IS IN ITS CORRECT POSITION AGAINST THE FRAME. | Seat the O-ring in its groove on the piston. Make sure that the valve is seated on the frame. |
+| SECONDARY (adj) | Second in importance | THE SECONDARY FILTER REMOVES THE REMAINING CONTAMINATION. |  |
+
+<!-- Page 361 of 434 -->
+|---|---|---|---|
+| secure (adj) — UNNAPPROVED | TIGHT (adj) | MAKE SURE THAT THE BOLTS ARE TIGHT. | Make sure that the bolts are secure. |
+|  | SAFE (adj) | BEFORE YOU LIFT THE PLATFORM, MAKE SURE THAT IT IS SAFE. | Make sure that the platform is secure before you lift it. |
+|  | CORRECTLY (adv) | MAKE SURE THAT THE BRACKETS ARE CORRECTLY ATTACHED. | Check the brackets for secure attachment. |
+| secure (v) — UNNAPPROVED | ATTACH (v) | REMOVE THE BOLTS THAT ATTACH THE UNIT. | Remove the bolts that secure the unit. |
+|  | SAFETY (v) | SAFETY THE PULLEY GUARD PINS WITH SPLIT PINS. | Secure the pulley guard pins with split pins. |
+| securely (adv) — UNNAPPROVED | CORRECTLY (adv) | MAKE SURE THAT THE BRACKETS ARE CORRECTLY ATTACHED. | Make sure that the brackets are securely attached. |
+|  | SAFELY (adv) | MAKE SURE THAT THE LADDER IS SAFELY ATTACHED. | Make sure the ladder is securely attached. |
+|  | TIGHT (adj) | MAKE SURE THAT THE BOLTS ARE TIGHT. | Make sure that the bolts are securely installed. |
+| security (n) — UNNAPPROVED | CORRECTLY (adv) | MAKE SURE THAT THE COMPONENTS ARE CORRECTLY ATTACHED. | Check the security of the components. |
+
+<!-- Page 362 of 434 -->
+|---|---|---|---|
+| SEE (v), SEES, SAW, SEEN | To know with the eyes | MAKE SURE THAT YOU CAN SEE THE CABLE THROUGH THE INSPECTION HOLE. |  |
+|  | For other meanings, use: REFER (v) | REFER TO TABLE 8001 FOR THE APPLICABLE TORQUE VALUES. | See Table 8001 for the applicable torque values. |
+|  | EXAMINE (v) | EXAMINE THE MEMBRANE FOR HOLES. | Check the membrane to see if there are holes. |
+|  | MAKE SURE (v) | MOVE THE TUBE TO MAKE SURE THAT ITS INNER CONNECTION IS TIGHT. | Move the tube to see if its inner connection is tight. |
+| seek (v) — UNNAPPROVED | GET (v) | GET MEDICAL AID IMMEDIATELY. | Seek medical attention immediately. |
+| seepage (n) — UNNAPPROVED | LEAKAGE (n) | CLEAN THE AREAS WHERE THERE IS HYDRAULIC FLUID LEAKAGE. | Clean the areas where there is hydraulic fluid seepage. |
+| seized (adj) — UNNAPPROVED | CATCH (v) | IF THE CONTROL CABLE IS CAUGHT IN THE PULLEY, RELEASE THE CABLE TENSION. | If the control cable is seized in the pulley, release the cable tension. |
+|  | MOVE (v) | IF YOU CANNOT MOVE THE BOLTS, APPLY SOME PENETRATING OIL. | If the bolts are seized, apply some penetrating oil. |
+|  | TURN (v) | IF THE FLAP CONTROL MOTOR CANNOT TURN, USE THE ALTERNATIVE MODE. | If the flap control motor is seized, use the alternate mode. |
+
+<!-- Page 363 of 434 -->
+|---|---|---|---|
+| SELECT (v), SELECTS, SELECTED, SELECTED | To make a choice | SELECT THE HYDRAULIC SYSTEM THAT YOU WILL PRESSURIZE. |  |
+|  | SELECT A LANGUAGE FROM THE MENU. |  |  |
+|  | Do not use this word as a synonym for SET (v). | SET THE SWITCH TO "TEST." | Select the switch to TEST. |
+| SELECTION (n) | The action or result of choosing | THE OPERATION OF THE INDICATOR DOES NOT PREVENT THE SELECTION OF SYSTEM 1. |  |
+| SEMICIRCULAR (adj) | That has the shape of half a circle | THE VALVE FLAPS ARE SEMICIRCULAR. |  |
+| SEND (v), SENDS, SENT, SENT | To cause to go | SEND THE FILTER ELEMENT TO THE MAINTENANCE SHOP FOR THE NECESSARY INSPECTION. |  |
+| SENSE (v), SENSES, SENSED, SENSED | To get an input automatically | THE TEMPERATURE BULB SENSES THE EXTERNAL AIR TEMPERATURE. |  |
+| SENSITIVE (adj) | That can sense small changes | THE CAPSULE IS SENSITIVE TO PRESSURE CHANGES. |  |
+| separable (adj) — UNNAPPROVED | DISASSEMBLE (v) | YOU CAN DISASSEMBLE THIS UNIT INTO TWO PARTS. | This unit is separable into two parts. |
+|  | DISCONNECT (v) | YOU CAN DISCONNECT THESE LINE FITTINGS. | These line fittings are separable. |
+
+<!-- Page 364 of 434 -->
+|---|---|---|---|
+| separate (adj) — UNNAPPROVED | ISOLATED (adj) | EACH HYDRAULIC SYSTEM IS FULLY ISOLATED. | All hydraulic systems are completely separate. |
+|  | DIFFERENT (adj) | PUT THE REMAINING PARTS IN A DIFFERENT CONTAINER. | Put the remaining parts in a separate container. |
+|  | NOT CONNECTED | THESE TWO TRACKS ARE NOT CONNECTED TO THE OTHER TWO. | These two tracks are separate from the other two. |
+|  | NOT ATTACHED | THE CAP IS NOT ATTACHED TO THE COUPLING. | The cap is separate from the coupling. |
+| separate (v) — UNNAPPROVED | DISCONNECT (v) | DISCONNECT THE LINE FITTINGS. | Separate the line fittings. |
+|  | DIVIDE (v) | YOU CAN DIVIDE THE DRAINS INTO THREE GROUPS. | You can separate the drains into three groups. |
+| separately (adv) — UNNAPPROVED | INDEPENDENTLY (adv) | THE SYSTEM MONITORS THE CONDITION OF THE PARTS INDEPENDENTLY. | The system monitors the condition of the parts separately. |
+| SEPARATION (n) | The action or result of separating | SEPARATION OF THESE PARTS IS NOT EASY. |  |
+| SEQUENCE (n) | The relation of items that follow one after the other in a list or the relation of steps or events that occur one after the other in time | TIGHTEN THE BOLTS IN THE SEQUENCE THAT IS GIVEN IN FIGURE 3. |  |
+| serious (adj) — UNNAPPROVED | IMPORTANT (adj) | VIRUS CONTAMINATION IS AN IMPORTANT PROBLEM. | Virus contamination is a serious problem. |
+|  | DANGEROUS (adj) | HYDRAULIC FLUID IS DANGEROUS FOR YOUR EYES. | Hydraulic fluid can cause serious eye injury. |
+
+<!-- Page 365 of 434 -->
+|---|---|---|---|
+| serrated (adj) — UNNAPPROVED | SERRATION (n) | USE GLOVES WHEN YOU TOUCH PARTS WITH EDGE SERRATIONS. | Use gloves when handling parts with serrated edges. |
+| SERRATION (n) | One or more notches or teeth as in a saw | MAKE MARKS THAT SHOW THE LOCATION OF THE SERRATIONS. |  |
+| serve (v) — UNNAPPROVED | Use an accurate verb. | THE RADIO MASTER SWITCH CONTROLS THE BUS BAR. | The radio master switch serves to control the bus bar. |
+| service (v) — UNNAPPROVED | SERVICING (n) | DO THE SERVICING OF THE FIRE EXTINGUISHERS. | Service the fire extinguishers. |
+| serviceability (n) — UNNAPPROVED | SERVICEABLE (adj) | THE TIRE IS SERVICEABLE IF THE CUTS ARE SMALLER THAN 10 mm. | The serviceability of the tire is not affected by any cut smaller than 10 mm. |
+| SERVICEABLE (adj) | Correct or satisfactory | DO A VISUAL INSPECTION OF THE ADAPTER TO MAKE SURE THAT IT IS SERVICEABLE. |  |
+| SERVICING (n) | The steps necessary to prepare something for operation | BEFORE YOU DO SERVICING OF THE HYDRAULIC SYSTEM, ISOLATE IT. |  |
+| SET (n) | A group of related items that you (can) use for the same purpose | USE THE SET OF TOOLS THAT IS SUPPLIED WITH THE UNIT. |  |
+| SET (v), SETS, SET, SET | To put something into a given adjustment, condition, or mode | SET THE ALTIMETER SCALE TO 1013 mbar. |  |
+| setting (n) — UNNAPPROVED | ADJUSTMENT (n) POSITION (n) | DO NOT CHANGE THE ADJUSTMENT OF THE SWITCHES. MAKE SURE THAT THE POSITION OF THE FLAPS IS EIGHT DEG. | Do not change the setting of the switches. |
+| SET (v) |  | THE MANUFACTURER SETS THE LENGTH OF THE ROD IN THE FACTORY. | Setting of the rod length is achieved in the factory. |
+
+<!-- Page 366 of 434 -->
+|---|---|---|---|
+| settle (v) — UNNAPPROVED | COLLECT (v) STABLE (adj) | LET THE SEDIMENT COLLECT AT THE BOTTOM OF THE CONTAINER. LET THE INDICATIONS BECOME STABLE. | Let the sediment settle at the bottom of the container. Let the indications settle. |
+| sever (v) — UNNAPPROVED | CUT (v) | MAKE SURE THAT YOU DO NOT CUT THE CONTROL CABLE. | Make sure you do not sever the control cable. |
+| several (adj) — UNNAPPROVED | SOME (adj) If this alternative is not sufficient, give the range, quantity, number, or minimum value. | SOME FUNCTIONS ARE NOT AVAILABLE. SOAK THE FILLER CAPS IN DISTILLED WATER FOR A MINIMUM OF EIGHT HOURS. | Several functions are not available. Soak the filler caps in distilled water for several hours. |
+| severe (adj) — UNNAPPROVED | DANGEROUS (adj) | THIS ANTISEPTIC CAN BE DANGEROUS FOR YOUR SKIN. | This antiseptic can cause severe skin problems. |
+| SHAKE (v), SHAKES, SHOOK, SHAKEN | To move or cause to move quickly up and down or from side to side | SHAKE THE CONTAINER. THE CONTROL COLUMN STARTS TO SHAKE BEFORE A STALL OCCURS. |  |
+| shall (v) — UNNAPPROVED | MUST (v) | HOLES MUST NOT HAVE SHARP EDGES. | Holes shall not have sharp edges. |
+| SHAPE (n) | The contour of an object | THE PATCH MUST BE THE SAME SHAPE AS THE CUTOUT. |  |
+| shape (v) — UNNAPPROVED | SHAPE (n) | MAKE THE PATCH THE SAME SHAPE AS THE CUTOUT. | Shape the patch to suit the cutout. |
+| SHARP (adj) (SHARPER, SHARPEST) | That can cut or make a hole | MAKE A HOLE WITH A SHARP TOOL. |  |
+
+<!-- Page 367 of 434 -->
+|---|---|---|---|
+| sharply (adv) — UNNAPPROVED | QUICKLY (adv) SUDDENLY (adv) | QUICKLY PULL THE CABLES TO DISENGAGE THEM. MOVE THE CONTROL COLUMN FORWARD SUDDENLY. | Sharply pull the cables to disengage them. Move the control column forward sharply. |
+| shear (v) — UNNAPPROVED | BREAK (v) CUT (v) | TIGHTEN THE NUT. CONTINUE UNTIL THE NUT BREAKS. DO NOT CUT THE WIRES. | Tighten the nut until it shears. Do not shear the wires. |
+| SHEET (n) | A piece of material that is thin in relation to its length and width | IF THE SHEETS HAVE DENTS WITH A DEPTH OF MORE THAN 0.5 mm, REMOVE THESE DENTS. |  |
+| shield (v) — UNNAPPROVED | PREVENT (v) PROTECTION (n) | PUT ON GOGGLES TO PREVENT INJURY TO YOUR EYES. GIVE THE CONTROL UNIT PROTECTION FROM DAMAGE. | Shield your eyes. Shield the control unit from damage. |
+| shift (v) — UNNAPPROVED | MOVE (v) | MOVE THE LEVER FORWARD. | Shift the lever forward. |
+| SHINY (adj) (SHINIER, SHINIEST) | That can cause a reflection of light | CLEAN THE SHINY AREA OF THE OLEO STRUT. |  |
+| SHOCK (n) | The sudden effect of energy on a person or object | SHOCKS CAN CAUSE DAMAGE TO THE GYROSCOPE. |  |
+| SHORT (adj) (SHORTER, (SHORTEST) | That has small length or duration If it is possible, be accurate. | ATTACH THE SHORT ARM OF THE BELLCRANK TO THE ROD. AFTER YOU STOP THE POWER SUPPLY, THE TEMPERATURE DECREASES IN A SHORT TIME. THIS TIME MUST NOT BE MORE THAN 30 SECONDS. |  |
+
+<!-- Page 368 of 434 -->
+|---|---|---|---|
+| shorten (v) — UNNAPPROVED | DECREASE (v) | DO NOT DECREASE THE STERILIZATION TIME. | Do not shorten the sterilization time. |
+| should (v) — UNNAPPROVED | MUST (v) IF (conj) | PERSONNEL MUST USE PROTECTIVE CLOTHING. IF A SYSTEM FAILURE OCCURS, STOP OPERATION IMMEDIATELY. | Personnel should wear protective clothing. Should a system failure occur, stop operation immediately. |
+| SHOW (v), SHOWS, SHOWED, SHOWN | 1. To cause to be seen 2. To be in view or come into view | THE INDICATOR SHOWS THE LEVEL OF BATTERY CHARGE. THE SYMBOL SHOWS ON THE SCREEN. |  |
+| shut down (v) — UNNAPPROVED | STOP (v) | STOP THE ENGINE. | Shut down the engine. |
+| SIDE (n) | 1. The specified surface or area of an object 2. A location or direction that has a relationship to a center or a line of division | LUBRICATE ONE SIDE OF THE WASHER. PUSH THE UNIT OUT AND THEN MOVE IT TO THE LEFT SIDE. |  |
+| sideways (adv) — UNNAPPROVED | SIDE (n) | PUSH THE UNIT OUT AND THEN MOVE IT TO THE LEFT SIDE. | Push the unit out and then move it sideways. |
+| sight (n) — UNNAPPROVED | VIEW (n) | TURN THE KNOB TO MAKE THE DISPLAY GO OUT OF VIEW. | Turn the knob to make the display go out of sight. |
+| sight (v) — UNNAPPROVED | LOOK (v) | LOOK ALONG THE SKIN. | Sight along the skin. |
+| SIGN (n) | The indication of a possible condition | EXAMINE THE SURFACE FOR SIGNS OF INTERNAL DAMAGE. |  |
+| significant (adj) — UNNAPPROVED | IMPORTANT (adj) | THIS PROCEDURE IS IMPORTANT FOR THE CORRECT OPERATION OF THE UNIT. | This procedure is significant for the correct operation of the unit. |
+| silence (v) — UNNAPPROVED | STOP (v) | STOP THE ALARM BELL. | Silence the alarm bell. |
+
+<!-- Page 369 of 434 -->
+|---|---|---|---|
+| similar (adj) — UNNAPPROVED | EQUIVALENT (adj) ALMOST THE SAME | USE THE SPECIFIED MATERIAL OR AN EQUIVALENT ONE. THE TWO ITEMS HAVE ALMOST THE SAME SHAPE. | Use the specified material or a similar one. The two items are similar in shape. |
+| SIMULATE (v), SIMULATES, SIMULATED, SIMULATED | To make a condition that is the same as one that can occur in operation | SIMULATE A WHEEL SPEED OF 80 KNOTS. |  |
+| simultaneous (adj) — UNNAPPROVED | AT THE SAME TIME | REMOVE THE FILTER ELEMENT AND THE FILTER HOUSING AT THE SAME TIME. | Simultaneous removal of the filter element and the filter housing is obligatory. |
+| simultaneously (adv) | AT THE SAME TIME | DO THESE TWO STEPS AT THE SAME TIME. | Do these two steps simultaneously. |
+| SINCE (conj) | Function word that shows: "from some time in the past until a later time or now" For other meanings, use: BECAUSE (conj) | IF IT IS MORE THAN TWO HOURS SINCE YOU MIXED THE COMPOUND, DO NOT USE IT. BE CAREFUL WHEN YOU USE ALODINE, BECAUSE IT IS A DANGEROUS MATERIAL. | Since Alodine is a dangerous material, be careful when you use it. |
+| situated (adj) — UNNAPPROVED | INSTALL (v) BE (v) | THE TRIM CONTROL KNOB IS INSTALLED ON THE CONTROL PEDESTAL. THE TRIM CONTROL KNOB IS ON THE CONTROL PEDESTAL. | The trim control knob is situated on the control pedestal. The trim control knob is situated on the control pedestal. |
+| situation (n) — UNNAPPROVED | CONDITION (n) Use the plural form. | THE ALGORITHM ADAPTS TO THE NEW CONDITIONS. | The algorithm adapts to the new situation. |
+
+<!-- Page 370 of 434 -->
+|---|---|---|---|
+| size (n) — UNNAPPROVED | DIMENSION (n) | THESE PARTS HAVE DIFFERENT DIMENSIONS. | These parts are of different sizes. |
+| skid (v) — UNNAPPROVED | SKID (TN) | THIS INDICATOR SHOWS THAT THE CAR IS IN A SKID. | This indicator indicates that the car is skidding. |
+| slack (adj) — UNNAPPROVED | TENSION (TN) | MAKE SURE THAT THE TENSION IN THE CONTROL CABLES IS CORRECT. | Check for slack control cables. |
+| slack (n) — UNNAPPROVED | TENSION (TN) | MAKE SURE THAT THE TENSION IN THE CONTROL CABLES IS CORRECT. | Check for slack in the control cables. |
+| slacken (v) — UNNAPPROVED | TENSION (TN) | RELEASE THE TENSION IN THE CONTROL CABLES. | Slacken the control cables. |
+| slackness (n) — UNNAPPROVED | TENSION (TN) | MAKE SURE THAT THE TENSION IN THE CABLES IS CORRECT. | Make sure there is no slackness in the cables. |
+| slave (v) — UNNAPPROVED | CONTROL (v) | THE PILOT'S INDICATORS CONTROL THE COPILOT'S INDICATORS. | The copilot's indicators are slaved to the pilot's indicators. |
+| slide (v) — UNNAPPROVED | MOVE (v) | MOVE THE COMPUTER HORIZONTALLY TO PREVENT DAMAGE. | Slide the computer horizontally to avoid damage. |
+| slight (adj) — UNNAPPROVED | SMALL (adj) LIGHT (adj) | IF THE LEAKAGE IS SMALL, TORQUE THE CONNECTION TO 4.0 Nm. THEN, DO THE TEST AGAIN. APPLY A LIGHT FORCE TO COMPRESS THE< | If slight leakage is found, torque the connection to 4.0 Nm. Then repeat the test. |
+| slightly (adv) — UNNAPPROVED | SMALL (adj) | MOVE THE ADAPTER A SMALL DISTANCE FORWARD. | Move the adapter slightly forward. |
+
+<!-- Page 371 of 434 -->
+|---|---|---|---|
+| slip (v) — UNNAPPROVED | MOVE (v) REMOVE (v) CAUSE TO FALL MOVE ACCIDENTALLY | MOVE THE CARRIAGE ALONG THE TRACK. REMOVE THE CLAMP FROM THE CABLE. IF OIL SPILLS, CLEAN THE AREA IMMEDIATELY. A WET SURFACE IS DANGEROUS AND CAN CAUSE YOU TO fall. MAKE SURE THAT THE CLUTCH DOES NOT MOVE ACCIDENTALLY. | Slip the carriage along the track. Slip the clamp from the cable. If oil spills, clean the area immediately. You can slip and fall. Make sure that the clutch does not slip. |
+| SLOPE (n) | A surface that is not level | IF THE VEHICLE IS PARKED ON A SLOPE, MAKE SURE THAT WHEEL CHOCKS ARE IN POSITION. |  |
+| SLOT (n) | A long opening that is not wide | PUSH THE CABLES THROUGH THE SLOT IN FRAME 8 AND ATTACH THEM TO THE CLIPS. |  |
+| SLOW (adj) (SLOWER, SLOWEST) | At low speed | MAKE SURE THAT THE MOVEMENT OF THE ELEVATORS IS SLOW. |  |
+| slow down (v) — UNNAPPROVED | DECREASE (v) | DECREASE THE SPEED OF THE SCREWING MACHINE TO PREVENT DAMAGE TO FASTENERS. | Slow down the screwing machine to prevent damage to fasteners. |
+| SLOWLY (adv) | In a slow manner | TURN THE KNOB SLOWLY. |  |
+| sluggish (adj) — UNNAPPROVED | SLOW (adj) | IF THE MOVEMENT OF THE NEEDLE IS TOO SLOW, REPLACE THE SENSOR. | If the movement of the needle is sluggish, replace the sensor. |
+
+<!-- Page 372 of 434 -->
+|---|---|---|---|
+| SMALL (adj) (SMALLER, SMALLEST) | Less than average in dimension, quantity, quality, or capacity | IF THE TEMPERATURE INCREASES SUDDENLY, ADD A SMALL QUANTITY OF REAGENT TO GET A STABLE REACTION. |  |
+| smear (v) — UNNAPPROVED | APPLY (v) | APPLY GREASE TO THE TAPER SLEEVE. | Smear grease on the taper sleeve. |
+| SMELL (v), SMELLS, SMELLED, SMELLED | To sense with the nose | IF YOU SMELL OIL IN THE COMPARTMENT, REPLACE THE RECIRCULATION FILTERS. |  |
+| SMOKE (n) | A gas that has particles of burned material and that you can see | WHEN THE CONCENTRATION OF SMOKE IS MORE THAN THE LIMIT, AN ALARM OPERATES. |  |
+| SMOKE (v), (SMOKES, SMOKED, SMOKED) | To breathe the fumes of burning material and especially tobacco | DO NOT SMOKE IN THE WORK AREA. |  |
+| SMOOTH (adj) (SMOOTHER, SMOOTHEST) | 1. That has a continuous uniform surface 2. That has a constant rate of movement | MAKE SURE THAT THE PAINTED SURFACE IS SMOOTH. EXAMINE THE LINKAGE FOR SMOOTH MOVEMENT. |  |
+| smooth (v) — UNNAPPROVED | SMOOTH (adj) | MAKE THE TAPE SMOOTH. | Smooth the tape out. |
+| SMOOTHLY (adv) | In a smooth manner | MAKE SURE THAT THE REDUCTION GEAR MOVES SMOOTHLY. |  |
+| snag (v) — UNNAPPROVED | CATCH (v) | THE CLOTH WILL CATCH ON BROKEN WIRES. | The cloth will snag on broken wires. |
+| snap (n) — UNNAPPROVED | CLICK (n) | WHEN YOU ATTACH THE SPRING CLIP, MAKE SURE THAT YOU HEAR A CLICK. | Ensure that there is a snap when you fit the spring clip. |
+
+<!-- Page 373 of 434 -->
+|---|---|---|---|
+| snap (v) — UNNAPPROVED | MOVE QUICKLY BREAK (v) | THE RETAINING CLIP MUST MOVE QUICKLY INTO ITS POSITION. IF YOU BEND THIS PART TOO MUCH, IT WILL BREAK. | The retaining clip must snap into its position. If you bend this part too much, it will snap. |
+| so (that) (conj) | UNTIL (prep) PREVENT (v) | ADJUST THE LENGTH OF THE ROD UNTIL YOU GET A MINIMUM CLEARANCE OF 0.1 in. LOCK THE WHEEL TO PREVENT MOVEMENT. | Adjust the length of rod so that a minimum gap of 0.1 in. is obtained. Lock the wheel so that it does not move. |
+| SOAK (v), SOAKS, SOAKED, SOAKED | 1. To put something into a liquid and keep it there until it is fully wet or soft 2.To stay in liquid until fully wet or soft. | SOAK THE FILTER IN THE CLEANING SOLUTION FOR 4 HOURS. THE COMPONENT MUST SOAK IN THE SOLUTION FOR A MINIMUM OF 2 HOURS. |  |
+| soapy (adj) — UNNAPPROVED | SOAP (TN) | CLEAN THE SURFACE WITH A SOLUTION OF SOAP AND WATER. | Clean the surface using soapy water. |
+| SOFT (adj) (SOFTER, SOFTEST) | Flexible, not hard | Rub the surface with a soft, dry cloth. |  |
+| soften (v) — UNNAPPROVED | MAKE…SOFT | PUT THE MATERIAL INTO THE SOLVENT TO MAKE THE COMPOUND SOFT. | Put the material into the solvent to soften the compound. |
+| soiled (adj) — UNNAPPROVED | DIRTY (adj) | DISCARD THE DIRTY RAGS. | Scrap the soiled rags. |
+| SOLID (adj) | That has the properties of a solid | THE RAILS ARE MADE FROM SOLID BARS. |  |
+| SOLID (n) | Material that is not a gas or a liquid | APPLY HEAT SLOWLY TO THE SOLID TO MONITOR ITS MELTING POINT. |  |
+| solidify (v) — UNNAPPROVED | SOLID (adj) | DO NOT LET THE FOAM BECOME SOLID. | Do not allow the foam to solidify. |
+
+<!-- Page 374 of 434 -->
+|---|---|---|---|
+| SOLUTION (n) | 1. A liquid that includes a dissolved material 2. The answer to a problem | PREPARE THE SOLUTION IN A CONTAINER MADE OF CERAMIC MATERIAL. The team's work was important for the solution of the technical problem. |  |
+| solve (v) — UNNAPPROVED | SOLUTION (n) | IF THE REMOVAL OF THE VALVE WAS NOT THE SOLUTION TO THE PROBLEM, REPLACE THE UNIT. | If the removal of the valve did not solve the problem, replace the unit. |
+| SOME (adj) | Related to a quantity not specified | SOME MODELS DO NOT HAVE THIS FUNCTION. |  |
+| SOME (pron) | Related to a quantity not specified | SOME MODELS HAVE THIS FUNCTION, BUT SOME DO NOT. |  |
+| SOMETHING (pron) | A thing that is not determined or specified | IF SOMETHING UNUSUAL OCCURS, DO THE NECESSARY CHECKS TO FIND THE CAUSE. |  |
+| soon (adv) — UNNAPPROVED | TIME (n) If it is possible, give the time. | WHEN YOU STOP THE POWER SUPPLY, THE TEMPERATURE WILL DECREASE IN A SHORT TIME. WHEN YOU STOP THE POWER SUPPLY, THE TEMPERATURE WILL DECREASE IN APPROXIMATELY 1 MINUTE. | When you stop the power supply, the temperature will decrease soon. When you stop the power supply, the temperature will decrease soon. |
+| SOUND (n) | Something that you can hear | INCREASE THE VOLUME OF THE SOUND. |  |
+| sound (v) — UNNAPPROVED | OPERATE (v) | THE ALARM BELL OPERATES. | The alarm bell sounds. |
+
+<!-- Page 375 of 434 -->
+|---|---|---|---|
+| SOURCE (n) | 1. Something that supplies energy or data 2. The point where something starts | THE SOLAR PANEL IS A SATISFACTORY SOURCE OF ENERGY. FIND THE SOURCE OF THE LEAKAGE. |  |
+| SPACE (n) | A distance, area, or volume | PUT THE SEALANT INTO THE SPACE BEHIND THE FLANGE OF THE WATER INJECTOR. |  |
+| space (v) — UNNAPPROVED | DISTANCE (n) | MAKE SURE THAT THERE IS AN EQUAL DISTANCE BETWEEN THE HOLES. | Make sure you space the holes equally. |
+| spacing (n) — UNNAPPROVED | DISTANCE (n) | REFERENCE FIG. 401 FOR THE DISTANCE BETWEEN RIVETS. | The rivet spacing is given in Fig. 401. |
+| spanwise (adj) — UNNAPPROVED | SPAN (TN) | MAKE SURE THAT THERE ARE NO SIGNS OF MOVEMENT ALONG THE SPAN. | Check for signs of spanwise movement. |
+| sparingly (adv) — UNNAPPROVED | QUANTITY (n) | APPLY A SMALL QUANTITY OF GREASE. | Apply grease sparingly. |
+| SPARK (n) | A hot, bright particle of a material that burns | DO NOT USE TEST EQUIPMENT THAT CAN CAUSE SPARKS. |  |
+| spark (v) — UNNAPPROVED | SPARK (n) | WHEN YOU USE ELECTRICAL EQUIPMENT THAT MAKES SPARKS, USE GOGGLES. | Wear goggles when using electrical equipment that sparks. |
+| SPEAK (v), SPEAKS, SPOKE, SPOKEN | To use a voice to make words | SPEAK INTO THE MICROPHONE. |  |
+| SPECIAL (adj) | For a specified function | TIGHTEN THE SPECIAL NUT. |  |
+
+<!-- Page 376 of 434 -->
+|---|---|---|---|
+| SPECIALLY (adv) | In a special manner | THIS EXTRACTOR IS SPECIALLY MADE TO REMOVE THESE PINS. |  |
+| specific (adj) — UNNAPPROVED | APPROVED (adj) SPECIFIED (adj) | USE APPROVED TOOLS TO PREVENT POSSIBLE DAMAGE. THESE AREAS HAVE SPECIFIED DAMAGE LIMITS. | Use specific tools to preclude the possibility of damage. These areas have specific damage limits. |
+| specifically (adv) — UNNAPPROVED | SPECIALLY (adv) | THESE MATERIALS ARE SPECIALLY MADE FOR PLASTIC SURFACES. | These materials are specifically designed for plastic surfaces. |
+| SPECIFIED (adj) | Given in, identified in, or related to a specification, regulation, or procedure | INFLATE THE TIRE WITH NITROGEN TO THE SPECIFIED PRESSURE. |  |
+| speck (n) — UNNAPPROVED | PARTICLE (n) | REMOVE ALL PARTICLES OF DUST FROM THE LENS. | Remove all specks of dust from the lens. |
+| speech (n) — UNNAPPROVED | VOICE (n) | IF YOU CANNOT HEAR THE VOICE, REPLACE THE UNIT. | If the speech is not audible, replace the unit. |
+| SPEED (n) | The rate of movement | ON THIS ROAD, THE MAXIMUM PERMITTED SPEED IS 30 MPH. |  |
+| SPHERICAL (adj) | That has the shape of a sphere | THE ACCUMULATORS ARE SPHERICAL AND HAVE BLADDERS. |  |
+| SPILL (v), SPILLS, SPILLED, SPILLED | To accidentally flow, or cause to flow, out of a container | IF THE ELECTROLYTE SPILLS, REMOVE IT IMMEDIATELY. IF YOU SPILL THE ELECTROLYTE, REMOVE IT IMMEDIATELY. |  |
+
+<!-- Page 377 of 434 -->
+|---|---|---|---|
+| spillage (n) — UNNAPPROVED | CONTAMINATION (n) | FIND THE AREA OF MERCURY CONTAMINATION. | Find the area of the mercury spillage. |
+|  | SPILL (v) | IF ACID SPILLS, CLEAN THE AREA. | After acid spillage, clean the area. |
+| spin (v) — UNNAPPROVED | TURN … QUICKLY | TURN THE WHEEL QUICKLY WITH YOUR HAND. | Spin the wheel by hand. |
+| splash (v) — UNNAPPROVED | GET (v) | IF YOU GET FLUID IN YOUR EYES, GET MEDICAL AID. | If fluid splashes into eyes, get medical aid. |
+| splined (adj) — UNNAPPROVED | SPLINE (TN) | THE DRIVE SHAFT HAS SPLINES. | The drive shaft is splined. |
+| split (adj) — UNNAPPROVED | DAMAGED (adj) | REPLACE DAMAGED COVERS. | Split covers must be replaced. |
+| split (v) — UNNAPPROVED | DIVIDE (v) | DIVIDE THE ELECTRICAL LOAD BETWEEN THE TWO BUS BARS. | Split the electrical load between the two bus bars. |
+|  | BREAK (v) | WHEN YOU APPLY THE MAXIMUM TEST PRESSURE, MAKE SURE THAT THE HOUSING DOES NOT BREAK | Make sure that the housing does not split when you apply the maximum test pressure. |
+| spot (n) — UNNAPPROVED | MARK (n) | A RED MARK ON THE PIN IDENTIFIES THE LUBRICATION POINT. | A red spot on the pin identifies the lubrication point. |
+|  | STAIN (TN) | REMOVE ALL STAINS FROM THE CARPET WITH SOAP AND WARM WATER. | Remove any spots from the carpet with soap and warm water. |
+| spot (v) — UNNAPPROVED | FIND (v) | IF YOU FIND CORROSION IN THIS AREA, USE REPAIR SCHEME No. 3. | If you spot corrosion in this area, use repair scheme No. 3. |
+| SPRAY (n) | A jet of very small drops of liquid | THE SEALANT IS RESISTANT TO SALT SPRAY. |  |
+
+<!-- Page 378 of 434 -->
+|---|---|---|---|
+| SPRAY (v) SPRAYS, SPRAYED, SPRAYED | To apply as a spray | DO NOT SPRAY DISINFECTANTS DIRECTLY ONTO THE CARPETS OR INSTRUMENT PANELS. |  |
+| spread (v) — UNNAPPROVED | APPLY (v) | APPLY THE COMPOUND EQUALLY. | Spread compound evenly. |
+| spring (v) — UNNAPPROVED | MOVE (v) | MAKE SURE THAT THE PINS DO NOT MOVE OUT OF THE NOTCH. | Make certain that the pins do not spring out of the notch. |
+| spurious (adj) — UNNAPPROVED | UNWANTED (adj) | IF THERE ARE UNWANTED INDICATIONS, DO A TEST. | In the event of spurious indications, do a test |
+| stability (n) — UNNAPPROVED | STABLE (adj) | BEFORE YOU LIFT THE VEHICLE WITH JACKS, MAKE SURE THAT IT IS STABLE. | Before jacking up the vehicle, make sure that its stability is ensured. |
+| stabilization (n) — UNNAPPROVED | STABLE (adj) | WHEN THE TEMPERATURE IS STABLE, MAKE SURE THAT THE OIL PRESSURE DECREASES. | Check that oil pressure drops after stabilization of temperature. |
+| stabilize (v) — UNNAPPROVED | STABLE (adj) | LET THE V-BARS BECOME STABLE. | Allow V-bars to stabilize. |
+| STABLE (adj) | That does not change or move | MAKE SURE THAT THE TEMPERATURE INDICATIONS ARE STABLE. |  |
+| stage (n) — UNNAPPROVED | STEP (n) | DURING THIS STEP, DO NOT REMOVE THE PIN. | Do not remove the pin at this stage. |
+| stained (adj) — UNNAPPROVED | DIRTY (adj) | IF THE CARPET IS DIRTY, CLEAN IT WITH MATERIAL No. 8. | If the carpet is stained, clean it with Material No. 8. |
+|  | STAIN (TN) | IF THERE ARE HYDRAULIC FLUID STAINS ON THE COVER, EXAMINE THE LINE COUPLINGS. | If the cover is stained by hydraulic fluid, check line couplings. |
+
+<!-- Page 379 of 434 -->
+|---|---|---|---|
+| stamp (v) — UNNAPPROVED | PUT (v) (WITH A STAMP [TN] OR STAMPS [TN]) | PUT THE TEST DATE ON THE CYLINDER NECK WITH THE APPLICABLE STAMP. | Stamp the test date on the cylinder neck. |
+|  | IDENTIFY (v) (WITH A STAMP [TN] OR STAMPS [TN]) | IDENTIFY THE MANUFACTURING DATE ON THE NAMEPLATE WITH THE APPLICABLE STAMP. | Stamp the manufacturing date on the nameplate. |
+| stand (v) — UNNAPPROVED | STAY (v) | STAY AWAY FROM SURFACES THAT MOVE. | Do not stand near moving surfaces. |
+| STANDARD (adj) | Related to equipment and procedures that are normally used | IN THIS PROCEDURE, USE STANDARD TOOLS. |  |
+| starboard (adj) — UNNAPPROVED | RIGHT (adj) | ON THE RIGHT WING, MOVE THE AILERONS UP. | On the starboard wing, move the ailerons up. |
+| START (n) | The beginning of a movement or operation | MOVEMENT CAN BE SLOW AT THE START. |  |
+| START (v), STARTS, STARTED, STARTED | 1. To begin a procedure, movement, or operation | START THE ENGINE. |  |
+|  | 2. To come into being, activity, or operation | MEASURE THE BEND RADIUS OF THE HOSE FROM THE POINT WHERE THE BEND STARTS. |  |
+| state (n) — UNNAPPROVED | CONDITION (n) | EXAMINE THE CONDITION OF THE UNIT. | Examine the state of the unit. |
+| state (v) — UNNAPPROVED | TELL (v) | UNLESS THE MANUFACTURER'S INSTRUCTIONS TELL YOU DIFFERENTLY, DO THE PROCEDURE THAT FOLLOWS. | Unless otherwise stated by the manufacturer, do the following procedure. |
+| station (v) — UNNAPPROVED | PUT (v) | PUT A PERSON NEAR THE FUEL TANK. | Station a person near the fuel tank. |
+
+<!-- Page 380 of 434 -->
+|---|---|---|---|
+| stationary (adj) — UNNAPPROVED | STABLE (adj) | WHEN THE PRESSURE IS STABLE, CLOSE THE VALVE. | When the pressure is stationary, close the valve. |
+|  | STOP (v) | WHEN THE FAN STOPS, MEASURE THE TEMPERATURE. | When the fan is stationary, measure the temperature. |
+| STAY (v), STAYS, STAYED | To continue to be in a location or condition | MAKE SURE THAT THE ASSEMBLED PARTS STAY ALIGNED. |  |
+| No other verb forms. |  |  |  |
+| steadily (adv) — UNNAPPROVED | CONTINUOUSLY (adv) | IF THE TEMPERATURE INCREASES CONTINUOUSLY, STOP THE ENGINE. | If the temperature increases steadily, stop the engine. |
+| steady (adj) — UNNAPPROVED | STABLE (adj) | MAKE SURE THAT THE SYSTEM PRESSURE IS STABLE. | Make sure that the system pressure is steady. |
+| STEP (n) | A specified part of a procedure | DO STEPS 13 THRU 16 A MINIMUM OF THREE TIMES. |  |
+| stick (v) — UNNAPPROVED | ATTACH (v) | ATTACH THE LABEL TO THE SURFACE. | Stick the label to the surface. |
+|  | FREELY (adv) | MAKE SURE THAT THE FAN BLADES MOVE FREELY. | Check that the fan blades do not stick. |
+|  | CATCH (v) | REMOVE ALL JEWELRY THAT CAN CATCH IN THE MACHINE. | Remove all jewelry that can get stuck in the machine. |
+| sticky (adj) — UNNAPPROVED | TACKY (adj) | WHEN THE CEMENT IS TACKY, PUT THE PATCH ON THE SURFACE. | Put the patch on the surface when the cement is sticky. |
+| stiff (adj) — UNNAPPROVED | MOVE (v) | IF THE PISTON DOES NOT MOVE EASILY IN THE SLEEVE, DO A DIMENSIONAL INSPECTION OF THE BE PARTS. | If the piston is stiff, check the dimensions of the piston and sleeve. |
+
+<!-- Page 381 of 434 -->
+|---|---|---|---|
+| still (adv) — UNNAPPROVED | STAY (v) CONTINUE (v) | MAKE SURE THAT THE “OVHT” LIGHT STAYS ON. MAKE SURE THAT THE ROTOR CONTINUES TO TURN. | Make sure that the “OVHT” light is still illuminated. Make sure that the rotor still turns. |
+| stimulate (v) — UNNAPPROVED | INCREASE (v) | INCREASE THE AIRFLOW. | Stimulate the airflow. |
+| stir (v) — UNNAPPROVED | MIX (v) | MIX THE BONDING MATERIAL WITH A SPATULA. | Stir the bonding material with a spatula. |
+| STOP (v), STOPS, STOPPED, STOPPED | 1. To cause the end of a procedure, movement, or an operation 2. To come to an end | STOP THE ENGINE. WHEN THE FLOW STOPS, REMOVE THE DRAIN HOSE. |  |
+| store (v) — UNNAPPROVED | KEEP (v) CONTAIN (v) STORAGE (TN) | KEEP THE CARTRIDGES IN A SAFETY AREA. THE FIRE EXTINGUISHER BOTTLES CONTAIN A DRY CHEMICAL POWDER AGENT. WHEN YOU PUT THE UNIT INTO STORAGE, OBEY THE APPLICABLE STORAGE INSTRUCTIONS. | Cartridges should be stored in a safety area. The fire extinguisher bottles store a dry chemical powder agent. When you store the unit, obey the applicable storage instructions. |
+| STOW (v), STOWS, STOWED, STOWED | To move or cause to move into a specified position of storage. | STOW THE LIFE VEST SAFELY BELOW THE PASSENGER SEAT. MAKE SURE THAT THE THRUST REVERSER STOWS WHEN YOU PUSH THE QUADRANT CONTROL FORWARD. |  |
+
+<!-- Page 382 of 434 -->
+|---|---|---|---|
+| STRAIGHT (adj) (STRAIGHTER, (STRAIGHTEST) | Without curves or bends | MAKE SURE THAT THE STRAIGHT PART OF THE RIGGING PIN IS SMOOTH. |  |
+| straighten (v) — UNNAPPROVED | STRAIGHT (adj) | DO NOT TRY TO MAKE THE BENDS IN THE CABLE STRAIGHT. | Do not try to straighten the bends in the cable. |
+| strain (v) — UNNAPPROVED | FILTER (TN) STRAIN (TN) | BEFORE YOU USE THE OIL, PUT IT THROUGH A FILTER. DO NOT PUT STRAIN ON THE BELLOWS. | Strain the oil before use. Do not strain bellows. |
+| strap (v) — UNNAPPROVED | ATTACH (v) (WITH STRAPS [TN]) | ATTACH THE CABLES TO THE STRUCTURE WITH AN APPLICABLE STRAP. | Strap the cables to the structure. |
+| stress (v) — UNNAPPROVED | FORCE (TN) | DO NOT PUT TOO MUCH FORCE ON THE DUCTING. | Do not stress the ducting unnecessarily. |
+| strictly (adv) — UNNAPPROVED | FULLY (adv) | FULLY OBEY THE SAFETY PRECAUTIONS. | Strictly obey the safety precautions. |
+| strike (v) — UNNAPPROVED | HIT (v) | MAKE SURE THAT THE SLING DOES NOT HIT THE SURFACE. | Make certain that the sling does not strike the surface. |
+| STRIP (n) | A piece of material that is long and thin, but not wide | PUT A STRIP OF ADHESIVE TAPE ALONG THE INSULATION BLANKET. |  |
+| strip (v) — UNNAPPROVED | REMOVE (v) | REMOVE THE INSULATION FROM THE WIRE. | Strip the insulation from the wire. |
+| STRIPE (n) | A line on a surface which is a different color | THE FLAG HAS RED AND WHITE STRIPES. |  |
+| striped (adj) — UNNAPPROVED | STRIPE (n) | THE FLAG HAS RED AND WHITE STRIPES. | The flag is striped red and white. |
+| stroke (n) — UNNAPPROVED | TRAVEL (n) | TO BLEED THE BRAKING SYSTEM, OPERATE THE HAND PUMP HANDLE THROUGH ITS FULL TRAVEL. | Bleed the braking system by applying full strokes to the hand pump handle. |
+
+<!-- Page 383 of 434 -->
+|---|---|---|---|
+| STRONG (adj) (STRONGER, (STRONGEST) | With much strength, power, or concentration | WHEN WINDS ARE STRONG, MOOR THE AIRCRAFT CAREFULLY. |  |
+| STRUCTURAL (adj) | Related to the structure | THE CHASSIS IS A STRUCTURAL COMPONENT OF THE VEHICLE. |  |
+| STRUCTURALLY (adv) | Related to the structure | THE LIST GIVES YOU STRUCTURALLY IMPORTANT ITEMS. |  |
+| STRUCTURE (n) | 1. A construction 2. The arrangement of something | ATTACH THE WIRES TO THE STRUCTURE. THE INTRODUCTION GIVES YOU THE STRUCTURE OF THE MAINTENANCE MANUAL. |  |
+| SUBASSEMBLY (n) | An assembly that is a part of a larger assembly | DO NOT CHANGE THE POSITION OF THE SUBASSEMBLIES. |  |
+| submerge (v) — UNNAPPROVED | PUT (v) | PUT THE FILTER ELEMENT FULLY INTO THE FLUID. | Submerge the filter element in the fluid. |
+| submit (v) — UNNAPPROVED | SEND (v) | SEND THE METAL PARTICLES TO A LABORATORY FOR ANALYSIS. | Submit the metal particles to a laboratory for analysis. |
+| SUBSEQUENT (adj) | Following in an unspecified time or sequence Use NEXT (adj) for the first occurrence that follows immediately in time or sequence. | A SUBSEQUENT REPAIR WILL BE FOR THE NEW CONFIGURATION ONLY. DO THE NEXT INSPECTION. | Do the immediately subsequent inspection. |
+
+<!-- Page 384 of 434 -->
+|---|---|---|---|
+| SUBSEQUENTLY (adv) | After an unspecified time Use THEN (adv) for an occurrence that follows immediately in time or sequence. | MAKE SURE THAT THE TOOL IS SUBSEQUENTLY AVAILABLE FOR THE INSTALLATION PROCEDURE. LIFT THE COVER. THEN, PULL THE HANDLE. | Lift the cover and subsequently pull the handle. |
+| subsequent to (prep) | AFTER (conj) | AFTER YOU INSTALL THE COMPONENT, REMOVE THE HANDLING TOOL. | Remove the handling tool subsequent to the installation of the component. |
+| substance (n) — UNNAPPROVED | MATERIAL (n) | THE PRIMER CONTAINS A MATERIAL THAT PREVENTS CORROSION. | The primer contains a substance that prevents corrosion. |
+| substitute (adj) — UNNAPPROVED | EQUIVALENT (adj) ALTERNATIVE (adj) | IF THE SPECIFIED MATERIAL IS NOT AVAILABLE, YOU CAN USE AN EQUIVALENT ONE. IF THIS SPECIAL TOOL IS NOT AVAILABLE, USE AN ALTERNATIVE METHOD. | A substitute material may be used if the specified one is not available. If this special tool is not available, use a substitute method. |
+| substitute (n) — UNNAPPROVED | ALTERNATIVE (n) | YOU CAN USE ALTERNATIVES FOR THESE ITEMS. | Equivalent substitutes may be used for these items. |
+| substitute (v) — UNNAPPROVED | REPLACE (v) | DO NOT REPLACE THE SELF-LOCKING NUTS WITH PLAIN NUTS. | Do not substitute the self-locking nuts with plain nuts. |
+| SUBTRACT (v), SUBTRACTS, SUBTRACTED, SUBTRACTED | To take from a number or quantity | SUBTRACT COEFFICIENT "A" FROM THE INDICATION. |  |
+
+<!-- Page 385 of 434 -->
+|---|---|---|---|
+| successful (adj) — UNNAPPROVED | CORRECT (adj) SATISFACTORY (adj) | IF THE TEST RESULTS ARE NOT CORRECT, REPLACE THE UNIT. IF THE TEST RESULTS ARE NOT SATISFACTORY, REPLACE THE UNIT. | If the test is not successful, replace the unit. If the test is not successful, replace the unit. |
+| SUCH (adj) | Of the same group | WHEN YOU DO WORK ON SUCH SYSTEMS, USE GOGGLES. |  |
+| such as | FOR EXAMPLE | WHEN YOU REMOVE THE STUD, USE APPLICABLE TOOLS. FOR EXAMPLE, USE A PLASTIC MALLET AND A PUNCH. | When you remove the stud, use applicable tools such as a plastic mallet and a punch. |
+| suck (v) — UNNAPPROVED | REMOVE (v) (WITH SUCTION [TN]) | REMOVE THE UNWANTED MATERIAL WITH SUCTION. | Suck out the unwanted material. |
+| SUDDEN (adj) | That occurs in a short time | SUDDEN MOVEMENT CAN CAUSE DAMAGE TO THE LIMIT STOPS. |  |
+| SUDDENLY (adv) | In a sudden manner | IF THE TEMPERATURE INCREASES SUDDENLY, STOP THE ENGINE. |  |
+| SUFFICIENT (adj) | Not less (or more) than necessary | ADJUST THE CLAMP UNTIL THERE IS SUFFICIENT FRICTION TO KEEP IT IN POSITION. |  |
+| SUFFICIENTLY (adv) | Not less (or more) than necessary | WHEN THE PAINT IS SUFFICIENTLY SOFT, REMOVE IT WITH A PLASTIC SPATULA. |  |
+| suitable (adj) — UNNAPPROVED | APPLICABLE (adj) CORRECT (adj) | PUT AN APPLICABLE SCREWDRIVER IN THE SLOT. PUT THE CORRECT PLUGS ON THE DISCONNECTED LINES. | Put a suitable screwdriver in the slot. Put suitable plugs on the disconnected lines. |
+
+<!-- Page 386 of 434 -->
+|---|---|---|---|
+| suitably (adv) — UNNAPPROVED | SUFFICIENTLY (adv) | WHEN THE PAINT IS SUFFICIENTLY SOFT, REMOVE IT WITH A PLASTIC SPATULA. | When the paint is suitably soft, remove it with a plastic spatula. |
+| SUM (n) | The result when you add | CALCULATE THE SUM OF THE LOADS FOR EACH AREA. |  |
+| SUPPLY (n) | Something that is supplied | STOP THE ELECTRICAL POWER SUPPLY. |  |
+| SUPPLY (v), SUPPLIES, SUPPLIED, SUPPLIED | 1. To give something that is necessary 2. To make something available for use | SUPPLY ELECTRICAL POWER TO THE AUXILIARY SYSTEM. THE POWER UNIT SUPPLIES ELECTRICITY TO THE CONTROL SYSTEM. |  |
+| support (n) — UNNAPPROVED | SUPPORT (TN) HOLD (v) | BEFORE YOU DISCONNECT THE ITEM, PUT A SUPPORT BELOW IT. WHILE YOU DISCONNECT THE COMPONENT, MAKE SURE THAT A PERSON HOLDS IT. | Make certain there is adequate support for the item before disconnecting it. Make certain that someone provides adequate support during component disconnection. |
+| support (v) — UNNAPPROVED | HOLD (v) SUPPORT (TN) | HOLD THE SWITCH AND REMOVE THE SCREWS. PUT A SUPPORT BELOW THE PUMP. THEN, REMOVE IT FROM THE DRIVE SHAFT. | Support the switch and remove the screws. Support the pump, then remove it from the drive shaft. |
+| SURE (adj) | Certain | IF YOU ARE NOT SURE THAT A PART IS SERVICEABLE, DISCARD IT. |  |
+| SURFACE (n) | One or more of the faces of something | CLEAN THE SURFACE WITH A SOFT, DRY CLOTH. |  |
+
+<!-- Page 387 of 434 -->
+|---|---|---|---|
+| surplus (adj) — UNNAPPROVED | UNWANTED (adj) | REMOVE THE UNWANTED GREASE. | Wipe off surplus grease. |
+| surrounding (adj) — UNNAPPROVED | ADJACENT (adj) AROUND (prep) | CLEAN THE MOUNTING AND THE ADJACENT AREA. REMOVE ALL SEALANT THAT IS AROUND THE HOLE. | Clean the mounting and the surrounding area. Remove all sealant surrounding the hole. |
+| survey (v) — UNNAPPROVED | EXAMINE (v) INSPECTION (n) | EXAMINE THE SURFACE. DO AN INSPECTION OF THE SURFACE. | Survey the surface. Survey the surface. |
+| suspect (adj) — UNNAPPROVED | THINK (v) | IF YOU THINK THAT THE VALVE IS UNSERVICEABLE, REMOVE IT. | Remove the suspect valve. |
+| suspect (v) — UNNAPPROVED | THINK (v) | IF YOU THINK THAT THE POWER UNIT DOES NOT OPERATE CORRECTLY, DO A SYSTEM CHECK. | If you suspect that the power unit does not operate correctly, do a system check. |
+| suspend (v) — UNNAPPROVED | HANG (v) STOP (v) | HANG THE ENGINE IN A FIREPROOF BAY. IF THE CABLE CATCHES, STOP THE PROCEDURE. | Suspend the engine in a fireproof bay. If the cable catches, suspend all operations. |
+| SWALLOW (v), SWALLOWS, SWALLOWED, SWALLOWED | To take through the mouth and esophagus into the stomach Use this word for safety instructions only. | IF YOU SWALLOW NITRIC ACID, DO NOT CAUSE VOMITING. GET MEDICAL AID IMMEDIATELY. |  |
+| swap (v) — UNNAPPROVED | INTERCHANGE (v) | INTERCHANGE THE COMPUTERS 1 AND 2. THEN DO THE TEST AGAIN. | Swap computers 1 and 2. Then do the test again. |
+| sweep (v) — UNNAPPROVED | SCAN (TN) | MAKE A SCAN OF THE FREQUENCY BAND. | Sweep the frequency band. |
+
+<!-- Page 388 of 434 -->
+|---|---|---|---|
+| swing (v) — UNNAPPROVED | MOVE (v) CALIBRATE (v) | MOVE THE SHOCK ABSORBERS INTO THEIR CORRECT POSITIONS. YOU CAN CALIBRATE ALL THE COMPASS SYSTEMS AT THE SAME TIME. | Swing the shock absorbers into their correct positions. All compass systems may be swung simultaneously. |
+| switch (v) — UNNAPPROVED | SET (v) | SET THE SELECTOR TO "SYSTEM DISPLAY." | Switch the selector to "SYSTEM DISPLAY." |
+| switch off (v) — UNNAPPROVED | SET (v) STOP (v) DE-ENERGIZE (v) | SET THE NAV 1 SWITCH TO "OFF." STOP THE UNIT AFTER 5 MINUTES. DE-ENERGIZE THE ELECTRICAL SYSTEM. | Switch off NAV 1. Switch off the unit after 5 minutes. Switch the electrical system off. |
+| switch on (v) — UNNAPPROVED | SET (v) START (v) ENERGIZE (v) | SET THE NAV 1 SWITCH TO "ON." START THE UNIT. ENERGIZE THE ELECTRICAL SYSTEM. | Switch on NAV 1. Switch on the unit. Switch the electrical system on. |
+| SYMBOL (n) | A written sign that identifies a quantity, operation, item, or condition | THE SPECIFICATION GIVES THE SYMBOLS FOR RELAYS, DIODES, AND OTHER PARTS OF THE SYSTEM. |  |
+| SYMMETRICAL (adj) | That has or is with symmetry | MAKE SURE THAT THE POSITION OF THE PARTS IS SYMMETRICAL. |  |
+| SYMMETRICALLY (adv) | In a symmetrical manner | THE ELEVATORS MUST MOVE SYMMETRICALLY. |  |
+| SYMPTOM (n) | A sign of a condition | IF THE SYMPTOMS OCCUR AGAIN, REMOVE THE UNIT. |  |
+| synchronize (v) — UNNAPPROVED | ADJUST (v) | ADJUST COMPASS SYSTEM 1 UNTIL IT AGREES WITH COMPASS SYSTEM 2. | Synchronize compass system 1 with compass system 2. |
+
+<!-- Page 389 of 434 -->
+|---|---|---|---|
+| SYNCHRONIZED (adj) | 1. That operates at the same time 2. That agrees with | MAKE SURE THAT THE TWO ROTORS ARE SYNCHRONIZED. MAKE SURE THAT THE TIMER IS SYNCHRONIZED WITH THE GPS CLOCK. |  |
+| SYSTEM (n) | An assembly of related parts to do a specified operation | DO NOT FILL THE SYSTEM DIRECTLY FROM A HIGH-PRESSURE CYLINDER. |  |
