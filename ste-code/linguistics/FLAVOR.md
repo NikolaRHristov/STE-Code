@@ -1,7 +1,7 @@
 # STE-Code Flavor: Linguistic Layer v1.0.0
 
-> **Flavor version:** FLAVOR-1.0.0
-> **Base standard:** STANDARD-1.0.0 (54 rules, 22 categories, 8 levels)
+> **Flavor version:** FLAVOR-1.1.0
+> **Base standard:** STANDARD-1.1.0 (54 rules, 22 categories, 8 levels)
 > **Relationship:** Additive — extends STANDARD without modifying it
 > **Status:** Specification complete; grounding, enrichment, and verification pending (see workflows)
 

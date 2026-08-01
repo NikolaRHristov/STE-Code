@@ -87,7 +87,15 @@ def git(*args: str) -> str:
 
 
 def _versions() -> dict:
-    """Current released version per track, read from git tags."""
+    """Version per track, from tags.
+
+    `release.py` exports STE_RELEASE_VERSION while cutting a release: the new
+    tag does not exist when claims are synced, and stamps must carry the
+    version being released, not the previous one.
+    """
+    override = os.environ.get("STE_RELEASE_VERSION")
+    if override:
+        return {"core": override, "STANDARD": override, "FLAVOR": override}
     tags = git("tag", "--list").splitlines()
     sem = re.compile(r"^(?:(?P<track>[A-Z]+)-)?v?(?P<v>\d+\.\d+\.\d+)$")
     tracks: dict[str, list[tuple[int, ...]]] = {}

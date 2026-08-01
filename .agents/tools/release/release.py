@@ -212,9 +212,10 @@ def main() -> int:
         raise SystemExit(f"Not a semver version: {version!r}")
 
     execute = args.execute and not args.dry_run
-    # facts.py reads this: the new tag does not exist yet, so the release date
-    # cannot be derived from git during this run.
+    # facts.py reads these: the new tag does not exist yet at sync time, so
+    # stamps must be told the version and date being released.
     os.environ["STE_RELEASE_DATE"] = date.today().isoformat()
+    os.environ["STE_RELEASE_VERSION"] = version
     r = Runner(execute)
     mode = "EXECUTE" if execute else "DRY RUN"
     print(f"STE-Code release {current} -> {version}   [{mode}]\n")

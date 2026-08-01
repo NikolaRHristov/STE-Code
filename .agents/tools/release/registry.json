@@ -37,8 +37,7 @@
     { "id": "citation-date", "file": "CITATION.cff", "pattern": "^date-released: \"(?P<value>[\\d-]+)\"$", "fact": "release_date" },
     { "id": "flavor-version", "file": "ste-code/linguistics/FLAVOR.md", "pattern": "> \\*\\*Flavor version:\\*\\* FLAVOR-(?P<value>[\\d.]+)", "fact": "versions.flavor" },
     { "id": "flavor-base", "file": "ste-code/linguistics/FLAVOR.md", "pattern": "> \\*\\*Base standard:\\*\\* STANDARD-(?P<value>[\\d.]+)", "fact": "versions.standard" },
-    { "id": "roadmap-version", "file": "docs/roadmap/ROADMAP.md", "pattern": "> \\*\\*Version:\\*\\* FLAVOR-(?P<value>[\\d.]+)", "fact": "versions.flavor" },
-    { "id": "benchmark-schema", "file": ".agents/benchmark/schema.json", "pattern": "\"version\": \"(?P<value>[\\d.]+)\"", "fact": "versions.core" }
+    { "id": "roadmap-version", "file": "docs/roadmap/ROADMAP.md", "pattern": "> \\*\\*Version:\\*\\* FLAVOR-(?P<value>[\\d.]+)", "fact": "versions.flavor" }
   ],
 
   "count_claims": [

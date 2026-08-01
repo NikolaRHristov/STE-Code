@@ -10,6 +10,7 @@ a real claim site.
 """
 
 import importlib.util as ilu
+import os
 import re
 import sys
 from pathlib import Path
@@ -226,6 +227,22 @@ check("release: owned paths exclude other sessions' dirs",
               for p in rel_mod.OWNED_PATHS),
       str(rel_mod.OWNED_PATHS))
 check("release: CHANGELOG.md is an owned path", "CHANGELOG.md" in rel_mod.OWNED_PATHS)
+check("registry: no claim site outside the owned paths",
+      all(any(c["file"] == p or c["file"].startswith(p + "/") for p in rel_mod.OWNED_PATHS)
+          for g in ("badges", "version_stamps") for c in reg[g]),
+      str([c["file"] for g in ("badges", "version_stamps") for c in reg[g]
+           if not any(c["file"] == p or c["file"].startswith(p + "/")
+                      for p in rel_mod.OWNED_PATHS)]))
+# Ordering: sync runs before tagging, so facts must accept the version being
+# released rather than reading the (not yet created) tag.
+os.environ["STE_RELEASE_VERSION"] = "9.9.9"
+os.environ["STE_RELEASE_DATE"] = "2099-01-01"
+forced = facts.collect()
+check("facts: release version override applies to every track",
+      all(v == "9.9.9" for v in forced["versions"].values()), str(forced["versions"]))
+check("facts: release date override applies", forced["release_date"] == "2099-01-01")
+del os.environ["STE_RELEASE_VERSION"], os.environ["STE_RELEASE_DATE"]
+check("facts: overrides are not sticky", facts.collect()["versions"]["core"] != "9.9.9")
 # Regression: CHANGELOG.md is created by step 4, so the staging list must be
 # resolved AFTER it exists, not reused from the preflight snapshot.
 commit_step = src.split('print("\\n6. commit")')[1].split('print("\\n7. tag")')[0]

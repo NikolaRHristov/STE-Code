@@ -1,6 +1,6 @@
 # STE-Code Linguistic Layer — Master Integration Roadmap
 
-> **Version:** FLAVOR-1.0.0
+> **Version:** FLAVOR-1.1.0
 > **Status:** Plan complete. Phase 0 (state reconciliation) is the blocker — nothing proceeds until it completes.
 > **Rule:** Additive only — nothing deleted, no rule text modified. Appendices, new files, and new directories only.
 
