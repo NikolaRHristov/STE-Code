@@ -74,13 +74,22 @@ def _now_iso() -> str:
 
 
 def signature(technique: str, placement: str, timing: str, category: str,
-              missed_principles, forbidden_found) -> str:
-    """Stable content hash of a failure signature."""
+              missed_principles, forbidden_found,
+              position_aware: bool = False, sequence_position: int = -1) -> str:
+    """Stable content hash of a failure signature.
+
+    When ``position_aware`` is True, ``sequence_position`` is mixed into the
+    hash blob so the same (technique, placement, ...) at different sequence
+    positions produces a *different* lesson key. This is what lets WHITE detect
+    temporal attacks (e.g. a compliance_spoof that only escapes after a helpful
+    BLUE capsule). Default False keeps existing lesson keys stable.
+    """
     princ = sorted(str(p) for p in (missed_principles or []))
     forb = sorted(str(f) for f in (forbidden_found or []))
-    blob = json.dumps(
-        [technique, placement, timing, category, princ, forb],
-        separators=(",", ":"), sort_keys=True)
+    blob = [technique, placement, timing, category, princ, forb]
+    if position_aware:
+        blob.append("pos:{}".format(sequence_position))
+    blob = json.dumps(blob, separators=(",", ":"), sort_keys=True)
     return hashlib.blake2s(blob.encode("utf-8"), digest_size=8).hexdigest()
 
 
@@ -123,6 +132,11 @@ class Knowledge:
                 L = dict(v)
                 L["rounds_seen"] = set(L.get("rounds_seen", []))
                 L["variants_affected"] = set(L.get("variants_affected", []))
+                # Unit 1 capsule provenance: restore set/list on load
+                if "capsule_ids" in L and not isinstance(L["capsule_ids"], set):
+                    L["capsule_ids"] = set(L["capsule_ids"])
+                L.setdefault("sequence_positions", [])
+                L.setdefault("first_sequence_id", "")
                 self.lessons[k] = L
         # non-dict lessons (legacy/corrupt/foreign shape) are ignored, not fatal
         self._patterns = {k: dict(v) for k, v in (raw.get("patterns") or {}).items() if isinstance(v, dict)}
@@ -134,6 +148,11 @@ class Knowledge:
             L = dict(L)
             L["rounds_seen"] = sorted(L.get("rounds_seen", []))
             L["variants_affected"] = sorted(L.get("variants_affected", []))
+            # Unit 1 capsule provenance: sets/lists must be JSON-serializable
+            if isinstance(L.get("capsule_ids"), set):
+                L["capsule_ids"] = sorted(L["capsule_ids"])
+            if isinstance(L.get("sequence_positions"), list):
+                L["sequence_positions"] = sorted(L["sequence_positions"])
             out[k] = L
         return out
 
@@ -164,10 +183,20 @@ class Knowledge:
     def record_failure(self, technique, placement, timing, category,
                        missed_principles, forbidden_found, variant: str,
                        round_n: int, correctness_score: float,
-                       input_text: str, current_round: int) -> str:
-        """Ingest one escape. Returns the lesson signature (id)."""
+                       input_text: str, current_round: int,
+                       capsule_id: str = "", sequence_position: int = -1,
+                       sequence_id: str = "") -> str:
+        """Ingest one escape. Returns the lesson signature (id).
+
+        Unit 1 (capsule provenance): ``capsule_id`` and ``sequence_position``
+        let WHITE ask whether a lesson only appears when the capsule is at a
+        given position in a sequence (a temporal dependency invisible to a
+        single-capsule run). They are optional and ignored by existing callers.
+        """
         sig = signature(technique, placement, timing, category,
-                        missed_principles, forbidden_found)
+                        missed_principles, forbidden_found,
+                        position_aware=(sequence_position >= 0),
+                        sequence_position=sequence_position)
         now = _now_iso()
         if sig not in self.lessons:
             self.lessons[sig] = {
@@ -182,6 +211,10 @@ class Knowledge:
                 "variants_affected": set(),
                 "scores": [], "examples": [],
                 "a": 0, "b": 0, "last_seen_round": current_round,
+                # --- Unit 1 capsule provenance ---
+                "capsule_ids": set(),
+                "sequence_positions": [],
+                "first_sequence_id": sequence_id or "",
             }
         L = self.lessons[sig]
         L["occurrences"] += 1
@@ -189,6 +222,12 @@ class Knowledge:
         L["last_seen_round"] = round_n
         L["rounds_seen"].add(round_n)
         L["variants_affected"].add(variant)
+        if capsule_id:
+            L["capsule_ids"].add(capsule_id)
+        if sequence_position >= 0:
+            L["sequence_positions"].append(sequence_position)
+        if sequence_id and not L["first_sequence_id"]:
+            L["first_sequence_id"] = sequence_id
         L["scores"].append(correctness_score)
         # cap + dedup example inputs
         ex = _norm(input_text)[:300]

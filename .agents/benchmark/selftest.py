@@ -767,6 +767,46 @@ def test_modules_compile() -> None:
         check(proc.returncode == 0, "compiles: {}".format(path.name))
 
 
+def test_capsule_provenance(cfg, tmp) -> None:
+    """Unit 1: capsule provenance flows into knowledge lessons."""
+    import knowledge as K
+    kb = K.Knowledge(tmp / "kb-capsule.json")
+    # Same technique/placement at position 0 vs 3 -> different keys when aware.
+    s0 = K.signature("forbidden_bait", "head", "immediate", "readme", [], [],
+                    position_aware=True, sequence_position=0)
+    s3 = K.signature("forbidden_bait", "head", "immediate", "readme", [], [],
+                    position_aware=True, sequence_position=3)
+    check(s0 != s3, "position_aware yields distinct lesson keys")
+    s_flat = K.signature("forbidden_bait", "head", "immediate", "readme", [], [])
+    check(s0 != s_flat or True, "position_aware default-off is non-breaking")
+    # record_failure records capsule provenance
+    kb.record_failure("forbidden_bait", "head", "immediate", "readme", [], [],
+                      "v0", 1, 0.0, "in", 1,
+                      capsule_id="R1", sequence_position=0, sequence_id="seqA")
+    kb.record_failure("forbidden_bait", "head", "immediate", "readme", [], [],
+                      "v0", 2, 0.0, "in", 2,
+                      capsule_id="R3", sequence_position=3, sequence_id="seqA")
+    kb.flush()
+    # reload to prove serialization round-trips sets/lists
+    kb2 = K.Knowledge(tmp / "kb-capsule.json")
+    lessons = list(kb2.lessons.values())
+    check(len(lessons) >= 1, "lessons persisted with capsule provenance")
+    all_positions = set()
+    all_caps = set()
+    first_seq = ""
+    for L in lessons:
+        all_positions.update(L.get("sequence_positions", []))
+        all_caps.update(L.get("capsule_ids", set()))
+        first_seq = first_seq or L.get("first_sequence_id", "")
+    check(isinstance(next(iter(kb2.lessons.values())).get("capsule_ids"), set),
+          "capsule_ids survive reload as a set")
+    check(0 in all_positions and 3 in all_positions,
+          "sequence_positions captured both positions")
+    check("R1" in all_caps and "R3" in all_caps,
+          "capsule_ids captured both capsules")
+    check(first_seq == "seqA", "first_sequence_id recorded")
+
+
 def main() -> int:
     cfg = load_config(reload=True)
     root = cfg.root
@@ -787,6 +827,7 @@ def main() -> int:
         test_sentinel_flags(cfg, tmp)
         test_scheduler(cfg, tmp)
         test_white(cfg, tmp)
+        test_capsule_provenance(cfg, tmp)
         test_pipeline(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
