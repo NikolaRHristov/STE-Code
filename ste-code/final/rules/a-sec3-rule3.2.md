@@ -49,7 +49,7 @@ Use only the verb forms and the tenses of verbs that are approved in the STE-Cod
 | Infinitive form (base form) | Imperative form (command form) | Simple present tense | Simple past tense | Simple future tense | Past participle form (as an adjective) |
 |---|---|---|---|---|---|
 | (To) Parse (regular verb) | Parse + object | You/we/they parse It parses | You/we/they parsed It parsed | You/we/they will parse It will parse | The parsed file |
-| (To) Write (irregular verb) | Write + object | You/we/they write It writes | You/we/they wrote It wrote | You/we/they will write It will write | The written log |
+| (To) Write (irregular verb) | Write + object | You/we/they write It writes | You/we/they wrote It wrote | You/we/they will write It will — It will write | The written log |
 | (To) Build (irregular verb) | Build + object | You/we/they build It builds | You/we/they built It built | You/we/they will build It will build | The built artifact |
 | (To) Send (irregular verb) | Send + object | You/we/they send It sends | You/we/they sent It sent | You/we/they will send It will send | The sent request |
 | (To) Validate (regular verb) | Validate + object | You/we/they validate It validates | You/we/they validated It validated | You/we/they will validate It will validate | The validated token |
@@ -79,7 +79,7 @@ Do not use other forms and tenses that are not approved, for example:
 - Past perfect ("had parsed") → simple past in two sentences with "Then".
 - Progressive ("is parsing", "was parsing") → simple present or simple past. If two actions happen together, write two sentences and add "at the same time".
 - Future progressive ("will be parsing") → simple future ("will parse").
-- Passive with an unapproved auxiliary ("is being parsed") → name the actor and use the active voice ("the worker parses the file").
+- Passive with an unapproved auxiliary ("is being parsed") → name the actor and use the active voice ("the worker parses the file") (see Rule 3.6).
 
 > **Note: structural carryover — no code-domain equivalent** — The six-column table of verb forms is a structural feature of the source standard. The code-domain version keeps the same table with approved code verbs. No mapping is forced.
 
@@ -115,7 +115,7 @@ Do not use other forms and tenses that are not approved, for example:
 > **Non-STE:** The framework had already initialized the connection pool before the query started.
 > **STE:** The framework made the connection pool. Then the query started.
 >
-> *Adapted from spec pair: the past perfect "had adjusted" is not approved. Use the simple past tense and sequence with "Then." The approved verb is "make", not "initialize".*
+> *Adapted from spec pair: the past perfect "had adjusted" is not approved. Use the simple past tense and sequence with "Then." The approved verb is "make" (replaces create/initialize), not "utilize" or "commence".*
 >
 > ```yaml
 > # STE: two sequential steps
@@ -129,11 +129,11 @@ Do not use other forms and tenses that are not approved, for example:
 > **Non-STE:** The scheduler is deploying the build to production while the tests are running.
 > **STE:** The scheduler sends the build to production. The tests run at the same time.
 >
-> *Adapted from spec pair: the present progressive "is adjusting" is not approved. Use the simple present tense for each action.*
+> *Adapted from spec pair: the present progressive "is adjusting" is not approved. Use the simple present tense for each action. Use the approved verb "send" (replaces transmit/dispatch), not "deploy" with a progressive form.*
 >
 > ```yaml
 > # .github/workflows/release.yml
-> # STE: the scheduler sends the build to production. The tests run at the same time.
+> # STE: the scheduler sends the build to production. The test runs at the same time.
 > jobs:
 >   deploy:
 >     runs-on: ubuntu-latest
@@ -195,8 +195,8 @@ Do not use other forms and tenses that are not approved, for example:
 > // STE: active voice, simple present tense
 > // The gateway validates the payload.
 > // The migration removes the deprecated field.
-> gateway.validate(payload);        // validate -> validates / validated / validated
-> migration.remove(record.legacyId); // remove -> removes / removed / removed
+> gateway.validate(payload);            // validate -> validates / validated / validated
+> migration.remove(record.legacyId);    // remove -> removes / removed / removed
 > ```
 
 > **Non-STE:** The written log and the parsed manifest are showing that the build had completed with the given options.
@@ -213,8 +213,41 @@ Do not use other forms and tenses that are not approved, for example:
 > }
 > ```
 
+> **Non-STE:** We have been building the release artifact and the CI pipeline will have run the tests by the time you review the pull request.
+> **STE:** We built the release artifact. The CI pipeline will run the tests. Then you can review the pull request.
+>
+> *Adapted from spec pair: the perfect progressive "have been building" and the future perfect "will have run" are not approved. Use the simple past and the simple future, and follow the sequence with "Then".*
+>
+> ```yaml
+> # .github/workflows/ci.yml
+> # STE: we built the release artifact. The CI pipeline will run the tests.
+> jobs:
+>   build:
+>     steps:
+>       - run: make release
+>   test:
+>     needs: build
+>     steps:
+>       - run: make test
+> ```
+
+> **Non-STE:** If the connection drops, the client is retrying the request until the server responds.
+> **STE:** If the connection drops, the client retries the request. Then the server responds.
+>
+> *Adapted from spec pair: the present progressive "is retrying" is not approved. Use the simple present for each action and separate the sequence with "Then".*
+>
+> ```python
+> # STE: simple present in the documentation comment
+> # If the connection drops, the client retries the request. Then the server responds.
+> def on_drop(client, server):
+>     client.retry()    # retry -> retries / retried / retried
+>     server.respond()  # respond -> responds / responded / responded
+> ```
+
 > **See also:** Rule 3.1 — Use Only the Verb Forms That Are Given in the Dictionary
-> **See also:** Rule 3.3 — Use the Active Voice
-> **See also:** Rule 3.4 — Do Not Leave Out a Verb or a Part of a Verb
+> **See also:** Rule 3.3 — Use the Past Participle Form as an Adjective
+> **See also:** Rule 3.4 — Do Not Use Auxiliary Verbs to Make Complex Verb Constructions
+> **See also:** Rule 3.5 — Use the "-ing" Form of a Verb Only as a Technical Noun
+> **See also:** Rule 3.6 — Use the Active Voice
 > **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
 > **See also:** The STE-Code dictionary (a-dictionary.md) — the full list of approved verbs and their allowed forms
