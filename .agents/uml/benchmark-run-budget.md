@@ -256,7 +256,7 @@ sequenceDiagram
     autonumber
     participant D as 🎛️ run_pipeline.py
     participant R as 🔴 RED
-    participant FS as 📁 tests/&lt;base&gt;/
+    participant FS as 📁 tests/base/
     participant B as 🔵 BLUE
     participant P as 🟣 PURPLE
     participant W as ⚪ WHITE
