@@ -28,6 +28,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from statistics import median
 from typing import Any
 
 PROJECT = Path(__file__).resolve().parents[3]
@@ -58,9 +59,21 @@ def count_tokens(text: str, enc_name: str = "o200k_base") -> int | None:
 
 
 def subdocs(directory: Path) -> list[Path]:
+    """Canonical content sub-documents of a tier.
+
+    `_index.md` is a navigation stub and `system-prompt.txt` is a concatenation
+    of the sub-documents in the same directory. Both are excluded so a tier is
+    measured once, not twice.
+    """
     if not directory.is_dir():
         return []
-    return sorted(p for p in directory.rglob("*") if p.is_file() and not p.name.startswith("."))
+    return sorted(
+        p
+        for p in directory.rglob("*")
+        if p.is_file()
+        and not p.name.startswith(".")
+        and p.name not in {"_index.md", "system-prompt.txt"}
+    )
 
 
 def measure_dir(directory: Path) -> dict:
@@ -96,38 +109,79 @@ def measure_dir(directory: Path) -> dict:
     }
 
 
-def measure_tier(tier: str) -> dict:
+def measure_tier(tier: str, cross: dict[str, list[float]] | None = None) -> dict:
     dist = measure_dir(ARTIFACTS / tier)
     base = measure_dir(BASE / tier)
 
-    dist_names = {Path(f["path"]).name for f in dist["per_file"]}
-    base_names = {Path(f["path"]).name for f in base["per_file"] if Path(f["path"]).name != "_index.md"}
-    pending = sorted(base_names - dist_names)
-
-    # Projection: distilled sub-docs keep their measured size; sub-docs still
-    # only present in _base are projected at the compression ratio already
-    # observed for this tier (distilled bytes / matching base bytes).
     base_by_name = {Path(f["path"]).name: f for f in base["per_file"]}
-    matched_base_bytes = sum(base_by_name[n]["bytes"] for n in dist_names if n in base_by_name)
-    matched_dist_bytes = sum(f["bytes"] for f in dist["per_file"] if Path(f["path"]).name in base_by_name)
-    ratio = (matched_dist_bytes / matched_base_bytes) if matched_base_bytes else 1.0
+    dist_by_name = {Path(f["path"]).name: f for f in dist["per_file"]}
 
-    pending_base_bytes = sum(base_by_name[n]["bytes"] for n in pending)
-    pending_base_tokens = sum(base_by_name[n]["tokens_o200k"] or 0 for n in pending)
-    projected_bytes = dist["bytes"] + int(pending_base_bytes * ratio)
-    projected_tokens = dist["tokens_o200k"] + int(pending_base_tokens * ratio)
+    base_names = {n for n in base_by_name}
+
+    # A sub-document is pending when it is absent from the tier, or when it is
+    # byte-identical to its `_base/` boilerplate (the distiller fell back).
+    missing = sorted(base_names - set(dist_by_name))
+    fallback = sorted(
+        n
+        for n in base_names & set(dist_by_name)
+        if (ARTIFACTS / tier / n).read_bytes() == (BASE / tier / n).read_bytes()
+    )
+    pending = sorted(set(missing) | set(fallback))
+
+    # Projection: distilled sub-documents keep their measured size. A pending
+    # sub-document is projected from its own `_base/` size using the ratio that
+    # the same sub-document already reached in the other tiers. Rule sections
+    # compress (~0.2x); principles, templates, and the dictionary expand, so a
+    # single tier-wide ratio would push the estimate the wrong way.
+    projected_bytes = dist["bytes"]
+    projected_tokens = dist["tokens_o200k"]
+    projections = {}
+    for name in pending:
+        base_entry = base_by_name[name]
+        ratios = (cross or {}).get(name, [])
+        ratio = median(ratios) if ratios else 1.0
+        projections[name] = round(ratio, 4)
+        projected_bytes -= dist_by_name.get(name, {"bytes": 0})["bytes"]
+        projected_tokens -= dist_by_name.get(name, {"tokens_o200k": 0})["tokens_o200k"] or 0
+        projected_bytes += int(base_entry["bytes"] * ratio)
+        projected_tokens += int((base_entry["tokens_o200k"] or 0) * ratio)
 
     return {
         "tier": tier,
         "distilled": {k: v for k, v in dist.items() if k != "per_file"},
         "base": {k: v for k, v in base.items() if k != "per_file"},
         "pending_subdocs": pending,
-        "compression_ratio": round(ratio, 4),
+        "pending_reason": {"missing": missing, "base_fallback": fallback},
+        "projection_ratios": projections,
         "projected_bytes": projected_bytes,
         "projected_tokens_o200k": projected_tokens,
         "complete": not pending,
         "per_file": dist["per_file"],
     }
+
+
+def cross_tier_ratios() -> dict[str, list[float]]:
+    """Per sub-document distillation ratio, gathered across every tier.
+
+    A tier contributes a ratio for a sub-document only when that sub-document is
+    genuinely distilled there (present, and not byte-identical to its base).
+    """
+    ratios: dict[str, list[float]] = {}
+    for tier in TIERS:
+        tier_dir = ARTIFACTS / tier
+        base_dir = BASE / tier
+        if not tier_dir.is_dir() or not base_dir.is_dir():
+            continue
+        for path in sorted(tier_dir.glob("*.md")):
+            base_path = base_dir / path.name
+            if not base_path.exists():
+                continue
+            base_bytes = base_path.stat().st_size
+            dist_bytes = path.stat().st_size
+            if base_bytes == 0 or path.read_bytes() == base_path.read_bytes():
+                continue
+            ratios.setdefault(path.name, []).append(dist_bytes / base_bytes)
+    return ratios
 
 
 def human_bytes(n: int) -> str:
@@ -156,7 +210,7 @@ def main() -> int:
         print("error: tiktoken is not installed; run `pip install tiktoken`", file=sys.stderr)
         return 2
 
-    results = [measure_tier(t) for t in TIERS if (ARTIFACTS / t).is_dir()]
+    results = [measure_tier(t, cross_tier_ratios()) for t in TIERS if (ARTIFACTS / t).is_dir()]
 
     if args.json:
         print(json.dumps({"tiers": results}, indent=2))
