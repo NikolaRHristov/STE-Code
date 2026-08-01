@@ -252,7 +252,7 @@ def main():
 
     # Deterministic bases (per-tier sub-doc dirs).
     import importlib.util
-    SCAFFOLD_PATH = (Path(__file__).resolve().parent.parent / "artifacts" / "levels_scaffold.py")
+    SCAFFOLD_PATH = (Path(__file__).resolve().parent / "levels_scaffold.py")
     spec = importlib.util.spec_from_file_location("levels_scaffold", str(SCAFFOLD_PATH))
     scaffold = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(scaffold)
