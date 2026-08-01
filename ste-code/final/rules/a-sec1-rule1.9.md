@@ -67,6 +67,87 @@ The three-word limit is a guideline, not a hard constraint. Exceptions exist for
 
 **CLI help text and man pages.** Command-line help text has limited horizontal space (typically 80 columns). Long noun phrases cause line wrapping that makes help text unreadable. Use the shortest term that identifies the concept. A flag description that says "Specifies the maximum number of concurrent parallel worker thread processes" should be "Maximum number of worker threads."
 
+### Worked Documentation-Type Examples
+
+The following pairs show the same principle applied across each documentation type. Each Non-STE example carries a long noun phrase; each STE example uses the shortest unambiguous term and lets the surrounding code or structure carry the detail.
+
+**README — project one-liner.**
+
+> **Non-STE:** This is a highly extensible, plugin-based, asynchronous task execution and job scheduling framework toolkit that you can embed inside any long-running backend service process.
+>
+> **STE:** TaskRunner is a job scheduler. Embed it in any backend service.
+
+```markdown
+# TaskRunner
+A job scheduler for background tasks. Embed it in your service.
+
+## Install
+npm install task-runner
+```
+
+**API documentation — response field.**
+
+> **Non-STE:** The response body contains a single user account profile information resource object that includes the unique identifier string, the canonical display name text, and the timestamp of the most recent successful authentication event.
+>
+> **STE:** The response is a `User` object with `id`, `displayName`, and `lastLoginAt`.
+
+```json
+{
+  "id": "u_8f2c",
+  "displayName": "Jane Doe",
+  "lastLoginAt": "2026-07-30T09:14:00Z"
+}
+```
+
+**Docstring — class summary.**
+
+> **Non-STE:** This is the central application-wide singleton instance manager component that is responsible for the creation, configuration, and lifecycle coordination of all long-lived background worker process objects.
+>
+> **STE:** The `WorkerManager` starts and stops background workers.
+
+```python
+class WorkerManager:
+    """The WorkerManager starts and stops background workers."""
+
+    def start(self, worker: Worker) -> None:
+        ...
+```
+
+**Commit message — subject line.**
+
+> **Non-STE:** Implement the comprehensive end-to-end encrypted credential storage and retrieval subsystem together with its corresponding automated test suite.
+>
+> **STE:** Add encrypted credential storage with tests.
+
+```text
+git commit -m "Add encrypted credential storage with tests"
+```
+
+**Error message — log line.**
+
+> **Non-STE:** The background asynchronous file synchronization daemon process encountered an unrecoverable input/output failure while attempting to write the cached user preference configuration data file to the persistent local disk volume.
+>
+> **STE:** Sync failed: could not write the config file to disk.
+
+```python
+logger.error("Sync failed: could not write the config file to disk")
+```
+
+**CLI help text — flag description.**
+
+> **Non-STE:** Specifies the maximum permitted quantity of simultaneously executing concurrent parallel worker subprocess threads that the application is permitted to spawn and manage for the purpose of processing items from the background job queue.
+>
+> **STE:** Maximum number of worker threads for the job queue.
+
+```python
+parser.add_argument(
+    "--max-workers",
+    type=int,
+    default=4,
+    help="Maximum number of worker threads for the job queue.",
+)
+```
+
 ### The Context Principle
 
 The core insight of Rule 1.9 is that context permits brevity. The original ASD-STE100 example demonstrates this: index numbers and illustrations provide context, so short nouns ("screws," "flange," "cover") are sufficient. In code documentation, equivalent context sources include:
@@ -86,12 +167,26 @@ The three-word limit is derived from the original ASD-STE100 specification, whic
 Exceptions to the three-word limit:
 
 1. **Established technical terms.** Terms such as "continuous integration pipeline" (3 words), "single sign-on provider" (3 words), and "abstract syntax tree" (3 words) are at the limit. Terms such as "public key infrastructure certificate" (4 words) exceed the limit but are standard in the security domain. Use the established term even if it exceeds three words. Do not invent a shorter form that the community does not use.
-
 2. **Framework and tool names.** Names such as "GitHub Actions workflow," "Amazon Web Services Lambda," and "Google Cloud Platform" exceed three words but are proper nouns. Use them as given. Do not abbreviate unless the abbreviation is a recognized technical noun (for example, "AWS Lambda").
-
 3. **Fully qualified type names.** In strongly typed languages, fully qualified names can be long (for example, `com.example.project.module.SubComponent`). Use the short name (`SubComponent`) after the first reference, or use the language's import/alias mechanism to refer to the type.
-
 4. **When shortening causes ambiguity.** If shortening a four-word phrase to three words creates ambiguity between two different concepts, keep the four-word phrase. Clarity overrides brevity.
+
+### Long Phrase to Short Form Reference Table
+
+Use this table as a quick lookup when you find a long noun phrase in your documentation. The STE column gives the shortest unambiguous form; the trigger shows what context makes the short form safe.
+
+| Long code-domain phrase | Short STE form | Context that permits the short form |
+|---|---|---|
+| asynchronous JavaScript XML HTTP request wrapper utility function | fetch utility | line number + code snippet |
+| serialized JSON payload from the remote application programming interface endpoint | JSON data from the API endpoint | field name + type definition |
+| user account profile information data transfer object | `UserProfileDTO` | the parameter is already named |
+| relational database management system server instance | database | port number + "primary" |
+| multi-platform containerized microservice orchestration and deployment management layer | Kubernetes cluster | diagram or README title |
+| dependency injection inversion of control container | DI container | preceding definition of DI |
+| mutual exclusion lock primitive with timeout-bounded acquisition | mutex | class name in the code |
+| configuration, settings, and options parameters object | `Config` object | the object is named `Config` |
+| dynamically allocated resizable contiguous memory region management utility | dynamic array | the type is declared |
+| horizontal pod autoscaling controller with CPU utilization threshold | `HorizontalPodAutoscaler` resource | the YAML `kind` field |
 
 ## Paradigm-Specific Guidance
 
@@ -102,7 +197,6 @@ Object-oriented documentation often describes class hierarchies with long inheri
 **Practice:** Use the class name. The reader can inspect the class definition for its inheritance chain, type parameters, and implemented interfaces. Write "the `UserRepository` class." If the inheritance is relevant to the discussion, state it in a separate sentence: "`UserRepository` extends `BaseRepository<User>`."
 
 **Before:** The concrete factory method implementation class instantiates the appropriate data access object implementation based on the runtime configuration profile.
-
 **After:** The `DaoFactory` class creates the correct DAO implementation for the active configuration profile.
 
 ```java
@@ -115,8 +209,13 @@ public class DaoFactory {
 ```
 
 **Before:** The dependency injection inversion of control container manages the lifecycle of the singleton-scoped service provider instances.
-
 **After:** The DI container manages the lifecycle of singleton services.
+
+```python
+# The DI container manages the lifecycle of singleton services.
+container = Container()
+container.register(UserService, scope="singleton")
+```
 
 In the second example, "DI" is a recognized abbreviation (category 16, Rule 1.5). "IoC" is removed because "DI container" already implies the concept. "Singleton-scoped service provider instances" becomes "singleton services" — the scope and role are clear from the context of DI documentation.
 
@@ -127,11 +226,9 @@ Functional programming documentation often describes transformations with long n
 **Practice:** Name the result. Use a short noun phrase that identifies what the value represents, not how it was computed. The computation is visible in the code.
 
 **Before:** The monomorphized iterator adapter chain with lazy evaluation semantics produces a collection of transformed elements.
-
 **After:** The iterator produces a transformed collection.
 
 **Before:** The higher-order function that takes a binary operation and an initial accumulator value and returns a function that reduces a foldable data structure to a single value.
-
 **After:** The fold function. It reduces a collection to a single value.
 
 ```haskell
@@ -143,8 +240,16 @@ sumValues = foldl (+) 0
 In the second example, "fold" is a standard algorithmic term (category 7). The long description duplicates what every functional programmer already knows. Use the standard term.
 
 **Before:** The discriminated union algebraic data type with exhaustive pattern matching guarantees.
-
 **After:** The enum type. Pattern matching covers all variants.
+
+```rust
+// The enum type. Pattern matching covers all variants.
+enum Status {
+    Active,
+    Suspended,
+    Closed,
+}
+```
 
 "Enum" is a data type term (category 4). "Discriminated union" and "algebraic data type" are synonyms in this context. Choose one and use it consistently (Rule 1.11). Do not use both in the same noun phrase.
 
@@ -155,11 +260,9 @@ Procedural documentation often describes functions with long noun phrases that l
 **Practice:** Name the function. Describe its purpose in a short sentence. Let the function signature carry the type information.
 
 **Before:** The variadic formatted output to file descriptor function with thread-safe internal buffering.
-
 **After:** The `fprintf` function. It writes formatted output to a file descriptor.
 
 **Before:** The dynamically allocated resizable contiguous memory region management utility.
-
 **After:** The dynamic array. It grows as you add elements.
 
 ```go
@@ -176,8 +279,15 @@ func (d *DynamicArray) Append(value int) {
 In the second example, "dynamic array" is a standard data structure term (category 4). The long phrase "dynamically allocated resizable contiguous memory region management utility" describes implementation details that are not needed for understanding the concept.
 
 **Before:** The mutual exclusion lock primitive with timeout-bounded acquisition and deadlock detection.
-
 **After:** The mutex. It has a timeout and deadlock detection.
+
+```go
+// The mutex. It has a timeout and deadlock detection.
+mu := sync.Mutex{}
+if mu.TryLock() {
+    defer mu.Unlock()
+}
+```
 
 "Mutex" is a computer science term (category 16). The additional features (timeout, deadlock detection) are described in a separate sentence, not embedded in the noun phrase.
 
@@ -188,7 +298,6 @@ Declarative documentation often describes resources with long noun phrases that 
 **Practice:** Name the resource type. Describe the configuration in bullet points or a table. The declarative code itself is the ultimate reference.
 
 **Before:** The Kubernetes horizontal pod autoscaling controller with CPU utilization metric threshold and minimum and maximum replica count bounds.
-
 **After:** The `HorizontalPodAutoscaler` resource. It scales pods based on CPU utilization. Set the minimum and maximum replica counts.
 
 ```yaml
@@ -210,8 +319,16 @@ spec:
 ```
 
 **Before:** The Structured Query Language parameterized query with multiple table joins, aggregate functions, grouping clauses, and sorted result set.
-
 **After:** The parameterized query. It joins the `users` and `orders` tables and groups results by region.
+
+```sql
+-- The parameterized query. It joins the users and orders tables and groups results by region.
+SELECT region, COUNT(*) AS orders
+FROM users
+JOIN orders ON orders.user_id = users.id
+GROUP BY region
+ORDER BY orders DESC;
+```
 
 In the second example, the long phrase describes the SQL structure. The short description states what the query does. The SQL code itself shows the joins, aggregates, and sorting.
 
@@ -222,11 +339,9 @@ Systems documentation often describes memory operations with long noun phrases t
 **Practice:** Use the short term ("reference," "borrow," "lifetime"). The Rust compiler enforces the guarantees. Documentation describes what the programmer controls, not what the compiler prevents.
 
 **Before:** The affine type system linear resource ownership tracking mechanism that prevents use-after-move errors at compile time.
-
 **After:** The ownership system. It prevents use-after-move errors.
 
 **Before:** The dynamically sized slice reference type with bounds checking that prevents out-of-bounds memory access at runtime.
-
 **After:** The slice reference. Bounds checks prevent out-of-bounds access.
 
 ```rust
@@ -375,6 +490,42 @@ parser.add_argument(
 - **Principle applied:** P9 (use short technical nouns: "worker threads" is 2 words, "job queue" is 2 words)
 - **Explanation:** The non-STE version is a 36-word description for a single flag. It uses synonyms piled together ("simultaneously executing concurrent parallel") and redundant permissions language ("permitted to spawn and manage"). The STE version is 9 words. "Maximum" implies the flag sets an upper bound. "Worker threads" names the resource. "Job queue" names the target. The reader does not need to be told that threads are "subprocess threads" or that they "process items" from a queue — these are inherent to the concepts of "worker threads" and "job queue." This follows the spec principle: reduce to the shortest term that is unambiguous in the program's context.
 
+### Example Group 7: Configuration File
+
+A configuration file already states the keys and values. The inline comment only needs to name the purpose in one short phrase; the key name carries the rest.
+
+```yaml
+# worker settings
+max_workers: 8          # maximum number of worker threads
+queue: "jobs"           # the job queue to read from
+retry_limit: 3          # attempts before a task fails
+```
+
+> **Non-STE:** The maximum permitted quantity of simultaneously executing concurrent parallel worker subprocess threads that the application is permitted to spawn and manage for processing items from the background job queue.
+>
+> **STE:** Maximum number of worker threads for the job queue.
+
+- **Principle applied:** P9 (use short technical nouns: "worker threads" is 2 words, "job queue" is 2 words)
+- **Explanation:** The non-STE version is the same 36-word phrase repeated as a config comment. In a config file, the key `max_workers` already names the setting and the value `8` states the limit. A nine-word comment is all the prose needs. Do not copy the long phrase into the comment — the key and value are the context.
+
+### Example Group 8: Test Description
+
+A test already names the function under test and the assertion. The test name and the assertion body carry the detail; the comment only states intent in the shortest form.
+
+```python
+def test_fetch_utility_returns_json():
+    # the fetch utility returns parsed JSON from the API endpoint
+    result = fetch_utility("https://api.example.com/users")
+    assert result["id"] == "u_8f2c"
+```
+
+> **Non-STE:** Verify that the asynchronous JavaScript XML HTTP request wrapper utility function successfully retrieves and deserializes the serialized JSON payload from the remote application programming interface endpoint into a native object structure.
+>
+> **STE:** The fetch utility returns parsed JSON from the API endpoint.
+
+- **Principle applied:** P9 (use short technical nouns: "fetch utility" is 2 words, "API endpoint" is 2 words)
+- **Explanation:** The non-STE version is a 26-word test description that embeds every implementation detail. The STE version reuses the shortest terms already established in this rule ("fetch utility," "API endpoint") and states the one behavior the test checks. The function name `test_fetch_utility_returns_json` and the `assert` line identify the subject and the expectation, so the comment does not need to repeat them as a long phrase.
+
 ## Edge Cases
 
 ### Edge Case 1: When the Short Term Is Less Well-Known Than the Long Term
@@ -382,6 +533,13 @@ parser.add_argument(
 Some short technical nouns are obscure. A documentation writer might use "AST" (2 words when expanded: "abstract syntax tree") because it is short, but a junior developer may not know the acronym. The rule says to use the term that is "easy to understand," not just short.
 
 **Resolution:** Use the expanded form at first use: "abstract syntax tree (AST)." Use "AST" for all subsequent references. If the audience is expected to know the acronym (for example, in a compiler documentation context), use "AST" directly. The ease-of-understanding test is: would a developer with one year of experience in this domain understand the term? If yes, the short term is acceptable. If no, expand on first use.
+
+```python
+# Before: walk the AST to find unused bindings
+# After (first use in a general document):
+# Walk the abstract syntax tree (AST) to find unused bindings.
+# Later in the same document: prune the AST.
+```
 
 ### Edge Case 2: When a Framework Name Is Also a Short Word
 
@@ -406,6 +564,15 @@ In some domains, a short term can refer to two different concepts. For example, 
 Tools such as JSDoc, Sphinx, and godoc generate documentation from source code. These tools often produce verbose output that includes the full type signature, all parameters, and all return values in a single block. The generated text may violate the three-word limit for noun phrases because it mechanically reproduces the code structure.
 
 **Resolution:** Generated documentation is exempt from Rule 1.9 for the auto-generated portions (same principle as Edge Case 4 in Rule 1.5). However, any human-written summary, description, or comment within the generated documentation must follow Rule 1.9. When writing a JSDoc `@description` tag or a Python docstring summary line, apply the rule: use the shortest term that is unambiguous.
+
+```javascript
+/**
+ * The rate limiter uses a token bucket algorithm backed by Redis.
+ * @param {number} maxTokens - Maximum number of tokens.
+ */
+class RateLimiter {}
+```
+The `@description`-equivalent summary ("The rate limiter uses a token bucket algorithm backed by Redis") uses short terms even though the generated parameter table below it is mechanical.
 
 ## Cross-References
 
@@ -497,3 +664,7 @@ NOTE: This checklist is a guide. Professional judgment is always necessary when 
 > **See also:** Rule 1.11 — Use One Term for One Concept
 > **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
 > **See also:** Rule 1.14 — Use English (American) Spelling
+
+
+
+
