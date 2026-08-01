@@ -29,11 +29,29 @@ Only a small number of phrasal verbs are approved. They all have a restricted me
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: "Put out the fire." (abstract) / STE: "Extinguish the fire." — "put" and "out" are approved individually, but together they form a phrasal verb; the approved verb "extinguish" replaces it. | Non-STE: "Give off gas." / STE: "Release gas." — "give" and "off" are approved individually, but together they form a phrasal verb; the approved verb "release" replaces it. | Non-STE: "Carry out the test." / STE: "Do the test." — "carry" and "out" are approved individually, but together they form a phrasal verb; the approved verb "do" replaces it.
+
 > **Non-STE:** The compiler puts out a warning when the type annotation is missing.
 >
 > **STE:** The compiler emits a warning when the type annotation is missing.
 
 ("Put" and "out" are approved words individually. Together, "put out" forms a phrasal verb with a meaning different from the approved meanings of "put" and "out." The approved verb "emit" has the meaning "to send out" and is the word that is most usual in code documentation.)
+
+```python
+# Non-STE — emit_warning.py
+def check_annotation(node):
+    """Validate the type annotation and put out a warning on failure."""
+    if node.annotation is None:
+        logger.warning("Missing type annotation on %s", node.name)
+
+
+# STE — emit_warning.py
+def check_annotation(node):
+    """Validate the type annotation and emit a warning on failure."""
+    if node.annotation is None:
+        logger.warning("Missing type annotation on %s", node.name)
+```
+
 *Adapted from spec pair: "Put out the fire." (abstract) / "Extinguish the fire." — "put" and "out" are approved individually, but together they form a phrasal verb; the approved verb "extinguish" replaces it.*
 
 > **Non-STE:** The function gives off an error code when the input is not valid.
@@ -41,6 +59,29 @@ Only a small number of phrasal verbs are approved. They all have a restricted me
 > **STE:** The function returns an error code when the input is not valid.
 
 ("Give" and "off" are approved words individually. Together, "give off" forms a phrasal verb with a meaning different from the approved meanings of "give" and "off." The approved verb "return" has the meaning "to send back a value" and is the correct word for this context in code documentation.)
+
+```go
+// Non-STE — handler.go
+func ParseInput(input []byte) (Record, error) {
+    rec, err := decode(input)
+    if err != nil {
+        // gives off an error code that the caller must inspect
+        return Record{}, ErrInvalidInput
+    }
+    return rec, nil
+}
+
+// STE — handler.go
+func ParseInput(input []byte) (Record, error) {
+    rec, err := decode(input)
+    if err != nil {
+        // returns an error code that the caller must inspect
+        return Record{}, ErrInvalidInput
+    }
+    return rec, nil
+}
+```
+
 *Adapted from spec pair: "Give off gas." / "Release gas." — "give" and "off" are approved individually, but together they form a phrasal verb; the approved verb "release" replaces it.*
 
 > **Non-STE:** The cleanup task carries out the memory deallocation after each request.
@@ -48,6 +89,33 @@ Only a small number of phrasal verbs are approved. They all have a restricted me
 > **STE:** The cleanup task does the memory deallocation after each request.
 
 ("Carry" and "out" are approved words individually. Together, "carry out" forms a phrasal verb. The approved verb "do" replaces the phrasal verb and keeps the same meaning.)
+
+```rust
+// Non-STE — scheduler.rs
+pub struct CleanupTask;
+
+impl CleanupTask {
+    /// Carries out the memory deallocation after each request.
+    pub fn run(&self, allocations: &mut Vec<Allocation>) {
+        for alloc in allocations.drain(..) {
+            alloc.free();
+        }
+    }
+}
+
+// STE — scheduler.rs
+pub struct CleanupTask;
+
+impl CleanupTask {
+    /// Does the memory deallocation after each request.
+    pub fn run(&self, allocations: &mut Vec<Allocation>) {
+        for alloc in allocations.drain(..) {
+            alloc.free();
+        }
+    }
+}
+```
+
 *Adapted from spec pattern: replace unapproved phrasal verbs with a single approved verb that has the same meaning.*
 
 ## Code-Domain Explanation
@@ -67,6 +135,20 @@ README files are the entry point for users. Phrasal verbs in README files can co
 
 Each heading and paragraph in a README file must use a single approved verb. Do not use a verb+preposition combination when one approved verb is sufficient.
 
+```markdown
+<!-- Non-STE README excerpt -->
+## Getting started
+1. Set up the project with `npm install`.
+2. Run through the quickstart to see the CLI in action.
+3. Check out the examples folder for sample configs.
+
+<!-- STE README excerpt -->
+## Getting started
+1. Install the project with `npm install`.
+2. Complete the quickstart to see the CLI in action.
+3. Examine the examples folder for sample configs.
+```
+
 ### API Documentation
 
 API reference documentation must be exact. A method description that uses a phrasal verb can hide the actual behavior of the method. Two readers can understand the same phrasal verb differently.
@@ -81,30 +163,60 @@ When you document an API endpoint or a function signature, use the approved verb
 
 For API reference pages, the verb must match the HTTP method or the function behavior exactly. A GET endpoint "gets" data, not "pulls down" or "fetches." A POST endpoint "creates" or "sends" data, not "puts in" or "hands over."
 
+```http
+// Non-STE — OpenAPI description
+// get:
+//   summary: Pulls down the user profile by ID.
+// post:
+//   summary: Puts in a new order for the cart.
+
+// STE — OpenAPI description
+// get:
+//   summary: Gets the user profile by ID.
+// post:
+//   summary: Creates a new order for the cart.
+```
+
 ### Docstrings and Inline Documentation
 
 Docstrings in Python, Javadoc in Java, and doc comments in Rust, Go, and C# are the most common places where phrasal verbs appear. Developers write docstrings quickly and use informal language. Edit docstrings to remove phrasal verbs:
 
-````
+````python
 # Non-STE:
 def process(data):
     """Runs through the data and picks out the valid entries."""
-    ...
+    results = []
+    for entry in data:
+        if entry.is_valid():
+            results.append(transform(entry))
+    return results
 
 # STE:
 def process(data):
     """Examines the data and selects the valid entries."""
-    ...
+    results = []
+    for entry in data:
+        if entry.is_valid():
+            results.append(transform(entry))
+    return results
 ````
 
-````
+````rust
 // Non-STE:
 /// Sets up the connection pool and kicks off the health check.
-pub fn init() -> Pool { ... }
+pub fn init() -> Pool {
+    let pool = Pool::new(get_config());
+    pool.run_health_check();
+    pool
+}
 
 // STE:
 /// Configures the connection pool and starts the health check.
-pub fn init() -> Pool { ... }
+pub fn init() -> Pool {
+    let pool = Pool::new(get_config());
+    pool.run_health_check();
+    pool
+}
 ````
 
 ### Commit Messages
@@ -124,11 +236,21 @@ Commit messages are permanent records of changes. A phrasal verb in a commit mes
 
 A commit message such as "Clean up the old API endpoints" is ambiguous. "Remove the old API endpoints" or "Refactor the old API endpoints" makes the change exact.
 
+```text
+# Non-STE commit messages
+git commit -m "Clean up the old API endpoints"
+git commit -m "Speed up the image resize loop"
+
+# STE commit messages
+git commit -m "Remove the old API endpoints"
+git commit -m "Accelerate the image resize loop"
+```
+
 ### Error Messages
 
 Error messages must tell the user exactly what went wrong and what to do. A phrasal verb in an error message can make the recovery action unclear:
 
-```
+```text
 // Non-STE:
 Error: Could not hook up to the database.
 
@@ -136,7 +258,7 @@ Error: Could not hook up to the database.
 Error: Could not connect to the database.
 ```
 
-```
+```text
 // Non-STE:
 Error: The build process blew up during the linking step.
 
@@ -144,7 +266,7 @@ Error: The build process blew up during the linking step.
 Error: The build process failed during the linking step.
 ```
 
-```
+```text
 // Non-STE:
 Warning: The lock file is out of whack. Run `install` to sort it out.
 
@@ -160,6 +282,18 @@ Release notes document what changed for users. Phrasal verbs in release notes re
 - "Added back the export feature" → "Restored the export feature"
 - "The team ironed out the performance issues" → "The team corrected the performance issues"
 - "We phased out support for Python 3.7" → "We ended support for Python 3.7" (DEPRECATED)
+
+```markdown
+<!-- Non-STE changelog -->
+## 2.0.0
+- Did away with the legacy parser.
+- Ironed out the performance issues on the export job.
+
+<!-- STE changelog -->
+## 2.0.0
+- Removed the legacy parser.
+- Corrected the performance issues on the export job.
+```
 
 ## Paradigm-Specific Guidance
 
@@ -179,14 +313,20 @@ Object-oriented documentation describes classes, methods, constructors, and dest
  * Tears down the connection and cleans up all associated resources.
  * Call this method when you are done with the connection.
  */
-public void close() { ... }
+public void close() {
+    connection.disconnect();
+    resourceRegistry.releaseAll();
+}
 
 // STE:
 /**
  * Closes the connection and releases all associated resources.
  * Call this method when you no longer need the connection.
  */
-public void close() { ... }
+public void close() {
+    connection.disconnect();
+    resourceRegistry.releaseAll();
+}
 ````
 
 ### Functional Documentation (Haskell, Elixir, Clojure, Rust)
@@ -199,6 +339,16 @@ Functional documentation describes pure functions, pipelines, and data transform
 - "The function reaches out to the external service" → "The function sends a request to the external service"
 
 In functional languages, prefer verbs that describe pure transformations: "transforms," "applies," "filters," "maps," "reduces." Do not use phrasal verbs that suggest side effects when the function is pure.
+
+```haskell
+-- Non-STE
+process :: [Entry] -> [Entry]
+process = map transform . filterOut isNull
+
+-- STE
+process :: [Entry] -> [Entry]
+process = map transform . remove isNull
+```
 
 ### Procedural Documentation (C, Go, Bash)
 
@@ -221,6 +371,16 @@ In C documentation, avoid phrasal verbs that describe memory operations:
 - "Free up the allocated memory" → "Release the allocated memory" or "Free the allocated memory"
 - "The pointer hands back the result" → "The pointer returns the result" (but pointers do not return values — "The function writes the result through the pointer" is more exact)
 
+```c
+// Non-STE:
+// The caller must free up the buffer that read_config hands back.
+void read_config(char **out);
+
+// STE:
+// The caller must release the buffer that read_config returns.
+void read_config(char **out);
+```
+
 ### Declarative Documentation (SQL, Terraform, Kubernetes YAML)
 
 Declarative documentation describes desired state, not step-by-step procedures. Phrasal verbs can accidentally introduce an imperative tone that conflicts with the declarative model:
@@ -229,6 +389,14 @@ Declarative documentation describes desired state, not step-by-step procedures. 
 - "The deployment spins up new pods when the load increases" → "The deployment starts new pods when the load increases"
 - "The migration tears down the old index before it builds the new one" → "The migration removes the old index before it creates the new one"
 - "The query joins together the users and orders tables" → "The query joins the users table with the orders table"
+
+```hcl
+# Non-STE — main.tf comment
+# The module brings up three EC2 instances and spins up a load balancer.
+
+# STE — main.tf comment
+# The module creates three EC2 instances and starts a load balancer.
+```
 
 ### Systems Documentation (Rust Ownership, C Memory)
 
@@ -243,12 +411,22 @@ Systems documentation describes ownership, lifetimes, memory safety, and concurr
 // Non-STE:
 /// Takes ownership of the string and hands back a parsed Config.
 /// If parsing fails, it gives back the original string.
-pub fn parse_config(input: String) -> Result<Config, String> { ... }
+pub fn parse_config(input: String) -> Result<Config, String> {
+    match Config::from_str(&input) {
+        Ok(config) => Ok(config),
+        Err(_) => Err(input),
+    }
+}
 
 // STE:
 /// Receives ownership of the string and returns a parsed Config.
 /// If parsing fails, it returns the original string.
-pub fn parse_config(input: String) -> Result<Config, String> { ... }
+pub fn parse_config(input: String) -> Result<Config, String> {
+    match Config::from_str(&input) {
+        Ok(config) => Ok(config),
+        Err(_) => Err(input),
+    }
+}
 ````
 
 ## Extended Examples
@@ -256,38 +434,114 @@ pub fn parse_config(input: String) -> Result<Config, String> { ... }
 > **Non-STE:** The test runner runs through all test suites and prints out a summary report.
 >
 > **STE:** The test runner executes all test suites and prints a summary report.
->
+
 > *Principles applied: P1, P11 — "run through" is a phrasal verb (verb + preposition). Replace with the single approved verb "execute." Also "prints out" becomes "prints" — "out" adds no meaning and the verb "print" alone is approved for this meaning.*
+
+```python
+# Non-STE
+def run(tester):
+    tester.runs_through_all_suites()
+    tester.prints_out_summary()
+
+# STE
+def run(tester):
+    tester.executes_all_suites()
+    tester.prints_summary()
+```
 
 > **Non-STE:** The framework sets up the routing table from the annotation data.
 >
 > **STE:** The framework configures the routing table from the annotation data.
->
+
 > *Principles applied: P1 — "set up" is one of the most common phrasal verbs in code documentation. The approved verb "configure" replaces it when the context is about initialization with parameters. Use "install" when the context is about placing files on a system. Use "create" when the context is about making a new resource from nothing.*
+
+```python
+# Non-STE
+router = Router()
+router.sets_up_routing_table(annotations)
+
+# STE
+router = Router()
+router.configures_routing_table(annotations)
+```
 
 > **Non-STE:** The middleware looks at the request headers and filters out the sensitive fields.
 >
 > **STE:** The middleware examines the request headers and removes the sensitive fields.
->
+
 > *Principles applied: P1, P2 — "look at" is a phrasal verb that means "examine" or "inspect." "Filter out" is also a phrasal verb. The approved verbs "examine" and "remove" each replace one phrasal verb. Note: "filter" alone (without "out") is an approved technical verb. The sentence "The middleware filters the request headers" uses "filter" as an approved verb; adding "out" makes it a phrasal verb.*
+
+```python
+# Non-STE
+class SecurityMiddleware:
+    def process(self, request):
+        request = self.looks_at_headers(request)
+        request = self.filters_out_sensitive(request)
+        return request
+
+# STE
+class SecurityMiddleware:
+    def process(self, request):
+        request = self.examines_headers(request)
+        request = self.removes_sensitive(request)
+        return request
+```
 
 > **Non-STE:** The cleanup job kicks in after 30 seconds of idle time and clears out the expired sessions.
 >
 > **STE:** The cleanup job starts after 30 seconds of idle time and removes the expired sessions.
->
+
 > *Principles applied: P1 — "kick in" is an informal phrasal verb with no place in technical documentation. The approved verb "start" gives the exact meaning: the job begins execution. "Clear out" is replaced by "remove" — the expired sessions are deleted, not "cleared out."*
+
+```python
+# Non-STE
+def cleanup_job():
+    if idle_for() > 30:
+        kick_in()
+        clear_out_expired_sessions()
+
+# STE
+def cleanup_job():
+    if idle_for() > 30:
+        start()
+        remove_expired_sessions()
+```
 
 > **Non-STE:** The compiler breaks down the source file into an abstract syntax tree, then goes on to generate the intermediate representation.
 >
 > **STE:** The compiler divides the source file into an abstract syntax tree, then continues to generate the intermediate representation.
->
+
 > *Principles applied: P1, P11 — "break down" and "go on" are both phrasal verbs. "Break down" (meaning "analyze into parts") becomes "divides" or "separates." "Go on" (meaning "proceed to the next step") becomes "continues." The approved verb "analyze" is also acceptable for the first replacement when the emphasis is on examination rather than separation.*
+
+```python
+# Non-STE
+def compile(source):
+    ast = breaks_down_source(source)
+    goes_on_to_generate_ir(ast)
+
+# STE
+def compile(source):
+    ast = divides_source(source)
+    continues_to_generate_ir(ast)
+```
 
 > **Non-STE:** The plugin system lets you hook into the build pipeline at three different points. You can also tap into the logging stream.
 >
 > **STE:** The plugin system lets you connect to the build pipeline at three different points. You can also subscribe to the logging stream.
->
+
 > *Principles applied: P1, P10 — "hook into" and "tap into" are both informal phrasal verbs with abstract meanings. "Connect to" and "subscribe to" use approved verbs with exact meanings. "Hook into" is also slang (P10), which makes it doubly non-compliant. The approved verb "connect" is standard for describing integration points between systems.*
+
+```python
+# Non-STE
+pipeline = BuildPipeline()
+pipeline.hook_into(stage="lint")
+pipeline.tap_into(stream="logs")
+
+# STE
+pipeline = BuildPipeline()
+pipeline.connect_to(stage="lint")
+pipeline.subscribe_to(stream="logs")
+```
 
 ## Approved Phrasal Verbs in STE-Code
 
@@ -301,6 +555,15 @@ A small number of phrasal verbs are approved because no single verb replaces the
 | roll back | Return to a previous state | "Roll back the deployment if the health check fails." |
 
 NOTE: "Log in" and "log out" use the approved verb "log" with the prepositions "in" and "out." Do not use "sign in," "sign out," "log on," or "log off." The verb "back up" (two words) is approved only for making copies. Do not use it for movement ("the car backs up") or support ("back up your claim").
+
+```sql
+-- Approved phrasal verbs in use
+-- Non-STE: BEGIN; sign in as admin; ...
+-- STE:
+-- Log in as admin before you run the migration.
+-- Back up the orders table before you apply the schema change.
+-- Roll back the deployment if the health check fails.
+```
 
 ## Edge Cases
 
@@ -319,6 +582,14 @@ When you describe what the framework does — not what it is called — apply Ru
 
 The distinction: a proper name is a noun (P1.5). A description of behavior is a verb phrase and must follow Rule 9.3.
 
+```python
+# Non-STE — behavior described with a phrasal verb
+setuptools.sets_up_package_metadata()
+
+# STE — behavior described with an approved verb
+setuptools.configures_package_metadata()
+```
+
 ### Edge Case 2: When a Code Keyword Is Also a Phrasal Verb Component
 
 Some code keywords overlap with phrasal verb components. "Break," "continue," "throw," and "catch" are all approved as code keywords (P1.5). In documentation, use them as technical nouns or as approved verbs with their technical meaning:
@@ -330,6 +601,20 @@ Some code keywords overlap with phrasal verb components. "Break," "continue," "t
 The last example violates Rule 9.3 because "breaks out of" is a phrasal verb. Replace it: "The code exits the loop when the condition is true."
 
 Similarly, "catch" in "the handler catches the error" is approved (technical verb). But "the handler catches up with the event stream" is a phrasal verb and is not approved. Replace: "the handler synchronizes with the event stream."
+
+```java
+// Non-STE
+// The loop breaks out of the iteration when the flag is set.
+while (running) {
+    if (flag) break; // phrasal verb in the comment — not approved
+}
+
+// STE
+// The loop exits the iteration when the flag is set.
+while (running) {
+    if (flag) break;
+}
+```
 
 ### Edge Case 3: Two Approved Words That Are Not a Phrasal Verb
 
@@ -348,6 +633,14 @@ Contrast these with actual phrasal verbs where the meaning changes:
 
 The test: if you can remove the preposition and the sentence still has approximately the same meaning, the preposition is part of a prepositional phrase and the combination is not a phrasal verb. If removing the preposition changes the meaning completely, it is a phrasal verb.
 
+```python
+# Permitted: "write" keeps its meaning; "to the file" is a prepositional phrase
+write(config, to=config_file)
+
+# Not approved: "write up" is a phrasal verb (compose formally)
+write_up(test_plan)  # replace with: compose(test_plan)
+```
+
 ### Edge Case 4: Generated Documentation and Code Comments
 
 Auto-generated documentation from tools such as JSDoc, Sphinx, or `rustdoc` can contain phrasal verbs that the developer wrote in the source code. The generated output inherits the phrasal verbs from the source.
@@ -355,6 +648,20 @@ Auto-generated documentation from tools such as JSDoc, Sphinx, or `rustdoc` can 
 When you write doc comments that a tool will extract and publish, apply Rule 9.3 to the source text. The generated documentation will then be compliant.
 
 When you consume third-party generated documentation that you cannot edit, you do not need to correct it. The rule applies to documentation that you write or maintain.
+
+```javascript
+// Non-STE source comment — generates non-compliant docs
+/**
+ * Sets up the cache and kicks off the warmup.
+ */
+function initCache() { /* ... */ }
+
+// STE source comment — generates compliant docs
+/**
+ * Configures the cache and starts the warmup.
+ */
+function initCache() { /* ... */ }
+```
 
 ### Edge Case 5: When a Single Approved Verb Does Not Exist for the Exact Meaning
 
@@ -366,6 +673,17 @@ Some phrasal verbs have no exact single-verb replacement in the approved vocabul
 - "The loop churns through the dataset." → "The loop processes the dataset." ("process" is not in the canonical synonym table but it is a well-known technical verb, P1.12)
 
 When no single approved verb is a perfect replacement, prefer the verb that is closest in meaning and add clarifying context in a subsequent sentence if necessary.
+
+```python
+# Non-STE
+def fetch_user(uid):
+    return client.calls_back_caller_with_result(uid)
+
+# STE — rewrite the sentence (Rule 9.1)
+def fetch_user(uid):
+    result = client.get(uid)
+    return send_result_to_caller(result, via="callback")
+```
 
 ## Cross-References
 
@@ -418,3 +736,5 @@ The ASD-STE100 standard has an underlying principle that applies strongly to cod
 - "Get rid of" (3 words) → "Remove" (1 word)
 
 This principle aligns with the core STE-Code value: precision through simplicity. Every extra word is a chance for misunderstanding.
+
+> **See also:** Rule 1.1 — Use approved words from the STE-Code dictionary; Rule 1.2 — Use words only as their specified part of speech; Rule 1.4 — Use only approved verb forms and adjective forms; Rule 1.11 — One term per concept; Rule 1.12 — Technical verbs are allowed; Rule 9.1 — Use a Different Sentence Construction to Write a Sentence When a Word-for-Word Replacement Is Not Sufficient; Rule 9.2 — Use Each Approved Word Correctly
