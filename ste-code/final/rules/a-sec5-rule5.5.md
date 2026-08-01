@@ -20,11 +20,13 @@ A note can have one or more sentences. Each sentence in a note can have a maximu
 
 Examples in STE:
 
-the CROSS FEED port is more than 5 cc/minute.
+| NOTE: | The flow through the CROSS FEED port is more than 5 cc/minute. |
+| --- | --- |
 
 (One sentence, 22 words.)
 
-results.
+| NOTE: | The test verifies the installation. The test shows the results. |
+| --- | --- |
 
 (Two sentences, 6 words and 8 words.)
 
@@ -32,7 +34,8 @@ Do not use the imperative form in a note. If you use the imperative form, the no
 
 Example:
 
-correctly.
+| NOTE: | Make sure that the avionics ventilation system continues to operate correctly. |
+| --- | --- |
 
 (This text is not a note because it contains the imperative form.)
 
@@ -48,11 +51,9 @@ Examples:
 | --- | --- |
 | STE: | CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM. |
 
-airflow to the compartment and therefore there is a risk of suffocation.
-
-(Although the non-STE text does not contain the imperative form, it is not a note. It is a safety instruction.)
-
-> **STE:** WARNING: BEFORE YOU CLOSE THE HATCH, MAKE SURE THAT NO PERSONS ARE IN THE CREW REST COMPARTMENT. WHEN THE HATCH IS CLOSED, THERE IS NO AIRFLOW TO THE COMPARTMENT AND THERE IS A RISK OF SUFFOCATION.
+| Non-STE: | NOTE: Before you close the hatch, make sure that no persons are in the crew rest compartment. When the hatch is closed, there is no airflow to the compartment and therefore there is a risk of suffocation. (Although the non-STE text does not contain the imperative form, it is not a note. It is a safety instruction.) |
+| --- | --- |
+| STE: | WARNING: BEFORE YOU CLOSE THE HATCH, MAKE SURE THAT NO PERSONS ARE IN THE CREW REST COMPARTMENT. WHEN THE HATCH IS CLOSED, THERE IS NO AIRFLOW TO THE COMPARTMENT AND THERE IS A RISK OF SUFFOCATION. |
 
 Do not use a note to give limits, tolerances, or results of a work step. This information must come directly after the related action in the work step.
 
@@ -74,6 +75,8 @@ If important information is missing from the procedure and this information is i
 
 In STE, you use notes in procedures. You can write notes in descriptions only if the notes are necessary for illustrations or tables that are parts of such descriptions.
 
+In code documentation, this test applies to any procedure that the reader follows: a setup walkthrough, an upgrade guide, a debugging playbook, or a CI pipeline. The reader must be able to complete the task from the numbered steps and the inline code alone, with every note treated as optional background.
+
 ## STE-Code Adaptation
 
 In code documentation, notes provide supplementary information that helps the reader understand context, behavior, or background details about a procedure. Notes must contain descriptive information only. Notes must not contain instructions for the reader to execute, commands to run, or step-by-step actions.
@@ -88,17 +91,19 @@ To verify correct note usage, read the procedure without the notes. If the reade
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: NOTE: When you connect the lines, do not bend them too much. If you bend the lines too much, you can cause damage to them. | STE: CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH. IF YOU BEND THE LINES TOO MUCH, YOU CAN CAUSE DAMAGE TO THEM.
+
 > **STE:** NOTE: The API rate limiter allows a maximum of 1000 requests per minute per client IP address on the free tier.
 >
 > *Source pairing: a note gives descriptive information only, with no instruction — follows the same principle as the original STE example in Rule 5.5.*
 
-(One sentence, 20 words. This note gives context about the API behavior without instructing the reader to do anything.)
+(One sentence, 20 words. This note gives context about the API behavior without instructing the reader to do anything. It appears in the reference page for the rate limiter, as background to the endpoint table.)
 
 > **STE:** NOTE: The configuration cache refreshes automatically every 60 seconds. Manual changes to the configuration file will not take effect until the next cache refresh cycle.
 >
 > *Adapted from spec: multi-sentence note example — a note can have one or more sentences, each with a maximum of 25 words.*
 
-(Two sentences, 8 words and 19 words. Descriptive information only, no instructions.)
+(Two sentences, 8 words and 19 words. Descriptive information only, no instructions. This note sits above the `config.toml` reference table.)
 
 > **Non-STE:** NOTE: When you update the dependencies, run the command `npm audit fix` to resolve known vulnerabilities. If you skip this step, your application may have security issues.
 >
@@ -106,7 +111,27 @@ To verify correct note usage, read the procedure without the notes. If the reade
 >
 > *Source pairing: an instruction written inside a note becomes a numbered work step — follows the same principle as the original STE example in Rule 5.5.*
 
-(Do not put instructions in a note. The instruction to run a command is a work step.)
+(Do not put instructions in a note. The instruction to run a command is a work step. The non-STE note would appear in a README security section like this:)
+
+```markdown
+## Security
+
+NOTE: When you update the dependencies, run the command `npm audit fix` to
+resolve known vulnerabilities. If you skip this step, your application may have
+security issues.
+```
+
+The STE-Code compliant README makes it a numbered step in the setup procedure:
+
+```markdown
+## Setup
+
+1. Install the dependencies with `npm install`.
+2. Copy `.env.example` to `.env`.
+3. Set the `DATABASE_URL` value in `.env`.
+4. Start the database with `docker compose up -d`.
+5. Run the command `npm audit fix` to resolve known vulnerabilities.
+```
 
 > **Non-STE:** NOTE: The response time must be less than 200 milliseconds under normal load conditions. If the response time is higher, investigate the database query performance.
 >
@@ -114,7 +139,20 @@ To verify correct note usage, read the procedure without the notes. If the reade
 >
 > *Adapted from spec: notes must not give limits, tolerances, or results — this information belongs directly in the work step.*
 
-(Do not put limits or requirements in a note. The limit belongs directly in the work step.)
+(Do not put limits or requirements in a note. The limit belongs directly in the work step. In an OpenAPI description, the limit is a statement in the endpoint body, not a note:)
+
+```yaml
+  /orders:
+    get:
+      summary: Get the list of orders for the current user.
+      description: |
+        The response time must be less than 200 milliseconds under normal load
+        conditions. If the response time is higher, investigate the database
+        query performance.
+      responses:
+        '200':
+          description: The list of orders.
+```
 
 | Non-STE: | NOTE: Before you deploy to production, make sure that all environment variables are set correctly. If you deploy with missing variables, the application will not start and the deployment will fail. (This text is not a note. It is a safety instruction.) |
 | --- | --- |
@@ -122,13 +160,15 @@ To verify correct note usage, read the procedure without the notes. If the reade
 
 > *Source pairing: a note that contains a safety instruction must become a CAUTION — follows the same principle as the original STE example in Rule 5.5.*
 
+(The CAUTION belongs at the top of the deployment runbook, before the numbered deploy steps, so the reader sees the risk before they act.)
+
 > **Non-STE:** NOTE: Do not run the migration script on the production database without first creating a full backup. Running the migration without a backup can cause irreversible data loss.
 >
 > **STE:** WARNING: DO NOT RUN THE MIGRATION SCRIPT ON THE PRODUCTION DATABASE WITHOUT A FULL BACKUP. RUNNING THE MIGRATION WITHOUT A BACKUP CAN CAUSE IRREVERSIBLE DATA LOSS.
 >
 > *Source pairing: critical safety information belongs in a WARNING, not a note — follows the same principle as the original STE example in Rule 5.5.*
 
-(Critical safety information belongs in a WARNING, not a note.)
+(Critical safety information belongs in a WARNING, not a note. The WARNING sits at the top of the upgrade guide, above step 1.)
 
 ### Code-Domain Explanation
 
@@ -144,15 +184,49 @@ A note in a README can explain why a dependency exists or give background on a d
 >
 > (Descriptive context. The reader does not need this information to complete the setup steps.)
 
+The note appears in the README like this:
+
+```markdown
+# acme-cli
+
+NOTE: This project uses SQLite for local development. The production deployment
+uses PostgreSQL for concurrent write support.
+
+## Setup
+
+1. Install the tool with `npm install -g acme-cli`.
+2. Run `acme init` to create the local database.
+3. Start the local server with `acme serve`.
+```
+
+The note gives background only. The three setup steps stay as numbered instructions, with no note mixed into them.
+
 #### API Documentation
 
 API reference documents describe endpoints, parameters, and response formats. Notes in API documentation explain behavior, side effects, or constraints. They must not include instructions for using the API endpoint.
 
 A note about rate limiting is acceptable. A note that says "Call the /refresh endpoint before this one" is an instruction. Move that instruction to the endpoint description or write it as a prerequisite step.
 
-> **STE:** NOTE: The `/search` endpoint returns a maximum of 50 results per page. Use the `cursor` parameter to get the next page of results.
+> **STE:** NOTE: The `/search` endpoint returns a maximum of 50 results per page. The `cursor` parameter gets the next page of results.
 >
-> (The second sentence gives an instruction and violates this rule. It must become a separate descriptive statement before the endpoint specification.)
+> (Both sentences are descriptive. The second sentence describes what the parameter does. It does not tell the reader to call anything.)
+
+The compliant note in an OpenAPI document reads:
+
+```yaml
+  /search:
+    get:
+      summary: Search the catalog.
+      description: |
+        NOTE: The `/search` endpoint returns a maximum of 50 results per page.
+        The `cursor` parameter gets the next page of results.
+      parameters:
+        - name: cursor
+          in: query
+          description: The pagination token from the previous response.
+```
+
+The original non-STE version wrote "Use the `cursor` parameter to get the next page of results," which is an instruction and breaks this rule.
 
 #### Docstrings
 
@@ -166,6 +240,20 @@ A docstring note can explain that a function is not thread-safe. It must not say
 >
 > *Principle applied: P4 (approved verb forms). The requirement is part of the function specification, not a note.*
 
+The compliant docstring reads:
+
+```python
+def connect() -> Connection:
+    """Open a connection to the cache server.
+
+    This module requires a call to `initialize()` before any other function
+    call. Other function calls will raise `ModuleNotInitializedError` if
+    `initialize()` has not completed.
+    """
+```
+
+The constraint is a descriptive statement in the docstring body, not a note that gives the reader an instruction.
+
 #### Commit Messages
 
 Commit messages follow a specific format: a summary line followed by a blank line and a body. Notes in commit message bodies must explain why a change was made. They must not give instructions for using the change.
@@ -175,6 +263,18 @@ A commit message note can explain that a refactor was necessary because of a per
 > **STE:** NOTE: The database schema change removes the `legacy_status` column. This column was deprecated in version 2.4 and no code references it.
 >
 > (Descriptive context about the change. No instructions.)
+
+The compliant commit message reads:
+
+```
+Remove the legacy_status column from the users table
+
+NOTE: The database schema change removes the `legacy_status` column. This
+column was deprecated in version 2.4 and no code references it. The upgrade
+migration handles the data copy before the drop.
+```
+
+The message explains the reason for the change. It does not tell the reader to run a migration in the note; that instruction appears in the upgrade guide as a numbered step.
 
 #### Error Messages
 
@@ -187,6 +287,19 @@ Error messages are the most constrained context for notes. An error message must
 > The database server on port 5432 did not respond. Check that the server is running. Make sure that the credentials in the `.env` file are correct.
 >
 > *Principle applied: P4. The fix guidance is part of the error description. It is not a note. The sentences use descriptive mood followed by imperative mood.*
+
+The compliant error is raised in code like this:
+
+```python
+raise ConnectionError(
+    "Error: Connection refused. "
+    "The database server on port 5432 did not respond. "
+    "Check that the server is running. "
+    "Make sure that the credentials in the .env file are correct."
+)
+```
+
+The fix guidance is part of the error text itself (descriptive statement followed by imperative steps), not a separate note that the reader might skip.
 
 ### Paradigm-Specific Guidance
 
@@ -202,6 +315,17 @@ Class documentation describes types, their state, and their behavior. Notes in c
 >
 > *Principle applied: P4. The constraint is a property of the object state. It is not an instruction to the reader.*
 
+The compliant docstring reads:
+
+```python
+class FileWriter:
+    """Write text to a file on disk.
+
+    NOTE: The object enters a disposed state after a call to `dispose()`.
+    Method calls on a disposed object cause an `ObjectDisposedException`.
+    """
+```
+
 #### Functional Documentation (Haskell, Elixir, Clojure, Rust)
 
 Functional code documents pure functions, type signatures, and data transformations. Notes explain purity constraints or performance characteristics.
@@ -211,6 +335,18 @@ Functional code documents pure functions, type signatures, and data transformati
 > **STE:** NOTE: This function is pure. It has no side effects. Repeated calls with the same arguments return the same result.
 >
 > *Principle applied: P4, P11 (one term per concept). The function's properties are described. The reader is not told what to do.*
+
+The compliant doc comment reads:
+
+```rust
+/// Compute the SHA-256 digest of the input bytes.
+///
+/// NOTE: This function is pure. It has no side effects. Repeated calls with
+/// the same arguments return the same result.
+pub fn digest(input: &[u8]) -> [u8; 32] {
+    // ...
+}
+```
 
 #### Procedural Documentation (C, Go, Bash)
 
@@ -222,6 +358,16 @@ Procedural code documents sequences of steps. Notes explain state between steps 
 >
 > *Principle applied: P4, P2 (words only as specified part of speech). "Remains" → "stays" for simpler vocabulary.*
 
+The compliant comment reads:
+
+```go
+// Open the log file for append access.
+//
+// NOTE: The file descriptor stays open until the code calls `close()`.
+// An unclosed file descriptor causes a resource leak.
+f, err := os.OpenFile("app.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+```
+
 #### Declarative Documentation (SQL, Terraform, Kubernetes YAML)
 
 Declarative documents describe desired state. Notes explain constraints or platform behavior that affects the declared state.
@@ -232,6 +378,18 @@ Declarative documents describe desired state. Notes explain constraints or platf
 >
 > *Principle applied: P4. The attribute behavior is described. The instruction "Always set this" is removed.*
 
+The compliant Terraform comment reads:
+
+```hcl
+# NOTE: The `depends_on` attribute controls resource creation order.
+# Terraform creates the database resource before the application resource
+# when this attribute is set.
+resource "kubernetes_deployment" "app" {
+  metadata { name = "app" }
+  depends_on = [kubernetes_deployment.database]
+}
+```
+
 #### Systems Documentation (Rust Ownership, C Memory)
 
 Systems documentation explains ownership, lifetime, and memory semantics. Notes clarify constraints that the compiler enforces.
@@ -241,6 +399,19 @@ Systems documentation explains ownership, lifetime, and memory semantics. Notes 
 > **STE:** NOTE: This function borrows the value immutably. The borrow prevents mutation of the value until the borrow ends. The compiler rejects code that violates this constraint.
 >
 > *Principle applied: P4, P11. The compiler's behavior is described. The reader is not given instructions.*
+
+The compliant doc comment reads:
+
+```rust
+/// Read the length of the buffer without taking ownership.
+///
+/// NOTE: This function borrows the value immutably. The borrow prevents
+/// mutation of the value until the borrow ends. The compiler rejects code
+/// that violates this constraint.
+pub fn len(buf: &Buffer) -> usize {
+    buf.data.len()
+}
+```
 
 ### Extended Examples
 
@@ -254,6 +425,26 @@ Each example shows a Non-STE version that violates the rule and an STE-Code comp
 >
 > *Principle applied: P1, P4. The version check instruction is a work step. The note about static assets is removed because it is not necessary for the procedure.*
 
+The non-STE note appears in a contributor guide like this:
+
+```markdown
+## Build
+
+NOTE: The build process generates static assets in the `dist/` directory.
+Before you run the build, make sure you have Node.js version 18 or higher
+installed. Run `node --version` to check your current version.
+```
+
+The compliant guide lists the prerequisite as a numbered step and drops the optional background note:
+
+```markdown
+## Build
+
+1. Make sure that Node.js version 18 or higher is installed.
+2. Install the dependencies with `npm install`.
+3. Build the static assets with `npm run build`.
+```
+
 Explanation: The Non-STE version hides a prerequisite check in a note. The reader might skip the note and use an incompatible Node.js version. The STE version makes the check a numbered work step.
 
 **Example 2: Requirement disguised as a note**
@@ -263,6 +454,20 @@ Explanation: The Non-STE version hides a prerequisite check in a note. The reade
 > **STE:** The authentication token is valid for 3600 seconds. After the token expires, the API returns a `401 Unauthorized` status code.
 >
 > *Principle applied: P4, P5. The token lifetime and the API behavior are descriptive statements. They belong in the endpoint specification, not in a note.*
+
+The compliant API description reads:
+
+```yaml
+  /profile:
+    get:
+      summary: Get the current user profile.
+      description: |
+        The authentication token is valid for 3600 seconds. After the token
+        expires, the API returns a `401 Unauthorized` status code. Send a
+        valid bearer token in the `Authorization` header.
+      security:
+        - bearerAuth: []
+```
 
 Explanation: The Non-STE version gives a requirement ("you must refresh") inside a note. The STE version moves the descriptive information about token lifetime and error behavior into the API specification body.
 
@@ -274,6 +479,18 @@ Explanation: The Non-STE version gives a requirement ("you must refresh") inside
 >
 > *Principle applied: P1 (use, not utilize), P2. The tuning guidance is a configuration instruction. It belongs in the configuration reference section, not in a note.*
 
+The compliant note keeps only the descriptive fact, and the tuning guidance moves to a configuration reference table:
+
+```markdown
+NOTE: The default connection pool size is 10.
+
+## Configuration
+
+| Variable    | Default | Description                                         |
+| ----------- | ------- | --------------------------------------------------- |
+| `POOL_SIZE` | `10`    | Set a higher value, such as `25`, for high traffic. |
+```
+
 Explanation: The Non-STE version gives tuning instructions in a note. The STE version keeps only the descriptive fact about the default value. The tuning guidance must appear in a dedicated configuration section or work step.
 
 **Example 4: Debugging instructions in a note**
@@ -283,6 +500,19 @@ Explanation: The Non-STE version gives tuning instructions in a note. The STE ve
 > **STE:** NOTE: The application writes startup errors to the file `/var/log/app/error.log`. Fatal errors start with the word "FATAL" in the log.
 >
 > *Principle applied: P4, P13 (do not use technical verbs as nouns). The debugging procedure is not a note. The note only describes the log file location and format.*
+
+The compliant project README separates the note from the troubleshooting steps:
+
+```markdown
+NOTE: The application writes startup errors to the file `/var/log/app/error.log`.
+Fatal errors start with the word "FATAL" in the log.
+
+## Troubleshooting
+
+1. Open `/var/log/app/error.log`.
+2. Search for lines that contain the word "FATAL".
+3. If you see a "connection refused" error, contact the operations team.
+```
 
 Explanation: The Non-STE version gives a troubleshooting procedure inside a note. The STE version describes where errors are logged and what to look for. The troubleshooting procedure must be a separate section with numbered steps.
 
@@ -294,6 +524,19 @@ Explanation: The Non-STE version gives a troubleshooting procedure inside a note
 >
 > *Principle applied: P1, P4. The migration commands are work steps. They must be numbered steps in the upgrade procedure.*
 
+The compliant upgrade guide reads:
+
+```markdown
+NOTE: This release adds a new `email_verified` column to the `users` table.
+
+## Upgrade
+
+1. Back up the production database.
+2. Run the migration with `php artisan migrate`.
+3. If the migration fails, roll back with `php artisan migrate:rollback` and
+   check your database permissions.
+```
+
 Explanation: The Non-STE version embeds run and rollback commands in a note. The STE version only describes the schema change. The migration commands belong in numbered upgrade steps.
 
 **Example 6: Timeout behavior explained incorrectly**
@@ -303,6 +546,18 @@ Explanation: The Non-STE version embeds run and rollback commands in a note. The
 > **STE:** NOTE: The default request timeout is 30 seconds. The load balancer drops connections that stay open longer than 60 seconds.
 >
 > *Principle applied: P4, P11. The constraints about maximum timeout and error handling are requirements. They belong in the API specification or client library documentation.*
+
+The compliant client library documentation reads:
+
+```markdown
+NOTE: The default request timeout is 30 seconds. The load balancer drops
+connections that stay open longer than 60 seconds.
+
+## Client configuration
+
+1. Keep the request timeout at or below 60 seconds.
+2. Handle `408 Request Timeout` responses in your client code.
+```
 
 Explanation: The Non-STE version gives a constraint and an instruction inside a note. The STE version only describes the default timeout and the load balancer behavior. The constraint and the error handling requirement must appear in the appropriate specification section.
 
@@ -322,9 +577,21 @@ Some framework names are also common verbs. For example, `React`, `Express`, `Sp
 
 Documentation generated by tools such as JSDoc, Sphinx, or `go doc` often includes notes from source comments. These generators do not know about this rule. If a generated note contains an instruction, the source comment is the problem. Fix the source comment.
 
-> **Non-STE:** NOTE: Call this method before any other method on the object.
+> **Non-STE (source comment):** NOTE: Call this method before any other method on the object.
 >
-> **STE (source):** This method must be the first call on the object.
+> **STE (source comment):** This method must be the first call on the object.
+
+The compliant source comment reads:
+
+```javascript
+/**
+ * Prepare the client for use.
+ *
+ * This method must be the first call on the object. Other method calls
+ * before this one raise `NotReadyError`.
+ */
+prepare() { /* ... */ }
+```
 
 Do not rely on the generator to filter or rephrase notes. The rule applies at the source level.
 
@@ -376,7 +643,7 @@ A note must use descriptive mood. If a sentence uses imperative mood, it is not 
 
 > **Non-STE:** NOTE: You must close the connection after each request to prevent a memory leak.
 >
-> ("Must" signals a requirement. This is a safety instruction, not a note.)
+> ("Must" signals a requirement. This is a safety instruction, not a note. The compliant form is a CAUTION: WARNING: CLOSE THE CONNECTION AFTER EACH REQUEST TO PREVENT A MEMORY LEAK.)
 
 **Sentence length in notes:** Each sentence in a note can have a maximum of 25 words. This constraint comes from the original STE standard. It prevents notes from becoming too dense for the reader to parse quickly. If a descriptive statement needs more than 25 words, split it into two sentences or move the information to the procedure body.
 
@@ -404,4 +671,4 @@ This rule interacts with several other rules in the STE-Code specification. The 
 
 - **Rule 9.1 (Descriptive Writing):** Notes contain descriptive text. The descriptive writing rules in Section 9 apply fully to notes.
 
-> **See also:** Rule 5.3 — Imperative (Command) Form for Instructions; Rule 5.4 — Descriptive Statement Before the Command; Rule 5.6 — Separate Steps for Separate Actions; Rule 7.1 — Use an Applicable Word to Identify the Level of Risk; Rule 9.1 — Descriptive Writing Rules; Rule 1.1 — Use Approved Words from the STE-Code Dictionary; Rule 1.5 — Technical Code Nouns; Rule 1.7 — Do Not Use Technical Nouns as Verbs
+> **See also:** Rule 1.1 — Use Approved Words from the STE-Code Dictionary; Rule 1.5 — Technical Code Nouns; Rule 1.7 — Do Not Use Technical Nouns as Verbs; Rule 5.3 — Imperative (Command) Form for Instructions; Rule 5.4 — Descriptive Statement Before the Command; Rule 5.6 — Separate Steps for Separate Actions; Rule 7.1 — Use an Applicable Word to Identify the Level of Risk; Rule 9.1 — Descriptive Writing Rules
