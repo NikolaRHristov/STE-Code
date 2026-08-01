@@ -1,7 +1,7 @@
 # STE-Code Flavor: Linguistic Layer v1.0.0
 
 > **Flavor version:** FLAVOR-1.0.0
-> **Base standard:** STANDARD-1.0.0 (51 rules, 22 categories, 5 levels)
+> **Base standard:** STANDARD-1.0.0 (54 rules, 22 categories, 8 levels)
 > **Relationship:** Additive — extends STANDARD without modifying it
 > **Status:** Specification complete; grounding, enrichment, and verification pending (see workflows)
 
@@ -24,8 +24,8 @@ addresses implicitly but doesn't name explicitly. Every layer is:
 STANDARD-1.0.0                    FLAVOR-1.0.0
 ──────────────                    ────────────
 ste-code/adapted/                 ste-code/linguistics/
-  a-sec*-rule*.md (51 rules)        semantics.json        ← semantic roles + collisions
-  a-dictionary.md (2,149 entries)   DECISION-TREE.md      ← rule application order
+  a-sec*-rule*.md (54 rules)        semantics.json        ← semantic roles + collisions
+  a-dictionary.md (560 entries)     DECISION-TREE.md      ← rule application order
   a-categories.md (22 categories)   SPECIFICATION.md      ← full layer specification
                                     registers.json        ← register profiles
 ste-code/artifacts/                 ste_code_lint.py      ← reference checker
@@ -77,7 +77,7 @@ python3 ste-code/linguistics/ste_code_lint.py sample-doc.md --flavor FLAVOR-1.0.
 
 | Version | Base | Changes |
 |---------|------|---------|
-| STANDARD-1.0.0 | — | 51 rules, 22 categories, 5 level prompts |
+| STANDARD-1.0.0 | — | 54 rules, 22 categories, 8 level prompts |
 | FLAVOR-1.0.0 | STANDARD-1.0.0 | 12 linguistic checking layers + 18 workflows |
 
 Future versions: MINIMAL-PAIRS-1.0.0 (corpus), DIACHRONIC-1.0.0 (temporal), GENERATIVE-1.0.0 (LLM contract).

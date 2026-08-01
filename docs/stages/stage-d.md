@@ -64,12 +64,10 @@ The orchestrator adapts these sections (`SECTIONS` in `adapt_batch.py`):
 | 9 | Writing Practices | 4, plus GR1–GR4 |
 
 !!! note
-    The repository README and the badge quote "51 rules + 4 GR", which is the
-    published rule count of the source standard. The pipeline section map above
-    is what `adapt_batch.py` expects and what `ste-code/adapted/` contains
-    today: 54 `a-secN-ruleX.Y.md` files plus the four General Rule files. Use
-    the section map when you work on the pipeline; use the standard count when
-    you cite the specification.
+    The section map above is what `adapt_batch.py` expects and what
+    `ste-code/adapted/` contains today: 54 `a-secN-ruleX.Y.md` files plus the
+    four General Rule files, which is 58 files. The section counts sum to 54,
+    and the README badge quotes the same 54.
 
 ---
 

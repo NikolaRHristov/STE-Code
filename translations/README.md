@@ -1,6 +1,7 @@
 # Translations — Phase E
 
-9 locales. ~540 target files. Scaffolding created. Population pending.
+10 locales. Directory scaffolding created; no content files exist yet. Each
+locale currently holds only `.gitkeep` placeholders.
 
 ## Locales
 
@@ -21,18 +22,18 @@
 
 ```
 translations/{locale}/
-├── artifacts/         ← 4 level system prompts
-├── templates/         ← 4 STE-Code templates
+├── artifacts/         ← level system prompts
+├── templates/         ← STE-Code templates
 ├── data/vocabulary/   ← approved and unapproved words
-└── rules/             ← 51 rule summaries
+└── rules/             ← one summary per rule (54 rules + 4 GR)
 ```
 
-## Translatable Content (~60 files per locale)
+## Translatable content per locale (planned)
 
-1. System prompts (4 files): Level 1 through Level 4
-2. Templates (4 files): micro, full, agentic, developer
+1. System prompts: one per artifact tier (levels -2 to 5)
+2. Templates: micro, full, agentic, developer
 3. Vocabulary (4 files): approved verbs, approved adjectives, unapproved entries, code dictionary
-4. Rules (51 files): One summary per rule
+4. Rules: 58 summaries (54 rules + 4 General Rules)
 
 ## Process
 

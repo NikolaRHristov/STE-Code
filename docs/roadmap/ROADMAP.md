@@ -44,7 +44,7 @@
 Verify every claim in the linguistic layer against actual repo content.
 
 ```
-Read: linguistics/* + all level prompts + all 57 adapted rules
+Read: linguistics/* + all level prompts + all 58 adapted rule files
       + data/synonym-table.json + benchmark_lib.py
 
 Produce docs/roadmap/GROUNDING-REPORT.md:

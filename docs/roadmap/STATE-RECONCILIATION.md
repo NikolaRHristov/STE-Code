@@ -12,7 +12,7 @@
 | Path | Count | Status |
 |------|:-----:|:------:|
 | `ste-code/adapted/a-sec*.md` | 58 files | ✅ 54 rules + 4 GR |
-| `ste-code/adapted/a-dictionary.md` | 5,943 lines | ✅ 2,149 entries |
+| `ste-code/adapted/a-dictionary.md` | 5,943 lines | ✅ 560 entries (452 approved, 108 unapproved) |
 | `ste-code/adapted/a-categories.md` | 607 lines | ✅ 22 categories + domain placeholders |
 | `ste-code/artifacts/level-2/` | 5 KB · ~1.2K tokens | ✅ |
 | `ste-code/artifacts/level-1/` | 26 KB · ~5.9K tokens | ✅ |
