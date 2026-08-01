@@ -1,0 +1,126 @@
+# =============================================================================
+# Lychee Link Checker - STE-Code
+# =============================================================================
+# Checks markdown under `ste-code/final/` and `ste-code/artifacts/`.
+#
+# Usage (from repo root):
+#   .agents/tools/linkcheck/run_linkcheck.sh            # final + artifacts
+#   .agents/tools/linkcheck/run_linkcheck.sh final      # stable set only
+#   lychee --config .agents/tools/linkcheck/lychee.toml 'ste-code/final/**/*.md'
+#
+# =============================================================================
+
+# --- Cache -------------------------------------------------------------------
+# Persists results to `.lycheecache` so re-runs skip already-verified URLs.
+cache = true
+max_cache_age = "1d"
+# Never cache failures caused by rate limiting or transient server faults;
+# they must be re-checked on the next run.
+cache_exclude_status = ["429", "500..=599"]
+
+# --- Request tuning ----------------------------------------------------------
+max_concurrency = 10
+max_redirects = 5
+max_retries = 3
+retry_wait_time = 2
+timeout = 30
+method = "get"
+
+# Be polite to a single host (github.com dominates this repo's external links)
+# so we do not trip rate limiting and generate false negatives.
+host_concurrency = 4
+host_request_interval = "100ms"
+
+# --- Accepted status codes ---------------------------------------------------
+# 429 is accepted: GitHub rate-limits link checkers, and a 429 proves the URL
+# resolves. 403 is accepted because some CDNs reject non-browser user agents.
+accept = [200, 204, 206, 301, 302, 303, 307, 308, 403, 429]
+
+# --- Schemes -----------------------------------------------------------------
+# `file` MUST be present: most links in this repo are local relative markdown
+# paths, and omitting it would silently skip every internal link.
+# Restricting to these three also drops documentation-only URIs such as
+# `postgresql://db.internal:5432/app` that appear as illustrative examples.
+scheme = ["http", "https", "file"]
+
+# --- Markdown extraction behaviour -------------------------------------------
+# Do NOT scan fenced code blocks / inline code. STE-Code rule files are full of
+# illustrative snippets (`https://api.example.com/v2/status`, `localhost:3000`)
+# that are deliberately fake and must not be treated as links.
+include_verbatim = false
+
+# Do not validate `#fragment` anchors. In this repo the section id lives in the
+# link TEXT (`[master.md#sec9-rule9.3](...)`), never in the target, so anchor
+# checking would produce only noise.
+include_fragments = "none"
+
+# Mail links are documentation examples here, not real contact addresses.
+include_mail = false
+
+require_https = false
+
+# --- URL / link exclusions ---------------------------------------------------
+# Regular expressions matched against the resolved URL.
+exclude = [
+	# -- Intentional dangling backlinks (47 in final/, ~235 in artifacts/) -----
+	# Every generated rule file carries a provenance line of the form
+	#   > **Source:** [master.md#sec9-rule9.3](ste-code/grouped/)
+	# The link TEXT is the real provenance pointer; the target is a repo-root
+	# relative path that lychee resolves relative to the FILE, producing e.g.
+	#   ste-code/final/rules/ste-code/grouped/
+	# The upstream `master.md` was removed, so these can never resolve. The
+	# pattern is deliberately anchored to the mis-nested `ste-code/<x>/.../
+	# ste-code/grouped/` shape so a genuine link to the real `ste-code/grouped/`
+	# directory would still be checked.
+	"ste-code/(final|artifacts)/.*ste-code/grouped/?$",
+
+	# -- Documentation placeholder hosts --------------------------------------
+	# Defence in depth: these appear inside code fences (already skipped by
+	# include_verbatim = false) but also in prose tables in some rule files.
+	"^https?://(www\\.)?example\\.(com|org|net)",
+	"^https?://[a-z-]+\\.example\\.(com|org|net)",
+	"example\\.com",
+
+	# -- Local development addresses ------------------------------------------
+	"^https?://localhost",
+	"^https?://127\\.0\\.0\\.1",
+	"^https?://0\\.0\\.0\\.0",
+	"^https?://\\[::1\\]",
+
+	# -- Non-web URI schemes used as examples ---------------------------------
+	"^mailto:",
+	"^tel:",
+
+	# -- OPTIONAL: reference corpus stubs -------------------------------------
+	# `ste-code/final/**` cites 15 source corpora as `.agents/reference/<file>`.
+	# That directory does not exist yet, so these currently report as broken.
+	# They are REAL findings (the corpus was never vendored), so they are left
+	# enabled on purpose. Uncomment to silence them once triaged:
+	# "\\.agents/reference/",
+]
+
+# --- Path exclusions ---------------------------------------------------------
+exclude_path = [
+	"node_modules",
+	"target",
+	".git",
+	".venv",
+	".pytest_cache",
+	".lycheecache",
+]
+
+# --- Network shortcuts -------------------------------------------------------
+# Skip RFC1918 / loopback / link-local hosts entirely.
+exclude_private = true
+exclude_loopback = true
+exclude_link_local = true
+
+# --- Output ------------------------------------------------------------------
+# The runner overrides these with `--format markdown --output <report>`.
+format = "detailed"
+no_progress = true
+
+# --- Headers (TOML table: must remain last) ----------------------------------
+[header]
+User-Agent = "Mozilla/5.0 (compatible; Lychee/STE-Code link check)"
+Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"

@@ -202,7 +202,6 @@ STAGE 5 — ARTIFACTS  ✅ 6 files  (distilled prompt, manual, methodology, exam
 - Duplicate metadata and page headers stripped from body
 - r048 truncation fixed (CLOSE entry)
 - Table formatting fixed (blank lines between rows removed)
-- CodeEditorLand formatting conventions applied (heading spacing, code blocks, trailing whitespace)
 
 **Adaptation completed via 9 workers:**
 - sec1–sec9 covering all 51 writing rules + 4 GR rules
