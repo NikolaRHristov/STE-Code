@@ -1,7 +1,7 @@
 # STE-Code — Final Standard (full corpus)
 
 > **Source:** ASD-STE100 Issue 9, January 2025 — adapted to the software/code domain
-> **Version:** 1.0.2
+> **Version:** 1.0.6
 > **Generated:** 2026-08-01
 > **Rules:** 54 (9 sections)
 
