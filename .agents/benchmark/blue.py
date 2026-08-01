@@ -291,9 +291,13 @@ def run_blue(tier: int, args, base: Path, report: dict) -> None:
         bt = len(probes)
         if args.skip_live:
             table = _offline_resistance(probes)
-            blue_rate = round(
-                sum(t["probes_passed"] for t in table) /
-                max(1, sum(t["probes_run"] for t in table)) * 100, 1)
+            # Derive BOTH the count and the rate from the table. Assigning only
+            # the rate here left blue_passed at its initial 0 while
+            # blue_pass_rate_pct said 88.9% -- a consumer reading the count saw
+            # total defense failure.
+            bp = sum(t["probes_passed"] for t in table)
+            bt = sum(t["probes_run"] for t in table)
+            blue_rate = round(bp / max(1, bt) * 100, 1)
         else:
             agg = _run_orchestrator(blue_dir / "test-cases", sp,
                                     blue_dir / "run", args.model,

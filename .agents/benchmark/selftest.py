@@ -616,6 +616,38 @@ def test_red_blue(cfg, tmp: Path) -> None:
     check(all(t["resistance_pct"] == 100.0 for t in nonverb),
           "blue non-verbatim placements = 100% (offline)")
 
+    # blue-done.json must report a COUNT consistent with its own rate. The
+    # offline branch used to assign only the rate, leaving blue_passed at 0
+    # while blue_pass_rate_pct said 88.9% -- a consumer reading the count saw
+    # total defense failure on a run that mostly passed.
+    bdir = tmp / "blue-counts" / "tier0" / "round1"
+    bdir.mkdir(parents=True, exist_ok=True)
+    (bdir / "purple.json").write_text(json.dumps(
+        {"tier": 0, "round": 1, "handshake": "purple"}), encoding="utf-8")
+    (bdir / "escapes.json").write_text(json.dumps(esc), encoding="utf-8")
+    rc = subprocess.run(
+        [sys.executable, str(BENCH / "blue.py"), "--skip-live",
+         "--tiers", "0", "--rounds", "1", "--base", str(bdir.parent.parent),
+         "--await-timeout", "5", "--poll-interval", "1"],
+        capture_output=True, text=True)
+    check(rc.returncode == 0, "blue.py offline run exits 0")
+    done = bdir / "blue-done.json"
+    if done.exists():
+        bd = json.loads(done.read_text())
+        tbl = bd.get("resistance_table", [])
+        want = sum(t["probes_passed"] for t in tbl)
+        run = sum(t["probes_run"] for t in tbl)
+        check(bd["blue_passed"] == want,
+              "blue_passed matches table ({} vs {})".format(
+                  bd["blue_passed"], want))
+        check(bd["blue_passed"] > 0 or want == 0,
+              "blue_passed is not falsely zero")
+        rate = round(want / max(1, run) * 100, 1)
+        check(bd["blue_pass_rate_pct"] == rate,
+              "blue_pass_rate_pct consistent with count")
+    else:
+        check(False, "blue writes blue-done.json")
+
     # BLUE await-timeout must be prompt, not hang.
     empty = tmp / "blue-empty"
     (empty / "tier0" / "round1").mkdir(parents=True)
