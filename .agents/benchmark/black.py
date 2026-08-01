@@ -248,14 +248,38 @@ class Verifier:
                       "blue_techniques": sorted(blue_techniques),
                       "untested": untested})
 
+    def _adopted_remedies(self, white) -> "list[dict]":
+        """Resolve the adopted remedies WHITE produced this round.
+
+        WHITE's sentinel records ``adopted`` as a *count*, not a list -- the
+        remedy bodies live in ``<base>/remedies/adopted/*.json``. Reading only
+        the sentinel key yields nothing, so the split-half challenge never runs
+        and every adopted remedy ships unverified. Prefer an inline list when a
+        caller supplies one, then fall back to the artifacts on disk.
+        """
+        if isinstance(white, dict):
+            for key in ("remedies_adopted", "remedies"):
+                val = white.get(key)
+                if isinstance(val, list) and val:
+                    return [r for r in val if isinstance(r, dict)]
+        out = []
+        adopted_dir = self.base / "remedies" / "adopted"
+        if adopted_dir.is_dir():
+            for path in sorted(adopted_dir.glob("*.json")):
+                try:
+                    body = json.loads(path.read_text(encoding="utf-8"))
+                except (OSError, ValueError):
+                    continue
+                if isinstance(body, dict):
+                    out.append(body)
+        return out
+
     def _challenge_remedies(self, variant, round_n, white) -> "list[dict]":
         if V is None:
             return []
-        adopted = white.get("remedies_adopted", []) if isinstance(white, dict) else []
-        if isinstance(adopted, int):
-            adopted = white.get("remedies", [])[:adopted]
+        adopted = self._adopted_remedies(white)
         out = []
-        for remedy in (adopted if isinstance(adopted, list) else []):
+        for remedy in adopted:
             rid = remedy.get("id") if isinstance(remedy, dict) else str(remedy)
             cases = remedy.get("cases") if isinstance(remedy, dict) else None
             if not cases:

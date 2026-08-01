@@ -41,7 +41,9 @@ Generalization (patterns)
 Lessons roll up into PATTERNS when a group shares a technique across placements
 ('technique X escapes regardless of placement'), a placement across techniques
 ('placement Y defeats everything'), or a missed principle. Each pattern carries
-support (count) and lift = support / base_rate_of_that_axis.
+support (count) and lift = (support / total lessons) / (1 / values on that axis),
+i.e. how much the group exceeds an even spread across that axis. lift > 1 means
+the axis value concentrates failures; lift ~ 1 means it carries no signal.
 
 Transfer
 --------
@@ -251,24 +253,29 @@ class Knowledge:
                 by_princ.setdefault(p, []).append(sig)
         total = len(self.lessons)
 
-        def _emit(kind, key, sigs):
+        def _emit(kind, key, sigs, universe):
             if len(sigs) < 2:
                 return
             pattern_id = "pat-{}-{}".format(kind, hashlib.blake2s(
                 key.encode()).hexdigest()[:6])
-            base_rate = len(sigs) / total if total else 0.0
+            # Lift compares this group's share of the corpus against the share
+            # it would hold if the axis were spread evenly over its observed
+            # values. Dividing (len(sigs)/total) by itself -- the previous
+            # base_rate -- is 1.0 by construction and carries no signal.
+            share = len(sigs) / total if total else 0.0
+            base_rate = (1.0 / len(universe)) if universe else 0.0
             self._patterns[pattern_id] = {
                 "id": pattern_id, "kind": kind, "key": key,
                 "support": len(sigs), "lesson_ids": sorted(sigs),
-                "lift": round((len(sigs) / total) / base_rate, 3) if base_rate else 0.0,
+                "lift": round(share / base_rate, 3) if base_rate else 0.0,
             }
 
         for t, s in by_tech.items():
-            _emit("technique_across_placements", t, s)
+            _emit("technique_across_placements", t, s, by_tech)
         for p, s in by_place.items():
-            _emit("placement_across_techniques", p, s)
+            _emit("placement_across_techniques", p, s, by_place)
         for pr, s in by_princ.items():
-            _emit("missed_principle", pr, s)
+            _emit("missed_principle", pr, s, by_princ)
 
     # -- query API -----------------------------------------------------------
 

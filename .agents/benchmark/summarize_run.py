@@ -452,18 +452,36 @@ def integrity_checks(dossier: dict) -> list:
             "the driver writes as a rising constant. The comparison is "
             "satisfied by construction, so confirmation carries no evidence.")
 
-    # 4. The remedy challenge never fired.
+    # 4. The remedy challenge: never fired, or fired without evidence.
     remedy_claims = [k for k in (verdicts.get("by_claim", {}) or {})
                      if k.startswith("remedy-")]
     if total_v and not remedy_claims:
         add("high", "Split-half remedy verification never ran",
             "No verdict carries a 'remedy-*' claim id, so BLACK's "
-            "_challenge_remedies produced nothing. It reads "
-            "white['remedies_adopted'], but white-done.json stores the count "
-            "under 'adopted' and keeps no per-case outcomes.",
+            "_challenge_remedies produced nothing. It could not resolve the "
+            "adopted remedies: white-done.json records 'adopted' as a count, "
+            "and the remedy bodies live in <base>/remedies/adopted/.",
             "verification.py -- the split-half instrument that detects "
             "overfitting -- is present, self-tested, and never applied to a "
             "real remedy. Adopted remedies are unverified.")
+    elif remedy_claims:
+        by_claim = verdicts.get("by_claim", {}) or {}
+        under = sum(counts.get("underpowered", 0)
+                    for k, counts in by_claim.items()
+                    if k.startswith("remedy-"))
+        graded = sum(sum(counts.values()) for k, counts in by_claim.items()
+                     if k.startswith("remedy-"))
+        if graded and under == graded:
+            add("high", "Remedy verification runs but has nothing to measure",
+                "All {} remedy verdicts across {} remedies came back "
+                "'underpowered': BLACK now resolves the adopted remedies, but "
+                "each carries no 'cases' array, so there are no per-case "
+                "derivation/verification outcomes to split."
+                .format(graded, len(remedy_claims)),
+                "The instrument is wired in and reports honestly, but WHITE "
+                "must record per-case outcomes on each remedy before the "
+                "split-half test can distinguish a real remedy from an "
+                "overfit one.")
 
     # 5. Reverse deduction: notes written, knowledge never pruned.
     pruned = max((c.get("pruned_lessons", 0) for c in cycles), default=0)
@@ -1140,10 +1158,15 @@ def _render_knowledge(doc: dict) -> list:
                  p.get("lift")] for p in pats]
         out.extend(_table(["pattern kind", "key", "support", "lift"], rows))
         out.append("")
-        out.append("> Every `lift` is 1.0. In `knowledge._regenerate_patterns` "
-                   "the lift is `(support/total) / base_rate` where `base_rate` "
-                   "is itself `support/total` — the ratio is 1.0 by "
-                   "construction and carries no signal.")
+        lifts = {round(float(p.get("lift") or 0), 3) for p in pats}
+        if lifts == {1.0}:
+            out.append("> Every `lift` is 1.0, so no axis value concentrates "
+                       "failures more than an even spread would.")
+        else:
+            out.append("> `lift` is this group's share of the corpus divided "
+                       "by an even spread across that axis. Above 1.0 the "
+                       "value concentrates failures; at 1.0 it carries no "
+                       "signal.")
         out.append("")
 
     if rem.get("adopted_count") or rem.get("rejected_count"):
