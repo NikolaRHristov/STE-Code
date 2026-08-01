@@ -31,92 +31,24 @@ If there is quoted text that has British English spelling, for example in an err
 
 ### Examples
 
-> *Adapted from spec pair:* Non-STE: "Fibre is the British English spelling of the word."  |  STE: "Fiber is the American English spelling of the word."
+> *Adapted from spec pair:* Non-STE: "Fibre is British English spelling."  |  STE: "Fiber is American English spelling."
 
-> *Adapted from spec pair:* Non-STE: "The colour of the part is red."  |  STE: "The color of the part is red."
+> *Adapted from spec pair:* Non-STE: "Colour is British English spelling."  |  STE: "Color is American English spelling."
 
 > **Non-STE:** The log file shows the colour of each output line.
-
-```
-# Non-STE README snippet for the logger package
-## Logger output
-The `write_log()` function prints a message for each request.
-The log file shows the colour of each output line:
-
-    [INFO] 2026-08-01 09:14:02 request=GET /health colour=green
-    [INFO] 2026-08-01 09:14:03 request=POST /login colour=blue
-
-Run the example:
-
-    python examples/show_log.py --path ./app.log
-```
-
+>
 > **STE:** The log file shows the color of each output line.
-
-```
-# STE README snippet for the logger package
-## Logger output
-The `write_log()` function prints a message for each request.
-The log file shows the color of each output line:
-
-    [INFO] 2026-08-01 09:14:02 request=GET /health color=green
-    [INFO] 2026-08-01 09:14:03 request=POST /login color=blue
-
-Run the example:
-
-    python examples/show_log.py --path ./app.log
-```
 
 > *Adapted from spec example: "Color" is American English spelling, and the spec explicitly lists it as an example. The non-STE version uses the British English spelling "colour," which is not permitted. The STE version uses the American English spelling "color."*
 
 > **Non-STE:** Initialise the variable before you use it in the loop.
-
-```python
-# Non-STE: config_loader.py
-def load_config(path):
-    """Read the YAML config and return a mapping of settings."""
-    settings = {}
-    # Initialise the variable before you use it in the loop.
-    index = 0
-    with open(path, "r") as handle:
-        for line in handle:
-            settings[index] = line.strip()
-            index = index + 1
-    return settings
-```
-
+>
 > **STE:** Initialize the variable before you use it in the loop.
-
-```python
-# STE: config_loader.py
-def load_config(path):
-    """Read the YAML config and give a mapping of settings."""
-    settings = {}
-    # Initialize the variable before you use it in the loop.
-    index = 0
-    with open(path, "r") as handle:
-        for line in handle:
-            settings[index] = line.strip()
-            index = index + 1
-    return settings
-```
 
 > *Adapted from spec example: "Fiber" is American English spelling. Just as the spec requires American English spelling for all technical documentation, STE-Code requires it for code documentation. "Initialize" is American English spelling. The non-STE version uses the British English spelling "initialise," which is not permitted.*
 
 > **STE:** The terminal shows the message `Colour profile not recognised`.
-
-```
-# STE: the surrounding prose uses American English; the quoted text keeps
-# the British spelling that the system printed.
-$ run_pipeline --profile dark
-Colour profile not recognised
-Falling back to the default profile.
-
-The terminal shows the message `Colour profile not recognised`. The
-surrounding documentation uses American English spelling. Keep the quoted
-text exactly as the program printed it.
-```
-
+>
 > *Adapted from spec concept: if a computer screen displays text with British English spelling, you must not change the spelling of the quoted text. In STE-Code, if a terminal output or error message contains British English spelling ("Colour," "recognised"), you must keep the quoted text exactly as it is. The surrounding documentation text must use American English spelling. This is the same principle as the spec example where British spelling in quoted computer screen text is preserved.*
 
 ---
@@ -136,26 +68,41 @@ Common README violations involve the -ise/-ize suffix pair. Words that end in "-
 Example — README installation section:
 
 > **Non-STE:** Organise your environment variables in a `.env` file. The application analyses this file at startup.
-
-```
-# Non-STE README
-## Install
-1. Organise your environment variables in a `.env` file.
-2. The application analyses this file at startup and loads the settings.
-3. Run `make serve` to start the local server.
-```
-
+>
 > **STE:** Organize your environment variables in a `.env` file. The application analyzes this file at startup.
-
-```
-# STE README
-## Install
-1. Organize your environment variables in a `.env` file.
-2. The application analyzes this file at startup and loads the settings.
-3. Run `make serve` to start the local server.
-```
-
 > *(P14 applied: "organise" → "organize"; "analyse" → "analyze")*
+
+Example — full README installation block:
+
+````
+# Non-STE
+
+## Installation
+
+1. Clonse the repository with `git clone https://github.com/acme/widget-api.git`.
+2. Organise your environment variables in a `.env` file. The application analyses
+   this file at startup to load the database connection string.
+3. Run `npm install`, then `npm run build` to compile the TypeScript sources.
+
+## Usage
+
+The CLI tool centres the output and colour-codes each log level.
+
+# STE
+
+## Installation
+
+1. Clone the repository with `git clone https://github.com/acme/widget-api.git`.
+2. Organize your environment variables in a `.env` file. The application analyzes
+   this file at startup to load the database connection string.
+3. Run `npm install`, then `npm run build` to build the TypeScript sources.
+
+## Usage
+
+The CLI tool centers the output and color-codes each log level.
+
+> *(P14 applied: "Clonse" → "Clone" [general error, not a dialect pair]; "Organise" → "Organize"; "analyses" → "analyzes"; "centres" → "centers"; "colour-codes" → "color-codes")*
+````
 
 ### API Documentation
 
@@ -166,34 +113,39 @@ Parameter names and endpoint paths are code-domain technical nouns (Rule 1.5, ca
 Example — OpenAPI description:
 
 > **Non-STE:** `colour_scheme` — The colour scheme to apply to the dashboard. Accepted values: "light", "dark".
-
-```yaml
-# Non-STE: openapi.yaml
-  /dashboard:
-    get:
-      parameters:
-        - name: colour_scheme
-          in: query
-          description: The colour scheme to apply to the dashboard. Accepted values "light" or "dark".
-          schema:
-            type: string
-```
-
+>
 > **STE:** `colour_scheme` — The color scheme to use for the dashboard. Accepted values: "light", "dark".
-
-```yaml
-# STE: openapi.yaml
-  /dashboard:
-    get:
-      parameters:
-        - name: colour_scheme
-          in: query
-          description: The color scheme to use for the dashboard. Accepted values "light" or "dark".
-          schema:
-            type: string
-```
-
 > *(P14 applied: "colour" → "color" in prose; parameter name `colour_scheme` preserved as quoted text)*
+
+Example — full JSDoc block for a REST endpoint handler:
+
+````
+/**
+ * Non-STE
+ *
+ * @route GET /api/v1/reports
+ * @summary Generate a usage report for the selected organisation.
+ * @param {string} colour_filter - The colour to filter the chart by.
+ *        Accepts any valid CSS colour value such as "#ff0000".
+ * @returns {Report} report - The generated report object. Serialises the
+ *          data set and returns the summarised totals.
+ */
+async function getReport(req, res) { /* ... */ }
+
+/**
+ * STE
+ *
+ * @route GET /api/v1/reports
+ * @summary Make a usage report for the selected organization.
+ * @param {string} colour_filter - The color to filter the chart by.
+ *        Accepts any valid CSS color value such as "#ff0000".
+ * @returns {Report} report - The generated report object. Serializes the
+ *          data set and gives the summarized totals.
+ */
+async function getReport(req, res) { /* ... */ }
+
+> *(P14 applied: "organisation" → "organization"; "colour" → "color" in prose; "Serialises" → "Serializes"; "returns" → "gives" [P1]; "summarised" → "summarized"; parameter name colour_filter preserved as quoted text)*
+````
 
 ### Docstrings and Inline Comments
 
@@ -204,28 +156,34 @@ British English spellings in docstrings often come from developers whose locale 
 Example — Python docstring:
 
 > **Non-STE:** """Centre the text in the terminal window. Returns the centred string."""
-
-```python
-# Non-STE
-def centre_text(text, width):
-    """Centre the text in the terminal window. Returns the centred string."""
-    pad = max(0, width - len(text))
-    left = pad // 2
-    return " " * left + text
-```
-
+>
 > **STE:** """Center the text in the terminal window. Gives the centered string."""
-
-```python
-# STE
-def center_text(text, width):
-    """Center the text in the terminal window. Gives the centered string."""
-    pad = max(0, width - len(text))
-    left = pad // 2
-    return " " * left + text
-```
-
 > *(P14 applied: "centre" → "center"; "centred" → "centered"; P1 also applied: "returns" → "gives")*
+
+Example — full Python module with docstrings and inline comments:
+
+````
+# Non-STE
+
+def normalise_signal(samples):
+    """Normalise the input signal and serialise the result to a buffer.
+    Returns the centred and optimised sample set."""
+    # Centre the data around zero, then optimise for peak detection.
+    buffer = serialise(samples)
+    return buffer
+
+
+# STE
+
+def normalize_signal(samples):
+    """Normalize the input signal and serialize the result to a buffer.
+    Gives the centered and optimized sample set."""
+    # Center the data around zero, then optimize for peak detection.
+    buffer = serialize(samples)
+    return buffer
+
+> *(P14 applied: "normalise" → "normalize"; "serialise" → "serialize"; "Returns" → "Gives" [P1]; "centred" → "centered"; "optimised" → "optimized"; "Centre" → "Center"; "optimise" → "optimize")*
+````
 
 ### Commit Messages
 
@@ -245,24 +203,29 @@ Common commit message violations:
 Example — commit message:
 
 > **Non-STE:** fix: correct colour parsing behaviour in the analytics module
-
-```
-Non-STE commit
-$ git commit -m "fix: correct colour parsing behaviour in the analytics module"
-[main 4f2a1c9] fix: correct colour parsing behaviour in the analytics module
- 2 files changed, 18 insertions(+), 4 deletions(-)
-```
-
+>
 > **STE:** fix: correct color parsing behavior in the analytics module
-
-```
-STE commit
-$ git commit -m "fix: correct color parsing behavior in the analytics module"
-[main 4f2a1c9] fix: correct color parsing behavior in the analytics module
- 2 files changed, 18 insertions(+), 4 deletions(-)
-```
-
 > *(P14 applied: "colour" → "color"; "behaviour" → "behavior")*
+
+Example — full commit body:
+
+````
+# Non-STE
+feat(auth): parametrise the token refresh logic
+
+We reorganise the session store and recognise expired tokens earlier.
+This optimises the reconnect path for clients that travel through
+proxy servers.
+
+# STE
+feat(auth): parameterize the token refresh logic
+
+We reorganize the session store and recognize expired tokens earlier.
+This optimizes the reconnect path for clients that travel through
+proxy servers.
+
+> *(P14 applied: "parametrise" → "parameterize"; "reorganise" → "reorganize"; "recognise" → "recognize"; "optimises" → "optimizes"; "travel" → "travel" [single-l, American])*
+````
 
 ### Error Messages
 
@@ -273,46 +236,31 @@ When you write error messages for your own software, apply Rule 1.14 consistentl
 Example — application error message:
 
 > **Non-STE:** Error: The licence key is not recognised. Please contact your administrator.
-
-```python
-# Non-STE
-def check_license(key):
-    if not validate(key):
-        raise LicenseError(
-            "Error: The licence key is not recognised. "
-            "Please contact your administrator."
-        )
-```
-
+>
 > **STE:** Error: The license key is not recognized. Speak to your administrator.
-
-```python
-# STE
-def check_license(key):
-    if not validate(key):
-        raise LicenseError(
-            "Error: The license key is not recognized. "
-            "Speak to your administrator."
-        )
-```
-
 > *(P14 applied: "licence" (noun) → "license"; "recognised" → "recognized"; P1 applied: "contact" → "speak to")*
 
-> **Non-STE:** OSError: [Errno 2] No such file or directory: '/etc/program/colour_profiles.cfg'
+Example — full error-handling module:
 
-> **STE (third-party):** OSError: [Errno 2] No such file or directory: '/etc/program/colour_profiles.cfg'
+````
+# Non-STE (application-authored messages)
+raise ConfigError("The licence key is not recognised. Please contact your administrator.")
+logger.error("The connection was cancelled by the server. The programme will retry.")
 
-```text
-# STE: the error text comes from the operating system, not from our code.
-# Keep the British spelling exactly as the system printed it.
-$ python main.py
-Traceback (most recent call last):
-  File "main.py", line 12, in <module>
-    load_profiles("/etc/program/colour_profiles.cfg")
-FileNotFoundError: [Errno 2] No such file or directory: '/etc/program/colour_profiles.cfg'
-```
+# STE (application-authored messages)
+raise ConfigError("The license key is not recognized. Speak to your administrator.")
+logger.error("The connection was canceled by the server. The program will retry.")
 
-> *(No change: the error message is quoted text from the operating system. The British spelling "colour" is preserved exactly as the system produces it.)*
+# Third-party / runtime messages are quoted text — preserve exactly
+try:
+    os.stat("/etc/app/colour_profiles.cfg")
+except OSError as exc:
+    # Non-STE and STE both keep the operating system's wording unchanged:
+    log_foreign_error(exc)  # OSError: [Errno 2] No such file or directory:
+                           # '/etc/app/colour_profiles.cfg'
+
+> *(P14 applied to prose: "licence" → "license"; "recognised" → "recognized"; "contact" → "speak to" [P1]; "cancelled" → "canceled"; "programme" → "program". The OSError string is quoted text, so its British spelling is preserved.)*
+````
 
 ---
 
@@ -339,32 +287,29 @@ Object-oriented documentation uses many words that end in -or/-our and -ize/-ise
 Example — Java class documentation:
 
 > **Non-STE:** The `CacheManager` class is responsible for the initialisation and serialisation of cached objects. It optimises memory usage through customisable eviction behaviour.
-
-```java
-/**
- * The CacheManager class is responsible for the initialisation and
- * serialisation of cached objects. It optimises memory usage through
- * customisable eviction behaviour.
- */
-public class CacheManager {
-    // ...
-}
-```
-
+>
 > **STE:** The `CacheManager` class is responsible for the initialization and serialization of cached objects. It optimizes memory usage through customizable eviction behavior.
-
-```java
-/**
- * The CacheManager class is responsible for the initialization and
- * serialization of cached objects. It optimizes memory usage through
- * customizable eviction behavior.
- */
-public class CacheManager {
-    // ...
-}
-```
-
 > *(P14 applied: "initialisation" → "initialization"; "serialisation" → "serialization"; "optimises" → "optimizes"; "customisable" → "customizable"; "behaviour" → "behavior")*
+
+Example — full C# XML documentation:
+
+````
+/// Non-STE
+/// <summary>
+/// Initialises the repository and serialises the cached entities.
+/// The method optimises throughput and customises the eviction behaviour.
+/// </summary>
+public void Bootstrap() { /* ... */ }
+
+/// STE
+/// <summary>
+/// Initializes the repository and serializes the cached entities.
+/// The method optimizes throughput and customizes the eviction behavior.
+/// </summary>
+public void Bootstrap() { /* ... */ }
+
+> *(P14 applied: "Initialises" → "Initializes"; "serialises" → "serializes"; "optimises" → "optimizes"; "customises" → "customizes"; "behaviour" → "behavior")*
+````
 
 ### Functional (Haskell, Elixir, Clojure, Rust)
 
@@ -380,32 +325,33 @@ Functional programming documentation has fewer spelling violations than OOP docu
 Example — Elixir module documentation:
 
 > **Non-STE:** This module defines a custom behaviour for plug initialisation. Modules that implement this behaviour must provide an `init/1` callback.
-
-```elixir
-# Non-STE
-defmodule MyApp.Plug do
-  @moduledoc """
-  This module defines a custom behaviour for plug initialisation.
-  Modules that implement this behaviour must provide an `init/1` callback.
-  """
-  @callback init(opts :: keyword()) :: keyword()
-end
-```
-
+>
 > **STE:** This module defines a custom `@behaviour` for plug initialization. Modules that implement this `@behaviour` must give an `init/1` callback.
-
-```elixir
-# STE
-defmodule MyApp.Plug do
-  @moduledoc """
-  This module defines a custom @behaviour for plug initialization.
-  Modules that implement this @behaviour must give an `init/1` callback.
-  """
-  @callback init(opts :: keyword()) :: keyword()
-end
-```
-
 > *(P14 applied: "initialisation" → "initialization"; `@behaviour` preserved as code keyword; P1 applied: "provide" → "give")*
+
+Example — full Elixir doc:
+
+````
+# Non-STE
+defmodule Storage do
+  @moduledoc """
+  Defines a custom behaviour for plug initialisation.
+  Modules that implement this behaviour must provide an `init/1` callback
+  and a `handle_event/2` callback that analyses each request.
+  """
+end
+
+# STE
+defmodule Storage do
+  @moduledoc """
+  Defines a custom @behaviour for plug initialization.
+  Modules that implement this @behaviour must give an `init/1` callback
+  and a `handle_event/2` callback that analyzes each request.
+  """
+end
+
+> *(P14 applied: "initialisation" → "initialization"; "analyses" → "analyzes"; "@behaviour" preserved as code keyword; "provide" → "give" [P1])*
+````
 
 ### Procedural (C, Go, Bash)
 
@@ -423,34 +369,27 @@ Procedural documentation has the fewest British English spelling violations beca
 Example — C library documentation:
 
 > **Non-STE:** The licence key must be validated before the defence mechanisms are initialised.
-
-```c
-/* Non-STE
- * The licence key must be validated before the defence mechanisms
- * are initialised.
- */
-int start_server(const char *licence_key) {
-    if (!validate_license(licence_key)) return -1;
-    initialise_defense();
-    return run_loop();
-}
-```
-
+>
 > **STE:** The license key must be checked before the defense mechanisms are initialized.
-
-```c
-/* STE
- * The license key must be checked before the defense mechanisms
- * are initialized.
- */
-int start_server(const char *license_key) {
-    if (!check_license(license_key)) return -1;
-    init_defense();
-    return run_loop();
-}
-```
-
 > *(P14 applied: "licence" → "license"; "defence" → "defense"; "initialised" → "initialized"; P1 applied: "validated" → "checked")*
+
+Example — full Go doc comment:
+
+````
+// Non-STE
+// OpenStore validates the licence key and arms the defence mechanisms
+// before the connection is initialised. A cancelled context stops the
+// traveller goroutine that polls the upstream host.
+func OpenStore(ctx context.Context) (*Store, error) { /* ... */ }
+
+// STE
+// OpenStore checks the license key and arms the defense mechanisms
+// before the connection is initialized. A canceled context stops the
+// traveler goroutine that polls the upstream host.
+func OpenStore(ctx context.Context) (*Store, error) { /* ... */ }
+
+> *(P14 applied: "validates" → "checks" [P1]; "licence" → "license"; "defence" → "defense"; "initialised" → "initialized"; "cancelled" → "canceled"; "traveller" → "traveler")*
+````
 
 ### Declarative (SQL, Terraform, Kubernetes YAML)
 
@@ -466,30 +405,33 @@ Declarative documentation often includes British English spellings because many 
 Example — Terraform module documentation:
 
 > **Non-STE:** This module centralises the organisation of network policies. It also synchronises security groups across regions.
-
-```hcl
-# Non-STE
-# This module centralises the organisation of network policies.
-# It also synchronises security groups across regions.
-module "network" {
-  source = "./modules/network"
-  regions = ["us-east-1", "eu-west-1"]
-}
-```
-
+>
 > **STE:** This module centralizes the organization of network policies. It also synchronizes security groups across regions.
-
-```hcl
-# STE
-# This module centralizes the organization of network policies.
-# It also synchronizes security groups across regions.
-module "network" {
-  source = "./modules/network"
-  regions = ["us-east-1", "eu-west-1"]
-}
-```
-
 > *(P14 applied: "centralises" → "centralizes"; "organisation" → "organization"; "synchronises" → "synchronizes")*
+
+Example — full Kubernetes manifest comment block:
+
+````
+# Non-STE
+# This Deployment centralises the organisation of network policies.
+# The controller synchronises security groups across regions and
+# optimises the rollout to minimise downtime during a config change.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+
+# STE
+# This Deployment centralizes the organization of network policies.
+# The controller synchronizes security groups across regions and
+# optimizes the rollout to minimize downtime during a config change.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+
+> *(P14 applied: "centralises" → "centralizes"; "organisation" → "organization"; "synchronises" → "synchronizes"; "optimises" → "optimizes"; "minimises" → "minimizes")*
+````
 
 ### Systems (Rust Ownership, C Memory Management)
 
@@ -508,30 +450,25 @@ Systems documentation has a vocabulary of spelling-sensitive words related to me
 Example — Rust systems documentation:
 
 > **Non-STE:** The memory metre shows the current heap usage. The defence mechanisms prevent double-free errors and cancelled allocations from corrupting the heap.
-
-```rust
-/// Non-STE
-/// The memory metre shows the current heap usage. The defence mechanisms
-/// prevent double-free errors and cancelled allocations from corrupting
-/// the heap.
-pub fn report_heap(state: &Heap) {
-    println!("heap: {} bytes used", state.used());
-}
-```
-
+>
 > **STE:** The memory meter shows the current heap usage. The defense mechanisms prevent double-free errors and canceled allocations from corrupting the heap.
-
-```rust
-/// STE
-/// The memory meter shows the current heap usage. The defense mechanisms
-/// prevent double-free errors and canceled allocations from corrupting
-/// the heap.
-pub fn report_heap(state: &Heap) {
-    println!("heap: {} bytes used", state.used());
-}
-```
-
 > *(P14 applied: "metre" → "meter"; "defence" → "defense"; "cancelled" → "canceled")*
+
+Example — full C memory-pool comment:
+
+````
+/* Non-STE */
+/* The memory metre samples heap usage every second. The defence layer
+   blocks double-free errors, and the allocator frees cancelled
+   allocations before the traveller sweep runs. */
+
+/* STE */
+/* The memory meter samples heap usage every second. The defense layer
+   blocks double-free errors, and the allocator frees canceled
+   allocations before the traveler sweep runs. */
+
+> *(P14 applied: "metre" → "meter"; "defence" → "defense"; "cancelled" → "canceled"; "traveller" → "traveler")*
+````
 
 ---
 
@@ -542,174 +479,57 @@ Each example pair below shows a real code documentation scenario with a British 
 ### Example 1 — API Reference: Parameter Description
 
 > **Non-STE:** @param {string} colour — The colour of the notification badge. Accepts any valid CSS colour value.
-
-```js
-// Non-STE: notification.js
-/**
- * Show a notification badge on the screen.
- * @param {string} colour - The colour of the notification badge. Accepts any valid CSS colour value.
- */
-export function showBadge(colour) {
-  document.getElementById("badge").style.color = colour;
-}
-```
-
+>
 > **STE:** @param {string} color — The color of the notification badge. Accepts any valid CSS color value.
-
-```js
-// STE: notification.js
-/**
- * Show a notification badge on the screen.
- * @param {string} color - The color of the notification badge. Accepts any valid CSS color value.
- */
-export function showBadge(color) {
-  document.getElementById("badge").style.color = color;
-}
-```
-
+>
 > **Principle applied:** P14 (use American English spelling: "colour" → "color")
 > **Explanation:** Both occurrences of "colour" in the parameter documentation use British English spelling. The American English spelling "color" is required. Note that CSS property names (for example, `background-color`) use American English spelling natively, so the documentation is now also consistent with the API it documents.
 
 ### Example 2 — README: Architecture Overview
 
 > **Non-STE:** The service-oriented architecture centralises request handling through a single API gateway. This organisation minimises latency and maximises throughput.
-
-```md
-# Non-STE: Architecture
-The service-oriented architecture centralises request handling through a
-single API gateway. This organisation minimises latency and maximises
-throughput.
-
-## Components
-- `gateway` — centralises routing
-- `worker` — optimises job execution
-```
-
+>
 > **STE:** The service-oriented architecture centralizes request handling through a single API gateway. This organization minimizes latency and maximizes throughput.
-
-```md
-# STE: Architecture
-The service-oriented architecture centralizes request handling through a
-single API gateway. This organization minimizes latency and maximizes
-throughput.
-
-## Components
-- `gateway` — centralizes routing
-- `worker` — optimizes job execution
-```
-
+>
 > **Principle applied:** P14 (use American English spelling: "centralises" → "centralizes"; "organisation" → "organization"; "minimises" → "minimizes"; "maximises" → "maximizes")
 > **Explanation:** Four words in two sentences use the British English -ise suffix. The American English -ize suffix is required for all four. This example shows how a single paragraph can accumulate many spelling violations when a British English locale is used. The -ise/-ize pattern is the most frequent source of Rule 1.14 violations in code documentation.
 
 ### Example 3 — Docstring: Function Behavior Description
 
 > **Non-STE:** /** Analyses the input data and recognises patterns. Returns an object modelling the recognised patterns. */
-
-```python
-# Non-STE
-def scan(text):
-    """Analyses the input data and recognises patterns.
-    Returns an object modelling the recognised patterns."""
-    result = {"matches": []}
-    for token in text.split():
-        if matches_pattern(token):
-            result["matches"].append(token)
-    return result
-```
-
+>
 > **STE:** /** Analyzes the input data and recognizes patterns. Gives an object that models the recognized patterns. */
-
-```python
-# STE
-def scan(text):
-    """Analyzes the input data and recognizes patterns.
-    Gives an object that models the recognized patterns."""
-    result = {"matches": []}
-    for token in text.split():
-        if matches_pattern(token):
-            result["matches"].append(token)
-    return result
-```
-
+>
 > **Principle applied:** P14 (use American English spelling: "analyses" (verb) → "analyzes"; "recognises" → "recognizes"; "recognised" → "recognized"); P1 (use approved words: "returns" → "gives")
 > **Explanation:** Three words use the British English -yse/-ise suffixes. The American English -yze/-ize suffixes are required. "Modelling" is also a British English spelling variant (American: "modeling"), but the rewrite avoids it by restructuring the sentence. The docstring now uses American English spelling throughout.
 
 ### Example 4 — Commit Message: Configuration Change
 
 > **Non-STE:** chore: standardise ESLint configuration across all packages and synchronise with the monorepo
-
-```
-Non-STE commit
-$ git commit -m "chore: standardise ESLint configuration across all packages and synchronise with the monorepo"
-[main a1b2c3d] chore: standardise ESLint configuration across all packages and synchronise with the monorepo
- 6 files changed, 42 insertions(+), 9 deletions(-)
-```
-
+>
 > **STE:** chore: standardize ESLint configuration across all packages and synchronize with the monorepo
-
-```
-STE commit
-$ git commit -m "chore: standardize ESLint configuration across all packages and synchronize with the monorepo"
-[main a1b2c3d] chore: standardize ESLint configuration across all packages and synchronize with the monorepo
- 6 files changed, 42 insertions(+), 9 deletions(-)
-```
-
+>
 > **Principle applied:** P14 (use American English spelling: "standardise" → "standardize"; "synchronise" → "synchronize")
 > **Explanation:** Two verbs in a commit message use the British English -ise suffix. The American English -ize suffix is required. Commit messages with British English spelling break search consistency across a team.
 
 ### Example 5 — Error Message: User-Facing Validation
 
 > **Non-STE:** Validation error: The programme cannot recognise the file format. The file may have been cancelled during transfer.
-
-```python
-# Non-STE
-def open_file(path):
-    if not path.endswith(".json"):
-        raise ValueError(
-            "Validation error: The programme cannot recognise the file format. "
-            "The file may have been cancelled during transfer."
-        )
-```
-
+>
 > **STE:** Validation error: The program cannot recognize the file format. The file may have been canceled during transfer.
-
-```python
-# STE
-def open_file(path):
-    if not path.endswith(".json"):
-        raise ValueError(
-            "Validation error: The program cannot recognize the file format. "
-            "The file may have been canceled during transfer."
-        )
-```
-
+>
 > **Principle applied:** P14 (use American English spelling: "programme" → "program"; "recognise" → "recognize"; "cancelled" → "canceled")
 > **Explanation:** Three British English spelling variants in a user-facing error message. "Programme" (British) refers to a television or radio broadcast in American English; "program" is the American English spelling for a computer program. "Cancelled" uses the British English double-L convention; the American English single-L "canceled" is required.
 
 ### Example 6 — Configuration File Comment
 
-> **Non-STE:** # The log level controls the verbosity of output. Set to "debug" to analyse the full request/response lifecycle, including serialisation behaviour and connection pool utilisation.
-
-```ini
-; Non-STE: app.ini
-[logging]
-; The log level controls the verbosity of output. Set to "debug" to
-; analyse the full request/response lifecycle, including serialisation
-; behaviour and connection pool utilisation.
-level = debug
-```
-
-> **STE:** # The log level controls the verbosity of output. Set to "debug" to analyze the full request/response lifecycle, including serialization behavior and connection pool usage.
-
-```ini
-; STE: app.ini
-[logging]
-; The log level controls the verbosity of output. Set to "debug" to
-; analyze the full request/response lifecycle, including serialization
-; behavior and connection pool usage.
-level = debug
-```
-
+> **Non-STE:** # The log level controls the verbosity of output. Set to "debug" to
+> # analyse the full request/response lifecycle, including serialisation
+> # behaviour and connection pool utilisation.
+> **STE:** # The log level controls the verbosity of output. Set to "debug" to
+> # analyze the full request/response lifecycle, including serialization
+> # behavior and connection pool usage.
+>
 > **Principle applied:** P14 (use American English spelling: "analyse" → "analyze"; "serialisation" → "serialization"; "behaviour" → "behavior"; "utilisation" → "usage"); P1 (use approved words: "utilisation" is not approved; "usage" is the approved noun form of "use")
 > **Explanation:** Four British English spelling violations in a three-line configuration comment. Three are -yse/-ise suffix violations. The fourth is "behaviour," which uses the -our ending. "Utilisation" is both a British English spelling (American: "utilization") and an unapproved word under P1. The rewrite uses "usage," which is the approved noun form.
 
@@ -733,21 +553,8 @@ The following scenarios show where the rigid application of Rule 1.14 requires c
 When you write prose about a framework that uses British English spelling in its name, the prose must use American English spelling:
 
 > **Non-STE:** The `ColourPicker` component uses the `colour` library for colour space conversions.
-
-```jsx
-// Non-STE
-import { ColourPicker } from "colour-picker";
-// The ColourPicker component uses the colour library for colour space conversions.
-```
-
+>
 > **STE:** The `ColourPicker` component uses the `colour` library for color space conversions.
-
-```jsx
-// STE
-import { ColourPicker } from "colour-picker";
-// The ColourPicker component uses the colour library for color space conversions.
-```
-
 > *(Framework names preserved; prose uses American English spelling)*
 
 This creates a visual inconsistency, but it is the correct approach. The inconsistency signals to the reader that the British English words are technical names, not prose vocabulary.
@@ -764,43 +571,18 @@ This creates a visual inconsistency, but it is the correct approach. The inconsi
 **Guidance:** When the British English spelling is part of the code (a keyword, a function name, a class name), it is code-domain technical text. Preserve it exactly as it appears in the code. The surrounding documentation prose must use American English spelling.
 
 > **Non-STE:** The `@behaviour` callback initialises the module's state.
-
-```elixir
-# Non-STE
-@doc "The @behaviour callback initialises the module's state."
-def init(state), do: {:ok, state}
-```
-
+>
 > **STE:** The `@behaviour` callback initializes the module state.
-
-```elixir
-# STE
-@doc "The @behaviour callback initializes the module state."
-def init(state), do: {:ok, state}
-```
-
 > *(P14 applied: "initialises" → "initializes"; `@behaviour` preserved as code keyword)*
 
 Extreme case: when a language keyword and a documentation word are adjacent and use different spelling conventions:
 
 > **STE:** The `@behaviour` defines the behavior of the module.
-
-```elixir
-# STE
-@doc "The @behaviour defines the behavior of the module."
-```
-
 > *(Both spellings coexist: `@behaviour` is a code keyword, "behavior" is prose)*
 
 This is visually awkward but technically correct. Avoid the awkwardness by restructuring when possible:
 
 > **STE:** The module behavior is set by the `@behaviour` callback.
-
-```elixir
-# STE
-@doc "The module behavior is set by the @behaviour callback."
-```
-
 > *(Separation reduces the visual clash)*
 
 ### Edge Case 3: Generated Documentation from British English Tools
@@ -815,22 +597,10 @@ The following approach is recommended:
 2. For internal documentation, accept the generated boilerplate as-is unless it causes confusion.
 3. Write all source annotations (docstrings, comments, descriptions) in American English spelling. The generated output will inherit the correct spelling for the content you control.
 
-> **Ste (acceptable for internal docs):** *Generated by Sphinx. All rights reserved. Licence: MIT.*
-
-```
-# Internal docs footer (acceptable)
-Generated by Sphinx. All rights reserved. Licence: MIT.
-```
-
+> **STE (acceptable for internal docs):** *Generated by Sphinx. All rights reserved. Licence: MIT.*
 > *(The boilerplate "Licence" is from the tool's British English template. It is acceptable for internal documentation.)*
 
 > **STE (preferred for public docs):** *Generated by Sphinx. All rights reserved. License: MIT.*
-
-```
-# Public docs footer (preferred)
-Generated by Sphinx. All rights reserved. License: MIT.
-```
-
 > *(The template was customized to use American English spelling. This is preferred for public documentation.)*
 
 ### Edge Case 4: Internationalization (i18n) and Localization (l10n) Strings
@@ -840,15 +610,6 @@ Generated by Sphinx. All rights reserved. License: MIT.
 **Guidance:** Localization files are quoted text when referenced in documentation. The documentation prose around them must use American English spelling. The content of the files must be preserved as-is.
 
 > **STE:** The `en-GB.json` locale file contains `"colour": "Colour"`. The `en-US.json` locale file contains `"color": "Color"`.
-
-```json
-// en-GB.json (British English locale — preserved as-is)
-{ "theme_label": "Colour", "behavior_label": "Behaviour" }
-
-// en-US.json (American English locale — Rule 1.14 applies here)
-{ "theme_label": "Color", "behavior_label": "Behavior" }
-```
-
 > *(Both locale strings are preserved as-is. The documentation prose uses American English spelling: "contains," "file.")*
 
 When you write the American English locale file for your application, Rule 1.14 applies to that file as documentation. The British English locale file is written for British English users and falls under the "official directive" exception to Rule 1.14: the locale specification requires British English spelling.
@@ -885,9 +646,6 @@ Rule 1.14 is the final orthographic constraint in Section 1 (Words). It interact
 
 > **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
 > **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
-> **See also:** Rule 1.6 — Use a Non-Approved Word Only When It Is a Technical Noun
-> **See also:** Rule 1.8 — Use Standard, Well-Known Technical Nouns
-> **See also:** Rule 1.10 — No Slang, Jargon, or Regional Terms
 > **See also:** Rule 1.11 — One Term Per Concept — Be Consistent
 > **See also:** Rule 8.6 — Use Quoted Texts Correctly
 
@@ -909,9 +667,9 @@ Rule 1.14 divides all words in code documentation into three spelling classes:
 
 The most frequent Rule 1.14 violation in code documentation is the -ize/-ise suffix pair. The rule is:
 
-- Use -ize (American English): initialize, serialize, optimize, organize, recognize, synchronize, standardize, parameterize, customize, authorize, characterize, prioritize, utilize → (not approved; use "use" per P1), minimize, maximize, centralize, visualize.
+- Use -ize (American English): initialize, serialize, optimize, organize, recognize, synchronize, standardize, parameterize, customize, authorize, characterize, prioritize, minimize, maximize, centralize, visualize, analyze, paralyze.
 
-- Do not use -ise (British English): initialise, serialise, optimise, organise, recognise, synchronise, standardise, parametrise, customise, authorise, characterise, prioritise, utilise, minimise, maximise, centralise, visualise.
+- Do not use -ise (British English): initialise, serialise, optimise, organise, recognise, synchronise, standardise, parametrise, customise, authorise, characterise, prioritise, minimise, maximise, centralise, visualise, analyse, paralyse.
 
 There are no exceptions to this rule in STE-Code prose. The -ise suffix is never permitted in documentation prose.
 
@@ -990,13 +748,6 @@ Rule 1.14 states that quoted text with British English spelling must be preserve
 When a quoted British English word appears adjacent to an American English prose word, the reader sees two different spelling conventions in the same sentence. This is intentional: it signals that one word is a technical reference and the other is documentation prose.
 
 > **STE:** The `Colour` class manages color profiles for the application.
-
-```python
-# STE: the class name `Colour` is a code reference; "color" is prose.
-class Colour:
-    """The Colour class manages color profiles for the application."""
-```
-
 > *(`` `Colour` `` is a code reference; "color" is prose)*
 
 This visual distinction is a feature, not a defect. It helps the reader distinguish between technical names and explanatory prose.
