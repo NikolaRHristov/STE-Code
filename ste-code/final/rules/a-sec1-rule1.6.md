@@ -490,6 +490,79 @@ This approach is unsafe because the buffer is shared.
 This approach is not safe because the buffer is shared.
 ```
 
+## Decision Procedure — The Technical Noun Gate
+
+Rule 1.6 acts as a gate. An unapproved word may stay in code documentation only when it clears all three tests below. If it fails any test, replace it with the approved alternative from the controlled terminology or restructure the sentence.
+
+### Test 1 — Is the word unapproved?
+
+Approved words never enter this gate. They pass through Rule 1.1 and Rule 1.2 instead. Only unapproved words are tested here.
+
+- "function" is approved — not tested by Rule 1.6.
+- "handler" is unapproved — enters the gate.
+
+### Test 2 — Is it a technical noun, or part of a compound technical noun?
+
+The unapproved word must either be a standalone technical noun that fits one of the 19 categories (Rule 1.5), or embedded inside a compound technical noun that fits a category.
+
+- "handler" alone — not a recognized technical noun — fails Test 2.
+- "event handler" — recognized design-pattern term, category 1 — passes Test 2.
+- "main" alone — not a recognized technical noun — fails Test 2.
+- "main branch" — recognized Git term, category 5 — passes Test 2.
+
+### Test 3 — Is it used as a noun in the sentence?
+
+Even a word that passes Test 2 must function as a noun. If it is a verb, adjective, or adverb, it fails Test 3. This is enforced by Rule 1.7.
+
+- "The event handler processes the request." — "event handler" is a noun — passes.
+- "This class handlers the request." — "handlers" is a verb — fails Test 3 even though "handler" is a known technical noun. Replace with "processes" or "The request handler processes the request."
+
+### Worked trace
+
+> **Non-STE:** The main config loader backups the data through the handler pipeline.
+
+> **STE:** The primary config loader makes an auxiliary copy of the data through the processing pipeline.
+
+| Word / phrase | Test 1 (unapproved?) | Test 2 (technical noun?) | Test 3 (used as noun?) | Result |
+|---|---|---|---|---|
+| main config loader | yes | "main" is a general adjective, not part of a recognized compound here | — | replace "main" → "primary" |
+| backups | yes | "backup" as a verb is not a technical noun | used as verb | replace with "makes an auxiliary copy" |
+| handler pipeline | yes | "handler" + "pipeline" is not a recognized compound | used as noun, but fails Test 2 | replace with "processing pipeline" |
+
+### Compound technical noun checklist
+
+A compound counts as a code-domain technical noun only when all three are true:
+
+1. The words combine to name one concept that the domain recognizes.
+2. The compound fits one of the 19 categories.
+3. Replacing the unapproved word with its approved alternative changes the recognized name and causes confusion.
+
+If you can swap the unapproved word for its approved alternative and the term still names the same concept, it is NOT a technical noun — make the replacement. If the swap produces a name no one in the domain would recognize, the compound IS a technical noun and the unapproved word is permitted inside it.
+
+### Category overlap — the same word in different categories
+
+The same unapproved word can pass through the gate in different categories when its meaning changes:
+
+- "base" passes as part of "base case" (category 7, algorithmic), "base class" (category 1, code components), and "base URL" (category 8, directory hierarchy). It fails when used as a general adjective for a surface ("the base of the file") where "bottom" applies.
+- "cache" passes as a standalone technical noun in category 6 (cache layer), category 16 (cache invalidation), and category 18 (query cache).
+
+In each case the word names a specific concept within a category. It is not a general adjective or verb.
+
+### Distinguishing a technical noun from a descriptive adjective
+
+The hardest judgment in Rule 1.6 is telling a permitted technical noun from a descriptive adjective that must be replaced.
+
+1a. "Check out the main branch before you merge." — "main branch" is a Git convention, a technical noun. Permitted.
+1b. "The main configuration has the latest values." — "main" is a descriptive adjective. Replace with "primary".
+
+2a. "The base case returns the single-element array." — "base case" is an algorithmic term. Permitted.
+2b. "The base configuration is loaded first." — "base" is a descriptive adjective. Replace with "primary".
+
+3a. "The event handler processes each request." — "event handler" is a design-pattern term. Permitted.
+3b. "The handler processes each request." — "handler" alone is not a recognized technical noun. Replace with "function".
+
+Criterion: does the compound appear in the official documentation of the framework, language, or standard? If yes, it is a technical noun. If no, it is descriptive prose and the unapproved words must be replaced.
+
 ### Edge Cases
 
 **Edge Case 1 — Framework name that is also an unapproved word.** When a word is the proper name of a tool, it is a technical noun (category 3); when used with its general meaning, it is unapproved.
@@ -565,6 +638,30 @@ Use Homebrew to install the base packages. Then webpack the main bundle.
 ```
 Use Homebrew to install the primary packages. Then use `webpack` to make the primary bundle.
 ```
+
+## Dictionary and Category Reference
+
+**Controlled-terminology entries referenced by this rule** (see `a-dictionary.md` for the full list):
+
+- **BASE (n) — UNAPPROVED.** Approved alternatives: BOTTOM (n) for a surface or stack position, ROOT (n) for a positional or filesystem root. Permitted as part of compound code-domain technical nouns: "base case" (category 7), "base class" (category 1), "base URL" (category 8).
+- **MAIN (adj) — UNAPPROVED.** Approved alternative: PRIMARY (adj). Permitted as part of "main branch" (category 5) and "main function" / `main()` (category 1, the entry-point function).
+- **HANDLER (n) — UNAPPROVED.** Approved alternative: FUNCTION (n). Permitted as part of compound technical nouns such as "event handler" and "request handler" (category 1).
+- **BACKUP (n, v) — UNAPPROVED.** Approved alternatives: AUXILIARY (adj) for the adjective sense, and the construction "makes an auxiliary copy" for the verb sense. Permitted as part of "backup file", "backup_logs" (category 18), and resource names such as `/api/v1/backup` (category 19).
+- **BOTTOM (n), BOTTOM (adj) — APPROVED.** The approved alternative for "base" when it refers to a physical surface or stack position.
+- **FUNCTION (n) — APPROVED.** The approved alternative for a standalone unapproved "handler".
+- **PRIMARY (adj) — APPROVED.** The approved alternative for "main" used as a general adjective.
+- **AUXILIARY (adj) — APPROVED.** One approved alternative for "backup".
+- **ROOT (n) — (TN).** Code-domain technical noun for the top-level directory in a filesystem. Permitted (category 5 or 13). Approved alternative for "base" in positional contexts.
+
+**Categories most often used by Rule 1.6** (see `a-categories.md`):
+
+- Category 1 — Code components, modules, and libraries (event handler, base class, main function)
+- Category 3 — Development tools, environments, and support equipment (Express, pandas, webpack)
+- Category 5 — Infrastructure, deployment, and platforms (main branch, ConfigMap)
+- Category 7 — Mathematical, algorithmic, and scientific terms (base case, base functor)
+- Category 8 — Codebase navigation and directory hierarchy (base URL, Git root)
+- Category 18 — Database and storage terminology (backup_logs, backup file, config file)
+- Category 19 — Computer science, information, and communication technology (backup as a resource name, API)
 
 > **See also:** Rule 1.1 — Use Approved Words from the Dictionary, Technical Nouns, or Technical Verbs
 > **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
