@@ -4,10 +4,10 @@
 |----------------|-------|
 | 🔍 Total       | 73    |
 | 🔗 Unique      | 26    |
-| ✅ Successful  | 0     |
-| ⏳ Timeouts    | 0     |
+| ✅ Successful  | 6     |
+| ⏳ Timeouts    | 1     |
 | 🔀 Redirected  | 0     |
-| 👻 Excluded    | 58    |
+| 👻 Excluded    | 51    |
 | ❓ Unknown     | 0     |
 | 🚫 Errors      | 15    |
 | ⛔ Unsupported | 0     |
@@ -31,4 +31,10 @@
 * [ERROR] <file:///Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code/final/.agents/reference/vale-microsoft.md> (at 23:32) | File not found. Check if file exists and path is correct
 * [ERROR] <file:///Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code/final/.agents/reference/vale-write-good.md> (at 25:33) | File not found. Check if file exists and path is correct
 * [ERROR] <file:///Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code/final/.agents/reference/vale.md> (at 22:24) | File not found. Check if file exists and path is correct
+
+## Timeouts per input
+
+### Timeouts in ste-code/final/reference-catalogue.md
+
+* [TIMEOUT] <https://openste.org/> (at 17:27) | Request timed out
 
