@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 7.1
 
+> **Source:** [master.md#sec7-rule7.1](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 7.1** Use a word (for example, "warning" or "caution") or, when applicable, a symbol, to immediately show your reader the level of the related risk.
@@ -28,6 +30,8 @@ Compare the wording in the two safety instructions. The non-STE safety instructi
 - If there is a risk of unexpected behavior, performance degradation, or incorrect results, use a "CAUTION."
 - If there are the two levels of risk together, use a "WARNING."
 
+Severity mapping: This rule teaches the WARNING and CAUTION safety signal words for code documentation. For release-note and changelog severity, map the same levels as follows: WARNING to BREAKING, CAUTION to DEPRECATED, NOTE to NOTE.
+
 In the non-STE example that follows, the safety instruction is a caution. But if you know about data validation in software systems, you also know that unvalidated input can cause security breaches and data loss. Because there is a risk of security vulnerabilities and data loss here, you must identify this safety instruction as a warning.
 
 Compare the wording in the two code-documentation safety instructions. The non-STE safety instruction is an abstract statement and only makes a general claim. The warning in STE-Code gives clear and correct information about how to decrease the risk of security breaches. The warning contains the words "security breach" and "data loss" to make the reader clearly understand how important this safety instruction is.
@@ -38,7 +42,7 @@ Compare the wording in the two code-documentation safety instructions. The non-S
 >
 > **STE:** WARNING: BEFORE YOU PROCESS INPUT DATA, MAKE SURE THAT YOU SANITIZE AND VALIDATE THE DATA. UNSANITIZED INPUT CAN CAUSE SECURITY BREACHES AND DATA LOSS.
 >
-> *Adapted from spec pair: "CAUTION: EXTREME CLEANLINESS OF OXYGEN TUBES IS IMPERATIVE." → "WARNING: BEFORE YOU FILL THE LIQUID OXYGEN SYSTEM, PUT ON A FACE MASK AND PROTECTIVE CLOTHING. LIQUID OXYGEN CAN CAUSE IRRITATION OF THE RESPIRATORY TRACT AND EYE IRRITATION." — an abstract caution is escalated to a specific warning when the true risk level is higher.*
+> *Adapted from the spec pair shown in the Original Rule above: an abstract caution about cleanliness is escalated to a specific warning when the true risk level (injury or death) is higher. The code-domain pair below applies the same escalation. A vague caution about input becomes a warning that names the security breach and data loss risk.*
 
 > **Non-STE:** CAUTION: THE CONFIGURATION FILE MAY CONTAIN OUTDATED SETTINGS.
 >

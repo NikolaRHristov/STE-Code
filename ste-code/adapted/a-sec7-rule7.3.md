@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 7.3
 
+> **Source:** [master.md#sec7-rule7.3](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 7.3** If it is possible, always tell your reader about the problems that can occur if the reader does not obey the safety instruction. If there is a clear and specified risk, the person who does the task will understand the risk and be more careful.
@@ -19,6 +21,8 @@
 ## STE-Code Adaptation
 
 **Rule 7.3** In code documentation, if it is possible, always tell your reader about the problems that can occur if the reader does not obey the safety instruction. If there is a clear and specified risk, the developer who uses the code will understand the risk and be more careful.
+
+Severity mapping: The risk explanation must match the severity from Rule 7.1. For release-note and changelog severity, map the levels as follows: WARNING to BREAKING, CAUTION to DEPRECATED, NOTE to NOTE.
 
 ### Examples
 
@@ -160,7 +164,7 @@ The rule applies differently across documentation types:
 
 ## Cross-References
 
-- **Rule 1.1 (Use approved words):** The words in your risk explanation must come from the STE-Code dictionary. See the Canonical Synonym Table for substitutes: "retrieve" → "get", "terminate" → "stop", "utilize" → "use".
+- **Rule 1.1 (Use approved words):** The words in your risk explanation must come from the STE-Code dictionary. See the Canonical Synonym Table for substitutes (for example, replace non-approved verbs with their approved general-purpose equivalents).
 - **Rule 1.6 (Non-approved words only as technical nouns):** When a risk explanation must include a non-approved word (for example, `deadlock`, `thrashing`, `replay attack`), present it as a technical code noun and define it on first use.
 - **Rule 1.10 (No slang, jargon, or regional terms):** A risk explanation that says "this will brick your deployment" fails Rule 1.10 and Rule 7.3 simultaneously. Replace "brick" with the specific consequence: "THIS WILL MAKE THE DEPLOYMENT PERMANENTLY UNAVAILABLE."
 - **Rule 7.1 (Use clear, specific safety signal words):** The signal word (WARNING or CAUTION) sets the severity level. Rule 7.3 connects the signal word to the concrete consequence. A WARNING demands a risk of injury or data loss. A CAUTION demands a risk of incorrect results or system damage.

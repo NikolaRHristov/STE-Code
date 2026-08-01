@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 7.2
 
+> **Source:** [master.md#sec7-rule7.2](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 7.2** Start a safety instruction with a clear and accurate command or condition. Your reader must know how to prevent accidents and keep a high level of safety.
@@ -25,6 +27,8 @@ If your reader must know about a condition before the start of a procedure or wo
 **Rule 7.2** In code documentation, start a safety instruction with a clear and accurate command or condition. Your reader must know how to prevent security vulnerabilities, data loss, and system failures.
 
 If your reader must know about a condition before they use a function, method, or API, give this condition first.
+
+Severity mapping: The command or condition in a safety instruction carries the severity from Rule 7.1. In release notes and changelogs, the same levels map as follows: WARNING to BREAKING, CAUTION to DEPRECATED, NOTE to NOTE.
 
 ### Examples
 
