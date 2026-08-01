@@ -344,10 +344,11 @@ class Knowledge:
                 w = 0.5
             scored.append((w * (1.0 + L["occurrences"]), sig))
         scored.sort(key=lambda x: x[0], reverse=True)
+        weight_by_sig = {sig: w for w, sig in scored}
         out = []
         for _, sig in scored[:n]:
             L = self._with_conf(sig, current_round)
-            L["transfer_weight"] = round(w if False else scored[[s[1] for s in scored].index(sig)][0], 3)
+            L["transfer_weight"] = round(weight_by_sig.get(sig, 0.0), 3)
             out.append(L)
         return out
 
@@ -408,6 +409,7 @@ def _selftest() -> int:
     kb.record_failure("forbidden_bait", "nested", "immediate", "comment",
                       ["P1"], ["bunch"], "0", 1, 0.25, "bunch nested", 1)
     kb._regenerate_patterns()
+    kb.flush()  # persist the new lessons before the reload assertion
     pats = kb.patterns(min_support=2)
     check(any(p["kind"] == "technique_across_placements" and p["key"] == "forbidden_bait"
               for p in pats), "technique_across_placements pattern emitted")
