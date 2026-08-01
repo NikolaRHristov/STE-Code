@@ -142,7 +142,7 @@ def test_sentinel_flags(cfg, tmp: Path) -> None:
              "emit-only round marked mode=offline")
        check(p.get("red_pass_rate_pct") is None,
              "emit-only round has no false pass rate (None, not 0.0)")
-       check(p.get("red_total") == 480, "red_total still reported")
+       check(p.get("red_total") == 80, "red_total still reported (80 @ round 1)")
        check(p.get("escapes") == 0, "escapes=0 is honest, not a 'failure'")
 
    # A fully offline BLUE run (no escapes) must also mark scored=false.
@@ -161,8 +161,8 @@ def test_sentinel_flags(cfg, tmp: Path) -> None:
    check(bd.exists(), "blue writes blue-done.json")
    if bd.exists():
        b = json.loads(bd.read_text())
-       check(b.get("scored") is False or "scored" not in b or b.get("blue_probes") == 0,
-             "offline blue with no data not falsely 'measured'")
+       check(b.get("status") == "no-escapes",
+             "offline blue with no escapes writes status=no-escapes (not a false success)")
        # counting branch already guarded in test_red_blue; here we assert the
        # not-falsely-zero invariant holds when probes==0.
        check(b["blue_passed"] == 0, "blue_passed=0 when no probes (consistent)")

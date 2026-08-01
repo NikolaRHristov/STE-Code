@@ -273,6 +273,16 @@ def run_blue(tier: int, args, base: Path, report: dict) -> None:
         escapes = (json.load(open(rdir / "escapes.json"))
                    if (rdir / "escapes.json").exists() else [])
         if not escapes:
+            # A round with no escapes is a real (honest) outcome, not a missing
+            # run. Write the sentinel so PURPLE/BLACK/run_pipeline don't wait
+            # forever for a file that will never appear, and mark it so it is
+            # not read as a successful defense.
+            (rdir / "blue-done.json").write_text(json.dumps({
+                "tier": tier, "round": rnd, "status": "no-escapes",
+                "blue_probes": 0, "blue_passed": 0,
+                "blue_pass_rate_pct": None, "defense_timing": args.defense_timing,
+                "residual_escape_ids": [], "resistance_table": [],
+            }, indent=2), encoding="utf-8")
             tier_rounds.append({"round": rnd, "status": "no-escapes",
                                 "blue_probes": 0, "blue_pass_rate_pct": None})
             break
