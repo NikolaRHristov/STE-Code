@@ -146,6 +146,10 @@ class Anonymizer:
                     str(profile.get("display_name", "")), "corpus")
         if "base" in doc:
             doc["base"] = self.path(doc["base"])
+        # Filesystem identity is redacted at every active level, not just 'full'.
+        cov = doc.get("coverage", {})
+        if isinstance(cov, dict) and cov.get("missing"):
+            cov["missing"] = [self.path(m) for m in cov["missing"]]
 
         if self.level == "full":
             doc["variants"] = [self.variant(v) for v in doc.get("variants", [])]
@@ -156,9 +160,6 @@ class Anonymizer:
             timelines = doc.get("timelines")
             if isinstance(timelines, dict):
                 doc["timelines"] = {self.variant(k): v for k, v in timelines.items()}
-            cov = doc.get("coverage", {})
-            if isinstance(cov, dict) and cov.get("missing"):
-                cov["missing"] = [self.text(m) for m in cov["missing"]]
         return doc
 
     def markdown(self, text: str) -> str:
