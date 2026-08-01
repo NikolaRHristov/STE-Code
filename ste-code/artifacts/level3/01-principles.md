@@ -373,3 +373,95 @@ If your glossary lists the word only as a technical noun, obey Rule 1.7 and use
 a different sentence construction.
 
 > **See also:** Rule 1.5, Rule 1.12, Rule 1.13.
+
+---
+
+## Rule 1.8 — Use the technical nouns approved in your project or field
+
+If your project, company, industry, or subject field already has an approved
+name for a class, module, function, method, variable, component, or process,
+use that name. These names live in your project glossary, API documentation,
+coding standards, or company documentation.
+
+Do not invent your own names for items that already have established names.
+The source of truth is the repository.
+
+> **STE:** The dashboard page has a `UserTable` component and a `FilterPanel`
+> component.
+
+> **Non-STE:** The account controller manages login and user profile operations.
+>
+> **STE:** The `AccountController` manages authentication and user profile
+> operations.
+
+---
+
+## Rule 1.9 — Select short, easy technical nouns
+
+When no approved technical noun exists in your project, company, industry, or
+subject field, select one that is short (not more than three words) and easy to
+understand. Do not write a long descriptive phrase when a shorter term is
+enough. When the context identifies the item — a code snippet, a line number, a
+diagram, an API reference — use the shortest unambiguous term. Add one or two
+adjectives only when clarification is necessary.
+
+```javascript
+// client.js — line 42
+async function fetchUtility(url) {
+  const response = await fetch(url);
+  return response.json();
+}
+```
+
+> **Non-STE:** Call the asynchronous JavaScript XML HTTP request wrapper utility
+> function (line 42) to get the serialized JSON payload from the remote
+> application programming interface endpoint.
+>
+> **STE:** Call the `fetchUtility` function (line 42) to get the JSON data from
+> the API endpoint.
+
+---
+
+## Rule 1.10 — No regional, slang, or jargon words as technical nouns
+
+Some technical words are used only inside confined communities or single
+technology ecosystems. They are not easy to understand for readers from a
+different background or stack. Code documentation is read by junior developers,
+developers from other language communities, and non-native English speakers: a
+word that one subculture finds clear can be opaque to every other reader.
+Always select well-known words.
+
+| Do not write | Write |
+|---|---|
+| Remove all the cruft from the legacy module. | Remove all the unnecessary code from the legacy module. |
+| The function monkeys with the input data before validation. | The function changes the input data before validation. |
+| Bikeshedding delayed the API design by two weeks. | Unnecessary discussion about small details delayed the API design by two weeks. |
+| I spent the morning yak shaving before I could write the test. | I spent the morning completing unrelated prerequisite tasks before I could write the test. |
+| Replace the foo and bar placeholders with real values. | Replace the example and placeholder values with real values. |
+
+---
+
+## Rule 1.11 — One technical noun per item
+
+Do not use a different code-domain technical noun in another part of your
+documentation for the same item. Changing the name of one item between sections
+forces the reader to decide whether you mean the same item or a different one.
+The source of truth for the name is the code: the class, function, module,
+table, resource, environment variable, or configuration key as it is defined in
+the repository.
+
+> **Non-STE:**
+> 1. Initialize the UserService class to start the session manager.
+> 2. Call the authenticate method on the AccountManager to verify a user.
+> 3. The UserHandler returns a session token that you send in later requests.
+>
+> **STE:**
+> 1. Initialize the UserService class to start the session manager.
+> 2. Call the authenticate method on the UserService to verify a user.
+> 3. The UserService returns a session token that you send in later requests.
+
+> **Non-STE:** "/api/login path", "authentication route", "login endpoint" —
+> three names for one endpoint.
+>
+> **STE:** Use "/api/login endpoint" in every sentence, because the OpenAPI file
+> defines the path as `/api/login`.

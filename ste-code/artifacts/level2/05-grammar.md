@@ -428,3 +428,166 @@ Write the chain in cause-first order: "If you do X, Y can occur."
 >
 > **STE:** WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE. API KEYS IN
 > SOURCE CODE CAN CAUSE UNAUTHORIZED ACCESS AND DATA BREACHES.
+
+## Section 8 — Punctuation and word count
+
+### Rule 8.1 — Use all standard punctuation marks but not the semicolon
+The semicolon (;) is not permitted. It permits very long sentences and it is not
+easy to use correctly. Write two sentences instead.
+
+> **Non-STE:** Call the function to parse the response data; handle any errors
+> that occur.
+>
+> **STE:** Call the function to parse the response data. Handle any errors that
+> occur.
+
+This rule applies to documentation text only. It does not apply to source code,
+where the semicolon is part of the language syntax, or to text inside code
+blocks.
+
+### Rule 8.2 — Use hyphens to connect words that are directly related
+Five categories of hyphenation apply to code documentation:
+
+| Category | Examples |
+|---|---|
+| Two or more words that are an adjective before a noun | high-priority task, read-only file, thread-safe method, event-driven architecture, run-time error, end-to-end test, server-side rendering, just-in-time compilation |
+| Two-word fractions or numbers | seventy-two, twenty-eight, three-fourths |
+| An uppercase letter or a number plus a noun | L-shaped bracket, 64-bit register, 8-byte alignment, 128-bit value |
+| Verbs that have a noun as the first part | dry-run, hot-reload, cold-start, hard-code, soft-delete, short-circuit |
+| A prefix that ends with a vowel before a root that starts with a vowel | re-enter, re-establish, co-occurrence |
+
+### Rule 8.3 — Use of parentheses
+You can use parentheses:
+
+- To make references to code modules, diagrams, or text
+- To include letters or numbers that identify items
+- To identify the work steps in a procedure
+- To include abbreviations
+- To give the singular and plural forms of a noun at the same time
+- To explain words or a part of a sentence
+- To include an alternative.
+
+> **STE:** Call the request handler (Figure 3, Module A).
+
+### Rule 8.4 — A colon in a vertical list ends a sentence
+In a vertical list, the colon (:) has the same effect on the word count as a
+period.
+
+- Procedural sentences: a maximum of 20 words before the colon.
+- Descriptive sentences: a maximum of 25 words before the colon.
+
+Each item after the colon counts as a new sentence, with the same limits: 20
+words for procedural items, 25 words for descriptive items.
+
+> **STE:** To handle possible error conditions, the error handler catches these
+> exception types:
+> - The connection timeout of the database
+> - The authentication failure of an expired token
+> - The validation error of a malformed payload.
+
+### Rule 8.5 — Text in parentheses counts as one word
+Text in parentheses counts as one word in the sentence that contains it. The
+words inside the parentheses also make a new sentence, so count them again in
+that sentence.
+
+> **STE:** Make sure that the DEBUG environment variable is set to false (the
+> DEBUG flag is off). (12 words; the sentence in parentheses has 5 words.)
+
+An identifier or an abbreviation in parentheses also counts as one word.
+
+### Rule 8.6 — Elements that count as one word
+Count each of these as one word:
+
+- Numbers
+- Numbers together with units of measurement
+- Abbreviations
+- Alphanumeric identifiers
+- Quoted text
+- Titles, headings, and text on user interface elements and labels
+- Proper nouns of individuals, groups, organizations, and geopolitical entities.
+
+> **STE:** Do steps 13 thru 16 a minimum of three times. (10 words)
+
+### Rule 8.7 — Hyphenated words count as one word
+A hyphenated group is one unit for the reader, thus it is one word for the
+sentence-length limits.
+
+> **Non-STE:** The open function returns a read only file descriptor.
+>
+> **STE:** The open function returns a read-only file descriptor.
+> ("read-only" is one word.)
+
+## Section 9 — Word choice and consistency
+
+### Rule 9.1 — Use a different sentence construction when replacement fails
+The dictionary gives approved alternatives for words that are not approved. If
+the alternative has the same part of speech and keeps the meaning, replace the
+word. If it does not, write a new sentence with a different structure.
+
+Write a new construction when:
+
+1. The grammatical structure must change to use the alternative.
+2. The word-for-word replacement gives an unclear result.
+3. The alternative changes the meaning.
+4. The word is not in the controlled terminology.
+
+> **Non-STE:** A timeout value of 5000 ms is acceptable for this endpoint.
+>
+> **STE:** A timeout value of 5000 ms is permitted for this endpoint.
+
+### Rule 9.2 — Use each approved word correctly
+Some approved words have a restricted meaning. Read the approved meaning in the
+dictionary before you use the word. Use each word only as its approved part of
+speech. A small number of words are approved as more than one part of speech.
+
+> **Non-STE:** Execute the initialization script before you start the server.
+>
+> **STE:** Run the initialization script before you start the server.
+
+### Rule 9.3 — Do not make phrasal verbs
+Do not put an approved verb and a preposition together to make a new phrase. Use
+one approved verb that has the same meaning. Only a small number of phrasal
+verbs are approved, and they all have a restricted meaning.
+
+| Non-STE phrasal verb | STE verb |
+|---|---|
+| put out (a warning) | emit |
+| carry out (a test) | do |
+| give off (an event) | release |
+| set up (the service) | configure |
+| shut down (the process) | stop |
+
+> **Non-STE:** The compiler puts out a warning when the type annotation is
+> missing.
+>
+> **STE:** The compiler emits a warning when the type annotation is missing.
+
+### Rule 9.4 — Use a consistent style
+Use the same terminology and the same wording each time the same action or item
+occurs.
+
+- Use one name for one item. Do not alternate between "configuration file,"
+  "settings file," and "config."
+- Use one verb for one action. Do not alternate between "compile," "build," and
+  "make."
+- Use the same sentence structure for the same type of instruction.
+
+> **Non-STE:** Edit the settings file. Then compile the project. Then build the
+> config again to check it.
+>
+> **STE:** Edit the configuration file. Then build the project. Then build the
+> project again to check the configuration file.
+
+## Quick checklist
+
+- Technical nouns: three words maximum; prepositions or hyphens for the rest.
+- Verbs: infinitive, imperative, simple present, simple past, simple future,
+  past participle as an adjective. No auxiliaries, no progressive.
+- Voice: active, unless the agent is unknown in descriptive text.
+- Sentences: 20 words in procedures, 25 words in descriptions.
+- Instructions: one per sentence, imperative form, condition first.
+- Paragraphs: one topic, six sentences maximum, topic sentence first.
+- Safety: WARNING or CAUTION, command first, risk explained.
+- Punctuation: no semicolon; hyphens for related words; colon ends a sentence.
+- Words: one approved meaning, one part of speech, no phrasal verbs, one
+  consistent term for one concept.
