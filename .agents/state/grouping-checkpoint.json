@@ -1,0 +1,172 @@
+{
+  "completed": {
+    "001-front-matter": {
+      "pages": [
+        1,
+        27
+      ],
+      "bytes": 45103
+    },
+    "002-toc-and-nav": {
+      "pages": [
+        28,
+        40
+      ],
+      "bytes": 17769
+    },
+    "003-introduction": {
+      "pages": [
+        41,
+        41
+      ],
+      "bytes": 1626
+    },
+    "004-rules-sec-1": {
+      "pages": [
+        42,
+        59
+      ],
+      "bytes": 38804
+    },
+    "005-rules-sec-2": {
+      "pages": [
+        60,
+        63
+      ],
+      "bytes": 7936
+    },
+    "006-rules-sec-3": {
+      "pages": [
+        64,
+        72
+      ],
+      "bytes": 15027
+    },
+    "007-rules-sec-4": {
+      "pages": [
+        73,
+        82
+      ],
+      "bytes": 16107
+    },
+    "008-rules-sec-5": {
+      "pages": [
+        83,
+        90
+      ],
+      "bytes": 12452
+    },
+    "009-rules-sec-6": {
+      "pages": [
+        91,
+        98
+      ],
+      "bytes": 15699
+    },
+    "010-rules-sec-7": {
+      "pages": [
+        99,
+        102
+      ],
+      "bytes": 6935
+    },
+    "011-rules-sec-8": {
+      "pages": [
+        103,
+        110
+      ],
+      "bytes": 15873
+    },
+    "012-rules-sec-9": {
+      "pages": [
+        111,
+        124
+      ],
+      "bytes": 27897
+    },
+    "013-dictionary-intro": {
+      "pages": [
+        125,
+        141
+      ],
+      "bytes": 23495
+    },
+    "014-dict-a-b": {
+      "pages": [
+        142,
+        175
+      ],
+      "bytes": 52350
+    },
+    "015-dict-c": {
+      "pages": [
+        176,
+        199
+      ],
+      "bytes": 37997
+    },
+    "016-dict-d": {
+      "pages": [
+        200,
+        218
+      ],
+      "bytes": 48648
+    },
+    "017-dict-e-f": {
+      "pages": [
+        219,
+        250
+      ],
+      "bytes": 61000
+    },
+    "018-dict-g-i": {
+      "pages": [
+        251,
+        282
+      ],
+      "bytes": 50370
+    },
+    "019-dict-j-n": {
+      "pages": [
+        283,
+        310
+      ],
+      "bytes": 94928
+    },
+    "020-dict-o-p": {
+      "pages": [
+        311,
+        338
+      ],
+      "bytes": 101625
+    },
+    "021-dict-q-r": {
+      "pages": [
+        339,
+        358
+      ],
+      "bytes": 70137
+    },
+    "022-dict-s": {
+      "pages": [
+        359,
+        390
+      ],
+      "bytes": 134616
+    },
+    "023-dict-t-y": {
+      "pages": [
+        391,
+        426
+      ],
+      "bytes": 146352
+    },
+    "024-appendix": {
+      "pages": [
+        427,
+        434
+      ],
+      "bytes": 15591
+    }
+  }
+}
