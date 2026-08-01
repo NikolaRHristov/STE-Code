@@ -25,27 +25,35 @@ In descriptive writing, the reader must understand the text as a unit. Use words
 
 ### Examples
 
-Inconsistent (non-STE) documentation:
+> *Adapted from spec pair:* Non-STE: "Apply grease to the main body. Wipe the body clean. Inspect the body assembly for cracks." | STE: "Apply grease to the body. Wipe the body clean. Inspect the body for cracks."
 
-```
-1. Open the configuration file in a text editor.
-2. Change the port number in the settings file.
-3. Save the config and close it.
-4. Compile the project with the build command.
-5. Make the binary for the target platform.
-6. If you get errors, look at the log file.
-```
+Inconsistent (non-STE) documentation — a README "Configure the server" section that uses three names for one file and three verbs for one action:
 
-STE-Code (consistent):
+> **Non-STE:**
+> ```markdown
+> ## Configure the server
+>
+> 1. Open the configuration file in a text editor.
+> 2. Change the port number in the settings file.
+> 3. Save the config and close it.
+> 4. Compile the project with the build command.
+> 5. Make the binary for the target platform.
+> 6. If you get errors, look at the log file.
+> ```
 
-```
-1. Open the configuration file in a text editor.
-2. Change the port number in the configuration file.
-3. Save the configuration file and close it.
-4. Build the project with the build command.
-5. Build the binary for the target platform.
-6. If you get errors, look at the log file.
-```
+STE-Code (consistent) — the same section, with one noun for the file and one verb for each action:
+
+> **STE:**
+> ```markdown
+> ## Configure the server
+>
+> 1. Open the configuration file in a text editor.
+> 2. Change the port number in the configuration file.
+> 3. Save the configuration file and close it.
+> 4. Build the project with the build command.
+> 5. Build the binary for the target platform.
+> 6. If you get errors, look at the log file.
+> ```
 
 In the non-STE text, you can see different wordings:
 - Different terms for the same file ("configuration file," "settings file," and "config")
@@ -89,10 +97,42 @@ Rule 9.4 governs consistency across three orthogonal dimensions, each of which m
 
 In OO documentation, consistency is critical for inheritance chains. When you document a class hierarchy, use the same phrasing for overridden methods. If the base class `connect()` docstring says "Establishes a connection to the remote host," every subclass `connect()` docstring must reuse the same template, adding only the subclass-specific behavior:
 
-> **Non-STE:** Base: "Connects to server." Subclass: "Opens a socket to the backend." Sub-subclass: "Initiates TCP handshake with data node."
+> **Non-STE:**
+> ```python
+> class Connection:
+>     """Connects to server."""
+>     def connect(self):
+>         ...
 >
-> **STE:** Base: "Establishes a connection to the remote host." Subclass: "Establishes a connection to the remote host, with TLS encryption." Sub-subclass: "Establishes a connection to the remote host, with mTLS and certificate pinning."
+> class TlsConnection(Connection):
+>     """Opens a socket to the backend."""
+>     def connect(self):
+>         ...
 >
+> class MtlsConnection(TlsConnection):
+>     """Initiates TCP handshake with data node."""
+>     def connect(self):
+>         ...
+> ```
+
+> **STE:**
+> ```python
+> class Connection:
+>     """Establishes a connection to the remote host."""
+>     def connect(self):
+>         ...
+>
+> class TlsConnection(Connection):
+>     """Establishes a connection to the remote host, with TLS encryption."""
+>     def connect(self):
+>         ...
+>
+> class MtlsConnection(TlsConnection):
+>     """Establishes a connection to the remote host, with mTLS and certificate pinning."""
+>     def connect(self):
+>         ...
+> ```
+
 > *Principles applied: P3, P13 — using "establishes a connection" consistently; avoiding noun-as-verb "opens a socket."*
 
 Class and interface names must not be abbreviated inconsistently. If you introduce `UserRepository`, do not later refer to it as `UserRepo` or `the user repo` in prose.
@@ -103,10 +143,24 @@ Functional documentation describes transformations, not state changes. Maintain 
 
 For monadic or effectful code, pick one metaphor and stay with it. If you describe `IO` as "a description of an effect," do not later call it "a computation" or "an action."
 
-> **Non-STE:** `map` docstring: "Applies a function to each element and returns a new list." `filter` docstring: "Selects elements matching a predicate, producing a fresh collection."
+> **Non-STE:**
+> ```haskell
+> -- Applies a function to each element and returns a new list.
+> map :: (a -> b) -> [a] -> [b]
 >
-> **STE:** `map` docstring: "Returns a new list with the function applied to each element." `filter` docstring: "Returns a new list with only the elements that satisfy the predicate."
+> -- Selects elements matching a predicate, producing a fresh collection.
+> filter :: (a -> Bool) -> [a] -> [a]
+> ```
+
+> **STE:**
+> ```haskell
+> -- Returns a new list with the function applied to each element.
+> map :: (a -> b) -> [a] -> [b]
 >
+> -- Returns a new list with only the elements that satisfy the predicate.
+> filter :: (a -> Bool) -> [a] -> [a]
+> ```
+
 > *Principles applied: P3, P11 — "returns a new list" is the consistent anchor phrase; one term ("satisfy") replaces "matching."*
 
 ### Procedural (C, Go, Bash)
@@ -115,10 +169,36 @@ Procedural code documents sequences of steps. Consistency here means step struct
 
 In Go, error handling is idiomatic and repetitive. All error-checking documentation must use the same pattern. Do not describe `if err != nil` as "check for an error" in one place and "handle the error condition" in another.
 
-> **Non-STE:** "Check the return code. If it is non-zero, abort." vs. "Verify the exit status. On failure, terminate."
->
-> **STE:** "Check the return code. If the return code is not 0, stop the program." (every occurrence)
->
+> **Non-STE:**
+> ```go
+> // Check the return code. If it is non-zero, abort.
+> func run(cmd *exec.Cmd) error {
+>     if err := cmd.Run(); err != nil {
+>         return err
+>     }
+>     // Verify the exit status. On failure, terminate.
+>     if code := cmd.ProcessState.ExitCode(); code != 0 {
+>         return fmt.Errorf("bad exit: %d", code)
+>     }
+>     return nil
+> }
+> ```
+
+> **STE:**
+> ```go
+> // Check the return code. If the return code is not 0, stop the program.
+> func run(cmd *exec.Cmd) error {
+>     if err := cmd.Run(); err != nil {
+>         return err
+>     }
+>     // Check the return code. If the return code is not 0, stop the program.
+>     if code := cmd.ProcessState.ExitCode(); code != 0 {
+>         return fmt.Errorf("bad exit: %d", code)
+>     }
+>     return nil
+> }
+> ```
+
 > *Principles applied: P11, P1 — "check" over "verify," "return code" over "exit status," "stop" over "abort"/"terminate."*
 
 ### Declarative (SQL, Terraform, Kubernetes YAML, Docker Compose)
@@ -127,10 +207,46 @@ Declarative documentation describes desired state, not imperative steps. Use the
 
 In Kubernetes documentation, resource names are proper nouns. Use `ConfigMap` (the Kubernetes resource name) consistently. Do not write "config map," "configmap," or "configuration map" in prose.
 
-> **Non-STE:** "Create a ConfigMap to store settings. Mount the config map into the pod. The configuration map provides env vars."
->
-> **STE:** "Create a ConfigMap to store settings. Mount the ConfigMap into the Pod. The ConfigMap provides environment variables."
->
+> **Non-STE:**
+> ```yaml
+> # Create a ConfigMap to store settings.
+> apiVersion: v1
+> kind: ConfigMap
+> metadata:
+>   name: app-config
+> data:
+>   LOG_LEVEL: info
+> ---
+> # Mount the config map into the pod.
+> spec:
+>   containers:
+>     - name: app
+>       # The configuration map provides env vars.
+>       envFrom:
+>         - configMapRef:
+>             name: app-config
+> ```
+
+> **STE:**
+> ```yaml
+> # Create a ConfigMap to store settings.
+> apiVersion: v1
+> kind: ConfigMap
+> metadata:
+>   name: app-config
+> data:
+>   LOG_LEVEL: info
+> ---
+> # Mount the ConfigMap into the Pod.
+> spec:
+>   containers:
+>     - name: app
+>       # The ConfigMap provides environment variables.
+>       envFrom:
+>         - configMapRef:
+>             name: app-config
+> ```
+
 > *Principles applied: P5, P11 — `ConfigMap` and `Pod` are technical code nouns used consistently; no abbreviation of "environment variables."*
 
 ### Systems (Rust ownership docs, C memory docs, assembly-level docs)
@@ -139,10 +255,24 @@ Systems documentation describes guarantees, invariants, and safety conditions. C
 
 In Rust, "ownership," "borrow," and "lifetime" are terms of art with precise meanings. Never substitute synonyms. "The value is moved" is not "the value is transferred" — "moved" has a specific compiler-enforced meaning.
 
-> **Non-STE:** "The function takes possession of the buffer. The caller relinquishes control. After the call, the caller cannot access the memory region."
->
-> **STE:** "The function takes ownership of the buffer. The function moves the buffer. After the move, the caller cannot use the buffer."
->
+> **Non-STE:**
+> ```rust
+> /// The function takes possession of the buffer. The caller relinquishes
+> /// control. After the call, the caller cannot access the memory region.
+> fn consume(buf: Vec<u8>) {
+>     drop(buf);
+> }
+> ```
+
+> **STE:**
+> ```rust
+> /// The function takes ownership of the buffer. The function moves the
+> /// buffer. After the move, the caller cannot use the buffer.
+> fn consume(buf: Vec<u8>) {
+>     drop(buf);
+> }
+> ```
+
 > *Principles applied: P3, P11 — "ownership" and "move" are the canonical Rust terms; "takes possession" and "relinquishes control" break consistency with the Rust Reference.*
 
 ## Extended Examples
@@ -151,80 +281,144 @@ In Rust, "ownership," "borrow," and "lifetime" are terms of art with precise mea
 
 > **Non-STE:** Install the dependencies. Then fetch the source code. After that, you need to set up the environment. Finally, get the database running.
 >
+> From a project README:
+> ```markdown
+> ## Quick start
+>
+> 1. Install the dependencies.
+> 2. Then fetch the source code.
+> 3. After that, you need to set up the environment.
+> 4. Finally, get the database running.
+> ```
+
 > **STE:** Install the dependencies. Then download the source code. After that, set the environment variables. Finally, start the database.
 >
+> From a project README:
+> ```markdown
+> ## Quick start
+>
+> 1. Install the dependencies.
+> 2. Then download the source code.
+> 3. After that, set the environment variables.
+> 4. Finally, start the database.
+> ```
+
 > *Principles applied: P1, P2, P11 — each action uses one approved verb consistently across the procedure; "fetch" is replaced by "download" (canonical synonym table). "Set up" is split into "set" + object. "Get ... running" is replaced by "start."*
 
 ### Example 2: Noun Consistency Across Documentation Types
 
 > **Non-STE:** README: "This library provides authentication utilities." API docs: "The auth package handles login." Error message: "Authentication module failed to initialize."
 >
+> README, API reference, and error log:
+> ```markdown
+> # authkit
+> This library provides authentication utilities.
+> ```
+> ```http
+> GET /login
+> The auth package handles login.
+> ```
+> ```text
+> ERROR  auth.module.init.failed: Authentication module failed to initialize.
+> ```
+
 > **STE:** README: "This library provides authentication." API docs: "The authentication library handles login." Error message: "The authentication library failed to initialize."
 >
+> README, API reference, and error log:
+> ```markdown
+> # authkit
+> This library provides authentication.
+> ```
+> ```http
+> GET /login
+> The authentication library handles login.
+> ```
+> ```text
+> ERROR  auth.library.init.failed: The authentication library failed to initialize.
+> ```
+
 > *Principles applied: P11, P1 — "authentication library" is the only term for the artifact; "auth" is not used as an abbreviation; "module" and "package" are not mixed with "library."*
 
 ### Example 3: Structural Consistency in API Reference
 
 > **Non-STE:**
-> - `GET /items` — Retrieves all items.
-> - `POST /items` — Use this to create a new item.
-> - `GET /items/:id` — Gets item by ID.
-> - `DELETE /items/:id` — Removes the specified item.
->
+> ```http
+> GET /items    — Retrieves all items.
+> POST /items   — Use this to create a new item.
+> GET /items/:id    — Gets item by ID.
+> DELETE /items/:id — Removes the specified item.
+> ```
+
 > **STE:**
-> - `GET /items` — Returns all items.
-> - `POST /items` — Creates a new item.
-> - `GET /items/:id` — Returns the item with the specified ID.
-> - `DELETE /items/:id` — Removes the item with the specified ID.
->
+> ```http
+> GET /items    — Returns all items.
+> POST /items   — Creates a new item.
+> GET /items/:id    — Returns the item with the specified ID.
+> DELETE /items/:id — Removes the item with the specified ID.
+> ```
+
 > *Principles applied: P11, P4 — every endpoint description starts with a third-person singular verb; "retrieves" and "gets" are unified to "returns"; the `:id` description is identical across endpoints.*
 
 ### Example 4: Commit Message Convention Consistency
 
 > **Non-STE:**
-> ```
+> ```text
 > 12a7b3 Add user login endpoint
 > 8f2c41 Introduce rate limiting
 > d4e901 Insert health check route
 > 77b3f2 Create logout handler
 > ```
->
+> `git log --oneline` output mixes four verbs for the same category of change ("new feature").
+
 > **STE:**
-> ```
+> ```text
 > 12a7b3 Add user login endpoint
 > 8f2c41 Add rate limiting middleware
 > d4e901 Add health check route
 > 77b3f2 Add logout handler
 > ```
->
+> `git log --oneline` output uses the single verb "Add" for every new feature.
+
 > *Principles applied: P11, P1 — "Add" is the single imperative verb for new features; "Introduce," "Insert," and "Create" are removed. P11: one term per concept.*
 
 ### Example 5: Error Message Consistency Across a Service
 
 > **Non-STE:**
-> - Service A: "Connection refused by peer"
-> - Service B: "Cannot establish link to remote"
-> - Service C: "Failed to connect to upstream server"
->
+> ```text
+> [service-a] Connection refused by peer
+> [service-b] Cannot establish link to remote
+> [service-c] Failed to connect to upstream server
+> ```
+> The same failure mode produces three different messages, so the operator cannot search one string across all logs.
+
 > **STE:**
-> - Service A: "Cannot connect to the remote host"
-> - Service B: "Cannot connect to the remote host"
-> - Service C: "Cannot connect to the remote host"
->
+> ```text
+> [service-a] Cannot connect to the remote host
+> [service-b] Cannot connect to the remote host
+> [service-c] Cannot connect to the remote host
+> ```
+> The same failure mode produces one message, so the operator can search one string across all logs.
+
 > *Principles applied: P11, P1 — identical error text for the same failure mode; "refused," "establish link," and "failed to connect" all collapse to "cannot connect"; "peer," "remote," and "upstream server" all collapse to "remote host."*
 
 ### Example 6: CLI Flag Documentation Consistency
 
 > **Non-STE:**
-> `--verbose` — Enable verbose output
-> `--quiet` — Suppress all logging
-> `--debug` — Turns on debug-level messages
->
+> ```text
+> --verbose  Enable verbose output
+> --quiet    Suppress all logging
+> --debug    Turns on debug-level messages
+> ```
+> From `mycli --help`: "Suppress" and "Turns on" break the template; "logging" and "messages" are two words for "output."
+
 > **STE:**
-> `--verbose` — Enables verbose output
-> `--quiet` — Disables all output
-> `--debug` — Enables debug output
->
+> ```text
+> --verbose  Enables verbose output
+> --quiet    Disables all output
+> --debug    Enables debug output
+> ```
+> From `mycli --help`: each flag uses the same template "Enables/Disables [adjective] output."
+
 > *Principles applied: P11, P4 — each flag description uses the same grammatical template: "Enables/Disables [adjective] output"; "Suppress" and "Turns on" are replaced; "logging"/"messages" unified to "output."*
 
 ## Edge Cases
@@ -236,7 +430,7 @@ Some frameworks enforce specific terminology that conflicts with STE-Code prefer
 > **Non-STE:** "Pass properties to the component via its props. The component receives these arguments and renders accordingly."
 >
 > **STE:** "Pass props to the component. The component receives the props and renders the output."
->
+
 > *Principles applied: P5, P11 — "props" is a technical code noun and the canonical React term; do not translate it.*
 
 ### Edge Case 2: Generated Documentation
@@ -303,3 +497,5 @@ Key entries most affected by Rule 9.4:
 - **send** (not transmit, dispatch, forward)
 
 For each entry, pick the preferred term and use it in every sentence that expresses that concept. Do not use "use" in paragraph 1 and "utilize" in paragraph 3 for variation. Variation in technical documentation is a defect, not a stylistic virtue.
+
+> **See also:** Rule 1.1 — Approved Words; Rule 1.3 — Approved Meanings; Rule 1.5 — Technical Noun Categories; Rule 1.11 — One Term Per Concept; Rule 9.1 — Use a Different Sentence Construction to Write a Sentence When a Word-for-Word Replacement Is Not Sufficient; Rule 9.2 — Use Each Approved Word Correctly
