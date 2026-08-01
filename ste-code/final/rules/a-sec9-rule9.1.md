@@ -37,37 +37,141 @@ When you cannot do a word-for-word replacement, think about the purpose of the s
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: "A value of 2 mm is acceptable." | STE: "A value of 2 mm is permitted."
+
 > **Non-STE:** A timeout value of 5000 ms is acceptable for this endpoint.
 >
-> **STE:** A timeout value of 5000 ms is permitted for this endpoint.
+> In an API reference this appears as:
+>
+> **`POST /ingest` — Request parameters**
+>
+> | Parameter | Type | Description |
+> |---|---|---|
+> | `timeout_ms` | integer | A timeout value of 5000 ms is acceptable for this endpoint. |
+>
+> ```http
+> POST /ingest HTTP/1.1
+> Host: api.example.com
+> Content-Type: application/json
+>
+> { "timeout_ms": 5000 }
+> ```
 
-("Acceptable" is not approved. The approved adjective "permitted" has the same part of speech and does not change the meaning, so a word-for-word replacement is sufficient.)
+> **STE:** A timeout value of 5000 ms is permitted for this endpoint.
+>
+> In an API reference this appears as:
+>
+> **`POST /ingest` — Request parameters**
+>
+> | Parameter | Type | Description |
+> |---|---|---|
+> | `timeout_ms` | integer | A timeout value of 5000 ms is permitted for this endpoint. |
+>
+> ```http
+> POST /ingest HTTP/1.1
+> Host: api.example.com
+> Content-Type: application/json
+>
+> { "timeout_ms": 5000 }
+> ```
+
+("Acceptable" is not approved. The approved adjective "permitted" has the same part of speech and does not change the meaning, so a word-for-word replacement is sufficient. No restructuring is necessary.)
 *Adapted from spec pair: "A value of 2 mm is acceptable." / "A value of 2 mm is permitted."*
 
 > **Non-STE:** The stack trace in the console must be visible during the debugging session.
 >
+> From a runbook for the payment service:
+>
+> ```markdown
+> ## Debug the payment service
+>
+> 1. Start the service in debug mode.
+> 2. Reproduce the failed transaction.
+> 3. The stack trace in the console must be visible during the debugging session.
+> ```
+
 > **STE:** During the debugging session, make sure that you can see the stack trace in the console.
+>
+> From a runbook for the payment service:
+>
+> ```markdown
+> ## Debug the payment service
+>
+> 1. Start the service in debug mode.
+> 2. Reproduce the failed transaction.
+> 3. During the debugging session, make sure that you can see the stack trace in the console.
+> ```
 
 (The approved verb "see" replaces the adjective "visible." To use the verb "see," replace "must be" with "make sure that you can.")
 *Adapted from spec pair: "The oil level on the sight gauge must be visible during the test." / "During the test, make sure that you can see the oil level on the sight gauge."*
 
 > **Non-STE:** Loop the function twice to remove null values from the array.
 >
+> From the README of a data-cleaning utility:
+>
+> ```markdown
+> ### Quick start
+>
+> Loop the function twice to remove null values from the array.
+> ```
+
 > **STE:** Run the function for two iterations to remove null values from the array.
+>
+> From the README of a data-cleaning utility:
+>
+> ```markdown
+> ### Quick start
+>
+> Run the function for two iterations to remove null values from the array.
+> ```
 
 (The approved noun "iteration" together with the approved verb "run" replaces the verb "loop." The technical noun "two" replaces the adverb "twice.")
 *Adapted from spec pair: "Cycle the unit twice to remove air from the lines." / "Operate the unit for two cycles to remove air from the lines."*
 
 > **Non-STE:** Without this configuration change, the behavior of the function can be uncertain.
 >
+> From the configuration guide for a rate limiter:
+>
+> ```markdown
+> ## `strict_mode`
+>
+> Set this value to `true` to apply the strict limit.
+> Without this configuration change, the behavior of the function can be uncertain.
+> ```
+
 > **STE:** Without this configuration change, it is possible that the function will not behave as expected.
+>
+> From the configuration guide for a rate limiter:
+>
+> ```markdown
+> ## `strict_mode`
+>
+> Set this value to `true` to apply the strict limit.
+> Without this configuration change, it is possible that the function will not behave as expected.
+> ```
 
 ("Uncertain" is not in the controlled terminology. A word-for-word replacement such as "cannot be sure" or "cannot be known" gives a meaningless result. You must think about the meaning and write a new sentence.)
 *Adapted from spec pair: "Without this modification, the service life of the unit can be uncertain." / "Without this modification, it is possible that the service life of this unit will be shorter than usual."*
 
 > **Non-STE:** Just add a single log statement to the method.
 >
+> From a contribution guide:
+>
+> ```markdown
+> ### Add a trace
+>
+> Just add a single log statement to the method.
+> ```
+
 > **STE:** Only add a single log statement to the method.
+>
+> From a contribution guide:
+>
+> ```markdown
+> ### Add a trace
+>
+> Only add a single log statement to the method.
+> ```
 >
 > NOT: Immediately add a single log statement to the method.
 
@@ -76,14 +180,48 @@ When you cannot do a word-for-word replacement, think about the purpose of the s
 
 > **Non-STE:** The occurrence of type errors in the build output is a serious problem.
 >
+> From the build documentation:
+>
+> ```markdown
+> ## Common build failures
+>
+> The occurrence of type errors in the build output is a serious problem.
+> Fix each error before you run the tests.
+> ```
+
 > **STE:** Type errors in the build output are a serious problem.
+>
+> From the build documentation:
+>
+> ```markdown
+> ## Common build failures
+>
+> Type errors in the build output are a serious problem.
+> Fix each error before you run the tests.
+> ```
 
 ("Occurrence" is not in the controlled terminology. You must think of a different construction that keeps the same meaning without the unapproved word.)
 *Adapted from spec pair: "The incidence of water in fuel is dangerous." / "Water in fuel is dangerous."*
 
 > **Non-STE:** Scroll the editor pane so that it clears the minimap overlay.
 >
+> From the editor user guide:
+>
+> ```markdown
+> ### View the full file
+>
+> Scroll the editor pane so that it clears the minimap overlay.
+> ```
+
 > **STE:** Scroll the editor pane until it is away from the minimap overlay.
+>
+> From the editor user guide:
+>
+> ```markdown
+> ### View the full file
+>
+> Scroll the editor pane until it is away from the minimap overlay.
+> ```
 >
 > NOT: Scroll the editor pane so that it cleans the minimap overlay.
 
@@ -97,6 +235,14 @@ When you cannot do a word-for-word replacement, think about the purpose of the s
 > | Critical | 1 commit |
 > | Major | 3 commits |
 > | Minor | 5 commits |
+>
+> ```markdown
+> ## Fix linting errors
+>
+> If linting errors are detected during this procedure, the developer must
+> perform the correction within a certain number of commits depending on
+> error severity. Refer to following table:
+> ```
 
 > **STE:** If you find linting errors, refer to the table that follows:
 >
@@ -105,6 +251,12 @@ When you cannot do a word-for-word replacement, think about the purpose of the s
 > | Critical | 1 commit |
 > | Major | 3 commits |
 > | Minor | 5 commits |
+>
+> ```markdown
+> ## Fix linting errors
+>
+> If you find linting errors, refer to the table that follows:
+> ```
 
 (In the non-STE example: the underlined words are not approved; the verb form "are detected" is passive; the first sentence is too long; an article is missing before "following table"; the instruction is not imperative. The STE version uses approved words, active voice, imperative form, and moves the instruction into the table heading to avoid repeating information.)
 *Adapted from spec pair: the crack detection and repair table example using "If you find cracks, refer to the table that follows:" — see spec pages 117–119 for the full original.*
@@ -122,7 +274,24 @@ README files are the first document a new developer sees. They must be clear, sh
 - Use bullet points instead of long paragraphs.
 - Remove marketing language and replace it with factual statements.
 
-For example, a README that says "This library leverages asynchronous I/O to facilitate high-throughput data processing" has multiple unapproved words. A word-for-word replacement of each word individually ("This library uses asynchronous I/O to make easy high-throughput data processing") gives a meaningless result. You must think about the purpose of the sentence and write: "This library uses async I/O. It can process large quantities of data quickly."
+For example, a README that says "This library leverages asynchronous I/O to facilitate high-throughput data processing" has multiple unapproved words. A word-for-word replacement of each word individually ("This library uses asynchronous I/O to make easy high-throughput data processing") gives a meaningless result. You must think about the purpose of the sentence and write:
+
+> **Non-STE:** This library leverages asynchronous I/O to facilitate high-throughput data processing.
+>
+> ```markdown
+> # fastqueue
+>
+> fastqueue leverages asynchronous I/O to facilitate high-throughput
+> data processing for message pipelines.
+> ```
+
+> **STE:** This library uses async I/O. It can process large quantities of data quickly.
+>
+> ```markdown
+> # fastqueue
+>
+> fastqueue uses async I/O. It can process large quantities of data quickly.
+> ```
 
 ### API Documentation
 
@@ -133,7 +302,25 @@ API documentation has strict structural requirements. Each endpoint, parameter, 
 - Use a different grammatical subject if the original subject depends on an unapproved word.
 - Split compound descriptions into separate sentences, one per parameter or behavior.
 
-For example, an API description that says "This endpoint facilitates the retrieval of user profiles" cannot be fixed by replacing "facilitates" with "makes easy" and "retrieval" with "the action to get." You must restructure: "This endpoint gets user profiles."
+For example, an API description that says "This endpoint facilitates the retrieval of user profiles" cannot be fixed by replacing "facilitates" with "makes easy" and "retrieval" with "the action to get." You must restructure:
+
+> **Non-STE:** This endpoint facilitates the retrieval of user profiles.
+>
+> ```http
+> GET /users
+>
+> This endpoint facilitates the retrieval of user profiles.
+> The response contains the full record for each account.
+> ```
+
+> **STE:** This endpoint gets user profiles.
+>
+> ```http
+> GET /users
+>
+> This endpoint gets user profiles.
+> The response contains the full record for each account.
+> ```
 
 ### Docstrings and Inline Comments
 
@@ -144,6 +331,20 @@ Docstrings and inline comments are the most constrained documentation type. They
 - If a word-for-word replacement is impossible in the available space, remove the sentence and replace it with a reference to a longer document.
 - Never change a code symbol to match an approved word. Code symbols are technical nouns (Rule 1.5).
 
+> **Non-STE:** """Computes the aggregate of the supplied metrics and persists them."""
+> ```python
+> def summarize(metrics):
+>     """Computes the aggregate of the supplied metrics and persists them."""
+>     ...
+> ```
+
+> **STE:** """Gets the total of the metrics and saves them."""
+> ```python
+> def summarize(metrics):
+>     """Gets the total of the metrics and saves them."""
+>     ...
+> ```
+
 ### Commit Messages
 
 Commit messages have a conventional format: a short summary line, a blank line, and a body. When a word-for-word replacement fails in a commit message:
@@ -152,6 +353,19 @@ Commit messages have a conventional format: a short summary line, a blank line, 
 - Replace unapproved verbs with approved technical verbs from the STE-Code dictionary.
 - If the commit message describes a complex change that needs many unapproved words, write a shorter message and put the details in the pull request description.
 - Never use the commit message body as a substitute for proper documentation.
+
+> **Non-STE:** Implemented utilization of the cached connection pool to expedite request handling.
+>
+> ```text
+> Implemented utilization of the cached connection pool to expedite
+> request handling.
+> ```
+
+> **STE:** Use the cached connection pool to make requests faster.
+>
+> ```text
+> Use the cached connection pool to make requests faster.
+> ```
 
 ### Error Messages
 
@@ -164,7 +378,19 @@ Error messages must be short, clear, and actionable. They appear in logs, termin
 
 > **Non-STE:** The application encountered an unrecoverable exception while attempting to instantiate the connection pool.
 >
+> ```text
+> ERROR 2026-08-01T09:14:02Z com.db.PoolFactory
+> The application encountered an unrecoverable exception while
+> attempting to instantiate the connection pool.
+> ```
+
 > **STE:** The application cannot start the connection pool. Look at the log for more data.
+>
+> ```text
+> ERROR 2026-08-01T09:14:02Z com.db.PoolFactory
+> The application cannot start the connection pool.
+> Look at the log for more data.
+> ```
 
 *Principles applied: P1, P2, P11. "Encountered" replaced with cannot + start. "Unrecoverable" removed because the user cannot act on it. "Exception" and "instantiate" replaced with simpler constructions.*
 
@@ -184,7 +410,24 @@ Object-oriented documentation uses class names, method signatures, and inheritan
 
 > **Non-STE:** The `BaseRepository` class provides an abstraction that facilitates data access operations across multiple database backends.
 >
+> ```java
+> /**
+>  * The BaseRepository class provides an abstraction that
+>  * facilitates data access operations across multiple
+>  * database backends.
+>  */
+> public abstract class BaseRepository<T> { ... }
+> ```
+
 > **STE:** The `BaseRepository` class lets you use the same data access methods with different databases.
+>
+> ```java
+> /**
+>  * The BaseRepository class lets you use the same data
+>  * access methods with different databases.
+>  */
+> public abstract class BaseRepository<T> { ... }
+> ```
 
 *Principles applied: P1, P2, P7, P11. "Provides an abstraction that facilitates" is a chain of unapproved words. The STE version identifies the purpose (let you use the same methods) and states it directly. "Backends" replaced with "databases."*
 
@@ -198,7 +441,21 @@ Functional documentation describes pure functions, immutable data, and type tran
 
 > **Non-STE:** This function `fmap`s the provided transformation over the `Maybe` value, yielding a new `Maybe` that encapsulates the transformed result.
 >
+> ```haskell
+> -- This function fmaps the provided transformation over the
+> -- Maybe value, yielding a new Maybe that encapsulates
+> -- the transformed result.
+> mapMaybe :: (a -> b) -> Maybe a -> Maybe b
+> ```
+
 > **STE:** This function applies the transformation to the `Maybe` value. If the `Maybe` value is `Just x`, the result is `Just (f x)`. If it is `Nothing`, the result is `Nothing`.
+>
+> ```haskell
+> -- This function applies the transformation to the Maybe value.
+> -- If the Maybe value is Just x, the result is Just (f x).
+> -- If it is Nothing, the result is Nothing.
+> mapMaybe :: (a -> b) -> Maybe a -> Maybe b
+> ```
 
 *Principles applied: P1, P5. The code symbols `fmap`, `Maybe`, `Just`, `Nothing` are kept as technical nouns. "Yielding," "encapsulates," and "transformed result" are restructured into concrete conditional descriptions.*
 
@@ -212,7 +469,27 @@ Procedural documentation describes sequences of steps, memory operations, and sy
 
 > **Non-STE:** The program allocates a buffer on the heap, then deallocates it after processing to prevent memory leaks.
 >
+> ```c
+> /* The program allocates a buffer on the heap, then deallocates
+>    it after processing to prevent memory leaks. */
+> void run(void) {
+>     char *buf = malloc(SIZE);
+>     process(buf);
+>     free(buf);
+> }
+> ```
+
 > **STE:** The program gets a buffer from the heap. After it uses the buffer, it releases the memory to prevent memory leaks.
+>
+> ```c
+> /* The program gets a buffer from the heap. After it uses the
+>    buffer, it releases the memory to prevent memory leaks. */
+> void run(void) {
+>     char *buf = malloc(SIZE);
+>     process(buf);
+>     free(buf);
+> }
+> ```
 
 *Principles applied: P1, P2, P11. "Allocates" replaced with "gets." "Deallocates" replaced with "releases the memory." The sentence is split into two shorter sentences.*
 
@@ -226,7 +503,26 @@ Declarative documentation describes desired state, not procedures. This creates 
 
 > **Non-STE:** This Deployment manifest orchestrates the rollout of three replicated Pods, ensuring high availability through automated rescheduling.
 >
+> ```yaml
+> # This Deployment manifest orchestrates the rollout of three
+> # replicated Pods, ensuring high availability through
+> # automated rescheduling.
+> apiVersion: apps/v1
+> kind: Deployment
+> spec:
+>   replicas: 3
+> ```
+
 > **STE:** This Deployment makes three copies of the Pod. If a Pod stops, the system starts a new Pod automatically.
+>
+> ```yaml
+> # This Deployment makes three copies of the Pod.
+> # If a Pod stops, the system starts a new Pod automatically.
+> apiVersion: apps/v1
+> kind: Deployment
+> spec:
+>   replicas: 3
+> ```
 
 *Principles applied: P1, P2, P7, P11. "Orchestrates," "rollout," "ensuring," and "high availability" are all restructured. The sentence is split. "Replicated" becomes "copies." "Automated rescheduling" becomes "starts a new Pod automatically."*
 
@@ -239,7 +535,23 @@ Systems documentation describes ownership, lifetimes, and memory safety guarante
 
 > **Non-STE:** When a value is moved, the original binding can no longer be utilized to access that value.
 >
+> ```rust
+> // When a value is moved, the original binding can no longer
+> // be utilized to access that value.
+> let first = String::from("data");
+> let second = first;
+> println!("{}", first); // error
+> ```
+
 > **STE:** When you move a value, you cannot use the first variable name to get the value.
+>
+> ```rust
+> // When you move a value, you cannot use the first variable
+> // name to get the value.
+> let first = String::from("data");
+> let second = first;
+> println!("{}", first); // error
+> ```
 
 *Principles applied: P1, P2, P13. "Utilized" replaced with "use." "Binding" is a technical noun (kept as "variable name" for clarity). "Original" and "access" are restructured. The passive "is moved" becomes active "you move."*
 
@@ -247,37 +559,124 @@ Systems documentation describes ownership, lifetimes, and memory safety guarante
 
 > **Non-STE:** The middleware intercepts incoming requests and modifies the headers prior to forwarding them to the downstream service.
 >
+> ```python
+> # The middleware intercepts incoming requests and modifies the
+> # headers prior to forwarding them to the downstream service.
+> def handle(req):
+>     req = add_trace(req)
+>     return next_service(req)
+> ```
+
 > **STE:** The middleware gets each request. It changes the headers. Then it sends the request to the next service.
+>
+> ```python
+> # The middleware gets each request. It changes the headers.
+> # Then it sends the request to the next service.
+> def handle(req):
+>     req = add_trace(req)
+>     return next_service(req)
+> ```
 
 *Principles applied: P1, P2, P6, P11. "Intercepts" is not approved. "Modifies" replaced with "changes." "Prior to forwarding" replaced with "Then it sends." "Downstream service" is jargon (P10); "next service" is clearer. The long sentence is split into three short sentences.*
 
 > **Non-STE:** Utilize the `--verbose` flag to surface detailed diagnostic information during the build process.
 >
+> ```bash
+> # Utilize the --verbose flag to surface detailed diagnostic
+> # information during the build process.
+> ./build.sh --verbose
+> ```
+
 > **STE:** Use the `--verbose` flag to show detailed diagnostic data during the build.
+>
+> ```bash
+> # Use the --verbose flag to show detailed diagnostic data
+> # during the build.
+> ./build.sh --verbose
+> ```
 
 *Principles applied: P1, P11. "Utilize" is in the Synonym Table (prefer "use"). "Surface" as a verb is not approved; "show" is the approved alternative. "Information" replaced with "data" (see dictionary). "Process" removed as redundant.*
 
 > **Non-STE:** This configuration option governs whether the linter enforces the rule set in a strict or permissive fashion.
 >
+> ```yaml
+> # This configuration option governs whether the linter
+> # enforces the rule set in a strict or permissive fashion.
+> linter:
+>   mode: strict
+> ```
+
 > **STE:** This configuration option sets how the linter applies the rules. You can set it to strict or permitted.
+>
+> ```yaml
+> # This configuration option sets how the linter applies the
+> # rules. You can set it to strict or permitted.
+> linter:
+>   mode: strict
+> ```
 
 *Principles applied: P1, P2, P7. "Governs" is not approved. "Enforces" is not approved. "Fashion" is not approved. The sentence is restructured around "sets" and split. "Permissive" has no direct approved alternative; "permitted" (adjective) is used after restructuring.*
 
 > **Non-STE:** The garbage collector reclaims memory from objects that are no longer referenced, thereby preventing the application from exhausting available heap space.
 >
+> ```javascript
+> // The garbage collector reclaims memory from objects that are
+> // no longer referenced, thereby preventing the application
+> // from exhausting available heap space.
+> ```
+
 > **STE:** The garbage collector frees memory that the application does not use. This prevents the application from using all the available heap memory.
+>
+> ```javascript
+> // The garbage collector frees memory that the application
+> // does not use. This prevents the application from using
+> // all the available heap memory.
+> ```
 
 *Principles applied: P1, P2, P11. "Reclaims" replaced with "frees." "No longer referenced" restructured to "does not use." "Thereby preventing" split into a new sentence. "Exhausting" replaced with "using all."*
 
 > **Non-STE:** Should the connection pool become saturated, the system will automatically spawn additional worker threads to handle the overflow.
 >
+> ```go
+> // Should the connection pool become saturated, the system will
+> // automatically spawn additional worker threads to handle
+> // the overflow.
+> for len(pool) == cap(pool) {
+>     go worker()
+> }
+> ```
+
 > **STE:** If the connection pool is full, the system automatically starts more worker threads.
+>
+> ```go
+> // If the connection pool is full, the system automatically
+> // starts more worker threads.
+> for len(pool) == cap(pool) {
+>     go worker()
+> }
+> ```
 
 *Principles applied: P1, P2, P10, P11. "Should" as a conditional is not approved; "If" is the approved alternative. "Saturated" is jargon (P10). "Spawn" is not approved; "starts" is approved. "Handle the overflow" is unnecessary detail removed for clarity.*
 
 > **Non-STE:** The `render` method leverages a virtual DOM diffing algorithm to minimize expensive DOM manipulations.
 >
+> ```javascript
+> // The render method leverages a virtual DOM diffing algorithm
+> // to minimize expensive DOM manipulations.
+> render() {
+>   return diff(this.state, this.prev);
+> }
+> ```
+
 > **STE:** The `render` method uses a virtual DOM diff algorithm. This algorithm decreases the number of DOM changes.
+>
+> ```javascript
+> // The render method uses a virtual DOM diff algorithm.
+> // This algorithm decreases the number of DOM changes.
+> render() {
+>   return diff(this.state, this.prev);
+> }
+> ```
 
 *Principles applied: P1, P2, P11. "Leverages" is in the Synonym Table (prefer "use"). "Minimize" is not approved as a verb in this sense; restructured. "Expensive" in the sense of "computationally costly" is jargon (P10); the specific meaning is restated as "decreases the number of." "Manipulations" replaced with "changes."*
 
@@ -289,19 +688,35 @@ Some framework names are identical to unapproved English words. For example, the
 
 When a framework name is also a common English word (for example, "Express," "Next," "Fresh"), the context in the sentence tells the reader if the word is a framework name or a common word. Use code font for framework names to make the distinction clear.
 
+> **Non-STE:** Flask the service before you run the integration tests.
+>
+> **STE:** Use Flask with the service before you run the integration tests.
+
 ### Code Keywords That Conflict With Approved Words
 
 Some programming language keywords are identical to approved STE-Code words but have a different meaning. For example, "use" is an approved STE-Code verb meaning "to put into service." In Rust, `use` is also a keyword that imports names from a module. When you document Rust code, the keyword `use` in code font is a technical noun (Rule 1.5). The same word in prose follows the STE-Code dictionary. Write: "Put `use std::io` at the top of the file. Then you can use the `io` module."
 
 The same applies to "move" (approved STE-Code verb; Rust keyword for ownership transfer), "return" (approved STE-Code verb; keyword in most languages), and "break" (approved STE-Code verb; keyword for loop exit). Always use code font for the keyword and prose for the approved meaning.
 
+> **Non-STE:** You must move the value with the move keyword, then return it from the function.
+>
+> **STE:** You must move the value with the `move` keyword, then give it back from the function.
+
 ### Generated Code and Automated Output
 
-When you document generated code, the generated code itself is not subject to STE-Code rules. Only your documentation prose must follow the rules. If the generated code includes symbol names that use unapproved words, keep those symbol names unchanged in your documentation. For example, if a code generator produces a function named `utilizeData()`, you must keep the function name `utilizeData()` in your documentation because it is a code symbol (Rule 1.5). However, your description of what the function does must use approved words: "The `utilizeData()` function uses the data to make a report."
+When you document generated code, the generated code itself is not subject to STE-Code rules. Only your documentation prose must follow the rules. If the generated code includes symbol names that use unapproved words, keep those symbol names unchanged in your documentation. For example, if a code generator produces a function named `utilizeData()`, you must keep the function name `utilizeData()` in your documentation because it is a code symbol (Rule 1.5). However, your description of what the function does must use approved words:
+
+> **Non-STE:** The `utilizeData()` function leverages the cached payload to facilitate report generation.
+>
+> **STE:** The `utilizeData()` function uses the data to make a report.
 
 ### Quoted Log Output and Error Messages
 
-When you quote log output or error messages from a system, keep the quoted text exactly as it appears. The quoted text is data, not documentation. Your surrounding prose must follow STE-Code rules. For example, if a log message says "Encountered irrecoverable error," you write: The log shows: "Encountered irrecoverable error." This message means that the application found an error from which it cannot continue.
+When you quote log output or error messages from a system, keep the quoted text exactly as it appears. The quoted text is data, not documentation. Your surrounding prose must follow STE-Code rules. For example, if a log message says "Encountered irrecoverable error," you write:
+
+> **Non-STE:** Encountered irrecoverable error means the app crashed.
+>
+> **STE:** The log shows: "Encountered irrecoverable error." This message means that the application found an error from which it cannot continue.
 
 ### When Restructuring Changes the Technical Precision
 
@@ -313,9 +728,17 @@ Sometimes a word-for-word replacement is not sufficient, but a full restructurin
 
 The choice depends on the audience and the document type. When in doubt, prefer option 1 or 2.
 
+> **Non-STE:** The attacker can exploit the race condition to achieve arbitrary code execution.
+>
+> **STE:** A user can use the timing problem to run their own code in the process. A race condition is a fault where two operations happen at the same time and the result depends on the order. (Option 1: split + clarifying note.)
+
 ### Code Comments That Quote an Algorithm Name
 
-When you document an algorithm with a standard name (for example, "Dijkstra's shortest path," "QuickSort," "Two-Phase Commit"), the algorithm name is a technical noun (Rule 1.5). Keep the algorithm name unchanged even if it contains unapproved words. Your description of what the algorithm does must use approved words. Write: "The `QuickSort` algorithm sorts the array. It selects a pivot element and moves smaller elements before it and larger elements after it."
+When you document an algorithm with a standard name (for example, "Dijkstra's shortest path," "QuickSort," "Two-Phase Commit"), the algorithm name is a technical noun (Rule 1.5). Keep the algorithm name unchanged even if it contains unapproved words. Your description of what the algorithm does must use approved words.
+
+> **Non-STE:** The `QuickSort` algorithm orchestrates the partitioning of the array to facilitate ordered output.
+>
+> **STE:** The `QuickSort` algorithm sorts the array. It selects a pivot element and moves smaller elements before it and larger elements after it.
 
 ## Grammar Notes
 
@@ -343,6 +766,10 @@ A common pattern in Rule 9.1 is the change from an adjective to a verb. When an 
 
 This pattern applies to many code documentation scenarios: "is configurable" becomes "you can set"; "is accessible" becomes "you can get to" or "you can open"; "is extensible" becomes "you can add to."
 
+> **Non-STE:** The configuration panel is accessible only to administrators.
+>
+> **STE:** Only administrators can open the configuration panel.
+
 ### Noun-to-Verb Restructuring
 
 Another common pattern is the change from a noun to a verb. When an unapproved noun names an action, the approved alternative is frequently a verb. The pattern is:
@@ -353,6 +780,10 @@ Another common pattern is the change from a noun to a verb. When an unapproved n
 4. Restructure: "perform the retrieval of X" becomes "get X."
 
 This pattern is especially common in API documentation and formal technical specifications where nominalizations (action nouns) are used to sound formal. The STE-Code version is always shorter and clearer.
+
+> **Non-STE:** The service performs the validation of each request before it sends a response.
+>
+> **STE:** The service checks each request before it sends a response.
 
 ### Splitting Long Sentences
 
@@ -367,6 +798,10 @@ The split point is usually:
 
 After splitting, make sure that the first sentence has a complete meaning and the second sentence does not depend on the first sentence for its grammatical subject.
 
+> **Non-STE:** The cache stores the result of the query and returns it on the next call if the data has not changed and the time to live has not expired.
+>
+> **STE:** The cache stores the result of the query. It returns the result on the next call if the data has not changed. It also returns the result if the time to live has not expired.
+
 ### Removing Unnecessary Information
 
 The original ASD-STE100 notes that "frequently, a word-for-word replacement is impossible because the word has no synonym that is sufficiently close in meaning. You must think of what you are trying to say and, frequently, some of the meaning must be lost."
@@ -378,26 +813,24 @@ This is also true for code documentation. Some sentences in code documentation c
 - Implementation details that belong in the code, not the documentation.
 - Historical context that belongs in a changelog or an architecture decision record.
 
+> **Non-STE:** This highly robust, enterprise-grade caching layer completely eliminates all redundant database round-trips.
+>
+> **STE:** This cache stores the result of the query. The application does not get the same data from the database again.
+
 ## Cross-References
 
 This rule interacts with many other rules in the STE-Code system. The most important cross-references are:
 
 - **Rule 1.1 (Use Approved Words):** Rule 9.1 is the fallback when Rule 1.1 cannot be satisfied with a word-for-word replacement. Always try a word-for-word replacement first. Only use Rule 9.1 when the replacement fails.
-
+- **Rule 1.4 (Keep Sentences Short and Simple):** When you restructure a sentence with Rule 9.1, keep it short and use simple verb forms, even if the restructured sentence is longer than the original.
 - **Rule 1.5 (Technical Code Nouns):** Code keywords, framework names, and library names are technical nouns and are not subject to replacement. When a sentence contains a technical noun and also an unapproved word, you must restructure only the parts of the sentence that are not technical nouns.
-
-- **Rule 1.12 (Technical Verbs):** Technical verbs like "build," "deploy," "test," and "lint" are approved. Do not replace them. Rule 9.1 applies only to non-technical words in descriptive prose.
-
 - **Rule 1.7 (Do Not Use Technical Nouns as Verbs):** When a technical noun is used as a verb (for example, "to docker the application"), you must restructure the sentence. Rule 9.1 gives the method for restructuring.
-
+- **Rule 1.12 (Technical Verbs):** Technical verbs like "build," "deploy," "test," and "lint" are approved. Do not replace them. Rule 9.1 applies only to non-technical words in descriptive prose.
+- **Rule 3.1 (Use Simple Verb Tenses):** When you restructure a sentence with Rule 9.1, use only the simple present, simple past, or imperative. Do not introduce continuous or perfect tenses.
+- **Rule 5.1 (Short Sentences):** After restructuring, check that the new sentence is not longer than 20 words (procedural) or 25 words (descriptive). If it is longer, split it further or remove unnecessary information.
+- **Rule 6.1 (Active Voice):** When possible, restructure the sentence in the active voice. Active voice makes the agent clear and helps you select the correct approved verb.
 - **Rule 9.2 (Use Each Approved Word Correctly):** After you restructure a sentence with Rule 9.1, make sure that each approved word in the new sentence is used with its approved meaning. Rule 9.2 applies to the restructured sentence.
-
 - **Rule 9.3 (Do Not Make Phrasal Verbs):** When you restructure a sentence, do not introduce phrasal verbs. For example, do not restructure "initiate the process" to "kick off the process." Use "start the process."
-
 - **Rule 9.4 (Consistent Style):** When you restructure a sentence about a concept, use the same construction for all sentences about that concept in the document. Consistency is as important as correctness.
 
-- **Rule 3.1 (Use Simple Verb Tenses):** When you restructure a sentence with Rule 9.1, use only the simple present, simple past, or imperative. Do not introduce continuous or perfect tenses.
-
-- **Rule 5.1 (Short Sentences):** After restructuring, check that the new sentence is not longer than 20 words (procedural) or 25 words (descriptive). If it is longer, split it further or remove unnecessary information.
-
-- **Rule 6.1 (Active Voice):** When possible, restructure the sentence in the active voice. Active voice makes the agent clear and helps you select the correct approved verb.
+> **See also:** Rule 1.1 — Use Approved Words; Rule 1.4 — Keep Sentences Short and Simple; Rule 1.5 — Technical Code Nouns; Rule 1.7 — Do Not Use Technical Nouns as Verbs; Rule 1.12 — Technical Verbs; Rule 3.1 — Use Simple Verb Tenses; Rule 5.1 — Short Sentences; Rule 6.1 — Active Voice; Rule 9.2 — Use Each Approved Word Correctly; Rule 9.3 — When You Use Two Words Together, Do Not Make Phrasal Verbs; Rule 9.4 — When You Select Terminology or Wording, Always Use a Consistent Style
