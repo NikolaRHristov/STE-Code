@@ -164,17 +164,28 @@ def run_red(tier: int, args, base: Path, report: dict) -> list[dict]:
         # PURPLE HANDSHAKE: RED signals a round is complete (even if 0 escapes)
         # by writing purple.json. BLUE awaits this file (not a process dep) to
         # know the ledger is ready to consume.
+        #
+        # ``scored`` / ``simulated`` / ``mode`` mirror red.py: they tell a
+        # consumer whether the numbers are measured or just a wiring test. The
+        # pass rate may be None when nothing was actually scored.
+        scored = bool(escapes) or red_pass > 0
         (rdir / "purple.json").write_text(json.dumps({
             "tier": tier, "round": rnd, "handshake": "purple",
             "ledger": "escapes.json",
             "red_total": red_total, "red_passed": red_pass,
-            "red_pass_rate_pct": round(red_pass / red_total * 100, 1) if red_total else 0,
+            "red_pass_rate_pct": (round(red_pass / red_total * 100, 1)
+                                  if red_total and scored else None),
             "escapes": len(escapes),
+            "scored": scored,
+            "simulated": not scored,
+            "mode": "live" if scored else "offline",
         }, indent=2))
         tier_rounds.append({"round": rnd, "red_total": red_total,
                              "red_passed": red_pass,
-                             "red_pass_rate_pct": round(red_pass / red_total * 100, 1) if red_total else 0,
+                             "red_pass_rate_pct": (round(red_pass / red_total * 100, 1)
+                                                  if red_total and scored else None),
                              "escapes": len(escapes),
+                             "scored": scored, "mode": "live" if scored else "offline",
                              "techniques_escaped": sorted({e["technique"] for e in escapes})})
         residuals = escapes  # next round re-probes these
         if not escapes:

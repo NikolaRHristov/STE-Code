@@ -304,12 +304,23 @@ def _emit_round(tier: int, round_n: int, args, out: Path) -> dict:
                                        encoding="utf-8")
     # PURPLE HANDSHAKE: RED signals the round is complete by writing purple.json.
     # BLUE awaits this file (not a process dependency).
+    #
+    # ``scored`` distinguishes "the model ran and nothing passed" from "no model
+    # ran, so nothing was measured". Without it, an --emit-only/offline round
+    # publishes red_passed=0 AND escapes=0 -- mutually contradictory, since a
+    # case must either pass or escape -- and a consumer reads
+    # red_pass_rate_pct=0.0 as catastrophic failure of the level.
+    scored = bool(escapes) or red_pass > 0
     (rdir / "purple.json").write_text(json.dumps({
         "tier": tier, "round": round_n, "handshake": "purple",
         "ledger": "escapes.json",
         "red_total": red_total, "red_passed": red_pass,
-        "red_pass_rate_pct": round(red_pass / red_total * 100, 1) if red_total else 0,
+        "red_pass_rate_pct": (round(red_pass / red_total * 100, 1)
+                              if red_total and scored else None),
         "escapes": len(escapes),
+        "scored": scored,
+        "simulated": not scored,
+        "mode": "live" if scored else "offline",
     }, indent=2), encoding="utf-8")
 
     return {"round": round_n, "red_total": red_total, "red_passed": red_pass,

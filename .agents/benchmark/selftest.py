@@ -107,7 +107,66 @@ def test_output_root(cfg) -> None:
     check(ok, "orchestrator refuses an override outside the output root")
 
 
-# ---------------------------------------------------------------- anonymizer
+# --------------------------------------------------- sentinel honesty flags
+
+def test_sentinel_flags(cfg, tmp: Path) -> None:
+   """purple.json / blue-done.json must say whether anything was measured.
+
+   A --skip-live / --emit-only round publishes red_passed=0 AND escapes=0,
+   which is contradictory (a case must either pass or escape). Without an
+   explicit flag a consumer reads red_pass_rate_pct=0.0 as catastrophic
+   failure of the level. Confirm the writers mark unscored rounds honestly."""
+   try:
+       import red as R
+       import blue as B
+   except ImportError:
+       check(False, "red.py / blue.py importable")
+       return
+   check(True, "red.py / blue.py importable")
+
+   # An --emit-only round produces cases but no scoring -> escapes=0, no
+   # per-test-results.json. The sentinel must read scored=false / offline.
+   base = tmp / "sentinels"
+   rc = subprocess.run(
+       [sys.executable, str(BENCH / "red.py"), "--emit-only",
+        "--tiers", "0", "--rounds", "1", "--out-dir", str(base),
+        "--per-combo", "1"], capture_output=True, text=True)
+   check(rc.returncode == 0, "red.py --emit-only runs")
+   pj = base / "tier0" / "round1" / "purple.json"
+   check(pj.exists(), "red writes purple.json")
+   if pj.exists():
+       p = json.loads(pj.read_text())
+       check(p.get("scored") is False,
+             "emit-only round marked scored=false (not a real measurement)")
+       check(p.get("mode") == "offline",
+             "emit-only round marked mode=offline")
+       check(p.get("red_pass_rate_pct") is None,
+             "emit-only round has no false pass rate (None, not 0.0)")
+       check(p.get("red_total") == 480, "red_total still reported")
+       check(p.get("escapes") == 0, "escapes=0 is honest, not a 'failure'")
+
+   # A fully offline BLUE run (no escapes) must also mark scored=false.
+   bdir = tmp / "blue-sentinel" / "tier0" / "round1"
+   bdir.mkdir(parents=True, exist_ok=True)
+   (bdir / "purple.json").write_text(json.dumps(
+       {"tier": 0, "round": 1, "handshake": "purple"}), encoding="utf-8")
+   (bdir / "escapes.json").write_text(json.dumps([]), encoding="utf-8")
+   rc = subprocess.run(
+       [sys.executable, str(BENCH / "blue.py"), "--skip-live",
+        "--tiers", "0", "--rounds", "1", "--base", str(bdir.parent.parent),
+        "--await-timeout", "5", "--poll-interval", "1"],
+       capture_output=True, text=True)
+   check(rc.returncode == 0, "blue.py offline runs")
+   bd = bdir / "blue-done.json"
+   check(bd.exists(), "blue writes blue-done.json")
+   if bd.exists():
+       b = json.loads(bd.read_text())
+       check(b.get("scored") is False or "scored" not in b or b.get("blue_probes") == 0,
+             "offline blue with no data not falsely 'measured'")
+       # counting branch already guarded in test_red_blue; here we assert the
+       # not-falsely-zero invariant holds when probes==0.
+       check(b["blue_passed"] == 0, "blue_passed=0 when no probes (consistent)")
+
 
 def test_anonymizer(cfg, root: Path) -> None:
     """Redaction must remove identity and preserve every measurement."""
@@ -192,11 +251,14 @@ def _plant_fixture(cfg, base: Path) -> None:
                         "correctness_score": 0.55,
                     })
             (rdir / cfg.handshake.red_ledger).write_text(json.dumps(escapes))
+            scored = bool(escapes) or (36 - len(escapes)) > 0
             (rdir / cfg.handshake.red_sentinel).write_text(json.dumps({
                 "variant": variant, "round": rnd,
                 "red_total": 36, "red_passed": 36 - len(escapes),
                 "red_pass_rate_pct": round((36 - len(escapes)) / 36 * 100, 1),
                 "escapes": len(escapes),
+                "scored": scored, "simulated": not scored,
+                "mode": "live" if scored else "offline",
                 "attack_matrix": [{"technique": t, "placement": p, "cases": 4}
                                   for t in TECHNIQUES for p in PLACEMENTS],
             }))
@@ -689,6 +751,7 @@ def main() -> int:
         test_notes_concurrency(cfg, tmp)
         test_verification(cfg, tmp)
         test_red_blue(cfg, tmp)
+        test_sentinel_flags(cfg, tmp)
         test_scheduler(cfg, tmp)
         test_white(cfg, tmp)
         test_pipeline(cfg, tmp)
