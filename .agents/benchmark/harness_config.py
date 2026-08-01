@@ -364,7 +364,8 @@ class HarnessConfig:
             "system_prompt": str(system_prompt),
             "results_dir": str(results_dir),
             "model": model or self.default_model,
-            "max_workers": str(max_workers if max_workers is not None else self.default_max_workers),
+            "max_workers": str(self.default_max_workers
+                                if max_workers is None else max_workers),
             "timeout": str(timeout if timeout is not None else self.default_timeout_s),
             "poll_interval": str(
                 poll_interval if poll_interval is not None else self.default_poll_interval_s
@@ -456,7 +457,8 @@ def add_common_arguments(parser, *, config: "HarnessConfig | None" = None) -> No
     parser.add_argument("--profile", default=None,
                         help="path to a harness profile document (overrides the default)")
     parser.add_argument("--variants", default="all",
-                        help=f"comma-separated variant keys, or 'all' ({','.join(cfg.variant_order)})")
+                        help="comma-separated variant keys, or 'all' ({})".format(
+                            ",".join(cfg.variant_order)))
     parser.add_argument("--rounds", type=int, default=3)
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--base", default=None,

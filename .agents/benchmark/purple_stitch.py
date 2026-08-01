@@ -271,7 +271,8 @@ class Stitcher:
                 "intensity": variant.intensity,
                 "rounds_present": sum(1 for v in self.views[key] if v.exists),
                 "total_escapes": total_escapes,
-                "mean_red_pass_rate_pct": round(sum(red_rates) / len(red_rates), 1) if red_rates else None,
+                "mean_red_pass_rate_pct": (round(sum(red_rates) / len(red_rates), 1)
+                                          if red_rates else None),
                 "blue_resistance_pct": _pct(held, probes),
                 "durability": self.durability(key),
             })
@@ -302,10 +303,14 @@ class Stitcher:
     def build_report(self) -> dict:
         matrix = self.interplay_matrix()
         cells = matrix["cells"]
-        by_technique: "dict[str, dict]" = defaultdict(lambda: {"escapes": 0, "probes": 0, "held": 0})
-        by_placement: "dict[str, dict]" = defaultdict(lambda: {"escapes": 0, "probes": 0, "held": 0})
+        def _tally() -> dict:
+            return {"escapes": 0, "probes": 0, "held": 0}
+
+        by_technique: "dict[str, dict]" = defaultdict(_tally)
+        by_placement: "dict[str, dict]" = defaultdict(_tally)
         for cell in cells:
-            for bucket, key in ((by_technique, cell["technique"]), (by_placement, cell["placement"])):
+            for bucket, key in ((by_technique, cell["technique"]),
+                                (by_placement, cell["placement"])):
                 bucket[key]["escapes"] += cell["escapes"]
                 bucket[key]["probes"] += cell["blue_probes"]
                 bucket[key]["held"] += cell["blue_held"]
@@ -378,7 +383,8 @@ def render_markdown(report: dict) -> str:
     add("| technique | escapes | probes | resistance % |")
     add("|---|---|---|---|")
     for row in report["by_technique"][:20]:
-        add(f"| {row['technique']} | {row['escapes']} | {row['blue_probes']} | {row['resistance_pct']} |")
+        add(f"| {row['technique']} | {row['escapes']} | "
+            f"{row['blue_probes']} | {row['resistance_pct']} |")
     add("")
 
     add("## Escapes by placement")
@@ -386,7 +392,8 @@ def render_markdown(report: dict) -> str:
     add("| placement | escapes | probes | resistance % |")
     add("|---|---|---|---|")
     for row in report["by_placement"][:20]:
-        add(f"| {row['placement']} | {row['escapes']} | {row['blue_probes']} | {row['resistance_pct']} |")
+        add(f"| {row['placement']} | {row['escapes']} | "
+            f"{row['blue_probes']} | {row['resistance_pct']} |")
     add("")
 
     add("## Timing profile")
@@ -413,7 +420,8 @@ def render_markdown(report: dict) -> str:
     add("## Self-healing")
     add("")
     add(f"- knowledge base: {know['lessons']} lessons, {know['patterns']} patterns")
-    add(f"- remedies proposed: {white['remedies_proposed']} · adopted: {white['remedies_adopted']}")
+    add(f"- remedies proposed: {white['remedies_proposed']} · "
+        f"adopted: {white['remedies_adopted']}")
     add(f"- convergence: {white['convergence']}")
     add("")
     return "\n".join(out)
