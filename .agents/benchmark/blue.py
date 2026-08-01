@@ -310,8 +310,13 @@ def run_blue(tier: int, args, base: Path, report: dict) -> None:
 
         # residual = escapes BLUE still failed to close
         residual_ids = sorted({rid for t in table for rid in t["residual_escape_ids"]})
+        # status: "deferred" when this round produced no probes (e.g. delayed
+        # timing on an odd round). A deferred round is NOT a successful defense
+        # -- it must not be read as "BLUE passed" downstream.
+        status = "deferred" if not probes else "done"
         (rdir / "blue-done.json").write_text(json.dumps({
             "tier": tier, "round": rnd,
+            "status": status,
             "blue_probes": len(probes),
             "blue_passed": bp, "blue_pass_rate_pct": blue_rate,
             "residual_escape_ids": residual_ids,
@@ -320,7 +325,8 @@ def run_blue(tier: int, args, base: Path, report: dict) -> None:
         }, indent=2), encoding="utf-8")
 
         history.extend(escapes)
-        tier_rounds.append({"round": rnd, "status": "done",
+        tier_rounds.append({"round": rnd, "status": "deferred"
+                            if not probes else "done",
                             "blue_probes": len(probes),
                             "blue_pass_rate_pct": blue_rate,
                             "residual_escapes": len(residual_ids),

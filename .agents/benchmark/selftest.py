@@ -727,6 +727,35 @@ def test_red_blue(cfg, tmp: Path) -> None:
     check(rc.returncode == 0 and dt < 6.0,
           "blue await-timeout prompt ({}s)".format(round(dt, 1)))
 
+    # --defense-timing delayed on an odd round produces no probes. It must NOT
+    # write a success sentinel -- status must be 'deferred', so a 0-probe round
+    # is not misread as "BLUE passed".
+    dft = tmp / "blue-delayed" / "tier0" / "round1"
+    dft.mkdir(parents=True, exist_ok=True)
+    (dft / "purple.json").write_text(json.dumps(
+        {"tier": 0, "round": 1, "handshake": "purple"}), encoding="utf-8")
+    (dft / "escapes.json").write_text(json.dumps([{
+        "tier": 0, "round": 1, "test_id": "red-x-000",
+        "technique": "forbidden_bait", "category": "api_doc",
+        "placement": "head", "timing": "immediate",
+        "missed_principles": ["P1"], "forbidden_found": ["bunch"],
+        "correctness_score": 0.2, "input": "Please bunch it.",
+        "violating_output": "Please bunch it."}]), encoding="utf-8")
+    rc = subprocess.run(
+        [sys.executable, str(BENCH / "blue.py"), "--skip-live",
+         "--tiers", "0", "--rounds", "1", "--base", str(dft.parent.parent),
+         "--defense-timing", "delayed",
+         "--await-timeout", "5", "--poll-interval", "1"],
+        capture_output=True, text=True)
+    check(rc.returncode == 0, "blue --defense-timing delayed runs")
+    dj = dft / "blue-done.json"
+    check(dj.exists(), "blue-delayed writes blue-done.json")
+    if dj.exists():
+        d = json.loads(dj.read_text())
+        check(d.get("blue_probes") == 0, "delayed round probes nothing")
+        check(d.get("status") == "deferred",
+              "delayed round marked status=deferred (not a false success)")
+
 
 def test_modules_compile() -> None:
     """Every module present must import under the interpreter that runs it."""
