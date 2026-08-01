@@ -2,7 +2,19 @@
 """Corrected-regex overlap audit for STE-Code refined vs extracted dict pages."""
 import re, sys, glob, os
 
-ROOT = "/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code"
+def _repo_root():
+    here = os.path.dirname(os.path.abspath(__file__))
+    cur = here
+    for _ in range(8):
+        if os.path.isdir(os.path.join(cur, ".git")):
+            return cur
+        parent = os.path.dirname(cur)
+        if parent == cur:
+            break
+        cur = parent
+    return cur
+
+ROOT = os.path.join(_repo_root(), "ste-code")
 
 def hw(path):
     t = open(path, encoding='utf-8', errors='ignore').read()

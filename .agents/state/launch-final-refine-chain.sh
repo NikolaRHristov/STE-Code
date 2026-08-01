@@ -2,7 +2,8 @@
 # Launch the final re-refinement chain (batches 31-36) only when the number of
 # concurrent LLM workers drops below 3 — the free tier 429s above that.
 # Poll, never block: this script itself runs in the background.
-cd /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code || exit 1
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$REPO_ROOT" || exit 1
 
 while true; do
   # Count live parent chains from the earlier wave.

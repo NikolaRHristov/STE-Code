@@ -18,7 +18,29 @@ Run via Hermes cronjob (every 8m) OR as a long-lived background process.
 """
 import subprocess, time, sys, os
 
-REPO = "/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code"
+def _repo_root():
+    """Resolve the repo root without hardcoding any local path."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    # walk up to the dir that contains .git
+    cur = here
+    for _ in range(6):
+        if os.path.isdir(os.path.join(cur, ".git")):
+            return cur
+        parent = os.path.dirname(cur)
+        if parent == cur:
+            break
+        cur = parent
+    # fallback: ask git
+    try:
+        out = subprocess.run(["git", "rev-parse", "--show-toplevel"],
+                             capture_output=True, text=True, cwd=here)
+        if out.returncode == 0 and out.stdout.strip():
+            return out.stdout.strip()
+    except Exception:
+        pass
+    return here
+
+REPO = _repo_root()
 BRANCH = "Current"
 REMOTE = "origin"
 INTERVAL = 480  # seconds (8 min)

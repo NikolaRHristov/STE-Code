@@ -3,7 +3,19 @@
 collapsed onto one line, as in w080). Compares refined vs extracted."""
 import re, sys, glob, os
 
-ROOT = "/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code"
+def _repo_root():
+    here = os.path.dirname(os.path.abspath(__file__))
+    cur = here
+    for _ in range(8):
+        if os.path.isdir(os.path.join(cur, ".git")):
+            return cur
+        parent = os.path.dirname(cur)
+        if parent == cur:
+            break
+        cur = parent
+    return cur
+
+ROOT = os.path.join(_repo_root(), "ste-code")
 
 # non-anchored: a headword is  |**word (pos)  or  |**WORD (pos)**  anywhere,
 # plus #### WORD (pos) headings.
