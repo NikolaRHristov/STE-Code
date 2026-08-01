@@ -1,4 +1,4 @@
-# Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+# Rule 1.1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
 
 > **Source:** Adapted from ASD-STE100 Issue 9
 > **Source:** [master.md#sec1-rule1.12](ste-code/grouped/), Rule 1.12
@@ -120,27 +120,25 @@ Do not use a code-domain technical verb if it is not necessary. If it is possibl
 
 ### Examples
 
-> **Non-STE:** If you detect a null pointer exception, fix it.
+> *Adapted from spec pair:* Non-STE: "If you detect broken wires, repair them."  |  STE: "If you find broken wires, repair them."
+
+> **Non-STE:** In `api/handler.py`, the request parser catches a `NullPointerError` and the code comment reads: "If you detect a null pointer exception in the parser, fix it before the response returns to the client."
 >
-> **STE:** If you find a null pointer exception, fix it.
+> **STE:** In `api/handler.py`, the request parser catches a `NullPointerError` and the code comment reads: "If you find a null pointer exception in the parser, fix it before the response returns to the client."
 
-> *Adapted from spec pair: "If you detect broken wires, repair them" → "If you find broken wires, repair them." In the spec, "detect" is not approved and cannot be a technical verb in the general maintenance context — the approved verb "find" must be used. The same principle applies in STE-Code: when describing a general debugging scenario, "detect" is not approved and "find" must be used.*
+> *Adapted from spec concept: "detect" becomes permissible as a technical verb in the correct context. In the spec, "detect" can be a technical verb in category 3 c), civil and military operations. In STE-Code, "detect" is a code-domain technical verb (category 3 c), network and communication) when used in a security context where it is the established technical term. The example below shows a full logging statement for a security subsystem.*
 
-> **STE:** The intrusion detection system detects unauthorized access attempts.
-
-> *Adapted from spec concept: "detect" becomes permissible as a technical verb in the correct context. In the spec, "detect" can be a technical verb in category 3 c), civil and military operations. In STE-Code, "detect" is a code-domain technical verb (category 3 c), network and communication) when used in a security context where it is the established technical term.*
-
-> **STE:** Enter your API key in the configuration file.
+> **STE:** In `security/ids.py`, the intrusion detection system logs every event: "The intrusion detection system detects unauthorized access attempts and forwards them to the alert queue."
 
 > *Adapted from spec example: "Enter your password" — "Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes. Just as "enter" is a technical verb in the spec, "enter" is a code-domain technical verb in category 2 a) in STE-Code. The word "enter" is not approved in the controlled terminology as a general verb, but it is permitted because it fits the code-domain technical verb category — exactly as the spec permits it.*
 
-> **Non-STE:** Migrate the database schema to version 3.
+> **STE:** The setup script prints the instruction: "Enter your API key in the configuration file, then save the file and restart the service."
+
+> *Adapted from spec principle: prefer an approved verb with a technical noun over a technical verb when possible. In the spec, you must not use "clamp," "grease," or "wire" as technical verbs when you can use an approved verb with the technical noun. Similarly, "migrate" is a code-domain technical verb (category 3 b), database and storage), but the approved verb "run" with the code-domain technical noun "migration" is a valid alternative.*
+
+> **Non-STE:** The operations runbook says: "Migrate the database schema to version 3 and then verify the row counts before you open the service to traffic."
 >
-> **STE:** Run the migration of the database schema to version 3.
-
-> *Adapted from spec principle: prefer an approved verb with a technical noun over a technical verb when possible. In the spec, you must not use "clamp," "grease," or "wire" as technical verbs when you can use an approved verb with the technical noun. Similarly, "migrate" is a code-domain technical verb (category 3 b), database and storage), but the approved verb "run" with the code-domain technical noun "migration" is a valid alternative. The STE version uses the approved verb "run."*
-
----
+> **STE:** The operations runbook says: "Run the migration of the database schema to version 3 and then check the row counts before you open the service to traffic."
 
 ## Code-Domain Explanation
 
@@ -150,15 +148,15 @@ This rule controls which verbs you can use in code documentation. Rule 1.12 appl
 
 README files give a high-level description of a project. The audience includes both new users and experienced developers. README files must use approved verbs as the main verb of each sentence. Use code-domain technical verbs only when an approved verb cannot give the same meaning with the same precision.
 
-> **Non-STE:** To bootstrap the project, execute `npm install` and then initiate the development server.
+> **Non-STE:** The README quick-start section says: "To bootstrap the project, execute `npm install` in the root directory and then initiate the development server with `npm run dev` before you open `http://localhost:3000` in your browser."
 >
-> **STE:** To start the project, run `npm install` and then start the development server.
+> **STE:** The README quick-start section says: "To start the project, run `npm install` in the root directory and then start the development server with `npm run dev` before you open `http://localhost:3000` in your browser."
 
 > *Principles applied: P12 (canonical synonym table). "Bootstrap" and "initiate" are not approved; "start" is the approved verb. The instruction is a general project setup step, not a technical operation that needs a code-domain technical verb.*
 
-> **Non-STE:** The build pipeline compiles TypeScript, minifies JavaScript, and deploys artifacts to the CDN.
+> **Non-STE:** The build overview states: "The continuous integration pipeline compiles TypeScript, minifies JavaScript, and deploys the build artifacts to the CDN every time you push a commit to the main branch."
 >
-> **STE:** The build pipeline compiles TypeScript, minifies JavaScript, and deploys artifacts to the CDN.
+> **STE:** The build overview states: "The continuous integration pipeline compiles TypeScript, minifies JavaScript, and deploys the build artifacts to the CDN every time you push a commit to the main branch."
 
 > *Principles applied: P12, Rule 1.12 categories 1 a) and 1 c). "Compile," "minify," and "deploy" are all code-domain technical verbs in their correct categories. The sentence describes specific build operations. No approved verb can replace them without losing precision.*
 
@@ -166,9 +164,9 @@ README files give a high-level description of a project. The audience includes b
 
 API documentation describes function signatures, parameters, return values, and side effects. API docs have the most tolerance for code-domain technical verbs because the verbs often match the method names in the code. The principle of one term per concept (Rule 1.11) is important here: if the method is named `serialize()`, the documentation must also use "serialize" to keep consistency.
 
-> **Non-STE:** `serialize()` — This method performs serialization of the object into a byte stream.
+> **Non-STE:** The API reference reads: "`serialize()` — This method performs serialization of the object into a byte stream and returns the encoded result to the caller."
 >
-> **STE:** `serialize()` — This method serializes the object to a byte stream.
+> **STE:** The API reference reads: "`serialize()` — This method serializes the object to a byte stream and returns the encoded result to the caller."
 
 > *Principles applied: P7, P13. The first version uses the technical noun "serialization" where the technical verb "serializes" is more direct and matches the method name. Do not use a technical verb as a noun or a technical noun as a verb.*
 
@@ -176,9 +174,9 @@ API documentation describes function signatures, parameters, return values, and 
 
 Docstrings must be short. Use approved verbs for general operations. Use code-domain technical verbs when the operation is specific to the code domain and an approved verb would make the text longer or less clear.
 
-> **Non-STE:** // Utilize the cache to retrieve the user object, then verify its validity before returning.
+> **Non-STE:** The inline comment above `load_user()` reads: "// Utilize the cache to retrieve the user object, then verify its validity before returning the response to the router."
 >
-> **STE:** // Get the user object from the cache, then check that it is valid before you return it.
+> **STE:** The inline comment above `load_user()` reads: "// Get the user object from the cache, then check that it is valid before you return the response to the router."
 
 > *Principles applied: P1 (approved words only). "Utilize," "retrieve," and "verify" are not approved. "Get," "check," and "return" are approved. The comment describes a general flow, not a specific technical operation.*
 
@@ -186,13 +184,13 @@ Docstrings must be short. Use approved verbs for general operations. Use code-do
 
 Commit messages must use the imperative mood. Use approved verbs as the main verb. Code-domain technical verbs can appear as the main verb when the commit describes a specific technical operation that only that verb can name.
 
-> **Non-STE:** Implemented user authentication and authorization.
+> **Non-STE:** The commit message reads: "Implemented user authentication and authorization for the admin panel and added the login route."
 >
-> **STE:** Add user authentication and authorization.
+> **STE:** The commit message reads: "Add user authentication and authorization for the admin panel and add the login route."
 
 > *Principles applied: P4 (approved verb forms), imperative mood. "Add" is an approved verb. The past tense "Implemented" violates the imperative mood rule for commit messages.*
 
-> **STE:** Refactor the token parser to use a recursive descent algorithm.
+> **STE:** The commit message reads: "Refactor the token parser to use a recursive descent algorithm and remove the regex fallback."
 
 > *Principles applied: P12, Rule 1.12 category 1 a). "Refactor" is a code-domain technical verb. It names a specific code operation that "change" or "modify" does not capture with the same precision.*
 
@@ -200,17 +198,15 @@ Commit messages must use the imperative mood. Use approved verbs as the main ver
 
 Error messages must be clear to all users, not only developers. Use approved verbs in error messages that end users see. Use code-domain technical verbs in error messages that only developers see, such as stack traces, debug logs, and internal error codes.
 
-> **Non-STE:** (end-user error) The system failed to instantiate the configuration module due to deserialization failure.
+> **Non-STE:** (end-user error) The dialog box shows: "The system failed to instantiate the configuration module due to a deserialization failure in the startup sequence."
 >
-> **STE:** (end-user error) Could not load the configuration file because its format is not correct.
+> **STE:** (end-user error) The dialog box shows: "Could not load the configuration file because its format is not correct. Check the file and try again."
 
 > *Principles applied: P6, P10. "Instantiate" and "deserialization" are code-domain technical terms that an end user does not understand. Use approved verbs and plain language for end-user messages.*
 
-> **STE:** (developer error log) Failed to deserialize config.yaml: unexpected token at line 42.
+> **STE:** (developer error log) The stack trace prints: "Failed to deserialize config.yaml: unexpected token at line 42, column 7. Run the schema validator to see the full error report."
 
 > *Principles applied: P12, Rule 1.12 category 2 c). "Deserialize" is a code-domain technical verb for a developer audience. The developer needs the precise technical term to debug the problem.*
-
----
 
 ## Paradigm-Specific Guidance
 
@@ -220,16 +216,20 @@ Object-oriented documentation uses a specific set of code-domain technical verbs
 
 | Code-Domain Technical Verb | Meaning | Example |
 |---|---|---|
-| instantiate | Make an instance of a class | "Instantiate the `UserService` class with the default constructor." |
-| inherit | Get behavior from a parent class | "The `AdminController` inherits from `BaseController`." |
-| override | Replace a parent method | "Override the `validate()` method to add custom checks." |
-| extend | Add to a base class or interface | "Extend the `AbstractParser` to make a JSON parser." |
-| implement | Give a body to an interface method | "Implement the `Serializable` interface." |
-| encapsulate | Hide internal state | "Encapsulate the connection pool behind a getter method." |
-| delegate | Forward a method call to another object | "Delegate the logging to the injected `Logger` instance." |
-| inject | Supply a dependency from outside | "Inject the `Database` dependency through the constructor." |
+| instantiate | Make an instance of a class | "Instantiate the `UserService` class with the default constructor in the test setup." |
+| inherit | Get behavior from a parent class | "The `AdminController` inherits from `BaseController` and reuses its request filter." |
+| override | Replace a parent method | "Override the `validate()` method to add custom checks for the email field." |
+| extend | Add to a base class or interface | "Extend the `AbstractParser` to make a JSON parser that reads the response body." |
+| implement | Give a body to an interface method | "Implement the `Serializable` interface so the object can be written to the cache." |
+| encapsulate | Hide internal state | "Encapsulate the connection pool behind a getter method to control access." |
+| delegate | Forward a method call to another object | "Delegate the logging to the injected `Logger` instance instead of calling `print` directly." |
+| inject | Supply a dependency from outside | "Inject the `Database` dependency through the constructor of the repository class." |
 
 NOTE: Do not use these verbs when an approved verb is sufficient. For example, do not say "The class encapsulates the data" when you can say "The class holds the data."
+
+> **Non-STE:** The design note says: "The `Session` class encapsulates the user record and the token, then exposes them through getter methods."
+>
+> **STE:** The design note says: "The `Session` class holds the user record and the token, then gives them through getter methods."
 
 ### Functional Programming (Haskell, Elixir, Clojure, Rust iterators)
 
@@ -237,14 +237,14 @@ Functional programming documentation uses verbs that describe transformations of
 
 | Code-Domain Technical Verb | Meaning | Example |
 |---|---|---|
-| compose | Combine functions into a pipeline | "Compose the `parse` and `validate` functions." |
-| curry | Change a multi-argument function to a chain of single-argument functions | "Curry the `add` function for partial application." |
-| map | Apply a function to each element | "Map the `toUpperCase` function over the list." |
-| reduce | Combine elements with a binary operation | "Reduce the list with the `sum` function." |
-| fold | Combine elements with an initial value | "Fold the collection from the left with a seed value of 0." |
-| recurse | Call a function from within itself | "Recurse on the tail of the list." |
-| memoize | Cache function results | "Memoize the `fibonacci` function to prevent recomputation." |
-| lift | Move a function into a monadic context | "Lift the pure function into the `IO` monad." |
+| compose | Combine functions into a pipeline | "Compose the `parse` and `validate` functions into a single handler." |
+| curry | Change a multi-argument function to a chain of single-argument functions | "Curry the `add` function for partial application in the reducer." |
+| map | Apply a function to each element | "Map the `toUpperCase` function over the list of labels." |
+| reduce | Combine elements with a binary operation | "Reduce the list with the `sum` function to get the total count." |
+| fold | Combine elements with an initial value | "Fold the collection from the left with a seed value of 0 to compute the average." |
+| recurse | Call a function from within itself | "Recurse on the tail of the list until the base case returns an empty list." |
+| memoize | Cache function results | "Memoize the `fibonacci` function to prevent recomputation on repeated calls." |
+| lift | Move a function into a monadic context | "Lift the pure function into the `IO` monad so it can read the config file." |
 
 NOTE: "Map" and "reduce" are code-domain technical verbs in category 3 a). Do not confuse them with the approved verb "map" (to show a relationship) or "reduce" (to make smaller). The context must make the meaning clear.
 
@@ -254,15 +254,15 @@ Procedural documentation uses verbs that describe memory management, control flo
 
 | Code-Domain Technical Verb | Meaning | Example |
 |---|---|---|
-| allocate | Get a block of memory | "Allocate a buffer of 1024 bytes on the heap." |
-| deallocate | Release a block of memory | "Deallocate the buffer before the function returns." |
-| dereference | Get the value at a pointer address | "Dereference the pointer to get the struct value." |
-| flush | Write buffered data to output | "Flush the output buffer after each write." |
-| signal | Send a signal to a process | "Signal the worker process to stop." |
+| allocate | Get a block of memory | "Allocate a buffer of 1024 bytes on the heap before you read the socket." |
+| deallocate | Release a block of memory | "Deallocate the buffer before the function returns to prevent a memory leak." |
+| dereference | Get the value at a pointer address | "Dereference the pointer to get the struct value from the response." |
+| flush | Write buffered data to output | "Flush the output buffer after each write so the client receives the data." |
+| signal | Send a signal to a process | "Signal the worker process to stop when the shutdown hook fires." |
 
-> **Non-STE:** You must free the memory that you malloced earlier in the function.
+> **Non-STE:** The comment in `buffer.c` reads: "You must free the memory that you malloced earlier in the function before you return."
 >
-> **STE:** You must deallocate the memory that you allocated earlier in the function.
+> **STE:** The comment in `buffer.c` reads: "You must deallocate the memory that you allocated earlier in the function before you return."
 
 > *Principles applied: P11 (one term per concept). "Free" and "malloc" are C standard library function names. In documentation, use the code-domain technical verbs "allocate" and "deallocate" (category 2 c) for consistency across languages. The function names "malloc" and "free" are technical code nouns (Rule 1.5).*
 
@@ -272,15 +272,15 @@ Declarative documentation uses verbs that describe the desired state of a system
 
 | Code-Domain Technical Verb | Meaning | Example |
 |---|---|---|
-| provision | Make infrastructure available | "This resource provisions an AWS EC2 instance." |
-| converge | Bring actual state to desired state | "The controller converges the cluster to the declared configuration." |
-| reconcile | Compare actual state to desired state | "The operator reconciles the custom resource every 30 seconds." |
-| apply | Put a configuration into effect | "Apply the Terraform plan to provision the resources." |
-| destroy | Remove provisioned infrastructure | "Destroy the stack to remove all resources." |
+| provision | Make infrastructure available | "This resource provisions an AWS EC2 instance with the `web` tag." |
+| converge | Bring actual state to desired state | "The controller converges the cluster to the declared configuration on every reconcile loop." |
+| reconcile | Compare actual state to desired state | "The operator reconciles the custom resource every 30 seconds and reports drift." |
+| apply | Put a configuration into effect | "Apply the Terraform plan to provision the resources in the `staging` workspace." |
+| destroy | Remove provisioned infrastructure | "Destroy the stack to remove all resources and free the allocated IP addresses." |
 
-> **Non-STE:** Terraform will make an S3 bucket for you when you execute `terraform apply`.
+> **Non-STE:** The Terraform guide says: "Terraform will make an S3 bucket for you when you execute `terraform apply` in the root module."
 >
-> **STE:** Terraform provisions an S3 bucket when you apply the configuration.
+> **STE:** The Terraform guide says: "Terraform provisions an S3 bucket when you apply the configuration in the root module."
 
 > *Principles applied: P12, Rule 1.12 category 3 a) and 2 c). "Provision" is a code-domain technical verb (category 3 a), algorithmic and data, or category 2 c), system operations). "Apply" is a code-domain technical verb (category 2 c). The approved verb "make" is not precise enough.*
 
@@ -290,85 +290,81 @@ Systems documentation uses verbs that describe ownership, borrowing, and lifetim
 
 | Code-Domain Technical Verb | Meaning | Example |
 |---|---|---|
-| borrow | Get a reference without taking ownership | "Borrow the vector immutably for the duration of the loop." |
-| own | Hold exclusive control of a value | "The `String` struct owns its heap-allocated buffer." |
-| drop | Run the destructor and release resources | "The value drops when it goes out of scope." |
-| move | Transfer ownership to another binding | "Move the value into the closure." |
-| pin | Prevent a value from moving in memory | "Pin the future to the heap before polling it." |
-| acquire | Get exclusive access to a lock | "Acquire the mutex before you access the shared state." |
-| release | Give up exclusive access to a lock | "Release the lock when the critical section is complete." |
+| borrow | Get a reference without taking ownership | "Borrow the vector immutably for the duration of the loop to read each item." |
+| own | Hold exclusive control of a value | "The `String` struct owns its heap-allocated buffer and frees it on drop." |
+| drop | Run the destructor and release resources | "The value drops when it goes out of scope at the end of the function." |
+| move | Transfer ownership to another binding | "Move the value into the closure so the spawned thread can use it." |
+| pin | Prevent a value from moving in memory | "Pin the future to the heap before you poll it in the runtime." |
+| acquire | Get exclusive access to a lock | "Acquire the mutex before you access the shared state in the worker thread." |
+| release | Give up exclusive access to a lock | "Release the lock when the critical section is complete to unblock the next worker." |
 
-> **Non-STE:** You need to clone the string to avoid a borrow checker violation.
+> **Non-STE:** The unsafe block comment reads: "You need to clone the string to avoid a borrow checker violation when you return the slice."
 >
-> **STE:** You must clone the string to prevent a borrow conflict.
+> **STE:** The unsafe block comment reads: "You must clone the string to prevent a borrow conflict when you return the slice."
 
 > *Principles applied: P10, P12. "Violation" is a legal term (category 4), not a systems programming term. "Conflict" or "error" is more correct for a compiler message.*
-
----
 
 ## Extended Examples
 
 ### Example Group A: General Verb vs. Code-Domain Technical Verb
 
-> **Non-STE:** The script initiates a connection to the database and then commences the data migration process.
+> **Non-STE:** The deployment script log says: "The script initiates a connection to the database and then commences the data migration process before it starts the health check."
 >
-> **STE:** The script connects to the database and then migrates the data.
+> **STE:** The deployment script log says: "The script connects to the database and then migrates the data before it starts the health check."
 
 > *Principles applied: P12 (canonical synonym table + Rule 1.12). "Connect" and "migrate" are code-domain technical verbs (categories 3 c and 3 b). "Initiates" and "commences" are not approved and are not technical verbs in any category. The STE version uses the code-domain technical verbs directly, which is more concise and precise.*
 
 ### Example Group B: Technical Noun Used Incorrectly as a Verb
 
-> **Non-STE:** You must docker the application before you ship it.
+> **Non-STE:** The CI step reads: "You must docker the application before you ship it to the registry with the release tag."
 >
-> **STE:** You must containerize the application before you ship it.
+> **STE:** The CI step reads: "You must containerize the application before you ship it to the registry with the release tag."
 
 > *Principles applied: P7 (do not use technical nouns as verbs), P8 (use standard technical nouns). "Docker" is a brand name and a technical code noun (Rule 1.5). It is not a verb. "Containerize" is a code-domain technical verb (category 1 c), build and package). If "containerize" is not acceptable in your project glossary, use "package the application in a container" — the approved verb "package" with the technical noun "container."*
 
-> **Non-STE:** Git the changes and then push them to the remote.
+> **Non-STE:** The contributor guide says: "Git the changes and then push them to the remote before you open the pull request."
 >
-> **STE:** Commit the changes and then push them to the remote.
+> **STE:** The contributor guide says: "Commit the changes and then push them to the remote before you open the pull request."
 
 > *Principles applied: P7. "Git" is a tool name and a technical code noun. It is not a verb. "Commit" is a code-domain technical verb (category 2 b), user interface and application operations, when used in the version-control context).*
 
 ### Example Group C: When an Approved Verb Is Sufficient
 
-> **Non-STE:** Execute the test suite to verify that the API endpoint returns the correct status code.
+> **Non-STE:** The test plan says: "Execute the test suite to verify that the API endpoint returns the correct status code and the response body is valid."
 >
-> **STE:** Run the test suite to check that the API endpoint returns the correct status code.
+> **STE:** The test plan says: "Run the test suite to check that the API endpoint returns the correct status code and the response body is valid."
 
 > *Principles applied: P1, P12 (canonical synonym table). "Execute" and "verify" are not approved. "Run" and "check" are approved. The operations are general testing steps. No code-domain technical verb category is needed. Use the approved verbs.*
 
 ### Example Group D: When Only the Code-Domain Technical Verb Works
 
-> **Non-STE:** The function takes a string and turns it into a number, then does an operation on each item of the list.
+> **Non-STE:** The function description reads: "The `convert()` function takes a string and turns it into a number, then does an operation on each item of the list and gives back a new list."
 >
-> **STE:** The function parses a string to an integer, then maps the transformation over the list.
+> **STE:** The function description reads: "The `convert()` function parses a string to an integer, then maps the transformation over the list and returns a new list."
 
 > *Principles applied: P12, Rule 1.12 categories 3 a) and 3 a). "Parse" and "map" are code-domain technical verbs. "Turns it into" and "does an operation on each item" are imprecise and wordy. The code-domain technical verbs are necessary for precision.*
 
 ### Example Group E: API Documentation — Method Name Consistency
 
-> **Non-STE:** POST /api/users — This endpoint performs the creation of a new user record in the database.
+> **Non-STE:** The OpenAPI annotation reads: "POST /api/users — This endpoint performs the creation of a new user record in the database and returns the identifier of the created resource."
 >
-> **STE:** POST /api/users — This endpoint makes a new user in the database.
+> **STE:** The OpenAPI annotation reads: "POST /api/users — This endpoint makes a new user in the database and returns the identifier of the new resource."
 
 > *Principles applied: P13 (do not use technical verbs as nouns), P1 (approved words). "Performs the creation" uses the technical noun "creation" instead of the approved verb "makes." Do not use the nominalized form of a verb when the verb form is available and approved.*
 
-> **Non-STE:** `def serialize(self) -> bytes:` Returns the serialization of this object.
+> **Non-STE:** The method docstring reads: "`def serialize(self) -> bytes:` Returns the serialization of this object as a byte string for transport."
 >
-> **STE:** `def serialize(self) -> bytes:` Serializes this object and returns the result.
+> **STE:** The method docstring reads: "`def serialize(self) -> bytes:` Serializes this object and returns the result as a byte string for transport."
 
 > *Principles applied: P13. The method is named "serialize" (a code-domain technical verb). The documentation must use the same verb form to keep one term per concept (Rule 1.11). Do not switch to the noun "serialization."*
 
 ### Example Group F: Commit Message — Imperative Mood with Technical Verbs
 
-> **Non-STE:** Deployed the new authentication middleware and configured the rate limiter.
+> **Non-STE:** The commit message reads: "Deployed the new authentication middleware and configured the rate limiter for the public API."
 >
-> **STE:** Deploy the new authentication middleware and set the rate limiter.
+> **STE:** The commit message reads: "Deploy the new authentication middleware and set the rate limiter for the public API."
 
 > *Principles applied: P4 (imperative mood for commit messages), P12 (canonical synonym table). "Deploy" is a code-domain technical verb (category 1 c). "Set" is an approved verb. "Configured" uses the wrong mood (past indicative instead of imperative) and "configure" is a code-domain technical verb that can be replaced by "set" in this context.*
-
----
 
 ## Edge Cases
 
@@ -378,9 +374,9 @@ Some framework names are also common English verbs. For example, "Express" (the 
 
 RULE: When a framework or tool name is also a general verb, always use the framework name as a technical code noun (Rule 1.5). Add a qualifier if the context does not make the meaning clear.
 
-> **Non-STE:** Express the route handler as a middleware function.
+> **Non-STE:** The tutorial says: "Express the route handler as a middleware function so the request passes through the logger first."
 >
-> **STE:** Write the route handler as an Express middleware function.
+> **STE:** The tutorial says: "Write the route handler as an Express middleware function so the request passes through the logger first."
 
 > *Principles applied: P6, Rule 1.5. "Express" as a verb meaning "to state" is not approved. As a proper noun, "Express" is a technical code noun. The STE version makes the meaning clear by adding the framework name as a qualifier.*
 
@@ -390,15 +386,15 @@ Some programming language keywords are the same as approved STE-Code verbs. For 
 
 RULE: When a code keyword and an approved verb have the same spelling, use context to make the meaning clear. In inline code formatting, the keyword appears in monospace. In prose, the approved verb or technical verb appears in normal text.
 
-> **Non-STE:** The function returns a promise that you must await to get the result.
+> **Non-STE:** The docstring reads: "The function returns a promise that you must await to get the result from the network call."
 >
-> **STE:** The function returns a `Promise` that you must `await` to get the result.
+> **STE:** The docstring reads: "The function returns a `Promise` that you must `await` to get the result from the network call."
 
 > *Principles applied: P6, Rule 1.5. "Returns" is an approved verb. "Promise" and "await" are JavaScript keywords and technical code nouns. Use monospace formatting for keywords to distinguish them from approved verbs.*
 
-> **Non-STE:** Import the module at the top of the file, then return the configured instance.
+> **Non-STE:** The module header says: "Import the module at the top of the file, then return the configured instance to the caller."
 >
-> **STE:** Import the module at the top of the file. Then return the set instance.
+> **STE:** The module header says: "Import the module at the top of the file. Then return the set instance to the caller."
 
 > *Principles applied: P12, Rule 1.12 category 1 a). "Import" is a code-domain technical verb. "Return" is an approved verb. "Configured" is a code-domain technical verb that can be replaced by the approved verb "set" in this context.*
 
@@ -408,9 +404,9 @@ Generated code and auto-generated documentation do not always obey STE-Code rule
 
 RULE: Rule 1.12 applies to documentation that a human writes. Generated code and auto-generated documentation are exempt, but you must write any surrounding explanation in STE-Code. When you refer to a generated symbol name, treat it as a technical code noun (Rule 1.5).
 
-> **Non-STE:** The generated client library exposes a `serializeToJson()` method that leverages the native JSON encoder.
+> **Non-STE:** The integration note reads: "The generated client library exposes a `serializeToJson()` method that leverages the native JSON encoder to build the payload."
 >
-> **STE:** The generated client library has a `serializeToJson()` method that uses the native JSON encoder.
+> **STE:** The integration note reads: "The generated client library has a `serializeToJson()` method that uses the native JSON encoder to build the payload."
 
 > *Principles applied: P1, P12. "Exposes" and "leverages" are not approved. "Has" and "uses" are approved. The method name `serializeToJson()` is a technical code noun — do not change it even though "serialize" is a code-domain technical verb. The method name is generated and fixed.*
 
@@ -418,9 +414,9 @@ RULE: Rule 1.12 applies to documentation that a human writes. Generated code and
 
 Command-line interface (CLI) commands often use technical verbs as their names. For example, `git commit`, `docker build`, `kubectl apply`, `npm install`. When you document CLI commands, the command name is a technical code noun. The verb that describes the action can be an approved verb.
 
-> **Non-STE:** Execute `docker build` to containerize the application, then execute `docker push` to upload the image.
+> **Non-STE:** The operations guide says: "Execute `docker build` to containerize the application, then execute `docker push` to upload the image to the registry."
 >
-> **STE:** Run `docker build` to containerize the application, then run `docker push` to upload the image.
+> **STE:** The operations guide says: "Run `docker build` to containerize the application, then run `docker push` to upload the image to the registry."
 
 > *Principles applied: P1, P12. "Execute" is not approved. "Run" is approved. The commands `docker build` and `docker push` are technical code nouns. "Containerize" and "upload" are code-domain technical verbs (categories 1 c and 2 c).*
 
@@ -430,13 +426,11 @@ Some code-domain technical verbs have more than one word. For example, "roll bac
 
 RULE: Keep the multi-word technical verb as one unit. Do not insert words between its parts. Use the full form every time you refer to the operation.
 
-> **Non-STE:** You must roll the database migration back if the validation fails.
+> **Non-STE:** The migration runbook says: "You must roll the database migration back if the validation of the schema fails during the upgrade."
 >
-> **STE:** You must roll back the database migration if the check fails.
+> **STE:** The migration runbook says: "You must roll back the database migration if the check of the schema fails during the upgrade."
 
 > *Principles applied: P11 (one term per concept), P1 (approved words). "Roll back" is a single code-domain technical verb (category 3 b). Do not split it with an object. "Validation" is a technical noun form; use the approved verb "check" instead. In English, phrasal verbs can be split ("roll it back"), but STE-Code does not permit splitting of multi-word technical verbs to prevent ambiguity.*
-
----
 
 ## Cross-References
 
@@ -452,8 +446,6 @@ This rule connects to several other STE-Code rules. Read these rules together to
 | **Rule 1.13** — Do not use technical verbs as nouns | If a word is a code-domain technical verb, do not use its nominalized form. Prefer "serialize" (verb) over "serialization" (noun) when the sentence calls for a verb. Use the approved verb with the technical noun when the sentence calls for a noun. |
 | **Section 3** — Verb rules (tense, mood, voice) | Code-domain technical verbs must obey the same tense, mood, and voice rules as approved verbs. Use the imperative mood for procedures. Use the active voice. Do not use the "-ing" form as the main verb. |
 
----
-
 ## Grammar Notes
 
 ### Code-Domain Technical Verbs and the Imperative Mood
@@ -468,9 +460,9 @@ Procedural documentation (instructions, setup guides, API usage examples) must u
 
 Do not use the "-ing" form of a code-domain technical verb as the main verb of a procedural sentence.
 
-> **Non-STE:** Compiling the source files and then deploying to staging.
+> **Non-STE:** The runbook step reads: "Compiling the source files and then deploying to staging before you run the smoke tests."
 >
-> **STE:** Compile the source files. Then deploy the application to staging.
+> **STE:** The runbook step reads: "Compile the source files. Then deploy the application to staging before you run the smoke tests."
 
 > *Principles applied: P4 (approved verb forms). The "-ing" form is not an approved verb form for procedures. Use the imperative form.*
 
@@ -488,9 +480,9 @@ Descriptive documentation (architecture overviews, design documents, project des
 
 Use the active voice for code-domain technical verbs. The passive voice is permitted in descriptive texts when the agent is not important, but the active voice is always clearer.
 
-> **Non-STE:** The configuration file is parsed by the bootstrap module during initialization.
+> **Non-STE:** The design document says: "The configuration file is parsed by the bootstrap module during initialization and the result is cached."
 >
-> **STE:** The bootstrap module parses the configuration file when it starts.
+> **STE:** The design document says: "The bootstrap module parses the configuration file when it starts and caches the result."
 
 > *Principles applied: active voice, P12 (canonical synonym table). "Parses" is a code-domain technical verb (category 3 a). "Starts" is an approved verb. The passive construction "is parsed by" is wordier and less direct than the active "parses."*
 
@@ -498,9 +490,9 @@ Use the active voice for code-domain technical verbs. The passive voice is permi
 
 When a code-domain technical verb follows another verb, use the full infinitive form ("to" + verb). Do not drop the "to."
 
-> **Non-STE:** You need serialize the object before you send it.
+> **Non-STE:** The usage note reads: "You need serialize the object before you send it to the client in the response."
 >
-> **STE:** You must serialize the object before you send it.
+> **STE:** The usage note reads: "You must serialize the object before you send it to the client in the response."
 
 > *Principles applied: P4 (approved verb forms), grammar. "Need" is not approved; use "must." The full infinitive "to serialize" is required after some constructions, but "must" takes the bare infinitive ("must serialize"), which is correct.*
 
@@ -515,8 +507,18 @@ Code-domain technical verbs obey the same tense restrictions as approved verbs. 
 
 Do not use the present perfect, past perfect, or continuous tenses with code-domain technical verbs.
 
-> **Non-STE:** The system has been indexing the database for ten minutes.
+> **Non-STE:** The status report reads: "The system has been indexing the database for ten minutes and the query latency keeps increasing."
 >
-> **STE:** The system indexes the database. The index operation started ten minutes ago.
+> **STE:** The status report reads: "The system indexes the database. The index operation started ten minutes ago and the query latency keeps increasing."
 
 > *Principles applied: P4, tense restrictions. The present perfect continuous "has been indexing" is not permitted. Use the simple present with a time reference in a separate sentence.*
+
+## See also
+
+> **See also:** Rule 1.1 — Use approved words from the dictionary
+> **See also:** Rule 1.2 — Use words only as their specified part of speech
+> **See also:** Rule 1.5 — Technical code nouns are allowed
+> **See also:** Rule 1.7 — Do not use technical nouns as verbs
+> **See also:** Rule 1.11 — One term per concept
+> **See also:** Rule 1.13 — Do not use technical verbs as nouns
+> **See also:** Section 3 — Verb rules (tense, mood, voice)
