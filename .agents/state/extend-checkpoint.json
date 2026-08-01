@@ -1,0 +1,14 @@
+{
+  "nouns": {
+    "passed": true,
+    "n": 20
+  },
+  "anti-patterns": {
+    "passed": true,
+    "n": 20
+  },
+  "domains": {
+    "passed": true,
+    "n": 20
+  }
+}

@@ -340,14 +340,15 @@ grep -c "Source: master.md#" ste-code/adapted/a-sec*-rule*.md | grep ":0"
 
 ### Gate 9 - Aerospace Artifact Sweep
 
-Verify that no aerospace-domain artifacts survive into adapted output:
+**Do NOT use a naive `grep -v "## Original Rule"`** — same false-flag problem as Gate 6, AND it would flag the intentional mapping monoliths (`a-categories.md`, `a-dictionary.md`) whose aerospace terms are teaching content, not leakage. Use the zone-aware scanner:
 
 ```bash
-# Known aerospace terms that must NOT appear outside original rule blocks
-grep -rn "aircraft\|engine\|landing gear\|fuselage\|cockpit\|APU\|ECS\|ATA chapter" \
-  ste-code/adapted/ | grep -v "## Original Rule" | wc -l
-# Result must be 0 - aerospace terms are domain leakage
+python3 <ste-code-tooling>/scripts/aero_leak_scan.py ste-code/adapted/ --counts
+# FAIL = genuine aerospace leak in adapted prose (excludes Original Rule / Non-STE /
+# STE / Do-not-write / WRITE / ### Original / **Original:** / **Code-domain:** / tables)
 ```
+
+Genuine leaks are rare; most "aerospace" hits in the monoliths are correct. Re-express semantically; never `aircraft -> application`. See `ste-code-tooling` `references/semantic-adaptation.md`.
 
 ## Troubleshooting
 
