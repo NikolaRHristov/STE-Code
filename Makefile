@@ -28,4 +28,26 @@ audit:
 ## check: everything CI should run for the benchmark
 check: lint test audit
 
-.PHONY: test lint audit check
+# --- release maintenance -----------------------------------------------------
+# Deliberately NOT wired into `check`: the benchmark suite above is another
+# session's canonical gate, and mixing counts hides its real pass total.
+
+RELEASE := .agents/tools/release
+
+## release-test: self-tests for the release tooling
+release-test:
+	@$(PY) $(RELEASE)/test_release.py
+
+## drift: documented counts, badges, and versions must match disk
+drift:
+	@$(PY) $(RELEASE)/scan.py
+
+## release-check: lint + tests + drift for the release tooling only
+release-check:
+	@$(PY) -m compileall -q $(RELEASE) >/dev/null && echo "compile: ok"
+	@awk 'length>100 {print FILENAME":"FNR": "length" chars"; bad=1} \
+		END {exit bad+0}' $(RELEASE)/*.py && echo "line length: ok"
+	@$(PY) $(RELEASE)/test_release.py
+	@$(PY) $(RELEASE)/scan.py
+
+.PHONY: test lint audit check release-test drift release-check
