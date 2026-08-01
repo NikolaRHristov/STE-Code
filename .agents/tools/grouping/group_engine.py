@@ -329,43 +329,195 @@ def _token_to_position(token: str, id2pos: Dict[str, int]) -> Optional[int]:
     return id2pos.get(token.upper())
 
 
-def slice_pages(rf: "RefinedFile", id2pos: Optional[Dict[str, int]] = None) -> Dict[int, str]:
-    """Split a refined file into {sequential_page: body_text} using whatever
-    page-marker style the file uses (see _PAGE_MARKERS).
+def _build_group_map(plan):
+    """page -> (gid, key, start_letter, prev_gid).
 
-    Returns {} if the file's markers do not cleanly resolve to exactly the
-    file's declared page range — the caller MUST treat that as "not ready" (do
-    not guess). During refinement churn many files have partial/absent markers;
-    grouping should WAIT for a clean corpus rather than slice blind.
-
-    The file's leading metadata block (title + `> **Source:**` / `> **Pages:**`)
-    that precedes the first page marker is dropped: it is per-file boilerplate,
-    re-emitted once per group by the assembler.
+    For DICT groups, `start_letter` is the first alpha of the bucket key
+    (e.g. 'e' for group key 'e-f'); used to split straddler files at the
+    alphabetical boundary. Non-DICT groups have start_letter=None.
     """
-    if id2pos is None:
-        id2pos = id_to_position(parse_manifest())
+    gmap = {}
+    prev = None
+    for g in plan:
+        start_letter = None
+        if g.section == "DICT" and g.key:
+            m = re.match(r"^([A-Za-z])", g.key)
+            start_letter = m.group(1).upper() if m else None
+        for p in g.pages:
+            gmap[p] = (g.gid, g.key, start_letter, prev)
+        prev = g.gid
+    return gmap
+
+
+_GROUP_MAP_CACHE: Dict[str, Dict[int, tuple]] = {}
+
+
+def _group_map() -> Dict[int, tuple]:
+    """Cached page->group map (one source of truth with build_plan)."""
+    if "m" not in _GROUP_MAP_CACHE:
+        man = parse_manifest()
+        _GROUP_MAP_CACHE["m"] = _build_group_map(build_plan(man))
+    return _GROUP_MAP_CACHE["m"]
+
+
+_ENTRY_HEAD_RE = re.compile(r"^#{2,4}\s+([A-Za-z])", re.I)   # ### Word
+_ENTRY_ROW_RE = re.compile(r"^\|\s*([A-Za-z])", re.I)        # | Word (POS)
+
+
+def _entry_first_letter(line: str):
+    """If `line` begins a dictionary entry, return its first alpha letter (upper);
+    else None. Used to locate the alphabetical split point inside a merged
+    straddler file."""
+    s = line.strip()
+    m = _ENTRY_HEAD_RE.match(s) or _ENTRY_ROW_RE.match(s)
+    return m.group(1).upper() if m else None
+
+
+def _maybe_split_straddler(ps: int, pe: int, txt: str, gmap: Dict[int, tuple]):
+    """If segment [ps,pe] spans a group boundary, split it deterministically.
+
+    Only DICT straddlers need a real split: the boundary is the dictionary
+    letter change, found by scanning the merged body for the first entry whose
+    first letter >= the NEXT group's start letter. Returns a list of
+    (start_page, end_page, text) covering [ps,pe] exactly once.
+    """
+    g0 = gmap.get(ps)
+    g1 = gmap.get(pe)
+    if not g0 or not g1 or g0[0] == g1[0]:
+        return [(ps, pe, txt)]
+    # boundary page b = first page in (ps,pe] owned by a different group
+    b = None
+    for p in range(ps + 1, pe + 1):
+        if gmap.get(p, (None,))[0] != g0[0]:
+            b = p
+            break
+    if b is None:
+        return [(ps, pe, txt)]
+    split_letter = gmap.get(b, (None, None, None, None))[2]
+    if not split_letter:
+        # Non-dict straddler without a letter cue: keep whole in first group
+        # (rare; verify-groups will surface any coverage gap).
+        return [(ps, pe, txt)]
+    lines = txt.splitlines()
+    cut = len(lines)
+    for k, ln in enumerate(lines):
+        L = _entry_first_letter(ln)
+        if L is not None and L >= split_letter:
+            cut = k
+            break
+    part1 = "\n".join(lines[:cut]).rstrip() + "\n"
+    part2 = "\n".join(lines[cut:]).rstrip() + "\n"
+    return [(ps, b - 1, part1), (b, pe, part2)]
+
+
+def file_segments(rf: "RefinedFile", id2pos: Dict[str, int]) -> List[Tuple[int, int, str]]:
+    """Return ordered (start_page, end_page, text) segments that tile `rf` once.
+
+    Tolerates the four real-world drift conditions the refiner produces:
+      A_dupes        — spurious nav cross-references (e.g. `**Page TOC-2**`)
+                       resolved to a position OUTSIDE the file's range are
+                       ignored; consecutive equal positions are de-duped.
+      B_missing_lead — content before the first real marker belongs to rf.start
+                       (and trailing content after the last marker to rf.end).
+      C_merged       — a file with only its first-page marker (rest merged) is
+                       one segment spanning all its pages.
+      STRADDLER      — a merged segment that crosses a group boundary is split
+                       at the dictionary letter change (deterministic, no LLM).
+
+    Returns [] only for a genuinely broken file (segments don't cover the full
+    declared range) — the caller treats that as "not ready".
+    """
     text = rf.path.read_text(encoding="utf-8", errors="ignore")
     lines = text.splitlines()
-    marks: List[Tuple[int, int]] = []  # (line_index, sequential_position)
+    # Real page boundaries ONLY: a marker whose resolved position is inside
+    # this file's own page range. This drops spurious nav cross-references
+    # (TOC/SRI page-IDs pointing outside the range).
+    marks: List[Tuple[int, int]] = []
     for i, ln in enumerate(lines):
         tok = _match_page_marker(ln)
         if tok is None:
             continue
         pos = _token_to_position(tok, id2pos)
-        if pos is None:
+        if pos is None or pos < rf.start or pos > rf.end:
             continue
         marks.append((i, pos))
+    # de-dupe consecutive equal positions (keep first)
+    dm: List[Tuple[int, int]] = []
+    for i, p in marks:
+        if not dm or p != dm[-1][1]:
+            dm.append((i, p))
 
     expected = list(rf.pages)
-    got = [pos for _, pos in marks]
-    # Must be exactly the declared range, in order, no dupes/gaps.
-    if got != expected:
+
+    # CLEAN: markers resolve exactly to the declared range, in order.
+    if [p for _, p in dm] == expected:
+        segs = []
+        for j, (li, pos) in enumerate(dm):
+            end = dm[j + 1][0] if j + 1 < len(dm) else len(lines)
+            segs.append((pos, pos, "\n".join(lines[li:end]).rstrip() + "\n"))
+        return segs
+
+    gmap = _group_map()
+    segs: List[Tuple[int, int, str]] = []
+    if not dm:
+        # Fully merged: the entire file is one segment.
+        segs.append((rf.start, rf.end, text.rstrip() + "\n"))
+    else:
+        first_pos = dm[0][1]
+        last_pos = dm[-1][1]
+        last_line = dm[-1][0]
+        # leading content (missing leading marker) -> rf.start..first_pos-1
+        if first_pos > rf.start:
+            segs.append((rf.start, first_pos - 1,
+                         "\n".join(lines[:dm[0][0]]).rstrip() + "\n"))
+        for j, (li, pos) in enumerate(dm):
+            end = dm[j + 1][0] if j + 1 < len(dm) else len(lines)
+            segs.append((pos, pos, "\n".join(lines[li:end]).rstrip() + "\n"))
+        # trailing content (missing trailing marker) -> last_pos+1..rf.end
+        if last_pos < rf.end:
+            segs.append((last_pos + 1, rf.end,
+                         "\n".join(lines[last_line:]).rstrip() + "\n"))
+
+    # Split any segment that straddles a group boundary (STRADDLER).
+    out: List[Tuple[int, int, str]] = []
+    for (ps, pe, txt) in segs:
+        out.extend(_maybe_split_straddler(ps, pe, txt, gmap))
+
+    # Validate exact coverage of the declared range.
+    cover: List[int] = []
+    for ps, pe, _ in out:
+        cover.extend(range(ps, pe + 1))
+    if sorted(cover) != expected:
+        return []
+    return out
+
+
+def slice_pages(rf: "RefinedFile", id2pos: Optional[Dict[str, int]] = None) -> Dict[int, str]:
+    """Split a refined file into {sequential_page: body_text} using whatever
+    page-marker style the file uses (see _PAGE_MARKERS).
+
+    Tolerates marker drift (A_dupes / B_missing_lead / C_merged / STRADDLER) so
+    grouping no longer refuses a complete-but-imperfectly-marked corpus. Returns
+    {} only when a file is genuinely broken (its segments cannot cover the
+    declared page range) — the caller MUST treat that as "not ready".
+
+    Multi-page segments (merged/straddler) assign their full text to the FIRST
+    page of the segment and "" to the others, so that concatenating
+    slice[p] over a group's pages yields each segment exactly once (no
+    duplication) — which keeps the content-parity gate honest.
+    """
+    if id2pos is None:
+        id2pos = id_to_position(parse_manifest())
+    segs = file_segments(rf, id2pos)
+    if not segs:
         return {}
     out: Dict[int, str] = {}
-    for j, (li, pos) in enumerate(marks):
-        end = marks[j + 1][0] if j + 1 < len(marks) else len(lines)
-        out[pos] = "\n".join(lines[li:end]).rstrip() + "\n"
+    for (ps, pe, txt) in segs:
+        out[ps] = txt
+        for p in range(ps + 1, pe + 1):
+            out[p] = ""
     return out
+
 
 
 def corpus_ready(idx: Dict[int, "RefinedFile"],

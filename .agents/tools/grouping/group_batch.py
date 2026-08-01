@@ -173,6 +173,7 @@ def merge_page_tables(page_bodies: list[str]) -> str:
 
     out: list[str] = []
     in_dict_table = False
+    dict_header_emitted = False   # ≤1 dict header per group (ONE-TABLE guarantee)
     skip_one_sep = False
     in_picture = False   # inside a <!-- Start/End of picture text --> region
     i = 0
@@ -199,6 +200,7 @@ def merge_page_tables(page_bodies: list[str]) -> str:
             if _PIC_END_RE.search(raw):
                 in_picture = False
                 in_dict_table = False  # a picture region breaks any table run
+                dict_header_emitted = False  # a post-picture table re-emits its header
             i += 1
             continue
         if _PIC_START_RE.search(raw):
@@ -241,14 +243,19 @@ def merge_page_tables(page_bodies: list[str]) -> str:
             continue
 
         if _TABLE_HDR_RE.match(s):
-            if in_dict_table:
-                # repeated header not preceded by a page marker → just drop it
+            if dict_header_emitted:
+                # A repeated dict header (page boundary, or state confusion
+                # after intervening prose) is a duplicate of the same table —
+                # drop it AND its separator so the group keeps exactly ONE
+                # continuous table (verify-groups ONE-TABLE gate). Lossless:
+                # the header text is identical across the group.
                 skip_one_sep = True
                 i += 1
                 continue
             emit_blank()
             emit(raw)
             in_dict_table = True
+            dict_header_emitted = True
             i += 1
             continue
 

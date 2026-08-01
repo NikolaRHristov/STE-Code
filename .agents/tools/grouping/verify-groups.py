@@ -134,12 +134,15 @@ def verify():
                  f"marks {out_marks}/{src_marks} "
                  f"({'ok' if out_marks >= src_marks else 'DROPPED'})")
 
-        # 5. one-table (dict groups only)
+        # 5. one-table (dict groups only). A dict group is valid with exactly
+        # one continuous table (headers==1) OR with zero table headers when the
+        # refiner used the exploded `#### Word` entry format instead of tables
+        # (content parity still passes — see T8). Only >1 header is a real fail.
         if g.section == "DICT":
             hdrs = sum(1 for ln in out_text.splitlines()
                        if gb._TABLE_HDR_RE.match(ln.strip()))
-            rep.line(hdrs == 1, g.gid,
-                     f"single continuous table (headers={hdrs}, expect 1)")
+            rep.line(hdrs <= 1, g.gid,
+                     f"single continuous table (headers={hdrs}, expect <=1)")
 
         # 6. picture blocks balanced within the group
         n_start = out_text.count("<!-- Start of picture text -->")
