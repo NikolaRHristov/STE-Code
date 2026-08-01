@@ -41,6 +41,8 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: `To extinguish a possible fire, portable fire extinguishers are installed in these areas:` followed by a vertical list of locations with word counts | STE: `To handle possible error conditions, the error handler catches these exception types:` followed by a vertical list (ASD-STE100 Issue 9, Rule 8.4, page 105 — the colon before a vertical list acts as a period and each list item is a new sentence with its own word-count limit).
+
 > **Non-STE:** To handle all possible error conditions, the following exception types must be caught and processed by the error handler: database connection timeouts which occur when the primary node is unreachable, authentication failures caused by expired or invalid tokens, and validation errors due to malformed request payloads.
 >
 > **STE:** To handle possible error conditions, the error handler catches these exception types:
@@ -51,6 +53,41 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 >
 > *Adapted from spec pair: "To extinguish a possible fire, portable fire extinguishers are installed in these areas:" followed by a vertical list of locations with word counts.*
 
+The non-STE sentence buries three distinct catch cases in one 31-word introduction. Written as a handler, the same content is hard to scan:
+
+```python
+# Non-STE: one long comment, no clear list of cases.
+# To handle all possible error conditions, the following exception types
+# must be caught and processed by the error handler: database connection
+# timeouts which occur when the primary node is unreachable, authentication
+# failures caused by expired or invalid tokens, and validation errors due
+# to malformed request payloads.
+try:
+    result = call_external_service(request)
+except Exception as exc:        # catches everything in one branch
+    logger.error("unhandled error: %s", exc)
+    raise
+```
+
+The STE version names each case as a separate, scannable item and maps it to its own `except` branch:
+
+```python
+# STE: the comment lists each exception type on its own line.
+# To handle possible error conditions, the error handler catches
+# these exception types:
+#   - Database connection timeout
+#   - Authentication failure
+#   - Validation error
+try:
+    result = call_external_service(request)
+except DatabaseTimeout as exc:    # Database connection timeout
+    retry_with_backoff(exc)
+except AuthenticationFailure as exc:  # Authentication failure
+    redirect_to_login(exc)
+except ValidationError as exc:    # Validation error
+    return error_response(exc)
+```
+
 > **Non-STE:** The configuration file, which is located in the project root, supports these environment profiles that you can use for deployment: a development profile for local testing and debugging, a staging profile for pre-production integration verification, and a production profile for the live customer-facing environment.
 >
 > **STE:** The configuration file supports these environment profiles:
@@ -60,6 +97,35 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 > - Production. (1 word)
 >
 > *Adapted from spec pair: vertical list with colon introducing enumerated items, each counted as a separate sentence.*
+
+The non-STE comment hides the three profile names behind a 31-word introduction:
+
+```yaml
+# Non-STE: the profile names are buried in the lead-in sentence.
+# The configuration file, which is located in the project root, supports
+# these environment profiles that you can use for deployment: a development
+# profile for local testing and debugging, a staging profile for
+# pre-production integration verification, and a production profile for
+# the live customer-facing environment.
+profiles:
+  development: { url: "http://localhost:8080" }
+  staging:     { url: "https://staging.example.com" }
+  production:  { url: "https://example.com" }
+```
+
+The STE comment states the category in 7 words and lets the list carry the names:
+
+```yaml
+# STE: short introduction, then a vertical list.
+# The configuration file supports these environment profiles:
+#   - Development
+#   - Staging
+#   - Production
+profiles:
+  development: { url: "http://localhost:8080" }
+  staging:     { url: "https://staging.example.com" }
+  production:  { url: "https://example.com" }
+```
 
 ## Code-Domain Explanation
 
@@ -192,6 +258,23 @@ The database migration failed for one of these reasons:
 - A SQL file in the migrations directory has a syntax error.
 ````
 
+Underlying code that emits the message:
+
+```python
+# STE: the message uses a short introduction and one item per cause.
+def run_migration(db, migrations_dir):
+    causes = []
+    if not db.reachable():
+        causes.append("The database server is not reachable. Check the host and port.")
+    if not db.user_has_privilege("ALTER TABLE"):
+        causes.append("The migration user does not have the ALTER TABLE privilege.")
+    bad = find_sql_syntax_error(migrations_dir)
+    if bad is not None:
+        causes.append(f"A SQL file in the {migrations_dir} directory has a syntax error.")
+    if causes:
+        raise MigrationError("The database migration failed for one of these reasons:")
+```
+
 ## Paradigm-Specific Guidance
 
 ### Object-Oriented Paradigm (Java, C++, C#, Python classes)
@@ -218,6 +301,18 @@ The ConnectionPool constructor accepts these arguments:
 - timeout — The connection timeout value in milliseconds.
 ````
 
+Full docstring context:
+
+```java
+/**
+ * The ConnectionPool constructor accepts these arguments:
+ *   - url — A valid JDBC connection string (host, port, and database name)
+ *   - maxConnections — The largest number of concurrent connections
+ *   - timeout — The connection timeout value in milliseconds.
+ */
+public ConnectionPool(String url, int maxConnections, int timeout) { ... }
+```
+
 ### Functional Paradigm (Haskell, Elixir, Clojure, Rust)
 
 In functional documentation, vertical lists appear in ADT (algebraic data type) documentation (list of variants), function composition descriptions (list of transformation steps), and pattern matching documentation (list of match arms). Each list item often describes a separate case, variant, or transformation. The introduction should state the type or function name and the cases it handles.
@@ -243,6 +338,20 @@ file. The enum has these variants:
 - Err(ParseError::Io) — The file could not be read.
 - Err(ParseError::Syntax) — The file contains incorrect TOML syntax.
 ````
+
+Full doc context:
+
+```rust
+/// The ParseResult enum represents the result of parsing a configuration
+/// file. The enum has these variants:
+///   - Ok(Config) — The file was parsed successfully.
+///   - Err(ParseError::Io) — The file could not be read.
+///   - Err(ParseError::Syntax) — The file contains incorrect TOML syntax.
+enum ParseResult {
+    Ok(Config),
+    Err(ParseError),
+}
+```
 
 ### Procedural Paradigm (C, Go, Bash)
 
@@ -336,6 +445,21 @@ The caller must obey these safety conditions:
 >
 > *Principles applied: P1, P2 (short introduction, 7 words before colon). The original introduction was 37 words with embedded architecture and version details. The fix moves architecture information into each list item as a parenthetical. Each list item stands as a complete descriptive sentence.*
 
+Repository CI workflow that pins the same matrix — note the list stays short:
+
+```yaml
+# STE: the comment lists the supported platforms; the matrix mirrors it.
+# This library operates on these platforms:
+#   - Ubuntu 22.04 LTS and 24.04 LTS (x86_64 and ARM64)
+#   - macOS 14 Sonoma and 15 Sequoia (x86_64 and ARM64)
+#   - Windows 11 with MSVC 2022 or later (x86_64)
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04, macos-14, macos-15, windows-2022]
+```
+
 ### Example 4 — API Documentation: Response Fields
 
 > **Non-STE:** A successful request to the GET /users/{id} endpoint returns a JSON response body that contains the following fields which describe the user account and its current state in the system: an id field with the unique user identifier as a UUID string, a username field with the display name chosen by the user during registration, an email field containing the verified email address, a created_at field with the ISO 8601 timestamp of account creation, and a status field that can be either active, suspended, or pending_verification.
@@ -350,6 +474,27 @@ The caller must obey these safety conditions:
 >
 > *Principles applied: P1, P2 (introduction under 25 words, list items under 25 words each). The original had a 60-plus-word introduction with field descriptions embedded inline. The fix uses a short introduction and a dash-separated field description format. Code tokens in backticks count as one word each.*
 
+OpenAPI schema that documents the same fields — each field is its own entry, mirroring the list:
+
+```yaml
+# STE: A GET request to /users/{id} returns a JSON response with these fields:
+#   - id — The unique user identifier (UUID string)
+#   - username — The display name
+#   - email — The verified email address
+#   - created_at — The account creation timestamp (ISO 8601)
+#   - status — The account status (active, suspended, or pending_verification)
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:         { type: string, format: uuid }
+        username:   { type: string }
+        email:      { type: string, format: email }
+        created_at: { type: string, format: date-time }
+        status:     { type: string, enum: [active, suspended, pending_verification] }
+```
+
 ### Example 5 — Docstring: Raised Exceptions
 
 > **Non-STE:** This method can potentially raise the following exception types under various error conditions that the caller should be prepared to handle with appropriate try-catch blocks: a ValueError when the input string cannot be parsed into a valid integer representation, a TypeError when the provided argument is not a string type as expected by the parser, and an OverflowError when the parsed integer value exceeds the maximum allowed size for the platform's native integer type.
@@ -361,6 +506,26 @@ The caller must obey these safety conditions:
 > - OverflowError — The parsed value is too large for the platform.
 >
 > *Principles applied: P2 (descriptive sentence, 6 words before colon). The original introduction contained 29 words with redundant "try-catch" guidance. The fix puts the exception name and condition in each list item. The caller's responsibility to handle exceptions is implied by the method contract and does not need to be repeated.*
+
+Python function where the docstring matches the `raise` statements:
+
+```python
+def parse_int(text):
+    """Convert a string to an integer.
+
+    This method can raise these exceptions:
+      - ValueError — The input string is not a valid integer.
+      - TypeError — The argument is not a string.
+      - OverflowError — The parsed value is too large for the platform.
+    """
+    if not isinstance(text, str):
+        raise TypeError("The argument is not a string.")
+    try:
+        value = int(text)
+    except ValueError as exc:
+        raise ValueError("The input string is not a valid integer.") from exc
+    return value
+```
 
 ### Example 6 — Commit Message: Breaking Changes
 
@@ -374,6 +539,15 @@ The caller must obey these safety conditions:
 >
 > *Principles applied: P2 (descriptive sentence, 7 words before colon). The original introduction was 48 words and described the nature of the changes instead of letting the list items speak. Each list item is now a descriptive or imperative sentence under 25 words.*
 
+```text
+Subject:  Bump to v3.0.0 with auth and type breaking changes
+
+This release introduces these breaking changes:
+- The `authenticate` function returns a Promise. It no longer accepts a callback.
+- The `User` type does not include the `avatarUrl` field. Use the `Profile` type instead.
+- The minimum Node.js version is now 18 (was 16).
+```
+
 ### Example 7 — Error Message: Validation Errors
 
 > **Non-STE:** The configuration file failed validation because of the following problems that must be fixed before the application can start and accept any incoming requests: the server.port value of "0" is not within the allowed range of 1024 to 65535 for privileged and non-privileged ports respectively, the database.url field is empty but is marked as required in the configuration schema, and the logging.level field contains "verbose" which is not one of the recognized log level values.
@@ -386,6 +560,21 @@ The caller must obey these safety conditions:
 >
 > *Principles applied: P1 (short introduction, 6 words before colon), P2 (list items as new sentences). The original introduction was 42 words. Each list item now obeys the 25-word descriptive limit. The recovery instruction is implicit in the error format and does not need a separate "must be fixed" preamble.*
 
+Validation routine that builds the message from the same list:
+
+```python
+# STE: the error uses a short introduction and one item per problem.
+errors = []
+if not (1024 <= cfg.server.port <= 65535):
+    errors.append(f'The server.port value "{cfg.server.port}" is not in the range 1024 to 65535.')
+if not cfg.database.url:
+    errors.append("The database.url field is empty. This field is required.")
+if cfg.logging.level not in {"debug", "info", "warn", "error"}:
+    errors.append(f'The logging.level value "{cfg.logging.level}" is not a valid log level.')
+if errors:
+    raise ConfigError("The configuration file has these problems:")
+```
+
 ### Example 8 — Configuration File Comment: Option Values
 
 > **Non-STE:** The retry_strategy option in this configuration block controls how the client handles transient network failures and supports the following strategies with different trade-offs between consistency guarantees and tail latency characteristics that you should evaluate based on your workload profile: a fixed strategy that retries with a constant delay between attempts, an exponential strategy that doubles the delay after each failed retry, and a jittered strategy that adds random variation to the delay to avoid thundering herd problems during widespread outages.
@@ -397,6 +586,18 @@ The caller must obey these safety conditions:
 > - jittered — Add random variation to the delay.
 >
 > *Principles applied: P1, P2 (short introduction, 5 words before colon). The original introduction was 57 words with trade-off analysis embedded. The fix moves the strategy descriptions to the list items. The trade-off analysis belongs in a separate paragraph below the list, not in the introduction.*
+
+Config file where the comment documents the option as a list:
+
+```toml
+# STE: the retry_strategy option accepts these values:
+#   - fixed — Retry with a constant delay between attempts.
+#   - exponential — Double the delay after each failed retry.
+#   - jittered — Add random variation to the delay.
+# The trade-off analysis belongs in a separate paragraph below the list,
+# not in the introduction.
+retry_strategy = "exponential"
+```
 
 ## Edge Cases
 
@@ -484,13 +685,13 @@ Guidance: When you write the source comments or annotations that feed the genera
 
 ## Cross-References
 
-- **Rule 1.1 — Use Approved Words:** The words in your list introductions and list items must come from the STE-Code approved dictionary. Use the canonical synonyms (get, set, check, use) in list items. Do not use non-approved words just because a list item gives you a fresh sentence boundary.
-- **Rule 1.3 — Use Words Only with Their Approved Meanings:** When a list item describes a function's return value, make sure the verb "return" carries its approved meaning. Do not use "return" to mean "send back to the caller" in one list item and "produce as output" in another. Consistency across list items is mandatory.
-- **Rule 3.1 — Use Simple Sentences:** Each list item after a colon is a new sentence. It must obey Rule 3.1: one subject, one verb, one object. Do not nest clauses inside a list item. If a list item feels complex, split it into two list items.
-- **Rule 3.3 — Keep Paragraphs Short:** Vertical lists are a way to obey Rule 3.3 organically. A dense paragraph with a buried enumeration can be restructured as a short introduction plus a vertical list. The combined structure satisfies both Rule 3.3 and Rule 8.4.
-- **Rule 4.1 — Keep Sentences Short:** Rule 8.4 enforces Rule 4.1 at two points: the introduction before the colon (20/25 words) and each list item (20/25 words). A document that passes Rule 4.1 on all prose sentences can still fail Rule 8.4 on its vertical list introductions. Check both.
-- **Rule 6.3 — Use Lists to Show Sequential Steps:** Procedural vertical lists are the standard format for step-by-step instructions. Rule 6.3 governs when to use a list for procedures. Rule 8.4 governs the word counts within those lists. Together, they define the structure and the length of procedural documentation.
-- **Rule 8.1 — Do Not Use the Semicolon:** The semicolon ban in Rule 8.1 means writers cannot use semicolons to join list items into a single sentence. They must use a vertical list with a colon instead. The colon in Rule 8.4 is the approved replacement for semicolon-joined enumerations.
+- **Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs:** The words in your list introductions and list items must come from the STE-Code approved dictionary. Use the canonical synonyms (get, set, check, use) in list items. Do not use non-approved words just because a list item gives you a fresh sentence boundary.
+- **Rule 1.3 — Use Approved Words Only with Their Approved Meanings:** When a list item describes a function's return value, make sure the verb "return" carries its approved meaning. Do not use "return" to mean "send back to the caller" in one list item and "produce as output" in another. Consistency across list items is mandatory.
+- **Rule 3.1 — Use only the verb forms that are given in the dictionary:** Each list item after a colon is a new sentence. It must obey Rule 3.1: one subject, one verb, one object. Do not nest clauses inside a list item. If a list item feels complex, split it into two list items.
+- **Rule 3.3 — Use the past participle form as an adjective:** Vertical lists are a way to obey Rule 3.3 organically. A dense paragraph with a buried enumeration can be restructured as a short introduction plus a vertical list. The combined structure satisfies both Rule 3.3 and Rule 8.4.
+- **Rule 4.1 — One Topic Per Sentence, No Abstract Text:** Rule 8.4 enforces Rule 4.1 at two points: the introduction before the colon (20/25 words) and each list item (20/25 words). A document that passes Rule 4.1 on all prose sentences can still fail Rule 8.4 on its vertical list introductions. Check both.
+- **Rule 6.3 — Write Short Sentences. Use a Maximum of 25 Words in Each Sentence.:** Procedural vertical lists are the standard format for step-by-step instructions. Rule 6.3 governs when to use a list for procedures. Rule 8.4 governs the word counts within those lists. Together, they define the structure and the length of procedural documentation.
+- **Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon (;):** The semicolon ban in Rule 8.1 means writers cannot use semicolons to join list items into a single sentence. They must use a vertical list with a colon instead. The colon in Rule 8.4 is the approved replacement for semicolon-joined enumerations.
 - **STE-Code Dictionary — Section: Punctuation:** The dictionary defines the colon (:) as a sentence-boundary punctuation mark in the context of vertical lists. It also defines the period (.), question mark (?), and exclamation mark (!) as the other sentence terminators. Consult the dictionary for the full set of approved sentence boundaries.
 
 ## Grammar Notes
@@ -546,3 +747,20 @@ If you encounter a vertical list introduced by an em-dash, replace the em-dash w
 The ASD-STE100 vertical list rule (Rule 8.4 in the original specification) was designed for technical manuals, where a vertical list of components, tools, or steps is the primary documentation format. The colon divides the procedural context ("To remove the pump, disconnect these hoses:") from the actionable items. The word-count limit prevents the context from overwhelming the items.
 
 In code documentation, the same principle applies with different nouns. Instead of "hoses" and "pumps," the list enumerates parameters, return values, exceptions, dependencies, or steps. The structural need is identical: a short context-setter followed by a scannable list of items. The rule has been tested in high-stakes operational environments where misreading a list item causes real harm. In software, the stakes are lower but the readability benefit is the same.
+
+## See Also
+
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+
+> **See also:** Rule 3.1 — Use only the verb forms that are given in the dictionary.
+
+> **See also:** Rule 3.3 — Use the past participle form as an adjective.
+
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+
+> **See also:** Rule 6.3 — Write Short Sentences. Use a Maximum of 25 Words in Each Sentence.
+
+> **See also:** Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon (;)
+
