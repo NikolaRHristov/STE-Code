@@ -38,9 +38,9 @@ A hyphen is different from a dash, which divides ideas, shows a range, or gives 
 
 **Rule 8.2** In code documentation, use hyphens (-) to connect words that are directly related.
 
-A hyphen (-) is a punctuation mark that connects words or parts of words. Use the hyphen for code-domain technical nouns to show that two or more words are directly related. This construction helps the reader to understand words and phrases more easily in code comments, API documentation, and README files.
+A hyphen (-) is a punctuation mark that connects words or parts of words. Use the hyphen for code-domain technical nouns to show that two or more words are directly related. This construction helps the reader to understand words and phrases more easily in code comments, API documentation, README files, commit messages, and error strings.
 
-The same categories of hyphenation apply to code documentation:
+The same five categories of hyphenation apply to code documentation:
 
 1. Terms that have two or more words and are adjectives before a noun:
 
@@ -48,35 +48,69 @@ The same categories of hyphenation apply to code documentation:
 
 2. Two-word fractions or numbers in code documentation:
 
-   seventy-two, one hundred and twenty-eight, three-fourths
+   seventy-two, one hundred and twenty-eight, three-fourths, forty-seven, one hundred and sixty-two
 
 3. Terms that contain an uppercase letter plus a noun, or a number plus a noun, and that usually give the shape or configuration of something:
 
-   L-shaped bracket, T-shaped connector, 64-bit register, 8-byte alignment
+   L-shaped bracket, T-shaped connector, 64-bit register, 8-byte alignment, 128-bit value, 3-prong connector
 
 4. Verbs that contain a noun or a different part of speech as the first part:
 
-   dry-run, hot-reload, cold-start, hard-code, soft-delete
+   dry-run, hot-reload, cold-start, hard-code, soft-delete, short-circuit
 
 5. Terms in which the end of the prefix is a vowel, and the root word starts with a vowel:
 
-   pre-initialized, re-entrant, de-allocated, anti-aliasing
+   pre-initialized, re-entrant, de-allocated, anti-aliasing, re-indexed
 
-A hyphen is different from a dash, which divides ideas, shows a range, or gives a signal for a pause.
+A hyphen is different from a dash, which divides ideas, shows a range (for example, "lines 12-48"), or gives a signal for a pause. A dash is usually longer than a hyphen. In code documentation, keep the two distinct: the hyphen joins words into one concept, the dash separates ideas.
 
 ### Examples
 
-> **Non-STE:** The high priority task must acquire the write lock before it can modify the shared data structure.
->
-> **STE:** The high-priority task must get the write lock before it can change the shared data structure.
->
-> *Principles applied: P1, P2, P3. "High-priority" is a compound adjective before the noun "task." Added hyphen to show direct relationship. Replaced "acquire" with "get" and "modify" with "change" per STE vocabulary.*
+> *Adapted from spec pair:* Non-STE: "low-altitude flight, high-pressure chamber, air-conditioned compartment, self-sealing hose" (ASD-STE100 Issue 9, Rule 8.2, category 1) | STE: "high-priority task, read-only file, thread-safe method, self-contained module" (STE-Code Rule 8.2, category 1)
 
-> **Non-STE:** Use a read only file descriptor to open the configuration for parsing.
+> **Non-STE:**
+> ```
+> // The high priority task must acquire the write lock before it can modify the
+> // shared data structure.
+> void processQueue(SharedMap& map, const Entry& entry) {
+>     std::unique_lock lock(map.write_lock);
+>     map.modify(entry);
+> }
+> ```
 >
-> **STE:** Use a read-only file descriptor to open the configuration for parsing.
+> **STE:**
+> ```
+> // The high-priority task must get the write lock before it can change the
+> // shared data structure.
+> void processQueue(SharedMap& map, const Entry& entry) {
+>     std::unique_lock lock(map.write_lock);
+>     map.change(entry);
+> }
+> ```
 >
-> *Principles applied: P1, P2. "Read-only" is a compound adjective before the noun "file descriptor." Hyphen connects the words to prevent ambiguity about what "only" modifies.*
+> *Principles applied: P1, P2, P3. "High-priority" is a compound adjective before the noun "task." Added the hyphen to show the direct relationship. Replaced "acquire" with "get" and "modify" with "change" per STE-Code vocabulary (prefer short approved verbs over utilize/leverage-style wording).*
+
+> **Non-STE:**
+> ```
+> /**
+>  * Opens the config file for parsing.
+>  * @param fd  A read only file descriptor to open the configuration for parsing.
+>  * @return    0 on success, -1 on error.
+>  */
+> int openConfig(int fd);
+> ```
+>
+> **STE:**
+> ```
+> /**
+>  * Opens the config file for parsing.
+>  * @param fd  A read-only file descriptor to open the configuration for parsing.
+>  * @return    0 on success, -1 on error.
+>  */
+> int openConfig(int fd);
+> ```
+>
+> *Principles applied: P1, P2. "Read-only" is a compound adjective before the noun "file descriptor." The hyphen connects the words and prevents ambiguity about what "only" modifies: without it, "read only file descriptor" can be read as a file descriptor that only "reads" rather than one that is read-only.*
 
 ## Code-Domain Explanation
 
@@ -95,6 +129,12 @@ Common README patterns that need hyphens:
 
 NOTE: A README section title such as "Getting Started" is a gerund phrase, not a compound adjective. Do not hyphenate it.
 
+> **Non-STE:** "Our framework is battle tested and ready for production. It supports cross platform and is well documented."
+>
+> **STE:** "Our framework is battle-tested and production-ready. It supports cross-platform builds and is well-documented."
+>
+> *Principles applied: P1, P2. Each quality descriptor is a compound adjective before an implied or stated noun. The hyphens make the README parse on first read.*
+
 ### API Documentation
 
 API documentation describes function signatures, parameters, return types, and behavior contracts. Hyphens prevent ambiguity in parameter descriptions and return-value qualifiers.
@@ -108,6 +148,26 @@ Common API patterns that need hyphens:
 
 Example: A parameter documented as "a read only reference" is ambiguous. "Read-only reference" makes clear that the reference itself is read-only, not that it references read-only data (though it may also do that).
 
+> **Non-STE:**
+> ```
+> /**
+>  * @param count  A non negative integer that sets the buffer size.
+>  * @return       A read only reference to the internal cache.
+>  */
+> const Cache& resize(size_t count);
+> ```
+>
+> **STE:**
+> ```
+> /**
+>  * @param count  A non-negative integer that sets the buffer size.
+>  * @return       A read-only reference to the internal cache.
+>  */
+> const Cache& resize(size_t count);
+> ```
+>
+> *Principles applied: P1, P2. "Non-negative" and "read-only" are compound adjectives before "integer" and "reference." The hyphens bind the words so the reader parses one concept, not two separate modifiers.*
+
 ### Docstrings
 
 Docstrings live inside source code and describe what a function, class, or module does. Hyphens in docstrings keep descriptions compact and unambiguous.
@@ -118,6 +178,28 @@ Common docstring patterns that need hyphens:
 - **Postconditions:** Returns a deep-copied instance. The output is a newline-delimited list.
 - **Side effects:** This method is not thread-safe. The operation is non-blocking.
 - **Complexity:** Average-case O(n log n). Worst-case O(n squared).
+
+> **Non-STE:**
+> ```
+> def parse(text: str) -> list[str]:
+>     """Parse the input.
+>
+>     Precondition: the input must be a well formed JSON string.
+>     The buffer must be null terminated.
+>     """
+> ```
+>
+> **STE:**
+> ```
+> def parse(text: str) -> list[str]:
+>     """Parse the input.
+>
+>     Precondition: the input must be a well-formed JSON string.
+>     The buffer must be null-terminated.
+>     """
+> ```
+>
+> *Principles applied: P1, P2. "Well-formed" and "null-terminated" are compound adjectives before "JSON string" and "buffer." The hyphens mark each pair as a single qualifier.*
 
 ### Commit Messages
 
@@ -130,6 +212,12 @@ Commit messages are brief and benefit from hyphenated compounds that pack meanin
 | Implement just in time compilation pass | Implement just-in-time compilation pass |
 | Handle null terminated input in parser | Handle null-terminated input in parser |
 
+> **Non-STE:** `git commit -m "Add end to end test for auth flow"`
+>
+> **STE:** `git commit -m "Add end-to-end test for auth flow"`
+>
+> *Principles applied: P1, P2. "End-to-end" is a three-word compound adjective before "test." A reviewer scanning the log reads it as one concept.*
+
 ### Error Messages
 
 Error messages must be precise. A missing hyphen can make an error message confusing at exactly the moment the user needs clarity.
@@ -140,6 +228,12 @@ Error messages must be precise. A missing hyphen can make an error message confu
 | Expected non negative integer | Expected non-negative integer |
 | Thread safe violation detected | Thread-safe violation detected |
 | Buffer must be null terminated | Buffer must be null-terminated |
+
+> **Non-STE:** `raise ValueError("Expected non negative integer for port number")`
+>
+> **STE:** `raise ValueError("Expected non-negative integer for port number")`
+>
+> *Principles applied: P1, P2. "Non-negative" is a compound adjective before "integer." The hyphen shows the negation applies to the whole word, not to "negative" alone.*
 
 ## Paradigm-Specific Guidance
 
@@ -157,11 +251,27 @@ Object-oriented code uses compound adjectives to describe class properties, meth
 - **Threading:** thread-safe collection, lock-free algorithm, wait-free data structure, single-threaded context
 - **Lifecycle:** reference-counted pointer, garbage-collected object, stack-allocated buffer, heap-allocated array
 
-> **Non-STE:** The thread safe singleton uses lazy initialization to defer object creation until the first access.
+> **Non-STE:**
+> ```
+> // The thread safe singleton uses lazy initialization to defer object creation
+> // until the first access.
+> class CacheManager {
+> public:
+>     static CacheManager& instance();
+> };
+> ```
 >
-> **STE:** The thread-safe singleton uses lazy initialization to defer object creation until the first access.
+> **STE:**
+> ```
+> // The thread-safe singleton uses lazy initialization to defer object creation
+> // until the first access.
+> class CacheManager {
+> public:
+>     static CacheManager& instance();
+> };
+> ```
 >
-> *Principles applied: P1, P2. "Thread-safe" is a compound adjective before "singleton." The hyphen removes ambiguity: without it, "thread safe singleton" could be read as "thread" modifying "safe singleton."*
+> *Principles applied: P1, P2. "Thread-safe" is a compound adjective before "singleton." The hyphen removes ambiguity: without it, "thread safe singleton" can be read as "thread" modifying "safe singleton."*
 
 ### Functional (Haskell, Elixir, Clojure, Rust)
 
@@ -175,9 +285,21 @@ Functional programming emphasizes purity, immutability, and higher-order abstrac
 - **Evaluation:** lazily-evaluated sequence, strictly-evaluated argument, tail-recursive call, pattern-matched clause
 - **Concurrency:** message-passing actor, software-transactional memory, lock-free CAS loop
 
-> **Non-STE:** The higher order function returns a lazily evaluated sequence that is side effect free.
+> **Non-STE:**
+> ```
+> -- The higher order function returns a lazily evaluated sequence that is
+> -- side effect free.
+> map :: (a -> b) -> [a] -> [b]
+> map f xs = f <$> xs
+> ```
 >
-> **STE:** The higher-order function returns a lazily-evaluated sequence that is side-effect-free.
+> **STE:**
+> ```
+> -- The higher-order function returns a lazily-evaluated sequence that is
+> -- side-effect-free.
+> map :: (a -> b) -> [a] -> [b]
+> map f xs = f <$> xs
+> ```
 >
 > *Principles applied: P1, P2, P11. Three compound adjectives in one sentence, each needing a hyphen. "Higher-order" and "side-effect-free" are multi-word compounds. Consistent hyphenation makes the sentence parse correctly on first reading.*
 
@@ -193,11 +315,21 @@ Procedural code deals with memory layout, pointers, and sequential control flow.
 - **I/O and files:** newline-delimited output, null-separated records, byte-order-mark prefixed, CRLF-terminated line
 - **Build and linking:** statically-linked binary, dynamically-loaded library, position-independent code, link-time optimization
 
-> **Non-STE:** The function expects a null terminated string and returns a zero initialized struct.
+> **Non-STE:**
+> ```
+> /* The function expects a null terminated string and returns a zero
+>    initialized struct. */
+> void parse_config(const char* text, Config* out);
+> ```
 >
-> **STE:** The function expects a null-terminated string and returns a zero-initialized struct.
+> **STE:**
+> ```
+> /* The function expects a null-terminated string and returns a
+>    zero-initialized struct. */
+> void parse_config(const char* text, Config* out);
+> ```
 >
-> *Principles applied: P1, P2. Without hyphens, "null terminated string" could mean "null" modifies "terminated string" rather than "null-terminated" modifying "string." The hyphen binds "null" to "terminated" as a unit.*
+> *Principles applied: P1, P2. Without hyphens, "null terminated string" can mean "null" modifies "terminated string" rather than "null-terminated" modifying "string." The hyphen binds "null" to "terminated" as a unit.*
 
 ### Declarative (SQL, Terraform, Kubernetes YAML)
 
@@ -210,9 +342,23 @@ Declarative languages describe desired state. Compound adjectives qualify resour
 - **Kubernetes:** cluster-scoped resource, namespace-scoped object, ready-state pod, crash-looping container, health-check endpoint, rolling-update strategy, blue-green deployment
 - **Configuration:** well-formed document, schema-validated input, base64-encoded value, newline-separated list
 
-> **Non-STE:** The left joined table uses a fully qualified column name from the user provided input.
+> **Non-STE:**
+> ```
+> -- The left joined table uses a fully qualified column name from the
+> -- user provided input.
+> SELECT users.name
+> FROM users
+> LEFT JOIN orders ON users.id = orders.user_id;
+> ```
 >
-> **STE:** The left-joined table uses a fully-qualified column name from the user-provided input.
+> **STE:**
+> ```
+> -- The left-joined table uses a fully-qualified column name from the
+> -- user-provided input.
+> SELECT users.name
+> FROM users
+> LEFT JOIN orders ON users.id = orders.user_id;
+> ```
 >
 > *Principles applied: P1, P2. Three compound adjectives in one sentence. Each pair of words functions as a single modifier before its noun. Without hyphens, the reader must pause to parse which word modifies which.*
 
@@ -228,47 +374,120 @@ Systems programming documentation describes ownership, lifetimes, memory models,
 - **Low-level representation:** little-endian byte order, two's-complement representation, sign-extended value, bit-packed field, aligned-to-16-bytes address
 - **Safety:** undefined-behavior risk, data-race condition, use-after-free bug, double-free error, dangling-pointer access
 
-> **Non-STE:** The memory mapped file uses a copy on write page that is atomically reference counted.
+> **Non-STE:**
+> ```
+> // The memory mapped file uses a copy on write page that is
+> // atomically reference counted.
+> fn map_region(handle: &Arc<MappedFile>) { /* ... */ }
+> ```
 >
-> **STE:** The memory-mapped file uses a copy-on-write page that is atomically-reference-counted.
+> **STE:**
+> ```
+> // The memory-mapped file uses a copy-on-write page that is
+> // atomically-reference-counted.
+> fn map_region(handle: &Arc<MappedFile>) { /* ... */ }
+> ```
 >
 > *Principles applied: P1, P2, P11. Systems documentation has dense compound adjectives. "Memory-mapped," "copy-on-write," and "atomically-reference-counted" are each single concepts. The hyphens prevent the reader from misreading "copy on write page" as an instruction to copy something onto a write page.*
 
 ## Extended Examples
 
-> **Non-STE:** The anti aliasing filter is applied before the pixel data enters the re entrant rendering pipeline.
+> **Non-STE:**
+> ```
+> # The anti aliasing filter is applied before the pixel data enters the
+> # re entrant rendering pipeline.
+> def render(pixels: Image) -> Image:
+>     return apply_filter(pixels, ANTI_ALIAS)
+> ```
 >
-> **STE:** The anti-aliasing filter is applied before the pixel data enters the re-entrant rendering pipeline.
+> **STE:**
+> ```
+> # The anti-aliasing filter is applied before the pixel data enters the
+> # re-entrant rendering pipeline.
+> def render(pixels: Image) -> Image:
+>     return apply_filter(pixels, ANTI_ALIAS)
+> ```
 >
 > *Principles applied: P1, P2. Category 5 hyphenation: prefix ending in a vowel plus root starting with a vowel. "Anti-aliasing" and "re-entrant" each need a hyphen to separate the prefix from the root. Without the hyphen, the double vowel is visually confusing and slows reading.*
 
-> **Non-STE:** The 64 bit register alignment requires an 8 byte offset for each 128 bit value.
+> **Non-STE:**
+> ```
+> // The 64 bit register alignment requires an 8 byte offset for each
+> // 128 bit value.
+> struct Packet { uint64_t header; uint8_t pad[8]; uint128_t payload; };
+> ```
 >
-> **STE:** The 64-bit register alignment requires an 8-byte offset for each 128-bit value.
+> **STE:**
+> ```
+> // The 64-bit register alignment requires an 8-byte offset for each
+> // 128-bit value.
+> struct Packet { uint64_t header; uint8_t pad[8]; uint128_t payload; };
+> ```
 >
 > *Principles applied: P1, P2. Category 3 hyphenation: number plus noun giving configuration. "64-bit" functions as a single adjective modifying "register." The same pattern applies to "8-byte" and "128-bit." Without hyphens, the reader sees "64" as a standalone number rather than part of a compound modifier.*
 
-> **Non-STE:** Run a dry run of the deployment before you hot reload the production server.
+> **Non-STE:**
+> ```
+> # Run a dry run of the deployment before you hot reload the
+> # production server.
+> deploy(dry_run=True)
+> reload_server("prod", hot=True)
+> ```
 >
-> **STE:** Run a dry-run of the deployment before you hot-reload the production server.
+> **STE:**
+> ```
+> # Dry-run the deployment before you hot-reload the production server.
+> deploy(dry_run=True)
+> reload_server("prod", hot=True)
+> ```
 >
 > *Principles applied: P1, P2, P13. Category 4 hyphenation: verbs containing a noun as the first part. "Dry-run" is a verb here (not a noun), so it needs the hyphen. "Hot-reload" follows the same pattern. Compare: "Do a dry run" (noun, no hyphen) versus "Dry-run the deployment" (verb, hyphen required).*
 
-> **Non-STE:** The end to end test covers the entire data flow from server side rendering to client side hydration.
+> **Non-STE:**
+> ```
+> // The end to end test covers the entire data flow from server side
+> // rendering to client side hydration.
+> test_e2e();
+> ```
 >
-> **STE:** The end-to-end test covers the entire data flow from server-side rendering to client-side hydration.
+> **STE:**
+> ```
+> // The end-to-end test covers the entire data flow from server-side
+> // rendering to client-side hydration.
+> test_e2e();
+> ```
 >
 > *Principles applied: P1, P2, P11. Category 1 hyphenation: multi-word compound adjectives before nouns. "End-to-end" is a three-word adjective modifying "test." "Server-side" and "client-side" are two-word adjectives modifying "rendering" and "hydration." Consistent hyphenation across all three compounds makes the sentence parse clearly.*
 
-> **Non-STE:** This is a self contained module with a well defined interface and a fail fast error handling strategy.
+> **Non-STE:**
+> ```
+> // This is a self contained module with a well defined interface and a
+> // fail fast error handling strategy.
+> class Pipeline { /* ... */ };
+> ```
 >
-> **STE:** This is a self-contained module with a well-defined interface and a fail-fast error-handling strategy.
+> **STE:**
+> ```
+> // This is a self-contained module with a well-defined interface and a
+> // fail-fast error-handling strategy.
+> class Pipeline { /* ... */ };
+> ```
 >
 > *Principles applied: P1, P2. Category 1 hyphenation: compound adjectives before nouns. "Self-" compounds always take a hyphen. "Well-defined" is a standard compound. "Fail-fast" and "error-handling" are code-domain compounds. Four hyphenated terms in one sentence is acceptable when each is a genuine compound adjective.*
 
-> **Non-STE:** The just in time compiler produces machine code at run time using a fire and forget compilation strategy.
+> **Non-STE:**
+> ```
+> // The just in time compiler produces machine code at run time using a
+> // fire and forget compilation strategy.
+> jit_compile(source);
+> ```
 >
-> **STE:** The just-in-time compiler produces machine code at run time using a fire-and-forget compilation strategy.
+> **STE:**
+> ```
+> // The just-in-time compiler produces machine code at run time using a
+> // fire-and-forget compilation strategy.
+> jit_compile(source);
+> ```
 >
 > *Principles applied: P1, P2, P11. Category 1 hyphenation: multi-word compound adjectives. "Just-in-time" is a four-word adjective before "compiler." "Fire-and-forget" is a three-word adjective before "strategy." Note: "at run time" is not hyphenated because "run time" is a noun phrase, not a compound adjective before a noun.*
 
@@ -340,29 +559,33 @@ NOTE: Do not confuse URL path hyphens with documentation prose hyphens. They ser
 
 This rule interacts with several other STE-Code rules. Apply them together for consistent documentation.
 
-### Rule 1.1 — Use Approved Words From the STE-Code Dictionary
+### Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
 
 Many hyphenated compounds contain approved words. When you form a compound adjective, each component word must be an approved STE-Code word (or a permitted technical noun under Rule 1.5). Example: "thread-safe" uses "thread" (technical noun, Rule 1.5) and "safe" (approved adjective).
 
-### Rule 1.5 — Technical Code Nouns Are Allowed
+### Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
 
 Technical code nouns often appear as the first element in a hyphenated compound. Examples: "thread-safe," "stack-allocated," "type-safe," "cache-aligned." The technical noun is permitted under Rule 1.5. The hyphen connects it to the qualifying word.
 
-### Rule 1.9 — Prefer Short, Clear Technical Nouns
+### Rule 1.9 — When You Must Select a Technical Noun, Use One Which Is Short and Easy to Understand
 
 When a hyphenated compound becomes long (three or more words before a noun), ask whether you can shorten it. Example: "least-recently-used eviction policy" could become "LRU eviction policy" after the acronym is defined. Prefer the shorter form when the audience knows the acronym.
 
-### Rule 1.11 — One Term Per Concept
+### Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
 
 Hyphenated compounds are terms. Once you choose a hyphenated form for a concept, use that same form everywhere. Do not write "thread-safe" in one section and "thread safe" in another. Inconsistency confuses readers and undermines the purpose of Rule 8.2.
 
-### Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon
+### Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon (;)
 
 Rule 8.2 and Rule 8.1 work together as the punctuation rules. Rule 8.1 governs sentence-level punctuation (periods, commas, colons). Rule 8.2 governs word-level punctuation (hyphens in compounds). Apply both rules in every documentation sentence. A sentence can be correctly punctuated under Rule 8.1 but still violate Rule 8.2 if a compound adjective lacks a hyphen.
 
-### Rule 8.3 — Use Dashes Carefully and Do Not Confuse Them With Hyphens
+### Rule 8.6 — Elements That Count as One Word
 
-A hyphen connects words. A dash separates ideas. Do not use a hyphen where a dash is needed, and do not use a dash where a hyphen is needed. In code documentation, an em-dash (—) sets off a parenthetical thought. A hyphen (-) joins words into a compound. See Rule 8.3 for full guidance on dashes.
+Rule 8.6 defines which constructions count as one word for the STE-Code word-count limit. A hyphenated compound counts as one word, so a fully hyphenated phrase does not inflate your sentence word count the way a space-separated phrase does. See Rule 8.6 for the full list of what counts as one word.
+
+### Rule 8.7 — Hyphenated Words Count as One Word
+
+Rule 8.7 is the complement to this rule: it confirms that a hyphenated compound (for example, "read-only" or "end-to-end") counts as a single word when you measure sentence length against the STE-Code limit. Apply Rule 8.2 to form the compound and Rule 8.7 to count it correctly.
 
 ## Grammar Notes
 
@@ -445,3 +668,17 @@ Words with the prefix "self-" always take a hyphen in standard English and in ST
 | self-healing system | selfhealing system |
 
 The "self-" prefix rule is a sub-rule of Rule 8.2. Apply it consistently across all documentation types.
+
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+
+> **See also:** Rule 1.9 — When You Must Select a Technical Noun, Use One Which Is Short and Easy to Understand
+
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+
+> **See also:** Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon (;)
+
+> **See also:** Rule 8.6 — Elements That Count as One Word
+
+> **See also:** Rule 8.7 — Hyphenated Words Count as One Word
