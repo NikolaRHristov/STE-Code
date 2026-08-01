@@ -41,39 +41,39 @@
 | 3.3.3 | a-sec3-rule3.3.md | enriched | LLM final |
 | 3.3.4 | a-sec3-rule3.4.md | enriched | LLM final |
 | 3.3.5 | a-sec3-rule3.5.md | enriched | LLM final |
-| 3.3.6 | a-sec3-rule3.6.md | stale | copied; re-synthesize |
-| 3.3.7 | a-sec3-rule3.7.md | stale | copied; re-synthesize |
-| 4.4.1 | a-sec4-rule4.1.md | stale | copied; re-synthesize |
-| 4.4.2 | a-sec4-rule4.2.md | stale | copied; re-synthesize |
-| 4.4.3 | a-sec4-rule4.3.md | stale | copied; re-synthesize |
-| 4.4.4 | a-sec4-rule4.4.md | stale | copied; re-synthesize |
-| 4.4.5 | a-sec4-rule4.5.md | stale | copied; re-synthesize |
-| 5.5.1 | a-sec5-rule5.1.md | stale | copied; re-synthesize |
-| 5.5.2 | a-sec5-rule5.2.md | stale | copied; re-synthesize |
-| 5.5.3 | a-sec5-rule5.3.md | stale | copied; re-synthesize |
-| 5.5.4 | a-sec5-rule5.4.md | stale | copied; re-synthesize |
-| 5.5.5 | a-sec5-rule5.5.md | stale | copied; re-synthesize |
-| 6.6.1 | a-sec6-rule6.1.md | stale | copied; re-synthesize |
-| 6.6.2 | a-sec6-rule6.2.md | stale | copied; re-synthesize |
-| 6.6.3 | a-sec6-rule6.3.md | stale | copied; re-synthesize |
-| 6.6.4 | a-sec6-rule6.4.md | stale | copied; re-synthesize |
-| 6.6.5 | a-sec6-rule6.5.md | stale | copied; re-synthesize |
-| 6.6.6 | a-sec6-rule6.6.md | stale | copied; re-synthesize |
-| 7.7.1 | a-sec7-rule7.1.md | stale | copied; re-synthesize |
-| 7.7.2 | a-sec7-rule7.2.md | stale | copied; re-synthesize |
-| 7.7.3 | a-sec7-rule7.3.md | stale | copied; re-synthesize |
-| 8.8.1 | a-sec8-rule8.1.md | stale | copied; re-synthesize |
-| 8.8.2 | a-sec8-rule8.2.md | stale | copied; re-synthesize |
-| 8.8.3 | a-sec8-rule8.3.md | stale | copied; re-synthesize |
-| 8.8.4 | a-sec8-rule8.4.md | stale | copied; re-synthesize |
-| 8.8.5 | a-sec8-rule8.5.md | stale | copied; re-synthesize |
-| 8.8.6 | a-sec8-rule8.6.md | stale | copied; re-synthesize |
-| 8.8.7 | a-sec8-rule8.7.md | stale | copied; re-synthesize |
-| 9.9.1 | a-sec9-rule9.1.md | stale | copied; re-synthesize |
-| 9.9.2 | a-sec9-rule9.2.md | stale | copied; re-synthesize |
-| 9.9.3 | a-sec9-rule9.3.md | stale | copied; re-synthesize |
-| 9.9.4 | a-sec9-rule9.4.md | stale | copied; re-synthesize |
+| 3.3.6 | a-sec3-rule3.6.md | enriched | LLM final |
+| 3.3.7 | a-sec3-rule3.7.md | enriched | LLM final |
+| 4.4.1 | a-sec4-rule4.1.md | enriched | LLM final |
+| 4.4.2 | a-sec4-rule4.2.md | enriched | LLM final |
+| 4.4.3 | a-sec4-rule4.3.md | enriched | LLM final |
+| 4.4.4 | a-sec4-rule4.4.md | enriched | LLM final |
+| 4.4.5 | a-sec4-rule4.5.md | enriched | LLM final |
+| 5.5.1 | a-sec5-rule5.1.md | enriched | LLM final |
+| 5.5.2 | a-sec5-rule5.2.md | enriched | LLM final |
+| 5.5.3 | a-sec5-rule5.3.md | enriched | LLM final |
+| 5.5.4 | a-sec5-rule5.4.md | enriched | LLM final |
+| 5.5.5 | a-sec5-rule5.5.md | enriched | LLM final |
+| 6.6.1 | a-sec6-rule6.1.md | enriched | LLM final |
+| 6.6.2 | a-sec6-rule6.2.md | enriched | LLM final |
+| 6.6.3 | a-sec6-rule6.3.md | enriched | LLM final |
+| 6.6.4 | a-sec6-rule6.4.md | enriched | LLM final |
+| 6.6.5 | a-sec6-rule6.5.md | enriched | LLM final |
+| 6.6.6 | a-sec6-rule6.6.md | enriched | LLM final |
+| 7.7.1 | a-sec7-rule7.1.md | enriched | LLM final |
+| 7.7.2 | a-sec7-rule7.2.md | enriched | LLM final |
+| 7.7.3 | a-sec7-rule7.3.md | enriched | LLM final |
+| 8.8.1 | a-sec8-rule8.1.md | enriched | LLM final |
+| 8.8.2 | a-sec8-rule8.2.md | enriched | LLM final |
+| 8.8.3 | a-sec8-rule8.3.md | enriched | LLM final |
+| 8.8.4 | a-sec8-rule8.4.md | enriched | LLM final |
+| 8.8.5 | a-sec8-rule8.5.md | enriched | LLM final |
+| 8.8.6 | a-sec8-rule8.6.md | enriched | LLM final |
+| 8.8.7 | a-sec8-rule8.7.md | enriched | LLM final |
+| 9.9.1 | a-sec9-rule9.1.md | enriched | LLM final |
+| 9.9.2 | a-sec9-rule9.2.md | enriched | LLM final |
+| 9.9.3 | a-sec9-rule9.3.md | enriched | LLM final |
+| 9.9.4 | a-sec9-rule9.4.md | enriched | LLM final |
 
 ## Summary
-- enriched: 22 / 54
-- stale (must re-synthesize): 32 / 54
+- enriched: 54 / 54
+- stale (must re-synthesize): 0 / 54
