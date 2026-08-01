@@ -529,6 +529,13 @@ def main():
             if wpid != 0:
                 workers[tid]["completed"] = True
                 _child_pids.pop(tid, None)
+                # Record the outcome here too, so progress.json is accurate and
+                # Phase 2's `pending` set excludes already-finished workers.
+                if tid in progress:
+                    progress[tid]["outcome"] = classify_worker_result(
+                        workers[tid]["out_file"], False)
+                    progress[tid]["end_time"] = time.time()
+                    save_progress()
 
         # Count currently running workers (pid > 0 and not yet completed).
         running = sum(
