@@ -1,7 +1,0 @@
-Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
-
-1. .agents/uml/database-layout.md
-2. SCE/narratives/system-prompts/ste-code-micro.md
-3. SCE/narratives/system-prompts/ste-code-full.md
-
-For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchE-w3.md. Output ONLY the assessment file.

@@ -1,6 +1,0 @@
-Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
-
-1. .agents/uml/pipeline-state-machine.md
-2. .agents/uml/error-recovery.md
-
-For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchE-w2.md. Output ONLY the assessment file.

@@ -1,7 +1,0 @@
-Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
-
-1. .agents/references/section-types.md
-2. .agents/references/quality-checklist.md
-3. .agents/references/category-mapping.md
-
-For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchD-w2.md. Output ONLY the assessment file.

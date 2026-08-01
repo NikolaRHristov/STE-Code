@@ -1,7 +1,0 @@
-Read the maturity audit template at .agents/prompts/maturity-audit/worker-template.txt. Apply it to these files:
-
-1. .agents/agent/agent-1-extractor.md
-2. .agents/agent/agent-2-refiner.md
-3. .agents/agent/agent-3-auditor.md
-
-For each file, read it completely and produce a scored assessment following the template's format. Write your full assessment output to .agents/audit/maturity-batchA-w1.md. Output ONLY the assessment file — no preamble, no commentary.
