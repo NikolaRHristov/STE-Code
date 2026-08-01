@@ -20,6 +20,13 @@ You have file-read and file-write tools. Spend MANY tool calls:
 - The full standard was SPLIT into ordered chunks so nothing is lost. Read the
   chunks listed in the MANIFEST below, IN ORDER, to absorb the whole standard:
 {{bundle}}
+- FIRST read the DETERMINISTIC BASE sub-document for THIS file and DISTILL it
+  (do not merely copy it — reshape it for LLM consumption):
+  {{base_path}}
+  This base file is `{{subdoc}}` — the structural boilerplate for this slice of
+  the tier. Your job is to turn it into a clean, LLM-optimized sub-document (in
+  the spirit of llms.txt / llms-full.txt) that is faithful to the STE-Code spec
+  but shaped for an LLM to load and follow.
 - For low tiers (-2/-1/0) you may read selectively (core principles live in the
   early rules); for high tiers (3/4/5) you MUST read ALL chunks to assemble the
   complete dictionary + every rule + extensions.
