@@ -1,4 +1,4 @@
-# Rule 1.8 — Use Technical Nouns That Are Approved in Your Company, Industry, or Subject Field
+# Rule 1.8 — Use Technical Nouns That Are Approved in Your Project, Company, Industry, or Subject Field
 
 > **Source:** Adapted from ASD-STE100 Issue 9
 > **Source:** [master.md#sec1-rule1.8](ste-code/grouped/), Rule 1.8
@@ -21,19 +21,70 @@ Example:
 
 If your project, company, industry, or subject field has an approved code-domain technical noun for a class, module, function, method, variable, component, or process, use that code-domain technical noun. Usually, such code-domain technical nouns are included in your project glossary, API documentation, coding standards, or company documentation.
 
-Do not invent your own names for items that already have established names in your codebase or domain. Consistency with the approved terminology helps all readers understand the documentation.
+Do not invent your own names for items that already have established names in your codebase or domain. Consistency with the approved terminology helps all readers understand the documentation and lets them find the exact element in the source tree.
+
+> **See also:** Rule 1.1 — Use approved words from the dictionary
+> **See also:** Rule 1.2 — Use words only as their specified part of speech
+> **See also:** Rule 1.3 — Use words only with their approved meanings
+> **See also:** Rule 1.5 — You can use words in a technical noun category
+> **See also:** Rule 1.6 — Use non-approved words only as technical code nouns
+> **See also:** Rule 1.7 — Do not use technical nouns as verbs
+> **See also:** Rule 1.9 — Prefer short, clear technical nouns
+> **See also:** Rule 1.10 — Use no slang, jargon, or regional terms
+> **See also:** Rule 1.11 — Use one term per concept
+> **See also:** Rule 1.12 — You can use verbs in a technical verb category
+> **See also:** Rule 1.14 — Use American English spelling
 
 ### Examples
 
-> **STE:** The dashboard page has a UserTable component and a FilterPanel component.
+> *Adapted from spec pair:* STE: "The front panel of the phone has a touchscreen and a home button." (ASD-STE100 Rule 1.8 gives a compliant example only; there is no Non-STE counterpart in the spec. The code-domain pairs below apply the same principle: use the approved technical noun, not an invented description.)
 
-This adapts the spec example: "The front panel of the phone has a touchscreen and a home button." Just as "touchscreen" and "home button" are technical nouns approved in the industry, "UserTable" and "FilterPanel" are code-domain technical nouns approved in the project. The reader recognizes these exact names from the codebase.
+> **STE:** The dashboard page has a `UserTable` component and a `FilterPanel` component.
+
+This adapts the spec example: "The front panel of the phone has a touchscreen and a home button." Just as "touchscreen" and "home button" are technical nouns approved in the industry, `UserTable` and `FilterPanel` are code-domain technical nouns approved in the project. The reader recognizes these exact names from the codebase.
+
+Realistic documentation context (README extract):
+
+```markdown
+## Dashboard
+
+The dashboard page renders user data. It uses the `UserTable` component to
+show accounts and the `FilterPanel` component to narrow the results by role.
+```
 
 > **Non-STE:** The account controller manages login and user profile operations.
 >
-> **STE:** The AccountController manages authentication and user profile operations.
+> **STE:** The `AccountController` manages authentication and user profile operations.
 
-This adapts the spec principle that you must use the approved term. "AccountController" is the code-domain technical noun that is approved in the project (the actual class name in the codebase). The non-STE version uses "account controller," which is not the approved name. Just as you would not replace "touchscreen" with "finger screen" in the spec example, you must not replace "AccountController" with an invented name.
+This adapts the spec principle that you must use the approved term. "AccountController" is the code-domain technical noun that is approved in the project (the actual class name in the codebase). The non-STE version uses "account controller," which is not the approved name. Just as you would not replace "touchscreen" with "finger screen" in the spec example, you must not replace `AccountController` with an invented name.
+
+Realistic documentation context (controller docstring and route definition):
+
+```python
+# accounts/controllers.py
+
+class AccountController:
+    """Manage authentication and user profile operations.
+
+    This is the approved name from the source tree. Do not refer to it as
+    "account controller" or "account manager" in the docs.
+    """
+
+    def login(self, request: LoginRequest) -> Session:
+        ...
+
+    def update_profile(self, user_id: str, data: ProfileData) -> User:
+        ...
+```
+
+```python
+# accounts/routes.py
+
+from accounts.controllers import AccountController
+
+router = APIRouter()
+router.add_api_route("/login", AccountController().login, methods=["POST"])
+```
 
 ---
 
@@ -47,9 +98,18 @@ README files introduce a project to new users. The project glossary, API docs, a
 
 > **Non-STE:** The data display widget shows user information in a table format.
 >
-> **STE:** The UserTable component shows user information.
+> **STE:** The `UserTable` component shows user information.
 
-> *Principles applied: P8 (use standard, well-known technical nouns), P11 (one term per concept). "UserTable" is the approved code-domain technical noun from the codebase. "Data display widget" is an invented description that no reader can map to the code. The STE version uses the exact class name so readers can find it in the source code.*
+> *Principles applied: P8 (use standard, well-known technical nouns), P11 (one term per concept). `UserTable` is the approved code-domain technical noun from the codebase. "Data display widget" is an invented description that no reader can map to the code. The STE version uses the exact class name so readers can find it in the source code.*
+
+Realistic README extract:
+
+```markdown
+# User Admin
+
+`UserTable` shows user information. It reads from the `UserRepository` and
+emits a `rowClick` event when a user selects a row.
+```
 
 ### API Reference Documentation
 
@@ -61,6 +121,23 @@ API documentation describes endpoints, parameters, return types, and error codes
 
 > *Principles applied: P8, P11, P5 (technical code nouns are allowed). `GET /users/:id` and `User` are the approved technical nouns from the API spec and the type system. "User retrieval endpoint" and "user data object" are invented phrases that do not match the spec. Readers who search for "user retrieval" will not find the endpoint. Use the exact names.*
 
+Realistic OpenAPI extract:
+
+```yaml
+paths:
+  /users/{id}:
+    get:
+      operationId: getUserById
+      summary: Return a User object for the given identifier.
+      responses:
+        '200':
+          description: The requested User.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+```
+
 ### Docstrings and Inline Comments
 
 Docstrings explain what a function, class, or module does. Use the approved names from the codebase and the project glossary. When a standard industry term exists (for example, "observer pattern"), use it rather than a homegrown description.
@@ -70,6 +147,25 @@ Docstrings explain what a function, class, or module does. Use the approved name
 > **STE:** This class implements the observer pattern. It watches a `Subject` and notifies registered `Observer` instances.
 
 > *Principles applied: P8, P11. "Observer pattern," "Subject," and "Observer" are approved technical nouns from the design pattern literature and the codebase. "Listens to changes" and "data holder" are non-standard descriptions. Use the industry-approved name so readers recognize the design pattern immediately.*
+
+Realistic docstring with code:
+
+```python
+class EventBus:
+    """Implement the observer pattern.
+
+    The EventBus acts as the Subject. Call `subscribe()` to register an
+    Observer. When `publish()` runs, the bus notifies every registered
+    Observer instance with the event payload.
+    """
+
+    def subscribe(self, observer: Observer) -> None:
+        self._observers.append(observer)
+
+    def publish(self, event: Event) -> None:
+        for observer in self._observers:
+            observer.update(event)
+```
 
 ### Commit Messages
 
@@ -81,6 +177,23 @@ Commit messages record changes to the codebase. Use the approved names for files
 
 > *Principles applied: P8, P11, P5. `AuthService` and `JwtValidator` are the approved file and class names from the project. "Auth helper" and "token validator" are imprecise descriptions. A developer reading the commit log must be able to map the message to the actual code change. Exact names make that possible.*
 
+Realistic commit and diff header:
+
+```text
+commit 4f2c9a1
+Author: dev <dev@example.com>
+Date:   Mon Aug 01 2026
+
+    Refactor AuthService to use JwtValidator
+
+    Replace the hand-rolled HMAC check in AuthService with the shared
+    JwtValidator class. No behavior change.
+
+ src/auth/AuthService.java  | 12 ++++++------
+ src/auth/JwtValidator.java |  8 ++++++++
+ 2 files changed, 14 insertions(+), 6 deletions(-)
+```
+
 ### Error Messages
 
 Error messages report failures to users and developers. Use the approved component names, not generic descriptions. When a system component fails, the error message must name the component that failed.
@@ -90,6 +203,19 @@ Error messages report failures to users and developers. Use the approved compone
 > **STE:** Error: `PostgreSQLConnectionPool` could not execute the query. The pool is exhausted.
 
 > *Principles applied: P8, P11. `PostgreSQLConnectionPool` is the approved component name from the configuration and source code. "Storage system" could mean the database, the cache, the file system, or the object store. The STE version gives the exact component name so the operations team knows which system failed and which configuration to check.*
+
+Realistic application log and user-facing message:
+
+```text
+# Application log (developer-facing)
+ERROR 2026-08-01T09:14:02Z pool=PostgreSQLConnectionPool
+  org.example.db.PoolExhaustedException: could not execute query
+  "SELECT * FROM invoices WHERE due < now()"; active=20 max=20
+
+# User-facing message
+Error: The PostgreSQLConnectionPool could not execute the query.
+The pool is exhausted. Retry the request after a short delay.
+```
 
 ---
 
@@ -112,7 +238,39 @@ OOP documentation has many names for the same concept: class names, interface na
 >
 > **STE:** The `UserFactory` class is a Singleton. The `View` uses an `Observer` to update the UI when the `Model` changes.
 
-> *Principles applied: P8, P11. "UserFactory" is the approved class name (source code). "Singleton," "View," "Observer," and "Model" are approved technical nouns from design pattern literature and MVC terminology. "User maker," "display part," "watcher," and "data part" are invented names. The STE version uses the standard terms that every OOP developer recognizes.*
+> *Principles applied: P8, P11. `UserFactory` is the approved class name (source code). "Singleton," "View," "Observer," and "Model" are approved technical nouns from design pattern literature and MVC terminology. "User maker," "display part," "watcher," and "data part" are invented names. The STE version uses the standard terms that every OOP developer recognizes.*
+
+Realistic code and comment:
+
+```java
+// UserFactory.java
+public class UserFactory {
+    private static final UserFactory INSTANCE = new UserFactory();
+
+    public static UserFactory getInstance() {
+        return INSTANCE; // Singleton: use the approved pattern name
+    }
+
+    public User create(String name) {
+        return new User(name);
+    }
+}
+
+// UserView.java
+public class UserView implements Observer {
+    private final UserModel model;
+
+    public UserView(UserModel model) {
+        this.model = model;
+        model.addObserver(this); // Observer updates the UI on change
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        render(model.getState());
+    }
+}
+```
 
 ### Functional Programming (Haskell, Elixir, Clojure, Rust iterators)
 
@@ -133,6 +291,21 @@ Functional programming documentation uses mathematical and type-theoretic names.
 
 > *Principles applied: P8, P11, P5. `Option` and `None` are the approved type and variant names from the language standard library. "Monad" is the approved technical noun from category theory and functional programming. "Maybe-type," "chain functions," and "empty values" are informal descriptions. Use the exact names from the language, the library, and the mathematical foundation.*
 
+Realistic Rust code and doc comment:
+
+```rust
+/// Apply `f` to the value inside an `Option`, if present.
+///
+/// `Option` is the approved name from the standard library; do not call it
+/// a "maybe-type". The `None` variant is the approved empty case.
+fn map_option<T, U>(input: Option<T>, f: impl FnOnce(T) -> U) -> Option<U> {
+    match input {
+        Some(value) => Some(f(value)), // pattern matching on the variant
+        None => None,
+    }
+}
+```
+
 ### Procedural Programming (C, Go, Bash)
 
 Procedural documentation uses names for memory structures, system calls, and standard library functions. These names are defined by the language specification and the POSIX standard. Use the exact names from the authoritative source.
@@ -151,6 +324,24 @@ Procedural documentation uses names for memory structures, system calls, and sta
 > **STE:** The C program uses `malloc` to allocate memory for the `struct`. It then uses a `pointer` to pass the `struct` to the processing function.
 
 > *Principles applied: P8, P11, P5. `malloc`, `struct`, and `pointer` are approved technical nouns from the C language specification. "Heap allocation," "data record," and "memory address" are descriptions — they are not wrong, but they are not the standard names. Use the standard names that appear in the source code and in the language documentation.*
+
+Realistic C code and comment:
+
+```c
+/* Build a record on the heap and pass it by pointer to process(). */
+struct record {
+    int id;
+    char name[64];
+};
+
+struct record *make_record(int id, const char *name) {
+    struct record *r = malloc(sizeof(struct record)); // malloc, not "heap allocation"
+    if (r == NULL) return NULL;
+    r->id = id;
+    strncpy(r->name, name, sizeof(r->name) - 1);
+    return r; // r is a pointer to the struct
+}
+```
 
 ### Declarative Programming (SQL, Terraform, Kubernetes YAML)
 
@@ -171,6 +362,20 @@ Declarative documentation uses resource type names, keyword names, and configura
 
 > *Principles applied: P8, P11, P5. `aws_instance`, `public_ip`, and `output` are approved technical nouns from the Terraform provider documentation and the HCL language specification. "Compute instance," "AWS cloud," "IP number," and "exports" are descriptions that do not match the actual resource type names or attribute names. Users who copy "compute instance" into a Terraform file will get a syntax error. Use the exact resource type name.*
 
+Realistic Terraform extract:
+
+```hcl
+resource "aws_instance" "web" {
+  ami           = "ami-0abc1234"
+  instance_type = "t3.micro"
+}
+
+output "public_ip" {
+  description = "The public IP address of the web server."
+  value       = aws_instance.web.public_ip
+}
+```
+
 ### Systems Programming (Rust ownership, C memory, embedded)
 
 Systems documentation uses names for memory regions, hardware components, and ownership concepts. These names have precise meanings defined by the language specification, the hardware reference manual, or the operating system standard.
@@ -190,6 +395,16 @@ Systems documentation uses names for memory regions, hardware components, and ow
 
 > *Principles applied: P8, P11, P5. `move` and `borrow` are the approved technical nouns from the Rust language reference. "Give a value" and "lend a reference" are English paraphrases that do not match the language specification. Readers who learn Rust from the official documentation expect the terms "move" and "borrow." Use these terms so your documentation matches the language reference.*
 
+Realistic Rust code and comment:
+
+```rust
+fn process(data: Vec<u8>) {
+    let owned = data;        // `move` semantics: ownership transfers to `owned`
+    let len = owned.len();   // `borrow` a shared reference to read `owned`
+    println!("bytes: {len}");
+} // `owned` drops here; no transfer back needed
+```
+
 ---
 
 ## Extended Examples
@@ -202,6 +417,21 @@ Systems documentation uses names for memory regions, hardware components, and ow
 
 > *Principles applied: P8 (use standard, well-known technical nouns), P11 (one term per concept), P5 (technical code nouns). `PaymentProcessor`, `CardDetails`, `BankGateway`, and `Transaction` are the approved class names from the source code. "Payment processing handler," "card information," "bank system," and "the transaction" are descriptions. The STE version uses the exact class names so every reader can find these classes in the codebase.*
 
+Realistic module documentation:
+
+```python
+# payments/service.py
+class PaymentProcessor:
+    """Validate a CardDetails object and complete a Transaction."""
+
+    def __init__(self, gateway: BankGateway) -> None:
+        self.gateway = gateway
+
+    def charge(self, card: CardDetails, amount: Money) -> Transaction:
+        card.validate()
+        return self.gateway.submit(card, amount)
+```
+
 ### Example Group B: Pattern Name vs. Homemade Description
 
 > **Non-STE:** The class uses a setup where one object notifies many waiting objects when its state changes.
@@ -209,6 +439,20 @@ Systems documentation uses names for memory regions, hardware components, and ow
 > **STE:** The class implements the Observer pattern. The `Subject` notifies all registered `Observer` instances when its state changes.
 
 > *Principles applied: P8, P11, P9 (prefer short, clear technical nouns). "Observer pattern" is the industry-approved name from the Gang of Four design patterns. "Subject" and "Observer" are the approved role names from the pattern. "A setup where one object notifies many waiting objects" is a long description that no reader will recognize as the Observer pattern. The STE version uses the standard name so readers immediately understand the design.*
+
+Realistic interface definitions:
+
+```typescript
+interface Subject {
+  attach(observer: Observer): void;
+  detach(observer: Observer): void;
+  notify(): void;
+}
+
+interface Observer {
+  update(subject: Subject): void;
+}
+```
 
 ### Example Group C: Protocol Name vs. Generic Description
 
@@ -218,6 +462,17 @@ Systems documentation uses names for memory regions, hardware components, and ow
 
 > *Principles applied: P8, P9. "HTTPS" is the approved technical noun from the IETF standards. "Secure web communication" is a description that could refer to HTTPS, TLS, SSH, or a VPN. The STE version uses the exact protocol name so readers know which standard applies and can refer to the RFC.*
 
+Realistic configuration snippet:
+
+```yaml
+server:
+  # Use HTTPS (RFC 9110), not a vague "secure web communication" setting.
+  protocol: https
+  tls:
+    certificate: /etc/ssl/certs/server.pem
+    key: /etc/ssl/private/server.key
+```
+
 ### Example Group D: Framework Feature Name vs. Informal Description
 
 > **Non-STE:** React's function that manages state and side effects runs after the component draws on the screen.
@@ -225,6 +480,23 @@ Systems documentation uses names for memory regions, hardware components, and ow
 > **STE:** React's `useEffect` hook runs after the component renders.
 
 > *Principles applied: P8, P11, P5. `useEffect` is the approved API name from the React documentation. "Hook" is the approved category name for this type of function. "Render" is the approved term for the drawing phase. "Function that manages state and side effects" and "draws on the screen" are informal descriptions. Use the exact API names and React terminology.*
+
+Realistic component code:
+
+```jsx
+import { useEffect, useState } from "react";
+
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  // useEffect runs after the component renders (the approved term).
+  useEffect(() => {
+    fetch(`/users/${userId}`).then((r) => r.json()).then(setUser);
+  }, [userId]);
+
+  return <div>{user ? user.name : "Loading…"}</div>;
+}
+```
 
 ### Example Group E: Algorithm Name vs. Plain-Language Description
 
@@ -234,6 +506,26 @@ Systems documentation uses names for memory regions, hardware components, and ow
 
 > *Principles applied: P8, P11, P9. "Binary search algorithm" is the approved technical noun from computer science literature. "Splits the sorted list in half again and again" is a description of how binary search works, but it does not name the algorithm. A reader who knows binary search will recognize the name immediately. A reader who does not can look up "binary search" in any algorithms textbook. A description cannot be searched for as easily as a standard name.*
 
+Realistic implementation and docstring:
+
+```python
+def binary_search(items: list[int], target: int) -> int:
+    """Apply the binary search algorithm to a sorted array.
+
+    Return the index of `target`, or -1 if `target` is not present.
+    """
+    low, high = 0, len(items) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if items[mid] == target:
+            return mid
+        if items[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+```
+
 ### Example Group F: Configuration Key vs. Generic Description
 
 > **Non-STE:** Set the database location setting to point to your local database server address.
@@ -241,6 +533,21 @@ Systems documentation uses names for memory regions, hardware components, and ow
 > **STE:** Set the `DATABASE_URL` environment variable to your local PostgreSQL connection string.
 
 > *Principles applied: P8, P11, P5. `DATABASE_URL` is the approved configuration key name from the project's `.env.example` file. "Database location setting" is a description that does not tell the user which key to set. The STE version uses the exact key name so the user can copy it directly into their configuration file. "PostgreSQL" is the approved database name (not "database server"). "Connection string" is the approved technical noun for the value format.*
+
+Realistic configuration files:
+
+```bash
+# .env.example  — use the approved key name, not "database location setting"
+DATABASE_URL=postgresql://user:password@localhost:5432/app
+```
+
+```python
+# settings.py
+import os
+
+# Read the approved key name from the environment.
+DATABASE_URL = os.environ["DATABASE_URL"]  # PostgreSQL connection string
+```
 
 ---
 
@@ -256,6 +563,17 @@ RULE: The codebase name is the primary authority for code elements. If the class
 
 > *Principles applied: P8, P11. `DataStore` is the approved name from the source code. "Repository pattern" is the industry-approved name. Use both: the codebase name for traceability and the industry name for comprehension. Do not replace the codebase name with the industry name — that breaks the link between the documentation and the code.*
 
+Realistic docstring:
+
+```python
+class DataStore:
+    """Repository pattern implementation for all database access.
+
+    The class name in the source tree is `DataStore`. Use that exact name in
+    docs. "Repository" is the industry pattern name, shown here for context.
+    """
+```
+
 ### Edge Case 2: When Two Industry Standards Compete for the Same Concept
 
 Some concepts have two accepted names from different communities. For example, "callback" vs. "handler" vs. "listener" (all refer to a function that responds to an event). "Hash map" vs. "dictionary" vs. "associative array" (all refer to a key-value data structure). "Argument" vs. "parameter" (both refer to inputs to a function, with a narrow technical distinction that most documentation ignores).
@@ -267,6 +585,24 @@ RULE: Choose one name and use it consistently (Rule 1.11). Register your choice 
 > **STE:** The `EventHandler` callback receives the event and passes it to the registered listener.
 
 > *Principles applied: P11, P8. The non-STE version uses "callback," "handler," and "listener" interchangeably. The STE version assigns each term a distinct meaning: `EventHandler` is a class, "callback" is the function type, and "listener" is the registered consumer. Register these distinctions in the project glossary.*
+
+Realistic event code:
+
+```typescript
+type Callback = (event: Event) => void;
+
+class EventHandler {
+  private listeners: Callback[] = [];
+
+  on(listener: Callback): void {
+    this.listeners.push(listener); // "listener" = registered consumer
+  }
+
+  emit(event: Event): void {
+    for (const listener of this.listeners) listener(event);
+  }
+}
+```
 
 ### Edge Case 3: When the Approved Name Is an Acronym or Initialism
 
@@ -281,6 +617,17 @@ Many standard technical nouns are acronyms or initialisms: API, JSON, SQL, HTML,
 > **STE:** The API returns JSON. The API also sends a JWT.
 
 > *Principles applied: P11. After the first definition, use only the acronym. "Application programming interface" and "API" refer to the same concept — using both suggests a distinction that does not exist.*
+
+Realistic API documentation extract:
+
+```markdown
+## Authentication
+
+The application programming interface (API) returns JavaScript Object
+Notation (JSON). The JSON Web Token (JWT) in the response header identifies
+the user. After this definition, the document uses only "API", "JSON", and
+"JWT" so the reader is not misled into thinking they are different concepts.
+```
 
 ### Edge Case 4: When a Framework Renames a Standard Concept
 
@@ -298,6 +645,18 @@ RULE: In documentation for a specific framework, use the framework's approved na
 
 > *Principles applied: P8, P11. General documentation uses the most common term ("controller") and acknowledges the framework-specific variants in parentheses. This helps readers from different ecosystems understand the concept.*
 
+Realistic Django view:
+
+```python
+# polls/views.py  — Django uses "view", not "component" or "controller"
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def index(request):
+    latest = Question.objects.order_by("-pub_date")[:5]
+    return render(request, "polls/index.html", {"latest": latest})
+```
+
 ### Edge Case 5: When the Approved Name Changes During a Migration or Refactor
 
 During migrations and refactors, the codebase may have two names for the same concept: the old name (still in some files) and the new name (in the refactored files). Documentation must choose which name to use.
@@ -307,6 +666,17 @@ RULE: Use the target name (the name after the migration is complete). If you mus
 > **STE:** The `UserService` class (formerly `UserManager`) handles user authentication. DEPRECATED: `UserManager` is the old name. Use `UserService` in new code.
 
 > *Principles applied: P8, P11. `UserService` is the approved target name. `UserManager` is the deprecated name, shown only for migration context. After the migration is complete, remove all references to `UserManager` from the documentation.*
+
+Realistic migration guide extract:
+
+```markdown
+## Renaming UserManager to UserService
+
+The `UserService` class (formerly `UserManager`) handles user authentication.
+
+> DEPRECATED: `UserManager` is the old name. Use `UserService` in new code.
+> The old symbol is removed in version 3.0.
+```
 
 ### Edge Case 6: Package Managers and Ecosystem-Specific Name Variants
 
@@ -319,6 +689,18 @@ RULE: In documentation for a specific ecosystem, use the name from that ecosyste
 > **STE:** Install the `python-dotenv` package with `pip` to load environment variables.
 
 > *Principles applied: P8, P11. "Dotenv package" is ambiguous — it could be the npm package, the PyPI package, or the Ruby gem. The STE version gives the exact PyPI package name (`python-dotenv`) and the exact tool (`pip`). This instruction can be copied directly into a terminal.*
+
+Realistic installation section:
+
+```markdown
+## Install
+
+Install the `python-dotenv` package with `pip` to load environment variables:
+
+    python -m pip install python-dotenv
+
+(For Node.js projects, the equivalent is `npm install dotenv`.)
+```
 
 ---
 
@@ -339,6 +721,18 @@ This rule connects to several other STE-Code rules. Read these rules together to
 | **Rule 1.11** — One term per concept | Rule 1.11 requires consistency: one concept, one name. Rule 1.8 provides the decision process for choosing that one name. When you choose an approved technical noun under Rule 1.8, Rule 1.11 guarantees that you use it everywhere. |
 | **Rule 1.12** — Technical verbs are allowed | Some concepts have both a technical noun and a technical verb form (for example, "cache" is both a noun and a verb). Rule 1.8 applies to the noun form. Rule 1.12 applies to the verb form. When you use the verb form, choose the approved technical verb — but when you name the concept in documentation, use the approved technical noun. |
 | **Rule 1.14** — Use American English spelling | When the industry-standard technical noun has different spellings in different English variants (for example, "color" vs. "colour" in CSS property names), use the spelling from the specification. CSS uses "color" (American English). HTML uses "colour" in some deprecated attributes. Follow the specification, not Rule 1.14, for spec-defined names. For all other technical nouns, use American English spelling. |
+
+> **See also:** Rule 1.1 — Use approved words from the dictionary
+> **See also:** Rule 1.2 — Use words only as their specified part of speech
+> **See also:** Rule 1.3 — Use words only with their approved meanings
+> **See also:** Rule 1.5 — You can use words in a technical noun category
+> **See also:** Rule 1.6 — Use non-approved words only as technical code nouns
+> **See also:** Rule 1.7 — Do not use technical nouns as verbs
+> **See also:** Rule 1.9 — Prefer short, clear technical nouns
+> **See also:** Rule 1.10 — Use no slang, jargon, or regional terms
+> **See also:** Rule 1.11 — Use one term per concept
+> **See also:** Rule 1.12 — You can use verbs in a technical verb category
+> **See also:** Rule 1.14 — Use American English spelling
 
 ---
 
@@ -391,7 +785,7 @@ When you refer to an approved technical noun that is a unique entity (a specific
 When the approved technical noun appears in a code block, it is part of the quoted text (Rule 1.5, category 10). When it appears in prose, it is a code-domain technical noun. In both cases, use the exact approved name. The formatting changes, but the name does not.
 
 > **STE:** The `UserService.findById` method returns a `User` object — the approved names are identical in code blocks and prose:
-> ```
+> ```python
 > const user = await UserService.findById(id);
 > ```
 
