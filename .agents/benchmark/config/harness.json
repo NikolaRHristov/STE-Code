@@ -52,14 +52,41 @@
     }
   },
   "handshake": {
-    "$comment": "Filesystem convergence contract. RED, BLUE, PURPLE and WHITE agree on these names ONLY. No process dependency, no pipes, no shared memory.",
+    "$comment": "Filesystem convergence contract. RED, BLUE, PURPLE, WHITE and BLACK agree on these names ONLY. No process dependency, no pipes, no shared memory.",
     "round_dir_template": "{base}/variant{variant}/round{round}",
     "red_ledger": "escapes.json",
     "red_sentinel": "purple.json",
     "blue_sentinel": "blue-done.json",
     "white_sentinel": "white-done.json",
+    "black_sentinel": "black-done.json",
     "stitch_report": "report.json",
-    "knowledge_base": "knowledge.json"
+    "knowledge_base": "knowledge.json",
+    "notes_dir": "notes",
+    "notes_index": "index.json",
+    "attack_brief": "attack-brief.json",
+    "verdicts": "verdicts.json"
+  },
+  "notes": {
+    "$comment": "Inter-colour correspondence. See NOTES_PROTOCOL.md.",
+    "colours": ["red", "blue", "purple", "white", "black"],
+    "kinds": ["claim", "warning", "request", "acknowledgement", "rebuttal", "handoff"],
+    "ack_dispositions": ["accepted", "deferred", "rejected"],
+    "stale_after_rounds": 2,
+    "require_evidence": true
+  },
+  "verification": {
+    "$comment": "BLACK's split-half A/B instrument. Arm A derives, arm B verifies.",
+    "partition_strategies": [
+      "random_half", "stratified_half", "technique_disjoint",
+      "placement_disjoint", "temporal_half", "variant_holdout"
+    ],
+    "default_strategy": "stratified_half",
+    "derivation_arm": "A",
+    "verification_arm": "B",
+    "overfit_tolerance_pct": 10.0,
+    "min_arm_size": 8,
+    "verdicts": ["confirmed", "inflated", "deflated", "unsound", "underpowered"],
+    "split_seed": 7
   },
   "scoring": {
     "base": 0.40,

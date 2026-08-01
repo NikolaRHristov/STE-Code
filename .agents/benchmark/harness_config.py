@@ -98,8 +98,13 @@ class Handshake:
     red_sentinel: str
     blue_sentinel: str
     white_sentinel: str
+    black_sentinel: str
     stitch_report: str
     knowledge_base: str
+    notes_dir: str
+    notes_index: str
+    attack_brief: str
+    verdicts: str
 
 
 @dataclass(frozen=True)
@@ -205,9 +210,31 @@ class HarnessConfig:
             red_sentinel=hs.get("red_sentinel", "purple.json"),
             blue_sentinel=hs.get("blue_sentinel", "blue-done.json"),
             white_sentinel=hs.get("white_sentinel", "white-done.json"),
+            black_sentinel=hs.get("black_sentinel", "black-done.json"),
             stitch_report=hs.get("stitch_report", "report.json"),
             knowledge_base=hs.get("knowledge_base", "knowledge.json"),
+            notes_dir=hs.get("notes_dir", "notes"),
+            notes_index=hs.get("notes_index", "index.json"),
+            attack_brief=hs.get("attack_brief", "attack-brief.json"),
+            verdicts=hs.get("verdicts", "verdicts.json"),
         )
+
+        notes = document.get("notes", {})
+        self.note_colours = list(notes.get("colours", []))
+        self.note_kinds = list(notes.get("kinds", []))
+        self.ack_dispositions = list(notes.get("ack_dispositions", []))
+        self.notes_stale_after_rounds = int(notes.get("stale_after_rounds", 2))
+        self.notes_require_evidence = bool(notes.get("require_evidence", True))
+
+        verification = document.get("verification", {})
+        self.partition_strategies = list(verification.get("partition_strategies", []))
+        self.default_partition_strategy = verification.get("default_strategy", "random_half")
+        self.derivation_arm = verification.get("derivation_arm", "A")
+        self.verification_arm = verification.get("verification_arm", "B")
+        self.overfit_tolerance_pct = float(verification.get("overfit_tolerance_pct", 10.0))
+        self.min_arm_size = int(verification.get("min_arm_size", 8))
+        self.verdict_kinds = list(verification.get("verdicts", []))
+        self.split_seed = int(verification.get("split_seed", 7))
 
         sc = document.get("scoring", {})
         self.scoring = Scoring(
@@ -295,6 +322,22 @@ class HarnessConfig:
 
     def white_sentinel_path(self, base: "str | Path", variant: str, round_n: int) -> Path:
         return self.round_dir(base, variant, round_n) / self.handshake.white_sentinel
+
+    def black_sentinel_path(self, base: "str | Path", variant: str, round_n: int) -> Path:
+        return self.round_dir(base, variant, round_n) / self.handshake.black_sentinel
+
+    def notes_dir(self, base: "str | Path") -> Path:
+        """Correspondence lives at the base, not per round: notes cross rounds."""
+        return Path(base) / self.handshake.notes_dir
+
+    def notes_index_path(self, base: "str | Path") -> Path:
+        return self.notes_dir(base) / self.handshake.notes_index
+
+    def attack_brief_path(self, base: "str | Path") -> Path:
+        return Path(base) / self.handshake.attack_brief
+
+    def verdicts_path(self, base: "str | Path") -> Path:
+        return Path(base) / self.handshake.verdicts
 
     # --------------------------------------------------------------- runner
 

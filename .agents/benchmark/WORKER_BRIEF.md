@@ -15,9 +15,18 @@ converge on disk:
 | BLUE | defender — re-probes escapes, measures resistance | `blue.py` |
 | PURPLE | stitch — merges all sides into one report | `purple_stitch.py` (legacy: `purple.py`) |
 | WHITE | self-healing — learns, proposes remedies, validates them | `white.py`, `knowledge.py` |
+| BLACK | verifier — attacks the *conclusion*, split-half A/B | `black.py`, `verification.py` |
 
 Support modules: `harness_config.py` (all configuration), `anonymize.py` (report
-redaction), `config/harness.json` (the profile document — every project noun).
+redaction), `notes.py` (inter-colour correspondence), `scheduler.py` /
+`runner_pool.py` (throughput), `config/harness.json` (the profile document —
+every project noun).
+
+The colours leave each other **notes**: durable, addressed, evidence-bearing
+messages on disk that must be acknowledged. See `NOTES_PROTOCOL.md`. WHITE hands
+BLACK an *attack brief* — the weakest links in the other three colours, stated
+as falsifiable hypotheses — and BLACK tries to break the result with split-half
+A/B verification. Nothing may be concluded from the same data that produced it.
 
 ## 1. Non-negotiable rules
 
