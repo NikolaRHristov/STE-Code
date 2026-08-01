@@ -2,7 +2,7 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 4.4
 > **Source:** [master.md#sec4-rule4.4](ste-code/grouped/)
-> Source: master.md#sec4-rule4.4
+> **Domain:** code documentation (API docs, commit messages, README sections, code comments)
 
 ## Original Rule
 
@@ -42,35 +42,95 @@ In procedural documentation (function and method descriptions), use connecting w
 
 ### Code-Domain Examples
 
+> *Adapted from spec pair:* Non-STE: "The localizer course aligns with the centerline of the runway. The glideslope path is at a constant angle to the threshold of the runway." (two related facts joined only by context)  |  STE: "The localizer course aligns with the centerline of the runway. And the glideslope path is at a constant angle to the threshold of the runway."
+
 **Using "and" to connect two related descriptions:**
 
+The two sentences stay independent. Each sentence has one topic. The connecting word makes the link explicit.
+
+> **Non-STE:** `parseInput` validates the request payload and `formatOutput` serializes the response, and they're both called in the handler.
+>
 > **STE:** The `parseInput` function validates the request payload. And the `formatOutput` function serializes the response data.
 
 **Using "but" to show an exception or alternative:**
 
+Use "but" when the second sentence corrects, limits, or extends the first.
+
+> **Non-STE:** These error-handling rules are the minimum necessary for the API layer, although the local project conventions may specify additional ones.
+>
 > **STE:** These error-handling rules are the minimum necessary for the API layer. But the local project conventions can give other necessary error-handling rules.
 
 **Using "thus" to show a logical consequence:**
 
+Use "thus" when the second sentence is a direct result of the first.
+
+> **Non-STE:** If the validation step fails, the middleware sets an error code on the response object, so the downstream handler gets it and skips processing.
+>
 > **STE:** If the validation step fails, the middleware sets an error code on the response object. Thus, the downstream handler receives the error code and skips the processing step.
 
 **Using "as a result" to show cause and effect:**
 
+Use "as a result" for a clear physical or state change caused by the first sentence.
+
+> **Non-STE:** When the cache eviction policy runs, expired entries are removed, which frees up capacity for new entries.
+>
 > **STE:** When the cache eviction policy runs, expired entries are removed from the cache. As a result, the cache has free capacity for new entries.
+
+**Using "then" to show a time sequence in a procedure:**
+
+Use "then" for an ordered work step, not for logical consequence.
+
+> **Non-STE:** Open the database connection, after that run the migration script, and finally start the API server.
+>
+> **STE:** Open the database connection. Then run the migration script. And then start the API server.
 
 **Using demonstrative adjectives as connecting words in procedures:**
 
+The demonstrative adjective must point back to a topic that the previous sentence already named.
+
+> **Non-STE:** Tag the deprecated methods with the `@deprecated` annotation; it helps developers migrate to the new API.
+>
 > **STE:** Tag the deprecated methods with the `@deprecated` annotation. This annotation will help developers during the migration to the new API.
 
 **Connecting words in a safety instruction:**
 
+Safety instructions use the imperative form. The connecting word still links the precaution to its reason.
+
+> **Non-STE:** Always validate user input in this module because it prevents injection attacks.
+>
 > **STE:** BREAKING: ALWAYS VALIDATE USER INPUT IN THIS MODULE. THIS PRECAUTION WILL PREVENT INJECTION ATTACKS.
 
 **Non-STE versus STE (missing connection):**
 
+When you omit the connecting word, the reader must guess the link. STE makes the link explicit.
+
 > **Non-STE:** POST /users creates a new user account and returns a 201 status. The response body contains the created user object with an auto-generated ID. The ID can be used in later requests to reference this user.
 >
 > **STE:** A POST request to `/users` makes a new user account. As a result, the API returns a 201 status code. And the response body contains the created user object with an auto-generated ID. You can use this ID in later requests to refer to the user.
+
+**Using "as a result" in a configuration description:**
+
+> **Non-STE:** When you set `max_connections` to 64, the pool reuses sockets and latency drops under load.
+>
+> **STE:** Set the `max_connections` value to 64 in the config file. As a result, the connection pool reuses idle sockets. And the average request latency decreases under load.
+
+**Using "thus" in a test description:**
+
+> **Non-STE:** The test seeds a row, calls the delete endpoint, and the row is gone from the database afterward.
+>
+> **STE:** The test seeds one row in the database. Thus, the delete endpoint removes that row. And the database has zero rows after the call.
+
+**Using "at the same time" to show concurrency:**
+
+> **Non-STE:** The worker fetches the page and parses it concurrently using asyncio tasks.
+>
+> **STE:** The worker fetches the page from the remote server. At the same time, the parser reads the response stream. And both tasks finish before the timeout.
+
+**Using "but" in an error-message description:**
+
+> **Non-STE:** The `read_file` function returns the contents; however, it raises `PermissionError` when the path is not readable.
+>
+> **STE:** The `read_file` function returns the contents of the file. But it raises a `PermissionError` when the path is not readable.
 
 ### Paradigm-Specific Guidance
 
@@ -102,6 +162,12 @@ In procedural documentation (function and method descriptions), use connecting w
 - **Rule 1.11** — Use one term per concept. Use "thus" or "as a result" consistently, not both, for the same link.
 - **Rule 3.1** — Connecting words join simple sentences. Simplify a complex sentence before you connect it.
 - **Rule 4.1** — Each sentence before and after the connecting word must obey the length limit.
+
+> **See also:** Rule 1.1 — Approved Words Come from the Dictionary
+> **See also:** Rule 1.3 — Use Approved Words with the Approved Meaning
+> **See also:** Rule 1.11 — Use One Term per Concept
+> **See also:** Rule 3.1 — Write One Topic per Sentence
+> **See also:** Rule 4.1 — Write Sentences That Are Not Too Long
 
 ## Summary Checklist
 
