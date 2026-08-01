@@ -1,73 +1,95 @@
-# STE-Code Artifacts
+# STE-Code — Artifacts
 
-Ready-to-use, LLM-friendly packaging of the STE-Code standard (ASD-STE100
-Issue 9, January 2025, adapted to software documentation). The canonical
-source is [`../final/`](../final/) — this directory holds the **deployable
-deliverables**, built by the hybrid Phase F pipeline (deterministic base +
-LLM distillation).
+STE-Code is a controlled-language variation of ASD-STE100 for software
+documentation. This `artifacts/` directory holds the **deployable,
+LLM-distilled form** of the standard, laid out as small sub-documents so that
+neither the LLM writer nor the LLM reader ever has to touch one enormous file.
 
-> Adapted from ASD-STE100 Issue 9 (January 2025), ASD Europe. (c) ASD, 2025.
-> STE is an EU Trade Mark. Independent adaptation.
+## Layout — hybrid sub-doc tiers
 
-## Layout
+The standard is sliced into **8 tiers**, each a directory of focused
+sub-documents plus an `_index.md`:
 
-Each adaptation **level is a directory of small sub-documents** (so an LLM reads
-and writes files of a few hundred KB at most, never one 1.8 MB monster):
+| Tier | Level | Contents | Size on disk | Tokens |
+|------|-------|----------|-------------:|-------:|
+| `level-2/` | -2 | 14 core principles only (ultra-minimal) | 5 KB | ~1.2K |
+| `level-1/` | -1 | core principles + synonym table | 26 KB | ~5.9K |
+| `level0/`  | 0  | + short dictionary excerpt | 17 KB | ~4.3K |
+| `level1/`  | 1  | + doc templates (code review / PR feedback) | 58 KB | ~14.5K |
+| `level2/`  | 2  | + section-specific grammar rules | 75 KB | ~18.5K |
+| `level3/`  | 3  | + complete dictionary excerpt + all rules | 388 KB | ~95K |
+| `level4/`  | 4  | + extensions + reference catalogue | 462 KB | ~116K |
+| `level5/`  | 5  | full standard (all rules + extensions + catalogue + provenance) | 539 KB | ~134K |
 
-| Level | Directory | Approx. size | Purpose |
-|:-----:|-----------|:------------:|---------|
-| **-2** | [`level-2/`](level-2/) | ~5 KB | Ultra-minimal: the 14 core principles only |
-| **-1** | [`level-1/`](level-1/) | ~12 KB | Minimal: core principles + synonym table |
-| **0** | [`level0/`](level0/) | ~25 KB | Baseline: + short dictionary excerpt |
-| **1** | [`level1/`](level1/) | ~35 KB | + doc templates (code review / PR feedback) |
-| **2** | [`level2/`](level2/) | ~45 KB | + section-specific grammar rules |
-| **3** | [`level3/`](level3/) | ~1.8 MB | + complete dictionary + all 54 rules |
-| **4** | [`level4/`](level4/) | ~1.8 MB | + extensions + reference catalogue |
-| **5** | [`level5/`](level5/) | ~1.8 MB | Full standard (all rules + extensions + catalogue + provenance) |
+Size on disk is the measured sum of a tier's sub-documents; `_index.md` and
+`system-prompt.txt` are excluded, because `system-prompt.txt` repeats the same
+sub-documents. Token counts use the `o200k_base` tokenizer (GPT-4o, GPT-4.1,
+GPT-5, o-series); `cl100k_base` (GPT-4, GPT-3.5-turbo) agrees to within 0.3%,
+and Claude and Llama tokenizers stay within a few percent for English prose.
+Regenerate these figures with:
 
-Supporting files:
+```bash
+python3 .agents/tools/maintenance/measure_artifacts.py             # summary table
+python3 .agents/tools/maintenance/measure_artifacts.py --per-file  # sub-doc rows
+python3 .agents/tools/maintenance/measure_artifacts.py --json      # machine readable
+```
+
+**Distillation status.** Two sub-documents are still byte-identical to their
+`_base/` scaffold, which means the distiller fell back for them:
+
+| Sub-document | Now | Projected after distillation |
+|--------------|:---:|------------------------------|
+| `level3/03-dictionary.md` | 2.5 KB (scaffold) | ~4.7 KB; tier stays near ~95K tokens |
+| `level5/rules-sec7.md` | 123 KB (scaffold) | ~24 KB; tier drops to ~110K tokens |
+
+Each projection uses the ratio that the same sub-document already reached in the
+other tiers, so rule sections project downward and dictionary sections upward.
+
+Each tier directory contains:
+- `0N-*.md` / `rules-secN.md` — the distilled sub-documents
+- `_index.md` — a human-readable list of the tier's sub-documents
+- `system-prompt.txt` — **the whole tier concatenated into one file**, ready to
+  pass as a `--system-prompt-file` to a benchmark or application
+
+Concatenation is deterministic and reproducible; `system-prompt.txt` is just
+the sub-docs joined by `---`.
+
+## Consolidated single-file artifacts
 
 | File | Purpose |
 |------|---------|
-| `_base/` | Deterministic boilerplate sub-docs per tier (the layer the LLM distills from). Byte-reproducible; no LLM. |
-| `llms.txt` | `llms.txt`-style index of every tier and its sub-documents (for agentic retrieval). |
-| `llms-full.txt` | Concatenation of every distilled sub-document — the single-file full corpus. |
-| `VERSION` | Artifact version (bumped on each regeneration). |
-| `README.md` | This file. |
+| `llms.txt` | llms.txt-standard index — lists every tier + the full file |
+| `llms-full.txt` | the entire distilled standard in one file (the canonical consolidated artifact) |
 
-> The previous flat `ste-code-rules.md` / `ste-code-system-prompt.md` consolidated
-> files are **no longer produced**; `llms-full.txt` is the consolidated artifact.
+`llms-full.txt` replaces the retired `ste-code-rules.md` /
+`ste-code-system-prompt.md`; it is regenerated from `final/` by the assembler
+and is the single-file deliverable to embed.
 
-## How it was built (Phase F, hybrid)
+## Boilerplate
 
-1. **Deterministic level separation** — `levels_scaffold.py` reads `../final/`
-   and emits bounded sub-documents per tier into `_base/`. Oversized rule
-   sections are split (`rules-secN-part{i}.md`) so no sub-doc exceeds ~450 KB.
-2. **LLM distillation** — `distill_one.py` runs one Hermes session per
-   sub-document, reading its base and rewriting it into an LLM-optimized file
-   at `level<N>/<subdoc>` (multiple `write_file` / `patch` calls). On failure it
-   falls back to the base, so nothing is lost. Each worker commits its sub-doc
-   turn-by-turn.
-3. **Index assembly** — `llms.txt` (index) and `llms-full.txt` (concatenation)
-   are written deterministically after all sub-docs are distilled.
+| Path | Purpose |
+|------|---------|
+| `_base/` | deterministic per-tier base sub-docs (pre-LLM scaffold) |
+| `VERSION` | semantic version, bumped by the assembler |
 
-## Quick start
+## How it is built
 
-1. Pick a level directory that fits your token budget.
-2. Load its `_index.md` (or `llms.txt`) so the LLM knows the sub-doc layout.
-3. Point the LLM at the relevant sub-document(s) when it needs a rule, the
-   dictionary, or an example. For a single-file load, use `llms-full.txt`.
+1. **Deterministic scaffold** — `levels_scaffold.py` emits `_base/<tier>/` sub-docs.
+2. **LLM distill** — `synthesize_artifacts.py` distills each base sub-doc into
+   `ste-code/artifacts/<tier>/` (one small session per sub-doc).
+3. **Finalize assembly** — `finalize_artifacts.py` writes every tier's
+   `_index.md` + `system-prompt.txt` and the top-level `llms.txt` /
+   `llms-full.txt`.
 
-## Tooling
+Source of truth is `ste-code/final/` (the enriched standard produced by
+Phases D+G). Nothing here is hand-edited; re-run the assembler to regenerate.
 
-All scripts are agent-agnostic, in `.agents/tools/artifacts/`:
+## Using a tier
 
 ```bash
-python3 .agents/tools/artifacts/levels_scaffold.py     # rebuild _base/ boilerplate
-python3 .agents/tools/artifacts/distill_one.py <tier> <subdoc> <label> <desc>   # distill one sub-doc
-python3 .agents/tools/artifacts/artifact_batch.py      # assemble consolidated artifacts
-python3 .agents/tools/artifacts/verify-artifacts.py    # coverage gate (54/54 from final/)
-```
+# Feed a whole tier to an LLM (benchmark or app):
+python3 .agents/benchmark/benchmark-levels.py --levels 0,1,2,3,4,5
 
-The worker prompt lives at `.agents/tools/prompts/synthesize-artifacts-worker.md`
-and is rendered with `templater.py` (double-brace `{{token}}` syntax).
+# Or point any tool at one tier file:
+cat ste-code/artifacts/level1/system-prompt.txt
+```
