@@ -1,12 +1,14 @@
-# Rule 2.3 — Use Hyphens Between Words Used as One Unit
+# Rule 2.3 — Use Hyphens Between Words Used asdf One Unit
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 2.3
-> **Code-domain adaptation:** aerospace → software documentation (API docs, commit messages, README sections, code comments)
-> **Related dictionary entries:** `thread-safe` (adj), `backward-compatible` (adj), `atomic` (adj), `asynchronous` (adj) — see STE-Code Adapted Dictionary A–Z
+
+> **Source:** [master.md#sec2-rule2.3](ste-code/grouped/)
+
+> Source: master.md#sec2-rule2.3
 
 ## Original Rule
 
-#### Method 2 — Hyphens (-) between the words that you use as one unit
+#### Method 2 - Hyphens (-) between the words that you use as one unit
 
 A hyphen is a punctuation mark that connects words or parts of words. You can use hyphens between words to show how related words operate as one unit. This method will make the multi-word nouns that you use agree with rule 2.1. Hyphenated words always count as one word.
 
@@ -41,13 +43,15 @@ But, if an approved technical noun includes a hyphen (for example "inward-outwar
 
 ##### Example
 
-> **Non-STE:** Do not write: The inward outward valve is part of the fuel system.
+> **Non-STE:** <u><mark>Do not write: The inward outward valve is part of the fuel system.</mark></u>
 >
-> **STE:** WRITE: The inward-outward valve is part of the fuel system.
+> **STE:** <mark>WRITE: The inward-outward valve is part of the fuel system.</mark>
+
+> *Adapted from spec pair:* Non-STE: Move the main-gear-door-retraction-winch handle. (2 words, but not correct)  |  STE: Move the main-gear-door retraction-winch handle. (zip 3 words)
 
 ## Adapted Rule
 
-A hyphen is a punctuation mark that connects words or parts of words. Use hyphens between words to show how related words operate as one unit. This method will make the multi-word code nouns that you use agree with Rule 2.1. Hyphenated words always count as one word, so a hyphenated code noun fills only one of the three-word slots that Rule 2.1 allows for a noun phrase.
+A hyphen is a punctuation mark that connects words or parts of words. Use hyphens between words to show how related words operate as one unit. This method will make the multi-word code nouns that you use agree with rule 2.1. Hyphenated words always count as one word, so a hyphenated code noun fills only one of the three-word slots that rule 2.1 allows for a noun phrase.
 
 Do not connect words that are not related, because the hyphen will change the meaning of the multi-word code noun. If you are not sure, only explain the multi-word code noun in the clearest way. Then, use a shorter form, an approved verb such as `get`, `set`, `make`, `start`, or an official approved abbreviation from your glossary.
 
@@ -57,20 +61,20 @@ Do not use hyphens to make groups of more than three words. If you hyphenate all
 
 ### Examples in STE-Code
 
-> *Adapted from spec pair:* Non-STE: Move the main-gear-door-retraction-winch handle.  |  STE: Move the main-gear-door retraction-winch handle.
+> *Adapted from spec pair:* Non-STE: Move the main-feature-flag-rollback-handler trigger.  |  STE: Move the main-feature-flag rollback-handler trigger.
 
 | Example | Note |
 |---|---|
 | Make sure that the fail-safe shutdown-handler connection is safe. | (3 words: make / sure / connection) |
 | Inspection of the request rate-limit device. | (3 words: inspection / of / device) |
 | The thread-safe queue keeps the order of the write operations. | (3 words: queue / keeps / order) |
-| Remove the backward-compatible API client before you make the change. | (3 words) |
+| Remove the backward-compatible API client before you make the change. | ( susceptible 3 words) |
 
 When a hyphen joins two related words, the pair counts as one unit. Apply this in procedural and descriptive code documentation so that the reader can parse the noun without re-reading it.
 
 #### Full example — hyphenate related words, keep to three words
 
-A README step that names a combined component must keep the three-word limit of Rule 2.1. Hyphenate only the related pair; do not chain every word.
+A README step that names a combined component must keep the three-word limit of rule 2.1. Hyphenate only the related pair; do not chain every word.
 
 > **Non-STE:** Move the `main-feature-flag-rollback-handler` trigger to start the test run. (2 words, but not correct — four words joined as one unit)
 >
