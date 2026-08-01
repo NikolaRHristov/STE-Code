@@ -31,7 +31,7 @@ To keep multi-word nouns short, you can use prepositions (for example, "of," "on
 
 ## Adapted Rule
 
-To keep multi-word technical nouns short, use prepositions (for example, "of," "on," "in," and "for") and explain the multi-word technical nouns. Write each multi-word technical noun as a short noun that uses prepositions to make the meaning clear. A technical noun that the code domain uses (for example, a module name, a class name, a configuration key, an endpoint path, or an error type) must stay short so that the reader can parse it without effort.
+To keep multi-word technical nouns short, use prepositions (for example, "of," "on," "in," and "for") and explain the multi-word technical nouns. Write each multi-word technical noun as a short noun that uses prepositions to make the meaning clear. A technical noun that the code domain uses (for example, a module name, a class name, a configuration key, an endpoint path, an error type, or a test fixture) must stay short so that the reader can parse it without effort.
 
 When a phrase names a code component with more than a few words, break the phrase into small nouns that connect with prepositions. Do not write one long noun that stacks modifiers. Explain the relationship between the parts with "of," "on," "in," or "for."
 
@@ -40,7 +40,7 @@ Why this matters in code documentation:
 - A reader scans docs fast. A stacked noun such as `authentication_token_expiration_refresh_interval_setting` hides which part owns which. A short noun with prepositions shows the tree: the setting belongs to the interval, the interval belongs to the expiration, the expiration belongs to the token.
 - Short technical nouns match how code is already structured. A config key, a class, or a JSON field is one short concept. Prepositions in the sentence show how those short concepts relate.
 - Follow the Microsoft and Google style guides: use short, plain words. Do not use `utilize`, `leverage`, or `employ` when `use` is enough. Do not use `commence`, `initiate`, or `terminate` when `start` and `stop` are enough. Keep the verb simple and the noun short.
-- Approved code-domain adjectives stay attached to the short noun they modify: `idempotent`, `immutable`, `thread-safe`, `atomic`, `nullable`, `deprecated`, `stateless`, `backward-compatible`. Write `the idempotent retry policy`, not `idempotentretrypolicy`.
+- Approved code-domain adjectives stay attached to the short noun they modify: `idempotent`, `immutable`, `thread-safe`, `atomic`, `nullable`, `deprecated`, `stateless`, `backward-compatible`, `asynchronous`, `concurrent`, `deterministic`. Write `the idempotent retry policy`, not `idempotentretrypolicy`.
 
 How to apply the rule:
 
@@ -48,13 +48,13 @@ How to apply the rule:
 2. Split the chain at the ownership or containment points.
 3. Connect the parts with `of`, `on`, `in`, or `for`.
 4. If a part is itself a code component, name it with its short technical noun (its class, key, or file), not a merged word.
-5. In instruction text, use the approved verbs: `set`, `get`, `make`, `show`, `check`, `remove`, `send`, `start`, `stop`. Do not use `configure` for `set`, `retrieve` for `get`, or `delete`/`purge` for `remove`.
+5. In instruction text, use the approved verbs: `set`, `get`, `make`, `show`, `check`, `remove`, `send`, `start`, `stop`, `use`, `update`. Do not use `configure` for `set`, `retrieve` for `get`, `delete`/`purge` for `remove`, or `display` for `show`.
 
 ### Examples in STE-Code
 
 > *Adapted from spec pair:* Non-STE: Runway light connection resistance calibration. | STE: Calibration of the resistance of the runway light connection.
 
-The six pairs below re-express the ASD-STE100 pattern for code documentation. Each pair shows a full, runnable situation: a long stacked noun (Non-STE) and the same idea written as short nouns with prepositions (STE), followed by the code, config, or test that the documentation describes.
+The pairs below re-express the ASD-STE100 pattern for code documentation. Each pair shows a full, runnable situation: a long stacked noun (Non-STE) and the same idea written as short nouns with prepositions (STE), followed by the code, config, API doc, test, or commit message that the documentation describes.
 
 #### 1. Configuration key — auth token refresh
 
@@ -159,18 +159,20 @@ def align_cache_hook(hook, emitter, timeout: float = 5.0) -> bool:
     return False
 ```
 
-#### 5. Error message — retry policy
+#### 5. API documentation — retry policy
 
 > **Non-STE:** Payment gateway timeout retry exhaustion notification handler.
 >
 > **STE:** Handler of the notification of the exhaustion of the retry of the timeout of the payment gateway.
 
-An error type or log line that stacks five nouns is hard to grep and hard to read. Split it so each level is a short noun.
+An API doc, error type, or log line that stacks five nouns is hard to grep and hard to read. Split it so each level is a short noun.
 
 ```python
 # STE-Code: handler of the notification of the exhaustion of the retry
 #            of the timeout of the payment gateway
 class PaymentGatewayTimeoutRetryExhaustionNotificationHandler:
+    """Handler of the notification of the exhaustion of the retry of the timeout of the payment gateway."""
+
     def handle(self, notice) -> None:
         log.error("retry of the timeout of the payment gateway is exhausted")
 ```
@@ -196,9 +198,45 @@ Update the policy of the storage bucket of the image of the avatar of the profil
 useraccountprofileavatarimagestoragebucketpolicyupdate
 ```
 
+#### 7. README section — rate limit
+
+> **Non-STE:** The inbound request rate limit window reset schedule controls the burst.
+>
+> **STE:** The schedule of the reset of the window of the rate limit of the inbound request controls the burst.
+
+A README sentence that stacks the noun hides what the schedule actually resets. Name the short nouns and connect them with `of`.
+
+```markdown
+# STE-Code README
+
+The schedule of the reset of the window of the rate limit of the inbound
+request controls the burst. Set the window to 60 seconds.
+```
+
+```yaml
+# Non-STE: one long key, unclear what resets (do not write this)
+inbound_request_rate_limit_window_reset_schedule: "*/1 * * * *"
+```
+
+#### 8. Code comment — background job
+
+> **Non-STE:** The background worker queue overflow alert suppression rule runs on the staging cluster.
+>
+> **STE:** The alert suppression rule on the overflow of the background worker queue runs on the staging cluster.
+
+A code comment that stacks the subject makes the reader re-read. Put the head noun first, then attach the rest with `on` and `of`.
+
+```python
+# STE-Code comment: the alert suppression rule on the overflow
+# of the background worker queue runs on the staging cluster
+def install_alert_rule(cluster: str) -> None:
+    rule = AlertSuppressionRule(on=OverflowOf(WorkerQueue(background=True)))
+    deploy(rule, cluster="staging")
+```
+
 ## See also
 
-> **See also:** Rule 1.5 — Technical Noun Categories (what counts as a technical noun in code documentation)
-> **See also:** Rule 1.3 — Use Approved Words (keep verbs and nouns plain: use, set, get, remove, check, update)
-> **See also:** Rule 2.2 — Write One Instruction per Sentence (a short noun keeps each instruction to one clear action)
-> **See also:** Rule 2.3 — Write Short Sentences (a short noun keeps the sentence short)
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Code-Domain Technical Noun Category (what counts as a technical noun in code documentation)
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings (keep verbs and nouns plain: use, set, get, remove, check, update, show)
+> **See also:** Rule 2.2 — Write Long Technical Nouns in Full (when a noun must stay long, write it in full then use a short form)
+> **See also:** Rule 2.3 — Use Hyphens Between Words Used as One Unit (hyphenate a related pair, but do not chain more than three words)
