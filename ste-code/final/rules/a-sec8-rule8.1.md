@@ -18,29 +18,99 @@ Examples:
 
 | | (2) Replace the damaged part(s). |
 
+| **Non-STE:** | The battery is not user-replaceable; it can only be replaced by an approved service station. |
+
+| **STE:** | Users cannot replace the battery. Only specialists at approved service stations can replace it. |
+
 ## STE-Code Adaptation
 
 **Rule 8.1** In code documentation, you can use all standard English punctuation marks but not the semicolon (;).
 
 The semicolon (;) is not permitted in STE-Code because it lets you write very long sentences that are difficult to read in code comments and documentation. It is also not easy to use correctly. As an alternative to the semicolon, always write two different sentences.
 
+This rule applies to every form of code documentation: README files, API reference docs, docstrings, inline comments, commit messages, error messages, configuration comments, and specification documents. It does not apply to source code (where the semicolon is part of the language syntax) or to code shown inside code blocks. See Edge Case 1 for the full boundary.
+
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: `Examine the removed parts; replace the damaged ones.`  |  STE: `Examine the removed parts for damage. Replace the damaged part(s).` (ASD-STE100 Issue 9, Rule 8.1, page 103 — the semicolon joins two independent clauses; the fix splits them into two sentences.)
+
 > **Non-STE:** Call the function to parse the response data; handle any errors that occur.
->
+
+```python
+def fetch_user(client, user_id):
+    """Call the function to parse the response data; handle any errors that occur.
+
+    Parameters:
+        client: The HTTP client.
+        user_id: The identifier of the user.
+
+    Returns:
+        A user record.
+    """
+    response = client.get(f"/users/{user_id}")
+    data = json.loads(response.text)
+    if "error" in data:
+        raise UserError(data["error"])
+    return data
+```
+
 > **STE:** Call the function to parse the response data. Handle any errors that occur.
->
-> *Adapted from spec pair: "Examine the removed parts; replace the damaged ones." → split into two sentences.*
+
+```python
+def fetch_user(client, user_id):
+    """Call the function to parse the response data. Handle any errors that occur.
+
+    Parameters:
+        client: The HTTP client.
+        user_id: The identifier of the user.
+
+    Returns:
+        A user record.
+    """
+    response = client.get(f"/users/{user_id}")
+    data = json.loads(response.text)
+    if "error" in data:
+        raise UserError(data["error"])
+    return data
+```
+
+> *Adapted from spec pair: "Examine the removed parts; replace the damaged ones." — the semicolon packs an action and its follow-up into one sentence. The STE version shows the same split applied to a fetch-and-parse function.*
 
 > **Non-STE:** The cache is invalid after a write operation; you must flush it before the next read.
->
+
+```go
+// The cache is invalid after a write operation; you must flush it before the next read.
+func (c *Cache) Write(key string, value []byte) error {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    c.store[key] = value
+    return nil
+}
+```
+
 > **STE:** The cache is invalid after a write operation. You must flush it before the next read.
->
-> *Adapted from spec pair: "Examine the removed parts; replace the damaged ones." → split into two sentences.*
+
+```go
+// The cache is invalid after a write operation. You must flush it before
+// the next read.
+func (c *Cache) Write(key string, value []byte) error {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    c.store[key] = value
+    c.flush(key)
+    return nil
+}
+```
+
+> *Adapted from spec pair: "Examine the removed parts for damage." — the second clause states a required follow-up action. The STE version gives the cache behavior and the flush requirement as two sentences.*
+
+> **See also:** Rule 1.1 — Use Approved Words; Rule 3.1 — Use Simple Sentences; Rule 4.1 — Keep Sentences Short; Rule 4.4 — Use Connecting Words and Connecting Phrases to Connect Sentences; Rule 8.2 — Use Hyphens to Connect Words That Are Directly Related
+
+---
 
 ## Code-Domain Explanation
 
-Rule 8.1 forbids the semicolon in all code documentation. The semicolon lets a writer pack two or more independent clauses into one sentence. In code documentation, this compression makes sentences hard to parse, especially for non-native English readers. The semicolon also has a different meaning in many programming languages (statement terminator in C, Java, JavaScript, Rust, Go), which creates cognitive interference when the same symbol appears in documentation prose.
+Rule 8.1 forbids the semicolon in all code documentation. The semicolon lets a writer pack two or more independent clauses into one sentence. In code documentation, this compression makes sentences hard to parse, especially for non-native English readers. The semicolon also has a different meaning in many programming languages (statement terminator in C, C++, Java, JavaScript, Rust, Go), which creates cognitive interference when the same symbol appears in documentation prose.
 
 The fix is always the same: split the semicolon-separated sentence into two or more independent sentences. Each sentence stands alone with its own subject and verb. The reader processes one complete thought before moving to the next. This aligns with Rule 3.1 (use simple sentences) and Rule 4.1 (keep sentences short).
 
@@ -50,16 +120,21 @@ README files describe project purpose, installation, usage, and contribution gui
 
 Example of a semicolon violation in a README:
 
-```
-The server supports WebSocket connections; these use a persistent
-channel instead of the standard request-response cycle.
-```
+> **Non-STE:** The server supports WebSocket connections; these use a persistent channel instead of the standard request-response cycle.
 
-The second clause ("these use a persistent channel...") explains what WebSocket connections are. It deserves its own sentence:
+> **STE:** The server supports WebSocket connections. These connections use a persistent channel instead of the standard request-response cycle.
 
-```
+A full README section that applies the rule:
+
+```markdown
+## Real-Time Updates
+
 The server supports WebSocket connections. These connections use a
 persistent channel instead of the standard request-response cycle.
+
+Open a connection to `/ws` after the client signs in. The server
+pushes an event when a record changes. Close the connection on sign-out
+to free the channel.
 ```
 
 ### API Documentation
@@ -68,17 +143,23 @@ API documentation describes endpoints, parameters, request bodies, and response 
 
 Example of a semicolon violation in API docs:
 
-```
-POST /sessions creates a new session and returns a token; the token
-must be included in the Authorization header of subsequent requests.
-```
+> **Non-STE:** POST /sessions creates a new session and returns a token; the token must be included in the Authorization header of subsequent requests.
 
-The first clause describes the operation. The second clause gives a usage requirement. Each is a complete thought:
+> **STE:** A POST request to /sessions makes a new session and returns a token. You must include the token in the Authorization header of all later requests.
 
-```
-A POST request to /sessions makes a new session and returns a token.
-You must include the token in the Authorization header of all later
-requests.
+A full OpenAPI description block that applies the rule:
+
+```yaml
+/sessions:
+  post:
+    summary: Make a new session and return a token.
+    description: >
+      A POST request to /sessions makes a new session and returns a token.
+      You must include the token in the Authorization header of all later
+      requests.
+    responses:
+      '201':
+        description: The session was created.
 ```
 
 ### Docstrings and Inline Comments
@@ -87,16 +168,30 @@ Docstrings describe what a function does, what parameters it accepts, and what i
 
 Example of a semicolon violation in a docstring:
 
-```
-Returns the user record if found; raises UserNotFoundError otherwise.
-```
+> **Non-STE:** Returns the user record if found; raises UserNotFoundError otherwise.
 
-Split into a bullet list or two sentences:
+> **STE:** The function returns the user record when the user ID matches a database entry. The function raises a UserNotFoundError when the user ID does not match any entry.
 
-```
-Returns:
-    - The user record when the user ID matches a database entry.
-    - A UserNotFoundError when the user ID does not match any entry.
+A full docstring that applies the rule:
+
+```python
+def get_user(user_id: str) -> User:
+    """Get the user record for the given identifier.
+
+    The function returns the user record when the user ID matches a
+    database entry. The function raises a UserNotFoundError when the
+    user ID does not match any entry.
+
+    Parameters:
+        user_id: The identifier of the user.
+
+    Returns:
+        The matching user record.
+    """
+    record = db.query(User).filter_by(id=user_id).first()
+    if record is None:
+        raise UserNotFoundError(user_id)
+    return record
 ```
 
 ### Commit Messages
@@ -105,34 +200,89 @@ Commit messages describe what changed and why. The subject line is one sentence 
 
 Example of a semicolon violation in a commit message body:
 
-```
-The cache layer now uses a TTL of 300 seconds; expired entries
-are evicted by a background thread rather than on access.
-```
+> **Non-STE:** The cache layer now uses a TTL of 300 seconds; expired entries are evicted by a background thread rather than on access.
 
-Two distinct facts: the TTL value and the eviction strategy. They belong in separate sentences:
+> **STE:** The cache layer now uses a TTL of 300 seconds. Expired entries are evicted by a background thread rather than on access.
 
-```
-The cache layer now uses a TTL of 300 seconds. Expired entries
-are evicted by a background thread rather than on access.
+A full commit message that applies the rule:
+
+```text
+Use a 300-second TTL for the cache
+
+The cache layer now uses a TTL of 300 seconds. Expired entries are
+evicted by a background thread rather than on access. This change
+stops the handler thread from blocking on cache misses.
 ```
 
 ### Error Messages
 
-Error messages tell the user what went wrong and what to do next. Semicolons often appear when the error condition and the recovery action are joined into one sentence. The fix: write the error condition as one sentence. Write the recovery action as a second sentence. Better yet, follow the error message pattern: "X is not found. Do Y to fix this."
+Error messages tell the user what went wrong and what to do next. Semicolons often appear when the error condition and the recovery action are joined into one sentence. The fix: write the error condition as one sentence. Write the recovery action as a second sentence. Better yet, follow the error message pattern: "X is not valid. Do Y to fix this."
 
 Example of a semicolon violation in an error message:
 
-```
-Invalid port number; specify a value between 1024 and 65535.
+> **Non-STE:** Invalid port number; specify a value between 1024 and 65535.
+
+> **STE:** The port number is not valid. Specify a value between 1024 and 65535.
+
+A full error-string definition that applies the rule:
+
+```python
+def parse_port(value: str) -> int:
+    port = int(value)
+    if not 1024 <= port <= 65535:
+        # The port number is not valid. Specify a value between
+        # 1024 and 65535.
+        raise ValueError(
+            "The port number is not valid. "
+            "Specify a value between 1024 and 65535."
+        )
+    return port
 ```
 
-Two distinct pieces of information: what is wrong and what to do:
+### Configuration Files
 
+Configuration files use comments to explain each option. Semicolons often appear when the writer joins the purpose of an option with its trade-off in one sentence. The fix: write the purpose as one sentence. Write the trade-off as a second sentence. Keep each comment line short.
+
+Example of a semicolon violation in a config comment:
+
+> **Non-STE:** Set this to false for read-heavy workloads; the write path becomes slower but consistency guarantees improve under concurrent access.
+
+> **STE:** Set this option to false for read-heavy workloads. The write path becomes slower with this setting. But the consistency guarantees improve when many clients access the data at the same time.
+
+A full configuration block that applies the rule:
+
+```yaml
+# retry_on_conflict: set this option to true to retry a write when
+# the record changed during the operation. The write path becomes
+# slower with this setting. But the consistency guarantees improve
+# when many clients access the data at the same time.
+retry_on_conflict: true
 ```
-The port number is not valid. Specify a value between 1024 and
-65535.
+
+### Test Documentation
+
+Test files describe what each test checks and what failure means. Semicolons often appear when the writer joins the setup with the assertion in one sentence. The fix: write the setup as one sentence. Write the assertion as a second sentence.
+
+Example of a semicolon violation in a test comment:
+
+> **Non-STE:** This test creates a user with an empty name; the API must reject the request with a 400 status.
+
+> **STE:** This test creates a user with an empty name. The API must reject the request with a 400 status.
+
+A full test docstring that applies the rule:
+
+```python
+def test_reject_empty_name():
+    """Check that the API rejects a user with an empty name.
+
+    This test creates a user with an empty name. The API must reject
+    the request with a 400 status.
+    """
+    response = client.post("/users", json={"name": ""})
+    assert response.status_code == 400
 ```
+
+---
 
 ## Paradigm-Specific Guidance
 
@@ -144,16 +294,31 @@ Pattern: Write the constructor's initialization behavior as one sentence. Write 
 
 Example of a semicolon violation in a class docstring:
 
-```
-The ConnectionPool constructor opens N connections to the database;
-the pool is immediately ready for use after construction.
-```
+> **Non-STE:** The ConnectionPool constructor opens N connections to the database; the pool is immediately ready for use after construction.
 
-Split the initialization step and the readiness guarantee:
+> **STE:** The ConnectionPool constructor opens N connections to the database. The pool is ready for use immediately after the constructor returns.
 
-```
-The ConnectionPool constructor opens N connections to the database.
-The pool is ready for use immediately after the constructor returns.
+A full class docstring that applies the rule:
+
+```python
+class ConnectionPool:
+    """Manage a set of reusable database connections.
+
+    The ConnectionPool constructor opens N connections to the database.
+    The pool is ready for use immediately after the constructor returns.
+
+    The get_connection method returns a free connection from the pool.
+    The release_connection method returns a used connection to the pool.
+    """
+
+    def __init__(self, size: int):
+        self._pool = [connect() for _ in range(size)]
+
+    def get_connection(self):
+        return self._pool.pop()
+
+    def release_connection(self, conn):
+        self._pool.append(conn)
 ```
 
 ### Functional Paradigm (Haskell, Elixir, Clojure, Rust)
@@ -164,16 +329,27 @@ Pattern: Describe the happy-path transformation as one sentence. Describe the er
 
 Example of a semicolon violation in a Rust docstring:
 
-```
-Parses the input string into a Config struct; returns an Err if any
-field fails validation.
-```
+> **Non-STE:** Parses the input string into a Config struct; returns an Err if any field fails validation.
 
-Two distinct outcomes:
+> **STE:** This function parses the input string into a Config struct. The function returns an Err value when a field does not pass validation.
 
-```
-This function parses the input string into a Config struct. The
-function returns an Err value when a field does not pass validation.
+A full Rust doc comment that applies the rule:
+
+```rust
+/// Parse a configuration string.
+///
+/// This function parses the input string into a Config struct.
+/// The function returns an Err value when a field does not pass
+/// validation.
+///
+/// # Examples
+/// ```
+/// let cfg = parse_config("port = 8080");
+/// assert!(cfg.is_ok());
+/// ```
+pub fn parse_config(src: &str) -> Result<Config, ConfigError> {
+    // ...
+}
 ```
 
 ### Procedural Paradigm (C, Go, Bash)
@@ -184,17 +360,26 @@ Pattern: Write each procedural step as its own sentence. If the steps form a tig
 
 Example of a semicolon violation in a Go function comment:
 
-```
-InitBuffer allocates a 4KB memory block; it fills the block with
-zeros before returning the pointer.
-```
+> **Non-STE:** InitBuffer allocates a 4KB memory block; it fills the block with zeros before returning the pointer.
 
-Two steps in sequence:
+> **STE:** The InitBuffer function allocates a 4 KB memory block. Then it fills the block with zeros. The function returns the pointer after the block is filled.
 
-```
-The InitBuffer function allocates a 4 KB memory block. Then it fills
-the block with zeros. The function returns the pointer after the
-block is filled.
+A full Go comment block that applies the rule:
+
+```go
+// InitBuffer makes a new buffer for raw I/O.
+//
+// The InitBuffer function allocates a 4 KB memory block. Then it fills
+// the block with zeros. The function returns the pointer after the
+// block is filled. Call FreeBuffer to release the memory when you
+// finish with the buffer.
+func InitBuffer() *Buffer {
+    block := make([]byte, 4096)
+    for i := range block {
+        block[i] = 0
+    }
+    return &Buffer{data: block}
+}
 ```
 
 ### Declarative Paradigm (SQL, Terraform, Kubernetes YAML)
@@ -205,16 +390,20 @@ Pattern: Write each resource property as its own sentence. Write each effect of 
 
 Example of a semicolon violation in a Terraform variable description:
 
-```
-The instance_type variable sets the EC2 instance size; valid values
-include t3.micro, t3.small, and t3.medium.
-```
+> **Non-STE:** The instance_type variable sets the EC2 instance size; valid values include t3.micro, t3.small, and t3.medium.
 
-Two independent pieces of information:
+> **STE:** The instance_type variable sets the EC2 instance size. Valid values include t3.micro, t3.small, and t3.medium.
 
-```
-The instance_type variable sets the EC2 instance size. Valid values
-include t3.micro, t3.small, and t3.medium.
+A full Terraform comment block that applies the rule:
+
+```hcl
+# The instance_type variable selects the EC2 instance size.
+# Valid values include t3.micro, t3.small, and t3.medium.
+# The default is t3.small.
+variable "instance_type" {
+  type    = string
+  default = "t3.small"
+}
 ```
 
 ### Systems Paradigm (Rust ownership docs, C memory docs)
@@ -225,68 +414,242 @@ Pattern: Write the ownership or memory rule as one sentence. Write the consequen
 
 Example of a semicolon violation in a Rust safety doc:
 
-```
-The caller must ensure the pointer is non-null and aligned; undefined
-behavior occurs if either condition is violated.
+> **Non-STE:** The caller must ensure the pointer is non-null and aligned; undefined behavior occurs if either condition is violated.
+
+> **STE:** The caller must make sure that the pointer is not null. The caller must also make sure that the pointer is aligned. Undefined Behavior occurs if either condition is not met.
+
+A full Rust safety comment that applies the rule:
+
+```rust
+/// Read a value from a raw pointer.
+///
+/// # Safety
+///
+/// The caller must make sure that the pointer is not null. The caller
+/// must also make sure that the pointer is aligned. Undefined Behavior
+/// occurs if either condition is not met.
+///
+/// The caller must make sure that the pointer points to valid,
+/// initialized memory. The memory must not be mutated by another
+/// thread during the read.
+pub unsafe fn read_value(ptr: *const u32) -> u32 {
+    *ptr
+}
 ```
 
-The safety requirement and its consequence must be separate and unmissable:
-
-```
-The caller must make sure that the pointer is not null. The caller
-must also make sure that the pointer is aligned. Undefined Behavior
-occurs if either condition is not met.
-```
+---
 
 ## Extended Examples
 
 ### Example 3 — API Endpoint: Two effects of a mutation
 
 > **Non-STE:** PATCH /config updates the runtime settings and writes the new values to disk immediately; a restart is not required for the changes to take effect.
->
+
+```yaml
+/config:
+  patch:
+    summary: Update runtime settings.
+    description: >
+      PATCH /config updates the runtime settings and writes the new
+      values to disk immediately; a restart is not required for the
+      changes to take effect.
+```
+
 > **STE:** A PATCH request to /config updates the runtime settings and writes the new values to disk. A restart is not necessary for the changes to take effect.
->
+
+```yaml
+/config:
+  patch:
+    summary: Update runtime settings.
+    description: >
+      A PATCH request to /config updates the runtime settings and
+      writes the new values to disk. A restart is not necessary for
+      the changes to take effect.
+```
+
 > *Principles applied: P1 (split semicolon into two sentences), Rule 4.1 (each sentence under 25 words). The first sentence describes the operation. The second sentence states the operational benefit. The reader gets two complete, independent thoughts.*
 
 ### Example 4 — Docstring: Multiple return conditions
 
 > **Non-STE:** Returns the parsed configuration as a dict if the file is valid YAML; returns an empty dict if the file is empty; raises ConfigError if the file contains invalid syntax.
->
+
+```python
+def load_config(path: str) -> dict:
+    """Returns the parsed configuration as a dict if the file is valid YAML;
+    returns an empty dict if the file is empty; raises ConfigError if the
+    file contains invalid syntax."""
+    ...
+```
+
 > **STE:** The function returns the parsed configuration as a dict when the file is valid YAML. The function returns an empty dict when the file is empty. The function raises a ConfigError when the file contains incorrect syntax.
->
+
+```python
+def load_config(path: str) -> dict:
+    """Load configuration data from a YAML file.
+
+    The function returns the parsed configuration as a dict when the
+    file is valid YAML. The function returns an empty dict when the
+    file is empty. The function raises a ConfigError when the file
+    contains incorrect syntax.
+
+    Parameters:
+        path: The path to the configuration file.
+
+    Returns:
+        The parsed configuration as a dict.
+    """
+    ...
+```
+
 > *Principles applied: P1 (split semicolon chain into three sentences), Rule 3.1 (each sentence is a simple subject-verb-object clause). The original had three independent clauses joined by two semicolons. Each clause now stands alone with a repeated subject ("The function") for clarity.*
 
 ### Example 5 — Commit Message: Two independent facts
 
 > **Non-STE:** The authentication middleware now checks token expiry before decoding; expired tokens return a 401 before reaching the route handler.
->
+
+```text
+auth: check token expiry first
+
+The authentication middleware now checks token expiry before decoding;
+expired tokens return a 401 before reaching the route handler.
+```
+
 > **STE:** The authentication middleware now checks token expiry before decoding. Expired tokens return a 401 status code before they reach the route handler.
->
+
+```text
+auth: check token expiry first
+
+The authentication middleware now checks token expiry before decoding.
+Expired tokens return a 401 status code before they reach the route
+handler.
+```
+
 > *Principles applied: P1 (split semicolon), Rule 3.1 (simple sentences). The first sentence states the behavioral change. The second sentence states the user-visible effect. Each fact is independently verifiable in the diff.*
 
 ### Example 6 — Error Message: Condition and recovery
 
 > **Non-STE:** Database connection timed out after 30 seconds; check that the DB_HOST environment variable is set correctly and the server is reachable.
->
+
+```python
+raise ConnectionError(
+    "Database connection timed out after 30 seconds; check that the "
+    "DB_HOST environment variable is set correctly and the server is "
+    "reachable."
+)
+```
+
 > **STE:** The database connection timed out after 30 seconds. Check that the DB_HOST environment variable is set correctly. Make sure that the server is reachable.
->
+
+```python
+raise ConnectionError(
+    "The database connection timed out after 30 seconds. "
+    "Check that the DB_HOST environment variable is set correctly. "
+    "Make sure that the server is reachable."
+)
+```
+
 > *Principles applied: P1 (split semicolon), Rule 6.1 (imperative mood for recovery action). The error condition is one sentence. The two recovery checks are two imperative sentences. The user reads the problem, then executes the fixes one at a time.*
 
 ### Example 7 — README: Feature and constraint
 
 > **Non-STE:** The plugin system supports hot-reloading during development; production builds load plugins at startup only and cannot reload them without a restart.
->
+
+```markdown
+## Plugins
+
+The plugin system supports hot-reloading during development; production
+builds load plugins at startup only and cannot reload them without a
+restart.
+```
+
 > **STE:** The plugin system supports hot-reloading during development. Production builds load plugins at startup only. These builds cannot reload plugins without a restart.
->
+
+```markdown
+## Plugins
+
+The plugin system supports hot-reloading during development. Production
+builds load plugins at startup only. These builds cannot reload
+plugins without a restart.
+```
+
 > *Principles applied: P1 (split semicolon), P1 (demonstrative adjective "these"), Rule 4.4 (connecting words). The original had a semicolon and an "and" inside the second clause. The fix splits into three clean sentences with a demonstrative adjective linking the last two.*
 
 ### Example 8 — Configuration File Comment: Option and trade-off
 
 > **Non-STE:** Set this to false for read-heavy workloads; the write path becomes slower but consistency guarantees improve under concurrent access.
->
+
+```yaml
+# read_optimized: set this to false for read-heavy workloads; the
+# write path becomes slower but consistency guarantees improve under
+# concurrent access.
+read_optimized: false
+```
+
 > **STE:** Set this option to false for read-heavy workloads. The write path becomes slower with this setting. But the consistency guarantees improve when many clients access the data at the same time.
->
+
+```yaml
+# read_optimized: set this option to false for read-heavy workloads.
+# The write path becomes slower with this setting. But the consistency
+# guarantees improve when many clients access the data at the same
+# time.
+read_optimized: false
+```
+
 > *Principles applied: P1 (split semicolon), P1 (connecting word "but"), Rule 4.4. The first sentence gives the instruction. The second states the cost. The third states the benefit. The trade-off is explicit and the reader weighs both sides independently.*
+
+### Example 9 — Inline Comment: Two sequential steps
+
+> **Non-STE:** Acquire the lock then read the shared counter; release the lock after you record the value.
+
+```go
+// Acquire the lock then read the shared counter; release the lock
+// after you record the value.
+mu.Lock()
+count := sharedCounter
+mu.Unlock()
+log.Printf("count=%d", count)
+```
+
+> **STE:** Acquire the lock. Then read the shared counter. Release the lock after you record the value.
+
+```go
+// Acquire the lock. Then read the shared counter. Release the lock
+// after you record the value.
+mu.Lock()
+count := sharedCounter
+mu.Unlock()
+log.Printf("count=%d", count)
+```
+
+> *Principles applied: P1 (split semicolon), Rule 4.4 (connecting word "then"). The two steps become three short sentences. Each step is a clear, separate instruction.*
+
+### Example 10 — Pull Request Description: Two linked claims
+
+> **Non-STE:** This change removes the global singleton; all callers must now pass a Logger instance to the constructor.
+
+```markdown
+## Summary
+
+This change removes the global singleton; all callers must now pass a
+Logger instance to the constructor.
+```
+
+> **STE:** This change removes the global singleton. All callers must now pass a Logger instance to the constructor.
+
+```markdown
+## Summary
+
+This change removes the global singleton. All callers must now pass a
+Logger instance to the constructor.
+
+## Migration
+
+Update each `new Service()` call to `new Service(logger)`.
+```
+
+> *Principles applied: P1 (split semicolon). The removal and the caller requirement are two separate facts. The STE version splits them and adds a Migration section so each fact gets its own space.*
+
+---
 
 ## Edge Cases
 
@@ -298,6 +661,19 @@ Guidance: Do not remove semicolons from code examples to comply with Rule 8.1. T
 
 > **NOTE:** When you show a code snippet inline with backticks (`const x = 5;`), the semicolon inside the backticks is permitted. The backtick boundary separates code tokens from prose tokens.
 
+Example of the correct boundary:
+
+```javascript
+// This function declares a constant and returns its doubled value.
+// The semicolons below are JavaScript syntax, not documentation prose.
+function doubleValue(x) {
+  const result = x * 2;
+  return result;
+}
+```
+
+The comment lines above use no semicolons. The `const result = x * 2;` line keeps its semicolon because it is code.
+
 ### Edge Case 2 — Semicolons in Generated Documentation
 
 Auto-generated documentation (OpenAPI spec descriptions, protobuf source comments, JSDoc output, Javadoc output) may contain semicolons inserted by the generator. These are not under the writer's control.
@@ -306,6 +682,23 @@ Guidance: When you write the source comments that feed into the generator (JSDoc
 
 > **NOTE:** For documentation that you author directly (README files, hand-written API docs, commit messages), Rule 8.1 applies in full. The generator exemption applies only to machine-composed output that you cannot control.
 
+Example of a source comment that you control:
+
+```python
+def send_email(to: str, subject: str) -> bool:
+    """Send an email to the given address. Return true when the send succeeds.
+
+    Parameters:
+        to: The recipient address.
+        subject: The email subject.
+
+    Returns:
+        True when the email was sent. False when the send failed.
+    """
+```
+
+Write the source comment with periods only. If the generator joins these lines with a semicolon in the rendered page, that is a generator defect.
+
 ### Edge Case 3 — When a Semicolon Appears Inside a Quoted String
 
 Documentation sometimes quotes error messages, log output, or terminal text that contains semicolons. A quoted string is not your prose — it is the thing being quoted. Do not modify the content of quoted strings to remove semicolons.
@@ -313,7 +706,7 @@ Documentation sometimes quotes error messages, log output, or terminal text that
 Guidance: Keep the semicolon inside the quoted material. Use quotation marks or a code block to delimit the quoted text. The surrounding prose must obey Rule 8.1. The quoted material is exempt.
 
 > **STE:** The compiler shows the error message: "missing semicolon at line 42; expected ';' after expression." Add a semicolon at the end of line 42 to fix this error.
->
+
 > *The semicolons inside the quoted error message are preserved. The prose that explains the fix ("Add a semicolon...") uses no semicolons. The reader can see the exact compiler output while the documentation prose remains compliant.*
 
 ### Edge Case 4 — Lists That Look Like Semicolon-Separated Clauses
@@ -323,15 +716,23 @@ Some writers use a semicolon as a list separator for complex list items (items t
 Guidance: In STE-Code, do not use semicolons as super-commas in lists. Instead, structure the list as a bullet list or a table. Each list item becomes a separate line with its own sentence or phrase. This removes the need for semicolons entirely and improves readability.
 
 > **Non-STE:** The endpoint accepts three query parameters: `sort`, which sets the sort field; `order`, which must be "asc" or "desc"; and `limit`, which caps the result count.
->
+
 > **STE:** The endpoint accepts three query parameters:
 > - `sort` — Sets the sort field.
 > - `order` — Must be "asc" or "desc."
 > - `limit` — Caps the result count.
->
+
 > *Principles applied: P1 (no semicolons), Rule 3.3 (use lists for complex items). The bullet list replaces the super-comma structure. Each parameter gets its own line with a clear description.*
 
-### Edge Case 5 — Winking Semicolons in Chat and Informal Communication
+A full parameter table that applies the rule:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `sort` | string | Sets the sort field. |
+| `order` | string | Must be "asc" or "desc." |
+| `limit` | integer | Caps the result count. The default is 20. |
+
+### Edge Case 5 — Semicolons in Chat and Informal Communication
 
 Some development teams use semicolons in chat messages, code review comments, and informal wiki pages as a stylistic convention. This is not code documentation in the STE-Code sense — it is informal communication.
 
@@ -339,15 +740,31 @@ Guidance: Rule 8.1 applies to formal code documentation: README files, API refer
 
 > **NOTE:** This edge case does not create a loophole for commit messages. Commit messages are permanent repository history and must follow Rule 8.1. The exemption applies only to ephemeral communication channels like chat and code review comments.
 
+### Edge Case 6 — Semicolon Inside a Regular Expression or Data String
+
+Some documentation shows a regular expression, a CSV row, or a data format that uses a semicolon as a delimiter. The semicolon is part of the data, not the prose.
+
+Guidance: Keep the semicolon inside the code span or code block that holds the data. The prose that explains the pattern must not use semicolons.
+
+> **STE:** The parser splits each row on the `;` character. Put one field between each pair of semicolons. Use a quoted field when the value contains a semicolon.
+
+The three code spans above (`;`, `;`, and `;`) hold data delimiters. The surrounding sentences use periods only.
+
+---
+
 ## Cross-References
 
 - **Rule 1.1 — Use Approved Words:** The words you use to connect split sentences (and, but, thus, then) must come from the STE-Code approved dictionary. Do not invent new connecting words to replace semicolons.
 - **Rule 1.3 — Use Words Only with Their Approved Meanings:** When you split a semicolon sentence into two, make sure each connecting word you add carries its approved meaning. Do not use "thus" to mean "and" or "but" to mean "then."
 - **Rule 3.1 — Use Simple Sentences:** The fix for a semicolon violation is always to write two or more simple sentences. If either resulting sentence is complex, simplify it further.
+- **Rule 3.3 — Use Lists for Complex Items:** When a semicolon serves as a super-comma in a list, replace the list with bullets or a table (see Edge Case 4).
 - **Rule 4.1 — Keep Sentences Short:** Semicolons let you evade the 20-word (procedural) and 25-word (descriptive) sentence length limits. Removing semicolons and splitting sentences makes length compliance verifiable.
 - **Rule 4.4 — Use Connecting Words and Connecting Phrases to Connect Sentences:** After splitting a semicolon sentence, use a connecting word or phrase to show the logical relationship between the two new sentences. The connecting word replaces the semicolon and adds semantic clarity.
+- **Rule 6.3 — Write Short Sentences (Maximum 25 Words):** Short sentences make the split from a semicolon easy to verify by word count.
 - **Rule 8.2 — Use Hyphens to Connect Words That Are Directly Related:** Hyphens connect words. Semicolons connect clauses. Do not confuse these two punctuation marks. If you are connecting words, use a hyphen. If you are connecting clauses, split into two sentences.
 - **STE-Code Dictionary — Section: Punctuation:** The dictionary defines all approved punctuation marks and their usage constraints. Consult it for the full list of permitted punctuation and the rules for each mark.
+
+---
 
 ## Grammar Notes
 
