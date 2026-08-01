@@ -17,19 +17,33 @@ API docs, docstrings, commit messages, and error messages.
 ## Adaptation levels
 
 Each level is a **directory of small sub-documents** (so an LLM reads/writes
-files of a few hundred KB at most, never one 1.8 MB monster). Pick the level
+files of a few tens of KB at most, never one 1.8 MB monster). Pick the level
 that fits your token budget:
 
-| Level | Directory | Approx. size | Best for |
-|:-----:|-----------|:------------:|----------|
-| **-2** | [`ste-code/artifacts/level-2/`](ste-code/artifacts/level-2/) | ~5 KB | Ultra-minimal: the 14 core principles only |
-| **-1** | [`ste-code/artifacts/level-1/`](ste-code/artifacts/level-1/) | ~12 KB | Minimal: core principles + synonym table |
-| **0** | [`ste-code/artifacts/level0/`](ste-code/artifacts/level0/) | ~25 KB | Baseline: + short dictionary excerpt |
-| **1** | [`ste-code/artifacts/level1/`](ste-code/artifacts/level1/) | ~35 KB | + doc templates (code review / PR feedback) |
-| **2** | [`ste-code/artifacts/level2/`](ste-code/artifacts/level2/) | ~45 KB | + section-specific grammar rules |
-| **3** | [`ste-code/artifacts/level3/`](ste-code/artifacts/level3/) | ~1.8 MB | + complete dictionary + all 54 rules |
-| **4** | [`ste-code/artifacts/level4/`](ste-code/artifacts/level4/) | ~1.8 MB | + extensions + reference catalogue |
-| **5** | [`ste-code/artifacts/level5/`](ste-code/artifacts/level5/) | ~1.8 MB | Full standard (all rules + extensions + catalogue + provenance) |
+| Level | Directory | Size on disk | Tokens | Best for |
+|:-----:|-----------|:------------:|:------:|----------|
+| **-2** | [`ste-code/artifacts/level-2/`](ste-code/artifacts/level-2/) | 5 KB | ~1.2K | Ultra-minimal: the 14 core principles only |
+| **-1** | [`ste-code/artifacts/level-1/`](ste-code/artifacts/level-1/) | 26 KB | ~5.9K | Minimal: core principles + synonym table |
+| **0** | [`ste-code/artifacts/level0/`](ste-code/artifacts/level0/) | 17 KB | ~4.3K | Baseline: + short dictionary excerpt |
+| **1** | [`ste-code/artifacts/level1/`](ste-code/artifacts/level1/) | 58 KB | ~14.5K | + doc templates (code review / PR feedback) |
+| **2** | [`ste-code/artifacts/level2/`](ste-code/artifacts/level2/) | 75 KB | ~18.5K | + section-specific grammar rules |
+| **3** | [`ste-code/artifacts/level3/`](ste-code/artifacts/level3/) | 388 KB | ~95K | + complete dictionary + all 54 rules |
+| **4** | [`ste-code/artifacts/level4/`](ste-code/artifacts/level4/) | 462 KB | ~116K | + extensions + reference catalogue |
+| **5** | [`ste-code/artifacts/level5/`](ste-code/artifacts/level5/) | 539 KB | ~134K | Full standard (all rules + extensions + catalogue + provenance) |
+
+Sizes are the measured sum of each tier's sub-documents. Token counts come from
+the `o200k_base` tokenizer (GPT-4o / GPT-4.1 / GPT-5 / o-series); `cl100k_base`
+(GPT-4, GPT-3.5-turbo) lands within 0.3% of the same figures, and Claude and
+Llama tokenizers stay within a few percent for English prose. Regenerate the
+table with:
+
+```bash
+python3 .agents/tools/maintenance/measure_artifacts.py
+```
+
+Two sub-documents are still base boilerplate rather than distilled output
+(`level3/03-dictionary.md`, `level5/rules-sec7.md`). When Phase F distills them,
+level 3 moves to ~95K tokens and level 5 drops to ~110K tokens.
 
 Two **consolidated** deliverables are also produced for tooling that wants one
 file:
@@ -152,14 +166,16 @@ lost and never silently truncated:
 1. **Deterministic level separation** — `levels_scaffold.py` reads `ste-code/final/`
    and emits, for each of the 8 tiers, a directory of **bounded sub-documents**
    (`ste-code/artifacts/_base/level<N>/…`). Oversized rule sections are split so
-   no sub-doc exceeds ~450 KB. This is the boilerplate layer; it is
+   no base sub-doc exceeds 400 KB. This is the boilerplate layer; it is
    byte-reproducible and needs no LLM.
 2. **LLM distillation pass** — `distill_one.py` runs one Hermes session per
    sub-document. The worker reads its base sub-doc (plus `ste-code/final/` for
    anything outside it) and rewrites it into an LLM-optimized file at
    `ste-code/artifacts/level<N>/<subdoc>`, writing in multiple `write_file` /
    `patch` calls. On any failure it falls back to the deterministic base, so
-   nothing is lost. Each worker commits its sub-doc turn-by-turn.
+   nothing is lost. Each worker commits its sub-doc turn-by-turn. Distillation
+   takes the 1.85 MB base tier down to 388–539 KB; the largest distilled
+   sub-document is 123 KB.
 3. **Deterministic assembler** — `artifact_batch.py` concatenates `ste-code/final/`
    into `ste-code-rules.md` and `ste-code-system-prompt.md` (full rule coverage,
    version-stamped). No LLM, no truncation.
