@@ -17,27 +17,82 @@ In descriptive code documentation, the maximum sentence length is 25 words. This
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: "The Instrument Landing System (the system) on the aircraft shows data that helps the pilot during the approach to the runway." (ASD-STE100 Issue 9, p. 91)  |  STE: "The authentication middleware validates each incoming request before the controller processes it." (code-domain compliant rewrite)
+
 > **STE:** The authentication middleware validates each incoming request before the controller processes it. (11 words)
 >
 > *Code-domain example — a short, single-subject sentence that respects the 25-word limit.*
+>
+> ```python
+> # auth/middleware.py
+> async def auth_middleware(request: Request, call_next):
+>     # Validate the token on every request.
+>     # Stop the request if the token is not valid.
+>     user = validate_token(request.headers.get("Authorization"))
+>     if user is None:
+>         raise HTTPException(401, "The token is not valid.")
+>     request.state.user = user
+>     return await call_next(request)
+> ```
 
 > **Non-STE:** This function provides the ability to run arbitrary software applications within a sandboxed execution environment that isolates system resources. (21 words)
 >
 > **STE:** This function lets you run software applications in a sandbox. The sandbox isolates system resources. (8 words and 5 words)
 >
 > *Code-domain example — breaking one complex sentence into two shorter sentences improves clarity, even when the original is under 25 words.*
+>
+> ```python
+> # runner/sandbox.py
+> def run_in_sandbox(app: Path, sandbox: Sandbox) -> int:
+>     """Run a software application inside a sandbox.
+>
+>     The sandbox isolates the system resources.
+>     It returns the exit code of the application.
+>     """
+>     sandbox.mount_volume(app)
+>     return sandbox.execute([str(app)])
+> ```
 
 > **Non-STE:** The configuration loader reads the YAML manifest file from the filesystem and parses it into an in-memory representation that other modules can query at runtime to determine their operational parameters. (32 words)
 >
 > **STE:** The configuration loader reads the YAML manifest file from the filesystem. It parses the file into an in-memory representation. Other modules can query this representation at runtime. They use it to find their operational parameters. (20 words, 8 words, 7 words, and 8 words)
 >
 > *Code-domain example — a 32-word sentence is split into four sentences, each under the 25-word limit.*
+>
+> ```python
+> # config/loader.py
+> def load_config(path: Path) -> Config:
+>     """Read the YAML manifest from the filesystem.
+>
+>     Parse the file into an in-memory representation.
+>     Other modules query this representation at runtime.
+>     They use it to find their operational parameters.
+>     """
+>     raw = path.read_text()
+>     data = yaml.safe_load(raw)
+>     return Config(data)
+> ```
 
 > **Non-STE:** The cache invalidation strategy employs a time-to-live mechanism combined with a least-recently-used eviction policy to ensure that stale data is removed and memory consumption remains within the allocated heap budget. (34 words)
 >
 > **STE:** The cache invalidation strategy uses a time-to-live mechanism. It also uses a least-recently-used eviction policy. Together, these mechanisms remove stale data. They also keep memory consumption within the allocated heap budget. (16 words, 10 words, 7 words, and 10 words)
 >
 > *Code-domain example — a 34-word sentence is split into four sentences, each under the 25-word limit.*
+>
+> ```python
+> # cache/policy.py
+> class CachePolicy:
+>     """Control how the cache removes stale entries.
+>
+>     The policy uses a time-to-live mechanism.
+>     It also uses a least-recently-used eviction policy.
+>     Together, these mechanisms remove stale data.
+>     They keep memory use within the heap budget.
+>     """
+>     def __init__(self, ttl_seconds: int, max_entries: int) -> None:
+>         self.ttl_seconds = ttl_seconds
+>         self.max_entries = max_entries
+> ```
 
 > **See also:** Rule 6.1 — Give Information Gradually; Rule 6.2 — Use Key Words and Key Phrases to Give Your Text a Logical Structure; Rule 6.4 — Use Paragraphs to Show Related Information; Rule 6.5 — Make Sure That Each Paragraph Has Only One Topic
 
@@ -49,11 +104,41 @@ README files are the first document a new contributor reads. Long sentences in a
 
 A README that obeys the 25-word limit helps readers scan quickly. They can find the install steps without reading a dense paragraph. They can find the API example without parsing a complex sentence.
 
+```markdown
+# DataSync
+
+DataSync copies files between cloud storage providers.
+It supports AWS S3, Google Cloud Storage, and Azure Blob.
+Install it with `pip install datasync`.
+Set your credentials in the `.env` file before you run it.
+```
+
 ### API Documentation
 
 API reference docs describe endpoints, parameters, responses, and error codes. Each of these parts must stand alone. A 40-word sentence that mixes the URL, the method, the parameters, and the response is not useful. Instead, use one short sentence for each part.
 
 For example, describe the endpoint path and method in one sentence. Describe each parameter in its own sentence. Describe the response schema in separate sentences for each field. This structure matches the way developers read API docs: they scan for the one detail they need.
+
+```yaml
+# openapi.yaml (documented descriptions)
+/orders/{id}:
+  get:
+    summary: Get one order by its ID.
+    parameters:
+      - name: id
+        description: The unique ID of the order.
+        required: true
+        in: path
+        schema:
+          type: string
+    responses:
+      '200':
+        description: The request succeeded.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+```
 
 ### Docstrings
 
@@ -61,11 +146,32 @@ Docstrings have limited space. A short sentence communicates the function's purp
 
 Follow this pattern for docstrings: one sentence for the purpose, one sentence for each parameter, one sentence for the return value, and one sentence for each exception. Each sentence must stay under 25 words.
 
+```python
+def send_email(to: str, subject: str, body: str) -> bool:
+    """Send one email to the address you give.
+
+    The `to` argument is the recipient email address.
+    The `subject` argument is the email subject line.
+    The `body` argument is the plain-text email content.
+    The function returns True when the send succeeds.
+    It raises `SMTPError` when the mail server rejects the send.
+    """
+```
+
 ### Commit Messages
 
 Commit messages benefit from the same discipline. A commit subject line must not exceed 72 characters. But the sentence structure also matters. Use one short sentence to describe the change. Use additional short sentences in the body to explain why.
 
 Avoid packing multiple logical changes into one sentence. If the commit does three things, use three sentences. This makes `git log` output readable and bisect debugging faster.
+
+```text
+Add a retry loop to the payment client
+
+The payment API fails under load.
+Add a retry loop with a backoff delay.
+Log each retry with the request ID.
+Keep the retry count under the API quota.
+```
 
 ### Error Messages
 
@@ -74,6 +180,11 @@ Error messages must be clear and actionable. A long error message buries the cau
 Structure error messages in two parts: the problem and the action. For example: "The database connection failed. Check your network connection and credentials." Each part is a short sentence under 25 words.
 
 Error messages in log files also benefit from short sentences. Log aggregation tools parse messages by line. A single long sentence that spans 40 words is harder to search and filter.
+
+```text
+The migration failed. The "users" table already exists.
+Drop the table or set FORCE_MIGRATE=true to continue.
+```
 
 ## Paradigm-Specific Guidance
 
@@ -85,6 +196,20 @@ Instead, break the inheritance and the behavior into separate sentences:
 
 > The `AuthenticatedController` class extends `BaseController`. It implements the `Auditable` and `Loggable` interfaces. These interfaces add authentication-aware request handling. They also add audit trail support.
 
+```python
+class AuthenticatedController(BaseController):
+    """Handle requests that need a logged-in user.
+
+    This class extends BaseController.
+    It implements the Auditable interface.
+    It implements the Loggable interface.
+    These interfaces add authentication-aware request handling.
+    They also add audit trail support.
+    """
+    def handle(self, request: Request) -> Response:
+        ...
+```
+
 When documenting a class with many methods, do not describe all methods in one sentence. Describe each method in its own sentence or paragraph.
 
 ### Functional Documentation
@@ -95,6 +220,13 @@ Split the composition from the error behavior:
 
 > The `processOrder` function composes three functions: `validateOrder`, `calculateTotal`, and `applyDiscount`. It uses a monadic pipeline. The pipeline stops on the first validation failure. It collects errors in an `Either` type.
 
+```haskell
+-- Process an order through three pure steps.
+-- The pipeline stops on the first failure.
+processOrder :: Order -> Either [Error] Receipt
+processOrder = validateOrder >=> calculateTotal >=> applyDiscount
+```
+
 Pure function signatures are short by nature. But the prose that explains them must also be short.
 
 ### Procedural Documentation
@@ -104,6 +236,19 @@ Procedural code follows a sequence of steps. Documentation for procedural code m
 Do not combine three steps into one sentence. This pattern: "The function allocates a buffer, copies the input data into the buffer, and returns a pointer to the caller." is acceptable at 22 words. But it is better to split the allocation from the copy for clarity when safety is important:
 
 > The function allocates a buffer. It copies the input data into the buffer. It returns a pointer to the caller.
+
+```c
+/* Copy the input string into a heap buffer.
+ * The caller must free the returned pointer.
+ */
+char *copy_input(const char *input) {
+    size_t len = strlen(input) + 1;   /* Allocate the buffer. */
+    char *buf = malloc(len);          /* Allocate a buffer. */
+    if (!buf) return NULL;
+    memcpy(buf, input, len);          /* Copy the data into the buffer. */
+    return buf;                       /* Return the pointer to the caller. */
+}
+```
 
 Procedural documentation for C and Go code often documents preconditions and postconditions. Give each condition its own sentence.
 
@@ -117,6 +262,20 @@ Instead:
 
 > The `aws_instance` resource creates an EC2 instance. It launches the instance in the specified subnet. It applies the given security groups. It attaches the provided IAM instance profile.
 
+```hcl
+# aws_instance.tf
+resource "aws_instance" "web" {
+  # Launch an EC2 instance.
+  # Start the instance in the "web" subnet.
+  # Apply the "web-sg" security group.
+  # Attach the "web-profile" IAM instance profile.
+  ami           = "ami-0abc123"
+  subnet_id     = aws_subnet.web.id
+  vpc_security_group_ids = [aws_security_group.web.id]
+  iam_instance_profile = aws_iam_instance_profile.web.name
+}
+```
+
 ### Systems Documentation
 
 Systems documentation describes memory models, ownership rules, and concurrency guarantees. These topics are inherently complex. Short sentences are essential here.
@@ -124,6 +283,18 @@ Systems documentation describes memory models, ownership rules, and concurrency 
 Rust ownership documentation is a good example. The Rust Book uses short sentences to explain borrowing and lifetimes. A concept like "the borrow checker ensures that references do not outlive the data they refer to by tracking lifetimes at compile time" is 25 words. But Rust documentation often splits this further:
 
 > The borrow checker tracks references. It makes sure that references do not outlive their data. It does this at compile time. It uses lifetimes to enforce these rules.
+
+```rust
+/// Track a borrowed value.
+///
+/// The borrow checker tracks each reference.
+/// It makes sure references do not outlive their data.
+/// It does this check at compile time.
+/// It uses lifetimes to enforce the rules.
+fn print_length(s: &String) {
+    println!("Length: {}", s.len());
+}
+```
 
 Systems documentation also covers unsafe code blocks, FFI boundaries, and memory layout. These are safety-critical topics. Short sentences reduce the risk of misunderstanding.
 
@@ -137,6 +308,16 @@ Systems documentation also covers unsafe code blocks, FFI boundaries, and memory
 >
 > *Principles applied: P1, P2 — short sentences make each API detail independently scannable. The original sentence mixes four concepts (method, sorting, pagination, filtering). The STE version gives each concept its own sentence.*
 
+```http
+GET /api/v2/users?status=active&sort=-created_at HTTP/1.1
+Host: api.example.com
+Authorization: Bearer <token>
+
+# Response: a paginated list of users.
+# The list is sorted by creation date, newest first.
+# Use the `status` parameter to filter by account status.
+```
+
 ### Example 5 — Commit Message Body
 
 > **Non-STE:** Refactored the JWT middleware to extract token validation into a separate utility module and added comprehensive error handling for expired tokens, malformed headers, and missing claims with descriptive log messages. (31 words)
@@ -144,6 +325,16 @@ Systems documentation also covers unsafe code blocks, FFI boundaries, and memory
 > **STE:** Refactor the JWT middleware. Extract the token validation logic into a utility module. Add error handling for expired tokens. Add error handling for malformed headers. Add error handling for missing claims. Include descriptive log messages. (12 words, 9 words, 7 words, 7 words, 7 words, and 4 words)
 >
 > *Principles applied: P1, P8, P12 — the imperative mood for commits is preserved. Each logical change gets its own sentence. The git log becomes scannable line by line.*
+
+```text
+Refactor the JWT middleware
+
+Extract the token validation logic into a utility module.
+Add error handling for expired tokens.
+Add error handling for malformed headers.
+Add error handling for missing claims.
+Include descriptive log messages for each failure path.
+```
 
 ### Example 6 — Error Message
 
@@ -153,6 +344,13 @@ Systems documentation also covers unsafe code blocks, FFI boundaries, and memory
 >
 > *Principles applied: P1, P3, P10 — short error messages tell the user exactly what to do. Each possible cause gets its own sentence. Each action gets its own sentence.*
 
+```text
+DB_CONNECTION_FAILED: the database connection failed.
+Cause: the server is not reachable, or the credentials are not valid.
+Action: check your network connection.
+Action: check your credentials.
+```
+
 ### Example 7 — Class Constructor Docstring
 
 > **Non-STE:** Initializes a new instance of the `HttpClient` class with the specified base URL string and an optional dictionary of default HTTP headers along with a retry policy configuration that determines how many times a failed request should be retried before the client throws a `MaxRetriesExceededException`. (43 words)
@@ -160,6 +358,19 @@ Systems documentation also covers unsafe code blocks, FFI boundaries, and memory
 > **STE:** Make a new `HttpClient` instance. Use the specified base URL. Use the optional default headers dictionary. Set a retry policy. The policy sets the number of retries. The client throws `MaxRetriesExceededException` when retries run out. (7 words, 5 words, 6 words, 4 words, 7 words, and 11 words)
 >
 > *Principles applied: P1, P2, P4, P12 — each constructor parameter gets its own sentence. The exception behavior is separated from the parameter list. The docstring is readable line by line.*
+
+```python
+class HttpClient:
+    def __init__(self, base_url: str, headers: dict | None = None,
+                 max_retries: int = 3):
+        """Make a new HttpClient instance.
+
+        Use the base_url string as the request root.
+        Use the headers dictionary for default request headers.
+        Set a retry policy with max_retries attempts.
+        The client throws MaxRetriesExceededException when retries run out.
+        """
+```
 
 ### Example 8 — README Project Description
 
@@ -169,6 +380,17 @@ Systems documentation also covers unsafe code blocks, FFI boundaries, and memory
 >
 > *Principles applied: P1, P8, P11 — the project description is split into one sentence per feature. A reader can scan the feature list without parsing a dense paragraph. Each backend is listed in a separate sentence for clarity.*
 
+```markdown
+# LogKit
+
+LogKit is a lightweight logging library.
+It is built for distributed microservices.
+It writes structured JSON logs.
+It filters logs by level.
+It batches writes asynchronously.
+It ships logs to Elasticsearch, Loki, and CloudWatch.
+```
+
 ### Example 9 — Release Notes Entry
 
 > **Non-STE:** The v2.4 release introduces a new caching layer that reduces database query latency by 60 percent on average across all API endpoints and also includes a fix for the race condition that occurred when multiple workers attempted to update the same configuration key simultaneously. (44 words)
@@ -176,6 +398,14 @@ Systems documentation also covers unsafe code blocks, FFI boundaries, and memory
 > **STE:** The v2.4 release adds a new caching layer. This layer reduces database query latency by 60 percent. The improvement applies to all API endpoints. This release also fixes a race condition. The race condition occurred during concurrent configuration updates. (10 words, 8 words, 8 words, 7 words, and 9 words)
 >
 > *Principles applied: P1, P2, P12 — release notes are read by users and operators. Short sentences help them find breaking changes and new features quickly. The problem and the fix get separate sentences.*
+
+```markdown
+## v2.4
+
+- Add a caching layer that cuts database query latency by 60 percent.
+- Apply the improvement to all API endpoints.
+- Fix a race condition during concurrent configuration updates.
+```
 
 ## Edge Cases
 
@@ -195,6 +425,14 @@ Some languages use verbose keywords. For example, `synchronized` in Java, `concu
 
 Do not let verbose keywords justify long sentences. If the keyword adds 3 words, compensate with shorter phrasing elsewhere.
 
+```java
+// The synchronized keyword guards the shared counter.
+// Count it as one word in the sentence above.
+public synchronized void increment() {
+    counter++;
+}
+```
+
 ### Edge Case 3 — Compound Type Signatures
 
 Type signatures in TypeScript, Rust, and Scala can be long. Describing a complex generic type in a sentence often exceeds 25 words. Split the description: one sentence for the type shape, another for the constraints, and another for the behavior.
@@ -205,11 +443,32 @@ Use this pattern instead:
 
 > The function accepts a generic type parameter `T`. The type must implement `Serialize` and `Deserialize`. The function returns a `Result<Vec<T>, ParseError>`. The result is wrapped in a `Future`.
 
+```rust
+/// Accept a generic type T.
+/// The type must implement Serialize and Deserialize.
+/// The function returns a Result<Vec<T>, ParseError>.
+/// The result is wrapped in a Future.
+async fn load_all<T: Serialize + Deserialize<'static>>(
+    client: &Client,
+) -> impl Future<Output = Result<Vec<T>, ParseError>> {
+    ...
+}
+```
+
 ### Edge Case 4 — Legal and License Text
 
 License headers and legal disclaimers are not covered by Rule 6.3. These texts follow legal conventions, not technical writing standards. Do not apply the 25-word limit to MIT, Apache, or GPL license text. Do not apply it to copyright notices.
 
 However, the surrounding documentation that explains the license choice should obey the 25-word limit.
+
+```text
+// Copyright 2026 Example Corp.
+// SPDX-License-Identifier: MIT
+
+# License: MIT.
+# You can use this code in closed-source projects.
+# Keep the copyright notice in the source files.
+```
 
 ### Edge Case 5 — Generated Documentation
 
@@ -217,13 +476,25 @@ Auto-generated documentation from tools like JSDoc, Sphinx, or `go doc` may prod
 
 Fix the source docstrings. Do not edit the generated output directly. The generated output reflects the quality of the input.
 
+```javascript
+/**
+ * Start the background worker.
+ * It reads jobs from the queue.
+ * It runs each job in a separate thread.
+ * Stop the worker with the stop() method.
+ *
+ * @param {number} pollMs - The poll interval in milliseconds.
+ */
+function startWorker(pollMs) { /* ... */ }
+```
+
 ## Cross-References
 
 Rule 6.3 is part of the Sentence Length cluster in Section 6. These rules work together:
 
 - **Rule 6.1 — Give Information Gradually:** Short sentences enable gradual information delivery. Each sentence adds one new piece of information. Long sentences deliver too much information at once. The reader cannot absorb it.
 
-- **Rule 6.2 — Use Key Words and Key Phrases to Give Your Text a Logical Structure:** Short sentences make key words visible. A keyword at the start of a sentence signals the topic. A keyword buried in the middle of a 35-word sentence loses its signal value.
+- **Rule 6.2 — Use Key Words and Key Phrases to Give Your Text a Logical Structure:** Short sentences make key words visible. A keyword at the start of a sentence signals the topic. A keyword buried in the middle of a 35-word sentence lacks its signal value.
 
 - **Rule 6.4 — Use Paragraphs to Show Related Information:** Short sentences form clear paragraphs. A paragraph of three 12-word sentences is easier to read than one 36-word sentence. Use paragraphs to group related short sentences.
 
@@ -237,7 +508,7 @@ Rule 6.3 is part of the Sentence Length cluster in Section 6. These rules work t
 
 ### Clause Density
 
-Long sentences in code documentation often contain multiple clauses. Each clause adds a subject, a verb, and an object. The reader must hold the first clause in memory while parsing the second. With three or more clauses, the reader loses the thread.
+Long sentences in code documentation often contain multiple clauses. Each clause adds a subject, a verb, and an object. The reader must hold the first clause in memory while parsing the second. With three or more clauses, the reader misses the thread.
 
 The 25-word limit indirectly limits clause density. Most English clauses are 6 to 12 words. A 25-word sentence can hold at most two clauses with connecting words. This is a natural limit that matches working memory capacity.
 
@@ -251,6 +522,16 @@ Prefer coordination with separate sentences:
 
 > The `parse` function throws a `SyntaxError`. This error occurs when the input string contains invalid JSON. The parser cannot construct a valid AST from malformed tokens.
 
+```python
+def parse(text: str) -> Ast:
+    """Parse a JSON string into an AST.
+
+    The function throws a SyntaxError on bad input.
+    This error occurs when the string is not valid JSON.
+    The parser cannot build an AST from malformed tokens.
+    """
+```
+
 ### Implicit Connectives
 
 Short sentences rely on implicit connectives. The reader infers the relationship between sentences from their order. This is different from academic writing, which uses explicit connectives like "therefore," "consequently," and "furthermore."
@@ -262,3 +543,5 @@ In code documentation, implicit connectives work well. The reader expects docume
 Count hyphenated compound words as one word. For example, "least-recently-used" counts as one word, not three. Count acronyms as one word: "JSON" is one word. Count code tokens as one word: `Result<Vec<T>>` is one word.
 
 Do not count parenthetical word counts in examples. The notation "(12 words)" in an example sentence is metadata, not part of the sentence.
+
+> **See also:** Rule 6.1 — Give Information Gradually; Rule 6.2 — Use Key Words and Key Phrases to Give Your Text a Logical Structure; Rule 6.4 — Use Paragraphs to Show Related Information; Rule 6.5 — Make Sure That Each Paragraph Has Only One Topic; Rule 1.1 — Use Approved Words from the STE-Code Dictionary; Rule 1.10 — No Slang, Jargon, or Regional Terms
