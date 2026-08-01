@@ -38,6 +38,8 @@ Compare the wording in the two code-documentation safety instructions. The non-S
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: `CAUTION: EXTREME CLEANLINESS OF OXYGEN TUBES IS IMPERATIVE.`  |  STE: `WARNING: BEFORE YOU FILL THE LIQUID OXYGEN SYSTEM, PUT ON A FACE MASK AND PROTECTIVE CLOTHING. LIQUID OXYGEN CAN CAUSE IRRITATION OF THE RESPIRATORY TRACT AND EYE IRRITATION.` (ASD-STE100 Issue 9, Rule 7.1, page 99 — escalated from CAUTION to WARNING because the true risk is injury or death.)
+
 > **Non-STE:** CAUTION: ALWAYS VALIDATE INPUT DATA.
 >
 > **STE:** WARNING: BEFORE YOU PROCESS INPUT DATA, MAKE SURE THAT YOU SANITIZE AND VALIDATE THE DATA. UNSANITIZED INPUT CAN CAUSE SECURITY BREACHES AND DATA LOSS.
@@ -136,7 +138,18 @@ def execute_sql(query: str, params: tuple = ()) -> list:
  * @param {Function} fn - The function to cache.
  * @returns {Function} A cached version of the function.
  */
-function memoize(fn) { /* ... */ }
+function memoize(fn) {
+  const cache = new Map();
+  return function (...args) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+}
 ```
 
 *Principles applied: P1, P13 — caution for performance degradation (memory exhaustion), "cache" used as noun not verb*
@@ -192,6 +205,34 @@ Object-oriented documentation describes class contracts, inheritance hierarchies
 > **STE:** WARNING: OVERRIDE THE `validate` METHOD WITH CARE. CALL `super.validate()` BEFORE YOU ADD CUSTOM VALIDATION LOGIC. IF YOU SKIP THE BASE VALIDATION, UNTRUSTED DATA CAN BYPASS SECURITY CHECKS.
 >
 > *Principles applied: P1, P7 — warning for security risk, "call" used as imperative verb, specific consequence*
+
+```java
+abstract class RequestValidator {
+    /** Base security checks that apply to all request types. */
+    void validate(Request request) {
+        if (request.getUser() == null) {
+            throw new SecurityException("Missing user context");
+        }
+        if (!request.isAuthenticated()) {
+            throw new SecurityException("Request is not authenticated");
+        }
+    }
+}
+
+class PaymentRequestValidator extends RequestValidator {
+    @Override
+    void validate(Request request) {
+        // WARNING: CALL super.validate() BEFORE YOU ADD CUSTOM LOGIC.
+        super.validate();
+        PaymentRequest payment = (PaymentRequest) request;
+        if (payment.getAmount() <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than zero");
+        }
+    }
+}
+```
+
+*The `PaymentRequestValidator.validate` method shows the correct override: it calls `super.validate()` first, so the base security checks (user context and authentication) still run. If a developer removes that call, an untrusted request can bypass the checks and reach the payment logic.*
 
 **CAUTION for mutable shared state (C++):**
 
