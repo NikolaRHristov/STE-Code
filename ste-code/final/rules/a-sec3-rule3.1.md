@@ -28,7 +28,7 @@ The introduction to the dictionary in part 2 gives you more information about th
 
 The STE-Code dictionary gives you the verb forms that you can use for each approved verb. Use only the verb forms that the dictionary gives for a verb. Do not use other forms (for example, gerunds, participles used as verbs with auxiliaries, or inflected forms that are not listed).
 
-Every approved verb in the STE-Code dictionary appears with its allowed forms. The dictionary shows the base form, the third-person singular, the simple past, and the past participle. You use only those forms.
+Every approved verb in the STE-Code dictionary appears with its allowed forms. Each entry shows four forms in this order: the base form, the third-person singular, the simple past, and the past participle. You use only those forms.
 
 ```
 VALIDATE (v)
@@ -42,6 +42,17 @@ WROTE,
 WRITTEN
 ```
 
+**How to read a dictionary entry**
+
+| Line in the entry | Form | Example with WRITE | Where you use it |
+|---|---|---|---|
+| Line 1 | Base form (infinitive and imperative) | WRITE | "Write the log." / "to write the log" |
+| Line 2 | Third-person singular, simple present | WRITES | "The logger writes the record." |
+| Line 3 | Simple past | WROTE | "The job wrote the record." |
+| Line 4 | Past participle (as an adjective) | WRITTEN | "the written log" |
+
+If a form is not on one of those four lines, the form is not approved. The simple future is not a separate line: you make it with "will" and the base form ("will write").
+
 The four approved verb categories in STE-Code are:
 
 1. **Development operations** — build, compile, test, lint, format, commit, push, deploy, rollback
@@ -49,161 +60,112 @@ The four approved verb categories in STE-Code are:
 3. **Application operations** — handle, route, authenticate, authorize, validate, schedule, dispatch, resolve
 4. **Communication operations** — send, receive, publish, subscribe, stream, poll, broadcast, connect
 
-When you write a verb, confirm that the form is one that the dictionary lists for that verb. If the verb is not in the dictionary, do not use it. Use an approved verb instead. For each approved verb the dictionary gives exactly these forms and no others:
+**How to apply the rule**
 
-| Base form (infinitive) | Third-person singular | Simple past | Past participle |
-|---|---|---|---|
-| validate | validates | validated | validated |
-| write | writes | wrote | written |
-| build | builds | built | built |
-| read | reads | read | read |
-| migrate | migrates | migrated | migrated |
-| send | sends | sent | sent |
-| resolve | resolves | resolved | resolved |
-
-**How to check a verb form**
-
-1. Find the verb in the dictionary. If the verb is not there, do not use it.
-2. Use only the base form, the form that ends in "-s" for he/she/it, the simple past, or the past participle.
-3. Do not add "-ing" to a verb and use it with a form of "be" (for example, "is validating", "was building").
-4. Do not use "have", "has", or "had" with the past participle as a verb (for example, "has validated", "had written").
-5. Do not use the verb with "will" except to state a future action in simple future tense ("the test will fail"), and do not build longer verb chains around the approved forms.
-
-**Preferred simple verbs**
-
-When the verb you want is not in the dictionary, use one of the approved simple verbs instead of a longer word:
-
-- use, not utilize, leverage, or employ
-- start, not initiate, commence, or bootstrap
-- stop, not terminate, halt, or kill
-- show, not display, render, or present
-- make, not create, generate, or produce
-- get, not retrieve, fetch, or obtain
-- set, not configure, assign, or establish
-- check, not verify, validate, or ensure
-- do, not perform, execute, or carry out
-- send, not transmit, dispatch, or forward
-- remove, not delete, eliminate, or purge
-- keep, not retain, preserve, or maintain
-
-Note that some of these simple verbs are themselves approved verbs in the dictionary. Use only the forms that the dictionary lists for the verb you choose.
+1. Find the verb in the STE-Code dictionary.
+2. If the verb is not in the dictionary, do not use it. Use the approved verb that the dictionary gives instead. For example, use "make" and not "generate", use "get" and not "retrieve", use "check" and not "verify", use "use" and not "utilize", use "start" and not "initiate", use "stop" and not "terminate", use "remove" and not "delete", use "show" and not "render", use "do" and not "execute", and use "keep" and not "maintain".
+3. If the verb is in the dictionary, use one of the four listed forms only.
+4. Do not make a new form from an approved verb. "Parsing", "parseable", and "parser" are not verb forms of PARSE. A noun such as "parser" is approved only when the dictionary or a technical noun category gives it.
+5. Use the past participle only as an adjective ("the parsed manifest", "the deprecated method"). Do not use it with "have", "has", "had", or "get" to make a verb.
 
 > **Note: structural carryover — no code-domain equivalent** — The dictionary layout (base form, third-person singular, simple past, past participle shown for each verb) is a structural feature of the source standard. The code-domain version keeps the same layout with code verbs. No mapping is forced.
 
 ## Examples
 
-> *Adapted from spec pair:* Non-STE: The technician is removing the panel. | STE: The technician removes the panel.
+> *Adapted from spec pair:* Non-STE: The tool is removing the given information from the tank. | STE: The tool removes the given information.
 
-> **Non-STE:** The linter is validating the file and is reporting the errors to the terminal while the build is compiling the modules.
-> **STE:** The linter validates the file. It reports the errors to the terminal. The build compiles the modules.
+> **Non-STE:** The linter validates the file and is reporting the errors to the terminal.
+> **STE:** The linter validates the file. It reports the errors to the terminal.
 >
-> *Adapted from spec principle: use only the verb forms that the dictionary gives. The progressive forms "is validating", "is reporting", and "is compiling" are not approved forms.*
+> *Adapted from spec principle: use only the verb forms that the dictionary gives. The progressive form "is reporting" is not one of the four listed forms of REPORT.*
 >
-> ```python
-> # STE: plain approved verb forms only
-> def check_config(path):
->     """Validate the file. Report the errors to the terminal."""
->     errors = linter.validate(path)   # validate -> validates / validated / validated
->     for error in errors:
->         print(error)                 # print reports the result
->     build.compile_modules()          # compile -> compiles / compiled / compiled
+> ```bash
+> $ eslint src/index.js
+> # STE: the linter validates the file. It reports the errors to the terminal.
+> src/index.js
+>   12:5  error  'config' is assigned a value but never used  no-unused-vars
+> ✖ 1 problem (1 error, 0 warnings)
 > ```
 
 > **Non-STE:** The script has written the output to the log before the test starts.
 > **STE:** The script wrote the output to the log. Then the test starts.
 >
-> *Adapted from spec principle: use only the approved simple past form. The present perfect "has written" is not an approved form.*
+> *Adapted from spec principle: WRITE gives WRITE / WRITES / WROTE / WRITTEN. The present perfect "has written" is not a listed form.*
 >
-> ```bash
-> # STE: simple past tense, two clear steps
-> ./run_parser.sh > output.log   # the script wrote the output to the log
-> pytest tests/                  # then the test starts
+> ```python
+> # STE: the script wrote the output to the log. Then the test starts.
+> def main() -> None:
+>     with open("build.log", "w", encoding="utf-8") as log:
+>         log.write("build complete\n")   # write -> writes / wrote / written
+>     run_tests()
 > ```
 
-> **Non-STE:** The migration job had already seeded the database before the service attempted to read the table.
-> **STE:** The migration job seeded the database. Then the service read the table.
+> **Non-STE:** The service utilizes a token cache and leverages the parser for each request.
+> **STE:** The service uses a token cache. The service parses each request.
 >
-> *Adapted from spec principle: use only the approved simple past form. The past perfect "had seeded" is not an approved form. Break the sequence into separate sentences with "Then."*
->
-> ```yaml
-> # STE: two sequential steps, simple past in the comment
-> steps:
->   - name: seed-database      # the migration job seeded the database
->     run: python migrate.py --seed
->   - name: read-table         # then the service read the table
->     run: python service.py --read
-> ```
-
-> **Non-STE:** If the token expires, the client is reconnecting and will be retrying the request until the server responds.
-> **STE:** If the token expires, the client reconnects. It retries the request until the server responds.
->
-> *Adapted from spec principle: use only the approved forms. The progressive "is reconnecting" and the future progressive "will be retrying" are not approved forms. Use the simple present "reconnects" and the simple present "retries."*
+> *Adapted from spec principle: "utilize" and "leverage" are not in the dictionary. Use the approved verbs USE and PARSE.*
 >
 > ```javascript
-> // STE: simple present for repeated or general actions
-> function onTokenExpire(client) {
->   client.reconnects();        // reconnect -> reconnects / reconnected / reconnected
->   while (!client.hasResponse()) {
->     client.retries(request);   // retry -> retries / retried / retried
->   }
-> }
+> // STE: the service uses a token cache. The service parses each request.
+> const cache = new TokenCache();          // use -> uses / used / used
+> app.post("/orders", (req, res) => {
+>   const order = parseOrder(req.body);    // parse -> parses / parsed / parsed
+>   res.json(order);
+> });
 > ```
 
-> **Non-STE:** We are utilizing the cache to leverage the serialized data and to employ the parser for the input.
-> **STE:** We use the cache. We serialize the data. We parse the input.
+> **Non-STE:** The parsing of the manifest is done by the loader, and the validating of the schema comes after.
+> **STE:** The loader parses the manifest. Then the loader validates the schema.
 >
-> *Adapted from spec principle: use only approved verbs and only their approved forms. "Utilize", "leverage", and "employ" are not in the dictionary; the approved verb is "use". "Serialize" and "parse" are approved, but the gerund forms "serializing" and "employing" are not approved verb forms.*
+> *Adapted from spec principle: "parsing" and "validating" are gerunds. A gerund is not one of the four forms in the dictionary entry. Use the simple present tense and name the actor.*
 >
 > ```python
-> # STE: approved verbs, base or "-s" form only
-> cache.use()              # use -> uses / used / used
-> data = serialize(raw)    # serialize -> serializes / serialized / serialized
-> result = parser.parse(text)  # parse -> parses / parsed / parsed
+> # STE: the loader parses the manifest. Then the loader validates the schema.
+> manifest = loader.parse(path)      # parse -> parses / parsed / parsed
+> loader.validate(manifest, schema)  # validate -> validates / validated / validated
 > ```
 
-> **Non-STE:** The handler will be dispatching the event after the worker has resolved the task and the queue has published the message.
-> **STE:** The handler dispatches the event. The worker resolves the task. The queue publishes the message.
+> **Non-STE:** The migration had deleted the deprecated column and was terminating the open connections.
+> **STE:** The migration removed the deprecated column. Then the migration stopped the open connections.
 >
-> *Adapted from spec principle: use only the approved forms. The future progressive "will be dispatching", the present perfect "has resolved", and the present perfect "has published" are not approved forms. Use the simple present for each action.*
->
-> ```go
-> // STE: simple present in the documentation comment
-> // The handler dispatches the event. The worker resolves the task.
-> // The queue publishes the message.
-> func Handle(ctx Context) {
->     worker.Resolve(task)   // resolve -> resolves / resolved / resolved
->     queue.Publish(message) // publish -> publishes / published / published
->     handler.Dispatch(event) // dispatch -> dispatches / dispatched / dispatched
-> }
-> ```
-
-> **Non-STE:** The configuration was migrated by the tool and the records were deleted from the store.
-> **STE:** The tool migrated the configuration. It removed the records from the store.
->
-> *Adapted from spec principle: use only the approved verb forms. The passive progressive "was migrated" and "were deleted" are not approved. Name the actor (the tool) and use the simple past "migrated" and the approved verb "remove" (past "removed"), not "delete".*
+> *Adapted from spec principle: "delete" and "terminate" are not approved verbs; use REMOVE and STOP. The past perfect "had deleted" and the progressive "was terminating" are not listed forms.*
 >
 > ```sql
-> -- STE: name the actor, simple past tense
-> -- The tool migrated the configuration.
-> -- It removed the records from the store.
-> UPDATE config SET status = 'migrated' WHERE id = 1;
-> DELETE FROM store WHERE expired = true;  -- remove the records
+> -- STE: the migration removed the deprecated column.
+> ALTER TABLE accounts DROP COLUMN legacy_token;
+> -- Then the migration stopped the open connections.
+> SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'orders';
 > ```
 
-> **Non-STE:** The validated token is accepted and the encrypted payload gets decoded by the gateway.
-> **STE:** The gateway accepts the validated token. It decodes the encrypted payload.
+> **Non-STE:** The client will be receiving the streamed records after the broker has been publishing them for one minute.
+> **STE:** The broker publishes the records. The client will receive the streamed records after one minute.
 >
-> *Adapted from spec principle: the past participle "validated" is approved only as an adjective that modifies a noun ("the validated token"), not as a verb with an auxiliary. "Gets decoded" uses "get" with a past participle as a verb, which is not an approved form. Use the simple present "decodes".*
+> *Adapted from spec principle: the future progressive and the perfect progressive are not listed forms. Make the simple future with "will" and the base form. "Streamed" is correct because it is a past participle used as an adjective.*
 >
-> ```python
-> # STE: past participle as adjective only; verb in simple present
-> validated_token = auth.validate(token)  # "validated" modifies token (adjective use)
-> if gateway.accepts(validated_token):     # accept -> accepts / accepted / accepted
->     payload = gateway.decode(data)        # decode -> decodes / decoded / decoded
+> ```go
+> // STE: the broker publishes the records.
+> // The client will receive the streamed records after one minute.
+> func (b *Broker) Publish(rec []byte) error { // publish -> publishes / published / published
+>     return b.topic.Send(rec)                 // send -> sends / sent / sent
+> }
 > ```
 
-> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
-> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
-> **See also:** Rule 1.12 — Technical Verbs Are Allowed
+> **Non-STE:** The given options get validated by the gateway, and the removed entries are gotten from the cache.
+> **STE:** The gateway validates the given options. The gateway gets the removed entries from the cache.
+>
+> *Adapted from spec principle: "get validated" and "are gotten" are not listed forms. Name the actor and use the simple present tense. "Given" and "removed" are correct because they are past participles used as adjectives.*
+>
+> ```json
+> {
+>   "options": ["--release", "--strip"],
+>   "validated": true,
+>   "removedEntries": 12
+> }
+> ```
+
 > **See also:** Rule 3.2 — Use Only These Verb Forms and Tenses of Verbs
+> **See also:** Rule 3.3 — Use the Active Voice
+> **See also:** Rule 3.4 — Do Not Leave Out a Verb or a Part of a Verb
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.5 — Technical Noun Categories
 > **See also:** The STE-Code dictionary (a-dictionary.md) — the full list of approved verbs and their allowed forms
