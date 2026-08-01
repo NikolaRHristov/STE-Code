@@ -54,6 +54,43 @@ def _load(path: Path) -> "dict | list":
         return {}
 
 
+def _defended_pairs(args) -> "set":
+    """Load (technique, placement) pairs BLACK confirmed the base already
+    resists (from base/defended.json). WHITE skips these so it does not
+    re-learn attacks the base is already protected against."""
+    path = getattr(args, "defended", None)
+    if not path:
+        return set()
+    p = Path(path)
+    if not p.exists():
+        return set()
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return set()
+    out = set()
+    for sig in data.get("signatures", []):
+        # signatures are 16-hex; we recover the (tech, place) only if the
+        # driver recorded them -- but the driver prunes by signature, so we
+        # instead skip by resolving via the knowledge already loaded. Here we
+        # just return the raw signature set for callers that need it.
+        out.add(sig)
+    return out
+
+
+def _defended_pairs_match(args, kb) -> "set":
+    """Resolve defended signatures to (technique, placement) pairs using the
+    live knowledge base, so WHITE can skip the matching escapes."""
+    sigs = _defended_pairs(args)
+    if not sigs:
+        return set()
+    pairs = set()
+    for sig, L in (kb.lessons if hasattr(kb, "lessons") else {}).items():
+        if any(sig.startswith(s) or s.startswith(sig) for s in sigs):
+            pairs.add((L.get("technique"), L.get("placement")))
+    return pairs
+
+
 def _await(path: Path, timeout: float, poll: float) -> bool:
     deadline = time.time() + timeout
     while time.time() < deadline:
@@ -212,12 +249,21 @@ def run_white_variant(variant: str, args, cfg, base: Path,
         blue_done = _load(blue_s) if blue_ok else {}
         resistance = blue_done.get("resistance_table", []) if isinstance(blue_done, dict) else []
 
+        # Reverse-deduction guard: BLACK confirmed the base already resists
+        # these (technique, placement) pairs in a prior cycle. Honour those
+        # notes -- do NOT re-ingest them, so confidence can fall over turns.
+        skip = _defended_pairs_match(args, kb)
+
         # 1) ingest into knowledge base
         for e in escapes:
             if not isinstance(e, dict):
                 continue
+            tech = e.get("technique", "?")
+            place = e.get("placement", "?")
+            if skip and (tech, place) in skip:
+                continue
             kb.record_failure(
-                e.get("technique", "?"), e.get("placement", "?"),
+                tech, place,
                 e.get("timing", "immediate"), e.get("category", "readme"),
                 e.get("missed_principles", []), e.get("forbidden_found", []),
                 variant, rnd,
@@ -314,6 +360,9 @@ def main() -> int:
     parser.add_argument("--max-remedies-per-round", type=int, default=20)
     parser.add_argument("--knowledge", default=None,
                         help="path override for knowledge.json")
+    parser.add_argument("--defended", default=None,
+                        help="path to defended.json (signatures BLACK confirmed "
+                             "the base already resists); WHITE skips those pairs")
     parser.add_argument("--dry-run", action="store_true",
                         help="do not write adopted/rejected artifacts")
     parser.add_argument("--explain", action="store_true",

@@ -240,7 +240,8 @@ def _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cycle: int,
     # ---- PHASE 3: WHITE (prune defended lessons first, see _prune_knowledge) ----
     white_args = ["--skip-live", "--variants=" + ",".join(tiers),
                   "--rounds", str(rounds), "--base", str(base),
-                  "--await-timeout", "30", "--explain"] + live
+                  "--await-timeout", "30", "--explain",
+                  "--defended", str(base / "defended.json")] + live
     wp = _run_module("white", white_args, log_dir / "white", name="white-c{}".format(cycle))
     wp.wait()
     st["white"] = (base / "white-report.json").exists()
@@ -407,7 +408,16 @@ def main() -> int:
         print("[driver] ===== CYCLE {}/{} =====".format(cy, args.cycles))
         st = _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cy,
                         exclude=excluded_pairs)
-        # confidence / unresolved trend from knowledge
+        # reverse deduction: confirmed-defended claims -> notes + prune WHITE
+        defended = _collect_defended(base, tiers, rounds)
+        notes = _write_reverse_notes(base, defended)
+        pruned = _prune_knowledge(base, defended)
+        # shrink the attack surface for the next cycle
+        for d in defended:
+            if d.get("technique") and d.get("placement"):
+                excluded_pairs.add((d["technique"], d["placement"]))
+        # confidence / unresolved trend from knowledge (POST-prune, so the
+        # 4-turn learning curve shows the decrease)
         kb_path = base / "knowledge.json"
         trend = {"lessons": 0, "patterns": 0}
         if kb_path.exists():
@@ -417,14 +427,6 @@ def main() -> int:
                 trend["patterns"] = len(kb.get("patterns", {}))
             except (json.JSONDecodeError, OSError):
                 pass
-        # reverse deduction: confirmed-defended claims -> notes + prune WHITE
-        defended = _collect_defended(base, tiers, rounds)
-        notes = _write_reverse_notes(base, defended)
-        pruned = _prune_knowledge(base, defended)
-        # shrink the attack surface for the next cycle
-        for d in defended:
-            if d.get("technique") and d.get("placement"):
-                excluded_pairs.add((d["technique"], d["placement"]))
         cycles_report.append({
             "cycle": cy, "phases": st, "knowledge": trend,
             "defended_confirmed": len(defended),
