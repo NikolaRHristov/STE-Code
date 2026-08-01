@@ -21,6 +21,46 @@ last-resort fallback for pages that fail deterministic parity).
   the spec's pagination (blank pages carry the next letter's ID). SYMPTOM the
   user saw: group-017-dict-e-f starts with D-words (differentiate, difficult…).
 
+## UPSTREAM DEFECT FOUND (refinement, not grouping) — re-refinement in progress
+
+Grouping was producing letter-mixed dictionary buckets. Root cause is NOT the
+grouping engine: it is bad page attribution in ste-code/refined/.
+
+Evidence (headword-set comparison, extracted/ vs refined/, dict range only):
+  - 35 refined files have <50% headword overlap with THEIR OWN extracted page
+    range, and instead match an extracted file ~2 files earlier (~8 pages).
+    e.g. r072-p285-288 holds w070's words; r091-p361-364 holds w089's.
+    Spot check: extracted w072 p285-288 = label/lack/LAMINATED/land/LARGE/LAST;
+    refined r072 = insert/inside/INTO/inspect/INSTALL (I-words).
+  - Shift distribution across the dict range: {-3: 1, -2: 36, 0: 21}.
+  - REAL CONTENT LOSS: 144 of 1,837 dictionary headwords (7.8%) are absent from
+    refined/ entirely — a contiguous run of E-words confirmed by raw grep with 0
+    hits in refined/ and 1 in extracted/: early, earth, ease, easy, edge, empty,
+    enable, encircle (+ ~136 more).
+  - Worker→source mapping itself is fine: find_workers() maps worker N to
+    extracted wNNN and writes rNNN, and all 109 page ranges match 1:1. So the
+    defect is worker BEHAVIOUR on those runs, and re-running the same workers
+    against the same sources is the correct repair.
+
+AFFECTED WORKERS (35): R054 R055 R056 R072 R073 R074 R075 R076 R077 R078 R079
+R081 R082 R083 R084 R085 R086 R087 R089 R090 R091 R092 R093 R094 R095 R096 R097
+R098 R099 R101 R102 R103 R104 R105 R106
+AFFECTED BATCHES (15): 18 19 24 25 26 27 28 29 30 31 32 33 34 35 36
+
+RE-RUN PLAN (3 concurrent chains max — free tier 429s above that; each chain is
+its own background process, never a for-loop, never one parent):
+  chain 1: refine_batch.py 18 2     (batches 18-19)   [launched]
+  chain 2: refine_batch.py 24 4     (batches 24-27)   [launched]
+  chain 3: refine_batch.py 28 3     (batches 28-30)   [launched]
+  chain 4: refine_batch.py 31 6     (batches 31-36)   [queued — launch when a
+           chain frees up, to stay at 3 concurrent LLM workers]
+Note batches also re-run a few already-correct workers (e.g. R052/R053 in batch
+18); that is harmless — refine_batch gates each output and re-commits.
+
+VERIFY AFTER: for every re-refined file, own-page headword overlap must be >=50%
+and the 144 missing headwords must reappear. Then re-run the dict-bucket audit
+(every DICT group's stray-letter share should drop under ~2%) before regrouping.
+
 ## The four fixes
 
 ### Fix A — content-based DICT letter classification  [OWNER: main agent] — DONE (partial, honest scope)
