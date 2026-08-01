@@ -46,6 +46,13 @@ Measure the leakage from the outlet port. The leakage must not be more than 0.5 
 
 (The second sentence here gives the limit for the result of the test. The work step occurs in one action, and you cannot divide the sentence into two different work steps.)
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 5.1 — Short Sentences (Maximum 20 Words)
+> **See also:** Rule 5.2 — One Instruction Per Sentence
+
 ## STE-Code Adaptation
 
 In code documentation, procedural steps must be easy for the reader to execute one at a time. When a sentence contains multiple instructions, the reader can miss or skip an action, leading to errors in configuration, deployment, or debugging.
@@ -59,6 +66,8 @@ You may write more than one sentence in a single work step when:
 - Two or more actions occur at the same time and are inseparable
 - A result or measurement occurs immediately after an action, and describing them in separate steps would break the logical flow of the procedure.
 
+
+> *Adapted from spec pair:* Non-STE: Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover._ (25 words)  |  STE: Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)
 ### Examples
 
 > **Non-STE:** Open the configuration file in a text editor and locate the database section and change the connection string to point to the staging server and then save the file and close the editor. (37 words, 5 instructions)

@@ -18,6 +18,8 @@ You can also use demonstrative adjectives as connecting words to connect ideas i
 
 In procedures, you can use these connecting words when an explanation is necessary after a work step. Connecting words can also be necessary in safety instructions to connect related sentences or make the text clear.
 
+
+> *Adapted from spec pair:* Non-STE: The side stay assembly has two folding toggles hinged together and attached with hinges between the main gear strut and the side stay bracket. (This sentence contains more than one topic. To make this information clearer, you can write a new sentence for each topic.)  |  STE: <u>The side stay assembly has two folding toggles. The folding toggles are attached</u> together with hinges. These folding toggles are also attached with hinges between the main gear strut and the side stay bracket. (The new text has three sentences, and each sentence has its topic. Refer to the underlined text for the specified subjects in each sentence.)
 ### Examples (from source):
 
 > **STE:** The localizer course aligns with the centerline of the runway. And the glideslope path is at a constant angle to the threshold of the runway.
@@ -27,6 +29,13 @@ In procedures, you can use these connecting words when an explanation is necessa
 > **STE:** If the pressure increases, it changes the electrical currents in the transmitter. Thus, the power unit supplies currents to the indicator on the related panel.
 >
 > **STE:** When the hydraulic pressure is released, the sequence valve moves to the open position. As a result, the actuators are connected to the hydraulic return.
+
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 3.1 — Use only the verb forms that are given in the dictionary.
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+> **See also:** Rule 4.4 — Use Connecting Words and Connecting Phrases
 
 ## STE-Code Adaptation
 

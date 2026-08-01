@@ -11,6 +11,8 @@ In a descriptive text, give information gradually and make sure that each senten
 
 In code documentation, give information gradually and make sure that each sentence contains only one subject. If you give too much information too quickly, your documentation will not be easy to understand, and it will be necessary for the developer to read it again.
 
+
+> *Adapted from spec pair:* Non-STE: A smartphone is a cellular telephone that has an integrated computer and many other functions, such as an operating system, internet browsing as well as the ability to run software applications. (31 words)  |  STE: A smartphone is a cellular telephone that has an integrated computer and many other functions. (15 words) It includes an operating system and an internet browser, and it can also operate software applications. (16 words)
 ### Examples
 
 > **Non-STE:** The authentication middleware validates bearer tokens from the authorization header by calling the `validateToken` function in the security module which decodes the JWT payload using the `HS256` algorithm from the `jwt-signer` library and checks the `exp` claim against the current server time before extracting the `sub` and `role` claims and attaching them as properties on the `request.auth` object, and if the token is expired or malformed the middleware returns a `401 Unauthorized` response with a JSON error body containing a `message` field and an `errorCode` field set to `TOKEN_EXPIRED` or `TOKEN_MALFORMED` respectively, while also logging the failure to the audit trail via the `AuditLogger.log` static method which writes to the `audit_events` table in the primary database using an asynchronous write pattern that does not block the response pipeline.

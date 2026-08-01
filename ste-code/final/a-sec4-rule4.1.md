@@ -16,6 +16,8 @@ In a descriptive text, make sure that each sentence has only one topic (subject 
 
 For the two types of writing, always make sure that your text is not abstract. Make sure that it clearly shows how to do a task or how a system operates. Be accurate. Do not give information that is not accurate or can have different meanings.
 
+
+> *Adapted from spec pair:* Non-STE: The side stay assembly has two folding toggles hinged together and attached with hinges between the main gear strut and the side stay bracket. (This sentence contains more than one topic. To make this information clearer, you can write a new sentence for each topic.)  |  STE: <u>The side stay assembly has two folding toggles. The folding toggles are attached</u> together with hinges. These folding toggles are also attached with hinges between the main gear strut and the side stay bracket. (The new text has three sentences, and each sentence has its topic. Refer to the underlined text for the specified subjects in each sentence.)
 ### Examples:
 
 > **Non-STE:** Do not write: No leaks are permitted. (This sentence does not tell the reader about the action.)
@@ -27,6 +29,11 @@ For the two types of writing, always make sure that your text is not abstract. M
 > **STE:** WRITE: When the temperature increases, the cure time will decrease. (This sentence tells the reader the correct information about how the cure time changes. To make your writing more accurate, give the specified temperatures and the related cure times.)
 >
 > **STE:** WRITE: The cure time is 2 hours at a temperature of 20 °C.
+
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+> **See also:** Rule 4.2 — Do Not Omit Words or Use Contractions
 
 ## STE-Code Adaptation
 

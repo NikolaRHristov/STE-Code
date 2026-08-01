@@ -19,6 +19,13 @@ You cannot use the verb "follow" with other meanings that are not approved.
 
 In this sentence, always use "obey" with the approved meaning "to do that which the procedures or instructions tell you."
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+
 ## STE-Code Adaptation
 
 **Rule 1.3** Use approved words only with their approved meanings.
@@ -31,6 +38,8 @@ The approved meaning of the verb "obey" is "to do that which the procedures or i
 
 When an approved word has only one approved meaning in the controlled terminology, do not use it with any other meaning from standard English. If you need to express a different meaning, find an alternative approved word or use a different sentence construction.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** Follow the configuration steps to set up the server.

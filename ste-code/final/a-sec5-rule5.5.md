@@ -86,6 +86,8 @@ Each sentence in a note can have a maximum of 25 words. A note can contain one o
 
 To verify correct note usage, read the procedure without the notes. If the reader cannot complete the procedure correctly, move the missing information from the notes into work steps and repeat the test.
 
+
+> *Adapted from spec pair:* Non-STE: Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover._ (25 words)  |  STE: Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)
 ### Examples
 
 > **STE:** NOTE: The API rate limiter allows a maximum of 1000 requests per minute per client IP address on the free tier.

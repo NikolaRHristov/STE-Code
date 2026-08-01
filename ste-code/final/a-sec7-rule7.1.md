@@ -36,6 +36,8 @@ In the non-STE example that follows, the safety instruction is a caution. But if
 
 Compare the wording in the two code-documentation safety instructions. The non-STE safety instruction is an abstract statement and only makes a general claim. The warning in STE-Code gives clear and correct information about how to decrease the risk of security breaches. The warning contains the words "security breach" and "data loss" to make the reader clearly understand how important this safety instruction is.
 
+
+> *Adapted from spec pair:* Non-STE: <u>CAUTION:</u> EXTREME CLEANLINESS OF OXYGEN TUBES IS IMPERATIVE.  |  STE: <u>WARNING:</u> MAKE SURE THAT THE OXYGEN TUBES ARE FULLY CLEAN. OXYGEN AND GREASE MAKE AN EXPLOSIVE MIXTURE. AN EXPLOSION CAN CAUSE INJURY OR DEATH.
 ### Examples
 
 > **Non-STE:** CAUTION: ALWAYS VALIDATE INPUT DATA.

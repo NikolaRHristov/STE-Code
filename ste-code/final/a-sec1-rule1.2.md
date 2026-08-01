@@ -40,6 +40,13 @@ If a word that you want to use is not in the dictionary:
 2. Find which is the best synonym that is approved in the STE dictionary.
 3. Use the approved STE word or find a different sentence construction with other approved words.
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+
 ## STE-Code Adaptation
 
 **Rule 1.2** Use approved words from the controlled terminology only as the specified part of speech.
@@ -59,6 +66,8 @@ If a word that you want to use is not in the controlled terminology:
 2. Find which is the best synonym that is approved in the STE-Code controlled terminology.
 3. Use the approved STE-Code word or find a different sentence construction with other approved words.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** Query the database for user records.

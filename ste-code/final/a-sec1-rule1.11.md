@@ -23,6 +23,13 @@ Example:
 
 In the non-STE example, "servo control unit," "actuator," and "control unit" refer to the same item. Use the technical noun that is approved in your company, industry, or subject field. If, as in the example, the technical noun is "actuator," then always use this technical noun in your text.
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+
 ## STE-Code Adaptation
 
 **Rule 1.11** Do not use different code-domain technical nouns for the same item.
@@ -31,6 +38,8 @@ When you select a code-domain technical noun, do not use a different code-domain
 
 Changing the name of the same item in different sections of the documentation causes confusion. The reader must determine whether you refer to the same item or to a different item. Always use the same code-domain technical noun for the same item.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:**

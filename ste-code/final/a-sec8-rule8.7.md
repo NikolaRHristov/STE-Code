@@ -26,6 +26,10 @@ Examples:
 | Cutoff-switch power connection | (3 words) |
 | Main-gear-door retraction-winch handle | (3 words) |
 
+> **See also:** Rule 8.2 — Use Hyphens (-) to Connect Words That Are Directly Related
+> **See also:** Rule 8.6 — Elements That Count as One Word
+> **See also:** Rule 8.7 — Hyphenated Words Count as One Word
+
 ## STE-Code Adaptation
 
 **Rule 8.7** Hyphenated words count as one word.
@@ -34,6 +38,8 @@ Groups of words that are not usually adjectives but have the function of an adje
 
 In code documentation, this rule applies directly. A hyphenated technical term, whether it is a compound adjective or a long technical noun, counts as one word when you count words for sentence length.
 
+
+> *Adapted from spec pair:* Non-STE: A value of 2 mm is acceptable. ("Acceptable" is not approved.)  |  STE: A value of 2 mm is permitted.
 ### Examples
 
 > **Non-STE:** The build script uses a read only file descriptor to open the config for parsing.

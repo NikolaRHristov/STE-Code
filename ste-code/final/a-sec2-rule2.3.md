@@ -12,7 +12,9 @@
 
 A hyphen is a punctuation mark that connects words or parts of words. You can use hyphens between words to show how related words operate as one unit. This method will make the multi-word nouns that you use agree with rule 2.1. Hyphenated words always count as one word.
 
-##### Examples in STE
+##
+> *Adapted from spec pair:* Non-STE: Runway light connection resistance calibration._ (5 words)  |  STE: Calibrationof theresistanceof therunway light connection. (1 word, 1 word, and 3 words)
+### Examples in STE
 
 | Example | Note |
 |---|---|
@@ -79,3 +81,6 @@ But, if an approved technical code noun includes a hyphen (for example "input-ou
 > **Non-STE:** Do not write: The input output stream is part of the logging system.
 >
 > **STE:** WRITE: The input-output stream is part of the logging system.
+
+> **See also:** Rule 2.1 — Keep Technical Nouns Short
+> **See also:** Rule 2.3 — Use Hyphens Between Words Used as One Unit

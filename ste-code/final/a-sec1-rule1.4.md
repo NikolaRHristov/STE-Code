@@ -37,6 +37,13 @@ Superlative form: Slowest
 
 Adjectives that make their comparative and superlative forms with "more" and "most" do not have these forms in the dictionary. This is because "more" and "most" are approved words.
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
+
 ## STE-Code Adaptation
 
 **Rule 1.4** Use only the approved forms of verbs and adjectives.
@@ -67,6 +74,8 @@ Superlative form: Fastest
 
 Adjectives that make their comparative and superlative forms with "more" and "most" do not have these forms in the controlled terminology. This is because "more" and "most" are approved words.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** The compiler is compilating the source files.

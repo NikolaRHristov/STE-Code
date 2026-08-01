@@ -27,6 +27,8 @@ Replace the phrasal verb with a single approved verb that has the same meaning. 
 
 Only a small number of phrasal verbs are approved. They all have a restricted meaning.
 
+
+> *Adapted from spec pair:* Non-STE: The oil level on the sight gauge must be visible during the test.  |  STE: During the test, make sure that you can see the oil level on the sight gauge.
 ### Examples
 
 > **Non-STE:** The compiler puts out a warning when the type annotation is missing.

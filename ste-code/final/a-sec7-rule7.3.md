@@ -18,12 +18,21 @@
 
 > IF THEY FALL, PERMANENT DAMAGE TO THE PARTS CAN OCCUR.
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 1.6 — Use a Word That Is Not Approved in the Dictionary, Only When It Is a Technical Noun or Part of a Technical Noun
+> **See also:** Rule 7.1 — Use an Applicable Word (for Example, "Warning" or "Caution") to Identify the Level of Risk
+
 ## STE-Code Adaptation
 
 **Rule 7.3** In code documentation, if it is possible, always tell your reader about the problems that can occur if the reader does not obey the safety instruction. If there is a clear and specified risk, the developer who uses the code will understand the risk and be more careful.
 
 Severity mapping: The risk explanation must match the severity from Rule 7.1. For release-note and changelog severity, map the levels as follows: WARNING to BREAKING, CAUTION to DEPRECATED, NOTE to NOTE.
 
+
+> *Adapted from spec pair:* Non-STE: <u>CAUTION:</u> EXTREME CLEANLINESS OF OXYGEN TUBES IS IMPERATIVE.  |  STE: <u>WARNING:</u> MAKE SURE THAT THE OXYGEN TUBES ARE FULLY CLEAN. OXYGEN AND GREASE MAKE AN EXPLOSIVE MIXTURE. AN EXPLOSION CAN CAUSE INJURY OR DEATH.
 ### Examples
 
 > **Non-STE:** WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE.

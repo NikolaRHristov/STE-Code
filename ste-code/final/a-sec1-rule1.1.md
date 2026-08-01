@@ -28,6 +28,13 @@ In the context of ISO 1087:2019, "subject fields" refer to specific domains or a
 
 Technical nouns and technical verbs are usually included in your company glossary or terminology database. Always refer to these sources, and to the specified rules in this section, for the correct selection of words.
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.14 — Use American English Spelling Unless Other Official Directives Tell You Differently
+
 ## STE-Code Adaptation
 
 **Rule 1.1** In code documentation, use words that are:
@@ -43,6 +50,8 @@ The controlled terminology also gives a selection of words that are not approved
 
 Code-domain technical nouns and code-domain technical verbs are usually included in your project glossary or terminology database. Always refer to these sources, and to the specified rules in this section, for the correct selection of words.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 The word "run" is an approved verb in the controlled terminology. This is the code-domain adaptation of the spec example where "use" is an approved verb: just as "use" is the approved general-purpose verb in STE, "run" is the approved general-purpose verb for executing programs in STE-Code.

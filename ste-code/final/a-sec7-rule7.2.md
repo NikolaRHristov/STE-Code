@@ -30,6 +30,8 @@ If your reader must know about a condition before they use a function, method, o
 
 Severity mapping: The command or condition in a safety instruction carries the severity from Rule 7.1. In release notes and changelogs, the same levels map as follows: WARNING to BREAKING, CAUTION to DEPRECATED, NOTE to NOTE.
 
+
+> *Adapted from spec pair:* Non-STE: <u>CAUTION:</u> EXTREME CLEANLINESS OF OXYGEN TUBES IS IMPERATIVE.  |  STE: <u>WARNING:</u> MAKE SURE THAT THE OXYGEN TUBES ARE FULLY CLEAN. OXYGEN AND GREASE MAKE AN EXPLOSIVE MIXTURE. AN EXPLOSION CAN CAUSE INJURY OR DEATH.
 ### Examples
 
 > **Non-STE:** WARNING: STORING API KEYS IN THE SOURCE CODE IS NOT RECOMMENDED.

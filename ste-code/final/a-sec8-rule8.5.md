@@ -25,6 +25,13 @@ If there is an identifier in parentheses (a number, a letter, or an alphanumeric
 
 | | Hardware and Software Configuration Check of the In-Flight Entertainment (IFE) System (11 words) |
 
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 1.6 — Use a Word That Is Not Approved in the Dictionary, Only When It Is a Technical Noun or Part of a Technical Noun
+> **See also:** Rule 3.1 — Use only the verb forms that are given in the dictionary.
+> **See also:** Rule 3.3 — Use the past participle form as an adjective.
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+> **See also:** Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon (;)
+
 ## STE-Code Adaptation
 
 **Rule 8.5** In code documentation, when you put text in parentheses, it counts as one word in that sentence.
@@ -33,6 +40,8 @@ When you count words for sentence length, text in parentheses counts as one word
 
 If there is an identifier in parentheses (a number, a letter, or an alphanumeric identifier), this identifier counts as one word in the sentence. Abbreviations in parentheses also count as one word.
 
+
+> *Adapted from spec pair:* Non-STE: A value of 2 mm is acceptable. ("Acceptable" is not approved.)  |  STE: A value of 2 mm is permitted.
 ### Examples
 
 > **Non-STE:** Make sure that the DEBUG environment variable is set to false before you run the deployment script in the production cluster (the DEBUG flag must be explicitly disabled for all production workloads to prevent accidental log leakage).

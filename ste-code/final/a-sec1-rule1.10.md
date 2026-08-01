@@ -23,6 +23,13 @@ Examples:
 
 > **STE:** During logging operations, attach a cable to the heavy machinery to hold the logs in their position.
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.14 — Use American English Spelling Unless Other Official Directives Tell You Differently
+
 ## STE-Code Adaptation
 
 **Rule 1.10** Do not use regional, slang, or jargon words as code-domain technical nouns.
@@ -31,6 +38,8 @@ There can be technical words that only persons in confined communities or specif
 
 This rule is also applicable to technical slang or jargon words. If only a small number of persons understand a word, it will cause confusion and non-effective communication. Code documentation is read by developers with diverse backgrounds, including junior developers, developers from different language communities, and non-native English speakers.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** Remove all the cruft from the legacy module.

@@ -47,6 +47,13 @@ If a word is not in the dictionary, you can use it if it is part of a technical 
 
 (You can use "relative" as part of a technical noun, category 7, mathematical, scientific, engineering terms, and formulas.)
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 1.6 — Use a Word That Is Not Approved in the Dictionary, Only When It Is a Technical Noun or Part of a Technical Noun
+
 ## STE-Code Adaptation
 
 **Rule 1.6** Use a word that is not approved in the controlled terminology, only when it is a code-domain technical noun or part of a code-domain technical noun.
@@ -85,6 +92,8 @@ But you can use "main" as part of a code-domain technical noun. This adapts the 
 
 ("Main branch" is a code-domain technical noun, category 5, infrastructure, deployment, and platforms. It is incorrect to replace "main" with "primary" here, because "primary branch" is not the technical noun that is approved in your project, industry, or subject field. This is the same principle as the spec example: "primary landing gear" is not the approved technical noun.)
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** Make sure that the two connectors at the base of the chassis engage.

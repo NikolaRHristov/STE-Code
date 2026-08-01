@@ -25,6 +25,13 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 > - The cabin sub-compartment (3 words)
 > - The crew rest compartment. (4 words)
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 3.1 — Use only the verb forms that are given in the dictionary.
+> **See also:** Rule 3.3 — Use the past participle form as an adjective.
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+> **See also:** Rule 6.3 — Write Short Sentences. Use a Maximum of 25 Words in Each Sentence.
+
 ## STE-Code Adaptation
 
 **Rule 8.4** In code documentation, a colon (:) in a vertical list has the same effect on word count as a period and shows the end of a sentence.
@@ -39,6 +46,8 @@ Each item in a vertical list that comes after the colon counts as a new sentence
 - 20 words for procedural sentences
 - 25 words for descriptive sentences.
 
+
+> *Adapted from spec pair:* Non-STE: A value of 2 mm is acceptable. ("Acceptable" is not approved.)  |  STE: A value of 2 mm is permitted.
 ### Examples
 
 > **Non-STE:** To handle all possible error conditions, the following exception types must be caught and processed by the error handler: database connection timeouts which occur when the primary node is unreachable, authentication failures caused by expired or invalid tokens, and validation errors due to malformed request payloads.

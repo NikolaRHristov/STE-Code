@@ -53,6 +53,8 @@ Only a small number of approved words in the dictionary have an "-ing" form. The
 - A pronoun (something)
 - A preposition (during).
 
+> **See also:** Rule 3.5 — Use the "-ing" form of a verb only as a technical noun or as a modifier in a technical noun.
+
 ## STE-Code Adaptation
 
 In code documentation, words that have an "-ing" form can have different functions in a sentence. They can be part of a verb that describes an action in the present, an adjective, a noun, or a long group of modifiers. These different functions can cause ambiguity or long, complex sentences. Thus, words that have an "-ing" form are usually not permitted as verbs.
@@ -93,3 +95,5 @@ Approved words that have an "-ing" form in STE-Code:
 > **STE:** Be careful while the process starts.
 >
 > *Adapted from spec pair: "Be careful while the door is opening." The progressive form "is starting" is not approved.*
+
+> *Adapted from spec pair:* Non-STE: <u>The operator has adjusted the linkage.</u> (The present perfect tense is not approved.)  |  STE: The operator adjusted the linkage. (The simple past tense is approved.)

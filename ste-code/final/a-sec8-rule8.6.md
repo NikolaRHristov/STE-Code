@@ -139,6 +139,13 @@ When you count words for sentence length, count each of these as one word:
 
    ("Aerospace, Security and Defence Industries Association of Europe" is the proper noun of an organization and counts as one word.)
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.14 — Use American English Spelling Unless Other Official Directives Tell You Differently
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 1.6 — Use a Word That Is Not Approved in the Dictionary, Only When It Is a Technical Noun or Part of a Technical Noun
+> **See also:** Rule 1.7 — Do Not Use Words That Are Technical Nouns as Verbs
+
 ## STE-Code Adaptation
 
 **Rule 8.6** In code documentation, count each of these elements as one word:
@@ -268,6 +275,8 @@ When you count words for sentence length, count each of these as one word:
 
    ("Apache Software Foundation" is the proper noun of an organization and counts as one word.)
 
+
+> *Adapted from spec pair:* Non-STE: A value of 2 mm is acceptable. ("Acceptable" is not approved.)  |  STE: A value of 2 mm is permitted.
 ### Examples
 
 > **Non-STE:** The JSON Web Token authentication middleware must validate the signature of each incoming request using the public key obtained from the OpenID Connect identity provider, and the token must have an expiry time of not more than three hundred and sixty seconds to be valid for processing.

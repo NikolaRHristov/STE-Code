@@ -29,6 +29,8 @@ Do not use other forms and tenses that are not approved, for example:
 - The present/past progressive (is/was adjusting)
 - And all other complex verb constructions.
 
+> **See also:** Rule 3.2 — Use only these verb forms and tenses of verbs.
+
 ## STE-Code Adaptation
 
 Use only these verb forms and tenses of verbs:
@@ -75,3 +77,5 @@ Do not use other forms and tenses that are not approved, for example:
 > **STE:** The scheduler deploys the build to production. The tests run at the same time.
 >
 > *Adapted from spec pair: present progressive "is deploying" / "are running" is not approved.*
+
+> *Adapted from spec pair:* Non-STE: <u>The operator has adjusted the linkage.</u> (The present perfect tense is not approved.)  |  STE: The operator adjusted the linkage. (The simple past tense is approved.)

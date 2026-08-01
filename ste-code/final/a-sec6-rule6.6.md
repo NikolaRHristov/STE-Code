@@ -10,10 +10,19 @@
 
 Make sure that no paragraph has more than six sentences. Paragraphs divide a text into logical units and help keep the reader's attention. If paragraphs are too long, they cannot have this function. Do not put different topics in the same paragraph. If a paragraph has more than six sentences, divide it into two smaller paragraphs. This structure will make your text easier to read.
 
+> **See also:** Rule 6.1 — Give Information Gradually
+> **See also:** Rule 6.2 — Use Key Words and Key Phrases to Give Your Text a Logical Structure
+> **See also:** Rule 6.3 — Write Short Sentences. Use a Maximum of 25 Words in Each Sentence.
+> **See also:** Rule 6.4 — Use Paragraphs to Show Related Information
+> **See also:** Rule 6.5 — Make Sure That Each Paragraph Has Only One Topic
+> **See also:** Rule 6.6 — Make Sure That No Paragraph Has More Than Six Sentences
+
 ## STE-Code Adaptation
 
 In code documentation, make sure that no paragraph has more than six sentences. Paragraphs divide a documentation block into logical units and help keep the developer's attention. If paragraphs are too long, they cannot have this function. Do not put different topics in the same paragraph. If a paragraph has more than six sentences, divide it into two smaller paragraphs. This structure will make your documentation easier to read.
 
+
+> *Adapted from spec pair:* Non-STE: A smartphone is a cellular telephone that has an integrated computer and many other functions, such as an operating system, internet browsing as well as the ability to run software applications. (31 words)  |  STE: A smartphone is a cellular telephone that has an integrated computer and many other functions. (15 words) It includes an operating system and an internet browser, and it can also operate software applications. (16 words)
 ### Examples
 
 > **Non-STE:** The connection pool manager (1) has these primary components: a set of pre-allocated socket connections that the manager reuses across requests to avoid the cost of repeated TCP handshakes and TLS negotiation, a background reaper thread that closes connections that have been idle longer than the idle timeout and that also runs a periodic health probe to detect dropped links, a bounded queue that holds pending acquire requests when all connections are in use and that rejects new requests with a timeout error after the acquire timeout expires, and a metrics collector that records the number of active connections, the wait time distribution, and the count of rejected acquires for the observability stack; together these parts let the application serve high request rates without opening a new connection for every call. (5 sentences, but each is very long and dense)

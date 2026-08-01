@@ -23,6 +23,8 @@ This applies to all levels of consistency: use the same name for the same item (
 
 In descriptive writing, the reader must understand the text as a unit. Use words and sentences correctly and give a logical structure to the text. This method makes the text easier to read and understand.
 
+
+> *Adapted from spec pair:* Non-STE: The oil level on the sight gauge must be visible during the test.  |  STE: During the test, make sure that you can see the oil level on the sight gauge.
 ### Examples
 
 Inconsistent (non-STE) documentation:

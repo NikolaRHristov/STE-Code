@@ -24,6 +24,8 @@ If a word is not approved as a verb in the dictionary, do not use it as a verb. 
 >
 > **STE:** Do a check of the laptop battery.
 
+> **See also:** Rule 3.7 — Use an approved verb to describe an action, not a noun or other parts of speech.
+
 ## STE-Code Adaptation
 
 There can be different solutions to give the same information in STE-Code. If there is an approved verb that describes an action, use the approved verb. Verbs describe actions more clearly than nouns or other parts of speech.
@@ -62,3 +64,5 @@ If a word is not approved as a verb in the STE-Code dictionary, do not use it as
 > **STE:** The function returns 500 OK.
 >
 > *Adapted from spec principle: the approved verb "return" describes the action more clearly than the noun phrase "gives a result of."*
+
+> *Adapted from spec pair:* Non-STE: <u>The operator has adjusted the linkage.</u> (The present perfect tense is not approved.)  |  STE: The operator adjusted the linkage. (The simple past tense is approved.)

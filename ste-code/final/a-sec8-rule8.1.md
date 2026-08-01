@@ -18,12 +18,21 @@ Examples:
 
 | | (2) Replace the damaged part(s). |
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 3.1 — Use only the verb forms that are given in the dictionary.
+> **See also:** Rule 3.3 — Use the past participle form as an adjective.
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+> **See also:** Rule 4.4 — Use Connecting Words and Connecting Phrases
+
 ## STE-Code Adaptation
 
 **Rule 8.1** In code documentation, you can use all standard English punctuation marks but not the semicolon (;).
 
 The semicolon (;) is not permitted in STE-Code because it lets you write very long sentences that are difficult to read in code comments and documentation. It is also not easy to use correctly. As an alternative to the semicolon, always write two different sentences.
 
+
+> *Adapted from spec pair:* Non-STE: A value of 2 mm is acceptable. ("Acceptable" is not approved.)  |  STE: A value of 2 mm is permitted.
 ### Examples
 
 > **Non-STE:** Call the function to parse the response data; handle any errors that occur.

@@ -21,6 +21,13 @@ You can use technical nouns in procedural and descriptive writing if you can inc
 
 [The original specification lists 22 categories. Category titles include: Official parts information; Vehicles or machines, and locations on them; Tools and support equipment, their parts, and locations on them; Materials, consumables, and unwanted material; Facilities, infrastructure, and logistic procedures; Systems, components and circuits, their functions, configurations, and parts; Mathematical, scientific, engineering terms, and formulas; Navigation and geographic terms; Numbers, units of measurement and time (and their symbols); Quoted text; Professional roles, individuals, groups, organizations, and geopolitical entities; Parts of the body; Common personal effects, food, and beverages; Medical terms; Official documents, parts of documentation, standards, and guidelines; Environmental and operational conditions; Colors; Damage terms; Computer science, information and communication technology; Civil and military operations; Law and regulations; Animals, plants, and other life forms.]
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
+
 ## STE-Code Adaptation
 
 **Rule 1.5** You can use words that you can include in a code-domain technical noun category.
@@ -116,6 +123,8 @@ You can use code-domain technical nouns in procedural and descriptive writing if
 
 The code-domain technical nouns in their related categories are only examples. Rule 1.5 does not give a full list of all possible code-domain technical nouns.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** The developer used the thing to get data from the storage layer and put it on the screen.

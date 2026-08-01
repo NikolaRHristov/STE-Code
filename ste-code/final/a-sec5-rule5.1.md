@@ -39,6 +39,8 @@ Notes in code documentation procedures have a maximum sentence length of 25 word
 
 This rule applies to sentences in procedural documentation text. Code snippets, command examples, and terminal output that appear inside code blocks are not subject to the word count rule. String literals and identifier names inside code examples are also excluded from the word count.
 
+
+> *Adapted from spec pair:* Non-STE: Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover._ (25 words)  |  STE: Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)
 ### Examples
 
 > **Non-STE:** Run the database migration script from the project root directory and then restart the application server to apply all pending schema changes to the production environment. (27 words)

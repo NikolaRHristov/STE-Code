@@ -15,6 +15,8 @@ Good code documentation uses short sentences for complex topics. Short sentences
 
 In descriptive code documentation, the maximum sentence length is 25 words. This is because descriptive text is more complex than procedural text.
 
+
+> *Adapted from spec pair:* Non-STE: A smartphone is a cellular telephone that has an integrated computer and many other functions, such as an operating system, internet browsing as well as the ability to run software applications. (31 words)  |  STE: A smartphone is a cellular telephone that has an integrated computer and many other functions. (15 words) It includes an operating system and an internet browser, and it can also operate software applications. (16 words)
 ### Examples
 
 > **STE:** The authentication middleware validates each incoming request before the controller processes it. (11 words)

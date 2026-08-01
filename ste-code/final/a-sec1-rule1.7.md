@@ -512,3 +512,5 @@ Use this checklist to check that your documentation obeys Rule 1.7:
 5. Check that you did not use a tool name, brand name, or protocol name as a verb.
 6. Check that you did not drop part of a multi-word technical noun to make a verb.
 7. Read the sentence again and make sure the action is clear and the entity is clear.
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.

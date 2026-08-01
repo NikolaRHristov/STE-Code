@@ -15,6 +15,8 @@ In descriptive code documentation, paragraphs describe topics, and it is importa
 
 From the topic sentences, the developer will understand the contents of your documentation and will find the applicable information quickly. If the developer writes down each of the topic sentences from the documentation, they will make a good outline of its content. The other sentences in each paragraph give the information a logical structure and add more information on the topic of the paragraph.
 
+
+> *Adapted from spec pair:* Non-STE: A smartphone is a cellular telephone that has an integrated computer and many other functions, such as an operating system, internet browsing as well as the ability to run software applications. (31 words)  |  STE: A smartphone is a cellular telephone that has an integrated computer and many other functions. (15 words) It includes an operating system and an internet browser, and it can also operate software applications. (16 words)
 ### Examples
 
 > **Non-STE:** The authentication middleware validates each request and the logging system records all validation failures to the audit trail while the response pipeline returns JSON error bodies with error codes and the database connection pool maintains idle connections for reuse and the configuration module reloads settings when the manifest file changes on disk.

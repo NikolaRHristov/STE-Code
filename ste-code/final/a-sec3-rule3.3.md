@@ -27,6 +27,8 @@ There are also approved adjectives in the dictionary that are the past participl
 >
 > **STE:** Make sure that the mating surfaces are not damaged.
 
+> **See also:** Rule 3.3 — Use the past participle form as an adjective.
+
 ## STE-Code Adaptation
 
 When you use the past participle form as an adjective, it shows the condition of something. This is not passive voice. Use the past participle form of an approved verb as an adjective as follows:
@@ -60,3 +62,5 @@ There are also approved adjectives in the STE-Code dictionary that are the past 
 > **STE:** The parsed file is ready for the loader.
 >
 > *Adapted from spec principle: "parsed" is the past participle used as an adjective before the noun "file." It shows the condition of the file, not passive voice.*
+
+> *Adapted from spec pair:* Non-STE: <u>The operator has adjusted the linkage.</u> (The present perfect tense is not approved.)  |  STE: The operator adjusted the linkage. (The simple past tense is approved.)

@@ -15,6 +15,13 @@ Example:
 
 ("Touchscreen" and "home button" are technical nouns that are approved in your company, industry, or subject field.)
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.14 — Use American English Spelling Unless Other Official Directives Tell You Differently
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+
 ## STE-Code Adaptation
 
 **Rule 1.8** Use code-domain technical nouns that are approved in your project, company, industry, or subject field.
@@ -23,6 +30,8 @@ If your project, company, industry, or subject field has an approved code-domain
 
 Do not invent your own names for items that already have established names in your codebase or domain. Consistency with the approved terminology helps all readers understand the documentation.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **STE:** The dashboard page has a UserTable component and a FilterPanel component.

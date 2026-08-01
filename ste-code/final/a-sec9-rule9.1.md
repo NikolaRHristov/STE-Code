@@ -35,6 +35,8 @@ A different sentence construction is necessary because:
 
 When you cannot do a word-for-word replacement, think about the purpose of the sentence and use different words to get the same result. Frequently, you must select different words, use different verb forms, write shorter sentences, remove information that is not necessary, or get more information from a developer.
 
+
+> *Adapted from spec pair:* Non-STE: The oil level on the sight gauge must be visible during the test.  |  STE: During the test, make sure that you can see the oil level on the sight gauge.
 ### Examples
 
 > **Non-STE:** A timeout value of 5000 ms is acceptable for this endpoint.

@@ -79,6 +79,13 @@ When you find complex sentences in the passive voice that include auxiliary verb
 
 > **STE:** This type of fuel does not contain additives. (Descriptive sentence)
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 3.1 — Use only the verb forms that are given in the dictionary.
+> **See also:** Rule 3.3 — Use the past participle form as an adjective.
+> **See also:** Rule 3.4 — Do not use auxiliary verbs to make complex verb constructions.
+
 ## STE-Code Adaptation
 
 Use the active voice in all code documentation. In descriptive writing, the passive voice is permitted only when the agent (the person, service, or component that does the action) is unknown.
@@ -127,6 +134,8 @@ When the agent is unknown and you cannot identify it:
 >
 > *Adapted from spec pair: "During transmission, the data was corrupted." / "During transmission, something corrupted the data." / "Transmission corrupted the data."*
 
+
+> *Adapted from spec pair:* Non-STE: <u>The operator has adjusted the linkage.</u> (The present perfect tense is not approved.)  |  STE: The operator adjusted the linkage. (The simple past tense is approved.)
 ### Examples
 
 > **Non-STE:** The database connection is established by the connection pool at startup.

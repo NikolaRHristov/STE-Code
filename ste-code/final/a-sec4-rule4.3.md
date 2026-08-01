@@ -33,6 +33,8 @@ Always make sure that the layout of your vertical list is easy to read. In the e
 
 An item in a vertical list can contain a verb and not be a full sentence. Then, you do not use a period at the end of that item.
 
+
+> *Adapted from spec pair:* Non-STE: The side stay assembly has two folding toggles hinged together and attached with hinges between the main gear strut and the side stay bracket. (This sentence contains more than one topic. To make this information clearer, you can write a new sentence for each topic.)  |  STE: <u>The side stay assembly has two folding toggles. The folding toggles are attached</u> together with hinges. These folding toggles are also attached with hinges between the main gear strut and the side stay bracket. (The new text has three sentences, and each sentence has its topic. Refer to the underlined text for the specified subjects in each sentence.)
 ### Examples (from source):
 
 > **Non-STE:** The wheel assembly comprises the tire, the tube, the spokes, the spoke fittings, the valve, and the hub.
@@ -52,6 +54,13 @@ An item in a vertical list can contain a verb and not be a full sentence. Then, 
 > - A three-view drawing of the unit
 > - A photograph of the unit
 > - A copy of the source data.
+
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.6 — Use a Word That Is Not Approved in the Dictionary, Only When It Is a Technical Noun or Part of a Technical Noun
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+> **See also:** Rule 4.2 — Do Not Omit Words or Use Contractions
+> **See also:** Rule 4.3 — Use a Vertical List for Complex Text
+> **See also:** Rule 5.1 — Short Sentences (Maximum 20 Words)
 
 ## STE-Code Adaptation
 

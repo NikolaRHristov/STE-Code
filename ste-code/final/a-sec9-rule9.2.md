@@ -29,6 +29,8 @@ Also, make sure that you use approved words as their approved part of speech. In
 
 A small number of words are approved as more than one part of speech and have more than one meaning. These words are important and occur frequently in software development documentation.
 
+
+> *Adapted from spec pair:* Non-STE: The oil level on the sight gauge must be visible during the test.  |  STE: During the test, make sure that you can see the oil level on the sight gauge.
 ### Examples
 
 > **Non-STE:** Execute the initialization script before you start the server.

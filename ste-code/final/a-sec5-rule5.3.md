@@ -368,3 +368,5 @@ Resolution: Label each block clearly ("Run this command," "You will see output l
 - **STE-Code Dictionary** — See the canonical synonym table for approved imperative verbs. Prefer "use" over "utilize," "start" over "initiate," "stop" over "terminate," "check" over "verify."
 
 > **See also:** Rule 5.4 — Descriptive Statement Before the Command; Rule 7.1 — Use an Applicable Word to Identify the Level of Risk; Rule 7.2 — Start a Safety Instruction with a Clear and Accurate Command or Condition
+
+> *Adapted from spec pair:* Non-STE: Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover._ (25 words)  |  STE: Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)

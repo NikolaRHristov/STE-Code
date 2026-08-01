@@ -23,6 +23,8 @@ You can also use connecting words and connecting phrases to help the developer u
 
 When you use key words and key phrases, make sure that you do not change them in your documentation. The same terminology will keep your documentation clear and correct.
 
+
+> *Adapted from spec pair:* Non-STE: A smartphone is a cellular telephone that has an integrated computer and many other functions, such as an operating system, internet browsing as well as the ability to run software applications. (31 words)  |  STE: A smartphone is a cellular telephone that has an integrated computer and many other functions. (15 words) It includes an operating system and an internet browser, and it can also operate software applications. (16 words)
 ### Examples
 
 The example that follows is the STE text from the adapted example for rule 6.1. In the text, you can see how the underlined key words and key phrases connect sentences and their related ideas. This makes the documentation much easier to read and understand.

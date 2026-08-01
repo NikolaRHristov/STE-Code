@@ -34,6 +34,13 @@ The examples that follow show how to use hyphens to connect words that are direc
 
 A hyphen is different from a dash, which divides ideas, shows a range, or gives a signal for a pause. A dash is usually longer than a hyphen, but it is at times shown as a hyphen with a space on each side.
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 1.9 — When You Must Select a Technical Noun, Use One Which Is Short and Easy to Understand
+> **See also:** Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon (;)
+> **See also:** Rule 8.2 — Use Hyphens (-) to Connect Words That Are Directly Related
+
 ## STE-Code Adaptation
 
 **Rule 8.2** In code documentation, use hyphens (-) to connect words that are directly related.
@@ -64,6 +71,8 @@ The same categories of hyphenation apply to code documentation:
 
 A hyphen is different from a dash, which divides ideas, shows a range, or gives a signal for a pause.
 
+
+> *Adapted from spec pair:* Non-STE: A value of 2 mm is acceptable. ("Acceptable" is not approved.)  |  STE: A value of 2 mm is permitted.
 ### Examples
 
 > **Non-STE:** The high priority task must acquire the write lock before it can modify the shared data structure.

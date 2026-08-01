@@ -26,6 +26,13 @@ If the Constant Speed Drive (CSD) does not operate, correctly disconnect it from
 
 The two sentences in the examples are correct, but their meanings are different. In the first sentence, the comma after "correctly" shows that the adverb modifies the verb "operate." In the second sentence, the comma after "operate" shows that the adverb modifies the verb "disconnect."
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 5.3 — Imperative (Command) Form for Instructions
+> **See also:** Rule 5.4 — Descriptive Statement Before the Command
+> **See also:** Rule 5.5 — Notes Give Information Only, Not Instructions
+
 ## STE-Code Adaptation
 
 In code documentation, many procedural steps have conditions that the reader must know before they act. Examples include checking that a service is running before stopping it, verifying that a file exists before editing it, or confirming that a previous step completed successfully before proceeding.
@@ -124,6 +131,8 @@ Error messages must tell the user what went wrong and what to do. The condition-
 >
 > *Principle applied: P1 ("cannot" instead of "unable to"), P8 (host and port as technical nouns). Each corrective action is a separate condition-command pair: "If the server is not running, start it."*
 
+
+> *Adapted from spec pair:* Non-STE: Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover._ (25 words)  |  STE: Put preservation oil into the unit through the vent hole. (10 words) Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover. (16 words)
 ### Examples
 
 > **Non-STE:** Before you change the database schema you must shut down the application server and stop all background worker processes that are connected to the database.

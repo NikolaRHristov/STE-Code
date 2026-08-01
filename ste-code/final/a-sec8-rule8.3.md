@@ -57,6 +57,13 @@ In STE, you can use parentheses as follows:
 
    > **STE:** Open the left (right) access panel L42 (R42).
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 1.9 — When You Must Select a Technical Noun, Use One Which Is Short and Easy to Understand
+> **See also:** Rule 5.1 — Short Sentences (Maximum 20 Words)
+> **See also:** Rule 6.3 — Write Short Sentences. Use a Maximum of 25 Words in Each Sentence.
+> **See also:** Rule 8.2 — Use Hyphens (-) to Connect Words That Are Directly Related
+
 ## STE-Code Adaptation
 
 **Rule 8.3** In code documentation, you can use parentheses:
@@ -102,6 +109,8 @@ In STE, you can use parentheses as follows:
 
    > **STE:** Use the left (right) API key for the staging (production) environment.
 
+
+> *Adapted from spec pair:* Non-STE: A value of 2 mm is acceptable. ("Acceptable" is not approved.)  |  STE: A value of 2 mm is permitted.
 ### Examples
 
 > **Non-STE:** A Representational State Transfer Application Programming Interface, or REST API, is an architectural style for designing networked applications relying on stateless, client-server communication.

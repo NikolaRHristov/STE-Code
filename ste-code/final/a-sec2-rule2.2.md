@@ -21,7 +21,9 @@ A long multi-word noun can be a long technical noun, or it can be a combination 
 
 If a long technical noun comes from an official document (for example, an engineering drawing or an illustrated parts catalog), write it in full the first time that it occurs in the text. Then, if it is possible, explain the technical noun and in the remaining text of your document, use a shorter form or an approved abbreviation.
 
-#### Examples in STE
+#
+> *Adapted from spec pair:* Non-STE: Runway light connection resistance calibration._ (5 words)  |  STE: Calibrationof theresistanceof therunway light connection. (1 word, 1 word, and 3 words)
+### Examples in STE
 
 <mark>Before you do this procedure, engage the ramp service door safety connector pin (the pin that hold the ramp service door, referred to in this procedure as the "safety connector pin".</mark>
 
@@ -93,3 +95,6 @@ You can use abbreviations that come from your official code documentation but be
 > **STE:** Use the data transformer adapter to configure the main form validation module before you run the build.
 >
 > *Adaptation note: Write the long technical code noun in full the first time it occurs. Then use the approved abbreviation in the remaining text.*
+
+> **See also:** Rule 2.1 — Keep Technical Nouns Short
+> **See also:** Rule 2.2 — Write Long Technical Nouns in Full

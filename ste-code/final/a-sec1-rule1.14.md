@@ -29,6 +29,8 @@ This adapts the spec directly: the same rule applies to code documentation as it
 
 If there is quoted text that has British English spelling, for example in an error message, a code comment, or on a user interface, do not change the spelling. Keep the quoted text as it is. Refer to Rule 8.6 which tells you how to use quoted texts correctly.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** The log file shows the colour of each output line.

@@ -108,6 +108,8 @@ Systems documentation describes resource management and safety guarantees. Commo
 
 Rust documentation has an approved exception: the borrow checker is a named system component (technical noun, rule 1.5). "The borrow" as a concept name is correct. But "do a borrow" as an instruction is wrong — use "Borrow the value."
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** Do a compile of the source files.

@@ -24,6 +24,8 @@ GIVEN
 
 The introduction to the dictionary in part 2 gives you more information about the verb forms and how to use the approved verbs.
 
+> **See also:** Rule 3.1 — Use only the verb forms that are given in the dictionary.
+
 ## STE-Code Adaptation
 
 The STE-Code dictionary gives you the verb forms that you can use for each approved verb. Use only the verb forms that the dictionary gives for a verb. Do not use other forms (for example, gerunds, participles used as verbs with auxiliaries, or inflected forms that are not listed).
@@ -64,3 +66,5 @@ When you write a verb, confirm that the form is one that the dictionary lists fo
 > **STE:** The script wrote the output to the log. Then the test starts.
 >
 > *Adapted from spec principle: use only the approved simple past form. The present perfect "has written" is not an approved form.*
+
+> *Adapted from spec pair:* Non-STE: <u>The operator has adjusted the linkage.</u> (The present perfect tense is not approved.)  |  STE: The operator adjusted the linkage. (The simple past tense is approved.)

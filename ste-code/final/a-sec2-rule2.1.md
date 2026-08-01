@@ -10,7 +10,9 @@
 
 To keep multi-word nouns short, you can use prepositions (for example, "of," "on," "in," and "for") and explain the multi-word nouns.
 
-#### Examples
+#
+> *Adapted from spec pair:* Non-STE: Runway light connection resistance calibration._ (5 words)  |  STE: Calibrationof theresistanceof therunway light connection. (1 word, 1 word, and 3 words)
+### Examples
 
 > **Non-STE:** _Runway light connection resistance calibration._ (5 words)
 >
@@ -51,3 +53,5 @@ When a phrase names a code component with more than a few words, break the phras
 > **Non-STE:** Adjust to obtain cache invalidation hook alignment with the event emitter. (4 words)
 >
 > **STE:** Adjust the cache invalidation hook until it aligns with the event emitter. (3 words and 1 word)
+
+> **See also:** Rule 2.1 — Keep Technical Nouns Short

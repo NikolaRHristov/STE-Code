@@ -55,6 +55,13 @@ The dictionary includes some words that, although not approved, can be technical
 
 ("Enter" is a technical verb, category 2 a), computer processes and applications, input and output processes.)
 
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
+> **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+
 ## STE-Code Adaptation
 
 **Rule 1.12** You can use verbs that you can include in a code-domain technical verb category.
@@ -118,6 +125,8 @@ If you must use code-domain technical verbs, use only code-domain technical verb
 
 Do not use a code-domain technical verb if it is not necessary. If it is possible, use a verb that is approved in the controlled terminology and an applicable code-domain technical noun.
 
+
+> *Adapted from spec pair:* Non-STE: Test the system for leaks.  |  STE: Do the leak test of the system.
 ### Examples
 
 > **Non-STE:** If you detect a null pointer exception, fix it.

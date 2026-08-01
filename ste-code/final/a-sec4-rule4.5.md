@@ -18,6 +18,8 @@ When you use the article in a series of items, always make sure that adjectives 
 
 A definite article is incorrect before a noun when an alphanumeric identifier comes after it. This is because the alphanumeric identifier shows that it is a proper noun.
 
+
+> *Adapted from spec pair:* Non-STE: The side stay assembly has two folding toggles hinged together and attached with hinges between the main gear strut and the side stay bracket. (This sentence contains more than one topic. To make this information clearer, you can write a new sentence for each topic.)  |  STE: <u>The side stay assembly has two folding toggles. The folding toggles are attached</u> together with hinges. These folding toggles are also attached with hinges between the main gear strut and the side stay bracket. (The new text has three sentences, and each sentence has its topic. Refer to the underlined text for the specified subjects in each sentence.)
 ### Examples (from source):
 
 > **Non-STE:** Turn shaft assembly.
@@ -37,6 +39,11 @@ A definite article is incorrect before a noun when an alphanumeric identifier co
 > **Incorrect:** Tag the circuit breaker 36L7
 >
 > **Correct:** Tag circuit breaker 36L7.
+
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 4.1 — One Topic Per Sentence, No Abstract Text
+> **See also:** Rule 4.2 — Do Not Omit Words or Use Contractions
+> **See also:** Rule 4.5 — Use an Article or a Demonstrative Adjective Before a Noun
 
 ## STE-Code Adaptation
 
