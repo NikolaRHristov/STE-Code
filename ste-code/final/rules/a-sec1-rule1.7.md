@@ -115,6 +115,10 @@ In some contexts, the same word can be a code-domain technical noun and a code-d
 
 This distinction is central to Rule 1.7: when a word is a code-domain technical noun in your glossary, do not use it as a verb. When the same word is a code-domain technical verb in your glossary, you may use it as a verb. The key is consistency: decide which part of speech the word has in your project glossary and obey that decision.
 
+## Examples
+
+> *Adapted from spec pair:* Non-STE: Oil the steel surfaces.  |  STE: Apply oil to the steel surfaces.
+
 ---
 
 ## Code-Domain Explanation
