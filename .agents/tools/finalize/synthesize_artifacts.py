@@ -254,7 +254,7 @@ def main():
     resume = "--resume" in args
     verify = "--verify" in args
     regen = "--regen-progress" in args
-    scaffold_only = "--scaffold-only" in args
+    scaffold_only = "--scaffold-only" in args or "--scaffold" in args
 
     if verify:
         ok = all((ARTIFACTS_DIR / f).exists() and (ARTIFACTS_DIR / f).stat().st_size > 300
@@ -263,14 +263,21 @@ def main():
               f"({sum((ARTIFACTS_DIR/f).exists() for f,_,_ in LEVELS)}/{len(LEVELS)})")
         sys.exit(0 if ok else 1)
 
-    # Always ensure deterministic bases exist first.
+    # Always ensure deterministic bases exist first (levels_scaffold lives in
+    # the artifacts/ tool dir, not finalize/).
     import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        "levels_scaffold", str(Path(__file__).with_name("levels_scaffold.py")))
+    SCAFFOLD_PATH = (Path(__file__).resolve().parent.parent / "artifacts"
+                     / "levels_scaffold.py")
+    spec = importlib.util.spec_from_file_location("levels_scaffold", str(SCAFFOLD_PATH))
     scaffold = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(scaffold)
     print("=== scaffolding deterministic level bases ===", flush=True)
-    scaffold.main()
+    saved_argv = sys.argv
+    sys.argv = ["levels_scaffold.py"]  # isolate scaffolder's own argparse
+    try:
+        scaffold.main()
+    finally:
+        sys.argv = saved_argv
 
     if scaffold_only:
         return

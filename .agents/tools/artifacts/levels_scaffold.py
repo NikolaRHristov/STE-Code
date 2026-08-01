@@ -66,12 +66,16 @@ def _core_principles(rules):
             and not re.search(r"1\.(1[5-9]|[2-9]\d)", p.name)]
 
 
-def _read(name, *parts):
-    p = FINAL_DIR.joinpath(*parts, name) if parts else FINAL_DIR / name
-    if p.exists():
+def _read(*parts):
+    """Read FINAL_DIR/<parts[0]>/<parts[1]>/.../<parts[-1]>; fall back to
+    FINAL_DIR/<parts[-1]> if that exists; else empty string."""
+    if not parts:
+        return ""
+    p = FINAL_DIR.joinpath(*parts)
+    if p.exists() and p.is_file():
         return p.read_text(encoding="utf-8", errors="ignore")
-    p2 = FINAL_DIR / name
-    return p2.read_text(encoding="utf-8", errors="ignore") if p2.exists() else ""
+    p2 = FINAL_DIR / parts[-1]
+    return p2.read_text(encoding="utf-8", errors="ignore") if (p2.exists() and p2.is_file()) else ""
 
 
 def _build_base(level_idx: int) -> str:
@@ -91,10 +95,10 @@ def _build_base(level_idx: int) -> str:
 
     if level_idx >= 1:  # -1 +
         lines += ["## Synonym / approved-word table",
-                  "", _read("a-categories.md", "rules")[:1500] or "(categories unavailable)", ""]
+                  "", _read("rules", "a-categories.md")[:1500] or "(categories unavailable)", ""]
     if level_idx >= 2:  # 0 +
         lines += ["## Dictionary excerpt (approved / unapproved)", "",
-                  _read("a-dictionary.md", "rules")[:2500] or "(dictionary unavailable)", ""]
+                  _read("rules", "a-dictionary.md")[:2500] or "(dictionary unavailable)", ""]
     if level_idx >= 3:  # 1 +
         lines += ["## Document templates (code review / PR feedback)",
                   "", "> Placeholder section — LLM fills with code-domain templates.", ""]
