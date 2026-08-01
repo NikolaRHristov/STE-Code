@@ -289,13 +289,17 @@ def synthesize_file(adapted_path: Path) -> bool:
         r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
                            capture_output=True, text=True, timeout=TIMEOUT_SECONDS)
     except subprocess.TimeoutExpired:
-        # One slow session must NOT kill the whole batch. Fall back to a clean copy
-        # so final/rules/ stays complete; the stale flag (progress.md) will mark it
-        # for re-synthesis later.
-        _fallback_copy(adapted_path, out_path)
-        print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
-        _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                           f"Phase G: synthesize {adapted_path.name} (LLM final)")
+        # One slow session must NOT kill the whole batch. But NEVER clobber a file
+        # that is already a valid enriched rule (written by a prior run) — only fall
+        # back to a clean copy if the current file is missing or not a valid rule.
+        if not (out_path.exists() and out_path.stat().st_size >= 400
+                and re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip())):
+            _fallback_copy(adapted_path, out_path)
+            print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
+            _git_commit_locked([str(out_path.relative_to(PROJECT))],
+                               f"Phase G: synthesize {adapted_path.name} (LLM final)")
+        else:
+            print(f"  [TIMEOUT] {adapted_path.name}: kept existing enriched file", flush=True)
         return True
     # Save the agent's stdout as trajectory/history (like refinement/extraction),
     # NOT as the output file.
@@ -306,12 +310,16 @@ def synthesize_file(adapted_path: Path) -> bool:
         _git_commit_locked([str(out_path.relative_to(PROJECT))],
                            f"Phase G: synthesize {adapted_path.name} (LLM final)")
         return True
-    # Session did not write a valid file -> deterministic fallback copy so the
-    # dir stays complete (no narration ever saved as the file).
-    _fallback_copy(adapted_path, out_path)
-    print(f"  [FALLBACK] {adapted_path.name}: session did not write valid file; clean copy", flush=True)
-    _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                       f"Phase G: synthesize {adapted_path.name} (LLM final)")
+    # Session did not write a valid file -> fall back, BUT only if the current file
+    # is not already a valid enriched rule (never overwrite good work).
+    if not (out_path.exists() and out_path.stat().st_size >= 400
+            and re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip())):
+        _fallback_copy(adapted_path, out_path)
+        print(f"  [FALLBACK] {adapted_path.name}: session did not write valid file; clean copy", flush=True)
+        _git_commit_locked([str(out_path.relative_to(PROJECT))],
+                           f"Phase G: synthesize {adapted_path.name} (LLM final)")
+    else:
+        print(f"  [FALLBACK] {adapted_path.name}: kept existing enriched file", flush=True)
     return True
 
 
