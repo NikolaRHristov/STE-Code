@@ -223,27 +223,72 @@ class Verifier:
         """Does the verdict flip under perturbed scoring parameters?
 
         The harness's resistance/rescore is computed from cfg.scoring weights.
-        We re-run the same stored per-case outcomes through perturbed weights
-        and report whether the headline rate moves materially.
+        We re-run the stored per-cell outcomes through perturbed weights and
+        report whether the headline rate moves materially. If it moves by more
+        than cfg.overfit_tolerance_pct, the headline is "inflated" (fragile to
+        the exact weight choice) rather than genuinely confirmed.
         """
         cells = purple.get("interplay_matrix", {}).get("cells", [])
         cfg = self.cfg
         base_weights = dict(cfg.scoring.__dict__)
-        perturbed = {k: round(max(0.05, v * 1.5), 3) for k, v in base_weights.items()}
-        # Outcomes are not recoverable per-case from the stitched report; use the
-        # stored per-cell resisted counts as a proxy distribution.
-        base_rate = purple.get("overall_resistance_pct")
-        moved = "n/a"
-        if base_rate is not None:
-            moved = "perturbation shifts headline by <=tolerance"
+        # Perturbation TILTS the weights rather than scaling them uniformly:
+        # boost one axis, shrink another. A uniform *1.5 scale would cancel in
+        # the weighted mean, so a real sensitivity test must change relative
+        # weighting. We tilt every axis by a factor alternating >1 / <1.
+        _axes = list(base_weights.keys()) or ["default"]
+        perturbed = {}
+        for i, k in enumerate(_axes):
+            factor = 1.5 if i % 2 == 0 else round(1.0 / 1.5, 3)
+            perturbed[k] = round(max(0.05, base_weights[k] * factor), 3)
+
+        def _resistance_from_weights(weights: "dict") -> "float | None":
+            """Recompute resistance from stored per-cell passed/run fractions
+            using the supplied scoring weights. Each cell is weighted by its
+            ``kind`` if that key exists in the weight dict, else ``default`` —
+            so perturbing individual weight axes actually moves the headline
+            (a uniform *1.5 scale would otherwise cancel in the mean).
+            """
+            if not cells:
+                return None
+            num = 0.0
+            den = 0.0
+            for c in cells:
+                if not isinstance(c, dict):
+                    continue
+                passed = float(c.get("probes_passed", 0) or 0)
+                run = float(c.get("probes_run", 0) or 0)
+                if run <= 0:
+                    continue
+                kind = c.get("kind")
+                w = weights.get(kind, weights.get("default", 1.0)) \
+                    if isinstance(kind, str) else weights.get("default", 1.0)
+                num += w * (passed / run)
+                den += w
+            return (num / den * 100.0) if den > 0 else None
+
+        base_rate = _resistance_from_weights(base_weights)
+        perturbed_rate = _resistance_from_weights(perturbed)
+        moved_pct = None
+        if base_rate is not None and perturbed_rate is not None:
+            moved_pct = abs(perturbed_rate - base_rate)
+        tol = float(getattr(cfg, "overfit_tolerance_pct", 10.0))
+        verdict = "confirmed"
+        reason = "scoring perturbation {} left the headline stable".format(perturbed)
+        if moved_pct is not None and moved_pct > tol:
+            verdict = "inflated"
+            reason = ("scoring perturbation moved headline by {:.1f}pp "
+                      "> tolerance {:.1f}pp — headline is weight-fragile"
+                      .format(moved_pct, tol))
         return self._record(
             variant, round_n, "challenge-scoring", "blue",
             "verdict sensitivity to scoring weights {}".format(base_weights),
-            "perturbed-scoring", "confirmed" if base_rate is None else "confirmed",
-            "scoring perturbation {} left the headline stable".format(perturbed),
+            "perturbed-scoring", verdict, reason,
             corrected=None,
             evidence={"perturbed_weights": perturbed,
-                      "base_rate_pct": base_rate})
+                      "base_rate_pct": base_rate,
+                      "perturbed_rate_pct": perturbed_rate,
+                      "moved_pp": moved_pct,
+                      "tolerance_pp": tol})
 
     def _challenge_selection(self, variant, round_n, escapes, blue) -> dict:
         """Are BLUE's probes only where RED looked?"""

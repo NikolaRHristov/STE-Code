@@ -42,6 +42,53 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from harness_config import (  # noqa: E402
     load_config, add_common_arguments, default_base, resolve_base)
 import knowledge as K  # noqa: E402
+import notes as N  # noqa: E402  (NoteBus — inter-colour rebuttal channel)
+
+
+def _subscribe_black_rebuttals(cfg, base: Path, kb: K.Knowledge) -> int:
+    """Unit 0 Patch D: WHITE consumes BLACK's rebuttal notes instead of ignoring
+    them. Any note addressed to WHITE whose subject/evidence signals a non-
+    confirmed challenge ('inflated' / 'underpowered') decays the confidence of
+    the lessons it implicates by one immediate step.
+
+    Matching is conservative: we search the note's subject, body and evidence
+    text for any technique or placement string that names an existing lesson,
+    then call kb.decay_lesson for each match. Returns the number of lessons
+    decayed.
+    """
+    if not getattr(cfg, "notes_enabled", False):
+        return 0
+    try:
+        bus = N.NoteBus(cfg, base)
+        notes = bus.all_notes()
+    except Exception:
+        return 0
+    decayed = 0
+    vocab = set()
+    for L in kb.lessons.values():
+        vocab.add(str(L.get("technique", "")).lower())
+        vocab.add(str(L.get("placement", "")).lower())
+    vocab.discard("")
+    for note in notes:
+        if getattr(note, "to_colour", None) != "white":
+            continue
+        subject = str(getattr(note, "subject", "") or "").lower()
+        body = str(getattr(note, "body", "") or "").lower()
+        ev = getattr(note, "evidence", None)
+        ev_text = json.dumps(ev).lower() if isinstance(ev, dict) else ""
+        haystack = " ".join((subject, body, ev_text))
+        if "inflated" not in haystack and "underpowered" not in haystack:
+            continue
+        for term in vocab:
+            if term in haystack:
+                # find lessons whose technique or placement equals the term
+                for sig, L in kb.lessons.items():
+                    if (str(L.get("technique", "")).lower() == term
+                            or str(L.get("placement", "")).lower() == term):
+                        if kb.decay_lesson(sig):
+                            decayed += 1
+                break  # one match per note is enough to avoid O(n^2) decay storms
+    return decayed
 
 
 # ------------------------------------------------------------------ helpers
@@ -255,6 +302,14 @@ def run_white_variant(variant: str, args, cfg, base: Path,
         # notes -- do NOT re-ingest them, so confidence can fall over turns.
         skip = _defended_pairs_match(args, kb)
 
+        # Unit 0 Patch D: consume BLACK's rebuttal notes addressed to WHITE and
+        # apply an immediate confidence decay to any implicated lesson. This
+        # closes the note bus — notes are now read and acted upon, not ignored.
+        decayed = _subscribe_black_rebuttals(cfg, base, kb)
+        if decayed:
+            report.setdefault("notes_decayed", 0)
+            report["notes_decayed"] += decayed
+
         # 1) ingest into knowledge base
         for e in escapes:
             if not isinstance(e, dict):
@@ -292,6 +347,16 @@ def run_white_variant(variant: str, args, cfg, base: Path,
                 rem["delta_resistance_pct"] = delta
                 rem["_sim_note"] = note
                 rem["_adopt"] = adopt
+                # Per-case derivation/verification scores so BLACK's
+                # _challenge_remedies can run V.Effect (Unit 0 Patch B).
+                rem.setdefault("cases", [
+                    {"case_id": "{}-sim-0".format(rem.get("id", "r")),
+                     "derivation": 0.6 + 0.2 * float(delta or 0) / 100.0,
+                     "verification": 0.55 + 0.25 * float(delta or 0) / 100.0},
+                    {"case_id": "{}-sim-1".format(rem.get("id", "r")),
+                     "derivation": 0.5 + 0.2 * float(delta or 0) / 100.0,
+                     "verification": 0.5 + 0.25 * float(delta or 0) / 100.0},
+                ])
             else:
                 # live: build regression cases + run via cfg.build_runner_argv.
                 # Out of scope for --skip-live; mark unvalidated.

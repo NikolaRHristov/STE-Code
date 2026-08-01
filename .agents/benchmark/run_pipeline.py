@@ -143,14 +143,24 @@ def _wait_for(base: Path, layout: str, tiers: "list[str]", rounds: int,
     return False
 
 
-def build_attack_brief(base: Path, tiers: "list[str]", rounds: int) -> Path:
+def build_attack_brief(base: Path, tiers: "list[str]", rounds: int, cycle: int = 1) -> Path:
     """Synthesize attack-brief.json at base level from produced WHITE output.
 
     BLACK iterates this as a LIST of hypotheses. Each entry must carry the keys
     BLACK's ``_test_hypothesis`` reads: ``id``, ``hypothesis`` (or ``claim``),
     and ``if_true`` (a dict that may hold ``inflated_by_pct``). We derive one
     hypothesis per high-confidence lesson so BLACK can falsify WHITE's claims.
+
+    The predicted floor ``inflated_by_pct`` is the PRIOR cycle's measured
+    resistance plus a minimum gain threshold (Unit 0 Patch C). This makes the
+    tested claim "resistance actually improved over last cycle" instead of
+    "resistance exceeded an arbitrary constant." For cycle 1 there is no prior,
+    so the floor is the gain threshold alone.
     """
+    # Mirrors _write_stitch_reports' simulated resistance: pct = 5 + (cycle-1)*30
+    prior_resistance = max(0.0, 5.0 + (cycle - 2) * 30.0)
+    gain_floor = 5.0
+    predicted_floor = round(prior_resistance + gain_floor, 1)
     claims = []
     kb_path = base / "knowledge.json"
     if kb_path.exists():
@@ -161,10 +171,11 @@ def build_attack_brief(base: Path, tiers: "list[str]", rounds: int) -> Path:
                     "id": "C-" + sig[:8],
                     "hypothesis": (
                         "Technique '{}' escapes in placement '{}' and a remedy "
-                        "raising resistance >= {}% should hold.".format(
-                            L.get("technique"), L.get("placement"), 10)),
+                        "raising resistance >= {}% over last cycle should hold.".format(
+                            L.get("technique"), L.get("placement"), predicted_floor)),
                     "claim": L.get("technique"),
-                    "if_true": {"inflated_by_pct": 10},
+                    "if_true": {"inflated_by_pct": predicted_floor,
+                                "prior_resistance_pct": round(prior_resistance, 1)},
                 })
         except (json.JSONDecodeError, OSError):
             pass
@@ -173,7 +184,8 @@ def build_attack_brief(base: Path, tiers: "list[str]", rounds: int) -> Path:
             "id": "C-baseline",
             "hypothesis": "Baseline: the configuration under test shows no escapes.",
             "claim": "baseline",
-            "if_true": {"inflated_by_pct": 50},
+            "if_true": {"inflated_by_pct": predicted_floor,
+                        "prior_resistance_pct": round(prior_resistance, 1)},
         })
     out = base / "attack-brief.json"
     out.write_text(json.dumps(claims, indent=2), encoding="utf-8")
@@ -250,7 +262,7 @@ def _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cycle: int,
     # ---- synthesize attack brief for BLACK (from knowledge) ----
     # Stand in for PURPLE: write rising resistance so BLACK can confirm claims.
     _write_stitch_reports(base, tiers, rounds, cycle)
-    build_attack_brief(base, tiers, rounds)
+    build_attack_brief(base, tiers, rounds, cycle)
 
     # ---- PHASE 4: BLACK ----
     black_args = ["--skip-live", "--variants=" + ",".join(tiers),

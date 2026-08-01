@@ -199,6 +199,21 @@ class Knowledge:
         self._regenerate_patterns()
         return sig
 
+    def decay_lesson(self, sig: str, weight: int = 1) -> bool:
+        """Apply one immediate decay step to a challenged lesson (Unit 0 Patch D).
+
+        Bumping ``a`` (absence/decay evidence) lowers ``b/(a+b)`` exactly as the
+        natural round-boundary decay does, so a BLACK rebuttal can knock a
+        lesson's confidence down without waiting for the next round. Returns
+        True if the lesson existed and was decayed.
+        """
+        L = self.lessons.get(sig)
+        if L is None:
+            return False
+        L["a"] += max(1, int(weight))
+        self._regenerate_patterns()
+        return True
+
     def record_absence(self, current_round: int) -> None:
         """Call once per round per variant that produced NO escapes for a signature.
 
