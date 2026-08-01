@@ -79,10 +79,16 @@ placement family, per timing strategy, or per verification concern
 ## 4. Orientation commands
 
 ```bash
+python3 .agents/benchmark/selftest.py           # THE canonical green check — run before you report done
 python3 .agents/benchmark/harness_config.py     # profile, variants, prompt paths
 python3 .agents/benchmark/anonymize.py          # redaction levels demo
 python3 .agents/benchmark/purple_stitch.py --help
 ```
+
+`selftest.py` proves the shared layers (config, redaction, stitch) still hold and
+compiles every module in the directory, including yours. It must exit 0 before
+you report your task complete. When you add a colour module, add its planted-
+signal test to `selftest.py` rather than leaving a throwaway probe behind.
 
 ## 5. Definition of done
 
