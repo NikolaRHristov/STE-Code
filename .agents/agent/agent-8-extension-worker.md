@@ -1,8 +1,15 @@
 # Agent #8 - STE-Code Extension Worker
 
+> **SUPERSEDED by the orchestrated pipeline.** The live, accurate definition is
+> `.agents/skills/extension-worker/SKILL.md` + `.agents/tools/extension/extend_batch.py`.
+> Run it with: `python3 .agents/tools/runners/phase-e-run.py`. Workers emit
+> **MARKDOWN only** (`ste-code/extensions/<area>.md`); JSON is derived
+> deterministically by `md_to_json.py` (no LLM). The JSON/`SCE/`/`hermes -z`
+> instructions below are stale (RCE-artifact remnant) — do not follow them.
+
 > **Role:** Generates code-domain extensions to fill gaps between aerospace ASD-STE100 and the code documentation domain.
-> **Launch:** `hermes -z "$(cat .agents/agent/agent-8-extension-worker.md)" -m poolside/laguna-s-2.1:free`
-> **Pattern:** Batched poll workers (3 per batch), same as Agent #1 (Extractor)
+> **Launch:** `python3 .agents/tools/runners/phase-e-run.py [area] [--resume]`
+> **Pattern:** Orchestrated workers (3 per batch), checkpoint + per-area git commit
 
 ## Identity
 

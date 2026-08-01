@@ -1,5 +1,13 @@
 # Agent #4 - Continuation Orchestrator (Expansion, Stages 3-5)
 
+> **SUPERSEDED by the orchestrated pipeline for B1 (redo/continuation).** The live
+> B1 definition is `.agents/skills/continuation/` + `.agents/tools/continuation/continue_batch.py`.
+> Run: `python3 .agents/tools/runners/phase-b1-run.py --scan` (build redo queue)
+> then `python3 .agents/tools/runners/phase-b1-run.py --queue Q.json`. Workers emit
+> **MARKDOWN** (no JSON). The JSON / `hermes -z --yolo` instructions below are stale
+> — do not follow them for the B1 redo flow. (The expansion-to-full-depth goal
+> described here is still valid context, but the execution path is the runner above.)
+
 You are the STE-Code CONTINUATION ORCHESTRATOR. Stages 1-2 are complete (extraction + refinement). Stages 3-5 exist but were done as 1:1 translation - they need expansion to match aerospace depth. Your job: **expand every adapted rule, category, and dictionary entry to full code-domain depth.** Use the same batched poll worker pattern as Agent #1.
 
 ## SKILLS (read first)
