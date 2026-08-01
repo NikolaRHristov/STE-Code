@@ -61,6 +61,8 @@ You may write more than one sentence in a single work step when:
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover. | STE: Put preservation oil into the unit through the vent hole. Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover.
+
 > **Non-STE:** Open the configuration file in a text editor and locate the database section and change the connection string to point to the staging server and then save the file and close the editor. (37 words, 5 instructions)
 >
 > **STE:** (1) Open the configuration file in a text editor. (2) Locate the database section. (3) Change the connection string to point to the staging server. (4) Save the file. (5) Close the editor.
@@ -68,6 +70,26 @@ You may write more than one sentence in a single work step when:
 > (Each instruction is a separate work step.)
 >
 > *Source pairing: split one compound instruction into separate numbered work steps — follows the same principle as the original STE example in Rule 5.2.*
+
+*Documentation context — the STE version in `docs/CONFIGURATION.md`:*
+
+```markdown
+## Point the app at the staging database
+
+1. Open `config/database.toml` in a text editor.
+2. Find the `[database]` section.
+3. Set `connection_string = "postgres://staging-db:5432/app"`.
+4. Save the file.
+5. Close the editor.
+
+The file has this shape:
+
+```toml
+[database]
+connection_string = "postgres://localhost:5432/app"
+pool_size = 10
+```
+```
 
 > **Non-STE:** Run the test suite with the coverage flag enabled and verify that the total line coverage is above 80 percent across all modules in the project. (27 words)
 >
@@ -77,6 +99,18 @@ You may write more than one sentence in a single work step when:
 >
 > *Source pairing: a result or limit that follows the action immediately in the same work step — follows the same principle as the original STE example in Rule 5.2.*
 
+*Documentation context — the STE version in `CONTRIBUTING.md` and the command that produces it:*
+
+```markdown
+## Run the tests
+
+Run the suite with coverage:
+
+    pytest --cov=src --cov-report=term-missing
+
+The total line coverage must be more than 80 percent across all project modules.
+```
+
 > **Non-STE:** Make sure the environment variable DATABASE_URL is set correctly and then execute the initialization script to create the required database tables and populate them with the seed data. (31 words)
 >
 > **STE:** Make sure that the environment variable DATABASE_URL is set correctly. Then, execute the initialization script. The script creates the required database tables and populates them with the seed data.
@@ -84,6 +118,22 @@ You may write more than one sentence in a single work step when:
 > (The check and the execution form one continuous work step. The third sentence explains what the script does.)
 >
 > *Source pairing: a check that is immediately followed by the related action in one work step — follows the same principle as the original STE example in Rule 5.2.*
+
+*Documentation context — the STE version in `docs/local-dev.md`:*
+
+```markdown
+## Set up the local database
+
+Make sure that the `DATABASE_URL` environment variable is set correctly:
+
+    export DATABASE_URL="postgres://localhost:5432/app"
+
+Then, run the initialization script:
+
+    python scripts/init_db.py
+
+The script creates the required tables and loads the seed data.
+```
 
 Actions that occur at the same time:
 
@@ -100,6 +150,27 @@ Actions that occur at the same time:
 >
 > *Additional code-domain example — no direct spec pair*
 
+*Documentation context — the STE version in `docs/ops/runbook.md`:*
+
+```markdown
+## Debug a slow startup
+
+1. Set the logging level to debug in `config/logging.yaml`:
+
+   ```yaml
+   logging:
+     level: debug
+   ```
+
+2. Restart the application server:
+
+       systemctl restart app-server
+
+3. Watch the terminal log output for error messages during the startup sequence:
+
+       journalctl -u app-server -f
+```
+
 ## Code-Domain Explanation
 
 This rule operates differently across the five primary code documentation types. Each type has a distinct audience, reading pattern, and failure mode when instructions are combined in a single sentence.
@@ -112,19 +183,30 @@ Every numbered step in a README quick-start or installation section must contain
 
 Example of a correctly structured README setup section:
 
-```
-(1) Install the package with pip.
-(2) Copy the example configuration file to your project root.
-    The file includes default values for all settings.
-(3) Set the DATABASE_URL environment variable.
-(4) Run the initialization command.
-    The command creates the required database tables.
+```markdown
+## Quick start
+
+1. Install the package with pip:
+
+       pip install ste-code
+
+2. Copy the example configuration file to your project root.
+   The file `config.example.toml` includes default values for all settings.
+
+3. Set the `DATABASE_URL` environment variable:
+
+       export DATABASE_URL="postgres://localhost:5432/app"
+
+4. Run the initialization command.
+   The command `python scripts/init_db.py` creates the required database tables.
 ```
 
 Do not write:
 
-```
-(1) Install the package with pip and copy the example config file and set DATABASE_URL.
+```markdown
+## Quick start
+
+1. Install the package with pip and copy the example config file and set DATABASE_URL.
 ```
 
 ### API Documentation
@@ -137,6 +219,21 @@ Each API documentation block should follow this sentence structure:
 - Sentence 2: The HTTP method and path.
 - Sentence 3: Required authentication or headers.
 - Subsequent sentences: One per request body field, one per query parameter, one per response field, one per error code.
+
+Example of a correctly structured OpenAPI description block:
+
+```markdown
+### Create a user
+
+Create a new user account.
+Send a `POST` request to `/v1/users`.
+The request needs a `Bearer` token in the `Authorization` header.
+The request body has a `username` field of type string.
+The request body has an `email` field of type string.
+The response returns status `201 Created` on success.
+The response body has an `id` field of type string.
+The response returns status `409 Conflict` when the username is taken.
+```
 
 ### Docstrings
 
@@ -151,7 +248,7 @@ The body of the docstring may contain multiple sentences, but each must describe
 
 **Non-STE docstring:**
 
-```
+```python
 def connect(db_url, timeout):
     """Connect to the database using the given URL and configure the
     connection pool with the specified timeout and start the background
@@ -160,11 +257,22 @@ def connect(db_url, timeout):
 
 **STE-Code docstring:**
 
-```
+```python
 def connect(db_url, timeout):
     """Open a connection to the database at the given URL.
     Configure the connection pool with the specified timeout.
-    Start the background health check thread."""
+    Start the background health check thread.
+
+    Args:
+        db_url: The connection string for the database.
+        timeout: The maximum wait time for a connection, in seconds.
+
+    Returns:
+        A live database connection.
+
+    Raises:
+        ConnectionError: The database is unreachable.
+    """
 ```
 
 ### Commit Messages
@@ -187,6 +295,16 @@ Add user authentication module
 
 (The refactor and doc update belong in separate commits, or as body bullets.)
 
+**STE-Code commit with related changes in the body:**
+
+```
+Add user authentication module
+
+- Add the login and session endpoints.
+- Update the OpenAPI schema with the new routes.
+- Add the auth integration tests.
+```
+
 ### Error Messages
 
 Error messages must state exactly one problem. When an error message combines multiple failure conditions, the reader cannot determine which condition triggered the error or which corrective action to take first.
@@ -199,18 +317,18 @@ Each error message must:
 
 **Non-STE error message:**
 
-```
+```text
 ERROR: The database connection failed and the retry limit was exceeded or the
 configuration file is missing required fields.
 ```
 
 **STE-Code error messages (two separate conditions):**
 
-```
+```text
 ERROR: The database connection failed. The retry limit of 3 attempts was exceeded.
 ```
 
-```
+```text
 ERROR: The configuration file is missing required fields: host, port, database.
 ```
 
@@ -224,18 +342,28 @@ When documenting a class that requires a multi-step setup sequence (e.g., factor
 
 **Non-STE class setup:**
 
-```
-Create a new HttpClient instance, set the timeout and retry policy, and then
-call the execute method with the request object.
+```java
+// Create a new HttpClient, set the timeout and retry policy, then
+// call execute with the request object.
+HttpClient client = HttpClient.newBuilder()
+    .connectTimeout(Duration.ofSeconds(30))
+    .retryPolicy(RetryPolicy.exponentialBackoff())
+    .build();
+client.execute(request);
 ```
 
 **STE-Code class setup:**
 
-```
-(1) Create a new HttpClient instance.
-(2) Set the timeout property.
-(3) Set the retry policy.
-(4) Call the execute method with the request object.
+```java
+// 1. Create a new HttpClient instance.
+// 2. Set the connect timeout to 30 seconds.
+// 3. Set the retry policy to exponential backoff.
+// 4. Call execute with the request object.
+HttpClient client = HttpClient.newBuilder()
+    .connectTimeout(Duration.ofSeconds(30))
+    .retryPolicy(RetryPolicy.exponentialBackoff())
+    .build();
+client.execute(request);
 ```
 
 ### Functional Documentation (Haskell, Elixir, Clojure, Rust)
@@ -246,16 +374,19 @@ Function signatures in functional languages often express multiple constraints. 
 
 **Non-STE pipeline description:**
 
-```
-This function filters the list to remove null values and then maps each
-remaining element through the parser and collects the successful results.
+```rust
+/// Filters the list to remove null values, maps each remaining element
+/// through the parser, and collects the successful results.
+fn parse_all(items: Vec<Option<&str>>) -> Vec<Value> { /* ... */ }
 ```
 
 **STE-Code pipeline description:**
 
-```
-This function removes null values from the list. It maps each remaining
-element through the parser. It collects the successful results.
+```rust
+/// Remove null values from the list.
+/// Map each remaining element through the parser.
+/// Collect the successful results.
+fn parse_all(items: Vec<Option<&str>>) -> Vec<Value> { /* ... */ }
 ```
 
 ### Procedural Documentation (C, Go, Bash)
@@ -264,17 +395,25 @@ Procedural code executes statements sequentially. The documentation for procedur
 
 **Non-STE Bash comment:**
 
-```
+```bash
 # Download the latest release binary, verify its checksum, and move it to
 # /usr/local/bin.
+curl -fsSL "$URL" -o /tmp/cli
+sha256sum -c /tmp/cli.sha256
+mv /tmp/cli /usr/local/bin/cli
 ```
 
 **STE-Code Bash comments:**
 
-```
+```bash
 # Download the latest release binary.
+curl -fsSL "$URL" -o /tmp/cli
+
 # Verify the checksum of the downloaded binary.
+sha256sum -c /tmp/cli.sha256
+
 # Move the binary to /usr/local/bin.
+mv /tmp/cli /usr/local/bin/cli
 ```
 
 Each comment sits on the line immediately before the command it describes.
@@ -285,18 +424,30 @@ Declarative configurations describe desired state. Each resource, each property,
 
 **Non-STE Terraform resource docs:**
 
-```
-This resource creates an S3 bucket with versioning enabled and configures a
-lifecycle policy to delete old objects after 30 days and sets the bucket ACL
-to private.
+```hcl
+# Creates an S3 bucket with versioning enabled, a lifecycle policy to
+# delete old objects after 30 days, and a private ACL.
+resource "aws_s3_bucket" "logs" {
+  bucket = "app-logs"
+  versioning { enabled = true }
+  lifecycle_rule { expiration { days = 30 } }
+  acl = "private"
+}
 ```
 
 **STE-Code Terraform resource docs:**
 
-```
-This resource creates an S3 bucket. It enables versioning on the bucket.
-It configures a lifecycle policy to delete objects after 30 days. It sets
-the bucket ACL to private.
+```hcl
+# This resource creates an S3 bucket.
+# It enables versioning on the bucket.
+# It configures a lifecycle policy to delete objects after 30 days.
+# It sets the bucket ACL to private.
+resource "aws_s3_bucket" "logs" {
+  bucket = "app-logs"
+  versioning { enabled = true }
+  lifecycle_rule { expiration { days = 30 } }
+  acl = "private"
+}
 ```
 
 ### Systems Documentation (Rust Ownership, C Memory Model)
@@ -305,18 +456,19 @@ Systems documentation describes invariants, guarantees, and safety conditions. E
 
 **Non-STE ownership docs:**
 
-```
-The function borrows the buffer immutably for the duration of the read
-operation and returns a reference to the parsed data that is valid for the
-lifetime of the input buffer.
+```rust
+/// Borrows the buffer immutably for the read operation and returns a
+/// reference to the parsed data that is valid for the lifetime of the input.
+fn parse<'a>(buf: &'a [u8]) -> &'a Parsed { /* ... */ }
 ```
 
 **STE-Code ownership docs:**
 
-```
-The function borrows the buffer immutably for the duration of the read
-operation. It returns a reference to the parsed data. The returned reference
-is valid for the lifetime of the input buffer.
+```rust
+/// Borrow the buffer immutably for the duration of the read operation.
+/// Return a reference to the parsed data.
+/// The returned reference is valid for the lifetime of the input buffer.
+fn parse<'a>(buf: &'a [u8]) -> &'a Parsed { /* ... */ }
 ```
 
 ## Extended Examples
@@ -333,6 +485,22 @@ Each example below shows a real code documentation scenario, the Non-STE violati
 >
 > **Explanation:** The Non-STE version chains four instructions (send, include, check, verify) with "and". The STE version numbers the steps and separates the request body description from the response validation. Step (1) contains two sentences because describing the body immediately after the action is a result-immediately-after-action exception.
 
+*Documentation context — the full `docs/api/users.md` block:*
+
+```markdown
+## Create a user
+
+1. Send a `POST` request to `/v1/users`.
+   Include a JSON body with the `username` and `email` fields:
+
+   ```json
+   { "username": "ada", "email": "ada@example.com" }
+   ```
+
+2. Check that the response status code is `201`.
+3. Make sure that the `Location` header contains the URL of the new user resource.
+```
+
 ### Example 2: Docker Compose Quick-Start
 
 > **Non-STE:** Clone the repository to your local machine and then navigate into the project directory and run docker compose up to start all the services and after that open your browser and go to http://localhost:3000 to see the application. (38 words, 5 instructions)
@@ -343,6 +511,24 @@ Each example below shows a real code documentation scenario, the Non-STE violati
 >
 > **Explanation:** The Non-STE version uses "and then" / "and after that" to chain five sequential actions. The STE version assigns a numbered step to each action. The infinitive phrase "to start all the services" is preserved in step (3) as a purpose clause, which is not an instruction.
 
+*Documentation context — the full `README.md` quick-start:*
+
+````markdown
+## Run locally
+
+1. Clone the repository:
+
+       git clone https://github.com/example/app.git
+
+2. Go to the project directory:
+
+       cd app
+
+3. Run `docker compose up` to start all the services.
+4. Open a browser.
+5. Go to http://localhost:3000.
+````
+
 ### Example 3: Configuration File Editing Guide
 
 > **Non-STE:** Open the .env file in your preferred text editor and locate the line that starts with JWT_SECRET and replace the placeholder value with a randomly generated 256-bit key that you can create using the openssl rand -hex 32 command and then save the file and restart the application server for the changes to take effect. (52 words, 5 instructions)
@@ -352,6 +538,23 @@ Each example below shows a real code documentation scenario, the Non-STE violati
 > **Principle applied:** Rule 5.2 and the result-immediately-after-action exception. Also Rule 1.1 (use approved words: "find" not "locate", "make" not "create").
 >
 > **Explanation:** The key-generation instruction is separated from the replacement instruction. The final sentence states the result (changes take effect) as a separate descriptive sentence within step (5).
+
+*Documentation context — the full `docs/configuration.md` guide:*
+
+````markdown
+## Rotate the JWT secret
+
+1. Open the `.env` file in a text editor.
+2. Find the line that starts with `JWT_SECRET`.
+3. Replace the placeholder value with a new secret key.
+   To generate a key, run:
+
+       openssl rand -hex 32
+
+4. Save the file.
+5. Restart the application server.
+   The changes take effect after the restart.
+````
 
 ### Example 4: Database Migration Rollback
 
@@ -365,6 +568,20 @@ Each example below shows a real code documentation scenario, the Non-STE violati
 >
 > **Explanation:** The Non-STE version combines the destructive action description, the consequence, and the mitigation instruction in one sentence. The STE version separates the BREAKING block (what the migration does) from the operational instruction (what the user must do before running it).
 
+*Documentation context — the full `migrations/0042_drop_legacy_orders.md` notice:*
+
+````markdown
+# Migration 0042 — Drop legacy_orders
+
+**BREAKING:** This migration drops the `legacy_orders` table.
+It removes all indexes and foreign key constraints that reference it.
+
+**IMPORTANT:** You cannot roll back this migration automatically.
+Create a full database backup before you run this migration:
+
+    pg_dump app > backup-before-0042.sql
+````
+
 ### Example 5: CI/CD Pipeline Step Documentation
 
 > **Non-STE:** The build stage compiles the TypeScript source files and runs the unit tests with Jest and then packages the application into a Docker image and pushes it to the container registry with the git commit SHA as the image tag. (38 words, 4 actions described)
@@ -375,6 +592,24 @@ Each example below shows a real code documentation scenario, the Non-STE violati
 >
 > **Explanation:** Even when documenting an automated pipeline (not instructing a human), describing actions one per step improves clarity and maintainability. The final sentence is a descriptive detail, not an instruction.
 
+*Documentation context — the full `.github/workflows/build.yml` step list:*
+
+````yaml
+# The build job runs these steps in order:
+# 1. Compile the TypeScript source files.
+# 2. Run the unit tests with Jest.
+# 3. Package the application into a Docker image.
+# 4. Push the image to the container registry.
+# The image tag is the git commit SHA.
+jobs:
+  build:
+    steps:
+      - run: tsc --noEmit
+      - run: jest
+      - run: docker build -t registry/app:${GITHUB_SHA} .
+      - run: docker push registry/app:${GITHUB_SHA}
+````
+
 ### Example 6: Git Workflow Documentation
 
 > **Non-STE:** Create a new feature branch from the main branch and make your code changes on that branch and then commit your changes with a descriptive message and push the branch to the remote repository and open a pull request against the main branch. (40 words, 5 instructions)
@@ -384,6 +619,27 @@ Each example below shows a real code documentation scenario, the Non-STE violati
 > **Principle applied:** Rule 5.2. Each git operation is a discrete action that the user executes as a separate command.
 >
 > **Explanation:** This is the most common violation in open-source contributing guides. Writers compress the entire git workflow into one or two sentences. The STE version mirrors how the user actually works: one command, one step, one sentence.
+
+*Documentation context — the full `CONTRIBUTING.md` workflow:*
+
+````markdown
+## Submit a change
+
+1. Create a feature branch from `main`:
+
+       git switch -c feat/short-description
+
+2. Make your code changes on the feature branch.
+3. Commit your changes with a descriptive message:
+
+       git commit -m "Add rate limit to login endpoint"
+
+4. Push the branch to the remote repository:
+
+       git push -u origin feat/short-description
+
+5. Open a pull request against `main`.
+````
 
 ## Edge Cases
 
@@ -422,6 +678,9 @@ For example, prefer this JSDoc annotation style:
  * @param {string} email - The email address for the account.
  * @returns {User} The newly created user object.
  */
+function createUser(username, email) {
+  // ...
+}
 ```
 
 Over this:
@@ -431,6 +690,9 @@ Over this:
  * Creates a new user account with the given username and email and returns
  * the user object.
  */
+function createUser(username, email) {
+  // ...
+}
 ```
 
 The first style generates one sentence per parameter automatically. The second style generates a compound sentence that may violate Rule 5.2.
@@ -441,18 +703,30 @@ Test case descriptions and assertion messages often combine multiple conditions.
 
 **Non-STE test description:**
 
-```
-Test that the login endpoint returns 200 and sets the session cookie and
-redirects to the dashboard.
+```python
+def test_login():
+    # Test that the endpoint returns 200 and sets the session cookie
+    # and redirects to the dashboard.
+    ...
 ```
 
 **STE-Code test description:**
 
+```python
+def test_login():
+    # This test checks three conditions:
+    # (1) The login endpoint returns status code 200.
+    # (2) The response sets the session cookie.
+    # (3) The response redirects to the dashboard.
+    ...
 ```
-This test checks three conditions:
-(1) The login endpoint returns status code 200.
-(2) The response sets the session cookie.
-(3) The response redirects to the dashboard.
+
+Assertion messages, one per condition:
+
+```python
+assert response.status_code == 200, "Expected status code 200"
+assert "session" in response.cookies, "Expected a session cookie"
+assert response.headers["Location"].endswith("/dashboard"), "Expected redirect to dashboard"
 ```
 
 ### Edge Case 5: Console Log Messages During Multi-Step Operations
@@ -461,13 +735,13 @@ When a script or CLI tool logs progress during a multi-step operation, each log 
 
 **Non-STE log output:**
 
-```
+```text
 INFO: Connecting to the database and running migrations and seeding data...
 ```
 
 **STE-Code log output:**
 
-```
+```text
 INFO: Connecting to the database...
 INFO: Database connection established.
 INFO: Running migrations...
@@ -543,7 +817,7 @@ The STE-Code anti-pattern against "-ing" forms as main verbs directly supports R
 (Three implied instructions hidden in gerund phrases before the main instruction.)
 
 **After:**
-```
+```text
 (1) Install the package.
 (2) Configure the environment.
 (3) Set up the database.
@@ -559,3 +833,12 @@ A sentence with one main clause and one subordinate clause may still violate Rul
 
 **Before:** `After the build completes, deploy the artifact to the staging server.`
 **After:** `(1) Wait for the build to complete. (2) Deploy the artifact to the staging server.`
+
+## See also
+
+> **See also:** Rule 5.1 — Short Sentences (Max 20 Words)
+> **See also:** Rule 5.3 — Imperative (Command) Form
+> **See also:** Rule 1.1 — Use Approved Words
+> **See also:** Rule 1.12 — Technical Verbs
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 5.5 — Notes Give Information Only
