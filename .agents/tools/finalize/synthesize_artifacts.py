@@ -52,7 +52,9 @@ VENDOR_DIR = PROJECT / ".agents" / "vendor"
 MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
-TIMEOUT_SECONDS = 1800
+TIMEOUT_SECONDS = 600  # per-sub-doc distillation; healthy distills take 20-90s,
+                        # large sub-docs a few min. Bounded so a stuck session
+                        # fails fast (fallback) instead of hanging 30 min.
 
 LEVELS = [
     ("level-2", "-2", "ultra-minimal: the 14 core principles only"),
