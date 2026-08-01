@@ -31,6 +31,25 @@ The approved meaning of the verb "obey" is "to do that which the procedures or i
 
 When an approved word has only one approved meaning in the controlled terminology, do not use it with any other meaning from standard English. If you need to express a different meaning, find an alternative approved word or use a different sentence construction.
 
+### Decision Procedure: How to Check a Word Against Rule 1.3
+
+Before you publish any code documentation, run every approved verb, noun, adjective, or adverb you used through this four-step check. The check is cheap and catches the most common class of documentation defect: a sentence that looks correct and uses an approved word, but assigns that word a meaning it does not have.
+
+1. **Identify the part of speech in your sentence.** Is the word a verb, noun, adjective, or adverb in the way you wrote it? Write it down. (This step belongs to Rule 1.2, but Rule 1.3 depends on it — the part of speech selects the meaning.)
+2. **Look up the approved meaning for that part of speech** in `a-dictionary.md`. Each entry lists the approved meaning(s) and, for polysemous words, the meaning tied to each part of speech.
+3. **Ask the only question that matters: does my sentence use the word with exactly that meaning?** If yes, the word passes. If no — even if the word is approved and the sentence reads smoothly — the word fails Rule 1.3.
+4. **Replace or restructure.** If the word fails, either swap it for an approved word whose meaning fits the context (for example, "operate" instead of "run" when you mean "function on a platform") or rewrite the sentence so the original approved word carries its approved meaning.
+
+Worked check — a README line:
+
+> **Sentence:** The background worker runs every night.
+> **Step 1:** "runs" is a verb.
+> **Step 2:** The approved meaning of the verb "run" is "execute a program or command."
+> **Step 3:** The writer means "operates" or "executes on a schedule," not "executes a program." The meaning does not match.
+> **Step 4:** Rewrite: "The background worker operates every night." (Approved meaning of "operate" = "function or work in a specified way" — match.)
+
+This procedure is the difference between a document that is merely grammatical and a document that is unambiguous. A reader who sees "the job runs" assumes execution; if you meant "the job continues," the documentation is wrong even though "run" is an approved verb.
+
 ### Examples
 
 > *Adapted from spec pair:* Non-STE: "Follow the instructions to complete the task." | STE: "Obey the instructions to complete the task." *(ASD-STE100 Issue 9, Rule 1.3: approved meaning of "follow" = "come after, go after"; approved meaning of "obey" = "to do that which the procedures or instructions tell you")*
@@ -80,6 +99,29 @@ def logout(user):
 ## Code-Domain Explanation
 
 Rule 1.3 governs semantic precision in code documentation. An approved word is not a blank check — it carries exactly the meaning assigned to it in the controlled terminology. This rule prevents the most common class of documentation bugs: using the right word with the wrong meaning. A reader who sees "run" assumes "execute a program." If the writer meant "manage" or "operate," the documentation is misleading even though "run" is an approved verb. This section explains how Rule 1.3 applies to each documentation type.
+
+### Quick Reference: Most-Misused Approved Words
+
+The table below collects the approved words most often used with the wrong meaning across all documentation types, with their single approved meaning and the approved word to use instead when you mean something different. Use it as a first-pass audit of your own writing before applying the per-type guidance that follows.
+
+| Approved word | Approved meaning (use it only this way) | Wrong meaning to avoid | Approved alternative |
+|---------------|------------------------------------------|------------------------|----------------------|
+| **run** | execute a program or command | operate, manage, continue | operate, manage, continue |
+| **return** | send a value back from a function to its caller | go back to a state or location | go back |
+| **call** | invoke a function, method, or subroutine | name something, shout | name, refer to as |
+| **get** | fetch or retrieve data from a source | become, understand, receive passively | become, understand, receive |
+| **set** | put a value into a variable or configuration | become solid, prepare | become solid, prepare |
+| **make** | bring into existence by building or assembling | force, earn | cause, earn |
+| **send** | transmit data to a destination | cause to go (a person) | cause to go |
+| **raise** | cause an exception or error to occur | increase, lift | increase, lift |
+| **catch** | handle or intercept an exception | capture a moving object, become trapped | capture, become trapped |
+| **pass** | give data as an argument to a function | go past, succeed, transfer possession | go past, succeed, give |
+| **check** | examine something to determine correctness or state | stop, restrain, leave in safekeeping | stop, leave |
+| **break** | exit a loop or switch statement immediately | divide into parts, damage, interrupt | split, damage, interrupt |
+| **continue** | skip to the next iteration of a loop | keep doing something without interruption | keep |
+| **fail** | an operation did not complete successfully | not pass a test | not pass |
+| **move** | transfer ownership of a value (Rust) | change physical position | go, change position |
+| **borrow** | take a reference without taking ownership | take something temporarily | take temporarily |
 
 ### README Files
 
@@ -248,6 +290,75 @@ raise ConnectionError(
 ```
 
 > *(P3 applied: "failed" → "did not complete" — "fail" means "did not complete successfully"; "negotiate" → removed — "negotiate" is not approved in this sense; "timed out" → "stopped after 30 seconds" — "timeout" is a noun, and the approved meaning is "time limit exceeded," but restructured to avoid the noun-as-verb issue)*
+
+### Tests and Test Documentation
+
+Test code and its documentation describe expected and observed behavior. The approved verbs in tests carry meanings that are specific to the testing domain, and general-English drift is common. "Pass" and "fail" are the two highest-risk words.
+
+**High-risk approved words in test documentation:**
+
+- **pass** — Approved meaning: "a procedure to check correctness was successful" (noun sense of the test outcome) or, as a verb, "give data as an argument to a function" (Rule 1.3, docstrings table). In test reporting, "the test passes" uses "pass" to mean "the test reaches its expected result." Do not use "pass" to mean "go past" (pass the building) or "succeed at a non-test task." When you mean "succeed," use "succeed."
+- **fail** — Approved meaning: "an operation did not complete successfully" (or, in test reporting, "the test did not reach its expected result"). Do not use "fail" to mean "not pass an examination." Use "not pass."
+- **assert** — Approved meaning: "state that a condition is true, or cause an error when it is not" (code-domain technical verb, Rule 1.12). Do not use "assert" in prose to mean "claim" or "insist" (assert your opinion). Use "state" or "claim."
+- **mock** — Approved meaning: "replace a real component with a test double that records or simulates its behavior" (code-domain technical verb). Do not use "mock" in prose to mean "ridicule." Use "make fun of."
+
+Example — pytest documentation:
+
+> **Non-STE:**
+
+```python
+def test_retry_policy():
+    """Verifies the client retries three times before it gives up.
+    The test fails if the backoff does not pass the threshold."""
+    result = client.with_retries(3).call()
+    assert result.attempts == 3
+```
+
+> **STE:**
+
+```python
+def test_retry_policy():
+    """Checks that the client retries three times before it stops.
+    The test does not complete if the backoff does not reach the threshold."""
+    result = client.with_retries(3).call()
+    assert result.attempts == 3
+```
+
+> *(P3 applied: "verifies" → "checks" — "verify" is not an approved verb, "check" is (approved meaning: examine for correctness); "gives up" → "stops" — "give up" is not an approved phrase in this sense, "stop" is approved; "fails" → "does not complete" — "fail" means "did not complete successfully"; "pass" → "reach" — "pass" as a verb means "give as argument," not "exceed a threshold")*
+
+### Changelogs and Release Notes
+
+Changelogs describe what changed between versions. They combine the constrained vocabulary of commit messages with the descriptive freedom of prose, which makes Rule 1.3 violations easy to miss. Each verb that names a change must carry its approved meaning.
+
+**High-risk approved words in changelogs:**
+
+- **add** — Approved meaning: "include new code, files, or features that did not exist before." Do not use "add" to mean "perform arithmetic addition" or "increase an amount." Use "increase."
+- **remove** — Approved meaning: "delete code, files, or features so they no longer exist in the codebase." Do not use "remove" to mean "move to a different location." Use "move."
+- **update** — Approved meaning: "change existing code or configuration to a newer version or state." Do not use "update" to mean "give someone the latest information" in a conversational sense. Use "tell."
+- **fix** — Approved meaning: "correct a defect or unintended behavior." Do not use "fix" to mean "attach firmly." Use "attach."
+- **support** — Approved meaning: "provide compatibility with or the ability to handle a feature, protocol, or input" (code-domain technical verb, Rule 1.12). Do not use "support" to mean "hold up physically" or "endorse." Use "hold" or "endorse."
+
+Example — changelog entry:
+
+> **Non-STE:**
+
+```markdown
+## 2.4.0
+
+- Added support for OAuth2 and removed the legacy XML exporter.
+- Fixed the connection pool that was dropping requests under load.
+```
+
+> **STE:**
+
+```markdown
+## 2.4.0
+
+- Added compatibility with OAuth2 and removed the legacy XML exporter.
+- Corrected the connection pool that was losing requests under load.
+```
+
+> *(P3 applied: "support" → "compatibility" — "support" as a noun phrasing "added support for" drifts from its approved meaning ("provide the ability to handle"); "fixed" → "corrected" — "fix" means "correct a defect," and "corrected" states the approved meaning directly; "dropping" → "losing" — "drop" as a verb means "remove permanently" in declarative contexts, not "lose intermittently," so "lose" is the precise approved alternative)*
 
 ---
 
@@ -643,6 +754,56 @@ debug = true
 > **Principle applied:** P3 (use approved words only with their approved meanings: "enable" → "turn on" — "enable" is an approved verb meaning "make something possible," but "turn on" is the correct phrase for activating a feature; "dump" → "writes" — "dump" is a code-domain technical noun, not a verb; "impacts" → "decreases" — "impact" as a verb meaning "affect" is not approved; "significantly" → removed — unnecessary adverb); P1 ("verbose" → "detailed" — approved adjective; "setting" → "setting" — approved noun, correct)
 > **Explanation:** "Enable" has the approved meaning "make something possible." But for toggling a boolean flag to `true`, "turn on" is the correct phrase. "Dump" is a code-domain technical noun ("core dump," "memory dump"), not a verb. "Impacts" as a verb meaning "affects" is not approved — "decreases" is more precise and approved. The sentence is split to keep each under 20 words (procedural limit).
 
+### Example 7 — Test Suite: Timeout Assertion
+
+> **Non-STE:**
+
+```python
+def test_upload_deadline():
+    """The upload should break if the network hangs. The test passes
+    only when the request returns before the deadline."""
+    with timeout(5):
+        upload(sample_file)
+    assert completed
+```
+
+> **STE:**
+
+```python
+def test_upload_deadline():
+    """The upload should stop if the network does not respond. The test
+    reaches its result only when the request goes back before the deadline."""
+    with timeout(5):
+        upload(sample_file)
+    assert completed
+```
+
+> **Principle applied:** P3 (use approved words only with their approved meanings: "break" → "stop" — "break" means "exit a loop," not "abort an operation"; "hangs" → "does not respond" — "hang" is a code-domain technical noun for an unresponsive process, not a verb; "passes" → "reaches its result" — "pass" as a verb means "give as argument," not "succeed"; "returns" → "goes back" — "return" means "send a value back from a function," not "complete"); P1 ("should" → "should" — approved modal, kept)
+> **Explanation:** "Break" is the hardest word in this example: its only approved meaning is "exit a loop or switch statement." Aborting an upload on a stalled network is not a loop exit, so "stop" is the approved replacement. "Pass" again shows the verb/noun split — as a verb it means "give as argument," so a passing test must be described with "reaches its result" or "completes." "Return" for "complete before a deadline" is the classic intra-process return vs. completion drift; the approved phrase is "goes back" only when a value literally comes back, otherwise "completes."
+
+### Example 8 — README: Command Invocation vs. Naming
+
+> **Non-STE:**
+
+```markdown
+## Usage
+
+Call the CLI `shipit` to deploy your app. We call this workflow the
+"Blue-Green" workflow. The tool runs on any host and returns a status code.
+```
+
+> **STE:**
+
+```markdown
+## Usage
+
+Call the CLI `shipit` to deploy your app. We name this workflow the
+"Blue-Green" workflow. The tool operates on any host and gives a status code.
+```
+
+> **Principle applied:** P3 (use approved words only with their approved meanings: first "call" → "call" — correct, "invoke" meaning; second "call" → "name" — "call" meaning "name" is not approved; "runs" → "operates" — "run" means "execute a program," not "function on a host"; "returns" → "gives" — "return" means "send a value back from a function," not "produce a result"); P2 (part of speech: "call" as verb (invoke) vs. "call" meaning name — the second use violates Rule 1.2 as well)
+> **Explanation:** This example shows the same word, "call," used twice in one paragraph with two different intended meanings. The first is the approved verb meaning "invoke." The second, "we call this workflow," means "name," which is not an approved meaning for either the verb or noun form of "call" — it fails both Rule 1.2 (part of speech drift) and Rule 1.3 (meaning drift). "Name" is the approved replacement. "Runs on any host" again drifts to "operates," and "returns a status code" drifts to "gives a status code" because a CLI does not send a value back from a function; it produces output.
+
 ---
 
 ## Edge Cases
@@ -787,6 +948,32 @@ livenessProbe:
 ```
 
 > "Liveness probe" is a compound code-domain technical noun. Adding the modifier "liveness" disambiguates between the general approved noun "probe" and the domain-specific technical noun.
+
+### Edge Case 6: Homograph Drift — When a Word's Approved Meaning and a Code-Domain Technical Verb Share a Spelling
+
+**Scenario:** A general-English word is approved with one meaning, but the same spelling is also used as a code-domain technical verb with a different, more specific meaning. For example, "serve" is an approved verb meaning "give food or attend to a customer," but in web documentation "serve" is also used as a code-domain technical verb meaning "respond to a request from a client" (a web server serves a response). A writer may use the approved general meaning when the technical meaning is intended, or vice versa, and the reader cannot tell which.
+
+**Guidance:** When the context is a running program responding to requests, treat "serve" as the code-domain technical verb (permitted under Rule 1.12) and do not apply the general approved meaning. When the context is genuinely about attending to a user or providing a resource in a non-network sense, use the approved general meaning or restructure. The disambiguator is the subject: a `server` (code-domain technical noun) serves requests; a person serves a customer.
+
+> **Non-STE:**
+
+```python
+# The middleware serves the cached page to the user and then returns.
+def handle(req):
+    page = cache.get(req.path)
+    return respond(page)
+```
+
+> **STE:**
+
+```python
+# The middleware gives the cached page to the user and then goes back.
+def handle(req):
+    page = cache.get(req.path)
+    return respond(page)
+```
+
+> "Serve" here is used in the code-domain technical sense ("respond to a request"), which is permitted under Rule 1.12. But the sentence also says "returns," which means "send a value back from a function." The middleware does not send a value back to itself — it responds to the client and the function goes back. The rewrite uses "gives" for the delivery and "goes back" for the function exit, removing the ambiguous "serve" and the misused "returns." When in doubt, prefer the explicit approved verbs "give" and "go back" over the homographic "serve" and "return."
 
 ---
 
