@@ -17,6 +17,8 @@ From the topic sentences, the developer will understand the contents of your doc
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: "The ILS system shows the pilot the deviation data and aligns the localizer with the runway centerline and the glideslope is at a constant angle and the pointers show the direction and this data comes from the receivers in the aircraft."  |  STE: "The Instrument Landing System (the system) on the aircraft shows data that helps the pilot during the approach to the runway. This system shows the pilot the deviations from the localizer course and the glideslope path. The localizer course aligns with the centerline of the runway. And the glideslope path is at a constant angle to the threshold of the runway." (ASD-STE100 Rule 6.5, pages 91-98)
+
 > **Non-STE:** The authentication middleware validates each request and the logging system records all validation failures to the audit trail while the response pipeline returns JSON error bodies with error codes and the database connection pool maintains idle connections for reuse and the configuration module reloads settings when the manifest file changes on disk.
 
 > **STE:** The authentication middleware validates each request and returns error responses when validation fails.
@@ -27,7 +29,26 @@ From the topic sentences, the developer will understand the contents of your doc
 >
 > The middleware also logs each failure to the audit trail. It calls the `AuditLogger.log` static method. This method writes a record to the `audit_events` table in the primary database. The write uses an asynchronous pattern that does not block the response pipeline.
 >
-> *Code-domain example — the Non-STE version combines multiple topics into one sentence; the STE version separates them into three paragraphs, each with one topic.*
+> ```typescript
+> // auth.middleware.ts — one function, but its documentation has three
+> // single-topic paragraphs (see above).
+> export async function authenticate(
+>   req: Request,
+>   res: Response,
+>   next: NextFunction
+> ): Promise<void> {
+>   const header = req.headers["authorization"]; // "Bearer <jwt>"
+>   const result = await security.validateToken(header);
+>   if (result.status === "ok") {
+>     req.auth = { sub: result.sub, role: result.role };
+>     return next();
+>   }
+>   res.status(401).json({ message: result.reason, errorCode: result.code });
+>   AuditLogger.log({ event: "auth_failure", code: result.code });
+> }
+> ```
+>
+> *Code-domain example — the Non-STE version combines five topics into one sentence; the STE version separates them into three paragraphs, each with one topic. The code block shows that one function can have multiple documentation topics.*
 
 In the STE text, the documentation is divided into three paragraphs:
 
@@ -160,6 +181,14 @@ Do not document both the allocation and the deallocation of a resource in one pa
 >
 > The `POST /users` endpoint creates a new user account. The endpoint accepts a JSON body with `email`, `password`, and `name` fields. It hashes the password using bcrypt with a cost factor of 12. It stores the user record in the `users` table of the primary database. On success, the endpoint returns a `201 Created` response. The response body contains the user's public profile as a JSON object.
 >
+> ```json
+> {
+>   "email": "ada@example.com",
+>   "password": "s3cret",
+>   "name": "Ada Lovelace"
+> }
+> ```
+>
 > The `EmailService` sends a welcome email after the user record is created. The email send is asynchronous. It does not block the HTTP response.
 >
 > If the email is already in use, the endpoint returns a `409 Conflict` response. The response body contains a JSON object with an `error` field set to `EMAIL_TAKEN`.
@@ -174,11 +203,23 @@ Do not document both the allocation and the deallocation of a resource in one pa
 
 > **STE:** Install the project in four stages: dependencies, configuration, database setup, and server start.
 >
-> To install the project, clone the repository and run `npm install`. This command downloads all Node.js dependencies.
+> To install the project, clone the repository and run `npm install`. This command downloads all Node.js dependencies. The dependencies include `express` for the HTTP server, `pg` for the PostgreSQL client, and `redis` for the cache.
 >
 > Configure the environment variables. Copy the `.env.example` file to `.env`. Set the `DATABASE_URL` and `API_KEY` values in the `.env` file.
 >
+> ```bash
+> cp .env.example .env
+> # then edit .env and set:
+> # DATABASE_URL=postgres://user:pass@localhost:5432/app
+> # API_KEY=your-secret-key
+> ```
+>
 > Set up the database. Run `npm run migrate` to create the schema. Run `npm run seed` to add sample data.
+>
+> ```bash
+> npm run migrate
+> npm run seed
+> ```
 >
 > Start the development server with `npm run dev`. The server listens on port 3000 by default. To change the port, set the `PORT` environment variable. The server also starts a WebSocket server on the same port.
 >
@@ -194,6 +235,17 @@ Do not document both the allocation and the deallocation of a resource in one pa
 >
 > The `validatePasswordResetToken` function used a stale database connection. It did not pick up the new password hash after the reset completed. This commit changes the function to use a fresh connection from the pool for each validation.
 >
+> ```text
+> # Commit command (one topic, one commit):
+> git commit -m "Fix authentication failure after password reset"
+> ```
+>
+> The refactor of the user service, the dependency update, and the UI spinner are separate topics. They belong in their own commits:
+>
+> - `Refactor user service to use the repository pattern`
+> - `Bump express to a version that fixes CVE-2024-1234`
+> - `Add loading spinner to the login page`
+>
 > *Principles applied: P1, P6. The Non-STE commit message has four unrelated topics (bug fix, refactor, dependency update, UI change). The STE version is one commit with one topic. The other changes belong in separate commits.*
 
 ### Example 5 — Class Documentation (OOP)
@@ -203,6 +255,17 @@ Do not document both the allocation and the deallocation of a resource in one pa
 > **STE:** The `PaymentProcessor` class handles payment transactions for multiple payment providers.
 >
 > The `PaymentProcessor` class handles payment transactions. It validates payment methods, processes charges, and issues refunds.
+>
+> ```java
+> public class PaymentProcessor {
+>     private final Map<Provider, PaymentAdapter> adapters;
+>     public PaymentProcessor(Map<Provider, PaymentAdapter> adapters) {
+>         this.adapters = adapters;
+>     }
+>     public Charge process(ChargeRequest req) { /* ... */ }
+>     public Refund processRefund(RefundRequest req) { /* ... */ }
+> }
+> ```
 >
 > The class supports two payment providers: Stripe and PayPal. Each provider has a separate adapter class. The `PaymentProcessor` delegates provider-specific logic to the applicable adapter.
 >
@@ -229,6 +292,12 @@ Do not document both the allocation and the deallocation of a resource in one pa
 >
 > To fix this problem, check that the database server is running. Verify the `DATABASE_URL` value. Make sure that your network allows connections to the database port.
 >
+> ```bash
+> # Check that PostgreSQL accepts connections on its port:
+> pg_isready -h localhost -p 5432
+> # expected output: "accepting connections"
+> ```
+>
 > *Principles applied: P1, P3, P10. The Non-STE error message mixes symptoms, causes, and solutions with informal language ("probably", "also make sure"). The STE version separates the description, the causes, and the fix steps into distinct paragraphs.*
 
 ### Example 7 — Configuration Documentation
@@ -238,6 +307,16 @@ Do not document both the allocation and the deallocation of a resource in one pa
 > **STE:** The cache module supports two drivers: Redis and in-memory.
 >
 > The cache module supports two drivers: Redis and in-memory. Set the `CACHE_DRIVER` environment variable to `redis` or `memory`.
+>
+> ```toml
+> # .env (or config.toml)
+> CACHE_DRIVER = "redis"        # or "memory"
+> REDIS_URL = "redis://localhost:6379"
+> REDIS_PREFIX = "app-cache:"
+> REDIS_TIMEOUT = 5000          # milliseconds
+> REDIS_CLUSTER_URLS = "redis://node1:6379,redis://node2:6379"
+> MAX_ITEMS = 1000              # used only when CACHE_DRIVER = "memory"
+> ```
 >
 > When you use the Redis driver, set these environment variables:
 > - `REDIS_URL` — the connection string for the Redis server.
