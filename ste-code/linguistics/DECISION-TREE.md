@@ -27,7 +27,7 @@ Intent determines which rules apply. Imperative sentences skip referent checks (
 For every verb: is it an Action term? If yes:
 - In noun position → violation. Replace with Result form.
 - In imperative position → permitted.
-- `The deploy takes five minutes` → `The deployment takes five minutes.`
+- `The deploy takes five minutes` → `The deploy (n) takes five minutes.` (resolved exception: adapted rules use 'deploy' as the noun form, so Result is 'deploy (n)', not 'deployment')
 
 For every noun: is it an Action term used as noun? If yes:
 - Check if Result form exists. If yes, replace.

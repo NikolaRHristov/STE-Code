@@ -9,12 +9,12 @@
       "Action": {
         "description": "Verbs that name an operation. Permitted in imperative position. Prohibited as nouns.",
         "examples": ["deploy", "build", "compile", "test", "run", "execute", "install", "configure", "validate", "commit", "push", "merge", "rollback", "scale", "migrate", "provision"],
-        "rule": "Action terms must not appear as nouns. 'The deploy takes five minutes' → 'The deployment takes five minutes.'"
+        "rule": "Action terms must not appear as nouns. 'The build takes five minutes' → 'The build (n) takes five minutes.' (Exception: 'deploy' resolves to 'deploy (n)' per its term_table entry.)"
       },
       "Result": {
         "description": "Nouns naming the outcome of an Action. Permitted as nouns. The canonical form for what an Action produces.",
-        "examples": ["deployment", "build (n)", "compilation", "test (n)", "execution", "installation", "configuration", "validation", "commit (n)", "migration (n)"],
-        "rule": "Use Result form when naming the output. 'After the build completes' → 'After the build process completes' or restructure."
+        "examples": ["deployment", "build (n)", "test (n)", "execution", "installation", "configuration", "validation", "commit (n)", "migration (n)"],
+        "rule": "Use Result form when naming the output. 'After the build completes' → 'After the build process completes' or restructure. Note: 'deploy' is a resolved exception — the adapted rules use 'the deploy' as the noun form, so its Result is 'deploy (n)' (not 'deployment')."
       },
       "Entity": {
         "description": "Nouns naming system components, data structures, or concepts. No Action/Result ambiguity.",

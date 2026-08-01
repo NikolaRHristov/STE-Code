@@ -1,6 +1,6 @@
 # STE-Code Flavor: Linguistic Layer v1.0.0
 
-> **Flavor version:** FLAVOR-1.1.0
+> **Flavor version:** FLAVOR-1.0.0
 > **Base standard:** STANDARD-1.1.0 (54 rules, 22 categories, 8 levels)
 > **Relationship:** Additive — extends STANDARD without modifying it
 > **Status:** Specification complete; grounding, enrichment, and verification pending (see workflows)
@@ -26,11 +26,12 @@ STANDARD-1.0.0                    FLAVOR-1.0.0
 ste-code/adapted/                 ste-code/linguistics/
   a-sec*-rule*.md (54 rules)        semantics.json        ← semantic roles + collisions
   a-dictionary.md (560 entries)     DECISION-TREE.md      ← rule application order
-  a-categories.md (22 categories)   SPECIFICATION.md      ← full layer specification
+  a-categories.md (22 categories)   SPECIFICATION.md*     ← full layer specification (Phase 3)
                                     registers.json        ← register profiles
-ste-code/artifacts/                 ste_code_lint.py      ← reference checker
+ste-code/artifacts/                 ste_code_lint.py      ← reference checker (5 layers live)
   level1-5/system-prompt.txt        GENERATION-CONTRACT.md ← LLM generation rules
                                     WORKFLOWS.md          ← 17 implementation workflows
+                                    discourse.json*       ← anaphora/definitions spec (Phase 3)
 .agents/
   config/agents.yaml              (unchanged — both use same agent runner)
   benchmark/                      (extended — linguistic benchmark hooks)
@@ -78,7 +79,7 @@ python3 ste-code/linguistics/ste_code_lint.py sample-doc.md --flavor FLAVOR-1.0.
 | Version | Base | Changes |
 |---------|------|---------|
 | STANDARD-1.0.0 | — | 54 rules, 22 categories, 8 level prompts |
-| FLAVOR-1.0.0 | STANDARD-1.0.0 | 12 linguistic checking layers + 18 workflows |
+| FLAVOR-1.0.0 | STANDARD-1.0.0 | 12 linguistic checking layers + 17 workflows |
 
 Future versions: MINIMAL-PAIRS-1.0.0 (corpus), DIACHRONIC-1.0.0 (temporal), GENERATIVE-1.0.0 (LLM contract).
 
