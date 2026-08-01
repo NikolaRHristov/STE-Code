@@ -48,7 +48,7 @@ validates links across `final/` and `artifacts/`.
 | Linkcheck | Deterministic | lychee scans `final/` + `artifacts/` for broken links. |
 
 Stage C and Stage F are pure Python on purpose. A free-tier model that is asked
-to re-emit a 600 KB corpus truncates mid-stream, which is silent content loss.
+to re-emit a 650 KB corpus truncates mid-stream, which is silent content loss.
 Where the task is reorganization, not writing, the pipeline moves bytes instead
 of re-typing them.
 

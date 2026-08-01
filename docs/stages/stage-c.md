@@ -43,7 +43,7 @@ that says so: grouping is deterministic, so there is no agent to select.
 ## Why this stage has no LLM
 
 An earlier version gave the full 109-file → 24-group concatenation (about
-600 KB of output) to one free-tier model and asked it to re-emit every byte.
+650 KB of output) to one free-tier model and asked it to re-emit every byte.
 That guarantees mid-stream truncation, which is silent, corpus-wide content
 loss. Grouping is a reorganization and not a judgement, so it is pure Python:
 bytes are moved, never re-typed.
