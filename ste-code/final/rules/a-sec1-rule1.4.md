@@ -1,4 +1,4 @@
-# Rule 1.1.4 — Use Only the Approved Forms of Verbs and Adjectives
+# Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
 
 > **Source:** Adapted from ASD-STE100 Issue 9
 > **Source:** [master.md#sec1-rule1.4](ste-code/grouped/), Rule 1.4
@@ -374,6 +374,111 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 
 > **Principle applied:** P4 (use only approved verb forms: "Iterating" → "Iterate" (imperative); "accumulating" → "add"; "outputting" → "write"; "breaking" → "stop"; "exceeds" → "is larger than"); P1 (use approved words: "threshold" is a technical noun — permitted; "limit" is permitted)
 > **Explanation:** Inline comments that describe a procedure use the imperative mood, so the base form "Iterate" replaces the "-ing" form "Iterating." "Accumulating" is replaced with the approved verb "add." "Outputting" is replaced with "write" (the approved alternative to "output" as a verb is acceptable, but "write" is in the controlled terminology). "Breaking" is replaced with the approved verb "stop." "Exceeds" is replaced with the approved comparative construction "is larger than" to avoid the technical verb "exceed." The technical nouns "list," "sum," "limit," "log file," "loop," and "threshold" remain unchanged.
+
+---
+
+## Runnable Documentation Artifacts
+
+The pairs above isolate single sentences. In real repositories, Rule 1.4 applies to whole files that mix narrative prose, code fences, and metadata. The two full artifacts below show a complete document written the wrong way and the same document rewritten to STE-Code. Each artifact is a file you can save and open as-is. Read the **STE** version as the template.
+
+### Artifact A — `README.md` (project setup and feature summary)
+
+**Non-STE:**
+
+```markdown
+# cachekit
+
+cachekit is a library that is handling in-memory caching. It's leveraging
+a TTL-based eviction policy and is automatically invalidating entries when
+they become stale.
+
+## Getting Started
+
+After cloning the repo, you can start installing the dependencies and then
+begin building the package by executing `npm run build`. The compiler will be
+generating the bundles in the `dist/` directory while you are editing the
+config file.
+
+## Features
+
+* The manager is responsible for maintaining cached data and is providing a
+  thread-safe read path.
+* We are supporting async loading, and the prefetch worker is continuously
+  polling the source for changes.
+* This release is more fast than the previous one and gives better throughput.
+```
+
+**STE:**
+
+```markdown
+# cachekit
+
+cachekit is a library that handles in-memory caching. It uses a TTL-based
+eviction policy and removes old entries when they become stale.
+
+## Getting Started
+
+Clone the repo, install the dependencies, then build the package with
+`npm run build`. The compiler makes the bundles in the `dist/` directory
+while you edit the config file.
+
+## Features
+
+* The manager keeps cached data and gives a thread-safe read path.
+* cachekit supports async loading, and the prefetch worker checks the source
+  for changes.
+* This release is faster than the previous one and gives higher throughput.
+```
+
+> **Principle applied:** P4 (procedural sections use the imperative: "Clone," "install," "build"; "-ing" main verbs become simple present: "is handling" → "handles," "is leveraging" → "uses," "is automatically invalidating" → "removes," "will be generating" → "makes," "are editing" → "edit," "is responsible for maintaining" → "keeps," "is providing" → "gives," "are supporting" → "supports," "is continuously polling" → "checks," "is more fast" → "is faster"); P1 ("executing" → "with," "better" → "higher" — approved comparative of "high").
+
+### Artifact B — `user_service.py` (module docstring, API doc, inline comments, and error path)
+
+**Non-STE:**
+
+```python
+"""The UserService class is managing user records and is returning a
+profile object upon lookup. It is throwing a NotFoundError when the id is
+not matching any row, and it is logging every access for the audit trail.
+"""
+
+class UserService:
+    def get_profile(self, user_id: str) -> Profile:
+        """Was fetching the profile for the given id and returning it.
+        Is raising NotFoundError if the record is not existing.
+        """
+        if not self.store.contains(user_id):
+            # The lookup is failing, so we are bubbling up the error
+            raise NotFoundError("no such user")
+        record = self.store.read(user_id)
+        # Is serializing the record and is writing it to the cache
+        self.cache.put(user_id, record)
+        return record
+```
+
+**STE:**
+
+```python
+"""The UserService class keeps user records and gives a profile object
+upon lookup. It gives a NotFoundError when the id does not match any row,
+and it logs every access for the audit trail.
+"""
+
+class UserService:
+    def get_profile(self, user_id: str) -> Profile:
+        """Get the profile for the given id and give it.
+        Raise NotFoundError when the record is not in the store.
+        """
+        if not self.store.contains(user_id):
+            # The lookup fails, so we give the error
+            raise NotFoundError("no such user")
+        record = self.store.read(user_id)
+        # Save the record and put it in the cache
+        self.cache.put(user_id, record)
+        return record
+```
+
+> **Principle applied:** P4 (module docstring: "is managing" → "keeps," "is returning" → "gives," "is throwing" → "gives," "is logging" → "logs"; method docstring: "Was fetching" → "Get" (imperative), "is raising" → "Raise," "is not existing" → "is not in the store"; inline comments: "is failing" → "fails," "are bubbling up" → "give," "Is serializing … is writing" → "Save … put"); P1 ("bubbling up" → "give," "serializing" → "save"). Note that `NotFoundError`, `Profile`, `UserService`, `store`, `cache`, `record`, and `user_id` are code-domain technical nouns and remain unchanged.
 
 ---
 
