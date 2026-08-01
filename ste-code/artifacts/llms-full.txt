@@ -649,7 +649,7 @@ Prefer `socket` over `realtime_notification_channel`; short nouns read faster.
 **Rule 1.10 — Do not use regional, slang, or jargon words as technical nouns.**
 "No worries" and "utilize" are not technical nouns; use `use` and `use` instead.
 
-**Rule 超额1.11 — Do not use different technical nouns for the same item.**
+**Rule 1.11 — Do not use different technical nouns for the same item.**
 One concept, one term. If your README says `auth middleware`, the API docs and
 docstrings must say `auth middleware` — not `auth layer`.
 
