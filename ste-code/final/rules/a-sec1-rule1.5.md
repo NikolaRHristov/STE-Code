@@ -1,4 +1,4 @@
-# Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+# Rule 1.5 — You Can Use Words That You Can Include in a Code-Domain Technical Noun Category
 
 > **Source:** Adapted from ASD-STE100 Issue 9
 > **Source:** [master.md#sec1-rule1.5](ste-code/grouped/), Rule 1.5
@@ -118,11 +118,53 @@ The code-domain technical nouns in their related categories are only examples. R
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: "The developer used the thing to get data from the storage layer and put it on the screen." | STE: "The frontend developer used the API client to get data from the database and show it on the UI."
+
+The main example pair shows the rule in action. The non-STE version uses imprecise words ("thing," "storage layer," "screen") that are not clearly identified as technical nouns. The STE version uses precise code-domain technical nouns drawn from the categories above:
+
+- `frontend developer` — category 11 (professional roles, teams, and organizations)
+- `API client` — category 6 (systems, subsystems, and architectural components)
+- `database` — category 16 (computer science, information, and communication technology) and category 18 (database and storage terminology)
+- `UI` — category 8 (interface elements and navigation)
+
 > **Non-STE:** The developer used the thing to get data from the storage layer and put it on the screen.
 >
 > **STE:** The frontend developer used the API client to get data from the database and show it on the UI.
 
-> *Adapted from spec concept: technical nouns give precision to documentation. Just as STE uses categories like "Vehicles or machines" and "Tools and support equipment" to classify aerospace nouns, STE-Code uses categories like "Professional roles" (frontend developer), "Computer science" (API client, database), and "Interface elements" (UI) to classify code-domain nouns. The non-STE version uses imprecise words ("thing," "storage layer," "screen") that are not clearly identified as technical nouns.*
+A complete, runnable API client shows why the precise nouns matter:
+
+```typescript
+// Non-STE documentation comment (inside UserServiceClient.ts)
+// The dev uses the thingy to pull stuff out of the store and flash it on the view.
+export class UserServiceClient {
+  constructor(private http: ApiClient) {}
+
+  async loadUser(id: string): Promise<User> {
+    const response = await this.http.get(`/users/${id}`);
+    return response.data;
+  }
+}
+```
+
+```typescript
+// STE-Code documentation comment (inside UserServiceClient.ts)
+// The frontend developer uses the API client to get the user from the
+// database and show the user on the UI.
+export class UserServiceClient {
+  constructor(private http: ApiClient) {}
+
+  async loadUser(id: string): Promise<User> {
+    const response = await this.http.get(`/users/${id}`);
+    return response.data;
+  }
+}
+```
+
+- **Principle applied:** P1 (use approved words: "show" instead of "flash on the view"), P11 (one term per concept: "API client" and "database" name exact components instead of "thingy" and "store")
+- **Category mapping:** frontend developer (category 11), API client (category 6), database (category 18), UI (category 8)
+- **Explanation:** The non-STE comment uses informal words ("thingy," "store," "flash on the view") that are not registered technical nouns. A reader cannot tell what subsystem stores the data or what surface shows it. The STE version names each part with a code-domain technical noun from a recognized category.
+
+---
 
 ## Code-Domain Explanation
 
@@ -132,17 +174,116 @@ This rule is the primary mechanism for introducing domain-specific vocabulary in
 
 **README files.** A README introduces a project and describes its purpose, installation, and usage. Use technical nouns from categories 1 (code components), 3 (development tools), 5 (infrastructure), and 17 (legal terms). For example, "This package provides a middleware for Express" uses three code-domain technical nouns — package (category 1), middleware (category 1), and Express (category 5). Each noun names a precise concept that no STE-Code approved word can replace.
 
+Complete README example:
+
+```markdown
+# logger-middleware
+
+A Node.js package that gives request logging for Express applications.
+
+## Install
+
+Run `npm install logger-middleware` to add the package to your project.
+
+## License
+
+This package uses the MIT license. See the LICENSE file for the full text.
+```
+
+- `package` (category 1), `middleware` (category 1), `Node.js` (category 3), `Express` (category 5), `npm` (category 3), `MIT license` (category 17). The approved verbs ("gives," "Run," "add," "uses," "See") keep the surrounding prose in the controlled terminology.
+
 **API documentation.** API docs describe endpoints, parameters, return types, and error codes. Use technical nouns from categories 6 (systems), 18 (database), and 19 (network). An API endpoint description such as "The GET /users/:id route returns a JSON object with a user struct" uses route (category 19), JSON (category 4), and struct (category 4). These terms are the subject of the documentation and must appear verbatim.
+
+Complete API reference example:
+
+```typescript
+/**
+ * Gets a user by ID.
+ *
+ * @route GET /users/:id
+ * @param id - The user ID from the database primary key.
+ * @returns A JSON object with the user struct and the user roles.
+ * @throws NotFoundError if the user is not in the table.
+ */
+async function getUser(id: string): Promise<User> {
+  const user = await db.query('SELECT * FROM users WHERE id = $1', [id]);
+  return user;
+}
+```
+
+- `route` (category 19), `JSON` (category 4), `struct` (category 4), `database` (category 18), `primary key` (category 18), `table` (category 18), `NotFoundError` (category 15). The prose uses approved verbs ("Gets," "returns," "if").
 
 **Docstrings and inline comments.** Docstrings explain what a function, class, or module does. Use technical nouns from categories 4 (data types), 7 (algorithms), and 15 (defects). A Python docstring such as "Traverse the binary search tree in-order and return a sorted array" uses binary search tree (category 7), in-order (category 7), and array (category 4). The nouns are essential to describe the algorithm correctly.
 
+Complete docstring example:
+
+```python
+def in_order_traversal(root: TreeNode) -> list[int]:
+    """Traverse the binary search tree in-order and return a sorted array.
+
+    The function walks the left subtree, visits the node, then walks the
+    right subtree. Use this function to get keys in ascending order.
+
+    Args:
+        root: The root node of the binary search tree.
+
+    Returns:
+        A list of node values in sorted order.
+    """
+    result: list[int] = []
+    if root is not None:
+        result.extend(in_order_traversal(root.left))
+        result.append(root.value)
+        result.extend(in_order_traversal(root.right))
+    return result
+```
+
+- `binary search tree` (category 7), `in-order` (category 7), `node` (category 4), `subtree` (category 4), `list` (category 4), `array` (category 4). The docstring uses approved verbs ("Traverse," "return," "walks," "Use," "get").
+
 **Commit messages.** Commit messages record what changed and why. Use technical nouns from categories 1 (code components), 15 (defects), and 18 (database). A commit message such as "Fix race condition in the connection pool that caused a deadlock on PostgreSQL" uses race condition (category 15), connection pool (category 18), deadlock (category 15), and PostgreSQL (category 18). These nouns identify the exact change.
 
+Complete commit message example:
+
+```
+fix: correct race condition in connection pool that caused deadlock on PostgreSQL
+
+The pool gave a connection to two threads at the same time. This caused a
+deadlock on PostgreSQL when both threads locked the same row. Add a mutex
+around the checkout to give one connection per thread.
+```
+
+- `race condition` (category 15), `connection pool` (category 18), `deadlock` (category 15), `PostgreSQL` (category 18), `thread` (category 13), `row` (category 18), `mutex` (category 16). The verbs are approved ("correct," "gave," "caused," "Add," "give").
+
 **Error messages.** Error messages report failures to users and developers. Use technical nouns from categories 13 (runtime), 15 (defects), and 19 (network). An error message such as "Connection refused: the TCP socket on port 5432 timed out after 30 seconds" uses TCP (category 19), socket (category 19), port (category 19), and seconds (category 9). These nouns give the user actionable information.
+
+Complete error message example:
+
+```json
+{
+  "error": "Connection refused: the TCP socket on port 5432 timed out after 30 seconds",
+  "code": "DB_CONNECTION_TIMEOUT",
+  "detail": "The PostgreSQL connection pool could not get a connection."
+}
+```
+
+- `TCP` (category 19), `socket` (category 19), `port` (category 19), `seconds` (category 9), `PostgreSQL` (category 18), `connection pool` (category 18). The prose uses approved verbs ("timed out," "could not get").
 
 ### Distinction from Rule 1.1 (Approved Words)
 
 Rule 1.1 requires the use of approved words from the STE-Code dictionary for all common vocabulary. Rule 1.5 is the complement: it permits words outside the dictionary when they name a technical concept. The two rules work together. Use an approved word whenever one exists. Use a code-domain technical noun when no approved word names the concept.
+
+```text
+Decision flow for a word in your documentation:
+
+1. Is the word in the controlled terminology as APPROVED?
+     Yes -> Use it with its approved part of speech and meaning (Rule 1.1).
+     No  -> Go to step 2.
+2. Does the word name a precise software concept (a component, tool, type,
+   protocol, role, defect, or other category-19 term)?
+     Yes -> It is a code-domain technical noun (Rule 1.5). Use it, but do
+            not use it as a verb (Rule 1.7). Register it in the glossary.
+     No  -> The word is forbidden. Replace it (Rules 1.1 and 1.6).
+```
 
 ### Distinction from Rule 1.6 (Non-Approved Words Only as Technical Nouns)
 
@@ -159,16 +300,63 @@ ASD-STE100 requires that every technical noun a project uses be registered in th
 
 A project that does not maintain a glossary risks ambiguity: the same noun may mean different things to different readers, which violates P11 (one term per concept).
 
+Complete glossary entry example:
+
+```yaml
+# glossary.yaml
+terms:
+  - term: connection pool
+    categories: [18]            # Database and storage terminology
+    meaning: >-
+      A set of reusable database connections that the application keeps open
+      to avoid the cost of opening a new connection for each request.
+    example: >-
+      The PostgreSQL connection pool gives a connection to each request
+      thread and returns it after the query completes.
+  - term: race condition
+    categories: [15]            # Defects, errors, and fault terminology
+    meaning: >-
+      A defect that happens when two or more threads access shared data at
+      the same time and the result depends on the order of access.
+    example: >-
+      A race condition in the connection pool caused a deadlock on
+      PostgreSQL when two threads locked the same row.
+```
+
+---
+
 ## Paradigm-Specific Guidance
 
 ### Object-Oriented Paradigm (Java, C++, C#, Python classes)
 
 In OOP documentation, use technical nouns from categories 1 (code components), 4 (data types), and 6 (systems). Class names, method names, interface names, and design pattern names are code-domain technical nouns. They do not require translation to approved words.
 
-Acceptable: "The `UserRepository` class extends the `BaseRepository` abstract class and implements the `IAuditable` interface."
+Acceptable:
+
+```java
+/**
+ * The UserRepository class extends the BaseRepository abstract class and
+ * implements the IAuditable interface.
+ */
+public class UserRepository extends BaseRepository implements IAuditable {
+    // ...
+}
+```
+
 Explanation: `UserRepository`, `BaseRepository`, and `IAuditable` are code components (category 1). `abstract class` and `interface` are computer science terms (category 16).
 
-Acceptable: "The factory method pattern decouples the object creation logic from the client."
+Acceptable:
+
+```java
+/**
+ * The factory method pattern decouples the object creation logic from the
+ * client. The client asks for an object without naming the class.
+ */
+public class Creator {
+    public Product factoryMethod() { return new ConcreteProduct(); }
+}
+```
+
 Explanation: `factory method pattern` is a design pattern (category 6). `object` is a data structure (category 4). `client` is a system component (category 6).
 
 Not acceptable: "The repo leverages the base to retrieve user data." (Uses non-approved "leverage" — use "use". Uses informal abbreviation "repo" — use full technical noun "repository".)
@@ -177,10 +365,27 @@ Not acceptable: "The repo leverages the base to retrieve user data." (Uses non-a
 
 In functional programming documentation, use technical nouns from categories 7 (algorithms), 4 (data types), and 16 (computer science). Terms such as monad, functor, closure, currying, pattern matching, recursion, and immutability are code-domain technical nouns.
 
-Acceptable: "The function returns an `Option` monad. Use pattern matching to extract the value."
+Acceptable:
+
+```haskell
+-- The function returns an Option monad. Use pattern matching to extract
+-- the value.
+safeHead :: [a] -> Option a
+safeHead []    = None
+safeHead (x:_) = Some x
+```
+
 Explanation: `Option` is a data type (category 4). `monad` is a computer science concept (category 16). `pattern matching` is an algorithmic term (category 7).
 
-Acceptable: "The `fold` function applies a binary operation to each element of the list and accumulates the result."
+Acceptable:
+
+```haskell
+-- The fold function applies a binary operation to each element of the
+-- list and accumulates the result.
+sumList :: Num a => [a] -> a
+sumList = fold (+) 0
+```
+
 Explanation: `fold` is an algorithmic term (category 7). `binary operation` is a mathematical term (category 7). `list` is a data structure (category 4).
 
 Not acceptable: "The combinator stuff chains stuff together to make new stuff." (No recognized technical nouns. Replace with specific terms: parser combinator, function, pipeline.)
@@ -189,10 +394,33 @@ Not acceptable: "The combinator stuff chains stuff together to make new stuff." 
 
 In procedural code documentation, use technical nouns from categories 4 (data types), 13 (runtime), and 19 (network). Terms such as pointer, struct, mutex, goroutine, channel, file descriptor, and signal are code-domain technical nouns.
 
-Acceptable: "The C function accepts a pointer to a `FILE` struct and returns an integer status code."
+Acceptable:
+
+```c
+/* The C function accepts a pointer to a FILE struct and returns an
+   integer status code. */
+int read_config(FILE *handle) {
+    // ...
+    return 0;
+}
+```
+
 Explanation: `pointer` is a data type (category 4). `FILE` is a code component (category 1). `struct` is a data structure (category 4). `integer` is a data type (category 4).
 
-Acceptable: "The Go goroutine reads from the channel. The mutex prevents a race condition."
+Acceptable:
+
+```go
+// The Go goroutine reads from the channel. The mutex prevents a race
+// condition.
+func worker(ch chan int, mu *sync.Mutex) {
+    for v := range ch {
+        mu.Lock()
+        // ...
+        mu.Unlock()
+    }
+}
+```
+
 Explanation: `goroutine` is a runtime term (category 13). `channel` is a data structure (category 4). `mutex` is a computer science term (category 16). `race condition` is a defect term (category 15).
 
 Not acceptable: "The script fires off a subprocess to crunch the numbers." (Uses non-approved "fires off" — use "starts". "crunch" is jargon — use "process".)
@@ -201,10 +429,33 @@ Not acceptable: "The script fires off a subprocess to crunch the numbers." (Uses
 
 In declarative documentation, use technical nouns from categories 18 (database), 5 (infrastructure), and 12 (official documents). Terms such as SELECT, JOIN, resource, module, provider, pod, deployment, and namespace are code-domain technical nouns. YAML keys and SQL keywords are quoted text (category 10) when referenced verbatim.
 
-Acceptable: "The `SELECT` statement uses an `INNER JOIN` on the `users` and `orders` tables. The query returns a result set."
+Acceptable:
+
+```sql
+-- The SELECT statement uses an INNER JOIN on the users and orders tables.
+-- The query returns a result set.
+SELECT u.id, o.total
+FROM users AS u
+INNER JOIN orders AS o ON o.user_id = u.id;
+```
+
 Explanation: `SELECT` and `INNER JOIN` are quoted text (category 10). `users` and `orders` are database terms (category 18). `result set` is a database term (category 18).
 
-Acceptable: "The Terraform `resource` block declares an AWS EC2 instance. The `provider` block configures the AWS region."
+Acceptable:
+
+```hcl
+# The Terraform resource block declares an AWS EC2 instance. The provider
+# block configures the AWS region.
+resource "aws_instance" "web" {
+  ami           = "ami-0abc123"
+  instance_type = "t3.micro"
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+```
+
 Explanation: `resource` and `provider` are infrastructure terms (category 5). `AWS`, `EC2`, and `region` are infrastructure terms (category 5).
 
 Not acceptable: "K8s spins up a bunch of pods inside the thing." (Uses informal "K8s" — use "Kubernetes". Uses non-approved "spins up" — use "starts". Uses imprecise "thing" — use "namespace".)
@@ -213,15 +464,40 @@ Not acceptable: "K8s spins up a bunch of pods inside the thing." (Uses informal 
 
 In systems documentation, use technical nouns from categories 13 (runtime), 4 (data types), and 15 (defects). Terms such as ownership, borrow, lifetime, stack, heap, allocation, deallocation, undefined behavior, and segmentation fault are code-domain technical nouns.
 
-Acceptable: "The Rust compiler enforces the ownership rules. The borrow checker prevents dangling pointers at compile time."
+Acceptable:
+
+```rust
+// The Rust compiler enforces the ownership rules. The borrow checker
+// prevents dangling pointers at compile time.
+fn process(data: Vec<u8>) {
+    let view = &data; // borrow
+    // ...
+} // data dropped here; view cannot outlive data
+```
+
 Explanation: `ownership` and `borrow checker` are computer science terms (category 16). `dangling pointers` is a defect term (category 15). `compile time` is a runtime term (category 13).
 
-Acceptable: "The `malloc` function allocates memory on the heap. The caller must call `free` to prevent a memory leak."
+Acceptable:
+
+```c
+/* The malloc function allocates memory on the heap. The caller must call
+   free to prevent a memory leak. */
+void *buffer = malloc(1024);
+// ... use buffer ...
+free(buffer);
+```
+
 Explanation: `malloc` and `free` are code components (category 1). `heap` is a runtime term (category 13). `memory leak` is a defect term (category 15).
 
 Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with memory stuff." (Uses informal "thingy" and "stuff" — replace with "ownership system" and "memory errors". Uses idiom "shooting yourself in the foot" — forbidden by P10.)
 
+---
+
 ## Extended Examples
+
+Each example pair below shows a real code documentation scenario, the STE-Code compliant rewrite, which principle was applied, the category mapping, and an explanation of the fix.
+
+> *Adapted from spec pair:* Non-STE: "The developer used the thing to get data from the storage layer and put it on the screen." | STE: "The frontend developer used the API client to get data from the database and show it on the UI."
 
 ### Example Group 1: API Documentation
 
@@ -229,9 +505,25 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 >
 > **STE:** The endpoint uses the authentication middleware to check the request. The endpoint then starts a background job to process the data.
 
-- **Principle applied:** P1 (use approved words: "use" instead of "leverage", "check" instead of "authenticate", "start" instead of "kicks off", "process" instead of "crunch")
+```typescript
+// Non-STE JSDoc
+/**
+ * Leverages the auth middleware to authenticate the incoming request,
+ * then kicks off a background job to crunch the payload.
+ */
+```
+
+```typescript
+// STE-Code JSDoc
+/**
+ * Uses the authentication middleware to check the request.
+ * Then starts a background job to process the data.
+ */
+```
+
+- **Principle applied:** P1 (use approved words: "use" instead of "leverage", "check" instead of "authenticate", "start" instead of "kicks off", "process" instead of "crunch"), P11 (one term per concept: "data" instead of "payload")
 - **Category mapping:** authentication middleware (category 16), background job (category 13), endpoint (category 19)
-- **Explanation:** The non-STE version uses "leverage" (not approved), "kicks off" (jargon), and "crunch" (jargon). The STE version replaces these with approved verbs and keeps the code-domain technical nouns.
+- **Explanation:** The non-STE version uses "leverage" (not approved), "kicks off" (jargon), and "crunch" (jargon). The STE version replaces these with approved verbs and keeps the code-domain technical nouns. "Payload" is a jargon word; "data" is the approved general noun and is precise enough here.
 
 ### Example Group 2: README Installation Instructions
 
@@ -239,9 +531,25 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 >
 > **STE:** First, clone the repository. Then, change to the repository directory. After that, start the development server.
 
-- **Principle applied:** P1 (use approved words: "clone" is a technical verb per P12, "change" instead of "cd", "start" instead of "fire up"), P10 (no slang: "snag" is informal)
+```markdown
+# Non-STE README
+
+1. Snag the repo: `git clone https://github.com/acme/app.git`
+2. `cd app`
+3. Fire up the dev server: `npm run dev`
+```
+
+```markdown
+# STE-Code README
+
+1. Clone the repository: `git clone https://github.com/acme/app.git`
+2. Change to the repository directory: `cd app`
+3. Start the development server: `npm run dev`
+```
+
+- **Principle applied:** P1 (use approved words: "clone" is a technical verb per Rule 1.12, "change" instead of "cd", "start" instead of "fire up"), P10 (no slang: "snag" is informal)
 - **Category mapping:** repository (category 1), development server (category 5)
-- **Explanation:** The non-STE version uses slang ("snag"), a shell command as a verb ("cd into"), and jargon ("fire up"). The STE version uses the technical verb "clone" (permitted by P12) and approved verbs.
+- **Explanation:** The non-STE version uses slang ("snag"), a shell command as a verb ("cd into"), and jargon ("fire up"). The STE version uses the technical verb "clone" (permitted by Rule 1.12) and approved verbs. `git`, `npm`, and `app` are code-domain technical nouns (categories 3 and 1).
 
 ### Example Group 3: Commit Message
 
@@ -249,9 +557,20 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 >
 > **STE:** Update dependencies. Fix a timeout defect in the connection pool that caused a crash in production.
 
+```
+Non-STE commit:
+  bumped deps and fixed the wonky timeout thing that was breaking prod
+```
+
+```
+STE-Code commit:
+  update dependencies
+  fix a timeout defect in the connection pool that caused a crash in production
+```
+
 - **Principle applied:** P1 (use approved words: "update" instead of "bumped"), P10 (no jargon: "wonky" is informal, "prod" is informal), P11 (one term per concept: "defect" instead of "thing")
 - **Category mapping:** dependencies (category 1), timeout (category 13), connection pool (category 18), crash (category 15), production (category 13)
-- **Explanation:** The non-STE version uses informal language ("bumped", "wonky", "thing", "prod"). The STE version identifies each problem with a precise code-domain technical noun.
+- **Explanation:** The non-STE version uses informal language ("bumped", "wonky", "thing", "prod"). The STE version identifies each problem with a precise code-domain technical noun. "Production" is the full category-13 term; "prod" is an informal abbreviation and is forbidden.
 
 ### Example Group 4: Error Message
 
@@ -259,9 +578,20 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 >
 > **STE:** Error: The PostgreSQL connection pool could not get a connection. The TCP socket timed out after 30 seconds.
 
+```text
+Non-STE console output:
+  Oops! Something went sideways when the DB tried to do its thing.
+```
+
+```text
+STE-Code console output:
+  Error: The PostgreSQL connection pool could not get a connection.
+  The TCP socket timed out after 30 seconds.
+```
+
 - **Principle applied:** P1 (use approved words), P10 (no slang: "went sideways", "do its thing"), P11 (one term per concept: name the specific component)
 - **Category mapping:** PostgreSQL (category 18), connection pool (category 18), TCP socket (category 19), 30 seconds (category 9)
-- **Explanation:** The non-STE version is vague and unprofessional. The STE version names the exact system, the exact component, and the exact timeout value. Users can act on this information.
+- **Explanation:** The non-STE version is vague and unprofessional. The STE version names the exact system, the exact component, and the exact timeout value. Users can act on this information. "DB" is an informal abbreviation; "PostgreSQL" is the precise category-18 term.
 
 ### Example Group 5: Docstring for a Function
 
@@ -269,9 +599,23 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 >
 > **STE:** Traverse the binary search tree. Return a list of nodes that match the predicate function.
 
+```python
+# Non-STE docstring
+def prune(tree, predicate):
+    """This guy walks the tree and yanks out all the nodes
+    that match the predicate."""
+```
+
+```python
+# STE-Code docstring
+def prune(tree, predicate):
+    """Traverse the binary search tree.
+    Return a list of nodes that match the predicate function."""
+```
+
 - **Principle applied:** P1 (use approved words: "return" instead of "yanks out"), P10 (no slang: "this guy", "walks", "yanks out"), P11 (one term per concept: "traverse" is the standard term for tree navigation)
 - **Category mapping:** binary search tree (category 7), nodes (category 4), list (category 4), predicate function (category 7)
-- **Explanation:** The non-STE version uses anthropomorphic and informal language. The STE version uses standard algorithmic terminology.
+- **Explanation:** The non-STE version uses anthropomorphic and informal language. The STE version uses standard algorithmic terminology. "Tree" is a recognized data structure (category 4); "predicate" is an algorithmic term (category 7).
 
 ### Example Group 6: Configuration File Comment
 
@@ -279,9 +623,72 @@ Not acceptable: "Rust's thingy stops you from shooting yourself in the foot with
 >
 > **STE:** Increase this value to reduce the response time. WARNING: Large values can cause a memory leak.
 
+```yaml
+# Non-STE config comment
+# Tweak this knob if you want the cache to go faster but be careful
+# not to blow up the memory.
+cache:
+  max_entries: 10000
+```
+
+```yaml
+# STE-Code config comment
+# Increase this value to reduce the response time.
+# WARNING: Large values can cause a memory leak.
+cache:
+  max_entries: 10000
+```
+
 - **Principle applied:** P1 (use approved words: "increase" instead of "tweak"), P10 (no slang: "knob", "blow up"), P11 (one term per concept: "response time" instead of "go faster")
 - **Category mapping:** response time (category 7), memory leak (category 15)
-- **Explanation:** The non-STE version uses metaphors ("knob", "blow up") that do not convey technical meaning. The STE version states the effect precisely and adds a warning about the defect.
+- **Explanation:** The non-STE version uses metaphors ("knob", "blow up") that do not convey technical meaning. The STE version states the effect precisely and adds a warning about the defect. "Cache" and "max_entries" are code-domain technical nouns (categories 1 and 4) and remain unchanged.
+
+### Example Group 7: Test Description
+
+> **Non-STE:** it should totally nuke all the rows when the migration borks
+>
+> **STE:** it removes all the rows when the migration fails
+
+```typescript
+// Non-STE test
+it('should totally nuke all the rows when the migration borks', () => {
+  // ...
+});
+```
+
+```typescript
+// STE-Code test
+it('removes all the rows when the migration fails', () => {
+  // ...
+});
+```
+
+- **Principle applied:** P1 (use approved words: "removes" instead of "nuke", "fails" instead of "borks"), P10 (no slang: "totally nuke", "borks")
+- **Category mapping:** rows (category 18), migration (category 18)
+- **Explanation:** Test descriptions are code documentation and must follow Rule 1.5 together with Rule 1.1. "Nuke" and "borks" are slang. "Rows" and "migration" are code-domain technical nouns (category 18) and remain unchanged. The present tense ("removes") replaces the modal "should" for direct, clear test language.
+
+### Example Group 8: Code Review Comment
+
+> **Non-STE:** Can we please leverage a singleton here so we don't keep spinning up new clients?
+>
+> **STE:** Use a singleton here so we do not keep starting new clients.
+
+```text
+Non-STE review comment:
+  Can we please leverage a singleton here so we don't keep spinning up
+  new clients?
+```
+
+```text
+STE-Code review comment:
+  Use a singleton here so we do not keep starting new clients.
+```
+
+- **Principle applied:** P1 (use approved words: "use" instead of "leverage", "starting" instead of "spinning up"), P10 (no jargon)
+- **Category mapping:** singleton (category 6), clients (category 6)
+- **Explanation:** "Leverage" and "spinning up" are not approved. "Singleton" is a design pattern code-domain technical noun (category 6). "Clients" is a system component (category 6). The STE version keeps the technical nouns and uses approved verbs.
+
+---
 
 ## Edge Cases
 
@@ -297,6 +704,17 @@ Explanation: `Go` is a development tool (category 3). It is not the verb "go".
 
 When a sentence is ambiguous without capitalization (for example, "use swift to process the data"), always capitalize framework names or use the full term ("the Swift language", "the Rust compiler") to distinguish them from approved words.
 
+```go
+// Non-STE: use swift to process the data
+// STE-Code: use the Swift language to process the data
+func main() {
+    data := []int{3, 1, 2}
+    sort(data) // sort is the Swift standard library function
+}
+```
+
+- `Swift` (category 3) is a development tool. The verb "use" is approved. "Process" is approved.
+
 ### Edge Case 2: Code Keywords Inside Documentation
 
 Code keywords (`if`, `else`, `for`, `while`, `return`, `class`, `def`, `fn`, `let`, `const`, `var`, `async`, `await`) are quoted text (category 10) when they appear in documentation. They do not need to be technical nouns because they are part of the quoted text category. However, when you use them as English words in a sentence, they must follow approved meanings.
@@ -309,6 +727,20 @@ Not acceptable: "If the request fails, return a 500." (Missing backticks around 
 Acceptable: "If the request fails, return `500 Internal Server Error`."
 Explanation: The status code is quoted text (category 10).
 
+```typescript
+/**
+ * If the request fails, return `500 Internal Server Error`.
+ * The `if` statement checks the response status.
+ */
+function handle(res: Response): void {
+  if (!res.ok) {
+    throw new Error('500 Internal Server Error');
+  }
+}
+```
+
+- `if` (category 10), `500 Internal Server Error` (category 10), `response` (category 19). The verbs "fails", "return", "checks", "throw" — "throw" is a code-domain technical verb (Rule 1.12); the rest are approved.
+
 ### Edge Case 3: Abbreviations and Acronyms
 
 Code-domain technical nouns often appear as abbreviations or acronyms (API, JSON, SQL, HTML, CSS, HTTP, TCP, TLS, DNS, URL). These are permissible under Rule 1.5 as technical nouns in categories 16, 18, or 19. However, you must define each abbreviation at its first use in a document, unless the abbreviation is universally understood by the target audience.
@@ -317,6 +749,17 @@ Acceptable (first use): "The application programming interface (API) uses Hypert
 Acceptable (subsequent use): "The API returns a JSON response over HTTPS."
 
 Not acceptable: "The API leverages HTTPS to transmit the payload." (Uses non-approved "leverage" — use "use". Non-approved "transmit" — use "send". Non-approved "payload" — use "data" or define as a technical noun.)
+
+```typescript
+// First use in the document:
+// The application programming interface (API) uses Hypertext Transfer
+// Protocol Secure (HTTPS) to send the data.
+
+// Later in the document:
+// The API returns a JSON response over HTTPS.
+```
+
+- `API` (category 19), `HTTPS` (category 19), `JSON` (category 4). The verbs "uses", "send", "returns" are approved.
 
 ### Edge Case 4: Generated Code and Auto-Generated Documentation
 
@@ -328,6 +771,14 @@ Explanation: The human-written comment follows STE-Code. The generated code itse
 Not acceptable (human-written comment in generated file): `// this hack works around a funky TS bug`
 Explanation: The comment uses non-approved "hack" (use "workaround"), jargon "funky" (use "known defect"), and informal abbreviation "TS" (use "TypeScript").
 
+```typescript
+// @ts-expect-error TS1234 — The generated type is incompatible with the
+// runtime type. Use this workaround for the known type error.
+const value = legacyApi.get() as CorrectType;
+```
+
+- `TS1234` (category 15, error code, quoted text category 10), `runtime type` (category 13), `workaround` (approved noun), `type error` (category 15). The approved verbs "Use" and the noun "workaround" keep the comment compliant.
+
 ### Edge Case 5: Project-Specific Internal Names
 
 Projects often name internal components with made-up words, code names, or branded terms (for example, "Project Nightfall", "Hammerhead subsystem", "PhoenixCache"). These are permissible as code-domain technical nouns under category 1 (code components) or category 6 (systems) if they appear in the project glossary. Without glossary registration, such names are non-approved words and violate Rule 1.6.
@@ -337,6 +788,20 @@ Explanation: `PhoenixCache` is registered in the project glossary under category
 
 Not acceptable (without glossary): "The PhoenixCache layer stores frequently accessed data in memory."
 Explanation: `PhoenixCache` is not in the glossary. Readers cannot know what it means. Add it to the glossary first.
+
+```yaml
+# glossary.yaml (required before use)
+terms:
+  - term: PhoenixCache
+    categories: [6]   # Systems, subsystems, and architectural components
+    meaning: >-
+      The in-memory caching layer that keeps frequently accessed data to
+      reduce database reads.
+    example: >-
+      The PhoenixCache layer stores frequently accessed data in memory.
+```
+
+---
 
 ## Grammar Notes
 
@@ -370,6 +835,15 @@ Acceptable: "The user's session data is encrypted." (Category 11 permits possess
 Acceptable: "The configuration of the Docker container is stored in a YAML file." (Category 5, use "of" construction.)
 Not acceptable: "The Docker container's configuration is stored in a YAML file." (Category 5 does not permit possessive.)
 
+```yaml
+# STE-Code: use "of" for category-5 nouns
+# The configuration of the Docker container is stored in a YAML file.
+docker:
+  config_file: docker.config.yaml
+```
+
+- `Docker container` (category 5), `YAML file` (category 4). The noun "configuration" is approved.
+
 ### Technical Nouns and Pluralization
 
 Technical nouns follow standard English pluralization rules. Acronyms and initialisms form plurals by adding a lowercase "s" without an apostrophe.
@@ -390,6 +864,8 @@ Explanation: `TypeScript` is a proper noun (category 3). `controller` is a commo
 Not acceptable: "The typescript compiler checks the Types. The Controller handles the request."
 Explanation: `typescript` should be `TypeScript`. `Types` and `Controller` should be lowercase (not first word, not proper nouns).
 
+---
+
 ## Cross-References
 
 - **Rule 1.1 (Approved Words):** Rule 1.1 lists the approved words you must use for all common vocabulary. Rule 1.5 describes the exception: you may use non-approved words if they are code-domain technical nouns. See Rule 1.1 for the complete approved-word dictionary.
@@ -403,6 +879,19 @@ Explanation: `typescript` should be `TypeScript`. `Types` and `Controller` shoul
 - **Rule 1.11 (One Term per Concept):** Each code-domain technical noun must refer to exactly one concept in your project. Do not use the same noun for two different concepts. See Rule 1.11.
 - **Rule 1.12 (Technical Verbs):** Technical verbs (build, deploy, test, lint, compile, debug) are permitted. They are not technical nouns. Do not confuse the two categories. See Rule 1.12.
 
-## Summary
+**Categories reference:** See `a-categories.md` for the full list of the nineteen code-domain technical noun categories defined under Rule 1.5.
 
-Rule 1.5 is the gateway for all domain-specific vocabulary in STE-Code documentation. It permits you to use words outside the approved dictionary when those words name a precise concept in one of the nineteen code-domain categories. The rule requires discipline: register every technical noun in your project glossary, use each noun only with its registered meaning, and do not use technical nouns as verbs. When you follow Rule 1.5 together with Rules 1.1 and 1.6, your documentation uses only two kinds of words: approved STE-Code words for common vocabulary, and code-domain technical nouns for domain-specific concepts. There is no third category.
+---
+
+## See also
+
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 1.4 — Use Only the Approved Verb Forms and Adjective Forms
+> **See also:** Rule 1.6 — Use a Non-Approved Word Only When It Is a Technical Noun
+> **See also:** Rule 1.7 — Do Not Use Technical Nouns as Verbs
+> **See also:** Rule 1.8 — Use Standard, Well-Known Technical Nouns
+> **See also:** Rule 1.9 — Prefer Short, Clear Technical Nouns
+> **See also:** Rule 1.11 — One Term Per Concept
+> **See also:** Rule 1.12 — Technical Verbs Are Allowed
