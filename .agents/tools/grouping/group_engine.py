@@ -244,13 +244,31 @@ def _build_page_letter_cache() -> None:
             if rf and rf.path.name not in seen:
                 seen[rf.path.name] = rf
         for rf in seen.values():
-            for start, end, text in file_segments(rf, id2pos):
-                if start != end:
-                    continue  # merged segment — not attributable to a single page
+            # split_straddlers=False is REQUIRED here: file_segments() otherwise
+            # calls _group_map() -> build_plan() -> classify_page() -> back into
+            # this function. That cycle used to cache a group map built from a
+            # half-populated letter cache, so _group_map() and a fresh
+            # build_plan() permanently disagreed about ~20 pages. The letter
+            # oracle only needs raw marker segmentation, not boundary splitting.
+            for start, end, text in file_segments(rf, id2pos, split_straddlers=False):
                 letters = _page_entry_letters(text)
                 if not letters:
                     continue
-                _PAGE_LETTER_CACHE[start] = collections.Counter(letters).most_common(1)[0][0]
+                if start == end:
+                    _PAGE_LETTER_CACHE[start] = collections.Counter(letters).most_common(1)[0][0]
+                    continue
+                # Merged segment: no internal page markers, so we cannot say
+                # which page each entry sits on. But the body IS in spec order,
+                # so the segment as a whole belongs to the letters it contains.
+                # Assign every page of the segment the segment's FIRST letter
+                # when the segment is alphabetically homogeneous (one letter);
+                # a mixed merged segment keeps the MANIFEST letters and is left
+                # to `_maybe_split_straddler`, which splits it at the boundary.
+                distinct = set(letters)
+                if len(distinct) == 1:
+                    only = next(iter(distinct))
+                    for p in range(start, end + 1):
+                        _PAGE_LETTER_CACHE[p] = only
     except Exception:
         # Never let the oracle break planning — fall back to MANIFEST letters.
         pass
@@ -408,10 +426,30 @@ def build_plan(manifest: Dict[int, str]) -> List[Group]:
     # 6. DICT — balanced alphabetical buckets.
     dict_pages = pages_of("DICT")
     if dict_pages:
+        # The letter for a page can come from real content (see
+        # dict_letter_for_page), which occasionally disagrees with the spec's
+        # page order: a merged refined file may report a letter that has already
+        # been passed (e.g. pages 285-288 read as 'I' while 282-284 read 'J'/'K').
+        # Grouping by raw letter would then INTERLEAVE two buckets and produce
+        # non-contiguous page ranges. Dictionary pages are physically ordered, so
+        # we walk them in page order and never let the letter go backwards; a
+        # regressing page stays with the bucket already in progress.
+        seq = sorted(dict_pages)
+        eff: Dict[int, str] = {}
+        high: Optional[str] = None
+        for p in seq:
+            L = sect[p][1] or "?"
+            if L == "?":
+                L = high or "?"
+            elif high is not None and L < high:
+                L = high          # never regress — keeps buckets contiguous
+            else:
+                high = L
+            eff[p] = L
         letter_pages: Dict[str, List[int]] = {}
         order: List[str] = []
-        for p in dict_pages:
-            L = sect[p][1] or "?"
+        for p in seq:
+            L = eff[p]
             if L not in letter_pages:
                 letter_pages[L] = []
                 order.append(L)
@@ -534,7 +572,8 @@ def _maybe_split_straddler(ps: int, pe: int, txt: str, gmap: Dict[int, tuple]):
     return [(ps, b - 1, part1), (b, pe, part2)]
 
 
-def file_segments(rf: "RefinedFile", id2pos: Dict[str, int]) -> List[Tuple[int, int, str]]:
+def file_segments(rf: "RefinedFile", id2pos: Dict[str, int],
+                  split_straddlers: bool = True) -> List[Tuple[int, int, str]]:
     """Return ordered (start_page, end_page, text) segments that tile `rf` once.
 
     Tolerates the four real-world drift conditions the refiner produces:
@@ -581,7 +620,7 @@ def file_segments(rf: "RefinedFile", id2pos: Dict[str, int]) -> List[Tuple[int, 
             segs.append((pos, pos, "\n".join(lines[li:end]).rstrip() + "\n"))
         return segs
 
-    gmap = _group_map()
+    gmap = _group_map() if split_straddlers else {}
     segs: List[Tuple[int, int, str]] = []
     if not dm:
         # Fully merged: the entire file is one segment.
