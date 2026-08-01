@@ -23,18 +23,6 @@ If your project, company, industry, or subject field has an approved code-domain
 
 Do not invent your own names for items that already have established names in your codebase or domain. Consistency with the approved terminology helps all readers understand the documentation and lets them find the exact element in the source tree.
 
-> **See also:** Rule 1.1 — Use approved words from the dictionary
-> **See also:** Rule 1.2 — Use words only as their specified part of speech
-> **See also:** Rule 1.3 — Use words only with their approved meanings
-> **See also:** Rule 1.5 — You can use words in a technical noun category
-> **See also:** Rule 1.6 — Use non-approved words only as technical code nouns
-> **See also:** Rule 1.7 — Do not use technical nouns as verbs
-> **See also:** Rule 1.9 — Prefer short, clear technical nouns
-> **See also:** Rule 1.10 — Use no slang, jargon, or regional terms
-> **See also:** Rule 1.11 — Use one term per concept
-> **See also:** Rule 1.12 — You can use verbs in a technical verb category
-> **See also:** Rule 1.14 — Use American English spelling
-
 ### Examples
 
 > *Adapted from spec pair:* STE: "The front panel of the phone has a touchscreen and a home button." (ASD-STE100 Rule 1.8 gives a compliant example only; there is no Non-STE counterpart in the spec. The code-domain pairs below apply the same principle: use the approved technical noun, not an invented description.)
