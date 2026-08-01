@@ -400,7 +400,7 @@ def main():
     results_dir = _resolve_path(args.results_dir, ".agents/benchmark/results")
     sys_prompt_file = _resolve_path(
         args.system_prompt_file,
-        "ste-code/artifacts/ste-code-distilled-system-prompt.txt",
+        "ste-code/artifacts/llms-full.txt",
     )
 
     # Load system prompt.

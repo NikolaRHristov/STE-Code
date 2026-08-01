@@ -1,0 +1,1681 @@
+<!-- 01-principles.md -->
+
+# Level 2 — Core Principles (Section 1: Words)
+
+Section 1 of STE-Code holds the fourteen word-level rules. Every word in code
+documentation must pass one of three gates:
+
+1. It is approved in the STE-Code controlled terminology.
+2. It is a code-domain technical noun (Rule 1.5).
+3. It is a code-domain technical verb (Rule 1.12).
+
+There is no fourth category. Rule 1.6 forbids everything else.
+
+| Rule | Statement |
+|------|-----------|
+| 1.1 | Use words that are approved in the controlled terminology, code-domain technical nouns, or code-domain technical verbs. |
+| 1.2 | Use approved words only as the specified part of speech. |
+| 1.3 | Use approved words only with their approved meanings. |
+| 1.4 | Use only the approved forms of verbs and adjectives. |
+| 1.5 | You can use words that you can include in a code-domain technical noun category. |
+| 1.6 | Use a non-approved word only when it is a code-domain technical noun or part of one. |
+| 1.7 | Do not use code-domain technical nouns as verbs. |
+| 1.8 | Use code-domain technical nouns that are approved in your project, company, industry, or subject field. |
+| 1.9 | When you must select a code-domain technical noun, use one which is short and easy to understand. |
+| 1.10 | Do not use regional, slang, or jargon words as code-domain technical nouns. |
+| 1.11 | Do not use different code-domain technical nouns for the same item. |
+| 1.12 | You can use verbs that you can include in a code-domain technical verb category. |
+| 1.13 | Do not use code-domain technical verbs as nouns. |
+| 1.14 | Use American English spelling unless other official directives tell you differently. |
+
+---
+
+## Rule 1.1 — Use approved words, technical nouns, or technical verbs
+
+In code documentation, use words that are approved in the project controlled
+terminology, code-domain technical nouns, or code-domain technical verbs.
+
+- A code-domain technical noun names a concept in software development
+  (`UserAuthenticator`, connection pool, race condition).
+- A code-domain technical verb names an operation or process in software
+  development (serialize, compile, deploy).
+- The controlled terminology also lists non-approved words with approved
+  alternatives. Register project terms in the project glossary.
+
+Common replacements:
+
+| Do not write | Write |
+|--------------|-------|
+| execute, invoke (prose) | run, call |
+| generate, construct | make |
+| configure | set |
+| retrieve, fetch | get |
+| transmit | send |
+| delete, purge | remove |
+| validate, verify, ensure | check |
+| utilize, leverage | use |
+| initiate, bootstrap, commence | start |
+| terminate | stop |
+| unable to | cannot |
+| invalid, malformed | not correct |
+| prior to | before |
+| at this time | now |
+| persists | continues |
+
+Examples:
+
+> **Non-STE:** Execute the script to do the task.
+>
+> **STE:** Run the script to do the task.
+
+> **Non-STE:** To begin utilizing the build toolchain, you must first generate the distributable artifact, then execute the compiled binary to bootstrap the local development service.
+>
+> **STE:** Use the build tool to make the binary. Run the binary to start the local service.
+
+> **Non-STE:** `Error: Unable to establish connection to the database. Please verify your credentials and retry.`
+>
+> **STE:** `Error: Cannot connect to the database. Check your credentials and try again.`
+
+Application by documentation type:
+
+- **README** — approved imperative verbs in setup steps; approved adjectives in
+  overview prose ("large" not "substantial", "usual" not "conventional").
+- **API reference** — names stay as technical nouns; the prose around them uses
+  approved words ("gives" not "resolves", "gives an error" not "rejects").
+- **Docstrings and comments** — shortest approved word: "do" not "perform",
+  "check" not "ensure", "make" not "construct".
+- **Commit messages** — approved imperative verbs only: add, fix, remove,
+  update, set, make, check, run. Not "implement" (use "add"), not "optimize"
+  (use "make faster").
+- **Error messages** — approved words only, no jargon or abbreviations that are
+  not technical nouns.
+
+---
+
+## Rule 1.2 — Use approved words only as the specified part of speech
+
+Each approved word has a specified part of speech in the controlled
+terminology. Use the word only in that role.
+
+- "Query" is an approved noun, not an approved verb.
+- "Static" is an approved adjective, not an approved verb.
+- Some words are approved in more than one role. "Call" is an approved verb
+  (to call a function) and an approved noun (a function call). Position in the
+  sentence shows which role applies.
+
+When a word is not in the controlled terminology: find it in a standard
+English dictionary, find the closest approved synonym, then use the approved
+word or a different sentence construction. A replacement must not change the
+meaning.
+
+| Violating form | Error | Write |
+|----------------|-------|-------|
+| Query the database / Cache the result / Queue the job / Log the error / Index the record | Technical noun used as verb | Send a query / Keep the result in the cache / Put the job in the queue / Write the error in the log / Use the index to find the record |
+| Docker the app / Git the change / Kubectl the pod / Terraform the VPC | Tool name used as verb | Use Docker / Save with Git / Use `kubectl` / Use Terraform |
+| Secure the endpoint / Empty the buffer / Silent the log | Adjective used as verb | Make the endpoint secure / Make the buffer empty / Make the log silent |
+| Static the variable / Ready the worker / Live the connection | Adjective used as verb | Make the variable static / Make the worker ready / Make the connection live |
+| Utilize the cache / Leverage the library / Employ the service | Unapproved verb | Use the cache / Use the library / Use the service |
+| Commence the build / Initiate the transfer / Terminate the process | Unapproved verb | Start the build / Start the transfer / Stop the process |
+| Orchestrate the services / Facilitate the sync | Unapproved verb | Control the services / Help the sync |
+
+"Clear" is approved as both a verb and an adjective, so "Clear the flag" is
+permitted. The make + adjective pattern applies to true adjectives such as
+"secure" and "empty".
+
+---
+
+## Rule 1.3 — Use approved words only with their approved meanings
+
+Each approved word has a specified meaning that is often narrower than its
+standard English meaning. Do not use the word with any other meaning.
+
+- The approved meaning of "follow" is "come after, go after".
+- The approved meaning of "obey" is "to do that which the procedures or
+  instructions tell you".
+
+Check procedure (run every content word through it):
+
+1. Identify the part of speech as you wrote it.
+2. Look up the approved meaning for that part of speech in the dictionary.
+3. Ask whether your sentence uses exactly that meaning. If not, the word fails
+   even though it is approved and the sentence reads well.
+4. Replace the word, or rewrite the sentence so the word carries its approved
+   meaning.
+
+Worked check:
+
+> **Sentence:** The background worker runs every night.
+> **Step 1:** "runs" is a verb.
+> **Step 2:** Approved meaning of the verb "run" = "execute a program or command".
+> **Step 3:** The writer means "operates on a schedule". No match.
+> **Step 4:** "The background worker operates every night."
+
+---
+
+## Rule 1.4 — Use only the approved forms of verbs and adjectives
+
+The controlled terminology gives each approved verb with its approved forms,
+and each approved adjective in base form with its comparative and superlative
+forms where applicable.
+
+| Infinitive/Imperative | Simple present | Simple past | Past participle (as adjective) |
+|-----------------------|----------------|-------------|--------------------------------|
+| (To) Compile / Compile | Compile(s) | Compiled | Compiled |
+
+Adjective: FAST (adj) (FASTER, FASTEST). Base "fast", comparative "faster",
+superlative "fastest". Adjectives that form comparatives with "more" and "most"
+have no listed forms, because "more" and "most" are approved words.
+
+Do not invent forms.
+
+> **Non-STE:** The compiler is compilating the source files every time you save the document, and it compilates them even when no change occurs in the code.
+>
+> **STE:** The compiler compiles the source files each time you save the document, and it compiles them even when no change occurs in the code.
+
+---
+
+## Rule 1.5 — Code-domain technical noun categories
+
+You can use a word that is not in the controlled terminology when you can put
+it in one or more of these nineteen categories. Register each such noun in the
+project glossary with its category, its approved meaning in the project, and an
+example sentence.
+
+| # | Category | Examples |
+|---|----------|----------|
+| 1 | Code components, modules, and libraries | class, controller, helper, hook, middleware, mixin, module, package, plugin, provider, repository, service, utility |
+| 2 | Computing devices and their components | CPU, disk, GPU, keyboard, laptop, memory, monitor, mouse, printer, screen, server, smartphone, tablet, terminal |
+| 3 | Development tools, environments, and support equipment | CLI, compiler, debugger, Docker, editor, IDE, Git, Jest, linter, loader, Prettier, terminal, test runner, TypeScript, webpack |
+| 4 | Data structures, types, and formats | array, boolean, buffer, CSV, enum, hash map, integer, JSON, linked list, object, queue, stack, string, struct, tree, tuple, XML, YAML |
+| 5 | Infrastructure, deployment, and platforms | AWS, CI/CD, container, deployment, Heroku, Kubernetes, load balancer, Node.js, pipeline, pod, production, staging, Vercel |
+| 6 | Systems, subsystems, and architectural components | API gateway, authentication layer, caching layer, client, database layer, message broker, microservice, proxy, rate limiter, REST API, routing layer, server, WebSocket |
+| 7 | Mathematical, algorithmic, and scientific terms | Big O notation, binary search, coefficient, complexity, exponent, hash function, iteration, logarithm, matrix, recursion, regex, sorting algorithm, time complexity, traversal |
+| 8 | Interface elements and navigation | button, checkbox, dialog, dropdown, footer, header, menu, modal, navigation bar, radio button, scrollbar, sidebar, tab, text field, toggle, tooltip |
+| 9 | Numbers, units of measurement, and time | byte, gigabyte (GB), hertz (Hz), hour (h), kilobyte (KB), megabyte (MB), millisecond (ms), minute, nanosecond (ns), second (s), terabyte (TB) |
+| 10 | Quoted text | `Cannot read properties of undefined`, `ENOENT: no such file or directory`, `Submit` button, `404 Not Found`, `connection refused` |
+| 11 | Professional roles, teams, and organizations | administrator, backend developer, contributor, DevOps engineer, frontend developer, Google, maintainer, Microsoft, product owner, QA engineer, reviewer, scrum master, user |
+| 12 | Official documents, API references, and standards | API reference, changelog, code of conduct, contributing guide, diagram, figure, Getting Started guide, HTTP specification, note, paragraph, README, release notes, RFC, section, table, warning |
+| 13 | Runtime environments and operational conditions | development, environment variable, garbage collection, heap, hot reload, live reload, memory leak, production, sandbox, stack trace, staging, test, thread, timeout, virtual machine |
+| 14 | Colors | black, blue, cyan, gray, green, magenta, orange, red, white, yellow |
+| 15 | Defects, errors, and fault terminology | assertion failure, bug, crash, deadlock, defect, exception, hang, infinite loop, memory leak, null pointer, race condition, regression, stack overflow, timeout, type error |
+| 16 | Computer science, information, and communication technology | AI, algorithm, authentication, authorization, blockchain, containerization, cryptography, database, encoding, encryption, firewall, hashing, internet, machine learning, metadata, neural network, protocol, query, sandbox, schema, token, virtualization |
+| 17 | Legal and licensing terms | Apache 2.0, BSD license, compliance, copyright, GPL, license, MIT license, open source, proprietary, terms of service, third-party, trademark, warranty |
+| 18 | Database and storage terminology | connection pool, cursor, foreign key, index, migration, NoSQL, ORM, PostgreSQL, primary key, query, Redis, relation, row, schema, seed, SQL, SQLite, stored procedure, table, transaction, view |
+| 19 | Network and protocol terminology | DNS, endpoint, HTTP, HTTPS, IP address, localhost, middleware, packet, port, request, response, route, socket, SSH, TCP, TLS, UDP, URL, VPN, WebSocket |
+
+Colors are adjectives, but STE-Code identifies them as code-domain technical
+nouns. Comparative and superlative forms of colors (blacker, the reddest) are
+not permitted. The listed nouns are examples only, not a full list.
+
+### Grammar notes for technical nouns
+
+- **Articles.** Use "the" for a specific instance, "a" or "an" for an
+  indefinite instance, and no article for a plural general reference:
+  "Kubernetes pods run in a namespace."
+- **Modifiers.** A technical noun can modify another technical noun. Both parts
+  must belong to a recognized category: "The Redis cache server stores the
+  session data."
+- **Possessive form.** Permitted only for category 11 (roles, teams,
+  organizations). Write "The user's session data" but "The configuration of the
+  Docker container", not "The Docker container's configuration".
+- **Plurals.** Standard English rules. Acronyms add a lowercase "s" without an
+  apostrophe: "two APIs and three SQL queries", not "two API's".
+- **Capitalization.** Proper nouns keep their original capitalization
+  (TypeScript, PostgreSQL). Common technical nouns are lowercase unless they
+  start a sentence (controller, endpoint, middleware).
+
+### Edge cases
+
+- **Framework names that are common words** (React, Vue, Swift, Go, Rust, Elm,
+  Next, Nest) are technical nouns in category 3 or 5. Capitalize them or use
+  the full term ("the Swift language", "the Go compiler") to remove ambiguity.
+- **Code keywords** (`if`, `else`, `for`, `return`, `class`, `async`) are
+  quoted text (category 10) in documentation. Write "The `if` statement checks
+  the condition." Return `500 Internal Server Error`, not a bare 500.
+- **Abbreviations and acronyms** (API, JSON, SQL, HTTP, TLS) are permitted in
+  categories 16, 18, or 19. Define each one at first use unless the audience
+  universally understands it.
+- **Generated code and generated documentation** are exempt, because a machine
+  produced them. Human-written comments inside generated files are not exempt.
+- **Project-specific internal names** (`PhoenixCache`) are technical nouns only
+  after glossary registration. Without registration they are non-approved words
+  and violate Rule 1.6.
+- **Numbers as technical nouns.** Version numbers, status codes, and port
+  numbers are category 9 nouns or quoted text and must appear verbatim: "runs
+  on port 5432 and returns `404 Not Found`".
+
+---
+
+## Rule 1.6 — Non-approved words only as technical nouns
+
+A word that the controlled terminology does not approve is permitted only when
+it is a code-domain technical noun or part of one.
+
+> **Non-STE:** The handler processes each incoming event.
+>
+> **STE:** The function processes each incoming event.
+>
+> **STE:** The event handler processes each incoming event.
+
+"Event handler" is a code-domain technical noun (category 1), so "handler" is
+permitted inside it.
+
+> **Non-STE:** The main configuration has the latest values.
+>
+> **STE:** The primary configuration has the latest values.
+>
+> **STE:** Merge the feature branch into the main branch.
+
+"Main branch" is the approved Git technical noun (category 5). Do not replace
+"main" with "primary" there, because "primary branch" is not the approved term.
+
+---
+
+## Rule 1.7 — Do not use technical nouns as verbs
+
+Use a code-domain technical noun only as a noun, or as a modifier inside
+another technical noun. Restructure the sentence so the word keeps its noun
+role.
+
+> **Non-STE:** Database the user records before the migration.
+>
+> **STE:** Store the user records in the database before the migration.
+
+> **Non-STE:** Cache the API responses to improve performance.
+>
+> **STE:** Store the API responses in the cache to improve performance.
+
+---
+
+## Rule 1.8 — Use technical nouns approved in your project or field
+
+If your project, company, industry, or subject field has an approved name for a
+class, module, function, method, variable, component, or process, use that
+name. Do not invent a new name for an item that already has one. The source of
+truth is the codebase.
+
+> **STE:** The dashboard page has a `UserTable` component and a `FilterPanel` component.
+
+> **Non-STE:** The account controller manages login and user profile operations.
+>
+> **STE:** The `AccountController` manages authentication and user profile operations.
+
+---
+
+## Rule 1.9 — Select short technical nouns
+
+When your project has no approved technical noun, select one that is short (not
+more than three words) and easy to understand. Do not use a long descriptive
+phrase when the context — a code snippet, a line number, a diagram, or an API
+reference — already identifies the item. Add one or two adjectives only when
+clarification is necessary.
+
+> **Non-STE:** Call the asynchronous JavaScript XML HTTP request wrapper utility function (line 42) to get the serialized JSON payload from the remote application programming interface endpoint.
+>
+> **STE:** Call the `fetchUtility` function (line 42) to get the JSON data from the API endpoint.
+
+---
+
+## Rule 1.10 — No regional, slang, or jargon words
+
+Some technical words are used only inside a confined community or a single
+language ecosystem. Readers from other backgrounds, junior developers, and
+non-native English speakers cannot understand them. Select well-known words.
+
+> **Non-STE:** `"""Remove all the cruft from the legacy module."""`
+>
+> **STE:** `"""Remove all the unnecessary code from the legacy module."""`
+
+Other examples: "snag the repo" → "clone the repository"; "fire up the dev
+server" → "start the development server"; "K8s spins up pods" → "Kubernetes
+starts pods"; "a funky TS bug" → "a known TypeScript defect".
+
+---
+
+## Rule 1.11 — One technical noun per item
+
+Do not use different technical nouns for the same item in different parts of a
+document. A changed name forces the reader to decide whether you refer to one
+item or to several.
+
+> **Non-STE:**
+> 1. Initialize the UserService class to start the session manager.
+> 2. Call the authenticate method on the AccountManager to verify a user.
+> 3. The UserHandler returns a session token that you send in later requests.
+>
+> **STE:** Use `UserService` in all three sentences, because the repository
+> defines one class with that name.
+
+---
+
+## Rule 1.12 — Code-domain technical verb categories
+
+A code-domain technical verb names an operation or process in software
+development. You can use a verb that is not in the controlled terminology when
+you can put it in one of these four categories.
+
+| # | Category | Examples |
+|---|----------|----------|
+| 1a | Development processes — write and modify code | compile, concatenate, import, inject, instantiate, lint, minify, marshal, optimize, polyfill, refactor, resolve, shim, stub, substitute, tokenize, transpile, trace, vectorize |
+| 1b | Development processes — test and verify code | assert, benchmark, debug, fuzz, instrument, mock, profile, snapshot, spy, stub, unit-test |
+| 1c | Development processes — build and package | bundle, deploy, package, publish, release, tag, version |
+| 1d | Development processes — manage dependencies | hoist, install, link, lock, pin, update, upgrade |
+| 2a | Computer processes — input and output | click, copy, cut, digitize, enter, paste, press, print, scan, swipe, tap, type |
+| 2b | Computer processes — user interface and application operations | clear, close, delete, deselect, disable, drag, drag and drop, enable, encrypt, erase, filter, hide, highlight, invalidate, maximize, minimize, navigate, open, save, scroll, select, show, sort, store, submit, toggle, validate, zoom in, zoom out |
+| 2c | Computer processes — system operations | abort, authenticate, authorize, boot, cache, communicate, configure, debug, deserialize, download, format, hydrate, initialize, install, load, log, manage, mount, process, reboot, render, retry, serialize, spawn, synchronize, throttle, update, upgrade, upload |
+| 3a | Subject fields — algorithmic, mathematical, and data | aggregate, bisect, compute, concatenate, convert, count, decode, encode, escape, filter, hash, index, map, merge, normalize, parse, pipeline, precompute, recalculate, reduce, tokenize, transform, validate, verify |
+| 3b | Subject fields — database and storage | backup, compact, flush, index, migrate, persist, query, replicate, restore, roll back, seed, shard, upsert, vacuum, write-ahead |
+| 3c | Subject fields — network and communication | broadcast, connect, disconnect, establish, forward, handshake, intercept, listen, poll, proxy, reject, resolve, route, send, stream, timeout, tunnel, unsubscribe, webhook |
+| 3d | Subject fields — security and authentication | authenticate, authorize, decrypt, decode, encode, encrypt, hash, revoke, salt, sanitize, sign, validate, verify |
+| 4 | Legal and licensing texts | acknowledge, assign, comply with, conform to, disclose, enforce, explain, grant, inform, license, modify, notify, permit, regulate, sign, supersede, waive |
+
+Code-domain technical verbs obey the same rules as approved verbs. The lists
+are examples only.
+
+Priority: if an approved verb gives the instruction or the information
+accurately, use the approved verb. Use a technical verb only when no approved
+verb is sufficient, and only when the technical verb is exact in your context.
+Where possible, write the sentence with an approved verb plus a code-domain
+technical noun.
+
+> **Non-STE:** If you detect broken wires, repair them.
+>
+> **STE:** If you find broken wires, repair them.
+
+---
+
+## Rule 1.13 — Do not use technical verbs as nouns
+
+Use a code-domain technical verb only as a verb. When you need a noun, use an
+approved noun or a code-domain technical noun with the same meaning. A word can
+belong to both systems when it fits a verb category (Rule 1.12) and a noun
+category (Rule 1.5).
+
+| Do not write | Write |
+|--------------|-------|
+| Do a build of the project | Build the project |
+| The function does a parse of the input string | The function parses the input string |
+| Does a compile of the source files | Compiles the source files |
+| `// A retry of the connection` | `// Retry the connection` |
+| Addition of login endpoint | Add login endpoint |
+| Compile of module 'auth' failed | Failed to compile module 'auth' |
+| Start of deploy for release v2.1.0 | Deploy started for release v2.1.0 |
+
+When an API returns a named artifact (a `Build` object, a `Deployment`
+resource), the noun form is a technical noun under Rule 1.5, not a misused
+verb.
+
+---
+
+## Rule 1.14 — Use American English spelling
+
+Use the spelling given in the STE-Code controlled terminology, which is
+American English. Use a different spelling only when a project specification,
+style guide, contract, or other official directive says so.
+
+Do not change the spelling of quoted text — an error message, a code comment,
+or a user interface label — even when it uses British English. See Rule 8.6.
+
+> **Non-STE:** The log file shows the colour of each output line.
+>
+> **STE:** The log file shows the color of each output line.
+
+> **Non-STE:** Initialise the variable before you use it in the loop.
+>
+> **STE:** Initialize the variable before you use it in the loop.
+
+---
+
+<!-- 02-synonyms.md -->
+
+# Level 2 — Technical Noun Categories: Grammar Rules (Rule 1.5)
+
+This is the Rule 1.5 slice of STE-Code Level 2: the **grammar rules for
+using code-domain technical nouns**. Level 1 gave you the nineteen categories
+and the three-word gate (Rules 1.1 / 1.5 / 1.6). Level 2 adds the
+section-specific grammar that governs how a technical noun is written once you
+have decided it is allowed.
+
+All content below is faithful to the authoritative Rule 1.5 adaptation
+(`final/rules/a-sec1-rule1.5.md`). Every example stays inside the code domain.
+The rule numbers and categories are not invented.
+
+## Rule 1.5 — recap (before the grammar)
+
+**Rule 1.5** You can use words that you can include in a code-domain technical
+noun category.
+
+A code-domain technical noun is a noun term that refers to a specified concept
+in software development and is applicable to a subject field. The controlled
+terminology does not include all code-domain technical nouns because there are
+too many, and each project or subject field uses different technical nouns.
+You can find many of these in your project glossary or terminology database.
+
+The nineteen categories (Level 1) are the gate: a non-approved word is
+permitted only when it names a precise concept in one of them **and** is
+registered in your glossary. Level 2 now covers how to write that noun
+correctly — articles, compounds, possessive, plural, and capitalization.
+
+## Grammar rule 1 — Articles with technical nouns
+
+Technical nouns follow the same article rules as approved nouns:
+
+- Use **"the"** for a specific instance.
+- Use **"a" / "an"** for an indefinite instance.
+- Use **no article** for plural general references.
+
+Acceptable:
+- The `UserController` handles a request. The controller returns a response.
+- Kubernetes pods run in a namespace.
+
+(`UserController` is a specific code component; `request` and `response` are
+network terms; `pods` is a plural general reference.)
+
+## Grammar rule 2 — Technical nouns as modifiers (compound phrases)
+
+A technical noun can modify another noun to form a compound technical noun
+phrase. When two technical nouns form a compound, the first functions as a
+modifier and the second as the head noun. **Both must belong to a recognized
+category.**
+
+Acceptable:
+- The Redis cache server stores the session data.
+  (`Redis` (database) modifies `cache server` (systems); `session data` is a
+  compound where `session` (runtime) modifies `data` (data structure).)
+- The PostgreSQL connection pool uses a round-robin scheduler.
+  (`PostgreSQL` (database) modifies `connection pool` (database);
+  `round-robin` (algorithmic) modifies `scheduler` (systems).)
+
+Not acceptable:
+- The thing layer processes the stuff queue.
+  (Neither "thing" nor "stuff" is a recognized technical noun.)
+
+## Grammar rule 3 — The possessive form
+
+The possessive (`'s`) is permitted **only** for category 11 — professional
+roles, individuals, groups, organizations, and teams. Do **not** use the
+possessive with any other category of technical noun. Use "of" constructions or
+noun-as-modifier constructions instead.
+
+Acceptable:
+- The user's session data is encrypted. (Category 11 permits possessive.)
+- The configuration of the Docker container is stored in a YAML file.
+  (Category 5 — use "of".)
+
+Not acceptable:
+- The Docker container's configuration is stored in a YAML file.
+  (Category 5 does not permit possessive — use "of".)
+
+## Grammar rule 4 — Pluralization
+
+Technical nouns follow standard English pluralization. Acronyms and
+initialisms form plurals by adding a lowercase **"s" without an apostrophe**.
+
+Acceptable:
+- The system uses two APIs and three SQL queries.
+  (`APIs` is the plural of `API` (network); `queries` is the plural of
+  `query` (database).)
+
+Not acceptable:
+- The system uses two API's and three SQL's.
+  (The apostrophe incorrectly suggests possession. Use `APIs` and
+  `SQL queries`.)
+
+## Grammar rule 5 — Capitalization
+
+Code-domain technical nouns that are **proper nouns** (programming language
+names, company names, product names) keep their original capitalization.
+**Common** technical nouns (for example `controller`, `endpoint`,
+`middleware`) use lowercase unless they are the first word of a sentence.
+
+Acceptable:
+- The TypeScript compiler checks the types. The controller handles the request.
+  (`TypeScript` is a proper noun (development tool); `controller` is a common
+  technical noun (code component).)
+
+Not acceptable:
+- The typescript compiler checks the Types. The Controller handles the request.
+  (`typescript` should be `TypeScript`; `Types` and `Controller` should be
+  lowercase — not first word, not proper nouns.)
+
+## Grammar-sensitive edge cases
+
+These cases change how the grammar rules above apply.
+
+### Framework names that are also common words
+
+Some frameworks use common English words as names (`React`, `Vue`, `Swift`,
+`Go`, `Rust`, `Elm`, `Next`, `Nest`). The framework name is a code-domain
+technical noun (category 3 or 5) and does not follow the approved meaning of
+the common word.
+
+Acceptable:
+- Use the React framework to build the user interface. (`React` is a
+  development tool, not the verb "react".)
+- The Go compiler builds the binary. (`Go` is a development tool, not the
+  verb "go".)
+
+When a sentence is ambiguous without capitalization (for example "use swift to
+process the data"), always capitalize the framework name or use the full term
+("the Swift language", "the Rust compiler") to distinguish it from an approved
+word.
+
+### Code keywords inside documentation
+
+Code keywords (`if`, `else`, `for`, `while`, `return`, `class`, `def`, `fn`,
+`let`, `const`, `var`, `async`, `await`) are **quoted text (category 10)** when
+they appear in documentation. They do not need to be technical nouns. When you
+use them as English words in a sentence, they must follow approved meanings.
+
+Acceptable:
+- The `if` statement checks the condition. (`if` is quoted text; the
+  surrounding sentence uses approved words.)
+
+Not acceptable:
+- If the request fails, return a 500. (`500` is an HTTP status code — quoted
+  text or a category 9 noun. Write `404 Not Found` or `500`.)
+
+Acceptable:
+- If the request fails, return `500 Internal Server Error`. (Status code is
+  quoted text, category 10.)
+
+### Abbreviations and acronyms
+
+Code-domain technical nouns often appear as abbreviations or acronyms (`API`,
+`JSON`, `SQL`, `HTML`, `CSS`, `HTTP`, `TCP`, `TLS`, `DNS`, `URL`). These are
+permissible under Rule 1.5 (categories 16, 18, or 19). However, you must define
+each abbreviation at its first use in a document, unless it is universally
+understood by the target audience.
+
+Acceptable (first use):
+- The application programming interface (API) uses Hypertext Transfer Protocol
+  Secure (HTTPS).
+
+Acceptable (subsequent use):
+- The API returns a JSON response over HTTPS.
+
+Not acceptable:
+- The API leverages HTTPS to transmit the payload. (Non-approved "leverage" →
+  use "use"; non-approved "transmit" → use "send"; non-approved "payload" →
+  use "data" or define as a technical noun.)
+
+### Numbers as technical nouns
+
+Quantitative values that name a configuration, version, status, or port are
+code-domain technical nouns in category 9 when the value is a fixed, named
+token rather than a measured quantity. Version numbers (`Node.js 18`), HTTP
+status codes (`404`), and port numbers (`port 5432`) are quoted text or
+category 9 nouns and must appear verbatim.
+
+Acceptable:
+- The service runs on port 5432 and returns `404 Not Found` when the row is
+  absent. (`port 5432` is a category 9 noun; `404 Not Found` is quoted text.)
+
+Not acceptable:
+- The service runs on the default db port and gives a not found error.
+  (Imprecise — use "port 5432" and "`404 Not Found`".)
+
+## Cross-references
+
+- **Rule 1.1 (Approved Words):** the dictionary for all common vocabulary;
+  Rule 1.5 is the exception for domain-specific nouns.
+- **Rule 1.2 (Part of Speech):** a technical noun is used only as a noun or
+  noun modifier — never as a verb.
+- **Rule 1.3 (Approved Meanings):** a technical noun carries the meaning
+  registered in your glossary; do not reuse it with another meaning.
+- **Rule 1.6 (Non-Approved Words):** forbids every non-approved word that is
+  not a code-domain technical noun. Read Rules 1.5 and 1.6 together.
+- **Rule 1.7 (Technical Nouns as Verbs):** a code-domain technical noun cannot
+  be used as a verb (for example "host" is a noun; use "make available" or
+  "run" as the verb).
+- **Rule 1.8 (Standard Technical Nouns):** use well-known terms; do not invent
+  a new term when a standard one exists.
+- **Rule 1.9 (Short Technical Nouns):** prefer short, clear technical nouns
+  over long, obscure ones.
+- **Rule 1.11 (One Term per Concept):** each technical noun refers to exactly
+  one concept in your project.
+- **Rule 1.12 (Technical Verbs):** technical verbs (`build`, `deploy`, `test`,
+  `lint`, `compile`, `debug`) are permitted but are a separate category from
+  technical nouns.
+
+## Summary
+
+Level 2 adds the grammar layer on top of Level 1's nineteen categories. A
+code-domain technical noun is written with correct articles, may modify other
+nouns to form compound phrases, takes the possessive only when it is a
+category-11 role/org term, pluralizes without an apostrophe, and keeps
+proper-noun capitalization. Framework names that double as common words,
+quoted code keywords, abbreviations, and fixed numeric tokens each have their
+own handling. Together with Rules 1.1 and 1.6, these rules leave documentation
+with only two kinds of words: approved STE-Code words for common vocabulary,
+and code-domain technical nouns for domain-specific concepts — and the grammar
+rules above govern how the second kind is written.
+
+---
+
+<!-- 03-dictionary.md -->
+
+# Level 2 — Adapted Dictionary (A–Z excerpt)
+
+A code-domain adaptation of the ASD-STE100 Issue 9 dictionary (Part 2, pp. 149–434),
+reshaped for use by an LLM that generates or reviews code documentation.
+
+This slice teaches the STE approval model for words: which words are approved,
+which are not, and how to rewrite unapproved words into approved ones. It uses
+code-domain examples only (API docs, commit messages, README sections, code comments).
+
+Use this slice when you:
+- Write or review API documentation and reference pages
+- Draft commit messages and pull-request descriptions
+- Author README sections and module/package overviews
+- Write inline code comments and docstrings
+
+Scope note: this Level 2 slice shows the entry format with a few canonical examples
+(letter **A**). The complete approved (~875) and unapproved (~1274) word lists are
+bundled at higher STE-Code tiers (3/4/5). Do not invent words beyond what the
+dictionary lists; for unknown words, prefer an approved verb or a technical noun.
+
+---
+
+## How to read an entry
+
+- **UPPERCASE words** are approved in STE-Code — you may use them.
+- **lowercase words** are unapproved — replace them with the listed alternative.
+  Unapproved status is also marked with the tag **UNNAPROVED** on the entry.
+- Each entry carries a part-of-speech tag:
+  `(v)` verb · `(n)` noun · `(adj)` adjective · `(adv)` adverb ·
+  `(prep)` preposition · `(conj)` conjunction · `(pron)` pronoun · `(art)` article
+- Code-domain technical tags:
+  `(TN)` = code-domain Technical Noun (e.g. *config*, *endpoint*, *pipeline*)
+  `(TV)` = code-domain Technical Verb (e.g. *deploy*, *build*, *parse*)
+- Every entry shows three things:
+  1. the original ASD-STE100 rule text,
+  2. the same idea rewritten for code documentation,
+  3. one or more STE / non-STE code-example pairs demonstrating the approved form.
+
+### LLM guidance
+
+When generating or reviewing code documentation, prefer UPPERCASE-approved words
+and the verbs listed as alternatives for unapproved words (e.g. use `STOP`/`TERMINATE`
+instead of `abandon`, `CAN` instead of `ability to`). Keep the approved form as
+the short, direct sentence; the non-STE form is the longer, indirect phrasing to avoid.
+
+---
+
+# A
+
+## A (art) — APPROVED
+Function word: indefinite article. Use before a singular countable noun.
+- **Original:** A FUEL PUMP IS INSTALLED IN ZONE 10.
+- **Code-domain:** A CONFIG FILE IS INCLUDED IN THE ROOT DIRECTORY.
+- **STE:** A config file is included in the root directory.
+- **Non-STE:** Config files included in root directory.
+
+## ABANDON (v) — UNNAPROVED
+Not approved. Replace with `STOP` (v) or `TERMINATE` (v).
+- **Original:** GO (v), STOP (v). IF THERE IS A FIRE, IMMEDIATELY GO TO A SAFE AREA. / IF THE VALUES ARE INCORRECT, STOP THE TEST PROCEDURE.
+- **Code-domain:** TERMINATE (v), STOP (v). IF THE BUILD FAILS, STOP THE DEPLOYMENT PIPELINE. / IF THE VALUES ARE INCORRECT, TERMINATE THE TEST RUN.
+- **STE:** If the build fails, stop the deployment pipeline.
+- **Non-STE:** If the build fails, abandon the deployment pipeline.
+- **STE:** If the values are incorrect, terminate the test run.
+- **Non-STE:** If the values are incorrect, abandon the test procedure.
+
+## ABILITY (n) — UNNAPROVED
+Not approved. Replace with `CAN` (v).
+- **Original:** CAN (v). ONE GENERATOR CAN SUPPLY POWER FOR ALL THE SYSTEMS.
+- **Code-domain:** CAN (v). ONE CONFIGURATION CAN HANDLE REQUESTS FOR ALL THE ENDPOINTS.
+- **STE:** One configuration can handle requests for all the endpoints.
+- **Non-STE:** One configuration has the ability to handle requests for all the endpoints.
+
+---
+
+## Quick substitutions (from this excerpt)
+
+| Unapproved (avoid) | Approved replacement | Example (STE) |
+| --- | --- | --- |
+| abandon (v) | STOP (v), TERMINATE (v) | If the build fails, stop the deployment pipeline. |
+| ability (n) (as "has the ability to") | CAN (v) | One configuration can handle all the endpoints. |
+
+When you see an unapproved word in source text, swap it for the approved verb and
+keep the sentence short and direct. Approved articles such as **A** stay as-is.
+
+---
+
+## Scope of this slice
+
+This excerpt covers the A entries only. The patterns it demonstrates — approved
+articles, unapproved verbs replaced by approved verbs (ABANDON → STOP/TERMINATE),
+and unapproved nouns replaced by modal verbs (ABILITY → CAN) — repeat across the
+full A–Z dictionary bundled in higher STE-Code tiers (3/4/5).
+
+The Level 2 dictionary couples with `01-principles.md`, `02-synonyms.md`,
+`04-templates.md`, and `05-grammar.md`. A word is permitted in Level 2 only when
+it is an approved word, a code-domain technical noun `(TN)`, or a code-domain
+technical verb `(TV)`.
+
+---
+
+<!-- 04-templates.md -->
+
+# Level 2 — Document Templates (Code Review / PR Feedback)
+
+These templates apply STE-Code Level 2 to the two document types where controlled
+words matter most in day-to-day engineering work: code review comments and pull
+request feedback.
+
+Level 1 gave the word-level gate (Rules 1.1–1.14) and the template shapes. Level 2
+adds the **section-specific grammar rules** that govern how a review or PR sentence
+is built once you have decided the words are allowed:
+
+- the imperative (command) form for every action line (Rule 5.3),
+- the descriptive-statement-before-command structure for findings and conditions
+  (Rule 5.4),
+- the technical-noun grammar for identifiers and code terms that appear in review
+  text (Rule 1.5): backticks, one name per item, articles, possessive, plural,
+  capitalization.
+
+Each template below is a fill-in shape. Every word you add must pass one of the
+three Level 1 gates:
+
+1. It is approved in the controlled terminology (the STE-Code dictionary).
+2. It is a code-domain technical noun (Rule 1.5, 19 categories).
+3. It is a code-domain technical verb (Rule 1.12).
+
+Identifiers, file paths, commands, and type names are technical nouns. Write them
+in backticks and do not inflect them.
+
+## Template selection
+
+| Situation | Template |
+|-----------|----------|
+| One line or one hunk in a diff | T1 — Inline review comment |
+| A defect the author must fix before merge | T2 — Blocking review finding |
+| An optional improvement | T3 — Non-blocking suggestion |
+| The summary you leave on the whole pull request | T4 — PR review summary |
+| The description the author writes on the pull request | T5 — PR description |
+| A reply to review feedback | T6 — Author response |
+
+## Shared word rules for all templates
+
+| Do not write | Write |
+|--------------|-------|
+| This looks a bit weird / smells off | This function returns `null` when the input list is empty. |
+| Can we maybe just not do this? | Remove the call to `resetCache`. |
+| It'd be great if you could refactor | Move the retry logic into `RetryPolicy`. |
+| The code is broken | The `parseDate` function throws `TypeError` for an empty string. |
+| We should probably handle errors | Catch `IOError` in `readConfig` and return a default value. |
+
+Rules applied above: 1.1 (approved words only), 1.9 (short technical nouns),
+1.10 (no slang or jargon), 1.11 (one noun per item).
+
+The action line in every template uses the imperative form (Rule 5.3): start the
+sentence with a base verb, no "must", no modal verb, no passive voice. The finding
+and condition lines may be descriptive statements, but they still use approved words
+and one technical noun per item (Rule 1.11).
+
+## T1 — Inline review comment
+
+Shape (three parts, in this order):
+
+```
+<observation>: one sentence, one subject, present tense.
+<effect>: one sentence that gives the result of the observation.
+<action>: one imperative sentence.
+```
+
+Example:
+
+> The `getUser` function returns `undefined` when `id` is `0`.
+> The caller in `UserController` then reads a property of `undefined`.
+> Return `null` for an unknown `id`, and check the result in `UserController`.
+
+Constraints:
+
+- Use the imperative form for the action (Rule 5.3): start with a base verb,
+  no "must", no modal ("can", "should", "may"), no passive voice.
+- Name the item with the same technical noun each time (Rule 1.11). Do not write
+  `getUser`, then "the getter", then "that helper".
+- Do not use a technical noun as a verb (Rule 1.7). Write "Send a request to the
+  `/users` endpoint", not "Endpoint the request".
+- Use backticks for every identifier, path, and type name (Rule 1.5 grammar):
+  `UserController`, `id`, `null` stay uninflected.
+
+## T2 — Blocking review finding
+
+```
+**Finding:** <one sentence: what is wrong>
+**Location:** `<path>:<line>` in `<symbol>`
+**Cause:** <one sentence>
+**Result:** <one sentence: what fails, and when>
+**Required change:** <one imperative sentence>
+```
+
+Example:
+
+> **Finding:** The `saveOrder` method does not validate the `quantity` field.
+> **Location:** `src/orders/service.ts:142` in `OrderService.saveOrder`
+> **Cause:** The method writes the request body to the database with no check.
+> **Result:** A negative `quantity` value is written to the `orders` table.
+> **Required change:** Reject a request when `quantity` is less than `1`.
+
+Use "required change" for a defect. Write the change as a single imperative
+sentence (Rule 5.3). Do not use "must" as an intensifier in the prose — the field
+label already gives the obligation. The `Location` line names the item with one
+technical noun each time (Rule 1.11); `src/orders/service.ts` and
+`OrderService.saveOrder` stay in backticks and are not inflected.
+
+## T3 — Non-blocking suggestion
+
+```
+**Suggestion (optional):** <one imperative sentence>
+**Reason:** <one sentence>
+```
+
+Example:
+
+> **Suggestion (optional):** Move the three retry constants into `RetryPolicy`.
+> **Reason:** The same three values occur in `HttpClient` and in `QueueWorker`.
+
+Mark the comment as optional in the first word. Write the suggestion as one
+imperative sentence (Rule 5.3). Do not use hedge words such as "maybe", "perhaps",
+or "just" to signal that a comment is optional (Rule 1.10).
+
+## T4 — PR review summary
+
+```
+**Decision:** Approve | Request changes | Comment
+**Scope:** <one sentence: what the pull request changes>
+**Blocking findings:** <count>
+1. <one sentence each, with `path:line`>
+**Optional suggestions:** <count>
+1. <one sentence each>
+**Verification:** <one sentence: what you ran or read>
+```
+
+Example:
+
+> **Decision:** Request changes
+> **Scope:** The pull request adds a rate limiter to the `/api/v1/login` route.
+> **Blocking findings:** 1
+> 1. `src/middleware/rateLimit.ts:58` — The limiter counts a failed request and
+>    a successful request in the same bucket.
+> **Optional suggestions:** 1
+> 1. Give the `WINDOW_MS` constant a unit in its name.
+> **Verification:** I ran `npm test` and read the diff in `src/middleware`.
+
+Write the decision as one of the three approved values. Do not invent a fourth
+value, and do not write the decision as a sentence. Each finding line is one
+sentence that names its item with one technical noun (Rule 1.11); each `path:line`
+stays in backticks. The `Verification` line uses the first person only for the
+actor ("I ran"), not to soften the obligation.
+
+## T5 — PR description (author)
+
+```
+## What
+<one to three sentences. One subject in each sentence.>
+
+## Why
+<one to three sentences. Give the cause, then the result.>
+
+## How
+1. <imperative sentence>
+2. <imperative sentence>
+
+## Test
+- <one sentence per check, with the command in backticks>
+
+## Risk
+<one sentence. Write "None." when there is no risk.>
+```
+
+Example:
+
+> ## What
+> This pull request adds a retry to the `PaymentClient.charge` method.
+>
+> ## Why
+> The payment gateway returns `503` during a deployment. The current client
+> fails the order on the first `503` response.
+>
+> ## How
+> 1. Add a `RetryPolicy` class with three attempts and an exponential delay.
+> 2. Call `RetryPolicy.execute` from `PaymentClient.charge`.
+>
+> ## Test
+> - Run `npm test -- payment` to check the new unit tests.
+> - Send a request to the sandbox gateway to check the delay values.
+>
+> ## Risk
+> A retry can create a duplicate charge if the gateway accepted the first
+> request. The client sends an idempotency key to prevent this result.
+
+The `How` steps are all imperative (Rule 5.3). The `What` and `Why` sections are
+descriptive statements, but each sentence still uses one technical noun per item
+(Rule 1.11) and approved words only (Rule 1.1).
+
+## T6 — Author response to feedback
+
+```
+**Comment:** <link or `path:line`>
+**Response:** Done | Changed | Not changed
+**Detail:** <one sentence>
+```
+
+Example:
+
+> **Comment:** `src/middleware/rateLimit.ts:58`
+> **Response:** Changed
+> **Detail:** The limiter now counts only a failed request in the login bucket.
+
+Use one of the three approved response values. Do not use "LGTM", "nit", "wontfix",
+or other jargon labels (Rule 1.10). The `Comment` line gives the item in backticks
+with one name each time (Rule 1.11).
+
+## Approved verbs for review and PR text
+
+Use these code-domain technical verbs in the action line of any template. Use
+the base form for an instruction (Rule 5.3), and the third-person form for a
+statement of fact.
+
+| Verb | Use it for |
+|------|-----------|
+| add | New code, a new field, a new file |
+| remove | Deleted code or a deleted field |
+| replace | One item exchanged for another |
+| move | Code relocated with no change in behavior |
+| rename | A new name for the same item |
+| return | The value a function gives back |
+| throw / raise | An error the code emits |
+| catch / handle | An error the code accepts |
+| validate | A check on input |
+| reject | A refused input or request |
+| call | Invocation of a function or method |
+| read / write | Access to a file, field, or record |
+| log | A record written to the audit trail or log |
+| test | A check that runs in the test suite |
+
+Do not use a verb from this table as a noun (Rule 1.13). Write "The function
+returns a value", not "The return of the function".
+
+## Forbidden words in review and PR text
+
+| Forbidden | Reason | Use instead |
+|-----------|--------|-------------|
+| nit, LGTM, WIP, PTAL, IMO | jargon (Rule 1.10) | the full template label |
+| smelly, hacky, ugly, clean | subjective, not approved (Rule 1.1) | the concrete defect |
+| stuff, thing, some code | not a technical noun (Rule 1.5) | the identifier in backticks |
+| leverage, utilize | not approved (Rule 1.3) | use |
+| behaviour, initialise, colour | British spelling (Rule 1.14) | behavior, initialize, color |
+| we should maybe possibly | hedging (Rule 1.1) | one imperative sentence |
+
+## Section-specific grammar rules for review and PR text
+
+Level 2 adds the grammar that governs how a review or PR sentence is built. The
+two rules below come from the STE-Code procedural-grammar set (Rules 5.3 and 5.4),
+reshaped for review and PR text.
+
+### Grammar rule G1 — Imperative form in the action line (Rule 5.3)
+
+Every action line (T1 `action`, T2 `Required change`, T3 `Suggestion`, T5 `How`)
+starts with a base verb and gives a direct instruction. Drop the subject "you"
+(the reader is implied), and do not use passive voice, gerunds, or modal verbs.
+
+- Do not add "must" before the imperative in a standard instruction. Reserve
+  "must" for a security or data-loss warning (for example a finding where a
+  leaked key can cause permanent loss).
+- Do not soften the instruction with "can", "could", "should", "may", or
+  "might". "Set the timeout to 30 seconds" leaves no room for "optional".
+
+> **Non-STE:** The test suite can be executed with `npm test`.
+> **STE:** Run the unit tests with `npm test`.
+
+> **Non-STE:** Before you delete the branch, you must push all local commits.
+> **STE:** Before you delete the branch, push all local commits to the remote.
+
+### Grammar rule G2 — Descriptive statement before the command (Rule 5.4)
+
+When a finding or condition must be known first, write it as a descriptive
+statement, then a comma, then the imperative. The comma is required: it shows
+where the condition ends and the command begins. Moving the comma changes which
+verb an adverb modifies.
+
+> **STE:** If the connection pool is full, reject the request.
+> (The comma after "full" shows "automatically" would modify "reject".)
+> **STE:** If the connection pool is full automatically, reject the request.
+> (The comma after "automatically" changes the meaning — the pool fills on its
+> own; reject it.)
+
+Apply G2 inside T2 (`Result` then `Required change`) and T4 (`Scope` sets the
+condition, findings follow). Keep conditions short — one condition per sentence.
+
+### Grammar rule G3 — Technical-noun grammar inside review text (Rule 1.5)
+
+Identifiers, paths, type names, and commands in review text are code-domain
+technical nouns. Apply the following grammar:
+
+- **Backticks, no inflection.** Write `getUser`, `null`, `OrderService`. Do not
+  write "the `getUser`s" or "two `null`s". Use a lowercase "s" for acronym plurals
+  without an apostrophe: `APIs`, not `API's`.
+- **One name per item (Rule 1.11).** Name the same symbol the same way every time
+  in one comment thread: `getUser`, not "the getter", then "that helper".
+- **Articles.** Use "the" for a specific instance, "a"/"an" for an indefinite one,
+  no article for a plural general reference: "The `UserController` handles a
+  request. Kubernetes pods run in a namespace."
+- **Possessive only for roles/orgs (category 11).** Write "the user's session
+  data" but "the configuration of the `Docker` container", not "the `Docker`
+  container's configuration".
+- **Capitalization.** Proper nouns keep their capitalization (`TypeScript`,
+  `PostgreSQL`); common technical nouns are lowercase unless first word
+  (`controller`, `endpoint`, `middleware`).
+- **Quoted keywords and status codes.** Code keywords (`if`, `return`, `class`)
+  and status codes (`404 Not Found`, `500`) are quoted text (category 10). Write
+  "Return `500 Internal Server Error`", not a bare "500".
+
+## Checklist before you post
+
+1. Each sentence has one subject.
+2. Each item has one name, used every time (Rule 1.11).
+3. Each identifier is in backticks and is not inflected.
+4. Each action is one imperative sentence (Rule 5.3).
+5. Each condition comes before its command, separated by a comma (Rule 5.4).
+6. No word from the forbidden table is present.
+7. Spelling is American English (Rule 1.14).
+
+---
+
+<!-- 05-grammar.md -->
+
+# Level 2 — Section-Specific Grammar Rules
+
+Grammar rules of STE-Code, grouped by the section of the standard that owns
+them. Each rule is stated as a directive, then shown with a minimal
+code-domain pair. Use this file as the grammar layer on top of the Level 2
+dictionary and approved-word tables.
+
+Scope: code documentation only — README files, API reference, docstrings,
+inline comments, commit messages, error messages, changelogs, configuration
+comments. Source code inside code blocks is never subject to these rules.
+
+Reading key:
+- **Non-STE** — text that breaks the rule.
+- **STE** — the compliant rewrite.
+- Word counts, where given, follow the counting rules in Section 8.
+
+Rule map:
+
+| Section | Topic | Rules |
+|---|---|---|
+| 2 | Technical noun structure | 2.1–2.3 |
+| 3 | Verbs, tense, and voice | 3.1–3.7 |
+| 4 | Sentence structure | 4.1–4.5 |
+| 5 | Procedural writing | 5.1–5.5 |
+| 6 | Descriptive writing | 6.1–6.6 |
+| 7 | Safety instructions | 7.1–7.3 |
+| 8 | Punctuation and word count | 8.1–8.7 |
+| 9 | Word choice and consistency | 9.1–9.4 |
+
+## Section 2 — Technical noun structure
+
+### Rule 2.1 — Keep technical nouns short
+Use a maximum of three words in a technical noun. Use prepositions ("of," "on,"
+"in," "for," "to") to split longer noun phrases and show which part owns which.
+
+> **Non-STE:** the authentication token expiration refresh interval setting
+>
+> **STE:** the refresh interval for the expiration of the authentication token
+
+Keep approved adjectives attached to the short noun that they modify:
+`idempotent`, `immutable`, `thread-safe`, `atomic`, `nullable`, `deprecated`,
+`stateless`, `backward-compatible`, `asynchronous`, `concurrent`,
+`deterministic`.
+
+### Rule 2.2 — Write long technical nouns in full
+When a technical noun has more than three words, write it in full the first time
+that it occurs. Then make it clear with one of these methods:
+
+- Give a shorter form and use that shorter form in the remaining text.
+- Use hyphens between the words that operate as one unit (Rule 2.3).
+- Use prepositions to split the noun into short parts (Rule 2.1).
+
+> **STE:** Before you start this procedure, initialize the user session cache
+> invalidation lock handler (in this procedure, the "invalidation lock handler").
+
+Do not divide a technical noun that your framework, schema, or API
+specification defines. Write it in its approved form.
+
+### Rule 2.3 — Use hyphens between words used as one unit
+Use a hyphen to show that related words operate as one unit. A hyphenated group
+counts as one word (Rule 8.7), so it fills only one of the three slots that
+Rule 2.1 allows.
+
+> **Non-STE:** Move the main-feature-flag-rollback-handler trigger.
+>
+> **STE:** Move the main-feature-flag rollback-handler trigger.
+
+- Do not hyphenate words that are not related. The hyphen changes the meaning.
+- Do not make hyphen groups of more than three words. Split longer chains with
+  `of`, `on`, or `in`.
+- Do not change an approved hyphenated term, for example `input-output stream`,
+  `thread-safe queue`, or `backward-compatible API`.
+
+## Section 3 — Verbs, tense, and voice
+
+### Rule 3.1 — Use only the verb forms in the dictionary
+Each approved verb appears with its allowed forms: base, third-person singular,
+simple past, and past participle. Use only those forms.
+
+```
+VALIDATE (v)   VALIDATES   VALIDATED,   VALIDATED
+WRITE (v)      WRITES      WROTE,       WRITTEN
+```
+
+Do not use gerunds as verbs, participles with auxiliaries, or inflected forms
+that the dictionary does not list.
+
+### Rule 3.2 — Use only the approved forms and tenses
+Approved forms and tenses:
+
+- The infinitive form
+- The imperative (command) form
+- The simple present tense
+- The simple past tense
+- The simple future tense
+- The past participle form, as an adjective only.
+
+| Form | Regular verb (parse) | Irregular verb (write) |
+|---|---|---|
+| Infinitive | (to) parse | (to) write |
+| Imperative | Parse the payload. | Write the log entry. |
+| Simple present | It parses | It writes |
+| Simple past | It parsed | It wrote |
+| Simple future | It will parse | It will write |
+| Past participle (adj) | the parsed file | the written log |
+
+### Rule 3.3 — Use the past participle as an adjective
+The past participle shows the condition of something. This is not passive voice.
+Use it before a noun, or after "to be," "to become," or "to stay."
+
+> **STE:** The parsed file stays in the cache. The endpoint becomes deprecated.
+
+Tests that the word is an adjective and not passive voice:
+
+1. The word gives a condition, not an action that an actor does.
+2. You can put it directly before the noun: "the closed connection".
+3. You can put it after "is", "becomes", or "stays": "the cache is initialized".
+4. If the sentence names an actor and an action ("the file was parsed by the
+   loader"), it is passive voice. Write the active voice instead (Rule 3.6).
+
+Do not use a past participle that the dictionary does not approve.
+
+### Rule 3.4 — Do not use auxiliary verbs for complex constructions
+Do not put "have," "be," "will be," "can be," "must be," "should be," or
+"is to be" with a past participle to make compound tenses or passive voice.
+
+- Use the simple past instead of the present perfect or past perfect.
+- Use the active voice with a named agent instead of "be + past participle."
+- Use the imperative form instead of "is to be + past participle."
+- Use "you can + base verb" instead of "can be + past participle."
+
+> **Non-STE:** The loader has parsed the manifest.
+>
+> **STE:** The loader parsed the manifest.
+
+If a compound construction seems necessary, split the sentence into two short
+sentences with approved forms.
+
+### Rule 3.5 — Use the "-ing" form only as a noun or a modifier
+Use a word that has an "-ing" form only as a technical noun (for example, in a
+heading) or as a modifier inside a technical noun. Do not use it as a verb.
+
+Approved "-ing" words in STE-Code:
+
+- Nouns: logging, monitoring, routing, servicing
+- Adjectives: matching, missing, remaining
+- A pronoun: something
+- A preposition: during.
+
+> **Non-STE:** The service is starting and then it is logging the request.
+>
+> **STE:** The service starts. Then it logs the request.
+
+The present progressive is not an approved tense (Rule 3.2), and the "-ing"
+form hides the auxiliary constructions that Rule 3.4 forbids.
+
+### Rule 3.6 — Use the active voice
+Use the active voice in all code documentation. In descriptive writing, the
+passive voice is permitted only when the agent is unknown.
+
+Test: ask "by whom or by what?" If the sentence answers that question, it is
+passive. Move the agent into the subject position.
+
+> **Non-STE:** The API response is parsed by the middleware.
+>
+> **STE:** The middleware parses the API response.
+
+### Rule 3.7 — Use an approved verb for an action, not a noun
+If an approved verb describes the action, use the verb. A noun names a thing; a
+verb names the work.
+
+> **Non-STE:** The endpoint performs validation of the token.
+>
+> **STE:** The endpoint validates the token.
+
+The four Technical Code Verb categories:
+
+| Category | Verbs |
+|---|---|
+| Development operations | build, compile, test, lint, format, commit, push, deploy, rollback |
+| Data operations | read, write, serialize, deserialize, parse, encode, decode, query, insert, migrate |
+| Application operations | handle, route, authenticate, authorize, validate, schedule, dispatch, resolve |
+| Communication actions | send, receive, publish, subscribe, stream, poll, broadcast, connect |
+
+Prefer the plain approved verb — `use`, `start`, `stop`, `show`, `make`, `get`,
+`set`, `check`, `do`, `send`, `remove`, `keep` — over *utilize*, *leverage*,
+*employ*, *commence*, *terminate*, or *initiate*.
+
+## Section 4 — Sentence structure
+
+### Rule 4.1 — One topic per sentence, no abstract text
+In descriptive text (a class, module, or type description), give each sentence
+one topic and do not use the imperative form. In procedural text (a function or
+method description), give one instruction per sentence in the imperative form.
+Do not write abstract text.
+
+> **Non-STE:** The `HttpClient` class has two internal buffers connected
+> together and linked with callbacks between the request handler and the
+> response dispatcher.
+>
+> **STE:** The `HttpClient` class has two internal buffers. Callbacks connect
+> the internal buffers. These callbacks link the request handler to the
+> response dispatcher.
+
+### Rule 4.2 — Do not omit words or use contractions
+Each sentence must have all its parts.
+
+- Do not omit the noun. The reader will not know which code element you mean.
+- Do not omit the verb. The reader will not know the action.
+- Do not omit the subject. The reader will not know which function, class, or
+  module does the action.
+- Do not omit articles ("the," "a," "an").
+- Do not use contractions. Write "do not," "is not," and "are not."
+
+> **Non-STE:** Can't be longer than 64 bytes.
+>
+> **STE:** The key can have a maximum length of 64 bytes.
+
+### Rule 4.3 — Use a vertical list for complex text
+When a sentence must include many items (parameters, return fields, error
+codes, configuration options, environment variables, dependencies, or test
+cases) or many actions, use a vertical list.
+
+When you make a vertical list:
+
+- Put a colon (:) at the end of the introductory sentence.
+- Identify each item with a number, letter, dash, or bullet.
+- Start each item with an uppercase letter.
+- Where applicable, use an article before the noun that is the subject of the
+  item.
+- Put a period at the end of an item that is a full sentence.
+- Do not put a period at the end of an item that is not a full sentence.
+
+### Rule 4.4 — Use connecting words and connecting phrases
+Connecting words and phrases link the topic of one sentence to the idea in the
+sentence that follows.
+
+- Approved connecting words: "and," "but," "then," "thus."
+- Approved connecting phrases: "as a result," "at the same time."
+- Demonstrative adjectives ("this," "these") also connect related sentences.
+
+> **STE:** The middleware validates the token. Thus the controller receives
+> only authenticated requests.
+
+### Rule 4.5 — Use an article or a demonstrative adjective before a noun
+Articles and demonstrative adjectives show the position of nouns in the
+sentence. Do not remove them to make the text shorter.
+
+- Do not use an article in a general statement or before an abstract concept
+  ("performance," "scalability," "error handling," "concurrency," "backward
+  compatibility").
+- In short sentences, use an article before each noun.
+- In a long series of items, use the article only before the first noun. If an
+  adjective applies to the first item only, repeat the article.
+- Do not use a definite article before a code identifier. A function name, a
+  class name, a variable name, a file name, an environment variable, an error
+  code, and a version tag are proper nouns.
+- Always keep the noun after "this" or "these". Do not write "this" alone.
+
+> **Non-STE:** Call the `parseConfig`. This returns a map.
+>
+> **STE:** Call `parseConfig`. This function returns a map.
+
+## Section 5 — Procedural writing
+
+### Rule 5.1 — Maximum of 20 words in a procedural sentence
+Procedures include installation instructions, setup steps, deployment
+checklists, debugging workflows, and API usage guides. Use a maximum of 20
+words in each procedural sentence. Warnings and cautions obey the same limit.
+A note has a maximum of 25 words in each sentence.
+
+> **Non-STE:** Run the database migration script from the project root
+> directory and then restart the application server to apply all pending schema
+> changes to the production environment. (27 words)
+>
+> **STE:** Run the database migration script from the project root directory.
+> Then restart the application server. (15 words)
+
+Code snippets, command examples, and terminal output inside code blocks are not
+subject to the word count.
+
+### Rule 5.2 — One instruction per sentence
+Write only one instruction in each sentence. Use numbered or bulleted lists to
+show the sequence. A procedure can have any number of work steps.
+
+You can write two instructions in one sentence with "and" only when both actions
+occur at the same time. You can write more than one sentence in a work step
+when:
+
+- Two or more actions occur at the same time and you cannot separate them
+- A result or measurement occurs immediately after the action.
+
+### Rule 5.3 — Use the imperative (command) form for instructions
+Start each procedural instruction with an imperative verb: "run," "set," "open,"
+"save," "install," "configure," "restart," "copy," "delete," "create," "add,"
+"enter," "select," "check."
+
+> **Non-STE:** The configuration file should be edited before deployment.
+>
+> **STE:** Edit the configuration file before you deploy.
+
+Do not use passive voice, gerunds, or modal verbs ("can," "could," "should,"
+"may," "might") for instructions. Use "must" only for security warnings, data
+loss cautions, and critical conditions.
+
+In a README file, the imperative form applies to the procedural sections only
+(installation, configuration, build, quick start). Descriptive sections can use
+declarative sentences.
+
+### Rule 5.4 — Put the descriptive statement before the command
+When the reader must know a condition first, write the condition as a
+descriptive statement, then a comma, then the instruction.
+
+> **Non-STE:** Stop the service if the health check reports a failure.
+>
+> **STE:** If the health check reports a failure, stop the service.
+
+The comma is the marker that makes the reader evaluate the condition before the
+action. Do not bury the condition after the command.
+
+### Rule 5.5 — Notes give information only
+A note gives supplementary information. A note must not give an instruction, a
+command, a requirement, a limit, or an expected result. Put that information in
+the work step. A note must not contain an imperative verb.
+
+> **STE:** NOTE: The API rate limiter permits a maximum of 1000 requests each
+> minute for each client IP address on the free tier.
+
+If the information prevents data loss, a security issue, or system damage, write
+it as a WARNING or CAUTION instead (Section 7). To test a procedure, read it
+without the notes. If the reader cannot complete it, move the missing
+information into the work steps.
+
+## Section 6 — Descriptive writing
+
+### Rule 6.1 — Give information gradually
+Give the reader one piece of information at a time. Each sentence has one
+subject. Do not combine multiple actions, conditions, or subjects.
+
+> **Non-STE:** The authentication middleware validates bearer tokens from the
+> authorization header by calling the `validateToken` function which decodes
+> the JWT payload and checks the `exp` claim before attaching the claims to the
+> request and logging any failure to the audit trail.
+>
+> **STE:** The authentication middleware validates each incoming request. The
+> middleware reads the bearer token from the `Authorization` header. It sends
+> the token to the `validateToken` function. The function decodes the JWT
+> payload. Then it compares the `exp` claim with the current server time.
+
+### Rule 6.2 — Use key words and key phrases for logical structure
+Key words are terms that occur again in a documentation block to link concepts.
+Key phrases have the same function. Do not change a key word after you select
+it (see also Rule 9.4).
+
+Connecting words and phrases approved in STE-Code: `and`, `but`, `then`, `thus`,
+`also`, `however`, `therefore`, `for example`, `as a result`, `at the same
+time`. Put them at the start of the sentence.
+
+Do not use `moreover`, `furthermore`, `nevertheless`, or `subsequently`.
+
+### Rule 6.3 — Maximum of 25 words in a descriptive sentence
+Descriptive text is more complex than procedural text, so the limit is 25 words.
+
+> **STE:** The authentication middleware validates each incoming request before
+> the controller processes it. (11 words)
+
+### Rule 6.4 — Use paragraphs to show related information
+A paragraph keeps related information together. Start each paragraph with a
+topic sentence that tells the reader the topic. The sentences that follow
+explain that topic or add information about it. A new paragraph tells the reader
+that a new topic starts.
+
+> **STE:** The data pipeline uses a sequence of stages to process events.
+> Validation checks the event schema and rejects malformed events. Enrichment
+> adds metadata to the event. Transformation converts the event into a target
+> format. Persistence writes the event to the data store.
+
+### Rule 6.5 — One topic in each paragraph
+Each paragraph has one topic. The topic sentence is the first and most important
+sentence. It gives new information and makes a logical connection to previous
+information, usually with a key word or a connecting word.
+
+If the reader collects the topic sentences of a document, those sentences make a
+good outline of its content.
+
+### Rule 6.6 — No more than six sentences in a paragraph
+If a paragraph has more than six sentences, divide it into two paragraphs. Do
+not put different topics in the same paragraph.
+
+## Section 7 — Safety instructions
+
+### Rule 7.1 — Use a signal word to show the level of risk
+
+| Signal word | Use it when there is a risk of |
+|---|---|
+| WARNING | Security vulnerabilities, data loss, or system corruption |
+| CAUTION | Unexpected behavior, performance degradation, or incorrect results |
+| NOTE | No risk — supplementary information only (Rule 5.5) |
+
+If the two levels of risk occur together, use a WARNING.
+
+Severity mapping for release notes and changelogs: WARNING to BREAKING,
+CAUTION to DEPRECATED, NOTE to NOTE.
+
+A safety instruction must be specific. It must name the risk, not make a general
+claim.
+
+### Rule 7.2 — Start a safety instruction with a command or a condition
+Start with a clear and accurate command. If the reader must know a condition
+before they use a function, method, or API, give the condition first.
+
+> **Non-STE:** WARNING: STORING API KEYS IN THE SOURCE CODE IS NOT RECOMMENDED.
+>
+> **STE:** WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE. ALWAYS USE
+> ENVIRONMENT VARIABLES OR A SECRETS MANAGER TO STORE API KEYS.
+
+### Rule 7.3 — Give an explanation of the risk or possible result
+Tell the reader what can occur if they do not obey the safety instruction. A
+risk explanation has three parts:
+
+1. The failure to obey the instruction
+2. The immediate consequence
+3. The final harm.
+
+Write the chain in cause-first order: "If you do X, Y can occur."
+
+> **Non-STE:** WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE.
+>
+> **STE:** WARNING: DO NOT STORE API KEYS IN THE SOURCE CODE. API KEYS IN
+> SOURCE CODE CAN CAUSE UNAUTHORIZED ACCESS AND DATA BREACHES.
+
+## Section 8 — Punctuation and word count
+
+### Rule 8.1 — Use all standard punctuation marks but not the semicolon
+The semicolon (;) is not permitted. It permits very long sentences and it is not
+easy to use correctly. Write two sentences instead.
+
+> **Non-STE:** Call the function to parse the response data; handle any errors
+> that occur.
+>
+> **STE:** Call the function to parse the response data. Handle any errors that
+> occur.
+
+This rule applies to documentation text only. It does not apply to source code,
+where the semicolon is part of the language syntax, or to text inside code
+blocks.
+
+### Rule 8.2 — Use hyphens to connect words that are directly related
+Five categories of hyphenation apply to code documentation:
+
+| Category | Examples |
+|---|---|
+| Two or more words that are an adjective before a noun | high-priority task, read-only file, thread-safe method, event-driven architecture, run-time error, end-to-end test, server-side rendering, just-in-time compilation |
+| Two-word fractions or numbers | seventy-two, twenty-eight, three-fourths |
+| An uppercase letter or a number plus a noun | L-shaped bracket, 64-bit register, 8-byte alignment, 128-bit value |
+| Verbs that have a noun as the first part | dry-run, hot-reload, cold-start, hard-code, soft-delete, short-circuit |
+| A prefix that ends with a vowel before a root that starts with a vowel | re-enter, re-establish, co-occurrence |
+
+### Rule 8.3 — Use of parentheses
+You can use parentheses:
+
+- To make references to code modules, diagrams, or text
+- To include letters or numbers that identify items
+- To identify the work steps in a procedure
+- To include abbreviations
+- To give the singular and plural forms of a noun at the same time
+- To explain words or a part of a sentence
+- To include an alternative.
+
+> **STE:** Call the request handler (Figure 3, Module A).
+
+### Rule 8.4 — A colon in a vertical list ends a sentence
+In a vertical list, the colon (:) has the same effect on the word count as a
+period.
+
+- Procedural sentences: a maximum of 20 words before the colon.
+- Descriptive sentences: a maximum of 25 words before the colon.
+
+Each item after the colon counts as a new sentence, with the same limits: 20
+words for procedural items, 25 words for descriptive items.
+
+> **STE:** To handle possible error conditions, the error handler catches these
+> exception types:
+> - The connection timeout of the database
+> - The authentication failure of an expired token
+> - The validation error of a malformed payload.
+
+### Rule 8.5 — Text in parentheses counts as one word
+Text in parentheses counts as one word in the sentence that contains it. The
+words inside the parentheses also make a new sentence, so count them again in
+that sentence.
+
+> **STE:** Make sure that the DEBUG environment variable is set to false (the
+> DEBUG flag is off). (12 words; the sentence in parentheses has 5 words.)
+
+An identifier or an abbreviation in parentheses also counts as one word.
+
+### Rule 8.6 — Elements that count as one word
+Count each of these as one word:
+
+- Numbers
+- Numbers together with units of measurement
+- Abbreviations
+- Alphanumeric identifiers
+- Quoted text
+- Titles, headings, and text on user interface elements and labels
+- Proper nouns of individuals, groups, organizations, and geopolitical entities.
+
+> **STE:** Do steps 13 thru 16 a minimum of three times. (10 words)
+
+### Rule 8.7 — Hyphenated words count as one word
+A hyphenated group is one unit for the reader, thus it is one word for the
+sentence-length limits.
+
+> **Non-STE:** The open function returns a read only file descriptor.
+>
+> **STE:** The open function returns a read-only file descriptor.
+> ("read-only" is one word.)
+
+## Section 9 — Word choice and consistency
+
+### Rule 9.1 — Use a different sentence construction when replacement fails
+The dictionary gives approved alternatives for words that are not approved. If
+the alternative has the same part of speech and keeps the meaning, replace the
+word. If it does not, write a new sentence with a different structure.
+
+Write a new construction when:
+
+1. The grammatical structure must change to use the alternative.
+2. The word-for-word replacement gives an unclear result.
+3. The alternative changes the meaning.
+4. The word is not in the controlled terminology.
+
+> **Non-STE:** A timeout value of 5000 ms is acceptable for this endpoint.
+>
+> **STE:** A timeout value of 5000 ms is permitted for this endpoint.
+
+### Rule 9.2 — Use each approved word correctly
+Some approved words have a restricted meaning. Read the approved meaning in the
+dictionary before you use the word. Use each word only as its approved part of
+speech. A small number of words are approved as more than one part of speech.
+
+> **Non-STE:** Execute the initialization script before you start the server.
+>
+> **STE:** Run the initialization script before you start the server.
+
+### Rule 9.3 — Do not make phrasal verbs
+Do not put an approved verb and a preposition together to make a new phrase. Use
+one approved verb that has the same meaning. Only a small number of phrasal
+verbs are approved, and they all have a restricted meaning.
+
+| Non-STE phrasal verb | STE verb |
+|---|---|
+| put out (a warning) | emit |
+| carry out (a test) | do |
+| give off (an event) | release |
+| set up (the service) | configure |
+| shut down (the process) | stop |
+
+> **Non-STE:** The compiler puts out a warning when the type annotation is
+> missing.
+>
+> **STE:** The compiler emits a warning when the type annotation is missing.
+
+### Rule 9.4 — Use a consistent style
+Use the same terminology and the same wording each time the same action or item
+occurs.
+
+- Use one name for one item. Do not alternate between "configuration file,"
+  "settings file," and "config."
+- Use one verb for one action. Do not alternate between "compile," "build," and
+  "make."
+- Use the same sentence structure for the same type of instruction.
+
+> **Non-STE:** Edit the settings file. Then compile the project. Then build the
+> config again to check it.
+>
+> **STE:** Edit the configuration file. Then build the project. Then build the
+> project again to check the configuration file.
+
+## Quick checklist
+
+- Technical nouns: three words maximum; prepositions or hyphens for the rest.
+- Verbs: infinitive, imperative, simple present, simple past, simple future,
+  past participle as an adjective. No auxiliaries, no progressive.
+- Voice: active, unless the agent is unknown in descriptive text.
+- Sentences: 20 words in procedures, 25 words in descriptions.
+- Instructions: one per sentence, imperative form, condition first.
+- Paragraphs: one topic, six sentences maximum, topic sentence first.
+- Safety: WARNING or CAUTION, command first, risk explained.
+- Punctuation: no semicolon; hyphens for related words; colon ends a sentence.
+- Words: one approved meaning, one part of speech, no phrasal verbs, one
+  consistent term for one concept.

@@ -1,0 +1,346 @@
+<!-- 01-principles.md -->
+
+# Level 0 — Core Principles
+
+STE-Code Level 0 is the baseline. It collects the fourteen core principles that
+govern controlled vocabulary in code documentation, plus a short dictionary
+excerpt of code-domain technical terms. Everything below is faithful to the
+STE-Code standard: no rules are invented, and every example stays inside the
+code domain (no aerospace or other subject-field leakage).
+
+The principles form a gate. Every word in every sentence of code documentation
+must pass one of them: it is an approved word in the controlled terminology, a
+code-domain technical noun, or a code-domain technical verb.
+
+---
+
+## The Fourteen Principles
+
+**Rule 1.1 — Use words that are approved in the dictionary, technical nouns, or technical verbs.**
+Use only vocabulary that is (a) listed in the controlled terminology, (b) a
+code-domain technical noun such as `UserAuthenticator`, or (c) a code-domain
+technical verb such as `serialize`. A sentence like
+"Run the script to do the task" passes because `run` is an approved verb.
+
+**Rule 1.2 — Use approved words only as the specified part of speech.**
+A word approved as a noun must not be forced into verb service. Do not write
+"Docker the app"; write "Use Docker to build the app." The technical noun
+`query` stays a noun — use "Send a query to the database," not "Query the
+database."
+
+**Rule 1.3 — Use approved words only with their approved meanings.**
+An approved verb keeps its controlled meaning. "The worker runs every night"
+is correct only when you mean execute; if you mean manage, write "operates."
+
+**Rule 1.4 — Use only the approved forms of verbs and adjectives.**
+Use the approved inflection: `run / ran / run` for the verb, `large / larger /
+largest` for the adjective — never unlisted variants.
+
+**Rule 1.5 — You can use words that you can include in a code-domain technical noun category.**
+Words outside the dictionary are allowed when they name a precise concept in one
+of the nineteen code-domain categories — for example `Promise`, `User`, `ApiError`.
+
+**Rule 1.6 — Use a word that is not approved in the dictionary, only when it is a code-domain technical noun or part of a code-domain technical noun.**
+A non-approved word must be a registered code-domain technical noun (such as
+`ValidationError`) or it is forbidden.
+
+**Rule 1.7 — Do not use words that are technical nouns as verbs.**
+"Cache the result" is wrong when `cache` is a noun; write "Keep the result in
+the cache."
+
+**Rule 1.8 — Use technical nouns that are approved in your project, company, industry, or subject field.**
+Register project-specific nouns (`aws_instance`, `kubernetes_deployment`) in
+your glossary and reuse them exactly.
+
+**Rule 1.9 — When you must select a technical noun, use one which is short and easy to understand.**
+Prefer `socket` over `realtime_notification_channel`; short nouns read faster.
+
+**Rule 1.10 — Do not use regional, slang, or jargon words as technical nouns.**
+"No worries" and "utilize" are not technical nouns; use `use` and `use` instead.
+
+**Rule 超额1.11 — Do not use different technical nouns for the same item.**
+One concept, one term. If your README says `auth middleware`, the API docs and
+docstrings must say `auth middleware` — not `auth layer`.
+
+**Rule 1.12 — You can use verbs that you can include in a technical verb category.**
+Code-domain technical verbs (`map`, `filter`, `fold`, `reduce`, `compose`,
+`curry`) are permitted even though they are not in the approved-word list.
+
+**Rule 1.13 — Do not use technical verbs as nouns.**
+"Refactor the module" is fine as a verb; do not write "The refactor of the
+module" when `refactor` is a verb, not a noun.
+
+**Rule 1.14 — Use American English spelling unless other official directives tell you differently.**
+`color`, `center`, `initialize` — not `colour`, `centre`, `initialise`.
+
+---
+
+## Short Dictionary Excerpt (code-domain examples)
+
+| Type | Example | Notes |
+|------|---------|-------|
+| Approved verb | `run`, `make`, `get`, `set`, `send` | General-purpose STE-Code verbs |
+| Code-domain technical noun | `UserAuthenticator`, `Promise`, `aws_instance` | Registered in project glossary |
+| Code-domain technical verb | `serialize`, `map`, `filter`, `refactor` | Permitted under Rule 1.12 |
+| Adjective (approved) | `large`, `static`, `secure` | Use only as adjectives, never as verbs |
+
+**Non-STE vs STE (canonical pair):**
+
+> Non-STE: Query the database for user records.
+> STE: Send a query to the database for user records.
+
+> Non-STE: Docker the app and deploy to production.
+> STE: Use Docker to make a container for the app. Deploy the container to production.
+
+These fourteen principles, together with the dictionary excerpt, are the complete
+Level 0 slice. They are the deterministic base from which higher tiers build.
+
+---
+
+<!-- 02-synonyms.md -->
+
+# Level 0 — Technical Noun Categories (Rule 1.5)
+
+This is the Rule 1.5 slice of STE-Code Level 0: the **code-domain technical noun
+categories**. It is the "approved-word / synonym table" for Level 0 — the short,
+deterministic list of domain-specific terms you may use outside the approved-word
+dictionary.
+
+Everything below is faithful to the STE-Code standard. No categories or terms are
+invented. Examples stay inside the code domain (no aerospace or other subject-field
+leakage).
+
+Rule 1.5 is the **gateway for all domain-specific vocabulary**. The approved-word
+dictionary (Rule 1.1) cannot list every project's nouns, so STE-Code permits a word
+outside the dictionary *only* when it names a precise concept in one of the nineteen
+categories below. Use an approved word whenever one exists; use a code-domain
+technical noun only when no approved word names the concept.
+
+---
+
+## How the gate works
+
+A word is allowed in STE-Code documentation if it is **one** of:
+
+1. **An approved word** — listed in the controlled terminology (Rule 1.1).
+2. **A code-domain technical noun** — a word that fits at least one of the
+   nineteen categories below and is registered in your project glossary (Rule 1.5).
+3. **A code-domain technical verb** — a verb in the technical-verb category
+   (Rule 1.12).
+
+Any word that is none of these is **forbidden** by Rule 1.6. There is no fourth
+category.
+
+> Non-STE: The developer used the thing to get data from the storage layer and put it on the screen.
+> STE: The frontend developer used the API client to get data from the database and show it on the UI.
+> (`frontend developer` = category 11, `API client` = category 16, `database` = category 18, `UI` = category 8 — each names a precise concept.)
+
+---
+
+## The 19 Code-Domain Technical Noun Categories
+
+The terms listed under each category are **examples only** — Rule 1.5 does not give
+a full list. A word belongs in a category if it names a precise software concept.
+Register every project-specific noun in your glossary before using it.
+
+### 1. Code components, modules, and libraries
+Software parts, packages, and reusable units of code.
+`class`, `controller`, `helper`, `hook`, `middleware`, `mixin`, `module`, `package`, `plugin`, `provider`, `repository`, `service`, `utility`
+
+### 2. Computing devices and their components
+Hardware, devices, and physical computing resources.
+`CPU`, `disk`, `GPU`, `keyboard`, `laptop`, `memory`, `monitor`, `mouse`, `printer`, `screen`, `server`, `smartphone`, `tablet`, `terminal`
+
+### 3. Development tools, environments, and support equipment
+Development tools, IDEs, build systems, and testing frameworks.
+`CLI`, `compiler`, `debugger`, `Docker`, `editor`, `IDE`, `Git`, `Jest`, `linter`, `loader`, `Prettier`, `terminal`, `test runner`, `TypeScript`, `webpack`
+
+### 4. Data structures, types, and formats
+Data representation, storage structures, and file formats.
+`array`, `boolean`, `buffer`, `CSV`, `enum`, `hash map`, `integer`, `JSON`, `linked list`, `object`, `queue`, `stack`, `string`, `struct`, `tree`, `tuple`, `XML`, `YAML`
+
+### 5. Infrastructure, deployment, and platforms
+Hosting, deployment, containerization, and runtime platforms.
+`AWS`, `CI/CD`, `container`, `deployment`, `Heroku`, `Kubernetes`, `load balancer`, `Node.js`, `pipeline`, `pod`, `production`, `staging`, `Vercel`
+
+---
+
+### 6. Systems, subsystems, and architectural components
+System design, architecture patterns, and their parts.
+`API gateway`, `authentication layer`, `caching layer`, `client`, `database layer`, `message broker`, `microservice`, `proxy`, `rate limiter`, `REST API`, `routing layer`, `server`, `WebSocket`
+
+### 7. Mathematical, algorithmic, and scientific terms
+Algorithms, computational concepts, and mathematical formulas.
+`Big O notation`, `binary search`, `coefficient`, `complexity`, `exponent`, `hash function`, `iteration`, `logarithm`, `matrix`, `recursion`, `regex`, `sorting algorithm`, `time complexity`, `traversal`
+
+### 8. Interface elements and navigation
+UI components, navigation controls, and layout elements.
+`button`, `checkbox`, `dialog`, `dropdown`, `footer`, `header`, `menu`, `modal`, `navigation bar`, `radio button`, `scrollbar`, `sidebar`, `tab`, `text field`, `toggle`, `tooltip`
+
+### 9. Numbers, units of measurement, and time
+Quantitative data, measurements, and time-related information.
+`byte`, `gigabyte (GB)`, `hertz (Hz)`, `hour (h)`, `kilobyte (KB)`, `megabyte (MB)`, `millisecond (ms)`, `minute`, `nanosecond (ns)`, `second (s)`, `terabyte (TB)`
+
+### 10. Quoted text
+Texts you cannot change in code documentation — error messages, code snippets, UI labels, log output.
+`Cannot read properties of undefined`, `ENOENT: no such file or directory`, `Submit` button, `404 Not Found`, `connection refused`
+
+---
+
+### 11. Professional roles, teams, and organizations
+Roles, individuals, organizations, and teams related to software development.
+`administrator`, `backend developer`, `contributor`, `DevOps engineer`, `frontend developer`, `Google`, `maintainer`, `Microsoft`, `product owner`, `QA engineer`, `reviewer`, `scrum master`, `user`
+
+### 12. Official documents, API references, and standards
+Documentation types, standards, specifications, and their structural parts.
+`API reference`, `changelog`, `code of conduct`, `contributing guide`, `diagram`, `figure`, `Getting Started guide`, `HTTP specification`, `note`, `paragraph`, `README`, `release notes`, `RFC`, `section`, `table`, `warning`
+
+### 13. Runtime environments and operational conditions
+Execution contexts, environment variables, and operating parameters.
+`development`, `environment variable`, `garbage collection`, `heap`, `hot reload`, `live reload`, `memory leak`, `production`, `sandbox`, `stack trace`, `staging`, `test`, `thread`, `timeout`, `virtual machine`
+
+### 14. Colors
+Colors that identify color-related properties in code (CSS, terminal output, syntax highlighting).
+`black`, `blue`, `cyan`, `gray`, `green`, `magenta`, `orange`, `red`, `white`, `yellow`
+Colors are adjectives, but STE-Code identifies them as code-domain technical nouns. Comparative and superlative forms (for example, `blacker`, `the reddest`) are not permitted.
+
+### 15. Defects, errors, and fault terminology
+Types of software defects, errors, and malfunctions.
+`assertion failure`, `bug`, `crash`, `deadlock`, `defect`, `exception`, `hang`, `infinite loop`, `memory leak`, `null pointer`, `race condition`, `regression`, `stack overflow`, `timeout`, `type error`
+
+---
+
+### 16. Computer science, information, and communication technology
+Concepts, technologies, and architectures in computing and communication.
+`AI`, `algorithm`, `authentication`, `authorization`, `blockchain`, `containerization`, `cryptography`, `database`, `encoding`, `encryption`, `firewall`, `hashing`, `internet`, `machine learning`, `metadata`, `neural network`, `protocol`, `query`, `sandbox`, `schema`, `token`, `virtualization`
+
+### 17. Legal and licensing terms
+Software licenses, legal documents, and compliance terminology.
+`Apache 2.0`, `BSD license`, `compliance`, `copyright`, `GPL`, `license`, `MIT license`, `open source`, `proprietary`, `terms of service`, `third-party`, `trademark`, `warranty`
+
+### 18. Database and storage terminology
+Database concepts, storage systems, and data persistence.
+`connection pool`, `cursor`, `foreign key`, `index`, `migration`, `NoSQL`, `ORM`, `PostgreSQL`, `primary key`, `query`, `Redis`, `relation`, `row`, `schema`, `seed`, `SQL`, `SQLite`, `stored procedure`, `table`, `transaction`, `view`
+
+### 19. Network and protocol terminology
+Networking concepts, protocols, and communication.
+`DNS`, `endpoint`, `HTTP`, `HTTPS`, `IP address`, `localhost`, `middleware`, `packet`, `port`, `request`, `response`, `route`, `socket`, `SSH`, `TCP`, `TLS`, `UDP`, `URL`, `VPN`, `WebSocket`
+
+---
+
+## Using the categories (gateway rules)
+
+- **Use an approved word whenever one exists.** A technical noun is the *exception*,
+  not the default. Reach for `use`, not a jargon synonym, when an approved word fits.
+- **Register every technical noun in your project glossary** before you use it. The
+  glossary entry must give the term, its category or categories, its approved meaning
+  in context, and an example sentence.
+- **Use each noun only with its registered meaning** (Rule 1.3) and only as a noun or
+  noun modifier (Rule 1.2). Do not turn a technical noun into a verb (Rule 1.7).
+- **Prefer short, standard terms** (Rules 1.8, 1.9). Do not invent a new term when a
+  standard one exists, and do not use regional or slang words as technical nouns
+  (Rule 1.10).
+- **One concept, one term** (Rule 1.11). If the README says `auth middleware`, the API
+  reference and docstrings must say `auth middleware` — not `auth layer`.
+
+The terms in each category are examples only. Rule 1.5 does not give a full list of
+all possible code-domain technical nouns. When a term is a literal identifier, API
+name, or exact string from code (a class name, function name, environment variable, or
+error message), show it in backticks — for example, `UserRepository`, `NODE_ENV`,
+`"404 Not Found"`.
+
+These nineteen categories, together with the fourteen core principles and the
+dictionary excerpt, complete the Level 0 slice. They are the deterministic base from
+which higher tiers build.
+
+---
+
+<!-- 03-dictionary.md -->
+
+# Level 0 — Dictionary Excerpt (Approved / Unapproved)
+
+This sub-document is the short dictionary excerpt that accompanies the fourteen
+core principles in the Level 0 baseline of STE-Code. Together with
+`01-principles.md`, it forms the complete deterministic base for code
+documentation (API docs, commit messages, README sections, code comments).
+
+The glossary is adapted from the ASD-STE100 Issue 9 dictionary (Part 2,
+pages 149–434) and domain-adapted from aerospace to the code domain: aerospace
+examples are replaced with code examples, while word alphabetization, the
+STE/non-STE pair format, approved/unapproved status, and parts of speech are
+preserved.
+
+The full controlled terminology contains approximately 875 approved words and
+1274 unapproved words. This Level 0 slice shows a short excerpt (the A entries)
+plus the rules for reading any entry. Higher tiers bundle the complete
+dictionary.
+
+---
+
+## How to Read This Dictionary
+
+- **UPPERCASE words** are approved in STE-Code.
+- **lowercase words** are not approved; use the listed STE alternatives instead.
+- **(v)** = verb, **(n)** = noun, **(adj)** = adjective, **(adv)** = adverb,
+  **(prep)** = preposition, **(conj)** = conjunction, **(pron)** = pronoun,
+  **(art)** = article.
+- **(TN)** = code-domain Technical Noun, **(TV)** = code-domain Technical Verb.
+- Each entry shows the original rule text, a code-domain rewrite, and
+  STE / non-STE code example pairs.
+- An entry marked **UNNAPROVED** (lowercase) is forbidden; the entry lists the
+  approved replacement(s) and example pairs that show the correction.
+
+---
+
+# A
+
+## A (art) — APPROVED
+
+Indefinite article. Use before a singular countable noun.
+
+- Original: A FUEL PUMP IS INSTALLED IN ZONE 10.
+- Code-domain: A CONFIG FILE IS INCLUDED IN THE ROOT DIRECTORY.
+
+> STE: A config file is included in the root directory.
+> Non-STE: Config files included in root directory.
+
+---
+
+## ABANDON (v) — UNNAPROVED
+
+Not approved. Use **STOP (v)** or **TERMINATE (v)** instead.
+
+- Original: GO (v), STOP (v). IF THERE IS A FIRE, IMMEDIATELY GO TO A SAFE AREA. / IF THE VALUES ARE INCORRECT, STOP THE TEST PROCEDURE.
+- Code-domain: TERMINATE (v), STOP (v). IF THE BUILD FAILS, STOP THE DEPLOYMENT PIPELINE. / IF THE VALUES ARE INCORRECT, TERMINATE THE TEST RUN.
+
+> STE: If the build fails, stop the deployment pipeline.
+> Non-STE: If the build fails, abandon the deployment pipeline.
+
+> STE: If the values are incorrect, terminate the test run.
+> Non-STE: If the values are incorrect, abandon the test procedure.
+
+---
+
+## ABILITY (n) — UNNAPROVED
+
+Not approved. Use **CAN (v)** instead.
+
+- Original: CAN (v). ONE GENERATOR CAN SUPPLY POWER FOR ALL THE SYSTEMS.
+- Code-domain: CAN (v). ONE CONFIGURATION CAN HANDLE REQUESTS FOR ALL THE ENDPOINTS.
+
+> STE: One configuration can handle requests for all the endpoints.
+> Non-STE: One configuration has the ability to handle requests for all the endpoints.
+
+---
+
+## Scope of This Slice
+
+This excerpt covers the A entries only. The patterns it demonstrates — approved
+articles, unapproved verbs replaced by approved verbs (ABANDON → STOP/TERMINATE),
+and unapproved nouns replaced by modal verbs (ABILITY → CAN) — repeat across the
+full A–Z dictionary bundled in higher STE-Code tiers.
+
+For the gate that this glossary serves, see `01-principles.md` (the fourteen
+core principles) and `02-synonyms.md`. A word is permitted in Level 0 only when
+it is an approved word, a code-domain technical noun, or a code-domain technical
+verb.

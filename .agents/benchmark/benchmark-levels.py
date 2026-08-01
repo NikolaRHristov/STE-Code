@@ -19,12 +19,18 @@ ORCHESTRATOR = PROJECT / ".agents" / "benchmark" / "orchestrator.py"
 ARTIFACTS = PROJECT / "ste-code" / "artifacts"
 RESULTS_BASE = PROJECT / ".agents" / "benchmark" / "results-levels"
 
+# STE-Code now ships 8 deterministic tiers (artifacts/<tier>/system-prompt.txt),
+# produced by finalize_artifacts.py. Every tier has a single concatenated
+# system-prompt.txt, so the benchmark can feed any tier directly.
 LEVEL_PROMPTS = {
-    1: ARTIFACTS / "level1" / "system-prompt.txt",
-    2: ARTIFACTS / "level2" / "system-prompt.txt",
-    3: ARTIFACTS / "level3" / "system-prompt.txt",
-    4: ARTIFACTS / "level4" / "system-prompt.txt",
-    5: None,  # Level 5 uses individual rule summaries, not a single prompt
+    -2: ARTIFACTS / "level-2" / "system-prompt.txt",
+    -1: ARTIFACTS / "level-1" / "system-prompt.txt",
+    0:  ARTIFACTS / "level0"  / "system-prompt.txt",
+    1:  ARTIFACTS / "level1"  / "system-prompt.txt",
+    2:  ARTIFACTS / "level2"  / "system-prompt.txt",
+    3:  ARTIFACTS / "level3"  / "system-prompt.txt",
+    4:  ARTIFACTS / "level4"  / "system-prompt.txt",
+    5:  ARTIFACTS / "level5"  / "system-prompt.txt",
 }
 
 
@@ -128,7 +134,8 @@ def collect_results(results_dirs, output_path):
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Multi-Level STE-Code Benchmark")
-    parser.add_argument("--levels", default="1,2,3,4,5", help="Comma-separated levels (default: 1-5)")
+    parser.add_argument("--levels", default="-2,-1,0,1,2,3,4,5",
+                        help="Comma-separated tiers (default: all 8 tiers)")
     parser.add_argument("--model", default="poolside/laguna-s-2.1:free", help="Model to use")
     parser.add_argument("--timeout", type=int, default=600, help="Timeout per orchestrator (seconds)")
     parser.add_argument("--max-workers", type=int, default=0, help="Max concurrent workers (0=unlimited)")
@@ -152,8 +159,6 @@ def main():
             prompt = LEVEL_PROMPTS.get(lv)
             if prompt and prompt.exists():
                 print(f"  Level {lv}: {prompt} ({prompt.stat().st_size//4:,} ~tokens)")
-            elif lv == 5:
-                print(f"  Level {lv}: 51 rule summaries (~100K tokens)")
             else:
                 print(f"  Level {lv}: PROMPT NOT FOUND")
         return
@@ -165,16 +170,8 @@ def main():
     for lv in levels:
         prompt = LEVEL_PROMPTS.get(lv)
         if not prompt or not prompt.exists():
-            if lv == 5:
-                # Level 5: use empty prompt file (worker will read summaries)
-                prompt = results_dir / "level-5-prompt.txt"
-                prompt.write_text(
-                    "You are STE-Code Level 5. Read all rule summaries from "
-                    "ste-code/artifacts/level5/ and apply the full specification."
-                )
-            else:
-                print(f"SKIP Level {lv}: prompt file not found")
-                continue
+            print(f"SKIP Level {lv}: prompt file not found")
+            continue
 
         proc = subprocess.Popen(
             [sys.executable, str(ORCHESTRATOR),

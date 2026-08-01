@@ -1,0 +1,18 @@
+# STE-Code
+
+> STE-Code is a controlled-language variation of ASD-STE100 for software documentation, distilled here for LLM consumption as small sub-documents. Load the tier that matches your context window; each tier is a directory of focused files plus an _index.md.
+
+## Tiers
+
+- [level-2/](level-2/) — level -2 — ultra-minimal: the 14 core principles only
+- [level-1/](level-1/) — level -1 — minimal/core: 14 core principles + synonym table
+- [level0/](level0/) — level 0 — baseline: core principles + short dictionary excerpt
+- [level1/](level1/) — level 1 — + doc templates (code review / PR feedback)
+- [level2/](level2/) — level 2 — + section-specific grammar rules
+- [level3/](level3/) — level 3 — + complete dictionary excerpt + all rules
+- [level4/](level4/) — level 4 — + extensions + reference catalogue
+- [level5/](level5/) — level 5 — full standard (all rules + extensions + catalogue + provenance)
+
+## Full standard
+
+- [llms-full.txt](llms-full.txt) — concatenation of every distilled sub-document.
