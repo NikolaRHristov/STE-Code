@@ -12,7 +12,8 @@
 #
 # Model is read from STE_MODEL (default tencent/hy3:free).
 set -u
-REPO="$(cd "$(dirname "$0")/../../../../" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 cd "$REPO" || exit 1
 RUN=".agents/tools/runners"
 export STE_MODEL="${STE_MODEL:-tencent/hy3:free}"
