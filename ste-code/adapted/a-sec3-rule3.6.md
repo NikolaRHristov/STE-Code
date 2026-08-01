@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 3.6
 
+> Source: master.md#sec3-rule3.6
+
 ## Original Rule
 
 Use the active voice. In descriptive writing, you can use the passive voice only if the agent is unknown.
@@ -600,13 +602,13 @@ Use this pattern when the sentence is in a descriptive section and the agent is 
 
 When you convert a passive sentence to active voice, you must also check the replacement verb against the STE-Code Canonical Synonym Table. Many passive constructions contain avoided words that need replacement.
 
-> **Non-STE:** The result is utilized by the downstream pipeline.
+> **Non-STE:** The result is used by the downstream pipeline.
 >
 > **STE:** The downstream pipeline uses the result.
 
 In this pair, three fixes work together:
-1. Convert passive to active (*is utilized by* → active verb) — Rule 3.6.
-2. Replace the avoided word (*utilize* → *use*) — Rule 1.1 and Canonical Synonym Table.
+1. Convert passive to active (*is used by* → active verb) — Rule 3.6.
+2. Replace the avoided word (*used* → *uses*) — Rule 1.1 and Canonical Synonym Table.
 3. Apply active voice correctly (*pipeline uses the result*) — Rule 3.6.
 
 > **Non-STE:** The error is displayed on the console by the logger.
