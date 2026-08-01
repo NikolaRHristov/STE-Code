@@ -26,10 +26,15 @@ DESIGN (mocked/basic benchmark, to be reworked later)
 - For each (document, parameter-set) pair, launch ONE long worker session
   (hermes-oneshot-wrapper --debug) that DISTILLS the source rule into a variant.
 - Variants are written to ste-code/parametarized/<doc>/v<k>.md.
-- A benchmark runner (placeholder run_benchmark_variant) executes the SAME
-  benchmark suite with each variant as the system-prompt "standard reference",
-  collecting scores per variant into ste-code/parametarized/<doc>/bench-<k>.json.
-  CRITICAL: it writes ONLY under ste-code/parametarized/ — never under final/.
+- A benchmark runner executes the SAME benchmark suite with each variant as the
+  system-prompt "standard reference", collecting scores per variant.
+- Variants are written to ste-code/parametarized/<doc>/v<k>.md (deliverables).
+- Benchmark RESULTS are written under .agents/benchmark/tests/parametarized/<doc>/
+  (inside the single benchmark output root, where the harness output-root guard
+  requires them) as run-*/aggregate-results.json. The aggregator pass-rate and
+  avg correctness are folded back into bench-<k>.json next to the variant.
+  CRITICAL: it writes ONLY under ste-code/parametarized/ (variants) and the
+  benchmark tests root (results) — never under final/.
 - Workers run in PARALLEL (default 3, capped <=3) but each variant is its OWN
   long session — so "3 on 1 file" => 3 different variant files, then 3 bench runs.
 
@@ -176,28 +181,63 @@ def _build_variant_prompt(doc_path: Path, param: dict) -> str:
     )
 
 
-# ── mock benchmark runner (rework later to call real orchestrator) ──────────
+# ── benchmark runner (wired to the real harness) ──────────────────────────
 def run_benchmark_variant(variant_path: Path, doc_stem: str, variant_id: str) -> dict:
-    """PLACEHOLDER benchmark: returns a stub score object.
+    """Run the SAME static benchmark suite with the variant as the system prompt.
 
-    Rework: call .agents/benchmark/orchestrator.py with this variant as the
-    'standard reference' system prompt, collect pass-rate/score, write JSON.
-    CRITICAL: writes ONLY under the variant's parametarized/ directory — never
-    under ste-code/final/.
+    The variant .md is the "standard reference" the suite is scored against.
+    Results are written under the single benchmark output root
+    (.agents/benchmark/tests/parametarized/<doc>/) so the harness output-root
+    guard is satisfied; the distilled variant docs themselves stay in
+    ste-code/parametarized/ (a deliverable, never under final/).
+
+    Falls back to a stub record if the orchestrator cannot be launched, so a
+    trajectory run never hard-crashes on a benchmark failure.
     """
-    stub = {
-        "variant": str(variant_path),
-        "doc": doc_stem,
-        "variant_id": variant_id,
-        "status": "MOCKED",
-        "pass_rate": None,
-        "avg_score": None,
-        "note": "benchmark runner is mocked; wire to .agents/benchmark/orchestrator.py",
-        "ran_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-    }
-    out = variant_path.parent / f"bench-{variant_id}.json"  # parent == parametarized/<doc>/
-    out.write_text(json.dumps(stub, indent=2), encoding="utf-8")
-    return stub
+    bench_root = Path(__file__).resolve().parent.parent.parent / "benchmark" / "tests" / "parametarized"
+    results_dir = bench_root / doc_stem / f"bench-{variant_id}"
+    results_dir.mkdir(parents=True, exist_ok=True)
+    orch = Path(__file__).resolve().parent.parent.parent / "benchmark" / "orchestrator.py"
+    try:
+        r = subprocess.run(
+            [sys.executable, str(orch),
+             "--system-prompt-file", str(variant_path),
+             "--results-dir", str(results_dir),
+             "--model", MODEL,
+             "--max-workers", "3", "--timeout", "1800", "--poll-interval", "10"],
+            capture_output=True, text=True, timeout=2400)
+        ok = r.returncode == 0
+        agg = results_dir / "aggregate-results.json"
+        pass_rate = None
+        avg_score = None
+        if agg.exists():
+            try:
+                d = json.loads(agg.read_text())
+                pass_rate = d.get("pass_rate_pct")
+                avg_score = d.get("aggregates", {}).get("avg_correctness")
+            except Exception:
+                pass
+        return {
+            "variant": str(variant_path),
+            "doc": doc_stem,
+            "variant_id": variant_id,
+            "status": "ran" if ok else "error",
+            "pass_rate": pass_rate,
+            "avg_score": avg_score,
+            "results_dir": str(results_dir),
+            "ran_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }
+    except Exception as e:  # never let a benchmark failure kill the trajectory
+        return {
+            "variant": str(variant_path),
+            "doc": doc_stem,
+            "variant_id": variant_id,
+            "status": "MOCKED",
+            "pass_rate": None,
+            "avg_score": None,
+            "note": "orchestrator unavailable ({}); wire fixed but run skipped".format(e),
+            "ran_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }
 
 
 # ── one variant job ─────────────────────────────────────────────────────────
@@ -228,11 +268,17 @@ def produce_variant(doc_path: Path, param: dict, do_bench: bool) -> dict:
     ok = out_path.exists() and out_path.stat().st_size >= 300 \
         and bool(re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip()))
     result = {"doc": stem, "variant": vid, "ok": ok, "path": str(out_path)}
-    if ok:
-        result["bench"] = run_benchmark_variant(out_path, stem, vid) if do_bench else None
+    if ok and do_bench:
+        bench = run_benchmark_variant(out_path, stem, vid)
+        result["bench"] = bench
+        # Persist the bench record next to the variant for traceability.
+        (out_path.parent / f"bench-{vid}.json").write_text(
+            json.dumps(bench, indent=2), encoding="utf-8")
         with _lock:
-            print(f"  ✓ {stem} -> {out_path.name}"
-                  + (f" (bench {result['bench']['status']})" if do_bench else ""), flush=True)
+            print(f"  ✓ {stem} -> {out_path.name} (bench {bench['status']})", flush=True)
+    elif ok:
+        with _lock:
+            print(f"  ✓ {stem} -> {out_path.name}", flush=True)
     else:
         with _lock:
             print(f"  [WEAK] {stem} {vid}: variant not written validly", flush=True)
@@ -243,7 +289,7 @@ def produce_variant(doc_path: Path, param: dict, do_bench: bool) -> dict:
 def _plan(docs: list[Path], params: list[dict], bench: bool):
     print("=== TRAJECTORY PLAN (dry-run) ===")
     print(f"docs={len(docs)} variants/doc={len(params)} total_jobs={len(docs)*len(params)}")
-    print(f"benchmark per variant: {bench} (mocked)")
+    print(f"benchmark per variant: {bench} (real orchestrator under tests/parametarized/)")
     print(f"output root: {PARAM_DIR}")
     print(f"prompt template: {PROMPT_MD}")
     for d in docs[:8]:
