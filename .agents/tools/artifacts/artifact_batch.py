@@ -1,20 +1,29 @@
 #!/usr/bin/env python3
-"""Phase F Assembler — final STE-Code deliverables from adapted rules.
+"""Phase F Assembler — final STE-Code deliverables from the FINAL standard.
 
-Consolidates ste-code/adapted/ into the canonical deployable artifacts:
+Consolidates ste-code/final/ (the enriched, vendor-grounded standard produced by
+Phases D+G) into the canonical deployable artifacts:
   - ste-code/artifacts/ste-code-rules.md          (full rule corpus)
   - ste-code/artifacts/ste-code-system-prompt.md  (distilled, template-wrapped)
 
-This is DETERMINISTIC assembly (no LLM): it concatenates the adapted rule files
-in canonical order, wraps them in an externalized header/footer template, and
-verifies coverage. The creative adaptation already happened in Phase D; here we
+This is DETERMINISTIC assembly (no LLM): it concatenates the final rule files in
+canonical order, wraps them in an externalized header/footer template, and
+verifies coverage. The creative enrichment already happened in Phase G; here we
 only *collect and package* — so there is no truncation or content-loss risk, and
-the output is reproducible byte-for-byte from the same adapted/ input.
+the output is reproducible byte-for-byte from the same final/ input.
+
+UPGRADED (bring-to-standard):
+  - Source is now ste-code/final/ (was stale ste-code/adapted/).
+  - Folds in final/rules/{a-categories,a-dictionary} + final/extensions/* +
+    final/{README,provenance,reference-catalogue}.md.
+  - VERSION bump: reads/writes ste-code/artifacts/VERSION; embeds it in headers.
+  - Template placeholders kept as {{name}} (project templater standard).
 
 Usage:
-  python3 artifact_batch.py            # assemble both artifacts
+  python3 artifact_batch.py            # assemble both artifacts + bump VERSION
   python3 artifact_batch.py --dry-run  # plan only, write nothing
   python3 artifact_batch.py --verify    # run verify-artifacts.py only
+  python3 artifact_batch.py --version 1.2.0   # force a specific version string
 """
 from __future__ import annotations
 
@@ -23,13 +32,15 @@ import sys
 import re
 import json
 import argparse
+from datetime import datetime
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent
-ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
+FINAL_DIR = PROJECT / "ste-code" / "final"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 STATE_DIR = PROJECT / ".agents" / "state"
 CHECKPOINT_PATH = STATE_DIR / "artifact-checkpoint.json"
+VERSION_PATH = ARTIFACTS_DIR / "VERSION"
 
 # Canonical rule ordering: section -> rule ids (mirrors adaptation EXPECTED).
 SECTION_ORDER = {
@@ -41,7 +52,7 @@ SECTION_ORDER = {
     6: [f"6.{i}" for i in range(1, 7)],
     7: [f"7.{i}" for i in range(1, 4)],
     8: [f"8.{i}" for i in range(1, 8)],
-    9: [f"9.{i}" for i in range(1, 5)] + ["GR1", "GR2", "GR3", "GR4"],
+    9: [f"9.{i}" for i in range(1, 5)],
 }
 
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
@@ -49,20 +60,45 @@ from templater import Templater
 TPL = Templater(__file__)
 
 
+def _bump_version(forced: str | None) -> str:
+    """Return the version to stamp: forced > existing+patch > 1.0.0."""
+    if forced:
+        return forced
+    if VERSION_PATH.exists():
+        try:
+            cur = VERSION_PATH.read_text(encoding="utf-8").strip()
+            m = re.match(r"^(\d+)\.(\d+)\.(\d+)$", cur)
+            if m:
+                maj, min_, pat = (int(x) for x in m.groups())
+                return f"{maj}.{min_}.{pat + 1}"
+        except OSError:
+            pass
+    return "1.0.0"
+
+
 def _ordered_rule_files():
-    """Return adapted rule files in canonical section/rule order."""
+    """Return final rule files in canonical section/rule order."""
     out = []
     for sec, ids in SECTION_ORDER.items():
         for rid in ids:
-            p = ADAPTED_DIR / f"a-sec{sec}-rule{rid}.md"
+            p = FINAL_DIR / "rules" / f"a-sec{sec}-rule{rid}.md"
             if p.exists():
                 out.append(p)
     # Append any section-rule files not in the canonical list (forward-compat).
     seen = {p.name for p in out}
-    for p in sorted(ADAPTED_DIR.glob("a-sec*-rule*.md")):
+    for p in sorted((FINAL_DIR / "rules").glob("a-sec*-rule*.md")):
         if p.name not in seen:
             out.append(p)
     return out
+
+
+def _read(name: str, *parts: str) -> str:
+    p = FINAL_DIR.joinpath(*parts, name) if parts else FINAL_DIR / name
+    if p.exists():
+        return p.read_text(encoding="utf-8", errors="ignore")
+    # also try directly under FINAL_DIR
+    p2 = FINAL_DIR / name
+    return p2.read_text(encoding="utf-8", errors="ignore") if p2.exists() else ""
 
 
 def _collect_rule_text(files):
@@ -73,60 +109,80 @@ def _collect_rule_text(files):
     return "\n\n---\n\n".join(blocks)
 
 
-def _assemble(dry_run: bool) -> tuple[bool, dict]:
+def _assemble(dry_run: bool, version: str) -> tuple[bool, dict]:
     rule_files = _ordered_rule_files()
     if not rule_files:
-        print("No adapted rule files found — run Phase D first.", flush=True)
-        return False, {"reason": "no adapted rules"}
+        print("No final rule files found — run Phase G (finalize) first.", flush=True)
+        return False, {"reason": "no final rules"}
 
     rule_text = _collect_rule_text(rule_files)
-    cats = (ADAPTED_DIR / "a-categories.md").read_text(encoding="utf-8", errors="ignore") if (ADAPTED_DIR / "a-categories.md").exists() else ""
-    dict_text = (ADAPTED_DIR / "a-dictionary.md").read_text(encoding="utf-8", errors="ignore") if (ADAPTED_DIR / "a-dictionary.md").exists() else ""
+    cats = _read("a-categories.md", "rules")
+    dict_text = _read("a-dictionary.md", "rules")
+    extensions = "\n\n---\n\n".join(
+        f"# Extension: {p.stem}\n\n{p.read_text(encoding='utf-8', errors='ignore')}"
+        for p in sorted((FINAL_DIR / "extensions").glob("*.md"))
+    )
+    provenance = _read("provenance.md")
+    catalogue = _read("reference-catalogue.md")
+    today = datetime.now().strftime("%Y-%m-%d")
 
     full = TPL.render(
         "artifact-rules",
+        version=version,
+        generated=today,
         rule_count=len(rule_files),
-        generated=__import__("datetime").datetime.now().strftime("%Y-%m-%d"),
         rules=rule_text,
         categories=cats,
         dictionary=dict_text,
+        extensions=extensions,
+        provenance=provenance,
+        catalogue=catalogue,
     )
     prompt = TPL.render(
         "artifact-system-prompt",
+        version=version,
+        generated=today,
         rule_count=len(rule_files),
-        generated=__import__("datetime").datetime.now().strftime("%Y-%m-%d"),
         rules=rule_text,
     )
 
     if dry_run:
         print(f"[dry-run] would write {len(rule_files)} rules into 2 artifacts "
-              f"(rules={len(full)}B, prompt={len(prompt)}B)")
+              f"(rules={len(full)}B, prompt={len(prompt)}B, version={version})")
         return True, {"rule_count": len(rule_files), "rules_bytes": len(full),
-                      "prompt_bytes": len(prompt)}
+                      "prompt_bytes": len(prompt), "version": version}
 
     ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
     (ARTIFACTS_DIR / "ste-code-rules.md").write_text(full, encoding="utf-8")
     (ARTIFACTS_DIR / "ste-code-system-prompt.md").write_text(prompt, encoding="utf-8")
+    VERSION_PATH.write_text(version + "\n", encoding="utf-8")
     STATE_DIR.mkdir(parents=True, exist_ok=True)
-    CHECKPOINT_PATH.write_text(json.dumps({"assembled": len(rule_files)}, indent=2))
+    CHECKPOINT_PATH.write_text(json.dumps({"assembled": len(rule_files), "version": version}, indent=2))
     print(f"Wrote ste-code-rules.md and ste-code-system-prompt.md "
-          f"({len(rule_files)} rules)")
-    return True, {"rule_count": len(rule_files)}
+          f"({len(rule_files)} rules, version {version})")
+    return True, {"rule_count": len(rule_files), "version": version}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--verify", action="store_true")
+    ap.add_argument("--version", default=None, help="force a specific version string")
     args = ap.parse_args()
 
     if args.verify:
-        import subprocess
-        r = subprocess.run([sys.executable, str(Path(__file__).with_name("verify-artifacts.py"))])
+        r = subprocess_run_verify()
         sys.exit(r.returncode)
 
-    ok, stats = _assemble(args.dry_run)
+    version = _bump_version(args.version)
+    ok, stats = _assemble(args.dry_run, version)
     sys.exit(0 if ok else 1)
+
+
+def subprocess_run_verify():
+    import subprocess
+    r = subprocess.run([sys.executable, str(Path(__file__).with_name("verify-artifacts.py"))])
+    return r
 
 
 if __name__ == "__main__":
