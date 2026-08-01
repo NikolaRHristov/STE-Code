@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Features include: data can be processed quickly, files are able to be converted automatically, and results will be displayed in real-time.
-
-Output the corrected text, then a compliance summary.

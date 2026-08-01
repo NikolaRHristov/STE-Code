@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Write a user-facing error message for when a form field is empty but required. Use STE-Code: clear, actionable, no slang. Include what went wrong and what to do.
-
-Output the corrected text, then a compliance summary.

@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-GET /api/users — fetches all users. POST /api/users — creates a new user. PUT /api/users/:id — modifies an existing user. DELETE /api/users/:id — removes a user.
-
-Output the corrected text, then a compliance summary.

@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-This project utilizes a microservices architecture. We make use of Docker for containerization and Kubernetes for orchestration. The API endpoints should be accessed via HTTPS. For more info, check out our docs which contain lots of helpful tips and tricks.
-
-Output the corrected text, then a compliance summary.

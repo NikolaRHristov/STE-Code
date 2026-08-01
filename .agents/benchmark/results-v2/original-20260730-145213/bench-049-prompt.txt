@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-You removed the deprecated `UserService.create()` method. Users must migrate to `UserService.register()`. This is a breaking change. Write a conventional commit message with proper severity markers using STE-Code.
-
-Output the corrected text, then a compliance summary.

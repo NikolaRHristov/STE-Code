@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-You refactored the authentication middleware to use a strategy pattern instead of a monolithic `if/else` chain. The change improves testability and allows adding new auth methods without modifying existing code. Write a conventional commit with body using STE-Code.
-
-Output the corrected text, then a compliance summary.

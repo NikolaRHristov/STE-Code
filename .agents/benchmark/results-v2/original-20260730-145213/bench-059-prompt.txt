@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Write a complete README for a small open-source library called `validate-json`. It validates JSON against a schema, supports custom rules, and has a CLI and programmatic API. Include: description, install, usage, contributing. Use STE-Code throughout.
-
-Output the corrected text, then a compliance summary.

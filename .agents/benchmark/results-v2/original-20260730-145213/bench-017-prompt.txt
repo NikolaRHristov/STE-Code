@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-TypeError: Cannot read property 'name' of undefined. This usually happens when it is not properly initialized.
-
-Output the corrected text, then a compliance summary.

@@ -1,9 +1,0 @@
-I don't have any documentation for "STE-Code" in this workspace, and I'm not familiar with that specific standard. Before I can check compliance, I need to know what the STE-Code rules are.
-
-Could you point me to the STE-Code specification or describe what it enforces? Some things that would help:
-
-- Is STE-Code a controlled-language standard (like ASD-STE100 Simplified Technical English)?
-- Is it a project-specific style guide or rule set?
-- Does it prescribe specific word choices, sentence structures, formatting, or severity markers?
-
-If you have a file in the repo or a URL documenting the rules, I can read it and apply the checks immediately. Without it, I'd just be guessing and could steer you wrong.

@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-This library does a bunch of stuff and should be called with the user object to get everything set up properly.
-
-Output the corrected text, then a compliance summary.

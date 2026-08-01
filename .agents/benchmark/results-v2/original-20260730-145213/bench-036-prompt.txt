@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Write a Python function `validate_email(address)` that checks if an email address is valid. Include a complete docstring with Args and Returns sections. Use STE-Code principles: approved words, active voice, no jargon.
-
-Output the corrected text, then a compliance summary.

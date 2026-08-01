@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-feat: added a bunch of new endpoints for the user service
-
-Output the corrected text, then a compliance summary.

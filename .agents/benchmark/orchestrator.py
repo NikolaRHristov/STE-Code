@@ -517,6 +517,19 @@ def main():
     launch_index = 0
 
     while launch_index < len(to_launch):
+        # Reap any children that finished since the last pass so their slots
+        # free up. Without this, `running` stays pinned at max_workers and the
+        # launch loop busy-waits forever, never reaching the remaining tests.
+        for tid in [t for t, w in workers.items()
+                    if w.get("pid", -1) > 0 and not w.get("completed", False)]:
+            try:
+                wpid, _ = os.waitpid(workers[tid]["pid"], os.WNOHANG)
+            except ChildProcessError:
+                wpid = workers[tid]["pid"]
+            if wpid != 0:
+                workers[tid]["completed"] = True
+                _child_pids.pop(tid, None)
+
         # Count currently running workers (pid > 0 and not yet completed).
         running = sum(
             1 for w in workers.values()

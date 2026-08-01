@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Write a one-paragraph project description for a tool that checks code documentation for STE-Code compliance. Explain what it does, who it helps, and its main benefit. Use STE-Code: active voice, approved words, no marketing fluff.
-
-Output the corrected text, then a compliance summary.

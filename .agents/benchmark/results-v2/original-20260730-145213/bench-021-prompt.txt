@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-// This function does a bunch of stuff to get the user data
-
-Output the corrected text, then a compliance summary.

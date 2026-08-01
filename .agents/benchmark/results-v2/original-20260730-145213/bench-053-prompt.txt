@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Write an error message for when the server cannot connect to the database. Include: what failed, why it matters, recovery steps. Use STE-Code approved terms and imperative mood for actions.
-
-Output the corrected text, then a compliance summary.

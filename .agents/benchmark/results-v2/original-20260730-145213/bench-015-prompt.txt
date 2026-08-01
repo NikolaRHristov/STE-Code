@@ -1,9 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-refactor: overhauled the entire data layer
-
-Switched from MongoDB to PostgreSQL because Mongo was being flaky. Also cleaned up a ton of legacy code that was doing weird stuff with the connection pool.
-
-Output the corrected text, then a compliance summary.

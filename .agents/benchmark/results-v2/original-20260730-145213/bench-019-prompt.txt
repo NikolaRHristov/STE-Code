@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-MongoError: connection pool is exhausted, the server is probably overloaded or something
-
-Output the corrected text, then a compliance summary.

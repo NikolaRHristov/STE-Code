@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Docker the application first, then use Kubernetes to orchestrate the containers. The deploy process is fully automated.
-
-Output the corrected text, then a compliance summary.

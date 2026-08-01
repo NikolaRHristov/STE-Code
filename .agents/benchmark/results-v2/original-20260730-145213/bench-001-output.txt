@@ -1,9 +1,0 @@
-Corrected text:
-
-"This library initializes several services and requires the user object as a parameter for proper setup."
-
-Compliance summary:
-- "does a bunch of stuff" — vague and informal; replaced with "initializes several services"
-- "should be called with" — weak obligation, ambiguous about whether the caller or the library is the subject; replaced with "requires ... as a parameter"
-- "to get everything set up properly" — wordy and informal; replaced with "for proper setup"
-- Overall result meets technical documentation standards: precise, professional, and actionable.

@@ -1,7 +1,0 @@
-You are a helpful coding assistant. Respond to the user's request.
-
-## TASK
-Check this text for compliance and correct it:
-Write a TypeScript function `processPayload(data: unknown)` that validates and transforms an API payload. Include JSDoc with @param and @returns. Use STE-Code: active voice, no slang, clear error descriptions.
-
-Output the corrected text, then a compliance summary.
