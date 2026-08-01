@@ -184,6 +184,9 @@ class HarnessConfig:
         self.default_max_workers = int(runner.get("default_max_workers", 2))
         self.default_timeout_s = int(runner.get("default_timeout_s", 600))
         self.default_poll_interval_s = int(runner.get("default_poll_interval_s", 2))
+        self.default_rounds = int(runner.get("default_rounds", 3))
+        self.base_dir = Path(runner.get("base_dir",
+                                        str(Path(self.root) / "benchmark-runs")))
 
         variants = document.get("variants", {})
         registry = variants.get("registry", {})

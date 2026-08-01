@@ -64,6 +64,8 @@ class Partition:
         self.seed = seed
         self.arm_a = arm_a
         self.arm_b = arm_b
+        self.size_a = len(arm_a)
+        self.size_b = len(arm_b)
         self.note = note
         self.balance = self._balance()
 
