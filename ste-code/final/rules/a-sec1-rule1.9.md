@@ -27,11 +27,23 @@ Do not use long descriptive phrases when a shorter term is sufficient. If the co
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20).  |  STE: Remove the four screws (10) that attach the flange (15) to the cover (20).
+
+**Spec pair in code context.** The original ASD-STE100 example uses an index number (10) and an illustration to identify a physical part. In STE-Code, a line number and a code snippet do the same work.
+
+```javascript
+// client.js — line 42
+async function fetchUtility(url) {
+  const response = await fetch(url);
+  return response.json();
+}
+```
+
 > **Non-STE:** Call the asynchronous JavaScript XML HTTP request wrapper utility function (line 42) to get the serialized JSON payload from the remote application programming interface endpoint.
 >
-> **STE:** Call the fetch utility (line 42) to get the JSON data from the API endpoint.
+> **STE:** Call the `fetchUtility` function (line 42) to get the JSON data from the API endpoint.
 
-This adapts the spec pair: "Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20)" becomes "Remove the four screws (10) that attach the flange (15) to the cover (20)." In the spec, the long descriptive phrase "stainless steel pan head machine screws" is reduced to "screws" because the index number (10) and the illustration identify the part. In STE-Code, the long phrase "asynchronous JavaScript XML HTTP request wrapper utility function" is reduced to "fetch utility" because the line number (42) and the code snippet identify the function. "JSON payload" becomes "JSON data" and "remote application programming interface endpoint" becomes "API endpoint" — both follow the spec principle of using the shortest unambiguous term.
+This adapts the spec pair: "Remove the four stainless steel pan head machine screws (10) that attach the metallic machined flange (15) to the front housing cover (20)" becomes "Remove the four screws (10) that attach the flange (15) to the cover (20)." In the spec, the long descriptive phrase "stainless steel pan head machine screws" is reduced to "screws" because the index number (10) and the illustration identify the part. In STE-Code, the long phrase "asynchronous JavaScript XML HTTP request wrapper utility function" is reduced to "`fetchUtility` function" because the line number (42) and the code snippet identify the function. "JSON payload" becomes "JSON data" and "remote application programming interface endpoint" becomes "API endpoint" — both follow the spec principle of using the shortest unambiguous term.
 
 ## Code-Domain Explanation
 
@@ -90,9 +102,20 @@ Object-oriented documentation often describes class hierarchies with long inheri
 **Practice:** Use the class name. The reader can inspect the class definition for its inheritance chain, type parameters, and implemented interfaces. Write "the `UserRepository` class." If the inheritance is relevant to the discussion, state it in a separate sentence: "`UserRepository` extends `BaseRepository<User>`."
 
 **Before:** The concrete factory method implementation class instantiates the appropriate data access object implementation based on the runtime configuration profile.
+
 **After:** The `DaoFactory` class creates the correct DAO implementation for the active configuration profile.
 
+```java
+// The DaoFactory class creates the correct DAO implementation for the active configuration profile.
+public class DaoFactory {
+    public UserDao createUserDao(ConfigProfile profile) {
+        return new JdbcUserDao(profile.getDataSource());
+    }
+}
+```
+
 **Before:** The dependency injection inversion of control container manages the lifecycle of the singleton-scoped service provider instances.
+
 **After:** The DI container manages the lifecycle of singleton services.
 
 In the second example, "DI" is a recognized abbreviation (category 16, Rule 1.5). "IoC" is removed because "DI container" already implies the concept. "Singleton-scoped service provider instances" becomes "singleton services" — the scope and role are clear from the context of DI documentation.
@@ -104,14 +127,23 @@ Functional programming documentation often describes transformations with long n
 **Practice:** Name the result. Use a short noun phrase that identifies what the value represents, not how it was computed. The computation is visible in the code.
 
 **Before:** The monomorphized iterator adapter chain with lazy evaluation semantics produces a collection of transformed elements.
+
 **After:** The iterator produces a transformed collection.
 
 **Before:** The higher-order function that takes a binary operation and an initial accumulator value and returns a function that reduces a foldable data structure to a single value.
+
 **After:** The fold function. It reduces a collection to a single value.
+
+```haskell
+-- The fold function. It reduces a collection to a single value.
+sumValues :: [Int] -> Int
+sumValues = foldl (+) 0
+```
 
 In the second example, "fold" is a standard algorithmic term (category 7). The long description duplicates what every functional programmer already knows. Use the standard term.
 
 **Before:** The discriminated union algebraic data type with exhaustive pattern matching guarantees.
+
 **After:** The enum type. Pattern matching covers all variants.
 
 "Enum" is a data type term (category 4). "Discriminated union" and "algebraic data type" are synonyms in this context. Choose one and use it consistently (Rule 1.11). Do not use both in the same noun phrase.
@@ -123,14 +155,28 @@ Procedural documentation often describes functions with long noun phrases that l
 **Practice:** Name the function. Describe its purpose in a short sentence. Let the function signature carry the type information.
 
 **Before:** The variadic formatted output to file descriptor function with thread-safe internal buffering.
+
 **After:** The `fprintf` function. It writes formatted output to a file descriptor.
 
 **Before:** The dynamically allocated resizable contiguous memory region management utility.
+
 **After:** The dynamic array. It grows as you add elements.
+
+```go
+// The dynamic array. It grows as you add elements.
+type DynamicArray struct {
+    items []int
+}
+
+func (d *DynamicArray) Append(value int) {
+    d.items = append(d.items, value)
+}
+```
 
 In the second example, "dynamic array" is a standard data structure term (category 4). The long phrase "dynamically allocated resizable contiguous memory region management utility" describes implementation details that are not needed for understanding the concept.
 
 **Before:** The mutual exclusion lock primitive with timeout-bounded acquisition and deadlock detection.
+
 **After:** The mutex. It has a timeout and deadlock detection.
 
 "Mutex" is a computer science term (category 16). The additional features (timeout, deadlock detection) are described in a separate sentence, not embedded in the noun phrase.
@@ -142,9 +188,29 @@ Declarative documentation often describes resources with long noun phrases that 
 **Practice:** Name the resource type. Describe the configuration in bullet points or a table. The declarative code itself is the ultimate reference.
 
 **Before:** The Kubernetes horizontal pod autoscaling controller with CPU utilization metric threshold and minimum and maximum replica count bounds.
+
 **After:** The `HorizontalPodAutoscaler` resource. It scales pods based on CPU utilization. Set the minimum and maximum replica counts.
 
+```yaml
+# The HorizontalPodAutoscaler resource. It scales pods based on CPU utilization.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-hpa
+spec:
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+```
+
 **Before:** The Structured Query Language parameterized query with multiple table joins, aggregate functions, grouping clauses, and sorted result set.
+
 **After:** The parameterized query. It joins the `users` and `orders` tables and groups results by region.
 
 In the second example, the long phrase describes the SQL structure. The short description states what the query does. The SQL code itself shows the joins, aggregates, and sorting.
@@ -156,10 +222,19 @@ Systems documentation often describes memory operations with long noun phrases t
 **Practice:** Use the short term ("reference," "borrow," "lifetime"). The Rust compiler enforces the guarantees. Documentation describes what the programmer controls, not what the compiler prevents.
 
 **Before:** The affine type system linear resource ownership tracking mechanism that prevents use-after-move errors at compile time.
+
 **After:** The ownership system. It prevents use-after-move errors.
 
 **Before:** The dynamically sized slice reference type with bounds checking that prevents out-of-bounds memory access at runtime.
+
 **After:** The slice reference. Bounds checks prevent out-of-bounds access.
+
+```rust
+// The slice reference. Bounds checks prevent out-of-bounds access.
+fn first(bytes: &[u8]) -> Option<u8> {
+    bytes.first().copied()
+}
+```
 
 In both examples, the safety mechanism (ownership, bounds checking) is described in a separate sentence. The noun phrase names the concept. The explanation follows.
 
@@ -167,14 +242,46 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 
 ### Example Group 1: README Project Description
 
+A README introduces a library. The code block after the prose gives the reader the full context, so the prose does not need to name every internal detail.
+
+````markdown
+# FetchKit
+
+A small client for HTTP requests.
+
+## Install
+npm install fetchkit
+
+## Use
+```javascript
+import { FetchKit } from "fetchkit";
+
+const client = new FetchKit();
+const users = await client.getJson("/api/users");
+```
+````
+
 > **Non-STE:** This is a high-performance, event-driven, non-blocking I/O model JavaScript runtime environment built on Chrome's V8 JavaScript engine that uses an asynchronous, single-threaded event loop architecture for building scalable network applications.
 >
-> **STE:** Node.js is a JavaScript runtime. It uses an event-driven, non-blocking I/O model. Use it to build scalable network applications.
+> **STE:** FetchKit is an HTTP client. It uses an event-driven, non-blocking I/O model. Use it to build scalable network applications.
 
-- **Principle applied:** P9 (use short technical nouns: "Node.js" is 2 words, "JavaScript runtime" is 2 words)
-- **Explanation:** The non-STE version is a 42-word noun phrase that embeds architecture details, the engine name, and the use case. The STE version names the technology in two words, then explains the architecture and use case in separate sentences. The reader can absorb each piece of information independently. This follows the spec principle: "screws" (one word) replaces "stainless steel pan head machine screws" (six words). The context — the README title, the installation section, the code examples — makes the short term sufficient.
+- **Principle applied:** P9 (use short technical nouns: "FetchKit" is 1 word, "HTTP client" is 2 words)
+- **Explanation:** The non-STE version is a 42-word noun phrase that embeds architecture details, the engine name, and the use case. The STE version names the technology in one or two words, then explains the architecture and use case in separate sentences. The reader can absorb each piece of information independently. This follows the spec principle: "screws" (one word) replaces "stainless steel pan head machine screws" (six words). The context — the README title, the installation section, the code example — makes the short term sufficient.
 
 ### Example Group 2: API Documentation Parameter Description
+
+The endpoint already names the fields in its request contract. The prose only needs to point the reader to that contract.
+
+````http
+POST /v1/users
+Content-Type: application/json
+
+{
+  "emailAddress": "jane@example.com",
+  "displayName": "Jane Doe",
+  "subscribeToNewsletter": false
+}
+````
 
 > **Non-STE:** The request body must contain a JSON object with a required string field named "emailAddress" that must match the standard internet electronic mail address format as defined by RFC 5322, an optional string field named "displayName" with a maximum length of 100 Unicode characters, and a required boolean field named "subscribeToNewsletter" that defaults to false if not provided.
 >
@@ -188,14 +295,37 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 
 ### Example Group 3: Docstring for a Function
 
+The function signature and body show the types and the work. The docstring states the action and the result.
+
+```python
+def create_user(email_address, display_name=None, subscribe=False):
+    """Create and return a new User instance with the given dependencies.
+
+    Args:
+        email_address: Email for the new account.
+        display_name: Optional display name.
+        subscribe: Opt in to the newsletter.
+    """
+    user = User(email=email_address, name=display_name)
+    user.newsletter = subscribe
+    user.save()
+    return user
+```
+
 > **Non-STE:** This public static factory method constructs and returns a newly created, fully initialized, thread-safe instance of the UserService class with all of its required collaborator dependencies injected and its internal state properly configured for the current runtime environment.
 >
-> **STE:** Create and return a new `UserService` instance with the given dependencies.
+> **STE:** Create and return a new `User` instance with the given dependencies.
 
-- **Principle applied:** P9 (use short technical nouns: "UserService instance" is 2 words, "dependencies" is 1 word)
-- **Explanation:** The non-STE version is a 40-word noun phrase that describes the method's visibility ("public"), its nature ("static factory"), its return behavior ("newly created"), its thread safety, its initialization state, and its configuration. The STE version states the action ("create and return") and the result ("a new UserService instance"). The code signature shows visibility, static modifier, and parameter types. The class documentation describes thread safety. The docstring does not need to repeat information that the code already conveys. This follows the spec principle: the function signature is like the illustration in the original example — it provides context that makes a long description unnecessary.
+- **Principle applied:** P9 (use short technical nouns: "User instance" is 2 words, "dependencies" is 1 word)
+- **Explanation:** The non-STE version is a 40-word noun phrase that describes the method's visibility ("public"), its nature ("static factory"), its return behavior ("newly created"), its thread safety, its initialization state, and its configuration. The STE version states the action ("Create and return") and the result ("a new User instance"). The code signature shows the parameters. The class documentation describes thread safety. The docstring does not need to repeat information that the code already conveys. This follows the spec principle: the function signature is like the illustration in the original example — it provides context that makes a long description unnecessary.
 
 ### Example Group 4: Commit Message Subject Line
+
+The subject line is short. The body can carry detail. Use a recognized abbreviation (JWT) instead of the expanded form.
+
+```text
+git commit -m "Refactor auth middleware: extract JWT validation and role resolution into separate utilities"
+```
 
 > **Non-STE:** Refactor the authentication and authorization middleware layer to extract the JSON Web Token validation and user permission role resolution logic into separate composable utility functions.
 >
@@ -206,6 +336,18 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 
 ### Example Group 5: Error Message
 
+The error message is the text a reader sees in a log or terminal. Keep it short so display tools do not cut it off.
+
+```python
+try:
+    connect("192.168.1.100", 5432, timeout=30)
+except TimeoutError:
+    raise ConnectionError(
+        "Connection to the primary database at 192.168.1.100:5432 "
+        "timed out after 30 seconds"
+    )
+```
+
 > **Non-STE:** The operation to establish a connection to the primary relational database management system server instance located at the network address 192.168.1.100 on the default Transmission Control Protocol port number 5432 has failed due to a network timeout condition after waiting for the configured connection timeout duration of 30 seconds.
 >
 > **STE:** Connection to the primary database at 192.168.1.100:5432 timed out after 30 seconds.
@@ -214,6 +356,17 @@ In both examples, the safety mechanism (ownership, bounds checking) is described
 - **Explanation:** The non-STE version is a 55-word sentence that embeds the database type ("relational database management system"), the server role ("primary"), the protocol ("Transmission Control Protocol"), the default port ("5432"), the failure type ("network timeout condition"), and the duration. The STE version is a 13-word sentence that conveys the same information: what failed (connection), where (192.168.1.100:5432), what happened (timed out), and when (after 30 seconds). The protocol is implied by the port number and the term "database." The database type is implied by "primary" (which implies a replica set, specific to certain databases). The error message reader needs to know what to fix, not what every acronym expands to. This follows the spec principle: the short term is sufficient because the context (a database connection error) identifies the components.
 
 ### Example Group 6: CLI Help Text
+
+The flag name carries the concept; the help string only needs to state the limit and the target.
+
+```python
+parser.add_argument(
+    "--max-workers",
+    type=int,
+    default=4,
+    help="Maximum number of worker threads for the job queue.",
+)
+```
 
 > **Non-STE:** Specifies the maximum permitted quantity of simultaneously executing concurrent parallel worker subprocess threads that the application is permitted to spawn and manage for the purpose of processing items from the background job queue.
 >
@@ -257,19 +410,12 @@ Tools such as JSDoc, Sphinx, and godoc generate documentation from source code. 
 ## Cross-References
 
 - **Rule 1.1 (Approved Words):** When you shorten a noun phrase, replace non-approved words with approved words from the dictionary. For example, "leverage the authentication mechanism" becomes "use the auth service" — "leverage" is replaced with "use" (Rule 1.1), and "authentication mechanism" is shortened to "auth service" (Rule 1.9). The two rules work together.
-
 - **Rule 1.5 (Technical Code Nouns):** Rule 1.5 defines which terms are permissible as code-domain technical nouns. Rule 1.9 applies after Rule 1.5: once you have identified a permissible technical noun, select the shortest form of it. "Application programming interface" is a technical noun under category 19; Rule 1.9 says to use "API."
-
 - **Rule 1.6 (Non-Approved Words as Technical Nouns):** Rule 1.6 forbids non-approved words except as technical nouns. Rule 1.9 applies to the technical nouns that Rule 1.6 permits. A technical noun that passes Rule 1.6 must also pass Rule 1.9: it must be short and easy to understand.
-
 - **Rule 1.8 (Standard Technical Nouns):** Rule 1.8 requires you to use the technical noun that is approved in your project or industry. Rule 1.9 says to use the shortest form of that approved noun. When the industry standard is a long form ("Transport Layer Security"), use the standard short form if one exists ("TLS"). Do not invent a non-standard short form ("TransSec").
-
 - **Rule 1.10 (No Slang or Jargon):** Rule 1.10 forbids slang and jargon as technical nouns. Rule 1.9 reinforces this: a short slang term ("repo" for "repository") may seem to satisfy the shortness requirement, but it fails the "easy to understand" test for readers outside the community. Use the standard short form ("repository") or a recognized abbreviation.
-
 - **Rule 1.11 (One Term per Concept):** Rule 1.11 requires consistency. When you shorten a technical noun under Rule 1.9, use the same shortened form everywhere in the document. Do not use "auth service" in one paragraph and "authentication module" in the next for the same component. Choose one short form and apply it consistently.
-
 - **Rule 1.13 (Do Not Use Technical Verbs as Nouns):** Rule 1.13 forbids using verbs as nouns. A common violation occurs when writers shorten a noun phrase by converting a verb to a noun: "the deploy" instead of "the deployment process." Rule 1.9 does not permit this. The short form must be a noun, not a verb used as a noun.
-
 - **Rule 1.14 (American English Spelling):** When a short form has both American and British spellings, use the American spelling. "Initialize" (American) not "initialise" (British). "Color" not "colour." This applies to all forms: full nouns, shortened nouns, and adjectives.
 
 ## Grammar Notes
@@ -342,3 +488,12 @@ Use this checklist when reviewing code documentation for Rule 1.9 compliance:
 10. Read the shortened phrase aloud. Is it easy to understand? If not, the phrase is too short. Add one disambiguating adjective.
 
 NOTE: This checklist is a guide. Professional judgment is always necessary when deciding between brevity and clarity. When the two conflict, clarity wins.
+
+> **See also:** Rule 1.1 — Use Approved Words
+> **See also:** Rule 1.5 — Use Approved Technical Nouns for Your Subject Field
+> **See also:** Rule 1.6 — Use Non-Approved Words Only as Technical Nouns
+> **See also:** Rule 1.8 — Use the Standard Technical Noun
+> **See also:** Rule 1.10 — Do Not Use Slang or Jargon
+> **See also:** Rule 1.11 — Use One Term for One Concept
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.14 — Use English (American) Spelling
