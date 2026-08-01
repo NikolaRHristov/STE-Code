@@ -35,6 +35,8 @@ If there is an identifier in parentheses (a number, a letter, or an alphanumeric
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: n/a (source rule is illustrative)  |  STE: Make sure that the EMER pushbutton switch is released (the EMER legend is off). — Remove the safety pin (10). — Installation of a Business Class (B/C) Seat
+
 > **Non-STE:** Make sure that the DEBUG environment variable is set to false before you run the deployment script in the production cluster (the DEBUG flag must be explicitly disabled for all production workloads to prevent accidental log leakage).
 >
 > **STE:** Make sure that the DEBUG environment variable is set to false (the DEBUG flag is off). (12 words)
@@ -43,11 +45,36 @@ If there is an identifier in parentheses (a number, a letter, or an alphanumeric
 
 (This sentence has 12 words, because the text in parentheses counts as one word. The sentence in parentheses has 5 words and counts as a different sentence.)
 
+Realistic code-domain anchor — a deployment runbook step:
+
+````
+# deploy.sh (excerpt)
+# WRONG: the aside buries a production safety rule inside parentheses
+export DEBUG=false (set DEBUG to false on all production hosts to stop log leakage)
+
+# RIGHT
+export DEBUG=false
+# The DEBUG flag is off on all production hosts.
+````
+
 > **Non-STE:** Remove the health check flag number ten from the deployment configuration.
 >
 > **STE:** Remove the health check flag (10). (5 words)
 >
 > *Adapted from spec pair: "Remove the safety pin (10)." — identifier in parentheses counts as one word.*
+
+Realistic code-domain anchor — a config schema comment:
+
+````
+# config.yaml (excerpt)
+# WRONG
+# remove the health check flag number ten from the deployment configuration
+health_check_flag: 10
+
+# RIGHT
+# Remove the health check flag (10).
+health_check_flag: 10
+````
 
 > **Non-STE:** Installation and Configuration of a Continuous Integration and Continuous Deployment Pipeline for the Application
 >
@@ -55,13 +82,23 @@ If there is an identifier in parentheses (a number, a letter, or an alphanumeric
 >
 > *Adapted from spec pair: "Installation of a Business Class (B/C) Seat" — abbreviation in parentheses counts as one word.*
 
+Realistic code-domain anchor — a README heading and intro line:
+
+````
+# WRONG
+# Installation and Configuration of a Continuous Integration and Continuous Deployment Pipeline for the Application
+
+# RIGHT
+# Configuration of a Continuous Integration/Continuous Deployment (CI/CD) Pipeline
+````
+
 ## Code-Domain Explanation
 
-Rule 8.5 governs how parenthetical text affects word counting in all code documentation. The rule has two parts: (1) the parenthetical block counts as exactly one word in the enclosing sentence, and (2) the words inside the parentheses form their own separate sentence with their own word-count limit. This dual counting system lets the writer add clarifying asides without inflating the word count of the main sentence, while still enforcing brevity on the aside itself.
+Rule 8.5 governs how parenthetical text affects word counting in all code documentation. The rule has two parts: (1) the parenthetical block counts as exactly one word in the enclosing sentence, and (2) the words inside the parentheses form their own separate sentence with its own word-count limit. This dual counting system lets you add clarifying asides without inflating the word count of the main sentence, while still enforcing brevity on the aside itself.
 
 The most important practical effect of Rule 8.5 is that parentheses become a tool for managing sentence length. When a sentence approaches the 20-word procedural limit or the 25-word descriptive limit, moving qualifying information into parentheses reduces the main sentence's word count by the length of the moved text minus one. This is not a loophole — it is the intended mechanism. The parenthetical text remains subject to the same length limits as any other sentence. A parenthetical with 30 words violates the spirit of the rule even though the main sentence gains only one word.
 
-A secondary effect is that parentheses create a hierarchy of attention. The main sentence carries the primary message. The parenthetical carries secondary or clarifying information. A reader who skips the parenthetical should still understand the main sentence. If the parenthetical contains mission-critical information, the information belongs in the main sentence, not in parentheses.
+A secondary effect is that parentheses create a hierarchy of attention. The main sentence carries the primary message. The parenthetical carries secondary or clarifying information. A reader who skips the parenthetical should still understand the main sentence. If the parenthetical contains information that the reader must act on, that information belongs in the main sentence, not in parentheses.
 
 ### README Files
 
@@ -207,29 +244,41 @@ In OOP documentation, parentheses appear most often around type names, class ref
 
 A common OOP-specific violation: the writer uses parentheses to embed inheritance justifications or interface contract explanations inside class-level docstrings. The parenthetical describes why a class extends another class or implements an interface in a specific way. This design rationale belongs in a separate paragraph, not in a parenthetical aside.
 
-Example of a violation in a Java class docstring:
-
-````
-The CachingUserRepository extends the BaseRepository class and
-implements the UserRepository interface (the BaseRepository provides
-generic CRUD operations with connection pooling, and UserRepository
-adds user-specific query methods — we extend rather than compose
-because the caching layer needs access to protected connection
-management methods on BaseRepository).
-````
-
-The fix separates the design rationale:
-
-````
-The CachingUserRepository extends the BaseRepository class. It
-implements the UserRepository interface.
-
-The BaseRepository class provides generic CRUD operations with
-connection pooling. The UserRepository interface adds user-specific
-query methods. This class extends BaseRepository rather than
-composing it. The caching layer needs access to protected
-connection management methods.
-````
+> **Non-STE:** A Java class docstring that embeds the inheritance justification in parentheses:
+> ```java
+> /**
+>  * The CachingUserRepository extends the BaseRepository class and
+>  * implements the UserRepository interface (the BaseRepository provides
+>  * generic CRUD operations with connection pooling, and UserRepository
+>  * adds user-specific query methods — we extend rather than compose
+>  * because the caching layer needs access to protected connection
+>  * management methods on BaseRepository).
+>  */
+> public class CachingUserRepository extends BaseRepository
+>         implements UserRepository {
+>     // ...
+> }
+> ```
+>
+> **STE:** Move the design rationale to its own paragraph:
+> ```java
+> /**
+>  * The CachingUserRepository extends the BaseRepository class. It
+>  * implements the UserRepository interface.
+>  *
+>  * The BaseRepository class provides generic CRUD operations with
+>  * connection pooling. The UserRepository interface adds user-specific
+>  * query methods. This class extends BaseRepository rather than
+>  * composing it. The caching layer needs access to protected
+>  * connection management methods.
+>  */
+> public class CachingUserRepository extends BaseRepository
+>         implements UserRepository {
+>     // ...
+> }
+> ```
+>
+> *Principles applied: Rule 8.5 (the parenthetical is an explanatory aside that violates the sentence limit; the fix makes it a separate paragraph), Rule 3.3 (keep paragraphs short).*
 
 ### Functional Paradigm (Haskell, Elixir, Clojure, Rust)
 
@@ -237,29 +286,37 @@ In functional documentation, parentheses appear around type parameters, pattern 
 
 A functional-specific violation: the writer uses parentheses to embed a full explanation of a monadic transformation or a lazy evaluation behavior inside a function description. Functional paradigms favor composition and transformation chains — writers sometimes try to parenthesize the entire chain description.
 
-Example of a violation in a Rust function docstring:
-
-````
-The transform function applies a series of operations to the input
-stream (it first filters out all None values using filter_map, then
-converts each remaining value through the provided mapper function,
-and finally collects the results into a Vec — the entire chain is
-lazy and does not allocate until collect is called at the end).
-````
-
-The fix moves the chain description to a separate paragraph:
-
-````
-The transform function applies a series of operations to the input
-stream.
-
-The function does these steps:
-- Remove all None values with filter_map.
-- Convert each remaining value with the mapper function.
-- Collect the results into a Vec.
-
-The chain is lazy. It does not allocate until collect is called.
-````
+> **Non-STE:** A Rust docstring that buries the transformation chain in parentheses:
+> ```rust
+> /// The transform function applies a series of operations to the input
+> /// stream (it first filters out all None values using filter_map, then
+> /// converts each remaining value through the provided mapper function,
+> /// and finally collects the results into a Vec — the entire chain is
+> /// lazy and does not allocate until collect is called at the end).
+> pub fn transform(input: impl Iterator<Item = Option<i32>>,
+>                  mapper: impl Fn(i32) -> i32) -> Vec<i32> {
+>     // ...
+> }
+> ```
+>
+> **STE:** Move the chain description to its own paragraph:
+> ```rust
+> /// The transform function applies a series of operations to the input
+> /// stream.
+> ///
+> /// The function does these steps:
+> /// - Remove all None values with filter_map.
+> /// - Convert each remaining value with the mapper function.
+> /// - Collect the results into a Vec.
+> ///
+> /// The chain is lazy. It does not allocate until collect is called.
+> pub fn transform(input: impl Iterator<Item = Option<i32>>,
+>                  mapper: impl Fn(i32) -> i32) -> Vec<i32> {
+>     // ...
+> }
+> ```
+>
+> *Principles applied: Rule 8.5 (the parenthetical is an explanatory aside; the fix splits it into a list and a separate sentence), Rule 3.1 (use simple sentences).*
 
 ### Procedural Paradigm (C, Go, Bash)
 
@@ -267,30 +324,36 @@ In procedural documentation, parentheses appear around exit codes, flag values, 
 
 A procedural-specific violation: the writer uses parentheses to embed error-handling logic inside a step description. The parenthetical describes the full if-else branching for an error condition. Procedural documentation should use separate sentences or a NOTE block for error handling.
 
-Example of a violation in a Go function docstring:
-
-````
-WriteConfig saves the application configuration to the specified
-file path (if the file already exists, the function returns an
-ErrExists error and the caller must check for this error and decide
-whether to overwrite by calling WriteConfigForce or to abort — if
-the parent directory does not exist, the function creates it with
-0755 permissions before writing).
-````
-
-The fix separates the error conditions:
-
-````
-WriteConfig saves the application configuration to the specified
-file path.
-
-If the file exists, the function returns an ErrExists error. The
-caller must check for this error. To overwrite the file, call
-WriteConfigForce. To abort, return the error.
-
-If the parent directory does not exist, the function creates it with
-0755 permissions.
-````
+> **Non-STE:** A Go docstring that embeds error branching in parentheses:
+> ```go
+> // WriteConfig saves the application configuration to the specified
+> // file path (if the file already exists, the function returns an
+> // ErrExists error and the caller must check for this error and decide
+> // whether to overwrite by calling WriteConfigForce or to abort — if
+> // the parent directory does not exist, the function creates it with
+> // 0755 permissions before writing).
+> func WriteConfig(path string, cfg Config) error {
+>     // ...
+> }
+> ```
+>
+> **STE:** Separate the error conditions into their own sentences:
+> ```go
+> // WriteConfig saves the application configuration to the specified
+> // file path.
+> //
+> // If the file exists, the function returns an ErrExists error. The
+> // caller must check for this error. To overwrite the file, call
+> // WriteConfigForce. To abort, return the error.
+> //
+> // If the parent directory does not exist, the function creates it with
+> // 0755 permissions.
+> func WriteConfig(path string, cfg Config) error {
+>     // ...
+> }
+> ```
+>
+> *Principles applied: Rule 8.5 (the parenthetical is an explanatory aside that breaches the procedural limit; the fix promotes each branch to its own sentence), Rule 4.1 (keep sentences short).*
 
 ### Declarative Paradigm (SQL, Terraform, Kubernetes YAML)
 
@@ -298,28 +361,34 @@ In declarative documentation, parentheses appear around allowed values, validati
 
 A declarative-specific violation: the writer uses parentheses to embed migration instructions or backward-compatibility notes inside a resource property description. Declarative configurations often evolve across versions, and the writer tries to capture the full evolution history in a parenthetical.
 
-Example of a violation in a Terraform variable description:
-
-````
-The schema_version variable sets the database schema version (in
-version 1.x of this module the default was "13" but in version 2.x
-the default changed to "15" — if you are upgrading from 1.x you
-must run the database migration script before changing this value
-to avoid data loss, and you should also update the parameter group
-family to match the new schema version).
-````
-
-The fix:
-
-````
-The schema_version variable sets the database schema version. The
-default value is "15".
-
-BREAKING: The default value changed from "13" in version 1.x to
-"15" in version 2.x. Before you change this value during an upgrade,
-run the database migration script. Also update the parameter group
-family to match the new version.
-````
+> **Non-STE:** A Terraform variable description that embeds the migration history in parentheses:
+> ```hcl
+> variable "schema_version" {
+>   description = "The schema_version variable sets the database schema version (in
+>   version 1.x of this module the default was \"13\" but in version 2.x
+>   the default changed to \"15\" — if you are upgrading from 1.x you
+>   must run the database migration script before changing this value
+>   to avoid data loss, and you should also update the parameter group
+>   family to match the new schema version)."
+>   type        = string
+> }
+> ```
+>
+> **STE:** Move the breaking-change note to its own block:
+> ```hcl
+> variable "schema_version" {
+>   description = "The schema_version variable sets the database schema version. The
+>   default value is \"15\".
+>
+>   BREAKING: The default value changed from \"13\" in version 1.x to
+>   \"15\" in version 2.x. Before you change this value during an upgrade,
+>   run the database migration script. Also update the parameter group
+>   family to match the new version."
+>   type        = string
+> }
+> ```
+>
+> *Principles applied: Rule 8.5 (the parenthetical is an explanatory aside that exceeds the limit; the fix moves it out of parentheses), Rule 3.3 (keep paragraphs short).*
 
 ### Systems Paradigm (Rust ownership docs, C memory docs)
 
@@ -327,33 +396,42 @@ In systems documentation, parentheses appear around safety preconditions, lifeti
 
 The systems-specific rule is stricter than the general rule: do not put safety-critical information in parentheses. Put it in the main sentence or in its own `# Safety` section. Parentheses in systems documentation should contain only secondary clarifications, never preconditions.
 
-Example of a violation in a Rust unsafe function docstring:
-
-````
-The set_ptr function writes a value to the memory location that
-the pointer refers to (the caller must ensure that the pointer is
-valid for writes, that it is properly aligned for type T, and that
-no other thread holds a reference to the same memory location
-during the write — violating any of these conditions causes
-undefined behavior).
-````
-
-The parenthetical contains the safety contract. The safety contract should not be in parentheses. The fix:
-
-````
-The set_ptr function writes a value to the memory location that the
-pointer refers to.
-
-# Safety
-
-The caller must obey these conditions:
-- The pointer must be valid for writes.
-- The pointer must be properly aligned for type T.
-- No other thread must hold a reference to the same memory location
-  during the write.
-
-If any of these conditions is not obeyed, the behavior is undefined.
-````
+> **Non-STE:** A Rust unsafe docstring that buries the safety contract in parentheses:
+> ```rust
+> /// The set_ptr function writes a value to the memory location that
+> /// the pointer refers to (the caller must ensure that the pointer is
+> /// valid for writes, that it is properly aligned for type T, and that
+> /// no other thread holds a reference to the same memory location
+> /// during the write — violating any of these conditions causes
+> /// undefined behavior).
+> ///
+> /// # Safety
+> /// (none)
+> pub unsafe fn set_ptr<T>(ptr: *mut T, value: T) {
+>     // ...
+> }
+> ```
+>
+> **STE:** Promote the safety contract out of parentheses into its own section:
+> ```rust
+> /// The set_ptr function writes a value to the memory location that the
+> /// pointer refers to.
+> ///
+> /// # Safety
+> ///
+> /// The caller must obey these conditions:
+> /// - The pointer must be valid for writes.
+> /// - The pointer must be properly aligned for type T.
+> /// - No other thread must hold a reference to the same memory location
+> ///   during the write.
+> ///
+> /// If any of these conditions is not obeyed, the behavior is undefined.
+> pub unsafe fn set_ptr<T>(ptr: *mut T, value: T) {
+>     // ...
+> }
+> ```
+>
+> *Principles applied: Rule 8.5 (no parenthetical used for safety information), Rule 3.1 (use simple sentences for each precondition).*
 
 ## Extended Examples
 
@@ -415,7 +493,7 @@ Guidance: Backtick-delimited code tokens are atomic. A token like `setTimeout(ca
 
 > **STE:** Call the `authenticate()` function. Then call `validate(token)`. (6 words)
 
-> *The parentheses inside the backtick-delimited code tokens are part of the token, not Rule 8.5 parentheticals. The sentence has six prose words. The code tokens count as one word each.* 
+> *The parentheses inside the backtick-delimited code tokens are part of the token, not Rule 8.5 parentheticals. The sentence has six prose words. The code tokens count as one word each.*
 
 ### Edge Case 2 — When Parentheses Contain a URL
 
@@ -544,3 +622,13 @@ In a technical manual, a parenthetical like `(set the parameter to 50-55 Nm)` is
 In code documentation, the same principle applies with different nouns. Instead of measurement values, the parenthetical contains error codes, default values, version numbers, and rationale. The structural need is identical: the main sentence carries the action or description, and the parenthetical carries the qualifying detail. The rule is a reminder that parentheticals are not dumping grounds — they are structured asides with their own sentence discipline.
 
 The original rule also emphasizes that parentheses should not be used to hide information the reader must see. The same applies to code documentation: do not use parentheses to hide deprecation warnings, breaking change notices, or safety-critical conditions. These deserve their own sentences, their own paragraphs, or their own labeled blocks (BREAKING, DEPRECATED, NOTE).
+
+## See also
+
+> **See also:** Rule 1.5 — Technical Code Nouns Are Allowed
+> **See also:** Rule 1.6 — Non-Approved Words Only as Technical Code Nouns
+> **See also:** Rule 3.1 — Use Simple Sentences
+> **See also:** Rule 3.3 — Keep Paragraphs Short
+> **See also:** Rule 4.1 — Keep Sentences Short
+> **See also:** Rule 8.1 — Do Not Use the Semicolon
+> **See also:** Rule 8.4 — Colon in a Vertical List
