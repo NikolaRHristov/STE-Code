@@ -1,0 +1,180 @@
+{
+  "entries": [
+    {
+      "slug": "microsoft-writing-style-guide",
+      "title": "Microsoft Writing Style Guide",
+      "url": "https://learn.microsoft.com/en-us/style-guide/welcome/",
+      "local_path": ".agents/reference/microsoft-writing-style-guide.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:53:44Z"
+    },
+    {
+      "slug": "microsoft-style-guide-github",
+      "title": "MicrosoftDocs/microsoft-style-guide (GitHub source)",
+      "url": "https://github.com/MicrosoftDocs/microsoft-style-guide",
+      "local_path": ".agents/reference/microsoft-style-guide-github.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:53:48Z"
+    },
+    {
+      "slug": "google-style-guides",
+      "title": "Google Style Guides",
+      "url": "https://google.github.io/styleguide/",
+      "local_path": ".agents/reference/google-style-guides.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:53:51Z"
+    },
+    {
+      "slug": "kong-apiglossary",
+      "title": "Kong/apiglossary",
+      "url": "https://github.com/Kong/apiglossary",
+      "local_path": ".agents/reference/kong-apiglossary.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:53:54Z"
+    },
+    {
+      "slug": "dwyl-technical-glossary",
+      "title": "dwyl/technical-glossary",
+      "url": "https://raw.githubusercontent.com/dwyl/technical-glossary/main/README.md",
+      "local_path": ".agents/reference/dwyl-technical-glossary.txt",
+      "kind": "raw",
+      "fetched_at": "2026-08-01T04:53:57Z"
+    },
+    {
+      "slug": "jvalentino-glossary",
+      "title": "jvalentino/glossary",
+      "url": "https://github.com/jvalentino/glossary",
+      "local_path": ".agents/reference/jvalentino-glossary.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:01Z"
+    },
+    {
+      "slug": "github-official-glossary",
+      "title": "GitHub Official Glossary",
+      "url": "https://docs.github.com/en/get-started/learning-about-github/github-glossary",
+      "local_path": ".agents/reference/github-official-glossary.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:05Z"
+    },
+    {
+      "slug": "devops-style-guide-glossary",
+      "title": "DevOps Style Guide Glossary",
+      "url": "https://tydukes.github.io/coding-style-guide/glossary/",
+      "local_path": ".agents/reference/devops-style-guide-glossary.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:08Z"
+    },
+    {
+      "slug": "ryanwi-software-terms",
+      "title": "ryanwi software-terms.dic",
+      "url": "https://gist.githubusercontent.com/ryanwi/6135845/raw/software-terms.dic",
+      "local_path": ".agents/reference/ryanwi-software-terms.txt",
+      "kind": "raw",
+      "fetched_at": "2026-08-01T04:54:11Z"
+    },
+    {
+      "slug": "openste",
+      "title": "OpenSTE.org",
+      "url": "https://openste.org/",
+      "local_path": null,
+      "kind": "pointer",
+      "fetched_at": "2026-08-01T04:54:32Z"
+    },
+    {
+      "slug": "en-wl-wordlist",
+      "title": "en-wl/wordlist (SCOWL)",
+      "url": "https://github.com/en-wl/wordlist",
+      "local_path": ".agents/reference/en-wl-wordlist.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:36Z"
+    },
+    {
+      "slug": "michaelwehar-5000-common",
+      "title": "MichaelWehar 5000-more-common",
+      "url": "https://raw.githubusercontent.com/MichaelWehar/Public-Domain-Word-Lists/master/5000-more-common.txt",
+      "local_path": ".agents/reference/michaelwehar-5000-common.txt",
+      "kind": "raw",
+      "fetched_at": "2026-08-01T04:54:38Z"
+    },
+    {
+      "slug": "dwyl-english-words",
+      "title": "dwyl/english-words (POINTER)",
+      "url": "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt",
+      "local_path": null,
+      "kind": "pointer",
+      "fetched_at": "2026-08-01T04:54:39Z"
+    },
+    {
+      "slug": "free-dictionary-api-wordlist",
+      "title": "freeDictionaryAPI english.txt (POINTER)",
+      "url": "https://raw.githubusercontent.com/meetDeveloper/freeDictionaryAPI/master/meta/wordList/english.txt",
+      "local_path": null,
+      "kind": "pointer",
+      "fetched_at": "2026-08-01T04:54:39Z"
+    },
+    {
+      "slug": "vale",
+      "title": "Vale linter",
+      "url": "https://github.com/errata-ai/vale",
+      "local_path": ".agents/reference/vale.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:42Z"
+    },
+    {
+      "slug": "vale-microsoft",
+      "title": "errata-ai/Microsoft",
+      "url": "https://github.com/errata-ai/Microsoft",
+      "local_path": ".agents/reference/vale-microsoft.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:45Z"
+    },
+    {
+      "slug": "vale-google",
+      "title": "errata-ai/Google",
+      "url": "https://github.com/errata-ai/Google",
+      "local_path": ".agents/reference/vale-google.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:49Z"
+    },
+    {
+      "slug": "vale-write-good",
+      "title": "errata-ai/write-good",
+      "url": "https://github.com/errata-ai/write-good",
+      "local_path": ".agents/reference/vale-write-good.md",
+      "kind": "page",
+      "fetched_at": "2026-08-01T04:54:53Z"
+    },
+    {
+      "slug": "topic-word-list",
+      "title": "GitHub topic: word-list",
+      "url": "https://github.com/topics/word-list",
+      "local_path": null,
+      "kind": "pointer",
+      "fetched_at": "2026-08-01T04:54:53Z"
+    },
+    {
+      "slug": "topic-glossary-terms",
+      "title": "GitHub topic: glossary-terms",
+      "url": "https://github.com/topics/glossary-terms",
+      "local_path": null,
+      "kind": "pointer",
+      "fetched_at": "2026-08-01T04:54:53Z"
+    },
+    {
+      "slug": "topic-technical-writing",
+      "title": "GitHub topic: technical-writing",
+      "url": "https://github.com/topics/technical-writing",
+      "local_path": null,
+      "kind": "pointer",
+      "fetched_at": "2026-08-01T04:54:53Z"
+    },
+    {
+      "slug": "topic-controlled-vocabulary",
+      "title": "GitHub topic: controlled-vocabulary",
+      "url": "https://github.com/topics/controlled-vocabulary",
+      "local_path": null,
+      "kind": "pointer",
+      "fetched_at": "2026-08-01T04:54:53Z"
+    }
+  ]
+}
