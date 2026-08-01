@@ -36,11 +36,11 @@
 | 2.2.1 | a-sec2-rule2.1.md | enriched | LLM final |
 | 2.2.2 | a-sec2-rule2.2.md | enriched | LLM final |
 | 2.2.3 | a-sec2-rule2.3.md | enriched | LLM final |
-| 3.3.1 | a-sec3-rule3.1.md | stale | copied; re-synthesize |
-| 3.3.2 | a-sec3-rule3.2.md | stale | copied; re-synthesize |
-| 3.3.3 | a-sec3-rule3.3.md | stale | copied; re-synthesize |
-| 3.3.4 | a-sec3-rule3.4.md | stale | copied; re-synthesize |
-| 3.3.5 | a-sec3-rule3.5.md | stale | copied; re-synthesize |
+| 3.3.1 | a-sec3-rule3.1.md | enriched | LLM final |
+| 3.3.2 | a-sec3-rule3.2.md | enriched | LLM final |
+| 3.3.3 | a-sec3-rule3.3.md | enriched | LLM final |
+| 3.3.4 | a-sec3-rule3.4.md | enriched | LLM final |
+| 3.3.5 | a-sec3-rule3.5.md | enriched | LLM final |
 | 3.3.6 | a-sec3-rule3.6.md | stale | copied; re-synthesize |
 | 3.3.7 | a-sec3-rule3.7.md | stale | copied; re-synthesize |
 | 4.4.1 | a-sec4-rule4.1.md | stale | copied; re-synthesize |
@@ -75,5 +75,5 @@
 | 9.9.4 | a-sec9-rule9.4.md | stale | copied; re-synthesize |
 
 ## Summary
-- enriched: 16 / 54
-- stale (must re-synthesize): 38 / 54
+- enriched: 21 / 54
+- stale (must re-synthesize): 33 / 54

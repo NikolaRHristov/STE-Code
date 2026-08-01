@@ -281,12 +281,22 @@ def synthesize_file(adapted_path: Path) -> bool:
     pf = tmp / f"finalize-{adapted_path.stem}.txt"
     pf.write_text(prompt)
 
-    env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "300", "STE_MODEL": MODEL}
+    env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "600", "STE_MODEL": MODEL}
     # The session (worker) READS the source and WRITES ste-code/final/rules/<name>
     # itself via its file tools — the orchestrator is NOT a dumb pipe that writes
     # r.stdout. We capture r.stdout only as trajectory/history to .agents/tmp/.
-    r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
-                       capture_output=True, text=True, timeout=300)
+    try:
+        r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
+                           capture_output=True, text=True, timeout=TIMEOUT_SECONDS)
+    except subprocess.TimeoutExpired:
+        # One slow session must NOT kill the whole batch. Fall back to a clean copy
+        # so final/rules/ stays complete; the stale flag (progress.md) will mark it
+        # for re-synthesis later.
+        _fallback_copy(adapted_path, out_path)
+        print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
+        _git_commit_locked([str(out_path.relative_to(PROJECT))],
+                           f"Phase G: synthesize {adapted_path.name} (LLM final)")
+        return True
     # Save the agent's stdout as trajectory/history (like refinement/extraction),
     # NOT as the output file.
     (tmp / f"finalize-traj-{adapted_path.stem}.txt").write_text(r.stdout, encoding="utf-8")
