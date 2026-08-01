@@ -153,13 +153,14 @@ def _assemble(dry_run: bool, version: str) -> tuple[bool, dict]:
                       "prompt_bytes": len(prompt), "version": version}
 
     ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
-    (ARTIFACTS_DIR / "ste-code-rules.md").write_text(full, encoding="utf-8")
-    (ARTIFACTS_DIR / "ste-code-system-prompt.md").write_text(prompt, encoding="utf-8")
+    # Consolidated full corpus is llms-full.txt (ste-code-rules.md /
+    # ste-code-system-prompt.md were retired; llms-full.txt is the single-file
+    # consolidated artifact).
+    (ARTIFACTS_DIR / "llms-full.txt").write_text(full, encoding="utf-8")
     VERSION_PATH.write_text(version + "\n", encoding="utf-8")
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     CHECKPOINT_PATH.write_text(json.dumps({"assembled": len(rule_files), "version": version}, indent=2))
-    print(f"Wrote ste-code-rules.md and ste-code-system-prompt.md "
-          f"({len(rule_files)} rules, version {version})")
+    print(f"Wrote llms-full.txt ({len(rule_files)} rules, version {version})")
     return True, {"rule_count": len(rule_files), "version": version}
 
 
