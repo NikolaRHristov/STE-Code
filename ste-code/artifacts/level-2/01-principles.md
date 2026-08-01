@@ -1,16 +1,75 @@
-## Core principles (14)
+# Level -2 — Core Principles
 
-- # Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
-- # Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
-- # Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
-- # Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
-- # Rule 1.13 — Do Not Use Technical Verbs as Nouns
-- # Rule 1.14 — Use American English Spelling Unless Other Official Directives Tell You Differently
-- # Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
-- # Rule 1.3 — Use Approved Words Only with Their Approved Meanings
-- # Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
-- # Rule 1.5 — You Can Use Words That You Can Include in a Code-Domain Technical Noun Category
-- # Rule 1.6 — Use a Word That Is Not Approved in the Dictionary, Only When It Is a Code-Domain Technical Noun or Part of a Code-Domain Technical Noun
-- # Rule 1.7 — Do Not Use Words That Are Technical Nouns as Verbs
-- # Rule 1.8 — Use Technical Nouns That Are Approved in Your Project, Company, Industry, or Subject Field
-- # Rule 1.9 — When You Must Select a Technical Noun, Use One Which Is Short and Easy to Understand
+Ultra-minimal STE-Code reference for LLMs that generate code documentation.
+Use this when you write README, API docs, docstrings, comments, commit messages, or error text.
+Every word must be either an approved word or a code-domain technical noun/verb (see the gate at the end).
+
+## Rule 1.1 — Use approved words, or code-domain technical nouns/verbs
+Every word must pass one gate: an approved word in the controlled terminology, a code-domain technical noun (e.g. `UserAuthenticator`), or a code-domain technical verb (e.g. `serialize`).
+- Non-STE: Execute the script to do the task.
+- STE: Run the script to do the task.
+
+## Rule 1.2 — Use approved words only as their approved part of speech
+A word approved as a noun is not a verb, and vice versa. Do not verb a noun.
+- Non-STE: Query the database for user records.
+- STE: Send a query to the database for user records.
+- Non-STE: Static the variable.
+- STE: Make the variable static.
+
+## Rule 1.3 — Use approved words only with their approved meaning
+An approved word keeps its controlled meaning. "run" = execute a program; "return" = send a value back from a function. Do not drift to general English.
+- Non-STE: The background worker runs every night. (meaning "operates")
+- STE: The background worker operates every night.
+
+## Rule 1.4 — Use only the approved forms of verbs and adjectives
+Use the verb and adjective forms listed in the controlled terminology (infinitive, -s, past, participle; base, comparative, superlative). Do not coin other forms.
+
+## Rule 1.5 — Code-domain technical nouns are allowed in 19 categories
+You may use a word not in the dictionary if it names a code concept in one of 19 categories (e.g. code components, data types, infrastructure, defects, network). Register it in the project glossary. Examples: `controller`, `array`, `Kubernetes`, `race condition`, `port 5432`.
+
+## Rule 1.6 — A non-approved word is allowed only as a technical noun
+A word not in the terminology fails unless it is (or is part of) a recognized code-domain technical noun.
+- Non-STE: The handler processes each event. ("handler" alone is not approved)
+- STE: The function processes each event.  — or — The event handler processes each event.
+
+## Rule 1.7 — Do not use technical nouns as verbs
+Keep technical nouns as nouns. Describe the action with an approved or technical verb.
+- Non-STE: Cache the API responses. / Docker the application.
+- STE: Store the API responses in the cache. / Containerize the application with Docker.
+
+## Rule 1.8 — Use technical nouns approved in your project/domain
+If your project, company, or domain already has an approved name for a component, use it. Do not invent a new name for something already named in the codebase.
+- STE: The dashboard uses the `UserTable` component and the `FilterPanel` component.
+
+## Rule 1.9 — When you pick a technical noun, keep it short
+No approved name exists? Pick a noun that is short (≤ 3 words) and easy to understand. Add at most one or two adjectives only if needed.
+
+## Rule 1.10 — No regional, slang, or jargon nouns
+Do not use slang or ecosystem-only jargon as technical nouns. A word one subculture finds clear can be opaque to everyone else.
+- Non-STE: Remove the cruft from the module.
+- STE: Remove the unnecessary code from the module.
+
+## Rule 1.11 — One technical noun per item, used consistently
+Do not rename the same thing across the document. Always use the same code-domain technical noun for the same item; the source code is the source of truth.
+- Non-STE: Start the session manager... call the AccountManager to verify a user.
+- STE: Start the UserService... call the UserService to verify a user.
+
+## Rule 1.12 — Code-domain technical verbs are allowed (categories)
+You may use a verb not in the dictionary if it fits a technical-verb category (e.g. build, deploy, test, lint, compile, debug, clone, parse). Prefer an approved verb when one fits exactly.
+- Non-STE: If you detect broken wires, repair them.
+- STE: If you find broken wires, repair them.  (or use the technical verb "detect" when it is the precise term)
+
+## Rule 1.13 — Do not use technical verbs as nouns
+Use technical verbs only as verbs. Need a noun? Use an approved noun or a code-domain technical noun.
+- STE: Enter your password.  (not "do the enter of your password")
+
+## Rule 1.14 — American English spelling by default
+Use American English spelling (color, fiber). Keep British spelling only inside quoted text (error messages, UI labels, code).
+
+## The gate (apply to every sentence)
+A word is allowed only if it is ONE of:
+1. An approved word, used as its approved part of speech and approved meaning (Rules 1.1, 1.2, 1.3, 1.4).
+2. A code-domain technical noun in one of 19 categories, kept as a noun and used consistently (Rules 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11).
+3. A code-domain technical verb in a technical-verb category (Rule 1.12, 1.13).
+4. Quoted text / a number used verbatim (Rule 1.14 exception).
+There is no fourth category. When unsure, pick the shortest approved verb.
