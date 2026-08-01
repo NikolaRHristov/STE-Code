@@ -1,0 +1,292 @@
+[
+  {
+    "title": "orchestrator",
+    "type": "domain",
+    "domain": "containerization",
+    "term": "orchestrator",
+    "definition": [
+      "A control plane component that schedules",
+      "deploys",
+      "and manages the lifecycle of containerized workloads across a cluster of machines."
+    ],
+    "replaces": [
+      "scheduler",
+      "cluster manager",
+      "container manager"
+    ],
+    "source": "generated-batch-001"
+  },
+  {
+    "title": "subnet",
+    "type": "domain",
+    "domain": "networking",
+    "term": "subnet",
+    "definition": [
+      "A logical partition of an IP network that groups addresses so routers can forward traffic between isolated",
+      "addressable segments."
+    ],
+    "replaces": [
+      "network slice",
+      "IP range",
+      "address block"
+    ],
+    "source": "generated-batch-001"
+  },
+  {
+    "title": "mock",
+    "type": "domain",
+    "domain": "testing",
+    "term": "mock",
+    "definition": "A test double that simulates the behavior of a dependency and verifies that the code under test calls it as expected.",
+    "replaces": [
+      "stub",
+      "fake",
+      "dummy object"
+    ],
+    "source": "generated-batch-001"
+  },
+  {
+    "title": "telemetry",
+    "type": "domain",
+    "domain": "observability",
+    "term": "telemetry",
+    "definition": [
+      "The automated collection and transmission of metrics",
+      "traces",
+      "and logs from a running system to a central analysis backend."
+    ],
+    "replaces": [
+      "instrumentation data",
+      "system signals",
+      "monitoring output"
+    ],
+    "source": "generated-batch-002"
+  },
+  {
+    "title": "pipeline",
+    "type": "domain",
+    "domain": "CI/CD",
+    "term": "pipeline",
+    "definition": [
+      "An automated sequence of build",
+      "test",
+      "and deployment stages that moves a code change from commit to production without manual intervention."
+    ],
+    "replaces": [
+      "build chain",
+      "workflow",
+      "job stream"
+    ],
+    "source": "generated-batch-002"
+  },
+  {
+    "title": "index",
+    "type": "domain",
+    "domain": "database",
+    "term": "index",
+    "definition": "A secondary data structure that maps column values to row locations so the database can satisfy queries without scanning every table row.",
+    "replaces": [
+      "lookup table",
+      "secondary structure",
+      "access path"
+    ],
+    "source": "generated-batch-002"
+  },
+  {
+    "title": "authentication",
+    "type": "domain",
+    "domain": "security",
+    "term": "authentication",
+    "definition": [
+      "The process of verifying the identity of a user",
+      "service",
+      "or device before the system grants access to protected resources."
+    ],
+    "replaces": [
+      "auth",
+      "login check",
+      "identity confirmation"
+    ],
+    "source": "generated-batch-003"
+  },
+  {
+    "title": "idempotency",
+    "type": "domain",
+    "domain": "distributed systems",
+    "term": "idempotency",
+    "definition": "A property of an operation that produces the same final result whether it runs once or multiple times with the same input.",
+    "replaces": [
+      "repeat safety",
+      "retry proof",
+      "safe re-execution"
+    ],
+    "source": "generated-batch-003"
+  },
+  {
+    "title": "autoscaling",
+    "type": "domain",
+    "domain": "cloud",
+    "term": "autoscaling",
+    "definition": "A mechanism that automatically increases or decreases the number of running instances in response to measured load or schedule.",
+    "replaces": [
+      "elastic resize",
+      "self-adjust",
+      "dynamic capacity"
+    ],
+    "source": "generated-batch-003"
+  },
+  {
+    "title": "hydration",
+    "type": "domain",
+    "domain": "frontend",
+    "term": "hydration",
+    "definition": "The process in which a client browser attaches event handlers and interactive state to server-rendered HTML so the page becomes fully interactive.",
+    "replaces": [
+      "client boot",
+      "attach behavior",
+      "re-render bind"
+    ],
+    "source": "generated-batch-004"
+  },
+  {
+    "title": "rebase",
+    "type": "domain",
+    "domain": "version control",
+    "term": "rebase",
+    "definition": "An operation that moves a branch's commits onto the tip of another branch so the project history stays linear and free of merge commits.",
+    "replaces": [
+      "transplant",
+      "replay commits",
+      "restack"
+    ],
+    "source": "generated-batch-004"
+  },
+  {
+    "title": "eviction",
+    "type": "domain",
+    "domain": "caching",
+    "term": "eviction",
+    "definition": "The policy by which a cache removes stored entries when it reaches its size limit or when entries exceed their configured time to live.",
+    "replaces": [
+      "purge rule",
+      "drop policy",
+      "clearance"
+    ],
+    "source": "generated-batch-004"
+  },
+  {
+    "title": "broker",
+    "type": "domain",
+    "domain": "message queue",
+    "term": "broker",
+    "definition": "A middleware server that receives messages from producers and routes them to the correct consumers while buffering them during outages.",
+    "replaces": [
+      "message hub",
+      "relay",
+      "dispatcher"
+    ],
+    "source": "generated-batch-005"
+  },
+  {
+    "title": "pagination",
+    "type": "domain",
+    "domain": "API design",
+    "term": "pagination",
+    "definition": [
+      "A response strategy that splits a large collection of records into numbered or cursor-based pages so clients fetch data in bounded",
+      "predictable chunks."
+    ],
+    "replaces": [
+      "paged results",
+      "chunking",
+      "windowing"
+    ],
+    "source": "generated-batch-005"
+  },
+  {
+    "title": "latency",
+    "type": "domain",
+    "domain": "performance",
+    "term": "latency",
+    "definition": "The elapsed time between a system receiving a request and returning the first or last byte of the corresponding response.",
+    "replaces": [
+      "response delay",
+      "wait time",
+      "lag"
+    ],
+    "source": "generated-batch-005"
+  },
+  {
+    "title": "rollout",
+    "type": "domain",
+    "domain": "deployment",
+    "term": "rollout",
+    "definition": [
+      "The controlled procedure that releases a new software version to production",
+      "often in stages",
+      "so failures affect only a limited portion of traffic."
+    ],
+    "replaces": [
+      "push",
+      "ship",
+      "go-live"
+    ],
+    "source": "generated-batch-006"
+  },
+  {
+    "title": "structured log",
+    "type": "domain",
+    "domain": "logging",
+    "term": "structured log",
+    "definition": [
+      "A log entry emitted as machine-readable key-value fields instead of free text so automated systems can parse",
+      "filter",
+      "and aggregate it reliably."
+    ],
+    "replaces": [
+      "plain log",
+      "text log",
+      "raw print"
+    ],
+    "source": "generated-batch-006"
+  },
+  {
+    "title": "race condition",
+    "type": "domain",
+    "domain": "concurrency",
+    "term": "race condition",
+    "definition": "A defect that occurs when two or more concurrent operations access shared state without synchronization and the result depends on their unpredictable execution order.",
+    "replaces": [
+      "timing bug",
+      "collision",
+      "concurrent fault"
+    ],
+    "source": "generated-batch-006"
+  },
+  {
+    "title": "cipher",
+    "type": "domain",
+    "domain": "encryption",
+    "term": "cipher",
+    "definition": "An algorithm that transforms plaintext into ciphertext and back using a key so that only parties with the key can read the protected data.",
+    "replaces": [
+      "crypto scheme",
+      "codec",
+      "scrambler"
+    ],
+    "source": "generated-batch-007"
+  },
+  {
+    "title": "alert",
+    "type": "domain",
+    "domain": "monitoring",
+    "term": "alert",
+    "definition": "A notification fired when a metric crosses a defined threshold so an operator can investigate or a runbook can trigger an automated remediation.",
+    "replaces": [
+      "warning",
+      "trigger",
+      "notification event"
+    ],
+    "source": "generated-batch-007"
+  }
+]
