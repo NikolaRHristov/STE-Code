@@ -397,6 +397,80 @@ def test_verification(cfg, base: Path) -> None:
           "large gap inflates regardless of tolerance setting")
 
 
+def test_red_blue(cfg, tmp: Path) -> None:
+    """RED generator + BLUE defender: placement/timing, handshake, offline run."""
+    try:
+        import red as R
+        import blue as B
+    except ImportError:
+        check(False, "red.py / blue.py importable")
+        return
+    check(True, "red.py / blue.py importable")
+
+    # RED: full placement x timing spread, schema-conformant.
+    cases = R.build_red_cases(0, 1, per_combo=1, seed=7)
+    check(len(cases) == 10 * 8 * 6,  # 10 techniques x 8 placements x 6 timings
+          "red case count = 480 (got {})".format(len(cases)))
+    placements = {c["placement"] for c in cases}
+    timings = {c["timing"] for c in cases}
+    check(placements == set(R.PLACE_OPTIONS),
+          "red all 8 placements present")
+    check(timings == set(R.TIMING_OPTIONS),
+          "red all 6 timings present")
+    bad, _ = R._schema_check(cases)
+    check(bad == 0, "red cases schema-valid ({} invalid)".format(bad))
+    # new techniques present
+    techs = {c["adversarial_technique"] for c in cases}
+    check({"instruction_override", "unit_smuggle", "spelling_drift"} <= techs,
+          "red new techniques present")
+
+    # RED emit: write handshakes to a temp base.
+    out = tmp / "redblue"
+    rc = subprocess.run(
+        [sys.executable, str(BENCH / "red.py"), "--emit-only",
+         "--tiers", "0", "--rounds", "1", "--out-dir", str(out),
+         "--per-combo", "1"], capture_output=True, text=True)
+    check(rc.returncode == 0, "red.py --emit-only runs")
+    check((out / "tier0" / "round1" / "purple.json").exists(),
+          "red writes purple.json handshake")
+    check((out / "tier0" / "round1" / "escapes.json").exists(),
+          "red writes escapes.json ledger")
+
+    # BLUE: build probes from a synthetic escape set.
+    esc = [{"tier": 0, "round": 1, "test_id": "red-x-000",
+            "technique": "forbidden_bait", "category": "api_doc",
+            "placement": "head", "timing": "immediate",
+            "missed_principles": ["P1"], "forbidden_found": ["bunch"],
+            "correctness_score": 0.2, "input": "Please bunch it.",
+            "violating_output": "Please bunch it."}]
+    probes = B.build_blue_probes(esc, probe_placements=B.PROBE_PLACEMENTS,
+                                 defense_timing="reactive", round_n=1)
+    check(len(probes) == len(B.PROBE_PLACEMENTS),
+          "blue builds one probe per placement")
+    check(all(p["probe_placement"] in B.PROBE_PLACEMENTS for p in probes),
+          "blue probes carry probe_placement")
+    table = B._offline_resistance(probes)
+    # verbatim should fail (residual), others pass
+    verbatim = [t for t in table if t["placement"] == "verbatim"][0]
+    check(verbatim["resistance_pct"] == 0.0, "blue verbatim residual = 0%")
+    nonverb = [t for t in table if t["placement"] != "verbatim"]
+    check(all(t["resistance_pct"] == 100.0 for t in nonverb),
+          "blue non-verbatim placements = 100% (offline)")
+
+    # BLUE await-timeout must be prompt, not hang.
+    empty = tmp / "blue-empty"
+    (empty / "tier0" / "round1").mkdir(parents=True)
+    t0 = __import__("time").time()
+    rc = subprocess.run(
+        [sys.executable, str(BENCH / "blue.py"), "--skip-live",
+         "--tiers", "0", "--rounds", "1", "--base", str(empty),
+         "--await-timeout", "2", "--poll-interval", "1"],
+        capture_output=True, text=True)
+    dt = __import__("time").time() - t0
+    check(rc.returncode == 0 and dt < 6.0,
+          "blue await-timeout prompt ({}s)".format(round(dt, 1)))
+
+
 def test_modules_compile() -> None:
     """Every module present must import under the interpreter that runs it."""
     for path in sorted(BENCH.glob("*.py")):
@@ -418,6 +492,7 @@ def main() -> int:
         test_notes(cfg, tmp)
         test_notes_concurrency(cfg, tmp)
         test_verification(cfg, tmp)
+        test_red_blue(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     test_modules_compile()
