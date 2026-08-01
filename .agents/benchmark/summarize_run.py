@@ -565,6 +565,183 @@ def integrity_checks(dossier: dict) -> list:
 
 # ------------------------------------------------------------------- assembly
 
+def compute_metrics(doc: dict) -> dict:
+    """Flatten the dossier into the scalar metrics GOALS.yaml can test.
+
+    Every metric here is derived from artifacts, never asserted. A metric that
+    cannot be computed is None, which grades as "unknown" rather than "failed".
+    """
+    pipe = doc.get("pipeline", {}) or {}
+    tiers = doc.get("tier_runs") or []
+    # The control suite is scaffolding, not a tier: it carries no tier number
+    # and runs against a mock model. Counting it as a measured result inflates
+    # the headline pass rate with 2/2 that no real model produced.
+    tiers = [t for t in tiers
+             if t.get("tier") is not None
+             and str(t.get("model") or "").lower() != "mock"]
+    done = [t for t in tiers if t.get("status") == "complete"]
+    rounds = pipe.get("rounds_detail") or []
+    cycles = pipe.get("cycles_report") or []
+    verd = pipe.get("verdicts", {}) or {}
+    notes = pipe.get("notes", {}) or {}
+    rem = pipe.get("remedies", {}) or {}
+    findings = doc.get("findings") or []
+
+    passed = sum(t.get("passed") or 0 for t in done)
+    total = sum(t.get("total_tests") or 0 for t in done)
+    rates = [t.get("pass_rate_pct") for t in done
+             if t.get("pass_rate_pct") is not None]
+
+    # Difficulty ordering: sort suites by tier, check pass rate never rises.
+    # `tier` arrives as a string ("-2", "-1", "0"), so it must be coerced to a
+    # number first -- sorting it lexicographically orders -1 before -2 and
+    # silently reports a monotonic ladder that is not monotonic.
+    monotonic = None
+    ranked = []
+    for t in done:
+        tier, rate = t.get("tier"), t.get("pass_rate_pct")
+        if tier is None or rate is None:
+            continue
+        try:
+            ranked.append((float(tier), rate))
+        except (TypeError, ValueError):
+            continue
+    ranked.sort(key=lambda x: x[0])
+    if len(ranked) >= 2:
+        monotonic = all(a[1] >= b[1] - 1e-9
+                        for a, b in zip(ranked, ranked[1:]))
+
+    lesson_counts = [(c.get("knowledge") or {}).get("lessons", 0)
+                     for c in cycles]
+    peak = max(lesson_counts) if lesson_counts else 0
+    final = lesson_counts[-1] if lesson_counts else None
+    converged = (bool(lesson_counts) and peak > 0 and final == 0) or None
+    if lesson_counts and not (peak > 0 and final == 0):
+        converged = False
+
+    total_v = verd.get("total") or 0
+    confirmed = (verd.get("by_verdict") or {}).get("confirmed", 0)
+    dissent = total_v - confirmed if total_v else 0
+
+    # A remedy counts as verified only with a per-case split-half outcome.
+    verified = 0
+    for r in (rem.get("adopted") or []):
+        prov = str(r.get("provenance") or "").lower()
+        if any(k in prov for k in ("split", "permutation", "bootstrap")):
+            verified += 1
+
+    return {
+        "suites_completed": len(done),
+        "suites_total": len(tiers),
+        "suites_completed_pct": (round(100.0 * len(done) / len(tiers), 1)
+                                 if tiers else None),
+        "measured_pass_rate_pct": (round(100.0 * passed / total, 1)
+                                   if total else None),
+        "worst_suite_pass_pct": min(rates) if rates else None,
+        "tier_monotonic": monotonic,
+        "pipeline_live": (not pipe.get("skip_live")) if pipe.get("exists") else None,
+        "escapes_observed": ((not any(r.get("escapes_simulated")
+                                      for r in rounds))
+                             if rounds else None),
+        "lessons_final": final,
+        "lessons_peak": peak if cycles else None,
+        "lessons_pruned": max((c.get("pruned_lessons", 0) for c in cycles),
+                              default=None) if cycles else None,
+        "pairs_excluded": max((c.get("excluded_pairs", 0) for c in cycles),
+                              default=None) if cycles else None,
+        "loop_converged": converged,
+        "black_verdicts": total_v or None,
+        "black_dissent": dissent if total_v else None,
+        "black_dissent_pct": (round(100.0 * dissent / total_v, 1)
+                              if total_v else None),
+        "remedies_adopted": rem.get("adopted_count"),
+        "remedies_verified": verified if rem.get("adopted_count") else None,
+        "notes_protocol": notes.get("protocol_notes"),
+        "control_cases": max((c.get("total_tests") or 0
+                              for c in (doc.get("control_runs") or [])),
+                             default=None),
+        "critical_findings": sum(1 for f in findings
+                                 if f.get("severity") in ("critical", "high")),
+    }
+
+
+_OPS = {
+    "gte": (lambda a, b: a >= b, ">="),
+    "gt": (lambda a, b: a > b, ">"),
+    "lte": (lambda a, b: a <= b, "<="),
+    "lt": (lambda a, b: a < b, "<"),
+    "eq": (lambda a, b: a == b, "=="),
+    "ne": (lambda a, b: a != b, "!="),
+    "is_true": (lambda a, b: a is True, "is true"),
+    "is_false": (lambda a, b: a is False, "is false"),
+}
+
+
+def load_goals(bench: Path) -> list:
+    """Read GOALS.yaml. Absent or unparseable means no grading, not a crash."""
+    path = bench / "GOALS.yaml"
+    if not path.exists():
+        return []
+    try:
+        import yaml
+    except ImportError:
+        return []
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return []
+    goals = data.get("goals") if isinstance(data, dict) else None
+    return goals if isinstance(goals, list) else []
+
+
+def grade_goals(goals: list, metrics: dict) -> list:
+    """Score each goal: met / not met / unknown / untestable.
+
+    `untestable` is deliberate and distinct from `not met`: if a goal's
+    prerequisite failed, we never got to measure it, and reporting that as a
+    failure would overstate what the run showed.
+    """
+    graded = []
+    by_id = {}
+    for g in goals:
+        check = g.get("check") or {}
+        metric = check.get("metric")
+        op_name = check.get("op", "is_true")
+        want = check.get("value")
+        got = metrics.get(metric)
+        fn, sym = _OPS.get(op_name, _OPS["is_true"])
+
+        if got is None:
+            status = "unknown"
+        else:
+            try:
+                status = "met" if fn(got, want) else "not met"
+            except TypeError:
+                status = "unknown"
+
+        expect = ("{} {}".format(sym, want) if op_name not in
+                  ("is_true", "is_false") else sym)
+        rec = {"id": g.get("id"), "statement": " ".join(
+                   str(g.get("statement", "")).split()),
+               "rationale": " ".join(str(g.get("rationale", "")).split()),
+               "weight": g.get("weight", "secondary"),
+               "metric": metric, "expected": expect, "observed": got,
+               "status": status, "blocked_by": g.get("blocked_by") or []}
+        graded.append(rec)
+        by_id[rec["id"]] = rec
+
+    # Second pass: demote failures whose prerequisites did not hold.
+    for rec in graded:
+        if rec["status"] in ("met", "unknown"):
+            continue
+        blockers = [b for b in rec["blocked_by"]
+                    if by_id.get(b, {}).get("status") not in ("met", None)]
+        if blockers:
+            rec["status"] = "untestable"
+            rec["blocked_reason"] = ", ".join(blockers)
+    return graded
+
+
 def build_dossier(bench: Path, base: Path) -> dict:
     doc = {
         "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -576,6 +753,8 @@ def build_dossier(bench: Path, base: Path) -> dict:
         "pipeline": collect_pipeline(base),
     }
     doc["findings"] = integrity_checks(doc)
+    doc["metrics"] = compute_metrics(doc)
+    doc["goals"] = grade_goals(load_goals(bench), doc["metrics"])
     return doc
 
 
@@ -590,6 +769,58 @@ def _table(headers, rows) -> list:
     out.extend(_row(r) for r in rows)
     return out
 
+
+_GOAL_ICON = {"met": "✅", "not met": "❌", "untestable": "🚧",
+              "unknown": "❔"}
+
+
+def _render_scorecard(doc: dict) -> list:
+    """Goals vs outcome — the first thing a reader should see."""
+    goals = doc.get("goals") or []
+    if not goals:
+        return []
+    out = ["", "## Scorecard — goals vs outcome", "",
+           "Declared in `.agents/benchmark/GOALS.yaml` before the run; graded "
+           "here from artifacts. 🚧 means a prerequisite goal failed, so this "
+           "one was never measurable — which is not the same as failing it.",
+           ""]
+    tally = Counter(g["status"] for g in goals)
+    prim = [g for g in goals if g["weight"] == "primary"]
+    prim_met = sum(1 for g in prim if g["status"] == "met")
+    out.append("**{}/{} primary goals met** · {} overall: {}".format(
+        prim_met, len(prim), len(goals),
+        " · ".join("{} {}".format(_GOAL_ICON.get(k, "•"), v)
+                   for k, v in sorted(tally.items()))))
+    out.append("")
+    for weight in ("primary", "secondary"):
+        sel = [g for g in goals if g["weight"] == weight]
+        if not sel:
+            continue
+        out.append("### {} goals".format(weight.capitalize()))
+        out.append("")
+        rows = []
+        for g in sel:
+            obs = g["observed"]
+            obs = "—" if obs is None else obs
+            note = ("blocked by {}".format(g["blocked_reason"])
+                    if g.get("blocked_reason") else g["statement"])
+            rows.append([_GOAL_ICON.get(g["status"], "•"), g["id"], note,
+                         "`{}`".format(g["metric"]), g["expected"], obs])
+        out.extend(_table(["", "id", "goal", "metric", "wanted", "observed"],
+                          rows))
+        out.append("")
+    missed = [g for g in goals
+              if g["status"] in ("not met", "untestable")
+              and g["weight"] == "primary"]
+    if missed:
+        out.append("### Why the primary goals were not established")
+        out.append("")
+        for g in missed:
+            out.append("- **{} {}** — {} _{}_".format(
+                _GOAL_ICON.get(g["status"]), g["id"], g["statement"],
+                g["rationale"]))
+        out.append("")
+    return out
 
 def render_markdown(doc: dict) -> str:
     out = []
@@ -621,6 +852,7 @@ def render_markdown(doc: dict) -> str:
         add("")
 
     add(_section_scope(doc))
+    out.extend(_render_scorecard(doc))
     add("")
     out.extend(_render_measured(doc))
     out.extend(_render_pipeline(doc))
@@ -1166,11 +1398,95 @@ Write a report for an engineer who did not run this. Requirements:
 5. Ground every claim in a number from the dossier. Do not invent figures.
 6. End with concrete next actions, ordered by what unblocks the most.
 
+> **Provenance is the first duty.** If the pipeline ran offline, say so before
+> any adversarial figure, and never present a simulated number as a measurement.
+
 Dossier follows.
 
 OUTPUT CONTRACT: reply with the report itself as markdown, and nothing else. Do \
 not create, write or modify any file. Do not run any command. Do not preface the \
 report with a summary of what you did. The report text IS the deliverable.
+"""
+
+
+# The staged agent process, mirroring the extraction -> refinement -> final
+# chain used elsewhere in .agents/. One call cannot both audit evidence and
+# write well: stage 1 establishes what the evidence supports, stage 2 grades
+# goals against those findings, stage 3 writes prose over a settled record.
+# Each stage sees the previous stage's output, never its reasoning.
+
+STAGE_EXTRACT = """\
+You are Stage 1 of 3 — EXTRACTION. Do not write a report.
+
+Read the dossier and extract the load-bearing facts. For every claim, record
+whether the evidence is MEASURED (a model produced it) or SIMULATED (a generator
+produced it offline). Discard anything not grounded in a figure.
+
+Output strict JSON, no prose, no code fence:
+
+{
+  "provenance": {"pipeline_offline": bool, "measured_sources": [str],
+                 "simulated_sources": [str]},
+  "established": [{"claim": str, "evidence": str, "provenance":
+                   "MEASURED"|"SIMULATED"}],
+  "not_established": [{"claim": str, "why": str}],
+  "anomalies": [{"observation": str, "figure": str}]
+}
+
+Rules: every "evidence" and "figure" must quote a number or key from the
+dossier. An anomaly is a number that contradicts another number, or one that is
+suspiciously constant. If a section is absent, say so in not_established rather
+than inventing it.
+"""
+
+STAGE_ASSESS = """\
+You are Stage 2 of 3 — ASSESSMENT. Do not write the final report.
+
+You receive the run's declared goals (with a deterministic grade already
+computed from artifacts) and Stage 1's extracted findings. Judge each goal
+against the findings and explain the grade in causal terms.
+
+Where the deterministic grade and the evidence disagree, say so plainly and
+prefer the evidence — the grader is mechanical and can be fooled by a key that
+looks right.
+
+Output strict JSON, no prose, no code fence:
+
+{
+  "goals": [{"id": str, "verdict": "met"|"not met"|"untestable"|"disputed",
+             "because": str, "consequence": str}],
+  "root_causes": [{"cause": str, "goals_blocked": [str], "fix": str}],
+  "confidence": {"level": "high"|"medium"|"low", "why": str}
+}
+
+"consequence" states what the reader cannot conclude because of this grade.
+"root_causes" must be ordered by how many goals each one unblocks.
+"""
+
+STAGE_FINAL = """\
+You are Stage 3 of 3 — FINAL REPORT. Write for an engineer who did not run this.
+
+You receive the goals, Stage 1's findings, and Stage 2's assessment. Those are
+settled: do not re-derive them and do not contradict them. Your job is prose and
+structure over an agreed record.
+
+Required shape:
+
+# Adversarial benchmark run — analysis
+## Verdict            one paragraph: goals met, and what the run does/does not show
+## Provenance         MEASURED vs SIMULATED, stated before any adversarial figure
+## Goals scorecard    markdown table: goal, wanted, observed, status, meaning
+## What was established
+## What was not established, and why
+## The five-colour loop   did BLACK genuinely challenge, or confirm by construction
+## Root causes        ordered by how many goals each unblocks
+## Next actions       numbered, each naming the goal it unblocks
+
+Rules: markdown tables for anything comparative. Ground every claim in a figure.
+Invent nothing. Never present a simulated number as a measurement.
+
+OUTPUT CONTRACT: reply with the report markdown and nothing else. Do not create,
+write or modify any file. Do not run any command. Do not describe what you did.
 """
 
 
@@ -1186,6 +1502,157 @@ def _strip_preamble(text: str) -> str:
         if line.lstrip().startswith("# "):
             return "\n".join(lines[i:]).strip()
     return text.strip()
+
+
+def _call_model(prompt: str, model: str, timeout: int) -> "str | None":
+    """One model call via the hermes CLI. Returns None on any failure.
+
+    The prompt goes on argv, not via ``@file``. A file reference is sometimes
+    treated as session orientation rather than the task itself, and the model
+    answers "there is no task here" -- which parses as a valid reply and
+    silently poisons the stage. Passing the text directly removes that failure
+    mode; the OS argv limit is ~1MB and these prompts are ~15KB.
+    """
+    import shutil
+    import subprocess
+
+    exe = shutil.which("hermes")
+    if not exe:
+        return None
+    try:
+        proc = subprocess.run([exe, "-z", prompt, "-m", model, "--yolo"],
+                              capture_output=True, text=True, timeout=timeout)
+        return (proc.stdout or "").strip() or None
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
+_NON_ANSWER = (
+    "no actual task", "there's no task", "there is no task",
+    "what would you like me to do", "let me know what you want",
+    "didn't come through", "did not come through",
+)
+
+
+def _looks_like_non_answer(text: str) -> bool:
+    """True if the model replied to the harness instead of doing the task.
+
+    A CLI reply such as "there's no actual task in your message yet" is
+    well-formed prose, so nothing downstream would reject it -- it would be
+    archived as the run's analysis. Catch it here and treat the stage as
+    failed.
+    """
+    if not text:
+        return True
+    head = text[:600].lower()
+    return any(p in head for p in _NON_ANSWER)
+
+
+def _parse_json_reply(text: str) -> "dict | None":
+    """Pull a JSON object out of a model reply that may be fenced or chatty."""
+    if not text:
+        return None
+    candidate = text.strip()
+    if "```" in candidate:
+        parts = candidate.split("```")
+        for part in parts:
+            part = part.lstrip()
+            if part.startswith("json"):
+                part = part[4:]
+            part = part.strip()
+            if part.startswith("{"):
+                candidate = part
+                break
+    start, end = candidate.find("{"), candidate.rfind("}")
+    if start == -1 or end <= start:
+        return None
+    try:
+        return json.loads(candidate[start:end + 1])
+    except json.JSONDecodeError:
+        return None
+
+
+def _call_stage(prompt: str, model: str, timeout: int,
+                attempts: int = 2) -> "str | None":
+    """Call the model, rejecting non-answers and retrying once.
+
+    The "no task here" reply is intermittent, so a single retry recovers most
+    occurrences without turning a broken model into an infinite loop.
+    """
+    for _ in range(max(1, attempts)):
+        text = _call_model(prompt, model, timeout)
+        if text and not _looks_like_non_answer(text):
+            return text
+    return None
+
+
+def analyse(doc: dict, model: str, timeout: int = 900,
+            on_stage=None) -> dict:
+    """Run the three-stage agent chain over the dossier.
+
+    Returns {"report": str|None, "stages": {...}}. Each stage degrades
+    independently: if extraction fails the chain still runs with the raw
+    dossier, and if the final stage fails the caller keeps the deterministic
+    report. A stage is never silently skipped -- its status is recorded.
+    """
+    stages = {}
+
+    def note(name, status, detail=""):
+        stages[name] = {"status": status, "detail": detail}
+        if on_stage:
+            on_stage(name, status, detail)
+
+    evidence = build_llm_brief(doc)
+    goals_json = json.dumps(doc.get("goals") or [], indent=1, default=str)
+
+    # Stage 1 -- extraction.
+    raw = _call_stage(
+        STAGE_EXTRACT + "\n```json\n" + evidence + "\n```\n", model, timeout)
+    findings = _parse_json_reply(raw or "")
+    if findings:
+        note("extract", "ok", "{} established, {} not".format(
+            len(findings.get("established") or []),
+            len(findings.get("not_established") or [])))
+    else:
+        note("extract", "skipped" if raw is None else "unparsed",
+             "falling back to the raw dossier")
+        findings = {"note": "extraction unavailable; raw dossier follows",
+                    "dossier": json.loads(evidence)}
+
+    findings_json = json.dumps(findings, indent=1, default=str)[:12000]
+
+    # Stage 2 -- assessment against declared goals.
+    raw = _call_stage(
+        STAGE_ASSESS + "\n## Declared goals (deterministic grade)\n```json\n"
+        + goals_json + "\n```\n\n## Stage 1 findings\n```json\n"
+        + findings_json + "\n```\n", model, timeout)
+    assessment = _parse_json_reply(raw or "")
+    if assessment:
+        note("assess", "ok", "{} goals judged, {} root causes".format(
+            len(assessment.get("goals") or []),
+            len(assessment.get("root_causes") or [])))
+    else:
+        note("assess", "skipped" if raw is None else "unparsed",
+             "final stage will grade from the deterministic scorecard")
+        assessment = {"note": "assessment unavailable; "
+                              "use the deterministic grades verbatim"}
+
+    # Stage 3 -- the report.
+    report = _call_stage(
+        STAGE_FINAL + "\n## Declared goals\n```json\n" + goals_json
+        + "\n```\n\n## Stage 1 findings\n```json\n" + findings_json
+        + "\n```\n\n## Stage 2 assessment\n```json\n"
+        + json.dumps(assessment, indent=1, default=str)[:12000]
+        + "\n```\n", model, timeout)
+    if report and not _looks_like_non_answer(report):
+        report = _strip_preamble(report)
+        note("final", "ok", "{} chars".format(len(report)))
+    else:
+        report = None
+        note("final", "skipped", "deterministic report stands")
+
+    return {"report": report, "stages": stages,
+            "findings": findings, "assessment": assessment}
 
 
 def synthesize(doc: dict, model: str, timeout: int = 900) -> "str | None":
@@ -1258,7 +1725,7 @@ def _run_fingerprint(doc: dict) -> str:
 
 
 def _archive(bench: Path, doc: dict, report: str,
-             narrative: "str | None") -> dict:
+             narrative: "str | None", analysis: "dict | None" = None) -> dict:
     """Write this run's artifacts into the dated report tree.
 
     Layout keeps one directory per calendar day and one file set per distinct
@@ -1286,6 +1753,11 @@ def _archive(bench: Path, doc: dict, report: str,
     if narrative:
         targets.append(("narrative", day_dir / "{}-narrative.md".format(fp),
                         narrative))
+    if analysis:
+        targets.append(("stages", day_dir / "{}-stages.json".format(fp),
+                        json.dumps({k: v for k, v in analysis.items()
+                                    if k != "report"},
+                                   indent=2, default=str)))
     for name, path, text in targets:
         existed = path.exists()
         path.write_text(text, encoding="utf-8")
@@ -1391,8 +1863,18 @@ def main() -> int:
 
     # LLM synthesis before archiving, so the narrative is archived with the run.
     narrative = None
+    analysis = None
     if args.llm:
-        narrative = synthesize(doc, args.model)
+        def _stage(name, status, detail):
+            if not args.quiet:
+                mark = {"ok": "✓", "skipped": "·", "unparsed": "!"}.get(
+                    status, "?")
+                print("  [{}] stage {:<8} {}".format(mark, name, detail))
+
+        if not args.quiet:
+            print("running 3-stage analysis (extract → assess → report)...")
+        analysis = analyse(doc, args.model, on_stage=_stage)
+        narrative = analysis.get("report")
         if narrative is None:
             print("[llm] synthesis unavailable (hermes CLI missing or call "
                   "failed); the deterministic report stands.")
@@ -1407,13 +1889,13 @@ def main() -> int:
             if narrative:
                 print("\n\n---\n\n# Model synthesis\n\n" + narrative)
     else:
-        written = _archive(bench, doc, report, narrative)
+        written = _archive(bench, doc, report, narrative, analysis)
         if args.stdout:
             print(report)
         if not args.quiet:
             print("archived run {} -> {}".format(
                 written["fingerprint"], _report_dir(bench)))
-            for key in ("report", "dossier", "narrative"):
+            for key in ("report", "dossier", "narrative", "stages"):
                 rec = written.get(key)
                 if isinstance(rec, dict):
                     print("  {:<9} {} {}".format(
