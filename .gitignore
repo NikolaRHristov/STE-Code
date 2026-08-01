@@ -60,3 +60,6 @@ ste-code/audit/
 SCE/
 
 trajectory_samples.jsonl
+
+# Benchmark run reports: regenerate with .agents/benchmark/summarize_run.py
+.agents/benchmark/report/

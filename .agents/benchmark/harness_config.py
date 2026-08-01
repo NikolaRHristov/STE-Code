@@ -478,6 +478,33 @@ def default_base(config: HarnessConfig) -> Path:
     return config.results_base / "redblue"
 
 
+def resolve_base(config: HarnessConfig, cli_value) -> Path:
+    """Resolve a --base/--results-dir override against the one output root.
+
+    Every benchmark run — tier, control, level sweep, five-colour pipe — writes
+    under ``results_base`` (.agents/benchmark/tests). Runners used to each own a
+    top-level directory, so .agents/benchmark/ grew a folder per run shape. A
+    CLI override that escapes the root would reintroduce exactly that, so it is
+    refused here instead of silently scattering artifacts.
+
+    Passing ``None`` returns ``default_base(config)``. Relative paths are taken
+    as relative to ``results_base``, so ``--base simple`` means
+    ``<results_base>/simple``.
+    """
+    if cli_value is None:
+        return default_base(config)
+    root = config.results_base.resolve()
+    candidate = Path(cli_value)
+    if not candidate.is_absolute():
+        candidate = root / candidate
+    resolved = candidate.resolve()
+    if resolved != root and root not in resolved.parents:
+        raise ConfigError(
+            "benchmark output must stay under {} (got {}); pass a path inside "
+            "it or a name relative to it".format(root, resolved))
+    return resolved
+
+
 if __name__ == "__main__":
     import sys
 

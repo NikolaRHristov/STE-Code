@@ -39,7 +39,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from harness_config import load_config, add_common_arguments, default_base  # noqa: E402
+from harness_config import (  # noqa: E402
+    load_config, add_common_arguments, default_base, resolve_base)
 import knowledge as K  # noqa: E402
 
 
@@ -370,7 +371,7 @@ def main() -> int:
     args = parser.parse_args()
 
     cfg = load_config(args.profile)
-    base = Path(args.base) if args.base else default_base(cfg)
+    base = resolve_base(cfg, args.base)
     base = base if isinstance(base, Path) else Path(str(base))
     base.mkdir(parents=True, exist_ok=True)
 

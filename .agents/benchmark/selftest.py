@@ -23,7 +23,7 @@ BENCH = Path(__file__).resolve().parent
 sys.path.insert(0, str(BENCH))
 
 import anonymize  # noqa: E402
-from harness_config import load_config  # noqa: E402
+from harness_config import default_base, load_config  # noqa: E402
 
 CHECKS: "list[tuple[bool, str]]" = []
 
@@ -60,6 +60,51 @@ def test_config(cfg) -> None:
           "black sentinel path")
     check(cfg.attack_brief_path(base).name == cfg.handshake.attack_brief, "attack brief path")
     check(cfg.verdicts_path(base).name == cfg.handshake.verdicts, "verdicts path")
+
+
+# ------------------------------------------------------------- output root
+
+def test_output_root(cfg) -> None:
+    """Every runner writes under one root; overrides may not escape it.
+
+    Runners used to each own a top-level directory (results/, results-control/,
+    results-levels/), so .agents/benchmark/ grew a folder per run shape. These
+    checks keep that collapsed.
+    """
+    from harness_config import ConfigError, resolve_base
+    root = cfg.results_base.resolve()
+
+    check(root.name == "tests" and root.parent.name == "benchmark",
+          "results_base is .agents/benchmark/tests")
+    check(resolve_base(cfg, None) == default_base(cfg),
+          "no override -> harness default_base")
+    check(resolve_base(cfg, "simple") == root / "simple",
+          "bare name resolves under the output root")
+    check(resolve_base(cfg, str(root / "a" / "b")) == root / "a" / "b",
+          "absolute path inside the root is accepted")
+
+    for escape in ("/tmp/nope", str(cfg.root / ".agents" / "tmp" / "pipe"),
+                   str(root.parent / "results-control")):
+        try:
+            resolve_base(cfg, escape)
+            ok = False
+        except ConfigError:
+            ok = True
+        check(ok, "override outside the root is refused ({})".format(escape))
+
+    # orchestrator.py keeps its own resolver (no harness_config import).
+    import importlib
+    orch = importlib.import_module("orchestrator")
+    check(Path(orch._resolve_results_dir(None)) == root,
+          "orchestrator default is the output root")
+    check(Path(orch._resolve_results_dir("tier0-static")) == root / "tier0-static",
+          "orchestrator bare name resolves under the output root")
+    try:
+        orch._resolve_results_dir("/tmp/nope")
+        ok = False
+    except SystemExit:
+        ok = True
+    check(ok, "orchestrator refuses an override outside the output root")
 
 
 # ---------------------------------------------------------------- anonymizer
@@ -590,6 +635,7 @@ def main() -> int:
     cfg = load_config(reload=True)
     root = cfg.root
     test_config(cfg)
+    test_output_root(cfg)
     test_anonymizer(cfg, root)
     tmp = Path(tempfile.mkdtemp(prefix="harness-selftest-"))
     try:

@@ -33,6 +33,8 @@ from datetime import datetime, timezone
 
 PROJECT = Path(__file__).resolve().parent.parent.parent
 BENCH = PROJECT / ".agents" / "benchmark"
+sys.path.insert(0, str(BENCH))
+from harness_config import load_config, resolve_base  # noqa: E402
 ORCH = BENCH / "orchestrator.py"
 CONTROL = BENCH / "orchestrator-control.py"
 GEN = BENCH / "generate_adhoc_tests.py"
@@ -79,15 +81,17 @@ def main() -> int:
     ap.add_argument("--max-workers", type=int, default=2,
                     help="per-orchestrator worker fan-out")
     ap.add_argument("--timeout", type=int, default=600)
-    ap.add_argument("--results-base",
-                    default=str(BENCH / "tests"),
-                    help="parent dir; each variation writes tests/<name>/")
+    ap.add_argument("--results-base", default=None,
+                    help="parent dir (default: <results_base>); each variation "
+                         "writes <base>/<name>/ and must stay under it")
     ap.add_argument("--skip-adhoc", action="store_true")
     ap.add_argument("--skip-control", action="store_true")
     ap.add_argument("--seed", type=int, default=7)
     args = ap.parse_args()
 
-    base = Path(args.results_base)
+    cfg = load_config()
+    base = cfg.results_base if args.results_base is None else resolve_base(
+        cfg, args.results_base)
     base.mkdir(parents=True, exist_ok=True)
 
     # Generate ad-hoc cases pre-run.

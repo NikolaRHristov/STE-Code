@@ -39,6 +39,8 @@ PROJECT = Path(__file__).resolve().parent.parent.parent
 BENCH = PROJECT / ".agents" / "benchmark"
 sys.path.insert(0, str(BENCH))
 
+from harness_config import load_config, resolve_base  # noqa: E402
+
 # The generator owns the base techniques; we import and extend it.
 import adversarial as _adv  # noqa: E402
 
@@ -387,7 +389,8 @@ def main() -> int:
                     help="csv subset of the 10 techniques")
     ap.add_argument("--per-combo", type=int, default=1,
                     help="cases per (technique,placement,timing) combo")
-    ap.add_argument("--out-dir", default=str(BENCH / "tests" / "redblue"))
+    ap.add_argument("--out-dir", default=None,
+                    help="output dir (default: <results_base>/redblue); must stay under it")
     ap.add_argument("--emit-only", action="store_true",
                     help="generate cases + handshakes without running a model")
     ap.add_argument("--model", default="tencent/hy3:free")
@@ -395,7 +398,7 @@ def main() -> int:
     ap.add_argument("--timeout", type=int, default=600)
     args = ap.parse_args()
 
-    out = Path(args.out_dir)
+    out = resolve_base(load_config(), args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
     tiers = [int(x) for x in args.tiers.split(",")]
 

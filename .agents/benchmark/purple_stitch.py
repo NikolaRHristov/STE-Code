@@ -34,6 +34,7 @@ from harness_config import (  # noqa: E402
     add_common_arguments,
     default_base,
     load_config,
+    resolve_base,
 )
 
 UNKNOWN = "unknown"
@@ -443,7 +444,7 @@ def main() -> int:
     args = parser.parse_args()
 
     cfg = load_config(args.profile)
-    base = Path(args.base) if args.base else default_base(cfg)
+    base = resolve_base(cfg, args.base)
     if not base.exists():
         print(f"stitch: base does not exist yet: {base}", file=sys.stderr)
         return 2

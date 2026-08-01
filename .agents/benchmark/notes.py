@@ -34,7 +34,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import anonymize as _anon  # noqa: E402
-from harness_config import add_common_arguments, default_base, load_config  # noqa: E402
+from harness_config import (  # noqa: E402
+    add_common_arguments, default_base, load_config, resolve_base)
 
 SCHEMA_VERSION = 1
 
@@ -540,7 +541,7 @@ def main() -> int:
     args = parser.parse_args()
 
     cfg = load_config(args.profile)
-    base = Path(args.base) if args.base else default_base(cfg)
+    base = resolve_base(cfg, args.base)
     bus = NoteBus(cfg, base)
     anon = _anon.from_args(args, root=cfg.root,
                            extra_terms=[cfg.profile_id, cfg.display_name])

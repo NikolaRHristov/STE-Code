@@ -43,6 +43,8 @@ BENCH = PROJECT / ".agents" / "benchmark"
 ORCH = BENCH / "orchestrator.py"
 sys.path.insert(0, str(BENCH))
 
+from harness_config import load_config, resolve_base  # noqa: E402
+
 # Tier system-prompt paths (mirror purple.py exactly).
 TIER_DIR = {t: (PROJECT / "ste-code" / "artifacts" / f"level{t}" / "system-prompt.txt")
             for t in (-2, -1, 0, 1, 2, 3, 4, 5)}
@@ -341,7 +343,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="BLUE defender / hardening driver.")
     ap.add_argument("--tiers", default="-2,-1,0,1,2,3,4,5")
     ap.add_argument("--rounds", type=int, default=3)
-    ap.add_argument("--base", default=str(BENCH / "tests" / "redblue"))
+    ap.add_argument("--base", default=None,
+                    help="output dir (default: <results_base>/redblue); must stay under it")
     ap.add_argument("--await-timeout", type=float, default=3600.0)
     ap.add_argument("--poll-interval", type=float, default=1.0)
     ap.add_argument("--probe-placements", default=None,
@@ -360,7 +363,7 @@ def main() -> int:
                     help="generate probes + offline resistance without a model")
     args = ap.parse_args()
 
-    base = Path(args.base)
+    base = resolve_base(load_config(), args.base)
     base.mkdir(parents=True, exist_ok=True)
     tiers = [int(x) for x in args.tiers.split(",")]
     # defense-timings kept singular per run for clean independence; accept csv

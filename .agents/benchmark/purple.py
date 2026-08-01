@@ -42,6 +42,7 @@ TIER_DIR = {t: (PROJECT / "ste-code" / "artifacts" / f"level{t}" / "system-promp
 
 sys.path.insert(0, str(BENCH))
 import adversarial as _adv  # noqa: E402
+from harness_config import load_config, resolve_base  # noqa: E402
 
 
 def _run_orchestrator(test_dir: Path, sp: Path, results_dir: Path,
@@ -252,11 +253,12 @@ def main() -> int:
     ap.add_argument("--max-workers", type=int, default=2)
     ap.add_argument("--timeout", type=int, default=600)
     ap.add_argument("--seed", type=int, default=7)
-    ap.add_argument("--results-base", default=str(BENCH / "tests" / "redblue"))
+    ap.add_argument("--results-base", default=None,
+                    help="output dir (default: <results_base>/redblue); must stay under it")
     ap.add_argument("--skip-live", action="store_true")
     args = ap.parse_args()
 
-    base = Path(args.results_base)
+    base = resolve_base(load_config(), args.results_base)
     base.mkdir(parents=True, exist_ok=True)
     tiers = [int(x) for x in args.tiers.split(",")]
     report = {"timestamp": datetime.now(timezone.utc).isoformat(),

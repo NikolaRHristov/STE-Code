@@ -1324,15 +1324,23 @@ def _archive(bench: Path, doc: dict, report: str,
 
 
 def _discover_base(bench: Path) -> Path:
-    """Newest pipeline base: one holding a pipeline-report.json."""
+    """Newest pipeline base: a directory holding a ``pipeline-report.json``.
+
+    Searched in the scratch tree first, then the archived report tree, then the
+    results base. Pipeline bases are frequently transient -- ``selftest.py``
+    removes its scratch fixtures on the way out -- so finding nothing is normal
+    and the caller renders a report without a pipeline section.
+    """
     candidates = []
-    scratch = bench.parent / "tmp"
-    if scratch.exists():
-        for d in scratch.iterdir():
-            if d.is_dir() and (d / "pipeline-report.json").exists():
-                candidates.append(d)
+    for root in (bench.parent / "tmp", bench / "tests", bench / "report"):
+        if not root.exists():
+            continue
+        for path in root.glob("*/pipeline-report.json"):
+            candidates.append(path.parent)
+        for path in root.glob("*/*/pipeline-report.json"):
+            candidates.append(path.parent)
     if not candidates:
-        return scratch / "pipe"
+        return bench.parent / "tmp" / "pipe"
     return max(candidates, key=lambda d: _mtime(d / "pipeline-report.json"))
 
 
@@ -1380,26 +1388,39 @@ def main() -> int:
         Path(args.out).write_text(report, encoding="utf-8")
         if not args.quiet:
             print("wrote {}".format(args.out))
-    else:
-        print(report)
 
+    # LLM synthesis before archiving, so the narrative is archived with the run.
+    narrative = None
     if args.llm:
         narrative = synthesize(doc, args.model)
         if narrative is None:
-            print("\n[llm] synthesis unavailable (hermes CLI missing or call "
-                  "failed); the deterministic report above stands.")
-        else:
-            dest = args.llm_out or (
-                str(Path(args.out).with_suffix(".narrative.md"))
-                if args.out else None)
-            if dest:
-                Path(dest).write_text(narrative, encoding="utf-8")
-                if not args.quiet:
-                    print("wrote {}".format(dest))
-            else:
-                print("\n\n---\n\n# Model synthesis\n\n" + narrative)
+            print("[llm] synthesis unavailable (hermes CLI missing or call "
+                  "failed); the deterministic report stands.")
+        elif args.llm_out:
+            Path(args.llm_out).write_text(narrative, encoding="utf-8")
+            if not args.quiet:
+                print("wrote {}".format(args.llm_out))
 
-    if not args.quiet and args.out:
+    if args.no_archive:
+        if not args.out or args.stdout:
+            print(report)
+            if narrative:
+                print("\n\n---\n\n# Model synthesis\n\n" + narrative)
+    else:
+        written = _archive(bench, doc, report, narrative)
+        if args.stdout:
+            print(report)
+        if not args.quiet:
+            print("archived run {} -> {}".format(
+                written["fingerprint"], _report_dir(bench)))
+            for key in ("report", "dossier", "narrative"):
+                rec = written.get(key)
+                if isinstance(rec, dict):
+                    print("  {:<9} {} {}".format(
+                        key, Path(rec["path"]).name,
+                        "(replaced)" if rec["replaced"] else ""))
+
+    if not args.quiet:
         crit = [f for f in doc.get("findings", [])
                 if f["severity"] in ("critical", "high")]
         print("  {} findings ({} critical/high)".format(

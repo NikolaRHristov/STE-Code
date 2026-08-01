@@ -210,6 +210,28 @@ def _resolve_path(cli_val: Optional[str], default_rel: str) -> str:
     return os.path.join(project_root, default_rel)
 
 
+def _resolve_results_dir(cli_val: Optional[str]) -> str:
+    """Resolve --results-dir, keeping every run under the one output root.
+
+    All benchmark output lives in .agents/benchmark/tests. A bare name is taken
+    as a subdirectory of it (``--results-dir tier0-static``); an override that
+    escapes the root is refused, because a directory per run shape is exactly
+    the scatter this root exists to prevent.
+    """
+    root = os.path.join(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")),
+        ".agents", "benchmark", "tests")
+    if cli_val is None:
+        return root
+    candidate = cli_val if os.path.isabs(cli_val) else os.path.join(root, cli_val)
+    resolved = os.path.abspath(candidate)
+    if resolved != root and not resolved.startswith(root + os.sep):
+        raise SystemExit(
+            "benchmark output must stay under {} (got {}); pass a path inside "
+            "it or a name relative to it".format(root, resolved))
+    return resolved
+
+
 # ---------------------------------------------------------------------------
 # Scoring engine (extracted so it can be re-used by rescore.py)
 # ---------------------------------------------------------------------------
@@ -397,7 +419,7 @@ def main():
 
     # Resolve paths.
     test_dir = _resolve_path(args.test_dir, ".agents/benchmark/test-cases")
-    results_dir = _resolve_path(args.results_dir, ".agents/benchmark/tests")
+    results_dir = _resolve_results_dir(args.results_dir)
     sys_prompt_file = _resolve_path(
         args.system_prompt_file,
         "ste-code/artifacts/llms-full.txt",
