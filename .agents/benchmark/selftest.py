@@ -397,6 +397,45 @@ def test_verification(cfg, base: Path) -> None:
           "large gap inflates regardless of tolerance setting")
 
 
+def test_scheduler(cfg, tmp: Path) -> None:
+    """Scheduler: AIMD window, retry/breaker, checkpoint/resume (sim self-test)."""
+    try:
+        import scheduler as S
+    except ImportError:
+        check(False, "scheduler.py importable")
+        return
+    check(True, "scheduler.py importable")
+    # AdaptiveWindow AIMD invariants
+    w = S.AdaptiveWindow(floor=1, ceiling=8, backoff_factor=0.5, now=(lambda: 0.0))
+    for _ in range(7):
+        w.on_success()
+    check(w.window == 8, "window reaches ceiling on success")
+    for _ in range(3):
+        w.on_rate_limited()
+    check(w.window == 1, "window floors on rate-limit")
+    # classify_failure table
+    check(S.classify_failure("HTTP 429") == "retryable", "429 retryable")
+    check(S.classify_failure("empty output") == "retryable", "empty output retryable")
+    check(S.classify_failure("HTTP 400 bad request") == "terminal", "400 terminal")
+    # CircuitBreaker opens under sustained failure
+    cb = S.CircuitBreaker(failure_rate=0.5, min_sample=10, cooldown=0.0, now=(lambda: 0.0))
+    for _ in range(12):
+        cb.record(False)
+    check(cb.state == S.CircuitBreaker.OPEN, "breaker opens under failure rate")
+    # Checkpoint fsync durability + resume skip
+    ck = S.Checkpoint(tmp / "ckpt.jsonl")
+    ck.record_done("a", "ok", 1.0, 1)
+    ck.record_done("b", "failed", 2.0, 2)
+    check(ck.completed() == {"a"}, "checkpoint records only ok outcomes")
+    check(ck.remaining(["a", "b", "c"]) == ["b", "c"], "remaining excludes completed")
+    # Full simulation self-test must exit 0
+    proc = subprocess.run([sys.executable, str(BENCH / "scheduler.py"), "--self-test"],
+                          capture_output=True, text=True, timeout=120)
+    check(proc.returncode == 0,
+          "scheduler.py --self-test exits 0 ({} lines)".format(
+              len(proc.stdout.splitlines())))
+
+
 def test_red_blue(cfg, tmp: Path) -> None:
     """RED generator + BLUE defender: placement/timing, handshake, offline run."""
     try:
@@ -493,6 +532,7 @@ def main() -> int:
         test_notes_concurrency(cfg, tmp)
         test_verification(cfg, tmp)
         test_red_blue(cfg, tmp)
+        test_scheduler(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     test_modules_compile()
