@@ -190,8 +190,8 @@ python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pai
 | Level Worker | `skills/level-worker/SKILL.md` | 4 parallel workers at levels 1-4 using agent runner |
 | Extension Worker | `skills/extension-worker/SKILL.md` | Markdown-first gap-fill generation (orchestrated via `phase-e-run.py`); JSON derived |
 | Translations | `skills/translations/SKILL.md` | Multi-locale placeholder pipeline, 9 locales, ~540 files, batch-of-3 workers |
-||| State Report | `skills/state-report/SKILL.md` | Standardized pipeline state format |
-||| Execution Auditor | `skills/execution-auditor/SKILL.md` | Hidden agent for forensic disk verification |
+| State Report | `skills/state-report/SKILL.md` | Standardized pipeline state format |
+| Execution Auditor | `skills/execution-auditor/SKILL.md` | Hidden agent for forensic disk verification |
 
 ---
 ## Feedback & Lessons Learned
