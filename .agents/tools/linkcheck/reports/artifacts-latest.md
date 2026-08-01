@@ -4,10 +4,10 @@
 |----------------|-------|
 | 🔍 Total       | 302   |
 | 🔗 Unique      | 56    |
-| ✅ Successful  | 6     |
-| ⏳ Timeouts    | 3     |
+| ✅ Successful  | 0     |
+| ⏳ Timeouts    | 0     |
 | 🔀 Redirected  | 0     |
-| 👻 Excluded    | 251   |
+| 👻 Excluded    | 260   |
 | ❓ Unknown     | 0     |
 | 🚫 Errors      | 42    |
 | ⛔ Unsupported | 0     |
@@ -67,18 +67,4 @@
 * [ERROR] <file:///Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code/artifacts/.agents/reference/vale-microsoft.md> (at 40320:32) | File not found. Check if file exists and path is correct
 * [ERROR] <file:///Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code/artifacts/.agents/reference/vale-write-good.md> (at 40322:33) | File not found. Check if file exists and path is correct
 * [ERROR] <file:///Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/ste-code/artifacts/.agents/reference/vale.md> (at 40319:24) | File not found. Check if file exists and path is correct
-
-## Timeouts per input
-
-### Timeouts in ste-code/artifacts/_base/level4/07-catalogue.md
-
-* [TIMEOUT] <https://openste.org/> (at 19:27) | Request timed out
-
-### Timeouts in ste-code/artifacts/_base/level5/07-catalogue.md
-
-* [TIMEOUT] <https://openste.org/> (at 19:27) | Request timed out
-
-### Timeouts in ste-code/artifacts/ste-code-rules.md
-
-* [TIMEOUT] <https://openste.org/> (at 40314:27) | Request timed out
 

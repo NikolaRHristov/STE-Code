@@ -1,0 +1,3 @@
+# Generated link-check reports and lychee cache — not source.
+reports/
+.lycheecache
