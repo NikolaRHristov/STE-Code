@@ -129,7 +129,7 @@ Example — conventional commit:
 
 Error messages are read by end users and developers. They must use approved words to be clear to non-native English speakers. Do not use jargon, slang, or domain-specific abbreviations unless they are code-domain technical nouns.
 
-Use "cannot" (approved) instead of "unable to" (not approved). Use "incorrect" (approved adjective) instead of "invalid" or "malformed." Use "N/A" or "N/A" only when it is a code-domain technical noun for a missing value.
+Use "cannot" (approved) instead of "unable to" (not approved). Use "incorrect" (approved adjective) instead of "invalid" or "malformed." Use "N/A" only when it is a code-domain technical noun for a missing value.
 
 Example — CLI error message:
 
@@ -246,23 +246,52 @@ Example — Rust documentation:
 
 Each example pair below shows a real code documentation scenario, the STE-Code compliant rewrite, which principle was applied, and an explanation of the fix.
 
+> *Adapted from spec pair:* Non-STE: “The word ‘use’ is an approved verb in the dictionary. The word ‘engine’ is a technical noun. The word ‘ream’ is a technical verb.”  |  STE: “The word ‘run’ is an approved verb in the controlled terminology. The word ‘UserAuthenticator’ is a code-domain technical noun. The word ‘serialize’ is a code-domain technical verb.”
+
 ### Example 1 — API Reference: Return Value Description
 
-> **Non-STE:** Returns a promise that resolves to an array of User objects, or rejects with an ApiError if the request fails.
+> **Non-STE:** /**
+>  * Fetches the current user profile from the identity service.
+>  *
+>  * @returns {Promise<UserProfile>}
+>  *   A promise that resolves to the user profile object, or rejects
+>  *   with a NetworkError if the request cannot be completed.
+>  */
+> async function getCurrentUser() {
+>   return fetch('/api/me').then(res => res.json());
+> }
 >
-> **STE:** Gives a `Promise` that completes with a list of `User` objects. If the request does not complete, the `Promise` gives an `ApiError`.
+> **STE:** /**
+>  * Gets the current user profile from the identity service.
+>  *
+>  * @returns {Promise<UserProfile>}
+>  *   A promise that completes with the user profile object. If the
+>  *   request does not complete, the promise gives a NetworkError.
+>  */
+> async function getCurrentUser() {
+>   return fetch('/api/me').then(res => res.json());
+> }
 >
-> **Principle applied:** P1 (use approved words: "resolve" → "complete," "reject" → "gives an error")
-> **Explanation:** "Resolve" and "reject" are Promise-specific technical verbs. In prose, they are replaced with the approved verb "complete" and the approved construction "gives an error." The technical nouns `Promise`, `User`, and `ApiError` are code-domain technical nouns and remain unchanged. The structure is split into two sentences to keep each sentence under 25 words (descriptive limit).
+> **Principle applied:** P1 (use approved words: "fetch" → "get," "resolves" → "completes," "rejects" → "gives an error")
+> **Explanation:** "Fetch" is not an approved verb; "get" is the approved alternative with the same meaning. "Resolve" and "reject" are Promise-specific technical verbs. In prose, they are replaced with the approved verb "complete" and the approved construction "gives an error." The technical nouns `Promise`, `UserProfile`, and `NetworkError` are code-domain technical nouns and remain unchanged. The structure is split into two sentences to keep each sentence under 25 words (descriptive limit).
 
 ### Example 2 — README: Feature Description
 
-> **Non-STE:** The application leverages machine learning algorithms to analyze user behavior patterns and generate personalized recommendations in real time.
+> **Non-STE:** # OrderService
 >
-> **STE:** The application uses machine learning to examine user behavior and make personal recommendations immediately.
+> The OrderService application leverages machine learning algorithms to
+> analyze user behavior patterns and generate personalized recommendations in
+> real time. It utilizes a distributed cache to expedite response times under
+> substantial load.
 >
-> **Principle applied:** P1 (use approved words: "leverage" → "use," "analyze" → "examine," "generate" → "make," "personalized" → "personal"); P9 (prefer short technical nouns: "algorithms" removed as redundant next to "machine learning"); P8 (use standard technical nouns: "real time" → "immediately")
-> **Explanation:** "Leverage" is a banned word under P1. "Analyze" is not in the approved verb list; "examine" is approved and has the same meaning in this context. "Patterns" and "algorithms" add no information that "machine learning" does not already carry. "Real time" is replaced with "immediately," an approved adverb. The sentence structure is simplified to one clause.
+> **STE:** # OrderService
+>
+> The OrderService application uses machine learning to examine user behavior
+> and make personal recommendations immediately. It uses a distributed cache
+> to make responses fast under large load.
+>
+> **Principle applied:** P1 (use approved words: "leverage" → "use," "analyze" → "examine," "generate" → "make," "personalized" → "personal," "utilizes" → "uses," "expedite" → "make fast," "substantial" → "large"); P9 (prefer short technical nouns: "algorithms" removed as redundant next to "machine learning," "patterns" removed as redundant); P8 (use standard technical nouns: "real time" → "immediately")
+> **Explanation:** "Leverage" and "utilizes" are banned words under P1; both are replaced with "use." "Analyze" is not in the approved verb list; "examine" is approved and has the same meaning in this context. "Patterns" and "algorithms" add no information that "machine learning" does not already carry. "Expedite" is not approved; "make fast" is the approved verb phrase. "Substantial" is not an approved adjective; "large" is approved. "Real time" is replaced with "immediately," an approved adverb.
 
 ### Example 3 — Docstring: Function Purpose
 
@@ -274,6 +303,11 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 >  * @returns {Object} The validated and populated configuration.
 >  * @throws {ValidationError} If the configuration is invalid.
 >  */
+> function applyDefaults(config) {
+>   const schema = loadSchema();
+>   return merge(config, schema.defaults);
+> }
+>
 > **STE:** /**
 >  * Checks the given configuration object against the schema
 >  * and adds default values for all missing fields.
@@ -282,18 +316,28 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 >  * @returns {Object} The checked configuration with defaults.
 >  * @throws {ValidationError} If the configuration is not correct.
 >  */
+> function applyDefaults(config) {
+>   const schema = loadSchema();
+>   return merge(config, schema.defaults);
+> }
 >
 > **Principle applied:** P1 (use approved words: "validate" → "check," "provided" → "given," "populate" → "add," "any" → "all," "invalid" → "not correct"); P6 (non-approved word used as technical noun: "ValidationError" is a code-domain technical noun)
 > **Explanation:** "Validate" is not an approved verb; "check" is the approved alternative with the same meaning. "Populate" is replaced with "add," which is simpler and approved. "Invalid" is not an approved adjective; "not correct" uses the approved adjective "correct" with the approved negation "not." The technical noun `ValidationError` is a code-domain technical noun and remains unchanged.
 
 ### Example 4 — Error Message: User-Facing
 
-> **Non-STE:** Unable to process your request at this time. Please verify your input and try again. If the problem persists, contact support.
+> **Non-STE:** HTTP 500 response body:
+> {
+>   "error": "Unable to process your request at this time. Please verify your input and try again. If the problem persists, contact support."
+> }
 >
-> **STE:** Cannot process your request now. Check your input and try again. If the problem continues, speak to support.
+> **STE:** HTTP 500 response body:
+> {
+>   "error": "Cannot process your request now. Check your input and try again. If the problem continues, speak to support."
+> }
 >
 > **Principle applied:** P1 (use approved words: "unable to" → "cannot," "at this time" → "now," "verify" → "check," "persists" → "continues," "contact" → "speak to")
-> **Explanation:** "Unable to" is not approved; "cannot" is the approved modal verb. "Verify" is not an approved verb in this context; "check" is approved. "Persist" is not approved; "continue" is approved. "Contact" as a verb is not approved; "speak to" uses the approved verb "speak."
+> **Explanation:** "Unable to" is not approved; "cannot" is the approved modal verb. "Verify" is not an approved verb in this context; "check" is approved. "Persist" is not approved; "continue" is approved. "Contact" as a verb is not approved; "speak to" uses the approved verb "speak." The JSON structure and the `"error"` key are code-domain technical nouns and remain unchanged.
 
 ### Example 5 — Commit Message: Bug Fix
 
@@ -306,14 +350,82 @@ Each example pair below shows a real code documentation scenario, the STE-Code c
 
 ### Example 6 — Configuration File Comment
 
-> **Non-STE:** # This parameter dictates the maximum quantity of concurrent connections
+> **Non-STE:** # config.yaml
+> # This parameter dictates the maximum quantity of concurrent connections
 > # the server shall entertain before commencing to reject additional requests.
-> **STE:** # This parameter sets the largest number of connections that the server
+> server:
+>   max_connections: 100
+>
+> **STE:** # config.yaml
+> # This parameter sets the largest number of connections that the server
 > # accepts at the same time. When the server has this many connections,
 > # it refuses new requests.
+> server:
+>   max_connections: 100
 >
 > **Principle applied:** P1 (use approved words: "dictates" → "sets," "quantity" → "number," "concurrent" → "at the same time," "shall entertain" → "accepts," "commencing" → removed, "reject" → "refuses," "additional" → "new"); P9 (prefer short terms); anti-pattern: no semicolons, no "-ing" as main verb in procedure
-> **Explanation:** This example shows many violations at once. "Dictate" is replaced with "set." "Shall entertain" is a double violation — "shall" is not approved in descriptive writing and "entertain" is not the approved meaning. The entire sentence is restructured into two shorter sentences that use approved verbs ("sets," "accepts," "refuses") and approved constructions.
+> **Explanation:** This example shows many violations at once. "Dictate" is replaced with "set." "Shall entertain" is a double violation — "shall" is not approved in descriptive writing and "entertain" is not the approved meaning. The entire sentence is restructured into two shorter sentences that use approved verbs ("sets," "accepts," "refuses") and approved constructions. The YAML keys `server` and `max_connections` are code-domain technical nouns and remain unchanged.
+
+### Example 7 — Test Suite: Describe Block
+
+> **Non-STE:** describe('PaymentProcessor', () => {
+>   it('should successfully process a valid transaction and persist the record', () => {
+>     // ...
+>   });
+> });
+>
+> **STE:** describe('PaymentProcessor', () => {
+>   it('processes a correct transaction and keeps the record', () => {
+>     // ...
+>   });
+> });
+>
+> **Principle applied:** P1 (use approved words: "should successfully process" → "processes," "valid" → "correct," "persist" → "keeps")
+> **Explanation:** Test descriptions are code documentation and must follow Rule 1.1. "Valid" is not an approved adjective in this sense; "correct" is approved. "Persist" is not an approved verb; "keep" is the approved alternative. "PaymentProcessor" is a code-domain technical noun (a class name) and remains unchanged. "Should" is removed because STE-Code test descriptions use the present tense directly rather than the modal "should."
+
+### Example 8 — Inline Code Comment
+
+> **Non-STE:** // FIXME: we need to ascertain why the cache fails to invalidate
+> // when the upstream token expires, then remediate the stale entries
+>
+> **STE:** // FIXME: find why the cache does not clear when the upstream token
+> // stops. Then remove the stale entries.
+>
+> **Principle applied:** P1 (use approved words: "ascertain" → "find," "fails to invalidate" → "does not clear," "expires" → "stops," "remediate" → "remove")
+> **Explanation:** "Ascertain" is not an approved verb; "find" is. "Invalidate" as a verb is not approved; "clear" is the approved alternative for removing cached state. "Expire" is not approved in this sense; "stop" is. "Remediate" is not approved; "remove" is. "FIXME" is a code-domain technical noun for known issues and is permitted.
+
+### Example 9 — SQL Migration Comment
+
+> **Non-STE:** -- This migration procedurally consolidates the legacy
+> -- `user_prefs` table into `user_settings` and eliminates the
+> -- deprecated `theme` column.
+>
+> **STE:** -- This migration joins the legacy `user_prefs` table into
+> -- `user_settings` and removes the deprecated `theme` column.
+>
+> **Principle applied:** P1 (use approved words: "procedurally consolidates" → "joins," "eliminates" → "removes")
+> **Explanation:** "Consolidate" is not an approved verb; "join" is the approved alternative for combining tables. "Eliminate" is not approved; "remove" is. The SQL keywords and table names (`user_prefs`, `user_settings`, `theme`) are code-domain technical nouns and remain unchanged inside the code comment.
+
+### Example 10 — Kubernetes Manifest Annotation
+
+> **Non-STE:** # deployment.yaml
+> # This manifest orchestrates the rollout of three replicas of the
+> # auth gateway and guarantees zero-downtime updates.
+> apiVersion: apps/v1
+> kind: Deployment
+> metadata:
+>   name: auth-gateway
+>
+> **STE:** # deployment.yaml
+> # This manifest controls the rollout of three replicas of the
+> # auth gateway and gives zero-downtime updates.
+> apiVersion: apps/v1
+> kind: Deployment
+> metadata:
+>   name: auth-gateway
+>
+> **Principle applied:** P1 (use approved words: "orchestrates" → "controls," "guarantees" → "gives")
+> **Explanation:** "Orchestrate" is not an approved verb; "control" is the approved alternative. "Guarantee" is not approved; "give" is. The kind name `Deployment` and the field names `apiVersion`, `kind`, `metadata`, `name` are code-domain technical nouns and remain unchanged.
 
 ---
 
@@ -327,11 +439,11 @@ The following scenarios show where the boundary between approved words, technica
 
 **Guidance:** Framework names are code-domain technical nouns (category 3, development tools and environments) and are permitted under Rule 1.5. The fact that "express" as a verb is not approved does not affect the use of "Express" as a proper noun. Always write the framework name with its correct capitalization and treat it as a technical noun.
 
-> **Non-STE:** Express your API using Express's routing capabilities.
+> **Non-STE:** Express your API using Express's routing capabilities. The framework facilitates the transmission of requests to your handlers.
 >
-> **STE:** Use Express routing to make your API endpoints.
+> **STE:** Use Express routing to make your API endpoints. The framework sends requests to your handlers.
 >
-> In the first sentence, "Express" as a verb (meaning "to show or state") conflicts with the framework name. The second sentence uses "Express" only as a technical noun and uses the approved verb "use" for the action.
+> In the first sentence, "Express" as a verb (meaning "to show or state") conflicts with the framework name. The second sentence uses "Express" only as a technical noun and uses the approved verb "use" for the action. "Facilitates" and "transmission" are replaced with the approved verbs "sends."
 
 ### Edge Case 2: Code Keyword That Conflicts with the Rule
 
@@ -339,11 +451,11 @@ The following scenarios show where the boundary between approved words, technica
 
 **Guidance:** When the keyword appears in a code block, it is quoted text (Rule 1.5, category 10) and does not need to follow Rule 1.1. When the keyword appears in prose documentation, treat it as a code-domain technical noun (use backticks: `` `yield` ``). If you must describe what `yield` does, use the approved verb "give" in the prose and mark the keyword with backticks.
 
-> **Non-STE:** The `yield` keyword yields control back to the caller.
+> **Non-STE:** The `yield` keyword yields control back to the caller and transmits the next value from the generator.
 >
-> **STE:** The `yield` keyword gives control back to the caller.
+> **STE:** The `yield` keyword gives control back to the caller and sends the next value from the generator.
 >
-> `` `yield` `` is a code-domain technical noun. "Gives" is the approved verb that replaces the unapproved "yields" in the prose.
+> `` `yield` `` is a code-domain technical noun. "Gives" is the approved verb that replaces the unapproved "yields" in the prose. "Transmits" is replaced with the approved verb "sends."
 
 ### Edge Case 3: Generated Code Documentation
 
@@ -353,17 +465,37 @@ The following scenarios show where the boundary between approved words, technica
 
 **Recommendation:** Write STE-Code compliant source annotations. The generated documentation will be cleaner even if the generator adds non-STE boilerplate. For critical public-facing API docs, post-process the generated output to replace non-approved words.
 
+**Example — OpenAPI source annotation:**
+
+> **Non-STE:** # openapi.yaml
+> # components:
+> #   schemas:
+> #     Order:
+> #       description: >
+> #         Represents a customer purchase transaction. Utilize this to
+> #         ascertain the fulfillment status.
+>
+> **STE:** # openapi.yaml
+> # components:
+> #   schemas:
+> #     Order:
+> #       description: >
+> #         Shows a customer purchase. Use this to find the fulfillment
+> #         status.
+>
+> "Utilize" → "use" and "ascertain" → "find" are applied in the source annotation so the generated reference page stays compliant.
+
 ### Edge Case 4: Technical Verb Used as a Noun in a Compound Term
 
 **Scenario:** A code-domain technical verb like "build" appears as a noun in a compound term like "build system" or "build pipeline."
 
 **Guidance:** Rule 1.13 states that you must not use technical verbs as nouns. But when a technical verb is part of a compound code-domain technical noun, the compound as a whole is a noun. "Build system" is a code-domain technical noun (category 3, development tools). The word "build" inside the compound is not functioning as a standalone noun — it is part of a recognized technical term. This is permitted under Rule 1.5 and Rule 1.6.
 
-> **Non-STE:** The build took 45 minutes to complete.
+> **Non-STE:** The build took 45 minutes to complete. We must expedite the build for the next release.
 >
-> **STE:** The build procedure took 45 minutes.
+> **STE:** The build procedure took 45 minutes. We must make the build faster for the next release.
 >
-> "Build" used alone as a noun violates Rule 1.13. Adding "procedure" makes it a compound technical noun that is acceptable. Alternatively, restructure: "The system built in 45 minutes."
+> "Build" used alone as a noun violates Rule 1.13. Adding "procedure" makes it a compound technical noun that is acceptable. "Expedite" is replaced with the approved verb phrase "make faster." Alternatively, restructure: "The system built in 45 minutes."
 
 ### Edge Case 5: Non-English Words and Loanwords
 
@@ -371,11 +503,23 @@ The following scenarios show where the boundary between approved words, technica
 
 **Guidance:** These words are code-domain technical nouns when they name a specific algorithm, protocol, or pattern. "Rendezvous" as part of "rendezvous protocol" is a technical noun. "Naïve Bayes" is a technical noun. When used outside of a technical term, replace with an approved English word. "De facto" in prose should be replaced with "usual" or "primary."
 
-> **Non-STE:** This is the de facto standard for serialization in the ecosystem.
+> **Non-STE:** This is the de facto standard for serialization in the ecosystem. The rendezvous protocol synchronizes the nodes.
 >
-> **STE:** This is the usual standard for serialization in the ecosystem.
+> **STE:** This is the usual standard for serialization in the ecosystem. The rendezvous protocol synchronizes the nodes.
 >
-> "De facto" is not an approved phrase. "Usual" is the approved adjective.
+> "De facto" is not an approved phrase. "Usual" is the approved adjective. "Rendezvous protocol" is a code-domain technical noun and remains unchanged.
+
+### Edge Case 6: Acronyms and Initialisms as Technical Nouns
+
+**Scenario:** Acronyms such as "JWT," "OAuth," "CLI," "API," and "URL" appear throughout code documentation. Some of these letters spell unapproved words if read as English (for example, "api" is not a real English word).
+
+**Guidance:** Acronyms and initialisms that name a protocol, interface, or tool are code-domain technical nouns (category 1, systems and components). Write them in their standard uppercase form and treat them as technical nouns. Do not attempt to apply Rule 1.1 part-of-speech constraints to the individual letters.
+
+> **Non-STE:** utilize the JWT to authenticate the CLI session via OAuth
+>
+> **STE:** use the JWT to check the CLI session via OAuth
+>
+> "Utilize" → "use" and "authenticate" → "check" are applied; "JWT," "CLI," and "OAuth" are code-domain technical nouns and remain unchanged.
 
 ---
 
@@ -446,3 +590,21 @@ Some words are technical terms in both the general STE dictionary and the softwa
 In ASD-STE100 Issue 9, Rule 1.1 is the foundation of the entire specification. It introduces the dictionary (Part 2 of the spec) and the concept of controlled vocabulary. The aerospace specification emphasizes that the dictionary is not a complete vocabulary — it is a selection of the most frequently used words, and technical terms fill the gaps. STE-Code follows the same philosophy: the controlled terminology gives the most frequently used words in code documentation, and the 19 categories of code-domain technical nouns (plus the code-domain technical verb provision) fill the gaps.
 
 The original ASD-STE100 uses the term "dictionary." STE-Code uses "controlled terminology" to avoid confusion with programming language data structures (Python `dict`, JavaScript `Map`, etc.). Both serve the same function: a curated list of approved words with their parts of speech, meanings, and usage examples.
+
+---
+
+## See also
+
+> **See also:** Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
+> **See also:** Rule 1.3 — Use Approved Words Only with Their Approved Meanings
+> **See also:** Rule 1.4 — Use Only the Approved Verb Forms and Adjective Forms
+> **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
+> **See also:** Rule 1.6 — Use a Non-Approved Word Only When It Is a Technical Noun
+> **See also:** Rule 1.7 — Do Not Use Technical Nouns as Verbs
+> **See also:** Rule 1.8 — Use Standard, Well-Known Technical Nouns
+> **See also:** Rule 1.9 — Prefer Short, Clear Technical Nouns
+> **See also:** Rule 1.10 — No Slang, Jargon, or Regional Terms
+> **See also:** Rule 1.11 — One Term Per Concept
+> **See also:** Rule 1.12 — Technical Verbs Are Allowed
+> **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
+> **See also:** Rule 1.14 — Use American English Spelling
