@@ -580,7 +580,7 @@ The technical nouns in their related categories are only examples. Rule 1.5 does
 > — Model training, inference pipelines, experiment tracking. Target: Categories 7, 9, 14, 19.
 
 > [GAMEDEV] Game development examples (Unity, Unreal, Godot)
-> — Game loop, physics, shaders, ECS. Target: Categories 2, 6, 7, 18.
+> — Game loop, physics, shaders, Entity Component System. Target: Categories 2, 6, 7, 18.
 
 > [EMBEDDED] Embedded/IoT examples (C, Rust, RTOS, firmware)
 > — Memory-mapped I/O, interrupts, bootloaders. Target: Categories 2, 6, 9, 16.

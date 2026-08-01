@@ -5468,7 +5468,7 @@
 
 ## USE (v)
 - **Original:** To make something do its specified function. USE THE CORRECT TOOL.
-- **Code-domain:** To employ. USE THE API TO FETCH DATA.
+- **Code-domain:** To make a tool, API, or command do its specified function. USE THE API TO FETCH DATA.
 > **STE:** Use the API to fetch data.
 > **Non-STE:** Utilize the API to fetch data.
 
