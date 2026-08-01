@@ -216,6 +216,22 @@ check("release: three tracks configured", set(rel_mod.TRACKS) == {"core", "STAND
 check("release: tag formats differ per track",
       len({v.format(v="1.0.0") for v in rel_mod.TRACKS.values()}) == 3)
 
+# Multi-session safety: staging must be path-scoped, never `git add -A`, or a
+# release sweeps up a concurrent session's half-written files.
+src = (HERE / "release.py").read_text(encoding="utf-8")
+check("release: never stages the whole tree", '"add", "-A"' not in src)
+check("release: owned paths exclude other sessions' dirs",
+      not any(p.startswith((".agents/benchmark", ".agents/state", "ste-code/refined",
+                            "ste-code/grouped", "ste-code/extracted"))
+              for p in rel_mod.OWNED_PATHS),
+      str(rel_mod.OWNED_PATHS))
+check("release: CHANGELOG.md is an owned path", "CHANGELOG.md" in rel_mod.OWNED_PATHS)
+# Regression: CHANGELOG.md is created by step 4, so the staging list must be
+# resolved AFTER it exists, not reused from the preflight snapshot.
+commit_step = src.split('print("\\n6. commit")')[1].split('print("\\n7. tag")')[0]
+check("release: staging list is recomputed at commit time",
+      "OWNED_PATHS" in commit_step and ".exists()" in commit_step, commit_step.strip()[:160])
+
 # --- teardown --------------------------------------------------------------
 
 for p in sorted(SANDBOX.rglob("*"), reverse=True):

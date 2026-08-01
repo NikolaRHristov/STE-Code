@@ -253,7 +253,10 @@ def main() -> int:
         step_verify()
 
     print("\n6. commit")
-    for p in owned:
+    # Recompute: earlier steps create files (CHANGELOG.md on a first release)
+    # that did not exist when `owned` was resolved during preflight.
+    to_stage = [p for p in (args.paths or OWNED_PATHS) if (PROJECT / p).exists()]
+    for p in to_stage:
         r.run("git", "add", "--", p)
     r.run("git", "commit", "-m", f"chore(release): v{version}", check=False)
 
