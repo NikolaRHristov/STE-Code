@@ -34,80 +34,91 @@ When you use the past participle form as an adjective, it shows the condition of
 - Before a noun
 - After a verb form of the verbs "to be," "to become," or "to stay."
 
-Do not use the past participle form if it is not in the dictionary.
+Do not use the past participle form if it is not in the STE-Code dictionary.
 
-There are also approved adjectives in the STE-Code dictionary that are the past participle form of verbs that are not approved. Their approved part of speech in the dictionary is "(adj)" and thus you can use them. Examples in the code domain are "deprecated," "corrupted," "allowed," and "given."
+There are also approved adjectives in the STE-Code dictionary that are the past participle form of verbs that are not approved. Their approved part of speech in the dictionary is "(adj)" and thus you can use them.
 
-**How to tell an adjective from passive voice**
+**How to know that the past participle is an adjective and not passive voice**
 
-1. **Look for the actor.** Passive voice hides who does the action ("The file was parsed by the loader"). An adjective states a condition and needs no actor ("The parsed file is ready").
-2. **Try the position test.** If the word can go directly before the noun ("the parsed file", "the deprecated method"), it works as an adjective.
-3. **Try the linking-verb test.** If the word follows "is", "becomes", or "stays" and answers "in what condition?", it is an adjective ("The cache is initialized").
-4. **If the word adds "by <actor>", it is passive voice.** Rewrite it in the active voice. See Rule 3.6.
+1. The word gives the **condition** of the thing, not an action that an actor does.
+2. You can put the word directly before the noun: "the parsed file", "the deprecated method", "the closed connection".
+3. You can put the word after "is", "becomes", or "stays": "the cache is initialized", "the endpoint becomes deprecated", "the record stays locked".
+4. If the sentence names an actor and an action ("the file was parsed by the loader"), the sentence is passive voice. Write the active voice instead (see Rule 3.6).
 
-**How to correct a wrong use**
+**Common code-domain past participles that are approved as adjectives**
 
-- Passive voice → active voice with a named actor: "The record was deleted by the job" → "The job deletes the record."
-- Past participle used as a full verb → simple past: "The service has restarted" → "The service restarted."
-- Past participle that is not in the dictionary → use an approved word: "the instantiated client" → "the new client"; "the leveraged cache" → "the used cache".
-- Two or more stacked participles → one participle and one noun: "the parsed validated cached response" → "the parsed response. The cache keeps the response after the check."
+| Past participle (adj) | Example noun phrase | Condition that it shows |
+|---|---|---|
+| parsed | the parsed manifest | The parser read the file. |
+| serialized | the serialized record | The record is in a transport format. |
+| deserialized | the deserialized object | The object is in memory again. |
+| initialized | the initialized cache | The cache is ready for use. |
+| deprecated | the deprecated method | The method is old. Do not use it. |
+| allowed | the allowed memory | The limit that the configuration gives. |
+| corrupted | the corrupted index | The data is not correct. |
+| locked | the locked row | Another transaction holds the row. |
+| written | the written log | The log file is on disk. |
+| given | the given options | The options that the caller sends. |
+| built | the built artifact | The build made the artifact. |
+| signed | the signed token | The token has a valid signature. |
+
+**Cautions**
+
+- Do not make a new past participle from an unapproved verb. Write "the deleted branch" only if "delete" or "deleted (adj)" is in the dictionary; if it is not, use the approved verb "remove" and write "the removed branch".
+- Do not use a past participle as a verb with "have", "has", or "had" (see Rule 3.2).
+- Do not put more than one past participle before the same noun. Write "the parsed and validated payload" as two short sentences if the phrase becomes difficult.
+- Prefer the plain word. Use "started", not "commenced". Use "used", not "utilized" or "leveraged". Use "stopped", not "terminated".
+
+> **Note: structural carryover — no code-domain equivalent** — The source rule uses aerospace hardware ("disassembled unit", "mating surfaces") to show the grammar. The code-domain version keeps the same grammar and gives software conditions instead. No mapping is forced.
 
 ## Examples
 
-> *Adapted from spec pair:* Non-STE: The unit which had been taken apart must be looked at for damage.  |  STE: Examine all parts of the disassembled unit for damage.
+> *Adapted from spec pair:* Non-STE: The unit was disassembled by the technician. | STE: Examine all parts of the disassembled unit for damage.
 
-> **Non-STE:** All fields of the object that was deserialized by the reader must be inspected for corruption by the caller.
 > **STE:** Inspect all fields of the deserialized object for corruption.
 >
 > ("Deserialized" is an adjective before the noun "object." It shows the condition of the object.)
 >
 > ```python
-> # STE: "deserialized" is an adjective before the noun "object".
-> def inspect(deserialized_object: dict) -> None:
->     """Inspect all fields of the deserialized object for corruption."""
->     for name, value in deserialized_object.items():
->         if value is None:
->             raise ValueError(f"corrupted field: {name}")
+> # STE: "deserialized" gives the condition of the object.
+> obj = json.loads(payload)          # the deserialized object
+> for name, value in obj.items():
+>     if value is None:
+>         log.write(f"field {name} is corrupted")
 > ```
 
-> **Non-STE:** When the cache has been fully initialized by the bootstrap code, the worker threads are started.
 > **STE:** When the cache is fully initialized, start the worker threads.
 >
 > ("Initialized" is an adjective after the verb "to be." It shows the condition of the cache.)
 >
 > ```go
-> // STE: "initialized" is an adjective after the verb "to be".
-> // When the cache is fully initialized, start the worker threads.
+> // STE: "initialized" comes after "is" and gives the condition of the cache.
 > if cache.IsInitialized() {
 >     pool.Start(workerCount)
 > }
 > ```
 
-> **Non-STE:** More memory than is permitted must not be given to the buffer by the allocator.
 > **STE:** Do not exceed the allowed memory for the buffer.
 >
 > *Adapted from spec pair: "Do not put more than the permitted weight on the trolley." ("permitted" is an approved adjective with part of speech "(adj)".)*
 >
 > ```yaml
-> # STE: "allowed" is an approved adjective before the noun "memory".
-> limits:
->   allowed_memory_mb: 512
->   allowed_open_files: 1024
+> # config/limits.yml
+> # STE: the allowed memory for the buffer is 256 MB.
+> buffer:
+>   allowed_memory_mb: 256
 > ```
 
-> **Non-STE:** It must be ensured that the input values have not been corrupted by the previous stage.
 > **STE:** Make sure that the input values are not corrupted.
 >
 > *Adapted from spec pair: "Make sure that the mating surfaces are not damaged." ("damaged" is an approved adjective with part of speech "(adj)".)*
 >
-> ```javascript
-> // STE: "corrupted" is an adjective after the verb "to be".
-> function check(values) {
->   if (isCorrupted(values)) {
->     throw new Error("the input values are corrupted");
->   }
->   return values;
-> }
+> ```python
+> # STE: "corrupted" gives the condition of the values.
+> def check(values):
+>     """Make sure that the input values are not corrupted."""
+>     if any(v is None for v in values):
+>         raise ValueError("the input values are corrupted")
 > ```
 
 > **Non-STE:** The parsed file was processed by the loader.
@@ -115,76 +126,126 @@ There are also approved adjectives in the STE-Code dictionary that are the past 
 >
 > *Adapted from spec principle: "parsed" is the past participle used as an adjective before the noun "file." It shows the condition of the file, not passive voice.*
 >
-> ```bash
-> # STE: "parsed" shows the condition of the file. The loader is the actor.
-> parse-config --in app.conf --out app.parsed.json
-> loader --config app.parsed.json
+> ```python
+> # STE: "parsed" is an adjective. The sentence keeps the active voice.
+> parsed_file = parse(path)   # the parsed file is ready for the loader
+> loader.load(parsed_file)
 > ```
 
-> **Non-STE:** The method has been deprecated and will be removed by a future release, so it should not be called by new code.
-> **STE:** The method is deprecated. A future release removes the method. Do not call the deprecated method in new code.
+> **Non-STE:** The method has been deprecated by the API team in release 4.2.
+> **STE:** The method is deprecated in release 4.2. Do not use the deprecated method in new code.
 >
-> *Adapted from spec principle: "deprecated" is an approved adjective. It shows the condition of the method. Use the active voice for the action of the release.*
+> *Adapted from spec principle: "deprecated" is an approved adjective. Do not make a complex verb construction with "has been".*
 >
 > ```java
 > /**
->  * The method is deprecated. Use {@link #send(Request)}.
->  * Do not call the deprecated method in new code.
+>  * STE: the method is deprecated in release 4.2.
+>  * Use {@link #send(Request)} instead.
 >  */
 > @Deprecated
-> public void sendLegacy(Request request) { ... }
+> public void transmit(Request request) { ... }
 > ```
 
-> **Non-STE:** After the token has been signed and been validated, access is granted to the stored records by the API.
-> **STE:** When the token is signed and validated, the API gives access to the stored records.
+> **Non-STE:** After the record gets locked, the transaction which was started earlier is being committed.
+> **STE:** The transaction writes the locked record. Then the transaction ends.
 >
-> *Adapted from spec principle: "signed", "validated", and "stored" show conditions. The API is the actor of the action.*
+> *Adapted from spec principle: "locked" is the past participle as an adjective before the noun "record." "Gets locked" and "is being committed" are passive constructions that are not approved (see Rule 3.4 and Rule 3.6).*
+>
+> ```sql
+> -- STE: the transaction writes the locked record. Then the transaction ends.
+> BEGIN;
+> SELECT * FROM orders WHERE id = 42 FOR UPDATE;  -- the locked row
+> UPDATE orders SET status = 'sent' WHERE id = 42;
+> COMMIT;
+> ```
+
+> **Non-STE:** The signed token which had been given to the client is validated by the gateway on each request.
+> **STE:** The gateway validates the signed token on each request.
+>
+> *Adapted from spec principle: "signed" is a past participle as an adjective before the noun "token." The gateway is the actor, so use the active voice.*
+>
+> ```javascript
+> // STE: the gateway validates the signed token on each request.
+> app.use((req, res, next) => {
+>   const signedToken = req.headers.authorization; // the signed token
+>   if (!gateway.validate(signedToken)) {
+>     return res.status(401).send("the signed token is not valid");
+>   }
+>   next();
+> });
+> ```
+
+> **Non-STE:** When the index becomes corrupted it will have to be being rebuilt by the maintenance job.
+> **STE:** When the index becomes corrupted, the maintenance job makes the index again.
+>
+> *Adapted from spec principle: "corrupted" comes after the verb "to become" and shows the condition of the index. Use the approved verb "make" and the active voice for the action.*
+>
+> ```bash
+> # STE: when the index becomes corrupted, the maintenance job makes the index again.
+> if ! sqlite3 app.db "PRAGMA integrity_check;" | grep -q "^ok$"; then
+>   ./scripts/make-index.sh app.db
+> fi
+> ```
+
+> **Non-STE:** The build artifact stays uncompiled until the pipeline has compiled the modified sources.
+> **STE:** The artifact stays unbuilt until the pipeline builds the modified sources.
+>
+> *Adapted from spec principle: "unbuilt" and "modified" show conditions after "to stay" and before a noun. Do not use the present perfect "has compiled" (see Rule 3.2).*
+>
+> ```yaml
+> # .github/workflows/ci.yml
+> # STE: the pipeline builds the modified sources. Then the artifact is ready.
+> jobs:
+>   build:
+>     steps:
+>       - run: git diff --name-only HEAD~1   # the modified sources
+>       - run: make build
+> ```
+
+> **Non-STE:** The user is shown a warning if the uploaded configuration file was found to be malformed.
+> **STE:** The CLI shows a warning if the uploaded configuration file is malformed.
+>
+> *Adapted from spec principle: "uploaded" and "malformed" are adjectives that show the condition of the file. Name the actor ("the CLI") and use the active voice.*
+>
+> ```bash
+> $ myapp config upload ./app.toml
+> # STE: the CLI shows a warning if the uploaded configuration file is malformed.
+> warning: the uploaded configuration file is malformed at line 12
+> ```
+
+> **Non-STE:** All of the returned records had already been serialized before the response was sent.
+> **STE:** The API sends the serialized records in the response.
+>
+> *Adapted from spec principle: "serialized" is an adjective before the noun "records." Use the simple present tense and the approved verb "send".*
 >
 > ```json
 > {
->   "token": { "signed": true, "validated": true },
->   "access": "granted",
->   "records": "stored"
+>   "records": [
+>     { "id": 1, "state": "serialized" },
+>     { "id": 2, "state": "serialized" }
+>   ],
+>   "count": 2
 > }
 > ```
 
-> **Non-STE:** The written log stays unchanged until it is rotated by the daemon at midnight.
-> **STE:** The written log stays unchanged. The daemon rotates the log at 00:00.
+> **Non-STE:** Make sure that the written log and the given options are not being modified by the plugin.
+> **STE:** Make sure that the plugin does not change the written log or the given options.
 >
-> *Adapted from spec principle: "written" and "unchanged" are adjectives after "to stay". Name the actor for the action of the daemon.*
->
-> ```bash
-> # STE: the written log stays unchanged. The daemon rotates the log at 00:00.
-> logrotate --state /var/lib/logrotate.status /etc/logrotate.d/api
-> ```
-
-> **Non-STE:** The instantiated client object which was utilized by the test had been left in a connected state.
-> **STE:** The test keeps the new client in a connected state.
->
-> *Adapted from spec principle: "instantiated" and "utilized" are not in the dictionary. Use "new" and "use". "Connected" is an approved adjective that shows the condition of the client.*
+> *Adapted from spec principle: "written" and "given" are approved past participles used as adjectives. Change the passive progressive to the active voice.*
 >
 > ```python
-> # STE: use approved words. "connected" shows the condition of the client.
-> def test_client_stays_connected():
->     client = new_client(url)
->     assert client.is_connected
+> # STE: make sure that the plugin does not change the written log or the given options.
+> def run_plugin(plugin, log_path, options):
+>     before = hash_file(log_path)
+>     plugin.run(dict(options))          # the given options, as a copy
+>     if hash_file(log_path) != before:
+>         raise RuntimeError("the plugin changed the written log")
 > ```
 
-> **Non-STE:** The failed build and the given options were recorded by the pipeline in the generated report.
-> **STE:** The pipeline records the failed build and the given options in the report.
->
-> *Adapted from spec pair: "The adjusted linkage" and "the given information" show the past participle used as an adjective. Keep the adjectives, but write the action in the active voice.*
->
-> ```yaml
-> # STE: "failed" and "given" are adjectives. The pipeline is the actor.
-> report:
->   failed_build: 4821
->   given_options: ["--release", "--strip"]
-> ```
-
-> **See also:** Rule 3.2 — Use only these verb forms and tenses of verbs
-> **See also:** Rule 3.4 — Do not use auxiliary verbs to make complex verb constructions
-> **See also:** Rule 3.5 — Use the "-ing" form of a verb only as a technical noun or as a modifier in a technical noun
+> **See also:** Rule 3.1 — Use Only the Verb Forms That Are Given in the Dictionary
+> **See also:** Rule 3.2 — Use Only These Verb Forms and Tenses of Verbs
+> **See also:** Rule 3.4 — Do Not Use Auxiliary Verbs to Make Complex Verb Constructions
+> **See also:** Rule 3.5 — Use the "-ing" Form of a Verb Only as a Technical Noun
 > **See also:** Rule 3.6 — Use the Active Voice
-> **See also:** Rule 1.1 — Use words that are approved in the dictionary
+> **See also:** Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
 > **See also:** The STE-Code dictionary (a-dictionary.md) — the approved adjectives with part of speech "(adj)"
