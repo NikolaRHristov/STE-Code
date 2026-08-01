@@ -215,6 +215,137 @@ def test_stitch(cfg, base: Path) -> None:
 
 # -------------------------------------------------------------- colour modules
 
+def test_notes(cfg, base: Path) -> None:
+    """The correspondence bus: protocol rules, threading, staleness, races."""
+    try:
+        import notes as notes_mod
+    except ImportError:
+        return  # not built yet; other checks still apply
+
+    bus = notes_mod.NoteBus(cfg, base)
+    ev = {"escape_ids": ["red-0-nested_quote_bait-nested-003"]}
+
+    handoff = bus.write("red", "blue", "handoff", "ledger ready for round 1",
+                        variant="0", round_n=1, expects_ack=True)
+    claim = bus.write("blue", "white", "claim", "resistance is placement-driven",
+                      variant="0", round_n=1, evidence=ev, confidence=0.8,
+                      expects_ack=True)
+    ignored = bus.write("purple", "all", "warning", "attack and probe counts disagree",
+                        variant="0", round_n=1, evidence=ev, expects_ack=True)
+    brief = bus.write("white", "black", "handoff", "attack brief",
+                      variant="0", round_n=2, expects_ack=True)
+
+    check(handoff.id.startswith("red-blue-0-1-"), "note id encodes from/to/variant/round")
+    check(bus.read(handoff.id) is not None, "note round-trips through disk")
+
+    # evidence is required exactly for the kinds that assert a fact
+    try:
+        bus.write("red", "blue", "claim", "no evidence attached", variant="0", round_n=1)
+        check(False, "evidence-free claim rejected")
+    except notes_mod.NoteError:
+        check(True, "evidence-free claim rejected")
+    try:
+        bus.write("red", "blue", "handoff", "handoff needs no evidence",
+                  variant="0", round_n=1)
+        check(True, "handoff exempt from evidence rule")
+    except notes_mod.NoteError:
+        check(False, "handoff exempt from evidence rule")
+
+    # config and code cannot drift apart
+    for bad in (("mauve", "blue", "handoff"), ("red", "mauve", "handoff"),
+                ("red", "blue", "gossip")):
+        try:
+            bus.write(bad[0], bad[1], bad[2], "invalid", variant="0", round_n=1)
+            check(False, "rejects unknown {}".format(bad))
+        except notes_mod.NoteError:
+            check(True, "rejects unknown value in {}".format(bad[2]))
+
+    ack = bus.acknowledge(claim.id, "accepted", action_taken="remedy queued")
+    check(ack.kind == "acknowledgement" and ack.in_reply_to == claim.id,
+          "acknowledgement links to its note")
+    reb = bus.acknowledge(handoff.id, "rejected", rebuttal="counts disagree",
+                          evidence=ev)
+    check(reb.kind == "rebuttal", "a rejection is recorded as a rebuttal")
+
+    chain = bus.thread(claim.id)
+    check([n.id for n in chain] == [claim.id, ack.id], "thread reconstructs the reply chain")
+
+    unacked = [n.id for n in bus.inbox("black", unacked_only=True)]
+    check(brief.id in unacked, "unacked inbox finds the open note addressed to the colour")
+    check(ignored.id in unacked, "an unanswered broadcast is open for every colour")
+    check(claim.id not in unacked, "a note addressed elsewhere stays out of this inbox")
+    check(any(n.id == ignored.id for n in bus.inbox("black")),
+          "broadcast reaches every colour's inbox")
+
+    stale = bus.stale(current_round=3)
+    check([n.id for n in stale] == [ignored.id],
+          "stale finds exactly the ignored broadcast, not the answered notes")
+    check(brief.id not in [n.id for n in stale], "recent unanswered note is not yet stale")
+
+    correction = bus.write("purple", "all", "warning", "corrected: counts agree",
+                           variant="0", round_n=1, evidence=ev, supersedes=ignored.id)
+    check(all(n.id != ignored.id for n in bus.inbox("red")),
+          "superseded note drops out of the inbox")
+    check(correction.id not in [n.id for n in bus.stale(3)],
+          "superseding a note clears its staleness")
+
+    summary = bus.summary()
+    check(summary["total"] >= 8, "summary counts every note")
+    check(summary["matrix"]["red"]["blue"] >= 2, "correspondence matrix populated")
+    check(summary["superseded"] == 1, "summary reports the supersession")
+
+    anon = anonymize.Anonymizer("paths", root=cfg.root)
+    leaky = bus.write("black", "all", "rebuttal", "see " + str(Path.home() / "x.json"),
+                      variant="0", round_n=2,
+                      evidence={"artifact_paths": [str(Path.home() / "x.json")]})
+    exported = notes_mod.render_markdown(bus.all_notes(), anon, bus.summary())
+    check(str(Path.home()) not in exported, "export redacts home directory")
+    check("/Volumes/" not in exported, "export redacts absolute paths")
+    check(str(Path.home()) in json.dumps(bus.read(leaky.id).to_dict()),
+          "on-disk note keeps the raw path for machine use")
+
+    check(bus.rebuild_index() == len(bus.all_notes()), "index rebuilds from note files")
+
+
+def test_notes_concurrency(cfg, base: Path) -> None:
+    """Independent processes appending at once must not lose or corrupt notes."""
+    try:
+        import notes  # noqa: F401
+    except ImportError:
+        return
+    writers, per_writer = 4, 6
+    script = (
+        "import sys; sys.path.insert(0, {bench!r});\n"
+        "from harness_config import load_config\n"
+        "import notes\n"
+        "cfg = load_config()\n"
+        "bus = notes.NoteBus(cfg, {base!r})\n"
+        "for i in range({n}):\n"
+        "    bus.write('red', 'blue', 'handoff', 'from %s #%d' % (sys.argv[1], i),\n"
+        "              variant='9', round_n=1)\n"
+    ).format(bench=str(BENCH), base=str(base), n=per_writer)
+    procs = [subprocess.Popen([sys.executable, "-c", script, "w{}".format(i)],
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+             for i in range(writers)]
+    errors = []
+    for proc in procs:
+        _, err = proc.communicate(timeout=120)
+        if proc.returncode != 0:
+            errors.append(err.decode()[-300:])
+    check(not errors, "all concurrent writers exited cleanly")
+    if errors:
+        print(errors[0])
+
+    import notes as notes_mod
+    bus = notes_mod.NoteBus(cfg, base)
+    written = [n for n in bus.all_notes() if str(n.variant) == "9"]
+    ids = [n.id for n in written]
+    check(len(written) == writers * per_writer,
+          "no note lost under concurrency ({} of {})".format(
+              len(written), writers * per_writer))
+    check(len(set(ids)) == len(ids), "no duplicate note ids under concurrency")
+
+
 def test_modules_compile() -> None:
     """Every module present must import under the interpreter that runs it."""
     for path in sorted(BENCH.glob("*.py")):
@@ -233,6 +364,8 @@ def main() -> int:
     tmp = Path(tempfile.mkdtemp(prefix="harness-selftest-"))
     try:
         test_stitch(cfg, tmp)
+        test_notes(cfg, tmp)
+        test_notes_concurrency(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     test_modules_compile()
