@@ -54,6 +54,9 @@ jobs:
       - name: Check for drifted claims
         run: python3 .agents/tools/release/scan.py
 
+      - name: Self-test the release tooling
+        run: python3 .agents/tools/release/test_release.py
+
   release:
     name: Release
     if: github.event_name == 'workflow_dispatch' && (inputs.version != '' || inputs.bump != 'none')
