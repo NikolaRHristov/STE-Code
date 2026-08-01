@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 8.6
 
+> **Source:** [master.md#sec8-rule8.6](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 8.6** Count each of these elements as one word:

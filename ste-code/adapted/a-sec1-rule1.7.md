@@ -1,6 +1,7 @@
 # Rule 1.7 — Do Not Use Words That Are Technical Nouns as Verbs
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.7
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.7](ste-code/grouped/), Rule 1.7
 
 ## Original Rule
 

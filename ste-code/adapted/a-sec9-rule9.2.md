@@ -1,6 +1,7 @@
 # Rule 9.2 — Use Each Approved Word Correctly
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 9.2
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec9-rule9.2](ste-code/grouped/), Rule 9.2
 
 ## Original Rule
 

@@ -1,6 +1,7 @@
 # Rule 5.2 — One Instruction Per Sentence
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 5.2
+> **Source:** [master.md#sec5-rule5.2](ste-code/grouped/)
 
 ## Original Rule
 
@@ -66,7 +67,7 @@ You may write more than one sentence in a single work step when:
 >
 > (Each instruction is a separate work step.)
 >
-> *Adapted from spec pair: "Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover." / "Put preservation oil into the unit through the vent hole. Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover."*
+> *Source pairing: split one compound instruction into separate numbered work steps — follows the same principle as the original STE example in Rule 5.2.*
 
 > **Non-STE:** Run the test suite with the coverage flag enabled and verify that the total line coverage is above 80 percent across all modules in the project. (27 words)
 >
@@ -74,7 +75,7 @@ You may write more than one sentence in a single work step when:
 >
 > (The second sentence states the result limit. The work step is one action and cannot be divided into two separate work steps.)
 >
-> *Adapted from spec pair: "Measure the leakage from the outlet port. The leakage must not be more than 0.5 cc/minute." (result immediately after action)*
+> *Source pairing: a result or limit that follows the action immediately in the same work step — follows the same principle as the original STE example in Rule 5.2.*
 
 > **Non-STE:** Make sure the environment variable DATABASE_URL is set correctly and then execute the initialization script to create the required database tables and populate them with the seed data. (31 words)
 >
@@ -82,7 +83,7 @@ You may write more than one sentence in a single work step when:
 >
 > (The check and the execution form one continuous work step. The third sentence explains what the script does.)
 >
-> *Adapted from spec pair: "Make sure that the locking torque of each of the four bolts (6) is a minimum of 0.30 Nm. Then, torque each of the four bolts (6) to 4.20 Nm." (check immediately followed by action)*
+> *Source pairing: a check that is immediately followed by the related action in one work step — follows the same principle as the original STE example in Rule 5.2.*
 
 Actions that occur at the same time:
 

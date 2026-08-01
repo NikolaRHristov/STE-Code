@@ -1,6 +1,7 @@
 # Rule 5.5 — Notes Give Information Only, Not Instructions
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 5.5
+> **Source:** [master.md#sec5-rule5.5](ste-code/grouped/)
 
 ## Original Rule
 
@@ -89,7 +90,7 @@ To verify correct note usage, read the procedure without the notes. If the reade
 
 > **STE:** NOTE: The API rate limiter allows a maximum of 1000 requests per minute per client IP address on the free tier.
 >
-> *Adapted from spec: "NOTE: The gyroscope will become stable after approximately 15 seconds." — a note gives descriptive information only, no instructions.*
+> *Source pairing: a note gives descriptive information only, with no instruction — follows the same principle as the original STE example in Rule 5.5.*
 
 (One sentence, 20 words. This note gives context about the API behavior without instructing the reader to do anything.)
 
@@ -103,7 +104,7 @@ To verify correct note usage, read the procedure without the notes. If the reade
 >
 > **STE:** (5) Run the command `npm audit fix` to resolve known vulnerabilities.
 >
-> *Adapted from spec: note with imperative form — "Make sure that the avionics ventilation system continues to operate correctly" became work step (6), not a note.*
+> *Source pairing: an instruction written inside a note becomes a numbered work step — follows the same principle as the original STE example in Rule 5.5.*
 
 (Do not put instructions in a note. The instruction to run a command is a work step.)
 
@@ -119,13 +120,13 @@ To verify correct note usage, read the procedure without the notes. If the reade
 | --- | --- |
 | STE: | CAUTION: BEFORE YOU DEPLOY TO PRODUCTION, MAKE SURE THAT ALL ENVIRONMENT VARIABLES ARE SET CORRECTLY. IF YOU DEPLOY WITH MISSING VARIABLES, THE APPLICATION WILL NOT START. |
 
-> *Adapted from spec pair: "NOTE: When you connect the lines, do not bend them too much." → "CAUTION: WHEN YOU CONNECT THE LINES, DO NOT BEND THEM TOO MUCH." — a note containing safety information must be moved to a safety instruction.*
+> *Source pairing: a note that contains a safety instruction must become a CAUTION — follows the same principle as the original STE example in Rule 5.5.*
 
 > **Non-STE:** NOTE: Do not run the migration script on the production database without first creating a full backup. Running the migration without a backup can cause irreversible data loss.
 >
 > **STE:** WARNING: DO NOT RUN THE MIGRATION SCRIPT ON THE PRODUCTION DATABASE WITHOUT A FULL BACKUP. RUNNING THE MIGRATION WITHOUT A BACKUP CAN CAUSE IRREVERSIBLE DATA LOSS.
 >
-> *Adapted from spec: "WARNING: BEFORE YOU CLOSE THE HATCH, MAKE SURE THAT NO PERSONS ARE IN THE CREW REST COMPARTMENT." — critical safety information belongs in a WARNING, not a note.*
+> *Source pairing: critical safety information belongs in a WARNING, not a note — follows the same principle as the original STE example in Rule 5.5.*
 
 (Critical safety information belongs in a WARNING, not a note.)
 

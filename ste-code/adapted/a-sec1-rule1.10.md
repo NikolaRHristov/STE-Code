@@ -1,6 +1,7 @@
 # Rule 1.10 — Do Not Use Regional, Slang, or Jargon Words as Technical Nouns
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.10
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.10](ste-code/grouped/), Rule 1.10
 
 ## Original Rule
 

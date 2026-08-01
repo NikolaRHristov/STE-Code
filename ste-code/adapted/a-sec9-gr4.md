@@ -1,128 +1,81 @@
-# GR-4 — The Pronoun "This"
+# GR-4 — The Pronoun "this"
 
-> **Source:** Adapted from ASD-STE100 Issue 9, GR-4
+> **Source:** Adapted from ASD-STE100 Issue 9, General Recommendation GR-4
+
+> **Source:** [master.md#sec9-gr4](ste-code/grouped/)
+
+> Source: master.md#sec9-gr4
 
 ## Original Rule
 
-The pronoun "this" (general recommendation, not an STE rule).
-
 When you use the pronoun "this" in a sentence, make sure that the reader knows the item the pronoun refers to. If "this" can refer to more than one item, give the applicable context again.
-
-## STE-Code Adaptation
-
-> **See also:** GR-1 — The Conjunction "That"; GR-2 — The Preposition "With"; GR-3 — How to Use Pronouns
-
-In code documentation, when you use the pronoun "this" in a sentence, make sure that the reader knows exactly which item, condition, or result the pronoun refers to. If "this" can refer to more than one item in the preceding text, repeat the applicable context to remove the ambiguity.
-
-In software documentation, "this" frequently refers to a condition, an error state, a configuration, or a result described in the previous sentence. If the reader cannot immediately identify the referent, the instruction or explanation becomes unclear and can lead to incorrect implementation.
 
 ### Examples
 
-> **Non-STE:** Make sure that the connection is not closed. If it is, this can cause failure of the request.
+> **Do not write:** Make sure that the cover is not locked (this can cause damage to the probe).
 >
-> (Does "this" refer to the connection in the closed condition or to the connection in the not-closed condition?)
+> (Which is the cause of damage to the probe? The cover in the locked condition? Or the cover in the unlocked condition?)
 
-> **STE:** Make sure that the connection is not closed. If the connection is closed, this can cause failure of the request.
+> **WRITE:** Make sure that the cover is not locked. If the cover is locked, this can cause damage to the probe.
+>
+> Or: If the cover is locked, damage to the probe can occur.
 
-(The context is repeated so that the reader knows "this" refers to the closed condition.)
-*Adapted from spec pair: "Make sure that the cover is not locked. If it is, this can cause damage to the probe." / "Make sure that the cover is not locked. If the cover is locked, this can cause damage to the probe."*
+> **Do not write:** Do not use crocus cloth on aluminum parts. If you do this, you can cause corrosion on aluminum parts. Crocus cloth contains ferrous oxide.
+>
+> **WRITE:** Do not use crocus cloth on aluminum parts. Crocus cloth contains ferrous oxide, which can cause corrosion on aluminum parts.
 
-Or:
+## Adapted Rule
 
-> **STE:** If the connection is closed, failure of the request can occur.
+When you use the pronoun "this" in a sentence, make sure that the reader knows the item the pronoun refers to. If "this" can refer to more than one item, give the applicable context again.
 
-*Adapted from spec alternative: "If the cover is locked, damage to the probe can occur."*
+### Examples
 
-> **Non-STE:** Check that the environment variable is set. If it is not, this can prevent the build from completing.
+> **Non-STE:** Make sure that the cache is not locked (this can cause a stale read).
 >
-> (Does "this" refer to the variable being not set, or to the act of checking?)
+> (Which is the cause of the stale read? The cache in the locked condition? Or the cache in the unlocked condition?)
 
-> **STE:** Check that the environment variable is set. If the environment variable is not set, this condition can prevent the build from completing.
+> **STE:** Make sure that the cache is not locked. If the cache is locked, this can cause a stale read.
+>
+> Or: If the cache is locked, a stale read can occur.
 
-*Adapted from spec pattern: repeat the applicable context to disambiguate "this."*
+(The first STE version repeats "the cache is locked" so "this" has one clear referent. The second removes "this" entirely and states the consequence directly.)
 
-> **Non-STE:** Verify that the function returns a non-null value. If it does not, this can cause a runtime error in the caller.
+> **Non-STE:** Do not use `console.log` in production code. If you do this, you can cause a performance problem. `console.log` writes to the standard output synchronously.
 >
-> **STE:** Verify that the function returns a non-null value. If the function returns a null value, this null value can cause a runtime error in the caller.
+> **STE:** Do not use `console.log` in production code. `console.log` writes to the standard output synchronously, which can cause a performance problem.
 
-*Adapted from spec pattern: replace the pronoun with the explicit referent to remove ambiguity.*
+(The "this" version is ambiguous because "this" could refer to "use `console.log`" or to "production code." The STE version binds the cause to `console.log` with "which.")
 
-> **Non-STE:** The server validates the token and then processes the request. This can take several seconds.
+> **Non-STE:** Close the file handle before you exit the process (this prevents a descriptor leak).
 >
-> (Does "This" refer to the validation, to the request processing, or to both?)
->
-> **STE:** The server validates the token and then processes the request. The full validation and processing sequence can take several seconds.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (The context is repeated so that the reader knows "This" refers to both actions together.)
+> **STE:** Close the file handle before you exit the process. If you do not close the file handle, a descriptor leak can occur.
 
-> **Non-STE:** Make sure the cache is not stale. This can cause incorrect data to be returned.
->
-> (Does "This" refer to the cache being stale or to the act of making sure?)
->
-> **STE:** Make sure the cache is not stale. A stale cache can cause incorrect data to be returned.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (Replacing "This" with "A stale cache" clarifies that the stale condition causes the problem.)
+("This" after a parenthetical is a frequent ambiguity source. Restate the condition and the consequence without the pronoun.)
 
-> **Non-STE:** The function accepts a callback and a timeout parameter. This is optional.
->
-> (Does "This" refer to the callback, to the timeout parameter, or to both?)
->
-> **STE:** The function accepts a callback and a timeout parameter. The timeout parameter is optional.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (The specific noun "The timeout parameter" replaces "This" to remove the ambiguity.)
+## Code-Domain Explanation
 
-> **Non-STE:** Run the migration script and restart the server. This can cause downtime.
->
-> (Does "This" refer to running the migration, restarting the server, or both?)
->
-> **STE:** Run the migration script and restart the server. Restarting the server can cause downtime.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (The explicit referent "Restarting the server" tells the reader which action causes the downtime.)
+GR-4 is a focused form of GR-3. The pronoun "this" most often appears at the start of a clause or inside parentheses, where it can float between two nearby nouns. In code documentation the two nouns are frequently a component and an action, and the reader cannot tell which one "this" modifies.
 
-> **Non-STE:** The build pipeline compiles the source and runs the test suite. If this fails, check the logs.
->
-> (Does "This" refer to the compilation, the test suite, or the entire pipeline?)
->
-> **STE:** The build pipeline compiles the source and runs the test suite. If the test suite fails, check the logs.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (The specific referent "the test suite" replaces "this" to tell the reader what to check.)
+Three fixes, in order of preference:
 
-> **Non-STE:** The middleware checks the rate limit and the authentication state. This must be configured in the settings file.
->
-> (Does "This" refer to the middleware, the rate limit, the authentication state, or all of them?)
->
-> **STE:** The middleware checks the rate limit and the authentication state. The rate limit and the authentication state must be configured in the settings file.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (The explicit referents "The rate limit and the authentication state" remove the ambiguity.)
+1. **Restate the referent.** "Make sure that the cache is not locked. If the cache is locked, this can cause a stale read." The repetition removes all doubt.
+2. **State the consequence directly.** "If the cache is locked, a stale read can occur." No pronoun, no ambiguity.
+3. **Bind with "which."** "The `console.log` call writes synchronously, which can cause a performance problem." The "which" clause attaches to the nearest complete idea.
 
-> **Non-STE:** The logger writes to stdout and to a file. You can disable this in the configuration.
->
-> (Does "This" refer to stdout output, file output, or both?)
->
-> **STE:** The logger writes to stdout and to a file. You can disable file logging in the configuration.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (The specific term "file logging" replaces "this" to tell the reader which output is affected.)
+Avoid the pattern "Do X. If you do this, Y" when "this" could mean X or the surrounding context. Name the cause.
 
-> **Non-STE:** The API returns a status code and a response body. This indicates whether the request succeeded.
->
-> (Does "This" refer to the status code, the response body, or both?)
->
-> **STE:** The API returns a status code and a response body. The status code indicates whether the request succeeded.
->
-> *Adapted from spec pattern: repeat the applicable context to disambiguate "This."*
->
-> (Replacing "This" with "The status code" specifies which part of the response carries the success indicator.)
+## Edge Cases
+
+### "This" as a determiner versus a pronoun
+
+"This" can be a determiner ("use this function") or a pronoun ("this causes a leak"). GR-4 applies to the pronoun use. As a determiner, "this" is clear when it directly precedes the noun it modifies ("use this function," not "use this"). When "this" stands alone as a pronoun, apply the rule above.
+
+### "This" at the start of a sentence after a list
+
+When a sentence starts with "This" after a list of items, the referent is usually the whole list, not one item. State the list result instead: "These three steps prepare the environment" is clearer than "This prepares the environment" when the reader must know that all three steps matter.
+
+## Cross-References
+
+- **GR-3 (How to Use Pronouns):** The general rule for pronoun clarity. GR-4 is the "this" special case.
+- **Rule 9.2 (Use Each Approved Word Correctly):** Use "this" only as the approved pronoun. Do not use it where a noun is required for clarity.
+- **Rule 4.1 (Sentence Structure):** Keep the referent and "this" in the same or adjacent sentence so the link stays clear.

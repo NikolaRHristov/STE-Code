@@ -1,6 +1,7 @@
 # Rule 1.9 — When You Must Select a Technical Noun, Use One Which Is Short and Easy to Understand
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.9
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.9](ste-code/grouped/), Rule 1.9
 
 ## Original Rule
 

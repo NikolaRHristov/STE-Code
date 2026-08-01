@@ -1,6 +1,7 @@
 # Rule 6.5 — Make Sure That Each Paragraph Has Only One Topic
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 6.5
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec6-rule6.5](ste-code/grouped/), Rule 6.5
 
 ## Original Rule
 

@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 8.1
 
+> **Source:** [master.md#sec8-rule8.1](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 8.1** You can use all standard English punctuation marks but not the semicolon (;).
@@ -365,7 +367,7 @@ STE-Code does not permit this usage. The super-comma forces the reader to mainta
 
 Many programming languages use the semicolon as a statement terminator (C, C++, Java, JavaScript, Rust, Go, and others). Developers who write documentation for these languages have deeply ingrained muscle memory for the semicolon. They read and write semicolons thousands of times per day in code. When switching to documentation prose, this muscle memory can cause unconscious semicolon insertion — the writer types a semicolon out of habit, not because the sentence needs one.
 
-This cognitive interference is unique to code documentation. An aerospace technical writer does not type semicolons in a C compiler all day before writing the aircraft maintenance manual. The code documentation writer does. Rule 8.1 is therefore more important — and harder to obey — in code documentation than in the original aerospace domain. Review your documentation prose separately from your code. Look specifically for semicolons that belong in code but not in prose.
+This cognitive interference is unique to code documentation. A technical writer who documents a language that uses the semicolon as a statement terminator types semicolons thousands of times per day in source files. When that writer switches to documentation prose, the habit can cause unconscious semicolon insertion. Rule 8.1 is therefore more important — and harder to obey — in code documentation than in general-purpose prose. Review your documentation prose separately from your code. Look specifically for semicolons that belong in code but not in prose.
 
 ### The Period as the Only Sentence Boundary
 

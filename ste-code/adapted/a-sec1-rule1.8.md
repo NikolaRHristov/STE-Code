@@ -1,6 +1,7 @@
 # Rule 1.8 — Use Technical Nouns That Are Approved in Your Company, Industry, or Subject Field
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.8
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.8](ste-code/grouped/), Rule 1.8
 
 ## Original Rule
 

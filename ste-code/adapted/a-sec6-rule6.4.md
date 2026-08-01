@@ -1,6 +1,7 @@
 # Rule 6.4 — Use Paragraphs to Show Related Information
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 6.4
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec6-rule6.4](ste-code/grouped/), Rule 6.4
 
 ## Original Rule
 

@@ -1,6 +1,7 @@
 # Rule 6.3 — Write Short Sentences. Use a Maximum of 25 Words in Each Sentence.
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 6.3
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec6-rule6.3](ste-code/grouped/), Rule 6.3
 
 ## Original Rule
 

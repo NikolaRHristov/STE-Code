@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 8.2
 
+> **Source:** [master.md#sec8-rule8.2](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 8.2** Use hyphens (-) to connect words that are directly related.

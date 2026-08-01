@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 8.5
 
+> **Source:** [master.md#sec8-rule8.5](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 8.5** When you put text in parentheses, it counts as one word in that sentence.
@@ -299,18 +301,18 @@ A declarative-specific violation: the writer uses parentheses to embed migration
 Example of a violation in a Terraform variable description:
 
 ````
-The engine_version variable sets the database engine version (in
+The schema_version variable sets the database schema version (in
 version 1.x of this module the default was "13" but in version 2.x
 the default changed to "15" — if you are upgrading from 1.x you
 must run the database migration script before changing this value
 to avoid data loss, and you should also update the parameter group
-family to match the new engine version).
+family to match the new schema version).
 ````
 
 The fix:
 
 ````
-The engine_version variable sets the database engine version. The
+The schema_version variable sets the database schema version. The
 default value is "15".
 
 BREAKING: The default value changed from "13" in version 1.x to
@@ -389,7 +391,7 @@ If any of these conditions is not obeyed, the behavior is undefined.
 
 ### Example 8 — Error Message: Error Code with Recovery Hint
 
-> **Non-STE:** Failed to bind to port 8080 because the address is already in use by another process that was started previously and is still holding the socket open on that port number (you can identify the process using the lsof -i :8080 command and then terminate it with kill followed by the process ID, or you can configure this application to use a different port by setting the PORT environment variable to an alternative value such as 3000 or 9090 before restarting).
+> **Non-STE:** Failed to bind to port 8080 because the address is already in use by another process that was started previously and is still holding the socket open on that port number (you can identify the process using the lsof -i :8080 command and then stop it with kill followed by the process ID, or you can configure this application to use a different port by setting the PORT environment variable to an alternative value such as 3000 or 9090 before restarting).
 >
 > **STE:** Cannot bind to port 8080 (EADDRINUSE). The address is in use. To find the process, run `lsof -i :8080`. To use a different port, set the PORT environment variable (example: 3000). Then restart the application.
 >
@@ -533,12 +535,12 @@ If the information is important enough to include, it is important enough to be 
 >
 > *Principles applied: Rule 8.5 (no parenthetical used for safety information), P3 (use approved meanings). The original buried undefined behavior warnings in a parenthetical. The fix promotes each precondition to its own sentence.*
 
-### Historical Context and Aerospace Origins
+### Historical Context and Domain Origins
 
-The ASD-STE100 parentheses rule (Rule 8.5 in the original specification) was designed for aircraft maintenance manuals, where parenthetical text often contains part numbers, tool identifiers, torque values, and safety condition clarifications. The dual counting system ensures that a maintenance technician can read the main procedural sentence (counting the parenthetical as one word) without the parenthetical inflating the sentence length, while the parenthetical's internal text remains constrained to prevent burying critical information.
+The ASD-STE100 parentheses rule (Rule 8.5 in the original specification) was designed for technical manuals, where parenthetical text often contains part numbers, tool identifiers, measurement values, and safety condition clarifications. The dual counting system ensures that a reader can read the main procedural sentence (counting the parenthetical as one word) without the parenthetical inflating the sentence length, while the parenthetical's internal text remains constrained to prevent burying critical information.
 
-In aerospace maintenance, a parenthetical like `(torque to 50-55 lbf-ft)` is an explanatory parenthetical that forms a separate procedural sentence. The technician reads the main step, then reads the parenthetical for the specific parameter. The word-count limit on the parenthetical prevents the parameter from being buried in a sea of text.
+In a technical manual, a parenthetical like `(set the parameter to 50-55 Nm)` is an explanatory parenthetical that forms a separate procedural sentence. The reader reads the main step, then reads the parenthetical for the specific parameter. The word-count limit on the parenthetical prevents the parameter from being buried in a sea of text.
 
-In code documentation, the same principle applies with different nouns. Instead of torque values, the parenthetical contains error codes, default values, version numbers, and rationale. The structural need is identical: the main sentence carries the action or description, and the parenthetical carries the qualifying detail. The aerospace origin of the rule is a reminder that parentheticals are not dumping grounds — they are structured asides with their own sentence discipline.
+In code documentation, the same principle applies with different nouns. Instead of measurement values, the parenthetical contains error codes, default values, version numbers, and rationale. The structural need is identical: the main sentence carries the action or description, and the parenthetical carries the qualifying detail. The rule is a reminder that parentheticals are not dumping grounds — they are structured asides with their own sentence discipline.
 
-The original aerospace rule also emphasizes that parentheses should not be used to hide information the technician must see. The same applies to code documentation: do not use parentheses to hide deprecation warnings, breaking change notices, or safety-critical conditions. These deserve their own sentences, their own paragraphs, or their own labeled blocks (BREAKING, DEPRECATED, NOTE).
+The original rule also emphasizes that parentheses should not be used to hide information the reader must see. The same applies to code documentation: do not use parentheses to hide deprecation warnings, breaking change notices, or safety-critical conditions. These deserve their own sentences, their own paragraphs, or their own labeled blocks (BREAKING, DEPRECATED, NOTE).

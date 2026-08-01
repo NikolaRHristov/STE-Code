@@ -2,6 +2,8 @@
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 8.4
 
+> **Source:** [master.md#sec8-rule8.4](ste-code/grouped/)
+
 ## Original Rule
 
 **Rule 8.4** In a vertical list, a colon (:) has the same effect on word count as a period and shows the end of a sentence.
@@ -539,8 +541,8 @@ Some writers use an em-dash (—) instead of a colon to introduce a vertical lis
 
 If you encounter a vertical list introduced by an em-dash, replace the em-dash with a colon. Count the words in the introduction as usual. The replacement is mechanical and does not require rewriting the introduction.
 
-### Historical Context and Aerospace Origins
+### Historical Context and Domain Origins
 
-The ASD-STE100 vertical list rule (Rule 8.4 in the original specification) was designed for aircraft maintenance manuals, where a vertical list of components, tools, or steps is the primary documentation format. The colon divides the procedural context ("To remove the fuel pump, disconnect these hoses:") from the actionable items. The word-count limit prevents the context from overwhelming the items.
+The ASD-STE100 vertical list rule (Rule 8.4 in the original specification) was designed for technical manuals, where a vertical list of components, tools, or steps is the primary documentation format. The colon divides the procedural context ("To remove the pump, disconnect these hoses:") from the actionable items. The word-count limit prevents the context from overwhelming the items.
 
-In code documentation, the same principle applies with different nouns. Instead of "hoses" and "fuel pumps," the list enumerates parameters, return values, exceptions, dependencies, or steps. The structural need is identical: a short context-setter followed by a scannable list of items. The aerospace origin of the rule is a reminder that this structure has been tested in high-stakes operational environments where misreading a list item can cause physical harm. In software, the stakes are lower but the readability benefit is the same.
+In code documentation, the same principle applies with different nouns. Instead of "hoses" and "pumps," the list enumerates parameters, return values, exceptions, dependencies, or steps. The structural need is identical: a short context-setter followed by a scannable list of items. The rule has been tested in high-stakes operational environments where misreading a list item causes real harm. In software, the stakes are lower but the readability benefit is the same.

@@ -1,6 +1,7 @@
 # Rule 1.4 — Use Only the Approved Forms of Verbs and Adjectives
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.4
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.4](ste-code/grouped/), Rule 1.4
 
 ## Original Rule
 

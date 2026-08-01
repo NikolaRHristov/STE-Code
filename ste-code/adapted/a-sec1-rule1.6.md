@@ -1,6 +1,7 @@
 # Rule 1.6 — Use a Word That Is Not Approved in the Dictionary, Only When It Is a Technical Noun or Part of a Technical Noun
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.6
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.6](ste-code/grouped/), Rule 1.6
 
 ## Original Rule
 

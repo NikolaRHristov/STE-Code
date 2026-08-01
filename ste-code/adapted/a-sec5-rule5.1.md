@@ -1,6 +1,7 @@
 # Rule 5.1 — Short Sentences (Maximum 20 Words)
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 5.1
+> **Source:** [master.md#sec5-rule5.1](ste-code/grouped/)
 
 ## Original Rule
 
@@ -44,7 +45,7 @@ This rule applies to sentences in procedural documentation text. Code snippets, 
 >
 > **STE:** Run the database migration script from the project root directory. (9 words) Then, restart the application server to apply all pending schema changes. (13 words)
 >
-> *Adapted from spec pair: "Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover." (25 words) / "Put preservation oil into the unit through the vent hole." (10 words) "Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover." (16 words)*
+> *Source pairing: the long-sentence-to-two-shorter-sentences split in the Non-STE/STE pair directly above follows the same principle as the original STE example in Rule 5.1.*
 
 > **Non-STE:** The initialization process will automatically create the required directory structure and populate it with default configuration files before the application starts. (22 words)
 >
@@ -60,7 +61,7 @@ This rule applies to sentences in procedural documentation text. Code snippets, 
 
 > **CAUTION:** IF YOU DELETE THE CONFIGURATION DIRECTORY WITHOUT A BACKUP, YOU CANNOT RESTORE THE APPLICATION SETTINGS TO THEIR PREVIOUS STATE. (18 words)
 >
-> *Adapted from spec example: "WHEN YOU REMOVE THE SHROUD (26), BE CAREFUL NOT TO CAUSE DAMAGE TO THE SURFACE OF THE FLANGE ASSEMBLY (22)." (20 words)*
+> *Adapted from spec example: a CAUTION that stays within the 20-word limit on destructive operations — see the original STE example in Rule 5.1.*
 
 > **Non-STE:** For more detailed information about the supported authentication methods and their respective configuration parameters in this release, please refer to the official authentication module documentation page. (27 words)
 > **STE (note):** For more information about the supported authentication methods, refer to the authentication module documentation. (15 words)

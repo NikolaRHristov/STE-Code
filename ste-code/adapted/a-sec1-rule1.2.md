@@ -1,6 +1,7 @@
 # Rule 1.2 — Use Approved Words Only as the Specified Part of Speech
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.2
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.2](ste-code/grouped/), Rule 1.2
 
 ## Original Rule
 

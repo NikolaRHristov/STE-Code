@@ -1,6 +1,7 @@
 # Rule 5.3 — Imperative (Command) Form for Instructions
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 5.3
+> **Source:** [master.md#sec5-rule5.3](ste-code/grouped/)
 
 ## Original Rule
 
@@ -222,7 +223,7 @@ Restart the application server.
 >
 > **STE:** Remove the old log files before the new deployment.
 >
-> *Adapted from spec pair: "Oil and grease are to be removed with a degreasing agent." → "Remove oil and grease with a degreasing agent."*
+> *Source pairing: a passive "are to be" construction becomes a direct imperative — follows the same principle as the original STE example in Rule 5.3.*
 
 > **Non-STE:** The configuration file should be validated against the schema before the application is started.
 >
@@ -250,11 +251,11 @@ Restart the application server.
 | --- | --- |
 | WRITE: | Before you delete the branch, push all local commits to the remote repository. |
 
-> *Adapted from spec pair: "Before you remove the clamp, you must disconnect the hose." → "Before you remove the clamp, disconnect the hose."*
+> *Source pairing: drop "must" before a standard imperative — follows the same principle as the original STE example in Rule 5.3.*
 
 > **WARNING:** IF YOU MUST STORE CREDENTIALS IN THE CONFIGURATION FILE, ALWAYS USE AN ENCRYPTED SECRETS MANAGER. PLAIN-TEXT CREDENTIALS CAN CAUSE SECURITY BREACHES.
 >
-> *Adapted from spec: "WARNING: IF YOU MUST CUT THE WIRE, ALWAYS USE A PROTECTIVE MASK. PIECES OF WIRES CAN CAUSE INJURY."*
+> *Source pairing: reserve "must" for a security-critical condition — follows the same principle as the original STE example in Rule 5.3.*
 
 ("Must" is correct here because the instruction is critical for security. The warning format signals the importance to the reader.)
 

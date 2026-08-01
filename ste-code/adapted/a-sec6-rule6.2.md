@@ -1,6 +1,7 @@
 # Rule 6.2 — Use Key Words and Key Phrases to Give Your Text a Logical Structure
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 6.2
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec6-rule6.2](ste-code/grouped/), Rule 6.2
 
 ## Original Rule
 

@@ -1,6 +1,7 @@
 # Rule 1.11 — Do Not Use Different Technical Nouns for the Same Item
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.11
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.11](ste-code/grouped/), Rule 1.11
 
 ## Original Rule
 

@@ -1,10 +1,12 @@
 # GR-3 — How to Use Pronouns
 
-> **Source:** Adapted from ASD-STE100 Issue 9, GR-3
+> **Source:** Adapted from ASD-STE100 Issue 9, General Recommendation GR-3
+
+> **Source:** [master.md#sec9-gr3](ste-code/grouped/)
+
+> Source: master.md#sec9-gr3
 
 ## Original Rule
-
-How to use pronouns (general recommendation, not an STE rule).
 
 Pronouns refer to a person, a location, or an item that is already in a text. Examples of pronouns are "it," "they," "that," "these," and "those." If you use the pronouns correctly, your text will be easy to read.
 
@@ -12,98 +14,74 @@ In STE, the approved pronouns are in the dictionary. Do not use a pronoun if it 
 
 If a pronoun can refer to one or more nouns in a text, it can cause ambiguity in a sentence. If there is ambiguity, replace the pronoun with the word that it refers to. This will make the sentence clear and easier to read.
 
-## STE-Code Adaptation
+### Examples
 
-In code documentation, pronouns refer to an item, a concept, or an entity that is already in the text. Examples of approved pronouns include "it," "they," "that," "these," and "those." Do not use pronouns that are not in the controlled terminology.
+> **Do not write:** If you engage the pins incorrectly with the seats, they can become damaged.
+>
+> **WRITE:** If you engage the pins incorrectly with the seats, the pins can become damaged.
+>
+> Or: If you engage the pins incorrectly with the seats, the seats can become damaged.
+>
+> Or: If you engage the pins incorrectly with the seats, the pins and seats can become damaged.
 
-If a pronoun can refer to one or more nouns in a text, it can cause ambiguity. In code documentation, this is especially important because the reader must understand precisely which component, function, module, or parameter is affected. If there is ambiguity, replace the pronoun with the specific word that it refers to. This makes the sentence clear and prevents the reader from taking the wrong action.
+## Adapted Rule
+
+Pronouns refer to a person, a location, or an item that is already in a text. Examples of pronouns are "it," "they," "that," "these," and "those." If you use the pronouns correctly, your text will be easy to read.
+
+In code documentation, the approved pronouns are in the controlled terminology. Do not use a pronoun if it is not in the controlled terminology (for example, "she" or "he").
+
+If a pronoun can refer to one or more nouns in a text, it can cause ambiguity in a sentence. If there is ambiguity, replace the pronoun with the word that it refers to. This will make the sentence clear and easier to read.
 
 ### Examples
 
-> **Non-STE:** If you configure the middleware before the route handler, it can block the request.
+> **Non-STE:** If you call the API incorrectly with the credentials, they can become invalid.
 >
-> **STE:** If you configure the middleware before the route handler, the middleware can block the request.
+> **STE:** If you call the API incorrectly with the credentials, the credentials can become invalid.
 >
-> *Adapted from spec rule: "If a pronoun can refer to one or more nouns in a text, it can cause ambiguity... replace the pronoun with the word that it refers to." — "it" replaced by "the middleware."*
+> Or: If you call the API incorrectly with the credentials, the API can become invalid.
 >
-> (The pronoun "it" can refer to either "the middleware" or "the route handler." Replacing "it" with "the middleware" makes the sentence clear.)
+> Or: If you call the API incorrectly with the credentials, the API and the credentials can become invalid.
 
-Or:
+(Without the repetition, "they" could mean the API, the credentials, or both. State the referent so the reader knows what becomes invalid.)
 
-> **STE:** If you configure the middleware before the route handler, the route handler can block the request.
+> **Non-STE:** When you update the record and the index, make sure that it is consistent.
+>
+> **STE:** When you update the record and the index, make sure that the index is consistent.
+>
+> Or: When you update the record and the index, make sure that the record is consistent.
 
-Or:
+("It" refers to either "the record" or "the index." Replace "it" with the correct noun.)
 
-> **STE:** If you configure the middleware before the route handler, the middleware and the route handler can block the request.
+> **Non-STE:** The function returns a value. If it is null, log a warning.
+>
+> **STE:** The function returns a value. If the value is null, log a warning.
 
-> **Non-STE:** If you pass the socket to the handler function before it is initialized, it can fail.
->
-> **STE:** If you pass the socket to the handler function before the socket is initialized, the handler function can fail.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — both ambiguous "it" pronouns are resolved to their specific referents.*
->
-> (The first "it" refers to "the socket"; the second "it" is ambiguous. Replace both pronouns with the specific nouns to make the sentence clear.)
+("It" could refer to the function or the value. State "the value" to remove the ambiguity.)
 
-> **Non-STE:** The cache stores results from the database query. They expire after one hour.
->
-> **STE:** The cache stores results from the database query. The cached results expire after one hour.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — "They" replaced by "The cached results."*
->
-> (The pronoun "They" can refer to "results" or "the database query." Replacing "They" with "The cached results" makes the sentence clear.)
+## Code-Domain Explanation
 
-> **Non-STE:** When you call this endpoint, it returns the user profile with their permissions.
->
-> **STE:** When you call this endpoint, the endpoint returns the user profile with the user's permissions.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — "it" replaced by "the endpoint," and the unapproved pronoun "their" replaced by "the user's."*
->
-> (The pronoun "it" is ambiguous — it can refer to "this endpoint" or to the act of calling. The pronoun "their" is not in the controlled vocabulary.)
+GR-3 prevents pronoun ambiguity, which is common in code documentation because sentences frequently name two or more technical items (a function and its argument, a service and its dependency, a record and its index). When a pronoun like "it" or "they" sits between two possible referents, the reader must guess.
 
-> **Non-STE:** The parser scans the input stream and tokenizes it. That makes it available to the compiler pass.
->
-> **STE:** The parser scans the input stream and tokenizes the input stream. The tokenization makes the tokenized stream available to the compiler pass.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — all three ambiguous pronouns are resolved to their specific referents.*
->
-> (The first "it" refers to "the input stream." "That" refers to the tokenization process. The second "it" refers to the tokenized stream. Replace each pronoun with the specific noun.)
+Two practices remove the ambiguity:
 
-> **Non-STE:** These variables control the connection timeout. Set them before you start the application.
->
-> **STE:** These variables control the connection timeout. Set the timeout variables before you start the application.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — "them" replaced by "the timeout variables."*
->
-> (The pronoun "them" can refer to "These variables" or to some other variables in an earlier sentence. Repeating the noun prevents ambiguity.)
+1. **Repeat the noun.** When the referent is unclear, write the noun again. This adds words but removes doubt. In code documentation, clarity wins over brevity.
+2. **Keep the referent close.** When you must use a pronoun, put the noun it refers to in the same sentence or the immediately preceding one.
 
-> **Non-STE:** The module exports two functions. Use those when you process user input.
->
-> **STE:** The module exports two functions. Use the exported functions when you process user input.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — "those" replaced by "the exported functions."*
->
-> (The pronoun "those" can refer to "two functions" or to other items in the surrounding text. The explicit noun removes the ambiguity.)
+The rule also restricts pronouns to the approved set. Gender-specific pronouns ("he," "she") are not permitted (see GR-7, Inclusive Language). Use "you" for the reader, "it" for a single item, and "they" or "these"/"those" for plural items that are already named.
 
-> **Non-STE:** The API key is stored in the configuration file. Make sure it is valid before you deploy.
->
-> **STE:** The API key is stored in the configuration file. Make sure the API key is valid before you deploy.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — "it" replaced by "the API key."*
->
-> (The pronoun "it" can refer to "The API key" or to "the configuration file." Replacing "it" with the specific noun makes the instruction unambiguous.)
+## Edge Cases
 
-> **Non-STE:** The loop iterates over the array and the index. When it reaches the last element, the loop stops.
->
-> **STE:** The loop iterates over the array and the index. When the loop reaches the last element, the loop stops.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — "it" replaced by "the loop."*
->
-> (The pronoun "it" can refer to "the loop," "the array," or "the index." Replacing "it" with "the loop" removes the ambiguity.)
+### Pronouns that refer to code symbols
 
-> **Non-STE:** If the configuration uses the default settings, it will override your custom values.
->
-> **STE:** If the configuration uses the default settings, the default configuration will override your custom values.
->
-> *Adapted from spec rule: "replace the pronoun with the word that it refers to" — "it" replaced by "the default configuration."*
->
-> (The pronoun "it" can refer to "the configuration" or to "the default settings." The corrected sentence specifies that the default configuration does the overriding.)
+When a pronoun refers to a code symbol in code font, the symbol is a technical noun (Rule 1.5). The pronoun still must be approved, and it still must have a clear referent. "The function `parse()` returns a token. If it is empty, stop." — here "it" clearly refers to "a token," not to `parse()`. Keep the distance short.
+
+### "They" as a plural technical noun
+
+"The modules can fail. If they fail, retry." is clear because "they" refers to "the modules" in the preceding sentence. When the preceding sentence names both modules and a server, repeat the noun: "If the modules fail, retry."
+
+## Cross-References
+
+- **GR-4 (The Pronoun "this"):** A special case of pronoun clarity. "This" at the start of a sentence must have an unambiguous referent.
+- **Rule 9.2 (Use Each Approved Word Correctly):** Use only approved pronouns. Do not introduce "he," "she," or other non-approved pronouns.
+- **Rule 4.1 (Sentence Structure):** Short sentences with the noun and its pronoun close together reduce ambiguity.
+- **GR-7 (Inclusive Language):** Gender-specific pronouns are not permitted; use neutral constructions.

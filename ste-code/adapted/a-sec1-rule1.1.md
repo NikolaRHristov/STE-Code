@@ -1,6 +1,7 @@
 # Rule 1.1 — Use Words That Are Approved in the Dictionary, Technical Nouns, or Technical Verbs
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.1
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.1](ste-code/grouped/), Rule 1.1
 
 ## Original Rule
 

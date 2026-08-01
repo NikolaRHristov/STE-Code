@@ -1,6 +1,7 @@
 # Rule 1.13 — Do Not Use Technical Verbs as Nouns
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.13
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.13](ste-code/grouped/), Rule 1.13
 
 ## Original Rule
 

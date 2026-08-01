@@ -1,6 +1,7 @@
 # Rule 1.3 — Use Approved Words Only with Their Approved Meanings
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.3
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.3](ste-code/grouped/), Rule 1.3
 
 ## Original Rule
 

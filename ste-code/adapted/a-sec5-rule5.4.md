@@ -1,6 +1,7 @@
 # Rule 5.4 — Descriptive Statement Before the Command
 
 > **Source:** Adapted from ASD-STE100 Issue 9, Rule 5.4
+> **Source:** [master.md#sec5-rule5.4](ste-code/grouped/)
 
 ## Original Rule
 
@@ -129,7 +130,7 @@ Error messages must tell the user what went wrong and what to do. The condition-
 >
 > **STE:** Before you change the database schema, shut down the application server and stop all background worker processes that connect to the database.
 >
-> *Adapted from spec pair: "Before you remove the clamp, you must disconnect the hose." → "Before you remove the clamp, disconnect the hose."*
+> *Source pairing: condition first, comma, then command — follows the same principle as the original STE example in Rule 5.4.*
 
 (The comma separates the condition from the instruction. The reader evaluates the condition first.)
 
@@ -137,7 +138,7 @@ Error messages must tell the user what went wrong and what to do. The condition-
 >
 > **STE:** If the connection pool has reached its maximum capacity, disconnect the active client sessions.
 >
-> *Adapted from spec: "If the Constant Speed Drive (CSD) does not operate correctly, disconnect it from the gearbox." — condition first, comma, then command.*
+> *Source pairing: condition first, comma, then command — follows the same principle as the original STE example in Rule 5.4.*
 
 (The condition comes first. The comma separates the descriptive "if" clause from the command "disconnect.")
 
@@ -165,11 +166,11 @@ Comma placement changes meaning:
 > If the service does not start automatically, restart it with the recovery script.
 > (The comma after "automatically" shows that "automatically" modifies the verb "start." The reader must restart the service manually if it does not start automatically.)
 
-> *Adapted from spec: "If the Constant Speed Drive (CSD) does not operate correctly, disconnect it from the gearbox." vs. "If the Constant Speed Drive (CSD) does not operate, correctly disconnect it from the gearbox." — comma placement changes which verb the adverb modifies.*
+> *Source pairing: comma placement changes which verb an adverb modifies — follows the same principle as the original STE example in Rule 5.4.*
 
 > **WARNING:** IF YOU MUST DELETE THE ENCRYPTION KEY, ALWAYS VERIFY THAT NO ACTIVE SESSIONS USE THE KEY. DELETING AN ACTIVE ENCRYPTION KEY CAN CAUSE PERMANENT DATA LOSS.
 >
-> *Adapted from spec: "WARNING: IF YOU MUST CUT THE WIRE, ALWAYS USE A PROTECTIVE MASK. PIECES OF WIRES CAN CAUSE INJURY." — condition first in a safety instruction.*
+> *Source pairing: condition first in a safety instruction — follows the same principle as the original STE example in Rule 5.4.*
 
 (The condition "IF YOU MUST DELETE THE ENCRYPTION KEY" comes first, followed by a comma and the safety instruction.)
 

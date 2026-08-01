@@ -1,6 +1,7 @@
 # Rule 9.1 — Use a Different Sentence Construction to Write a Sentence When a Word-for-Word Replacement Is Not Sufficient
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 9.1
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec9-rule9.1](ste-code/grouped/), Rule 9.1
 
 ## Original Rule
 

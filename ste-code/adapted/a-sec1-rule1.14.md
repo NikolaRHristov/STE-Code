@@ -1,6 +1,7 @@
 # Rule 1.14 — Use American English Spelling Unless Other Official Directives Tell You Differently
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.14
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.14](ste-code/grouped/), Rule 1.14
 
 ## Original Rule
 

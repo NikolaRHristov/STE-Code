@@ -1,6 +1,7 @@
 # Rule 9.4 — When You Select Terminology or Wording, Always Use a Consistent Style
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 9.4
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec9-rule9.4](ste-code/grouped/), Rule 9.4
 
 ## Original Rule
 

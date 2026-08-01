@@ -1,6 +1,7 @@
 # Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.12
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec1-rule1.12](ste-code/grouped/), Rule 1.12
 
 ## Original Rule
 

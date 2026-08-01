@@ -1,6 +1,7 @@
 # Rule 6.1 — Give Information Gradually
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 6.1
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec6-rule6.1](ste-code/grouped/), Rule 6.1
 
 ## Original Rule
 

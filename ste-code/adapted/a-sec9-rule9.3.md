@@ -1,6 +1,7 @@
 # Rule 9.3 — When You Use Two Words Together, Do Not Make Phrasal Verbs
 
-> **Source:** Adapted from ASD-STE100 Issue 9, Rule 9.3
+> **Source:** Adapted from ASD-STE100 Issue 9
+> **Source:** [master.md#sec9-rule9.3](ste-code/grouped/), Rule 9.3
 
 ## Original Rule
 
