@@ -80,59 +80,110 @@ Top categories: comments, error messages, and config files.
 ```
 STE-Code/
 ├── README.md
+├── CONTRIBUTING.md            Contribution policy
+├── CODE_OF_CONDUCT.md
+├── CITATION.cff
+├── LICENSE                    MIT
+├── mkdocs.yml                 Documentation site config
+├── docs/                      Documentation site (MkDocs → GitHub Pages)
+│   ├── index.md               Home
+│   ├── pipeline.md            Six-stage A→F overview
+│   ├── stages/                stage-a.md … stage-f.md
+│   ├── contributing.md
+│   └── roadmap/               Roadmap, grounding report, state reconciliation
+├── spec/                      ASD-STE100 Issue 9 source (434 pages)
+│   └── issue-09-2025/page-dir/   Page files + MANIFEST.md
 ├── ste-code/
-│   ├── artifacts/
+│   ├── artifacts/             Stage F — deliverables + level prompts
 │   │   ├── level1/system-prompt.txt     ★ ~1.2K tokens
 │   │   ├── level2/system-prompt.txt     ★ ~4.5K tokens
 │   │   ├── level3/system-prompt.txt     ★ ~8K tokens
-│   │   ├── level4/system-prompt.txt     ★ ~45K tokens
-│   │   └── level5/                      ★ 51 rule summaries
-│   ├── adapted/               The standard (57 adapted files)
-│   ├── data/                  Structured JSON (vocabulary, synonyms)
+│   │   ├── level4/                      ★ rules + dictionary (~45K tokens)
+│   │   └── level5/                      ★ full rule summaries
+│   ├── extracted/             Stage A — raw page extraction (109 files)
+│   ├── refined/               Stage B — formatted pages (109 files)
+│   ├── grouped/               Stage C — 24 semantic groups
+│   ├── adapted/               Stage D — the standard, adapted to code
+│   ├── extensions/            Stage E — gap-fill entries (markdown + derived JSON)
+│   ├── enriched/              Enrichment pass output
+│   ├── data/                  Structured JSON (vocabulary, synonym table)
+│   ├── merged/                master-raw.md consolidation
 │   ├── templates/             Additional system prompts
-│   ├── merged/                master.md (full spec consolidation)
-│   ├── refined/               Stage 2 — formatted extraction
-│   └── extracted/             Stage 1 — raw extraction
-├── spec/                      ASD-STE100 Issue 9 source (434 pages)
-├── translations/              Translation scaffolding (9 locales)
+│   ├── linguistics/           Research notes, decision tree, contracts
+│   ├── audit/                 Audit reports
+│   └── _archive/              Superseded pipeline output
+├── translations/              Locale scaffolding (10 locales)
 └── .agents/                   Pipeline orchestration (agents, skills, config)
     ├── config/agents.yaml     Agent backend configuration
-    └── tools/                 Assembly scripts (agent-agnostic)
+    ├── benchmark/             59-test benchmark suite
+    └── tools/
+        ├── runners/           phase-a … phase-f runners + launch-downstream.sh
+        ├── extraction/  refinement/  grouping/
+        ├── adaptation/  extension/   artifacts/
+        ├── quality/  maintenance/  continuation/  benchmark/
+        └── lib/               Agent runner and shared infrastructure
 ```
 
 ---
 
 ## Agent-Agnostic Tools
 
-All assembly scripts use the agent runner at `.agents/tools/lib/agent-runner.py`. The default backend is Hermes. Add other agents in `.agents/config/agents.yaml`.
+All pipeline scripts use the agent runner at `.agents/tools/lib/agent-runner.py`. The default backend is Hermes. Add other agents in `.agents/config/agents.yaml`. The model is read from `STE_MODEL` (default `tencent/hy3:free`).
 
 ```bash
-# Assemble prompts (default: Hermes)
+# List available agent backends
+python3 .agents/tools/lib/agent-runner.py --list
+
+# Run one pipeline stage (see the stage table below)
+python3 .agents/tools/runners/phase-c-run.py --verify     # deterministic
+python3 .agents/tools/runners/phase-d-run.py --resume     # LLM workers
+
+# Run the downstream chain C→D→E→F
+bash .agents/tools/runners/launch-downstream.sh
+
+# Assemble the level prompts (all accept --agent <name> and --dry-run)
 python3 .agents/tools/refinement/assemble-level3.py
 python3 .agents/tools/refinement/assemble-level2.py
 python3 .agents/tools/refinement/assemble-level1.py
 
-# Use a different agent
-python3 .agents/tools/refinement/assemble-level1.py --agent claude
-
-# List available agents
-python3 .agents/tools/lib/agent-runner.py --list
+# Quality sweep and benchmark
+python3 .agents/tools/quality/sweep-quality.py --batches 5
+python3 .agents/benchmark/orchestrator.py
 ```
 
-For full documentation, see [`.agents/AGENTS.md`](.agents/AGENTS.md).
+Full documentation: the [documentation site](docs/index.md) and [`.agents/AGENTS.md`](.agents/AGENTS.md).
 
 ---
 
 ## Pipeline
 
-The standard was built from ASD-STE100 Issue 9 through a five-stage automated pipeline:
+The standard was built from ASD-STE100 Issue 9 by a six-stage pipeline (A→F). Every stage has a runner in `.agents/tools/runners/` and a deterministic verification gate.
 
 ```
-Extract → Refine → Merge → Adapt → Artifacts
-(434pp)   (109f)    (1f)    (57f)    (5 levels)
+A Extract → B Refine → C Group → D Adapt → E Extend → F Artifacts
+ (434 pp)    (109 f)    (24 f)    (58+ f)   (6 areas)   (deliverables)
 ```
 
-Nine specialized agents orchestrated 109 parallel workers. The adaptation replaced aerospace terms with code-domain equivalents.
+| Stage | Runner | Reads | Writes | Gate |
+|:-----:|--------|-------|--------|------|
+| **A** Extraction | `phase-a-run.py`, `phase-a-gen.py` | `spec/issue-09-2025/page-dir/` | `ste-code/extracted/` | size + page headers, 2 retries |
+| **B** Refinement | `phase-b-run.py`, `phase-b1-run.py` | `ste-code/extracted/` | `ste-code/refined/` | per-batch parity, `verify_continuation.py` |
+| **C** Grouping | `phase-c-run.py` | `ste-code/refined/` | `ste-code/grouped/` | `verify-groups.py` |
+| **D** Adaptation | `phase-d-run.py` | `ste-code/grouped/` | `ste-code/adapted/` | `verify-adaptation.py` |
+| **E** Extension | `phase-e-run.py` | gap areas | `ste-code/extensions/` | `verify_extensions.py` |
+| **F** Artifacts | `phase-f-run.py` | `ste-code/adapted/` | `ste-code/artifacts/` | `verify-artifacts.py` |
+
+Stages A, B, D, and E use LLM workers. Stages C and F are pure Python: grouping and assembly only move bytes, so content cannot be lost.
+
+```bash
+# Run the downstream chain C→D→E→F
+bash .agents/tools/runners/launch-downstream.sh
+
+# Grouping dry-run only (writes nothing)
+bash .agents/tools/runners/launch-downstream.sh --dry
+```
+
+Stage details: [docs/pipeline.md](docs/pipeline.md) and [docs/stages/](docs/stages/).
 
 ---
 

@@ -1,0 +1,40 @@
+site_name: STE-Code Documentation
+site_description: Simplified Technical English for code documentation — rules, levels, and the six-stage build pipeline.
+site_author: Nikola Hristov
+repo_url: https://github.com/NikolaRHristov/STE-Code
+repo_name: NikolaRHristov/STE-Code
+edit_uri: edit/Current/docs/
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: readthedocs
+  highlightjs: true
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - fenced_code
+
+exclude_docs: |
+  README.md
+  .DS_Store
+
+nav:
+  - Home: index.md
+  - Pipeline: pipeline.md
+  - Stages:
+      - "A — Extraction": stages/stage-a.md
+      - "B — Refinement": stages/stage-b.md
+      - "C — Grouping": stages/stage-c.md
+      - "D — Adaptation": stages/stage-d.md
+      - "E — Extension": stages/stage-e.md
+      - "F — Artifacts": stages/stage-f.md
+  - Contributing: contributing.md
+  - Roadmap:
+      - Roadmap: roadmap/ROADMAP.md
+      - Grounding Report: roadmap/GROUNDING-REPORT.md
+      - State Reconciliation: roadmap/STATE-RECONCILIATION.md

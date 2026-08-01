@@ -16,17 +16,43 @@ Hierarchical organization of all agent orchestration scripts.
 │   ├── telemetry-worker.py    # Telemetry wrapper for hermes -z
 │   └── telemetry-worker.sh    # Shell convenience wrapper
 │
-├── runners/      # Pipeline phase runners (self-exec into agent)
+├── runners/      # Pipeline phase runners (stages A-F)
 │   ├── phase-a-gen.py         # Pre-generate Phase A prompts
-│   ├── phase-a-run.py         # Extraction phase runner
-│   ├── phase-b-run.py         # Refinement phase runner
-│   ├── phase-b1-run.py        # Continuation refinement runner
-│   ├── phase-c-run.py         # Merge phase runner
-│   ├── phase-d-run.py         # Adaptation phase runner
-│   └── phase-f-run.py         # Artifact generation runner
+│   ├── phase-a-run.py         # A: extraction runner
+│   ├── phase-b-run.py         # B: refinement runner
+│   ├── phase-b1-run.py        # B1: continuation / redo refinement runner
+│   ├── phase-c-run.py         # C: grouping runner (deterministic)
+│   ├── phase-d-run.py         # D: adaptation runner
+│   ├── phase-e-run.py         # E: extension (gap-fill) runner
+│   ├── phase-f-run.py         # F: artifact assembly runner (deterministic)
+│   ├── launch-downstream.sh   # Runs C -> D -> E -> F
+│   └── templates/             # Externalized worker prompts
 │
 ├── extraction/   # Spec page extraction pipeline
 │   └── extract_batch.py       # Batch orchestrator (109 workers)
+│
+├── grouping/     # Stage C — deterministic grouping (no LLM)
+│   ├── group_engine.py        # Plan + parity primitives (single source of truth)
+│   ├── group_batch.py         # Assembler: refined/ -> grouped/ (24 groups)
+│   ├── dict_normalize.py      # Dictionary page -> one 4-column table
+│   └── verify-groups.py       # Post-assembly gate (coverage, parity, marks)
+│
+├── adaptation/   # Stage D — STE -> STE-Code adaptation
+│   ├── adapt_batch.py         # Orchestrator: one worker per rule section
+│   └── verify-adaptation.py   # Gate: aerospace leakage, synonyms, coverage
+│
+├── extension/    # Stage E — gap-fill extensions (markdown first)
+│   ├── extend_batch.py        # Orchestrator: six gap areas
+│   ├── md_to_json.py          # Deterministic markdown -> JSON derivation
+│   └── verify_extensions.py   # Gate: six deterministic checks
+│
+├── artifacts/    # Stage F — final assembly (no LLM)
+│   ├── artifact_batch.py      # adapted/ -> ste-code-rules.md + system prompt
+│   └── verify-artifacts.py    # Gate: rule coverage, no drops or duplicates
+│
+├── continuation/ # Redo queue for incomplete refined pages (B1)
+│   ├── continue_batch.py      # Re-processes a queue with checkpoint + commit
+│   └── verify_continuation.py # Finds incomplete pages, writes the queue
 │
 ├── refinement/   # Level assembly + content generation
 │   ├── assemble-level1.py     # Compress to ~1.2K tokens
