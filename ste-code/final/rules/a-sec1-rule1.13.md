@@ -110,171 +110,97 @@ Rust documentation has an approved exception: the borrow checker is a named syst
 
 ### Examples
 
-> *Adapted from spec pair:* Non-STE: "Do an enter of your password" (the nominalization Rule 1.13 forbids — "enter" used as a noun)  |  STE: "Enter your password." (ASD-STE100 Issue 9, Rule 1.13)
-> *Adapted from spec pair:* Non-STE: — (Rule 1.13 shows "plate" as both a technical verb and a technical noun)  |  STE: "There are two methods to plate the ring nut (2)" (ASD-STE100 Issue 9, Rule 1.13)
+> *Adapted from spec pair:* Non-STE: nominalized technical verb — for example, "Do an enter of the password" (enter used as a noun) | STE: "Enter your password." (enter used only as a verb, ASD-STE100 Rule 1.13). The spec's parallel dual-category case is "plate": "There are two methods to plate the ring nut (2)" — plate used as a technical verb, while the same word can also fit a technical noun category.
 
-Each pair below shows a realistic, runnable documentation fragment. The Non-STE version breaks Rule 1.13 (a code-domain technical verb used as a noun, usually inside a light-verb construction such as "do a …", "make a …", "execute a …"). The STE-Code version uses the technical verb correctly as a verb, or — where the word fits a technical noun category (rule 1.5) — a permitted technical noun.
+> **Non-STE:** The `build` job does a compile of the source files, then it starts the unit tests.
+>
+> **STE:** The `build` job compiles the source files, then it starts the unit tests.
 
-#### Example 1 — Compile (README build section)
+```
+# Non-STE — README.md (Build section)
+Run `npm run build`. The script does a compile of the source files
+and then starts the dev server.
 
-**Context:** A README explains how to build a C project from source.
-
-> **Non-STE:** Do a compile of the source files.
-
-```markdown
-## Build from source
-
-Do a compile of the source files with this command:
-
-    cc -std=c11 -o bin/app src/main.c src/net.c
-
-A compile of the source files takes about 30 seconds on a clean checkout.
+# STE — README.md (Build section)
+Run `npm run build`. The script compiles the source files
+and then starts the dev server.
 ```
 
-> **STE:** Compile the source files.
+> *Adapted from spec example: "Enter your password" — "enter" must be used only as a verb. Just as you cannot use "enter" as a noun in STE, you cannot use "compile" as a noun in STE-Code. "Compile" is a code-domain technical verb (category 1 a), development processes, write and modify code). The non-STE version uses "compile" as a noun, which is not permitted. The STE version uses "compile" correctly as a verb.*
 
-```markdown
-## Build from source
+> **Non-STE:** The merge of the feature branch caused a conflict in the `auth` module and blocked the release.
+>
+> **STE:** The merge operation of the feature branch caused a conflict in the `auth` module and blocked the release.
 
-Compile the source files with this command:
+```
+# Non-STE — CHANGELOG.md
+- The merge of the feature branch caused a conflict in the auth module.
 
-    cc -std=c11 -o bin/app src/main.c src/net.c
-
-The compiler compiles the source files in about 30 seconds on a clean checkout.
+# STE — CHANGELOG.md
+- The merge operation of the feature branch caused a conflict in the auth module.
 ```
 
-*Adapted from spec example: "Enter your password" — "enter" must be used only as a verb. Just as you cannot use "enter" as a noun in STE, you cannot use "compile" as a noun in STE-Code. "Compile" is a code-domain technical verb (category 1 a), development processes, write and modify code). The non-STE version uses "compile" as a noun, which is not permitted. The STE version uses "compile" correctly as a verb.*
+> *Adapted from spec principle: technical verbs must be used only as verbs. "Merge" is a code-domain technical verb (category 1 c), development processes, build and package). The non-STE example uses "merge" as a noun. The STE version uses "merge" as an adjective that is part of the code-domain technical noun "merge operation."*
 
-#### Example 2 — Merge (release notes / changelog)
+> **STE:** Run the deploy script before you switch the load balancer to the new version.
+>
+> **STE:** The deploy completed successfully and all health checks passed.
 
-**Context:** A changelog records what happened when a feature branch joined the main branch.
+("Deploy" is a code-domain technical verb, category 1 c), development processes, build and package.)
 
-> **Non-STE:** The merge of the feature branch caused a conflict.
-
-```markdown
-### Release notes — v2.1.0
-
-The merge of the feature-login branch into main caused a conflict in
-`auth.py`. We resolved the conflict by keeping the new handler and removing
-the duplicate import.
+```
+# STE — runbook.md
+Run the deploy script before you switch the load balancer to the new version.
+The deploy completed successfully and all health checks passed.
 ```
 
-> **STE:** The merge operation of the feature branch caused a conflict.
+> *Adapted from spec example: "There are two methods to plate the ring nut (2)" — "plate" can be both a technical verb and a technical noun. Just as "plate" in the spec can be a technical verb (category 1 c), attach material) and also a technical noun (a different context), "deploy" can be both a code-domain technical verb (category 1 c), build and package) and a code-domain technical noun (category 5, infrastructure, deployment, and platforms). In the second example, "deploy" refers to a deployment event or process as a noun — it fits into a code-domain technical noun category in the same way "plate" fits into a technical noun category in the spec.*
 
-```markdown
-### Release notes — v2.1.0
+> **Non-STE:** If the error rate stays above five percent, execute a rollback of the migration.
+>
+> **STE:** If the error rate stays above five percent, roll back the migration.
 
-The merge operation of the feature-login branch into main caused a conflict
-in `auth.py`. We resolved the conflict by keeping the new handler and
-removing the duplicate import.
+```
+# Non-STE — incident-runbook.md
+If the error rate stays above five percent, execute a rollback of the migration.
+
+# STE — incident-runbook.md
+If the error rate stays above five percent, roll back the migration.
 ```
 
-*Adapted from spec principle: technical verbs must be used only as verbs. "Merge" is a code-domain technical verb (category 1 c), development processes, build and package). The non-STE example uses "merge" as a noun. The STE version uses "merge" as an adjective that modifies the code-domain technical noun "merge operation" (category 4, data structures) — a permitted dual-category noun use under rule 1.5.*
+> *Principle applied: P13 — Do not use technical verbs as nouns. "Rollback" is a code-domain technical verb (category 3 b), database and storage). The non-STE version nominalizes "rollback" with a light verb "Execute." The STE version uses "roll back" as the main verb of the sentence — the approved verb "roll" plus the particle "back." If the project uses "rollback" as a compound noun (category 18, database and storage), the STE version "Run the rollback of the migration" is also correct because "rollback" then fits a technical noun category.*
 
-#### Example 3 — Deploy (deployment runbook, from the spec "plate" dual-category example)
+> **Non-STE:** The import of the module takes approximately ten seconds on a cold cache.
+>
+> **STE:** The import operation for the module takes approximately ten seconds on a cold cache.
 
-**Context:** A runbook shows how to publish a service and then report status. The spec's "plate" example proves a word can be both a technical verb and a technical noun; "deploy" is the code-domain equivalent. Both lines below are compliant.
+```
+# Non-STE — src/loader.ts
+/**
+ * The import of the module takes approximately ten seconds on a cold cache.
+ */
 
-> **STE:** Run the deploy script.
-
-```bash
-#!/usr/bin/env bash
-# scripts/deploy.sh — publish the service to the production cluster
-set -euo pipefail
-./scripts/deploy.sh --env prod --tag v2.1.0
+# STE — src/loader.ts
+/**
+ * The import operation for the module takes approximately ten seconds on a cold cache.
+ */
 ```
 
-> **STE:** The deploy completed successfully.
-
-```markdown
-## Deployment status
-
-The deploy completed successfully. The service is live on the production
-cluster with three replicas and a green health check.
-```
-
-*Adapted from spec example: "There are two methods to plate the ring nut (2)" — "plate" can be both a technical verb (category 1 c), attach material) and a technical noun. Just as "plate" fits both category systems in the spec, "deploy" can be both a code-domain technical verb (category 1 c, build and package) and a code-domain technical noun (category 5, infrastructure, deployment, and platforms). In the second example, "deploy" refers to a deployment event as a noun — it fits a technical noun category, so the use is correct.*
-
-#### Example 4 — Rollback (database recovery runbook)
-
-**Context:** A runbook tells an operator how to recover a failed migration.
-
-> **Non-STE:** Execute a rollback of the migration.
-
-```markdown
-## Recovery
-
-If the release fails health checks, execute a rollback of the migration
-with the following command, then restart the API pods:
-
-    alembic downgrade -1
-```
-
-> **STE:** Roll back the migration.
-
-```markdown
-## Recovery
-
-If the release fails health checks, roll back the migration with the
-following command, then restart the API pods:
-
-    alembic downgrade -1
-```
-
-*Principle applied: Rule 1.13 — Do not use technical verbs as nouns. "Rollback" is a code-domain technical verb (category 3 b), database and storage). The non-STE version nominalizes "rollback" with a light verb "Execute." The STE version uses "roll back" as the main verb of the sentence — the approved verb "roll" plus the particle "back." If the project uses "rollback" as a compound noun (category 18, database and storage), the STE version "Run the rollback of the migration" is also correct because "rollback" then fits a technical noun category.*
-
-#### Example 5 — Import (module docstring)
-
-**Context:** A Python module docstring explains startup cost to a reader who will import it.
-
-> **Non-STE:** The import of the module takes approximately ten seconds.
-
-```python
-"""training_model
-
-The import of the module takes approximately ten seconds because it loads
-the trained model into memory at startup. Call `load_model()` only after
-the import completes.
-"""
-```
-
-> **STE:** The import operation for the module takes approximately ten seconds.
-
-```python
-"""training_model
-
-The import operation for the module takes approximately ten seconds because
-it loads the trained model into memory at startup. Call `load_model()`
-only after the import operation completes.
-```
-
-*Principle applied: Rule 1.13 — Do not use technical verbs as nouns, Rule 1.5 — Use approved words from the STE-Code dictionary. "Import" is a code-domain technical verb (category 1 a), development processes, write and modify code). In the non-STE version, "import" is used as a noun. The STE version replaces it with the approved noun "operation" modified by "import" as an adjective. An alternative STE version "Importing the module takes approximately ten seconds" uses the gerund form — gerunds are permitted in descriptive text when they describe an ongoing process, but avoid them as main verbs in procedural sentences (refer to Section 3 grammar rules).*
-
-#### Example 6 — Commit (contributing guide)
-
-**Context:** A CONTRIBUTING guide tells a contributor the order of operations before they change context.
+> *Principle applied: P13 — Do not use technical verbs as nouns, P1 — Use approved words from the STE-Code dictionary. "Import" is a code-domain technical verb (category 1 a), development processes, write and modify code). In the non-STE version, "import" is used as a noun. The STE version replaces it with the approved noun "operation" modified by "import" as an adjective. An alternative STE version "Importing the module takes approximately ten seconds" uses the gerund form — gerunds are permitted in descriptive text when they describe an ongoing process, but avoid them as main verbs in procedural sentences (refer to Section 3 grammar rules).*
 
 > **Non-STE:** Make a commit of your changes before you switch branches.
-
-```markdown
-## Before you switch branches
-
-Make a commit of your changes before you switch branches. Write a short,
-clear message that shows the intent of the change, for example
-"Add rate-limit to login endpoint."
-```
-
+>
 > **STE:** Commit your changes before you switch branches.
 
-```markdown
-## Before you switch branches
+```
+# Non-STE — CONTRIBUTING.md
+Make a commit of your changes before you switch branches.
 
-Commit your changes before you switch branches. Write a short, clear
-message that shows the intent of the change, for example
-"Add rate-limit to login endpoint."
+# STE — CONTRIBUTING.md
+Commit your changes before you switch branches.
 ```
 
-*Principle applied: Rule 1.13 — Do not use technical verbs as nouns, Rule 1.4 — Use only approved verb forms. "Commit" is a code-domain technical verb (category 2 c), system operations). The non-STE version wraps "commit" in a light-verb construction "Make a commit." The STE version uses "commit" directly as the main imperative verb. In Git documentation, "a commit" as a noun (referring to a snapshot object) is correct because it is a code-domain technical noun (category 4, data structures) — this is the dual-category exception from rule 1.5 and rule 1.12.*
+> *Principle applied: P13 — Do not use technical verbs as nouns, P4 — Use only approved verb forms. "Commit" is a code-domain technical verb (category 2 c), system operations). The non-STE version wraps "commit" in a light verb construction "Make a commit." The STE version uses "commit" directly as the main imperative verb. In Git documentation, "a commit" as a noun (referring to a snapshot object) is correct because it is a code-domain technical noun (category 4, data structures) — this is the dual-category exception from rule 1.5 and rule 1.12.*
 
 ### Edge Cases
 
@@ -307,25 +233,10 @@ Generated output from tools, compilers, and linters is quoted text (technical no
 
 When you summarize the tool output in your own documentation, apply rule 1.13:
 
+> **STE:** The compiler could not compile module "auth."
 > **Non-STE:** The compiler reported a compile error in module "auth."
 
-```markdown
-## Build failure
-
-The compiler reported a compile error in module "auth." Check the type
-annotations before you rebuild.
-```
-
-> **STE:** The compiler could not compile module "auth."
-
-```markdown
-## Build failure
-
-The compiler could not compile module "auth." Check the type annotations
-before you rebuild.
-```
-
-If "compile error" is an established term in your project glossary, it can be a compound technical noun (rule 1.5).
+The non-STE version uses "compile" as a noun ("a compile error"). The STE version uses "compile" as a verb ("could not compile"). If "compile error" is an established term in your project glossary, it can be a compound technical noun (rule 1.5).
 
 **Docker and Kubernetes resource names**
 
@@ -420,13 +331,10 @@ Test application:
 - "The compile failed" — "compile" with article → noun use → "compile" is not a dual-category word → VIOLATION
 - "The build failed" — "build" with article → noun use → "build" is a dual-category word (category 3) → CORRECT
 - "The import failed" — "import" with article → noun use → "import" is a dual-category word (category 4) → CORRECT
-- "The lint found errors" — "lint" with article → noun use → "lint" is not a dual-category word → VIOLATION. Write "The linter found errors" (linter = technical noun, category 3)
-
-## See Also
+- "The lint found errors" — "lint" with article → noun use → "lint" is not a dual-category word → VIOLATION. Write "The linter found errors" (linter = technical noun, category 3).
 
 > **See also:** Rule 1.12 — You Can Use Verbs That You Can Include in a Technical Verb Category
 > **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
 > **See also:** Rule 1.7 — Do Not Use Technical Nouns as Verbs
 > **See also:** Rule 1.4 — Use Only Approved Verb Forms and Adjective Forms
 > **See also:** Rule 1.10 — No Slang, Jargon, or Regional Terms
-> **See also:** STE-Code Dictionary — Approved Words and Technical Verb/Noun Lists
