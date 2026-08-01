@@ -46,6 +46,7 @@ GROUPED_DIR = PROJECT / "ste-code" / "grouped"
 REFERENCE_DIR = PROJECT / ".agents" / "reference"
 STATE_DIR = PROJECT / ".agents" / "state"
 CHECKPOINT_PATH = STATE_DIR / "finalize-checkpoint.json"
+PROGRESS_PATH = STATE_DIR / "finalize-progress.md"
 ASSEMBLE = PROJECT / ".agents" / "tools" / "finalize" / "assemble_final.py"
 
 MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
@@ -195,6 +196,41 @@ STE-Code Adaptation, and Examples structure. Then ENRICH it:
    utilize/leverage/employ/commence/terminate/initiate when a simpler verb works).
 5. NO aerospace leakage: every example and term must be code-domain.
 
+# HOW TO WRITE THE FILE (critical)
+You are a session with file-read and file-write tools, and you are ONE WORKER in
+a BATCH that is re-synthesizing the whole STE-Code standard (one rule file per
+session). Your job is ONLY this single rule; other sessions handle the other
+rules in parallel. Keep your output coherent with the overall standard — do not
+invent new global conventions; stay consistent with the existing STE-Code voice
+(plain, code-domain, ASD-STE100-derived).
+
+You MAY and SHOULD research for better enrichment before writing:
+- Read ste-code/adapted/{adapted_path.name} (your source) and the PREVIOUS DOCUMENTS
+  block below for traceability and borrowed vocabulary.
+- Explore the reference material: .agents/reference/ (vendor style guides,
+  dictionaries, glossaries) and any other relevant folders under .agents/ or
+  ste-code/ to borrow approved, controlled vocabulary and realistic examples.
+- Use multiple read_file calls across turns — do not assume; verify against the
+  real files on disk.
+
+WORKING STYLE — granular and surgical, not one-shot:
+- Make SMALL, surgical edits across MANY tool calls / turns. Do not try to produce
+  the entire enriched file in a single huge response. Draft or read, refine a
+  section, write, re-read to confirm, repeat. This keeps each step bounded and
+  avoids truncated output.
+- This session may take MANY turns and many API calls — that is expected and fine.
+
+WHEN DONE:
+- WRITE the finished enriched rule directly to disk at:
+  ste-code/final/rules/{adapted_path.name}
+  using your file-write tool (overwrite any existing content there).
+- The file MUST begin with '# Rule' and be self-contained, parseable markdown.
+- After the file is written and you have re-read it to confirm it is correct and
+  complete, END the session (stop). Your ONLY artifact is that single written file.
+- Do NOT print the file to the chat, do NOT write any narration, tool logs,
+  "Rewrote…", "What changed vs…", or "Key changes" into the file or the chat.
+  Do not create helper scripts.
+
 Output ONLY the rewritten markdown file. No code fences, no commentary outside
 the file. The file must be self-contained and parseable as one markdown document.
 
@@ -246,37 +282,88 @@ def synthesize_file(adapted_path: Path) -> bool:
     pf.write_text(prompt)
 
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "300", "STE_MODEL": MODEL}
-    try:
-        r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
-                           capture_output=True, text=True, timeout=300)
-        if r.returncode == 0 and r.stdout.strip():
-            out_path.write_text(r.stdout, encoding="utf-8")
-            # GUARD: if the worker returned narration instead of the rule body,
-            # reject and re-attempt (never save a contaminated file)
-            if not re.match(r"^#\s*Rule", r.stdout.strip()):
-                print(f"  [GUARD] {adapted_path.name}: LLM returned non-rule body; retrying", flush=True)
-                return synthesize_file(adapted_path)
-            print(f"  ✓ {adapted_path.name}", flush=True)
-            return True
-        else:
-            # fall back to deterministic copy
-            _fallback_copy(adapted_path, out_path)
-        ok, why = _file_gate_ok(out_path)
-        if not ok:
-            # gate failed on LLM output -> use fallback copy (still complete)
-            _fallback_copy(adapted_path, out_path)
-            ok, why = _file_gate_ok(out_path)
-        if not _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                                  f"Phase G: synthesize {adapted_path.name} (LLM final)"):
-            print(f"  FINALIZE {adapted_path.name}: commit failed", flush=True)
-        return ok
-    except subprocess.TimeoutExpired:
-        _fallback_copy(adapted_path, out_path)
-        _file_gate_ok(out_path)
+    # The session (worker) READS the source and WRITES ste-code/final/rules/<name>
+    # itself via its file tools — the orchestrator is NOT a dumb pipe that writes
+    # r.stdout. We capture r.stdout only as trajectory/history to .agents/tmp/.
+    r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
+                       capture_output=True, text=True, timeout=300)
+    # Save the agent's stdout as trajectory/history (like refinement/extraction),
+    # NOT as the output file.
+    (tmp / f"finalize-traj-{adapted_path.stem}.txt").write_text(r.stdout, encoding="utf-8")
+    # Gate on the file the SESSION itself wrote (not our stdout).
+    if out_path.exists() and out_path.stat().st_size >= 400 and re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip()):
+        print(f"  ✓ {adapted_path.name} (session wrote final)", flush=True)
         _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                           f"Phase G: synthesize {adapted_path.name} (fallback copy)")
-        print(f"  FINALIZE {adapted_path.name}: [TIMEOUT] fallback copy", flush=True)
+                           f"Phase G: synthesize {adapted_path.name} (LLM final)")
         return True
+    # Session did not write a valid file -> deterministic fallback copy so the
+    # dir stays complete (no narration ever saved as the file).
+    _fallback_copy(adapted_path, out_path)
+    print(f"  [FALLBACK] {adapted_path.name}: session did not write valid file; clean copy", flush=True)
+    _git_commit_locked([str(out_path.relative_to(PROJECT))],
+                       f"Phase G: synthesize {adapted_path.name} (LLM final)")
+    return True
+
+
+def _regen_progress():
+    """Regenerate .agents/state/finalize-progress.md from DISK EVIDENCE (not memory):
+    a row is 'stale' iff final/rules/<f> == adapted/<f>. This is the authoritative
+    stale-flag an agent reads to know WHICH files to re-synthesize and WHEN
+    (every run / on demand via --regen-progress). Kept in .agents/ so ste-code/
+    stays shippable (no pipeline bookkeeping inside it)."""
+    FINAL_RULES = FINAL_RULES_DIR
+    rows = []
+    files = sorted(FINAL_RULES.glob("a-sec*-rule*.md"))
+    enriched = stale = 0
+    for p in files:
+        num = SECTION_RULE_RE.search(p.name)
+        rule_id = num.group(1) + "." + num.group(2) if num else p.stem
+        src = ADAPTED_DIR / p.name
+        is_stale = (src.exists() and p.read_text(errors="ignore") == src.read_text(errors="ignore"))
+        status = "stale" if is_stale else "enriched"
+        if is_stale:
+            stale += 1
+        else:
+            enriched += 1
+        note = "copied; re-synthesize" if is_stale else "LLM final"
+        rows.append((rule_id, p.name, status, note))
+    lines = [
+        "# STE-Code final/ Progress Tracker",
+        "",
+        "> **⚠️ Stale-flag source of truth.** A row marked `stale` means",
+        "> `ste-code/final/rules/<file>` is byte-identical to `ste-code/adapted/<file>`",
+        "> — i.e. it was copied, NOT LLM-synthesized. Those files MUST be re-synthesized",
+        "> by an agent session (the agent reads adapted/ + references and writes the",
+        "> enriched file itself). A row marked `enriched` is a real LLM synthesis.",
+        ">",
+        "> Regenerate this table any time with:",
+        "> `python3 .agents/tools/finalize/finalize_batch.py --regen-progress`",
+        "> (written to .agents/state/finalize-progress.md — ste-code/ is shippable).",
+        "> The execution auditor cross-references these claims against disk evidence.",
+        "",
+        "## Status legend",
+        "- `enriched` — LLM-synthesized final rule (differs from adapted source)",
+        "- `stale`    — copied from adapted/ (NOT synthesized; must be re-run)",
+        "",
+        "## Rule status",
+        "",
+        "| # | File | Status | Note |",
+        "|---|------|--------|------|",
+    ]
+    for rule_id, name, status, note in rows:
+        lines.append(f"| {rule_id} | {name} | {status} | {note} |")
+    lines += [
+        "",
+        "## Summary",
+        f"- enriched: {enriched} / {len(files)}",
+        f"- stale (must re-synthesize): {stale} / {len(files)}",
+    ]
+    out = PROGRESS_PATH
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"  progress regenerated -> {out}: {enriched} enriched / {stale} stale / {len(files)} total",
+          flush=True)
+    return out
 
 
 def main():
@@ -284,11 +371,16 @@ def main():
     args = sys.argv[1:]
     resume = "--resume" in args
     verify = "--verify" in args
+    regen_progress = "--regen-progress" in args
     single = next((a for a in args if a.endswith(".md")), None)
 
     if verify:
         v = PROJECT / ".agents" / "tools" / "finalize" / "verify_final.py"
         os.execv(VENV_PYTHON, [VENV_PYTHON, str(v)])
+        return
+
+    if regen_progress:
+        _regen_progress()
         return
 
     atexit.register(lambda: _save_checkpoint(_checkpoint))
@@ -297,6 +389,20 @@ def main():
 
     FINAL_RULES_DIR.mkdir(parents=True, exist_ok=True)
     files = [ADAPTED_DIR / single] if single else sorted(ADAPTED_DIR.glob("a-sec*-rule*.md"))
+
+    # --only-stale: synthesize ONLY rules whose final/rules/<f> == adapted/<f>
+    # (the copied, non-synthesized ones flagged in progress.md).
+    only_stale = "--only-stale" in args
+    if only_stale:
+        kept = []
+        for p in files:
+            fp = FINAL_RULES_DIR / p.name
+            sp = ADAPTED_DIR / p.name
+            if fp.exists() and sp.exists() and fp.read_text(errors="ignore") == sp.read_text(errors="ignore"):
+                kept.append(p)
+            elif not fp.exists():
+                kept.append(p)
+        files = kept
 
     done = _checkpoint.setdefault("done", [])
     n_ok = 0
@@ -315,6 +421,8 @@ def main():
             print(f"    ✓ {p.name}", flush=True)
         else:
             print(f"    ✗ {p.name} (will retry next run)", flush=True)
+        # keep progress.md current after every file
+        _regen_progress()
 
     # copy categories + dictionary (deterministic, code-domain) into final/rules/
     for extra in ("a-categories.md", "a-dictionary.md"):
