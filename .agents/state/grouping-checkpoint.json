@@ -110,14 +110,14 @@
         200,
         218
       ],
-      "bytes": 48648
+      "bytes": 32304
     },
     "017-dict-e-f": {
       "pages": [
         219,
         250
       ],
-      "bytes": 61000
+      "bytes": 53573
     },
     "018-dict-g-i": {
       "pages": [
@@ -131,42 +131,42 @@
         283,
         310
       ],
-      "bytes": 94928
+      "bytes": 46244
     },
     "020-dict-o-p": {
       "pages": [
         311,
         338
       ],
-      "bytes": 101625
+      "bytes": 49496
     },
     "021-dict-q-r": {
       "pages": [
         339,
         358
       ],
-      "bytes": 70137
+      "bytes": 38499
     },
     "022-dict-s": {
       "pages": [
         359,
         390
       ],
-      "bytes": 134616
+      "bytes": 69324
     },
     "023-dict-t-y": {
       "pages": [
         391,
         426
       ],
-      "bytes": 146352
+      "bytes": 80218
     },
     "024-appendix": {
       "pages": [
         427,
         434
       ],
-      "bytes": 15591
+      "bytes": 7933
     }
   }
 }

@@ -464,19 +464,18 @@ def file_segments(rf: "RefinedFile", id2pos: Dict[str, int]) -> List[Tuple[int, 
         segs.append((rf.start, rf.end, text.rstrip() + "\n"))
     else:
         first_pos = dm[0][1]
-        last_pos = dm[-1][1]
-        last_line = dm[-1][0]
         # leading content (missing leading marker) -> rf.start..first_pos-1
         if first_pos > rf.start:
             segs.append((rf.start, first_pos - 1,
                          "\n".join(lines[:dm[0][0]]).rstrip() + "\n"))
+        # Each marker's segment extends to the NEXT marker's page (or rf.end),
+        # so merged trailing content (C_merged: no interior markers) is covered
+        # by the single marker's segment — never a duplicate trailing segment.
         for j, (li, pos) in enumerate(dm):
-            end = dm[j + 1][0] if j + 1 < len(dm) else len(lines)
-            segs.append((pos, pos, "\n".join(lines[li:end]).rstrip() + "\n"))
-        # trailing content (missing trailing marker) -> last_pos+1..rf.end
-        if last_pos < rf.end:
-            segs.append((last_pos + 1, rf.end,
-                         "\n".join(lines[last_line:]).rstrip() + "\n"))
+            end_li = dm[j + 1][0] if j + 1 < len(dm) else len(lines)
+            seg_end = (dm[j + 1][1] - 1) if j + 1 < len(dm) else rf.end
+            segs.append((pos, seg_end,
+                         "\n".join(lines[li:end_li]).rstrip() + "\n"))
 
     # Split any segment that straddles a group boundary (STRADDLER).
     out: List[Tuple[int, int, str]] = []

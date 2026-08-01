@@ -236,10 +236,65 @@ def t_template_header():
         check("strict missing-var raises", True)
 
 
+def t_marker_drift_slicing():
+    print("T10 slicer tolerates marker drift (A/B/C/STRADDLER)")
+    man = engine.parse_manifest()
+    id2pos = engine.id_to_position(man)
+
+    # A_dupes: spurious nav cross-reference (**Page TOC-2**) inside body must
+    # NOT be treated as a page boundary; only range-internal markers count.
+    rf_a = engine.RefinedFile.__new__(engine.RefinedFile)
+    rf_a.path = None
+    rf_a.worker, rf_a.start, rf_a.end = 8, 29, 32
+    rf_a.__dict__["pages"] = range(29, 33)
+    src_a = ("# Page 29 of 434\n\n**Page TOC-2**\n\nbody 29\n"
+             "# Page 30 of 434\nbody 30\n"
+             "# Page 31 of 434\nbody 31\n"
+             "# Page 32 of 434\nbody 32\n")
+    # monkeypatch read_text via a tiny wrapper
+    class _F:
+        def __init__(self, p): self.p = p
+        def read_text(self, *a, **k): return src_a
+    rf_a.path = _F("r008-p29-32.md")
+    sl = engine.slice_pages(rf_a, id2pos)
+    check("A_dupes: slices all 4 pages", set(sl.keys()) == {29, 30, 31, 32})
+    check("A_dupes: no duplicate bodies", sum(1 for v in sl.values() if v) == 4)
+
+    # B_missing_lead: page 117 has no marker; leading body -> page 117.
+    rf_b = engine.RefinedFile.__new__(engine.RefinedFile)
+    rf_b.worker, rf_b.start, rf_b.end = 30, 117, 120
+    rf_b.__dict__["pages"] = range(117, 121)
+    src_b = ("# Page 117-120 of 434\nleading body for 117\n"
+             "# Page 118 of 434\nbody 118\n"
+             "# Page 119 of 434\nbody 119\n"
+             "# Page 120 of 434\nbody 120\n")
+    class _Fb:
+        def __init__(self, p): self.p = p
+        def read_text(self, *a, **k): return src_b
+    rf_b.path = _Fb("r030-p117-120.md")
+    slb = engine.slice_pages(rf_b, id2pos)
+    check("B_missing_lead: slices 117-120", set(slb.keys()) == {117, 118, 119, 120})
+    check("B_missing_lead: page 117 has leading body", "leading body" in slb[117])
+
+    # C_merged: only first page marked, rest merged -> one multi-page segment.
+    rf_c = engine.RefinedFile.__new__(engine.RefinedFile)
+    rf_c.worker, rf_c.start, rf_c.end = 54, 213, 216
+    rf_c.__dict__["pages"] = range(213, 217)
+    src_c = ("# Page 213 of 434\nmerged body 213-216 with entries\n")
+    class _Fc:
+        def __init__(self, p): self.p = p
+        def read_text(self, *a, **k): return src_c
+    rf_c.path = _Fc("r054-p213-216.md")
+    slc = engine.slice_pages(rf_c, id2pos)
+    check("C_merged: slices 213-216", set(slc.keys()) == {213, 214, 215, 216})
+    check("C_merged: full text on first page only",
+          "merged body" in slc[213] and slc[214] == "" and slc[216] == "")
+
+
 def main():
     for t in (t_dict_merge, t_rules_passthrough, t_picture_span,
               t_picture_inline_end, t_parity, t_plan_coverage, t_slicer_formats,
-              t_exact_parity, t_template_header):
+              t_exact_parity, t_template_header, t_marker_drift_slicing):
         t()
     print(f"\n{'='*50}\n{_passed} passed, {_failed} failed\n{'='*50}")
     sys.exit(1 if _failed else 0)
