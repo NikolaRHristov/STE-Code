@@ -1,7 +1,0 @@
-{
-  "$schema": "../../compute/schemas/vocabulary-entry.schema.json",
-  "version": "1.0.0",
-  "description": "Organization-specific vocabulary extensions. Terms here are approved for use within a specific organization or project. They follow all STE-Code vocabulary rules but are not part of the core standard.",
-  "instructions": "Add new organization-approved terms here. Each entry requires: term, type, category-id, domain, severity, added-by, added-date, and a rationale.",
-  "extensions": []
-}
