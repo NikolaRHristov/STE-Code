@@ -519,32 +519,41 @@ def test_pipeline(cfg, tmp: Path) -> None:
 
     Verifies the five colours converge through the filesystem handshake and the
     4-turn reverse-deduction loop fires (notes written, knowledge pruned).
+
+    The run writes under the output root like any other run (the runners refuse
+    a base outside it), into a selftest-owned dir removed on the way out.
     """
     import run_pipeline as RP  # noqa: F401  (ensures module importable)
-    base = tmp / "pipe"
+    base = cfg.results_base / "selftest-pipe"
+    shutil.rmtree(base, ignore_errors=True)
     base.mkdir(parents=True, exist_ok=True)
-    proc = subprocess.run(
-        [sys.executable, str(BENCH / "run_pipeline.py"),
-         "--base", str(base), "--skip-live", "--rounds", "1", "--cycles", "2",
-         "--workers", "8", "--await-timeout", "120"],
-        capture_output=True, text=True, timeout=300)
-    check(proc.returncode == 0, "run_pipeline.py exits 0 (rc={})".format(proc.returncode))
-    # sentinels from every colour must exist
-    for sent in ("purple.json", "blue-done.json", "white-done.json", "black-done.json"):
-        found = len(list(base.glob("**/" + sent)))
-        check(found >= 1, "pipeline produced {} (found {})".format(sent, found))
-    report = json.loads((base / "pipeline-report.json").read_text())
-    check(len(report["cycles_report"]) == 2, "two cycles recorded")
-    check(all(c["phases"].get("black") for c in report["cycles_report"]),
-          "BLACK completed every cycle")
-    # reverse-deduction: notes + pruning must have fired by cycle 2
-    c2 = report["cycles_report"][1]
-    check(c2["reverse_notes_written"] >= 1, "reverse-deduction notes written")
-    check(c2["pruned_lessons"] >= 1, "WHITE knowledge pruned across cycles")
-    # knowledge must converge downward (not grow unboundedly)
-    check(report["cycles_report"][1]["knowledge"]["lessons"] <=
-          report["cycles_report"][0]["knowledge"]["lessons"],
-          "lessons do not grow across cycles (convergence)")
+    try:
+        proc = subprocess.run(
+            [sys.executable, str(BENCH / "run_pipeline.py"),
+             "--base", str(base), "--skip-live", "--rounds", "1", "--cycles", "2",
+             "--workers", "8", "--await-timeout", "120"],
+            capture_output=True, text=True, timeout=300)
+        check(proc.returncode == 0,
+              "run_pipeline.py exits 0 (rc={})".format(proc.returncode))
+        # sentinels from every colour must exist
+        for sent in ("purple.json", "blue-done.json", "white-done.json",
+                     "black-done.json"):
+            found = len(list(base.glob("**/" + sent)))
+            check(found >= 1, "pipeline produced {} (found {})".format(sent, found))
+        report = json.loads((base / "pipeline-report.json").read_text())
+        check(len(report["cycles_report"]) == 2, "two cycles recorded")
+        check(all(c["phases"].get("black") for c in report["cycles_report"]),
+              "BLACK completed every cycle")
+        # reverse-deduction: notes + pruning must have fired by cycle 2
+        c2 = report["cycles_report"][1]
+        check(c2["reverse_notes_written"] >= 1, "reverse-deduction notes written")
+        check(c2["pruned_lessons"] >= 1, "WHITE knowledge pruned across cycles")
+        # knowledge must converge downward (not grow unboundedly)
+        check(report["cycles_report"][1]["knowledge"]["lessons"] <=
+              report["cycles_report"][0]["knowledge"]["lessons"],
+              "lessons do not grow across cycles (convergence)")
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
 
 
 def test_red_blue(cfg, tmp: Path) -> None:
@@ -637,7 +646,11 @@ def main() -> int:
     test_config(cfg)
     test_output_root(cfg)
     test_anonymizer(cfg, root)
-    tmp = Path(tempfile.mkdtemp(prefix="harness-selftest-"))
+    # Scratch lives under the output root: the runners refuse a base outside
+    # it, and a stray tempdir is exactly the per-run scatter that root prevents.
+    cfg.results_base.mkdir(parents=True, exist_ok=True)
+    tmp = Path(tempfile.mkdtemp(prefix="harness-selftest-",
+                                dir=str(cfg.results_base)))
     try:
         test_stitch(cfg, tmp)
         test_notes(cfg, tmp)
