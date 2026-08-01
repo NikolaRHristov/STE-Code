@@ -32,6 +32,7 @@ report. No LLM, no network.
 """
 from __future__ import annotations
 
+import re
 import importlib.util as _ilu
 import sys
 from pathlib import Path
@@ -134,15 +135,21 @@ def verify():
                  f"marks {out_marks}/{src_marks} "
                  f"({'ok' if out_marks >= src_marks else 'DROPPED'})")
 
-        # 5. one-table (dict groups only). A dict group is valid with exactly
-        # one continuous table (headers==1) OR with zero table headers when the
-        # refiner used the exploded `#### Word` entry format instead of tables
-        # (content parity still passes — see T8). Only >1 header is a real fail.
+        # 5. one-table (dict groups only). After the dict normalizer (Fix B),
+        #    every dict group MUST be exactly ONE continuous 4-col table: exactly
+        #    one `| Word (POS) |` header and ZERO leftover `#### WORD (POS)`
+        #    block headings. Weakened neither to a no-op nor to the old
+        #    `hdrs <= 1` which silently passed block-format groups (headers=0).
         if g.section == "DICT":
-            hdrs = sum(1 for ln in out_text.splitlines()
-                       if gb._TABLE_HDR_RE.match(ln.strip()))
-            rep.line(hdrs <= 1, g.gid,
-                     f"single continuous table (headers={hdrs}, expect <=1)")
+            lines = out_text.splitlines()
+            hdrs = sum(1 for ln in lines if gb._TABLE_HDR_RE.match(ln.strip()))
+            block_heads = sum(
+                1 for ln in lines
+                if re.match(r"^#{3,4}\s+\*{0,2}[A-Za-z][A-Za-z()\-\s,]*\s*\(", ln.strip()))
+            rep.line(
+                hdrs == 1 and block_heads == 0, g.gid,
+                f"single continuous table (headers={hdrs}, ####WORD blocks={block_heads}, "
+                f"expect headers==1 and blocks==0)")
 
         # 6. picture blocks balanced within the group
         n_start = out_text.count("<!-- Start of picture text -->")

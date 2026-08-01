@@ -731,7 +731,8 @@ def corpus_ready(idx: Dict[int, "RefinedFile"],
 
 _TAG_RE = re.compile(r"</?[a-zA-Z][^>]*>")
 _HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
-_DICT_HDR_LINE_RE = re.compile(r"^\|\s*Word\s*\(?POS\)?", re.I)
+_DICT_HDR_LINE_RE = re.compile(
+    r"^\|\s*\*?\*?\s*word\b\s*\*?(?:<br>)?\*?\s*\(?(?:pos|part of speech)?\)?", re.I)
 _SEP_LINE_RE = re.compile(r"^\|[\s:\-\|]+\|?\s*$")
 _PAGE_LINE_RE = re.compile(r"^(?:#{1,4}\s+Page\s+.+|\*\*\s*Page\s+.+\*\*)\s*$", re.I)
 _BOILERPLATE_RE = re.compile(

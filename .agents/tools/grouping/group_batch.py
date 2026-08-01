@@ -77,6 +77,8 @@ pipeline_core = _load_module(
     "pipeline_core", PROJECT / ".agents" / "tools" / "lib" / "pipeline_core.py")
 _templater_mod = _load_module(
     "templater", PROJECT / ".agents" / "tools" / "lib" / "templater.py")
+dict_normalize = _load_module(
+    "dict_normalize", PROJECT / ".agents" / "tools" / "grouping" / "dict_normalize.py")
 
 # External markdown templates live in grouping/templates/*.md (edit those, not
 # the f-strings here) — see .agents/tools/grouping/templates/README.md.
@@ -313,6 +315,12 @@ def assemble_group(group, idx, id2pos) -> tuple[str | None, dict]:
             sliced_ok = False
             break
         body = slices[p]
+        # Normalize every DICT page body to one clean 4-col table so the
+        # assembler can collapse same-header pages into a single continuous
+        # table (Fix B). Non-dict bodies are unaffected by the normalizer's
+        # shape detection. Parity is preserved: label words are kept in cells.
+        if group.section == "DICT":
+            body = dict_normalize.normalize_dict_page(body)
         page_bodies.append(body)
         src_words += word_count(body)
         src_marks += mark_count(body)
@@ -508,8 +516,17 @@ def assemble_all(plan, idx, man, id2pos, force=False) -> int:
         gfile.write_text(text, encoding="utf-8")
         # verify against disk (Lesson #4)
         reread = gfile.read_text(encoding="utf-8")
-        ok, miss, _ = engine.parity_diff("\n".join(
-            engine.slice_pages(idx[p], id2pos).get(p, "") for p in g.pages), reread)
+        # Source pages must be normalized the SAME way assemble_group normalized
+        # them (Fix B) so the parity gate compares like-for-like. Comparing raw
+        # source vs normalized output would flag the dict-header label words
+        # (word/pos/approved/meaning/ste…) as "missing".
+        src_slices = []
+        for p in g.pages:
+            sl = engine.slice_pages(idx[p], id2pos).get(p, "")
+            if g.section == "DICT":
+                sl = dict_normalize.normalize_dict_page(sl)
+            src_slices.append(sl)
+        ok, miss, _ = engine.parity_diff("\n".join(src_slices), reread)
         if not ok:
             print(f"[FAIL] {g.gid}: post-write parity mismatch "
                   f"({sum(miss.values())} tokens) — file left for inspection")
