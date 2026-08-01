@@ -39,6 +39,8 @@ ste-code/audit/
 .agents/benchmark/results-levels/*/level-*/run-*/bench-*-*.txt
 .agents/benchmark/results-levels/*/level-*/run-*/emergency-state.json
 .agents/benchmark/results-levels/*/level-*/run-*/progress.json
+.agents/benchmark/results-levels/**/*.json
+.agents/benchmark/results-levels/**/*.txt
 .agents/benchmark/results-v2/
 .agents/benchmark/results/
 .agents/prompts/maturity-fixes/*.txt
