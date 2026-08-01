@@ -628,16 +628,20 @@ def test_red_blue(cfg, tmp: Path) -> None:
         return
     check(True, "red.py / blue.py importable")
 
-    # RED: full placement x timing spread, schema-conformant.
+    # RED: full placement x timing spread. Timings describe behaviour across
+    # rounds, so a single-round run collapses them to "immediate" (480 -> 80
+    # unique attacks, no relabelled waste). Multi-round keeps all six.
     cases = R.build_red_cases(0, 1, per_combo=1, seed=7)
-    check(len(cases) == 10 * 8 * 6,  # 10 techniques x 8 placements x 6 timings
-          "red case count = 480 (got {})".format(len(cases)))
+    check(len(cases) == 10 * 8,  # 10 techniques x 8 placements (timing collapsed)
+          "red case count = 80 at round 1 (got {})".format(len(cases)))
+    multi = R.build_red_cases(0, 6, per_combo=1, seed=7)
+    check(len(multi) == 10 * 8 * 6,
+          "red case count = 480 at round 6 (got {})".format(len(multi)))
     placements = {c["placement"] for c in cases}
     timings = {c["timing"] for c in cases}
     check(placements == set(R.PLACE_OPTIONS),
           "red all 8 placements present")
-    check(timings == set(R.TIMING_OPTIONS),
-          "red all 6 timings present")
+    check(timings == {"immediate"}, "red single round collapses timings")
     bad, _ = R._schema_check(cases)
     check(bad == 0, "red cases schema-valid ({} invalid)".format(bad))
     # new techniques present

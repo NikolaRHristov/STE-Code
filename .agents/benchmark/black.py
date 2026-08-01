@@ -165,8 +165,28 @@ class Verifier:
             out.append(self._challenge_duplicates(variant, round_n, escapes))
 
         # WHITE's own hypotheses from the brief, each tested.
+        real = [e for e in brief
+                if e.get("claim", "baseline") != "baseline"]
         for entry in brief:
             out.append(self._test_hypothesis(variant, round_n, entry, purple))
+
+        # When WHITE published no real hypotheses (only the "baseline: no
+        # escapes" fallback), every brief challenge confirms a tautology built
+        # from empty evidence. That is 40/40 "confirmed" that proves nothing.
+        # Record the gap explicitly so a 0-hypothesis round is not misread as
+        # strong validation.
+        n_brief = len(brief)
+        if n_brief == 0 or not real:
+            out.append(self._record(
+                variant, round_n, "brief-coverage", "white",
+                "WHITE published no falsifiable hypotheses this round",
+                "attack-brief", "underpowered",
+                "no hypotheses to falsify: the attack-brief held only the "
+                "baseline fallback (or was empty), so the brief challenges "
+                "above confirmed a claim built from empty evidence. Treat "
+                "those 'confirmed' verdicts as void.",
+                evidence={"brief_entries": n_brief,
+                          "falsifiable_hypotheses": len(real)}))
         return out
 
     def _record(self, variant, round_n, claim_id, source, hypothesis,

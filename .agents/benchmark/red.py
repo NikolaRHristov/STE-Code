@@ -223,6 +223,14 @@ def build_red_cases(tier: int, round_n: int, *, per_combo: int = 1,
     timings = timings or TIMING_OPTIONS
     techniques = techniques or (_adv.TECHNIQUES + NEW_TECHNIQUES)
 
+    # Timings describe behaviour *across rounds* (escalating, decaying, ...).
+    # In a single-round run every timing is identical, so expanding all six
+    # just relabels the same 80 (technique x placement) attacks 6x -- 400
+    # wasted cases at ~19 runs/hour. Collapse to the single meaningful timing
+    # unless the caller explicitly asked for a subset.
+    if round_n <= 1 and timings == TIMING_OPTIONS:
+        timings = ["immediate"]
+
     rng = random.Random((seed + tier * 1000 + round_n * 7) & 0xFFFFFFFF)
     cases: "list[dict]" = []
     seq = 0
