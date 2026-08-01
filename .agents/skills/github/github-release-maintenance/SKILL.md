@@ -172,6 +172,52 @@ records of past mistakes — leave them.
 
 ## Pitfalls
 
+These are real failures hit while building and running this tooling.
+
+1. **`git add -A` during a release is destructive.** Other Hermes sessions run
+   concurrently in this repo and auto-commit their own directories. Staging the
+   whole tree sweeps up their half-written files. `release.py` stages only
+   `OWNED_PATHS`; a test asserts `"add", "-A"` never appears in the source.
+   Widen deliberately with `--paths`.
+
+2. **Preflight must not demand a globally clean tree.** Dirt outside the
+   release's own paths belongs to another session. Preflight checks only
+   `git status --porcelain -- <owned paths>` and fails only on real conflicts.
+
+3. **Stamp the version being released, not the newest tag.** `sync` runs at
+   step 3 but the tag is created at step 7, so `facts.py` would read the
+   *previous* version and stamp it. `release.py` exports `STE_RELEASE_VERSION`
+   and `STE_RELEASE_DATE`; `facts.py` prefers them over git. Skipping this
+   ships a release whose `CITATION.cff` claims the old version.
+
+4. **Resolve the staging list *after* the changelog step.** `CHANGELOG.md` may
+   not exist when preflight runs. A list captured too early silently omits it,
+   producing a release that generated a changelog but never committed it.
+
+5. **Never register a claim site another session owns.** A rule pointing at
+   `.agents/benchmark/schema.json` makes the drift gate red whenever that
+   session is mid-edit. A test asserts every claim file is inside
+   `OWNED_PATHS`.
+
+6. **Numbers describing the *source* standard are not drift.** ASD-STE100 has
+   53 rules and 19 categories; this adaptation has 54 and 22. Both appear
+   legitimately in the same sentence. Spell source figures as words
+   ("fifty-three rules") or append `<!-- release-scan:ignore -->`. Never
+   "fix" them — that makes the provenance claim false.
+
+7. **`git push` can hang on an auth prompt** and burn the whole tool timeout.
+   Export `GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=10"` first
+   so it fails fast instead of blocking. `timeout` is not on macOS by default.
+
+8. **Retag after any post-release fix.** If you amend content after tagging,
+   `git tag -f -a` all three tracks, force-push them, and refresh the release
+   body with `gh release edit --notes-file`. Otherwise the tag points at
+   content that does not match the notes.
+
+9. **Verify against git, not the tool's own output.** `Done (EXECUTE)` means
+   the loop finished, not that the work is correct. Check
+   `git ls-remote --tags`, `git show --stat`, and `gh release view`.
+
 - **`tiktoken` is required** for tier measurement. Without it, tier facts come
   back empty and tier claims are silently skipped. `pip install tiktoken`.
 - **Two page counts are both correct.** The source PDF has 434 printed pages;
