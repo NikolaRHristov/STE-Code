@@ -7,6 +7,7 @@
 | v1 | 2025-07-15 | Initial grid with 109 workers, 37 batches of 3. Single-shot extraction only. No retry logic. |
 | v2 | 2025-07-22 | Added worker-rails injection into prompt template. Added minimum file size check (>3KB). Added truncation detection by scanning last 3 lines. |
 | v3 | 2025-07-28 | Added full error recovery matrix with retry/split/skip paths. Cross-referenced `.agents/references/rails.md` and `.agents/references/worker-rails.md`. Added verification gates per batch. Added design rationale section. Added pre-flight checks. |
+| v4 | 2025-07-31 | Updated input path from `spec/issue-09-2025/page-NNNN.md` to `spec/issue-09-2025/page-dir/page-<spec-id>.md`. Old sequential page files replaced by spec-page-id files split from combined markdown. |
 
 For the current state of the pipeline, see `.agents/state/PROGRESS.md`.
 
@@ -46,7 +47,7 @@ Worker isolation:   independent hermes -z invocations, no shared state
 
 ## Worker Grid
 
-Pages grouped by 4. Output files: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
+Pages grouped by 4. Input: `spec/issue-09-2025/page-dir/page-<spec-id>.md`. Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 
 ### Batch Map (37 batches × 3 workers)
 
@@ -115,7 +116,7 @@ These rails apply to the launch script and orchestrator:
 - **R3 — Completion Integrity**: Never claim a batch is complete before verification. See "Verification Gates" below.
 - **R4 — Content Fidelity**: Workers extract exact text. Zero fabrication, zero commentary, zero summarization.
 - **R5 — Formatting Standards**: Output must follow the 9 refinement rules (blank lines after headings, clean tables, proper STE/Non-STE format).
-- **R6 — Factual Correctness**: Use the canonical facts (19 categories, deepseek-v4-pro, 53 rules).
+- **R6 — Factual Correctness**: Use the canonical facts (19 categories, poolside/laguna-s-2.1:free, 53 rules).
 - **R7 — Progress Tracking**: Update `.agents/state/PROGRESS.md` after verification, not before.
 - **R8 — Error Recovery**: When a mistake is detected, fix it. Do not hide it. Document the fix in `.agents/feedback/exchange.md`.
 
@@ -142,7 +143,7 @@ NOTE: Worker rails W1-W10 are appended to every `hermes -z` prompt. The full inj
 ## Worker Prompt Template (per worker)
 
 ```bash
-hermes -z "Read spec/issue-09-2025/page-NNNN.md through page-NNNN.md. Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+hermes -z "Read spec/issue-09-2025/page-dir/page-XXXX.md through page-YYYY.md. Extract ALL content exactly into ste-code/extracted/wNNN-pPPPP-PPPP.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 NOTE: The full worker rails block (W1-W10 from `.agents/references/worker-rails.md`) is appended to this prompt. The launcher script handles the concatenation.
@@ -154,10 +155,10 @@ NOTE: The full worker rails block (W1-W10 from `.agents/references/worker-rails.
 Run these checks before launching any batch:
 
 ```
-□ spec/issue-09-2025/ directory exists with page-0001.md through page-0434.md
+□ spec/issue-09-2025/page-dir/ directory exists with page-front-matter.md through page-2-1-Y2.md
 □ ste-code/extracted/ directory exists and is empty (or contains only prior successful extracts)
 □ .agents/state/PROGRESS.md is initialized with all 109 workers marked [ ]
-□ Model deepseek-v4-pro is available and responding
+□ Model poolside/laguna-s-2.1:free is available and responding
 □ API rate limit allows 3 concurrent requests
 □ Disk has >50MB free for 109 output files (~4-8KB each)
 □ git status is clean or shows only PROGRESS.md changes
@@ -204,7 +205,7 @@ A batch is NOT complete until all three gates pass.
 | All pages in range represented | Count `# Page N of 434` headers in output | If fewer than expected: truncated, split and retry |
 | Table row counts consistent | No single `|` orphan lines | If found: PDF interleaving artifact, re-extract |
 | Expected section type matches content | Cross-reference `.agents/references/section-types.md` | If wrong section type: wrong page range, re-extract with corrected range |
-| Spot-check 3 random lines against source | Compare output lines to `spec/issue-09-2025/page-NNNN.md` | If mismatch: fabrication risk, delete and re-extract |
+|| Spot-check 3 random lines against source | Compare output lines to `spec/issue-09-2025/page-dir/page-<spec-id>.md` | If mismatch: fabrication risk, delete and re-extract |
 
 ### Full Verification Procedure (per batch)
 
@@ -271,7 +272,7 @@ ste-code/extracted/w042b-p167-168.md
 cat w042a-p165-166.md w042b-p167-168.md > w042-p165-168.md
 ```
 
-NOTE: Split sub-workers use the same prompt template with adjusted page ranges. The worker rails (W1-W10) still apply. After merging, verify the combined file passes all 3 gates before committing.
+NOTE: Split sub-workers use the same prompt template with adjusted page ranges. The worker rails (W1-W10) still apply. After grouping, verify the combined file passes all 3 gates before committing.
 
 ### Escalation Criteria
 

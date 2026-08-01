@@ -6,6 +6,7 @@
 |---------|------|---------|
 | v1 | 2025-07-15 | Initial classification with 8 section types. Page ranges from worker-grid.md. No edge case handling. |
 | v2 | 2025-07-28 | Added failure recovery protocol, edge case resolution rules, gold-standard examples per type, cross-references, and design rationale appendix. |
+| v3 | 2025-07-31 | Page files now use spec page identifiers (e.g., page-HI-1.md, page-1-1-1.md) in the page-dir/ subdirectory, split from the combined issue-09-2025.md. Page ranges in this document still use PDF page numbers for worker assignment. |
 
 Last updated: 2025-07-30. Applies to ASD-STE100 Issue 9 (2025-01-15).
 

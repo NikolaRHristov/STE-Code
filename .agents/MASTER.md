@@ -16,7 +16,7 @@ All terms used throughout this project. Agents must use these exact terms.
 |------|-----------|------------|
 | **Extraction** | `ste-code/extracted/` | Stage 1: Raw text extraction from ASD-STE100 spec pages |
 | **Refinement** | `ste-code/refined/` | Stage 2: Formatting raw extraction into clean markdown |
-| **Merge** | `ste-code/merged/` | Stage 3: Concatenate, deduplicate, organize into master.md |
+| **Merge** | `ste-code/grouped/` | Stage 3: Concatenate, deduplicate, organize into master.md |
 | **Adaptation** | `ste-code/adapted/` | Stage 4: Transform STE rules into STE-Code (coding domain) |
 | **Artifacts** | `ste-code/artifacts/` | Stage 5: Generate 6 final .txt output files |
 
@@ -49,7 +49,7 @@ All terms used throughout this project. Agents must use these exact terms.
 | STE writing rules | 53 original → 51 adapted + 4 GR |
 | Spec pages | 434 | — |
 | Spec version | Issue 9, January 2025 | — |
-| Worker model | `deepseek-v4-pro` | "deepseek-pro" or "flash" |
+| Worker model | `poolside/laguna-s-2.1:free` | "deepseek-pro" or "flash" |
 | Workers per batch | 3 | — |
 | Pages per worker | 4 | — |
 | Total workers | 109 | — |
@@ -61,14 +61,14 @@ All terms used throughout this project. Agents must use these exact terms.
 |------|------|----------|
 | `ste-code/extracted/` | Data | 109 raw extraction .md files |
 | `ste-code/refined/` | Data | 109 formatted .md files |
-| `ste-code/merged/` | Data | master-raw.md, master.md |
+| `ste-code/grouped/` | Data | master-raw.md, master.md |
 | `ste-code/adapted/` | Data | Per-rule adaptation .md files |
 | `ste-code/artifacts/` | Data | 6 final .txt artifact files |
 | `ste-code/README.md` | Data | Pipeline documentation |
 | `.agents/state/` | Workflow | PROGRESS.md, REFINE-PROGRESS.md |
 | `.agents/audit/` | Workflow | Audit reports, state snapshots |
 | `.agents/prompts/refine/` | Workflow | 109 refinement worker prompts |
-| `.agents/scripts/` | Workflow | verify-batch.sh, check-rails.py |
+| `.agents/tools/quality/` | Workflow | verify-batch.sh, check-rails.py |
 | `.agents/feedback/` | Workflow | exchange.md (orchestrator↔reviewer) |
 | `.agents/skills/` | Workflow | 8 SKILL.md files + references |
 | `.agents/_scratch/` | Workflow | Quarantined premature files |
@@ -98,7 +98,7 @@ All terms used throughout this project. Agents must use these exact terms.
 
 - **Error**: Agent fabricated 6 artifact files before extraction complete
 - **Error**: Claimed "22 categories" — corrected to 19
-- **Error**: Claimed "deepseek-pro normalizes to flash" — corrected to `deepseek-v4-pro`
+- **Error**: Claimed "deepseek-pro normalizes to flash" — corrected to `poolside/laguna-s-2.1:free`
 - **Error**: Agent claimed "CORE ARTIFACTS COMPLETE" with 288 pages unread
 - **Correction**: Created v2/v3 protocol with hard gates and verification
 
@@ -145,7 +145,7 @@ ls spec/issue-09-2025/page-0001.md  # Must exist
 ls spec/issue-09-2025/page-0434.md  # Must exist
 
 # Verify model available
-hermes config | grep default  # Should be deepseek-v4-pro
+hermes config | grep default  # Should be poolside/laguna-s-2.1:free
 ```
 
 ### Step 1: Directory Setup
@@ -160,12 +160,12 @@ mkdir -p .agents/{state,audit,prompts/refine,scripts,feedback,_scratch}
 ```bash
 # Generate 109 worker prompts (each: read 4 spec pages, write to extracted/)
 # Launch in batches of 3:
-hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat .agents/prompts/refine/r001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 
 # After each batch:
-bash .agents/scripts/verify-batch.sh extracted w w001 w002 w003
+bash .agents/tools/quality/verify-batch.sh extracted w w001 w002 w003
 # Update .agents/state/PROGRESS.md
 ```
 
@@ -175,15 +175,15 @@ bash .agents/scripts/verify-batch.sh extracted w w001 w002 w003
 # Generate 109 refinement prompts (each: read extracted/NNN, write refined/NNN)
 # Launch same batch pattern as extraction
 # After each batch:
-bash .agents/scripts/verify-batch.sh refined r r001 r002 r003
+bash .agents/tools/quality/verify-batch.sh refined r r001 r002 r003
 ```
 
 ### Step 4: Merge
 
 ```bash
-cat ste-code/refined/r*-p*.md > ste-code/merged/master-raw.md
+cat ste-code/refined/r*-p*.md > ste-code/grouped/master-raw.md
 # Deduplicate, organize by section, validate completeness
-# Output: ste-code/merged/master.md
+# Output: ste-code/grouped/master.md
 ```
 
 ### Step 5: Adapt
@@ -211,7 +211,7 @@ cat ste-code/refined/r*-p*.md > ste-code/merged/master-raw.md
 
 ```bash
 # Rails compliance
-python3 .agents/scripts/check-rails.py
+python3 .agents/tools/quality/check-rails.py
 
 # State report
 # Trigger any agent: "state" → writes to .agents/audit/state-YYYYMMDD-HHMMSS.md
@@ -250,7 +250,7 @@ python3 .agents/scripts/check-rails.py
 | R7 | Progress Tracking | PROGRESS.md not reflecting reality |
 | R8 | Error Recovery | Hiding instead of fixing mistakes |
 
-Full details: `.agents/skills/references/rails.md`
+Full details: `.agents/references/rails.md`
 
 ---
 
@@ -258,12 +258,12 @@ Full details: `.agents/skills/references/rails.md`
 
 | File | Content |
 |------|---------|
-| `.agents/skills/references/worker-grid.md` | 109-worker batch grid |
-| `.agents/skills/references/section-types.md` | Page type classification |
-| `.agents/skills/references/worker-rails.md` | Worker-level self-checks |
-| `.agents/skills/references/quality-checklist.md` | Per-batch checklist |
-| `.agents/skills/references/category-mapping.md` | 19-category STE→STE-Code map |
-| `.agents/skills/references/rails.md` | 8 immutable guardrails |
+| `.agents/references/worker-grid.md` | 109-worker batch grid |
+| `.agents/references/section-types.md` | Page type classification |
+| `.agents/references/worker-rails.md` | Worker-level self-checks |
+| `.agents/references/quality-checklist.md` | Per-batch checklist |
+| `.agents/references/category-mapping.md` | 19-category STE→STE-Code map |
+| `.agents/references/rails.md` | 8 immutable guardrails |
 | `.agents/references/idempotency-baseline.md` | Worker idempotency standard — Tier 1/2/3 checks |
 | `.agents/feedback/exchange.md` | Orchestrator↔Reviewer communication |
 
@@ -275,10 +275,10 @@ Full details: `.agents/skills/references/rails.md`
 
 | Tool | Path | Purpose |
 |------|------|---------|
-| Oneshot wrapper | `.agents/tools/hermes-oneshot-wrapper.py` | Calls AIAgent directly. Reads prompt from file, deletes it after. No CLI, no TUI. |
-| Launch worker | `.agents/tools/launch-worker.sh` | Shell wrapper: auto-detects hermes venv, calls oneshot wrapper. Supports background with output capture. |
-| Telemetry worker | `.agents/tools/telemetry-worker.py` | Per-worker JSON telemetry in `.agents/telemetry/`. **Note: currently uses `hermes -z` CLI — migrate to oneshot wrapper.** |
-| Prompt generator | `.agents/tools/phase-a-gen.py` | Generates enhanced prompts from maturity-fix templates. |
+| Oneshot wrapper | `.agents/tools/lib/hermes-oneshot-wrapper.py` | Calls AIAgent directly. Reads prompt from file, deletes it after. No CLI, no TUI. |
+| Launch worker | `.agents/tools/shared/launch-worker.sh` | Shell wrapper: auto-detects hermes venv, calls oneshot wrapper. Supports background with output capture. |
+| Telemetry worker | `.agents/tools/shared/telemetry-worker.py` | Per-worker JSON telemetry in `.agents/telemetry/`. **Note: currently uses `hermes -z` CLI — migrate to oneshot wrapper.** |
+| Prompt generator | `.agents/tools/runners/phase-a-gen.py` | Generates enhanced prompts from maturity-fix templates. |
 
 **Anti-patterns (DO NOT USE):**
 - ❌ `hermes -z "$(cat file)"` in `terminal(background=true)` — opens TUI, does not process

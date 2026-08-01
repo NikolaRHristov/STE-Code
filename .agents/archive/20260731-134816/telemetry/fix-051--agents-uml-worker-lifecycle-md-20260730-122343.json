@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-051--agents-uml-worker-lifecycle-md",
+  "batch": 17,
+  "target": ".agents/uml/worker-lifecycle.md",
+  "duration_s": 423.5,
+  "output_ok": true,
+  "output_size": 49306,
+  "output_lines": 867,
+  "timestamp": "2026-07-30T12:30:47.406663+00:00"
+}

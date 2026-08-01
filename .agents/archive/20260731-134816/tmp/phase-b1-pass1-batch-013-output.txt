@@ -1,0 +1,9 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      category-mapping.md  0.2s
+  ┊ 📖 read      quality-checklist.md  0.2s
+  ┊ 🔎 find      *.json  0.1s
+  ┊ 📖 read      a-sec1-rule1.8.md  0.1s
+  ┊ 📖 read      pass1-batch-012.json  0.1s
+  ┊ 📖 read      pass1-batch-010.json  0.2s

@@ -2,7 +2,7 @@
 
 > **Source:** ASD-STE100 Issue 9, Rule 1.5, Pages 49-52 (lines 1698-1878 of master.md)
 > **Adaptation:** Aerospace → Code Documentation Domain
-> **Categories:** 22 (not 19 - Issue 9 added categories 21 and 22)
+|> **Categories:** 19 (verified against ASD-STE100 Issue 9, pages 47-52)
 > **Generated:** 2026-07-30
 
 ---
@@ -19,7 +19,7 @@ You can find many of these technical nouns in your company glossary or terminolo
 STE gives you a list of categories, with examples, to help you:
 - Select technical nouns to put in your company glossary or terminology database.
 - Use technical nouns correctly.
-You can use technical nouns in procedural and descriptive writing if you can include them in one or more of these twenty-two categories.
+You can use technical nouns in procedural and descriptive writing if you can include them in one or more of these nineteen categories.
 
 ### Adapted (Code Documentation Domain)
 
@@ -31,7 +31,7 @@ You can find many of these technical nouns in your project glossary, API referen
 This adaptation gives you a list of categories, with examples, to help you:
 - Select technical nouns to put in your project glossary or terminology database.
 - Use technical nouns correctly in API documentation, commit messages, README files, code comments, and technical specifications.
-You can use technical nouns in procedural and descriptive code documentation if you can include them in one or more of these twenty-two categories.
+You can use technical nouns in procedural and descriptive code documentation if you can include them in one or more of these nineteen categories.
 
 ### STE / Non-STE Example Pair
 
@@ -564,7 +564,7 @@ The technical nouns in their related categories are only examples. Rule 1.5 does
 
 ---
 
-*Adaptation complete. All 22 categories from ASD-STE100 Issue 9, Rule 1.5 (master.md lines 1698-1878) have been adapted from aerospace to code documentation domain. Related rules 1.6 through 1.11 (master.md lines 1883-2108) are included with adapted STE/non-STE code example pairs.*
+*Adaptation complete. All 19 categories from ASD-STE100 Issue 9, Rule 1.5 (master.md lines 1698-1878) have been adapted from aerospace to code documentation domain. Related rules 1.6 through 1.11 (master.md lines 1883-2108) are included with adapted STE/non-STE code example pairs.*
 
 ---
 

@@ -1,0 +1,17 @@
+TASK: Second-pass enrichment of the STE-Code deployment guide. Read then enrich.
+
+INPUT: ste-code/artifacts/ste-code-deployment-guide.txt
+OUTPUT: ste-code/artifacts/ste-code-deployment-guide.txt (overwrite with enriched version)
+
+ENRICHMENT INSTRUCTIONS:
+1. PRESERVE all 4 deployment options (Ollama, LM Studio, Python, batch)
+2. ADD Option E: OpenAI API integration with system message injection
+3. ADD Option F: Claude API with system prompt in first user turn
+4. ADD Option G: LangChain integration with STE-Code as a chain step
+5. EXPAND the Python example with error handling, retries, and streaming
+6. ADD a "Model Compatibility Matrix" table showing which models work best (deepseek-coder, qwen-coder, codestral, gpt-4, claude) with token limits
+7. ADD a "Troubleshooting" section: 5 common deployment issues + fixes
+8. ADD a "Benchmark Results" section: expected accuracy, latency, and token usage per model
+9. ENSURE: poolside/laguna-s-2.1:free reference accurate, 19 categories reference
+
+Output ONLY the enriched markdown file. No commentary.

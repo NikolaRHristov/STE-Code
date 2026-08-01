@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Phase E Runner — STE-Code gap-fill extensions (orchestrated, markdown-first).
+
+Delegates to .agents/tools/extension/extend_batch.py, which launches LLM workers
+that emit MARKDOWN (ste-code/extensions/<area>.md), derives JSON deterministically
+via md_to_json.py, and commits each area only after verify_extensions.py passes.
+
+Legacy one-shot CLI (--agent, --model) accepted as informational no-ops. The real
+pipeline is extend_batch.py.
+
+Usage:
+  python3 phase-e-run.py                 # all six gap areas
+  python3 phase-e-run.py verbs          # one area
+  python3 phase-e-run.py --resume       # skip passed areas
+  python3 phase-e-run.py --verify       # run verify_extensions.py only
+"""
+import os
+import sys
+from pathlib import Path
+
+PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+EXT_BATCH = PROJECT / ".agents" / "tools" / "extension" / "extend_batch.py"
+VERIFY = PROJECT / ".agents" / "tools" / "extension" / "verify_extensions.py"
+VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
+
+
+def main():
+    args = sys.argv[1:]
+    if "--verify" in args:
+        os.execv(VENV, [VENV, str(VERIFY)])
+        return
+    cmd = [VENV, str(EXT_BATCH), *args]
+    env = {**os.environ, "STE_MODEL": os.environ.get("STE_MODEL", "tencent/hy3:free")}
+    sys.stdout.write("Phase E (extensions) is orchestrated by extend_batch.py.\n"
+                     "Launching: " + " ".join(cmd) + "\n")
+    sys.stdout.flush()
+    os.execvpe(VENV, cmd, env)
+
+
+if __name__ == "__main__":
+    main()

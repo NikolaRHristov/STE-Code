@@ -104,19 +104,19 @@ STE-Code/
 
 ## Agent-Agnostic Tools
 
-All assembly scripts use the agent runner at `.agents/tools/agent-runner.py`. The default backend is Hermes. Add other agents in `.agents/config/agents.yaml`.
+All assembly scripts use the agent runner at `.agents/tools/lib/agent-runner.py`. The default backend is Hermes. Add other agents in `.agents/config/agents.yaml`.
 
 ```bash
 # Assemble prompts (default: Hermes)
-python3 .agents/tools/assemble-level3.py
-python3 .agents/tools/assemble-level2.py
-python3 .agents/tools/assemble-level1.py
+python3 .agents/tools/refinement/assemble-level3.py
+python3 .agents/tools/refinement/assemble-level2.py
+python3 .agents/tools/refinement/assemble-level1.py
 
 # Use a different agent
-python3 .agents/tools/assemble-level1.py --agent claude
+python3 .agents/tools/refinement/assemble-level1.py --agent claude
 
 # List available agents
-python3 .agents/tools/agent-runner.py --list
+python3 .agents/tools/lib/agent-runner.py --list
 ```
 
 For full documentation, see [`.agents/AGENTS.md`](.agents/AGENTS.md).

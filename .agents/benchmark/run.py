@@ -22,7 +22,7 @@ PROJECT = Path(__file__).resolve().parent.parent.parent
 BENCHMARK_DIR = Path(__file__).resolve().parent
 TEST_DIR = BENCHMARK_DIR / "test-cases"
 RESULTS_DIR = BENCHMARK_DIR / "results-v2"
-MODEL = "deepseek-v4-pro"
+MODEL = "poolside/laguna-s-2.1:free"
 
 # ── System prompts for each mode ──
 

@@ -2,7 +2,7 @@
 
 > **Source:** ASD-STE100 Issue 9, January 2025 (434 pages)
 > **Agents:** Extraction (#1), Refinement (#2), Auditor (#3), Continuation (#4)
-> **Model:** deepseek-v4-pro exclusively
+> **Model:** poolside/laguna-s-2.1:free exclusively
 > **Key Facts:** 53 writing rules + 4 GR rules, 19 technical noun categories, ~875 approved + ~1400 unapproved dictionary entries
 
 ---
@@ -99,7 +99,7 @@ stateDiagram-v2
 
     state BatchLoop {
         [*] --> GeneratePrompts : write 3 prompts to disk
-        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
         LaunchWorkers --> WorkerRun : 3 workers parallel (bg + notify_on_complete)
         WorkerRun --> WaitAll : wait for all 3 to exit
         WaitAll --> VerifyBatch : verify output files
@@ -161,7 +161,7 @@ stateDiagram-v2
 
     state BatchLoop {
         [*] --> GeneratePrompts : write 3 full prompts (no abbreviation)
-        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat ste-code/prompts-refine/rNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+        GeneratePrompts --> LaunchWorkers : hermes -z "$(cat ste-code/prompts-refine/rNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
         LaunchWorkers --> WorkerRun : 3 workers parallel (bg + notify_on_complete)
         WorkerRun --> WaitAll : wait for all 3 to exit
         WaitAll --> VerifyBatch : verify output files
@@ -199,7 +199,7 @@ stateDiagram-v2
         [*] --> G2_Count : ls ste-code/refined/r*-p*.md | wc -l → 109
         G2_Count --> G2_ZeroByte : find ste-code/refined -size 0 → empty
         G2_ZeroByte --> G2_Gaps : iterate r001-r109, all present
-        G2_Gaps --> G2_Rails : python3 .agents/scripts/check-rails.py
+        G2_Gaps --> G2_Rails : python3 .agents/tools/quality/check-rails.py
         G2_Rails --> G2_SpotCheck : spot-check 3 random files (formatting, no "...")
         G2_SpotCheck --> G2_Pass : ALL CHECKS PASS
         G2_SpotCheck --> G2_Fail : any check fails
@@ -470,7 +470,7 @@ stateDiagram-v2
         G4_3 --> G4_4 : anti-patterns are code-specific (not aerospace)
         G4_4 --> G4_5 : every claim cross-references master.md entry
         G4_5 --> G4_6 : anti-fabrication rules 1-7 verified
-        G4_6 --> G4_7 : 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro)
+        G4_6 --> G4_7 : 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro)
         G4_7 --> G4_PASS : GATE 4 ✅
     }
 
@@ -497,7 +497,7 @@ stateDiagram-v2
 
     state "Batch Scheduler\n(Orchestrator Loop)" as Scheduler {
         [*] --> WritePrompts : write 3 prompt files to disk
-        WritePrompts --> Launch : hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+        WritePrompts --> Launch : hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
         Launch --> Fork
 
         state Fork {
@@ -650,7 +650,7 @@ stateDiagram-v2
     }
 
     state "R6 — Factual Correctness" as R6 {
-        note: 19 categories (NOT 22)\n53+4 rules (NOT 65)\ndeepseek-v4-pro (NOT deepseek-pro)\n434 pages (Issue 9, Jan 2025)
+        note: 19 categories (NOT 22)\n53+4 rules (NOT 65)\npoolside/laguna-s-2.1:free (NOT deepseek-pro)\n434 pages (Issue 9, Jan 2025)
     }
 
     state "R7 — Progress Tracking" as R7 {
@@ -762,13 +762,13 @@ stateDiagram-v2
 |-------|-------|-------|--------|---------|-------|------|
 | 1 — Extract | #1 | 434 spec pages | `ste-code/extracted/` | 109 (37×3) | 109 | GATE 0 → GATE 1 |
 | 2 — Refine | #2 | `extracted/` | `ste-code/refined/` | 109 (37×3) | 109 | GATE 1 → GATE 2 |
-| 3 — Merge | #4 | `refined/` | `ste-code/merged/` | 1 (sequential) | 2 | GATE 2 → GATE 3 |
+| 3 — Merge | #4 | `refined/` | `ste-code/grouped/` | 1 (sequential) | 2 | GATE 2 → GATE 3 |
 | 4 — Adapt | #4 | `merged/` | `ste-code/adapted/` | 1 (sequential) | ≥10 | GATE 3 → GATE 4 |
 | 5 — Artifacts | #4 | `adapted/` | `ste-code/artifacts/` | 1 (sequential) | 6 | GATE 4 → FINAL |
 
 **Agent #3 (Auditor)** operates across all stages — disk-verified, never trusts claims, enforces R1-R8 rails.
 
-**Model:** deepseek-v4-pro exclusively. **Key facts:** 53 writing rules + 4 GR rules, 19 categories (NOT 22), 434 pages.
+**Model:** poolside/laguna-s-2.1:free exclusively. **Key facts:** 53 writing rules + 4 GR rules, 19 categories (NOT 22), 434 pages.
 
 ---
 
@@ -783,7 +783,7 @@ This section gives meta-instructions for agents and humans who must change this 
 3. Increment the minor version for additions (`1.X` → `1.X+1`).
 4. Increment the major version for breaking changes (`1.X` → `2.0`).
 5. Do not delete any existing section unless it is deprecated. Mark deprecated sections with `**DEPRECATED:** reason` at the top.
-6. Run `python3 .agents/scripts/check-rails.py` after any change to verify data consistency.
+6. Run `python3 .agents/tools/quality/check-rails.py` after any change to verify data consistency.
 
 ### 13.2 Scenario: Adding Stage 6 to the Pipeline
 
@@ -818,7 +818,7 @@ The batch count formula: `batches = ceil(worker_count / 3)`. For 109 workers: `c
 
 ### 13.4 Scenario: Changing the Model Name
 
-When you switch from `deepseek-v4-pro` to a different model:
+When you switch from `poolside/laguna-s-2.1:free` to a different model:
 
 | Section | Action |
 |---------|--------|
@@ -874,7 +874,7 @@ When artifacts change (add, remove, rename):
 **Limitation:** The pipeline hardcodes a maximum of 3 concurrent workers per batch. This limit exists for three reasons:
 1. Hermes Agent runs on a single process; more than 3 parallel `hermes -z` invocations risk context-window memory pressure.
 2. The `notify_on_complete` channel has not been tested at scale beyond 3 concurrent signals.
-3. `deepseek-v4-pro` API rate limits may trigger if 4+ workers submit prompts simultaneously.
+3. `poolside/laguna-s-2.1:free` API rate limits may trigger if 4+ workers submit prompts simultaneously.
 
 **What happens if violated:** Launching 4+ workers may cause:
 - Silent notification drops (one or more workers complete but the coordinator never learns).
@@ -915,7 +915,7 @@ When artifacts change (add, remove, rename):
 
 ### 14.6 Memory Pressure at Scale
 
-**Limitation:** Each `hermes -z` worker loads the full system prompt (~18K tokens) plus the worker prompt (~2K tokens) into context. With deepseek-v4-pro's context window, this is well within limits for a single worker. However, running 3 workers concurrently on a single host consumes ~3× context memory. On constrained systems, this may cause swapping.
+**Limitation:** Each `hermes -z` worker loads the full system prompt (~18K tokens) plus the worker prompt (~2K tokens) into context. With poolside/laguna-s-2.1:free's context window, this is well within limits for a single worker. However, running 3 workers concurrently on a single host consumes ~3× context memory. On constrained systems, this may cause swapping.
 
 **Workaround:** Reduce batch size to 2 or 1 on low-memory hosts. This increases pipeline wall-clock time but avoids OOM conditions.
 
@@ -945,7 +945,7 @@ When artifacts change (add, remove, rename):
 | `git` | Commit steps (all stages) | ≥ 2.30 | Cannot commit batches; pipeline stalls |
 | `git gcommit-hermes` alias | Commit steps | Custom alias | Commit fails; fall back to raw `git commit` |
 | `hermes` CLI | Worker launch (Stages 1–2) | v0.19.0+ | Cannot launch workers; pipeline cannot start |
-| `deepseek-v4-pro` API | All worker and orchestrator agents | Model endpoint | Workers fail on API errors (429, 503, timeout) |
+| `poolside/laguna-s-2.1:free` API | All worker and orchestrator agents | Model endpoint | Workers fail on API errors (429, 503, timeout) |
 | `python3` | Scripts (`check-rails.py`, prompt generators) | ≥ 3.9 | Gate checks cannot run; rails unverified |
 | `bash` | Shell commands in pipeline steps | ≥ 4.0 | Command execution fails |
 | `grep`, `find`, `wc`, `ls` | Gate verification checks | POSIX standard | Individual gate sub-checks fail |
@@ -955,9 +955,9 @@ When artifacts change (add, remove, rename):
 
 | Script | Used At | Purpose |
 |--------|---------|---------|
-| `.agents/scripts/check-rails.py` | GATE 1, GATE 2 | Validates R1–R8 compliance on extracted/refined files |
-| `.agents/scripts/generate_refine_prompts.py` | Stage 2 setup | Generates 109 refinement prompts from extracted files |
-| `.agents/scripts/generate_expansion_prompts.py` | Extension phase | Generates gap-filler prompts for dictionary/categories |
+| `.agents/tools/quality/check-rails.py` | GATE 1, GATE 2 | Validates R1–R8 compliance on extracted/refined files |
+| `.agents/tools/refinement/generate_refinement_prompts.py` | Stage 2 setup | Generates 109 refinement prompts from extracted files |
+| `.agents/tools/refinement/generate_expansion_prompts.py` | Extension phase | Generates gap-filler prompts for dictionary/categories |
 
 ### 15.3 State Files
 
@@ -975,7 +975,7 @@ GATE 0 checks:
   Is git installed?              → NO → pipeline cannot commit
   Is hermes on PATH?             → NO → pipeline cannot launch workers
   Is python3 on PATH?            → NO → check-rails.py cannot run
-  Is deepseek-v4-pro reachable?  → NO → workers fail after launch
+  Is poolside/laguna-s-2.1:free reachable?  → NO → workers fail after launch
   Does gcommit-hermes alias exist? → NO → fall back to raw git commit
 ```
 
@@ -1007,7 +1007,7 @@ These conditions must always be true across all pipeline runs. The Auditor (Agen
 
 - **I10 — Single Agent Per Stage:** Stages 1–2 each have one dedicated agent. Stages 3–5 share Agent #4.
 - **I11 — Auditor Cross-Cutting:** Agent #3 audits all stages but never modifies stage output directly. It moves files only to `_scratch/` for quarantine.
-- **I12 — Model Immutability:** All agents use `deepseek-v4-pro`. No model switching mid-pipeline.
+- **I12 — Model Immutability:** All agents use `poolside/laguna-s-2.1:free`. No model switching mid-pipeline.
 
 ### 16.5 Progress Tracking Invariants
 
@@ -1139,7 +1139,7 @@ checks:
     fail_action: "fix paths and retry"
   - id: G0-02
     description: "ste-code/ directory structure created"
-    command: "test -d ste-code/extracted && test -d ste-code/refined && test -d ste-code/merged && test -d ste-code/adapted && test -d ste-code/artifacts"
+    command: "test -d ste-code/extracted && test -d ste-code/refined && test -d ste-code/grouped && test -d ste-code/adapted && test -d ste-code/artifacts"
     expected: "exit 0"
     severity: critical
     fail_action: "mkdir -p for missing directories"
@@ -1151,7 +1151,7 @@ checks:
     fail_action: "regenerate worker grid"
   - id: G0-04
     description: "Prompt generation infrastructure ready"
-    command: "test -f .agents/scripts/generate_refine_prompts.py"
+    command: "test -f .agents/tools/refinement/generate_refinement_prompts.py"
     expected: "file exists"
     severity: warning
     fail_action: "locate or create prompt generator"
@@ -1195,7 +1195,7 @@ checks:
     fail_action: "re-launch specific missing workers"
   - id: G1-05
     description: "check-rails.py passes all checks"
-    command: "python3 .agents/scripts/check-rails.py ste-code/extracted/"
+    command: "python3 .agents/tools/quality/check-rails.py ste-code/extracted/"
     expected: "exit 0"
     severity: critical
     fail_action: "inspect rail violations; fix or re-extract"
@@ -1295,43 +1295,43 @@ description: "Verify the merged master document is complete and correct"
 checks:
   - id: G3-01
     description: "master-raw.md exists"
-    command: "test -f ste-code/merged/master-raw.md"
+    command: "test -f ste-code/grouped/master-raw.md"
     expected: "exit 0"
     severity: critical
     fail_action: "redo concatenation from refined files"
   - id: G3-02
     description: "master.md exists (deduplicated)"
-    command: "test -f ste-code/merged/master.md"
+    command: "test -f ste-code/grouped/master.md"
     expected: "exit 0"
     severity: critical
     fail_action: "redo deduplication and organization pass"
   - id: G3-03
     description: "Exactly 53 rules present"
-    command: "grep -c '^#### Rule' ste-code/merged/master.md"
+    command: "grep -c '^#### Rule' ste-code/grouped/master.md"
     expected: "53"
     severity: critical
     fail_action: "redo merge; check for missing or duplicated rules"
   - id: G3-04
     description: "19 technical noun categories present"
-    command: "grep -c '^### Category' ste-code/merged/master.md"
+    command: "grep -c '^### Category' ste-code/grouped/master.md"
     expected: "19"
     severity: critical
     fail_action: "redo merge; check category boundary deduplication"
   - id: G3-05
     description: "Approximately 875 APPROVED dictionary entries"
-    command: "grep -c 'APPROVED' ste-code/merged/master.md"
+    command: "grep -c 'APPROVED' ste-code/grouped/master.md"
     expected: ">= 800 AND <= 950"
     severity: warning
     fail_action: "investigate discrepancy; may indicate boundary merge errors"
   - id: G3-06
     description: "Approximately 1400 UNAPPROVED dictionary entries"
-    command: "grep -c 'UNAPPROVED' ste-code/merged/master.md"
+    command: "grep -c 'UNAPPROVED' ste-code/grouped/master.md"
     expected: ">= 1300 AND <= 1500"
     severity: warning
     fail_action: "investigate discrepancy; may indicate boundary merge errors"
   - id: G3-07
     description: "Section organization correct"
-    command: "grep '^## ' ste-code/merged/master.md"
+    command: "grep '^## ' ste-code/grouped/master.md"
     expected: "Front matter, Part 1, Categories, Part 2, Appendices (in order)"
     severity: critical
     fail_action: "reorganize sections"
@@ -1387,8 +1387,8 @@ checks:
     fail_action: "quarantine and regenerate affected files"
   - id: G4-07
     description: "Correct category count and model name"
-    command: "grep -c '19 categories' ste-code/adapted/*.md && grep -c 'deepseek-v4-pro' ste-code/adapted/*.md"
-    expected: "19 referenced, deepseek-v4-pro referenced (not 22, not deepseek-pro)"
+    command: "grep -c '19 categories' ste-code/adapted/*.md && grep -c 'poolside/laguna-s-2.1:free' ste-code/adapted/*.md"
+    expected: "19 referenced, poolside/laguna-s-2.1:free referenced (not 22, not deepseek-pro)"
     severity: critical
     fail_action: "correct category count or model name"
 ```
@@ -1458,7 +1458,7 @@ checks:
 ┌─────────────────────────────────────────────────────────────┐
 │            STE-CODE PIPELINE — QUICK REFERENCE              │
 ├─────────────────────────────────────────────────────────────┤
-│ MODEL: deepseek-v4-pro   SPEC: ASD-STE100 Issue 9 (434 pp) │
+│ MODEL: poolside/laguna-s-2.1:free   SPEC: ASD-STE100 Issue 9 (434 pp) │
 │ AGENTS: #1 Extract  #2 Refine  #3 Audit  #4 Continue       │
 ├──────────┬──────────┬──────────┬──────────┬────────────────┤
 │ STAGE 1  │ STAGE 2  │ STAGE 3  │ STAGE 4  │ STAGE 5        │
@@ -1470,11 +1470,11 @@ checks:
 │ RAILS (R1-R8): Isolation • Naming • Completion • Fidelity  │
 │                Formatting • Correctness • Progress • Errors │
 ├─────────────────────────────────────────────────────────────┤
-│ LAUNCH: hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro   │
+│ LAUNCH: hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free   │
 │         --yolo bg=true notify_on_complete=true              │
 ├─────────────────────────────────────────────────────────────┤
 │ COMMIT: git add -A && git gcommit-hermes "Batch N: …"     │
-│ GATE:   python3 .agents/scripts/check-rails.py              │
+│ GATE:   python3 .agents/tools/quality/check-rails.py              │
 │ AUDIT:  "state" → Agent #3 state report                     │
 ├─────────────────────────────────────────────────────────────┤
 │ INVARIANTS: 109 files • >3KB • no gaps • no fabrication     │

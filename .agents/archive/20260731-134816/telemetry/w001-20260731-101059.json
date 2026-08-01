@@ -1,0 +1,22 @@
+{
+  "worker_id": "W001",
+  "batch": 1,
+  "page_range": "1-4",
+  "model": "poolside/laguna-s-2.1:free",
+  "attempt": 3,
+  "prompt_size_bytes": 873,
+  "start_time": "2026-07-31T10:10:59.620428+00:00",
+  "end_time": "2026-07-31T10:10:59.646037+00:00",
+  "duration_seconds": 0.0,
+  "exit_code": 2,
+  "output_file": "ste-code/extracted/w001-p1-4.md",
+  "output_exists": false,
+  "output_size_bytes": 0,
+  "output_lines": 0,
+  "verification_status": null,
+  "verification_message": null,
+  "errors": [
+    "Output file not created by agent"
+  ],
+  "stderr_snippet": "/Users/nikola/.hermes/hermes-agent/venv/bin/python3: can't open file '/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/tools/hermes-oneshot-wrapper.py': [Errno 2] No such file or directory\n"
+}

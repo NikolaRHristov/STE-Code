@@ -1,0 +1,23 @@
+Done. The file has been saved. Here is the summary:
+
+**File:** `.agents/skills/translations/SKILL.md`
+**Before:** 355 lines (16,512 bytes)
+**After:** 746 lines (38,174 bytes)
+**Added:** 391 lines of new content
+
+**All original content preserved.** The following sections were added:
+
+| Section | Location | Description |
+|---------|----------|-------------|
+| Architecture Overview | After intro | Five-phase loop diagram, key architectural decisions table with rationale |
+| Agent #9 Role Contract (inline) | After Agent Contract | Table summarizing the full contract: skills, poll system, locale split, quality gates, recovery, self-discovery, token budget, performance |
+| Decision Tree | Under What's Translatable? | ASCII decision tree with 7 branches covering all file types. Each branch has a YES/NO path with explicit verdict. Default SKIP with traceable reason |
+| Pre-Flight Checks + Post-Creation Self-Check | Within Worker Prompt Template | Worker validates source dir exists, lists files, counts them. After creation, runs `test -f` and `wc -c` on every placeholder |
+| Prompt Template Variables | After Prompt Template | Table mapping tokens (`<SOURCE_DIR>`, `<LOCALE_1>`, etc.) to replacements with examples |
+| Annotated Report Walkthrough | After Example Discovery Report | Line-by-line interpretation of each report field. What the orchestrator checks. What makes a reason good vs bad |
+| Report Validation by Orchestrator | After Walkthrough | 5 validation rules the orchestrator applies before accepting a report. Rejection criteria and idempotent re-launch strategy |
+| Validation Commands | After Quality Checks | 5 exact shell commands for batch-scoped verification: placeholder existence, empty check, per-locale count, path structure diff, batch-scoped wc |
+| Catalog Validation Rules | Under Catalog Schema | 6 rules (R1-R6) covering header accuracy, duplicate detection, source directory grouping, section ordering, separator consistency, overwrite protection. Shell one-liner for R1 check |
+| 5 New Edge Cases | Under Edge Cases | Source dir missing, worker failure modes table (5 types with symptoms and recovery), symlinks, empty source dir, locale dir conflict |
+| Troubleshooting | Before Key Facts | 5 common symptoms: count mismatch, per-locale mismatch, catalog/disk drift, wrong working directory, git merge conflict on catalog. Each with cause and fix |
+| Worker Lifecycle | Before Communication | Full lifecycle diagram from LAUNCH through PRE-FLIGHT, REASONING, FILE CREATION, SELF-CHECK, REPORT to EXIT. Orchestrator's 8 post-exit actions listed |

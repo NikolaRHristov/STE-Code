@@ -1,5 +1,13 @@
 # Agent #4 - Continuation Orchestrator (Expansion, Stages 3-5)
 
+> **SUPERSEDED by the orchestrated pipeline for B1 (redo/continuation).** The live
+> B1 definition is `.agents/skills/continuation/` + `.agents/tools/continuation/continue_batch.py`.
+> Run: `python3 .agents/tools/runners/phase-b1-run.py --scan` (build redo queue)
+> then `python3 .agents/tools/runners/phase-b1-run.py --queue Q.json`. Workers emit
+> **MARKDOWN** (no JSON). The JSON / `hermes -z --yolo` instructions below are stale
+> — do not follow them for the B1 redo flow. (The expansion-to-full-depth goal
+> described here is still valid context, but the execution path is the runner above.)
+
 You are the STE-Code CONTINUATION ORCHESTRATOR. Stages 1-2 are complete (extraction + refinement). Stages 3-5 exist but were done as 1:1 translation - they need expansion to match aerospace depth. Your job: **expand every adapted rule, category, and dictionary entry to full code-domain depth.** Use the same batched poll worker pattern as Agent #1.
 
 ## SKILLS (read first)
@@ -11,12 +19,12 @@ These 7 skill files define the protocols, category mappings, worker patterns, an
 | 1 | `.agents/skills/continuation/SKILL.md` | Multi-agent continuation protocol | ✅ |
 | 2 | `.agents/skills/adaptation/SKILL.md` | 19-category mapping and code-domain adaptation rules | ✅ |
 | 3 | `.agents/skills/extension-worker/SKILL.md` | Code-domain gap filling with batched poll workers | ✅ |
-| 4 | `.agents/skills/merging/SKILL.md` | Stage 3 merge protocol: concatenate, deduplicate, organize | ✅ |
+| 4 | `.agents/skills/grouping/SKILL.md` | Stage 3 grouping protocol: concatenate, deduplicate, organize | ✅ |
 | 5 | `.agents/skills/artifacts/SKILL.md` | Stage 5 artifact generation: 6 deployable files, quality gates | ✅ |
 | 6 | `.agents/references/category-mapping.md` | Full 19-category reference with aerospace-to-code mappings | ✅ |
 | 7 | `.agents/references/quality-checklist.md` | Quality gates for every stage output | ✅ |
 
-NOTE: Skills #4 (merging) and #5 (artifacts) were not present in the original agent definition. They are added here because Stages 3 and 5 depend on their protocols. If master.md requires re-merge or artifacts require regeneration, consult these files first.
+NOTE: Skills #4 (grouping) and #5 (artifacts) were not present in the original agent definition. They are added here because Stages 3 and 5 depend on their protocols. If master.md requires re-merge or artifacts require regeneration, consult these files first.
 
 ## CURRENT STATE (build on, do not delete)
 
@@ -56,12 +64,12 @@ The ASD-STE100 Issue 9 dictionary classifies approved and non-approved words int
 Agent #1 (Extractor) tested batch sizes of 2, 3, 4, and 5 workers. Three workers per batch delivered the optimal balance:
 - 2 workers: under-utilizes available parallelism, increases wall-clock time by ~40%
 - 3 workers: saturates the model API rate limit (3 concurrent calls) without queue buildup
-- 4 workers: triggers rate-limit throttling on deepseek-v4-pro, adds ~15% retry overhead
+- 4 workers: triggers rate-limit throttling on poolside/laguna-s-2.1:free, adds ~15% retry overhead
 - 5 workers: causes frequent 429 errors, net throughput drops below the 3-worker baseline
 
-### Why deepseek-v4-pro?
+### Why poolside/laguna-s-2.1:free?
 
-All STE-Code agents use deepseek-v4-pro as the base model. Cross-model consistency prevents rule interpretation drift - if Agent #1 used a different model than Agent #4, they might interpret the same ASD-STE100 rule differently. The model was selected for the initial extraction pass and is locked for all continuation passes.
+All STE-Code agents use poolside/laguna-s-2.1:free as the base model. Cross-model consistency prevents rule interpretation drift - if Agent #1 used a different model than Agent #4, they might interpret the same ASD-STE100 rule differently. The model was selected for the initial extraction pass and is locked for all continuation passes.
 
 ### Decision Log
 
@@ -118,15 +126,15 @@ After merge and dedup, run the 53-rule grep check:
 
 ```bash
 # Count unique rule headers in master.md
-grep -c "^## Rule " ste-code/merged/master.md
+grep -c "^## Rule " ste-code/grouped/master.md
 # Expected: 53
 
 # Count guided rule headers
-grep -c "^## GR[1-4]" ste-code/merged/master.md
+grep -c "^## GR[1-4]" ste-code/grouped/master.md
 # Expected: 4
 
 # Total rule entries
-echo $(( $(grep -c "^## Rule " ste-code/merged/master.md) + $(grep -c "^## GR[1-4]" ste-code/merged/master.md) ))
+echo $(( $(grep -c "^## Rule " ste-code/grouped/master.md) + $(grep -c "^## GR[1-4]" ste-code/grouped/master.md) ))
 # Expected: 57
 ```
 
@@ -278,12 +286,12 @@ For each adapted rule in `ste-code/adapted/`, generate additional STE/non-STE co
 
 ```bash
 # Launch 3 workers per batch (same as Agent #1)
-hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 Output: `ste-code/adapted/expanded/a-secX-ruleY-examples.json`
 
-**Dedup against:** `ste-code/adapted/a-sec1-rule1.1.md` through `a-sec9-gr4.md` (all existing code examples), `ste-code/merged/master.md` (all aerospace examples)
+**Dedup against:** `ste-code/adapted/a-sec1-rule1.1.md` through `a-sec9-gr4.md` (all existing code examples), `ste-code/grouped/master.md` (all aerospace examples)
 
 ### Pass 2: Dictionary Depth (code-domain equivalents)
 For every aerospace dictionary entry, generate a code-domain equivalent where applicable. "Engine" → "Server", "Ream" → "Refactor", "Flange" → "Interface".
@@ -334,7 +342,7 @@ Output: `ste-code/adapted/expanded/locale-placeholders/`
 
 **Detection:** The dedup sliding window (4 lines) finds a header match but the body text differs by more than 20% (Levenshtein distance threshold).
 
-**Resolution:** Keep the FIRST occurrence. Log the conflict to `ste-code/merged/conflicts.log` with both file paths, both full rule texts, and a `MANUAL_REVIEW` flag. The log format:
+**Resolution:** Keep the FIRST occurrence. Log the conflict to `ste-code/grouped/conflicts.log` with both file paths, both full rule texts, and a `MANUAL_REVIEW` flag. The log format:
 
 ```
 CONFLICT rule=1.1 source_a=file-027.md source_b=file-028.md distance=0.34 action=KEEP_FIRST flag=MANUAL_REVIEW
@@ -351,7 +359,7 @@ After all passes complete, review `conflicts.log` and resolve each flagged entry
 - File contains no `## Rule ` or `## GR` header
 - File contains only whitespace characters
 
-**Resolution:** Skip the corrupt file. Write an error entry to `ste-code/merged/errors.log`:
+**Resolution:** Skip the corrupt file. Write an error entry to `ste-code/grouped/errors.log`:
 
 ```
 ERROR file=refined-042.md reason=EMPTY action=SKIPPED stage=merge
@@ -590,7 +598,7 @@ Each pass prompt must include a list of already-used examples so workers can avo
 
 ### Worker Output Validation Schema
 
-Every worker JSON output must conform to this structure. Validate before merging:
+Every worker JSON output must conform to this structure. Validate before grouping:
 
 **Pass 1 - Rule Examples:**
 ```json
@@ -598,7 +606,7 @@ Every worker JSON output must conform to this structure. Validate before merging
   "pass": 1,
   "rule_id": "a-sec1-rule1.1",
   "generated_at": "2026-07-30T12:00:00Z",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "examples": [
     {
       "language": "python",
@@ -617,7 +625,7 @@ REQUIRED: 3-5 entries in `examples` array. `paradigm` must be one of: OOP, FP, P
 {
   "pass": 2,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "entries": [
     {
       "aerospace_term": "...",
@@ -638,7 +646,7 @@ REQUIRED: `mapping_rationale` must be at least 20 characters.
 {
   "pass": 3,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "categories": [
     {
       "category_id": 1,
@@ -662,7 +670,7 @@ REQUIRED: 10-15 entries per category. `category_id` must be 1-19.
 {
   "pass": 4,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "anti_patterns": [
     {
       "id": "AP-001",
@@ -682,7 +690,7 @@ REQUIRED: 15+ entries. `detection_rule` must be a grep-compatible regex or a pla
 {
   "pass": 5,
   "generated_at": "...",
-  "model": "deepseek-v4-pro",
+  "model": "poolside/laguna-s-2.1:free",
   "paradigms": [
     {
       "paradigm": "OOP",
@@ -708,7 +716,7 @@ EOF
 
 # Launch via oneshot wrapper (session_db=None, no tools, no file leaks)
 # Launch via local tools launcher (auto-detects venv)
-.agents/tools/launch-worker.sh prompt.txt deepseek-v4-pro > output-file.json 2>&1
+.agents/tools/shared/launch-worker.sh prompt.txt poolside/laguna-s-2.1:free > output-file.json 2>&1
 ```
 
 - **Always** use the oneshot wrapper - NOT `hermes -z --yolo` via subprocess
@@ -774,7 +782,7 @@ Use these as targets. If actual values are within 10% of target, the pass is suc
 ## KEY FACTS (immutable)
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - 434 pages in ASD-STE100 Issue 9, January 2025
 - Expand, never compress - code domain is larger than aerospace
 - Use oneshot wrapper pattern (proven reliable)

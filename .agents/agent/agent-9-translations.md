@@ -17,7 +17,7 @@ Enrichment is ad-hoc and per-category. Different sessions add different things -
 ## SKILLS (read first)
 
 1. `.agents/skills/translations/SKILL.md` - Discovery + scaffolding protocol
-2. `.agents/skills/spec-extraction/ste-code-workers/SKILL.md` - Worker orchestration (batch-of-3 pattern)
+2. `.agents/skills/extraction/SKILL.md` - Worker orchestration (batch-of-3 pattern)
 3. `.agents/references/worker-rails.md` - Worker self-validation rails
 4. `.agents/agent/agent-3-auditor.md` - How the auditor verifies claims against disk
 
@@ -185,7 +185,7 @@ Your output is the blank files on disk plus this report. Do NOT put any content 
 
 Then launch:
 ```bash
-hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat .agents/prompts/translations/discovery-NNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## DISCOVERY TARGETS (in order of priority)
@@ -586,7 +586,7 @@ The `ste-code/adapted/a-dictionary.md` file is 5,943 lines. A worker that encoun
 - 3 workers per batch, notify_on_complete=true
 - Catalog tracked in `translations/catalog.md`
 - Re-scan after enrichment - discovery never "finishes"
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - Communication via `.agents/feedback/exchange.md`
 
 ## STATE TRACKING

@@ -43,7 +43,7 @@ example pair. The format is:
 Facts are immutable across the pipeline:
   - 19 technical noun categories (not 22)
   - 51 writing rules plus 4 General Rules (not 65)
-  - Model: deepseek-v4-pro
+  - Model: tencent/hy3:free
   - 434 spec pages across 109 workers, 37 batches of 3
 
 
@@ -56,11 +56,11 @@ previous stage directory and writes to its own. Cross-contamination between
 stages is forbidden (Rail 1: Stage Isolation).
 
 STAGE 1 — EXTRACTION
-  Input: spec/issue-09-2025/page-0001.md through page-0434.md
+  Input: spec/issue-09-2025/page-dir/page-<spec-id>.md (426 files)
   Output: ste-code/extracted/wNNN-pPPPP-PPPP.md (109 files)
   Method: Parallel workers read 4 pages each, extract every word verbatim
   Workers: 109 workers, 37 batches of 3
-  Model: deepseek-v4-pro
+  Model: tencent/hy3:free
   Quality: Tier 1-3 gates (structural, content, integrity)
   Recovery: 5-level escalation (retry, split, model switch, flag, stop)
 
@@ -216,7 +216,7 @@ PIPELINE-LEVEL QUALITY (8 immutable guardrails):
   R3 — Completion Integrity: never claim complete without disk evidence
   R4 — Content Fidelity: zero fabrication, every claim grounded in source
   R5 — Formatting Standards: 9 refinement rules, blank lines, tables
-  R6 — Factual Correctness: 19 categories, deepseek-v4-pro, 51 rules
+  R6 — Factual Correctness: 19 categories, tencent/hy3:free, 51 rules
   R7 — Progress Tracking: PROGRESS.md matches disk reality
   R8 — Error Recovery: fixes documented, stale files purged
 
@@ -265,7 +265,7 @@ SCORING METHOD
 
 EXECUTION
   Parallel workers in batches of 3, each processing one test case
-  Same model (deepseek-v4-pro) for both STE-Code and control groups
+  Same model (tencent/hy3:free) for both STE-Code and control groups
   CWD-isolated execution prevents cross-contamination
   Orchestrator: .agents/benchmark/orchestrator.py
   Control: .agents/benchmark/orchestrator-control.py
@@ -314,11 +314,12 @@ STE-Code compliant output using those artifacts as reference.
 IMMUTABLE FACTS
 ---------------
 
-Source: ASD-STE100 Issue 9, January 2025 (434 pages)
-Model: deepseek-v4-pro
+Source: ASD-STE100 Issue 9, January 2025 (434 PDF pages, 426 spec pages)
+Model: tencent/hy3:free
 Adaptation: 51 writing rules + 4 General Rules (55 adapted files)
 Categories: 19 technical noun categories + 4 verb categories
 Dictionary: 5,943 lines of approved/unapproved words
 Artifacts: 6 deployable files across 5 adaptation levels
 Benchmark: 59 tests, 14 categories, 96.6% pass rate
-Version: 3.0, 2026-07-30
+Version: 3.1, 2026-07-31
+Page files: spec/issue-09-2025/page-dir/page-<spec-id>.md (426 files split from combined markdown)

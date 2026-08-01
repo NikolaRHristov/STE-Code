@@ -1,0 +1,22 @@
+{
+  "worker_id": "W002",
+  "batch": 1,
+  "page_range": "5-8",
+  "model": "poolside/laguna-s-2.1:free",
+  "attempt": 1,
+  "prompt_size_bytes": 1496,
+  "start_time": "2026-07-31T10:24:44.908376+00:00",
+  "end_time": "2026-07-31T10:34:44.918803+00:00",
+  "duration_seconds": 600.0,
+  "exit_code": -1,
+  "output_file": "ste-code/extracted/w002-p5-8.md",
+  "output_exists": false,
+  "output_size_bytes": 0,
+  "output_lines": 0,
+  "verification_status": null,
+  "verification_message": null,
+  "errors": [
+    "TIMEOUT after 600s"
+  ],
+  "stderr_snippet": ""
+}

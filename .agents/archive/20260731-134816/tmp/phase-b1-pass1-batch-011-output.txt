@@ -1,0 +1,29 @@
+  ┊ 📖 read      SKILL.md  0.3s
+  ┊ 📖 read      SKILL.md  0.3s
+  ┊ 📖 read      SKILL.md  0.3s
+  ┊ 📖 read      category-mapping.md  0.3s
+  ┊ 📖 read      quality-checklist.md  0.3s
+  ┊ 🔎 find      a-sec1-rule1.6*  0.1s
+  ┊ 🔎 find      pass1-batch-*  0.1s
+  ┊ 📖 read      a-sec1-rule1.6.md  0.1s
+  ┊ 📖 read      pass1-batch-009.json  0.1s
+  ┊ 📖 read      pass1-batch-008.json  0.1s
+File written and validated. Here is a summary of the expansion:
+
+---
+
+Pass 1 — Rule Examples (Batch 11) complete. Wrote 5 entries to `ste-code/adapted/expanded/pass1-batch-011.json`.
+
+**Rule 1.6** — Non-approved words only when they are technical nouns (Principle P6)
+
+| # | Unapproved Word | Approved Alternative | Technical Noun Form | Category |
+|---|----------------|---------------------|-------------------|----------|
+| 1 | gateway | entry point | API gateway | 19 (Network/I/O) |
+| 2 | worker | process | background worker | 6 (Modules/Services) |
+| 3 | token | symbol | access token | 19 (Network/I/O) |
+| 4 | hook | callback | pre-commit hook | 3 (Dev tools) |
+| 5 | pipe | channel | named pipe | 19 (Network/I/O) |
+
+Each entry follows the spec pattern: the non-STE example uses the unapproved word in a general context (violation), the STE example uses the approved alternative, and the explanation documents that the unapproved word IS permitted as part of a code-domain technical noun — mirroring the `base → bottom / base (technical noun)` and `main → primary / main landing gear` patterns from the original.
+
+All entries pass the dedup blacklist check, all non-STE examples use avoided synonyms from the canonical table (Transmit→Send, Initiate→Start, retrieve→get, execute→do, leverages→use, verify→check, Configure→Set, validate→check, Employ→Use, forward→send), and no aerospace terms leaked into the code-domain examples.

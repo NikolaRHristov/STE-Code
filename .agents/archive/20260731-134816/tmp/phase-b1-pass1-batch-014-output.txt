@@ -1,0 +1,10 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      category-mapping.md  0.2s
+  ┊ 🔎 find      ste-code/adapted/expanded/*.json  0.2s
+  ┊ 📖 read      pass1-batch-012.json  0.1s
+  ┊ 📖 read      pass1-batch-011.json  0.1s
+  ┊ 📖 read      pass1-batch-010.json  0.1s
+  ┊ 🔎 find      pass1-batch-01*.json  0.1s
+  ┊ 📖 read      quality-checklist.md  0.2s
+  ┊ 🔎 find      pass1-batch-013.json  0.2s
+  ┊ 🔎 find      pass1-batch-014.json  0.1s

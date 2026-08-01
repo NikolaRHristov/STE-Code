@@ -6,7 +6,7 @@ runs all 59 test cases against its assigned system prompt. Results are compared
 across levels to measure how compliance scales with prompt size.
 
 Usage:
-  python3 .agents/benchmark/benchmark-levels.py [--levels 1,2,3,4,5] [--model deepseek-v4-pro]
+  python3 .agents/benchmark/benchmark-levels.py [--levels 1,2,3,4,5] [--model poolside/laguna-s-2.1:free]
                                                 [--timeout 600] [--max-workers 10]
 """
 
@@ -129,7 +129,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="Multi-Level STE-Code Benchmark")
     parser.add_argument("--levels", default="1,2,3,4,5", help="Comma-separated levels (default: 1-5)")
-    parser.add_argument("--model", default="deepseek-v4-pro", help="Model to use")
+    parser.add_argument("--model", default="poolside/laguna-s-2.1:free", help="Model to use")
     parser.add_argument("--timeout", type=int, default=600, help="Timeout per orchestrator (seconds)")
     parser.add_argument("--max-workers", type=int, default=0, help="Max concurrent workers (0=unlimited)")
     parser.add_argument("--dry-run", action="store_true", help="Print config without running")

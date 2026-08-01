@@ -1,0 +1,18 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 🔎 find      ste-code/adapted/expanded  0.2s
+  ┊ 🔎 find      ste-code/adapted/a-sec1-rule1.14*  0.1s
+  ┊ 📖 read      SKILL.md  0.1s
+Pass 1 Batch 6 complete. Written to `ste-code/adapted/expanded/pass1-batch-006.json`.
+
+Summary of 5 new STE/non-STE pairs for Rule 1.14:
+
+| # | British → American | Context |
+|---|---|---|
+| 1 | catalogues → catalogs | API endpoint documentation |
+| 2 | behaviour → behavior | Callback/middleware API docs |
+| 3 | organise → organize | Procedural module organization |
+| 4 | Quoted British preserved | Rust compiler error (P14 + Rule 8.6) |
+| 5 | analyses→analyzes, modelling→modeling | Profiling tool docs (double correction) |
+
+All 5 examples are distinct from the dedup blacklist and from the 3 existing examples in `a-sec1-rule1.14.md`. No aerospace terms remain.

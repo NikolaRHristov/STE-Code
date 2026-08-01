@@ -1,4 +1,4 @@
-### .agents/skills/spec-extraction/ste-code-workers/SKILL.md
+### .agents/skills/extraction/SKILL.md
 - **Level:** 3
 - **Summary:** Orchestrates 109 parallel `hermes -z` workers for ASD-STE100 Issue 9 spec extraction. Defines launch rules, batch-of-3 coordination, quality checks, and mandatory PROGRESS.md tracking.
 - **Strengths:**
@@ -22,7 +22,7 @@
 - **What Level 4 Would Add:** Dedicated edge-case section covering worker hangs, timeouts, corrupt output, and git commit failures with per-case recovery protocols. Design rationale for batch size, page count, and model choice. Performance benchmarks with timing data. Known limitations section with workarounds. Example of correct output format.
 - **Priority:** medium
 
-### .agents/skills/spec-extraction/ste-code-workers/references/worker-prompts.md
+### .agents/skills/extraction/references/worker-prompts.md
 - **Level:** 1
 - **Summary:** Reference catalog of 9 worker prompts (W1-W9) used to extract the 434-page ASD-STE100 spec, covering front matter through appendices. Each prompt specifies page ranges, INCLUDE lists, and FORMAT instructions.
 - **Strengths:**
@@ -41,7 +41,7 @@
 - **What Level 2 Would Add:** A header explaining these are v2 legacy prompts and how they differ from v3. Cross-reference to the parent SKILL.md. Instructions for generating v3-style 109-worker prompts. Rationale for the 9-way split. Version date and author.
 - **Priority:** high
 
-### .agents/skills/spec-extraction/ste-code-validate/SKILL.md
+### .agents/skills/validation/SKILL.md
 - **Level:** 3
 - **Summary:** Systematic validation protocol for worker extraction output, with per-batch checks (file existence, content signals, truncation, fabrication) and full-extraction audits (coverage, volume, rule completeness). Includes a periodic spot-check protocol.
 - **Strengths:**
@@ -66,7 +66,7 @@
 - **What Level 4 Would Add:** Edge case handling for all 4 check types with decision trees. Recovery protocols for each failure mode (fabrication confirmed → re-extract with stricter prompt; truncation → split range; empty output → retry with different model or context window). Rationale for all numeric thresholds. Known limitations per check type. Integration guide showing where validation fits in the overall pipeline. Meta-instructions for threshold tuning based on observed data.
 - **Priority:** medium
 
-### .agents/skills/spec-extraction/ste-code-refine/SKILL.md
+### .agents/skills/refinement/SKILL.md
 - **Level:** 3
 - **Summary:** Second-pass worker swarm orchestrator that reformats extracted spec files into clean, standardized markdown. Defines 9 non-negotiable formatting rules with ✅/❌ examples, worker prompt template, launch protocol, and verification checks.
 - **Strengths:**
@@ -94,7 +94,7 @@
 ## Batch Summary
 - Files scored: 4
 - Level distribution: -2:0 -1:0 1:1 2:0 3:3 4:0 5:0
-- Highest priority: `.agents/skills/spec-extraction/ste-code-workers/references/worker-prompts.md` - critically out of sync with the v3 extraction skill (9 prompts vs 109 workers), needs immediate reconciliation or deprecation notice
+- Highest priority: `.agents/skills/extraction/references/worker-prompts.md` - critically out of sync with the v3 extraction skill (9 prompts vs 109 workers), needs immediate reconciliation or deprecation notice
 - Pattern observations:
   1. **Dangling rails reference bug shared across all 3 SKILL.md files.** Each contains a `> **RAILS**: Before any action, validate against .` line where the path after "against" is missing (just a period). This appears to be a copy-paste artifact. Fix once in a shared template.
   2. **No file reaches Level 4 due to missing edge case handling.** All three Level 3 files are strong on the happy path but silent on what happens when things go wrong - worker hangs, corrupt output, verification failures, file system errors. This single gap is the primary blocker to Level 4 for the entire batch.

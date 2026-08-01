@@ -180,7 +180,7 @@ flowchart TD
 
 ## Agent Identity
 - Role: refinement-orchestrator
-- Session: Hermes TUI, deepseek-v4-pro
+- Session: Hermes TUI, poolside/laguna-s-2.1:free
 - Last action: Completed all 109 refinement workers
 - Time since last batch: <1 minute (pipeline complete)
 
@@ -681,7 +681,7 @@ When a section is no longer relevant:
 
 When two agents propose edits to the same section:
 1. The agent that detects the conflict must flag it in exchange.md.
-2. The reviewer resolves the conflict by choosing one edit or merging both.
+2. The reviewer resolves the conflict by choosing one edit or grouping both.
 3. No agent should overwrite another agent's unacknowledged edit.
 4. If an edit has been in the document for less than 1 pipeline run, treat it as "fresh" and do not overwrite it.
 
@@ -815,12 +815,12 @@ NOTE: These gates apply to this document. Run them after every edit.
 
 ### Automated Validation Script
 
-Save this script to `.agents/scripts/validate-agent-communication.sh`:
+Save this script to `.agents/tools/quality/validate-agent-communication.sh`:
 
 ```bash
 #!/bin/bash
 # Quality Gate validation for agent-communication.md
-# Run: bash .agents/scripts/validate-agent-communication.sh
+# Run: bash .agents/tools/quality/validate-agent-communication.sh
 DOC=".agents/uml/agent-communication.md"
 PASS=0; FAIL=0
 
@@ -1084,7 +1084,7 @@ NOTE: This playbook tells an agent how to recover from common pipeline failures.
 **Symptoms:** Worker output files are truncated or empty. Git commits fail. State reports cannot be written. Error messages contain "No space left on device."
 
 **Diagnosis:**
-1. Check disk space: `df -h /Volumes/CORSAIR/`
+1. Check disk space: `df -h`
 2. Identify large directories: `du -sh .agents/audit/ ste-code/extracted/ ste-code/refined/`
 3. Check for unbounded growth: `ls -lt .agents/audit/ | head -20`
 
@@ -1193,7 +1193,7 @@ NOTE: These patterns describe communication behaviors that degrade pipeline reli
 
 **Risk:** The pipeline amplifies a small initial error into a large final error. The fabricated content passes through all quality gates because each gate assumes the previous stage was correct.
 
-**Remedy:** Every agent must independently verify the previous stage's output before starting work. Agent #2 must `find extracted/*.md | wc -l` before launching refinement. Agent #4 must count refined files before merging. Trust no claim without verification.
+**Remedy:** Every agent must independently verify the previous stage's output before starting work. Agent #2 must `find extracted/*.md | wc -l` before launching refinement. Agent #4 must count refined files before grouping. Trust no claim without verification.
 
 #### AP7 — Trust-Me
 

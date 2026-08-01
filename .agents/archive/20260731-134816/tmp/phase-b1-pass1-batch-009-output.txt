@@ -1,0 +1,28 @@
+  ┊ 📖 read      SKILL.md  0.3s
+  ┊ 📖 read      SKILL.md  0.3s
+  ┊ 📖 read      SKILL.md  0.3s
+  ┊ 📖 read      quality-checklist.md  0.3s
+  ┊ 🔎 find      pass1-batch-*.json  0.2s
+  ┊ 🔎 find      *rule1.4*  0.1s
+  ┊ 📖 read      pass1-batch-006.json  0.1s
+  ┊ 📖 read      pass1-batch-005.json  0.1s
+  ┊ 📖 read      pass1-batch-004.json  0.1s
+  ┊ 📖 read      a-sec1-rule1.4.md  0.1s
+  ┊ 📖 read      pass1-batch-003.json  0.1s
+  ┊ 📖 read      pass1-batch-002.json  0.1s
+  ┊ 📖 read      pass1-batch-001.json  0.1s
+Batch 9 (Pass 1 — Rule Examples) complete. File written to:
+
+  ste-code/adapted/expanded/pass1-batch-009.json
+
+Summary of 5 new examples for Rule 1.4 (approved verb and adjective forms):
+
+| # | Violation Type | Non-STE → STE Fix | Principle |
+|---|---------------|-------------------|-----------|
+| 1 | Progressive verb form | "is linting" → "lints" (split sentence) | P4 |
+| 2 | Invented past participle | "have builded" → "build" (imperative) | P4 |
+| 3 | Wrong comparative adjective | "more quick" → "quicker" | P4 |
+| 4 | Invented -ing verb form | "is deserializating" → "deserializes" | P4 |
+| 5 | Wrong superlative adjective | "most clean" → "cleanest" | P4 |
+
+Each entry follows the canonical pattern: code-domain scenario, aerospace terms fully replaced, STE uses approved forms, non-STE uses unapproved forms, explanation ties back to the spec's original Rule 1.4 concept. No blacklist matches, no overlap with the existing 2 examples in `a-sec1-rule1.4.md`.

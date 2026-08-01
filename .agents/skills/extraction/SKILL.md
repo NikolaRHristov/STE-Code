@@ -6,6 +6,10 @@ related: [".agents/references/worker-grid.md", ".agents/references/section-types
 
 # Extraction Worker Orchestration
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Extract the 434-page ASD-STE100 Issue 9 spec using 109 parallel `hermes -z` workers. Each worker processes exactly 4 pages. Coordinate the workers in 37 batches of 3. This skill is agent-agnostic. Any agent can use it.
 
 ## Design Rationale
@@ -45,20 +49,35 @@ The last worker (W109) processes only 2 pages (pages 433-434). This is correct. 
 ## Worker Command Template
 
 ```bash
-hermes -z "Read spec/issue-09-2025/page-<<START>>.md through page-<<END>>.md. 
-Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
-Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+hermes -z "Read spec/issue-09-2025/page-dir/page-<<START>>.md through page-<<END>>.md. \
+Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.\
+Do not summarize. Include every word, every table, every example.\
+Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
+
+NOTE: Page files now use spec page identifiers (e.g., page-HI-1.md, page-1-1-1.md)
+in the page-dir/ subdirectory, not sequential page-NNNN.md numbering.
+Use spec/issue-09-2025/split_spec.py to regenerate page files from the
+combined issue-09-2025.md.
 
 ## Launch Rules
 
-- **Always** use `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- **ALWAYS PRESERVE** existing extracted files. Never `rm` or overwrite files in `ste-code/extracted/` that already exist. If a file already exists and passes quality checks, skip it. If it exists but fails, delete only that one file and re-extract.
+- **Always** use `hermes -z` with the oneshot wrapper (via agent-runner)
 - **Always** launch exactly 3 workers per batch. Do not launch more.
 - **Always** verify output after each batch before you launch the next batch.
 - **Never** use inline extraction. It defeats parallelization.
 - **Never** exceed 4 pages per worker. This prevents truncation.
-- **Always** save state. Use `git gcommit-hermes "Batch N complete"` after each batch.
+- **Always** save state. Use `git gcommit-hermes` after each batch.
+- If running in a new session with existing extracted files from a previous run, **check what already exists** and skip already-extracted worker ranges. Resume from the first missing worker.
+
+## Concurrent Session Handling
+
+If multiple sessions launch `extract_batch.py`:
+- Each checks existing files and skips already-completed workers
+- Worker output files use deterministic names (`wNNN-pSTART-END.md`) — the same worker will produce the same filename
+- If a file already exists and passes quality gates, the worker is skipped (marked "already extracted")
+- **Never** clear the entire `ste-code/extracted/` directory — only delete individual files that fail verification
 
 ## Expected Output Format
 

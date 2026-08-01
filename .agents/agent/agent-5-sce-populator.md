@@ -51,7 +51,7 @@ Expected: 55. If count differs, log the discrepancy:
 ### Pre-Flight 3: Master Dictionary Available
 
 ```bash
-test -f ste-code/merged/master.md && echo "OK" || echo "MISSING"
+test -f ste-code/grouped/master.md && echo "OK" || echo "MISSING"
 ```
 
 Abort if MISSING. The vocabulary extraction step depends on this file.
@@ -83,7 +83,7 @@ This is idempotent. Run it regardless.
 
 ```
 ste-code/refined/  109 files, 100.0 audit, 1,111 APPROVED + 1,574 UNAPPROVED
-ste-code/merged/   master.md (23,737 lines, 780KB)
+ste-code/grouped/   master.md (23,737 lines, 780KB)
 ste-code/adapted/  57 files (51 rules + 4 GR + dictionary + categories)
 ste-code/artifacts/ 6 files (~72K chars)
 ```
@@ -93,7 +93,7 @@ ste-code/artifacts/ 6 files (~72K chars)
 ```
 ste-code/adapted/a-secN-ruleX.Y.md  ──►  SCE/core/rules/rule-X.Y.md
 ste-code/adapted/a-secN-grN.md      ──►  SCE/core/rules/gr-N.md
-ste-code/merged/master.md           ──►  SCE/data/vocabulary/approved-verbs.json
+ste-code/grouped/master.md           ──►  SCE/data/vocabulary/approved-verbs.json
                                   ──►  SCE/data/vocabulary/approved-adjectives.json
                                   ──►  SCE/data/vocabulary/unapproved-entries.json
                                   ──►  SCE/core/categories/synonym-table.json
@@ -176,7 +176,7 @@ Transform: strip `a-secN-` prefix, convert to lowercase.
 
 ### 2. Update vocabulary JSON
 
-From `ste-code/merged/master.md`, extract all dictionary entries and write:
+From `ste-code/grouped/master.md`, extract all dictionary entries and write:
 
 - `SCE/data/vocabulary/approved-verbs.json` - All APPROVED verbs with meanings and forms. Each entry: `{"term": "...", "type": "verb", "category-id": N, "domain": ["code"], "approved": true, "source": "rule-1.1"}`
 - `SCE/data/vocabulary/approved-adjectives.json` - All APPROVED adjectives. Each entry: `{"term": "...", "type": "adjective", "category-id": null, "domain": ["code"], "approved": true, "source": "rule-1.1", "notes": "Replaces: ..."}`
@@ -190,7 +190,7 @@ For conflicting entries, use the following resolution order:
 
 ### 3. Update synonym table
 
-From `ste-code/merged/master.md` and `SCE/data/vocabulary/unapproved-entries.json`, populate `SCE/core/categories/synonym-table.json`.
+From `ste-code/grouped/master.md` and `SCE/data/vocabulary/unapproved-entries.json`, populate `SCE/core/categories/synonym-table.json`.
 
 Format:
 ```json
@@ -523,7 +523,7 @@ Make sure that the database connection is open before you run the query.
 | Frontmatter field `principle` cannot be inferred from rule text | Use the Principle Mapping table. Flag with `"principle-inferred": true`. |
 | Dictionary entry has conflicting APPROVED/UNAPPROVED tags | Resolve from `ste-code/refined/` (100.0 audit) as source of truth |
 | Rule ID pattern does not match schema regex | Normalize: `Rule 1.1` → `rule-1.1`, `GR-1` → `gr-1` |
-| Vocabulary entry is missing `meaning` field | Look up in `ste-code/merged/master.md`. If absent, add `"meaning": "TBD"`. |
+| Vocabulary entry is missing `meaning` field | Look up in `ste-code/grouped/master.md`. If absent, add `"meaning": "TBD"`. |
 | Synonym table entry maps to itself (no-op) | Skip and log; do not create self-referencing entries |
 | System prompt exceeds target token count | Truncate least-common entries with `"priority": "low"` annotation |
 | Adapted file count does not match expected 55 | Diff expected vs actual. List missing by name. Continue with what exists. |
@@ -537,7 +537,7 @@ Make sure that the database connection is open before you run the query.
 ## KEY FACTS
 - 19 categories (NOT 22)
 - 53 rules + 4 GR (NOT 65)
-- Model: deepseek-v4-pro
+- Model: poolside/laguna-s-2.1:free
 - Source: ASD-STE100 Issue 9, January 2025
 
 ## OUTPUT
@@ -563,7 +563,7 @@ All files written to `SCE/`. Commit with message "feat(sce): Regenerate SCE from
 
 1. Run pre-flight checks (P1-P5). Fix all failures before continuing.
 2. Populate `SCE/core/rules/` from `ste-code/adapted/`.
-3. Extract vocabulary from `ste-code/merged/master.md`.
+3. Extract vocabulary from `ste-code/grouped/master.md`.
 4. Regenerate system prompts from `ste-code/artifacts/`.
 5. Run validation commands (5a-5e). Fix violations. Retry up to 3 times.
 6. Verify the quality gate checklist.

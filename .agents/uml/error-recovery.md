@@ -114,7 +114,7 @@ Approximate load: 2,800 tokens.
 
 ```mermaid
 flowchart TD
-    START["Worker Launched<br/>hermes -z '...' -m deepseek-v4-pro --yolo"] --> DISPATCH
+    START["Worker Launched<br/>hermes -z '...' -m poolside/laguna-s-2.1:free --yolo"] --> DISPATCH
 
     DISPATCH{"Dispatch<br/>Succeeded?"}
     DISPATCH -->|"Yes"| RUN["Worker Executes<br/>Reads 4 spec pages → writes .md"]
@@ -168,16 +168,16 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    REQ["Request: -m deepseek-v4-pro"] --> PROXY{"Hermes Proxy<br/>Model Router"}
-    PROXY -->|"Normal"| OK["Routes to deepseek-v4-pro<br/>✅ Correct"]
+    REQ["Request: -m poolside/laguna-s-2.1:free"] --> PROXY{"Hermes Proxy<br/>Model Router"}
+    PROXY -->|"Normal"| OK["Routes to poolside/laguna-s-2.1:free<br/>✅ Correct"]
     PROXY -->|"Misroute"| WRONG["Routes to deepseek-v4-flash<br/>❌ Wrong model"]
     PROXY -->|"Fallback"| FALLBACK["Model unavailable →<br/>falls back to cheaper model<br/>⚠️ Silent degradation"]
 
     WRONG --> DETECT1["DETECTION: Audit checks<br/>output for model-typical patterns:<br/>- 'deepseek-pro' in text<br/>- Unexpected formatting style"]
     FALLBACK --> DETECT2["DETECTION: Audit checks<br/>output quality signals:<br/>- Shorter than expected<br/>- Summarized instead of extracted"]
 
-    DETECT1 --> FIX1["FIX: Patch model refs to<br/>deepseek-v4-pro, re-extract if<br/>content quality is degraded"]
-    DETECT2 --> FIX2["FIX: Re-launch worker explicitly<br/>with -m deepseek-v4-pro flag"]
+    DETECT1 --> FIX1["FIX: Patch model refs to<br/>poolside/laguna-s-2.1:free, re-extract if<br/>content quality is degraded"]
+    DETECT2 --> FIX2["FIX: Re-launch worker explicitly<br/>with -m poolside/laguna-s-2.1:free flag"]
 
     style WRONG fill:#ff6b6b,stroke:#c92a2a,color:#000
     style FALLBACK fill:#ffa94d,stroke:#d9480f,color:#000
@@ -364,7 +364,7 @@ flowchart TD
 
     subgraph AUTO_FIXES["SAFE AUTO-FIXES (Auditor executes)"]
         AF1["22 → 19 category count<br/>patch all files"]
-        AF2["deepseek-pro → deepseek-v4-pro<br/>patch all model references"]
+        AF2["deepseek-pro → poolside/laguna-s-2.1:free<br/>patch all model references"]
         AF3["hermes -z file I/O false claim<br/>patch to corrected text"]
         AF4["Empty ste-code/extracted/<br/>rm -rf the empty directory"]
         AF5["Fabricated artifact files<br/>(6 .txt + PLAN.md + README.md)<br/>rm individual files"]
@@ -426,7 +426,7 @@ flowchart TD
 
         R6["RAIL 6: FACTUAL CORRECTNESS"]
         R6 --> R6D["DETECT: '22 categories',<br/>'deepseek-pro',<br/>'hermes -z no file I/O'"]
-        R6 --> R6R["RECOVER: patch to correct facts<br/>19 categories / deepseek-v4-pro<br/>Auto-fixable by auditor"]
+        R6 --> R6R["RECOVER: patch to correct facts<br/>19 categories / poolside/laguna-s-2.1:free<br/>Auto-fixable by auditor"]
 
         R7["RAIL 7: PROGRESS TRACKING"]
         R7 --> R7D["DETECT: [x] without verification<br/>[!] never used for failures<br/>Timestamps missing"]
@@ -1108,12 +1108,12 @@ STEP 2 — Run a model health probe.
   Launch a single worker with a known-good page range:
     hermes -z "Read spec/issue-09-2025/page-0001.md through page-0004.md.
     Extract all content. Write to ste-code/extracted/probe-p1-4.md."
-    -m deepseek-v4-pro --yolo
+    -m poolside/laguna-s-2.1:free --yolo
   If the probe also truncates or fabricates: Model is degraded. Wait for API recovery.
 
 STEP 3 — Check if the proxy changed routing.
   Run: hermes status
-  Confirm the model routing matches deepseek-v4-pro.
+  Confirm the model routing matches poolside/laguna-s-2.1:free.
 
 STEP 4 — Escalate if degradation persists.
   After 3 failed probes (with 120s wait between each): Escalate to manual pipeline pause.
@@ -1190,7 +1190,7 @@ TRIGGER 5: File timestamp older than 24 hours in active directory
 
 TRIGGER 6: Worker output file references wrong model name
   DETECT: grep -l 'deepseek-v4-flash' ste-code/extracted/*.md
-  ACTION:  Auto-fix (AF2): patch to 'deepseek-v4-pro'. Re-audit.
+  ACTION:  Auto-fix (AF2): patch to 'poolside/laguna-s-2.1:free'. Re-audit.
 
 TRIGGER 7: Split depth = 3 for any worker
   DETECT: Filename matches wNNNa[a-d][1-2]-p*.md (three suffix levels)
@@ -1406,8 +1406,8 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph CMDS["Emergency Recovery Commands"]
-        CMD1["🔍 Full Audit<br/>hermes -z 'Read execution-auditor SKILL.md.<br/>Audit all claims vs disk evidence.<br/>Report to .agents/audit/audit-NOW.md'<br/>-m deepseek-v4-pro --yolo"]
-        CMD2["🔧 Audit + Fix<br/>hermes -z 'Read execution-auditor SKILL.md.<br/>Full audit + apply all safe auto-fixes.<br/>Report to .agents/audit/audit-NOW.md'<br/>-m deepseek-v4-pro --yolo"]
+        CMD1["🔍 Full Audit<br/>hermes -z 'Read execution-auditor SKILL.md.<br/>Audit all claims vs disk evidence.<br/>Report to .agents/audit/audit-NOW.md'<br/>-m poolside/laguna-s-2.1:free --yolo"]
+        CMD2["🔧 Audit + Fix<br/>hermes -z 'Read execution-auditor SKILL.md.<br/>Full audit + apply all safe auto-fixes.<br/>Report to .agents/audit/audit-NOW.md'<br/>-m poolside/laguna-s-2.1:free --yolo"]
         CMD3["📊 Coverage Check<br/>for pg in $(seq 1 434); do<br/>  grep -rq page-$(printf '%04d' $pg) ste-code/extracted/ || echo missing $pg<br/>done"]
         CMD4["🗑️  Emergency Clean<br/>rm -rf ste-code/extracted/w*-p*.md<br/>rm -rf ste-code/refined/r*-p*.md<br/>Reset PROGRESS.md to Batch 1<br/>(Only if < 30% coverage)"]
         CMD5["🔄 Resume Pipeline<br/>Read PROGRESS.md for last [x] batch.<br/>Launch Batch (last_batch + 1)<br/>Continue pipeline normally"]

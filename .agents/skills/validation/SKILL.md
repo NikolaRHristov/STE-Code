@@ -12,6 +12,10 @@ metadata:
 
 # STE-Code Validation Protocol
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 ## Overview
 
 > **RAILS**: Validate every action against `references/rails.md` — 8 immutable guardrails.
@@ -594,7 +598,7 @@ Prioritize these workers for spot-checks:
 1. Workers flagged with WARN in any check during batch validation.
 2. Workers whose page range crosses a content-signal zone boundary.
 3. Workers that were re-extracted (split and merged). Spot-check at least
-   one split half before merging.
+   one split half before grouping.
 4. The first worker of each new content-signal zone (w001 for pages 1-4,
    w004 for pages 13-16, w017 for pages 67-70, w033 for pages 129-132,
    w091 for pages 361-364). These workers sit at zone transitions and are

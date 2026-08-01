@@ -1,0 +1,41 @@
+  ┊ 📖 read      orchestrator-control.py  0.2s
+  ┊ 📖 read      orchestrator.py  0.2s
+  ┊ 📖 read      orchestrator.py L500  0.1s
+  ┊ 🔎 find      benchmark_lib*.py  0.1s
+  ┊ 🔎 grep      DESIGN RATIONALE  0.1s
+  ┊ 🔎 grep      Phase 6: Post-Run Delta Report  0.1s
+  ┊ 🔎 grep      import argparse  0.1s
+  ┊ 🔎 grep      RETRY LOGIC  0.1s
+  ┊ 🔎 grep      _cleanup_workers  0.1s
+  ┊ 🔎 grep      "group": "control"  0.1s
+  ┊ 🔎 grep      print\("Done\."\)  0.1s
+  ┊ 🔎 grep      print\(f"=== Control Group Benchmark  0.1s
+  ┊ 🔎 grep      _find_latest_ste_run  0.1s
+  ┊ 🔎 grep      _print_delta_report  0.1s
+Done. Here is a summary of the changes:
+
+**File**: `.agents/benchmark/orchestrator-control.py`
+**Line count**: 484 → 888 (+404 lines)
+**Syntax**: Verified OK (py_compile passes)
+**Original content**: 100% preserved — all 484 original lines are intact, zero deletions
+
+**Additions applied**:
+
+1. **DESIGN RATIONALE block** (lines 4-52) — Documents the experimental design: why the control group exists, cross-reference to `orchestrator.py`, explanation of the ~90% code duplication as intentional, and the "accidental compliance" scoring rationale (why STE-Code keywords are used to score content that was never instructed to follow STE-Code)
+
+2. **CLI argument parsing** (lines 57-80) — `--model`, `--timeout`, `--compare`, `--ste-results`, `--retries`, `--no-report` flags. Hardcoded defaults still work with no arguments. CLI overrides applied after constants via a post-block at line 132
+
+3. **Signal handling** (lines 90-115) — SIGINT/SIGTERM handlers that kill all tracked child PIDs before exit, preventing orphaned hermes worker processes
+
+4. **Retry logic** (lines 249-340) — Activated by `--retries N`. After Phase 2, checks all worker outputs for empty/missing/stub content. Re-launches failing workers up to N times with a shorter timeout. Marks retried workers in their metadata
+
+5. **`"group": "control"` marker** (line 598) — Added to aggregate JSON to distinguish control runs from experiment runs when comparing
+
+6. **Phase 6: Post-Run Delta Report** (lines 747-890) — Three functions:
+   - `_find_latest_ste_run()` — auto-detects the most recent `results/run-*/aggregate-results.json`
+   - `_load_aggregate()` — safe JSON loader with error handling
+   - `_print_delta_report()` — side-by-side comparison showing pass rate delta, avg correctness delta, per-category improvements sorted by benefit, top 3 winners, categories where control outperforms STE-Code, and an overall verdict
+
+7. **`--no-report` flag** — suppresses terminal output for CI/automated runs while still writing JSON files
+
+8. **SCORING ENGINE documentation** (lines 353-367) — Comment block above Phase 3 explaining the shared scoring engine and the "accidental compliance" measurement design

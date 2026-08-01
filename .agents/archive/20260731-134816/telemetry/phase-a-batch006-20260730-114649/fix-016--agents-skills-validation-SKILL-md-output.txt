@@ -1,0 +1,27 @@
+  ┊ 📖 read      SKILL.md  0.3s
+  ┊ 🔎 find      SKILL.md  0.2s
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      rails.md  0.2s
+Done. The improved file is at:
+
+/Volumes/CORSAIR/Developer/macOS/Application/Manual/.agents/skills/validation/SKILL.md
+
+**885 lines** (was 429, +456 lines added). All original content preserved. New sections:
+
+| Section | What it adds |
+|---------|-------------|
+| **Severity Levels: PASS, WARN, FAIL** (line 27) | Defines each severity with concrete criteria and required actions. WARN → auto-escalate to FAIL after 2 occurrences. |
+| **Example: Batch 12 — WARN Result** (line 139) | Third worked example showing what a WARN looks like in real output vs PASS vs FAIL. |
+| **Triple-Boundary Workers** (line 221) | Edge case for 4-page workers spanning 3 content-signal zones. AND-match across all three, WARN on partial. |
+| **Content Signal False Positives** (line 239) | Detects inflated match counts from ToC/index repeats. Shell command for uniqueness check. |
+| **Cascading Failures** (line 261) | When 2+ workers fail in one batch — systemic root cause checklist (rate limits, prompt corruption, source pages). CASCADE marker for auditor. |
+| **Truncation Escalation Path** (line 340) | After 2 re-extraction rounds, stop splitting. Flag MANUAL. Extract yourself via read_file. Never split below 1 page. |
+| **Split Size Calculator** (line 409) | Shell function `split_range()` for computing half-range splits with odd-page handling. |
+| **Race Condition: Next Batch Launch** (line 451) | BLOCKED/RECOVERED markers. Do not launch next batch during re-extraction. |
+| **Re-Extraction Naming Convention** (line 489) | Two-level suffix rule: w020→w020a,w020b→w020a1,w020a2→MANUAL. No deeper nesting. |
+| **Preserving Failed Output** (line 735) | Rename to `.failed` suffix instead of deleting. Auditor uses failed files for pattern detection. |
+| **Worked Example: FAIL with Recovery** (line 658) | Complete validation-log.md entry tracing Batch 7 from initial FAIL through split, re-extract, merge, RECOVERED sign-off. |
+| **Spot-Check Targeting** (line 596) | Prioritization rules: WARN workers, boundary-crossers, re-extracted workers, zone-transition workers. Spot-check failure response procedure. |
+| **Integration with Continuation Skill** (line 768) | Stage gate (extraction→refinement), progress synchronization map, state file updates. |
+| **End-to-End Validation Lifecycle** (line 823) | Four-phase checklist: per-batch, spot-check, full sign-off, continuous validation through stages 2-5. Final sign-off entry template. |

@@ -5,7 +5,7 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │ STAGE 1: EXTRACTION                  Agent #1                    │
-│   Input:  spec/issue-09-2025/page-*.md (434 pages)              │
+│   Input:  spec/issue-09-2025/page-dir/page-*.md (426 pages)              │
 │   Output: ste-code/extracted/w*-p*.md (109 files)               │
 │   Status: ✅ Complete                                           │
 ├──────────────────────────────────────────────────────────────────┤
@@ -17,11 +17,11 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 ├──────────────────────────────────────────────────────────────────┤
 │ STAGE 3: MERGE                                                  │
 │   Input:  ste-code/refined/r*-p*.md                             │
-│   Output: ste-code/merged/master.md (23,737 lines, 780KB)       │
+│   Output: ste-code/grouped/master.md (23,737 lines, 780KB)       │
 │   Status: ✅ Complete                                           │
 ├──────────────────────────────────────────────────────────────────┤
 │ STAGE 4: ADAPTATION                                              │
-│   Input:  ste-code/merged/master.md                             │
+│   Input:  ste-code/grouped/master.md                             │
 │   Output: ste-code/adapted/ (57 files: 51 rules + 4 GR +        │
 │           dictionary + categories)                               │
 │   Status: ✅ Complete                                           │
@@ -44,7 +44,7 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 
 | Directory | Stage | Contents |
 |-----------|-------|----------|
-| `extracted/` | 1 — Raw | 109 files from spec pages |
+| `extracted/` | 1 — Raw | 109 files from spec pages (page-dir/page-*.md) |
 | `refined/` | 2 — Formatted | 109 files, 100.0 audit score |
 | `merged/` | 3 — Consolidated | master.md (deduplicated) |
 | `adapted/` | 4 — Code-adapted | 57 adapted rule, dictionary, and category files |
@@ -70,7 +70,7 @@ The five-stage pipeline is complete. Nine agents orchestrated 109 parallel worke
 
 - 0 FIXME markers across all adapted and artifact files
 - 0 CRLF line endings
-- 0 stale references (53 rules, 22 categories)
+- 0 stale references (53 rules, 19 categories)
 - All rule cross-references verified
 - Two quality sweep passes over 65 files
 - Agent-agnostic tooling with configurable backends

@@ -6,12 +6,16 @@ related: [".agents/benchmark/orchestrator.py", ".agents/benchmark/orchestrator-c
 
 # Benchmarking Orchestrator - Agent-Agnostic
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Measure STE-Code correctness and performance against a defined test suite. Run pre-defined test cases through `hermes -z` with the STE-Code system prompt, compare outputs against expected results, and produce structured benchmark reports. A control group runs the same tests with a plain assistant prompt for comparison.
 
 ## Architecture
 
 ```
-TEST CASES (14 categories, 59 tests) → hermes -z (deepseek-v4-pro) → SCORED RESULTS
+TEST CASES (14 categories, 59 tests) → hermes -z (poolside/laguna-s-2.1:free) → SCORED RESULTS
 ```
 
 ### Orchestrator Scripts
@@ -319,7 +323,7 @@ Check the following text for STE-Code compliance. Apply all 14 principles.
 Produce the corrected text, then a compliance summary.
 
 ## TEXT TO CORRECT
-<input text here>" -m deepseek-v4-pro --yolo
+<input text here>" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 To restrict the orchestrator to one category, temporarily move or rename the other category files before running. There is no native `--category` filter in the current orchestrator.
@@ -370,7 +374,7 @@ Check the following text for STE-Code compliance. Apply all 14 principles.
 Produce the corrected text, then a compliance summary.
 
 ## TEXT TO CORRECT
-$INPUT" -m deepseek-v4-pro --yolo
+$INPUT" -m poolside/laguna-s-2.1:free --yolo
 
 # 3. Check if the compliance summary mentions the expected principles
 # 4. If a principle is missing, add it to the test's expected_principles

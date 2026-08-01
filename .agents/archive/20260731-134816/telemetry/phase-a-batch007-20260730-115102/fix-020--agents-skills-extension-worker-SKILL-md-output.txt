@@ -1,0 +1,31 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 📖 read      agent-8-extension-worker.md  0.2s
+  ┊ 🔎 find      EXTENSION-PROGRESS.md  0.2s
+  ┊ 📖 read      EXTENSION-PROGRESS.md  0.1s
+  ┊ 📖 read      MASTER.md  0.1s
+  ┊ 🔎 find      launch-levels.py  0.1s
+Done. File saved: `/Volumes/CORSAIR/Developer/macOS/Application/Manual/.agents/skills/extension-worker/SKILL.md`
+
+**Stats:**
+- 608 lines (was 60)
+- 22,750 bytes (was 2,262)
+- Version bumped from `1.0.0` to `2.0.0`
+
+**All 5 audit gaps fixed:**
+
+| Gap | Fix |
+|-----|-----|
+| Incomplete `generate` command | Replaced `# (to be adapted...` stub with `python3 .agents/benchmark/launch-extension-workers.py --area ...` with full argument table and 6-step script behavior description |
+| No worker prompt template | Added complete 5-section template: Task Directive, Output Schema Constraints, Anti-Fabrication Rails, Worker Rails (W1-W10), Output Format Lock — plus a heredoc construction command |
+| No example generated entry | Added 9 example entries across all 6 gap areas (2 for verbs, 1 adjective, 2 nouns, 1 verb-example, 2 anti-patterns, 1 domain) — each valid, complete JSON |
+| No inline schema summary | Added full inline summary of all 6 entry schemas from Agent #8 with every required field, type, and constraint — no need to open a second file |
+| No quality gates | Added 10 gates (JSON syntax, required fields, definition length, fabrication detection, unique terms, STE/non-STE pair quality, valid principle numbers, cross-reference traceability, batch size compliance, cross-batch duplicates) — each with a runnable check command |
+
+**Beyond the suggested improvements (creative additions):**
+- Pre-Flight Checks section (directories, references, model availability)
+- Anti-Fabrication Rails section in the prompt template
+- Output Format Lock section (exact JSON shape constraints)
+- Anti-Pattern Severity Levels table (blocking/error/warning/info)
+- Output Validation Pipeline Summary (5-step pipeline + 3 failure recovery tracks + escalation rule + timeout policy)
+- New `audit` action with 3 concrete validation commands
+- Expanded State section with a full batch state template that includes failure tracking fields

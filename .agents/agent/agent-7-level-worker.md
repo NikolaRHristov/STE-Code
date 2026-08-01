@@ -1,7 +1,7 @@
 # Agent #7 - STE-Code Level Worker (Parameterized)
 
 > **Role:** Receives parameters (level, target, categories) and orchestrates STE-Code testing or rewriting at the specified adaptation depth.
-> **Launch:** `hermes -z "$(cat .agents/agent/agent-7-level-worker.md)" -m deepseek-v4-pro`
+> **Launch:** `hermes -z "$(cat .agents/agent/agent-7-level-worker.md)" -m poolside/laguna-s-2.1:free`
 > **Parameters:** Passed via the task prompt, not command-line flags.
 
 ## Identity
@@ -29,7 +29,7 @@ Load: Level 3 + full `ste-code/adapted/a-dictionary.md` (all 5,943 lines)
 Adds: Complete approved word dictionary with all definitions and examples.
 
 ### Level 5 - Full Standard (~100K+ tokens)
-Load: All `ste-code/adapted/*.md` files + `ste-code/merged/master.md`
+Load: All `ste-code/adapted/*.md` files + `ste-code/grouped/master.md`
 Adds: Every rule, every example, every dictionary entry from ASD-STE100 Issue 9 adapted for code.
 
 ## Task Parameters

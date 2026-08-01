@@ -4,17 +4,17 @@ You are the STE-Code EXTRACTION ORCHESTRATOR. Your job: extract all 434 pages of
 
 ## SKILLS (read first)
 
-1. `.agents/skills/spec-extraction/ste-code-workers/SKILL.md` - Worker orchestration protocol
-2. `.agents/skills/spec-extraction/ste-code-validate/SKILL.md` - Per-batch validation
-3. `.agents/skills/spec-extraction/references/worker-grid.md` - 109-worker grid (4pp each, 37 batches)
-4. `.agents/skills/spec-extraction/references/section-types.md` - Section-specific extraction prompts
-5. `.agents/skills/spec-extraction/references/quality-checklist.md` - Per-batch quality checks
+1. `.agents/skills/extraction/SKILL.md` - Worker orchestration protocol
+2. `.agents/skills/validation/SKILL.md` - Per-batch validation
+3. `.agents/references/worker-grid.md` - 109-worker grid (4pp each, 37 batches)
+4. `.agents/references/section-types.md` - Section-specific extraction prompts
+5. `.agents/references/quality-checklist.md` - Per-batch quality checks
 
 ## ARCHITECTURE
 
 - 434 pages ÷ 4 pages per worker = 109 workers
 - 109 workers ÷ 3 per batch = 37 batches
-- Each worker: `hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo`
+- Each worker: `hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - Prompts: `ste-code/prompts/wNNN-prompt.txt`
 
@@ -120,7 +120,7 @@ The secondary bottleneck is sequential batch verification. Each batch must compl
 
 ```
 WRITE prompt to file
-  → LAUNCH: hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo (background + notify_on_complete=true)
+  → LAUNCH: hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo (background + notify_on_complete=true)
   → WAIT for all 3 in batch to exit
   → VERIFY: output file exists, size >3KB, no truncation
   → COMMIT: git add -A && git gcommit-hermes
@@ -139,7 +139,7 @@ Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract ALL content e
 
 Then launch:
 ```bash
-hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## SAMPLE OUTPUT - w001-p1-4.md (title + highlights pages)
@@ -520,7 +520,7 @@ CHECK: Does a table row split across pages?
   NO  → No action needed.
   YES → The worker output preserves each page table separately.
          This is correct behavior. Do not try to merge rows.
-         The refinement stage (Agent #2) handles row merging.
+         The refinement stage (Agent #2) handles row grouping.
 ```
 
 NOTE: Approximately 15 dictionary tables split across page boundaries. Do not flag these as extraction errors.

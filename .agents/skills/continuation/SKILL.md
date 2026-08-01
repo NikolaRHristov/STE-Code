@@ -13,6 +13,10 @@ metadata:
 
 # STE-Code Continuation Skill — Stages 3-5
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 ## Overview
 
 This skill is used by ANY agent (#1, #2, or #3) to continue pipeline work beyond their primary phase. Each agent applies this skill from its own perspective, using its own output as input to the next stage.
@@ -45,7 +49,7 @@ Each agent uses different input sources depending on who invokes this skill:
 ls ste-code/enriched/w*-p*.md 2>/dev/null | wc -l  # enriched count
 ls ste-code/refined/r*.md 2>/dev/null | wc -l        # refined count
 ls ste-code/extracted/w*-p*.md 2>/dev/null | wc -l   # extracted count
-ls ste-code/merged/master.md 2>/dev/null              # merge exists?
+ls ste-code/grouped/master.md 2>/dev/null              # merge exists?
 ls ste-code/adapted/*.md 2>/dev/null | wc -l         # adaptation count
 ls ste-code/artifacts/*.txt 2>/dev/null | wc -l      # artifact count
 ```
@@ -56,16 +60,16 @@ File counts are not enough. A file that exists can be stale. Use timestamps to d
 
 ```bash
 # Check if master.md is older than any source file (stale)
-if [ -f ste-code/merged/master.md ]; then
-  newest_source=$(find ste-code/enriched ste-code/refined ste-code/extracted -name "*.md" -newer ste-code/merged/master.md 2>/dev/null | wc -l)
+if [ -f ste-code/grouped/master.md ]; then
+  newest_source=$(find ste-code/enriched ste-code/refined ste-code/extracted -name "*.md" -newer ste-code/grouped/master.md 2>/dev/null | wc -l)
   if [ "$newest_source" -gt 0 ]; then
     echo "STALE: master.md is older than $newest_source source files. Re-merge required."
   fi
 fi
 
 # Check if adapted files are older than master.md (stale)
-if [ -f ste-code/merged/master.md ] && [ "$(ls ste-code/adapted/*.md 2>/dev/null | wc -l)" -gt 0 ]; then
-  stale_count=$(find ste-code/adapted -name "*.md" ! -newer ste-code/merged/master.md 2>/dev/null | wc -l)
+if [ -f ste-code/grouped/master.md ] && [ "$(ls ste-code/adapted/*.md 2>/dev/null | wc -l)" -gt 0 ]; then
+  stale_count=$(find ste-code/adapted -name "*.md" ! -newer ste-code/grouped/master.md 2>/dev/null | wc -l)
   if [ "$stale_count" -gt 0 ]; then
     echo "STALE: $stale_count adapted files are older than master.md. Re-adaptation required."
   fi
@@ -121,12 +125,12 @@ If no source directory has the full 109 files:
 
 ### Edge Case: Zero-Byte master.md
 
-If `ste-code/merged/master.md` exists but has 0 bytes:
+If `ste-code/grouped/master.md` exists but has 0 bytes:
 
 ```bash
-if [ -f ste-code/merged/master.md ] && [ ! -s ste-code/merged/master.md ]; then
+if [ -f ste-code/grouped/master.md ] && [ ! -s ste-code/grouped/master.md ]; then
   echo "CORRUPT: master.md is zero bytes. Remove and re-merge."
-  rm ste-code/merged/master.md
+  rm ste-code/grouped/master.md
 fi
 ```
 
@@ -136,15 +140,15 @@ fi
 
 ### Protocol
 
-1. **Concatenate** all files in page order into `ste-code/merged/master-raw.md`:
+1. **Concatenate** all files in page order into `ste-code/grouped/master-raw.md`:
    ```bash
-   cat ste-code/$INPUT_DIR/w*-p*.md > ste-code/merged/master-raw.md
+   cat ste-code/$INPUT_DIR/w*-p*.md > ste-code/grouped/master-raw.md
    ```
 
 2. **Deduplicate** — scan for duplicate content at page boundaries.
    See the Deduplication Operations section below for operational commands.
 
-3. **Organize by section** into `ste-code/merged/master.md`:
+3. **Organize by section** into `ste-code/grouped/master.md`:
    ```
    ## Front Matter (pages 1-42)
    ## Part 1 — Writing Rules (pages 43-128)
@@ -163,14 +167,14 @@ fi
    ```
 
 4. **Validate:**
-   - `grep -c "^#### Rule" ste-code/merged/master.md` → must be 53
-   - `grep -c "^### Category" ste-code/merged/master.md` → must be 19
+   - `grep -c "^#### Rule" ste-code/grouped/master.md` → must be 53
+   - `grep -c "^### Category" ste-code/grouped/master.md` → must be 19
    - File size > 500KB
    - 10 random spot-checks against source pages
 
 ### Output
-- `ste-code/merged/master-raw.md` — concatenated raw (temporary)
-- `ste-code/merged/master.md` — deduplicated, organized (permanent)
+- `ste-code/grouped/master-raw.md` — concatenated raw (temporary)
+- `ste-code/grouped/master.md` — deduplicated, organized (permanent)
 
 ### Deduplication Operations (Operationalized)
 
@@ -180,40 +184,40 @@ Do not describe deduplication. Run these operational commands. The commands dete
 
 ```bash
 # List rule headers that appear more than once
-grep "^#### Rule" ste-code/merged/master-raw.md | sort | uniq -d
+grep "^#### Rule" ste-code/grouped/master-raw.md | sort | uniq -d
 
 # Count occurrences of each rule header
-grep "^#### Rule" ste-code/merged/master-raw.md | sort | uniq -c | sort -rn
+grep "^#### Rule" ste-code/grouped/master-raw.md | sort | uniq -c | sort -rn
 ```
 
 #### Find Duplicate Dictionary Entries
 
 ```bash
 # Extract all dictionary entry headers (WORD (POS) - APPROVED/UNAPPROVED)
-grep "^#### [A-Z]" ste-code/merged/master-raw.md | sort | uniq -d
+grep "^#### [A-Z]" ste-code/grouped/master-raw.md | sort | uniq -d
 
 # Count entries that appear more than once
-grep "^#### [A-Z]" ste-code/merged/master-raw.md | sort | uniq -c | sort -rn | head -20
+grep "^#### [A-Z]" ste-code/grouped/master-raw.md | sort | uniq -c | sort -rn | head -20
 ```
 
 #### Find Duplicate Category Listings
 
 ```bash
 # Category headers that appear more than once
-grep "^### Category" ste-code/merged/master-raw.md | sort | uniq -d
+grep "^### Category" ste-code/grouped/master-raw.md | sort | uniq -d
 ```
 
 #### Automated Deduplication Script
 
-Save this script as `ste-code/merged/deduplicate.sh`. It performs a conservative first-pass deduplication:
+Save this script as `ste-code/grouped/deduplicate.sh`. It performs a conservative first-pass deduplication:
 
 ```bash
 #!/bin/bash
 # deduplicate.sh — remove exact duplicate blocks from master-raw.md
 # Writes deduplicated output to master-dedup.md
 
-INPUT="ste-code/merged/master-raw.md"
-OUTPUT="ste-code/merged/master-dedup.md"
+INPUT="ste-code/grouped/master-raw.md"
+OUTPUT="ste-code/grouped/master-dedup.md"
 TEMP=$(mktemp)
 
 echo "=== Deduplication Report ==="
@@ -365,12 +369,12 @@ If the merge validation fails (wrong rule count, wrong category count, wrong fil
 
 | Failure | Root Cause | Recovery Action |
 |---------|------------|-----------------|
-| `grep -c "^#### Rule"` returns < 53 | One or more rules were not extracted or were lost in deduplication | Check which rules are missing: `for s in 1 2 3 4 5 6 7 8 9; do for r in $(seq 1 14); do grep -q "^#### Rule $s.$r" ste-code/merged/master.md || echo "MISSING: Rule $s.$r"; done; done`. Re-extract the pages that contain missing rules. |
-| `grep -c "^#### Rule"` returns > 53 | Deduplication failed — duplicate rule headers remain | Run the deduplication script again. Check output: `grep "^#### Rule" ste-code/merged/master.md \| sort \| uniq -d`. Remove all but the first occurrence of each duplicate. |
+| `grep -c "^#### Rule"` returns < 53 | One or more rules were not extracted or were lost in deduplication | Check which rules are missing: `for s in 1 2 3 4 5 6 7 8 9; do for r in $(seq 1 14); do grep -q "^#### Rule $s.$r" ste-code/grouped/master.md || echo "MISSING: Rule $s.$r"; done; done`. Re-extract the pages that contain missing rules. |
+| `grep -c "^#### Rule"` returns > 53 | Deduplication failed — duplicate rule headers remain | Run the deduplication script again. Check output: `grep "^#### Rule" ste-code/grouped/master.md \| sort \| uniq -d`. Remove all but the first occurrence of each duplicate. |
 | `grep -c "^### Category"` returns < 19 | Categories were split across page boundaries and not merged | Find which categories are missing. Check the original spec pages 43-128 for the category listing. Re-extract the category section if needed. |
 | File size < 500KB | Concatenation missed files or a worker produced empty output | Run: `find ste-code/$INPUT_DIR -name "*.md" -size 0`. Re-extract any zero-byte files. Re-concatenate. |
 | Spot-check mismatch (content does not match source) | Worker paraphrased or fabricated content | Identify the worker that produced the incorrect content. Re-extract those pages. The worker file naming convention maps page ranges: worker wNNN covers pages (NNN-1)*4+1 to min(NNN*4, 434). |
-| master-raw.md contains binary content or encoding errors | Worker output contains non-UTF-8 characters | Run: `file ste-code/merged/master-raw.md`. If it says "data" instead of "UTF-8 text", find the offending worker: `for f in ste-code/$INPUT_DIR/*.md; do file "$f" \| grep -v "UTF-8" && echo "BAD: $f"; done`. Re-extract those workers. |
+| master-raw.md contains binary content or encoding errors | Worker output contains non-UTF-8 characters | Run: `file ste-code/grouped/master-raw.md`. If it says "data" instead of "UTF-8 text", find the offending worker: `for f in ste-code/$INPUT_DIR/*.md; do file "$f" \| grep -v "UTF-8" && echo "BAD: $f"; done`. Re-extract those workers. |
 
 **General merge recovery protocol:**
 
@@ -410,9 +414,9 @@ Use the same `hermes` command pattern as extraction workers. Each worker reads m
 
 ```bash
 # Launch adaptation workers in background with notification
-hermes -z "Read ste-code/merged/master.md. Focus on Section 1 — Words (Rules 1.1-1.14). Adapt every rule from aerospace to code documentation domain. PRESERVE rule numbers and section structure. REPLACE aerospace examples with code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Output ONLY the adaptation. Write to ste-code/adapted/a-sec1-rules.md." -m deepseek-v4-pro &
+hermes -z "Read ste-code/grouped/master.md. Focus on Section 1 — Words (Rules 1.1-1.14). Adapt every rule from aerospace to code documentation domain. PRESERVE rule numbers and section structure. REPLACE aerospace examples with code examples (API docs, commit messages, README sections). For each rule: write original rule text, then code-domain rewrite, then STE/non-STE code example pairs. Output ONLY the adaptation. Write to ste-code/adapted/a-sec1-rules.md." -m poolside/laguna-s-2.1:free &
 
-hermes -z "Read ste-code/merged/master.md. Focus on Section 2 — Noun Clusters (Rules 2.1-2.3). Adapt every rule from aerospace to code documentation domain. ..." -m deepseek-v4-pro &
+hermes -z "Read ste-code/grouped/master.md. Focus on Section 2 — Noun Clusters (Rules 2.1-2.3). Adapt every rule from aerospace to code documentation domain. ..." -m poolside/laguna-s-2.1:free &
 
 # Continue for all 11 workers (a001 through a011)
 ```
@@ -421,7 +425,7 @@ NOTE: Launch in batches of 3 to avoid resource contention. Wait for each batch t
 
 ### Adaptation Prompt Template
 ```
-Read ste-code/merged/master.md. Focus on <<SECTION>>. 
+Read ste-code/grouped/master.md. Focus on <<SECTION>>. 
 Adapt every rule, category, and example from aerospace to code documentation domain.
 PRESERVE: rule numbers, section structure, STE/non-STE pair format.
 REPLACE: aerospace examples → code examples (API docs, commit messages, README sections).
@@ -558,7 +562,7 @@ When an adaptation worker produces aerospace examples, re-launch with this promp
 ```
 CRITICAL: Your previous output contained aerospace examples. This is a failure.
 
-Read ste-code/merged/master.md. Focus on <<SECTION>>.
+Read ste-code/grouped/master.md. Focus on <<SECTION>>.
 Adapt every rule to the code documentation domain.
 
 FORBIDDEN terms (do NOT use in any example):
@@ -711,7 +715,7 @@ If artifact generation fails, diagnose and recover using the quality gate tables
 | Artifact 4 has fewer than 3 rule citations | Transformation is too simple | Add a Step line for each transformation action. Each Step must cite at least one rule number. |
 | Artifact 5 is missing a deployment target | Worker skipped a section | Check that Ollama, LM Studio, and Python each have a dedicated section. Add any missing section. |
 | Aerospace terms found in any artifact | `grep -i "aircraft\|flight\|wing\|engine" ste-code/artifacts/*.txt` returns results | The adapted source files still have aerospace content. Go back to Stage 4 and fix the adaptation before regenerating artifacts. |
-| Artifact 6 mentions wrong model name | Agent invented "deepseek-pro" or similar | Search artifacts for "deepseek". Replace any variant with `deepseek-v4-pro`. |
+| Artifact 6 mentions wrong model name | Agent invented "deepseek-pro" or similar | Search artifacts for "deepseek". Replace any variant with `poolside/laguna-s-2.1:free`. |
 
 ---
 
@@ -734,7 +738,7 @@ This skill orchestrates Stages 3-5. Other skills provide input, validation, and 
 |-------|------|---------------|
 | **Extraction** | `.agents/skills/extraction/SKILL.md` | Produces the 109 worker files that feed Stage 3. If extracted/ is incomplete, re-run Stage 1. |
 | **Refinement** | `.agents/skills/refinement/SKILL.md` | Produces refined files in refined/. Used by Agent #2 as Stage 3 input. |
-| **Merging** | `.agents/skills/merging/SKILL.md` | Full merge protocol with 7 edge cases and 6 validation steps. This skill's Stage 3 section is the abbreviated version. For the complete protocol, see merging SKILL.md. |
+| **Merging** | `.agents/skills/grouping/SKILL.md` | Full merge protocol with 7 edge cases and 6 validation steps. This skill's Stage 3 section is the abbreviated version. For the complete protocol, see grouping SKILL.md. |
 | **Adaptation** | `.agents/skills/adaptation/SKILL.md` | Full adaptation protocol with 9 verification gates, 5 worked examples, and 5 edge cases. This skill's Stage 4 section is the abbreviated version. |
 | **Artifacts** | `.agents/skills/artifacts/SKILL.md` | Full artifact generation protocol with quality gates for all 6 artifacts, verification script, failure recovery, edge cases, and integration tests. This skill's Stage 5 section references it. |
 | **Validation** | `.agents/skills/validation/SKILL.md` | Per-batch quality checks, truncation detection, fabrication detection. Apply these checks after each stage. |
@@ -748,9 +752,9 @@ After completing any stage (3, 4, or 5), run this cross-check before declaring t
 
 ### After Stage 3 (Merge)
 - [ ] master.md exists and is > 500KB
-- [ ] `grep -c "^#### Rule" ste-code/merged/master.md` returns 53
-- [ ] `grep -c "^### Category" ste-code/merged/master.md` returns 19
-- [ ] No duplicate rule headers: `grep "^#### Rule" ste-code/merged/master.md | sort | uniq -d` returns empty
+- [ ] `grep -c "^#### Rule" ste-code/grouped/master.md` returns 53
+- [ ] `grep -c "^### Category" ste-code/grouped/master.md` returns 19
+- [ ] No duplicate rule headers: `grep "^#### Rule" ste-code/grouped/master.md | sort | uniq -d` returns empty
 - [ ] All letters A-Z have dictionary entries
 - [ ] master-raw.md is preserved (do not delete it — Stage 4 workers may need it for context)
 - [ ] Spot-check 10 pages: content matches source
@@ -765,7 +769,7 @@ After completing any stage (3, 4, or 5), run this cross-check before declaring t
 
 ### After Stage 5 (Artifacts)
 - [ ] All 6 artifact files exist
-- [ ] Model name is correct everywhere: `grep -rh "deepseek" ste-code/artifacts/ | sort -u` returns only `deepseek-v4-pro`
+- [ ] Model name is correct everywhere: `grep -rh "deepseek" ste-code/artifacts/ | sort -u` returns only `poolside/laguna-s-2.1:free`
 - [ ] Full verification script from `.agents/skills/artifacts/SKILL.md` passes all checks
 - [ ] Integration test from `.agents/skills/artifacts/SKILL.md` passes all 5 consistency checks
 - [ ] PROGRESS.md updated with final artifact counts and timestamps
@@ -831,7 +835,7 @@ See Stage 3 Edge Case above for the full recovery procedure.
 ## Immutable Facts
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules (NOT 65)
-- Model: deepseek-v4-pro (NOT deepseek-pro or v4-flash)
+- Model: poolside/laguna-s-2.1:free (NOT deepseek-pro or v4-flash)
 - 434 pages in ASD-STE100 Issue 9
 - 109 extraction workers (pages 1-434, 4 pages each)
 - 11 adaptation workers (9 sections + categories + dictionary)

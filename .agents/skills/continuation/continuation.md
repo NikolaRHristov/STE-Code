@@ -7,7 +7,7 @@ execution auditor (see `.agents/audit/` for reports). Your job: drive Stages 4
 ```
 STAGE 1 — EXTRACT   ✅ 109/109  (912K, 10,927 lines in ste-code/extracted/)
 STAGE 2 — REFINE     ✅ 109/109  (916K, 21,852 lines in ste-code/refined/)
-STAGE 3 — MERGE      ✅ Ready    (ste-code/merged/master-raw.md + master.md, 708K)
+STAGE 3 — MERGE      ✅ Ready    (ste-code/grouped/master-raw.md + master.md, 708K)
 STAGE 4 — ADAPT      ⬜ 0 files  (ste-code/adapted/ is empty — YOU START HERE)
 STAGE 5 — ARTIFACTS  ⬜ 0 files  (ste-code/artifacts/ is empty — after adaptation)
 ```
@@ -17,8 +17,8 @@ STAGE 5 — ARTIFACTS  ⬜ 0 files  (ste-code/artifacts/ is empty — after adap
 ```bash
 find ste-code/extracted -name 'w*-p*.md' -type f | wc -l   # Must be 109
 find ste-code/refined -name 'r*.md' -type f | wc -l         # Must be 109
-ls ste-code/merged/                                          # Must show master-raw.md + master.md
-head -5 ste-code/merged/master.md                            # Must show "ASD-STE100 Issue 9"
+ls ste-code/grouped/                                          # Must show master-raw.md + master.md
+head -5 ste-code/grouped/master.md                            # Must show "ASD-STE100 Issue 9"
 mkdir -p ste-code/adapted ste-code/artifacts
 ```
 
@@ -29,7 +29,7 @@ If any check fails, STOP. Report the discrepancy. Do not fabricate.
 You are a coordinator, not an inline adapter. You do not adapt rules yourself.
 You launch sub-workers that adapt one section each. The workflow is:
 
-1. **Read** `ste-code/merged/master.md` one section at a time.
+1. **Read** `ste-code/grouped/master.md` one section at a time.
 2. **Launch** one `hermes -z` sub-worker per section with the section-specific
    adaptation prompt from `.agents/prompts/adapt/adapt-secN.txt`.
 3. **Wait** for each sub-worker to complete. The sub-worker writes adapted files
@@ -60,35 +60,35 @@ per-rule adaptation files. You coordinate: launch, wait, validate, retry.
 
 ```bash
 # Section 1 — Words (Rules 1.1–1.14, 14 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec1.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec1.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 2 — Multi-word Nouns (Rules 2.1–2.3, 3 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec2.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec2.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 3 — Verbs (Rules 3.1–3.7, 7 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec3.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec3.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 4 — Sentences (Rules 4.1–4.5, 5 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec4.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec4.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 5 — Procedural Writing (Rules 5.1–5.5, 5 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec5.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec5.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 6 — Descriptive Writing (Rules 6.1–6.6, 6 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec6.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec6.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 7 — Safety Instructions (Rules 7.1–7.3, 3 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec7.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec7.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 8 — Punctuation (Rules 8.1–8.7, 7 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec8.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec8.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 9 — Writing Practices (Rules 9.1–9.4 + GR1–GR4, 8 files)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m poolside/laguna-s-2.1:free
 
 # Supporting outputs
-hermes -z "$(cat .agents/prompts/adapt/adapt-categories.txt)" -m deepseek-v4-pro
-hermes -z "$(cat .agents/prompts/adapt/adapt-dictionary.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-categories.txt)" -m poolside/laguna-s-2.1:free
+hermes -z "$(cat .agents/prompts/adapt/adapt-dictionary.txt)" -m poolside/laguna-s-2.1:free
 ```
 
 NOTE: You can launch Sections 1–9 in parallel. They write to independent files.
@@ -101,7 +101,7 @@ Use the combined prompt that adapts all 9 sections at once. This is slower but
 requires less coordination:
 
 ```bash
-hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m poolside/laguna-s-2.1:free
 ```
 
 Choose the section-by-section method if you need partial results quickly or if
@@ -119,13 +119,13 @@ Full pipeline specification: 5 stages, 9 agents, adaptation levels 1-5, 59-test
 benchmark suite. Defines terminology, directory layout, and the adaptation level
 system (Level 1 = 500 tokens, Level 5 = 100K+ tokens).
 
-### 2. `.agents/skills/references/rails.md` — 8 guardrails (do not skip)
+### 2. `.agents/references/rails.md` — 8 guardrails (do not skip)
 
 Non-negotiable quality rules that apply to every orchestrator and worker:
 
 - **R1 (Stage Isolation)**: Write only to your stage directory. Stage 4 writes
   to `ste-code/adapted/`. Stage 5 writes to `ste-code/artifacts/`. Never touch
-  `ste-code/extracted/`, `ste-code/refined/`, or `ste-code/merged/`.
+  `ste-code/extracted/`, `ste-code/refined/`, or `ste-code/grouped/`.
 - **R2 (Naming)**: `a-secN-ruleY.Z.md` for adaptation,
   `ste-code-<name>.txt` for artifacts.
 - **R3 (Completion Integrity)**: Never claim a file complete until it exists on
@@ -135,7 +135,7 @@ Non-negotiable quality rules that apply to every orchestrator and worker:
   master.md. No fabrication. No invented terms.
 - **R5 (Formatting)**: `#` page, `##` section, `###` rule, `####` dictionary.
   Blank line after every heading.
-- **R6 (Facts)**: 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro or
+- **R6 (Facts)**: 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro or
   deepseek-v4-flash), 53 rules + 4 GR (NOT 65).
 - **R7 (Progress)**: Update `.agents/state/PROGRESS.md` after every completed
   file. Never before verification.
@@ -179,7 +179,7 @@ anti-patterns (e.g., `proxy` → Category 19, not Category 8).
 
 ## Stage 4 — Adaptation
 
-Read `ste-code/merged/master.md` (structural index). Use it to find which files contain
+Read `ste-code/grouped/master.md` (structural index). Use it to find which files contain
 each rule, category, and dictionary entry. Produce adaptation files in `ste-code/adapted/`.
 
 ### Output
@@ -202,7 +202,7 @@ each rule, category, and dictionary entry. Produce adaptation files in `ste-code
 - Every category MUST match one of the 19 from master.md
 - Every example MUST be an adaptation of a real STE/non-STE pair from the extracted spec
 - No invented code terms without a master.md source
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-pro or deepseek-v4-flash)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-pro or deepseek-v4-flash)
 
 ### Worked Example: A Single Adapted Rule
 
@@ -214,7 +214,7 @@ Use this as your template for all 53 rule files.
 
 **Source:** ASD-STE100 Issue 9, Section 1, Rule 1.1
 **Adapted from:** master.md#sec1-rule1.1
-**Model:** deepseek-v4-pro
+**Model:** poolside/laguna-s-2.1:free
 
 ---
 
@@ -274,7 +274,7 @@ Every `a-secN-ruleY.Z.md` file must contain these sections:
 | `# Rule X.Y — Title` | Yes | Rule number and short title |
 | `**Source:**` line | Yes | "ASD-STE100 Issue 9, Section N, Rule X.Y" |
 | `**Adapted from:**` line | Yes | "master.md#secN-ruleX.Y" for backlink integrity |
-| `**Model:**` line | Yes | "deepseek-v4-pro" (never a variant) |
+| `**Model:**` line | Yes | "poolside/laguna-s-2.1:free" (never a variant) |
 | `## Original Rule` | Yes | The rule text as it appears in master.md |
 | `## Adapted Rule (STE-Code)` | Yes | The rule text adapted for the code domain |
 | `## Code-Domain Example Pairs` | Yes | At least one Non-STE/STE-Code pair |
@@ -340,10 +340,10 @@ grep -rn "In summary\|The key point is\|This rule describes" \
 ### Quick Check: Wrong Model Name
 
 ```bash
-# Must use deepseek-v4-pro, never a variant
+# Must use poolside/laguna-s-2.1:free, never a variant
 grep -rn "deepseek-pro\|deepseek-v4-flash\|deepseek-v3" \
   ste-code/adapted/
-# Any output = FAIL: wrong model name — patch to deepseek-v4-pro
+# Any output = FAIL: wrong model name — patch to poolside/laguna-s-2.1:free
 ```
 
 ### Completeness Check: Rule Number Coverage
@@ -458,7 +458,7 @@ pairs are missing the "Prefer" or "Avoid" column. Some rows have only one term.
 **Detection**:
 ```bash
 # Count synonym rows in master.md
-grep -c "^| " ste-code/merged/master.md  # approximate — adjust for table format
+grep -c "^| " ste-code/grouped/master.md  # approximate — adjust for table format
 # If <12 rows, the table is incomplete
 ```
 
@@ -493,7 +493,7 @@ categories because it used an older Issue of ASD-STE100.
 **Detection**:
 ```bash
 # Count unique category definitions in master.md
-grep -c "^### Category" ste-code/merged/master.md
+grep -c "^### Category" ste-code/grouped/master.md
 # Must return 19
 ```
 
@@ -566,7 +566,7 @@ limit error, or a model unavailability message.
 
 **Action**: Wait 30 seconds and retry once. If the second attempt also fails,
 check:
-- Is the model `deepseek-v4-pro` available? Check `hermes status` or
+- Is the model `poolside/laguna-s-2.1:free` available? Check `hermes status` or
   `hermes --list-models`.
 - Are you rate-limited? Wait 60 seconds, then retry all pending sections.
 - Is the prompt file too large? For Section 1 (14 rules), the prompt may exceed
@@ -637,8 +637,8 @@ Run these checks before generating any artifact. Stop if any check fails.
 
 ```bash
 # master.md must be healthy
-test -f ste-code/merged/master.md || { echo "FAIL: master.md missing"; exit 1; }
-master_bytes=$(wc -c < ste-code/merged/master.md)
+test -f ste-code/grouped/master.md || { echo "FAIL: master.md missing"; exit 1; }
+master_bytes=$(wc -c < ste-code/grouped/master.md)
 [ "$master_bytes" -gt 500000 ] || { echo "FAIL: master.md too small ($master_bytes bytes, need >500KB)"; exit 1; }
 
 # All 53 adapted rule files must exist
@@ -669,7 +669,7 @@ echo "PASS: All pre-generation checks passed."
 | R3 | NEVER claim a file complete until it EXISTS on disk with real content (>30 lines) |
 | R4 | Every claim backed by source data from master.md. No fabrication. |
 | R5 | `#` page, `##` section, `###` rule, `####` dictionary. Blank line after every heading. |
-| R6 | 19 categories, deepseek-v4-pro, 53 rules + 4 GR. Never claim otherwise. |
+| R6 | 19 categories, poolside/laguna-s-2.1:free, 53 rules + 4 GR. Never claim otherwise. |
 | R7 | Update `.agents/state/PROGRESS.md` after EVERY completed file. |
 | R8 | Fix mistakes immediately. Document what happened. |
 
@@ -778,7 +778,7 @@ echo "=== $PASS passed, $FAIL failed ==="
 Pick 3 adapted rules at random. For each:
 
 1. Open the adapted file (`ste-code/adapted/a-secN-ruleY.Z.md`).
-2. Find the original rule in `ste-code/merged/master.md` using the source
+2. Find the original rule in `ste-code/grouped/master.md` using the source
    backlink.
 3. Verify:
    - The rule number matches.
@@ -815,13 +815,13 @@ fi
 
 Premature adaptation files exist in `.agents/_scratch/`. They were created before
 extraction completed and moved there by RAILS. **Do NOT reuse them.** Regenerate
-everything from `ste-code/merged/master.md`.
+everything from `ste-code/grouped/master.md`.
 
 ## Immutable Facts
 
 - 19 technical noun categories (NOT 22)
 - 53 writing rules + 4 GR rules (NOT 65)
-- Model: deepseek-v4-pro (NOT deepseek-pro or deepseek-v4-flash)
+- Model: poolside/laguna-s-2.1:free (NOT deepseek-pro or deepseek-v4-flash)
 - 434 pages in ASD-STE100 Issue 9
 - Output: .md for adaptation, .txt for artifacts
 

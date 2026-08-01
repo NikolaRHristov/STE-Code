@@ -1,0 +1,26 @@
+{
+  "worker_id": "b1-004",
+  "invocation": "hermes -z \"$(cat .agents/prompts/expansion-pass1/pass1-batch-004.txt)\" -m poolside/laguna-s-2.1:free --yolo",
+  "prompt_file": ".agents/prompts/expansion-pass1/pass1-batch-004.txt",
+  "prompt_size_bytes": 11323,
+  "model": "poolside/laguna-s-2.1:free",
+  "reasoning_effort": "high",
+  "start_time": "2026-07-30T04:16:44.890715+00:00",
+  "end_time": "2026-07-30T04:18:01.917953+00:00",
+  "duration_seconds": 77.0,
+  "exit_code": 0,
+  "output_file": "ste-code/adapted/expanded/pass1-batch-004.json",
+  "output_exists": true,
+  "output_size_bytes": 3918,
+  "output_valid_json": true,
+  "output_entry_count": 5,
+  "self_healing": {
+    "blacklist_hits": 0,
+    "aerospace_terms_found": 1,
+    "duplicate_entries": 0,
+    "retries": 0,
+    "status": "WARN"
+  },
+  "errors": [],
+  "stderr_snippet": ""
+}

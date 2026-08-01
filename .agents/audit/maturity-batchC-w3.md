@@ -1,4 +1,4 @@
-### .agents/skills/spec-extraction/execution-auditor/SKILL.md
+### .agents/skills/execution-auditor/SKILL.md
 - **Level:** 3
 - **Summary:** Hidden verification agent skill that audits other agents' completion claims against disk evidence. Defines a 5-step audit protocol (collect claims, collect evidence, cross-reference, flag discrepancies, produce report), fabrication detection patterns, and an auto-fix mode for safe, known pattern remediation (22→19, stale file cleanup, model name corrections).
 - **Strengths:**
@@ -19,7 +19,7 @@
 - **What Level 4 Would Add:** Explicit rationale for design decisions (threshold choices, why these 6 fabrication patterns), performance considerations (token cost estimates for full vs. partial audits, guidance on sampling strategies), known limitations with workarounds (e.g., "keyword-based fabrication detection has a blind spot for paraphrased AI content - spot-check 3 random files manually per audit"), and a section on how to extend the fixable/unfixable pattern tables when new patterns emerge.
 - **Priority:** low
 
-### .agents/skills/spec-extraction/execution-auditor/references/evidence-commands.md
+### .agents/skills/execution-auditor/references/evidence-commands.md
 - **Level:** 2
 - **Summary:** Reference sheet of shell commands for evidence collection during execution audits. Covers file counting, line-length classification, page coverage gaps, fabrication detection sweeps, timestamp consistency, and trust score calculation.
 - **Strengths:**
@@ -38,7 +38,7 @@
 - **What Level 3 Would Add:** A preamble explaining when each command suite should be run and how to interpret results, expected value ranges for normal operation (e.g., "page coverage below 90% is 🔴 CRITICAL"), error-handling branches for missing directories and empty globs, and cross-references back to the parent SKILL.md and to rails.md. A filled example of normal command output alongside an annotated abnormal output would make interpretation actionable.
 - **Priority:** medium
 
-### .agents/skills/spec-extraction/agent-state-report/SKILL.md
+### .agents/skills/state-report/SKILL.md
 - **Level:** 2
 - **Summary:** Defines a standardized pipeline state report format that any agent must produce when triggered by "state", "status", "report", or similar keywords. Specifies a 7-section markdown template and 5 execution rules that mandate real disk verification over memory-based estimates.
 - **Strengths:**
@@ -57,7 +57,7 @@
 - **What Level 3 Would Add:** At least one filled example of a real state report (even with anonymized counts), edge-case branches for missing directories, missing git repos, and agents run outside the pipeline root. Cross-references to rails.md (for the 8-rail definitions) and MASTER.md (for expected pipeline counts). A short section on interpreting the report - which sections are diagnostic vs. informational, and what patterns signal trouble.
 - **Priority:** medium
 
-### .agents/skills/spec-extraction/ste-code-continue/extractor.md
+### .agents/skills/continuation/extractor.md
 - **Level:** 3
 - **Summary:** Defines the Extraction Orchestrator agent role - drives 109 parallel `hermes -z` workers across 37 batches of 3 to extract all 434 pages of the ASD-STE100 Issue 9 spec into `ste-code/extracted/`. Includes a complete worker grid, launch protocol, per-batch quality checks, and failure recovery.
 - **Strengths:**
@@ -68,7 +68,7 @@
   - Failure recovery specified: "If any check fails, re-extract with the worker's page range split in half"
   - Launch rules are specific and non-negotiable (exactly 3 per batch, never inline, never exceed 4 pages)
   - Cross-references to rails.md and worker-grid.md - both exist on disk
-  - Immutable facts section prevents common errors (19 not 22 categories, deepseek-v4-pro not deepseek-pro)
+  - Immutable facts section prevents common errors (19 not 22 categories, poolside/laguna-s-2.1:free not deepseek-pro)
 - **Gaps:**
   - No rationale for the batch size of 3 - why not 2 or 5? Is this a rate-limit constraint, a model context constraint, or an empirical optimum?
   - No performance considerations - what's the estimated wall-clock time for 37 batches × 3 parallel workers? What's the token cost estimate?
@@ -76,11 +76,11 @@
   - Quality check #3 (truncation check) says "Last 3 lines end cleanly (period, footer, or table row)" but doesn't specify what to do if only some but not all workers in a batch pass this check
   - No meta-instructions or mechanism for extending the worker grid if the spec grows to 450 pages
   - No version history - the grid is hardcoded for Issue 9 (434 pages) with no guidance on adapting to Issue 10
-  - Cross-reference to `.agents/skills/spec-extraction/references/worker-grid.md` exists but is not verified for content parity - the inline grid and external grid could diverge
+  - Cross-reference to `.agents/references/worker-grid.md` exists but is not verified for content parity - the inline grid and external grid could diverge
 - **What Level 4 Would Add:** Rationale for design decisions (batch size of 3, 4-page limit), performance estimates (wall-clock time, token budget per batch), known limitations with workarounds (formatting variance, worker failure modes), and a section on adapting the grid for different spec sizes or future issues.
 - **Priority:** low
 
-### .agents/skills/spec-extraction/ste-code-continue/refiner.md
+### .agents/skills/continuation/refiner.md
 - **Level:** 3
 - **Summary:** Defines the Refinement Orchestrator agent role - launches a second-pass worker swarm (109 workers, 37 batches of 3) that reformats raw extracted spec files into clean, standardized markdown following 9 non-negotiable rules. Zero content loss, pure formatting transformation.
 - **Strengths:**
@@ -101,7 +101,7 @@
 - **What Level 4 Would Add:** Before/after examples for at least 3 of the 8 problem→solution transformations, explicit boundary definitions for the "zero content loss" rule (what's considered redundant and safe to collapse), failure recovery steps for each verification check, and a rationale section explaining why these 9 rules were chosen and their priority order.
 - **Priority:** low
 
-### .agents/skills/spec-extraction/ste-code-continue/continuation.md
+### .agents/skills/continuation/continuation.md
 - **Level:** 3
 - **Summary:** Defines the Continuation Orchestrator (Agent #3) - picks up after extraction and refinement are complete to drive Stages 4 (adaptation: 53 rules + 19 categories + synonym/polysemy tables) and 5 (artifacts: 6 deployable files). Provides verification commands, prerequisite reading, output specifications, guardrails, and validation procedures.
 - **Strengths:**

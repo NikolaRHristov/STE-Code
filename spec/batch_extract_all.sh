@@ -11,10 +11,13 @@ SPEC_DIR="$SCRIPT_DIR"
 source "$VENV"
 
 # Clean up old extracted dirs
-rm -rf "$SPEC_DIR/issue-09-2025" "$SPEC_DIR/issue-07-2017" \
+rm -rf "$SPEC_DIR/issue-07-2017" \
        "$SPEC_DIR/presentation-ata-s1000d-2022" \
        "$SPEC_DIR/paper-ceur-vol3427" "$SPEC_DIR/paper-ceur-vol3990" \
        "$SPEC_DIR/test-output"
+# NOTE: issue-09-2025/ is NOT deleted here. It contains the combined
+# markdown (issue-09-2025.md) and the page-dir/ subdirectory with
+# individual page files. Use split_spec.py to regenerate page-dir/.
 
 echo "=== Extracting all PDFs to individual page markdown files ==="
 echo ""

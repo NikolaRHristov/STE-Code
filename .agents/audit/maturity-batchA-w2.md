@@ -10,7 +10,7 @@
   - Immutable key facts section prevents drift in rule/category counts (lines 107-112)
   - START NOW section provides an executable sequence of 5 steps
 - **Gaps:**
-  - All 5 "READ THESE FIRST" cross-references point to paths under `.agents/skills/spec-extraction/` - this directory does not exist (verified via disk search). The actual skill files live under `.agents/skills/merging/SKILL.md`, `.agents/skills/adaptation/SKILL.md`, `.agents/skills/artifacts/SKILL.md`, etc. Every cross-reference is broken.
+  - All 5 "READ THESE FIRST" cross-references point to paths under `.agents/skills/spec-extraction/` - this directory does not exist (verified via disk search). The actual skill files live under `.agents/skills/grouping/SKILL.md`, `.agents/skills/adaptation/SKILL.md`, `.agents/skills/artifacts/SKILL.md`, etc. Every cross-reference is broken.
   - No examples of expected output at any stage - what does a merged rule block look like? What does an adapted code-domain example pair look like?
   - No edge case handling: what if deduplication encounters a true semantic conflict (not just a boundary repeat)? What if a refined file is corrupt or empty? What if master.md fails the 53-rule grep check?
   - No failure recovery strategy - no rollback instructions, no checkpointing, no partial-resume protocol

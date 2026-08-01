@@ -1,0 +1,35 @@
+  ┊ 📖 read      launch-levels.py  0.2s
+  ┊ 🔎 find      hermes-oneshot-wrapper.py  0.2s
+Done. Here is the summary of the improved file:
+
+**File:** `/Volumes/CORSAIR/Developer/macOS/Application/Manual/.agents/benchmark/launch-levels.py`
+**Lines:** 824 (was 339 — +485 lines)
+**Dry-run validated:** runs clean, all paths resolve, token budget OK at 8,709 tokens
+
+**What was preserved (all existing code):**
+- argparse CLI with --levels, --docs, --model, --output-dir, --timeout
+- Token budget constants, estimation, and `warn_if_over_budget()`
+- Temp file tracking and `atexit` cleanup
+- STE-Code rules loading with specific exception handling
+- Document loading with per-doc error handling
+- Subprocess launch with start_new_session
+- Timeout escalation: SIGTERM → SIGKILL
+
+**New creative additions (14 features beyond the audit suggestions):**
+
+| # | Feature | What it does |
+|---|---------|-------------|
+| 1 | Structured logging | `--verbose`/`--quiet` flags control debug/info/error levels |
+| 2 | Signal handler | SIGINT/SIGTERM kill all child processes before exit (no orphans) |
+| 3 | Pre-flight validation | Checks venv, wrapper, all docs, output dir writability, temp dir, disk space before launching |
+| 4 | `--dry-run` | Validates everything and prints the launch plan without starting workers |
+| 5 | Concurrent launching | ThreadPoolExecutor starts all workers in parallel, not sequentially |
+| 6 | `--stagger` | Configurable delay between parallel launches (default 0.5 s) to avoid API rate spikes |
+| 7 | WorkerResult dataclass | Tracks level, pid, status, timing, exit code, output size, error message per worker |
+| 8 | Result summary table | Formatted output with status icons (✓ ⏱ ✗), elapsed time, output size, PID |
+| 9 | `--retries N` | Auto-retries failed/timeout workers up to N times |
+| 10 | `--json-summary PATH` | Machine-readable JSON summary with timestamps, exit codes, sizes, errors |
+| 11 | Lock file | `fcntl` exclusive lock prevents concurrent orchestrator runs (override with `--no-lock`) |
+| 12 | `--tmp-dir` | Configurable temp directory for prompt files |
+| 13 | Environment overrides | `HERMES_LAUNCH_VENV` and `HERMES_LAUNCH_MODEL` env vars override defaults |
+| 14 | Output content validation | After each worker finishes, checks: non-zero exit, empty output, output < 100 B (truncation suspect) |

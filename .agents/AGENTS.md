@@ -2,26 +2,26 @@
 
 > **Project root:** `.agents/`  
 > **Pipeline spec:** `ste-code/` (ASD-STE100 → STE-Code adaptation)  
-> **Default agent:** Hermes (`deepseek-v4-pro`)  
+> **Default agent:** Hermes (`poolside/laguna-s-2.1:free`)  
 > **Framework:** Agent-agnostic (pre-configured for Hermes, supports Claude, Codex, custom)
 
 ## Agent Runner
 
-All scripts use the **agent-agnostic runner** at `.agents/tools/agent-runner.py`.
-Configure backends in `.agents/config/agents.yaml`. Default: Hermes with `deepseek-v4-pro`.
+All scripts use the **agent-agnostic runner** at `.agents/tools/lib/agent-runner.py`.
+Configure backends in `.agents/config/agents.yaml`. Default: Hermes with `poolside/laguna-s-2.1:free`.
 
 ```bash
 # Use default agent (Hermes)
-python3 .agents/tools/assemble-level1.py
+python3 .agents/tools/refinement/assemble-level1.py
 
 # Use a different agent
-python3 .agents/tools/assemble-level1.py --agent claude
+python3 .agents/tools/refinement/assemble-level1.py --agent claude
 
 # List available agents
-python3 .agents/tools/agent-runner.py --list
+python3 .agents/tools/lib/agent-runner.py --list
 
 # Shell launcher (agent-agnostic)
-.agents/tools/launch-worker.sh prompt.txt --agent hermes --model deepseek-v4-pro out.txt
+.agents/tools/shared/launch-worker.sh prompt.txt --agent hermes --model poolside/laguna-s-2.1:free out.txt
 ```
 
 Adding a new agent: edit `.agents/config/agents.yaml` and add your backend.
@@ -41,7 +41,13 @@ Adding a new agent: edit `.agents/config/agents.yaml` and add your backend.
 | [`uml/`](uml/) | Pipeline state machines, worker lifecycle diagrams |
 | [`state/`](state/) | Progress tracking, migration plans |
 | [`audit/`](audit/) | Execution auditor reports |
-| [`scripts/`](scripts/) | Utility scripts (verification, prompt generation) |
+| `tools/quality/` | Quality checking (rails, tables, verification) |
+| `tools/refinement/` | Level assembly (prompts, levels 1-4) |
+| `tools/maintenance/` | Content fixes and gap filling |
+| `tools/benchmark/` | Benchmark execution |
+| `tools/runners/` | Pipeline phase runners |
+| `tools/lib/` | Core infrastructure |
+| `tools/shared/` | Shared utilities |
 | [`feedback/`](feedback/) | Inter-agent communication |
 
 ## Pipeline Stages (5-stage)
@@ -111,15 +117,15 @@ Top 3 categories where STE-Code wins hardest: **comments** (+0.580), **error mes
 
 ```bash
 # Assemble level prompts (default: hermes)
-python3 .agents/tools/assemble-level3.py
-python3 .agents/tools/assemble-level2.py
-python3 .agents/tools/assemble-level1.py
+python3 .agents/tools/refinement/assemble-level3.py
+python3 .agents/tools/refinement/assemble-level2.py
+python3 .agents/tools/refinement/assemble-level1.py
 
 # Use a different agent
-python3 .agents/tools/assemble-level1.py --agent claude
+python3 .agents/tools/refinement/assemble-level1.py --agent claude
 
 # Quality sweep (5 parallel batches)
-python3 .agents/tools/sweep-quality.py --batches 5
+python3 .agents/tools/quality/sweep-quality.py --batches 5
 
 # STE-Code benchmark (59 tests, parallel)
 python3 .agents/benchmark/orchestrator.py
@@ -128,7 +134,7 @@ python3 .agents/benchmark/orchestrator.py
 python3 .agents/benchmark/orchestrator-control.py
 
 # List available agent backends
-python3 .agents/tools/agent-runner.py --list
+python3 .agents/tools/lib/agent-runner.py --list
 ```
 
 ## Contributing
@@ -155,8 +161,8 @@ Active placeholder tags in adapted files mark where domain content belongs:
 ### Batch Generation (Internal)
 ```bash
 # Generate domain examples across rules
-python3 .agents/tools/fill-gaps.py --domain MOBILE --rule a-sec4-rule4.3
-python3 .agents/tools/fill-gaps.py --domain ML --all-rules --min-pairs 3
+python3 .agents/tools/maintenance/fill-gaps.py --domain MOBILE --rule a-sec4-rule4.3
+python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pairs 3
 ```
 
 ## Skills Inventory
@@ -165,14 +171,22 @@ python3 .agents/tools/fill-gaps.py --domain ML --all-rules --min-pairs 3
 |-------|------|-------------|
 | Extraction | `skills/extraction/SKILL.md` | 109 parallel workers, 4 pages each, 37 batches |
 | Refinement | `skills/refinement/SKILL.md` | 9 formatting rules, section-aware v2 workers |
-| Merging | `skills/merging/SKILL.md` | Concatenate, deduplicate, organize 109 files |
-| Adaptation | `skills/adaptation/SKILL.md` | 53 rules → code domain, 19 categories |
-| Artifacts | `skills/artifacts/SKILL.md` | 6 deployable files, quality gates |
+| Merging | `skills/grouping/SKILL.md` | Deterministic grouping (concat+split, MANIFEST-driven, no LLM) → `ste-code/grouped/` |
+| Adaptation | `skills/adaptation/SKILL.md` | 53 rules → code domain, 19 categories; orchestrated per-section, gated |
+| Artifacts | `skills/artifacts/SKILL.md` | Final deliverables assembled from `adapted/`; coverage-verified |
 | Auditing | `skills/auditing/SKILL.md` | 8-rail verification, fabrication detection |
 | Validation | `skills/validation/SKILL.md` | Per-batch quality checks, spot-checks |
 | Continuation | `skills/continuation/SKILL.md` | Multi-agent stages 3-5, any agent perspective |
 | Benchmarking | `skills/benchmarking/SKILL.md` | 59 tests, 14 categories, control group |
 | Level Worker | `skills/level-worker/SKILL.md` | 4 parallel workers at levels 1-4 using agent runner |
-| Extension Worker | `skills/extension-worker/SKILL.md` | Batched poll workers generating code-domain gap fillers |
+| Extension Worker | `skills/extension-worker/SKILL.md` | Markdown-first gap-fill generation (orchestrated via `phase-e-run.py`); JSON derived |
 | Translations | `skills/translations/SKILL.md` | Multi-locale placeholder pipeline, 9 locales, ~540 files, batch-of-3 workers |
-| State Report | `skills/state-report.md` | Standardized pipeline state format |
+||| State Report | `skills/state-report/SKILL.md` | Standardized pipeline state format |
+||| Execution Auditor | `skills/execution-auditor/SKILL.md` | Hidden agent for forensic disk verification |
+
+---
+## Feedback & Lessons Learned
+
+- [`feedback/exchange.md`](feedback/exchange.md) — Project-specific adaptations (2-chain parallelism, gitignore fix, extract_batch.py notes)
+- [`feedback/poll-vs-wait.md`](feedback/poll-vs-wait.md) — Use `process(action='poll')`, never `wait` or blocking timeouts
+- [`feedback/aphrodite-tool-testing.md`](feedback/aphrodite-tool-testing.md) — **Use this when working with aphrodite CCR markers**: `aphrodite_retrieve(hash=...)` must be called immediately on every `<<<CCR:hash|type|size>>>` marker in tool output. Never re-read a file when you have a live CCR marker — the marker IS the content.

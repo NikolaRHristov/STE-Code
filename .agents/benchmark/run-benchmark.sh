@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # STE-Code Benchmark Runner v1.1.0 — sequential execution, Python-scored, JSON-safe
-# Usage: bash .agents/benchmark/run-benchmark.sh [--category readme] [--test bench-001] [--model deepseek-v4-pro] [--dry-run] [--timeout 300]
+# Usage: bash .agents/benchmark/run-benchmark.sh [--category readme] [--test bench-001] [--model poolside/laguna-s-2.1:free] [--dry-run] [--timeout 300]
 # Agent #4 benchmarking orchestrator — runs test cases through hermes -z with STE-Code system prompt
 #
 # ══════════════════════════════════════════════════════════════════════════════
@@ -19,7 +19,7 @@ set -euo pipefail
 
 CATEGORY_FILTER=""
 TEST_FILTER=""
-MODEL="deepseek-v4-pro"
+MODEL="poolside/laguna-s-2.1:free"
 DRY_RUN=false
 TEST_TIMEOUT=300   # max seconds per hermes invocation
 
@@ -30,7 +30,7 @@ Usage: bash .agents/benchmark/run-benchmark.sh [FLAGS]
 FLAGS:
   --category NAME    Run only tests in category NAME (e.g. readme, commit, error)
   --test ID          Run only a single test by ID (e.g. bench-001)
-  --model NAME       Override the model passed to hermes (default: deepseek-v4-pro)
+  --model NAME       Override the model passed to hermes (default: poolside/laguna-s-2.1:free)
   --timeout SECONDS  Maximum seconds per hermes invocation (default: 300)
   --dry-run          Load test cases and print what would run, but do not execute
 

@@ -1,0 +1,28 @@
+  ┊ 📖 read      state-report.md  0.2s
+  ┊ 🔎 find      *.md  0.2s
+  ┊ 🔎 find      *.md  0.2s
+  ┊ 📖 read      SKILL.md  0.1s
+  ┊ 📖 read      SKILL.md  0.1s
+  ┊ 📖 read      agent-3-auditor.md  0.1s
+  ┊ 📖 read      agent-4-continuation.md  0.1s
+  ┊ 📖 read      SKILL.md  0.2s
+File saved successfully. Here is a summary:
+
+**State Report Skill — Improved**
+
+Path: `.agents/skills/state-report.md`
+Line count: 498 (up from 46, +452 lines)
+
+All original content preserved. New sections added:
+
+- Status Emoji Legend — defines ✅/🟢/⬜ and adds 🔴/🟠/⚠️ with criteria
+- When to Produce a State Report — mandatory handoff triggers (5 stage gates) and recommended mid-stage triggers with a decision flow
+- Complete Example — fully filled mid-extraction state report with 66/109 files, active workers, PROGRESS.md sync status, verified shell command output
+- Discrepancy Resolution — 8 discrepancy types with severity and immediate actions, resolution order (Critical → Missing → Truncated → Stale → Extra), stale PROGRESS.md resolution procedure, partial stage completion guidance
+- Edge Cases — 8 scenarios: missing PROGRESS.md, missing exchange.md, corrupted audit directory, same-timestamp collision, missing stage directory, failed file count command, cross-stage file detection, paused pipeline
+- Consumers — 5 agents (Auditor, Continuator, Execution Auditor, Refiner, Extractor) with what each needs from the report, file path references, and handoff protocol
+- Inter-Agent Information Flow — ASCII diagram showing state report flow through all agents
+- Report Lifecycle — creation, verification, archiving, and correlation with audit reports
+- Execution rules extended from 4 to 10 covering missing PROGRESS.md, missing audit directory, failed commands, and write verification
+
+Cross-references are exact: links to `.agents/agent/agent-3-auditor.md`, `.agents/skills/auditing/SKILL.md`, `.agents/agent/agent-4-continuation.md`, `.agents/skills/continuation/SKILL.md`, `.agents/skills/spec-extraction/execution-auditor/SKILL.md`, and the refiner/extractor agent definitions.

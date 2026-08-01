@@ -13,8 +13,8 @@ default_agent: hermes
 agents:
   hermes:
     runtime: ~/.hermes/hermes-agent/venv/bin/python3
-    wrapper: .agents/tools/hermes-oneshot-wrapper.py
-    default_model: deepseek-v4-pro
+    wrapper: lib/hermes-oneshot-wrapper.py
+    default_model: tencent/hy3:free
     env:
       HERMES_REASONING_EFFORT: high
       HERMES_YOLO_MODE: "1"

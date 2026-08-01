@@ -1,0 +1,62 @@
+  ┊ 🔎 find      references/*  0.1s
+  ┊ 🔎 find      **/*  0.1s
+  ┊ 🔎 find      *.md  0.1s
+  ┊ 📖 read      category-mapping.md  0.2s
+  ┊ 📖 read      rails.md  0.2s
+  ┊ 📖 read      quality-checklist.md  0.2s
+  ┊ 🔎 find      *.md  0.2s
+  ┊ 🔎 find      ste-code/merged/*.md  0.1s
+  ┊ 🔎 find      ste-code/adapted/*.md  0.1s
+  ┊ 📖 read      MASTER.md  0.1s
+  ┊ 🔎 find      ste-code/merged/master.md  0.1s
+  ┊ 🔎 find      ste-code/adapted/a-sec*  0.1s
+  ┊ 🔎 find      ste-code/artifacts/*  0.2s
+  ┊ 📖 read      master.md  0.2s
+  ┊ 🔎 grep      ste-code/adapted/a-sec1-rule1.1.md  0.2s
+  ┊ 📖 read      a-sec3-rule3.5.md  0.1s
+  ┊ 📖 read      ste-code-distilled-system-prompt.txt  0.1s
+  ┊ 🔎 grep      ste-code/merged/master.md  0.1s
+  ┊ 📖 read      a-sec3-rule3.5.md L41  0.1s
+  ┊ 📖 read      ste-code-self-reading-manual.txt  0.1s
+  ┊ 📖 read      ste-code-extraction-methodology.txt  0.2s
+  ┊ 📖 read      a-sec1-rule1.2.md  0.2s
+  ┊ 📖 read      a-sec7-rule7.1.md  0.2s
+  ┊ 📖 read      ste-code-example-turn.txt  0.2s
+  ┊ 📖 read      ste-code-deployment-guide.txt  0.2s
+File saved: 421 lines, 23,106 bytes. All original content preserved. Here is what was added:
+
+**New sections added:**
+
+1. **Concrete Input Sources** (table) — explicit file paths for `ste-code/merged/master.md` (20,794 lines, 685 KB), category mapping, quality checklist, and rails. No more vague "9 worker files" reference.
+
+2. **Intermediate Adapted Files** (table) — maps all 9 sections to 53 adapted rule file names, showing the complete `a-secN-ruleY.Z.md` naming scheme including the 4 general rules.
+
+3. **Execution Protocol** (11 steps across 4 phases) — a concrete turn-by-turn protocol:
+   - Phase 4A: Load and validate input (3 steps)
+   - Phase 4B: Adapt each rule (5 sub-steps per rule, 53 iterations)
+   - Phase 4C: Produce final artifacts (1 step)
+   - Phase 4D: Verify and report (2 steps)
+
+4. **Worked Example: Rule 3.5** — a complete before/after showing the full adaptation pipeline for one rule. Includes:
+   - Original aerospace example pairs from master.md
+   - Analogue identification (how "are doing" maps to "are running," how the complex fragment maps to style-guide violation)
+   - Final adapted output with citation lines tracing each example back to its spec pair
+   - Traceability explanation
+
+5. **Preservation Rationale** (table) — explicit reasons for each preservation decision: rule numbers preserved for cross-reference integrity, pipeline preserved for domain-agnosticism, dictionary architecture preserved for scanability, etc.
+
+6. **Replacement Rationale** (table) — explicit reasons for each replacement decision: aerospace examples replaced because target domain is code documentation, categories mapped via category-mapping.md, WARNING/CAUTION mapped because two-level risk structure is identical.
+
+7. **Edge Case Guidance** (6 cases) — EC1 through EC6 covering:
+   - Rules with no code analogue (map structure, not content)
+   - Idiomatic aerospace examples (preserve grammar, replace vocabulary)
+   - Rules with multiple possible adaptations (pick the most common, include alternatives)
+   - Dictionary words with no code meaning (omit, note omission)
+   - Cross-section dependencies (add "See also")
+   - Truncated or corrupted input (mark incomplete, do not fabricate)
+
+8. **Quality Gate Checklist** (4 sub-checklists, 28 items) — adapted file checks, artifact file checks, cross-reference integrity, and rail compliance. Each item is a concrete pass/fail.
+
+9. **File Structure After Adaptation** (tree diagram) — complete directory tree showing `merged/` → `adapted/` (53 files + 4 GR) → `artifacts/` (6 files).
+
+Version bumped from 1.0.0 to 1.1.0.

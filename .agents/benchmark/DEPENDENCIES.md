@@ -19,13 +19,13 @@ writes the model response to stdout.
 ### Required invocation form
 
 ```bash
-hermes -z "<full prompt text>" -m deepseek-v4-pro --yolo
+hermes -z "<full prompt text>" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 | Flag | Meaning |
 |---|---|
 | `-z` | Pass the argument as a combined system+user prompt (zero-shot single-string mode) |
-| `-m <model>` | Model name. All benchmark scripts hardcode `deepseek-v4-pro`. |
+| `-m <model>` | Model name. All benchmark scripts hardcode `poolside/laguna-s-2.1:free`. |
 | `--yolo` | Skip all interactive confirmation prompts. Required for unattended batch runs. |
 
 ### Expected location
@@ -38,8 +38,8 @@ which hermes && hermes --version
 
 ### Model
 
-All benchmark scripts use `deepseek-v4-pro`. The model name is hardcoded in
-each script as `MODEL = "deepseek-v4-pro"`. To override, edit the `MODEL`
+All benchmark scripts use `poolside/laguna-s-2.1:free`. The model name is hardcoded in
+each script as `MODEL = "poolside/laguna-s-2.1:free"`. To override, edit the `MODEL`
 constant at the top of the relevant script.
 
 ### API credentials

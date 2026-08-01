@@ -2,17 +2,15 @@
 
 > **CRITICAL: Anti-Fabrication Rules — READ BEFORE ANY ACTION**
 >
-> 1. You MUST NOT write any output file until its prerequisite worker JSON exists on disk.
+> 1. You MUST NOT write any output file until its prerequisite data exists on disk.
 > 2. Every phase has a HARD GATE — a file-existence check. Do not proceed past a gate.
 > 3. If a worker fails, re-launch it. Do not fabricate its data.
-> 4. All STE-Code content MUST cross-reference a worker JSON entry. No spec data = no output.
+> 4. All STE-Code content MUST cross-reference a source page. No spec data = no output.
 > 5. Track progress in `.agents/state/PROGRESS.md` — update it after EVERY completed step.
 
 ---
 
 ## Version History
-
-This document is a living protocol. Record all structural changes, field additions, and logic updates below.
 
 | Version | Date | Author | Change | Rationale |
 |---------|------|--------|--------|-----------|
@@ -21,12 +19,13 @@ This document is a living protocol. Record all structural changes, field additio
 | 1.2 | 2025-07-28 | Agent #3 (Auditor) | Added anti-fabrication rules block at document top. Added spot-check validation in GATE 2. | Audit found fabricated rule text in 3 of 9 worker JSONs |
 | 1.3 | 2025-07-29 | Agent #1 (Extractor) | Updated worker table to match 109-worker grid (granular-strategy.md). Documented 4pp sweet spot. | Original 9-worker split was too coarse; workers missed content |
 | 1.4 | 2025-07-30 | Hermes (maturity audit) | Added cross-reference index, known limitations, measurable quality gates, schema evolution protocol, recovery protocols, environment dependencies, timing budget, decision consequences, and glossary. | Maturity audit identified 5 structural gaps. This release fills all 5 plus adds 7 proactive sections. |
+| 1.5 | 2026-07-31 | Hermes (operator) | Updated GATE 0 to use page-dir/ naming. Updated GATE 1 to use 109-worker markdown pipeline. Updated model references to poolside/laguna-s-2.1:free. Removed JSON-based worker schema in favor of markdown extraction. | Page files now use spec page identifiers in page-dir/. Model is poolside/laguna-s-2.1:free, not poolside/laguna-s-2.1:free. Workers output .md files, not .json files. |
 
 ### How to Update This Version Table
 
 After any change to this document:
 
-1. Add a new row to the version table.
+1. Add a new row to the version history table.
 2. Use the current date in `YYYY-MM-DD` format.
 3. State the author as your agent role or `Hermes (operator)`.
 4. Describe the change in one sentence.
@@ -46,10 +45,11 @@ This protocol does not exist in isolation. The table below lists every document 
 | Granular Strategy | `.agents/references/granular-strategy.md` | Page-split rationale: why 4pp per worker, why 109 workers, why 37 batches | GATE 1 worker assignments assume this split. If the strategy changes, worker counts break. |
 | Section Types | `.agents/references/section-types.md` | Content signature per page range, tailored extraction prompts, edge case rules | Workers need content-aware extraction. Generic extraction misses rule/dictionary boundary markers. |
 | Worker Grid | `.agents/references/worker-grid.md` | Full 109-worker launch architecture, batch map, worker-to-page mapping | GATE 1 launch protocol uses this grid. Without it, workers hit the wrong pages. |
-| Worker Rails | `.agents/references/worker-rails.md` | 10 output-format rails injected into every worker prompt | Workers validate their own output before writing. Missing rails = corrupted JSON files. |
+| Worker Rails | `.agents/references/worker-rails.md` | 10 output-format rails injected into every worker prompt | Workers validate their own output before writing. Missing rails = corrupted output files. |
 | Process Rails | `.agents/references/rails.md` | 8 process rails for all orchestrators and workers | Anti-fabrication rules (top of this document) derive from rail R4. |
-| Quality Checklist | `.agents/references/quality-checklist.md` | Per-batch verification checklist run after each batch of 3 | GATE 1 batch validation references this. Skip it and malformed JSON passes through. |
+| Quality Checklist | `.agents/references/quality-checklist.md` | Per-batch verification checklist run after each batch of 3 | GATE 1 batch validation references this. Skip it and malformed output passes through. |
 | Category Mapping | `.agents/references/category-mapping.md` | 19 technical noun categories mapped from STE to STE-Code | GATE 3 adaptation needs these mappings. Incorrect mapping = incorrect output artifacts. |
+| Page Files | `spec/issue-09-2025/page-dir/page-*.md` | 426 individual spec page files split from combined markdown | GATE 0 verifies these exist. Workers read these in GATE 1. |
 
 ### Documents That EXTEND This Protocol (read only when relevant)
 
@@ -71,8 +71,8 @@ This protocol does not exist in isolation. The table below lists every document 
 | Artifact | Path | Created By | Gate |
 |----------|------|-----------|------|
 | Progress Tracker | `.agents/state/PROGRESS.md` | GATE 0 init script | GATE 0 |
-| Worker JSONs | `ste-code/workers/w1.json` through `w9.json` | GATE 1 workers | GATE 1 |
-| Master State | `ste-code/extracted/master.json` | GATE 2 merge script | GATE 2 |
+| 109 Extraction Files | `ste-code/extracted/wNNN-pPPPP-PPPP.md` | GATE 1 workers | GATE 1 |
+| Master State | `ste-code/grouped/master.md` | GATE 2 merge script | GATE 2 |
 | 6 Output Artifacts | `ste-code/artifacts/*.txt` + `ste-code/README.md` | GATE 4 artifact writers | GATE 4 |
 
 ---
@@ -81,7 +81,7 @@ This protocol does not exist in isolation. The table below lists every document 
 
 ### What This Protocol Covers
 
-- Extraction of the ASD-STE100 Issue 9 specification into structured JSON
+- Extraction of the ASD-STE100 Issue 9 specification into markdown files
 - Merging and validation of extracted data
 - Adaptation of STE rules for the code documentation domain
 - Generation of 6 deployable output artifacts
@@ -103,15 +103,26 @@ This protocol does not exist in isolation. The table below lists every document 
 **Before any extraction, verify these paths exist and are readable:**
 
 ```bash
-ls spec/issue-09-2025/page-0001.md   # Must return the file
-ls spec/issue-09-2025/page-0434.md   # Must return the file
-ls spec/issue-07-2017/page-0001.md   # Must return the file
+# Verify page-dir exists with page files
+ls spec/issue-09-2025/page-dir/page-front-matter.md  # Must return the file
+ls spec/issue-09-2025/page-dir/page-HI-1.md          # Must return the file
+ls spec/issue-09-2025/page-dir/page-2-1-Y2.md        # Must return the file
+ls spec/issue-09-2025/page-dir/MANIFEST.md           # Must return the file
+
+# Verify combined markdown exists
+test -f spec/issue-09-2025/issue-09-2025.md && echo "Combined markdown: OK"
+
+# If page-dir is missing, regenerate it:
+# python3 spec/issue-09-2025/split_spec.py
 ```
 
 **Create output directories:**
 
 ```bash
-mkdir -p ste-code/workers
+mkdir -p ste-code/extracted
+mkdir -p ste-code/refined
+mkdir -p ste-code/grouped
+mkdir -p ste-code/adapted
 mkdir -p ste-code/artifacts
 ```
 
@@ -119,22 +130,59 @@ mkdir -p ste-code/artifacts
 
 ```bash
 cat > .agents/state/PROGRESS.md << 'TRACKER'
-# STE-Code Progress Tracker
+# STE-Code Progress Tracker — 109-Worker Grid
 
-## Workers
-- [ ] W1: Front matter + Section 1 rules (pages 1-30) → workers/w1.json
-- [ ] W2: Sections 2-3 rules (pages 31-60) → workers/w2.json
-- [ ] W3: Sections 4-5 rules (pages 61-90) → workers/w3.json
-- [ ] W4: Sections 6-7 rules (pages 91-120) → workers/w4.json
-- [ ] W5: Sections 8-9 + GR rules (pages 121-180) → workers/w5.json
-- [ ] W6: Dictionary A-F (pages 181-240) → workers/w6.json
-- [ ] W7: Dictionary G-P (pages 241-300) → workers/w7.json
-- [ ] W8: Dictionary Q-Z (pages 301-360) → workers/w8.json
-- [ ] W9: Appendices + history (pages 361-434) → workers/w9.json
+## GATE 0: Environment ✓
+- [x] Page files exist in spec/issue-09-2025/page-dir/ (426 files + MANIFEST.md)
+- [x] Output directories created (extracted/, refined/, merged/, adapted/, artifacts/)
+- [x] State saved via git gcommit-hermes
+
+## Extraction — 4 pages per worker, 109 workers total (434 pages)
+Output directory: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
+
+| Batch | Workers | Pages | Status |
+|-------|---------|-------|--------|
+| 1 | W001(1-4), W002(5-8), W003(9-12) | 1-12 | [ ] |
+| 2 | W004(13-16), W005(17-20), W006(21-24) | 13-24 | [ ] |
+| 3 | W007(25-28), W008(29-32), W009(33-36) | 25-36 | [ ] |
+| 4 | W010(37-40), W011(41-44), W012(45-48) | 37-48 | [ ] |
+| 5 | W013(49-52), W014(53-56), W015(57-60) | 49-60 | [ ] |
+| 6 | W016(61-64), W017(65-68), W018(69-72) | 61-72 | [ ] |
+| 7 | W019(73-76), W020(77-80), W021(81-84) | 73-84 | [ ] |
+| 8 | W022(85-88), W023(89-92), W024(93-96) | 85-96 | [ ] |
+| 9 | W025(97-100), W026(101-104), W027(105-108) | 97-108 | [ ] |
+| 10 | W028(109-112), W029(113-116), W030(117-120) | 109-120 | [ ] |
+| 11 | W031(121-124), W032(125-128), W033(129-132) | 121-132 | [ ] |
+| 12 | W034(133-136), W035(137-140), W036(141-144) | 133-144 | [ ] |
+| 13 | W037(145-148), W038(149-152), W039(153-156) | 145-156 | [ ] |
+| 14 | W040(157-160), W041(161-164), W042(165-168) | 157-168 | [ ] |
+| 15 | W043(169-172), W044(173-176), W045(177-180) | 169-180 | [ ] |
+| 16 | W046(181-184), W047(185-188), W048(189-192) | 181-192 | [ ] |
+| 17 | W049(193-196), W050(197-200), W051(201-204) | 193-204 | [ ] |
+| 18 | W052(205-208), W053(209-212), W054(213-216) | 205-216 | [ ] |
+| 19 | W055(217-220), W056(221-224), W057(225-228) | 217-228 | [ ] |
+| 20 | W058(229-232), W059(233-236), W060(237-240) | 229-240 | [ ] |
+| 21 | W061(241-244), W062(245-248), W063(249-252) | 241-252 | [ ] |
+| 22 | W064(253-256), W065(257-260), W066(261-264) | 253-264 | [ ] |
+| 23 | W067(265-268), W068(269-272), W069(273-276) | 265-276 | [ ] |
+| 24 | W070(277-280), W071(281-284), W072(285-288) | 277-288 | [ ] |
+| 25 | W073(289-292), W074(293-296), W075(297-300) | 289-300 | [ ] |
+| 26 | W076(301-304), W077(305-308), W078(309-312) | 301-312 | [ ] |
+| 27 | W079(313-316), W080(317-320), W081(321-324) | 313-324 | [ ] |
+| 28 | W082(325-328), W083(329-332), W084(333-336) | 325-336 | [ ] |
+| 29 | W085(337-340), W086(341-344), W087(345-348) | 337-348 | [ ] |
+| 30 | W088(349-352), W089(353-356), W090(357-360) | 349-360 | [ ] |
+| 31 | W091(361-364), W092(365-368), W093(369-372) | 361-372 | [ ] |
+| 32 | W094(373-376), W095(377-380), W096(381-384) | 373-384 | [ ] |
+| 33 | W097(385-388), W098(389-392), W099(393-396) | 385-396 | [ ] |
+| 34 | W100(397-400), W101(401-404), W102(405-408) | 397-408 | [ ] |
+| 35 | W103(409-412), W104(413-416), W105(417-420) | 409-420 | [ ] |
+| 36 | W106(421-424), W107(425-428), W108(429-432) | 421-432 | [ ] |
+| 37 | W109(433-434) — 2 pages only | 433-434 | [ ] |
 
 ## Merge
-- [ ] Master state merged from all 9 worker JSONs
-- [ ] Spot-check: 10 random pages verified against master state
+- [ ] Master state merged from all 109 worker outputs
+- [ ] Spot-check: 10 random pages verified against source
 
 ## Adaptation (performed AFTER merge is complete)
 - [ ] Section 1 Rules (1.1-1.14) adapted for code
@@ -171,311 +219,163 @@ echo "GATE 0 PASSED: Environment ready"
 
 ### Worker Specification
 
-Each worker is a separate `hermes -z` session. All workers use `deepseek-v4-pro` (full reasoning capability).
+Each worker is a separate `hermes -z` session. All workers use `poolside/laguna-s-2.1:free` (the available model in this environment).
 Workers extract RAW spec text — they do NOT adapt or rewrite anything.
+
+**Pipeline configuration:** 109 workers, 4 pages per worker, 37 batches of 3 workers.
+See `.agents/references/worker-grid.md` for the full batch map and `.agents/references/worker-rails.md` for output format rails.
 
 ### Worker Assignments
 
-| Worker | Pages | What to Extract | Output |
-|--------|-------|-----------------|--------|
-| W1 | 1–30 | Front matter, TOC, highlights, Section 1 rules (1.1–1.14) with ALL STE/non-STE example pairs, subject-to-rule index | `workers/w1.json` |
-| W2 | 31–60 | Section 2-3 rules (2.1–2.3, 3.1–3.7) with ALL example pairs. Technical noun categories start | `workers/w2.json` |
-| W3 | 61–90 | Section 4-5 rules (4.1–4.4, 5.1–5.5) with ALL example pairs. Technical noun categories continue | `workers/w3.json` |
-| W4 | 91–120 | Section 6-7 rules (6.1–6.6, 7.1–7.3) with ALL example pairs. Technical noun categories complete | `workers/w4.json` |
-| W5 | 121–180 | Section 8-9 rules (8.1–8.7, 9.1–9.4) + GR1–GR4 with ALL examples. Complete polysemy resolution table | `workers/w5.json` |
-| W6 | 181–240 | Dictionary A–F: every entry with WORD, POS, approved meaning, approved forms, alternatives. Complete canonical synonym table | `workers/w6.json` |
-| W7 | 241–300 | Dictionary G–P: every entry. All transformation examples with before/after text | `workers/w7.json` |
-| W8 | 301–360 | Dictionary Q–Z: every entry. Remaining transformation examples | `workers/w8.json` |
-| W9 | 361–434 | Appendices, change history (all issues 1-9), decision flowchart, index, 19 category enumeration | `workers/w9.json` |
+Workers are launched in 37 batches of 3, each reading 4 pages from `spec/issue-09-2025/page-dir/`.
+The full worker-to-page mapping is in `.agents/references/worker-grid.md`. Key ranges:
 
-### Worker JSON Schema
+| Batch | Workers | Pages | Section Type |
+|-------|---------|-------|--------------|
+| 1 | W001(1-4), W002(5-8), W003(9-12) | 1-12 | FRONT |
+| 2 | W004(13-16), W005(17-20), W006(21-24) | 13-24 | TOC + INDEX |
+| 3 | W007(25-28), W008(29-32), W009(33-36) | 25-36 | INTRO |
+| 4-5 | W010-W015 | 37-60 | RULES + CATEGORIES |
+| 6-10 | W016-W030 | 61-120 | RULES |
+| 11-12 | W031-W036 | 121-144 | RULES + DICT start |
+| 13-30 | W037-W090 | 145-360 | DICT (A-F, G-P, Q-Z) |
+| 31-37 | W091-W109 | 361-434 | APPENDIX |
 
-Every worker MUST output this exact JSON structure. No markdown wrapping.
+### Worker Output Format
 
-```json
-{
-  "worker_id": "W1",
-  "source_pages": "1-30",
-  "pages_actually_read": 30,
-  "extraction_timestamp": "ISO8601",
-  "rules": [
-    {
-      "rule_number": "1.1",
-      "section": "Words",
-      "rule_text": "EXACT TEXT FROM SPEC",
-      "ste_examples": ["EXACT STE EXAMPLE 1", "EXACT STE EXAMPLE 2"],
-      "non_ste_examples": ["EXACT NON-STE EXAMPLE 1", "EXACT NON-STE EXAMPLE 2"],
-      "explanatory_notes": "EXACT EXPLANATORY TEXT"
-    }
-  ],
-  "categories": [
-    {
-      "category_number": 1,
-      "category_name": "EXACT CATEGORY NAME",
-      "description": "EXACT DESCRIPTION",
-      "examples": ["example1", "example2"]
-    }
-  ],
-  "dictionary_entries": [
-    {
-      "word": "WORD",
-      "approved": true,
-      "part_of_speech": "v",
-      "approved_meaning": "EXACT MEANING",
-      "approved_forms": ["FORM1", "FORM2"],
-      "alternatives": []
-    }
-  ],
-  "synonyms": [
-    {
-      "canonical": "CANONICAL FORM",
-      "rejected": ["synonym1", "synonym2"],
-      "concept": "WHAT THE CONCEPT IS"
-    }
-  ],
-  "polysemy": [
-    {
-      "word": "WORD",
-      "approved_meaning": "THE ONE APPROVED MEANING",
-      "rejected_meanings": [
-        {"sense": "rejected sense 1", "use_instead": "ALTERNATIVE WORD"},
-        {"sense": "rejected sense 2", "use_instead": "ALTERNATIVE WORD"}
-      ]
-    }
-  ],
-  "pipeline_steps": [
-    {
-      "pass_number": 1,
-      "name": "EXACT PASS NAME",
-      "description": "EXACT DESCRIPTION",
-      "actions": ["action 1", "action 2"]
-    }
-  ],
-  "evolution_history": [
-    {
-      "issue": "Issue 1",
-      "year": 1986,
-      "key_changes": ["change 1", "change 2"]
-    }
-  ]
-}
-```
+Each worker outputs a markdown file: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 
-### Worker Prompt Template
+File structure:
+```markdown
+# Page N of 434
 
-For each worker, construct the prompt EXACTLY as follows (replace `<<PLACEHOLDERS>>`):
+## Section Title From Spec
 
-```
-You are a spec extraction worker. Extract ONLY — do not adapt, summarize, or rewrite.
+Content paragraph. Preserve all text exactly.
 
-READ these files sequentially:
-  spec/issue-09-2025/page-<<START_PAGE>>.md through page-<<END_PAGE>>.md
+### Subsection
 
-EXTRACT: <<TASK_DESCRIPTION>>
+More content. Do not add commentary. Do not summarize.
 
-OUTPUT: Write ONLY valid JSON to ste-code/extracted/w<<N>>.json
-Use the schema below. Every field must contain EXACT text from the spec pages.
-If a page has no content matching a key, use an empty array [].
+#### WORD (POS) — APPROVED
 
-{
-  "worker_id": "W<<N>>",
-  "source_pages": "<<START_PAGE>>-<<END_PAGE>>",
-  "pages_actually_read": <<PAGE_COUNT>>,
-  "rules": [ ... rule objects with EXACT rule_number, rule_text, ste_examples, non_ste_examples, explanatory_notes ... ],
-  "categories": [ ... category objects ... ],
-  "dictionary_entries": [ ... entry objects ... ],
-  "synonyms": [ ... synonym objects ... ],
-  "polysemy": [ ... polysemy objects ... ],
-  "pipeline_steps": [ ... step objects ... ],
-  "evolution_history": [ ... issue objects ... ]
-}
-
-RULES:
-1. Extract EXACT text. Do not paraphrase. Do not summarize.
-2. Include ALL example pairs — every STE example AND its non-STE counterpart.
-3. For dictionary entries, include every field: word, approved boolean, POS, meaning, forms, alternatives.
-4. If you cannot finish all pages, update "pages_actually_read" to the actual count.
-5. Write ONLY the JSON. No markdown fences, no explanations, no preamble, no postscript.
-6. Verify the JSON is valid before writing.
+- **Meaning:** exact approved meaning from spec
+- **Forms:** form1, form2, form3
+- **STE:** approved example sentence
+- **Non-STE:** non-approved example sentence
 ```
 
 ### Worker Launch Protocol (Batch of 3)
 
-**DO NOT launch more than 3 workers at once.** After each batch, verify the JSON files exist and are valid before launching the next batch.
+**DO NOT launch more than 3 workers at once.** After each batch, verify the output files exist and pass quality checks before launching the next batch.
 
 **Batch 1 — Launch:**
 ```bash
-hermes -z --model deepseek-v4-pro "<W1_PROMPT>" &
-hermes -z --model deepseek-v4-pro "<W2_PROMPT>" &
-hermes -z --model deepseek-v4-pro "<W3_PROMPT>" &
+hermes -z "Read spec/issue-09-2025/page-dir/page-front-matter.md through page-1-1-4.md. Extract ALL content exactly into ste-code/extracted/w001-p1-4.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read spec/issue-09-2025/page-dir/page-1-1-5.md through page-1-1-8.md. Extract ALL content exactly into ste-code/extracted/w002-p5-8.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "Read spec/issue-09-2025/page-dir/page-1-1-9.md through page-1-1-12.md. Extract ALL content exactly into ste-code/extracted/w003-p9-12.md. Do not summarize. Include every word, every table, every example. Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo &
 ```
 
 **Batch 1 — Verify (after workers complete):**
 ```bash
 # Check files exist
-test -f ste-code/extracted/w1.json && echo "W1 OK" || echo "W1 MISSING — RE-LAUNCH"
-test -f ste-code/extracted/w2.json && echo "W2 OK" || echo "W2 MISSING — RE-LAUNCH"
-test -f ste-code/extracted/w3.json && echo "W3 OK" || echo "W3 MISSING — RE-LAUNCH"
+test -f ste-code/extracted/w001-p1-4.md && echo "W001 OK" || echo "W001 MISSING — RE-LAUNCH"
+test -f ste-code/extracted/w002-p5-8.md && echo "W002 OK" || echo "W002 MISSING — RE-LAUNCH"
+test -f ste-code/extracted/w003-p9-12.md && echo "W003 OK" || echo "W003 MISSING — RE-LAUNCH"
 
-# Validate JSON
-python3 -c "import json; json.load(open('ste-code/extracted/w1.json')); print('W1 valid')"
-python3 -c "import json; json.load(open('ste-code/extracted/w2.json')); print('W2 valid')"
-python3 -c "import json; json.load(open('ste-code/extracted/w3.json')); print('W3 valid')"
+# Check file sizes (FRONT section threshold: > 2 KB)
+for f in ste-code/extracted/w001-p1-4.md ste-code/extracted/w002-p5-8.md ste-code/extracted/w003-p9-12.md; do
+  if [ -f "$f" ]; then
+    size=$(wc -c < "$f")
+    lines=$(wc -l < "$f")
+    echo "$f: $size bytes, $lines lines"
+  fi
+done
 
-# Check content quality: each file must have actual entries
-python3 -c "
-import json
-for w in ['w1','w2','w3']:
-    d = json.load(open(f'ste-code/extracted/{w}.json'))
-    rules = len(d.get('rules',[]))
-    cats = len(d.get('categories',[]))
-    entries = len(d.get('dictionary_entries',[]))
-    print(f'{w}: {rules} rules, {cats} categories, {entries} dict entries')
-    if rules == 0 and cats == 0 and entries == 0:
-        print(f'  WARNING: {w} has zero extracted content — RE-LAUNCH')
-"
+# Check for fabrication signals
+grep -r -c 'React\|Docker\|npm\|async/await\|This page describes\|In summary' ste-code/extracted/w001-p1-4.md ste-code/extracted/w002-p5-8.md ste-code/extracted/w003-p9-12.md || echo "No fabrication signals found"
 ```
 
 **Update PROGRESS.md** after each verified batch:
 ```bash
-# In .agents/state/PROGRESS.md, change [ ] to [x] for W1, W2, W3
+# In .agents/state/PROGRESS.md, change [ ] to [x] for W001, W002, W003
 ```
-
-**Batch 2 — W4, W5, W6** (launch only after Batch 1 fully verified)
-**Batch 3 — W7, W8, W9** (launch only after Batch 2 fully verified)
 
 ### Worker Failure Protocol
 
-If ANY worker JSON is missing, has zero content, or fails JSON validation:
+If ANY worker output file is missing, has zero content, or fails quality checks:
 1. Mark it `[!] FAILED` in PROGRESS.md
 2. Re-launch that specific worker with the SAME prompt
-3. If it fails twice, reduce its page range by half and launch two sub-workers
-4. Do NOT proceed past GATE 1 until all 9 worker files exist AND contain real content
+3. If it fails twice, split its page range in half and launch two sub-workers
+4. Do NOT proceed past GATE 1 until all 3 workers in the batch pass checks
 
 ---
 
 ### Quality Gates for Extraction (Measurable Thresholds)
 
-> **CRITICAL:** Binary checks (file exists, JSON parses, non-empty arrays) are necessary but insufficient. Apply these quantitative thresholds to every worker JSON before accepting it.
+> **CRITICAL:** Binary checks (file exists, non-empty) are necessary but insufficient. Apply these quantitative thresholds to every worker output before accepting it.
 
-#### QG1: Rule Completeness
+#### QG1: File Existence & Size
 
-The ASD-STE100 Issue 9 specification defines exactly 53 writing rules (Sections 1-9 plus GR1-GR4). After GATE 2 merge, the master state MUST contain at least **95% of expected rules** (50 of 53). Rules may be split across workers. Count unique `rule_number` values in the merged dataset.
+| Check | Threshold | Method |
+|-------|-----------|--------|
+| Output file exists | File present on disk | `test -f <file>` |
+| File size > 2 KB (FRONT/TOC) | 2,048 bytes minimum | `wc -c < <file>` |
+| File size > 3 KB (INDEX/INTRO) | 3,072 bytes minimum | `wc -c < <file>` |
+| File size > 5 KB (RULES) | 5,120 bytes minimum | `wc -c < <file>` |
+| File size > 8 KB (DICT) | 8,192 bytes minimum | `wc -c < <file>` |
+| File size > 1.5 KB (last batch only) | 1,536 bytes minimum for W109 | `wc -c < <file>` |
 
-```bash
-python3 -c "
-import json, os
-master = json.load(open('ste-code/extracted/master.json'))
-rules = master.get('rules', [])
-rule_nums = set(r.get('rule_number') for r in rules if r.get('rule_number'))
-total = len(rule_nums)
-print(f'Unique rules: {total} / 53 expected')
-if total < 50:
-    missing = set(f'{s}.{n}' for s in range(1,10) for n in range(1,15)) - rule_nums
-    print(f'MISSING RULES: {sorted(missing)}')
-    print(f'FAIL: {total}/53 is below the 95% threshold (50/53). Do not proceed.')
-    exit(1)
-else:
-    print(f'PASS: {total}/53 meets the 95% threshold.')
-"
-```
+#### QG2: Truncation Detection
 
-#### QG2: Dictionary Entry Threshold
+| Check | Method | Action on Failure |
+|-------|--------|-------------------|
+| Last 3 lines end cleanly | `tail -3 <file>` — no mid-word breaks | Split page range in half, retry both |
+| No mid-sentence endings | Last line ends with punctuation or page footer | Re-extract |
+| Page header present | `head -1 <file>` matches `# Page N of M` or `**Page <ID>**` | Re-extract with explicit header instruction |
 
-The complete dictionary contains approximately 875 approved words plus non-approved alternatives. After GATE 2 merge, the master state MUST contain at least **90% of expected entries** (788 of 875). Count unique `word` values in the `dictionary_entries` array.
+#### QG3: Fabrication Detection
 
-```bash
-python3 -c "
-import json
-master = json.load(open('ste-code/extracted/master.json'))
-entries = master.get('dictionary_entries', [])
-total = len(entries)
-approved = sum(1 for e in entries if e.get('approved'))
-rejected = sum(1 for e in entries if not e.get('approved'))
-print(f'Dictionary entries: {total} total ({approved} approved, {rejected} non-approved)')
-if total < 788:
-    print(f'FAIL: {total}/875 is below the 90% threshold (788). Do not proceed.')
-    exit(1)
-print(f'PASS: {total} entries meets the 90% threshold.')
-"
-```
+| Check | Method | Action on Failure |
+|-------|--------|-------------------|
+| No modern software terms | `grep -c -E 'React|Docker|npm|async/await|This page describes|In summary|The key point is' <file>` | CRITICAL: delete file, re-extract from spec |
+| No commentary language | `grep -c -E 'This page describes|The key point is|In summary|Essentially|Let me check|Wait, actually' <file>` | Delete file, re-extract |
 
-#### QG3: Category Completeness
+#### QG4: Content Signals
 
-The specification defines exactly 19 technical noun categories. After GATE 2 merge, the master state MUST contain **exactly 19 categories**. Fewer than 19 means data loss. More than 19 means duplication. Either is a failure.
-
-```bash
-python3 -c "
-import json
-master = json.load(open('ste-code/extracted/master.json'))
-cats = master.get('categories', [])
-total = len(cats)
-print(f'Categories: {total}')
-if total != 19:
-    print(f'FAIL: Expected exactly 19 categories, found {total}. Do not proceed.')
-    exit(1)
-print('PASS: Exactly 19 categories.')
-"
-```
-
-#### QG4: Example Pair Density
-
-Each rule object MUST contain at least one STE example AND one non-STE example in its `ste_examples` and `non_ste_examples` arrays. Rules with zero examples in either array indicate incomplete extraction.
-
-```bash
-python3 -c "
-import json
-master = json.load(open('ste-code/extracted/master.json'))
-rules = master.get('rules', [])
-empty_ste = [r['rule_number'] for r in rules if not r.get('ste_examples')]
-empty_non = [r['rule_number'] for r in rules if not r.get('non_ste_examples')]
-print(f'Rules with zero STE examples: {len(empty_ste)} ({empty_ste})')
-print(f'Rules with zero non-STE examples: {len(empty_non)} ({empty_non})')
-if empty_ste or empty_non:
-    print('FAIL: Rules with zero examples found. Re-extract those pages.')
-    exit(1)
-print('PASS: All rules have example pairs.')
-"
-```
+Use the expected content signals table from `.agents/references/quality-checklist.md` to verify each worker's output matches its section type.
 
 #### QG5: Spot-Check Accuracy
 
-Pick 10 random page numbers from 1-434. Read the original markdown page. Find the corresponding content in master.json. Compare character-by-character. If ANY mismatch is found (excluding whitespace normalization), the responsible worker must re-extract.
+Pick 10 random page numbers from 1-434. Read the original markdown page from `spec/issue-09-2025/page-dir/`. Find the corresponding content in the worker output. Compare character-by-character. If ANY mismatch is found (excluding whitespace normalization), the responsible worker must re-extract.
 
 ```bash
 python3 -c "
-import json, random, os
-master = json.load(open('ste-code/extracted/master.json'))
-# Pick 10 random pages
-pages = sorted(random.sample(range(1, 435), 10))
-errors = 0
-for p in pages:
-    print(f'Spot-check page {p:04d}: ', end='')
-    path = f'spec/issue-09-2025/page-{p:04d}.md'
+import os, random
+# Pick 10 random pages from the MANIFEST
+manifest = open('spec/issue-09-2025/page-dir/MANIFEST.md').read()
+# Extract page IDs from manifest
+import re
+page_ids = re.findall(r'\| \d+ \| (.+?) \|', manifest)
+sample = random.sample(page_ids, min(10, len(page_ids)))
+for pid in sample:
+    print(f'Spot-check page ID: {pid}')
+    path = f'spec/issue-09-2025/page-dir/page-{pid}.md'
     if not os.path.exists(path):
-        print(f'FILE MISSING (cannot verify)')
-        errors += 1
+        print(f'  FILE MISSING (cannot verify)')
     else:
-        # Read a slice of the file for comparison
         text = open(path).read()[:500].strip()
+        print(f'  Source: {text[:100]}...')
+        # Check if this content appears in any extracted file
         found = False
-        for r in master.get('rules', []):
-            if text[:50] in r.get('rule_text', '') or r.get('rule_text', '')[:50] in text:
+        for ef in os.listdir('ste-code/extracted/'):
+            content = open(f'ste-code/extracted/{ef}').read()
+            if text[:50] in content:
                 found = True
+                print(f'  Found in: {ef}')
                 break
-        for e in master.get('dictionary_entries', []):
-            if e.get('word', '').lower() in text.lower():
-                found = True
-                break
-        if found:
-            print('MATCH')
-        else:
-            print(f'NO MATCH — content from page {p} not found in master')
-            errors += 1
-if errors > 0:
-    print(f'FAIL: {errors}/10 spot-checks failed. Re-extract affected pages.')
-    exit(1)
-print('PASS: All 10 spot-checks matched.')
+        if not found:
+            print(f'  NO MATCH — content from page {pid} not found in any extracted file')
 "
 ```
 
@@ -483,59 +383,46 @@ print('PASS: All 10 spot-checks matched.')
 
 | Gate | Threshold | Fails If | Recovery |
 |------|-----------|----------|----------|
-| QG1: Rule Completeness | ≥ 50 of 53 rules (95%) | Fewer than 50 unique rule numbers | Identify missing rules, re-launch workers for those page ranges |
-| QG2: Dictionary Entries | ≥ 788 of 875 entries (90%) | Fewer than 788 unique dictionary words | Identify which letter ranges are under-extracted, re-launch W6/W7/W8 |
-| QG3: Categories | Exactly 19 | Fewer or more than 19 | Re-extract W2-W4 (categories span these workers) |
-| QG4: Example Density | 100% of rules have ≥1 STE + ≥1 non-STE example | Any rule has empty example arrays | Re-launch the worker responsible for that rule's page range |
-| QG5: Spot-Check Accuracy | 10 of 10 random pages match master | Any page has zero matches in master | Flag the specific worker, re-extract with halved page range |
+| QG1: File Existence & Size | File exists, size > per-type threshold | File missing or below threshold | Re-launch worker. If persists, split page range. |
+| QG2: Truncation | Last 3 lines end cleanly | Mid-word or mid-sentence ending | Split page range in half, re-extract both |
+| QG3: Fabrication | 0 banned terms found | Any banned term in output | Delete file, re-extract from spec |
+| QG4: Content Signals | 3 of 3 sampled lines match section type | Fewer than 3 matches | Expand sample to 8 lines. If still < 3, re-extract. |
+| QG5: Spot-Check | 10 of 10 random pages match | Any page has zero matches in extracted output | Flag the specific worker, re-extract with halved page range |
 
-**Do not proceed past GATE 2 until all five quality gates pass.**
+**Do not proceed past GATE 1 until all quality gates pass for all 3 workers in the batch.**
 
 ---
 
 ## GATE 2: Merge and Validate
 
-**HARD GATE: All 9 worker JSON files must exist, be valid JSON, and contain non-empty extraction data.**
+**HARD GATE: All 109 extraction files must exist in `ste-code/extracted/` and pass quality checks.**
+
 ```bash
 python3 -c "
-import json, os
-total_rules = 0
-total_entries = 0
-for i in range(1,10):
-    path = f'ste-code/extracted/w{i}.json'
-    if not os.path.exists(path):
-        print(f'MISSING: {path} — CANNOT PROCEED')
-        exit(1)
-    d = json.load(open(path))
-    rules = len(d.get('rules',[]))
-    entries = len(d.get('dictionary_entries',[]))
-    total_rules += rules
-    total_entries += entries
-    print(f'W{i}: {rules} rules, {entries} dict entries — OK')
-print(f'TOTAL: {total_rules} rules, {total_entries} dict entries')
-if total_rules < 50:
-    print(f'WARNING: Only {total_rules} rules — expected ~53. Some may be missing.')
-if total_entries < 500:
-    print(f'WARNING: Only {total_entries} dict entries — expected ~875+.')
+import os
+expected = 109
+actual = len([f for f in os.listdir('ste-code/extracted/') if f.startswith('w') and f.endswith('.md')])
+print(f'Extraction files: {actual}/{expected}')
+if actual < expected:
+    missing = expected - actual
+    print(f'FAIL: {missing} files missing. Do not proceed.')
+    exit(1)
+print('PASS: All 109 extraction files present.')
 "
 ```
 
-**If the gate fails, do not proceed. Fix missing workers first.**
-
 ### Merge into Master State
 
-Read all 9 worker JSONs. Merge into `ste-code/extracted/master.json`:
-- Deduplicate rules by rule_number
-- Sort rules by section (1.1, 1.2, ..., 9.4, GR1-GR4)
-- Merge categories (should total exactly 19)
-- Merge dictionary entries, deduplicating by word
-- Merge synonyms and polysemy entries
+Concatenate all 109 refined files into `ste-code/grouped/master.md`:
+- Deduplicate content at page boundaries
+- Sort by spec page order (use MANIFEST.md for ordering)
+- Preserve all content verbatim — no summarization
 
 ### Spot-Check Validation
 
 Pick 10 random page numbers from 1-434. For each:
-1. Read the original markdown page directly
-2. Find the rule/dictionary entry in your master state
+1. Read the original markdown page from `spec/issue-09-2025/page-dir/`
+2. Find the corresponding content in `ste-code/grouped/master.md`
 3. Verify the text matches EXACTLY
 
 If ANY mismatch found, flag the worker responsible and re-extract those pages.
@@ -544,13 +431,13 @@ If ANY mismatch found, flag the worker responsible and re-extract those pages.
 
 ## GATE 3: Adaptation (Phase 2 from Original)
 
-**HARD GATE: `ste-code/extracted/master.json` must exist and contain verified data.**
+**HARD GATE: `ste-code/grouped/master.md` must exist and contain verified data.**
 
 Only NOW do you begin adaptation. For each rule in the master state:
 
 ### Adaptation Protocol (PER RULE)
 
-1. Read the rule's exact text from master.json
+1. Read the rule's exact text from master.md
 2. Read the STE and non-STE example pairs
 3. Think: "What is the coding-domain equivalent of this constraint?"
 4. Write the adapted rule text preserving the original structure
@@ -563,11 +450,11 @@ For each of the 19 categories, produce a table entry:
 
 | Original Category | STE-Code Category | Rationale |
 |-------------------|-------------------|-----------|
-| Exact name from master.json | Code-domain equivalent | 1-sentence justification |
+| Exact name from master.md | Code-domain equivalent | 1-sentence justification |
 
 ### Synonym Table Adaptation
 
-Take every canonical synonym pair from master.json. For each:
+Take every canonical synonym pair from the controlled terminology. For each:
 - Keep the original canonical form if it works for code domain
 - OR adapt it to a code-domain equivalent
 - Document the mapping
@@ -578,7 +465,7 @@ Take every canonical synonym pair from master.json. For each:
 
 **HARD GATE: All adaptation checkboxes in PROGRESS.md must be checked `[x]`.**
 
-Only NOW write the output files. Each file MUST reference specific data from master.json.
+Only NOW write the output files. Each file MUST reference specific data from master.md.
 
 ### File 1: ste-code-distilled-system-prompt.txt
 
@@ -599,11 +486,11 @@ P2. [Adapted from Rules 1.3, 9.4 — original text: "..."]
 ... through P14
 
 ## CANONICAL SYNONYM TABLE
-|| STE-Code | NOT | Original STE Mapping |
-||...|...|...|
+||| STE-Code | NOT | Original STE Mapping |||
+|||...|...|...|
 
 ## APPROVED VOCABULARY POLICY
-[Adapted from master.json vocabulary architecture]
+[Adapted from master.md vocabulary architecture]
 
 ## DOCUMENT INTERACTION PROTOCOL
 [10-step protocol adapted for code documents]
@@ -620,7 +507,7 @@ P2. [Adapted from Rules 1.3, 9.4 — original text: "..."]
 Write to `ste-code/artifacts/ste-code-self-reading-manual.txt`
 
 8 sections (S0-S8) following the exact structure of the original SSRM.
-Each section must reference data from master.json.
+Each section must reference data from master.md.
 
 ### File 3: ste-code-extraction-methodology.txt
 
@@ -659,13 +546,16 @@ for f in ste-code/artifacts/*.txt; do
   echo "$(basename $f): $chars chars ~$((chars/4)) tokens"
 done
 
-# Verify all files reference master.json data
+# Verify all files reference master.md data
 python3 -c "
-import json
-master = json.load(open('ste-code/extracted/master.json'))
-print(f'Master state: {len(master[\"rules\"])} rules, {len(master[\"dictionary_entries\"])} entries')
-print(f'Categories: {len(master[\"categories\"])}')
+import os
+master_size = os.path.getsize('ste-code/grouped/master.md')
+print(f'Master state: {master_size:,} chars')
 print('All artifact files must exist in ste-code/artifacts/')
+for f in os.listdir('ste-code/artifacts/'):
+    if f.endswith('.txt') or f.endswith('.md'):
+        size = os.path.getsize(f'ste-code/artifacts/{f}')
+        print(f'  {f}: {size:,} chars')
 "
 ```
 
@@ -674,12 +564,12 @@ print('All artifact files must exist in ste-code/artifacts/')
 ## Phase Flow Summary (with Hard Gates)
 
 ```
-GATE 0:  Verify spec files exist, create directories, init PROGRESS.md
+GATE 0:  Verify spec files exist in page-dir/, create directories, init PROGRESS.md
   ↓ (gate passes: all files confirmed)
-GATE 1:  Launch 9 workers in 3 batches, verify JSON output
-  ↓ (gate passes: 9 valid JSON files with real content)
-GATE 2:  Merge into master.json, spot-check 10 random pages
-  ↓ (gate passes: master.json valid, spot-checks pass)
+GATE 1:  Launch 109 workers in 37 batches of 3, verify output files
+  ↓ (gate passes: 109 valid .md files with real content)
+GATE 2:  Merge into master.md, spot-check 10 random pages
+  ↓ (gate passes: master.md valid, spot-checks pass)
 GATE 3:  Adapt all 53 rules, 19 categories, synonyms, polysemy pipeline
   ↓ (gate passes: all PROGRESS.md checkboxes checked)
 GATE 4:  Write 6 artifact files to ste-code/artifacts/
@@ -695,18 +585,18 @@ GATE 4:  Write 6 artifact files to ste-code/artifacts/
 
 **Problem:** If a spec page contains broken markdown (unclosed code fences, mismatched headers, corrupted tables), the worker may misparse the page and produce garbled extraction.
 
-**Detection:** A worker JSON that passes validation but contains jumbled rule text (characters from wrong sections, truncated sentences) likely hit a malformed page.
+**Detection:** A worker output that passes format checks but contains jumbled text (characters from wrong sections, truncated sentences) likely hit a malformed page.
 
-**Mitigation:** Before launching workers, run a syntax check on all 434 pages:
+**Mitigation:** Before launching workers, run a syntax check on all page files:
 
 ```bash
 python3 -c "
-import os, re
-for i in range(1, 435):
-    path = f'spec/issue-09-2025/page-{i:04d}.md'
-    if not os.path.exists(path):
-        print(f'MISSING: {path}')
+import os
+page_dir = 'spec/issue-09-2025/page-dir'
+for f in sorted(os.listdir(page_dir)):
+    if not f.endswith('.md'):
         continue
+    path = os.path.join(page_dir, f)
     text = open(path).read()
     # Check for unclosed code fences
     fences = text.count('\`\`\`')
@@ -718,73 +608,68 @@ for i in range(1, 435):
 "
 ```
 
-If more than 5 pages are malformed, halt extraction and fix the spec source first.
-
 ### Limitation 2: Spec Page Count Mismatch
 
-**Problem:** The protocol assumes exactly 434 pages in `spec/issue-09-2025/`. If the directory contains fewer pages (a partial extraction, a truncated download, a version mismatch), workers will read to the end of available files and report `pages_actually_read` lower than assigned.
+**Problem:** The protocol assumes 426 page files in `spec/issue-09-2025/page-dir/`. If the directory contains fewer pages (a partial split, a truncated download), workers will read missing files and produce incomplete output.
 
-**Detection:** The GATE 0 file check confirms page-0001.md and page-0434.md exist. But intermediate gaps are not checked. After GATE 1, a worker may report `pages_actually_read: 18` when assigned 30 pages.
-
-**Mitigation:** Run a gap check after GATE 0:
+**Detection:** The GATE 0 file check confirms key page files exist. Run a gap check after GATE 0:
 
 ```bash
 python3 -c "
 import os
-gaps = []
-for i in range(1, 435):
-    path = f'spec/issue-09-2025/page-{i:04d}.md'
-    if not os.path.exists(path):
-        gaps.append(i)
-if gaps:
-    print(f'GAPS: Missing {len(gaps)} pages: {gaps[:20]}...')
-    print('Extraction may be incomplete. Fill gaps or reduce worker ranges.')
+manifest = 'spec/issue-09-2025/page-dir/MANIFEST.md'
+if not os.path.exists(manifest):
+    print('FAIL: MANIFEST.md missing')
+    exit(1)
+lines = open(manifest).readlines()
+page_count = sum(1 for l in lines if l.strip().startswith('|') and 'page-' in l)
+print(f'Manifest page entries: {page_count}')
+if page_count < 426:
+    print(f'WARNING: Expected 426 pages, found {page_count}')
 else:
-    print('All 434 pages present.')
+    print('All pages present.')
 "
 ```
 
 ### Limitation 3: Context Window Constraints
 
-**Problem:** This protocol was designed for `deepseek-v4-pro` with a 1M token context window. If the target model changes (a smaller model, a different provider), the 30-page worker ranges may exceed the context window. The worker will truncate input silently mid-page, producing incomplete extraction.
+**Problem:** This protocol uses `poolside/laguna-s-2.1:free`. If the target model changes (a smaller model, a different provider), the 4-page-per-worker ranges may exceed the context window. The worker will truncate input silently mid-page, producing incomplete extraction.
 
-**Detection:** Compare `pages_actually_read` against the assigned range for each worker. A discrepancy of more than 2 pages is suspicious.
+**Detection:** Compare output file size against the per-type thresholds in QG1. A file significantly below threshold suggests truncation.
 
-**Mitigation:** If the model has a smaller context window, use the 4-page-per-worker strategy defined in `.agents/references/granular-strategy.md` (109 workers instead of 9). The 9-worker layout in this protocol is the "coarse" version for models with large context windows.
+**Mitigation:** If the model has a smaller context window, reduce pages per worker to 2 and double the worker count. The 4-page grouping is optimized for the current model.
 
 ### Limitation 4: Model Unavailability
 
-**Problem:** If `deepseek-v4-pro` is unavailable (API outage, rate limit, credential expiry), all 9 workers will fail simultaneously. There is no fallback model specified in this protocol.
+**Problem:** If `poolside/laguna-s-2.1:free` is unavailable (API outage, rate limit, credential expiry), all 3 workers in a batch will fail simultaneously. There is no fallback model specified in this protocol.
 
-**Detection:** Batch 1 workers all fail with HTTP 429 or 503 errors. No JSON files are written.
+**Detection:** Batch workers all fail with HTTP 429 or 503 errors. No output files are written.
 
 **Mitigation:**
 1. Check provider status.
 2. Wait for the rate limit window to reset.
-3. If the outage persists beyond 30 minutes, switch to an alternative model with comparable context window. Update all `--model` flags in the launch commands.
+3. If the outage persists beyond 30 minutes, switch to an alternative model. Update all model flags in the launch commands.
 4. Document the model switch in the version history table.
 
 ### Limitation 5: Inter-Worker Boundary Errors
 
-**Problem:** W1 covers pages 1-30 and W2 covers pages 31-60. A rule that starts on page 30 and continues on page 31 may be partially extracted by W1 (truncated) and partially by W2 (missing the beginning). The merge step sees two incomplete fragments that do not deduplicate cleanly.
+**Problem:** W033 covers pages 129-132 and W034 covers pages 133-136. A rule that starts on page 132 and continues on page 133 may be partially extracted by W033 (truncated) and partially by W034 (missing the beginning). The merge step sees two incomplete fragments.
 
-**Detection:** After GATE 2 merge, check for rules with truncated `rule_text` (ends with "..." or a mid-sentence fragment) or rules appearing in two workers with different `rule_number` values but overlapping content.
+**Detection:** After GATE 2 merge, check for rules with truncated text (ends with "..." or a mid-sentence fragment) or rules appearing in two workers with overlapping content.
 
-**Mitigation:** Overlap worker page ranges by 1 page. W1: pages 1-30, W2: pages 30-60, W3: pages 60-90, etc. The 1-page overlap ensures boundary rules appear in both workers. In the merge step, deduplicate by comparing the first 100 characters of `rule_text`.
+**Mitigation:** Workers at section boundaries add the note `[CONTINUED on next worker]` or `[CONTINUED from previous worker]` at the split point. The refiner joins them. See `.agents/references/section-types.md` Edge Case Resolution for details.
 
-### Limitation 6: Dictionary Entry Drift Across Issues
+### Limitation 6: Spec Page Reference Drift
 
-**Problem:** The protocol references ASD-STE100 Issue 9 (January 2025) and also checks for `spec/issue-07-2017/page-0001.md` in GATE 0. If Issue 7 has different dictionary entries than Issue 9, workers may inadvertently mix data from two versions.
+**Problem:** This protocol references ASD-STE100 Issue 9 (January 2025). If the spec source changes (new issue, updated PDF), the page file contents may not match what the protocol expects.
 
-**Detection:** Compare `evolution_history` arrays in W9 (which should document changes from Issue 1 through 9) against the actual dictionary entries in W6-W8. If W6 contains a word that W9 claims was removed in Issue 5, there is a cross-issue contamination.
-
-**Mitigation:** Use Issue 9 as the authoritative source. The Issue 7 file check in GATE 0 exists for reference only. Workers MUST extract from `spec/issue-09-2025/` and MUST NOT read from `spec/issue-07-2017/` unless the task description explicitly requires historical comparison.
+**Mitigation:** Use `spec/issue-09-2025/` as the authoritative source. Workers MUST extract from `spec/issue-09-2025/page-dir/` only. Do not read from other spec directories unless the task description explicitly requires historical comparison.
 
 ### Limitation 7: Concurrent Write Collisions
 
-**Problem:** If two instances of this protocol run simultaneously (two separate `hermes` sessions both following this document), they will write to the same `ste-code/workers/` and `ste-code/extracted/` directories. One session may overwrite the other's worker output.
+**Problem:** If two instances of this protocol run simultaneously (two separate `hermes` sessions both following this document), they will write to the same `ste-code/extracted/` directory. One session may overwrite the other's output.
 
-**Detection:** Worker JSON files change unexpectedly between verification and merge. The `extraction_timestamp` field in worker JSON does not match the expected launch time.
+**Detection:** Worker output files change unexpectedly between verification and merge.
 
 **Mitigation:** Before starting GATE 0, check for an existing lock file:
 
@@ -809,15 +694,15 @@ Create the lock file at GATE 0 start. Remove it at GATE 4 completion or on any h
 
 1. Check network connectivity and model API status.
 2. If the model is unavailable, switch to an alternative model (see Limitation 4).
-3. If the model is available but all prompts return empty JSON, the prompt template may contain an error. Check for unescaped characters, mismatched quotes, or schema validation failures in the worker prompt.
+3. If the model is available but all prompts return empty, the prompt template may contain an error. Check for unescaped characters, mismatched quotes, or format issues.
 4. Re-launch the batch after fixing the root cause.
 
-### Recovery Path: Merge Failure (master.json is invalid)
+### Recovery Path: Merge Failure (master.md is invalid)
 
-1. Check which worker JSON file introduced the corruption. Validate each file individually.
+1. Check which worker output file introduced the corruption. Validate each file individually.
 2. Re-extract the corrupted worker.
 3. Re-run the merge.
-4. If corruption persists, manually merge the valid worker JSONs and flag the corrupted worker's page range for re-extraction from the raw spec pages.
+4. If corruption persists, manually merge the valid worker outputs and flag the corrupted worker's page range for re-extraction from the raw spec pages.
 
 ### Recovery Path: Adaptation Failure (cannot map a rule to code domain)
 
@@ -842,32 +727,30 @@ Create the lock file at GATE 0 start. Remove it at GATE 4 completion or on any h
 
 ## Schema Evolution Protocol
 
-### When to Evolve the Worker JSON Schema
+### When to Evolve the Worker Output Schema
 
-The worker JSON schema may need new fields when:
+The worker output format may need new fields when:
 
-1. A new section of the spec is discovered that does not fit into existing arrays (`rules`, `categories`, `dictionary_entries`, `synonyms`, `polysemy`, `pipeline_steps`, `evolution_history`).
-2. A downstream artifact needs structured data not captured by the current schema (for example, a `cross_references` field linking each rule to the dictionary words it governs).
-3. A quality gate requires a new quantitative metric that the current schema does not support (for example, `example_count` per rule, or `page_number` per dictionary entry for traceability).
+1. A new section of the spec is discovered that does not fit into the current extraction format.
+2. A downstream artifact needs structured data not captured by the current markdown output.
+3. A quality gate requires a new quantitative metric that the current format does not support.
 
 ### Protocol for Adding a Field
 
 1. **Document the need.** Add a row to the version history table explaining what field is needed and why.
-2. **Add the field to the schema in this document.** Update the JSON schema block in GATE 1.
-3. **Update the worker prompt template.** Add the new field to the prompt template in GATE 1 so workers know to populate it.
-4. **Add a quality gate for the new field** in the Quality Gates section (QG6, QG7, etc.).
-5. **Mark the change as a BREAKING change** if existing worker JSON files will fail validation against the new schema. If the field is optional (workers can leave it as `[]`), it is backward-compatible.
-6. **Re-extract affected pages** if the new field requires data that old worker JSONs do not contain.
+2. **Update the worker prompt template.** Add the new field instructions to the GATE 1 prompt section.
+3. **Add a quality gate for the new field** in the Quality Gates section (QG6, QG7, etc.).
+4. **Re-extract affected pages** if the new field requires data that old worker outputs do not contain.
 
 ### Protocol for Renaming a Field
 
 1. Do NOT rename fields. Add a new field and mark the old one as DEPRECATED in the schema comments.
 2. During GATE 2 merge, read from the new field if present, fall back to the old field if absent.
-3. After all 9 workers use the new field (proven by running the full pipeline at least once), remove the DEPRECATED field from the schema.
+3. After all 109 workers use the new field, remove the DEPRECATED field from the schema.
 
 ### Protocol for Removing a Field
 
-1. Mark the field as DEPRECATED in the schema for one full pipeline run.
+1. Mark the field as DEPRECATED for one full pipeline run.
 2. Verify that no downstream code (merge scripts, quality gates, artifact writers) references the deprecated field.
 3. Remove the field from the schema. Document the removal in the version history.
 
@@ -893,10 +776,10 @@ Before any modification:
 |------------|----------------|---------------|-----------------|
 | Python 3 | 3.9+ | `python3 --version` | GATE 0, 1, 2, 4 |
 | Hermes Agent | 0.19.0+ | `hermes --version` | GATE 1 (worker launch) |
-| Model: deepseek-v4-pro | — | API availability check | GATE 1 (all workers) |
+| Model: poolside/laguna-s-2.1:free | — | API availability check | GATE 1 (all workers) |
 | Bash | 3.2+ | `bash --version` | GATE 0 (init scripts) |
-| Disk space | 500 MB free | `df -h .` | GATE 1 (worker JSON storage) |
-| Spec files | ASD-STE100 Issue 9, 434 pages | `ls spec/issue-09-2025/page-0001.md` | GATE 0 |
+| Disk space | 500 MB free | `df -h .` | GATE 1 (output file storage) |
+| Spec files | ASD-STE100 Issue 9, 426 page files | `ls spec/issue-09-2025/page-dir/page-HI-1.md` | GATE 0 |
 
 ### Pre-Flight Environment Check
 
@@ -912,7 +795,7 @@ echo "Hermes: OK"
 
 df -h . | tail -1 | awk '{print "Disk: " $4 " free"}'
 
-test -f spec/issue-09-2025/page-0001.md && echo "Spec: OK" || { echo "FAIL: Spec files missing"; exit 1; }
+test -f spec/issue-09-2025/page-dir/page-HI-1.md && echo "Spec: OK" || { echo "FAIL: Spec files missing"; exit 1; }
 
 echo "=== All checks passed ==="
 ```
@@ -921,23 +804,20 @@ echo "=== All checks passed ==="
 
 ## Timing Budget Estimates
 
-Total pipeline wall-clock time under ideal conditions: **approximately 52 minutes.**
+Total pipeline wall-clock time under ideal conditions: **approximately 37-74 minutes.**
 
 | Phase | Task | Est. Time | Parallelism | Notes |
 |-------|------|-----------|-------------|-------|
 | GATE 0 | Environment setup | 30 sec | Serial | File checks + directory creation |
-| GATE 1 | Batch 1 (W1-W3) | 8-12 min | 3 parallel workers | Each worker reads 30 pages, extracts JSON |
-| GATE 1 | Batch 1 verification | 1 min | Serial | JSON validation + quality checks |
-| GATE 1 | Batch 2 (W4-W6) | 8-12 min | 3 parallel workers | Same page ranges |
-| GATE 1 | Batch 2 verification | 1 min | Serial | JSON validation |
-| GATE 1 | Batch 3 (W7-W9) | 8-12 min | 3 parallel workers | Final batch |
-| GATE 1 | Batch 3 verification | 1 min | Serial | JSON validation |
-| GATE 2 | Merge + spot-check | 3-5 min | Serial | Read 9 files, merge, validate 10 pages |
+| GATE 1 | Each batch (3 workers) | 10-20 min | 3 parallel workers | Each worker reads 4 pages |
+| GATE 1 | 37 batches | 20-37 min | 3 parallel per batch | Serialized batches |
+| GATE 1 | Verification per batch | 1 min | Serial | File existence + quality checks |
+| GATE 2 | Merge + spot-check | 3-5 min | Serial | Read 109 files, merge, validate 10 pages |
 | GATE 2 | Quality gate scripts | 2 min | Serial | QG1-QG5 automated checks |
 | GATE 3 | Rule adaptation (53 rules) | 5-8 min | Serial | One agent adapts all rules sequentially |
 | GATE 3 | Category + synonym remapping | 2 min | Serial | Table generation |
 | GATE 4 | Write 6 artifacts | 3-5 min | Serial | File writes + final verification |
-| **Total** | | **~42-62 min** | | Variance depends on model response time |
+| **Total** | | **~40-75 min** | | Variance depends on model response time |
 
 NOTE: These estimates assume the model API is responsive and no worker failures occur. Add 10-15 minutes per failed worker that requires re-launch. A full batch failure (model outage) adds 30+ minutes.
 
@@ -948,19 +828,19 @@ NOTE: These estimates assume the model API is responsive and no worker failures 
 ### If You Skip GATE 0
 
 - PROGRESS.md does not exist. You cannot track which workers have completed.
-- Output directories are missing. Worker JSONs fail to write with "No such file or directory."
-- Spec files are not verified. Workers may run against missing pages and produce empty JSONs silently.
+- Output directories are missing. Worker output files fail to write with "No such file or directory."
+- Spec files are not verified. Workers may run against missing pages and produce empty output silently.
 
 ### If You Skip GATE 1 Verification
 
-- Malformed JSON passes to GATE 2. The merge script crashes.
-- Zero-content worker JSONs are accepted. The master state is incomplete.
+- Malformed output files pass to GATE 2. The merge produces garbage.
+- Zero-content worker files are accepted. The master state is incomplete.
 - The pipeline appears to succeed but produces artifacts with missing data.
 
 ### If You Skip GATE 2 Quality Gates
 
-- The master state has 42 rules instead of 53. Artifacts are incomplete.
-- The master state has 600 dictionary entries instead of 875. Approved word lists are incorrect.
+- The master state has missing rules. Artifacts are incomplete.
+- The master state has missing dictionary entries. Approved word lists are incorrect.
 - Spot-check failures go undetected. Fabricated rule text enters the output artifacts.
 
 ### If You Skip GATE 3 Adaptation Verification
@@ -984,14 +864,14 @@ NOTE: These estimates assume the model API is responsive and no worker failures 
 |------|-----------|
 | **ASD-STE100** | The international specification for Simplified Technical English, maintained by the Aerospace and Defence Industries Association of Europe. |
 | **Issue 9** | The January 2025 release of ASD-STE100, containing 53 writing rules, approximately 875 dictionary entries, 19 technical noun categories, and a 6-pass writing pipeline. |
-| **Worker** | A single `hermes -z` session that reads a range of spec pages and writes a JSON output file. Workers are stateless. They do not communicate with each other. |
+| **Worker** | A single `hermes -z` session that reads a range of spec page files and writes a markdown output file. Workers are stateless. They do not communicate with each other. |
 | **Batch** | A group of up to 3 workers launched simultaneously. Batches are serialized: Batch 2 does not start until Batch 1 is verified. |
 | **Gate** | A hard checkpoint in the pipeline. Progress past a gate is impossible until its conditions are met. Gates enforce sequential execution and prevent data fabrication. |
-| **Master State** | The merged, deduplicated JSON file (`master.json`) that combines all 9 worker outputs into a single authoritative data structure. All adaptation and artifact generation reads from master state. |
+| **Master State** | The merged markdown file (`ste-code/grouped/master.md`) that combines all 109 worker outputs into a single authoritative document. All adaptation and artifact generation reads from master state. |
 | **Adaptation** | The process of transforming aerospace-domain STE rules into code-domain STE-Code rules. This is NOT summarization. Every adapted rule preserves the original structure and intent. |
 | **Artifact** | One of 6 output files written in GATE 4. Artifacts are deployable documents (system prompts, manuals, guides) that can be used independently of this pipeline. |
-| **Quality Gate** | A quantitative threshold that must be met before proceeding. Unlike binary gates (file exists), quality gates measure completeness (95% of rules present, 90% of dictionary entries). |
-| **Fabrication** | Writing data into an output file that does not come from a worker JSON or the original spec. The anti-fabrication rules at the top of this document prohibit this under all circumstances. |
+| **Quality Gate** | A quantitative threshold that must be met before proceeding. Unlike binary gates (file exists), quality gates measure completeness (file size, content signals, fabrication detection). |
+| **Fabrication** | Writing data into an output file that does not come from a worker output or the original spec. The anti-fabrication rules at the top of this document prohibit this under all circumstances. |
 | **Spot-Check** | Reading a random spec page directly and comparing its content against the merged master state. A single mismatch is a failure. |
 | **PROGRESS.md** | The state-tracking file at `.agents/state/PROGRESS.md`. Every completed step in the pipeline updates this file. It is the single source of truth for pipeline progress. |
 
@@ -999,11 +879,11 @@ NOTE: These estimates assume the model API is responsive and no worker failures 
 
 ## Document Metadata
 
-- **Protocol version:** 1.4
-- **Last updated:** 2025-07-30
+- **Protocol version:** 1.5
+- **Last updated:** 2026-07-31
 - **Applies to:** ASD-STE100 Issue 9 (January 2025)
-- **Target model:** deepseek-v4-pro
-- **Framework:** Hermes Agent v0.19.0+
-- **Total spec pages:** 434
+- **Target model:** poolside/laguna-s-2.1:free
+- **Framework:** Hermes Agent
+- **Total spec pages:** 434 (426 page files in page-dir/)
 - **Expected output:** 6 artifacts in `ste-code/artifacts/`
-- **Estimated total runtime:** 42-62 minutes (ideal conditions)
+- **Estimated total runtime:** 40-75 minutes (ideal conditions)

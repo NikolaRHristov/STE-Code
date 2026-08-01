@@ -1,96 +1,103 @@
 # STE-Code Progress Tracker v3
 
-> **Last updated:** 2026-07-30 — EXTRACTION COMPLETE
+> **Last updated:** 2026-07-31 — Fresh extraction from page-dir/
 > **⚠️ Keep this file current after every batch. The execution auditor cross-references claims here against disk evidence.**
 
 ## GATE 0: Environment ✓
 - [x] Paths verified
-- [x] Directories created (`ste-code/extracted/`, `ste-code/refined/`, `ste-code/audit/`, `ste-code/merged/`)
-- [x] State saved via git gcommit-hermes
+- [x] Directories created (`ste-code/extracted/`, `ste-code/refined/`, `ste-code/audit/`, `ste-code/grouped/`)
+- [x] Model configured: `poolside/laguna-s-2.1:free` (corrected from invalid model name)
+- [x] State saved via git
 
 ---
 
-## Extraction — 4 pages per worker, 109 workers total (434 pages) ✅ COMPLETE
+## GATE 1: Extraction (IN PROGRESS)
 
-Output directory: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
+**Status:** Re-extracting from `spec/issue-09-2025/page-dir/` source files
 
-### Section 1 — Words (pages 1-66)
+Previous extraction files were from an incompatible PDF version. Cleared and restarting.
 
-| Batch | Workers | Pages | Status |
-|-------|---------|-------|--------|
-| 1 | W001(1-4), W002(5-8), W003(9-12) | 1-12 | ✅ |
-| 2 | W004(13-16), W005(17-20), W006(21-24) | 13-24 | ✅ |
-| 3 | W007(25-28), W008(29-32), W009(33-36) | 25-36 | ✅ |
-| 4 | W010(37-40), W011(41-44), W012(45-48) | 37-48 | ✅ |
-| 5 | W013(49-52), W014(53-56), W015(57-60) | 49-60 | ✅ |
-| 6 | W016(61-64), W017(65-68), W018(69-72) | 61-72 | ✅ |
-
-### Section 2 — Dictionary (pages 67-434)
+### Batch Progress
 
 | Batch | Workers | Pages | Status |
 |-------|---------|-------|--------|
-| 7 | W019(73-76), W020(77-80), W021(81-84) | 73-84 | ✅ |
-| 8 | W022(85-88), W023(89-92), W024(93-96) | 85-96 | ✅ |
-| 9 | W025(97-100), W026(101-104), W027(105-108) | 97-108 | ✅ |
-| 10 | W028(109-112), W029(113-116), W030(117-120) | 109-120 | ✅ |
-| 11 | W031(121-124), W032(125-128), W033(129-132) | 121-132 | ✅ |
-| 12 | W034(133-136), W035(137-140), W036(141-144) | 133-144 | ✅ |
-| 13 | W037(145-148), W038(149-152), W039(153-156) | 145-156 | ✅ |
-| 14 | W040(157-160), W041(161-164), W042(165-168) | 157-168 | ✅ |
-| 15 | W043(169-172), W044(173-176), W045(177-180) | 169-180 | ✅ |
-| 16 | W046(181-184), W047(185-188), W048(189-192) | 181-192 | ✅ |
-| 17 | W049(193-196), W050(197-200), W051(201-204) | 193-204 | ✅ |
-| 18 | W052(205-208), W053(209-212), W054(213-216) | 205-216 | ✅ |
-| 19 | W055(217-220), W056(221-224), W057(225-228) | 217-228 | ✅ |
-| 20 | W058(229-232), W059(233-236), W060(237-240) | 229-240 | ✅ |
-| 21 | W061(241-244), W062(245-248), W063(249-252) | 241-252 | ✅ |
-| 22 | W064(253-256), W065(257-260), W066(261-264) | 253-264 | ✅ |
-| 23 | W067(265-268), W068(269-272), W069(273-276) | 265-276 | ✅ |
-| 24 | W070(277-280), W071(281-284), W072(285-288) | 277-288 | ✅ |
-| 25 | W073(289-292), W074(293-296), W075(297-300) | 289-300 | ✅ |
-| 26 | W076(301-304), W077(305-308), W078(309-312) | 301-312 | ✅ |
-| 27 | W079(313-316), W080(317-320), W081(321-324) | 313-324 | ✅ |
-| 28 | W082(325-328), W083(329-332), W084(333-336) | 325-336 | ✅ |
-| 29 | W085(337-340), W086(341-344), W087(345-348) | 337-348 | ✅ |
-| 30 | W088(349-352), W089(353-356), W090(357-360) | 349-360 | ✅ |
-| 31 | W091(361-364), W092(365-368), W093(369-372) | 361-372 | ✅ |
-| 32 | W094(373-376), W095(377-380), W096(381-384) | 373-384 | ✅ |
-| 33 | W097(385-388), W098(389-392), W099(393-396) | 385-396 | ✅ |
-| 34 | W100(397-400), W101(401-404), W102(405-408) | 397-408 | ✅ |
-| 35 | W103(409-412), W104(413-416), W105(417-420) | 409-420 | ✅ |
-| 36 | W106(421-424), W107(425-428), W108(429-432) | 421-432 | ✅ |
-| 37 | W109(433-434) — 2 pages only | 433-434 | ✅ |
+| 01 | W001, W002, W003 | 1-12 | [x] |
+| 02 | W004, W005, W006 | 13-24 | [x] |
+| 03 | W007, W008, W009 | 25-36 | [x] |
+| 04 | W010, W011, W012 | 37-48 | [x] |
+| 05 | W013, W014, W015 | 49-60 | [x] |
+| 06 | W016, W017, W018 | 61-72 | [x] |
+| 07 | W019, W020, W021 | 73-84 | [x] |
+| 08 | W022, W023, W024 | 85-96 | [x] |
+| 09 | W025, W026, W027 | 97-108 | [x] |
+| 10 | W028, W029, W030 | 109-120 | [x] |
+| 11 | W031, W032, W033 | 121-132 | [x] |
+| 12 | W034, W035, W036 | 133-144 | [x] |
+| 13 | W037, W038, W039 | 145-156 | [x] |
+| 14 | W040, W041, W042 | 157-168 | [x] |
+| 15 | W043, W044, W045 | 169-180 | [x] |
+| 16 | W046, W047, W048 | 181-192 | [x] |
+| 17 | W049, W050, W051 | 193-204 | [x] |
+| 18 | W052, W053, W054 | 205-216 | [x] |
+| 19 | W055, W056, W057 | 217-228 | [x] |
+| 20 | W058, W059, W060 | 229-240 | [x] |
+| 21 | W061, W062, W063 | 241-252 | [x] |
+| 22 | W064, W065, W066 | 253-264 | [x] |
+| 23 | W067, W068, W069 | 265-276 | [x] |
+| 24 | W070, W071, W072 | 277-288 | [x] |
+| 25 | W073, W074, W075 | 289-300 | [x] |
+| 26 | W076, W077, W078 | 301-312 | [x] |
+| 27 | W079, W080, W081 | 313-324 | [x] |
+| 28 | W082, W083, W084 | 325-336 | [x] |
+| 29 | W085, W086, W087 | 337-348 | [x] |
+| 30 | W088, W089, W090 | 349-360 | [x] |
+| 31 | W091, W092, W093 | 361-372 | [x] |
+| 32 | W094, W095, W096 | 373-384 | [x] |
+| 33 | W097, W098, W099 | 385-396 | [x] |
+| 34 | W100, W101, W102 | 397-408 | [x] |
+| 35 | W103, W104, W105 | 409-420 | [x] |
+| 36 | W106, W107, W108 | 421-432 | [x] |
+| 37 | W109 | 433-434 | [x] |
 
-**Progress: 109/109 workers (100%) — 434/434 pages ✨ COMPLETE**
+| Quality Checks |
+|- [x] 79/109 extraction files exist on disk
+- [ ] All 434 page headers present in extracted files (`# Page N of 434`)
+- [ ] No missing page headers
+- [ ] No fabrication signals in any file
+- [ ] All files > 1.5KB (minimum threshold)
+- [ ] All files > 15 lines (minimum threshold)
+
+### Notes
+- Old archive files were from incompatible PDF version — cleared extraction directory
+- Re-extracting from `spec/issue-09-2025/page-dir/` (427 page files)
+- Manifest maps sequential positions 1-434 to spec-page-id filenames
+- Using `hermes -z` with inline page content (not file references) for reliable extraction
 
 ---
 
-## GATE 1: Verify
-- [x] All 109 extraction files exist on disk
-- [x] Total extraction: 10,927 lines across all workers
-- [x] Last file (w109) contains real Y/Z dictionary entries — verified
-- [ ] Full fabrication spot-check on all 109 files (sampled w001, w030, w063, w109 — all real)
-- [ ] Truncation check on all 109 files (manual)
+## GATE 2: Grouping (PENDING)
+|- [ ] `ste-code/grouped/` created with semantic group files |
+|- [ ] groups-manifest.json written with all 434 pages accounted for |
+|- [ ] No broken dictionary entries or rule pairs across group boundaries |
 
-## GATE 2: Merge
-- [x] `ste-code/merged/master-raw.md` — 10,927 lines, full concatenation
-- [x] `ste-code/merged/master.md` — 156 lines structural index
-- [ ] Full dedup pass
-- [ ] 10 random spot-checks against source pages
+## GATE 3: Adaptation (PENDING)
+|- [ ] 19 categories remapped to code domain |
+|- [ ] 4 verb categories defined |
+|- [ ] Synonym table adapted |
+|- [ ] All 53 rules + 4 GR rules summarized with code-domain applications |
 
-## GATE 3: Adaptation
-- [x] 19 categories remapped to code domain (in ste-code-distilled-system-prompt.txt)
-- [x] 4 verb categories defined (in ste-code-self-reading-manual.txt)
-- [x] Synonym table adapted (30+ entries, in system prompt + manual)
-- [x] Polysemy resolution table created (35+ entries, in self-reading manual)
-- [x] All 53 rules summarized with code-domain applications (in self-reading manual S2)
+## GATE 4: Artifacts (PENDING)
+- [ ] 6 deployable artifacts generated
 
-## GATE 4: Artifacts
-- [x] `ste-code/artifacts/ste-code-distilled-system-prompt.txt` (~2,700 tokens)
-- [x] `ste-code/artifacts/ste-code-self-reading-manual.txt` (~6,400 tokens, S0-S8)
-- [x] `ste-code/artifacts/ste-code-extraction-methodology.txt` (~1,450 tokens)
-- [x] `ste-code/artifacts/ste-code-example-turn.txt` (~760 tokens)
-- [x] `ste-code/artifacts/ste-code-deployment-guide.txt` (~1,150 tokens)
-- [x] `ste-code/artifacts/README.md` (~980 tokens)
-- [x] Total: 6 files, ~53,777 chars, ~13,400 tokens
-- [x] Token budget: within target range (12,400 ± 10%)
+---
+
+## Pipeline Stage Summary
+
+| Stage | Status | Files | Notes |
+|-------|--------|-------|-------|
+| GATE 0 (Environment) | ✅ Pass | — | Model: poolside/laguna-s-2.1:free |
+| GATE 1 (Extraction) | ⏳ In Progress | 0/109 | Re-extracting from page-dir/ |
+|| GATE 2 (Grouping) | ⏸️ Pending | — | Renamed from Merge — semantic page grouping |
+|| GATE 3 (Adaptation) | ⏸️ Pending | — | Depends on grouping stage |
+|| GATE 4 (Artifacts) | ⏸️ Pending | — | Depends on adaptation |
+| Enrichment | ⏭️ Skipped | — | User: skip — only adds cosmetic metadata comments |

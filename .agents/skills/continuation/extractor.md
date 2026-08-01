@@ -48,7 +48,7 @@ in the original). A garbled page needs a better source.
 hermes -z "Read spec/issue-09-2025/page-<<START>>.md through page-<<END>>.md.
 Extract ALL content exactly into ste-code/extracted/w<<NNN>>-p<<START>>-<<END>>.md.
 Do not summarize. Include every word, every table, every example.
-Output ONLY the markdown file." -m deepseek-v4-pro --yolo
+Output ONLY the markdown file." -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## Expected Output Example
@@ -153,7 +153,7 @@ ls ste-code/prompts-refine/w*-prompt.txt | wc -l  # Must be 109
 
 ## Launch Rules
 
-- Always use `hermes -z "$(cat ste-code/prompts-refine/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo`
+- Always use `hermes -z "$(cat ste-code/prompts-refine/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 - Always launch exactly 3 workers per batch (never more)
 - Do not launch 4 or more workers at once. Rate limits cause silent failures
   with 4+ parallel workers. Three workers is the safe ceiling.
@@ -165,7 +165,7 @@ ls ste-code/prompts-refine/w*-prompt.txt | wc -l  # Must be 109
 
 ### Why 3 Workers Per Batch
 
-The `deepseek-v4-pro` API tier allows 3 concurrent requests without rate limiting.
+The `poolside/laguna-s-2.1:free` API tier allows 3 concurrent requests without rate limiting.
 A fourth concurrent worker triggers 429 responses. The 429 errors cause retries
 that cascade into more 429s. Three workers is the tested safe limit.
 
@@ -186,7 +186,7 @@ that cascade into more 429s. Three workers is the tested safe limit.
 The fastest path uses a high-concurrency API tier.
 The slowest path includes retries from rate limits or failures.
 
-NOTE: These estimates use the `deepseek-v4-pro` model. Other models
+NOTE: These estimates use the `poolside/laguna-s-2.1:free` model. Other models
 may produce different timing and token counts.
 
 ### Time by Batch Position
@@ -239,7 +239,7 @@ Batch 36: W106(421-424) W107(425-428) W108(429-432)
 Batch 37: W109(433-434) — 2 pages only, last batch
 ```
 
-Full grid also at: `.agents/skills/references/worker-grid.md`
+Full grid also at: `.agents/references/worker-grid.md`
 
 ## Quality Checks (Per Batch)
 
@@ -510,18 +510,18 @@ Do not start refinement until all extraction batch checks pass.
 ## Immutable Facts
 
 - 19 technical noun categories (NOT 22)
-- deepseek-v4-pro model (NOT deepseek-pro or deepseek-v4-flash)
+- poolside/laguna-s-2.1:free model (NOT deepseek-pro or deepseek-v4-flash)
 - Output: `ste-code/extracted/wNNN-pPPPP-PPPP.md`
 - 109 workers × 4 pages = 434 pages total
 - 3 workers per batch maximum (API rate limit ceiling)
-- Follow `.agents/skills/references/rails.md` — all 8 guardrails apply
+- Follow `.agents/references/rails.md` — all 8 guardrails apply
 
 ## Start Now
 
 1. Verify spec pages exist: `ls spec/issue-09-2025/ | head -5`
 2. Run pre-extraction page validation (check for empty, garbled, image-only pages)
 3. Generate 109 prompt files with the generation script
-4. Launch Batch 1: `hermes -z "$(cat ste-code/prompts-refine/w001-prompt.txt)" -m deepseek-v4-pro --yolo`
+4. Launch Batch 1: `hermes -z "$(cat ste-code/prompts-refine/w001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo`
 5. Wait for completion, run the batch validation script, update PROGRESS.md
 6. Record batch summary in extraction-log.md
 7. Continue through all 37 batches

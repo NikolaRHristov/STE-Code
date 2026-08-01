@@ -64,7 +64,7 @@ _cli_parser = _argparse.ArgumentParser(
 )
 _cli_parser.add_argument(
     "--model", default=None,
-    help="Model to use (default: deepseek-v4-pro)"
+    help="Model to use (default: poolside/laguna-s-2.1:free)"
 )
 _cli_parser.add_argument(
     "--timeout", type=int, default=None,
@@ -118,7 +118,7 @@ _signal.signal(_signal.SIGTERM, _cleanup_workers)
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 TEST_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/test-cases")
 RESULTS_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/results-control")
-MODEL = "deepseek-v4-pro"
+MODEL = "poolside/laguna-s-2.1:free"
 
 # ---- CLI overrides: supersede hardcoded defaults when arguments provided ----
 if _cli_args.model is not None:

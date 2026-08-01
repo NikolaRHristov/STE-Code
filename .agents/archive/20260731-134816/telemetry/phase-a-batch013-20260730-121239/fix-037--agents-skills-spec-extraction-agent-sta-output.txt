@@ -1,0 +1,25 @@
+  ┊ 🔎 find      rails.md  0.1s
+  ┊ 🔎 find      **/PROGRESS.md  0.1s
+  ┊ 🔎 find      **/MASTER.md  0.1s
+  ┊ 📖 read      rails.md  0.1s
+  ┊ 📖 read      PROGRESS.md  0.1s
+  ┊ 📖 read      MASTER.md  0.1s
+Done. The improved file is saved at:
+
+`.agents/skills/spec-extraction/agent-state-report/SKILL.md`
+
+**Stats:** 494 lines (up from 133), 18,493 bytes (up from 3,582).
+
+Here is what was added, section by section:
+
+| Section | Lines | Purpose |
+|----------|-------|---------|
+| **Pre-Flight Checks** | 22-31 | 5 mandatory checks before report generation — pipeline root, stage dirs, PROGRESS.md, git repo, cwd |
+| **Filled Example** | 84-172 | Complete concrete report with real-looking values for all 9 sections — an agent seeing this for the first time has a model of what "done" looks like |
+| **Edge Case Handling** | 174-266 | 7 edge cases: no pipeline dir, zero files, no git repo, wrong cwd, missing stage directories, PROGRESS.md missing, git status failure — each with explicit recovery steps |
+| **Failure Modes & Recovery** | 268-322 | 4 failure modes: stale PROGRESS.md, rails unassessable, partial pipeline state, worker count mismatch — each with severity guidance and discovery protocol |
+| **PROGRESS.md Update Protocol** | 324-376 | Concrete format for timestamp, stage status, batch rows, and change log — plus 3 "when NOT to update" rules |
+| **Cross-References** | 378-470 | 8-reference table linking rails.md, MASTER.md, PROGRESS.md, quality-checklist.md, worker-grid.md, worker-rails.md, section-types.md, and pipeline spec — all verified to exist on disk |
+| **Safety Checklist** | 483-494 | 8-item pre-claim checklist: real output, correct filename, matching timestamps, no blanks, verified counts, cross-section consistency, UNKNOWN explanations, change log entry |
+
+All original content is preserved — the Trigger section, REPORT FORMAT template, Execution Rules (with Rule 3 now backed by a full protocol), and Quick Launch block remain exactly as they were. Version bumped to 1.1.0.

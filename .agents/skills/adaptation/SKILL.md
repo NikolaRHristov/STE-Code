@@ -1,9 +1,24 @@
 # Adaptation Protocol - Stage 4
 
+> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+> Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to THIS skill.
+> One session = one operation = one read + one write. No re-editing own output.
+
 Transform STE rules into STE-Code (coding domain). Agent-agnostic.
 
-## Input: `ste-code/merged/master.md`
+## Input: `ste-code/grouped/*.md` (all grouped group files; the orchestrator
+concatenates them and slices each rule section by its canonical title)
 ## Output: `ste-code/adapted/` (rule-by-rule STE→STE-Code)
+
+## Orchestration & prompts
+- **`.agents/tools/adaptation/adapt_batch.py`** launches one LLM worker per rule
+  section (1-9 + GR), embeds THIS skill as the authoritative protocol, and commits
+  each section only after its deterministic gate passes (verify-adaptation.py).
+- Worker prompts are externalized to **`.agents/tools/adaptation/templates/`**
+  (edit those `.md` files to change wording — not the `.py`). The embedded skill
+  text below is the single source of truth for behavior.
+- Refuses to launch until `ste-code/grouped/` exists and is non-trivial.
+- Checkpoint + `--resume` + per-section git commit (crash-safe, like refine_batch.py).
 
 ## PRESERVE (unchanged)
 - All 53 rule numbers and 9-section organization
@@ -188,31 +203,31 @@ Launch one worker per section. Each worker reads the merged master.md and adapts
 
 ```bash
 # Section 1 - Words (Rules 1.1-1.14)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec1.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec1.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 2 - Multi-word Nouns (Rules 2.1-2.3)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec2.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec2.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 3 - Verbs (Rules 3.1-3.7)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec3.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec3.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 4 - Sentences (Rules 4.1-4.5)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec4.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec4.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 5 - Procedural Writing (Rules 5.1-5.5)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec5.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec5.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 6 - Descriptive Writing (Rules 6.1-6.6)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec6.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec6.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 7 - Safety Instructions (Rules 7.1-7.3)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec7.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec7.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 8 - Punctuation (Rules 8.1-8.7)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec8.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec8.txt)" -m poolside/laguna-s-2.1:free
 
 # Section 9 - Writing Practices (Rules 9.1-9.4 + GR1-GR4)
-hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m poolside/laguna-s-2.1:free
 ```
 
 ### Launch All at Once
@@ -220,7 +235,7 @@ hermes -z "$(cat .agents/prompts/adapt/adapt-sec9.txt)" -m deepseek-v4-pro
 Use the combined prompt that adapts all 9 sections plus categories and synonyms:
 
 ```bash
-hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m deepseek-v4-pro
+hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m poolside/laguna-s-2.1:free
 ```
 
 ### Naming Convention
@@ -233,7 +248,7 @@ hermes -z "$(cat .agents/prompts/adapt/adapt-all-prompt.txt)" -m deepseek-v4-pro
 
 ### Prerequisites
 
-- `ste-code/merged/master.md` must exist and pass all merge verification gates
+- `ste-code/grouped/master.md` must exist and pass all merge verification gates
 - All 53 rules must be present and numbered correctly
 - All 19 categories must be enumerated
 - Dictionary entries must cover A-Z
@@ -285,7 +300,7 @@ grep -l "Non-STE:" ste-code/adapted/a-sec*-rule*.md | wc -l
 ### Gate 4 - Adaptation Fidelity (Spot Check)
 
 Pick 5 random adapted rules. For each:
-1. Read the original rule text in `ste-code/merged/master.md`
+1. Read the original rule text in `ste-code/grouped/master.md`
 2. Read the adapted rule in `ste-code/adapted/a-secN-ruleX.Y.md`
 3. Verify that the adaptation:
    - Preserves the rule number and core instruction

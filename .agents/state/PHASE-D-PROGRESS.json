@@ -1,15 +1,12 @@
 {
-  "done": [
-    "distilled-prompt",
-    "self-reading-manual",
-    "methodology",
-    "example-turn",
-    "deployment-guide",
-    "artifact-readme"
-  ],
-  "batches_done": [
-    1,
-    2
-  ],
-  "updated": "2026-07-30T14:34:58.750918+00:00"
+  "phase": "D (Adaptation)",
+  "status": "NOT_STARTED",
+  "description": "STE-to-STE-Code adaptation (53 rules + 4 GR rules)",
+  "input_dir": "ste-code/grouped/",
+  "output_dir": "ste-code/adapted/",
+  "rules_completed": 0,
+  "rules_total": 53,
+  "done": [],
+  "batches_done": [],
+  "updated": "2026-07-31T15:50:00.000000+00:00"
 }

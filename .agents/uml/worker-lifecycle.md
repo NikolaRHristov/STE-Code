@@ -2,9 +2,9 @@
 
 > Source documents:
 > - `.agents/skills/ste-code-workers/SKILL.md`
-> - `.agents/skills/references/worker-grid.md`
-> - `.agents/skills/references/rails.md`
-> - `.agents/skills/references/worker-rails.md`
+> - `.agents/references/worker-grid.md`
+> - `.agents/references/rails.md`
+> - `.agents/references/worker-rails.md`
 > - `.agents/prompts/agent-1-extractor.md`
 
 ---
@@ -45,14 +45,14 @@ flowchart TD
 ### Launch Command Template
 
 ```
-hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat ste-code/prompts/wNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 **Flags:**
 | Flag | Meaning |
 |------|---------|
 | `-z` | One-shot mode: execute prompt, write output, exit |
-| `-m deepseek-v4-pro` | Model selection (RAIL 6: immutable) |
+| `-m poolside/laguna-s-2.1:free` | Model selection (RAIL 6: immutable) |
 | `--yolo` | Skip confirmation prompts for file writes |
 | `background=true` | Launched via Hermes terminal with bg tracking |
 | `notify_on_complete=true` | Coordinator gets automatic exit notification |
@@ -252,7 +252,7 @@ flowchart TD
 
 ```
 WRITE prompt to file
-  → LAUNCH: hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo (background + notify_on_complete=true)
+  → LAUNCH: hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo (background + notify_on_complete=true)
   → WAIT for all 3 in batch to exit
   → VERIFY: output file exists, size >3KB, no truncation
   → COMMIT: git add -A && git gcommit-hermes
@@ -283,7 +283,7 @@ flowchart TD
 
     TO --> SPLIT["Split page range in half\n4 pages → two 2-page ranges"]
     SQ --> REWRITE["Rewrite prompt to file\nUse $(cat file) pattern\nNever embed multi-line in shell"]
-    MN --> CORRECT["Ensure -m deepseek-v4-pro\n(RAIL 6: immutable model)\nRe-launch with correct model"]
+    MN --> CORRECT["Ensure -m poolside/laguna-s-2.1:free\n(RAIL 6: immutable model)\nRe-launch with correct model"]
     TR --> SPLIT
     FB --> DELETE["Delete fabricated file\nrm ste-code/extracted/wNNN-*.md"]
     FM --> SPLIT
@@ -307,7 +307,7 @@ flowchart TD
 |-------|-----------------|------------|-----------------|-------------|
 | **Worker Timeout** | No notify_on_complete after ~60s | Too many pages, model stalled | Split 4-page range into two 2-page ranges | 2 → escalate |
 | **Shell Quoting Failure** | Prompt garbled, model misinterprets | Multi-line prompt in shell command | Rewrite prompt to file, use `$(cat file)` | 1 (fix is reliable) |
-| **Model Normalization** | Wrong model in launch command | `deepseek-pro` or `deepseek-v4-flash` used | Correct to `deepseek-v4-pro` (RAIL 6) | 1 (fix is reliable) |
+| **Model Normalization** | Wrong model in launch command | `deepseek-pro` or `deepseek-v4-flash` used | Correct to `poolside/laguna-s-2.1:free` (RAIL 6) | 1 (fix is reliable) |
 | **Truncation** | Last line ends mid-word, partial table row, missing footer | Model output limit, page count too high | Split page range in half; re-extract both halves | 2 → single pages |
 | **Fabrication** | Modern terms ("React", "Docker"), commentary ("This page describes..."), narrative prose | Model hallucinating instead of extracting | Delete file; re-extract from spec with stricter prompt | 2 → flag for manual review |
 | **Missing File** | `test -f` returns false, worker exited ≠ 0 | Worker crashed, disk full, path error | Verify directory exists; split range; re-launch | 2 → skip and flag |
@@ -392,9 +392,9 @@ Run these checks before you launch any batch. A check that fails must be fixed b
 | 5 | PROGRESS.md readable | `test -f .agents/state/PROGRESS.md && test -r .agents/state/PROGRESS.md` | File exists and is readable |
 | 6 | Git repo clean (no uncommitted conflicts) | `git status --porcelain | grep -E '^(UU|AA|DD)' | wc -l` | Output is 0 |
 | 7 | Disk space sufficient | `df -h . | tail -1 | awk '{print $4}'` | At least 500MB free |
-| 8 | Model available | `hermes status 2>&1 | grep -c deepseek-v4-pro` | Returns 1 or more |
+| 8 | Model available | `hermes status 2>&1 | grep -c poolside/laguna-s-2.1:free` | Returns 1 or more |
 | 9 | No stale worker sessions | `hermes process list 2>&1 | grep -c 'session_id'` | Returns 0 |
-| 10 | Worker grid up-to-date | `test .agents/skills/references/worker-grid.md -nt .agents/state/PROGRESS.md` | Grid is newer than progress |
+| 10 | Worker grid up-to-date | `test .agents/references/worker-grid.md -nt .agents/state/PROGRESS.md` | Grid is newer than progress |
 
 NOTE: After all 10 checks pass, create the coordinator lock: `touch ste-code/.coordinator-lock`.
 
@@ -413,7 +413,7 @@ Each of the 10 Worker Rails (W1–W10) maps to enforcement points in this docume
 | W3 | First line must be `# Page N of M` | Checklist item 4 (content signals) | Section 2 |
 | W4 | No commentary or narrative prose | Checklist item 5 (fabrication check) | Section 2, Section 5 |
 | W5 | No modern terms not in the spec | Checklist item 5 (fabrication check scans for "React", "Docker", "API") | Section 2, Section 5 |
-| W6 | Use only the assigned model (`deepseek-v4-pro`) | Error Recovery Matrix (Model Normalization row) | Section 5 |
+| W6 | Use only the assigned model (`poolside/laguna-s-2.1:free`) | Error Recovery Matrix (Model Normalization row) | Section 5 |
 | W7 | Output must be valid markdown | Checklist item 3 (last 3 lines check catches malformed tables) | Section 2 |
 | W8 | Self-validate against all 10 rails before writing | Worker States diagram (self_validating substate) | Section 3 |
 | W9 | Write complete output — do not stop early | Checklist item 2 (size check >3KB, >30 lines) | Section 2 |

@@ -1,0 +1,26 @@
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 🔎 find      *adaptation*/SKILL.md  0.1s
+  ┊ 📖 read      SKILL.md  0.2s
+  ┊ 🔎 find      rails.md  0.1s
+File saved successfully. Here is the summary:
+
+**Path:** `.agents/skills/spec-extraction/ste-code-artifacts/SKILL.md`
+**Size:** 492 lines, 23,354 chars (was 170 lines, 6,350 chars)
+**Net additions:** +322 lines, +17,004 chars
+
+All original content preserved. New sections added:
+
+### Applied suggested improvements:
+1. **Per-artifact failure recovery** — each of the 6 artifacts now has a dedicated failure recovery section with gate-specific fix procedures (e.g., "if synonym table has invented forms → load master.md table, compare pair-by-pair, remove any pair not in source")
+2. **Edge case decision matrix** — 7-row table covering rule count mismatch (< 53, > 53), dictionary letter gaps, category count deviations, synonym duplicates, and character budget overshoots with tier-gated actions
+3. **Repair procedures per quality gate** — every quality gate checkbox now has a concrete repair action immediately below it, specifying what to read, what to fix, and how to re-validate
+4. **Cross-reference to ste-code-adaptation/SKILL.md** — new "Dependency on Adaptation Rules" section with explicit preserve/replace contracts and a cross-reference validation checklist
+5. **Artifact 4 sourcing rule** — mandatory procedure to extract a real STE/non-STE pair from master.md with source citation (rule number + line range), plus an example sourcing trace showing the adaptation chain
+
+### Creative additions beyond suggestions:
+- **Atomic write model** — write to `.tmp/`, validate, then `mv` to final location; prevents partial files
+- **Master.md → artifact mapping table** — shows exactly which master.md sections feed each artifact with approximate source line counts
+- **4-tier error recovery hierarchy** — T1 (single gate failure) through T4 (dependency violation), each with specific actions
+- **Partial output policy** — explicit rules for what to keep/discard/resume when generation is interrupted
+- **Generation log format** — structured markdown template for tracking each run's pass/fail status per artifact
+- **Quick recovery reference table** — problem-to-section mapping for fast operator lookup

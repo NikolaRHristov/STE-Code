@@ -316,7 +316,7 @@ awk '
 
 ### Quick Batch Verification Script
 
-Save this as `.agents/scripts/verify-refine-batch.sh`:
+Save this as `.agents/tools/quality/verify-refine-batch.sh`:
 
 ```bash
 #!/bin/bash
@@ -478,12 +478,12 @@ Output ONLY the refined markdown file. No explanations, no commentary.
 
 ### Launch Protocol
 
-Launch workers using ONLY `deepseek-v4-pro` (NEVER `deepseek-v4-flash`):
+Launch workers using ONLY `poolside/laguna-s-2.1:free` (NEVER `deepseek-v4-flash`):
 
 ```bash
-hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m deepseek-v4-pro --yolo &
-hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m deepseek-v4-pro --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r001-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r002-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
+hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 ```
 
 ## Verification (Per Batch)
@@ -499,7 +499,7 @@ hermes -z "$(cat ste-code/prompts-refine/r003-prompt.txt)" -m deepseek-v4-pro --
 
 Checks 1-5 are basic. Checks 6-8 are structural. See the "Verification —
 Concrete Commands" section above for the exact `grep`, `awk`, and `wc` commands
-that run each check. Use `bash .agents/scripts/verify-refine-batch.sh r001
+that run each check. Use `bash .agents/tools/quality/verify-refine-batch.sh r001
 r002 r003` for automated batch verification.
 
 ## 🔴 MANDATORY: Update REFINE-PROGRESS.md After Every Batch
@@ -517,7 +517,7 @@ Use these status markers:
 
 ## Immutable Facts
 
-- 19 categories (NOT 22), deepseek-v4-pro (NOT deepseek-v4-flash)
+- 19 categories (NOT 22), poolside/laguna-s-2.1:free (NOT deepseek-v4-flash)
 - Zero content loss — format only
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - Follow `.agents/references/rails.md` — all 8 guardrails apply
@@ -528,7 +528,7 @@ After refinement completes (all 109 files verified, REFINE-PROGRESS.md shows
 100%), the pipeline continues:
 
 - **Stage 3 (Merge):** The continuation orchestrator reads from
-  `ste-code/refined/` and produces `ste-code/merged/master.md`. See
+  `ste-code/refined/` and produces `ste-code/grouped/master.md`. See
   `.agents/skills/continuation/SKILL.md` (lines 75-79 for the decision tree,
   lines 138-260 for merge operations and deduplication).
 - **Stage 4 (Adaptation):** Transforms 53 rules from `master.md` into code
@@ -550,7 +550,7 @@ find ste-code/refined -name 'r*-p*.md' -type f | wc -l  # Must be 109
 grep -c 'BLOCKED' .agents/state/REFINE-PROGRESS.md      # Must be 0
 
 # Rail compliance
-python3 .agents/scripts/check-rails.py                   # Must pass
+python3 .agents/tools/quality/check-rails.py                   # Must pass
 ```
 
 ## Start Now

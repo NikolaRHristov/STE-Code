@@ -1,0 +1,27 @@
+  ┊ 🔎 grep      *.md  0.1s [Search failed: rg: regex parse error:
+    (?:...]
+  ┊ 🔎 grep      check-rails.py  0.2s
+  ┊ 🔎 grep      check-tables.py  0.2s
+  ┊ 🔎 find      *.py  0.1s
+  ┊ 🔎 find      *.md  0.1s
+  ┊ 📖 read      worker-lifecycle.md  0.1s
+  ┊ 📖 read      database-layout.md  0.1s
+Done. The file is saved at `.agents/uml/pipeline-state-machine.md` with 1503 lines (was 738, +765 lines added).
+
+Here is what was added, preserving all original content:
+
+**Required improvements applied:**
+- Version History table (line 10) tracking all structural changes with date, version, change description, and author
+- Section 13: How to Update This Document (line 775) with 6 scenario-driven meta-instructions: adding Stage 6, changing worker count (with batch formula), changing model name, changing concurrency limit, updating artifact list, and general update rules
+- Appendix A: Quality Gates Checklist (line 1124) — all 6 gates extracted into machine-parseable YAML blocks with command, expected, severity, and fail_action fields per check; 40+ checks total, mechanically executable
+- Section 14: Known Limitations & Workarounds (line 859) — 8 documented limitations: notify_on_complete reliability, 3-worker concurrency limit, git gcommit-hermes dependency, hardcoded 109-worker assumption, batch barrier blocking, memory pressure at scale, Mermaid rendering dependency, spec source file naming assumption
+- Section 18: Agentic-Load Specifications (line 1040) — per-section token counts with approximate tokens/characters, recommended loading strategy matrix per agent role (Agent #1: ~3,500 tokens from 8 sections, Agent #3: ~5,800 tokens from 12 sections, etc.), and 3 loading efficiency tips
+
+**Creative additions beyond requirements:**
+- How to Read This Document (line 26) — quick navigation table mapping each section to its best use case
+- Section 15: Dependency Map (line 939) — external dependencies table with failure modes, internal scripts table, state files table, and a pre-flight check summary
+- Section 16: Invariants (line 984) — 14 invariants across 5 categories (stage integrity, file integrity, content integrity, agent integrity, progress tracking) that Auditor verifies
+- Section 17: Glossary (line 1019) — 14 terms defined (Agent, Batch, Barrier, Coordinator, exchange.md, Fabrication, Gate, Handoff, Orchestrator, Rail, Spec, Stage, State Report, Worker)
+- Section 19: Cross-Reference Matrix (line 1094) — which sections each agent role must read
+- Appendix B: Quick Reference Card (line 1455) — ASCII box-drawing summary for fast recall
+- Document Maintenance Log (line 1499) — audit trail of all changes to this file

@@ -36,18 +36,18 @@ NOTE: Sub-rules (R3a, R4a, R9a, R9b) were added after the initial rule set. Each
 
 ## SKILLS (read first)
 
-1. `.agents/skills/spec-extraction/ste-code-refine/SKILL.md` - Refinement protocol (9 rules)
-2. `.agents/skills/spec-extraction/ste-code-workers/SKILL.md` - Worker orchestration (same architecture)
-3. `.agents/skills/spec-extraction/references/worker-grid.md` - 109-worker grid
-4. `.agents/skills/spec-extraction/references/quality-checklist.md` - Per-batch checks
-5. `.agents/skills/spec-extraction/references/rails.md` - 8 immutable guardrails
+1. `.agents/skills/refinement/SKILL.md` - Refinement protocol (9 rules)
+2. `.agents/skills/extraction/SKILL.md` - Worker orchestration (same architecture)
+3. `.agents/references/worker-grid.md` - 109-worker grid
+4. `.agents/references/quality-checklist.md` - Per-batch checks
+5. `.agents/references/rails.md` - 8 immutable guardrails
 
 ## ARCHITECTURE
 
 - Input: `ste-code/extracted/wNNN-pPPPP-PPPP.md` (from agent #1)
 - Output: `ste-code/refined/rNNN-pPPPP-PPPP.md`
 - 109 workers, 37 batches of 3
-- Model: `deepseek-v4-pro` exclusively
+- Model: `poolside/laguna-s-2.1:free` exclusively
 - Prompts in: `.agents/prompts/refine/`
 
 ## POLL SYSTEM
@@ -107,7 +107,7 @@ Never merge STE and non-STE into the same line. Never abbreviate examples with "
 Any code-like content (pipeline steps, shell commands, Python snippets) must be in fenced code blocks with a language identifier:
 ````
 ```bash
-hermes -z "$(cat prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 ````
 
@@ -263,7 +263,7 @@ After each batch of three workers finishes, run the automated quality gate scrip
 ### Automated Checks (run per file)
 
 ```bash
-python3 .agents/scripts/check-refined.py ste-code/refined/rNNN-pPPPP-PPPP.md
+python3 .agents/tools/quality/check-refined.py ste-code/refined/rNNN-pPPPP-PPPP.md
 ```
 
 The script checks these conditions:
@@ -285,7 +285,7 @@ The script checks these conditions:
 After all three files pass individual checks, run the batch summary:
 
 ```bash
-python3 .agents/scripts/check-refined-batch.py Batch-N rNNN rNNN rNNN
+python3 .agents/tools/quality/check-refined-batch.py Batch-N rNNN rNNN rNNN
 ```
 
 The batch check confirms:
@@ -452,7 +452,7 @@ Output ONLY the refined markdown file. No explanations, no commentary, no "I hav
 
 Each worker is launched with:
 ```bash
-hermes -z "$(cat .agents/prompts/refine/rNNN-prompt.txt)" -m deepseek-v4-pro --yolo
+hermes -z "$(cat .agents/prompts/refine/rNNN-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo
 ```
 
 ## PROGRESS TRACKING
@@ -743,7 +743,7 @@ NOTE: Total tokens for the full pass (~2.08M) is an estimate. Actual usage chang
 | Red - Extreme Usage | Worker uses >2.0x tier average tokens | Kill the worker. Check for loop or hallucination. Re-launch. |
 | Green - Efficient | Worker uses <1.2x tier average tokens | Expected. No action. |
 
-### Cost Estimation (deepseek-v4-pro, as of 2025-07-30)
+### Cost Estimation (poolside/laguna-s-2.1:free, as of 2025-07-30)
 
 | Metric | Value |
 |--------|-------|
@@ -849,14 +849,14 @@ done
 
 ```bash
 # All 434 pages must be covered with no gaps
-python3 .agents/scripts/check-page-coverage.py ste-code/refined/
+python3 .agents/tools/quality/check-page-coverage.py ste-code/refined/
 ```
 
 ### V3: Gate Pass Rate
 
 ```bash
 # Run quality gates on all 109 files
-python3 .agents/scripts/check-refined-all.py
+python3 .agents/tools/quality/check-refined-all.py
 
 # Expected output:
 #   Total files: 109
@@ -868,7 +868,7 @@ python3 .agents/scripts/check-refined-all.py
 
 ```bash
 # Compare word counts between extracted and refined
-python3 .agents/scripts/compare-word-counts.py ste-code/extracted/ ste-code/refined/
+python3 .agents/tools/quality/compare-word-counts.py ste-code/extracted/ ste-code/refined/
 
 # Expected: refined word count is 95-105% of extracted word count per file
 # Any file below 90%: content loss. Any file above 110%: possible fabrication.
@@ -878,7 +878,7 @@ python3 .agents/scripts/compare-word-counts.py ste-code/extracted/ ste-code/refi
 
 ```bash
 # Check heading depth consistency across all files
-python3 .agents/scripts/check-heading-depth.py ste-code/refined/
+python3 .agents/tools/quality/check-heading-depth.py ste-code/refined/
 
 # Expected: zero depth jumps (## → #### without ###)
 ```
@@ -887,7 +887,7 @@ python3 .agents/scripts/check-heading-depth.py ste-code/refined/
 
 ```bash
 # Every STE must have a matching Non-STE in the same file
-python3 .agents/scripts/check-example-pairs.py ste-code/refined/
+python3 .agents/tools/quality/check-example-pairs.py ste-code/refined/
 
 # Expected: STE count = Non-STE count in every file that has examples
 ```
@@ -896,7 +896,7 @@ python3 .agents/scripts/check-example-pairs.py ste-code/refined/
 
 ```bash
 # Dictionary pages (r101-r109) must have all required fields
-python3 .agents/scripts/check-dictionary-entries.py ste-code/refined/r10[1-9]-p*.md
+python3 .agents/tools/quality/check-dictionary-entries.py ste-code/refined/r10[1-9]-p*.md
 
 # Expected: every APPROVED entry has Meaning + STE + Non-STE (Forms optional)
 # Expected: every UNAPPROVED entry has Alternatives + STE + Non-STE
@@ -906,7 +906,7 @@ python3 .agents/scripts/check-dictionary-entries.py ste-code/refined/r10[1-9]-p*
 
 ```bash
 # Check all 8 guardrails
-python3 .agents/scripts/check-rails.py
+python3 .agents/tools/quality/check-rails.py
 
 # Expected: all 8 rails PASS
 ```
@@ -957,10 +957,10 @@ All of these conditions must be true before you signal completion:
 
 1. Verify: `ls ste-code/refined/r*-p*.md | wc -l` must be 109
 2. Verify: no zero-byte files, no gaps in r001-r109
-3. Run rails compliance check: `python3 .agents/scripts/check-rails.py`
-4. Run quality gate batch check on all 109 files: `python3 .agents/scripts/check-refined-all.py`
+3. Run rails compliance check: `python3 .agents/tools/quality/check-rails.py`
+4. Run quality gate batch check on all 109 files: `python3 .agents/tools/quality/check-refined-all.py`
 5. Spot-check 3 random files for formatting quality and absence of "..." omissions
-6. Write state report using `.agents/skills/spec-extraction/agent-state-report/SKILL.md`
+6. Write state report using `.agents/skills/state-report/SKILL.md`
 7. Signal completion in `.agents/feedback/exchange.md`
 
 ## START NOW

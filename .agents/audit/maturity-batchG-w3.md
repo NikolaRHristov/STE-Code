@@ -144,7 +144,7 @@
   - Adopt the same weighted scoring formula as the Python orchestrator to make results comparable
 - **Priority:** medium
 
-### .agents/scripts/check-rails.py
+### .agents/tools/quality/check-rails.py
 - **Level:** 2
 - **Summary:** Scans extracted and refined markdown files against 8 quality rails (naming conventions, formatting rules, fabrication signals, factual accuracy) and reports violations with severity indicators (🔴/🟡).
 - **Strengths:**
@@ -174,7 +174,7 @@
   - Cross-reference to `references/` for rail definitions and the Audit skill for the broader auditing workflow
 - **Priority:** high
 
-### .agents/scripts/generate_refine_prompts.py
+### .agents/tools/refinement/generate_refinement_prompts.py
 - **Level:** 2
 - **Summary:** Generates one refinement worker prompt file per extracted spec file, embedding 9 formatting rules and page-range metadata into a structured template suitable for batch submission to the Refiner agent.
 - **Strengths:**
@@ -207,10 +207,10 @@
 ## Batch Summary
 - Files scored: 7
 - Level distribution: -2:0 -1:0 1:0 2:5 3:2 4:0 5:0
-- Highest priority: `.agents/benchmark/orchestrator-control.py` (90% code duplication - every fix to the main orchestrator must be manually replicated), `.agents/scripts/check-rails.py` (non-executable due to placeholder path - literally cannot run without editing the source), `.agents/benchmark/rescore.py` (duplicated extraction logic and divergent keyword sets produce non-idempotent rescoring)
+- Highest priority: `.agents/benchmark/orchestrator-control.py` (90% code duplication - every fix to the main orchestrator must be manually replicated), `.agents/tools/quality/check-rails.py` (non-executable due to placeholder path - literally cannot run without editing the source), `.agents/benchmark/rescore.py` (duplicated extraction logic and divergent keyword sets produce non-idempotent rescoring)
 - Pattern observations:
   - **Code duplication is endemic**: `orchestrator-control.py` duplicates ~300 lines from `orchestrator.py`; `rescore.py` duplicates extraction functions from the same source; no shared library exists despite 3 of 7 files sharing the same scoring/extraction core
-  - **No CLI argument parsing anywhere**: all 7 files hardcode paths, models, timeouts, and directories. Model name `deepseek-v4-pro` appears as a string literal in 5 files with no central configuration
+  - **No CLI argument parsing anywhere**: all 7 files hardcode paths, models, timeouts, and directories. Model name `poolside/laguna-s-2.1:free` appears as a string literal in 5 files with no central configuration
   - **Placeholder paths block execution**: 2 scripts (`check-rails.py`, `generate_refine_prompts.py`) contain literal `<project-root>` strings that prevent running without manual edits, while 5 other scripts correctly auto-detect the project root via `os.path.dirname(__file__)`
   - **No error recovery patterns**: bare `except:` in `launch-levels.py`, silent `try/except: continue` in `check-rails.py`, no retry logic in any orchestrator variant - transient failures become permanent
   - **Scoring divergence**: `orchestrator.py`, `orchestrator-control.py`, `rescore.py`, and `run-benchmark.sh` each implement their own scoring with different keyword sets and formulas - comparing results across runners is misleading

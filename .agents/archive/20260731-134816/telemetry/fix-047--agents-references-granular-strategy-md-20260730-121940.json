@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-047--agents-references-granular-strategy-md",
+  "batch": 16,
+  "target": ".agents/references/granular-strategy.md",
+  "duration_s": 243.3,
+  "output_ok": true,
+  "output_size": 28209,
+  "output_lines": 573,
+  "timestamp": "2026-07-30T12:23:43.843600+00:00"
+}

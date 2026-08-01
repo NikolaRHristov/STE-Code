@@ -1,0 +1,10 @@
+{
+  "worker_id": "fix-032--agents-skills-spec-extraction-ste-code-",
+  "batch": 11,
+  "target": ".agents/skills/spec-extraction/ste-code-adaptation/references/category-mapping.md",
+  "duration_s": 198.2,
+  "output_ok": true,
+  "output_size": 38582,
+  "output_lines": 471,
+  "timestamp": "2026-07-30T12:08:21.603292+00:00"
+}
