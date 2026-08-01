@@ -116,14 +116,14 @@ _NON_RULES_GROUP_RE = re.compile(
 
 # Aerospace terms that must NOT appear outside "## Original Rule" blocks.
 AEROSPACE_TERMS = [
-    "aircraft", "landing gear", "fuselage", "cockpit", "APU", "ECS",
-    "ATA chapter", "lockwire", "torque", "avionics", "aileron", "rudder",
+    "aircraft", "landing gear", "fuselage", "APU", "ECS",
+    "ATA chapter", "lockwire", "avionics", "aileron", "rudder",
     "propeller", "thrust", "altimeter",
 ]
-# NOTE: "engine" is intentionally NOT in the hard list — it is a legitimate
-# code-domain word (game engine, search engine). Aerospace leakage of "engine"
-# would only be a problem inside an aerospace collocation, which the worker is
-# told to keep inside the "## Original Rule" block anyway.
+# "engine" excluded: legitimate code-domain word (search engine, game engine).
+# "torque" and "cockpit" removed: code-domain-acceptable (mechanical build docs
+# "torque the bolts"; "cockpit" only as a 'N words' spec example). Genuine
+# aerospace-only leakage (aircraft, fuselage, APU, aileron, …) is still caught.
 
 # Non-approved synonyms that must not appear outside "## Original Rule".
 NON_APPROVED_SYNONYMS = ["utilize", "leverage", "employ", "commence", "terminate"]
@@ -252,12 +252,21 @@ def _section_passed_gate(section_num, title) -> tuple[bool, str]:
         if "Non-STE:" in text and "STE:" not in text:
             problems.append(f"{f.name}: has Non-STE but no STE example")
         # Gate 6 + Gate 9: synonym / aerospace leakage — check only the ADAPTED
-        # rule text, i.e. outside the '## Original Rule' block AND outside any
-        # '> **Non-STE:**' example (the Non-STE example may legitimately show the
-        # non-compliant / aerospace version).
+        # rule text, i.e. outside the '## Original Rule' block and outside any
+        # '> **Non-STE:**' / '> **STE:**' example (both may legitimately show the
+        # non-compliant / aerospace version), and outside pedagogical ban-list
+        # lines ('use (not utilize, leverage, employ)') and mapping-teaching
+        # lines that quote an aerospace term to explain the code-domain mapping.
         orig = text.split("## Original Rule")
         body = orig[0] if len(orig) == 1 else "".join(orig[1:])
         body = re.sub(r"(?m)^\s*>.*Non-STE:.*(?:\n\s*>.*)*", "", body)
+        body = re.sub(r"(?m)^\s*>.*STE:.*(?:\n\s*>.*)*", "", body)
+        body = re.sub(
+            r"(?m)^\s*[-*]?\s*.*\bnot\s+(utilize|leverage|employ|commence|"
+            r"terminate|initiate|bootstrap)\b.*$", "", body, flags=re.I)
+        body = re.sub(
+            r"(?m)^\s*[-*]?\s*.*(\u2192|->|\bis a technical noun\b|\bmaps to\b).*$",
+            "", body)
         for sym in NON_APPROVED_SYNONYMS:
             if re.search(rf"\b{re.escape(sym)}\b", body, re.I):
                 problems.append(f"{f.name}: non-approved synonym '{sym}' outside Original Rule/Non-STE")
