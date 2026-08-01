@@ -436,6 +436,39 @@ def test_scheduler(cfg, tmp: Path) -> None:
               len(proc.stdout.splitlines())))
 
 
+def test_white(cfg, tmp: Path) -> None:
+    """WHITE: knowledge base + self-healing ingest/pattern (real execution)."""
+    try:
+        import knowledge as K
+        import white as W
+    except ImportError:
+        check(False, "knowledge.py / white.py importable")
+        return
+    check(True, "knowledge.py / white.py importable")
+    # knowledge self-test must pass
+    proc = subprocess.run([sys.executable, str(BENCH / "knowledge.py"), "--self-test"],
+                          capture_output=True, text=True, timeout=120)
+    check(proc.returncode == 0, "knowledge.py --self-test exits 0")
+    # ingest a few escapes and confirm a pattern rolls up
+    kb = K.Knowledge(tmp / "white-knowledge.json")
+    for place in ("head", "tail", "nested"):
+        kb.record_failure("forbidden_bait", place, "immediate", "api_doc",
+                          ["P1"], ["bunch"], "0", 1, 0.2, "x", 1)
+    kb.flush()
+    kb._regenerate_patterns()
+    pats = kb.patterns(min_support=2)
+    check(any(p["kind"] == "technique_across_placements" for p in pats),
+          "knowledge rolls up technique_across_placements pattern")
+    # confidence formula: failures raise confidence
+    sig = list(kb.lessons.keys())[0]
+    check(kb.confidence_of(sig, 1) > 0.0, "lesson confidence > 0 after failures")
+    # white.py --help exercises the shared-arg CLI wiring without a live run
+    h = subprocess.run([sys.executable, str(BENCH / "white.py"), "--help"],
+                       capture_output=True, text=True, timeout=60)
+    check(h.returncode == 0 and "await-timeout" in h.stdout,
+          "white.py CLI wires shared args (--await-timeout present)")
+
+
 def test_red_blue(cfg, tmp: Path) -> None:
     """RED generator + BLUE defender: placement/timing, handshake, offline run."""
     try:
@@ -533,6 +566,7 @@ def main() -> int:
         test_verification(cfg, tmp)
         test_red_blue(cfg, tmp)
         test_scheduler(cfg, tmp)
+        test_white(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     test_modules_compile()

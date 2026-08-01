@@ -115,13 +115,15 @@ class Knowledge:
         self.version = int(raw.get("version", 0))
         # tolerate unknown keys: only pull what we know, keep the rest via update
         self.lessons = {}
-        for k, v in (raw.get("lessons") or {}).items():
-            L = dict(v)
-            # restore set-typed fields from their serialized lists
-            L["rounds_seen"] = set(L.get("rounds_seen", []))
-            L["variants_affected"] = set(L.get("variants_affected", []))
-            self.lessons[k] = L
-        self._patterns = {k: dict(v) for k, v in (raw.get("patterns") or {}).items()}
+        raw_lessons = raw.get("lessons")
+        if isinstance(raw_lessons, dict):
+            for k, v in raw_lessons.items():
+                L = dict(v)
+                L["rounds_seen"] = set(L.get("rounds_seen", []))
+                L["variants_affected"] = set(L.get("variants_affected", []))
+                self.lessons[k] = L
+        # non-dict lessons (legacy/corrupt/foreign shape) are ignored, not fatal
+        self._patterns = {k: dict(v) for k, v in (raw.get("patterns") or {}).items() if isinstance(v, dict)}
 
     @staticmethod
     def _serialize_lessons(lessons: "dict[str, dict]") -> "dict[str, dict]":
