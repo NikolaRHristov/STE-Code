@@ -11,20 +11,27 @@
 ### Core Standard (STANDARD-1.0.0)
 | Path | Count | Status |
 |------|:-----:|:------:|
-| `ste-code/adapted/a-sec*.md` | 55 files | ✅ 51 rules + 4 GR |
+| `ste-code/adapted/a-sec*.md` | 58 files | ✅ 54 rules + 4 GR |
 | `ste-code/adapted/a-dictionary.md` | 5,943 lines | ✅ 2,149 entries |
-| `ste-code/adapted/a-categories.md` | 567 lines | ✅ 22 categories + domain placeholders |
-| `ste-code/artifacts/level1/system-prompt.txt` | ~1.2K tokens | ✅ |
-| `ste-code/artifacts/level2/system-prompt.txt` | ~4.5K tokens | ✅ |
-| `ste-code/artifacts/level3/system-prompt.txt` | ~8K tokens | ✅ |
-| `ste-code/artifacts/level4/system-prompt.txt` | ~45K tokens | ✅ |
-| `ste-code/artifacts/level5/` | 51 summaries | ✅ |
+| `ste-code/adapted/a-categories.md` | 607 lines | ✅ 22 categories + domain placeholders |
+| `ste-code/artifacts/level-2/` | 5 KB · ~1.2K tokens | ✅ |
+| `ste-code/artifacts/level-1/` | 26 KB · ~5.9K tokens | ✅ |
+| `ste-code/artifacts/level0/` | 17 KB · ~4.3K tokens | ✅ |
+| `ste-code/artifacts/level1/` | 58 KB · ~14.5K tokens | ✅ |
+| `ste-code/artifacts/level2/` | 75 KB · ~18.5K tokens | ✅ |
+| `ste-code/artifacts/level3/` | 388 KB · ~95K tokens | ⚠️ `03-dictionary.md` still a `_base/` fallback |
+| `ste-code/artifacts/level4/` | 462 KB · ~116K tokens | ✅ |
+| `ste-code/artifacts/level5/` | 539 KB · ~134K tokens | ⚠️ `rules-sec7.md` still a `_base/` fallback; distils to ~110K |
 | `ste-code/data/` | 6 JSON files | ✅ |
-| `ste-code/artifacts/ste-code-*.txt` | 6 files | ✅ legacy artifacts |
-| `.agents/tools/` | 26 scripts | ✅ agent-agnostic |
+| `ste-code/artifacts/llms-full.txt` | consolidated single file | ✅ replaces the retired `ste-code-*.md` pair |
+| `.agents/tools/` | 84 scripts | ✅ agent-agnostic |
 | `.agents/config/agents.yaml` | hermes pre-configured | ✅ |
 | `.agents/GAPS.md` | 11 domain gaps | ✅ |
 | `README.md` | Credits & References | ✅ |
+
+Sizes and token counts above are measured, not estimated. Regenerate with
+`python3 .agents/tools/maintenance/measure_artifacts.py`; token counts use the
+`o200k_base` tokenizer.
 
 ### Linguistic Flavor (FLAVOR-1.0.0)
 | Path | Purpose | Status |

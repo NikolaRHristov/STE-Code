@@ -22,8 +22,9 @@ LLM-optimized form (in the spirit of `llms.txt` / `llms-full.txt`).
 ### 1. Deterministic level separation — `levels_scaffold.py`
 Reads `ste-code/final/` and emits, for each of the 8 tiers, a directory of
 **bounded sub-documents** under `ste-code/artifacts/_base/level<N>/`. Oversized
-rule sections are split (`rules-secN-part{i}.md`) so no sub-doc exceeds ~450 KB.
-This is the boilerplate layer — byte-reproducible, no LLM, no truncation.
+rule sections are split (`rules-secN-part{i}.md`) so no base sub-doc exceeds
+400 KB. This is the boilerplate layer — byte-reproducible, no LLM, no
+truncation. Each full tier scaffold is about 1.85 MB before distillation.
 
 ```bash
 python3 .agents/tools/artifacts/levels_scaffold.py            # write all 8 tier dirs

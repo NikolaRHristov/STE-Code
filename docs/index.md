@@ -27,19 +27,29 @@ documentation, docstrings, commit messages, and error messages.
 
 ## Adaptation levels
 
-Each level is a system prompt. Choose the level that fits your token budget.
+Each level is a directory of sub-documents, with a concatenated
+`system-prompt.txt` for one-file use. Choose the level that fits your token
+budget.
 
-| Level | File | Tokens | Best for |
-|:-----:|------|:------:|----------|
-| **1** | [`level1/system-prompt.txt`](https://github.com/NikolaRHristov/STE-Code/blob/Current/ste-code/artifacts/level1/system-prompt.txt) | ~1.2K | Interactive sessions, tight token budgets |
-| **2** | [`level2/system-prompt.txt`](https://github.com/NikolaRHristov/STE-Code/blob/Current/ste-code/artifacts/level2/system-prompt.txt) | ~4.5K | Code review, PR feedback |
-| **3** | [`level3/system-prompt.txt`](https://github.com/NikolaRHristov/STE-Code/blob/Current/ste-code/artifacts/level3/system-prompt.txt) | ~8K | Full document rewriting |
-| **4** | [`level4/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level4) | ~45K | Strict compliance checking |
-| **5** | [`level5/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level5) | ~100K+ | Specification-grade documentation |
+| Level | Directory | Size | Tokens | Best for |
+|:-----:|-----------|:----:|:------:|----------|
+| **-2** | [`level-2/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level-2) | 5 KB | ~1.2K | Ultra-minimal: the 14 core principles |
+| **-1** | [`level-1/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level-1) | 26 KB | ~5.9K | Core principles + synonym table |
+| **0** | [`level0/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level0) | 17 KB | ~4.3K | Baseline: + short dictionary excerpt |
+| **1** | [`level1/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level1) | 58 KB | ~14.5K | Interactive sessions, tight token budgets |
+| **2** | [`level2/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level2) | 75 KB | ~18.5K | Code review, PR feedback |
+| **3** | [`level3/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level3) | 388 KB | ~95K | Full document rewriting |
+| **4** | [`level4/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level4) | 462 KB | ~116K | Strict compliance checking |
+| **5** | [`level5/`](https://github.com/NikolaRHristov/STE-Code/tree/Current/ste-code/artifacts/level5) | 539 KB | ~134K | Specification-grade documentation |
 
-To use a level, copy the system prompt into the system-prompt field of your
-model. The model then applies the controlled vocabulary, the synonym table, and
-the sentence-length limits.
+Sizes are measured sums of each tier's sub-documents. Token counts use the
+`o200k_base` tokenizer (GPT-4o, GPT-4.1, GPT-5, o-series); `cl100k_base`
+(GPT-4, GPT-3.5-turbo) agrees to within 0.3%. Run
+`python3 .agents/tools/maintenance/measure_artifacts.py` to regenerate them.
+
+To use a level, copy its `system-prompt.txt` into the system-prompt field of
+your model. The model then applies the controlled vocabulary, the synonym table,
+and the sentence-length limits.
 
 ---
 
