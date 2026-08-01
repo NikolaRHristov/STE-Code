@@ -70,6 +70,19 @@ def _section_rules(rules, sec):
     return [p for p in rules if re.search(rf"a-sec{sec}-rule", p.name)]
 
 
+def _split_rule_paths(rule_paths, max_bytes=400000):
+    """Split a list of rule-file Paths into size-bounded chunks (<= max_bytes)."""
+    chunks, cur, sz = [], [], 0
+    for p in rule_paths:
+        t = len(p.read_text(encoding="utf-8", errors="ignore"))
+        if sz + t > max_bytes and cur:
+            chunks.append(cur); cur, sz = [], 0
+        cur.append(p); sz += t
+    if cur:
+        chunks.append(cur)
+    return chunks
+
+
 def _build_subdocs(level_idx: int) -> list[tuple[str, str]]:
     """Return [(subdoc_name, content), ...] for this tier."""
     rules = _all_rules()
@@ -106,15 +119,24 @@ def _build_subdocs(level_idx: int) -> list[tuple[str, str]]:
                      "## Section-specific grammar rules\n\n"
                      "> Placeholder — LLM fills from the full rule set."))
 
-    # rules by section (3..5) — one sub-doc per section (keeps files bounded)
+    # rules by section (3..5) — split each section into size-bounded sub-docs
     if level_idx >= 5:
         for sec in range(1, 10):
             sec_rules = _section_rules(rules, sec)
             if not sec_rules:
                 continue
-            parts = [f"<!-- {p.name} -->\n\n{p.read_text(encoding='utf-8', errors='ignore').strip()}"
-                     for p in sec_rules]
-            subs.append((f"rules-sec{sec}.md", "\n\n---\n\n".join(parts)))
+            parts = _split_rule_paths(sec_rules)
+            if len(parts) == 1:
+                content = "\n\n---\n\n".join(
+                    f"<!-- {p.name} -->\n\n{p.read_text(encoding='utf-8', errors='ignore').strip()}"
+                    for p in parts[0])
+                subs.append((f"rules-sec{sec}.md", content))
+            else:
+                for i, chunk in enumerate(parts, 1):
+                    content = "\n\n---\n\n".join(
+                        f"<!-- {p.name} -->\n\n{p.read_text(encoding='utf-8', errors='ignore').strip()}"
+                        for p in chunk)
+                    subs.append((f"rules-sec{sec}-part{i}.md", content))
 
     # extensions + catalogue (4..5)
     if level_idx >= 6:
