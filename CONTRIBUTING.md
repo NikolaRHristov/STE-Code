@@ -34,7 +34,7 @@ STE-Code inherits 19 technical noun categories from ASD-STE100. If you believe a
 
 ### Improve Adaptation Rules
 
-The 53 writing rules and 4 General Rules (GR1–GR4) were adapted from aerospace English into the code domain. If a rule produces awkward output for a specific language or framework:
+The 54 writing rules and 4 General Rules (GR1–GR4) were adapted from aerospace English into the code domain. If a rule produces awkward output for a specific language or framework:
 
 1. Confirm the rule aligns with ASD-STE100 Issue 9 structure.
 2. Provide a **before/after example pair** showing the problem and the proposed fix.
@@ -242,7 +242,7 @@ A non-zero exit code indicates at least one rail failure. The checker reports th
 All 6 artifacts in `ste-code/artifacts/` must be consistent:
 
 1. **System prompt** (`ste-code-distilled-system-prompt.txt`): ~1,200 tokens. Must contain all 14 principles.
-2. **Self-reading manual** (`ste-code-self-reading-manual.txt`): Must contain all 51 adapted rules (9 sections), 17 domain extensions, and the synonym table.
+2. **Self-reading manual** (`ste-code-self-reading-manual.txt`): Must contain all 54 adapted rules (9 sections), 17 domain extensions, and the synonym table.
 3. **Extraction methodology** (`ste-code-extraction-methodology.txt`): Must describe the 6-pass pipeline with turn-by-turn protocol.
 4. **Example turn** (`ste-code-example-turn.txt`): Must include a before/after pair with a changes table and metrics.
 5. **Deployment guide** (`ste-code-deployment-guide.txt`): Must cover at least 7 deployment options.

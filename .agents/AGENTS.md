@@ -69,7 +69,7 @@ Extraction → Refinement → Merge → Adaptation → Artifacts
 | 6 | STE-Code Analysis | Paradigm-agnostic (OOP/FP/procedural/systems). Produces STE-Code compliant docs + self-audit |
 | 7 | Level Worker | Parameterized worker. Receives level (1-5) + action (test/rewrite/benchmark), loads rules at that depth |
 | 8 | Extension Worker | Generates code-domain gap fillers using batched poll workers. Dictionary entries, category examples, anti-patterns, domain extensions |
-| 9 | Translation Orchestrator | Discovery-based locale scaffolding. Blank placeholders for all translatable content across 9 locales |
+| 9 | Translation Orchestrator | Discovery-based locale scaffolding. Blank placeholders for all translatable content across 10 locales |
 
 ## Adaptation Levels
 
@@ -181,7 +181,7 @@ python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pai
 | Extraction | `skills/extraction/SKILL.md` | 109 parallel workers, 4 pages each, 37 batches |
 | Refinement | `skills/refinement/SKILL.md` | 9 formatting rules, section-aware v2 workers |
 | Merging | `skills/grouping/SKILL.md` | Deterministic grouping (concat+split, MANIFEST-driven, no LLM) → `ste-code/grouped/` |
-| Adaptation | `skills/adaptation/SKILL.md` | 53 rules → code domain, 19 categories; orchestrated per-section, gated |
+| Adaptation | `skills/adaptation/SKILL.md` | 53 source rules → 54 code-domain rules, 22 categories; orchestrated per-section, gated |
 | Artifacts | `skills/artifacts/SKILL.md` | Final deliverables assembled from `adapted/`; coverage-verified |
 | Auditing | `skills/auditing/SKILL.md` | 8-rail verification, fabrication detection |
 | Validation | `skills/validation/SKILL.md` | Per-batch quality checks, spot-checks |
@@ -189,7 +189,7 @@ python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pai
 | Benchmarking | `skills/benchmarking/SKILL.md` | 59 tests, 14 categories, control group |
 | Level Worker | `skills/level-worker/SKILL.md` | 4 parallel workers at levels 1-4 using agent runner |
 | Extension Worker | `skills/extension-worker/SKILL.md` | Markdown-first gap-fill generation (orchestrated via `phase-e-run.py`); JSON derived |
-| Translations | `skills/translations/SKILL.md` | Multi-locale placeholder pipeline, 9 locales, ~540 files, batch-of-3 workers |
+| Translations | `skills/translations/SKILL.md` | Multi-locale placeholder pipeline, 10 locales, ~540 files, batch-of-3 workers |
 | State Report | `skills/state-report/SKILL.md` | Standardized pipeline state format |
 | Execution Auditor | `skills/execution-auditor/SKILL.md` | Hidden agent for forensic disk verification |
 

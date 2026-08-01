@@ -3,11 +3,14 @@ message: "If you use STE-Code in your research, please cite it as follows."
 title: "STE-Code: Simplified Technical English for Code Documentation"
 abstract: >-
   STE-Code adapts the ASD-STE100 Issue 9 aerospace technical writing standard
-  (434 pages, 53 rules, 19 categories) into a code documentation domain. It
-  provides 6 deployable artifacts including a distilled system prompt,
-  self-reading manual, extraction methodology, worked examples, and deployment
-  guides. The 5-stage pipeline uses 109 parallel LLM workers for extraction,
-  refinement, adaptation, and enrichment.
+  (434 pages, fifty-three rules, nineteen technical-noun categories) into a
+  code documentation domain, yielding 54 code-domain rules across 9 sections,
+  4 General Rules, and 22 categories. It ships the standard at eight levels of
+  strictness, from a 1.2K-token core to the full 134K-token specification, plus
+  a controlled vocabulary, a synonym table, and consolidated llms.txt
+  artifacts. The six-stage pipeline (extraction, refinement, grouping,
+  adaptation, extension, artifacts) uses parallel LLM workers with
+  deterministic verification between stages.
 authors:
   - family-names: "Hristov"
     given-names: "Nikola R."
@@ -17,7 +20,7 @@ repository-code: "https://github.com/NikolaRHristov/STE-Code"
 url: "https://github.com/NikolaRHristov/STE-Code"
 license: MIT
 version: 1.0.0
-date-released: "2026-07-30"
+date-released: "2026-08-01"
 keywords:
   - "simplified-technical-english"
   - "code-documentation"

@@ -1,0 +1,97 @@
+name: Release maintenance
+
+# Two jobs:
+#   drift  — every push and PR: fail when a documented count, badge, or version
+#            disagrees with what is actually on disk.
+#   release — manual: run the full release (sync, changelog, tag, publish).
+
+on:
+  push:
+    branches: [Current]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Target version (X.Y.Z). Leave empty to only check drift."
+        required: false
+        type: string
+      bump:
+        description: "Version bump when no explicit version is given"
+        required: false
+        default: "none"
+        type: choice
+        options: [none, patch, minor, major]
+      execute:
+        description: "Apply the release. Unchecked = dry run."
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  drift:
+    name: Fact drift
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tokenizer
+        run: python -m pip install --upgrade pip tiktoken
+
+      - name: Report measured facts
+        run: python3 .agents/tools/release/facts.py
+
+      - name: Check for drifted claims
+        run: python3 .agents/tools/release/scan.py
+
+  release:
+    name: Release
+    if: github.event_name == 'workflow_dispatch' && (inputs.version != '' || inputs.bump != 'none')
+    needs: drift
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tokenizer
+        run: python -m pip install --upgrade pip tiktoken
+
+      - name: Configure git identity
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.version }}" ]; then
+            ARGS="--version ${{ inputs.version }}"
+          else
+            ARGS="--bump ${{ inputs.bump }}"
+          fi
+          if [ "${{ inputs.execute }}" = "true" ]; then
+            ARGS="$ARGS --execute"
+          else
+            ARGS="$ARGS --dry-run"
+          fi
+          python3 .agents/tools/release/release.py $ARGS --branch Current
