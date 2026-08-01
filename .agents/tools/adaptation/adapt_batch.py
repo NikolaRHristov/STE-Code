@@ -72,6 +72,19 @@ SECTIONS = {
 TOTAL_SECTIONS = len(SECTIONS)
 
 # Section heading patterns used to slice source text out of grouped/*.md.
+#
+# TWO shapes are accepted, in priority order:
+#   1. The GROUP header that Phase C actually emits: `# Rules Sec N`. Grouping
+#      names a group by its plan label, so the canonical spec titles
+#      ("1. Words", "3. Verbs") do NOT survive into grouped/*.md — matching only
+#      on them silently yielded 0/9 sections and every worker got the
+#      "(section text not found)" fallback prompt.
+#   2. The canonical spec heading `# N. Title`, kept as a fallback so this still
+#      works against raw/refined text or a future grouping that preserves titles.
+_SECTION_GROUP_RE = {
+    n: re.compile(rf"^#+\s*Rules\s+Sec\s+{n}\b", re.I | re.M)
+    for n in range(1, 10)
+}
 _SECTION_HEAD_RE = {
     1: re.compile(r"^#+\s*1[\.\s]+Words", re.I | re.M),
     2: re.compile(r"^#+\s*2[\.\s]+Multi-word\s+Nouns", re.I | re.M),
@@ -83,6 +96,23 @@ _SECTION_HEAD_RE = {
     8: re.compile(r"^#+\s*8[\.\s]+Punctuation", re.I | re.M),
     9: re.compile(r"^#+\s*9[\.\s]+Writing\s+Practices", re.I | re.M),
 }
+
+
+def _find_section_head(section_num: int, text: str, pos: int = 0):
+    """First match for a section heading in either accepted shape."""
+    for table in (_SECTION_GROUP_RE, _SECTION_HEAD_RE):
+        m = table[section_num].search(text, pos)
+        if m:
+            return m
+    return None
+
+
+# Terminator for the LAST rule section (9). Phase C emits one `# <Title>` header
+# per group; the first of these that is not a rules group ends the rule text.
+# Order in grouped/: … Rules Sec 9 → Dictionary Intro → Dict A B → … → Appendix.
+_NON_RULES_GROUP_RE = re.compile(
+    r"^#\s*(?:Dictionary\s+Intro|Dict\s+[A-Z]|Appendix)\b", re.I | re.M
+)
 
 # Aerospace terms that must NOT appear outside "## Original Rule" blocks.
 AEROSPACE_TERMS = [
@@ -138,22 +168,31 @@ def extract_section_source(section_num: int, grouped_text: str) -> str:
     """Slice the source rules for one adaptation section out of grouped text.
 
     Finds the section heading, then takes everything up to the next section
-    heading (or end). Robust to grouping's internal reorganization because it
-    keys on the canonical rule-section titles, not group boundaries.
+    heading (or end). Accepts both the `# Rules Sec N` group header that Phase C
+    emits and the canonical `# N. Title` spec heading (see _find_section_head).
+
+    Section 9 is special: it is the LAST rule section, so there is no section-10
+    heading to stop at and a naive slice runs on through the whole dictionary
+    (~570k chars — it would blow the worker's context and bury the rules). It is
+    therefore terminated at the first non-rules group header that follows.
     """
-    head = _SECTION_HEAD_RE[section_num]
-    m = head.search(grouped_text)
+    m = _find_section_head(section_num, grouped_text)
     if not m:
         return ""
     start = m.start()
     # Find the next section heading after this one.
-    rest = grouped_text[m.end():]
     end = len(grouped_text)
     for nxt in range(section_num + 1, 10):
-        nm = _SECTION_HEAD_RE[nxt].search(rest)
+        nm = _find_section_head(nxt, grouped_text, m.end())
         if nm:
-            end = m.end() + nm.start()
+            end = nm.start()
             break
+    else:
+        # No later rule section (i.e. section 9): stop at the next group header
+        # that is not part of the rules (dictionary, appendix, …).
+        tail = _NON_RULES_GROUP_RE.search(grouped_text, m.end())
+        if tail:
+            end = tail.start()
     return grouped_text[start:end].strip()
 
 

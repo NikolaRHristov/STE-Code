@@ -104,8 +104,16 @@ def classify_page(page: int, page_id: Optional[str]) -> Tuple[str, Optional[str]
     key: for RULES = chapter number (str '1'..'9'); for DICT = letter 'A'..'Z';
          else None.
 
-    Classification is by MANIFEST page-ID prefix (churn-proof). Pages past the
-    MANIFEST (427-434) fall through to APPENDIX by page number.
+    SECTION is classified by MANIFEST page-ID prefix (churn-proof). Pages past
+    the MANIFEST (427-434) fall through to APPENDIX by page number.
+
+    The DICT *letter* key is NOT taken from the MANIFEST — see
+    `dict_letter_for_page`. The spec's own pagination drifts ~1 page ahead of the
+    letter content it labels (blank/continuation pages carry the NEXT letter's
+    page-ID), so `2-1-E1..E6` (pages 219-224) actually still hold D-entries and
+    real E starts on page 225. Trusting the ID there files D-words into the E-F
+    bucket (user-visible bug). The letter is therefore derived from the page's
+    real entry content, with the MANIFEST letter as fallback.
     """
     if page_id is None:
         return "APPENDIX", None
@@ -138,11 +146,127 @@ def classify_page(page: int, page_id: Optional[str]) -> Tuple[str, Optional[str]
         return "DICT_INTRO", None
     md = re.match(r"^2-1-([A-Z])", page_id)
     if md:
-        return "DICT", md.group(1)
+        return "DICT", dict_letter_for_page(page, md.group(1))
     if page_id.startswith("2-1-"):
-        return "DICT", None  # dict page whose letter didn't parse — still DICT
+        return "DICT", dict_letter_for_page(page, None)
 
     return "APPENDIX", None  # unknown prefix → appendix (never dropped)
+
+
+# ───────────────────────────────────────────────────────────────────────────
+# DICT letter oracle — derived from CONTENT, not the MANIFEST page-ID
+# ───────────────────────────────────────────────────────────────────────────
+# WHY: the spec's pagination drifts ~1 page ahead of the letter it labels. 32
+# dictionary boundary pages are affected across A..Y; e.g. pages 219-224 carry
+# page-IDs `2-1-E1..E6` but still hold D-entries (differentiate, difficult,
+# dilute...), and real E ("ENTRY", "EQUAL") only starts on page 225. Blank and
+# continuation pages inherit the NEXT letter's ID, which is what shifts them.
+# Grouping by the ID therefore files D-words into the E-F bucket — the exact
+# symptom reported. So we read the page's REAL first-entry letters and use the
+# dominant one, falling back to the MANIFEST letter when a page has no parseable
+# entries (blank page, pure continuation, picture-only).
+#
+# This oracle reads the refined corpus, so it is cached per-process: build_plan
+# calls classify_page for all 434 pages and must stay cheap.
+
+# A dictionary ENTRY headword line, in any of the three refined shapes:
+#   `| WORD (n) | ...`          clean GFM table row
+#   `|**word (v) — UNAPPROVED**|...`  messy multi-column row (bold, empty leads)
+#   `#### WORD (n) — APPROVED`  heading-block entry
+_DICT_ENTRY_PATTERNS = [
+    re.compile(r"^\|+\s*\*{0,2}([A-Za-z])[A-Za-z\-' ]*\s*\(", re.I),   # table row w/ (POS)
+    re.compile(r"^#{2,4}\s+\*{0,2}([A-Za-z])[A-Za-z\-' ]*\s*\(", re.I),  # #### WORD (POS)
+]
+
+
+def _page_entry_letters(body: str) -> List[str]:
+    """Every dictionary-entry initial letter on a page body, in order.
+
+    Skips table headers, separator rows, and continuation rows (a row whose
+    first cell is empty continues the entry above and carries no headword).
+    """
+    out: List[str] = []
+    for raw in body.splitlines():
+        s = raw.strip()
+        if not s:
+            continue
+        if _DICT_HDR_LINE_RE.match(s) or _SEP_LINE_RE.match(s):
+            continue
+        if _PAGE_LINE_RE.match(s):
+            continue
+        for pat in _DICT_ENTRY_PATTERNS:
+            m = pat.match(s)
+            if not m:
+                continue
+            # For a table row, ensure the FIRST cell is a real headword and not
+            # a continuation (empty first cell) — `|` splitting makes that easy.
+            if s.startswith("|"):
+                cells = [c.strip().strip("*") for c in s.split("|")]
+                first = next((c for c in cells[1:] if c != ""), "")
+                if not first or not first[0].isalpha():
+                    break
+                out.append(first[0].upper())
+            else:
+                out.append(m.group(1).upper())
+            break
+    return out
+
+
+_PAGE_LETTER_CACHE: Dict[int, Optional[str]] = {}
+_PAGE_LETTER_BUILT = False
+
+
+def _build_page_letter_cache() -> None:
+    """Populate page → dominant content letter for every refined dict page.
+
+    Reads each refined file ONCE and splits it into page bodies with the same
+    segmenter the assembler uses, so the letter oracle and the copy path always
+    agree about what lives on a page.
+
+    IMPORTANT — only SINGLE-PAGE segments are trusted. A merged (C_merged)
+    segment covers several pages with no internal markers, so its dominant
+    letter cannot be attributed to any one page; spreading it across the range
+    both mis-labels pages and produces non-contiguous buckets (the plan must
+    stay a contiguous tiling of 1..434). Merged pages therefore fall back to the
+    MANIFEST letter, and the straddler splitter still fixes the boundary inside
+    the file at assembly time.
+    """
+    global _PAGE_LETTER_BUILT
+    if _PAGE_LETTER_BUILT:
+        return
+    _PAGE_LETTER_BUILT = True  # set first: a failure must not cause a retry loop
+    try:
+        id2pos = id_to_position(parse_manifest())
+        idx = index_refined()
+        seen: Dict[str, RefinedFile] = {}
+        for p in range(1, TOTAL_PAGES + 1):
+            rf = idx.get(p)
+            if rf and rf.path.name not in seen:
+                seen[rf.path.name] = rf
+        for rf in seen.values():
+            for start, end, text in file_segments(rf, id2pos):
+                if start != end:
+                    continue  # merged segment — not attributable to a single page
+                letters = _page_entry_letters(text)
+                if not letters:
+                    continue
+                _PAGE_LETTER_CACHE[start] = collections.Counter(letters).most_common(1)[0][0]
+    except Exception:
+        # Never let the oracle break planning — fall back to MANIFEST letters.
+        pass
+
+
+def dict_letter_for_page(page: int, manifest_letter: Optional[str]) -> Optional[str]:
+    """Letter bucket for a dictionary page: content first, MANIFEST as fallback.
+
+    Only pages whose content we can attribute unambiguously (a single-page
+    segment) override the MANIFEST. Merged segments and unparseable pages keep
+    the MANIFEST letter so the plan stays a contiguous, monotonic tiling; the
+    straddler splitter fixes letter boundaries *inside* a merged file at
+    assembly time.
+    """
+    _build_page_letter_cache()
+    return _PAGE_LETTER_CACHE.get(page) or manifest_letter
 
 
 # ───────────────────────────────────────────────────────────────────────────
