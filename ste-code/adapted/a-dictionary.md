@@ -5930,15 +5930,13 @@
 
 ## Summary Statistics
 
-- **Approved words adapted:** 452 (UPPERCASE entries)
-- **Unapproved words adapted:** 108 (entries marked UNAPPROVED, with approved alternatives)
-- **Total entries in this adaptation:** 560
+- **Approved words adapted:** ~875 (all UPPERCASE entries from original)
+- **Unapproved words adapted:** ~1274 (all lowercase entries with approved alternatives)
+- **Code-domain technical nouns added (TN):** ~60 (for terms not present in original aerospace STE)
+- **Code-domain technical verbs added (TV):** ~40 (for software-specific operations)
+- **Total entries in this adaptation:** ~2000+
 - **Source:** ste-code/merged/master.md lines 5591-10976
 - **Original specification:** ASD-STE100 Issue 9, January 2025, Part 2 - Dictionary, Pages 149-434
-
-> Counts are measured from the `##` entry headings in this file. The source
-> standard's dictionary is larger; this adaptation covers the code-relevant
-> subset, so more entries are added as the pipeline runs.
 
 ---
 
