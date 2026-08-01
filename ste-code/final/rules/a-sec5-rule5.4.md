@@ -126,6 +126,8 @@ Error messages must tell the user what went wrong and what to do. The condition-
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: `Before you remove the clamp, you must disconnect the hose.`  |  STE: `Before you remove the clamp, disconnect the hose.`
+
 > **Non-STE:** Before you change the database schema you must shut down the application server and stop all background worker processes that are connected to the database.
 >
 > **STE:** Before you change the database schema, shut down the application server and stop all background worker processes that connect to the database.
@@ -146,7 +148,7 @@ Error messages must tell the user what went wrong and what to do. The condition-
 | --- | --- |
 | WRITE: | When the configuration file fails to load, the application uses the default settings from the built-in configuration provider. |
 
-> *Adapted from spec: comma placement guidance — the comma shows where the condition ends and the main clause begins.*
+> *Adapted from spec pair:* Non-STE: `When the configuration file fails to load the application uses the default settings...`  |  STE: `When the configuration file fails to load, the application uses the default settings...` (comma placement guidance — the comma shows where the condition ends and the main clause begins.)
 
 (The comma after "load" is necessary to show where the condition ends and the main clause begins.)
 
@@ -186,13 +188,53 @@ Each example below shows a real code documentation scenario. The Non-STE version
 >
 > *Principle applied: P1 ("push" instead of "pushes"), P5 (Docker as technical noun), P8. The condition "After all tests pass and the security scan finds no vulnerabilities" comes first. The comma separates the condition from the main clause "the deployment pipeline pushes." The original buried the condition after the action.*
 
+Full configuration that the documentation describes:
+
+```yaml
+# .github/workflows/deploy.yml
+name: deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test                 # unit + integration tests
+      - run: npm run scan             # security vulnerability scan
+      - name: push image
+        run: docker push registry.example.com/app:${{ github.sha }}
+```
+
+The STE version of the surrounding README instruction reads: "After all tests pass and the security scan finds no vulnerabilities, the deployment pipeline pushes the Docker image to the container registry."
+
 #### Example 2 — Database Migration Rollback
 
 > **Non-STE:** You can manually revert the migration by executing the down script but first make sure that no other instances of the application are currently connected to the database because concurrent schema changes will corrupt the migration history table.
 >
 > **STE:** Before you run the down script, make sure that no other application instances connect to the database. Then, run the down script to revert the migration.
 >
-> *Principle applied: P1 ("run" instead of "execute," "make sure" instead of "verify that" per synonym table context), P5 (down script as technical noun). The condition "Before you run the down script" comes first. Two separate sentences keep each step clear. The NOTICE "Concurrent schema changes can corrupt the migration history table" is implied but could be added as a separate NOTE line.*
+> *Principle applied: P1 ("run" instead of "execute," "make sure" instead of "verify that" per synonym table context), P5 (down script as technical noun). The condition "Before you run the down script" comes first. Two separate sentences keep each step clear.*
+
+Supporting migration files:
+
+```sql
+-- migrations/0042_add_audit_log.up.sql
+CREATE TABLE audit_log (id BIGSERIAL PRIMARY KEY, event TEXT NOT NULL);
+
+-- migrations/0042_add_audit_log.down.sql
+DROP TABLE audit_log;
+```
+
+```bash
+# Run the rollback. The STE instruction applies:
+# Before you run the down script, make sure that no other application instances connect to the database.
+psql "$DATABASE_URL" -f migrations/0042_add_audit_log.down.sql
+```
+
+NOTE: Concurrent schema changes can corrupt the migration history table.
 
 #### Example 3 — Terraform Infrastructure as Code
 
@@ -202,6 +244,23 @@ Each example below shows a real code documentation scenario. The Non-STE version
 >
 > *Principle applied: P2, P5 (terraform commands as technical nouns), P8. Three separate steps. Each condition-command pair is its own sentence. "Before you run `terraform apply`, run `terraform plan`" places the prerequisite condition first.*
 
+```hcl
+# main.tf
+resource "aws_s3_bucket" "logs" {
+  bucket = "app-logs-prod"
+}
+```
+
+```bash
+# STE-ordered commands:
+# Before you run terraform apply, run terraform plan.
+terraform plan -out=tfplan
+# Check the plan output for unexpected resource destruction.
+terraform show tfplan
+# If the plan is correct, run terraform apply.
+terraform apply tfplan
+```
+
 #### Example 4 — Kubernetes Pod Troubleshooting
 
 > **Non-STE:** To figure out why the pod keeps restarting you should describe the pod to see its events and check the logs of the previous container instance with the --previous flag if the current container is still running.
@@ -209,6 +268,16 @@ Each example below shows a real code documentation scenario. The Non-STE version
 > **STE:** If a pod restarts again and again, get its events. Run `kubectl describe pod <name>`. To see the logs from the previous container instance, use the `--previous` flag.
 >
 > *Principle applied: P1 ("get" instead of "to figure out," "use" instead of "check"), P5 (kubectl, pod as technical nouns), P8. The condition "If a pod restarts again and again" comes first. The infinitive phrase "To see the logs..." is an alternative condition form. Both place the condition before the command.*
+
+```bash
+# STE-ordered troubleshooting:
+# If a pod restarts again and again, get its events.
+kubectl get events --field-selector involvedObject.kind=Pod
+# Run kubectl describe pod <name>.
+kubectl describe pod payment-worker-7c9f4
+# To see the logs from the previous container instance, use the --previous flag.
+kubectl logs payment-worker-7c9f4 --previous
+```
 
 #### Example 5 — SQL Query Documentation
 
@@ -218,6 +287,16 @@ Each example below shows a real code documentation scenario. The Non-STE version
 >
 > *Principle applied: P1, P5 (SQL keywords as technical nouns), P8. Two sentences. The first is a direct command (Rule 5.3 — imperative form). The second uses condition-before-command: "If you do not include a `WHERE` clause" comes first, then the descriptive result. This warns the reader about the consequence of violating the instruction.*
 
+```sql
+-- Correct: a WHERE clause limits the update.
+UPDATE accounts SET balance = balance - 100 WHERE id = 42;
+
+-- Violation: no WHERE clause. The statement updates all rows in the table.
+UPDATE accounts SET balance = 0;
+```
+
+The documentation warns: "Always include a `WHERE` clause in an `UPDATE` statement. If you do not include a `WHERE` clause, the statement updates all rows in the table."
+
 #### Example 6 — Git Workflow Documentation
 
 > **Non-STE:** You should rebase your feature branch onto the latest main branch to incorporate upstream changes and resolve any merge conflicts locally instead of during the pull request review process but only after you have committed or stashed all of your current work.
@@ -225,6 +304,16 @@ Each example below shows a real code documentation scenario. The Non-STE version
 > **STE:** Before you rebase your feature branch, commit or stash your current work. After you commit or stash your work, rebase your feature branch onto the latest `main` branch. If merge conflicts occur, resolve them locally.
 >
 > *Principle applied: P1 ("rebase" as technical verb per P12), P5 (branch as technical noun), P8. Three separate condition-command pairs. Each condition comes first. The comma separates the condition from the command in every sentence. The original nested three conditions inside one sentence, violating the one-condition-per-step principle.*
+
+```bash
+# STE-ordered workflow:
+# Before you rebase your feature branch, commit or stash your current work.
+git add -A && git commit -m "WIP: in-progress change"
+# After you commit or stash your work, rebase your feature branch onto main.
+git fetch origin && git rebase origin/main
+# If merge conflicts occur, resolve them locally.
+git status   # shows the conflicting files; open and edit them, then git add
+```
 
 ## Paradigm-Specific Guidance
 
@@ -242,6 +331,15 @@ State the precondition before the method call instruction. If a method mutates o
 >
 > *Principle applied: P1, P5 (`.save()` as technical noun). Two sentences. The condition "After the entity passes validation" comes before the command.*
 
+```python
+# STE documentation for the method:
+# Set all required fields on the entity.
+entity.name = "billing-service"
+entity.port = 8080
+# After the entity passes validation, call .save().
+entity.save()   # raises ValidationError if a required field is empty
+```
+
 For constructor documentation, state the preconditions that must be true before object creation.
 
 > **Non-STE:** Constructs a new HttpClient instance with the provided configuration. The configuration object must not be null and must have at least a base URL set otherwise an IllegalStateException will be thrown at construction time.
@@ -249,6 +347,18 @@ For constructor documentation, state the preconditions that must be true before 
 > **STE (Java):** Make a new `HttpClient` instance with the specified configuration. If the configuration is `null`, the constructor throws `IllegalStateException`. If the base URL is not set, the constructor throws `IllegalStateException`.
 >
 > *Principle applied: P1 ("make" instead of "constructs"), P5 (`HttpClient`, `IllegalStateException` as technical nouns). Each error condition is a separate condition-result pair.*
+
+```java
+// STE constructor contract:
+// Make a new HttpClient instance with the specified configuration.
+// If the configuration is null, the constructor throws IllegalStateException.
+// If the base URL is not set, the constructor throws IllegalStateException.
+public HttpClient(Config config) {
+    if (config == null) throw new IllegalStateException("config is null");
+    if (config.baseUrl() == null) throw new IllegalStateException("base URL not set");
+    this.config = config;
+}
+```
 
 ### Functional Programming (Haskell, Elixir, Clojure, Rust)
 
@@ -262,11 +372,28 @@ State the input condition before describing the transformation. Use the conditio
 >
 > *Principle applied: P1, P5 (Haskell types as technical nouns). Each case is a condition-before-result pair. The comma separates the condition from the result clause.*
 
+```haskell
+-- STE documentation:
+-- If the list is not empty, the function returns Just (head list).
+-- If the list is empty, the function returns Nothing.
+safeHead :: [a] -> Maybe a
+safeHead []     = Nothing
+safeHead (x:xs) = Just x
+```
+
 > **Non-STE:** unwrap_or() returns the contained Some value or a provided default if the Option is None and panics if called on a None value with unwrap() instead of unwrap_or().
 >
 > **STE (Rust):** If the `Option` is `Some(value)`, `unwrap_or(default)` returns `value`. If the `Option` is `None`, `unwrap_or(default)` returns `default`. NOTE: Do not use `unwrap()` on a `None` value. `unwrap()` causes a panic on `None`.
 >
 > *Principle applied: P5 (Rust types and methods as technical nouns), P8. Each branch is a separate condition-result pair. The NOTE uses imperative form (Rule 5.5 — notes give information, not instructions; here the instruction is acceptable as a warning).*
+
+```rust
+// STE documentation:
+// If the Option is Some(value), unwrap_or(default) returns value.
+// If the Option is None, unwrap_or(default) returns default.
+// NOTE: Do not use unwrap() on a None value. unwrap() causes a panic on None.
+let config = settings.get("timeout").unwrap_or(default_timeout);
+```
 
 ### Procedural Programming (C, Go, Bash)
 
@@ -280,11 +407,37 @@ State the system-state condition before the action. In Bash scripts and Makefile
 >
 > *Principle applied: P1 ("read" instead of "reads"), P5 (Go type notation as technical noun). The precondition "If the file does not exist" comes before the result clause.*
 
+```go
+// STE documentation:
+// Read the file at path into memory.
+// Return the contents as a []byte.
+// If the file does not exist, the function returns an error.
+// If the file is not readable, the function returns an error.
+func ReadAll(path string) ([]byte, error) {
+    data, err := os.ReadFile(path)
+    if err != nil {
+        return nil, fmt.Errorf("read %s: %w", path, err)
+    }
+    return data, nil
+}
+```
+
 > **Non-STE:** Kill the process using the PID from the lockfile after checking that the process is actually still running and the PID hasn't been reused by the operating system for a different process.
 >
 > **STE (Bash script comment):** If the process is still running, stop it. Use the PID from the lockfile. Before you stop the process, make sure that the PID is correct.
 >
 > *Principle applied: P1 ("stop" instead of "kill"), P5 (PID as technical noun). The condition "If the process is still running" comes first, followed by the command "stop it."*
+
+```bash
+# STE-ordered shutdown:
+# If the process is still running, stop it.
+# Use the PID from the lockfile.
+PID=$(cat /var/run/app.pid)
+# Before you stop the process, make sure that the PID is correct.
+if kill -0 "$PID" 2>/dev/null; then
+  kill "$PID"
+fi
+```
 
 ### Declarative Programming (SQL, Terraform, Kubernetes YAML)
 
@@ -296,6 +449,15 @@ Declarative documentation describes desired state, not procedural steps. However
 >
 > *Principle applied: P1, P5 (`terraform destroy` as technical noun). Three sentences. The condition "Before you run `terraform destroy`" comes first. Each prerequisite is its own step.*
 
+```bash
+# STE-ordered teardown:
+# Before you run terraform destroy, back up all important data.
+aws s3 sync s3://app-state-prod s3://app-state-backup-$(date +%F)
+# Make sure that no other teams use the resources.
+# Then, run terraform destroy.
+terraform destroy -auto-approve
+```
+
 For SQL documentation, state the condition for a query or mutation before the statement.
 
 > **Non-STE:** The DELETE FROM statement removes rows from the table but you must run it inside a transaction if you want to be able to roll back the deletion in case you made a mistake with the WHERE clause.
@@ -303,6 +465,15 @@ For SQL documentation, state the condition for a query or mutation before the st
 > **STE:** Run `DELETE FROM` inside a transaction. If you do not use a `WHERE` clause, the statement removes all rows. If the `WHERE` clause is incorrect, you can roll back the transaction.
 >
 > *Principle applied: P1, P5 (SQL keywords as technical nouns). The imperative command "Run `DELETE FROM` inside a transaction" comes first (Rule 5.3). The conditions "If you do not use..." and "If the `WHERE` clause is incorrect..." each precede their result clauses.*
+
+```sql
+-- STE documentation:
+-- Run DELETE FROM inside a transaction.
+BEGIN;
+DELETE FROM sessions WHERE expires_at < now();
+-- If the WHERE clause is incorrect, you can roll back the transaction.
+ROLLBACK;   -- or COMMIT; once you confirm the row count
+```
 
 ### Systems Programming (Rust Ownership, C Memory Management)
 
@@ -316,11 +487,33 @@ State the safety condition before the operation. Use WARNING or BREAKING prefixe
 >
 > *Principle applied: P5 (Rust keyword as technical noun), P8. The condition "Before you call an `unsafe` function" comes first. The WARNING uses the condition-before-command pattern inside a safety instruction (see Rule 7.2).*
 
+```rust
+// STE documentation for the raw pointer dereference:
+// Before you call an unsafe function, read its safety documentation.
+// Make sure that your code upholds all documented safety invariants.
+// WARNING: IF YOUR CODE DOES NOT UPHOLD THE SAFETY INVARIANTS, THE PROGRAM CAN HAVE UNDEFINED BEHAVIOR.
+unsafe fn deref(ptr: *const u32) -> u32 {
+    *ptr   // caller must ensure ptr is non-null and points to valid memory
+}
+```
+
 > **Non-STE:** Call free() on the pointer to release the dynamically allocated memory back to the heap after making absolutely sure that no other part of the program still holds a reference to that memory because use-after-free is a critical security vulnerability.
 >
 > **STE (C):** Before you call `free(ptr)`, make sure that no other code uses `ptr`. WARNING: IF YOU CALL `free(ptr)` AND OTHER CODE STILL USES `ptr`, THE PROGRAM CAN HAVE A USE-AFTER-FREE VULNERABILITY. AFTER YOU CALL `free(ptr)`, DO NOT USE `ptr`.
 >
 > *Principle applied: P1 ("call" as approved verb), P5 (C function as technical noun). The condition "Before you call `free(ptr)`" comes first. The WARNING and the final command both follow the condition-before-command pattern.*
+
+```c
+/* STE documentation:
+   Before you call free(ptr), make sure that no other code uses ptr.
+   WARNING: IF YOU CALL free(ptr) AND OTHER CODE STILL USES ptr,
+   THE PROGRAM CAN HAVE A USE-AFTER-FREE VULNERABILITY.
+   AFTER YOU CALL free(ptr), DO NOT USE ptr. */
+void release(Buffer *ptr) {
+    free(ptr);   /* after this line, ptr is invalid */
+    ptr = NULL;
+}
+```
 
 ## Edge Cases
 
@@ -334,11 +527,26 @@ Some framework names are common English words that might appear in the STE-Code 
 >
 > *Principle applied: P5 (Next.js as framework name), P1. The word "start" is an approved STE-Code verb. "Next.js" is a framework name that includes a period, which is acceptable as a technical noun. The comma after "server" separates the condition from the command.*
 
+```bash
+# STE-ordered setup:
+# Before you start the Next.js development server, set the environment variables.
+echo "DATABASE_URL=postgres://localhost:5432/app" > .env.local
+npm run dev   # Next.js reads .env.local at startup and caches the values
+```
+
 > **Non-STE:** When you run the Express app in production mode it loads the production middleware stack that excludes the development-only error handler and the hot module replacement plugin.
 >
 > **STE:** When you run the Express application in production mode, it loads the production middleware stack.
 >
 > *Principle applied: P5 (Express as framework name). "Express" is both an English word and a framework name. In code documentation, it is a technical noun. The condition "When you run the Express application in production mode" comes first, separated by a comma.*
+
+```javascript
+// STE documentation:
+// When you run the Express application in production mode, it loads the production middleware stack.
+if (process.env.NODE_ENV === "production") {
+  app.use(productionMiddleware);   // no dev error overlay, no HMR
+}
+```
 
 ### Edge Case 2 — Code Keyword Inside the Condition Clause
 
@@ -350,11 +558,29 @@ Code keywords, function names, and variable names are technical nouns under Rule
 >
 > *Principle applied: P5 (code expression as technical noun). The condition clause contains a code expression with `&&`, `||`, and backticks. The comma after `` `true` `` separates the condition from the command. The reader can see where the condition ends because the comma follows the closing backtick.*
 
+```python
+# STE documentation:
+# If someCondition && anotherCondition || fallbackFlag is true, start the state transition.
+if some_condition and another_condition or fallback_flag:
+    start_state_transition()
+```
+
 > **Non-STE:** When `response.status === 429` the client should wait for the duration specified in the `Retry-After` header before retrying the request.
 >
 > **STE:** When `response.status === 429`, wait for the duration in the `Retry-After` header. Then, send the request again.
 >
 > *Principle applied: P5 (JavaScript expression as technical noun), P1 ("send... again" instead of "retrying"). The comma after the code expression `response.status === 429` (inside backticks) separates the condition from the command. Two sentences keep each action clear.*
+
+```javascript
+// STE documentation:
+// When response.status === 429, wait for the duration in the Retry-After header.
+// Then, send the request again.
+if (response.status === 429) {
+  const wait = Number(response.headers.get("Retry-After")) || 1;
+  await sleep(wait * 1000);
+  return sendRequestAgain();
+}
+```
 
 ### Edge Case 3 — Condition Clause Contains a Comma for a Different Reason
 
@@ -366,9 +592,17 @@ Sometimes a condition clause itself contains a comma (for example, a list of ite
 >
 > *Principle applied: P1, P8. The condition clause "If you change the database schema, the API contract, or the message queue format" contains internal commas (list separators). Adding another comma after "format" would create ambiguity. The STE version introduces the list in a separate descriptive sentence, then uses a simple condition clause "If you change one or more of these parts" that has no internal commas.*
 
-Alternative approach: use a semicolon-free restructuring.
+```yaml
+# config.yaml
+interface:
+  version: 3          # bump this number when you change a listed part
+  parts:
+    - database_schema
+    - api_contract
+    - message_queue_format
+```
 
-> **STE (alternative):** Before you change the database schema, the API contract, or the message queue format, update the version number in the configuration file.
+> STE (alternative): Before you change the database schema, the API contract, or the message queue format, update the version number in the configuration file.
 >
 > *This works when the condition is short enough that the reader can parse both the list commas and the separating comma. Use this pattern only when the condition clause has at most one internal comma. For longer lists, use the two-sentence approach above.*
 
@@ -382,11 +616,25 @@ Some documentation assumes the reader observes a condition from tool output (a l
 >
 > *Principle applied: P1 ("shows" instead of "you see"). The condition "If the terminal shows 'Connection refused'" comes first, separated by a comma. The observable output is the condition.*
 
+```bash
+# STE troubleshooting:
+# If the terminal shows "Connection refused," start the database server.
+pg_ctl start -D /var/lib/postgresql/data
+```
+
 > **Non-STE:** You'll know the build succeeded when you see "BUILD SUCCESSFUL" in the terminal output at which point you can proceed to deploy the artifact to the staging environment.
 >
 > **STE:** When the terminal shows "BUILD SUCCESSFUL," deploy the artifact to the staging environment.
 >
 > *Principle applied: P1, P5 (build output string as technical noun). The observable condition comes first. The comma separates it from the command.*
+
+```bash
+# STE-ordered release:
+# When the terminal shows "BUILD SUCCESSFUL," deploy the artifact to staging.
+./gradlew build
+# output: BUILD SUCCESSFUL
+aws s3 cp build/app.jar s3://staging-binaries/app.jar
+```
 
 ### Edge Case 5 — Generated Code and Automated Documentation
 
@@ -396,6 +644,19 @@ Generated documentation (from tools like Sphinx, JSDoc, godoc, or rustdoc) canno
 >
 > **Generated output (acceptable):** The function waits indefinitely if `timeout_ms` is `0`. (The generator placed the main clause first. This is acceptable for automated output, but the source docstring must follow Rule 5.4.)
 
+```python
+def await_ready(timeout_ms: int) -> bool:
+    """If timeout_ms is 0, the function waits indefinitely.
+
+    Args:
+        timeout_ms: Maximum wait time in milliseconds.
+    """
+    if timeout_ms == 0:
+        while not ready():
+            pass
+    return ready()
+```
+
 When you write generator templates that produce human-readable documentation (README generators, CLI help text templates), apply Rule 5.4 to the template text, not to the generated variable substitutions.
 
 > **Non-STE:** Run {{command}} to {{action}} after you {{condition}}.
@@ -403,6 +664,13 @@ When you write generator templates that produce human-readable documentation (RE
 > **STE (template):** After you {{condition}}, run {{command}} to {{action}}.
 >
 > *Principle applied: P1, P8. The template places the condition placeholder first, then the command. The generated output will inherit the correct structure regardless of the substituted values.*
+
+```jinja
+{# CLI help template — keeps the condition before the command #}
+{% for step in steps %}
+After you {{ step.condition }}, run `{{ step.command }}` to {{ step.action }}.
+{% endfor %}
+```
 
 ## Grammar Notes
 
@@ -488,10 +756,11 @@ The condition clause contains technical nouns (`kubectl`, `pods`, `ErrImagePull`
 
 ## Cross-References
 
-- **Rule 1.1 — Use Approved Words:** The condition clause and command must use words from the STE-Code dictionary. Technical code nouns are exempt under Rule 1.5.
-- **Rule 1.5 — Technical Code Nouns:** Keywords, frameworks, tool names, and file paths in condition clauses are technical nouns and are not subject to the approved-word dictionary.
-- **Rule 5.3 — Imperative (Command) Form for Instructions:** The command that follows the condition clause must use the imperative mood. Rule 5.4 supplies the condition; Rule 5.3 supplies the verb form.
-- **Rule 5.5 — Notes Give Information Only, Not Instructions:** If a condition does not lead to a command, it is a note, not an instruction. Do not use the condition-before-command pattern for notes. Use NOTE: instead.
-- **Rule 7.2 — Start a Safety Instruction with a Clear and Accurate Command or Condition:** When a condition clause leads to a safety-critical command, use the WARNING prefix. The condition-before-command pattern applies inside the safety instruction.
+> **See also:** Rule 1.1 — Use Approved Words: The condition clause and command must use words from the STE-Code dictionary. Technical code nouns are exempt under Rule 1.5.
+> **See also:** Rule 1.4 — Approved Verb Forms: The command that follows the condition clause must use an approved verb form. The condition clause may use tense-marked verbs ("runs," "starts," "fails") because conditions describe states, not actions.
+> **See also:** Rule 1.5 — Technical Code Nouns: Keywords, frameworks, tool names, and file paths in condition clauses are technical nouns and are not subject to the approved-word dictionary.
+> **See also:** Rule 5.3 — Imperative (Command) Form for Instructions: The command that follows the condition clause must use the imperative mood. Rule 5.4 supplies the condition; Rule 5.3 supplies the verb form.
+> **See also:** Rule 5.5 — Notes Give Information Only, Not Instructions: If a condition does not lead to a command, it is a note, not an instruction. Do not use the condition-before-command pattern for notes. Use NOTE: instead.
+> **See also:** Rule 7.2 — Start a Safety Instruction with a Clear and Accurate Command or Condition: When a condition clause leads to a safety-critical command, use the WARNING prefix. The condition-before-command pattern applies inside the safety instruction.
+
 - **STE-Code Dictionary:** Consult the dictionary for approved verbs ("start," "stop," "check," "make," "get," "set," "remove," "send," "show," "run," "use") and approved nouns to use in condition clauses. Use the synonym table to replace non-approved words ("verify" → "check," "obtain" → "get," "terminate" → "stop").
-- **Rule 1.4 — Approved Verb Forms:** The command that follows the condition clause must use an approved verb form. The condition clause may use tense-marked verbs ("runs," "starts," "fails") because conditions describe states, not actions.
