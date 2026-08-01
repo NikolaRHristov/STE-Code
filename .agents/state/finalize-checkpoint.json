@@ -1,1 +1,27 @@
-{"enrich": true, "done": ["a-sec1-rule1.10.md", "a-sec1-rule1.2.md", "a-sec1-rule1.14.md", "a-sec1-rule1.5.md", "a-sec1-rule1.7.md", "a-sec1-rule1.8.md", "a-sec2-rule2.1.md", "a-sec1-rule1.12.md", "a-sec1-rule1.13.md", "a-sec2-rule2.2.md"]}
+{
+  "enrich": true,
+  "done": [
+    "a-sec1-rule1.10.md",
+    "a-sec1-rule1.7.md",
+    "a-sec2-rule2.2.md",
+    "a-sec2-rule2.3.md",
+    "a-sec1-rule1.12.md",
+    "a-sec1-rule1.1.md",
+    "a-sec1-rule1.11.md",
+    "a-sec1-rule1.4.md",
+    "a-sec1-rule1.6.md",
+    "a-sec1-rule1.13.md",
+    "a-sec2-rule2.1.md",
+    "a-sec1-rule1.14.md",
+    "a-sec1-rule1.2.md",
+    "a-sec1-rule1.3.md",
+    "a-sec1-rule1.5.md",
+    "a-sec1-rule1.8.md",
+    "a-sec1-rule1.9.md",
+    "a-sec3-rule3.1.md",
+    "a-sec3-rule3.2.md",
+    "a-sec3-rule3.3.md",
+    "a-sec3-rule3.4.md",
+    "a-sec3-rule3.5.md"
+  ]
+}

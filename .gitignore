@@ -26,10 +26,15 @@ venv/
 .agents/audit/
 .agents/rewrites/
 .agents/telemetry/
-.agents/tmp/**/*.txt
+.agents/tmp/**
 ste-code/audit/
 
-# === Benchmark runtime artifacts ===
+# === Vendor reference corpora (cloned public repos — NOT source, do not commit) ===
+.agents/vendor/
+
+# === Benchmark sample-session artifacts (delegate sessions, all I/O in .agents/) ===
+.agents/benchmark/sample-session/**
+# === Benchmark runtime artifacts (legacy orchestrator) ===
 .agents/benchmark/results-control/
 .agents/benchmark/results-levels/*/level-*/run-*/bench-*-*.txt
 .agents/benchmark/results-levels/*/level-*/run-*/emergency-state.json
