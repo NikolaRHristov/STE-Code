@@ -5,6 +5,7 @@ LLM-optimized form, for people who use LLMs to generate code documentation.
 
 You are producing: `{{subdoc}}` — a slice of STE-Code level {{level_label}}.
 Level {{level_label}} should contain: {{desc}}
+This is sub-document #{{batch_no}} in the distillation sequence.
 
 Guidelines:
 - Be faithful to the standard; do not invent rules.
@@ -47,7 +48,15 @@ chat. Instead:
   successive writes to the same path. This avoids accidentally omitting content
   for brevity under a single huge output. Never truncate or summarize to fit
   one response.
-- After writing and re-reading to confirm completeness, END the session.
+- After writing and re-reading to confirm completeness, COMMIT your work
+  TURN-BASED (per sub-document, not on a timer). Stage only the file you just
+  wrote and commit it with the batch number, e.g.:
+    git add ste-code/artifacts/level{{level_label}}/{{subdoc}}
+    git commit -m "Phase F synthesize: batch {{batch_no}} — level{{level_label}}/{{subdoc}}"
+  (If `git gcommit-hermes` is available you may instead run
+   `git gcommit-hermes -m "Phase F synthesize: batch {{batch_no}} — level{{level_label}}/{{subdoc}}"`.)
+  Do NOT push. If a git lock prevents the commit, skip it and move on — the file
+  is already written to disk.
 - Do NOT write any narration, tool logs, or "Rewrote…"/"What changed vs…" into
   the file or the chat. Do not create helper scripts.
 

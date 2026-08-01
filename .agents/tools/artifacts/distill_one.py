@@ -53,8 +53,20 @@ def main():
     out_path = ARTIFACTS_DIR / tier_dir / subdoc
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Turn-based sequence counter so the worker can commit with a batch number.
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    counter_path = STATE_DIR / "distill-counter.json"
+    try:
+        counter = json.loads(counter_path.read_text()) if counter_path.exists() else {}
+    except Exception:
+        counter = {}
+    seq = int(counter.get("seq", 0)) + 1
+    counter["seq"] = seq
+    counter_path.write_text(json.dumps(counter))
+
     prompt = render_template(
-        PROMPT_MD, subdoc=subdoc, level_label=label, desc=desc, base_path=str(base_path))
+        PROMPT_MD, subdoc=subdoc, level_label=label, desc=desc, base_path=str(base_path),
+        batch_no=str(seq))
     tmp = PROJECT / ".agents" / "tmp"
     tmp.mkdir(parents=True, exist_ok=True)
     pf = tmp / f"distill-{tier_dir}-{subdoc}.txt"
