@@ -133,15 +133,19 @@ uncomment the `.agents/reference/` line in `lychee.toml`.
 DNS resolves (`95.96.176.48`) but the host does not accept connections (`curl` times out at 45 s).
 Host-side outage, not a checker artifact.
 
-### `ste-code/artifacts/` — 88 markdown files (⚠ PARTIAL — regeneration in flight)
+### `ste-code/artifacts/` — 102 markdown files (⚠ PARTIAL — regeneration in flight)
 
 | | |
 |---|---|
-| Total links | 302 (56 unique) |
-| Excluded | 251 |
+| Total links | 303 (56 unique) |
+| Excluded | 252 |
 | Successful | 6 |
 | **Errors** | **42** |
 | **Timeouts** | **3** |
+
+> File count rose 88 → 93 → 102 across three runs in one session while the
+> artifact pipeline was writing. Error count held steady at 42, so the findings
+> below are stable; only the totals drift. Re-run after regeneration settles.
 
 Errors by file:
 
