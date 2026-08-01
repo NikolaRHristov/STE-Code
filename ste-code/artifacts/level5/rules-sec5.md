@@ -312,4 +312,103 @@ Rule 1.1 (approved words), Rule 1.4 (verb forms), Rule 1.5 (technical nouns),
 Rule 5.3 (imperative verb form), Rule 5.5 (notes), Rule 7.2 (safety instruction
 start). Dictionary synonyms: verify → check, obtain → get, terminate → stop.
 
-<!-- APPEND -->
+## Rule 5.5 — Notes Give Information Only, Not Instructions
+
+**Core rule:** A NOTE gives descriptive information only. It must not contain
+instructions, commands, step-by-step actions, requirements, limits, tolerances,
+or expected results of a work step. A note must not use the imperative form.
+
+Each sentence in a note may be up to 25 words. A note can have one or more
+sentences.
+
+### The "remove the notes" test
+To check correct note usage: read the procedure *without* the notes. If the
+reader can complete the procedure correctly, the notes are used correctly. If
+important information is only in a note, move it into a numbered work step and
+repeat the test.
+
+### Move note content out when…
+- it tells the reader to run a command → make it a numbered work step.
+- it states a limit/tolerance/result → put it directly in the work step after the
+  related action.
+- it carries safety-critical info (data loss, security, system damage) → convert
+  to a WARNING or CAUTION safety instruction. A note is never a substitute for a
+  safety instruction.
+
+**Non-STE:** NOTE: When you update dependencies, run `npm audit fix` to resolve
+vulnerabilities. If you skip this, you may have security issues.
+**STE:** (5) Run the command `npm audit fix` to resolve known vulnerabilities.
+
+**Non-STE:** NOTE: Do not run the migration on production without a backup.
+**STE:** WARNING: DO NOT RUN THE MIGRATION ON THE PRODUCTION DATABASE WITHOUT A
+FULL BACKUP. RUNNING IT WITHOUT A BACKUP CAN CAUSE IRREVERSIBLE DATA LOSS.
+
+### Apply across doc types
+- **README:** notes give project context (why a dependency exists). Not install steps.
+- **API docs:** notes explain behavior/side effects/constraints. "Call the
+  /refresh endpoint first" is an instruction — move it to the endpoint description.
+- **Docstrings:** describe behavior/constraints. "Call `initialize()` first" is a
+  requirement — write it as a descriptive constraint in the function spec.
+- **Commit body:** explain *why* a change was made. Not "run the migration" (that
+  belongs in release notes / upgrade guide).
+- **Error messages:** the fix guidance is part of the error text (descriptive +
+  imperative), not a separate note the reader might skip.
+
+### Paradigm notes
+- **OOP:** note explains disposed-state constraint, not "call dispose() first."
+- **Functional:** note states purity/performance, not "memoize it."
+- **Procedural:** note states resource-leak behavior, not "close the fd."
+- **Declarative:** note describes attribute behavior, not "always set this."
+- **Systems:** note describes borrow/compiler behavior, not "don't mutate."
+
+### Grammar of notes
+- **Descriptive mood only.** Subject performs/experiences the action (system,
+  code, environment). "The cache expires after 300 seconds." NOT "Run the build."
+- **Modals:** "can/may/will" are fine when describing system behavior. "must" in
+  a note is a red flag — it usually signals a requirement that belongs in a work
+  step or WARNING.
+- **Articles:** do not omit "the/a/an" in notes.
+- **Technical nouns** (function/class/command names) follow Rule 1.5 — exempt from
+  the dictionary, but surrounding words must use approved vocabulary.
+
+### Edge cases
+- **Framework name = verb** (React, Express): still a technical noun in a note;
+  not an instruction. "The `React` component tree re-renders when state changes."
+- **Generated docs:** fix the *source comment*, not the generator output.
+- **Interactive tutorials:** exploratory "try this" notes are acceptable only in
+  non-shipping tutorial material, never in reference/README/API docs.
+- **Command referenced, not commanded:** "The `terraform plan` command shows the
+  changes" is a note. "Run `terraform plan`" is an instruction — not a note.
+- **Conditional in a note:** "if" alone doesn't make it an instruction. Test: does
+  the clause describe system behavior (note) or tell the reader to do something
+  (a step)? "The server returns 503 if upstream is slow" = note. "If you get 503,
+  check /health" = step.
+
+### Cross-references
+Rule 1.1 (approved words), Rule 1.5 (technical nouns), Rule 1.7 (no
+technical-noun-as-verb), Rule 5.3 (imperative vs descriptive), Rule 5.4
+(descriptive-before-command — a note must not follow this pattern), Rule 5.6
+(separate steps for separate actions), Rule 7.1 (risk signal words), Rule 9.1
+(descriptive writing).
+
+## Quick checklist for LLM code-doc generation
+
+When generating install steps, API guides, READMEs, docstrings, commit messages,
+or error text, apply Section 5 in this order:
+
+1. **5.3 — Use imperative verbs** for every instruction. Drop passive voice,
+   gerunds, and modals (can/should/may). Reserve "must" for WARNING/CAUTION.
+2. **5.2 — One instruction per sentence.** Number steps. Split compound
+   instructions. Don't put preconditions, results, or "and"-chained actions in one
+   sentence unless they are simultaneous or an immediate result.
+3. **5.1 — Keep each procedural sentence ≤ 20 words** (notes ≤ 25). Exclude code
+   blocks and count backtick tokens as one word each. Split long sentences at
+   conjunctions/conditions or into lists.
+4. **5.4 — Put the condition before the command**, with a comma.
+   `After you set DATABASE_URL, run the migration.` Never reverse the order.
+5. **5.5 — Keep NOTES descriptive only.** No imperatives, no commands, no limits.
+   If a note tells the reader to act, make it a work step (or a WARNING). A note
+   sentence may be up to 25 words.
+
+Defaults that are NOT instructions: code blocks, terminal output, string literals,
+identifier names, and the words around a backticked technical noun.
