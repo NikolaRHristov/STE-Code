@@ -12,25 +12,29 @@ You are a parameterized STE-Code worker. You receive a task specification and ex
 
 When you receive a `level` parameter, load only the rules for that level:
 
-### Level 1 - Core Principles (Current, ~500 tokens)
-Load: `ste-code/artifacts/ste-code-distilled-system-prompt.txt`
+### Level 1 - Core Principles (58 KB, ~14.5K tokens)
+Load: `ste-code/artifacts/level1/system-prompt.txt`
 Contains: 14 core principles (P1-P14), synonym table, anti-patterns, output format rules.
 
-### Level 2 - Principles + Full Dictionary Excerpt (~5K tokens)
-Load: Level 1 + `ste-code/adapted/a-dictionary.md` (first 200 lines - top code-relevant words)
-Adds: Approved/non-approved word pairs with coding-domain meanings.
+### Level 2 - Principles + Section Grammar (75 KB, ~18.5K tokens)
+Load: `ste-code/artifacts/level2/system-prompt.txt`
+Adds: Approved/non-approved word pairs with coding-domain meanings, grammar rules.
 
-### Level 3 - Section-Specific Grammar (~20K tokens)
-Load: Level 2 + all `ste-code/adapted/a-sec1-rule*` through `ste-code/a-sec9-*` files
+### Level 3 - Complete Dictionary + All Rules (388 KB, ~95K tokens)
+Load: `ste-code/artifacts/level3/system-prompt.txt`
 Adds: Detailed grammar rules per section (sentence structure, verb forms, noun clusters, procedural writing).
 
-### Level 4 - Full Dictionary (~50K tokens)
-Load: Level 3 + full `ste-code/adapted/a-dictionary.md` (all 5,943 lines)
+### Level 4 - Extensions + Reference Catalogue (462 KB, ~116K tokens)
+Load: `ste-code/artifacts/level4/system-prompt.txt`
 Adds: Complete approved word dictionary with all definitions and examples.
 
-### Level 5 - Full Standard (~100K+ tokens)
-Load: All `ste-code/adapted/*.md` files + `ste-code/grouped/master.md`
+### Level 5 - Full Standard (539 KB, ~134K tokens)
+Load: `ste-code/artifacts/level5/system-prompt.txt`
 Adds: Every rule, every example, every dictionary entry from ASD-STE100 Issue 9 adapted for code.
+
+Sizes and token counts are measured (o200k_base). Regenerate with
+`python3 .agents/tools/maintenance/measure_artifacts.py`. Tiers -2, -1, and 0
+are also available at 5 KB / 26 KB / 17 KB (~1.2K / ~5.9K / ~4.3K tokens).
 
 ## Task Parameters
 
@@ -93,10 +97,10 @@ You receive a JSON-like task specification:
 | `.agents/benchmark/orchestrator.py` | Benchmark runner |
 
 ## Key Facts
-- 5 adaptation levels, from 50 lines (Level 1) to 9,400+ lines (Level 5)
-- Level 1: ~500 tokens. Level 5: ~100K+ tokens.
+- 8 adaptation tiers (levels -2 through 5), from 5 KB (level -2) to 539 KB (level 5)
+- Level -2: ~1.2K tokens. Level 1: ~14.5K tokens. Level 5: ~134K tokens.
 - Source: ASD-STE100 Issue 9, January 2025, adapted for code documentation
-- 9 sections, 57 adapted rule files, 1 full dictionary
+- 9 sections, 58 adapted rule files (54 rules + 4 GR), 1 full dictionary
 - This agent can rewrite its own Level 1 prompt into Level 3 using Level 3 rules
 
 ---
@@ -364,7 +368,7 @@ After you write the output, verify:
 **Symptom:** The target file plus the loaded rule files exceeds the model context window. The LLM truncates input or produces incomplete output.
 
 **Response:**
-- Before loading, estimate the token count: rules (~20K at Level 3) + target file size in bytes × 0.25 (approx tokens per byte).
+- Before loading, estimate the token count: rules (~95K at Level 3) + target file size in bytes × 0.24 (measured tokens per byte for this corpus).
 - If the estimate exceeds 100K tokens, split the target into sections.
 - Process one section at a time. Concatenate results.
 - Report: `NOTE: Target file is <N> tokens. Split into <M> sections for processing.`

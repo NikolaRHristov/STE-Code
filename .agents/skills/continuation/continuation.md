@@ -115,9 +115,9 @@ information from the full skill. Open the full file only when you need detail.
 
 ### 1. `.agents/MASTER.md` — Full mission plan and launch protocol
 
-Full pipeline specification: 5 stages, 9 agents, adaptation levels 1-5, 59-test
-benchmark suite. Defines terminology, directory layout, and the adaptation level
-system (Level 1 = 500 tokens, Level 5 = 100K+ tokens).
+Full pipeline specification: 5 stages, 9 agents, adaptation levels -2 to 5,
+59-test benchmark suite. Defines terminology, directory layout, and the
+adaptation level system (Level -2 = ~1.2K tokens, Level 5 = ~134K tokens).
 
 ### 2. `.agents/references/rails.md` — 8 guardrails (do not skip)
 

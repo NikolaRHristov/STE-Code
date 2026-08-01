@@ -73,22 +73,29 @@ Extraction → Refinement → Merge → Adaptation → Artifacts
 
 ## Adaptation Levels
 
-| Level | Content | Size | Use Case |
-|-------|---------|------|----------|
-| **1** | 14 core principles + synonym table | ~1.2K tokens | Interactive sessions, low-context scenarios |
-| **2** | + Top dictionary excerpt + doc templates | ~4.5K tokens | Code review, PR feedback |
-| **3** | + Section-specific grammar rules | ~8K tokens | Full document rewriting |
-| **4** | + Complete dictionary excerpt + all 51 rules | ~45K tokens | Strict compliance checking |
-| **5** | Full standard (all 51 rule summaries) | ~100K+ tokens | Specification-grade documentation |
+| Level | Content | Size | Tokens | Use Case |
+|-------|---------|------|--------|----------|
+| **-2** | 14 core principles only | 5 KB | ~1.2K | Ultra-minimal, tightest budgets |
+| **-1** | + synonym table | 26 KB | ~5.9K | Minimal |
+| **0** | + short dictionary excerpt | 17 KB | ~4.3K | Baseline |
+| **1** | + doc templates | 58 KB | ~14.5K | Interactive sessions, low-context scenarios |
+| **2** | + section-specific grammar rules | 75 KB | ~18.5K | Code review, PR feedback |
+| **3** | + complete dictionary + all 54 rules | 388 KB | ~95K | Full document rewriting |
+| **4** | + extensions + reference catalogue | 462 KB | ~116K | Strict compliance checking |
+| **5** | Full standard + provenance | 539 KB | ~134K | Specification-grade documentation |
+
+Measured with `python3 .agents/tools/maintenance/measure_artifacts.py`
+(o200k_base tokenizer). Rule of thumb for sizing a load: 0.24 tokens per byte
+of UTF-8 markdown, i.e. about 4.1 bytes per token.
 
 ## Assembly Scripts (all agent-agnostic)
 
 | Script | Input | Output | Description |
 |--------|-------|--------|-------------|
-| `assemble-level1.py` | Level 2 | Level 1 (~1.2K) | Compress to essential principles |
-| `assemble-level2.py` | Level 3 | Level 2 (~4.5K) | Compact compliance prompt |
-| `assemble-level3.py` | 51× Level 5 | Level 3 (~8K) | Section grammar + vocabulary |
-| `assemble-level4.py` | 51× Level 5 | Level 4 (~45K) | All rules + dictionary excerpt |
+| `assemble-level1.py` | Level 2 | Level 1 (~14.5K) | Compress to essential principles |
+| `assemble-level2.py` | Level 3 | Level 2 (~18.5K) | Compact compliance prompt |
+| `assemble-level3.py` | 54× Level 5 | Level 3 (~95K) | Section grammar + vocabulary |
+| `assemble-level4.py` | 54× Level 5 | Level 4 (~116K) | All rules + dictionary excerpt |
 | `sweep-quality.py` | All artifacts | Sweep report | 5-batch parallel quality audit |
 | `fix-fixmes.py` | Adapted files | Fixed files | Generate missing STE corrections |
 
@@ -105,11 +112,13 @@ Top 3 categories where STE-Code wins hardest: **comments** (+0.580), **error mes
 
 ## Key Artifacts
 
-- `ste-code/artifacts/level1/system-prompt.txt` — Level 1: 14 principles (~1.2K tokens)
-- `ste-code/artifacts/level2/system-prompt.txt` — Level 2: 20 principles + dictionary (~4.5K tokens)
-- `ste-code/artifacts/level3/system-prompt.txt` — Level 3: 9-section grammar (~8K tokens)
-- `ste-code/artifacts/level4/system-prompt.txt` — Level 4: 51 rules + dictionary (~45K tokens)
-- `ste-code/adapted/` — 57 files of ASD-STE100 rules adapted for code
+- `ste-code/artifacts/level1/system-prompt.txt` — Level 1: 14 principles + templates (58 KB, ~14.5K tokens)
+- `ste-code/artifacts/level2/system-prompt.txt` — Level 2: + section grammar (75 KB, ~18.5K tokens)
+- `ste-code/artifacts/level3/system-prompt.txt` — Level 3: 9-section grammar + full dictionary (388 KB, ~95K tokens)
+- `ste-code/artifacts/level4/system-prompt.txt` — Level 4: 54 rules + dictionary + catalogue (462 KB, ~116K tokens)
+- `ste-code/artifacts/level5/system-prompt.txt` — Level 5: full standard + provenance (539 KB, ~134K tokens)
+- `ste-code/artifacts/llms-full.txt` — every distilled sub-document in one file
+- `ste-code/adapted/` — 60 files of ASD-STE100 rules adapted for code (54 rules + 4 GR + dictionary + categories)
 - `.agents/benchmark/orchestrator.py` — Parallel benchmark runner (59 workers, CWD-isolated)
 - `.agents/benchmark/orchestrator-control.py` — Control group runner (plain assistant, no STE-Code)
 

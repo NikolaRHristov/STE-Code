@@ -114,13 +114,19 @@ refuses to launch until its input directory is ready (grouping needs
 
 ## Adaptation Levels
 
-| Level | Content | Tokens |
-|-------|---------|--------|
-| 1 | 14 principles + synonym table | ~500 |
-| 2 | + Top dictionary excerpt | ~5K |
-| 3 | + Section-specific grammar | ~20K |
-| 4 | + Full dictionary | ~50K |
-| 5 | Full standard | ~100K+ |
+| Level | Content | Size | Tokens |
+|-------|---------|------|--------|
+| -2 | 14 core principles only | 5 KB | ~1.2K |
+| -1 | + synonym table | 26 KB | ~5.9K |
+| 0 | + short dictionary excerpt | 17 KB | ~4.3K |
+| 1 | + doc templates | 58 KB | ~14.5K |
+| 2 | + section-specific grammar | 75 KB | ~18.5K |
+| 3 | + complete dictionary + all 54 rules | 388 KB | ~95K |
+| 4 | + extensions + reference catalogue | 462 KB | ~116K |
+| 5 | Full standard + provenance | 539 KB | ~134K |
+
+Measured, not estimated. Regenerate with
+`python3 .agents/tools/maintenance/measure_artifacts.py` (o200k_base tokenizer).
 
 ## Benchmark Results
 
