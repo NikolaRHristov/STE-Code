@@ -34,6 +34,17 @@ from pathlib import Path
 BENCH = Path(__file__).resolve().parent
 PROJECT = BENCH.parent.parent
 
+
+def _prompt(name: str) -> str:
+    """Load prompt text from templates/ beside this script.
+
+    Prompt wording lives in markdown, not in Python -- see
+    .agents/tools/lib/PROMPTS.md. These prompts take no placeholders, so the
+    file is returned verbatim.
+    """
+    return (BENCH / "templates" / (name + ".md")).read_text(encoding="utf-8")
+
+
 # Provenance labels. Every reported figure carries one.
 MEASURED = "MEASURED"
 SIMULATED = "SIMULATED"
@@ -1393,43 +1404,7 @@ def build_llm_brief(doc: dict, limit: int = 14000) -> str:
     return text[:limit]
 
 
-LLM_INSTRUCTIONS = """\
-You are reading the evidence dossier of an adversarial benchmark harness with \
-five participants:
-
-  RED    generates adversarial inputs and records which ones escaped
-  BLUE   relocates each escaped payload and measures resistance
-  PURPLE stitches RED x BLUE into an interplay matrix
-  WHITE  learns from escapes, proposes remedies, validates them
-  BLACK  attacks the CONCLUSION the other four produce, and rules on it
-
-The design thesis is adversarial self-refutation: WHITE hands BLACK an attack \
-brief describing the weakest links in the other colours' reasoning, so BLACK \
-can disprove results that only looked correct. Claims that survive that \
-process are the ones worth keeping.
-
-Write a report for an engineer who did not run this. Requirements:
-
-1. Lead with what is MEASURED versus SIMULATED. Never present a simulated \
-   number as a measurement. If the pipeline ran offline, say so first.
-2. Explain what the benchmark set out to test, what it actually established, \
-   and what it failed to establish.
-3. Use markdown tables for anything comparative.
-4. Address the self-refutation loop explicitly: did BLACK genuinely challenge \
-   the claims, or did it confirm them by construction? Did the learning curve \
-   converge?
-5. Ground every claim in a number from the dossier. Do not invent figures.
-6. End with concrete next actions, ordered by what unblocks the most.
-
-> **Provenance is the first duty.** If the pipeline ran offline, say so before
-> any adversarial figure, and never present a simulated number as a measurement.
-
-Dossier follows.
-
-OUTPUT CONTRACT: reply with the report itself as markdown, and nothing else. Do \
-not create, write or modify any file. Do not run any command. Do not preface the \
-report with a summary of what you did. The report text IS the deliverable.
-"""
+LLM_INSTRUCTIONS = _prompt("llm-instructions")
 
 
 # The staged agent process, mirroring the extraction -> refinement -> final
@@ -1438,79 +1413,11 @@ report with a summary of what you did. The report text IS the deliverable.
 # goals against those findings, stage 3 writes prose over a settled record.
 # Each stage sees the previous stage's output, never its reasoning.
 
-STAGE_EXTRACT = """\
-You are Stage 1 of 3 — EXTRACTION. Do not write a report.
+STAGE_EXTRACT = _prompt("stage-1-extract")
 
-Read the dossier and extract the load-bearing facts. For every claim, record
-whether the evidence is MEASURED (a model produced it) or SIMULATED (a generator
-produced it offline). Discard anything not grounded in a figure.
+STAGE_ASSESS = _prompt("stage-2-assess")
 
-Output strict JSON, no prose, no code fence:
-
-{
-  "provenance": {"pipeline_offline": bool, "measured_sources": [str],
-                 "simulated_sources": [str]},
-  "established": [{"claim": str, "evidence": str, "provenance":
-                   "MEASURED"|"SIMULATED"}],
-  "not_established": [{"claim": str, "why": str}],
-  "anomalies": [{"observation": str, "figure": str}]
-}
-
-Rules: every "evidence" and "figure" must quote a number or key from the
-dossier. An anomaly is a number that contradicts another number, or one that is
-suspiciously constant. If a section is absent, say so in not_established rather
-than inventing it.
-"""
-
-STAGE_ASSESS = """\
-You are Stage 2 of 3 — ASSESSMENT. Do not write the final report.
-
-You receive the run's declared goals (with a deterministic grade already
-computed from artifacts) and Stage 1's extracted findings. Judge each goal
-against the findings and explain the grade in causal terms.
-
-Where the deterministic grade and the evidence disagree, say so plainly and
-prefer the evidence — the grader is mechanical and can be fooled by a key that
-looks right.
-
-Output strict JSON, no prose, no code fence:
-
-{
-  "goals": [{"id": str, "verdict": "met"|"not met"|"untestable"|"disputed",
-             "because": str, "consequence": str}],
-  "root_causes": [{"cause": str, "goals_blocked": [str], "fix": str}],
-  "confidence": {"level": "high"|"medium"|"low", "why": str}
-}
-
-"consequence" states what the reader cannot conclude because of this grade.
-"root_causes" must be ordered by how many goals each one unblocks.
-"""
-
-STAGE_FINAL = """\
-You are Stage 3 of 3 — FINAL REPORT. Write for an engineer who did not run this.
-
-You receive the goals, Stage 1's findings, and Stage 2's assessment. Those are
-settled: do not re-derive them and do not contradict them. Your job is prose and
-structure over an agreed record.
-
-Required shape:
-
-# Adversarial benchmark run — analysis
-## Verdict            one paragraph: goals met, and what the run does/does not show
-## Provenance         MEASURED vs SIMULATED, stated before any adversarial figure
-## Goals scorecard    markdown table: goal, wanted, observed, status, meaning
-## What was established
-## What was not established, and why
-## The five-colour loop   did BLACK genuinely challenge, or confirm by construction
-## Root causes        ordered by how many goals each unblocks
-## Next actions       numbered, each naming the goal it unblocks
-
-Rules: markdown tables for anything comparative. Ground every claim in a figure.
-Invent nothing. Never present a simulated number as a measurement.
-
-OUTPUT CONTRACT: reply with the report markdown and nothing else. Do not create,
-write or modify any file. Do not run any command. Do not describe what you did.
-"""
+STAGE_FINAL = _prompt("stage-3-final")
 
 
 def _strip_preamble(text: str) -> str:
