@@ -475,7 +475,7 @@ def test_pipeline(cfg, tmp: Path) -> None:
     Verifies the five colours converge through the filesystem handshake and the
     4-turn reverse-deduction loop fires (notes written, knowledge pruned).
     """
-    import run_pipeline as RP
+    import run_pipeline as RP  # noqa: F401  (ensures module importable)
     base = tmp / "pipe"
     base.mkdir(parents=True, exist_ok=True)
     proc = subprocess.run(
@@ -600,6 +600,7 @@ def main() -> int:
         test_red_blue(cfg, tmp)
         test_scheduler(cfg, tmp)
         test_white(cfg, tmp)
+        test_pipeline(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     test_modules_compile()
