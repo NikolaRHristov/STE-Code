@@ -22,6 +22,7 @@ what makes a split reproducible without storing it.
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import random
@@ -364,3 +365,175 @@ def evaluate(cases: list, outcome_of, cfg, strategy: "str | None" = None,
     eff = Effect([float(outcome_of(c)) for c in split.arm_a],
                  [float(outcome_of(c)) for c in split.arm_b], cfg, iterations)
     return verdict(eff, cfg, split.as_dict())
+
+
+# -------------------------------------------------------- planted-signal demo
+
+def _demo_cases() -> list:
+    """A synthetic corpus with four deliberately planted signals.
+
+    - remedy 'R1' succeeds uniformly              -> confirmed
+    - remedy 'R2' overfits to the derivation arm  -> inflated: its success is
+      set to 1.0 only for the R2 cases that land in arm A under the same
+      strategy the verdict uses, 0.0 elsewhere, so the derivation arm shows a
+      large effect that the verification arm does not reproduce
+    - cell (technique=rare, placement=last) tiny -> underpowered
+    - one case near-duplicated four times         -> duplicate inflation (caller)
+    - two rounds and two variants                 -> so temporal_half and
+      variant_holdout produce real arms, never empty B
+    """
+    cases = []
+    cid = 0
+    placements = ("inner", "nested", "last")
+    techniques = ("T0", "T1", "T2", "T3")
+    variants = ("0", "1")
+    rounds = (1, 2)
+    for variant in variants:
+        for round_n in rounds:
+            for technique in techniques:
+                for placement in placements:
+                    for i in range(6):
+                        cid += 1
+                        remedy = "R1" if (i % 2 == 0) else "R2"
+                        # R1 always works. R2 starts at 0.0; the planted overfit
+                        # (below) lifts it only on the derivation-arm cases.
+                        success = 1.0 if remedy == "R1" else 0.0
+                        cases.append({"id": "c{:04d}".format(cid),
+                                      "technique": technique, "placement": placement,
+                                      "variant": variant, "round": round_n,
+                                      "remedy": remedy, "success": success})
+    # a degenerate cell for underpowered
+    for i in range(2):
+        cid += 1
+        cases.append({"id": "c{:04d}".format(cid), "technique": "rare",
+                      "placement": "last", "variant": "0", "round": 1,
+                      "remedy": "R1", "success": 0.0})
+    # near-duplicates: four copies of one input
+    for i in range(4):
+        cid += 1
+        cases.append({"id": "c{:04d}".format(cid), "technique": "T0",
+                      "placement": "inner", "variant": "0", "round": 1,
+                      "remedy": "R1", "success": 1.0, "dup_of": "c0001"})
+
+    # Plant the overfit against the strategy the self-test evaluates R2 with.
+    # Partition the R2 cases exactly as evaluate() will, then mark the
+    # derivation-arm cases as the only ones the remedy helps. The verification
+    # arm reproduces the 0.0 baseline, so the gap reads as inflated -- the
+    # realistic "learned on the training set" failure, not a property of any
+    # single technique or placement.
+    cfg = load_config()
+    r2 = [c for c in cases if c["remedy"] == "R2"]
+    r2_split = partition(r2, "technique_disjoint", cfg)
+    for case in r2_split.arm_a:
+        case["success"] = 1.0
+    for case in r2_split.arm_b:
+        case["success"] = 0.0
+    return cases
+
+
+def _self_test() -> int:
+    cfg = load_config()
+    cases = _demo_cases()
+    print("partitioners:")
+    for strategy in cfg.partition_strategies:
+        split = partition(cases, strategy, cfg)
+        d = split.as_dict()
+        flag = (" [degenerate: {}]".format(", ".join(split.degenerate()))
+                if split.degenerate() else "")
+        print("  {:<18} A={:<3} B={:<3} max_skew={}%{}".format(
+            strategy, d["size_a"], d["size_b"],
+            max((v["max_skew_pct"] for v in d["balance"].values()), default=0),
+            flag))
+
+    # determinism: same seed -> identical arm membership
+    a1 = [c["id"] for c in partition(cases, "random_half", cfg).arm_a]
+    a2 = [c["id"] for c in partition(cases, "random_half", cfg).arm_a]
+    assert a1 == a2, "split is not deterministic"
+    print("  determinism: identical arm membership across runs OK")
+
+    print("\nplanted-signal verdicts:")
+    # R1 confirmed everywhere
+    v_r1 = evaluate([c for c in cases if c["remedy"] == "R1"], lambda c: c["success"],
+                    cfg, strategy="stratified_half")
+    print("  R1 (real fix):    {}".format(v_r1.kind))
+    assert v_r1.kind == "confirmed", v_r1
+    # R2 inflated under a disjoint technique split
+    v_r2 = evaluate([c for c in cases if c["remedy"] == "R2"], lambda c: c["success"],
+                    cfg, strategy="technique_disjoint")
+    print("  R2 (overfit):     {}  gap={}pp".format(v_r2.kind, v_r2.effect.gap_pct))
+    assert v_r2.kind == "inflated", v_r2
+    # rare/last cell underpowered
+    v_rare = evaluate([c for c in cases if c["technique"] == "rare"],
+                      lambda c: c["success"], cfg, strategy="stratified_half")
+    print("  rare cell:        {}  (n={}/{})".format(
+        v_rare.kind, v_rare.effect.n_a, v_rare.effect.n_b))
+    assert v_rare.kind == "underpowered", v_rare
+    # deflated: construct an arm B that is stronger
+    eff = Effect([0.4] * 20, [0.95] * 20, cfg)
+    v_def = verdict(eff, cfg)
+    print("  synthetic better-on-B: {}".format(v_def.kind))
+    assert v_def.kind == "deflated", v_def
+    print("\nself-test: all planted signals detected, exit 0")
+    return 0
+
+
+def main() -> int:
+    if any(arg in ("--self-test", "-S") for arg in sys.argv[1:]):
+        return _self_test()
+    parser = argparse.ArgumentParser(description="Split-half A/B verification.")
+    cfg_preview = load_config()
+    add_common_arguments(parser, config=cfg_preview)
+    parser.add_argument("--strategy", default=cfg_preview.default_partition_strategy,
+                        choices=list(cfg_preview.partition_strategies))
+    parser.add_argument("--seed", type=int, default=None)
+    parser.add_argument("--iterations", type=int, default=DEFAULT_ITERATIONS)
+    parser.add_argument("--cases", default=None, help="path to a JSON list of cases")
+    parser.add_argument("--outcome", default="success",
+                        help="key holding each case's 0..1 outcome")
+    parser.add_argument("--min-arm-size", type=int, default=None)
+    parser.add_argument("--tolerance", type=float, default=None)
+    parser.add_argument("--json", action="store_true")
+    parser.add_argument("--explain", action="store_true")
+    args = parser.parse_args()
+
+    cfg = load_config(args.profile)
+    if args.min_arm_size is not None:
+        cfg = _override(cfg, "min_arm_size", args.min_arm_size)
+    if args.tolerance is not None:
+        cfg = _override(cfg, "overfit_tolerance_pct", args.tolerance)
+
+    cases = []
+    if args.cases:
+        cases = json.loads(Path(args.cases).read_text(encoding="utf-8"))
+    else:
+        cases = _demo_cases()
+
+    split = partition(cases, args.strategy, cfg, args.seed)
+    eff = Effect([float(c.get(args.outcome, 0)) for c in split.arm_a],
+                 [float(c.get(args.outcome, 0)) for c in split.arm_b], cfg,
+                 args.iterations)
+    v = verdict(eff, cfg, split.as_dict())
+    if args.json:
+        print(json.dumps(v.as_dict(), indent=2))
+    else:
+        print("strategy {}: A={} B={} (seed {})".format(
+            args.strategy, eff.n_a, eff.n_b, split.seed))
+        print("  mean A {}%  mean B {}%  gap {}pp  p={}".format(
+            eff.mean_a_pct, eff.mean_b_pct, eff.gap_pct, eff.p_value))
+        print("  verdict: {}".format(v.kind))
+        if args.explain:
+            print("  reason: {}".format(v.reason))
+    return 0
+
+
+def _override(cfg, key: str, value):
+    """Return a config proxy with one attribute replaced (no file mutation)."""
+    import types
+    proxy = types.SimpleNamespace(**{k: getattr(cfg, k) for k in dir(cfg)
+                                     if not k.startswith("__")})
+    setattr(proxy, key, value)
+    return proxy
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

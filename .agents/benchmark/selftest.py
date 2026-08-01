@@ -346,6 +346,57 @@ def test_notes_concurrency(cfg, base: Path) -> None:
     check(len(set(ids)) == len(ids), "no duplicate note ids under concurrency")
 
 
+def test_verification(cfg, base: Path) -> None:
+    """BLACK's split-half engine: partitioners, determinism, planted signals."""
+    try:
+        import verification as V
+    except ImportError:
+        return
+
+    cases = V._demo_cases()
+    # every declared strategy must produce non-empty, matching arms
+    for strat in cfg.partition_strategies:
+        split = V.partition(cases, strat, cfg)
+        check(split.size_a > 0 and split.size_b > 0,
+              "strategy {} yields both arms".format(strat))
+
+    # determinism: same seed -> identical arm membership (no PYTHONHASHSEED leak)
+    a1 = [c["id"] for c in V.partition(cases, "random_half", cfg).arm_a]
+    a2 = [c["id"] for c in V.partition(cases, "random_half", cfg).arm_a]
+    check(a1 == a2, "split is deterministic across calls")
+
+    # planted signals
+    r1 = V.evaluate([c for c in cases if c["remedy"] == "R1"],
+                    lambda c: c["success"], cfg, strategy="stratified_half")
+    check(r1.kind == "confirmed", "R1 (real fix) confirmed, got {}".format(r1.kind))
+
+    r2 = V.evaluate([c for c in cases if c["remedy"] == "R2"],
+                    lambda c: c["success"], cfg, strategy="technique_disjoint")
+    check(r2.kind == "inflated", "R2 (overfit) inflated, got {}".format(r2.kind))
+
+    rare = V.evaluate([c for c in cases if c["technique"] == "rare"],
+                      lambda c: c["success"], cfg, strategy="stratified_half")
+    check(rare.kind == "underpowered",
+          "sparse cell underpowered, got {}".format(rare.kind))
+    check(rare.effect.n_a < cfg.min_arm_size,
+          "underpowered arm below the floor")
+
+    # deflated: arm B genuinely stronger
+    eff = V.Effect([0.4] * 20, [0.95] * 20, cfg)
+    check(V.verdict(eff, cfg).kind == "deflated", "better-on-B reads deflated")
+
+    # decision table is closed: every produced kind is a declared verdict kind
+    seen = {r1.kind, r2.kind, rare.kind, V.verdict(eff, cfg).kind}
+    check(seen <= set(cfg.verdict_kinds),
+          "all verdicts are declared kinds")
+
+    # the configuration knobs drive the table: a relaxed tolerance never hides
+    # a real gap
+    relaxed = V.verdict(V.Effect([0.4] * 20, [0.1] * 20, cfg), cfg)
+    check(relaxed.kind == "inflated",
+          "large gap inflates regardless of tolerance setting")
+
+
 def test_modules_compile() -> None:
     """Every module present must import under the interpreter that runs it."""
     for path in sorted(BENCH.glob("*.py")):
@@ -366,6 +417,7 @@ def main() -> int:
         test_stitch(cfg, tmp)
         test_notes(cfg, tmp)
         test_notes_concurrency(cfg, tmp)
+        test_verification(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     test_modules_compile()
