@@ -385,14 +385,14 @@ convergence the harness is designed to produce.
 flowchart TD
     subgraph SWEEP["FULL SWEEP — 8 levels × 3 rounds × per-combo 3"]
         direction TB
-        L1["level -2 · 12,537 runs · 1.2K tok/run"]
-        L2["level -1 · 12,537 runs · 5.9K tok/run"]
-        L3["level 0 · 12,537 runs · 4.3K tok/run"]
-        L4["level 1 · 12,537 runs · 14.5K tok/run"]
-        L5["level 2 · 12,537 runs · 18.5K tok/run"]
-        L6["level 3 · 12,537 runs · 95K tok/run"]
-        L7["level 4 · 12,537 runs · 116K tok/run"]
-        L8["level 5 · 12,537 runs · 134K tok/run"]
+        L1["level -2 · 12,243 runs · 1.2K tok/run"]
+        L2["level -1 · 12,243 runs · 5.9K tok/run"]
+        L3["level 0 · 12,243 runs · 4.3K tok/run"]
+        L4["level 1 · 12,243 runs · 14.5K tok/run"]
+        L5["level 2 · 12,243 runs · 18.5K tok/run"]
+        L6["level 3 · 12,243 runs · 95K tok/run"]
+        L7["level 4 · 12,243 runs · 116K tok/run"]
+        L8["level 5 · 12,243 runs · 134K tok/run"]
     end
     SWEEP --> TOT["<b>97,944 model runs</b><br/><b>~4.8 BILLION prompt tokens</b>"]
 
