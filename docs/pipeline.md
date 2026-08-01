@@ -6,12 +6,18 @@ orchestrator module in `.agents/tools/<domain>/`, and a deterministic
 verification gate that blocks the commit when the stage output is bad.
 
 ```text
-A Extraction → B Refinement → C Grouping → D Adaptation → E Extension → F Artifacts
-   spec/          extracted/     refined/      grouped/       adapted/      adapted/
-      ↓               ↓             ↓             ↓              ↓             ↓
-  extracted/       refined/      grouped/      adapted/     extensions/    artifacts/
-   (109 f)         (109 f)       (24 f)        (58+ f)        (6 areas)     (deliverables)
+A Extraction → B Refinement → C Grouping → D Adaptation → E Extension → Finalize → F Artifacts → Linkcheck
+   spec/          extracted/     refined/      grouped/       adapted/      final/      artifacts/   (lychee)
+      ↓               ↓             ↓             ↓              ↓           ↓            ↓
+  extracted/       refined/      grouped/      adapted/     extensions/    final/     artifacts/  reports
+   (109 f)         (109 f)       (24 f)        (54+ f)        (6 areas)   (54 rules)  (deliverables)
 ```
+
+Stage **Finalize** consolidates the adapted corpus + extensions into the single
+canonical standard at `ste-code/final/` (54 rules, dictionary, categories,
+extensions, catalogue, provenance). Stage **F (Artifacts)** packages `final/`
+into deployables. The **Linkcheck** stage (lychee, in `.agents/tools/linkcheck/`)
+validates links across `final/` and `artifacts/`.
 
 ---
 
@@ -24,7 +30,7 @@ A Extraction → B Refinement → C Grouping → D Adaptation → E Extension �
 | [C](stages/stage-c.md) | `phase-c-run.py` | `ste-code/refined/` | `ste-code/grouped/` | `verify-groups.py` |
 | [D](stages/stage-d.md) | `phase-d-run.py` | `ste-code/grouped/` | `ste-code/adapted/` | `verify-adaptation.py` |
 | [E](stages/stage-e.md) | `phase-e-run.py` | gap areas + adapted corpus | `ste-code/extensions/` | `verify_extensions.py` |
-| [F](stages/stage-f.md) | `phase-f-run.py` | `ste-code/adapted/` | `ste-code/artifacts/` | `verify-artifacts.py` |
+| [F](stages/stage-f.md) | `phase-f-run.py`, `artifact_batch.py`, `distill_one.py` | `ste-code/final/` | `ste-code/artifacts/` | `verify-artifacts.py` |
 
 ---
 
@@ -37,7 +43,9 @@ A Extraction → B Refinement → C Grouping → D Adaptation → E Extension �
 | C | **Deterministic** | Grouping only moves bytes (concatenate + split), so content cannot be lost |
 | D | LLM workers | Genuine rewriting: aerospace examples become code-domain examples |
 | E | LLM workers | Generates new code-domain entries; JSON is derived deterministically |
-| F | **Deterministic** | Assembly only: concatenate adapted rules in canonical order |
+| F | **Hybrid** | Deterministic assembly (`artifact_batch.py`) concatenates `final/` with no truncation; an LLM pass (`distill_one.py`) distills each sub-document into `level<N>/`. The LLM writes in multiple `write_file`/`patch` calls; on failure it falls back to the deterministic base. |
+| Finalize | Deterministic + deep enrichment | Consolidates `adapted/` + extensions into `final/` (54 rules), grounded in `.agents/vendor/` research. |
+| Linkcheck | Deterministic | lychee scans `final/` + `artifacts/` for broken links. |
 
 Stage C and Stage F are pure Python on purpose. A free-tier model that is asked
 to re-emit a 600 KB corpus truncates mid-stream, which is silent content loss.
@@ -81,9 +89,8 @@ All pipeline output is under `ste-code/`.
 | `extracted/` | A | 109 raw page-group files (`wNNN-pA-B.md`), 4 spec pages each |
 | `refined/` | B | 109 formatted page-group files (`rNNN-pA-B.md`) |
 | `grouped/` | C | 24 semantic group files plus `GROUPING-NOTES.md` |
-| `adapted/` | D | Code-domain rule files (`a-secN-ruleX.Y.md`), `a-sec9-gr1..4.md`, `a-dictionary.md`, `a-categories.md` |
-| `extensions/` | E | One markdown file per gap area, plus the derived JSON (created on the first Stage E run) |
-| `artifacts/` | F | `ste-code-rules.md`, `ste-code-system-prompt.md`, and the `level1`–`level5` prompt trees |
+| `final/` | Finalize | **THE STANDARD** — 54 rule files (`a-secN-ruleX.Y.md`), `a-categories.md`, `a-dictionary.md`, `extensions/`, `reference-catalogue.md`, `provenance.md`, `README.md` |
+| `artifacts/` | F | `_base/` (deterministic boilerplate sub-docs), `level-2/`…`level5/` (LLM-distilled sub-docs), `ste-code-rules.md`, `ste-code-system-prompt.md`, `llms.txt`, `llms-full.txt` |
 | `enriched/` | — | Enrichment pass output (109 files) |
 | `data/` | — | `synonym-table.json` and the vocabulary data |
 | `merged/` | — | `master-raw.md` consolidation |

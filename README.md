@@ -1,50 +1,70 @@
 # STE-Code — Simplified Technical English for Code Documentation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Standard](https://img.shields.io/badge/standard-51%20rules%20%2B%204%20GR-brightgreen)](https://github.com/NikolaRHristov/STE-Code)
-[![Spec](https://img.shields.io/badge/source-ASD--STE100%20Issue%209-lightgrey)](https://asd-ste100.org)
+[![Standard](https://img.shields.io/badge/standard-54%20rules-brightgreen)](https://github.com/NikolaRHristov/STE-Code)
+[![Source](https://img.shields.io/badge/source-ASD--STE100%20Issue%209-lightgrey)](https://asd-ste100.org)
 [![Benchmark](https://img.shields.io/badge/benchmark-96.6%25%20pass-success)](https://github.com/NikolaRHristov/STE-Code)
 
----
-
-STE-Code is a documentation standard adapted from [ASD-STE100 Issue 9](https://asd-ste100.org) for code documentation. It gives you 51 writing rules, 4 grammar recommendations, a controlled vocabulary, and system prompt templates at five levels. The standard removes ambiguity, jargon, and hedging from README files, API documentation, docstrings, commit messages, and error messages.
-
----
-
-## Adaptation Levels
-
-Choose the level that fits your token budget:
-
-| Level | File | Tokens | Best For |
-|:-----:|------|:------:|----------|
-| **1** | [`level1/system-prompt.txt`](ste-code/artifacts/level1/system-prompt.txt) | ~1.2K | Interactive sessions, tight token budgets |
-| **2** | [`level2/system-prompt.txt`](ste-code/artifacts/level2/system-prompt.txt) | ~4.5K | Code review, PR feedback |
-| **3** | [`level3/system-prompt.txt`](ste-code/artifacts/level3/system-prompt.txt) | ~8K | Full document rewriting |
-| **4** | [`level4/system-prompt.txt`](ste-code/artifacts/level4/system-prompt.txt) | ~45K | Strict compliance checking |
-
-Level 5 (the full specification) has 51 rule summaries at [`ste-code/artifacts/level5/`](ste-code/artifacts/level5/).
+STE-Code is a documentation standard adapted from
+[ASD-STE100 Issue 9](https://asd-ste100.org) for **code documentation**. It gives
+you 54 writing rules (across 9 sections), a controlled vocabulary, a synonym
+table, and system-prompt material packaged at **eight** levels of strictness
+(`-2` → `5`). The standard removes ambiguity, jargon, and hedging from READMEs,
+API docs, docstrings, commit messages, and error messages.
 
 ---
 
-## How It Works
+## Adaptation levels
 
-Copy a system prompt into your LLM. The model writes clear, unambiguous documentation.
+Each level is a **directory of small sub-documents** (so an LLM reads/writes
+files of a few hundred KB at most, never one 1.8 MB monster). Pick the level
+that fits your token budget:
+
+| Level | Directory | Approx. size | Best for |
+|:-----:|-----------|:------------:|----------|
+| **-2** | [`ste-code/artifacts/level-2/`](ste-code/artifacts/level-2/) | ~5 KB | Ultra-minimal: the 14 core principles only |
+| **-1** | [`ste-code/artifacts/level-1/`](ste-code/artifacts/level-1/) | ~12 KB | Minimal: core principles + synonym table |
+| **0** | [`ste-code/artifacts/level0/`](ste-code/artifacts/level0/) | ~25 KB | Baseline: + short dictionary excerpt |
+| **1** | [`ste-code/artifacts/level1/`](ste-code/artifacts/level1/) | ~35 KB | + doc templates (code review / PR feedback) |
+| **2** | [`ste-code/artifacts/level2/`](ste-code/artifacts/level2/) | ~45 KB | + section-specific grammar rules |
+| **3** | [`ste-code/artifacts/level3/`](ste-code/artifacts/level3/) | ~1.8 MB | + complete dictionary + all 54 rules |
+| **4** | [`ste-code/artifacts/level4/`](ste-code/artifacts/level4/) | ~1.8 MB | + extensions + reference catalogue |
+| **5** | [`ste-code/artifacts/level5/`](ste-code/artifacts/level5/) | ~1.8 MB | Full standard (all rules + extensions + catalogue + provenance) |
+
+Two **consolidated** deliverables are also produced for tooling that wants one
+file:
+
+* [`ste-code/artifacts/ste-code-rules.md`](ste-code/artifacts/ste-code-rules.md) — the full corpus, assembled deterministically.
+* [`ste-code/artifacts/ste-code-system-prompt.md`](ste-code/artifacts/ste-code-system-prompt.md) — the same standard shaped as an LLM system prompt.
+
+And an `llms.txt` / `llms-full.txt` pair (in the spirit of the
+[llms.txt](https://llmstxt.org) convention) indexes every sub-document for
+agentic retrieval.
+
+---
+
+## How it works
+
+Copy a level's system prompt (or load its `llms.txt`) into your LLM. The model
+writes clear, unambiguous documentation.
 
 ```
-You: Copy level1/system-prompt.txt into the system prompt field.
-LLM: You are an STE-Code technical writer. Apply these rules...
-You: Check this docstring.
-     /** This function basically handles user stuff. */
-LLM: /** Creates a user or updates the data of a user. */
+You:  Load ste-code/artifacts/level1/ and its _index.md, or ste-code-rules.md.
+LLM:  You are an STE-Code technical writer. Apply these rules...
+You:  Check this docstring.
+      /** This function basically handles user stuff. */
+LLM:  /** Creates a user or updates the data of a user. */
 ```
 
-The LLM applies the controlled vocabulary, the synonym table, and the sentence-length limits. It replaces jargon with approved words. It uses active voice and imperative mood.
+The LLM applies the controlled vocabulary, the synonym table, and the
+sentence-length limits. It replaces jargon with approved words, uses active
+voice and the imperative mood, and keeps each sentence to one instruction.
 
 ---
 
-## The Rules
+## The rules
 
-The 51 rules cover nine sections:
+The 54 rules cover nine sections:
 
 | Section | Rules | Covers |
 |---------|:-----:|--------|
@@ -54,17 +74,21 @@ The 51 rules cover nine sections:
 | 4 — Sentences | 5 | Length, clarity, contractions, completeness |
 | 5 — Procedures | 5 | Instructional writing, step structure |
 | 6 — Descriptions | 5 | Descriptive writing, comparisons |
-| 7 — Warnings | 3 | BREAKING, DEPRECATED, NOTE formatting |
+| 7 — Warnings | 3 | BREAKING / DEPRECATED / NOTE formatting |
 | 8 — Punctuation | 6 | Commas, hyphens, parentheses, lists |
-| 9 — Document Structure | 4 | Headings, lists, tables, organization |
+| 9 — Document Structure | 7 | Headings, lists, tables, organization |
 
-Each rule has a code-domain adaptation with paradigm-specific guidance for object-oriented, functional, procedural, declarative, and systems programming. The full rules are in [`ste-code/adapted/`](ste-code/adapted/).
+Each rule carries a code-domain adaptation with paradigm-specific guidance for
+object-oriented, functional, procedural, declarative, and systems programming.
+The canonical source is [`ste-code/final/`](ste-code/final/) — every rule, the
+dictionary, the synonym categories, the six gap-fill extensions, the reference
+catalogue, and the provenance record.
 
 ---
 
 ## Benchmark
 
-STE-Code against a plain assistant on 59 documentation tests across 14 categories:
+STE-Code vs. a plain assistant on 59 documentation tests across 14 categories:
 
 | | STE-Code | Plain Assistant | Improvement |
 |---|:--------:|:---------------:|:-----------:|
@@ -79,111 +103,149 @@ Top categories: comments, error messages, and config files.
 
 ```
 STE-Code/
-├── README.md
-├── CONTRIBUTING.md            Contribution policy
-├── CODE_OF_CONDUCT.md
-├── CITATION.cff
+├── README.md                  This file
 ├── LICENSE                    MIT
-├── mkdocs.yml                 Documentation site config
-├── docs/                      Documentation site (MkDocs → GitHub Pages)
+├── mkdocs.yml                 Documentation site config (MkDocs → GitHub Pages)
+├── docs/                      Documentation site (MkDocs)
 │   ├── index.md               Home
-│   ├── pipeline.md            Six-stage A→F overview
+│   ├── pipeline.md            Pipeline overview (A→F + Finalize + Artifacts)
 │   ├── stages/                stage-a.md … stage-f.md
 │   ├── contributing.md
 │   └── roadmap/               Roadmap, grounding report, state reconciliation
-├── spec/                      ASD-STE100 Issue 9 source (434 pages)
-│   └── issue-09-2025/page-dir/   Page files + MANIFEST.md
 ├── ste-code/
-│   ├── artifacts/             Stage F — deliverables + level prompts
-│   │   ├── level1/system-prompt.txt     ★ ~1.2K tokens
-│   │   ├── level2/system-prompt.txt     ★ ~4.5K tokens
-│   │   ├── level3/system-prompt.txt     ★ ~8K tokens
-│   │   ├── level4/                      ★ rules + dictionary (~45K tokens)
-│   │   └── level5/                      ★ full rule summaries
-│   ├── extracted/             Stage A — raw page extraction (109 files)
-│   ├── refined/               Stage B — formatted pages (109 files)
-│   ├── grouped/               Stage C — 24 semantic groups
-│   ├── adapted/               Stage D — the standard, adapted to code
-│   ├── extensions/            Stage E — gap-fill entries (markdown + derived JSON)
-│   ├── enriched/              Enrichment pass output
-│   ├── data/                  Structured JSON (vocabulary, synonym table)
-│   ├── merged/                master-raw.md consolidation
-│   ├── templates/             Additional system prompts
-│   ├── linguistics/           Research notes, decision tree, contracts
-│   ├── audit/                 Audit reports
+│   ├── final/                 ★ THE STANDARD (source of truth, 54 rules)
+│   │   ├── rules/             a-secN-ruleX.Y.md (54), a-categories.md, a-dictionary.md
+│   │   ├── extensions/        six gap-fill areas (markdown + derived JSON)
+│   │   ├── README.md          Standard overview
+│   │   ├── provenance.md      Build/provenance record
+│   │   └── reference-catalogue.md
+│   ├── artifacts/             ★ DEPLOYABLE DELIVERABLES (Phase F)
+│   │   ├── _base/             Deterministic boilerplate sub-docs per tier
+│   │   ├── level-2/ … level5/ LLM-distilled sub-docs per tier
+│   │   ├── ste-code-rules.md  Consolidated full corpus
+│   │   ├── ste-code-system-prompt.md
+│   │   ├── llms.txt           Index of every sub-document
+│   │   └── llms-full.txt      Concatenation of every sub-document
+│   ├── extracted/  refined/  grouped/  adapted/   (intermediate pipeline stages)
+│   ├── extensions/  enriched/  data/  templates/  linguistics/  audit/
 │   └── _archive/              Superseded pipeline output
-├── translations/              Locale scaffolding (10 locales)
-└── .agents/                   Pipeline orchestration (agents, skills, config)
-    ├── config/agents.yaml     Agent backend configuration
-    ├── benchmark/             59-test benchmark suite
-    └── tools/
-        ├── runners/           phase-a … phase-f runners + launch-downstream.sh
-        ├── extraction/  refinement/  grouping/
-        ├── adaptation/  extension/   artifacts/
-        ├── quality/  maintenance/  continuation/  benchmark/
-        └── lib/               Agent runner and shared infrastructure
+├── spec/                      ASD-STE100 Issue 9 source (434 pages)
+├── translations/              Locale scaffolding
+└── .agents/                   Pipeline orchestration (agents, skills, tools)
+    ├── tools/
+    │   ├── extraction/ refinement/ grouping/ adaptation/ extension/
+    │   ├── finalize/    artifacts/   trajectory/   linkcheck/
+    │   ├── quality/  maintenance/  continuation/  benchmark/
+    │   ├── lib/         shared/       prompts/      runners/
+    │   └── TEMPLATES.md
+    ├── vendor/                 Vendor research (git-ignored, not committed)
+    └── tmp/                    Runtime scratch (git-ignored)
 ```
 
 ---
 
-## Agent-Agnostic Tools
+## Hybrid artifact build (Phase F)
 
-All pipeline scripts use the agent runner at `.agents/tools/lib/agent-runner.py`. The default backend is Hermes. Add other agents in `.agents/config/agents.yaml`. The model is read from `STE_MODEL` (default `tencent/hy3:free`).
+The deployable artifacts are produced by a **hybrid** design so content is never
+lost and never silently truncated:
 
-```bash
-# List available agent backends
-python3 .agents/tools/lib/agent-runner.py --list
+1. **Deterministic level separation** — `levels_scaffold.py` reads `ste-code/final/`
+   and emits, for each of the 8 tiers, a directory of **bounded sub-documents**
+   (`ste-code/artifacts/_base/level<N>/…`). Oversized rule sections are split so
+   no sub-doc exceeds ~450 KB. This is the boilerplate layer; it is
+   byte-reproducible and needs no LLM.
+2. **LLM distillation pass** — `distill_one.py` runs one Hermes session per
+   sub-document. The worker reads its base sub-doc (plus `ste-code/final/` for
+   anything outside it) and rewrites it into an LLM-optimized file at
+   `ste-code/artifacts/level<N>/<subdoc>`, writing in multiple `write_file` /
+   `patch` calls. On any failure it falls back to the deterministic base, so
+   nothing is lost. Each worker commits its sub-doc turn-by-turn.
+3. **Deterministic assembler** — `artifact_batch.py` concatenates `ste-code/final/`
+   into `ste-code-rules.md` and `ste-code-system-prompt.md` (full rule coverage,
+   version-stamped). No LLM, no truncation.
+4. **Index assembly** — a final pass writes `llms.txt` (an `llms.txt`-style index
+   of every tier/sub-doc) and `llms-full.txt` (the concatenation).
 
-# Run one pipeline stage (see the stage table below)
-python3 .agents/tools/runners/phase-c-run.py --verify     # deterministic
-python3 .agents/tools/runners/phase-d-run.py --resume     # LLM workers
-
-# Run the downstream chain C→D→E→F
-bash .agents/tools/runners/launch-downstream.sh
-
-# Assemble the level prompts (all accept --agent <name> and --dry-run)
-python3 .agents/tools/refinement/assemble-level3.py
-python3 .agents/tools/refinement/assemble-level2.py
-python3 .agents/tools/refinement/assemble-level1.py
-
-# Quality sweep and benchmark
-python3 .agents/tools/quality/sweep-quality.py --batches 5
-python3 .agents/benchmark/orchestrator.py
 ```
-
-Full documentation: the [documentation site](docs/index.md) and [`.agents/AGENTS.md`](.agents/AGENTS.md).
+final/  ──levels_scaffold.py──▶  _base/level<N>/   ──distill_one.py (LLM)──▶  level<N>/<subdoc>
+   │                                                                                  │
+   └──────────────────artifact_batch.py────────────────▶ ste-code-rules.md ─────────┘
+                                                                                    │
+                                                          llms.txt + llms-full.txt ◀──┘
+```
 
 ---
 
-## Pipeline
+## Link checking
 
-The standard was built from ASD-STE100 Issue 9 by a six-stage pipeline (A→F). Every stage has a runner in `.agents/tools/runners/` and a deterministic verification gate.
+A lychee-based link checker lives in `.agents/tools/linkcheck/` (config
+`lychee.toml`, runner `run_linkcheck.sh`). It scans `ste-code/final/**/*.md` and
+`ste-code/artifacts/**/*.md`, ignoring intentional legacy `master.md#…`
+backlinks and surfacing **real** broken links (stale internal paths, dead
+external URLs). Run it with `bash .agents/tools/linkcheck/run_linkcheck.sh`.
+
+---
+
+## Pipeline (how the standard was built)
+
+The standard was built from ASD-STE100 Issue 9 by a six-stage pipeline
+**A→F**, terminating in a Finalize stage that consolidates everything into
+`ste-code/final/`, followed by the Artifacts stage that packages `final/` into
+deployables.
 
 ```
-A Extract → B Refine → C Group → D Adapt → E Extend → F Artifacts
- (434 pp)    (109 f)    (24 f)    (58+ f)   (6 areas)   (deliverables)
+A Extract → B Refine → C Group → D Adapt → E Extend → Finalize → F Artifacts → Linkcheck
+ (434 pp)    (109 f)    (24 f)    (54+ f)   (6 areas)   (final/)     (artifacts/)   (lychee)
 ```
 
-| Stage | Runner | Reads | Writes | Gate |
-|:-----:|--------|-------|--------|------|
-| **A** Extraction | `phase-a-run.py`, `phase-a-gen.py` | `spec/issue-09-2025/page-dir/` | `ste-code/extracted/` | size + page headers, 2 retries |
-| **B** Refinement | `phase-b-run.py`, `phase-b1-run.py` | `ste-code/extracted/` | `ste-code/refined/` | per-batch parity, `verify_continuation.py` |
-| **C** Grouping | `phase-c-run.py` | `ste-code/refined/` | `ste-code/grouped/` | `verify-groups.py` |
-| **D** Adaptation | `phase-d-run.py` | `ste-code/grouped/` | `ste-code/adapted/` | `verify-adaptation.py` |
-| **E** Extension | `phase-e-run.py` | gap areas | `ste-code/extensions/` | `verify_extensions.py` |
-| **F** Artifacts | `phase-f-run.py` | `ste-code/adapted/` | `ste-code/artifacts/` | `verify-artifacts.py` |
+| Stage | Reads | Writes | Type |
+|:------:|-------|--------|------|
+| **A** Extraction | `spec/issue-09-2025/page-dir/` | `ste-code/extracted/` | LLM workers |
+| **B** Refinement | `ste-code/extracted/` | `ste-code/refined/` | LLM workers |
+| **C** Grouping | `ste-code/refined/` | `ste-code/grouped/` | Deterministic |
+| **D** Adaptation | `ste-code/grouped/` | `ste-code/adapted/` | LLM workers |
+| **E** Extension | gap areas | `ste-code/extensions/` | LLM workers |
+| **Finalize** | `ste-code/adapted/` + extensions | `ste-code/final/` (54 rules) | Deterministic + deep enrichment |
+| **F** Artifacts | `ste-code/final/` | `ste-code/artifacts/` | Hybrid (deterministic + LLM) |
+| **Linkcheck** | `ste-code/final/`, `ste-code/artifacts/` | reports | Deterministic (lychee) |
 
-Stages A, B, D, and E use LLM workers. Stages C and F are pure Python: grouping and assembly only move bytes, so content cannot be lost.
+Stages C, Finalize, F (assembly), and Linkcheck are deterministic or
+byte-moving, so content cannot be lost. Stages A, B, D, E use LLM workers.
+
+Run the downstream chain:
 
 ```bash
-# Run the downstream chain C→D→E→F
-bash .agents/tools/runners/launch-downstream.sh
-
-# Grouping dry-run only (writes nothing)
-bash .agents/tools/runners/launch-downstream.sh --dry
+bash .agents/tools/runners/launch-downstream.sh   # C→D→E→Finalize→F
 ```
 
-Stage details: [docs/pipeline.md](docs/pipeline.md) and [docs/stages/](docs/stages/).
+The model is read from `STE_MODEL` (default `tencent/hy3:free`).
+
+---
+
+## Agent-agnostic tools
+
+All pipeline scripts use the agent runner at `.agents/tools/lib/`. The default
+backend is Hermes; other backends can be configured. Prompts are externalized to
+`.agents/tools/prompts/*.md` and rendered with `templater.py` (double-brace
+`{{token}}` syntax).
+
+```bash
+# Assemble the consolidated artifacts (deterministic, from final/)
+python3 .agents/tools/artifacts/artifact_batch.py
+python3 .agents/tools/artifacts/verify-artifacts.py
+
+# Build the deterministic boilerplate sub-docs
+python3 .agents/tools/artifacts/levels_scaffold.py
+
+# Distill ONE sub-document with the LLM (one worker, own process)
+python3 .agents/tools/artifacts/distill_one.py level3 01-principles.md 3 "..."
+
+# Link check
+bash .agents/tools/linkcheck/run_linkcheck.sh
+```
+
+Full documentation: the [documentation site](docs/index.md) and
+[`.agents/AGENTS.md`](.agents/AGENTS.md).
 
 ---
 
@@ -203,76 +265,36 @@ MIT. See [LICENSE](LICENSE).
 }
 ```
 
-## Credits & References
+## Credits & references
 
 STE-Code stands on decades of controlled-language research, documentation
 theory, and verification tooling.
 
-### Primary Standard
-
-- **ASD-STE100 Simplified Technical English, Issue 9 (January 2025)** —
-  the foundational standard STE-Code adapts to the code domain. Owned by
-  **ASD — Aerospace, Security and Defence Industries Association of Europe**,
-  Brussels; maintained by the **Simplified Technical English Maintenance
-  Group (STEMG)**. Copyright and trademark of ASD.
+### Primary standard
+- **ASD-STE100 Simplified Technical English, Issue 9 (January 2025)** — the
+  foundational standard STE-Code adapts to the code domain, owned by **ASD**
+  (Aerospace, Security and Defence Industries Association of Europe),
+  maintained by the **Simplified Technical English Maintenance Group (STEMG)**.
   <https://www.asd-ste100.org/>
 
-- **AECMA / AIA Simplified English lineage** — STE's origin: developed in the
-  late 1970s–1980s by the **European Association of Aerospace Industries
-  (AECMA, now ASD)** with the **Aerospace Industries Association of America
-  (AIA)**, at the request of the **Association of European Airlines (AEA)**.
-  Working group founded 30 June 1983, Amsterdam; first Guide release 1986;
-  became ASD-STE100 specification in 2005 and an international standard in
-  2025. Historical basis for STE-Code's core principle: enforceability
-  determines survival (Caterpillar Fundamental English, unenforced, died 1982).
-
-### Controlled Natural Language Theory
-
+### Controlled natural language theory
 - **Tobias Kuhn** — *A Survey and Classification of Controlled Natural
-  Languages* (Computational Linguistics, 2014; 636+ citations). Source of
-  the PENS classification (Precision, Expressiveness, Naturalness,
-  Simplicity) used to profile STE-Code rules.
+  Languages* (Computational Linguistics, 2014). Source of the PENS classification.
   <https://aclanthology.org/J14-1005.pdf>
-
 - **Norbert E. Fuchs & Rolf Schwitter** (University of Zurich) — *Attempto
-  Controlled English (ACE)* (1996). Precedent for machine-processable
-  controlled English and explicit quoting conventions for the use–mention
-  distinction.
-  <https://attempto.ifi.uzh.ch/>
+  Controlled English (ACE)* (1996). <https://attempto.ifi.uzh.ch/>
 
-- **Rimay CNL research** — *On systematically building a controlled natural
-  language for functional requirements* (PubMed). Source of the coverage
-  methodology (88% of 460 real statements expressible).
-  <https://pubmed.ncbi.nlm.nih.gov/34776756/>
+### Documentation & readability
+- **John M. Carroll** — *Minimalism* (ACM SIGDOC). Basis for register
+  stratification: users act first and read at the moment of need.
 
-### Documentation & Readability Research
+### Adjacent standards
+- **Google Style Guides** — <https://google.github.io/styleguide/>
+- **github/codeql-coding-standards** — machine-enforceable standards as
+  executable queries. <https://github.com/github/codeql-coding-standards>
 
-- **John M. Carroll** — *Minimalism* tradition in technical documentation
-  (ACM SIGDOC). Learning-theoretic basis for register stratification: users
-  act first and read at the moment of need.
-  <https://dl.acm.org/doi/10.1145/296336.296362>
-
-### Verification & Executable Documentation Tooling
-
-- **asciidoctest** (PyPI) — *Verifiable, stateful, and interactive
-  documentation with AsciiDoc*. Reference implementation for code-block
-  verification.
-  <https://libraries.io/pypi/asciidoctest>
-
-### Adjacent Standards & Catalogues
-
-- **Google Style Guides** — precedent for public, per-language style standards.
-  <https://google.github.io/styleguide/>
-- **Kristories/awesome-guidelines** — community catalogue of coding standards.
-  <https://github.com/Kristories/awesome-guidelines>
-- **github/codeql-coding-standards** — precedent for machine-enforceable
-  standards as executable queries.
-  <https://github.com/github/codeql-coding-standards>
-
-### Intellectual-Property Note
-
-ASD-STE100 is a copyright and trademark of ASD, Brussels. STE-Code adapts
-its *principles and rule categories* to the software domain; it does not
-reproduce the standard's dictionary or rule text. Users requiring the
-authoritative aerospace standard should obtain Issue 9 directly from ASD
-(free of charge via the official form): <https://www.asd-ste100.org/>.
+### IP note
+ASD-STE100 is a copyright and trademark of ASD, Brussels. STE-Code adapts its
+*principles and rule categories* to the software domain; it does not reproduce
+the standard's dictionary or rule text. Obtain Issue 9 directly from ASD
+(free via the official form): <https://www.asd-ste100.org/>.

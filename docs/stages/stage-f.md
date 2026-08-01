@@ -1,119 +1,98 @@
-# Stage F — Artifacts
+# Stage F — Artifacts (hybrid)
 
-**Purpose:** consolidate the adapted rule corpus into the canonical deployable
-deliverables. This stage is **deterministic**: it collects and packages, and no
-model re-types the content.
+**Purpose:** package the canonical standard at `ste-code/final/` into the
+deployable, LLM-friendly artifacts under `ste-code/artifacts/`.
+
+Stage F is **hybrid**: a deterministic layer guarantees completeness and
+reproducibility, and an LLM layer distills each slice into an
+LLM-optimized form (in the spirit of `llms.txt` / `llms-full.txt`).
 
 | | |
 |---|---|
-| **Reads** | `ste-code/adapted/` |
-| **Writes** | `ste-code/artifacts/ste-code-rules.md`, `ste-code/artifacts/ste-code-system-prompt.md` |
-| **Type** | Pure Python, no LLM |
-| **Runner** | `.agents/tools/runners/phase-f-run.py` |
-| **Orchestrator** | `.agents/tools/artifacts/artifact_batch.py` |
+| **Reads** | `ste-code/final/` (54 rules, dictionary, categories, extensions, catalogue, provenance) |
+| **Writes** | `ste-code/artifacts/_base/`, `ste-code/artifacts/level-2/`…`level5/`, `ste-code-rules.md`, `ste-code-system-prompt.md`, `llms.txt`, `llms-full.txt` |
+| **Type** | Hybrid: deterministic assembly + LLM distillation |
+| **Tools** | `.agents/tools/artifacts/levels_scaffold.py`, `distill_one.py`, `artifact_batch.py`, `verify-artifacts.py` |
 | **Gate** | `.agents/tools/artifacts/verify-artifacts.py` |
-| **Checkpoint** | `.agents/state/artifact-checkpoint.json` |
 
 ---
 
-## Commands
+## The four steps
+
+### 1. Deterministic level separation — `levels_scaffold.py`
+Reads `ste-code/final/` and emits, for each of the 8 tiers, a directory of
+**bounded sub-documents** under `ste-code/artifacts/_base/level<N>/`. Oversized
+rule sections are split (`rules-secN-part{i}.md`) so no sub-doc exceeds ~450 KB.
+This is the boilerplate layer — byte-reproducible, no LLM, no truncation.
 
 ```bash
-# Assemble the artifacts
-python3 .agents/tools/runners/phase-f-run.py
+python3 .agents/tools/artifacts/levels_scaffold.py            # write all 8 tier dirs
+python3 .agents/tools/artifacts/levels_scaffold.py --dry-run
+```
 
-# Plan only, write nothing
-python3 .agents/tools/runners/phase-f-run.py --dry-run
+### 2. LLM distillation — `distill_one.py`
+One Hermes session per sub-document. The worker reads its base sub-doc (and
+`ste-code/final/` for anything outside it), then rewrites it into an
+LLM-optimized file at `ste-code/artifacts/level<N>/<subdoc>`. It writes in
+multiple `write_file` / `patch` calls (never one giant call, to avoid
+truncation). On any failure it falls back to the deterministic base, so nothing
+is lost. Each worker commits its sub-doc turn-by-turn with a batch number.
 
-# Gate only
-python3 .agents/tools/runners/phase-f-run.py --verify
+```bash
+# one sub-doc, as its own background process
+python3 .agents/tools/artifacts/distill_one.py level3 01-principles.md 3 \
+    "+ complete dictionary excerpt + all rules"
+```
 
-# Direct assembler use
+The worker prompt lives at
+`.agents/tools/prompts/synthesize-artifacts-worker.md` and is rendered with
+`templater.py` (double-brace `{{token}}` syntax).
+
+### 3. Deterministic assembler — `artifact_batch.py`
+Concatenates `ste-code/final/` into two consolidated deliverables:
+
+* `ste-code/artifacts/ste-code-rules.md` — the full corpus.
+* `ste-code/artifacts/ste-code-system-prompt.md` — the same standard shaped as
+  an LLM system prompt, with the "write in multiple calls" guidance.
+
+Full rule coverage is verified against `final/` (54/54). No LLM, no truncation.
+
+```bash
 python3 .agents/tools/artifacts/artifact_batch.py
 python3 .agents/tools/artifacts/artifact_batch.py --dry-run
-python3 .agents/tools/artifacts/artifact_batch.py --verify
-
-# Gate on its own
-python3 .agents/tools/artifacts/verify-artifacts.py
 ```
 
-`--agent` and `--model` are accepted and forwarded as informational no-ops. The
-runner executes the Hermes virtual environment interpreter at
-`~/.hermes/hermes-agent/venv/bin/python3`; to use a different interpreter, call
-`artifact_batch.py` directly.
+### 4. Index assembly — `llms.txt` / `llms-full.txt`
+A final deterministic pass writes:
 
----
+* `ste-code/artifacts/llms.txt` — an `llms.txt`-style index of every tier and
+  its sub-documents (for agentic retrieval).
+* `ste-code/artifacts/llms-full.txt` — the concatenation of every distilled
+  sub-document.
 
-## What the assembler does
-
-* Concatenates the adapted rule files in canonical order (`SECTION_ORDER` in
-  `artifact_batch.py`): section 1 rules, then section 2, and so on to section 9
-  followed by `GR1`–`GR4`.
-* Wraps the corpus in an externalized header and footer template, so you can
-  change the packaging without changing the Python.
-* Verifies rule coverage.
-
-The creative work already happened in Stage D. Stage F only collects, so there
-is no truncation risk, and the output is reproducible byte for byte from the
-same `adapted/` input.
-
----
-
-## Level prompts
-
-The five adaptation levels live under `ste-code/artifacts/level1` …
-`ste-code/artifacts/level5`. They are assembled by the level scripts in
-`.agents/tools/refinement/`, not by `artifact_batch.py`:
-
-```bash
-python3 .agents/tools/refinement/assemble-level4.py
-python3 .agents/tools/refinement/assemble-level3.py
-python3 .agents/tools/refinement/assemble-level2.py
-python3 .agents/tools/refinement/assemble-level1.py
-
-# Level 5 summaries
-python3 .agents/tools/refinement/populate-level5.py
-python3 .agents/tools/refinement/regenerate-level5.py
-```
-
-Every assembly script accepts `--agent <name>` to select a backend and
-`--dry-run` to preview.
-
-| Script | Input | Output |
-|--------|-------|--------|
-| `assemble-level1.py` | Level 2 | Level 1 (~1.2K tokens) |
-| `assemble-level2.py` | Level 3 | Level 2 (~4.5K tokens) |
-| `assemble-level3.py` | Level 5 rule summaries | Level 3 (~8K tokens) |
-| `assemble-level4.py` | Level 5 rule summaries | Level 4 (~45K tokens) |
-| `assemble-level4-parallel.py` | Level 5 rule summaries | Level 4, parallel build |
+Each tier directory also gets a `_index.md` listing its sub-docs.
 
 ---
 
 ## Verification gate
 
-`verify-artifacts.py` confirms that the assembled artifacts cover every adapted
-rule and that the assembly did not drop or duplicate content. It is
-deterministic — no model. Exit code `0` means the gate passes.
-
-Related quality tools:
+`verify-artifacts.py` confirms that the assembled artifacts cover every rule in
+`ste-code/final/` and that nothing was dropped or duplicated. Deterministic — no
+model. Exit code `0` means the gate passes.
 
 ```bash
-python3 .agents/tools/quality/sweep-quality.py --batches 5
-python3 .agents/tools/quality/check-rails.py
-python3 .agents/tools/quality/check-tables.py
+python3 .agents/tools/artifacts/verify-artifacts.py
 ```
 
----
-
-## Benchmark the result
+Related quality tooling (applies to `final/`):
 
 ```bash
-python3 .agents/benchmark/orchestrator.py           # STE-Code, 59 tests
-python3 .agents/benchmark/orchestrator-control.py   # Plain assistant control group
+bash .agents/tools/linkcheck/run_linkcheck.sh   # lychee link check
 ```
 
 ---
 
 ## Back to the overview
 
-See the [pipeline overview](../pipeline.md) for the full A→F flow.
+See the [pipeline overview](../pipeline.md) for the full A→F + Finalize +
+Linkcheck flow.
