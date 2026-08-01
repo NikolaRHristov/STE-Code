@@ -80,7 +80,8 @@ def main() -> int:
                     help="per-orchestrator worker fan-out")
     ap.add_argument("--timeout", type=int, default=600)
     ap.add_argument("--results-base",
-                    default=str(BENCH / "results-variations"))
+                    default=str(BENCH / "tests"),
+                    help="parent dir; each variation writes tests/<name>/")
     ap.add_argument("--skip-adhoc", action="store_true")
     ap.add_argument("--skip-control", action="store_true")
     ap.add_argument("--seed", type=int, default=7)

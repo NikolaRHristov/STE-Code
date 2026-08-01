@@ -88,7 +88,8 @@ def _rephrase(static_case: dict, rng: random.Random, idx: int) -> dict:
             [w for kw in static_case.get("forbidden_keywords", [])
              for w in (kw if isinstance(kw, list) else [kw])
              if isinstance(w, str)] +
-            [w for w in (slang.split(), hedge.split(), nounverb.split()) if w]
+            [w for grp in (slang.split(), hedge.split(), nounverb.split())
+             for w in grp]
         )),
         "max_tokens": static_case.get("max_tokens", 300),
         "difficulty": static_case.get("difficulty", "medium"),
