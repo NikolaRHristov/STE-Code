@@ -11,8 +11,8 @@
 # instructed to do so.
 #
 # CROSS-REFERENCE: `orchestrator.py` (sibling file)
-#   - orchestrator.py:     STE-Code system prompt → results/run-*/
-#   - orchestrator-control.py:  Plain system prompt → results-control/run-*/
+#   - orchestrator.py:     STE-Code system prompt → tests/run-*/
+#   - orchestrator-control.py:  Plain system prompt → tests/control/run-*/
 #   - Both run the same 59 test cases from test-cases/category-*.json
 #   - Both use the SAME scoring engine (PRINCIPLE_KEYWORDS, check_principles,
 #     calc_correctness) to ensure an apples-to-apples comparison
@@ -77,7 +77,7 @@ _cli_parser.add_argument(
 _cli_parser.add_argument(
     "--ste-results", default=None,
     help="Path to STE-Code aggregate JSON for comparison "
-         "(auto-detects latest results/run-*/aggregate-results.json if --compare set)"
+         "(auto-detects latest tests/run-*/aggregate-results.json if --compare set)"
 )
 _cli_parser.add_argument(
     "--retries", type=int, default=0,
@@ -117,7 +117,7 @@ _signal.signal(_signal.SIGTERM, _cleanup_workers)
 # Auto-detect project root (works on any machine)
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 TEST_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/test-cases")
-RESULTS_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/results-control")
+RESULTS_DIR = os.path.join(PROJECT_ROOT, ".agents/benchmark/tests/control")
 MODEL = "poolside/laguna-s-2.1:free"
 
 # ---- CLI overrides: supersede hardcoded defaults when arguments provided ----
@@ -746,7 +746,7 @@ if not _CLI_NO_REPORT:
 # =============================================================================
 # Phase 6: Post-Run Delta Report — Control vs STE-Code Comparison
 # =============================================================================
-# Automatically loads the latest STE-Code aggregate JSON (from results/run-*/)
+# Automatically loads the latest STE-Code aggregate JSON (from tests/run-*/)
 # and prints a side-by-side delta report. Activated by --compare flag or
 # called explicitly. If --ste-results is provided, uses that file directly.
 # Falls back to auto-detecting the most recent STE-Code run directory.
@@ -759,11 +759,11 @@ if not _CLI_NO_REPORT:
 def _find_latest_ste_run():
     """Auto-detect the most recent STE-Code results directory.
 
-    Searches PROJECT_ROOT/.agents/benchmark/results/run-*/ for the
-    newest aggregate-results.json (NOT results-control — those are us).
+    Searches PROJECT_ROOT/.agents/benchmark/tests/run-*/ for the
+    newest aggregate-results.json (NOT tests/control — those are us).
     Returns path to aggregate JSON or None if not found.
     """
-    ste_results_dir = os.path.join(PROJECT_ROOT, ".agents/benchmark", "results")
+    ste_results_dir = os.path.join(PROJECT_ROOT, ".agents/benchmark", "tests")
     if not os.path.isdir(ste_results_dir):
         return None
 

@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 PROJECT = Path(__file__).resolve().parent.parent.parent
 ORCHESTRATOR = PROJECT / ".agents" / "benchmark" / "orchestrator.py"
 ARTIFACTS = PROJECT / "ste-code" / "artifacts"
-RESULTS_BASE = PROJECT / ".agents" / "benchmark" / "results-levels"
+RESULTS_BASE = PROJECT / ".agents" / "benchmark" / "tests" / "levels"
 
 # STE-Code now ships 8 deterministic tiers (artifacts/<tier>/system-prompt.txt),
 # produced by finalize_artifacts.py. Every tier has a single concatenated

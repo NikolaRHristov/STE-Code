@@ -43,19 +43,14 @@ ste-code/audit/
 .agents/benchmark/rescore.py
 .agents/benchmark/benchmark_lib.py
 
-# All benchmark run output lives under tests/ (one dir, ignored).
-# Each variation writes tests/<name>/; never commit these.
+# ALL benchmark run output lives under tests/ — one dir, ignored, no exceptions.
+# orchestrator.py, orchestrator-control.py, benchmark-levels.py, run_pipeline.py
+# and run_all_variations.py all default under it; pass --results-dir/--base only
+# with a path inside tests/.
 .agents/benchmark/tests/
 # Ad-hoc prompts are generated pre-run (deterministic, seed=7) — never commit.
 .agents/benchmark/test-cases-adhoc/
-# Legacy results dirs (historical runs) — also ignored.
 .agents/benchmark/*.log
-.agents/benchmark/mini-results/
-.agents/benchmark/results-control/
-.agents/benchmark/results-levels/
-.agents/benchmark/results-v2/
-.agents/benchmark/results-v3/
-.agents/benchmark/results/
 .agents/benchmark/sample-session/**
 
 /fetchUserData.js

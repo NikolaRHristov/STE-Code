@@ -397,7 +397,7 @@ def main():
 
     # Resolve paths.
     test_dir = _resolve_path(args.test_dir, ".agents/benchmark/test-cases")
-    results_dir = _resolve_path(args.results_dir, ".agents/benchmark/results")
+    results_dir = _resolve_path(args.results_dir, ".agents/benchmark/tests")
     sys_prompt_file = _resolve_path(
         args.system_prompt_file,
         "ste-code/artifacts/llms-full.txt",
