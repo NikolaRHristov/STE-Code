@@ -41,11 +41,19 @@ This rule applies to sentences in procedural documentation text. Code snippets, 
 
 ### Examples
 
+> *Adapted from spec pair:* Non-STE: Put preservation oil into the unit through the vent hole until the oil level is approximately 6 mm (0.24 inches) below the surface of the flange cover. | STE: Put preservation oil into the unit through the vent hole. Continue until the oil level is approximately 6 mm (0.24 in) below the surface of the flange cover.
+
 > **Non-STE:** Run the database migration script from the project root directory and then restart the application server to apply all pending schema changes to the production environment. (27 words)
 >
 > **STE:** Run the database migration script from the project root directory. (9 words) Then, restart the application server to apply all pending schema changes. (13 words)
 >
 > *Source pairing: the long-sentence-to-two-shorter-sentences split in the Non-STE/STE pair directly above follows the same principle as the original STE example in Rule 5.1.*
+
+```bash
+cd /srv/payments-service
+alembic upgrade head
+systemctl restart payments.service
+```
 
 > **Non-STE:** The initialization process will automatically create the required directory structure and populate it with default configuration files before the application starts. (22 words)
 >
@@ -53,20 +61,39 @@ This rule applies to sentences in procedural documentation text. Code snippets, 
 >
 > *Additional code-domain example — no direct spec pair*
 
+```bash
+./payments-service init
+# creates ./config and ./data, then writes config/default.toml
+```
+
 > **Non-STE:** Set the environment variable HTTP_TIMEOUT to the value 30000 which represents the maximum number of milliseconds that the client will wait for a response from the upstream server. (30 words)
 >
 > **STE:** Set the environment variable HTTP_TIMEOUT to 30000. (8 words) This value is the maximum wait time in milliseconds for a response from the upstream server. (17 words)
 >
 > *Additional code-domain example — no direct spec pair*
 
+```bash
+export HTTP_TIMEOUT=30000
+```
+
 > **CAUTION:** IF YOU DELETE THE CONFIGURATION DIRECTORY WITHOUT A BACKUP, YOU CANNOT RESTORE THE APPLICATION SETTINGS TO THEIR PREVIOUS STATE. (18 words)
 >
 > *Adapted from spec example: a CAUTION that stays within the 20-word limit on destructive operations — see the original STE example in Rule 5.1.*
+
+```bash
+cp -r ./config ./config.bak   # back up first
+rm -rf ./config               # then delete
+```
 
 > **Non-STE:** For more detailed information about the supported authentication methods and their respective configuration parameters in this release, please refer to the official authentication module documentation page. (27 words)
 > **STE (note):** For more information about the supported authentication methods, refer to the authentication module documentation. (15 words)
 >
 > *Adapted from original rule — notes have a maximum sentence length of 25 words; no direct spec pair*
+
+```text
+NOTE: Supported methods are OAuth2, API key, and mTLS.
+See docs/auth.md for setup steps.
+```
 
 ## Code-Domain Explanation
 
@@ -77,10 +104,20 @@ Rule 5.1 applies to all procedural text in software documentation. A procedure i
 README files contain installation procedures, configuration steps, and quick-start guides. Each step in these procedures must use sentences of 20 words or fewer. A long installation instruction is difficult to follow while the reader types commands in a terminal window. Break long steps into two or more shorter steps. Each step must give exactly one instruction.
 
 > **Non-STE:** Clone the repository to your local machine using the command shown below and then navigate into the newly created project directory before running the setup script. (28 words)
->
-> **STE:** Clone the repository to your local machine. (6 words) Use the command shown below. (5 words) Then, navigate into the new project directory. (7 words) Run the setup script. (4 words)
->
-> *Principle: P12 (technical verbs: clone, navigate, run). Four instructions become four sentences.*
+
+```bash
+git clone https://github.com/example/payments-service.git && cd payments-service && ./setup.sh
+```
+
+> **STE:** Clone the repository to your local machine. (6 words) Then, navigate into the new project directory. (7 words) Run the setup script. (4 words)
+
+```bash
+git clone https://github.com/example/payments-service.git
+cd payments-service
+./setup.sh
+```
+
+> *Principle: P12 (technical verbs: clone, navigate, run). Four instructions become four sentences. Each step is a separate command the reader can copy and run.*
 
 ### API Documentation
 
@@ -92,6 +129,14 @@ API reference pages describe endpoints, parameters, return types, and error code
 >
 > *Principle: P1 (use approved words: accepts, specifies, return). Descriptive sentences may use up to 25 words each. Here, the longest is 9 words. The original sentence packs three pieces of information into one clause chain.*
 
+Request the second page of a paginated list:
+
+```http
+GET /v1/orders?page=2&page_size=50 HTTP/1.1
+Host: api.example.com
+Authorization: Bearer <token>
+```
+
 ### Docstrings and Inline Comments
 
 Docstrings for functions and methods often contain procedural instructions for callers. Each sentence in a docstring procedure must obey the 20-word limit. Descriptive sentences about return values or side effects may use up to 25 words. Inline comments that give instructions must also obey the limit.
@@ -100,7 +145,19 @@ Docstrings for functions and methods often contain procedural instructions for c
 >
 > **STE:** Call this method to initialize the connection pool. (8 words) Use the provided configuration. (4 words) The method establishes the minimum number of idle connections. (10 words) Then, it returns control to the caller. (8 words)
 >
-> *Principle: P2 (use words only as their specified part of speech: "initialize" as verb, "configuration" as noun). One long sentence with three embedded actions becomes four sentences.*
+> *Principle: P2 (use words only as specified part of speech: "initialize" as verb, "configuration" as noun). One long sentence with three embedded actions becomes four sentences.*
+
+Compliant Python docstring:
+
+```python
+def init_pool(config: PoolConfig) -> ConnectionPool:
+    """Initialize the connection pool.
+
+    Use the provided configuration. The method establishes the minimum
+    number of idle connections. Then, it returns control to the caller.
+    """
+    ...
+```
 
 ### Commit Messages
 
@@ -112,6 +169,16 @@ A commit message subject line is a short summary of the change. Keep the subject
 >
 > *Principle: P11 (one term per concept: "token validation logic" is used consistently). The justification ("so that it can be reused...") becomes a separate declarative sentence.*
 
+Compliant commit:
+
+```text
+Refactor authentication middleware
+
+Extracted the token validation logic into a separate utility function.
+The WebSocket upgrade handler and the GraphQL subscription resolver now
+reuse this function.
+```
+
 ### Error Messages
 
 Error messages shown to the user must be short and clear. Use the 20-word limit for error messages that tell the user to take action. Error messages that only report a condition may use the 25-word descriptive limit. Error messages are read under stress. Short sentences reduce the cognitive load on the user.
@@ -121,6 +188,12 @@ Error messages shown to the user must be short and clear. Use the 20-word limit 
 > **STE:** The configuration file has a syntax error on line 42. (11 words) Check for a missing closing bracket or an unquoted string value. (13 words)
 >
 > *Principle: P3 (use words only with approved meanings: "has" instead of "contains," "check" instead of "is most likely caused by"). The diagnosis and the remedy are separated.*
+
+Show the message as a short, actionable string:
+
+```text
+Config error on line 42: missing closing bracket or unquoted string.
+```
 
 ## Paradigm-Specific Guidance
 
@@ -136,6 +209,16 @@ Sentence-length pitfalls in OOP docs include long sentences that describe all co
 >
 > *Principle: P5 (technical code nouns: ILogger, configuration object). Each parameter is documented in its own sentence cluster. The reader can focus on one parameter at a time.*
 
+C# constructor signature:
+
+```csharp
+public DatabaseClient(
+    string connectionString,
+    ILogger logger,
+    ClientConfig? config = null
+) { ... }
+```
+
 ### Functional Documentation (Haskell, Elixir, Clojure, Rust)
 
 Functional documentation describes pure functions, type signatures, monadic chains, and pattern matching. The 20-word rule helps readers follow the flow of data through function compositions. Long sentences that trace data through multiple composed functions are common in functional docs and must be split.
@@ -145,6 +228,13 @@ Functional documentation describes pure functions, type signatures, monadic chai
 > **STE:** The `process` function maps a transformation over each element in the list. (13 words) Then, it filters out any `None` results. (8 words) Finally, it folds the remaining values into a single accumulator. (13 words) The provided binary operator controls the fold. (8 words)
 >
 > *Principle: P12 (technical verbs: maps, filters, folds). Each stage of the pipeline gets its own sentence. The reader traces data flow one transformation at a time.*
+
+Haskell implementation:
+
+```haskell
+process :: (a -> b) -> (b -> Bool) -> (b -> b -> b) -> [a] -> b
+process f p op = foldl1 op . filter p . map f
+```
 
 ### Procedural Documentation (C, Go, Bash)
 
@@ -156,6 +246,13 @@ Procedural code tends to have long sequences of setup, validation, and teardown 
 >
 > *Principle: P9 (short, clear technical nouns: configure script, make, -j flag). The detection phase and the compilation phase are separated. Flag usage is its own step.*
 
+Bash build commands:
+
+```bash
+./configure
+make -j"$(nproc)"
+```
+
 ### Declarative Documentation (SQL, Terraform, Kubernetes YAML)
 
 Declarative documentation describes the desired state of a system. Procedures in declarative docs include migration runbooks, apply-and-verify workflows, and rollback instructions. Long sentences that describe a resource and all its attributes together are the most common violation.
@@ -166,6 +263,14 @@ Declarative documentation describes the desired state of a system. Procedures in
 >
 > *Principle: P8 (standard, well-known technical nouns: backup, replication lag, migration script). Prerequisites are checked before the action. The sequence is explicit. The justification ("to prevent data inconsistency") is implied by the ordering.*
 
+Terraform migration runbook:
+
+```bash
+pg_dump "$PROD_DSN" > backup_$(date +%F).sql
+REPLICA_LAG=$(psql "$PROD_DSN" -t -c "SELECT EXTRACT(SECONDS FROM now() - pg_last_xact_replay_timestamp());")
+[ "$(echo "$REPLICA_LAG < 5" | bc)" -eq 1 ] && alembic upgrade head
+```
+
 ### Systems Documentation (Rust Ownership, C Memory Management)
 
 Systems documentation describes ownership models, memory allocation, lifetimes, and safety guarantees. These topics are complex. Short sentences prevent the reader from missing critical safety information. Long safety warnings that bury the hazard in context are dangerous and must be split.
@@ -175,6 +280,15 @@ Systems documentation describes ownership models, memory allocation, lifetimes, 
 > **STE:** After you call this function, do not use the original buffer pointer. (14 words) Ownership of the memory is transferred to the callee. (11 words) Access through the old pointer causes undefined behavior. (10 words)
 >
 > *Principle: P1 (use approved words: "causes" instead of "will result in"). The prohibition, the reason, and the consequence each get their own sentence. Safety-critical information is never buried in a subordinate clause.*
+
+Rust signature that transfers ownership:
+
+```rust
+fn take_buffer(buf: Vec<u8>) -> Parser {
+    // buf is moved into Parser; the caller's buf is no longer valid.
+    Parser::new(buf)
+}
+```
 
 ## Extended Examples
 
@@ -188,6 +302,13 @@ Each example below shows a Non-STE sentence (violating the rule) and the STE-Cod
 >
 > *Principle: P8 (standard technical nouns: Docker image, Dockerfile, container), P12 (technical verbs: build, run, map). The original sentence combines three procedural steps into one. The STE version splits the build, the file specification, the run command, and the port mapping into separate sentences. Each sentence now focuses on one action.*
 
+Docker commands:
+
+```bash
+docker build -t payments-service:latest .
+docker run -p 8080:80 payments-service:latest
+```
+
 ### Example 2 — Git Workflow Instructions
 
 > **Non-STE:** Create a new feature branch from the main branch, implement your changes in that branch, push the branch to the remote repository, and then open a pull request against the main branch for code review. (35 words)
@@ -195,6 +316,15 @@ Each example below shows a Non-STE sentence (violating the rule) and the STE-Cod
 > **STE:** Create a new feature branch from the main branch. (10 words) Implement your changes in that branch. (7 words) Push the branch to the remote repository. (9 words) Then, open a pull request against the main branch. (11 words)
 >
 > *Principle: P12 (technical verbs: create, push, open), P9 (short, clear technical nouns: branch, pull request). A four-step workflow was written as one sentence joined by commas and "and." The STE version gives each step its own sentence. The reader can complete one step before reading the next.*
+
+Git commands:
+
+```bash
+git switch -c feature/token-cache main
+# ... make changes, commit ...
+git push -u origin feature/token-cache
+gh pr create --base main --title "Add token cache"
+```
 
 ### Example 3 — Configuration File Documentation
 
@@ -204,6 +334,14 @@ Each example below shows a Non-STE sentence (violating the rule) and the STE-Cod
 >
 > *Principle: P1 (use approved verbs: controls, handles, set — instead of "lets you define"), P11 (one term per concept, consistent throughout). The original sentence describes three configuration options in one breath. The STE version separates the conceptual overview from each specific setting.*
 
+YAML configuration:
+
+```yaml
+retry_policy:
+  max_attempts: 3
+  backoff: exponential
+```
+
 ### Example 4 — API Rate Limiting Documentation
 
 > **Non-STE:** When a client exceeds the rate limit of 100 requests per minute the server will respond with HTTP status code 429 and include a Retry-After header that tells the client how many seconds it must wait before sending another request to the same endpoint. (42 words)
@@ -211,6 +349,16 @@ Each example below shows a Non-STE sentence (violating the rule) and the STE-Cod
 > **STE:** The rate limit is 100 requests per minute. (8 words) When a client exceeds this limit, the server responds with HTTP status 429. (14 words) The response includes a Retry-After header. (7 words) This header tells the client how many seconds to wait. (12 words) Then, the client can send another request. (8 words)
 >
 > *Principle: P2 (use words only as specified part of speech), P12 (technical verbs: responds, includes, send), P5 (technical code nouns: HTTP status 429, Retry-After). A complex conditional with embedded clauses is restructured into a sequence of short, declarative sentences. Each sentence states one fact about the system behavior.*
+
+Server response:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 30
+Content-Type: application/json
+
+{"error": "rate_limit_exceeded", "retry_after": 30}
+```
 
 ### Example 5 — Debugging Instructions
 
@@ -220,6 +368,14 @@ Each example below shows a Non-STE sentence (violating the rule) and the STE-Cod
 >
 > *Principle: P3 (use words only with approved meanings), P13 (do not use technical verbs as nouns: "sign" is a verb here). The original sentence has embedded relative clauses ("that was used to sign the token that the client is sending"). The STE version removes the nesting and restates the verification as a simple equality check. The longest sentence drops from 44 to 17 words.*
 
+Bash debug steps:
+
+```bash
+kubectl logs deploy/auth-service | grep -i "token"
+echo "$JWT_SECRET"
+jwt decode "$ACCESS_TOKEN" | grep -i secret
+```
+
 ### Example 6 — CI/CD Pipeline Documentation
 
 > **Non-STE:** The deployment pipeline will automatically run the full test suite on every push to the main branch and if all tests pass it will build a production Docker image and push it to the container registry before updating the Kubernetes deployment with the new image tag. (44 words)
@@ -227,6 +383,21 @@ Each example below shows a Non-STE sentence (violating the rule) and the STE-Cod
 > **STE:** The deployment pipeline runs the full test suite on every push to the main branch. (17 words) If all tests pass, the pipeline builds a production Docker image. (13 words) Then, it pushes the image to the container registry. (11 words) Finally, it updates the Kubernetes deployment with the new image tag. (14 words)
 >
 > *Principle: P12 (technical verbs: runs, builds, pushes, updates), P8 (standard technical nouns: Docker image, container registry, Kubernetes deployment), P11 (consistent term: "pipeline" throughout). A CI/CD pipeline description is restructured into a sequential narrative. Each stage of the pipeline gets its own sentence. The conditional is isolated from the build step.*
+
+CI configuration (GitHub Actions):
+
+```yaml
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    steps:
+      - run: pytest
+      - run: docker build -t registry.example.com/app:${{ github.sha }} .
+      - run: docker push registry.example.com/app:${{ github.sha }}
+      - run: kubectl set image deploy/app app=registry.example.com/app:${{ github.sha }}
+```
 
 ## Edge Cases
 
@@ -240,6 +411,18 @@ Some technical names are unavoidably long. "Amazon Web Services Elastic Kubernet
 >
 > **STE:** Create a new cluster in Amazon EKS. (7 words) Use the eksctl command-line tool. (6 words) Use the provided cluster configuration YAML file. (8 words) The file must specify three worker nodes of type t3.medium. (13 words)
 
+```bash
+eksctl create cluster -f cluster-config.yaml
+```
+
+```yaml
+# cluster-config.yaml
+nodeGroups:
+  - name: workers
+    instanceType: t3.medium
+    desiredCapacity: 3
+```
+
 ### Edge Case 2 — Code Keywords That Form Long Phrases
 
 Some code keyword sequences form long noun phrases that consume many word-count slots. For example: "the `async fn` with `impl Future<Output = Result<T, E>>` return type" contains several tokens. Counting conventions matter for compliance.
@@ -251,6 +434,15 @@ Some code keyword sequences form long noun phrases that consume many word-count 
 > **STE:** The function signature is `pub async fn fetch_user(id: UserId) -> Result<User, Error>`. (8 words) The function is public and asynchronous. (6 words) It returns a Result type. (6 words) The Result wraps a User value or an Error value. (11 words)
 >
 > *Under the code-token counting convention, the STE version's longest procedural sentence is 11 words. The code block in backticks counts as one word.*
+
+Rust signature:
+
+```rust
+pub async fn fetch_user(id: UserId) -> Result<User, Error> {
+    let row = db.query_one("SELECT * FROM users WHERE id = $1", &[&id]).await?;
+    Ok(User::from_row(row)?)
+}
+```
 
 ### Edge Case 3 — Generated Documentation
 
@@ -272,8 +464,18 @@ When a sentence introduces a multi-line code example mid-sentence, the sentence 
 
 > **Non-STE:** Use the following configuration block in your docker-compose.yml file to set up the service with the correct environment variables and port mappings as shown in the example below. (27 words, excluding the code block)
 >
-> **STE:** Use this configuration block in your docker-compose.yml file: (9 words) [code block] This configuration sets the correct environment variables and port mappings. (11 words)
->
+> **STE:** Use this configuration block in your docker-compose.yml file: (9 words) This configuration sets the correct environment variables and port mappings. (11 words)
+
+```yaml
+services:
+  web:
+    image: nginx:1.27
+    environment:
+      - LOG_LEVEL=info
+    ports:
+      - "8080:80"
+```
+
 > *The introductory sentence and the follow-up sentence are each under the 20-word limit. The code block is not counted.*
 
 ## Grammar Notes
@@ -294,6 +496,13 @@ When a procedural sentence exceeds 20 words, split it using one of these techniq
 >
 > **STE:** Make sure the database version is 4.2 or later. (10 words) Make sure the backup job completed successfully. (7 words) Then, run the migration script. (5 words)
 
+```sql
+SELECT version();          -- must be >= 4.2
+SELECT status FROM backups;  -- must be 'completed'
+-- then:
+alembic upgrade head
+```
+
 **2. Extract conditions into their own sentence.** Move a conditional clause ("if X, then Y") into a separate sentence that precedes or follows the main instruction. This also improves comprehension because the reader checks the condition before attempting the action.
 
 **3. Separate the action from its purpose.** Put the instruction in one sentence. Put the reason or result in the next sentence.
@@ -301,6 +510,10 @@ When a procedural sentence exceeds 20 words, split it using one of these techniq
 > **Non-STE:** Set the `NODE_ENV` variable to `production` so that the application loads the optimized configuration and disables the development-only debugging middleware and hot-reload features. (26 words)
 >
 > **STE:** Set the `NODE_ENV` variable to `production`. (6 words) This setting loads the optimized configuration. (6 words) It disables debugging middleware and hot-reload features. (8 words)
+
+```bash
+export NODE_ENV=production
+```
 
 **4. Use lists.** Convert a sentence that enumerates items into a bulleted or numbered list. Each list item can be a fragment or a short sentence. List items are not subject to the 20-word sentence limit because they are not sentences — but keep each item short for readability.
 
@@ -322,6 +535,10 @@ Coordinating conjunctions (and, but, or, nor, for, so, yet) may join two short, 
 >
 > **STE:** Run the full test suite with coverage reporting enabled. (9 words) Then, check the generated report for untested code paths. (11 words) These gaps can indicate missing test coverage. (8 words)
 
+```bash
+pytest --cov=src --cov-report=term-missing
+```
+
 ### Subordinate Clause Depth
 
 Limit subordinate clause depth to two levels. A sentence with three or more levels of embedding is difficult to parse and usually exceeds the 20-word limit. Flatten deep structures by promoting embedded clauses to their own sentences.
@@ -331,6 +548,14 @@ Limit subordinate clause depth to two levels. A sentence with three or more leve
 > **STE:** The server returns an error when the request payload exceeds the configured limit. (13 words) The administrator sets this limit in the settings file. (11 words)
 >
 > *Two levels of embedding replaced with two sentences at one level each.*
+
+```python
+MAX_PAYLOAD = settings["max_payload_bytes"]  # set by the administrator
+
+def handle(req):
+    if len(req.body) > MAX_PAYLOAD:
+        raise PayloadTooLarge(settings["max_payload_bytes"])
+```
 
 ## Cross-References
 
