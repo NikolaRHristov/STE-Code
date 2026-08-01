@@ -29,71 +29,77 @@ In the non-STE example, "servo control unit," "actuator," and "control unit" ref
 
 When you select a code-domain technical noun, do not use a different code-domain technical noun in other parts of your documentation to refer to the same item. Use the code-domain technical noun that is approved in your project, company, industry, or subject field consistently throughout your text.
 
-Changing the name of the same item in different sections of the documentation causes confusion. The reader must determine whether you refer to the same item or to a different item. Always use the same code-domain technical noun for the same item.
+Changing the name of the same item in different sections of the documentation causes confusion. The reader must determine whether you refer to the same item or to a different item. Always use the same code-domain technical noun for the same item. The source of truth for the noun is the code itself: the class, function, module, table, resource, environment variable, or configuration key as it is defined and used in the repository.
 
 ### Examples
 
-> **Non-STE:**
-> 1. Initialize the UserService class in the application entry point.
-> 2. Call the authenticate method on the AccountManager to verify the credentials.
-> 3. The UserHandler returns a session token that the client must store.
-
-> **STE:**
-> 1. Initialize the UserService class in the application entry point.
-> 2. Call the authenticate method on the UserService to verify the credentials.
-> 3. The UserService returns a session token that the client must store.
-
-README section that shows the violation:
-
-```markdown
-# Auth Service
-
-The `AccountManager` starts when the server boots. Use the `UserHandler`
-to get a token. The `UserService` class logs each request.
-```
-
-README section that follows the rule:
-
-```markdown
-# Auth Service
-
-The `UserService` starts when the server boots. Use the `UserService`
-to get a token. The `UserService` class logs each request.
-```
-
-> *Adapted from spec pair: "servo control unit," "actuator," and "control unit" refer to the same component, and the reader cannot tell if they are the same or different items. In the non-STE example, "UserService," "AccountManager," and "UserHandler" refer to the same class. The STE version uses the approved code-domain technical noun "UserService" in all three sentences, just as the spec example uses "actuator" consistently.*
+> *Adapted from spec pair:* Non-STE: "servo control unit", "actuator", "control unit" (three names for one component)  |  STE: "actuator" (one consistent technical noun for the component)
 
 > **Non-STE:**
-> 1. Send a request to the /api/login path to start a session.
-> 2. The authentication route returns a JSON Web Token to the caller.
-> 3. Include the token from the login endpoint in subsequent requests.
+> 1. Initialize the UserService class to start the session manager.
+> 2. Call the authenticate method on the AccountManager to verify a user.
+> 3. The UserHandler returns a session token that you send in later requests.
+
+```typescript
+// src/auth/UserService.ts  — the single source of truth for the name
+export class UserService {
+  authenticate(credentials: Credentials): SessionToken {
+    // ...
+  }
+}
+```
+
+> *Adapted from spec pair: "servo control unit," "actuator," and "control unit" → "actuator" (consistent technical noun). In the spec, three different names refer to the same component. In the non-STE example, "UserService," "AccountManager," and "UserHandler" refer to the same class. The reader cannot tell whether they are the same class or three classes. The repository defines one class named `UserService`. The STE version uses that approved code-domain technical noun in all three sentences.*
 
 > **STE:**
-> 1. Send a request to the /api/login endpoint to start a session.
-> 2. The /api/login endpoint returns a JSON Web Token to the caller.
-> 3. Include the token from the /api/login endpoint in subsequent requests.
+> 1. Initialize the UserService class to start the session manager.
+> 2. Call the authenticate method on the UserService to verify a user.
+> 3. The UserService returns a session token that you send in later requests.
 
-OpenAPI fragment that shows the violation:
+```typescript
+// src/auth/UserService.ts  — the only class that handles authentication
+export class UserService {
+  authenticate(credentials: Credentials): SessionToken {
+    // ...
+  }
+}
+```
+
+> **Non-STE:**
+> 1. Send a request to the /api/login path to get a token.
+> 2. The authentication route returns a JSON Web Token that you store in the browser.
+> 3. Include the token from the login endpoint in all later requests.
 
 ```yaml
+# openapi.yaml
 paths:
   /api/login:
     post:
-      summary: Start a session
-      description: The authentication route returns a JSON Web Token.
+      summary: Authenticate a user and return a token
+      responses:
+        '200':
+          description: Returns a JSON Web Token
 ```
 
-OpenAPI fragment that follows the rule:
+> *Adapted from spec pair: "servo control unit," "actuator," and "control unit" → "actuator" (consistent technical noun). In the spec, three names refer to one item. In the non-STE example, "/api/login path," "authentication route," and "login endpoint" are three names for the same API endpoint. The OpenAPI file defines the path as `/api/login`. The STE version uses that single approved code-domain technical noun consistently.*
+
+> **STE:**
+> 1. Send a request to the /api/login endpoint to get a token.
+> 2. The /api/login endpoint returns a JSON Web Token that you store in the browser.
+> 3. Include the token from the /api/login endpoint in all later requests.
 
 ```yaml
+# openapi.yaml
 paths:
   /api/login:
     post:
-      summary: Start a session
-      description: The /api/login endpoint returns a JSON Web Token.
+      summary: Authenticate a user and return a token
+      responses:
+        '200':
+          description: Returns a JSON Web Token
 ```
 
-> *Adapted from spec pair: "servo control unit," "actuator," and "control unit" refer to one item. In the non-STE example, "/api/login path," "authentication route," and "login endpoint" are three names for the same API endpoint. The STE version uses the single approved code-domain technical noun "/api/login endpoint" consistently, just as the spec example uses "actuator" consistently.*
+---
 
 ## Code-Domain Explanation
 
@@ -120,6 +126,8 @@ Commit messages are short and refer to components by their file paths, class nam
 ### Error Messages and Log Output
 
 Error messages and log output are read during debugging. If the error message uses a different name than the code, the developer must manually map the error message to the source. Always use the canonical code-domain technical noun in error messages. The log line `ERROR [PaymentProcessor] transaction failed` must use "PaymentProcessor" if that is the class name, not "billing engine" or "payment handler."
+
+---
 
 ## Paradigm-Specific Guidance
 
@@ -193,6 +201,182 @@ In systems documentation (ownership, lifetimes, memory layout), the canonical te
 **Guidance for abstract concepts:**
 When the concept does not map to a single code identifier, create a glossary entry in the project documentation. Use the glossary entry as the canonical code-domain technical noun. Cross-reference the glossary in each documentation section.
 
+---
+
+## Extended Examples
+
+### Example 1: Database Table
+
+> **Non-STE:**
+> 1. The user_accounts table stores authentication data for each user.
+> 2. Query the accounts relation to find active sessions that have not expired.
+> 3. The user table has a foreign key to the roles table that limits access.
+
+```sql
+-- migrations/0001_init.sql
+CREATE TABLE user_accounts (
+  id      UUID PRIMARY KEY,
+  email   TEXT NOT NULL UNIQUE,
+  role_id UUID REFERENCES roles(id)
+);
+```
+
+> **STE:**
+> 1. The user_accounts table stores authentication data for each user.
+> 2. Query the user_accounts table to find active sessions that have not expired.
+> 3. The user_accounts table has a foreign key to the roles table that limits access.
+
+```sql
+-- migrations/0001_init.sql
+CREATE TABLE user_accounts (
+  id      UUID PRIMARY KEY,
+  email   TEXT NOT NULL UNIQUE,
+  role_id UUID REFERENCES roles(id)
+);
+```
+
+> *Principle applied: P11 (One term per concept). Three names — "user_accounts table," "accounts relation," and "user table" — refer to the same database table. The schema defines the table as `user_accounts`. The reader cannot know whether "user table" is a shortened name for "user_accounts" or a different table. The STE version uses the schema-defined name "user_accounts" in all three sentences. If the canonical noun includes the "table" qualifier, use it consistently or drop it consistently — do not mix.*
+
+### Example 2: Configuration Key
+
+> **Non-STE:**
+> 1. Set the database_connection_timeout value in your config to 5 seconds.
+> 2. The DB timeout parameter controls how long the driver waits for a connection.
+> 3. Increase the connection deadline if you see timeout errors in the logs.
+
+```yaml
+# config/database.yaml
+database_connection_timeout: 5s
+```
+
+> **STE:**
+> 1. Set the database_connection_timeout value in your configuration file to 5 seconds.
+> 2. The database_connection_timeout parameter controls how long the driver waits for a connection.
+> 3. Increase the database_connection_timeout value if you see timeout errors in the logs.
+
+```yaml
+# config/database.yaml
+database_connection_timeout: 5s
+```
+
+> *Principle applied: P11 (One term per concept) and P1 (Use approved words from the dictionary). Four names — "database_connection_timeout," "DB timeout," "connection deadline," and "database_connection_timeout" — refer to the same configuration key. The first and fourth sentences use the correct name, but the middle sentences drift into informal synonyms. The STE version uses the configuration file key name in all three sentences. "DB" is an unapproved abbreviation (Rule 1.5); "deadline" has a different approved meaning than "timeout."*
+
+### Example 3: CLI Command
+
+> **Non-STE:**
+> 1. Run the project-builder tool to compile your source files into artifacts.
+> 2. The build system outputs the compiled artifacts to the dist/ directory.
+> 3. Use the compiler's --watch flag to recompile when you change a file.
+
+```text
+$ project-builder --help
+Usage: project-builder [options]
+  --watch     Recompile when source files change
+  --out <dir> Output directory for artifacts (default: dist)
+```
+
+> **STE:**
+> 1. Run the project-builder tool to compile your source files into artifacts.
+> 2. The project-builder tool outputs the compiled artifacts to the dist/ directory.
+> 3. Use the project-builder tool's --watch flag to recompile when you change a file.
+
+```text
+$ project-builder --help
+Usage: project-builder [options]
+  --watch     Recompile when source files change
+  --out <dir> Output directory for artifacts (default: dist)
+```
+
+> *Principle applied: P11 (One term per concept). Three names — "project-builder tool," "build system," and "compiler" — refer to the same CLI tool. The binary is named `project-builder`. The reader may think the project has three separate tools. The STE version uses the binary name "project-builder" in all three sentences. If the tool has other legitimate subsystem names (for example, a separate compiler), those must be introduced explicitly as distinct items.*
+
+### Example 4: Error Type
+
+> **Non-STE:**
+> 1. The function throws a ValidationFailure when the input is invalid.
+> 2. Catch the InputError to show a user-friendly message in the form.
+> 3. The validation exception includes a list of field errors to display.
+
+```python
+# src/validation.py
+class ValidationError(ValueError):
+    def __init__(self, field_errors: list[str]) -> None:
+        self.field_errors = field_errors
+
+def validate(payload: dict) -> None:
+    if not payload.get("email"):
+        raise ValidationError(["email is required"])
+```
+
+> **STE:**
+> 1. The function throws a ValidationError when the input is invalid.
+> 2. Catch the ValidationError to show a user-friendly message in the form.
+> 3. The ValidationError includes a list of field errors to display.
+
+```python
+# src/validation.py
+class ValidationError(ValueError):
+    def __init__(self, field_errors: list[str]) -> None:
+        self.field_errors = field_errors
+
+def validate(payload: dict) -> None:
+    if not payload.get("email"):
+        raise ValidationError(["email is required"])
+```
+
+> *Principle applied: P11 (One term per concept) and P8 (Use standard, well-known technical nouns). Three names — "ValidationFailure," "InputError," and "validation exception" — refer to the same error type. The source code defines the class as `ValidationError`. The reader cannot know whether "InputError" is a parent class of "ValidationFailure" or the same class. The STE version uses the class name "ValidationError" in all three sentences. If the class name is "ValidationError" in the source code, the documentation must match.*
+
+### Example 5: Environment Variable
+
+> **Non-STE:**
+> 1. Set the API_KEY environment variable before you start the server.
+> 2. The service reads its auth token from the environment at startup.
+> 3. If the secret key is not set, the process exits with code 1.
+
+```bash
+# .env
+API_KEY=sk_live_4eC39HqLyjWDarjtT1zdp7dc
+```
+
+> **STE:**
+> 1. Set the API_KEY environment variable before you start the server.
+> 2. The service reads the API_KEY environment variable at startup.
+> 3. If the API_KEY environment variable is not set, the process exits with code 1.
+
+```bash
+# .env
+API_KEY=sk_live_4eC39HqLyjWDarjtT1zdp7dc
+```
+
+> *Principle applied: P11 (One term per concept) and P4 (Use only approved verb and adjective forms). Three names — "API_KEY environment variable," "auth token," and "secret key" — refer to the same environment variable. The shell file defines the variable as `API_KEY`. The reader cannot know whether "auth token" is the same concept as "API_KEY" or a separate configuration value. The STE version uses the exact environment variable name "API_KEY" in all three sentences. The approved verb "start" replaces "starting" (Rule 1.4, no -ing forms as main verbs).*
+
+### Example 6: Git Branch
+
+> **Non-STE:**
+> 1. Create a feature branch from the mainline to hold your changes.
+> 2. Push your topic branch to the remote repository for review.
+> 3. Merge the development line back into master after the tests pass.
+
+```bash
+$ git branch
+  main
+* feature/login-rate-limit
+```
+
+> **STE:**
+> 1. Create a feature branch from the main branch to hold your changes.
+> 2. Push your feature branch to the remote repository for review.
+> 3. Merge the feature branch back into the main branch after the tests pass.
+
+```bash
+$ git branch
+  main
+* feature/login-rate-limit
+```
+
+> *Principle applied: P11 (One term per concept) and P14 (Use American English spelling). The names "mainline," "master," and "main branch" refer to the same branch. "Topic branch," "development line," and "feature branch" refer to the same branch. The STE version uses the Git convention names "main branch" and "feature branch" in all three sentences. Some projects use "master" as the canonical branch name — if so, use "master branch" consistently. The project's Git configuration determines the canonical noun.*
+
+---
+
 ## Edge Cases
 
 ### Edge Case 1: Framework Names That Are Also Unapproved Words
@@ -234,6 +418,32 @@ During a refactoring, a component changes its name. Documentation written before
 **Resolution:** After a rename is complete and committed, update all documentation to use the new name. Do not keep the old name in documentation with a "formerly known as" note, unless the old name is part of a public API that has not yet been deprecated. Use the DEPRECATED marker (per the STE-Code output format conventions) when the old name still appears in public-facing documentation.
 
 **Guidance:** A git log or changelog records the rename history. Documentation does not need to preserve the old name for historical purposes. If the rename affects a public API, add a deprecation notice that maps the old name to the new name, and remove the old name from all other documentation.
+
+---
+
+## Cross-References
+
+### Related Rules in Section 1
+
+- **Rule 1.1** (Use words that are approved in the dictionary, technical nouns, or technical verbs): Rule 1.11 assumes that the chosen code-domain technical noun is itself approved under Rule 1.1. A consistent noun that violates the dictionary is still a violation.
+- **Rule 1.3** (Use approved words only with their approved meanings): The canonical code-domain technical noun must be used with its approved meaning. Do not use the canonical noun to mean something else, even if you use it consistently.
+- **Rule 1.5** (Technical code nouns are allowed): Rule 1.11 applies to code-domain technical nouns. Rule 1.5 defines what qualifies as a code-domain technical noun. Together, these rules say: code-domain technical nouns are allowed, and once you choose one, use it consistently.
+- **Rule 1.6** (Non-approved words only when they are technical code nouns): If the code-domain technical noun is not in the controlled terminology, it is only permitted if it qualifies as a code-domain technical noun under Rule 1.6. Rule 1.11 does not override the dictionary restriction.
+- **Rule 1.8** (Use standard, well-known technical nouns): The canonical noun chosen under Rule 1.11 should be the standard, well-known name for the item. Rule 1.8 helps select the correct canonical noun. Rule 1.11 enforces consistency once the noun is chosen.
+- **Rule 1.9** (Prefer short, clear technical nouns): When choosing the canonical noun under Rule 1.11, prefer the shorter, clearer option among legitimate alternatives. Rule 1.9 guides the selection. Rule 1.11 governs the usage.
+- **Rule 1.10** (No slang, jargon, or regional terms): The canonical noun must not be slang or jargon. Rule 1.10 disqualifies inappropriate candidates. Rule 1.11 applies to the noun that survives the Rule 1.10 filter.
+
+### Related Rules in Section 3 (Verbs)
+
+- **Rule 3.1** (Use only the approved verb forms): When the canonical noun is used as the subject or object of a sentence, the verb must obey Rule 3.1. A consistent noun with an unapproved verb form is still a violation.
+- **Rule 3.6** (Use the active voice): A sentence that uses the canonical noun consistently but in passive voice violates Rule 3.6 if active voice is possible. Rule 1.11 governs noun choice; Rule 3.6 governs sentence structure.
+
+### STE-Code Dictionary
+
+- **Entry: TECHNICAL NOUN (TN):** The dictionary defines the category "technical noun" and gives examples. Rule 1.11 applies to all terms that qualify as code-domain technical nouns under this category. Refer to the dictionary entry for the full definition and scope.
+- **Entry: NAME (n):** The approved noun "name" is the general term for identifiers. When you cannot use the specific code-domain technical noun (for example, when describing the naming process itself), use "name." Do not use "identifier," "label," "tag," or "handle" as synonyms for "name" — these are reserved for their specific approved meanings.
+
+---
 
 ## Grammar Notes
 
@@ -309,255 +519,12 @@ Three different naming conventions — PascalCase, sentence case with article, a
 
 The normalization enforces Rule 1.11 at the list level. Each item uses the code-domain technical noun that matches the source code naming convention for the project.
 
-## Cross-References
-
-### Related Rules in Section 1
-
-- **Rule 1.1** (Use words that are approved in the dictionary, technical nouns, or technical verbs): Rule 1.11 assumes that the chosen code-domain technical noun is itself approved under Rule 1.1. A consistent noun that violates the dictionary is still a violation.
-
-- **Rule 1.3** (Use approved words only with their approved meanings): The canonical code-domain technical noun must be used with its approved meaning. Do not use the canonical noun to mean something else, even if you use it consistently.
-
-- **Rule 1.5** (Technical code nouns are allowed): Rule 1.11 applies to code-domain technical nouns. Rule 1.5 defines what qualifies as a code-domain technical noun. Together, these rules say: code-domain technical nouns are allowed, and once you choose one, use it consistently.
-
-- **Rule 1.6** (Non-approved words only when they are technical code nouns): If the code-domain technical noun is not in the controlled terminology, it is only permitted if it qualifies as a code-domain technical noun under Rule 1.6. Rule 1.11 does not override the dictionary restriction.
-
-- **Rule 1.8** (Use standard, well-known technical nouns): The canonical noun chosen under Rule 1.11 should be the standard, well-known name for the item. Rule 1.8 helps select the correct canonical noun. Rule 1.11 enforces consistency once the noun is chosen.
-
-- **Rule 1.9** (Prefer short, clear technical nouns): When choosing the canonical noun under Rule 1.11, prefer the shorter, clearer option among legitimate alternatives. Rule 1.9 guides the selection. Rule 1.11 governs the usage.
-
-- **Rule 1.10** (No slang, jargon, or regional terms): The canonical noun must not be slang or jargon. Rule 1.10 disqualifies inappropriate candidates. Rule 1.11 applies to the noun that survives the Rule 1.10 filter.
-
-### Related Rules in Section 3 (Verbs)
-
-- **Rule 3.1** (Use only the approved verb forms): When the canonical noun is used as the subject or object of a sentence, the verb must obey Rule 3.1. A consistent noun with an unapproved verb form is still a violation.
-
-- **Rule 3.6** (Use the active voice): A sentence that uses the canonical noun consistently but in passive voice violates Rule 3.6 if active voice is possible. Rule 1.11 governs noun choice; Rule 3.6 governs sentence structure.
-
-### STE-Code Dictionary
-
-- **Entry: TECHNICAL NOUN (TN):** The dictionary defines the category "technical noun" and gives examples. Rule 1.11 applies to all terms that qualify as code-domain technical nouns under this category. Refer to the dictionary entry for the full definition and scope.
-
-- **Entry: NAME (n):** The approved noun "name" is the general term for identifiers. When you cannot use the specific code-domain technical noun (for example, when describing the naming process itself), use "name." Do not use "identifier," "label," "tag," or "handle" as synonyms for "name" — these are reserved for their specific approved meanings.
-
-## Extended Examples
-
-> *Adapted from spec pair:* Non-STE: "1. Make sure that the servo control unit is in the open position. 2. Do the operational test of the actuator. 3. Disconnect the control unit from the test rig."  |  STE: "1. Make sure that the actuator is in the open position. 2. Do the operational test of the actuator. 3. Disconnect the actuator from the test rig."
-
-### Example 1: Database Table
-
-> **Non-STE:**
-> 1. The user_accounts table stores authentication data.
-> 2. Query the accounts relation to find active sessions.
-> 3. The user table has a foreign key to the roles table.
-
-> **STE:**
-> 1. The user_accounts table stores authentication data.
-> 2. Query the user_accounts table to find active sessions.
-> 3. The user_accounts table has a foreign key to the roles table.
-
-Schema documentation that shows the violation:
-
-```sql
--- table: user_accounts
--- The accounts relation stores one row per registered user.
-
-SELECT * FROM user_table WHERE is_active = true;
-```
-
-Schema documentation that follows the rule:
-
-```sql
--- table: user_accounts
--- The user_accounts table stores one row per registered user.
-
-SELECT * FROM user_accounts WHERE is_active = true;
-```
-
-> *Principle applied: P11 (One term per concept). Three names — "user_accounts table," "accounts relation," and "user table" — refer to the same database table. The reader cannot know whether "user table" is a shortened name for "user_accounts" or a different table. The STE version uses the schema-defined name "user_accounts" in all three sentences. If the canonical noun includes the "table" qualifier, use it consistently or drop it consistently — do not mix.*
-
-### Example 2: Configuration Key
-
-> **Non-STE:**
-> 1. Set the database_connection_timeout value in your config.
-> 2. The DB timeout parameter controls how long the driver waits.
-> 3. Increase the connection deadline if you see timeout errors.
-
-> **STE:**
-> 1. Set the database_connection_timeout value in your configuration file.
-> 2. The database_connection_timeout parameter controls how long the driver waits.
-> 3. Increase the database_connection_timeout value if you see timeout errors.
-
-Configuration reference that shows the violation:
-
-```yaml
-# config.yaml
-database_connection_timeout: 5000   # set the DB timeout here
-# if the connection deadline is too low, the driver drops the link
-```
-
-Configuration reference that follows the rule:
-
-```yaml
-# config.yaml
-database_connection_timeout: 5000   # set the database_connection_timeout here
-# if the database_connection_timeout is too low, the driver drops the link
-```
-
-> *Principle applied: P11 (One term per concept) and P1 (Use approved words from the dictionary). Four names — "database_connection_timeout," "DB timeout," "connection deadline," and "database_connection_timeout" — refer to the same configuration key. The first and fourth sentences use the correct name, but the middle sentences drift into informal synonyms. The STE version uses the configuration file key name in all three sentences. "DB" is an unapproved abbreviation (Rule 1.5); "deadline" has a different approved meaning than "timeout."*
-
-### Example 3: CLI Command
-
-> **Non-STE:**
-> 1. Run the project-builder tool to compile your source files.
-> 2. The build system outputs artifacts to the dist/ directory.
-> 3. Use the compiler's --watch flag for development.
-
-> **STE:**
-> 1. Run the project-builder tool to compile your source files.
-> 2. The project-builder tool outputs artifacts to the dist/ directory.
-> 3. Use the project-builder tool's --watch flag for development.
-
-Contributing guide that shows the violation:
-
-```markdown
-## Build
-
-Run the project-builder tool to compile your source files.
-The build system outputs artifacts to the dist/ directory.
-Use the compiler's --watch flag for development.
-```
-
-Contributing guide that follows the rule:
-
-```markdown
-## Build
-
-Run the project-builder tool to compile your source files.
-The project-builder tool outputs artifacts to the dist/ directory.
-Use the project-builder tool's --watch flag for development.
-```
-
-> *Principle applied: P11 (One term per concept). Three names — "project-builder tool," "build system," and "compiler" — refer to the same CLI tool. The reader may think the project has three separate tools. The STE version uses the binary name "project-builder" in all three sentences. If the tool has other legitimate subsystem names (for example, a separate compiler), those must be introduced explicitly as distinct items.*
-
-### Example 4: Error Type
-
-> **Non-STE:**
-> 1. The function throws a ValidationFailure when the input is invalid.
-> 2. Catch the InputError to show a user-friendly message.
-> 3. The validation exception includes a list of field errors.
-
-> **STE:**
-> 1. The function throws a ValidationError when the input is invalid.
-> 2. Catch the ValidationError to show a user-friendly message.
-> 3. The ValidationError includes a list of field errors.
-
-Docstring that shows the violation:
-
-```python
-class InputError(Exception):
-    """Raised when input is invalid."""
-
-
-def parse_user(data: dict) -> User:
-    """Parse a user record.
-
-    Raises:
-        ValidationFailure: if the input is invalid.
-        InputError: to show a user-friendly message.
-        validation exception: includes a list of field errors.
-    """
-```
-
-Docstring that follows the rule:
-
-```python
-class ValidationError(Exception):
-    """Raised when input is invalid."""
-
-
-def parse_user(data: dict) -> User:
-    """Parse a user record.
-
-    Raises:
-        ValidationError: if the input is invalid.
-        ValidationError: to show a user-friendly message.
-        ValidationError: includes a list of field errors.
-    """
-```
-
-> *Principle applied: P11 (One term per concept) and P8 (Use standard, well-known technical nouns). Three names — "ValidationFailure," "InputError," and "validation exception" — refer to the same error type. The reader cannot know whether "InputError" is a parent class of "ValidationFailure" or the same class. The STE version uses the class name "ValidationError" in all three sentences. If the class name is "ValidationError" in the source code, the documentation must match.*
-
-### Example 5: Environment Variable
-
-> **Non-STE:**
-> 1. Set the API_KEY environment variable before starting the server.
-> 2. The service reads its auth token from the environment.
-> 3. If the secret key is not set, the process exits with code 1.
-
-> **STE:**
-> 1. Set the API_KEY environment variable before you start the server.
-> 2. The service reads the API_KEY environment variable at startup.
-> 3. If the API_KEY environment variable is not set, the process exits with code 1.
-
-Setup guide that shows the violation:
-
-```bash
-# export API_KEY before you start the server
-export API_KEY="tok_abc"
-# the service reads its auth token from the environment
-# if the secret key is not set, the process exits with code 1
-./run-server
-```
-
-Setup guide that follows the rule:
-
-```bash
-# export the API_KEY environment variable before you start the server
-export API_KEY="tok_abc"
-# the service reads the API_KEY environment variable at startup
-# if the API_KEY environment variable is not set, the process exits with code 1
-./run-server
-```
-
-> *Principle applied: P11 (One term per concept) and P4 (Use only approved verb and adjective forms). Three names — "API_KEY environment variable," "auth token," and "secret key" — refer to the same environment variable. The reader cannot know whether "auth token" is the same concept as "API_KEY" or a separate configuration value. The STE version uses the exact environment variable name "API_KEY" in all three sentences. The approved verb "start" replaces "starting" (Rule 1.4, no -ing forms as main verbs).*
-
-### Example 6: Git Branch
-
-> **Non-STE:**
-> 1. Create a feature branch from the mainline.
-> 2. Push your topic branch to the remote repository.
-> 3. Merge the development line back into master.
-
-> **STE:**
-> 1. Create a feature branch from the main branch.
-> 2. Push your feature branch to the remote repository.
-> 3. Merge the feature branch back into the main branch.
-
-Workflow document that shows the violation:
-
-```markdown
-## Workflow
-
-1. Create a feature branch from the mainline.
-2. Push your topic branch to the remote repository.
-3. Merge the development line back into master.
-```
-
-Workflow document that follows the rule:
-
-```markdown
-## Workflow
-
-1. Create a feature branch from the main branch.
-2. Push your feature branch to the remote repository.
-3. Merge the feature branch back into the main branch.
-```
-
-> *Principle applied: P11 (One term per concept) and P14 (Use American English spelling). The names "mainline," "master," and "main branch" refer to the same branch. "Topic branch," "development line," and "feature branch" refer to the same branch. The STE version uses the Git convention names "main branch" and "feature branch" in all three sentences. Some projects use "master" as the canonical branch name — if so, use "master branch" consistently. The project's Git configuration determines the canonical noun.*
+---
 
 > **See also:** Rule 1.1 — Use words that are approved in the dictionary, technical nouns, or technical verbs
 > **See also:** Rule 1.3 — Use approved words only with their approved meanings
 > **See also:** Rule 1.5 — Technical code nouns are allowed
+> **See also:** Rule 1.6 — Non-approved words only when they are technical code nouns
 > **See also:** Rule 1.8 — Use standard, well-known technical nouns
 > **See also:** Rule 1.9 — Prefer short, clear technical nouns
 > **See also:** Rule 1.10 — No slang, jargon, or regional terms
