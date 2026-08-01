@@ -97,11 +97,47 @@ To change a sentence from the passive voice to the active voice, use one of thes
 >
 > *Adapted from spec pair: "The circuits are connected by a switching relay." / "A switching relay connects the circuits."*
 
+Realistic context — a README section that documents an HTTP request pipeline:
+
+> **Non-STE:**
+> ```markdown
+> ## How the request pipeline works
+>
+> After the client sends a request, the raw HTTP body is read by the server.
+> The API response is parsed by the middleware. The parsed data is then
+> validated by the schema checker before the controller receives it.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## How the request pipeline works
+>
+> After the client sends a request, the server reads the raw HTTP body.
+> The middleware parses the API response. The schema checker then validates
+> the parsed data before the controller receives it.
+> ```
+
 **Method 2:** Change an infinitive verb to an active verb:
 
 > **STE:** The profiler calculates the memory usage from these values. (Active)
 >
 > *Adapted from spec pair: "The computer calculates the energy consumption from these values."*
+
+Realistic context — a docstring for a profiling helper:
+
+> **Non-STE:**
+> ```python
+> def report_memory(samples):
+>     """To calculate the memory usage from these values. The peak is
+>     returned as a percentage of the allocated heap."""
+> ```
+>
+> **STE:**
+> ```python
+> def report_memory(samples):
+>     """Calculate the memory usage from these values. Return the peak
+>     as a percentage of the allocated heap."""
+> ```
 
 **Method 3:** In procedural writing, change the verb to the imperative ("command") form:
 
@@ -111,6 +147,29 @@ To change a sentence from the passive voice to the active voice, use one of thes
 >
 > *Adapted from original Method 3 principle — imperative ("command") form*
 
+Realistic context — a contributing guide:
+
+> **Non-STE:**
+> ```markdown
+> ## Setup
+>
+> The dependencies can be installed with the following command. The test
+> suite can then be run from the same directory.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## Setup
+>
+> Install the dependencies with this command:
+>
+>     npm install
+>
+> Then run the test suite from the same directory:
+>
+>     npm test
+> ```
+
 **Method 4:** When the agent is not given in the sentence, use the pronouns "you" or "we" as subjects in the active form. If the agent is the reader, use "you." If the agent is your organization, use "we."
 
 > **Non-STE:** The configuration file can be edited with a text editor. (Passive)
@@ -118,6 +177,24 @@ To change a sentence from the passive voice to the active voice, use one of thes
 > **STE:** You can edit the configuration file with a text editor. (Active)
 >
 > *Adapted from spec pair: "On the ground, the valve can be opened with the override handle." / "On the ground, you can open the valve with the override handle."*
+
+Realistic context — a getting-started page:
+
+> **Non-STE:**
+> ```markdown
+> ## First run
+>
+> The configuration file can be edited with a text editor. The server
+> can be started after you save your changes.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## First run
+>
+> You can edit the configuration file with a text editor. After you save
+> your changes, you can start the server.
+> ```
 
 When the agent is unknown and you cannot identify it:
 
@@ -127,7 +204,25 @@ When the agent is unknown and you cannot identify it:
 >
 > *Adapted from spec pair: "During transmission, the data was corrupted." / "During transmission, something corrupted the data." / "Transmission corrupted the data."*
 
+Realistic context — an error report from a flaky integration test:
+
+> **Passive (correct):**
+> ```text
+> During the network request, the payload was corrupted before the checksum
+> was computed. The agent is unknown because the failure occurs only under
+> heavy load and leaves no stack trace.
+> ```
+>
+> **Active (incorrect):**
+> ```text
+> During the network request, the socket corrupted the payload.
+> ```
+> "socket" is not the true cause — the active sentence becomes technically
+> wrong and misleads the reader about where to fix the bug.
+
 ### Examples
+
+> *Adapted from spec pair: Non-STE: "The circuits are connected by a switching relay."  |  STE: "A switching relay connects the circuits." (Method 1) — and Non-STE: "On the ground, the valve can be opened with the override handle."  |  STE: "On the ground, you can open the valve with the override handle." (Method 4)*
 
 > **Non-STE:** The database connection is established by the connection pool at startup.
 >
@@ -135,11 +230,50 @@ When the agent is unknown and you cannot identify it:
 >
 > *Adapted from spec pair: "The circuits are connected by a switching relay." / "A switching relay connects the circuits." (Method 1)*
 
+Realistic context — an architecture overview for a backend service:
+
+> **Non-STE:**
+> ```markdown
+> ## Startup sequence
+>
+> The configuration is loaded by the bootstrap routine. The database
+> connection is established by the connection pool at startup. The cache
+> is warmed by a background worker before the first request is served.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## Startup sequence
+>
+> The bootstrap routine loads the configuration. The connection pool
+> establishes the database connection at startup. A background worker
+> warms the cache before it serves the first request.
+> ```
+
 > **Non-STE:** The test results can be viewed in the terminal output.
 >
 > **STE:** You can see the test results in the terminal output.
 >
 > *Adapted from spec pair: "On the ground, the valve can be opened with the override handle." / "On the ground, you can open the valve with the override handle." (Method 4)*
+
+Realistic context — a CI job summary in a pull-request template:
+
+> **Non-STE:**
+> ```markdown
+> ## Checks
+>
+> The linting errors are reported by the linter. The test results can be
+> viewed in the terminal output. The coverage report is generated by the
+> coverage tool.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## Checks
+>
+> The linter reports the linting errors. You can see the test results in
+> the terminal output. The coverage tool generates the coverage report.
+> ```
 
 ## Code-Domain Explanation
 
@@ -155,11 +289,52 @@ In procedural sections, use the imperative mood with "you" as the implied subjec
 >
 > **STE:** Install the package with this command: pip install . (Active imperative — the reader is the agent.)
 
+Realistic context — the install section of a Python library README:
+
+> **Non-STE:**
+> ```markdown
+> ## Installation
+>
+> The package can be installed with `pip install`. A virtual environment
+> should be created before the install is done.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## Installation
+>
+> Install the package with this command:
+>
+>     pip install .
+>
+> Create a virtual environment before you install the package.
+> ```
+
 In descriptive sections, use the active voice with the project, library, or tool as the subject. The passive voice in a descriptive section makes the project seem like a passive object instead of an active system.
 
 > **Non-STE:** Support for WebSocket connections is provided by this library. (Passive)
 >
 > **STE:** This library supports WebSocket connections. (Active — the library is the agent.)
+
+Realistic context — the feature list of a networking library README:
+
+> **Non-STE:**
+> ```markdown
+> ## Features
+>
+> Support for WebSocket connections is provided by this library. Automatic
+> reconnection is handled by the transport layer. Message compression is
+> applied by the codec before each frame is sent.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## Features
+>
+> This library supports WebSocket connections. The transport layer handles
+> automatic reconnection. The codec compresses each message before it sends
+> the frame.
+> ```
 
 ### API Documentation
 
@@ -169,17 +344,80 @@ API reference documentation describes what each method, function, or endpoint do
 >
 > **STE:** This method validates the input string and returns a boolean. (Active)
 
+Realistic context — a JSDoc block for an email validator:
+
+> **Non-STE:**
+> ```javascript
+> /**
+>  * Checks a user-supplied address.
+>  * The input string is validated and a boolean is returned by this method.
+>  * @param {string} address - the address to check
+>  * @returns {boolean} true when the address is well formed
+>  */
+> ```
+>
+> **STE:**
+> ```javascript
+> /**
+>  * Check a user-supplied address.
+>  * This method validates the input string and returns a boolean.
+>  * @param {string} address - the address to check
+>  * @returns {boolean} true when the address is well formed
+>  */
+> ```
+
 When you document a callback parameter, the callback is the agent that performs the action. Use the callback as the subject.
 
 > **Non-STE:** The URL is transformed by the callback before the request is sent. (Passive)
 >
 > **STE:** The callback transforms the URL. Then the client sends the request. (Active)
 
+Realistic context — an OpenAPI parameter description:
+
+> **Non-STE:**
+> ```yaml
+> parameters:
+>   - name: onRequest
+>     description: >
+>       A function that runs before the call. The URL is transformed by the
+>       callback before the request is sent to the upstream service.
+> ```
+>
+> **STE:**
+> ```yaml
+> parameters:
+>   - name: onRequest
+>     description: >
+>       A function that runs before the call. The callback transforms the
+>       URL. Then the client sends the request to the upstream service.
+> ```
+
 When you document a return value, use the method as the subject in the active voice. Do not use a passive construction that makes the return value the subject.
 
 > **Non-STE:** A `Promise<User>` is returned by this function. (Passive)
 >
 > **STE:** This function returns a `Promise<User>`. (Active)
+
+Realistic context — a TypeScript function signature comment:
+
+> **Non-STE:**
+> ```typescript
+> /**
+>  * Fetches the current user. A `Promise<User>` is returned by this function.
+>  * The user record is read from the session store while the promise is pending.
+>  */
+> function getCurrentUser(): Promise<User>
+> ```
+>
+> **STE:**
+> ```typescript
+> /**
+>  * Fetch the current user. This function returns a `Promise<User>`.
+>  * While the promise is pending, the function reads the user record from
+>  * the session store.
+>  */
+> function getCurrentUser(): Promise<User>
+> ```
 
 ### Docstrings and Inline Comments
 
@@ -188,6 +426,22 @@ Docstrings describe the purpose, parameters, return value, and behavior of a fun
 > **Non-STE:** """A hash of the input data is computed and then it is returned as a hex string."""
 >
 > **STE:** """Compute the hash of the input data. Return the result as a hex string."""
+
+Realistic context — a Python hashing utility:
+
+> **Non-STE:**
+> ```python
+> def sha256_hex(data: bytes) -> str:
+>     """A hash of the input data is computed and then it is returned as a
+>     hex string. The digest is calculated by the hashlib module."""
+> ```
+>
+> **STE:**
+> ```python
+> def sha256_hex(data: bytes) -> str:
+>     """Compute the hash of the input data. Return the result as a hex
+>     string. The hashlib module calculates the digest."""
+> ```
 
 Inline comments explain a specific line or block of code. Use the active voice with the code entity or the developer as the subject. Passive voice in an inline comment can make the responsibility for an action unclear.
 
@@ -198,6 +452,34 @@ Inline comments explain a specific line or block of code. Use the active voice w
 > **Non-STE:** // The connection is closed by the finally block.
 >
 > **STE:** // The finally block closes the connection.
+
+Realistic context — a Go function that writes a record:
+
+> **Non-STE:**
+> ```go
+> func (w *Writer) Write(rec Record) error {
+>     // The buffer is flushed before new data is written.
+>     if err := w.buf.Flush(); err != nil {
+>         return err
+>     }
+>     // The connection is closed by the finally block.
+>     defer w.conn.Close()
+>     return w.conn.Send(rec)
+> }
+> ```
+>
+> **STE:**
+> ```go
+> func (w *Writer) Write(rec Record) error {
+>     // Flush the buffer before you write new data.
+>     if err := w.buf.Flush(); err != nil {
+>         return err
+>     }
+>     // The finally block closes the connection.
+>     defer w.conn.Close()
+>     return w.conn.Send(rec)
+> }
+> ```
 
 ### Commit Messages
 
@@ -210,6 +492,22 @@ Commit messages follow the imperative mood convention, which is inherently activ
 > **Non-STE:** Rate limiting was added to the API endpoints. (Passive)
 >
 > **STE:** Add rate limiting to the API endpoints. (Active imperative)
+
+Realistic context — two commits in a feature branch:
+
+> **Non-STE:**
+> ```text
+> git log --oneline
+> a1b2c3d The authentication bug was fixed.
+> e4f5g6h Rate limiting was added to the API endpoints.
+> ```
+>
+> **STE:**
+> ```text
+> git log --oneline
+> a1b2c3d Fix the authentication bug.
+> e4f5g6h Add rate limiting to the API endpoints.
+> ```
 
 NOTE: Some projects use changelog auto-generation tools that extract commit messages. If the tool wraps commit messages in passive sentences (for example, "A fix was made for the authentication bug"), the generated changelog is not subject to this rule. The rule applies to the commit messages you write, not to the changelog the tool generates.
 
@@ -225,9 +523,32 @@ Error messages describe what went wrong and, when possible, what action to take.
 >
 > **STE:** The rate limiter rejected the request. (Active)
 
+Realistic context — log lines from a config loader and an API gateway:
+
+> **Non-STE:**
+> ```text
+> [warn]  An invalid configuration value was encountered while the file was
+>         being parsed.
+> [error] The request was rejected by the rate limiter.
+> ```
+>
+> **STE:**
+> ```text
+> [warn]  The parser found an invalid configuration value in the file.
+> [error] The rate limiter rejected the request.
+> ```
+
 When the agent is truly unknown (for example, a network timeout with no identifiable cause), the passive voice is correct. This is the exception defined in the original rule.
 
 > **Correct:** The connection was reset. (The agent is unknown — no process or component can be identified as the cause.)
+
+Realistic context — a raw socket error with no local cause:
+
+> **Correct (passive):**
+> ```text
+> [error] The connection was reset. The peer closed the TCP session without
+>         sending a FIN or RST that our client could observe.
+> ```
 
 ## Paradigm-Specific Guidance
 
@@ -239,17 +560,73 @@ In object-oriented documentation, classes, methods, and design patterns are the 
 >
 > **STE:** The container resolves the dependency at runtime. (Active)
 
+Realistic context — a Spring-style DI container description:
+
+> **Non-STE:**
+> ```markdown
+> ## Dependency resolution
+>
+> The dependency is resolved by the container at runtime. The bean is
+> created after all its prerequisites are satisfied by the registrar.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## Dependency resolution
+>
+> The container resolves the dependency at runtime. After the registrar
+> satisfies all prerequisites, the container creates the bean.
+> ```
+
 When you document a design pattern, the pattern's components have clear agency. The factory creates objects. The observer receives notifications. The decorator wraps behavior. Use these components as subjects.
 
 > **Non-STE:** New instances are created by the factory method when they are requested by the client. (Passive)
 >
 > **STE:** The factory method creates a new instance when the client requests one. (Active)
 
+Realistic context — a factory pattern docstring:
+
+> **Non-STE:**
+> ```python
+> class ConnectionFactory:
+>     """New instances are created by the factory method when they are
+>     requested by the client. The pool is checked before a connection
+>     is made."""
+> ```
+>
+> **STE:**
+> ```python
+> class ConnectionFactory:
+>     """Create a new instance with the factory method when the client
+>     requests one. The factory method checks the pool before it makes a
+>     connection."""
+> ```
+
 When you document an abstract class or interface contract, use the implementing class as the grammatical subject. Passive voice in a contract description makes the obligation unclear.
 
 > **Non-STE:** The `validate()` method is called before the data is processed by the handler. (Passive)
 >
 > **STE:** The handler calls the `validate()` method before it processes the data. (Active)
+
+Realistic context — an interface contract in a Java service:
+
+> **Non-STE:**
+> ```java
+> /**
+>  * The validate() method is called before the data is processed by the
+>  * handler. A ValidationException is thrown when the record is rejected.
+>  */
+> interface RequestHandler { void handle(Request req); }
+> ```
+>
+> **STE:**
+> ```java
+> /**
+>  * The handler calls the validate() method before it processes the data.
+>  * The handler throws a ValidationException when it rejects the record.
+>  */
+> interface RequestHandler { void handle(Request req); }
+> ```
 
 ### Functional Paradigm (Haskell, Elixir, Clojure, Rust)
 
@@ -259,17 +636,65 @@ Functional code documentation describes pure functions, data transformations, an
 >
 > **STE:** The `map` function transforms each element in the list. (Active)
 
+Realistic context — a Haskell list pipeline comment:
+
+> **Non-STE:**
+> ```haskell
+> -- Each element in the list is transformed by the map function. The result
+> -- is then filtered and the sum is computed by foldl.
+> total = foldl (+) 0 . filter (>0) . map (*2) $ xs
+> ```
+>
+> **STE:**
+> ```haskell
+> -- The map function transforms each element in the list. The filter function
+> -- keeps the positive values. Then foldl computes the sum.
+> total = foldl (+) 0 . filter (>0) . map (*2) $ xs
+> ```
+
 When you document a pipeline of composed functions, break the pipeline into active sentences. Each sentence names the function that performs an action.
 
 > **Non-STE:** The input is filtered, then mapped, and finally the result is reduced to a single value. (Passive)
 >
 > **STE:** The `filter` function removes invalid items. The `map` function transforms each item. The `reduce` function combines the results into a single value. (Active)
 
+Realistic context — a Clojure threading macro doc:
+
+> **Non-STE:**
+> ```clojure
+> ;; The input is filtered, then mapped, and finally the result is reduced to
+> ;; a single value by the reduce step.
+> (->> items (filter valid?) (map enrich) (reduce merge {}))
+> ```
+>
+> **STE:**
+> ```clojure
+> ;; The filter function removes invalid items. The map function transforms
+> ;; each item. The reduce function combines the results into a single map.
+> (->> items (filter valid?) (map enrich) (reduce merge {}))
+> ```
+
 When you document higher-order functions or combinators, use the combinator as the grammatical subject.
 
 > **Non-STE:** Two functions are composed into a new function by the `compose` combinator. (Passive)
 >
 > **STE:** The `compose` combinator combines two functions into a new function. (Active)
+
+Realistic context — a Rust combinator doc:
+
+> **Non-STE:**
+> ```rust
+> /// Two functions are composed into a new function by the compose
+> /// combinator. The result is cached by the memoize wrapper.
+> fn compose<A, B, C>(f: fn(B) -> C, g: fn(A) -> B) -> impl Fn(A) -> C
+> ```
+>
+> **STE:**
+> ```rust
+> /// The compose combinator combines two functions into a new function.
+> /// The memoize wrapper caches the result.
+> fn compose<A, B, C>(f: fn(B) -> C, g: fn(A) -> B) -> impl Fn(A) -> C
+> ```
 
 ### Procedural Paradigm (C, Go, Bash)
 
@@ -278,6 +703,22 @@ Procedural documentation contains step-by-step instructions and descriptions of 
 > **Non-STE:** The file is opened, the contents are read, and the connection is closed. (Passive — who does each step?)
 >
 > **STE:** The script opens the file. It reads the contents. Then it closes the connection. (Active)
+
+Realistic context — a backup shell script header:
+
+> **Non-STE:**
+> ```bash
+> # The file is opened, the contents are read, and the connection is closed
+> # by the dump routine. The archive is written to /var/backups.
+> pg_dump app > /var/backups/app.sql
+> ```
+>
+> **STE:**
+> ```bash
+> # The script opens the file, reads the contents, and closes the connection.
+> # Then it writes the archive to /var/backups.
+> pg_dump app > /var/backups/app.sql
+> ```
 
 When you document a shell script or command-line tool, use the script or tool as the subject in descriptive text and the imperative mood in procedural text.
 
@@ -289,6 +730,24 @@ When you document a shell script or command-line tool, use the script or tool as
 >
 > **STE:** Use the --rotate flag to rotate the log file. (Active imperative)
 
+Realistic context — a Makefile help target:
+
+> **Non-STE:**
+> ```makefile
+> # Environment variables are checked before the build process is started.
+> # The log file can be rotated with the --rotate flag.
+> build:
+> 	./configure && $(MAKE)
+> ```
+>
+> **STE:**
+> ```makefile
+> # The script checks the environment variables. Then it starts the build.
+> # Use the --rotate flag to rotate the log file.
+> build:
+> 	./configure && $(MAKE)
+> ```
+
 ### Declarative Paradigm (SQL, Terraform, Kubernetes YAML, Dockerfile)
 
 Declarative documentation describes the desired state that a system moves toward. The active voice names the tool or engine that applies the declaration. The declaration itself does not act — the tool that reads the declaration acts.
@@ -297,11 +756,45 @@ Declarative documentation describes the desired state that a system moves toward
 >
 > **STE:** This Terraform module provisions an AWS VPC with three subnets. (Active)
 
+Realistic context — a Terraform module README:
+
+> **Non-STE:**
+> ```markdown
+> ## What this module builds
+>
+> An AWS VPC with three subnets is provisioned by this Terraform module.
+> A NAT gateway is attached to the private subnet by the same module.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## What this module builds
+>
+> This Terraform module provisions an AWS VPC with three subnets. The same
+> module attaches a NAT gateway to the private subnet.
+> ```
+
 When you document a SQL query, the database engine is the agent. Use the query or the engine as the subject.
 
 > **Non-STE:** All rows with a status of 'active' are selected by this query. (Passive)
 >
 > **STE:** This query selects all rows with a status of 'active'. (Active)
+
+Realistic context — a query comment in a migration file:
+
+> **Non-STE:**
+> ```sql
+> -- All rows with a status of 'active' are selected by this query. The
+> -- matching accounts are then counted by the aggregate.
+> SELECT count(*) FROM accounts WHERE status = 'active';
+> ```
+>
+> **STE:**
+> ```sql
+> -- This query selects all rows with a status of 'active'. The aggregate
+> -- then counts the matching accounts.
+> SELECT count(*) FROM accounts WHERE status = 'active';
+> ```
 
 When you document a Kubernetes manifest, the Kubernetes controller is the agent. Use the controller or the resource as the subject.
 
@@ -309,11 +802,45 @@ When you document a Kubernetes manifest, the Kubernetes controller is the agent.
 >
 > **STE:** The deployment controller maintains three replicas of the pod. (Active)
 
+Realistic context — a Deployment manifest description:
+
+> **Non-STE:**
+> ```markdown
+> ## Scaling
+>
+> Three replicas of the pod are maintained by the deployment controller. The
+> rollout is paused by the operator during a canary release.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## Scaling
+>
+> The deployment controller maintains three replicas of the pod. During a
+> canary release, the operator pauses the rollout.
+> ```
+
 NOTE: YAML comments and Dockerfile comments are procedural by nature. Use the imperative mood and active voice in these comments because they instruct the reader or the build engine.
 
 > **Non-STE:** # The base image is set to Ubuntu 22.04. (Passive)
 >
 > **STE:** # Use Ubuntu 22.04 as the base image. (Active imperative)
+
+Realistic context — a Dockerfile preamble:
+
+> **Non-STE:**
+> ```dockerfile
+> # The base image is set to Ubuntu 22.04. The working directory is created
+> # at /app by the build stage.
+> FROM ubuntu:22.04
+> ```
+>
+> **STE:**
+> ```dockerfile
+> # Use Ubuntu 22.04 as the base image. The build stage creates the working
+> # directory at /app.
+> FROM ubuntu:22.04
+> ```
 
 ### Systems Programming (Rust Ownership Docs, C Memory Docs)
 
@@ -323,17 +850,67 @@ Systems documentation describes ownership, lifetimes, memory allocation, and con
 >
 > **STE:** The allocator allocates the memory block. It returns a pointer. (Active)
 
+Realistic context — a C allocator doc:
+
+> **Non-STE:**
+> ```c
+> /* The memory block is allocated by the allocator and a pointer is returned.
+>    The block is zeroed before it is handed to the caller. */
+> void *alloc_block(size_t bytes);
+> ```
+>
+> **STE:**
+> ```c
+> /* The allocator allocates the memory block. It returns a pointer. The
+>    allocator zeroes the block before it hands the block to the caller. */
+> void *alloc_block(size_t bytes);
+> ```
+
 When you document ownership transfer in Rust, the function or scope that takes ownership is the agent. Use it as the subject.
 
 > **Non-STE:** Ownership of the string is taken by the `process` function. (Passive)
 >
 > **STE:** The `process` function takes ownership of the string. (Active)
 
+Realistic context — a Rust function that consumes a value:
+
+> **Non-STE:**
+> ```rust
+> /// Ownership of the string is taken by the process function. The buffer
+> /// is freed when the function returns.
+> fn process(input: String) { /* ... */ }
+> ```
+>
+> **STE:**
+> ```rust
+> /// The process function takes ownership of the string. The function frees
+> /// the buffer when it returns.
+> fn process(input: String) { /* ... */ }
+> ```
+
 When you document a concurrency primitive, the primitive is the agent. Mutexes lock. Channels send. Atomics store.
 
 > **Non-STE:** Access to the shared state is controlled by the mutex. (Passive)
 >
 > **STE:** The mutex controls access to the shared state. (Active)
+
+Realistic context — a Rust concurrency comment:
+
+> **Non-STE:**
+> ```rust
+> // Access to the shared state is controlled by the mutex. The value is sent
+> // to the worker by the channel.
+> let guard = state.lock().unwrap();
+> tx.send(guard.clone());
+> ```
+>
+> **STE:**
+> ```rust
+> // The mutex controls access to the shared state. The channel sends the
+> // value to the worker.
+> let guard = state.lock().unwrap();
+> tx.send(guard.clone());
+> ```
 
 ## Extended Examples
 
@@ -347,6 +924,26 @@ When you document a concurrency primitive, the primitive is the agent. Mutexes l
 >
 > **Explanation:** The original text has three consecutive passive constructions. The reader must work backward to find the agent. The STE version establishes "this service" as the agent once, then uses active verbs for each feature.
 
+Realistic context — the full feature section of a gateway service README:
+
+> **Non-STE:**
+> ```markdown
+> ## What this service does
+>
+> Authentication via OAuth2 and JWT tokens is supported by this service.
+> Rate limiting is applied to all endpoints. Requests are logged to a
+> centralized logging system. Health checks are exposed on port 8080.
+> ```
+>
+> **STE:**
+> ```markdown
+> ## What this service does
+>
+> This service supports authentication with OAuth2 and JWT tokens. It applies
+> rate limiting to all endpoints. It sends request logs to a centralized
+> logging system. It exposes health checks on port 8080.
+> ```
+
 ### Example 2 — API Method Documentation
 
 > **Non-STE:** `createUser(payload)` — A new user is created with the provided payload. The payload is validated before the user record is inserted into the database. A `User` object is returned upon success.
@@ -356,6 +953,28 @@ When you document a concurrency primitive, the primitive is the agent. Mutexes l
 > **Principle applied:** P2 — Use words only as their specified part of speech. P4 — Use only approved verb forms. The passive constructions are replaced with active imperatives and indicative verbs.
 >
 > **Explanation:** The original text uses three passive constructions in a row. The reader does not know if "is validated" means the method does it, the database does it, or the caller must do it. The STE version names the method as the agent and uses active verbs.
+
+Realistic context — the full JSDoc for the endpoint handler:
+
+> **Non-STE:**
+> ```javascript
+> /**
+>  * POST /users
+>  * createUser(payload) — A new user is created with the provided payload.
+>  * The payload is validated before the user record is inserted into the
+>  * database. A User object is returned upon success.
+>  */
+> ```
+>
+> **STE:**
+> ```javascript
+> /**
+>  * POST /users
+>  * createUser(payload) — Create a new user with the provided payload. The
+>  * method validates the payload. Then it inserts the user record into the
+>  * database. It returns a User object on success.
+>  */
+> ```
 
 ### Example 3 — Docstring for a Class
 
@@ -367,6 +986,24 @@ When you document a concurrency primitive, the primitive is the agent. Mutexes l
 >
 > **Explanation:** The original docstring uses passive voice throughout. The reader cannot tell if the class manages the pool automatically or if the caller must manage it. The STE version uses imperatives and active voice to clarify the class's responsibility.
 
+Realistic context — the full Python class docstring and a usage note:
+
+> **Non-STE:**
+> ```python
+> class ConnectionPool:
+>     """A pool of database connections is managed by this class. Connections
+>     are borrowed when a request is received and they are returned when the
+>     request is complete. Idle connections are closed by the reaper thread."""
+> ```
+>
+> **STE:**
+> ```python
+> class ConnectionPool:
+>     """Manage a pool of database connections. The class lends a connection
+>     when a request arrives. It returns the connection when the request is
+>     complete. The reaper thread closes idle connections."""
+> ```
+
 ### Example 4 — Commit Message
 
 > **Non-STE:** The memory leak in the image processing pipeline was fixed. Redundant allocations were removed and the buffer pool was refactored.
@@ -376,6 +1013,26 @@ When you document a concurrency primitive, the primitive is the agent. Mutexes l
 > **Principle applied:** P4 — Use only approved verb forms. P9 — Prefer short, clear technical nouns. Method 3 (imperative) applied throughout.
 >
 > **Explanation:** The original commit message uses three passive constructions. The STE version uses three imperative verbs. Each verb describes one change. The reader immediately knows what the commit does.
+
+Realistic context — the commit shown in `git show`:
+
+> **Non-STE:**
+> ```text
+> commit 9f2c1ab
+> Author:Dev <dev@example.com>
+>
+>     The memory leak in the image processing pipeline was fixed. Redundant
+>     allocations were removed and the buffer pool was refactored.
+> ```
+>
+> **STE:**
+> ```text
+> commit 9f2c1ab
+> Author:Dev <dev@example.com>
+>
+>     Fix the memory leak in the image processing pipeline. Remove redundant
+>     allocations. Refactor the buffer pool.
+> ```
 
 ### Example 5 — Error Message
 
@@ -387,6 +1044,24 @@ When you document a concurrency primitive, the primitive is the agent. Mutexes l
 >
 > **Explanation:** The original error message uses passive voice. The user does not know which component detected the error. The STE version names two agents: the token validator (which found the problem) and the server (which rejected the request).
 
+Realistic context — the structured log entry for a failed request:
+
+> **Non-STE:**
+> ```json
+> {
+>   "level": "error",
+>   "msg": "A malformed token was encountered during request validation. The request was rejected."
+> }
+> ```
+>
+> **STE:**
+> ```json
+> {
+>   "level": "error",
+>   "msg": "The token validator found a malformed token. The server rejected the request."
+> }
+> ```
+
 ### Example 6 — Configuration File Comment
 
 > **Non-STE:** # The maximum number of concurrent connections is controlled by this setting. Requests beyond this limit are queued.
@@ -396,6 +1071,22 @@ When you document a concurrency primitive, the primitive is the agent. Mutexes l
 > **Principle applied:** P11 — One term per concept. Method 1 applied: the agent ("this setting") moves to subject position. The second sentence adds a clear agent ("the server").
 >
 > **Explanation:** Configuration comments describe static behavior. Passive voice in a configuration comment can make the relationship between the setting and the behavior unclear. Active voice names the setting as the agent that controls the behavior.
+
+Realistic context — the config block in a TOML file:
+
+> **Non-STE:**
+> ```toml
+> # The maximum number of concurrent connections is controlled by this
+> # setting. Requests beyond this limit are queued.
+> max_connections = 100
+> ```
+>
+> **STE:**
+> ```toml
+> # This setting controls the maximum number of concurrent connections.
+> # The server queues requests beyond this limit.
+> max_connections = 100
+> ```
 
 ## Edge Cases
 
@@ -410,6 +1101,21 @@ When the agent that performed an action is genuinely unknown, the passive voice 
 
 > **Correct (passive):** The data was corrupted before the checksum was computed.
 > **Incorrect (active):** Something corrupted the data before the checksum was computed. (Too vague — "something" adds no information.)
+
+Realistic context — a crash report from a corrupted write:
+
+> **Correct (passive):**
+> ```text
+> [fatal] The data was corrupted before the checksum was computed. The write
+> completed without an error from the storage driver, so no component on our
+> side can be named as the cause.
+> ```
+> **Incorrect (active):**
+> ```text
+> [fatal] Something corrupted the data before the checksum was computed.
+> ```
+> "something" adds no information and sends the reader looking for a phantom
+> process.
 
 NOTE: Use the word "something" as the agent only when you can describe the type of agent (for example, "some process," "some external service"). If you cannot even describe the type, keep the passive voice.
 
@@ -426,6 +1132,24 @@ However, if the documentation section describes the developer's responsibilities
 
 > **Correct:** You must store the configuration file in the `/etc/myapp` directory.
 
+Realistic context — a config reference table where the file is the topic:
+
+> **Topic-comment (acceptable passive):**
+> ```markdown
+> ## Configuration files
+>
+> The configuration file is stored in the `/etc/myapp` directory. The
+> environment file is stored in the same directory. The session file is
+> written next to them at runtime.
+> ```
+> **Developer-responsibility (active):**
+> ```markdown
+> ## Before you deploy
+>
+> You must store the configuration file in the `/etc/myapp` directory. You
+> must also copy the environment file to the same directory.
+> ```
+
 **Decision rule:** If the paragraph topic is the object (the thing acted upon) and changing to active voice would introduce an agent that distracts from the topic, use the passive voice. If the paragraph topic is the agent, use the active voice.
 
 ### Edge Case 3 — Academic or RFC-Style References in Code Documentation
@@ -438,6 +1162,21 @@ Some code documentation includes references to academic papers, RFCs, or formal 
 
 Do not rewrite the quotation. The rule applies only to the documentation text that you write.
 
+Realistic context — a proxy server doc that quotes the RFC:
+
+> **Your prose (STE):**
+> ```markdown
+> Our proxy reads the request line first. The server parses the headers after
+> it reads the body.
+> ```
+> **Quoted RFC (unchanged passive):**
+> ```markdown
+> NOTE: The following description quotes RFC 7230. The passive voice in the
+> quotation is from the original RFC text.
+>
+> > "The request message is parsed by the server into its component parts."
+> ```
+
 ### Edge Case 4 — Framework-Generated Documentation
 
 Some frameworks and tools generate API documentation automatically from code annotations, type definitions, or schema files (for example, OpenAPI/Swagger, JSDoc templates, Sphinx autodoc summaries). These generators sometimes produce passive voice constructions.
@@ -445,6 +1184,23 @@ Some frameworks and tools generate API documentation automatically from code ann
 If you control the generator template (for example, a Sphinx theme or a JSDoc template), configure it to use active voice. If you do not control the generator output, add a NOTE at the top of the generated documentation.
 
 > NOTE: This document was generated by [tool name]. Some sentences use the passive voice. Refer to the source code comments for STE-Code compliant descriptions.
+
+Realistic context — a generated OpenAPI page:
+
+> **Generated doc (passive, not yours to fix):**
+> ```markdown
+> NOTE: This document was generated by openapi-generator. Some sentences use
+> the passive voice. Refer to the source code comments for STE-Code compliant
+> descriptions.
+>
+> > The user object is returned by the GET /users endpoint.
+> ```
+> **Your source comment (STE, which the template should copy):**
+> ```javascript
+> /**
+>  * Get the current user. The GET /users endpoint returns the user object.
+>  */
+> ```
 
 ### Edge Case 5 — Passive Voice in Established Error Message Standards
 
@@ -455,23 +1211,38 @@ Do not rewrite error messages from external systems. The rule applies only to er
 > **Your error message (STE):** The server cannot connect to the database at host:port.
 > **System error message (unchanged):** Connection refused.
 
+Realistic context — an application catch block:
+
+> **Your code (STE message you write):**
+> ```go
+> if err != nil {
+>     return fmt.Errorf("the server cannot connect to the database at %s:%s", host, port)
+> }
+> ```
+> **System string (unchanged, from the OS):**
+> ```text
+> Connection refused
+> ```
+
 ## Cross-References
 
 This rule interacts with several other STE-Code rules. Obey all related rules when you apply Rule 3.6.
 
 - **Rule 1.1 (Approved Words):** When you convert a passive sentence to active voice, you may need to introduce a new agent as the subject. Make sure the agent is an approved word from the STE-Code dictionary or a permitted technical noun (Rule 1.5). Refer to the Canonical Synonym Table for preferred replacements.
-
 - **Rule 1.5 (Technical Code Nouns):** Technical nouns that name code entities (for example, *middleware*, *validator*, *container*, *allocator*, *mutex*) are permitted as agents in active voice sentences. The agent must be a real code entity, not a vague abstraction.
-
 - **Rule 1.12 (Technical Verbs):** When you write an active voice sentence, the verb is often a technical verb (for example, *parse*, *compile*, *deploy*, *render*, *query*, *allocate*). Use these verbs in their approved simple forms. Do not use them in compound passive constructions.
-
 - **Rule 3.1 (Simple Verb Tenses):** Active voice sentences use the simple present or simple past tense. A passive sentence can hide a compound tense behind the auxiliary verb "be." When you convert to active voice, you also simplify the tense.
-
 - **Rule 3.4 (Auxiliary Verbs):** Passive voice uses the auxiliary verb "be" plus a past participle. Converting a passive sentence to active voice removes the unnecessary auxiliary verb. If the passive construction also uses "have" (for example, "has been parsed"), refer to Rule 3.4 for guidance on removing compound auxiliaries.
-
 - **Rule 3.5 (-ing Forms):** Passive progressive constructions (for example, "is being parsed") combine a passive auxiliary with an "-ing" form. These constructions violate both Rule 3.5 and Rule 3.6. Convert them to active voice first, then check for any remaining "-ing" forms.
-
 - **Rule 3.7 (Sentence Length):** Sentences must not exceed 20 words in procedural text and 25 words in descriptive text. Passive constructions are often longer than their active equivalents. Converting to active voice usually shortens the sentence. If the active sentence is still too long, split it into two or more sentences.
+
+> **See also:** Rule 1.1 — Use approved words (dictionary and Canonical Synonym Table)
+> **See also:** Rule 1.5 — Use technical nouns from the code-domain categories
+> **See also:** Rule 1.12 — Use approved technical verbs in their simple forms
+> **See also:** Rule 3.1 — Use only the simple verb tenses
+> **See also:** Rule 3.4 — Use only the approved auxiliary verbs
+> **See also:** Rule 3.5 — Use the "-ing" form only as a technical noun or modifier
+> **See also:** Rule 3.7 — Write sentences that do not exceed the word limit
 
 ## Grammar Notes
 
@@ -618,3 +1389,11 @@ In this pair, three fixes work together:
 In this pair, two fixes work together:
 1. Convert passive to active (*is displayed by* → *shows*) — Rule 3.6.
 2. Replace the avoided word (*display* → *show*) — Rule 1.1 and Canonical Synonym Table.
+
+> **Non-STE:** The report is generated by the scheduler every night.
+>
+> **STE:** The scheduler makes the report every night.
+
+In this pair, two fixes work together:
+1. Convert passive to active (*is generated by* → *makes*) — Rule 3.6 and Method 1.
+2. Replace the avoided word (*generated* → *makes*) — Rule 1.1 and Canonical Synonym Table (approved verb: *make* replaces *generate*).
