@@ -15,11 +15,10 @@ PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 
 
 def _load(name, path):
-    spec = ilu.spec_from_file_location(name, str(path))
-    mod = ilu.module_from_spec(spec)
-    sys.modules[name] = mod
-    spec.loader.exec_module(mod)
-    return mod
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
+    from templater import load_local
+    return load_local(name, path)
 
 
 engine = _load("group_engine", PROJECT / ".agents/tools/grouping/group_engine.py")

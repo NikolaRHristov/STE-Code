@@ -63,12 +63,11 @@ FINAL_CTX = VENDOR_DIR / "FINAL_PHASE_CONTEXT_INSTRUCTIONS.md"
 # ── Prompt text lives in templates/, not in this file ─────────────────────────
 # See .agents/tools/lib/PROMPTS.md. Edit templates/finalize-*.md to change
 # worker wording; this script only supplies the values.
-import importlib.util as _ilu  # noqa: E402
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import lib_import
 
-_tspec = _ilu.spec_from_file_location(
-    "templater", str(PROJECT / ".agents" / "tools" / "lib" / "templater.py"))
-templater = _ilu.module_from_spec(_tspec)
-_tspec.loader.exec_module(templater)
+templater = lib_import("templater")
 _TPL = templater.Templater(__file__)
 
 MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")

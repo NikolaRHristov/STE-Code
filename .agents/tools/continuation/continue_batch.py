@@ -48,11 +48,10 @@ TPL = Templater(__file__)
 
 
 def _skill_text():
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        "skill_prompt", str(PROJECT / ".agents" / "tools" / "lib" / "skill_prompt.py"))
-    m = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(m)
+    import sys as _sys
+    _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+    from templater import lib_import
+    m = lib_import("skill_prompt")
     return m.skill_section("continuation")
 
 

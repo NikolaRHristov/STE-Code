@@ -82,18 +82,13 @@ exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # The oneshot wrapper sub-agents do not auto-load the STE-Code profile skills,
 # so we embed the authoritative skill text directly. This keeps the prompt and
 # the skill in lockstep (edit the SKILL.md, not the baked prompt).
-import importlib.util as _ilu
-_spec = _ilu.spec_from_file_location(
-    "skill_prompt",
-    str(PROJECT / ".agents" / "tools" / "lib" / "skill_prompt.py"),
-)
-skill_prompt = _ilu.module_from_spec(_spec)
-_spec.loader.exec_module(skill_prompt)
 
 # Shared template loader ({{placeholder}} syntax — see lib/templater.py).
 import sys as _sys
 _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
-from templater import render_template
+from templater import lib_import, render_template
+
+skill_prompt = lib_import("skill_prompt")
 _EXTRACTION_PROMPT_PATH = PROJECT / ".agents" / "tools" / "prompts" / "extraction-worker.md"
 
 

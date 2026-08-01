@@ -187,11 +187,8 @@ def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600, skill=None)
     # Embed the authoritative skill text (keeps prompt + skill in lockstep).
     if skill:
         try:
-            import importlib.util as _ilu
-            _sp = _ilu.spec_from_file_location(
-                "skill_prompt", str(_TOOLS / "lib" / "skill_prompt.py"))
-            _m = _ilu.module_from_spec(_sp)
-            _sp.loader.exec_module(_m)
+            from templater import lib_import
+            _m = lib_import("skill_prompt")
             prompt = prompt + _m.skill_section(skill)
         except Exception:
             pass  # skill embedding is best-effort; prompt still runs

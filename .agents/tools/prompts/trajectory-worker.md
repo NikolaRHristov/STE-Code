@@ -33,7 +33,9 @@ re-express it from scratch for the target defined by the parameters:
   function/comment shapes it should emit, and explicit "when you receive a
   request that trips this rule, do X" instructions.
 - If `target_consumer` is a human doc block, keep it readable but tune density
-  and examples to `verbosity`.
+  and examples to `format` (e.g. "example-led with library HINTS",
+  "DO/DON'T checklist + copy-paste patterns", "full sections + decision
+  procedures").
 - If `use_case` names a library/framework/ecosystem, re-cast EVERY example in
   that library's idioms, APIs, error types, and naming — include library-specific
   HINTS (common pitfalls, gotchas, migration notes) the generic rule omits.

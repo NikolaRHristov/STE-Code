@@ -251,11 +251,11 @@ def main():
         sys.exit(0 if ok else 1)
 
     # Deterministic bases (per-tier sub-doc dirs).
-    import importlib.util
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
+    from templater import load_local
     SCAFFOLD_PATH = (Path(__file__).resolve().parent / "levels_scaffold.py")
-    spec = importlib.util.spec_from_file_location("levels_scaffold", str(SCAFFOLD_PATH))
-    scaffold = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(scaffold)
+    scaffold = load_local("levels_scaffold", SCAFFOLD_PATH)
     print("=== scaffolding deterministic level bases (sub-doc dirs) ===", flush=True)
     saved = sys.argv
     sys.argv = ["levels_scaffold.py"]

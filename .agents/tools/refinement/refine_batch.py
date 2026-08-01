@@ -51,23 +51,16 @@ FILENAME_RE = re.compile(r"^w(?P<worker>\d{3})-p(?P<start>\d{1,4})-(?P<end>\d{1,
 # The oneshot wrapper sub-agents do not auto-load the STE-Code profile skills,
 # so the authoritative skill text is embedded. Edit the SKILL.md (not this
 # script) to change refinement behavior.
-import importlib.util as _ilu
-_spec = _ilu.spec_from_file_location(
-    "skill_prompt",
-    str(PROJECT / ".agents" / "tools" / "lib" / "skill_prompt.py"),
-)
-skill_prompt = _ilu.module_from_spec(_spec)
-_spec.loader.exec_module(skill_prompt)
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import lib_import
+
+skill_prompt = lib_import("skill_prompt")
 
 # ── Prompt text lives in templates/, not in this file ─────────────────────────
 # See .agents/tools/lib/PROMPTS.md. Edit templates/refine-*.md to change
 # wording; this script only supplies the values.
-_tspec = _ilu.spec_from_file_location(
-    "templater",
-    str(PROJECT / ".agents" / "tools" / "lib" / "templater.py"),
-)
-templater = _ilu.module_from_spec(_tspec)
-_tspec.loader.exec_module(templater)
+templater = lib_import("templater")
 _TPL = templater.Templater(__file__)
 
 

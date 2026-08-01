@@ -52,7 +52,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 # ── import the shared engine (single source of truth for the plan) ──────────
-import importlib.util as _ilu
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
+from templater import load_local
 
 
 def _load_module(mod_name: str, path: Path):
@@ -63,11 +65,7 @@ def _load_module(mod_name: str, path: Path):
     `from __future__ import annotations`. The repo's bare exec() pattern skips
     this; we do it right so the engine's dataclasses load cleanly.
     """
-    spec = _ilu.spec_from_file_location(mod_name, str(path))
-    mod = _ilu.module_from_spec(spec)
-    sys.modules[mod_name] = mod
-    spec.loader.exec_module(mod)
-    return mod
+    return load_local(mod_name, path)
 
 
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent

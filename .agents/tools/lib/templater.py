@@ -143,3 +143,92 @@ if __name__ == "__main__":
     except ValueError as e:
         print("strict extra OK:", e)
     print("templater self-check passed")
+
+
+# ── shared module loader ──────────────────────────────────────────────────────
+# Many tools need to import a sibling from .agents/tools/lib/ (templater,
+# skill_prompt, agent_runner) without installing the tree as a package. The
+# bare spec_from_file_location / module_from_spec / exec_module boilerplate was
+# copy-pasted across 16 sites; this is the one sanctioned form. It also
+# registers the module in sys.modules by `name` so dataclasses with ClassVar
+# type-resolution (group_engine, etc.) load cleanly under
+# `from __future__ import annotations`.
+import importlib.util as _ilu  # noqa: E402
+import sys  # noqa: E402
+
+_LIB_DIR = Path(__file__).resolve().parent
+
+
+def lib_import(name: str, *, project_root: "Path | None" = None) -> object:
+    """Import a module living in .agents/tools/lib/ by filename stem.
+
+    project_root, when given, is added to sys.path so the loaded module's own
+    `from templater import ...` / `from skill_prompt import ...` style imports
+    resolve. (Those imports only work after bootstrap_lib() has run, or after a
+    sys.path.insert for lib/.)
+
+    Args:
+        name: module filename stem, e.g. "agent_runner" -> lib/agent-runner.py
+        project_root: optional repo root; if set, the appropriate lib/ dir is
+            put first on sys.path so the module's relative imports work.
+
+    Returns the loaded module object (also cached in sys.modules[name]).
+    """
+    path = _LIB_DIR / f"{name}.py"
+    if not path.exists():
+        # Module names normalize hyphens to underscores; the file on disk may
+        # keep the hyphen (e.g. "agent_runner" -> "agent-runner.py"). Try both.
+        path = _LIB_DIR / f"{name.replace('_', '-')}.py"
+    if name in sys.modules:
+        return sys.modules[name]
+    if project_root is not None:
+        sys.path.insert(0, str(_LIB_DIR))
+    spec = _ilu.spec_from_file_location(name, str(path))
+    if spec is None or spec.loader is None:
+        raise ImportError(f"cannot load lib module {name!r} from {path}")
+    mod = _ilu.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def bootstrap_lib(project_root: "Path | None" = None) -> "Path":
+    """Put .agents/tools/lib/ first on sys.path.
+
+    After calling this once, any script may do `from templater import Templater`,
+    `from skill_prompt import skill_section`, `from agent_runner import run_agent`
+    as normal imports instead of the 48 duplicated sys.path.insert() bootstraps.
+
+    Args:
+        project_root: repo root. If omitted, derives lib/ from this file's
+            location. Provided for symmetry with lib_import().
+
+    Returns the lib/ directory path.
+    """
+    sys.path.insert(0, str(_LIB_DIR))
+    return _LIB_DIR
+
+
+def load_local(name: str, path: "Path") -> object:
+    """Import an arbitrary module from an explicit path, registering sys.modules.
+
+    Used for local sibling modules that are not part of lib/ (group_engine,
+    levels_scaffold, etc.). Registration in sys.modules is required so modules
+    defining @dataclass with ClassVar type-resolution (under
+    `from __future__ import annotations`) load cleanly — the bare exec() pattern
+    skips this. This collapses the ~9 duplicated spec_from_file_location blocks
+    that loaded local modules.
+
+    Args:
+        name: module name for sys.modules registration (any unique string).
+        path: absolute path to the .py file.
+
+    Returns the loaded module object.
+    """
+    spec = _ilu.spec_from_file_location(name, str(path))
+    if spec is None or spec.loader is None:
+        raise ImportError(f"cannot load module {name!r} from {path}")
+    mod = _ilu.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod

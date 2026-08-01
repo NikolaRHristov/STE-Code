@@ -40,3 +40,14 @@ check on the grader.
 **Every stage ends with an output contract.** Without "reply with the report and
 nothing else", a sub-agent will use its tools and write stray files into the
 repository root. This was observed, not hypothesised.
+
+## Orchestrator worker prompts
+
+`orchestrator.py` (legacy, excluded from `make lint`) had the same two prompts
+duplicated in the launch and retry paths. They are now `build_full_prompt()` in
+`orchestrator.py`, selecting between:
+
+| template | when | placeholders |
+|---|---|---|
+| `orchestrator-generate.md` | generation task (`prompt` in test case) | `system_prompt`, `task_input` |
+| `orchestrator-check.md` | check/correction task | `system_prompt`, `task_input` |

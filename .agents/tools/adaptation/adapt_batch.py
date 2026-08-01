@@ -128,21 +128,16 @@ AEROSPACE_TERMS = [
 # Non-approved synonyms that must not appear outside "## Original Rule".
 NON_APPROVED_SYNONYMS = ["utilize", "leverage", "employ", "commence", "terminate"]
 
-def _load_module(name: str, path: Path):
-    import importlib.util as _ilu
-    spec = _ilu.spec_from_file_location(name, str(path))
-    m = _ilu.module_from_spec(spec)
-    sys.modules[name] = m
-    spec.loader.exec_module(m)
-    return m
-
+import sys as _sys
+_sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
+from templater import lib_import
 
 engine = None  # lazy: only needed for slicing grouped text
-_tpl = _load_module("templater", PROJECT / ".agents" / "tools" / "lib" / "templater.py")
+_tpl = lib_import("templater")
 TPL = _tpl.Templater(__file__)
 
 # Embed the authoritative adaptation SKILL.md into every worker prompt.
-_skill = _load_module("skill_prompt", PROJECT / ".agents" / "tools" / "lib" / "skill_prompt.py")
+_skill = lib_import("skill_prompt")
 
 
 # ── readiness gate ───────────────────────────────────────────────────────────

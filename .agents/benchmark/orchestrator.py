@@ -46,6 +46,32 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from typing import Dict, Optional
 
+# Prompt text lives in templates/, not inline — see .agents/tools/lib/PROMPTS.md.
+# orchestrator.py is a legacy script (excluded from `make lint`), but the two
+# worker prompts were duplicated across the launch and retry paths; externalizing
+# them removes the duplication and makes wording editable without touching fork()
+# logic.
+from pathlib import Path as _Path
+import sys as _sys
+_sys.path.insert(0, str(_Path(__file__).resolve().parent.parent.parent
+                  / ".agents" / "tools" / "lib"))
+from templater import Templater as _Templater  # noqa: E402
+
+_ORCH_TPL = _Templater(__file__)
+
+
+def build_full_prompt(system_prompt: str, task_input: str,
+                      is_generation: bool) -> str:
+    """Assemble a worker prompt from the externalized templates.
+
+    Replaces the two near-identical f-strings that were copy-pasted in the launch
+    and retry paths. `is_generation` selects the generate vs check template.
+    """
+    name = "orchestrator-generate" if is_generation else "orchestrator-check"
+    return _ORCH_TPL.render(name, system_prompt=system_prompt,
+                            task_input=task_input)
+
+
 # ---------------------------------------------------------------------------
 # CLI argument parsing — all magic numbers become overridable
 # ---------------------------------------------------------------------------
@@ -575,27 +601,7 @@ def main():
             task_input = tc.get("prompt", tc.get("input", ""))
 
             # Build full prompt based on type.
-            if is_generation:
-                full_prompt = f"""{system_prompt}
-
-## TASK
-{task_input}
-
-IMPORTANT: Do NOT create any files. Output all code and documentation inline as text.
-Use STE-Code principles (P1-P14) for all documentation and text you generate.
-Apply the synonym table for all word choices.
-Produce the requested output first, then a compliance summary table showing which principles you followed."""
-            else:
-                full_prompt = f"""{system_prompt}
-
-## TASK
-Check the following text for STE-Code compliance. Apply all 14 principles (P1-P14). 
-Replace unapproved terms using the synonym table. 
-IMPORTANT: Do NOT create any files. Output the corrected text inline.
-Produce the corrected text first, then a compliance summary table.
-
-## TEXT TO CORRECT
-{task_input}"""
+            full_prompt = build_full_prompt(system_prompt, task_input, is_generation)
 
             # Write prompt to temp file (useful for debugging).
             prompt_file = os.path.join(run_dir, f"{tid}-prompt.txt")
@@ -724,27 +730,7 @@ Produce the corrected text first, then a compliance summary table.
                 tc = next(t for t in test_cases if t["id"] == tid)
                 is_generation = "prompt" in tc
                 task_input = tc.get("prompt", tc.get("input", ""))
-                if is_generation:
-                    full_prompt = f"""{system_prompt}
-
-## TASK
-{task_input}
-
-IMPORTANT: Do NOT create any files. Output all code and documentation inline as text.
-Use STE-Code principles (P1-P14) for all documentation and text you generate.
-Apply the synonym table for all word choices.
-Produce the requested output first, then a compliance summary table showing which principles you followed."""
-                else:
-                    full_prompt = f"""{system_prompt}
-
-## TASK
-Check the following text for STE-Code compliance. Apply all 14 principles (P1-P14). 
-Replace unapproved terms using the synonym table. 
-IMPORTANT: Do NOT create any files. Output the corrected text inline.
-Produce the corrected text first, then a compliance summary table.
-
-## TEXT TO CORRECT
-{task_input}"""
+                full_prompt = build_full_prompt(system_prompt, task_input, is_generation)
 
                 pid = os.fork()
                 if pid == 0:
