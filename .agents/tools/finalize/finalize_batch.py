@@ -8,8 +8,8 @@ reads the code-domain references, and rewrites the rule with:
   - the MOST COMPLETE code examples (full, runnable, not abbreviated)
   - cross-references to other rules it cites (See also)
   - traceability back to the original ASD-STE100 spec pair
-  - borrowed controlled vocabulary from the vendor references (Microsoft/Google
-    word lists, glossaries)
+  - borrowed controlled vocabulary from the VENDOR references (Microsoft/Google
+    word lists, glossaries) under .agents/vendor/
   - NO aerospace leakage; code-domain examples only
 
 Mechanism (mirrors extend_batch.py / refine_batch.py): each rule file is a
@@ -18,14 +18,22 @@ by verify_final.py, with checkpoint + per-file git commit (crash-safe resume).
 If the LLM worker fails/times out for a file, we FALL BACK to a deterministic
 copy of the adapted file so final/rules/ is always complete.
 
+Multiple workers run in PARALLEL (--workers N, default 3; capped to <=3 to stay
+within the free-tier concurrency budget). Only one worker may mutate the shared
+checkpoint / git index / progress.md at a time (a process-wide lock serializes
+those writes); the LLM subprocesses themselves run concurrently.
+
 After synthesis, run synthesize_levels.py (SEPARATE delegate) to break the
 finished final/rules/ into reworked levels 1-5.
 
 Usage:
-  python3 finalize_batch.py                 # synthesize all rule files
-  python3 finalize_batch.py --resume        # skip already-done files
+  python3 finalize_batch.py                  # synthesize all rule files
+  python3 finalize_batch.py --resume         # skip already-done files
+  python3 finalize_batch.py --fresh          # ignore checkpoint, re-run all
+  python3 finalize_batch.py --workers 3      # parallelism (default 3, max 3)
+  python3 finalize_batch.py --only-stale     # synthesize only copied/non-synth
   python3 finalize_batch.py a-sec1-rule1.1.md  # single file (debug)
-  python3 finalize_batch.py --verify        # run verify_final.py only
+  python3 finalize_batch.py --verify         # run verify_final.py only
 """
 from __future__ import annotations
 
@@ -36,23 +44,27 @@ import json
 import time
 import signal
 import subprocess
-import atexit
+import threading
+import fcntl
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 
 PROJECT = Path(__file__).resolve().parent.parent.parent.parent
 FINAL_RULES_DIR = PROJECT / "ste-code" / "final" / "rules"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 GROUPED_DIR = PROJECT / "ste-code" / "grouped"
-REFERENCE_DIR = PROJECT / ".agents" / "reference"
+VENDOR_DIR = PROJECT / ".agents" / "vendor"
 STATE_DIR = PROJECT / ".agents" / "state"
 CHECKPOINT_PATH = STATE_DIR / "finalize-checkpoint.json"
 PROGRESS_PATH = STATE_DIR / "finalize-progress.md"
-ASSEMBLE = PROJECT / ".agents" / "tools" / "finalize" / "assemble_final.py"
+LOCK_PATH = STATE_DIR / "finalize.lock"
+FINAL_CTX = VENDOR_DIR / "FINAL_PHASE_CONTEXT_INSTRUCTIONS.md"
 
 MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
 TIMEOUT_SECONDS = 600
+MAX_WORKERS = 3  # free-tier concurrency budget — never exceed
 
 SECTION_RULE_RE = re.compile(r"a-sec(\d+)-rule([\d.]+)\.md$")
 RULE_H1_RE = re.compile(r"^#\s*Rule\s+(\d+\.\d+)\s*—\s*(.+?)\s*$", re.M)
@@ -81,6 +93,8 @@ def _save_checkpoint(ckpt):
 
 
 _checkpoint = _load_checkpoint()
+# Serialize all shared-state mutations (checkpoint/git/progress) across workers.
+_lock = threading.Lock()
 
 
 def _git_commit_locked(files, msg):
@@ -94,28 +108,85 @@ def _git_commit_locked(files, msg):
         return False
 
 
-# ── reference context (borrowed vocabulary) ─────────────────────────────────
+# ── reference context (borrowed vocabulary from VENDOR corpora) ─────────────
 def _reference_context() -> str:
-    """Small, relevant reference excerpts to seed the synthesizer's vocabulary."""
+    """Seed the synthesizer's vocabulary from the downloaded VENDOR corpora.
+
+    The old .agents/reference/ catalogue was removed; authoritative word lists
+    and style guides now live in .agents/vendor/. Pull concrete, relevant
+    excerpts from Microsoft/Google style packages, glossaries, and word lists.
+    """
     parts = []
-    # vendor reference catalogue
-    cat = REFERENCE_DIR / "manifest.json"
-    if cat.exists():
+    # 1) Surface the final-phase context directive so the worker knows where to
+    #    look for grounding documents.
+    if FINAL_CTX.exists():
+        parts.append(
+            "# Final-phase context directive (where to ground ambiguous choices)\n"
+            + FINAL_CTX.read_text(encoding="utf-8", errors="ignore")[:1200]
+        )
+    # 2) Pull approved-word lists from the Vale Microsoft/Google style packages.
+    for pkg, slug in (("vale-microsoft", "Microsoft"), ("vale-google", "Google")):
+        pkg_dir = VENDOR_DIR / pkg
+        if not pkg_dir.exists():
+            continue
+        # collect .txt/.md vocab files (e.g. word lists, preferred terms)
+        excerpts = []
+        for ext in ("*.txt", "*.md"):
+            for p in list(pkg_dir.rglob(ext))[:4]:
+                try:
+                    txt = p.read_text(encoding="utf-8", errors="ignore")
+                except Exception:
+                    continue
+                # take a bounded body sample
+                body = txt[:500]
+                if body.strip():
+                    excerpts.append(f"## {p.name}\n{body}")
+                if len("\n\n".join(excerpts)) > 1500:
+                    break
+            if excerpts:
+                break
+        if excerpts:
+            parts.append(f"# Reference vocabulary: {slug} style package\n"
+                         + "\n\n".join(excerpts)[:1800])
+    # 3) Concrete word-list snippets (software terms, common words, technical glossary)
+    for slug, fname in (
+        ("software-terms.dic", "software-terms.dic"),
+        ("dwyl-technical-glossary", None),
+        ("kong-apiglossary", None),
+        ("jvalentino-glossary", None),
+    ):
+        p = VENDOR_DIR / fname if fname else VENDOR_DIR / slug
+        if not p.exists():
+            # maybe it's a directory — take its README
+            if p.is_dir():
+                readme = p / "README.md"
+                if readme.exists():
+                    p = readme
+                else:
+                    continue
+            else:
+                continue
         try:
-            entries = json.load(open(cat))["entries"]
-            lines = "\n".join(f"- {e['title']}: {e['url']}" for e in entries[:12])
-            parts.append("# Vendor reference catalogue (borrow vocabulary from these)\n" + lines)
-        except Exception:
-            pass
-    # pull a few concrete word-list snippets (Microsoft / Google approved words)
-    for slug in ("microsoft-writing-style-guide", "google-style-guides", "kong-apiglossary"):
-        p = REFERENCE_DIR / (slug + ".md")
-        if p.exists():
             txt = p.read_text(encoding="utf-8", errors="ignore")
-            # take the first ~600 chars of body after the header
-            body = txt.split("\n---\n", 1)[-1][:600]
+        except Exception:
+            continue
+        body = txt[:600]
+        if body.strip():
             parts.append(f"# Reference: {slug}\n{body}")
-    return "\n\n".join(parts)
+    # 4) Microsoft Style Guide prose (the extracted styleguide/ tree)
+    msg = VENDOR_DIR / "styleguide"
+    if msg.is_dir():
+        for md in list(msg.rglob("*.md"))[:3]:
+            try:
+                txt = md.read_text(encoding="utf-8", errors="ignore")
+            except Exception:
+                continue
+            body = txt[:500]
+            if body.strip():
+                parts.append(f"# Microsoft Style Guide: {md.name}\n{body}")
+            if len("\n\n".join(parts)) > 6000:
+                break
+    return "\n\n".join(parts)[:8000]
 
 
 def _previous_documents_context(section_num: str, self_num: str) -> str:
@@ -148,7 +219,6 @@ def _previous_documents_context(section_num: str, self_num: str) -> str:
         ep = PROJECT / "ste-code" / "extensions" / f"{area}.md"
         if ep.exists():
             txt = ep.read_text(errors="ignore")
-            # extract heading + replaces lines
             lines = [l for l in txt.splitlines() if l.startswith("### ") or "**replaces**" in l][:24]
             parts.append(f"# Extension approved {area}\n" + "\n".join(lines))
     return "\n\n".join(parts)
@@ -192,8 +262,9 @@ STE-Code Adaptation, and Examples structure. Then ENRICH it:
    `> *Adapted from spec pair:* Non-STE: <original ASD-STE100 example>  |  STE: <compliant version>`
    (derive from the rule's own content / the Original Rule block / prior documents).
 4. BORROW VOCABULARY: use approved, plain code-domain words (prefer the
-   Microsoft/Google style-guide words and the STE-Code dictionary; avoid
-   utilize/leverage/employ/commence/terminate/initiate when a simpler verb works).
+   Microsoft/Google style-guide words and the STE-Code dictionary under
+   .agents/vendor/; avoid utilize/leverage/employ/commence/terminate/initiate
+   when a simpler verb works).
 5. NO aerospace leakage: every example and term must be code-domain.
 
 # HOW TO WRITE THE FILE (critical)
@@ -207,9 +278,13 @@ invent new global conventions; stay consistent with the existing STE-Code voice
 You MAY and SHOULD research for better enrichment before writing:
 - Read ste-code/adapted/{adapted_path.name} (your source) and the PREVIOUS DOCUMENTS
   block below for traceability and borrowed vocabulary.
-- Explore the reference material: .agents/reference/ (vendor style guides,
-  dictionaries, glossaries) and any other relevant folders under .agents/ or
-  ste-code/ to borrow approved, controlled vocabulary and realistic examples.
+- Explore the reference material under .agents/vendor/ — it contains downloaded
+  public word lists, style guides, and glossaries (Microsoft Style Guide, SCOWL,
+  dwyl english-words, Vale Microsoft/Google/write-good packages, Kong/dwyl/
+  jvalentino glossaries, software-terms.dic, OpenSTE). Borrow APPROVED, controlled
+  vocabulary and realistic examples from them to ground your enrichment.
+- Read .agents/vendor/FINAL_PHASE_CONTEXT_INSTRUCTIONS.md for which corpora to
+  consult when a term, rule scope, example, or allowed/forbidden word is ambiguous.
 - Use multiple read_file calls across turns — do not assume; verify against the
   real files on disk.
 
@@ -248,7 +323,13 @@ def _fallback_copy(adapted_path: Path, out_path: Path):
                         encoding="utf-8")
 
 
-# ── gate (reuse verify_final.py logic on the single file) ───────────────────
+def _valid_rule(path: Path) -> bool:
+    if not (path.exists() and path.stat().st_size >= 400):
+        return False
+    return bool(re.match(r"^#\s*Rule", path.read_text(errors="ignore").lstrip()))
+
+
+# ── gate (single file) ─────────────────────────────────────────────────────
 def _file_gate_ok(path: Path) -> tuple[bool, str]:
     if not path.exists():
         return False, "missing"
@@ -259,8 +340,7 @@ def _file_gate_ok(path: Path) -> tuple[bool, str]:
         return False, "fabrication marker"
     if len(t) < 300:
         return False, "too short"
-    if not re.search(r">\s*\*\*Non-STE", t) and "## Examples" in t:
-        # examples section should have at least one pair
+    if not re.search(r">\s*\*\*(?:Non-STE|STE)", t) and "## Examples" in t:
         if "STE:" not in t:
             return False, "no STE example pair"
     return True, "ok"
@@ -292,34 +372,43 @@ def synthesize_file(adapted_path: Path) -> bool:
         # One slow session must NOT kill the whole batch. But NEVER clobber a file
         # that is already a valid enriched rule (written by a prior run) — only fall
         # back to a clean copy if the current file is missing or not a valid rule.
-        if not (out_path.exists() and out_path.stat().st_size >= 400
-                and re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip())):
-            _fallback_copy(adapted_path, out_path)
-            print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
-            _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                               f"Phase G: synthesize {adapted_path.name} (LLM final)")
-        else:
-            print(f"  [TIMEOUT] {adapted_path.name}: kept existing enriched file", flush=True)
+        with _lock:
+            if not _valid_rule(out_path):
+                _fallback_copy(adapted_path, out_path)
+                print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
+                _git_commit_locked([str(out_path.relative_to(PROJECT))],
+                                   f"Phase G: synthesize {adapted_path.name} (LLM final)")
+            else:
+                print(f"  [TIMEOUT] {adapted_path.name}: kept existing enriched file", flush=True)
         return True
     # Save the agent's stdout as trajectory/history (like refinement/extraction),
     # NOT as the output file.
     (tmp / f"finalize-traj-{adapted_path.stem}.txt").write_text(r.stdout, encoding="utf-8")
     # Gate on the file the SESSION itself wrote (not our stdout).
-    if out_path.exists() and out_path.stat().st_size >= 400 and re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip()):
-        print(f"  ✓ {adapted_path.name} (session wrote final)", flush=True)
-        _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                           f"Phase G: synthesize {adapted_path.name} (LLM final)")
+    if _valid_rule(out_path):
+        with _lock:
+            print(f"  ✓ {adapted_path.name} (session wrote final)", flush=True)
+            _git_commit_locked([str(out_path.relative_to(PROJECT))],
+                               f"Phase G: synthesize {adapted_path.name} (LLM final)")
+            if adapted_path.name not in _checkpoint.setdefault("done", []):
+                _checkpoint["done"].append(adapted_path.name)
+            _save_checkpoint(_checkpoint)
+            _regen_progress()
         return True
     # Session did not write a valid file -> fall back, BUT only if the current file
     # is not already a valid enriched rule (never overwrite good work).
-    if not (out_path.exists() and out_path.stat().st_size >= 400
-            and re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip())):
-        _fallback_copy(adapted_path, out_path)
-        print(f"  [FALLBACK] {adapted_path.name}: session did not write valid file; clean copy", flush=True)
-        _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                           f"Phase G: synthesize {adapted_path.name} (LLM final)")
-    else:
-        print(f"  [FALLBACK] {adapted_path.name}: kept existing enriched file", flush=True)
+    with _lock:
+        if not _valid_rule(out_path):
+            _fallback_copy(adapted_path, out_path)
+            print(f"  [FALLBACK] {adapted_path.name}: session did not write valid file; clean copy", flush=True)
+            _git_commit_locked([str(out_path.relative_to(PROJECT))],
+                               f"Phase G: synthesize {adapted_path.name} (LLM final)")
+        else:
+            print(f"  [FALLBACK] {adapted_path.name}: kept existing enriched file", flush=True)
+        if adapted_path.name not in _checkpoint.setdefault("done", []):
+            _checkpoint["done"].append(adapted_path.name)
+        _save_checkpoint(_checkpoint)
+        _regen_progress()
     return True
 
 
@@ -390,7 +479,17 @@ def main():
     resume = "--resume" in args
     verify = "--verify" in args
     regen_progress = "--regen-progress" in args
+    only_stale = "--only-stale" in args
+    fresh = "--fresh" in args
     single = next((a for a in args if a.endswith(".md")), None)
+    # parallelism
+    workers = MAX_WORKERS
+    for i, a in enumerate(args):
+        if a == "--workers" and i + 1 < len(args):
+            try:
+                workers = max(1, min(MAX_WORKERS, int(args[i + 1])))
+            except ValueError:
+                pass
 
     if verify:
         v = PROJECT / ".agents" / "tools" / "finalize" / "verify_final.py"
@@ -401,16 +500,22 @@ def main():
         _regen_progress()
         return
 
-    atexit.register(lambda: _save_checkpoint(_checkpoint))
-    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
-    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
+    atexit_lock = threading.Lock()
+
+    def _atexit():
+        with atexit_lock:
+            _save_checkpoint(_checkpoint)
+
+    import atexit
+    atexit.register(_atexit)
+    signal.signal(signal.SIGTERM, lambda *_: (_atexit(), sys.exit(0)))
+    signal.signal(signal.SIGINT, lambda *_: (_atexit(), sys.exit(130)))
 
     FINAL_RULES_DIR.mkdir(parents=True, exist_ok=True)
     files = [ADAPTED_DIR / single] if single else sorted(ADAPTED_DIR.glob("a-sec*-rule*.md"))
 
     # --only-stale: synthesize ONLY rules whose final/rules/<f> == adapted/<f>
     # (the copied, non-synthesized ones flagged in progress.md).
-    only_stale = "--only-stale" in args
     if only_stale:
         kept = []
         for p in files:
@@ -422,25 +527,41 @@ def main():
                 kept.append(p)
         files = kept
 
+    if fresh:
+        _checkpoint = {"done": []}
+        print("  --fresh: ignoring checkpoint, re-running all files", flush=True)
+
     done = _checkpoint.setdefault("done", [])
-    n_ok = 0
+    if resume and not fresh:
+        print(f"  resume: {len(done)} already done in checkpoint", flush=True)
+
+    # Build the work list (skip done unless fresh/single/only_stale override)
+    work = []
     for p in files:
-        if resume and p.name in done:
+        if resume and not fresh and p.name in done:
             print(f"  skip (done): {p.name}", flush=True)
-            n_ok += 1
             continue
-        print(f"  SYNTH {p.name}...", flush=True)
-        ok = synthesize_file(p)
-        if ok:
-            if p.name not in done:
-                done.append(p.name)
-            _save_checkpoint(_checkpoint)
-            n_ok += 1
-            print(f"    ✓ {p.name}", flush=True)
-        else:
-            print(f"    ✗ {p.name} (will retry next run)", flush=True)
-        # keep progress.md current after every file
-        _regen_progress()
+        work.append(p)
+
+    if not work:
+        print("  nothing to do (all done). Use --fresh to re-run all.", flush=True)
+    else:
+        print(f"  launching {len(work)} workers across <= {workers} concurrent LLM sessions...",
+              flush=True)
+
+        def _run_one(p: Path):
+            print(f"  SYNTH {p.name}...", flush=True)
+            ok = synthesize_file(p)
+            return p.name, ok
+
+        completed = 0
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            for name, ok in ex.map(_run_one, work):
+                completed += 1
+                if ok:
+                    print(f"    ✓ {name}  ({completed}/{len(work)})", flush=True)
+                else:
+                    print(f"    ✗ {name}  ({completed}/{len(work)}) (will retry next run)", flush=True)
 
     # copy categories + dictionary (deterministic, code-domain) into final/rules/
     for extra in ("a-categories.md", "a-dictionary.md"):
@@ -456,8 +577,9 @@ def main():
     # adapted/ over the LLM-synthesized final/rules/ here — that would clobber the
     # enrichment. Run assemble_final.py explicitly after synthesis if needed.
 
-    print(f"\n{'='*60}\nPhase G synthesis done: {n_ok}/{len(files)} files ✓\n{'='*60}", flush=True)
-    sys.exit(0 if n_ok == len(files) else 1)
+    _save_checkpoint(_checkpoint)
+    print(f"\n{'='*60}\nPhase G synthesis done: {len(work)} workers dispatched\n{'='*60}", flush=True)
+    sys.exit(0)
 
 
 if __name__ == "__main__":
