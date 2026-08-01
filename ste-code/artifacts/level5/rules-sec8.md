@@ -263,4 +263,181 @@ points: intro and each item), Rule 6.3 (procedural lists), Rule 8.1 (the colon
 replaces semicolon-joined enumerations). The colon before a vertical list is the
 approved replacement for semicolon-joined clause lists.
 
-<!-- APPEND-MARKER -->
+## Rule 8.5 — Parentheses and word count
+
+When you put text in parentheses, it counts as ONE WORD in the enclosing
+sentence. But the words inside the parentheses also form a separate sentence
+with its own word-count limit (20 procedural / 25 descriptive). An identifier in
+parentheses (a number, letter, or alphanumeric identifier) and an abbreviation
+in parentheses each count as one word and do not need to obey the sentence-length
+limit, because they are not prose.
+
+Two types of parentheticals:
+- Identifier parentheticals: (10), (EACCES), (CI/CD), (v2.1) — one word, no sentence limit.
+- Explanatory parentheticals: (the DEBUG flag is off), (the worker runs every 60 seconds) — one word in the main sentence, but a complete separate sentence that must obey the limit.
+
+Do not use parentheses to hide safety conditions, required steps, or warnings
+the reader must act on. If the information is important enough to include, it is
+important enough to be a main sentence.
+
+### Examples
+
+Non-STE: Make sure that the DEBUG environment variable is set to false before you run the deployment script in the production cluster (the DEBUG flag must be explicitly disabled for all production workloads to prevent accidental log leakage).
+STE:    Make sure that the DEBUG environment variable is set to false (the DEBUG flag is off).
+
+Non-STE: Remove the health check flag number ten from the deployment configuration.
+STE:    Remove the health check flag (10).
+
+Non-STE: Installation and Configuration of a Continuous Integration and Continuous Deployment Pipeline for the Application
+STE:    Configuration of a Continuous Integration/Continuous Deployment (CI/CD) Pipeline
+
+Non-STE: The timeout parameter sets the request timeout in seconds (this parameter is optional and defaults to 30 if not provided, but if you set retries greater than zero you should increase the timeout accordingly to account for the cumulative wait time across all retry attempts).
+STE:    The timeout parameter sets the request timeout in seconds. The default value is 30. This parameter is optional. NOTE: If you set retries to a value larger than zero, increase the timeout to account for the cumulative wait time.
+
+### Guidance by doc type
+- README: do not bury conditional instructions in parentheses; split long asides into their own sentences.
+- API docs: identifiers (200, 404, application/json, optional) count as one word; do not embed full conditional logic in a parameter description.
+- Docstrings: short parentheticals ((int, optional), (default: 30)) are fine; move algorithmic explanations out.
+- Commit messages: issue refs ((#1234)), (breaking), (auth) count as one word; put justification in the body, not in parentheses.
+- Error messages: keep error codes and recovery hints short ((Error code: EACCES), (try: chmod 600)); never put the whole recovery procedure in parentheses — use a list.
+
+### Paradigm notes
+- OO: (User), (abstract), (Factory pattern) are identifier parentheticals, one word each; move inheritance rationale to its own paragraph.
+- Functional: (Eq a), (when x > 0), (:else) are short; move transformation-chain descriptions to a list.
+- Procedural: (exit code 1), (-v), (if root) are identifier parentheticals; promote error-branch logic to separate sentences.
+- Declarative: (PostgreSQL 14+), (required), (default: true) are short; move migration/back-compat history out of parentheses into a NOTE/BREAKING block.
+- Systems (stricter): never put safety-critical information in parentheses. Use the main sentence or a `# Safety` section — "The caller must obey these conditions: - The pointer must be valid for writes. - …"
+
+### Edge cases
+1. Function-call notation in backticks (`authenticate()`, `parse(input)`) is one atomic word; its internal parentheses are not Rule 8.5 parentheticals.
+2. A URL in parentheses is an identifier (one word); if the parenthetical adds explanatory text after the URL, that text forms a separate sentence.
+3. Never nest parentheses. Use an em-dash for the inner aside or split into a sentence.
+4. Library/method names with parentheses as part of the canonical spelling (`expect()`) stay in backticks and count as one word.
+5. Generator-inserted parentheticals (type hints, defaults) are accepted; follow 8.5 for any you write manually.
+
+### Cross-references
+Rule 1.5 (code nouns in parentheses), Rule 1.6 (non-approved words only as
+technical nouns — parentheses are not a loophole), Rule 3.1 (the parenthetical
+is a sentence), Rule 3.3 (long parentheticals signal a restructure), Rule 4.1
+(word limits apply to the parenthetical sentence), Rule 8.1 (a semicolon inside
+a parenthetical is still forbidden), Rule 8.4 (a parenthetical can hold a nested
+list).
+
+## Rule 8.6 — Elements that count as one word
+
+For sentence-length counting, count each of these as ONE WORD:
+
+1. Numbers: "Do steps 13 thru 16 a minimum of three times." / "The configuration file has twenty-one keys." Do NOT count numbers that identify paragraphs or work steps (document numbering).
+2. Numbers with units of measurement: "Make sure that the timeout is 10 ms." / "The payload is 20 MB." / "The latency must be 10 μs." ("10 ms" is one word).
+3. Abbreviations (acronyms and initialisms): "For remote access, use the VPN." / "During this security check, obey OWASP guidelines." / "a.m." with its number is one word.
+4. Alphanumeric identifiers: "Tag error code E36L7." / "Examine the No. 1 handler installation." / `user_preferences`, `ERR_PG_TIMEOUT_0099`, `OrderPaymentFailed`.
+5. Quoted text: words between quotation marks, backticks, or `<code>` tags count as one word — `"Service Overview"`, `C = (A - B) - 0.063 mm` (a formula is one word), `useUserProfile(userId)`.
+6. Titles, headings, and text on UI elements / labels: "refer to the Operations Runbook for the applicable safety procedures." / "refer to Error Handling and Recovery, page block 1001." / dialog warnings quoted verbatim count as one word.
+7. Proper nouns of individuals, groups, organizations, and geopolitical entities: "The creator of Linux was Linus Torvalds." / "the Apache Software Foundation."
+
+Applying 8.6 collapses many seemingly-long sentences into compliance. A README
+sentence that looks like 17 words may count as 12 once "GitHub Actions" (proper
+noun), "CI/CD" (abbreviation), "AWS Lambda" (proper noun), and "Serverless
+Framework" (proper noun) each become one word.
+
+### Examples
+
+Non-STE: ...validate the signature of each incoming request using the public key obtained from the OpenID Connect identity provider, and the token must have an expiry time of not more than three hundred and sixty seconds...
+STE:    The JWT authentication middleware must validate the signature of each incoming request. The token must have an expiry time of not more than 360 seconds to be valid for processing. ("JWT" = 1 word; "360 seconds" = 1 word.)
+
+Non-STE: ...set the property called http.client.retry.max.attempts to a numeric value of five and also set the property http.client.retry.backoff.millis to a numeric value of one thousand...
+STE:    In `application.properties`, set `http.client.retry.max.attempts` to 5. Set `http.client.retry.backoff.millis` to 1000. (file path = 1; each prop name = 1; "5", "1000" = 1 each.)
+
+Non-STE: ...freeze the checkout container to two hundred and fifty millicores of CPU and five hundred and twelve mebibytes of memory...
+STE:    In the Kubernetes manifest, set the `checkout` container to 250m CPU and 512Mi memory. Set the limit to 500m CPU and 1Gi memory. ("checkout" = 1; "250m CPU", "512Mi", "500m CPU", "1Gi" = 1 each.)
+
+### Paradigm notes
+- OO: class/method/interface/package names are proper nouns or identifiers (1 word each); "Abstract Factory Pattern" is one word.
+- Functional: type signatures and monad stacks quoted count as one word — `validate :: Config -> Either ValidationError Config`, `ReaderT Env (ExceptT AppError IO) a`.
+- Procedural: `pthread_mutex_lock(&mtx)` (quoted, 1 word), `EAGAIN` (identifier, 1 word), `context.Context` (proper noun, 1 word).
+- Declarative: `users(email_address, created_at)` (quoted, 1 word), `aws_lambda_function.main` (identifier, 1 word), `readinessProbe.httpGet.path` (identifier, 1 word).
+- Systems: `fn process<'a>(data: &'a [u8]) -> Cow<'a, str>` (quoted, 1 word), `0x7fff5fbff8c0` (identifier, 1 word).
+
+### Edge cases
+1. Framework names with "unapproved" words (Express, Swift, React) are proper nouns (1 word); do not rewrite them to obey word rules.
+2. Code keywords quoted in docs (`class`, `return`, `async`) count as one word; do not replace them with synonyms. When used in your own prose, apply the dictionary normally.
+3. Generated text you cannot change (Javadoc `@see`, auto-generated OpenAPI descriptions) counts as one word (category 6).
+4. Nested quoted text: the outer backtick/`<code>` boundary defines the unit; everything inside counts as one word.
+5. Semantic versions (`1.2.3-alpha.1+build.456`), Git hashes (`a1b2c3d`), image digests (`sha256:abc123...`) are alphanumeric identifiers (1 word). "Version 1.2.3" = two words ("Version" + "1.2.3").
+6. Document part numbers (rule/section numbers in cross-refs, step numbers, issue IDs as references) are structural and not counted as quantities.
+
+### Cross-references
+Rule 1.1 (proper nouns/identifiers exempt from approved-word rule), Rule 1.5
+(framework/library names are technical nouns and proper nouns), Rule 1.6
+(non-approved words inside proper nouns/identifiers allowed), Rule 1.14
+(American spelling exemptions for proper nouns), Rule 8.7 (hyphenated words also
+count as one), Rule 4.1 (the 20/25 limits these counts serve).
+
+## Rule 8.7 — Hyphenated words count as one word
+
+A hyphenated group of words counts as ONE WORD when you count sentence length.
+The hyphen joins two or more words into a single unit the reader processes as one
+concept, so the 20-word (procedural) / 25-word (descriptive) limits measure the
+unit as one word, not as the number of words inside it.
+
+Two cases:
+
+Case 1 — Hyphenated compound adjectives (attributive, before a noun):
+- `read-only file descriptor` — "read-only" is one word.
+- `thread-safe singleton`, `event-driven architecture`, `low-latency cache`,
+  `client-side rendering pipeline`, `end-to-end test suite`,
+  `backward-compatible API`.
+- After a linking verb / after the noun, do NOT hyphenate and count each word:
+  "The singleton is thread safe" (5 words: "thread" and "safe" are separate).
+
+Case 2 — Long hyphenated technical nouns:
+- `cutoff-switch power connection` (3 words: `cutoff-switch` / `power` / `connection`)
+- `main-gear-door retraction-winch handle` (3 words: `main-gear-door` / `retraction-winch` / `handle`)
+- Code-domain: `build-time environment variable` (3 words), `client-side rendering pipeline` (3 words), `end-to-end test suite` (3 words), `check-out request handler` (3 words), `sign-in error message` (3 words), `look-up table index` (3 words). Words after the hyphenated unit are separate.
+
+### Examples
+
+Non-STE: The open function returns a read only file descriptor.
+STE:    The open function returns a read-only file descriptor. ("read-only" = 1 word)
+
+Non-STE: To calibrate the retry interval, use the try and error method.
+STE:    To calibrate the retry interval, use the trial-and-error method. ("trial-and-error" = 1 word)
+
+Non-STE: Set the build time environment variable to the path of the staging cluster...
+STE:    Set the build-time environment variable to the path of the staging cluster... ("build-time" = 1 word)
+
+Non-STE: The client side rendering pipeline builds the page in the browser.
+STE:    The client-side rendering pipeline builds the page in the browser. ("client-side" = 1 word)
+
+Non-STE: Use a thread safe singleton for the cache.
+STE:    Use a thread-safe singleton for the cache. ("thread-safe" = 1 word)
+
+Word-count proof: "The build-time environment variable must point to the staging cluster." = 10 words. `build-time` is one word, not two.
+
+### Interaction with other rules
+- With Rule 8.2: hyphenate per 8.2, then count the hyphenated unit as one word per 8.7. ("open-source" hyphenated per 8.2; counts as one word per 8.7. "JSON" is an abbreviation, one word per 8.6.)
+- With Rule 8.6: a hyphenated term is a separate case — it is not an abbreviation or identifier, but still counts as one word. Do not double-count.
+- Exception: a hyphen in a spelled-out numeral (twenty-one, forty-seven) or a range (pages 10-15) is covered by Rule 8.6 (numbers count as one word), not 8.7.
+
+### Common code-domain hyphenated terms (each = one word before a noun)
+
+| Term | Type |
+|------|------|
+| read-only, write-only, thread-safe, event-driven | compound adjective |
+| client-side, server-side, end-to-end, backward-compatible, low-latency | compound adjective |
+| build-time, run-time, sign-in, check-out, request-response | technical noun |
+
+When a term in this table follows the noun or a linking verb, write it as separate words and count each word.
+
+### Cross-references
+Rule 8.2 (when to use hyphens), Rule 8.6 (other one-word elements),
+Rule 4.1 (sentence-length limit), Rule 4.2 (do not omit words / use contractions).
+
+---
+
+### How an LLM should apply Section 8 when generating code documentation
+1. Never write a semicolon in prose; split into sentences (8.1).
+2. Hyphenate compound adjectives before nouns; keep predicates separate (8.2, 8.7).
+3. Use parentheses only for the seven allowed purposes; never nest them; never hide safety info in them (8.3, 8.5).
+4. Introduce vertical lists with a short colon sentence; each item is its own sentence under 20/25 words (8.4).
+5. When counting length, collapse numbers+units, abbreviations, identifiers, quoted code, titles, and proper nouns to one word each, and hyphenated groups to one word (8.6, 8.7).
