@@ -59,9 +59,31 @@ If a word that you want to use is not in the controlled terminology:
 2. Find which is the best synonym that is approved in the STE-Code controlled terminology.
 3. Use the approved STE-Code word or find a different sentence construction with other approved words.
 
-### Examples
+### Preferred Approved Verbs (Borrowed Vocabulary)
+
+When you must replace a noun or adjective used as a verb, choose the shortest approved verb that keeps the meaning. The Microsoft Writing Style Guide and the Google Developer Documentation Style Guide both recommend plain, common verbs and warn against inflated words such as "utilize," "leverage," "commence," "terminate," and "initiate." STE-Code follows the same advice: prefer "use" over "utilize" or "leverage," "start" over "commence" or "initiate," and "stop" over "terminate."
+
+The table below maps the most common noun-as-verb and adjective-as-verb violations in code documentation to the approved STE-Code verb (or construction) you should use instead.
+
+| Violating form (do not use) | Part of speech error | Approved STE-Code replacement |
+|-----------------------------|----------------------|-------------------------------|
+| Query the database / Cache the result / Queue the job / Log the error / Index the record | Technical noun used as verb | Send a query / Keep the result in the cache / Put the job in the queue / Write the error in the log / Use the index to find the record |
+| Docker the app / Git the change / Kubectl the pod / Terraform the VPC | Tool name used as verb | Use Docker / Save with Git / Use `kubectl` / Use Terraform |
+| Secure the endpoint / Empty the buffer / Silent the log / Clear the flag* | Adjective used as verb | Make the endpoint secure / Make the buffer empty / Make the log silent / Clear the flag |
+| Static the variable / Ready the worker / Live the connection | Adjective used as verb | Make the variable static / Make the worker ready / Make the connection live |
+| Utilize the cache / Leverage the library / Employ the service | Unapproved verb (inflate) | Use the cache / Use the library / Use the service |
+| Commence the build / Initiate the transfer / Terminate the process | Unapproved verb (inflate) | Start the build / Start the transfer / Stop the process |
+| Orchestrate the services / Facilitate the sync | Unapproved verb | Control the services / Help the sync |
+
+\* "Clear" is approved as both verb and adjective, so "Clear the flag" is allowed; the table lists it only to show the make + adjective pattern applies to true adjectives such as "secure" and "empty."
+
+---
 
 > *Adapted from spec pair:* Non-STE: "Test the system for leaks." | STE: "Do the leak test of the system."
+
+The two adapted spec pairs below are the canonical starters for Rule 1.2. Each one is shown first as a single corrected sentence pair, then as a full, runnable code documentation context so you can see the part-of-speech fix in a realistic situation.
+
+**Pair A — "query" (approved noun, not verb), adapted from "test" (approved noun, not verb).**
 
 > **Non-STE:** Query the database for user records.
 
@@ -69,11 +91,45 @@ If a word that you want to use is not in the controlled terminology:
 
 > *Adapted from spec pair: "Test the system for leaks" → "Do the leak test of the system." Just as "test" is only an approved noun in STE and cannot be used as a verb, "query" is only an approved noun in STE-Code. The STE version uses the approved verb "send" with the approved noun "query."*
 
+Full data-access module, before:
+
+```python
+def get_users(db):
+    # Query the database for user records that are active.
+    rows = db.execute("SELECT * FROM users WHERE active = 1")
+    return rows
+```
+
+Full data-access module, after:
+
+```python
+def get_users(db):
+    # Send a query to the database for the user records that are active.
+    rows = db.execute("SELECT * FROM users WHERE active = 1")
+    return rows
+```
+
+**Pair B — "static" (approved adjective, not verb), adapted from "dim" (approved adjective, not verb).**
+
 > **Non-STE:** Static the variable to prevent modification.
 
 > **STE:** Make the variable static to prevent modification.
 
-> *Adapted from spec example: "dim" is an approved adjective but not a verb. Just as you cannot use "dim" as a verb in STE, you cannot use "static" as a verb in STE-Code. The STE version uses the approved verb "make" with the approved adjective "static."*
+> *Adapted from spec pair: "dim" is an approved adjective but not a verb. Just as you cannot use "dim" as a verb in STE, you cannot use "static" as a verb in STE-Code. The STE version uses the approved verb "make" with the approved adjective "static."*
+
+Full configuration constant, before:
+
+```go
+// Static the cache size so the value does not change at run time.
+const cacheSize = 256
+```
+
+Full configuration constant, after:
+
+```go
+// Make the cache size static so the value does not change at run time.
+const cacheSize = 256
+```
 
 ---
 
@@ -652,6 +708,82 @@ services:
 > **Principles applied:** P2 (use approved part of speech: "endpoints" as a verb → "handles at its endpoints"; "queues" as a verb → "puts in the queue"); P1 (use approved words: "orchestrates" → "controls"; "stores" → "keeps").
 > **Explanation:** "Endpoint" is a code-domain technical noun (category 8, routing and state) — it cannot be used as a verb meaning "to handle HTTP requests at endpoints." "Queue" is a code-domain technical noun (category 6, modules and services) — it cannot be used as a verb meaning "to put messages into a queue." Both are corrected by introducing approved verbs ("handles," "puts") and keeping the technical nouns in prepositional phrases. The word "orchestrates" is corrected per P1 to "controls."
 
+### Example 7 — Unit Test: Name and Assertion Message
+
+A unit test file mixes code and human-readable descriptions. The test name (a sentence) and the assertion message are prose, so Rule 1.2 applies to them even though the code itself is exempt.
+
+Full test module, before:
+
+```python
+def test_cache_eviction():
+    cache = Cache(max_size=2)
+    cache.put("a", 1)
+    cache.put("b", 2)
+    cache.put("c", 3)  # should garbage the oldest entry
+    assert cache.size() == 2
+    assert not cache.contains("a")
+```
+
+Full test module, after:
+
+```python
+def test_cache_eviction():
+    cache = Cache(max_size=2)
+    cache.put("a", 1)
+    cache.put("b", 2)
+    cache.put("c", 3)  # should remove the oldest entry
+    assert cache.size() == 2
+    assert not cache.contains("a")
+```
+
+> **Non-STE:** # should garbage the oldest entry
+>
+> **STE:** # should remove the oldest entry
+
+> **Principles applied:** P2 (use approved part of speech: "garbage" is a noun → "remove"); P1 (use approved words: "remove" is an approved verb).
+> **Explanation:** "Garbage" is a code-domain technical noun (waste data) — it cannot be used as a verb meaning "to delete." The comment is prose that explains the assertion, so Rule 1.2 applies. The STE version uses the approved verb "remove." The test function name `test_cache_eviction` stays unchanged because it is a code identifier (Rule 1.5, category 10).
+
+### Example 8 — CI/CD Pipeline: Step Descriptions
+
+Pipeline configuration files (YAML) contain step names and echo messages that are prose. Rule 1.2 applies to those strings even though the YAML keys and shell commands are exempt.
+
+Full workflow file, before:
+
+```yaml
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker the image
+        run: docker build -t app:1.0 .
+      - name: Artifact the binary
+        run: mv app dist/app
+```
+
+Full workflow file, after:
+
+```yaml
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Docker to make the image
+        run: docker build -t app:1.0 .
+      - name: Put the binary in the artifact
+        run: mv app dist/app
+```
+
+> **Non-STE:** - name: Docker the image / - name: Artifact the binary
+>
+> **STE:** - name: Use Docker to make the image / - name: Put the binary in the artifact
+
+> **Principles applied:** P2 (use approved part of speech: "Docker" is a noun → "Use Docker"; "Artifact" is a noun → "Put in the artifact"); P1 (use approved words: "make" and "put" are approved verbs).
+> **Explanation:** The `name:` fields are prose that a human reads in the CI log, so Rule 1.2 applies. "Docker" is a code-domain technical noun (a tool name) — it cannot be used as a verb. "Artifact" is a code-domain technical noun (category 13, build output) — it cannot be used as a verb. The `run:` shell commands stay unchanged because they are code (Rule 1.5, category 10).
+
 ---
 
 ## Edge Cases
@@ -932,5 +1064,6 @@ The ASD-STE100 Issue 9 also notes that Rule 1.2 interacts with Rule 1.12 (Techni
 > **See also:** Rule 1.4 — Use Only the Approved Verb Forms and Adjective Forms
 > **See also:** Rule 1.5 — You Can Use Words That You Can Include in a Technical Noun Category
 > **See also:** Rule 1.7 — Do Not Use Technical Nouns as Verbs
+> **See also:** Rule 1.10 — Do Not Use Jargon, Slang, or Clipped Forms
 > **See also:** Rule 1.12 — Technical Verbs Are Allowed
 > **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
