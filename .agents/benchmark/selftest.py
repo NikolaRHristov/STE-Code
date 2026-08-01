@@ -469,6 +469,39 @@ def test_white(cfg, tmp: Path) -> None:
           "white.py CLI wires shared args (--await-timeout present)")
 
 
+def test_pipeline(cfg, tmp: Path) -> None:
+    """End-to-end driver: RED->BLUE->WHITE->BLACK across cycles (offline).
+
+    Verifies the five colours converge through the filesystem handshake and the
+    4-turn reverse-deduction loop fires (notes written, knowledge pruned).
+    """
+    import run_pipeline as RP
+    base = tmp / "pipe"
+    base.mkdir(parents=True, exist_ok=True)
+    proc = subprocess.run(
+        [sys.executable, str(BENCH / "run_pipeline.py"),
+         "--base", str(base), "--skip-live", "--rounds", "1", "--cycles", "2",
+         "--workers", "8", "--await-timeout", "120"],
+        capture_output=True, text=True, timeout=300)
+    check(proc.returncode == 0, "run_pipeline.py exits 0 (rc={})".format(proc.returncode))
+    # sentinels from every colour must exist
+    for sent in ("purple.json", "blue-done.json", "white-done.json", "black-done.json"):
+        found = len(list(base.glob("**/" + sent)))
+        check(found >= 1, "pipeline produced {} (found {})".format(sent, found))
+    report = json.loads((base / "pipeline-report.json").read_text())
+    check(len(report["cycles_report"]) == 2, "two cycles recorded")
+    check(all(c["phases"].get("black") for c in report["cycles_report"]),
+          "BLACK completed every cycle")
+    # reverse-deduction: notes + pruning must have fired by cycle 2
+    c2 = report["cycles_report"][1]
+    check(c2["reverse_notes_written"] >= 1, "reverse-deduction notes written")
+    check(c2["pruned_lessons"] >= 1, "WHITE knowledge pruned across cycles")
+    # knowledge must converge downward (not grow unboundedly)
+    check(report["cycles_report"][1]["knowledge"]["lessons"] <=
+          report["cycles_report"][0]["knowledge"]["lessons"],
+          "lessons do not grow across cycles (convergence)")
+
+
 def test_red_blue(cfg, tmp: Path) -> None:
     """RED generator + BLUE defender: placement/timing, handshake, offline run."""
     try:

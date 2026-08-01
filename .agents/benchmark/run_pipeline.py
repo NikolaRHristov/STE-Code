@@ -360,7 +360,7 @@ def _prune_knowledge(base: Path, defended: "list[dict]") -> int:
             kb = {}
         lessons = kb.get("lessons", {})
         for d in defended:
-            bid = d.get("claim_id", "").replace("brief-", "")  # BLACK prefixes
+            bid = d.get("brief_id", d.get("claim_id", "")).replace("brief-", "")  # BLACK prefixes
             if bid.startswith("C-"):
                 prefix = bid[2:]
                 for sig in list(lessons.keys()):
