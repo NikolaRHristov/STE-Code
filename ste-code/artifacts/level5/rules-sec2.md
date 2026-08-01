@@ -446,3 +446,123 @@ jobs:
 - Rule 1.3 — approved words: use, set, get, make, show, check, remove, send, start, stop.
 
 ---
+
+## Rule 2.3 — Use Hyphens Between Words Used as One Unit
+
+> Source: ASD-STE100 Issue 9, Rule 2.3
+
+### Rule
+
+A hyphen connects words or parts of words. Use hyphens between words to show
+that related words operate as one unit. This makes multi-word code nouns agree
+with Rule 2.1: a hyphenated group always counts as one word, so it fills only
+one of the three word slots.
+
+Constraints:
+
+- Do not connect words that are not related. The hyphen changes the meaning of
+  the multi-word code noun. If you are not sure, explain the noun in the
+  clearest way, then use a shorter form, an approved verb (`get`, `set`, `make`,
+  `start`), or an official abbreviation from your glossary.
+- If an approved technical code noun already includes hyphens — `input-output
+  stream`, `thread-safe queue`, `backward-compatible API` — do not change it.
+  If it is too long, write it in full the first time, then use the short form.
+- Do not hyphenate groups of more than three words. Split longer chains with
+  prepositions such as `of`, `on`, or `in`.
+- If an approved technical code noun has three words or fewer, hyphens are not
+  necessary.
+
+### Examples
+
+| Example | Note |
+|---|---|
+| Make sure that the fail-safe shutdown-handler connection is safe. | 3 words |
+| Inspection of the request rate-limit device. | 3 words |
+| The thread-safe queue keeps the order of the write operations. | 3 words |
+| Remove the backward-compatible API client before you make the change. | 3 words |
+
+#### Hyphenate the related pair only
+
+> **Non-STE:** Move the `main-feature-flag-rollback-handler` trigger to start the test run. (four words joined as one unit — not correct)
+>
+> **STE:** Move the `main-feature-flag` rollback-handler trigger to start the test run. (3 units: main-feature-flag / rollback-handler / trigger)
+
+```bash
+# The hyphen joins the related pair only
+make test trigger=rollback-handler flag=main-feature-flag
+```
+
+```python
+def move_trigger(main_feature_flag: str, rollback_handler: str) -> None:
+    """Move the main-feature-flag rollback-handler trigger to start the test run."""
+    trigger = f"{main_feature_flag}:{rollback_handler}"
+    start_test_run(trigger)
+```
+
+#### Do not hyphenate a three-word approved technical noun
+
+> **Non-STE:** A. Remove the `data-adapter` assembly (8) from the view body (20). B. Remove the `pipeline-validator` assembly (15) from its seat.
+>
+> **STE:** A. Remove the `data adapter` assembly (8) from the view body (20). B. Remove the `pipeline validator` assembly (15) from its seat.
+
+```python
+def remove_assembly(name: str, part_id: int) -> None:
+    """Remove the data adapter assembly (part_id) from the view body."""
+    detach(name, part_id)
+    log(f"removed {name} assembly {part_id}")
+
+remove_assembly("data adapter", 8)
+remove_assembly("pipeline validator", 15)
+```
+
+#### Keep a hyphen that the official name already has
+
+> **Non-STE:** The `input output stream` is part of the logging system.
+>
+> **STE:** The `input-output stream` is part of the logging system.
+
+```python
+class LoggingSystem:
+    def __init__(self, stream: "InputOutputStream") -> None:
+        # The input-output stream is part of the logging system.
+        self.stream = stream
+
+    def write(self, message: str) -> None:
+        self.stream.push(message)
+```
+
+```yaml
+logging:
+  # The input-output stream is part of the logging system.
+  input-output-stream:
+    buffer-size: 4096
+    flush-on-error: true
+```
+
+### See also
+
+- Rule 2.1 — the three-word limit that hyphenated units help you meet.
+- Rule 2.2 — write a long noun in full, then use the short form.
+- Rule 1.5 — where hyphenated code terms such as `thread-safe queue` and
+  `backward-compatible API` are defined.
+- Rule 1.3 — pair hyphenated nouns with short approved verbs.
+
+---
+
+## Section 2 quick reference for LLM generation
+
+When you generate code documentation, apply these checks to every noun phrase:
+
+1. Count the words in the noun phrase. Hyphenated units count as one word.
+   More than three? Apply Rule 2.1 or Rule 2.2.
+2. Is it a stacked chain? Split it with `of`, `on`, `in`, `for`, `to`, with the
+   head noun first.
+3. Is it an official approved term? Keep its exact form, including its hyphens.
+   Write it in full on first use, then use the short form or abbreviation.
+4. Do two adjacent words act as one modifier? Hyphenate them — but never
+   hyphenate more than three words, and never after an `-ly` adverb.
+5. Is the verb approved? Use `set`, `get`, `make`, `show`, `check`, `remove`,
+   `send`, `start`, `stop`, `use`, `update`.
+6. Never merge a noun chain into one identifier-like word in prose
+   (`useraccountprofileavatarimagestoragebucketpolicyupdate`). Prose names the
+   parts; code identifiers stay short and nested.
