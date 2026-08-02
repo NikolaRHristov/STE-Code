@@ -32,6 +32,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 REFINED_DIR = PROJECT / "ste-code" / "refined"
 QUEUE_PATH = PROJECT / "ste-code" / "extensions" / ".continue-queue.json"
 
@@ -82,7 +83,7 @@ def main():
     print(f"\n{len(queue)} refined page(s) flagged for B1 continuation.")
     if not print_only:
         queue_path.parent.mkdir(parents=True, exist_ok=True)
-        queue_path.write_text(json.dumps(queue, indent=2))
+        write_text(queue_path, json.dumps(queue, indent=2))
         print(f"Queue written: {queue_path}")
     sys.exit(0)
 
