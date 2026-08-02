@@ -55,7 +55,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -226,7 +226,7 @@ def synthesize_file(adapted_path: Path) -> bool:
 
     prompt = _build_prompt(adapted_path, self_num, title, sm.group(1))
     tmp = PROJECT / ".agents" / "tmp"
-    tmp.mkdir(parents=True, exist_ok=True)
+    mkdir(tmp)
     pf = tmp / f"deepen-{adapted_path.stem}.txt"
     write_text(pf, prompt)
 
@@ -297,7 +297,7 @@ def _regen_progress():
     for rule_id, name, status in rows:
         lines.append(f"| {rule_id} | {name} | {status} |")
     lines += ["", "## Summary", f"- deep: {deep} / {len(files)}", f"- weak: {weak} / {len(files)}"]
-    PROGRESS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    mkdir(PROGRESS_PATH.parent)
     write_text(PROGRESS_PATH, "\n".join(lines) + "\n")
     print(f"  deepenrich progress -> {PROGRESS_PATH}: {deep} deep / {weak} weak / {len(files)} total", flush=True)
     return PROGRESS_PATH
@@ -338,7 +338,7 @@ def main():
     signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
     signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
 
-    FINAL_RULES_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(FINAL_RULES_DIR)
     files = [FINAL_RULES_DIR / single] if single else sorted(FINAL_RULES_DIR.glob("a-sec*-rule*.md"))
 
     if only_weak:
