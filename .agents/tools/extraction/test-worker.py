@@ -14,6 +14,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "extraction"))
 from extract_batch import parse_manifest, worker_page_range, build_prompt, verify_output
 
@@ -33,7 +34,7 @@ wrapper = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py
 tmp = PROJECT / ".agents" / "tmp"
 tmp.mkdir(parents=True, exist_ok=True)
 prompt_file = tmp / f"diag-prompt-{os.getpid()}.txt"
-prompt_file.write_text(prompt)
+write_text(prompt_file, prompt)
 
 cmd = [venv_python, wrapper, str(prompt_file), "--model", model]
 env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "120"}
