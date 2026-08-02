@@ -111,6 +111,24 @@ def hermes_home() -> str:
     return normalize(os.environ.get("HERMES_HOME") or os.path.expanduser("~/.hermes"))
 
 
+def profile_home(profile: str) -> str:
+    """Absolute profile directory for *profile*, independent of the environment.
+
+    ``hermes_home()`` trusts ``$HERMES_HOME``, which is inherited from whatever
+    shell started the process. A bench run launched from a dev session
+    therefore resolved its writable profile root to ``dev-ste-code`` — the
+    locked-down policy handed out write access to the PERMISSIVE profile's
+    directory. Deriving the path from the resolved profile NAME closes that
+    hole: the policy grants the profile it claims to be running as, not the
+    one whose environment happened to leak in.
+    """
+    root = os.path.dirname(hermes_home())
+    if os.path.basename(root) == "profiles":
+        return normalize(os.path.join(root, profile))
+    return normalize(os.path.join(os.path.expanduser("~/.hermes"), "profiles",
+                                  profile))
+
+
 def active_profile() -> str:
     """Profile name derived from ``$HERMES_HOME`` (``profiles/<name>``)."""
     explicit = os.environ.get("HERMES_PROFILE")
@@ -222,8 +240,49 @@ NETWORK_COMMANDS = [
     "cargo", "go", "docker", "kubectl",
 ]
 
+# Commands that start another agent, schedule future work, or drive the GUI.
+#
+# Denying the ``delegate_task`` TOOL is not enough. A locked-down session can
+# reach the same capability through the shell: ``hermes -z '...'`` starts a
+# fresh agent that re-reads its own configuration, and nothing in the child
+# inherits this policy. The same applies to schedulers (``cron``/``at``) and to
+# macOS automation (``osascript`` drives any running application, including a
+# terminal that is not jailed).
+#
+# This is layer 5 of the confinement model: an LLM session launched from inside
+# a jailed session.
+AGENT_SPAWN_COMMANDS = [
+    "hermes", "claude", "codex", "aider", "cursor", "ollama", "llm",
+    "crontab", "at", "launchctl", "systemctl", "osascript", "automator",
+    "open", "sudo", "su", "doas",
+]
 
-def _build_dev(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
+# Subdirectories of a Hermes profile that decide what the NEXT session does.
+#
+# ``hermes_home()`` is granted under every policy so telemetry stays
+# inspectable, but the profile directory also holds the switches that control
+# enforcement itself. Writing ``config.yaml`` disables the jail on the next
+# run; ``hooks/``, ``plugins/`` and ``skills/`` execute attacker-chosen code in
+# the next session. Granting the whole profile therefore hands a locked-down
+# session a persistence primitive: modify the profile, start a new session,
+# escape.
+#
+# These are denied even inside the profile so a jailed session can WRITE its
+# own logs but never rewrite its own cage.
+PROFILE_CONTROL_SUBDIRS = [
+    "config.yaml", "jail.yaml", "hooks", "plugins", "skills", "memories",
+    "cron", "auth.json", ".env", "hermes.db", "commands", "agents",
+]
+
+
+def _profile_control_denies(profile_home: str) -> List[str]:
+    """Absolute deny paths for the control surface of *profile_home*."""
+    return [normalize(os.path.join(profile_home, name))
+            for name in PROFILE_CONTROL_SUBDIRS]
+
+
+def _build_dev(project_root: Optional[str], cfg: Dict[str, Any],
+               home: str) -> Policy:
     """Permissive authoring policy: the repo plus this Hermes profile."""
     write: List[str] = []
     deny: List[str] = []
@@ -232,7 +291,7 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
         parent = os.path.dirname(project_root)
         if parent and parent != project_root:
             deny.append(parent)
-    write.append(hermes_home())
+    write.append(home)
 
     # The dev profile provisions the fleet: `scripts/jail-install.sh` links the
     # jail into `ste-code` and `benchmark-ste-code`, and those profiles have to
@@ -244,7 +303,7 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
     #
     # Scoped to `<hermes>/profiles`, NOT to `<hermes>` itself: the parent holds
     # the shared `.env` with every API key, and no authoring task writes there.
-    profiles_root = os.path.dirname(hermes_home())
+    profiles_root = os.path.dirname(home)
     if os.path.basename(profiles_root) == "profiles":
         write.append(normalize(profiles_root))
 
@@ -267,7 +326,8 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
     )
 
 
-def _build_user(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
+def _build_user(project_root: Optional[str], cfg: Dict[str, Any],
+                home: str) -> Policy:
     """Locked-down consumer policy.
 
     The user reads the standard and artifacts and applies them to their OWN
@@ -276,10 +336,13 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
     user launched Hermes in, and network/escalation tools are off.
     """
     workspace = normalize(cfg.get("workspace") or os.getcwd())
-    write: List[str] = [hermes_home()]
+    write: List[str] = [home]
     write.extend(temp_roots())
 
     deny: List[str] = []
+    # The session may write its own logs and cache, but never the switches
+    # that decide what the NEXT session does. See PROFILE_CONTROL_SUBDIRS.
+    deny.extend(_profile_control_denies(home))
     # The STE-Code checkout itself is never writable under this policy, even
     # when the user launched Hermes from inside it.
     if project_root:
@@ -310,7 +373,7 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
         allow_network=False,
         allowed_tools=None,
         denied_tools=NETWORK_TOOLS + ESCALATION_TOOLS,
-        denied_commands=NETWORK_COMMANDS,
+        denied_commands=NETWORK_COMMANDS + AGENT_SPAWN_COMMANDS,
         description=(
             "User profile: read the STE-Code standard and artifacts and apply "
             "them to your own project. The STE-Code checkout is read-only and "
@@ -319,30 +382,39 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
     )
 
 
-def _build_bench(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
-    """Locked-down benchmark policy.
+def _build_bench(project_root: Optional[str], cfg: Dict[str, Any],
+                 home: str) -> Policy:
+    """Benchmark policy: run adversarial sessions, confined to the benchmark tree.
 
-    Benchmarks execute adversarially generated prompts. Assume the prompt is
-    hostile: writes are confined to the benchmark output tree, nothing else in
-    the repository is writable, and network and escalation tools are off.
-    Telemetry under ``$HERMES_HOME`` stays writable so runs remain inspectable.
+    The benchmark launches adversarial sub-sessions (one per stage) and may
+    rewrite anything inside ``.agents/benchmark/`` — its own harness, attacks,
+    results. It may NOT touch the standard itself (``ste-code/`` is read-only)
+    and may not change the machine beyond that tree.
+
+    Spawning is allowed but force-confined: ``delegate_task`` / ``cronjob``
+    children inherit this policy through ``jail-exec-wrap`` (which sets
+    ``STE_CODE_JAIL_POLICY`` / ``HERMES_PROFILE`` and injects a confinement
+    directive), so a benchmark session cannot spin up an unjailed agent.
     """
-    out_dir = cfg.get("benchmark_output")
-    if out_dir:
-        bench_root = normalize(out_dir)
-    elif project_root:
-        bench_root = normalize(os.path.join(project_root, ".agents", "benchmark",
-                                            "tests"))
+    if project_root:
+        bench_root = normalize(os.path.join(project_root, ".agents",
+                                            "benchmark"))
     else:
         bench_root = normalize(os.path.join(tempfile.gettempdir(),
                                             "ste-code-benchmark"))
 
-    write: List[str] = [bench_root, hermes_home()]
+    write: List[str] = [bench_root, home]
     write.extend(temp_roots())
 
     deny: List[str] = []
+    # Writable telemetry, non-writable control surface. Without this the
+    # benchmark can rewrite its own config.yaml to disable the jail, then
+    # start a fresh session with no confinement at all.
+    deny.extend(_profile_control_denies(home))
     if project_root:
-        # Everything in the repo except the benchmark output tree.
+        # The repository as a whole is read-only: the benchmark runs the
+        # standard, it does not develop it. The benchmark tree nested inside
+        # is a more specific write root, so it still wins.
         deny.append(project_root)
         parent = os.path.dirname(project_root)
         if parent and parent != project_root:
@@ -353,13 +425,17 @@ def _build_bench(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
         write_roots=write,
         deny_roots=deny,
         allow_network=False,
+        # Spawning is allowed (delegation drives the per-stage sessions) but is
+        # force-confined by jail-exec-wrap. The rest of the escape surface stays
+        # shut: no network, no agent binary, no profile self-modification.
         allowed_tools=None,
-        denied_tools=NETWORK_TOOLS + ESCALATION_TOOLS,
-        denied_commands=NETWORK_COMMANDS,
+        denied_tools=NETWORK_TOOLS + ["skill_manage", "memory"],
+        denied_commands=NETWORK_COMMANDS + AGENT_SPAWN_COMMANDS,
         description=(
-            "Benchmark profile: adversarial prompts run here. Writes are "
-            "confined to the benchmark output tree; the rest of the repository "
-            "and the machine are read-only. Network access is disabled."
+            "Benchmark profile: adversarial prompts and per-stage sessions run "
+            "here. Writes are confined to the benchmark tree; the STE-Code "
+            "standard and the rest of the machine are read-only. Network is "
+            "off. Spawned sessions are force-confined to this same policy."
         ),
     )
 
@@ -442,6 +518,11 @@ def load_context(force: bool = False) -> JailContext:
         cfg.get("root_markers") or DEFAULT_ROOT_MARKERS,
     )
 
+    # Derive the profile directory from the RESOLVED profile name rather than
+    # from $HERMES_HOME. A bench policy must never be handed the dev profile's
+    # directory just because a dev shell launched it.
+    profile_root = profile_home(profile)
+
     builder = _BUILDERS.get(str(policy_name))
     if builder is None:
         logger.error(
@@ -451,7 +532,7 @@ def load_context(force: bool = False) -> JailContext:
         )
         builder = _BUILDERS[_STRICT_FALLBACK]
 
-    policy = builder(project_root, cfg)
+    policy = builder(project_root, cfg, profile_root)
 
     # Config may widen or narrow the computed roots.
     for extra in cfg.get("extra_write_roots") or []:
