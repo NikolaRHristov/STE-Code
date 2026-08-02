@@ -42,6 +42,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
@@ -299,7 +300,7 @@ def main() -> int:
         notes_file = PROJECT / ".agents/tmp/release-notes.md"
         if execute:
             notes_file.parent.mkdir(parents=True, exist_ok=True)
-            notes_file.write_text(notes or f"STE-Code {version}", encoding="utf-8")
+            write_text(notes_file, notes or f"STE-Code {version}")
         r.run(
             "gh", "release", "create", f"v{version}",
             "--title", f"STE-Code v{version}",
