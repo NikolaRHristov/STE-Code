@@ -1,35 +1,51 @@
-# Agent #4 — STE-Code Benchmarking Orchestrator
+# Benchmark Orchestrator
 
-> **Role:** Performance and correctness benchmarking agent
-> **Input:** Test cases from `.agents/benchmark/test-cases/`
-> **Output:** Results to `.agents/benchmark/results/`
-> **Model:** poolside/laguna-s-2.1:free
+## Purpose
 
-## Identity
+This skill defines the benchmarking role: measure how well a configuration under test resists
+adversarial and ordinary input, and produce a structured, reproducible report. An agent assigned
+to a benchmark run reads this file, then `CONTRACT.md` and `WORKER_BRIEF.md`.
 
-You are the STE-Code Benchmarking Orchestrator. Your job: measure STE-Code's correctness and performance against a defined test suite. You run pre-defined test cases through `hermes -z` with the STE-Code system prompt, compare outputs against expected results, and produce structured benchmark reports.
+## Footprint
 
-## Architecture
+Resolved from `.agents/benchmark/config/harness.json`.
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  TEST CASES           EXECUTION           RESULTS        │
-│  (pre/post pairs)  →  (hermes -z)    →   (scored JSON)  │
-│                                                          │
-│  ┌──────────┐      ┌──────────────┐    ┌──────────────┐ │
-│  │ Category │      │ System       │    │ Correctness  │ │
-│  │ 1: README│  →   │ Prompt       │ →  │ Score (0-1)  │ │
-│  │ 2: API   │      │ + Test Input │    │ Token Usage  │ │
-│  │ 3: Commit│      │              │    │ Latency (ms) │ │
-│  │ 4: Error │      │ deepseek-    │    │ Diff Ratio   │ │
-│  │ 5: Config│      │ v4-pro       │    │ Compliance % │ │
-│  └──────────┘      └──────────────┘    └──────────────┘ │
-└─────────────────────────────────────────────────────────┘
-```
+| Kind | Value |
+|---|---|
+| Inputs | `paths.static_cases` — `.agents/benchmark/test-cases/` (14 category files) |
+| Inputs | `paths.generated_cases` — `.agents/benchmark/test-cases-adhoc/` |
+| Inputs | `paths.variant_prompt_template` — `ste-code/artifacts/{variant_dir}/system-prompt.txt` |
+| Outputs | `paths.results_base` — `.agents/benchmark/tests/<run-name>/run-<timestamp>/` |
+| Outputs | `runner.aggregate_filename`, `runner.per_test_filename` |
+| Scratch | `paths.scratch` — `.agents/tmp/` |
+| Agent | `runner.default_model`, `runner.default_max_workers`, `runner.default_timeout_s` |
 
-## Test Case Schema
+## Usage
 
-Each test case is a JSON file:
+    python3 .agents/benchmark/selftest.py                       # offline green check
+    python3 .agents/benchmark/harness_config.py                 # resolved profile and paths
+    python3 .agents/benchmark/orchestrator.py --results-dir <name>
+    python3 .agents/benchmark/orchestrator-control.py --results-dir <name>
+    python3 .agents/benchmark/benchmark-levels.py --results-dir <name> --levels 1,2,3,4,5
+    python3 .agents/benchmark/run_pipeline.py --base <name>
+    python3 .agents/benchmark/summarize_run.py --base <name>
+
+Pass `--results-dir` and `--base` a bare name, never an absolute path.
+
+## Behaviour
+
+- Load and validate every case in `paths.static_cases` against `schema.json`.
+- Resolve the variant prompt for each tier under test from `paths.variant_prompt_template`.
+- Build each worker prompt from `templates/orchestrator-generate.md` or
+  `templates/orchestrator-check.md`; prompt text is never inline in Python.
+- Run cases concurrently up to `runner.default_max_workers`, each bounded by
+  `runner.default_timeout_s`.
+- Score every response with the shared formula in `harness_config`, then write the per-test and
+  aggregate documents into a timestamped run directory.
+- Summarize a finished run with `summarize_run.py`, which drives the three-stage prompt chain in
+  `templates/`.
+
+### Case schema
 
 ```json
 {
@@ -45,109 +61,43 @@ Each test case is a JSON file:
 }
 ```
 
-## Benchmark Categories
+Rule ids render through `cfg.rule(n)` from `profile.rule_prefix` and `profile.rule_count`; the
+`P` prefix is configuration, not a literal.
 
-| # | Category | Test Count | Example Input |
-|---|----------|-----------|---------------|
-| 1 | README | 5 | Project description paragraphs |
-| 2 | API Doc | 5 | Function/method documentation |
-| 3 | Commit Message | 5 | Conventional commit messages |
-| 4 | Error Message | 5 | Error strings and stack traces |
-| 5 | Code Comment | 5 | Inline and block comments |
-| 6 | CHANGELOG | 3 | Release note entries |
-| 7 | Config File | 3 | .env, .toml, .yaml comments |
-| 8 | Composite | 4 | Full document sections |
-| **Total** | **8 categories** | **35** | |
+### Categories
 
-## Execution Protocol
+The corpus holds 14 categories across 59 cases, one JSON file per category under `test-cases/`:
+`readme`, `api-doc`, `commit`, `error`, `comment`, `changelog`, `config`, `composite`,
+`gen-function`, `gen-pr-review`, `gen-api-doc`, `gen-commit`, `gen-error`, `gen-readme`.
 
-### Phase 1: Pre-Benchmark
-1. Verify system prompt artifact exists: `ste-code/artifacts/ste-code-distilled-system-prompt.txt`
-2. Load all test cases from `.agents/benchmark/test-cases/`
-3. Validate each test case against schema
-4. Initialize results structure
+### Scoring
 
-### Phase 2: Execution (per test case)
-
-```bash
-# Build the full prompt
-SYSTEM_PROMPT=$(cat ste-code/artifacts/ste-code-distilled-system-prompt.txt)
-TEST_INPUT=$(cat .agents/benchmark/test-cases/bench-001.json | jq -r '.input')
-FULL_PROMPT="$SYSTEM_PROMPT
-
-## TASK
-Check the following text for STE-Code compliance and produce corrected output:
-
-$TEST_INPUT"
-
-# Run with timing
-START_TIME=$(date +%s%N)
-hermes -z "$FULL_PROMPT" -m poolside/laguna-s-2.1:free --yolo > .agents/benchmark/results/bench-001-output.txt 2>&1
-END_TIME=$(date +%s%N)
-LATENCY_MS=$(( (END_TIME - START_TIME) / 1000000 ))
-```
-
-### Phase 3: Scoring (per test case)
-
-Scoring is implemented in `benchmark_lib.py::calc_correctness`. The canonical formula is:
+The canonical formula lives in `harness_config`, and every constant comes from `scoring.*` in the
+profile document. There is exactly one formula; no module reimplements it.
 
 ```
-base_score      = 0.4
-principle_bonus = 0.6 × (principles_satisfied / total_expected_principles)
-forbidden_pen   = 0.3 × (forbidden_found / total_forbidden)   [skipped when total_forbidden == 0]
-keyword_bonus   = 0.1 × (expected_keywords_found / total_expected_keywords)
+base            = scoring.base                  (0.40)
+principle_bonus = scoring.principle_weight   × principles_satisfied / total_expected
+forbidden_pen   = scoring.forbidden_penalty  × forbidden_found / total_forbidden
+keyword_bonus   = scoring.keyword_bonus      × keywords_found / total_expected_keywords
+pattern_pen     = scoring.pattern_penalty    × patterns_matched / total_patterns
 
-CORRECTNESS = clamp(base + principle_bonus − forbidden_pen + keyword_bonus, 0.0, 1.0)
-
-TOKEN_USAGE   = extract from hermes output, or estimate (chars / 4)
-COMPLIANCE % = principles_satisfied / total_expected_principles
-DIFF_RATIO    = SequenceMatcher ratio between output and prior run output (stability metric)
+correctness = clamp(base + principle_bonus - forbidden_pen + keyword_bonus - pattern_pen, 0, 1)
+passed      = correctness >= scoring.pass_threshold          (0.70)
 ```
 
-> **Note:** `diff_ratio` measures output stability across runs, not distance from a ground-truth string.  
-> A `diff_ratio` near 0 means the output is nearly identical to the prior run; near 1 means it changed significantly.
+The forbidden and pattern terms are skipped when their denominator is zero. `diff_ratio` measures
+output stability between runs, not distance from a ground-truth string: near 0 means the output
+matches the prior run, near 1 means it changed.
 
-### Phase 4: Aggregation
-
-Generate aggregate report (example values — not a real result):
-```json
-{
-  "benchmark_id": "ste-code-v1.0.0",
-  "timestamp": "<ISO-8601 timestamp of actual run>",
-  "model": "poolside/laguna-s-2.1:free",
-  "total_tests": 35,
-  "passed": 32,
-  "failed": 3,
-  "aggregates": {
-    "avg_correctness": 0.91,
-    "avg_latency_ms": 4500,
-    "avg_token_usage": 1200,
-    "total_tokens": 42000,
-    "avg_diff_ratio": 0.12
-  },
-  "by_category": {
-    "readme": {"passed": 5, "failed": 0, "avg_correctness": 0.95},
-    "api_doc": {"passed": 4, "failed": 1, "avg_correctness": 0.88}
-  },
-  "failures": [
-    {"id": "bench-012", "reason": "forbidden_keyword_present", "keyword": "should", "score": 0.67}
-  ],
-  "recommendations": [
-    "System prompt handles README and commits well",
-    "API doc category needs improved example coverage",
-    "Latency acceptable for interactive use (<5s avg)"
-  ]
-}
-```
-
-## Result Schema
+### Result record
 
 ```json
 {
   "test_id": "string",
-  "category": "readme|api_doc|commit|error|comment|changelog|config|composite",
-  "input": "string (original text)",
-  "output": "string (STE-Code corrected text)",
+  "category": "string",
+  "input": "string",
+  "output": "string",
   "expected_principles_satisfied": ["P1", "P2"],
   "expected_principles_missed": ["P10"],
   "forbidden_keywords_found": ["should"],
@@ -161,43 +111,50 @@ Generate aggregate report (example values — not a real result):
 }
 ```
 
-## Worker Launch Protocol
+## Configuration
 
-Same as extraction/refinement — batches of 3 with `notify_on_complete=true`:
+Every knob lives in configuration. Nothing is hardcoded in a script.
 
-```bash
-# Batch 1: Categories 1-3 (15 tests)
-hermes -z "$(cat .agents/benchmark/prompts/b1-readme-api-commit.txt)" -m poolside/laguna-s-2.1:free --yolo &
-hermes -z "$(cat .agents/benchmark/prompts/b2-error-comment.txt)" -m poolside/laguna-s-2.1:free --yolo &
-hermes -z "$(cat .agents/benchmark/prompts/b3-changelog-config.txt)" -m poolside/laguna-s-2.1:free --yolo &
-wait
+| Key | File | Governs |
+|---|---|---|
+| `runner.default_model` | `config/harness.json` | The configured model default for the harness |
+| `runner.default_max_workers` | `config/harness.json` | Concurrency, default 2 |
+| `runner.default_timeout_s` | `config/harness.json` | Per-case budget, default 600 |
+| `runner.argv_template` | `config/harness.json` | Flags passed to the scoring backend |
+| `scoring.*` | `config/harness.json` | Base, weights, penalties, `pass_threshold` |
+| `variants.registry` | `config/harness.json` | Tier ids and their directory names |
+| `paths.*` | `config/harness.json` | Every directory read or written |
+| `agent.model`, `agent.timeout_s` | `../config/defaults.yaml` | Shared pipeline defaults |
+| `runtime.retry_attempts`, `runtime.backoff_base_s` | `../config/defaults.yaml` | Pre-flight retry |
 
-# Batch 2: Composite tests + scoring
-hermes -z "$(cat .agents/benchmark/prompts/b4-composite.txt)" -m poolside/laguna-s-2.1:free --yolo &
-hermes -z "$(cat .agents/benchmark/prompts/b5-score-aggregate.txt)" -m poolside/laguna-s-2.1:free --yolo &
-wait
-```
+`orchestrator.py`, `orchestrator-control.py` and `benchmark-levels.py` are legacy entry points
+that carry their own `--model` default of `poolside/laguna-s-2.1:free`. Prefer driving a run
+through `harness_config.build_runner_argv()`, which supplies `runner.default_model` instead.
 
-## Key Facts (Immutable)
-- Model: poolside/laguna-s-2.1:free
-- 14 benchmark test categories (readme, api-docs, comments, commit-msgs, error-msgs, config, docstrings, gen-pr-review, gen-api-doc, gen-commit, gen-error, gen-config, gen-readme, gen-comments)
-- 51 writing rules + 4 GR rules (STE-Code adapted count)
-- Source: ASD-STE100 Issue 9, January 2025
-- Runtime: hermes CLI (local dependency — not committed)
-- Scoring: correctness = keywords_found/total_expected × (1 − forbidden_found/total_forbidden) when total_forbidden > 0; if total_forbidden = 0, factor is 1.0
-- System prompt: `ste-code/artifacts/ste-code-distilled-system-prompt.txt`
-- Benchmark dir: `.agents/benchmark/`
-- Scoring implementation: `benchmark_lib.py::calc_correctness`
+All writes go through `ste_io`; paths resolve through `ste_paths`; retry and pre-flight logic come
+from `ste_runtime`. Never open a file for writing directly and never inline an interpreter or
+wrapper path.
 
-## START NOW
+## Failure modes
 
-```
-Read .agents/benchmark/SKILL.md and execute.
+- HTTP 429 from the free tier above roughly three concurrent workers. Lower `--max-workers`; the
+  retry policy in `../config/defaults.yaml` absorbs the rest. Do not relaunch into the same limit.
+- A case that exceeds `runner.default_timeout_s` is recorded as timed out; the run continues.
+- A missing variant prompt aborts the tier before any model call; check
+  `paths.variant_prompt_template` resolves for the requested variant.
+- A run interrupted part way leaves a timestamped directory with no aggregate file. Treat a
+  missing `aggregate-results.json` as "did not finish", not as a zero score.
+- A `--results-dir` outside the repository is rejected by `ste_paths` and by the `bench` jail
+  policy.
+- A schema-invalid case file fails validation in the pre-flight step rather than mid-run.
 
-1. Verify system prompt artifact exists
-2. Load all test cases from test-cases/
-3. Launch benchmark workers in batches of 3
-4. Score results against expected outputs
-5. Produce aggregate report in results/
-6. Post findings to .agents/feedback/exchange.md
-```
+## See also
+
+- `CONTRACT.md` — genericity rules, handshake protocol, record shapes
+- `WORKER_BRIEF.md` — session starter and definition of done
+- `NOTES_PROTOCOL.md` — inter-colour correspondence
+- `DEPENDENCIES.md` — external binary and Python requirements
+- `templates/README.md` — the prompt assets and the three-stage chain
+- `tests/README.md` — the output root
+- `config/harness.json` — the profile document
+- `../feedback/exchange.md` — where findings are posted

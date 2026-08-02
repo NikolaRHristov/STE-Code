@@ -1,126 +1,152 @@
-# Capsule-Sequenced Adversarial Pipeline — Formal Specification
+# Capsule-Sequenced Adversarial Pipeline
 
-> Status: **formalized + Unit 0 in progress.** Every claim below is reconciled
-> against the *actual* code in `.agents/benchmark/` as of this writing. Where the
-> original design text assumed an API that does not exist, the divergence is
-> called out in **RECON** blocks so a local model implementing this does not
-> hallucinate.
+## Purpose
 
-> Ownership note: `summarize_run.py` is owned by a parallel prompt-extraction
-> agent. **Unit 4 (entropy guard) MUST NOT be implemented by editing that file**
-> from this session — it is flagged `BLOCKED-OTHER-AGENT` below and will be
-> coordinated, not touched.
+This is the formal specification of the capsule primitive: a scheduled unit of work that wraps a
+RED, BLUE, WHITE or BLACK invocation in a sequencing envelope. It replaces the unconditional
+RED-to-BLUE mirror with a declared dependency graph, so a colour can be given a deliberately
+partial view of the evidence. A worker implementing or extending the sequencer reads this file.
 
----
+Every claim here is reconciled against the code in `.agents/benchmark/`. Where an earlier design
+assumed an API that does not exist, the divergence is stated so an implementer does not invent
+one.
 
-## 0. Reconciliation against the real codebase
+## Footprint
 
-| Original assumption | Reality in repo | Action |
+| Kind | Value |
+|---|---|
+| Inputs | `../config/sequence.yaml` — capsule sequence definitions |
+| Inputs | `../config/harness.json` — profile, paths, handshake names, verification knobs |
+| Inputs | prior capsule sentinels named by `handshake.*` |
+| Outputs | `variant<V>/capsule<id>/escapes.json` — the `sees`-scoped escape corpus |
+| Outputs | round sentinels and payloads under `paths.results_base` |
+| Scratch | `paths.scratch` (`.agents/tmp/`) |
+| Agent | `runner.default_model`; offline under `--skip-live` |
+
+## Usage
+
+    python3 .agents/benchmark/capsule_scheduler.py            # list sequences and resolved order
+    python3 .agents/benchmark/capsule_scheduler.py --skip-live
+    python3 .agents/benchmark/run_pipeline.py --base <name>
+    python3 .agents/benchmark/selftest.py                     # gates offline behaviour
+
+With no `sequence.yaml` in the profile directory the scheduler prints that there is nothing to
+schedule, and a pipeline run degrades to the existing fixed colour order.
+
+## Behaviour
+
+- `load_sequence(cfg)` reads `sequence.yaml` from the harness profile directory.
+- Capsules are topologically sorted by their `sees` edges; a cycle raises `ValueError`.
+- Before running a capsule the scheduler waits for every sentinel named in its `sees` set, under
+  the bounded await timeout.
+- For a BLUE capsule the scheduler writes a scoped escape file built only from the capsules it
+  sees, then passes it with `--escape-file`.
+- Timing offsets are honoured live and encoded as `timing` metadata under `--skip-live`.
+- Colour modules are unchanged: the scheduler composes them and never reaches inside them.
+
+### Capsule record
+
+| Field | Meaning |
+|---|---|
+| `id` | deterministic: hash of colour, variant, round, sequence position, seed |
+| `colour` | RED, BLUE, WHITE or BLACK |
+| `sequence_id` | id of the `sequence.yaml` entry that spawned it |
+| `sees` | prior capsule ids whose output state this capsule consumes |
+| `timing_offset_s` | seconds after the preceding capsule's sentinel; 0 is immediate |
+| `intent` | `adversarial`, `helpful` or `hybrid` |
+| `position` | zero-indexed position in the declared sequence |
+
+A BLUE capsule `B1` with `sees: [R1]` and not `R2` builds probes against a partial escape corpus,
+which tests hardening against an incomplete picture before the next RED wave lands.
+
+### Canonical topologies
+
+| Sequence id | Shape |
+|---|---|
+| `saturation_then_exploit_v1` | `R1 → R2 → B1 → R3` |
+| `helpful_poisoning_v1` | `R1 → B1 (helpful) → R2 (compliance_spoof)` |
+| `temporal_drift_v1` | `R1 → [τ] → B1 → [τ] → R2` |
+| `cooperative_collapse_v1` | `R1 (hidden near-miss) → B1 (helpful, partial) → R2` |
+
+### Reconciliation against the codebase
+
+| Earlier assumption | Reality | Resolution |
 |---|---|---|
-| `schema.json` has a `capsule` block | `schema.json` uses JSON-Schema `definitions`; no capsule block | Additive (Unit 1) |
-| `cfg.rule_file(rule_id)` exists | `rule()` takes `int`, returns `P{n}`; no path resolver, no `rule_registry.json` | Add `rule_file()` + `rule_registry.json` (Unit 5) |
-| `knowledge.json` is the lesson store | runtime store is in-memory `knowledge.py`; `knowledge.json` is absent | Unit 1 extends `record_failure` signature |
-| WHITE reads BLACK notes | `white.py` does **not** import `notes`; explicitly skips notes (`white.py:255`) | Add note subscription (Unit 0 Note-Bus gap) |
-| `NoteBus.subscribe` exists | `NoteBus.write(from,to,kind,subject,...)` + `read(id)` + `all_notes()` exist; no `subscribe` | Use `all_notes()` filtered by `to_colour=="white"` |
-| Entropy guard in `summarize_run.py` | file owned by other agent | **BLOCKED-OTHER-AGENT** — coordinate |
-| `_challenge_scoring` returns `confirmed` both branches | **confirmed**: `black.py:242` | **Patch A** (real bug) |
-| `build_attack_brief` hardcodes `inflated_by_pct` | **confirmed**: `run_pipeline.py:167,176` (10 / 50) | **Patch C** (real bug) |
-| `_challenge_remedies` underpowered w/o `cases` | **confirmed**: reads `remedy.get("cases")`, else `underpowered` | **Patch B** (real bug) |
+| `schema.json` has a `capsule` block | `schema.json` uses JSON-Schema `definitions` | additive, Unit 1 |
+| `cfg.rule_file(rule_id)` exists | `rule()` takes an int and returns `P{n}` | add `rule_file()`, Unit 5 |
+| `knowledge.json` is the lesson store | the runtime store is in-memory in `knowledge.py` | Unit 1 extends `record_failure` |
+| WHITE reads BLACK notes | `white.py` does not import `notes` | note subscription, Patch D |
+| `NoteBus.subscribe` exists | `write()`, `read()` and `all_notes()` exist | filter `all_notes()` by `to_colour` |
 
-`cfg.min_arm_size`, `cfg.default_partition_strategy`, `cfg.overfit_tolerance_pct`,
-`cfg.bank(name)`, `cfg.scoring` all exist. `harness_config.resolve_base` guard
-(single output root `.agents/benchmark/tests/`) enforced from prior work.
+`cfg.min_arm_size`, `cfg.default_partition_strategy`, `cfg.overfit_tolerance_pct`, `cfg.bank(name)`
+and `cfg.scoring` all exist. `harness_config.resolve_base` enforces the single output root at
+`.agents/benchmark/tests/`.
 
----
+### Implementation units
 
-## 1. Theoretical model (capsule primitive)
+| Unit | Scope | Status |
+|---|---|---|
+| 0 — Patch A | `black.py` re-scores per-cell probes through perturbed weights and returns `inflated` when the headline moves past `overfit_tolerance_pct` | implemented |
+| 0 — Patch B | `white.py` writes `cases:[{case_id, derivation, verification}]` so remedy challenges have data | implemented |
+| 0 — Patch C | `run_pipeline.build_attack_brief` derives `inflated_by_pct` from measured resistance plus a gain floor | implemented |
+| 0 — Patch D | WHITE consumes BLACK rebuttals and decays the challenged lesson's confidence one step | implemented |
+| 1 — Schema extension | additive `capsule` block in `schema.json`; `record_failure(capsule_id, sequence_position)`; lessons gain `capsule_ids`, `sequence_positions`, `first_sequence_id` | not started |
+| 2 — `capsule_scheduler.py` | reads `sequence.yaml`, resolves the `sees` DAG, polls sentinels, writes scoped escape files | implemented |
+| 3 — Intent-aware probes | `build_blue_probes` branches on `intent`; new placements `code_comment`, `inline_code_span`, `link_title` | not started |
+| 4 — Entropy guard | Shannon entropy over technique, placement and timing pairs; rising floor; metrics `corpus_entropy_pct`, `sequence_depth_tested` | not started, needs coordination |
+| 5 — Inference-driven WHITE | `patch_text` proposals, `cfg.rule_file()`, `rule_registry.json`, `proposed_amendments.json` per cycle | not started, depends on Unit 1 |
+| 6 — Synthetic-to-real bridge | calibration baseline over all topologies, tier-0 live injection, entropy-driven expansion | not started |
 
-A **capsule** is a scheduled unit of work wrapping an existing RED/BLUE/WHITE/BLACK
-invocation inside a sequencing envelope. Properties:
+Unit 4 touches `summarize_run.py`, which a parallel prompt-extraction agent owns. Coordinate
+before editing that file rather than editing it from a sequencer session.
 
-- `id` — deterministic: hash(colour, variant, round, sequence_position, seed)
-- `colour` — RED | BLUE | WHITE | BLACK
-- `sequence_id` — id of the `sequence.yaml` entry that spawned it
-- `sees` — set of prior capsule ids whose output state this capsule consumes
-- `timing_offset_s` — seconds after preceding capsule's sentinel (0 = immediate)
-- `intent` — `adversarial` | `helpful` | `hybrid`
-- `position` — 0-indexed position in the declared sequence
+## Configuration
 
-The `sees` relationship replaces the unconditional RED→BLUE mirror in
-`run_pipeline._run_cycle`. BLUE capsule `B1` with `sees:[R1]` (not `R2`) builds
-probes against a deliberately partial escape corpus.
+Every knob lives in configuration; nothing is hardcoded in the scheduler.
 
-### Four canonical topologies
-1. **Saturation then exploit** — `R1 → R2 → B1 → R3`
-2. **Helpful poisoning** — `R1 → B1(helpful) → R2(compliance_spoof)`
-3. **Temporal drift** — `R1 → [τ] → B1 → [τ] → R2`
-4. **Cooperative collapse** — `R1(hidden, near-miss) → B1(helpful, partial) → R2`
+| Key | File | Governs |
+|---|---|---|
+| `sequence_id`, `seed`, `capsules[]` | `../config/sequence.yaml` | The declared sequences |
+| `capsules[].sees`, `.timing_offset_s`, `.intent` | `../config/sequence.yaml` | Per-capsule envelope |
+| `handshake.*` | `../config/harness.json` | Sentinel and payload filenames |
+| `paths.results_base`, `paths.scratch` | `../config/harness.json` | Where output and scratch go |
+| `verification.overfit_tolerance_pct` | `../config/harness.json` | When BLACK reports `inflated` |
+| `verification.min_arm_size` | `../config/harness.json` | When a claim is `underpowered` |
+| `runner.default_model` | `../config/harness.json` | The configured model default |
+| `runtime.retry_attempts`, `runtime.backoff_base_s` | `../../config/defaults.yaml` | Pre-flight retry |
 
----
+Writes go through `ste_io`, paths resolve through `ste_paths`, and retry behaviour comes from
+`ste_runtime`.
 
-## 2. Implementation units (order-locked)
+## Failure modes
 
-### Unit 0 — Precondition patches (real bugs, all testable under `--skip-live`)
-- **Patch A** (`black.py:_challenge_scoring`): re-score stored per-cell
-  `probes_passed/probes_run` through perturbed weights; return `"inflated"` when
-  the headline moves > `cfg.overfit_tolerance_pct`. *Status: IMPLEMENTED this pass.*
-- **Patch B** (`white.py` remedy files): write `cases:[{case_id, derivation,
-  verification}]` so `_challenge_remedies` has data for `V.Effect`.
-  *Status: IMPLEMENTED this pass.*
-- **Patch C** (`run_pipeline.build_attack_brief`): `inflated_by_pct` = prior
-  cycle measured resistance + gain floor (not hardcoded 10/50).
-  *Status: IMPLEMENTED this pass.*
-- **Patch D (Note-Bus gap)**: WHITE subscribes to BLACK rebuttals
-  (`all_notes()` where `to_colour=="white"` and `kind in {"inflated","underpowered"}`)
-  and applies one immediate `decay_factor` step to the challenged lesson's
-  confidence. *Status: IMPLEMENTED this pass.*
+- A cycle in the `sees` graph raises `ValueError` before any capsule runs.
+- A missing sentinel for a `sees` dependency stalls the capsule until the await timeout, which
+  records the status and continues rather than blocking forever.
+- A sequence file absent from the profile directory yields no schedule; the pipeline falls back to
+  the fixed colour order.
+- A capsule whose scoped escape file is empty still runs and reports zero findings; the sentinel
+  is written regardless, so "did not run" stays distinguishable.
+- Editing `summarize_run.py` from this workstream collides with the owning agent and loses work.
+- Line-number references into colour modules drift as those modules change; re-locate by symbol
+  name rather than by line.
 
-### Unit 1 — Schema extension (`schema.json` + `knowledge.py`)
-Add additive `capsule` block to Case/Escape/Resistance definitions. Extend
-`record_failure(capsule_id="", sequence_position=-1)`; lesson gains
-`capsule_ids`, `sequence_positions`, `first_sequence_id`. `signature()` gains
-`position_aware` flag (default False → existing keys stable).
-*Status: NOT STARTED.*
+## Verification contract
 
-### Unit 2 — `capsule_scheduler.py`
-New module reads `sequence.yaml` via `harness_config`, resolves `sees` DAG,
-polls sentinels (reuses existing `await_timeout`), writes scoped
-`variant<V>/capsule<id>/escapes.json`, passes `--escape-file`. Runs without a
-sequence file degrade to existing fixed order. *Status: NOT STARTED.*
+Every unit is independently testable under `--skip-live`, produces a valid artifact, and is
+additive to `CONTRACT.md`. No colour contract and no part of the filesystem convergence protocol
+is broken. New checks land in `selftest.py`, which reports its own pass count on each run.
 
-### Unit 3 — Intent-aware probe generation (`blue.py`)
-`build_blue_probes` branches on `intent`: `adversarial` (current),
-`helpful` (deterministic rule-based rewrite via `cfg.bank`), `hybrid`
-(new placements `code_comment`, `inline_code_span`, `link_title`).
-*Status: NOT STARTED.*
+## Open questions
 
-### Unit 4 — Entropy guard (`summarize_run.py`) — **BLOCKED-OTHER-AGENT**
-Shannon entropy over `(technique,placement)`, `(technique,timing)`,
-`(placement,sequence_position)`; floor rising 0.5→0.85 by cycle 7. New metrics
-`corpus_entropy_pct`, `sequence_depth_tested`; new goals G13/G14.
-*Coordination required before implementation.*
+1. Where `rule_registry.json` belongs: the profile directory or the repository root (Unit 5).
+2. Whether the entropy-guard floor default is strict enough (Unit 4).
+3. How to coordinate Unit 4 with the agent that owns `summarize_run.py`.
 
-### Unit 5 — Inference-driven WHITE + `proposed_amendments.json`
-WHITE calls inference on live runs for high-confidence lessons → `patch_text`
-(`analysis`, `rule_amendment`, `example_pair`). Add `cfg.rule_file(rule_id)` +
-`rule_registry.json`. Write `proposed_amendments.json` per cycle.
-*Status: NOT STARTED (depends on Unit 1 capsule provenance).*
+## See also
 
-### Unit 6 — Synthetic-to-real bridge
-Calibration baseline (`--skip-live` over all topologies) → tier-0 live injection →
-entropy-driven tier expansion → convergence condition. `calibration_baseline.json`
-becomes regression test. *Status: NOT STARTED.*
-
----
-
-## 3. Verification contract
-
-Every unit is independently testable under `--skip-live`, produces a valid
-artifact, and is additive to CONTRACT.md. No existing colour contract or
-filesystem convergence protocol is broken. New selftests land in
-`selftest.py` (which already gates offline behaviour and reached 170/170).
-
-## 4. Open questions for the user
-1. Where should `rule_registry.json` live — profile dir or repo root? (Affects Unit 5.)
-2. Entropy-guard floor default 0.5 acceptable, or stricter? (Unit 4.)
-3. Coordinate Unit 4 with the prompt-extraction agent owning `summarize_run.py`?
+- `../CONTRACT.md` — genericity rules and the handshake protocol
+- `../NOTES_PROTOCOL.md` — correspondence and split-half verification
+- `../WORKER_BRIEF.md` — session starter and definition of done
+- `../config/sequence.yaml` — the sequence definitions
+- `../config/harness.json` — the profile document
