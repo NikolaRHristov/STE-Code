@@ -52,7 +52,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -329,7 +329,7 @@ def run_worker(section_num, title, source_text):
     """Run one section-adaptation worker (foreground, returns True/False)."""
     prompt = _build_prompt(section_num, title, source_text)
     tmp = PROJECT / ".agents" / "tmp"
-    tmp.mkdir(parents=True, exist_ok=True)
+    mkdir(tmp)
     pf = tmp / f"adapt-sec{section_num}.txt"
     write_text(pf, prompt)
 
