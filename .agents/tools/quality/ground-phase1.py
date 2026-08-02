@@ -21,7 +21,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -67,7 +67,7 @@ def build_worker_prompt(batch_files, batch_num, total_batches):
 
 def main():
     dry_run = "--dry-run" in sys.argv
-    TMP_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(TMP_DIR)
 
     files = sorted(ADAPTED_DIR.glob("a-sec*.md"))
     batch_size = max(1, len(files) // 5)
