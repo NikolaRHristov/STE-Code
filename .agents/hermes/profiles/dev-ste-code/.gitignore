@@ -1,0 +1,53 @@
+# Runtime state for the dev-ste-code profile.
+# The live profile (~/.hermes/profiles/dev-ste-code) is a symlink to this
+# directory, so everything Hermes writes at runtime lands here. None of it
+# belongs in the repository — it is machine-local and may contain secrets.
+#
+# NOTE: skills/ is NOT ignored — it holds the bucket symlinks that define this
+# profile's skill set and must be tracked.
+
+# Credentials (symlinked in from ~/.hermes at install time)
+.env
+auth.json
+auth.lock
+
+# Session / conversation databases
+*.db
+*.db-shm
+*.db-wal
+state.db*
+session*
+sessions/
+
+# Caches and logs
+cache/
+logs/
+lsp/
+.hub/
+.usage.json
+.usage.json.lock
+.bundled_manifest
+.hermes_history
+processes.json
+*_cache.json
+models_dev_cache.json
+ollama_cloud_models_cache.json
+provider_models_cache.json
+context_length_cache.yaml
+.update_check
+
+# Locally created runtime directories
+cron/
+hooks/
+desktop/
+bin/
+audio_cache/
+image_cache/
+sandboxes/
+spawn-trees/
+pastes/
+pairing/
+rate_limits/
+projects.db
+verification_evidence.db
+tui-theme-boot.json

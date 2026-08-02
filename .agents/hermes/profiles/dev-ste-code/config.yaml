@@ -1,0 +1,146 @@
+# The `dev-ste-code` profile: author the STE-Code methodology.
+#
+# This is the profile the pipeline is developed FROM. It writes across the whole
+# repository — the standard, the artifacts, the agent skills, and this very
+# profile source. The `dev` jail policy is permissive authoring: it may rewrite
+# the checkout, spawn sub-sessions, and use the network for tooling.
+#
+# Source of truth: .agents/hermes/profiles/dev-ste-code/ in the STE-Code
+# repository. `~/.hermes/profiles/dev-ste-code` holds symlinks back to it.
+# Runtime-only state (state.db, caches, logs, .env) lives only in ~/.hermes and
+# is excluded by .gitignore — it never enters the repository.
+#
+# Skill set: the four STE skill buckets (ste-code-apply, ste-code-authoring,
+# ste-code-benchmark, ste-code-dev) plus the two skills promoted into the dev
+# bucket (delegation-verification, ste-code-skill-library). Hermes recurses
+# into each bucket symlink and loads every child SKILL.md.
+
+model:
+  default: tencent/hy3:free
+  provider: nous
+  base_url: https://inference-api.nousresearch.com/v1
+fallback_providers: []
+
+agent:
+  max_turns: 90
+  api_max_retries: 3
+  tool_use_enforcement: auto
+  task_completion_guidance: true
+  environment_probe: true
+  coding_context: auto
+  clarify_timeout: 600
+  reasoning_effort: high
+
+terminal:
+  backend: local
+  cwd: .
+  timeout: 180
+  auto_source_bashrc: true
+  persistent_shell: true
+
+tool_output:
+  max_bytes: 50000
+  max_lines: 2000
+  max_line_length: 2000
+
+compression:
+  enabled: true
+  threshold: 0.5
+  target_ratio: 0.2
+  protect_last_n: 20
+  protect_first_n: 3
+
+display:
+  busy_input_mode: steer
+  show_reasoning: true
+  tool_progress: verbose
+
+context:
+  engine: compressor
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 6000
+
+# Authoring drives the pipeline: it spawns sub-sessions (level-worker,
+# extension-worker batches) and may rewrite the standard. Depth 1 keeps a
+# spawned session from spawning further.
+delegation:
+  max_iterations: 120
+  max_concurrent_children: 2
+  max_spawn_depth: 1
+  orchestrator_enabled: true
+
+skills:
+  external_dirs: []
+  template_vars: true
+  inline_shell: false
+  write_approval: false
+  # Bundled default Hermes skills are stripped; this profile loads only the
+  # STE skill set via the bucket symlinks in skills/.
+  disabled:
+    - airtable
+    - apple-notes
+    - apple-reminders
+    - arxiv
+    - ascii-video
+    - baoyu-infographic
+    - blogwatcher
+    - claude-code
+    - claude-design
+    - codex
+    - comfyui
+    - design-md
+    - evaluating-llms-harness
+    - findmy
+    - gif-search
+    - google-workspace
+    - himalaya
+    - huggingface-hub
+    - humanizer
+    - imessage
+    - inspecting-hermes-desktop-dom
+    - llama-cpp
+    - llm-wiki
+    - manim-video
+    - maps
+    - node-inspect-debugger
+    - notion
+    - obsidian
+    - opencode
+    - openhue
+    - p5js
+    - polymarket
+    - serving-llms-vllm
+    - songsee
+    - songwriting-and-ai-music
+    - teams-meeting-pipeline
+    - touchdesigner-mcp
+    - xurl
+    - youtube-content
+
+security:
+  redact_secrets: true
+  tirith_enabled: true
+  tirith_fail_open: true
+
+code_execution:
+  mode: project
+
+tools:
+  tool_search:
+    enabled: auto
+    threshold_pct: 10
+
+# Enforce write confinement. The `dev` policy is derived from the profile NAME,
+# so no per-profile policy file is required. The jail is inert unless enabled
+# here: a symlinked but unenabled plugin looks correctly installed and enforces
+# NOTHING.
+plugins:
+  enabled:
+    - ste-code-jail
+  disabled: []
+  entries:
+    ste-code-jail:
+      allow_tool_override: false
