@@ -113,23 +113,12 @@ def _prepare_bundle() -> tuple[int, str]:
 
 
 def _load_checkpoint():
-    if CHECKPOINT_PATH.exists():
-        try:
-            return json.load(open(CHECKPOINT_PATH))
-        except Exception:
-            pass
-    return {}
-
+    from ste_checkpoint import load
+    return load(CHECKPOINT_PATH)
 
 def _save_checkpoint(ck):
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
-    tmp = str(CHECKPOINT_PATH) + ".tmp"
-    try:
-        json.dump(ck, open(tmp, "w"), indent=2, default=str)
-        os.replace(tmp, str(CHECKPOINT_PATH))
-    except Exception:
-        pass
-
+    from ste_checkpoint import save
+    save(CHECKPOINT_PATH, ck)
 
 _checkpoint = _load_checkpoint()
 
