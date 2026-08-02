@@ -20,6 +20,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 def scan_file(filepath):
     """Find nested fence issues. Returns list of (line_num, description)."""
@@ -139,7 +140,7 @@ def fix_file(filepath):
                 lines[j] = _upgrade_fence(lines[j], new_bt)
                 break
     
-    filepath.write_text('\n'.join(lines))
+    write_text(filepath, '\n'.join(lines))
     return len(fixes)
 
 
