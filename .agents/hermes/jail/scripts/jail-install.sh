@@ -23,10 +23,11 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 JAIL_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+PROFILE_SRC_DIR="$(cd "$JAIL_DIR/.." && pwd)/profiles"
 PROFILES_DIR="$HOME/.hermes/profiles"
 
 GROUP_PLUGIN="ste-code-jail"
-COMPONENTS=("jail-fs" "jail-cmd" "jail-net")
+COMPONENTS=("jail-fs" "jail-cmd" "jail-net" "jail-exec-wrap")
 ALL_PROFILES=("dev-ste-code" "ste-code" "benchmark-ste-code")
 
 DRY_RUN=0
@@ -72,9 +73,22 @@ install_profile() {
     log "profile: $profile"
 
     if [ ! -d "$dir" ]; then
-        log "  ✗ profile does not exist: $dir"
-        log "    create it: hermes profile create $profile"
-        return 1
+        # A profile with a source in the repository can be created here: the
+        # installer owns its on-disk layout, so it makes the directory and
+        # links the source content in. A profile with no source must be
+        # created by `hermes profile create`, which seeds machine-local state
+        # that the installer must not assume.
+        if [ -d "$PROFILE_SRC_DIR/$profile" ]; then
+            if [ "$DRY_RUN" = "1" ]; then
+                log "  would: create $dir from the repository source"
+            else
+                run mkdir -p "$dir"
+            fi
+        else
+            log "  ✗ profile does not exist: $dir"
+            log "    create it: hermes profile create $profile"
+            return 1
+        fi
     fi
 
     local plugins_dir="$dir/plugins"
@@ -90,12 +104,82 @@ install_profile() {
     fi
 
     link_credentials "$dir" || failed=1
+    link_profile_source "$profile" "$dir" || failed=1
     seed_model_config "$dir" || failed=1
 
     # The policy is derived from the profile NAME, so no per-profile config is
     # required. A profile that needs an override drops its own jail.yaml here.
     log "  policy: $(policy_for "$profile")"
     return $failed
+}
+
+# Link product content from the repository into the live profile.
+#
+# A profile that is COPIED into ~/.hermes drifts: fix a skill in the repo and
+# the live profile keeps the old text. Everything that belongs to the product
+# therefore lives in .agents/hermes/profiles/<name>/ and is symlinked out, the
+# same way the jail plugin is.
+#
+# Only profiles with a source directory are touched. `dev-ste-code` has none —
+# it holds machine-local authoring state that must not enter the repository.
+link_profile_source() {
+    local profile="$1" dir="$2"
+    local src="$PROFILE_SRC_DIR/$profile"
+
+    [ -d "$src" ] || return 0
+
+    log "  source: $src"
+
+    local entry name dest
+    for entry in "$src"/*; do
+        [ -e "$entry" ] || continue
+        name="$(basename "$entry")"
+        # README.md documents the source tree; it is not profile content.
+        [ "$name" = "README.md" ] && continue
+        dest="$dir/$name"
+
+        # `skills/` is merged, not replaced: link each skill individually so a
+        # profile can hold both repository skills and locally installed ones.
+        if [ "$name" = "skills" ] && [ -d "$entry" ]; then
+            [ -d "$dest" ] || run mkdir -p "$dest"
+            local skill sname sdest
+            for skill in "$entry"/*; do
+                [ -e "$skill" ] || continue
+                sname="$(basename "$skill")"
+                sdest="$dest/$sname"
+                if [ -L "$sdest" ]; then
+                    [ "$(readlink "$sdest")" = "$skill" ] && continue
+                    run rm -f "$sdest"
+                elif [ -e "$sdest" ]; then
+                    log "  ⚠ skills/$sname is a real directory — leaving it"
+                    continue
+                fi
+                run ln -sfn "$skill" "$sdest"
+                log "  → skills/$sname"
+            done
+            continue
+        fi
+
+        if [ -L "$dest" ]; then
+            [ "$(readlink "$dest")" = "$entry" ] && { log "  = $name"; continue; }
+            run rm -f "$dest"
+        elif [ -e "$dest" ]; then
+            # A real file or directory already exists in the live profile.
+            # Back it up (once) rather than clobbering live state, then link
+            # the repository source over it. This preserves an in-flight
+            # session's config while moving the profile onto tracked content.
+            if [ ! -e "$dest.bak" ]; then
+                run cp -a "$dest" "$dest.bak"
+                log "  ↩ backed up live $name -> $name.bak"
+            else
+                log "  ↩ kept existing $name.bak"
+            fi
+            run rm -rf "$dest"
+        fi
+
+        run ln -sfn "$entry" "$dest"
+        log "  → $name"
+    done
 }
 
 # A freshly created profile has a placeholder .env with no keys, so a live
@@ -141,6 +225,14 @@ seed_model_config() {
     local dir="$1"
     local dest="$dir/config.yaml"
     local source_cfg="$PROFILES_DIR/dev-ste-code/config.yaml"
+
+    # A profile whose config.yaml comes from the repository owns its own
+    # settings. Seeding or appending would either fail on the symlink or
+    # rewrite tracked content from machine-local state.
+    if [ -L "$dest" ]; then
+        log "  = config.yaml (from the repository source)"
+        return 0
+    fi
 
     if [ "$DRY_RUN" = "1" ]; then
         log "  would: seed config.yaml (model + plugin enablement)"
