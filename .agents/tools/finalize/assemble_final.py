@@ -35,7 +35,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 GROUPED_DIR = PROJECT / "ste-code" / "grouped"
@@ -60,7 +60,7 @@ import subprocess
 
 
 def consolidate():
-    FINAL_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(FINAL_DIR)
     # 1) rules/ — enriched adapted rules (re-run enrichment deterministically)
     rules_dir = FINAL_DIR / "rules"
     rules_dir.mkdir(exist_ok=True)
