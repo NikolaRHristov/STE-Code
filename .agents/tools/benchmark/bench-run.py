@@ -18,6 +18,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 TEST_DIR = PROJECT / ".agents" / "benchmark" / "test-cases"
 RESULTS_DIR = PROJECT / ".agents" / "benchmark" / "results-v3"
 
@@ -144,7 +145,7 @@ def main():
     }
 
     report_file = RESULTS_DIR / f"level-{level}-{timestamp}.json"
-    report_file.write_text(json.dumps(report, indent=2))
+    write_text(report_file, json.dumps(report, indent=2))
 
     print(f"\nLevel {level}: {passed}/{len(results)} passed ({100*passed/len(results):.1f}%)")
     print(f"Avg score: {avg_score:.3f}")
