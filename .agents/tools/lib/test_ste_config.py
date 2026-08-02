@@ -77,10 +77,16 @@ def main() -> int:
     )
 
     # 4. resolution order ----------------------------------------------------
-    check(cfg.model == "tencent/hy3:free", "model inherits from defaults.yaml")
+    # The refinement unit overrides the shared default, so its model is poolside;
+    # a unit without an override (extraction) inherits tencent from defaults.
     check(
-        cfg.get("agent.workers_per_batch") == 3,
-        "unit value overrides the shared default",
+        sc.load(_R / ".agents" / "tools" / "extraction" / "config.yaml").model
+        == "tencent/hy3:free",
+        "a unit without an override inherits the shared model default",
+    )
+    check(
+        cfg.model == "poolside/laguna-s-2.1:free",
+        "the refinement unit's own model override wins over the shared default",
     )
 
     os.environ["STE_MODEL"] = "env/model:test"
