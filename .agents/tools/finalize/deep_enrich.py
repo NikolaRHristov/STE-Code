@@ -55,6 +55,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -227,7 +228,7 @@ def synthesize_file(adapted_path: Path) -> bool:
     tmp = PROJECT / ".agents" / "tmp"
     tmp.mkdir(parents=True, exist_ok=True)
     pf = tmp / f"deepen-{adapted_path.stem}.txt"
-    pf.write_text(prompt)
+    write_text(pf, prompt)
 
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "900", "STE_MODEL": MODEL}
     # --debug => full tool-call trace saved to .agents/tmp/oneshot-debug/ (real
@@ -239,7 +240,7 @@ def synthesize_file(adapted_path: Path) -> bool:
     except subprocess.TimeoutExpired:
         with _lock:
             if not _valid_rule(out_path):
-                out_path.write_text(adapted_path.read_text(errors="ignore"), encoding="utf-8")
+                write_text(out_path, adapted_path.read_text(errors="ignore"))
                 print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
                 _git_commit_locked([str(out_path.relative_to(PROJECT))],
                                    f"Phase G+: deepen {adapted_path.name} (fallback)")
@@ -297,7 +298,7 @@ def _regen_progress():
         lines.append(f"| {rule_id} | {name} | {status} |")
     lines += ["", "## Summary", f"- deep: {deep} / {len(files)}", f"- weak: {weak} / {len(files)}"]
     PROGRESS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    PROGRESS_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text(PROGRESS_PATH, "\n".join(lines) + "\n")
     print(f"  deepenrich progress -> {PROGRESS_PATH}: {deep} deep / {weak} weak / {len(files)} total", flush=True)
     return PROGRESS_PATH
 
