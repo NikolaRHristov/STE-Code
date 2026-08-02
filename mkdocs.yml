@@ -26,6 +26,7 @@ exclude_docs: |
 nav:
   - Home: index.md
   - Pipeline: pipeline.md
+  - Architecture: architecture-profiles-and-jail.md
   - Contributing: contributing.md
   - Roadmap:
       - Roadmap: roadmap/ROADMAP.md
