@@ -1,0 +1,27 @@
+# Shared agent defaults.
+#
+# This is the ONLY file whose values are inherited by every unit, and it is
+# deliberately limited to the `agent:` section — the loader rejects any other
+# top-level key. Paths, layout patterns, separators and thresholds are
+# unit-local by construction, so this file cannot grow into a global config.
+#
+# A unit overrides any of these by declaring the same key in its own
+# config.yaml; the unit always wins.
+
+agent:
+    # The model every stage uses unless it declares otherwise.
+    # Previously repeated across 25 files as a literal.
+    model: tencent/hy3:free
+
+    # Backend defined in .agents/config/agents.yaml.
+    name: hermes
+
+    # Wall-clock budget for a single worker invocation, in seconds.
+    timeout_s: 600
+
+    # Concurrent workers per batch. Above 3 the free tier returns HTTP 429.
+    workers_per_batch: 3
+
+    # Retry policy for a failed worker call.
+    retries: 3
+    backoff_s: 5

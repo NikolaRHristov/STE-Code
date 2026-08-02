@@ -1,0 +1,51 @@
+# Refinement stage — complete footprint.
+#
+# Everything this directory reads, writes, and formats is declared here.
+# Nothing outside this file changes the stage's behaviour.
+
+unit: refinement
+
+# ── What the stage reads ────────────────────────────────────────────────────
+inputs:
+    extracted: ste-code/extracted
+
+# ── What the stage writes ───────────────────────────────────────────────────
+outputs:
+    refined: ste-code/refined
+    state: .agents/state
+    checkpoint: .agents/state/refine-checkpoint.json
+    trajectory: .agents/tmp
+
+# ── Filenames and directory layout ──────────────────────────────────────────
+layout:
+    # Source pages: w001-p1-4.md  (worker 001, pages 1 to 4)
+    worker_file: "w{worker:03d}-p{start}-{end}.md"
+    worker_glob: "*.md"
+    worker_re: '^w(?P<worker>\d{3})-p(?P<start>\d{1,4})-(?P<end>\d{1,4})\.md$'
+
+    # Refined pages: r001-p1-4.md — same stem, r prefix.
+    refined_file: "r{worker:03d}-p{start}-{end}.md"
+    refined_glob: "r*.md"
+
+# ── Markers, stamps and encoding ────────────────────────────────────────────
+format:
+    encoding: utf-8
+    # Refiner marks retained source spans; the grouper reads these back.
+    mark_open: "<mark>"
+    mark_close: "</mark>"
+    markup_tag_re: '</?[a-zA-Z][^>]*>'
+
+# ── Gates and magic numbers ─────────────────────────────────────────────────
+thresholds:
+    # Total source pages the stage expects to process.
+    total_workers: 109
+
+    # Normalized word count of output must reach this fraction of the source.
+    # NEVER gate on raw line or word count: table and collapse rules make
+    # correct output legitimately shorter.
+    word_ratio_min: 0.98
+
+# ── Agent settings (inherits .agents/config/defaults.yaml) ──────────────────
+agent:
+    workers_per_batch: 3
+    timeout_s: 600
