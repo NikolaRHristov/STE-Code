@@ -1,0 +1,116 @@
+# Capsule sequence definitions (Unit 2).
+# Loaded by capsule_scheduler.py from the profile directory.
+# Each capsule: id, colour, variant, round, intent, timing_offset_s, sees.
+# `sees` is the dependency DAG: a capsule only reads output state from the
+# listed capsule ids. BLUE capsules with partial `sees` test hardening against
+# an incomplete picture before the next RED wave lands.
+
+sequence_id: "saturation_then_exploit_v1"
+seed: 42
+capsules:
+  - id: R1
+    colour: RED
+    variant: "0"
+    round: 1
+    intent: adversarial
+    timing_offset_s: 0
+    sees: []
+  - id: R2
+    colour: RED
+    variant: "0"
+    round: 2
+    intent: adversarial
+    timing_offset_s: 0
+    sees: [R1]
+  - id: B1
+    colour: BLUE
+    variant: "0"
+    round: 1
+    intent: helpful
+    timing_offset_s: 0
+    sees: [R1]          # deliberately partial -- does not see R2
+  - id: R3
+    colour: RED
+    variant: "0"
+    round: 3
+    intent: adversarial
+    timing_offset_s: 120
+    sees: [B1]          # exploits what B1 hardened against
+
+---
+sequence_id: "helpful_poisoning_v1"
+seed: 42
+capsules:
+  - id: R1
+    colour: RED
+    variant: "0"
+    round: 1
+    intent: adversarial
+    timing_offset_s: 0
+    sees: []
+  - id: B1
+    colour: BLUE
+    variant: "0"
+    round: 1
+    intent: helpful
+    timing_offset_s: 0
+    sees: [R1]
+  - id: R2
+    colour: RED
+    variant: "0"
+    round: 2
+    intent: adversarial
+    timing_offset_s: 0
+    sees: [B1]          # compliance_spoof fires after helpful priming
+
+---
+sequence_id: "temporal_drift_v1"
+seed: 42
+capsules:
+  - id: R1
+    colour: RED
+    variant: "0"
+    round: 1
+    intent: adversarial
+    timing_offset_s: 0
+    sees: []
+  - id: B1
+    colour: BLUE
+    variant: "0"
+    round: 1
+    intent: helpful
+    timing_offset_s: 300
+    sees: [R1]
+  - id: R2
+    colour: RED
+    variant: "0"
+    round: 2
+    intent: adversarial
+    timing_offset_s: 300
+    sees: [B1]
+
+---
+sequence_id: "cooperative_collapse_v1"
+seed: 42
+capsules:
+  - id: R1
+    colour: RED
+    variant: "0"
+    round: 1
+    intent: adversarial
+    timing_offset_s: 0
+    sees: []
+  - id: B1
+    colour: BLUE
+    variant: "0"
+    round: 1
+    intent: helpful
+    timing_offset_s: 0
+    sees: [R1]
+  - id: R2
+    colour: RED
+    variant: "0"
+    round: 2
+    intent: adversarial
+    timing_offset_s: 0
+    sees: [B1]

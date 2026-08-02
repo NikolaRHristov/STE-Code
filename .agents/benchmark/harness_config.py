@@ -155,6 +155,7 @@ class HarnessConfig:
     def __init__(self, document: dict, source: Path) -> None:
         self._doc = document
         self.source = source
+        self.profile_dir = source.parent.resolve()
 
         paths = document.get("paths", {})
         self.root = _find_root(source.parent, paths.get("root_markers", [".git"]))

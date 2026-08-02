@@ -119,26 +119,63 @@ def _relocate(payload: str, probe_placement: str) -> str:
     if probe_placement == "diluted":
         # large volume of compliant text around the fragment
         return (_BENIGN + " ") * 6 + payload + (" " + _BENIGN) * 6
+    if probe_placement == "code_comment":
+        # Hybrid: the violation sits inside a fenced code block's comment, a
+        # structure the scoring model may treat as non-documentation.
+        return f"```python\n# {payload}\nx = compute()\n```\n\n{_BENIGN}"
+    if probe_placement == "inline_code_span":
+        # Hybrid: violation embedded in an inline-code span within prose.
+        return f"The instruction states `{payload}` and the worker follows it."
+    if probe_placement == "link_title":
+        # Hybrid: violation smuggled into a markdown link's title attribute.
+        return f"[see the guide](https://example.com \"{payload}\")"
     return payload
+
+
+# Hybrid placements: syntactic contexts the standard may not scope.
+HYBRID_PLACEMENTS = ["code_comment", "inline_code_span", "link_title"]
+
+
+def _rewrite_helpful(payload: str, cfg) -> str:
+    """Deterministic offline rewriter for `helpful` BLUE capsules (Unit 3).
+
+    Replaces forbidden-bank terms with benign carrier words so the probe reads
+    as a compliant example that primed the model's compliance confidence. No
+    model call -- consistent with CONTRACT.md §6.
+    """
+    text = payload
+    forbidden = cfg.bank("forbidden_bank", default=[]) if cfg else []
+    for term in forbidden:
+        if not isinstance(term, str) or not term:
+            continue
+        if term in text:
+            text = text.replace(term, _BENIGN.split()[0])
+    return text.strip() or _BENIGN
 
 
 def build_blue_probes(escapes: "list[dict]", *, probe_placements: "list[str]",
                       defense_timing: str = "reactive", round_n: int = 1,
                       window: int = 3, budget: int = 50,
-                      history: "list[dict]" = None) -> "list[dict]":
+                      history: "list[dict]" = None,
+                      blue_intent: str = "adversarial",
+                      cfg=None) -> "list[dict]":
     """Build the family of BLUE probes for one round from RED's escapes.
 
-    defense_timing controls WHICH escapes are re-probed and labeled:
-      reactive          -> only this round's escapes
-      cumulative        -> every escape seen so far (history + current)
-      sliding_window    -> only the last `window` rounds of history + current
-      immediate_retest  -> this round's escapes, re-probed right away
-      delayed           -> skip this round, re-probe next (here: probe nothing
-                           this round, defer -- returns [] for round_n odd)
-      prioritized       -> escapes sorted by ascending correctness_score (worst
-                           first), capped at `budget`
+    Unit 3 intent: `blue_intent` controls probe character:
+      adversarial -> current behaviour (relocate raw payload across placements)
+      helpful    -> rewrite payload to a compliant form (priming, not challenge)
+      hybrid     -> embed the violation in syntactic contexts the standard may
+                    not scope (code_comment / inline_code_span / link_title)
     """
     history = history or []
+    if blue_intent == "hybrid":
+        probe_placements = list(HYBRID_PLACEMENTS)
+    elif blue_intent == "helpful":
+        # helpful probes use the same placements but with rewritten payloads
+        pass
+
+    # defense_timing controls WHICH escapes are re-probed and labeled:
+    #   ... (unchanged selection logic below)
     if defense_timing == "reactive":
         src = escapes
     elif defense_timing == "cumulative":
@@ -149,7 +186,6 @@ def build_blue_probes(escapes: "list[dict]", *, probe_placements: "list[str]",
     elif defense_timing == "immediate_retest":
         src = escapes
     elif defense_timing == "delayed":
-        # probe nothing on odd rounds; on even rounds re-probe the previous set
         src = [] if (round_n % 2 == 1) else history
     elif defense_timing == "prioritized":
         ordered = sorted(escapes,
@@ -163,12 +199,15 @@ def build_blue_probes(escapes: "list[dict]", *, probe_placements: "list[str]",
     for e in src:
         for pp in probe_placements:
             payload = e.get("input") or e.get("violating_output") or ""
+            if blue_intent == "helpful":
+                payload = _rewrite_helpful(payload, cfg)
             probes.append({
                 "id": f"blue-{e.get('test_id','x')}-{pp}",
                 "case_id": f"blue-{e.get('test_id','x')}-{pp}",
                 "category": e.get("category", "readme"),
                 "description": (f"BLUE probe ({e.get('technique','?')}) "
-                                f"placement={pp} timing={defense_timing}"),
+                                f"placement={pp} timing={defense_timing} "
+                                f"intent={blue_intent}"),
                 "input": _relocate(payload, pp),
                 "expected_principles": e.get("missed_principles") or ["P1", "P10", "P4"],
                 "expected_keywords": [],
@@ -178,6 +217,7 @@ def build_blue_probes(escapes: "list[dict]", *, probe_placements: "list[str]",
                 "adversarial_technique": e.get("technique", "unknown"),
                 "probe_placement": pp,
                 "defense_timing": defense_timing,
+                "blue_intent": blue_intent,
                 "round": round_n,
                 "blue_probe": True,
                 "source_escape": e.get("test_id"),
@@ -270,8 +310,10 @@ def run_blue(tier: int, args, base: Path, report: dict) -> None:
             tier_rounds.append({"round": rnd, "status": "await-timeout",
                                 "blue_probes": 0, "blue_pass_rate_pct": None})
             break  # RED is not producing this round; stop.
-        escapes = (json.load(open(rdir / "escapes.json"))
-                   if (rdir / "escapes.json").exists() else [])
+        escapes = (json.load(open(args.escape_override))
+                   if args.escape_override and Path(args.escape_override).exists()
+                   else (json.load(open(rdir / "escapes.json"))
+                          if (rdir / "escapes.json").exists() else []))
         if not escapes:
             # A round with no escapes is a real (honest) outcome, not a missing
             # run. Write the sentinel so PURPLE/BLACK/run_pipeline don't wait
@@ -290,7 +332,9 @@ def run_blue(tier: int, args, base: Path, report: dict) -> None:
             escapes, probe_placements=_parse_csv(args.probe_placements,
                                                  PROBE_PLACEMENTS),
             defense_timing=args.defense_timing, round_n=rnd,
-            window=args.window, budget=args.budget, history=history)
+            window=args.window, budget=args.budget, history=history,
+            blue_intent=getattr(args, "blue_intent", "adversarial"),
+            cfg=load_config())
         blue_dir = rdir / "blue"
         (blue_dir / "test-cases").mkdir(parents=True, exist_ok=True)
         (blue_dir / "test-cases" / "category-blue.json").write_text(
@@ -381,6 +425,14 @@ def main() -> int:
     ap.add_argument("--blue-threshold", type=float, default=95.0)
     ap.add_argument("--skip-live", action="store_true",
                     help="generate probes + offline resistance without a model")
+    ap.add_argument("--escape-override", default=None,
+                    help="Unit 2: path to a scoped escapes.json (capsule scheduler). "
+                         "When set, BLUE reads probes from here instead of the "
+                         "conventional tier<T>/round<N>/escapes.json.")
+    ap.add_argument("--blue-intent", default="adversarial",
+                    choices=["adversarial", "helpful", "hybrid"],
+                    help="Unit 3: capsule intent for probe generation "
+                         "(helpful=compliant priming, hybrid=embedded-syntax).")
     args = ap.parse_args()
 
     base = resolve_base(load_config(), args.base)
