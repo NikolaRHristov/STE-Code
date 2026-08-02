@@ -32,7 +32,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 BASE_DIR = ARTIFACTS_DIR / "_base"
@@ -177,7 +177,7 @@ def main(argv=None):
             total = sum(len(c) for _, c in subs)
             print(f"[dry-run] {fname}: {len(subs)} sub-docs ({total}B)")
             continue
-        tdir.mkdir(parents=True, exist_ok=True)
+        mkdir(tdir)
         idx = [f"# STE-Code Level {label} — base index", "",
                f"> {desc}", "", "## Sub-documents (distill each):", ""]
         for name, content in subs:
