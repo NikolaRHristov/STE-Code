@@ -25,6 +25,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
 
@@ -57,7 +58,7 @@ def standardize_file(filepath, dry_run=False):
         changes += n
 
     if changes > 0 and not dry_run:
-        filepath.write_text(content)
+        write_text(filepath, content)
 
     return original, content, changes
 
