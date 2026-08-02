@@ -456,19 +456,13 @@ def dry_run(plan, idx, man, id2pos):
 
 
 # ── real assembly (guarded) ─────────────────────────────────────────────────
-def _load_checkpoint() -> dict:
-    if CHECKPOINT_PATH.exists():
-        try:
-            return json.loads(CHECKPOINT_PATH.read_text(encoding="utf-8"))
-        except Exception:
-            return {}
-    return {}
-
+def _load_checkpoint():
+    from ste_checkpoint import load
+    return load(CHECKPOINT_PATH)
 
 def _save_checkpoint(cp: dict):
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
-    CHECKPOINT_PATH.write_text(json.dumps(cp, indent=2), encoding="utf-8")
-
+    from ste_checkpoint import save
+    save(CHECKPOINT_PATH, cp)
 
 def assemble_all(plan, idx, man, id2pos, force=False) -> int:
     """Write every group to grouped/, guarded on corpus readiness.
