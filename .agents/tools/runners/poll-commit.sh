@@ -8,7 +8,22 @@
 # Usage:  bash .agents/tools/runners/poll-commit.sh [interval_seconds] [max_iterations]
 set -uo pipefail
 
-ROOT="/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code"
+# Never hardcode a machine path: walk up to a repository marker so a clone
+# works anywhere. Mirrors .agents/tools/lib/repo_root.py and jail-lib.sh.
+find_root() {
+    local d
+    d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    while [ "$d" != "/" ]; do
+        if [ -d "$d/.git" ] || [ -f "$d/Makefile" ]; then
+            printf '%s\n' "$d"
+            return 0
+        fi
+        d="$(dirname "$d")"
+    done
+    return 1
+}
+
+ROOT="$(find_root)" || { echo "cannot locate repository root" >&2; exit 1; }
 INTERVAL="${1:-300}"
 MAX_ITER="${2:-288}"      # 288 * 300s = 24h
 LOG="$ROOT/.agents/tmp/poll-commit.log"
@@ -17,7 +32,6 @@ LOG="$ROOT/.agents/tmp/poll-commit.log"
 OWNED=(
   ".agents/benchmark"
   ".agents/tools/runners/poll-commit.sh"
-  ".agents/state/benchmark-redblue"
   ".agents/skills/benchmarking"
 )
 
