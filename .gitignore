@@ -1,27 +1,27 @@
-# === Python ===
+# Python
 __pycache__/
 .venv/
 *.pyc
 *.pyo
 venv/
 
-# === macOS ===
+# macOS
 .AppleDouble
 .DS_Store
 .LSOverride
 
-# === IDE / Editor ===
+# IDE / Editor
 .idea/
 .vscode/
 *.swo
 *.swp
 *~
 
-# === Hermes runtime ===
+# Hermes runtime
 .hermes/sessions/
 .hermes/venv/
 
-# === Generated worker artifacts (NOT source) ===
+# Generated worker artifacts (NOT source)
 .agents/_scratch/
 .agents/audit/
 .agents/rewrites/
@@ -29,10 +29,10 @@ venv/
 .agents/tmp/**
 ste-code/audit/
 
-# === Vendor reference corpora (cloned public repos — NOT source, do not commit) ===
+# Vendor reference corpora (cloned public repos — NOT source, do not commit)
 .agents/vendor/
 
-# === Benchmark scratch (runtime artifacts — never commit) ===
+# Benchmark scratch (runtime artifacts — never commit)
 # Retired legacy benchmark scripts (old single-prompt layout; superseded by
 # orchestrator.py + benchmark-levels.py against the 8-tier artifacts).
 .agents/benchmark/enlarge-ste-code.py

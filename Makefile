@@ -28,7 +28,7 @@ audit:
 
 ## jail: prove the write-confinement plugins block folder escapes
 jail:
-	@$(PY) $(JAIL)/tests/test_jail.py | grep -E "^RESULT:"
+	@set -o pipefail; $(PY) $(JAIL)/tests/test_jail.py | grep -E "^RESULT:"
 
 ## check: everything CI should run for the benchmark
 check: lint test audit jail
