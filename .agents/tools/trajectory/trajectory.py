@@ -74,7 +74,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -209,7 +209,7 @@ def run_benchmark_variant(variant_path: Path, doc_stem: str, variant_id: str) ->
     """
     bench_root = Path(__file__).resolve().parent.parent.parent / "benchmark" / "tests" / "parametarized"
     results_dir = bench_root / doc_stem / f"bench-{variant_id}"
-    results_dir.mkdir(parents=True, exist_ok=True)
+    mkdir(results_dir)
     orch = Path(__file__).resolve().parent.parent.parent / "benchmark" / "orchestrator.py"
     try:
         r = subprocess.run(
@@ -258,7 +258,7 @@ def produce_variant(doc_path: Path, param: dict, do_bench: bool) -> dict:
     stem = doc_path.stem
     vid = param.get("id", "x")
     out_dir = PARAM_DIR / stem
-    out_dir.mkdir(parents=True, exist_ok=True)
+    mkdir(out_dir)
     out_path = out_dir / f"v_{vid}.md"
 
     prompt = _build_variant_prompt(doc_path, param)
