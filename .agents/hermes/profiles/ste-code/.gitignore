@@ -32,9 +32,7 @@ context_length_cache.yaml
 # Locally created runtime directories
 cron/
 hooks/
-skills/
 desktop/
 bin/
 audio_cache/
-
 !skills/applying-ste-code
