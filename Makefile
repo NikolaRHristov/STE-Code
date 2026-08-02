@@ -33,6 +33,28 @@ jail:
 ## check: everything CI should run for the benchmark
 check: lint test audit jail
 
+# --- skill distribution -------------------------------------------------------
+# Keep .agents/skills/ the single source of truth: every profile loads its
+# STE skill buckets through a two-level symlink chain into that directory.
+# `skills-link` asserts the links exist; `skills-check` reports drift without
+# changing anything. Run `skills-prune` once to drop foreign default buckets
+# that leaked into a live profile.
+
+HERMES := .agents/hermes
+SKILLS_LINK := $(HERMES)/skills-link.sh
+
+## skills-link: symlink every STE profile's skill buckets into the single source
+skills-link:
+	@bash $(SKILLS_LINK) --all
+
+## skills-check: report drift (foreign/real-copy skills) without changing files
+skills-check:
+	@bash $(SKILLS_LINK) --status
+
+## skills-prune: remove foreign default skill buckets from live profiles
+skills-prune:
+	@bash $(SKILLS_LINK) --all --prune
+
 # --- release maintenance -----------------------------------------------------
 # Deliberately NOT wired into `check`: the benchmark suite above is another
 # session's canonical gate, and mixing counts hides its real pass total.
@@ -55,4 +77,5 @@ release-check:
 	@$(PY) $(RELEASE)/test_release.py
 	@$(PY) $(RELEASE)/scan.py
 
-.PHONY: test lint audit check release-test drift release-check
+.PHONY: test lint audit check release-test drift release-check \
+        skills-link skills-check skills-prune

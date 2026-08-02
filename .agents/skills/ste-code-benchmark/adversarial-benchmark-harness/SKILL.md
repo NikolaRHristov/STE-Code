@@ -517,3 +517,48 @@ Observed repeatedly on this profile — treat as defaults:
 - Pipeline bookkeeping lives in `.agents/`, never in the shippable product dir.
 - **Commit with `git gcommit-hermes`, not poll-commit.sh** (see §9). If it's
   out of credits, write the message yourself.
+
+---
+
+## 12. The developmental loop: RED-obsolescence & closure
+
+Beyond the static colour roles in §1, the harness is also a **developmental
+adversarial pipeline**: the driver (`run_pipeline.py`) loops cycles
+RED → BLUE → WHITE → BLACK, and BLACK-confirmed "defended" claims prune RED's
+attack space across cycles until RED becomes **obsolete** — the attack space is
+closed and frozen as a taxonomy. Full plan, entity model, broken-list with
+file:line anchors, the exact fix set, the hard constraints, and the reject-list:
+**`references/developmental-loop-phase0.md`**. Read it before touching the loop.
+
+The pieces that make the developmental arc real (and the mistakes that killed it):
+
+- **RED must stay DETERMINISTIC — do NOT add an LLM to RED.** Its generator
+  (`build_red_cases` in `red.py`) is already correct; the live bug was (a) RED
+  launched with `--emit-only` writing an *empty* `escapes.json` (escapes were
+  only recorded from a model run that never happens), and (b) BLUE/WHITE/BLACK
+  hardcoded `--skip-live`. Fix the handoff, not the generator. Adding an LLM to
+  RED breaks the "WHITE/BLACK deterministic" invariant.
+- **The provenance bond.** BLUE consumes RED's GENERATED escapes (`generator ==
+  "RED"`); BLUE must never grade its own generated attacks. RED→BLUE is the only
+  honest adversarial handoff.
+- **The BLACK→RED pruning edge.** Driver builds `excluded_pairs` set from
+  BLACK-confirmed defended (technique, placement) pairs; persist it to
+  `excluded_pairs.json` and feed it into the NEXT cycle's RED via a **new
+  `--exclude-pairs <file>` flag on `red.py`** so RED skips solved regions.
+  Without that flag the loop only prunes the synthetic seed, never real RED
+  generation.
+- **Closure detector (the missing endpoint).** `coverage = len(excluded_pairs) /
+  total_pairs` (RED's techniques × placements, ~80). Declare `red_obsolete` at
+  `coverage >= 0.95` and **early-stop the cycle loop**; keep `--cycles` as a max.
+  Write `closure-report.json`.
+- **Preserve BLACK's empty-evidence guard.** When WHITE publishes no falsifiable
+  hypotheses, BLACK emits `brief-coverage → underpowered` (not a fake
+  `confirmed`). Never weaken this.
+- **Reject the remote research spec's priority order.** Its ideas (provenance,
+  separation, 4-dim closure ≥0.9) are sound *as target-state*, but it front-loads
+  over-engineered defenses (contamination watermarking, judge calibration, CUPED,
+  Bonferroni, Pareto, OpenTelemetry) for a pipeline that can't yet run a live
+  adversarial pass. Fix the foundational handoff + closure detector first.
+- **`run_pipeline.py` IS the orchestrator** (the driver); PURPLE is an
+  attestation *stub*, not a separate orchestrator. The remote research agent
+  misread this — don't copy its invented "ORCHESTRATOR role".

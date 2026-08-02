@@ -234,6 +234,19 @@ These are real failures hit while building and running this tooling.
 - **Multi-session safety.** A release does `git add -A`. Do not run it while
   another Hermes session is mid-write in `ste-code/refined/` or
   `ste-code/grouped/`.
+- **`STANDARD-*` tags are ONLY for `ste-code/` **standard wording** changes —
+  never for repository/`.agents/` work.** A release whose commits live entirely
+  under `.agents/` (benchmark harness, profiles, toolchain, docs) or the root
+  (Makefile, README) is a *repository* release: bump `v*` only. Tagging
+  `STANDARD-1.2.0` for `.agents/`-only work is wrong — `STANDARD` signals the
+  canonical STE-Code standard was revised, which did not happen. In practice a
+  `STANDARD-1.2.0` tag was created for repo-infra work and had to be deleted;
+  the standard tags were correctly left at `STANDARD-1.1.0`. Gate: run
+  `git diff --stat <prev-standard-tag>..HEAD` — if `ste-code/` shows **no
+  wording change**, do NOT create or bump `STANDARD-*`; use `v1.2.0`
+  (repository release) and keep `FLAVOR-*` in step with a *standard* release
+  only. A repository release is still a real tag (for remote review) — it just
+  does not touch the `STANDARD`/`FLAVOR` tracks.
 
 ## Verification after a release
 

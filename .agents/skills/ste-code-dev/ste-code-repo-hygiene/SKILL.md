@@ -165,6 +165,27 @@ git commit -m "scope(subdir): short reason"  # re-commit cleanly
 - One file per commit when another session is live. Each commit is verified to
   stage exactly one path before running it.
 
+## 8. Dependency manifests (`requirements.txt`)
+
+When this repo needs a `requirements.txt` (repo root), mirror the user's other
+repos — `CodeEditorLand/Land/requirements.txt` and `REPxREP/Repository/requirements.txt`:
+
+- **Banner-style `=== section ===` comments**, not a bare pip list.
+- **Separate blocks:** `Python` (real PyPI packages pinned `pkg>=x.y.z`, or
+  "No external packages required." + which stdlib modules + minimum Python
+  version), `System tools` (external binaries the Makefile/scripts shell out
+  to, with `macOS: brew install …` / `Linux: apt install …` hints), and
+  `Node.js / pnpm ecosystem` (only if a `package.json` exists).
+- **Evidence-based — never list from docs.** Only list deps actually `import`ed
+  or invoked in the repo. Remote-research specs that *mention* packages
+  (openpyxl, scipy, opentelemetry, redis, …) are NOT dependencies unless code
+  imports them. Scan with
+  `grep -rhoE "^\s*(import|from) [a-zA-Z0-9_]+" .agents` and cross-check each
+  module against the Python stdlib; keep only the third-party hits. Optional
+  imports inside `try/except ImportError` still count if the code uses them.
+- A repo release that *adds* `requirements.txt` is repository-only — do not
+  bump `STANDARD-*` for it (see `github-release-maintenance`).
+
 ## References
 - `references/per-purpose-config.md` — ste_config.py API, defaults.yaml guard, how to add a unit config.
 - `references/root-derivation-dry.md` — migration script recipe + the two reverted mistakes.

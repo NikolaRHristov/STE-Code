@@ -1,0 +1,171 @@
+# =============================================================================
+# STE-Code — repository tool manifest
+# =============================================================================
+#
+# This file records what the *repository toolchain* needs on a machine: the
+# Python interpreter, the handful of PyPI packages the code actually imports,
+# and the external CLIs the scripts shell out to. It mirrors the convention
+# used by CodeEditorLand/Land and REPxREP/Repository.
+#
+# It is NOT the dependency list of the STE-Code standard, the artifacts under
+# ste-code/, or the documentation corpus. Those carry no runtime dependencies.
+#
+# Every entry below was verified against real `import` statements, real
+# `subprocess`/shell invocations, the Makefile, or the CI workflows. Tools that
+# appear only in prose were deliberately left out.
+
+# =============================================================================
+# Python
+# =============================================================================
+#
+# Minimum Python version: 3.9
+#   - Declared by the repo itself: .agents/benchmark/DEPENDENCIES.md
+#     ("Python 3.9 or later") and .agents/benchmark/WORKER_BRIEF.md
+#     ("Target Python 3.9. No `match`, no runtime `X | Y`.")
+#   - Verified on disk across the 149 tracked .py files:
+#       * no `match` statements (3.10+) anywhere
+#       * no runtime `X | Y` unions (PEP 604, 3.10+)
+#       * 69 files carry `from __future__ import annotations`, so `list[str]`
+#         style annotations stay lazily evaluated
+#       * .agents/tools/quality/check-rails.py uses `list[...]` annotations
+#         without the future import -> PEP 585 floor, 3.9+
+#   - CI pins 3.12 (.github/workflows/docs.yml, release.yml)
+#   - The checked-in .venv is CPython 3.14.6 (Homebrew python@3.14)
+#
+# macOS:  brew install python@3.12
+# Linux:  apt install python3.12  /  dnf install python3.12
+# https://www.python.org/downloads/
+#
+# Standard library only, for the vast majority of the toolchain. Modules the
+# scripts rely on (by frequency across .agents/ and spec/):
+#   pathlib, sys, os, json, re, argparse, subprocess, time, datetime, typing,
+#   shutil, signal, tempfile, logging, collections, atexit, importlib, random,
+#   threading, hashlib, concurrent.futures, difflib, dataclasses, ast, shlex,
+#   urllib, glob, fnmatch, fcntl, errno, copy, statistics, math, traceback,
+#   getpass, socket, py_compile / compileall
+#
+# The four packages below are the only third-party imports/invocations found.
+
+PyYAML>=6.0.3
+#   Hard, module-level import — the harness will not start without it:
+#     .agents/benchmark/capsule_scheduler.py:24  `import yaml`
+#   Also imported defensively (try/except ImportError -> degraded mode) by:
+#     .agents/tools/lib/ste_config.py:49, .agents/tools/lib/ste_runtime.py:47,
+#     .agents/benchmark/summarize_run.py:715, .agents/hermes/jail/core/policy.py:469,
+#     .agents/tools/lib/agent-runner.py:90,103
+#   Floor = version observed on this machine (6.0.3).
+
+pdfplumber>=0.11.10
+#   Hard, module-level import in the spec/ PDF extraction tooling only:
+#     spec/extract_page.py:15  `import pdfplumber`
+#     spec/extract_pdf.py:32   `import pdfplumber`  (driven by spec/batch_extract_all.sh)
+#   Not needed for `make check`, the pipeline, or the release tooling.
+#   Pulls pdfminer.six, pypdfium2, Pillow, cryptography, charset-normalizer —
+#   all present in the repo's .venv (pdfplumber 0.11.10).
+
+tiktoken
+#   Optional at runtime, required for accurate token counts in CI.
+#     .agents/tools/maintenance/measure_artifacts.py:55 — `import tiktoken`
+#     inside try/except ImportError; returns None (counts skipped) when absent.
+#     .github/workflows/release.yml — `pip install --upgrade pip tiktoken`
+#     before facts.py / scan.py, so drift checks see real numbers.
+#   CI installs it unpinned; left unpinned here to match.
+
+mkdocs
+#   Documentation site build only (theme: readthedocs — built in, no extra
+#   package needed; see mkdocs.yml).
+#     .github/workflows/docs.yml — `pip install --upgrade pip mkdocs`
+#     then `mkdocs build --strict`
+#   CI installs it unpinned; left unpinned here to match.
+
+# =============================================================================
+# System tools  (not installable via pip)
+# =============================================================================
+#
+# hermes    - The agent CLI every model-facing stage shells out to. Required
+#             for any pipeline stage or benchmark run that calls a model; the
+#             deterministic stages and `make check` do not need it.
+#             Invoked as: hermes -z "<prompt>" -m <model> --yolo
+#             Evidence: .agents/benchmark/DEPENDENCIES.md ("Requires the
+#             `hermes` CLI on `PATH`"), .agents/tools/lib/agent-runner.py,
+#             .agents/tools/shared/launch-worker.sh, .agents/tools/lib/ste_paths.py
+#             Not an open-source package; not vendored in this repository.
+#
+# git       - Version control plus the release tooling's source of truth.
+#             Shelled out to from 15 Python modules, e.g.
+#             ["git", "rev-parse", "--show-toplevel"], ["git", "ls-files"],
+#             ["git", "add", ...], ["git", "commit", ...] under
+#             .agents/tools/release/, .agents/tools/finalize/, .agents/hermes/.
+#   macOS:  xcode-select --install  /  brew install git
+#   Linux:  apt install git  /  dnf install git
+#
+# bash      - All 13 shell scripts are bash (#!/usr/bin/env bash), and the
+#             Makefile invokes `bash .agents/hermes/skills-link.sh` for the
+#             skills-link / skills-check / skills-prune targets. `set -o
+#             pipefail` is used by the `jail` target.
+#   macOS:  brew install bash   (3.2 system bash also works for these scripts)
+#   Linux:  preinstalled
+#
+# awk       - The Makefile `lint` and `release-check` gates enforce the
+#             100-column limit with an inline awk program.
+#             Also used by .agents/hermes/skills-link.sh.
+#   Preinstalled on macOS and Linux (BSD awk / gawk both fine).
+#
+# POSIX shell utils - grep, sed, find, ln, readlink, mktemp, uname are used by
+#             .agents/hermes/skills-link.sh (symlink chain management) and the
+#             jail scripts. Preinstalled everywhere; listed for completeness.
+#
+# gh        - GitHub CLI. OPTIONAL: .agents/tools/release/release.py guards
+#             every call with `shutil.which("gh")` (line 129/166/290) and
+#             degrades to "publishing and labels will be skipped".
+#             Used for: gh label list/create, gh repo edit --add-topic,
+#             gh release create.
+#   macOS:  brew install gh
+#   Linux:  apt install gh  /  dnf install gh
+#   https://cli.github.com
+#
+# lychee    - Markdown/link checker driven by .agents/tools/linkcheck/run_linkcheck.sh
+#             (`command -v lychee` at line 52; config at linkcheck/lychee.toml).
+#             The script exits 1 with its own install hint when missing.
+#   macOS:  brew install lychee
+#   Linux:  cargo install lychee
+#   https://github.com/lycheeverse/lychee
+#
+# sandbox-exec - macOS Seatbelt sandbox, the kernel-enforced write confinement
+#             backend for .agents/hermes/jail/scripts/jail-exec.sh (Darwin
+#             branch, line 110-115). Ships with macOS; no install needed.
+#
+# bwrap     - bubblewrap, the Linux equivalent used by the same script's Linux
+#             branch (line ~118: `command -v bwrap` / "apt/dnf install bubblewrap").
+#   Linux:  apt install bubblewrap  /  dnf install bubblewrap
+#   Not applicable on macOS.
+#
+# claude / codex - OPTIONAL alternate agent backends registered in
+#             .agents/tools/lib/agent-runner.py (agents map: "claude" ->
+#             command "claude", "codex" -> command "codex") and selectable via
+#             `launch-worker.sh --agent claude`. The default backend is hermes;
+#             neither CLI is needed unless explicitly selected.
+#
+# NOT required, despite appearances:
+#   curl    - appears only as a *string inside jail test fixtures*
+#             (.agents/hermes/jail/tests/test_jail.py:182,234,297) — commands
+#             the policy layer is expected to refuse. Never executed.
+#   node    - the `node` matches in .agents/tools/lib/*.py are Python AST /
+#             config-tree variable names, not the Node.js binary.
+
+# =============================================================================
+# Node.js / pnpm ecosystem
+# =============================================================================
+#
+# None. There is no package.json, pnpm-workspace.yaml, or node_modules
+# anywhere in the repository (`find . -name package.json` -> no results).
+# No JavaScript or TypeScript is built, linted, or executed by this toolchain.
+
+# =============================================================================
+# Other runtimes
+# =============================================================================
+#
+# Rust / cargo - not used to build anything in this repository. cargo is
+#                mentioned above only as the Linux install route for lychee.
+# Go           - not used.
+# Docker       - not used.
