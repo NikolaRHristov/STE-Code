@@ -45,6 +45,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -166,7 +167,7 @@ def run_area(area):
     tmp = PROJECT / ".agents" / "tmp"
     tmp.mkdir(parents=True, exist_ok=True)
     pf = tmp / f"extend-{area}.txt"
-    pf.write_text(prompt)
+    write_text(pf, prompt)
 
     for attempt in range(1, 4):
         print(f"  EXT {area}: launching worker (attempt {attempt})...", flush=True)
