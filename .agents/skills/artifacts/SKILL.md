@@ -273,7 +273,7 @@ Run this script after all 6 artifacts are generated. It performs every pass/fail
 PASS=0; FAIL=0
 ARTIFACTS="ste-code/artifacts"
 
-echo "=== Full Artifact Verification ==="; echo
+echo "Full Artifact Verification"; echo
 
 # --- Artifact 1 ---
 echo "--- Artifact 1: System Prompt ---"
@@ -339,7 +339,7 @@ grep -qi "quick.start\|getting started" "$f" 2>/dev/null && echo "PASS: quick-st
 grep -q "poolside/laguna-s-2.1:free" "$f" 2>/dev/null && echo "PASS: correct model name" && PASS=$((PASS+1)) || { echo "FAIL: wrong or missing model name"; FAIL=$((FAIL+1)); }
 echo
 
-echo "=== Summary: $PASS passed, $FAIL failed ==="
+echo "Summary: $PASS passed, $FAIL failed"
 ```
 
 ## Failure Recovery

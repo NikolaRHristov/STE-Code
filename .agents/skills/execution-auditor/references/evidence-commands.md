@@ -48,7 +48,7 @@ fix the environment before the audit can start.
 
 ```bash
 # Pre-flight: verify the audit environment is ready
-echo "=== Pre-Flight Check ==="
+echo "Pre-Flight Check"
 
 # Check working directory
 if [ -f ".agents/state/PROGRESS.md" ]; then
@@ -369,7 +369,7 @@ page coverage audit if coverage is near or above 100%:
 
 ```bash
 # Find pages covered by more than one file
-echo "=== Duplicate page coverage check ==="
+echo "Duplicate page coverage check"
 for pg in $(seq 1 434); do
   pg_fmt=$(printf "%04d" $pg)
   matches=$(grep -rl "page-${pg_fmt}" ste-code/extracted/w*-p*.md 2>/dev/null)
@@ -393,7 +393,7 @@ file-by-file evidence loop.
 
 ```bash
 # Modern terms that should NOT appear in ASD-STE100 spec text
-echo "=== Fabrication signals ==="
+echo "Fabrication signals"
 for term in "React" "Docker" "npm" "API endpoint" "async/await" "TypeScript" "Kubernetes"; do
   count=$(grep -rl "$term" ste-code/extracted/w*-p*.md 2>/dev/null | wc -l)
   if [ "$count" -gt 0 ]; then
@@ -402,7 +402,7 @@ for term in "React" "Docker" "npm" "API endpoint" "async/await" "TypeScript" "Ku
 done
 
 # Commentary patterns that indicate fabrication
-echo "=== Commentary patterns ==="
+echo "Commentary patterns"
 for pattern in "This page describes" "The key point" "In summary" "As we can see"; do
   count=$(grep -rl "$pattern" ste-code/extracted/w*-p*.md 2>/dev/null | wc -l)
   if [ "$count" -gt 0 ]; then
@@ -411,7 +411,7 @@ for pattern in "This page describes" "The key point" "In summary" "As we can see
 done
 
 # Missing spec boilerplate
-echo "=== Boilerplate check ==="
+echo "Boilerplate check"
 for f in ste-code/extracted/w*-p*.md; do
   if ! grep -q "ASD-STE100" "$f" 2>/dev/null; then
     echo "🔴 $f: missing ASD-STE100 boilerplate"
@@ -454,7 +454,7 @@ NOTE: The `stat` command uses macOS format (`stat -f '%Sm'`). On Linux, use `sta
 
 ```bash
 # Files created before claims were made are suspicious
-echo "=== Chronology check ==="
+echo "Chronology check"
 echo "PROGRESS.md last modified: $(stat -f '%Sm' .agents/state/PROGRESS.md 2>/dev/null || echo 'FILE MISSING')"
 echo "Feedback last modified: $(stat -f '%Sm' .agents/feedback/exchange.md 2>/dev/null || echo 'FILE MISSING')"
 
@@ -538,7 +538,7 @@ that agent. This identifies which agent is the source of discrepancies.
 
 ```bash
 # Quick per-agent trust score (manual classification needed)
-echo "=== Per-agent claims from PROGRESS.md ==="
+echo "Per-agent claims from PROGRESS.md"
 echo "Extraction claims (batches with [x]):"
 grep -c '\[x\].*[Ww]\d\d\d' .agents/state/PROGRESS.md 2>/dev/null || echo "0"
 
@@ -613,7 +613,7 @@ Run this script if multiple commands produce empty output. It checks the
 filesystem state and reports what is missing.
 
 ```bash
-echo "=== Empty Output Diagnostic ==="
+echo "Empty Output Diagnostic"
 echo ""
 
 # Directory structure check

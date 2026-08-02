@@ -1,7 +1,7 @@
 ---
 description: "Generate code-domain placeholder entries for STE-Code gaps using batched poll workers. Dictionary, categories, anti-patterns, domain extensions."
 version: "2.0.0"
-related: [".agents/agent/agent-8-extension-worker.md", "SCE/core/categories/synonym-table.json", "SCE/data/vocabulary/approved-verbs.json"]
+related: ["SCE/core/categories/synonym-table.json", "SCE/data/vocabulary/approved-verbs.json"]
 ---
 
 # Extension Worker Orchestration — Agent-Agnostic
@@ -185,9 +185,9 @@ python3 .agents/tools/quality/detect-duplicates.py SCE/data/vocabulary/generated
 - Anti-patterns: `SCE/compute/generated/`
 - Domain extensions: `SCE/data/vocabulary/generated/`
 
-## Entry Schemas — Inline Summary (from Agent #8)
+## Entry Schemas
 
-The full schemas live in `.agents/agent/agent-8-extension-worker.md`. This section summarizes the required fields for each gap area so the reader can validate output without opening a second file.
+This section defines the required fields for each gap area. Use it to validate output.
 
 ### Verb Entry
 
@@ -555,7 +555,7 @@ A duplicate is acceptable only when the `type` or `category` field differs betwe
 
 ## Output Validation Pipeline Summary
 
-The full validation protocol is defined in Agent #8 (`.agents/agent/agent-8-extension-worker.md`). This summary provides a quick reference for the operator.
+This section defines the output validation protocol for the operator.
 
 ### Pipeline Steps
 

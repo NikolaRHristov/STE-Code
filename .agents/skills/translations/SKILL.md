@@ -1,7 +1,7 @@
 ---
 description: "Translation discovery + scaffolding — explore pipeline output, reason about translatability, create fully blank placeholders across 9 locales. Discovery-based, not fixed-grid. Re-scans find new enrichment automatically."
 version: "2.0.0"
-related: [".agents/references/translation-grid.md", ".agents/references/worker-rails.md", ".agents/agent/agent-9-translations.md"]
+related: [".agents/references/translation-grid.md", ".agents/references/worker-rails.md"]
 ---
 
 # Translation Discovery + Scaffolding
@@ -36,11 +36,11 @@ EXPLORE source directory
 | Target ordering | User-facing first | If discovery is interrupted, the most visible content already has placeholders. |
 | Catalog ownership | Orchestrator only | Workers report. Only the orchestrator writes `translations/catalog.md`. Prevents merge conflicts. |
 
-NOTE: The full design rationale, performance benchmarks, token budgets, and recovery protocols live in `.agents/agent/agent-9-translations.md`. This document is the operational protocol. The agent definition is the strategic plan.
+NOTE: This document is both the operational protocol and the role definition for the translation orchestrator.
 
 ## Agent Contract (Agent #9)
 
-This skill is the operational protocol for **Agent #9 — Translation Orchestrator**. The agent's role definition lives in `.agents/agent/agent-9-translations.md`.
+This skill is the operational protocol and the role definition for **Agent #9 — Translation Orchestrator**.
 
 **Agent #9 contract summary:**
 
@@ -52,7 +52,7 @@ This skill is the operational protocol for **Agent #9 — Translation Orchestrat
 - **Output:** Blank placeholder files at correct paths. The catalog (`translations/catalog.md`) tracks all discoveries.
 - **Communication:** Batch completions go to `.agents/feedback/exchange.md`. State updates go to `.agents/state/TRANSLATIONS-PROGRESS.md`.
 
-See `.agents/agent/agent-9-translations.md` for the full role definition including the poll system, failure handling, and step-by-step launch instructions.
+The sections below define the poll system, failure handling, and launch instructions.
 
 ### Agent #9 Role Contract (Inline Summary)
 

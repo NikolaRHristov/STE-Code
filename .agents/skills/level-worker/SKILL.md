@@ -1,7 +1,7 @@
 ---
 description: "Launch parallel Agent #7 workers at STE-Code levels 1-4 using Hermes oneshot wrapper. Each worker rewrites documents at its adaptation depth."
 version: "1.1.0"
-related: [".agents/agent/agent-7-level-worker.md", ".agents/benchmark/launch-levels.py", ".hermes/skills/hermes-shell-hooks/templates/hermes-oneshot-wrapper.py"]
+related: [".agents/benchmark/launch-levels.py", ".hermes/skills/hermes-shell-hooks/templates/hermes-oneshot-wrapper.py"]
 ---
 
 # Level Worker Launcher — Agent-Agnostic
@@ -44,7 +44,7 @@ Each output file contains rewritten text, a change log, and a P1-P14 compliance 
 
 ## Agent #7 Role Contract
 
-Agent #7 is a parameterized STE-Code worker. Its full definition is at [`.agents/agent/agent-7-level-worker.md`](../../agent/agent-7-level-worker.md).
+Agent #7 is a parameterized STE-Code worker. This skill is its full definition.
 
 Key facts about the agent:
 - Agent #7 receives `level` (1-5), `action` (test/rewrite/benchmark), and `target` parameters.
@@ -528,7 +528,7 @@ Level 5 is defined in the Agent #7 contract and the adaptation levels table. The
 
 | Component | Path | Role |
 |-----------|------|------|
-| Agent #7 definition | [`.agents/agent/agent-7-level-worker.md`](../../agent/agent-7-level-worker.md) | Worker identity, levels, task parameters, execution protocol, edge cases, pre-flight checklist |
+| Agent #7 definition | This skill (`SKILL.md`) | Worker identity, levels, task parameters, execution protocol, edge cases, pre-flight checklist |
 | Oneshot wrapper | [`.agents/tools/lib/hermes-oneshot-wrapper.py`](../../tools/hermes-oneshot-wrapper.py) | Hermes AIAgent caller with `session_db=None`, no tool access |
 | Launcher script | [`.agents/benchmark/launch-levels.py`](../../benchmark/launch-levels.py) | Parallel worker launcher with token budget checks, temp file cleanup, timeout handling |
 
@@ -545,7 +545,7 @@ Level 5 is defined in the Agent #7 contract and the adaptation levels table. The
 
 | Component | Path | Role |
 |-----------|------|------|
-| Agent #3 — Auditor | [`.agents/agent/agent-3-auditor.md`](../../agent/agent-3-auditor.md) | Verifies worker output against disk evidence |
+| Agent #3 — Auditor | [`.agents/skills/auditing/SKILL.md`](../auditing/SKILL.md) | Verifies worker output against disk evidence |
 | Worker rails | [`.agents/references/worker-rails.md`](../../references/worker-rails.md) | 10-rail self-validation checklist |
 | Execution auditor reports | `.agents/audit/` | Auditor run results |
 

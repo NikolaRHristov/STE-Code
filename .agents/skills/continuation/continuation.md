@@ -770,7 +770,7 @@ for f in ste-code/adapted/a-sec*-rule*.md; do
   PASS=$((PASS + 1))
 done
 
-echo "=== $PASS passed, $FAIL failed ==="
+echo "$PASS passed, $FAIL failed"
 ```
 
 ### Spot-Check Protocol

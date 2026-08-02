@@ -298,7 +298,7 @@ Combine all checks into one pass:
 ```bash
 BATCH_PREFIX="w001"  # Change per batch
 for f in ste-code/extracted/${BATCH_PREFIX}-p*.md; do
-  echo "=== Checking $f ==="
+  echo "Checking $f"
   test -f "$f" || { echo "FAIL: file missing"; continue; }
   SIZE=$(wc -c < "$f"); [ "$SIZE" -lt 3000 ] && echo "FAIL: too small ($SIZE bytes)"
   LINES=$(wc -l < "$f"); [ "$LINES" -lt 30 ] && echo "FAIL: too few lines ($LINES)"

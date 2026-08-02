@@ -377,7 +377,7 @@ Reads state reports before running a stage audit. The auditor compares state rep
 - Rails compliance status (to prioritize audit checks)
 - List of errors and blockers (to target audit investigation)
 
-Reference: `.agents/agent/agent-3-auditor.md`, `.agents/skills/auditing/SKILL.md`
+Reference: `.agents/skills/auditing/SKILL.md`
 
 ### Agent #4 — Continuator
 
@@ -389,7 +389,7 @@ Reads state reports at stage gates to decide if continuation is safe. The contin
 - PROGRESS.md sync status (to trust the tracking)
 - Active workers list (to avoid duplicate launches)
 
-Reference: `.agents/agent/agent-4-continuation.md`, `.agents/skills/continuation/SKILL.md`
+Reference: `.agents/skills/continuation/SKILL.md`
 
 ### Execution Auditor (Hidden Agent)
 
@@ -406,13 +406,13 @@ Reference: `.agents/skills/execution-auditor/SKILL.md`
 
 Reads state reports at the Stage 1 → Stage 2 handoff. The refiner does not start refinement until the state report shows Stage 1 at 100% with all 109 extraction files verified.
 
-Reference: `.agents/agent/agent-2-refiner.md`, `.agents/skills/refinement/SKILL.md`
+Reference: `.agents/skills/refinement/SKILL.md`
 
 ### Agent #1 — Extractor
 
 Reads state reports produced by the auditor to learn which files need re-extraction. The state report's Errors & Blockers table is the extractor's re-extraction queue.
 
-Reference: `.agents/agent/agent-1-extractor.md`, `.agents/skills/extraction/SKILL.md`
+Reference: `.agents/skills/extraction/SKILL.md`
 
 ### Consumer Handoff Protocol
 

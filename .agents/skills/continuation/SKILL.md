@@ -220,7 +220,7 @@ INPUT="ste-code/grouped/master-raw.md"
 OUTPUT="ste-code/grouped/master-dedup.md"
 TEMP=$(mktemp)
 
-echo "=== Deduplication Report ==="
+echo "Deduplication Report"
 
 # Step 1: Find duplicate rule headers
 echo "--- Rule duplicates ---"
@@ -258,7 +258,7 @@ echo "--- Duplicate locations ---"
 grep -n "^#### Rule" "$INPUT" | sort -t: -k2 | uniq -d -f 1 2>/dev/null || true
 grep -n "^### Category" "$INPUT" | sort -t: -k2 | uniq -d -f 1 2>/dev/null || true
 
-echo "=== Deduplication complete ==="
+echo "Deduplication complete"
 echo "Review duplicates above. Keep first occurrence of each."
 echo "Output: $OUTPUT"
 

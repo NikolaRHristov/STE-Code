@@ -166,7 +166,7 @@ them rather than rediscovering them:
 - `.agents/AGENTS.md:184` — "53 rules → code domain, 19 categories"
 - `.agents/AGENTS.md:72,192` — "9 locales" (there are 10)
 
-`--wide` also flags the historical audit narratives in `.agents/agent/` that
+`--wide` also flags historical narratives that
 *quote* wrong numbers on purpose ("Error: claimed 22 categories"). Those are
 records of past mistakes — leave them.
 
