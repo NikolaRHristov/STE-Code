@@ -55,7 +55,7 @@ CHECKPOINT_PATH = STATE_DIR / "continue-checkpoint.json"
 
 MODEL = CFG.model
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
-WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
+WRAPPER = RT.wrapper  # resolved by ste_runtime pre-flight
 TIMEOUT_SECONDS = 600
 
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))

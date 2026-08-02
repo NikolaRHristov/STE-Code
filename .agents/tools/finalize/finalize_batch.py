@@ -88,7 +88,7 @@ _TPL = templater.Templater(__file__)
 
 MODEL = CFG.model
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
-WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
+WRAPPER = RT.wrapper  # resolved by ste_runtime pre-flight
 TIMEOUT_SECONDS = 600
 MAX_WORKERS = 3  # free-tier concurrency budget — never exceed
 

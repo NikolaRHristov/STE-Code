@@ -49,7 +49,7 @@ VENDOR_DIR = PROJECT / ".agents" / "vendor"
 
 MODEL = CFG.model
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
-WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
+WRAPPER = RT.wrapper  # resolved by ste_runtime pre-flight
 TIMEOUT_SECONDS = 300  # per sub-doc; healthy distills 20-90s, large a few min.
 
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))

@@ -67,7 +67,7 @@ VENDOR_DIR = PROJECT / ".agents" / "vendor"
 
 MODEL = CFG.model
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
-WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
+WRAPPER = RT.wrapper  # resolved by ste_runtime pre-flight
 TIMEOUT_SECONDS = 600  # per-sub-doc distillation; healthy distills take 20-90s,
                         # large sub-docs a few min. Bounded so a stuck session
                         # fails fast (fallback) instead of hanging 30 min.

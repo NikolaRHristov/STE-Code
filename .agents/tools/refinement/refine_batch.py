@@ -64,7 +64,7 @@ TOTAL_WORKERS = CFG.get("thresholds.total_workers")
 TIMEOUT_SECONDS = CFG.get("agent.timeout_s")
 
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
-WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
+WRAPPER = RT.wrapper  # resolved by ste_runtime pre-flight
 
 FILENAME_RE = CFG.regex("layout.worker_re")
 

@@ -71,7 +71,7 @@ WORKERS_PER_BATCH = int(os.environ.get("ADAPT_WORKERS_PER_BATCH", "1"))
 TIMEOUT_SECONDS = 900
 
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
-WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
+WRAPPER = RT.wrapper  # resolved by ste_runtime pre-flight
 
 # 9 rule sections (number -> (title, expected rule count)). GR1-GR4 live in sec9.
 SECTIONS = {
