@@ -68,7 +68,15 @@ def _load_module(mod_name: str, path: Path):
     return load_local(mod_name, path)
 
 
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+# _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
+import sys as _sys
+from pathlib import Path as _Path
+_R = next(p for p in _Path(__file__).resolve().parents
+          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
+from repo_root import repo_root as _repo_root  # noqa: E402
+
+PROJECT = _repo_root(__file__)
 engine = _load_module(
     "group_engine", PROJECT / ".agents" / "tools" / "grouping" / "group_engine.py")
 pipeline_core = _load_module(

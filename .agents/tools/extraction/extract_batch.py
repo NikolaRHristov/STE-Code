@@ -43,7 +43,15 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 # ── Resolve project root from script location (no hardcoded paths) ──────────
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+# _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
+import sys as _sys
+from pathlib import Path as _Path
+_R = next(p for p in _Path(__file__).resolve().parents
+          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
+from repo_root import repo_root as _repo_root  # noqa: E402
+
+PROJECT = _repo_root(__file__)
 PAGE_DIR = PROJECT / "spec" / "issue-09-2025" / "page-dir"
 EXTRACTED_DIR = PROJECT / "ste-code" / "extracted"
 MANIFEST_PATH = PAGE_DIR / "MANIFEST.md"
