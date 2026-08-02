@@ -28,6 +28,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 
 # Mirrors synthesis.LEVELS: (tier_dir, level_label, description)
@@ -58,7 +59,7 @@ def _write_tier_index(tier_dir: Path, level_label: str, desc: str, subs: list[Pa
     ]
     for s in subs:
         lines.append(f"- {s.name}")
-    (tier_dir / "_index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text((tier_dir / "_index.md"), "\n".join(lines) + "\n")
 
 
 def _write_tier_system_prompt(tier_dir: Path, subs: list[Path]) -> None:
@@ -92,7 +93,7 @@ def _assemble_llms_files(present: list[tuple[str, str, str]]) -> None:
         "",
         "- [llms-full.txt](llms-full.txt) — concatenation of every distilled sub-document.",
     ]
-    (ARTIFACTS_DIR / "llms.txt").write_text("\n".join(idx) + "\n", encoding="utf-8")
+    write_text((ARTIFACTS_DIR / "llms.txt"), "\n".join(idx) + "\n")
 
     full = []
     for d, _, _ in present:
@@ -102,7 +103,7 @@ def _assemble_llms_files(present: list[tuple[str, str, str]]) -> None:
             full.append(ip.read_text(errors="ignore"))
         for sf in _tier_subdocs(ARTIFACTS_DIR / d):
             full.append(f"\n## {sf.name}\n\n" + sf.read_text(errors="ignore"))
-    (ARTIFACTS_DIR / "llms-full.txt").write_text("\n\n".join(full), encoding="utf-8")
+    write_text((ARTIFACTS_DIR / "llms-full.txt"), "\n\n".join(full))
 
 
 def main() -> int:
