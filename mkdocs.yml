@@ -26,15 +26,6 @@ exclude_docs: |
 nav:
   - Home: index.md
   - Pipeline: pipeline.md
-  - Stages:
-      - "A — Extraction": stages/stage-a.md
-      - "B — Refinement": stages/stage-b.md
-      - "C — Grouping": stages/stage-c.md
-      - "D — Adaptation": stages/stage-d.md
-      - "E — Extension": stages/stage-e.md
-      - "F — Artifacts": stages/stage-f.md
   - Contributing: contributing.md
   - Roadmap:
       - Roadmap: roadmap/ROADMAP.md
-      - Grounding Report: roadmap/GROUNDING-REPORT.md
-      - State Reconciliation: roadmap/STATE-RECONCILIATION.md

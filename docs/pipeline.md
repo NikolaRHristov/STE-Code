@@ -1,78 +1,162 @@
 # Pipeline
 
-STE-Code is built from the ASD-STE100 Issue 9 specification by a **six-stage
-pipeline (A→F)**. Each stage has one runner in `.agents/tools/runners/`, one
-orchestrator module in `.agents/tools/<domain>/`, and a deterministic
-verification gate that blocks the commit when the stage output is bad.
+The pipeline reads the ASD-STE100 Issue 9 specification and writes the STE-Code
+level artifacts. It runs in five stages. Each stage has a runner in
+`.agents/tools/runners/`, an orchestrator module in `.agents/tools/<domain>/`,
+and a deterministic gate that blocks the commit when the stage output is bad.
 
-```text
-A Extraction → B Refinement → C Grouping → D Adaptation → E Extension → Finalize → F Artifacts → Linkcheck
-   spec/          extracted/     refined/      grouped/       adapted/      final/      artifacts/   (lychee)
-      ↓               ↓             ↓             ↓              ↓           ↓            ↓
-  extracted/       refined/      grouped/      adapted/     extensions/    final/     artifacts/  reports
-   (109 f)         (109 f)       (24 f)        (54+ f)        (6 areas)   (54 rules)  (deliverables)
+```
+Extraction → Refinement → Merge → Adaptation → Artifacts
+ extracted/    refined/    grouped/   adapted/   artifacts/
+  (109 f)      (109 f)     (24 f)      (60 f)     (8 tiers)
+                                       final/
 ```
 
-Stage **Finalize** consolidates the adapted corpus + extensions into the single
-canonical standard at `ste-code/final/` (54 rules, dictionary, categories,
-extensions, catalogue, provenance). Stage **F (Artifacts)** packages `final/`
-into deployables. The **Linkcheck** stage (lychee, in `.agents/tools/linkcheck/`)
-validates links across `final/` and `artifacts/`.
+Every stage writes into its own directory under `ste-code/`. A stage never
+edits the output of an earlier stage, so you can re-run one stage without
+losing the rest.
 
 ---
 
-## Stage table
+## Stages
 
-| Stage | Runner | Reads | Writes | Gate |
-|:-----:|--------|-------|--------|------|
-| [A](stages/stage-a.md) | `phase-a-run.py`, `phase-a-gen.py` | `spec/issue-09-2025/page-dir/` (434 pages) | `ste-code/extracted/` | output size + page headers, 2 retries |
-| [B](stages/stage-b.md) | `phase-b-run.py`, `phase-b1-run.py` | `ste-code/extracted/` | `ste-code/refined/` | per-batch content parity; `verify_continuation.py` |
-| [C](stages/stage-c.md) | `phase-c-run.py` | `ste-code/refined/` | `ste-code/grouped/` | `verify-groups.py` |
-| [D](stages/stage-d.md) | `phase-d-run.py` | `ste-code/grouped/` | `ste-code/adapted/` | `verify-adaptation.py` |
-| [E](stages/stage-e.md) | `phase-e-run.py` | gap areas + adapted corpus | `ste-code/extensions/` | `verify_extensions.py` |
-| [F](stages/stage-f.md) | `phase-f-run.py`, `artifact_batch.py`, `distill_one.py` | `ste-code/final/` | `ste-code/artifacts/` | `verify-artifacts.py` |
+| # | Stage | Reads | Writes | Type | Runner | Gate |
+|:-:|-------|-------|--------|------|--------|------|
+| 1 | Extraction | `spec/issue-09-2025/page-dir/` | `ste-code/extracted/` — 109 page-group files | LLM workers | `phase-a-run.py`, `phase-a-gen.py` | Output size and page headers, 2 retries |
+| 2 | Refinement | `ste-code/extracted/` | `ste-code/refined/` — 109 formatted files | LLM workers | `phase-b-run.py`, `phase-b1-run.py` | Per-batch content parity |
+| 3 | Merge | `ste-code/refined/` | `ste-code/grouped/` — 24 groups plus `GROUPING-NOTES.md` | Deterministic | `phase-c-run.py` | `verify-groups.py` |
+| 4 | Adaptation | `ste-code/grouped/` | `ste-code/adapted/`, then `ste-code/final/` | LLM workers | `phase-d-run.py`, `phase-e-run.py`, `phase-g-run.py` | `verify-adaptation.py`, `verify_extensions.py` |
+| 5 | Artifacts | `ste-code/final/` | `ste-code/artifacts/` — 8 tiers | Deterministic and LLM | `phase-f-run.py` | `verify-artifacts.py` |
+
+All runners are in `.agents/tools/runners/`.
+
+### 1. Extraction
+
+Workers read the specification pages and write markdown. Each worker takes four
+pages. The source PDF has 434 pages, and the split produces 426 page files,
+because the front matter and the blank versos merge.
+
+### 2. Refinement
+
+Workers reformat the raw extraction into clean markdown: dictionary tables and
+rule pages. No content is removed.
+
+### 3. Merge
+
+Python concatenates and splits the 109 refined files into 24 semantic groups.
+No model runs in this stage. Reorganization moves bytes; it does not re-type
+them, so content cannot be lost.
+
+### 4. Adaptation
+
+Workers rewrite the aerospace specification into the code domain. Rule numbers
+and structure stay the same. The examples change from aircraft maintenance to
+code documentation. This stage produces:
+
+| Output | Contents |
+|--------|----------|
+| `ste-code/adapted/` | 60 markdown files: 54 rules, 4 General Rules, the dictionary, the categories |
+| `ste-code/extensions/` | Gap-fill entries for the code domain: verbs, adjectives, nouns, anti-patterns, domains |
+| `ste-code/final/` | The consolidated standard: 54 rule files, dictionary, 22 categories, extensions, reference catalogue, provenance |
+
+Workers emit markdown only. Any JSON is derived from that markdown by a
+separate deterministic step, so a model never hand-writes structured data.
+
+`ste-code/final/` is the source of truth for stage 5.
+
+### 5. Artifacts
+
+Stage 5 packages `ste-code/final/` into the deliverable at
+`ste-code/artifacts/`. It works in three steps:
+
+1. **Scaffold (deterministic).** `levels_scaffold.py` reads `ste-code/final/`
+   and writes one directory of bounded sub-documents per tier into
+   `ste-code/artifacts/_base/level<N>/`. Oversized rule sections are split.
+   This step is byte-reproducible and needs no model.
+2. **Distill (LLM).** `distill_one.py` runs one session per sub-document. It
+   rewrites the scaffold into an optimized file at
+   `ste-code/artifacts/level<N>/<subdoc>`, in several `write_file` and `patch`
+   calls. If a session fails, the deterministic scaffold stays in place, so
+   nothing is lost.
+3. **Assemble (deterministic).** `artifact_batch.py` writes each tier's
+   `_index.md` and `system-prompt.txt`, then the top-level `llms.txt`,
+   `llms-full.txt`, and `VERSION`.
+
+`system-prompt.txt` is the tier's sub-documents joined together. It is the file
+you load into a model.
 
 ---
 
-## Which stages use an LLM
+## Which stages use a model
 
 | Stage | Type | Reason |
 |:-----:|------|--------|
-| A | LLM workers | Reads spec page images/text and writes markdown |
-| B | LLM workers | Reformats extracted text into the 9 refinement rules |
-| C | **Deterministic** | Grouping only moves bytes (concatenate + split), so content cannot be lost |
-| D | LLM workers | Genuine rewriting: aerospace examples become code-domain examples |
-| E | LLM workers | Generates new code-domain entries; JSON is derived deterministically |
-| F | **Hybrid** | Deterministic assembly (`artifact_batch.py`) concatenates `final/` with no truncation; an LLM pass (`distill_one.py`) distills each sub-document into `level<N>/`. The LLM writes in multiple `write_file`/`patch` calls; on failure it falls back to the deterministic base. |
-| Finalize | Deterministic + deep enrichment | Consolidates `adapted/` + extensions into `final/` (54 rules), grounded in `.agents/vendor/` research. |
-| Linkcheck | Deterministic | lychee scans `final/` + `artifacts/` for broken links. |
+| 1 Extraction | LLM workers | Reads spec page text and writes markdown |
+| 2 Refinement | LLM workers | Reformats extracted text into the refinement rules |
+| 3 Merge | **Deterministic** | Grouping only moves bytes, so content cannot be lost |
+| 4 Adaptation | LLM workers | Genuine rewriting: aerospace examples become code-domain examples |
+| 5 Artifacts | **Hybrid** | Deterministic scaffold and assembly, with an LLM distillation pass that falls back to the scaffold on failure |
 
-Stage C and Stage F are pure Python on purpose. A free-tier model that is asked
-to re-emit a 650 KB corpus truncates mid-stream, which is silent content loss.
-Where the task is reorganization, not writing, the pipeline moves bytes instead
-of re-typing them.
+The Merge stage and the assembly step of Artifacts are pure Python on purpose. A
+free-tier model that is asked to re-emit a 650 KB corpus truncates mid-stream,
+and that is silent content loss. Where the task is reorganization and not
+writing, the pipeline moves bytes instead of re-typing them.
 
 ---
 
-## Run the downstream stages
+## Output layers
 
-`launch-downstream.sh` runs C→D→E→F in order. Each stage refuses to start when
-its input is not ready, so an early abort is a hard stop and not a silent
-failure.
+Everything the pipeline writes is under `ste-code/`.
+
+| Directory | Stage | Contents |
+|-----------|:-----:|----------|
+| `extracted/` | 1 | 109 raw page-group files (`wNNN-pA-B.md`), 4 spec pages each |
+| `refined/` | 2 | 109 formatted page-group files (`rNNN-pA-B.md`) |
+| `grouped/` | 3 | 24 group files plus `GROUPING-NOTES.md` |
+| `adapted/` | 4 | 60 markdown files of code-domain rules |
+| `extensions/` | 4 | Gap-fill entries, markdown plus derived JSON |
+| `final/` | 4 | **The standard**: 54 rule files (`a-secN-ruleX.Y.md`), `a-categories.md`, `a-dictionary.md`, `extensions/`, `reference-catalogue.md`, `provenance.md` |
+| `artifacts/` | 5 | `_base/` (deterministic scaffold), `level-2/`…`level5/` (distilled sub-documents), `llms.txt`, `llms-full.txt`, `VERSION` |
+| `enriched/` | — | 109 enrichment-pass files |
+| `data/` | — | Synonym table and vocabulary JSON |
+| `templates/` | — | Prompt templates for each STE-Code register |
+| `linguistics/` | — | Research notes, decision tree, generation contract, reference linter |
+| `audit/` | — | Audit reports |
+
+The consolidation into `final/` is grounded in the vendor research under
+`.agents/vendor/`. That directory holds cloned public reference corpora. It is
+git-ignored and it is never committed.
+
+---
+
+## Run a stage
+
+The deterministic stages are safe on a clean checkout. The model stages cost
+tokens and rewrite tracked content, so run them only when you intend to
+regenerate that layer.
 
 ```bash
-# Full downstream run: C → D → E → F
-bash .agents/tools/runners/launch-downstream.sh
+# Merge — plan only, writes nothing
+python3 .agents/tools/runners/phase-c-run.py --dry-run
 
-# Grouping dry-run only (writes nothing)
+# Merge — assemble and gate
+python3 .agents/tools/runners/phase-c-run.py --verify
+
+# Artifacts — plan only
+python3 .agents/tools/runners/phase-f-run.py --dry-run
+
+# The whole downstream chain
+bash .agents/tools/runners/launch-downstream.sh
 bash .agents/tools/runners/launch-downstream.sh --dry
 ```
 
-The script stops before Stage C when `ste-code/refined/` has fewer than 100
-markdown files, because that means the refiner is still running.
+Each stage refuses to start when its input is not ready, so an early abort is a
+hard stop and not a silent failure. `launch-downstream.sh` stops before the
+Merge stage when `ste-code/refined/` holds fewer than 100 markdown files,
+because that means refinement is still running.
 
-The model is read from the `STE_MODEL` environment variable
-(default: `tencent/hy3:free`).
+The model comes from the `STE_MODEL` environment variable. The default is
+`tencent/hy3:free`.
 
 ```bash
 STE_MODEL=tencent/hy3:free bash .agents/tools/runners/launch-downstream.sh
@@ -80,49 +164,57 @@ STE_MODEL=tencent/hy3:free bash .agents/tools/runners/launch-downstream.sh
 
 ---
 
-## Output layers
+## Gates
 
-All pipeline output is under `ste-code/`.
+Each stage has a deterministic verifier. Exit code `0` means the gate passes.
 
-| Directory | Stage | Contents |
-|-----------|:-----:|----------|
-| `extracted/` | A | 109 raw page-group files (`wNNN-pA-B.md`), 4 spec pages each |
-| `refined/` | B | 109 formatted page-group files (`rNNN-pA-B.md`) |
-| `grouped/` | C | 24 semantic group files plus `GROUPING-NOTES.md` |
-| `final/` | Finalize | **THE STANDARD** — 54 rule files (`a-secN-ruleX.Y.md`), `a-categories.md`, `a-dictionary.md`, `extensions/`, `reference-catalogue.md`, `provenance.md`, `README.md` |
-| `artifacts/` | F | `_base/` (deterministic boilerplate sub-docs), `level-2/`…`level5/` (LLM-distilled sub-docs), `ste-code-rules.md`, `ste-code-system-prompt.md`, `llms.txt`, `llms-full.txt` |
-| `enriched/` | — | Enrichment pass output (109 files) |
-| `data/` | — | `synonym-table.json` and the vocabulary data |
-| `merged/` | — | `master-raw.md` consolidation |
-| `templates/` | — | Prompt templates for each STE-Code register |
-| `linguistics/` | — | Research notes, decision tree, generation contract |
-| `audit/` | — | Audit reports |
-| `_archive/` | — | Superseded output from earlier pipeline versions |
+```bash
+python3 .agents/tools/grouping/verify-groups.py         # Merge
+python3 .agents/tools/adaptation/verify-adaptation.py   # Adaptation
+python3 .agents/tools/extension/verify_extensions.py    # Extensions
+python3 .agents/tools/artifacts/verify-artifacts.py     # Artifacts
+```
+
+Quality checks that apply to any markdown layer:
+
+```bash
+python3 .agents/tools/quality/check-rails.py    # the 8 rails
+python3 .agents/tools/quality/check-tables.py   # table integrity
+bash .agents/tools/linkcheck/run_linkcheck.sh   # lychee link check
+```
 
 ---
 
 ## Checkpoints and resume
 
-Every orchestrated stage writes a checkpoint to `.agents/state/` after each
-work item and commits the item to git when the gate passes. If the session
-stops, restart the stage with `--resume` to skip the completed items.
+Every orchestrated stage writes a checkpoint into `.agents/state/` after each
+work item, and commits the item when the gate passes. If the session stops,
+restart the stage with `--resume` to skip the completed items.
 
 | Stage | Checkpoint |
 |:-----:|------------|
-| A | `.agents/state/extraction-checkpoint.json` |
-| D | `.agents/state/adapt-checkpoint.json` |
-| E | `.agents/state/extend-checkpoint.json` |
-| F | `.agents/state/artifact-checkpoint.json` |
+| 1 Extraction | `.agents/state/extraction-checkpoint.json` |
+| 2 Refinement | `.agents/state/refine-checkpoint.json` |
+| 3 Merge | `.agents/state/grouping-checkpoint.json` |
+| 4 Adaptation | `.agents/state/adapt-checkpoint.json`, `extend-checkpoint.json`, `finalize-checkpoint.json` |
+| 5 Artifacts | `.agents/state/artifact-checkpoint.json`, `artifact-llm-checkpoint.json` |
 
 ---
 
 ## Prerequisites
 
-* Python 3 for the deterministic stages (C, F) and for all runners.
-* An agent backend for the LLM stages (A, B, D, E). The default backend is
-  Hermes. Configure the backends in `.agents/config/agents.yaml`, and list them
-  with `python3 .agents/tools/lib/agent-runner.py --list`.
-* The Phase E and Phase F runners execute the Hermes virtual environment
-  interpreter at `~/.hermes/hermes-agent/venv/bin/python3`. Install Hermes at
-  that path, or start the orchestrator modules directly
-  (`extend_batch.py`, `artifact_batch.py`) with your own interpreter.
+| Requirement | Needed for |
+|-------------|------------|
+| Python 3 | Every runner, and the deterministic stages |
+| An agent backend | The stages that call a model (1, 2, 4, and the distill step of 5) |
+
+The default backend is Hermes. Configure backends in
+`.agents/config/agents.yaml` and list them with:
+
+```bash
+python3 .agents/tools/lib/agent-runner.py --list
+```
+
+The extension and artifact runners call
+`~/.hermes/hermes-agent/venv/bin/python3`. If Hermes is not at that path, start
+`extend_batch.py` or `artifact_batch.py` directly with your own interpreter.

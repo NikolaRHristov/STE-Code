@@ -1,7 +1,9 @@
 # docs/ — the STE-Code documentation site
 
-This directory holds the sources of the MkDocs site that GitHub Pages
-publishes. It is documentation only: nothing here is read by the pipeline.
+This directory holds the MkDocs sources for the site that GitHub Pages
+publishes. It is documentation only: the pipeline reads nothing here.
+
+The entry point is [`index.md`](index.md).
 
 ## Layout
 
@@ -9,18 +11,21 @@ publishes. It is documentation only: nothing here is read by the pipeline.
 mkdocs.yml              ← site config (repository ROOT, not this directory)
 docs/
 ├── README.md           This file (excluded from the built site)
-├── index.md            Home
-├── pipeline.md         Six-stage A→F overview
-├── stages/
-│   ├── stage-a.md      Extraction
-│   ├── stage-b.md      Refinement
-│   ├── stage-c.md      Grouping
-│   ├── stage-d.md      Adaptation
-│   ├── stage-e.md      Extension
-│   └── stage-f.md      Artifacts
+├── index.md            Home: what STE-Code is, and the level table
+├── pipeline.md         The five stages that build the standard
 ├── contributing.md     Local pipeline run and contribution rules
-└── roadmap/            Roadmap, grounding report, state reconciliation
+└── roadmap/
+    └── ROADMAP.md      Planned work on the linguistic layer
 ```
+
+| File | Contents |
+|------|----------|
+| `index.md` | Home: what STE-Code is, and the level table |
+| `pipeline.md` | The five stages that build the standard |
+| `contributing.md` | Local run instructions; points to the root `CONTRIBUTING.md` |
+| `roadmap/ROADMAP.md` | Planned work on the linguistic layer |
+
+`README.md` is excluded from the built site by the `exclude_docs` setting.
 
 ### Why `mkdocs.yml` is in the repository root
 
@@ -33,7 +38,7 @@ ERROR - Config value 'docs_dir': The 'docs_dir' should not be the parent
         the 'docs_dir' is a sibling of the config file.
 ```
 
-So the config sits at the repository root with `docs_dir: docs`, which is the
+So the config sits at the repository root with `docs_dir: docs`. That is the
 standard MkDocs and GitHub Pages layout.
 
 ## Preview the site
@@ -53,17 +58,20 @@ mkdocs build --strict   # writes ./site/, fails on a broken link or a warning
 
 `site/` is build output. Do not commit it.
 
-## Publication
-
-`.github/workflows/docs.yml` builds the site with `mkdocs build --strict` and
-publishes it to GitHub Pages on each push to the default branch (`Current`),
-and on manual dispatch.
-
-One repository setting is required: **Settings → Pages → Build and deployment →
-Source = GitHub Actions**.
-
 ## Add a page
 
 1. Write the markdown file in `docs/`.
 2. Add it to the `nav:` list in the root `mkdocs.yml`.
 3. Run `mkdocs build --strict` to confirm the links and the navigation.
+
+A `nav:` entry that names a file which does not exist fails the strict build.
+Remove the entry when you delete the page.
+
+## Publication
+
+`.github/workflows/docs.yml` builds the site with `mkdocs build --strict` and
+publishes it to GitHub Pages on each push to the default branch (`Current`), and
+on manual dispatch.
+
+One repository setting is required: **Settings → Pages → Build and deployment →
+Source = GitHub Actions**.

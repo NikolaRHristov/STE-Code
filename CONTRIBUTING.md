@@ -1,202 +1,300 @@
 # Contributing to STE-Code
 
-Thank you for your interest in contributing to STE-Code — Simplified Technical English adapted for code documentation. This project traces its rules, categories, and vocabulary to ASD-STE100 Issue 9 (January 2025), and every contribution helps make code documentation clearer, more precise, and more machine-readable.
+STE-Code adapts ASD-STE100 Issue 9 (January 2025) to code documentation. Every
+rule, category, and vocabulary entry traces back to that standard. Contributions
+must keep that trace intact.
 
 ---
 
-## Ways to Contribute
+## Before you start
 
-### Suggest New Synonyms for the Synonym Table
+Verify the checkout:
 
-The controlled vocabulary is the heart of STE-Code. If you find an unapproved term in real-world code documentation that lacks an approved replacement, propose it.
+```bash
+make check
+```
 
-1. Locate the master synonym table in [`ste-code/artifacts/ste-code-self-reading-manual.txt`](./ste-code/artifacts/ste-code-self-reading-manual.txt) (Section S4).
-2. Open a GitHub issue using the **Synonym Proposal** template.
-3. Include:
-   - **UNAPPROVED** term and where it appears in documentation (link to a real repo or README).
-   - **RECOMMENDED APPROVED** replacement(s).
-   - **DOMAIN** (e.g. DevOps, frontend, database, API design).
-   - **JUSTIFICATION** — why the term is ambiguous, metaphorical, or non-literal.
-   - At least **3 real-world examples** of the term in code documentation.
+The gate prints `RESULT: all policies passed`. If it does not, fix that first.
 
-New synonyms must have a proven unapproved counterexample from actual documentation. We do not accept speculative proposals.
+| Target | What it does |
+|--------|--------------|
+| `make check` | The canonical gate: `lint`, `test`, `audit`, `jail` |
+| `make lint` | Compile every benchmark module; check line length |
+| `make test` | Run the adversarial benchmark self-test |
+| `make audit` | Prove emitted reports carry no operator identity |
+| `make jail` | Prove the write-confinement plugins block folder escapes |
+| `make drift` | Compare documented counts, badges, and versions against disk |
+| `make release-test` | Self-tests for the release tooling |
+| `make release-check` | `lint`, tests, and `drift` for the release tooling |
 
-### Propose New Code-Domain Categories
-
-STE-Code inherits 19 technical noun categories from ASD-STE100. If you believe a new category is warranted:
-
-1. Review the 19 existing categories in Section S3 of the self-reading manual.
-2. Open a **Category Proposal** issue with:
-   - **Category name** and at least **5 example nouns**.
-   - **Counterexample** — documentation that would improve with this category.
-   - **Justification** — why existing categories do not cover these terms.
-3. New categories must map to a distinct domain concept not already represented (e.g. "Middleware Components" vs. "Frameworks").
-
-### Improve Adaptation Rules
-
-The 54 writing rules and 4 General Rules (GR1–GR4) were adapted from aerospace English into the code domain. If a rule produces awkward output for a specific language or framework:
-
-1. Confirm the rule aligns with ASD-STE100 Issue 9 structure.
-2. Provide a **before/after example pair** showing the problem and the proposed fix.
-3. Include a **migration plan** if the change alters existing compliance output — idempotency must be preserved (the same input must always produce the same output).
-
-Rule changes require consensus: the maintainer plus at least 2 community reviewers.
-
-### Submit Real-World Code Documentation Examples
-
-The project's example corpus strengthens every rule and synonym. Submit:
-
-- A link to a public repository with documentation that would benefit from STE-Code.
-- The **original text** and your **STE-Code compliant rewrite**.
-- A short table of metrics (word count, ambiguous terms removed, hedging eliminated).
-
-Accepted examples are added to [`ste-code/artifacts/ste-code-example-turn.txt`](./ste-code/artifacts/ste-code-example-turn.txt) with attribution.
-
-### Report Bugs in the Pipeline
-
-The 5-stage pipeline (Extract → Refine → Merge → Adapt → Artifacts) processes 434 pages of the ASD-STE100 Issue 9 specification. If you find:
-
-- A rule that references a missing page.
-- A synonym that contradicts an approved term.
-- An artifact file that is truncated or malformed.
-- A compliance check that produces inconsistent output.
-
-Open a **Bug Report** issue. Include the specific file, line number (if known), expected behavior, and actual behavior.
-
-### Improve Deployment Guides
-
-The deployment guide covers ChatGPT, Claude, Gemini, local models (Ollama, LM Studio, llama.cpp), and CI/CD integration. If you:
-
-- Use STE-Code with a platform not yet documented (e.g. vLLM, Groq, Together AI, AWS Bedrock).
-- Discover a simpler setup flow for an existing platform.
-- Find a broken command or outdated dependency.
-
-Submit a PR against [`ste-code/artifacts/ste-code-deployment-guide.txt`](./ste-code/artifacts/ste-code-deployment-guide.txt).
+`make check` is the default target. `make drift` and the release targets are
+deliberately separate from `check`.
 
 ---
 
-## Development Setup
+## Development setup
 
 ### Prerequisites
 
-- Python 3.9+
-- Git
-- An LLM runtime (optional — only needed for running compliance checks):
-  - **Ollama** with a compatible model (deepseek-coder, qwen-coder, codestral).
-  - **LM Studio** (GUI, macOS/Windows/Linux).
-  - **llama-cpp-python** for programmatic use.
-  - **OpenAI API key** or **Anthropic API key** for cloud-based checks.
+| Requirement | Needed for |
+|-------------|------------|
+| Python 3 | Every runner, every gate, and the deterministic stages |
+| Git | Version control and the release tooling |
+| An agent backend | The pipeline stages that call a model |
 
-### Clone and Install
+An LLM runtime is optional. You need one only to run a compliance check or a
+model stage. Any of these work:
+
+- **Ollama** with a code model (deepseek-coder, qwen-coder, codestral).
+- **LM Studio** (GUI; macOS, Windows, Linux).
+- **llama-cpp-python** for programmatic use.
+- An **OpenAI** or **Anthropic** API key for cloud-based checks.
+
+The default backend is Hermes. Configure the backends in
+`.agents/config/agents.yaml` and list them with:
+
+```bash
+python3 .agents/tools/lib/agent-runner.py --list
+```
+
+The model is read from the `STE_MODEL` environment variable. The default is
+`tencent/hy3:free`.
+
+### Clone
 
 ```bash
 git clone https://github.com/NikolaRHristov/STE-Code.git
-cd ste-code
+cd STE-Code
 ```
 
-No package installation is required. The project is a collection of markdown artifacts, a Python rails checker, and text-based system prompts. All source material lives under `ste-code/`.
-
-### Run the Pipeline
-
-The pipeline is already executed and the artifacts are committed. To verify:
-
-```bash
-# Verify all 8 rails pass
-python3 ste-code/check-rails.py
-
-# Expected output: ✅ All files pass rails compliance.
-```
-
-To run a compliance check against your own documentation:
-
-```bash
-# Ollama (simplest)
-ollama create ste-code -f Modelfile && ollama run ste-code
-
-# Batch processing
-cat ste-code/artifacts/ste-code-distilled-system-prompt.txt > /tmp/ste-code-context.txt
-echo -e "\n---\n" >> /tmp/ste-code-context.txt
-cat my-readme.md >> /tmp/ste-code-context.txt
-hermes -z "$(cat /tmp/ste-code-context.txt)" -m tencent/hy3:free --yolo
-```
-
-Full deployment instructions are in [`ste-code/artifacts/ste-code-deployment-guide.txt`](./ste-code/artifacts/ste-code-deployment-guide.txt).
+No package installation is required. The project is a set of markdown
+artifacts, Python tools, and text system prompts. All standard content is under
+`ste-code/`.
 
 ---
 
-## Pull Request Process
+## Ways to contribute
 
-### Branch Naming
+| Contribution | What to supply |
+|--------------|----------------|
+| New synonym | The unapproved term, the approved replacement, the domain, the reason it is ambiguous, and 3 real examples from public documentation |
+| New category | The category name, 5 example nouns, a counterexample, and why the existing 22 categories do not cover it |
+| Rule improvement | A before/after example pair, and a migration plan that keeps the output idempotent |
+| Real-world example | The original text, your STE-Code rewrite, and a short metrics table |
+| Domain example | A Non-STE / STE pair for a domain tag from `.agents/GAPS.md` |
+| Bug report | The file, the line number, the expected behavior, and the actual behavior |
 
-Use one of the following prefixes:
+We do not accept speculative proposals. A new synonym needs a proven
+counterexample from real documentation.
 
-| Prefix   | Purpose                                     |
-|----------|---------------------------------------------|
-| `feat/`  | New synonyms, categories, rules, or features |
-| `fix/`   | Bug fixes, pipeline corrections              |
-| `docs/`  | Documentation, deployment guide updates      |
+### New synonym
 
-Examples: `feat/add-orchestrate-synonym`, `fix/r3-page-gap-145`, `docs/vllm-deployment`.
+The controlled vocabulary is the core of STE-Code. Propose a synonym when you
+find an unapproved term in real code documentation that has no approved
+replacement.
 
-### PR Template
+1. Read the current synonym table in `ste-code/data/` and the dictionary in
+   `ste-code/final/rules/a-dictionary.md`.
+2. Open an issue with the term.
+3. Include the **unapproved** term and where it appears (link a real repository
+   or README), the **approved** replacement, the **domain** (for example
+   DevOps, frontend, database, API design), the **reason** the term is
+   ambiguous, metaphorical, or non-literal, and **3 real examples** of the term
+   in code documentation.
 
-All pull requests must use the template at [GitHub Issues](https://github.com/NikolaRHristov/STE-Code/issues). The template requires:
+### New category
 
-- A summary of the change.
-- Reference to the related issue.
-- A checklist confirming:
-  - The change is traceable to ASD-STE100 Issue 9 (for rule/synonym changes).
-  - Idempotency is preserved.
-  - The 8-rail checker passes (`python3 ste-code/check-rails.py`).
+STE-Code carries 22 technical-noun categories, in
+`ste-code/final/rules/a-categories.md`.
 
-### Review Requirements
+1. Read the 22 existing categories first.
+2. Open an issue with the category name and at least 5 example nouns.
+3. Give a counterexample: documentation that improves with this category.
+4. State why the existing categories do not cover these terms. A new category
+   must map to a distinct domain concept, for example "middleware components"
+   against "frameworks".
 
-- At least **1 approval** from a maintainer or trusted reviewer.
-- Rule changes require **2 community reviewer approvals** in addition to the maintainer.
-- All review threads must be resolved before merge.
+### Rule improvement
 
-### Rails Compliance
+The 54 rules and the 4 General Rules (GR1–GR4) were adapted from aerospace
+English into the code domain. Propose a change when a rule produces awkward
+output for a language or a framework.
 
-All 8 rails must pass before merge:
+1. Confirm the rule still matches the ASD-STE100 Issue 9 structure.
+2. Supply a before/after example pair that shows the problem and the fix.
+3. Supply a migration plan when the change alters existing output. Idempotency
+   must hold: the same input must always produce the same output.
 
-| Rail | Name              | Description                                              |
-|------|-------------------|----------------------------------------------------------|
-| R1   | Stage Isolation   | Files must be in the correct stage directory             |
-| R2   | Naming            | Files must follow `[w|r]NNN-pPPPP-PPPP.md` pattern       |
-| R3   | Page Coverage     | All 434 pages must be accounted for, no gaps             |
-| R4   | Fabrication       | No AI-fabricated content (e.g. React, Docker, npm)       |
-| R5   | Formatting        | Headings, blank lines, boilerplate, STE examples, headers |
-| R6   | Facts             | No incorrect claims (e.g. "22 categories" — must be 19)  |
+Rule changes need consensus: the maintainer, plus 2 community reviewers.
 
-Run the checker locally:
+### Domain example format
 
-```bash
-python3 ste-code/check-rails.py
+Add the pair to the matching rule file in `ste-code/adapted/`:
+
+```markdown
+> [DOMAIN: mobile]
+> **Non-STE:** [real code documentation from the domain]
+> **STE:** [the STE-Code compliant correction]
 ```
 
-A failing rail blocks the merge. Fix the issue and re-run until all rails pass.
+Put the domain tag in the commit message.
+
+### Bug report
+
+Open an issue when you find a rule that references a missing page, a synonym
+that contradicts an approved term, a truncated or malformed artifact file, or a
+gate that produces inconsistent output. Name the file, the line number, the
+expected behavior, and the actual behavior.
 
 ---
 
-## Style Guide
+## Where the content lives
 
-### STE-Code Compliance for Documentation
+| Path | Contents |
+|------|----------|
+| `ste-code/final/rules/` | The 54 rules, one file per rule, plus the dictionary and the categories |
+| `ste-code/adapted/` | The code-domain adaptation, including the 4 General Rules |
+| `ste-code/final/extensions/` | Gap-fill entries: verbs, adjectives, nouns, anti-patterns, domains |
+| `ste-code/artifacts/` | Generated. Do not hand-edit. Re-run the artifact stage instead |
+| `.agents/GAPS.md` | The open domain-coverage gaps |
 
-All project documentation — including this CONTRIBUTING.md, README.md, and all artifact files — must itself be STE-Code compliant. This means:
+Everything under `ste-code/artifacts/` is pipeline output. A hand edit there is
+lost on the next run.
 
-- **Use the active voice.** Write "Run the checker" not "The checker should be run."
-- **Use approved vocabulary.** Consult the synonym table in the self-reading manual (Section S4). Replace unapproved terms like "basically," "stuff," "make sure," and "be careful" with their approved equivalents.
-- **Write short sentences.** Target 20 words or fewer per sentence. Break long sentences at natural clause boundaries.
-- **Use imperative mood for instructions.** Write "Open the file" not "You should open the file."
-- **One instruction per sentence.** Write "Install the package. Run the tests." not "Install the package and then run the tests."
-- **Avoid hedging.** Remove "should," "might," "could," "probably," and "maybe" from procedural text.
-- **Use consistent terminology.** Refer to the same concept with the same word throughout. Do not alternate between "function," "method," and "routine" for the same thing.
-- **No slang or jargon.** Replace "wanna," "cool," "magic incantation," "bunch of," and similar informal language.
-- **Use descriptive headings.** Section titles must describe their content, not tease it.
+---
 
-### Conventional Commits
+## Run the pipeline locally
 
-All commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+The deterministic stages are safe on a clean checkout. The model stages cost
+tokens and rewrite tracked content, so run them only when you intend to
+regenerate that layer.
+
+```bash
+python3 .agents/tools/runners/phase-c-run.py --dry-run   # Merge, plan only
+python3 .agents/tools/runners/phase-f-run.py --dry-run   # Artifacts, plan only
+bash .agents/tools/runners/launch-downstream.sh          # the whole chain
+bash .agents/tools/runners/launch-downstream.sh --dry    # plan the chain only
+```
+
+`launch-downstream.sh` stops before the Merge stage when `ste-code/refined/`
+holds fewer than 100 markdown files, because that means refinement is still
+running.
+
+See [docs/pipeline.md](docs/pipeline.md) for the stage table, the gates, and the
+prerequisites.
+
+### Stage gates
+
+Run the gate for the layer you changed. Exit code `0` means it passes.
+
+```bash
+python3 .agents/tools/grouping/verify-groups.py         # Merge
+python3 .agents/tools/adaptation/verify-adaptation.py   # Adaptation
+python3 .agents/tools/extension/verify_extensions.py    # Extensions
+python3 .agents/tools/artifacts/verify-artifacts.py     # Artifacts
+```
+
+---
+
+## Testing
+
+### Rails checker
+
+The rails checker scans the pipeline output against 8 rails:
+
+```bash
+python3 .agents/tools/quality/check-rails.py
+```
+
+| Rail | Name | Checks |
+|------|------|--------|
+| R1 | Stage isolation | Each file is in the correct stage directory |
+| R2 | Naming | File names follow the `[w\|r]NNN-pAAAA-BBBB.md` pattern |
+| R3 | Completeness | No page gaps; every page is accounted for |
+| R4 | Fabrication | No invented content, for example React, Docker, npm |
+| R5 | Formatting | Headings, blank lines, boilerplate, STE examples, page headers |
+| R6 | Factual accuracy | Documented counts match disk, for example 54 rules and 22 categories |
+| R7 | Cross-references | Every internal reference resolves |
+| R8 | Metadata | Required front matter and stamps are present |
+
+A non-zero exit code means at least one rail failed. The checker names the
+file, the rail, and the problem for every issue.
+
+### Table integrity
+
+```bash
+python3 .agents/tools/quality/check-tables.py
+```
+
+### Quality sweep
+
+A parallel audit across every markdown layer:
+
+```bash
+python3 .agents/tools/quality/sweep-quality.py --batches 5
+```
+
+### Link checking
+
+lychee scans `ste-code/final/` and `ste-code/artifacts/` for broken links:
+
+```bash
+bash .agents/tools/linkcheck/run_linkcheck.sh
+```
+
+The configuration is `.agents/tools/linkcheck/lychee.toml`. It ignores the
+intentional legacy `master.md#…` backlinks and reports real breakage: stale
+internal paths and dead external URLs.
+
+---
+
+## Documentation
+
+All project documentation must follow STE-Code itself:
+
+- Use the active voice. Write "Run the checker", not "The checker should be run".
+- Use the imperative mood for instructions.
+- One instruction per sentence.
+- Keep sentences to 20 words or fewer.
+- Use approved vocabulary. Replace "basically", "stuff", "make sure", and
+  "be careful".
+- Remove hedging: "should", "might", "could", "probably", "maybe".
+- Use one word for one concept. Do not alternate between "function", "method",
+  and "routine".
+- Use no slang and no jargon. Replace "wanna", "cool", "magic incantation", and
+  "a bunch of".
+- Use descriptive headings. A heading states its content; it does not tease it.
+- Prefer a table to three paragraphs.
+
+Preview the documentation site:
+
+```bash
+pip install mkdocs
+mkdocs serve            # http://127.0.0.1:8000
+mkdocs build --strict   # fails on a broken link or a warning
+```
+
+`mkdocs.yml` is in the repository root. The pages are in `docs/`. Add a new page
+to the `nav:` list in `mkdocs.yml`.
+
+---
+
+## Pull requests
+
+### Branch names
+
+| Prefix | Purpose |
+|--------|---------|
+| `feat/` | New synonyms, categories, rules, or features |
+| `fix/` | Bug fixes and pipeline corrections |
+| `docs/` | Documentation |
+
+Examples: `feat/add-orchestrate-synonym`, `fix/r3-page-gap-145`,
+`docs/level-table`.
+
+### Commit messages
+
+Use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
 <type>(<scope>): <description>
@@ -209,107 +307,54 @@ All commit messages must follow the [Conventional Commits](https://www.conventio
 Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
 
 Examples:
-- `feat(synonyms): add orchestrate → control/manage to synonym table`
-- `fix(pipeline): correct page gap in R3 coverage check`
-- `docs(deploy): add vLLM deployment instructions`
 
----
+- `feat(synonyms): add orchestrate → control/manage to the synonym table`
+- `fix(pipeline): correct the page gap in the R3 coverage check`
+- `docs(levels): correct the level table token counts`
 
-## Testing
+`CHANGELOG.md` is generated from these commits by
+`.agents/tools/release/changelog.py`. Write the commit message carefully; do not
+edit the changelog by hand.
 
-### Running the Rails Checker
+### Checklist
 
-The 8-rail compliance checker validates pipeline integrity across all stage directories:
+- [ ] `make check` passes.
+- [ ] Rule and synonym changes trace to ASD-STE100 Issue 9.
+- [ ] Idempotency holds: the same input produces the same output.
+- [ ] The stage gate for the layer you changed passes.
+- [ ] The rails checker passes.
 
-```bash
-python3 ste-code/check-rails.py
-```
+### Review
 
-Expected output:
-
-```
-Files checked: 218
-Clean: 218
-Issues: 0
-
-✅ All files pass rails compliance.
-```
-
-A non-zero exit code indicates at least one rail failure. The checker reports the specific file, rail, and description for each issue.
-
-### Verifying Artifacts
-
-All 6 artifacts in `ste-code/artifacts/` must be consistent:
-
-1. **System prompt** (`ste-code-distilled-system-prompt.txt`): ~1,200 tokens. Must contain all 14 principles.
-2. **Self-reading manual** (`ste-code-self-reading-manual.txt`): Must contain all 54 adapted rules (9 sections), 17 domain extensions, and the synonym table.
-3. **Extraction methodology** (`ste-code-extraction-methodology.txt`): Must describe the 6-pass pipeline with turn-by-turn protocol.
-4. **Example turn** (`ste-code-example-turn.txt`): Must include a before/after pair with a changes table and metrics.
-5. **Deployment guide** (`ste-code-deployment-guide.txt`): Must cover at least 7 deployment options.
-6. **README** (`README.md`): Must include quick start, examples, comparison metrics, and the roadmap.
-
-To verify artifact consistency against the pipeline output:
-
-```bash
-# Check that the system prompt references match the self-reading manual
-grep -c "Principle" ste-code/artifacts/ste-code-distilled-system-prompt.txt
-grep -c "Rule " ste-code/artifacts/ste-code-self-reading-manual.txt
-
-# Verify no fabrication signals in any artifact
-grep -r "fabricate\|hallucinat\|guess" ste-code/artifacts/ && echo "FABRICATION DETECTED" || echo "Clean"
-```
-
----
-
-## Issue Templates
-
-Issue templates are available in `.github/ISSUE_TEMPLATE/`. Choose the template that matches your contribution:
-
-- **Synonym Proposal** — suggest a new unapproved → approved pair.
-- **Category Proposal** — propose a new technical noun category.
-- **Rule Change** — suggest an improvement to an existing adaptation rule.
-- **Bug Report** — report a pipeline, artifact, or checker defect.
-- **Documentation Example** — submit a real-world before/after documentation pair.
-
-If your contribution does not fit a template, open a blank issue with a descriptive title.
-
----
-
-## Code of Conduct
-
-This project adheres to the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md). By participating, you agree to uphold its standards. In short: be respectful, be constructive, and assume good faith. Harassment, trolling, and dismissive behavior are not tolerated.
+- At least 1 approval from a maintainer.
+- Rule changes need 2 community reviewer approvals in addition.
+- Resolve every review thread before the merge.
 
 ---
 
 ## Recognition
 
-### Contributors
+Every contribution type counts: code, documentation, synonym proposals,
+category proposals, bug reports, and examples. Contributors are credited in the
+release notes for the version that carries their change.
 
-STE-Code follows the [all-contributors](https://allcontributors.org/) specification. Every contribution type is recognized — code, documentation, synonym proposals, category proposals, bug reports, deployment guides, and examples.
+---
 
-To add yourself, mention `@all-contributors` in a PR or issue comment:
+## Code of conduct
 
-```
-@all-contributors please add @username for code, doc, ideas, bug
-```
-
-Supported contribution types: `code`, `doc`, `ideas`, `bug`, `example`, `review`, `question`, `talk`, `tutorial`.
-
-### Current Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This list is auto-generated. Do not edit it manually.
+This project uses the [Contributor Covenant](CODE_OF_CONDUCT.md). Be respectful,
+be constructive, and assume good faith. Harassment, trolling, and dismissive
+behavior are not tolerated.
 
 ---
 
 ## License
 
-STE-Code is licensed under the MIT License. By contributing, you agree that your contributions will be licensed under the same terms. See [`LICENSE`](./LICENSE) for the full text.
+MIT. By contributing, you agree to license your contribution under the same
+terms. See [LICENSE](LICENSE).
 
 ---
 
-## Questions?
+## Questions
 
-Open a GitHub issue with the `question` label, or start a Discussion. We respond to all contributor inquiries.
+Open a GitHub issue with the `question` label.
