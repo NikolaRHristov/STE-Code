@@ -287,7 +287,7 @@ def produce_variant(doc_path: Path, param: dict, do_bench: bool) -> dict:
 
 # ── plan / dry-run ──────────────────────────────────────────────────────────
 def _plan(docs: list[Path], params: list[dict], bench: bool):
-    print("=== TRAJECTORY PLAN (dry-run) ===")
+    print("TRAJECTORY PLAN (dry-run)")
     print(f"docs={len(docs)} variants/doc={len(params)} total_jobs={len(docs)*len(params)}")
     print(f"benchmark per variant: {bench} (real orchestrator under tests/parametarized/)")
     print(f"output root: {PARAM_DIR}")
@@ -297,7 +297,7 @@ def _plan(docs: list[Path], params: list[dict], bench: bool):
             print(f"  - {d.name}  ->  {PARAM_DIR/d.stem}/v_{p.get('id','x')}.md")
     if len(docs) > 8:
         print(f"  ... and {len(docs)-8} more docs")
-    print("=== END PLAN ===")
+    print("END PLAN")
 
 
 def main():

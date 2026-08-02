@@ -302,7 +302,7 @@ def _regen_progress():
 
 
 def _report():
-    print("=== DEEP GATE REPORT (current final/rules/) ===")
+    print("DEEP GATE REPORT (current final/rules/)")
     files = sorted(FINAL_RULES_DIR.glob("a-sec*-rule*.md"))
     for p in files:
         ok, why = _deep_gate(p)

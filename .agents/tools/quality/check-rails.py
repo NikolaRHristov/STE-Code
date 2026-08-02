@@ -472,7 +472,7 @@ def format_text(result: dict) -> str:
     lines.append("")
 
     # Per-rail summary
-    lines.append("=== Issues by Rail ===")
+    lines.append("Issues by Rail")
     for rail_name, count in sorted(result["rail_stats"].items()):
         if count > 0 or "UNIMPLEMENTED" not in str(count):
             marker = "⚠" if count > 0 else "✓"
@@ -481,7 +481,7 @@ def format_text(result: dict) -> str:
 
     # Per-file detail
     if result["issue_list"]:
-        lines.append("=== Issues Found ===")
+        lines.append("Issues Found")
         for issue in result["issue_list"]:
             lines.append(f"  {issue}")
         lines.append("")

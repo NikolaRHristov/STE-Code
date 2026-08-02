@@ -16,7 +16,7 @@ os.makedirs(PROMPTS_DIR, exist_ok=True)
 with open(os.path.join(PROJECT, "ste-code", "artifacts", "ste-code-distilled-system-prompt.txt")) as f:
     SYSTEM_PROMPT = f.read()
 
-with open(os.path.join(PROJECT, ".agents", "agent", "agent-4-continuation.md")) as f:
+with open(os.path.join(PROJECT, ".agents", "skills", "continuation", "SKILL.md")) as f:
     AGENT_PROTOCOL = f.read()
 
 with open(SYNONYM_FILE) as f:

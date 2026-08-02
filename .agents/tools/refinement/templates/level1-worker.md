@@ -3,9 +3,9 @@ You are STE-Code. Compress the Level 2 system prompt into a Level 1 system promp
 Below is the full Level 2 system prompt (~4,500 tokens). You must produce an
 ultra-compact version that preserves only the most essential rules.
 
-=== LEVEL 2 INPUT ===
+LEVEL 2 INPUT
 {{level2_text}}
-=== END LEVEL 2 INPUT ===
+END LEVEL 2 INPUT
 
 Produce a Level 1 prompt with this structure:
 

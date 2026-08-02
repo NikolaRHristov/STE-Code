@@ -108,8 +108,8 @@ CONTRACTIONS = [
 
 FILES_TO_AUDIT = [
     "README.md",
-    ".agents/agent/agent-1-extractor.md",
-    ".agents/agent/agent-6-phi-sce.md",
+    ".agents/skills/extraction/SKILL.md",
+    ".agents/skills/adaptation/SKILL.md",
     ".agents/MASTER.md",
     ".agents/skills/refinement/SKILL.md",
     ".agents/feedback/exchange.md",

@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
-# =============================================================================
 # run_linkcheck.sh - lychee link check for STE-Code markdown.
-# =============================================================================
 #
 # Scans `ste-code/final/**/*.md` and `ste-code/artifacts/**/*.md` for broken
 # links using .agents/tools/linkcheck/lychee.toml. Writes one markdown report
@@ -18,7 +16,6 @@
 #             2 = broken links found.
 #
 # Structure adapted from REPxREP/Repository/Maintain/Check/Links.sh.
-# =============================================================================
 
 set -e
 
@@ -66,14 +63,14 @@ mkdir -p "$Reports"
 Stamp=$(date +%Y%m%d-%H%M%S)
 Status=0
 
-echo "========================================"
+echo ""
 echo "STE-Code Link Check"
-echo "========================================"
+echo ""
 echo "Tooling: $(lychee --version)"
 echo "Config:  ${Config#"$Root"/}"
 echo "Root:    $Root"
 echo "Targets: $Targets"
-echo "========================================"
+echo ""
 echo ""
 
 for Target in $Targets; do
@@ -122,13 +119,13 @@ for Target in $Targets; do
 	echo ""
 done
 
-echo "========================================"
+echo ""
 if [ "$Status" -eq 0 ]; then
 	echo "Link check complete. No broken links."
 else
 	echo "Link check complete. Broken links found (exit $Status)."
 	echo "Full reports: ${Reports#"$Root"/}/"
 fi
-echo "========================================"
+echo ""
 
 exit "$Status"

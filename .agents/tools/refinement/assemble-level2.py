@@ -30,9 +30,9 @@ Below is the full Level 3 system prompt (~8,000 tokens). You must produce a
 compact version that preserves all essential rules but drops the full
 section-by-section grammar breakdowns.
 
-=== LEVEL 3 INPUT ===
+LEVEL 3 INPUT
 {level3_text}
-=== END LEVEL 3 INPUT ===
+END LEVEL 3 INPUT
 
 Produce a Level 2 prompt with this structure:
 

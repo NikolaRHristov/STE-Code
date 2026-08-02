@@ -1,6 +1,4 @@
-# =============================================================================
 # Lychee Link Checker - STE-Code
-# =============================================================================
 # Checks markdown under `ste-code/final/` and `ste-code/artifacts/`.
 #
 # Usage (from repo root):
@@ -8,7 +6,6 @@
 #   .agents/tools/linkcheck/run_linkcheck.sh final      # stable set only
 #   lychee --config .agents/tools/linkcheck/lychee.toml 'ste-code/final/**/*.md'
 #
-# =============================================================================
 
 # --- Cache -------------------------------------------------------------------
 # Persists results to `.lycheecache` so re-runs skip already-verified URLs.

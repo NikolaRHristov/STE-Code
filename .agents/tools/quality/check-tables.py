@@ -127,7 +127,7 @@ def main():
     breaks = find_table_breaks()
     anomalies = find_table_anomalies()
 
-    print(f"=== Table Integrity Report ===\n")
+    print(f"Table Integrity Report\n")
     print(f"Table breaks (split across pages without continuation): {len(breaks)}")
     for b in breaks:
         print(f"  {b['file']} → {b['next_file']} (pages {b['page_range']})")

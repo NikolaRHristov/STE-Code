@@ -196,7 +196,7 @@ def _assemble_llms_files():
 
     full = []
     for d, _ in present_tiers:
-        full.append(f"# === tier {d} ===\n")
+        full.append(f"# tier {d}\n")
         ip = ARTIFACTS_DIR / d / "_index.md"
         if ip.exists():
             full.append(ip.read_text(errors="ignore"))
@@ -256,7 +256,7 @@ def main():
     from templater import load_local
     SCAFFOLD_PATH = (Path(__file__).resolve().parent / "levels_scaffold.py")
     scaffold = load_local("levels_scaffold", SCAFFOLD_PATH)
-    print("=== scaffolding deterministic level bases (sub-doc dirs) ===", flush=True)
+    print("scaffolding deterministic level bases (sub-doc dirs)", flush=True)
     saved = sys.argv
     sys.argv = ["levels_scaffold.py"]
     try:
@@ -308,7 +308,7 @@ def main():
                           f"Phase F: LLM-distill tier {d} ({len(subs)} sub-docs)")
         _regen_progress()
 
-    print("=== assembling llms.txt / llms-full.txt ===", flush=True)
+    print("assembling llms.txt / llms-full.txt", flush=True)
     _assemble_llms_files()
     print(f"\n{'='*60}\nArtifacts distilled: tiers complete -> ste-code/artifacts/\n{'='*60}", flush=True)
     sys.exit(0)

@@ -76,7 +76,7 @@ to know what PASS, WARN, and FAIL results look like.
 ### Example: Batch 4 (w010-w012) — All Passing
 
 ```
-=== Batch 4 Validation (w010-w012, pages 37-48) ===
+Batch 4 Validation (w010-w012, pages 37-48)
 
 --- Check 1: File Existence and Size ---
 PASS w010: 187 lines, 12432 bytes
@@ -98,13 +98,13 @@ w010: no modern software terms found — PASS
 w011: no commentary language found — PASS
 w012: no fabrication flags — PASS
 
-=== Batch 4 Result: ALL PASS ===
+Batch 4 Result: ALL PASS
 ```
 
 ### Example: Batch 7 (w019-w021) — Mixed Results
 
 ```
-=== Batch 7 Validation (w019-w021, pages 73-84) ===
+Batch 7 Validation (w019-w021, pages 73-84)
 
 --- Check 1: File Existence and Size ---
 PASS w019: 201 lines, 14823 bytes
@@ -126,7 +126,7 @@ w019: no fabrication flags — PASS
 w020: SKIP (too few lines for fabrication check)
 w021: no fabrication flags — PASS
 
-=== Batch 7 Result: 1 FAIL (w020), 2 PASS ===
+Batch 7 Result: 1 FAIL (w020), 2 PASS
 Action: Split w020 page range (77-80) into two halves and re-extract.
 See "Re-Extraction Procedure" below.
 ```
@@ -137,7 +137,7 @@ This example shows a WARN result. The worker output is usable but has a
 minor problem. The batch continues after recording the warning.
 
 ```
-=== Batch 12 Validation (w034-w036, pages 133-144) ===
+Batch 12 Validation (w034-w036, pages 133-144)
 
 --- Check 1: File Existence and Size ---
 PASS w034: 192 lines, 13801 bytes
@@ -159,7 +159,7 @@ w034: no fabrication flags — PASS
 w035: no fabrication flags — PASS
 w036: no fabrication flags — PASS
 
-=== Batch 12 Result: ALL PASS (1 WARN: w035) ===
+Batch 12 Result: ALL PASS (1 WARN: w035)
 Action: Flag w035 for spot-check review. No re-extraction needed.
 ```
 

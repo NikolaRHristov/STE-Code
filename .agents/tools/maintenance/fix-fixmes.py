@@ -67,7 +67,7 @@ def main():
         print(f"{relpath}: {status}")
 
     # Verify — check remaining FIXMEs
-    print("\n=== POST-FIX CHECK ===")
+    print("\nPOST-FIX CHECK")
     for relpath in FILES_WITH_FIXMES:
         abspath = PROJECT / relpath
         if abspath.exists():

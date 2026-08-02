@@ -88,7 +88,7 @@ def _assemble_llms_files(present: list[tuple[str, str, str]]) -> None:
 
     full = []
     for d, _, _ in present:
-        full.append(f"# === tier {d} ===\n")
+        full.append(f"# tier {d}\n")
         ip = ARTIFACTS_DIR / d / "_index.md"
         if ip.exists():
             full.append(ip.read_text(errors="ignore"))

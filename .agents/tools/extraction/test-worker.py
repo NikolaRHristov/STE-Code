@@ -47,7 +47,7 @@ try:
     if output_file.exists():
         content = output_file.read_text()
         lines = content.splitlines()
-        print(f"\n=== OUTPUT FILE ===\n{output_file.stat().st_size}B, {len(lines)} lines", flush=True)
+        print(f"\nOUTPUT FILE\n{output_file.stat().st_size}B, {len(lines)} lines", flush=True)
         print(f"\n--- FIRST 5 ---\n{chr(10).join(lines[:5])}", flush=True)
         print(f"\n--- LAST 10 ---\n{chr(10).join(lines[-10:])}", flush=True)
         ok, msg = verify_output(worker_num, start_pos, end_pos, str(output_file))
