@@ -51,6 +51,18 @@ make `profile_dir/skills/` contain only STE symlinks (into `.agents/skills/`).
 - Verify at runtime (NOT static): `env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p> hermes skills list --enabled-only` — expect 0 builtin, only STE names.
 - See `scripts/verify_profile_skills.py` for a read-only check.
 
+## Launching a jailed profile (new terminal)
+
+The jail activates from `config.yaml` (`plugins.enabled: [ste-code-jail]`), so no `STE_CODE_JAIL_POLICY` export is needed — the policy derives from the profile name (`PROFILE_POLICY_MAP`). To run a benchmark session in a fresh terminal:
+
+```bash
+export HERMES_HOME=~/.hermes/profiles/benchmark-ste-code
+export HERMES_PROFILE=benchmark-ste-code
+hermes --tui
+```
+
+`jail-exec-wrap` re-asserts `STE_CODE_JAIL_POLICY=bench` + `HERMES_PROFILE=benchmark-ste-code` on every spawned child anyway, so children stay confined even if the env leaks. Requires macOS (`sandbox-exec`) or Linux (`bwrap`). The `dev` profile is intentionally NOT wrapped and is the only one permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
+
 ## Verify after ANY change
 - `make check` — the gate (178 checks + all 3 policies pass).
 - `python3 .agents/hermes/jail/tests/test_jail.py` — adversarial suite (bench: 20 allow / 49 escape; user: 14/48; dev: 24/37).
