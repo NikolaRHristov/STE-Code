@@ -1,40 +1,58 @@
-# Python
+# ── Language and editor ──────────────────────────────────────────────────────
 __pycache__/
-.venv/
 *.pyc
 *.pyo
+.venv/
 venv/
 
-# macOS
 .AppleDouble
 .DS_Store
 .LSOverride
 
-# IDE / Editor
 .idea/
 .vscode/
 *.swo
 *.swp
 *~
 
-# Hermes runtime
-.hermes/sessions/
-.hermes/venv/
+# ── Agent run state ──────────────────────────────────────────────────────────
+# Resume points, progress tables, and locks. They describe one machine's run,
+# never the project: committed, they make the next clone skip work it never
+# did. Each directory keeps its README so the structure survives a reset.
+.agents/state/*
+!.agents/state/README.md
 
-# Generated worker artifacts (NOT source)
+.agents/tmp/*
+!.agents/tmp/README.md
+
 .agents/_scratch/
+.agents/archive/
 .agents/audit/
 .agents/rewrites/
 .agents/telemetry/
-.agents/tmp/**
-ste-code/audit/
 
-# Vendor reference corpora (cloned public repos — NOT source, do not commit)
-.agents/vendor/
+# Inter-agent channel: the format is tracked, the entries are not.
+.agents/feedback/*
+!.agents/feedback/exchange.md
+!.agents/feedback/poll-vs-wait.md
 
-# Benchmark scratch (runtime artifacts — never commit)
+# ── Benchmark output ─────────────────────────────────────────────────────────
+# ALL benchmark run output lives under tests/ — one directory, ignored, no
+# exceptions. orchestrator.py, orchestrator-control.py, benchmark-levels.py,
+# run_pipeline.py and run_all_variations.py default under it; pass
+# --results-dir / --base only with a path inside it.
+.agents/benchmark/tests/*
+!.agents/benchmark/tests/README.md
+
+# Ad-hoc prompts are generated before a run (deterministic, seed=7).
+.agents/benchmark/test-cases-adhoc/
+# Reports: regenerate with .agents/benchmark/summarize_run.py
+.agents/benchmark/report/
+.agents/benchmark/sample-session/**
+.agents/benchmark/*.log
+
 # Retired legacy benchmark scripts (old single-prompt layout; superseded by
-# orchestrator.py + benchmark-levels.py against the 8-tier artifacts).
+# orchestrator.py + benchmark-levels.py against the tiered artifacts).
 .agents/benchmark/enlarge-ste-code.py
 .agents/benchmark/launch-levels.py
 .agents/benchmark/run.py
@@ -43,23 +61,22 @@ ste-code/audit/
 .agents/benchmark/rescore.py
 .agents/benchmark/benchmark_lib.py
 
-# ALL benchmark run output lives under tests/ — one dir, ignored, no exceptions.
-# orchestrator.py, orchestrator-control.py, benchmark-levels.py, run_pipeline.py
-# and run_all_variations.py all default under it; pass --results-dir/--base only
-# with a path inside tests/.
-.agents/benchmark/tests/
-# Ad-hoc prompts are generated pre-run (deterministic, seed=7) — never commit.
-.agents/benchmark/test-cases-adhoc/
-.agents/benchmark/*.log
-.agents/benchmark/sample-session/**
+# ── Generated reports ────────────────────────────────────────────────────────
+.agents/tools/linkcheck/reports/
+.lycheecache
+trajectory_samples.jsonl
 
+# ── Vendor corpora ───────────────────────────────────────────────────────────
+# Cloned public reference repositories. Large, redistributable from source,
+# and not this project's work.
+.agents/vendor/
+
+# ── Pipeline output ──────────────────────────────────────────────────────────
+ste-code/audit/
+SCE/
+
+# Benchmark subjects written into the repository root by an escaped run.
 /fetchUserData.js
 /processPayload.ts
 /user_service.py
 /validate_email.py
-SCE/
-
-trajectory_samples.jsonl
-
-# Benchmark run reports: regenerate with .agents/benchmark/summarize_run.py
-.agents/benchmark/report/

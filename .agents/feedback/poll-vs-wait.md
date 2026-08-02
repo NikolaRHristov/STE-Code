@@ -1,14 +1,39 @@
-# Feedback: Use poll, not wait
+# Poll, do not wait
 
-## Date: 2026-07-31
+A convention for every agent that launches long work in this project.
 
-**Issue:** The agent used `process(action='wait')` and `terminal(timeout=...)` which blocks the conversation for up to 60-300 seconds. This freezes the conversation and prevents the user from sending mid-turn messages.
+## Rule
 
-**Solution:** Use `process(action='poll')` for checking background process status. Poll is non-blocking and returns immediately with current status. The user can then decide if they want to keep checking or move on.
+Launch long tasks in the background and **poll** them. Never block the
+conversation on a task you cannot interrupt.
 
-**Additional issue:** Terminal commands with `sleep` loops in `timeout` mode also block the conversation. Use short `sleep` loops inside `background=true` processes instead.
+| Do | Do not |
+|---|---|
+| `terminal(background=True, notify_on_complete=True)` | `terminal(timeout=600)` on a long run |
+| `process(action='poll')` | `process(action='wait')` |
+| a `sleep` loop **inside** a background process | a `sleep` loop in the foreground |
 
-**Best practice:**
-- Launch long tasks with `terminal(background=true, notify_on_complete=true)`
-- Check status with `process(action='poll', session_id=...)`
-- Use `notify_on_complete=true` to get automatic completion notification
+## Why
+
+A blocking call freezes the session for as long as the task runs. The
+operator cannot steer, correct a wrong parameter, or stop a bad run — the
+message they send arrives only after the block ends, which is usually after
+the damage.
+
+Polling returns immediately with the current status. The operator keeps
+control, and the agent does other useful work between polls.
+
+## Pattern
+
+```python
+# launch
+terminal(command="python3 .agents/tools/<stage>/<stage>_batch.py 1",
+         background=True, notify_on_complete=True)
+
+# check — returns at once, no matter how long the task runs
+process(action="poll", session_id="<id>")
+```
+
+Concurrency is capped: run at most **two** agent-backed workers at a time.
+Above that the provider rate-limits and the failure rate rises faster than
+the throughput gain.
