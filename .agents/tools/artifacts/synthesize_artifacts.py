@@ -48,7 +48,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -86,7 +86,7 @@ from templater import render_template
 
 # ── chunked standard (no truncation) ──────────────────────────────────────────
 def _prepare_bundle() -> tuple[int, str]:
-    BUNDLE_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(BUNDLE_DIR)
     for old in BUNDLE_DIR.glob("chunk-*.md"):
         old.unlink()
     parts = []
@@ -154,7 +154,7 @@ def _distill_subdoc(tier_dir, subdoc_name, level_label, desc, manifest) -> bool:
     out = ARTIFACTS_DIR / tier_dir / subdoc_name
     prompt = _build_prompt(level_label, subdoc_name, desc, manifest, base_path)
     tmp = PROJECT / ".agents" / "tmp"
-    tmp.mkdir(parents=True, exist_ok=True)
+    mkdir(tmp)
     pf = tmp / f"artifact-{tier_dir}-{subdoc_name}.txt"
     write_text(pf, prompt)
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "1800", "STE_MODEL": MODEL}
@@ -233,7 +233,7 @@ def _regen_progress():
     lines += ["", "## Summary",
               f"- sub-docs done: {done_n} / {total}",
               f"- tiers: {sum(1 for _,_,s,_ in rows if s=='done')}/{len(LEVELS)} complete"]
-    PROGRESS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    mkdir(PROGRESS_PATH.parent)
     write_text(PROGRESS_PATH, "\n".join(lines) + "\n")
     print(f"  progress regenerated: {done_n}/{total} sub-docs", flush=True)
 
@@ -277,7 +277,7 @@ def main():
     signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
     signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
 
-    ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(ARTIFACTS_DIR)
     manifest = _prepare_bundle()[1]
     done = _checkpoint.setdefault("done", [])  # list of "tier/subdoc" keys
     total_ok = 0
@@ -286,7 +286,7 @@ def main():
         if not bdir.is_dir():
             continue
         adir = ARTIFACTS_DIR / d
-        adir.mkdir(parents=True, exist_ok=True)
+        mkdir(adir)
         subs = [p.name for p in sorted(bdir.glob("*.md")) if p.name != "_index.md"]
         for s in subs:
             key = f"{d}/{s}"
