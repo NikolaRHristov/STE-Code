@@ -46,6 +46,8 @@ from ste_io import write_text, mkdir  # noqa: E402
 # Every path, pattern, threshold and agent setting this stage uses is declared
 # in config.yaml beside this file. Read that file to see the whole footprint.
 CFG = _load_config(__file__)
+from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+RT = _resolve_runtime(__file__)
 
 EXTRACTED_DIR = CFG.path("inputs.extracted")
 REFINED_DIR = CFG.path("outputs.refined")

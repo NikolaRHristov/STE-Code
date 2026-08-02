@@ -47,6 +47,8 @@ from ste_io import write_text, mkdir  # noqa: E402
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
 CFG = _load_config(__file__)
+from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+RT = _resolve_runtime(__file__)
 REFINED_DIR = PROJECT / "ste-code" / "refined"
 STATE_DIR = PROJECT / ".agents" / "state"
 CHECKPOINT_PATH = STATE_DIR / "continue-checkpoint.json"
