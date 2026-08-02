@@ -89,10 +89,117 @@ install_profile() {
         link_one "$GROUP_PLUGIN" "$plugins_dir" || failed=1
     fi
 
+    link_credentials "$dir" || failed=1
+    seed_model_config "$dir" || failed=1
+
     # The policy is derived from the profile NAME, so no per-profile config is
     # required. A profile that needs an override drops its own jail.yaml here.
     log "  policy: $(policy_for "$profile")"
     return $failed
+}
+
+# A freshly created profile has a placeholder .env with no keys, so a live
+# session cannot start. Point it at the shared credential store, exactly as
+# dev-ste-code does. Only ever replaces a placeholder or an existing symlink —
+# a real .env with content is left alone.
+link_credentials() {
+    local dir="$1"
+    local shared="$HOME/.hermes/.env"
+    local dest="$dir/.env"
+
+    [ -e "$shared" ] || { log "  = .env (no shared store to link)"; return 0; }
+
+    if [ -L "$dest" ]; then
+        if [ "$(readlink "$dest")" = "$shared" ]; then
+            log "  = .env (already linked)"
+            return 0
+        fi
+        log "  ⚠ .env points elsewhere — leaving it alone"
+        return 0
+    fi
+
+    # Treat a comments-only file as a placeholder: no KEY=value lines.
+    if [ -f "$dest" ] && grep -qE '^[A-Za-z_][A-Za-z0-9_]*=' "$dest"; then
+        log "  ⚠ .env holds real keys — leaving it alone"
+        return 0
+    fi
+
+    run ln -sfn "$shared" "$dest"
+    log "  → .env -> shared credential store"
+}
+
+# A profile with no config.yaml falls back to whatever the shell environment
+# offers, which is how the live test hit "HTTP 402 Insufficient Balance" from a
+# provider this project does not use.
+#
+# The config must ALSO enable the plugin. Hermes does not activate a plugin
+# just because it is present in plugins/: it must be listed under
+# `plugins.enabled`. A profile with the jail symlinked but not enabled looks
+# perfectly installed and enforces NOTHING — the live test proved this by
+# escaping all four cases while `--status` reported the link was fine.
+seed_model_config() {
+    local dir="$1"
+    local dest="$dir/config.yaml"
+    local source_cfg="$PROFILES_DIR/dev-ste-code/config.yaml"
+
+    if [ "$DRY_RUN" = "1" ]; then
+        log "  would: seed config.yaml (model + plugin enablement)"
+        return 0
+    fi
+
+    if [ ! -e "$dest" ]; then
+        if [ -f "$source_cfg" ]; then
+            # Copy only the model block: the rest of the dev config is
+            # authoring setup a locked-down profile must not inherit.
+            awk '
+                /^model:/           { inblock = 1; print; next }
+                inblock && /^[ \t]/ { print; next }
+                inblock             { inblock = 0 }
+            ' "$source_cfg" > "$dest"
+            log "  → config.yaml (model seeded from dev-ste-code)"
+        else
+            : > "$dest"
+            log "  → config.yaml (created)"
+        fi
+    fi
+
+    ensure_plugin_enabled "$dest"
+}
+
+# Append a `plugins.enabled` block naming the group plugin when the config does
+# not already enable it. Without this the jail is inert.
+ensure_plugin_enabled() {
+    local dest="$1"
+    local want="$GROUP_PLUGIN"
+    [ "$GRANULAR" = "1" ] && want=""
+
+    if grep -qE "^[[:space:]]*-[[:space:]]*(ste-code-jail|jail-fs)[[:space:]]*$" "$dest"; then
+        log "  = config.yaml (jail already enabled)"
+        return 0
+    fi
+
+    if grep -qE "^plugins:" "$dest"; then
+        log "  ⚠ config.yaml has a plugins: block but does not enable the jail"
+        log "    add this under plugins.enabled:  - $GROUP_PLUGIN"
+        return 1
+    fi
+
+    {
+        echo ""
+        echo "# Enforce write confinement. The jail is inert unless enabled here."
+        echo "plugins:"
+        echo "  enabled:"
+        if [ -n "$want" ]; then
+            echo "    - $GROUP_PLUGIN"
+        else
+            for name in "${COMPONENTS[@]}"; do echo "    - $name"; done
+        fi
+        echo "  disabled: []"
+        echo "  entries:"
+        echo "    ${want:-jail-fs}:"
+        echo "      allow_tool_override: false"
+    } >> "$dest"
+    log "  → config.yaml (jail ENABLED)"
 }
 
 policy_for() {
@@ -114,6 +221,18 @@ show_status() {
             continue
         fi
         log "$profile: $(policy_for "$profile")"
+
+        # Report ENABLEMENT, not just the link. A symlinked but unenabled
+        # plugin enforces nothing while looking correctly installed.
+        local cfg="$dir/config.yaml"
+        if [ -f "$cfg" ] && grep -qE \
+            "^[[:space:]]*-[[:space:]]*(ste-code-jail|jail-fs)[[:space:]]*$" "$cfg"; then
+            log "  ✓ enabled in config.yaml"
+        else
+            log "  ✗ NOT ENABLED in config.yaml — the jail enforces NOTHING"
+            log "    fix: $0 $profile"
+        fi
+
         local found=0
         for name in "$GROUP_PLUGIN" "${COMPONENTS[@]}"; do
             local dest="$dir/plugins/$name"
@@ -131,7 +250,9 @@ show_status() {
                 found=1
             fi
         done
-        [ "$found" = "0" ] && log "  ✗ no jail plugin linked"
+        if [ "$found" = "0" ]; then
+            log "  ✗ no jail plugin linked"
+        fi
     done
 }
 

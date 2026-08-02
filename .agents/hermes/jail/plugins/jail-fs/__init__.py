@@ -50,7 +50,11 @@ _JAIL_ROOT = _find_jail_root()
 if str(_JAIL_ROOT) not in sys.path:
     sys.path.insert(0, str(_JAIL_ROOT))
 
-from core.analysis import is_passthrough_device, write_targets  # noqa: E402
+from core.analysis import (  # noqa: E402
+    containment_violations,
+    is_passthrough_device,
+    write_targets,
+)
 from core.policy import load_context  # noqa: E402
 
 # Tools whose arguments can name a write destination.
@@ -93,6 +97,13 @@ def _on_pre_tool_call(
 
     seen: set = set()
     violations: List[str] = []
+
+    # Structural invariants first: these hold regardless of the write roots.
+    # A skill traversal that lands inside an allowed directory is still an
+    # escape from the skill's own sandbox.
+    for label, reason in containment_violations(tool_name, args, base):
+        violations.append(f"  - {label}: {reason}")
+
     for label, resolved in targets:
         if resolved in seen:
             continue

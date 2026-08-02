@@ -102,6 +102,39 @@ def _cases(policy: str, root: str, parent: str,
                           "file_path": "../../../escape.md",
                           "file_content": "x"},
          "skill_manage traversal out of skills dir"),
+        # --- wrapper commands hide the real command word -------------------
+        # Each of these was an unblocked escape: the segment's command word was
+        # the wrapper, which is in no write table, so every operand — including
+        # the escaping path — was silently ignored.
+        ("terminal", {"command": "sudo mkdir -p /etc/evil"},
+         "sudo prefix hides mkdir"),
+        ("terminal", {"command": "nice -n 5 mkdir -p ../nice-escape"},
+         "nice prefix with a value flag"),
+        ("terminal", {"command": "time mkdir -p ../time-escape"},
+         "time prefix"),
+        ("terminal", {"command": "xargs -I{} mkdir -p ../{} < list.txt"},
+         "xargs prefix with attached placeholder"),
+        ("terminal", {"command":
+                      "env HOME=/Users/nikola mkdir -p $HOME/env-prefix"},
+         "env prefix plus VAR=value assignment"),
+        ("terminal", {"command": "nohup touch ../nohup-escape &"},
+         "nohup prefix"),
+        # --- destinations that match no other rule -------------------------
+        ("terminal", {"command": "dd if=/dev/zero of=../wipe.img"},
+         "dd of= key/value destination"),
+        ("terminal", {"command": f"dd if=x of={parent}/abs.img"},
+         "dd of= absolute destination"),
+        ("terminal", {"command":
+                      "python3 - <<'EOF'\nimport os\n"
+                      "os.makedirs('../heredoc-escape')\nEOF"},
+         "heredoc script body is invisible to the tokenizer"),
+        # --- archive modes that DO write -----------------------------------
+        ("terminal", {"command": "tar -czf ../archive.tar.gz ."},
+         "tar create with clustered -czf writing outside"),
+        ("terminal", {"command": "tar -xzf /tmp/p.tar.gz -C .."},
+         "tar extract into the parent"),
+        ("terminal", {"command": "unzip /tmp/p.zip -d ../out"},
+         "unzip extract into the parent"),
     ]
 
     allow: List[Case] = [
@@ -116,6 +149,25 @@ def _cases(policy: str, root: str, parent: str,
         ("write_file", {"path": "/tmp/scratch.txt", "content": "x"},
          "write into temp"),
         ("execute_code", {"code": "print(1 + 1)"}, "pure computation"),
+        # --- character devices ------------------------------------------
+        # `2>/dev/null` is not a filesystem write. Gating it blocked ordinary
+        # read commands in a live session and taught the operator to distrust
+        # the jail, which is worse than the risk it removed.
+        ("terminal", {"command": "hermes profile list 2>/dev/null"},
+         "stderr discarded to /dev/null"),
+        ("terminal", {"command": "find . -name '*.py' 2>/dev/null | head"},
+         "/dev/null inside a pipeline"),
+        ("terminal", {"command": "diff a.md b.md > /dev/null 2>&1"},
+         "stdout to /dev/null plus fd duplication"),
+        ("terminal", {"command": "python3 -V > /dev/stdout"},
+         "/dev/stdout resolves to /dev/fd/1"),
+        ("terminal", {"command": "cat f | tee /dev/stderr"},
+         "tee to /dev/stderr"),
+        # --- archives read, not write -----------------------------------
+        ("terminal", {"command": "tar -tzf .agents/tmp/x.tar.gz"},
+         "tar LIST is a pure read"),
+        ("terminal", {"command": "unzip -l /tmp/x.zip"},
+         "unzip LIST is a pure read"),
     ]
 
     if policy == "dev":
@@ -140,6 +192,25 @@ def _cases(policy: str, root: str, parent: str,
         escape += [
             ("write_file", {"path": os.path.join(root, ".git/config"),
                             "content": "x"}, "write into denied .git"),
+            # dev provisions sibling profiles, so <hermes>/profiles is
+            # writable — but the shared credential store one level up is not.
+            ("write_file", {"path": os.path.expanduser("~/.hermes/.env"),
+                            "content": "x"},
+             "write the shared API-key .env"),
+            ("terminal", {"command": "cp secrets ~/.hermes/.env"},
+             "overwrite the shared .env via cp"),
+        ]
+        allow += [
+            # dev provisions sibling profiles. Use a path that is NOT itself a
+            # symlink: `.env` in a live profile points at the shared credential
+            # store, and resolving through it correctly lands on a denied
+            # target. Asserting "allowed" there made the case depend on whether
+            # provisioning had already run on this machine.
+            ("write_file",
+             {"path": os.path.expanduser(
+                 "~/.hermes/profiles/benchmark-ste-code/config.yaml"),
+              "content": "model: x"},
+             "provision a sibling profile"),
         ]
 
     elif policy == "user":
