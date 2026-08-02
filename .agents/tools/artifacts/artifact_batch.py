@@ -167,7 +167,8 @@ def _assemble(dry_run: bool, version: str) -> tuple[bool, dict]:
     (ARTIFACTS_DIR / "llms-full.txt").write_text(full, encoding="utf-8")
     VERSION_PATH.write_text(version + "\n", encoding="utf-8")
     STATE_DIR.mkdir(parents=True, exist_ok=True)
-    CHECKPOINT_PATH.write_text(json.dumps({"assembled": len(rule_files), "version": version}, indent=2))
+    from ste_checkpoint import save
+    save(CHECKPOINT_PATH, {"assembled": len(rule_files), "version": version})
     print(f"Wrote llms-full.txt ({len(rule_files)} rules, version {version})")
     return True, {"rule_count": len(rule_files), "version": version}
 
