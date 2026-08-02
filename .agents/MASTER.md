@@ -49,7 +49,8 @@ All terms used throughout this project. Agents must use these exact terms.
 | STE writing rules | 53 original → 51 adapted + 4 GR |
 | Spec pages | 434 | — |
 | Spec version | Issue 9, January 2025 | — |
-| Worker model | `poolside/laguna-s-2.1:free` | "deepseek-pro" or "flash" |
+| Worker model (pipeline default) | `tencent/hy3:free` (set in `.agents/config/defaults.yaml`) | "deepseek-pro" or "flash" |
+| Worker model (benchmark suite) | `poolside/laguna-s-2.1:free` (set in `.agents/benchmark/config`) | — |
 | Workers per batch | 3 | — |
 | Pages per worker | 4 | — |
 | Total workers | 109 | — |
@@ -68,9 +69,9 @@ All terms used throughout this project. Agents must use these exact terms.
 | `.agents/state/` | Workflow | PROGRESS.md, REFINE-PROGRESS.md |
 | `.agents/audit/` | Workflow | Audit reports, state snapshots |
 | `.agents/prompts/refine/` | Workflow | 109 refinement worker prompts |
-| `.agents/tools/quality/` | Workflow | verify-batch.sh, check-rails.py |
+| `.agents/tools/quality/` | Workflow | check-rails.py, check-tables.py |
 | `.agents/feedback/` | Workflow | exchange.md (orchestrator↔reviewer) |
-| `.agents/skills/` | Workflow | 8 SKILL.md files + references |
+| `.agents/skills/` | Workflow | 24 SKILL.md files + references |
 | `.agents/_scratch/` | Workflow | Quarantined premature files |
 | `spec/issue-09-2025/` | Source | 434 page .md files |
 | `spec/issue-07-2017/` | Source | 382 page .md files |
@@ -78,64 +79,13 @@ All terms used throughout this project. Agents must use these exact terms.
 
 ---
 
-## MISSION HISTORY
-
-### Phase 0 — Foundation (2026-07-29)
-
-- Downloaded ASD-STE100 Issue 7 (382pp) and Issue 9 (434pp) PDFs
-- Extracted all PDFs to individual page markdown files (840 pages total)
-- Created 8 extracted reference documents from conversation analysis
-- Named: 01-ste-introduction.md through 08-self-reading-manual.md
-
-### Phase 1 — Architecture Design (2026-07-29)
-
-- Designed the 5-stage pipeline: Extract → Refine → Merge → Adapt → Artifacts
-- Created initial system prompt, extraction methodology, and worked example
-- Established PRESERVE/REPLACE rules for STE→STE-Code adaptation
-- Mapped 19 STE categories to 19 STE-Code categories
-
-### Phase 2 — First Attempt & Corrections (2026-07-29)
-
-- **Error**: Agent fabricated 6 artifact files before extraction complete
-- **Error**: Claimed "22 categories" — corrected to 19
-- **Error**: Claimed "deepseek-pro normalizes to flash" — corrected to `poolside/laguna-s-2.1:free`
-- **Error**: Agent claimed "CORE ARTIFACTS COMPLETE" with 288 pages unread
-- **Correction**: Created v2/v3 protocol with hard gates and verification
-
-### Phase 3 — Worker Swarm (2026-07-30)
-
-- Extraction orchestrator launched: 109 workers, 37 batches of 3
-- **Complete**: All 109 extraction workers finished (434/434 pages)
-- Refinement orchestrator launched: 54 prompts generated, ~54 files refined
-- **Status**: Refinement at ~50% (54/109), remaining prompts need generation
-
-### Phase 4 — Rails & Quality (2026-07-30)
-
-- Created 8 immutable rails preventing common mistake classes
-- Created worker rails (10 self-checks per worker)
-- Created batch verification script and rails compliance checker
-- Separated data (`ste-code/`) from workflow (`.agents/`)
-- Created agent state report skill for standardized status reporting
-
----
-
-## CURRENT STATE
-
-```
-Stage 1 — Extraction:   ✅ 109/109 (100%)   434/434 pages
-Stage 2 — Refinement:   🟢 ~54/109 (~50%)   ~216/434 pages
-Stage 3 — Merge:        🟡 master-raw.md exists, needs dedup
-Stage 4 — Adaptation:   ⬜ Pending
-Stage 5 — Artifacts:    ⬜ Pending
-```
-
-**Active**: Refinement orchestrator processing batches
-**Blocked**: Nothing
-**Next**: Complete refinement, run merge, begin adaptation
-
----
-
 ## EXECUTION FROM SCRATCH
+
+> **Launch tooling note:** the `hermes -z ... --yolo &` snippets below are the
+> *original* launch pattern. The current canonical launcher is the oneshot
+> wrapper (see CANONICAL TOOLS) — `hermes -z` in `terminal(background=true)`
+> opens a TUI and is now an anti-pattern. Prefer
+> `python3 .agents/tools/lib/hermes-oneshot-wrapper.py <prompt> --model <model>`.
 
 ### Prerequisites
 
@@ -165,7 +115,7 @@ hermes -z "$(cat .agents/prompts/refine/r002-prompt.txt)" -m poolside/laguna-s-2
 hermes -z "$(cat .agents/prompts/refine/r003-prompt.txt)" -m poolside/laguna-s-2.1:free --yolo &
 
 # After each batch:
-bash .agents/tools/quality/verify-batch.sh extracted w w001 w002 w003
+bash .agents/tools/quality/check-rails.py extracted w w001 w002 w003
 # Update .agents/state/PROGRESS.md
 ```
 
@@ -175,7 +125,7 @@ bash .agents/tools/quality/verify-batch.sh extracted w w001 w002 w003
 # Generate 109 refinement prompts (each: read extracted/NNN, write refined/NNN)
 # Launch same batch pattern as extraction
 # After each batch:
-bash .agents/tools/quality/verify-batch.sh refined r r001 r002 r003
+bash .agents/tools/quality/check-rails.py refined r r001 r002 r003
 ```
 
 ### Step 4: Merge
@@ -284,6 +234,11 @@ Full details: `.agents/references/rails.md`
 - ❌ `hermes -z "$(cat file)"` in `terminal(background=true)` — opens TUI, does not process
 - ❌ `subprocess.Popen(["hermes", "-z", ...])` — unreliable stdout capture
 - ❌ Custom Python wrappers that call `hermes -z` via subprocess — use oneshot wrapper instead
+
+**Configuration & shared helpers:** every tunable lives in `config.yaml`
+(per unit) merged under `.agents/config/defaults.yaml`; all writes go through
+`ste_io`, the agent runtime path through `ste_paths`, pre-flight knobs through
+`ste_runtime`. See `tools/lib/README.md`.
 
 ## AGENT RULE ACCESS
 

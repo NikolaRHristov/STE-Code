@@ -27,7 +27,11 @@ if pid == 0:
     os.chdir(str(PROJECT))
     env = os.environ.copy()
     env["HERMES_REASONING_EFFORT"] = "medium"  # or "high"
-    os.execvpe(VENV_PYTHON, [VENV_PYTHON, str(WRAPPER), str(tmp), "--model", "tencent/hy3:free"], env)
+    from ste_paths import venv_python
+    from ste_runtime import resolve as _resolve_rt
+    rt = _resolve_rt(__file__)
+    os.execvpe(venv_python(), [venv_python(), rt.wrapper, str(tmp),
+                "--model", CFG.model], env)
     os._exit(1)
 ```
 
@@ -247,11 +251,25 @@ Level 4: ASSEMBLY    Assembly script ready, pending execution        🔄 Ready
 
 ---
 
+## 10. Configuration & Shared Helpers
+
+Every tunable lives in config, never hardcoded. Each `tools/<unit>/` owns a
+`config.yaml` (its footprint: inputs, outputs, layout, agent overrides). The
+shared `.agents/config/defaults.yaml` supplies `agent:` (model, timeout,
+workers) and `runtime:` (retry_attempts, batch_divisor, encoding) knobs merged
+underneath, so the unit always wins. Stages read `ste_config.load(__file__)`
+for footprint and `ste_runtime.resolve(__file__)` for pre-flight knobs.
+
+All file writes go through `ste_io` (confined to the repo by the jail policy);
+the agent runtime path comes from `ste_paths` (`venv_python()`, `wrapper_path()`).
+No script declares `VENV_PYTHON` / `WRAPPER` / `open(...,"w")` literals — those
+are centralized in the helpers. See `tools/lib/README.md`.
+
 ## 9. Quick Reference
 
 ```bash
-# Run a single worker
-python3 .agents/tools/lib/hermes-oneshot-wrapper.py prompt.txt --model tencent/hy3:free
+# Run a single worker (model injected from config via ste_config)
+python3 .agents/tools/lib/hermes-oneshot-wrapper.py prompt.txt --model "$(python3 -c 'from ste_config import load; print(load(".agents/tools/refinement/refine_batch.py").model)')"
 
 # Run Phase A (maturity fixes)
 python3 .agents/tools/runners/phase-a-run.py
