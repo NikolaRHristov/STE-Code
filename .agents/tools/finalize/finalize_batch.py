@@ -58,6 +58,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -293,7 +294,7 @@ def synthesize_file(adapted_path: Path) -> bool:
     tmp = PROJECT / ".agents" / "tmp"
     tmp.mkdir(parents=True, exist_ok=True)
     pf = tmp / f"finalize-{adapted_path.stem}.txt"
-    pf.write_text(prompt)
+    write_text(pf, prompt)
 
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "600", "STE_MODEL": MODEL}
     # The session (worker) READS the source and WRITES ste-code/final/rules/<name>
@@ -317,7 +318,7 @@ def synthesize_file(adapted_path: Path) -> bool:
         return True
     # Save the agent's stdout as trajectory/history (like refinement/extraction),
     # NOT as the output file.
-    (tmp / f"finalize-traj-{adapted_path.stem}.txt").write_text(r.stdout, encoding="utf-8")
+    write_text((tmp / f"finalize-traj-{adapted_path.stem}.txt"), r.stdout)
     # Gate on the file the SESSION itself wrote (not our stdout).
     if _valid_rule(out_path):
         with _lock:
@@ -401,7 +402,7 @@ def _regen_progress():
     ]
     out = PROGRESS_PATH
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text(out, "\n".join(lines) + "\n")
     print(f"  progress regenerated -> {out}: {enriched} enriched / {stale} stale / {len(files)} total",
           flush=True)
     return out
