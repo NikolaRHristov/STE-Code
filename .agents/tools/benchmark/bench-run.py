@@ -7,7 +7,6 @@ Usage: python3 .agents/tools/benchmark/bench-run.py <level> [--dry-run]
 
 import json, subprocess, sys, time
 from pathlib import Path
-from datetime import datetime, timezone
 
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
@@ -19,6 +18,7 @@ from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
+from ste_time import run_stamp  # noqa: E402
 TEST_DIR = PROJECT / ".agents" / "benchmark" / "test-cases"
 RESULTS_DIR = PROJECT / ".agents" / "benchmark" / "results-v3"
 
@@ -105,7 +105,7 @@ def main():
         return
 
     mkdir(RESULTS_DIR)
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    timestamp = run_stamp()
     results = []
 
     for i, tc in enumerate(tests):

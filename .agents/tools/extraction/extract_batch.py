@@ -53,6 +53,7 @@ from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir, write_json  # noqa: E402
+from ste_time import run_stamp  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -234,7 +235,7 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
 
     mkdir(TELEMETRY_DIR)
     mkdir(LOG_DIR)
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    timestamp = run_stamp()
     telemetry_path = TELEMETRY_DIR / f"w{worker_num:03d}-{timestamp}.json"
 
     start_time = time.time()

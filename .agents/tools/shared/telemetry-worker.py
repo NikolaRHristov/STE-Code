@@ -48,6 +48,7 @@ from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_json  # noqa: E402
+from ste_time import run_stamp  # noqa: E402
 TELEMETRY_DIR = os.path.join(PROJECT, ".agents", "telemetry")
 os.makedirs(TELEMETRY_DIR, exist_ok=True)
 
@@ -126,7 +127,7 @@ def main():
 
     # Telemetry record
     reasoning = load_reasoning_effort()
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    timestamp = run_stamp()
     telemetry = {
         "worker_id": worker_id,
         "invocation": invocation,
