@@ -77,6 +77,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 engine = _load_module(
     "group_engine", PROJECT / ".agents" / "tools" / "grouping" / "group_engine.py")
 pipeline_core = _load_module(
@@ -513,7 +514,7 @@ def assemble_all(plan, idx, man, id2pos, force=False) -> int:
             skipped += 1
             continue
 
-        gfile.write_text(text, encoding="utf-8")
+        write_text(gfile, text)
         # verify against disk (Lesson #4)
         reread = gfile.read_text(encoding="utf-8")
         # Source pages must be normalized the SAME way assemble_group normalized
