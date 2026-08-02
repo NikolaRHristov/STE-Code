@@ -48,6 +48,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -105,7 +106,7 @@ def _prepare_bundle() -> tuple[int, str]:
     if cur:
         chunks.append("\n\n---\n\n".join(cur))
     for i, c in enumerate(chunks):
-        (BUNDLE_DIR / f"chunk-{i:03d}.md").write_text(c, encoding="utf-8")
+        write_text((BUNDLE_DIR / f"chunk-{i:03d}.md"), c)
     manifest = "\n".join(
         f"- Read `{BUNDLE_DIR / f'chunk-{i:03d}.md'}` (part {i+1}/{len(chunks)})"
         for i in range(len(chunks)))
@@ -155,13 +156,13 @@ def _distill_subdoc(tier_dir, subdoc_name, level_label, desc, manifest) -> bool:
     tmp = PROJECT / ".agents" / "tmp"
     tmp.mkdir(parents=True, exist_ok=True)
     pf = tmp / f"artifact-{tier_dir}-{subdoc_name}.txt"
-    pf.write_text(prompt)
+    write_text(pf, prompt)
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "1800", "STE_MODEL": MODEL}
     try:
         r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
                            capture_output=True, text=True, timeout=TIMEOUT_SECONDS,
                            env=env, cwd=str(PROJECT))
-        (tmp / f"artifact-traj-{tier_dir}-{subdoc_name}.txt").write_text(r.stdout, encoding="utf-8")
+        write_text((tmp / f"artifact-traj-{tier_dir}-{subdoc_name}.txt"), r.stdout)
         if out.exists() and out.stat().st_size > 200:
             return True
         _fallback_subdoc(tier_dir, subdoc_name)
@@ -175,9 +176,9 @@ def _fallback_subdoc(tier_dir, subdoc_name):
     src = BASE_DIR / tier_dir / subdoc_name
     dst = ARTIFACTS_DIR / tier_dir / subdoc_name
     if src.exists():
-        dst.write_text(src.read_text(errors="ignore"), encoding="utf-8")
+        write_text(dst, src.read_text(errors="ignore"))
     else:
-        dst.write_text(f"# {subdoc_name} (base only)\n", encoding="utf-8")
+        write_text(dst, f"# {subdoc_name} (base only)\n")
 
 
 def _assemble_llms_files():
@@ -193,7 +194,7 @@ def _assemble_llms_files():
         idx.append(f"- [{d}/]({d}/) — level {l} — {dict((x[1],x[2]) for x in LEVELS)[l]}")
     idx += ["", "## Full standard", "",
             "- [llms-full.txt](llms-full.txt) — concatenation of every distilled sub-document."]
-    (ARTIFACTS_DIR / "llms.txt").write_text("\n".join(idx) + "\n", encoding="utf-8")
+    write_text((ARTIFACTS_DIR / "llms.txt"), "\n".join(idx) + "\n")
 
     full = []
     for d, _ in present_tiers:
@@ -205,7 +206,7 @@ def _assemble_llms_files():
             if sf.name == "_index.md":
                 continue
             full.append(f"\n## {sf.name}\n\n" + sf.read_text(errors="ignore"))
-    (ARTIFACTS_DIR / "llms-full.txt").write_text("\n\n".join(full), encoding="utf-8")
+    write_text((ARTIFACTS_DIR / "llms-full.txt"), "\n\n".join(full))
     print(f"  wrote llms.txt + llms-full.txt ({len(present_tiers)} tiers)", flush=True)
 
 
@@ -233,7 +234,7 @@ def _regen_progress():
               f"- sub-docs done: {done_n} / {total}",
               f"- tiers: {sum(1 for _,_,s,_ in rows if s=='done')}/{len(LEVELS)} complete"]
     PROGRESS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    PROGRESS_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text(PROGRESS_PATH, "\n".join(lines) + "\n")
     print(f"  progress regenerated: {done_n}/{total} sub-docs", flush=True)
 
 
@@ -304,7 +305,7 @@ def main():
                f"> {desc}", "", "## Sub-documents", ""]
         for s in subs:
             idx.append(f"- {s}")
-        (adir / "_index.md").write_text("\n".join(idx) + "\n", encoding="utf-8")
+        write_text((adir / "_index.md"), "\n".join(idx) + "\n")
         _git_commit_locked([str((adir).relative_to(PROJECT))],
                           f"Phase F: LLM-distill tier {d} ({len(subs)} sub-docs)")
         _regen_progress()
