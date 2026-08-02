@@ -52,7 +52,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text, mkdir  # noqa: E402
+from ste_io import write_text, mkdir, write_json  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -343,8 +343,7 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
 def _save_telemetry(path, data):
     """Save telemetry JSON."""
     try:
-        with open(path, "w") as f:
-            json.dump(data, f, indent=2)
+        write_json(path, data)
     except Exception:
         pass
 
@@ -364,12 +363,8 @@ def _load_checkpoint():
 
 def _save_checkpoint(checkpoint):
     """Atomically write the checkpoint file for crash-safe resume."""
-    mkdir(STATE_DIR)
-    tmp_path = str(CHECKPOINT_PATH) + ".tmp"
     try:
-        with open(tmp_path, "w") as f:
-            json.dump(checkpoint, f, indent=2, default=str)
-        os.replace(tmp_path, str(CHECKPOINT_PATH))
+        write_json(CHECKPOINT_PATH, checkpoint)
     except Exception:
         pass
 

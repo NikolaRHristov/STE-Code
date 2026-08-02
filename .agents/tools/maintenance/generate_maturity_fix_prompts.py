@@ -12,6 +12,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 PROMPTS_DIR = os.path.join(PROJECT, ".agents", "prompts", "maturity-fixes")
 AUDIT_DIR = os.path.join(PROJECT, ".agents", "audit")
 
@@ -102,7 +103,6 @@ for mf in maturity_files:
         )
         safe_name = target_file.replace("/", "-").replace(".", "-")
         prompt_file = os.path.join(PROMPTS_DIR, f"fix-{prompt_count:03d}-{safe_name[:40]}.txt")
-        with open(prompt_file, "w") as f:
-            f.write(prompt)
+        write_text(prompt_file, prompt)
 
 print(f"Generated {prompt_count} prompts in {PROMPTS_DIR}/")

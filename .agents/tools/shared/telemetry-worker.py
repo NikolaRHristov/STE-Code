@@ -47,6 +47,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_json  # noqa: E402
 TELEMETRY_DIR = os.path.join(PROJECT, ".agents", "telemetry")
 os.makedirs(TELEMETRY_DIR, exist_ok=True)
 
@@ -206,8 +207,7 @@ def main():
         print(f"[telemetry] ERROR: {e}")
 
     # Write telemetry
-    with open(telemetry_path, "w") as f:
-        json.dump(telemetry, f, indent=2)
+    write_json(telemetry_path, telemetry)
 
     return telemetry["exit_code"] if telemetry["exit_code"] and telemetry["exit_code"] > 0 else (1 if not telemetry["output_exists"] else 0)
 

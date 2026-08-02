@@ -286,8 +286,7 @@ def generate_prompts(
 
         # Write the prompt file.
         try:
-            with open(prompt_path, "w", encoding="utf-8") as pf:
-                pf.write(prompt)
+            write_text(prompt_path, prompt)
         except OSError as exc:
             log.error("Cannot write prompt file: %s — %s", prompt_path, exc)
             continue

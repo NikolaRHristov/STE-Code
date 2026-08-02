@@ -12,6 +12,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 PROMPTS_DIR = os.path.join(PROJECT, ".agents", "prompts", "expansion-pass1")
 ADAPTED_DIR = os.path.join(PROJECT, "ste-code", "adapted")
 MASTER_FILE = os.path.join(PROJECT, "ste-code", "merged", "master.md")
@@ -112,8 +113,7 @@ OUTPUT FORMAT (valid JSON only):
 Do NOT create files. Output JSON to stdout only.
 """
         prompt_file = os.path.join(PROMPTS_DIR, f"pass1-batch-{batch_num:03d}.txt")
-        with open(prompt_file, "w") as f:
-            f.write(prompt)
+        write_text(prompt_file, prompt)
 
 print(f"Generated {batch_num} prompts in {PROMPTS_DIR}/")
 print(f"Dedup blacklist: {len(dedup_examples)} existing examples loaded")
