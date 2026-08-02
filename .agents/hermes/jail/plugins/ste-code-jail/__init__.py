@@ -57,8 +57,10 @@ if str(_JAIL_ROOT) not in sys.path:
 from core.policy import load_context  # noqa: E402
 
 # Order matters: cheapest and broadest checks first, so a denied tool is
-# refused before its arguments are parsed.
-COMPONENTS = ("jail-net", "jail-cmd", "jail-fs")
+# refused before its arguments are parsed. `jail-exec-wrap` runs LAST because
+# it rewrites the command in place — it must see the final string, after every
+# inspecting component has had the chance to refuse it outright.
+COMPONENTS = ("jail-net", "jail-cmd", "jail-fs", "jail-exec-wrap")
 
 
 def _load_component(name: str):

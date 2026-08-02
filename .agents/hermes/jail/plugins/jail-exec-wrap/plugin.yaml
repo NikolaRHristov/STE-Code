@@ -1,0 +1,6 @@
+name: jail-exec-wrap
+version: "1.0.0"
+description: "Force opaque subprocesses through the kernel sandbox (Seatbelt/bubblewrap) under the user and bench policies. Granular component of ste-code-jail; closes the gap where argument inspection cannot see inside python3 build.py. The dev policy is not wrapped."
+author: STE-Code
+hooks:
+  - pre_tool_call
