@@ -21,6 +21,7 @@ import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+from ste_io import mkdir  # noqa: E402
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 
@@ -111,7 +112,7 @@ def _ensure_directory(path: Path, label: str) -> None:
         label: Human-readable label for error messages (e.g. 'output').
     """
     try:
-        path.mkdir(parents=True, exist_ok=True)
+        mkdir(path)
     except PermissionError:
         log.error(
             "Cannot create %s directory: %s — permission denied.",
