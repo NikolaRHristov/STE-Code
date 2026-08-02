@@ -33,7 +33,14 @@ silently ships empty work.
 
 ## Pitfalls
 
-- `status=completed` + HTTP 429/524 in transcript = gave up, not finished.
+- `status=completed` + HTTP 429/524 in transcript = gave up, not finished —
+  **with one exception.** A 429 can land at the *tail* of the transcript: the
+  summary-transport call failing *after* the delegate already wrote its
+  deliverables. In that case `status=completed` + a 429 + a real on-disk
+  deliverable = a completed task. Do NOT discard the work. The 429 alone is not
+  proof of failure; it is a reason to verify on disk (which you must do anyway).
+  Only treat 429 as failure when the deliverable is genuinely absent — confirm
+  with `ls`/reads before re-launching.
 - The jail may reject `python3 - <<'EOF>` heredocs as a write to `/` (false
   positive). Write the salvage script to `.agents/tmp/` and run it instead.
 - A delegate that says "done?" or pastes an error as a result has not verified
