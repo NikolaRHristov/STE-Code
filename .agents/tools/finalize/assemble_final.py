@@ -35,6 +35,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 GROUPED_DIR = PROJECT / "ste-code" / "grouped"
@@ -91,7 +92,7 @@ def consolidate():
             kind = e.get("kind", "page")
             loc = e.get("local_path") or e.get("url")
             cat_lines.append(f"| {e['title']} | {kind} | [{e['url']}]({loc}) |")
-    (FINAL_DIR / "reference-catalogue.md").write_text("\n".join(cat_lines) + "\n", encoding="utf-8")
+    write_text((FINAL_DIR / "reference-catalogue.md"), "\n".join(cat_lines) + "\n")
 
     # 4) provenance.md — audit trail of every layer
     prov = ["# Provenance — STE-Code pipeline stages\n",
@@ -105,7 +106,7 @@ def consolidate():
             "| E Extension | ste-code/extensions/ | code-domain vocabulary gap-fills |",
             "| References | .agents/reference/ | vendor/community vocab (catalogued) |",
             "\nConsolidated into ste-code/final/ by assemble_final.py.\n"]
-    (FINAL_DIR / "provenance.md").write_text("\n".join(prov), encoding="utf-8")
+    write_text((FINAL_DIR / "provenance.md"), "\n".join(prov))
 
     # 5) README.md — master index
     readme = ["# STE-Code — Consolidated Standard (final/)\n",
@@ -119,7 +120,7 @@ def consolidate():
               "\n## Use\n",
               "Load `rules/` as the canonical rule set; `extensions/` as the approved "
               "vocabulary; consult `reference-catalogue.md` for external authority.\n"]
-    (FINAL_DIR / "README.md").write_text("\n".join(readme), encoding="utf-8")
+    write_text((FINAL_DIR / "README.md"), "\n".join(readme))
 
     print(f"  ASSEMBLE: rules={n_rules} extensions={n_ext} -> ste-code/final/")
     if not _git_commit_locked([str(FINAL_DIR.relative_to(PROJECT))],
