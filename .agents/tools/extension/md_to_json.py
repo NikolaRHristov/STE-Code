@@ -14,6 +14,7 @@ import sys
 import re
 import json
 from pathlib import Path
+from ste_io import write_text  # noqa: E402
 
 
 def parse_entry(block: str) -> dict:
@@ -60,7 +61,7 @@ def md_to_json(md_path: Path) -> Path:
         entries.append(parse_entry(p))
     entries = [e for e in entries if e]
     out = md_path.with_suffix(".json")
-    out.write_text(json.dumps(entries, indent=2, ensure_ascii=False), encoding="utf-8")
+    write_text(out, json.dumps(entries, indent=2, ensure_ascii=False))
     return out
 
 
