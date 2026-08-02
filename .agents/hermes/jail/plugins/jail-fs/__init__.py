@@ -50,7 +50,7 @@ _JAIL_ROOT = _find_jail_root()
 if str(_JAIL_ROOT) not in sys.path:
     sys.path.insert(0, str(_JAIL_ROOT))
 
-from core.analysis import write_targets  # noqa: E402
+from core.analysis import is_passthrough_device, write_targets  # noqa: E402
 from core.policy import load_context  # noqa: E402
 
 # Tools whose arguments can name a write destination.
@@ -97,6 +97,11 @@ def _on_pre_tool_call(
         if resolved in seen:
             continue
         seen.add(resolved)
+        # `2>/dev/null` and friends write to a character device, not a file.
+        # Gating them blocks ordinary read commands and teaches the operator
+        # to distrust the jail, which is worse than the risk it removes.
+        if is_passthrough_device(resolved):
+            continue
         reason = policy.may_write(resolved)
         if reason:
             violations.append(f"  - {label}: {resolved} ({reason})")

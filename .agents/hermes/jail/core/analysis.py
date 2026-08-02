@@ -52,16 +52,44 @@ _WRITE_COMMANDS: Dict[str, str] = {
     "truncate": "all", "chmod": "all", "chown": "all", "mkfifo": "all",
     "mktemp": "all", "unlink": "all", "shred": "all",
     "cp": "last", "mv": "last", "install": "last", "rsync": "last",
-    "ln": "last", "tee": "all", "dd": "all", "zip": "all", "tar": "all",
-    "unzip": "all", "curl": "all", "wget": "all", "git": "all",
-    "sed": "all", "perl": "all", "ruby": "all", "awk": "all",
+    "ln": "last", "tee": "all", "dd": "all", "curl": "all", "wget": "all",
+    "git": "all", "sed": "all", "perl": "all", "ruby": "all", "awk": "all",
 }
+
+# Archive tools need mode-dependent analysis: `tar -x` READS the archive and
+# WRITES to the extraction directory, while `tar -c` writes the archive and
+# reads the tree. Treating every operand as a write (the old behaviour) made
+# `tar -tzf repo/x.tar.gz` a policy violation under the locked-down profiles —
+# a false positive on a pure listing. Handled by ``_archive_targets``.
+_ARCHIVE_COMMANDS = frozenset({"tar", "unzip", "zip"})
 
 # Interpreters whose inline-script flag carries code we must look inside.
 _INLINE_CODE_FLAGS = {
     "python": ("-c",), "python3": ("-c",), "node": ("-e", "--eval"),
     "ruby": ("-e",), "perl": ("-e",), "sh": ("-c",), "bash": ("-c",),
     "zsh": ("-c",), "dash": ("-c",),
+}
+
+# Wrappers that run another command. The real command is the first operand
+# after the wrapper's own flags, so analysis must step past them — otherwise
+# `sudo mkdir ../x` is read as a call to `sudo` and its operands are ignored.
+# Each entry maps the wrapper to the flags that consume a following argument.
+_COMMAND_PREFIXES: Dict[str, frozenset] = {
+    "sudo": frozenset({"-u", "-g", "-p", "-C", "--user", "--group"}),
+    "doas": frozenset({"-u"}),
+    "env": frozenset({"-u", "--unset", "-C", "--chdir"}),
+    "nice": frozenset({"-n", "--adjustment"}),
+    "ionice": frozenset({"-c", "-n", "-p"}),
+    "nohup": frozenset(),
+    "time": frozenset({"-o", "-f", "--format", "--output"}),
+    "timeout": frozenset({"-s", "--signal", "-k", "--kill-after"}),
+    "stdbuf": frozenset({"-i", "-o", "-e"}),
+    "setsid": frozenset(),
+    "command": frozenset(),
+    "exec": frozenset(),
+    "xargs": frozenset({"-I", "-n", "-P", "-d", "-E", "-L", "-s", "--replace",
+                        "--max-args", "--max-procs", "--delimiter"}),
+    "watch": frozenset({"-n", "--interval"}),
 }
 
 # Shell operators that end a command segment.
@@ -73,8 +101,52 @@ _REDIRECT_TOKENS = {">", ">>", ">|", "&>", "&>>", "1>", "2>", "1>>", "2>>"}
 # Flags that name a directory the command operates in.
 _DIR_FLAGS = {"-C", "--directory", "--cd", "-o", "--output", "--output-dir"}
 
+# Per-command flags that name a write destination but are too ambiguous to put
+# in the shared set. `-d` means "extract to DIR" for unzip and "delete" for
+# several other tools, so it is scoped to the commands where it is a target.
+_EXTRA_DIR_FLAGS: Dict[str, frozenset] = {
+    "unzip": frozenset({"-d"}),
+    "rsync": frozenset({"--backup-dir"}),
+}
+
+# Operands of the form ``key=value`` that name a file the command writes.
+# ``dd of=../wipe.img`` carries its destination this way and matches no other
+# rule: it is not a redirect, not a flag, and not a positional operand.
+_KEYVALUE_WRITE_OPERANDS: Dict[str, Tuple[str, ...]] = {
+    "dd": ("of",),
+}
+
 # A token that could denote a filesystem path.
 _PATHLIKE_RE = re.compile(r"^(?:[~./]|[A-Za-z0-9_.\-]+/)")
+
+# Character devices and stdio that every shell pipeline writes to. Writing to
+# them mutates no file, so gating them produces pure false positives — the
+# `2>/dev/null` on an ordinary read command being the obvious one. This mirrors
+# the device allow-list in the Seatbelt profile emitted by scripts/jail-lib.sh,
+# so both layers agree on what is not a filesystem write.
+#
+# The match is exact, never a prefix: `/dev/` as a subpath would re-open the
+# hole this list is carved out of (`/dev/rdisk1` destroys a disk, and
+# `/dev/../Users/x` escapes entirely). Anything under /dev not named here stays
+# gated.
+_DEVICE_WRITE_ALLOW = frozenset({
+    "/dev/null", "/dev/zero", "/dev/tty", "/dev/stdout", "/dev/stderr",
+    "/dev/stdin", "/dev/console", "/dev/dtracehelper", "/dev/random",
+    "/dev/urandom",
+})
+
+# /dev/fd/N and /dev/ttysNNN are numbered per process, so they need a pattern.
+_DEVICE_WRITE_ALLOW_RE = re.compile(r"^/dev/(?:fd/[0-9]+|ttys[0-9]+|pts/[0-9]+)$")
+
+
+def is_passthrough_device(resolved: str) -> bool:
+    """True when *resolved* is a character device that writes to no file.
+
+    Callers use this to skip gating a target: ``echo x > /dev/null`` is not a
+    filesystem write in any sense the policy cares about.
+    """
+    return (resolved in _DEVICE_WRITE_ALLOW
+            or bool(_DEVICE_WRITE_ALLOW_RE.match(resolved)))
 
 # Quoted string literals inside embedded code.
 _STRING_LITERAL_RE = re.compile(r"""(?:'([^']{1,400})'|"([^"]{1,400})")""")
@@ -129,6 +201,110 @@ def _basename(command_word: str) -> str:
     return os.path.basename(expand(command_word)).lower()
 
 
+def _strip_command_prefixes(tokens: List[str]) -> List[str]:
+    """Drop wrapper commands so the real command word leads the segment.
+
+    ``sudo mkdir -p ../x`` must be analysed as ``mkdir -p ../x``. Without this
+    the segment's command word is ``sudo``, which is in no write table, and
+    every operand — including the escaping path — is silently ignored.
+
+    Also drops ``VAR=value`` assignment prefixes (``HOME=/x mkdir $HOME/y``)
+    and, for ``xargs``, the ``-I{}`` placeholder form that attaches its value.
+    Bounded by the token count so a pathological input cannot spin.
+    """
+    index = 0
+    limit = len(tokens)
+    while index < limit:
+        word = tokens[index]
+        # `VAR=value cmd ...` — an assignment prefix, not the command.
+        if re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", word):
+            index += 1
+            continue
+        name = _basename(word)
+        flags = _COMMAND_PREFIXES.get(name)
+        if flags is None:
+            break
+        index += 1
+        # Step past the wrapper's own options.
+        while index < limit:
+            token = tokens[index]
+            if not token.startswith("-") or token == "-":
+                break
+            # `-I{}` / `-n5` attach their value; `-I {}` consumes the next one.
+            if token in flags and index + 1 < limit:
+                index += 2
+            else:
+                index += 1
+    return tokens[index:]
+
+
+def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
+    """Write targets for ``tar`` / ``unzip`` / ``zip``, by operating mode.
+
+    Archive tools read in one mode and write in another, so a single "every
+    operand is a write" rule is wrong in both directions. It flags listing an
+    archive (``tar -tzf x.tar.gz``) as a violation while giving no special
+    weight to the extraction directory, which is where the writes land.
+
+    Mode is read from the flags:
+
+    ==========================  ============================================
+    Mode                        Write target
+    ==========================  ============================================
+    ``tar -x`` (extract)        the ``-C`` directory, else the cwd
+    ``tar -c`` (create)         the archive named by ``-f``
+    ``tar -t`` (list)           nothing — a pure read
+    ``unzip`` (default)         the ``-d`` directory, else the cwd
+    ``unzip -l`` / ``-t``       nothing — a pure read
+    ``zip``                     the archive, i.e. the first operand
+    ==========================  ============================================
+    """
+    targets: List[Tuple[str, str]] = []
+    flags = "".join(t[1:] for t in body[1:]
+                    if t.startswith("-") and not t.startswith("--"))
+    long_flags = {t for t in body[1:] if t.startswith("--")}
+    operands = [t for t in body[1:]
+                if not t.startswith("-") and t not in _REDIRECT_TOKENS]
+
+    def dir_flag_value(*names: str) -> Optional[str]:
+        for index, token in enumerate(body):
+            if token in names and index + 1 < len(body):
+                return body[index + 1]
+        return None
+
+    if name == "tar":
+        listing = "t" in flags or "--list" in long_flags
+        extracting = "x" in flags or "--extract" in long_flags
+        creating = ("c" in flags or "r" in flags or "u" in flags
+                    or {"--create", "--append", "--update"} & long_flags)
+        if listing and not extracting and not creating:
+            return targets
+        if extracting:
+            # Extraction writes into -C, or the cwd when -C is absent. The
+            # bare cwd is reported so an outside workdir is still caught.
+            targets.append(("terminal(tar extract dir)",
+                            dir_flag_value("-C", "--directory") or "."))
+        if creating:
+            archive = dir_flag_value("-f", "--file")
+            if archive and archive != "-":
+                targets.append(("terminal(tar archive)", archive))
+        return targets
+
+    if name == "unzip":
+        if "l" in flags or "t" in flags or "v" in flags:
+            return targets
+        targets.append(("terminal(unzip dest)", dir_flag_value("-d") or "."))
+        return targets
+
+    if name == "zip":
+        # `zip archive.zip files...` — the archive is the first operand.
+        if operands:
+            targets.append(("terminal(zip archive)", operands[0]))
+        return targets
+
+    return targets
+
+
 def _embedded_paths(code: str) -> List[str]:
     """Path-like string literals in embedded code that also performs a write."""
     if not _EMBEDDED_WRITE_RE.search(code):
@@ -153,17 +329,25 @@ def _analyze_segment(
     if not tokens:
         return targets, cwd
 
-    name = _basename(tokens[0])
+    # Redirections are scanned over the ORIGINAL tokens, because a redirect may
+    # legally precede the command word (`> out.txt cat in.txt`). Everything
+    # else is analysed after wrapper commands are stripped.
+    body = _strip_command_prefixes(tokens)
+    if not body:
+        body = tokens
+
+    name = _basename(body[0])
 
     # `cd DIR` moves the cwd for every later segment. The destination itself
     # is not a write, so it is not reported as a target.
     if name == "cd":
-        operands = [t for t in tokens[1:] if not t.startswith("-")]
+        operands = [t for t in body[1:] if not t.startswith("-")]
         if operands:
             return targets, resolve_against(operands[0], cwd)
         return targets, os.path.expanduser("~")
 
-    # Redirections write regardless of the command (`cat x > ../y`).
+    # Redirections write regardless of the command (`cat x > ../y`). Scanned
+    # over the full token list because a redirect may precede the command word.
     index = 0
     while index < len(tokens):
         token = tokens[index]
@@ -180,42 +364,54 @@ def _analyze_segment(
             targets.append(("terminal(redirect)", match.group("path")))
         index += 1
 
-    # Directory-selecting flags (`git -C ..`, `curl -o ../x`).
-    for index, token in enumerate(tokens):
-        if token in _DIR_FLAGS and index + 1 < len(tokens):
-            targets.append((f"terminal({token})", tokens[index + 1]))
+    # Directory-selecting flags (`git -C ..`, `curl -o ../x`, `unzip -d ../x`).
+    dir_flags = set(_DIR_FLAGS) | _EXTRA_DIR_FLAGS.get(name, frozenset())
+    for index, token in enumerate(body):
+        if token in dir_flags and index + 1 < len(body):
+            targets.append((f"terminal({token})", body[index + 1]))
         elif token.startswith("--output=") or token.startswith("--directory="):
             targets.append(("terminal(flag)", token.split("=", 1)[1]))
+
+    # `key=value` operands that name an output file (`dd of=../wipe.img`).
+    for key in _KEYVALUE_WRITE_OPERANDS.get(name, ()):  # type: ignore[arg-type]
+        prefix = key + "="
+        for token in body[1:]:
+            if token.startswith(prefix):
+                targets.append((f"terminal({name} {key})", token[len(prefix):]))
 
     # Inline interpreter code: recurse into the script body.
     flags = _INLINE_CODE_FLAGS.get(name)
     if flags:
-        for index, token in enumerate(tokens):
-            if token in flags and index + 1 < len(tokens):
-                body = tokens[index + 1]
-                for literal in _embedded_paths(body):
+        for index, token in enumerate(body):
+            if token in flags and index + 1 < len(body):
+                script = body[index + 1]
+                for literal in _embedded_paths(script):
                     targets.append((f"terminal({name} {token})", literal))
                 # A nested `sh -c 'cd .. && mkdir x'` is itself a command line.
                 if name in {"sh", "bash", "zsh", "dash"}:
-                    nested, _ = _analyze_command(body, cwd)
+                    nested, _ = _analyze_command(script, cwd)
                     targets.extend(nested)
+
+    # Archive tools: mode decides whether this reads or writes.
+    if name in _ARCHIVE_COMMANDS:
+        targets.extend(_archive_targets(name, body))
 
     # Known write commands: their operands are write targets.
     mode = _WRITE_COMMANDS.get(name)
     if mode:
         # `sed -i` / `perl -i` only write with the in-place flag.
         if name in {"sed", "perl", "ruby", "awk"}:
-            if not any(re.match(r"^-[^-]*i", t) for t in tokens[1:]):
+            if not any(re.match(r"^-[^-]*i", t) for t in body[1:]):
                 mode = None
         # git only writes to a path for a subset of subcommands.
         if name == "git" and mode:
-            sub = next((t for t in tokens[1:] if not t.startswith("-")), "")
+            sub = next((t for t in body[1:] if not t.startswith("-")), "")
             if sub not in {"init", "clone", "worktree"}:
                 mode = None
 
     if mode:
         operands = [
-            t for t in tokens[1:]
+            t for t in body[1:]
             if not t.startswith("-")
             and t not in _REDIRECT_TOKENS
             and "://" not in t
@@ -236,11 +432,37 @@ def _analyze_segment(
     return targets, cwd
 
 
+_HEREDOC_RE = re.compile(
+    r"<<-?\s*(?P<quote>['\"]?)(?P<tag>[A-Za-z_][A-Za-z0-9_]*)(?P=quote)\s*\n"
+    r"(?P<bodytext>.*?)^\s*(?P=tag)\s*$",
+    re.MULTILINE | re.DOTALL,
+)
+
+
+def _heredoc_bodies(command: str) -> List[str]:
+    """Return the body text of every heredoc in *command*.
+
+    ``python3 - <<'EOF' ... EOF`` feeds a whole script through stdin. The
+    tokenizer sees only ``python3 -``, so without this the script body — and
+    any ``os.makedirs('../x')`` inside it — is invisible to the analysis.
+    """
+    return [m.group("bodytext") for m in _HEREDOC_RE.finditer(command)]
+
+
 def _analyze_command(command: str, cwd: str) -> Tuple[List[Tuple[str, str]], str]:
     """Analyse a full shell command line, threading cwd across segments."""
     targets: List[Tuple[str, str]] = []
     current = cwd
-    for segment in _split_segments(_strip_grouping(_tokenize(command))):
+
+    # A heredoc body is script text, not shell tokens. Strip it out before
+    # tokenizing (its content would otherwise be parsed as commands) and scan
+    # it separately for embedded write calls.
+    for body_text in _heredoc_bodies(command):
+        for literal in _embedded_paths(body_text):
+            targets.append(("terminal(heredoc)", resolve_against(literal, cwd)))
+    stripped = _HEREDOC_RE.sub(" ", command)
+
+    for segment in _split_segments(_strip_grouping(_tokenize(stripped))):
         found, current = _analyze_segment(segment, current)
         # Resolve each target against the cwd in force for its segment.
         for label, raw in found:
