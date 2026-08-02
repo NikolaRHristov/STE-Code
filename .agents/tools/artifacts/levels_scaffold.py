@@ -32,6 +32,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 BASE_DIR = ARTIFACTS_DIR / "_base"
@@ -180,9 +181,9 @@ def main(argv=None):
         idx = [f"# STE-Code Level {label} — base index", "",
                f"> {desc}", "", "## Sub-documents (distill each):", ""]
         for name, content in subs:
-            (tdir / name).write_text(content + "\n", encoding="utf-8")
+            write_text((tdir / name), content + "\n")
             idx.append(f"- {name} — {len(content)}B")
-        (tdir / "_index.md").write_text("\n".join(idx) + "\n", encoding="utf-8")
+        write_text((tdir / "_index.md"), "\n".join(idx) + "\n")
         print(f"  base {label}: {tdir.name}/ ({len(subs)} sub-docs)")
     if not args.dry_run:
         (BASE_DIR / ".manifest.json").write_text(
