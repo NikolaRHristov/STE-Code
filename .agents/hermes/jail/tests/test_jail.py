@@ -115,7 +115,7 @@ def _cases(policy: str, root: str, parent: str,
         ("terminal", {"command": "xargs -I{} mkdir -p ../{} < list.txt"},
          "xargs prefix with attached placeholder"),
         ("terminal", {"command":
-                      "env HOME=/Users/nikola mkdir -p $HOME/env-prefix"},
+                      "env HOME=/home/operator mkdir -p $HOME/env-prefix"},
          "env prefix plus VAR=value assignment"),
         ("terminal", {"command": "nohup touch ../nohup-escape &"},
          "nohup prefix"),
