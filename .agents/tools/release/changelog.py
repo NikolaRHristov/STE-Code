@@ -30,6 +30,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 REPO = "https://github.com/NikolaRHristov/STE-Code"
 
 SECTIONS = [
@@ -208,7 +209,7 @@ def main() -> int:
         print(text)
         return 0
 
-    (PROJECT / "CHANGELOG.md").write_text(text, encoding="utf-8")
+    write_text((PROJECT / "CHANGELOG.md"), text)
     print(f"Wrote CHANGELOG.md ({len(text.splitlines())} lines)")
     return 0
 
