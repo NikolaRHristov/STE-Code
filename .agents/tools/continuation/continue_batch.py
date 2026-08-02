@@ -73,24 +73,12 @@ def _build_prompt(target_rel: str) -> str:
 
 
 def _load_checkpoint():
-    if CHECKPOINT_PATH.exists():
-        try:
-            return json.load(open(CHECKPOINT_PATH))
-        except (json.JSONDecodeError, OSError):
-            pass
-    return {}
-
+    from ste_checkpoint import load
+    return load(CHECKPOINT_PATH)
 
 def _save_checkpoint(ckpt):
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
-    tmp = str(CHECKPOINT_PATH) + ".tmp"
-    try:
-        with open(tmp, "w") as f:
-            json.dump(ckpt, f, indent=2, default=str)
-        os.replace(tmp, str(CHECKPOINT_PATH))
-    except Exception:
-        pass
-
+    from ste_checkpoint import save
+    save(CHECKPOINT_PATH, ckpt)
 
 _checkpoint = _load_checkpoint()
 
