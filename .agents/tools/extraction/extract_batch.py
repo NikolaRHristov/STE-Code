@@ -52,6 +52,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -316,7 +317,7 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
             # Save stdout for debugging
             if result.stdout:
                 debug_file = LOG_DIR / f"w{worker_num:03d}-stdout.txt"
-                debug_file.write_text(result.stdout[:1000], encoding="utf-8")
+                write_text(debug_file, result.stdout[:1000])
 
     except subprocess.TimeoutExpired:
         duration = time.time() - start_time
@@ -477,7 +478,7 @@ def _update_progress(batch_num, results):
         if line.strip().startswith(f"| {batch_num:02d} |"):
             lines[i] = f"| {batch_num:02d} | {w_str} | {start_pos}-{end_pos} | {status} |"
 
-    PROGRESS_PATH.write_text("\n".join(lines), encoding="utf-8")
+    write_text(PROGRESS_PATH, "\n".join(lines))
 
 
 def main():
