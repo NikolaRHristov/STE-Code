@@ -456,7 +456,7 @@ def main() -> int:
                                             encoding="utf-8")
 
     if args.explain:
-        print("\n=== WHITE explain ===")
+        print("\nWHITE explain")
         for v, vr in report["per_variant"].items():
             print("variant {}: {}".format(v, vr["convergence"]))
             for r in vr["rounds"]:

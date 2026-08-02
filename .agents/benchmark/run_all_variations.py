@@ -55,7 +55,7 @@ def _run_one(name: str, cmd: list[str], results_dir: Path, model: str) -> dict:
         r = subprocess.run(cmd, cwd=str(PROJECT), capture_output=True,
                             text=True, timeout=60 * 60)
         rc = r.returncode
-        log.write_text(f"RC={rc}\n=== STDOUT ===\n{r.stdout}\n=== STDERR ===\n{r.stderr}\n")
+        log.write_text(f"RC={rc}\nSTDOUT\n{r.stdout}\nSTDERR\n{r.stderr}\n")
     except subprocess.TimeoutExpired:
         rc = -1
         log.write_text("TIMEOUT after 60m\n")
@@ -169,7 +169,7 @@ def main() -> int:
         })
     (base / "comparison.json").write_text(json.dumps(report, indent=2))
     print(f"\nWrote {base / 'comparison.json'}")
-    print("\n=== SUMMARY ===")
+    print("\nSUMMARY")
     for row in report["results"]:
         pr = row["pass_rate_pct"]
         print(f"  {row['name']:<16} pass={pr if pr is None else str(pr)+'%'} "

@@ -418,7 +418,7 @@ def main() -> int:
     excluded_pairs: "set[tuple]" = set()
 
     for cy in range(1, args.cycles + 1):
-        print("[driver] ===== CYCLE {}/{} =====".format(cy, args.cycles))
+        print("[driver] CYCLE {}/{}".format(cy, args.cycles))
         st = _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cy,
                         exclude=excluded_pairs)
         # reverse deduction: confirmed-defended claims -> notes + prune WHITE

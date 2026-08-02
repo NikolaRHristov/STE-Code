@@ -473,7 +473,7 @@ def main():
             test_cases.append(t)
 
     # Print banner.
-    print(f"=== STE-Code Benchmark Orchestrator ===")
+    print(f"STE-Code Benchmark Orchestrator")
     print(f"Model:       {args.model}")
     print(f"Test cases:  {len(test_cases)}")
     print(f"Max workers: {'unlimited' if args.max_workers == 0 else args.max_workers}")
@@ -793,7 +793,7 @@ def main():
             save_progress()
 
     print()
-    print("=== All workers finished. Scoring... ===")
+    print("All workers finished. Scoring...")
     print()
 
     # -----------------------------------------------------------------------
@@ -1094,7 +1094,7 @@ def main():
     failures = [r for r in results if not r["passed"]]
     if failures:
         print()
-        print(f"=== FAILURES ({len(failures)}) ===")
+        print(f"FAILURES ({len(failures)})")
         for r in failures:
             print(f"  {r['test_id']} ({r['category']}, {r['difficulty']}): score={r['correctness_score']}")
             print(f"    Input:  {r['input'][:80]}...")
@@ -1105,7 +1105,7 @@ def main():
 
     # Recommendations.
     if aggregate["recommendations"]:
-        print("=== RECOMMENDATIONS ===")
+        print("RECOMMENDATIONS")
         for rec in aggregate["recommendations"]:
             print(f"  • {rec}")
 

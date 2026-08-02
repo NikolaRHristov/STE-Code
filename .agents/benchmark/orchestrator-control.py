@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Control Group Benchmark — plain coding assistant, no STE-Code rails. Same 59 tests."""
 
-# =============================================================================
 # DESIGN RATIONALE — WHY THIS FILE EXISTS
-# =============================================================================
 # This is the CONTROL GROUP for the STE-Code benchmark suite. It runs the
 # identical 59 tests as `orchestrator.py` but uses a plain system prompt
 # with NO STE-Code rules. The purpose: measure how much a standard coding
@@ -45,15 +43,12 @@
 #     "consistent" without actually following STE-Code rules. This proxy
 #     is intentionally lenient — it gives the control group every benefit
 #     of the doubt, making the comparison conservative.
-# =============================================================================
 
 import json, os, subprocess, time, sys, re, tempfile, glob
 from collections import defaultdict
 from datetime import datetime, timezone
 
-# =============================================================================
 # CLI: Optional command-line overrides (added before hardcoded defaults)
-# =============================================================================
 # The script works without any CLI arguments — all defaults are hardcoded
 # below. When arguments are provided, they supersede the hardcoded values
 # in the override block that follows the constants section.
@@ -89,9 +84,7 @@ _cli_parser.add_argument(
 )
 _cli_args, _ = _cli_parser.parse_known_args()
 
-# =============================================================================
 # SIGNAL HANDLING: Clean shutdown for parallel child processes
-# =============================================================================
 # When the user presses Ctrl+C, we must kill all forked worker processes
 # to avoid orphaned hermes invocations. Without this handler, a SIGINT
 # terminates only the parent while children keep running in the background.
@@ -144,7 +137,7 @@ for cat_file in sorted(glob.glob(os.path.join(TEST_DIR, "category-*.json"))):
         t["_file"] = cat_file
         test_cases.append(t)
 
-print(f"=== Control Group Benchmark (Plain Assistant) ===")
+print(f"Control Group Benchmark (Plain Assistant)")
 print(f"Model: {MODEL}")
 print(f"Test cases loaded: {len(test_cases)}")
 print(f"Launching {len(test_cases)} parallel workers...")
@@ -245,9 +238,7 @@ while pending and elapsed < MAX_WAIT:
 if pending:
     print(f"WARNING: {len(pending)} workers timed out: {', '.join(sorted(pending))}")
 
-# =============================================================================
 # RETRY LOGIC: Re-launch workers with empty, missing, or error output
-# =============================================================================
 # Some workers may produce empty output (model refused, API error, crash)
 # or very short stub output (<20 chars). This block checks all outputs and
 # re-launches failing workers up to _CLI_RETRIES times with a shorter timeout.
@@ -359,12 +350,10 @@ IMPORTANT: Do NOT create any files. Output the improved text inline.
             print("  All retried workers now have output.")
 
 print()
-print("=== All workers finished. Scoring... ===")
+print("All workers finished. Scoring...")
 print()
 
-# =============================================================================
 # SCORING ENGINE — Shared with orchestrator.py (lines 133-228)
-# =============================================================================
 # The PRINCIPLE_KEYWORDS dictionary, extract_corrected_text(),
 # extract_compliance_section(), check_principles(), check_keywords(), and
 # calc_correctness() are IDENTICAL to orchestrator.py.
@@ -381,7 +370,6 @@ print()
 #   conservative experimental design that avoids inflating the STE-Code
 #   advantage. Any delta between STE-Code and control scores is therefore
 #   a lower bound on the true improvement.
-# =============================================================================
 
 # Phase 3: Score each output
 PRINCIPLE_KEYWORDS = {
@@ -721,7 +709,7 @@ if not _CLI_NO_REPORT:
     failures = [r for r in results if not r["passed"]]
     if failures:
         print()
-        print(f"=== FAILURES ({len(failures)}) ===")
+        print(f"FAILURES ({len(failures)})")
         for r in failures:
             print(f"  {r['test_id']} ({r['category']}, {r['difficulty']}): score={r['correctness_score']}")
             print(f"    Input:  {r['input'][:80]}...")
@@ -732,7 +720,7 @@ if not _CLI_NO_REPORT:
 
     # Recommendations
     if aggregate["recommendations"]:
-        print("=== RECOMMENDATIONS ===")
+        print("RECOMMENDATIONS")
         for rec in aggregate["recommendations"]:
             print(f"  • {rec}")
 
@@ -743,9 +731,7 @@ if not _CLI_NO_REPORT:
     print()
     print("Done.")
 
-# =============================================================================
 # Phase 6: Post-Run Delta Report — Control vs STE-Code Comparison
-# =============================================================================
 # Automatically loads the latest STE-Code aggregate JSON (from tests/run-*/)
 # and prints a side-by-side delta report. Activated by --compare flag or
 # called explicitly. If --ste-results is provided, uses that file directly.
