@@ -33,6 +33,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -74,7 +75,7 @@ def main():
         counter = {}
     seq = int(counter.get("seq", 0)) + 1
     counter["seq"] = seq
-    counter_path.write_text(json.dumps(counter))
+    write_text(counter_path, json.dumps(counter))
 
     prompt = render_template(
         PROMPT_MD, subdoc=subdoc, level_label=label, desc=desc, base_path=str(base_path),
@@ -82,7 +83,7 @@ def main():
     tmp = PROJECT / ".agents" / "tmp"
     tmp.mkdir(parents=True, exist_ok=True)
     pf = tmp / f"distill-{tier_dir}-{subdoc}.txt"
-    pf.write_text(prompt, encoding="utf-8")
+    write_text(pf, prompt)
 
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "300", "STE_MODEL": MODEL}
     traj_path = tmp / f"distill-traj-{tier_dir}-{subdoc}.txt"
@@ -115,10 +116,10 @@ def main():
         print(f"  OK {tier_dir}/{subdoc} ({out_path.stat().st_size}B)", flush=True)
         return 0
     if base_path.exists():
-        out_path.write_text(base_path.read_text(errors="ignore"), encoding="utf-8")
+        write_text(out_path, base_path.read_text(errors="ignore"))
         print(f"  FALLBACK {tier_dir}/{subdoc} (base shipped, {out_path.stat().st_size}B)", flush=True)
     else:
-        out_path.write_text(f"# {subdoc}\n\n(base unavailable)\n", encoding="utf-8")
+        write_text(out_path, f"# {subdoc}\n\n(base unavailable)\n")
         print(f"  FALLBACK-EMPTY {tier_dir}/{subdoc}", flush=True)
     return 0
 
