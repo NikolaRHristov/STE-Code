@@ -40,6 +40,7 @@ from repo_root import repo_root as _repo_root  # noqa: E402
 from ste_config import load as _load_config  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 
 # Every path, pattern, threshold and agent setting this stage uses is declared
 # in config.yaml beside this file. Read that file to see the whole footprint.
@@ -271,7 +272,7 @@ def run_worker(worker_num, src_path, start, end):
     tmp = PROJECT / ".agents" / "tmp"
     tmp.mkdir(parents=True, exist_ok=True)
     pf = tmp / f"refine-prompt-{worker_num:03d}.txt"
-    pf.write_text(prompt)
+    write_text(pf, prompt)
 
     env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "120", "STE_MODEL": MODEL}
     cmd = [VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL]
