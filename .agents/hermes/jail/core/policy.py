@@ -13,23 +13,11 @@ The active profile selects a policy. Resolution order:
 3. the profile name mapped through ``PROFILE_POLICY_MAP``
 4. ``strict`` — fail closed when nothing matches
 
-+---------------------+----------+------------------------------------------+
-| Profile             | Policy   | Intent                                   |
-+=====================+==========+==========================================+
-| ``dev-ste-code``    | ``dev``  | Author the methodology. Writes anywhere  |
-|                     |          | in the repo and the Hermes profile. Full |
-|                     |          | tool access. Network allowed.            |
-+---------------------+----------+------------------------------------------+
-| ``ste-code``        | ``user`` | The shipped product. A reader: consume   |
-|                     |          | the standard and artifacts, apply them   |
-|                     |          | to the user's OWN project. No writes into|
-|                     |          | the STE-Code checkout. No network.       |
-+---------------------+----------+------------------------------------------+
-| ``benchmark-``      |``bench`` | Run benchmarks under adversarially       |
-| ``ste-code``        |          | generated prompts. Writes confined to the|
-|                     |          | benchmark output tree only. No network.  |
-|                     |          | Telemetry stays inspectable.             |
-+---------------------+----------+------------------------------------------+
+| Profile              | Policy  | Intent                                    |
+|----------------------|---------|-------------------------------------------|
+| `dev-ste-code`       | `dev`   | Author the methodology. Writes anywhere in the repo and the Hermes profile. Full tool access. Network allowed. |
+| `ste-code`           | `user`  | The shipped product. A reader: consume the standard and artifacts, apply them to the user's OWN project. No writes into the STE-Code checkout. No network. |
+| `benchmark-ste-code` | `bench` | Run benchmarks under adversarially generated prompts. Writes confined to the benchmark output tree only. No network. Telemetry stays inspectable. |
 
 ``user`` and ``bench`` are locked down: a malicious or confused prompt cannot
 reach the rest of the machine. ``dev`` is deliberately permissive — it is the
@@ -245,6 +233,21 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
         if parent and parent != project_root:
             deny.append(parent)
     write.append(hermes_home())
+
+    # The dev profile provisions the fleet: `scripts/jail-install.sh` links the
+    # jail into `ste-code` and `benchmark-ste-code`, and those profiles have to
+    # be created and configured from somewhere. That capability already existed
+    # — the install script writes through an opaque subprocess, which argument
+    # inspection cannot see — so denying it at layer 1 only made the policy
+    # dishonest about what dev can do. Granting the profiles root makes it
+    # explicit and reviewable.
+    #
+    # Scoped to `<hermes>/profiles`, NOT to `<hermes>` itself: the parent holds
+    # the shared `.env` with every API key, and no authoring task writes there.
+    profiles_root = os.path.dirname(hermes_home())
+    if os.path.basename(profiles_root) == "profiles":
+        write.append(normalize(profiles_root))
+
     write.extend(temp_roots())
     if project_root:
         deny.append(normalize(os.path.join(project_root, ".git")))
@@ -258,7 +261,8 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any]) -> Policy:
         denied_commands=[],
         description=(
             "Development profile: full authoring access to the STE-Code "
-            "repository and this Hermes profile."
+            "repository, this Hermes profile, and the sibling profiles it "
+            "provisions."
         ),
     )
 

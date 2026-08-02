@@ -1,5 +1,4 @@
 # Agent Backends Configuration
-# =============================
 # Add new agents here. The default_agent is used when no --agent flag is given.
 #
 # Each agent needs:

@@ -22,9 +22,10 @@ import re
 import shlex
 from typing import Dict, List, Optional, Sequence, Tuple
 
-from .policy import normalize
+from .policy import is_within, normalize
 
-__all__ = ["write_targets", "analyze_command", "expand", "resolve_against"]
+__all__ = ["write_targets", "analyze_command", "expand", "resolve_against",
+           "is_passthrough_device", "containment_violations"]
 
 
 def expand(raw: str) -> str:
@@ -248,35 +249,57 @@ def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
 
     Mode is read from the flags:
 
-    ==========================  ============================================
-    Mode                        Write target
-    ==========================  ============================================
-    ``tar -x`` (extract)        the ``-C`` directory, else the cwd
-    ``tar -c`` (create)         the archive named by ``-f``
-    ``tar -t`` (list)           nothing — a pure read
-    ``unzip`` (default)         the ``-d`` directory, else the cwd
-    ``unzip -l`` / ``-t``       nothing — a pure read
-    ``zip``                     the archive, i.e. the first operand
-    ==========================  ============================================
+    | Mode                  | Write target                            |
+    |-----------------------|-----------------------------------------|
+    | `tar -x` (extract)    | the `-C` directory, else the cwd        |
+    | `tar -c` (create)     | the archive named by `-f`               |
+    | `tar -t` (list)       | nothing, a pure read                    |
+    | `unzip` (default)     | the `-d` directory, else the cwd        |
+    | `unzip -l` / `-t`     | nothing, a pure read                    |
+    | `zip`                 | the archive, the first operand          |
     """
     targets: List[Tuple[str, str]] = []
-    flags = "".join(t[1:] for t in body[1:]
-                    if t.startswith("-") and not t.startswith("--"))
-    long_flags = {t for t in body[1:] if t.startswith("--")}
+    short_cluster = "".join(t[1:] for t in body[1:]
+                            if t.startswith("-") and not t.startswith("--"))
+    # BSD/GNU tar also accepts the flags without a leading dash (`tar czf x`).
+    if name == "tar" and len(body) > 1 and not body[1].startswith("-"):
+        if re.fullmatch(r"[a-zA-Z]+", body[1]) and (
+                set(body[1]) & set("xctruf")):
+            short_cluster += body[1]
+    long_flags = {t.split("=", 1)[0] for t in body[1:] if t.startswith("--")}
     operands = [t for t in body[1:]
                 if not t.startswith("-") and t not in _REDIRECT_TOKENS]
+    if name == "tar" and operands and operands[0] == short_cluster:
+        # The dashless flag cluster is not an operand.
+        operands = operands[1:]
 
     def dir_flag_value(*names: str) -> Optional[str]:
+        """Value of ``-X val`` / ``--long=val``, else None."""
         for index, token in enumerate(body):
             if token in names and index + 1 < len(body):
                 return body[index + 1]
+            for flag in names:
+                if flag.startswith("--") and token.startswith(flag + "="):
+                    return token.split("=", 1)[1]
+        return None
+
+    def archive_operand() -> Optional[str]:
+        """The archive path, whether ``-f x`` or a clustered ``-czf x``."""
+        explicit = dir_flag_value("-f", "--file")
+        if explicit:
+            return explicit
+        # `-czf x.tar.gz` — f is inside the cluster, so the archive is the
+        # first positional operand. Missing this made `tar -czf ../x.tgz .`
+        # an unblocked escape.
+        if "f" in short_cluster and operands:
+            return operands[0]
         return None
 
     if name == "tar":
-        listing = "t" in flags or "--list" in long_flags
-        extracting = "x" in flags or "--extract" in long_flags
-        creating = ("c" in flags or "r" in flags or "u" in flags
-                    or {"--create", "--append", "--update"} & long_flags)
+        listing = "t" in short_cluster or "--list" in long_flags
+        extracting = "x" in short_cluster or "--extract" in long_flags
+        creating = (bool(set("cru") & set(short_cluster))
+                    or bool({"--create", "--append", "--update"} & long_flags))
         if listing and not extracting and not creating:
             return targets
         if extracting:
@@ -285,13 +308,13 @@ def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
             targets.append(("terminal(tar extract dir)",
                             dir_flag_value("-C", "--directory") or "."))
         if creating:
-            archive = dir_flag_value("-f", "--file")
+            archive = archive_operand()
             if archive and archive != "-":
                 targets.append(("terminal(tar archive)", archive))
         return targets
 
     if name == "unzip":
-        if "l" in flags or "t" in flags or "v" in flags:
+        if set("ltvz") & set(short_cluster):
             return targets
         targets.append(("terminal(unzip dest)", dir_flag_value("-d") or "."))
         return targets
@@ -507,6 +530,46 @@ def command_basenames(command: str) -> List[str]:
 def _skill_root() -> str:
     hermes_home = os.environ.get("HERMES_HOME") or os.path.expanduser("~/.hermes")
     return os.path.join(hermes_home, "skills")
+
+
+def containment_violations(
+    tool_name: str, args: Dict[str, object], base: str
+) -> List[Tuple[str, str]]:
+    """Return ``(label, reason)`` for targets that escape their OWN sandbox.
+
+    Some tools carry a structural invariant that is stronger than the write
+    policy. ``skill_manage(file_path=...)`` is documented as relative to the
+    skill's own directory, so ``../../../escape.md`` is a violation of the tool
+    contract no matter how wide the policy's write roots happen to be.
+
+    Checking this separately matters because write roots move. Widening ``dev``
+    to cover ``<hermes>/profiles`` (so it can provision sibling profiles) made
+    a skill traversal land inside an allowed root and stop being reported —
+    the policy check alone could not tell "wrote to a permitted directory"
+    from "climbed out of the skills tree into it".
+    """
+    out: List[Tuple[str, str]] = []
+
+    if tool_name == "skill_manage":
+        file_path = args.get("file_path")
+        if isinstance(file_path, str) and file_path:
+            expanded = expand(file_path)
+            if os.path.isabs(expanded):
+                # An absolute file_path ignores the skill directory entirely.
+                out.append(("skill_manage(file_path)",
+                            "an absolute path escapes the skill directory"))
+            else:
+                name = str(args.get("name") or "")
+                skill_dir = normalize(os.path.join(_skill_root(), name))
+                resolved = resolve_against(
+                    os.path.join(_skill_root(), name, file_path), base)
+                if not is_within(resolved, skill_dir):
+                    out.append((
+                        "skill_manage(file_path)",
+                        f"path escapes the skill directory ({skill_dir})",
+                    ))
+
+    return out
 
 
 def write_targets(
