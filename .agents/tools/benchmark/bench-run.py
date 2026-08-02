@@ -18,7 +18,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 TEST_DIR = PROJECT / ".agents" / "benchmark" / "test-cases"
 RESULTS_DIR = PROJECT / ".agents" / "benchmark" / "results-v3"
 
@@ -104,7 +104,7 @@ def main():
     if dry_run:
         return
 
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(RESULTS_DIR)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     results = []
 
