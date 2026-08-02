@@ -13,7 +13,9 @@ lives in `config.yaml` (or the shared `defaults.yaml`), never hardcoded.
   - state: `.agents/state`
 
 ## Usage
-    python3 .agents/tools/extension/extend_batch.py
+```bash
+python3 .agents/tools/extension/extend_batch.py
+```
 
 ## Behaviour
 - Loads `config.yaml` via `ste_config.load(__file__)`.

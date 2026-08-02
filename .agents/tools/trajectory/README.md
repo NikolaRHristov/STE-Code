@@ -15,7 +15,9 @@ lives in `config.yaml` (or the shared `defaults.yaml`), never hardcoded.
   - tmp: `.agents/tmp`
 
 ## Usage
-    python3 .agents/tools/trajectory/trajectory.py
+```bash
+python3 .agents/tools/trajectory/trajectory.py
+```
 
 ## Behaviour
 - Loads `config.yaml` via `ste_config.load(__file__)`.

@@ -12,7 +12,9 @@ lives in `config.yaml` (or the shared `defaults.yaml`), never hardcoded.
   - (none declared)
 
 ## Usage
-    python3 .agents/tools/benchmark/bench-run.py
+```bash
+python3 .agents/tools/benchmark/bench-run.py
+```
 
 ## Behaviour
 - Loads `config.yaml` via `ste_config.load(__file__)`.

@@ -18,7 +18,9 @@ lives in `config.yaml` (or the shared `defaults.yaml`), never hardcoded.
   - feedback: `.agents/feedback/exchange.md`
 
 ## Usage
-    python3 .agents/tools/extraction/extract_batch.py
+```bash
+python3 .agents/tools/extraction/extract_batch.py
+```
 
 ## Behaviour
 - Loads `config.yaml` via `ste_config.load(__file__)`.
