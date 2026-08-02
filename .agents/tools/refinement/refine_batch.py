@@ -40,6 +40,7 @@ from repo_root import repo_root as _repo_root  # noqa: E402
 from ste_config import load as _load_config  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_paths import venv_python  # noqa: E402
 from ste_io import write_text, mkdir  # noqa: E402
 
 # Every path, pattern, threshold and agent setting this stage uses is declared
