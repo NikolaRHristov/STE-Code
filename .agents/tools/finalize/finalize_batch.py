@@ -96,23 +96,12 @@ sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 
 # ── checkpoint ──────────────────────────────────────────────────────────────
 def _load_checkpoint():
-    if CHECKPOINT_PATH.exists():
-        try:
-            return json.load(open(CHECKPOINT_PATH))
-        except Exception:
-            pass
-    return {}
-
+    from ste_checkpoint import load
+    return load(CHECKPOINT_PATH)
 
 def _save_checkpoint(ckpt):
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
-    tmp = str(CHECKPOINT_PATH) + ".tmp"
-    try:
-        json.dump(ckpt, open(tmp, "w"), indent=2, default=str)
-        os.replace(tmp, str(CHECKPOINT_PATH))
-    except Exception:
-        pass
-
+    from ste_checkpoint import save
+    save(CHECKPOINT_PATH, ckpt)
 
 _checkpoint = _load_checkpoint()
 # Serialize all shared-state mutations (checkpoint/git/progress) across workers.
