@@ -1,0 +1,11 @@
+# Extension stage — complete footprint.
+unit: extension
+inputs:
+    adapted: ste-code/adapted
+outputs:
+    extensions: ste-code/extensions
+    state: .agents/state
+agent:
+    model: tencent/hy3:free
+    workers_per_batch: 3
+    timeout_s: 600

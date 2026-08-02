@@ -1,0 +1,14 @@
+# Finalize stage — complete footprint.
+unit: finalize
+inputs:
+    adapted: ste-code/adapted
+    grouped: ste-code/grouped
+    refined: ste-code/refined
+    vendor: .agents/vendor
+outputs:
+    final_rules: ste-code/final/rules
+    state: .agents/state
+agent:
+    model: tencent/hy3:free
+    workers_per_batch: 3
+    timeout_s: 600

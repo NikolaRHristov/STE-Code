@@ -1,0 +1,11 @@
+# Adaptation stage — complete footprint.
+unit: adaptation
+inputs:
+    grouped: ste-code/grouped
+outputs:
+    adapted: ste-code/adapted
+    state: .agents/state
+agent:
+    model: tencent/hy3:free
+    workers_per_batch: 3
+    timeout_s: 600

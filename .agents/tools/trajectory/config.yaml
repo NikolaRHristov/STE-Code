@@ -1,0 +1,13 @@
+# Trajectory stage — complete footprint.
+unit: trajectory
+inputs:
+    final_rules: ste-code/final/rules
+    prompt: .agents/tools/prompts/trajectory-worker.md
+    vendor: .agents/vendor
+outputs:
+    parametarized: ste-code/parametarized
+    tmp: .agents/tmp
+agent:
+    model: tencent/hy3:free
+    workers_per_batch: 1
+    timeout_s: 900

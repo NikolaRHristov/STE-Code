@@ -1,0 +1,10 @@
+# Continuation stage — complete footprint.
+unit: continuation
+inputs:
+    refined: ste-code/refined
+outputs:
+    state: .agents/state
+agent:
+    model: tencent/hy3:free
+    workers_per_batch: 3
+    timeout_s: 600

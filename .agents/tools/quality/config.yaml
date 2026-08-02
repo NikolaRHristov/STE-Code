@@ -1,0 +1,15 @@
+# Quality stage — complete footprint.
+unit: quality
+inputs:
+    adapted: ste-code/adapted
+    final: ste-code/final
+    extracted: ste-code/extracted
+    refined: ste-code/refined
+    grouped: ste-code/grouped
+outputs:
+    state: .agents/state
+format:
+    encoding: utf-8
+agent:
+    model: poolside/laguna-s-2.1:free
+    timeout_s: 900

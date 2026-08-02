@@ -1,0 +1,18 @@
+# Extraction stage — complete footprint.
+unit: extraction
+inputs:
+    spec: spec/issue-09-2025/page-dir
+    prompt: .agents/tools/prompts/extraction-worker.md
+outputs:
+    extracted: ste-code/extracted
+    state: .agents/state
+    progress: .agents/state/PROGRESS.md
+    telemetry: .agents/telemetry
+    logs: .agents/tmp/extraction-logs
+    feedback: .agents/feedback/exchange.md
+format:
+    encoding: utf-8
+agent:
+    model: tencent/hy3:free
+    workers_per_batch: 3
+    timeout_s: 600

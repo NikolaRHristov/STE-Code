@@ -1,0 +1,11 @@
+# Grouping stage — complete footprint.
+unit: grouping
+inputs:
+    refined: ste-code/refined
+outputs:
+    grouped: ste-code/grouped
+    state: .agents/state
+format:
+    encoding: utf-8
+layout:
+    source_page_re: '^r?(?P<worker>\d{3})-p(?P<start>\d{1,4})-(?P<end>\d{1,4})\.md$'

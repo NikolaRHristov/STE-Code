@@ -1,0 +1,11 @@
+# Artifacts stage — complete footprint.
+unit: artifacts
+inputs:
+    final: ste-code/final
+outputs:
+    artifacts: ste-code/artifacts
+    state: .agents/state
+agent:
+    model: tencent/hy3:free
+    workers_per_batch: 3
+    timeout_s: 600

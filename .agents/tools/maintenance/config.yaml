@@ -1,0 +1,10 @@
+# Maintenance stage — complete footprint.
+unit: maintenance
+inputs:
+    artifacts: ste-code/artifacts
+outputs:
+    state: .agents/state
+agent:
+    # Long-context reasoning over whole documents.
+    model: poolside/laguna-s-2.1:free
+    timeout_s: 900

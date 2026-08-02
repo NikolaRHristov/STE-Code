@@ -1,0 +1,11 @@
+# Release stage — complete footprint.
+unit: release
+inputs:
+    adapted: ste-code/adapted
+    final: ste-code/final
+    extracted: ste-code/extracted
+    refined: ste-code/refined
+    grouped: ste-code/grouped
+outputs:
+    sandbox: .agents/tmp/release-selftest
+    state: .agents/state
