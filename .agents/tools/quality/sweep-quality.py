@@ -19,7 +19,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -96,7 +96,7 @@ def main():
         print("\nDry run complete. Use without --dry-run to execute.")
         return
 
-    TMP_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(TMP_DIR)
 
     # Launch all batches in parallel using agent_runner
     processes = []
