@@ -52,7 +52,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -232,8 +232,8 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
             return True, msg, True  # already extracted, skip
         output_file.unlink()
 
-    TELEMETRY_DIR.mkdir(parents=True, exist_ok=True)
-    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(TELEMETRY_DIR)
+    mkdir(LOG_DIR)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     telemetry_path = TELEMETRY_DIR / f"w{worker_num:03d}-{timestamp}.json"
 
@@ -364,7 +364,7 @@ def _load_checkpoint():
 
 def _save_checkpoint(checkpoint):
     """Atomically write the checkpoint file for crash-safe resume."""
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(STATE_DIR)
     tmp_path = str(CHECKPOINT_PATH) + ".tmp"
     try:
         with open(tmp_path, "w") as f:
@@ -502,9 +502,9 @@ def main():
     mapping = parse_manifest()
     print(f"Manifest: {len(mapping)} page mappings", flush=True)
 
-    EXTRACTED_DIR.mkdir(parents=True, exist_ok=True)
-    LOG_DIR.mkdir(parents=True, exist_ok=True)
-    TELEMETRY_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(EXTRACTED_DIR)
+    mkdir(LOG_DIR)
+    mkdir(TELEMETRY_DIR)
 
     # Report existing files
     existing = sorted(EXTRACTED_DIR.glob("w*.md"))
