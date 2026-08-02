@@ -124,8 +124,12 @@ def test_sentinel_flags(cfg, tmp: Path) -> None:
        return
    check(True, "red.py / blue.py importable")
 
-   # An --emit-only round produces cases but no scoring -> escapes=0, no
-   # per-test-results.json. The sentinel must read scored=false / offline.
+   # An --emit-only round produces cases but no scoring: no
+   # per-test-results.json, so the sentinel must read scored=false / offline.
+   # The ledger is NOT empty -- RED publishes its generated adversarial cases
+   # as the attack surface BLUE defends (the developmental handoff). A
+   # non-empty ledger therefore no longer implies measurement: the honesty
+   # flags, not the escape count, carry that meaning.
    base = tmp / "sentinels"
    rc = subprocess.run(
        [sys.executable, str(BENCH / "red.py"), "--emit-only",
@@ -143,7 +147,11 @@ def test_sentinel_flags(cfg, tmp: Path) -> None:
        check(p.get("red_pass_rate_pct") is None,
              "emit-only round has no false pass rate (None, not 0.0)")
        check(p.get("red_total") == 80, "red_total still reported (80 @ round 1)")
-       check(p.get("escapes") == 0, "escapes=0 is honest, not a 'failure'")
+       check(p.get("escapes") == 80,
+             "emit-only publishes its generated attack surface as escapes "
+             "(80), so BLUE has real data to defend")
+       check(p.get("escape_source") == "generated",
+             "escapes marked generated (not measured) -- unscored round stays honest")
 
    # A fully offline BLUE run (no escapes) must also mark scored=false.
    bdir = tmp / "blue-sentinel" / "tier0" / "round1"

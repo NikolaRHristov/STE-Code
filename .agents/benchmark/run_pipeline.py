@@ -211,15 +211,26 @@ def _write_stitch_reports(base: Path, tiers: "list[str]", rounds: int, cycle: in
 
 
 def _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cycle: int,
-               exclude: "set[tuple]" = None) -> "dict":
+               exclude: "set[tuple]" = None,
+               excl_path: "Path|None" = None) -> "dict":
     """Run one full RED->BLUE->WHITE->BLACK pass and return a phase-status dict."""
     st: "dict" = {}
 
+    # A phase is only forced offline when the DRIVER is offline. When the driver
+    # is live the colours must actually run against the model -- that real
+    # handoff (RED's generated attacks -> BLUE's defense -> WHITE's lessons ->
+    # BLACK's verdicts) is the whole point of the developmental loop.
+    skip = ["--skip-live"] if args.skip_live else []
+
     # ---- PHASE 1: RED (per tier, parallel) ----
+    # BLACK->RED pruning edge: pairs BLACK confirmed defended are removed from
+    # RED's attack surface. Never goes in ``live`` -- RED never calls a model.
+    excl_flag = (["--exclude-pairs", str(excl_path)]
+                 if excl_path and Path(excl_path).exists() else [])
     red_procs = []
     for t in tiers:
         a = ["--tiers", t, "--rounds", str(rounds), "--out-dir", str(base),
-             "--emit-only"] + live
+             "--emit-only"] + excl_flag + live
         red_procs.append(_run_module("red", a, log_dir / "red", name="red-c{}-{}".format(cycle, t)))
     for i in range(0, len(red_procs), max(1, args.workers)):
         for p in red_procs[i:i + args.workers]:
@@ -239,7 +250,7 @@ def _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cycle: int,
     blue_procs = []
     for t in tiers:
         a = ["--tiers", t, "--rounds", str(rounds), "--base", str(base),
-             "--await-timeout", "30", "--skip-live"] + live
+             "--await-timeout", "30"] + skip + live
         blue_procs.append(_run_module("blue", a, log_dir / "blue", name="blue-c{}-{}".format(cycle, t)))
     for i in range(0, len(blue_procs), max(1, args.workers)):
         for p in blue_procs[i:i + args.workers]:
@@ -251,10 +262,10 @@ def _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cycle: int,
             _mirror_tier_to_variant(base, t, r, ["blue-done.json"])
 
     # ---- PHASE 3: WHITE (prune defended lessons first, see _prune_knowledge) ----
-    white_args = ["--skip-live", "--variants=" + ",".join(tiers),
-                  "--rounds", str(rounds), "--base", str(base),
-                  "--await-timeout", "30", "--explain",
-                  "--defended", str(base / "defended.json")] + live
+    white_args = skip + ["--variants=" + ",".join(tiers),
+                         "--rounds", str(rounds), "--base", str(base),
+                         "--await-timeout", "30", "--explain",
+                         "--defended", str(base / "defended.json")] + live
     wp = _run_module("white", white_args, log_dir / "white", name="white-c{}".format(cycle))
     wp.wait()
     st["white"] = (base / "white-report.json").exists()
@@ -265,14 +276,59 @@ def _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cycle: int,
     build_attack_brief(base, tiers, rounds, cycle)
 
     # ---- PHASE 4: BLACK ----
-    black_args = ["--skip-live", "--variants=" + ",".join(tiers),
-                  "--rounds", str(rounds), "--base", str(base),
-                  "--await-timeout", "30", "--explain"] + live
+    black_args = skip + ["--variants=" + ",".join(tiers),
+                         "--rounds", str(rounds), "--base", str(base),
+                         "--await-timeout", "30", "--explain"] + live
     bp = _run_module("black", black_args, log_dir / "black", name="black-c{}".format(cycle))
     bp.wait()
     st["black"] = _wait_for(base, "variant{variant}", tiers, rounds, "black-done.json",
                            "BLACK(c{})".format(cycle), args.await_timeout)
     return st
+
+
+# ------------------------------------------------------------------- closure
+
+# RED is "obsolete" once BLACK has confirmed the base defends this fraction of
+# RED's whole (technique x placement) attack space: there is nothing left worth
+# attacking, which is the endpoint the developmental loop is driving toward.
+RED_OBSOLETE_COVERAGE = 0.95
+
+
+def _red_pair_space() -> int:
+    """Size of RED's full (technique x placement) attack space.
+
+    Read from RED itself so the closure metric tracks the generator instead of
+    a stale constant. Falls back to the known 10 techniques x 8 placements if
+    RED cannot be imported (it pulls in adversarial.py + repo_root bootstrap).
+    """
+    try:
+        import red as _red  # noqa: PLC0415 -- deliberately lazy/optional
+        techniques = list(_red._adv.TECHNIQUES) + list(_red.NEW_TECHNIQUES)
+        placements = list(_red.PLACE_OPTIONS)
+        n = len(techniques) * len(placements)
+        return n if n > 0 else 80
+    except Exception:  # import error, attribute drift, bootstrap failure
+        return 10 * 8
+
+
+def _write_excluded_pairs(base: Path, excluded_pairs: "set[tuple]") -> Path:
+    """Persist the BLACK-confirmed defended pairs where RED's next cycle reads
+    them (``--exclude-pairs``). Written every cycle, including empty, so the
+    file is always a truthful snapshot of the pruned surface."""
+    out = base / "excluded_pairs.json"
+    out.write_text(json.dumps(
+        {"exclude": [list(pair) for pair in sorted(excluded_pairs)]}, indent=2),
+        encoding="utf-8")
+    return out
+
+
+def _closure(excluded_pairs: "set[tuple]", total_pairs: int) -> "dict":
+    """Coverage of RED's attack space that BLACK has confirmed defended."""
+    coverage = (len(excluded_pairs) / total_pairs) if total_pairs else 0.0
+    return {"total_pairs": total_pairs,
+            "excluded_pairs": len(excluded_pairs),
+            "coverage": round(coverage, 3),
+            "red_obsolete": coverage >= RED_OBSOLETE_COVERAGE}
 
 
 def _collect_defended(base: Path, tiers: "list[str]", rounds: int) -> "list[dict]":
@@ -416,11 +472,16 @@ def main() -> int:
     log_dir.mkdir(parents=True, exist_ok=True)
     cycles_report = []
     excluded_pairs: "set[tuple]" = set()
+    total_pairs = _red_pair_space()
+    # Snapshot the (empty) pruning file up front so cycle 1 has a readable,
+    # well-formed file instead of RED silently receiving nothing.
+    excl_path = _write_excluded_pairs(base, excluded_pairs)
+    red_obsolete = False
 
     for cy in range(1, args.cycles + 1):
         print("[driver] CYCLE {}/{}".format(cy, args.cycles))
         st = _run_cycle(args, base, cfg, tiers, rounds, live, log_dir, cy,
-                        exclude=excluded_pairs)
+                        exclude=excluded_pairs, excl_path=excl_path)
         # reverse deduction: confirmed-defended claims -> notes + prune WHITE
         defended = _collect_defended(base, tiers, rounds)
         notes = _write_reverse_notes(base, defended)
@@ -429,6 +490,8 @@ def main() -> int:
         for d in defended:
             if d.get("technique") and d.get("placement"):
                 excluded_pairs.add((d["technique"], d["placement"]))
+        # persist the pruned surface so the NEXT cycle's RED reads it
+        excl_path = _write_excluded_pairs(base, excluded_pairs)
         # confidence / unresolved trend from knowledge (POST-prune, so the
         # 4-turn learning curve shows the decrease)
         kb_path = base / "knowledge.json"
@@ -440,34 +503,75 @@ def main() -> int:
                 trend["patterns"] = len(kb.get("patterns", {}))
             except (json.JSONDecodeError, OSError):
                 pass
+        # closure: how much of RED's attack space is now confirmed defended
+        closure = _closure(excluded_pairs, total_pairs)
         cycles_report.append({
             "cycle": cy, "phases": st, "knowledge": trend,
             "defended_confirmed": len(defended),
             "reverse_notes_written": notes, "pruned_lessons": pruned,
             "excluded_pairs": len(excluded_pairs),
+            "closure": closure,
         })
-        print("[driver] cycle {}: phases={} lessons={} defended={} notes={} pruned={} excluded={}".format(
-            cy, st, trend["lessons"], len(defended), notes, pruned, len(excluded_pairs)))
+        print("[driver] cycle {}: phases={} lessons={} defended={} notes={} pruned={} excluded={} coverage={}".format(
+            cy, st, trend["lessons"], len(defended), notes, pruned,
+            len(excluded_pairs), closure["coverage"]))
+
+        # ---- CLOSURE: stop when RED has nothing left worth attacking ----
+        if closure["red_obsolete"]:
+            red_obsolete = True
+            print("[driver] CLOSURE REACHED at cycle {}: BLACK confirmed {}/{} "
+                  "(technique, placement) pairs defended (coverage {} >= {}). "
+                  "RED is obsolete; stopping early.".format(
+                      cy, len(excluded_pairs), total_pairs,
+                      closure["coverage"], RED_OBSOLETE_COVERAGE))
+            break
 
     report = {
         "start_utc": cycles_report[0] if False else None,  # overwritten below
         "base": str(base), "tiers": tiers, "rounds": rounds,
-        "cycles": args.cycles, "skip_live": args.skip_live,
+        "cycles": args.cycles, "cycles_run": len(cycles_report),
+        "skip_live": args.skip_live,
         "cycles_report": cycles_report,
     }
     # cross-cycle confidence trend (the 4-turn learning curve)
     report["confidence_trend"] = [
         {"cycle": c["cycle"], "lessons": c["knowledge"]["lessons"],
          "defended": c["defended_confirmed"]} for c in cycles_report]
+    # ---- closure report: did the loop reach the RED-obsolete endpoint? ----
+    final_closure = (cycles_report[-1]["closure"] if cycles_report
+                     else _closure(excluded_pairs, total_pairs))
+    closure_report = {
+        "base": str(base),
+        "generated_utc": datetime.now(timezone.utc).isoformat(),
+        "threshold": RED_OBSOLETE_COVERAGE,
+        "total_pairs": total_pairs,
+        "excluded_pairs": len(excluded_pairs),
+        "coverage": final_closure["coverage"],
+        "red_obsolete": red_obsolete,
+        "stopped_early": red_obsolete and len(cycles_report) < args.cycles,
+        "cycles_run": len(cycles_report),
+        "cycles_max": args.cycles,
+        "excluded_pairs_list": [list(p) for p in sorted(excluded_pairs)],
+        "coverage_trend": [{"cycle": c["cycle"],
+                            "coverage": c["closure"]["coverage"],
+                            "excluded_pairs": c["closure"]["excluded_pairs"]}
+                           for c in cycles_report],
+    }
+    report["closure"] = closure_report
+    (base / "closure-report.json").write_text(
+        json.dumps(closure_report, indent=2), encoding="utf-8")
     (base / "pipeline-report.json").write_text(json.dumps(report, indent=2),
                                                encoding="utf-8")
     all_ok = all(c["phases"].get("black", False) for c in cycles_report)
     print("\n[driver] PIPELINE ({} cycles) {}".format(
-        args.cycles, "COMPLETE" if all_ok else "INCOMPLETE"))
+        len(cycles_report), "COMPLETE" if all_ok else "INCOMPLETE"))
     for c in cycles_report:
         print("  - cycle {}: black={} lessons={} defended={}".format(
             c["cycle"], c["phases"].get("black"), c["knowledge"]["lessons"],
             c["defended_confirmed"]))
+    print("[driver] closure: coverage={} of {} pairs | red_obsolete={}".format(
+        final_closure["coverage"], total_pairs, red_obsolete))
+    print("[driver] closure report: {}".format(base / "closure-report.json"))
     print("[driver] report: {}".format(base / "pipeline-report.json"))
     return 0 if all_ok else 1
 
