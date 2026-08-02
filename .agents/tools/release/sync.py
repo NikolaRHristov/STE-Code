@@ -32,6 +32,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
@@ -60,7 +61,7 @@ def apply_line_fix(rel: str, line_no: int, found: str, expected: str, pattern: s
         return False
     out.append(line[cursor:])
     lines[line_no - 1] = "".join(out)
-    path.write_text("".join(lines), encoding="utf-8")
+    write_text(path, "".join(lines))
     return True
 
 
@@ -72,7 +73,7 @@ def apply_stamp_fix(rel: str, pattern: str, expected: str) -> bool:
     if not m or "value" not in (m.groupdict() or {}):
         return False
     s, e = m.span("value")
-    path.write_text(text[:s] + expected + text[e:], encoding="utf-8")
+    write_text(path, text[:s] + expected + text[e:])
     return True
 
 
