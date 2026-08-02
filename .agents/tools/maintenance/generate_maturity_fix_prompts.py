@@ -3,7 +3,15 @@
 Each prompt: target file + gap description + improvement instructions."""
 import os, glob
 
-PROJECT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+# _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
+import sys as _sys
+from pathlib import Path as _Path
+_R = next(p for p in _Path(__file__).resolve().parents
+          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
+from repo_root import repo_root as _repo_root  # noqa: E402
+
+PROJECT = _repo_root(__file__)
 PROMPTS_DIR = os.path.join(PROJECT, ".agents", "prompts", "maturity-fixes")
 AUDIT_DIR = os.path.join(PROJECT, ".agents", "audit")
 

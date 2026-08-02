@@ -29,7 +29,15 @@ from typing import Dict, List, Optional, Tuple
 # ---------------------------------------------------------------------------
 # Project root auto-detection (matches all tool scripts)
 # ---------------------------------------------------------------------------
-PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+# _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
+import sys as _sys
+from pathlib import Path as _Path
+_R = next(p for p in _Path(__file__).resolve().parents
+          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
+from repo_root import repo_root as _repo_root  # noqa: E402
+
+PROJECT = _repo_root(__file__)
 CHECKPOINT = PROJECT / ".agents" / "state" / "extraction-checkpoint.json"
 LOCKDIR = PROJECT / ".agents" / "state" / "locks"
 LOCKDIR.mkdir(parents=True, exist_ok=True)

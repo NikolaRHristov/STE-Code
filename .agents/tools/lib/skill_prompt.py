@@ -23,7 +23,15 @@ import re
 from pathlib import Path
 
 # Project root: this file lives at .agents/tools/lib/skill_prompt.py
-_PROJECT = Path(__file__).resolve().parent.parent.parent.parent
+# _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
+import sys as _sys
+from pathlib import Path as _Path
+_R = next(p for p in _Path(__file__).resolve().parents
+          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
+from repo_root import repo_root as _repo_root  # noqa: E402
+
+_PROJECT = _repo_root(__file__)
 _SKILLS_DIR = _PROJECT / ".agents" / "skills"
 
 
