@@ -38,7 +38,15 @@ Output:
 import os, sys, json, time, subprocess, re
 from datetime import datetime, timezone
 
-PROJECT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+# _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
+import sys as _sys
+from pathlib import Path as _Path
+_R = next(p for p in _Path(__file__).resolve().parents
+          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
+from repo_root import repo_root as _repo_root  # noqa: E402
+
+PROJECT = _repo_root(__file__)
 TELEMETRY_DIR = os.path.join(PROJECT, ".agents", "telemetry")
 os.makedirs(TELEMETRY_DIR, exist_ok=True)
 
