@@ -1,35 +1,50 @@
-# External templates convention (STE-Code tools)
+# External templates convention
 
-Every pipeline tool that **generates markdown or worker prompts** keeps that text
-in an external `templates/*.md` file beside the script, **not** as inline
-f-strings. This makes the generated text easy to review, diff, and edit without
-touching Python, and avoids the brace/pipe escaping hell of `.format()`.
+## Purpose
 
-## Loader
-`from templater import Templater` (`.agents/tools/lib/templater.py`):
-```python
-TPL = Templater(__file__)                 # -> <tool_dir>/templates/
-text = TPL.render("name", var=value)      # -> templates/name.md
-```
+This file is a pointer. The canonical description of how prompt and output text is
+stored, named, rendered and audited lives in
+[lib/PROMPTS.md](lib/PROMPTS.md). Read that file. This one exists only so that a
+reader who lands on `.agents/tools/TEMPLATES.md` is redirected rather than served a
+second, drifting copy of the same rules.
 
-## Placeholder syntax: `{{name}}`
-Double-brace, **not** `.format()`. Markdown prompts are full of literal `{` `}`
-(JSON, code fences) and `|` (tables) — `{{name}}` never collides, so template
-authors write natural markdown with zero escaping.
+## Footprint
 
-## Strict by default
-A template that needs a var you didn't pass raises `KeyError`; a var you passed
-but the template doesn't use raises `ValueError`. Pass `strict=False` to relax
-(both are real bugs to surface early — a typo'd placeholder shipping to a worker
-silently corrupts output).
+- Reads: nothing. This document describes a convention; it is not executed.
+- The convention it points at is implemented by `.agents/tools/lib/templater.py`.
 
-## Where templates live
-- `grouping/templates/` — group header / metadata blocks
-- `runners/templates/` — phase worker prompts
-- (other tool folders follow the same pattern as they're converted)
+## Usage
 
-## Refinement folder note
-`refinement/*.py` is managed by the refinement orchestration agent and is
-intentionally NOT converted here. When that work stabilizes, its inline
-`f"""..."""` worker prompts (`_build_prompt`, `_build_batch_prompt`) should
-follow this same convention.
+    python3 .agents/tools/lib/audit_prompt_migration.py   # tools with inline prompts
+    python3 .agents/tools/lib/survey_prompts.py           # classify string literals
+
+## Behaviour
+
+- Every tool that sends text to a model keeps that text in `templates/*.md` beside
+  the script, loaded through `lib/templater.py`.
+- Placeholders use double braces, `{{name}}`, so literal braces and pipes in
+  markdown need no escaping.
+- `render()` is strict: a missing placeholder and an unused variable are both errors.
+- `templates/` also holds generated-output blocks such as
+  `grouping/templates/group_header.md`. Same loader, different destination — the
+  distinction that matters is whether the text reaches a model.
+
+## Configuration
+
+- No tunable knobs. The loader takes its encoding from `runtime.encoding` in
+  `.agents/config/defaults.yaml`.
+- Template locations are fixed by convention: `<unit>/templates/<name>.md`.
+- Never hardcode prompt text in a `.py` file.
+
+## Failure modes
+
+- `KeyError` — the template needs a placeholder the caller did not pass.
+- `ValueError` — the caller passed a variable the template never uses.
+- Silent drift — editing a template changes model behaviour with no test to catch
+  it. Diff a rendered prompt against the previous output before shipping a reword.
+
+## See also
+
+- [lib/PROMPTS.md](lib/PROMPTS.md) — canonical, read this first
+- [lib/templater.py](lib/templater.py) — the loader
+- [README.md](README.md) — tools directory overview

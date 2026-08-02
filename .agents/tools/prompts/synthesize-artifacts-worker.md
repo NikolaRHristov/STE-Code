@@ -53,8 +53,9 @@ chat. Instead:
   wrote and commit it with the batch number, e.g.:
     git add ste-code/artifacts/level{{level_label}}/{{subdoc}}
     git commit -m "Phase F synthesize: batch {{batch_no}} — level{{level_label}}/{{subdoc}}"
-  (If `git gcommit-hermes` is available you may instead run
-   `git gcommit-hermes -m "Phase F synthesize: batch {{batch_no}} — level{{level_label}}/{{subdoc}}"`.)
+  Stage the single file by path. Never run `git add -A`, `git add .` or a
+  commit-all helper: another session may be writing elsewhere in the repo and a
+  repo-wide sweep would capture its unrelated work.
   Do NOT push. If a git lock prevents the commit, skip it and move on — the file
   is already written to disk.
 - Do NOT write any narration, tool logs, or "Rewrote…"/"What changed vs…" into
