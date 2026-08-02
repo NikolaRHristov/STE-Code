@@ -52,6 +52,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 REFINED_DIR = PROJECT / "ste-code" / "refined"
 
 _ENTRY_RE = re.compile(r"^#{1,4}\s+([A-Za-z][A-Za-z\-\']*)\s*\(", re.M)
@@ -263,7 +264,7 @@ def main():
 
     # APPLY
     for path, repaired in changed:
-        path.write_text(repaired, encoding="utf-8")
+        write_text(path, repaired)
     # verify: re-run slice_pages
     bad = [rf.path.name for rf in idx.values()
            if not ge.slice_pages(rf, id2pos)]
