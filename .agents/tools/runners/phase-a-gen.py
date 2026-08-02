@@ -23,7 +23,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 PROMPTS_DIR = PROJECT / ".agents" / "prompts" / "maturity-fixes"
 TMP_DIR = PROJECT / ".agents" / "tmp"
 
@@ -62,7 +62,7 @@ def main():
     start = int(sys.argv[1])
     end = int(sys.argv[2]) if len(sys.argv) > 2 else start
 
-    TMP_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(TMP_DIR)
     all_prompts = sorted(PROMPTS_DIR.glob("fix-*.txt"))
 
     for batch_num in range(start, end + 1):
