@@ -37,23 +37,32 @@ _R = next(p for p in _Path(__file__).resolve().parents
           if (p / ".git").is_dir() or (p / "Makefile").is_file())
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
+from ste_config import load as _load_config  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-EXTRACTED_DIR = PROJECT / "ste-code" / "extracted"
-REFINED_DIR = PROJECT / "ste-code" / "refined"
-STATE_DIR = PROJECT / ".agents" / "state"
-CHECKPOINT_PATH = STATE_DIR / "refine-checkpoint.json"
+
+# Every path, pattern, threshold and agent setting this stage uses is declared
+# in config.yaml beside this file. Read that file to see the whole footprint.
+CFG = _load_config(__file__)
+
+EXTRACTED_DIR = CFG.path("inputs.extracted")
+REFINED_DIR = CFG.path("outputs.refined")
+STATE_DIR = CFG.path("outputs.state")
+CHECKPOINT_PATH = CFG.path("outputs.checkpoint")
 
 # ── Config ────────────────────────────────────────────────────────────────────
-MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
-WORKERS_PER_BATCH = int(os.environ.get("REFINE_WORKERS_PER_BATCH", "3"))
-TOTAL_WORKERS = 109
-TIMEOUT_SECONDS = 600
+MODEL = CFG.model
+WORKERS_PER_BATCH = int(
+    os.environ.get("REFINE_WORKERS_PER_BATCH")
+    or CFG.get("agent.workers_per_batch")
+)
+TOTAL_WORKERS = CFG.get("thresholds.total_workers")
+TIMEOUT_SECONDS = CFG.get("agent.timeout_s")
 
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
 
-FILENAME_RE = re.compile(r"^w(?P<worker>\d{3})-p(?P<start>\d{1,4})-(?P<end>\d{1,4})\.md$")
+FILENAME_RE = CFG.regex("layout.worker_re")
 
 # ── Skill embedding: inject the refinement SKILL.md into every worker prompt ──
 # The oneshot wrapper sub-agents do not auto-load the STE-Code profile skills,
