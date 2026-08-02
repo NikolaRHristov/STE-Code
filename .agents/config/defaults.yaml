@@ -25,3 +25,16 @@ agent:
     # Retry policy for a failed worker call.
     retries: 3
     backoff_s: 5
+
+# Shared pre-flight runtime knobs (read by ste_runtime, NOT by ste_config).
+# These are not unit-footprint paths, so they may be shared. A unit overrides
+# any of these by declaring the same key under `runtime:` in its own config.yaml.
+runtime:
+    # Max attempts for a failed agent call (1 + this many retries).
+    retry_attempts: 3
+    # Base delay for exponential backoff, in seconds.
+    backoff_base_s: 2.0
+    # Divisor used to split a unit's files into batches (files // divisor).
+    batch_divisor: 5
+    # Text encoding for all reads/writes.
+    encoding: utf-8

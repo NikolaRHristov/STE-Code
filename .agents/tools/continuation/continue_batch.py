@@ -134,7 +134,7 @@ def run_one(target_rel: str) -> bool:
     mkdir(tmp)
     pf = tmp / "continue-prompt.txt"
     write_text(pf, prompt)
-    for attempt in range(1, 4):
+    for attempt in range(1, RT.retry_attempts + 1):
         print(f"  B1 {target_rel}: redo (attempt {attempt})...", flush=True)
         env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "180", "STE_MODEL": MODEL}
         try:

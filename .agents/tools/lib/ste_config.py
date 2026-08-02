@@ -64,7 +64,9 @@ DEFAULTS_REL = Path(".agents") / "config" / "defaults.yaml"
 
 # Only these top-level sections may appear in defaults.yaml. Everything else is
 # unit-local by design; allowing paths here would recreate the global config.
-DEFAULTS_ALLOWED = {"agent"}
+# ``runtime:`` is the pre-flight knob set (retry/backoff/batch/encoding) owned by
+# ste_runtime — it is not a path or footprint, so sharing it is intentional.
+DEFAULTS_ALLOWED = {"agent", "runtime"}
 
 # Environment overrides, applied after the unit file. Keep this list short and
 # explicit: an unbounded env surface is another hidden configuration source.
