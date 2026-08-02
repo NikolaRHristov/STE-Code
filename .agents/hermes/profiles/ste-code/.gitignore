@@ -36,3 +36,5 @@ skills/
 desktop/
 bin/
 audio_cache/
+
+!skills/applying-ste-code
