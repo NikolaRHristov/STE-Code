@@ -130,6 +130,9 @@ remove STE skills that are now duplicated inside a bucket.
   matched `-*` names). Before trusting the final count, `ls -d
   .agents/skills/ste-code-*-etc` and remove stragglers.
 
+## Pitfalls
+- **`skill_manage(action='create')` frontmatter is strict.** The `description:` field has a small budget (~60 chars), must be trigger-first, and must end with a period; YAML parsing FAILS if it contains `->` arrows, unescaped colons, or runs long (the `iterative-diff-research` create failed 3× before the description fit). Keep the description to one short sentence; put all detail in the SKILL.md body. If a create returns a YAML/char error, trim the description first.
+
 ## Verification
 See `references/verify.md` for the exact commands: `env HERMES_PROFILE=<p>
 HERMES_HOME=~/.hermes/profiles/<p> hermes skills list --enabled-only` must list

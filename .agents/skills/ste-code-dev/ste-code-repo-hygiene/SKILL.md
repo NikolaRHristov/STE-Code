@@ -185,6 +185,8 @@ repos — `CodeEditorLand/Land/requirements.txt` and `REPxREP/Repository/require
   imports inside `try/except ImportError` still count if the code uses them.
 - A repo release that *adds* `requirements.txt` is repository-only — do not
   bump `STANDARD-*` for it (see `github-release-maintenance`).
+- **Independently verify the manifest before shipping.** Do NOT trust a delegate's import-scan alone — tool-presence checks (`command -v`, `shutil.which`) and subprocess/shell invocations are often wrapped differently, and a bare grep for `import` can both miss real deps and over-count (`node` matches as an AST variable name; `curl` only appears inside jail test fixtures as a string to refuse). Cross-check each listed tool with `grep -rI` for actual invocations + install routes (`brew/apt/dnf/cargo/npm install …`), and confirm the `NOT required` calls really are only strings/tests. Count occurrences per tool to gauge significance.
+- **Repo ships a `.venv` — do not `pip install` into system Python.** The checked-in `.venv` is CPython 3.14.6, and `python3` on macOS (3.9.6) is externally managed, so `python3 -m pip install` fails or harms system state. Install optional PyPI packages into the repo `.venv` (`source .venv/bin/activate && pip install …`). All required third-party packages were already verified importable in that venv.
 
 ## References
 - `references/per-purpose-config.md` — ste_config.py API, defaults.yaml guard, how to add a unit config.

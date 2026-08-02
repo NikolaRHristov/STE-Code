@@ -55,8 +55,10 @@ make `profile_dir/skills/` contain only STE symlinks (into `.agents/skills/`).
 - `make check` — the gate (178 checks + all 3 policies pass).
 - `python3 .agents/hermes/jail/tests/test_jail.py` — adversarial suite (bench: 20 allow / 49 escape; user: 14/48; dev: 24/37).
 - `hermes skills list --enabled-only` per profile — confirms the skill strip.
+- Confirm a locked profile cannot defeat its own cage: under `STE_CODE_JAIL_POLICY=bench HERMES_PROFILE=benchmark-ste-code`, `jail-exec.sh /bin/sh -c 'rm -f "$HOME/.hermes/profiles/benchmark-ste-code/plugins/ste-code-jail"'` must return `Operation not permitted`; same for writing `config.yaml` or any file under `plugins/`. This proves the deny-path, not just the symlink.
 
 ## Pitfalls
+- **Only the `dev` (parent) profile may (re)install the jail.** `jail-install.sh --all`/`install` writes into `<hermes>/profiles`, a root granted ONLY under `_build_dev`. A `bench`/`user` session has no profiles-root write access, and its `PROFILE_CONTROL_SUBDIRS` deny (config.yaml, hooks, plugins, skills) means it cannot even touch its own cage — so a confined session is structurally unable to install, relink, repair, or disable the jail. Treat `jail-install.sh` as a TRUSTED SETUP action run only by a parent (dev) session; never let a confined session run it. A confined session may run only read-only probes: `jail-install.sh --status` and `jail-exec.sh --check`/`--show` (they change nothing). After any dev-side (re)install, verify with `--status` + `jail-exec.sh --check` under `STE_CODE_JAIL_POLICY=bench`.
 - **Concurrent-committer commit hazard.** `git gcommit-hermes` is the `Save`
   binary: it auto-stages untracked/modified files AND `git reset`s the index on
   failure, so it sweeps the OTHER agent's live work into your commit or silently
