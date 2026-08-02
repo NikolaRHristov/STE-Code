@@ -74,6 +74,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 FINAL_RULES_DIR = PROJECT / "ste-code" / "final" / "rules"
 PARAM_DIR = PROJECT / "ste-code" / "parametarized"
 TMP_DIR = PROJECT / ".agents" / "tmp"
@@ -81,7 +85,7 @@ DEBUG_DIR = TMP_DIR / "oneshot-debug"
 VENDOR_DIR = PROJECT / ".agents" / "vendor"
 PROMPT_MD = PROJECT / ".agents" / "tools" / "prompts" / "trajectory-worker.md"
 
-MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
+MODEL = CFG.model
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
 TIMEOUT_SECONDS = 1800  # long, multi-turn distillation sessions

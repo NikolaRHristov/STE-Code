@@ -27,6 +27,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 FINALIZE = PROJECT / ".agents" / "tools" / "finalize" / "finalize_batch.py"
 VERIFY = PROJECT / ".agents" / "tools" / "finalize" / "verify_final.py"
 VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
@@ -38,7 +42,7 @@ def main():
         os.execv(VENV, [VENV, str(VERIFY)])
         return
     cmd = [VENV, str(FINALIZE), *args]
-    env = {**os.environ, "STE_MODEL": os.environ.get("STE_MODEL", "tencent/hy3:free")}
+    env = {**os.environ, "STE_MODEL": CFG.model}
     sys.stdout.write("Phase G (finalize) — single combined enrichment step.\n"
                      "Launching: " + " ".join(cmd) + "\n")
     sys.stdout.flush()

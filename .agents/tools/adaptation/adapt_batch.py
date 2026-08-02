@@ -52,13 +52,17 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 GROUPED_DIR = PROJECT / "ste-code" / "grouped"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 STATE_DIR = PROJECT / ".agents" / "state"
 CHECKPOINT_PATH = STATE_DIR / "adapt-checkpoint.json"
 
 # ── Config ──────────────────────────────────────────────────────────────────
-MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
+MODEL = CFG.model
 WORKERS_PER_BATCH = int(os.environ.get("ADAPT_WORKERS_PER_BATCH", "1"))
 TIMEOUT_SECONDS = 900
 

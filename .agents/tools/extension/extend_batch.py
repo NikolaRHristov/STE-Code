@@ -45,12 +45,16 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 EXT_DIR = PROJECT / "ste-code" / "extensions"
 STATE_DIR = PROJECT / ".agents" / "state"
 CHECKPOINT_PATH = STATE_DIR / "extend-checkpoint.json"
 MD_TO_JSON = Path(__file__).resolve().parent / "md_to_json.py"
 
-MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
+MODEL = CFG.model
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
 TIMEOUT_SECONDS = 600

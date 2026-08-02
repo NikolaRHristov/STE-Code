@@ -26,6 +26,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 ARTIFACT_BATCH = PROJECT / ".agents" / "tools" / "artifacts" / "artifact_batch.py"
 VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 
@@ -33,7 +37,7 @@ VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3"
 def main():
     args = sys.argv[1:]
     cmd = [VENV, str(ARTIFACT_BATCH), *args]
-    env = {**os.environ, "STE_MODEL": os.environ.get("STE_MODEL", "tencent/hy3:free")}
+    env = {**os.environ, "STE_MODEL": CFG.model}
     sys.stdout.write("Phase F (artifacts) is assembled by artifact_batch.py.\n"
                      "Launching: " + " ".join(cmd) + "\n")
     sys.stdout.flush()

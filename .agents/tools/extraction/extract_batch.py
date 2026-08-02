@@ -52,6 +52,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 PAGE_DIR = PROJECT / "spec" / "issue-09-2025" / "page-dir"
 EXTRACTED_DIR = PROJECT / "ste-code" / "extracted"
 MANIFEST_PATH = PAGE_DIR / "MANIFEST.md"
@@ -70,7 +74,7 @@ if _env_path.exists():
             os.environ.setdefault(k.strip(), v.strip())
 
 # ── Config ────────────────────────────────────────────────────────────────────
-MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
+MODEL = CFG.model
 MAX_WORKERS = int(os.environ.get("STE_MAX_WORKERS", "109"))
 PAGES_PER_WORKER = int(os.environ.get("STE_PAGES_PER_WORKER", "4"))
 WORKERS_PER_BATCH = int(os.environ.get("STE_WORKERS_PER_BATCH", "3"))

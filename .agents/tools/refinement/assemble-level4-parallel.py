@@ -17,6 +17,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
@@ -72,7 +76,7 @@ def main():
     processes = []
     for name, files, out, instructions in tasks:
         prompt = build_worker_prompt(name, files, out, instructions)
-        proc = launch_agent(prompt, agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"), cwd=PROJECT)
+        proc = launch_agent(prompt, agent=agent, model=CFG.model, cwd=PROJECT)
         processes.append((name, proc))
         print(f"Launched {name} ({len(files)} files, PID {proc.pid})")
 

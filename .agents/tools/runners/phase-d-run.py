@@ -28,6 +28,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 ADAPT_BATCH = PROJECT / ".agents" / "tools" / "adaptation" / "adapt_batch.py"
 VERIFY = PROJECT / ".agents" / "tools" / "adaptation" / "verify-adaptation.py"
 VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
@@ -40,7 +44,7 @@ def main():
         return
 
     cmd = [VENV, str(ADAPT_BATCH), *args]
-    env = {**os.environ, "STE_MODEL": os.environ.get("STE_MODEL", "tencent/hy3:free")}
+    env = {**os.environ, "STE_MODEL": CFG.model}
     sys.stdout.write(
         "Phase D (adaptation) is orchestrated by adapt_batch.py.\n"
         "Launching: " + " ".join(cmd) + "\n"

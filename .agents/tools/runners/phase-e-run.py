@@ -27,6 +27,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 EXT_BATCH = PROJECT / ".agents" / "tools" / "extension" / "extend_batch.py"
 VERIFY = PROJECT / ".agents" / "tools" / "extension" / "verify_extensions.py"
 VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
@@ -38,7 +42,7 @@ def main():
         os.execv(VENV, [VENV, str(VERIFY)])
         return
     cmd = [VENV, str(EXT_BATCH), *args]
-    env = {**os.environ, "STE_MODEL": os.environ.get("STE_MODEL", "tencent/hy3:free")}
+    env = {**os.environ, "STE_MODEL": CFG.model}
     sys.stdout.write("Phase E (extensions) is orchestrated by extend_batch.py.\n"
                      "Launching: " + " ".join(cmd) + "\n")
     sys.stdout.flush()

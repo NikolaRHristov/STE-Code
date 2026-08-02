@@ -47,5 +47,7 @@ thresholds:
 
 # ── Agent settings (inherits .agents/config/defaults.yaml) ──────────────────
 agent:
+    # Worker sub-agents use the long-context model for large refined pages.
+    model: poolside/laguna-s-2.1:free
     workers_per_batch: 3
     timeout_s: 600

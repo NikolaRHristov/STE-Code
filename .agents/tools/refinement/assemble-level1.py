@@ -20,6 +20,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 # Make .agents/tools/lib/ importable as a flat namespace (templater,
 # skill_prompt, agent_runner, ...). See .agents/tools/lib/templater.py.
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
@@ -61,7 +65,7 @@ def main():
         return
 
     LEVEL1_DIR.mkdir(parents=True, exist_ok=True)
-    result = run_agent(prompt, agent=agent, model=os.environ.get("STE_MODEL", "poolside/laguna-s-2.1:free"), cwd=PROJECT)
+    result = run_agent(prompt, agent=agent, model=CFG.model, cwd=PROJECT)
     print(f"Exit: {result.returncode}")
 
     if OUTPUT.exists():

@@ -33,13 +33,17 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 BASE_DIR = ARTIFACTS_DIR / "_base"
 STATE_DIR = PROJECT / ".agents" / "state"
 VENDOR_DIR = PROJECT / ".agents" / "vendor"
 
-MODEL = os.environ.get("STE_MODEL", "tencent/hy3:free")
+MODEL = CFG.model
 VENV_PYTHON = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
 WRAPPER = str(PROJECT / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
 TIMEOUT_SECONDS = 300  # per sub-doc; healthy distills 20-90s, large a few min.

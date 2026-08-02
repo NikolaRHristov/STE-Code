@@ -17,6 +17,10 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+
+# Every agent setting this stage uses is declared in config.yaml beside it.
+from ste_config import load as _load_config  # noqa: E402
+CFG = _load_config(__file__)
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
@@ -46,7 +50,7 @@ def main():
     tmp.parent.mkdir(parents=True, exist_ok=True)
     tmp.write_text(prompt)
 
-    cmd, env = get_agent_command(agent=agent, model=os.environ.get("STE_MODEL", "tencent/hy3:free"),
+    cmd, env = get_agent_command(agent=agent, model=CFG.model,
                                   cwd=PROJECT, prompt_file=tmp)
     os.execvpe(cmd[0], cmd, env)
 
