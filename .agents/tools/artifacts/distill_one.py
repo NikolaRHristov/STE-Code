@@ -33,7 +33,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
-from ste_io import write_text  # noqa: E402
+from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
@@ -64,10 +64,10 @@ def main():
 
     base_path = BASE_DIR / tier_dir / subdoc
     out_path = ARTIFACTS_DIR / tier_dir / subdoc
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+    mkdir(out_path.parent)
 
     # Turn-based sequence counter so the worker can commit with a batch number.
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    mkdir(STATE_DIR)
     counter_path = STATE_DIR / "distill-counter.json"
     try:
         counter = json.loads(counter_path.read_text()) if counter_path.exists() else {}
@@ -81,7 +81,7 @@ def main():
         PROMPT_MD, subdoc=subdoc, level_label=label, desc=desc, base_path=str(base_path),
         batch_no=str(seq))
     tmp = PROJECT / ".agents" / "tmp"
-    tmp.mkdir(parents=True, exist_ok=True)
+    mkdir(tmp)
     pf = tmp / f"distill-{tier_dir}-{subdoc}.txt"
     write_text(pf, prompt)
 
