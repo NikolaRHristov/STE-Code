@@ -1,0 +1,37 @@
+# ste-code-jail — shared defaults
+#
+# SINGLE SOURCE OF TRUTH. Every profile symlinks to this file's directory;
+# a profile that needs an override drops its own jail.yaml into
+# $HERMES_HOME/jail.yaml, which is merged over these values.
+#
+# No machine-specific paths appear here. The project root is discovered by
+# walking up to a repository marker, so a clone works anywhere.
+
+# false = dry run: violations are logged, nothing is blocked.
+enforce: true
+
+# Leave unset to select the policy from the profile name:
+#   dev-ste-code        -> dev    (author the methodology; permissive)
+#   ste-code            -> user   (consume the methodology; locked down)
+#   benchmark-ste-code  -> bench  (run adversarial benchmarks; locked down)
+# An unmapped profile FAILS CLOSED to the bench policy.
+# Override for a one-off run with STE_CODE_JAIL_POLICY=dev|user|bench.
+# policy: dev
+
+# Files identifying the project root.
+root_markers:
+  - .git
+  - Makefile
+
+# Additional roots, applied on top of the policy's computed set.
+# Keep these lists SHORT — every entry is a hole in the jail.
+extra_write_roots: []
+extra_deny_roots: []
+
+# Where the bench policy is allowed to write. Relative to the project root
+# when unset: .agents/benchmark/tests
+# benchmark_output: /absolute/path/to/output
+
+# Which directory the user policy treats as the user's own project.
+# Defaults to the working directory Hermes was launched in.
+# workspace: /absolute/path/to/my-project

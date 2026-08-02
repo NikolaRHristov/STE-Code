@@ -1,0 +1,6 @@
+name: ste-code-jail
+version: "2.0.0"
+description: "Group plugin assembling jail-fs, jail-cmd and jail-net under one policy selected from the active profile (dev / user / bench). Enable this for normal use; enable the components individually only to debug a policy."
+author: STE-Code
+hooks:
+  - pre_tool_call

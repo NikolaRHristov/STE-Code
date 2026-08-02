@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 """Self-test for the ste-code-jail plugin.
 
-Exercises the containment logic directly (no Hermes runtime needed) so the
-jail can be verified in CI and after any edit:
+Two suites, no Hermes runtime required (the hook is called directly), so this
+runs in CI:
+
+  ALLOW    calls that must NOT be blocked (false-positive guard)
+  ESCAPE   real bypass attempts that must ALL be blocked
+
+The ESCAPE suite is adversarial by design. It was written by trying to defeat
+the plugin, and the first run of it found 14 holes in a version that passed a
+16-case happy-path suite. Add a case here whenever a new bypass is imagined.
 
     python3 .agents/hermes/plugins/ste-code-jail/selftest.py
+    python3 .agents/hermes/plugins/ste-code-jail/selftest.py -v
 
-Exit code 0 = all cases pass.
+Exit code 0 = every case behaved as required.
 """
 
 from __future__ import annotations
@@ -32,8 +40,8 @@ def _load_plugin():
 
 
 def main() -> int:
-    # The plugin logs every block at WARNING. That is right at runtime and
-    # pure noise here, where blocking is the expected outcome.
+    verbose = "-v" in sys.argv or "--verbose" in sys.argv
+    # The plugin logs every block at WARNING. Correct at runtime, noise here.
     logging.disable(logging.CRITICAL)
 
     jail = _load_plugin()
@@ -44,138 +52,292 @@ def main() -> int:
         print("FAIL: project root was not discovered")
         return 1
 
-    print(f"project root : {root}")
-    print(f"enforce      : {cfg.get('enforce')}")
-    print(f"allowed roots: {len(cfg.get('_roots') or [])}")
-    for entry in cfg.get("_roots") or []:
-        print(f"  - {entry}")
-    print()
-
     parent = os.path.dirname(root)
     tmp = tempfile.gettempdir()
 
-    # (tool, args, expect_blocked, label)
-    cases = [
+    print(f"project root : {root}")
+    print(f"enforce      : {cfg.get('enforce')}")
+    print(f"allowed roots: {len(cfg.get('_roots') or [])}")
+    if verbose:
+        for entry in cfg.get("_roots") or []:
+            print(f"  - {entry}")
+    print()
+
+    # ---------------------------------------------------------------- ALLOW
+    # Must NOT be blocked. These protect against a jail so strict it makes
+    # ordinary work impossible.
+    allow = [
         (
             "write_file",
             {"path": os.path.join(root, ".agents/state/ok.md"), "content": "x"},
-            False,
-            "write inside repo",
+            "absolute write inside repo",
         ),
         (
             "write_file",
-            {"path": ".agents/state/ok-relative.md", "content": "x"},
-            False,
+            {"path": ".agents/state/ok.md", "content": "x"},
             "relative write inside repo",
         ),
         (
             "write_file",
-            {"path": os.path.join(parent, ".agents/prompts/escape.md"), "content": "x"},
-            True,
-            "write into repo PARENT (the real-world escape)",
-        ),
-        (
-            "write_file",
-            {"path": os.path.join(root, "../sibling/.agents/x.md"), "content": "x"},
-            True,
-            "dot-dot traversal out of repo",
-        ),
-        (
-            "write_file",
-            {"path": "~/Documents/escape.md", "content": "x"},
-            True,
-            "write into home directory",
-        ),
-        (
-            "write_file",
-            {"path": os.path.join(root, ".git/config"), "content": "x"},
-            True,
-            "write into denied .git",
-        ),
-        (
-            "write_file",
             {"path": os.path.join(tmp, "scratch.txt"), "content": "x"},
-            False,
-            "write into temp (allowed)",
+            "write into temp",
         ),
         (
             "patch",
-            {"mode": "replace", "path": os.path.join(parent, "outside.py"),
-             "old_string": "a", "new_string": "b"},
-            True,
-            "patch a file outside the repo",
-        ),
-        (
-            "patch",
-            {"mode": "patch",
-             "patch": "*** Begin Patch\n*** Add File: " + os.path.join(parent, "x.py")
-                      + "\n+print(1)\n*** End Patch"},
-            True,
-            "V4A patch adding a file outside the repo",
+            {
+                "mode": "replace",
+                "path": os.path.join(root, "Makefile"),
+                "old_string": "a",
+                "new_string": "b",
+            },
+            "patch inside repo",
         ),
         (
             "terminal",
-            {"command": f"mkdir -p {parent}/.agents/prompts/expansion-pass1"},
-            True,
-            "mkdir outside the repo",
-        ),
-        (
-            "terminal",
-            {"command": f"echo hi > {parent}/leak.txt"},
-            True,
-            "shell redirect outside the repo",
+            {"command": "mkdir -p .agents/tmp/work"},
+            "relative mkdir inside repo",
         ),
         (
             "terminal",
             {"command": f"mkdir -p {root}/.agents/tmp/work"},
-            False,
-            "mkdir inside the repo",
+            "absolute mkdir inside repo",
         ),
         (
             "terminal",
-            {"command": f"cat {parent}/somefile.md"},
-            False,
-            "READ outside the repo stays allowed",
+            {"command": "echo hi > .agents/tmp/out.txt"},
+            "redirect inside repo",
+        ),
+        ("terminal", {"command": "make check"}, "plain build command"),
+        ("terminal", {"command": "git status --short"}, "read-only git"),
+        (
+            "terminal",
+            {"command": "git add -A && git commit -m x"},
+            "git add/commit (no path operand)",
+        ),
+        ("terminal", {"command": f"cat {parent}/somefile.md"}, "READ outside repo"),
+        ("terminal", {"command": "ls -la /etc"}, "read-only ls outside"),
+        (
+            "terminal",
+            {"command": "grep -r pattern /usr/share"},
+            "read-only grep outside",
         ),
         (
             "terminal",
-            {"command": "ls -la /etc"},
-            False,
-            "read-only ls outside the repo stays allowed",
+            {"command": "cd .agents/tools && python3 -c 'print(1)'"},
+            "cd inside repo then run",
+        ),
+        (
+            "terminal",
+            {"command": "curl -s https://example.com/api"},
+            "network read, no output file",
+        ),
+        (
+            "terminal",
+            {"command": "chmod 755 .agents/tools/lib/repo_root.py"},
+            "chmod inside repo",
+        ),
+        ("read_file", {"path": "/etc/hosts"}, "read_file is never gated"),
+        (
+            "search_files",
+            {"pattern": "x", "path": "/usr"},
+            "search_files is never gated",
+        ),
+        ("execute_code", {"code": "print(1 + 1)"}, "pure computation"),
+        (
+            "execute_code",
+            {"code": "from hermes_tools import read_file\nread_file('/etc/hosts')"},
+            "execute_code reading outside",
+        ),
+    ]
+
+    # --------------------------------------------------------------- ESCAPE
+    # Every one of these MUST be blocked.
+    escape = [
+        (
+            "write_file",
+            {"path": os.path.join(parent, ".agents/prompts/x.md"), "content": "x"},
+            "absolute write into repo PARENT",
+        ),
+        (
+            "write_file",
+            {"path": "../direct-relative.md", "content": "x"},
+            "relative ../ write",
+        ),
+        (
+            "write_file",
+            {"path": os.path.join(root, "../sibling/x.md"), "content": "x"},
+            "dot-dot traversal",
+        ),
+        (
+            "write_file",
+            {"path": "~/Documents/escape.md", "content": "x"},
+            "tilde write into home",
+        ),
+        (
+            "write_file",
+            {"path": os.path.join(root, ".git/config"), "content": "x"},
+            "write into denied .git",
+        ),
+        (
+            "patch",
+            {
+                "mode": "replace",
+                "path": os.path.join(parent, "out.py"),
+                "old_string": "a",
+                "new_string": "b",
+            },
+            "patch outside repo",
+        ),
+        (
+            "patch",
+            {
+                "mode": "patch",
+                "patch": "*** Begin Patch\n*** Add File: "
+                + os.path.join(parent, "x.py")
+                + "\n+print(1)\n*** End Patch",
+            },
+            "V4A patch adding file outside",
+        ),
+        ("terminal", {"command": "mkdir -p ../escape-relative"}, "relative ../ mkdir"),
+        (
+            "terminal",
+            {"command": "cd .. && mkdir -p .agents/prompts/x"},
+            "cd .. then relative mkdir (the original escape)",
+        ),
+        (
+            "terminal",
+            {"command": "(cd /tmp/../Users && mkdir -p escape)"},
+            "subshell cd then relative mkdir",
+        ),
+        ("terminal", {"command": "echo leak > ../leak.txt"}, "relative redirect"),
+        (
+            "terminal",
+            {"command": "cat > ../heredoc.txt <<'EOF'\nx\nEOF"},
+            "heredoc to relative path",
+        ),
+        ("terminal", {"command": "tee ../tee-leak.txt"}, "tee to relative path"),
+        (
+            "terminal",
+            {"command": f"echo x > {parent}/abs-leak.txt"},
+            "absolute redirect outside",
+        ),
+        (
+            "terminal",
+            {"command": "mkdir -p $HOME/env-escape"},
+            "environment variable expansion",
+        ),
+        (
+            "terminal",
+            {"command": "mkdir -p ${HOME}/brace-escape"},
+            "braced environment variable",
+        ),
+        ("terminal", {"command": "mv notes.md .."}, "mv into parent"),
+        ("terminal", {"command": "cp secrets.txt ~/Desktop/"}, "cp to tilde path"),
+        ("terminal", {"command": "rsync -a data/ ../mirror/"}, "rsync to parent"),
+        ("terminal", {"command": "git -C .. init escaped-repo"}, "git -C parent"),
+        ("terminal", {"command": "ln -s /etc/passwd ../link"}, "symlink into parent"),
+        (
+            "terminal",
+            {"command": f"curl -o {parent}/dl.bin https://x.test/f"},
+            "curl -o outside",
+        ),
+        (
+            "terminal",
+            {"command": "sed -i '' 's/a/b/' ../outside.md"},
+            "sed in-place outside",
+        ),
+        (
+            "terminal",
+            {"command": f"python3 -c \"import os; os.makedirs('{parent}/py')\""},
+            "python -c makedirs outside",
+        ),
+        (
+            "terminal",
+            {"command": "sh -c 'cd .. && mkdir -p nested-escape'"},
+            "nested sh -c with cd ..",
         ),
         (
             "terminal",
             {"command": "make test", "workdir": parent},
-            True,
-            "terminal workdir outside the repo",
+            "workdir outside repo",
         ),
         (
-            "read_file",
-            {"path": "/etc/hosts"},
-            False,
-            "read_file is never gated",
+            "terminal",
+            {"command": "mkdir -p safe", "workdir": parent},
+            "relative mkdir under an outside workdir",
+        ),
+        (
+            "execute_code",
+            {
+                "code": "from hermes_tools import write_file\n"
+                f"write_file('{parent}/x.md', 'x')"
+            },
+            "execute_code write_file outside",
+        ),
+        (
+            "execute_code",
+            {
+                "code": "from hermes_tools import terminal\n"
+                f"terminal('mkdir -p {parent}/y')"
+            },
+            "execute_code terminal mkdir outside",
+        ),
+        (
+            "skill_manage",
+            {
+                "action": "write_file",
+                "name": "s",
+                "file_path": "../../../escape.md",
+                "file_content": "x",
+            },
+            "skill_manage traversal out of skills dir",
         ),
     ]
 
     failures = 0
-    for tool, args, expect_blocked, label in cases:
+
+    print(f"ALLOW suite ({len(allow)} cases) — must NOT be blocked")
+    for tool, args, label in allow:
         result = jail._on_pre_tool_call(tool_name=tool, args=args)
         blocked = isinstance(result, dict) and result.get("action") == "block"
-        ok = blocked == expect_blocked
-        status = "PASS" if ok else "FAIL"
-        verdict = "BLOCKED" if blocked else "allowed"
-        want = "BLOCKED" if expect_blocked else "allowed"
-        print(f"[{status}] {label}: {verdict} (want {want})")
-        if not ok:
+        if blocked:
             failures += 1
-            if isinstance(result, dict):
-                print("        " + str(result.get("message", ""))[:300])
+            print(f"  [FAIL] {label}: blocked (false positive)")
+            if verbose:
+                print("         " + str(result.get("message", ""))[:400])
+        elif verbose:
+            print(f"  [ok]   {label}")
+    if not verbose:
+        print(f"  {len(allow) - failures}/{len(allow)} allowed correctly")
 
+    print(f"\nESCAPE suite ({len(escape)} cases) — must ALL be blocked")
+    escape_failures = 0
+    for tool, args, label in escape:
+        result = jail._on_pre_tool_call(tool_name=tool, args=args)
+        blocked = isinstance(result, dict) and result.get("action") == "block"
+        if not blocked:
+            failures += 1
+            escape_failures += 1
+            print(f"  [HOLE] {label}: NOT blocked")
+        elif verbose:
+            print(f"  [ok]   {label}")
+    if not verbose:
+        print(f"  {len(escape) - escape_failures}/{len(escape)} escapes blocked")
+
+    total = len(allow) + len(escape)
     print()
     if failures:
-        print(f"{failures} case(s) FAILED")
+        print(f"{failures} of {total} case(s) FAILED")
         return 1
-    print(f"all {len(cases)} case(s) passed")
+    print(
+        f"all {total} case(s) passed "
+        f"({len(allow)} allowed, {len(escape)} escapes blocked)"
+    )
+    print()
+    print("NOTE: argument inspection cannot see inside an opaque subprocess")
+    print("      (`python3 build.py` calling os.makedirs('../x')). Wrap those")
+    print("      in scripts/jail-exec.sh for kernel-enforced confinement;")
+    print("      verify with: scripts/jail-exec.sh --check")
     return 0
 
 
