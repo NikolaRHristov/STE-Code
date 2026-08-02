@@ -1,0 +1,42 @@
+# ste-code-jail configuration
+#
+# Every write performed by a Hermes tool must resolve INSIDE one of the
+# allowed roots. Reads are never restricted — the agent may still read
+# anything on the machine.
+#
+# PORTABILITY: this file contains no machine-specific paths. The project root
+# is discovered at load time by walking up from this plugin directory until a
+# repository marker is found (see `root_markers`). Clone the repo anywhere and
+# the jail anchors itself correctly.
+#
+# Symlinks are resolved before the containment check, so a symlink pointing
+# out of the jail does not widen it.
+
+# false = dry run: violations are logged, nothing is blocked.
+enforce: true
+
+# Filenames/directories that identify the project root. The first ancestor of
+# this plugin directory containing any of these wins.
+root_markers:
+  - .git
+  - Makefile
+
+# Extra write roots, in addition to the auto-discovered project root.
+# Entries may be absolute or `~`-relative. Keep this list SHORT — every entry
+# is a hole in the jail. Leave empty to allow writes only inside the repo.
+extra_roots: []
+
+# Allow writes under $HERMES_HOME (profile state: sessions, logs, caches,
+# skills, memories). Set false to forbid the agent from touching its own
+# profile from inside this project.
+allow_hermes_home: true
+
+# Allow writes under the system temp directories (/tmp, $TMPDIR, and the
+# macOS /var/folders per-user temp tree).
+allow_temp: true
+
+# Paths that are inside an allowed root but must still never be written.
+# Relative entries are resolved against the discovered project root.
+deny:
+  - .git
+  - .agents/hermes/plugins/ste-code-jail

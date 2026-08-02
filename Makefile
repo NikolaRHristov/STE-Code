@@ -2,6 +2,7 @@
 
 PY := python3
 BENCH := .agents/benchmark
+JAIL := .agents/hermes/plugins/ste-code-jail
 
 # Modules held to the current style. Legacy scripts (orchestrator*, purple,
 # benchmark-levels, generate_adhoc_tests) predate it and are migrated
@@ -25,8 +26,12 @@ lint:
 audit:
 	@$(PY) $(BENCH)/anonymize.py >/dev/null && echo "anonymizer: ok"
 
+## jail: prove the write-confinement plugin blocks folder escapes
+jail:
+	@$(PY) $(JAIL)/selftest.py >/dev/null && echo "ste-code-jail: ok"
+
 ## check: everything CI should run for the benchmark
-check: lint test audit
+check: lint test audit jail
 
 # --- release maintenance -----------------------------------------------------
 # Deliberately NOT wired into `check`: the benchmark suite above is another

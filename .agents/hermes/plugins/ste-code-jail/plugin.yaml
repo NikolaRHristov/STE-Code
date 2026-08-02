@@ -1,0 +1,7 @@
+name: ste-code-jail
+version: "1.0.0"
+description: "Confine every filesystem-writing tool to the project repository. Blocks write_file / patch / skill_manage / terminal writes that resolve outside the repo root, so a bad relative path or a hallucinated absolute path cannot create stray directories elsewhere on the machine. Reads stay unrestricted. The repo root is discovered automatically (no machine-specific paths); override in jail.yaml."
+author: "STE-Code"
+kind: standalone
+hooks:
+  - pre_tool_call
