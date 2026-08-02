@@ -23,6 +23,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 PROMPTS_DIR = PROJECT / ".agents" / "prompts" / "maturity-fixes"
 TMP_DIR = PROJECT / ".agents" / "tmp"
 
@@ -79,7 +80,7 @@ def main():
                 continue
 
             tmp_path = TMP_DIR / f"phase-a-{worker_id}.txt"
-            tmp_path.write_text(enhanced)
+            write_text(tmp_path, enhanced)
             print(f"  ✓ {worker_id} → {target} ({len(enhanced)} chars)")
 
     print(f"\nAll prompts for batches {start}-{end} generated in {TMP_DIR}/")
