@@ -44,6 +44,7 @@ _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
+from ste_io import write_text  # noqa: E402
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 STATE_DIR = PROJECT / ".agents" / "state"
@@ -164,8 +165,8 @@ def _assemble(dry_run: bool, version: str) -> tuple[bool, dict]:
     # Consolidated full corpus is llms-full.txt (ste-code-rules.md /
     # ste-code-system-prompt.md were retired; llms-full.txt is the single-file
     # consolidated artifact).
-    (ARTIFACTS_DIR / "llms-full.txt").write_text(full, encoding="utf-8")
-    VERSION_PATH.write_text(version + "\n", encoding="utf-8")
+    write_text((ARTIFACTS_DIR / "llms-full.txt"), full)
+    write_text(VERSION_PATH, version + "\n")
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     from ste_checkpoint import save
     save(CHECKPOINT_PATH, {"assembled": len(rule_files), "version": version})
