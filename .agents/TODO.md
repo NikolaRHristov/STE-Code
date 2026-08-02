@@ -17,6 +17,7 @@ Architecture and reasoning: [`docs/architecture-profiles-and-jail.md`](../docs/a
 | Live-session harness with canary-file evidence | `scripts/live-jail-test.sh --all` |
 | Profiles hold symlinks back to this repository | `jail-install.sh --status` |
 | Installer links **and enables** the plugin | `--status` reports enablement |
+| v1 plugin retired — `.agents/hermes/jail/` is the only jail | `make check` green after removal |
 
 Profiles now on disk: `dev-ste-code` (authoring, live) and
 `benchmark-ste-code` (blank, `bench` policy). The `ste-code` consumer profile
@@ -29,28 +30,7 @@ hermes profile create ste-code --no-skills
 
 ---
 
-## 1. Retire the v1 plugin
-
-Two generations exist:
-
-```
-.agents/hermes/plugins/ste-code-jail/    v1 — superseded, no profile links it
-.agents/hermes/jail/                     v2 — single source of truth
-```
-
-v2 is what both profiles link to and what the `Makefile` tests. v1 is dead
-weight, but **confirm no session is working from it before deleting** — the
-directory name is close enough to v2's that a careless removal reads as an
-attack on the live jail.
-
-```bash
-git rm -r .agents/hermes/plugins/ste-code-jail
-make check          # must stay green
-```
-
----
-
-## 2. Migrate pipeline scripts off hop counting
+## 1. Migrate pipeline scripts off hop counting
 
 The jail is a backstop; this is the actual fix. **79** path derivations under
 `.agents/tools/` still compute the root by counting parent hops:
@@ -79,7 +59,7 @@ grep -rl "parent\.parent\.parent\|parents\[[0-9]\]" .agents/tools --include=*.py
 
 ---
 
-## 3. Wrap pipeline stages in the kernel jail
+## 2. Wrap pipeline stages in the kernel jail
 
 Argument inspection cannot see inside `python3 build.py`. No runner is
 wrapped yet:
