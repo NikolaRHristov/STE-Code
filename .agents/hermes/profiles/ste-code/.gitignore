@@ -1,0 +1,38 @@
+# Runtime state for the ste-code profile.
+# The live profile (~/.hermes/profiles/ste-code) is a symlink to this
+# directory, so everything Hermes writes at runtime lands here. None of it
+# belongs in the repository — it is machine-local and may contain secrets.
+
+# Credentials (symlinked in from ~/.hermes at install time)
+.env
+auth.json
+auth.lock
+
+# Session / conversation databases
+*.db
+*.db-shm
+*.db-wal
+state.db*
+session*
+sessions/
+
+# Caches and logs
+cache/
+logs/
+lsp/
+.hermes_history
+processes.json
+*_cache.json
+models_dev_cache.json
+ollama_cloud_models_cache.json
+provider_models_cache.json
+context_length_cache.yaml
+.update_check
+
+# Locally created runtime directories
+cron/
+hooks/
+skills/
+desktop/
+bin/
+audio_cache/

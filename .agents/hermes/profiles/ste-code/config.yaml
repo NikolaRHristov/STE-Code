@@ -1,0 +1,82 @@
+# The `ste-code` profile: read the standard, write your own documentation.
+#
+# This profile is the CONSUMER view of the repository. It is not the profile
+# the methodology is authored from — that is `dev-ste-code`. Here you read the
+# standard and the level artifacts, then apply them to documentation in your
+# own project.
+#
+# The `user` jail policy makes that boundary real: the STE-Code checkout is
+# read-only, network access is off, and delegation is disabled. A downloaded
+# methodology must not be able to rewrite itself.
+#
+# Source of truth: .agents/hermes/profiles/ste-code/ in the STE-Code
+# repository. `~/.hermes/profiles/ste-code` holds symlinks back to it.
+
+model:
+  default: tencent/hy3:free
+  provider: nous
+  base_url: https://inference-api.nousresearch.com/v1
+fallback_providers: []
+
+agent:
+  max_turns: 60
+  api_max_retries: 3
+  tool_use_enforcement: auto
+  task_completion_guidance: true
+  environment_probe: true
+  coding_context: auto
+  reasoning_effort: high
+  disabled_toolsets: []
+
+terminal:
+  backend: local
+  cwd: .
+  timeout: 180
+  persistent_shell: true
+
+tool_output:
+  max_bytes: 50000
+  max_lines: 2000
+  max_line_length: 2000
+
+compression:
+  enabled: true
+  threshold: 0.5
+  target_ratio: 0.2
+  protect_last_n: 20
+  protect_first_n: 3
+
+display:
+  show_reasoning: true
+  tool_progress: verbose
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 6000
+
+# Delegation is denied by the `user` jail policy. Depth 0 keeps the
+# configuration honest instead of advertising a capability the jail refuses.
+delegation:
+  max_spawn_depth: 0
+  orchestrator_enabled: false
+
+skills:
+  external_dirs: []
+  template_vars: true
+  inline_shell: false
+  write_approval: false
+
+security:
+  redact_secrets: true
+
+# Enforce write confinement. The jail is inert unless it is enabled here:
+# a symlinked but unenabled plugin looks correctly installed and enforces
+# NOTHING.
+plugins:
+  enabled:
+    - ste-code-jail
+  disabled: []
+  entries:
+    ste-code-jail:
+      allow_tool_override: false
