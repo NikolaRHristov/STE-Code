@@ -30,10 +30,10 @@ compression:
   protect_first_n: 3
 display:
   busy_input_mode: steer
-  show_reasoning: false
+  show_reasoning: true
   tool_progress: verbose
   sections:
-    thinking: hidden
+    thinking: expanded
 context:
   engine: compressor
 memory:
@@ -108,3 +108,5 @@ plugins:
   entries:
     ste-code-jail:
       allow_tool_override: false
+    privacy-scrub:
+      enabled: true

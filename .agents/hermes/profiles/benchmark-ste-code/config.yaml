@@ -1,51 +1,25 @@
-# The `benchmark-ste-code` profile: design and run the adversarial benchmark.
-#
-# Unlike the other locked profiles, this one SPAWNS. It launches one
-# adversarial sub-session per stage and may rewrite everything inside
-# `.agents/benchmark/` — the harness, the attack prompts, and the results. It
-# runs the standard; it does not develop it, so `ste-code/` stays read-only.
-#
-# Spawned sessions are FORCE-CONFINED: jail-exec-wrap sets
-# STE_CODE_JAIL_POLICY=bench (and HERMES_PROFILE=benchmark-ste-code) on every
-# child, so a benchmark run cannot spin up an unjailed agent. Network is off
-# and the profile control surface (config.yaml, hooks, plugins, skills) cannot
-# be rewritten — a benchmark cannot disable its own cage.
-#
-# Source of truth: .agents/hermes/profiles/benchmark-ste-code/ in the STE-Code
-# repository. `~/.hermes/profiles/benchmark-ste-code` is a symlink to it.
-
 model:
   default: tencent/hy3:free
   provider: nous
   base_url: https://inference-api.nousresearch.com/v1
-
 agent:
   max_turns: 120
   api_max_retries: 3
   tool_use_enforcement: auto
   environment_probe: true
   reasoning_effort: high
-
 terminal:
   backend: local
   cwd: .
   timeout: 300
   persistent_shell: true
-
-# Delegation drives the per-stage adversarial sessions. jail-exec-wrap
-# force-confines every child to this same policy, so enabling it is not an
-# escalation. Depth is capped: a spawned session may not spawn further.
 delegation:
   max_iterations: 120
   max_concurrent_children: 3
   max_spawn_depth: 1
   orchestrator_enabled: true
-
 security:
   redact_secrets: true
-
-# Enforce write confinement. The `bench` policy is derived from the profile
-# NAME, so no per-profile policy file is required.
 plugins:
   enabled:
     - ste-code-jail
@@ -53,3 +27,5 @@ plugins:
   entries:
     ste-code-jail:
       allow_tool_override: false
+display:
+  tool_progress: verbose
