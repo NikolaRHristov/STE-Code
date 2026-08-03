@@ -20,6 +20,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 BENCH = Path(__file__).resolve().parent
@@ -1331,6 +1332,166 @@ def test_capsule_provenance(cfg, tmp) -> None:
     check(first_seq == "seqA", "first_sequence_id recorded")
 
 
+def test_capsule_scheduler(cfg, tmp: Path) -> None:
+    """Unit 2: capsule sequencing - DAG order, rejection, scoping, await."""
+    try:
+        import capsule_scheduler as CS
+    except ImportError:
+        check(False, "capsule_scheduler.py importable")
+        return
+    check(True, "capsule_scheduler.py importable")
+
+    # 1. multi-level dependency graph: dependencies precede dependents
+    seq = {
+        "sequence_id": "seqA",
+        "capsules": [
+            {"id": "B1", "colour": "BLUE", "sees": ["R1"]},
+            {"id": "R1", "colour": "RED"},
+            {"id": "B2", "colour": "BLUE", "sees": ["B1", "R2"]},
+            {"id": "R2", "colour": "RED"},
+        ],
+    }
+    order = [c["id"] for c in CS.resolve_order(seq)]
+    check(set(order) == {"R1", "R2", "B1", "B2"}, "resolve_order keeps every capsule")
+    check(
+        order.index("R1") < order.index("B1") < order.index("B2")
+        and order.index("R2") < order.index("B2"),
+        "resolve_order puts dependencies before dependents ({})".format(order),
+    )
+
+    # 2. independent nodes order deterministically across repeated runs
+    repeats = {tuple(c["id"] for c in CS.resolve_order(seq)) for _ in range(5)}
+    check(len(repeats) == 1, "resolve_order is stable for independent nodes")
+
+    # 3. a dependency on a capsule that does not exist is rejected, not dropped
+    missing = {
+        "sequence_id": "seqM",
+        "capsules": [{"id": "B1", "colour": "BLUE", "sees": ["NOPE"]}],
+    }
+    try:
+        CS.resolve_order(missing)
+        rejected, diag = False, ""
+    except ValueError as exc:
+        rejected, diag = True, str(exc)
+    check(rejected, "missing dependency is rejected (not silently dropped)")
+    check(
+        "B1" in diag,
+        "missing-dependency error names the blocked capsule (shares the "
+        "cycle diagnostic: {})".format(diag),
+    )
+
+    # 4. a cycle is rejected and the diagnostic names the cycle members
+    cyc = {
+        "sequence_id": "seqC",
+        "capsules": [
+            {"id": "A", "sees": ["B"]},
+            {"id": "B", "sees": ["A"]},
+        ],
+    }
+    try:
+        CS.resolve_order(cyc)
+        cycled, cdiag = False, ""
+    except ValueError as exc:
+        cycled, cdiag = True, str(exc)
+    check(cycled, "cycle in the sees graph raises ValueError")
+    check(
+        "A" in cdiag and "B" in cdiag and "cycle" in cdiag,
+        "cycle diagnostic names the offending nodes ({})".format(cdiag),
+    )
+
+    # 5. escape-set scoping: a BLUE capsule sees only its declared dependencies
+    base = tmp / "capsched"
+    for variant, rnd, tech in (("0", 1, "seen"), ("1", 1, "unseen")):
+        d = base / "variant{}".format(variant) / "round{}".format(rnd)
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "escapes.json").write_text(
+            json.dumps([{"technique": tech, "placement": "head"}]),
+            encoding="utf-8",
+        )
+    all_caps = {
+        "R1": {"id": "R1", "colour": "RED", "variant": "0", "round": 1},
+        "R2": {"id": "R2", "colour": "RED", "variant": "1", "round": 1},
+        "B1": {
+            "id": "B1",
+            "colour": "BLUE",
+            "sees": ["R1"],
+            "timing_offset_s": 7,
+        },
+    }
+    scoped = CS._scoped_escapes(base, "seqA", all_caps["B1"], all_caps)
+    check(scoped is not None and scoped.exists(), "scoped escape file is written")
+    payload = json.loads(scoped.read_text()) if scoped else []
+    techs = {e.get("technique") for e in payload}
+    check(techs == {"seen"}, "scoping keeps only sees-declared escapes ({})".format(techs))
+    check(
+        all(e.get("timing") == "delayed_7s" for e in payload),
+        "timing offset is encoded on scoped escapes",
+    )
+    # a capsule that sees nothing gets no scoped file
+    check(
+        CS._scoped_escapes(base, "seqA", all_caps["R1"], all_caps) is None,
+        "a capsule with no sees produces no scoped file",
+    )
+    # a capsule seeing a dependency with no escapes on disk also yields None
+    check(
+        CS._scoped_escapes(
+            base,
+            "seqA",
+            {"id": "B9", "sees": ["R9"]},
+            {"R9": {"id": "R9", "variant": "7", "round": 9}},
+        )
+        is None,
+        "absent dependency escapes produce no scoped file",
+    )
+
+    # 6. bounded sentinel wait: times out when absent, returns fast when present
+    absent = tmp / "no-such-sentinel.json"
+    t0 = time.time()
+    waited = CS._await_file(absent, 0.3, 0.05)
+    elapsed = time.time() - t0
+    check(waited is False, "_await_file returns False when the sentinel never lands")
+    check(0.2 <= elapsed < 5.0, "_await_file honours its timeout ({:.2f}s)".format(elapsed))
+    present = tmp / "sentinel-present.json"
+    present.write_text("{}", encoding="utf-8")
+    check(CS._await_file(present, 5.0, 0.05) is True, "_await_file sees an existing sentinel")
+
+    # load_sequence: absent file degrades to the legacy fixed order (empty list)
+    class _Cfg:
+        profile_dir = tmp / "empty-profile"
+
+    _Cfg.profile_dir.mkdir(parents=True, exist_ok=True)
+    check(CS.load_sequence(_Cfg()) == [], "load_sequence returns [] with no sequence.yaml")
+    (_Cfg.profile_dir / "sequence.yaml").write_text(
+        "sequence_id: s1\ncapsules:\n  - id: R1\n---\nsequence_id: s2\ncapsules:\n  - id: R2\n",
+        encoding="utf-8",
+    )
+    docs = CS.load_sequence(_Cfg())
+    check(
+        [d.get("sequence_id") for d in docs] == ["s1", "s2"],
+        "load_sequence reads every YAML document",
+    )
+    (_Cfg.profile_dir / "sequence.yaml").write_text(
+        "capsules: [ {id: R1,\n  bad: ]}\n", encoding="utf-8"
+    )
+    check(CS.load_sequence(_Cfg()) == [], "malformed sequence.yaml degrades to []")
+
+    # entropy summary counts distinct (technique, placement) cells
+    summary = CS.summarize_entropy(
+        seq,
+        {
+            "R1": [
+                {"technique": "a", "placement": "head"},
+                {"technique": "a", "placement": "head"},
+                {"technique": "a", "placement": "tail"},
+            ],
+            "R2": [{"technique": "b", "placement": "head"}, {"no": "fields"}],
+        },
+    )
+    check(summary["distinct_cells"] == 3, "summarize_entropy counts distinct cells")
+    check(summary["total_escapes"] == 4, "summarize_entropy ignores incomplete records")
+    check(summary["sequence_id"] == "seqA", "summarize_entropy reports the sequence id")
+
+
 def main() -> int:
     cfg = load_config(reload=True)
     root = cfg.root
@@ -1351,6 +1512,7 @@ def main() -> int:
         test_scheduler(cfg, tmp)
         test_white(cfg, tmp)
         test_capsule_provenance(cfg, tmp)
+        test_capsule_scheduler(cfg, tmp)
         test_pipeline(cfg, tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
