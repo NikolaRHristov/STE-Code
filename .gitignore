@@ -49,8 +49,11 @@ venv/
 # exceptions. orchestrator.py, orchestrator-control.py, benchmark-levels.py,
 # run_pipeline.py and run_all_variations.py default under it; pass
 # --results-dir / --base only with a path inside it.
-.agents/benchmark/tests/*
+.agents/benchmark/tests/**/*
 !.agents/benchmark/tests/README.md
+
+.agents/hermes/jail/tests/**/*
+!.agents/hermes/jail/tests/README.md
 
 # Ad-hoc prompts are generated before a run (deterministic, seed=7).
 .agents/benchmark/test-cases-adhoc/
