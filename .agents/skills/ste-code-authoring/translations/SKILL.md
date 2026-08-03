@@ -814,7 +814,7 @@ Example: 5 placeholders under `zh-CN/` but only 4 under `ja/`.
 ### Symptom: Worker Creates Placeholders Under Wrong Root
 
 **Cause:** The worker ran from the wrong working directory. Placeholders ended
-up at `~/Developer/macOS/Application/Manual/translations/...` instead of
+up at `<manual-repo>/translations/...` instead of
 `<project_root>/translations/...`.
 
 **Fix:**

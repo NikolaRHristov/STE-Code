@@ -15,7 +15,7 @@
 # Exit codes: 0 = no broken links, 1 = lychee missing / bad usage,
 #             2 = broken links found.
 #
-# Structure adapted from REPxREP/Repository/Maintain/Check/Links.sh.
+# Structure adapted from <repo>/Repository/Maintain/Check/Links.sh.
 
 set -e
 

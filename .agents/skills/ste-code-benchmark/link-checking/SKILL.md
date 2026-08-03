@@ -190,7 +190,7 @@ Repo-specific decisions:
   drift mid-run. Re-run after regeneration settles before treating
   `artifacts/README.md` misses as defects.
 
-Reference-repo provenance: config base from `CodeEditorLand/WebSite/lychee.toml`
+Reference-repo provenance: config base from `<repo>/WebSite/lychee.toml`
 (cache, retry, `[header]`, fragment policy); runner shape from
-`REPxREP/Repository/Maintain/Check/Links.sh` (quoted globs, tool-presence
+`<repo>/Repository/Maintain/Check/Links.sh` (quoted globs, tool-presence
 guard).

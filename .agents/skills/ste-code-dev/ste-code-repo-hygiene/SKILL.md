@@ -5,7 +5,7 @@ description:
     to
 category: dev
 capability: developing-and-changing-the-standard
-source: /Users/nikola/.hermes/profiles/dev-ste-code/skills/ste-code/ste-code-repo-hygiene
+source: <home>/.hermes/profiles/dev-ste-code/skills/ste-code/ste-code-repo-hygiene
 layout: ste-code-canonical-v1
 ---
 
@@ -32,9 +32,9 @@ hardened after a multi-session DRY + config-centralisation refactor.
 
 ## 2. Shippability / anonymization
 
-- **No local absolute paths in tracked files.** Replace `/Users/nikola` →
-  `/home/operator` and `/Volumes/.../STE-Code` with marker-walk root detection.
-  `git grep -n "/Volumes/\|/Users/" -- .` (excluding vendor) must be clean
+- **No local absolute paths in tracked files.** Replace `<home>` →
+  `/home/operator` and `<repo-root>` with marker-walk root detection.
+  `git grep -n "<repo-root>\\|<home>" -- .` (excluding vendor) must be clean
   before shipping.
 - **PII in tracked memory / profile files.** When `USER.md` / `MEMORY.md` are
   tracked in the repo (they are symlinked from
@@ -198,8 +198,8 @@ git commit -m "scope(subdir): short reason"  # re-commit cleanly
 ## 8. Dependency manifests (`requirements.txt`)
 
 When this repo needs a `requirements.txt` (repo root), mirror the user's other
-repos — `CodeEditorLand/Land/requirements.txt` and
-`REPxREP/Repository/requirements.txt`:
+repos — `<repo>/Land/requirements.txt` and
+`<repo>/Repository/requirements.txt`:
 
 - **Banner-style `=== section ===` comments**, not a bare pip list.
 - **Separate blocks:** `Python` (real PyPI packages pinned `pkg>=x.y.z`, or "No

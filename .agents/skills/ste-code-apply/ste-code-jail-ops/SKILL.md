@@ -4,7 +4,7 @@ description:
     Maintain the jail that confines the three STE-Code Hermes profiles. The jail
 category: apply
 capability: applying-the-standard-to-a-codebase
-source: /Users/nikola/.hermes/profiles/dev-ste-code/skills/ste-code/ste-code-jail-ops
+source: <home>/.hermes/profiles/dev-ste-code/skills/ste-code/ste-code-jail-ops
 layout: ste-code-canonical-v1
 ---
 

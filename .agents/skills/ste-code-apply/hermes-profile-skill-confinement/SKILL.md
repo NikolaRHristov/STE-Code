@@ -5,7 +5,7 @@ description:
     Hermes skills
 category: apply
 capability: applying-the-standard-to-a-codebase
-source: /Users/nikola/.hermes/profiles/dev-ste-code/skills/devops/hermes-profile-skill-confinement
+source: <home>/.hermes/profiles/dev-ste-code/skills/devops/hermes-profile-skill-confinement
 layout: ste-code-canonical-v1
 ---
 
