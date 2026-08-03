@@ -67,6 +67,16 @@ silently ships empty work.
   with `ls`/reads before re-launching.
 - The jail may reject `python3 - <<'EOF>` heredocs as a write to `/` (false
   positive). Write the salvage script to `.agents/tmp/` and run it instead.
+- **Concrete on-disk verification battery (don't just trust `status`).** After a
+  delegate returns, run an independent check on the named deliverable before
+  declaring success: (a) `read_file` the output path — read the actual content,
+  don't rely on `grep` alone; (b) `grep -n "<false-phrase>" <file>` to prove the
+  bad text is gone; (c) `git check-ignore -v <path>` whenever the claim involves
+  what the repo ships. Observed this session: a delegate reported
+  `status=completed` with an HTTP 429 on its final transport call, yet its
+  `patch` writes HAD landed — the battery confirmed the edits were real, so the
+  429 tail was the "completed + 429 + real deliverable" non-failure case (see
+  pitfall #1), not a discard. The battery is what lets you tell the two apart.
 - A delegate that says "done?" or pastes an error as a result has not verified
   anything. Trust the file, not the chat.
 

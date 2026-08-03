@@ -34,6 +34,27 @@ hardened after a multi-session DRY + config-centralisation refactor.
   `/home/operator` and `/Volumes/.../STE-Code` with marker-walk root detection.
   `git grep -n "/Volumes/\|/Users/" -- .` (excluding vendor) must be clean before
   shipping.
+- **PII in tracked memory / profile files.** When `USER.md` / `MEMORY.md` are
+  tracked in the repo (they are symlinked from `~/.hermes/profiles/<p>/memories/`
+  into `.agents/hermes/memory/<p>/`), context-compaction auto-summaries routinely
+  capture real identifiers — the operator's full name, the GitHub org, and repo
+  names. These are version-controlled, so they leak on every clone. **Anonymize on
+  sight:** `<person>`, `<github-org>`, `<repo-a/b/c>`, etc. Keep the workflow
+  preferences (the durable, non-personal part) verbatim.
+  - *Verification:* `grep -rniE "nikola|hristov|<real-org>|<real-repo>" .agents/hermes/memory/`
+    must return CLEAN before committing memory files.
+- **Audit for false "ships" claims.** `.agents/tmp/*` is gitignored → it ships
+  NOTHING (see §1). A doc that says the repo "ships" content from a gitignored
+  path is self-contradictory and false. Observed in the wild: a skill claimed the
+  repo "ships a family of release notes under `.agents/tmp/remote-notes/`" while
+  the repo's own hygiene rule states `.agents/tmp/` ships nothing.
+  - *Audit:* grep `ships|repo ships|the repo ships` across `**/*.md`; for each hit,
+    confirm it is NOT a claim about THIS repo's shipped contents reaching a
+    gitignored path (verify with `git check-ignore -v <path>`). Cautionary
+    anti-pattern tables (e.g. "Repository → profile (wrong): the repo ships a
+    dangling symlink") and illustrative Non-STE→STE example sentences are
+    ACCURATE — leave them. Only correct claims that assert committed/shipped
+    content living under a gitignored path.
 - Repo is the source of truth; Hermes profiles symlink INTO it. Never put a
   repo→`~/.hermes` symlink in the tree.
 
