@@ -1,6 +1,6 @@
 ---
 name: adaptation
-description: > **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+description: STE-Code skill — load when its trigger matches; see body for workflow.
 category: authoring
 capability: authoring-and-changing-the-standard
 source: .agents/skills/adaptation
@@ -9,7 +9,6 @@ layout: ste-code-canonical-v1
 
 # Adaptation Protocol - Stage 4
 
-> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
 > Session isolation + STRICT_RULES (R1-R6) from `lib/pipeline_core.py` apply to
 > THIS skill. One session = one operation = one read + one write. No re-editing
 > own output.

@@ -99,10 +99,9 @@ substring of the new file. 0 missing = safe.
 
 ### 3. Preserve out-of-scope artifacts
 
-Keep `OPERATING_PRINCIPLES.md` (skills reference it via
-`.agents/skills/OPERATING_PRINCIPLES.md`) and any profile-local real dirs that
-are NOT STE-Code (e.g. `delegation/`) unless the user says otherwise. Only
-remove STE skills that are now duplicated inside a bucket.
+Keep any profile-local real dirs that are NOT STE-Code (e.g. `delegation/`)
+unless the user says otherwise. Only remove STE skills that are now duplicated
+inside a bucket.
 
 ## Pitfalls
 

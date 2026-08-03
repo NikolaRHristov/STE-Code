@@ -1,6 +1,6 @@
 ---
 name: grouping
-description: > **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
+description: STE-Code skill — load when its trigger matches; see body for workflow.
 category: dev
 capability: developing-and-changing-the-standard
 source: .agents/skills/grouping
@@ -9,7 +9,6 @@ layout: ste-code-canonical-v1
 
 # Grouping & Semantic Chunk Assembly (Phase C)
 
-> **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
 > STRICT_RULES (R1–R6) from `lib/pipeline_core.py` apply.
 
 ## What changed (read this first)
