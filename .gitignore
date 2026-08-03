@@ -22,6 +22,11 @@ venv/
 .agents/state/*
 !.agents/state/README.md
 
+# Per-run scratch: release notes, research findings, working rewrites. They
+# describe ONE machine's run, never the project — committed, they make the next
+# clone skip work it never did. The repo ships NOTHING from here (the repo's own
+# .agents/skills/ste-code-dev/ste-code-repo-hygiene/SKILL.md states ".agents/tmp/
+# is gitignored → it ships nothing"). Keep final reports here; never version them.
 .agents/tmp/*
 !.agents/tmp/README.md
 
