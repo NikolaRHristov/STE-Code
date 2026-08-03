@@ -255,6 +255,13 @@ NETWORK_TOOLS = [
 # must not be able to escalate by delegating to a less restricted context.
 ESCALATION_TOOLS = ["delegate_task", "cronjob", "skill_manage", "memory"]
 
+# Escalation tools the bench policy keeps despite the general rule: delegation
+# drives the per-stage benchmark sessions, and jail-exec-wrap force-confines
+# the children, so spawning cannot widen the cage. Everything else in
+# ESCALATION_TOOLS is denied under bench by default - including entries added
+# in future, unless they are deliberately exempted here.
+BENCH_ALLOWED_ESCALATION_TOOLS = frozenset({"delegate_task", "cronjob"})
+
 # Commands that reach the network or install software.
 NETWORK_COMMANDS = [
     "curl",
@@ -491,7 +498,8 @@ def _build_bench(project_root: Optional[str], cfg: Dict[str, Any], home: str) ->
         # force-confined by jail-exec-wrap. The rest of the escape surface stays
         # shut: no network, no agent binary, no profile self-modification.
         allowed_tools=None,
-        denied_tools=NETWORK_TOOLS + ["skill_manage", "memory"],
+        denied_tools=NETWORK_TOOLS
+        + [t for t in ESCALATION_TOOLS if t not in BENCH_ALLOWED_ESCALATION_TOOLS],
         denied_commands=NETWORK_COMMANDS + AGENT_SPAWN_COMMANDS,
         description=(
             "Benchmark profile: adversarial prompts and per-stage sessions run "

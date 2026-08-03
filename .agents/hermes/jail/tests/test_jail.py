@@ -25,6 +25,7 @@ import importlib.util
 import logging
 import os
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -788,6 +789,82 @@ def run_fail_closed(verbose: bool) -> int:
     return failures
 
 
+def run_bench_escalation(verbose: bool) -> int:
+    """Regression: bench must derive its escalation denies (item B3).
+
+    The bench policy used to hardcode ``["skill_manage", "memory"]``, so any
+    tool added to ``ESCALATION_TOOLS`` later was silently ALLOWED under bench -
+    a fail-OPEN default. It now subtracts ``BENCH_ALLOWED_ESCALATION_TOOLS``
+    from ``ESCALATION_TOOLS``, so new entries default to denied.
+
+    Both sets are pinned here so the equivalence is enforced, not assumed.
+    """
+    import core.policy as core_policy
+
+    print(f"\n{'=' * 66}")
+    print("BENCH ESCALATION DENIES (B3) - new escalation tools fail CLOSED")
+    print(f"{'=' * 66}")
+
+    failures = 0
+    checks = 0
+
+    def _bench_denied() -> List[str]:
+        home = os.path.join(tempfile.gettempdir(), "ste-bench-b3-home")
+        return list(core_policy._build_bench(None, {}, home).denied_tools)
+
+    denied = _bench_denied()
+
+    # 1. spawning stays allowed - delegation drives the per-stage sessions.
+    for tool in sorted(core_policy.BENCH_ALLOWED_ESCALATION_TOOLS):
+        checks += 1
+        if tool in denied:
+            failures += 1
+            print(f"  [FAIL] {tool}: denied under bench (breaks per-stage runs)")
+        elif verbose:
+            print(f"  [ok]   {tool} allowed under bench")
+
+    # 2. the rest of the escalation surface stays shut.
+    for tool in core_policy.ESCALATION_TOOLS:
+        if tool in core_policy.BENCH_ALLOWED_ESCALATION_TOOLS:
+            continue
+        checks += 1
+        if tool not in denied:
+            failures += 1
+            print(f"  [HOLE] {tool}: NOT denied under bench")
+        elif verbose:
+            print(f"  [ok]   {tool} denied under bench")
+
+    # 3. fail-open guard: a future ESCALATION_TOOLS entry must be denied by
+    #    default. This is the assertion that would have caught the defect.
+    checks += 1
+    sentinel = "__b3_sentinel_tool__"
+    original = list(core_policy.ESCALATION_TOOLS)
+    try:
+        core_policy.ESCALATION_TOOLS.append(sentinel)
+        if sentinel not in _bench_denied():
+            failures += 1
+            print(
+                f"  [HOLE] new ESCALATION_TOOLS entry {sentinel} is ALLOWED "
+                "under bench (bench denies are hardcoded, not derived)"
+            )
+        elif verbose:
+            print(f"  [ok]   new entry {sentinel} denied under bench by default")
+    finally:
+        core_policy.ESCALATION_TOOLS[:] = original
+
+    # 4. restoring the list must restore the effective set exactly.
+    checks += 1
+    if _bench_denied() != denied:
+        failures += 1
+        print("  [FAIL] sentinel probe left the bench denied set mutated")
+    elif verbose:
+        print("  [ok]   bench denied set unchanged after the probe")
+
+    if not verbose:
+        print(f"  {checks - failures}/{checks} bench escalation checks passed")
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-v", "--verbose", action="store_true")
@@ -803,6 +880,7 @@ def main() -> int:
     policies = [opts.policy] if opts.policy else ["dev", "user", "bench"]
     total_failures = sum(run_policy(p, opts.verbose) for p in policies)
     total_failures += run_fail_closed(opts.verbose)
+    total_failures += run_bench_escalation(opts.verbose)
 
     print(f"\n{'=' * 66}")
     if total_failures:
