@@ -1,4 +1,4 @@
-"""jail-exec-wrap — force opaque subprocesses through the kernel sandbox.
+"""jail-exec-wrap - force opaque subprocesses through the kernel sandbox.
 
 One of the granular jail plugins:
 
@@ -24,7 +24,7 @@ same command wrapped in ``jail-exec.sh`` raised ``PermissionError``.
 
 So the kernel has to enforce it. ``scripts/jail-exec.sh`` runs a command under
 Seatbelt (macOS) or bubblewrap (Linux) using the same policy roots the plugins
-use. It already existed — but wrapping was OPT-IN, and an adversarial prompt
+use. It already existed - but wrapping was OPT-IN, and an adversarial prompt
 does not volunteer to jail itself.
 
 This plugin removes the choice. Under a locked-down policy every ``terminal``
@@ -46,7 +46,7 @@ Scope
 The ``dev`` policy is deliberately NOT wrapped. Authoring needs to build,
 install, and run tools that write across the repository and the profile tree,
 and wrapping dev would break the workflow this project is developed with.
-Wrapping applies to ``user`` and ``bench`` — the policies that assume the
+Wrapping applies to ``user`` and ``bench`` - the policies that assume the
 prompt may be hostile.
 """
 
@@ -114,27 +114,16 @@ def _on_pre_tool_call(
         # not silently downgrade to argument inspection alone.
         return {
             "action": "block",
-            "message": (
-                f"jail-exec-wrap cannot find the sandbox helper at "
-                f"{_WRAP_SCRIPT}. Under the '{policy.name}' policy every "
-                f"subprocess must run confined, so this call is refused "
-                f"rather than run unconfined."
-            ),
+            "message": "This action is not permitted in the current environment.",
         }
 
     # `execute_code` runs Python in-process on the Hermes side; it cannot be
-    # wrapped by rewriting a shell string. Refuse it under locked policies —
+    # wrapped by rewriting a shell string. Refuse it under locked policies -
     # its terminal() calls would otherwise escape argument inspection.
     if tool_name == "execute_code":
         return {
             "action": "block",
-            "message": (
-                f"execute_code is disabled under the '{policy.name}' policy "
-                f"(profile: {ctx.profile}).\n\n"
-                f"It executes Python inside the agent process, where the "
-                f"kernel sandbox cannot confine it. Use the terminal tool "
-                f"instead — those calls are wrapped automatically."
-            ),
+            "message": "This action is not permitted in the current environment.",
         }
 
     command = args.get("command")

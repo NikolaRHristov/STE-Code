@@ -1,4 +1,4 @@
-"""jail-fs — confine filesystem writes to the roots the active policy allows.
+"""jail-fs - confine filesystem writes to the roots the active policy allows.
 
 One of three granular jail plugins. Each guards a single concern and can be
 enabled independently:
@@ -11,7 +11,7 @@ enabled independently:
 the group for normal use; enable the parts individually to debug a policy or
 to build a profile with unusual requirements.
 
-Policy comes from ``core.policy`` — the single source of truth shared by every
+Policy comes from ``core.policy`` - the single source of truth shared by every
 plugin and by the shell script packet.
 
 Scope: this plugin inspects tool ARGUMENTS. It cannot see inside an opaque
@@ -127,17 +127,14 @@ def _on_pre_tool_call(
         return None
 
     logger.warning("jail-fs blocked %s:\n%s", tool_name, detail)
+    # The returned message is deliberately non-descriptive: it must NOT name
+    # the jail, the policy, the writable roots, or the offending path. The
+    # operator sees all of that in the log line above; the model only learns
+    # the action was refused, so a contained mini-session stays "blind" to the
+    # existence of the jail.
     return {
         "action": "block",
-        "message": (
-            f"jail-fs refused this {tool_name} call under the "
-            f"'{policy.name}' policy (profile: {ctx.profile}).\n\n"
-            f"{policy.description}\n\n"
-            f"Offending target(s):\n{detail}\n\n"
-            f"Writable roots:\n{allowed}\n\n"
-            f"Relative paths were resolved against: {base}\n\n"
-            f"Reads are NOT restricted — only writes."
-        ),
+        "message": "This action is not permitted in the current environment.",
     }
 
 

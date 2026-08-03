@@ -1,4 +1,4 @@
-"""ste-code-jail-core — shared policy engine for every jail plugin.
+"""ste-code-jail-core - shared policy engine for every jail plugin.
 
 Single source of truth. The granular plugins (``jail-fs``, ``jail-cmd``,
 ``jail-net``) and the shell script packet all resolve their rules through this
@@ -11,7 +11,7 @@ The active profile selects a policy. Resolution order:
 1. ``STE_CODE_JAIL_POLICY`` environment variable (explicit override)
 2. ``policy:`` in the profile's ``jail.yaml``
 3. the profile name mapped through ``PROFILE_POLICY_MAP``
-4. ``strict`` — fail closed when nothing matches
+4. ``strict`` - fail closed when nothing matches
 
 | Profile              | Policy  | Intent                                    |
 |----------------------|---------|-------------------------------------------|
@@ -20,7 +20,7 @@ The active profile selects a policy. Resolution order:
 | `benchmark-ste-code` | `bench` | Run benchmarks under adversarially generated prompts. Writes confined to the benchmark output tree only. No network. Telemetry stays inspectable. |
 
 ``user`` and ``bench`` are locked down: a malicious or confused prompt cannot
-reach the rest of the machine. ``dev`` is deliberately permissive — it is the
+reach the rest of the machine. ``dev`` is deliberately permissive - it is the
 profile you author from.
 
 Reads are unrestricted under every policy. Confinement targets writes,
@@ -108,7 +108,7 @@ def resolve_project_root(
 # location makes resolution cwd-INDEPENDENT: a `hermes -z` / delegated child
 # spawned with cwd=~/.hermes (or ~) would otherwise walk up from its cwd, find
 # no .git marker, return None, and silently DROP the real repo from every
-# policy's write roots — which is exactly the symptom of a child session that
+# policy's write roots - which is exactly the symptom of a child session that
 # "cannot locate anything." Prefer this anchor; fall back to the cwd-walk only
 # when the core is imported from outside a checkout (e.g. unit tests).
 def resolve_project_root_anchored() -> Optional[str]:
@@ -139,7 +139,7 @@ def profile_home(profile: str) -> str:
 
     ``hermes_home()`` trusts ``$HERMES_HOME``, which is inherited from whatever
     shell started the process. A bench run launched from a dev session
-    therefore resolved its writable profile root to ``dev-ste-code`` — the
+    therefore resolved its writable profile root to ``dev-ste-code`` - the
     locked-down policy handed out write access to the PERMISSIVE profile's
     directory. Deriving the path from the resolved profile NAME closes that
     hole: the policy grants the profile it claims to be running as, not the
@@ -185,6 +185,7 @@ class Policy:
     name: str
     write_roots: List[str] = field(default_factory=list)
     deny_roots: List[str] = field(default_factory=list)
+    read_deny_roots: List[str] = field(default_factory=list)
     allow_network: bool = True
     allowed_tools: Optional[List[str]] = None
     denied_tools: List[str] = field(default_factory=list)
@@ -196,7 +197,7 @@ class Policy:
 
         Most-specific-match-wins: the longest matching write root is compared
         against the longest matching deny root. This lets a policy deny a
-        parent while still allowing a directory nested inside it — needed
+        parent while still allowing a directory nested inside it - needed
         because the repository's own parent is denied while the repository is
         allowed.
         """
@@ -234,6 +235,28 @@ class Policy:
         for pattern in self.denied_commands:
             if fnmatch.fnmatch(basename, pattern):
                 return f"command '{basename}' is disabled by the {self.name} policy"
+        return None
+
+    def may_read(self, resolved: str) -> Optional[str]:
+        """Return a refusal reason for reading *resolved*, else ``None``.
+
+        Reads are unrestricted under ``dev`` (read_deny_roots is empty there).
+        Under locked-down policies this blocks the operating-system / kernel
+        tree, every profile's control surface (``.env``, ``auth.json``,
+        ``config.yaml``, ``memories/`` …), and any *sibling* profile directory
+        - so a bench delegate or poll worker cannot read the host's internals
+        or another profile's credentials. The verdict is intentionally
+        non-descriptive: the agent must not learn *what* was denied or *why*,
+        only that the read is not permitted in this environment.
+        """
+        if not self.read_deny_roots:
+            return None
+        for root in self.read_deny_roots:
+            if is_within(resolved, root) or resolved == root:
+                # Non-descriptive: do NOT name the jail, the policy, or the
+                # denied path. The operator sees the detail in the log line;
+                # the model only gets a neutral refusal.
+                return "read not permitted"
         return None
 
 
@@ -339,7 +362,9 @@ AGENT_SPAWN_COMMANDS = [
 # escape.
 #
 # These are denied even inside the profile so a jailed session can WRITE its
-# own logs but never rewrite its own cage.
+# own logs but never rewrite its own cage. The same list is reused to DENY
+# READS of the control surface under locked-down policies, so a bench delegate
+# or poll worker cannot read another profile's .env / auth.json / config.yaml.
 PROFILE_CONTROL_SUBDIRS = [
     "config.yaml",
     "jail.yaml",
@@ -355,12 +380,71 @@ PROFILE_CONTROL_SUBDIRS = [
     "agents",
 ]
 
+# Paths at the OPERATING-SYSTEM / kernel level that a locked-down session must
+# never be able to READ, even though the jail's other layers leave reads open.
+# These are machine-specific and carry no information useful to a benchmark
+# task, but they do expose the host's kernel, firmware and credential store.
+# A child session launched under the bench policy is thus "blind" to the
+# surroundings the operator wants hidden - without the prompt ever mentioning
+# the jail.
+READ_DENY_KERNEL = [
+    "/System",
+    "/Library/Apple",
+    "/Library/Extensions",
+    "/System/Library/Extensions",
+    "/usr/lib/kext",
+    "/Library/Kernels",
+    "/var/db",
+    "/private/var/db",
+    "/var/root",
+    "/private/var/root",
+    "/boot",
+    "/proc",
+    "/sys",
+]
+
 
 def _profile_control_denies(profile_home: str) -> List[str]:
     """Absolute deny paths for the control surface of *profile_home*."""
     return [
         normalize(os.path.join(profile_home, name)) for name in PROFILE_CONTROL_SUBDIRS
     ]
+
+
+def _read_deny_roots_for(home: str, profile: str) -> List[str]:
+    """Build the read-deny list for a locked-down policy.
+
+    Covers three classes the operator wants hidden from a bench child:
+      1. the OS / kernel tree (``READ_DENY_KERNEL``);
+      2. every profile's control surface - ``.env``, ``auth.json``,
+         ``config.yaml``, ``memories/`` … (reusing ``PROFILE_CONTROL_SUBDIRS``)
+         under BOTH the active profile and any sibling;
+      3. every *sibling* profile directory entirely, so a child cannot read
+         another profile's session state or secrets.
+    The active profile's telemetry (logs/db) stays readable; only its control
+    surface is denied, mirroring the write-side ``_profile_control_denies``.
+    """
+    roots: List[str] = [normalize(r) for r in READ_DENY_KERNEL]
+
+    # All profile directories we can see.
+    profiles_parent = os.path.dirname(home)
+    if os.path.basename(profiles_parent) == "profiles":
+        try:
+            for name in os.listdir(profiles_parent):
+                if name == profile:
+                    continue
+                sib = normalize(os.path.join(profiles_parent, name))
+                if os.path.isdir(sib):
+                    roots.append(sib)
+        except OSError:
+            pass
+
+    # Control-surface files inside the active profile (and siblings already
+    # covered above, but list explicitly so a future restructure stays safe).
+    for name in PROFILE_CONTROL_SUBDIRS:
+        roots.append(normalize(os.path.join(home, name)))
+
+    return roots
 
 
 def _build_dev(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> Policy:
@@ -377,8 +461,8 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> P
     # The dev profile provisions the fleet: `scripts/jail-install.sh` links the
     # jail into `ste-code` and `benchmark-ste-code`, and those profiles have to
     # be created and configured from somewhere. That capability already existed
-    # — the install script writes through an opaque subprocess, which argument
-    # inspection cannot see — so denying it at layer 1 only made the policy
+    # - the install script writes through an opaque subprocess, which argument
+    # inspection cannot see - so denying it at layer 1 only made the policy
     # dishonest about what dev can do. Granting the profiles root makes it
     # explicit and reviewable.
     #
@@ -407,7 +491,9 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> P
     )
 
 
-def _build_user(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> Policy:
+def _build_user(
+    project_root: Optional[str], cfg: Dict[str, Any], home: str, profile: str = ""
+) -> Policy:
     """Locked-down consumer policy.
 
     The user reads the standard and artifacts and applies them to their OWN
@@ -432,7 +518,7 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> 
     # Most-specific-match-wins would otherwise let a workspace nested in the
     # repo override the repo-wide deny and make the shipped product writable
     # by itself. A user who launches from inside the checkout gets no project
-    # write root at all — which is the correct locked-down outcome, and the
+    # write root at all - which is the correct locked-down outcome, and the
     # block message tells them to run from their own project directory.
     workspace_inside_repo = bool(project_root and is_within(workspace, project_root))
     if not workspace_inside_repo:
@@ -449,6 +535,7 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> 
         name="user",
         write_roots=write,
         deny_roots=deny,
+        read_deny_roots=_read_deny_roots_for(home, profile),
         allow_network=False,
         allowed_tools=None,
         denied_tools=NETWORK_TOOLS + ESCALATION_TOOLS,
@@ -461,11 +548,13 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> 
     )
 
 
-def _build_bench(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> Policy:
+def _build_bench(
+    project_root: Optional[str], cfg: Dict[str, Any], home: str, profile: str = ""
+) -> Policy:
     """Benchmark policy: run adversarial sessions, confined to the benchmark tree.
 
     The benchmark launches adversarial sub-sessions (one per stage) and may
-    rewrite anything inside ``.agents/benchmark/`` — its own harness, attacks,
+    rewrite anything inside ``.agents/benchmark/`` - its own harness, attacks,
     results. It may NOT touch the standard itself (``ste-code/`` is read-only)
     and may not change the machine beyond that tree.
 
@@ -502,6 +591,7 @@ def _build_bench(project_root: Optional[str], cfg: Dict[str, Any], home: str) ->
         name="bench",
         write_roots=write,
         deny_roots=deny,
+        read_deny_roots=_read_deny_roots_for(home, profile),
         allow_network=False,
         # Spawning is allowed (delegation drives the per-stage sessions) but is
         # force-confined by jail-exec-wrap. The rest of the escape surface stays
@@ -587,7 +677,7 @@ def load_context(force: bool = False) -> JailContext:
     if not policy_name:
         policy_name = _STRICT_FALLBACK
         logger.warning(
-            "ste-code-jail-core: profile '%s' has no policy mapping — "
+            "ste-code-jail-core: profile '%s' has no policy mapping - "
             "failing closed to '%s'",
             profile,
             policy_name,
@@ -611,24 +701,27 @@ def load_context(force: bool = False) -> JailContext:
     builder = _BUILDERS.get(str(policy_name))
     if builder is None:
         logger.error(
-            "ste-code-jail-core: unknown policy '%s' — failing closed to '%s'",
+            "ste-code-jail-core: unknown policy '%s' - failing closed to '%s'",
             policy_name,
             _STRICT_FALLBACK,
         )
         builder = _BUILDERS[_STRICT_FALLBACK]
 
-    policy = builder(project_root, cfg, profile_root)
+    policy = builder(project_root, cfg, profile_root, profile)
 
     # Config may widen or narrow the computed roots.
     for extra in cfg.get("extra_write_roots") or []:
         policy.write_roots.append(normalize(str(extra)))
     for extra in cfg.get("extra_deny_roots") or []:
         policy.deny_roots.append(normalize(str(extra)))
+    for extra in cfg.get("extra_read_deny_roots") or []:
+        policy.read_deny_roots.append(normalize(str(extra)))
 
     policy.write_roots = list(
         dict.fromkeys(r for r in policy.write_roots if r and r != os.sep)
     )
     policy.deny_roots = list(dict.fromkeys(policy.deny_roots))
+    policy.read_deny_roots = list(dict.fromkeys(policy.read_deny_roots))
 
     _context_cache = JailContext(
         policy=policy,

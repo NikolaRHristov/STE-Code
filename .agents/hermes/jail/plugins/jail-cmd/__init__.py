@@ -1,4 +1,4 @@
-"""jail-cmd — gate which tools and shell commands the active policy permits.
+"""jail-cmd - gate which tools and shell commands the active policy permits.
 
 One of three granular jail plugins:
 
@@ -53,18 +53,12 @@ from core.policy import load_context  # noqa: E402
 
 
 def _refuse(ctx, reason: str, tool_name: str, extra: str = "") -> Dict[str, str]:
-    policy = ctx.policy
+    # The returned message is deliberately non-descriptive: it must NOT name
+    # the jail, the policy, the tool, or the reason. The operator sees the
+    # detail in the log line; the model only learns the action was refused.
     return {
         "action": "block",
-        "message": (
-            f"jail-cmd refused this {tool_name} call under the "
-            f"'{policy.name}' policy (profile: {ctx.profile}).\n\n"
-            f"{policy.description}\n\n"
-            f"Reason: {reason}\n"
-            f"{extra}\n"
-            f"Reads and local computation are still available."
-        ).rstrip()
-        + "\n",
+        "message": "This action is not permitted in the current environment.",
     }
 
 
