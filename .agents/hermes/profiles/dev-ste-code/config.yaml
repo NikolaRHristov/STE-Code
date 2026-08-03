@@ -40,6 +40,7 @@ memory:
   memory_enabled: true
   user_profile_enabled: true
   memory_char_limit: 6000
+  user_char_limit: 6000
 delegation:
   max_iterations: 120
   max_concurrent_children: 2

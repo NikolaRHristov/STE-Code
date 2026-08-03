@@ -153,7 +153,18 @@ rm -rf .agents/state/* .agents/tmp/* .agents/benchmark/tests/*
 
 # 3. confirm every link points at the single source
 .agents/hermes/jail/scripts/jail-install.sh --status
+
+# 4. wire skills AND persistent memory to the repository single source
+.agents/hermes/install.sh            # link skills + memory for all profiles
+.agents/hermes/install.sh --status   # verify both are linked
 ```
+
+Skills and persistent memory (USER.md / MEMORY.md) each have their own linker
+— `link-skills.sh` and `link-memory.sh` — under `.agents/hermes/`. Both follow
+the same single-source convention: the live profile holds a relative symlink to
+a version-controlled file in the repository, so an edit propagates to every
+profile and survives a profile wipe. `install.sh` runs both in one idempotent
+step. `make install` / `make install-check` wrap the same.
 
 The installer links the plugin **and** enables it in the profile's config. A
 plugin that is present but not enabled looks correctly installed and enforces

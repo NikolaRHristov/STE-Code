@@ -41,7 +41,9 @@ check: lint test audit jail
 # that leaked into a live profile.
 
 HERMES := .agents/hermes
-SKILLS_LINK := $(HERMES)/skills-link.sh
+SKILLS_LINK := $(HERMES)/link-skills.sh
+MEMORY_LINK := $(HERMES)/link-memory.sh
+INSTALL     := $(HERMES)/install.sh
 
 ## skills-link: symlink every STE profile's skill buckets into the single source
 skills-link:
@@ -54,6 +56,30 @@ skills-check:
 ## skills-prune: remove foreign default skill buckets from live profiles
 skills-prune:
 	@bash $(SKILLS_LINK) --all --prune
+
+# --- profile memory ---------------------------------------------------------
+# Persistent memory (USER.md / MEMORY.md) is tracked in the repo under
+# .agents/hermes/memory/<profile>/ and linked into each live profile as a
+# relative symlink, mirroring the skill distribution above.
+
+## memory-link: symlink each profile's USER.md/MEMORY.md into the repo source
+memory-link:
+	@bash $(MEMORY_LINK) --all
+
+## memory-check: report whether each profile's memory files are linked
+memory-check:
+	@bash $(MEMORY_LINK) --status
+
+# --- one-shot install -------------------------------------------------------
+# Wire skills AND memory for every profile in a single step. Idempotent.
+
+## install: link skills + memory for all three profiles
+install:
+	@bash $(INSTALL)
+
+## install-check: report drift for both skills and memory
+install-check:
+	@bash $(INSTALL) --status
 
 # --- release maintenance -----------------------------------------------------
 # Deliberately NOT wired into `check`: the benchmark suite above is another
