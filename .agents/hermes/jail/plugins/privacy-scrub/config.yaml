@@ -1,0 +1,35 @@
+# privacy-scrub — sensitive-data guard for memory writes.
+#
+# Patterns here are scanned (case-insensitive) against the *content* of any
+# memory write (memory tool: target=memory/user, content=..., operations=[...]).
+# A match BLOCKS the write and tells the model which class of data leaked, so it
+# can retry without it. The background self-improvement review therefore cannot
+# persist credentials or machine-specific paths into MEMORY.md / USER.md.
+#
+# This file is intentionally FREE of real identifiers. It guards by DATA CLASS
+# (email, phone, API keys, home paths) using high-precision regexes, plus an
+# OPTIONAL operator-name list that is supplied at runtime — never hard-coded here.
+# Set the HERMES_OPERATOR_NAMES env var (comma-separated) to block specific
+# personal names, e.g. HERMES_OPERATOR_NAMES="Jane Doe,jdoe". When unset, name
+# guarding relies on the generic patterns below.
+#
+# This is the single source of truth. The plugin reads this file at registration.
+# Add new cases here as they surface — do not hard-code them in __init__.py.
+
+# Literal substrings (case-insensitive). Intentionally generic placeholders only.
+# Real operator names belong in HERMES_OPERATOR_NAMES, not in this tracked file.
+literal: []
+
+# Regex patterns (case-insensitive). Each is narrow and high-precision to avoid
+# blocking legitimate memory (project names, generic nouns).
+regex:
+  - '[\w.+-]+@[\w-]+\.[\w.-]+'                 # email
+  - 'sk-[a-zA-Z0-9]{20,}'                     # OpenAI-style key
+  - 'AKIA[0-9A-Z]{16}'                        # AWS access key id
+  - 'ghp_[a-zA-Z0-9]{36,}'                    # GitHub PAT
+  - 'eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.' # JWT
+  - '/home/[a-z0-9_-]+/'                      # generic unix home path
+  - 'C:\\\\Users\\[^\\\\]+'                    # windows home path
+  - '/Users/[A-Za-z0-9_-]+/'                 # macOS home path
+  - '~/[A-Za-z0-9_.-]+'                       # tilde-expanded home path
+  - '\+?\d[\d\s().-]{7,}\d'                   # phone-like (>=9 digits) — LAST: broad, apply after specific classes
