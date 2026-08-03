@@ -925,6 +925,80 @@ def run_network_runners(verbose: bool) -> int:
     return failures
 
 
+def run_fuzz_determinism(verbose: bool) -> int:
+    """Regression: the fuzz corpus generator must be reproducible (item C2').
+
+    ``--seed`` defaulted to ``None``, so ``random.Random(None)`` drew OS
+    entropy and a corpus that caught an analyser crash could never be
+    replayed. Two unseeded runs must now be byte-identical, and the effective
+    seed must be recorded in the corpus header so a run is replayable from
+    its output alone.
+    """
+    import json
+    import importlib.util as _ilu
+
+    print(f"\n{'=' * 66}")
+    print("FUZZ CORPUS DETERMINISM (C2') - reproducible seeds")
+    print(f"{'=' * 66}")
+
+    path = _TESTS_DIR / "fuzz_corpus_generator.py"
+    spec = _ilu.spec_from_file_location("fuzz_corpus_generator_under_test", path)
+    assert spec and spec.loader
+    fuzz = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(fuzz)
+
+    failures = 0
+    checks = 0
+    tmp = tempfile.mkdtemp(prefix="ste-c2-fuzz")
+    first = os.path.join(tmp, "a.jsonl")
+    second = os.path.join(tmp, "b.jsonl")
+    seeded = os.path.join(tmp, "s42.jsonl")
+
+    fuzz.run(60, first, None)
+    fuzz.run(60, second, None)
+
+    checks += 1
+    with open(first, "rb") as handle:
+        blob_a = handle.read()
+    with open(second, "rb") as handle:
+        blob_b = handle.read()
+    if blob_a != blob_b:
+        failures += 1
+        print("  [HOLE] two seed=None runs differ: default is nondeterministic")
+    elif verbose:
+        print("  [ok]   two seed=None runs are byte-identical")
+
+    checks += 1
+    header = json.loads(blob_a.decode("utf-8").splitlines()[0])
+    if not header.get("header") or not isinstance(header.get("seed"), int):
+        failures += 1
+        print(f"  [HOLE] default run header records no seed: {header}")
+    elif verbose:
+        print(f"  [ok]   default run header records seed {header['seed']}")
+
+    fuzz.run(20, seeded, 42)
+    checks += 1
+    with open(seeded, "r", encoding="utf-8") as handle:
+        head = json.loads(handle.readline())
+    if head.get("seed") != 42:
+        failures += 1
+        print(f"  [HOLE] explicit --seed 42 not recorded in header: {head}")
+    elif verbose:
+        print("  [ok]   explicit seed 42 recorded in header")
+
+    checks += 1
+    gen = fuzz.CorpusGenerator()
+    if not isinstance(getattr(gen, "seed", None), int):
+        failures += 1
+        print("  [HOLE] CorpusGenerator does not expose .seed for replay")
+    elif verbose:
+        print(f"  [ok]   CorpusGenerator exposes .seed = {gen.seed}")
+
+    if not verbose:
+        print(f"  {checks - failures}/{checks} fuzz determinism checks passed")
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-v", "--verbose", action="store_true")
@@ -942,6 +1016,7 @@ def main() -> int:
     total_failures += run_fail_closed(opts.verbose)
     total_failures += run_bench_escalation(opts.verbose)
     total_failures += run_network_runners(opts.verbose)
+    total_failures += run_fuzz_determinism(opts.verbose)
 
     print(f"\n{'=' * 66}")
     if total_failures:

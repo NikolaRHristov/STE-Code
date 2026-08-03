@@ -35,6 +35,11 @@ from core import analysis  # noqa: E402  (path injection must come first)
 
 DEFAULT_OUT = os.path.join(JAIL_ROOT, "tests", "fuzz_corpus.jsonl")
 
+# A fixed default seed keeps unseeded runs reproducible: a CI crash found by
+# the fuzzer must be replayable from the corpus alone. The effective seed is
+# always written to the corpus header record and printed in the summary.
+DEFAULT_FUZZ_SEED = 7
+
 VERBS = [
     "mkdir",
     "touch",
@@ -160,8 +165,13 @@ WRAPPERS = [
 class CorpusGenerator:
     """Produces adversarial shell-command strings for the analyser."""
 
-    def __init__(self, rng: random.Random | None = None) -> None:
-        self.rng = rng or random.Random()
+    def __init__(
+        self,
+        rng: random.Random | None = None,
+        seed: int | None = None,
+    ) -> None:
+        self.seed = DEFAULT_FUZZ_SEED if seed is None else seed
+        self.rng = rng or random.Random(self.seed)
 
     # -- pieces ----------------------------------------------------------
     def path(self) -> str:
@@ -246,11 +256,14 @@ class CorpusGenerator:
 
 
 def run(count: int, out_path: str, seed: int | None) -> Tuple[int, int, int]:
-    gen = CorpusGenerator(random.Random(seed))
+    effective = DEFAULT_FUZZ_SEED if seed is None else seed
+    gen = CorpusGenerator(random.Random(effective), seed=effective)
     crashed = 0
     total_targets = 0
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as handle:
+        header: Dict[str, object] = {"header": True, "seed": effective}
+        handle.write(json.dumps(header, ensure_ascii=False) + "\n")
         for index in range(count):
             command = gen.random_command()
             record: Dict[str, object] = {"i": index, "command": command}
@@ -287,9 +300,11 @@ def main(argv: List[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     count = args.count_pos if args.count_pos is not None else args.count
-    generated, crashed, total_targets = run(count, args.out, args.seed)
+    effective = DEFAULT_FUZZ_SEED if args.seed is None else args.seed
+    generated, crashed, total_targets = run(count, args.out, effective)
 
     print("corpus:    %s" % args.out)
+    print("seed:      %d" % effective)
     print("generated: %d" % generated)
     print("crashed:   %d" % crashed)
     print("targets:   %d" % total_targets)
