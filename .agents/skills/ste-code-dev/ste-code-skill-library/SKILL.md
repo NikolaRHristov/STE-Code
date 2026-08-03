@@ -144,6 +144,28 @@ inside a bucket.
   in the SKILL.md body. If a create returns a YAML/char error, trim the
   description first.
 
+## Pitfalls (skill hygiene — added after the dead-reference cleanup)
+
+- **Verify a referenced doc actually exists before keeping a MANDATORY
+  cross-reference.** Skills across all buckets carried
+  `> **MANDATORY**: Read .agents/skills/OPERATING_PRINCIPLES.md before any work.`
+  even though that file does not exist anywhere in the repo. A skill that points
+  at a missing file trains the next session to fail open. Before adding a
+  `MANDATORY`/doc reference, `search_files` for the target path; remove dangling
+  references. When scrubbing, also fix `rule`/`Pitfalls` text that tells the
+  reader to *preserve* a file that does not exist.
+- **Benchmark skills must describe GOAL + HOW-TO, not the environment they run
+  in.** The `ste-code-benchmark/*` bucket executes *inside* the confinement, but
+  its skill text must stay at the level of "what to build/verify and the commands
+  to run." Strip jail/Seatbelt/`STE_CODE_JAIL_POLICY`/`policy.py`/
+  `_STRICT_FALLBACK`/`PYTHONPYCACHEPREFIX`/`dev`/`bench` profile names, and
+  "sandbox reads the policy map" prose. Keep confinement/environment detail in
+  `ste-code-apply/*` (jail-ops, profile-confinement), where it belongs — a
+  benchmark skill that leaks the cage teaches the adversarial runner to reason
+  about its own jail. (Harness *tooling* may still be told to "compile
+  in-process so it is environment-independent" — that is a portability rule, not
+  a jail disclosure.)
+
 ## Verification
 
 See `references/verify.md` for the exact commands:

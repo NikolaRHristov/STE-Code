@@ -148,6 +148,25 @@ permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
 - When stripping skills, MOVE default dirs to a backup outside the repo (e.g.
   `/tmp`); never delete — they may be needed.
 
+## Pitfalls (confined-tooling — verified this session)
+
+- **A new/looser/anonymous profile does NOT relax confinement.**
+  `core/policy.py:_STRICT_FALLBACK = "bench"` — an unmapped profile name falls
+  through to the *strictest* policy, so a profile like `benchmark-run-ste-code`
+  is jailed exactly like `bench`. When confined tooling fails (e.g. `py_compile`
+  cannot write `.pyc` into the denied project tree, or a `make test` goes
+  158/180 with all failures being `compiles:` checks), **fix the tooling, not
+  the profile.** Concrete recipe: compile **in-process** with
+  `py_compile.compile(abs_path, cfile="<temp>/x.pyc", doraise=True)` — use
+  `$PYTHONPYCACHEPREFIX` if set (else `/tmp`) for the `cfile`. This removes both
+  failure modes (no cwd dependency, no project-root bytecode write) and still
+  catches real syntax errors via the full `compile()` pipeline. See
+  `references/confined-tooling.md`.
+- **Run *developer verification* (selftest / make test) from a profile that can
+  write the project tree** (the `dev` policy), and keep the *adversarial run*
+  under `bench`. Do not invent a profile hoping it is looser — the sandbox reads
+  the policy map, not the profile's stated purpose.
+
 ## User preferences (this repo)
 
 - Profiles: source in `.agents/hermes/profiles/`, symlinked per-profile into
