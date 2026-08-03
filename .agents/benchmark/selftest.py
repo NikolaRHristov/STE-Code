@@ -14,6 +14,8 @@ Exit 0 = green. Any failure prints the failing check and exits 1.
 from __future__ import annotations
 
 import json
+import os
+import py_compile
 import shutil
 import subprocess
 import sys
@@ -1209,16 +1211,38 @@ def test_red_blue(cfg, tmp: Path) -> None:
 
 
 def test_modules_compile() -> None:
-    """Every module present must import under the interpreter that runs it."""
+    """Every module present must compile under the interpreter that runs it.
+
+    Implemented in-process with ``py_compile.compile`` rather than a
+    ``py_compile`` subprocess so it is jailed-env-proof:
+
+    * The compile uses an **absolute** path, so it never depends on the
+      (possibly jail-pinned) cwd of the caller.
+    * The ``.pyc`` cache is written under the jail-allowed temp dir
+      (``$PYTHONPYCACHEPREFIX`` if set, else ``/tmp``) instead of next to the
+      source, so the bench jail — which denies project-root writes — cannot
+      block the check. This mirrors the ``run_bench.sh`` fix
+      (``PYTHONPYCACHEPREFIX=/tmp/ste-bench-pycache``).
+    * ``doraise=True`` turns any real syntax error into an exception, so this
+      check still catches exactly what the subprocess version caught.
+
+    Execution-only syntax checks (``return``/``yield``/``continue`` outside
+    their valid scope) are detected precisely because we drive the full
+    ``compile()`` pipeline, not just ``ast.parse``.
+    """
+    cache_root = os.environ.get("PYTHONPYCACHEPREFIX") or tempfile.gettempdir()
+    cache_dir = Path(cache_root) / "ste-selftest-pyc"
+    cache_dir.mkdir(parents=True, exist_ok=True)
     for path in sorted(BENCH.glob("*.py")):
         if path.name == "selftest.py":
             continue
-        proc = subprocess.run(
-            [sys.executable, "-m", "py_compile", str(path)],
-            capture_output=True,
-            text=True,
-        )
-        check(proc.returncode == 0, "compiles: {}".format(path.name))
+        ok = True
+        try:
+            cfile = cache_dir / "{}.{}.pyc".format(path.stem, abs(hash(str(path))))
+            py_compile.compile(str(path), cfile=str(cfile), doraise=True)
+        except (py_compile.PyCompileError, SyntaxError, OSError):
+            ok = False
+        check(ok, "compiles: {}".format(path.name))
 
 
 def test_capsule_provenance(cfg, tmp) -> None:
