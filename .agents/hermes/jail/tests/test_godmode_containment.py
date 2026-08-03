@@ -79,27 +79,27 @@ def test_all_profiles_block_cage_rewrites() -> None:
         for target in _ATTACK_WRITES + _OBFUSCATED:
             # A `terminal` call that writes the attack file.
             cmd = f"tee {target} > /dev/null"
-            targets = write_targets("terminal", {"command": cmd}, ctx.project_root or os.getcwd())
+            targets = write_targets(
+                "terminal", {"command": cmd}, ctx.project_root or os.getcwd()
+            )
             resolved = {t for _, t in targets}
             # Every resolved target must be either a passthrough device or
             # inside the deny set - i.e. the jail must refuse the write.
             offensive = {
-                r for r in resolved
-                if r not in denied_real and "/dev/" not in r
+                r for r in resolved if r not in denied_real and "/dev/" not in r
             }
             # Under dev, some of these (the repo's own jail config) ARE writable
             # by design - but the HOME-based cage rewrites must NEVER be.
-            home_offensive = {r for r in offensive if r.startswith(os.path.realpath(HERMES))}
+            home_offensive = {
+                r for r in offensive if r.startswith(os.path.realpath(HERMES))
+            }
             assert not home_offensive, (
                 f"[{profile}] jail missed a HOME cage-rewrite target: {home_offensive}"
             )
             # The repo jail-config write is allowed under dev (authoring) but the
             # policy decline must still be enforced for the OTHER profiles.
             if profile != "dev-ste-code":
-                repo_offensive = {
-                    r for r in offensive
-                    if str(ctx.project_root) in r
-                }
+                repo_offensive = {r for r in offensive if str(ctx.project_root) in r}
                 assert not repo_offensive, (
                     f"[{profile}] jail missed a repo cage-rewrite target: {repo_offensive}"
                 )
@@ -126,4 +126,6 @@ def test_godmode_templates_are_caught_as_writes() -> None:
 if __name__ == "__main__":
     test_all_profiles_block_cage_rewrites()
     test_godmode_templates_are_caught_as_writes()
-    print("OK: godmode containment - all cage-rewrite writes blocked under dev/user/bench")
+    print(
+        "OK: godmode containment - all cage-rewrite writes blocked under dev/user/bench"
+    )

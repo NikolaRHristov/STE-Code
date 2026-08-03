@@ -36,15 +36,45 @@ from core import analysis  # noqa: E402  (path injection must come first)
 DEFAULT_OUT = os.path.join(JAIL_ROOT, "tests", "fuzz_corpus.jsonl")
 
 VERBS = [
-    "mkdir", "touch", "rm", "cp", "mv", "ln", "tee", "dd", "tar", "unzip",
-    "git", "curl", "wget", "sort", "gcc", "ps", "sed", "python3", "sh",
-    "echo", "cat", "chmod", "rsync", "npm", "docker", "sudo", "env",
-    "xargs", "nice",
+    "mkdir",
+    "touch",
+    "rm",
+    "cp",
+    "mv",
+    "ln",
+    "tee",
+    "dd",
+    "tar",
+    "unzip",
+    "git",
+    "curl",
+    "wget",
+    "sort",
+    "gcc",
+    "ps",
+    "sed",
+    "python3",
+    "sh",
+    "echo",
+    "cat",
+    "chmod",
+    "rsync",
+    "npm",
+    "docker",
+    "sudo",
+    "env",
+    "xargs",
+    "nice",
 ]
 
 REPO_RELATIVE = [
-    ".agents/x", "Makefile", "tests/out.txt", "./build/artifact.o",
-    ".agents/hermes/jail/core/analysis.py", "src/main.c", "a/b/c.txt",
+    ".agents/x",
+    "Makefile",
+    "tests/out.txt",
+    "./build/artifact.o",
+    ".agents/hermes/jail/core/analysis.py",
+    "src/main.c",
+    "a/b/c.txt",
 ]
 
 REPO_ABSOLUTE = [
@@ -54,31 +84,77 @@ REPO_ABSOLUTE = [
 ]
 
 PARENT_ABSOLUTE = [
-    "../x", "../../escape.txt", "../..", os.path.expanduser("~/.."),
-    os.path.join(REPO_ROOT, "..", "sibling.txt"), "./../../out",
+    "../x",
+    "../../escape.txt",
+    "../..",
+    os.path.expanduser("~/.."),
+    os.path.join(REPO_ROOT, "..", "sibling.txt"),
+    "./../../out",
 ]
 
-TMP_PATHS = ["/tmp/x", "/tmp/fuzz/out.log", "/var/tmp/y", "/dev/null",
-             "/dev/stderr", "/dev/rdisk1"]
+TMP_PATHS = [
+    "/tmp/x",
+    "/tmp/fuzz/out.log",
+    "/var/tmp/y",
+    "/dev/null",
+    "/dev/stderr",
+    "/dev/rdisk1",
+]
 
-HOME_PATHS = ["~/x", "~/.hermes/skills/a.md", "$HOME/y", "${HOME}/z/out",
-              "~/../etc/passwd"]
+HOME_PATHS = [
+    "~/x",
+    "~/.hermes/skills/a.md",
+    "$HOME/y",
+    "${HOME}/z/out",
+    "~/../etc/passwd",
+]
 
-PATH_POOLS = [REPO_RELATIVE, REPO_ABSOLUTE, PARENT_ABSOLUTE, TMP_PATHS,
-              HOME_PATHS]
+PATH_POOLS = [REPO_RELATIVE, REPO_ABSOLUTE, PARENT_ABSOLUTE, TMP_PATHS, HOME_PATHS]
 
-PLAIN_FLAGS = ["-p", "-r", "-f", "-v", "-a", "-l", "-n", "-q", "--force",
-               "--verbose", "-czf", "-xzf", "-tzf", "-9"]
+PLAIN_FLAGS = [
+    "-p",
+    "-r",
+    "-f",
+    "-v",
+    "-a",
+    "-l",
+    "-n",
+    "-q",
+    "--force",
+    "--verbose",
+    "-czf",
+    "-xzf",
+    "-tzf",
+    "-9",
+]
 
-TRICKY_FLAGS = ["-o", "--output", "-C", "--directory", "-d", "-O",
-                "--output-document", "--output-dir", "--backup-dir"]
+TRICKY_FLAGS = [
+    "-o",
+    "--output",
+    "-C",
+    "--directory",
+    "-d",
+    "-O",
+    "--output-document",
+    "--output-dir",
+    "--backup-dir",
+]
 
 ATTACHED_FLAGS = ["--output={p}", "--directory={p}", "-o{p}", "of={p}"]
 
 REDIRECTS = [">", ">>", "2>", "&>", "1>", "2>>", ">|"]
 CHAINS = ["&&", ";", "|", "||", "\n", "&"]
-WRAPPERS = ["sudo", "env", "xargs", "nice -n 5", "sudo -u root",
-            "env -C /tmp", "xargs -I{}", "timeout 5", "nohup"]
+WRAPPERS = [
+    "sudo",
+    "env",
+    "xargs",
+    "nice -n 5",
+    "sudo -u root",
+    "env -C /tmp",
+    "xargs -I{}",
+    "timeout 5",
+    "nohup",
+]
 
 
 class CorpusGenerator:
@@ -124,10 +200,10 @@ class CorpusGenerator:
         if verb in {"python3", "sh"} and self.rng.random() < 0.5:
             inner = self.rng.choice(
                 [
-                    "import os; os.makedirs('%s')" % self.rng.choice(
-                        self.rng.choice(PATH_POOLS)),
-                    "open('%s','w').write('x')" % self.rng.choice(
-                        self.rng.choice(PATH_POOLS)),
+                    "import os; os.makedirs('%s')"
+                    % self.rng.choice(self.rng.choice(PATH_POOLS)),
+                    "open('%s','w').write('x')"
+                    % self.rng.choice(self.rng.choice(PATH_POOLS)),
                     "cd .. && mkdir %s" % self.rng.choice(PARENT_ABSOLUTE),
                 ]
             )
@@ -149,9 +225,12 @@ class CorpusGenerator:
         tokens: List[str] = []
         if self.rng.random() < 0.25:
             tokens.extend(
-                [self.rng.choice(["cd ..", "cd ../..", "cd /tmp",
-                                  "cd $HOME", "cd ${HOME}/x"]),
-                 self.rng.choice(["&&", ";"])]
+                [
+                    self.rng.choice(
+                        ["cd ..", "cd ../..", "cd /tmp", "cd $HOME", "cd ${HOME}/x"]
+                    ),
+                    self.rng.choice(["&&", ";"]),
+                ]
             )
         target = self.rng.randint(15, 25)
         while len(tokens) < target:
@@ -195,8 +274,13 @@ def run(count: int, out_path: str, seed: int | None) -> Tuple[int, int, int]:
 
 def main(argv: List[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("count_pos", nargs="?", type=int, default=None,
-                        help="number of commands (positional shorthand)")
+    parser.add_argument(
+        "count_pos",
+        nargs="?",
+        type=int,
+        default=None,
+        help="number of commands (positional shorthand)",
+    )
     parser.add_argument("--count", type=int, default=10000)
     parser.add_argument("--out", default=DEFAULT_OUT)
     parser.add_argument("--seed", type=int, default=None)

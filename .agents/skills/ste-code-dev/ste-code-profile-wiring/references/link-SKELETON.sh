@@ -18,8 +18,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO="$(cd "$SCRIPT_DIR/.." && pwd)"          # .agents
-SOURCE="$(cd "$REPO/hermes/<thing>" && pwd)"  # .agents/hermes/<thing>
+REPO="$(cd "$SCRIPT_DIR/.." && pwd)"         # .agents
+SOURCE="$(cd "$REPO/hermes/<thing>" && pwd)" # .agents/hermes/<thing>
 PROFILE_SRC="$REPO/hermes/profiles"
 LIVE="$HOME/.hermes/profiles"
 
@@ -47,10 +47,16 @@ PY
 link_dir() {
 	local dest="$1" src="$2" name rel
 	name="$(basename "$dest")"
-	[ -e "$src" ] || { log "  source missing: $src"; return 1; }
+	[ -e "$src" ] || {
+		log "  source missing: $src"
+		return 1
+	}
 	if [ -L "$dest" ]; then
 		rel="$(relpath "$dest" "$src")"
-		[ "$(readlink "$dest")" = "$rel" ] && { log "  = $name"; return 0; }
+		[ "$(readlink "$dest")" = "$rel" ] && {
+			log "  = $name"
+			return 0
+		}
 		run rm -f "$dest"
 	elif [ -e "$dest" ]; then
 		if [ -d "$dest" ] && [ -z "$(find "$dest" -maxdepth 1 -mindepth 1 2>/dev/null)" ]; then
@@ -71,7 +77,10 @@ install_profile() {
 	local l2="$LIVE/$profile/<thing>"
 	log ""
 	log "profile: $profile"
-	[ -d "$LIVE/$profile" ] || { log "  live profile missing"; return 1; }
+	[ -d "$LIVE/$profile" ] || {
+		log "  live profile missing"
+		return 1
+	}
 	[ -d "$PROFILE_SRC/$profile" ] || run mkdir -p "$PROFILE_SRC/$profile"
 	# Pitfall #2: level-2 source is the l1 pointer this run creates; fall back
 	# to SOURCE for dry-run (where l1 doesn't exist yet).
@@ -86,10 +95,18 @@ show_status() {
 	log ""
 	log "=== $profile ==="
 	for d in "$l1" "$l2"; do
-		local nm; nm="$(basename "$d")"
-		[ -e "$d" ] || [ -L "$d" ] || { log "  [$nm] absent"; continue; }
-		[ -L "$d" ] || { log "  [$nm] REAL (not linked)"; continue; }
-		local rt; rt="$(resolve "$d")"
+		local nm
+		nm="$(basename "$d")"
+		[ -e "$d" ] || [ -L "$d" ] || {
+			log "  [$nm] absent"
+			continue
+		}
+		[ -L "$d" ] || {
+			log "  [$nm] REAL (not linked)"
+			continue
+		}
+		local rt
+		rt="$(resolve "$d")"
 		# Pitfall #1: match the dir itself, not just its children.
 		case "$rt" in
 		"$SOURCE" | "$SOURCE"/*) log "  [$nm] ok -> $rt" ;;
@@ -106,18 +123,29 @@ for arg in "$@"; do
 	--dry-run) DRY_RUN=1 ;;
 	--status) STATUS=1 ;;
 	--all) ALL=1 ;;
-	--help | -h) usage; exit 0 ;;
-	-*) log "unknown option: $arg"; exit 2 ;;
+	--help | -h)
+		usage
+		exit 0
+		;;
+	-*)
+		log "unknown option: $arg"
+		exit 2
+		;;
 	*) targets+=("$arg") ;;
 	esac
 done
 [ "$DRY_RUN" = 1 ] && log "(dry run — nothing will change)"
 if [ "$STATUS" = 1 ]; then
-	show_status dev-ste-code; show_status ste-code; show_status benchmark-ste-code
+	show_status dev-ste-code
+	show_status ste-code
+	show_status benchmark-ste-code
 	exit 0
 fi
 [ "$ALL" = 1 ] && targets=(dev-ste-code ste-code benchmark-ste-code)
-[ "${#targets[@]}" -eq 0 ] && { log "usage: link-<thing>.sh <profile> | --all | --status [--dry-run]"; exit 2; }
+[ "${#targets[@]}" -eq 0 ] && {
+	log "usage: link-<thing>.sh <profile> | --all | --status [--dry-run]"
+	exit 2
+}
 status=0
 for p in "${targets[@]}"; do install_profile "$p" || status=1; done
 log ""

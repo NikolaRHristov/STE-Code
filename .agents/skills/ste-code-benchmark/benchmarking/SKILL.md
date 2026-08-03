@@ -1,6 +1,7 @@
 ---
 name: benchmarking
-description: STE-Code skill — load when its trigger matches; see body for workflow.
+description:
+    STE-Code skill — load when its trigger matches; see body for workflow.
 category: benchmark
 capability: running-the-adversarial-benchmark
 source: .agents/skills/benchmarking

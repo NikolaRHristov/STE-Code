@@ -34,6 +34,7 @@ default - the heuristic layer is deterministic and fast.
 Stdin : JSON {hook_event_name, tool_name:"terminal", tool_input{command,...}}
 Stdout: {"action":"modify","args":{"command": "..."}}  or {} for no-op.
 """
+
 import json
 import os
 import re
@@ -64,13 +65,15 @@ try:
     sys.path.insert(0, str(HERE))
     from post_memory_anonymise import anonymise  # type: ignore
 except Exception:  # noqa: BLE001
+
     def anonymise(text: str) -> str:  # minimal fallback
         if not text:
             return text
         text = re.sub(r"/Users/[A-Za-z0-9_.-]+", "<user-home>", text)
         text = re.sub(r"/Volumes/[A-Za-z0-9_./-]+", "<repo>", text)
-        text = re.sub(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
-                      "<email>", text)
+        text = re.sub(
+            r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", "<email>", text
+        )
         return text
 
 
@@ -78,13 +81,18 @@ except Exception:  # noqa: BLE001
 # Jail roots (import the real policy; fallback to the known dev write_roots)
 # --------------------------------------------------------------------------- #
 def _load_jail_roots():
-    write_roots = {str(REPO), os.path.expanduser("~/.hermes/profiles/dev-ste-code"),
-                   os.path.expanduser("~/.hermes/profiles"), "/tmp",
-                   "/private/var/folders"}
+    write_roots = {
+        str(REPO),
+        os.path.expanduser("~/.hermes/profiles/dev-ste-code"),
+        os.path.expanduser("~/.hermes/profiles"),
+        "/tmp",
+        "/private/var/folders",
+    }
     deny_roots = set()
     try:
         sys.path.insert(0, str(REPO / ".agents" / "hermes" / "jail" / "core"))
         import policy  # type: ignore
+
         ctx = policy._build_dev()
         write_roots = {str(Path(p).resolve()) for p in ctx.policy.write_roots}
         deny_roots = {str(Path(p).resolve()) for p in ctx.policy.deny_roots}
@@ -134,8 +142,19 @@ def split_subcommands(cmd: str):
 
 # Tokens that, when they are the WHOLE command (no redirect/write), are noise.
 _NOISE_SOLO = {
-    "sleep", "clear", "cls", "say", "open", "notify", "echo", "printf",
-    "print", "banner", "figlet", "cowsay", "toilet",
+    "sleep",
+    "clear",
+    "cls",
+    "say",
+    "open",
+    "notify",
+    "echo",
+    "printf",
+    "print",
+    "banner",
+    "figlet",
+    "cowsay",
+    "toilet",
 }
 
 
@@ -151,8 +170,13 @@ def _first_word(sub: str) -> str:
 
 def _is_redirect_write(sub: str) -> bool:
     # Writes to a file: > >> | tee (when tee writes) cp/mv/rm/write_file/ln/mkdir/touch
-    return bool(re.search(r"[>\]]>|\btee\b|\bcp\b|\bmv\b|\brm\b|\bln\b|"
-                          r"\bmkdir\b|\btouch\b|\bwrite_file\b|\bgit\s", sub))
+    return bool(
+        re.search(
+            r"[>\]]>|\btee\b|\bcp\b|\bmv\b|\brm\b|\bln\b|"
+            r"\bmkdir\b|\btouch\b|\bwrite_file\b|\bgit\s",
+            sub,
+        )
+    )
 
 
 def is_noise(sub: str) -> bool:
@@ -161,8 +185,18 @@ def is_noise(sub: str) -> bool:
         # echo/printf that writes to a file is useful; pure print is noise.
         if fw in ("echo", "printf", "print") and not _is_redirect_write(sub):
             return True
-        if fw in ("sleep", "clear", "cls", "say", "open", "notify",
-                  "banner", "figlet", "cowsay", "toilet"):
+        if fw in (
+            "sleep",
+            "clear",
+            "cls",
+            "say",
+            "open",
+            "notify",
+            "banner",
+            "figlet",
+            "cowsay",
+            "toilet",
+        ):
             return True
     return False
 
@@ -205,28 +239,41 @@ def jail_violation(sub: str) -> str:
 def _llm_classify(sub: str) -> bool:
     """Return True if essential. Best-effort; on any failure treat as essential."""
     import subprocess
+
     prompt = (
         "Reply with only '1' if this shell command performs a useful action "
         "(writes a file, runs a build/test, installs, edits code, queries a "
         "system) and should run, or '0' if it is only descriptive/noise "
-        "(prints status, sleeps, clears screen, repeats info). Command: "
-        + sub
+        "(prints status, sleeps, clears screen, repeats info). Command: " + sub
     )
     tmphome = Path("/tmp") / f"hermes-scrub-{os.getpid()}"
     try:
         tmphome.mkdir(parents=True, exist_ok=True)
         import shutil
+
         src = Path(os.path.expanduser("~/.hermes")) / "auth.json"
         if src.exists():
             shutil.copyfile(src, tmphome / "auth.json")
-        env = {**os.environ, "HERMES_HOME": str(tmphome),
-               "HERMES_ACCEPT_HOOKS": "0"}
+        env = {**os.environ, "HERMES_HOME": str(tmphome), "HERMES_ACCEPT_HOOKS": "0"}
         proc = subprocess.run(
-            ["hermes", "-z", prompt, "--provider", "nous",
-             "-m", os.environ.get("HERMES_ANON_LLM_MODEL", "tencent/hy3:free"),
-             "--yolo", "-t", ""],
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-            cwd=str(REPO), env=env, timeout=60)
+            [
+                "hermes",
+                "-z",
+                prompt,
+                "--provider",
+                "nous",
+                "-m",
+                os.environ.get("HERMES_ANON_LLM_MODEL", "tencent/hy3:free"),
+                "--yolo",
+                "-t",
+                "",
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            cwd=str(REPO),
+            env=env,
+            timeout=60,
+        )
         out = proc.stdout.decode("utf-8", "replace").strip()
         return out.startswith("1")
     except Exception:  # noqa: BLE001
@@ -234,6 +281,7 @@ def _llm_classify(sub: str) -> bool:
     finally:
         try:
             import shutil
+
             shutil.rmtree(tmphome, ignore_errors=True)
         except Exception:
             pass

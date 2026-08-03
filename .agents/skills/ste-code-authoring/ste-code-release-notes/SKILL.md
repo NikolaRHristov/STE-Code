@@ -1,7 +1,6 @@
 ---
 name: ste-code-release-notes
-description:
-    Reformat STE-Code release notes to the house visual standard.
+description: Reformat STE-Code release notes to the house visual standard.
 ---
 
 # STE-Code Release Notes - House Visual Standard

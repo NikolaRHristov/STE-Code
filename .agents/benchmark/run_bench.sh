@@ -16,5 +16,5 @@ export PYTHONDONTWRITEBYTECODE=0
 # Run under the bench jail (kernel layer). Adjust the policy env if your
 # jail-exec wrapper differs.
 exec env STE_CODE_JAIL_POLICY=bench \
-  .agents/hermes/jail/scripts/jail-exec.sh /bin/sh -c \
-  "STE_CODE_JAILED=1 exec python3 .agents/benchmark/run_pipeline.py $*"
+	.agents/hermes/jail/scripts/jail-exec.sh /bin/sh -c \
+	"STE_CODE_JAILED=1 exec python3 .agents/benchmark/run_pipeline.py $*"

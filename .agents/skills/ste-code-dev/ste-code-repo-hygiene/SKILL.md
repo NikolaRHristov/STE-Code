@@ -1,7 +1,6 @@
 ---
 name: ste-code-repo-hygiene
-description:
-    Keep the STE-Code repo's toolchain and artifacts ship-clean.
+description: Keep the STE-Code repo's toolchain and artifacts ship-clean.
 category: dev
 capability: developing-and-changing-the-standard
 source: <home>/.hermes/profiles/dev-ste-code/skills/ste-code/ste-code-repo-hygiene
@@ -69,6 +68,7 @@ previously derived the root themselves (83 by
 `Path(__file__).resolve().parent.parent…`); exactly 1 used the helper.** A
 script that counts `.parent` hops silently points PROJECT at an ancestor of the
 repo when the file moves, and `os.makedirs` scatters output outside the checkout
+
 - the exact bug class the jail exists to catch.
 
 Replacement bootstrap (depth-independent, self-contained - see
@@ -197,8 +197,7 @@ git commit -m "scope(subdir): short reason"  # re-commit cleanly
 ## 8. Dependency manifests (`requirements.txt`)
 
 When this repo needs a `requirements.txt` (repo root), mirror the user's other
-repos - `<repo>/Land/requirements.txt` and
-`<repo>/Repository/requirements.txt`:
+repos - `<repo>/Land/requirements.txt` and `<repo>/Repository/requirements.txt`:
 
 - **Banner-style `=== section ===` comments**, not a bare pip list.
 - **Separate blocks:** `Python` (real PyPI packages pinned `pkg>=x.y.z`, or "No

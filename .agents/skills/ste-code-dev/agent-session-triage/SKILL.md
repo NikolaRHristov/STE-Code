@@ -40,34 +40,34 @@ Cheapest and highest-yield first. Most "code bugs" die at step 1.
 
 1. **Read the process environment.**
 
-   ```bash
-   ps eww -p <pid>          # env is appended to the command column
-   ```
+    ```bash
+    ps eww -p <pid>          # env is appended to the command column
+    ```
 
-   Look for the vars that select config/profile/policy (for Hermes:
-   `HERMES_HOME`, `HERMES_PROFILE`, `STE_CODE_JAIL_POLICY`, `PWD`). A session
-   pointed at the _wrong profile_ behaves exactly like a session hitting a _code
-   bug_, and is far more common.
+    Look for the vars that select config/profile/policy (for Hermes:
+    `HERMES_HOME`, `HERMES_PROFILE`, `STE_CODE_JAIL_POLICY`, `PWD`). A session
+    pointed at the _wrong profile_ behaves exactly like a session hitting a
+    _code bug_, and is far more common.
 
 2. **Compare process start time against file mtime.**
 
-   ```bash
-   ps -Ao pid,lstart,command | grep <proc>
-   stat -f "%Sm %N" -t "%Y-%m-%d %H:%M:%S" <edited-file>   # macOS
-   ```
+    ```bash
+    ps -Ao pid,lstart,command | grep <proc>
+    stat -f "%Sm %N" -t "%Y-%m-%d %H:%M:%S" <edited-file>   # macOS
+    ```
 
-   A process started **before** your edit holds the old module in memory. Config
-   loaders commonly memoise into a module global at first call, and plugins
-   import once at registration - so re-reading the file changes nothing for a
-   live process. No amount of in-session verification will show your fix.
+    A process started **before** your edit holds the old module in memory.
+    Config loaders commonly memoise into a module global at first call, and
+    plugins import once at registration - so re-reading the file changes nothing
+    for a live process. No amount of in-session verification will show your fix.
 
 3. **Check for leaked env across runs.** An env var that overrides a config map
    persists in a shell after the run that set it. Grep the log for the
    contradiction (e.g. a dev profile registering a bench policy):
 
-   ```bash
-   grep "profile=<expected> policy=<unexpected>" <logs>/agent.log
-   ```
+    ```bash
+    grep "profile=<expected> policy=<unexpected>" < logs > /agent.log
+    ```
 
 4. **Only now read the source** - and read the _whole_ expression (see below).
 
@@ -157,5 +157,5 @@ tree clean).
 - `references/jail-project-root-case.md` - the concrete looping-session instance
   of the "cannot locate the repo" class, plus a copy-pasteable probe.
 - `scripts/show_jail_context.py` - read-only probe that prints the exact
-  `load_context()` policy / project_root / write+deny roots a FRESH session would
-  resolve (run it out-of-session to bypass any stale in-session cache).
+  `load_context()` policy / project_root / write+deny roots a FRESH session
+  would resolve (run it out-of-session to bypass any stale in-session cache).

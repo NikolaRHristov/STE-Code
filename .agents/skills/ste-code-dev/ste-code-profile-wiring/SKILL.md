@@ -1,7 +1,7 @@
 ---
 name: ste-code-profile-wiring
 description: >-
-  Wire profiles to a single-source via two-level symlinks.
+    Wire profiles to a single-source via two-level symlinks.
 ---
 
 # STE-Code profile single-source wiring
@@ -19,9 +19,9 @@ description: >-
 
 Three linkers live in `.agents/hermes/`:
 
-- `link-skills.sh` — skill buckets (per-profile *selected* subsets).
+- `link-skills.sh` — skill buckets (per-profile _selected_ subsets).
 - `link-memory.sh` — `USER.md` / `MEMORY.md` per profile.
-- `link-hooks.sh` — a flat hook dir *shared* by all profiles.
+- `link-hooks.sh` — a flat hook dir _shared_ by all profiles.
 
 All three use the SAME two-level relative symlink chain:
 
@@ -34,9 +34,9 @@ REPO single source                  e.g. .agents/hermes/hooks/      (real files,
 - Level-1 target is a **relative** symlink (relocatable repo).
 - Level-2 points at the level-1 pointer (also relative).
 - The global agent dir `~/.hermes/hermes-agent/hooks` is a SEPARATE symlink
-  **→** the same canonical; it is NOT the source. If you find local
-  `~/.hermes/` files leaking into a profile, the fix is to **LINK the profile
-  dir**, not to unlink the global (see Pitfalls #5).
+  **→** the same canonical; it is NOT the source. If you find local `~/.hermes/`
+  files leaking into a profile, the fix is to **LINK the profile dir**, not to
+  unlink the global (see Pitfalls #5).
 
 `install.sh` runs all three linkers (`--all`); the `Makefile` exposes
 `skills-link`/`skills-check`, `memory-link`/`memory-check`,
@@ -54,15 +54,15 @@ REPO single source                  e.g. .agents/hermes/hooks/      (real files,
 5. Wire `install.sh` (add the third `bash link-foo.sh --all $DRY` / `--status`
    line) and the `Makefile` (`FOO_LINK` var + `foo-link` / `foo-check` targets).
 6. Add a `!foo` exception to **every** profile `.gitignore`
-   (`.agents/hermes/profiles/<p>/.gitignore`) so the pointer symlink is
-   TRACKED — the bare `foo/` entry ignores it. Also add a `# NOTE:` line.
+   (`.agents/hermes/profiles/<p>/.gitignore`) so the pointer symlink is TRACKED
+   — the bare `foo/` entry ignores it. Also add a `# NOTE:` line.
 
 ## Pitfalls (verified this session — 2026-08-03)
 
 1. **Status glob must match the dir itself.** A `case "$rt" in "$SOURCE"/*)`
-   only matches children of the source, not the source dir when a symlink
-   points AT it. Use `"$SOURCE" | "$SOURCE"/*`, or `show_status` reports a
-   false `WRONG TARGET` even though the link is correct.
+   only matches children of the source, not the source dir when a symlink points
+   AT it. Use `"$SOURCE" | "$SOURCE"/*`, or `show_status` reports a false
+   `WRONG TARGET` even though the link is correct.
 
 2. **Dry-run "source missing" for level-2.** Level-2's source is the level-1
    pointer, which the run creates. In `--dry-run` (no writes) level-1 doesn't
@@ -70,26 +70,25 @@ REPO single source                  e.g. .agents/hermes/hooks/      (real files,
    `if [ -e "$l1" ]; then link_dir "$l2" "$l1"; else link_dir "$l2" "$SOURCE"; fi`
    — compute level-2 against the canonical when the pointer isn't present.
 
-3. **`git check-ignore` lies for symlink-to-dir.** `git check-ignore
-   .agents/hermes/profiles/<p>/foo` still reports "ignored" even with a `!foo`
-   negation, because the dir-style pattern matches the symlink and
-   negation-on-symlink ordering is finicky. Don't trust it. Verify the pointer
-   is tracked with `git ls-files --cached -s <path>` → mode `120000`
+3. **`git check-ignore` lies for symlink-to-dir.**
+   `git check-ignore .agents/hermes/profiles/<p>/foo` still reports "ignored"
+   even with a `!foo` negation, because the dir-style pattern matches the
+   symlink and negation-on-symlink ordering is finicky. Don't trust it. Verify
+   the pointer is tracked with `git ls-files --cached -s <path>` → mode `120000`
    (symlink), and `git status --short` shows `A`. Confirm NO real files leaked
    with `git ls-files --cached | grep 'profiles/.*/foo/' | grep -v '/foo$'`
    (expect empty).
 
-4. **Empty real dirs are safe to replace; non-empty are not.** Hermes may
-   create an empty `hooks/` at runtime. `link_dir` should `rmdir` an empty real
-   dir but REFUSE (skip) a non-empty one so authored runtime content is never
-   clobbered.
+4. **Empty real dirs are safe to replace; non-empty are not.** Hermes may create
+   an empty `hooks/` at runtime. `link_dir` should `rmdir` an empty real dir but
+   REFUSE (skip) a non-empty one so authored runtime content is never clobbered.
 
 5. **The premise can be inverted — check inodes first.** Before "unlinking"
    anything, check inodes: `stat -f '%i'` on the canonical file vs the profile
    copy. If they share an inode, the profile already reads the repo through a
    link — no unlink needed. In this session the user assumed hooks were linked
    repo→global; actually the global was a symlink **→** the repo, and the
-   profiles were simply *unlinked* (empty real dirs). The fix was to LINK the
+   profiles were simply _unlinked_ (empty real dirs). The fix was to LINK the
    profiles, not unlink the global.
 
 ## Verification (run after any linker change)
@@ -104,9 +103,9 @@ REPO single source                  e.g. .agents/hermes/hooks/      (real files,
 ## Relationship to other skills
 
 - `ste-code-repo-hygiene` — formatting / link-checking / release-notes hygiene
-  (a different concern; this skill is about *how the files get wired in*).
-- `hermes-profile-skill-confinement` — *which* skills a profile loads; this
-  skill is about *how the files get there*.
+  (a different concern; this skill is about _how the files get wired in_).
+- `hermes-profile-skill-confinement` — _which_ skills a profile loads; this
+  skill is about _how the files get there_.
 
 ## Promotion note
 
@@ -119,5 +118,5 @@ drifts from the repo.
 ## Support files
 
 - `references/link-SKELETON.sh` — copy this, replace every `<thing>`, and wire
-  it into `install.sh` + `Makefile` to add a new profile linker. Embeds all
-  five pitfalls from above.
+  it into `install.sh` + `Makefile` to add a new profile linker. Embeds all five
+  pitfalls from above.

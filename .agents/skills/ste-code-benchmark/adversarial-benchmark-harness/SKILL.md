@@ -331,16 +331,16 @@ Fix the root cause with a small `Makefile` exposing `test` / `lint` / `audit` /
 `check`, so `make check` is the one command.
 
 **`selftest.py` must pass before any worker reports done.** The harness has no
-external test framework, so `selftest.py` (run via `make test` / `python3
-.agents/benchmark/selftest.py`) is the one command that proves the shared layers
-still hold — `WORKER_BRIEF.md` makes a green exit a hard precondition for
-reporting a task complete. If `selftest.py` fails, **fix the tooling that breaks
-it, never work around or skip the check.** A compile gate that depends on the
-caller's working directory or on writing cache files next to the source is
-fragile; compile **in-process** (e.g. `py_compile.compile(abs_path, cfile=<temp>,
-doraise=True)`) so it works regardless of where or how the worker runs, while
-still catching real syntax errors. Keep the harness self-verifying and
-environment-independent.
+external test framework, so `selftest.py` (run via `make test` /
+`python3 .agents/benchmark/selftest.py`) is the one command that proves the
+shared layers still hold — `WORKER_BRIEF.md` makes a green exit a hard
+precondition for reporting a task complete. If `selftest.py` fails, **fix the
+tooling that breaks it, never work around or skip the check.** A compile gate
+that depends on the caller's working directory or on writing cache files next to
+the source is fragile; compile **in-process** (e.g.
+`py_compile.compile(abs_path, cfile=<temp>, doraise=True)`) so it works
+regardless of where or how the worker runs, while still catching real syntax
+errors. Keep the harness self-verifying and environment-independent.
 
 **Scope `lint` to the files you actually hold to the standard.** A first
 `make check` failed on ~65 line-length violations, ~56 of them pre-existing

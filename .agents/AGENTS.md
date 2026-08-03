@@ -213,25 +213,25 @@ profiles via two-level symlinks (`link-skills.sh`). A profile loads only its
 declared buckets, so the consumer `ste-code` profile is amnesic about
 authoring/dev infrastructure.
 
-| Skill             | Bucket / File                                                  | Description                                                                            |
-| ----------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Apply Standard    | `skills/ste-code-consumer/apply-standard/SKILL.md`            | The only consumer-facing skill: read the standard, apply it to your own code/docs.      |
-| Extraction        | `skills/ste-code-dev/extraction/SKILL.md`                     | 109 parallel workers, 4 pages each, 37 batches                                         |
-| Refinement        | `skills/ste-code-authoring/refinement/SKILL.md`               | 9 formatting rules, section-aware v2 workers                                           |
-| Grouping (Merge)  | `skills/ste-code-dev/grouping/SKILL.md`                       | Deterministic grouping (concat+split, MANIFEST-driven, no LLM) → `ste-code/grouped/`   |
-| Adaptation        | `skills/ste-code-authoring/adaptation/SKILL.md`               | 53 source rules → 54 code-domain rules, 22 categories; orchestrated per-section, gated |
-| Artifacts         | `skills/ste-code-authoring/artifacts/SKILL.md`               | Final deliverables assembled from `adapted/`; coverage-verified                        |
-| Auditing          | `skills/ste-code-authoring/auditing/SKILL.md`                 | 8-rail verification, fabrication detection                                             |
-| Validation        | `skills/ste-code-benchmark/validation/SKILL.md`               | Per-batch quality checks, spot-checks                                                  |
-| Continuation      | `skills/ste-code-authoring/continuation/SKILL.md`             | Multi-agent stages 3-5, any agent perspective                                          |
-| Benchmarking      | `skills/ste-code-benchmark/benchmarking/SKILL.md`             | 59 tests, 14 categories, control group                                                 |
-| Level Worker      | `skills/ste-code-dev/level-worker/SKILL.md`                   | 4 parallel workers at levels 1-4 using agent runner                                    |
-| Extension Worker  | `skills/ste-code-authoring/extension-worker/SKILL.md`         | Markdown-first gap-fill generation (orchestrated via `phase-e-run.py`); JSON derived   |
-| Translations      | `skills/ste-code-authoring/translations/SKILL.md`             | Multi-locale placeholder pipeline, 10 locales, ~540 files, batch-of-3 workers          |
-| State Report      | `skills/ste-code-dev/state-report/SKILL.md`                   | Standardized pipeline state format                                                     |
-| Execution Auditor | `skills/ste-code-dev/execution-auditor/SKILL.md`             | Hidden agent for forensic disk verification                                            |
-| STE-Code Jail Ops | `skills/ste-code-dev/ste-code-jail-ops/SKILL.md`              | Maintain the jail that confines the three STE-Code Hermes profiles.                    |
-| Skill Confinement | `skills/ste-code-dev/hermes-profile-skill-confinement/SKILL.md` | Confine a Hermes profile to a chosen skill set; block default bundled skills.         |
+| Skill             | Bucket / File                                                   | Description                                                                            |
+| ----------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Apply Standard    | `skills/ste-code-consumer/apply-standard/SKILL.md`              | The only consumer-facing skill: read the standard, apply it to your own code/docs.     |
+| Extraction        | `skills/ste-code-dev/extraction/SKILL.md`                       | 109 parallel workers, 4 pages each, 37 batches                                         |
+| Refinement        | `skills/ste-code-authoring/refinement/SKILL.md`                 | 9 formatting rules, section-aware v2 workers                                           |
+| Grouping (Merge)  | `skills/ste-code-dev/grouping/SKILL.md`                         | Deterministic grouping (concat+split, MANIFEST-driven, no LLM) → `ste-code/grouped/`   |
+| Adaptation        | `skills/ste-code-authoring/adaptation/SKILL.md`                 | 53 source rules → 54 code-domain rules, 22 categories; orchestrated per-section, gated |
+| Artifacts         | `skills/ste-code-authoring/artifacts/SKILL.md`                  | Final deliverables assembled from `adapted/`; coverage-verified                        |
+| Auditing          | `skills/ste-code-authoring/auditing/SKILL.md`                   | 8-rail verification, fabrication detection                                             |
+| Validation        | `skills/ste-code-benchmark/validation/SKILL.md`                 | Per-batch quality checks, spot-checks                                                  |
+| Continuation      | `skills/ste-code-authoring/continuation/SKILL.md`               | Multi-agent stages 3-5, any agent perspective                                          |
+| Benchmarking      | `skills/ste-code-benchmark/benchmarking/SKILL.md`               | 59 tests, 14 categories, control group                                                 |
+| Level Worker      | `skills/ste-code-dev/level-worker/SKILL.md`                     | 4 parallel workers at levels 1-4 using agent runner                                    |
+| Extension Worker  | `skills/ste-code-authoring/extension-worker/SKILL.md`           | Markdown-first gap-fill generation (orchestrated via `phase-e-run.py`); JSON derived   |
+| Translations      | `skills/ste-code-authoring/translations/SKILL.md`               | Multi-locale placeholder pipeline, 10 locales, ~540 files, batch-of-3 workers          |
+| State Report      | `skills/ste-code-dev/state-report/SKILL.md`                     | Standardized pipeline state format                                                     |
+| Execution Auditor | `skills/ste-code-dev/execution-auditor/SKILL.md`                | Hidden agent for forensic disk verification                                            |
+| STE-Code Jail Ops | `skills/ste-code-dev/ste-code-jail-ops/SKILL.md`                | Maintain the jail that confines the three STE-Code Hermes profiles.                    |
+| Skill Confinement | `skills/ste-code-dev/hermes-profile-skill-confinement/SKILL.md` | Confine a Hermes profile to a chosen skill set; block default bundled skills.          |
 
 Profile → bucket map (single source, symlinked):
 

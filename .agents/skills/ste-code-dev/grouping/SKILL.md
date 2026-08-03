@@ -1,6 +1,7 @@
 ---
 name: grouping
-description: STE-Code skill — load when its trigger matches; see body for workflow.
+description:
+    STE-Code skill — load when its trigger matches; see body for workflow.
 category: dev
 capability: developing-and-changing-the-standard
 source: .agents/skills/grouping

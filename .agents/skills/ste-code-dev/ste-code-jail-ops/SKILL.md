@@ -1,7 +1,6 @@
 ---
 name: ste-code-jail-ops
-description:
-    Maintain the jail that confines the three STE-Code Hermes profiles.
+description: Maintain the jail that confines the three STE-Code Hermes profiles.
 category: dev
 capability: developing-and-changing-the-standard
 source: <home>/.hermes/profiles/dev-ste-code/skills/ste-code-dev/ste-code-jail-ops
@@ -73,7 +72,7 @@ STE-Code skills" = make `profile_dir/skills/` contain only STE symlinks (into
 
 - Verify at runtime (NOT static):
   `env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p> hermes skills list --enabled-only`
-  - expect 0 builtin, only STE names.
+    - expect 0 builtin, only STE names.
 - See `scripts/verify_profile_skills.py` for a read-only check.
 
 ## Launching a jailed profile (new terminal)
@@ -96,11 +95,12 @@ permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
 
 ## Project-root resolution (cwd-independent - verified)
 
-The jail resolves the STE-Code repo as a write root **from its own file location**,
-not the session cwd. `core/policy.py:resolve_project_root_anchored()` walks up
-from `policy.py` (`core/` → `jail/` → `hermes/` → `.agents/` → `<repo>`) and
-returns the checkout when `<repo>/.git` or `Makefile` exists. `load_context()`
-uses it FIRST; the `cwd` walk is only a fallback (unit tests). Consequence:
+The jail resolves the STE-Code repo as a write root **from its own file
+location**, not the session cwd.
+`core/policy.py:resolve_project_root_anchored()` walks up from `policy.py`
+(`core/` → `jail/` → `hermes/` → `.agents/` → `<repo>`) and returns the checkout
+when `<repo>/.git` or `Makefile` exists. `load_context()` uses it FIRST; the
+`cwd` walk is only a fallback (unit tests). Consequence:
 
 - A `hermes -z` child spawned with `cwd=~/.hermes` still resolves the repo
   correctly - it is NOT dropped from the write roots (the earlier "project_root
@@ -108,29 +108,31 @@ uses it FIRST; the `cwd` walk is only a fallback (unit tests). Consequence:
 - The dominant "cannot write to the repo" cause is therefore **environment, not
   code**: a session whose inherited `HERMES_HOME` points at the wrong profile
   (e.g. a dev shell that leaked `benchmark-ste-code`) resolves to that profile's
-  policy, under which the repo is read-only *by design*. Relaunch with the
-  intended profile (`env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p>`)
+  policy, under which the repo is read-only _by design_. Relaunch with the
+  intended profile
+  (`env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p>`)
   rather than editing `policy.py`. See `references/project-root-resolution.md`.
 
 ## Jailed poll-worker launch (HERMES_HOME prefix)
 
 When launching a worker under the jail via `jail-exec.sh`, the kernel layer
 computes Seatbelt/bwrap roots from `HERMES_HOME` **at the command line**, not
-merely an export inside the launcher. Prefix it on the `jail-exec.sh` invocation:
+merely an export inside the launcher. Prefix it on the `jail-exec.sh`
+invocation:
 
 ```bash
-base64 -i prompt.md -o prompt.b64            # macOS needs -i
+base64 -i prompt.md -o prompt.b64 # macOS needs -i
 PROMPT=$(base64 -d -i prompt.b64)
-HERMES_HOME=~/.hermes/profiles/<target-profile> \
-  .agents/hermes/jail/scripts/jail-exec.sh \
-    hermes -p <profile> -m M --yolo -z "$PROMPT"   # flags BEFORE -z, prompt last
+HERMES_HOME=~/.hermes/profiles/ < target-profile > \
+.agents/hermes/jail/scripts/jail-exec.sh \
+	hermes -p M --yolo -z "$PROMPT" < profile > -m # flags BEFORE -z, prompt last
 ```
 
-Failing to prefix `HERMES_HOME` makes `jail_init` use the *parent* profile's home
-and the worker's `logs/agent.log` write is denied (`Operation not permitted`). Do
-not `cd` into the repo inside the launcher. See `poll-worker-launch` for the full
-recipe and verification (`logs/agent.log` first line must read
-`profile=<target> policy=<expected>`).
+Failing to prefix `HERMES_HOME` makes `jail_init` use the _parent_ profile's
+home and the worker's `logs/agent.log` write is denied
+(`Operation not permitted`). Do not `cd` into the repo inside the launcher. See
+`poll-worker-launch` for the full recipe and verification (`logs/agent.log`
+first line must read `profile=<target> policy=<expected>`).
 
 ## Verify after ANY change
 
@@ -190,7 +192,7 @@ recipe and verification (`logs/agent.log` first line must read
 
 - **A new/looser/anonymous profile does NOT relax confinement.**
   `core/policy.py:_STRICT_FALLBACK = "bench"` - an unmapped profile name falls
-  through to the *strictest* policy, so a profile like `benchmark-run-ste-code`
+  through to the _strictest_ policy, so a profile like `benchmark-run-ste-code`
   is jailed exactly like `bench`. When confined tooling fails (e.g. `py_compile`
   cannot write `.pyc` into the denied project tree, or a `make test` goes
   158/180 with all failures being `compiles:` checks), **fix the tooling, not
@@ -200,8 +202,8 @@ recipe and verification (`logs/agent.log` first line must read
   failure modes (no cwd dependency, no project-root bytecode write) and still
   catches real syntax errors via the full `compile()` pipeline. See
   `references/confined-tooling.md`.
-- **Run *developer verification* (selftest / make test) from a profile that can
-  write the project tree** (the `dev` policy), and keep the *adversarial run*
+- **Run _developer verification_ (selftest / make test) from a profile that can
+  write the project tree** (the `dev` policy), and keep the _adversarial run_
   under `bench`. Do not invent a profile hoping it is looser - the sandbox reads
   the policy map, not the profile's stated purpose.
 

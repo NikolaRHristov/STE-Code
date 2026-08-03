@@ -1,7 +1,6 @@
 ---
 name: link-checking
-description:
-    Find genuinely broken doc links without false-positive noise.
+description: Find genuinely broken doc links without false-positive noise.
 category: benchmark
 capability: running-the-adversarial-benchmark
 source: .agents/skills/validation/link-checking
@@ -189,7 +188,6 @@ Repo-specific decisions:
   drift mid-run. Re-run after regeneration settles before treating
   `artifacts/README.md` misses as defects.
 
-Reference-repo provenance: config base from `<repo>/WebSite/lychee.toml`
-(cache, retry, `[header]`, fragment policy); runner shape from
-`<repo>/Repository/Maintain/Check/Links.sh` (quoted globs, tool-presence
-guard).
+Reference-repo provenance: config base from `<repo>/WebSite/lychee.toml` (cache,
+retry, `[header]`, fragment policy); runner shape from
+`<repo>/Repository/Maintain/Check/Links.sh` (quoted globs, tool-presence guard).

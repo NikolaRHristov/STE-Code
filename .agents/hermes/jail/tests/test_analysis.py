@@ -100,8 +100,7 @@ def test_resolve_against() -> None:
         "absolute path must ignore the base",
     )
     check(
-        resolve_against("../sibling.md", BASE)
-        == os.path.join(PARENT, "sibling.md"),
+        resolve_against("../sibling.md", BASE) == os.path.join(PARENT, "sibling.md"),
         "..-relative path must climb out of the base",
     )
     check(
@@ -192,7 +191,9 @@ def test_dash_o_is_read_only_for_most_commands() -> None:
         # rsync/unzip may legitimately report their own operands; what must NOT
         # appear is a target derived from the `-o` flag's following token.
         check(
-            not any(t.endswith("/pid=,command=") or t.endswith("/foo") for t in targets),
+            not any(
+                t.endswith("/pid=,command=") or t.endswith("/foo") for t in targets
+            ),
             f"`-o` must not name a write target in: {command}",
         )
 
@@ -282,7 +283,10 @@ def test_cwd_threading() -> None:
 
 def test_workdir_argument() -> None:
     targets = [
-        p for _, p in write_targets("terminal", {"command": "mkdir -p sub", "workdir": PARENT}, BASE)
+        p
+        for _, p in write_targets(
+            "terminal", {"command": "mkdir -p sub", "workdir": PARENT}, BASE
+        )
     ]
     check(
         os.path.join(PARENT, "sub") in targets,
@@ -337,8 +341,17 @@ def test_wrapper_prefixes() -> None:
 # --------------------------------------------------------------------------- #
 def test_write_command_operands() -> None:
     # "all" operands
-    for command in ("mkdir ../m", "touch ../m", "rm ../m", "rmdir ../m", "chmod 755 ../m"):
-        check(writes_to(command, os.path.join(PARENT, "m")), f"all-operand write missed: {command}")
+    for command in (
+        "mkdir ../m",
+        "touch ../m",
+        "rm ../m",
+        "rmdir ../m",
+        "chmod 755 ../m",
+    ):
+        check(
+            writes_to(command, os.path.join(PARENT, "m")),
+            f"all-operand write missed: {command}",
+        )
 
     # "last" operand only (cp/mv/install semantics)
     cp_targets = paths("cp a.txt b.txt ../dest/")
@@ -351,8 +364,13 @@ def test_write_command_operands() -> None:
         "cp must NOT report its sources as writes",
     )
     check(writes_to("mv notes.md ..", PARENT), "mv into the parent is a write")
-    check(writes_to("ln -s /etc/passwd ../link", "/link"), "ln -s destination is a write")
-    check(writes_to("install -m 755 bin ../out/bin", "/out/bin"), "install writes its last operand")
+    check(
+        writes_to("ln -s /etc/passwd ../link", "/link"), "ln -s destination is a write"
+    )
+    check(
+        writes_to("install -m 755 bin ../out/bin", "/out/bin"),
+        "install writes its last operand",
+    )
 
     # Bare (non-path-like) operands still resolve under the cwd.
     check(
@@ -432,10 +450,14 @@ def test_archive_modes() -> None:
         "unzip -l /tmp/x.zip",
         "unzip -t /tmp/x.zip",
     ):
-        check(has_no_targets(command), f"archive listing must be a pure read: {command}")
+        check(
+            has_no_targets(command), f"archive listing must be a pure read: {command}"
+        )
 
     # CREATE writes the archive.
-    check(writes_to("tar -czf ../a.tar.gz .", "/a.tar.gz"), "tar create (clustered -czf)")
+    check(
+        writes_to("tar -czf ../a.tar.gz .", "/a.tar.gz"), "tar create (clustered -czf)"
+    )
     check(writes_to("tar -c -f ../a.tar .", "/a.tar"), "tar create (separate -c -f)")
     check(writes_to("tar czf ../a.tgz .", "/a.tgz"), "tar create (dashless flags)")
     check(writes_to("tar --create --file=../a.tar .", "/a.tar"), "tar --create --file=")
@@ -464,9 +486,7 @@ def test_archive_modes() -> None:
 # --------------------------------------------------------------------------- #
 def test_inline_code() -> None:
     check(
-        writes_to(
-            f"python3 -c \"import os; os.makedirs('{PARENT}/py')\"", "/py"
-        ),
+        writes_to(f"python3 -c \"import os; os.makedirs('{PARENT}/py')\"", "/py"),
         "python3 -c makedirs must be seen",
     )
     check(
@@ -499,7 +519,7 @@ def test_inline_code() -> None:
         "an inline open() is conservatively reported regardless of mode",
     )
     check(
-        has_no_targets("python3 -c \"print(1 + 1)\""),
+        has_no_targets('python3 -c "print(1 + 1)"'),
         "inline code with no write call names no target",
     )
 
@@ -828,7 +848,9 @@ def main() -> int:
         print(f"  [{status}] {test.__name__}" + (f"  ({new} failed)" if new else ""))
 
     print("-" * 66)
-    print(f"{_CHECKS} assertions, {len(_FAILURES)} failed, {failed_tests} failing test(s)")
+    print(
+        f"{_CHECKS} assertions, {len(_FAILURES)} failed, {failed_tests} failing test(s)"
+    )
     if _FAILURES:
         print("\nFailures:")
         for failure in _FAILURES:

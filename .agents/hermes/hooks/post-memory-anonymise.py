@@ -31,6 +31,7 @@ Two layers:
 Stdin : JSON {hook_event_name, tool_name:"memory", tool_input{action,target,...}}
 Stdout: {}  (return value ignored; we act by rewriting the store file)
 """
+
 import hashlib
 import json
 import os
@@ -45,6 +46,7 @@ HERMES_HOME = Path(os.path.expanduser("~/.hermes"))
 LOG_DIR = HERMES_HOME / "agent-hooks" / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 LOG = LOG_DIR / "memory-anonymise.log"
+
 
 # dev-ste-code memory is symlinked from the STE-Code repo. Keep authoritative.
 def _repo_root() -> Path:
@@ -74,16 +76,97 @@ LLM_MODEL = os.environ.get("HERMES_ANON_LLM_MODEL", "tencent/hy3:free")
 # "Level Worker", "GitHub Copilot", "Red Hat Linux". Covers common brand-name
 # first words AND continuations that would otherwise look like a "Surname".
 _KNOWN_NON_PERSON = {
-    "STE", "API", "URL", "Red", "Black", "White", "Blue", "Purple", "Green",
-    "Yellow", "Orange", "Level", "Agent", "Hermes", "GitHub", "GitLab", "Nous",
-    "Code", "Tool", "Hook", "Config", "Memory", "User", "Host", "Email", "Person",
-    "Repo", "Home", "Shell", "File", "Path", "Error", "Warning", "Info", "Debug",
-    "Test", "Build", "Run", "Note", "Table", "Figure", "Section", "Chapter",
-    "Make", "Skip", "Pass", "Fail", "True", "False", "None", "Model", "Prompt",
-    "Hat", "Linux", "Mac", "OS", "Server", "Studio", "Hub", "Base", "Stack",
-    "Cloud", "Pro", "Max", "Mini", "Air", "Book", "Pad", "Pen", "TV", "App",
-    "Kit", "Lab", "Soft", "Hard", "Open", "Free", "Dev", "Ops", "Net", "Web",
-    "Data", "Core", "Edge", "Flow", "View", "Docs", "DB", "SQL", "No", "Go",
+    "STE",
+    "API",
+    "URL",
+    "Red",
+    "Black",
+    "White",
+    "Blue",
+    "Purple",
+    "Green",
+    "Yellow",
+    "Orange",
+    "Level",
+    "Agent",
+    "Hermes",
+    "GitHub",
+    "GitLab",
+    "Nous",
+    "Code",
+    "Tool",
+    "Hook",
+    "Config",
+    "Memory",
+    "User",
+    "Host",
+    "Email",
+    "Person",
+    "Repo",
+    "Home",
+    "Shell",
+    "File",
+    "Path",
+    "Error",
+    "Warning",
+    "Info",
+    "Debug",
+    "Test",
+    "Build",
+    "Run",
+    "Note",
+    "Table",
+    "Figure",
+    "Section",
+    "Chapter",
+    "Make",
+    "Skip",
+    "Pass",
+    "Fail",
+    "True",
+    "False",
+    "None",
+    "Model",
+    "Prompt",
+    "Hat",
+    "Linux",
+    "Mac",
+    "OS",
+    "Server",
+    "Studio",
+    "Hub",
+    "Base",
+    "Stack",
+    "Cloud",
+    "Pro",
+    "Max",
+    "Mini",
+    "Air",
+    "Book",
+    "Pad",
+    "Pen",
+    "TV",
+    "App",
+    "Kit",
+    "Lab",
+    "Soft",
+    "Hard",
+    "Open",
+    "Free",
+    "Dev",
+    "Ops",
+    "Net",
+    "Web",
+    "Data",
+    "Core",
+    "Edge",
+    "Flow",
+    "View",
+    "Docs",
+    "DB",
+    "SQL",
+    "No",
+    "Go",
 }
 # Heuristic: Title-Case "Firstname Lastname" (e.g. "Nikola Hristov") -> <person>.
 # No literal operator name is baked into this file (that would leak PII into the
@@ -100,16 +183,18 @@ _PERSON_HEURISTIC = re.compile(
 def build_anon_patterns():
     pats = [
         (re.compile(r"/Users/[A-Za-z0-9_.-]+"), "<user-home>"),
-        (re.compile(
-            r"/Volumes/[A-Za-z0-9_.-]+/[A-Za-z0-9_. -]+/Application/"
-            r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+"), "<repo>"),
+        (
+            re.compile(
+                r"/Volumes/[A-Za-z0-9_.-]+/[A-Za-z0-9_. -]+/Application/"
+                r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+"
+            ),
+            "<repo>",
+        ),
         (re.compile(r"/Volumes/[A-Za-z0-9_./-]+"), "<repo>"),
         (re.compile(r"/private/var/folders/[A-Za-z0-9/_-]+"), "<tmp>"),
-        (re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"),
-         "<email>"),
+        (re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"), "<email>"),
         (re.compile(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b"), "<ip>"),
-        (re.compile(r"[A-Za-z0-9.-]+\.(?:nousresearch\.com|local|lan|home)"),
-         "<host>"),
+        (re.compile(r"[A-Za-z0-9.-]+\.(?:nousresearch\.com|local|lan|home)"), "<host>"),
         (_PERSON_HEURISTIC, "<person>"),
     ]
     names = os.environ.get("HERMES_OPERATOR_NAMES", "")
@@ -221,19 +306,32 @@ def _llm_refine(store: Path) -> None:
             src_auth = HERMES_HOME / "auth.json"
             if src_auth.exists():
                 import shutil
+
                 shutil.copyfile(src_auth, tmphome / "auth.json")
         except OSError as e:
             _log(f"llm: temp home setup failed: {e}")
             return
 
-        env = {**os.environ, "HERMES_HOME": str(tmphome),
-               "HERMES_ACCEPT_HOOKS": "0"}
+        env = {**os.environ, "HERMES_HOME": str(tmphome), "HERMES_ACCEPT_HOOKS": "0"}
         try:
             proc = subprocess.run(
-                ["hermes", "-z", prompt, "--provider", "nous",
-                 "-m", LLM_MODEL, "--yolo", "-t", ""],
-                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                start_new_session=True, cwd=str(REPO), env=env,
+                [
+                    "hermes",
+                    "-z",
+                    prompt,
+                    "--provider",
+                    "nous",
+                    "-m",
+                    LLM_MODEL,
+                    "--yolo",
+                    "-t",
+                    "",
+                ],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                start_new_session=True,
+                cwd=str(REPO),
+                env=env,
                 timeout=120,
             )
         except Exception as e:  # noqa: BLE001
@@ -243,6 +341,7 @@ def _llm_refine(store: Path) -> None:
             # Clean the throwaway home (session + auth copy) immediately.
             try:
                 import shutil
+
                 shutil.rmtree(tmphome, ignore_errors=True)
             except OSError:
                 pass
@@ -310,10 +409,11 @@ def main() -> int:
         #    exit before the ~10s LLM call finishes - the old bug).
         try:
             subprocess.Popen(
-                [sys.executable, os.path.abspath(__file__), "--llm-refine",
-                 str(store)],
-                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                start_new_session=True, cwd=str(REPO),
+                [sys.executable, os.path.abspath(__file__), "--llm-refine", str(store)],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True,
+                cwd=str(REPO),
                 env={**os.environ, "HERMES_ACCEPT_HOOKS": "0"},
             )
         except Exception as e:  # noqa: BLE001

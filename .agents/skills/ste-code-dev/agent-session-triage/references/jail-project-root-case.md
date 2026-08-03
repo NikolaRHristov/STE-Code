@@ -5,8 +5,8 @@ the "looping session reports it cannot locate the repo" class.
 
 ## Symptom
 
-A dev session reports "the jail cannot locate the STE-Code repo" / "every write is
-blocked as outside the allowed roots". The instinct is to hunt for a stale
+A dev session reports "the jail cannot locate the STE-Code repo" / "every write
+is blocked as outside the allowed roots". The instinct is to hunt for a stale
 installed copy of `policy.py` or a wrong `cfg` path. **In the instance that
 produced this note, that instinct was wrong.**
 
@@ -17,7 +17,8 @@ up from the process cwd to a `.git`/`Makefile` marker. The theory: a session
 spawned with `cwd=~/.hermes` found no marker → `project_root=None` → the repo
 dropped from the write roots.
 
-Verify the premise before investigating it. Evaluating `load_context()` directly:
+Verify the premise before investigating it. Evaluating `load_context()`
+directly:
 
 ```
 project_root: <repo>
@@ -25,18 +26,18 @@ policy: dev
 write_roots: [repo, profile, profiles, /tmp, ...]
 ```
 
-The anchored resolver (`resolve_project_root_anchored`) was already landing on the
-repo. The premise was false; every downstream step (searching for duplicate
+The anchored resolver (`resolve_project_root_anchored`) was already landing on
+the repo. The premise was false; every downstream step (searching for duplicate
 `policy.py`, diffing jail configs) was wasted.
 
 ## The real cause in the live stuck sessions
 
 They were **benchmark** sessions whose `HERMES_HOME` had been inherited as
-`benchmark-ste-code` (env leak from a parent dev shell). Under the `bench` policy
-the STE-Code checkout is **read-only by design** - so "cannot write to the repo"
-was *correct* behaviour, not a bug. The fix was to launch with the intended
-profile (`HERMES_PROFILE` + `HERMES_HOME` set to the dev profile), not to change
-any code.
+`benchmark-ste-code` (env leak from a parent dev shell). Under the `bench`
+policy the STE-Code checkout is **read-only by design** - so "cannot write to
+the repo" was _correct_ behaviour, not a bug. The fix was to launch with the
+intended profile (`HERMES_PROFILE` + `HERMES_HOME` set to the dev profile), not
+to change any code.
 
 ## The read-only jail-context probe
 

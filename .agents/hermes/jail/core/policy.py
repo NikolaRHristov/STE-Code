@@ -581,7 +581,9 @@ def load_context(force: bool = False) -> JailContext:
         or resolve_project_root_anchored()  # cwd-independent: anchor to the
         # checkout this core ships inside, so spawned children (cwd=~/.hermes,
         # ~) still resolve the real repo. Falls back to a cwd walk internally.
-        or resolve_project_root(os.getcwd(), cfg.get("root_markers") or DEFAULT_ROOT_MARKERS)
+        or resolve_project_root(
+            os.getcwd(), cfg.get("root_markers") or DEFAULT_ROOT_MARKERS
+        )
     )
 
     # Derive the profile directory from the RESOLVED profile name rather than

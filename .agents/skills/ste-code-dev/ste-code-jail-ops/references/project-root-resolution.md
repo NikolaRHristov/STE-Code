@@ -18,7 +18,7 @@ parents[4] = <repo>        # the STE-Code checkout
 ```
 
 If `<repo>/.git` or `<repo>/Makefile` exists, it returns that path. Only if the
-core is imported from *outside* a checkout (unit tests) does it fall back to a
+core is imported from _outside_ a checkout (unit tests) does it fall back to a
 `cwd` walk via `resolve_project_root(os.getcwd())`.
 
 `load_context()` calls it first:
@@ -55,25 +55,25 @@ of the session** - including a `hermes -z` child spawned with `cwd=~/.hermes`.
 
 ## Failure mode A - wrong profile via inherited env (NOT a code bug)
 
-A session pointed at the *wrong* profile behaves identically to a session
-hitting a *code* bug. The two stuck benchmark sessions reported "cannot write to
+A session pointed at the _wrong_ profile behaves identically to a session
+hitting a _code_ bug. The two stuck benchmark sessions reported "cannot write to
 the repo" while **already carrying the anchored fix**: their `HERMES_HOME` was
 inherited as `benchmark-ste-code`, so they resolved to the `bench` policy, under
-which the repo is read-only *by design*. Fix = launch with the intended profile:
+which the repo is read-only _by design_. Fix = launch with the intended profile:
 
 ```bash
 env -u HERMES_HOME \
-  HERMES_PROFILE=dev-ste-code \
-  HERMES_HOME=~/.hermes/profiles/dev-ste-code \
-  hermes --tui
+	HERMES_PROFILE=dev-ste-code \
+	HERMES_HOME=~/.hermes/profiles/dev-ste-code \
+	hermes --tui
 ```
 
 A healthy dev session logs: `profile=dev ... write_roots=6 network=allowed`.
 
 ## Failure mode B - stale bytecode (transient)
 
-A process started *before* an edit holds the old module in memory; plugins import
-once at registration and `load_context()` caches the result in
+A process started _before_ an edit holds the old module in memory; plugins
+import once at registration and `load_context()` caches the result in
 `_context_cache`. Re-reading the file changes nothing for a live process. A
 restart clears it. Always verify a fix in a FRESH subprocess
 (`jail-install.sh --status` or a new `hermes` invocation), never in-session.

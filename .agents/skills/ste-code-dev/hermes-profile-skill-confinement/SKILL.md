@@ -1,7 +1,8 @@
 ---
 name: hermes-profile-skill-confinement
 description:
-    Confine a Hermes profile to a chosen skill set; block default bundled skills.
+    Confine a Hermes profile to a chosen skill set; block default bundled
+    skills.
 category: dev
 capability: developing-the-standard
 source: <home>/.hermes/profiles/dev-ste-code/skills/ste-code-dev/hermes-profile-skill-confinement
@@ -59,4 +60,5 @@ env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p> \
 ```
 
 Confirm zero default skills, only intended STE skills. Static `ls` is NOT enough
+
 - a live session can change what resolves.

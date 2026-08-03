@@ -1,7 +1,6 @@
 ---
 name: apply-standard
-description:
-    Apply the STE-Code standard to your own code and docs.
+description: Apply the STE-Code standard to your own code and docs.
 ---
 
 # Applying STE-Code to your documentation

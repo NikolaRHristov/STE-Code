@@ -89,6 +89,7 @@ def classify_private(text: str) -> Optional[bool]:
         # runs under STE_CODE_JAIL_POLICY=bench with a stripped env, HOME=/tmp,
         # and leak-scanned output — never as a bare, unconfined `hermes -z`.
         import sys
+
         _bench = Path(__file__).resolve().parents[4] / "benchmark"
         if str(_bench) not in sys.path:
             sys.path.insert(0, str(_bench))

@@ -18,8 +18,8 @@ Label distribution top: `terminal(redirect)` 3433, then per-verb labels
 
 Surprising behaviour (no defect, documented ceilings):
 
-- `-o` is correctly scoped: `ps -o pid=` yields no target, while
-  `curl -o ../x` does. The scoping table in `_EXTRA_DIR_FLAGS` holds up.
+- `-o` is correctly scoped: `ps -o pid=` yields no target, while `curl -o ../x`
+  does. The scoping table in `_EXTRA_DIR_FLAGS` holds up.
 - `-C` and `--directory` are universal, so a wrapper such as `env -C /tmp`
   produces a write target even though `env -C` only changes directory.
 - `tar -tzf` correctly yields nothing; `tar -czf ../x.tgz` is caught.

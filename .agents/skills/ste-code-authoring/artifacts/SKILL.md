@@ -1,6 +1,7 @@
 ---
 name: artifacts
-description: STE-Code skill — load when its trigger matches; see body for workflow.
+description:
+    STE-Code skill — load when its trigger matches; see body for workflow.
 category: authoring
 capability: authoring-and-changing-the-standard
 source: .agents/skills/artifacts

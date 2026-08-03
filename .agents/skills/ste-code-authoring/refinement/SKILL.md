@@ -1,7 +1,6 @@
 ---
 name: refinement
-description:
-    Reformat extracted STE-Code docs to simplified-English standard.
+description: Reformat extracted STE-Code docs to simplified-English standard.
 category: authoring
 capability: authoring-and-changing-the-standard
 source: .agents/skills/refinement

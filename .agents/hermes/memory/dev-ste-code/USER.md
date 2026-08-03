@@ -13,6 +13,15 @@ preferring `install.sh`/`link-*.sh` style idempotent scripts. Delegate =
 produce/write output; poll worker = research/observe. Never trust delegate
 self-reports — verify deliverables on disk. (Note: raw `hermes -z` is
 --oneshot + YOLO auto-approve, NOT stricter than delegate_task; make poll
-workers strict via minimal --toolsets / confined profile.)
-§
-§ Engineering-style preferences (from STE-Code dev-authoring sessions): Prefers PYTHON hooks over bash for capability ("use python for the hooks, to make them more advanced"). Insists on SINGLE RESPONSIBILITY for hooks — one job each (the memory hook must anonymise ONLY; the earlier LLM-restructure that spawned `hermes -z` oneshots and caused 84-message runaway sessions violated SRP and was removed). Wants LLM-powered features but with NO session clutter ("session db none") — achieve via `HERMES_HOME=<temp>` so child sessions write to a throwaway state.db, not the real store. Benchmark skills must be GOAL-FOCUSED and ENVIRONMENT-AGNOSTIC: they say what + how, never leak jail/policy internals (the jail is STE-Code's concern, enforced by harness/plugins). Memory ops fire-and-forget — never long logged oneshot sessions.
+workers strict via minimal --toolsets / confined profile.) § § Engineering-style
+preferences (from STE-Code dev-authoring sessions): Prefers PYTHON hooks over
+bash for capability ("use python for the hooks, to make them more advanced").
+Insists on SINGLE RESPONSIBILITY for hooks — one job each (the memory hook must
+anonymise ONLY; the earlier LLM-restructure that spawned `hermes -z` oneshots
+and caused 84-message runaway sessions violated SRP and was removed). Wants
+LLM-powered features but with NO session clutter ("session db none") — achieve
+via `HERMES_HOME=<temp>` so child sessions write to a throwaway state.db, not
+the real store. Benchmark skills must be GOAL-FOCUSED and ENVIRONMENT-AGNOSTIC:
+they say what + how, never leak jail/policy internals (the jail is STE-Code's
+concern, enforced by harness/plugins). Memory ops fire-and-forget — never long
+logged oneshot sessions.

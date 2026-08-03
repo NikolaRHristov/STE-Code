@@ -88,9 +88,9 @@ HARDEN:
 
 When the worker must run a STE-Code profile under the jail, the **kernel
 confinement layer (`jail-exec.sh`) computes its Seatbelt/bwrap roots from
-`HERMES_HOME`**. A common failure: the launcher `export`s `HERMES_HOME` *inside*
+`HERMES_HOME`**. A common failure: the launcher `export`s `HERMES_HOME` _inside_
 the launcher shell but does NOT prefix it on the `jail-exec.sh` command itself,
-so `jail_init` runs with the *parent* profile's home and the worker's
+so `jail_init` runs with the _parent_ profile's home and the worker's
 `logs/agent.log` write is denied (`Operation not permitted`).
 
 **Correct recipe** (flags BEFORE `-z`; prompt last; `HERMES_HOME` prefix on the
@@ -100,21 +100,23 @@ jailed command, not only exported inside the launcher):
 # 1) base64 the prompt (macOS needs -i) so it travels as one token-safe blob
 base64 -i prompt.md -o prompt.b64
 # 2) launcher reads it back via `base64 -d -i`
-read -r PROMPT; PROMPT=$(base64 -d -i prompt.b64)
+read -r PROMPT
+PROMPT=$(base64 -d -i prompt.b64)
 
 # 3) HERMES_HOME is PREFIXED on the jail-exec.sh invocation (not just exported)
-HERMES_HOME=~/.hermes/profiles/<target-profile> \
-  .agents/hermes/jail/scripts/jail-exec.sh \
-    hermes -p <profile> -m M --yolo \
-      -z "$PROMPT"
+HERMES_HOME=~/.hermes/profiles/ < target-profile > \
+.agents/hermes/jail/scripts/jail-exec.sh \
+	hermes -p M --yolo \
+	-z "$PROMPT" < profile > -m
 #                                   ^ prompt LAST - else `argument -z: expected
 #                                     one argument`
 ```
 
 Rules:
 
-- **Flags before `-z`**, prompt as the final positional. `hermes -p X -m M -z
-  "$PROMPT"` - never `hermes -z "$PROMPT" -p X` (parser errors).
+- **Flags before `-z`**, prompt as the final positional.
+  `hermes -p X -m M -z "$PROMPT"` - never `hermes -z "$PROMPT" -p X` (parser
+  errors).
 - **Do not `cd` into the repo inside the launcher** - let `HERMES_HOME` +
   `jail-exec.sh` resolve roots from the profile dir.
 - The **prompt carries NO textual confinement**; confinement comes from the

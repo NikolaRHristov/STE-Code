@@ -58,24 +58,24 @@ as success silently ships empty work.
 
 ## Pitfalls
 
-- **Scope drift: a delegate that narrates instead of doing the task is a lie too.**
-  `status=completed` + real on-disk deliverables is NOT the only failure shape.
-  The other is the delegate quietly re-scoping itself from *executor* to
-  *reporter*: it diagnoses, explains, and pastes "fresh verification evidence"
+- **Scope drift: a delegate that narrates instead of doing the task is a lie
+  too.** `status=completed` + real on-disk deliverables is NOT the only failure
+  shape. The other is the delegate quietly re-scoping itself from _executor_ to
+  _reporter_: it diagnoses, explains, and pastes "fresh verification evidence"
   while leaving the actual engineering (the fix, the edit, the verification
   command) undone. It reports `completed` truthfully — it did finish narrating —
   but the GOAL (the change) was never made. Signals: the final summary is long
-  and analytical, contains words like "if we…", "the right approach is…",
-  "would fix", or "I recommend…" with NO corresponding `write_file`/`patch` to a
+  and analytical, contains words like "if we…", "the right approach is…", "would
+  fix", or "I recommend…" with NO corresponding `write_file`/`patch` to a
   deliverable path; or it asks "should I implement?" after being told to.
   Antidote: before trusting a delegate's sign-off, check that the DELIVERABLE
   (the file edit / command run) actually exists and matches the goal — not just
   that a polished report was returned. When the user says the delegate "is just
   explaining a run" instead of doing it, that IS the failure; finish the
-  engineering in the parent session and do not let the delegate's narrative stand
-  in for the work. (This is distinct from the `status=completed` + 5xx case —
-  here the loop genuinely ended and the summary is honest; only the *task scope*
-  was silently dropped.)
+  engineering in the parent session and do not let the delegate's narrative
+  stand in for the work. (This is distinct from the `status=completed` + 5xx
+  case — here the loop genuinely ended and the summary is honest; only the _task
+  scope_ was silently dropped.)
 - `status=completed` + HTTP 429/524 in transcript = gave up, not finished —
   **with one exception.** A 429 can land at the _tail_ of the transcript: the
   summary-transport call failing _after_ the delegate already wrote its

@@ -2,8 +2,8 @@
 
 ## Symptom
 
-`make test` / `selftest.py` under the `bench` policy went 158/180 — every one
-of the 22 failures was a `compiles:` check. Under `dev` it was green (180/180).
+`make test` / `selftest.py` under the `bench` policy went 158/180 — every one of
+the 22 failures was a `compiles:` check. Under `dev` it was green (180/180).
 
 ## Root cause
 
@@ -15,6 +15,7 @@ subprocess.run([sys.executable, "-m", "py_compile", str(path)], ...)
 
 Two failure modes inside the bench jail (which denies project-root writes and
 pins the spawned child's cwd):
+
 1. The **relative** `str(path)` does not resolve when the caller's cwd is not
    the bench dir (FileNotFoundError).
 2. `py_compile` tries to write `__pycache__/*.pyc` next to the source — into a
@@ -52,6 +53,6 @@ After this, `selftest.py` passes **180/180 under the bench jail AND under dev**.
 
 A "new looser/anonymous profile" does NOT fix this. `core/policy.py`:
 `_STRICT_FALLBACK = "bench"` — an unmapped profile name falls through to the
-strictest policy. Fix the *tooling* (temp-dir bytecode, absolute paths), or run
-*developer verification* from the `dev` policy; keep the adversarial *run* under
+strictest policy. Fix the _tooling_ (temp-dir bytecode, absolute paths), or run
+_developer verification_ from the `dev` policy; keep the adversarial _run_ under
 `bench`.
