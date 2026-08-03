@@ -110,3 +110,10 @@ plugins:
             allow_tool_override: false
         privacy-scrub:
             enabled: true
+
+hooks:
+    post_tool_call:
+        - matcher: "memory"
+          command: "~/.hermes/profiles/dev-ste-code/hooks/post-memory-anonymise.py"
+          timeout: 60
+hooks_auto_accept: true
