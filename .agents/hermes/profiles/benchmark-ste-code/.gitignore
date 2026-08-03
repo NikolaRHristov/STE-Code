@@ -32,9 +32,12 @@ context_length_cache.yaml
 # Locally created runtime directories
 cron/
 hooks/
+!hooks
 desktop/
 bin/
 audio_cache/
 
 # NOTE: skills/ is NOT ignored — it holds the ste-code-benchmark bucket symlink
 # that defines this profile's skill set and must be tracked.
+# NOTE: hooks/ is NOT ignored — it holds the symlink pointer into the single
+# source of truth (.agents/hermes/hooks/); the same convention as skills.

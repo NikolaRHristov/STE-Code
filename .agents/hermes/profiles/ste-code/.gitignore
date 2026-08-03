@@ -32,6 +32,7 @@ context_length_cache.yaml
 # Locally created runtime directories
 cron/
 hooks/
+!hooks
 desktop/
 bin/
 audio_cache/

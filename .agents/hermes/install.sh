@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # install.sh — wire every STE-Code Hermes profile to the repository's single
-# sources in one step. Runs the two linkers (skills, then memory); each handles
-# its own idempotency and status reporting.
+# sources in one step. Runs the three linkers (skills, memory, hooks); each
+# handles its own idempotency and status reporting.
 #
 # Usage:
-#   install.sh            # link skills + memory for all three profiles
-#   install.sh --status   # report drift for both, change nothing
+#   install.sh            # link skills + memory + hooks for all three profiles
+#   install.sh --status   # report drift for all three, change nothing
 #   install.sh --dry-run  # show what would change
 set -euo pipefail
 
@@ -25,14 +25,16 @@ for arg in "$@"; do
 		echo "unknown option: $arg" >&2
 		exit 2
 		;;
-	esac
+esac
 done
 
 if [ -n "$STATUS" ]; then
 	bash "$SCRIPT_DIR/link-skills.sh" --status
 	bash "$SCRIPT_DIR/link-memory.sh" --status
+	bash "$SCRIPT_DIR/link-hooks.sh" --status
 	exit 0
 fi
 
 bash "$SCRIPT_DIR/link-skills.sh" --all $DRY
 bash "$SCRIPT_DIR/link-memory.sh" --all $DRY
+bash "$SCRIPT_DIR/link-hooks.sh" --all $DRY

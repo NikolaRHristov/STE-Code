@@ -70,6 +70,21 @@ memory-link:
 memory-check:
 	@bash $(MEMORY_LINK) --status
 
+# --- profile hooks ----------------------------------------------------------
+# Pre/post tool-call hooks live once in .agents/hermes/hooks/ and are linked
+# into every profile through a two-level symlink chain (same convention as
+# skills/memory). Each profile therefore loads the identical canonical hook set.
+
+HOOKS_LINK := $(HERMES)/link-hooks.sh
+
+## hooks-link: symlink every STE profile's hooks/ into the single source
+hooks-link:
+	@bash $(HOOKS_LINK) --all
+
+## hooks-check: report whether each profile's hooks are linked
+hooks-check:
+	@bash $(HOOKS_LINK) --status
+
 # --- one-shot install -------------------------------------------------------
 # Wire skills AND memory for every profile in a single step. Idempotent.
 
