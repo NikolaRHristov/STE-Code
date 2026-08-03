@@ -116,4 +116,8 @@ hooks:
         - matcher: "memory"
           command: "~/.hermes/profiles/dev-ste-code/hooks/post-memory-anonymise.py"
           timeout: 60
+    pre_tool_call:
+        - matcher: "terminal"
+          command: "~/.hermes/profiles/dev-ste-code/hooks/pre-tool-call-scrub-commands.py"
+          timeout: 30
 hooks_auto_accept: true
