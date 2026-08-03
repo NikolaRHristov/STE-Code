@@ -11,10 +11,10 @@ Pipeline (the requested breakdown -> scrub -> jail -> reassemble):
   1. BREAK DOWN: split the command into sub-commands on && ; || & <newline>
      (quotes respected). Each pipeline segment (with its |'s) stays one unit.
   2. DROP NOISE: remove pure-descriptive commands the model emits to "explain"
-     itself — lone `echo`/`printf`/`print`/`say`/`sleep`/`clear`/`open` that
+     itself - lone `echo`/`printf`/`print`/`say`/`sleep`/`clear`/`open` that
      print text but do nothing useful. Keep `echo`/`printf` ONLY when they
      write to a file (>) or are the actual command purpose. Net effect: the
-     tool_call reduces to the ESSENTIAL parts (the "1 or 0" — launch or drop).
+     tool_call reduces to the ESSENTIAL parts (the "1 or 0" - launch or drop).
   3. SCRUB PII: run every surviving sub-command through the same anonymiser
      regex set as post-memory-anonymise.py (imported), so paths/names/emails
      never appear in executed commands either.
@@ -22,14 +22,14 @@ Pipeline (the requested breakdown -> scrub -> jail -> reassemble):
      write_roots / deny_roots (imported from .agents/hermes/jail/core/policy.py,
      with a fallback set). DROP any sub-command that would WRITE outside the
      allowed roots or INTO a deny root. This is "instantiating the jail at this
-     level" — the command is pre-filtered so it cannot break the jail.
+     level" - the command is pre-filtered so it cannot break the jail.
   5. REASSEMBLE: join the surviving sub-commands with their original separators
      and return {"action":"modify","args":{"command": <cleaned>}}.
 
 Optional LLM "1-or-0" classifier: if HERMES_SCRUB_LLM=1, ambiguous sub-commands
 are classified essential(1)/drop(0) by a Nous LLM call (--provider nous, no
 base_url), launched as a DETACHED child so the hook returns instantly. OFF by
-default — the heuristic layer is deterministic and fast.
+default - the heuristic layer is deterministic and fast.
 
 Stdin : JSON {hook_event_name, tool_name:"terminal", tool_input{command,...}}
 Stdout: {"action":"modify","args":{"command": "..."}}  or {} for no-op.
@@ -42,9 +42,22 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-REPO = Path(
-    "/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code"
-)
+
+
+def _repo_root() -> Path:
+    """Resolve the STE-Code checkout from this file's location, not by
+    hardcoding a machine path (which leaks the operator's directory layout and
+    breaks on any other checkout). Walk up to the dir containing `.agents/`."""
+    here = Path(__file__).resolve().parent
+    cand = here
+    while cand != cand.parent:
+        if (cand / ".agents").is_dir():
+            return cand
+        cand = cand.parent
+    return here
+
+
+REPO = _repo_root()
 
 # Reuse the anonymiser regex set (single source of truth for PII scrubbing).
 try:
@@ -264,7 +277,7 @@ def main() -> int:
         kept.append(sub_scrubbed)
 
     if not kept:
-        # Everything was noise/jail-breaking — don't break the agent's intent;
+        # Everything was noise/jail-breaking - don't break the agent's intent;
         # pass the original through unchanged (safe no-op for THIS hook).
         return 0
 

@@ -23,25 +23,59 @@
 # real dir is left alone (warn + skip) so authored runtime content is never
 # clobbered.
 #
+# A non-empty real dir can be repaired with --force. --force never blind-deletes:
+# it removes an entry only when the entry is positively classified as disposable
+# (a stale copy of a canonical hook, or a known-retired hook), moves the
+# hook-generated logs/ dir aside instead of deleting it, and KEEPS plus REPORTS
+# anything it does not recognise. If unrecognised entries remain the directory is
+# still refused, naming exactly what blocked it.
+#
 # Usage:
-#   link-hooks.sh --all [--dry-run]
-#   link-hooks.sh <profile> [--dry-run]
+#   link-hooks.sh --all [--dry-run] [--force]
+#   link-hooks.sh <profile> [--dry-run] [--force]
 #   link-hooks.sh --status
 #   link-hooks.sh --help
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO="$(cd "$SCRIPT_DIR/.." && pwd)"        # .agents
-SOURCE="$(cd "$REPO/hermes/hooks" && pwd)"  # .agents/hermes/hooks  (single source)
-PROFILE_SRC="$REPO/hermes/profiles"         # .agents/hermes/profiles
+REPO="$(cd "$SCRIPT_DIR/.." && pwd)"       # .agents
+SOURCE="$(cd "$REPO/hermes/hooks" && pwd)" # .agents/hermes/hooks  (single source)
+PROFILE_SRC="$REPO/hermes/profiles"        # .agents/hermes/profiles
 LIVE="$HOME/.hermes/profiles"
+GLOBAL_HOOKS="$HOME/.hermes/agent-hooks"
 
 DRY_RUN=0
 ALL=0
 STATUS=0
+FORCE=0
 
 log() { printf '%s\n' "$*"; }
 run() { if [ "$DRY_RUN" = 1 ]; then log "  would: $*"; else "$@"; fi; }
+
+# --- classification predicates (link-skills.sh idiom) -----------------------
+# Only entries a predicate can positively identify are ever removed. Anything
+# unrecognised is kept and reported for the operator to handle by hand.
+
+# Hooks deleted from the canonical source (commit f3b8a3d) that may survive as
+# stale copies in a runtime hooks dir.
+RETIRED_HOOKS="pre-tool-call-diagnostic.sh pre-tool-call-modify-terminal.sh \
+test-pre-modify.sh"
+
+is_retired_hook() {
+	local n="$1"
+	for r in $RETIRED_HOOKS; do [ "$n" = "$r" ] && return 0; done
+	return 1
+}
+
+# A file whose name matches a hook in the canonical source: a stale copy, safe
+# to drop because the symlink restores the authoritative version.
+is_canonical_hook() {
+	[ -f "$SOURCE/$1" ]
+}
+
+# Runtime log dir created by the hooks themselves. Never deleted — relocated
+# next to the hooks dir so nothing an operator may want is destroyed.
+is_runtime_logs() { [ "$1" = "logs" ]; }
 
 resolve() {
 	python3 -c 'import os,sys;print(os.path.realpath(sys.argv[1]))' "$1" 2>/dev/null || echo "$1"
@@ -55,6 +89,36 @@ dest, src = sys.argv[1], sys.argv[2]
 dest_dir = os.path.dirname(os.path.abspath(dest))
 print(os.path.relpath(os.path.abspath(src), dest_dir))
 PY
+}
+
+# Prune a non-empty real hooks dir down to nothing, conservatively.
+# Removes only entries a predicate positively identifies; keeps and reports the
+# rest. Echoes the names of blocking entries on stdout via BLOCKERS.
+# $1 = dir (absolute)
+BLOCKERS=()
+prune_hooks_dir() {
+	local dir="$1" e nm
+	BLOCKERS=()
+	for e in "$dir"/* "$dir"/.[!.]*; do
+		[ -e "$e" ] || [ -L "$e" ] || continue
+		nm="$(basename "$e")"
+		if is_retired_hook "$nm"; then
+			log "    prune: $nm (retired hook, removed from source in f3b8a3d)"
+			run rm -f "$e"
+		elif [ -L "$e" ]; then
+			log "    prune: $nm (symlink into the canonical source)"
+			run rm -f "$e"
+		elif is_canonical_hook "$nm"; then
+			log "    prune: $nm (stale copy of a canonical hook)"
+			run rm -f "$e"
+		elif is_runtime_logs "$nm"; then
+			log "    relocate: $nm -> $dir-logs (runtime logs, never deleted)"
+			run mv "$e" "$dir-logs"
+		else
+			log "    keep (unrecognised — handle by hand): $nm"
+			BLOCKERS+=("$nm")
+		fi
+	done
 }
 
 # Link a hook directory (level dest) to the canonical source dir.
@@ -77,8 +141,23 @@ link_dir() {
 		if [ -d "$dest" ] && [ -z "$(find "$dest" -maxdepth 1 -mindepth 1 2>/dev/null)" ]; then
 			log "  ~ $name is an empty real dir — replacing with symlink"
 			run rmdir "$dest"
+		elif [ -d "$dest" ] && [ "$FORCE" = 1 ]; then
+			log "  ! $name is a non-empty real dir — --force: pruning what is provably disposable"
+			prune_hooks_dir "$dest"
+			if [ "${#BLOCKERS[@]}" -gt 0 ]; then
+				log "  ✗ $name still holds ${#BLOCKERS[@]} unrecognised entr$([ "${#BLOCKERS[@]}" = 1 ] && echo y || echo ies) — refusing to replace:"
+				for b in "${BLOCKERS[@]}"; do log "      $b"; done
+				log "      move or delete them by hand, then re-run with --force"
+				return 1
+			fi
+			if [ "$DRY_RUN" = 1 ]; then
+				log "  would: rmdir $dest (empty after prune)"
+				log "  would: ln -sfn $(relpath "$dest" "$src") $dest"
+				return 0
+			fi
+			rmdir "$dest"
 		else
-			log "  ✗ $name exists and is NOT a symlink (non-empty?) — refusing to replace"
+			log "  ✗ $name exists and is NOT a symlink (non-empty?) — refusing to replace$([ "$FORCE" = 1 ] || echo " (retry with --force)")"
 			return 1
 		fi
 	fi
@@ -88,8 +167,8 @@ link_dir() {
 
 install_profile() {
 	local profile="$1"
-	local l1="$PROFILE_SRC/$profile/hooks"   # level 1: profile repo dir
-	local l2="$LIVE/$profile/hooks"          # level 2: live profile
+	local l1="$PROFILE_SRC/$profile/hooks" # level 1: profile repo dir
+	local l2="$LIVE/$profile/hooks"        # level 2: live profile
 	log ""
 	log "profile: $profile"
 	if [ ! -d "$LIVE/$profile" ]; then
@@ -106,6 +185,16 @@ install_profile() {
 		link_dir "$l2" "$SOURCE"
 	fi
 	link_dir "$l1" "$SOURCE"
+}
+
+install_global() {
+	log ""
+	log "global: ~/.hermes/agent-hooks"
+	if [ ! -d "$(dirname "$GLOBAL_HOOKS")" ]; then
+		log "  ✗ ~/.hermes missing"
+		return 1
+	fi
+	link_dir "$GLOBAL_HOOKS" "$SOURCE"
 }
 
 show_status() {
@@ -134,13 +223,14 @@ show_status() {
 	done
 }
 
-usage() { sed -n '2,38p' "$0"; }
+usage() { sed -n '2,37p' "$0"; }
 
 targets=()
 for arg in "$@"; do
 	case "$arg" in
 	--dry-run) DRY_RUN=1 ;;
 	--status) STATUS=1 ;;
+	--force) FORCE=1 ;;
 	--all) ALL=1 ;;
 	--help | -h)
 		usage
@@ -162,17 +252,21 @@ if [ "$STATUS" = 1 ]; then
 	show_status benchmark-ste-code
 	log ""
 	log "=== global agent hooks (expect symlink -> canonical) ==="
-	if [ -L "$HOME/.hermes/hermes-agent/hooks" ]; then
-		log "  ok -> $(resolve "$HOME/.hermes/hermes-agent/hooks")"
-	else
-		log "  NOT a symlink (real dir or absent) — was it relinked manually?"
-	fi
+	for g in "$HOME/.hermes/hermes-agent/hooks" "$GLOBAL_HOOKS"; do
+		if [ -L "$g" ]; then
+			log "  [$g] ok -> $(resolve "$g")"
+		elif [ -d "$g" ]; then
+			log "  [$g] REAL DIR ($(find "$g" -maxdepth 1 -mindepth 1 2>/dev/null | wc -l | tr -d ' ') entries) — repair with: link-hooks.sh --all --force"
+		else
+			log "  [$g] absent"
+		fi
+	done
 	exit 0
 fi
 
 if [ "$ALL" = 1 ]; then targets=(dev-ste-code ste-code benchmark-ste-code); fi
 if [ "${#targets[@]}" -eq 0 ]; then
-	log "usage: link-hooks.sh <profile> | --all | --status [--dry-run]"
+	log "usage: link-hooks.sh <profile> | --all | --status [--dry-run] [--force]"
 	exit 2
 fi
 
@@ -180,6 +274,9 @@ status=0
 for p in "${targets[@]}"; do
 	install_profile "$p" || status=1
 done
+if [ "$ALL" = 1 ]; then
+	install_global || status=1
+fi
 log ""
 if [ "$status" = 0 ]; then log "done. verify with: link-hooks.sh --status"; else log "completed with errors."; fi
 exit $status

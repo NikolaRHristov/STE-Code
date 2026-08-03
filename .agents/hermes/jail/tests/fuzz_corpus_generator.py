@@ -54,7 +54,7 @@ REPO_ABSOLUTE = [
 ]
 
 PARENT_ABSOLUTE = [
-    "../x", "../../escape.txt", "../..", "/Users/nikola/..",
+    "../x", "../../escape.txt", "../..", os.path.expanduser("~/.."),
     os.path.join(REPO_ROOT, "..", "sibling.txt"), "./../../out",
 ]
 

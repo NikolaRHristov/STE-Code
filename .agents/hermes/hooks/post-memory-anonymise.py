@@ -13,19 +13,19 @@ Single responsibility: ANONYMISE. Nothing else (no restructure that writes
 files via the agent, no session clutter).
 
 Two layers:
-  1. REGEX scrub — synchronous, pure-Python, ~50ms, GUARANTEED. Runs on every
+  1. REGEX scrub - synchronous, pure-Python, ~50ms, GUARANTEED. Runs on every
      memory write. No subprocess, no PII left on disk. This is the contract.
-  2. LLM refine — async, BEST-EFFORT, debounced. Calls the Nous inference API
+  2. LLM refine - async, BEST-EFFORT, debounced. Calls the Nous inference API
      THROUGH `hermes -z` to catch names/PII the regex misses and tidy structure.
      Critical guards so it can NEVER become the old runaway bug:
        * The child runs with HERMES_HOME=<temp> so its session is written to a
          throwaway state.db, NOT the real profile store ("session db none").
-       * The child uses `-t ''` (NO tools) so it can only RETURN text — it can
+       * The child uses `-t ''` (NO tools) so it can only RETURN text - it can
          never call write_file/memory and loop on the jail (the old 84-msg bug).
        * HERMES_ACCEPT_HOOKS=0 so its own writes can't re-trigger this hook.
        * Debounced by a lock file + content hash: only one LLM pass runs at a
          time, and only if the store changed since the last pass.
-       * Provider launched with just `--provider nous -m <model>` — NO base_url.
+       * Provider launched with just `--provider nous -m <model>` - NO base_url.
        * On ANY failure the regex result stands; the LLM layer is optional.
 
 Stdin : JSON {hook_event_name, tool_name:"memory", tool_input{action,target,...}}
@@ -47,9 +47,20 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 LOG = LOG_DIR / "memory-anonymise.log"
 
 # dev-ste-code memory is symlinked from the STE-Code repo. Keep authoritative.
-REPO = Path(
-    "/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code"
-)
+def _repo_root() -> Path:
+    """Resolve the STE-Code checkout from this file's location, not by
+    hardcoding a machine path (which leaks the operator's directory layout and
+    breaks on any other checkout). Walk up to the dir containing `.agents/`."""
+    here = Path(__file__).resolve().parent
+    cand = here
+    while cand != cand.parent:
+        if (cand / ".agents").is_dir():
+            return cand
+        cand = cand.parent
+    return here
+
+
+REPO = _repo_root()
 MEMORY_STORE = REPO / ".agents" / "hermes" / "memory" / "dev-ste-code" / "MEMORY.md"
 USER_STORE = REPO / ".agents" / "hermes" / "memory" / "dev-ste-code" / "USER.md"
 
@@ -58,7 +69,7 @@ LLM_MODEL = os.environ.get("HERMES_ANON_LLM_MODEL", "tencent/hy3:free")
 # --------------------------------------------------------------------------- #
 # Anonymiser (regex, deterministic, no network, no subprocess)
 # --------------------------------------------------------------------------- #
-# Known non-person Title-Case tokens — excluded from the person-name heuristic so
+# Known non-person Title-Case tokens - excluded from the person-name heuristic so
 # we don't anonymise product/role names like "Red Hat", "Hermes Agent",
 # "Level Worker", "GitHub Copilot", "Red Hat Linux". Covers common brand-name
 # first words AND continuations that would otherwise look like a "Surname".
@@ -119,7 +130,7 @@ def anonymise(text: str) -> str:
 
 
 # --------------------------------------------------------------------------- #
-# Store helpers — scrub whole file idempotently
+# Store helpers - scrub whole file idempotently
 # --------------------------------------------------------------------------- #
 def _now():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%3NZ")
@@ -193,7 +204,7 @@ def _llm_refine(store: Path) -> None:
             "<user-home>, <repo>, <person>, <email>, <ip>, <host>, <tmp>.\n"
             "TASK: return the SAME information, but (1) replace any remaining "
             "real person names, emails, IPs, absolute paths, or hostnames with "
-            "the matching placeholder; (2) keep all placeholders VERBATIM — never "
+            "the matching placeholder; (2) keep all placeholders VERBATIM - never "
             "expand them; (3) keep the existing structure (lines / '§' separators); "
             "(4) do NOT add commentary, headings, or new facts. Output ONLY the "
             "scrubbed markdown.\n\n"
@@ -245,7 +256,7 @@ def _llm_refine(store: Path) -> None:
         cleaned = re.sub(r"\n?```$", "", cleaned).strip()
         if not cleaned:
             return
-        # Re-anonymise the LLM output (defence in depth — never trust the LLM).
+        # Re-anonymise the LLM output (defence in depth - never trust the LLM).
         cleaned = anonymise(cleaned)
         try:
             store.write_text(cleaned, encoding="utf-8")
@@ -289,14 +300,14 @@ def main() -> int:
         target = (tool_input.get("target") or "memory").lower()
         store = USER_STORE if target == "user" else MEMORY_STORE
 
-        # 1) GUARANTEED synchronous regex scrub — no PII persists past this point.
+        # 1) GUARANTEED synchronous regex scrub - no PII persists past this point.
         changed = scrub_store(store)
         _log(f"post_memory -> {store.name} (regex scrub={'yes' if changed else 'no'})")
 
         # 2) BEST-EFFORT async LLM refine (debounced; isolated session; fallback
         #    to regex on any failure). Launched as a DETACHED child so it survives
         #    this short-lived hook process (a daemon thread would be killed on
-        #    exit before the ~10s LLM call finishes — the old bug).
+        #    exit before the ~10s LLM call finishes - the old bug).
         try:
             subprocess.Popen(
                 [sys.executable, os.path.abspath(__file__), "--llm-refine",
