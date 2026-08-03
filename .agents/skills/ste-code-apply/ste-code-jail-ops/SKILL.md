@@ -19,13 +19,13 @@ grouped plugin `ste-code-jail` (components: `jail-fs`, `jail-cmd`, `jail-net`,
 
 - Adding or reworking a profile (`dev-ste-code`, `ste-code`,
   `benchmark-ste-code`).
-- Closing a confinement gap — a way out of the jail an adversarial prompt found.
+- Closing a confinement gap - a way out of the jail an adversarial prompt found.
 - Making a locked profile spawn sessions that stay confined
   (`benchmark-ste-code` → per-stage sessions).
 - Stripping default Hermes skills so a profile loads only STE-Code skills.
 - Verifying the jail after any policy/plugin change.
 
-## The confinement model — 5 layers
+## The confinement model - 5 layers
 
 | #   | Layer                                  | Enforced by                                        | Classic gap                                         |
 | --- | -------------------------------------- | -------------------------------------------------- | --------------------------------------------------- |
@@ -66,20 +66,20 @@ into `~/.hermes/profiles/<name>/` per-profile** (NOT the whole dir). See
 ## Stripping default Hermes skills
 
 During a profile session the TUI repins `SKILLS_DIR` (and `HERMES_HOME`) to
-`profile_dir/skills`, so that dir is the **ONLY** skill source —
+`profile_dir/skills`, so that dir is the **ONLY** skill source -
 `~/.hermes/skills/` (the ~78 bundled defaults) is NOT scanned. Therefore "only
 STE-Code skills" = make `profile_dir/skills/` contain only STE symlinks (into
 `.agents/skills/`).
 
 - Verify at runtime (NOT static):
   `env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p> hermes skills list --enabled-only`
-  — expect 0 builtin, only STE names.
+  - expect 0 builtin, only STE names.
 - See `scripts/verify_profile_skills.py` for a read-only check.
 
 ## Launching a jailed profile (new terminal)
 
 The jail activates from `config.yaml` (`plugins.enabled: [ste-code-jail]`), so
-no `STE_CODE_JAIL_POLICY` export is needed — the policy derives from the profile
+no `STE_CODE_JAIL_POLICY` export is needed - the policy derives from the profile
 name (`PROFILE_POLICY_MAP`). To run a benchmark session in a fresh terminal:
 
 ```bash
@@ -94,12 +94,50 @@ stay confined even if the env leaks. Requires macOS (`sandbox-exec`) or Linux
 (`bwrap`). The `dev` profile is intentionally NOT wrapped and is the only one
 permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
 
+## Project-root resolution (cwd-independent - verified)
+
+The jail resolves the STE-Code repo as a write root **from its own file location**,
+not the session cwd. `core/policy.py:resolve_project_root_anchored()` walks up
+from `policy.py` (`core/` → `jail/` → `hermes/` → `.agents/` → `<repo>`) and
+returns the checkout when `<repo>/.git` or `Makefile` exists. `load_context()`
+uses it FIRST; the `cwd` walk is only a fallback (unit tests). Consequence:
+
+- A `hermes -z` child spawned with `cwd=~/.hermes` still resolves the repo
+  correctly - it is NOT dropped from the write roots (the earlier "project_root
+  = None" failure mode is closed).
+- The dominant "cannot write to the repo" cause is therefore **environment, not
+  code**: a session whose inherited `HERMES_HOME` points at the wrong profile
+  (e.g. a dev shell that leaked `benchmark-ste-code`) resolves to that profile's
+  policy, under which the repo is read-only *by design*. Relaunch with the
+  intended profile (`env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p>`)
+  rather than editing `policy.py`. See `references/project-root-resolution.md`.
+
+## Jailed poll-worker launch (HERMES_HOME prefix)
+
+When launching a worker under the jail via `jail-exec.sh`, the kernel layer
+computes Seatbelt/bwrap roots from `HERMES_HOME` **at the command line**, not
+merely an export inside the launcher. Prefix it on the `jail-exec.sh` invocation:
+
+```bash
+base64 -i prompt.md -o prompt.b64            # macOS needs -i
+PROMPT=$(base64 -d -i prompt.b64)
+HERMES_HOME=~/.hermes/profiles/<target-profile> \
+  .agents/hermes/jail/scripts/jail-exec.sh \
+    hermes -p <profile> -m M --yolo -z "$PROMPT"   # flags BEFORE -z, prompt last
+```
+
+Failing to prefix `HERMES_HOME` makes `jail_init` use the *parent* profile's home
+and the worker's `logs/agent.log` write is denied (`Operation not permitted`). Do
+not `cd` into the repo inside the launcher. See `poll-worker-launch` for the full
+recipe and verification (`logs/agent.log` first line must read
+`profile=<target> policy=<expected>`).
+
 ## Verify after ANY change
 
-- `make check` — the gate (178 checks + all 3 policies pass).
-- `python3 .agents/hermes/jail/tests/test_jail.py` — adversarial suite (bench:
+- `make check` - the gate (178 checks + all 3 policies pass).
+- `python3 .agents/hermes/jail/tests/test_jail.py` - adversarial suite (bench:
   20 allow / 49 escape; user: 14/48; dev: 24/37).
-- `hermes skills list --enabled-only` per profile — confirms the skill strip.
+- `hermes skills list --enabled-only` per profile - confirms the skill strip.
 - Confirm a locked profile cannot defeat its own cage: under
   `STE_CODE_JAIL_POLICY=bench HERMES_PROFILE=benchmark-ste-code`,
   `jail-exec.sh /bin/sh -c 'rm -f "$HOME/.hermes/profiles/benchmark-ste-code/plugins/ste-code-jail"'`
@@ -112,7 +150,7 @@ permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
   `jail-install.sh --all`/`install` writes into `<hermes>/profiles`, a root
   granted ONLY under `_build_dev`. A `bench`/`user` session has no profiles-root
   write access, and its `PROFILE_CONTROL_SUBDIRS` deny (config.yaml, hooks,
-  plugins, skills) means it cannot even touch its own cage — so a confined
+  plugins, skills) means it cannot even touch its own cage - so a confined
   session is structurally unable to install, relink, repair, or disable the
   jail. Treat `jail-install.sh` as a TRUSTED SETUP action run only by a parent
   (dev) session; never let a confined session run it. A confined session may run
@@ -133,12 +171,12 @@ permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
   clobbering that agent's in-flight files. Confirm your code is present with
   `git show <sha> -- <file>` and move on. The user has explicitly said "don't
   split".
-- Do NOT set `STE_CODE_JAIL_POLICY` from an inherited `$HERMES_HOME` alone —
+- Do NOT set `STE_CODE_JAIL_POLICY` from an inherited `$HERMES_HOME` alone -
   derive the profile dir from the profile NAME (`profile_home()`).
-- Do NOT leave `execute_code` allowed under a wrapped policy — it runs
+- Do NOT leave `execute_code` allowed under a wrapped policy - it runs
   in-process, cannot be kernel-confined. Block it; tell the user to use
   `terminal`.
-- Do NOT wrap `dev` — authoring must build/install across the tree.
+- Do NOT wrap `dev` - authoring must build/install across the tree.
 - A running session caches its policy at startup; verify a fix in a FRESH
   subprocess (`jail-install.sh --status` or a new `hermes` invocation), never
   in-session.
@@ -146,25 +184,25 @@ permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
   with machine-local state (`dev-ste-code`) are created by
   `hermes profile create`.
 - When stripping skills, MOVE default dirs to a backup outside the repo (e.g.
-  `/tmp`); never delete — they may be needed.
+  `/tmp`); never delete - they may be needed.
 
-## Pitfalls (confined-tooling — verified this session)
+## Pitfalls (confined-tooling - verified this session)
 
 - **A new/looser/anonymous profile does NOT relax confinement.**
-  `core/policy.py:_STRICT_FALLBACK = "bench"` — an unmapped profile name falls
+  `core/policy.py:_STRICT_FALLBACK = "bench"` - an unmapped profile name falls
   through to the *strictest* policy, so a profile like `benchmark-run-ste-code`
   is jailed exactly like `bench`. When confined tooling fails (e.g. `py_compile`
   cannot write `.pyc` into the denied project tree, or a `make test` goes
   158/180 with all failures being `compiles:` checks), **fix the tooling, not
   the profile.** Concrete recipe: compile **in-process** with
-  `py_compile.compile(abs_path, cfile="<temp>/x.pyc", doraise=True)` — use
+  `py_compile.compile(abs_path, cfile="<temp>/x.pyc", doraise=True)` - use
   `$PYTHONPYCACHEPREFIX` if set (else `/tmp`) for the `cfile`. This removes both
   failure modes (no cwd dependency, no project-root bytecode write) and still
   catches real syntax errors via the full `compile()` pipeline. See
   `references/confined-tooling.md`.
 - **Run *developer verification* (selftest / make test) from a profile that can
   write the project tree** (the `dev` policy), and keep the *adversarial run*
-  under `bench`. Do not invent a profile hoping it is looser — the sandbox reads
+  under `bench`. Do not invent a profile hoping it is looser - the sandbox reads
   the policy map, not the profile's stated purpose.
 
 ## User preferences (this repo)
@@ -175,6 +213,6 @@ permitted to run `jail-install.sh --all`/`install` (see Pitfalls).
 - `benchmark-ste-code` may spawn adversarial sessions (`delegate_task`/`cronjob`
   are ALLOWED, force-confined via `jail-exec-wrap` setting
   `STE_CODE_JAIL_POLICY=bench` on every child) and rewrite the WHOLE
-  `.agents/benchmark/` tree (harness, attacks, results) — not just `tests/`.
+  `.agents/benchmark/` tree (harness, attacks, results) - not just `tests/`.
   `ste-code/` stays read-only via most-specific-match-wins in the write roots.
 - Work in background + poll; never long foreground sleep/wait blockers.

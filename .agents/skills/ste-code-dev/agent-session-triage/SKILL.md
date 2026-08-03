@@ -7,7 +7,7 @@ category: ste-code-dev
 # Agent Session Triage
 
 Diagnose a stuck, looping, or misconfigured agent session, and safely clean up a
-fleet of stale sessions — **without killing yourself or the user's live
+fleet of stale sessions - **without killing yourself or the user's live
 session.**
 
 ## When to use
@@ -17,24 +17,24 @@ session.**
   conclusion.
 - A session reports it "cannot locate", "cannot write to", or "lost" a project
   root / repo / working directory.
-- Two or more sessions fail **identically** — a strong signal the cause is
+- Two or more sessions fail **identically** - a strong signal the cause is
   environment, not code.
 - You are asked to kill, restart, or hand off stale sessions.
 
-## Rule 0 — the session's own diagnosis is a hypothesis, not evidence
+## Rule 0 - the session's own diagnosis is a hypothesis, not evidence
 
 A looping session states its theory with total confidence ("`X()` returns `None`
 because my cwd is wrong"). That confidence is generated, not measured. **Verify
 the premise before investigating it.** In the case that produced this skill the
-premise was false, and every subsequent step — hunting config files, searching
-for stale installed copies — was wasted effort chasing a bug that did not exist.
+premise was false, and every subsequent step - hunting config files, searching
+for stale installed copies - was wasted effort chasing a bug that did not exist.
 
 Corollary: a function that "fails to resolve" may be returning a **wrong value**
 rather than `None`. Print the actual value. A silent wrong answer produces no
 exception, which is exactly why the session theorises instead of reading a stack
 trace.
 
-## Triage order — environment BEFORE source
+## Triage order - environment BEFORE source
 
 Cheapest and highest-yield first. Most "code bugs" die at step 1.
 
@@ -58,7 +58,7 @@ Cheapest and highest-yield first. Most "code bugs" die at step 1.
 
    A process started **before** your edit holds the old module in memory. Config
    loaders commonly memoise into a module global at first call, and plugins
-   import once at registration — so re-reading the file changes nothing for a
+   import once at registration - so re-reading the file changes nothing for a
    live process. No amount of in-session verification will show your fix.
 
 3. **Check for leaked env across runs.** An env var that overrides a config map
@@ -69,7 +69,7 @@ Cheapest and highest-yield first. Most "code bugs" die at step 1.
    grep "profile=<expected> policy=<unexpected>" <logs>/agent.log
    ```
 
-4. **Only now read the source** — and read the _whole_ expression (see below).
+4. **Only now read the source** - and read the _whole_ expression (see below).
 
 5. **Re-verify in a FRESH subprocess.** Never in-session; see step 2.
 
@@ -103,7 +103,7 @@ both paths before treating one as a control.
 The genuine hazard: your own reporting path is in the process list.
 
 1. **Compute your own ancestry live and exclude it.** Walk `getppid()` up to PID
-   1 and add every hop to a keep-set. Do not hardcode it — a helper subprocess
+   1 and add every hop to a keep-set. Do not hardcode it - a helper subprocess
    spawned mid-task gets a fresh PID that a static list will miss.
 2. **Identify the supervisor.** A dashboard/gateway process is often the _parent
    of every UI session_, including yours. Killing it takes you down mid-report.
@@ -117,7 +117,7 @@ The genuine hazard: your own reporting path is in the process list.
 5. **SIGTERM → wait → verify → SIGKILL → re-verify.**
 6. **Re-check apparent SIGKILL survivors after a few seconds.** Processes
    mid-teardown still appear in `ps`. Recheck before escalating or reporting
-   failure — in practice they are simply gone.
+   failure - in practice they are simply gone.
 
 Print a **WILL KILL / PRESERVED** table and reconcile it before pulling the
 trigger.
@@ -125,7 +125,7 @@ trigger.
 ## Handing off
 
 When the user replaces a looping session, leave a written handoff the successor
-can read, and **state the corrected diagnosis prominently** — otherwise the new
+can read, and **state the corrected diagnosis prominently** - otherwise the new
 session re-derives the same wrong theory from the same source file. Include: the
 false premise and why it is false, the real cause(s), the triage order, and a
 re-runnable probe. Check whether the destination directory is gitignored and
@@ -149,6 +149,13 @@ tree clean).
 
 ## Related
 
-- `ste-code-jail-ops` — jail policy internals, confinement layers, and the
-  profile/policy map that step 1 inspects. See its
-  `references/project-root-resolution.md` for the worked STE-Code case.
+- `ste-code-jail-ops` - jail policy internals, confinement layers, and the
+  profile/policy map that step 1 inspects. Its
+  `references/project-root-resolution.md` is the worked STE-Code case (anchored
+  `resolve_project_root_anchored()`, the two real failure modes: wrong-profile
+  env leak and stale bytecode).
+- `references/jail-project-root-case.md` - the concrete looping-session instance
+  of the "cannot locate the repo" class, plus a copy-pasteable probe.
+- `scripts/show_jail_context.py` - read-only probe that prints the exact
+  `load_context()` policy / project_root / write+deny roots a FRESH session would
+  resolve (run it out-of-session to bypass any stale in-session cache).
