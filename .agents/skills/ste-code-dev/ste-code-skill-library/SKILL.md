@@ -11,7 +11,7 @@ layout: ste-code-canonical-v1
 
 The STE-Code skill library lives in **`STE-Code/.agents/skills/`** and is the
 single source for every STE-Code Hermes skill. Each profile
-(`~/.hermes/profiles/<p>/skills/`) points at it via symlinks — during a profile
+(`~/.hermes/profiles/<p>/skills/`) points at it via symlinks - during a profile
 session the TUI repins `SKILLS_DIR` + `HERMES_HOME` to the profile dir, so **the
 profile's `skills/` dir is the only skill source scanned** (the bundled
 `~/.hermes/skills/` set is NOT consulted). Therefore: to change what a profile
@@ -24,7 +24,7 @@ loads, change `.agents/skills/` and the profile's symlinks.
 - Any task that moves/renames/rewrites skill directories or edits a profile's
   `skills/` layout.
 
-## Workflow (do it manually — see rule below)
+## Workflow (do it manually - see rule below)
 
 1. **Backup first.** Copy the current tree to `/tmp/ste-skills-backup` (or
    `.agents/tmp/`) before any destructive move:
@@ -32,19 +32,20 @@ loads, change `.agents/skills/` and the profile's symlinks.
 2. **Categorize semantically by USAGE, not by origin or literal tags.** Name a
    bucket for _when you reach for it_. The four canonical buckets (as settled
    after user corrections):
-    - `ste-code-authoring` — skills that **WRITE / CHANGE the STE standard**
+    - `ste-code-authoring` - skills that **WRITE / CHANGE the STE standard**
       (adaptation, extension-worker, refinement, translations, artifacts,
       auditing, continuation).
-    - `ste-code-dev` — skills that **DEVELOP / OPERATE the agents + pipeline
+    - `ste-code-dev` - skills that **DEVELOP / OPERATE the agents + pipeline
       that produce it** (extraction, grouping, level-worker, execution-auditor,
       state-report, github-release-maintenance, ste-code-repo-hygiene).
-    - `ste-code-benchmark` — running the adversarial benchmark.
-    - `ste-code-apply` — applying / operating the standard (jail-ops, profile
-      confinement). The split is **authoring the standard** vs **developing the
-      agents that produced it** — they are NOT the same bucket; `authoring` ≠
-      `development`. Avoid narrow-action names — `release` was rejected as "too
+    - `ste-code-benchmark` - running the adversarial benchmark.
+    - `ste-code-dev` - developing the agents/tools that produced the standard
+      (jail-ops, profile-confinement, agent-session-triage, poll-worker-launch).
+      The split is **authoring the standard** vs **developing the agents that
+      produced it** - they are NOT the same bucket; `authoring` ≠ `development`.
+      Avoid narrow-action names - `release` was rejected as "too
       specific of an action"; GitHub / release ops go in `ste-code-dev`, not a
-      `release` bucket. **Never use literal `-etc` suffixes** — they read as
+      `release` bucket. **Never use literal `-etc` suffixes** - they read as
       placeholders, not categories.
 3. **Move files with terminal commands** (`mkdir -p`, `mv`, `cp -R`, `ln -s`,
    `rm -rf`), not Python scripts. See the rule below.
@@ -52,7 +53,7 @@ loads, change `.agents/skills/` and the profile's symlinks.
    then symlink each bucket dir into the profile's `skills/`:
    `ln -s STE-Code/.agents/skills/ste-code-authoring ~/.hermes/profiles/dev-ste-code/skills/ste-code-authoring`
    Hermes recurses into a symlinked bucket dir and loads each child `SKILL.md`;
-   a bucket dir without its own `SKILL.md` is just a container — that's fine.
+   a bucket dir without its own `SKILL.md` is just a container - that's fine.
 5. **Rewrite the moved `category` / `capability` / `source` frontmatter.** When
    a skill changes bucket, its YAML metadata goes stale. After the move, fix
    every `SKILL.md` in the bucket:
@@ -71,7 +72,7 @@ loads, change `.agents/skills/` and the profile's symlinks.
 6. **Run heavy reorgs as a background poll worker, not foreground.** Launch the
    move/copy as `terminal(background=true, notify_on_complete=true)` and keep
    working; poll with `process(action='poll')`. The user's standing directive:
-   "recursively in a poll worker so that it doesn't interfere with your work" —
+   "recursively in a poll worker so that it doesn't interfere with your work" -
    never block on a long reorg.
 7. **Verify (see references/verify.md).**
 
@@ -83,10 +84,10 @@ Prefer terminal/CLI for moving, copying, renaming, and symlinking files (`mv`,
 `cp`, `ln -s`, `rm`). **Do NOT write a Python helper script to do file
 reorganization unless the user explicitly asks for one.** Hand-written scripts
 for bulk file ops were rejected mid-session: "do it manually with copying files
-and manually checking — don't write python scripts unless specifically asked."
+and manually checking - don't write python scripts unless specifically asked."
 Use Python/`execute_code` only for _inspection_ (reading, diffing, counting),
 never as the mechanism that performs the move. (The `skill_manage` tool itself
-is fine — that is not a hand-written script.)
+is fine - that is not a hand-written script.)
 
 ### 2. Never simplify or lose instructions when rewriting
 
@@ -118,7 +119,7 @@ inside a bucket.
   script.
 - **Self-improvement patches target profile-local real dirs.** Skills like
   `ste-code-jail-ops` and `hermes-profile-skill-confinement` get auto-patched in
-  `~/.hermes/profiles/dev-ste-code/skills/` — they are machine-local, not in the
+  `~/.hermes/profiles/dev-ste-code/skills/` - they are machine-local, not in the
   repo. Promote them into `.agents/skills/` if you want them tracked; otherwise
   they vanish if the profile is wiped.
 - **Concurrent committer:** another Hermes session may sweep your uncommitted
@@ -127,7 +128,7 @@ inside a bucket.
 - **Stale frontmatter after a move.** A moved/renamed skill keeps its old
   `category:` (wrong bucket), `capability:` (wrong phrase), and `source:` (a
   stale machine-local `~/.hermes/...` path). Always rewrite these after the move
-  (step 5) — a renamed skill whose `source:` still points at the old path is a
+  (step 5) - a renamed skill whose `source:` still points at the old path is a
   real finding from this session.
 - **Idempotent re-runs leave ghosts.** A re-run that writes `ste-code-dev-etc`
   then later `ste-code-dev` leaves the `-etc` dir behind (glob cleanup only
@@ -144,7 +145,7 @@ inside a bucket.
   in the SKILL.md body. If a create returns a YAML/char error, trim the
   description first.
 
-## Pitfalls (skill hygiene — added after the dead-reference cleanup)
+## Pitfalls (skill hygiene - added after the dead-reference cleanup)
 
 - **Verify a referenced doc actually exists before keeping a MANDATORY
   cross-reference.** Skills across all buckets carried
@@ -160,10 +161,10 @@ inside a bucket.
   to run." Strip jail/Seatbelt/`STE_CODE_JAIL_POLICY`/`policy.py`/
   `_STRICT_FALLBACK`/`PYTHONPYCACHEPREFIX`/`dev`/`bench` profile names, and
   "sandbox reads the policy map" prose. Keep confinement/environment detail in
-  `ste-code-apply/*` (jail-ops, profile-confinement), where it belongs — a
+  `ste-code-apply/*` (jail-ops, profile-confinement), where it belongs - a
   benchmark skill that leaks the cage teaches the adversarial runner to reason
   about its own jail. (Harness *tooling* may still be told to "compile
-  in-process so it is environment-independent" — that is a portability rule, not
+  in-process so it is environment-independent" - that is a portability rule, not
   a jail disclosure.)
 
 ## Verification
