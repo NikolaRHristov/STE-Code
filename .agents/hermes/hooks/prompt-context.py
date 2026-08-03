@@ -11,6 +11,7 @@ Optimizations:
 - Silent exit for simple/chatty prompts (no I/O at all)
 - No subprocess, no network, no LLM
 """
+
 import hashlib
 import json
 import os
@@ -23,19 +24,98 @@ HERMES = Path(os.path.expanduser("~/.hermes"))
 CTX_CACHE = HERMES / "cache" / "ctx" / "last"
 _CTX_TTL = 1800  # 30 minutes
 
-_STOP = frozenset({
-    'the','and','for','you','this','that','with','from','have','not','but',
-    'what','just','will','would','could','been','does','also','then','them',
-    'when','where','which','while','about','into','over','after','your',
-    'more','each','only','used','all','any','are','has','how','its',
-    'may','out','put','set','way','see','too','now','new','old','one',
-    'get','try','was','were','can','like','much','many',
-    'hermes','agent','session','task','please','help','show','tell','list',
-    'here','want','need','find','add','make','check','run',
-})
+_STOP = frozenset(
+    {
+        "the",
+        "and",
+        "for",
+        "you",
+        "this",
+        "that",
+        "with",
+        "from",
+        "have",
+        "not",
+        "but",
+        "what",
+        "just",
+        "will",
+        "would",
+        "could",
+        "been",
+        "does",
+        "also",
+        "then",
+        "them",
+        "when",
+        "where",
+        "which",
+        "while",
+        "about",
+        "into",
+        "over",
+        "after",
+        "your",
+        "more",
+        "each",
+        "only",
+        "used",
+        "all",
+        "any",
+        "are",
+        "has",
+        "how",
+        "its",
+        "may",
+        "out",
+        "put",
+        "set",
+        "way",
+        "see",
+        "too",
+        "now",
+        "new",
+        "old",
+        "one",
+        "get",
+        "try",
+        "was",
+        "were",
+        "can",
+        "like",
+        "much",
+        "many",
+        "hermes",
+        "agent",
+        "session",
+        "task",
+        "please",
+        "help",
+        "show",
+        "tell",
+        "list",
+        "here",
+        "want",
+        "need",
+        "find",
+        "add",
+        "make",
+        "check",
+        "run",
+    }
+)
 
-_SKIP = (r'^thank', r'^ok\b', r'^sure', r'^yes\b', r'^no\b',
-         r'^hello', r'^hi\b', r'^hey', r'^/\w+')
+_SKIP = (
+    r"^thank",
+    r"^ok\b",
+    r"^sure",
+    r"^yes\b",
+    r"^no\b",
+    r"^hello",
+    r"^hi\b",
+    r"^hey",
+    r"^/\w+",
+)
 
 
 def main():
@@ -58,13 +138,13 @@ def main():
             return
 
     # Extract keywords (4+ chars, no stopwords, top 6)
-    words = [w for w in re.findall(r'[a-z]{4,}', plow) if w not in _STOP]
+    words = [w for w in re.findall(r"[a-z]{4,}", plow) if w not in _STOP]
     keys = list(dict.fromkeys(words))[:6]
     if len(keys) < 2:
         return
 
     # Dedup cache check -- skip all I/O if same keywords recently scanned
-    cache_key = hashlib.md5('|'.join(sorted(keys)).encode()).hexdigest()[:12]
+    cache_key = hashlib.md5("|".join(sorted(keys)).encode()).hexdigest()[:12]
     cache_dir = CTX_CACHE.parent
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_file = CTX_CACHE
@@ -82,19 +162,23 @@ def main():
     # 1. Recent sessions - grep first 400 bytes only
     sd = HERMES / "sessions"
     if sd.is_dir():
-        sessions = sorted(sd.iterdir(),
-                          key=lambda p: p.stat().st_mtime,
-                          reverse=True)[:25]
+        sessions = sorted(sd.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True)[
+            :25
+        ]
         for sf in sessions:
             if not sf.name.startswith("session_"):
                 continue
             try:
-                blob = sf.read_bytes()[:400].decode('utf-8', errors='ignore').lower()
+                blob = sf.read_bytes()[:400].decode("utf-8", errors="ignore").lower()
                 hits = [k for k in keys if k in blob]
                 if len(hits) >= 2:
                     # Extract a short title snippet
                     idx = blob.find('"content"')
-                    snippet = blob[idx:idx+80].replace('\n', ' ').strip('"\\ ') if idx >= 0 else "..."
+                    snippet = (
+                        blob[idx : idx + 80].replace("\n", " ").strip('"\\ ')
+                        if idx >= 0
+                        else "..."
+                    )
                     parts.append(f"Session ({', '.join(hits[:2])}): {snippet}")
                     if len(parts) >= 3:
                         break
@@ -122,11 +206,14 @@ def main():
     mem = HERMES / "memory"
     if mem.exists():
         try:
-            content = mem.read_text(errors='ignore').lower()
+            content = mem.read_text(errors="ignore").lower()
             hits = [k for k in keys if k in content]
             if hits:
-                matching = [l.strip() for l in mem.read_text(errors='ignore').split('\n')
-                            if any(k in l.lower() for k in hits) and l.strip()][:3]
+                matching = [
+                    l.strip()
+                    for l in mem.read_text(errors="ignore").split("\n")
+                    if any(k in l.lower() for k in hits) and l.strip()
+                ][:3]
                 if matching:
                     parts.append("Memory:\n" + "\n".join(f"  {l}" for l in matching))
         except Exception:
@@ -140,8 +227,10 @@ def main():
             if time.time() - qd.get("timestamp", 0) < 300:
                 issues = qd.get("issues", [])
                 if issues:
-                    parts.append("AI-tell check (last response):\n"
-                                 + "\n".join(f"  - {i}" for i in issues[:3]))
+                    parts.append(
+                        "AI-tell check (last response):\n"
+                        + "\n".join(f"  - {i}" for i in issues[:3])
+                    )
         except Exception:
             pass
 

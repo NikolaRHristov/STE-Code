@@ -22,55 +22,59 @@ FORMAT_TIMEOUT = 5
 
 # Extensions mapped to formatter
 FORMATTERS = {
-    'py': 'python',
-    'js': 'javascript',
-    'ts': 'typescript',
-    'jsx': 'javascript',
-    'tsx': 'typescript',
-    'css': 'css',
-    'json': 'json',
-    'md': 'markdown',
-    'yaml': 'yaml',
-    'yml': 'yaml',
-    'sh': 'shell',
-    'bash': 'shell',
-    'rs': 'rust',
-    'html': 'html',
-    'toml': 'toml',
+    "py": "python",
+    "js": "javascript",
+    "ts": "typescript",
+    "jsx": "javascript",
+    "tsx": "typescript",
+    "css": "css",
+    "json": "json",
+    "md": "markdown",
+    "yaml": "yaml",
+    "yml": "yaml",
+    "sh": "shell",
+    "bash": "shell",
+    "rs": "rust",
+    "html": "html",
+    "toml": "toml",
 }
 
 # Formatter name mapped to tool
 TOOL_MAP = {
-    'python': 'black',
-    'javascript': 'prettier',
-    'typescript': 'prettier',
-    'css': 'prettier',
-    'json': 'prettier',
-    'markdown': 'prettier',
-    'yaml': 'prettier',
-    'shell': 'shfmt',
-    'rust': 'cargo_fmt',
-    'html': 'prettier',
-    'toml': 'prettier',
+    "python": "black",
+    "javascript": "prettier",
+    "typescript": "prettier",
+    "css": "prettier",
+    "json": "prettier",
+    "markdown": "prettier",
+    "yaml": "prettier",
+    "shell": "shfmt",
+    "rust": "cargo_fmt",
+    "html": "prettier",
+    "toml": "prettier",
 }
 
-SKIP_DIRS = {"node_modules", "Target", "target", "dist", ".git", "Generated", "__pycache__"}
+SKIP_DIRS = {
+    "node_modules",
+    "Target",
+    "target",
+    "dist",
+    ".git",
+    "Generated",
+    "__pycache__",
+}
 
 
 def find_binary(name):
     """Find a formatter binary in common locations."""
-    search = subprocess.run(
-        ["which", name],
-        capture_output=True, text=True, timeout=3
-    )
+    search = subprocess.run(["which", name], capture_output=True, text=True, timeout=3)
     if search.returncode == 0 and search.stdout.strip():
         return search.stdout.strip()
 
     # Fallback for cargo_fmt
     if name == "cargo_fmt":
         which = subprocess.run(
-            ["which", "cargo"],
-            capture_output=True, text=True, timeout=3
+            ["which", "cargo"], capture_output=True, text=True, timeout=3
         )
         if which.returncode == 0:
             return "cargo_fmt"
@@ -84,7 +88,9 @@ def format_file(filepath, tool_name):
         if tool_name == "shfmt":
             subprocess.run(
                 ["shfmt", "-w", filepath],
-                capture_output=True, text=True, timeout=FORMAT_TIMEOUT
+                capture_output=True,
+                text=True,
+                timeout=FORMAT_TIMEOUT,
             )
             return (True, "shfmt")
 
@@ -94,15 +100,19 @@ def format_file(filepath, tool_name):
                 return (False, "prettier not found")
             subprocess.run(
                 [bin_path, "--write", filepath, "--log-level", "warn"],
-                capture_output=True, text=True, timeout=FORMAT_TIMEOUT,
-                cwd=os.path.dirname(filepath) or "."
+                capture_output=True,
+                text=True,
+                timeout=FORMAT_TIMEOUT,
+                cwd=os.path.dirname(filepath) or ".",
             )
             return (True, "prettier")
 
         elif tool_name == "black":
             subprocess.run(
                 ["black", "-q", filepath],
-                capture_output=True, text=True, timeout=FORMAT_TIMEOUT
+                capture_output=True,
+                text=True,
+                timeout=FORMAT_TIMEOUT,
             )
             return (True, "black")
 
@@ -113,8 +123,10 @@ def format_file(filepath, tool_name):
                 if (parent / "Cargo.toml").exists():
                     subprocess.run(
                         ["cargo", "fmt", "--", filepath],
-                        capture_output=True, text=True, timeout=FORMAT_TIMEOUT,
-                        cwd=str(parent)
+                        capture_output=True,
+                        text=True,
+                        timeout=FORMAT_TIMEOUT,
+                        cwd=str(parent),
                     )
                     return (True, "cargo fmt")
                 if parent == parent.parent:
@@ -167,7 +179,9 @@ def main():
     if not tool_name:
         return
 
-    bin_available = find_binary(tool_name) if tool_name != "cargo_fmt" else find_binary("cargo")
+    bin_available = (
+        find_binary(tool_name) if tool_name != "cargo_fmt" else find_binary("cargo")
+    )
     if not bin_available:
         return
 
@@ -175,11 +189,15 @@ def main():
 
     # Log result for next turn
     if success:
-        print(json.dumps({
-            "action": "formatted",
-            "tool": detail,
-            "file": filepath,
-        }))
+        print(
+            json.dumps(
+                {
+                    "action": "formatted",
+                    "tool": detail,
+                    "file": filepath,
+                }
+            )
+        )
 
 
 if __name__ == "__main__":

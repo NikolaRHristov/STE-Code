@@ -47,7 +47,9 @@ def main():
     except (json.JSONDecodeError, ValueError):
         return
 
-    assistant_response = payload.get("assistant_response", "") or payload.get("response", "")
+    assistant_response = payload.get("assistant_response", "") or payload.get(
+        "response", ""
+    )
 
     if len(assistant_response) < 100:
         return
@@ -62,23 +64,37 @@ def main():
         if phrase.lower() in assistant_response.lower():
             issues.append(f"Phrase: '{phrase}'")
 
-    code_blocks = re.findall(r'```(?:\w*)\n([\s\S]*?)```', assistant_response)
+    code_blocks = re.findall(r"```(?:\w*)\n([\s\S]*?)```", assistant_response)
     for block in code_blocks:
         for line in block.split("\n"):
             stripped = line.lstrip("#/ ")
-            for word in ("AI", "AI-generated", "auto-generated", "Claude", "GPT", "LLM"):
-                if word in stripped and ("generated" in stripped.lower() or "written" in stripped.lower()):
-                    issues.append(f"Code comment references AI: '{stripped.strip()[:80]}'")
+            for word in (
+                "AI",
+                "AI-generated",
+                "auto-generated",
+                "Claude",
+                "GPT",
+                "LLM",
+            ):
+                if word in stripped and (
+                    "generated" in stripped.lower() or "written" in stripped.lower()
+                ):
+                    issues.append(
+                        f"Code comment references AI: '{stripped.strip()[:80]}'"
+                    )
                     break
 
     if issues:
         CACHE_DIR.mkdir(parents=True, exist_ok=True)
         with open(CACHE_FILE, "w") as f:
-            json.dump({
-                "timestamp": time.time(),
-                "issues": issues,
-                "source": "fast_check",
-            }, f)
+            json.dump(
+                {
+                    "timestamp": time.time(),
+                    "issues": issues,
+                    "source": "fast_check",
+                },
+                f,
+            )
 
 
 if __name__ == "__main__":
