@@ -1,0 +1,4 @@
+# STE-Code internal tooling monorepo (.agents/) — local install artifacts.
+# The formatter package installs prettier here; never commit the tree.
+node_modules/
+.pnpm/

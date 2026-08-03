@@ -1,0 +1,8 @@
+{
+  "name": "@ste-code/tools",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "STE-Code internal tooling monorepo. Lives entirely inside .agents/ so the STE-Code repo root carries no package.json or prettier config. The formatter package is ./format.",
+  "packageManager": "pnpm@11.18.0"
+}

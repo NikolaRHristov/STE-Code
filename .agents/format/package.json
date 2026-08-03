@@ -1,0 +1,14 @@
+{
+  "name": "@ste-code/format",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Prettier-based markdown/formatting for STE-Code. Run from this directory; formats ../../ste-code/ and .. (the .agents/ tree) without touching .agents/hermes or .agents/tmp.",
+  "scripts": {
+    "format": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore --write ../../ste-code/ ..",
+    "check": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore --check ../../ste-code/ .."
+  },
+  "devDependencies": {
+    "prettier": "^3.9.5"
+  }
+}

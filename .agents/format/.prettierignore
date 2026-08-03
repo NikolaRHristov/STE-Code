@@ -1,0 +1,26 @@
+# ===========================================================================
+# .prettierignore — anchors to .agents/format/ (this file's directory).
+# Patterns are relative to HERE, so:
+#   ..        -> .agents/
+#   ../hermes -> .agents/hermes   (the other agent's verified surface)
+#   ../../ste-code -> ste-code/   (repo root's standard tree)
+#
+# Goal: format ../../ste-code/ and .. (the .agents/ tree) with prettier, but
+# NEVER touch the other agent's verified tooling (commits 3756d82 + bbcb052)
+# or this package's own scaffolding / scratch.
+# ===========================================================================
+
+# --- this package's own internals (relative to .agents/format/) -------------
+node_modules/
+pnpm-lock.yaml
+package.json
+
+# --- the other agent's verified surface (DO NOT TOUCH) ----------------------
+# install / link scripts + dev-profile memory symlinks (USER.md / MEMORY.md)
+../hermes/**
+
+# --- our own scratch / research output --------------------------------------
+../tmp/**
+
+# --- generated / vendored content under ste-code ----------------------------
+../../ste-code/artifacts/**
