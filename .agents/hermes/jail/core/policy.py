@@ -286,6 +286,15 @@ NETWORK_COMMANDS = [
     "go",
     "docker",
     "kubectl",
+    "nix",
+    "guix",
+    "pipx",
+    "uvx",
+    "uv",
+    "poetry",
+    "npx",
+    "bunx",
+    "deno",
 ]
 
 # Commands that start another agent, schedule future work, or drive the GUI.

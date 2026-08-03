@@ -865,6 +865,66 @@ def run_bench_escalation(verbose: bool) -> int:
     return failures
 
 
+def run_network_runners(verbose: bool) -> int:
+    """Regression: modern package runners must be denied commands (item B2).
+
+    ``NETWORK_COMMANDS`` listed ``pip``/``npm``/``cargo`` but not the modern
+    download-and-execute front ends. Matching is per command word, so ``pipx``
+    was never caught by ``pip`` and ``uvx <pkg>`` reached the network freely.
+    Each name is checked twice: present in the list, and actually recognised
+    as the command word of a synthetic invocation under ``user`` and ``bench``.
+    """
+    from core.analysis import command_basenames
+    import core.policy as core_policy
+
+    print(f"\n{'=' * 66}")
+    print("NETWORK PACKAGE RUNNERS (B2) - download-and-execute front ends")
+    print(f"{'=' * 66}")
+
+    runners = [
+        "nix",
+        "guix",
+        "pipx",
+        "uvx",
+        "uv",
+        "poetry",
+        "npx",
+        "bunx",
+        "deno",
+    ]
+
+    failures = 0
+    checks = 0
+
+    home = os.path.join(tempfile.gettempdir(), "ste-b2-home")
+    built = {
+        "user": core_policy._build_user(None, {}, home),
+        "bench": core_policy._build_bench(None, {}, home),
+    }
+
+    for name in runners:
+        checks += 1
+        if name not in core_policy.NETWORK_COMMANDS:
+            failures += 1
+            print(f"  [HOLE] {name}: missing from NETWORK_COMMANDS")
+        elif verbose:
+            print(f"  [ok]   {name} in NETWORK_COMMANDS")
+
+        for policy_name, policy in built.items():
+            checks += 1
+            denied = set(policy.denied_commands)
+            names = command_basenames(f"{name} install some-package")
+            if not any(word in denied for word in names):
+                failures += 1
+                print(f"  [HOLE] {name}: not denied under {policy_name}")
+            elif verbose:
+                print(f"  [ok]   {name} denied under {policy_name}")
+
+    if not verbose:
+        print(f"  {checks - failures}/{checks} package-runner checks passed")
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-v", "--verbose", action="store_true")
@@ -881,6 +941,7 @@ def main() -> int:
     total_failures = sum(run_policy(p, opts.verbose) for p in policies)
     total_failures += run_fail_closed(opts.verbose)
     total_failures += run_bench_escalation(opts.verbose)
+    total_failures += run_network_runners(opts.verbose)
 
     print(f"\n{'=' * 66}")
     if total_failures:
