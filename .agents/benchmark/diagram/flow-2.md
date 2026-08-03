@@ -5,16 +5,16 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
-> Previous: [flow.md](flow.md) · the atom — one case, one run, one score
-> Next: [flow-3.md](flow-3.md) · 🔵 BLUE + 🟣 PURPLE
+> Previous: [flow.md](flow.md) · the atom — one case, one run, one score Next:
+> [flow-3.md](flow-3.md) · 🔵 BLUE + 🟣 PURPLE
 
 ---
 
 ## 1. What RED is for
 
-RED does not try to find *a* weakness. It enumerates the **entire attack space**
+RED does not try to find _a_ weakness. It enumerates the **entire attack space**
 exhaustively, so that "we tested it" means something precise: every combination
-of *how you attack*, *where you put it*, and *when you send it* was tried at
+of _how you attack_, _where you put it_, and _when you send it_ was tried at
 least once.
 
 ```
@@ -36,8 +36,8 @@ least once.
                      └──────────────────────┘
 ```
 
-`REAL` — direct call returns **480 cases with 480 unique
-(technique, placement, timing) combos**. Full coverage, zero duplication.
+`REAL` — direct call returns **480 cases with 480 unique (technique, placement,
+timing) combos**. Full coverage, zero duplication.
 
 ---
 
@@ -83,8 +83,8 @@ least once.
 
 **Why `timing` exists at all:** it only has meaning across multiple rounds. In a
 1-round run, all six timings collapse to the same thing — the case is generated
-once and sent once. So a 1-round run technically generates 480 cases but only
-80 *distinct* attacks (10 × 8), each labelled with six different timings.
+once and sent once. So a 1-round run technically generates 480 cases but only 80
+_distinct_ attacks (10 × 8), each labelled with six different timings.
 
 > ⚠ **DISCREPANCY 1 — timing is inert at rounds=1.** You pay for 480 runs but
 > get 80 distinct attacks; the other 400 are the same 80 relabelled. See
@@ -94,8 +94,9 @@ once and sent once. So a 1-round run technically generates 480 cases but only
 
 ## 3. A real generated attack
 
-`REAL` — verbatim from `.agents/tmp/pipe/tier-2/round1/red/test-cases/category-red.json`,
-case index 0 of 480.
+`REAL` — verbatim from
+`.agents/tmp/pipe/tier-2/round1/red/test-cases/category-red.json`, case index 0
+of 480.
 
 ```
 ┌─ red-t-2-r1-forbidden_bait-head-immediate-000 ─────────────────────────────┐
@@ -123,9 +124,10 @@ case index 0 of 480.
 
 Read the payload carefully — the attack is well built:
 
-- **`leverage` appears twice**, once as a nonsense verb (`Please leverage to
-  set up`). A model that pattern-matches on "replace leverage with use" will
-  produce *"Please use to set up"* — still broken grammar.
+- **`leverage` appears twice**, once as a nonsense verb
+  (`Please leverage to set up`). A model that pattern-matches on "replace
+  leverage with use" will produce _"Please use to set up"_ — still broken
+  grammar.
 - The **second sentence is clean and correct**. This is the carrier: it gives
   the model something legitimate to preserve, so a lazy "rewrite everything"
   strategy damages good text.
@@ -133,7 +135,7 @@ Read the payload carefully — the attack is well built:
   is most likely to anchor.
 
 **What passing this case proves:** the level's prompt teaches the model to
-remove banned vocabulary *and* repair the resulting grammar *and* leave correct
+remove banned vocabulary _and_ repair the resulting grammar _and_ leave correct
 text alone. Three things at once. That is why difficulty is `hard`.
 
 ---
@@ -216,14 +218,14 @@ possible without any shared memory.
 This file's **existence** is the signal. BLUE polls for it; it does not poll for
 a process, a port, or a lock. Write-then-exist is the entire IPC mechanism.
 
-> ⚠ **DISCREPANCY 2 — `red_passed: 0` and `escapes: 0` simultaneously.**
-> 480 cases ran, none passed, and none escaped. Both cannot be true: a case
-> either passes or escapes. This is the offline (`--skip-live`) signature —
-> RED never called a model, so nothing was scored, and both counters stayed at
-> their initial zero. The run is a **wiring test, not a measurement**, but
+> ⚠ **DISCREPANCY 2 — `red_passed: 0` and `escapes: 0` simultaneously.** 480
+> cases ran, none passed, and none escaped. Both cannot be true: a case either
+> passes or escapes. This is the offline (`--skip-live`) signature — RED never
+> called a model, so nothing was scored, and both counters stayed at their
+> initial zero. The run is a **wiring test, not a measurement**, but
 > `purple.json` does not say so anywhere. A consumer reading
-> `red_pass_rate_pct: 0.0` would conclude level -2 failed catastrophically.
-> Full analysis in [flow-5.md](flow-5.md) §2.
+> `red_pass_rate_pct: 0.0` would conclude level -2 failed catastrophically. Full
+> analysis in [flow-5.md](flow-5.md) §2.
 
 ---
 

@@ -78,6 +78,7 @@ def _extract_text(args: Any) -> List[str]:
                         texts.append(v)
     return texts
 
+
 # Placeholders used when redacting a matched span. Keeping them typed makes the
 # redaction self-documenting in the persisted memory entry.
 _PLACEHOLDER = {
@@ -144,11 +145,15 @@ def _is_enabled() -> bool:
     try:
         import yaml
 
-        cfg_path = Path.home() / ".hermes" / "profiles" / _active_profile() / "config.yaml"
+        cfg_path = (
+            Path.home() / ".hermes" / "profiles" / _active_profile() / "config.yaml"
+        )
         if not cfg_path.exists():
             return False
         data = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}
-        spec = (data.get("plugins") or {}).get("entries", {}).get("privacy-scrub-sanitize") or {}
+        spec = (data.get("plugins") or {}).get("entries", {}).get(
+            "privacy-scrub-sanitize"
+        ) or {}
         return bool(spec.get("enabled"))
     except Exception as exc:
         logger.debug("privacy-scrub-sanitize: enablement check failed (%s)", exc)
@@ -225,7 +230,9 @@ def _scrub_args(args: Any) -> Optional[Dict[str, Any]]:
     return new_args if changed else None
 
 
-def _on_pre_tool_call(tool_name: str = "", args: Any = None, **kwargs: Any) -> Optional[Dict[str, Any]]:
+def _on_pre_tool_call(
+    tool_name: str = "", args: Any = None, **kwargs: Any
+) -> Optional[Dict[str, Any]]:
     """Redact sensitive data from memory writes in place (feat-only).
 
     Tier-0 (regex) produces a precise in-place scrub via the ``modify`` action.

@@ -15,6 +15,7 @@ Usage:
   python3 verify-adaptation.py --grouped DIR --adapted DIR
 Exit code 0 if all gates pass, 1 otherwise.
 """
+
 from __future__ import annotations
 
 import sys
@@ -25,8 +26,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -36,14 +41,32 @@ ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
 # Expected per-section rule counts (mirrors adaptation SKILL.md Gate 1).
 EXPECTED = {
-    1: 14, 2: 3, 3: 7, 4: 5, 5: 5, 6: 6, 7: 3, 8: 7, 9: 4,
+    1: 14,
+    2: 3,
+    3: 7,
+    4: 5,
+    5: 5,
+    6: 6,
+    7: 3,
+    8: 7,
+    9: 4,
 }
 GR_IDS = ["GR1", "GR2", "GR3", "GR4"]
 
 AEROSPACE_TERMS = [
-    "aircraft", "landing gear", "fuselage", "APU", "ECS",
-    "ATA chapter", "lockwire", "avionics", "aileron", "rudder",
-    "propeller", "thrust", "altimeter",
+    "aircraft",
+    "landing gear",
+    "fuselage",
+    "APU",
+    "ECS",
+    "ATA chapter",
+    "lockwire",
+    "avionics",
+    "aileron",
+    "rudder",
+    "propeller",
+    "thrust",
+    "altimeter",
 ]
 # "engine" excluded: legitimate code-domain word (search engine, game engine).
 # "torque" and "cockpit" removed from the hard list: in the code domain they are
@@ -74,13 +97,18 @@ def _split_body(text: str) -> str:
     body = re.sub(
         r"(?m)^\s*[-*]?\s*.*\bnot\s+(utilize|leverage|employ|commence|terminate|"
         r"initiate|bootstrap)\b.*$",
-        "", body, flags=re.I)
+        "",
+        body,
+        flags=re.I,
+    )
     # Drop mapping-teaching lines that quote an aerospace term to explain the
     # code-domain equivalent (e.g. '"main landing gear" is a technical noun…'
     # or 'X → Y').
     body = re.sub(
         r"(?m)^\s*[-*]?\s*.*(\u2192|->|\bis a technical noun\b|\bmaps to\b).*$",
-        "", body)
+        "",
+        body,
+    )
     return body
 
 
@@ -100,12 +128,12 @@ def _benign_context(body: str, pos: int) -> bool:
     quote/paren pairs on a line don't cancel each other out."""
     line_start = body.rfind("\n", 0, pos) + 1
     line_end = body.find("\n", pos)
-    line = body[line_start:line_end if line_end != -1 else len(body)]
+    line = body[line_start : line_end if line_end != -1 else len(body)]
     rel = pos - line_start
     pre = line[:rel]  # text on the same line, before the term
 
     # inside backticks: an unclosed ` before the term
-    if "`" in pre and "`" not in pre[pre.rfind("`") + 1:]:
+    if "`" in pre and "`" not in pre[pre.rfind("`") + 1 :]:
         return True
     # inside an open double/single quote on this line
     if pre.count('"') % 2 == 1:
@@ -151,7 +179,9 @@ def main():
         files = sorted(adapted.glob(f"a-sec{sec}-rule*.md"))
         total_rules += len(files)
         if len(files) < exp:
-            problems.append(f"Gate1 sec{sec}: {len(files)} rule files, expected >= {exp}")
+            problems.append(
+                f"Gate1 sec{sec}: {len(files)} rule files, expected >= {exp}"
+            )
     if not (adapted / "a-categories.md").exists():
         problems.append("Gate1: missing a-categories.md")
     if not (adapted / "a-dictionary.md").exists():
@@ -176,29 +206,38 @@ def main():
         t = f.read_text(encoding="utf-8", errors="ignore")
         body = _split_body(t)
         for sym in _flagged_terms(body, NON_APPROVED_SYNONYMS):
-            problems.append(f"Gate6 {f.name}: non-approved synonym '{sym}' outside Original Rule")
+            problems.append(
+                f"Gate6 {f.name}: non-approved synonym '{sym}' outside Original Rule"
+            )
 
     # ── Gate 7/9 — aerospace leakage (outside Original Rule) ───────────────
     for f in sorted(adapted.glob("a-sec*-rule*.md")):
         t = f.read_text(encoding="utf-8", errors="ignore")
         body = _split_body(t)
         for term in _flagged_terms(body, AEROSPACE_TERMS):
-            problems.append(f"Gate9 {f.name}: aerospace term '{term}' outside Original Rule")
+            problems.append(
+                f"Gate9 {f.name}: aerospace term '{term}' outside Original Rule"
+            )
 
     # ── Gate 8 — backlink integrity (machine-readable Source anchor) ───────
     # Accept either the literal 'Source: master.md#' form OR the markdown-link
     # form the template emits: '[master.md#secN-ruleX.Y](ste-code/grouped/)'.
     for f in sorted(adapted.glob("a-sec*-rule*.md")):
         t = f.read_text(encoding="utf-8", errors="ignore")
-        if not re.search(r"Source:\s*master\.md#", t) and \
-           not re.search(r"\[master\.md#", t):
+        if not re.search(r"Source:\s*master\.md#", t) and not re.search(
+            r"\[master\.md#", t
+        ):
             problems.append(f"Gate8 {f.name}: missing 'Source: master.md#' backlink")
 
     # ── Summary ────────────────────────────────────────────────────────────
     print(f"Adaptation verification against {adapted}")
     print(f"  Rule files: {total_rules} (expected >= {sum(EXPECTED.values())})")
-    print(f"  a-categories.md: {'yes' if (adapted/'a-categories.md').exists() else 'MISSING'}")
-    print(f"  a-dictionary.md: {'yes' if (adapted/'a-dictionary.md').exists() else 'MISSING'}")
+    print(
+        f"  a-categories.md: {'yes' if (adapted / 'a-categories.md').exists() else 'MISSING'}"
+    )
+    print(
+        f"  a-dictionary.md: {'yes' if (adapted / 'a-dictionary.md').exists() else 'MISSING'}"
+    )
     if problems:
         print(f"\nFAIL — {len(problems)} problem(s):")
         for p in problems[:40]:

@@ -42,6 +42,7 @@ Usage:
   python3 .agents/tools/grouping/group_batch.py                # assemble (guarded)
   python3 .agents/tools/grouping/group_batch.py --force        # ignore idempotence
 """
+
 from __future__ import annotations
 
 import argparse
@@ -53,6 +54,7 @@ from pathlib import Path
 
 # ── import the shared engine (single source of truth for the plan) ──────────
 import sys as _sys
+
 _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
 from templater import load_local
 
@@ -71,21 +73,30 @@ def _load_module(mod_name: str, path: Path):
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
+
 engine = _load_module(
-    "group_engine", PROJECT / ".agents" / "tools" / "grouping" / "group_engine.py")
+    "group_engine", PROJECT / ".agents" / "tools" / "grouping" / "group_engine.py"
+)
 pipeline_core = _load_module(
-    "pipeline_core", PROJECT / ".agents" / "tools" / "lib" / "pipeline_core.py")
+    "pipeline_core", PROJECT / ".agents" / "tools" / "lib" / "pipeline_core.py"
+)
 _templater_mod = _load_module(
-    "templater", PROJECT / ".agents" / "tools" / "lib" / "templater.py")
+    "templater", PROJECT / ".agents" / "tools" / "lib" / "templater.py"
+)
 dict_normalize = _load_module(
-    "dict_normalize", PROJECT / ".agents" / "tools" / "grouping" / "dict_normalize.py")
+    "dict_normalize", PROJECT / ".agents" / "tools" / "grouping" / "dict_normalize.py"
+)
 
 # External markdown templates live in grouping/templates/*.md (edit those, not
 # the f-strings here) — see .agents/tools/grouping/templates/README.md.
@@ -133,8 +144,7 @@ def mark_count(text: str) -> int:
 _TABLE_HDR_RE = re.compile(r"^\|\s*Word\s*\(?POS\)?", re.I)
 _SEP_RE = re.compile(r"^\|[\s:\-\|]+\|?\s*$")
 # Page marker in any style (mirrors engine._PAGE_MARKERS but as one matcher).
-_PAGE_MARK_RE = re.compile(
-    r"^(?:#{1,4}\s+Page\s+.+|\*\*\s*Page\s+.+\*\*)\s*$", re.I)
+_PAGE_MARK_RE = re.compile(r"^(?:#{1,4}\s+Page\s+.+|\*\*\s*Page\s+.+\*\*)\s*$", re.I)
 # Picture-text region markers (the refiner wraps text extracted from a diagram
 # or image in these HTML comments). Content inside MUST pass through verbatim and
 # is never merged/split — a picture block can span a page boundary, so we must
@@ -182,9 +192,9 @@ def merge_page_tables(page_bodies: list[str]) -> str:
 
     out: list[str] = []
     in_dict_table = False
-    dict_header_emitted = False   # ≤1 dict header per group (ONE-TABLE guarantee)
+    dict_header_emitted = False  # ≤1 dict header per group (ONE-TABLE guarantee)
     skip_one_sep = False
-    in_picture = False   # inside a <!-- Start/End of picture text --> region
+    in_picture = False  # inside a <!-- Start/End of picture text --> region
     i = 0
     n = len(stream)
 
@@ -230,7 +240,8 @@ def merge_page_tables(page_bodies: list[str]) -> str:
             while j < n and stream[j].strip() == "":
                 j += 1
             follows_repeated_header = (
-                in_dict_table and j < n and _TABLE_HDR_RE.match(stream[j].strip()))
+                in_dict_table and j < n and _TABLE_HDR_RE.match(stream[j].strip())
+            )
             if follows_repeated_header:
                 tok = s.lstrip("#* ").strip().rstrip("*").strip()
                 emit(f"<!-- {tok} -->")
@@ -392,8 +403,10 @@ def dry_run(plan, idx, man, id2pos):
     dupes = []
     for i, g in enumerate(plan, 1):
         rng = f"{g.pages[0]}-{g.pages[-1]}" if g.pages else "-"
-        print(f"{i:>3}  {g.gid:<22} {g.section:<11} {str(g.key or ''):<7} "
-              f"{len(g.pages):>5}  {rng}")
+        print(
+            f"{i:>3}  {g.gid:<22} {g.section:<11} {str(g.key or ''):<7} "
+            f"{len(g.pages):>5}  {rng}"
+        )
         for p in g.pages:
             if p in seen_pages:
                 dupes.append(p)
@@ -402,32 +415,42 @@ def dry_run(plan, idx, man, id2pos):
 
     # Coverage integrity
     missing = [p for p in range(1, engine.TOTAL_PAGES + 1) if p not in seen_pages]
-    print(f"\nCOVERAGE: {len(seen_pages)}/{engine.TOTAL_PAGES} pages assigned; "
-          f"missing={missing[:12]}{'...' if len(missing) > 12 else ''}; "
-          f"duplicates={sorted(set(dupes))[:12]}")
+    print(
+        f"\nCOVERAGE: {len(seen_pages)}/{engine.TOTAL_PAGES} pages assigned; "
+        f"missing={missing[:12]}{'...' if len(missing) > 12 else ''}; "
+        f"duplicates={sorted(set(dupes))[:12]}"
+    )
 
     # Group-size sanity (uneven is allowed; flag only extremes)
     sizes = [(g.gid, len(g.pages)) for g in plan]
     biggest = max(sizes, key=lambda x: x[1])
     smallest = min(sizes, key=lambda x: x[1])
-    print(f"SIZES   : smallest={smallest[1]}p ({smallest[0]}), "
-          f"biggest={biggest[1]}p ({biggest[0]})")
+    print(
+        f"SIZES   : smallest={smallest[1]}p ({smallest[0]}), "
+        f"biggest={biggest[1]}p ({biggest[0]})"
+    )
 
     # DICT letter split integrity
     dict_groups = [g for g in plan if g.section == "DICT"]
-    print(f"\nDICT    : {len(dict_groups)} alphabetical buckets "
-          f"(target ~{engine.DICT_BUCKET_TARGET_PAGES}p each)")
+    print(
+        f"\nDICT    : {len(dict_groups)} alphabetical buckets "
+        f"(target ~{engine.DICT_BUCKET_TARGET_PAGES}p each)"
+    )
     for g in dict_groups:
         first_id = man.get(g.pages[0], "?")
         last_id = man.get(g.pages[-1], "?")
-        print(f"          {g.gid:<20} pages {g.pages[0]}-{g.pages[-1]} "
-              f"({len(g.pages)}p)  [{first_id} .. {last_id}]")
+        print(
+            f"          {g.gid:<20} pages {g.pages[0]}-{g.pages[-1]} "
+            f"({len(g.pages)}p)  [{first_id} .. {last_id}]"
+        )
 
     # Readiness (does NOT verify refinement quality — only sliceability)
     print(f"\nCORPUS READY FOR ASSEMBLY: {'YES' if ready else 'NO'}")
     if not ready:
-        print("  (assembly is blocked until the refined corpus is complete +"
-              " each file has clean `# Page N` markers)")
+        print(
+            "  (assembly is blocked until the refined corpus is complete +"
+            " each file has clean `# Page N` markers)"
+        )
         for pr in problems:
             print(f"  - {pr}")
 
@@ -445,25 +468,36 @@ def dry_run(plan, idx, man, id2pos):
         flag = "OK " if ok else "!! "
         extra = ""
         if not stats["parity_ok"]:
-            extra = f"  LOST={stats['missing_total']} {list(stats['missing_tokens'])[:5]}"
+            extra = (
+                f"  LOST={stats['missing_total']} {list(stats['missing_tokens'])[:5]}"
+            )
         if stats["out_marks"] < stats["src_marks"]:
             extra += f"  MARKS {stats['out_marks']}/{stats['src_marks']}"
-        print(f"  {flag}{g.gid:<22} tokens: 0 missing"
-              if ok else f"  {flag}{g.gid:<22}{extra}")
+        print(
+            f"  {flag}{g.gid:<22} tokens: 0 missing"
+            if ok
+            else f"  {flag}{g.gid:<22}{extra}"
+        )
     if not any_slice:
-        print("  (no groups sliceable yet — refined corpus mid-rewrite; this is"
-              " expected during refinement churn)")
+        print(
+            "  (no groups sliceable yet — refined corpus mid-rewrite; this is"
+            " expected during refinement churn)"
+        )
     print("=" * 74)
 
 
 # ── real assembly (guarded) ─────────────────────────────────────────────────
 def _load_checkpoint():
     from ste_checkpoint import load
+
     return load(CHECKPOINT_PATH)
+
 
 def _save_checkpoint(cp: dict):
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, cp)
+
 
 def assemble_all(plan, idx, man, id2pos, force=False) -> int:
     """Write every group to grouped/, guarded on corpus readiness.
@@ -479,8 +513,10 @@ def assemble_all(plan, idx, man, id2pos, force=False) -> int:
         print("[REFUSED] refined corpus is not ready for assembly:")
         for pr in problems:
             print(f"  - {pr}")
-        print("Wait for refinement to finish, or pass --force to override "
-              "(NOT recommended during churn).")
+        print(
+            "Wait for refinement to finish, or pass --force to override "
+            "(NOT recommended during churn)."
+        )
         return 1
 
     mkdir(GROUPED_DIR)
@@ -498,13 +534,17 @@ def assemble_all(plan, idx, man, id2pos, force=False) -> int:
             continue
         # hard parity gate — refuse to write a lossy group
         if not stats["parity_ok"]:
-            print(f"[FAIL] {g.gid}: content loss ({stats['missing_total']} tokens "
-                  f"missing e.g. {list(stats['missing_tokens'])[:5]}) — NOT written")
+            print(
+                f"[FAIL] {g.gid}: content loss ({stats['missing_total']} tokens "
+                f"missing e.g. {list(stats['missing_tokens'])[:5]}) — NOT written"
+            )
             failures += 1
             continue
         if stats["out_marks"] < stats["src_marks"]:
-            print(f"[FAIL] {g.gid}: marks dropped "
-                  f"({stats['out_marks']}/{stats['src_marks']}) — NOT written")
+            print(
+                f"[FAIL] {g.gid}: marks dropped "
+                f"({stats['out_marks']}/{stats['src_marks']}) — NOT written"
+            )
             failures += 1
             continue
 
@@ -529,29 +569,40 @@ def assemble_all(plan, idx, man, id2pos, force=False) -> int:
             src_slices.append(sl)
         ok, miss, _ = engine.parity_diff("\n".join(src_slices), reread)
         if not ok:
-            print(f"[FAIL] {g.gid}: post-write parity mismatch "
-                  f"({sum(miss.values())} tokens) — file left for inspection")
+            print(
+                f"[FAIL] {g.gid}: post-write parity mismatch "
+                f"({sum(miss.values())} tokens) — file left for inspection"
+            )
             failures += 1
             continue
         done[g.gid] = {"pages": [g.pages[0], g.pages[-1]], "bytes": len(text)}
         written += 1
-        print(f"[OK]   {g.gid:<22} {g.pages[0]}-{g.pages[-1]} "
-              f"({len(g.pages)}p, {len(text)} bytes)")
+        print(
+            f"[OK]   {g.gid:<22} {g.pages[0]}-{g.pages[-1]} "
+            f"({len(g.pages)}p, {len(text)} bytes)"
+        )
 
     cp["completed"] = done
     _save_checkpoint(cp)
     print("-" * 74)
-    print(f"assembled: {written} written, {skipped} skipped (idempotent), "
-          f"{failures} failed")
+    print(
+        f"assembled: {written} written, {skipped} skipped (idempotent), "
+        f"{failures} failed"
+    )
     return 1 if failures else 0
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="plan only, write nothing")
-    ap.add_argument("--plan-json", action="store_true", help="emit machine-readable plan")
-    ap.add_argument("--force", action="store_true",
-                    help="override readiness guard + idempotence (dangerous during churn)")
+    ap.add_argument(
+        "--plan-json", action="store_true", help="emit machine-readable plan"
+    )
+    ap.add_argument(
+        "--force",
+        action="store_true",
+        help="override readiness guard + idempotence (dangerous during churn)",
+    )
     args = ap.parse_args()
 
     man = engine.parse_manifest()
@@ -565,9 +616,14 @@ def main():
             "total_pages": engine.TOTAL_PAGES,
             "total_groups": len(plan),
             "groups": [
-                {"group_id": g.gid, "label": g.label, "section": g.section,
-                 "key": g.key, "pages": g.pages,
-                 "page_range": f"{g.pages[0]}-{g.pages[-1]}" if g.pages else None}
+                {
+                    "group_id": g.gid,
+                    "label": g.label,
+                    "section": g.section,
+                    "key": g.key,
+                    "pages": g.pages,
+                    "page_range": f"{g.pages[0]}-{g.pages[-1]}" if g.pages else None,
+                }
                 for g in plan
             ],
         }

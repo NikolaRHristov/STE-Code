@@ -30,6 +30,7 @@ Checks (all must pass):
 Exit code 0 = all groups pass; 1 = at least one failure. Prints a per-group
 report. No LLM, no network.
 """
+
 from __future__ import annotations
 
 import re
@@ -40,8 +41,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -51,8 +56,10 @@ GROUPED_DIR = PROJECT / "ste-code" / "grouped"
 
 def _load(name: str, path: Path):
     import sys as _sys
+
     _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
     from templater import load_local
+
     return load_local(name, path)
 
 
@@ -109,8 +116,11 @@ def verify():
             seen[p] = seen.get(p, 0) + 1
     missing = [p for p in range(1, engine.TOTAL_PAGES + 1) if p not in seen]
     dupes = [p for p, c in seen.items() if c > 1]
-    rep.line(not missing and not dupes, "COVERAGE",
-             f"{len(seen)}/{engine.TOTAL_PAGES} pages; missing={missing[:6]} dupes={dupes[:6]}")
+    rep.line(
+        not missing and not dupes,
+        "COVERAGE",
+        f"{len(seen)}/{engine.TOTAL_PAGES} pages; missing={missing[:6]} dupes={dupes[:6]}",
+    )
 
     # ── per-group checks ────────────────────────────────────────────────────
     for g in plan:
@@ -130,16 +140,22 @@ def verify():
         if ok:
             rep.line(True, g.gid, "parity OK (0 tokens missing)")
         else:
-            rep.line(False, g.gid,
-                     f"CONTENT LOSS: {sum(miss.values())} tokens missing "
-                     f"e.g. {list(miss)[:6]}")
+            rep.line(
+                False,
+                g.gid,
+                f"CONTENT LOSS: {sum(miss.values())} tokens missing "
+                f"e.g. {list(miss)[:6]}",
+            )
 
         # 3. marks
         src_marks = gb.mark_count(src_text)
         out_marks = gb.mark_count(out_text)
-        rep.line(out_marks >= src_marks, g.gid,
-                 f"marks {out_marks}/{src_marks} "
-                 f"({'ok' if out_marks >= src_marks else 'DROPPED'})")
+        rep.line(
+            out_marks >= src_marks,
+            g.gid,
+            f"marks {out_marks}/{src_marks} "
+            f"({'ok' if out_marks >= src_marks else 'DROPPED'})",
+        )
 
         # 5. one-table (dict groups only). After the dict normalizer (Fix B),
         #    every dict group MUST be exactly ONE continuous 4-col table: exactly
@@ -150,18 +166,27 @@ def verify():
             lines = out_text.splitlines()
             hdrs = sum(1 for ln in lines if gb._TABLE_HDR_RE.match(ln.strip()))
             block_heads = sum(
-                1 for ln in lines
-                if re.match(r"^#{3,4}\s+\*{0,2}[A-Za-z][A-Za-z()\-\s,]*\s*\(", ln.strip()))
+                1
+                for ln in lines
+                if re.match(
+                    r"^#{3,4}\s+\*{0,2}[A-Za-z][A-Za-z()\-\s,]*\s*\(", ln.strip()
+                )
+            )
             rep.line(
-                hdrs == 1 and block_heads == 0, g.gid,
+                hdrs == 1 and block_heads == 0,
+                g.gid,
                 f"single continuous table (headers={hdrs}, ####WORD blocks={block_heads}, "
-                f"expect headers==1 and blocks==0)")
+                f"expect headers==1 and blocks==0)",
+            )
 
         # 6. picture blocks balanced within the group
         n_start = out_text.count("<!-- Start of picture text -->")
         n_end = out_text.count("<!-- End of picture text -->")
-        rep.line(n_start == n_end, g.gid,
-                 f"picture blocks balanced (start={n_start} end={n_end})")
+        rep.line(
+            n_start == n_end,
+            g.gid,
+            f"picture blocks balanced (start={n_start} end={n_end})",
+        )
 
     print("-" * 74)
     status = "ALL GROUPS PASS" if rep.failures == 0 else f"{rep.failures} FAILURES"

@@ -2,24 +2,24 @@
 
 ## Purpose
 
-Release stage of the STE-Code pipeline. Reads the unit's declared
-inputs, transforms them, and writes the declared outputs. Every tunable knob
-lives in `config.yaml` (or the shared `defaults.yaml`), never hardcoded.
+Release stage of the STE-Code pipeline. Reads the unit's declared inputs,
+transforms them, and writes the declared outputs. Every tunable knob lives in
+`config.yaml` (or the shared `defaults.yaml`), never hardcoded.
 
 ## Footprint
 
 ### inputs
 
-  - adapted: `ste-code/adapted`
-  - final: `ste-code/final`
-  - extracted: `ste-code/extracted`
-  - refined: `ste-code/refined`
-  - grouped: `ste-code/grouped`
+- adapted: `ste-code/adapted`
+- final: `ste-code/final`
+- extracted: `ste-code/extracted`
+- refined: `ste-code/refined`
+- grouped: `ste-code/grouped`
 
 ### outputs
 
-  - sandbox: `.agents/tmp/release-selftest`
-  - state: `.agents/state`
+- sandbox: `.agents/tmp/release-selftest`
+- state: `.agents/state`
 
 ## Usage
 
@@ -38,18 +38,21 @@ python3 .agents/tools/release/changelog.py
 ## Configuration
 
 - `agent.model` — inherited from `defaults.yaml` unless this unit overrides it.
-- `runtime.retry_attempts`, `runtime.batch_divisor`, `runtime.encoding` — pre-flight
-  knobs declared in `defaults.yaml` under `runtime:`.
-- All paths are unit-local in `config.yaml`; shared values stay in `defaults.yaml`.
+- `runtime.retry_attempts`, `runtime.batch_divisor`, `runtime.encoding` —
+  pre-flight knobs declared in `defaults.yaml` under `runtime:`.
+- All paths are unit-local in `config.yaml`; shared values stay in
+  `defaults.yaml`.
 
 ## Failure modes
 
-- Worker timeout (`agent.timeout_s`): the caller retries up to `runtime.retry_attempts`.
-- HTTP 429 from the model API: back off; keep concurrency at `agent.workers_per_batch`
-  (above 3 the free tier rate-limits).
+- Worker timeout (`agent.timeout_s`): the caller retries up to
+  `runtime.retry_attempts`.
+- HTTP 429 from the model API: back off; keep concurrency at
+  `agent.workers_per_batch` (above 3 the free tier rate-limits).
 - Partial write: `ste_io` is atomic, and the checkpoint lets a re-run resume.
 
 ## See also
 
-- ../lib/README.md (shared helpers: ste_io, ste_config, ste_runtime, ste_checkpoint)
+- ../lib/README.md (shared helpers: ste_io, ste_config, ste_runtime,
+  ste_checkpoint)
 - ../../config/defaults.yaml (shared agent + runtime defaults)

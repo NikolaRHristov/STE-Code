@@ -1,50 +1,108 @@
 [
-  {
-    "id": "bench-040",
-    "category": "gen_pr_review",
-    "description": "Review code with vague variable names",
-    "prompt": "Review this code and write feedback using STE-Code principles:\n\n```python\ndef process(x, y):\n    tmp = x + y\n    if tmp > 100:\n        return stuff(tmp)\n    return None\n```\n\nPoint out issues with clear, constructive language. No slang, no \"this is bad\" without explanation.",
-    "expected_principles": ["P1", "P10", "P14"],
-    "expected_keywords": ["variable", "name", "descriptive", "function", "rename", "return", "suggest"],
-    "forbidden_keywords": ["stuff", "thing", "bad", "ugly", "messy", "stupid", "should probably"],
-    "required_patterns": [],
-    "max_tokens": 400,
-    "difficulty": "easy"
-  },
-  {
-    "id": "bench-041",
-    "category": "gen_pr_review",
-    "description": "Review error handling with constructive feedback",
-    "prompt": "Review this error handling and write STE-Code compliant feedback:\n\n```javascript\ntry {\n    const data = await getStuffFromDB();\n    return data;\n} catch (e) {\n    console.log('something went wrong');\n    throw new Error('oops');\n}\n```\n\nFocus on: error message clarity, approved terms, actionable suggestions.",
-    "expected_principles": ["P1", "P3", "P14"],
-    "expected_keywords": ["error", "message", "clear", "specific", "log", "catch", "describe"],
-    "forbidden_keywords": ["stuff", "something went wrong", "oops", "lazy", "terrible"],
-    "required_patterns": [],
-    "max_tokens": 400,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-042",
-    "category": "gen_pr_review",
-    "description": "Review naming and structure issues",
-    "prompt": "Review this React component for STE-Code compliance in its documentation and naming:\n\n```jsx\n// This component does the user stuff\nconst UserStuff = ({ data }) => {\n  // Fetch the things we need\n  const items = useMemo(() => data.map(d => d.item), [data]);\n  \n  // Show everything\n  return <div>{items.map(i => <p>{i}</p>)}</div>;\n};\n```\n\nWrite feedback on: naming, comments, clarity. Use approved terms.",
-    "expected_principles": ["P1", "P10", "P11"],
-    "expected_keywords": ["component", "name", "comment", "clear", "rename", "describe"],
-    "forbidden_keywords": ["stuff", "things", "everything", "does the", "bad name"],
-    "required_patterns": [],
-    "max_tokens": 450,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-043",
-    "category": "gen_pr_review",
-    "description": "Full PR review with multiple file feedback",
-    "prompt": "Review this PR that adds a new API endpoint. Write comprehensive STE-Code compliant feedback covering:\n- Function naming and docstrings\n- Error handling clarity\n- API route naming\n\n```python\n@app.route('/api/v1/doStuff', methods=['POST'])\ndef handle_request():\n    \"\"\"Handles the request stuff\"\"\"\n    try:\n        data = request.get_json()\n        result = process_data(data)\n        return jsonify({'status': 'ok', 'data': result})\n    except:\n        return jsonify({'error': 'Something failed'}), 500\n```",
-    "expected_principles": ["P1", "P10", "P11", "P14"],
-    "expected_keywords": ["endpoint", "route", "docstring", "error", "specific", "function name", "rename"],
-    "forbidden_keywords": ["stuff", "doStuff", "handles the", "Something failed", "ugly", "wrong"],
-    "required_patterns": [],
-    "max_tokens": 600,
-    "difficulty": "hard"
-  }
+	{
+		"id": "bench-040",
+		"category": "gen_pr_review",
+		"description": "Review code with vague variable names",
+		"prompt": "Review this code and write feedback using STE-Code principles:\n\n```python\ndef process(x, y):\n    tmp = x + y\n    if tmp > 100:\n        return stuff(tmp)\n    return None\n```\n\nPoint out issues with clear, constructive language. No slang, no \"this is bad\" without explanation.",
+		"expected_principles": ["P1", "P10", "P14"],
+		"expected_keywords": [
+			"variable",
+			"name",
+			"descriptive",
+			"function",
+			"rename",
+			"return",
+			"suggest"
+		],
+		"forbidden_keywords": [
+			"stuff",
+			"thing",
+			"bad",
+			"ugly",
+			"messy",
+			"stupid",
+			"should probably"
+		],
+		"required_patterns": [],
+		"max_tokens": 400,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-041",
+		"category": "gen_pr_review",
+		"description": "Review error handling with constructive feedback",
+		"prompt": "Review this error handling and write STE-Code compliant feedback:\n\n```javascript\ntry {\n    const data = await getStuffFromDB();\n    return data;\n} catch (e) {\n    console.log('something went wrong');\n    throw new Error('oops');\n}\n```\n\nFocus on: error message clarity, approved terms, actionable suggestions.",
+		"expected_principles": ["P1", "P3", "P14"],
+		"expected_keywords": [
+			"error",
+			"message",
+			"clear",
+			"specific",
+			"log",
+			"catch",
+			"describe"
+		],
+		"forbidden_keywords": [
+			"stuff",
+			"something went wrong",
+			"oops",
+			"lazy",
+			"terrible"
+		],
+		"required_patterns": [],
+		"max_tokens": 400,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-042",
+		"category": "gen_pr_review",
+		"description": "Review naming and structure issues",
+		"prompt": "Review this React component for STE-Code compliance in its documentation and naming:\n\n```jsx\n// This component does the user stuff\nconst UserStuff = ({ data }) => {\n  // Fetch the things we need\n  const items = useMemo(() => data.map(d => d.item), [data]);\n  \n  // Show everything\n  return <div>{items.map(i => <p>{i}</p>)}</div>;\n};\n```\n\nWrite feedback on: naming, comments, clarity. Use approved terms.",
+		"expected_principles": ["P1", "P10", "P11"],
+		"expected_keywords": [
+			"component",
+			"name",
+			"comment",
+			"clear",
+			"rename",
+			"describe"
+		],
+		"forbidden_keywords": [
+			"stuff",
+			"things",
+			"everything",
+			"does the",
+			"bad name"
+		],
+		"required_patterns": [],
+		"max_tokens": 450,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-043",
+		"category": "gen_pr_review",
+		"description": "Full PR review with multiple file feedback",
+		"prompt": "Review this PR that adds a new API endpoint. Write comprehensive STE-Code compliant feedback covering:\n- Function naming and docstrings\n- Error handling clarity\n- API route naming\n\n```python\n@app.route('/api/v1/doStuff', methods=['POST'])\ndef handle_request():\n    \"\"\"Handles the request stuff\"\"\"\n    try:\n        data = request.get_json()\n        result = process_data(data)\n        return jsonify({'status': 'ok', 'data': result})\n    except:\n        return jsonify({'error': 'Something failed'}), 500\n```",
+		"expected_principles": ["P1", "P10", "P11", "P14"],
+		"expected_keywords": [
+			"endpoint",
+			"route",
+			"docstring",
+			"error",
+			"specific",
+			"function name",
+			"rename"
+		],
+		"forbidden_keywords": [
+			"stuff",
+			"doStuff",
+			"handles the",
+			"Something failed",
+			"ugly",
+			"wrong"
+		],
+		"required_patterns": [],
+		"max_tokens": 600,
+		"difficulty": "hard"
+	}
 ]

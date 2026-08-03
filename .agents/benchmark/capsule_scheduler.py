@@ -14,6 +14,7 @@ Offline (--skip-live) timing offsets are encoded as ``timing`` metadata on the
 scoped escapes (``delayed_<N>s``) so temporal patterns are visible in the
 knowledge base without real wall-clock delays.
 """
+
 from __future__ import annotations
 
 import subprocess
@@ -36,8 +37,11 @@ def load_sequence(cfg, name: str = "sequence.yaml") -> "list[dict]":
     if not path.exists():
         return []
     try:
-        docs = [d for d in yaml.safe_load_all(path.read_text(encoding="utf-8"))
-                if isinstance(d, dict)]
+        docs = [
+            d
+            for d in yaml.safe_load_all(path.read_text(encoding="utf-8"))
+            if isinstance(d, dict)
+        ]
     except (yaml.YAMLError, OSError):
         return []
     return docs
@@ -59,13 +63,15 @@ def resolve_order(seq: dict) -> "list[dict]":
                 seen.add(cid)
                 progressed = True
         if not progressed:
-            raise ValueError("cycle in capsule sees graph: {}"
-                             .format(sorted(remaining)))
+            raise ValueError(
+                "cycle in capsule sees graph: {}".format(sorted(remaining))
+            )
     return order
 
 
-def _scoped_escapes(base: Path, seq_id: str, capsule: dict,
-                    all_capsules: "dict[str, dict]") -> "Path | None":
+def _scoped_escapes(
+    base: Path, seq_id: str, capsule: dict, all_capsules: "dict[str, dict]"
+) -> "Path | None":
     """Build (and write) the sees-scoped escape file for a BLUE capsule.
 
     A BLUE capsule at position p with sees=[R1,R2] reads the escape files from
@@ -73,6 +79,7 @@ def _scoped_escapes(base: Path, seq_id: str, capsule: dict,
     file, or None if there is nothing to scope (unusual).
     """
     import json
+
     seen = capsule.get("sees", []) or []
     if not seen:
         return None
@@ -103,8 +110,15 @@ def _scoped_escapes(base: Path, seq_id: str, capsule: dict,
     return out_path
 
 
-def run_sequence(base: Path, seq: dict, cfg, *, skip_live: bool = True,
-                 await_timeout: float = 120.0, poll: float = 1.0) -> "list[dict]":
+def run_sequence(
+    base: Path,
+    seq: dict,
+    cfg,
+    *,
+    skip_live: bool = True,
+    await_timeout: float = 120.0,
+    poll: float = 1.0,
+) -> "list[dict]":
     """Execute a capsule sequence. Returns a list of per-capsule result records.
 
     Each capsule is launched as a subprocess of its colour module (red.py /
@@ -113,6 +127,7 @@ def run_sequence(base: Path, seq: dict, cfg, *, skip_live: bool = True,
     this unit).
     """
     import json
+
     seq_id = seq.get("sequence_id", "seq")
     all_caps = {c["id"]: c for c in seq.get("capsules", [])}
     order = resolve_order(seq)
@@ -134,8 +149,9 @@ def run_sequence(base: Path, seq: dict, cfg, *, skip_live: bool = True,
         for dep in cap.get("sees", []) or []:
             dep_path = sentinels.get(dep)
             if dep_path and not _await_file(dep_path, await_timeout, poll):
-                results.append({"id": cid, "status": "await-timeout",
-                                 "missing_dep": dep})
+                results.append(
+                    {"id": cid, "status": "await-timeout", "missing_dep": dep}
+                )
                 break
         else:
             # build scoped escapes for BLUE
@@ -146,37 +162,60 @@ def run_sequence(base: Path, seq: dict, cfg, *, skip_live: bool = True,
                     extra = ["--escape-override", str(scoped)]
 
             module = "red" if colour == "red" else "blue"
-            cmd = [sys.executable, str(BENCH / f"{module}.py"),
-                   "--skip-live" if skip_live else "--model",
-                   "tencent/hy3:free" if not skip_live else "",
-                   "--tiers", variant,
-                   "--rounds", str(rnd),
-                   "--base", str(base),
-                   "--await-timeout", str(await_timeout),
-                   "--poll-interval", str(poll)] + extra
+            cmd = [
+                sys.executable,
+                str(BENCH / f"{module}.py"),
+                "--skip-live" if skip_live else "--model",
+                "tencent/hy3:free" if not skip_live else "",
+                "--tiers",
+                variant,
+                "--rounds",
+                str(rnd),
+                "--base",
+                str(base),
+                "--await-timeout",
+                str(await_timeout),
+                "--poll-interval",
+                str(poll),
+            ] + extra
             if colour == "blue":
                 intent = cap.get("intent", "adversarial")
                 if intent in ("helpful", "hybrid"):
                     cmd += ["--blue-intent", intent]
             cmd = [c for c in cmd if c]  # drop empty model arg
-            proc = subprocess.run(cmd, capture_output=True, text=True,
-                                  cwd=str(BENCH), timeout=int(await_timeout) + 60)
+            proc = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                cwd=str(BENCH),
+                timeout=int(await_timeout) + 60,
+            )
             # record sentinel location for dependents
-            sentinel = (base / f"variant{variant}" / f"round{rnd}" /
-                        ("purple.json" if colour == "red" else "blue-done.json"))
+            sentinel = (
+                base
+                / f"variant{variant}"
+                / f"round{rnd}"
+                / ("purple.json" if colour == "red" else "blue-done.json")
+            )
             sentinels[cid] = sentinel
-            results.append({
-                "id": cid, "colour": colour, "variant": variant, "round": rnd,
-                "status": "done" if proc.returncode == 0 else "error",
-                "rc": proc.returncode,
-                "sentinel": str(sentinel),
-            })
+            results.append(
+                {
+                    "id": cid,
+                    "colour": colour,
+                    "variant": variant,
+                    "round": rnd,
+                    "status": "done" if proc.returncode == 0 else "error",
+                    "rc": proc.returncode,
+                    "sentinel": str(sentinel),
+                }
+            )
     return results
 
 
 def _await_file(path: Path, timeout: float, poll: float) -> bool:
     """Bounded wait for a sentinel file (mirrors the colours' own await)."""
     import os
+
     deadline = time.time() + timeout
     while time.time() < deadline:
         if path.exists():
@@ -198,17 +237,22 @@ def summarize_entropy(seq: dict, escapes_by_capsule: "dict[str, list]") -> dict:
             if isinstance(e, dict) and e.get("technique") and e.get("placement"):
                 cells.add((e["technique"], e["placement"]))
                 total += 1
-    return {"distinct_cells": len(cells), "total_escapes": total,
-            "sequence_id": seq.get("sequence_id")}
+    return {
+        "distinct_cells": len(cells),
+        "total_escapes": total,
+        "sequence_id": seq.get("sequence_id"),
+    }
 
 
 if __name__ == "__main__":
     from harness_config import load_config
+
     cfg = load_config()
     seqs = load_sequence(cfg)
     if not seqs:
         print("no sequence.yaml in profile dir; nothing to schedule")
         sys.exit(0)
     for seq in seqs:
-        print(seq.get("sequence_id"), "-> order:",
-              [c["id"] for c in resolve_order(seq)])
+        print(
+            seq.get("sequence_id"), "-> order:", [c["id"] for c in resolve_order(seq)]
+        )

@@ -24,6 +24,7 @@ Usage:
   python3 generate_adhoc_tests.py --out-dir .agents/benchmark/test-cases-adhoc
   python3 generate_adhoc_tests.py --out-dir DIR --seed 7 --per-static 2
 """
+
 from __future__ import annotations
 
 import argparse
@@ -34,8 +35,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -43,24 +48,65 @@ PROJECT = _repo_root(__file__)
 STATIC_DIR = PROJECT / ".agents" / "benchmark" / "test-cases"
 
 # Violation phrase bank: jargon / hedging / passive / noun-as-verb to inject.
-SLANG = ["a bunch of", "a ton of", "stuff", "things", "kinda", "sorta",
-         "utilizes", "leverages", "orchestrates", "facilitates", "a whole host of"]
-HEDGE = ["should probably", "might want to", "ideally", "generally", "basically",
-         "for the most part", "more or less", "you may wish to"]
-PASSIVE = ["can be processed", "are able to be converted", "will be displayed",
-           "gets handled", "is being done", "was performed", "gets executed"]
-NOUN_AS_VERB = ["Docker the application", "Kubernetes the deployment",
-                "plugin the build", "containerize the service", "cache the result",
-                "queue the message", "tokenize the input"]
+SLANG = [
+    "a bunch of",
+    "a ton of",
+    "stuff",
+    "things",
+    "kinda",
+    "sorta",
+    "utilizes",
+    "leverages",
+    "orchestrates",
+    "facilitates",
+    "a whole host of",
+]
+HEDGE = [
+    "should probably",
+    "might want to",
+    "ideally",
+    "generally",
+    "basically",
+    "for the most part",
+    "more or less",
+    "you may wish to",
+]
+PASSIVE = [
+    "can be processed",
+    "are able to be converted",
+    "will be displayed",
+    "gets handled",
+    "is being done",
+    "was performed",
+    "gets executed",
+]
+NOUN_AS_VERB = [
+    "Docker the application",
+    "Kubernetes the deployment",
+    "plugin the build",
+    "containerize the service",
+    "cache the result",
+    "queue the message",
+    "tokenize the input",
+]
 WEAK_VERB = ["does", "makes", "handles", "does a", "performs a", "carries out a"]
 
 # Per-category realistic code-domain noun to vary the input subject.
 SUBJECTS = {
-    "readme": "library", "api-doc": "endpoint", "commit": "commit message",
-    "error": "error message", "comment": "code comment", "changelog": "changelog",
-    "config": "config file", "composite": "module", "gen-function": "function",
-    "gen-pr-review": "pull request", "gen-api-doc": "API reference",
-    "gen-commit": "commit", "gen-error": "exception", "gen-readme": "README",
+    "readme": "library",
+    "api-doc": "endpoint",
+    "commit": "commit message",
+    "error": "error message",
+    "comment": "code comment",
+    "changelog": "changelog",
+    "config": "config file",
+    "composite": "module",
+    "gen-function": "function",
+    "gen-pr-review": "pull request",
+    "gen-api-doc": "API reference",
+    "gen-commit": "commit",
+    "gen-error": "exception",
+    "gen-readme": "README",
 }
 
 CATEGORIES = list(SUBJECTS.keys())
@@ -92,13 +138,21 @@ def _rephrase(static_case: dict, rng: random.Random, idx: int) -> dict:
         "expected_principles": static_case.get("expected_principles", []),
         "expected_keywords": static_case.get("expected_keywords", []),
         # Flatten static forbidden keywords (may include multi-word phrases as lists).
-        "forbidden_keywords": sorted(set(
-            [w for kw in static_case.get("forbidden_keywords", [])
-             for w in (kw if isinstance(kw, list) else [kw])
-             if isinstance(w, str)] +
-            [w for grp in (slang.split(), hedge.split(), nounverb.split())
-             for w in grp]
-        )),
+        "forbidden_keywords": sorted(
+            set(
+                [
+                    w
+                    for kw in static_case.get("forbidden_keywords", [])
+                    for w in (kw if isinstance(kw, list) else [kw])
+                    if isinstance(w, str)
+                ]
+                + [
+                    w
+                    for grp in (slang.split(), hedge.split(), nounverb.split())
+                    for w in grp
+                ]
+            )
+        ),
         "max_tokens": static_case.get("max_tokens", 300),
         "difficulty": static_case.get("difficulty", "medium"),
         "generated": True,
@@ -118,28 +172,34 @@ def _templated(rng: random.Random, idx: int) -> list[dict]:
                 f"The {subject} {slang}. It {hedge} {rng.choice(WEAK_VERB)} the "
                 f"work done, and the output {passive} automatically."
             )
-            out.append({
-                "id": f"adhoc-tpl-{cat}-{idx:03d}-{k}",
-                "category": cat,
-                "description": f"ad-hoc templated {cat} snippet (generated)",
-                "input": new_input,
-                "expected_principles": ["P1", "P10", "P4"],
-                "expected_keywords": [subject],
-                "forbidden_keywords": sorted(set(
-                    slang.split() + hedge.split() + passive.split())),
-                "max_tokens": 300,
-                "difficulty": "medium",
-                "generated": True,
-            })
+            out.append(
+                {
+                    "id": f"adhoc-tpl-{cat}-{idx:03d}-{k}",
+                    "category": cat,
+                    "description": f"ad-hoc templated {cat} snippet (generated)",
+                    "input": new_input,
+                    "expected_principles": ["P1", "P10", "P4"],
+                    "expected_keywords": [subject],
+                    "forbidden_keywords": sorted(
+                        set(slang.split() + hedge.split() + passive.split())
+                    ),
+                    "max_tokens": 300,
+                    "difficulty": "medium",
+                    "generated": True,
+                }
+            )
     return out
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out-dir", default=str(PROJECT / ".agents" / "benchmark" / "test-cases-adhoc"))
+    ap.add_argument(
+        "--out-dir", default=str(PROJECT / ".agents" / "benchmark" / "test-cases-adhoc")
+    )
     ap.add_argument("--seed", type=int, default=7)
-    ap.add_argument("--per-static", type=int, default=2,
-                    help="variants generated per static case")
+    ap.add_argument(
+        "--per-static", type=int, default=2, help="variants generated per static case"
+    )
     args = ap.parse_args()
 
     rng = random.Random(args.seed)
@@ -171,10 +231,12 @@ def main() -> int:
     # Write one category-adhoc-<cat>.json per category (mirrors static layout).
     for cat, cases in by_cat.items():
         (out_dir / f"category-adhoc-{cat}.json").write_text(
-            json.dumps(cases, indent=2), encoding="utf-8")
+            json.dumps(cases, indent=2), encoding="utf-8"
+        )
 
-    print(f"Generated {total} ad-hoc cases across {len(by_cat)} categories "
-          f"-> {out_dir}")
+    print(
+        f"Generated {total} ad-hoc cases across {len(by_cat)} categories -> {out_dir}"
+    )
     return 0
 
 

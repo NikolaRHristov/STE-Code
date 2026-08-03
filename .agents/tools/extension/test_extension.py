@@ -3,6 +3,7 @@
 
 Run: python3 .agents/tools/extension/test_extension.py
 """
+
 import sys
 import json
 import tempfile
@@ -11,8 +12,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -21,6 +26,7 @@ sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "extension"))
 
 from templater import Templater
+
 EXT = __import__("extend_batch")
 VR = __import__("verify_extensions")
 MDJ = __import__("md_to_json")
@@ -43,8 +49,7 @@ TPL = Templater(PROJECT / ".agents" / "tools" / "extension" / "extend_batch.py")
 
 def t_prompt_render():
     print("E1 extension area prompt renders strict, no leftover {{}}, markdown-only")
-    out = TPL.render("extend-area", area="verbs", count=20,
-                     out_path="/tmp/x.md")
+    out = TPL.render("extend-area", area="verbs", count=20, out_path="/tmp/x.md")
     check("renders", "Extension Worker" in out)
     check("no leftover {{", "{{" not in out)
     check("markdown-only (no 'Output ONLY a valid JSON')", "valid JSON" not in out)
@@ -86,7 +91,9 @@ def t_gate_logic():
     check("clean markdown passes", ok, why)
     # Bad: fabrication + short definition
     bad = d / "adjectives.md"
-    bad.write_text("### x\n\n- **type**: adjective\n- **definition**: short\n- **source**: b\n")
+    bad.write_text(
+        "### x\n\n- **type**: adjective\n- **definition**: short\n- **source**: b\n"
+    )
     ok2, why2 = EXT._gate_ok(bad)
     check("bad fails", not ok2, why2)
     EXT.EXT_DIR = PROJECT / "ste-code" / "extensions"
@@ -109,18 +116,30 @@ def t_md_to_json():
 def t_verify_script():
     print("E4 verify_extensions.py on synthetic markdown dir")
     import subprocess
+
     d = Path(tempfile.mkdtemp())
     (d / "verbs.md").write_text(_good_md())
     MDJ.md_to_json(d / "verbs.md")  # produce derived JSON so Gate1b passes
-    r = subprocess.run([sys.executable, str(PROJECT / ".agents" / "tools" / "extension" / "verify_extensions.py"),
-                        "--dir", str(d)], capture_output=True, text=True, cwd=str(PROJECT))
-    check("verify exits 0 on clean markdown+json", r.returncode == 0, r.stdout + r.stderr)
+    r = subprocess.run(
+        [
+            sys.executable,
+            str(PROJECT / ".agents" / "tools" / "extension" / "verify_extensions.py"),
+            "--dir",
+            str(d),
+        ],
+        capture_output=True,
+        text=True,
+        cwd=str(PROJECT),
+    )
+    check(
+        "verify exits 0 on clean markdown+json", r.returncode == 0, r.stdout + r.stderr
+    )
 
 
 def main():
     for t in (t_prompt_render, t_gate_logic, t_md_to_json, t_verify_script):
         t()
-    print(f"\n{'='*50}\n{_passed} passed, {_failed} failed\n{'='*50}")
+    print(f"\n{'=' * 50}\n{_passed} passed, {_failed} failed\n{'=' * 50}")
     sys.exit(1 if _failed else 0)
 
 

@@ -1,6 +1,15 @@
 name: privacy-scrub-sanitize
 version: "1.0.0-feat"
-description: "FEAT-ONLY in-place sanitizer for memory writes. A pre_tool_call hook that REDACTS sensitive data (operator identity, credentials, machine paths) from memory tool args IN PLACE using the `modify` action added by PR #28953 (feat/pre-tool-call-content-transform). Unlike privacy-scrub (which BLOCKS the whole write on main), this hook transforms the content before dispatch so the rest of the entry still saves. CRITICAL: this hook MUST NOT run on a standard/main Hermes build — it self-disables when the `modify` action is unavailable. It is intentionally NOT linked or enabled by default; enable only on a feat/ Hermes agent build."
+description:
+    "FEAT-ONLY in-place sanitizer for memory writes. A pre_tool_call hook that
+    REDACTS sensitive data (operator identity, credentials, machine paths) from
+    memory tool args IN PLACE using the `modify` action added by PR #28953
+    (feat/pre-tool-call-content-transform). Unlike privacy-scrub (which BLOCKS
+    the whole write on main), this hook transforms the content before dispatch
+    so the rest of the entry still saves. CRITICAL: this hook MUST NOT run on a
+    standard/main Hermes build — it self-disables when the `modify` action is
+    unavailable. It is intentionally NOT linked or enabled by default; enable
+    only on a feat/ Hermes agent build."
 author: STE-Code
 hooks:
-  - pre_tool_call
+    - pre_tool_call

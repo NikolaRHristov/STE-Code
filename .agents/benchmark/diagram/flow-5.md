@@ -5,8 +5,8 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
-> Previous: [flow-4.md](flow-4.md) · ⚪ WHITE + ⚫ BLACK
-> Series start: [flow.md](flow.md)
+> Previous: [flow-4.md](flow-4.md) · ⚪ WHITE + ⚫ BLACK Series start:
+> [flow.md](flow.md)
 
 ---
 
@@ -77,9 +77,9 @@ entire coordination protocol.
 
 ## 2. Level ladder — what changes as the prompt grows
 
-`REAL (archived)` — the three tiers that completed live runs (of 17
-attempted). ⚠ These result dirs were deleted by a concurrent session mid-write;
-figures are as recorded but no longer re-verifiable:
+`REAL (archived)` — the three tiers that completed live runs (of 17 attempted).
+⚠ These result dirs were deleted by a concurrent session mid-write; figures are
+as recorded but no longer re-verifiable:
 
 ```
   level  prompt  pass    corr    avg latency
@@ -96,8 +96,8 @@ figures are as recorded but no longer re-verifiable:
 
 > ⚠ **The ladder is not monotonic, and the ordering is not what you would
 > expect.** Level -1 (26 KB) beats level -2 (5 KB) — fine, more prompt helps.
-> But level 0 (17 KB, *more* than -2) scores **worst** at 84.7%. And level -2
-> has the *highest* average correctness (0.914) while having a lower pass rate
+> But level 0 (17 KB, _more_ than -2) scores **worst** at 84.7%. And level -2
+> has the _highest_ average correctness (0.914) while having a lower pass rate
 > than -1.
 >
 > With n=59 and 2–9 failures per tier, these gaps are inside the noise floor.
@@ -140,9 +140,9 @@ severity.
   312  "blue_passed": bp,                 ← writes 0 offline, always
 ```
 
-**Impact** — any consumer reading `blue_passed` instead of
-`blue_pass_rate_pct` concludes the defense failed completely. The summarizer
-being built in the other session is exactly such a consumer.
+**Impact** — any consumer reading `blue_passed` instead of `blue_pass_rate_pct`
+concludes the defense failed completely. The summarizer being built in the other
+session is exactly such a consumer.
 
 **Fix** — in the offline branch, set
 `bp = sum(t["probes_passed"] for t in table)` before the write.
@@ -159,17 +159,16 @@ being built in the other session is exactly such a consumer.
 ```
 
 Under `--skip-live` RED never calls a model, so nothing is scored and both
-counters stay at their initial zero. But **`purple.json` carries no
-`simulated` flag** — unlike PURPLE's `report.json`, which does
-(`"simulated": true`).
+counters stay at their initial zero. But **`purple.json` carries no `simulated`
+flag** — unlike PURPLE's `report.json`, which does (`"simulated": true`).
 
 **Impact** — a 0.0% pass rate reads as total failure of the level. The
 distinction between "measured zero" and "never measured" is invisible to any
 downstream reader.
 
-**Fix** — write `"mode": "offline"` / `"simulated": true` into `purple.json`
-and `blue-done.json` whenever `--skip-live` is set. PURPLE already models the
-right behaviour; copy it.
+**Fix** — write `"mode": "offline"` / `"simulated": true` into `purple.json` and
+`blue-done.json` whenever `--skip-live` is set. PURPLE already models the right
+behaviour; copy it.
 
 ---
 
@@ -193,7 +192,7 @@ Which was **trivially true** — escapes.json was empty. BLACK verified an empty
 claim against empty data and confirmed it 40 times.
 
 **Impact** — a verifier that cannot detect a known-broken input is not
-verifying. The 40/40 result *looks* like strong validation and is worth nothing.
+verifying. The 40/40 result _looks_ like strong validation and is worth nothing.
 
 **Fix** — BLACK should emit `underpowered` (not `confirmed`) when the evidence
 set is empty, and the run summary should surface "0 hypotheses tested" rather
@@ -210,15 +209,15 @@ than "40 confirmed".
 ```
 
 All six timings (`immediate`, `escalating`, `decaying`, `burst`, `drip`,
-`oscillating`) describe behaviour *across rounds*. In a single-round run they
+`oscillating`) describe behaviour _across rounds_. In a single-round run they
 are identical.
 
 **Impact** — a 1-round run costs 6× what its information content justifies. At
 the measured ~19 runs/hour, that is **21 wasted hours per level**.
 
 **Fix** — either default `--rounds` to 6 so timings mean something, or collapse
-timings to `immediate` when `rounds == 1` (480 → 80 runs, same information).
-The second is the cheap win.
+timings to `immediate` when `rounds == 1` (480 → 80 runs, same information). The
+second is the cheap win.
 
 ---
 
@@ -252,10 +251,10 @@ checkpoint.
   5  delayed writes a false success sentinel   design gap    MEDIUM
 ```
 
-**The common thread:** every one of these makes a *non-result look like a
-result*. None of them causes a crash; all of them survive into the reports.
-That is the failure mode this harness is most exposed to — and, given that
-BLACK exists precisely to catch it, the most important class to fix first.
+**The common thread:** every one of these makes a _non-result look like a
+result_. None of them causes a crash; all of them survive into the reports. That
+is the failure mode this harness is most exposed to — and, given that BLACK
+exists precisely to catch it, the most important class to fix first.
 
 ---
 
@@ -282,7 +281,8 @@ out** at the 3,600 s ceiling.
 
 > The 60-minute per-job timeout is a **blocking defect**, not a tuning
 > preference. A 480-case RED phase at 19 runs/hour needs 25 hours. It will
-> *always* hit the wall. RED must be sharded, or `--timeout` raised past 90,000 s.
+> _always_ hit the wall. RED must be sharded, or `--timeout` raised past 90,000
+> s.
 
 ---
 

@@ -1,6 +1,9 @@
 name: jail-fs
 version: "1.0.0"
-description: "Confine filesystem writes to the roots the active jail policy allows. Granular component of ste-code-jail; guards write_file, patch, skill_manage, terminal and execute_code. Reads are never restricted."
+description:
+    "Confine filesystem writes to the roots the active jail policy allows.
+    Granular component of ste-code-jail; guards write_file, patch, skill_manage,
+    terminal and execute_code. Reads are never restricted."
 author: STE-Code
 hooks:
-  - pre_tool_call
+    - pre_tool_call

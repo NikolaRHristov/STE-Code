@@ -11,14 +11,19 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
 from ste_time import run_stamp  # noqa: E402
+
 TEST_DIR = PROJECT / ".agents" / "benchmark" / "test-cases"
 RESULTS_DIR = PROJECT / ".agents" / "benchmark" / "results-v3"
 
@@ -31,7 +36,12 @@ LEVEL_PROMPTS = {
 
 # Load scoring rules from benchmark_lib
 sys.path.insert(0, str(PROJECT / ".agents" / "benchmark"))
-from benchmark_lib import PRINCIPLE_KEYWORDS, calc_correctness, check_principles, check_keywords
+from benchmark_lib import (
+    PRINCIPLE_KEYWORDS,
+    calc_correctness,
+    check_principles,
+    check_keywords,
+)
 
 
 def load_tests():
@@ -56,7 +66,9 @@ TEXT:
     try:
         result = subprocess.run(
             ["hermes", "-z", full_prompt, "-m", model, "--yolo"],
-            capture_output=True, text=True, timeout=120,
+            capture_output=True,
+            text=True,
+            timeout=120,
         )
         elapsed = time.time() - start
         return result.stdout.strip(), elapsed, result.returncode
@@ -98,8 +110,10 @@ def main():
     system_prompt = prompt_file.read_text()
     tests = load_tests()
 
-    print(f"Level {level}: {prompt_file.name} ({len(system_prompt)//4:,} tokens)")
-    print(f"Tests: {len(tests)} across {len(list(TEST_DIR.glob('category-*.json')))} categories")
+    print(f"Level {level}: {prompt_file.name} ({len(system_prompt) // 4:,} tokens)")
+    print(
+        f"Tests: {len(tests)} across {len(list(TEST_DIR.glob('category-*.json')))} categories"
+    )
 
     if dry_run:
         return
@@ -109,23 +123,25 @@ def main():
     results = []
 
     for i, tc in enumerate(tests):
-        print(f"  [{i+1}/{len(tests)}] {tc['id']}...", end=" ", flush=True)
+        print(f"  [{i + 1}/{len(tests)}] {tc['id']}...", end=" ", flush=True)
         output, elapsed, rc = run_test(tc, system_prompt)
         score = score_test(tc, output) if rc == 0 and output != "[TIMEOUT]" else 0.0
         passed = score >= 0.7
         status = "PASS" if passed else "FAIL"
         print(f"{status} ({score:.2f}) in {elapsed:.0f}s")
 
-        results.append({
-            "id": tc["id"],
-            "category": tc.get("category", ""),
-            "input": tc.get("input", tc.get("prompt", "")),
-            "output": output[:500],
-            "score": round(score, 3),
-            "passed": passed,
-            "elapsed": round(elapsed, 1),
-            "exit_code": rc,
-        })
+        results.append(
+            {
+                "id": tc["id"],
+                "category": tc.get("category", ""),
+                "input": tc.get("input", tc.get("prompt", "")),
+                "output": output[:500],
+                "score": round(score, 3),
+                "passed": passed,
+                "elapsed": round(elapsed, 1),
+                "exit_code": rc,
+            }
+        )
 
     # Summary
     passed = sum(1 for r in results if r["passed"])
@@ -138,7 +154,7 @@ def main():
         "prompt_tokens": len(system_prompt) // 4,
         "tests": len(results),
         "passed": passed,
-        "pass_rate": f"{passed}/{len(results)} ({100*passed/len(results):.1f}%)",
+        "pass_rate": f"{passed}/{len(results)} ({100 * passed / len(results):.1f}%)",
         "avg_score": round(avg_score, 3),
         "total_elapsed_s": round(total_time, 1),
         "results": results,
@@ -147,7 +163,9 @@ def main():
     report_file = RESULTS_DIR / f"level-{level}-{timestamp}.json"
     write_text(report_file, json.dumps(report, indent=2))
 
-    print(f"\nLevel {level}: {passed}/{len(results)} passed ({100*passed/len(results):.1f}%)")
+    print(
+        f"\nLevel {level}: {passed}/{len(results)} passed ({100 * passed / len(results):.1f}%)"
+    )
     print(f"Avg score: {avg_score:.3f}")
     print(f"Total time: {total_time:.0f}s")
     print(f"Report: {report_file}")

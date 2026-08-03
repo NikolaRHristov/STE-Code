@@ -1,5 +1,16 @@
-§
-User manages the `<github-org>` GitHub org (family of repos: <repo-a>, <repo-b>, <repo-c>, <repo-d>). Maintains a strict separation: the STE-Code repo is the single source for skills + persistent memory, tracked via relative symlinks into per-profile live dirs (skills two-level, memory one-level). Prefers declarative, anonymized memory (placeholders like `<person>`/`<github-org>`, no quoted directives). Wants profile config to disable ALL non-STE bundled skills so only `ste-code-*` run. Expects delegated/poll-worker work to be verified on disk, not trusted from self-reports.
-§
-§
-Parallel/background work: DEFAULT to poll workers over delegate_task; KEEP delegate_task for quick small tasks. Poll worker = background terminal proc launching a Hermes oneshot FROM A PROMPT FILE, preferring `install.sh`/`link-*.sh` style idempotent scripts. Delegate = produce/write output; poll worker = research/observe. Never trust delegate self-reports — verify deliverables on disk. (Note: raw `hermes -z` is --oneshot + YOLO auto-approve, NOT stricter than delegate_task; make poll workers strict via minimal --toolsets / confined profile.)
+§ User manages the `<github-org>` GitHub org (family of repos: <repo-a>,
+<repo-b>, <repo-c>, <repo-d>). Maintains a strict separation: the STE-Code repo
+is the single source for skills + persistent memory, tracked via relative
+symlinks into per-profile live dirs (skills two-level, memory one-level).
+Prefers declarative, anonymized memory (placeholders like
+`<person>`/`<github-org>`, no quoted directives). Wants profile config to
+disable ALL non-STE bundled skills so only `ste-code-*` run. Expects
+delegated/poll-worker work to be verified on disk, not trusted from
+self-reports. § § Parallel/background work: DEFAULT to poll workers over
+delegate_task; KEEP delegate_task for quick small tasks. Poll worker =
+background terminal proc launching a Hermes oneshot FROM A PROMPT FILE,
+preferring `install.sh`/`link-*.sh` style idempotent scripts. Delegate =
+produce/write output; poll worker = research/observe. Never trust delegate
+self-reports — verify deliverables on disk. (Note: raw `hermes -z` is
+--oneshot + YOLO auto-approve, NOT stricter than delegate_task; make poll
+workers strict via minimal --toolsets / confined profile.)

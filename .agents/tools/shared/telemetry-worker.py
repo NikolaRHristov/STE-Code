@@ -35,22 +35,29 @@ Output:
     "stderr_snippet": ""
   }
 """
+
 import os, sys, json, time, subprocess, re
 from datetime import datetime, timezone
 
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_json  # noqa: E402
 from ste_time import run_stamp  # noqa: E402
+
 TELEMETRY_DIR = os.path.join(PROJECT, ".agents", "telemetry")
 os.makedirs(TELEMETRY_DIR, exist_ok=True)
+
 
 def load_reasoning_effort():
     """Read reasoning_effort from hermes config."""
@@ -58,12 +65,13 @@ def load_reasoning_effort():
     try:
         with open(config_path) as f:
             for line in f:
-                m = re.match(r'\s*reasoning_effort:\s*(\S+)', line)
+                m = re.match(r"\s*reasoning_effort:\s*(\S+)", line)
                 if m:
                     return m.group(1)
     except:
         pass
     return "unknown"
+
 
 def validate_json_output(filepath):
     """Check if output file is valid JSON and count entries."""
@@ -76,15 +84,33 @@ def validate_json_output(filepath):
     except:
         return False, 0
 
+
 def check_self_healing(filepath):
     """Scan output for self-healing signals."""
-    healing = {"blacklist_hits": 0, "aerospace_terms_found": 0, "duplicate_entries": 0, "retries": 0, "status": "PASS"}
+    healing = {
+        "blacklist_hits": 0,
+        "aerospace_terms_found": 0,
+        "duplicate_entries": 0,
+        "retries": 0,
+        "status": "PASS",
+    }
     try:
         with open(filepath) as f:
             content = f.read().lower()
-        aerospace = ["aircraft", "engine", "ream", "flange", "screw", "actuator", "fuselage", "landing gear", "aero plane", "aero engine"]
+        aerospace = [
+            "aircraft",
+            "engine",
+            "ream",
+            "flange",
+            "screw",
+            "actuator",
+            "fuselage",
+            "landing gear",
+            "aero plane",
+            "aero engine",
+        ]
         for term in aerospace:
-            if re.search(r'\b' + re.escape(term) + r'\b', content):
+            if re.search(r"\b" + re.escape(term) + r"\b", content):
                 healing["aerospace_terms_found"] += 1
         if healing["aerospace_terms_found"] > 0:
             healing["status"] = "WARN"
@@ -92,9 +118,12 @@ def check_self_healing(filepath):
         healing["status"] = "UNREADABLE"
     return healing
 
+
 def main():
     if len(sys.argv) < 3:
-        print("Usage: telemetry-worker.py <worker-id> <prompt-file> [--model MODEL] [--output OUTPUT_FILE]")
+        print(
+            "Usage: telemetry-worker.py <worker-id> <prompt-file> [--model MODEL] [--output OUTPUT_FILE]"
+        )
         sys.exit(1)
 
     worker_id = sys.argv[1]
@@ -123,7 +152,7 @@ def main():
         sys.exit(1)
 
     # Build invocation
-    invocation = f"hermes -z \"$(cat {prompt_file})\" -m {model} --yolo"
+    invocation = f'hermes -z "$(cat {prompt_file})" -m {model} --yolo'
 
     # Telemetry record
     reasoning = load_reasoning_effort()
@@ -146,10 +175,12 @@ def main():
         "output_entry_count": 0,
         "self_healing": {},
         "errors": [],
-        "stderr_snippet": ""
+        "stderr_snippet": "",
     }
 
-    print(f"[telemetry] worker={worker_id} model={model} reasoning={reasoning} prompt={prompt_size}B")
+    print(
+        f"[telemetry] worker={worker_id} model={model} reasoning={reasoning} prompt={prompt_size}B"
+    )
 
     # Launch worker
     start = time.time()
@@ -158,9 +189,10 @@ def main():
     try:
         result = subprocess.run(
             ["hermes", "-z", prompt_content, "-m", model, "--yolo"],
-            capture_output=True, text=True,
+            capture_output=True,
+            text=True,
             cwd=PROJECT,
-            timeout=600
+            timeout=600,
         )
         duration = time.time() - start
         telemetry["duration_seconds"] = round(duration, 1)
@@ -171,13 +203,23 @@ def main():
             telemetry["stderr_snippet"] = result.stderr[:500]
 
         if result.stdout:
-            errors = [l for l in result.stdout.split("\n") if "error" in l.lower() or "fail" in l.lower() or "traceback" in l.lower()]
+            errors = [
+                l
+                for l in result.stdout.split("\n")
+                if "error" in l.lower()
+                or "fail" in l.lower()
+                or "traceback" in l.lower()
+            ]
             if errors:
                 telemetry["errors"] = errors[:10]
 
         # Verify output
         if output_file:
-            full_output = os.path.join(PROJECT, output_file) if not os.path.isabs(output_file) else output_file
+            full_output = (
+                os.path.join(PROJECT, output_file)
+                if not os.path.isabs(output_file)
+                else output_file
+            )
             if os.path.exists(full_output):
                 telemetry["output_exists"] = True
                 telemetry["output_size_bytes"] = os.path.getsize(full_output)
@@ -188,8 +230,12 @@ def main():
             else:
                 telemetry["errors"].append(f"Output file not found: {full_output}")
 
-        status = "PASS" if result.returncode == 0 and telemetry["output_exists"] else "FAIL"
-        print(f"[telemetry] {status} duration={duration:.1f}s exit={result.returncode} output={'found' if telemetry['output_exists'] else 'MISSING'} size={telemetry['output_size_bytes']}B entries={telemetry['output_entry_count']}")
+        status = (
+            "PASS" if result.returncode == 0 and telemetry["output_exists"] else "FAIL"
+        )
+        print(
+            f"[telemetry] {status} duration={duration:.1f}s exit={result.returncode} output={'found' if telemetry['output_exists'] else 'MISSING'} size={telemetry['output_size_bytes']}B entries={telemetry['output_entry_count']}"
+        )
 
     except subprocess.TimeoutExpired:
         duration = time.time() - start
@@ -210,7 +256,12 @@ def main():
     # Write telemetry
     write_json(telemetry_path, telemetry)
 
-    return telemetry["exit_code"] if telemetry["exit_code"] and telemetry["exit_code"] > 0 else (1 if not telemetry["output_exists"] else 0)
+    return (
+        telemetry["exit_code"]
+        if telemetry["exit_code"] and telemetry["exit_code"] > 0
+        else (1 if not telemetry["output_exists"] else 0)
+    )
+
 
 if __name__ == "__main__":
     sys.exit(main())

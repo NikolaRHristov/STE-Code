@@ -132,8 +132,7 @@ def register(ctx) -> None:
     )
     if len(_chain) != len(COMPONENTS):
         logger.error(
-            "ste-code-jail: only %d of %d components loaded — the jail is "
-            "INCOMPLETE",
+            "ste-code-jail: only %d of %d components loaded — the jail is INCOMPLETE",
             len(_chain),
             len(COMPONENTS),
         )

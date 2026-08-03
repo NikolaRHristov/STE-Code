@@ -24,13 +24,18 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text  # noqa: E402
+
 REPO = "https://github.com/NikolaRHristov/STE-Code"
 
 SECTIONS = [
@@ -105,14 +110,18 @@ def commits(rev_range: str) -> list[dict]:
 def group(items: list[dict]) -> dict[str, list[dict]]:
     buckets: dict[str, list[dict]] = {}
     for c in items:
-        heading = "Other" if c["type"] is None else TYPE_TO_HEADING.get(c["type"], "Other")
+        heading = (
+            "Other" if c["type"] is None else TYPE_TO_HEADING.get(c["type"], "Other")
+        )
         if c["breaking"]:
             heading = "Changed"
         buckets.setdefault(heading, []).append(c)
     return buckets
 
 
-def render_section(version: str, when: str, items: list[dict], compare: str | None) -> str:
+def render_section(
+    version: str, when: str, items: list[dict], compare: str | None
+) -> str:
     lines = [f"## [{version}] — {when}", ""]
     if not items:
         lines += ["No user-facing changes.", ""]
@@ -185,7 +194,9 @@ def build(next_version: str | None) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--next", metavar="VERSION", help="promote unreleased to this version")
+    ap.add_argument(
+        "--next", metavar="VERSION", help="promote unreleased to this version"
+    )
     ap.add_argument("--stdout", action="store_true", help="print instead of writing")
     ap.add_argument("--notes", metavar="VERSION", help="print one release's notes only")
     args = ap.parse_args()

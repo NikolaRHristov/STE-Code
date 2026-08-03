@@ -16,6 +16,7 @@ Outputs, all under ``<base>``:
     report.json          full machine-readable stitch
     report.md            human-readable summary with the interplay matrices
 """
+
 from __future__ import annotations
 
 import argparse
@@ -74,7 +75,9 @@ class RoundView:
     the report can distinguish "defended successfully" from "never ran".
     """
 
-    def __init__(self, cfg: HarnessConfig, base: Path, variant: str, round_n: int) -> None:
+    def __init__(
+        self, cfg: HarnessConfig, base: Path, variant: str, round_n: int
+    ) -> None:
         self.variant = variant
         self.round = round_n
         self.dir = cfg.round_dir(base, variant, round_n)
@@ -116,14 +119,18 @@ class RoundView:
 class Stitcher:
     """Builds the cross-cutting view from a tree of RoundViews."""
 
-    def __init__(self, cfg: HarnessConfig, base: Path, variants: "list[str]", rounds: int) -> None:
+    def __init__(
+        self, cfg: HarnessConfig, base: Path, variants: "list[str]", rounds: int
+    ) -> None:
         self.cfg = cfg
         self.base = base
         self.variants = variants
         self.rounds = rounds
         self.views: "dict[str, list[RoundView]]" = {}
         for key in variants:
-            self.views[key] = [RoundView(cfg, base, key, n) for n in range(1, rounds + 1)]
+            self.views[key] = [
+                RoundView(cfg, base, key, n) for n in range(1, rounds + 1)
+            ]
 
     # ------------------------------------------------------------ per-variant
 
@@ -137,20 +144,22 @@ class Stitcher:
             red = view.red or {}
             blue = view.blue or {}
             white = view.white or {}
-            timeline.append({
-                "round": view.round,
-                "status": view.status,
-                "red_total": red.get("red_total"),
-                "red_passed": red.get("red_passed"),
-                "red_pass_rate_pct": red.get("red_pass_rate_pct"),
-                "escapes": len(view.escapes),
-                "blue_probes": blue.get("blue_probes"),
-                "blue_pass_rate_pct": blue.get("blue_pass_rate_pct"),
-                "residual_escapes": blue.get("residual_escapes"),
-                "white_remedies": white.get("remedies_proposed"),
-                "white_adopted": white.get("remedies_adopted"),
-                "white_status": white.get("status"),
-            })
+            timeline.append(
+                {
+                    "round": view.round,
+                    "status": view.status,
+                    "red_total": red.get("red_total"),
+                    "red_passed": red.get("red_passed"),
+                    "red_pass_rate_pct": red.get("red_pass_rate_pct"),
+                    "escapes": len(view.escapes),
+                    "blue_probes": blue.get("blue_probes"),
+                    "blue_pass_rate_pct": blue.get("blue_pass_rate_pct"),
+                    "residual_escapes": blue.get("residual_escapes"),
+                    "white_remedies": white.get("remedies_proposed"),
+                    "white_adopted": white.get("remedies_adopted"),
+                    "white_status": white.get("status"),
+                }
+            )
         return timeline
 
     def durability(self, key: str) -> dict:
@@ -166,8 +175,11 @@ class Stitcher:
             for eid in view.escape_keys():
                 seen_first.setdefault(eid, view.round)
                 seen_last[eid] = view.round
-        durable = {e: (seen_first[e], seen_last[e])
-                   for e in seen_first if seen_last[e] > seen_first[e]}
+        durable = {
+            e: (seen_first[e], seen_last[e])
+            for e in seen_first
+            if seen_last[e] > seen_first[e]
+        }
         closed = {e: seen_first[e] for e in seen_first if e not in durable}
         return {
             "total_distinct_escapes": len(seen_first),
@@ -195,14 +207,23 @@ class Stitcher:
             for view in self.views[key]:
                 red = view.red or {}
                 for cell in red.get("attack_matrix", []) or []:
-                    coord = (cell.get("technique", UNKNOWN), cell.get("placement", UNKNOWN))
+                    coord = (
+                        cell.get("technique", UNKNOWN),
+                        cell.get("placement", UNKNOWN),
+                    )
                     attacks[coord] += int(cell.get("cases", 0))
                 for esc in view.escapes:
-                    coord = (esc.get("technique", UNKNOWN), esc.get("placement", UNKNOWN))
+                    coord = (
+                        esc.get("technique", UNKNOWN),
+                        esc.get("placement", UNKNOWN),
+                    )
                     escapes[coord] += 1
                     attacks[coord] += 0
                 for row in view.resistance_rows():
-                    coord = (row.get("technique", UNKNOWN), row.get("placement", UNKNOWN))
+                    coord = (
+                        row.get("technique", UNKNOWN),
+                        row.get("placement", UNKNOWN),
+                    )
                     probes[coord] += int(row.get("probes", 0))
                     held[coord] += int(row.get("passed", 0))
 
@@ -210,16 +231,20 @@ class Stitcher:
         cells = []
         for technique, placement in sorted(coords):
             coord = (technique, placement)
-            cells.append({
-                "technique": technique,
-                "placement": placement,
-                "attacks": attacks.get(coord, 0),
-                "escapes": escapes.get(coord, 0),
-                "escape_rate_pct": _pct(escapes.get(coord, 0), attacks.get(coord, 0)),
-                "blue_probes": probes.get(coord, 0),
-                "blue_held": held.get(coord, 0),
-                "resistance_pct": _pct(held.get(coord, 0), probes.get(coord, 0)),
-            })
+            cells.append(
+                {
+                    "technique": technique,
+                    "placement": placement,
+                    "attacks": attacks.get(coord, 0),
+                    "escapes": escapes.get(coord, 0),
+                    "escape_rate_pct": _pct(
+                        escapes.get(coord, 0), attacks.get(coord, 0)
+                    ),
+                    "blue_probes": probes.get(coord, 0),
+                    "blue_held": held.get(coord, 0),
+                    "resistance_pct": _pct(held.get(coord, 0), probes.get(coord, 0)),
+                }
+            )
         return {"cells": cells, "coordinates": len(cells)}
 
     def timing_profile(self) -> list:
@@ -247,8 +272,14 @@ class Stitcher:
                     trend = "worsening"
                 elif ordered[-1] < ordered[0]:
                     trend = "improving"
-            rows.append({"timing": timing, "total_escapes": total,
-                         "per_round": ordered, "trend": trend})
+            rows.append(
+                {
+                    "timing": timing,
+                    "total_escapes": total,
+                    "per_round": ordered,
+                    "trend": trend,
+                }
+            )
         return sorted(rows, key=lambda r: -r["total_escapes"])
 
     def variant_ranking(self) -> list:
@@ -263,20 +294,27 @@ class Stitcher:
                 for row in view.resistance_rows():
                     probes += int(row.get("probes", 0))
                     held += int(row.get("passed", 0))
-            red_rates = [float(v.red["red_pass_rate_pct"]) for v in self.views[key]
-                         if isinstance(v.red, dict) and v.red.get("red_pass_rate_pct") is not None]
-            rows.append({
-                "variant": key,
-                "label": variant.label,
-                "directory": variant.directory,
-                "intensity": variant.intensity,
-                "rounds_present": sum(1 for v in self.views[key] if v.exists),
-                "total_escapes": total_escapes,
-                "mean_red_pass_rate_pct": (round(sum(red_rates) / len(red_rates), 1)
-                                          if red_rates else None),
-                "blue_resistance_pct": _pct(held, probes),
-                "durability": self.durability(key),
-            })
+            red_rates = [
+                float(v.red["red_pass_rate_pct"])
+                for v in self.views[key]
+                if isinstance(v.red, dict)
+                and v.red.get("red_pass_rate_pct") is not None
+            ]
+            rows.append(
+                {
+                    "variant": key,
+                    "label": variant.label,
+                    "directory": variant.directory,
+                    "intensity": variant.intensity,
+                    "rounds_present": sum(1 for v in self.views[key] if v.exists),
+                    "total_escapes": total_escapes,
+                    "mean_red_pass_rate_pct": (
+                        round(sum(red_rates) / len(red_rates), 1) if red_rates else None
+                    ),
+                    "blue_resistance_pct": _pct(held, probes),
+                    "durability": self.durability(key),
+                }
+            )
         return sorted(rows, key=lambda r: (r["total_escapes"], -(r["intensity"])))
 
     def coverage(self) -> dict:
@@ -294,24 +332,31 @@ class Stitcher:
                     complete += 1
                 else:
                     partial += 1
-        return {"planned_cells": planned, "cells_with_data": present,
-                "complete": complete, "partial": partial,
-                "coverage_pct": _pct(present, planned),
-                "missing": missing[:40]}
+        return {
+            "planned_cells": planned,
+            "cells_with_data": present,
+            "complete": complete,
+            "partial": partial,
+            "coverage_pct": _pct(present, planned),
+            "missing": missing[:40],
+        }
 
     # --------------------------------------------------------------- report
 
     def build_report(self) -> dict:
         matrix = self.interplay_matrix()
         cells = matrix["cells"]
+
         def _tally() -> dict:
             return {"escapes": 0, "probes": 0, "held": 0}
 
         by_technique: "dict[str, dict]" = defaultdict(_tally)
         by_placement: "dict[str, dict]" = defaultdict(_tally)
         for cell in cells:
-            for bucket, key in ((by_technique, cell["technique"]),
-                                (by_placement, cell["placement"])):
+            for bucket, key in (
+                (by_technique, cell["technique"]),
+                (by_placement, cell["placement"]),
+            ):
                 bucket[key]["escapes"] += cell["escapes"]
                 bucket[key]["probes"] += cell["blue_probes"]
                 bucket[key]["held"] += cell["blue_held"]
@@ -320,9 +365,14 @@ class Stitcher:
             rows = []
             for key in sorted(bucket):
                 entry = bucket[key]
-                rows.append({name: key, "escapes": entry["escapes"],
-                             "blue_probes": entry["probes"],
-                             "resistance_pct": _pct(entry["held"], entry["probes"])})
+                rows.append(
+                    {
+                        name: key,
+                        "escapes": entry["escapes"],
+                        "blue_probes": entry["probes"],
+                        "resistance_pct": _pct(entry["held"], entry["probes"]),
+                    }
+                )
             return sorted(rows, key=lambda r: -r["escapes"])
 
         knowledge = _read_json(self.base / self.cfg.handshake.knowledge_base, {}) or {}
@@ -331,8 +381,11 @@ class Stitcher:
         return {
             "schema_version": 2,
             "generated_at": datetime.now(timezone.utc).isoformat(),
-            "profile": {"id": self.cfg.profile_id, "display_name": self.cfg.display_name,
-                        "source": str(self.cfg.source)},
+            "profile": {
+                "id": self.cfg.profile_id,
+                "display_name": self.cfg.display_name,
+                "source": str(self.cfg.source),
+            },
             "base": str(self.base),
             "variants": self.variants,
             "rounds": self.rounds,
@@ -364,8 +417,10 @@ def render_markdown(report: dict) -> str:
     add("")
     add(f"Generated {report['generated_at']} · base `{report['base']}`")
     cov = report["coverage"]
-    add(f"Coverage: {cov['cells_with_data']}/{cov['planned_cells']} cells "
-        f"({cov['coverage_pct']}%) — {cov['complete']} complete, {cov['partial']} partial")
+    add(
+        f"Coverage: {cov['cells_with_data']}/{cov['planned_cells']} cells "
+        f"({cov['coverage_pct']}%) — {cov['complete']} complete, {cov['partial']} partial"
+    )
     add("")
 
     add("## Configurations under test")
@@ -374,9 +429,11 @@ def render_markdown(report: dict) -> str:
     add("|---|---|---|---|---|---|")
     for row in report["variant_ranking"]:
         dur = row["durability"]
-        add(f"| `{row['variant']}` | {row['label']} | {row['total_escapes']} | "
+        add(
+            f"| `{row['variant']}` | {row['label']} | {row['total_escapes']} | "
             f"{row['mean_red_pass_rate_pct']} | {row['blue_resistance_pct']} | "
-            f"{dur['durable']}/{dur['total_distinct_escapes']} |")
+            f"{dur['durable']}/{dur['total_distinct_escapes']} |"
+        )
     add("")
 
     add("## Escapes by technique")
@@ -384,8 +441,10 @@ def render_markdown(report: dict) -> str:
     add("| technique | escapes | probes | resistance % |")
     add("|---|---|---|---|")
     for row in report["by_technique"][:20]:
-        add(f"| {row['technique']} | {row['escapes']} | "
-            f"{row['blue_probes']} | {row['resistance_pct']} |")
+        add(
+            f"| {row['technique']} | {row['escapes']} | "
+            f"{row['blue_probes']} | {row['resistance_pct']} |"
+        )
     add("")
 
     add("## Escapes by placement")
@@ -393,8 +452,10 @@ def render_markdown(report: dict) -> str:
     add("| placement | escapes | probes | resistance % |")
     add("|---|---|---|---|")
     for row in report["by_placement"][:20]:
-        add(f"| {row['placement']} | {row['escapes']} | "
-            f"{row['blue_probes']} | {row['resistance_pct']} |")
+        add(
+            f"| {row['placement']} | {row['escapes']} | "
+            f"{row['blue_probes']} | {row['resistance_pct']} |"
+        )
     add("")
 
     add("## Timing profile")
@@ -402,18 +463,24 @@ def render_markdown(report: dict) -> str:
     add("| timing | total escapes | per round | trend |")
     add("|---|---|---|---|")
     for row in report["timing_profile"]:
-        add(f"| {row['timing']} | {row['total_escapes']} | {row['per_round']} | {row['trend']} |")
+        add(
+            f"| {row['timing']} | {row['total_escapes']} | {row['per_round']} | {row['trend']} |"
+        )
     add("")
 
     add("## Interplay matrix (technique × placement)")
     add("")
-    add("| technique | placement | attacks | escapes | escape % | probes | resistance % |")
+    add(
+        "| technique | placement | attacks | escapes | escape % | probes | resistance % |"
+    )
     add("|---|---|---|---|---|---|---|")
     hot = sorted(report["interplay_matrix"]["cells"], key=lambda c: -c["escapes"])[:40]
     for cell in hot:
-        add(f"| {cell['technique']} | {cell['placement']} | {cell['attacks']} | "
+        add(
+            f"| {cell['technique']} | {cell['placement']} | {cell['attacks']} | "
             f"{cell['escapes']} | {cell['escape_rate_pct']} | {cell['blue_probes']} | "
-            f"{cell['resistance_pct']} |")
+            f"{cell['resistance_pct']} |"
+        )
     add("")
 
     know = report["knowledge_summary"]
@@ -421,8 +488,10 @@ def render_markdown(report: dict) -> str:
     add("## Self-healing")
     add("")
     add(f"- knowledge base: {know['lessons']} lessons, {know['patterns']} patterns")
-    add(f"- remedies proposed: {white['remedies_proposed']} · "
-        f"adopted: {white['remedies_adopted']}")
+    add(
+        f"- remedies proposed: {white['remedies_proposed']} · "
+        f"adopted: {white['remedies_adopted']}"
+    )
     add(f"- convergence: {white['convergence']}")
     add("")
     return "\n".join(out)
@@ -430,16 +499,26 @@ def render_markdown(report: dict) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Stitch RED / BLUE / WHITE handshake artifacts into one report.")
+        description="Stitch RED / BLUE / WHITE handshake artifacts into one report."
+    )
     cfg_preview = load_config()
     add_common_arguments(parser, config=cfg_preview)
     _anon.add_arguments(parser)
-    parser.add_argument("--out", default=None,
-                        help="report path override (default: <base>/<stitch_report>)")
-    parser.add_argument("--markdown", default=None,
-                        help="markdown path override (default: <base>/report.md)")
-    parser.add_argument("--raw-out", default=None,
-                        help="also write the UNREDACTED report to this path (local use only)")
+    parser.add_argument(
+        "--out",
+        default=None,
+        help="report path override (default: <base>/<stitch_report>)",
+    )
+    parser.add_argument(
+        "--markdown",
+        default=None,
+        help="markdown path override (default: <base>/report.md)",
+    )
+    parser.add_argument(
+        "--raw-out",
+        default=None,
+        help="also write the UNREDACTED report to this path (local use only)",
+    )
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
 
@@ -453,8 +532,9 @@ def main() -> int:
     stitcher = Stitcher(cfg, base, variants, args.rounds)
     raw_report = stitcher.build_report()
 
-    anon = _anon.from_args(args, root=cfg.root,
-                           extra_terms=[cfg.profile_id, cfg.display_name])
+    anon = _anon.from_args(
+        args, root=cfg.root, extra_terms=[cfg.profile_id, cfg.display_name]
+    )
     report = anon.report(raw_report)
 
     out = Path(args.out) if args.out else base / cfg.handshake.stitch_report
@@ -466,22 +546,30 @@ def main() -> int:
 
     if not args.quiet:
         cov = report["coverage"]
-        print(f"stitched {cov['cells_with_data']}/{cov['planned_cells']} cells "
-              f"({cov['coverage_pct']}%) from {anon.path(base)}")
+        print(
+            f"stitched {cov['cells_with_data']}/{cov['planned_cells']} cells "
+            f"({cov['coverage_pct']}%) from {anon.path(base)}"
+        )
         print(f"  anonymization: {anon.level}")
         for row in report["variant_ranking"]:
-            print(f"  variant {str(row['variant']):>3} ({row['label']}): "
-                  f"escapes={row['total_escapes']} "
-                  f"resistance={row['blue_resistance_pct']} "
-                  f"durable={row['durability']['durable']}")
+            print(
+                f"  variant {str(row['variant']):>3} ({row['label']}): "
+                f"escapes={row['total_escapes']} "
+                f"resistance={row['blue_resistance_pct']} "
+                f"durable={row['durability']['durable']}"
+            )
         top = report["by_technique"][:5]
         if top:
-            print("  top techniques:", ", ".join(
-                f"{r['technique']}={r['escapes']}" for r in top))
+            print(
+                "  top techniques:",
+                ", ".join(f"{r['technique']}={r['escapes']}" for r in top),
+            )
         top_p = report["by_placement"][:5]
         if top_p:
-            print("  top placements:", ", ".join(
-                f"{r['placement']}={r['escapes']}" for r in top_p))
+            print(
+                "  top placements:",
+                ", ".join(f"{r['placement']}={r['escapes']}" for r in top_p),
+            )
         print(f"  wrote {anon.path(out)}")
         print(f"  wrote {anon.path(md)}")
     return 0
@@ -489,6 +577,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-
-

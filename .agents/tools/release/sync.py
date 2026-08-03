@@ -26,13 +26,18 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text  # noqa: E402
+
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
@@ -40,7 +45,9 @@ from facts import collect  # noqa: E402
 from scan import registry, resolve, scan_counts, scan_stamps, tracked_files  # noqa: E402
 
 
-def apply_line_fix(rel: str, line_no: int, found: str, expected: str, pattern: str) -> bool:
+def apply_line_fix(
+    rel: str, line_no: int, found: str, expected: str, pattern: str
+) -> bool:
     """Replace the matched number on one line, leaving the rest intact."""
     path = PROJECT / rel
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines(keepends=True)
@@ -135,7 +142,9 @@ def main() -> int:
     verb = "Would fix" if args.dry_run else "Fixed"
     print(f"{verb} {len(applied)} claim(s); {len(skipped)} need a decision.\n")
     for f in applied:
-        print(f"  {f['file']}:{f['line']}  {f['claim']}  {f['found']} -> {f['applied']}")
+        print(
+            f"  {f['file']}:{f['line']}  {f['claim']}  {f['found']} -> {f['applied']}"
+        )
     if skipped:
         print("\nUnresolved:")
         for f in skipped:

@@ -1,47 +1,68 @@
 [
-  {
-    "id": "bench-011", "category": "commit",
-    "description": "Vague commit message",
-    "input": "fixed stuff",
-    "expected_principles": ["P1", "P10", "P4"],
-    "expected_keywords": ["fix"],
-    "forbidden_keywords": ["stuff"],
-    "max_tokens": 150, "difficulty": "easy"
-  },
-  {
-    "id": "bench-012", "category": "commit",
-    "description": "Commit with passive voice and ambiguity",
-    "input": "Changes were made to the authentication module to make it work better",
-    "expected_principles": ["P4", "P1"],
-    "expected_keywords": ["update", "authentication", "module"],
-    "forbidden_keywords": ["were made", "make it work better"],
-    "max_tokens": 200, "difficulty": "easy"
-  },
-  {
-    "id": "bench-013", "category": "commit",
-    "description": "Conventional commit with unapproved terms",
-    "input": "feat: added a bunch of new endpoints for the user service",
-    "expected_principles": ["P10", "P1"],
-    "expected_keywords": ["add", "endpoint", "user service"],
-    "forbidden_keywords": ["bunch"],
-    "max_tokens": 200, "difficulty": "medium"
-  },
-  {
-    "id": "bench-014", "category": "commit",
-    "description": "Breaking change without severity marker",
-    "input": "chore: updated the API to use v2 endpoints, old ones removed",
-    "expected_principles": ["P4"],
-    "expected_keywords": ["BREAKING", "API", "v2", "remove"],
-    "forbidden_keywords": [],
-    "max_tokens": 250, "difficulty": "medium"
-  },
-  {
-    "id": "bench-015", "category": "commit",
-    "description": "Multi-paragraph commit with jargon",
-    "input": "refactor: overhauled the entire data layer\n\nSwitched from MongoDB to PostgreSQL because Mongo was being flaky. Also cleaned up a ton of legacy code that was doing weird stuff with the connection pool.",
-    "expected_principles": ["P1", "P10", "P8"],
-    "expected_keywords": ["migrate", "MongoDB", "PostgreSQL", "connection pool"],
-    "forbidden_keywords": ["overhauled", "flaky", "ton of", "weird stuff", "being"],
-    "max_tokens": 400, "difficulty": "hard"
-  }
+	{
+		"id": "bench-011",
+		"category": "commit",
+		"description": "Vague commit message",
+		"input": "fixed stuff",
+		"expected_principles": ["P1", "P10", "P4"],
+		"expected_keywords": ["fix"],
+		"forbidden_keywords": ["stuff"],
+		"max_tokens": 150,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-012",
+		"category": "commit",
+		"description": "Commit with passive voice and ambiguity",
+		"input": "Changes were made to the authentication module to make it work better",
+		"expected_principles": ["P4", "P1"],
+		"expected_keywords": ["update", "authentication", "module"],
+		"forbidden_keywords": ["were made", "make it work better"],
+		"max_tokens": 200,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-013",
+		"category": "commit",
+		"description": "Conventional commit with unapproved terms",
+		"input": "feat: added a bunch of new endpoints for the user service",
+		"expected_principles": ["P10", "P1"],
+		"expected_keywords": ["add", "endpoint", "user service"],
+		"forbidden_keywords": ["bunch"],
+		"max_tokens": 200,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-014",
+		"category": "commit",
+		"description": "Breaking change without severity marker",
+		"input": "chore: updated the API to use v2 endpoints, old ones removed",
+		"expected_principles": ["P4"],
+		"expected_keywords": ["BREAKING", "API", "v2", "remove"],
+		"forbidden_keywords": [],
+		"max_tokens": 250,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-015",
+		"category": "commit",
+		"description": "Multi-paragraph commit with jargon",
+		"input": "refactor: overhauled the entire data layer\n\nSwitched from MongoDB to PostgreSQL because Mongo was being flaky. Also cleaned up a ton of legacy code that was doing weird stuff with the connection pool.",
+		"expected_principles": ["P1", "P10", "P8"],
+		"expected_keywords": [
+			"migrate",
+			"MongoDB",
+			"PostgreSQL",
+			"connection pool"
+		],
+		"forbidden_keywords": [
+			"overhauled",
+			"flaky",
+			"ton of",
+			"weird stuff",
+			"being"
+		],
+		"max_tokens": 400,
+		"difficulty": "hard"
+	}
 ]

@@ -2,19 +2,25 @@
 """Single-worker diagnostic: run oneshot wrapper directly with full output capture.
 Usage: python3 test-worker.py <worker_num>
 """
+
 import os, sys, time, subprocess
 from pathlib import Path
 
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
+
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "extraction"))
 from extract_batch import parse_manifest, worker_page_range, build_prompt, verify_output
 
@@ -39,15 +45,23 @@ write_text(prompt_file, prompt)
 cmd = [venv_python, wrapper, str(prompt_file), "--model", model]
 env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "120"}
 
-print(f"W{worker_num:03d}  Pages: {start_pos}-{end_pos}  Prompt: {len(prompt)}B", flush=True)
+print(
+    f"W{worker_num:03d}  Pages: {start_pos}-{end_pos}  Prompt: {len(prompt)}B",
+    flush=True,
+)
 print(f"Running oneshot wrapper...", flush=True)
 
 start = time.time()
 try:
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=600, env=env, cwd=str(PROJECT))
+    result = subprocess.run(
+        cmd, capture_output=True, text=True, timeout=600, env=env, cwd=str(PROJECT)
+    )
     duration = time.time() - start
     print(f"\nDone in {duration:.1f}s  Exit: {result.returncode}", flush=True)
-    print(f"Stdout: {len(result.stdout)} chars  Stderr: {len(result.stderr)} chars", flush=True)
+    print(
+        f"Stdout: {len(result.stdout)} chars  Stderr: {len(result.stderr)} chars",
+        flush=True,
+    )
     if result.stderr:
         print(f"\n--- STDERR ---\n{result.stderr[:2000]}", flush=True)
     if result.stdout:
@@ -56,7 +70,10 @@ try:
     if output_file.exists():
         content = output_file.read_text()
         lines = content.splitlines()
-        print(f"\nOUTPUT FILE\n{output_file.stat().st_size}B, {len(lines)} lines", flush=True)
+        print(
+            f"\nOUTPUT FILE\n{output_file.stat().st_size}B, {len(lines)} lines",
+            flush=True,
+        )
         print(f"\n--- FIRST 5 ---\n{chr(10).join(lines[:5])}", flush=True)
         print(f"\n--- LAST 10 ---\n{chr(10).join(lines[-10:])}", flush=True)
         ok, msg = verify_output(worker_num, start_pos, end_pos, str(output_file))
@@ -72,7 +89,11 @@ except subprocess.TimeoutExpired as e:
     print(f"\n⏰ TIMEOUT after {duration:.1f}s", flush=True)
     out = e.stdout or ""
     err = e.stderr or ""
-    if isinstance(out, bytes): out = out.decode('utf-8', errors='replace')
-    if isinstance(err, bytes): err = err.decode('utf-8', errors='replace')
-    if out: print(f"Stdout: {out[:2000]}", flush=True)
-    if err: print(f"Stderr: {err[:2000]}", flush=True)
+    if isinstance(out, bytes):
+        out = out.decode("utf-8", errors="replace")
+    if isinstance(err, bytes):
+        err = err.decode("utf-8", errors="replace")
+    if out:
+        print(f"Stdout: {out[:2000]}", flush=True)
+    if err:
+        print(f"Stderr: {err[:2000]}", flush=True)

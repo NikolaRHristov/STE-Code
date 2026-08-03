@@ -88,6 +88,7 @@ def _load_config():
     if _CONFIG_FILE.exists():
         try:
             import yaml
+
             with open(_CONFIG_FILE) as f:
                 return yaml.safe_load(f)
         except ImportError:
@@ -101,6 +102,7 @@ def _load_config():
     _CONFIG_DIR.mkdir(parents=True, exist_ok=True)
     try:
         import yaml
+
         with open(_CONFIG_FILE, "w") as f:
             yaml.dump(_DEFAULT_CONFIG, f, default_flow_style=False, sort_keys=False)
     except ImportError:
@@ -117,7 +119,9 @@ def get_agent_config(agent=None):
     agent = agent or cfg.get("default_agent", "hermes")
     agent_cfg = cfg.get("agents", {}).get(agent)
     if not agent_cfg:
-        raise ValueError(f"Unknown agent: {agent}. Available: {list(cfg.get('agents', {}).keys())}")
+        raise ValueError(
+            f"Unknown agent: {agent}. Available: {list(cfg.get('agents', {}).keys())}"
+        )
     return agent_cfg
 
 
@@ -162,7 +166,9 @@ def _resolve_command(agent_cfg, prompt_file, model=None, cwd=None):
     return cmd, agent_cfg.get("env", {})
 
 
-def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600, skill=None):
+def run_agent(
+    prompt, agent=None, model=None, cwd=None, timeout=600, skill=None, confined=False
+):
     """
     Run a prompt through an agent synchronously.
 
@@ -188,6 +194,7 @@ def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600, skill=None)
     if skill:
         try:
             from templater import lib_import
+
             _m = lib_import("skill_prompt")
             prompt = prompt + _m.skill_section(skill)
         except Exception:
@@ -195,6 +202,23 @@ def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600, skill=None)
 
     agent_cfg = get_agent_config(agent)
     _TMP_DIR.mkdir(parents=True, exist_ok=True)
+    if confined:
+        from launch_confined_child import launch as _launch_confined
+
+        return _launch_confined(
+            prompt,
+            model=(model or agent_cfg.get("default_model", "tencent/hy3:free")),
+            label=f"agent-{os.getpid()}",
+        )
+    if confined:
+        from launch_confined_child import launch as _launch_confined
+
+        return _launch_confined(
+            prompt,
+            model=(model or agent_cfg.get("default_model", "tencent/hy3:free")),
+            label=f"agent-{os.getpid()}",
+            timeout=timeout,
+        )
 
     # Write prompt to temp file
     prompt_file = _TMP_DIR / f"agent-prompt-{os.getpid()}.txt"
@@ -221,7 +245,7 @@ def run_agent(prompt, agent=None, model=None, cwd=None, timeout=600, skill=None)
             pass
 
 
-def launch_agent(prompt, agent=None, model=None, cwd=None):
+def launch_agent(prompt, agent=None, model=None, cwd=None, confined=False):
     """
     Launch a prompt through an agent asynchronously (non-blocking).
 
@@ -282,9 +306,12 @@ def get_agent_command(agent=None, model=None, cwd=None, prompt_file=None):
 # ── CLI mode (for testing / direct invocation) ────────────────────
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser(description="Generic Agent Runner")
     parser.add_argument("prompt_file", nargs="?", help="File containing the prompt")
-    parser.add_argument("--agent", default=None, help="Agent backend (default from config)")
+    parser.add_argument(
+        "--agent", default=None, help="Agent backend (default from config)"
+    )
     parser.add_argument("--model", default=None, help="Model override")
     parser.add_argument("--list", action="store_true", help="List available agents")
     args = parser.parse_args()

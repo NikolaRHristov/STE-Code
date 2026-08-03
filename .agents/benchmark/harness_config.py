@@ -34,6 +34,7 @@ Usage::
     cfg.round_dir(base, "0", 1)    -> Path to variant0/round1
     cfg.build_runner_argv(...)     -> argv list for the scoring backend
 """
+
 from __future__ import annotations
 
 import json
@@ -176,7 +177,9 @@ class HarnessConfig:
         self.root = _find_root(source.parent, paths.get("root_markers", [".git"]))
 
         self.profile_id = document.get("profile", {}).get("id", "harness")
-        self.display_name = document.get("profile", {}).get("display_name", self.profile_id)
+        self.display_name = document.get("profile", {}).get(
+            "display_name", self.profile_id
+        )
         self.rule_prefix = document.get("profile", {}).get("rule_prefix", "P")
         self.rule_count = int(document.get("profile", {}).get("rule_count", 0))
 
@@ -184,7 +187,9 @@ class HarnessConfig:
             "variant_prompt_template", "{variant_dir}/system-prompt.txt"
         )
         self.static_cases = self._resolve(paths.get("static_cases", "test-cases"))
-        self.generated_cases = self._resolve(paths.get("generated_cases", "test-cases-generated"))
+        self.generated_cases = self._resolve(
+            paths.get("generated_cases", "test-cases-generated")
+        )
         self.results_base = self._resolve(paths.get("results_base", "tests"))
         self.scratch = self._resolve(paths.get("scratch", "tmp"))
         self.state = self._resolve(paths.get("state", "state"))
@@ -193,16 +198,21 @@ class HarnessConfig:
         self.runner_kind = runner.get("kind", "subprocess")
         self.runner_entrypoint = self._resolve(runner.get("entrypoint", ""))
         self._runner_argv_template = list(runner.get("argv_template", []))
-        self.aggregate_filename = runner.get("aggregate_filename", "aggregate-results.json")
-        self.per_test_filename = runner.get("per_test_filename", "per-test-results.json")
+        self.aggregate_filename = runner.get(
+            "aggregate_filename", "aggregate-results.json"
+        )
+        self.per_test_filename = runner.get(
+            "per_test_filename", "per-test-results.json"
+        )
         self.run_dir_glob = runner.get("run_dir_glob", "run-*")
         self.default_model = runner.get("default_model", "")
         self.default_max_workers = int(runner.get("default_max_workers", 2))
         self.default_timeout_s = int(runner.get("default_timeout_s", 600))
         self.default_poll_interval_s = int(runner.get("default_poll_interval_s", 2))
         self.default_rounds = int(runner.get("default_rounds", 3))
-        self.base_dir = Path(runner.get("base_dir",
-                                        str(Path(self.root) / "benchmark-runs")))
+        self.base_dir = Path(
+            runner.get("base_dir", str(Path(self.root) / "benchmark-runs"))
+        )
 
         variants = document.get("variants", {})
         registry = variants.get("registry", {})
@@ -224,7 +234,9 @@ class HarnessConfig:
 
         hs = document.get("handshake", {})
         self.handshake = Handshake(
-            round_dir_template=hs.get("round_dir_template", "{base}/variant{variant}/round{round}"),
+            round_dir_template=hs.get(
+                "round_dir_template", "{base}/variant{variant}/round{round}"
+            ),
             red_ledger=hs.get("red_ledger", "escapes.json"),
             red_sentinel=hs.get("red_sentinel", "purple.json"),
             blue_sentinel=hs.get("blue_sentinel", "blue-done.json"),
@@ -247,10 +259,14 @@ class HarnessConfig:
 
         verification = document.get("verification", {})
         self.partition_strategies = list(verification.get("partition_strategies", []))
-        self.default_partition_strategy = verification.get("default_strategy", "random_half")
+        self.default_partition_strategy = verification.get(
+            "default_strategy", "random_half"
+        )
         self.derivation_arm = verification.get("derivation_arm", "A")
         self.verification_arm = verification.get("verification_arm", "B")
-        self.overfit_tolerance_pct = float(verification.get("overfit_tolerance_pct", 10.0))
+        self.overfit_tolerance_pct = float(
+            verification.get("overfit_tolerance_pct", 10.0)
+        )
         self.min_arm_size = int(verification.get("min_arm_size", 8))
         self.verdict_kinds = list(verification.get("verdicts", []))
         self.split_seed = int(verification.get("split_seed", 7))
@@ -295,7 +311,9 @@ class HarnessConfig:
             return self._variants[str(key)]
         except KeyError:
             known = ", ".join(self.variant_order)
-            raise ConfigError(f"unknown variant '{key}'; known variants: {known}") from None
+            raise ConfigError(
+                f"unknown variant '{key}'; known variants: {known}"
+            ) from None
 
     def all_variants(self) -> "list[Variant]":
         return [self._variants[k] for k in self.variant_order]
@@ -336,13 +354,19 @@ class HarnessConfig:
     def red_sentinel_path(self, base: "str | Path", variant: str, round_n: int) -> Path:
         return self.round_dir(base, variant, round_n) / self.handshake.red_sentinel
 
-    def blue_sentinel_path(self, base: "str | Path", variant: str, round_n: int) -> Path:
+    def blue_sentinel_path(
+        self, base: "str | Path", variant: str, round_n: int
+    ) -> Path:
         return self.round_dir(base, variant, round_n) / self.handshake.blue_sentinel
 
-    def white_sentinel_path(self, base: "str | Path", variant: str, round_n: int) -> Path:
+    def white_sentinel_path(
+        self, base: "str | Path", variant: str, round_n: int
+    ) -> Path:
         return self.round_dir(base, variant, round_n) / self.handshake.white_sentinel
 
-    def black_sentinel_path(self, base: "str | Path", variant: str, round_n: int) -> Path:
+    def black_sentinel_path(
+        self, base: "str | Path", variant: str, round_n: int
+    ) -> Path:
         return self.round_dir(base, variant, round_n) / self.handshake.black_sentinel
 
     def notes_dir(self, base: "str | Path") -> Path:
@@ -383,11 +407,14 @@ class HarnessConfig:
             "system_prompt": str(system_prompt),
             "results_dir": str(results_dir),
             "model": model or self.default_model,
-            "max_workers": str(self.default_max_workers
-                                if max_workers is None else max_workers),
+            "max_workers": str(
+                self.default_max_workers if max_workers is None else max_workers
+            ),
             "timeout": str(timeout if timeout is not None else self.default_timeout_s),
             "poll_interval": str(
-                poll_interval if poll_interval is not None else self.default_poll_interval_s
+                poll_interval
+                if poll_interval is not None
+                else self.default_poll_interval_s
             ),
         }
         argv = [python or sys.executable, str(self.runner_entrypoint)]
@@ -399,7 +426,9 @@ class HarnessConfig:
         runs = sorted(Path(results_dir).glob(self.run_dir_glob))
         return runs[-1] if runs else None
 
-    def read_run_artifacts(self, results_dir: "str | Path") -> "tuple[dict | None, list]":
+    def read_run_artifacts(
+        self, results_dir: "str | Path"
+    ) -> "tuple[dict | None, list]":
         """Return ``(aggregate, per_test)`` from the most recent run directory."""
         run = self.latest_run_dir(results_dir)
         if run is None:
@@ -431,7 +460,9 @@ class HarnessConfig:
         value = self.vocabulary.get(name)
         if value is None:
             if default is None:
-                raise ConfigError(f"vocabulary bank '{name}' is not defined in {self.source}")
+                raise ConfigError(
+                    f"vocabulary bank '{name}' is not defined in {self.source}"
+                )
             return list(default)
         return list(value)
 
@@ -446,7 +477,9 @@ class HarnessConfig:
 _CACHE: "dict[str, HarnessConfig]" = {}
 
 
-def load_config(path: "str | Path | None" = None, *, reload: bool = False) -> HarnessConfig:
+def load_config(
+    path: "str | Path | None" = None, *, reload: bool = False
+) -> HarnessConfig:
     """Load a profile document.
 
     Resolution order: explicit ``path`` argument, then the ``BENCH_HARNESS_PROFILE``
@@ -461,7 +494,9 @@ def load_config(path: "str | Path | None" = None, *, reload: bool = False) -> Ha
     try:
         document = json.loads(resolved.read_text())
     except ValueError as exc:
-        raise ConfigError(f"harness profile is not valid JSON: {resolved}: {exc}") from exc
+        raise ConfigError(
+            f"harness profile is not valid JSON: {resolved}: {exc}"
+        ) from exc
     config = HarnessConfig(document, resolved)
     _CACHE[key] = config
     return config
@@ -473,21 +508,34 @@ def add_common_arguments(parser, *, config: "HarnessConfig | None" = None) -> No
     Keeps RED, BLUE, PURPLE and WHITE from drifting apart on flag names.
     """
     cfg = config or load_config()
-    parser.add_argument("--profile", default=None,
-                        help="path to a harness profile document (overrides the default)")
-    parser.add_argument("--variants", default="all",
-                        help="comma-separated variant keys, or 'all' ({})".format(
-                            ",".join(cfg.variant_order)))
+    parser.add_argument(
+        "--profile",
+        default=None,
+        help="path to a harness profile document (overrides the default)",
+    )
+    parser.add_argument(
+        "--variants",
+        default="all",
+        help="comma-separated variant keys, or 'all' ({})".format(
+            ",".join(cfg.variant_order)
+        ),
+    )
     parser.add_argument("--rounds", type=int, default=3)
     parser.add_argument("--seed", type=int, default=7)
-    parser.add_argument("--base", default=None,
-                        help="results base directory (default: <results_base>/redblue)")
+    parser.add_argument(
+        "--base",
+        default=None,
+        help="results base directory (default: <results_base>/redblue)",
+    )
     parser.add_argument("--model", default=None)
     parser.add_argument("--max-workers", type=int, default=None)
     parser.add_argument("--timeout", type=int, default=None)
     parser.add_argument("--poll-interval", type=int, default=None)
-    parser.add_argument("--skip-live", action="store_true",
-                        help="generate artifacts without invoking the scoring backend")
+    parser.add_argument(
+        "--skip-live",
+        action="store_true",
+        help="generate artifacts without invoking the scoring backend",
+    )
 
 
 def default_base(config: HarnessConfig) -> Path:
@@ -517,7 +565,8 @@ def resolve_base(config: HarnessConfig, cli_value) -> Path:
     if resolved != root and root not in resolved.parents:
         raise ConfigError(
             "benchmark output must stay under {} (got {}); pass a path inside "
-            "it or a name relative to it".format(root, resolved))
+            "it or a name relative to it".format(root, resolved)
+        )
     return resolved
 
 
@@ -531,16 +580,20 @@ if __name__ == "__main__":
     for variant in cfg.all_variants():
         prompt = cfg.variant_prompt(variant.key)
         mark = "ok " if prompt.exists() else "MISSING"
-        print(f"  {variant.key:>3} {variant.directory:<9} intensity={variant.intensity} "
-              f"{mark} {prompt.relative_to(cfg.root)}")
+        print(
+            f"  {variant.key:>3} {variant.directory:<9} intensity={variant.intensity} "
+            f"{mark} {prompt.relative_to(cfg.root)}"
+        )
     print(f"techniques     : {len(cfg.techniques)} -> {', '.join(cfg.techniques)}")
     print(f"placements     : {len(cfg.placements)} -> {', '.join(cfg.placements)}")
     print(f"timings        : {len(cfg.timings)} -> {', '.join(cfg.timings)}")
     print(f"probe placements: {len(cfg.probe_placements)}")
     print(f"defense timings : {len(cfg.defense_timings)}")
     print(f"runner         : {cfg.runner_entrypoint.name} kind={cfg.runner_kind}")
-    print(f"handshake      : ledger={cfg.handshake.red_ledger} red={cfg.handshake.red_sentinel} "
-          f"blue={cfg.handshake.blue_sentinel} white={cfg.handshake.white_sentinel}")
+    print(
+        f"handshake      : ledger={cfg.handshake.red_ledger} red={cfg.handshake.red_sentinel} "
+        f"blue={cfg.handshake.blue_sentinel} white={cfg.handshake.white_sentinel}"
+    )
     demo = cfg.round_dir(default_base(cfg), cfg.variant_order[0], 1)
     print(f"round dir demo : {demo}")
     print("runner argv    :", " ".join(cfg.build_runner_argv("T", "S", "R")[:6]), "...")

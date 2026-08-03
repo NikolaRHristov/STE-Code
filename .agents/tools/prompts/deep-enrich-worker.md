@@ -4,12 +4,12 @@ You are a senior technical writer doing a DEEP ENRICHMENT pass on the FINAL
 version of STE-Code (a controlled-language variation of ASD-STE100 for software
 documentation). The first synthesis pass already produced the rule file, but it
 was inconsistent — many rules lack cited vendor vocabulary, rich examples, and
-cross-references. Your job is to make THIS rule genuinely deep and authoritative.
+cross-references. Your job is to make THIS rule genuinely deep and
+authoritative.
 
 # SOURCE / TARGET
 
-File: {{src_name}}
-Title: Rule {{self_num}} — {{title}}
+File: {{src_name}} Title: Rule {{self_num}} — {{title}}
 
 {{src_text}}
 
@@ -28,17 +28,18 @@ STE-Code Adaptation, and Examples structure. Then SUBSTANTIALLY DEEPEN it:
    guides or the STE-Code dictionary. Do NOT guess — check the real sources.
 2. MOST COMPLETE CODE EXAMPLES: expand to at least 8 full, runnable, realistic
    code-domain Non-STE/STE pairs (functions, APIs, config, tests, errors,
-   comments, commit messages). No "..." abbreviations. Keep the
-   `> **Non-STE:**` / `> **STE:**` format.
+   comments, commit messages). No "..." abbreviations. Keep the `> **Non-STE:**`
+   / `> **STE:**` format.
 3. CROSS-REFERENCES: add at least 2 `> **See also:** Rule X.Y — <title>` links
    to related rules (read those rules if needed to describe the relationship).
 4. TRACEABILITY: include `> *Adapted from spec pair:* ...` after Examples.
 5. BORROW VOCABULARY: prefer approved plain words; avoid
-   utilize/leverage/employ/commence/terminate/initiate when a simpler verb works.
+   utilize/leverage/employ/commence/terminate/initiate when a simpler verb
+   works.
 6. SOURCES CONSULTED (mandatory): end the file with a section:
-   `## Sources consulted`
-   listing every vendor/reference file you actually read (relative paths under
-   .agents/vendor/). The gate REJECTS files without this section.
+   `## Sources consulted` listing every vendor/reference file you actually read
+   (relative paths under .agents/vendor/). The gate REJECTS files without this
+   section.
 7. NO aerospace leakage: every example and term must be code-domain.
 
 # HOW TO WRITE (critical)
@@ -51,8 +52,7 @@ tool calls — depth is the goal. Research before you write; cite what you used.
 # WHEN DONE
 
 - WRITE the finished deepened rule directly to disk at:
-  ste-code/final/rules/{{src_name}}
-  (overwrite existing content).
+  ste-code/final/rules/{{src_name}} (overwrite existing content).
 - It MUST begin with '# Rule', include '## Sources consulted', and be
   self-contained markdown. Re-read it to confirm completeness, then END.
 - Do NOT print the file to chat, no narration/tool logs. Your only artifact is

@@ -24,8 +24,14 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 from .policy import is_within, normalize
 
-__all__ = ["write_targets", "analyze_command", "expand", "resolve_against",
-           "is_passthrough_device", "containment_violations"]
+__all__ = [
+    "write_targets",
+    "analyze_command",
+    "expand",
+    "resolve_against",
+    "is_passthrough_device",
+    "containment_violations",
+]
 
 
 def expand(raw: str) -> str:
@@ -49,12 +55,31 @@ _PATCH_FILE_RE = re.compile(
 #   "all"  every non-flag operand
 #   "last" only the final operand (cp/mv/install semantics)
 _WRITE_COMMANDS: Dict[str, str] = {
-    "mkdir": "all", "touch": "all", "rm": "all", "rmdir": "all",
-    "truncate": "all", "chmod": "all", "chown": "all", "mkfifo": "all",
-    "mktemp": "all", "unlink": "all", "shred": "all",
-    "cp": "last", "mv": "last", "install": "last", "rsync": "last",
-    "ln": "last", "tee": "all", "dd": "all", "curl": "all", "wget": "all",
-    "git": "all", "sed": "all", "perl": "all", "ruby": "all", "awk": "all",
+    "mkdir": "all",
+    "touch": "all",
+    "rm": "all",
+    "rmdir": "all",
+    "truncate": "all",
+    "chmod": "all",
+    "chown": "all",
+    "mkfifo": "all",
+    "mktemp": "all",
+    "unlink": "all",
+    "shred": "all",
+    "cp": "last",
+    "mv": "last",
+    "install": "last",
+    "rsync": "last",
+    "ln": "last",
+    "tee": "all",
+    "dd": "all",
+    "curl": "all",
+    "wget": "all",
+    "git": "all",
+    "sed": "all",
+    "perl": "all",
+    "ruby": "all",
+    "awk": "all",
 }
 
 # Archive tools need mode-dependent analysis: `tar -x` READS the archive and
@@ -66,9 +91,15 @@ _ARCHIVE_COMMANDS = frozenset({"tar", "unzip", "zip"})
 
 # Interpreters whose inline-script flag carries code we must look inside.
 _INLINE_CODE_FLAGS = {
-    "python": ("-c",), "python3": ("-c",), "node": ("-e", "--eval"),
-    "ruby": ("-e",), "perl": ("-e",), "sh": ("-c",), "bash": ("-c",),
-    "zsh": ("-c",), "dash": ("-c",),
+    "python": ("-c",),
+    "python3": ("-c",),
+    "node": ("-e", "--eval"),
+    "ruby": ("-e",),
+    "perl": ("-e",),
+    "sh": ("-c",),
+    "bash": ("-c",),
+    "zsh": ("-c",),
+    "dash": ("-c",),
 }
 
 # Wrappers that run another command. The real command is the first operand
@@ -88,8 +119,21 @@ _COMMAND_PREFIXES: Dict[str, frozenset] = {
     "setsid": frozenset(),
     "command": frozenset(),
     "exec": frozenset(),
-    "xargs": frozenset({"-I", "-n", "-P", "-d", "-E", "-L", "-s", "--replace",
-                        "--max-args", "--max-procs", "--delimiter"}),
+    "xargs": frozenset(
+        {
+            "-I",
+            "-n",
+            "-P",
+            "-d",
+            "-E",
+            "-L",
+            "-s",
+            "--replace",
+            "--max-args",
+            "--max-procs",
+            "--delimiter",
+        }
+    ),
     "watch": frozenset({"-n", "--interval"}),
 }
 
@@ -130,11 +174,20 @@ _PATHLIKE_RE = re.compile(r"^(?:[~./]|[A-Za-z0-9_.\-]+/)")
 # hole this list is carved out of (`/dev/rdisk1` destroys a disk, and
 # `/dev/../Users/x` escapes entirely). Anything under /dev not named here stays
 # gated.
-_DEVICE_WRITE_ALLOW = frozenset({
-    "/dev/null", "/dev/zero", "/dev/tty", "/dev/stdout", "/dev/stderr",
-    "/dev/stdin", "/dev/console", "/dev/dtracehelper", "/dev/random",
-    "/dev/urandom",
-})
+_DEVICE_WRITE_ALLOW = frozenset(
+    {
+        "/dev/null",
+        "/dev/zero",
+        "/dev/tty",
+        "/dev/stdout",
+        "/dev/stderr",
+        "/dev/stdin",
+        "/dev/console",
+        "/dev/dtracehelper",
+        "/dev/random",
+        "/dev/urandom",
+    }
+)
 
 # /dev/fd/N and /dev/ttysNNN are numbered per process, so they need a pattern.
 _DEVICE_WRITE_ALLOW_RE = re.compile(r"^/dev/(?:fd/[0-9]+|ttys[0-9]+|pts/[0-9]+)$")
@@ -146,8 +199,10 @@ def is_passthrough_device(resolved: str) -> bool:
     Callers use this to skip gating a target: ``echo x > /dev/null`` is not a
     filesystem write in any sense the policy cares about.
     """
-    return (resolved in _DEVICE_WRITE_ALLOW
-            or bool(_DEVICE_WRITE_ALLOW_RE.match(resolved)))
+    return resolved in _DEVICE_WRITE_ALLOW or bool(
+        _DEVICE_WRITE_ALLOW_RE.match(resolved)
+    )
+
 
 # Quoted string literals inside embedded code.
 _STRING_LITERAL_RE = re.compile(r"""(?:'([^']{1,400})'|"([^"]{1,400})")""")
@@ -259,16 +314,17 @@ def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
     | `zip`                 | the archive, the first operand          |
     """
     targets: List[Tuple[str, str]] = []
-    short_cluster = "".join(t[1:] for t in body[1:]
-                            if t.startswith("-") and not t.startswith("--"))
+    short_cluster = "".join(
+        t[1:] for t in body[1:] if t.startswith("-") and not t.startswith("--")
+    )
     # BSD/GNU tar also accepts the flags without a leading dash (`tar czf x`).
     if name == "tar" and len(body) > 1 and not body[1].startswith("-"):
-        if re.fullmatch(r"[a-zA-Z]+", body[1]) and (
-                set(body[1]) & set("xctruf")):
+        if re.fullmatch(r"[a-zA-Z]+", body[1]) and (set(body[1]) & set("xctruf")):
             short_cluster += body[1]
     long_flags = {t.split("=", 1)[0] for t in body[1:] if t.startswith("--")}
-    operands = [t for t in body[1:]
-                if not t.startswith("-") and t not in _REDIRECT_TOKENS]
+    operands = [
+        t for t in body[1:] if not t.startswith("-") and t not in _REDIRECT_TOKENS
+    ]
     if name == "tar" and operands and operands[0] == short_cluster:
         # The dashless flag cluster is not an operand.
         operands = operands[1:]
@@ -298,15 +354,20 @@ def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
     if name == "tar":
         listing = "t" in short_cluster or "--list" in long_flags
         extracting = "x" in short_cluster or "--extract" in long_flags
-        creating = (bool(set("cru") & set(short_cluster))
-                    or bool({"--create", "--append", "--update"} & long_flags))
+        creating = bool(set("cru") & set(short_cluster)) or bool(
+            {"--create", "--append", "--update"} & long_flags
+        )
         if listing and not extracting and not creating:
             return targets
         if extracting:
             # Extraction writes into -C, or the cwd when -C is absent. The
             # bare cwd is reported so an outside workdir is still caught.
-            targets.append(("terminal(tar extract dir)",
-                            dir_flag_value("-C", "--directory") or "."))
+            targets.append(
+                (
+                    "terminal(tar extract dir)",
+                    dir_flag_value("-C", "--directory") or ".",
+                )
+            )
         if creating:
             archive = archive_operand()
             if archive and archive != "-":
@@ -340,9 +401,7 @@ def _embedded_paths(code: str) -> List[str]:
     return found
 
 
-def _analyze_segment(
-    tokens: List[str], cwd: str
-) -> Tuple[List[Tuple[str, str]], str]:
+def _analyze_segment(tokens: List[str], cwd: str) -> Tuple[List[Tuple[str, str]], str]:
     """Return ``(targets, new_cwd)`` for one command segment.
 
     ``targets`` are ``(label, raw_path)`` pairs this segment writes to.
@@ -400,7 +459,7 @@ def _analyze_segment(
         prefix = key + "="
         for token in body[1:]:
             if token.startswith(prefix):
-                targets.append((f"terminal({name} {key})", token[len(prefix):]))
+                targets.append((f"terminal({name} {key})", token[len(prefix) :]))
 
     # Inline interpreter code: recurse into the script body.
     flags = _INLINE_CODE_FLAGS.get(name)
@@ -434,10 +493,9 @@ def _analyze_segment(
 
     if mode:
         operands = [
-            t for t in body[1:]
-            if not t.startswith("-")
-            and t not in _REDIRECT_TOKENS
-            and "://" not in t
+            t
+            for t in body[1:]
+            if not t.startswith("-") and t not in _REDIRECT_TOKENS and "://" not in t
         ]
         # Drop the subcommand word for multiplexers.
         if name == "git" and operands:
@@ -493,11 +551,10 @@ def _analyze_command(command: str, cwd: str) -> Tuple[List[Tuple[str, str]], str
     return targets, current
 
 
-
-
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
 
 def analyze_command(command: str, cwd: str) -> List[Tuple[str, str]]:
     """Return ``(label, resolved_path)`` write targets for a shell command."""
@@ -556,18 +613,25 @@ def containment_violations(
             expanded = expand(file_path)
             if os.path.isabs(expanded):
                 # An absolute file_path ignores the skill directory entirely.
-                out.append(("skill_manage(file_path)",
-                            "an absolute path escapes the skill directory"))
+                out.append(
+                    (
+                        "skill_manage(file_path)",
+                        "an absolute path escapes the skill directory",
+                    )
+                )
             else:
                 name = str(args.get("name") or "")
                 skill_dir = normalize(os.path.join(_skill_root(), name))
                 resolved = resolve_against(
-                    os.path.join(_skill_root(), name, file_path), base)
+                    os.path.join(_skill_root(), name, file_path), base
+                )
                 if not is_within(resolved, skill_dir):
-                    out.append((
-                        "skill_manage(file_path)",
-                        f"path escapes the skill directory ({skill_dir})",
-                    ))
+                    out.append(
+                        (
+                            "skill_manage(file_path)",
+                            f"path escapes the skill directory ({skill_dir})",
+                        )
+                    )
 
     return out
 
@@ -604,8 +668,10 @@ def write_targets(
                 add("skill_manage(file_path)", file_path)
             else:
                 name = str(args.get("name") or "")
-                add("skill_manage(file_path)",
-                    os.path.join(_skill_root(), name, file_path))
+                add(
+                    "skill_manage(file_path)",
+                    os.path.join(_skill_root(), name, file_path),
+                )
 
     elif tool_name == "execute_code":
         code = args.get("code")
@@ -615,8 +681,10 @@ def write_targets(
             for match in re.finditer(
                 r"terminal\(\s*(?:command\s*=\s*)?['\"](.+?)['\"]", code, re.S
             ):
-                out.extend(("execute_code(terminal)", p)
-                           for _, p in analyze_command(match.group(1), base))
+                out.extend(
+                    ("execute_code(terminal)", p)
+                    for _, p in analyze_command(match.group(1), base)
+                )
 
     elif tool_name == "terminal":
         workdir = args.get("workdir")
@@ -624,8 +692,11 @@ def write_targets(
             add("terminal(workdir)", workdir)
         command = args.get("command")
         if isinstance(command, str) and command:
-            cwd = (resolve_against(workdir, base)
-                   if isinstance(workdir, str) and workdir else base)
+            cwd = (
+                resolve_against(workdir, base)
+                if isinstance(workdir, str) and workdir
+                else base
+            )
             out.extend(analyze_command(command, cwd))
 
     return out

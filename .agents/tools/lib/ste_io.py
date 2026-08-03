@@ -35,6 +35,7 @@ Usage
     write_json(path, data, make_parents=True)
     mkdir(cfg.path("outputs.state"))
 """
+
 from __future__ import annotations
 
 import json

@@ -14,6 +14,7 @@ before it ran:
 
 Deterministic, no LLM, reproducible byte-for-byte from the distilled tiers.
 """
+
 from __future__ import annotations
 
 import sys
@@ -22,25 +23,30 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text  # noqa: E402
+
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 
 # Mirrors synthesis.LEVELS: (tier_dir, level_label, description)
 LEVELS = [
     ("level-2", "-2", "ultra-minimal: the 14 core principles only"),
     ("level-1", "-1", "minimal/core: 14 core principles + synonym table"),
-    ("level0",  "0",  "baseline: core principles + short dictionary excerpt"),
-    ("level1",  "1",  "+ doc templates (code review / PR feedback)"),
-    ("level2",  "2",  "+ section-specific grammar rules"),
-    ("level3",  "3",  "+ complete dictionary excerpt + all rules"),
-    ("level4",  "4",  "+ extensions + reference catalogue"),
-    ("level5",  "5",  "full standard (all rules + extensions + catalogue + provenance)"),
+    ("level0", "0", "baseline: core principles + short dictionary excerpt"),
+    ("level1", "1", "+ doc templates (code review / PR feedback)"),
+    ("level2", "2", "+ section-specific grammar rules"),
+    ("level3", "3", "+ complete dictionary excerpt + all rules"),
+    ("level4", "4", "+ extensions + reference catalogue"),
+    ("level5", "5", "full standard (all rules + extensions + catalogue + provenance)"),
 ]
 
 
@@ -48,7 +54,9 @@ def _tier_subdocs(tier_dir: Path) -> list[Path]:
     return sorted(p for p in tier_dir.glob("*.md") if p.name != "_index.md")
 
 
-def _write_tier_index(tier_dir: Path, level_label: str, desc: str, subs: list[Path]) -> None:
+def _write_tier_index(
+    tier_dir: Path, level_label: str, desc: str, subs: list[Path]
+) -> None:
     lines = [
         f"# STE-Code Level {level_label} — distilled index",
         "",
@@ -121,8 +129,10 @@ def main() -> int:
         _write_tier_system_prompt(tdir, subs)
         present.append((d, l, desc))
         sp_size = (tdir / "system-prompt.txt").stat().st_size
-        print(f"  {d}/: {len(subs)} sub-docs -> _index.md + system-prompt.txt "
-              f"({sp_size:,}B)")
+        print(
+            f"  {d}/: {len(subs)} sub-docs -> _index.md + system-prompt.txt "
+            f"({sp_size:,}B)"
+        )
 
     if not present:
         print("No tiers present to assemble.")
@@ -130,8 +140,10 @@ def main() -> int:
 
     _assemble_llms_files(present)
     llf = (ARTIFACTS_DIR / "llms-full.txt").stat().st_size
-    print(f"  wrote llms.txt + llms-full.txt ({len(present)} tiers, "
-          f"llms-full.txt {llf:,}B)")
+    print(
+        f"  wrote llms.txt + llms-full.txt ({len(present)} tiers, "
+        f"llms-full.txt {llf:,}B)"
+    )
     print(f"\nArtifacts finalized -> {ARTIFACTS_DIR}")
     return 0
 

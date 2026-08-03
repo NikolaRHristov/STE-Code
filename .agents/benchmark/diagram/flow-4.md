@@ -5,14 +5,14 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
-> Previous: [flow-3.md](flow-3.md) · 🔵 BLUE + 🟣 PURPLE
-> Next: [flow-5.md](flow-5.md) · the whole machine + discrepancies
+> Previous: [flow-3.md](flow-3.md) · 🔵 BLUE + 🟣 PURPLE Next:
+> [flow-5.md](flow-5.md) · the whole machine + discrepancies
 
 ---
 
 ## 1. WHITE's job
 
-RED and BLUE produce *observations*. WHITE is the only stage that produces
+RED and BLUE produce _observations_. WHITE is the only stage that produces
 **durable knowledge** — a `knowledge.json` that survives across rounds and
 cycles, so the benchmark gets smarter instead of just repeating itself.
 
@@ -79,9 +79,9 @@ ladder is the actual value the benchmark produces:
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Note lesson `3f6b2f9acd76a7de` appears in **both** pattern 1 and pattern 2 —
-it is the `forbidden_bait × nested` cell, the intersection of the two
-weaknesses. That cell is where a fix would pay off twice.
+Note lesson `3f6b2f9acd76a7de` appears in **both** pattern 1 and pattern 2 — it
+is the `forbidden_bait × nested` cell, the intersection of the two weaknesses.
+That cell is where a fix would pay off twice.
 
 ---
 
@@ -114,8 +114,8 @@ This is a **real, actionable output**: it names the level, the failing
 technique, the missed principle, and the specific prompt edit to make. That is
 the deliverable the whole 1,393-run pipeline exists to produce.
 
-**But read `validated_by: simulated`.** The +35% is *derived from the lesson's
-own confidence*, not measured by re-running with the patched prompt. Offline,
+**But read `validated_by: simulated`.** The +35% is _derived from the lesson's
+own confidence_, not measured by re-running with the patched prompt. Offline,
 WHITE grades its own homework.
 
 ```
@@ -136,7 +136,7 @@ self-confirming.**
 
 ## 4. ⚫ BLACK — the adversary pointed inward
 
-Every other colour tries to break *the level*. BLACK tries to break **the
+Every other colour tries to break _the level_. BLACK tries to break **the
 benchmark's own conclusions**. Without it, a harness that measures itself will
 always report success.
 
@@ -199,7 +199,8 @@ A real verdict record:
 and checks the conclusion does not move. A result that flips under reweighting
 was an artifact of the weights, not a property of the level.
 
-> ⚠ **DISCREPANCY 5 — 40 of 40 `confirmed` is not reassuring, it is suspicious.**
+> ⚠ **DISCREPANCY 5 — 40 of 40 `confirmed` is not reassuring, it is
+> suspicious.**
 >
 > BLACK exists to find problems. It found none — across 5 independent
 > strategies, on a run where `escapes.json` was empty and `blue_passed` was
@@ -217,14 +218,14 @@ was an artifact of the weights, not a property of the level.
 >
 > WHITE produced no lessons this cycle (they were all pruned), so it published
 > no hypotheses. BLACK fell back to the baseline claim — "no escapes" — which
-> was *trivially true* because escapes.json was empty. **BLACK confirmed a
+> was _trivially true_ because escapes.json was empty. **BLACK confirmed a
 > tautology 40 times.** Detail in [flow-5.md](flow-5.md) §5.
 
 ---
 
 ## 5. The reverse-deduction loop
 
-The most interesting mechanism in the harness: BLACK talks *back* to WHITE.
+The most interesting mechanism in the harness: BLACK talks _back_ to WHITE.
 
 ```
    ⚫ BLACK confirms: "the base already resists this"
@@ -275,10 +276,10 @@ holds 12 signatures — the 12 (technique, placement) pairs BLACK confirmed. On
 the next cycle `_seed_escapes()` receives them as `exclude` and stops generating
 those attacks at all. The attack surface shrinks as the level proves itself.
 
-That is real convergence, correctly implemented — **and it is also why BLACK
-had nothing left to challenge by cycle 2.** The mechanism that makes the
-pipeline converge is the same one that empties BLACK's input. Both facts are
-true at once.
+That is real convergence, correctly implemented — **and it is also why BLACK had
+nothing left to challenge by cycle 2.** The mechanism that makes the pipeline
+converge is the same one that empties BLACK's input. Both facts are true at
+once.
 
 ---
 

@@ -33,8 +33,12 @@ from datetime import datetime, timezone
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 from ste_config import load as _load_config  # noqa: E402
@@ -47,6 +51,7 @@ from ste_io import write_text, mkdir  # noqa: E402
 # in config.yaml beside this file. Read that file to see the whole footprint.
 CFG = _load_config(__file__)
 from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+
 RT = _resolve_runtime(__file__)
 
 EXTRACTED_DIR = CFG.path("inputs.extracted")
@@ -57,8 +62,7 @@ CHECKPOINT_PATH = CFG.path("outputs.checkpoint")
 # ── Config ────────────────────────────────────────────────────────────────────
 MODEL = CFG.model
 WORKERS_PER_BATCH = int(
-    os.environ.get("REFINE_WORKERS_PER_BATCH")
-    or CFG.get("agent.workers_per_batch")
+    os.environ.get("REFINE_WORKERS_PER_BATCH") or CFG.get("agent.workers_per_batch")
 )
 TOTAL_WORKERS = CFG.get("thresholds.total_workers")
 TIMEOUT_SECONDS = CFG.get("agent.timeout_s")
@@ -73,6 +77,7 @@ FILENAME_RE = CFG.regex("layout.worker_re")
 # so the authoritative skill text is embedded. Edit the SKILL.md (not this
 # script) to change refinement behavior.
 import sys as _sys
+
 _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import lib_import
 
@@ -117,6 +122,7 @@ def _mark_text_coverage(src_txt, out_txt):
     "Non-STE:") carry no unique content and are skipped — their text always
     survives on the paired example line.
     """
+
     def norm(s):
         s = re.sub(r"<[^>]+>", " ", s)
         s = re.sub(r"[^a-z0-9 ]", " ", s.lower())
@@ -154,12 +160,12 @@ _BOILERPLATE_RE = re.compile(
     r"|Simplified\s+Technical\s+English"
     r"|Issue\s+9(\s*[-,]?\s*(2025-01-15|January\s+2025))?"
     r"|Part\s+\d+\s*[-–]\s*Dictionary"
-    r"|Part\s+\d+\s*[-–]\s*Writing\s+rules"            # repeated running header
-    r"|Subject[-\s]?to[-\s]?rule\s+index"               # repeated index running-header
+    r"|Part\s+\d+\s*[-–]\s*Writing\s+rules"  # repeated running header
+    r"|Subject[-\s]?to[-\s]?rule\s+index"  # repeated index running-header
     r"|Table\s+of\s+contents"
-    r"|\d{4}-\d{2}-\d{2}"                                # date stamps (2024-04-30, ...)
-    r"|Page\s+[A-Z0-9]+-[A-Z0-9\-]+"                 # Page 2-1-C18, Page HI-12
-    r"|Page\s+\d+(\s*[–-]\s*\d+)?\s+of\s+434"        # Page 34 of 434, Page 34–35 of 434
+    r"|\d{4}-\d{2}-\d{2}"  # date stamps (2024-04-30, ...)
+    r"|Page\s+[A-Z0-9]+-[A-Z0-9\-]+"  # Page 2-1-C18, Page HI-12
+    r"|Page\s+\d+(\s*[–-]\s*\d+)?\s+of\s+434"  # Page 34 of 434, Page 34–35 of 434
     r"|Highlights)"
 )
 
@@ -179,7 +185,11 @@ def _build_prompt(input_filename, output_filename, start_page, end_page):
         end_page=end_page,
     )
     skill = skill_prompt.skill_section("refinement")
-    return wrapper + skill + "\n\nOutput ONLY the refined markdown file. No explanations, no commentary.\n"
+    return (
+        wrapper
+        + skill
+        + "\n\nOutput ONLY the refined markdown file. No explanations, no commentary.\n"
+    )
 
 
 def _build_batch_prompt(files):
@@ -199,22 +209,27 @@ def _build_batch_prompt(files):
     task_blocks = []
     for i, (inp, out, s, e) in enumerate(files, 1):
         task_blocks.append(
-            _TPL.render("refine-batch-task", i=i, n=n, inp=inp, out=out,
-                        s=s, e=e)
+            _TPL.render("refine-batch-task", i=i, n=n, inp=inp, out=out, s=s, e=e)
         )
     tasks = "\n\n".join(task_blocks)
     wrapper = _TPL.render("refine-batch", n=n, tasks=tasks)
     skill = skill_prompt.skill_section("refinement")
-    return wrapper + skill + f"\n\nOutput ONLY the {n} refined markdown files. No explanations, no commentary.\n"
+    return (
+        wrapper
+        + skill
+        + f"\n\nOutput ONLY the {n} refined markdown files. No explanations, no commentary.\n"
+    )
 
 
 def _load_checkpoint():
     from ste_checkpoint import load
+
     return load(CHECKPOINT_PATH)
 
 
 def _save_checkpoint(ckpt):
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, ckpt)
 
 
@@ -236,6 +251,7 @@ def find_workers():
 def git_commit_locked(files, msg):
     """Serialize git commits across parallel batches via a lock dir."""
     import time as _time
+
     lock = STATE_DIR / "refine-git-lock"
     deadline = _time.time() + 120
     while _time.time() < deadline:
@@ -247,12 +263,19 @@ def git_commit_locked(files, msg):
     else:
         return False
     try:
-        subprocess.run(["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT))
-        r = subprocess.run(["git", "commit", "-m", msg, *files],
-                           capture_output=True, text=True, cwd=str(PROJECT))
+        subprocess.run(
+            ["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT)
+        )
+        r = subprocess.run(
+            ["git", "commit", "-m", msg, *files],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT),
+        )
         return r.returncode == 0
     finally:
         import shutil
+
         shutil.rmtree(lock, ignore_errors=True)
 
 
@@ -283,17 +306,31 @@ def run_worker(worker_num, src_path, start, end):
     max_attempts = 4
     for attempt in range(1, max_attempts + 1):
         start_t = time.time()
-        print(f"  R{worker_num:03d}: Refining {src_path.name} → {output_name} (attempt {attempt})...", flush=True)
+        print(
+            f"  R{worker_num:03d}: Refining {src_path.name} → {output_name} (attempt {attempt})...",
+            flush=True,
+        )
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True,
-                                    timeout=TIMEOUT_SECONDS, env=env, cwd=str(PROJECT))
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=TIMEOUT_SECONDS,
+                env=env,
+                cwd=str(PROJECT),
+            )
             dur = time.time() - start_t
             if result.stderr:
                 sl = result.stderr.lower()
                 if "error" in sl or "traceback" in sl:
-                    print(f"  R{worker_num:03d}: [stderr] {result.stderr[:300]}", flush=True)
+                    print(
+                        f"  R{worker_num:03d}: [stderr] {result.stderr[:300]}",
+                        flush=True,
+                    )
         except subprocess.TimeoutExpired:
-            print(f"  R{worker_num:03d}: [TIMEOUT] after {TIMEOUT_SECONDS}s", flush=True)
+            print(
+                f"  R{worker_num:03d}: [TIMEOUT] after {TIMEOUT_SECONDS}s", flush=True
+            )
             return False
         except Exception as e:
             print(f"  R{worker_num:03d}: [ERROR] {e}", flush=True)
@@ -325,21 +362,37 @@ def run_worker(worker_num, src_path, start, end):
             ok_marks = missing_marks == 0
 
             if ok_size and ok_skel and ok_parity and ok_marks:
-                _checkpoint[str(worker_num)] = {"passed": True, "output_size": sz,
-                                                "duration": round(dur, 1)}
+                _checkpoint[str(worker_num)] = {
+                    "passed": True,
+                    "output_size": sz,
+                    "duration": round(dur, 1),
+                }
                 _save_checkpoint(_checkpoint)
-                print(f"  R{worker_num:03d}: [PASS] {sz}B ({dur:.1f}s) "
-                      f"words {out_words}/{src_words} marks {total_marks-missing_marks}/{total_marks}", flush=True)
+                print(
+                    f"  R{worker_num:03d}: [PASS] {sz}B ({dur:.1f}s) "
+                    f"words {out_words}/{src_words} marks {total_marks - missing_marks}/{total_marks}",
+                    flush=True,
+                )
                 return True
             else:
                 reasons = []
-                if not ok_size: reasons.append(f"size={sz}B")
-                if not ok_skel: reasons.append("skeleton_missing")
-                if not ok_parity: reasons.append(f"word_loss {out_words}/{src_words}")
-                if not ok_marks: reasons.append(f"marks_lost {missing_marks}/{total_marks}")
-                print(f"  R{worker_num:03d}: [FAIL] {'; '.join(reasons)} — retrying", flush=True)
+                if not ok_size:
+                    reasons.append(f"size={sz}B")
+                if not ok_skel:
+                    reasons.append("skeleton_missing")
+                if not ok_parity:
+                    reasons.append(f"word_loss {out_words}/{src_words}")
+                if not ok_marks:
+                    reasons.append(f"marks_lost {missing_marks}/{total_marks}")
+                print(
+                    f"  R{worker_num:03d}: [FAIL] {'; '.join(reasons)} — retrying",
+                    flush=True,
+                )
         else:
-            print(f"  R{worker_num:03d}: [FAIL] no output file — likely rate-limited, retrying", flush=True)
+            print(
+                f"  R{worker_num:03d}: [FAIL] no output file — likely rate-limited, retrying",
+                flush=True,
+            )
 
         # Backoff before retry (covers 429 / transient API rejection)
         backoff = 20 * attempt
@@ -352,14 +405,17 @@ def run_worker(worker_num, src_path, start, end):
 
 def process_batch(batch_num, workers_map):
     start_worker = (batch_num - 1) * WORKERS_PER_BATCH + 1
-    members = [(w, workers_map[w]) for w in range(start_worker, start_worker + WORKERS_PER_BATCH)
-               if w in workers_map]
+    members = [
+        (w, workers_map[w])
+        for w in range(start_worker, start_worker + WORKERS_PER_BATCH)
+        if w in workers_map
+    ]
     if not members:
         print(f"Batch {batch_num}: no workers", flush=True)
         return True
 
     ids = ", ".join(f"R{w:03d}" for w, _ in members)
-    print(f"\n{'='*60}\nBatch {batch_num} — {ids}\n{'='*60}", flush=True)
+    print(f"\n{'=' * 60}\nBatch {batch_num} — {ids}\n{'=' * 60}", flush=True)
 
     all_ok = True
     for w, (src, s, e) in members:
@@ -374,7 +430,9 @@ def process_batch(batch_num, workers_map):
         if out.exists():
             passed_files.append(str(out.relative_to(PROJECT)))
     if passed_files:
-        msg = f"Refine Batch {batch_num:02d} - {'PASS' if all_ok else 'PARTIAL'} - {ids}"
+        msg = (
+            f"Refine Batch {batch_num:02d} - {'PASS' if all_ok else 'PARTIAL'} - {ids}"
+        )
         ok = git_commit_locked(passed_files, msg)
         if ok:
             print(f"  ✓ Committed: {msg}", flush=True)
@@ -392,21 +450,31 @@ def main():
     workers_map = find_workers()
     print(f"STE-Code Refinement Pipeline", flush=True)
     print(f"Model: {MODEL}", flush=True)
-    print(f"Workers available: {len(workers_map)} (batches of {WORKERS_PER_BATCH})", flush=True)
+    print(
+        f"Workers available: {len(workers_map)} (batches of {WORKERS_PER_BATCH})",
+        flush=True,
+    )
     print(f"Batches: {num_batches} (from {start_batch})", flush=True)
     print(f"Resume: {'yes' if resume else 'no'}", flush=True)
 
     atexit.register(lambda: _save_checkpoint(_checkpoint))
-    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
-    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
+    signal.signal(
+        signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0))
+    )
+    signal.signal(
+        signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130))
+    )
 
-    for batch_num in range(start_batch, min(start_batch + num_batches, TOTAL_WORKERS // WORKERS_PER_BATCH + 2)):
+    for batch_num in range(
+        start_batch,
+        min(start_batch + num_batches, TOTAL_WORKERS // WORKERS_PER_BATCH + 2),
+    ):
         if (batch_num - 1) * WORKERS_PER_BATCH + 1 > TOTAL_WORKERS:
             break
         process_batch(batch_num, workers_map)
 
     final = len(list(REFINED_DIR.glob("r*.md")))
-    print(f"\n{'='*60}\nDone. Files in refined/: {final}\n{'='*60}", flush=True)
+    print(f"\n{'=' * 60}\nDone. Files in refined/: {final}\n{'=' * 60}", flush=True)
 
 
 if __name__ == "__main__":

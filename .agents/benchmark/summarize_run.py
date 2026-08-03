@@ -21,6 +21,7 @@ Usage:
     python3 summarize_run.py --json dossier.json   # also dump the raw dossier
     python3 summarize_run.py --base .agents/tmp/pipe
 """
+
 from __future__ import annotations
 
 import argparse
@@ -86,12 +87,14 @@ def _iso(ts: float) -> str:
 
 def _latest_run(results_dir: Path) -> "Path | None":
     """Newest ``run-*`` directory under a results directory."""
-    runs = sorted((p for p in results_dir.glob("run-*") if p.is_dir()),
-                  key=lambda p: p.name)
+    runs = sorted(
+        (p for p in results_dir.glob("run-*") if p.is_dir()), key=lambda p: p.name
+    )
     return runs[-1] if runs else None
 
 
 # --------------------------------------------------------------- tier scoring
+
 
 def collect_tier_runs(bench: Path) -> list:
     """Every scored suite under ``tests/``: the only MEASURED evidence there is.
@@ -110,10 +113,15 @@ def collect_tier_runs(bench: Path) -> list:
         tier = match.group(1) if match else None
         suite = match.group(2) if match else "unknown"
         run = _latest_run(d)
-        rec = {"name": d.name, "tier": tier, "suite": suite,
-               "run_dir": str(run) if run else None,
-               "started_utc": _iso(_mtime(d)), "status": "no-run",
-               "provenance": MEASURED}
+        rec = {
+            "name": d.name,
+            "tier": tier,
+            "suite": suite,
+            "run_dir": str(run) if run else None,
+            "started_utc": _iso(_mtime(d)),
+            "status": "no-run",
+            "provenance": MEASURED,
+        }
         log = tests / (d.name + ".log")
         if log.exists():
             rec["log"] = str(log)
@@ -127,38 +135,50 @@ def collect_tier_runs(bench: Path) -> list:
         rec["cases_attempted"] = len(prog)
         if not agg:
             # Started, never aggregated: reconstruct what we can from progress.
-            outcomes = Counter(v.get("outcome") for v in prog.values()
-                               if isinstance(v, dict))
-            rec.update({"status": "incomplete",
-                        "worker_outcomes": dict(outcomes),
-                        "completed": outcomes.get("SUCCESS", 0)})
+            outcomes = Counter(
+                v.get("outcome") for v in prog.values() if isinstance(v, dict)
+            )
+            rec.update(
+                {
+                    "status": "incomplete",
+                    "worker_outcomes": dict(outcomes),
+                    "completed": outcomes.get("SUCCESS", 0),
+                }
+            )
             out.append(rec)
             continue
         aggregates = agg.get("aggregates", {}) or {}
-        rec.update({
-            "status": "complete",
-            "timestamp": agg.get("timestamp"),
-            "model": agg.get("model"),
-            "benchmark_id": agg.get("benchmark_id"),
-            "total_tests": agg.get("total_tests"),
-            "passed": agg.get("passed"),
-            "failed": agg.get("failed"),
-            "pass_rate_pct": agg.get("pass_rate_pct"),
-            "avg_correctness": aggregates.get("avg_correctness"),
-            "min_correctness": aggregates.get("min_correctness"),
-            "avg_latency_ms": aggregates.get("avg_latency_ms"),
-            "total_tokens_output": aggregates.get("total_tokens_output"),
-            "worker_outcomes": agg.get("worker_outcomes"),
-            "retries_total": agg.get("retries_total"),
-            "by_category": agg.get("by_category", {}),
-            "failures": [
-                {"test_id": t.get("test_id"), "category": t.get("category"),
-                 "score": t.get("correctness_score"),
-                 "missed": t.get("expected_principles_missed", []),
-                 "forbidden": t.get("forbidden_keywords_found", []),
-                 "notes": (t.get("notes") or "")[:300]}
-                for t in per if not t.get("passed")],
-        })
+        rec.update(
+            {
+                "status": "complete",
+                "timestamp": agg.get("timestamp"),
+                "model": agg.get("model"),
+                "benchmark_id": agg.get("benchmark_id"),
+                "total_tests": agg.get("total_tests"),
+                "passed": agg.get("passed"),
+                "failed": agg.get("failed"),
+                "pass_rate_pct": agg.get("pass_rate_pct"),
+                "avg_correctness": aggregates.get("avg_correctness"),
+                "min_correctness": aggregates.get("min_correctness"),
+                "avg_latency_ms": aggregates.get("avg_latency_ms"),
+                "total_tokens_output": aggregates.get("total_tokens_output"),
+                "worker_outcomes": agg.get("worker_outcomes"),
+                "retries_total": agg.get("retries_total"),
+                "by_category": agg.get("by_category", {}),
+                "failures": [
+                    {
+                        "test_id": t.get("test_id"),
+                        "category": t.get("category"),
+                        "score": t.get("correctness_score"),
+                        "missed": t.get("expected_principles_missed", []),
+                        "forbidden": t.get("forbidden_keywords_found", []),
+                        "notes": (t.get("notes") or "")[:300],
+                    }
+                    for t in per
+                    if not t.get("passed")
+                ],
+            }
+        )
         out.append(rec)
     return out
 
@@ -169,21 +189,29 @@ def collect_control(bench: Path) -> list:
     root = bench / "tests" / "control"
     if not root.exists():
         return out
-    for run in sorted((p for p in root.glob("run-*") if p.is_dir()),
-                      key=lambda p: p.name):
+    for run in sorted(
+        (p for p in root.glob("run-*") if p.is_dir()), key=lambda p: p.name
+    ):
         agg = _read_json(run / "aggregate-results.json")
         if not agg:
             continue
-        out.append({"run": run.name, "provenance": MEASURED,
-                    "total_tests": agg.get("total_tests"),
-                    "passed": agg.get("passed"),
-                    "pass_rate_pct": agg.get("pass_rate_pct"),
-                    "avg_correctness": (agg.get("aggregates", {}) or {})
-                    .get("avg_correctness")})
+        out.append(
+            {
+                "run": run.name,
+                "provenance": MEASURED,
+                "total_tests": agg.get("total_tests"),
+                "passed": agg.get("passed"),
+                "pass_rate_pct": agg.get("pass_rate_pct"),
+                "avg_correctness": (agg.get("aggregates", {}) or {}).get(
+                    "avg_correctness"
+                ),
+            }
+        )
     return out
 
 
 # ------------------------------------------------------- five-colour handshake
+
 
 def collect_pipeline(base: Path) -> dict:
     """Walk the variant/round handshake tree and the base-level artifacts.
@@ -216,7 +244,8 @@ def collect_pipeline(base: Path) -> dict:
     doc["defended"] = _read_json(base / "defended.json", {}) or {}
 
     doc["knowledge"] = _summarize_knowledge(
-        _read_json(base / "knowledge.json", {}) or {})
+        _read_json(base / "knowledge.json", {}) or {}
+    )
     doc["remedies"] = _summarize_remedies(base / "remedies")
     doc["notes"] = _summarize_notes(base / "notes")
     doc["rounds_detail"] = _walk_rounds(base)
@@ -238,16 +267,26 @@ def _walk_rounds(base: Path) -> list:
             black = _read_json(rdir / "black-done.json")
             stitch = _read_json(rdir / "report.json", {}) or {}
             escapes = _read_json(rdir / "escapes.json", []) or []
-            sides = [name for name, val in (("red", red), ("blue", blue),
-                                            ("white", white), ("black", black))
-                     if val is not None]
-            simulated = any(e.get("simulated") for e in escapes
-                            if isinstance(e, dict)) or stitch.get("simulated")
+            sides = [
+                name
+                for name, val in (
+                    ("red", red),
+                    ("blue", blue),
+                    ("white", white),
+                    ("black", black),
+                )
+                if val is not None
+            ]
+            simulated = any(
+                e.get("simulated") for e in escapes if isinstance(e, dict)
+            ) or stitch.get("simulated")
             rec = {
-                "variant": variant, "round": rdir.name.replace("round", ""),
+                "variant": variant,
+                "round": rdir.name.replace("round", ""),
                 "sides": sides,
-                "status": "complete" if len(sides) == 4 else (
-                    "absent" if not sides else "partial:" + "+".join(sides)),
+                "status": "complete"
+                if len(sides) == 4
+                else ("absent" if not sides else "partial:" + "+".join(sides)),
                 "escapes": len(escapes),
                 "escapes_simulated": bool(simulated),
                 "provenance": SIMULATED if simulated else MEASURED,
@@ -266,9 +305,13 @@ def _walk_rounds(base: Path) -> list:
                 "stitch_cycle": stitch.get("cycle"),
                 "black_verdicts": (black or {}).get("n_verdicts", 0),
             }
-            rec["escape_cells"] = sorted({
-                (e.get("technique"), e.get("placement")) for e in escapes
-                if isinstance(e, dict)})
+            rec["escape_cells"] = sorted(
+                {
+                    (e.get("technique"), e.get("placement"))
+                    for e in escapes
+                    if isinstance(e, dict)
+                }
+            )
             rec["resistance_table"] = (blue or {}).get("resistance_table", [])
             rec["verdict_records"] = (black or {}).get("verdicts", [])
             out.append(rec)
@@ -276,6 +319,7 @@ def _walk_rounds(base: Path) -> list:
 
 
 # ----------------------------------------------------- WHITE's durable memory
+
 
 def _summarize_knowledge(kb: dict) -> dict:
     """Roll up knowledge.json: lessons, their confidence, and the patterns.
@@ -293,55 +337,77 @@ def _summarize_knowledge(kb: dict) -> dict:
         conf = round(b / (a + b), 4) if (a + b) else 0.0
         scores = L.get("scores") or []
         mean_score = round(sum(scores) / len(scores), 3) if scores else None
-        rows.append({
-            "signature": sig[:8], "technique": L.get("technique"),
-            "placement": L.get("placement"), "timing": L.get("timing"),
-            "category": L.get("category"),
-            "missed_principles": L.get("missed_principles", []),
-            "forbidden_found": L.get("forbidden_found", []),
-            "occurrences": L.get("occurrences", 0),
-            "rounds_seen": L.get("rounds_seen", []),
-            "variants_affected": L.get("variants_affected", []),
-            "a": a, "b": b, "confidence": conf,
-            "mean_correctness": mean_score,
-            "severity": round((1.0 - (mean_score or 0.0)) *
-                              (1.0 + 0.1 * L.get("occurrences", 0)), 3),
-        })
+        rows.append(
+            {
+                "signature": sig[:8],
+                "technique": L.get("technique"),
+                "placement": L.get("placement"),
+                "timing": L.get("timing"),
+                "category": L.get("category"),
+                "missed_principles": L.get("missed_principles", []),
+                "forbidden_found": L.get("forbidden_found", []),
+                "occurrences": L.get("occurrences", 0),
+                "rounds_seen": L.get("rounds_seen", []),
+                "variants_affected": L.get("variants_affected", []),
+                "a": a,
+                "b": b,
+                "confidence": conf,
+                "mean_correctness": mean_score,
+                "severity": round(
+                    (1.0 - (mean_score or 0.0)) * (1.0 + 0.1 * L.get("occurrences", 0)),
+                    3,
+                ),
+            }
+        )
     rows.sort(key=lambda r: (-r["confidence"], -r["occurrences"]))
-    patterns = [p for p in (kb.get("patterns", {}) or {}).values()
-                if isinstance(p, dict)]
+    patterns = [
+        p for p in (kb.get("patterns", {}) or {}).values() if isinstance(p, dict)
+    ]
     patterns.sort(key=lambda p: -p.get("support", 0))
-    return {"schema_version": kb.get("schema_version"),
-            "version": kb.get("version"), "updated_at": kb.get("updated_at"),
-            "lesson_count": len(rows), "pattern_count": len(patterns),
-            "lessons": rows, "patterns": patterns,
-            "techniques": dict(Counter(r["technique"] for r in rows)),
-            "placements": dict(Counter(r["placement"] for r in rows))}
+    return {
+        "schema_version": kb.get("schema_version"),
+        "version": kb.get("version"),
+        "updated_at": kb.get("updated_at"),
+        "lesson_count": len(rows),
+        "pattern_count": len(patterns),
+        "lessons": rows,
+        "patterns": patterns,
+        "techniques": dict(Counter(r["technique"] for r in rows)),
+        "placements": dict(Counter(r["placement"] for r in rows)),
+    }
 
 
 def _summarize_remedies(root: Path) -> dict:
     """WHITE's proposals, split by whether the validation gate accepted them."""
-    doc = {"adopted": [], "rejected": [], "adopted_count": 0,
-           "rejected_count": 0}
+    doc = {"adopted": [], "rejected": [], "adopted_count": 0, "rejected_count": 0}
     if not root.exists():
         return doc
     for dest in ("adopted", "rejected"):
-        for path in sorted((root / dest).glob("*.json")) if (root / dest).exists() else []:
+        for path in (
+            sorted((root / dest).glob("*.json")) if (root / dest).exists() else []
+        ):
             rem = _read_json(path, {}) or {}
-            doc[dest].append({
-                "id": rem.get("id"), "kind": rem.get("remedy_kind"),
-                "target": rem.get("target"),
-                "diagnosis": rem.get("diagnosis"),
-                "patch_text": (rem.get("patch_text") or "")[:240],
-                "confidence": rem.get("confidence"),
-                "delta_resistance_pct": rem.get("delta_resistance_pct"),
-                "validated_by": rem.get("validated_by"),
-                "provenance": (SIMULATED if rem.get("validated_by") == "simulated"
-                               else MEASURED if rem.get("validated_by") else UNKNOWN),
-            })
+            doc[dest].append(
+                {
+                    "id": rem.get("id"),
+                    "kind": rem.get("remedy_kind"),
+                    "target": rem.get("target"),
+                    "diagnosis": rem.get("diagnosis"),
+                    "patch_text": (rem.get("patch_text") or "")[:240],
+                    "confidence": rem.get("confidence"),
+                    "delta_resistance_pct": rem.get("delta_resistance_pct"),
+                    "validated_by": rem.get("validated_by"),
+                    "provenance": (
+                        SIMULATED
+                        if rem.get("validated_by") == "simulated"
+                        else MEASURED
+                        if rem.get("validated_by")
+                        else UNKNOWN
+                    ),
+                }
+            )
         doc[dest + "_count"] = len(doc[dest])
-    doc["by_kind"] = dict(Counter(
-        r["kind"] for r in doc["adopted"] + doc["rejected"]))
+    doc["by_kind"] = dict(Counter(r["kind"] for r in doc["adopted"] + doc["rejected"]))
     doc["by_target"] = dict(Counter(r["target"] for r in doc["adopted"]))
     return doc
 
@@ -355,8 +421,14 @@ def _summarize_notes(root: Path) -> dict:
     reported, because a tree holding only the light shape means the protocol
     bus never actually ran.
     """
-    doc = {"total": 0, "by_kind": {}, "matrix": {}, "protocol_notes": 0,
-           "driver_notes": 0, "samples": []}
+    doc = {
+        "total": 0,
+        "by_kind": {},
+        "matrix": {},
+        "protocol_notes": 0,
+        "driver_notes": 0,
+        "samples": [],
+    }
     if not root.exists():
         return doc
     for path in sorted(root.glob("*.json")):
@@ -375,10 +447,16 @@ def _summarize_notes(root: Path) -> dict:
         doc["matrix"].setdefault(frm, {})
         doc["matrix"][frm][to] = doc["matrix"][frm].get(to, 0) + 1
         if len(doc["samples"]) < 6:
-            doc["samples"].append({
-                "id": note.get("id"), "from": frm, "to": to, "kind": kind,
-                "subject": note.get("subject") or note.get("claim_id"),
-                "message": (note.get("message") or note.get("body") or "")[:300]})
+            doc["samples"].append(
+                {
+                    "id": note.get("id"),
+                    "from": frm,
+                    "to": to,
+                    "kind": kind,
+                    "subject": note.get("subject") or note.get("claim_id"),
+                    "message": (note.get("message") or note.get("body") or "")[:300],
+                }
+            )
     return doc
 
 
@@ -398,17 +476,27 @@ def _summarize_verdicts(rounds: list) -> dict:
             by_colour[colour] += 1
             by_claim[str(v.get("claim_id"))][verdict] += 1
             if verdict != "confirmed" and len(non_confirmed) < 25:
-                non_confirmed.append({
-                    "claim_id": v.get("claim_id"), "variant": v.get("variant"),
-                    "round": v.get("round"), "source": colour,
-                    "verdict": verdict, "reason": (v.get("reason") or "")[:240]})
-    return {"total": sum(by_verdict.values()),
-            "by_verdict": dict(by_verdict), "by_challenged_colour": dict(by_colour),
-            "by_claim": {k: dict(v) for k, v in by_claim.items()},
-            "non_confirmed": non_confirmed}
+                non_confirmed.append(
+                    {
+                        "claim_id": v.get("claim_id"),
+                        "variant": v.get("variant"),
+                        "round": v.get("round"),
+                        "source": colour,
+                        "verdict": verdict,
+                        "reason": (v.get("reason") or "")[:240],
+                    }
+                )
+    return {
+        "total": sum(by_verdict.values()),
+        "by_verdict": dict(by_verdict),
+        "by_challenged_colour": dict(by_colour),
+        "by_claim": {k: dict(v) for k, v in by_claim.items()},
+        "non_confirmed": non_confirmed,
+    }
 
 
 # ------------------------------------------------------------ integrity checks
+
 
 def integrity_checks(dossier: dict) -> list:
     """Findings about the HARNESS, not the subject under test.
@@ -426,166 +514,228 @@ def integrity_checks(dossier: dict) -> list:
     cycles = pipe.get("cycles_report", []) or []
 
     def add(severity, title, detail, implication):
-        out.append({"severity": severity, "title": title,
-                    "detail": detail, "implication": implication})
+        out.append(
+            {
+                "severity": severity,
+                "title": title,
+                "detail": detail,
+                "implication": implication,
+            }
+        )
 
     # 1. Offline mode: nothing here was produced by a model.
     if pipe.get("skip_live"):
-        add("critical", "Pipeline ran offline (--skip-live)",
+        add(
+            "critical",
+            "Pipeline ran offline (--skip-live)",
             "pipeline-report.json records skip_live=true, so RED emitted cases "
             "without scoring them, BLUE derived resistance from its offline "
             "estimator, WHITE validated remedies by simulation, and the "
             "resistance figures BLACK confirmed came from _write_stitch_reports.",
             "Every adversarial number in this run is SIMULATED. It demonstrates "
-            "that the wiring converges; it measures nothing about the subject.")
+            "that the wiring converges; it measures nothing about the subject.",
+        )
 
     # 2. Seeded escapes: the escape corpus is synthetic by construction.
     seeded = [r for r in rounds if r.get("escapes_simulated")]
     if seeded:
-        add("critical", "Escape ledger is seeded, not observed",
+        add(
+            "critical",
+            "Escape ledger is seeded, not observed",
             "{} of {} rounds carry escapes flagged simulated:true, written by "
-            "run_pipeline._seed_escapes rather than produced by a scored run."
-            .format(len(seeded), len(rounds)),
+            "run_pipeline._seed_escapes rather than produced by a scored run.".format(
+                len(seeded), len(rounds)
+            ),
             "The technique/placement pattern (forbidden_bait everywhere, nested "
             "defeating everything) is the pattern the seeder was told to draw. "
             "WHITE's lessons rediscover that assumption, not a property of the "
-            "configuration under test.")
+            "configuration under test.",
+        )
 
     # 3. BLACK confirmed everything: a verifier that never dissents.
     bv = verdicts.get("by_verdict", {}) or {}
     total_v = verdicts.get("total", 0)
     if total_v and bv.get("confirmed", 0) == total_v:
-        add("high", "BLACK returned no dissenting verdict",
+        add(
+            "high",
+            "BLACK returned no dissenting verdict",
             "All {} verdicts are 'confirmed'; none are inflated, deflated, "
             "unsound or underpowered.".format(total_v),
             "BLACK's hypothesis test compares the brief's predicted lift "
             "(10%) against the stitch report's overall_resistance_pct, which "
             "the driver writes as a rising constant. The comparison is "
-            "satisfied by construction, so confirmation carries no evidence.")
+            "satisfied by construction, so confirmation carries no evidence.",
+        )
 
     # 4. The remedy challenge: never fired, or fired without evidence.
-    remedy_claims = [k for k in (verdicts.get("by_claim", {}) or {})
-                     if k.startswith("remedy-")]
+    remedy_claims = [
+        k for k in (verdicts.get("by_claim", {}) or {}) if k.startswith("remedy-")
+    ]
     if total_v and not remedy_claims:
-        add("high", "Split-half remedy verification never ran",
+        add(
+            "high",
+            "Split-half remedy verification never ran",
             "No verdict carries a 'remedy-*' claim id, so BLACK's "
             "_challenge_remedies produced nothing. It could not resolve the "
             "adopted remedies: white-done.json records 'adopted' as a count, "
             "and the remedy bodies live in <base>/remedies/adopted/.",
             "verification.py -- the split-half instrument that detects "
             "overfitting -- is present, self-tested, and never applied to a "
-            "real remedy. Adopted remedies are unverified.")
+            "real remedy. Adopted remedies are unverified.",
+        )
     elif remedy_claims:
         by_claim = verdicts.get("by_claim", {}) or {}
-        under = sum(counts.get("underpowered", 0)
-                    for k, counts in by_claim.items()
-                    if k.startswith("remedy-"))
-        graded = sum(sum(counts.values()) for k, counts in by_claim.items()
-                     if k.startswith("remedy-"))
+        under = sum(
+            counts.get("underpowered", 0)
+            for k, counts in by_claim.items()
+            if k.startswith("remedy-")
+        )
+        graded = sum(
+            sum(counts.values())
+            for k, counts in by_claim.items()
+            if k.startswith("remedy-")
+        )
         if graded and under == graded:
-            add("high", "Remedy verification runs but has nothing to measure",
+            add(
+                "high",
+                "Remedy verification runs but has nothing to measure",
                 "All {} remedy verdicts across {} remedies came back "
                 "'underpowered': BLACK now resolves the adopted remedies, but "
                 "each carries no 'cases' array, so there are no per-case "
-                "derivation/verification outcomes to split."
-                .format(graded, len(remedy_claims)),
+                "derivation/verification outcomes to split.".format(
+                    graded, len(remedy_claims)
+                ),
                 "The instrument is wired in and reports honestly, but WHITE "
                 "must record per-case outcomes on each remedy before the "
                 "split-half test can distinguish a real remedy from an "
-                "overfit one.")
+                "overfit one.",
+            )
 
     # 5. Reverse deduction: notes written, knowledge never pruned.
     pruned = max((c.get("pruned_lessons", 0) for c in cycles), default=0)
     notes_written = sum(c.get("reverse_notes_written", 0) for c in cycles)
     if notes_written and not pruned:
-        add("high", "Reverse deduction wrote notes but pruned nothing",
+        add(
+            "high",
+            "Reverse deduction wrote notes but pruned nothing",
             "{} reverse-deduction notes were written across cycles, yet "
             "pruned_lessons stayed 0. _collect_defended emits records keyed "
             "'brief_id'; _prune_knowledge reads d['claim_id'], which is never "
             "present, so the prefix match never runs.".format(notes_written),
             "The learning loop cannot converge: WHITE re-ingests the same "
-            "lessons every cycle and the confidence curve stays flat.")
+            "lessons every cycle and the confidence curve stays flat.",
+        )
 
     # 6. Learning curve: flat (no convergence) or descending (converged).
     if len(trend) >= 2:
         counts = [t.get("lessons") for t in trend]
         if len(set(counts)) == 1:
-            add("high", "Learning curve is flat across all cycles",
-                "Lesson count stayed at {} for all {} cycles."
-                .format(counts[0], len(counts)),
+            add(
+                "high",
+                "Learning curve is flat across all cycles",
+                "Lesson count stayed at {} for all {} cycles.".format(
+                    counts[0], len(counts)
+                ),
                 "The design intent (each cycle hardens the base, shrinking the "
                 "attack surface) is not observable. Either the exclusion set "
-                "never reaches the seeder or the prune never fires.")
+                "never reaches the seeder or the prune never fires.",
+            )
         elif counts[-1] == 0 and counts[0] > 0:
-            add("info", "Learning loop converged to zero open lessons",
+            add(
+                "info",
+                "Learning loop converged to zero open lessons",
                 "Lessons fell {} -> 0 across {} cycles; {} were pruned after "
                 "BLACK confirmed the base already resisted them, and {} "
                 "(technique, placement) pairs were excluded from the attack "
                 "surface.".format(
-                    counts[0], len(counts),
+                    counts[0],
+                    len(counts),
                     max((c.get("pruned_lessons", 0) for c in cycles), default=0),
-                    max((c.get("excluded_pairs", 0) for c in cycles), default=0)),
+                    max((c.get("excluded_pairs", 0) for c in cycles), default=0),
+                ),
                 "The self-refutation mechanism works end to end: a claim that "
                 "survives BLACK's challenge is retired rather than re-probed, "
                 "so the loop reaches a fixed point instead of cycling. What it "
                 "converged on is still the seeded corpus, so this validates "
-                "the machinery, not the subject.")
+                "the machinery, not the subject.",
+            )
 
     # 7. Defended count saturates without shrinking the surface.
     defended = [c.get("defended_confirmed", 0) for c in cycles]
     if len(defended) >= 2 and defended[-1] == defended[1] and defended[-1] > 0:
-        add("medium", "Defended-claim count saturates immediately",
-            "defended_confirmed jumps 0 -> {} at cycle 2 and never changes."
-            .format(defended[1]),
+        add(
+            "medium",
+            "Defended-claim count saturates immediately",
+            "defended_confirmed jumps 0 -> {} at cycle 2 and never changes.".format(
+                defended[1]
+            ),
             "Cycles 3 and 4 re-derive the identical conclusion. The extra "
-            "cycles cost time and add no information.")
+            "cycles cost time and add no information.",
+        )
 
     # 8. The signature-set that gates WHITE is empty.
     sigs = (pipe.get("defended", {}) or {}).get("signatures", [])
     if notes_written and not sigs:
-        add("medium", "defended.json carries no signatures",
+        add(
+            "medium",
+            "defended.json carries no signatures",
             "WHITE is invoked with --defended pointing at a file whose "
             "'signatures' list is empty, so _defended_pairs_match resolves to "
             "an empty skip set.",
             "WHITE's reverse-deduction guard is wired but inert; it never "
-            "skips a pair BLACK already cleared.")
+            "skips a pair BLACK already cleared.",
+        )
 
     # 9. BLUE saw no escapes in its own report despite a full ledger.
     blue_rep = pipe.get("blue_report", {}) or {}
     per_tier = blue_rep.get("per_tier", {}) or {}
-    no_escape_tiers = [t for t, v in per_tier.items()
-                       if any(r.get("status") == "no-escapes"
-                              for r in (v.get("rounds") or []))]
+    no_escape_tiers = [
+        t
+        for t, v in per_tier.items()
+        if any(r.get("status") == "no-escapes" for r in (v.get("rounds") or []))
+    ]
     if no_escape_tiers and any(r.get("escapes") for r in rounds):
-        add("medium", "BLUE's own report disagrees with the round tree",
+        add(
+            "medium",
+            "BLUE's own report disagrees with the round tree",
             "blue-report.json records status 'no-escapes' for tier(s) {} while "
             "the round directories hold seeded escapes and populated "
             "resistance tables.".format(", ".join(map(str, no_escape_tiers))),
             "BLUE ran before the seeder wrote the ledger for those tiers. The "
             "base-level BLUE report is a stale view; per-round blue-done.json "
-            "is the reliable one.")
+            "is the reliable one.",
+        )
 
     # 10. Every lesson is P1: the principle axis is degenerate.
-    princ = Counter(p for L in (kb.get("lessons") or [])
-                    for p in (L.get("missed_principles") or []))
+    princ = Counter(
+        p for L in (kb.get("lessons") or []) for p in (L.get("missed_principles") or [])
+    )
     if len(princ) == 1 and kb.get("lesson_count", 0) > 2:
-        add("low", "All lessons cite a single principle",
-            "Every one of the {} lessons names {} as the missed principle."
-            .format(kb.get("lesson_count"), next(iter(princ))),
+        add(
+            "low",
+            "All lessons cite a single principle",
+            "Every one of the {} lessons names {} as the missed principle.".format(
+                kb.get("lesson_count"), next(iter(princ))
+            ),
             "The seeder hardcodes that principle. Any rule-level conclusion is "
-            "an artifact of the fixture.")
+            "an artifact of the fixture.",
+        )
 
     # 11. Incomplete tier suites.
     tiers = dossier.get("tier_runs", []) or []
     stalled = [t for t in tiers if t.get("status") == "incomplete"]
     if stalled:
-        add("high", "Scored tier suites did not finish",
+        add(
+            "high",
+            "Scored tier suites did not finish",
             "{} of {} suites produced no aggregate: {}".format(
-                len(stalled), len(tiers),
-                ", ".join(t["name"] for t in stalled[:8])),
+                len(stalled), len(tiers), ", ".join(t["name"] for t in stalled[:8])
+            ),
             "Tier comparison is only possible across the {} suite(s) that did "
-            "complete; the rest hit the 3600s orchestrator cap."
-            .format(len(tiers) - len(stalled)))
+            "complete; the rest hit the 3600s orchestrator cap.".format(
+                len(tiers) - len(stalled)
+            ),
+        )
 
     order = {"critical": 0, "high": 1, "medium": 2, "low": 3, "info": 4}
     out.sort(key=lambda f: order.get(f["severity"], 9))
@@ -593,6 +743,7 @@ def integrity_checks(dossier: dict) -> list:
 
 
 # ------------------------------------------------------------------- assembly
+
 
 def compute_metrics(doc: dict) -> dict:
     """Flatten the dossier into the scalar metrics GOALS.yaml can test.
@@ -605,9 +756,11 @@ def compute_metrics(doc: dict) -> dict:
     # The control suite is scaffolding, not a tier: it carries no tier number
     # and runs against a mock model. Counting it as a measured result inflates
     # the headline pass rate with 2/2 that no real model produced.
-    tiers = [t for t in tiers
-             if t.get("tier") is not None
-             and str(t.get("model") or "").lower() != "mock"]
+    tiers = [
+        t
+        for t in tiers
+        if t.get("tier") is not None and str(t.get("model") or "").lower() != "mock"
+    ]
     done = [t for t in tiers if t.get("status") == "complete"]
     rounds = pipe.get("rounds_detail") or []
     cycles = pipe.get("cycles_report") or []
@@ -618,8 +771,7 @@ def compute_metrics(doc: dict) -> dict:
 
     passed = sum(t.get("passed") or 0 for t in done)
     total = sum(t.get("total_tests") or 0 for t in done)
-    rates = [t.get("pass_rate_pct") for t in done
-             if t.get("pass_rate_pct") is not None]
+    rates = [t.get("pass_rate_pct") for t in done if t.get("pass_rate_pct") is not None]
 
     # Difficulty ordering: sort suites by tier, check pass rate never rises.
     # `tier` arrives as a string ("-2", "-1", "0"), so it must be coerced to a
@@ -637,11 +789,9 @@ def compute_metrics(doc: dict) -> dict:
             continue
     ranked.sort(key=lambda x: x[0])
     if len(ranked) >= 2:
-        monotonic = all(a[1] >= b[1] - 1e-9
-                        for a, b in zip(ranked, ranked[1:]))
+        monotonic = all(a[1] >= b[1] - 1e-9 for a, b in zip(ranked, ranked[1:]))
 
-    lesson_counts = [(c.get("knowledge") or {}).get("lessons", 0)
-                     for c in cycles]
+    lesson_counts = [(c.get("knowledge") or {}).get("lessons", 0) for c in cycles]
     peak = max(lesson_counts) if lesson_counts else 0
     final = lesson_counts[-1] if lesson_counts else None
     converged = (bool(lesson_counts) and peak > 0 and final == 0) or None
@@ -654,7 +804,7 @@ def compute_metrics(doc: dict) -> dict:
 
     # A remedy counts as verified only with a per-case split-half outcome.
     verified = 0
-    for r in (rem.get("adopted") or []):
+    for r in rem.get("adopted") or []:
         prov = str(r.get("provenance") or "").lower()
         if any(k in prov for k in ("split", "permutation", "bootstrap")):
             verified += 1
@@ -662,35 +812,42 @@ def compute_metrics(doc: dict) -> dict:
     return {
         "suites_completed": len(done),
         "suites_total": len(tiers),
-        "suites_completed_pct": (round(100.0 * len(done) / len(tiers), 1)
-                                 if tiers else None),
-        "measured_pass_rate_pct": (round(100.0 * passed / total, 1)
-                                   if total else None),
+        "suites_completed_pct": (
+            round(100.0 * len(done) / len(tiers), 1) if tiers else None
+        ),
+        "measured_pass_rate_pct": (round(100.0 * passed / total, 1) if total else None),
         "worst_suite_pass_pct": min(rates) if rates else None,
         "tier_monotonic": monotonic,
         "pipeline_live": (not pipe.get("skip_live")) if pipe.get("exists") else None,
-        "escapes_observed": ((not any(r.get("escapes_simulated")
-                                      for r in rounds))
-                             if rounds else None),
+        "escapes_observed": (
+            (not any(r.get("escapes_simulated") for r in rounds)) if rounds else None
+        ),
         "lessons_final": final,
         "lessons_peak": peak if cycles else None,
-        "lessons_pruned": max((c.get("pruned_lessons", 0) for c in cycles),
-                              default=None) if cycles else None,
-        "pairs_excluded": max((c.get("excluded_pairs", 0) for c in cycles),
-                              default=None) if cycles else None,
+        "lessons_pruned": max(
+            (c.get("pruned_lessons", 0) for c in cycles), default=None
+        )
+        if cycles
+        else None,
+        "pairs_excluded": max(
+            (c.get("excluded_pairs", 0) for c in cycles), default=None
+        )
+        if cycles
+        else None,
         "loop_converged": converged,
         "black_verdicts": total_v or None,
         "black_dissent": dissent if total_v else None,
-        "black_dissent_pct": (round(100.0 * dissent / total_v, 1)
-                              if total_v else None),
+        "black_dissent_pct": (round(100.0 * dissent / total_v, 1) if total_v else None),
         "remedies_adopted": rem.get("adopted_count"),
         "remedies_verified": verified if rem.get("adopted_count") else None,
         "notes_protocol": notes.get("protocol_notes"),
-        "control_cases": max((c.get("total_tests") or 0
-                              for c in (doc.get("control_runs") or [])),
-                             default=None),
-        "critical_findings": sum(1 for f in findings
-                                 if f.get("severity") in ("critical", "high")),
+        "control_cases": max(
+            (c.get("total_tests") or 0 for c in (doc.get("control_runs") or [])),
+            default=None,
+        ),
+        "critical_findings": sum(
+            1 for f in findings if f.get("severity") in ("critical", "high")
+        ),
     }
 
 
@@ -748,14 +905,20 @@ def grade_goals(goals: list, metrics: dict) -> list:
             except TypeError:
                 status = "unknown"
 
-        expect = ("{} {}".format(sym, want) if op_name not in
-                  ("is_true", "is_false") else sym)
-        rec = {"id": g.get("id"), "statement": " ".join(
-                   str(g.get("statement", "")).split()),
-               "rationale": " ".join(str(g.get("rationale", "")).split()),
-               "weight": g.get("weight", "secondary"),
-               "metric": metric, "expected": expect, "observed": got,
-               "status": status, "blocked_by": g.get("blocked_by") or []}
+        expect = (
+            "{} {}".format(sym, want) if op_name not in ("is_true", "is_false") else sym
+        )
+        rec = {
+            "id": g.get("id"),
+            "statement": " ".join(str(g.get("statement", "")).split()),
+            "rationale": " ".join(str(g.get("rationale", "")).split()),
+            "weight": g.get("weight", "secondary"),
+            "metric": metric,
+            "expected": expect,
+            "observed": got,
+            "status": status,
+            "blocked_by": g.get("blocked_by") or [],
+        }
         graded.append(rec)
         by_id[rec["id"]] = rec
 
@@ -763,8 +926,11 @@ def grade_goals(goals: list, metrics: dict) -> list:
     for rec in graded:
         if rec["status"] in ("met", "unknown"):
             continue
-        blockers = [b for b in rec["blocked_by"]
-                    if by_id.get(b, {}).get("status") not in ("met", None)]
+        blockers = [
+            b
+            for b in rec["blocked_by"]
+            if by_id.get(b, {}).get("status") not in ("met", None)
+        ]
         if blockers:
             rec["status"] = "untestable"
             rec["blocked_reason"] = ", ".join(blockers)
@@ -789,6 +955,7 @@ def build_dossier(bench: Path, base: Path) -> dict:
 
 # ------------------------------------------------------------------ rendering
 
+
 def _row(cells) -> str:
     return "| " + " | ".join("" if c is None else str(c) for c in cells) + " |"
 
@@ -799,8 +966,7 @@ def _table(headers, rows) -> list:
     return out
 
 
-_GOAL_ICON = {"met": "✅", "not met": "❌", "untestable": "🚧",
-              "unknown": "❔"}
+_GOAL_ICON = {"met": "✅", "not met": "❌", "untestable": "🚧", "unknown": "❔"}
 
 
 def _render_scorecard(doc: dict) -> list:
@@ -808,18 +974,29 @@ def _render_scorecard(doc: dict) -> list:
     goals = doc.get("goals") or []
     if not goals:
         return []
-    out = ["", "## Scorecard — goals vs outcome", "",
-           "Declared in `.agents/benchmark/GOALS.yaml` before the run; graded "
-           "here from artifacts. 🚧 means a prerequisite goal failed, so this "
-           "one was never measurable — which is not the same as failing it.",
-           ""]
+    out = [
+        "",
+        "## Scorecard — goals vs outcome",
+        "",
+        "Declared in `.agents/benchmark/GOALS.yaml` before the run; graded "
+        "here from artifacts. 🚧 means a prerequisite goal failed, so this "
+        "one was never measurable — which is not the same as failing it.",
+        "",
+    ]
     tally = Counter(g["status"] for g in goals)
     prim = [g for g in goals if g["weight"] == "primary"]
     prim_met = sum(1 for g in prim if g["status"] == "met")
-    out.append("**{}/{} primary goals met** · {} overall: {}".format(
-        prim_met, len(prim), len(goals),
-        " · ".join("{} {}".format(_GOAL_ICON.get(k, "•"), v)
-                   for k, v in sorted(tally.items()))))
+    out.append(
+        "**{}/{} primary goals met** · {} overall: {}".format(
+            prim_met,
+            len(prim),
+            len(goals),
+            " · ".join(
+                "{} {}".format(_GOAL_ICON.get(k, "•"), v)
+                for k, v in sorted(tally.items())
+            ),
+        )
+    )
     out.append("")
     for weight in ("primary", "secondary"):
         sel = [g for g in goals if g["weight"] == weight]
@@ -831,25 +1008,40 @@ def _render_scorecard(doc: dict) -> list:
         for g in sel:
             obs = g["observed"]
             obs = "—" if obs is None else obs
-            note = ("blocked by {}".format(g["blocked_reason"])
-                    if g.get("blocked_reason") else g["statement"])
-            rows.append([_GOAL_ICON.get(g["status"], "•"), g["id"], note,
-                         "`{}`".format(g["metric"]), g["expected"], obs])
-        out.extend(_table(["", "id", "goal", "metric", "wanted", "observed"],
-                          rows))
+            note = (
+                "blocked by {}".format(g["blocked_reason"])
+                if g.get("blocked_reason")
+                else g["statement"]
+            )
+            rows.append(
+                [
+                    _GOAL_ICON.get(g["status"], "•"),
+                    g["id"],
+                    note,
+                    "`{}`".format(g["metric"]),
+                    g["expected"],
+                    obs,
+                ]
+            )
+        out.extend(_table(["", "id", "goal", "metric", "wanted", "observed"], rows))
         out.append("")
-    missed = [g for g in goals
-              if g["status"] in ("not met", "untestable")
-              and g["weight"] == "primary"]
+    missed = [
+        g
+        for g in goals
+        if g["status"] in ("not met", "untestable") and g["weight"] == "primary"
+    ]
     if missed:
         out.append("### Why the primary goals were not established")
         out.append("")
         for g in missed:
-            out.append("- **{} {}** — {} _{}_".format(
-                _GOAL_ICON.get(g["status"]), g["id"], g["statement"],
-                g["rationale"]))
+            out.append(
+                "- **{} {}** — {} _{}_".format(
+                    _GOAL_ICON.get(g["status"]), g["id"], g["statement"], g["rationale"]
+                )
+            )
         out.append("")
     return out
+
 
 def render_markdown(doc: dict) -> str:
     out = []
@@ -859,25 +1051,33 @@ def render_markdown(doc: dict) -> str:
 
     add("# Adversarial benchmark run report")
     add("")
-    add("Generated {} · profile **{}** ({})".format(
-        doc["generated_utc"], prof.get("display_name", "?"),
-        prof.get("description", "")))
+    add(
+        "Generated {} · profile **{}** ({})".format(
+            doc["generated_utc"],
+            prof.get("display_name", "?"),
+            prof.get("description", ""),
+        )
+    )
     add("")
 
     # ---- provenance banner: the single most important fact ----
     if pipe.get("skip_live"):
         add("> ## ⚠ Provenance: SIMULATED")
         add(">")
-        add("> This pipeline ran with `--skip-live`. No model was called by "
+        add(
+            "> This pipeline ran with `--skip-live`. No model was called by "
             "RED, BLUE, WHITE or BLACK. The escape ledger was written by "
             "`_seed_escapes`, BLUE's resistance came from its offline "
             "estimator, WHITE's remedy deltas were simulated from lesson "
             "confidence, and the resistance figures BLACK checked were written "
-            "by `_write_stitch_reports` as a rising constant.")
+            "by `_write_stitch_reports` as a rising constant."
+        )
         add(">")
-        add("> **Read every adversarial number below as a wiring check, not a "
+        add(
+            "> **Read every adversarial number below as a wiring check, not a "
             "measurement.** The only measured results in this report are the "
-            "scored tier suites in the next section.")
+            "scored tier suites in the next section."
+        )
         add("")
 
     add(_section_scope(doc))
@@ -895,20 +1095,26 @@ def _section_scope(doc: dict) -> str:
     pipe = doc.get("pipeline", {}) or {}
     tiers = doc.get("tier_runs", []) or []
     done = [t for t in tiers if t.get("status") == "complete"]
-    lines = ["## What this run tested", "",
-             "| dimension | value |", "|---|---|"]
+    lines = ["## What this run tested", "", "| dimension | value |", "|---|---|"]
     lines.append(_row(["scored suites attempted", len(tiers)]))
     lines.append(_row(["scored suites completed", len(done)]))
     lines.append(_row(["adversarial variants", len(pipe.get("tiers", []) or [])]))
     lines.append(_row(["rounds per variant", pipe.get("rounds")]))
     lines.append(_row(["adversarial cycles", pipe.get("cycles")]))
     lines.append(_row(["handshake cells", len(pipe.get("rounds_detail", []) or [])]))
-    lines.append(_row(["knowledge lessons",
-                       (pipe.get("knowledge", {}) or {}).get("lesson_count")]))
-    lines.append(_row(["remedies adopted",
-                       (pipe.get("remedies", {}) or {}).get("adopted_count")]))
-    lines.append(_row(["BLACK verdicts",
-                       (pipe.get("verdicts", {}) or {}).get("total")]))
+    lines.append(
+        _row(
+            ["knowledge lessons", (pipe.get("knowledge", {}) or {}).get("lesson_count")]
+        )
+    )
+    lines.append(
+        _row(
+            ["remedies adopted", (pipe.get("remedies", {}) or {}).get("adopted_count")]
+        )
+    )
+    lines.append(
+        _row(["BLACK verdicts", (pipe.get("verdicts", {}) or {}).get("total")])
+    )
     lines.append(_row(["notes exchanged", (pipe.get("notes", {}) or {}).get("total")]))
     return "\n".join(lines)
 
@@ -921,22 +1127,43 @@ def _render_measured(doc: dict) -> list:
         out.append("_No suite produced an aggregate. Nothing here is measured._")
         out.append("")
     else:
-        out.append("These ran a real model against the tier prompts. This is "
-                   "the only MEASURED evidence in the report.")
+        out.append(
+            "These ran a real model against the tier prompts. This is "
+            "the only MEASURED evidence in the report."
+        )
         out.append("")
         rows = []
         for t in sorted(done, key=lambda x: -(x.get("pass_rate_pct") or 0)):
-            rows.append([
-                "`{}`".format(t["name"]), t.get("tier"), t.get("suite"),
-                "{}/{}".format(t.get("passed"), t.get("total_tests")),
-                "**{}%**".format(t.get("pass_rate_pct")),
-                t.get("avg_correctness"),
-                "{:,}".format(int(t["avg_latency_ms"] / 1000))
-                if t.get("avg_latency_ms") else None,
-                t.get("model")])
-            
-        out.extend(_table(["suite", "tier", "kind", "passed", "pass rate",
-                           "avg correctness", "avg latency (s)", "model"], rows))
+            rows.append(
+                [
+                    "`{}`".format(t["name"]),
+                    t.get("tier"),
+                    t.get("suite"),
+                    "{}/{}".format(t.get("passed"), t.get("total_tests")),
+                    "**{}%**".format(t.get("pass_rate_pct")),
+                    t.get("avg_correctness"),
+                    "{:,}".format(int(t["avg_latency_ms"] / 1000))
+                    if t.get("avg_latency_ms")
+                    else None,
+                    t.get("model"),
+                ]
+            )
+
+        out.extend(
+            _table(
+                [
+                    "suite",
+                    "tier",
+                    "kind",
+                    "passed",
+                    "pass rate",
+                    "avg correctness",
+                    "avg latency (s)",
+                    "model",
+                ],
+                rows,
+            )
+        )
         out.append("")
 
         # per-category, from the best suite
@@ -945,11 +1172,17 @@ def _render_measured(doc: dict) -> list:
         if cats:
             out.append("### Category breakdown — `{}`".format(best["name"]))
             out.append("")
-            rows = [[c, "{}/{}".format(v.get("passed"), v.get("total")),
-                     v.get("avg_correctness"),
-                     "✅" if not v.get("failed") else "❌ {}".format(v.get("failed"))]
-                    for c, v in sorted(cats.items(),
-                                       key=lambda kv: kv[1].get("avg_correctness") or 0)]
+            rows = [
+                [
+                    c,
+                    "{}/{}".format(v.get("passed"), v.get("total")),
+                    v.get("avg_correctness"),
+                    "✅" if not v.get("failed") else "❌ {}".format(v.get("failed")),
+                ]
+                for c, v in sorted(
+                    cats.items(), key=lambda kv: kv[1].get("avg_correctness") or 0
+                )
+            ]
             out.extend(_table(["category", "passed", "avg correctness", ""], rows))
             out.append("")
 
@@ -958,41 +1191,79 @@ def _render_measured(doc: dict) -> list:
         if fails:
             out.append("### What failed")
             out.append("")
-            rows = [[s, f.get("test_id"), f.get("category"), f.get("score"),
-                     ", ".join(f.get("missed") or []) or "—",
-                     ", ".join(f.get("forbidden") or []) or "—"]
-                    for s, f in fails[:20]]
-            out.extend(_table(["suite", "test", "category", "score",
-                               "principles missed", "forbidden found"], rows))
+            rows = [
+                [
+                    s,
+                    f.get("test_id"),
+                    f.get("category"),
+                    f.get("score"),
+                    ", ".join(f.get("missed") or []) or "—",
+                    ", ".join(f.get("forbidden") or []) or "—",
+                ]
+                for s, f in fails[:20]
+            ]
+            out.extend(
+                _table(
+                    [
+                        "suite",
+                        "test",
+                        "category",
+                        "score",
+                        "principles missed",
+                        "forbidden found",
+                    ],
+                    rows,
+                )
+            )
             out.append("")
 
     stalled = [t for t in tiers if t.get("status") != "complete"]
     if stalled:
         out.append("### Suites that produced no result")
         out.append("")
-        rows = [[ "`{}`".format(t["name"]), t.get("status"),
-                  t.get("cases_attempted"), t.get("completed"),
-                  (t.get("worker_outcomes") or {}) or "—"] for t in stalled]
-        out.extend(_table(["suite", "status", "cases attempted",
-                           "completed", "worker outcomes"], rows))
+        rows = [
+            [
+                "`{}`".format(t["name"]),
+                t.get("status"),
+                t.get("cases_attempted"),
+                t.get("completed"),
+                (t.get("worker_outcomes") or {}) or "—",
+            ]
+            for t in stalled
+        ]
+        out.extend(
+            _table(
+                ["suite", "status", "cases attempted", "completed", "worker outcomes"],
+                rows,
+            )
+        )
         out.append("")
 
     ctrl = doc.get("control_runs", []) or []
     if ctrl:
         out.append("### Control baseline (no tier prompt)")
         out.append("")
-        rows = [[c["run"], "{}/{}".format(c.get("passed"), c.get("total_tests")),
-                 "{}%".format(c.get("pass_rate_pct")), c.get("avg_correctness")]
-                for c in ctrl]
+        rows = [
+            [
+                c["run"],
+                "{}/{}".format(c.get("passed"), c.get("total_tests")),
+                "{}%".format(c.get("pass_rate_pct")),
+                c.get("avg_correctness"),
+            ]
+            for c in ctrl
+        ]
         out.extend(_table(["run", "passed", "pass rate", "avg correctness"], rows))
         out.append("")
         sizes = {c.get("total_tests") for c in ctrl}
         tot = {t.get("total_tests") for t in done} or {None}
         if sizes and tot and max(sizes or [0]) < (max(x for x in tot if x) or 0):
-            out.append("> The control ran {} case(s) against the tiers' {}. "
-                       "It is a smoke test, not a comparable baseline — no "
-                       "STE-Code-vs-plain claim can rest on it."
-                       .format(max(sizes), max(x for x in tot if x)))
+            out.append(
+                "> The control ran {} case(s) against the tiers' {}. "
+                "It is a smoke test, not a comparable baseline — no "
+                "STE-Code-vs-plain claim can rest on it.".format(
+                    max(sizes), max(x for x in tot if x)
+                )
+            )
             out.append("")
     return out
 
@@ -1012,22 +1283,58 @@ def _render_pipeline(doc: dict) -> list:
     esc = sum(r.get("escapes", 0) for r in rd)
     prb = sum(r.get("blue_probes") or 0 for r in rd)
     rem = pipe.get("remedies", {}) or {}
-    out.append(_row(["**RED**", "attacks the subject",
-                     "`escapes.json` + `purple.json`",
-                     "{} escapes across {} cells".format(esc, len(rd))]))
-    out.append(_row(["**BLUE**", "relocates each escape, measures resistance",
-                     "`blue-done.json`", "{} probes".format(prb)]))
-    out.append(_row(["**PURPLE**", "stitches RED×BLUE into an interplay matrix",
-                     "`report.json`",
-                     "not run — driver wrote a synthetic stand-in"]))
-    out.append(_row(["**WHITE**", "learns, proposes and validates remedies",
-                     "`white-done.json`, `knowledge.json`",
-                     "{} adopted / {} rejected".format(
-                         rem.get("adopted_count"), rem.get("rejected_count"))]))
-    out.append(_row(["**BLACK**", "attacks the *conclusion*, not the subject",
-                     "`verdicts.json`, `black-done.json`",
-                     "{} verdicts".format(
-                         (pipe.get("verdicts", {}) or {}).get("total"))]))
+    out.append(
+        _row(
+            [
+                "**RED**",
+                "attacks the subject",
+                "`escapes.json` + `purple.json`",
+                "{} escapes across {} cells".format(esc, len(rd)),
+            ]
+        )
+    )
+    out.append(
+        _row(
+            [
+                "**BLUE**",
+                "relocates each escape, measures resistance",
+                "`blue-done.json`",
+                "{} probes".format(prb),
+            ]
+        )
+    )
+    out.append(
+        _row(
+            [
+                "**PURPLE**",
+                "stitches RED×BLUE into an interplay matrix",
+                "`report.json`",
+                "not run — driver wrote a synthetic stand-in",
+            ]
+        )
+    )
+    out.append(
+        _row(
+            [
+                "**WHITE**",
+                "learns, proposes and validates remedies",
+                "`white-done.json`, `knowledge.json`",
+                "{} adopted / {} rejected".format(
+                    rem.get("adopted_count"), rem.get("rejected_count")
+                ),
+            ]
+        )
+    )
+    out.append(
+        _row(
+            [
+                "**BLACK**",
+                "attacks the *conclusion*, not the subject",
+                "`verdicts.json`, `black-done.json`",
+                "{} verdicts".format((pipe.get("verdicts", {}) or {}).get("total")),
+            ]
+        )
+    )
     out.append("")
 
     trend = pipe.get("confidence_trend", []) or []
@@ -1037,28 +1344,56 @@ def _render_pipeline(doc: dict) -> list:
         out.append("")
         rows = []
         for t, c in zip(trend, cycles):
-            rows.append([t.get("cycle"), t.get("lessons"), t.get("defended"),
-                         c.get("reverse_notes_written"), c.get("pruned_lessons"),
-                         c.get("excluded_pairs"),
-                         "✅" if all((c.get("phases") or {}).values()) else "⚠"])
-        out.extend(_table(["cycle", "lessons", "defended confirmed",
-                           "reverse notes", "pruned", "excluded pairs",
-                           "phases ok"], rows))
+            rows.append(
+                [
+                    t.get("cycle"),
+                    t.get("lessons"),
+                    t.get("defended"),
+                    c.get("reverse_notes_written"),
+                    c.get("pruned_lessons"),
+                    c.get("excluded_pairs"),
+                    "✅" if all((c.get("phases") or {}).values()) else "⚠",
+                ]
+            )
+        out.extend(
+            _table(
+                [
+                    "cycle",
+                    "lessons",
+                    "defended confirmed",
+                    "reverse notes",
+                    "pruned",
+                    "excluded pairs",
+                    "phases ok",
+                ],
+                rows,
+            )
+        )
         out.append("")
         counts = [t.get("lessons") for t in trend]
         if len(set(counts)) == 1:
-            out.append("> The intent is a descending curve: BLACK confirms the "
-                       "base resists a claim, the driver notes it, WHITE prunes "
-                       "the lesson, and the next cycle's attack surface shrinks. "
-                       "Here the count never moves — the loop closes structurally "
-                       "but does not converge. See findings.")
+            out.append(
+                "> The intent is a descending curve: BLACK confirms the "
+                "base resists a claim, the driver notes it, WHITE prunes "
+                "the lesson, and the next cycle's attack surface shrinks. "
+                "Here the count never moves — the loop closes structurally "
+                "but does not converge. See findings."
+            )
             out.append("")
 
     if rd:
         out.append("### Per-variant handshake")
         out.append("")
-        agg = defaultdict(lambda: {"esc": 0, "prb": 0, "res": [], "rounds": 0,
-                                   "sides": set(), "adopted": 0})
+        agg = defaultdict(
+            lambda: {
+                "esc": 0,
+                "prb": 0,
+                "res": [],
+                "rounds": 0,
+                "sides": set(),
+                "adopted": 0,
+            }
+        )
         for r in rd:
             a = agg[r["variant"]]
             a["esc"] += r.get("escapes", 0)
@@ -1071,12 +1406,31 @@ def _render_pipeline(doc: dict) -> list:
         rows = []
         for v, a in sorted(agg.items(), key=lambda kv: _vkey(kv[0])):
             res = round(sum(a["res"]) / len(a["res"]), 1) if a["res"] else None
-            rows.append([v, a["rounds"], a["esc"], a["prb"],
-                         "{}%".format(res) if res is not None else "—",
-                         a["adopted"], "+".join(sorted(a["sides"]))])
-        out.extend(_table(["variant", "rounds", "escapes", "probes",
-                           "BLUE resistance", "remedies adopted",
-                           "sides landed"], rows))
+            rows.append(
+                [
+                    v,
+                    a["rounds"],
+                    a["esc"],
+                    a["prb"],
+                    "{}%".format(res) if res is not None else "—",
+                    a["adopted"],
+                    "+".join(sorted(a["sides"])),
+                ]
+            )
+        out.extend(
+            _table(
+                [
+                    "variant",
+                    "rounds",
+                    "escapes",
+                    "probes",
+                    "BLUE resistance",
+                    "remedies adopted",
+                    "sides landed",
+                ],
+                rows,
+            )
+        )
         out.append("")
 
         cells = Counter()
@@ -1114,70 +1468,117 @@ def _render_knowledge(doc: dict) -> list:
         # pruned_lessons is a CUMULATIVE total per cycle, not a per-cycle
         # delta, so the run total is the last/max value -- never the sum.
         pruned = max((c.get("pruned_lessons", 0) for c in cycles), default=0)
-        peak = max((c.get("knowledge", {}) or {}).get("lessons", 0)
-                   for c in cycles) if cycles else 0
+        peak = (
+            max((c.get("knowledge", {}) or {}).get("lessons", 0) for c in cycles)
+            if cycles
+            else 0
+        )
         if pruned or peak:
-            out.append("The knowledge base is **empty at the end of the run — "
-                       "by convergence, not by absence**. It peaked at {} "
-                       "lessons in cycle 1 and {} were pruned once BLACK "
-                       "confirmed the base already resisted them."
-                       .format(peak, pruned))
+            out.append(
+                "The knowledge base is **empty at the end of the run — "
+                "by convergence, not by absence**. It peaked at {} "
+                "lessons in cycle 1 and {} were pruned once BLACK "
+                "confirmed the base already resisted them.".format(peak, pruned)
+            )
             out.append("")
-            out.append("That is the loop working as designed: WHITE learns a "
-                       "lesson, BLACK independently confirms the configuration "
-                       "already defends it, the driver writes a "
-                       "reverse-deduction note, the lesson is retired, and the "
-                       "next cycle's attack surface shrinks by that "
-                       "(technique, placement) pair. {} pairs were excluded, "
-                       "which is why RED's ledger is empty in the final cycle."
-                       .format(max((c.get("excluded_pairs", 0)
-                                    for c in cycles), default=0)))
+            out.append(
+                "That is the loop working as designed: WHITE learns a "
+                "lesson, BLACK independently confirms the configuration "
+                "already defends it, the driver writes a "
+                "reverse-deduction note, the lesson is retired, and the "
+                "next cycle's attack surface shrinks by that "
+                "(technique, placement) pair. {} pairs were excluded, "
+                "which is why RED's ledger is empty in the final cycle.".format(
+                    max((c.get("excluded_pairs", 0) for c in cycles), default=0)
+                )
+            )
             out.append("")
-            out.append("> The caveat is what it converged *on*. The escape "
-                       "corpus was seeded, so the system reached a fixed point "
-                       "against a synthetic attack surface. The mechanism is "
-                       "demonstrated; the fixed point is not a property of the "
-                       "configuration under test.")
+            out.append(
+                "> The caveat is what it converged *on*. The escape "
+                "corpus was seeded, so the system reached a fixed point "
+                "against a synthetic attack surface. The mechanism is "
+                "demonstrated; the fixed point is not a property of the "
+                "configuration under test."
+            )
             out.append("")
         else:
             out.append("_No knowledge base._")
         return out
-    out.append("`knowledge.json` v{} · {} lessons · {} patterns · updated {}"
-               .format(kb.get("version"), kb.get("lesson_count"),
-                       kb.get("pattern_count"), kb.get("updated_at")))
+    out.append(
+        "`knowledge.json` v{} · {} lessons · {} patterns · updated {}".format(
+            kb.get("version"),
+            kb.get("lesson_count"),
+            kb.get("pattern_count"),
+            kb.get("updated_at"),
+        )
+    )
     out.append("")
-    out.append("A *lesson* is content-addressed by (technique, placement, "
-               "timing, category, missed principles, forbidden terms), so a "
-               "repeat failure bumps a counter instead of adding a row. "
-               "Confidence is `b / (a + b)` where `b` counts corroborating "
-               "failures and `a` counts rounds the signature went quiet.")
+    out.append(
+        "A *lesson* is content-addressed by (technique, placement, "
+        "timing, category, missed principles, forbidden terms), so a "
+        "repeat failure bumps a counter instead of adding a row. "
+        "Confidence is `b / (a + b)` where `b` counts corroborating "
+        "failures and `a` counts rounds the signature went quiet."
+    )
     out.append("")
-    rows = [[ "`{}`".format(L["signature"]), L["technique"], L["placement"],
-              L["category"], L["occurrences"], L["confidence"], L["severity"],
-              len(L.get("variants_affected", []))]
-            for L in (kb.get("lessons") or [])[:15]]
-    out.extend(_table(["sig", "technique", "placement", "category",
-                       "occurrences", "confidence", "severity",
-                       "variants hit"], rows))
+    rows = [
+        [
+            "`{}`".format(L["signature"]),
+            L["technique"],
+            L["placement"],
+            L["category"],
+            L["occurrences"],
+            L["confidence"],
+            L["severity"],
+            len(L.get("variants_affected", [])),
+        ]
+        for L in (kb.get("lessons") or [])[:15]
+    ]
+    out.extend(
+        _table(
+            [
+                "sig",
+                "technique",
+                "placement",
+                "category",
+                "occurrences",
+                "confidence",
+                "severity",
+                "variants hit",
+            ],
+            rows,
+        )
+    )
     out.append("")
 
     pats = kb.get("patterns") or []
     if pats:
         out.append("### Generalizations")
         out.append("")
-        rows = [[p.get("kind"), "`{}`".format(p.get("key")), p.get("support"),
-                 p.get("lift")] for p in pats]
+        rows = [
+            [
+                p.get("kind"),
+                "`{}`".format(p.get("key")),
+                p.get("support"),
+                p.get("lift"),
+            ]
+            for p in pats
+        ]
         out.extend(_table(["pattern kind", "key", "support", "lift"], rows))
         out.append("")
         lifts = {round(float(p.get("lift") or 0), 3) for p in pats}
         if lifts == {1.0}:
-            out.append("> Every `lift` is 1.0, so no axis value concentrates "
-                       "failures more than an even spread would.")
+            out.append(
+                "> Every `lift` is 1.0, so no axis value concentrates "
+                "failures more than an even spread would."
+            )
         else:
-            out.append("> `lift` is this group's share of the corpus divided "
-                       "by an even spread across that axis. Above 1.0 the "
-                       "value concentrates failures; at 1.0 it carries no "
-                       "signal.")
+            out.append(
+                "> `lift` is this group's share of the corpus divided "
+                "by an even spread across that axis. Above 1.0 the "
+                "value concentrates failures; at 1.0 it carries no "
+                "signal."
+            )
         out.append("")
 
     if rem.get("adopted_count") or rem.get("rejected_count"):
@@ -1192,30 +1593,52 @@ def _render_knowledge(doc: dict) -> list:
             "vocabulary_extension": "extend the approved word list",
             "precedence_rule": "order two rules that conflict",
         }
-        for k, n in sorted((rem.get("by_kind") or {}).items(),
-                           key=lambda kv: -kv[1]):
+        for k, n in sorted((rem.get("by_kind") or {}).items(), key=lambda kv: -kv[1]):
             out.append(_row([k, n, meaning.get(k, "—")]))
         out.append("")
-        rows = [[ "`{}`".format(r["id"]), r["kind"], "`{}`".format(r["target"]),
-                  r["confidence"], r["delta_resistance_pct"], r["provenance"]]
-                for r in (rem.get("adopted") or [])[:12]]
+        rows = [
+            [
+                "`{}`".format(r["id"]),
+                r["kind"],
+                "`{}`".format(r["target"]),
+                r["confidence"],
+                r["delta_resistance_pct"],
+                r["provenance"],
+            ]
+            for r in (rem.get("adopted") or [])[:12]
+        ]
         if rows:
             out.append("Adopted (top {}):".format(len(rows)))
             out.append("")
-            out.extend(_table(["id", "kind", "target", "confidence",
-                               "Δ resistance", "validation"], rows))
+            out.extend(
+                _table(
+                    [
+                        "id",
+                        "kind",
+                        "target",
+                        "confidence",
+                        "Δ resistance",
+                        "validation",
+                    ],
+                    rows,
+                )
+            )
             out.append("")
-            out.append("> `Δ resistance` is `simulate_validation`'s output: "
-                       "`min(40, lesson_confidence × 35)`. It is a restatement "
-                       "of how often the lesson recurred, not a re-measurement.")
+            out.append(
+                "> `Δ resistance` is `simulate_validation`'s output: "
+                "`min(40, lesson_confidence × 35)`. It is a restatement "
+                "of how often the lesson recurred, not a re-measurement."
+            )
             out.append("")
 
     if notes.get("total"):
         out.append("### Correspondence")
         out.append("")
-        out.append("{} notes — {} protocol-shaped, {} driver reverse-deduction."
-                   .format(notes["total"], notes.get("protocol_notes"),
-                           notes.get("driver_notes")))
+        out.append(
+            "{} notes — {} protocol-shaped, {} driver reverse-deduction.".format(
+                notes["total"], notes.get("protocol_notes"), notes.get("driver_notes")
+            )
+        )
         out.append("")
         matrix = notes.get("matrix") or {}
         cols = sorted({to for row in matrix.values() for to in row})
@@ -1226,11 +1649,13 @@ def _render_knowledge(doc: dict) -> list:
                 out.append(_row([frm] + [matrix[frm].get(c, 0) for c in cols]))
             out.append("")
         if notes.get("protocol_notes") == 0:
-            out.append("> No note carries a `from_colour` field, so the "
-                       "NOTES_PROTOCOL bus (`notes.py` `NoteBus`) never ran. "
-                       "Every note here is the driver's lighter "
-                       "reverse-deduction record. Acknowledgements, rebuttals "
-                       "and stale-note detection are unexercised.")
+            out.append(
+                "> No note carries a `from_colour` field, so the "
+                "NOTES_PROTOCOL bus (`notes.py` `NoteBus`) never ran. "
+                "Every note here is the driver's lighter "
+                "reverse-deduction record. Acknowledgements, rebuttals "
+                "and stale-note detection are unexercised."
+            )
             out.append("")
     return out
 
@@ -1242,9 +1667,11 @@ def _render_verdicts(doc: dict) -> list:
     if not v.get("total"):
         out.append("_BLACK produced no verdicts._")
         return out
-    out.append("BLACK does not attack the subject. It attacks the claim the "
-               "other colours jointly produce, and rules on the benchmark "
-               "itself.")
+    out.append(
+        "BLACK does not attack the subject. It attacks the claim the "
+        "other colours jointly produce, and rules on the benchmark "
+        "itself."
+    )
     out.append("")
     meaning = {
         "confirmed": "reproduces under BLACK's independent construction",
@@ -1253,13 +1680,18 @@ def _render_verdicts(doc: dict) -> list:
         "unsound": "does not survive; methodology broken for this cell",
         "underpowered": "too few observations to support the claim",
     }
-    rows = [[k, n, meaning.get(k, "—")]
-            for k, n in sorted((v.get("by_verdict") or {}).items(),
-                               key=lambda kv: -kv[1])]
+    rows = [
+        [k, n, meaning.get(k, "—")]
+        for k, n in sorted((v.get("by_verdict") or {}).items(), key=lambda kv: -kv[1])
+    ]
     out.extend(_table(["verdict", "count", "meaning"], rows))
     out.append("")
-    rows = [[k, n] for k, n in sorted(
-        (v.get("by_challenged_colour") or {}).items(), key=lambda kv: -kv[1])]
+    rows = [
+        [k, n]
+        for k, n in sorted(
+            (v.get("by_challenged_colour") or {}).items(), key=lambda kv: -kv[1]
+        )
+    ]
     out.append("Whose claims were challenged:")
     out.append("")
     out.extend(_table(["colour challenged", "verdicts"], rows))
@@ -1276,35 +1708,54 @@ def _render_verdicts(doc: dict) -> list:
     for cid, counts in sorted(claims.items()):
         label = known.get(cid)
         if label is None:
-            label = ("split-half of an adopted remedy"
-                     if cid.startswith("remedy-")
-                     else "WHITE hypothesis from the attack brief"
-                     if cid.startswith("brief-") else "—")
-        rows.append([ "`{}`".format(cid), sum(counts.values()),
-                      ", ".join("{} {}".format(n, k) for k, n in counts.items()),
-                      label])
+            label = (
+                "split-half of an adopted remedy"
+                if cid.startswith("remedy-")
+                else "WHITE hypothesis from the attack brief"
+                if cid.startswith("brief-")
+                else "—"
+            )
+        rows.append(
+            [
+                "`{}`".format(cid),
+                sum(counts.values()),
+                ", ".join("{} {}".format(n, k) for k, n in counts.items()),
+                label,
+            ]
+        )
     out.append("### Challenges run")
     out.append("")
     out.extend(_table(["claim", "n", "verdicts", "what it tests"], rows[:20]))
     out.append("")
     if not any(c.startswith("remedy-") for c in claims):
-        out.append("> **The remedy challenge is missing.** `verification.py` "
-                   "(split-half A/B, permutation test, bootstrap CI, five-rule "
-                   "decision table) is the instrument that detects an overfit "
-                   "remedy. It never ran: `_challenge_remedies` reads "
-                   "`white['remedies_adopted']`, and `white-done.json` stores "
-                   "the count under `adopted` with no per-case outcomes.")
+        out.append(
+            "> **The remedy challenge is missing.** `verification.py` "
+            "(split-half A/B, permutation test, bootstrap CI, five-rule "
+            "decision table) is the instrument that detects an overfit "
+            "remedy. It never ran: `_challenge_remedies` reads "
+            "`white['remedies_adopted']`, and `white-done.json` stores "
+            "the count under `adopted` with no per-case outcomes."
+        )
         out.append("")
 
     nc = v.get("non_confirmed") or []
     if nc:
         out.append("### Dissenting verdicts")
         out.append("")
-        rows = [[ "`{}`".format(r["claim_id"]), r["variant"], r["round"],
-                  r["source"], "**{}**".format(r["verdict"]), r["reason"]]
-                for r in nc]
-        out.extend(_table(["claim", "variant", "round", "against",
-                           "verdict", "reason"], rows))
+        rows = [
+            [
+                "`{}`".format(r["claim_id"]),
+                r["variant"],
+                r["round"],
+                r["source"],
+                "**{}**".format(r["verdict"]),
+                r["reason"],
+            ]
+            for r in nc
+        ]
+        out.extend(
+            _table(["claim", "variant", "round", "against", "verdict", "reason"], rows)
+        )
         out.append("")
     else:
         out.append("_No dissenting verdict was returned._")
@@ -1318,15 +1769,19 @@ def _render_findings(doc: dict) -> list:
     if not findings:
         out.append("_No integrity problems detected._")
         return out
-    icon = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "⚪",
-            "info": "🟢"}
-    out.extend(_table(["", "severity", "finding"],
-                      [[icon.get(f["severity"], "•"), f["severity"], f["title"]]
-                       for f in findings]))
+    icon = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "⚪", "info": "🟢"}
+    out.extend(
+        _table(
+            ["", "severity", "finding"],
+            [
+                [icon.get(f["severity"], "•"), f["severity"], f["title"]]
+                for f in findings
+            ],
+        )
+    )
     out.append("")
     for i, f in enumerate(findings, 1):
-        out.append("### {}. {} {}".format(i, icon.get(f["severity"], "•"),
-                                          f["title"]))
+        out.append("### {}. {} {}".format(i, icon.get(f["severity"], "•"), f["title"]))
         out.append("")
         out.append("**Observed.** {}".format(f["detail"]))
         out.append("")
@@ -1336,6 +1791,7 @@ def _render_findings(doc: dict) -> list:
 
 
 # ------------------------------------------------------------- LLM synthesis
+
 
 def build_llm_brief(doc: dict, limit: int = 14000) -> str:
     """Compact the dossier into a prompt an LLM can reason over.
@@ -1351,33 +1807,55 @@ def build_llm_brief(doc: dict, limit: int = 14000) -> str:
     brief = {
         "provenance": {
             "pipeline_offline": bool(pipe.get("skip_live")),
-            "warning": ("All adversarial figures are SIMULATED: generators "
-                        "produced them with no model in the loop."
-                        if pipe.get("skip_live") else
-                        "Adversarial figures came from live scoring."),
+            "warning": (
+                "All adversarial figures are SIMULATED: generators "
+                "produced them with no model in the loop."
+                if pipe.get("skip_live")
+                else "Adversarial figures came from live scoring."
+            ),
         },
         "measured_suites": [
-            {k: t.get(k) for k in ("name", "tier", "suite", "status",
-                                   "pass_rate_pct", "passed", "total_tests",
-                                   "avg_correctness", "model")}
-            for t in (doc.get("tier_runs") or [])],
-        "measured_failures": [
-            {"suite": t["name"], **{k: f.get(k) for k in
-                                    ("test_id", "category", "score", "missed",
-                                     "forbidden")}}
+            {
+                k: t.get(k)
+                for k in (
+                    "name",
+                    "tier",
+                    "suite",
+                    "status",
+                    "pass_rate_pct",
+                    "passed",
+                    "total_tests",
+                    "avg_correctness",
+                    "model",
+                )
+            }
             for t in (doc.get("tier_runs") or [])
-            for f in (t.get("failures") or [])][:25],
+        ],
+        "measured_failures": [
+            {
+                "suite": t["name"],
+                **{
+                    k: f.get(k)
+                    for k in ("test_id", "category", "score", "missed", "forbidden")
+                },
+            }
+            for t in (doc.get("tier_runs") or [])
+            for f in (t.get("failures") or [])
+        ][:25],
         "control_runs": doc.get("control_runs"),
         "pipeline": {
-            "cycles": pipe.get("cycles"), "rounds": pipe.get("rounds"),
+            "cycles": pipe.get("cycles"),
+            "rounds": pipe.get("rounds"),
             "variants": pipe.get("tiers"),
             "confidence_trend": pipe.get("confidence_trend"),
             "cycles_report": pipe.get("cycles_report"),
             "handshake_cells": len(pipe.get("rounds_detail") or []),
-            "total_escapes": sum(r.get("escapes", 0)
-                                 for r in (pipe.get("rounds_detail") or [])),
-            "total_probes": sum(r.get("blue_probes") or 0
-                                for r in (pipe.get("rounds_detail") or [])),
+            "total_escapes": sum(
+                r.get("escapes", 0) for r in (pipe.get("rounds_detail") or [])
+            ),
+            "total_probes": sum(
+                r.get("blue_probes") or 0 for r in (pipe.get("rounds_detail") or [])
+            ),
         },
         "knowledge": {
             "lesson_count": kb.get("lesson_count"),
@@ -1387,12 +1865,14 @@ def build_llm_brief(doc: dict, limit: int = 14000) -> str:
             "top_lessons": (kb.get("lessons") or [])[:10],
             "patterns": kb.get("patterns"),
         },
-        "remedies": {k: (pipe.get("remedies") or {}).get(k)
-                     for k in ("adopted_count", "rejected_count", "by_kind",
-                               "by_target")},
-        "notes": {k: (pipe.get("notes") or {}).get(k)
-                  for k in ("total", "by_kind", "matrix", "protocol_notes",
-                            "driver_notes")},
+        "remedies": {
+            k: (pipe.get("remedies") or {}).get(k)
+            for k in ("adopted_count", "rejected_count", "by_kind", "by_target")
+        },
+        "notes": {
+            k: (pipe.get("notes") or {}).get(k)
+            for k in ("total", "by_kind", "matrix", "protocol_notes", "driver_notes")
+        },
         "black_verdicts": pipe.get("verdicts"),
         "integrity_findings": doc.get("findings"),
     }
@@ -1450,17 +1930,25 @@ def _call_model(prompt: str, model: str, timeout: int) -> "str | None":
     if not exe:
         return None
     try:
-        proc = subprocess.run([exe, "-z", prompt, "-m", model, "--yolo"],
-                              capture_output=True, text=True, timeout=timeout)
+        proc = subprocess.run(
+            [exe, "-z", prompt, "-m", model, "--yolo"],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
         return (proc.stdout or "").strip() or None
     except (OSError, subprocess.SubprocessError):
         return None
 
 
 _NON_ANSWER = (
-    "no actual task", "there's no task", "there is no task",
-    "what would you like me to do", "let me know what you want",
-    "didn't come through", "did not come through",
+    "no actual task",
+    "there's no task",
+    "there is no task",
+    "what would you like me to do",
+    "let me know what you want",
+    "didn't come through",
+    "did not come through",
 )
 
 
@@ -1497,13 +1985,14 @@ def _parse_json_reply(text: str) -> "dict | None":
     if start == -1 or end <= start:
         return None
     try:
-        return json.loads(candidate[start:end + 1])
+        return json.loads(candidate[start : end + 1])
     except json.JSONDecodeError:
         return None
 
 
-def _call_stage(prompt: str, model: str, timeout: int,
-                attempts: int = 2) -> "str | None":
+def _call_stage(
+    prompt: str, model: str, timeout: int, attempts: int = 2
+) -> "str | None":
     """Call the model, rejecting non-answers and retrying once.
 
     The "no task here" reply is intermittent, so a single retry recovers most
@@ -1516,8 +2005,7 @@ def _call_stage(prompt: str, model: str, timeout: int,
     return None
 
 
-def analyse(doc: dict, model: str, timeout: int = 900,
-            on_stage=None) -> dict:
+def analyse(doc: dict, model: str, timeout: int = 900, on_stage=None) -> dict:
     """Run the three-stage agent chain over the dossier.
 
     Returns {"report": str|None, "stages": {...}}. Each stage degrades
@@ -1537,43 +2025,75 @@ def analyse(doc: dict, model: str, timeout: int = 900,
 
     # Stage 1 -- extraction.
     raw = _call_stage(
-        STAGE_EXTRACT + "\n```json\n" + evidence + "\n```\n", model, timeout)
+        STAGE_EXTRACT + "\n```json\n" + evidence + "\n```\n", model, timeout
+    )
     findings = _parse_json_reply(raw or "")
     if findings:
-        note("extract", "ok", "{} established, {} not".format(
-            len(findings.get("established") or []),
-            len(findings.get("not_established") or [])))
+        note(
+            "extract",
+            "ok",
+            "{} established, {} not".format(
+                len(findings.get("established") or []),
+                len(findings.get("not_established") or []),
+            ),
+        )
     else:
-        note("extract", "skipped" if raw is None else "unparsed",
-             "falling back to the raw dossier")
-        findings = {"note": "extraction unavailable; raw dossier follows",
-                    "dossier": json.loads(evidence)}
+        note(
+            "extract",
+            "skipped" if raw is None else "unparsed",
+            "falling back to the raw dossier",
+        )
+        findings = {
+            "note": "extraction unavailable; raw dossier follows",
+            "dossier": json.loads(evidence),
+        }
 
     findings_json = json.dumps(findings, indent=1, default=str)[:12000]
 
     # Stage 2 -- assessment against declared goals.
     raw = _call_stage(
-        STAGE_ASSESS + "\n## Declared goals (deterministic grade)\n```json\n"
-        + goals_json + "\n```\n\n## Stage 1 findings\n```json\n"
-        + findings_json + "\n```\n", model, timeout)
+        STAGE_ASSESS
+        + "\n## Declared goals (deterministic grade)\n```json\n"
+        + goals_json
+        + "\n```\n\n## Stage 1 findings\n```json\n"
+        + findings_json
+        + "\n```\n",
+        model,
+        timeout,
+    )
     assessment = _parse_json_reply(raw or "")
     if assessment:
-        note("assess", "ok", "{} goals judged, {} root causes".format(
-            len(assessment.get("goals") or []),
-            len(assessment.get("root_causes") or [])))
+        note(
+            "assess",
+            "ok",
+            "{} goals judged, {} root causes".format(
+                len(assessment.get("goals") or []),
+                len(assessment.get("root_causes") or []),
+            ),
+        )
     else:
-        note("assess", "skipped" if raw is None else "unparsed",
-             "final stage will grade from the deterministic scorecard")
-        assessment = {"note": "assessment unavailable; "
-                              "use the deterministic grades verbatim"}
+        note(
+            "assess",
+            "skipped" if raw is None else "unparsed",
+            "final stage will grade from the deterministic scorecard",
+        )
+        assessment = {
+            "note": "assessment unavailable; use the deterministic grades verbatim"
+        }
 
     # Stage 3 -- the report.
     report = _call_stage(
-        STAGE_FINAL + "\n## Declared goals\n```json\n" + goals_json
-        + "\n```\n\n## Stage 1 findings\n```json\n" + findings_json
+        STAGE_FINAL
+        + "\n## Declared goals\n```json\n"
+        + goals_json
+        + "\n```\n\n## Stage 1 findings\n```json\n"
+        + findings_json
         + "\n```\n\n## Stage 2 assessment\n```json\n"
         + json.dumps(assessment, indent=1, default=str)[:12000]
-        + "\n```\n", model, timeout)
+        + "\n```\n",
+        model,
+        timeout,
+    )
     if report and not _looks_like_non_answer(report):
         report = _strip_preamble(report)
         note("final", "ok", "{} chars".format(len(report)))
@@ -1581,8 +2101,12 @@ def analyse(doc: dict, model: str, timeout: int = 900,
         report = None
         note("final", "skipped", "deterministic report stands")
 
-    return {"report": report, "stages": stages,
-            "findings": findings, "assessment": assessment}
+    return {
+        "report": report,
+        "stages": stages,
+        "findings": findings,
+        "assessment": assessment,
+    }
 
 
 def synthesize(doc: dict, model: str, timeout: int = 900) -> "str | None":
@@ -1600,19 +2124,26 @@ def synthesize(doc: dict, model: str, timeout: int = 900) -> "str | None":
     if not exe:
         return None
     prompt = LLM_INSTRUCTIONS + "\n```json\n" + build_llm_brief(doc) + "\n```\n"
-    with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False,
-                                     encoding="utf-8") as fh:
+    with tempfile.NamedTemporaryFile(
+        "w", suffix=".txt", delete=False, encoding="utf-8"
+    ) as fh:
         fh.write(prompt)
         prompt_path = fh.name
     try:
         proc = subprocess.run(
             [exe, "-z", "@" + prompt_path, "-m", model, "--yolo"],
-            capture_output=True, text=True, timeout=timeout)
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
         text = (proc.stdout or "").strip()
         if not text:
-            proc = subprocess.run([exe, "-z", prompt, "-m", model, "--yolo"],
-                                  capture_output=True, text=True,
-                                  timeout=timeout)
+            proc = subprocess.run(
+                [exe, "-z", prompt, "-m", model, "--yolo"],
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+            )
             text = (proc.stdout or "").strip()
         return _strip_preamble(text) if text else None
     except (OSError, subprocess.SubprocessError):
@@ -1641,11 +2172,13 @@ def _run_fingerprint(doc: dict) -> str:
 
     pipe = doc.get("pipeline", {}) or {}
     parts = [
-        sorted("{}:{}:{}".format(t.get("name"), t.get("status"),
-                                 t.get("run_dir"))
-               for t in (doc.get("tier_runs") or [])),
+        sorted(
+            "{}:{}:{}".format(t.get("name"), t.get("status"), t.get("run_dir"))
+            for t in (doc.get("tier_runs") or [])
+        ),
         str((pipe.get("knowledge") or {}).get("version")),
-        str(pipe.get("cycles")), str(pipe.get("rounds")),
+        str(pipe.get("cycles")),
+        str(pipe.get("rounds")),
         str(len(pipe.get("rounds_detail") or [])),
         str((pipe.get("verdicts") or {}).get("total")),
         json.dumps(pipe.get("confidence_trend"), sort_keys=True, default=str),
@@ -1654,8 +2187,13 @@ def _run_fingerprint(doc: dict) -> str:
     return hashlib.blake2s(blob.encode("utf-8"), digest_size=6).hexdigest()
 
 
-def _archive(bench: Path, doc: dict, report: str,
-             narrative: "str | None", analysis: "dict | None" = None) -> dict:
+def _archive(
+    bench: Path,
+    doc: dict,
+    report: str,
+    narrative: "str | None",
+    analysis: "dict | None" = None,
+) -> dict:
     """Write this run's artifacts into the dated report tree.
 
     Layout keeps one directory per calendar day and one file set per distinct
@@ -1677,17 +2215,28 @@ def _archive(bench: Path, doc: dict, report: str,
     fp = _run_fingerprint(doc)
 
     written = {}
-    targets = [("report", day_dir / "{}-report.md".format(fp), report),
-               ("dossier", day_dir / "{}-dossier.json".format(fp),
-                json.dumps(doc, indent=2, default=str))]
+    targets = [
+        ("report", day_dir / "{}-report.md".format(fp), report),
+        (
+            "dossier",
+            day_dir / "{}-dossier.json".format(fp),
+            json.dumps(doc, indent=2, default=str),
+        ),
+    ]
     if narrative:
-        targets.append(("narrative", day_dir / "{}-narrative.md".format(fp),
-                        narrative))
+        targets.append(("narrative", day_dir / "{}-narrative.md".format(fp), narrative))
     if analysis:
-        targets.append(("stages", day_dir / "{}-stages.json".format(fp),
-                        json.dumps({k: v for k, v in analysis.items()
-                                    if k != "report"},
-                                   indent=2, default=str)))
+        targets.append(
+            (
+                "stages",
+                day_dir / "{}-stages.json".format(fp),
+                json.dumps(
+                    {k: v for k, v in analysis.items() if k != "report"},
+                    indent=2,
+                    default=str,
+                ),
+            )
+        )
     for name, path, text in targets:
         existed = path.exists()
         path.write_text(text, encoding="utf-8")
@@ -1700,28 +2249,38 @@ def _archive(bench: Path, doc: dict, report: str,
     index_path = root / "index.json"
     index = _read_json(index_path, []) or []
     entry = {
-        "fingerprint": fp, "day": day,
+        "fingerprint": fp,
+        "day": day,
         "generated_utc": doc.get("generated_utc"),
-        "suites_completed": sum(1 for t in (doc.get("tier_runs") or [])
-                                if t.get("status") == "complete"),
+        "suites_completed": sum(
+            1 for t in (doc.get("tier_runs") or []) if t.get("status") == "complete"
+        ),
         "suites_total": len(doc.get("tier_runs") or []),
         "findings": len(doc.get("findings") or []),
-        "critical_high": sum(1 for f in (doc.get("findings") or [])
-                             if f.get("severity") in ("critical", "high")),
+        "critical_high": sum(
+            1
+            for f in (doc.get("findings") or [])
+            if f.get("severity") in ("critical", "high")
+        ),
         "simulated": bool((doc.get("pipeline") or {}).get("skip_live")),
         "narrative": bool(narrative),
         "files": {k: v["path"] for k, v in written.items()},
     }
-    index = [e for e in index
-             if not (isinstance(e, dict) and e.get("fingerprint") == fp
-                     and e.get("day") == day)]
+    index = [
+        e
+        for e in index
+        if not (
+            isinstance(e, dict) and e.get("fingerprint") == fp and e.get("day") == day
+        )
+    ]
     index.append(entry)
     index_path.write_text(json.dumps(index, indent=2), encoding="utf-8")
 
     written["fingerprint"] = fp
     written["index"] = str(index_path)
-    written["deduped"] = any(v.get("replaced") for v in written.values()
-                             if isinstance(v, dict))
+    written["deduped"] = any(
+        v.get("replaced") for v in written.values() if isinstance(v, dict)
+    )
     return written
 
 
@@ -1748,27 +2307,47 @@ def _discover_base(bench: Path) -> Path:
 
 def main() -> int:
     ap = argparse.ArgumentParser(
-        description="Summarize the latest adversarial benchmark run.")
-    ap.add_argument("--base", default=None,
-                    help="pipeline results base (default: newest under .agents/tmp)")
-    ap.add_argument("--bench", default=str(BENCH),
-                    help="benchmark directory")
-    ap.add_argument("--out", default=None,
-                    help="also write the markdown report here (the archived "
-                         "copy under report/ is written regardless)")
-    ap.add_argument("--json", default=None,
-                    help="also write the raw dossier to this path")
-    ap.add_argument("--no-archive", action="store_true",
-                    help="skip the dated report/ tree; print to stdout only")
-    ap.add_argument("--stdout", action="store_true",
-                    help="print the report to stdout as well")
-    ap.add_argument("--llm", action="store_true",
-                    help="send the dossier to a model for a narrative report")
+        description="Summarize the latest adversarial benchmark run."
+    )
+    ap.add_argument(
+        "--base",
+        default=None,
+        help="pipeline results base (default: newest under .agents/tmp)",
+    )
+    ap.add_argument("--bench", default=str(BENCH), help="benchmark directory")
+    ap.add_argument(
+        "--out",
+        default=None,
+        help="also write the markdown report here (the archived "
+        "copy under report/ is written regardless)",
+    )
+    ap.add_argument(
+        "--json", default=None, help="also write the raw dossier to this path"
+    )
+    ap.add_argument(
+        "--no-archive",
+        action="store_true",
+        help="skip the dated report/ tree; print to stdout only",
+    )
+    ap.add_argument(
+        "--stdout", action="store_true", help="print the report to stdout as well"
+    )
+    ap.add_argument(
+        "--llm",
+        action="store_true",
+        help="send the dossier to a model for a narrative report",
+    )
     ap.add_argument("--model", default="tencent/hy3:free")
-    ap.add_argument("--llm-out", default=None,
-                    help="write the model's narrative here (default: alongside --out)")
-    ap.add_argument("--brief-out", default=None,
-                    help="write the LLM prompt brief without calling a model")
+    ap.add_argument(
+        "--llm-out",
+        default=None,
+        help="write the model's narrative here (default: alongside --out)",
+    )
+    ap.add_argument(
+        "--brief-out",
+        default=None,
+        help="write the LLM prompt brief without calling a model",
+    )
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -1779,12 +2358,14 @@ def main() -> int:
     report = render_markdown(doc)
 
     if args.json:
-        Path(args.json).write_text(json.dumps(doc, indent=2, default=str),
-                                   encoding="utf-8")
+        Path(args.json).write_text(
+            json.dumps(doc, indent=2, default=str), encoding="utf-8"
+        )
     if args.brief_out:
         Path(args.brief_out).write_text(
             LLM_INSTRUCTIONS + "\n```json\n" + build_llm_brief(doc) + "\n```\n",
-            encoding="utf-8")
+            encoding="utf-8",
+        )
 
     if args.out:
         Path(args.out).write_text(report, encoding="utf-8")
@@ -1795,10 +2376,10 @@ def main() -> int:
     narrative = None
     analysis = None
     if args.llm:
+
         def _stage(name, status, detail):
             if not args.quiet:
-                mark = {"ok": "✓", "skipped": "·", "unparsed": "!"}.get(
-                    status, "?")
+                mark = {"ok": "✓", "skipped": "·", "unparsed": "!"}.get(status, "?")
                 print("  [{}] stage {:<8} {}".format(mark, name, detail))
 
         if not args.quiet:
@@ -1806,8 +2387,10 @@ def main() -> int:
         analysis = analyse(doc, args.model, on_stage=_stage)
         narrative = analysis.get("report")
         if narrative is None:
-            print("[llm] synthesis unavailable (hermes CLI missing or call "
-                  "failed); the deterministic report stands.")
+            print(
+                "[llm] synthesis unavailable (hermes CLI missing or call "
+                "failed); the deterministic report stands."
+            )
         elif args.llm_out:
             Path(args.llm_out).write_text(narrative, encoding="utf-8")
             if not args.quiet:
@@ -1823,20 +2406,31 @@ def main() -> int:
         if args.stdout:
             print(report)
         if not args.quiet:
-            print("archived run {} -> {}".format(
-                written["fingerprint"], _report_dir(bench)))
+            print(
+                "archived run {} -> {}".format(
+                    written["fingerprint"], _report_dir(bench)
+                )
+            )
             for key in ("report", "dossier", "narrative", "stages"):
                 rec = written.get(key)
                 if isinstance(rec, dict):
-                    print("  {:<9} {} {}".format(
-                        key, Path(rec["path"]).name,
-                        "(replaced)" if rec["replaced"] else ""))
+                    print(
+                        "  {:<9} {} {}".format(
+                            key,
+                            Path(rec["path"]).name,
+                            "(replaced)" if rec["replaced"] else "",
+                        )
+                    )
 
     if not args.quiet:
-        crit = [f for f in doc.get("findings", [])
-                if f["severity"] in ("critical", "high")]
-        print("  {} findings ({} critical/high)".format(
-            len(doc.get("findings", [])), len(crit)))
+        crit = [
+            f for f in doc.get("findings", []) if f["severity"] in ("critical", "high")
+        ]
+        print(
+            "  {} findings ({} critical/high)".format(
+                len(doc.get("findings", [])), len(crit)
+            )
+        )
         for f in crit[:5]:
             print("   - [{}] {}".format(f["severity"], f["title"]))
     return 0
@@ -1844,4 +2438,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

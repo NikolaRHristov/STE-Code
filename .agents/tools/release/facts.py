@@ -23,8 +23,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -112,7 +116,9 @@ def _versions() -> dict:
         if not m:
             continue
         track = m.group("track") or "core"
-        tracks.setdefault(track, []).append(tuple(int(p) for p in m.group("v").split(".")))
+        tracks.setdefault(track, []).append(
+            tuple(int(p) for p in m.group("v").split("."))
+        )
     return {k: ".".join(str(p) for p in max(v)) for k, v in tracks.items()}
 
 
@@ -188,7 +194,9 @@ def main() -> int:
         if k == "tiers":
             for t in v:
                 mark = "" if t["complete"] else "  (distillation pending)"
-                print(f"  {t['tier']:<20} {t['kb']} KB / ~{t['tokens_k']}K tokens{mark}")
+                print(
+                    f"  {t['tier']:<20} {t['kb']} KB / ~{t['tokens_k']}K tokens{mark}"
+                )
             continue
         print(f"{k:<24} {v}")
     return 0

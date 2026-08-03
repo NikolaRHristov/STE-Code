@@ -20,6 +20,7 @@ Concurrency: several colours append at once. Each note is written to its own
 file with an atomic temp+rename, so a reader never observes a partial note. The
 index is a rebuildable cache, not the source of truth -- see IndexStore.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -35,7 +36,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import anonymize as _anon  # noqa: E402
 from harness_config import (  # noqa: E402
-    add_common_arguments, default_base, load_config, resolve_base)
+    add_common_arguments,
+    default_base,
+    load_config,
+    resolve_base,
+)
 
 SCHEMA_VERSION = 1
 
@@ -71,10 +76,25 @@ class NoteError(RuntimeError):
 class Note:
     """One immutable message. Construction validates; it cannot be half-valid."""
 
-    __slots__ = ("id", "schema_version", "from_colour", "to_colour", "variant",
-                 "round", "kind", "subject", "body", "evidence", "confidence",
-                 "expects_ack", "supersedes", "in_reply_to", "disposition",
-                 "action_taken", "created_at")
+    __slots__ = (
+        "id",
+        "schema_version",
+        "from_colour",
+        "to_colour",
+        "variant",
+        "round",
+        "kind",
+        "subject",
+        "body",
+        "evidence",
+        "confidence",
+        "expects_ack",
+        "supersedes",
+        "in_reply_to",
+        "disposition",
+        "action_taken",
+        "created_at",
+    )
 
     def __init__(self, **fields: object) -> None:
         for slot in self.__slots__:
@@ -93,20 +113,33 @@ class Note:
     def validate(self, cfg) -> "Note":
         colours = set(cfg.note_colours)
         if self.from_colour not in colours:
-            raise NoteError("unknown from_colour {!r}; declared colours are {}"
-                            .format(self.from_colour, sorted(colours)))
+            raise NoteError(
+                "unknown from_colour {!r}; declared colours are {}".format(
+                    self.from_colour, sorted(colours)
+                )
+            )
         if self.to_colour not in colours and self.to_colour != BROADCAST:
-            raise NoteError("unknown to_colour {!r}; expected a colour or {!r}"
-                            .format(self.to_colour, BROADCAST))
+            raise NoteError(
+                "unknown to_colour {!r}; expected a colour or {!r}".format(
+                    self.to_colour, BROADCAST
+                )
+            )
         if self.kind not in set(cfg.note_kinds):
-            raise NoteError("unknown kind {!r}; declared kinds are {}"
-                            .format(self.kind, sorted(cfg.note_kinds)))
-        if self.disposition is not None and self.disposition not in set(cfg.ack_dispositions):
+            raise NoteError(
+                "unknown kind {!r}; declared kinds are {}".format(
+                    self.kind, sorted(cfg.note_kinds)
+                )
+            )
+        if self.disposition is not None and self.disposition not in set(
+            cfg.ack_dispositions
+        ):
             raise NoteError("unknown disposition {!r}".format(self.disposition))
         try:
             conf = float(self.confidence)
         except (TypeError, ValueError):
-            raise NoteError("confidence must be a number, got {!r}".format(self.confidence))
+            raise NoteError(
+                "confidence must be a number, got {!r}".format(self.confidence)
+            )
         if not 0.0 <= conf <= 1.0:
             raise NoteError("confidence {} outside 0..1".format(conf))
         self.confidence = conf
@@ -117,7 +150,9 @@ class Note:
                 raise NoteError(
                     "kind {!r} asserts a fact and must cite evidence ({}); "
                     "notes are evidence, not chatter".format(
-                        self.kind, ", ".join(EVIDENCE_FIELDS)))
+                        self.kind, ", ".join(EVIDENCE_FIELDS)
+                    )
+                )
         return self
 
     def has_evidence(self) -> bool:
@@ -136,7 +171,8 @@ class Note:
 
     def __repr__(self) -> str:
         return "<Note {} {}->{} {} {!r}>".format(
-            self.id, self.from_colour, self.to_colour, self.kind, self.subject)
+            self.id, self.from_colour, self.to_colour, self.kind, self.subject
+        )
 
 
 class _DirLock:
@@ -150,7 +186,9 @@ class _DirLock:
     unique name and is published with an atomic rename.
     """
 
-    def __init__(self, path: Path, timeout: float = 10.0, stale_after: float = 60.0) -> None:
+    def __init__(
+        self, path: Path, timeout: float = 10.0, stale_after: float = 60.0
+    ) -> None:
         self.path = path
         self.timeout = timeout
         self.stale_after = stale_after
@@ -210,23 +248,44 @@ class NoteBus:
         existing = list(self.dir.glob(prefix + "-*.json"))
         best = 0
         for path in existing:
-            tail = path.stem[len(prefix) + 1:]
+            tail = path.stem[len(prefix) + 1 :]
             if tail.isdigit():
                 best = max(best, int(tail))
         return best + 1
 
-    def write(self, from_colour: str, to_colour: str, kind: str, subject: str,
-              body: str = "", variant: str = "-", round_n: int = 0,
-              evidence: "dict | None" = None, confidence: float = 1.0,
-              expects_ack: bool = False, supersedes: "str | None" = None,
-              in_reply_to: "str | None" = None, disposition: "str | None" = None,
-              action_taken: "str | None" = None) -> Note:
-        note = Note(from_colour=from_colour, to_colour=to_colour, kind=kind,
-                    subject=subject, body=body, variant=str(variant),
-                    round=int(round_n), evidence=dict(evidence or {}),
-                    confidence=confidence, expects_ack=bool(expects_ack),
-                    supersedes=supersedes, in_reply_to=in_reply_to,
-                    disposition=disposition, action_taken=action_taken)
+    def write(
+        self,
+        from_colour: str,
+        to_colour: str,
+        kind: str,
+        subject: str,
+        body: str = "",
+        variant: str = "-",
+        round_n: int = 0,
+        evidence: "dict | None" = None,
+        confidence: float = 1.0,
+        expects_ack: bool = False,
+        supersedes: "str | None" = None,
+        in_reply_to: "str | None" = None,
+        disposition: "str | None" = None,
+        action_taken: "str | None" = None,
+    ) -> Note:
+        note = Note(
+            from_colour=from_colour,
+            to_colour=to_colour,
+            kind=kind,
+            subject=subject,
+            body=body,
+            variant=str(variant),
+            round=int(round_n),
+            evidence=dict(evidence or {}),
+            confidence=confidence,
+            expects_ack=bool(expects_ack),
+            supersedes=supersedes,
+            in_reply_to=in_reply_to,
+            disposition=disposition,
+            action_taken=action_taken,
+        )
         note.validate(self.cfg)
         self.dir.mkdir(parents=True, exist_ok=True)
         prefix = "{}-{}-{}-{}".format(from_colour, to_colour, note.variant, note.round)
@@ -255,11 +314,19 @@ class NoteBus:
 
     def _append_index(self, note: Note) -> None:
         """Best-effort index update. The note files remain the source of truth."""
-        entry = {"id": note.id, "from": note.from_colour, "to": note.to_colour,
-                 "kind": note.kind, "variant": note.variant, "round": note.round,
-                 "subject": note.subject, "expects_ack": note.expects_ack,
-                 "in_reply_to": note.in_reply_to, "supersedes": note.supersedes,
-                 "created_at": note.created_at}
+        entry = {
+            "id": note.id,
+            "from": note.from_colour,
+            "to": note.to_colour,
+            "kind": note.kind,
+            "variant": note.variant,
+            "round": note.round,
+            "subject": note.subject,
+            "expects_ack": note.expects_ack,
+            "in_reply_to": note.in_reply_to,
+            "supersedes": note.supersedes,
+            "created_at": note.created_at,
+        }
         with _DirLock(self._lock_path) as lock:
             entries = self._read_index()
             entries.append(entry)
@@ -288,7 +355,9 @@ class NoteBus:
             if path.name == self.cfg.handshake.notes_index:
                 continue
             try:
-                found.append(Note.from_dict(json.loads(path.read_text(encoding="utf-8"))))
+                found.append(
+                    Note.from_dict(json.loads(path.read_text(encoding="utf-8")))
+                )
             except (OSError, ValueError):
                 continue  # a note being written right now; it will appear next scan
         found.sort(key=lambda n: (str(n.created_at), str(n.id)))
@@ -304,27 +373,47 @@ class NoteBus:
     def rebuild_index(self) -> int:
         """Regenerate the index from the note files. Repairs a lagging cache."""
         notes = self.all_notes()
-        entries = [{"id": n.id, "from": n.from_colour, "to": n.to_colour,
-                    "kind": n.kind, "variant": n.variant, "round": n.round,
-                    "subject": n.subject, "expects_ack": n.expects_ack,
-                    "in_reply_to": n.in_reply_to, "supersedes": n.supersedes,
-                    "created_at": n.created_at} for n in notes]
+        entries = [
+            {
+                "id": n.id,
+                "from": n.from_colour,
+                "to": n.to_colour,
+                "kind": n.kind,
+                "variant": n.variant,
+                "round": n.round,
+                "subject": n.subject,
+                "expects_ack": n.expects_ack,
+                "in_reply_to": n.in_reply_to,
+                "supersedes": n.supersedes,
+                "created_at": n.created_at,
+            }
+            for n in notes
+        ]
         _atomic_write(self.index_path, json.dumps(entries, indent=2))
         return len(entries)
 
-    def _filter(self, notes: "list[Note]", variant: "str | None",
-                round_n: "int | None") -> "list[Note]":
+    def _filter(
+        self, notes: "list[Note]", variant: "str | None", round_n: "int | None"
+    ) -> "list[Note]":
         if variant is not None:
             notes = [n for n in notes if str(n.variant) == str(variant)]
         if round_n is not None:
             notes = [n for n in notes if int(n.round or 0) == int(round_n)]
         return notes
 
-    def inbox(self, colour: str, variant: "str | None" = None,
-              round_n: "int | None" = None, unacked_only: bool = False) -> "list[Note]":
+    def inbox(
+        self,
+        colour: str,
+        variant: "str | None" = None,
+        round_n: "int | None" = None,
+        unacked_only: bool = False,
+    ) -> "list[Note]":
         """Notes addressed to a colour, including broadcasts."""
-        notes = [n for n in self.all_notes()
-                 if n.to_colour == colour or n.to_colour == BROADCAST]
+        notes = [
+            n
+            for n in self.all_notes()
+            if n.to_colour == colour or n.to_colour == BROADCAST
+        ]
         notes = self._filter(notes, variant, round_n)
         notes = [n for n in notes if not self._is_superseded(n)]
         if unacked_only:
@@ -332,8 +421,9 @@ class NoteBus:
             notes = [n for n in notes if n.expects_ack and n.id not in answered]
         return notes
 
-    def outbox(self, colour: str, variant: "str | None" = None,
-               round_n: "int | None" = None) -> "list[Note]":
+    def outbox(
+        self, colour: str, variant: "str | None" = None, round_n: "int | None" = None
+    ) -> "list[Note]":
         notes = [n for n in self.all_notes() if n.from_colour == colour]
         return self._filter(notes, variant, round_n)
 
@@ -364,27 +454,43 @@ class NoteBus:
             stack = list(by_parent.get(current.id, [])) + stack
         return chain
 
-    def acknowledge(self, note_id: str, disposition: str, action_taken: str = "",
-                    rebuttal: str = "", evidence: "dict | None" = None,
-                    from_colour: "str | None" = None) -> Note:
+    def acknowledge(
+        self,
+        note_id: str,
+        disposition: str,
+        action_taken: str = "",
+        rebuttal: str = "",
+        evidence: "dict | None" = None,
+        from_colour: "str | None" = None,
+    ) -> Note:
         """Answer a note. A rejection is a rebuttal and must carry evidence."""
         target = self.read(note_id)
         if target is None:
             raise NoteError("cannot acknowledge unknown note {!r}".format(note_id))
         if disposition not in set(self.cfg.ack_dispositions):
-            raise NoteError("unknown disposition {!r}; expected one of {}"
-                            .format(disposition, sorted(self.cfg.ack_dispositions)))
+            raise NoteError(
+                "unknown disposition {!r}; expected one of {}".format(
+                    disposition, sorted(self.cfg.ack_dispositions)
+                )
+            )
         responder = from_colour or target.to_colour
         if responder == BROADCAST:
             raise NoteError("a broadcast has no single responder; pass from_colour")
         kind = "rebuttal" if disposition == "rejected" else "acknowledgement"
         subject = "{}: {}".format(disposition, target.subject)
-        return self.write(from_colour=responder, to_colour=target.from_colour,
-                          kind=kind, subject=subject,
-                          body=rebuttal or action_taken,
-                          variant=target.variant, round_n=target.round or 0,
-                          evidence=evidence, in_reply_to=target.id,
-                          disposition=disposition, action_taken=action_taken)
+        return self.write(
+            from_colour=responder,
+            to_colour=target.from_colour,
+            kind=kind,
+            subject=subject,
+            body=rebuttal or action_taken,
+            variant=target.variant,
+            round_n=target.round or 0,
+            evidence=evidence,
+            in_reply_to=target.id,
+            disposition=disposition,
+            action_taken=action_taken,
+        )
 
     def stale(self, current_round: int) -> "list[Note]":
         """Notes that asked for an answer and never got one.
@@ -413,8 +519,9 @@ class NoteBus:
         got: "dict[str, int]" = {}
         for note in notes:
             matrix.setdefault(note.from_colour, {})
-            matrix[note.from_colour][note.to_colour] = \
+            matrix[note.from_colour][note.to_colour] = (
                 matrix[note.from_colour].get(note.to_colour, 0) + 1
+            )
             kinds[note.kind] = kinds.get(note.kind, 0) + 1
             sent[note.from_colour] = sent.get(note.from_colour, 0) + 1
             if note.expects_ack:
@@ -423,14 +530,23 @@ class NoteBus:
                     got[note.to_colour] = got.get(note.to_colour, 0) + 1
         ack_rate = {}
         for colour, total in sorted(expected.items()):
-            ack_rate[colour] = round(got.get(colour, 0) / total * 100, 1) if total else None
-        return {"total": len(notes), "matrix": matrix, "by_kind": kinds,
-                "sent": sent, "ack_expected": expected, "ack_received": got,
-                "ack_rate_pct": ack_rate,
-                "superseded": len(self._superseded_ids())}
+            ack_rate[colour] = (
+                round(got.get(colour, 0) / total * 100, 1) if total else None
+            )
+        return {
+            "total": len(notes),
+            "matrix": matrix,
+            "by_kind": kinds,
+            "sent": sent,
+            "ack_expected": expected,
+            "ack_received": got,
+            "ack_rate_pct": ack_rate,
+            "superseded": len(self._superseded_ids()),
+        }
 
 
 # ------------------------------------------------------------------- export
+
 
 def export_note(note: Note, anon) -> dict:
     """Redact one note for human consumption.
@@ -454,36 +570,57 @@ def export_note(note: Note, anon) -> dict:
 def render_markdown(notes: "list[Note]", anon, summary: "dict | None" = None) -> str:
     out: "list[str]" = ["# Correspondence", ""]
     if summary:
-        out.append("{} notes · {} superseded".format(
-            summary.get("total", 0), summary.get("superseded", 0)))
+        out.append(
+            "{} notes · {} superseded".format(
+                summary.get("total", 0), summary.get("superseded", 0)
+            )
+        )
         rates = summary.get("ack_rate_pct") or {}
         if rates:
-            out.append("Acknowledgement rate: " + ", ".join(
-                "{} {}%".format(colour, pct) for colour, pct in sorted(rates.items())))
+            out.append(
+                "Acknowledgement rate: "
+                + ", ".join(
+                    "{} {}%".format(colour, pct)
+                    for colour, pct in sorted(rates.items())
+                )
+            )
         out.append("")
-        out.append("| from \\ to | " + " | ".join(sorted(
-            {to for row in summary.get("matrix", {}).values() for to in row})) + " |")
+        out.append(
+            "| from \\ to | "
+            + " | ".join(
+                sorted({to for row in summary.get("matrix", {}).values() for to in row})
+            )
+            + " |"
+        )
         cols = sorted({to for row in summary.get("matrix", {}).values() for to in row})
         out.append("|---" * (len(cols) + 1) + "|")
         for frm in sorted(summary.get("matrix", {})):
             row = summary["matrix"][frm]
-            out.append("| {} | ".format(frm) + " | ".join(
-                str(row.get(col, 0)) for col in cols) + " |")
+            out.append(
+                "| {} | ".format(frm)
+                + " | ".join(str(row.get(col, 0)) for col in cols)
+                + " |"
+            )
         out.append("")
     for note in notes:
         payload = export_note(note, anon)
-        out.append("## {} → {} · {}".format(
-            payload["from_colour"], payload["to_colour"], payload["kind"]))
+        out.append(
+            "## {} → {} · {}".format(
+                payload["from_colour"], payload["to_colour"], payload["kind"]
+            )
+        )
         out.append("")
         out.append("**{}**".format(payload["subject"]))
         out.append("")
         if payload.get("body"):
             out.append(payload["body"])
             out.append("")
-        meta = ["id `{}`".format(payload["id"]),
-                "variant `{}`".format(payload["variant"]),
-                "round {}".format(payload["round"]),
-                "confidence {}".format(payload["confidence"])]
+        meta = [
+            "id `{}`".format(payload["id"]),
+            "variant `{}`".format(payload["variant"]),
+            "round {}".format(payload["round"]),
+            "confidence {}".format(payload["confidence"]),
+        ]
         if payload.get("in_reply_to"):
             meta.append("in reply to `{}`".format(payload["in_reply_to"]))
         if payload.get("supersedes"):
@@ -496,13 +633,19 @@ def render_markdown(notes: "list[Note]", anon, summary: "dict | None" = None) ->
         cited = {k: v for k, v in (payload.get("evidence") or {}).items() if v}
         if cited:
             out.append("")
-            out.append("Evidence: " + "; ".join(
-                "{}={}".format(k, ", ".join(str(x) for x in v)) for k, v in sorted(cited.items())))
+            out.append(
+                "Evidence: "
+                + "; ".join(
+                    "{}={}".format(k, ", ".join(str(x) for x in v))
+                    for k, v in sorted(cited.items())
+                )
+            )
         out.append("")
     return "\n".join(out)
 
 
 # ---------------------------------------------------------------------- CLI
+
 
 def _print_notes(notes: "list[Note]", anon) -> None:
     if not notes:
@@ -515,15 +658,22 @@ def _print_notes(notes: "list[Note]", anon) -> None:
             flag = " [awaiting ack]"
         if payload.get("disposition"):
             flag = " [{}]".format(payload["disposition"])
-        print("  {:<34} {:>6} -> {:<6} {:<16}{}".format(
-            payload["id"], payload["from_colour"], payload["to_colour"],
-            payload["kind"], flag))
+        print(
+            "  {:<34} {:>6} -> {:<6} {:<16}{}".format(
+                payload["id"],
+                payload["from_colour"],
+                payload["to_colour"],
+                payload["kind"],
+                flag,
+            )
+        )
         print("      {}".format(payload["subject"]))
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Inter-colour correspondence bus (see NOTES_PROTOCOL.md).")
+        description="Inter-colour correspondence bus (see NOTES_PROTOCOL.md)."
+    )
     cfg_preview = load_config()
     add_common_arguments(parser, config=cfg_preview)
     _anon.add_arguments(parser)
@@ -534,8 +684,12 @@ def main() -> int:
     parser.add_argument("--thread", default=None, metavar="NOTE_ID")
     parser.add_argument("--stale", type=int, default=None, metavar="CURRENT_ROUND")
     parser.add_argument("--summary", action="store_true")
-    parser.add_argument("--export", default=None, metavar="PATH",
-                        help="write the redacted correspondence as markdown")
+    parser.add_argument(
+        "--export",
+        default=None,
+        metavar="PATH",
+        help="write the redacted correspondence as markdown",
+    )
     parser.add_argument("--rebuild-index", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
@@ -543,8 +697,9 @@ def main() -> int:
     cfg = load_config(args.profile)
     base = resolve_base(cfg, args.base)
     bus = NoteBus(cfg, base)
-    anon = _anon.from_args(args, root=cfg.root,
-                           extra_terms=[cfg.profile_id, cfg.display_name])
+    anon = _anon.from_args(
+        args, root=cfg.root, extra_terms=[cfg.profile_id, cfg.display_name]
+    )
 
     if args.rebuild_index:
         print("index rebuilt: {} entries".format(bus.rebuild_index()))
@@ -564,8 +719,11 @@ def main() -> int:
         if args.json:
             print(json.dumps([export_note(n, anon) for n in notes], indent=2))
         else:
-            print("stale at round {} ({} unanswered past {} rounds)".format(
-                args.stale, len(notes), cfg.notes_stale_after_rounds))
+            print(
+                "stale at round {} ({} unanswered past {} rounds)".format(
+                    args.stale, len(notes), cfg.notes_stale_after_rounds
+                )
+            )
             _print_notes(notes, anon)
         return 0
 
@@ -574,8 +732,11 @@ def main() -> int:
         if args.json:
             print(json.dumps(summary, indent=2))
         else:
-            print("correspondence: {} notes, {} superseded".format(
-                summary["total"], summary["superseded"]))
+            print(
+                "correspondence: {} notes, {} superseded".format(
+                    summary["total"], summary["superseded"]
+                )
+            )
             for frm in sorted(summary["matrix"]):
                 for to, count in sorted(summary["matrix"][frm].items()):
                     print("  {:>6} -> {:<6} {}".format(frm, to, count))
@@ -590,20 +751,29 @@ def main() -> int:
         text = render_markdown(notes, anon, bus.summary())
         out = Path(args.export)
         _atomic_write(out, text)
-        print("exported {} notes to {} (anonymize={})".format(
-            len(notes), anon.path(out), anon.level))
+        print(
+            "exported {} notes to {} (anonymize={})".format(
+                len(notes), anon.path(out), anon.level
+            )
+        )
         return 0
 
     if args.inbox or args.outbox:
         if not args.colour:
             parser.error("--inbox/--outbox require --colour")
-        notes = (bus.inbox(args.colour, unacked_only=args.unacked)
-                 if args.inbox else bus.outbox(args.colour))
+        notes = (
+            bus.inbox(args.colour, unacked_only=args.unacked)
+            if args.inbox
+            else bus.outbox(args.colour)
+        )
         if args.json:
             print(json.dumps([export_note(n, anon) for n in notes], indent=2))
         else:
-            print("{} for {} ({} notes)".format(
-                "inbox" if args.inbox else "outbox", args.colour, len(notes)))
+            print(
+                "{} for {} ({} notes)".format(
+                    "inbox" if args.inbox else "outbox", args.colour, len(notes)
+                )
+            )
             _print_notes(notes, anon)
         return 0
 
@@ -615,6 +785,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-
-

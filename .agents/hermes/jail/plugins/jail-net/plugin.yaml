@@ -1,6 +1,10 @@
 name: jail-net
 version: "1.0.0"
-description: "Block network egress when the active jail policy forbids it. Granular component of ste-code-jail; guards network tools, URLs in shell commands, and network calls inside execute_code. Primary anti-exfiltration control for the benchmark profile."
+description:
+    "Block network egress when the active jail policy forbids it. Granular
+    component of ste-code-jail; guards network tools, URLs in shell commands,
+    and network calls inside execute_code. Primary anti-exfiltration control for
+    the benchmark profile."
 author: STE-Code
 hooks:
-  - pre_tool_call
+    - pre_tool_call

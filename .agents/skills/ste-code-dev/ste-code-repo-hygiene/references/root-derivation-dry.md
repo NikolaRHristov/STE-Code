@@ -25,10 +25,10 @@ PROJECT = _repo_root(__file__)
 
 ## Why this matters
 
-Counting `.parent` hops encodes the file's depth in the tree. Move the script one
-directory deeper/shallower and `PROJECT` silently points at an ancestor of the
-repo; `os.makedirs` then scatters output outside the checkout. That is the exact
-defect the jail exists to contain.
+Counting `.parent` hops encodes the file's depth in the tree. Move the script
+one directory deeper/shallower and `PROJECT` silently points at an ancestor of
+the repo; `os.makedirs` then scatters output outside the checkout. That is the
+exact defect the jail exists to contain.
 
 ## Two mistakes made (and reverted) during the migration
 
@@ -38,25 +38,25 @@ defect the jail exists to contain.
    Fix: a 6-line bootstrap that delegates to the shared `repo_root()`.
 
 2. **Import ordering `NameError`.** The bootstrap first emitted the marker-walk
-   using `Path(__file__)`, then a separate `import sys` / `from pathlib import
-   Path` line, then `sys.path.insert(...)`. Because the bootstrap used `sys`
-   ABOVE its import, the module raised `NameError: name 'sys' is not defined` on
-   import. Fix: make the bootstrap self-contained — `import sys as _sys` and
-   `from pathlib import Path as _Path` *inside* the bootstrap block, so ordering
-   is impossible to get wrong.
+   using `Path(__file__)`, then a separate `import sys` /
+   `from pathlib import Path` line, then `sys.path.insert(...)`. Because the
+   bootstrap used `sys` ABOVE its import, the module raised
+   `NameError: name 'sys' is not defined` on import. Fix: make the bootstrap
+   self-contained — `import sys as _sys` and `from pathlib import Path as _Path`
+   _inside_ the bootstrap block, so ordering is impossible to get wrong.
 
 ## How the migration script works (re-run it with)
 
 `scripts/migrate_root.py` — operate from the repo root:
 
 ```bash
-python3 scripts/migrate_root.py            # dry run, lists every derivation
-python3 scripts/migrate_root.py --apply    # rewrite all three fragile forms
-python3 scripts/migrate_root.py --only "benchmark/adversarial.py"   # one file
+python3 scripts/migrate_root.py                                   # dry run, lists every derivation
+python3 scripts/migrate_root.py --apply                           # rewrite all three fragile forms
+python3 scripts/migrate_root.py --only "benchmark/adversarial.py" # one file
 ```
 
 It excludes `.agents/tools/lib/repo_root.py` itself and `.agents/hermes/jail/`
-(owned by another live session), plus vendor/__pycache__/ste-code/tmp. It skips
+(owned by another live session), plus vendor/**pycache**/ste-code/tmp. It skips
 files that already contain the `_STE_REPO_ROOT_BOOTSTRAP` marker.
 
 ## Proof the fix works (run after migrating)

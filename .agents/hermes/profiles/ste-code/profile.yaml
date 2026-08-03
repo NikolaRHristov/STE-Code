@@ -1,6 +1,6 @@
 description: >-
-  STE-Code consumer profile. Read the standard, the rules, and the level
-  artifacts, then apply them to documentation in your own repository. Locked
-  down under the 'user' jail policy: the STE-Code checkout is read-only, there
-  is no network access, and delegation is disabled.
+    STE-Code consumer profile. Read the standard, the rules, and the level
+    artifacts, then apply them to documentation in your own repository. Locked
+    down under the 'user' jail policy: the STE-Code checkout is read-only, there
+    is no network access, and delegation is disabled.
 description_auto: false

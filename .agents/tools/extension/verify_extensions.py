@@ -16,6 +16,7 @@ Gates:
 
 Usage: python3 verify_extensions.py   (exit 0 = pass)
 """
+
 import sys
 import re
 import json
@@ -24,8 +25,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -33,22 +38,64 @@ PROJECT = _repo_root(__file__)
 EXT_DIR = PROJECT / "ste-code" / "extensions"
 
 REQUIRED = {
-    "verb": ["type", "category-id", "approved", "replaces", "definition",
-             "code_example_ste", "code_example_non_ste", "source"],
-    "adjective": ["type", "approved", "definition", "code_example_ste",
-                  "code_example_non_ste", "source"],
+    "verb": [
+        "type",
+        "category-id",
+        "approved",
+        "replaces",
+        "definition",
+        "code_example_ste",
+        "code_example_non_ste",
+        "source",
+    ],
+    "adjective": [
+        "type",
+        "approved",
+        "definition",
+        "code_example_ste",
+        "code_example_non_ste",
+        "source",
+    ],
     "noun": ["category-id", "category", "term", "definition", "approved", "source"],
-    "verb-example": ["category-id", "verb", "context", "example_ste", "example_non_ste", "source"],
-    "anti-pattern": ["id", "pattern", "non_ste", "ste", "violates", "severity", "context"],
+    "verb-example": [
+        "category-id",
+        "verb",
+        "context",
+        "example_ste",
+        "example_non_ste",
+        "source",
+    ],
+    "anti-pattern": [
+        "id",
+        "pattern",
+        "non_ste",
+        "ste",
+        "violates",
+        "severity",
+        "context",
+    ],
     "domain": ["domain", "term", "definition", "replaces", "source"],
 }
 AREA_TYPE = {
-    "verbs.md": "verb", "adjectives.md": "adjective", "nouns.md": "noun",
-    "verb-examples.md": "verb-example", "anti-patterns.md": "anti-pattern",
+    "verbs.md": "verb",
+    "adjectives.md": "adjective",
+    "nouns.md": "noun",
+    "verb-examples.md": "verb-example",
+    "anti-patterns.md": "anti-pattern",
     "domains.md": "domain",
 }
-AVOIDED = ["utilize", "leverage", "employ", "commence", "terminate",
-           "initiate", "bootstrap", "render", "generate", "obtain"]
+AVOIDED = [
+    "utilize",
+    "leverage",
+    "employ",
+    "commence",
+    "terminate",
+    "initiate",
+    "bootstrap",
+    "render",
+    "generate",
+    "obtain",
+]
 
 
 def _entries(md_text):
@@ -65,6 +112,7 @@ def _entries(md_text):
 
 def main():
     import argparse
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", type=Path, default=EXT_DIR)
     args = ap.parse_args()
@@ -78,7 +126,9 @@ def main():
     for f in files:
         text = f.read_text(encoding="utf-8", errors="ignore")
         # Gate 4 (fabrication, checked on raw markdown)
-        if re.search(r"TODO|TBD|FIXME|placeholder|<\s*PLACEHOLDER\s*>|\?\?\?", text, re.I):
+        if re.search(
+            r"TODO|TBD|FIXME|placeholder|<\s*PLACEHOLDER\s*>|\?\?\?", text, re.I
+        ):
             problems.append(f"Gate4 {f.name}: fabrication marker")
         entries = _entries(text)
         if not entries:
@@ -90,7 +140,10 @@ def main():
         for i, e in enumerate(entries):
             # crude field extraction
             fields = dict(re.findall(r"\*\*(.+?)\*\*:\s*(.+)", e))
-            fields = {k.strip().lower().replace(" ", "_"): v.strip() for k, v in fields.items()}
+            fields = {
+                k.strip().lower().replace(" ", "_"): v.strip()
+                for k, v in fields.items()
+            }
             missing = [k for k in required if k not in fields]
             if missing:
                 problems.append(f"Gate2 {f.name}[{i}]: missing {missing}")
@@ -99,7 +152,9 @@ def main():
             if etype in ("verb", "adjective"):
                 ns = fields.get("code_example_non_ste", "")
                 if not any(s in ns.lower() for s in AVOIDED):
-                    problems.append(f"Gate6 {f.name}[{i}]: non-STE lacks avoided synonym")
+                    problems.append(
+                        f"Gate6 {f.name}[{i}]: non-STE lacks avoided synonym"
+                    )
             title = e.strip().splitlines()[0].strip()
             if title in seen:
                 problems.append(f"Gate5 {f.name}: duplicate entry '{title}'")
@@ -112,7 +167,9 @@ def main():
             try:
                 data = json.loads(jf.read_text(encoding="utf-8"))
                 if not isinstance(data, list) or len(data) != len(entries):
-                    problems.append(f"Gate1 {f.name}: JSON entry count {len(data)} != markdown {len(entries)}")
+                    problems.append(
+                        f"Gate1 {f.name}: JSON entry count {len(data)} != markdown {len(entries)}"
+                    )
             except Exception as ex:
                 problems.append(f"Gate1 {f.name}: invalid derived JSON ({ex})")
 

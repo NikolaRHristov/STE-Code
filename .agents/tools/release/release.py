@@ -36,13 +36,18 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
+
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
@@ -87,9 +92,7 @@ class Runner:
             print(f"  would run: {printable}")
             return ""
         self.log.append(f"RUN  {printable}")
-        out = subprocess.run(
-            args, cwd=PROJECT, capture_output=True, text=True
-        )
+        out = subprocess.run(args, cwd=PROJECT, capture_output=True, text=True)
         if check and out.returncode != 0:
             raise SystemExit(f"FAILED: {printable}\n{out.stderr.strip()}")
         return out.stdout.strip()
@@ -110,7 +113,9 @@ def bump(current: str, part: str) -> str:
     return f"{major}.{minor}.{patch + 1}"
 
 
-def preflight(version: str, branch: str, allow_dirty: bool, paths: list[str]) -> list[str]:
+def preflight(
+    version: str, branch: str, allow_dirty: bool, paths: list[str]
+) -> list[str]:
     problems = []
     current = git_out("rev-parse", "--abbrev-ref", "HEAD")
     if current != branch:
@@ -165,7 +170,15 @@ def step_labels(r: Runner) -> None:
     existing = {}
     if shutil.which("gh"):
         raw = subprocess.run(
-            ["gh", "label", "list", "--limit", "200", "--json", "name,color,description"],
+            [
+                "gh",
+                "label",
+                "list",
+                "--limit",
+                "200",
+                "--json",
+                "name,color,description",
+            ],
             cwd=PROJECT,
             capture_output=True,
             text=True,
@@ -177,22 +190,40 @@ def step_labels(r: Runner) -> None:
     for label in reg["labels"]:
         name, color, desc = label["name"], label["color"], label["description"]
         cur = existing.get(name)
-        if cur and cur.get("color", "").lower() == color.lower() and cur.get("description") == desc:
+        if (
+            cur
+            and cur.get("color", "").lower() == color.lower()
+            and cur.get("description") == desc
+        ):
             continue
         verb = "edit" if cur else "create"
-        r.run("gh", "label", verb, name, "--color", color, "--description", desc, check=False)
+        r.run(
+            "gh",
+            "label",
+            verb,
+            name,
+            "--color",
+            color,
+            "--description",
+            desc,
+            check=False,
+        )
     topics = reg["topics"]
-    r.run(
-        "gh", "repo", "edit", "--add-topic", ",".join(topics), check=False
-    )
+    r.run("gh", "repo", "edit", "--add-topic", ",".join(topics), check=False)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--version", help="explicit target version, e.g. 1.1.0")
-    ap.add_argument("--bump", choices=["major", "minor", "patch"], help="derive the version")
-    ap.add_argument("--branch", default="Current", help="release branch (default: Current)")
-    ap.add_argument("--execute", action="store_true", help="apply changes (default: dry run)")
+    ap.add_argument(
+        "--bump", choices=["major", "minor", "patch"], help="derive the version"
+    )
+    ap.add_argument(
+        "--branch", default="Current", help="release branch (default: Current)"
+    )
+    ap.add_argument(
+        "--execute", action="store_true", help="apply changes (default: dry run)"
+    )
     ap.add_argument("--dry-run", action="store_true", help="explicit dry run")
     ap.add_argument("--check", action="store_true", help="run the drift scan only")
     ap.add_argument("--allow-dirty", action="store_true")
@@ -302,9 +333,14 @@ def main() -> int:
             mkdir(notes_file.parent)
             write_text(notes_file, notes or f"STE-Code {version}")
         r.run(
-            "gh", "release", "create", f"v{version}",
-            "--title", f"STE-Code v{version}",
-            "--notes-file", str(notes_file),
+            "gh",
+            "release",
+            "create",
+            f"v{version}",
+            "--title",
+            f"STE-Code v{version}",
+            "--notes-file",
+            str(notes_file),
             check=False,
         )
 

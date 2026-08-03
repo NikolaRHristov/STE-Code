@@ -1,6 +1,12 @@
 name: privacy-scrub
 version: "1.0.0"
-description: "Content-privacy guard for persistent memory. A pre_tool_call hook that refuses memory writes containing sensitive data (PII, credentials, home paths) so the background self-improvement review and any agent cannot persist it. Enable per profile via plugins.entries.privacy-scrub.enabled; installed into all profiles but inert until enabled. Extend the pattern list in config.yaml as new sensitive cases surface."
+description:
+    "Content-privacy guard for persistent memory. A pre_tool_call hook that
+    refuses memory writes containing sensitive data (PII, credentials, home
+    paths) so the background self-improvement review and any agent cannot
+    persist it. Enable per profile via plugins.entries.privacy-scrub.enabled;
+    installed into all profiles but inert until enabled. Extend the pattern list
+    in config.yaml as new sensitive cases surface."
 author: STE-Code
 hooks:
-  - pre_tool_call
+    - pre_tool_call

@@ -1,9 +1,8 @@
 # STE-Code — Final Standard (full corpus)
 
-> **Source:** ASD-STE100 Issue 9, January 2025 — adapted to the software/code domain
-> **Version:** {{version}}
-> **Generated:** {{generated}}
-> **Rules:** {{rule_count}} (9 sections)
+> **Source:** ASD-STE100 Issue 9, January 2025 — adapted to the software/code
+> domain **Version:** {{version}} **Generated:** {{generated}} **Rules:**
+> {{rule_count}} (9 sections)
 
 This document is the complete, consolidated STE-Code rule set, assembled
 deterministically from `ste-code/final/`. Each rule preserves its original

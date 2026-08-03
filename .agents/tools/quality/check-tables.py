@@ -17,8 +17,12 @@ from collections import defaultdict
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -44,21 +48,23 @@ def find_table_breaks():
 
         next_f = refined[i + 1]
         next_lines = [
-            l.strip()
-            for l in next_f.read_text().split("\n")[:10]
-            if l.strip()
+            l.strip() for l in next_f.read_text().split("\n")[:10] if l.strip()
         ]
-        next_starts_table = any(
-            l.startswith("|") for l in next_lines[:5]
-        ) if next_lines else False
+        next_starts_table = (
+            any(l.startswith("|") for l in next_lines[:5]) if next_lines else False
+        )
 
         if not next_starts_table:
             # Verify this is a real break (not a legitimate end-of-table)
-            breaks.append({
-                "file": f.name,
-                "next_file": next_f.name,
-                "page_range": f.name.split("-p")[1].replace(".md", "") if "-p" in f.name else "?",
-            })
+            breaks.append(
+                {
+                    "file": f.name,
+                    "next_file": next_f.name,
+                    "page_range": f.name.split("-p")[1].replace(".md", "")
+                    if "-p" in f.name
+                    else "?",
+                }
+            )
 
     return breaks
 
@@ -106,11 +112,13 @@ def find_table_anomalies():
                     row_count = 0
                 else:
                     # Orphan table row without separator
-                    anomalies.append({
-                        "file": f.name,
-                        "line": i + 1,
-                        "issue": "orphan row (no separator follows)",
-                    })
+                    anomalies.append(
+                        {
+                            "file": f.name,
+                            "line": i + 1,
+                            "issue": "orphan row (no separator follows)",
+                        }
+                    )
 
             elif s.startswith("|") and in_table:
                 row_count += 1
@@ -118,11 +126,13 @@ def find_table_anomalies():
             elif not s.startswith("|") and in_table:
                 # End of table
                 if has_header and has_separator and row_count == 0:
-                    anomalies.append({
-                        "file": f.name,
-                        "line": table_start + 1,
-                        "issue": "empty table (header + separator, no data rows)",
-                    })
+                    anomalies.append(
+                        {
+                            "file": f.name,
+                            "line": table_start + 1,
+                            "issue": "empty table (header + separator, no data rows)",
+                        }
+                    )
                 in_table = False
                 has_header = False
                 has_separator = False

@@ -10,12 +10,10 @@ looks right.
 
 Output strict JSON, no prose, no code fence:
 
-{
-  "goals": [{"id": str, "verdict": "met"|"not met"|"untestable"|"disputed",
-             "because": str, "consequence": str}],
-  "root_causes": [{"cause": str, "goals_blocked": [str], "fix": str}],
-  "confidence": {"level": "high"|"medium"|"low", "why": str}
-}
+{ "goals": [{"id": str, "verdict": "met"|"not met"|"untestable"|"disputed",
+"because": str, "consequence": str}], "root_causes": [{"cause": str,
+"goals_blocked": [str], "fix": str}], "confidence": {"level":
+"high"|"medium"|"low", "why": str} }
 
 "consequence" states what the reader cannot conclude because of this grade.
 "root_causes" must be ordered by how many goals each one unblocks.

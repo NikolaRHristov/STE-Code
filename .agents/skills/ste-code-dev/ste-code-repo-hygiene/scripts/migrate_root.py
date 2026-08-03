@@ -29,6 +29,7 @@ Exclusions: .agents/tools/lib/repo_root.py (the helper itself), .agents/hermes/j
 (owned by another live session), and vendor/__pycache__/ste-code/tmp. Files already
 carrying the _STE_REPO_ROOT_BOOTSTRAP marker are skipped.
 """
+
 from __future__ import annotations
 
 import argparse

@@ -3,7 +3,7 @@
 
 Design rationale:
   Scoring formula:  score = 0.4 + 0.6*(met/total_principles) - 0.3*(found/total_forbidden) + 0.1*(found/total_expected)
-  
+
   The 0.4 BASE ensures even a worker that addresses zero principles gets a floor above zero,
   because some output is better than no output. Without a base, a worker that produces valid
   content but misses all principle tags would score 0.0 — indistinguishable from a crash.
@@ -38,6 +38,12 @@ import os
 import re
 import signal
 import sys
+
+# Confined child launcher: force-pins the bench jail policy, strips the env,
+# resets HOME=/tmp, and wraps the child in jail-exec.sh (Layer-2 kernel
+# confinement). Benchmark children MUST launch through this — never a bare
+# `hermes -z`. (Same directory as this file, so the script dir is importable.)
+from launch_confined_child import build_command, build_child_env, DEFAULT_TOOLSET
 import tempfile
 import time
 import difflib
@@ -53,105 +59,117 @@ from typing import Dict, Optional
 # logic.
 from pathlib import Path as _Path
 import sys as _sys
-_sys.path.insert(0, str(_Path(__file__).resolve().parent.parent.parent
-                  / ".agents" / "tools" / "lib"))
+
+_sys.path.insert(
+    0, str(_Path(__file__).resolve().parent.parent.parent / ".agents" / "tools" / "lib")
+)
 from templater import Templater as _Templater  # noqa: E402
 
 _ORCH_TPL = _Templater(__file__)
 
 
-def build_full_prompt(system_prompt: str, task_input: str,
-                      is_generation: bool) -> str:
+def build_full_prompt(system_prompt: str, task_input: str, is_generation: bool) -> str:
     """Assemble a worker prompt from the externalized templates.
 
     Replaces the two near-identical f-strings that were copy-pasted in the launch
     and retry paths. `is_generation` selects the generate vs check template.
     """
     name = "orchestrator-generate" if is_generation else "orchestrator-check"
-    return _ORCH_TPL.render(name, system_prompt=system_prompt,
-                            task_input=task_input)
+    return _ORCH_TPL.render(name, system_prompt=system_prompt, task_input=task_input)
 
 
 # ---------------------------------------------------------------------------
 # CLI argument parsing — all magic numbers become overridable
 # ---------------------------------------------------------------------------
 
+
 def parse_args():
     p = argparse.ArgumentParser(
         description="STE-Code Benchmark Orchestrator — run 59+ tests in parallel workers"
     )
     p.add_argument(
-        "--model", "-m",
+        "--model",
+        "-m",
         default="poolside/laguna-s-2.1:free",
-        help="Model name passed to hermes (default: poolside/laguna-s-2.1:free)"
+        help="Model name passed to hermes (default: poolside/laguna-s-2.1:free)",
     )
     p.add_argument(
         "--test-dir",
         default=None,
-        help="Directory containing category-*.json test case files (default: auto-detect)"
+        help="Directory containing category-*.json test case files (default: auto-detect)",
     )
     p.add_argument(
         "--results-dir",
         default=None,
-        help="Directory to write run results (default: auto-detect)"
+        help="Directory to write run results (default: auto-detect)",
     )
     p.add_argument(
         "--system-prompt-file",
         default=None,
-        help="File containing the STE-Code system prompt (default: auto-detect)"
+        help="File containing the STE-Code system prompt (default: auto-detect)",
     )
     p.add_argument(
-        "--timeout", "-t",
-        type=int, default=600,
-        help="Maximum seconds to wait for all workers (default: 600)"
+        "--timeout",
+        "-t",
+        type=int,
+        default=600,
+        help="Maximum seconds to wait for all workers (default: 600)",
     )
     p.add_argument(
-        "--poll-interval", "-p",
-        type=int, default=5,
-        help="Seconds between worker-completion polls (default: 5)"
+        "--poll-interval",
+        "-p",
+        type=int,
+        default=5,
+        help="Seconds between worker-completion polls (default: 5)",
     )
     p.add_argument(
-        "--max-workers", "-w",
-        type=int, default=0,
+        "--max-workers",
+        "-w",
+        type=int,
+        default=0,
         help="Maximum concurrent workers. 0 = unlimited (one per test case). "
-             "Use to avoid API rate limits (default: 0)"
+        "Use to avoid API rate limits (default: 0)",
     )
     p.add_argument(
-        "--retries", "-r",
-        type=int, default=2,
-        help="Maximum retry attempts per worker if output is empty/missing (default: 2)"
+        "--retries",
+        "-r",
+        type=int,
+        default=2,
+        help="Maximum retry attempts per worker if output is empty/missing (default: 2)",
     )
     p.add_argument(
         "--retry-delay",
-        type=float, default=2.0,
-        help="Seconds to wait before retrying a failed worker (default: 2.0)"
+        type=float,
+        default=2.0,
+        help="Seconds to wait before retrying a failed worker (default: 2.0)",
     )
     p.add_argument(
         "--stagger",
-        type=float, default=0.0,
+        type=float,
+        default=0.0,
         help="Seconds to wait between launching each worker. "
-             "Use > 0 to avoid API burst rate limits (default: 0)"
+        "Use > 0 to avoid API burst rate limits (default: 0)",
     )
     p.add_argument(
         "--resume",
         action="store_true",
-        help="Resume a previous run — skip workers whose output files already exist"
+        help="Resume a previous run — skip workers whose output files already exist",
     )
     p.add_argument(
         "--resume-run-dir",
         default=None,
-        help="Explicit run directory to resume from (required if multiple previous runs exist)"
+        help="Explicit run directory to resume from (required if multiple previous runs exist)",
     )
     p.add_argument(
         "--dry-run",
         action="store_true",
-        help="Load test cases and print what would run, but do not launch workers"
+        help="Load test cases and print what would run, but do not launch workers",
     )
     p.add_argument(
         "--log-level",
         default="INFO",
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
-        help="Logging verbosity (default: INFO)"
+        help="Logging verbosity (default: INFO)",
     )
     return p.parse_args()
 
@@ -161,9 +179,10 @@ def parse_args():
 # ---------------------------------------------------------------------------
 
 # Global registry so signal handlers and cleanup can reach all workers.
-_child_pids: Dict[str, int] = {}        # test_id -> pid
+_child_pids: Dict[str, int] = {}  # test_id -> pid
 _run_dir: Optional[str] = None
 _atexit_registered: bool = False
+
 
 def _kill_all_children(signum: Optional[int] = None):
     """Send SIGKILL to every tracked child process, then SIGTERM for good measure."""
@@ -206,7 +225,9 @@ def _emergency_cleanup():
 def _signal_handler(signum, frame):
     """Handle SIGTERM/SIGINT: kill children, write emergency state, exit."""
     sig_name = signal.Signals(signum).name
-    print(f"\nReceived {sig_name}. Killing {len(_child_pids)} workers...", file=sys.stderr)
+    print(
+        f"\nReceived {sig_name}. Killing {len(_child_pids)} workers...", file=sys.stderr
+    )
     _kill_all_children(signum)
     _emergency_cleanup()
     sys.exit(128 + signum)
@@ -226,13 +247,12 @@ def install_signal_handlers():
 # Auto-detect project paths
 # ---------------------------------------------------------------------------
 
+
 def _resolve_path(cli_val: Optional[str], default_rel: str) -> str:
     """Return CLI override, or compute the default relative to the project root."""
     if cli_val is not None:
         return os.path.abspath(cli_val)
-    project_root = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "..", "..")
-    )
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     return os.path.join(project_root, default_rel)
 
 
@@ -246,7 +266,10 @@ def _resolve_results_dir(cli_val: Optional[str]) -> str:
     """
     root = os.path.join(
         os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")),
-        ".agents", "benchmark", "tests")
+        ".agents",
+        "benchmark",
+        "tests",
+    )
     if cli_val is None:
         return root
     candidate = cli_val if os.path.isabs(cli_val) else os.path.join(root, cli_val)
@@ -254,7 +277,8 @@ def _resolve_results_dir(cli_val: Optional[str]) -> str:
     if resolved != root and not resolved.startswith(root + os.sep):
         raise SystemExit(
             "benchmark output must stay under {} (got {}); pass a path inside "
-            "it or a name relative to it".format(root, resolved))
+            "it or a name relative to it".format(root, resolved)
+        )
     return resolved
 
 
@@ -272,44 +296,118 @@ def _resolve_results_dir(cli_val: Optional[str]) -> str:
 # These keywords are designed to catch explicit discussion of each
 # principle, which is the primary signal in this benchmark.
 PRINCIPLE_KEYWORDS = {
-    "P1":  ["approved word", "dictionary", "approved term", "approved vocabulary"],
-    "P2":  ["part of speech", "noun", "verb", "adjective", "adverb", "preposition", "conjunction"],
-    "P3":  ["approved meaning", "meaning", "definition", "defined sense", "single meaning"],
-    "P4":  ["active voice", "passive voice", "imperative", "infinitive", "simple present", "simple past", "past participle"],
-    "P5":  ["technical noun", "keyword", "framework", "library", "class name", "function name", "variable name"],
-    "P6":  ["non-approved", "technical name", "technical term", "unapproved"],
-    "P7":  ["noun as verb", "do not use noun as verb", "nominalization", "verbing"],
-    "P8":  ["standard", "well-known", "recognized", "established term"],
-    "P9":  ["short", "clear", "concise", "brief", "simple word"],
+    "P1": ["approved word", "dictionary", "approved term", "approved vocabulary"],
+    "P2": [
+        "part of speech",
+        "noun",
+        "verb",
+        "adjective",
+        "adverb",
+        "preposition",
+        "conjunction",
+    ],
+    "P3": [
+        "approved meaning",
+        "meaning",
+        "definition",
+        "defined sense",
+        "single meaning",
+    ],
+    "P4": [
+        "active voice",
+        "passive voice",
+        "imperative",
+        "infinitive",
+        "simple present",
+        "simple past",
+        "past participle",
+    ],
+    "P5": [
+        "technical noun",
+        "keyword",
+        "framework",
+        "library",
+        "class name",
+        "function name",
+        "variable name",
+    ],
+    "P6": ["non-approved", "technical name", "technical term", "unapproved"],
+    "P7": ["noun as verb", "do not use noun as verb", "nominalization", "verbing"],
+    "P8": ["standard", "well-known", "recognized", "established term"],
+    "P9": ["short", "clear", "concise", "brief", "simple word"],
     "P10": ["slang", "jargon", "regional", "vague", "informal", "colloquial", "idiom"],
     "P11": ["one term", "consistent", "same term", "synonym", "do not use synonyms"],
-    "P12": ["technical verb", "build", "deploy", "test", "lint", "compile", "debug", "install", "configure", "execute"],
+    "P12": [
+        "technical verb",
+        "build",
+        "deploy",
+        "test",
+        "lint",
+        "compile",
+        "debug",
+        "install",
+        "configure",
+        "execute",
+    ],
     "P13": ["verb as noun", "do not use verb as noun", "gerund as noun"],
-    "P14": ["american spelling", "american english", "color", "analyze", "organize", "standardize"],
+    "P14": [
+        "american spelling",
+        "american english",
+        "color",
+        "analyze",
+        "organize",
+        "standardize",
+    ],
 }
 
 
 def extract_corrected_text(output):
     """Extract corrected text - handle multiple output formats."""
-    for marker in [r'\*\*Corrected Text:\*\*', r'## Corrected Text', r'CORRECTED TEXT',
-                   r'# Corrected Text', r'Corrected Text \(STE-Code Compliant\)',
-                   r'# STE-Code Corrected Text']:
-        m = re.search(marker + r'\s*\n+(.*?)(?:\n---\n|\n## Compliance|\n# Compliance|\nCOMPLIANCE|\n\*\*Compliance)', output, re.DOTALL | re.IGNORECASE)
+    for marker in [
+        r"\*\*Corrected Text:\*\*",
+        r"## Corrected Text",
+        r"CORRECTED TEXT",
+        r"# Corrected Text",
+        r"Corrected Text \(STE-Code Compliant\)",
+        r"# STE-Code Corrected Text",
+    ]:
+        m = re.search(
+            marker
+            + r"\s*\n+(.*?)(?:\n---\n|\n## Compliance|\n# Compliance|\nCOMPLIANCE|\n\*\*Compliance)",
+            output,
+            re.DOTALL | re.IGNORECASE,
+        )
         if m and m.group(1).strip():
             return m.group(1).strip()
-    m = re.search(r'^(.*?)(?:\n---\n|\n#+\s*Compliance|\nCOMPLIANCE)', output, re.DOTALL | re.IGNORECASE)
+    m = re.search(
+        r"^(.*?)(?:\n---\n|\n#+\s*Compliance|\nCOMPLIANCE)",
+        output,
+        re.DOTALL | re.IGNORECASE,
+    )
     if m:
         text = m.group(1).strip()
-        text = re.sub(r'^#+\s*(?:Corrected|STE-Code).*?\n+', '', text, flags=re.IGNORECASE)
-        if text: return text.strip()
+        text = re.sub(
+            r"^#+\s*(?:Corrected|STE-Code).*?\n+", "", text, flags=re.IGNORECASE
+        )
+        if text:
+            return text.strip()
     return output.strip()
 
 
 def extract_compliance_section(output):
     """Extract compliance summary - handle multiple formats."""
-    for marker in [r'\*\*Compliance Summary\*\*', r'## Compliance Summary', r'COMPLIANCE SUMMARY',
-                   r'# Compliance Summary', r'Compliance Summary']:
-        m = re.search(re.escape(marker) if '**' in marker else marker + r'\s*\n(.*)', output, re.DOTALL | re.IGNORECASE)
+    for marker in [
+        r"\*\*Compliance Summary\*\*",
+        r"## Compliance Summary",
+        r"COMPLIANCE SUMMARY",
+        r"# Compliance Summary",
+        r"Compliance Summary",
+    ]:
+        m = re.search(
+            re.escape(marker) if "**" in marker else marker + r"\s*\n(.*)",
+            output,
+            re.DOTALL | re.IGNORECASE,
+        )
         if m:
             return m.group(1).strip() if m.lastindex else m.group(0)
     return ""
@@ -326,7 +424,7 @@ def check_principles(output, expected_principles):
     for p in expected_principles:
         found = False
         # 1. Explicit principle number mention in compliance
-        if re.search(r'\b' + re.escape(p) + r'\b', compliance):
+        if re.search(r"\b" + re.escape(p) + r"\b", compliance):
             found = True
         # 2. Keyword heuristics
         if not found and p in PRINCIPLE_KEYWORDS:
@@ -335,7 +433,7 @@ def check_principles(output, expected_principles):
                     found = True
                     break
         # 3. Also check full output for principle number
-        if not found and re.search(r'\b' + re.escape(p) + r'\b', output):
+        if not found and re.search(r"\b" + re.escape(p) + r"\b", output):
             found = True
 
         if found:
@@ -355,7 +453,14 @@ def check_keywords(text_lower, keywords):
     return found
 
 
-def calc_correctness(expected_principles, satisfied, forbidden_found, total_forbidden, expected_kw_found, total_expected_kw):
+def calc_correctness(
+    expected_principles,
+    satisfied,
+    forbidden_found,
+    total_forbidden,
+    expected_kw_found,
+    total_expected_kw,
+):
     """
     Calculate correctness score 0-1 using weighted formula.
 
@@ -430,6 +535,7 @@ def classify_worker_result(output_path: str, was_timed_out: bool) -> str:
 # Main orchestration
 # ---------------------------------------------------------------------------
 
+
 def main():
     global _child_pids, _run_dir
 
@@ -484,7 +590,9 @@ def main():
         print("DRY RUN — no workers will be launched.")
         for tc in test_cases:
             is_gen = "prompt" in tc
-            print(f"  [{tc['id']}] {tc['category']} ({'gen' if is_gen else 'corr'}) — {tc.get('description','')[:60]}")
+            print(
+                f"  [{tc['id']}] {tc['category']} ({'gen' if is_gen else 'corr'}) — {tc.get('description', '')[:60]}"
+            )
         print(f"\nWould run {len(test_cases)} workers with --model={args.model}")
         return
 
@@ -496,7 +604,9 @@ def main():
             # Find the most recent run.
             existing = sorted(glob.glob(os.path.join(results_dir, "run-*")))
             if not existing:
-                log.error("No previous run found to resume. Use --resume-run-dir to point at one.")
+                log.error(
+                    "No previous run found to resume. Use --resume-run-dir to point at one."
+                )
                 sys.exit(1)
             run_dir = existing[-1]
         print(f"Resuming run: {run_dir}")
@@ -543,7 +653,11 @@ def main():
         out_file = os.path.join(run_dir, f"{tid}-output.txt")
         if args.resume and tid in progress:
             prev = progress[tid]
-            if prev.get("outcome") == WORKER_SUCCESS and os.path.isfile(out_file) and os.path.getsize(out_file) > 0:
+            if (
+                prev.get("outcome") == WORKER_SUCCESS
+                and os.path.isfile(out_file)
+                and os.path.getsize(out_file) > 0
+            ):
                 log.info("Skipping %s — already completed in previous run", tid)
                 # Re-register with pid=-1 (already done) so scoring can pick it up.
                 workers[tid] = {
@@ -568,8 +682,11 @@ def main():
         # Reap any children that finished since the last pass so their slots
         # free up. Without this, `running` stays pinned at max_workers and the
         # launch loop busy-waits forever, never reaching the remaining tests.
-        for tid in [t for t, w in workers.items()
-                    if w.get("pid", -1) > 0 and not w.get("completed", False)]:
+        for tid in [
+            t
+            for t, w in workers.items()
+            if w.get("pid", -1) > 0 and not w.get("completed", False)
+        ]:
             try:
                 wpid, _ = os.waitpid(workers[tid]["pid"], os.WNOHANG)
             except ChildProcessError:
@@ -581,13 +698,15 @@ def main():
                 # Phase 2's `pending` set excludes already-finished workers.
                 if tid in progress:
                     progress[tid]["outcome"] = classify_worker_result(
-                        workers[tid]["out_file"], False)
+                        workers[tid]["out_file"], False
+                    )
                     progress[tid]["end_time"] = time.time()
                     save_progress()
 
         # Count currently running workers (pid > 0 and not yet completed).
         running = sum(
-            1 for w in workers.values()
+            1
+            for w in workers.values()
             if w.get("pid", -1) > 0 and not w.get("completed", False)
         )
         slots = max_workers - running
@@ -621,7 +740,15 @@ def main():
                 with open(out_file, "w") as outf:
                     os.dup2(outf.fileno(), 1)
                     os.dup2(outf.fileno(), 2)
-                os.execvp("hermes", ["hermes", "-z", full_prompt, "-m", args.model, "--yolo"])
+                # Launch the child through the confined launcher: pins
+                # STE_CODE_JAIL_POLICY=bench, strips creds, resets HOME=/tmp,
+                # wraps in jail-exec.sh (Layer-2). The wrapper asserts the
+                # policy is pinned and refuses to start unconfined.
+                cmd = build_command(prompt_file, args.model, DEFAULT_TOOLSET) + [
+                    "--yolo"
+                ]
+                env = build_child_env(None)
+                os.execvpe(cmd[0], cmd, env)
                 os._exit(1)  # should not reach
 
             _child_pids[tid] = pid
@@ -692,7 +819,9 @@ def main():
             save_progress()
 
         if just_finished:
-            print(f"  [{len(workers)-len(pending)}/{len(workers)}] Completed: {', '.join(just_finished)}")
+            print(
+                f"  [{len(workers) - len(pending)}/{len(workers)}] Completed: {', '.join(just_finished)}"
+            )
         elif elapsed % 30 == 0:
             print(f"  ... still waiting ({len(pending)} remaining, {elapsed}s elapsed)")
 
@@ -705,7 +834,9 @@ def main():
             progress[tid]["outcome"] = WORKER_TIMEOUT
             progress[tid]["end_time"] = time.time()
         save_progress()
-        print(f"WARNING: {len(pending)} workers timed out: {', '.join(sorted(pending))}")
+        print(
+            f"WARNING: {len(pending)} workers timed out: {', '.join(sorted(pending))}"
+        )
 
     # -----------------------------------------------------------------------
     # Phase 2b: Retry workers that produced empty or missing output.
@@ -717,12 +848,19 @@ def main():
         for tid in list(workers.keys()):
             attempt = workers[tid].get("attempt", 1)
             out_file = workers[tid]["out_file"]
-            outcome = progress[tid].get("outcome", classify_worker_result(out_file, tid in timed_out))
+            outcome = progress[tid].get(
+                "outcome", classify_worker_result(out_file, tid in timed_out)
+            )
 
             while outcome in retryable_outcomes and attempt <= args.retries:
                 attempt += 1
-                log.warning("Retrying %s (attempt %d/%d) — previous outcome: %s",
-                            tid, attempt, args.retries + 1, outcome)
+                log.warning(
+                    "Retrying %s (attempt %d/%d) — previous outcome: %s",
+                    tid,
+                    attempt,
+                    args.retries + 1,
+                    outcome,
+                )
                 print(f"  Retrying {tid} (attempt {attempt}/{args.retries + 1})...")
                 time.sleep(args.retry_delay)
 
@@ -730,7 +868,9 @@ def main():
                 tc = next(t for t in test_cases if t["id"] == tid)
                 is_generation = "prompt" in tc
                 task_input = tc.get("prompt", tc.get("input", ""))
-                full_prompt = build_full_prompt(system_prompt, task_input, is_generation)
+                full_prompt = build_full_prompt(
+                    system_prompt, task_input, is_generation
+                )
 
                 pid = os.fork()
                 if pid == 0:
@@ -740,8 +880,14 @@ def main():
                     with open(out_file, "w") as outf:
                         os.dup2(outf.fileno(), 1)
                         os.dup2(outf.fileno(), 2)
-                    os.execvp("hermes", ["hermes", "-z", full_prompt, "-m", args.model, "--yolo"])
-                    os._exit(1)
+                    # Launch the child through the confined launcher (retry path):
+                    # same policy-pin + env-strip + jail-exec.sh Layer-2 as above.
+                    cmd = build_command(prompt_file, args.model, DEFAULT_TOOLSET) + [
+                        "--yolo"
+                    ]
+                    env = build_child_env(None)
+                    os.execvpe(cmd[0], cmd, env)
+                    os._exit(1)  # should not reach
 
                 _child_pids[tid] = pid
                 workers[tid]["pid"] = pid
@@ -800,7 +946,9 @@ def main():
     # Phase 3: Score each output.
     # -----------------------------------------------------------------------
     results = []
-    category_stats = defaultdict(lambda: {"passed": 0, "failed": 0, "scores": [], "latencies": []})
+    category_stats = defaultdict(
+        lambda: {"passed": 0, "failed": 0, "scores": [], "latencies": []}
+    )
 
     for tc in test_cases:
         tid = tc["id"]
@@ -844,8 +992,14 @@ def main():
                 patterns_missed.append(pat)
 
         # Calculate correctness (single call with all params).
-        correctness = calc_correctness(tc["expected_principles"], satisfied, forbidden_found, len(forbidden),
-                                       expected_found, len(expected_kw))
+        correctness = calc_correctness(
+            tc["expected_principles"],
+            satisfied,
+            forbidden_found,
+            len(forbidden),
+            expected_found,
+            len(expected_kw),
+        )
 
         # Penalty for missing required patterns.
         if required_patterns:
@@ -858,8 +1012,12 @@ def main():
 
         # Compute actual diff ratio (input vs corrected output).
         if corrected and task_text:
-            diff_ratio = difflib.SequenceMatcher(None, task_text.lower(), corrected.lower()).ratio()
-            diff_ratio = round(1.0 - diff_ratio, 2)  # 0 = identical, 1 = completely different
+            diff_ratio = difflib.SequenceMatcher(
+                None, task_text.lower(), corrected.lower()
+            ).ratio()
+            diff_ratio = round(
+                1.0 - diff_ratio, 2
+            )  # 0 = identical, 1 = completely different
         else:
             diff_ratio = 0.0
 
@@ -1055,39 +1213,59 @@ def main():
         print(f"    {outcome:<10} {count}")
     print()
     print(f"  Averages:")
-    print(f"    Correctness:  {aggregate['aggregates']['avg_correctness']:.3f}  (range: {aggregate['aggregates']['min_correctness']:.2f}–{aggregate['aggregates']['max_correctness']:.2f})")
-    print(f"    Latency:      {aggregate['aggregates']['avg_latency_ms']}ms  (range: {aggregate['aggregates']['min_latency_ms']}–{aggregate['aggregates']['max_latency_ms']}ms)")
-    print(f"    Tokens in:    {aggregate['aggregates']['avg_token_input']} avg  ({aggregate['aggregates']['total_tokens_input']} total)")
-    print(f"    Tokens out:   {aggregate['aggregates']['avg_token_output']} avg  ({aggregate['aggregates']['total_tokens_output']} total)")
+    print(
+        f"    Correctness:  {aggregate['aggregates']['avg_correctness']:.3f}  (range: {aggregate['aggregates']['min_correctness']:.2f}–{aggregate['aggregates']['max_correctness']:.2f})"
+    )
+    print(
+        f"    Latency:      {aggregate['aggregates']['avg_latency_ms']}ms  (range: {aggregate['aggregates']['min_latency_ms']}–{aggregate['aggregates']['max_latency_ms']}ms)"
+    )
+    print(
+        f"    Tokens in:    {aggregate['aggregates']['avg_token_input']} avg  ({aggregate['aggregates']['total_tokens_input']} total)"
+    )
+    print(
+        f"    Tokens out:   {aggregate['aggregates']['avg_token_output']} avg  ({aggregate['aggregates']['total_tokens_output']} total)"
+    )
     print()
 
     # Category breakdown table.
     print("-" * 70)
-    print(f"  {'Category':<15} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Rate':>7} {'Avg Score':>10} {'Avg Lat':>8}")
+    print(
+        f"  {'Category':<15} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Rate':>7} {'Avg Score':>10} {'Avg Lat':>8}"
+    )
     print("-" * 70)
     for cat in sorted(aggregate["by_category"].keys()):
         d = aggregate["by_category"][cat]
         rate = round(d["passed"] / d["total"] * 100) if d["total"] else 0
-        print(f"  {cat:<15} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {rate:>6}% {d['avg_correctness']:>10.3f} {d['avg_latency_ms']:>7}ms")
+        print(
+            f"  {cat:<15} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {rate:>6}% {d['avg_correctness']:>10.3f} {d['avg_latency_ms']:>7}ms"
+        )
     print("-" * 70)
 
     # Difficulty breakdown.
     print()
-    print(f"  {'Difficulty':<12} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Avg Score':>10}")
+    print(
+        f"  {'Difficulty':<12} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Avg Score':>10}"
+    )
     print("-" * 45)
     for diff in ["easy", "medium", "hard"]:
         if diff in aggregate["by_difficulty"]:
             d = aggregate["by_difficulty"][diff]
-            print(f"  {diff:<12} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {d['avg_correctness']:>10.3f}")
+            print(
+                f"  {diff:<12} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {d['avg_correctness']:>10.3f}"
+            )
 
     # Per-test detail.
     print()
     print("-" * 70)
-    print(f"  {'ID':<12} {'Category':<12} {'Score':>6} {'Latency':>8} {'Result':>7}  Notes")
+    print(
+        f"  {'ID':<12} {'Category':<12} {'Score':>6} {'Latency':>8} {'Result':>7}  Notes"
+    )
     print("-" * 70)
     for r in results:
         status = "PASS" if r["passed"] else "FAIL"
-        print(f"  {r['test_id']:<12} {r['category']:<12} {r['correctness_score']:>6.2f} {r['latency_ms']:>7}ms {status:>7}  {r['notes'][:60]}")
+        print(
+            f"  {r['test_id']:<12} {r['category']:<12} {r['correctness_score']:>6.2f} {r['latency_ms']:>7}ms {status:>7}  {r['notes'][:60]}"
+        )
     print("-" * 70)
 
     # Failures detail.
@@ -1096,7 +1274,9 @@ def main():
         print()
         print(f"FAILURES ({len(failures)})")
         for r in failures:
-            print(f"  {r['test_id']} ({r['category']}, {r['difficulty']}): score={r['correctness_score']}")
+            print(
+                f"  {r['test_id']} ({r['category']}, {r['difficulty']}): score={r['correctness_score']}"
+            )
             print(f"    Input:  {r['input'][:80]}...")
             print(f"    Output: {r['output'][:80]}...")
             print(f"    Missed principles: {r['expected_principles_missed']}")

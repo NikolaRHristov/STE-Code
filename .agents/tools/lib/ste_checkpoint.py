@@ -23,6 +23,7 @@ Usage
     state["done"] = 3
     save(cfg.path("outputs.checkpoint"), state)
 """
+
 from __future__ import annotations
 
 import json
@@ -31,7 +32,9 @@ from pathlib import Path
 from typing import Any, Dict
 
 _HERE = Path(__file__).resolve()
-_R = next(p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_R = next(
+    p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 
 from ste_io import write_text, read_text  # noqa: E402
@@ -56,14 +59,19 @@ def save(path: Path, data: Dict[str, Any]) -> Path:
     p = Path(path)
     # Atomic: write to a sibling tmp file, then rename over the target.
     tmp = p.with_suffix(p.suffix + ".tmp")
-    write_text(tmp, json.dumps(data, indent=2, ensure_ascii=False, sort_keys=True),
-               encoding="utf-8", make_parents=True)
+    write_text(
+        tmp,
+        json.dumps(data, indent=2, ensure_ascii=False, sort_keys=True),
+        encoding="utf-8",
+        make_parents=True,
+    )
     tmp.replace(p)
     return p
 
 
 if __name__ == "__main__":
     from ste_io import _root
+
     d = _root() / ".agents" / "tmp" / "_ste_checkpoint_selfcheck"
     d.mkdir(parents=True, exist_ok=True)
     cp = d / "cp.json"

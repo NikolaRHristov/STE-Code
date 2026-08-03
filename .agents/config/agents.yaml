@@ -10,34 +10,34 @@
 default_agent: hermes
 
 agents:
-  hermes:
-    runtime: ~/.hermes/hermes-agent/venv/bin/python3
-    wrapper: lib/hermes-oneshot-wrapper.py
-    default_model: tencent/hy3:free
-    env:
-      HERMES_REASONING_EFFORT: high
-      HERMES_YOLO_MODE: "1"
-      HERMES_ACCEPT_HOOKS: "1"
+    hermes:
+        runtime: ~/.hermes/hermes-agent/venv/bin/python3
+        wrapper: lib/hermes-oneshot-wrapper.py
+        default_model: tencent/hy3:free
+        env:
+            HERMES_REASONING_EFFORT: high
+            HERMES_YOLO_MODE: "1"
+            HERMES_ACCEPT_HOOKS: "1"
 
-  # ── Stub backends (uncomment and configure when ready) ──────────
+    # ── Stub backends (uncomment and configure when ready) ──────────
 
-  # claude:
-  #   command: claude
-  #   args: ["-p", "--print", "--output-format", "text"]
-  #   prompt_arg: null        # null = pass prompt via stdin
-  #   default_model: claude-sonnet-4-20250514
-  #   env: {}
+    # claude:
+    #   command: claude
+    #   args: ["-p", "--print", "--output-format", "text"]
+    #   prompt_arg: null        # null = pass prompt via stdin
+    #   default_model: claude-sonnet-4-20250514
+    #   env: {}
 
-  # codex:
-  #   command: codex
-  #   args: ["exec"]
-  #   prompt_arg: "--prompt-file"
-  #   default_model: gpt-4o
-  #   env: {}
+    # codex:
+    #   command: codex
+    #   args: ["exec"]
+    #   prompt_arg: "--prompt-file"
+    #   default_model: gpt-4o
+    #   env: {}
 
-  # generic:
-  #   command: /path/to/custom-agent
-  #   args: []
-  #   prompt_arg: "--prompt-file"
-  #   default_model: null
-  #   env: {}
+    # generic:
+    #   command: /path/to/custom-agent
+    #   args: []
+    #   prompt_arg: "--prompt-file"
+    #   default_model: null
+    #   env: {}

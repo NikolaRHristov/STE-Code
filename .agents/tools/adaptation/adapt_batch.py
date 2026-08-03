@@ -30,6 +30,7 @@ extract/refine.
 Gate: refines only when ste-code/grouped/ is present and non-trivial; refuses
 otherwise (the grouping agent produces it — see phase-c-run.py).
 """
+
 from __future__ import annotations
 
 import os
@@ -46,8 +47,12 @@ from datetime import datetime, timezone
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -57,8 +62,10 @@ from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+
 RT = _resolve_runtime(__file__)
 GROUPED_DIR = PROJECT / "ste-code" / "grouped"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
@@ -83,7 +90,7 @@ SECTIONS = {
     6: ("Descriptive Writing", 6),
     7: ("Safety Instructions", 3),
     8: ("Punctuation", 7),
-    9: ("Writing Practices", 4),   # plus GR1-GR4
+    9: ("Writing Practices", 4),  # plus GR1-GR4
 }
 TOTAL_SECTIONS = len(SECTIONS)
 
@@ -98,8 +105,7 @@ TOTAL_SECTIONS = len(SECTIONS)
 #   2. The canonical spec heading `# N. Title`, kept as a fallback so this still
 #      works against raw/refined text or a future grouping that preserves titles.
 _SECTION_GROUP_RE = {
-    n: re.compile(rf"^#+\s*Rules\s+Sec\s+{n}\b", re.I | re.M)
-    for n in range(1, 10)
+    n: re.compile(rf"^#+\s*Rules\s+Sec\s+{n}\b", re.I | re.M) for n in range(1, 10)
 }
 _SECTION_HEAD_RE = {
     1: re.compile(r"^#+\s*1[\.\s]+Words", re.I | re.M),
@@ -132,9 +138,19 @@ _NON_RULES_GROUP_RE = re.compile(
 
 # Aerospace terms that must NOT appear outside "## Original Rule" blocks.
 AEROSPACE_TERMS = [
-    "aircraft", "landing gear", "fuselage", "APU", "ECS",
-    "ATA chapter", "lockwire", "avionics", "aileron", "rudder",
-    "propeller", "thrust", "altimeter",
+    "aircraft",
+    "landing gear",
+    "fuselage",
+    "APU",
+    "ECS",
+    "ATA chapter",
+    "lockwire",
+    "avionics",
+    "aileron",
+    "rudder",
+    "propeller",
+    "thrust",
+    "altimeter",
 ]
 # "engine" excluded: legitimate code-domain word (search engine, game engine).
 # "torque" and "cockpit" removed: code-domain-acceptable (mechanical build docs
@@ -145,6 +161,7 @@ AEROSPACE_TERMS = [
 NON_APPROVED_SYNONYMS = ["utilize", "leverage", "employ", "commence", "terminate"]
 
 import sys as _sys
+
 _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import lib_import
 
@@ -222,13 +239,18 @@ def _build_prompt(section_num, title, source_text):
         section_title=title,
         rule_count=SECTIONS[section_num][1],
         rule_ids=", ".join(rule_ids),
-        source_text=source_text or "(section text not found in grouped source — read ste-code/grouped/*.md for section "
+        source_text=source_text
+        or "(section text not found in grouped source — read ste-code/grouped/*.md for section "
         f"{section_num})",
     )
     skill = _skill.skill_section("adaptation")
-    return wrapper + skill + (
-        "\n\nOutput ONLY the adapted markdown rule files. No explanations, no "
-        "commentary outside the files. Write each file with your file-write tool.\n"
+    return (
+        wrapper
+        + skill
+        + (
+            "\n\nOutput ONLY the adapted markdown rule files. No explanations, no "
+            "commentary outside the files. Write each file with your file-write tool.\n"
+        )
     )
 
 
@@ -251,7 +273,10 @@ def _section_passed_gate(section_num, title) -> tuple[bool, str]:
     rule_files = sorted(ADAPTED_DIR.glob(f"{prefix}*.md"))
     expected = SECTIONS[section_num][1]
     if len(rule_files) < expected:
-        return False, f"missing rule files: have {len(rule_files)}, expected >= {expected}"
+        return (
+            False,
+            f"missing rule files: have {len(rule_files)}, expected >= {expected}",
+        )
 
     problems = []
     for f in rule_files:
@@ -274,17 +299,27 @@ def _section_passed_gate(section_num, title) -> tuple[bool, str]:
         body = re.sub(r"(?m)^\s*>.*STE:.*(?:\n\s*>.*)*", "", body)
         body = re.sub(
             r"(?m)^\s*[-*]?\s*.*\bnot\s+(utilize|leverage|employ|commence|"
-            r"terminate|initiate|bootstrap)\b.*$", "", body, flags=re.I)
+            r"terminate|initiate|bootstrap)\b.*$",
+            "",
+            body,
+            flags=re.I,
+        )
         body = re.sub(
             r"(?m)^\s*[-*]?\s*.*(\u2192|->|\bis a technical noun\b|\bmaps to\b).*$",
-            "", body)
+            "",
+            body,
+        )
         for sym in NON_APPROVED_SYNONYMS:
             if re.search(rf"\b{re.escape(sym)}\b", body, re.I):
-                problems.append(f"{f.name}: non-approved synonym '{sym}' outside Original Rule/Non-STE")
+                problems.append(
+                    f"{f.name}: non-approved synonym '{sym}' outside Original Rule/Non-STE"
+                )
         # Gate 9: aerospace leakage (outside Original Rule / Non-STE)
         for term in AEROSPACE_TERMS:
             if re.search(rf"\b{re.escape(term)}\b", body, re.I):
-                problems.append(f"{f.name}: aerospace term '{term}' outside Original Rule/Non-STE")
+                problems.append(
+                    f"{f.name}: aerospace term '{term}' outside Original Rule/Non-STE"
+                )
         # Gate: minimum content
         if len(text) < 300:
             problems.append(f"{f.name}: too small ({len(text)} bytes)")
@@ -297,17 +332,22 @@ def _section_passed_gate(section_num, title) -> tuple[bool, str]:
 # ── checkpoint ───────────────────────────────────────────────────────────────
 def _load_checkpoint():
     from ste_checkpoint import load
+
     return load(CHECKPOINT_PATH)
+
 
 def _save_checkpoint(ckpt):
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, ckpt)
+
 
 _checkpoint = _load_checkpoint()
 
 
 def git_commit_locked(files, msg):
     import time as _time
+
     lock = STATE_DIR / "adapt-git-lock"
     deadline = _time.time() + 120
     while _time.time() < deadline:
@@ -319,12 +359,19 @@ def git_commit_locked(files, msg):
     else:
         return False
     try:
-        subprocess.run(["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT))
-        r = subprocess.run(["git", "commit", "-m", msg, *files],
-                           capture_output=True, text=True, cwd=str(PROJECT))
+        subprocess.run(
+            ["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT)
+        )
+        r = subprocess.run(
+            ["git", "commit", "-m", msg, *files],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT),
+        )
         return r.returncode == 0
     finally:
         import shutil
+
         shutil.rmtree(lock, ignore_errors=True)
 
 
@@ -341,16 +388,27 @@ def run_worker(section_num, title, source_text):
 
     max_attempts = 3
     for attempt in range(1, max_attempts + 1):
-        print(f"  SEC{section_num}: Adapting '{title}' (attempt {attempt})...", flush=True)
+        print(
+            f"  SEC{section_num}: Adapting '{title}' (attempt {attempt})...", flush=True
+        )
         start_t = time.time()
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True,
-                                    timeout=TIMEOUT_SECONDS, env=env, cwd=str(PROJECT))
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=TIMEOUT_SECONDS,
+                env=env,
+                cwd=str(PROJECT),
+            )
             dur = time.time() - start_t
             if result.stderr:
                 sl = result.stderr.lower()
                 if "error" in sl or "traceback" in sl:
-                    print(f"  SEC{section_num}: [stderr] {result.stderr[:300]}", flush=True)
+                    print(
+                        f"  SEC{section_num}: [stderr] {result.stderr[:300]}",
+                        flush=True,
+                    )
         except subprocess.TimeoutExpired:
             print(f"  SEC{section_num}: [TIMEOUT] after {TIMEOUT_SECONDS}s", flush=True)
             return False
@@ -368,7 +426,9 @@ def run_worker(section_num, title, source_text):
         else:
             print(f"  SEC{section_num}: [GATE FAIL] {reason} — retrying", flush=True)
             backoff = 15 * attempt
-            print(f"  SEC{section_num}: sleeping {backoff}s before retry...", flush=True)
+            print(
+                f"  SEC{section_num}: sleeping {backoff}s before retry...", flush=True
+            )
             time.sleep(backoff)
 
     print(f"  SEC{section_num}: [GIVEUP] after {max_attempts} attempts", flush=True)
@@ -379,11 +439,11 @@ def process_section(section_num, grouped_text):
     title = SECTIONS[section_num][0]
     ck = _checkpoint.get(str(section_num))
     if ck and ck.get("passed"):
-        print(f"\n{'='*60}\nSection {section_num} — {title}\n{'='*60}", flush=True)
+        print(f"\n{'=' * 60}\nSection {section_num} — {title}\n{'=' * 60}", flush=True)
         print(f"  SEC{section_num}: ✓ Already adapted (checkpoint skip)", flush=True)
         return True
 
-    print(f"\n{'='*60}\nSection {section_num} — {title}\n{'='*60}", flush=True)
+    print(f"\n{'=' * 60}\nSection {section_num} — {title}\n{'=' * 60}", flush=True)
     source_text = extract_section_source(section_num, grouped_text)
     ok = run_worker(section_num, title, source_text)
     if ok:
@@ -407,7 +467,10 @@ def main():
     ready, msg = adaptation_ready()
     if not ready:
         print(f"ADAPTATION NOT READY: {msg}", flush=True)
-        print("Run grouping first (phase-c-run.py). Refusing to launch workers.", flush=True)
+        print(
+            "Run grouping first (phase-c-run.py). Refusing to launch workers.",
+            flush=True,
+        )
         sys.exit(2)
 
     grouped_text = _read_grouped_text()
@@ -417,18 +480,24 @@ def main():
     print(f"Resume: {'yes' if resume else 'no'}", flush=True)
 
     atexit.register(lambda: _save_checkpoint(_checkpoint))
-    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
-    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
+    signal.signal(
+        signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0))
+    )
+    signal.signal(
+        signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130))
+    )
 
     all_ok = True
-    for s in range(start_section, min(start_section + num_sections, TOTAL_SECTIONS + 1)):
+    for s in range(
+        start_section, min(start_section + num_sections, TOTAL_SECTIONS + 1)
+    ):
         if s not in SECTIONS:
             continue
         if not process_section(s, grouped_text):
             all_ok = False
 
     final = len(list(ADAPTED_DIR.glob("a-sec*-rule*.md")))
-    print(f"\n{'='*60}\nDone. Adapted rule files: {final}\n{'='*60}", flush=True)
+    print(f"\n{'=' * 60}\nDone. Adapted rule files: {final}\n{'=' * 60}", flush=True)
     sys.exit(0 if all_ok else 1)
 
 

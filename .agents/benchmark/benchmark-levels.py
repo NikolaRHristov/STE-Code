@@ -17,8 +17,12 @@ from datetime import datetime, timezone
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -33,12 +37,12 @@ RESULTS_BASE = PROJECT / ".agents" / "benchmark" / "tests" / "levels"
 LEVEL_PROMPTS = {
     -2: ARTIFACTS / "level-2" / "system-prompt.txt",
     -1: ARTIFACTS / "level-1" / "system-prompt.txt",
-    0:  ARTIFACTS / "level0"  / "system-prompt.txt",
-    1:  ARTIFACTS / "level1"  / "system-prompt.txt",
-    2:  ARTIFACTS / "level2"  / "system-prompt.txt",
-    3:  ARTIFACTS / "level3"  / "system-prompt.txt",
-    4:  ARTIFACTS / "level4"  / "system-prompt.txt",
-    5:  ARTIFACTS / "level5"  / "system-prompt.txt",
+    0: ARTIFACTS / "level0" / "system-prompt.txt",
+    1: ARTIFACTS / "level1" / "system-prompt.txt",
+    2: ARTIFACTS / "level2" / "system-prompt.txt",
+    3: ARTIFACTS / "level3" / "system-prompt.txt",
+    4: ARTIFACTS / "level4" / "system-prompt.txt",
+    5: ARTIFACTS / "level5" / "system-prompt.txt",
 }
 
 
@@ -48,12 +52,18 @@ def run_level(level, prompt_file, model, timeout, max_workers, results_dir):
     level_dir.mkdir(parents=True, exist_ok=True)
 
     cmd = [
-        sys.executable, str(ORCHESTRATOR),
-        "--model", model,
-        "--timeout", str(timeout),
-        "--max-workers", str(max_workers),
-        "--system-prompt-file", str(prompt_file),
-        "--results-dir", str(level_dir),
+        sys.executable,
+        str(ORCHESTRATOR),
+        "--model",
+        model,
+        "--timeout",
+        str(timeout),
+        "--max-workers",
+        str(max_workers),
+        "--system-prompt-file",
+        str(prompt_file),
+        "--results-dir",
+        str(level_dir),
     ]
 
     print(f"[Level {level}] Launching: {' '.join(cmd[-6:])}")
@@ -141,13 +151,28 @@ def collect_results(results_dirs, output_path):
 
 def main():
     import argparse
+
     parser = argparse.ArgumentParser(description="Multi-Level STE-Code Benchmark")
-    parser.add_argument("--levels", default="-2,-1,0,1,2,3,4,5",
-                        help="Comma-separated tiers (default: all 8 tiers)")
-    parser.add_argument("--model", default="poolside/laguna-s-2.1:free", help="Model to use")
-    parser.add_argument("--timeout", type=int, default=600, help="Timeout per orchestrator (seconds)")
-    parser.add_argument("--max-workers", type=int, default=0, help="Max concurrent workers (0=unlimited)")
-    parser.add_argument("--dry-run", action="store_true", help="Print config without running")
+    parser.add_argument(
+        "--levels",
+        default="-2,-1,0,1,2,3,4,5",
+        help="Comma-separated tiers (default: all 8 tiers)",
+    )
+    parser.add_argument(
+        "--model", default="poolside/laguna-s-2.1:free", help="Model to use"
+    )
+    parser.add_argument(
+        "--timeout", type=int, default=600, help="Timeout per orchestrator (seconds)"
+    )
+    parser.add_argument(
+        "--max-workers",
+        type=int,
+        default=0,
+        help="Max concurrent workers (0=unlimited)",
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="Print config without running"
+    )
     parser.add_argument("--results-dir", default=None, help="Custom results directory")
     args = parser.parse_args()
 
@@ -166,7 +191,9 @@ def main():
         for lv in levels:
             prompt = LEVEL_PROMPTS.get(lv)
             if prompt and prompt.exists():
-                print(f"  Level {lv}: {prompt} ({prompt.stat().st_size//4:,} ~tokens)")
+                print(
+                    f"  Level {lv}: {prompt} ({prompt.stat().st_size // 4:,} ~tokens)"
+                )
             else:
                 print(f"  Level {lv}: PROMPT NOT FOUND")
         return
@@ -182,12 +209,20 @@ def main():
             continue
 
         proc = subprocess.Popen(
-            [sys.executable, str(ORCHESTRATOR),
-             "--model", args.model,
-             "--timeout", str(args.timeout),
-             "--max-workers", str(args.max_workers),
-             "--system-prompt-file", str(prompt),
-             "--results-dir", str(results_dir / f"level-{lv}")],
+            [
+                sys.executable,
+                str(ORCHESTRATOR),
+                "--model",
+                args.model,
+                "--timeout",
+                str(args.timeout),
+                "--max-workers",
+                str(args.max_workers),
+                "--system-prompt-file",
+                str(prompt),
+                "--results-dir",
+                str(results_dir / f"level-{lv}"),
+            ],
             cwd=str(PROJECT),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

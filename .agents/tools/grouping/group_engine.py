@@ -43,6 +43,7 @@ group_batch.py (assembler) and verify-groups.py (checker) so all three agree
 on the plan — satisfying Refinement Lesson #1 ("prompt, skill, and gate must
 agree"): here there is ONE source of truth for the plan, shared by every tool.
 """
+
 from __future__ import annotations
 
 import collections
@@ -54,8 +55,12 @@ from typing import Dict, List, Optional, Tuple
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -66,7 +71,9 @@ MANIFEST_PATH = PROJECT / "spec" / "issue-09-2025" / "page-dir" / "MANIFEST.md"
 TOTAL_PAGES = 434
 
 # Refined filename: r<worker>-p<start>-<end>.md
-REFINED_RE = re.compile(r"^r(?P<worker>\d{3})-p(?P<start>\d{1,4})-(?P<end>\d{1,4})\.md$")
+REFINED_RE = re.compile(
+    r"^r(?P<worker>\d{3})-p(?P<start>\d{1,4})-(?P<end>\d{1,4})\.md$"
+)
 
 # ── Page-marker detection: tolerate every style the refiner has emitted ──────
 # The Refinement agent's output format is a moving target. We accept:
@@ -182,8 +189,12 @@ def classify_page(page: int, page_id: Optional[str]) -> Tuple[str, Optional[str]
 #   `|**word (v) — UNAPPROVED**|...`  messy multi-column row (bold, empty leads)
 #   `#### WORD (n) — APPROVED`  heading-block entry
 _DICT_ENTRY_PATTERNS = [
-    re.compile(r"^\|+\s*\*{0,2}([A-Za-z])[A-Za-z\-' ]*\s*\(", re.I),   # table row w/ (POS)
-    re.compile(r"^#{2,4}\s+\*{0,2}([A-Za-z])[A-Za-z\-' ]*\s*\(", re.I),  # #### WORD (POS)
+    re.compile(
+        r"^\|+\s*\*{0,2}([A-Za-z])[A-Za-z\-' ]*\s*\(", re.I
+    ),  # table row w/ (POS)
+    re.compile(
+        r"^#{2,4}\s+\*{0,2}([A-Za-z])[A-Za-z\-' ]*\s*\(", re.I
+    ),  # #### WORD (POS)
 ]
 
 
@@ -263,7 +274,9 @@ def _build_page_letter_cache() -> None:
                 if not letters:
                     continue
                 if start == end:
-                    _PAGE_LETTER_CACHE[start] = collections.Counter(letters).most_common(1)[0][0]
+                    _PAGE_LETTER_CACHE[start] = collections.Counter(
+                        letters
+                    ).most_common(1)[0][0]
                     continue
                 # Merged segment: no internal page markers, so we cannot say
                 # which page each entry sits on. But the body IS in spec order,
@@ -319,7 +332,9 @@ def index_refined() -> Dict[int, "RefinedFile"]:
         m = REFINED_RE.match(f.name)
         if not m:
             continue
-        rf = RefinedFile(f, int(m.group("worker")), int(m.group("start")), int(m.group("end")))
+        rf = RefinedFile(
+            f, int(m.group("worker")), int(m.group("start")), int(m.group("end"))
+        )
         for p in rf.pages:
             idx[p] = rf
     return idx
@@ -330,9 +345,9 @@ def index_refined() -> Dict[int, "RefinedFile"]:
 # ───────────────────────────────────────────────────────────────────────────
 @dataclass
 class Group:
-    gid: str            # e.g. "005-dict-A-C"
-    label: str          # human-readable
-    section: str        # FRONT / RULES / DICT / ...
+    gid: str  # e.g. "005-dict-A-C"
+    label: str  # human-readable
+    section: str  # FRONT / RULES / DICT / ...
     pages: List[int] = field(default_factory=list)
     key: Optional[str] = None  # rule chapter or letter-range
 
@@ -405,8 +420,15 @@ def build_plan(manifest: Dict[int, str]) -> List[Group]:
         nonlocal n
         n += 1
         slug = re.sub(r"[^a-z0-9]+", "-", label.lower()).strip("-")
-        groups.append(Group(gid=f"{n:03d}-{slug}", label=label, section=section,
-                            pages=list(pages), key=key))
+        groups.append(
+            Group(
+                gid=f"{n:03d}-{slug}",
+                label=label,
+                section=section,
+                pages=list(pages),
+                key=key,
+            )
+        )
 
     def pages_of(section):
         return [p for p in range(1, TOTAL_PAGES + 1) if sect[p][0] == section]
@@ -421,12 +443,20 @@ def build_plan(manifest: Dict[int, str]) -> List[Group]:
     if pages_of("INTRO"):
         add("introduction", "INTRO", pages_of("INTRO"))
     # 4. RULES — one group per rule chapter (Sec 1..9), in order.
-    chapters = sorted({sect[p][1] for p in range(1, TOTAL_PAGES + 1)
-                       if sect[p][0] == "RULES" and sect[p][1] is not None},
-                      key=lambda c: int(c))
+    chapters = sorted(
+        {
+            sect[p][1]
+            for p in range(1, TOTAL_PAGES + 1)
+            if sect[p][0] == "RULES" and sect[p][1] is not None
+        },
+        key=lambda c: int(c),
+    )
     for chap in chapters:
-        pages = [p for p in range(1, TOTAL_PAGES + 1)
-                 if sect[p][0] == "RULES" and sect[p][1] == chap]
+        pages = [
+            p
+            for p in range(1, TOTAL_PAGES + 1)
+            if sect[p][0] == "RULES" and sect[p][1] == chap
+        ]
         add(f"rules-sec-{chap}", "RULES", pages, key=chap)
     # 5. DICT_INTRO (dictionary preface / how-to-use).
     if pages_of("DICT_INTRO"):
@@ -450,7 +480,7 @@ def build_plan(manifest: Dict[int, str]) -> List[Group]:
             if L == "?":
                 L = high or "?"
             elif high is not None and L < high:
-                L = high          # never regress — keeps buckets contiguous
+                L = high  # never regress — keeps buckets contiguous
             else:
                 high = L
             eff[p] = L
@@ -530,8 +560,8 @@ def _group_map() -> Dict[int, tuple]:
     return _GROUP_MAP_CACHE["m"]
 
 
-_ENTRY_HEAD_RE = re.compile(r"^#{2,4}\s+([A-Za-z])", re.I)   # ### Word
-_ENTRY_ROW_RE = re.compile(r"^\|\s*([A-Za-z])", re.I)        # | Word (POS)
+_ENTRY_HEAD_RE = re.compile(r"^#{2,4}\s+([A-Za-z])", re.I)  # ### Word
+_ENTRY_ROW_RE = re.compile(r"^\|\s*([A-Za-z])", re.I)  # | Word (POS)
 
 
 def _entry_first_letter(line: str):
@@ -580,8 +610,9 @@ def _maybe_split_straddler(ps: int, pe: int, txt: str, gmap: Dict[int, tuple]):
     return [(ps, b - 1, part1), (b, pe, part2)]
 
 
-def file_segments(rf: "RefinedFile", id2pos: Dict[str, int],
-                  split_straddlers: bool = True) -> List[Tuple[int, int, str]]:
+def file_segments(
+    rf: "RefinedFile", id2pos: Dict[str, int], split_straddlers: bool = True
+) -> List[Tuple[int, int, str]]:
     """Return ordered (start_page, end_page, text) segments that tile `rf` once.
 
     Tolerates the four real-world drift conditions the refiner produces:
@@ -637,20 +668,20 @@ def file_segments(rf: "RefinedFile", id2pos: Dict[str, int],
         first_pos = dm[0][1]
         # leading content (missing leading marker) -> rf.start..first_pos-1
         if first_pos > rf.start:
-            segs.append((rf.start, first_pos - 1,
-                         "\n".join(lines[:dm[0][0]]).rstrip() + "\n"))
+            segs.append(
+                (rf.start, first_pos - 1, "\n".join(lines[: dm[0][0]]).rstrip() + "\n")
+            )
         # Each marker's segment extends to the NEXT marker's page (or rf.end),
         # so merged trailing content (C_merged: no interior markers) is covered
         # by the single marker's segment — never a duplicate trailing segment.
         for j, (li, pos) in enumerate(dm):
             end_li = dm[j + 1][0] if j + 1 < len(dm) else len(lines)
             seg_end = (dm[j + 1][1] - 1) if j + 1 < len(dm) else rf.end
-            segs.append((pos, seg_end,
-                         "\n".join(lines[li:end_li]).rstrip() + "\n"))
+            segs.append((pos, seg_end, "\n".join(lines[li:end_li]).rstrip() + "\n"))
 
     # Split any segment that straddles a group boundary (STRADDLER).
     out: List[Tuple[int, int, str]] = []
-    for (ps, pe, txt) in segs:
+    for ps, pe, txt in segs:
         out.extend(_maybe_split_straddler(ps, pe, txt, gmap))
 
     # Validate exact coverage of the declared range.
@@ -662,7 +693,9 @@ def file_segments(rf: "RefinedFile", id2pos: Dict[str, int],
     return out
 
 
-def slice_pages(rf: "RefinedFile", id2pos: Optional[Dict[str, int]] = None) -> Dict[int, str]:
+def slice_pages(
+    rf: "RefinedFile", id2pos: Optional[Dict[str, int]] = None
+) -> Dict[int, str]:
     """Split a refined file into {sequential_page: body_text} using whatever
     page-marker style the file uses (see _PAGE_MARKERS).
 
@@ -682,16 +715,16 @@ def slice_pages(rf: "RefinedFile", id2pos: Optional[Dict[str, int]] = None) -> D
     if not segs:
         return {}
     out: Dict[int, str] = {}
-    for (ps, pe, txt) in segs:
+    for ps, pe, txt in segs:
         out[ps] = txt
         for p in range(ps + 1, pe + 1):
             out[p] = ""
     return out
 
 
-
-def corpus_ready(idx: Dict[int, "RefinedFile"],
-                 id2pos: Optional[Dict[str, int]] = None) -> Tuple[bool, List[str]]:
+def corpus_ready(
+    idx: Dict[int, "RefinedFile"], id2pos: Optional[Dict[str, int]] = None
+) -> Tuple[bool, List[str]]:
     """Is the refined corpus complete + sliceable (all 434 pages present, every
     file's markers resolving to its full page range)? Returns (ready, problems).
 
@@ -717,9 +750,11 @@ def corpus_ready(idx: Dict[int, "RefinedFile"],
         if not slice_pages(rf, id2pos):
             unsliceable.append(name)
     if unsliceable:
-        problems.append(f"{len(unsliceable)} refined files whose page markers "
-                        f"don't cleanly resolve to their range (refinement in "
-                        f"progress / format drift): {unsliceable[:8]}...")
+        problems.append(
+            f"{len(unsliceable)} refined files whose page markers "
+            f"don't cleanly resolve to their range (refinement in "
+            f"progress / format drift): {unsliceable[:8]}..."
+        )
     return (not problems), problems
 
 
@@ -740,7 +775,8 @@ def corpus_ready(idx: Dict[int, "RefinedFile"],
 _TAG_RE = re.compile(r"</?[a-zA-Z][^>]*>")
 _HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
 _DICT_HDR_LINE_RE = re.compile(
-    r"^\|\s*\*?\*?\s*word\b\s*\*?(?:<br>)?\*?\s*\(?(?:pos|part of speech)?\)?", re.I)
+    r"^\|\s*\*?\*?\s*word\b\s*\*?(?:<br>)?\*?\s*\(?(?:pos|part of speech)?\)?", re.I
+)
 _SEP_LINE_RE = re.compile(r"^\|[\s:\-\|]+\|?\s*$")
 _PAGE_LINE_RE = re.compile(r"^(?:#{1,4}\s+Page\s+.+|\*\*\s*Page\s+.+\*\*)\s*$", re.I)
 _BOILERPLATE_RE = re.compile(
@@ -792,7 +828,7 @@ def parity_diff(src_text: str, out_text: str):
     reported)."""
     src = content_tokens(src_text)
     out = content_tokens(out_text)
-    missing = src - out       # Counter subtraction keeps only positive counts
+    missing = src - out  # Counter subtraction keeps only positive counts
     added = out - src
     return (sum(missing.values()) == 0), missing, added
 

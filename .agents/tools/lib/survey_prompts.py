@@ -27,34 +27,39 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve()
-AGENTS = HERE.parent.parent.parent          # .agents/
+AGENTS = HERE.parent.parent.parent  # .agents/
 ROOT = AGENTS.parent
 
 SKIP_PARTS = {"vendor", "archive", "__pycache__", "_scratch", "node_modules"}
 
 # Placeholder dialects already in the tree. Order matters only for reporting.
 PLACEHOLDER_PATTERNS = [
-    ("angle_double", re.compile(r"<<[A-Z0-9_]+>>")),          # <<START>>
-    ("brace_double", re.compile(r"\{\{[a-zA-Z0-9_]+\}\}")),   # {{name}}
-    ("dollar_brace", re.compile(r"\$\{[a-zA-Z0-9_]+\}")),     # ${name}
-    ("percent_named", re.compile(r"%\([a-zA-Z0-9_]+\)s")),    # %(name)s
+    ("angle_double", re.compile(r"<<[A-Z0-9_]+>>")),  # <<START>>
+    ("brace_double", re.compile(r"\{\{[a-zA-Z0-9_]+\}\}")),  # {{name}}
+    ("dollar_brace", re.compile(r"\$\{[a-zA-Z0-9_]+\}")),  # ${name}
+    ("percent_named", re.compile(r"%\([a-zA-Z0-9_]+\)s")),  # %(name)s
     ("brace_named", re.compile(r"(?<!\{)\{[a-zA-Z_][a-zA-Z0-9_]*\}(?!\})")),
-    ("brace_index", re.compile(r"(?<!\{)\{\d*\}(?!\})")),     # {} / {0}
+    ("brace_index", re.compile(r"(?<!\{)\{\d*\}(?!\})")),  # {} / {0}
 ]
 
 # Instruction-shaped signals.
 ROLE = re.compile(
     r"\b(you are|your job|your task|act as|you will|you must|as an? "
-    r"(?:expert|agent|orchestrator|reviewer|worker))\b", re.I)
+    r"(?:expert|agent|orchestrator|reviewer|worker))\b",
+    re.I,
+)
 IMPERATIVE = re.compile(
     r"^\s*(read|write|extract|refine|adapt|generate|produce|analyse|analyze|"
     r"summarize|summarise|convert|rewrite|review|verify|check|classify|"
     r"translate|explain|list|output|return|do not|never|always)\b",
-    re.I | re.M)
+    re.I | re.M,
+)
 OUTPUT_CONTRACT = re.compile(
     r"\b(output only|reply with|respond with|return only|strict json|"
     r"do not (?:summarize|summarise|explain|preface|add)|"
-    r"output contract|markdown only|no prose|no commentary)\b", re.I)
+    r"output contract|markdown only|no prose|no commentary)\b",
+    re.I,
+)
 RUBRIC = re.compile(r"^\s*(?:\d+[.)]|[-*])\s+\S", re.M)
 
 # Things that look wordy but are not prompts.
@@ -64,7 +69,9 @@ ARGPARSE_HELP = re.compile(r"^\s*(usage:|%\(prog\)s)", re.I)
 # Dispatch evidence: a call that ships text to a model.
 MODEL_CALL_HINTS = re.compile(
     r"hermes\b|--yolo|\bmodel\b|completions?\.create|messages\.create|"
-    r"chat\.completions|invoke_model|generate_content", re.I)
+    r"chat\.completions|invoke_model|generate_content",
+    re.I,
+)
 
 
 def iter_scripts(root: Path):
@@ -133,12 +140,16 @@ def classify(node: ast.Constant, text: str, docstrings: set) -> dict:
 def collect_docstring_ids(tree: ast.AST) -> set:
     out = set()
     for node in ast.walk(tree):
-        if isinstance(node, (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef,
-                             ast.ClassDef)):
+        if isinstance(
+            node, (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)
+        ):
             body = getattr(node, "body", None)
-            if body and isinstance(body[0], ast.Expr) \
-                    and isinstance(body[0].value, ast.Constant) \
-                    and isinstance(body[0].value.value, str):
+            if (
+                body
+                and isinstance(body[0], ast.Expr)
+                and isinstance(body[0].value, ast.Constant)
+                and isinstance(body[0].value.value, str)
+            ):
                 out.add(id(body[0].value))
     return out
 
@@ -155,8 +166,7 @@ def survey(root: Path, min_len: int = 200) -> dict:
         docs = collect_docstring_ids(tree)
         dispatches = bool(MODEL_CALL_HINTS.search(src))
         for node in ast.walk(tree):
-            if not isinstance(node, ast.Constant) \
-                    or not isinstance(node.value, str):
+            if not isinstance(node, ast.Constant) or not isinstance(node.value, str):
                 continue
             text = node.value
             if len(text) < min_len:
@@ -166,13 +176,18 @@ def survey(root: Path, min_len: int = 200) -> dict:
                 info["file_dispatches_to_model"] = dispatches
             rel = str(path.relative_to(root.parent))
             per_file[rel][info["verdict"]] += 1
-            rows.append({
-                "file": rel, "line": node.lineno, "chars": len(text),
-                "verdict": info["verdict"], "signals": info["signals"],
-                "placeholders": info["placeholders"],
-                "dispatches": dispatches,
-                "head": " ".join(text.strip().split())[:120],
-            })
+            rows.append(
+                {
+                    "file": rel,
+                    "line": node.lineno,
+                    "chars": len(text),
+                    "verdict": info["verdict"],
+                    "signals": info["signals"],
+                    "placeholders": info["placeholders"],
+                    "dispatches": dispatches,
+                    "head": " ".join(text.strip().split())[:120],
+                }
+            )
     return {"rows": rows, "per_file": {k: dict(v) for k, v in per_file.items()}}
 
 
@@ -181,8 +196,7 @@ def main() -> int:
     ap.add_argument("--root", default=str(AGENTS))
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--min-len", type=int, default=200)
-    ap.add_argument("--only", default=None,
-                    help="filter by verdict, e.g. prompt")
+    ap.add_argument("--only", default=None, help="filter by verdict, e.g. prompt")
     args = ap.parse_args()
 
     data = survey(Path(args.root).resolve(), args.min_len)
@@ -191,13 +205,11 @@ def main() -> int:
         rows = [r for r in rows if r["verdict"] == args.only]
 
     if args.json:
-        print(json.dumps({"rows": rows, "per_file": data["per_file"]},
-                         indent=2))
+        print(json.dumps({"rows": rows, "per_file": data["per_file"]}, indent=2))
         return 0
 
     tally = Counter(r["verdict"] for r in data["rows"])
-    print("scanned {} literals >= {} chars".format(len(data["rows"]),
-                                                   args.min_len))
+    print("scanned {} literals >= {} chars".format(len(data["rows"]), args.min_len))
     for k, v in tally.most_common():
         print("  {:<16} {}".format(k, v))
     print()
@@ -209,12 +221,18 @@ def main() -> int:
     for f in sorted(by_file):
         group = by_file[f]
         disp = "→model" if group[0]["dispatches"] else "      "
-        print("\n{} {}  ({} candidate{})".format(
-            disp, f, len(group), "" if len(group) == 1 else "s"))
+        print(
+            "\n{} {}  ({} candidate{})".format(
+                disp, f, len(group), "" if len(group) == 1 else "s"
+            )
+        )
         for r in group:
             ph = ",".join(r["placeholders"]) or "-"
-            print("    L{:<5} {:>6}c  {:<14} ph={:<24} {}".format(
-                r["line"], r["chars"], r["verdict"], ph, r["head"][:70]))
+            print(
+                "    L{:<5} {:>6}c  {:<14} ph={:<24} {}".format(
+                    r["line"], r["chars"], r["verdict"], ph, r["head"][:70]
+                )
+            )
     return 0
 
 

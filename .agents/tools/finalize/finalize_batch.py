@@ -35,6 +35,7 @@ Usage:
   python3 finalize_batch.py a-sec1-rule1.1.md  # single file (debug)
   python3 finalize_batch.py --verify         # run verify_final.py only
 """
+
 from __future__ import annotations
 
 import os
@@ -52,8 +53,12 @@ from concurrent.futures import ThreadPoolExecutor
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -63,8 +68,10 @@ from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+
 RT = _resolve_runtime(__file__)
 FINAL_RULES_DIR = PROJECT / "ste-code" / "final" / "rules"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
@@ -80,6 +87,7 @@ FINAL_CTX = VENDOR_DIR / "FINAL_PHASE_CONTEXT_INSTRUCTIONS.md"
 # See .agents/tools/lib/PROMPTS.md. Edit templates/finalize-*.md to change
 # worker wording; this script only supplies the values.
 import sys as _sys
+
 _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import lib_import
 
@@ -101,11 +109,15 @@ sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 # ── checkpoint ──────────────────────────────────────────────────────────────
 def _load_checkpoint():
     from ste_checkpoint import load
+
     return load(CHECKPOINT_PATH)
+
 
 def _save_checkpoint(ckpt):
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, ckpt)
+
 
 _checkpoint = _load_checkpoint()
 # Serialize all shared-state mutations (checkpoint/git/progress) across workers.
@@ -114,10 +126,18 @@ _lock = threading.Lock()
 
 def _git_commit_locked(files, msg):
     try:
-        subprocess.run(["git", "add", "-A", "--", *files], cwd=str(PROJECT),
-                       check=True, capture_output=True)
-        subprocess.run(["git", "commit", "-q", "-m", msg], cwd=str(PROJECT),
-                       check=True, capture_output=True)
+        subprocess.run(
+            ["git", "add", "-A", "--", *files],
+            cwd=str(PROJECT),
+            check=True,
+            capture_output=True,
+        )
+        subprocess.run(
+            ["git", "commit", "-q", "-m", msg],
+            cwd=str(PROJECT),
+            check=True,
+            capture_output=True,
+        )
         return True
     except subprocess.CalledProcessError:
         return False
@@ -161,8 +181,10 @@ def _reference_context() -> str:
             if excerpts:
                 break
         if excerpts:
-            parts.append(f"# Reference vocabulary: {slug} style package\n"
-                         + "\n\n".join(excerpts)[:1800])
+            parts.append(
+                f"# Reference vocabulary: {slug} style package\n"
+                + "\n\n".join(excerpts)[:1800]
+            )
     # 3) Concrete word-list snippets (software terms, common words, technical glossary)
     for slug, fname in (
         ("software-terms.dic", "software-terms.dic"),
@@ -214,17 +236,23 @@ def _previous_documents_context(section_num: str, self_num: str) -> str:
     try:
         for p in sorted(GROUPED_DIR.glob(f"group-*-rules-sec-{section_num}.md")):
             txt = p.read_text(encoding="utf-8", errors="ignore")
-            blocks = re.findall(r">\s*\*\*(Non-STE|STE|Do not write|WRITE):\*\*[^\n]*", txt)
+            blocks = re.findall(
+                r">\s*\*\*(Non-STE|STE|Do not write|WRITE):\*\*[^\n]*", txt
+            )
             if blocks:
-                parts.append(f"# Original spec source (grouped/ sec {section_num})\n"
-                             f"{txt[:1200]}")
+                parts.append(
+                    f"# Original spec source (grouped/ sec {section_num})\n{txt[:1200]}"
+                )
                 break
     except Exception:
         pass
     # 2) code-domain dictionary excerpt
     dic = ADAPTED_DIR / "a-dictionary.md"
     if dic.exists():
-        parts.append("# STE-Code dictionary (code-domain vocabulary)\n" + dic.read_text(errors="ignore")[:1500])
+        parts.append(
+            "# STE-Code dictionary (code-domain vocabulary)\n"
+            + dic.read_text(errors="ignore")[:1500]
+        )
     # 3) categories excerpt
     catf = ADAPTED_DIR / "a-categories.md"
     if catf.exists():
@@ -234,13 +262,19 @@ def _previous_documents_context(section_num: str, self_num: str) -> str:
         ep = PROJECT / "ste-code" / "extensions" / f"{area}.md"
         if ep.exists():
             txt = ep.read_text(errors="ignore")
-            lines = [l for l in txt.splitlines() if l.startswith("### ") or "**replaces**" in l][:24]
+            lines = [
+                l
+                for l in txt.splitlines()
+                if l.startswith("### ") or "**replaces**" in l
+            ][:24]
             parts.append(f"# Extension approved {area}\n" + "\n".join(lines))
     return "\n\n".join(parts)
 
 
 # ── prompt for one rule file ────────────────────────────────────────────────
-def _build_prompt(adapted_path: Path, self_num: str, title: str, section_num: str) -> str:
+def _build_prompt(
+    adapted_path: Path, self_num: str, title: str, section_num: str
+) -> str:
     src = adapted_path.read_text(encoding="utf-8", errors="ignore")
     refs = _reference_context()
     prev = _previous_documents_context(section_num, self_num)
@@ -257,8 +291,9 @@ def _build_prompt(adapted_path: Path, self_num: str, title: str, section_num: st
 
 # ── deterministic fallback ─────────────────────────────────────────────────
 def _fallback_copy(adapted_path: Path, out_path: Path):
-    out_path.write_text(adapted_path.read_text(encoding="utf-8", errors="ignore"),
-                        encoding="utf-8")
+    out_path.write_text(
+        adapted_path.read_text(encoding="utf-8", errors="ignore"), encoding="utf-8"
+    )
 
 
 def _valid_rule(path: Path) -> bool:
@@ -304,8 +339,12 @@ def synthesize_file(adapted_path: Path) -> bool:
     # itself via its file tools — the orchestrator is NOT a dumb pipe that writes
     # r.stdout. We capture r.stdout only as trajectory/history to .agents/tmp/.
     try:
-        r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
-                           capture_output=True, text=True, timeout=TIMEOUT_SECONDS)
+        r = subprocess.run(
+            [VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
+            capture_output=True,
+            text=True,
+            timeout=TIMEOUT_SECONDS,
+        )
     except subprocess.TimeoutExpired:
         # One slow session must NOT kill the whole batch. But NEVER clobber a file
         # that is already a valid enriched rule (written by a prior run) — only fall
@@ -313,11 +352,19 @@ def synthesize_file(adapted_path: Path) -> bool:
         with _lock:
             if not _valid_rule(out_path):
                 _fallback_copy(adapted_path, out_path)
-                print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
-                _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                                   f"Phase G: synthesize {adapted_path.name} (LLM final)")
+                print(
+                    f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy",
+                    flush=True,
+                )
+                _git_commit_locked(
+                    [str(out_path.relative_to(PROJECT))],
+                    f"Phase G: synthesize {adapted_path.name} (LLM final)",
+                )
             else:
-                print(f"  [TIMEOUT] {adapted_path.name}: kept existing enriched file", flush=True)
+                print(
+                    f"  [TIMEOUT] {adapted_path.name}: kept existing enriched file",
+                    flush=True,
+                )
         return True
     # Save the agent's stdout as trajectory/history (like refinement/extraction),
     # NOT as the output file.
@@ -326,8 +373,10 @@ def synthesize_file(adapted_path: Path) -> bool:
     if _valid_rule(out_path):
         with _lock:
             print(f"  ✓ {adapted_path.name} (session wrote final)", flush=True)
-            _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                               f"Phase G: synthesize {adapted_path.name} (LLM final)")
+            _git_commit_locked(
+                [str(out_path.relative_to(PROJECT))],
+                f"Phase G: synthesize {adapted_path.name} (LLM final)",
+            )
             if adapted_path.name not in _checkpoint.setdefault("done", []):
                 _checkpoint["done"].append(adapted_path.name)
             _save_checkpoint(_checkpoint)
@@ -338,11 +387,19 @@ def synthesize_file(adapted_path: Path) -> bool:
     with _lock:
         if not _valid_rule(out_path):
             _fallback_copy(adapted_path, out_path)
-            print(f"  [FALLBACK] {adapted_path.name}: session did not write valid file; clean copy", flush=True)
-            _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                               f"Phase G: synthesize {adapted_path.name} (LLM final)")
+            print(
+                f"  [FALLBACK] {adapted_path.name}: session did not write valid file; clean copy",
+                flush=True,
+            )
+            _git_commit_locked(
+                [str(out_path.relative_to(PROJECT))],
+                f"Phase G: synthesize {adapted_path.name} (LLM final)",
+            )
         else:
-            print(f"  [FALLBACK] {adapted_path.name}: kept existing enriched file", flush=True)
+            print(
+                f"  [FALLBACK] {adapted_path.name}: kept existing enriched file",
+                flush=True,
+            )
         if adapted_path.name not in _checkpoint.setdefault("done", []):
             _checkpoint["done"].append(adapted_path.name)
         _save_checkpoint(_checkpoint)
@@ -364,7 +421,9 @@ def _regen_progress():
         num = SECTION_RULE_RE.search(p.name)
         rule_id = num.group(1) + "." + num.group(2) if num else p.stem
         src = ADAPTED_DIR / p.name
-        is_stale = (src.exists() and p.read_text(errors="ignore") == src.read_text(errors="ignore"))
+        is_stale = src.exists() and p.read_text(errors="ignore") == src.read_text(
+            errors="ignore"
+        )
         status = "stale" if is_stale else "enriched"
         if is_stale:
             stale += 1
@@ -406,8 +465,10 @@ def _regen_progress():
     out = PROGRESS_PATH
     mkdir(out.parent)
     write_text(out, "\n".join(lines) + "\n")
-    print(f"  progress regenerated -> {out}: {enriched} enriched / {stale} stale / {len(files)} total",
-          flush=True)
+    print(
+        f"  progress regenerated -> {out}: {enriched} enriched / {stale} stale / {len(files)} total",
+        flush=True,
+    )
     return out
 
 
@@ -445,12 +506,17 @@ def main():
             _save_checkpoint(_checkpoint)
 
     import atexit
+
     atexit.register(_atexit)
     signal.signal(signal.SIGTERM, lambda *_: (_atexit(), sys.exit(0)))
     signal.signal(signal.SIGINT, lambda *_: (_atexit(), sys.exit(130)))
 
     mkdir(FINAL_RULES_DIR)
-    files = [ADAPTED_DIR / single] if single else sorted(ADAPTED_DIR.glob("a-sec*-rule*.md"))
+    files = (
+        [ADAPTED_DIR / single]
+        if single
+        else sorted(ADAPTED_DIR.glob("a-sec*-rule*.md"))
+    )
 
     # --only-stale: synthesize ONLY rules whose final/rules/<f> == adapted/<f>
     # (the copied, non-synthesized ones flagged in progress.md).
@@ -459,7 +525,11 @@ def main():
         for p in files:
             fp = FINAL_RULES_DIR / p.name
             sp = ADAPTED_DIR / p.name
-            if fp.exists() and sp.exists() and fp.read_text(errors="ignore") == sp.read_text(errors="ignore"):
+            if (
+                fp.exists()
+                and sp.exists()
+                and fp.read_text(errors="ignore") == sp.read_text(errors="ignore")
+            ):
                 kept.append(p)
             elif not fp.exists():
                 kept.append(p)
@@ -484,8 +554,10 @@ def main():
     if not work:
         print("  nothing to do (all done). Use --fresh to re-run all.", flush=True)
     else:
-        print(f"  launching {len(work)} workers across <= {workers} concurrent LLM sessions...",
-              flush=True)
+        print(
+            f"  launching {len(work)} workers across <= {workers} concurrent LLM sessions...",
+            flush=True,
+        )
 
         def _run_one(p: Path):
             print(f"  SYNTH {p.name}...", flush=True)
@@ -499,16 +571,22 @@ def main():
                 if ok:
                     print(f"    ✓ {name}  ({completed}/{len(work)})", flush=True)
                 else:
-                    print(f"    ✗ {name}  ({completed}/{len(work)}) (will retry next run)", flush=True)
+                    print(
+                        f"    ✗ {name}  ({completed}/{len(work)}) (will retry next run)",
+                        flush=True,
+                    )
 
     # copy categories + dictionary (deterministic, code-domain) into final/rules/
     for extra in ("a-categories.md", "a-dictionary.md"):
         src = ADAPTED_DIR / extra
         if src.exists():
-            (FINAL_RULES_DIR / extra).write_text(src.read_text(encoding="utf-8", errors="ignore"),
-                                                 encoding="utf-8")
-    _git_commit_locked([str(FINAL_RULES_DIR.relative_to(PROJECT))],
-                       "Phase G: finalize rule files synthesized (LLM) + categories/dictionary")
+            (FINAL_RULES_DIR / extra).write_text(
+                src.read_text(encoding="utf-8", errors="ignore"), encoding="utf-8"
+            )
+    _git_commit_locked(
+        [str(FINAL_RULES_DIR.relative_to(PROJECT))],
+        "Phase G: finalize rule files synthesized (LLM) + categories/dictionary",
+    )
 
     # NOTE: assembly into ste-code/final/ (extensions + catalogue + provenance) is a
     # SEPARATE, non-overwriting step (assemble_final.py). We do NOT re-copy raw
@@ -516,7 +594,10 @@ def main():
     # enrichment. Run assemble_final.py explicitly after synthesis if needed.
 
     _save_checkpoint(_checkpoint)
-    print(f"\n{'='*60}\nPhase G synthesis done: {len(work)} workers dispatched\n{'='*60}", flush=True)
+    print(
+        f"\n{'=' * 60}\nPhase G synthesis done: {len(work)} workers dispatched\n{'=' * 60}",
+        flush=True,
+    )
     sys.exit(0)
 
 

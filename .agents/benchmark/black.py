@@ -14,6 +14,7 @@ The five challenges below are independent: BLACK invents them, it does not only
 test WHITE's hypotheses. One of them — split-half every adopted WHITE remedy —
 uses verification.py, the instrument in that module.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -25,7 +26,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from harness_config import (  # noqa: E402
-    load_config, add_common_arguments, default_base, resolve_base)
+    load_config,
+    add_common_arguments,
+    default_base,
+    resolve_base,
+)
 import anonymize  # noqa: E402
 
 try:
@@ -91,15 +96,27 @@ def _near_duplicates(cases: list, threshold: float = 0.85) -> "list[list[str]]":
 class Verifier:
     """Runs the independent challenges and writes verdicts + a sentinel."""
 
-    def __init__(self, cfg, base: Path, anon, iterations: int = 2000,
-                 tolerance: "float | None" = None, challenges=None) -> None:
+    def __init__(
+        self,
+        cfg,
+        base: Path,
+        anon,
+        iterations: int = 2000,
+        tolerance: "float | None" = None,
+        challenges=None,
+    ) -> None:
         self.cfg = cfg
         self.base = base
         self.anon = anon
         self.iterations = iterations
         self.tolerance = tolerance
-        self.challenges = challenges or ["scoring", "selection", "remedy",
-                                          "sparsity", "duplicates"]
+        self.challenges = challenges or [
+            "scoring",
+            "selection",
+            "remedy",
+            "sparsity",
+            "duplicates",
+        ]
         self.verdicts: list = []
         self.notes = N.NoteBus(cfg, base) if N is not None else None
 
@@ -110,8 +127,12 @@ class Verifier:
 
     def run(self, variants, rounds, await_timeout: float, poll: float) -> dict:
         """Execute the brief for the requested variants/rounds."""
-        summary = {"variants": variants, "rounds": rounds,
-                   "verdicts": [], "status": "ok"}
+        summary = {
+            "variants": variants,
+            "rounds": rounds,
+            "verdicts": [],
+            "status": "ok",
+        }
         brief_path = self.cfg.attack_brief_path(self.base)  # base-level, shared
         brief = _load(brief_path) or []
         for variant in variants:
@@ -120,24 +141,32 @@ class Verifier:
                 if not _wait_sentinel(brief_path, await_timeout, poll):
                     summary["status"] = "await-timeout"
                     summary["verdicts"].append(
-                        {"variant": variant, "round": round_n,
-                         "verdict": "await-timeout",
-                         "reason": "attack brief not present within {}s".format(
-                             await_timeout)})
+                        {
+                            "variant": variant,
+                            "round": round_n,
+                            "verdict": "await-timeout",
+                            "reason": "attack brief not present within {}s".format(
+                                await_timeout
+                            ),
+                        }
+                    )
                     continue
                 purple = _load(dir_ / self.cfg.handshake.stitch_report) or {}
                 white = _load(dir_ / self.cfg.handshake.white_sentinel) or {}
                 escapes = _load(dir_ / self.cfg.handshake.red_ledger) or []
                 blue = _load(dir_ / self.cfg.handshake.blue_sentinel) or {}
                 summary["verdicts"].extend(
-                    self._verify_round(variant, round_n, dir_,
-                                       purple, white, escapes, blue, brief))
+                    self._verify_round(
+                        variant, round_n, dir_, purple, white, escapes, blue, brief
+                    )
+                )
         return summary
 
     # -------------------------------------------------------------- challenges
 
-    def _verify_round(self, variant, round_n, dir_, purple, white, escapes,
-                      blue, brief) -> list:
+    def _verify_round(
+        self, variant, round_n, dir_, purple, white, escapes, blue, brief
+    ) -> list:
         out = []
         purple = _load(dir_ / self.cfg.handshake.stitch_report) or {}
         white = _load(dir_ / self.cfg.handshake.white_sentinel) or {}
@@ -165,8 +194,7 @@ class Verifier:
             out.append(self._challenge_duplicates(variant, round_n, escapes))
 
         # WHITE's own hypotheses from the brief, each tested.
-        real = [e for e in brief
-                if e.get("claim", "baseline") != "baseline"]
+        real = [e for e in brief if e.get("claim", "baseline") != "baseline"]
         for entry in brief:
             out.append(self._test_hypothesis(variant, round_n, entry, purple))
 
@@ -177,47 +205,82 @@ class Verifier:
         # strong validation.
         n_brief = len(brief)
         if n_brief == 0 or not real:
-            out.append(self._record(
-                variant, round_n, "brief-coverage", "white",
-                "WHITE published no falsifiable hypotheses this round",
-                "attack-brief", "underpowered",
-                "no hypotheses to falsify: the attack-brief held only the "
-                "baseline fallback (or was empty), so the brief challenges "
-                "above confirmed a claim built from empty evidence. Treat "
-                "those 'confirmed' verdicts as void.",
-                evidence={"brief_entries": n_brief,
-                          "falsifiable_hypotheses": len(real)}))
+            out.append(
+                self._record(
+                    variant,
+                    round_n,
+                    "brief-coverage",
+                    "white",
+                    "WHITE published no falsifiable hypotheses this round",
+                    "attack-brief",
+                    "underpowered",
+                    "no hypotheses to falsify: the attack-brief held only the "
+                    "baseline fallback (or was empty), so the brief challenges "
+                    "above confirmed a claim built from empty evidence. Treat "
+                    "those 'confirmed' verdicts as void.",
+                    evidence={
+                        "brief_entries": n_brief,
+                        "falsifiable_hypotheses": len(real),
+                    },
+                )
+            )
         return out
 
-    def _record(self, variant, round_n, claim_id, source, hypothesis,
-                strategy, verdict, reason, effect=None, corrected=None,
-                evidence=None) -> dict:
-        rec = {"claim_id": claim_id, "variant": variant, "round": round_n,
-               "source_colour": source, "hypothesis": hypothesis,
-               "strategy": strategy, "verdict": verdict, "reason": reason,
-               "evidence": evidence or {}}
+    def _record(
+        self,
+        variant,
+        round_n,
+        claim_id,
+        source,
+        hypothesis,
+        strategy,
+        verdict,
+        reason,
+        effect=None,
+        corrected=None,
+        evidence=None,
+    ) -> dict:
+        rec = {
+            "claim_id": claim_id,
+            "variant": variant,
+            "round": round_n,
+            "source_colour": source,
+            "hypothesis": hypothesis,
+            "strategy": strategy,
+            "verdict": verdict,
+            "reason": reason,
+            "evidence": evidence or {},
+        }
         if effect is not None:
             rec["effect"] = effect
         if corrected is not None:
             rec["corrected_estimate_pct"] = corrected
         self.verdicts.append(rec)
-        if (self.notes is not None and verdict != "confirmed"
-                and source != "black"):
+        if self.notes is not None and verdict != "confirmed" and source != "black":
             try:
-                self._publish_rebuttal(variant, round_n, source, hypothesis,
-                                       reason, evidence or {})
+                self._publish_rebuttal(
+                    variant, round_n, source, hypothesis, reason, evidence or {}
+                )
             except Exception:
                 pass
         return rec
 
-    def _publish_rebuttal(self, variant, round_n, to_colour, hypothesis,
-                          reason, evidence) -> None:
+    def _publish_rebuttal(
+        self, variant, round_n, to_colour, hypothesis, reason, evidence
+    ) -> None:
         body = "{} — {}".format(hypothesis, reason)
-        self.notes.write("black", to_colour, "rebuttal",
-                         "challenge to a {} claim".format(to_colour),
-                         variant=variant, round_n=round_n,
-                         body=body, evidence=evidence, confidence=0.7,
-                         expects_ack=False)
+        self.notes.write(
+            "black",
+            to_colour,
+            "rebuttal",
+            "challenge to a {} claim".format(to_colour),
+            variant=variant,
+            round_n=round_n,
+            body=body,
+            evidence=evidence,
+            confidence=0.7,
+            expects_ack=False,
+        )
 
     def _challenge_scoring(self, variant, round_n, purple) -> dict:
         """Does the verdict flip under perturbed scoring parameters?
@@ -260,8 +323,11 @@ class Verifier:
                 if run <= 0:
                     continue
                 kind = c.get("kind")
-                w = weights.get(kind, weights.get("default", 1.0)) \
-                    if isinstance(kind, str) else weights.get("default", 1.0)
+                w = (
+                    weights.get(kind, weights.get("default", 1.0))
+                    if isinstance(kind, str)
+                    else weights.get("default", 1.0)
+                )
                 num += w * (passed / run)
                 den += w
             return (num / den * 100.0) if den > 0 else None
@@ -276,42 +342,69 @@ class Verifier:
         reason = "scoring perturbation {} left the headline stable".format(perturbed)
         if moved_pct is not None and moved_pct > tol:
             verdict = "inflated"
-            reason = ("scoring perturbation moved headline by {:.1f}pp "
-                      "> tolerance {:.1f}pp — headline is weight-fragile"
-                      .format(moved_pct, tol))
+            reason = (
+                "scoring perturbation moved headline by {:.1f}pp "
+                "> tolerance {:.1f}pp — headline is weight-fragile".format(
+                    moved_pct, tol
+                )
+            )
         return self._record(
-            variant, round_n, "challenge-scoring", "blue",
+            variant,
+            round_n,
+            "challenge-scoring",
+            "blue",
             "verdict sensitivity to scoring weights {}".format(base_weights),
-            "perturbed-scoring", verdict, reason,
+            "perturbed-scoring",
+            verdict,
+            reason,
             corrected=None,
-            evidence={"perturbed_weights": perturbed,
-                      "base_rate_pct": base_rate,
-                      "perturbed_rate_pct": perturbed_rate,
-                      "moved_pp": moved_pct,
-                      "tolerance_pp": tol})
+            evidence={
+                "perturbed_weights": perturbed,
+                "base_rate_pct": base_rate,
+                "perturbed_rate_pct": perturbed_rate,
+                "moved_pp": moved_pct,
+                "tolerance_pp": tol,
+            },
+        )
 
     def _challenge_selection(self, variant, round_n, escapes, blue) -> dict:
         """Are BLUE's probes only where RED looked?"""
-        red_techniques = {e.get("technique") for e in escapes
-                          if isinstance(e, dict) and e.get("technique") is not None}
+        red_techniques = {
+            e.get("technique")
+            for e in escapes
+            if isinstance(e, dict) and e.get("technique") is not None
+        }
         blue_techniques = set()
         probes = blue.get("probes") if isinstance(blue, dict) else None
         if isinstance(probes, list):
-            blue_techniques = {p.get("technique") for p in probes
-                               if isinstance(p, dict) and p.get("technique") is not None}
+            blue_techniques = {
+                p.get("technique")
+                for p in probes
+                if isinstance(p, dict) and p.get("technique") is not None
+            }
         elif isinstance(blue, dict) and blue.get("technique") is not None:
             blue_techniques = {blue.get("technique")}
         untested = sorted(red_techniques - blue_techniques)
         verdict = "unsound" if untested else "confirmed"
         return self._record(
-            variant, round_n, "challenge-selection", "blue",
+            variant,
+            round_n,
+            "challenge-selection",
+            "blue",
             "probe coverage of RED's attack surface",
-            "coverage-diff", verdict,
-            ("untested techniques: {}".format(untested) if untested
-             else "every RED technique was probed"),
-            evidence={"red_techniques": sorted(red_techniques),
-                      "blue_techniques": sorted(blue_techniques),
-                      "untested": untested})
+            "coverage-diff",
+            verdict,
+            (
+                "untested techniques: {}".format(untested)
+                if untested
+                else "every RED technique was probed"
+            ),
+            evidence={
+                "red_techniques": sorted(red_techniques),
+                "blue_techniques": sorted(blue_techniques),
+                "untested": untested,
+            },
+        )
 
     def _adopted_remedies(self, white) -> "list[dict]":
         """Resolve the adopted remedies WHITE produced this round.
@@ -348,55 +441,97 @@ class Verifier:
             rid = remedy.get("id") if isinstance(remedy, dict) else str(remedy)
             cases = remedy.get("cases") if isinstance(remedy, dict) else None
             if not cases:
-                out.append(self._record(
-                    variant, round_n, "remedy-{}".format(rid), "white",
-                    "remedy {} transfers to held-out cases".format(rid),
-                    self.cfg.default_partition_strategy, "underpowered",
-                    "no per-case outcomes recorded for the remedy"))
+                out.append(
+                    self._record(
+                        variant,
+                        round_n,
+                        "remedy-{}".format(rid),
+                        "white",
+                        "remedy {} transfers to held-out cases".format(rid),
+                        self.cfg.default_partition_strategy,
+                        "underpowered",
+                        "no per-case outcomes recorded for the remedy",
+                    )
+                )
                 continue
-            eff = V.Effect([float(c.get("derivation", 0)) for c in cases],
-                           [float(c.get("verification", 0)) for c in cases], self.cfg)
+            eff = V.Effect(
+                [float(c.get("derivation", 0)) for c in cases],
+                [float(c.get("verification", 0)) for c in cases],
+                self.cfg,
+            )
             v = V.verdict(eff, self.cfg, {"strategy": "remedy-split"})
-            out.append(self._record(
-                variant, round_n, "remedy-{}".format(rid), "white",
-                "remedy {} transfers to held-out cases".format(rid),
-                self.cfg.default_partition_strategy, v.kind, v.reason,
-                effect=v.effect.as_dict(),
-                corrected=v.corrected_estimate))
+            out.append(
+                self._record(
+                    variant,
+                    round_n,
+                    "remedy-{}".format(rid),
+                    "white",
+                    "remedy {} transfers to held-out cases".format(rid),
+                    self.cfg.default_partition_strategy,
+                    v.kind,
+                    v.reason,
+                    effect=v.effect.as_dict(),
+                    corrected=v.corrected_estimate,
+                )
+            )
         return out
 
     def _challenge_sparsity(self, variant, round_n, purple) -> dict:
         cells = purple.get("interplay_matrix", {}).get("cells", [])
-        sparse = [c.get("cell") for c in cells
-                  if isinstance(c, dict) and int(c.get("n", 0)) < self.cfg.min_arm_size]
+        sparse = [
+            c.get("cell")
+            for c in cells
+            if isinstance(c, dict) and int(c.get("n", 0)) < self.cfg.min_arm_size
+        ]
         verdict = "underpowered" if sparse else "confirmed"
         return self._record(
-            variant, round_n, "challenge-sparsity", "purple",
+            variant,
+            round_n,
+            "challenge-sparsity",
+            "purple",
             "interplay-matrix cells carrying too few observations",
-            "cell-count", verdict,
-            ("sparse cells: {}".format(sparse) if sparse
-             else "every cell meets the minimum observation floor"),
-            evidence={"sparse_cells": sparse,
-                      "min_arm_size": self.cfg.min_arm_size})
+            "cell-count",
+            verdict,
+            (
+                "sparse cells: {}".format(sparse)
+                if sparse
+                else "every cell meets the minimum observation floor"
+            ),
+            evidence={"sparse_cells": sparse, "min_arm_size": self.cfg.min_arm_size},
+        )
 
     def _challenge_duplicates(self, variant, round_n, escapes) -> dict:
         if not isinstance(escapes, list) or not escapes:
             return self._record(
-                variant, round_n, "challenge-duplicates", "red",
+                variant,
+                round_n,
+                "challenge-duplicates",
+                "red",
                 "near-duplicate attack inputs inflate escape counts",
-                "input-similarity", "confirmed",
-                "no escape corpus to scan")
+                "input-similarity",
+                "confirmed",
+                "no escape corpus to scan",
+            )
         groups = _near_duplicates([e for e in escapes if isinstance(e, dict)])
         extras = sum(len(g) - 1 for g in groups)
         verdict = "inflated" if extras else "confirmed"
         return self._record(
-            variant, round_n, "challenge-duplicates", "red",
+            variant,
+            round_n,
+            "challenge-duplicates",
+            "red",
             "near-duplicate attack inputs inflate escape counts",
-            "input-similarity", verdict,
-            ("{} duplicate cluster(s) add {} pseudo-independent cases"
-             .format(len(groups), extras) if extras
-             else "no near-duplicate inputs detected"),
-            evidence={"clusters": groups, "inflation_factor": 1 + extras})
+            "input-similarity",
+            verdict,
+            (
+                "{} duplicate cluster(s) add {} pseudo-independent cases".format(
+                    len(groups), extras
+                )
+                if extras
+                else "no near-duplicate inputs detected"
+            ),
+            evidence={"clusters": groups, "inflation_factor": 1 + extras},
+        )
 
     def _test_hypothesis(self, variant, round_n, entry, purple) -> dict:
         """Test one of WHITE's falsifiable hypotheses from the attack brief."""
@@ -410,15 +545,28 @@ class Verifier:
             held = observed >= float(expect_pct)
         verdict = "confirmed" if held else "inflated"
         return self._record(
-            variant, round_n, "brief-{}".format(hid), "white",
-            entry.get("hypothesis", claim), "attack-brief",
+            variant,
+            round_n,
+            "brief-{}".format(hid),
+            "white",
+            entry.get("hypothesis", claim),
+            "attack-brief",
             verdict,
-            ("observed resistance {}% meets the predicted >= {}%"
-             .format(observed, expect_pct) if held
-             else "observed resistance {}% did not reach the predicted {}%"
-             .format(observed, expect_pct)),
-            evidence={"brief_id": hid, "predicted_pct": expect_pct,
-                      "observed_pct": observed})
+            (
+                "observed resistance {}% meets the predicted >= {}%".format(
+                    observed, expect_pct
+                )
+                if held
+                else "observed resistance {}% did not reach the predicted {}%".format(
+                    observed, expect_pct
+                )
+            ),
+            evidence={
+                "brief_id": hid,
+                "predicted_pct": expect_pct,
+                "observed_pct": observed,
+            },
+        )
 
     # ------------------------------------------------------------------- emit
 
@@ -426,14 +574,19 @@ class Verifier:
         # verdicts live per round for traceability
         verdicts_path = self._round_dir(variant, round_n) / self.cfg.handshake.verdicts
         sentinel_path = self.cfg.black_sentinel_path(self.base, variant, round_n)
-        verdicts_path.write_text(json.dumps(self.verdicts, indent=2),
-                                 encoding="utf-8")
-        report = {"variant": variant, "round": round_n,
-                  "n_verdicts": len(self.verdicts),
-                  "verdicts": [
-                      {k: self.anon.text(v) if k in ("hypothesis", "reason") else v
-                       for k, v in rec.items()}
-                      for rec in self.verdicts]}
+        verdicts_path.write_text(json.dumps(self.verdicts, indent=2), encoding="utf-8")
+        report = {
+            "variant": variant,
+            "round": round_n,
+            "n_verdicts": len(self.verdicts),
+            "verdicts": [
+                {
+                    k: self.anon.text(v) if k in ("hypothesis", "reason") else v
+                    for k, v in rec.items()
+                }
+                for rec in self.verdicts
+            ],
+        }
         sentinel_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
         return verdicts_path, sentinel_path
 
@@ -443,34 +596,56 @@ def main() -> int:
     cfg_preview = load_config()
     add_common_arguments(parser, config=cfg_preview)
     anonymize.add_arguments(parser)
-    parser.add_argument("--await-timeout", type=float, default=300.0,
-                        help="seconds to wait for the attack brief")
-    parser.add_argument("--strategy", default=cfg_preview.default_partition_strategy,
-                        choices=list(cfg_preview.partition_strategies))
+    parser.add_argument(
+        "--await-timeout",
+        type=float,
+        default=300.0,
+        help="seconds to wait for the attack brief",
+    )
+    parser.add_argument(
+        "--strategy",
+        default=cfg_preview.default_partition_strategy,
+        choices=list(cfg_preview.partition_strategies),
+    )
     parser.add_argument("--bootstrap-iterations", type=int, default=2000)
-    parser.add_argument("--tolerance", type=float, default=None,
-                        help="override overfit tolerance (pp)")
-    parser.add_argument("--challenges", default=None,
-                        help="comma subset of scoring,selection,remedy,"
-                             "sparsity,duplicates")
+    parser.add_argument(
+        "--tolerance", type=float, default=None, help="override overfit tolerance (pp)"
+    )
+    parser.add_argument(
+        "--challenges",
+        default=None,
+        help="comma subset of scoring,selection,remedy,sparsity,duplicates",
+    )
     parser.add_argument("--explain", action="store_true")
     args = parser.parse_args()
 
     cfg = load_config(args.profile)
     base = resolve_base(cfg, args.base)
-    anon = anonymize.from_args(args, root=cfg.root,
-                           extra_terms=[cfg.profile_id, cfg.display_name])
+    anon = anonymize.from_args(
+        args, root=cfg.root, extra_terms=[cfg.profile_id, cfg.display_name]
+    )
 
-    variants = (cfg.variant_order if args.variants in (None, "all")
-                else [v.strip() for v in args.variants.split(",")])
+    variants = (
+        cfg.variant_order
+        if args.variants in (None, "all")
+        else [v.strip() for v in args.variants.split(",")]
+    )
     rounds = list(range(1, (args.rounds or cfg.default_rounds) + 1))
 
-    challenges = (args.challenges.split(",") if args.challenges
-                  else ["scoring", "selection", "remedy", "sparsity", "duplicates"])
+    challenges = (
+        args.challenges.split(",")
+        if args.challenges
+        else ["scoring", "selection", "remedy", "sparsity", "duplicates"]
+    )
 
-    verifier = Verifier(cfg, base, anon,
-                        iterations=args.bootstrap_iterations,
-                        tolerance=args.tolerance, challenges=challenges)
+    verifier = Verifier(
+        cfg,
+        base,
+        anon,
+        iterations=args.bootstrap_iterations,
+        tolerance=args.tolerance,
+        challenges=challenges,
+    )
     timeout = 0.0 if args.skip_live else args.await_timeout
     summary = verifier.run(variants, rounds, timeout, args.poll_interval)
 
@@ -481,11 +656,16 @@ def main() -> int:
 
     if args.explain:
         for rec in verifier.verdicts:
-            print("[{:<10}] {} | {} -> {}".format(
-                rec["verdict"], rec["claim_id"], rec["source_colour"],
-                rec["reason"]))
-    print("BLACK: {} verdicts, {} non-confirmed, status={}".format(
-        len(verifier.verdicts), len(non_confirmed), summary["status"]))
+            print(
+                "[{:<10}] {} | {} -> {}".format(
+                    rec["verdict"], rec["claim_id"], rec["source_colour"], rec["reason"]
+                )
+            )
+    print(
+        "BLACK: {} verdicts, {} non-confirmed, status={}".format(
+            len(verifier.verdicts), len(non_confirmed), summary["status"]
+        )
+    )
     return 0
 
 

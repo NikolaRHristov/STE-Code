@@ -8,21 +8,21 @@ Required shape:
 
 # Adversarial benchmark run — analysis
 
-## Verdict            one paragraph: goals met, and what the run does/does not show
+## Verdict one paragraph: goals met, and what the run does/does not show
 
-## Provenance         MEASURED vs SIMULATED, stated before any adversarial figure
+## Provenance MEASURED vs SIMULATED, stated before any adversarial figure
 
-## Goals scorecard    markdown table: goal, wanted, observed, status, meaning
+## Goals scorecard markdown table: goal, wanted, observed, status, meaning
 
 ## What was established
 
 ## What was not established, and why
 
-## The five-colour loop   did BLACK genuinely challenge, or confirm by construction
+## The five-colour loop did BLACK genuinely challenge, or confirm by construction
 
-## Root causes        ordered by how many goals each unblocks
+## Root causes ordered by how many goals each unblocks
 
-## Next actions       numbered, each naming the goal it unblocks
+## Next actions numbered, each naming the goal it unblocks
 
 Rules: markdown tables for anything comparative. Ground every claim in a figure.
 Invent nothing. Never present a simulated number as a measurement.

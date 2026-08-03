@@ -10,6 +10,7 @@ is a markdown file where every entry is a `### <title>` block of
 Usage:  python3 md_to_json.py ste-code/extensions/verbs.md
         python3 md_to_json.py ste-code/extensions/        (all *.md)
 """
+
 import sys
 import re
 import json
@@ -53,8 +54,12 @@ def md_to_json(md_path: Path) -> Path:
         if not p.strip():
             continue
         # Skip a leading preamble before the first entry.
-        if "**type**:" not in p and "**definition**:" not in p and "**pattern**:" not in p \
-           and "**domain**:" not in p:
+        if (
+            "**type**:" not in p
+            and "**definition**:" not in p
+            and "**pattern**:" not in p
+            and "**domain**:" not in p
+        ):
             # Could still be an entry without those exact keys; but require a field line.
             if not re.search(r"^\s*-\s*\*\*", p, re.M):
                 continue
@@ -74,10 +79,14 @@ def main():
         files = sorted(target.glob("*.md"))
         for f in files:
             out = md_to_json(f)
-            print(f"  {f.name} -> {out.name} ({len(json.loads(out.read_text()))} entries)")
+            print(
+                f"  {f.name} -> {out.name} ({len(json.loads(out.read_text()))} entries)"
+            )
     else:
         out = md_to_json(target)
-        print(f"  {target.name} -> {out.name} ({len(json.loads(out.read_text()))} entries)")
+        print(
+            f"  {target.name} -> {out.name} ({len(json.loads(out.read_text()))} entries)"
+        )
 
 
 if __name__ == "__main__":

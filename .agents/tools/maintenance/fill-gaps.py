@@ -14,8 +14,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -24,12 +28,15 @@ from ste_io import mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 
 import sys as _sys
+
 _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import Templater
+
 TPL = Templater(__file__)
 
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
@@ -100,7 +107,7 @@ def main():
 
     # Group into batches of 4 files per worker
     batch_size = 4
-    batches = [gaps[i:i+batch_size] for i in range(0, len(gaps), batch_size)]
+    batches = [gaps[i : i + batch_size] for i in range(0, len(gaps), batch_size)]
 
     processes = []
     for i, batch in enumerate(batches):
@@ -117,7 +124,9 @@ def main():
 
         proc = launch_agent(prompt, agent=agent, model=CFG.model, cwd=PROJECT)
         processes.append((i + 1, proc))
-        print(f"Launched batch {i+1}/{len(batches)} ({len(batch)} files, PID {proc.pid})")
+        print(
+            f"Launched batch {i + 1}/{len(batches)} ({len(batch)} files, PID {proc.pid})"
+        )
 
     print(f"\nWaiting for {len(processes)} gap-filler workers...")
     for batch_num, proc in processes:

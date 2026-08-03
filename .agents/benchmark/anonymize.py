@@ -24,6 +24,7 @@ Pseudonyms are deterministic: the same input maps to the same alias for a given
 salt, so two anonymized reports of the same run remain diffable and joinable.
 Without the salt the mapping is not reversible.
 """
+
 from __future__ import annotations
 
 import getpass
@@ -38,30 +39,43 @@ DEFAULT_SALT = "harness"
 
 
 def _alias(value: str, prefix: str, salt: str, width: int = 4) -> str:
-    digest = hashlib.blake2s(f"{salt}:{value}".encode("utf-8"), digest_size=8).hexdigest()
+    digest = hashlib.blake2s(
+        f"{salt}:{value}".encode("utf-8"), digest_size=8
+    ).hexdigest()
     return f"{prefix}-{digest[:width]}"
 
 
 class Anonymizer:
     """Redacts identity from strings and JSON-like structures."""
 
-    def __init__(self, level: str = "paths", *, root: "Path | None" = None,
-                 salt: str = DEFAULT_SALT, extra_terms: "list[str] | None" = None) -> None:
+    def __init__(
+        self,
+        level: str = "paths",
+        *,
+        root: "Path | None" = None,
+        salt: str = DEFAULT_SALT,
+        extra_terms: "list[str] | None" = None,
+    ) -> None:
         if level not in LEVELS:
-            raise ValueError(f"unknown anonymization level {level!r}; expected one of {LEVELS}")
+            raise ValueError(
+                f"unknown anonymization level {level!r}; expected one of {LEVELS}"
+            )
         self.level = level
         self.root = Path(root).resolve() if root else None
         self.salt = salt
         self._cache: "dict[str, str]" = {}
 
         terms = []
-        for candidate in (extra_terms or []):
+        for candidate in extra_terms or []:
             if candidate:
                 terms.append(str(candidate))
         # Machine identity. Collected defensively: any of these may fail in a
         # sandbox, and a failure must not disable redaction of the others.
-        for getter in (lambda: getpass.getuser(), lambda: socket.gethostname(),
-                       lambda: os.uname().nodename):
+        for getter in (
+            lambda: getpass.getuser(),
+            lambda: socket.gethostname(),
+            lambda: os.uname().nodename,
+        ):
             try:
                 value = getter()
             except Exception:
@@ -94,7 +108,7 @@ class Anonymizer:
                 pass
         home = str(Path.home())
         if text.startswith(home):
-            text = "~" + text[len(home):]
+            text = "~" + text[len(home) :]
         return self.text(text)
 
     def text(self, value: str) -> str:
@@ -106,8 +120,11 @@ class Anonymizer:
             if term in out:
                 out = out.replace(term, _alias(term, "x", self.salt))
         # Any surviving absolute path is collapsed to its final component.
-        out = re.sub(r"(/Users/|/home/|/Volumes/)[^\s'\"]+",
-                     lambda m: ".../" + m.group(0).rstrip("/").rsplit("/", 1)[-1], out)
+        out = re.sub(
+            r"(/Users/|/home/|/Volumes/)[^\s'\"]+",
+            lambda m: ".../" + m.group(0).rstrip("/").rsplit("/", 1)[-1],
+            out,
+        )
         return out
 
     def label(self, value: str, prefix: str = "label") -> str:
@@ -143,7 +160,8 @@ class Anonymizer:
             if self.level == "full":
                 profile["id"] = self.label(str(profile.get("id", "")), "profile")
                 profile["display_name"] = self.label(
-                    str(profile.get("display_name", "")), "corpus")
+                    str(profile.get("display_name", "")), "corpus"
+                )
         if "base" in doc:
             doc["base"] = self.path(doc["base"])
         # Filesystem identity is redacted at every active level, not just 'full'.
@@ -168,17 +186,28 @@ class Anonymizer:
 
 def add_arguments(parser) -> None:
     """Attach the shared anonymization flags to a CLI parser."""
-    parser.add_argument("--anonymize", choices=LEVELS, default="paths",
-                        help="redaction level for emitted reports (default: paths)")
-    parser.add_argument("--anonymize-salt", default=DEFAULT_SALT,
-                        help="salt for deterministic pseudonyms; change to break linkability")
+    parser.add_argument(
+        "--anonymize",
+        choices=LEVELS,
+        default="paths",
+        help="redaction level for emitted reports (default: paths)",
+    )
+    parser.add_argument(
+        "--anonymize-salt",
+        default=DEFAULT_SALT,
+        help="salt for deterministic pseudonyms; change to break linkability",
+    )
 
 
-def from_args(args, root: "Path | None" = None,
-              extra_terms: "list[str] | None" = None) -> Anonymizer:
-    return Anonymizer(getattr(args, "anonymize", "paths"), root=root,
-                      salt=getattr(args, "anonymize_salt", DEFAULT_SALT),
-                      extra_terms=extra_terms)
+def from_args(
+    args, root: "Path | None" = None, extra_terms: "list[str] | None" = None
+) -> Anonymizer:
+    return Anonymizer(
+        getattr(args, "anonymize", "paths"),
+        root=root,
+        salt=getattr(args, "anonymize_salt", DEFAULT_SALT),
+        extra_terms=extra_terms,
+    )
 
 
 if __name__ == "__main__":
@@ -187,12 +216,21 @@ if __name__ == "__main__":
 
     root = Path(sys.argv[1]) if len(sys.argv) > 1 else Path.cwd()
     sample = {
-        "profile": {"id": "corpus-x", "display_name": "Corpus X",
-                    "source": str(root / "config" / "harness.json")},
+        "profile": {
+            "id": "corpus-x",
+            "display_name": "Corpus X",
+            "source": str(root / "config" / "harness.json"),
+        },
         "base": str(root / "results" / "redblue"),
         "variants": ["0", "1"],
-        "variant_ranking": [{"variant": "0", "label": "baseline", "directory": "level0",
-                             "total_escapes": 12}],
+        "variant_ranking": [
+            {
+                "variant": "0",
+                "label": "baseline",
+                "directory": "level0",
+                "total_escapes": 12,
+            }
+        ],
         "timelines": {"0": [{"round": 1, "escapes": 12}]},
         "coverage": {"missing": [str(root / "results" / "redblue" / "v0")]},
     }

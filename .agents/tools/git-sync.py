@@ -16,7 +16,9 @@ Design per project convention:
 
 Run via Hermes cronjob (every 8m) OR as a long-lived background process.
 """
+
 import subprocess, time, sys, os
+
 
 def _repo_root():
     """Resolve the repo root without hardcoding any local path."""
@@ -32,25 +34,33 @@ def _repo_root():
         cur = parent
     # fallback: ask git
     try:
-        out = subprocess.run(["git", "rev-parse", "--show-toplevel"],
-                             capture_output=True, text=True, cwd=here)
+        out = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            text=True,
+            cwd=here,
+        )
         if out.returncode == 0 and out.stdout.strip():
             return out.stdout.strip()
     except Exception:
         pass
     return here
 
+
 REPO = _repo_root()
 BRANCH = "Current"
 REMOTE = "origin"
 INTERVAL = 480  # seconds (8 min)
 
+
 def run(cmd, check=True):
     r = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
     return r.returncode, r.stdout.strip(), r.stderr.strip()
 
+
 def safe_git(args):
     return run(["git"] + args)
+
 
 def sync_once():
     log = []
@@ -59,7 +69,9 @@ def sync_once():
     if rc != 0:
         return f"[sync] fetch FAILED: {err}"
     # 2. status of local vs remote
-    rc, out, err = safe_git(["rev-list", "--left-right", "--count", f"{REMOTE}/{BRANCH}...{BRANCH}"])
+    rc, out, err = safe_git(
+        ["rev-list", "--left-right", "--count", f"{REMOTE}/{BRANCH}...{BRANCH}"]
+    )
     if rc != 0:
         return f"[sync] rev-list FAILED: {err}"
     behind, ahead = (out.split() + ["0", "0"])[:2]
@@ -70,8 +82,10 @@ def sync_once():
         log.append(f"pulled {behind} commit(s): {out or err}")
     elif behind > 0 and ahead > 0:
         # diverged — do NOT force; report and wait for human
-        return (f"[sync] DIVERGED behind={behind} ahead={ahead} — "
-                f"not auto-merging. Run manually: git pull --rebase")
+        return (
+            f"[sync] DIVERGED behind={behind} ahead={ahead} — "
+            f"not auto-merging. Run manually: git pull --rebase"
+        )
     # 4. push committed work
     if ahead > 0:
         rc, out, err = safe_git(["push", REMOTE, BRANCH])
@@ -82,6 +96,7 @@ def sync_once():
     if not log:
         return f"[sync] ok — in sync (behind={behind}, ahead={ahead})"
     return "[sync] " + "; ".join(log)
+
 
 def main():
     one_shot = "--once" in sys.argv
@@ -96,6 +111,7 @@ def main():
         except Exception as e:
             print(time.strftime("%Y-%m-%d %H:%M") + f" [sync] ERROR: {e}")
         time.sleep(INTERVAL)
+
 
 if __name__ == "__main__":
     main()

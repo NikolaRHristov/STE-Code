@@ -11,6 +11,7 @@ Deterministic checks (no LLM):
 
 Exit 0 = PASS.
 """
+
 import sys
 import json
 from pathlib import Path
@@ -18,8 +19,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -27,15 +32,27 @@ PROJECT = _repo_root(__file__)
 FINAL = PROJECT / "ste-code" / "final"
 REFERENCE = PROJECT / ".agents" / "reference"
 
-EXPECTED_EXT = {"verbs", "adjectives", "nouns", "verb-examples", "anti-patterns", "domains"}
+EXPECTED_EXT = {
+    "verbs",
+    "adjectives",
+    "nouns",
+    "verb-examples",
+    "anti-patterns",
+    "domains",
+}
 
 
 def main():
     problems = []
     if not FINAL.exists():
-        print("verify-final-assembly: ste-code/final/ missing"); sys.exit(1)
+        print("verify-final-assembly: ste-code/final/ missing")
+        sys.exit(1)
 
-    rules = sorted((FINAL / "rules").glob("a-sec*-rule*.md")) if (FINAL / "rules").exists() else []
+    rules = (
+        sorted((FINAL / "rules").glob("a-sec*-rule*.md"))
+        if (FINAL / "rules").exists()
+        else []
+    )
     if len(rules) < 50:
         problems.append(f"Gate1: only {len(rules)} rule files (<50)")
     if not (FINAL / "rules" / "a-categories.md").exists():
@@ -55,8 +72,13 @@ def main():
     if not cat.exists():
         problems.append("Gate3: reference-catalogue.md missing")
     else:
-        rows = len([l for l in cat.read_text(encoding="utf-8", errors="ignore").splitlines()
-                    if l.strip().startswith("|") and "http" in l])
+        rows = len(
+            [
+                l
+                for l in cat.read_text(encoding="utf-8", errors="ignore").splitlines()
+                if l.strip().startswith("|") and "http" in l
+            ]
+        )
         if rows < 15:
             problems.append(f"Gate3: catalogue lists {rows} refs (<15)")
 
@@ -68,8 +90,10 @@ def main():
     # NOTE: content fabrication (TODO/TBD/???) is gated by verify_final.py Gate4 on
     # the rule files (fab=0 there). The assembly verifier checks structure only.
 
-    print(f"verify-final-assembly: rules={len(rules)} extensions={sorted(ext)} "
-          f"catalogue_rows={rows}")
+    print(
+        f"verify-final-assembly: rules={len(rules)} extensions={sorted(ext)} "
+        f"catalogue_rows={rows}"
+    )
     if problems:
         print(f"FAIL — {len(problems)} problem(s):")
         for p in problems:

@@ -40,7 +40,11 @@ LLM_ENABLED = os.environ.get("PRIVACY_LLM_CLASSIFY") == "1"
 
 
 def _profile() -> str:
-    return os.getenv("HERMES_PROFILE") or os.getenv("HERMES_ACTIVE_PROFILE") or "dev-ste-code"
+    return (
+        os.getenv("HERMES_PROFILE")
+        or os.getenv("HERMES_ACTIVE_PROFILE")
+        or "dev-ste-code"
+    )
 
 
 def _alert_log_path() -> Path:
@@ -108,6 +112,7 @@ def classify_private(text: str) -> Optional[bool]:
 # Backward-chain alert: append to a log the PARENT polls (child never sees it)
 # ---------------------------------------------------------------------------
 
+
 def write_alert(tool_name: str, reason: str, snippet: str, tier: str) -> None:
     """Append an out-of-band privacy alert the orchestrator agent can poll.
 
@@ -121,7 +126,7 @@ def write_alert(tool_name: str, reason: str, snippet: str, tier: str) -> None:
             "ts": time.time(),
             "profile": _profile(),
             "tool": tool_name,
-            "tier": tier,            # "regex" or "llm"
+            "tier": tier,  # "regex" or "llm"
             "reason": reason,
             "snippet": snippet[:200],
         }

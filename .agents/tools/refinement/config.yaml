@@ -33,7 +33,7 @@ format:
     # Refiner marks retained source spans; the grouper reads these back.
     mark_open: "<mark>"
     mark_close: "</mark>"
-    markup_tag_re: '</?[a-zA-Z][^>]*>'
+    markup_tag_re: "</?[a-zA-Z][^>]*>"
 
 # ── Gates and magic numbers ─────────────────────────────────────────────────
 thresholds:

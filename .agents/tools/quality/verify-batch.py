@@ -22,8 +22,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -97,13 +101,17 @@ def verify_worker(worker_num: int, mapping: dict) -> dict:
                 for j in range(prev_idx - 1, max(-1, prev_idx - 20), -1):
                     if lines[j].strip().startswith("|"):
                         cells = lines[j].strip().strip("|").split("|")
-                        if all(re.fullmatch(r":?-{3,}:?", c.strip()) for c in cells if c.strip()):
+                        if all(
+                            re.fullmatch(r":?-{3,}:?", c.strip())
+                            for c in cells
+                            if c.strip()
+                        ):
                             header_cols = len(cells)
                             break
                 row_cols = len(lines[prev_idx].strip().strip("|").split("|"))
                 if header_cols and row_cols != header_cols:
                     result["table_intact"] = False
-                    result["detail"] = f"table column mismatch at page break L{i+1}"
+                    result["detail"] = f"table column mismatch at page break L{i + 1}"
                     return result
 
     result["status"] = "PASS"
@@ -137,10 +145,16 @@ def main():
     passed = sum(1 for r in results if r["status"] == "PASS")
 
     if args.json:
-        print(json.dumps({"total": len(results), "passed": passed, "results": results}, indent=2))
+        print(
+            json.dumps(
+                {"total": len(results), "passed": passed, "results": results}, indent=2
+            )
+        )
     else:
         for r in results:
-            print(f"W{r['worker']:03d} ({r['pages']}): {r['status']} — {r.get('detail', '')}")
+            print(
+                f"W{r['worker']:03d} ({r['pages']}): {r['status']} — {r.get('detail', '')}"
+            )
         print(f"\n{passed}/{len(results)} passed")
 
     sys.exit(0 if passed == len(results) else 1)

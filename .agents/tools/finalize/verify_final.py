@@ -13,22 +13,40 @@ baseline:
 
 Exit 0 = PASS.
 """
+
 import sys
 from pathlib import Path
 
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 FINAL_DIR = PROJECT / "ste-code" / "final"
 
-AERO = ["aircraft", "landing gear", "fuselage", "APU", "ECS", "ATA chapter",
-        "lockwire", "avionics", "aileron", "rudder", "propeller", "thrust", "altimeter"]
+AERO = [
+    "aircraft",
+    "landing gear",
+    "fuselage",
+    "APU",
+    "ECS",
+    "ATA chapter",
+    "lockwire",
+    "avionics",
+    "aileron",
+    "rudder",
+    "propeller",
+    "thrust",
+    "altimeter",
+]
 SYN = ["utilize", "leverage", "employ", "commence", "terminate"]
 
 
@@ -38,10 +56,12 @@ import re
 def _adapted_prose(t):
     p = t.split("## Original Rule")
     b = p[0] if len(p) == 1 else "".join(p[1:])
-    for pat in [r"(?m)^\s*>.*Non-STE:.*(?:\n\s*>.*)*",
-                r"(?m)^\s*>.*STE:.*(?:\n\s*>.*)*",
-                r"(?m)^\s*>.*Do not write:.*(?:\n\s*>.*)*",
-                r"(?m)^\s*>.*WRITE:.*(?:\n\s*>.*)*"]:
+    for pat in [
+        r"(?m)^\s*>.*Non-STE:.*(?:\n\s*>.*)*",
+        r"(?m)^\s*>.*STE:.*(?:\n\s*>.*)*",
+        r"(?m)^\s*>.*Do not write:.*(?:\n\s*>.*)*",
+        r"(?m)^\s*>.*WRITE:.*(?:\n\s*>.*)*",
+    ]:
         b = re.sub(pat, "", b)
     return b
 
@@ -49,11 +69,15 @@ def _adapted_prose(t):
 def _is_mapping(b, pos):
     ls = b.rfind("\n", 0, pos) + 1
     le = b.find("\n", pos)
-    line = b[ls:le if le != -1 else len(b)]
-    pre = line[:pos - ls]
-    block = b[max(0, ls - 200):le if le != -1 else len(b)]
+    line = b[ls : le if le != -1 else len(b)]
+    pre = line[: pos - ls]
+    block = b[max(0, ls - 200) : le if le != -1 else len(b)]
     # Legitimate teaching / mapping content — not a domain-forgetting leak:
-    if "### Original" in block or "**Original:**" in block or "**Code-domain:**" in block:
+    if (
+        "### Original" in block
+        or "**Original:**" in block
+        or "**Code-domain:**" in block
+    ):
         return True
     if "**STE-Code Dictionary**" in block or "Synonym Table" in block:
         return True
@@ -64,15 +88,19 @@ def _is_mapping(b, pos):
     if "-ize " in block or "-ise " in block or "American English" in block:
         return True
     # synonym-table style: "use (not utilize, leverage, employ)" or "start (not initiate, commence)"
-    if re.search(r"\(not\s+(utilize|leverage|employ|commence|terminate|initiate|bootstrap)\b", block, re.I):
+    if re.search(
+        r"\(not\s+(utilize|leverage|employ|commence|terminate|initiate|bootstrap)\b",
+        block,
+        re.I,
+    ):
         return True
-    if "`" in pre and "`" not in pre[pre.rfind("`"):]:
+    if "`" in pre and "`" not in pre[pre.rfind("`") :]:
         return True
     if pre.count('"') % 2 == 1:
         return True
     if re.search(r"\b(not|do not use|avoid)\s*$", pre, re.I):
         return True
-    if pre.rfind("(") != -1 and ")" not in pre[pre.rfind("("):]:
+    if pre.rfind("(") != -1 and ")" not in pre[pre.rfind("(") :]:
         return True
     if "|" in line:
         return True
@@ -108,7 +136,9 @@ def main():
         if "Adapted from spec pair" in t:
             trace += 1
         b = _adapted_prose(t)
-        if re.search(r"(?m)>\s*\*\*(?:Non-STE|STE|WRITE|Do not write):\*\*\s*\.\.\.", b):
+        if re.search(
+            r"(?m)>\s*\*\*(?:Non-STE|STE|WRITE|Do not write):\*\*\s*\.\.\.", b
+        ):
             dots += 1
         for term in AERO + SYN:
             for m in re.finditer(r"\b" + re.escape(term) + r"\b", b, re.I):
@@ -119,10 +149,14 @@ def main():
     if see_also < 22:
         # SOFT: cross-references are a creative enrichment hint, not a hard gate.
         # A creative final may phrase cross-links differently; never block on it.
-        print(f"  [soft] cross-refs in {see_also} files (<22 v1.0.0 baseline) — informational only")
+        print(
+            f"  [soft] cross-refs in {see_also} files (<22 v1.0.0 baseline) — informational only"
+        )
     if trace < 29:
         # SOFT: traceability is an enrichment hint, not a hard gate.
-        print(f"  [soft] traceability in {trace} files (<29 v1.0.0 baseline) — informational only")
+        print(
+            f"  [soft] traceability in {trace} files (<29 v1.0.0 baseline) — informational only"
+        )
     if fab:
         problems.append(f"Gate4: {fab} files with fabrication markers")
     if leaks:
@@ -130,8 +164,10 @@ def main():
     if dots:
         problems.append(f"Gate6: {dots} unflagged '...' examples")
 
-    print(f"verify-final over {len(files)} rule files: see_also={see_also} trace={trace} "
-          f"fab={fab} leaks={leaks} dots={dots}")
+    print(
+        f"verify-final over {len(files)} rule files: see_also={see_also} trace={trace} "
+        f"fab={fab} leaks={leaks} dots={dots}"
+    )
     if problems:
         print(f"FAIL — {len(problems)} problem(s):")
         for p in problems:

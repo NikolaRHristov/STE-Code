@@ -13,6 +13,7 @@ Usage:
   python3 phase-f-run.py --dry-run       # plan only
   python3 phase-f-run.py --verify        # run verify-artifacts.py only
 """
+
 import os
 import sys
 from pathlib import Path
@@ -20,8 +21,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -30,6 +35,7 @@ from ste_paths import venv_python  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 ARTIFACT_BATCH = PROJECT / ".agents" / "tools" / "artifacts" / "artifact_batch.py"
 VENV = str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "python3")
@@ -39,8 +45,10 @@ def main():
     args = sys.argv[1:]
     cmd = [VENV, str(ARTIFACT_BATCH), *args]
     env = {**os.environ, "STE_MODEL": CFG.model}
-    sys.stdout.write("Phase F (artifacts) is assembled by artifact_batch.py.\n"
-                     "Launching: " + " ".join(cmd) + "\n")
+    sys.stdout.write(
+        "Phase F (artifacts) is assembled by artifact_batch.py.\n"
+        "Launching: " + " ".join(cmd) + "\n"
+    )
     sys.stdout.flush()
     os.execvpe(VENV, cmd, env)
 

@@ -13,8 +13,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -23,13 +27,16 @@ from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
 
 import sys as _sys
+
 _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import Templater
+
 TPL = Templater(__file__)
 
 TMP_DIR = PROJECT / ".agents" / "tmp" / "sweep"
@@ -79,7 +86,7 @@ def main():
     all_files = sorted(set(f for f in all_files if f.exists() and f.is_file()))
 
     print(f"Files to sweep: {len(all_files)}")
-    print(f"Batches: {num_batches} (~{len(all_files)//num_batches} files each)")
+    print(f"Batches: {num_batches} (~{len(all_files) // num_batches} files each)")
 
     # Divide into batches
     batch_size = max(1, len(all_files) // num_batches)
@@ -90,7 +97,7 @@ def main():
         batches.append(all_files[start:end])
 
     for i, batch in enumerate(batches):
-        print(f"  Batch {i+1}: {len(batch)} files")
+        print(f"  Batch {i + 1}: {len(batch)} files")
 
     if dry_run:
         print("\nDry run complete. Use without --dry-run to execute.")
@@ -104,7 +111,7 @@ def main():
         prompt = build_worker_prompt(batch, i + 1, num_batches)
         proc = launch_agent(prompt, agent=agent, model=CFG.model, cwd=PROJECT)
         processes.append((i + 1, proc))
-        print(f"Launched batch {i+1}/{num_batches} (PID {proc.pid})")
+        print(f"Launched batch {i + 1}/{num_batches} (PID {proc.pid})")
 
     # Wait for all and collect results
     print(f"\nWaiting for {len(processes)} batches...")

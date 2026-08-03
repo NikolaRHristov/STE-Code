@@ -20,6 +20,7 @@ builtin `hash()` (PYTHONHASHSEED-salted, so it differs per process). The same
 corpus and seed therefore produce byte-identical arms on any machine, which is
 what makes a split reproducible without storing it.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -39,8 +40,9 @@ ALPHA = 0.05
 
 def _stable_bits(value: str, seed: int) -> int:
     """A reproducible integer for a case id. blake2s, not hash()."""
-    digest = hashlib.blake2s("{}:{}".format(seed, value).encode("utf-8"),
-                             digest_size=8).digest()
+    digest = hashlib.blake2s(
+        "{}:{}".format(seed, value).encode("utf-8"), digest_size=8
+    ).digest()
     return int.from_bytes(digest, "big")
 
 
@@ -58,8 +60,9 @@ def _axis(case: dict, axis: str) -> str:
 class Partition:
     """Two arms plus the evidence that the split did not distort the corpus."""
 
-    def __init__(self, strategy: str, seed: int, arm_a: list, arm_b: list,
-                 note: str = "") -> None:
+    def __init__(
+        self, strategy: str, seed: int, arm_a: list, arm_b: list, note: str = ""
+    ) -> None:
         self.strategy = strategy
         self.seed = seed
         self.arm_a = arm_a
@@ -88,8 +91,7 @@ class Partition:
                 in_b = sum(1 for c in self.arm_b if _axis(c, axis) == key)
                 total = in_a + in_b
                 share_a = (in_a / total * 100) if total else 0.0
-                rows[key] = {"a": in_a, "b": in_b,
-                             "a_share_pct": round(share_a, 1)}
+                rows[key] = {"a": in_a, "b": in_b, "a_share_pct": round(share_a, 1)}
                 worst = max(worst, abs(share_a - 50.0))
             report[axis] = {"cells": rows, "max_skew_pct": round(worst, 1)}
         return report
@@ -104,13 +106,19 @@ class Partition:
         return out
 
     def as_dict(self) -> dict:
-        return {"strategy": self.strategy, "seed": self.seed,
-                "size_a": len(self.arm_a), "size_b": len(self.arm_b),
-                "balance": self.balance, "degenerate_axes": self.degenerate(),
-                "note": self.note}
+        return {
+            "strategy": self.strategy,
+            "seed": self.seed,
+            "size_a": len(self.arm_a),
+            "size_b": len(self.arm_b),
+            "balance": self.balance,
+            "degenerate_axes": self.degenerate(),
+            "note": self.note,
+        }
 
 
 # ------------------------------------------------------------- partitioners
+
 
 def _split_random(cases: list, seed: int) -> tuple:
     a, b = [], []
@@ -130,7 +138,9 @@ def _split_stratified(cases: list, seed: int) -> tuple:
     cells: "dict[tuple, list]" = {}
     for index, case in enumerate(cases):
         key = (_axis(case, "technique"), _axis(case, "placement"))
-        cells.setdefault(key, []).append((_stable_bits(_case_id(case, index), seed), case))
+        cells.setdefault(key, []).append(
+            (_stable_bits(_case_id(case, index), seed), case)
+        )
     a, b = [], []
     for key in sorted(cells):
         ordered = [case for _, case in sorted(cells[key], key=lambda pair: pair[0])]
@@ -193,11 +203,15 @@ _STRATEGIES = {
 def partition(cases: list, strategy: str, cfg, seed: "int | None" = None) -> Partition:
     """Split a corpus into a derivation arm and a verification arm."""
     if strategy not in cfg.partition_strategies:
-        raise ValueError("unknown strategy {!r}; declared strategies are {}"
-                         .format(strategy, list(cfg.partition_strategies)))
+        raise ValueError(
+            "unknown strategy {!r}; declared strategies are {}".format(
+                strategy, list(cfg.partition_strategies)
+            )
+        )
     if strategy not in _STRATEGIES:
-        raise ValueError("strategy {!r} is declared in config but not implemented"
-                         .format(strategy))
+        raise ValueError(
+            "strategy {!r} is declared in config but not implemented".format(strategy)
+        )
     use_seed = cfg.split_seed if seed is None else int(seed)
     arm_a, arm_b, note = _STRATEGIES[strategy](list(cases), use_seed)
     return Partition(strategy, use_seed, arm_a, arm_b, note)
@@ -205,12 +219,14 @@ def partition(cases: list, strategy: str, cfg, seed: "int | None" = None) -> Par
 
 # ---------------------------------------------------------------- statistics
 
+
 def _mean(values: list) -> float:
     return sum(float(v) for v in values) / len(values) if values else 0.0
 
 
-def permutation_p(sample_a: list, sample_b: list, seed: int,
-                  iterations: int = DEFAULT_ITERATIONS) -> float:
+def permutation_p(
+    sample_a: list, sample_b: list, seed: int, iterations: int = DEFAULT_ITERATIONS
+) -> float:
     """Two-sided permutation test on the difference of means.
 
     Chosen over a t-test because outcomes here are pass/fail indicators and
@@ -237,8 +253,9 @@ def permutation_p(sample_a: list, sample_b: list, seed: int,
     return (hits + 1) / (iterations + 1)
 
 
-def bootstrap_ci(sample: list, seed: int, iterations: int = DEFAULT_ITERATIONS,
-                 alpha: float = ALPHA) -> tuple:
+def bootstrap_ci(
+    sample: list, seed: int, iterations: int = DEFAULT_ITERATIONS, alpha: float = ALPHA
+) -> tuple:
     """Percentile bootstrap interval for the mean. Empty sample -> (0, 0)."""
     if not sample:
         return (0.0, 0.0)
@@ -257,8 +274,9 @@ def bootstrap_ci(sample: list, seed: int, iterations: int = DEFAULT_ITERATIONS,
 class Effect:
     """The measured comparison between the two arms, in percentage points."""
 
-    def __init__(self, arm_a: list, arm_b: list, cfg,
-                 iterations: int = DEFAULT_ITERATIONS) -> None:
+    def __init__(
+        self, arm_a: list, arm_b: list, cfg, iterations: int = DEFAULT_ITERATIONS
+    ) -> None:
         self.n_a = len(arm_a)
         self.n_b = len(arm_b)
         self.mean_a_pct = round(_mean(arm_a) * 100, 2)
@@ -271,41 +289,58 @@ class Effect:
         self.ci_b = bootstrap_ci(arm_b, cfg.split_seed + 1, iterations)
 
     def as_dict(self) -> dict:
-        return {"n_a": self.n_a, "n_b": self.n_b,
-                "mean_a_pct": self.mean_a_pct, "mean_b_pct": self.mean_b_pct,
-                "delta_pct": self.delta_pct, "gap_pct": self.gap_pct,
-                "p_value": self.p_value, "ci_a_pct": list(self.ci_a),
-                "ci_b_pct": list(self.ci_b), "iterations": self.iterations}
+        return {
+            "n_a": self.n_a,
+            "n_b": self.n_b,
+            "mean_a_pct": self.mean_a_pct,
+            "mean_b_pct": self.mean_b_pct,
+            "delta_pct": self.delta_pct,
+            "gap_pct": self.gap_pct,
+            "p_value": self.p_value,
+            "ci_a_pct": list(self.ci_a),
+            "ci_b_pct": list(self.ci_b),
+            "iterations": self.iterations,
+        }
 
 
 # ------------------------------------------------------------ decision table
 
+
 def _rule_underpowered(eff: Effect, cfg) -> "str | None":
     if eff.n_a < cfg.min_arm_size or eff.n_b < cfg.min_arm_size:
-        return ("arm sizes {}/{} below the floor of {}; too few observations to "
-                "support any claim".format(eff.n_a, eff.n_b, cfg.min_arm_size))
+        return (
+            "arm sizes {}/{} below the floor of {}; too few observations to "
+            "support any claim".format(eff.n_a, eff.n_b, cfg.min_arm_size)
+        )
     return None
 
 
 def _rule_inflated(eff: Effect, cfg) -> "str | None":
     if eff.gap_pct > cfg.overfit_tolerance_pct and eff.mean_b_pct < eff.mean_a_pct:
-        return ("verification arm is {} pp weaker than the derivation arm "
-                "(tolerance {} pp); the result did not transfer"
-                .format(eff.gap_pct, cfg.overfit_tolerance_pct))
+        return (
+            "verification arm is {} pp weaker than the derivation arm "
+            "(tolerance {} pp); the result did not transfer".format(
+                eff.gap_pct, cfg.overfit_tolerance_pct
+            )
+        )
     return None
 
 
 def _rule_deflated(eff: Effect, cfg) -> "str | None":
     if eff.gap_pct > cfg.overfit_tolerance_pct and eff.mean_b_pct > eff.mean_a_pct:
-        return ("verification arm is {} pp stronger than the derivation arm; "
-                "the reported figure understates the effect".format(eff.gap_pct))
+        return (
+            "verification arm is {} pp stronger than the derivation arm; "
+            "the reported figure understates the effect".format(eff.gap_pct)
+        )
     return None
 
 
 def _rule_unsound(eff: Effect, cfg) -> "str | None":
     if eff.p_value > ALPHA and eff.gap_pct > 0.0:
-        return ("arms differ by {} pp but p={} exceeds {}; the difference is "
-                "indistinguishable from chance".format(eff.gap_pct, eff.p_value, ALPHA))
+        return (
+            "arms differ by {} pp but p={} exceeds {}; the difference is "
+            "indistinguishable from chance".format(eff.gap_pct, eff.p_value, ALPHA)
+        )
     return None
 
 
@@ -320,8 +355,14 @@ DECISION_TABLE = (
 
 
 class Verdict:
-    def __init__(self, kind: str, reason: str, effect: Effect,
-                 partition_info: dict, corrected_estimate: "float | None" = None) -> None:
+    def __init__(
+        self,
+        kind: str,
+        reason: str,
+        effect: Effect,
+        partition_info: dict,
+        corrected_estimate: "float | None" = None,
+    ) -> None:
         self.kind = kind
         self.reason = reason
         self.effect = effect
@@ -329,13 +370,18 @@ class Verdict:
         self.corrected_estimate = corrected_estimate
 
     def as_dict(self) -> dict:
-        return {"verdict": self.kind, "reason": self.reason,
-                "corrected_estimate_pct": self.corrected_estimate,
-                "effect": self.effect.as_dict(), "partition": self.partition}
+        return {
+            "verdict": self.kind,
+            "reason": self.reason,
+            "corrected_estimate_pct": self.corrected_estimate,
+            "effect": self.effect.as_dict(),
+            "partition": self.partition,
+        }
 
     def __repr__(self) -> str:
         return "<Verdict {} gap={}pp p={}>".format(
-            self.kind, self.effect.gap_pct, self.effect.p_value)
+            self.kind, self.effect.gap_pct, self.effect.p_value
+        )
 
 
 def verdict(effect: Effect, cfg, partition_info: "dict | None" = None) -> Verdict:
@@ -344,32 +390,48 @@ def verdict(effect: Effect, cfg, partition_info: "dict | None" = None) -> Verdic
         reason = rule(effect, cfg)
         if reason is not None:
             if kind not in cfg.verdict_kinds:
-                raise ValueError("decision table produced {!r}, which is not a "
-                                 "declared verdict kind".format(kind))
+                raise ValueError(
+                    "decision table produced {!r}, which is not a "
+                    "declared verdict kind".format(kind)
+                )
             corrected = effect.mean_b_pct if kind in ("inflated", "deflated") else None
             return Verdict(kind, reason, effect, partition_info or {}, corrected)
-    return Verdict("confirmed",
-                   "effect holds on the untouched verification arm "
-                   "(gap {} pp within tolerance {} pp, p={})".format(
-                       effect.gap_pct, cfg.overfit_tolerance_pct, effect.p_value),
-                   effect, partition_info or {})
+    return Verdict(
+        "confirmed",
+        "effect holds on the untouched verification arm "
+        "(gap {} pp within tolerance {} pp, p={})".format(
+            effect.gap_pct, cfg.overfit_tolerance_pct, effect.p_value
+        ),
+        effect,
+        partition_info or {},
+    )
 
 
-def evaluate(cases: list, outcome_of, cfg, strategy: "str | None" = None,
-             seed: "int | None" = None,
-             iterations: int = DEFAULT_ITERATIONS) -> Verdict:
+def evaluate(
+    cases: list,
+    outcome_of,
+    cfg,
+    strategy: "str | None" = None,
+    seed: "int | None" = None,
+    iterations: int = DEFAULT_ITERATIONS,
+) -> Verdict:
     """Partition, measure, and rule on a claim in one call.
 
     `outcome_of` maps a case to a float in 0..1 (or a bool).
     """
     strat = strategy or cfg.default_partition_strategy
     split = partition(cases, strat, cfg, seed)
-    eff = Effect([float(outcome_of(c)) for c in split.arm_a],
-                 [float(outcome_of(c)) for c in split.arm_b], cfg, iterations)
+    eff = Effect(
+        [float(outcome_of(c)) for c in split.arm_a],
+        [float(outcome_of(c)) for c in split.arm_b],
+        cfg,
+        iterations,
+    )
     return verdict(eff, cfg, split.as_dict())
 
 
 # -------------------------------------------------------- planted-signal demo
+
 
 def _demo_cases() -> list:
     """A synthetic corpus with four deliberately planted signals.
@@ -400,22 +462,46 @@ def _demo_cases() -> list:
                         # R1 always works. R2 starts at 0.0; the planted overfit
                         # (below) lifts it only on the derivation-arm cases.
                         success = 1.0 if remedy == "R1" else 0.0
-                        cases.append({"id": "c{:04d}".format(cid),
-                                      "technique": technique, "placement": placement,
-                                      "variant": variant, "round": round_n,
-                                      "remedy": remedy, "success": success})
+                        cases.append(
+                            {
+                                "id": "c{:04d}".format(cid),
+                                "technique": technique,
+                                "placement": placement,
+                                "variant": variant,
+                                "round": round_n,
+                                "remedy": remedy,
+                                "success": success,
+                            }
+                        )
     # a degenerate cell for underpowered
     for i in range(2):
         cid += 1
-        cases.append({"id": "c{:04d}".format(cid), "technique": "rare",
-                      "placement": "last", "variant": "0", "round": 1,
-                      "remedy": "R1", "success": 0.0})
+        cases.append(
+            {
+                "id": "c{:04d}".format(cid),
+                "technique": "rare",
+                "placement": "last",
+                "variant": "0",
+                "round": 1,
+                "remedy": "R1",
+                "success": 0.0,
+            }
+        )
     # near-duplicates: four copies of one input
     for i in range(4):
         cid += 1
-        cases.append({"id": "c{:04d}".format(cid), "technique": "T0",
-                      "placement": "inner", "variant": "0", "round": 1,
-                      "remedy": "R1", "success": 1.0, "dup_of": "c0001"})
+        cases.append(
+            {
+                "id": "c{:04d}".format(cid),
+                "technique": "T0",
+                "placement": "inner",
+                "variant": "0",
+                "round": 1,
+                "remedy": "R1",
+                "success": 1.0,
+                "dup_of": "c0001",
+            }
+        )
 
     # Plant the overfit against the strategy the self-test evaluates R2 with.
     # Partition the R2 cases exactly as evaluate() will, then mark the
@@ -440,12 +526,20 @@ def _self_test() -> int:
     for strategy in cfg.partition_strategies:
         split = partition(cases, strategy, cfg)
         d = split.as_dict()
-        flag = (" [degenerate: {}]".format(", ".join(split.degenerate()))
-                if split.degenerate() else "")
-        print("  {:<18} A={:<3} B={:<3} max_skew={}%{}".format(
-            strategy, d["size_a"], d["size_b"],
-            max((v["max_skew_pct"] for v in d["balance"].values()), default=0),
-            flag))
+        flag = (
+            " [degenerate: {}]".format(", ".join(split.degenerate()))
+            if split.degenerate()
+            else ""
+        )
+        print(
+            "  {:<18} A={:<3} B={:<3} max_skew={}%{}".format(
+                strategy,
+                d["size_a"],
+                d["size_b"],
+                max((v["max_skew_pct"] for v in d["balance"].values()), default=0),
+                flag,
+            )
+        )
 
     # determinism: same seed -> identical arm membership
     a1 = [c["id"] for c in partition(cases, "random_half", cfg).arm_a]
@@ -455,20 +549,35 @@ def _self_test() -> int:
 
     print("\nplanted-signal verdicts:")
     # R1 confirmed everywhere
-    v_r1 = evaluate([c for c in cases if c["remedy"] == "R1"], lambda c: c["success"],
-                    cfg, strategy="stratified_half")
+    v_r1 = evaluate(
+        [c for c in cases if c["remedy"] == "R1"],
+        lambda c: c["success"],
+        cfg,
+        strategy="stratified_half",
+    )
     print("  R1 (real fix):    {}".format(v_r1.kind))
     assert v_r1.kind == "confirmed", v_r1
     # R2 inflated under a disjoint technique split
-    v_r2 = evaluate([c for c in cases if c["remedy"] == "R2"], lambda c: c["success"],
-                    cfg, strategy="technique_disjoint")
+    v_r2 = evaluate(
+        [c for c in cases if c["remedy"] == "R2"],
+        lambda c: c["success"],
+        cfg,
+        strategy="technique_disjoint",
+    )
     print("  R2 (overfit):     {}  gap={}pp".format(v_r2.kind, v_r2.effect.gap_pct))
     assert v_r2.kind == "inflated", v_r2
     # rare/last cell underpowered
-    v_rare = evaluate([c for c in cases if c["technique"] == "rare"],
-                      lambda c: c["success"], cfg, strategy="stratified_half")
-    print("  rare cell:        {}  (n={}/{})".format(
-        v_rare.kind, v_rare.effect.n_a, v_rare.effect.n_b))
+    v_rare = evaluate(
+        [c for c in cases if c["technique"] == "rare"],
+        lambda c: c["success"],
+        cfg,
+        strategy="stratified_half",
+    )
+    print(
+        "  rare cell:        {}  (n={}/{})".format(
+            v_rare.kind, v_rare.effect.n_a, v_rare.effect.n_b
+        )
+    )
     assert v_rare.kind == "underpowered", v_rare
     # deflated: construct an arm B that is stronger
     eff = Effect([0.4] * 20, [0.95] * 20, cfg)
@@ -485,13 +594,17 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Split-half A/B verification.")
     cfg_preview = load_config()
     add_common_arguments(parser, config=cfg_preview)
-    parser.add_argument("--strategy", default=cfg_preview.default_partition_strategy,
-                        choices=list(cfg_preview.partition_strategies))
+    parser.add_argument(
+        "--strategy",
+        default=cfg_preview.default_partition_strategy,
+        choices=list(cfg_preview.partition_strategies),
+    )
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--iterations", type=int, default=DEFAULT_ITERATIONS)
     parser.add_argument("--cases", default=None, help="path to a JSON list of cases")
-    parser.add_argument("--outcome", default="success",
-                        help="key holding each case's 0..1 outcome")
+    parser.add_argument(
+        "--outcome", default="success", help="key holding each case's 0..1 outcome"
+    )
     parser.add_argument("--min-arm-size", type=int, default=None)
     parser.add_argument("--tolerance", type=float, default=None)
     parser.add_argument("--json", action="store_true")
@@ -511,17 +624,26 @@ def main() -> int:
         cases = _demo_cases()
 
     split = partition(cases, args.strategy, cfg, args.seed)
-    eff = Effect([float(c.get(args.outcome, 0)) for c in split.arm_a],
-                 [float(c.get(args.outcome, 0)) for c in split.arm_b], cfg,
-                 args.iterations)
+    eff = Effect(
+        [float(c.get(args.outcome, 0)) for c in split.arm_a],
+        [float(c.get(args.outcome, 0)) for c in split.arm_b],
+        cfg,
+        args.iterations,
+    )
     v = verdict(eff, cfg, split.as_dict())
     if args.json:
         print(json.dumps(v.as_dict(), indent=2))
     else:
-        print("strategy {}: A={} B={} (seed {})".format(
-            args.strategy, eff.n_a, eff.n_b, split.seed))
-        print("  mean A {}%  mean B {}%  gap {}pp  p={}".format(
-            eff.mean_a_pct, eff.mean_b_pct, eff.gap_pct, eff.p_value))
+        print(
+            "strategy {}: A={} B={} (seed {})".format(
+                args.strategy, eff.n_a, eff.n_b, split.seed
+            )
+        )
+        print(
+            "  mean A {}%  mean B {}%  gap {}pp  p={}".format(
+                eff.mean_a_pct, eff.mean_b_pct, eff.gap_pct, eff.p_value
+            )
+        )
         print("  verdict: {}".format(v.kind))
         if args.explain:
             print("  reason: {}".format(v.reason))
@@ -531,8 +653,10 @@ def main() -> int:
 def _override(cfg, key: str, value):
     """Return a config proxy with one attribute replaced (no file mutation)."""
     import types
-    proxy = types.SimpleNamespace(**{k: getattr(cfg, k) for k in dir(cfg)
-                                     if not k.startswith("__")})
+
+    proxy = types.SimpleNamespace(
+        **{k: getattr(cfg, k) for k in dir(cfg) if not k.startswith("__")}
+    )
     setattr(proxy, key, value)
     return proxy
 

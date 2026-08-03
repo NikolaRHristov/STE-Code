@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
 """Generate expansion worker prompts for Agent #4 Pass 1 (Rule Examples).
 Each prompt contains: system rules + agent protocol + task + input files + dedup blacklist."""
+
 import os, glob, json
 
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text  # noqa: E402
+
 PROMPTS_DIR = os.path.join(PROJECT, ".agents", "prompts", "expansion-pass1")
 ADAPTED_DIR = os.path.join(PROJECT, "ste-code", "adapted")
 MASTER_FILE = os.path.join(PROJECT, "ste-code", "merged", "master.md")
@@ -22,7 +28,11 @@ DICT_FILE = os.path.join(PROJECT, "SCE", "data", "vocabulary", "code-dictionary.
 os.makedirs(PROMPTS_DIR, exist_ok=True)
 
 # Load base templates
-with open(os.path.join(PROJECT, "ste-code", "artifacts", "ste-code-distilled-system-prompt.txt")) as f:
+with open(
+    os.path.join(
+        PROJECT, "ste-code", "artifacts", "ste-code-distilled-system-prompt.txt"
+    )
+) as f:
     SYSTEM_PROMPT = f.read()
 
 with open(os.path.join(PROJECT, ".agents", "skills", "continuation", "SKILL.md")) as f:
@@ -41,7 +51,8 @@ for af in sorted(glob.glob(os.path.join(ADAPTED_DIR, "a-sec*-*.md"))):
         content = f.read()
         # Extract STE/non-STE pairs
         import re
-        pairs = re.findall(r'\*\*STE:\*\*\s*(.*?)(?:\n|$)', content)
+
+        pairs = re.findall(r"\*\*STE:\*\*\s*(.*?)(?:\n|$)", content)
         for p in pairs:
             if len(p) > 10 and len(p) < 200:
                 dedup_examples.append(p.strip())
@@ -60,19 +71,19 @@ for sec in sorted(sec_files.keys()):
     for fpath in sec_files[sec]:
         fname = os.path.basename(fpath).replace(".md", "")
         batch_num += 1
-        
+
         with open(fpath) as f:
             rule_content = f.read()
-        
+
         # Build dedup section (first 20 existing examples, grows with each batch)
         dedup_section = "\n".join(f"- {ex}" for ex in dedup_examples[:20])
-        
+
         # Build synonym reference
         synonym_ref = "\n".join(
             f"  {p['approved']} → NOT: {', '.join(p['avoid'])}"
             for p in SYNONYMS["pairs"][:15]
         )
-        
+
         prompt = f"""{SYSTEM_PROMPT}
 
 {AGENT_PROTOCOL[:2000]}

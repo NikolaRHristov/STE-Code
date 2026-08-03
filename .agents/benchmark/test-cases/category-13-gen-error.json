@@ -1,50 +1,99 @@
 [
-  {
-    "id": "bench-052",
-    "category": "gen_error",
-    "description": "Generate a validation error message",
-    "prompt": "Write a user-facing error message for when a form field is empty but required. Use STE-Code: clear, actionable, no slang. Include what went wrong and what to do.",
-    "expected_principles": ["P1", "P3", "P14", "P4"],
-    "expected_keywords": ["required", "empty", "enter", "field", "provide"],
-    "forbidden_keywords": ["oops", "something went wrong", "please", "should", "must", "you need to"],
-    "required_patterns": [],
-    "max_tokens": 150,
-    "difficulty": "easy"
-  },
-  {
-    "id": "bench-053",
-    "category": "gen_error",
-    "description": "Generate a network error with recovery steps",
-    "prompt": "Write an error message for when the server cannot connect to the database. Include: what failed, why it matters, recovery steps. Use STE-Code approved terms and imperative mood for actions.",
-    "expected_principles": ["P1", "P3", "P14", "P4"],
-    "expected_keywords": ["database", "connect", "fail", "check", "network", "retry", "contact"],
-    "forbidden_keywords": ["oops", "something went wrong", "please try again", "might be", "probably"],
-    "required_patterns": [],
-    "max_tokens": 300,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-054",
-    "category": "gen_error",
-    "description": "Generate a permission error",
-    "prompt": "Write a 403 Forbidden error message for when a user tries to access an admin-only endpoint. Use STE-Code: specific about what is denied, actionable about what to do. Include HTTP status code.",
-    "expected_principles": ["P1", "P3", "P4", "P14"],
-    "expected_keywords": ["403", "access", "denied", "admin", "permission", "contact"],
-    "forbidden_keywords": ["oops", "you don't have", "sorry", "should be an admin", "can't"],
-    "required_patterns": ["403"],
-    "max_tokens": 250,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-055",
-    "category": "gen_error",
-    "description": "Generate a full error response object",
-    "prompt": "Design a JSON error response format for a REST API. Include fields for: error code, message, details, and a recovery hint. Write the schema as STE-Code compliant documentation. Explain each field using approved terms.",
-    "expected_principles": ["P1", "P4", "P11", "P14"],
-    "expected_keywords": ["error", "code", "message", "detail", "recover", "hint", "JSON", "field"],
-    "forbidden_keywords": ["stuff", "thing", "should contain", "utilize", "basically"],
-    "required_patterns": ["error", "code", "message"],
-    "max_tokens": 500,
-    "difficulty": "hard"
-  }
+	{
+		"id": "bench-052",
+		"category": "gen_error",
+		"description": "Generate a validation error message",
+		"prompt": "Write a user-facing error message for when a form field is empty but required. Use STE-Code: clear, actionable, no slang. Include what went wrong and what to do.",
+		"expected_principles": ["P1", "P3", "P14", "P4"],
+		"expected_keywords": ["required", "empty", "enter", "field", "provide"],
+		"forbidden_keywords": [
+			"oops",
+			"something went wrong",
+			"please",
+			"should",
+			"must",
+			"you need to"
+		],
+		"required_patterns": [],
+		"max_tokens": 150,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-053",
+		"category": "gen_error",
+		"description": "Generate a network error with recovery steps",
+		"prompt": "Write an error message for when the server cannot connect to the database. Include: what failed, why it matters, recovery steps. Use STE-Code approved terms and imperative mood for actions.",
+		"expected_principles": ["P1", "P3", "P14", "P4"],
+		"expected_keywords": [
+			"database",
+			"connect",
+			"fail",
+			"check",
+			"network",
+			"retry",
+			"contact"
+		],
+		"forbidden_keywords": [
+			"oops",
+			"something went wrong",
+			"please try again",
+			"might be",
+			"probably"
+		],
+		"required_patterns": [],
+		"max_tokens": 300,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-054",
+		"category": "gen_error",
+		"description": "Generate a permission error",
+		"prompt": "Write a 403 Forbidden error message for when a user tries to access an admin-only endpoint. Use STE-Code: specific about what is denied, actionable about what to do. Include HTTP status code.",
+		"expected_principles": ["P1", "P3", "P4", "P14"],
+		"expected_keywords": [
+			"403",
+			"access",
+			"denied",
+			"admin",
+			"permission",
+			"contact"
+		],
+		"forbidden_keywords": [
+			"oops",
+			"you don't have",
+			"sorry",
+			"should be an admin",
+			"can't"
+		],
+		"required_patterns": ["403"],
+		"max_tokens": 250,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-055",
+		"category": "gen_error",
+		"description": "Generate a full error response object",
+		"prompt": "Design a JSON error response format for a REST API. Include fields for: error code, message, details, and a recovery hint. Write the schema as STE-Code compliant documentation. Explain each field using approved terms.",
+		"expected_principles": ["P1", "P4", "P11", "P14"],
+		"expected_keywords": [
+			"error",
+			"code",
+			"message",
+			"detail",
+			"recover",
+			"hint",
+			"JSON",
+			"field"
+		],
+		"forbidden_keywords": [
+			"stuff",
+			"thing",
+			"should contain",
+			"utilize",
+			"basically"
+		],
+		"required_patterns": ["error", "code", "message"],
+		"max_tokens": 500,
+		"difficulty": "hard"
+	}
 ]

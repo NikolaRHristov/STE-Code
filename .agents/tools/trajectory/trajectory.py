@@ -51,6 +51,7 @@ Usage:
   python3 trajectory.py --workers 3              # parallelism (default 3, max 3)
   python3 trajectory.py --plan                   # DRY RUN: print plan, write nothing
 """
+
 from __future__ import annotations
 
 import os
@@ -68,8 +69,12 @@ from concurrent.futures import ThreadPoolExecutor
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -79,8 +84,10 @@ from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+
 RT = _resolve_runtime(__file__)
 FINAL_RULES_DIR = PROJECT / "ste-code" / "final" / "rules"
 PARAM_DIR = PROJECT / "ste-code" / "parametarized"
@@ -184,14 +191,16 @@ def _format_param_block(param: dict) -> str:
 def _build_variant_prompt(doc_path: Path, param: dict) -> str:
     src = doc_path.read_text(encoding="utf-8", errors="ignore")
     m = RULE_H1_RE.search(src)
-    self_num = (m.group(1) if m else doc_path.stem.replace("a-sec", "").replace("rule", "."))
-    title = (m.group(2).strip() if m else doc_path.stem)
+    self_num = (
+        m.group(1) if m else doc_path.stem.replace("a-sec", "").replace("rule", ".")
+    )
+    title = m.group(2).strip() if m else doc_path.stem
     return render_template(
         PROMPT_MD,
         src_name=doc_path.name,
         src_text=src,
         param_block=_format_param_block(param),
-        out_path=str(PARAM_DIR / doc_path.stem / f"v_{param.get('id','x')}.md"),
+        out_path=str(PARAM_DIR / doc_path.stem / f"v_{param.get('id', 'x')}.md"),
         self_num=self_num,
         title=title,
     )
@@ -210,18 +219,39 @@ def run_benchmark_variant(variant_path: Path, doc_stem: str, variant_id: str) ->
     Falls back to a stub record if the orchestrator cannot be launched, so a
     trajectory run never hard-crashes on a benchmark failure.
     """
-    bench_root = Path(__file__).resolve().parent.parent.parent / "benchmark" / "tests" / "parametarized"
+    bench_root = (
+        Path(__file__).resolve().parent.parent.parent
+        / "benchmark"
+        / "tests"
+        / "parametarized"
+    )
     results_dir = bench_root / doc_stem / f"bench-{variant_id}"
     mkdir(results_dir)
-    orch = Path(__file__).resolve().parent.parent.parent / "benchmark" / "orchestrator.py"
+    orch = (
+        Path(__file__).resolve().parent.parent.parent / "benchmark" / "orchestrator.py"
+    )
     try:
         r = subprocess.run(
-            [sys.executable, str(orch),
-             "--system-prompt-file", str(variant_path),
-             "--results-dir", str(results_dir),
-             "--model", MODEL,
-             "--max-workers", "3", "--timeout", "1800", "--poll-interval", "10"],
-            capture_output=True, text=True, timeout=2400)
+            [
+                sys.executable,
+                str(orch),
+                "--system-prompt-file",
+                str(variant_path),
+                "--results-dir",
+                str(results_dir),
+                "--model",
+                MODEL,
+                "--max-workers",
+                "3",
+                "--timeout",
+                "1800",
+                "--poll-interval",
+                "10",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=2400,
+        )
         ok = r.returncode == 0
         agg = results_dir / "aggregate-results.json"
         pass_rate = None
@@ -251,7 +281,9 @@ def run_benchmark_variant(variant_path: Path, doc_stem: str, variant_id: str) ->
             "status": "MOCKED",
             "pass_rate": None,
             "avg_score": None,
-            "note": "orchestrator unavailable ({}); wire fixed but run skipped".format(e),
+            "note": "orchestrator unavailable ({}); wire fixed but run skipped".format(
+                e
+            ),
             "ran_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         }
 
@@ -272,26 +304,36 @@ def produce_variant(doc_path: Path, param: dict, do_bench: bool) -> dict:
     try:
         r = subprocess.run(
             [VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL, "--debug"],
-            capture_output=True, text=True, timeout=TIMEOUT_SECONDS)
+            capture_output=True,
+            text=True,
+            timeout=TIMEOUT_SECONDS,
+        )
     except subprocess.TimeoutExpired:
         with _lock:
             print(f"  [TIMEOUT] {stem} {vid}", flush=True)
         return {"doc": stem, "variant": vid, "ok": False, "reason": "timeout"}
 
     (TMP_DIR / f"traj-traj-{stem}-{vid}.txt").write_text(
-        "STDOUT:\n" + r.stdout + "\nSTDERR:\n" + r.stderr, encoding="utf-8")
+        "STDOUT:\n" + r.stdout + "\nSTDERR:\n" + r.stderr, encoding="utf-8"
+    )
 
-    ok = out_path.exists() and out_path.stat().st_size >= 300 \
+    ok = (
+        out_path.exists()
+        and out_path.stat().st_size >= 300
         and bool(re.match(r"^#\s*Rule", out_path.read_text(errors="ignore").lstrip()))
+    )
     result = {"doc": stem, "variant": vid, "ok": ok, "path": str(out_path)}
     if ok and do_bench:
         bench = run_benchmark_variant(out_path, stem, vid)
         result["bench"] = bench
         # Persist the bench record next to the variant for traceability.
         (out_path.parent / f"bench-{vid}.json").write_text(
-            json.dumps(bench, indent=2), encoding="utf-8")
+            json.dumps(bench, indent=2), encoding="utf-8"
+        )
         with _lock:
-            print(f"  ✓ {stem} -> {out_path.name} (bench {bench['status']})", flush=True)
+            print(
+                f"  ✓ {stem} -> {out_path.name} (bench {bench['status']})", flush=True
+            )
     elif ok:
         with _lock:
             print(f"  ✓ {stem} -> {out_path.name}", flush=True)
@@ -304,15 +346,19 @@ def produce_variant(doc_path: Path, param: dict, do_bench: bool) -> dict:
 # ── plan / dry-run ──────────────────────────────────────────────────────────
 def _plan(docs: list[Path], params: list[dict], bench: bool):
     print("TRAJECTORY PLAN (dry-run)")
-    print(f"docs={len(docs)} variants/doc={len(params)} total_jobs={len(docs)*len(params)}")
-    print(f"benchmark per variant: {bench} (real orchestrator under tests/parametarized/)")
+    print(
+        f"docs={len(docs)} variants/doc={len(params)} total_jobs={len(docs) * len(params)}"
+    )
+    print(
+        f"benchmark per variant: {bench} (real orchestrator under tests/parametarized/)"
+    )
     print(f"output root: {PARAM_DIR}")
     print(f"prompt template: {PROMPT_MD}")
     for d in docs[:8]:
         for p in params:
-            print(f"  - {d.name}  ->  {PARAM_DIR/d.stem}/v_{p.get('id','x')}.md")
+            print(f"  - {d.name}  ->  {PARAM_DIR / d.stem}/v_{p.get('id', 'x')}.md")
     if len(docs) > 8:
-        print(f"  ... and {len(docs)-8} more docs")
+        print(f"  ... and {len(docs) - 8} more docs")
     print("END PLAN")
 
 
@@ -327,15 +373,19 @@ def main():
     params_file = None
     for i, a in enumerate(args):
         if a == "--variants" and i + 1 < len(args):
-            try: variants_n = int(args[i + 1])
-            except ValueError: pass
+            try:
+                variants_n = int(args[i + 1])
+            except ValueError:
+                pass
         if a == "--params" and i + 1 < len(args):
             params_file = Path(args[i + 1])
     workers = MAX_WORKERS
     for i, a in enumerate(args):
         if a == "--workers" and i + 1 < len(args):
-            try: workers = max(1, min(MAX_WORKERS, int(args[i + 1])))
-            except ValueError: pass
+            try:
+                workers = max(1, min(MAX_WORKERS, int(args[i + 1])))
+            except ValueError:
+                pass
 
     if list_params:
         print(json.dumps(default_params(), indent=2))
@@ -344,17 +394,23 @@ def main():
     # resolve params (optionally trim to N variants)
     params = _load_params(params_file)
     if variants_n is not None:
-        params = params[:max(1, variants_n)]
+        params = params[: max(1, variants_n)]
 
     # resolve docs
     if single:
-        docs = [(FINAL_RULES_DIR / single) if (FINAL_RULES_DIR / single).exists()
-                else Path(single)]
+        docs = [
+            (FINAL_RULES_DIR / single)
+            if (FINAL_RULES_DIR / single).exists()
+            else Path(single)
+        ]
         docs = [d for d in docs if d.exists()]
     elif do_all:
         docs = sorted(FINAL_RULES_DIR.glob("a-sec*-rule*.md"))
     else:
-        print("Specify a .md file, --all, or --list-params. Use --plan for dry-run.", file=sys.stderr)
+        print(
+            "Specify a .md file, --all, or --list-params. Use --plan for dry-run.",
+            file=sys.stderr,
+        )
         sys.exit(2)
 
     if plan_only:
@@ -370,7 +426,10 @@ def main():
     signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
 
     jobs = [(d, p) for d in docs for p in params]
-    print(f"  trajectory: {len(jobs)} variant jobs across <= {workers} workers...", flush=True)
+    print(
+        f"  trajectory: {len(jobs)} variant jobs across <= {workers} workers...",
+        flush=True,
+    )
 
     def _run(job):
         d, p = job
@@ -381,9 +440,16 @@ def main():
         results = list(ex.map(_run, jobs))
 
     ok = sum(1 for r in results if r.get("ok"))
-    print(f"\n{'='*60}\nTRAJECTORY done: {ok}/{len(results)} variants written"
-          + (f"; benchmarks: {sum(1 for r in results if r.get('bench'))}" if bench else "")
-          + f"\noutput: {PARAM_DIR}\n{'='*60}", flush=True)
+    print(
+        f"\n{'=' * 60}\nTRAJECTORY done: {ok}/{len(results)} variants written"
+        + (
+            f"; benchmarks: {sum(1 for r in results if r.get('bench'))}"
+            if bench
+            else ""
+        )
+        + f"\noutput: {PARAM_DIR}\n{'=' * 60}",
+        flush=True,
+    )
     sys.exit(0 if ok == len(results) else 1)
 
 

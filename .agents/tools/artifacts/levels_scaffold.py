@@ -16,6 +16,7 @@ Usage:
   python3 levels_scaffold.py          # build all 8 tier dirs into _base/
   python3 levels_scaffold.py --dry-run
 """
+
 from __future__ import annotations
 
 import re
@@ -26,13 +27,18 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
+
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 BASE_DIR = ARTIFACTS_DIR / "_base"
@@ -40,12 +46,12 @@ BASE_DIR = ARTIFACTS_DIR / "_base"
 LEVELS = [
     ("level-2", "-2", "ultra-minimal: the 14 core principles only"),
     ("level-1", "-1", "minimal/core: 14 core principles + synonym table"),
-    ("level0",  "0",  "baseline: core principles + short dictionary excerpt"),
-    ("level1",  "1",  "+ doc templates (code review / PR feedback)"),
-    ("level2",  "2",  "+ section-specific grammar rules"),
-    ("level3",  "3",  "+ complete dictionary excerpt + all rules"),
-    ("level4",  "4",  "+ extensions + reference catalogue"),
-    ("level5",  "5",  "full standard (all rules + extensions + catalogue + provenance)"),
+    ("level0", "0", "baseline: core principles + short dictionary excerpt"),
+    ("level1", "1", "+ doc templates (code review / PR feedback)"),
+    ("level2", "2", "+ section-specific grammar rules"),
+    ("level3", "3", "+ complete dictionary excerpt + all rules"),
+    ("level4", "4", "+ extensions + reference catalogue"),
+    ("level5", "5", "full standard (all rules + extensions + catalogue + provenance)"),
 ]
 
 
@@ -67,12 +73,20 @@ def _read(*parts):
     if p.exists() and p.is_file():
         return p.read_text(encoding="utf-8", errors="ignore")
     p2 = FINAL_DIR / parts[-1]
-    return p2.read_text(encoding="utf-8", errors="ignore") if (p2.exists() and p2.is_file()) else ""
+    return (
+        p2.read_text(encoding="utf-8", errors="ignore")
+        if (p2.exists() and p2.is_file())
+        else ""
+    )
 
 
 def _core_principles(rules):
-    return [p for p in rules if re.search(r"a-sec1-rule1\.\d+\.md$", p.name)
-            and not re.search(r"1\.(1[5-9]|[2-9]\d)", p.name)]
+    return [
+        p
+        for p in rules
+        if re.search(r"a-sec1-rule1\.\d+\.md$", p.name)
+        and not re.search(r"1\.(1[5-9]|[2-9]\d)", p.name)
+    ]
 
 
 def _section_rules(rules, sec):
@@ -85,8 +99,10 @@ def _split_rule_paths(rule_paths, max_bytes=400000):
     for p in rule_paths:
         t = len(p.read_text(encoding="utf-8", errors="ignore"))
         if sz + t > max_bytes and cur:
-            chunks.append(cur); cur, sz = [], 0
-        cur.append(p); sz += t
+            chunks.append(cur)
+            cur, sz = [], 0
+        cur.append(p)
+        sz += t
     if cur:
         chunks.append(cur)
     return chunks
@@ -106,27 +122,43 @@ def _build_subdocs(level_idx: int) -> list[tuple[str, str]]:
 
     # 02 — synonym / categories (-1..5)
     if level_idx >= 1:
-        subs.append(("02-synonyms.md",
-                     "## Synonym / approved-word table\n\n"
-                     + (_read("rules", "a-categories.md")[:1500] or "(unavailable)")))
+        subs.append(
+            (
+                "02-synonyms.md",
+                "## Synonym / approved-word table\n\n"
+                + (_read("rules", "a-categories.md")[:1500] or "(unavailable)"),
+            )
+        )
 
     # 03 — dictionary excerpt (0..5)
     if level_idx >= 2:
-        subs.append(("03-dictionary.md",
-                     "## Dictionary excerpt (approved / unapproved)\n\n"
-                     + (_read("rules", "a-dictionary.md")[:2500] or "(unavailable)")))
+        subs.append(
+            (
+                "03-dictionary.md",
+                "## Dictionary excerpt (approved / unapproved)\n\n"
+                + (_read("rules", "a-dictionary.md")[:2500] or "(unavailable)"),
+            )
+        )
 
     # 04 — doc templates (1..5)
     if level_idx >= 3:
-        subs.append(("04-templates.md",
-                     "## Document templates (code review / PR feedback)\n\n"
-                     "> Placeholder — LLM fills with code-domain templates."))
+        subs.append(
+            (
+                "04-templates.md",
+                "## Document templates (code review / PR feedback)\n\n"
+                "> Placeholder — LLM fills with code-domain templates.",
+            )
+        )
 
     # 05 — section-specific grammar (2..5)
     if level_idx >= 4:
-        subs.append(("05-grammar.md",
-                     "## Section-specific grammar rules\n\n"
-                     "> Placeholder — LLM fills from the full rule set."))
+        subs.append(
+            (
+                "05-grammar.md",
+                "## Section-specific grammar rules\n\n"
+                "> Placeholder — LLM fills from the full rule set.",
+            )
+        )
 
     # rules by section (3..5) — split each section into size-bounded sub-docs
     if level_idx >= 5:
@@ -138,29 +170,43 @@ def _build_subdocs(level_idx: int) -> list[tuple[str, str]]:
             if len(parts) == 1:
                 content = "\n\n---\n\n".join(
                     f"<!-- {p.name} -->\n\n{p.read_text(encoding='utf-8', errors='ignore').strip()}"
-                    for p in parts[0])
+                    for p in parts[0]
+                )
                 subs.append((f"rules-sec{sec}.md", content))
             else:
                 for i, chunk in enumerate(parts, 1):
                     content = "\n\n---\n\n".join(
                         f"<!-- {p.name} -->\n\n{p.read_text(encoding='utf-8', errors='ignore').strip()}"
-                        for p in chunk)
+                        for p in chunk
+                    )
                     subs.append((f"rules-sec{sec}-part{i}.md", content))
 
     # extensions + catalogue (4..5)
     if level_idx >= 6:
         ext = "\n\n---\n\n".join(
             f"# Extension {p.stem}\n\n{p.read_text(encoding='utf-8', errors='ignore')}"
-            for p in sorted((FINAL_DIR / "extensions").glob("*.md")))
-        subs.append(("06-extensions.md", "## Extensions\n\n" + (ext[:3000] or "(unavailable)")))
-        subs.append(("07-catalogue.md",
-                     "## Reference catalogue\n\n"
-                     + (_read("reference-catalogue.md")[:2000] or "(unavailable)")))
+            for p in sorted((FINAL_DIR / "extensions").glob("*.md"))
+        )
+        subs.append(
+            ("06-extensions.md", "## Extensions\n\n" + (ext[:3000] or "(unavailable)"))
+        )
+        subs.append(
+            (
+                "07-catalogue.md",
+                "## Reference catalogue\n\n"
+                + (_read("reference-catalogue.md")[:2000] or "(unavailable)"),
+            )
+        )
 
     # provenance (5)
     if level_idx >= 7:
-        subs.append(("08-provenance.md",
-                     "## Provenance\n\n" + (_read("provenance.md")[:2000] or "(unavailable)")))
+        subs.append(
+            (
+                "08-provenance.md",
+                "## Provenance\n\n"
+                + (_read("provenance.md")[:2000] or "(unavailable)"),
+            )
+        )
 
     return subs
 
@@ -178,8 +224,14 @@ def main(argv=None):
             print(f"[dry-run] {fname}: {len(subs)} sub-docs ({total}B)")
             continue
         mkdir(tdir)
-        idx = [f"# STE-Code Level {label} — base index", "",
-               f"> {desc}", "", "## Sub-documents (distill each):", ""]
+        idx = [
+            f"# STE-Code Level {label} — base index",
+            "",
+            f"> {desc}",
+            "",
+            "## Sub-documents (distill each):",
+            "",
+        ]
         for name, content in subs:
             write_text((tdir / name), content + "\n")
             idx.append(f"- {name} — {len(content)}B")
@@ -187,7 +239,8 @@ def main(argv=None):
         print(f"  base {label}: {tdir.name}/ ({len(subs)} sub-docs)")
     if not args.dry_run:
         (BASE_DIR / ".manifest.json").write_text(
-            json.dumps({"levels": [l[1] for l in LEVELS]}, indent=2))
+            json.dumps({"levels": [l[1] for l in LEVELS]}, indent=2)
+        )
         print(f"Scaffolded {len(LEVELS)} tier dirs -> {BASE_DIR}")
     return 0
 

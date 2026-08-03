@@ -28,6 +28,7 @@ Under --skip-live the A/B validation is SIMULATED deterministically from
 knowledge-base statistics and clearly labelled 'simulated' -- simulated numbers
 are never presented as measured.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -40,7 +41,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from harness_config import (  # noqa: E402
-    load_config, add_common_arguments, default_base, resolve_base)
+    load_config,
+    add_common_arguments,
+    default_base,
+    resolve_base,
+)
 import knowledge as K  # noqa: E402
 import notes as N  # noqa: E402  (NoteBus — inter-colour rebuttal channel)
 
@@ -83,8 +88,10 @@ def _subscribe_black_rebuttals(cfg, base: Path, kb: K.Knowledge) -> int:
             if term in haystack:
                 # find lessons whose technique or placement equals the term
                 for sig, L in kb.lessons.items():
-                    if (str(L.get("technique", "")).lower() == term
-                            or str(L.get("placement", "")).lower() == term):
+                    if (
+                        str(L.get("technique", "")).lower() == term
+                        or str(L.get("placement", "")).lower() == term
+                    ):
                         if kb.decay_lesson(sig):
                             decayed += 1
                 break  # one match per note is enough to avoid O(n^2) decay storms
@@ -92,6 +99,7 @@ def _subscribe_black_rebuttals(cfg, base: Path, kb: K.Knowledge) -> int:
 
 
 # ------------------------------------------------------------------ helpers
+
 
 def _load(path: Path) -> "dict | list":
     if not path.exists():
@@ -157,6 +165,7 @@ def _intensity(cfg, variant_key: str) -> float:
 
 # ---------------------------------------------------------------- diagnosis
 
+
 def diagnose(escapes: "list[dict]", resistance: "list[dict]") -> "list[dict]":
     """Turn raw escapes + BLUE resistance tables into structured diagnoses.
 
@@ -174,11 +183,14 @@ def diagnose(escapes: "list[dict]", resistance: "list[dict]") -> "list[dict]":
     for tech, es in by_tech.items():
         placements = {e.get("placement") for e in es}
         # which of those placements were actually resisted by BLUE?
-        resisted = {p for (t, p), r in res_by.items()
-                    if t == tech and r.get("resistance_pct", 0.0) >= 50.0}
+        resisted = {
+            p
+            for (t, p), r in res_by.items()
+            if t == tech and r.get("resistance_pct", 0.0) >= 50.0
+        }
         escapes_in = placements - resisted
         if not resisted:
-            drive = "technique"   # BLUE fixed none of the placements
+            drive = "technique"  # BLUE fixed none of the placements
         elif not escapes_in:
             drive = "resolved"
         elif len(resisted) >= 1 and len(escapes_in) >= 1:
@@ -186,19 +198,22 @@ def diagnose(escapes: "list[dict]", resistance: "list[dict]") -> "list[dict]":
         else:
             drive = "mixed"
         for e in es:
-            out.append({
-                "escape_id": e.get("test_id"),
-                "technique": tech,
-                "placement": e.get("placement"),
-                "timing": e.get("timing"),
-                "category": e.get("category"),
-                "missed_principles": e.get("missed_principles", []),
-                "drive": drive,
-            })
+            out.append(
+                {
+                    "escape_id": e.get("test_id"),
+                    "technique": tech,
+                    "placement": e.get("placement"),
+                    "timing": e.get("timing"),
+                    "category": e.get("category"),
+                    "missed_principles": e.get("missed_principles", []),
+                    "drive": drive,
+                }
+            )
     return out
 
 
 # --------------------------------------------------------------- remediation
+
 
 def synthesize_remedy(diag: dict, cfg, lesson_conf: float) -> "dict | None":
     """Build one remedy record (CONTRACT.md section 5 shape) for a diagnosis."""
@@ -213,19 +228,26 @@ def synthesize_remedy(diag: dict, cfg, lesson_conf: float) -> "dict | None":
         # Target the technique (so simulated validation can match the lesson); the
         # patch text still names the specific rule that must be clarified.
         target = tech
-        patch = ("For rule {}: clarify the requirement so the '{}' technique is "
-                 "handled in ALL placements, not just some.".format(rule_id, tech))
+        patch = (
+            "For rule {}: clarify the requirement so the '{}' technique is "
+            "handled in ALL placements, not just some.".format(rule_id, tech)
+        )
     elif diag["drive"] == "placement":
         kind = "placement_guard"
         target = place
-        patch = ("Add an explicit guard covering the '{}' location: content inside "
-                 "this placement is NOT exempt from the rule and must be rewritten."
-                 .format(place))
+        patch = (
+            "Add an explicit guard covering the '{}' location: content inside "
+            "this placement is NOT exempt from the rule and must be rewritten.".format(
+                place
+            )
+        )
     else:
         kind = "example_pair"
         target = tech
-        patch = ("Provide a non-compliant/compliant example pair teaching {} so the "
-                 "missed principle ({}) is illustrated.".format(tech, rule_id))
+        patch = (
+            "Provide a non-compliant/compliant example pair teaching {} so the "
+            "missed principle ({}) is illustrated.".format(tech, rule_id)
+        )
 
     return {
         "id": rid,
@@ -240,8 +262,9 @@ def synthesize_remedy(diag: dict, cfg, lesson_conf: float) -> "dict | None":
     }
 
 
-def simulate_validation(remedy: dict, kb: K.Knowledge, cfg,
-                        variant_key: str) -> "tuple[float, bool, str]":
+def simulate_validation(
+    remedy: dict, kb: K.Knowledge, cfg, variant_key: str
+) -> "tuple[float, bool, str]":
     """Deterministic OFFLINE validation.
 
     Returns (delta_resistance_pct, would_adopt, note). The delta is derived from
@@ -260,7 +283,9 @@ def simulate_validation(remedy: dict, kb: K.Knowledge, cfg,
     for L in kb.lessons.values():
         if kind == "placement_guard" and L["placement"] == target:
             conf = max(conf, kb.confidence_of(L["signature"], 0))
-        elif kind in ("rule_clarification", "example_pair") and L["technique"] == target:
+        elif (
+            kind in ("rule_clarification", "example_pair") and L["technique"] == target
+        ):
             conf = max(conf, kb.confidence_of(L["signature"], 0))
     # simulated lift scales with corroboration; capped
     delta = round(min(40.0, conf * 35.0), 1)
@@ -271,8 +296,10 @@ def simulate_validation(remedy: dict, kb: K.Knowledge, cfg,
 
 # ----------------------------------------------------------------- round loop
 
-def run_white_variant(variant: str, args, cfg, base: Path,
-                      kb: K.Knowledge, report: dict) -> None:
+
+def run_white_variant(
+    variant: str, args, cfg, base: Path, kb: K.Knowledge, report: dict
+) -> None:
     rounds_rounds = []
     convergence = None
     for rnd in range(1, args.rounds + 1):
@@ -286,16 +313,30 @@ def run_white_variant(variant: str, args, cfg, base: Path,
         # Give BLUE a short, bounded window to land its sentinel. If RED's
         # sentinel appeared but BLUE's did not within this window, WHITE
         # proceeds in degraded (partial) mode rather than hanging.
-        blue_ok = _await(blue_s, min(5.0, args.await_timeout), poll) if red_ok else False
+        blue_ok = (
+            _await(blue_s, min(5.0, args.await_timeout), poll) if red_ok else False
+        )
         if not red_ok:
-            rounds_rounds.append({"round": rnd, "status": "await-timeout",
-                                  "remedies_proposed": 0, "adopted": 0})
+            rounds_rounds.append(
+                {
+                    "round": rnd,
+                    "status": "await-timeout",
+                    "remedies_proposed": 0,
+                    "adopted": 0,
+                }
+            )
             break
         partial = not blue_ok
 
-        escapes = _load(rdir / cfg.handshake.red_ledger) if (rdir / cfg.handshake.red_ledger).exists() else []
+        escapes = (
+            _load(rdir / cfg.handshake.red_ledger)
+            if (rdir / cfg.handshake.red_ledger).exists()
+            else []
+        )
         blue_done = _load(blue_s) if blue_ok else {}
-        resistance = blue_done.get("resistance_table", []) if isinstance(blue_done, dict) else []
+        resistance = (
+            blue_done.get("resistance_table", []) if isinstance(blue_done, dict) else []
+        )
 
         # Reverse-deduction guard: BLACK confirmed the base already resists
         # these (technique, placement) pairs in a prior cycle. Honour those
@@ -319,13 +360,18 @@ def run_white_variant(variant: str, args, cfg, base: Path,
             if skip and (tech, place) in skip:
                 continue
             kb.record_failure(
-                tech, place,
-                e.get("timing", "immediate"), e.get("category", "readme"),
-                e.get("missed_principles", []), e.get("forbidden_found", []),
-                variant, rnd,
+                tech,
+                place,
+                e.get("timing", "immediate"),
+                e.get("category", "readme"),
+                e.get("missed_principles", []),
+                e.get("forbidden_found", []),
+                variant,
+                rnd,
                 float(e.get("correctness_score") or 0.0),
                 e.get("input") or e.get("violating_output") or "",
-                current_round=rnd)
+                current_round=rnd,
+            )
         kb.flush()
 
         # 2) diagnose
@@ -333,7 +379,7 @@ def run_white_variant(variant: str, args, cfg, base: Path,
 
         # 3) synthesize remedies (capped per round)
         remedies = []
-        for d in diags[:args.max_remedies_per_round]:
+        for d in diags[: args.max_remedies_per_round]:
             conf = 0.5
             rem = synthesize_remedy(d, cfg, conf)
             if rem:
@@ -349,14 +395,21 @@ def run_white_variant(variant: str, args, cfg, base: Path,
                 rem["_adopt"] = adopt
                 # Per-case derivation/verification scores so BLACK's
                 # _challenge_remedies can run V.Effect (Unit 0 Patch B).
-                rem.setdefault("cases", [
-                    {"case_id": "{}-sim-0".format(rem.get("id", "r")),
-                     "derivation": 0.6 + 0.2 * float(delta or 0) / 100.0,
-                     "verification": 0.55 + 0.25 * float(delta or 0) / 100.0},
-                    {"case_id": "{}-sim-1".format(rem.get("id", "r")),
-                     "derivation": 0.5 + 0.2 * float(delta or 0) / 100.0,
-                     "verification": 0.5 + 0.25 * float(delta or 0) / 100.0},
-                ])
+                rem.setdefault(
+                    "cases",
+                    [
+                        {
+                            "case_id": "{}-sim-0".format(rem.get("id", "r")),
+                            "derivation": 0.6 + 0.2 * float(delta or 0) / 100.0,
+                            "verification": 0.55 + 0.25 * float(delta or 0) / 100.0,
+                        },
+                        {
+                            "case_id": "{}-sim-1".format(rem.get("id", "r")),
+                            "derivation": 0.5 + 0.2 * float(delta or 0) / 100.0,
+                            "verification": 0.5 + 0.25 * float(delta or 0) / 100.0,
+                        },
+                    ],
+                )
             else:
                 # live: build regression cases + run via cfg.build_runner_argv.
                 # Out of scope for --skip-live; mark unvalidated.
@@ -371,7 +424,11 @@ def run_white_variant(variant: str, args, cfg, base: Path,
             # dry-run never writes adopted/rejected artifacts
             if args.dry_run:
                 continue
-            dest = "adopted" if adopt and (rem["delta_resistance_pct"] or 0) >= args.adopt_threshold else "rejected"
+            dest = (
+                "adopted"
+                if adopt and (rem["delta_resistance_pct"] or 0) >= args.adopt_threshold
+                else "rejected"
+            )
             if dest == "adopted":
                 adopted += 1
             else:
@@ -380,59 +437,86 @@ def run_white_variant(variant: str, args, cfg, base: Path,
                 out_dir = base / "remedies" / dest
                 out_dir.mkdir(parents=True, exist_ok=True)
                 (out_dir / (rem["id"] + ".json")).write_text(
-                    json.dumps(rem, indent=2), encoding="utf-8")
+                    json.dumps(rem, indent=2), encoding="utf-8"
+                )
 
         # 5) write white-done.json (white_sentinel)
         summary = {
-            "variant": variant, "round": rnd,
+            "variant": variant,
+            "round": rnd,
             "status": "partial" if partial else "done",
             "escapes_ingested": len(escapes),
             "diagnoses": len(diags),
             "remedies_proposed": len(remedies),
-            "adopted": adopted, "rejected": rejected,
+            "adopted": adopted,
+            "rejected": rejected,
             "knowledge_lessons": len(kb.lessons),
             "knowledge_patterns": len(kb.patterns(min_support=2)),
         }
         (rdir / cfg.handshake.white_sentinel).write_text(
-            json.dumps(summary, indent=2), encoding="utf-8")
+            json.dumps(summary, indent=2), encoding="utf-8"
+        )
 
         rounds_rounds.append(summary)
 
         # 6) convergence: stop if nothing unresolved above the confidence floor
-        unresolved = kb.unresolved(confidence_floor=args.confidence_floor,
-                                   current_round=rnd)
+        unresolved = kb.unresolved(
+            confidence_floor=args.confidence_floor, current_round=rnd
+        )
         if not unresolved:
-            convergence = "no unresolved lessons above confidence floor at round {}".format(rnd)
+            convergence = (
+                "no unresolved lessons above confidence floor at round {}".format(rnd)
+            )
             break
 
     if convergence is None:
         convergence = "rounds exhausted ({} rounds)".format(args.rounds)
     report.setdefault("per_variant", {})[variant] = {
-        "rounds": rounds_rounds, "convergence": convergence}
+        "rounds": rounds_rounds,
+        "convergence": convergence,
+    }
 
 
 # ------------------------------------------------------------------------- CLI
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="WHITE self-healing loop.")
     add_common_arguments(parser, config=load_config())
     parser.add_argument("--await-timeout", type=float, default=3600.0)
-    parser.add_argument("--adopt-threshold", type=float, default=10.0,
-                        help="min delta_resistance_pct to adopt a remedy")
-    parser.add_argument("--confidence-floor", type=float, default=0.3,
-                        help="unresolved-lesson confidence floor for convergence")
-    parser.add_argument("--remedy-kinds", default=None,
-                        help="csv subset of remedy kinds (informational)")
+    parser.add_argument(
+        "--adopt-threshold",
+        type=float,
+        default=10.0,
+        help="min delta_resistance_pct to adopt a remedy",
+    )
+    parser.add_argument(
+        "--confidence-floor",
+        type=float,
+        default=0.3,
+        help="unresolved-lesson confidence floor for convergence",
+    )
+    parser.add_argument(
+        "--remedy-kinds",
+        default=None,
+        help="csv subset of remedy kinds (informational)",
+    )
     parser.add_argument("--max-remedies-per-round", type=int, default=20)
-    parser.add_argument("--knowledge", default=None,
-                        help="path override for knowledge.json")
-    parser.add_argument("--defended", default=None,
-                        help="path to defended.json (signatures BLACK confirmed "
-                             "the base already resists); WHITE skips those pairs")
-    parser.add_argument("--dry-run", action="store_true",
-                        help="do not write adopted/rejected artifacts")
-    parser.add_argument("--explain", action="store_true",
-                        help="dump human-readable rationale")
+    parser.add_argument(
+        "--knowledge", default=None, help="path override for knowledge.json"
+    )
+    parser.add_argument(
+        "--defended",
+        default=None,
+        help="path to defended.json (signatures BLACK confirmed "
+        "the base already resists); WHITE skips those pairs",
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="do not write adopted/rejected artifacts"
+    )
+    parser.add_argument(
+        "--explain", action="store_true", help="dump human-readable rationale"
+    )
     args = parser.parse_args()
 
     cfg = load_config(args.profile)
@@ -440,37 +524,65 @@ def main() -> int:
     base = base if isinstance(base, Path) else Path(str(base))
     base.mkdir(parents=True, exist_ok=True)
 
-    kb_path = Path(args.knowledge) if args.knowledge else (base / cfg.handshake.knowledge_base)
+    kb_path = (
+        Path(args.knowledge)
+        if args.knowledge
+        else (base / cfg.handshake.knowledge_base)
+    )
     kb = K.Knowledge(kb_path)
 
-    variants = (cfg.variant_order if args.variants in (None, "all")
-                else [v.strip() for v in args.variants.split(",")])
+    variants = (
+        cfg.variant_order
+        if args.variants in (None, "all")
+        else [v.strip() for v in args.variants.split(",")]
+    )
 
-    report = {"timestamp": datetime.now(timezone.utc).isoformat(),
-              "mode": "white", "variants": variants, "rounds": args.rounds,
-              "per_variant": {}}
+    report = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "mode": "white",
+        "variants": variants,
+        "rounds": args.rounds,
+        "per_variant": {},
+    }
     for v in variants:
         run_white_variant(v, args, cfg, base, kb, report)
 
-    (base / "white-report.json").write_text(json.dumps(report, indent=2),
-                                            encoding="utf-8")
+    (base / "white-report.json").write_text(
+        json.dumps(report, indent=2), encoding="utf-8"
+    )
 
     if args.explain:
         print("\nWHITE explain")
         for v, vr in report["per_variant"].items():
             print("variant {}: {}".format(v, vr["convergence"]))
             for r in vr["rounds"]:
-                print("  r{} [{}]: ingested={} diagnoses={} proposed={} adopted={} rejected={}".format(
-                    r["round"], r["status"], r.get("escapes_ingested"),
-                    r.get("diagnoses"), r.get("remedies_proposed"),
-                    r.get("adopted"), r.get("rejected")))
-        print("\nknowledge: {} lessons, {} patterns".format(
-            len(kb.lessons), len(kb.patterns(min_support=2))))
+                print(
+                    "  r{} [{}]: ingested={} diagnoses={} proposed={} adopted={} rejected={}".format(
+                        r["round"],
+                        r["status"],
+                        r.get("escapes_ingested"),
+                        r.get("diagnoses"),
+                        r.get("remedies_proposed"),
+                        r.get("adopted"),
+                        r.get("rejected"),
+                    )
+                )
+        print(
+            "\nknowledge: {} lessons, {} patterns".format(
+                len(kb.lessons), len(kb.patterns(min_support=2))
+            )
+        )
         print("top lessons by confidence:")
         for L in kb.top_lessons(n=5, by="confidence", current_round=args.rounds):
-            print("  {} tech={} place={} occ={} conf={}".format(
-                L["signature"][:8], L["technique"], L["placement"],
-                L["occurrences"], L["confidence"]))
+            print(
+                "  {} tech={} place={} occ={} conf={}".format(
+                    L["signature"][:8],
+                    L["technique"],
+                    L["placement"],
+                    L["occurrences"],
+                    L["confidence"],
+                )
+            )
 
     print("\nWrote {} (variants={})".format(base / "white-report.json", variants))
     return 0

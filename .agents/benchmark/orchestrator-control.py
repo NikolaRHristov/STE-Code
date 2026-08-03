@@ -45,6 +45,12 @@
 #     of the doubt, making the comparison conservative.
 
 import json, os, subprocess, time, sys, re, tempfile, glob
+
+# Confined child launcher (same dir as this file → importable). Benchmark
+# control-group children launch through it: pins STE_CODE_JAIL_POLICY=bench,
+# strips creds, resets HOME=/tmp, wraps in jail-exec.sh (Layer-2).
+from launch_confined_child import build_command, build_child_env, DEFAULT_TOOLSET
+
 from collections import defaultdict
 from datetime import datetime, timezone
 
@@ -53,34 +59,41 @@ from datetime import datetime, timezone
 # below. When arguments are provided, they supersede the hardcoded values
 # in the override block that follows the constants section.
 import argparse as _argparse
+
 _cli_parser = _argparse.ArgumentParser(
     description="Control Group Benchmark — plain assistant, no STE-Code prompt. "
-                "Compares against STE-Code orchestrator results."
+    "Compares against STE-Code orchestrator results."
 )
 _cli_parser.add_argument(
-    "--model", default=None,
-    help="Model to use (default: poolside/laguna-s-2.1:free)"
+    "--model", default=None, help="Model to use (default: poolside/laguna-s-2.1:free)"
 )
 _cli_parser.add_argument(
-    "--timeout", type=int, default=None,
-    help="Maximum wait time per worker in seconds (default: 600)"
+    "--timeout",
+    type=int,
+    default=None,
+    help="Maximum wait time per worker in seconds (default: 600)",
 )
 _cli_parser.add_argument(
-    "--compare", action="store_true",
-    help="Run post-run delta report against the latest STE-Code results"
+    "--compare",
+    action="store_true",
+    help="Run post-run delta report against the latest STE-Code results",
 )
 _cli_parser.add_argument(
-    "--ste-results", default=None,
+    "--ste-results",
+    default=None,
     help="Path to STE-Code aggregate JSON for comparison "
-         "(auto-detects latest tests/run-*/aggregate-results.json if --compare set)"
+    "(auto-detects latest tests/run-*/aggregate-results.json if --compare set)",
 )
 _cli_parser.add_argument(
-    "--retries", type=int, default=0,
-    help="Number of retries for workers with empty or missing output (default: 0)"
+    "--retries",
+    type=int,
+    default=0,
+    help="Number of retries for workers with empty or missing output (default: 0)",
 )
 _cli_parser.add_argument(
-    "--no-report", action="store_true",
-    help="Skip the terminal report and only write JSON files"
+    "--no-report",
+    action="store_true",
+    help="Skip the terminal report and only write JSON files",
 )
 _cli_args, _ = _cli_parser.parse_known_args()
 
@@ -91,6 +104,7 @@ _cli_args, _ = _cli_parser.parse_known_args()
 import signal as _signal
 
 _CHILD_PIDS = []  # Populated during Phase 1 — tracks all forked PIDs
+
 
 def _cleanup_workers(signum=None, frame=None):
     """Kill all tracked child processes and exit cleanly."""
@@ -104,6 +118,7 @@ def _cleanup_workers(signum=None, frame=None):
     print("All workers stopped. Exiting.")
     sys.exit(1)
 
+
 _signal.signal(_signal.SIGINT, _cleanup_workers)
 _signal.signal(_signal.SIGTERM, _cleanup_workers)
 
@@ -111,8 +126,12 @@ _signal.signal(_signal.SIGTERM, _cleanup_workers)
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -161,11 +180,11 @@ workers = {}  # test_id -> {pid, out_file}
 
 for tc in test_cases:
     tid = tc["id"]
-    
+
     # Determine test type: correction (has "input") or generation (has "prompt")
     is_generation = "prompt" in tc
     task_input = tc.get("prompt", tc.get("input", ""))
-    
+
     # Build full prompt based on type
     if is_generation:
         full_prompt = f"""{SYSTEM_PROMPT}
@@ -203,9 +222,11 @@ IMPORTANT: Do NOT create any files. Output the improved text inline.
         with open(out_file, "w") as outf:
             os.dup2(outf.fileno(), 1)
             os.dup2(outf.fileno(), 2)
-        os.execvp("hermes", ["hermes", "-z", full_prompt, "-m", MODEL, "--yolo"])
+        cmd = build_command(prompt_file, MODEL, DEFAULT_TOOLSET) + ["--yolo"]
+        env = build_child_env(None)
+        os.execvpe(cmd[0], cmd, env)
         os._exit(1)  # should not reach
-    
+
     workers[tid] = {"pid": pid, "out_file": out_file, "start_time": time.time()}
     _CHILD_PIDS.append(pid)  # Track for signal handler cleanup
 
@@ -224,7 +245,7 @@ pending = set(workers.keys())
 while pending and elapsed < MAX_WAIT:
     time.sleep(poll_interval)
     elapsed += poll_interval
-    
+
     just_finished = []
     for tid in list(pending):
         pid = workers[tid]["pid"]
@@ -234,12 +255,14 @@ while pending and elapsed < MAX_WAIT:
                 just_finished.append(tid)
         except ChildProcessError:
             just_finished.append(tid)
-    
+
     for tid in just_finished:
         pending.discard(tid)
-    
+
     if just_finished:
-        print(f"  [{len(workers)-len(pending)}/{len(workers)}] Completed: {', '.join(just_finished)}")
+        print(
+            f"  [{len(workers) - len(pending)}/{len(workers)}] Completed: {', '.join(just_finished)}"
+        )
     elif elapsed % 30 == 0:
         print(f"  ... still waiting ({len(pending)} remaining, {elapsed}s elapsed)")
 
@@ -269,15 +292,19 @@ if _CLI_RETRIES > 0:
             _retry_pool.append(tid)
 
     if _retry_pool:
-        print(f"\nRetry: {len(_retry_pool)} workers have empty/missing output. "
-              f"Retrying up to {_CLI_RETRIES} time(s)...")
+        print(
+            f"\nRetry: {len(_retry_pool)} workers have empty/missing output. "
+            f"Retrying up to {_CLI_RETRIES} time(s)..."
+        )
         _RETRY_TIMEOUT = max(MAX_WAIT // 3, 60)  # Shorter timeout for retries
 
         for _attempt in range(1, _CLI_RETRIES + 1):
             if not _retry_pool:
                 break
 
-            print(f"  Retry attempt {_attempt}/{_CLI_RETRIES} for {len(_retry_pool)} workers...")
+            print(
+                f"  Retry attempt {_attempt}/{_CLI_RETRIES} for {len(_retry_pool)} workers..."
+            )
             _still_failing = []
 
             for tid in list(_retry_pool):
@@ -313,8 +340,12 @@ IMPORTANT: Do NOT create any files. Output the improved text inline.
                     with open(out_file, "w") as outf:
                         os.dup2(outf.fileno(), 1)
                         os.dup2(outf.fileno(), 2)
-                    os.execvp("hermes", ["hermes", "-z", full_prompt, "-m", MODEL, "--yolo"])
-                    os._exit(1)
+                    cmd = build_command(prompt_file, MODEL, DEFAULT_TOOLSET) + [
+                        "--yolo"
+                    ]
+                    env = build_child_env(None)
+                    os.execvpe(cmd[0], cmd, env)
+                    os._exit(1)  # should not reach
 
                 workers[tid]["pid"] = pid
                 workers[tid]["retry_attempt"] = _attempt
@@ -352,8 +383,10 @@ IMPORTANT: Do NOT create any files. Output the improved text inline.
             _retry_pool = _still_failing
 
         if _retry_pool:
-            print(f"  WARNING: {len(_retry_pool)} workers still failing after "
-                  f"{_CLI_RETRIES} retries: {', '.join(sorted(_retry_pool))}")
+            print(
+                f"  WARNING: {len(_retry_pool)} workers still failing after "
+                f"{_CLI_RETRIES} retries: {', '.join(sorted(_retry_pool))}"
+            )
         else:
             print("  All retried workers now have output.")
 
@@ -381,15 +414,15 @@ print()
 
 # Phase 3: Score each output
 PRINCIPLE_KEYWORDS = {
-    "P1":  ["approved", "dictionary"],
-    "P2":  ["part of speech"],
-    "P3":  ["meaning"],
-    "P4":  ["verb", "active voice", "passive", "imperative"],
-    "P5":  ["technical", "noun", "keyword", "framework"],
-    "P6":  ["non-approved"],
-    "P7":  ["noun as verb", "technical noun"],
-    "P8":  ["standard", "well-known"],
-    "P9":  ["short", "clear"],
+    "P1": ["approved", "dictionary"],
+    "P2": ["part of speech"],
+    "P3": ["meaning"],
+    "P4": ["verb", "active voice", "passive", "imperative"],
+    "P5": ["technical", "noun", "keyword", "framework"],
+    "P6": ["non-approved"],
+    "P7": ["noun as verb", "technical noun"],
+    "P8": ["standard", "well-known"],
+    "P9": ["short", "clear"],
     "P10": ["slang", "jargon", "regional", "vague", "informal"],
     "P11": ["consistent", "one term", "synonym"],
     "P12": ["technical verb", "build", "deploy", "test", "lint"],
@@ -397,42 +430,71 @@ PRINCIPLE_KEYWORDS = {
     "P14": ["american", "spelling", "color", "analyze"],
 }
 
+
 def extract_corrected_text(output):
     """Extract corrected text - handle multiple output formats."""
-    for marker in [r'\*\*Corrected Text:\*\*', r'## Corrected Text', r'CORRECTED TEXT',
-                   r'# Corrected Text', r'Corrected Text \(STE-Code Compliant\)',
-                   r'# STE-Code Corrected Text']:
-        m = re.search(marker + r'\s*\n+(.*?)(?:\n---\n|\n## Compliance|\n# Compliance|\nCOMPLIANCE|\n\*\*Compliance)', output, re.DOTALL | re.IGNORECASE)
+    for marker in [
+        r"\*\*Corrected Text:\*\*",
+        r"## Corrected Text",
+        r"CORRECTED TEXT",
+        r"# Corrected Text",
+        r"Corrected Text \(STE-Code Compliant\)",
+        r"# STE-Code Corrected Text",
+    ]:
+        m = re.search(
+            marker
+            + r"\s*\n+(.*?)(?:\n---\n|\n## Compliance|\n# Compliance|\nCOMPLIANCE|\n\*\*Compliance)",
+            output,
+            re.DOTALL | re.IGNORECASE,
+        )
         if m and m.group(1).strip():
             return m.group(1).strip()
-    m = re.search(r'^(.*?)(?:\n---\n|\n#+\s*Compliance|\nCOMPLIANCE)', output, re.DOTALL | re.IGNORECASE)
+    m = re.search(
+        r"^(.*?)(?:\n---\n|\n#+\s*Compliance|\nCOMPLIANCE)",
+        output,
+        re.DOTALL | re.IGNORECASE,
+    )
     if m:
         text = m.group(1).strip()
-        text = re.sub(r'^#+\s*(?:Corrected|STE-Code).*?\n+', '', text, flags=re.IGNORECASE)
-        if text: return text.strip()
+        text = re.sub(
+            r"^#+\s*(?:Corrected|STE-Code).*?\n+", "", text, flags=re.IGNORECASE
+        )
+        if text:
+            return text.strip()
     return output.strip()
+
 
 def extract_compliance_section(output):
     """Extract compliance summary - handle multiple formats."""
-    for marker in [r'\*\*Compliance Summary\*\*', r'## Compliance Summary', r'COMPLIANCE SUMMARY',
-                   r'# Compliance Summary', r'Compliance Summary']:
-        m = re.search(re.escape(marker) if '**' in marker else marker + r'\s*\n(.*)', output, re.DOTALL | re.IGNORECASE)
+    for marker in [
+        r"\*\*Compliance Summary\*\*",
+        r"## Compliance Summary",
+        r"COMPLIANCE SUMMARY",
+        r"# Compliance Summary",
+        r"Compliance Summary",
+    ]:
+        m = re.search(
+            re.escape(marker) if "**" in marker else marker + r"\s*\n(.*)",
+            output,
+            re.DOTALL | re.IGNORECASE,
+        )
         if m:
             return m.group(1).strip() if m.lastindex else m.group(0)
     return ""
+
 
 def check_principles(output, expected_principles):
     """Check principles in BOTH compliance section AND full output."""
     compliance = extract_compliance_section(output)
     full_lower = (compliance + " " + output).lower()
-    
+
     satisfied = []
     missed = []
-    
+
     for p in expected_principles:
         found = False
         # 1. Explicit principle number mention in compliance
-        if re.search(r'\b' + re.escape(p) + r'\b', compliance):
+        if re.search(r"\b" + re.escape(p) + r"\b", compliance):
             found = True
         # 2. Keyword heuristics
         if not found and p in PRINCIPLE_KEYWORDS:
@@ -441,15 +503,16 @@ def check_principles(output, expected_principles):
                     found = True
                     break
         # 3. Also check full output for principle number
-        if not found and re.search(r'\b' + re.escape(p) + r'\b', output):
+        if not found and re.search(r"\b" + re.escape(p) + r"\b", output):
             found = True
-        
+
         if found:
             satisfied.append(p)
         else:
             missed.append(p)
-    
+
     return satisfied, missed
+
 
 def check_keywords(text_lower, keywords):
     """Check which keywords appear in text."""
@@ -459,26 +522,37 @@ def check_keywords(text_lower, keywords):
             found.append(kw)
     return found
 
-def calc_correctness(expected_principles, satisfied, forbidden_found, total_forbidden, expected_kw_found, total_expected_kw):
+
+def calc_correctness(
+    expected_principles,
+    satisfied,
+    forbidden_found,
+    total_forbidden,
+    expected_kw_found,
+    total_expected_kw,
+):
     """Calculate correctness score 0-1 using weighted formula."""
     score = 0.4  # base
-    
+
     # Principle compliance: 60% weight
     if expected_principles:
         score += 0.6 * len(satisfied) / len(expected_principles)
-    
+
     # Forbidden keywords penalty: deduct up to 0.3
     if total_forbidden > 0:
         score -= 0.3 * len(forbidden_found) / total_forbidden
-    
+
     # Expected keywords bonus: add up to 0.1
     if total_expected_kw > 0:
         score += 0.1 * len(expected_kw_found) / total_expected_kw
-    
+
     return round(max(0.0, min(1.0, score)), 2)
 
+
 results = []
-category_stats = defaultdict(lambda: {"passed": 0, "failed": 0, "scores": [], "latencies": []})
+category_stats = defaultdict(
+    lambda: {"passed": 0, "failed": 0, "scores": [], "latencies": []}
+)
 
 for tc in test_cases:
     tid = tc["id"]
@@ -486,31 +560,31 @@ for tc in test_cases:
     is_generation = "prompt" in tc
     task_text = tc.get("prompt", tc.get("input", ""))
     out_file = workers[tid]["out_file"]
-    
+
     # Read output
     try:
         with open(out_file) as f:
             output = f.read()
     except FileNotFoundError:
         output = "OUTPUT_FILE_MISSING"
-    
+
     latency_ms = int((time.time() - workers[tid]["start_time"]) * 1000)
-    
+
     # Extract corrected text
     corrected = extract_corrected_text(output)
     corrected_lower = corrected.lower()
-    
+
     # Check principles
     satisfied, missed = check_principles(output, tc["expected_principles"])
-    
+
     # Check forbidden keywords (only in corrected text, not compliance summary)
     forbidden = tc.get("forbidden_keywords", [])
     forbidden_found = check_keywords(corrected_lower, forbidden)
-    
+
     # Check expected keywords in corrected text
     expected_kw = tc.get("expected_keywords", [])
     expected_found = check_keywords(corrected_lower, expected_kw)
-    
+
     # Check required patterns (for generation tests)
     required_patterns = tc.get("required_patterns", [])
     patterns_found = []
@@ -520,24 +594,30 @@ for tc in test_cases:
             patterns_found.append(pat)
         else:
             patterns_missed.append(pat)
-    
+
     # Calculate correctness (single call with all params)
-    correctness = calc_correctness(tc["expected_principles"], satisfied, forbidden_found, len(forbidden),
-                                   expected_found, len(expected_kw))
-    
+    correctness = calc_correctness(
+        tc["expected_principles"],
+        satisfied,
+        forbidden_found,
+        len(forbidden),
+        expected_found,
+        len(expected_kw),
+    )
+
     # Penalty for missing required patterns
     if required_patterns:
         pattern_penalty = 0.2 * len(patterns_missed) / len(required_patterns)
         correctness = round(max(0.0, correctness - pattern_penalty), 2)
-    
+
     # Token estimation (handle both input and prompt)
     task_text = tc.get("prompt", tc.get("input", ""))
     token_input = len(task_text) // 4
     token_output = len(corrected) // 4
-    
+
     # Pass/fail threshold
     passed = correctness >= 0.7
-    
+
     # Notes
     notes_parts = []
     if missed:
@@ -548,7 +628,7 @@ for tc in test_cases:
         notes_parts.append(f"Keywords OK: {len(expected_found)}/{len(expected_kw)}")
     if patterns_missed:
         notes_parts.append(f"Patterns missed: {', '.join(patterns_missed)}")
-    
+
     result = {
         "test_id": tid,
         "category": cat,
@@ -571,7 +651,7 @@ for tc in test_cases:
         "difficulty": tc.get("difficulty", "unknown"),
     }
     results.append(result)
-    
+
     # Track category stats
     if passed:
         category_stats[cat]["passed"] += 1
@@ -649,12 +729,18 @@ for diff in ["easy", "medium", "hard"]:
 
 # Recommendations
 if aggregate["aggregates"]["avg_correctness"] < 0.7:
-    aggregate["recommendations"].append("System prompt needs improvement — avg correctness below 0.7")
+    aggregate["recommendations"].append(
+        "System prompt needs improvement — avg correctness below 0.7"
+    )
 if aggregate["aggregates"]["avg_latency_ms"] > 5000:
-    aggregate["recommendations"].append("Latency above 5s average — consider flash model for simple cases")
+    aggregate["recommendations"].append(
+        "Latency above 5s average — consider flash model for simple cases"
+    )
 for cat, data in aggregate["by_category"].items():
     if data["avg_correctness"] < 0.6:
-        aggregate["recommendations"].append(f"Category '{cat}' underperforming (avg {data['avg_correctness']}) — review test design or prompt coverage")
+        aggregate["recommendations"].append(
+            f"Category '{cat}' underperforming (avg {data['avg_correctness']}) — review test design or prompt coverage"
+        )
 
 # Write results
 agg_file = os.path.join(run_dir, "aggregate-results.json")
@@ -678,39 +764,59 @@ if not _CLI_NO_REPORT:
     print(f"  Failed:     {aggregate['failed']}")
     print()
     print(f"  Averages:")
-    print(f"    Correctness:  {aggregate['aggregates']['avg_correctness']:.3f}  (range: {aggregate['aggregates']['min_correctness']:.2f}–{aggregate['aggregates']['max_correctness']:.2f})")
-    print(f"    Latency:      {aggregate['aggregates']['avg_latency_ms']}ms  (range: {aggregate['aggregates']['min_latency_ms']}–{aggregate['aggregates']['max_latency_ms']}ms)")
-    print(f"    Tokens in:    {aggregate['aggregates']['avg_token_input']} avg  ({aggregate['aggregates']['total_tokens_input']} total)")
-    print(f"    Tokens out:   {aggregate['aggregates']['avg_token_output']} avg  ({aggregate['aggregates']['total_tokens_output']} total)")
+    print(
+        f"    Correctness:  {aggregate['aggregates']['avg_correctness']:.3f}  (range: {aggregate['aggregates']['min_correctness']:.2f}–{aggregate['aggregates']['max_correctness']:.2f})"
+    )
+    print(
+        f"    Latency:      {aggregate['aggregates']['avg_latency_ms']}ms  (range: {aggregate['aggregates']['min_latency_ms']}–{aggregate['aggregates']['max_latency_ms']}ms)"
+    )
+    print(
+        f"    Tokens in:    {aggregate['aggregates']['avg_token_input']} avg  ({aggregate['aggregates']['total_tokens_input']} total)"
+    )
+    print(
+        f"    Tokens out:   {aggregate['aggregates']['avg_token_output']} avg  ({aggregate['aggregates']['total_tokens_output']} total)"
+    )
     print()
 
     # Category breakdown table
     print("-" * 70)
-    print(f"  {'Category':<15} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Rate':>7} {'Avg Score':>10} {'Avg Lat':>8}")
+    print(
+        f"  {'Category':<15} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Rate':>7} {'Avg Score':>10} {'Avg Lat':>8}"
+    )
     print("-" * 70)
     for cat in sorted(aggregate["by_category"].keys()):
         d = aggregate["by_category"][cat]
         rate = round(d["passed"] / d["total"] * 100) if d["total"] else 0
-        print(f"  {cat:<15} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {rate:>6}% {d['avg_correctness']:>10.3f} {d['avg_latency_ms']:>7}ms")
+        print(
+            f"  {cat:<15} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {rate:>6}% {d['avg_correctness']:>10.3f} {d['avg_latency_ms']:>7}ms"
+        )
     print("-" * 70)
 
     # Difficulty breakdown
     print()
-    print(f"  {'Difficulty':<12} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Avg Score':>10}")
+    print(
+        f"  {'Difficulty':<12} {'Tests':>6} {'Passed':>7} {'Failed':>7} {'Avg Score':>10}"
+    )
     print("-" * 45)
     for diff in ["easy", "medium", "hard"]:
         if diff in aggregate["by_difficulty"]:
             d = aggregate["by_difficulty"][diff]
-            print(f"  {diff:<12} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {d['avg_correctness']:>10.3f}")
+            print(
+                f"  {diff:<12} {d['total']:>6} {d['passed']:>7} {d['failed']:>7} {d['avg_correctness']:>10.3f}"
+            )
 
     # Per-test detail
     print()
     print("-" * 70)
-    print(f"  {'ID':<12} {'Category':<12} {'Score':>6} {'Latency':>8} {'Result':>7}  Notes")
+    print(
+        f"  {'ID':<12} {'Category':<12} {'Score':>6} {'Latency':>8} {'Result':>7}  Notes"
+    )
     print("-" * 70)
     for r in results:
         status = "PASS" if r["passed"] else "FAIL"
-        print(f"  {r['test_id']:<12} {r['category']:<12} {r['correctness_score']:>6.2f} {r['latency_ms']:>7}ms {status:>7}  {r['notes'][:60]}")
+        print(
+            f"  {r['test_id']:<12} {r['category']:<12} {r['correctness_score']:>6.2f} {r['latency_ms']:>7}ms {status:>7}  {r['notes'][:60]}"
+        )
     print("-" * 70)
 
     # Failures detail
@@ -719,7 +825,9 @@ if not _CLI_NO_REPORT:
         print()
         print(f"FAILURES ({len(failures)})")
         for r in failures:
-            print(f"  {r['test_id']} ({r['category']}, {r['difficulty']}): score={r['correctness_score']}")
+            print(
+                f"  {r['test_id']} ({r['category']}, {r['difficulty']}): score={r['correctness_score']}"
+            )
             print(f"    Input:  {r['input'][:80]}...")
             print(f"    Output: {r['output'][:80]}...")
             print(f"    Missed principles: {r['expected_principles_missed']}")
@@ -749,6 +857,7 @@ if not _CLI_NO_REPORT:
 # difference that STE-Code system prompt instructions make vs a plain
 # assistant. Without this automated step, you must manually open both
 # aggregate JSON files and compute deltas by hand.
+
 
 def _find_latest_ste_run():
     """Auto-detect the most recent STE-Code results directory.
@@ -801,8 +910,12 @@ def _print_delta_report(control_agg, ste_agg):
 
     print(f"  {'Metric':<22} {'Control':>10} {'STE-Code':>10} {'Delta':>10}")
     print("-" * 55)
-    print(f"  {'Pass rate':<22} {c_pass:>9.1f}% {s_pass:>9.1f}% {(s_pass - c_pass):>+9.1f}%")
-    print(f"  {'Avg correctness':<22} {c_avg:>10.3f} {s_avg:>10.3f} {(s_avg - c_avg):>+10.3f}")
+    print(
+        f"  {'Pass rate':<22} {c_pass:>9.1f}% {s_pass:>9.1f}% {(s_pass - c_pass):>+9.1f}%"
+    )
+    print(
+        f"  {'Avg correctness':<22} {c_avg:>10.3f} {s_avg:>10.3f} {(s_avg - c_avg):>+10.3f}"
+    )
     print(f"  {'Avg latency':<22} {c_lat:>9}ms {s_lat:>9}ms {(s_lat - c_lat):>+10}ms")
     print()
 
@@ -811,7 +924,9 @@ def _print_delta_report(control_agg, ste_agg):
     s_cats = ste_agg.get("by_category", {})
     all_cats = sorted(set(list(c_cats.keys()) + list(s_cats.keys())))
 
-    print(f"  {'Category':<16} {'Control':>8} {'STE-Code':>8} {'Delta':>8} {'Improvement':>12}")
+    print(
+        f"  {'Category':<16} {'Control':>8} {'STE-Code':>8} {'Delta':>8} {'Improvement':>12}"
+    )
     print("-" * 58)
 
     cat_deltas = []
@@ -834,7 +949,9 @@ def _print_delta_report(control_agg, ste_agg):
     if winners:
         print("  Top 3 categories where STE-Code helps most:")
         for i, (cat, c_score, s_score, delta) in enumerate(winners, 1):
-            print(f"    {i}. {cat}: +{delta:.3f} (control={c_score:.3f}, ste={s_score:.3f})")
+            print(
+                f"    {i}. {cat}: +{delta:.3f} (control={c_score:.3f}, ste={s_score:.3f})"
+            )
         print()
 
     # --- Negative deltas (control beats STE-Code) ---

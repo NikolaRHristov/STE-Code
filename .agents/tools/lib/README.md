@@ -12,14 +12,16 @@ the single source for cross-cutting behaviour; no unit re-implements them.
   policy. A `clean=True` escape hatch exists for operator-driven setup that is
   explicitly outside the pipeline; it can never widen the repo boundary.
 - `ste_config.py` — per-unit configuration. `load(__file__)` reads the unit's
-  `config.yaml` merged under `defaults.yaml` (agent + runtime keys only). Exposes
-  `cfg.model`, `cfg.path(...)`, `cfg.pattern(...)`, `cfg.get(...)`.
+  `config.yaml` merged under `defaults.yaml` (agent + runtime keys only).
+  Exposes `cfg.model`, `cfg.path(...)`, `cfg.pattern(...)`, `cfg.get(...)`.
 - `ste_runtime.py` — pre-flight runtime resolution. `resolve(__file__)` computes
   the wrapper path, venv interpreter, retry count, batch divisor and encoding
-  from the repo. The shared source of these knobs (see `defaults.yaml` `runtime:`).
-- `ste_checkpoint.py` — atomic checkpoint load/save for crash-safe resume; routes
-  through `ste_io`.
-- `ste_paths.py` — `venv_python()` and `wrapper_path()` (agent runtime locations).
+  from the repo. The shared source of these knobs (see `defaults.yaml`
+  `runtime:`).
+- `ste_checkpoint.py` — atomic checkpoint load/save for crash-safe resume;
+  routes through `ste_io`.
+- `ste_paths.py` — `venv_python()` and `wrapper_path()` (agent runtime
+  locations).
 - `ste_time.py` — `run_stamp()`; the one run-stamp timestamp format.
 - `ste_retry.py` — `retry()` with exponential backoff.
 - `ste_cli.py` — argparse scaffolding for the entrypoints.

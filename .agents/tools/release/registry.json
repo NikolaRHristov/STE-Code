@@ -1,132 +1,233 @@
 {
-  "//": "Registry of every version / count / badge claim STE-Code makes about itself. Consumed by scan.py and sync.py. Add a rule here when a new claim site appears; never hand-edit the target files during a release.",
+	"//": "Registry of every version / count / badge claim STE-Code makes about itself. Consumed by scan.py and sync.py. Add a rule here when a new claim site appears; never hand-edit the target files during a release.",
 
-  "badges": [
-    {
-      "id": "badge-license",
-      "file": "README.md",
-      "pattern": "\\[!\\[License: MIT\\]\\(https://img\\.shields\\.io/badge/License-MIT-blue\\.svg\\)\\]",
-      "fact": null,
-      "note": "static — no fact binding"
-    },
-    {
-      "id": "badge-standard-rules",
-      "file": "README.md",
-      "pattern": "badge/standard-(?P<value>\\d+)%20rules-",
-      "fact": "rules"
-    },
-    {
-      "id": "badge-benchmark",
-      "file": "README.md",
-      "pattern": "badge/benchmark-(?P<value>[\\d.]+)%25%20pass-",
-      "fact": "benchmark_pass_rate",
-      "optional": true,
-      "note": "only synced when a committed benchmark summary provides the fact; runs under .agents/benchmark/tests/ are gitignored"
-    },
-    {
-      "id": "badge-version",
-      "file": "README.md",
-      "pattern": "badge/version-(?P<value>[\\d.]+)-",
-      "fact": "versions.core",
-      "optional": true
-    }
-  ],
+	"badges": [
+		{
+			"id": "badge-license",
+			"file": "README.md",
+			"pattern": "\\[!\\[License: MIT\\]\\(https://img\\.shields\\.io/badge/License-MIT-blue\\.svg\\)\\]",
+			"fact": null,
+			"note": "static — no fact binding"
+		},
+		{
+			"id": "badge-standard-rules",
+			"file": "README.md",
+			"pattern": "badge/standard-(?P<value>\\d+)%20rules-",
+			"fact": "rules"
+		},
+		{
+			"id": "badge-benchmark",
+			"file": "README.md",
+			"pattern": "badge/benchmark-(?P<value>[\\d.]+)%25%20pass-",
+			"fact": "benchmark_pass_rate",
+			"optional": true,
+			"note": "only synced when a committed benchmark summary provides the fact; runs under .agents/benchmark/tests/ are gitignored"
+		},
+		{
+			"id": "badge-version",
+			"file": "README.md",
+			"pattern": "badge/version-(?P<value>[\\d.]+)-",
+			"fact": "versions.core",
+			"optional": true
+		}
+	],
 
-  "version_stamps": [
-    { "id": "citation-version", "file": "CITATION.cff", "pattern": "^version: (?P<value>[\\d.]+)$", "fact": "versions.core" },
-    { "id": "citation-date", "file": "CITATION.cff", "pattern": "^date-released: \"(?P<value>[\\d-]+)\"$", "fact": "release_date" },
-    { "id": "flavor-version", "file": "ste-code/linguistics/FLAVOR.md", "pattern": "> \\*\\*Flavor version:\\*\\* FLAVOR-(?P<value>[\\d.]+)", "fact": "versions.flavor" },
-    { "id": "flavor-base", "file": "ste-code/linguistics/FLAVOR.md", "pattern": "> \\*\\*Base standard:\\*\\* STANDARD-(?P<value>[\\d.]+)", "fact": "versions.standard" },
-    { "id": "roadmap-version", "file": "docs/roadmap/ROADMAP.md", "pattern": "> \\*\\*Version:\\*\\* FLAVOR-(?P<value>[\\d.]+)", "fact": "versions.flavor" }
-  ],
+	"version_stamps": [
+		{
+			"id": "citation-version",
+			"file": "CITATION.cff",
+			"pattern": "^version: (?P<value>[\\d.]+)$",
+			"fact": "versions.core"
+		},
+		{
+			"id": "citation-date",
+			"file": "CITATION.cff",
+			"pattern": "^date-released: \"(?P<value>[\\d-]+)\"$",
+			"fact": "release_date"
+		},
+		{
+			"id": "flavor-version",
+			"file": "ste-code/linguistics/FLAVOR.md",
+			"pattern": "> \\*\\*Flavor version:\\*\\* FLAVOR-(?P<value>[\\d.]+)",
+			"fact": "versions.flavor"
+		},
+		{
+			"id": "flavor-base",
+			"file": "ste-code/linguistics/FLAVOR.md",
+			"pattern": "> \\*\\*Base standard:\\*\\* STANDARD-(?P<value>[\\d.]+)",
+			"fact": "versions.standard"
+		},
+		{
+			"id": "roadmap-version",
+			"file": "docs/roadmap/ROADMAP.md",
+			"pattern": "> \\*\\*Version:\\*\\* FLAVOR-(?P<value>[\\d.]+)",
+			"fact": "versions.flavor"
+		}
+	],
 
-  "count_claims": [
-    { "id": "rules-count",      "facts": ["rules", "adapted_rules"],                "pattern": "(?<![\\w.])(?P<value>\\d{2})(?= (?:writing |adapted |code-domain )?rules\\b)" },
-    { "id": "categories-count", "facts": ["categories", "benchmark_categories"],    "pattern": "(?<![\\w.])(?P<value>\\d{2})(?= categor(?:y|ies)\\b)" },
-    { "id": "tests-count",      "facts": ["benchmark_tests"],                       "pattern": "(?<![\\w.])(?P<value>\\d{2})(?= tests\\b)" },
-    { "id": "tier-count",       "facts": ["tier_count"],                            "pattern": "(?<![\\w.])(?P<value>\\d)(?= tiers\\b)" },
-    { "id": "locales-count",    "facts": ["locales"],                               "pattern": "(?<![\\w.])(?P<value>\\d{1,2})(?= locales\\b)" },
-    { "id": "groups-count",     "facts": ["groups"],                                "pattern": "(?<![\\w.])(?P<value>\\d{2})(?= groups\\b)" },
-    { "id": "spec-pages",       "facts": ["spec_pdf_pages", "spec_pages"],          "pattern": "(?<![\\w.])(?P<value>\\d{3})(?= pages\\b)" },
-    { "id": "worker-count",     "facts": ["extracted"],                             "pattern": "(?<![\\w.])(?P<value>\\d{3})(?= (?:extraction |parallel )?workers\\b)" }
-  ],
+	"count_claims": [
+		{
+			"id": "rules-count",
+			"facts": ["rules", "adapted_rules"],
+			"pattern": "(?<![\\w.])(?P<value>\\d{2})(?= (?:writing |adapted |code-domain )?rules\\b)"
+		},
+		{
+			"id": "categories-count",
+			"facts": ["categories", "benchmark_categories"],
+			"pattern": "(?<![\\w.])(?P<value>\\d{2})(?= categor(?:y|ies)\\b)"
+		},
+		{
+			"id": "tests-count",
+			"facts": ["benchmark_tests"],
+			"pattern": "(?<![\\w.])(?P<value>\\d{2})(?= tests\\b)"
+		},
+		{
+			"id": "tier-count",
+			"facts": ["tier_count"],
+			"pattern": "(?<![\\w.])(?P<value>\\d)(?= tiers\\b)"
+		},
+		{
+			"id": "locales-count",
+			"facts": ["locales"],
+			"pattern": "(?<![\\w.])(?P<value>\\d{1,2})(?= locales\\b)"
+		},
+		{
+			"id": "groups-count",
+			"facts": ["groups"],
+			"pattern": "(?<![\\w.])(?P<value>\\d{2})(?= groups\\b)"
+		},
+		{
+			"id": "spec-pages",
+			"facts": ["spec_pdf_pages", "spec_pages"],
+			"pattern": "(?<![\\w.])(?P<value>\\d{3})(?= pages\\b)"
+		},
+		{
+			"id": "worker-count",
+			"facts": ["extracted"],
+			"pattern": "(?<![\\w.])(?P<value>\\d{3})(?= (?:extraction |parallel )?workers\\b)"
+		}
+	],
 
-  "count_claims_note": "Counts are ambiguous by nature (\"14 categories\" of tests vs \"22 categories\" of technical nouns), so each claim accepts a SET of facts and only flags a number matching none of them. Scanning is limited to sync_files by default; --wide scans every tracked document as advisory. Suppress a false positive with a trailing '<!-- release-scan:ignore -->' comment on the line.",
+	"count_claims_note": "Counts are ambiguous by nature (\"14 categories\" of tests vs \"22 categories\" of technical nouns), so each claim accepts a SET of facts and only flags a number matching none of them. Scanning is limited to sync_files by default; --wide scans every tracked document as advisory. Suppress a false positive with a trailing '<!-- release-scan:ignore -->' comment on the line.",
 
-  "sync_files": [
-    "README.md",
-    "CITATION.cff",
-    "CONTRIBUTING.md",
-    "docs/index.md",
-    "docs/pipeline.md",
-    "docs/contributing.md",
-    "docs/stages/stage-a.md",
-    "docs/stages/stage-b.md",
-    "docs/stages/stage-c.md",
-    "docs/stages/stage-d.md",
-    "docs/stages/stage-e.md",
-    "docs/stages/stage-f.md",
-    "ste-code/README.md",
-    "ste-code/artifacts/README.md",
-    "ste-code/linguistics/FLAVOR.md",
-    ".agents/AGENTS.md",
-    ".agents/README.md",
-    "translations/README.md"
-  ],
+	"sync_files": [
+		"README.md",
+		"CITATION.cff",
+		"CONTRIBUTING.md",
+		"docs/index.md",
+		"docs/pipeline.md",
+		"docs/contributing.md",
+		"docs/stages/stage-a.md",
+		"docs/stages/stage-b.md",
+		"docs/stages/stage-c.md",
+		"docs/stages/stage-d.md",
+		"docs/stages/stage-e.md",
+		"docs/stages/stage-f.md",
+		"ste-code/README.md",
+		"ste-code/artifacts/README.md",
+		"ste-code/linguistics/FLAVOR.md",
+		".agents/AGENTS.md",
+		".agents/README.md",
+		"translations/README.md"
+	],
 
-  "scan_exclude": [
-    "spec/",
-    ".agents/vendor/",
-    ".agents/audit/",
-    ".agents/state/",
-    ".agents/trajectory/",
-    ".agents/tmp/",
-    "ste-code/extracted/",
-    "ste-code/refined/",
-    "ste-code/grouped/",
-    "ste-code/adapted/",
-    "ste-code/final/",
-    "ste-code/artifacts/",
-    "ste-code/enriched/",
-    "ste-code/data/",
-    "ste-code/audit/",
-    "translations/bg/",
-    "translations/de/",
-    "translations/es/",
-    "translations/fr/",
-    "translations/it/",
-    "translations/ja/",
-    "translations/pl/",
-    "translations/pt-BR/",
-    "translations/uk/",
-    "translations/zh-CN/"
-  ],
+	"scan_exclude": [
+		"spec/",
+		".agents/vendor/",
+		".agents/audit/",
+		".agents/state/",
+		".agents/trajectory/",
+		".agents/tmp/",
+		"ste-code/extracted/",
+		"ste-code/refined/",
+		"ste-code/grouped/",
+		"ste-code/adapted/",
+		"ste-code/final/",
+		"ste-code/artifacts/",
+		"ste-code/enriched/",
+		"ste-code/data/",
+		"ste-code/audit/",
+		"translations/bg/",
+		"translations/de/",
+		"translations/es/",
+		"translations/fr/",
+		"translations/it/",
+		"translations/ja/",
+		"translations/pl/",
+		"translations/pt-BR/",
+		"translations/uk/",
+		"translations/zh-CN/"
+	],
 
-  "scan_exclude_note": "Pipeline output dirs are excluded: their numbers are content of the standard (\"version 3.0 of the library\"), not claims about STE-Code itself.",
+	"scan_exclude_note": "Pipeline output dirs are excluded: their numbers are content of the standard (\"version 3.0 of the library\"), not claims about STE-Code itself.",
 
-  "labels": [
-    { "name": "release",        "color": "0E8A16", "description": "Release preparation and version bumps" },
-    { "name": "stage:a-extract","color": "1D76DB", "description": "Stage A — spec extraction" },
-    { "name": "stage:b-refine", "color": "1D76DB", "description": "Stage B — refinement" },
-    { "name": "stage:c-group",  "color": "1D76DB", "description": "Stage C — deterministic grouping" },
-    { "name": "stage:d-adapt",  "color": "1D76DB", "description": "Stage D — code-domain adaptation" },
-    { "name": "stage:e-extend", "color": "1D76DB", "description": "Stage E — gap-fill extensions" },
-    { "name": "stage:f-artifact","color": "1D76DB","description": "Stage F — deployable artifacts" },
-    { "name": "benchmark",      "color": "5319E7", "description": "Benchmark suite and scoring" },
-    { "name": "docs",           "color": "0075CA", "description": "Documentation" },
-    { "name": "tooling",        "color": "BFD4F2", "description": "Pipeline tooling and scripts" },
-    { "name": "translations",   "color": "C2E0C6", "description": "Locale scaffolding and translation" },
-    { "name": "fact-drift",     "color": "D93F0B", "description": "A documented count or version disagrees with disk" }
-  ],
+	"labels": [
+		{
+			"name": "release",
+			"color": "0E8A16",
+			"description": "Release preparation and version bumps"
+		},
+		{
+			"name": "stage:a-extract",
+			"color": "1D76DB",
+			"description": "Stage A — spec extraction"
+		},
+		{
+			"name": "stage:b-refine",
+			"color": "1D76DB",
+			"description": "Stage B — refinement"
+		},
+		{
+			"name": "stage:c-group",
+			"color": "1D76DB",
+			"description": "Stage C — deterministic grouping"
+		},
+		{
+			"name": "stage:d-adapt",
+			"color": "1D76DB",
+			"description": "Stage D — code-domain adaptation"
+		},
+		{
+			"name": "stage:e-extend",
+			"color": "1D76DB",
+			"description": "Stage E — gap-fill extensions"
+		},
+		{
+			"name": "stage:f-artifact",
+			"color": "1D76DB",
+			"description": "Stage F — deployable artifacts"
+		},
+		{
+			"name": "benchmark",
+			"color": "5319E7",
+			"description": "Benchmark suite and scoring"
+		},
+		{ "name": "docs", "color": "0075CA", "description": "Documentation" },
+		{
+			"name": "tooling",
+			"color": "BFD4F2",
+			"description": "Pipeline tooling and scripts"
+		},
+		{
+			"name": "translations",
+			"color": "C2E0C6",
+			"description": "Locale scaffolding and translation"
+		},
+		{
+			"name": "fact-drift",
+			"color": "D93F0B",
+			"description": "A documented count or version disagrees with disk"
+		}
+	],
 
-  "topics": [
-    "simplified-technical-english",
-    "asd-ste100",
-    "controlled-language",
-    "code-documentation",
-    "technical-writing",
-    "llm",
-    "system-prompt",
-    "documentation-standard"
-  ]
+	"topics": [
+		"simplified-technical-english",
+		"asd-ste100",
+		"controlled-language",
+		"code-documentation",
+		"technical-writing",
+		"llm",
+		"system-prompt",
+		"documentation-standard"
+	]
 }

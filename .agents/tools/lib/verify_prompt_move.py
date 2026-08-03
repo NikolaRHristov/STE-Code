@@ -53,7 +53,8 @@ def load_templater():
     import importlib.util
 
     spec = importlib.util.spec_from_file_location(
-        "templater", str(HERE / "templater.py"))
+        "templater", str(HERE / "templater.py")
+    )
     if spec is None or spec.loader is None:
         raise RuntimeError("cannot load templater.py")
     mod = importlib.util.module_from_spec(spec)
@@ -63,8 +64,9 @@ def load_templater():
 
 def cmd_capture(args) -> int:
     STORE.mkdir(parents=True, exist_ok=True)
-    text = (sys.stdin.read() if args.stdin
-            else Path(args.file).read_text(encoding="utf-8"))
+    text = (
+        sys.stdin.read() if args.stdin else Path(args.file).read_text(encoding="utf-8")
+    )
     dest = STORE / "{}.txt".format(args.name)
     dest.write_text(text, encoding="utf-8")
     print("captured {} chars -> {}".format(len(text), dest))
@@ -74,26 +76,27 @@ def cmd_capture(args) -> int:
 def cmd_check(args) -> int:
     baseline_path = STORE / "{}.txt".format(args.name)
     if not baseline_path.exists():
-        print("no baseline for '{}' -- run capture first".format(args.name),
-              file=sys.stderr)
+        print(
+            "no baseline for '{}' -- run capture first".format(args.name),
+            file=sys.stderr,
+        )
         return 2
     baseline = normalize(baseline_path.read_text(encoding="utf-8"))
 
     variables = {}
     for pair in args.var or []:
         if "=" not in pair:
-            print("bad --var {!r}, expected name=value".format(pair),
-                  file=sys.stderr)
+            print("bad --var {!r}, expected name=value".format(pair), file=sys.stderr)
             return 2
         k, v = pair.split("=", 1)
         variables[k] = v
     if args.vars_json:
-        variables.update(json.loads(Path(args.vars_json)
-                                    .read_text(encoding="utf-8")))
+        variables.update(json.loads(Path(args.vars_json).read_text(encoding="utf-8")))
 
     tpl = load_templater()
-    rendered = tpl.render_template(Path(args.template),
-                                   strict=not args.loose, **variables)
+    rendered = tpl.render_template(
+        Path(args.template), strict=not args.loose, **variables
+    )
     rendered = normalize(rendered)
 
     if rendered == baseline:
@@ -102,8 +105,12 @@ def cmd_check(args) -> int:
 
     print("DIFFERS    {}".format(args.name))
     diff = difflib.unified_diff(
-        baseline.split("\n"), rendered.split("\n"),
-        fromfile="inline (before)", tofile="template (after)", lineterm="")
+        baseline.split("\n"),
+        rendered.split("\n"),
+        fromfile="inline (before)",
+        tofile="template (after)",
+        lineterm="",
+    )
     shown = 0
     for line in diff:
         print(line)
@@ -119,14 +126,14 @@ def cmd_list(args) -> int:
         print("no baselines captured")
         return 0
     for p in sorted(STORE.glob("*.txt")):
-        print("{:<40} {:>7} chars".format(p.stem, len(p.read_text(
-            encoding="utf-8"))))
+        print("{:<40} {:>7} chars".format(p.stem, len(p.read_text(encoding="utf-8"))))
     return 0
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__,
-                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     c = sub.add_parser("capture", help="store the pre-migration prompt")
@@ -140,8 +147,11 @@ def main() -> int:
     k.add_argument("--template", required=True)
     k.add_argument("--var", action="append")
     k.add_argument("--vars-json")
-    k.add_argument("--loose", action="store_true",
-                   help="non-strict render (leaves unknown placeholders)")
+    k.add_argument(
+        "--loose",
+        action="store_true",
+        help="non-strict render (leaves unknown placeholders)",
+    )
     k.add_argument("--max-diff", type=int, default=60)
     k.set_defaults(fn=cmd_check)
 

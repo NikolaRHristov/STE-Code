@@ -11,8 +11,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -21,6 +25,7 @@ from ste_io import mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 # Provides: run_agent, launch_agent, get_agent_command
@@ -61,12 +66,30 @@ def main():
         sections.setdefault(sec, []).append(str(sf.relative_to(PROJECT)))
 
     tasks = [
-        ("Rules S1-3", sections.get("sec1", []) + sections.get("sec2", []) + sections.get("sec3", []),
-         LEVEL4_DIR / "rules-s1-3.md", "Extract compact rule summaries for sections 1-3."),
-        ("Rules S4-6", sections.get("sec4", []) + sections.get("sec5", []) + sections.get("sec6", []),
-         LEVEL4_DIR / "rules-s4-6.md", "Extract compact rule summaries for sections 4-6."),
-        ("Rules S7-9", sections.get("sec7", []) + sections.get("sec8", []) + sections.get("sec9", []),
-         LEVEL4_DIR / "rules-s7-9.md", "Extract compact rule summaries for sections 7-9."),
+        (
+            "Rules S1-3",
+            sections.get("sec1", [])
+            + sections.get("sec2", [])
+            + sections.get("sec3", []),
+            LEVEL4_DIR / "rules-s1-3.md",
+            "Extract compact rule summaries for sections 1-3.",
+        ),
+        (
+            "Rules S4-6",
+            sections.get("sec4", [])
+            + sections.get("sec5", [])
+            + sections.get("sec6", []),
+            LEVEL4_DIR / "rules-s4-6.md",
+            "Extract compact rule summaries for sections 4-6.",
+        ),
+        (
+            "Rules S7-9",
+            sections.get("sec7", [])
+            + sections.get("sec8", [])
+            + sections.get("sec9", []),
+            LEVEL4_DIR / "rules-s7-9.md",
+            "Extract compact rule summaries for sections 7-9.",
+        ),
     ]
 
     if dry_run:

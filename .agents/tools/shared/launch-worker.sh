@@ -18,29 +18,41 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 AGENT_RUNNER="$SCRIPT_DIR/../lib/agent-runner.py"
-PROMPT_FILE="$1"; shift
+PROMPT_FILE="$1"
+shift
 
 # Parse optional flags
 AGENT=""
 MODEL=""
+CONFINED=""
 while [[ $# -gt 0 ]]; do
-    case "$1" in
-        --agent) AGENT="$2"; shift 2 ;;
-        --model) MODEL="$2"; shift 2 ;;
-        *) break ;;
-    esac
+	case "$1" in
+	--agent)
+		AGENT="$2"
+		shift 2
+		;;
+	--model)
+		MODEL="$2"
+		shift 2
+		;;
+	--confined)
+		CONFINED=1
+		shift
+		;;
+	*) break ;;
+	esac
 done
 
 OUTPUT_FILE="${1:-}"
 
 if [ ! -f "$PROMPT_FILE" ]; then
-    echo "ERROR: Prompt file not found: $PROMPT_FILE" >&2
-    exit 1
+	echo "ERROR: Prompt file not found: $PROMPT_FILE" >&2
+	exit 1
 fi
 
 if [ ! -f "$AGENT_RUNNER" ]; then
-    echo "ERROR: Agent runner not found: $AGENT_RUNNER" >&2
-    exit 1
+	echo "ERROR: Agent runner not found: $AGENT_RUNNER" >&2
+	exit 1
 fi
 
 # Build agent-runner CLI args
@@ -50,19 +62,33 @@ RUNNER_ARGS=("$PROMPT_FILE")
 
 # Auto-detect Python (prefer hermes venv, fall back to system python3)
 if [ -f "$HOME/.hermes/hermes-agent/venv/bin/python3" ]; then
-    PYTHON="$HOME/.hermes/hermes-agent/venv/bin/python3"
+	PYTHON="$HOME/.hermes/hermes-agent/venv/bin/python3"
 elif [ -f "$PROJECT_ROOT/.hermes/hermes-agent/venv/bin/python3" ]; then
-    PYTHON="$PROJECT_ROOT/.hermes/hermes-agent/venv/bin/python3"
+	PYTHON="$PROJECT_ROOT/.hermes/hermes-agent/venv/bin/python3"
 else
-    PYTHON="python3"
+	PYTHON="python3"
+fi
+
+if [ -n "$CONFINED" ]; then
+	# Route through the hardened, kernel-confined launcher instead of the
+	# bare agent-runner. Force-pins the bench jail policy + env-strip.
+	_LCD="$(cd "$SCRIPT_DIR/../../benchmark" && pwd)/launch_confined_child.py"
+	if [ -n "$OUTPUT_FILE" ]; then
+		mkdir -p "$(dirname "$OUTPUT_FILE")"
+		nohup "$PYTHON" "$_LCD" "$PROMPT_FILE" --model "$MODEL" >"$OUTPUT_FILE" 2>&1 &
+		echo "Confined worker launched (PID: $!) → $OUTPUT_FILE"
+	else
+		"$PYTHON" "$_LCD" "$PROMPT_FILE" --model "$MODEL"
+	fi
+	exit 0
 fi
 
 if [ -n "$OUTPUT_FILE" ]; then
-    # Background mode with output capture
-    mkdir -p "$(dirname "$OUTPUT_FILE")"
-    nohup "$PYTHON" "$AGENT_RUNNER" "${RUNNER_ARGS[@]}" > "$OUTPUT_FILE" 2>&1 &
-    echo "Worker launched (PID: $!) → $OUTPUT_FILE"
+	# Background mode with output capture
+	mkdir -p "$(dirname "$OUTPUT_FILE")"
+	nohup "$PYTHON" "$AGENT_RUNNER" "${RUNNER_ARGS[@]}" >"$OUTPUT_FILE" 2>&1 &
+	echo "Worker launched (PID: $!) → $OUTPUT_FILE"
 else
-    # Foreground mode
-    "$PYTHON" "$AGENT_RUNNER" "${RUNNER_ARGS[@]}"
+	# Foreground mode
+	"$PYTHON" "$AGENT_RUNNER" "${RUNNER_ARGS[@]}"
 fi

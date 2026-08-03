@@ -36,120 +36,121 @@
 # is not the same as one you measured and missed.
 
 goals:
-  - id: G1
-    statement: >-
-      The harness runs end to end: all five colours complete every cycle and
-      the driver produces a report.
-    check: {metric: black_verdicts, op: gt, value: 0}
-    weight: primary
-    rationale: >-
-      Wiring check. Everything else is meaningless if the handshake does not
-      close.
+    - id: G1
+      statement: >-
+          The harness runs end to end: all five colours complete every cycle and
+          the driver produces a report.
+      check: { metric: black_verdicts, op: gt, value: 0 }
+      weight: primary
+      rationale: >-
+          Wiring check. Everything else is meaningless if the handshake does not
+          close.
 
-  - id: G2
-    statement: >-
-      The learning loop converges: WHITE's lessons rise, BLACK confirms the
-      base defends them, they are pruned, and the attack surface shrinks to a
-      fixed point.
-    check: {metric: loop_converged, op: is_true}
-    weight: primary
-    rationale: >-
-      This is the design thesis. WHITE hands BLACK the attack brief so BLACK
-      can disprove claims that only looked correct; surviving claims retire.
-      A flat curve means the loop is not closing.
+    - id: G2
+      statement: >-
+          The learning loop converges: WHITE's lessons rise, BLACK confirms the
+          base defends them, they are pruned, and the attack surface shrinks to
+          a fixed point.
+      check: { metric: loop_converged, op: is_true }
+      weight: primary
+      rationale: >-
+          This is the design thesis. WHITE hands BLACK the attack brief so BLACK
+          can disprove claims that only looked correct; surviving claims retire.
+          A flat curve means the loop is not closing.
 
-  - id: G3
-    statement: >-
-      The adversarial half runs against a live model, so its numbers are
-      measurements rather than generator output.
-    check: {metric: pipeline_live, op: is_true}
-    weight: primary
-    rationale: >-
-      Under --skip-live every adversarial figure is simulated. CONTRACT.md §6
-      forbids presenting these as measurements.
+    - id: G3
+      statement: >-
+          The adversarial half runs against a live model, so its numbers are
+          measurements rather than generator output.
+      check: { metric: pipeline_live, op: is_true }
+      weight: primary
+      rationale: >-
+          Under --skip-live every adversarial figure is simulated. CONTRACT.md
+          §6 forbids presenting these as measurements.
 
-  - id: G4
-    statement: >-
-      RED discovers escapes by attacking the subject, rather than replaying a
-      seeded corpus.
-    check: {metric: escapes_observed, op: is_true}
-    weight: primary
-    blocked_by: [G3]
-    rationale: >-
-      A seeded ledger means WHITE rediscovers the seeder's assumptions. The
-      convergence is real but it converges on fiction.
+    - id: G4
+      statement: >-
+          RED discovers escapes by attacking the subject, rather than replaying
+          a seeded corpus.
+      check: { metric: escapes_observed, op: is_true }
+      weight: primary
+      blocked_by: [G3]
+      rationale: >-
+          A seeded ledger means WHITE rediscovers the seeder's assumptions. The
+          convergence is real but it converges on fiction.
 
-  - id: G5
-    statement: >-
-      BLACK genuinely challenges the conclusion: at least some verdicts come
-      back as something other than "confirmed".
-    check: {metric: black_dissent, op: gt, value: 0}
-    weight: primary
-    blocked_by: [G3]
-    rationale: >-
-      A challenger that confirms everything is not testing anything. All-
-      confirmed usually means the hypothesis is compared against a constant
-      the driver itself wrote.
+    - id: G5
+      statement: >-
+          BLACK genuinely challenges the conclusion: at least some verdicts come
+          back as something other than "confirmed".
+      check: { metric: black_dissent, op: gt, value: 0 }
+      weight: primary
+      blocked_by: [G3]
+      rationale: >-
+          A challenger that confirms everything is not testing anything. All-
+          confirmed usually means the hypothesis is compared against a constant
+          the driver itself wrote.
 
-  - id: G6
-    statement: >-
-      Adopted remedies survive split-half verification, so an overfit remedy
-      is caught before it is kept.
-    check: {metric: remedies_verified, op: gt, value: 0}
-    weight: primary
-    rationale: >-
-      verification.py implements the permutation test and bootstrap CI. If it
-      never runs, adopted remedies are unverified by construction.
+    - id: G6
+      statement: >-
+          Adopted remedies survive split-half verification, so an overfit remedy
+          is caught before it is kept.
+      check: { metric: remedies_verified, op: gt, value: 0 }
+      weight: primary
+      rationale: >-
+          verification.py implements the permutation test and bootstrap CI. If
+          it never runs, adopted remedies are unverified by construction.
 
-  - id: G7
-    statement: >-
-      Every scored suite finishes inside the orchestrator's time budget.
-    check: {metric: suites_completed_pct, op: gte, value: 100}
-    weight: secondary
-    rationale: >-
-      Partial suite coverage means the measured half is a biased sample of the
-      tiers, not the tiers.
+    - id: G7
+      statement: >-
+          Every scored suite finishes inside the orchestrator's time budget.
+      check: { metric: suites_completed_pct, op: gte, value: 100 }
+      weight: secondary
+      rationale: >-
+          Partial suite coverage means the measured half is a biased sample of
+          the tiers, not the tiers.
 
-  - id: G8
-    statement: >-
-      Measured quality clears the bar on the suites that did finish.
-    check: {metric: measured_pass_rate_pct, op: gte, value: 90}
-    weight: secondary
-    rationale: Headline quality number for the subject under test.
+    - id: G8
+      statement: >-
+          Measured quality clears the bar on the suites that did finish.
+      check: { metric: measured_pass_rate_pct, op: gte, value: 90 }
+      weight: secondary
+      rationale: Headline quality number for the subject under test.
 
-  - id: G9
-    statement: >-
-      Difficulty ordering holds: pass rate falls as tier difficulty rises.
-    check: {metric: tier_monotonic, op: is_true}
-    weight: secondary
-    rationale: >-
-      If harder tiers do not score lower, the tiers are not measuring
-      difficulty and the ladder is miscalibrated.
+    - id: G9
+      statement: >-
+          Difficulty ordering holds: pass rate falls as tier difficulty rises.
+      check: { metric: tier_monotonic, op: is_true }
+      weight: secondary
+      rationale: >-
+          If harder tiers do not score lower, the tiers are not measuring
+          difficulty and the ladder is miscalibrated.
 
-  - id: G10
-    statement: >-
-      The control baseline is large enough to support a comparison against the
-      profile under test.
-    check: {metric: control_cases, op: gte, value: 30}
-    weight: secondary
-    rationale: >-
-      A 2-case control is a smoke test. No profile-vs-plain claim can rest on
-      it.
+    - id: G10
+      statement: >-
+          The control baseline is large enough to support a comparison against
+          the profile under test.
+      check: { metric: control_cases, op: gte, value: 30 }
+      weight: secondary
+      rationale: >-
+          A 2-case control is a smoke test. No profile-vs-plain claim can rest
+          on it.
 
-  - id: G11
-    statement: >-
-      Colours correspond over the real note bus, exercising acknowledgement,
-      rebuttal and stale-note detection.
-    check: {metric: notes_protocol, op: gt, value: 0}
-    weight: secondary
-    rationale: >-
-      Notes with no from_colour are the driver's lighter reverse-deduction
-      record; NOTES_PROTOCOL.md's bus never ran.
+    - id: G11
+      statement: >-
+          Colours correspond over the real note bus, exercising acknowledgement,
+          rebuttal and stale-note detection.
+      check: { metric: notes_protocol, op: gt, value: 0 }
+      weight: secondary
+      rationale: >-
+          Notes with no from_colour are the driver's lighter reverse-deduction
+          record; NOTES_PROTOCOL.md's bus never ran.
 
-  - id: G12
-    statement: The harness itself is free of critical or high severity defects.
-    check: {metric: critical_findings, op: eq, value: 0}
-    weight: secondary
-    rationale: >-
-      Defects in the instrument contaminate every number the instrument
-      produces.
+    - id: G12
+      statement:
+          The harness itself is free of critical or high severity defects.
+      check: { metric: critical_findings, op: eq, value: 0 }
+      weight: secondary
+      rationale: >-
+          Defects in the instrument contaminate every number the instrument
+          produces.

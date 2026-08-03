@@ -48,6 +48,7 @@ PROMPT_NAME_TEMPLATE = "r{worker}-prompt.txt"
 
 # ── Path resolution ───────────────────────────────────────────────────────────
 
+
 def _resolve_project_root() -> Path:
     """Auto-detect the project root directory from the location of this script.
 
@@ -57,8 +58,8 @@ def _resolve_project_root() -> Path:
     Raises:
         RuntimeError: If the expected directory structure is not found.
     """
-    script_dir = Path(__file__).resolve().parent          # .agents/tools/refinement/
-    project_root = script_dir.parent.parent.parent        # project root
+    script_dir = Path(__file__).resolve().parent  # .agents/tools/refinement/
+    project_root = script_dir.parent.parent.parent  # project root
 
     # Sanity check: the root should contain these known directories.
     expected_markers = ["ste-code", ".agents"]
@@ -84,7 +85,9 @@ def _resolve_default_dirs() -> Tuple[Path, Path]:
     prompts = root / "ste-code" / "prompts-refine"
     return extracted, prompts
 
+
 # ── Validation ────────────────────────────────────────────────────────────────
+
 
 def _validate_directory(path: Path, label: str) -> None:
     """Check that a directory exists and is readable. Exit on failure.
@@ -124,7 +127,9 @@ def _ensure_directory(path: Path, label: str) -> None:
         log.error("Cannot create %s directory: %s — %s", label, path, exc)
         sys.exit(1)
 
+
 # ── File scanning ─────────────────────────────────────────────────────────────
+
 
 def _find_extracted_files(extracted_dir: Path) -> List[Path]:
     """Find all extracted specification files matching the expected pattern.
@@ -153,11 +158,13 @@ def _find_extracted_files(extracted_dir: Path) -> List[Path]:
     for name in all_files:
         m = FILENAME_RE.match(name)
         if m:
-            matched.append({
-                "path": extracted_dir / name,
-                "worker": int(m.group("worker")),
-                "page_start": int(m.group("start")),
-            })
+            matched.append(
+                {
+                    "path": extracted_dir / name,
+                    "worker": int(m.group("worker")),
+                    "page_start": int(m.group("start")),
+                }
+            )
         else:
             log.debug("Skipping non-conforming file: %s", name)
 
@@ -165,7 +172,9 @@ def _find_extracted_files(extracted_dir: Path) -> List[Path]:
     matched.sort(key=lambda d: (d["worker"], d["page_start"]))
     return [d["path"] for d in matched]
 
+
 # ── Prompt generation ────────────────────────────────────────────────────────
+
 
 def _build_prompt(
     input_filename: str,
@@ -217,7 +226,9 @@ RULES (apply in order, do not skip any):
 Output ONLY the refined markdown file. No explanations, no commentary.
 """
 
+
 # ── Main logic ────────────────────────────────────────────────────────────────
+
 
 def generate_prompts(
     extracted_dir: Path,
@@ -305,7 +316,9 @@ def generate_prompts(
 
     return generated
 
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
+
 
 def _build_argparser() -> argparse.ArgumentParser:
     """Build and return the argument parser for this script.
@@ -388,7 +401,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         except RuntimeError as exc:
             log.error("%s", exc)
             return 1
-        extracted_dir = args.input_dir.resolve() if args.input_dir else default_extracted
+        extracted_dir = (
+            args.input_dir.resolve() if args.input_dir else default_extracted
+        )
         prompts_dir = args.output_dir.resolve() if args.output_dir else default_prompts
 
     log.debug("Input directory:  %s", extracted_dir)

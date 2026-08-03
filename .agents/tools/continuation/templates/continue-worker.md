@@ -17,7 +17,8 @@ and follows the refined markdown format used by the rest of ste-code/refined/.
    and all marker conventions used elsewhere in ste-code/refined/ (e.g.
    `<!-- Start of picture text -->` ... `<!-- End of picture text -->`).
 4. Do NOT change the meaning or drop any source content. Reflow only if needed.
-5. Write the corrected file with your file-write tool, replacing the old content.
+5. Write the corrected file with your file-write tool, replacing the old
+   content.
 
 ## Hard rules
 

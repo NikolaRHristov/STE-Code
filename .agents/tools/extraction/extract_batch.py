@@ -46,8 +46,12 @@ from datetime import datetime, timezone
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -57,6 +61,7 @@ from ste_time import run_stamp  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 PAGE_DIR = PROJECT / "spec" / "issue-09-2025" / "page-dir"
 EXTRACTED_DIR = PROJECT / "ste-code" / "extracted"
@@ -99,11 +104,14 @@ exec(open(PROJECT / ".agents" / "tools" / "lib" / "_import_runner.py").read())
 
 # Shared template loader ({{placeholder}} syntax — see lib/templater.py).
 import sys as _sys
+
 _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import lib_import, render_template
 
 skill_prompt = lib_import("skill_prompt")
-_EXTRACTION_PROMPT_PATH = PROJECT / ".agents" / "tools" / "prompts" / "extraction-worker.md"
+_EXTRACTION_PROMPT_PATH = (
+    PROJECT / ".agents" / "tools" / "prompts" / "extraction-worker.md"
+)
 
 
 def parse_manifest():
@@ -189,7 +197,7 @@ def verify_output(worker_num, start_pos, end_pos, output_path):
     lines = content.splitlines()
 
     # Gate 1: Size — must have meaningful content
-    is_last = (worker_num == MAX_WORKERS)
+    is_last = worker_num == MAX_WORKERS
     min_size = 200 if is_last else 600
     if size < min_size:
         return False, f"Size {size}B below {min_size}B minimum"
@@ -226,7 +234,8 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
         if ok:
             # Mark in checkpoint so future sessions skip it.
             _checkpoint[str(worker_num)] = {
-                "passed": True, "attempt": 0,
+                "passed": True,
+                "attempt": 0,
                 "output_size": output_file.stat().st_size,
             }
             _save_checkpoint(_checkpoint)
@@ -239,8 +248,10 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
     telemetry_path = TELEMETRY_DIR / f"w{worker_num:03d}-{timestamp}.json"
 
     start_time = time.time()
-    print(f"  W{worker_num:03d} (attempt {attempt}): Extracting "
-          f"{start_pos}-{end_pos}...", flush=True)
+    print(
+        f"  W{worker_num:03d} (attempt {attempt}): Extracting {start_pos}-{end_pos}...",
+        flush=True,
+    )
 
     telemetry = {
         "worker_id": f"W{worker_num:03d}",
@@ -286,9 +297,13 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
         if result.stdout:
             stdout_lower = result.stdout.lower()
             if "http 400" in stdout_lower or "error" in stdout_lower:
-                errors = [l for l in result.stdout.split("\n")
-                           if "error" in l.lower() or "traceback" in l.lower()
-                           or "http 400" in l.lower()]
+                errors = [
+                    l
+                    for l in result.stdout.split("\n")
+                    if "error" in l.lower()
+                    or "traceback" in l.lower()
+                    or "http 400" in l.lower()
+                ]
                 if errors:
                     telemetry["errors"].extend(errors[:5])
 
@@ -300,20 +315,24 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
                 output_file.read_text(encoding="utf-8").splitlines()
             )
             telemetry["verification_status"] = "PASS"
-            telemetry["verification_message"] = f"OK — {telemetry['output_size_bytes']}B, {telemetry['output_lines']} lines"
-            print(f"  W{worker_num:03d}: [PASS] {telemetry['verification_message']} ({duration:.1f}s)",
-                  flush=True)
+            telemetry["verification_message"] = (
+                f"OK — {telemetry['output_size_bytes']}B, {telemetry['output_lines']} lines"
+            )
+            print(
+                f"  W{worker_num:03d}: [PASS] {telemetry['verification_message']} ({duration:.1f}s)",
+                flush=True,
+            )
             _save_telemetry(telemetry_path, telemetry)
             # Checkpoint: mark this worker as passed.
             _checkpoint[str(worker_num)] = {
-                "passed": True, "attempt": attempt,
+                "passed": True,
+                "attempt": attempt,
                 "output_size": telemetry["output_size_bytes"],
             }
             _save_checkpoint(_checkpoint)
             return True, telemetry["verification_message"], False
         else:
-            print(f"  W{worker_num:03d}: [FAIL] No output file — retrying",
-                  flush=True)
+            print(f"  W{worker_num:03d}: [FAIL] No output file — retrying", flush=True)
             telemetry["errors"].append("Output file not created by agent")
             # Save stdout for debugging
             if result.stdout:
@@ -326,8 +345,10 @@ def run_worker(worker_num, start_pos, end_pos, mapping, attempt=1):
         telemetry["end_time"] = datetime.now(timezone.utc).isoformat()
         telemetry["errors"].append(f"TIMEOUT after {duration:.0f}s")
         telemetry["exit_code"] = -1
-        print(f"  W{worker_num:03d}: [TIMEOUT] after {duration:.0f}s — retrying",
-              flush=True)
+        print(
+            f"  W{worker_num:03d}: [TIMEOUT] after {duration:.0f}s — retrying",
+            flush=True,
+        )
 
     except Exception as e:
         duration = time.time() - start_time
@@ -350,6 +371,7 @@ def _save_telemetry(path, data):
 
 
 # ── Checkpoint / fast-failover state ──────────────────────────────────────────
+
 
 def _load_checkpoint():
     """Load the extraction checkpoint — a dict of worker_num → {"passed": bool, "attempt": int}."""
@@ -391,10 +413,13 @@ def process_batch(batch_num, start_worker, mapping):
     batch_end = workers[-1][2]
     worker_ids = [f"W{w:03d}" for w, _, _ in workers]
 
-    print(f"\n{'='*60}", flush=True)
-    print(f"Batch {batch_num:02d} — {', '.join(worker_ids)} "
-          f"(pages {batch_start}-{batch_end})", flush=True)
-    print(f"{'='*60}", flush=True)
+    print(f"\n{'=' * 60}", flush=True)
+    print(
+        f"Batch {batch_num:02d} — {', '.join(worker_ids)} "
+        f"(pages {batch_start}-{batch_end})",
+        flush=True,
+    )
+    print(f"{'=' * 60}", flush=True)
 
     # Process workers sequentially (shared model backend)
     results = []
@@ -422,13 +447,16 @@ def process_batch(batch_num, start_worker, mapping):
             f = EXTRACTED_DIR / f"w{worker_num:03d}-p{start_pos}-{end_pos}.md"
             subprocess.run(
                 ["git", "add", str(f.relative_to(PROJECT))],
-                capture_output=True, text=True, cwd=str(PROJECT)
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT),
             )
 
     # Collect any passed worker files for this commit
     passed_files = [
         str(EXTRACTED_DIR / f"w{w:03d}-p{s}-{e}.md").replace(str(PROJECT) + "/", "")
-        for w, s, e, ok in results if ok
+        for w, s, e, ok in results
+        if ok
     ]
 
     status_str = "PASS" if all_passed else f"PARTIAL ({passed}/{len(workers)})"
@@ -440,7 +468,9 @@ def process_batch(batch_num, start_worker, mapping):
     if passed_files:
         result = subprocess.run(
             ["git", "commit", "-m", commit_msg] + passed_files,
-            capture_output=True, text=True, cwd=str(PROJECT)
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT),
         )
         if result.returncode == 0:
             print(f"  ✓ Committed: {commit_msg}", flush=True)
@@ -472,7 +502,9 @@ def _update_progress(batch_num, results):
     lines = content.splitlines()
     for i, line in enumerate(lines):
         if line.strip().startswith(f"| {batch_num:02d} |"):
-            lines[i] = f"| {batch_num:02d} | {w_str} | {start_pos}-{end_pos} | {status} |"
+            lines[i] = (
+                f"| {batch_num:02d} | {w_str} | {start_pos}-{end_pos} | {status} |"
+            )
 
     write_text(PROGRESS_PATH, "\n".join(lines))
 
@@ -486,14 +518,21 @@ def main():
 
     print(f"STE-Code Batch Extraction Pipeline v2", flush=True)
     print(f"Model: {MODEL}", flush=True)
-    print(f"Batches: {num_batches} (workers {start_batch}-{start_batch + num_batches - 1})", flush=True)
+    print(
+        f"Batches: {num_batches} (workers {start_batch}-{start_batch + num_batches - 1})",
+        flush=True,
+    )
     print(f"Resume: {'yes (from checkpoint)' if resume else 'no'}", flush=True)
     print(f"Project: {PROJECT}", flush=True)
 
     # Register checkpoint save on exit (crash-safe resume).
     atexit.register(lambda: _save_checkpoint(_checkpoint))
-    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
-    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
+    signal.signal(
+        signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0))
+    )
+    signal.signal(
+        signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130))
+    )
 
     mapping = parse_manifest()
     print(f"Manifest: {len(mapping)} page mappings", flush=True)
@@ -506,7 +545,8 @@ def main():
     existing = sorted(EXTRACTED_DIR.glob("w*.md"))
     if existing:
         last_w = max(
-            int(f.stem.split("-")[0][1:]) for f in existing
+            int(f.stem.split("-")[0][1:])
+            for f in existing
             if f.stem.startswith("w") and f.stem[1:].split("-")[0].isdigit()
         )
         print(f"  Existing last: W{last_w:03d} ({len(existing)} files)", flush=True)
@@ -528,14 +568,18 @@ def main():
         workers_in_batch = min(WORKERS_PER_BATCH, MAX_WORKERS - start_worker + 1)
         total_workers += workers_in_batch
         total_passed += sum(
-            1 for w in range(start_worker, start_worker + workers_in_batch)
-            if (EXTRACTED_DIR / f"w{w:03d}-p{(w-1)*4+1}-{min(w*4, TOTAL_PAGES)}.md").exists()
+            1
+            for w in range(start_worker, start_worker + workers_in_batch)
+            if (
+                EXTRACTED_DIR
+                / f"w{w:03d}-p{(w - 1) * 4 + 1}-{min(w * 4, TOTAL_PAGES)}.md"
+            ).exists()
         )
 
     final_count = len(list(EXTRACTED_DIR.glob("w*.md")))
-    print(f"\n{'='*60}", flush=True)
+    print(f"\n{'=' * 60}", flush=True)
     print(f"Done. Files in extracted/: {final_count}", flush=True)
-    print(f"{'='*60}", flush=True)
+    print(f"{'=' * 60}", flush=True)
 
 
 if __name__ == "__main__":

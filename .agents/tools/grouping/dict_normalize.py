@@ -39,12 +39,15 @@ demotes page markers to `<!-- Page N -->` comments.
 DETERMINISTIC — no LLM. Free-tier LLMs truncate large dict tables (exchange.md
 Lesson #3); this parser cannot.
 """
+
 from __future__ import annotations
 
 import re
 
 # ── column model ────────────────────────────────────────────────────────────
-HEADER = "| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |"
+HEADER = (
+    "| Word (POS) | Approved meaning/ALTERNATIVES | STE EXAMPLE | Non-STE example |"
+)
 SEPARATOR = "|---|---|---|---|"
 
 # Bullet/label -> which column it feeds. We KEEP the label word in the cell so
@@ -52,7 +55,13 @@ SEPARATOR = "|---|---|---|---|"
 # lossless.
 _LABEL_COL = [
     (re.compile(r"^\s*[-*]\s*\*{0,2}(meaning|definition)\b", re.I), 2),
-    (re.compile(r"^\s*[-*]\s*\*{0,2}(approved\s+alternative\s*\d*|approved\s+alternatives|alternative\s*\d*|alternative|alternatives)\b", re.I), 2),
+    (
+        re.compile(
+            r"^\s*[-*]\s*\*{0,2}(approved\s+alternative\s*\d*|approved\s+alternatives|alternative\s*\d*|alternative|alternatives)\b",
+            re.I,
+        ),
+        2,
+    ),
     (re.compile(r"^\s*[-*]\s*\*{0,2}(approved\s+meaning)\b", re.I), 2),
     (re.compile(r"^\s*[-*]\s*\*{0,2}(inflections?|forms?|spelling)\b", re.I), 2),
     (re.compile(r"^\s*[-*]\s*\*{0,2}(see)\b", re.I), 2),
@@ -63,7 +72,9 @@ _LABEL_COL = [
 _STE_Q_RE = re.compile(r"^\s*>\s*\*{0,2}\s*ste\s*:\s*", re.I)
 _NONSTE_Q_RE = re.compile(r"^\s*>\s*\*{0,2}\s*non[- ]?ste\s*:\s*", re.I)
 _BULLET_RE = re.compile(r"^\s*[-*]\s+\*{0,2}(.+?)\s*$")
-_HEAD_RE = re.compile(r"^#{3,4}\s+\*{0,2}([A-Za-z][A-Za-z()\-\s,]*?)\s*\(([^)]*)\)", re.I)
+_HEAD_RE = re.compile(
+    r"^#{3,4}\s+\*{0,2}([A-Za-z][A-Za-z()\-\s,]*?)\s*\(([^)]*)\)", re.I
+)
 _SUBHEAD_RE = re.compile(r"^#{1,3}\s+\*{0,2}(approved|unapproved|dictionary)\b", re.I)
 _PAGE_RE = re.compile(r"^#{1,4}\s+Page\s+.+", re.I)
 _PIC_START_RE = re.compile(r"<!--\s*Start of picture text\s*-->", re.I)
@@ -74,6 +85,8 @@ _TABLE_HDR_RE = re.compile(r"^\|\s*word\b\s*\(?(?:pos|part of speech)?\)?", re.I
 def _demark(s: str) -> str:
     """Strip `**` bold and `<br>` so header/row matchers see plain text."""
     return re.sub(r"\*\*|<\s*br\s*/?\s*>", "", s, flags=re.I)
+
+
 _SEP_RE = re.compile(r"^\|[\s:\-|]+$", re.I)
 _NONTOKEN_RE = re.compile(r"^\s*(>|\||#|\*|\-|\s)*$")
 
@@ -141,8 +154,11 @@ def _block_to_rows(body: str) -> list[str]:
         word = f"{m.group(1).strip()} ({m.group(2).strip()})"
         j = i + 1
         block: list[str] = []
-        while j < n and not _HEAD_RE.match(lines[j].strip()) \
-                and not _PAGE_RE.match(lines[j].strip()):
+        while (
+            j < n
+            and not _HEAD_RE.match(lines[j].strip())
+            and not _PAGE_RE.match(lines[j].strip())
+        ):
             block.append(lines[j])
             j += 1
         col2, col3, col4 = [], [], []
@@ -262,5 +278,6 @@ def normalize_dict_page(body: str) -> str:
 
 if __name__ == "__main__":
     import sys
+
     src = sys.stdin.read()
     sys.stdout.write(normalize_dict_page(src))

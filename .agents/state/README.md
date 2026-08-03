@@ -1,7 +1,7 @@
 # Pipeline run state
 
-Empty by design. Every file that appears here is written by a running
-pipeline stage and describes **this machine's run** — not the project.
+Empty by design. Every file that appears here is written by a running pipeline
+stage and describes **this machine's run** — not the project.
 
 ```
 .agents/state/
@@ -15,12 +15,12 @@ pipeline stage and describes **this machine's run** — not the project.
 **Never commit run state.** A checkpoint records what one operator's machine
 completed. Committed, it makes the next clone skip work it never did.
 
-**Never trust a checkpoint over disk.** A checkpoint marks a unit done even
-when the stage fell back to a copy. Regenerate the progress table from the
-output files and compare:
+**Never trust a checkpoint over disk.** A checkpoint marks a unit done even when
+the stage fell back to a copy. Regenerate the progress table from the output
+files and compare:
 
 ```bash
-python3 .agents/tools/<stage>/<stage>_batch.py --regen-progress
+python3 .agents/tools/ --regen-progress < stage > / < stage > _batch.py
 ```
 
 **Never write pipeline output here.** This directory holds bookkeeping only.
@@ -28,8 +28,8 @@ Stage output belongs in the output tree the stage owns.
 
 ## Reset
 
-Deleting this directory's contents returns the pipeline to a clean state.
-Stages recreate what they need on the next run:
+Deleting this directory's contents returns the pipeline to a clean state. Stages
+recreate what they need on the next run:
 
 ```bash
 rm -rf .agents/state/*

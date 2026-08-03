@@ -1,42 +1,51 @@
 ---
 name: hermes-profile-skill-confinement
-description: A Hermes profile must load ONLY a chosen skill set and NO default bundled Hermes skills
+description:
+    A Hermes profile must load ONLY a chosen skill set and NO default bundled
+    Hermes skills
 category: apply
 capability: applying-the-standard-to-a-codebase
 source: /Users/nikola/.hermes/profiles/dev-ste-code/skills/devops/hermes-profile-skill-confinement
 layout: ste-code-canonical-v1
 ---
 
-
 # Confine a Hermes profile to a specific skill set
 
 ## When to use
-A Hermes profile must load ONLY a chosen skill set and NO default bundled Hermes skills
-(e.g. STE-Code authoring/benchmark/consumer profiles).
+
+A Hermes profile must load ONLY a chosen skill set and NO default bundled Hermes
+skills (e.g. STE-Code authoring/benchmark/consumer profiles).
 
 ## Mechanism (verified in Hermes source)
+
 - `hermes_cli/web_server.py:13352` repins at profile-session start:
   `SKILLS_DIR = profile_dir/"skills"` and `HERMES_HOME = profile_dir`.
-- `agent/skill_commands.py` scans ONLY `SKILLS_DIR` (+ `skills.external_dirs` from config),
-  NOT the global `~/.hermes/skills/`.
-- So the profile `skills/` dir is the SOLE source while that profile is active. Make it hold
-  only symlinks to your chosen skills and NO default skill can load.
+- `agent/skill_commands.py` scans ONLY `SKILLS_DIR` (+ `skills.external_dirs`
+  from config), NOT the global `~/.hermes/skills/`.
+- So the profile `skills/` dir is the SOLE source while that profile is active.
+  Make it hold only symlinks to your chosen skills and NO default skill can
+  load.
 
 ## Procedure
-1. Canonical source: `REPO/.agents/skills/<name>` (+ consumer skills like `applying-ste-code`).
+
+1. Canonical source: `REPO/.agents/skills/<name>` (+ consumer skills like
+   `applying-ste-code`).
 2. Per profile `skills/` dir:
-   - KEEP state files: `.bundled_manifest`, `.usage.json`, `.usage.json.lock`, `.hub/`.
-   - For each desired skill: symlink `skills/<name> -> <source>/<name>`.
-   - REMOVE (MOVE to `/tmp/<backup>/<profile>/`, never delete) default real dirs
-     (apple, creative, email, media, mlops, note-taking, productivity, research, smart-home,
-     social-media, software-development).
-   - Remove stale/wrong symlinks; create missing wanted symlinks.
+    - KEEP state files: `.bundled_manifest`, `.usage.json`, `.usage.json.lock`,
+      `.hub/`.
+    - For each desired skill: symlink `skills/<name> -> <source>/<name>`.
+    - REMOVE (MOVE to `/tmp/<backup>/<profile>/`, never delete) default real
+      dirs (apple, creative, email, media, mlops, note-taking, productivity,
+      research, smart-home, social-media, software-development).
+    - Remove stale/wrong symlinks; create missing wanted symlinks.
 
 ## Pitfalls
-- LIVE sessions regenerate `skills/` (e.g. `dev-ste-code/skills/ste-code/` came back with
-  `ste-code-jail-ops`, `ste-code-repo-hygiene`). Re-strip only after the session goes quiet.
-  If the user explicitly says to leave a regenerated real dir as-is (their active work),
-  do NOT re-symlink it — it is legit STE work, just not yet single-sourced.
+
+- LIVE sessions regenerate `skills/` (e.g. `dev-ste-code/skills/ste-code/` came
+  back with `ste-code-jail-ops`, `ste-code-repo-hygiene`). Re-strip only after
+  the session goes quiet. If the user explicitly says to leave a regenerated
+  real dir as-is (their active work), do NOT re-symlink it — it is legit STE
+  work, just not yet single-sourced.
 - Do NOT prune `~/.hermes/skills/` (global, shared). Confinement is per-profile.
 - `github-release-maintenance`, `ste-code-continuation`, `ste-code-validate`,
   `adversarial-benchmark-harness`, `gated-batch-orchestration`, `link-checking`,
@@ -44,9 +53,11 @@ A Hermes profile must load ONLY a chosen skill set and NO default bundled Hermes
   (`github`, `continuation`, `validation`); `hermes skills list` flattens them.
 
 ## Verification (runtime, not static)
+
 ```
 env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p> \
   hermes skills list --enabled-only
 ```
-Confirm zero default skills, only intended STE skills. Static `ls` is NOT enough — a live
-session can change what resolves.
+
+Confirm zero default skills, only intended STE skills. Static `ls` is NOT enough
+— a live session can change what resolves.

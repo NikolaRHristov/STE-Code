@@ -3,6 +3,7 @@
 
 Run: python3 .agents/tools/continuation/test_continuation.py
 """
+
 import sys
 import json
 import subprocess
@@ -12,8 +13,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -22,6 +27,7 @@ sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "continuation"))
 
 from templater import Templater
+
 CB = __import__("continue_batch")
 VC = __import__("verify_continuation")
 
@@ -52,6 +58,7 @@ def t_prompt_render():
 def t_queue_parse():
     print("C2 verify_continuation builds a queue from flagged refined pages")
     import subprocess
+
     d = Path(tempfile.mkdtemp())
     qp = d / ".continue-queue.json"
     # A truncated page
@@ -63,10 +70,27 @@ def t_queue_parse():
         "Each worker reads its configuration from the environment and writes a "
         "status file when it finishes. The supervisor checks the status file and "
         "restarts the worker if the file is older than the timeout. Use short "
-        "sentences and active voice in all procedure documentation.\n")
-    r = subprocess.run([sys.executable, str(PROJECT / ".agents" / "tools" / "continuation" / "verify_continuation.py"),
-                        "--dir", str(d), "--queue", str(qp)],
-                       capture_output=True, text=True, cwd=str(PROJECT))
+        "sentences and active voice in all procedure documentation.\n"
+    )
+    r = subprocess.run(
+        [
+            sys.executable,
+            str(
+                PROJECT
+                / ".agents"
+                / "tools"
+                / "continuation"
+                / "verify_continuation.py"
+            ),
+            "--dir",
+            str(d),
+            "--queue",
+            str(qp),
+        ],
+        capture_output=True,
+        text=True,
+        cwd=str(PROJECT),
+    )
     check("verifier exits 0", r.returncode == 0, r.stderr)
     data = json.loads(qp.read_text())
     check("queue flags truncated page", any("bad.md" in e for e in data), str(data))
@@ -75,15 +99,22 @@ def t_queue_parse():
 
 def t_runner_guard():
     print("C3 continue_batch refuses without --queue (exit 2)")
-    r = subprocess.run([sys.executable, str(PROJECT / ".agents" / "tools" / "continuation" / "continue_batch.py")],
-                       capture_output=True, text=True, cwd=str(PROJECT))
+    r = subprocess.run(
+        [
+            sys.executable,
+            str(PROJECT / ".agents" / "tools" / "continuation" / "continue_batch.py"),
+        ],
+        capture_output=True,
+        text=True,
+        cwd=str(PROJECT),
+    )
     check("exit 2 without queue", r.returncode == 2, str(r.returncode))
 
 
 def main():
     for t in (t_prompt_render, t_queue_parse, t_runner_guard):
         t()
-    print(f"\n{'='*50}\n{_passed} passed, {_failed} failed\n{'='*50}")
+    print(f"\n{'=' * 50}\n{_passed} passed, {_failed} failed\n{'=' * 50}")
     sys.exit(1 if _failed else 0)
 
 

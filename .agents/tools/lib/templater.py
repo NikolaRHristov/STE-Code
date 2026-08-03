@@ -43,6 +43,7 @@ USAGE
     from templater import render_template
     text = render_template(Path("/abs/templates/x.md"), name="value")
 """
+
 from __future__ import annotations
 
 import re
@@ -74,11 +75,13 @@ def render_string(template: str, *, strict: bool = True, **vars: object) -> str:
         missing = needed - supplied
         if missing:
             raise KeyError(
-                f"template needs placeholder(s) not supplied: {sorted(missing)}")
+                f"template needs placeholder(s) not supplied: {sorted(missing)}"
+            )
         extra = supplied - needed
         if extra:
             raise ValueError(
-                f"variable(s) supplied but not used by template: {sorted(extra)}")
+                f"variable(s) supplied but not used by template: {sorted(extra)}"
+            )
 
     def _sub(m: "re.Match[str]") -> str:
         name = m.group(1)

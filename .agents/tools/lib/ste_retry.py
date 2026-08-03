@@ -13,6 +13,7 @@ Usage
 
     result = retry(call_api, retries=3, backoff_s=5, label="expand")
 """
+
 from __future__ import annotations
 
 import time
@@ -34,6 +35,7 @@ def retry(
     Raises the last exception if all attempts fail.
     """
     import logging
+
     log = logging.getLogger("ste_retry")
     last: BaseException | None = None
     for attempt in range(1, retries + 1):

@@ -33,84 +33,84 @@ ALL_PROFILES=("dev-ste-code" "ste-code" "benchmark-ste-code")
 DRY_RUN=0
 GRANULAR=0
 
-log()  { printf '%s\n' "$*"; }
-run()  { if [ "$DRY_RUN" = "1" ]; then log "  would: $*"; else "$@"; fi; }
+log() { printf '%s\n' "$*"; }
+run() { if [ "$DRY_RUN" = "1" ]; then log "  would: $*"; else "$@"; fi; }
 
 link_one() {
-    # $1 = plugin name, $2 = profile plugins dir
-    local name="$1" dest_dir="$2"
-    local src="$JAIL_DIR/plugins/$name"
-    local dest="$dest_dir/$name"
+	# $1 = plugin name, $2 = profile plugins dir
+	local name="$1" dest_dir="$2"
+	local src="$JAIL_DIR/plugins/$name"
+	local dest="$dest_dir/$name"
 
-    if [ ! -d "$src" ]; then
-        log "  ✗ source missing: $src"
-        return 1
-    fi
+	if [ ! -d "$src" ]; then
+		log "  ✗ source missing: $src"
+		return 1
+	fi
 
-    if [ -L "$dest" ]; then
-        local current
-        current="$(readlink "$dest")"
-        if [ "$current" = "$src" ]; then
-            log "  = $name (already linked)"
-            return 0
-        fi
-        run rm -f "$dest"
-    elif [ -e "$dest" ]; then
-        log "  ✗ $name exists and is NOT a symlink — refusing to replace it"
-        log "    move it aside first: $dest"
-        return 1
-    fi
+	if [ -L "$dest" ]; then
+		local current
+		current="$(readlink "$dest")"
+		if [ "$current" = "$src" ]; then
+			log "  = $name (already linked)"
+			return 0
+		fi
+		run rm -f "$dest"
+	elif [ -e "$dest" ]; then
+		log "  ✗ $name exists and is NOT a symlink — refusing to replace it"
+		log "    move it aside first: $dest"
+		return 1
+	fi
 
-    run ln -sfn "$src" "$dest"
-    log "  → $name"
+	run ln -sfn "$src" "$dest"
+	log "  → $name"
 }
 
 install_profile() {
-    local profile="$1"
-    local dir="$PROFILES_DIR/$profile"
+	local profile="$1"
+	local dir="$PROFILES_DIR/$profile"
 
-    log ""
-    log "profile: $profile"
+	log ""
+	log "profile: $profile"
 
-    if [ ! -d "$dir" ]; then
-        # A profile with a source in the repository can be created here: the
-        # installer owns its on-disk layout, so it makes the directory and
-        # links the source content in. A profile with no source must be
-        # created by `hermes profile create`, which seeds machine-local state
-        # that the installer must not assume.
-        if [ -d "$PROFILE_SRC_DIR/$profile" ]; then
-            if [ "$DRY_RUN" = "1" ]; then
-                log "  would: create $dir from the repository source"
-            else
-                run mkdir -p "$dir"
-            fi
-        else
-            log "  ✗ profile does not exist: $dir"
-            log "    create it: hermes profile create $profile"
-            return 1
-        fi
-    fi
+	if [ ! -d "$dir" ]; then
+		# A profile with a source in the repository can be created here: the
+		# installer owns its on-disk layout, so it makes the directory and
+		# links the source content in. A profile with no source must be
+		# created by `hermes profile create`, which seeds machine-local state
+		# that the installer must not assume.
+		if [ -d "$PROFILE_SRC_DIR/$profile" ]; then
+			if [ "$DRY_RUN" = "1" ]; then
+				log "  would: create $dir from the repository source"
+			else
+				run mkdir -p "$dir"
+			fi
+		else
+			log "  ✗ profile does not exist: $dir"
+			log "    create it: hermes profile create $profile"
+			return 1
+		fi
+	fi
 
-    local plugins_dir="$dir/plugins"
-    [ -d "$plugins_dir" ] || run mkdir -p "$plugins_dir"
+	local plugins_dir="$dir/plugins"
+	[ -d "$plugins_dir" ] || run mkdir -p "$plugins_dir"
 
-    local failed=0
-    if [ "$GRANULAR" = "1" ]; then
-        for name in "${COMPONENTS[@]}"; do
-            link_one "$name" "$plugins_dir" || failed=1
-        done
-    else
-        link_one "$GROUP_PLUGIN" "$plugins_dir" || failed=1
-    fi
+	local failed=0
+	if [ "$GRANULAR" = "1" ]; then
+		for name in "${COMPONENTS[@]}"; do
+			link_one "$name" "$plugins_dir" || failed=1
+		done
+	else
+		link_one "$GROUP_PLUGIN" "$plugins_dir" || failed=1
+	fi
 
-    link_credentials "$dir" || failed=1
-    link_profile_source "$profile" "$dir" || failed=1
-    seed_model_config "$dir" || failed=1
+	link_credentials "$dir" || failed=1
+	link_profile_source "$profile" "$dir" || failed=1
+	seed_model_config "$dir" || failed=1
 
-    # The policy is derived from the profile NAME, so no per-profile config is
-    # required. A profile that needs an override drops its own jail.yaml here.
-    log "  policy: $(policy_for "$profile")"
-    return $failed
+	# The policy is derived from the profile NAME, so no per-profile config is
+	# required. A profile that needs an override drops its own jail.yaml here.
+	log "  policy: $(policy_for "$profile")"
+	return $failed
 }
 
 # Link product content from the repository into the live profile.
@@ -123,63 +123,66 @@ install_profile() {
 # Only profiles with a source directory are touched. `dev-ste-code` has none —
 # it holds machine-local authoring state that must not enter the repository.
 link_profile_source() {
-    local profile="$1" dir="$2"
-    local src="$PROFILE_SRC_DIR/$profile"
+	local profile="$1" dir="$2"
+	local src="$PROFILE_SRC_DIR/$profile"
 
-    [ -d "$src" ] || return 0
+	[ -d "$src" ] || return 0
 
-    log "  source: $src"
+	log "  source: $src"
 
-    local entry name dest
-    for entry in "$src"/*; do
-        [ -e "$entry" ] || continue
-        name="$(basename "$entry")"
-        # README.md documents the source tree; it is not profile content.
-        [ "$name" = "README.md" ] && continue
-        dest="$dir/$name"
+	local entry name dest
+	for entry in "$src"/*; do
+		[ -e "$entry" ] || continue
+		name="$(basename "$entry")"
+		# README.md documents the source tree; it is not profile content.
+		[ "$name" = "README.md" ] && continue
+		dest="$dir/$name"
 
-        # `skills/` is merged, not replaced: link each skill individually so a
-        # profile can hold both repository skills and locally installed ones.
-        if [ "$name" = "skills" ] && [ -d "$entry" ]; then
-            [ -d "$dest" ] || run mkdir -p "$dest"
-            local skill sname sdest
-            for skill in "$entry"/*; do
-                [ -e "$skill" ] || continue
-                sname="$(basename "$skill")"
-                sdest="$dest/$sname"
-                if [ -L "$sdest" ]; then
-                    [ "$(readlink "$sdest")" = "$skill" ] && continue
-                    run rm -f "$sdest"
-                elif [ -e "$sdest" ]; then
-                    log "  ⚠ skills/$sname is a real directory — leaving it"
-                    continue
-                fi
-                run ln -sfn "$skill" "$sdest"
-                log "  → skills/$sname"
-            done
-            continue
-        fi
+		# `skills/` is merged, not replaced: link each skill individually so a
+		# profile can hold both repository skills and locally installed ones.
+		if [ "$name" = "skills" ] && [ -d "$entry" ]; then
+			[ -d "$dest" ] || run mkdir -p "$dest"
+			local skill sname sdest
+			for skill in "$entry"/*; do
+				[ -e "$skill" ] || continue
+				sname="$(basename "$skill")"
+				sdest="$dest/$sname"
+				if [ -L "$sdest" ]; then
+					[ "$(readlink "$sdest")" = "$skill" ] && continue
+					run rm -f "$sdest"
+				elif [ -e "$sdest" ]; then
+					log "  ⚠ skills/$sname is a real directory — leaving it"
+					continue
+				fi
+				run ln -sfn "$skill" "$sdest"
+				log "  → skills/$sname"
+			done
+			continue
+		fi
 
-        if [ -L "$dest" ]; then
-            [ "$(readlink "$dest")" = "$entry" ] && { log "  = $name"; continue; }
-            run rm -f "$dest"
-        elif [ -e "$dest" ]; then
-            # A real file or directory already exists in the live profile.
-            # Back it up (once) rather than clobbering live state, then link
-            # the repository source over it. This preserves an in-flight
-            # session's config while moving the profile onto tracked content.
-            if [ ! -e "$dest.bak" ]; then
-                run cp -a "$dest" "$dest.bak"
-                log "  ↩ backed up live $name -> $name.bak"
-            else
-                log "  ↩ kept existing $name.bak"
-            fi
-            run rm -rf "$dest"
-        fi
+		if [ -L "$dest" ]; then
+			[ "$(readlink "$dest")" = "$entry" ] && {
+				log "  = $name"
+				continue
+			}
+			run rm -f "$dest"
+		elif [ -e "$dest" ]; then
+			# A real file or directory already exists in the live profile.
+			# Back it up (once) rather than clobbering live state, then link
+			# the repository source over it. This preserves an in-flight
+			# session's config while moving the profile onto tracked content.
+			if [ ! -e "$dest.bak" ]; then
+				run cp -a "$dest" "$dest.bak"
+				log "  ↩ backed up live $name -> $name.bak"
+			else
+				log "  ↩ kept existing $name.bak"
+			fi
+			run rm -rf "$dest"
+		fi
 
-        run ln -sfn "$entry" "$dest"
-        log "  → $name"
-    done
+		run ln -sfn "$entry" "$dest"
+		log "  → $name"
+	done
 }
 
 # A freshly created profile has a placeholder .env with no keys, so a live
@@ -187,29 +190,32 @@ link_profile_source() {
 # dev-ste-code does. Only ever replaces a placeholder or an existing symlink —
 # a real .env with content is left alone.
 link_credentials() {
-    local dir="$1"
-    local shared="$HOME/.hermes/.env"
-    local dest="$dir/.env"
+	local dir="$1"
+	local shared="$HOME/.hermes/.env"
+	local dest="$dir/.env"
 
-    [ -e "$shared" ] || { log "  = .env (no shared store to link)"; return 0; }
+	[ -e "$shared" ] || {
+		log "  = .env (no shared store to link)"
+		return 0
+	}
 
-    if [ -L "$dest" ]; then
-        if [ "$(readlink "$dest")" = "$shared" ]; then
-            log "  = .env (already linked)"
-            return 0
-        fi
-        log "  ⚠ .env points elsewhere — leaving it alone"
-        return 0
-    fi
+	if [ -L "$dest" ]; then
+		if [ "$(readlink "$dest")" = "$shared" ]; then
+			log "  = .env (already linked)"
+			return 0
+		fi
+		log "  ⚠ .env points elsewhere — leaving it alone"
+		return 0
+	fi
 
-    # Treat a comments-only file as a placeholder: no KEY=value lines.
-    if [ -f "$dest" ] && grep -qE '^[A-Za-z_][A-Za-z0-9_]*=' "$dest"; then
-        log "  ⚠ .env holds real keys — leaving it alone"
-        return 0
-    fi
+	# Treat a comments-only file as a placeholder: no KEY=value lines.
+	if [ -f "$dest" ] && grep -qE '^[A-Za-z_][A-Za-z0-9_]*=' "$dest"; then
+		log "  ⚠ .env holds real keys — leaving it alone"
+		return 0
+	fi
 
-    run ln -sfn "$shared" "$dest"
-    log "  → .env -> shared credential store"
+	run ln -sfn "$shared" "$dest"
+	log "  → .env -> shared credential store"
 }
 
 # A profile with no config.yaml falls back to whatever the shell environment
@@ -222,161 +228,170 @@ link_credentials() {
 # perfectly installed and enforces NOTHING — the live test proved this by
 # escaping all four cases while `--status` reported the link was fine.
 seed_model_config() {
-    local dir="$1"
-    local dest="$dir/config.yaml"
-    local source_cfg="$PROFILES_DIR/dev-ste-code/config.yaml"
+	local dir="$1"
+	local dest="$dir/config.yaml"
+	local source_cfg="$PROFILES_DIR/dev-ste-code/config.yaml"
 
-    # A profile whose config.yaml comes from the repository owns its own
-    # settings. Seeding or appending would either fail on the symlink or
-    # rewrite tracked content from machine-local state.
-    if [ -L "$dest" ]; then
-        log "  = config.yaml (from the repository source)"
-        return 0
-    fi
+	# A profile whose config.yaml comes from the repository owns its own
+	# settings. Seeding or appending would either fail on the symlink or
+	# rewrite tracked content from machine-local state.
+	if [ -L "$dest" ]; then
+		log "  = config.yaml (from the repository source)"
+		return 0
+	fi
 
-    if [ "$DRY_RUN" = "1" ]; then
-        log "  would: seed config.yaml (model + plugin enablement)"
-        return 0
-    fi
+	if [ "$DRY_RUN" = "1" ]; then
+		log "  would: seed config.yaml (model + plugin enablement)"
+		return 0
+	fi
 
-    if [ ! -e "$dest" ]; then
-        if [ -f "$source_cfg" ]; then
-            # Copy only the model block: the rest of the dev config is
-            # authoring setup a locked-down profile must not inherit.
-            awk '
+	if [ ! -e "$dest" ]; then
+		if [ -f "$source_cfg" ]; then
+			# Copy only the model block: the rest of the dev config is
+			# authoring setup a locked-down profile must not inherit.
+			awk '
                 /^model:/           { inblock = 1; print; next }
                 inblock && /^[ \t]/ { print; next }
                 inblock             { inblock = 0 }
-            ' "$source_cfg" > "$dest"
-            log "  → config.yaml (model seeded from dev-ste-code)"
-        else
-            : > "$dest"
-            log "  → config.yaml (created)"
-        fi
-    fi
+            ' "$source_cfg" >"$dest"
+			log "  → config.yaml (model seeded from dev-ste-code)"
+		else
+			: >"$dest"
+			log "  → config.yaml (created)"
+		fi
+	fi
 
-    ensure_plugin_enabled "$dest"
+	ensure_plugin_enabled "$dest"
 }
 
 # Append a `plugins.enabled` block naming the group plugin when the config does
 # not already enable it. Without this the jail is inert.
 ensure_plugin_enabled() {
-    local dest="$1"
-    local want="$GROUP_PLUGIN"
-    [ "$GRANULAR" = "1" ] && want=""
+	local dest="$1"
+	local want="$GROUP_PLUGIN"
+	[ "$GRANULAR" = "1" ] && want=""
 
-    if grep -qE "^[[:space:]]*-[[:space:]]*(ste-code-jail|jail-fs)[[:space:]]*$" "$dest"; then
-        log "  = config.yaml (jail already enabled)"
-        return 0
-    fi
+	if grep -qE "^[[:space:]]*-[[:space:]]*(ste-code-jail|jail-fs)[[:space:]]*$" "$dest"; then
+		log "  = config.yaml (jail already enabled)"
+		return 0
+	fi
 
-    if grep -qE "^plugins:" "$dest"; then
-        log "  ⚠ config.yaml has a plugins: block but does not enable the jail"
-        log "    add this under plugins.enabled:  - $GROUP_PLUGIN"
-        return 1
-    fi
+	if grep -qE "^plugins:" "$dest"; then
+		log "  ⚠ config.yaml has a plugins: block but does not enable the jail"
+		log "    add this under plugins.enabled:  - $GROUP_PLUGIN"
+		return 1
+	fi
 
-    {
-        echo ""
-        echo "# Enforce write confinement. The jail is inert unless enabled here."
-        echo "plugins:"
-        echo "  enabled:"
-        if [ -n "$want" ]; then
-            echo "    - $GROUP_PLUGIN"
-        else
-            for name in "${COMPONENTS[@]}"; do echo "    - $name"; done
-        fi
-        echo "  disabled: []"
-        echo "  entries:"
-        echo "    ${want:-jail-fs}:"
-        echo "      allow_tool_override: false"
-    } >> "$dest"
-    log "  → config.yaml (jail ENABLED)"
+	{
+		echo ""
+		echo "# Enforce write confinement. The jail is inert unless enabled here."
+		echo "plugins:"
+		echo "  enabled:"
+		if [ -n "$want" ]; then
+			echo "    - $GROUP_PLUGIN"
+		else
+			for name in "${COMPONENTS[@]}"; do echo "    - $name"; done
+		fi
+		echo "  disabled: []"
+		echo "  entries:"
+		echo "    ${want:-jail-fs}:"
+		echo "      allow_tool_override: false"
+	} >>"$dest"
+	log "  → config.yaml (jail ENABLED)"
 }
 
 policy_for() {
-    case "$1" in
-        dev-ste-code)       echo "dev   (permissive authoring)" ;;
-        ste-code)           echo "user  (locked down; repo read-only)" ;;
-        benchmark-ste-code) echo "bench (locked down; benchmark output only)" ;;
-        *)                  echo "bench (FAIL CLOSED — profile not mapped)" ;;
-    esac
+	case "$1" in
+	dev-ste-code) echo "dev   (permissive authoring)" ;;
+	ste-code) echo "user  (locked down; repo read-only)" ;;
+	benchmark-ste-code) echo "bench (locked down; benchmark output only)" ;;
+	*) echo "bench (FAIL CLOSED — profile not mapped)" ;;
+	esac
 }
 
 show_status() {
-    log "jail source: $JAIL_DIR"
-    log ""
-    for profile in "${ALL_PROFILES[@]}"; do
-        local dir="$PROFILES_DIR/$profile"
-        if [ ! -d "$dir" ]; then
-            log "$profile: NOT CREATED"
-            continue
-        fi
-        log "$profile: $(policy_for "$profile")"
+	log "jail source: $JAIL_DIR"
+	log ""
+	for profile in "${ALL_PROFILES[@]}"; do
+		local dir="$PROFILES_DIR/$profile"
+		if [ ! -d "$dir" ]; then
+			log "$profile: NOT CREATED"
+			continue
+		fi
+		log "$profile: $(policy_for "$profile")"
 
-        # Report ENABLEMENT, not just the link. A symlinked but unenabled
-        # plugin enforces nothing while looking correctly installed.
-        local cfg="$dir/config.yaml"
-        if [ -f "$cfg" ] && grep -qE \
-            "^[[:space:]]*-[[:space:]]*(ste-code-jail|jail-fs)[[:space:]]*$" "$cfg"; then
-            log "  ✓ enabled in config.yaml"
-        else
-            log "  ✗ NOT ENABLED in config.yaml — the jail enforces NOTHING"
-            log "    fix: $0 $profile"
-        fi
+		# Report ENABLEMENT, not just the link. A symlinked but unenabled
+		# plugin enforces nothing while looking correctly installed.
+		local cfg="$dir/config.yaml"
+		if [ -f "$cfg" ] && grep -qE \
+			"^[[:space:]]*-[[:space:]]*(ste-code-jail|jail-fs)[[:space:]]*$" "$cfg"; then
+			log "  ✓ enabled in config.yaml"
+		else
+			log "  ✗ NOT ENABLED in config.yaml — the jail enforces NOTHING"
+			log "    fix: $0 $profile"
+		fi
 
-        local found=0
-        for name in "$GROUP_PLUGIN" "${COMPONENTS[@]}"; do
-            local dest="$dir/plugins/$name"
-            if [ -L "$dest" ]; then
-                local target
-                target="$(readlink "$dest")"
-                if [ "$target" = "$JAIL_DIR/plugins/$name" ]; then
-                    log "  ✓ $name -> single source"
-                else
-                    log "  ⚠ $name -> $target (NOT the single source)"
-                fi
-                found=1
-            elif [ -e "$dest" ]; then
-                log "  ⚠ $name is a real directory, not a symlink (will drift)"
-                found=1
-            fi
-        done
-        if [ "$found" = "0" ]; then
-            log "  ✗ no jail plugin linked"
-        fi
-    done
+		local found=0
+		for name in "$GROUP_PLUGIN" "${COMPONENTS[@]}"; do
+			local dest="$dir/plugins/$name"
+			if [ -L "$dest" ]; then
+				local target
+				target="$(readlink "$dest")"
+				if [ "$target" = "$JAIL_DIR/plugins/$name" ]; then
+					log "  ✓ $name -> single source"
+				else
+					log "  ⚠ $name -> $target (NOT the single source)"
+				fi
+				found=1
+			elif [ -e "$dest" ]; then
+				log "  ⚠ $name is a real directory, not a symlink (will drift)"
+				found=1
+			fi
+		done
+		if [ "$found" = "0" ]; then
+			log "  ✗ no jail plugin linked"
+		fi
+	done
 }
 
 targets=()
 for arg in "$@"; do
-    case "$arg" in
-        --granular) GRANULAR=1 ;;
-        --dry-run)  DRY_RUN=1 ;;
-        --status)   show_status; exit 0 ;;
-        --all)      targets=("${ALL_PROFILES[@]}") ;;
-        -h|--help)  sed -n '2,22p' "$0"; exit 0 ;;
-        -*)         log "unknown option: $arg"; exit 2 ;;
-        *)          targets+=("$arg") ;;
-    esac
+	case "$arg" in
+	--granular) GRANULAR=1 ;;
+	--dry-run) DRY_RUN=1 ;;
+	--status)
+		show_status
+		exit 0
+		;;
+	--all) targets=("${ALL_PROFILES[@]}") ;;
+	-h | --help)
+		sed -n '2,22p' "$0"
+		exit 0
+		;;
+	-*)
+		log "unknown option: $arg"
+		exit 2
+		;;
+	*) targets+=("$arg") ;;
+	esac
 done
 
 if [ "${#targets[@]}" -eq 0 ]; then
-    log "usage: jail-install.sh <profile> | --all | --status  [--granular] [--dry-run]"
-    exit 2
+	log "usage: jail-install.sh <profile> | --all | --status  [--granular] [--dry-run]"
+	exit 2
 fi
 
 [ "$DRY_RUN" = "1" ] && log "(dry run — nothing will change)"
 
 status=0
 for profile in "${targets[@]}"; do
-    install_profile "$profile" || status=1
+	install_profile "$profile" || status=1
 done
 
 log ""
 if [ "$status" = "0" ]; then
-    log "done. verify with: $0 --status"
+	log "done. verify with: $0 --status"
 else
-    log "completed with errors."
+	log "completed with errors."
 fi
 exit $status

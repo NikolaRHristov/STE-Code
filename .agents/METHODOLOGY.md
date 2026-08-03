@@ -1,7 +1,7 @@
 # STE-Code Methodology & Operations Manual
 
-> **Version:** 1.0 | **Date:** 2026-07-30
-> **Purpose:** Complete reference for running, extending, and maintaining the STE-Code pipeline.
+> **Version:** 1.0 | **Date:** 2026-07-30 **Purpose:** Complete reference for
+> running, extending, and maintaining the STE-Code pipeline.
 
 ---
 
@@ -37,20 +37,20 @@ if pid == 0:
 
 ### What NEVER to Use
 
-| ❌ Anti-Pattern | Why It Fails |
-|----------------|-------------|
-| `hermes -z "$(cat file)"` in background | Opens TUI, doesn't process |
-| `subprocess.Popen(["hermes", "-z", ...])` | Unreliable stdout capture |
-| Custom Python subprocess wrappers calling `hermes -z` | Use oneshot wrapper instead |
-| Single worker processing >10 files | Context limits, quality degradation |
+| ❌ Anti-Pattern                                       | Why It Fails                        |
+| ----------------------------------------------------- | ----------------------------------- |
+| `hermes -z "$(cat file)"` in background               | Opens TUI, doesn't process          |
+| `subprocess.Popen(["hermes", "-z", ...])`             | Unreliable stdout capture           |
+| Custom Python subprocess wrappers calling `hermes -z` | Use oneshot wrapper instead         |
+| Single worker processing >10 files                    | Context limits, quality degradation |
 
 ### Reasoning Levels
 
-| Level | Use When | Token Cost |
-|-------|----------|:----------:|
-| `high` | Complex adaptation, creative writing, multi-file assembly | 1.5x |
-| `medium` | Fixing gaps, extracting data, simple transformations | 1.0x |
-| `low` | Counting, verification, file checks | 0.7x |
+| Level    | Use When                                                  | Token Cost |
+| -------- | --------------------------------------------------------- | :--------: |
+| `high`   | Complex adaptation, creative writing, multi-file assembly |    1.5x    |
+| `medium` | Fixing gaps, extracting data, simple transformations      |    1.0x    |
+| `low`    | Counting, verification, file checks                       |    0.7x    |
 
 ---
 
@@ -90,23 +90,24 @@ for batch in batches:
 
 ### State Tracking
 
-Every phase MUST have a state file (`.agents/state/PHASE-<LETTER>-PROGRESS.json`):
+Every phase MUST have a state file
+(`.agents/state/PHASE-<LETTER>-PROGRESS.json`):
 
 ```json
 {
-  "done": ["worker-id-1", "worker-id-2"],
-  "batches_done": [1, 2, 3],
-  "updated": "2026-07-30T12:00:00Z"
+	"done": ["worker-id-1", "worker-id-2"],
+	"batches_done": [1, 2, 3],
+	"updated": "2026-07-30T12:00:00Z"
 }
 ```
 
 ### Idempotency (from idempotency-baseline.md)
 
-| Tier | Check | When |
-|:----:|-------|------|
-| 1 | Output file exists + >500B | All workers |
-| 2 | Structural validity (headings, entries) | Adaptation, expansion |
-| 3 | Content fingerprint (SHA256) | Artifacts, merge |
+| Tier | Check                                   | When                  |
+| :--: | --------------------------------------- | --------------------- |
+|  1   | Output file exists + >500B              | All workers           |
+|  2   | Structural validity (headings, entries) | Adaptation, expansion |
+|  3   | Content fingerprint (SHA256)            | Artifacts, merge      |
 
 ---
 
@@ -146,28 +147,28 @@ ste-code/
 
 ### Canonical (use these)
 
-| Tool | Purpose |
-|------|---------|
+| Tool                        | Purpose                                         |
+| --------------------------- | ----------------------------------------------- |
 | `hermes-oneshot-wrapper.py` | Launch a single worker (calls AIAgent directly) |
-| `telemetry-worker.py` | Tracked worker with JSON telemetry |
-| `phase-a-run.py` | Phase A orchestrator (maturity fixes) |
-| `phase-b-run.py` | Phase B orchestrator (rule deepening) |
-| `phase-c-run.py` | Phase C orchestrator (structured data) |
-| `phase-d-run.py` | Phase D orchestrator (artifact regeneration) |
-| `phase-f-run.py` | Phase F orchestrator (final audit) |
-| `populate-level5.py` | Level 5 summary population |
-| `assemble-level4.py` | Level 4 prompt assembly |
-| `generate-max-prompt.py` | Level 5 MAX prompt generation |
-| `fix-ste-run.py` | STE gap fixer (batched) |
-| `check-tables.py` | Table integrity checker |
-| `scan-fences.py` | Nested code fence detector |
-| `dogfood-audit.py` | STE-Code compliance self-audit |
+| `telemetry-worker.py`       | Tracked worker with JSON telemetry              |
+| `phase-a-run.py`            | Phase A orchestrator (maturity fixes)           |
+| `phase-b-run.py`            | Phase B orchestrator (rule deepening)           |
+| `phase-c-run.py`            | Phase C orchestrator (structured data)          |
+| `phase-d-run.py`            | Phase D orchestrator (artifact regeneration)    |
+| `phase-f-run.py`            | Phase F orchestrator (final audit)              |
+| `populate-level5.py`        | Level 5 summary population                      |
+| `assemble-level4.py`        | Level 4 prompt assembly                         |
+| `generate-max-prompt.py`    | Level 5 MAX prompt generation                   |
+| `fix-ste-run.py`            | STE gap fixer (batched)                         |
+| `check-tables.py`           | Table integrity checker                         |
+| `scan-fences.py`            | Nested code fence detector                      |
+| `dogfood-audit.py`          | STE-Code compliance self-audit                  |
 
 ### Shell Wrappers
 
-| Tool | Purpose |
-|------|---------|
-| `launch-worker.sh` | Venv detection + oneshot wrapper |
+| Tool                  | Purpose                           |
+| --------------------- | --------------------------------- |
+| `launch-worker.sh`    | Venv detection + oneshot wrapper  |
 | `telemetry-worker.sh` | Convenience wrapper for telemetry |
 
 ---
@@ -180,12 +181,12 @@ ste-code/
 python3 .agents/benchmark/run.py --compare
 ```
 
-| Mode | Prompt | Purpose |
-|------|--------|---------|
-| original | Plain LLM | Baseline |
-| sloppy | Intentional sloppiness | Worst case |
-| ste-code | Level 5 standard | Best case |
-| ste-baseline | Original ASD-STE100 | Reference |
+| Mode         | Prompt                 | Purpose    |
+| ------------ | ---------------------- | ---------- |
+| original     | Plain LLM              | Baseline   |
+| sloppy       | Intentional sloppiness | Worst case |
+| ste-code     | Level 5 standard       | Best case  |
+| ste-baseline | Original ASD-STE100    | Reference  |
 
 ### Scoring
 
@@ -241,13 +242,13 @@ Level 4: ASSEMBLY    Assembly script ready, pending execution        🔄 Ready
 
 ## 8. Common Pitfalls & Fixes
 
-| Symptom | Cause | Fix |
-|---------|-------|-----|
-| Workers open TUI instead of processing | `hermes -z "$(cat file)"` in bg | Use oneshot wrapper with fork+exec |
-| Workers delete content | Prompt too permissive | Add "PRESERVE ALL EXISTING CONTENT" + "Only ADD" |
-| Empty STE after Non-STE | Phase B blockquote formatting split pairs | Mark with FIXME, fix in targeted batch |
-| Level prompt mangled | Single worker processing too many files | Batch into groups of 4 |
-| State file stale | Orchestrator crashed mid-batch | Remove current batch from `batches_done`, re-run |
+| Symptom                                | Cause                                     | Fix                                              |
+| -------------------------------------- | ----------------------------------------- | ------------------------------------------------ |
+| Workers open TUI instead of processing | `hermes -z "$(cat file)"` in bg           | Use oneshot wrapper with fork+exec               |
+| Workers delete content                 | Prompt too permissive                     | Add "PRESERVE ALL EXISTING CONTENT" + "Only ADD" |
+| Empty STE after Non-STE                | Phase B blockquote formatting split pairs | Mark with FIXME, fix in targeted batch           |
+| Level prompt mangled                   | Single worker processing too many files   | Batch into groups of 4                           |
+| State file stale                       | Orchestrator crashed mid-batch            | Remove current batch from `batches_done`, re-run |
 
 ---
 
@@ -257,13 +258,14 @@ Every tunable lives in config, never hardcoded. Each `tools/<unit>/` owns a
 `config.yaml` (its footprint: inputs, outputs, layout, agent overrides). The
 shared `.agents/config/defaults.yaml` supplies `agent:` (model, timeout,
 workers) and `runtime:` (retry_attempts, batch_divisor, encoding) knobs merged
-underneath, so the unit always wins. Stages read `ste_config.load(__file__)`
-for footprint and `ste_runtime.resolve(__file__)` for pre-flight knobs.
+underneath, so the unit always wins. Stages read `ste_config.load(__file__)` for
+footprint and `ste_runtime.resolve(__file__)` for pre-flight knobs.
 
 All file writes go through `ste_io` (confined to the repo by the jail policy);
-the agent runtime path comes from `ste_paths` (`venv_python()`, `wrapper_path()`).
-No script declares `VENV_PYTHON` / `WRAPPER` / `open(...,"w")` literals — those
-are centralized in the helpers. See `tools/lib/README.md`.
+the agent runtime path comes from `ste_paths` (`venv_python()`,
+`wrapper_path()`). No script declares `VENV_PYTHON` / `WRAPPER` /
+`open(...,"w")` literals — those are centralized in the helpers. See
+`tools/lib/README.md`.
 
 ## 9. Quick Reference
 

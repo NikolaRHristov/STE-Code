@@ -35,6 +35,7 @@ Usage:
   python3 .agents/tools/grouping/repair_markers.py --dry-run   # report only
   python3 .agents/tools/grouping/repair_markers.py --apply     # rewrite + commit
 """
+
 import re
 import subprocess
 import sys
@@ -46,13 +47,18 @@ import group_engine as ge
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text  # noqa: E402
+
 REFINED_DIR = PROJECT / "ste-code" / "refined"
 
 _ENTRY_RE = re.compile(r"^#{1,4}\s+([A-Za-z][A-Za-z\-\']*)\s*\(", re.M)
@@ -153,12 +159,14 @@ def repair_text(text: str, rf, plan, id2pos) -> str:
     for k in range(1, n):
         if bounds[k] is None:
             prev = bounds[k - 1]
-            nxt_idx = next((j for j in range(k + 1, n) if bounds[j] is not None),
-                           n)
+            nxt_idx = next((j for j in range(k + 1, n) if bounds[j] is not None), n)
             nxt = bounds[nxt_idx] if nxt_idx < n else len(lines)
             span = lines[prev:nxt] if nxt > prev else lines[prev:]
-            raw = (len(span) * (k - prev_b)) // (nxt_idx - prev_b) \
-                if (nxt_idx - prev_b) else prev + 1
+            raw = (
+                (len(span) * (k - prev_b)) // (nxt_idx - prev_b)
+                if (nxt_idx - prev_b)
+                else prev + 1
+            )
             bounds[k] = prev + _snap_to_heading(span, raw)
         prev_b = k
 
@@ -167,8 +175,9 @@ def repair_text(text: str, rf, plan, id2pos) -> str:
     if ng_letter:
         page_group = {p: g.gid for g in plan for p in g.pages}
         first_gid = page_group.get(expected[0])
-        boundary_page = next((p for p in expected
-                              if page_group.get(p) != first_gid), None)
+        boundary_page = next(
+            (p for p in expected if page_group.get(p) != first_gid), None
+        )
         if boundary_page is not None:
             bk = expected.index(boundary_page)
             for j in range(bounds[0] + 1, len(lines)):
@@ -207,7 +216,6 @@ def repair_text(text: str, rf, plan, id2pos) -> str:
     return "\n".join(out) + "\n"
 
 
-
 def _gid_of(rf, plan, page):
     for g in plan:
         if page in g.pages:
@@ -217,9 +225,12 @@ def _gid_of(rf, plan, page):
 
 def main():
     import argparse
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="report only, write nothing")
-    ap.add_argument("--apply", action="store_true", help="rewrite refined files + git commit")
+    ap.add_argument(
+        "--apply", action="store_true", help="rewrite refined files + git commit"
+    )
     args = ap.parse_args()
     if not (args.dry_run or args.apply):
         args.dry_run = True
@@ -242,7 +253,9 @@ def main():
         r_tokens = ge.content_tokens(repaired)
         lost = o_tokens - r_tokens
         if sum(lost.values()) > 0:
-            problems.append(f"{name}: CONTENT LOSS detected ({dict(lost.most_common(5))})")
+            problems.append(
+                f"{name}: CONTENT LOSS detected ({dict(lost.most_common(5))})"
+            )
             continue
         if repaired == orig:
             continue  # nothing changed (shouldn't happen for flagged, but safe)
@@ -266,15 +279,18 @@ def main():
     for path, repaired in changed:
         write_text(path, repaired)
     # verify: re-run slice_pages
-    bad = [rf.path.name for rf in idx.values()
-           if not ge.slice_pages(rf, id2pos)]
-    print(f"\nAfter repair: {len(bad)} files still unsliceable (was {len(changed)+len(bad)}).")
+    bad = [rf.path.name for rf in idx.values() if not ge.slice_pages(rf, id2pos)]
+    print(
+        f"\nAfter repair: {len(bad)} files still unsliceable (was {len(changed) + len(bad)})."
+    )
     if bad:
         print("  still bad: " + ", ".join(bad))
     # commit
     subprocess.run(["git", "add", "-A", "ste-code/refined"], cwd=PROJECT, check=True)
-    msg = (f"Refinement markers: deterministic repair of {len(changed)} flagged files "
-           f"(A_dupes/B_missing_lead/C_merged/straddler) so grouping slices cleanly")
+    msg = (
+        f"Refinement markers: deterministic repair of {len(changed)} flagged files "
+        f"(A_dupes/B_missing_lead/C_merged/straddler) so grouping slices cleanly"
+    )
     subprocess.run(["git", "commit", "-q", "-m", msg], cwd=PROJECT, check=True)
     print("Committed repaired refined files.")
 

@@ -95,7 +95,9 @@ def _is_enabled() -> bool:
     try:
         import yaml
 
-        cfg_path = Path.home() / ".hermes" / "profiles" / _active_profile() / "config.yaml"
+        cfg_path = (
+            Path.home() / ".hermes" / "profiles" / _active_profile() / "config.yaml"
+        )
         if not cfg_path.exists():
             return False
         data = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}

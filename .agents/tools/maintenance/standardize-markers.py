@@ -19,13 +19,18 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text  # noqa: E402
+
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
 
 
@@ -37,22 +42,22 @@ def standardize_file(filepath, dry_run=False):
 
     # Fix 1: Non-STE with parenthetical descriptions
     # Pattern: > **Non-STE (anything):** → > **Non-STE:**
-    pattern_nonste = re.compile(r'> \*\*Non-STE\s*\([^)]*\):\*\*')
-    new_content, n = pattern_nonste.subn('> **Non-STE:**', content)
+    pattern_nonste = re.compile(r"> \*\*Non-STE\s*\([^)]*\):\*\*")
+    new_content, n = pattern_nonste.subn("> **Non-STE:**", content)
     if n > 0:
         content = new_content
         changes += n
 
     # Fix 2: STE-Code → STE
-    pattern_stecode = re.compile(r'> \*\*STE-Code:\*\*')
-    new_content, n = pattern_stecode.subn('> **STE:**', content)
+    pattern_stecode = re.compile(r"> \*\*STE-Code:\*\*")
+    new_content, n = pattern_stecode.subn("> **STE:**", content)
     if n > 0:
         content = new_content
         changes += n
 
     # Fix 3: Double spaces after markers
-    pattern_doublespace = re.compile(r'(> \*\*(?:Non-STE|STE):\*\*)  +')
-    new_content, n = pattern_doublespace.subn(r'\1 ', content)
+    pattern_doublespace = re.compile(r"(> \*\*(?:Non-STE|STE):\*\*)  +")
+    new_content, n = pattern_doublespace.subn(r"\1 ", content)
     if n > 0:
         content = new_content
         changes += n

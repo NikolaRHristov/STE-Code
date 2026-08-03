@@ -25,6 +25,7 @@ from typing import Dict, List, Optional
 # Path resolution — auto-detect or CLI override
 # ---------------------------------------------------------------------------
 
+
 def resolve_root(cli_root: Optional[str] = None) -> str:
     """Return the project root directory.
 
@@ -40,7 +41,9 @@ def resolve_root(cli_root: Optional[str] = None) -> str:
         return root
 
     # check-rails.py lives at .agents/tools/quality/ → four levels up is project root
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
+    return os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "..", "..")
+    )
 
 
 def ste_code_dir(root: str) -> str:
@@ -132,6 +135,7 @@ def make_fact_check(trigger: str, correction: str, desc: str):
 # documented but not yet active; they serve as a roadmap for future work.
 # ---------------------------------------------------------------------------
 
+
 def _build_rails(fact_checks: List[dict]) -> dict:
     """Assemble the complete rail dictionary.
 
@@ -154,9 +158,7 @@ def _build_rails(fact_checks: List[dict]) -> dict:
         "desc": "Files must follow [w|r]NNN-pPPPP-PPPP.md pattern",
         "pattern": r"^(w|r)\d{3}-p\d+-\d+\.md$",
         "check": lambda fname: (
-            0
-            if re.match(r"^(w|r)\d{3}-p\d+-\d+\.md$", fname)
-            else 1
+            0 if re.match(r"^(w|r)\d{3}-p\d+-\d+\.md$", fname) else 1
         ),
     }
 
@@ -220,9 +222,7 @@ def _build_rails(fact_checks: List[dict]) -> dict:
     rails["R5-Page-Header"] = {
         "desc": "First line must be a # Page N of M header",
         "check": lambda content: (
-            0
-            if re.match(r"^# Page \d+ of \d+", content.split("\n")[0])
-            else 1
+            0 if re.match(r"^# Page \d+ of \d+", content.split("\n")[0]) else 1
         ),
     }
 
@@ -233,9 +233,7 @@ def _build_rails(fact_checks: List[dict]) -> dict:
         key = f"R6-Fact-{idx + 1:02d}"
         rails[key] = {
             "desc": fc["desc"],
-            "check": make_fact_check(
-                fc["trigger"], fc["correction"], fc["desc"]
-            ),
+            "check": make_fact_check(fc["trigger"], fc["correction"], fc["desc"]),
         }
 
     # ── R7: Cross-Reference Validity ─────────────────────────────────────
@@ -264,7 +262,10 @@ def _build_rails(fact_checks: List[dict]) -> dict:
 # Rail check implementations — extracted functions for testability
 # ---------------------------------------------------------------------------
 
-def _check_stage_isolation(fname: str, stage_dir: str, _unused_content: str = "") -> int:
+
+def _check_stage_isolation(
+    fname: str, stage_dir: str, _unused_content: str = ""
+) -> int:
     """Verify the file prefix matches its stage directory.
 
     Convention:
@@ -318,6 +319,7 @@ def _check_glued_headings(content: str) -> int:
 # ---------------------------------------------------------------------------
 # Core scanning logic
 # ---------------------------------------------------------------------------
+
 
 def check_all(
     root: str,
@@ -463,6 +465,7 @@ def check_all(
 # Output formatters
 # ---------------------------------------------------------------------------
 
+
 def format_text(result: dict) -> str:
     """Produce a human-readable text report."""
     lines: list[str] = []
@@ -518,6 +521,7 @@ def format_ci(result: dict) -> str:
 # CLI entry point
 # ---------------------------------------------------------------------------
 
+
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     """Parse command-line arguments."""
     p = argparse.ArgumentParser(
@@ -552,7 +556,8 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         help="Path to a JSON file with fact-check rules (default: built-in rules)",
     )
     p.add_argument(
-        "--verbose", "-v",
+        "--verbose",
+        "-v",
         action="store_true",
         help="Print additional diagnostic information to stderr",
     )

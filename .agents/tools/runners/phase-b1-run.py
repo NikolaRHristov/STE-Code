@@ -12,6 +12,7 @@ Usage:
   python3 phase-b1-run.py --queue Q.json [--resume]
   python3 phase-b1-run.py --scan                  # run verify_continuation.py
 """
+
 import os
 import sys
 from pathlib import Path
@@ -19,13 +20,18 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_paths import venv_python  # noqa: E402
+
 CONT_DIR = PROJECT / ".agents" / "tools" / "continuation"
 CONTINUE_BATCH = CONT_DIR / "continue_batch.py"
 VERIFY = CONT_DIR / "verify_continuation.py"

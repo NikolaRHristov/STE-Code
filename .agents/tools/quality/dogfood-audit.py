@@ -18,8 +18,12 @@ from collections import Counter
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -82,13 +86,39 @@ SYNONYMS = {
 
 # Slang/jargon/hedging to flag
 BANNED_TERMS = [
-    "stuff", "kinda", "sorta", "gotta", "wanna", "basically",
-    "actually", "literally", "obviously", "clearly", "just",
-    "really", "very", "quite", "rather", "somewhat",
-    "maybe", "perhaps", "possibly", "probably", "generally",
-    "essentially", "fundamentally", "inherently",
-    "thing", "things", "stuff", "a lot", "lots of",
-    "super", "mega", "ultra", "hyper",
+    "stuff",
+    "kinda",
+    "sorta",
+    "gotta",
+    "wanna",
+    "basically",
+    "actually",
+    "literally",
+    "obviously",
+    "clearly",
+    "just",
+    "really",
+    "very",
+    "quite",
+    "rather",
+    "somewhat",
+    "maybe",
+    "perhaps",
+    "possibly",
+    "probably",
+    "generally",
+    "essentially",
+    "fundamentally",
+    "inherently",
+    "thing",
+    "things",
+    "stuff",
+    "a lot",
+    "lots of",
+    "super",
+    "mega",
+    "ultra",
+    "hyper",
 ]
 
 # Passive voice indicators
@@ -104,14 +134,50 @@ PASSIVE_PATTERNS = [
 ]
 
 CONTRACTIONS = [
-    "don't", "can't", "won't", "isn't", "aren't", "wasn't",
-    "weren't", "haven't", "hasn't", "hadn't", "shouldn't",
-    "wouldn't", "couldn't", "mightn't", "mustn't",
-    "it's", "that's", "there's", "here's", "what's",
-    "let's", "who's", "he's", "she's", "we're", "they're",
-    "I'm", "you're", "I've", "you've", "we've", "they've",
-    "I'll", "you'll", "we'll", "they'll", "he'll", "she'll",
-    "I'd", "you'd", "we'd", "they'd", "he'd", "she'd",
+    "don't",
+    "can't",
+    "won't",
+    "isn't",
+    "aren't",
+    "wasn't",
+    "weren't",
+    "haven't",
+    "hasn't",
+    "hadn't",
+    "shouldn't",
+    "wouldn't",
+    "couldn't",
+    "mightn't",
+    "mustn't",
+    "it's",
+    "that's",
+    "there's",
+    "here's",
+    "what's",
+    "let's",
+    "who's",
+    "he's",
+    "she's",
+    "we're",
+    "they're",
+    "I'm",
+    "you're",
+    "I've",
+    "you've",
+    "we've",
+    "they've",
+    "I'll",
+    "you'll",
+    "we'll",
+    "they'll",
+    "he'll",
+    "she'll",
+    "I'd",
+    "you'd",
+    "we'd",
+    "they'd",
+    "he'd",
+    "she'd",
 ]
 
 FILES_TO_AUDIT = [
@@ -146,36 +212,42 @@ def audit_file(filepath):
         pattern = r"\b" + re.escape(bad) + r"\b"
         matches = re.findall(pattern, content_lower)
         if matches:
-            result["violations"].append({
-                "type": "unapproved word",
-                "detail": f"'{bad}' → use '{good}'",
-                "count": len(matches),
-                "severity": "warning",
-            })
+            result["violations"].append(
+                {
+                    "type": "unapproved word",
+                    "detail": f"'{bad}' → use '{good}'",
+                    "count": len(matches),
+                    "severity": "warning",
+                }
+            )
 
     # Check 2: Slang/jargon
     for term in BANNED_TERMS:
         pattern = r"\b" + re.escape(term) + r"\b"
         matches = re.findall(pattern, content_lower)
         if matches:
-            result["violations"].append({
-                "type": "slang/jargon/hedging",
-                "detail": f"'{term}'",
-                "count": len(matches),
-                "severity": "warning",
-            })
+            result["violations"].append(
+                {
+                    "type": "slang/jargon/hedging",
+                    "detail": f"'{term}'",
+                    "count": len(matches),
+                    "severity": "warning",
+                }
+            )
 
     # Check 3: Passive voice
     passive_count = 0
     for pat in PASSIVE_PATTERNS:
         passive_count += len(re.findall(pat, content_lower))
     if passive_count > 3:
-        result["violations"].append({
-            "type": "passive voice",
-            "detail": f"{passive_count} passive constructions detected",
-            "count": passive_count,
-            "severity": "advisory",
-        })
+        result["violations"].append(
+            {
+                "type": "passive voice",
+                "detail": f"{passive_count} passive constructions detected",
+                "count": passive_count,
+                "severity": "advisory",
+            }
+        )
 
     # Check 4: Contractions
     contraction_count = 0
@@ -183,12 +255,14 @@ def audit_file(filepath):
         pattern = r"\b" + re.escape(c) + r"\b"
         contraction_count += len(re.findall(pattern, content_lower))
     if contraction_count > 0:
-        result["violations"].append({
-            "type": "contractions",
-            "detail": f"{contraction_count} contraction(s) found",
-            "count": contraction_count,
-            "severity": "warning",
-        })
+        result["violations"].append(
+            {
+                "type": "contractions",
+                "detail": f"{contraction_count} contraction(s) found",
+                "count": contraction_count,
+                "severity": "warning",
+            }
+        )
 
     # Check 5: Long sentences (>25 words)
     long_sentences = 0
@@ -203,12 +277,14 @@ def audit_file(filepath):
         if wc > 25:
             long_sentences += 1
     if long_sentences > 2:
-        result["violations"].append({
-            "type": "long sentences",
-            "detail": f"{long_sentences} sentences exceed 25 words",
-            "count": long_sentences,
-            "severity": "advisory",
-        })
+        result["violations"].append(
+            {
+                "type": "long sentences",
+                "detail": f"{long_sentences} sentences exceed 25 words",
+                "count": long_sentences,
+                "severity": "advisory",
+            }
+        )
 
     # Calculate score
     penalty = 0

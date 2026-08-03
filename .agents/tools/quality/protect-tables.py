@@ -26,8 +26,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -87,36 +91,46 @@ def find_table_breaks(content: str, filename: str) -> list:
                             continue
                 row_cols = count_table_columns(prev)
                 if header_cols and row_cols != header_cols:
-                    issues.append({
-                        "type": "column_mismatch_at_page_boundary",
-                        "line": i,
-                        "expected_cols": header_cols,
-                        "found_cols": row_cols,
-                        "detail": f"Table row before {line} has {row_cols} cols, header expects {header_cols}",
-                    })
+                    issues.append(
+                        {
+                            "type": "column_mismatch_at_page_boundary",
+                            "line": i,
+                            "expected_cols": header_cols,
+                            "found_cols": row_cols,
+                            "detail": f"Table row before {line} has {row_cols} cols, header expects {header_cols}",
+                        }
+                    )
     return issues
 
 
 def verify_page_headers(content: str) -> list:
     """Ensure all expected `# Page N of 434` headers are present and sequential."""
     issues = []
-    headers = [int(m.group(1)) for m in re.finditer(r"^# Page (\d+) of 434", content, re.M)]
+    headers = [
+        int(m.group(1)) for m in re.finditer(r"^# Page (\d+) of 434", content, re.M)
+    ]
     if not headers:
         return issues
     # Check for gaps
     for i in range(1, len(headers)):
         if headers[i] != headers[i - 1] + 1:
-            issues.append({
-                "type": "page_sequence_gap",
-                "detail": f"Pages jump from {headers[i-1]} to {headers[i]} (missing {headers[i-1]+1}..{headers[i]-1})",
-            })
+            issues.append(
+                {
+                    "type": "page_sequence_gap",
+                    "detail": f"Pages jump from {headers[i - 1]} to {headers[i]} (missing {headers[i - 1] + 1}..{headers[i] - 1})",
+                }
+            )
     return issues
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", default=str(PROJECT / "ste-code" / "extracted"))
-    ap.add_argument("--fix", action="store_true", help="Auto-insert TABLE CONTINUES markers (best-effort)")
+    ap.add_argument(
+        "--fix",
+        action="store_true",
+        help="Auto-insert TABLE CONTINUES markers (best-effort)",
+    )
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
 
@@ -144,16 +158,28 @@ def main():
             all_issues.append({"file": str(f.relative_to(PROJECT)), "issues": issues})
 
     # Report
-    blocking = [i for fi in all_issues for i in fi["issues"] if i["type"] == "column_mismatch_at_page_boundary"]
-    warnings = [i for fi in all_issues for i in fi["issues"] if i["type"] == "page_sequence_gap"]
+    blocking = [
+        i
+        for fi in all_issues
+        for i in fi["issues"]
+        if i["type"] == "column_mismatch_at_page_boundary"
+    ]
+    warnings = [
+        i for fi in all_issues for i in fi["issues"] if i["type"] == "page_sequence_gap"
+    ]
 
     if args.json:
-        print(json.dumps({
-            "files_checked": files_checked,
-            "blocking_errors": len(blocking),
-            "warnings": len(warnings),
-            "issues": all_issues,
-        }, indent=2))
+        print(
+            json.dumps(
+                {
+                    "files_checked": files_checked,
+                    "blocking_errors": len(blocking),
+                    "warnings": len(warnings),
+                    "issues": all_issues,
+                },
+                indent=2,
+            )
+        )
     else:
         print(f"Files checked: {files_checked}")
         print(f"Blocking errors: {len(blocking)}")

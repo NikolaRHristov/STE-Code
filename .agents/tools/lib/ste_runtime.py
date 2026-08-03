@@ -38,6 +38,7 @@ Usage
     rt.batch_divisor                # int
     rt.encoding                     # "utf-8"
 """
+
 from __future__ import annotations
 
 from pathlib import Path

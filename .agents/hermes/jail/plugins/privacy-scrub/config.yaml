@@ -23,13 +23,13 @@ literal: []
 # Regex patterns (case-insensitive). Each is narrow and high-precision to avoid
 # blocking legitimate memory (project names, generic nouns).
 regex:
-  - '[\w.+-]+@[\w-]+\.[\w.-]+'                 # email
-  - 'sk-[a-zA-Z0-9]{20,}'                     # OpenAI-style key
-  - 'AKIA[0-9A-Z]{16}'                        # AWS access key id
-  - 'ghp_[a-zA-Z0-9]{36,}'                    # GitHub PAT
-  - 'eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.' # JWT
-  - '/home/[a-z0-9_-]+/'                      # generic unix home path
-  - 'C:\\\\Users\\[^\\\\]+'                    # windows home path
-  - '/Users/[A-Za-z0-9_-]+/'                 # macOS home path
-  - '~/[A-Za-z0-9_.-]+'                       # tilde-expanded home path
-  - '\+?\d[\d\s().-]{7,}\d'                   # phone-like (>=9 digits) — LAST: broad, apply after specific classes
+    - '[\w.+-]+@[\w-]+\.[\w.-]+' # email
+    - "sk-[a-zA-Z0-9]{20,}" # OpenAI-style key
+    - "AKIA[0-9A-Z]{16}" # AWS access key id
+    - "ghp_[a-zA-Z0-9]{36,}" # GitHub PAT
+    - 'eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.' # JWT
+    - "/home/[a-z0-9_-]+/" # generic unix home path
+    - 'C:\\\\Users\\[^\\\\]+' # windows home path
+    - "/Users/[A-Za-z0-9_-]+/" # macOS home path
+    - "~/[A-Za-z0-9_.-]+" # tilde-expanded home path
+    - '\+?\d[\d\s().-]{7,}\d' # phone-like (>=9 digits) — LAST: broad, apply after specific classes

@@ -20,8 +20,8 @@ enforce: true
 
 # Files identifying the project root.
 root_markers:
-  - .git
-  - Makefile
+    - .git
+    - Makefile
 
 # Additional roots, applied on top of the policy's computed set.
 # Keep these lists SHORT — every entry is a hole in the jail.

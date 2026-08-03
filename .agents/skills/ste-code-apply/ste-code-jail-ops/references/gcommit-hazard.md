@@ -7,14 +7,15 @@ auto-generates a Conventional Commit message.
 ## Observed behavior (verified this session)
 
 - It commits the **staged index** ("Executing 'git commit -F -'"), BUT it also
-  **auto-stages untracked AND modified-but-unstaged files** before committing.
-  A run with only `jail-install.sh` staged swept in an unrelated `refine_batch.py`
+  **auto-stages untracked AND modified-but-unstaged files** before committing. A
+  run with only `jail-install.sh` staged swept in an unrelated `refine_batch.py`
   that another agent had modified.
 - On its internal failure path it runs **`git reset` and wipes the staged
-  index** without committing. Multiple runs here lost my staged `jail-install.sh`.
+  index** without committing. Multiple runs here lost my staged
+  `jail-install.sh`.
 - The repo has a **concurrent external committer** that auto-commits mid-session
-  (often empty/auto messages), sweeping in-flight staged/untracked files into ITS
-  commit. So `gcommit-hermes` output is also unreliable as proof of what was
+  (often empty/auto messages), sweeping in-flight staged/untracked files into
+  ITS commit. So `gcommit-hermes` output is also unreliable as proof of what was
   committed.
 
 ## Safe pattern when concurrency is active

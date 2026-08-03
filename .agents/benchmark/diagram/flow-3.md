@@ -5,8 +5,8 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
-> Previous: [flow-2.md](flow-2.md) · 🔴 RED
-> Next: [flow-4.md](flow-4.md) · ⚪ WHITE + ⚫ BLACK
+> Previous: [flow-2.md](flow-2.md) · 🔴 RED Next: [flow-4.md](flow-4.md) · ⚪
+> WHITE + ⚫ BLACK
 
 ---
 
@@ -17,7 +17,7 @@ RED found that an attack got through. BLUE asks a sharper question:
 > **Did it get through because the attack is strong, or because of where it
 > happened to sit?**
 
-BLUE takes each escape and re-fires the *same payload* from **9 different
+BLUE takes each escape and re-fires the _same payload_ from **9 different
 placements**. If the payload only wins from one position, it is a positional
 weakness (cheap to fix). If it wins from all nine, the technique itself defeats
 the level (expensive, important).
@@ -50,8 +50,9 @@ resistant, it just got lucky with formatting.
 
 ## 2. A real BLUE probe
 
-`REAL` — from `.agents/tmp/pipe/tier-2/round1/blue/test-cases/category-blue.json`,
-probe 0 of 108.
+`REAL` — from
+`.agents/tmp/pipe/tier-2/round1/blue/test-cases/category-blue.json`, probe 0
+of 108.
 
 ```
 ┌─ blue-red-t-2-r1-forbidden_bait-head-verbatim ─────────────────────────────┐
@@ -71,8 +72,8 @@ probe 0 of 108.
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Every probe carries `source_escape`, so any finding traces back to the exact
-RED case that produced it. Nothing in the pipeline is anonymous.
+Every probe carries `source_escape`, so any finding traces back to the exact RED
+case that produced it. Nothing in the pipeline is anonymous.
 
 ---
 
@@ -103,10 +104,10 @@ escapes:
     delayed                      0     ← nothing at all
 ```
 
-> ⚠ **DISCREPANCY 3 — `delayed` does zero work on a 1-round run.**
-> By design it defers to even rounds. But the default is `--rounds 1`, so
-> `--defense-timing delayed` produces **0 probes, 0 findings, and still writes
-> a `blue-done.json` sentinel** claiming success. WHITE then proceeds on empty
+> ⚠ **DISCREPANCY 3 — `delayed` does zero work on a 1-round run.** By design it
+> defers to even rounds. But the default is `--rounds 1`, so
+> `--defense-timing delayed` produces **0 probes, 0 findings, and still writes a
+> `blue-done.json` sentinel** claiming success. WHITE then proceeds on empty
 > input. Detail in [flow-5.md](flow-5.md) §3.
 
 ---
@@ -124,7 +125,7 @@ Under `--skip-live` there is no model, so BLUE uses a deterministic estimator
 ```
 
 That yields a fixed 8-of-9 = **88.9%** for every technique. It is a
-*conservative placeholder*, not a measurement — and the code says so. But the
+_conservative placeholder_, not a measurement — and the code says so. But the
 number it writes into `blue-done.json` is indistinguishable in shape from a real
 measured one.
 
@@ -148,17 +149,16 @@ measured one.
 
 > ⚠ **DISCREPANCY 4 — `blue_passed: 0` contradicts `blue_pass_rate_pct: 88.9`.**
 >
-> I summed the resistance table directly: **96 passed of 108 run = 88.9%.**
-> So the *rate* is right and the *count* is wrong.
+> I summed the resistance table directly: **96 passed of 108 run = 88.9%.** So
+> the _rate_ is right and the _count_ is wrong.
 >
 > Cause (blue.py:290-296 vs :312): in the offline branch, `blue_rate` is
-> computed from the table but the variable `bp` is never assigned — it keeps
-> the value `0` initialised at line 291. The live branch (line 302) sets
+> computed from the table but the variable `bp` is never assigned — it keeps the
+> value `0` initialised at line 291. The live branch (line 302) sets
 > `bp = agg.get("passed", 0)` correctly. **Offline-only bug.**
 >
-> Consequence: any consumer using `blue_passed` instead of
-> `blue_pass_rate_pct` sees total defense failure. Fix in
-> [flow-5.md](flow-5.md) §4.
+> Consequence: any consumer using `blue_passed` instead of `blue_pass_rate_pct`
+> sees total defense failure. Fix in [flow-5.md](flow-5.md) §4.
 
 ### The resistance table (real rows)
 
@@ -222,10 +222,10 @@ A fix for (1) belongs in the vocabulary rules. A fix for (2) belongs in the
 structural rules. **Different remedies, different owners** — and BLUE is what
 separates them.
 
-> ⚠ Both patterns are *seeded*, not observed — `run_pipeline._seed_escapes()`
-> injects exactly this shape offline ("one technique escapes in every
-> placement; one placement defeats every technique"). The analysis machinery is
-> proven correct; the finding itself is synthetic. See [flow-5.md](flow-5.md) §2.
+> ⚠ Both patterns are _seeded_, not observed — `run_pipeline._seed_escapes()`
+> injects exactly this shape offline ("one technique escapes in every placement;
+> one placement defeats every technique"). The analysis machinery is proven
+> correct; the finding itself is synthetic. See [flow-5.md](flow-5.md) §2.
 
 ---
 

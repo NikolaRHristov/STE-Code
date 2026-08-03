@@ -1,47 +1,78 @@
 [
-  {
-    "id": "bench-016", "category": "error",
-    "description": "Cryptic error message",
-    "input": "Error: Something went wrong",
-    "expected_principles": ["P1", "P3", "P14"],
-    "expected_keywords": ["Error", "failed", "reason"],
-    "forbidden_keywords": ["Something went wrong"],
-    "max_tokens": 150, "difficulty": "easy"
-  },
-  {
-    "id": "bench-017", "category": "error",
-    "description": "Error with ambiguous pronoun",
-    "input": "TypeError: Cannot read property 'name' of undefined. This usually happens when it is not properly initialized.",
-    "expected_principles": ["P1", "P3"],
-    "expected_keywords": ["TypeError", "undefined", "initialize", "property"],
-    "forbidden_keywords": ["This usually happens", "it is not properly"],
-    "max_tokens": 250, "difficulty": "easy"
-  },
-  {
-    "id": "bench-018", "category": "error",
-    "description": "HTTP error without clear action",
-    "input": "500 Internal Server Error — please try again later",
-    "expected_principles": ["P1", "P14"],
-    "expected_keywords": ["500", "Internal Server Error", "contact", "administrator", "retry"],
-    "forbidden_keywords": ["please try again later"],
-    "max_tokens": 200, "difficulty": "medium"
-  },
-  {
-    "id": "bench-019", "category": "error",
-    "description": "Database error with jargon",
-    "input": "MongoError: connection pool is exhausted, the server is probably overloaded or something",
-    "expected_principles": ["P1", "P10"],
-    "expected_keywords": ["connection pool", "exhausted", "server", "overloaded"],
-    "forbidden_keywords": ["probably", "or something"],
-    "max_tokens": 250, "difficulty": "medium"
-  },
-  {
-    "id": "bench-020", "category": "error",
-    "description": "Stack trace with unclear root cause",
-    "input": "FATAL: Process exited with code 1\n\nError: Failed to connect to database at localhost:5432\n    at ConnectionPool.connect (pool.js:42)\n    at Database.initialize (db.js:18)\n\nThe database might not be running. Try starting it with npm run db:start.",
-    "expected_principles": ["P1", "P4", "P14"],
-    "expected_keywords": ["connection", "database", "localhost:5432", "start"],
-    "forbidden_keywords": ["might not be", "Try starting it"],
-    "max_tokens": 400, "difficulty": "hard"
-  }
+	{
+		"id": "bench-016",
+		"category": "error",
+		"description": "Cryptic error message",
+		"input": "Error: Something went wrong",
+		"expected_principles": ["P1", "P3", "P14"],
+		"expected_keywords": ["Error", "failed", "reason"],
+		"forbidden_keywords": ["Something went wrong"],
+		"max_tokens": 150,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-017",
+		"category": "error",
+		"description": "Error with ambiguous pronoun",
+		"input": "TypeError: Cannot read property 'name' of undefined. This usually happens when it is not properly initialized.",
+		"expected_principles": ["P1", "P3"],
+		"expected_keywords": [
+			"TypeError",
+			"undefined",
+			"initialize",
+			"property"
+		],
+		"forbidden_keywords": ["This usually happens", "it is not properly"],
+		"max_tokens": 250,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-018",
+		"category": "error",
+		"description": "HTTP error without clear action",
+		"input": "500 Internal Server Error — please try again later",
+		"expected_principles": ["P1", "P14"],
+		"expected_keywords": [
+			"500",
+			"Internal Server Error",
+			"contact",
+			"administrator",
+			"retry"
+		],
+		"forbidden_keywords": ["please try again later"],
+		"max_tokens": 200,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-019",
+		"category": "error",
+		"description": "Database error with jargon",
+		"input": "MongoError: connection pool is exhausted, the server is probably overloaded or something",
+		"expected_principles": ["P1", "P10"],
+		"expected_keywords": [
+			"connection pool",
+			"exhausted",
+			"server",
+			"overloaded"
+		],
+		"forbidden_keywords": ["probably", "or something"],
+		"max_tokens": 250,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-020",
+		"category": "error",
+		"description": "Stack trace with unclear root cause",
+		"input": "FATAL: Process exited with code 1\n\nError: Failed to connect to database at localhost:5432\n    at ConnectionPool.connect (pool.js:42)\n    at Database.initialize (db.js:18)\n\nThe database might not be running. Try starting it with npm run db:start.",
+		"expected_principles": ["P1", "P4", "P14"],
+		"expected_keywords": [
+			"connection",
+			"database",
+			"localhost:5432",
+			"start"
+		],
+		"forbidden_keywords": ["might not be", "Try starting it"],
+		"max_tokens": 400,
+		"difficulty": "hard"
+	}
 ]

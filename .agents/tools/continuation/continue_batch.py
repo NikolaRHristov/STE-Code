@@ -21,6 +21,7 @@ Usage:
   python3 continue_batch.py --queue Q.json --resume
 Do NOT run while the Refinement agent is actively writing refined/.
 """
+
 from __future__ import annotations
 
 import os
@@ -35,8 +36,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -46,8 +51,10 @@ from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+
 RT = _resolve_runtime(__file__)
 REFINED_DIR = PROJECT / "ste-code" / "refined"
 STATE_DIR = PROJECT / ".agents" / "state"
@@ -60,29 +67,40 @@ TIMEOUT_SECONDS = 600
 
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import Templater
+
 TPL = Templater(__file__)
 
 
 def _skill_text():
     import sys as _sys
+
     _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
     from templater import lib_import
+
     m = lib_import("skill_prompt")
     return m.skill_section("continuation")
 
 
 def _build_prompt(target_rel: str) -> str:
     wrapper = TPL.render("continue-worker", target=target_rel)
-    return wrapper + _skill_text() + "\n\nRewrite ONLY the file above. No commentary outside it.\n"
+    return (
+        wrapper
+        + _skill_text()
+        + "\n\nRewrite ONLY the file above. No commentary outside it.\n"
+    )
 
 
 def _load_checkpoint():
     from ste_checkpoint import load
+
     return load(CHECKPOINT_PATH)
+
 
 def _save_checkpoint(ckpt):
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, ckpt)
+
 
 _checkpoint = _load_checkpoint()
 
@@ -99,12 +117,19 @@ def git_commit_locked(files, msg):
     else:
         return False
     try:
-        subprocess.run(["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT))
-        r = subprocess.run(["git", "commit", "-m", msg, *files],
-                           capture_output=True, text=True, cwd=str(PROJECT))
+        subprocess.run(
+            ["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT)
+        )
+        r = subprocess.run(
+            ["git", "commit", "-m", msg, *files],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT),
+        )
         return r.returncode == 0
     finally:
         import shutil
+
         shutil.rmtree(lock, ignore_errors=True)
 
 
@@ -138,10 +163,17 @@ def run_one(target_rel: str) -> bool:
         print(f"  B1 {target_rel}: redo (attempt {attempt})...", flush=True)
         env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "180", "STE_MODEL": MODEL}
         try:
-            r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
-                               capture_output=True, text=True, timeout=TIMEOUT_SECONDS,
-                               env=env, cwd=str(PROJECT))
-            if r.stderr and ("error" in r.stderr.lower() or "traceback" in r.stderr.lower()):
+            r = subprocess.run(
+                [VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
+                capture_output=True,
+                text=True,
+                timeout=TIMEOUT_SECONDS,
+                env=env,
+                cwd=str(PROJECT),
+            )
+            if r.stderr and (
+                "error" in r.stderr.lower() or "traceback" in r.stderr.lower()
+            ):
                 print(f"  B1: [stderr] {r.stderr[:200]}", flush=True)
         except subprocess.TimeoutExpired:
             print(f"  B1 {target_rel}: [TIMEOUT]", flush=True)
@@ -164,11 +196,18 @@ def main():
     queue_args = [a for a in argv if a.startswith("--queue")]
     if not queue_args:
         print("Usage: continue_batch.py --queue QUEUE.json [--resume]", flush=True)
-        print("The queue must be produced by verify-continuation.py and reviewed "
-              "before running, so B1 never overwrites the Refinement agent's live "
-              "refined/ output unilaterally.", flush=True)
+        print(
+            "The queue must be produced by verify-continuation.py and reviewed "
+            "before running, so B1 never overwrites the Refinement agent's live "
+            "refined/ output unilaterally.",
+            flush=True,
+        )
         sys.exit(2)
-    queue_path = Path(queue_args[0].split("=", 1)[1] if "=" in queue_args[0] else argv[argv.index("--queue") + 1])
+    queue_path = Path(
+        queue_args[0].split("=", 1)[1]
+        if "=" in queue_args[0]
+        else argv[argv.index("--queue") + 1]
+    )
     if not queue_path.exists():
         print(f"Queue not found: {queue_path}", flush=True)
         sys.exit(2)
@@ -178,8 +217,12 @@ def main():
         sys.exit(2)
 
     atexit.register(lambda: _save_checkpoint(_checkpoint))
-    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
-    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
+    signal.signal(
+        signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0))
+    )
+    signal.signal(
+        signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130))
+    )
 
     print(f"STE-Code B1 continuation — {len(queue)} page(s) to redo", flush=True)
     all_ok = True
@@ -195,7 +238,10 @@ def main():
                 print(f"  ✓ committed {msg}", flush=True)
             else:
                 print(f"  ✗ commit failed {msg}", flush=True)
-    print(f"\n{'='*60}\nB1 done. Passed {sum(1 for t in queue if _checkpoint.get(t,{}).get('passed'))}/{len(queue)}\n{'='*60}", flush=True)
+    print(
+        f"\n{'=' * 60}\nB1 done. Passed {sum(1 for t in queue if _checkpoint.get(t, {}).get('passed'))}/{len(queue)}\n{'=' * 60}",
+        flush=True,
+    )
     sys.exit(0 if all_ok else 1)
 
 

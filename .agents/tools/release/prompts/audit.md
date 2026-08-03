@@ -4,7 +4,7 @@ Paste this into an LLM (or run it through `hermes -z`) when the deterministic
 scan is clean but you want a judgement call on wording, or when `sync.py`
 reports an **ambiguous** count it refuses to guess.
 
-The tools decide *numbers*. The LLM decides *meaning*. Never let the model
+The tools decide _numbers_. The LLM decides _meaning_. Never let the model
 invent a count — it only ever chooses between candidates the tools measured.
 
 ---
@@ -41,11 +41,11 @@ Reply with the verdict line only. No preamble.
 
 Apply the verdict:
 
-| Verdict | Action |
-|---------|--------|
+| Verdict    | Action                                                       |
+| ---------- | ------------------------------------------------------------ |
 | `STALE 22` | `python3 .agents/tools/release/sync.py --pick <claim-id>=22` |
-| `OTHER …` | append `<!-- release-scan:ignore -->` to that line |
-| `QUOTE …` | append `<!-- release-scan:ignore -->` to that line |
+| `OTHER …`  | append `<!-- release-scan:ignore -->` to that line           |
+| `QUOTE …`  | append `<!-- release-scan:ignore -->` to that line           |
 
 ---
 
@@ -72,15 +72,15 @@ Check only these, and report findings as a short list:
 If everything is sound, reply exactly: NOTES OK
 ```
 
-A finding of type 2 means the pattern belongs in `changelog.py`'s `NOISE`
-regex — fix the filter, not the notes, so the next release inherits it.
+A finding of type 2 means the pattern belongs in `changelog.py`'s `NOISE` regex
+— fix the filter, not the notes, so the next release inherits it.
 
 ---
 
 ## Prompt: post-release documentation sweep
 
-Run after `--execute`, once the scan is green. Catches prose the scanner
-cannot see, because it reads meaning rather than digits.
+Run after `--execute`, once the scan is green. Catches prose the scanner cannot
+see, because it reads meaning rather than digits.
 
 ```
 You are checking STE-Code documentation for claims that are stale in ways a
@@ -118,5 +118,5 @@ DRIFT:
 $(cat .agents/tmp/drift.json)"
 ```
 
-Keep scratch files in `.agents/tmp/` and delete them afterwards — they are
-never part of a release.
+Keep scratch files in `.agents/tmp/` and delete them afterwards — they are never
+part of a release.

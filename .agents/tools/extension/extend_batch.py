@@ -24,6 +24,7 @@ Usage:
 
 Model: STE_MODEL env var (default tencent/hy3:free).
 """
+
 from __future__ import annotations
 
 import os
@@ -39,8 +40,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -50,8 +55,10 @@ from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+
 RT = _resolve_runtime(__file__)
 EXT_DIR = PROJECT / "ste-code" / "extensions"
 STATE_DIR = PROJECT / ".agents" / "state"
@@ -75,32 +82,43 @@ AREAS = {
 
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import Templater
+
 TPL = Templater(__file__)
 
 
 def _skill_text():
     import sys as _sys
+
     _sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
     from templater import lib_import
+
     m = lib_import("skill_prompt")
     return m.skill_section("extension-worker")
 
 
 def _build_prompt(area, out_path, count):
     wrapper = TPL.render("extend-area", area=area, count=count, out_path=out_path)
-    return wrapper + _skill_text() + (
-        "\n\nOutput ONLY the markdown file. No JSON, no code fences around the file.\n"
+    return (
+        wrapper
+        + _skill_text()
+        + (
+            "\n\nOutput ONLY the markdown file. No JSON, no code fences around the file.\n"
+        )
     )
 
 
 # ── checkpoint ───────────────────────────────────────────────────────────────
 def _load_checkpoint():
     from ste_checkpoint import load
+
     return load(CHECKPOINT_PATH)
+
 
 def _save_checkpoint(ckpt):
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, ckpt)
+
 
 _checkpoint = _load_checkpoint()
 
@@ -117,12 +135,19 @@ def git_commit_locked(files, msg):
     else:
         return False
     try:
-        subprocess.run(["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT))
-        r = subprocess.run(["git", "commit", "-m", msg, *files],
-                           capture_output=True, text=True, cwd=str(PROJECT))
+        subprocess.run(
+            ["git", "add", *files], capture_output=True, text=True, cwd=str(PROJECT)
+        )
+        r = subprocess.run(
+            ["git", "commit", "-m", msg, *files],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT),
+        )
         return r.returncode == 0
     finally:
         import shutil
+
         shutil.rmtree(lock, ignore_errors=True)
 
 
@@ -150,8 +175,11 @@ def _gate_ok(md_path: Path) -> tuple[bool, str]:
         # Gate 6: verb/adjective need an avoided synonym in non_ste
         if "**type**: verb" in e or "**type**: adjective" in e:
             ns = re.search(r"\*\*code_example_non_ste\*\*:\s*(.+)", e)
-            if ns and not re.search(r"utilize|leverage|employ|commence|terminate|initiate|bootstrap",
-                                     ns.group(1), re.I):
+            if ns and not re.search(
+                r"utilize|leverage|employ|commence|terminate|initiate|bootstrap",
+                ns.group(1),
+                re.I,
+            ):
                 return False, "Gate6 non-STE lacks avoided synonym"
         # Gate 5: unique key per entry
         km = re.search(r"^([^\n]+)", e.strip())
@@ -176,22 +204,37 @@ def run_area(area):
         print(f"  EXT {area}: launching worker (attempt {attempt})...", flush=True)
         env = {**os.environ, "HERMES_REQUEST_TIMEOUT": "180", "STE_MODEL": MODEL}
         try:
-            r = subprocess.run([VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
-                               capture_output=True, text=True, timeout=TIMEOUT_SECONDS,
-                               env=env, cwd=str(PROJECT))
-            if r.stderr and ("error" in r.stderr.lower() or "traceback" in r.stderr.lower()):
+            r = subprocess.run(
+                [VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL],
+                capture_output=True,
+                text=True,
+                timeout=TIMEOUT_SECONDS,
+                env=env,
+                cwd=str(PROJECT),
+            )
+            if r.stderr and (
+                "error" in r.stderr.lower() or "traceback" in r.stderr.lower()
+            ):
                 print(f"  EXT {area}: [stderr] {r.stderr[:200]}", flush=True)
         except subprocess.TimeoutExpired:
             print(f"  EXT {area}: [TIMEOUT]", flush=True)
             return False
         ok, why = _gate_ok(md_path)
         if ok:
-            _checkpoint[area] = {"passed": True, "n": len(re.split(r'\n### ', md_path.read_text()))}
+            _checkpoint[area] = {
+                "passed": True,
+                "n": len(re.split(r"\n### ", md_path.read_text())),
+            }
             _save_checkpoint(_checkpoint)
             # Derive JSON deterministically (no LLM) — the ONLY JSON produced.
             try:
-                subprocess.run([VENV_PYTHON, str(MD_TO_JSON), str(md_path)],
-                               capture_output=True, text=True, cwd=str(PROJECT), check=True)
+                subprocess.run(
+                    [VENV_PYTHON, str(MD_TO_JSON), str(md_path)],
+                    capture_output=True,
+                    text=True,
+                    cwd=str(PROJECT),
+                    check=True,
+                )
             except subprocess.CalledProcessError as ex:
                 print(f"  EXT {area}: [md_to_json FAIL] {ex.stderr[:200]}", flush=True)
                 return False
@@ -215,12 +258,18 @@ def main():
     if dry:
         for a in areas:
             fn, tgt, cap = AREAS[a]
-            print(f"  [dry-run] area={a} -> ste-code/extensions/{fn} (+ derived {fn[:-3]}.json)")
+            print(
+                f"  [dry-run] area={a} -> ste-code/extensions/{fn} (+ derived {fn[:-3]}.json)"
+            )
         return
 
     atexit.register(lambda: _save_checkpoint(_checkpoint))
-    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
-    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
+    signal.signal(
+        signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0))
+    )
+    signal.signal(
+        signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130))
+    )
 
     all_ok = True
     for area in areas:
@@ -230,21 +279,25 @@ def main():
         if resume and _checkpoint.get(area, {}).get("passed"):
             print(f"  EXT {area}: ✓ checkpoint skip", flush=True)
             continue
-        print(f"\n{'='*60}\nExtension area: {area}\n{'='*60}", flush=True)
+        print(f"\n{'=' * 60}\nExtension area: {area}\n{'=' * 60}", flush=True)
         if not run_area(area):
             all_ok = False
         else:
-            files = [str((EXT_DIR / AREAS[area][0]).relative_to(PROJECT)),
-                     str((EXT_DIR / (AREAS[area][0][:-3] + ".json")).relative_to(PROJECT))]
+            files = [
+                str((EXT_DIR / AREAS[area][0]).relative_to(PROJECT)),
+                str((EXT_DIR / (AREAS[area][0][:-3] + ".json")).relative_to(PROJECT)),
+            ]
             msg = f"Extension batch: {area} - PASS"
             if git_commit_locked(files, msg):
                 print(f"  ✓ committed {msg}", flush=True)
             else:
                 print(f"  ✗ commit failed {msg}", flush=True)
 
-    print(f"\n{'='*60}\nExtension done. Areas passed: "
-          f"{sum(1 for a in areas if _checkpoint.get(a,{}).get('passed'))}/{len(areas)}\n{'='*60}",
-          flush=True)
+    print(
+        f"\n{'=' * 60}\nExtension done. Areas passed: "
+        f"{sum(1 for a in areas if _checkpoint.get(a, {}).get('passed'))}/{len(areas)}\n{'=' * 60}",
+        flush=True,
+    )
     sys.exit(0 if all_ok else 1)
 
 

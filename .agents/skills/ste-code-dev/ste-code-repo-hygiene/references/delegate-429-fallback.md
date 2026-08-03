@@ -27,17 +27,17 @@ delegates just hits the same limit.
 
 3. **Finish the work with deterministic local Python.** Static scans, `grep`
    sweeps, regex substitution, and report generation are pure computation.
-   - Inventory + duplication ranking: `execute_code` over the file tree.
-   - Config surface: regex over `os.environ.get("STE_MODEL", "...")`,
-     `Path(__file__).resolve().parent…`, glob patterns, argparse defaults.
-   - Reports: `write_file` the markdown; verify with `python3` not a model.
+    - Inventory + duplication ranking: `execute_code` over the file tree.
+    - Config surface: regex over `os.environ.get("STE_MODEL", "...")`,
+      `Path(__file__).resolve().parent…`, glob patterns, argparse defaults.
+    - Reports: `write_file` the markdown; verify with `python3` not a model.
 
 4. **Report honestly.** State that the delegate failed on rate limits and that
    you completed the analysis locally from its salvaged data.
 
 ## Why this pattern matters here
 
-The STE-Code repo runs several concurrent Hermes sessions on one Nous key.
-HTTP 429 is common and transient. A delegate that dies on it leaves `completed`
-but empty — trusting that flag loses the work. The salvage path recovers it
-without burning more quota.
+The STE-Code repo runs several concurrent Hermes sessions on one Nous key. HTTP
+429 is common and transient. A delegate that dies on it leaves `completed` but
+empty — trusting that flag loses the work. The salvage path recovers it without
+burning more quota.

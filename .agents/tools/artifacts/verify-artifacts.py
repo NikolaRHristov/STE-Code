@@ -10,14 +10,19 @@ and that extensions/catalogue were included.
 
 Usage: python3 verify-artifacts.py   (exit 0 = pass)
 """
+
 import sys
 from pathlib import Path
 
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -59,7 +64,9 @@ def main():
         missing = [fr.name for fr in final_rules if fr.name not in txt]
         covered = len(final_rules) - len(missing)
         problems.extend(f"artifact missing rule {n}" for n in missing)
-        print(f"Artifact rule coverage: {covered}/{len(final_rules)} final rules present")
+        print(
+            f"Artifact rule coverage: {covered}/{len(final_rules)} final rules present"
+        )
         if covered == 0:
             problems.append("no rule ids found in artifact — assembly likely empty")
 

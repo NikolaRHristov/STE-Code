@@ -33,6 +33,7 @@ from typing import Any, Dict, Optional
 
 logger = logging.getLogger(__name__)
 
+
 def _find_jail_root() -> Path:
     """Locate the jail root by MARKER, never by counting parent hops.
 
@@ -44,9 +45,7 @@ def _find_jail_root() -> Path:
     for candidate in Path(__file__).resolve().parents:
         if (candidate / "core" / "policy.py").exists():
             return candidate
-    raise RuntimeError(
-        "jail: cannot locate the shared core/ package above " + __file__
-    )
+    raise RuntimeError("jail: cannot locate the shared core/ package above " + __file__)
 
 
 _JAIL_ROOT = _find_jail_root()
@@ -102,8 +101,7 @@ def _on_pre_tool_call(
 
     def maybe_block(evidence: str) -> Optional[Dict[str, str]]:
         if not ctx.enforce:
-            logger.warning("jail-net (dry run) would block %s: %s",
-                           tool_name, evidence)
+            logger.warning("jail-net (dry run) would block %s: %s", tool_name, evidence)
             return None
         logger.warning("jail-net blocked %s: %s", tool_name, evidence)
         return _refuse(ctx, tool_name, evidence)

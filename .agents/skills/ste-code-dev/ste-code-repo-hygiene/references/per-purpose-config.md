@@ -72,7 +72,7 @@ thresholds:
     total_workers: 109
     word_ratio_min: 0.98
 agent:
-    model: poolside/laguna-s-2.1:free   # stage-specific override
+    model: poolside/laguna-s-2.1:free # stage-specific override
     workers_per_batch: 3
     timeout_s: 600
 ```
@@ -89,8 +89,10 @@ FILENAME_RE = CFG.regex("layout.worker_re")
 
 ## Pitfall (hit in the real refactor)
 
-Models differ per stage. Refinement/assembly workers use `poolside/laguna-s-2.1:free`;
-extraction/adapt/extend/finalize use `tencent/hy3:free`. If you convert a stage's
+Models differ per stage. Refinement/assembly workers use
+`poolside/laguna-s-2.1:free`; extraction/adapt/extend/finalize use
+`tencent/hy3:free`. If you convert a stage's
 `os.environ.get("STE_MODEL", "poolside/...")` to `CFG.model`, set that stage's
-`agent.model` to the OLD literal first — otherwise you silently change behaviour.
-Verify by importing the module and asserting `m.CFG.model == "<old literal>"`.
+`agent.model` to the OLD literal first — otherwise you silently change
+behaviour. Verify by importing the module and asserting
+`m.CFG.model == "<old literal>"`.

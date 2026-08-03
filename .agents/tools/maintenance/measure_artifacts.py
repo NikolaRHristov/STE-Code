@@ -34,8 +34,12 @@ from typing import Any
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -43,7 +47,16 @@ PROJECT = _repo_root(__file__)
 ARTIFACTS = PROJECT / "ste-code" / "artifacts"
 BASE = ARTIFACTS / "_base"
 
-TIERS = ["level-2", "level-1", "level0", "level1", "level2", "level3", "level4", "level5"]
+TIERS = [
+    "level-2",
+    "level-1",
+    "level0",
+    "level1",
+    "level2",
+    "level3",
+    "level4",
+    "level5",
+]
 
 _ENCODERS: dict[str, "Any"] = {}
 
@@ -150,7 +163,9 @@ def measure_tier(tier: str, cross: dict[str, list[float]] | None = None) -> dict
         ratio = median(ratios) if ratios else 1.0
         projections[name] = round(ratio, 4)
         projected_bytes -= dist_by_name.get(name, {"bytes": 0})["bytes"]
-        projected_tokens -= dist_by_name.get(name, {"tokens_o200k": 0})["tokens_o200k"] or 0
+        projected_tokens -= (
+            dist_by_name.get(name, {"tokens_o200k": 0})["tokens_o200k"] or 0
+        )
         projected_bytes += int(base_entry["bytes"] * ratio)
         projected_tokens += int((base_entry["tokens_o200k"] or 0) * ratio)
 
@@ -209,23 +224,34 @@ def human_tokens(n: int) -> str:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     ap.add_argument("--json", action="store_true", help="emit JSON")
-    ap.add_argument("--per-file", action="store_true", help="print per sub-document rows")
+    ap.add_argument(
+        "--per-file", action="store_true", help="print per sub-document rows"
+    )
     args = ap.parse_args()
 
     if encoder("o200k_base") is None:
-        print("error: tiktoken is not installed; run `pip install tiktoken`", file=sys.stderr)
+        print(
+            "error: tiktoken is not installed; run `pip install tiktoken`",
+            file=sys.stderr,
+        )
         return 2
 
-    results = [measure_tier(t, cross_tier_ratios()) for t in TIERS if (ARTIFACTS / t).is_dir()]
+    results = [
+        measure_tier(t, cross_tier_ratios()) for t in TIERS if (ARTIFACTS / t).is_dir()
+    ]
 
     if args.json:
         print(json.dumps({"tiers": results}, indent=2))
         return 0
 
-    print(f"{'Tier':<9} {'Files':>5} {'Bytes':>10} {'o200k':>9} {'cl100k':>9} "
-          f"{'Largest':>9} {'Projected':>10} {'Pending':>8}")
+    print(
+        f"{'Tier':<9} {'Files':>5} {'Bytes':>10} {'o200k':>9} {'cl100k':>9} "
+        f"{'Largest':>9} {'Projected':>10} {'Pending':>8}"
+    )
     print("-" * 82)
     for r in results:
         d = r["distilled"]
@@ -240,8 +266,10 @@ def main() -> int:
         for r in results:
             print(f"\n== {r['tier']}")
             for f in r["per_file"]:
-                print(f"  {human_bytes(f['bytes']):>9} {human_tokens(f['tokens_o200k']):>8}  "
-                      f"{Path(f['path']).name}")
+                print(
+                    f"  {human_bytes(f['bytes']):>9} {human_tokens(f['tokens_o200k']):>8}  "
+                    f"{Path(f['path']).name}"
+                )
     return 0
 
 

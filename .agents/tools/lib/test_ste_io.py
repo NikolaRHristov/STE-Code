@@ -8,6 +8,7 @@ Guards:
   - reads are normalised and unrestricted
   - STE_CODE_CLEAN_RUN=1 is required for a clean write to be honoured
 """
+
 from __future__ import annotations
 
 import os
@@ -15,7 +16,9 @@ import sys
 from pathlib import Path
 
 _HERE = Path(__file__).resolve()
-_R = next(p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_R = next(
+    p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 
 import ste_io  # noqa: E402
@@ -62,7 +65,10 @@ def main() -> int:
     os.environ["STE_CODE_CLEAN_RUN"] = "1"
     try:
         ste_io.write_text(p / "clean.txt", "c", clean=True, make_parents=True)
-        check(ste_io.read_text(p / "clean.txt") == "c", "clean opt-in write succeeds (still confined)")
+        check(
+            ste_io.read_text(p / "clean.txt") == "c",
+            "clean opt-in write succeeds (still confined)",
+        )
     finally:
         del os.environ["STE_CODE_CLEAN_RUN"]
 

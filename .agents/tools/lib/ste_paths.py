@@ -16,6 +16,7 @@ Usage
 
     proc = subprocess.run([venv_python(), wrapper_path(), ...])
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -38,7 +39,9 @@ def wrapper_path(project_root: Path | None = None) -> str:
         from repo_root import repo_root
 
         project_root = repo_root()
-    return str(Path(project_root) / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py")
+    return str(
+        Path(project_root) / ".agents" / "tools" / "lib" / "hermes-oneshot-wrapper.py"
+    )
 
 
 if __name__ == "__main__":

@@ -1,166 +1,282 @@
 {
-  "$comment": "Harness profile. ALL project-specific naming lives HERE as DATA, never inlined in the harness code. Swap this file to retarget the harness at a different standard, product, or corpus without editing a single .py file.",
-  "profile": {
-    "id": "ste-code",
-    "display_name": "STE-Code",
-    "description": "Code-domain adaptation of a controlled-language standard.",
-    "rule_prefix": "P",
-    "rule_count": 14
-  },
-  "paths": {
-    "root_markers": [".git", "pyproject.toml"],
-    "variant_prompt_template": "ste-code/artifacts/{variant_dir}/system-prompt.txt",
-    "static_cases": ".agents/benchmark/test-cases",
-    "generated_cases": ".agents/benchmark/test-cases-adhoc",
-    "results_base": ".agents/benchmark/tests",
-    "scratch": ".agents/tmp",
-    "state": ".agents/state/benchmark-redblue"
-  },
-  "runner": {
-    "$comment": "The scoring backend is pluggable. argv_template placeholders are filled by harness_config.build_runner_argv().",
-    "kind": "subprocess",
-    "entrypoint": ".agents/benchmark/orchestrator.py",
-    "argv_template": [
-      "--test-dir", "{test_dir}",
-      "--system-prompt-file", "{system_prompt}",
-      "--results-dir", "{results_dir}",
-      "--max-workers", "{max_workers}",
-      "--timeout", "{timeout}",
-      "--poll-interval", "{poll_interval}",
-      "--model", "{model}"
-    ],
-    "aggregate_filename": "aggregate-results.json",
-    "per_test_filename": "per-test-results.json",
-    "run_dir_glob": "run-*",
-    "default_model": "tencent/hy3:free",
-    "default_max_workers": 2,
-    "default_timeout_s": 600,
-    "default_poll_interval_s": 2
-  },
-  "variants": {
-    "$comment": "A 'variant' is one configuration under test (here: a prompt tier). key = variant id, dir = on-disk directory name. The harness never assumes ids are integers or that dir == 'level' + id.",
-    "order": ["-2", "-1", "0", "1", "2", "3", "4", "5"],
-    "registry": {
-      "-2": { "dir": "level-2", "label": "principles only",        "intensity": 1 },
-      "-1": { "dir": "level-1", "label": "+ synonym table",        "intensity": 1 },
-      "0":  { "dir": "level0",  "label": "+ dictionary excerpt",   "intensity": 1 },
-      "1":  { "dir": "level1",  "label": "+ doc templates",        "intensity": 2 },
-      "2":  { "dir": "level2",  "label": "+ section grammar",      "intensity": 3 },
-      "3":  { "dir": "level3",  "label": "+ full dictionary",      "intensity": 4 },
-      "4":  { "dir": "level4",  "label": "+ extensions",           "intensity": 4 },
-      "5":  { "dir": "level5",  "label": "full standard",          "intensity": 4 }
-    }
-  },
-  "handshake": {
-    "$comment": "Filesystem convergence contract. RED, BLUE, PURPLE, WHITE and BLACK agree on these names ONLY. No process dependency, no pipes, no shared memory.",
-    "round_dir_template": "{base}/variant{variant}/round{round}",
-    "red_ledger": "escapes.json",
-    "red_sentinel": "purple.json",
-    "blue_sentinel": "blue-done.json",
-    "white_sentinel": "white-done.json",
-    "black_sentinel": "black-done.json",
-    "stitch_report": "report.json",
-    "knowledge_base": "knowledge.json",
-    "notes_dir": "notes",
-    "notes_index": "index.json",
-    "attack_brief": "attack-brief.json",
-    "verdicts": "verdicts.json"
-  },
-  "notes": {
-    "$comment": "Inter-colour correspondence. See NOTES_PROTOCOL.md.",
-    "colours": ["red", "blue", "purple", "white", "black"],
-    "kinds": ["claim", "warning", "request", "acknowledgement", "rebuttal", "handoff"],
-    "ack_dispositions": ["accepted", "deferred", "rejected"],
-    "stale_after_rounds": 2,
-    "require_evidence": true
-  },
-  "verification": {
-    "$comment": "BLACK's split-half A/B instrument. Arm A derives, arm B verifies.",
-    "partition_strategies": [
-      "random_half", "stratified_half", "technique_disjoint",
-      "placement_disjoint", "temporal_half", "variant_holdout"
-    ],
-    "default_strategy": "stratified_half",
-    "derivation_arm": "A",
-    "verification_arm": "B",
-    "overfit_tolerance_pct": 10.0,
-    "min_arm_size": 8,
-    "verdicts": ["confirmed", "inflated", "deflated", "unsound", "underpowered"],
-    "split_seed": 7
-  },
-  "scoring": {
-    "base": 0.40,
-    "principle_weight": 0.60,
-    "forbidden_penalty": 0.30,
-    "keyword_bonus": 0.10,
-    "pattern_penalty": 0.20,
-    "pass_threshold": 0.70
-  },
-  "vocabulary": {
-    "$comment": "Attack/defense word banks are DATA. A different domain ships a different bank; the generator code is unchanged.",
-    "forbidden_bank": [
-      "bunch", "stuff", "things", "kinda", "sorta", "utilize", "leverage",
-      "facilitate", "a ton of", "whole host of", "should probably",
-      "might want to", "basically", "properly", "everything", "do a",
-      "carry out a"
-    ],
-    "near_miss_pairs": [
-      ["authenticate", "authorize"],
-      ["configure", "configurate"],
-      ["initialize", "initialise"],
-      ["synchronize", "synchnorize"],
-      ["user account", "user acount"],
-      ["library", "libary"]
-    ],
-    "spelling_drift_pairs": [
-      ["initialize", "initialise"],
-      ["color", "colour"],
-      ["serialize", "serialise"],
-      ["behavior", "behaviour"],
-      ["center", "centre"],
-      ["analyze", "analyse"]
-    ],
-    "subjects": [
-      "library", "endpoint", "commit message", "error message", "code comment",
-      "config file", "module", "function", "pull request", "API reference",
-      "README", "changelog"
-    ],
-    "benign_carrier_sentences": [
-      "The module reads the configuration file at start.",
-      "Each request carries a correlation identifier in the header.",
-      "The build pipeline runs the unit tests before it makes the container.",
-      "Set the timeout value before you open the connection.",
-      "The logger writes one structured record for each request."
-    ],
-    "categories": [
-      "readme", "api-doc", "commit", "error", "comment",
-      "changelog", "config", "composite"
-    ]
-  },
-  "techniques": {
-    "$comment": "Technique ids only. Their construction lives in the generator; adding an id here without a builder is a hard error, which keeps config and code honest.",
-    "enabled": [
-      "forbidden_bait", "compliance_spoof", "near_miss_term", "ambiguity",
-      "broken_rewrite", "hedge_passive", "multi_violation",
-      "instruction_override", "unit_smuggle", "spelling_drift"
-    ]
-  },
-  "placements": {
-    "enabled": ["head", "tail", "middle", "split", "nested", "header", "table_cell", "comment"]
-  },
-  "timings": {
-    "enabled": ["immediate", "escalating", "decaying", "burst", "drip", "oscillating"]
-  },
-  "defense": {
-    "probe_placements": ["verbatim", "head", "tail", "middle", "nested", "header", "table_cell", "isolated", "diluted"],
-    "timings": ["reactive", "cumulative", "sliding_window", "immediate_retest", "delayed", "prioritized"],
-    "window": 2,
-    "budget": 64,
-    "threshold_pct": 95.0
-  },
-  "limits": {
-    "max_tokens_default": 1500,
-    "await_timeout_s": 3600,
-    "poll_interval_s": 15
-  }
+	"$comment": "Harness profile. ALL project-specific naming lives HERE as DATA, never inlined in the harness code. Swap this file to retarget the harness at a different standard, product, or corpus without editing a single .py file.",
+	"profile": {
+		"id": "ste-code",
+		"display_name": "STE-Code",
+		"description": "Code-domain adaptation of a controlled-language standard.",
+		"rule_prefix": "P",
+		"rule_count": 14
+	},
+	"paths": {
+		"root_markers": [".git", "pyproject.toml"],
+		"variant_prompt_template": "ste-code/artifacts/{variant_dir}/system-prompt.txt",
+		"static_cases": ".agents/benchmark/test-cases",
+		"generated_cases": ".agents/benchmark/test-cases-adhoc",
+		"results_base": ".agents/benchmark/tests",
+		"scratch": ".agents/tmp",
+		"state": ".agents/state/benchmark-redblue"
+	},
+	"runner": {
+		"$comment": "The scoring backend is pluggable. argv_template placeholders are filled by harness_config.build_runner_argv().",
+		"kind": "subprocess",
+		"entrypoint": ".agents/benchmark/orchestrator.py",
+		"argv_template": [
+			"--test-dir",
+			"{test_dir}",
+			"--system-prompt-file",
+			"{system_prompt}",
+			"--results-dir",
+			"{results_dir}",
+			"--max-workers",
+			"{max_workers}",
+			"--timeout",
+			"{timeout}",
+			"--poll-interval",
+			"{poll_interval}",
+			"--model",
+			"{model}"
+		],
+		"aggregate_filename": "aggregate-results.json",
+		"per_test_filename": "per-test-results.json",
+		"run_dir_glob": "run-*",
+		"default_model": "tencent/hy3:free",
+		"default_max_workers": 2,
+		"default_timeout_s": 600,
+		"default_poll_interval_s": 2
+	},
+	"variants": {
+		"$comment": "A 'variant' is one configuration under test (here: a prompt tier). key = variant id, dir = on-disk directory name. The harness never assumes ids are integers or that dir == 'level' + id.",
+		"order": ["-2", "-1", "0", "1", "2", "3", "4", "5"],
+		"registry": {
+			"-2": {
+				"dir": "level-2",
+				"label": "principles only",
+				"intensity": 1
+			},
+			"-1": {
+				"dir": "level-1",
+				"label": "+ synonym table",
+				"intensity": 1
+			},
+			"0": {
+				"dir": "level0",
+				"label": "+ dictionary excerpt",
+				"intensity": 1
+			},
+			"1": {
+				"dir": "level1",
+				"label": "+ doc templates",
+				"intensity": 2
+			},
+			"2": {
+				"dir": "level2",
+				"label": "+ section grammar",
+				"intensity": 3
+			},
+			"3": {
+				"dir": "level3",
+				"label": "+ full dictionary",
+				"intensity": 4
+			},
+			"4": { "dir": "level4", "label": "+ extensions", "intensity": 4 },
+			"5": { "dir": "level5", "label": "full standard", "intensity": 4 }
+		}
+	},
+	"handshake": {
+		"$comment": "Filesystem convergence contract. RED, BLUE, PURPLE, WHITE and BLACK agree on these names ONLY. No process dependency, no pipes, no shared memory.",
+		"round_dir_template": "{base}/variant{variant}/round{round}",
+		"red_ledger": "escapes.json",
+		"red_sentinel": "purple.json",
+		"blue_sentinel": "blue-done.json",
+		"white_sentinel": "white-done.json",
+		"black_sentinel": "black-done.json",
+		"stitch_report": "report.json",
+		"knowledge_base": "knowledge.json",
+		"notes_dir": "notes",
+		"notes_index": "index.json",
+		"attack_brief": "attack-brief.json",
+		"verdicts": "verdicts.json"
+	},
+	"notes": {
+		"$comment": "Inter-colour correspondence. See NOTES_PROTOCOL.md.",
+		"colours": ["red", "blue", "purple", "white", "black"],
+		"kinds": [
+			"claim",
+			"warning",
+			"request",
+			"acknowledgement",
+			"rebuttal",
+			"handoff"
+		],
+		"ack_dispositions": ["accepted", "deferred", "rejected"],
+		"stale_after_rounds": 2,
+		"require_evidence": true
+	},
+	"verification": {
+		"$comment": "BLACK's split-half A/B instrument. Arm A derives, arm B verifies.",
+		"partition_strategies": [
+			"random_half",
+			"stratified_half",
+			"technique_disjoint",
+			"placement_disjoint",
+			"temporal_half",
+			"variant_holdout"
+		],
+		"default_strategy": "stratified_half",
+		"derivation_arm": "A",
+		"verification_arm": "B",
+		"overfit_tolerance_pct": 10.0,
+		"min_arm_size": 8,
+		"verdicts": [
+			"confirmed",
+			"inflated",
+			"deflated",
+			"unsound",
+			"underpowered"
+		],
+		"split_seed": 7
+	},
+	"scoring": {
+		"base": 0.4,
+		"principle_weight": 0.6,
+		"forbidden_penalty": 0.3,
+		"keyword_bonus": 0.1,
+		"pattern_penalty": 0.2,
+		"pass_threshold": 0.7
+	},
+	"vocabulary": {
+		"$comment": "Attack/defense word banks are DATA. A different domain ships a different bank; the generator code is unchanged.",
+		"forbidden_bank": [
+			"bunch",
+			"stuff",
+			"things",
+			"kinda",
+			"sorta",
+			"utilize",
+			"leverage",
+			"facilitate",
+			"a ton of",
+			"whole host of",
+			"should probably",
+			"might want to",
+			"basically",
+			"properly",
+			"everything",
+			"do a",
+			"carry out a"
+		],
+		"near_miss_pairs": [
+			["authenticate", "authorize"],
+			["configure", "configurate"],
+			["initialize", "initialise"],
+			["synchronize", "synchnorize"],
+			["user account", "user acount"],
+			["library", "libary"]
+		],
+		"spelling_drift_pairs": [
+			["initialize", "initialise"],
+			["color", "colour"],
+			["serialize", "serialise"],
+			["behavior", "behaviour"],
+			["center", "centre"],
+			["analyze", "analyse"]
+		],
+		"subjects": [
+			"library",
+			"endpoint",
+			"commit message",
+			"error message",
+			"code comment",
+			"config file",
+			"module",
+			"function",
+			"pull request",
+			"API reference",
+			"README",
+			"changelog"
+		],
+		"benign_carrier_sentences": [
+			"The module reads the configuration file at start.",
+			"Each request carries a correlation identifier in the header.",
+			"The build pipeline runs the unit tests before it makes the container.",
+			"Set the timeout value before you open the connection.",
+			"The logger writes one structured record for each request."
+		],
+		"categories": [
+			"readme",
+			"api-doc",
+			"commit",
+			"error",
+			"comment",
+			"changelog",
+			"config",
+			"composite"
+		]
+	},
+	"techniques": {
+		"$comment": "Technique ids only. Their construction lives in the generator; adding an id here without a builder is a hard error, which keeps config and code honest.",
+		"enabled": [
+			"forbidden_bait",
+			"compliance_spoof",
+			"near_miss_term",
+			"ambiguity",
+			"broken_rewrite",
+			"hedge_passive",
+			"multi_violation",
+			"instruction_override",
+			"unit_smuggle",
+			"spelling_drift"
+		]
+	},
+	"placements": {
+		"enabled": [
+			"head",
+			"tail",
+			"middle",
+			"split",
+			"nested",
+			"header",
+			"table_cell",
+			"comment"
+		]
+	},
+	"timings": {
+		"enabled": [
+			"immediate",
+			"escalating",
+			"decaying",
+			"burst",
+			"drip",
+			"oscillating"
+		]
+	},
+	"defense": {
+		"probe_placements": [
+			"verbatim",
+			"head",
+			"tail",
+			"middle",
+			"nested",
+			"header",
+			"table_cell",
+			"isolated",
+			"diluted"
+		],
+		"timings": [
+			"reactive",
+			"cumulative",
+			"sliding_window",
+			"immediate_retest",
+			"delayed",
+			"prioritized"
+		],
+		"window": 2,
+		"budget": 64,
+		"threshold_pct": 95.0
+	},
+	"limits": {
+		"max_tokens_default": 1500,
+		"await_timeout_s": 3600,
+		"poll_interval_s": 15
+	}
 }

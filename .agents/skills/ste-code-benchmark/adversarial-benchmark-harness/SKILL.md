@@ -7,17 +7,17 @@ source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.ag
 layout: ste-code-canonical-v1
 ---
 
-
 # Adversarial benchmark harness — design, build, verify
 
-**Load this when** you are asked to build or extend a benchmark where independent
-"colours" attack, defend, stitch, heal, or verify a configuration under test — or
-when a user asks for RED / BLUE / PURPLE / WHITE / BLACK sides, adversarial
-test generation, or A/B verification of a benchmark's own conclusions.
+**Load this when** you are asked to build or extend a benchmark where
+independent "colours" attack, defend, stitch, heal, or verify a configuration
+under test — or when a user asks for RED / BLUE / PURPLE / WHITE / BLACK sides,
+adversarial test generation, or A/B verification of a benchmark's own
+conclusions.
 
-**Companion skills**: `gated-batch-orchestration` owns *watching* a long run
+**Companion skills**: `gated-batch-orchestration` owns _watching_ a long run
 already in flight (throughput forensics, gate-failure triage, commit
-attribution). This skill owns *designing and building* the harness and the
+attribution). This skill owns _designing and building_ the harness and the
 parallel-delegation pattern used to build it. `benchmarking` owns the STE-Code
 scoring backend (`orchestrator.py`) that a harness like this drives.
 
@@ -25,18 +25,18 @@ scoring backend (`orchestrator.py`) that a harness like this drives.
 
 ## 1. The colour model
 
-| Colour | Attacks | Owns | Question it answers |
-|---|---|---|---|
-| RED | the configuration | `red.py`, `adversarial.py` | what gets through? |
-| BLUE | RED's escapes | `blue.py` | does a fix hold when the payload moves? |
-| PURPLE | nothing — pure reader | `purple_stitch.py` | what do the sides jointly say? |
-| WHITE | the failure history | `white.py`, `knowledge.py` | what should change, and did it work? |
-| BLACK | **the conclusion** | `black.py`, `verification.py` | would this result survive scrutiny? |
+| Colour | Attacks               | Owns                          | Question it answers                     |
+| ------ | --------------------- | ----------------------------- | --------------------------------------- |
+| RED    | the configuration     | `red.py`, `adversarial.py`    | what gets through?                      |
+| BLUE   | RED's escapes         | `blue.py`                     | does a fix hold when the payload moves? |
+| PURPLE | nothing — pure reader | `purple_stitch.py`            | what do the sides jointly say?          |
+| WHITE  | the failure history   | `white.py`, `knowledge.py`    | what should change, and did it work?    |
+| BLACK  | **the conclusion**    | `black.py`, `verification.py` | would this result survive scrutiny?     |
 
 The distinction that makes the model worth building: **RED attacks the system,
-BLACK attacks the claim.** Without BLACK, a harness happily reports a number that
-was derived and validated on the same data. BLACK is where a benchmark stops
-flattering itself.
+BLACK attacks the claim.** Without BLACK, a harness happily reports a number
+that was derived and validated on the same data. BLACK is where a benchmark
+stops flattering itself.
 
 Support layers, each a separate module: config (`harness_config.py` +
 `config/harness.json`), redaction (`anonymize.py`), correspondence (`notes.py`),
@@ -99,8 +99,8 @@ Learned building `notes.py`, where five colours append to one directory:
 
 ## 3. Generic ≠ simple — the hardest constraint to hold
 
-The recurring user directive on this class of work: *"make sure all scripts are
-generic and generalized enough, **not simple**, but anonymized."*
+The recurring user directive on this class of work: _"make sure all scripts are
+generic and generalized enough, **not simple**, but anonymized."_
 
 Externalize every **noun**; keep every **algorithm** deep. Swapping the profile
 document must retarget the harness at a different corpus with **zero code
@@ -128,7 +128,7 @@ Write an audit tool (`audit_generic.py`) that greps for the violations rather
 than trusting review — and make the audit itself generic by reading the strings
 it searches for out of the config. Give it an inline pragma allowlist
 (`# audit: allow <rule-id> <reason>`) so legitimate cases (the config layer is
-*allowed* to know the layout) don't become permanent noise; report exemptions in
+_allowed_ to know the layout) don't become permanent noise; report exemptions in
 their own section so they stay visible.
 
 ---
@@ -137,42 +137,42 @@ their own section so they stay visible.
 
 Benchmark output travels: into a repo, a PR, a paper, an issue. Three levels:
 
-| Level | Removes | Use |
-|---|---|---|
-| `off` | nothing | local debugging only |
-| `paths` (default) | username, hostname, home dir, absolute paths | everyday runs |
-| `full` | `paths` + pseudonymizes profile id, variant labels, directory names | publication |
+| Level             | Removes                                                             | Use                  |
+| ----------------- | ------------------------------------------------------------------- | -------------------- |
+| `off`             | nothing                                                             | local debugging only |
+| `paths` (default) | username, hostname, home dir, absolute paths                        | everyday runs        |
+| `full`            | `paths` + pseudonymizes profile id, variant labels, directory names | publication          |
 
 Design rules learned the hard way:
 
-- **Deterministic pseudonyms, salted.** `blake2s(salt + value)[:4]` → `variant-a1b2`.
-  Same salt ⇒ same alias, so two anonymized reports stay diffable and joinable.
-  Change the salt ⇒ linkability breaks across publications. Not reversible
-  without the salt.
+- **Deterministic pseudonyms, salted.** `blake2s(salt + value)[:4]` →
+  `variant-a1b2`. Same salt ⇒ same alias, so two anonymized reports stay
+  diffable and joinable. Change the salt ⇒ linkability breaks across
+  publications. Not reversible without the salt.
 - **Never touch the numbers.** Redaction changes how a result is reported, never
   what was measured. Test this explicitly: assert a count and a rate survive
   verbatim at every level.
 - **`off` must be a true passthrough** (`report(x) is x`), so debugging sees
   exactly the raw document.
-- **Reject an unknown level** with `ValueError` rather than silently degrading to
-  no redaction — a typo'd level must never publish raw identity.
+- **Reject an unknown level** with `ValueError` rather than silently degrading
+  to no redaction — a typo'd level must never publish raw identity.
 - **Machine-readable keeps raw, human-readable gets redacted.** An on-disk note
-  or artifact keeps absolute paths so tools can resolve them; the *export* is
+  or artifact keeps absolute paths so tools can resolve them; the _export_ is
   what must be clean. Assert both halves.
 
 ### Pitfall: per-field redaction gated on the wrong level (real bug, caught by test)
 
-A `coverage.missing` list of paths was redacted only inside the `if level ==
-"full"` branch, so at the **default** `paths` level the report leaked
-`/Users/<name>/...`. Filesystem identity must be redacted at **every active
-level**; only *semantic* pseudonymization is `full`-only. When you add a field to
-a report, ask which of the two buckets it is in — and add a leak-scan assertion,
-not just a code review.
+A `coverage.missing` list of paths was redacted only inside the
+`if level == "full"` branch, so at the **default** `paths` level the report
+leaked `/Users/<name>/...`. Filesystem identity must be redacted at **every
+active level**; only _semantic_ pseudonymization is `full`-only. When you add a
+field to a report, ask which of the two buckets it is in — and add a leak-scan
+assertion, not just a code review.
 
 Always leak-scan the **output**, not only the source:
 
 ```bash
-grep -ciE "<user>|<hostname>|/Users/|/Volumes/|$HOME" report.json report.md   # expect 0
+grep -ciE "<user>|<hostname>|/Users/|/Volumes/|$HOME" report.json report.md # expect 0
 ```
 
 ---
@@ -188,7 +188,8 @@ Record: `id`, `from_colour`, `to_colour` (or `all`), `variant`, `round`, `kind`
 `evidence{escape_ids, probe_ids, remedy_ids, artifact_paths}`, `confidence`,
 `expects_ack`, `supersedes`, `created_at`.
 
-- **Immutable.** A correction is a new note with `supersedes` set, never an edit.
+- **Immutable.** A correction is a new note with `supersedes` set, never an
+  edit.
 - **Evidence enforcement.** `claim`/`warning`/`rebuttal` must carry ≥1 evidence
   item or the write is rejected; `handoff`/`request`/`acknowledgement` are
   exempt — they route work or answer an existing note rather than asserting a
@@ -196,23 +197,23 @@ Record: `id`, `from_colour`, `to_colour` (or `all`), `variant`, `round`, `kind`
 - **Unacknowledged ≠ invisible.** Notes with `expects_ack` unanswered past N
   rounds surface as `stale_notes` in the stitch report.
 - **Validate colour/kind against config** so code and config cannot drift apart.
-- A rejection is a **rebuttal** and must carry counter-evidence; an acceptance is
-  an **acknowledgement** carrying `action_taken`.
+- A rejection is a **rebuttal** and must carry counter-evidence; an acceptance
+  is an **acknowledgement** carrying `action_taken`.
 - Notes are free text written by agents plus artifact paths — a prime leak
   vector. The on-disk note keeps raw paths for machine use; the **export** goes
   through the anonymizer.
 
 **Broadcast semantics bite the tests.** A note addressed to `all` with
-`expects_ack` legitimately appears in *every* colour's unacked inbox. Assert
+`expects_ack` legitimately appears in _every_ colour's unacked inbox. Assert
 membership (`brief.id in unacked`), not list equality — see §7.
 
 ### The WHITE → BLACK handoff
 
-WHITE holds the only cross-round, cross-variant model of *why* things fail —
-which is exactly what an attacker would need to discredit the benchmark. So WHITE
-writes that model down deliberately as an **attack brief**: falsifiable
-hypotheses of the form *"if X were true, the reported result would be inflated by
-roughly Y"*. BLACK's job is to test each one.
+WHITE holds the only cross-round, cross-variant model of _why_ things fail —
+which is exactly what an attacker would need to discredit the benchmark. So
+WHITE writes that model down deliberately as an **attack brief**: falsifiable
+hypotheses of the form _"if X were true, the reported result would be inflated
+by roughly Y"_. BLACK's job is to test each one.
 
 ---
 
@@ -222,24 +223,24 @@ roughly Y"*. BLACK's job is to test each one.
 (WHITE's remedies, BLUE's probes); arm B verifies, untouched until the claim is
 fixed, then evaluated once.
 
-Partition strategies, all deterministic given a seed — use a **stable hash of the
-case id** (`hashlib`, *not* builtin `hash()`, which is salted per process, and
-never `random.shuffle`), so the split reproduces without being stored:
+Partition strategies, all deterministic given a seed — use a **stable hash of
+the case id** (`hashlib`, _not_ builtin `hash()`, which is salted per process,
+and never `random.shuffle`), so the split reproduces without being stored:
 
-| Strategy | Detects |
-|---|---|
-| `random_half` | ordinary sampling noise |
-| `stratified_half` | confounding by cell composition |
+| Strategy             | Detects                                                            |
+| -------------------- | ------------------------------------------------------------------ |
+| `random_half`        | ordinary sampling noise                                            |
+| `stratified_half`    | confounding by cell composition                                    |
 | `technique_disjoint` | technique overfitting (a remedy that only fixes what it was shown) |
-| `placement_disjoint` | placement overfitting |
-| `temporal_half` | drift; remedies that only work on the round they came from |
-| `variant_holdout` | whether a lesson transfers across configurations |
+| `placement_disjoint` | placement overfitting                                              |
+| `temporal_half`      | drift; remedies that only work on the round they came from         |
+| `variant_holdout`    | whether a lesson transfers across configurations                   |
 
 Verdicts: `confirmed` / `inflated` / `deflated` / `unsound` / `underpowered`,
 assigned by an explicit documented decision table over (effect, A-vs-B gap,
-power) — not ad-hoc `if`s scattered through the code. Enforce a minimum arm size;
-an underpowered claim must **never** be presented as confirmed. Report the gap as
-a number, and label anything measured on arm A alone `derivation-only`.
+power) — not ad-hoc `if`s scattered through the code. Enforce a minimum arm
+size; an underpowered claim must **never** be presented as confirmed. Report the
+gap as a number, and label anything measured on arm A alone `derivation-only`.
 
 BLACK's own standing challenges, beyond WHITE's brief: scoring-artifact
 sensitivity, selection bias (regions RED never generated), remedy overfit, cell
@@ -251,9 +252,9 @@ evidence).
 ## 7. Planted-signal fixtures — the acceptance test
 
 A synthetic fixture must contain **signals you deliberately planted**, and the
-test asserts the detector *found them and ranked them correctly*. Example: make
-one technique escape in every placement and one placement defeat every technique,
-then assert both rank first.
+test asserts the detector _found them and ranked them correctly_. Example: make
+one technique escape in every placement and one placement defeat every
+technique, then assert both rank first.
 
 > **A fixture where everything comes back clean/confirmed means your detector is
 > broken, not that your system is healthy.**
@@ -269,16 +270,16 @@ requires.
 ### Pitfall: a too-balanced fixture hides the overfit signal
 
 When planting an overfit remedy in a split-half fixture, do **not** tie the
-planted outcome to a *stratifying attribute* (e.g. `placement`). If each arm
+planted outcome to a _stratifying attribute_ (e.g. `placement`). If each arm
 contains the same mix of placements, every split reproduces the same aggregate
 and the overfit never shows — the detector comes back `confirmed` and you
-falsely conclude the system is healthy (see the §7 warning about clean fixtures).
-Tie the planted outcome to **arm membership**: the derivation arm passes every
-case, the verification arm passes **zero** (success is a function of which arm the
-case landed in, not of any observable attribute). Then any split that separates
-the arms surfaces a ~100-point gap → `inflated`. Verify the fixture by computing
-the split you intend to assert on and confirming the gap is non-zero *before*
-wiring the assertion.
+falsely conclude the system is healthy (see the §7 warning about clean
+fixtures). Tie the planted outcome to **arm membership**: the derivation arm
+passes every case, the verification arm passes **zero** (success is a function
+of which arm the case landed in, not of any observable attribute). Then any
+split that separates the arms surfaces a ~100-point gap → `inflated`. Verify the
+fixture by computing the split you intend to assert on and confirming the gap is
+non-zero _before_ wiring the assertion.
 
 ### Pitfall: when the assertion and the code disagree, check which is wrong
 
@@ -286,7 +287,7 @@ Three times across this work a "failure" was a wrong assertion, not a bug: a
 2-complete / 2-partial fixture asserted as 1/3; a subset relation asserted as
 equality (2 variants, 1 timeline); and an unacked-inbox list asserted as exactly
 one id when a broadcast correctly appears there too. Fix the assertion — but
-never *weaken* a check to make it green. Re-derive the expected value from the
+never _weaken_ a check to make it green. Re-derive the expected value from the
 fixture by hand first, and prefer membership/subset assertions where the domain
 genuinely allows extra members.
 
@@ -301,7 +302,7 @@ deletes the evidence.
 Promote it to `selftest.py` in the harness directory, committed:
 
 ```bash
-python3 .agents/benchmark/selftest.py     # exit 0 = green
+python3 .agents/benchmark/selftest.py # exit 0 = green
 ```
 
 It should: assert config mirrors the document, exercise every redaction level
@@ -312,18 +313,18 @@ concurrently by other workers get compile-gated automatically as they land.
 
 Use `tempfile.mkdtemp` + `shutil.rmtree` in a `finally` so fixtures never leak;
 verify zero leftovers. Run it twice to prove idempotence. Add its invocation to
-the worker brief as a gate: *no worker reports done until this exits 0*.
+the worker brief as a gate: _no worker reports done until this exits 0_.
 
 ### Make it DISCOVERABLE, or it does not count as verified
 
-A committed `selftest.py` is still invisible if nothing points at it. If the repo
-has no `Makefile`, `pyproject.toml`, `pytest.ini`, `tests/`, or `AGENTS.md`,
-there is **no canonical command**, and every session re-derives verification from
-scratch. Check first:
+A committed `selftest.py` is still invisible if nothing points at it. If the
+repo has no `Makefile`, `pyproject.toml`, `pytest.ini`, `tests/`, or
+`AGENTS.md`, there is **no canonical command**, and every session re-derives
+verification from scratch. Check first:
 
 ```bash
 for f in Makefile justfile pyproject.toml setup.cfg tox.ini pytest.ini \
-         package.json AGENTS.md CLAUDE.md; do [ -e "$f" ] && echo "$f"; done
+	package.json AGENTS.md CLAUDE.md; do [ -e "$f" ] && echo "$f"; done
 ```
 
 Fix the root cause with a small `Makefile` exposing `test` / `lint` / `audit` /
@@ -333,7 +334,7 @@ Fix the root cause with a small `Makefile` exposing `test` / `lint` / `audit` /
 `make check` failed on ~65 line-length violations, ~56 of them pre-existing
 legacy (`orchestrator*.py`, `purple.py`). Gating on those makes lint permanently
 red, and a permanently-red gate is an ignored gate. List the clean modules in a
-`CLEAN :=` variable, keep `compileall` across *everything*, and migrate legacy
+`CLEAN :=` variable, keep `compileall` across _everything_, and migrate legacy
 opportunistically. Then **fix the violations in files you own** rather than
 raising the limit — one of nine was a genuine DRY win (two identical
 `defaultdict(lambda: {...})` literals collapsed into a shared `_tally()`).
@@ -348,28 +349,28 @@ worker doing sequential turns wastes wall-clock time.
 
 > **Delegation on this class of work fails silently.** On this exact project,
 > four subagents across two batches all returned `status=completed` and wrote
-> **zero files** — every module ended up built by the parent session. Read
-> "Size the goal to the budget" and "Verify the batch on disk" below *before*
+> **zero files** — every module ended up built by the parent session. Read "Size
+> the goal to the budget" and "Verify the batch on disk" below _before_
 > dispatching a build fan-out.
 
 **Raise the caps first** (defaults are conservative):
 
 ```bash
-hermes config set delegation.max_concurrent_children 8   # from 3
-hermes config set delegation.max_spawn_depth 3           # from 1 — lets workers delegate
+hermes config set delegation.max_concurrent_children 8 # from 3
+hermes config set delegation.max_spawn_depth 3         # from 1 — lets workers delegate
 hermes config set delegation.orchestrator_enabled true
-hermes config set delegation.max_iterations 120          # from 50 — long builds
-hermes config get delegation                             # verify
+hermes config set delegation.max_iterations 120 # from 50 — long builds
+hermes config get delegation                    # verify
 ```
 
 `max_spawn_depth: 1` is what silently prevents workers from fanning out further.
 But raising it is **necessary, not sufficient**: the child also needs
-`delegate_task` in its *toolset*. With `toolsets: [hermes-cli]` the children
+`delegate_task` in its _toolset_. With `toolsets: [hermes-cli]` the children
 could not delegate at all and burned turns discovering that
 (`delegate_task is not exposed in this session's toolset`).
 
-> **PITFALL — do NOT raise `max_concurrent_children` to 8 on this profile.**
-> On the STE-Code free-tier endpoint, raising it 3 → 8 *caused* the HTTP 524
+> **PITFALL — do NOT raise `max_concurrent_children` to 8 on this profile.** On
+> the STE-Code free-tier endpoint, raising it 3 → 8 _caused_ the HTTP 524
 > (Cloudflare 120s read timeout) failures this skill warns about: every
 > dispatched build batch returned `status=completed` with a 524 payload in the
 > body and **wrote zero files**. The bottleneck is endpoint saturation, not the
@@ -386,21 +387,22 @@ spend the whole budget reading (`read_file` × 8, `search_files`, `execute_code`
 probes) and never reach the first `write_file`. Antidote, stated verbatim in the
 goal:
 
-- **One file per child**, named absolutely: *"ONE FILE. Nothing else."*
-- *"Read these two files only; do not explore the tree."*
-- *"WRITE THE FILE EARLY, then refine. Do not spend more than 3 tool calls on
-  reading before your first `write_file`."*
+- **One file per child**, named absolutely: _"ONE FILE. Nothing else."_
+- _"Read these two files only; do not explore the tree."_
+- _"WRITE THE FILE EARLY, then refine. Do not spend more than 3 tool calls on
+  reading before your first `write_file`."_
 - **Quote the API inline** in the context block so the child never needs to open
   the config module.
 - Paste the **real measured numbers** in, so the child doesn't rediscover them.
-- If `delegate_task` isn't in the child's toolset: *"do the work yourself; do NOT
-  use delegate_task."*
+- If `delegate_task` isn't in the child's toolset: _"do the work yourself; do
+  NOT use delegate_task."_
 - Keep the dispatch short. ~4–6 KB of numbered requirements A–G reads as
   thorough and behaves as overhead: the child plans, re-plans, never writes.
 
 **When in doubt, build it in the parent session.** A ~600-line concurrency-
-critical module written directly (skeleton, then successive `patch` calls) passed
-27/27 on its first probe — faster end-to-end than two failed delegation rounds.
+critical module written directly (skeleton, then successive `patch` calls)
+passed 27/27 on its first probe — faster end-to-end than two failed delegation
+rounds.
 
 ### The WORKER_BRIEF.md pattern
 
@@ -410,14 +412,14 @@ session starter:
 
 `.agents/benchmark/WORKER_BRIEF.md` — orientation (the colour table), the
 non-negotiable rules (contract, genericity, anonymization, language version,
-never block, verify with real execution, don't commit, scratch location),
-**file ownership** (who owns what, "if you need a change in a file you don't own,
+never block, verify with real execution, don't commit, scratch location), **file
+ownership** (who owns what, "if you need a change in a file you don't own,
 report it — do not edit it"), the delegation policy, orientation commands, and
 the definition of done.
 
 Then each dispatch carries: read these N files **in this order** → the state of
 the problem with **real measured numbers** → explicit file ownership including
-files that *don't exist yet* ("import defensively, they're being written right
+files that _don't exist yet_ ("import defensively, they're being written right
 now") → deliverable paths → an acceptance test that must fail on a broken
 detector.
 
@@ -439,8 +441,8 @@ grep -nE "exit_reason|not exposed|Error|429|524" \
 ### Committing work (replaces the poll-commit worker)
 
 **Do not run `.agents/tools/runners/poll-commit.sh`.** It auto-commits with junk
-messages (`chore(benchmark): poll-commit N file(s)`) that the user has explicitly
-rejected. Kill any running instance:
+messages (`chore(benchmark): poll-commit N file(s)`) that the user has
+explicitly rejected. Kill any running instance:
 
 ```bash
 pkill -f poll-commit.sh
@@ -449,13 +451,14 @@ pkill -f poll-commit.sh
 Commit with the intelligent tooling instead:
 
 ```bash
-git gcommit-hermes        # Maintain/Save tool: writes a real, context-aware message
+git gcommit-hermes # Maintain/Save tool: writes a real, context-aware message
 ```
 
 > **Caveat:** `git gcommit-hermes` calls a model backend (DeepSeek) that can be
-> out of credits — observed `HTTP 402 Insufficient Balance`, aborting the commit.
-> When it fails, **write an intelligent message yourself** (why + what, never the
-> dumb auto format) and `git commit` directly. Do NOT fall back to poll-commit.
+> out of credits — observed `HTTP 402 Insufficient Balance`, aborting the
+> commit. When it fails, **write an intelligent message yourself** (why + what,
+> never the dumb auto format) and `git commit` directly. Do NOT fall back to
+> poll-commit.
 
 Scope every commit to session-owned paths — never `git add -A`; other sessions
 own other directories.
@@ -468,7 +471,7 @@ own other directories.
   under ~8K tokens: write a skeleton with an `# __APPEND__` marker, then grow it
   with successive `patch` calls. Don't retry the same oversized call.
 - **Assert the failure mode, not just the happy path.** Every detector needs a
-  fixture where it *must* fire.
+  fixture where it _must_ fire.
 - **Redaction gated on the wrong level** — see §4.
 - **`match` statements / `X | Y` at runtime** break on Python 3.9. Use
   `from __future__ import annotations` and quote annotations in dataclasses.
@@ -476,14 +479,22 @@ own other directories.
   cycle; dump `[a for a in dir(cfg) if not a.startswith('_')]` once instead.
 - **`write_file` refuses `/private/var/folders/...`** (sensitive-system-path
   guard). Put scratch probes under the repo's own scratch dir and let the
-  *fixture* use `tempfile.mkdtemp`.
+  _fixture_ use `tempfile.mkdtemp`.
 - **Don't interfere with a live run.** When orchestrators are mid-flight, build
   alongside them in scratch and never signal their pids.
 - **Bare `ps` misses detached processes** — use `ps -axo` or explicit `-p`.
-- **Don't re-declare args `add_common_arguments` already adds.** `harness_config.add_common_arguments(parser, config=...)` registers `--base, --profile, --rounds, --variants, --poll-interval, --skip-live, --model, --max-workers, --seed, --timeout`. Re-adding any of them makes argparse raise `ArgumentError: conflicting option string`. In `black.py` this surfaced as a launch-time crash; the fix was to delete the duplicate `parser.add_argument("--poll-interval" / "--rounds" / "--variants" / "--skip-live")` lines.
+- **Don't re-declare args `add_common_arguments` already adds.**
+  `harness_config.add_common_arguments(parser, config=...)` registers
+  `--base, --profile, --rounds, --variants, --poll-interval, --skip-live, --model, --max-workers, --seed, --timeout`.
+  Re-adding any of them makes argparse raise
+  `ArgumentError: conflicting option string`. In `black.py` this surfaced as a
+  launch-time crash; the fix was to delete the duplicate
+  `parser.add_argument("--poll-interval" / "--rounds" / "--variants" / "--skip-live")`
+  lines.
 - **`cfg.scoring` is an object, not a dict.** `dict(cfg.scoring)` raises
-  `TypeError: 'Scoring' object is not iterable`; use `dict(cfg.scoring.__dict__)`
-  (or `vars(cfg.scoring)`). Hit in `black.py`'s scoring-artifact challenge.
+  `TypeError: 'Scoring' object is not iterable`; use
+  `dict(cfg.scoring.__dict__)` (or `vars(cfg.scoring)`). Hit in `black.py`'s
+  scoring-artifact challenge.
 - **Base-level vs per-round paths.** `cfg.attack_brief_path(base)` and
   `cfg.verdicts_path(base)` take **only** `base`; the attack brief is shared at
   the base, not per round. `cfg.black_sentinel_path(base, variant, round_n)` and
@@ -493,10 +504,11 @@ own other directories.
 - **Schema vs runtime field requirements differ.** `schema.json`'s `TestCase.id`
   regex (`^bench-\d{3}$`) is NOT enforced by `orchestrator.py` at runtime; the
   runner merely passes `tc["id"]` through as `test_id`. But `category` IS
-  restricted to the underscore enum (`api_doc`, not `api-doc`) and `expected_principles`
-  needs `minItems: 1`. Keep generated cases schema-conformant (underscore
-  categories) so a future schema-validation step won't reject them, but don't
-  assume the orchestrator will crash on a non-`bench-` id.
+  restricted to the underscore enum (`api_doc`, not `api-doc`) and
+  `expected_principles` needs `minItems: 1`. Keep generated cases
+  schema-conformant (underscore categories) so a future schema-validation step
+  won't reject them, but don't assume the orchestrator will crash on a
+  non-`bench-` id.
 
 ---
 
@@ -510,55 +522,57 @@ Observed repeatedly on this profile — treat as defaults:
   the conversation moving and find other work while things run.
 - **Anonymize by default**, both the report and the benchmark itself.
 - **More workers.** When throughput is model-latency-bound the user wants the
-  worker count raised, delegation used *inside* workers, and worker lifespan
+  worker count raised, delegation used _inside_ workers, and worker lifespan
   extended with richer starter context.
 - **Prove it with real output.** Fresh tool output, not recollection; never
   fabricate a result you did not observe.
 - Pipeline bookkeeping lives in `.agents/`, never in the shippable product dir.
-- **Commit with `git gcommit-hermes`, not poll-commit.sh** (see §9). If it's
-  out of credits, write the message yourself.
+- **Commit with `git gcommit-hermes`, not poll-commit.sh** (see §9). If it's out
+  of credits, write the message yourself.
 
 ---
 
 ## 12. The developmental loop: RED-obsolescence & closure
 
 Beyond the static colour roles in §1, the harness is also a **developmental
-adversarial pipeline**: the driver (`run_pipeline.py`) loops cycles
-RED → BLUE → WHITE → BLACK, and BLACK-confirmed "defended" claims prune RED's
-attack space across cycles until RED becomes **obsolete** — the attack space is
-closed and frozen as a taxonomy. Full plan, entity model, broken-list with
-file:line anchors, the exact fix set, the hard constraints, and the reject-list:
+adversarial pipeline**: the driver (`run_pipeline.py`) loops cycles RED → BLUE →
+WHITE → BLACK, and BLACK-confirmed "defended" claims prune RED's attack space
+across cycles until RED becomes **obsolete** — the attack space is closed and
+frozen as a taxonomy. Full plan, entity model, broken-list with file:line
+anchors, the exact fix set, the hard constraints, and the reject-list:
 **`references/developmental-loop-phase0.md`**. Read it before touching the loop.
 
-The pieces that make the developmental arc real (and the mistakes that killed it):
+The pieces that make the developmental arc real (and the mistakes that killed
+it):
 
 - **RED must stay DETERMINISTIC — do NOT add an LLM to RED.** Its generator
   (`build_red_cases` in `red.py`) is already correct; the live bug was (a) RED
-  launched with `--emit-only` writing an *empty* `escapes.json` (escapes were
+  launched with `--emit-only` writing an _empty_ `escapes.json` (escapes were
   only recorded from a model run that never happens), and (b) BLUE/WHITE/BLACK
   hardcoded `--skip-live`. Fix the handoff, not the generator. Adding an LLM to
   RED breaks the "WHITE/BLACK deterministic" invariant.
-- **The provenance bond.** BLUE consumes RED's GENERATED escapes (`generator ==
-  "RED"`); BLUE must never grade its own generated attacks. RED→BLUE is the only
-  honest adversarial handoff.
+- **The provenance bond.** BLUE consumes RED's GENERATED escapes
+  (`generator == "RED"`); BLUE must never grade its own generated attacks.
+  RED→BLUE is the only honest adversarial handoff.
 - **The BLACK→RED pruning edge.** Driver builds `excluded_pairs` set from
   BLACK-confirmed defended (technique, placement) pairs; persist it to
   `excluded_pairs.json` and feed it into the NEXT cycle's RED via a **new
   `--exclude-pairs <file>` flag on `red.py`** so RED skips solved regions.
   Without that flag the loop only prunes the synthetic seed, never real RED
   generation.
-- **Closure detector (the missing endpoint).** `coverage = len(excluded_pairs) /
-  total_pairs` (RED's techniques × placements, ~80). Declare `red_obsolete` at
-  `coverage >= 0.95` and **early-stop the cycle loop**; keep `--cycles` as a max.
-  Write `closure-report.json`.
+- **Closure detector (the missing endpoint).**
+  `coverage = len(excluded_pairs) / total_pairs` (RED's techniques × placements,
+  ~80). Declare `red_obsolete` at `coverage >= 0.95` and **early-stop the cycle
+  loop**; keep `--cycles` as a max. Write `closure-report.json`.
 - **Preserve BLACK's empty-evidence guard.** When WHITE publishes no falsifiable
   hypotheses, BLACK emits `brief-coverage → underpowered` (not a fake
   `confirmed`). Never weaken this.
 - **Reject the remote research spec's priority order.** Its ideas (provenance,
-  separation, 4-dim closure ≥0.9) are sound *as target-state*, but it front-loads
-  over-engineered defenses (contamination watermarking, judge calibration, CUPED,
-  Bonferroni, Pareto, OpenTelemetry) for a pipeline that can't yet run a live
-  adversarial pass. Fix the foundational handoff + closure detector first.
+  separation, 4-dim closure ≥0.9) are sound _as target-state_, but it
+  front-loads over-engineered defenses (contamination watermarking, judge
+  calibration, CUPED, Bonferroni, Pareto, OpenTelemetry) for a pipeline that
+  can't yet run a live adversarial pass. Fix the foundational handoff + closure
+  detector first.
 - **`run_pipeline.py` IS the orchestrator** (the driver); PURPLE is an
-  attestation *stub*, not a separate orchestrator. The remote research agent
+  attestation _stub_, not a separate orchestrator. The remote research agent
   misread this — don't copy its invented "ORCHESTRATOR role".

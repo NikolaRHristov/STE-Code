@@ -1,5 +1,5 @@
 description: >-
-  Adversarial benchmark runs for STE-Code. Locked down under the 'bench'
-  jail policy: writes confined to the benchmark output tree, no network, no
-  delegation.
+    Adversarial benchmark runs for STE-Code. Locked down under the 'bench' jail
+    policy: writes confined to the benchmark output tree, no network, no
+    delegation.
 description_auto: false

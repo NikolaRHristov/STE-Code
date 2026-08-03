@@ -8,8 +8,8 @@
 > **Temporary reading document.** Simulated walk-through of the STE-Code
 > adversarial benchmark, one stage per file.
 >
-> **Everything in a `REAL` box was read off disk during this session.**
-> Two sources:
+> **Everything in a `REAL` box was read off disk during this session.** Two
+> sources:
 >
 > - **Offline pipeline artifacts** — RED cases, BLUE probes, sentinels,
 >   verdicts, knowledge, remedies. **Re-verified after writing**: I regenerated
@@ -25,13 +25,13 @@
 >
 > No `hermes -z` was invoked for this document. Inferred numbers say `DERIVED`.
 >
-> | File | Stage |
-> |------|-------|
-> | **flow.md** | ← you are here · the atom: one case, one run, one score |
-> | flow-2.md | 🔴 RED — building the attack space |
-> | flow-3.md | 🔵 BLUE + 🟣 PURPLE — defending and stitching |
-> | flow-4.md | ⚪ WHITE + ⚫ BLACK — learning and falsifying |
-> | flow-5.md | The whole machine + 4 discrepancies found while writing this |
+> | File        | Stage                                                        |
+> | ----------- | ------------------------------------------------------------ |
+> | **flow.md** | ← you are here · the atom: one case, one run, one score      |
+> | flow-2.md   | 🔴 RED — building the attack space                           |
+> | flow-3.md   | 🔵 BLUE + 🟣 PURPLE — defending and stitching                |
+> | flow-4.md   | ⚪ WHITE + ⚫ BLACK — learning and falsifying                |
+> | flow-5.md   | The whole machine + 4 discrepancies found while writing this |
 
 ---
 
@@ -82,8 +82,8 @@ picture — everything else is this loop, repeated and aggregated.
                        └────────────┘     = a real, durable weakness
 ```
 
-**The asymmetry that drives everything:** a case that *passes* is thrown away.
-A case that *fails* becomes the input to BLUE, then WHITE, then BLACK. The
+**The asymmetry that drives everything:** a case that _passes_ is thrown away. A
+case that _fails_ becomes the input to BLUE, then WHITE, then BLACK. The
 benchmark spends nearly all of its budget on failures. A perfect level would
 cost almost nothing to test past RED.
 
@@ -92,9 +92,9 @@ cost almost nothing to test past RED.
 ## 2. A real case, watched through every state
 
 `REAL (archived)` — read from
-`tier-1-static/run-20260801-125510/per-test-results.json`, test `bench-006`.
-An actual model generation from level -1. (Source dir since deleted by a
-concurrent session — see the note at the top.)
+`tier-1-static/run-20260801-125510/per-test-results.json`, test `bench-006`. An
+actual model generation from level -1. (Source dir since deleted by a concurrent
+session — see the note at the top.)
 
 ### State 1 · DEFINED
 
@@ -139,11 +139,11 @@ controlled language. Note the trap: `does the`, `thing`, `everything`,
 ```
 
 Look at what the model actually did well: `everything goes well` →
-`the authentication is successful`; `something goes wrong` → `the
-authentication fails`; `might throw` → `can show`. Three real improvements.
+`the authentication is successful`; `something goes wrong` →
+`the authentication fails`; `might throw` → `can show`. Three real improvements.
 
-And what it missed: it kept **`does the`**. It also emitted a stray `===============`
-header line.
+And what it missed: it kept **`does the`**. It also emitted a stray
+`===============` header line.
 
 ### State 4 · SCORED
 
@@ -178,7 +178,8 @@ header line.
 names the principle (P1), the trigger phrase, and the level. This single record
 is what WHITE will later turn into a remedy.
 
-`REAL (archived)` — 1 of only **2 failures in 59 cases** at level -1 (96.6% pass).
+`REAL (archived)` — 1 of only **2 failures in 59 cases** at level -1 (96.6%
+pass).
 
 ---
 

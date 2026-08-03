@@ -1,107 +1,207 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/NikolaRHristov/STE-Code/.agents/benchmark/schema.json",
-  "title": "STE-Code Benchmark Schema",
-  "description": "Schema for STE-Code benchmark test cases and results",
-  "version": "1.0.0",
-  "definitions": {
-    "TestCategory": {
-      "type": "string",
-      "enum": ["readme", "api_doc", "commit", "error", "comment", "changelog", "config", "composite"]
-    },
-    "Difficulty": {
-      "type": "string",
-      "enum": ["easy", "medium", "hard"]
-    },
-    "Principle": {
-      "type": "string",
-      "pattern": "^P([1-9]|1[0-4])$"
-    },
-    "Capsule": {
-      "type": "object",
-      "description": "Unit 1: sequencing envelope wrapping a RED/BLUE/WHITE/BLACK invocation. Additive; existing consumers ignore it.",
-      "properties": {
-        "id": {"type": "string", "description": "Stable id: hash(colour, variant, round, sequence_position, seed)"},
-        "colour": {"type": "string", "enum": ["RED", "BLUE", "WHITE", "BLACK"]},
-        "sequence_id": {"type": "string", "description": "id of the sequence.yaml entry that spawned this capsule"},
-        "sees": {"type": "array", "items": {"type": "string"}, "description": "capsule ids whose output this capsule consumes"},
-        "intent": {"type": "string", "enum": ["adversarial", "helpful", "hybrid"]},
-        "timing_offset_s": {"type": "number", "minimum": 0, "description": "seconds after preceding capsule sentinel appeared"},
-        "position": {"type": "integer", "minimum": 0, "description": "0-indexed position in the declared sequence"}
-      },
-      "required": ["id", "colour", "sequence_id", "sees", "intent", "timing_offset_s", "position"]
-    },
-    "TestCase": {
-      "type": "object",
-      "required": ["id", "category", "description", "input", "expected_principles", "expected_keywords", "forbidden_keywords", "max_tokens", "difficulty"],
-      "properties": {
-        "id": {"type": "string", "pattern": "^bench-\\d{3}$"},
-        "category": {"$ref": "#/definitions/TestCategory"},
-        "description": {"type": "string", "minLength": 10},
-        "input": {"type": "string", "minLength": 5},
-        "expected_principles": {"type": "array", "items": {"$ref": "#/definitions/Principle"}, "minItems": 1},
-        "expected_keywords": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-        "forbidden_keywords": {"type": "array", "items": {"type": "string"}},
-        "max_tokens": {"type": "integer", "minimum": 100, "maximum": 2000},
-        "difficulty": {"$ref": "#/definitions/Difficulty"},
-        "capsule": {"$ref": "#/definitions/Capsule"}
-      }
-    },
-    "TestResult": {
-      "type": "object",
-      "required": ["test_id", "category", "passed", "correctness_score", "latency_ms"],
-      "properties": {
-        "test_id": {"type": "string"},
-        "category": {"$ref": "#/definitions/TestCategory"},
-        "input": {"type": "string"},
-        "output": {"type": "string"},
-        "expected_principles_satisfied": {"type": "array", "items": {"$ref": "#/definitions/Principle"}},
-        "expected_principles_missed": {"type": "array", "items": {"$ref": "#/definitions/Principle"}},
-        "forbidden_keywords_found": {"type": "array", "items": {"type": "string"}},
-        "correctness_score": {"type": "number", "minimum": 0, "maximum": 1},
-        "latency_ms": {"type": "integer", "minimum": 0},
-        "token_count_input": {"type": "integer", "minimum": 0},
-        "token_count_output": {"type": "integer", "minimum": 0},
-        "diff_ratio": {"type": "number", "minimum": 0, "maximum": 1},
-        "passed": {"type": "boolean"},
-        "notes": {"type": "string"},
-        "capsule": {"$ref": "#/definitions/Capsule"}
-      }
-    },
-    "AggregateReport": {
-      "type": "object",
-      "required": ["benchmark_id", "timestamp", "model", "total_tests", "passed", "failed", "aggregates", "by_category"],
-      "properties": {
-        "benchmark_id": {"type": "string"},
-        "timestamp": {"type": "string", "format": "date-time"},
-        "model": {"type": "string"},
-        "total_tests": {"type": "integer"},
-        "passed": {"type": "integer"},
-        "failed": {"type": "integer"},
-        "aggregates": {
-          "type": "object",
-          "properties": {
-            "avg_correctness": {"type": "number"},
-            "avg_latency_ms": {"type": "number"},
-            "avg_token_usage": {"type": "number"},
-            "total_tokens": {"type": "integer"},
-            "avg_diff_ratio": {"type": "number"}
-          }
-        },
-        "by_category": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "passed": {"type": "integer"},
-              "failed": {"type": "integer"},
-              "avg_correctness": {"type": "number"}
-            }
-          }
-        },
-        "failures": {"type": "array", "items": {"$ref": "#/definitions/TestResult"}},
-        "recommendations": {"type": "array", "items": {"type": "string"}}
-      }
-    }
-  }
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/NikolaRHristov/STE-Code/.agents/benchmark/schema.json",
+	"title": "STE-Code Benchmark Schema",
+	"description": "Schema for STE-Code benchmark test cases and results",
+	"version": "1.0.0",
+	"definitions": {
+		"TestCategory": {
+			"type": "string",
+			"enum": [
+				"readme",
+				"api_doc",
+				"commit",
+				"error",
+				"comment",
+				"changelog",
+				"config",
+				"composite"
+			]
+		},
+		"Difficulty": {
+			"type": "string",
+			"enum": ["easy", "medium", "hard"]
+		},
+		"Principle": {
+			"type": "string",
+			"pattern": "^P([1-9]|1[0-4])$"
+		},
+		"Capsule": {
+			"type": "object",
+			"description": "Unit 1: sequencing envelope wrapping a RED/BLUE/WHITE/BLACK invocation. Additive; existing consumers ignore it.",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": "Stable id: hash(colour, variant, round, sequence_position, seed)"
+				},
+				"colour": {
+					"type": "string",
+					"enum": ["RED", "BLUE", "WHITE", "BLACK"]
+				},
+				"sequence_id": {
+					"type": "string",
+					"description": "id of the sequence.yaml entry that spawned this capsule"
+				},
+				"sees": {
+					"type": "array",
+					"items": { "type": "string" },
+					"description": "capsule ids whose output this capsule consumes"
+				},
+				"intent": {
+					"type": "string",
+					"enum": ["adversarial", "helpful", "hybrid"]
+				},
+				"timing_offset_s": {
+					"type": "number",
+					"minimum": 0,
+					"description": "seconds after preceding capsule sentinel appeared"
+				},
+				"position": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "0-indexed position in the declared sequence"
+				}
+			},
+			"required": [
+				"id",
+				"colour",
+				"sequence_id",
+				"sees",
+				"intent",
+				"timing_offset_s",
+				"position"
+			]
+		},
+		"TestCase": {
+			"type": "object",
+			"required": [
+				"id",
+				"category",
+				"description",
+				"input",
+				"expected_principles",
+				"expected_keywords",
+				"forbidden_keywords",
+				"max_tokens",
+				"difficulty"
+			],
+			"properties": {
+				"id": { "type": "string", "pattern": "^bench-\\d{3}$" },
+				"category": { "$ref": "#/definitions/TestCategory" },
+				"description": { "type": "string", "minLength": 10 },
+				"input": { "type": "string", "minLength": 5 },
+				"expected_principles": {
+					"type": "array",
+					"items": { "$ref": "#/definitions/Principle" },
+					"minItems": 1
+				},
+				"expected_keywords": {
+					"type": "array",
+					"items": { "type": "string" },
+					"minItems": 1
+				},
+				"forbidden_keywords": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"max_tokens": {
+					"type": "integer",
+					"minimum": 100,
+					"maximum": 2000
+				},
+				"difficulty": { "$ref": "#/definitions/Difficulty" },
+				"capsule": { "$ref": "#/definitions/Capsule" }
+			}
+		},
+		"TestResult": {
+			"type": "object",
+			"required": [
+				"test_id",
+				"category",
+				"passed",
+				"correctness_score",
+				"latency_ms"
+			],
+			"properties": {
+				"test_id": { "type": "string" },
+				"category": { "$ref": "#/definitions/TestCategory" },
+				"input": { "type": "string" },
+				"output": { "type": "string" },
+				"expected_principles_satisfied": {
+					"type": "array",
+					"items": { "$ref": "#/definitions/Principle" }
+				},
+				"expected_principles_missed": {
+					"type": "array",
+					"items": { "$ref": "#/definitions/Principle" }
+				},
+				"forbidden_keywords_found": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"correctness_score": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 1
+				},
+				"latency_ms": { "type": "integer", "minimum": 0 },
+				"token_count_input": { "type": "integer", "minimum": 0 },
+				"token_count_output": { "type": "integer", "minimum": 0 },
+				"diff_ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+				"passed": { "type": "boolean" },
+				"notes": { "type": "string" },
+				"capsule": { "$ref": "#/definitions/Capsule" }
+			}
+		},
+		"AggregateReport": {
+			"type": "object",
+			"required": [
+				"benchmark_id",
+				"timestamp",
+				"model",
+				"total_tests",
+				"passed",
+				"failed",
+				"aggregates",
+				"by_category"
+			],
+			"properties": {
+				"benchmark_id": { "type": "string" },
+				"timestamp": { "type": "string", "format": "date-time" },
+				"model": { "type": "string" },
+				"total_tests": { "type": "integer" },
+				"passed": { "type": "integer" },
+				"failed": { "type": "integer" },
+				"aggregates": {
+					"type": "object",
+					"properties": {
+						"avg_correctness": { "type": "number" },
+						"avg_latency_ms": { "type": "number" },
+						"avg_token_usage": { "type": "number" },
+						"total_tokens": { "type": "integer" },
+						"avg_diff_ratio": { "type": "number" }
+					}
+				},
+				"by_category": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "object",
+						"properties": {
+							"passed": { "type": "integer" },
+							"failed": { "type": "integer" },
+							"avg_correctness": { "type": "number" }
+						}
+					}
+				},
+				"failures": {
+					"type": "array",
+					"items": { "$ref": "#/definitions/TestResult" }
+				},
+				"recommendations": {
+					"type": "array",
+					"items": { "type": "string" }
+				}
+			}
+		}
+	}
 }

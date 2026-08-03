@@ -331,9 +331,7 @@ def Audit(FilePath: Path, Text: str) -> list[str]:
             continue
         Widths = {Row.count("|") for Row in Current.Lines}
         if len(Widths) > 1:
-            Findings.append(
-                f"table has inconsistent column counts: {sorted(Widths)}"
-            )
+            Findings.append(f"table has inconsistent column counts: {sorted(Widths)}")
 
     Markers = {
         BulletRegex.match(Line).group(1)  # type: ignore[union-attr]

@@ -26,8 +26,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -49,24 +53,22 @@ def load_skill(name: str) -> str:
         # Find the closing --- of the frontmatter block.
         m = re.match(r"^---\s*\n.*?\n---\s*\n?", text, re.DOTALL)
         if m:
-            text = text[m.end():]
+            text = text[m.end() :]
     return text.strip()
 
 
-def skill_section(name: str, heading: str = "PIPELINE SKILL (authoritative rules)") -> str:
+def skill_section(
+    name: str, heading: str = "PIPELINE SKILL (authoritative rules)"
+) -> str:
     """Wrap a skill's body in a delimiter so the worker treats it as binding."""
     body = load_skill(name)
     if not body:
         return ""
-    return (
-        f"\n\n# {'='*60}\n"
-        f"# {heading}: {name}\n"
-        f"# {'='*60}\n\n"
-        f"{body}\n"
-    )
+    return f"\n\n# {'=' * 60}\n# {heading}: {name}\n# {'=' * 60}\n\n{body}\n"
 
 
 if __name__ == "__main__":
     import sys
+
     name = sys.argv[1] if len(sys.argv) > 1 else "extraction"
     print(skill_section(name))

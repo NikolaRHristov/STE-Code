@@ -25,6 +25,7 @@ Usage:
   python3 artifact_batch.py --verify    # run verify-artifacts.py only
   python3 artifact_batch.py --version 1.2.0   # force a specific version string
 """
+
 from __future__ import annotations
 
 import os
@@ -38,13 +39,18 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
+
 FINAL_DIR = PROJECT / "ste-code" / "final"
 ARTIFACTS_DIR = PROJECT / "ste-code" / "artifacts"
 STATE_DIR = PROJECT / ".agents" / "state"
@@ -66,6 +72,7 @@ SECTION_ORDER = {
 
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import Templater
+
 TPL = Templater(__file__)
 
 
@@ -156,10 +163,16 @@ def _assemble(dry_run: bool, version: str) -> tuple[bool, dict]:
     )
 
     if dry_run:
-        print(f"[dry-run] would write {len(rule_files)} rules into 2 artifacts "
-              f"(rules={len(full)}B, prompt={len(prompt)}B, version={version})")
-        return True, {"rule_count": len(rule_files), "rules_bytes": len(full),
-                      "prompt_bytes": len(prompt), "version": version}
+        print(
+            f"[dry-run] would write {len(rule_files)} rules into 2 artifacts "
+            f"(rules={len(full)}B, prompt={len(prompt)}B, version={version})"
+        )
+        return True, {
+            "rule_count": len(rule_files),
+            "rules_bytes": len(full),
+            "prompt_bytes": len(prompt),
+            "version": version,
+        }
 
     mkdir(ARTIFACTS_DIR)
     # Consolidated full corpus is llms-full.txt (ste-code-rules.md /
@@ -169,6 +182,7 @@ def _assemble(dry_run: bool, version: str) -> tuple[bool, dict]:
     write_text(VERSION_PATH, version + "\n")
     mkdir(STATE_DIR)
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, {"assembled": len(rule_files), "version": version})
     print(f"Wrote llms-full.txt ({len(rule_files)} rules, version {version})")
     return True, {"rule_count": len(rule_files), "version": version}
@@ -192,7 +206,10 @@ def main():
 
 def subprocess_run_verify():
     import subprocess
-    r = subprocess.run([sys.executable, str(Path(__file__).with_name("verify-artifacts.py"))])
+
+    r = subprocess.run(
+        [sys.executable, str(Path(__file__).with_name("verify-artifacts.py"))]
+    )
     return r
 
 

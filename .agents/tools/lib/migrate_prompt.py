@@ -47,6 +47,7 @@ PREIMAGE_SUFFIX = "_preimage.py"
 
 # ── extraction ───────────────────────────────────────────────────────────────
 
+
 def joinedstr_to_template(node: ast.JoinedStr) -> tuple:
     """Rebuild an f-string as {{name}} template text.
 
@@ -63,9 +64,15 @@ def joinedstr_to_template(node: ast.JoinedStr) -> tuple:
             if expr.isidentifier():
                 parts.append("{{" + expr + "}}")
             else:
-                placeholder = expr.replace(".", "_").replace("(", "") \
-                    .replace(")", "").replace("[", "_").replace("]", "") \
-                    .replace(":", "_").replace(" ", "")
+                placeholder = (
+                    expr.replace(".", "_")
+                    .replace("(", "")
+                    .replace(")", "")
+                    .replace("[", "_")
+                    .replace("]", "")
+                    .replace(":", "_")
+                    .replace(" ", "")
+                )
                 if not placeholder.isidentifier():
                     placeholder = "value{}".format(len(unresolved))
                 parts.append("{{" + placeholder + "}}")
@@ -83,11 +90,12 @@ def find_payload(tree: ast.AST, function: str, min_len: int):
             continue
         for node in ast.walk(fn):
             if isinstance(node, ast.JoinedStr):
-                size = sum(len(v.value) for v in node.values
-                           if isinstance(v, ast.Constant)
-                           and isinstance(v.value, str))
-            elif isinstance(node, ast.Constant) \
-                    and isinstance(node.value, str):
+                size = sum(
+                    len(v.value)
+                    for v in node.values
+                    if isinstance(v, ast.Constant) and isinstance(v.value, str)
+                )
+            elif isinstance(node, ast.Constant) and isinstance(node.value, str):
                 size = len(node.value)
             else:
                 continue
@@ -103,9 +111,10 @@ def cmd_extract(args) -> int:
     tree = ast.parse(path.read_text(encoding="utf-8"))
     node = find_payload(tree, args.function, args.min_len)
     if node is None:
-        print("no payload >= {} chars in {}()".format(args.min_len,
-                                                      args.function),
-              file=sys.stderr)
+        print(
+            "no payload >= {} chars in {}()".format(args.min_len, args.function),
+            file=sys.stderr,
+        )
         return 1
     if isinstance(node, ast.JoinedStr):
         text, unresolved = joinedstr_to_template(node)
@@ -132,6 +141,7 @@ def cmd_extract(args) -> int:
 
 
 # ── preimage + verification ──────────────────────────────────────────────────
+
 
 def preimage_path(script: Path) -> Path:
     return script.with_name("_" + script.stem + PREIMAGE_SUFFIX)
@@ -168,8 +178,10 @@ def cmd_verify(args) -> int:
     script = Path(args.script)
     pre = preimage_path(script)
     if not pre.exists():
-        print("no preimage at {} -- run `preimage` before editing".format(pre),
-              file=sys.stderr)
+        print(
+            "no preimage at {} -- run `preimage` before editing".format(pre),
+            file=sys.stderr,
+        )
         return 2
 
     kwargs = {}
@@ -197,9 +209,15 @@ def cmd_verify(args) -> int:
         return 0
 
     print("DIFFERS    {}()".format(args.function))
-    for i, line in enumerate(difflib.unified_diff(
-            a.split("\n"), b.split("\n"), fromfile="before (inline)",
-            tofile="after (template)", lineterm="")):
+    for i, line in enumerate(
+        difflib.unified_diff(
+            a.split("\n"),
+            b.split("\n"),
+            fromfile="before (inline)",
+            tofile="after (template)",
+            lineterm="",
+        )
+    ):
         print(line)
         if i > args.max_diff:
             print("... truncated")
@@ -209,8 +227,8 @@ def cmd_verify(args) -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(
-        description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter)
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     e = sub.add_parser("extract")
@@ -231,8 +249,9 @@ def main() -> int:
     v.add_argument("--kwargs-json")
     v.add_argument("--args-json")
     v.add_argument("--max-diff", type=int, default=60)
-    v.add_argument("--cleanup", action="store_true",
-                   help="delete the preimage when identical")
+    v.add_argument(
+        "--cleanup", action="store_true", help="delete the preimage when identical"
+    )
     v.set_defaults(fn=cmd_verify)
 
     args = ap.parse_args()

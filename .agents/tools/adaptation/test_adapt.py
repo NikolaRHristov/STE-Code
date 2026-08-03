@@ -7,6 +7,7 @@ artifact assembly are correct before any worker is launched.
 
 Run:  python3 .agents/tools/adaptation/test_adapt.py
 """
+
 import sys
 import re
 from pathlib import Path
@@ -14,8 +15,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -51,8 +56,14 @@ def t_prompt_render():
     print("T1 adaptation section prompt renders (strict, no leftover {{}})")
     title = AD.SECTIONS[1][0]
     src = "# 1. Words\nRule 1.1 ...\nRule 1.14 ..."
-    out = TPL_AD.render("adapt-sec", section_num=1, section_title=title,
-                        rule_count=14, rule_ids="1.1, 1.2", source_text=src)
+    out = TPL_AD.render(
+        "adapt-sec",
+        section_num=1,
+        section_title=title,
+        rule_count=14,
+        rule_ids="1.1, 1.2",
+        source_text=src,
+    )
     check("renders without error", "adapt" in out.lower() or "Adaptation" in out)
     check("no leftover {{", "{{" not in out)
     check("embeds section title", title in out)
@@ -85,6 +96,7 @@ def t_section_slicing():
 def t_gate_logic():
     print("T3 section gate rejects aerospace leakage / missing / synonym")
     import tempfile
+
     d = Path(tempfile.mkdtemp())
     # Monkeypatch expected counts so the gate accepts this synthetic 3-file section.
     AD.SECTIONS[1] = ("Words", 3)
@@ -93,18 +105,22 @@ def t_gate_logic():
     good.write_text(
         "# Rule 1.1 — Use Words That Are Approved in the Dictionary\n\n"
         "> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.1\n\n"
-        "## Original Rule\n\nThe word \"use\" is an approved verb in the dictionary.\n\n"
-        "## Adapted Rule\n\nThe word \"run\" is an approved verb in the controlled terminology.\n\n"
+        '## Original Rule\n\nThe word "use" is an approved verb in the dictionary.\n\n'
+        '## Adapted Rule\n\nThe word "run" is an approved verb in the controlled terminology.\n\n'
         "> **Non-STE:** Utilize the build tool to generate the artifact.\n"
         "> **STE:** Use the build tool to make the artifact.\n"
     )
     # Bad: aerospace leak outside Original Rule
     bad = d / "a-sec1-rule1.2.md"
-    bad.write_text("# Rule 1.2\n> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.2\n"
-                   "The aircraft must land safely.\n## Original Rule\nfoo\n")
+    bad.write_text(
+        "# Rule 1.2\n> **Source:** Adapted from ASD-STE100 Issue 9, Rule 1.2\n"
+        "The aircraft must land safely.\n## Original Rule\nfoo\n"
+    )
     # Missing example pair
     nomore = d / "a-sec1-rule1.3.md"
-    nomore.write_text("# Rule 1.3\n> **Source:** x\n## Original Rule\nfoo\n> **Non-STE:** a\n")
+    nomore.write_text(
+        "# Rule 1.3\n> **Source:** x\n## Original Rule\nfoo\n> **Non-STE:** a\n"
+    )
     AD.ADAPTED_DIR = d
     ok, why = AD._section_passed_gate(1, "Words")
     check("gate fails on bad section", not ok, why)
@@ -119,6 +135,7 @@ def t_gate_logic():
 def t_artifact_assembly(tmp_path=None):
     print("T4 artifact assembly collects + orders adapted rules")
     import tempfile
+
     ad = Path(tempfile.mkdtemp())
     (ad / "a-sec1-rule1.1.md").write_text("# Rule 1.1\nbody one")
     (ad / "a-sec3-rule3.1.md").write_text("# Rule 3.1\nbody three")
@@ -128,22 +145,42 @@ def t_artifact_assembly(tmp_path=None):
     AR.ADAPTED_DIR = ad
     files = AR._ordered_rule_files()
     names = [f.name for f in files]
-    check("orders by section then rule", names == ["a-sec1-rule1.1.md", "a-sec1-rule1.2.md", "a-sec3-rule3.1.md"],
-          str(names))
+    check(
+        "orders by section then rule",
+        names == ["a-sec1-rule1.1.md", "a-sec1-rule1.2.md", "a-sec3-rule3.1.md"],
+        str(names),
+    )
     text = AR._collect_rule_text(files)
-    check("collects all bodies", "body one" in text and "body two" in text and "body three" in text)
+    check(
+        "collects all bodies",
+        "body one" in text and "body two" in text and "body three" in text,
+    )
     # render artifact templates
-    full = TPL_AR.render("artifact-rules", rule_count=3, generated="2026-08-01",
-                         rules=text, categories="CATS", dictionary="DIC")
-    check("artifact-rules renders, no leftover", "{{" not in full and "body one" in full)
-    prompt = TPL_AR.render("artifact-system-prompt", rule_count=3, generated="2026-08-01", rules=text)
-    check("artifact-system-prompt renders, no leftover", "{{" not in prompt and "body one" in prompt)
+    full = TPL_AR.render(
+        "artifact-rules",
+        rule_count=3,
+        generated="2026-08-01",
+        rules=text,
+        categories="CATS",
+        dictionary="DIC",
+    )
+    check(
+        "artifact-rules renders, no leftover", "{{" not in full and "body one" in full
+    )
+    prompt = TPL_AR.render(
+        "artifact-system-prompt", rule_count=3, generated="2026-08-01", rules=text
+    )
+    check(
+        "artifact-system-prompt renders, no leftover",
+        "{{" not in prompt and "body one" in prompt,
+    )
 
 
 def t_readiness_gate():
     print("T5 adaptation readiness gate refuses without grouped/")
     import tempfile
     import shutil
+
     # Point at a nonexistent dir
     AD.GROUPED_DIR = Path(tempfile.mkdtemp()) / "nope"
     ok, why = AD.adaptation_ready()
@@ -152,10 +189,15 @@ def t_readiness_gate():
 
 
 def main():
-    for t in (t_prompt_render, t_section_slicing, t_gate_logic,
-              t_artifact_assembly, t_readiness_gate):
+    for t in (
+        t_prompt_render,
+        t_section_slicing,
+        t_gate_logic,
+        t_artifact_assembly,
+        t_readiness_gate,
+    ):
         t()
-    print(f"\n{'='*50}\n{_passed} passed, {_failed} failed\n{'='*50}")
+    print(f"\n{'=' * 50}\n{_passed} passed, {_failed} failed\n{'=' * 50}")
     sys.exit(1 if _failed else 0)
 
 

@@ -49,8 +49,12 @@ __all__ = [
 ]
 
 # A directory holding one of these marks a project root.
-DEFAULT_ROOT_MARKERS: Sequence[str] = (".git", "Makefile", "pyproject.toml",
-                                       "package.json")
+DEFAULT_ROOT_MARKERS: Sequence[str] = (
+    ".git",
+    "Makefile",
+    "pyproject.toml",
+    "package.json",
+)
 
 PROFILE_POLICY_MAP: Dict[str, str] = {
     "dev-ste-code": "dev",
@@ -64,6 +68,7 @@ _MAX_WALK_DEPTH = 24
 # ---------------------------------------------------------------------------
 # Path helpers
 # ---------------------------------------------------------------------------
+
 
 def normalize(path: str) -> str:
     """Expand ``~``/variables and fully resolve symlinks to an absolute path."""
@@ -125,8 +130,7 @@ def profile_home(profile: str) -> str:
     root = os.path.dirname(hermes_home())
     if os.path.basename(root) == "profiles":
         return normalize(os.path.join(root, profile))
-    return normalize(os.path.join(os.path.expanduser("~/.hermes"), "profiles",
-                                  profile))
+    return normalize(os.path.join(os.path.expanduser("~/.hermes"), "profiles", profile))
 
 
 def active_profile() -> str:
@@ -143,6 +147,7 @@ def active_profile() -> str:
 # ---------------------------------------------------------------------------
 # Policy
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class Policy:
@@ -203,19 +208,14 @@ class Policy:
                 return f"tool '{tool_name}' is disabled by the {self.name} policy"
         if self.allowed_tools is not None:
             if not any(fnmatch.fnmatch(tool_name, p) for p in self.allowed_tools):
-                return (
-                    f"tool '{tool_name}' is not in the {self.name} policy "
-                    f"allow-list"
-                )
+                return f"tool '{tool_name}' is not in the {self.name} policy allow-list"
         return None
 
     def may_run_command(self, basename: str) -> Optional[str]:
         """Return a refusal reason for running *basename*, else ``None``."""
         for pattern in self.denied_commands:
             if fnmatch.fnmatch(basename, pattern):
-                return (
-                    f"command '{basename}' is disabled by the {self.name} policy"
-                )
+                return f"command '{basename}' is disabled by the {self.name} policy"
         return None
 
 
@@ -225,8 +225,12 @@ class Policy:
 
 # Tools that reach the network. Blocked wholesale under locked-down policies.
 NETWORK_TOOLS = [
-    "web_search", "web_extract", "browser_*", "image_generate",
-    "text_to_speech", "vision_analyze",
+    "web_search",
+    "web_extract",
+    "browser_*",
+    "image_generate",
+    "text_to_speech",
+    "vision_analyze",
 ]
 
 # Tools that spawn further agents or mutate agent state. Locked-down profiles
@@ -235,9 +239,28 @@ ESCALATION_TOOLS = ["delegate_task", "cronjob", "skill_manage", "memory"]
 
 # Commands that reach the network or install software.
 NETWORK_COMMANDS = [
-    "curl", "wget", "nc", "ncat", "telnet", "ssh", "scp", "sftp", "rsync",
-    "pip", "pip3", "npm", "pnpm", "yarn", "brew", "apt", "apt-get", "gem",
-    "cargo", "go", "docker", "kubectl",
+    "curl",
+    "wget",
+    "nc",
+    "ncat",
+    "telnet",
+    "ssh",
+    "scp",
+    "sftp",
+    "rsync",
+    "pip",
+    "pip3",
+    "npm",
+    "pnpm",
+    "yarn",
+    "brew",
+    "apt",
+    "apt-get",
+    "gem",
+    "cargo",
+    "go",
+    "docker",
+    "kubectl",
 ]
 
 # Commands that start another agent, schedule future work, or drive the GUI.
@@ -252,9 +275,23 @@ NETWORK_COMMANDS = [
 # This is layer 5 of the confinement model: an LLM session launched from inside
 # a jailed session.
 AGENT_SPAWN_COMMANDS = [
-    "hermes", "claude", "codex", "aider", "cursor", "ollama", "llm",
-    "crontab", "at", "launchctl", "systemctl", "osascript", "automator",
-    "open", "sudo", "su", "doas",
+    "hermes",
+    "claude",
+    "codex",
+    "aider",
+    "cursor",
+    "ollama",
+    "llm",
+    "crontab",
+    "at",
+    "launchctl",
+    "systemctl",
+    "osascript",
+    "automator",
+    "open",
+    "sudo",
+    "su",
+    "doas",
 ]
 
 # Subdirectories of a Hermes profile that decide what the NEXT session does.
@@ -270,19 +307,29 @@ AGENT_SPAWN_COMMANDS = [
 # These are denied even inside the profile so a jailed session can WRITE its
 # own logs but never rewrite its own cage.
 PROFILE_CONTROL_SUBDIRS = [
-    "config.yaml", "jail.yaml", "hooks", "plugins", "skills", "memories",
-    "cron", "auth.json", ".env", "hermes.db", "commands", "agents",
+    "config.yaml",
+    "jail.yaml",
+    "hooks",
+    "plugins",
+    "skills",
+    "memories",
+    "cron",
+    "auth.json",
+    ".env",
+    "hermes.db",
+    "commands",
+    "agents",
 ]
 
 
 def _profile_control_denies(profile_home: str) -> List[str]:
     """Absolute deny paths for the control surface of *profile_home*."""
-    return [normalize(os.path.join(profile_home, name))
-            for name in PROFILE_CONTROL_SUBDIRS]
+    return [
+        normalize(os.path.join(profile_home, name)) for name in PROFILE_CONTROL_SUBDIRS
+    ]
 
 
-def _build_dev(project_root: Optional[str], cfg: Dict[str, Any],
-               home: str) -> Policy:
+def _build_dev(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> Policy:
     """Permissive authoring policy: the repo plus this Hermes profile."""
     write: List[str] = []
     deny: List[str] = []
@@ -326,8 +373,7 @@ def _build_dev(project_root: Optional[str], cfg: Dict[str, Any],
     )
 
 
-def _build_user(project_root: Optional[str], cfg: Dict[str, Any],
-                home: str) -> Policy:
+def _build_user(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> Policy:
     """Locked-down consumer policy.
 
     The user reads the standard and artifacts and applies them to their OWN
@@ -360,8 +406,7 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any],
         deny.append(normalize(os.path.join(workspace, ".git")))
 
     hint = (
-        " Launch Hermes from your own project directory to get a writable "
-        "workspace."
+        " Launch Hermes from your own project directory to get a writable workspace."
         if workspace_inside_repo
         else ""
     )
@@ -382,8 +427,7 @@ def _build_user(project_root: Optional[str], cfg: Dict[str, Any],
     )
 
 
-def _build_bench(project_root: Optional[str], cfg: Dict[str, Any],
-                 home: str) -> Policy:
+def _build_bench(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> Policy:
     """Benchmark policy: run adversarial sessions, confined to the benchmark tree.
 
     The benchmark launches adversarial sub-sessions (one per stage) and may
@@ -397,11 +441,11 @@ def _build_bench(project_root: Optional[str], cfg: Dict[str, Any],
     directive), so a benchmark session cannot spin up an unjailed agent.
     """
     if project_root:
-        bench_root = normalize(os.path.join(project_root, ".agents",
-                                            "benchmark"))
+        bench_root = normalize(os.path.join(project_root, ".agents", "benchmark"))
     else:
-        bench_root = normalize(os.path.join(tempfile.gettempdir(),
-                                            "ste-code-benchmark"))
+        bench_root = normalize(
+            os.path.join(tempfile.gettempdir(), "ste-code-benchmark")
+        )
 
     write: List[str] = [bench_root, home]
     write.extend(temp_roots())
@@ -449,6 +493,7 @@ _STRICT_FALLBACK = "bench"
 # ---------------------------------------------------------------------------
 # Context
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class JailContext:
@@ -540,9 +585,9 @@ def load_context(force: bool = False) -> JailContext:
     for extra in cfg.get("extra_deny_roots") or []:
         policy.deny_roots.append(normalize(str(extra)))
 
-    policy.write_roots = list(dict.fromkeys(
-        r for r in policy.write_roots if r and r != os.sep
-    ))
+    policy.write_roots = list(
+        dict.fromkeys(r for r in policy.write_roots if r and r != os.sep)
+    )
     policy.deny_roots = list(dict.fromkeys(policy.deny_roots))
 
     _context_cache = JailContext(

@@ -18,6 +18,7 @@ Usage
     args = parse_stage_args(parser)
     # args.model, args.workers, args.dry_run are resolved from config + env
 """
+
 from __future__ import annotations
 
 import argparse
@@ -26,7 +27,9 @@ from pathlib import Path
 from typing import Optional, Sequence
 
 _HERE = Path(__file__).resolve()
-_R = next(p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_R = next(
+    p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from ste_config import load  # noqa: E402
 
@@ -51,17 +54,21 @@ def add_common_flags(
     cfg = load(unit)
     if with_model:
         parser.add_argument(
-            "--model", default=cfg.model,
+            "--model",
+            default=cfg.model,
             help=f"Agent model (default: {cfg.model}; override with STE_MODEL)",
         )
     if with_workers:
         parser.add_argument(
-            "--workers", type=int, default=cfg.get("agent.workers_per_batch"),
+            "--workers",
+            type=int,
+            default=cfg.get("agent.workers_per_batch"),
             help="Concurrent workers per batch",
         )
     if with_dry_run:
         parser.add_argument(
-            "--dry-run", action="store_true",
+            "--dry-run",
+            action="store_true",
             help="Print the planned work without writing anything",
         )
     if extra:

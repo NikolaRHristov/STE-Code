@@ -38,6 +38,7 @@ Usage
     cfg.pattern("layout.worker_file")  # "w{worker:03d}-p{start}-{end}.md"
     cfg.get("thresholds.timeout_s")    # 600
 """
+
 from __future__ import annotations
 
 import os
@@ -172,7 +173,9 @@ class Config:
         """
         raw = self.get(dotted)
         if not isinstance(raw, str):
-            raise ConfigError(f"{dotted}: expected a path string, got {type(raw).__name__}")
+            raise ConfigError(
+                f"{dotted}: expected a path string, got {type(raw).__name__}"
+            )
         candidate = Path(raw)
         resolved = candidate if candidate.is_absolute() else (self.root / candidate)
         return ensure_inside_repo(resolved, self.root)
@@ -260,6 +263,8 @@ if __name__ == "__main__":
     import argparse
 
     ap = argparse.ArgumentParser(description="Show a unit's configured footprint")
-    ap.add_argument("path", nargs="?", default=".", help="file or directory in the unit")
+    ap.add_argument(
+        "path", nargs="?", default=".", help="file or directory in the unit"
+    )
     args = ap.parse_args()
     print(load(args.path).footprint())

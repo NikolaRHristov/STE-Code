@@ -1,6 +1,8 @@
 ---
 name: applying-ste-code
-description: Use when writing or rewriting documentation to the STE-Code standard. Loads the right level artifact and applies the rules.
+description:
+    Use when writing or rewriting documentation to the STE-Code standard. Loads
+    the right level artifact and applies the rules.
 ---
 
 # Applying STE-Code to your documentation
@@ -18,8 +20,8 @@ start:
 ls ste-code/artifacts/llms.txt
 ```
 
-If that path does not resolve, ask the user where the checkout is. Do not
-guess, and do not reconstruct rules from memory — the standard on disk is the
+If that path does not resolve, ask the user where the checkout is. Do not guess,
+and do not reconstruct rules from memory — the standard on disk is the
 authority.
 
 ## 2. Load the right level
@@ -27,12 +29,12 @@ authority.
 Each level is one plain-text file. A higher level is stricter and costs more
 context.
 
-| Level | File | Tokens | Use when |
-|:-----:|------|-------:|----------|
-| -2 | `ste-code/artifacts/level-2/system-prompt.txt` | ~1.2K | A quick pass, principles only |
-| 1 | `ste-code/artifacts/level1/system-prompt.txt` | ~14.5K | **Start here.** Rules plus templates |
-| 3 | `ste-code/artifacts/level3/system-prompt.txt` | ~94.7K | Full dictionary and all 54 rules |
-| 5 | `ste-code/artifacts/level5/system-prompt.txt` | ~133.8K | The complete standard with provenance |
+| Level | File                                           |  Tokens | Use when                              |
+| :---: | ---------------------------------------------- | ------: | ------------------------------------- |
+|  -2   | `ste-code/artifacts/level-2/system-prompt.txt` |   ~1.2K | A quick pass, principles only         |
+|   1   | `ste-code/artifacts/level1/system-prompt.txt`  |  ~14.5K | **Start here.** Rules plus templates  |
+|   3   | `ste-code/artifacts/level3/system-prompt.txt`  |  ~94.7K | Full dictionary and all 54 rules      |
+|   5   | `ste-code/artifacts/level5/system-prompt.txt`  | ~133.8K | The complete standard with provenance |
 
 Read the level file with `read_file` and apply it. Level 1 is the default
 choice; move up only when a rule you need is missing.
@@ -61,15 +63,15 @@ project root. Tell them to restart from their own project directory:
 ```bash
 cd ~/my-project
 env -u HERMES_HOME \
-    HERMES_PROFILE=ste-code \
-    HERMES_HOME=~/.hermes/profiles/ste-code \
-    hermes --tui
+	HERMES_PROFILE=ste-code \
+	HERMES_HOME=~/.hermes/profiles/ste-code \
+	hermes --tui
 ```
 
 ## 5. Report what you changed
 
-Give the user a short table: the original text, the rewrite, and the rule
-number you applied. Cite the rule only when the change is not self-evident.
+Give the user a short table: the original text, the rewrite, and the rule number
+you applied. Cite the rule only when the change is not self-evident.
 
 ## Pitfalls
 

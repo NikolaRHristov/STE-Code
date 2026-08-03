@@ -32,6 +32,7 @@ Usage:
   python3 deep_enrich.py a-sec1-rule1.1.md  # single file (debug)
   python3 deep_enrich.py --report        # scan final/rules and print gate gaps
 """
+
 from __future__ import annotations
 
 import os
@@ -49,8 +50,12 @@ from concurrent.futures import ThreadPoolExecutor
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -60,8 +65,10 @@ from ste_io import write_text, mkdir  # noqa: E402
 
 # Every agent setting this stage uses is declared in config.yaml beside it.
 from ste_config import load as _load_config  # noqa: E402
+
 CFG = _load_config(__file__)
 from ste_runtime import resolve as _resolve_runtime  # noqa: E402
+
 RT = _resolve_runtime(__file__)
 FINAL_RULES_DIR = PROJECT / "ste-code" / "final" / "rules"
 ADAPTED_DIR = PROJECT / "ste-code" / "adapted"
@@ -92,11 +99,15 @@ sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 # ── checkpoint ──────────────────────────────────────────────────────────────
 def _load_checkpoint():
     from ste_checkpoint import load
+
     return load(CHECKPOINT_PATH)
+
 
 def _save_checkpoint(ckpt):
     from ste_checkpoint import save
+
     save(CHECKPOINT_PATH, ckpt)
+
 
 _checkpoint = _load_checkpoint()
 _lock = threading.Lock()
@@ -104,10 +115,18 @@ _lock = threading.Lock()
 
 def _git_commit_locked(files, msg):
     try:
-        subprocess.run(["git", "add", "-A", "--", *files], cwd=str(PROJECT),
-                       check=True, capture_output=True)
-        subprocess.run(["git", "commit", "-q", "-m", msg], cwd=str(PROJECT),
-                       check=True, capture_output=True)
+        subprocess.run(
+            ["git", "add", "-A", "--", *files],
+            cwd=str(PROJECT),
+            check=True,
+            capture_output=True,
+        )
+        subprocess.run(
+            ["git", "commit", "-q", "-m", msg],
+            cwd=str(PROJECT),
+            check=True,
+            capture_output=True,
+        )
         return True
     except subprocess.CalledProcessError:
         return False
@@ -122,18 +141,50 @@ def _relevant_vendor(rule_text: str, title: str) -> str:
     head = (title or "").lower()
     words = set(re.findall(r"[a-z]{4,}", rule_text.lower()))
     # drop generic stopwords
-    stop = {"that", "with", "this", "from", "your", "have", "will", "they", "used",
-            "use", "rule", "code", "write", "writing", "text", "technical", "more",
-            "than", "when", "which", "their", "other", "must", "should", "into"}
+    stop = {
+        "that",
+        "with",
+        "this",
+        "from",
+        "your",
+        "have",
+        "will",
+        "they",
+        "used",
+        "use",
+        "rule",
+        "code",
+        "write",
+        "writing",
+        "text",
+        "technical",
+        "more",
+        "than",
+        "when",
+        "which",
+        "their",
+        "other",
+        "must",
+        "should",
+        "into",
+    }
     kws = [w for w in words if w not in stop][:12]
     probe = " ".join(kws[:6])
     parts = []
     # 1) targeted grep across vendor for the probe keywords
     try:
         r = subprocess.run(
-            ["grep", "-rIl", "-E", "|".join(re.escape(k) for k in kws[:6]),
-             str(VENDOR_DIR)],
-            capture_output=True, text=True, timeout=60)
+            [
+                "grep",
+                "-rIl",
+                "-E",
+                "|".join(re.escape(k) for k in kws[:6]),
+                str(VENDOR_DIR),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
         hits = [p for p in r.stdout.splitlines() if p.strip()]
     except Exception:
         hits = []
@@ -154,7 +205,9 @@ def _relevant_vendor(rule_text: str, title: str) -> str:
     # 2) always include the curated final-phase directive + Microsoft/Google seeds
     fp = VENDOR_DIR / "FINAL_PHASE_CONTEXT_INSTRUCTIONS.md"
     if fp.exists():
-        parts.append("# Final-phase context directive\n" + fp.read_text(errors="ignore")[:800])
+        parts.append(
+            "# Final-phase context directive\n" + fp.read_text(errors="ignore")[:800]
+        )
     header = (
         f"# PRE-SELECTED VENDOR MATERIAL for this rule (probe keywords: {probe})\n"
         "These files under .agents/vendor/ are RELEVANT to this rule. You MUST read "
@@ -172,7 +225,9 @@ sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import render_template  # {{placeholder}} substitution (project standard)
 
 
-def _build_prompt(adapted_path: Path, self_num: str, title: str, section_num: str) -> str:
+def _build_prompt(
+    adapted_path: Path, self_num: str, title: str, section_num: str
+) -> str:
     src = adapted_path.read_text(encoding="utf-8", errors="ignore")
     vendor = _relevant_vendor(src, title)
     return render_template(
@@ -199,7 +254,13 @@ def _deep_gate(path: Path) -> tuple[bool, str]:
     t = path.read_text(encoding="utf-8", errors="ignore")
     nonste = t.count("Non-STE:")
     seealso = t.count("See also:")
-    cite = bool(re.search(r"Microsoft|Google|Vale|SCOWL|OpenSTE|glossar|style ?guide|word ?list|dwyl|kong|jvalentino|\.agents/vendor", t, re.I))
+    cite = bool(
+        re.search(
+            r"Microsoft|Google|Vale|SCOWL|OpenSTE|glossar|style ?guide|word ?list|dwyl|kong|jvalentino|\.agents/vendor",
+            t,
+            re.I,
+        )
+    )
     trace = "Adapted from spec pair" in t
     sources_section = "Sources consulted" in t
     if REQUIRE_VENDOR_CITE and not (cite or sources_section):
@@ -239,26 +300,37 @@ def synthesize_file(adapted_path: Path) -> bool:
     try:
         r = subprocess.run(
             [VENV_PYTHON, WRAPPER, str(pf), "--model", MODEL, "--debug"],
-            capture_output=True, text=True, timeout=TIMEOUT_SECONDS)
+            capture_output=True,
+            text=True,
+            timeout=TIMEOUT_SECONDS,
+        )
     except subprocess.TimeoutExpired:
         with _lock:
             if not _valid_rule(out_path):
                 write_text(out_path, adapted_path.read_text(errors="ignore"))
-                print(f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy", flush=True)
-                _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                                   f"Phase G+: deepen {adapted_path.name} (fallback)")
+                print(
+                    f"  [TIMEOUT] {adapted_path.name}: fell back to clean copy",
+                    flush=True,
+                )
+                _git_commit_locked(
+                    [str(out_path.relative_to(PROJECT))],
+                    f"Phase G+: deepen {adapted_path.name} (fallback)",
+                )
             else:
                 print(f"  [TIMEOUT] {adapted_path.name}: kept existing", flush=True)
         return True
     (tmp / f"deepen-traj-{adapted_path.stem}.txt").write_text(
-        "STDOUT:\n" + r.stdout + "\nSTDERR:\n" + r.stderr, encoding="utf-8")
+        "STDOUT:\n" + r.stdout + "\nSTDERR:\n" + r.stderr, encoding="utf-8"
+    )
     # Re-read from disk (worker wrote it) and STRICTLY gate.
     ok, reason = _deep_gate(out_path)
     with _lock:
         if ok:
             print(f"  ✓ {adapted_path.name} deepened (gate ok)", flush=True)
-            _git_commit_locked([str(out_path.relative_to(PROJECT))],
-                               f"Phase G+: deepen {adapted_path.name} (cited+enriched)")
+            _git_commit_locked(
+                [str(out_path.relative_to(PROJECT))],
+                f"Phase G+: deepen {adapted_path.name} (cited+enriched)",
+            )
             if adapted_path.name not in _checkpoint.setdefault("done", []):
                 _checkpoint["done"].append(adapted_path.name)
             _save_checkpoint(_checkpoint)
@@ -267,7 +339,10 @@ def synthesize_file(adapted_path: Path) -> bool:
         # Not deep enough -> re-dispatch is handled by the caller loop (--only-weak
         # will catch it next pass). For a single run, leave the prior good file and
         # mark weak so a follow-up --only-weak re-run fixes it.
-        print(f"  [WEAK] {adapted_path.name}: gate fail ({reason}); kept, will re-run via --only-weak", flush=True)
+        print(
+            f"  [WEAK] {adapted_path.name}: gate fail ({reason}); kept, will re-run via --only-weak",
+            flush=True,
+        )
         if adapted_path.name not in _checkpoint.setdefault("done", []):
             _checkpoint["done"].append(adapted_path.name)
         _save_checkpoint(_checkpoint)
@@ -292,17 +367,26 @@ def _regen_progress():
     lines = [
         "# STE-Code final/ DEEP-ENRICHMENT Tracker",
         "",
-        "> Deep gate: vendor citation + >=%d Non-STE pairs + >=%d See-also + traceability." % (MIN_NONSTE_PAIRS, MIN_SEE_ALSO),
+        "> Deep gate: vendor citation + >=%d Non-STE pairs + >=%d See-also + traceability."
+        % (MIN_NONSTE_PAIRS, MIN_SEE_ALSO),
         "",
         "| # | File | Status |",
         "|---|------|--------|",
     ]
     for rule_id, name, status in rows:
         lines.append(f"| {rule_id} | {name} | {status} |")
-    lines += ["", "## Summary", f"- deep: {deep} / {len(files)}", f"- weak: {weak} / {len(files)}"]
+    lines += [
+        "",
+        "## Summary",
+        f"- deep: {deep} / {len(files)}",
+        f"- weak: {weak} / {len(files)}",
+    ]
     mkdir(PROGRESS_PATH.parent)
     write_text(PROGRESS_PATH, "\n".join(lines) + "\n")
-    print(f"  deepenrich progress -> {PROGRESS_PATH}: {deep} deep / {weak} weak / {len(files)} total", flush=True)
+    print(
+        f"  deepenrich progress -> {PROGRESS_PATH}: {deep} deep / {weak} weak / {len(files)} total",
+        flush=True,
+    )
     return PROGRESS_PATH
 
 
@@ -338,11 +422,19 @@ def main():
         return
 
     atexit.register(lambda: _save_checkpoint(_checkpoint))
-    signal.signal(signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0)))
-    signal.signal(signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130)))
+    signal.signal(
+        signal.SIGTERM, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(0))
+    )
+    signal.signal(
+        signal.SIGINT, lambda *_: (_save_checkpoint(_checkpoint), sys.exit(130))
+    )
 
     mkdir(FINAL_RULES_DIR)
-    files = [FINAL_RULES_DIR / single] if single else sorted(FINAL_RULES_DIR.glob("a-sec*-rule*.md"))
+    files = (
+        [FINAL_RULES_DIR / single]
+        if single
+        else sorted(FINAL_RULES_DIR.glob("a-sec*-rule*.md"))
+    )
 
     if only_weak:
         files = [p for p in files if _is_weak(p)]
@@ -355,9 +447,15 @@ def main():
     work = [p for p in files if not (resume and not fresh and p.name in done)]
 
     if not work:
-        print("  nothing to do. Use --only-weak to target weak files, or --fresh.", flush=True)
+        print(
+            "  nothing to do. Use --only-weak to target weak files, or --fresh.",
+            flush=True,
+        )
     else:
-        print(f"  deepening {len(work)} files across <= {workers} concurrent workers...", flush=True)
+        print(
+            f"  deepening {len(work)} files across <= {workers} concurrent workers...",
+            flush=True,
+        )
 
         def _run(p):
             print(f"  DEEPEN {p.name}...", flush=True)
@@ -371,7 +469,7 @@ def main():
 
     _save_checkpoint(_checkpoint)
     _regen_progress()
-    print(f"\n{'='*60}\nPhase G+ deep enrichment done\n{'='*60}", flush=True)
+    print(f"\n{'=' * 60}\nPhase G+ deep enrichment done\n{'=' * 60}", flush=True)
     sys.exit(0)
 
 

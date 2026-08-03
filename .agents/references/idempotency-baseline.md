@@ -1,7 +1,7 @@
 # Worker Idempotency Baseline
 
-> **Version:** 1.0 | **Date:** 2026-07-30
-> **Purpose:** Every worker must check before regenerating. No wasted tokens.
+> **Version:** 1.0 | **Date:** 2026-07-30 **Purpose:** Every worker must check
+> before regenerating. No wasted tokens.
 
 ## Rule
 
@@ -22,7 +22,8 @@ if output_file.exists() and output_file.size > 500:
 
 ### Tier 2 — Structural Validity
 
-Check file existence + parse structural elements (headings, table rows, dictionary entries). Skip if counts match expected minimums.
+Check file existence + parse structural elements (headings, table rows,
+dictionary entries). Skip if counts match expected minimums.
 
 ```
 if output_file.exists():
@@ -35,7 +36,8 @@ if output_file.exists():
 
 ### Tier 3 — Content Fingerprint
 
-Check file existence + hash content fingerprint. Skip if fingerprint matches last-known-good. Re-run only if source inputs changed.
+Check file existence + hash content fingerprint. Skip if fingerprint matches
+last-known-good. Re-run only if source inputs changed.
 
 ```
 if output_file.exists():
@@ -74,6 +76,7 @@ Every orchestrator MUST:
 ## Granular Commit Protocol
 
 After each batch completes:
+
 1. `git add <batch-target-dir>/`
 2. `git commit -m "phase:<letter> batch:<N> — <files-summary>"`
 3. Push every 3 batches

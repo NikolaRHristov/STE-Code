@@ -17,25 +17,31 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
 PROJECT = _repo_root(__file__)
 from ste_io import write_text, mkdir  # noqa: E402
+
 PROMPTS_DIR = PROJECT / ".agents" / "prompts" / "maturity-fixes"
 TMP_DIR = PROJECT / ".agents" / "tmp"
 
 # External markdown blocks live in templates/ (edit those, not the f-strings).
 sys.path.insert(0, str(PROJECT / ".agents" / "tools" / "lib"))
 from templater import Templater
+
 TPL = Templater(__file__)
 
 
 def enhance_prompt(prompt_text):
     """Add creative license and write_file tool instruction."""
-    m = re.search(r'TARGET FILE:\s*(\S+)', prompt_text)
+    m = re.search(r"TARGET FILE:\s*(\S+)", prompt_text)
     target = m.group(1) if m else None
     if not target:
         return None, None
@@ -43,10 +49,13 @@ def enhance_prompt(prompt_text):
     creative_block = TPL.render("phase-a-creative-block")
     tool_block = TPL.render("phase-a-execution-block", target=target)
 
-    if 'Do NOT create files. Output the improved file content to stdout only.' in prompt_text:
+    if (
+        "Do NOT create files. Output the improved file content to stdout only."
+        in prompt_text
+    ):
         enhanced = prompt_text.replace(
-            'Do NOT create files. Output the improved file content to stdout only.',
-            creative_block + tool_block
+            "Do NOT create files. Output the improved file content to stdout only.",
+            creative_block + tool_block,
         )
     else:
         enhanced = prompt_text + "\n" + creative_block + tool_block
@@ -67,7 +76,7 @@ def main():
 
     for batch_num in range(start, end + 1):
         start_idx = (batch_num - 1) * 3
-        batch_prompts = all_prompts[start_idx:start_idx + 3]
+        batch_prompts = all_prompts[start_idx : start_idx + 3]
 
         print(f"Batch {batch_num}:")
         for prompt_file in batch_prompts:

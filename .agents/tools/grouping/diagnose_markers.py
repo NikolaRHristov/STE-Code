@@ -23,6 +23,7 @@ Categories:
 
 Usage: python3 .agents/tools/grouping/diagnose_markers.py
 """
+
 import sys
 from pathlib import Path
 
@@ -32,8 +33,12 @@ import group_engine as ge
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -68,7 +73,7 @@ def categorize(rf, id2pos):
     if dedup == expected:
         return "A_dupes", got, marks
     # contiguous suffix of expected (missing only leading pages)
-    if len(dedup) >= 1 and dedup == expected[-len(dedup):] and dedup[0] > expected[0]:
+    if len(dedup) >= 1 and dedup == expected[-len(dedup) :] and dedup[0] > expected[0]:
         return "B_missing_lead", got, marks
     # single marker == first page -> merged rest
     if len(dedup) == 1 and dedup[0] == expected[0]:
@@ -88,14 +93,22 @@ def main():
         for p in g.pages:
             page_group[p] = g.gid
 
-    cats = {"CLEAN": [], "A_dupes": [], "B_missing_lead": [], "C_merged": [],
-            "OTHER": [], "STRADDLER": []}
+    cats = {
+        "CLEAN": [],
+        "A_dupes": [],
+        "B_missing_lead": [],
+        "C_merged": [],
+        "OTHER": [],
+        "STRADDLER": [],
+    }
     straddlers = []
     for name, rf in sorted({rf.path.name: rf for rf in idx.values()}.items()):
         cat, got, marks = categorize(rf, id2pos)
         if cat != "CLEAN":
             # straddler?
-            groups = {page_group.get(p) for p in rf.pages if page_group.get(p) is not None}
+            groups = {
+                page_group.get(p) for p in rf.pages if page_group.get(p) is not None
+            }
             if len(groups) > 1:
                 cat = "STRADDLER"
                 straddlers.append((name, sorted(groups)))

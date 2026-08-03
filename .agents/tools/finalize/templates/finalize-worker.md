@@ -1,14 +1,13 @@
-You are a senior technical writer synthesizing the FINAL, most-enriched
-version of STE-Code (a controlled-language variation of ASD-STE100 for software
-documentation). You are rewriting ONE rule file. Reason carefully about this rule
-and produce the richest, most useful code-domain version possible. This is a
-CREATIVE enrichment step: expand examples, deepen guidance, and borrow vocabulary
-from the provided references and prior documents.
+You are a senior technical writer synthesizing the FINAL, most-enriched version
+of STE-Code (a controlled-language variation of ASD-STE100 for software
+documentation). You are rewriting ONE rule file. Reason carefully about this
+rule and produce the richest, most useful code-domain version possible. This is
+a CREATIVE enrichment step: expand examples, deepen guidance, and borrow
+vocabulary from the provided references and prior documents.
 
 # INPUT — the current adapted rule (from ste-code/adapted/)
 
-File: {{adapted_path_name}}
-Title: Rule {{self_num}} — {{title}}
+File: {{adapted_path_name}} Title: Rule {{self_num}} — {{title}}
 
 {{src}}
 
@@ -33,7 +32,8 @@ STE-Code Adaptation, and Examples structure. Then ENRICH it:
    `> **See also:** Rule X.Y — <title>` for each related rule it cites.
 3. TRACEABILITY: after the Examples heading, add
    `> *Adapted from spec pair:* Non-STE: <original ASD-STE100 example>  |  STE: <compliant version>`
-   (derive from the rule's own content / the Original Rule block / prior documents).
+   (derive from the rule's own content / the Original Rule block / prior
+   documents).
 4. BORROW VOCABULARY: use approved, plain code-domain words (prefer the
    Microsoft/Google style-guide words and the STE-Code dictionary under
    .agents/vendor/; avoid utilize/leverage/employ/commence/terminate/initiate
@@ -50,41 +50,50 @@ invent new global conventions; stay consistent with the existing STE-Code voice
 (plain, code-domain, ASD-STE100-derived).
 
 You MAY and SHOULD research for better enrichment before writing:
-- Read ste-code/adapted/{{adapted_path_name}} (your source) and the PREVIOUS DOCUMENTS
-  block below for traceability and borrowed vocabulary.
+
+- Read ste-code/adapted/{{adapted_path_name}} (your source) and the PREVIOUS
+  DOCUMENTS block below for traceability and borrowed vocabulary.
 - Explore the reference material under .agents/vendor/ — it contains downloaded
   public word lists, style guides, and glossaries (Microsoft Style Guide, SCOWL,
   dwyl english-words, Vale Microsoft/Google/write-good packages, Kong/dwyl/
-  jvalentino glossaries, software-terms.dic, OpenSTE). Borrow APPROVED, controlled
-  vocabulary and realistic examples from them to ground your enrichment.
+  jvalentino glossaries, software-terms.dic, OpenSTE). Borrow APPROVED,
+  controlled vocabulary and realistic examples from them to ground your
+  enrichment.
 - Read .agents/vendor/FINAL_PHASE_CONTEXT_INSTRUCTIONS.md for which corpora to
-  consult when a term, rule scope, example, or allowed/forbidden word is ambiguous.
+  consult when a term, rule scope, example, or allowed/forbidden word is
+  ambiguous.
 - Use multiple read_file calls across turns — do not assume; verify against the
   real files on disk.
 
 WORKING STYLE — granular and surgical, not one-shot:
-- Make SMALL, surgical edits across MANY tool calls / turns. Do not try to produce
-  the entire enriched file in a single huge response. Draft or read, refine a
-  section, write, re-read to confirm, repeat. This keeps each step bounded and
-  avoids truncated output.
-- This session may take MANY turns and many API calls — that is expected and fine.
+
+- Make SMALL, surgical edits across MANY tool calls / turns. Do not try to
+  produce the entire enriched file in a single huge response. Draft or read,
+  refine a section, write, re-read to confirm, repeat. This keeps each step
+  bounded and avoids truncated output.
+- This session may take MANY turns and many API calls — that is expected and
+  fine.
 
 WHEN DONE:
+
 - WRITE the finished enriched rule directly to disk at:
-  ste-code/final/rules/{{adapted_path_name}}
-  using your file-write tool (overwrite any existing content there).
+  ste-code/final/rules/{{adapted_path_name}} using your file-write tool
+  (overwrite any existing content there).
 - The file MUST begin with '# Rule' and be self-contained, parseable markdown.
 - After the file is written and you have re-read it to confirm it is correct and
-  complete, END the session (stop). Your ONLY artifact is that single written file.
+  complete, END the session (stop). Your ONLY artifact is that single written
+  file.
 - Do NOT print the file to the chat, do NOT write any narration, tool logs,
-  "Rewrote…", "What changed vs…", or "Key changes" into the file or the chat.
-  Do not create helper scripts.
+  "Rewrote…", "What changed vs…", or "Key changes" into the file or the chat. Do
+  not create helper scripts.
 
 Output ONLY the rewritten markdown file. No code fences, no commentary outside
-the file. The file must be self-contained and parseable as one markdown document.
+the file. The file must be self-contained and parseable as one markdown
+document.
 
 STRICT FORMAT RULE (enforced): Do NOT prepend or append ANY assistant narration,
-tool logs, "Rewrote…", file paths, "What changed vs…", "Key changes", or meta-notes.
-Emit ONLY the raw markdown rule body: it MUST begin with '# Rule' and end with the
-Examples block. No explanatory text before or after. If you add a single word of
-commentary, the file is rejected. Start immediately with the rule heading.
+tool logs, "Rewrote…", file paths, "What changed vs…", "Key changes", or
+meta-notes. Emit ONLY the raw markdown rule body: it MUST begin with '# Rule'
+and end with the Examples block. No explanatory text before or after. If you add
+a single word of commentary, the file is rejected. Start immediately with the
+rule heading.

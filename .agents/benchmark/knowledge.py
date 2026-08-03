@@ -54,6 +54,7 @@ inherit the harder lessons.
 Writes are atomic (temp file + os.replace). schema_version is stored; load()
 tolerates unknown keys so the format can grow.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -65,17 +66,24 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 SCHEMA_VERSION = 1
-DECAY_FACTOR = 0.85        # confidence multiplier per decay period
-DECAY_EVERY = 3           # rounds without a failure = one decay step
+DECAY_FACTOR = 0.85  # confidence multiplier per decay period
+DECAY_EVERY = 3  # rounds without a failure = one decay step
 
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def signature(technique: str, placement: str, timing: str, category: str,
-              missed_principles, forbidden_found,
-              position_aware: bool = False, sequence_position: int = -1) -> str:
+def signature(
+    technique: str,
+    placement: str,
+    timing: str,
+    category: str,
+    missed_principles,
+    forbidden_found,
+    position_aware: bool = False,
+    sequence_position: int = -1,
+) -> str:
     """Stable content hash of a failure signature.
 
     When ``position_aware`` is True, ``sequence_position`` is mixed into the
@@ -99,11 +107,16 @@ def _norm(text: str) -> str:
 
 # --------------------------------------------------------------------- Knowledge
 
+
 class Knowledge:
     """The knowledge base object. Loaded from / written to a JSON file."""
 
-    def __init__(self, path: "str | Path", decay_factor: float = DECAY_FACTOR,
-                 decay_every: int = DECAY_EVERY) -> None:
+    def __init__(
+        self,
+        path: "str | Path",
+        decay_factor: float = DECAY_FACTOR,
+        decay_every: int = DECAY_EVERY,
+    ) -> None:
         self.path = Path(path)
         self.decay_factor = decay_factor
         self.decay_every = decay_every
@@ -139,7 +152,11 @@ class Knowledge:
                 L.setdefault("first_sequence_id", "")
                 self.lessons[k] = L
         # non-dict lessons (legacy/corrupt/foreign shape) are ignored, not fatal
-        self._patterns = {k: dict(v) for k, v in (raw.get("patterns") or {}).items() if isinstance(v, dict)}
+        self._patterns = {
+            k: dict(v)
+            for k, v in (raw.get("patterns") or {}).items()
+            if isinstance(v, dict)
+        }
 
     @staticmethod
     def _serialize_lessons(lessons: "dict[str, dict]") -> "dict[str, dict]":
@@ -180,12 +197,23 @@ class Knowledge:
 
     # -- lesson ingestion ----------------------------------------------------
 
-    def record_failure(self, technique, placement, timing, category,
-                       missed_principles, forbidden_found, variant: str,
-                       round_n: int, correctness_score: float,
-                       input_text: str, current_round: int,
-                       capsule_id: str = "", sequence_position: int = -1,
-                       sequence_id: str = "") -> str:
+    def record_failure(
+        self,
+        technique,
+        placement,
+        timing,
+        category,
+        missed_principles,
+        forbidden_found,
+        variant: str,
+        round_n: int,
+        correctness_score: float,
+        input_text: str,
+        current_round: int,
+        capsule_id: str = "",
+        sequence_position: int = -1,
+        sequence_id: str = "",
+    ) -> str:
         """Ingest one escape. Returns the lesson signature (id).
 
         Unit 1 (capsule provenance): ``capsule_id`` and ``sequence_position``
@@ -193,24 +221,38 @@ class Knowledge:
         given position in a sequence (a temporal dependency invisible to a
         single-capsule run). They are optional and ignored by existing callers.
         """
-        sig = signature(technique, placement, timing, category,
-                        missed_principles, forbidden_found,
-                        position_aware=(sequence_position >= 0),
-                        sequence_position=sequence_position)
+        sig = signature(
+            technique,
+            placement,
+            timing,
+            category,
+            missed_principles,
+            forbidden_found,
+            position_aware=(sequence_position >= 0),
+            sequence_position=sequence_position,
+        )
         now = _now_iso()
         if sig not in self.lessons:
             self.lessons[sig] = {
                 "signature": sig,
-                "technique": technique, "placement": placement,
-                "timing": timing, "category": category,
+                "technique": technique,
+                "placement": placement,
+                "timing": timing,
+                "category": category,
                 "missed_principles": sorted(str(p) for p in (missed_principles or [])),
                 "forbidden_found": sorted(str(f) for f in (forbidden_found or [])),
-                "first_seen": now, "last_seen": now,
-                "first_seen_round": round_n, "last_seen_round": round_n,
-                "occurrences": 0, "rounds_seen": set(),
+                "first_seen": now,
+                "last_seen": now,
+                "first_seen_round": round_n,
+                "last_seen_round": round_n,
+                "occurrences": 0,
+                "rounds_seen": set(),
                 "variants_affected": set(),
-                "scores": [], "examples": [],
-                "a": 0, "b": 0, "last_seen_round": current_round,
+                "scores": [],
+                "examples": [],
+                "a": 0,
+                "b": 0,
+                "last_seen_round": current_round,
                 # --- Unit 1 capsule provenance ---
                 "capsule_ids": set(),
                 "sequence_positions": [],
@@ -310,8 +352,9 @@ class Knowledge:
         def _emit(kind, key, sigs, universe):
             if len(sigs) < 2:
                 return
-            pattern_id = "pat-{}-{}".format(kind, hashlib.blake2s(
-                key.encode()).hexdigest()[:6])
+            pattern_id = "pat-{}-{}".format(
+                kind, hashlib.blake2s(key.encode()).hexdigest()[:6]
+            )
             # Lift compares this group's share of the corpus against the share
             # it would hold if the axis were spread evenly over its observed
             # values. Dividing (len(sigs)/total) by itself -- the previous
@@ -319,8 +362,11 @@ class Knowledge:
             share = len(sigs) / total if total else 0.0
             base_rate = (1.0 / len(universe)) if universe else 0.0
             self._patterns[pattern_id] = {
-                "id": pattern_id, "kind": kind, "key": key,
-                "support": len(sigs), "lesson_ids": sorted(sigs),
+                "id": pattern_id,
+                "kind": kind,
+                "key": key,
+                "support": len(sigs),
+                "lesson_ids": sorted(sigs),
                 "lift": round(share / base_rate, 3) if base_rate else 0.0,
             }
 
@@ -333,11 +379,14 @@ class Knowledge:
 
     # -- query API -----------------------------------------------------------
 
-    def top_lessons(self, n: int = 10, by: str = "confidence",
-                    current_round: int = 0) -> "list[dict]":
-        keys = {"confidence": lambda s: self.confidence_of(s, current_round),
-                "occurrences": lambda s: self.lessons[s]["occurrences"],
-                "severity": lambda s: self.severity(s)}
+    def top_lessons(
+        self, n: int = 10, by: str = "confidence", current_round: int = 0
+    ) -> "list[dict]":
+        keys = {
+            "confidence": lambda s: self.confidence_of(s, current_round),
+            "occurrences": lambda s: self.lessons[s]["occurrences"],
+            "severity": lambda s: self.severity(s),
+        }
         fn = keys.get(by, keys["confidence"])
         ordered = sorted(self.lessons.keys(), key=fn, reverse=True)
         out = []
@@ -350,8 +399,9 @@ class Knowledge:
             out.append(L)
         return out
 
-    def lessons_for(self, variant: str = None, technique: str = None,
-                    placement: str = None) -> "list[dict]":
+    def lessons_for(
+        self, variant: str = None, technique: str = None, placement: str = None
+    ) -> "list[dict]":
         out = []
         for s, L in self.lessons.items():
             if variant is not None and variant not in L["variants_affected"]:
@@ -366,14 +416,22 @@ class Knowledge:
     def patterns(self, min_support: int = 2) -> "list[dict]":
         return [p for p in self._patterns.values() if p["support"] >= min_support]
 
-    def unresolved(self, confidence_floor: float = 0.0, current_round: int = 0) -> "list[dict]":
-        return [self._with_conf(s, current_round) for s in self.lessons
-                if self.confidence_of(s, current_round) >= confidence_floor]
+    def unresolved(
+        self, confidence_floor: float = 0.0, current_round: int = 0
+    ) -> "list[dict]":
+        return [
+            self._with_conf(s, current_round)
+            for s in self.lessons
+            if self.confidence_of(s, current_round) >= confidence_floor
+        ]
 
     def resolved(self, current_round: int = 0) -> "list[dict]":
         """Lessons whose decayed confidence has fallen below 0.2 (likely fixed)."""
-        return [self._with_conf(s, current_round) for s in self.lessons
-                if self.confidence_of(s, current_round) < 0.2]
+        return [
+            self._with_conf(s, current_round)
+            for s in self.lessons
+            if self.confidence_of(s, current_round) < 0.2
+        ]
 
     def _with_conf(self, sig: str, current_round: int) -> dict:
         L = dict(self.lessons[sig])
@@ -382,8 +440,13 @@ class Knowledge:
 
     # -- transfer ------------------------------------------------------------
 
-    def predict(self, target_variant_key: str, all_variants: "list",
-                n: int = 5, current_round: int = 0) -> "list[dict]":
+    def predict(
+        self,
+        target_variant_key: str,
+        all_variants: "list",
+        n: int = 5,
+        current_round: int = 0,
+    ) -> "list[dict]":
         """Predict likely escapes for a variant never probed, weighted by the
         intensity similarity of known variants."""
         target = None
@@ -401,7 +464,9 @@ class Knowledge:
             for vid in L["variants_affected"]:
                 for v in all_variants:
                     if str(v.key) == str(vid):
-                        w += 1.0 / (1.0 + abs(float(getattr(v, "intensity", 1.0)) - target_int))
+                        w += 1.0 / (
+                            1.0 + abs(float(getattr(v, "intensity", 1.0)) - target_int)
+                        )
                         break
             if w == 0.0:
                 w = 0.5
@@ -425,21 +490,34 @@ class Knowledge:
         for s in self.lessons:
             if s in other.lessons:
                 a, b = self.lessons[s], other.lessons[s]
-                if (a["occurrences"] != b["occurrences"]
-                        or a["a"] != b["a"] or a["b"] != b["b"]):
-                    changed.append({
-                        "signature": s,
-                        "occurrences_delta": a["occurrences"] - b["occurrences"],
-                        "a_delta": a["a"] - b["a"], "b_delta": a["b"] - b["b"],
-                    })
-        return {"added": added, "removed": removed, "changed": changed,
-                "self_version": self.version, "other_version": other.version}
+                if (
+                    a["occurrences"] != b["occurrences"]
+                    or a["a"] != b["a"]
+                    or a["b"] != b["b"]
+                ):
+                    changed.append(
+                        {
+                            "signature": s,
+                            "occurrences_delta": a["occurrences"] - b["occurrences"],
+                            "a_delta": a["a"] - b["a"],
+                            "b_delta": a["b"] - b["b"],
+                        }
+                    )
+        return {
+            "added": added,
+            "removed": removed,
+            "changed": changed,
+            "self_version": self.version,
+            "other_version": other.version,
+        }
 
 
 # ------------------------------------------------------------------ self-test
 
+
 def _selftest() -> int:
     import tempfile
+
     tmp = Path(tempfile.mkdtemp(prefix="kb-selftest-"))
     fails = 0
 
@@ -452,39 +530,96 @@ def _selftest() -> int:
     kb = Knowledge(tmp / "knowledge.json")
     # Two escapes with the SAME signature must not duplicate rows.
     for _ in range(3):
-        kb.record_failure("forbidden_bait", "head", "immediate", "api_doc",
-                          ["P1"], ["bunch"], "0", 1, 0.2, "Please bunch it.", 1)
+        kb.record_failure(
+            "forbidden_bait",
+            "head",
+            "immediate",
+            "api_doc",
+            ["P1"],
+            ["bunch"],
+            "0",
+            1,
+            0.2,
+            "Please bunch it.",
+            1,
+        )
     kb.flush()
-    check(len(kb.lessons) == 1, "same signature -> single lesson (got {})".format(len(kb.lessons)))
-    check(kb.lessons and list(kb.lessons.values())[0]["occurrences"] == 3,
-          "occurrences incremented to 3")
+    check(
+        len(kb.lessons) == 1,
+        "same signature -> single lesson (got {})".format(len(kb.lessons)),
+    )
+    check(
+        kb.lessons and list(kb.lessons.values())[0]["occurrences"] == 3,
+        "occurrences incremented to 3",
+    )
     # confidence rises with b (failures)
     sig = list(kb.lessons.keys())[0]
     check(kb.confidence_of(sig, 1) > 0.0, "confidence > 0 after failures")
     # a different signature is a new lesson
-    kb.record_failure("spelling_drift", "nested", "immediate", "commit",
-                      ["P1"], [], "0", 1, 0.1, "We will realise it.", 1)
+    kb.record_failure(
+        "spelling_drift",
+        "nested",
+        "immediate",
+        "commit",
+        ["P1"],
+        [],
+        "0",
+        1,
+        0.1,
+        "We will realise it.",
+        1,
+    )
     kb.flush()
     check(len(kb.lessons) == 2, "distinct signature -> second lesson")
     # patterns: need >=2 shares. Add placements that share a technique.
-    kb.record_failure("forbidden_bait", "tail", "immediate", "readme",
-                      ["P1"], ["bunch"], "0", 1, 0.3, "bunch again", 1)
-    kb.record_failure("forbidden_bait", "nested", "immediate", "comment",
-                      ["P1"], ["bunch"], "0", 1, 0.25, "bunch nested", 1)
+    kb.record_failure(
+        "forbidden_bait",
+        "tail",
+        "immediate",
+        "readme",
+        ["P1"],
+        ["bunch"],
+        "0",
+        1,
+        0.3,
+        "bunch again",
+        1,
+    )
+    kb.record_failure(
+        "forbidden_bait",
+        "nested",
+        "immediate",
+        "comment",
+        ["P1"],
+        ["bunch"],
+        "0",
+        1,
+        0.25,
+        "bunch nested",
+        1,
+    )
     kb._regenerate_patterns()
     kb.flush()  # persist the new lessons before the reload assertion
     pats = kb.patterns(min_support=2)
-    check(any(p["kind"] == "technique_across_placements" and p["key"] == "forbidden_bait"
-              for p in pats), "technique_across_placements pattern emitted")
+    check(
+        any(
+            p["kind"] == "technique_across_placements" and p["key"] == "forbidden_bait"
+            for p in pats
+        ),
+        "technique_across_placements pattern emitted",
+    )
     # query API
     top = kb.top_lessons(n=5, by="occurrences", current_round=1)
     check(top and top[0]["occurrences"] >= 3, "top_lessons by occurrences works")
     lf = kb.lessons_for(technique="forbidden_bait")
     check(len(lf) == 3, "lessons_for(technique) filters (got {})".format(len(lf)))
+
     # transfer prediction for an unprobed variant
     class _V:
         def __init__(self, k, i):
-            self.key = k; self.intensity = i
+            self.key = k
+            self.intensity = i
+
     preds = kb.predict("2", [_V("0", 1.0), _V("2", 3.0)], n=3, current_round=1)
     check(isinstance(preds, list), "predict returns a list")
     # persistence: reload from disk keeps lessons (no dup)
@@ -498,9 +633,13 @@ def _selftest() -> int:
     kb.flush()
     conf_old = kb.confidence_of(sig, 1)
     conf_new = kb.confidence_of(sig, 10)
-    check(conf_new <= conf_old, "confidence decays with absence ({}->{})".format(conf_old, conf_new))
+    check(
+        conf_new <= conf_old,
+        "confidence decays with absence ({}->{})".format(conf_old, conf_new),
+    )
 
     import shutil
+
     shutil.rmtree(tmp, ignore_errors=True)
     print("\nknowledge self-test: {} failed".format(fails))
     return 1 if fails else 0
@@ -508,6 +647,7 @@ def _selftest() -> int:
 
 def main() -> int:
     import argparse
+
     ap = argparse.ArgumentParser(description="WHITE knowledge base self-test / demo.")
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--demo", action="store_true")

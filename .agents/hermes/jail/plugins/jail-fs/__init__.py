@@ -29,6 +29,7 @@ from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
+
 # The shared core lives beside the plugins, not inside them.
 def _find_jail_root() -> Path:
     """Locate the jail root by MARKER, never by counting parent hops.
@@ -41,9 +42,7 @@ def _find_jail_root() -> Path:
     for candidate in Path(__file__).resolve().parents:
         if (candidate / "core" / "policy.py").exists():
             return candidate
-    raise RuntimeError(
-        "jail: cannot locate the shared core/ package above " + __file__
-    )
+    raise RuntimeError("jail: cannot locate the shared core/ package above " + __file__)
 
 
 _JAIL_ROOT = _find_jail_root()

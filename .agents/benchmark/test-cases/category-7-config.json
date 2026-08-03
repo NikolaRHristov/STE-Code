@@ -1,29 +1,53 @@
 [
-  {
-    "id": "bench-029", "category": "config",
-    "description": ".env file with unclear comments",
-    "input": "# This is the database URL, make sure it's correct\nDATABASE_URL=postgresql://localhost:5432/myapp\n# Secret key for JWT stuff\nJWT_SECRET=super-secret-key",
-    "expected_principles": ["P1", "P10"],
-    "expected_keywords": ["database", "URL", "PostgreSQL", "JWT", "secret", "key"],
-    "forbidden_keywords": ["make sure it's correct", "stuff"],
-    "max_tokens": 250, "difficulty": "easy"
-  },
-  {
-    "id": "bench-030", "category": "config",
-    "description": "Dockerfile with passive instructions",
-    "input": "# The application will be built using the Node.js image\nFROM node:18\n# Dependencies should be installed before copying the source code\nRUN npm install",
-    "expected_principles": ["P4", "P1"],
-    "expected_keywords": ["build", "Node.js", "install", "dependencies", "source"],
-    "forbidden_keywords": ["will be built", "should be installed"],
-    "max_tokens": 250, "difficulty": "medium"
-  },
-  {
-    "id": "bench-031", "category": "config",
-    "description": "CI config with ambiguous instructions",
-    "input": "# This job does the testing stuff\n# It runs all the tests and makes sure nothing is broken\n# If something fails, the build will be marked as red\ntest:\n  script: npm test",
-    "expected_principles": ["P1", "P10", "P14", "P3"],
-    "expected_keywords": ["test", "run", "build", "fail"],
-    "forbidden_keywords": ["stuff", "makes sure", "nothing is broken", "marked as red"],
-    "max_tokens": 300, "difficulty": "medium"
-  }
+	{
+		"id": "bench-029",
+		"category": "config",
+		"description": ".env file with unclear comments",
+		"input": "# This is the database URL, make sure it's correct\nDATABASE_URL=postgresql://localhost:5432/myapp\n# Secret key for JWT stuff\nJWT_SECRET=super-secret-key",
+		"expected_principles": ["P1", "P10"],
+		"expected_keywords": [
+			"database",
+			"URL",
+			"PostgreSQL",
+			"JWT",
+			"secret",
+			"key"
+		],
+		"forbidden_keywords": ["make sure it's correct", "stuff"],
+		"max_tokens": 250,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-030",
+		"category": "config",
+		"description": "Dockerfile with passive instructions",
+		"input": "# The application will be built using the Node.js image\nFROM node:18\n# Dependencies should be installed before copying the source code\nRUN npm install",
+		"expected_principles": ["P4", "P1"],
+		"expected_keywords": [
+			"build",
+			"Node.js",
+			"install",
+			"dependencies",
+			"source"
+		],
+		"forbidden_keywords": ["will be built", "should be installed"],
+		"max_tokens": 250,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-031",
+		"category": "config",
+		"description": "CI config with ambiguous instructions",
+		"input": "# This job does the testing stuff\n# It runs all the tests and makes sure nothing is broken\n# If something fails, the build will be marked as red\ntest:\n  script: npm test",
+		"expected_principles": ["P1", "P10", "P14", "P3"],
+		"expected_keywords": ["test", "run", "build", "fail"],
+		"forbidden_keywords": [
+			"stuff",
+			"makes sure",
+			"nothing is broken",
+			"marked as red"
+		],
+		"max_tokens": 300,
+		"difficulty": "medium"
+	}
 ]

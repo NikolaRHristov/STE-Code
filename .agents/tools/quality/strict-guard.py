@@ -47,8 +47,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -88,7 +92,7 @@ def check_file(filepath: Path) -> list:
     for i, line in enumerate(lines[:5]):  # Check first 5 lines (preface area)
         for pat in freelance_patterns:
             if re.match(pat, line.strip(), re.I):
-                violations.append(f"R3: freelance preface at L{i+1}: {line[:60]!r}")
+                violations.append(f"R3: freelance preface at L{i + 1}: {line[:60]!r}")
 
     # R1/R2: Table column consistency
     header_cols = None
@@ -101,7 +105,9 @@ def check_file(filepath: Path) -> list:
                 # Could be intentional (continuation) — only flag if NOT preceded by marker
                 prev = lines[i - 1] if i > 0 else ""
                 if "<!-- TABLE CONTINUES" not in prev:
-                    violations.append(f"R2: column mismatch at L{i+1}: got {len(cells)}, expected {header_cols}")
+                    violations.append(
+                        f"R2: column mismatch at L{i + 1}: got {len(cells)}, expected {header_cols}"
+                    )
 
     # R6: Truncation signal — file ends mid-table or mid-word without page marker
     last_content = lines[-1].strip() if lines else ""

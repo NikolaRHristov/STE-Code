@@ -1,50 +1,114 @@
 [
-  {
-    "id": "bench-036",
-    "category": "gen_function",
-    "description": "Write a function with docstring — validate email",
-    "prompt": "Write a Python function `validate_email(address)` that checks if an email address is valid. Include a complete docstring with Args and Returns sections. Use STE-Code principles: approved words, active voice, no jargon.",
-    "expected_principles": ["P1", "P4", "P10"],
-    "expected_keywords": ["def validate_email", "Args:", "Returns:", "address", "check", "valid", "return"],
-    "forbidden_keywords": ["stuff", "thing", "should", "utilize", "perform validation", "might"],
-    "required_patterns": ["\"\"\".*Args:.*address.*Returns:.*\"\"\""],
-    "max_tokens": 400,
-    "difficulty": "easy"
-  },
-  {
-    "id": "bench-037",
-    "category": "gen_function",
-    "description": "Write a function that processes data with proper error handling",
-    "prompt": "Write a TypeScript function `processPayload(data: unknown)` that validates and transforms an API payload. Include JSDoc with @param and @returns. Use STE-Code: active voice, no slang, clear error descriptions.",
-    "expected_principles": ["P1", "P3", "P12"],
-    "expected_keywords": ["processPayload", "@param", "@returns", "validate", "transform", "error", "throw"],
-    "forbidden_keywords": ["stuff", "thing", "should", "utilize", "basically", "kind of"],
-    "required_patterns": ["/\\*\\*.*@param.*@returns.*\\*/"],
-    "max_tokens": 500,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-038",
-    "category": "gen_function",
-    "description": "Write an async function with clear error states documented",
-    "prompt": "Write a JavaScript async function `fetchUserData(userId)` that reads from an API. Document all error states in the JSDoc. Use STE-Code: one term per concept, no \"fetch\" → use \"read\", no passive voice.",
-    "expected_principles": ["P4", "P11", "P1"],
-    "expected_keywords": ["async function fetchUserData", "@throws", "userId", "read", "return", "error", "API"],
-    "forbidden_keywords": ["fetch", "get user data", "should", "will be", "might fail"],
-    "required_patterns": ["async function", "@throws"],
-    "max_tokens": 500,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-039",
-    "category": "gen_function",
-    "description": "Write a class with full method documentation",
-    "prompt": "Write a Python class `UserService` with methods `register`, `authenticate`, and `delete`. Each method needs a STE-Code compliant docstring. Use approved verbs from the STE-Code synonym table. Use imperative mood for summaries.",
-    "expected_principles": ["P1", "P4", "P11"],
-    "expected_keywords": ["class UserService", "def register", "def authenticate", "def delete", "Args:", "Returns:", "Raises:"],
-    "forbidden_keywords": ["utilize", "leverage", "fetch", "obtain", "stuff", "perform"],
-    "required_patterns": ["class UserService", "def register", "def authenticate", "def delete"],
-    "max_tokens": 700,
-    "difficulty": "hard"
-  }
+	{
+		"id": "bench-036",
+		"category": "gen_function",
+		"description": "Write a function with docstring — validate email",
+		"prompt": "Write a Python function `validate_email(address)` that checks if an email address is valid. Include a complete docstring with Args and Returns sections. Use STE-Code principles: approved words, active voice, no jargon.",
+		"expected_principles": ["P1", "P4", "P10"],
+		"expected_keywords": [
+			"def validate_email",
+			"Args:",
+			"Returns:",
+			"address",
+			"check",
+			"valid",
+			"return"
+		],
+		"forbidden_keywords": [
+			"stuff",
+			"thing",
+			"should",
+			"utilize",
+			"perform validation",
+			"might"
+		],
+		"required_patterns": ["\"\"\".*Args:.*address.*Returns:.*\"\"\""],
+		"max_tokens": 400,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-037",
+		"category": "gen_function",
+		"description": "Write a function that processes data with proper error handling",
+		"prompt": "Write a TypeScript function `processPayload(data: unknown)` that validates and transforms an API payload. Include JSDoc with @param and @returns. Use STE-Code: active voice, no slang, clear error descriptions.",
+		"expected_principles": ["P1", "P3", "P12"],
+		"expected_keywords": [
+			"processPayload",
+			"@param",
+			"@returns",
+			"validate",
+			"transform",
+			"error",
+			"throw"
+		],
+		"forbidden_keywords": [
+			"stuff",
+			"thing",
+			"should",
+			"utilize",
+			"basically",
+			"kind of"
+		],
+		"required_patterns": ["/\\*\\*.*@param.*@returns.*\\*/"],
+		"max_tokens": 500,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-038",
+		"category": "gen_function",
+		"description": "Write an async function with clear error states documented",
+		"prompt": "Write a JavaScript async function `fetchUserData(userId)` that reads from an API. Document all error states in the JSDoc. Use STE-Code: one term per concept, no \"fetch\" → use \"read\", no passive voice.",
+		"expected_principles": ["P4", "P11", "P1"],
+		"expected_keywords": [
+			"async function fetchUserData",
+			"@throws",
+			"userId",
+			"read",
+			"return",
+			"error",
+			"API"
+		],
+		"forbidden_keywords": [
+			"fetch",
+			"get user data",
+			"should",
+			"will be",
+			"might fail"
+		],
+		"required_patterns": ["async function", "@throws"],
+		"max_tokens": 500,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-039",
+		"category": "gen_function",
+		"description": "Write a class with full method documentation",
+		"prompt": "Write a Python class `UserService` with methods `register`, `authenticate`, and `delete`. Each method needs a STE-Code compliant docstring. Use approved verbs from the STE-Code synonym table. Use imperative mood for summaries.",
+		"expected_principles": ["P1", "P4", "P11"],
+		"expected_keywords": [
+			"class UserService",
+			"def register",
+			"def authenticate",
+			"def delete",
+			"Args:",
+			"Returns:",
+			"Raises:"
+		],
+		"forbidden_keywords": [
+			"utilize",
+			"leverage",
+			"fetch",
+			"obtain",
+			"stuff",
+			"perform"
+		],
+		"required_patterns": [
+			"class UserService",
+			"def register",
+			"def authenticate",
+			"def delete"
+		],
+		"max_tokens": 700,
+		"difficulty": "hard"
+	}
 ]

@@ -1,31 +1,34 @@
 model:
-  default: tencent/hy3:free
-  provider: nous
-  base_url: https://inference-api.nousresearch.com/v1
+    default: tencent/hy3:free
+    provider: nous
+    base_url: https://inference-api.nousresearch.com/v1
 agent:
-  max_turns: 120
-  api_max_retries: 3
-  tool_use_enforcement: auto
-  environment_probe: true
-  reasoning_effort: high
+    max_turns: 120
+    api_max_retries: 3
+    tool_use_enforcement: auto
+    environment_probe: true
+    reasoning_effort: high
 terminal:
-  backend: local
-  cwd: .
-  timeout: 300
-  persistent_shell: true
+    backend: local
+    cwd: .
+    timeout: 300
+    persistent_shell: true
 delegation:
-  max_iterations: 120
-  max_concurrent_children: 3
-  max_spawn_depth: 1
-  orchestrator_enabled: true
+    max_iterations: 120
+    max_concurrent_children: 3
+    max_spawn_depth: 1
+    orchestrator_enabled: true
 security:
-  redact_secrets: true
+    redact_secrets: true
 plugins:
-  enabled:
-    - ste-code-jail
-  disabled: []
-  entries:
-    ste-code-jail:
-      allow_tool_override: false
+    enabled:
+        - ste-code-jail
+        - privacy-scrub
+    disabled: []
+    entries:
+        ste-code-jail:
+            allow_tool_override: false
+        privacy-scrub:
+            enabled: true
 display:
-  tool_progress: verbose
+    tool_progress: verbose

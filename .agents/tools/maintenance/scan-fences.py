@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """Find nested code fence issues: triple-backtick fence inside another."""
+
 import re
 from pathlib import Path
 
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -44,7 +49,9 @@ for f in sorted(PROJECT.rglob("*.md")):
                 stack.pop()
             elif stack:
                 # New fence inside another = nested
-                print(f"NESTED: {f.relative_to(PROJECT)}:{i+1} BT={bt} lang='{lang}' inside BT={top_bt} at L{stack[-1][0]}")
+                print(
+                    f"NESTED: {f.relative_to(PROJECT)}:{i + 1} BT={bt} lang='{lang}' inside BT={top_bt} at L{stack[-1][0]}"
+                )
                 stack.append((i + 1, bt, indent, lang))
             else:
                 stack.append((i + 1, bt, indent, lang))

@@ -24,8 +24,12 @@ from pathlib import Path
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -53,10 +57,14 @@ def tracked_files(reg: dict, wide: bool) -> list[str]:
     """Claim sites to scan: the curated sync set, or every tracked doc."""
     if not wide:
         return [f for f in reg["sync_files"] if (PROJECT / f).exists()]
-    out = subprocess.run(["git", "ls-files"], capture_output=True, text=True, cwd=PROJECT)
+    out = subprocess.run(
+        ["git", "ls-files"], capture_output=True, text=True, cwd=PROJECT
+    )
     excl = tuple(reg["scan_exclude"])
     keep = (".md", ".txt", ".json", ".yml", ".yaml", ".cff")
-    return [f for f in out.stdout.split() if f.endswith(keep) and not f.startswith(excl)]
+    return [
+        f for f in out.stdout.split() if f.endswith(keep) and not f.startswith(excl)
+    ]
 
 
 IGNORE = "release-scan:ignore"
@@ -196,7 +204,9 @@ def main() -> int:
         print(f"  {rel}")
         for i in items:
             loc = f":{i['line']}" if i["line"] else ""
-            print(f"    {i['claim']:<18} {loc:<7} found {i['found']!r} expected {i['expected']!r}")
+            print(
+                f"    {i['claim']:<18} {loc:<7} found {i['found']!r} expected {i['expected']!r}"
+            )
             print(f"      {i['text']}")
         print()
     return 1

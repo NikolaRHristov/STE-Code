@@ -12,6 +12,7 @@ Guards the properties that make the design worth having:
 
 Run:  python3 .agents/tools/lib/test_ste_config.py
 """
+
 from __future__ import annotations
 
 import os
@@ -19,7 +20,9 @@ import sys
 from pathlib import Path
 
 _HERE = Path(__file__).resolve()
-_R = next(p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file())
+_R = next(
+    p for p in _HERE.parents if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 
 import ste_config as sc  # noqa: E402
@@ -102,7 +105,9 @@ def main() -> int:
 
     # 5. footprint -----------------------------------------------------------
     text = cfg.footprint()
-    check("inputs:" in text and "outputs:" in text, "footprint lists inputs and outputs")
+    check(
+        "inputs:" in text and "outputs:" in text, "footprint lists inputs and outputs"
+    )
     check(
         cfg.render("layout.refined_file", worker=7, start=1, end=4) == "r007-p1-4.md",
         "layout patterns render from configuration",
@@ -114,7 +119,8 @@ def main() -> int:
 
     # every declared path stays inside the repository
     inside = all(
-        str(p).startswith(str(_R)) for p in {**cfg.paths("inputs"), **cfg.paths("outputs")}.values()
+        str(p).startswith(str(_R))
+        for p in {**cfg.paths("inputs"), **cfg.paths("outputs")}.values()
     )
     check(inside, "every declared path resolves inside the repository")
 

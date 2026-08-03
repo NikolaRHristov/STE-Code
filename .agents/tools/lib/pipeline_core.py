@@ -32,8 +32,12 @@ from typing import Dict, List, Optional, Tuple
 # _STE_REPO_ROOT_BOOTSTRAP: locate the repo by marker, not by counting parent hops.
 import sys as _sys
 from pathlib import Path as _Path
-_R = next(p for p in _Path(__file__).resolve().parents
-          if (p / ".git").is_dir() or (p / "Makefile").is_file())
+
+_R = next(
+    p
+    for p in _Path(__file__).resolve().parents
+    if (p / ".git").is_dir() or (p / "Makefile").is_file()
+)
 _sys.path.insert(0, str(_R / ".agents" / "tools" / "lib"))
 from repo_root import repo_root as _repo_root  # noqa: E402
 
@@ -59,6 +63,7 @@ R6: If context is too small for 4 pages, request 2 pages. NEVER truncate. Never 
 ISOLATION_NOTE = """SESSION ISOLATION: This is ONE operation in its own session.
 Read input, write output, exit. Do NOT re-read your output. Do NOT edit it.
 Another session will handle the next stage."""
+
 
 # ---------------------------------------------------------------------------
 # R2: Table integrity helpers
@@ -99,12 +104,14 @@ def find_table_breaks(content: str) -> List[Dict]:
                             break
                 row_cols = count_table_columns(prev)
                 if header_cols and row_cols != header_cols:
-                    issues.append({
-                        "type": "column_mismatch_at_page_boundary",
-                        "line": i + 1,
-                        "expected": header_cols,
-                        "found": row_cols,
-                    })
+                    issues.append(
+                        {
+                            "type": "column_mismatch_at_page_boundary",
+                            "line": i + 1,
+                            "expected": header_cols,
+                            "found": row_cols,
+                        }
+                    )
     return issues
 
 
@@ -130,7 +137,7 @@ def detect_freelance(content: str) -> List[str]:
     for i, line in enumerate(content.split("\n")[:5]):
         for pat in FREELANCE_PATTERNS:
             if re.match(pat, line.strip(), re.I):
-                violations.append(f"L{i+1}: {line[:60]!r}")
+                violations.append(f"L{i + 1}: {line[:60]!r}")
     return violations
 
 
@@ -156,7 +163,11 @@ def is_worker_done(worker_num: int) -> bool:
 def save_checkpoint(worker_num: int, output_size: int, attempt: int = 1) -> None:
     """Atomically record a passed worker."""
     cp = load_checkpoint()
-    cp[str(worker_num)] = {"passed": True, "attempt": attempt, "output_size": output_size}
+    cp[str(worker_num)] = {
+        "passed": True,
+        "attempt": attempt,
+        "output_size": output_size,
+    }
     tmp = CHECKPOINT.with_suffix(".tmp")
     tmp.write_text(json.dumps(cp, indent=2, default=str))
     tmp.replace(CHECKPOINT)
@@ -183,6 +194,7 @@ def release_lock(target_stem: str, agent_id: str = "unknown") -> bool:
             owner = (lock / "owner").read_text()
             if agent_id in owner or agent_id == "force":
                 import shutil
+
                 shutil.rmtree(lock)
                 return True
         except Exception:
@@ -224,7 +236,9 @@ def would_truncate(content: str) -> bool:
 def verify_extracted_file(filepath: Path, start: int, end: int) -> Dict:
     """R1-R6 check for one extracted worker file. Returns result dict."""
     result = {
-        "file": str(filepath.relative_to(PROJECT)) if filepath.is_relative_to(PROJECT) else str(filepath),
+        "file": str(filepath.relative_to(PROJECT))
+        if filepath.is_relative_to(PROJECT)
+        else str(filepath),
         "exists": False,
         "headers_ok": False,
         "table_ok": True,

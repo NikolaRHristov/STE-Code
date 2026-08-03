@@ -1,57 +1,77 @@
 [
-  {
-    "id": "bench-001",
-    "category": "readme",
-    "description": "README introduction with jargon",
-    "input": "This library does a bunch of stuff and should be called with the user object to get everything set up properly.",
-    "expected_principles": ["P1", "P10", "P4"],
-    "expected_keywords": ["library", "user object", "call"],
-    "forbidden_keywords": ["bunch", "stuff", "should", "everything", "properly"],
-    "max_tokens": 300,
-    "difficulty": "easy"
-  },
-  {
-    "id": "bench-002",
-    "category": "readme",
-    "description": "README installation instructions",
-    "input": "To get started, you need to first install a bunch of dependencies and then run the setup script which will configure everything for you.",
-    "expected_principles": ["P1", "P5", "P10"],
-    "expected_keywords": ["install", "dependencies", "run"],
-    "forbidden_keywords": ["bunch", "everything", "you need to"],
-    "max_tokens": 300,
-    "difficulty": "easy"
-  },
-  {
-    "id": "bench-003",
-    "category": "readme",
-    "description": "README features list with passive voice",
-    "input": "Features include: data can be processed quickly, files are able to be converted automatically, and results will be displayed in real-time.",
-    "expected_principles": ["P4", "P2"],
-    "expected_keywords": ["process", "convert", "display", "real-time"],
-    "forbidden_keywords": ["can be", "are able to be", "will be"],
-    "max_tokens": 350,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-004",
-    "category": "readme",
-    "description": "README architecture description with noun-verb confusion",
-    "input": "Docker the application first, then use Kubernetes to orchestrate the containers. The deploy process is fully automated.",
-    "expected_principles": ["P7", "P13"],
-    "expected_keywords": ["containerize", "Docker", "Kubernetes", "deploy"],
-    "forbidden_keywords": ["Docker the", "the deploy"],
-    "max_tokens": 300,
-    "difficulty": "medium"
-  },
-  {
-    "id": "bench-005",
-    "category": "readme",
-    "description": "README full section with multiple violations",
-    "input": "This project utilizes a microservices architecture. We make use of Docker for containerization and Kubernetes for orchestration. The API endpoints should be accessed via HTTPS. For more info, check out our docs which contain lots of helpful tips and tricks.",
-    "expected_principles": ["P1", "P2", "P8", "P10"],
-    "expected_keywords": ["Docker", "Kubernetes", "API", "HTTPS", "documentation"],
-    "forbidden_keywords": ["utilizes", "make use of", "should", "lots of", "tips and tricks", "check out", "info"],
-    "max_tokens": 500,
-    "difficulty": "hard"
-  }
+	{
+		"id": "bench-001",
+		"category": "readme",
+		"description": "README introduction with jargon",
+		"input": "This library does a bunch of stuff and should be called with the user object to get everything set up properly.",
+		"expected_principles": ["P1", "P10", "P4"],
+		"expected_keywords": ["library", "user object", "call"],
+		"forbidden_keywords": [
+			"bunch",
+			"stuff",
+			"should",
+			"everything",
+			"properly"
+		],
+		"max_tokens": 300,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-002",
+		"category": "readme",
+		"description": "README installation instructions",
+		"input": "To get started, you need to first install a bunch of dependencies and then run the setup script which will configure everything for you.",
+		"expected_principles": ["P1", "P5", "P10"],
+		"expected_keywords": ["install", "dependencies", "run"],
+		"forbidden_keywords": ["bunch", "everything", "you need to"],
+		"max_tokens": 300,
+		"difficulty": "easy"
+	},
+	{
+		"id": "bench-003",
+		"category": "readme",
+		"description": "README features list with passive voice",
+		"input": "Features include: data can be processed quickly, files are able to be converted automatically, and results will be displayed in real-time.",
+		"expected_principles": ["P4", "P2"],
+		"expected_keywords": ["process", "convert", "display", "real-time"],
+		"forbidden_keywords": ["can be", "are able to be", "will be"],
+		"max_tokens": 350,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-004",
+		"category": "readme",
+		"description": "README architecture description with noun-verb confusion",
+		"input": "Docker the application first, then use Kubernetes to orchestrate the containers. The deploy process is fully automated.",
+		"expected_principles": ["P7", "P13"],
+		"expected_keywords": ["containerize", "Docker", "Kubernetes", "deploy"],
+		"forbidden_keywords": ["Docker the", "the deploy"],
+		"max_tokens": 300,
+		"difficulty": "medium"
+	},
+	{
+		"id": "bench-005",
+		"category": "readme",
+		"description": "README full section with multiple violations",
+		"input": "This project utilizes a microservices architecture. We make use of Docker for containerization and Kubernetes for orchestration. The API endpoints should be accessed via HTTPS. For more info, check out our docs which contain lots of helpful tips and tricks.",
+		"expected_principles": ["P1", "P2", "P8", "P10"],
+		"expected_keywords": [
+			"Docker",
+			"Kubernetes",
+			"API",
+			"HTTPS",
+			"documentation"
+		],
+		"forbidden_keywords": [
+			"utilizes",
+			"make use of",
+			"should",
+			"lots of",
+			"tips and tricks",
+			"check out",
+			"info"
+		],
+		"max_tokens": 500,
+		"difficulty": "hard"
+	}
 ]

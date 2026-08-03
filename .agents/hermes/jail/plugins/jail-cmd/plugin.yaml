@@ -1,6 +1,9 @@
 name: jail-cmd
 version: "1.0.0"
-description: "Gate which tools and shell commands the active jail policy permits. Granular component of ste-code-jail; blocks denied tools (delegation, cron, memory) and denied binaries including those hidden inside sh -c."
+description:
+    "Gate which tools and shell commands the active jail policy permits.
+    Granular component of ste-code-jail; blocks denied tools (delegation, cron,
+    memory) and denied binaries including those hidden inside sh -c."
 author: STE-Code
 hooks:
-  - pre_tool_call
+    - pre_tool_call
