@@ -17,6 +17,7 @@ Guidelines:
   across the whole standard.
 
 # RESEARCH FREEDOM (read, do not guess)
+
 You have file-read and file-write tools. Spend MANY tool calls:
 - FIRST read the DETERMINISTIC BASE sub-document for this slice and DISTILL it:
   {{base_path}}
@@ -31,6 +32,7 @@ You have file-read and file-write tools. Spend MANY tool calls:
   it in full before writing.
 
 # HOW TO WRITE THE FILE (critical)
+
 You are a session with file-read and file-write tools (write_file, patch, and
 any other file-editing tool available to you). Do NOT print the file to the
 chat. Instead:

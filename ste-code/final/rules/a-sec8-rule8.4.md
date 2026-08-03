@@ -763,4 +763,3 @@ In code documentation, the same principle applies with different nouns. Instead 
 > **See also:** Rule 6.3 — Write Short Sentences. Use a Maximum of 25 Words in Each Sentence.
 
 > **See also:** Rule 8.1 — Use All Standard English Punctuation Marks but Not the Semicolon (;)
-

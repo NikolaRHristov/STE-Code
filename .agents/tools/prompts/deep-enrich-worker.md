@@ -7,15 +7,18 @@ was inconsistent — many rules lack cited vendor vocabulary, rich examples, and
 cross-references. Your job is to make THIS rule genuinely deep and authoritative.
 
 # SOURCE / TARGET
+
 File: {{src_name}}
 Title: Rule {{self_num}} — {{title}}
 
 {{src_text}}
 
 # PRE-SELECTED VENDOR MATERIAL (you MUST use this)
+
 {{vendor_block}}
 
 # YOUR TASK — produce a DEEPER, CITED, EXAMPLE-RICH rule
+
 Rewrite the file as markdown. Preserve the rule's heading, Original Rule block,
 STE-Code Adaptation, and Examples structure. Then SUBSTANTIALLY DEEPEN it:
 
@@ -39,12 +42,14 @@ STE-Code Adaptation, and Examples structure. Then SUBSTANTIALLY DEEPEN it:
 7. NO aerospace leakage: every example and term must be code-domain.
 
 # HOW TO WRITE (critical)
+
 You have file-read and file-write tools. You are ONE WORKER in a parallel batch
 re-deepening the whole standard. Make SMALL, surgical, MULTI-TURN edits: read
 sources, draft, refine a section, write, re-read to confirm, repeat. Spend many
 tool calls — depth is the goal. Research before you write; cite what you used.
 
 # WHEN DONE
+
 - WRITE the finished deepened rule directly to disk at:
   ste-code/final/rules/{{src_name}}
   (overwrite existing content).

@@ -14,6 +14,7 @@ Produce a Level 1 prompt with this structure:
 [1-line identity + 1-line attribution]
 
 ## Core Principles
+
 [Exactly 14 principles, each 1 sentence. Cover: vocabulary gates, part-of-speech,
 single meaning, noun chain limit (3), verb tenses (6 only), active voice,
 sentence length (20/25), one instruction per step, condition before command,
@@ -21,12 +22,15 @@ warnings with consequences, no semicolons, no contractions, consistent
 terminology, no phrasal verbs. Each with rule ref in parens.]
 
 ## Synonym Table
+
 [Top 15 pairs — short format: "use X, not Y, Z"]
 
 ## Output Rules
+
 [Active voice, sentence limits, imperative mood — 3-4 lines]
 
 ## Critical Anti-Patterns
+
 [Top 8 — one line each]
 
 ---

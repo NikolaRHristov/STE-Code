@@ -26,6 +26,7 @@
 | CAN (v), CAN, COULD | Do not use COULD (v) to show possibility | IF YOU DO NOT OBEY THIS WARNING, AN EXPLOSION CAN OCCUR. | If you do not obey this warning, an explosion could occur. |
 
 <!-- Page 176 of 434 -->
+
 |---|---|---|---|
 | CANCEL (v), CANCELS, CANCELED, CANCELED | 1. To do the necessary steps to stop a process | IF YOU ACCIDENTALLY PUSH THE SWITCH, CANCEL THE START SEQUENCE. |  |
 | CANCEL (v), CANCELS, CANCELED, CANCELED | 2. To remove the validity of something | THIS NEW REVISION AUTOMATICALLY CANCELS THE PREVIOUS ONE. |  |
@@ -40,6 +41,7 @@
 | CAPACITY (n) | The maximum quantity that something can hold or make | THE CAPACITY OF THE TANK IS 564 LITERS. |  |
 
 <!-- Page 177 of 434 -->
+
 |---|---|---|---|
 | care (n) — UNNAPPROVED | PRECAUTION (n) | WHEN YOU DO WORK WITH HIGH VOLTAGES, OBEY THE SAFETY PRECAUTIONS. | You must take care when you work with high voltages. |
 |  | CAREFUL (adj) | BE CAREFUL WHEN YOU INSTALL THE NUTS. | Take care when installing the nuts. |
@@ -54,6 +56,7 @@
 | case (in case of) (conj) | IF (conj) | IF THERE IS A FIRE, OPERATE THE CRASH SWITCHES. | In case of a fire, operate the crash switches. |
 
 <!-- Page 178 of 434 -->
+
 |---|---|---|---|
 | CATCH (v), CATCHES, CAUGHT, CAUGHT | To stop or prevent the movement of something | THE LUG ON THE PANEL OPENING CATCHES THE BOTTOM OF THE DRAWER. |  |
 |  | For other meanings, use: | DO NOT LET THE TOOL CATCH ON THE PANEL. |  |
@@ -68,6 +71,7 @@
 | cease (v) — UNNAPPROVED | STOP (v) | THE WARNING STOPS AT 17 DEG. | The warning ceases at 17 deg. |
 
 <!-- Page 179 of 434 -->
+
 |---|---|---|---|
 | center (v) — UNNAPPROVED | CENTER (TN) | ALIGN THE PISTON WITH THE CENTER OF THE SLEEVE. | Center the piston in the sleeve. |
 | centralize (v) — UNNAPPROVED | CENTER (TN) | SET THE CONTROLS TO THE CENTER POSITION. | Centralize the controls. |
@@ -83,6 +87,7 @@
 | CHANGE (n) | That which occurs when something changes | THE COLOR CHANGE SHOWS THAT THE TEMPERATURE IS TOO HIGH. |  |
 
 <!-- Page 180 of 434 -->
+
 |---|---|---|---|
 | CHANGE (v), CHANGES, CHANGED, CHANGED | To become or to cause to become different | IF THE HUMIDITY CHANGES FREQUENTLY, PUT A COVER ON THE UNIT. |  |
 |  | For other meanings, use: | CHANGE THE COLOR OF THE DISPLAY. |  |
@@ -97,6 +102,7 @@
 | CHECK (n) | The procedure you do to make sure that something operates correctly or has no defects | DO A CHECK OF THE HYDRAULIC SYSTEM. DO A CHECK FOR LOOSE FASTENERS. |  |
 
 <!-- Page 181 of 434 -->
+
 |---|---|---|---|
 | check (v) — UNNAPPROVED | MAKE SURE (v) | MAKE SURE THAT IT IS SAFE TO SUPPLY ELECTRICAL POWER. | Check that it is safe to supply electrical power. |
 | check (v) — UNNAPPROVED | MEASURE (v) | MEASURE THE DISTANCE BETWEEN THE SURFACES. | Check the distance between the surfaces. |
@@ -113,6 +119,7 @@
 | choose (v) — UNNAPPROVED | ALTERNATIVE (adj) | TABLE 1 GIVES A LIST OF ALTERNATIVE ADHESIVES. | Table 1 lists the adhesives which you can choose. |
 
 <!-- Page 182 of 434 -->
+
 |---|---|---|---|
 | circa (prep) — UNNAPPROVED | APPROXIMATELY (adv) | PUT A CONTAINER (APPROXIMATELY 5 LITERS) BELOW THE WASTE WATER OUTLET. | Put a container (circa 5 liters) under the waste water outlet. |
 | circle (v) — UNNAPPROVED | AROUND (prep) | THE POINTER MOVES AROUND THE DIAL. | The pointer circles the dial. |
@@ -127,6 +134,7 @@
 | cleanliness (n) — UNNAPPROVED | CLEAN (adj) | CONDITIONS FOR A SATISFACTORY BOND ARE: - A CLEAN SURFACE - A CORRECT TEMPERATURE - A CORRECT PRESSURE. | A satisfactory bond depends on the cleanliness of the surface, the temperature, and the pressure. |
 
 <!-- Page 183 of 434 -->
+
 |---|---|---|---|
 | CLEAR (adj) | 1. Without blockage or interference | MAKE SURE THAT THE PITOT AIR INLET IS CLEAR. |  |
 | CLEAR (adj) | 2. Easy to understand and without ambiguity. For other meanings, use: | ALWAYS GIVE CLEAR INSTRUCTIONS ABOUT SAFETY. |  |
@@ -143,6 +151,7 @@
 | CLOGGED (adj) | Blocked with unwanted material. | IF THE FILTER IS CLOGGED, REPLACE IT. |  |
 
 <!-- Page 184 of 434 -->
+
 |---|---|---|---|
 | close (adj) — UNNAPPROVED | NEAR (prep) | DO NOT USE SOLVENTS NEAR FLAMES OR SPARKS. | Do not use solvents in close contact with flames or sparks. |
 | CLOSE (v), CLOSES, CLOSED, CLOSED | 1. To move together, or to move to a position that stops or prevents materials from going in or out | CLOSE THE INSTRUMENT PANEL. |  |
@@ -161,6 +170,7 @@
 | code (v) — UNNAPPROVED | CODE (n) | PUT A CODE ON THE CABLES. | Code the cables. |
 
 <!-- Page 185 of 434 -->
+
 |---|---|---|---|
 | COIL (n) | A sequence of loops | MAKE SURE THAT THE COILS OF THE OXYGEN HOSE DO NOT RUB TOGETHER. |  |
 | coil (v) — UNNAPPROVED | WIND (v) | WIND THE CABLES CAREFULLY. | Coil the cables carefully. |
@@ -178,6 +188,7 @@
 | colored (adj) — UNNAPPROVED | COLOR (n) | THE SCALE HAS TWO AREAS OF DIFFERENT COLOR. | The scale is divided into two colored areas. |
 
 <!-- Page 186 of 434 -->
+
 |---|---|---|---|
 | combine (v) — UNNAPPROVED | MIX (v) | MIX THE WATER AND THE GLYCOL. | Combine water and glycol. |
 | combine (v) — UNNAPPROVED | PUT TOGETHER | DO NOT PUT DIFFERENT HPT SEGMENTS TOGETHER. | Do not combine different HPT segments. |
@@ -188,6 +199,7 @@
 | common (adj) — UNNAPPROVED | SAME (adv) | THE REMOVAL PROCEDURE IS THE SAME FOR THE TWO ITEMS. | The removal procedure is common to both items. |
 
 <!-- Page 187 of 434 -->
+
 |---|---|---|---|
 | communicate (v) — UNNAPPROVED | CONTACT (v) | FOR MORE INFORMATION, CONTACT THE MANUFACTURER. | For more information, communicate with the manufacturer. |
 | communicate (v) — UNNAPPROVED | SPEAK (v) | USE A TELEPHONE TO SPEAK WITH THE LINE MANAGER. | Use a telephone to communicate with the line manager. |
@@ -203,6 +215,7 @@
 | compilation (n) — UNNAPPROVED | COLLECT (v) | COLLECT ALL INSPECTION RECORDS FOR THE COMPONENT. | Compile all inspection records for the component. |
 
 <!-- Page 188 of 434 -->
+
 |---|---|---|---|
 | complete (adj) — UNNAPPROVED | FULL (adj) | EXTEND AND RETRACT THE ACTUATOR THROUGH THREE FULL CYCLES. | Extend and retract the actuator through three complete cycles. |
 | complete (adj) — UNNAPPROVED | ALL (adj) | SEND ALL THE TEST RESULTS TO THE MANUFACTURER. | The complete test results must be sent to the manufacturer. |
@@ -217,6 +230,7 @@
 | comply (v) — UNNAPPROVED | Used in law and regulations. Refer to rule 1.12. | THE SHIP CERTIFICATE MUST COMPLY WITH ALL THE REQUIREMENTS OF THE AUTHORITIES. |  |
 
 <!-- Page 189 of 434 -->
+
 |---|---|---|---|
 | COMPONENT (n) | A part, subassembly, or unit that has a specified function | CLEAN THESE COMPONENTS WITH APPROVED SOLVENTS. |  |
 | comprehensive (adj) | FULL (adj) | DO A FULL INSPECTION OF THE FAIRING. | Do a comprehensive inspection of the fairing. |
@@ -230,6 +244,7 @@
 | concern (v) — UNAPPROVED | APPLICABLE (adj) | THIS PROCEDURE IS APPLICABLE ONLY TO A TYPE B UNIT. | This procedure only concerns a Type B unit. |
 
 <!-- Page 190 of 434 -->
+
 |---|---|---|---|
 | conclusion (n) — UNAPPROVED | END (n) | AT THE END OF THE TEST, SET THE SWITCH TO "NORMAL." | At the conclusion of the test, you must switch to NORMAL. |
 | conclusion (n) — UNAPPROVED | RESULT (n) | IF THE RESULTS OF THE TEST ARE UNSATISFACTORY, REPLACE THE UNIT. | If the conclusions of the test are unsatisfactory, replace the unit. |
@@ -243,6 +258,7 @@
 | conflict (n) — UNAPPROVED | AGREE (v) | IF THE TWO INDICATIONS DO NOT AGREE, DO THE TEST AGAIN. | If there is a conflict between the two indicators, repeat the test. |
 
 <!-- Page 191 of 434 -->
+
 |---|---|---|---|
 | conform (v) — UNAPPROVED | AGREE (v) | IF THE FLAP EXTENSION DOES NOT AGREE WITH THE POSITION OF THE FLAP CONTROL LEVER, DO THE RIGGING PROCEDURE AGAIN. | If the flap extension does not conform to the setting of the flap control lever, do the rigging procedure again. |
 | conformance (n) — UNAPPROVED | AGREE (v) | THE INDICATIONS MUST AGREE WITH THOSE IN TABLE 2. | The indications must be in conformance with those in Table 2. |
@@ -255,6 +271,7 @@
 | consequence (n) — UNAPPROVED | BECAUSE OF (prep) | BECAUSE OF THIS DEFECT, THE UNIT WILL NOT OPERATE. | As a consequence of this defect, the unit will not operate. |
 
 <!-- Page 192 of 434 -->
+
 |---|---|---|---|
 | consider (v) — UNAPPROVED | THINK (v) | IF YOU THINK THAT THE INDICATION IS NOT CORRECT, DO THE TEST AGAIN. | If you consider that the indication is not correct, do the test again. |
 | considerable (adj) — UNAPPROVED | LARGE (adj) | CLEAN YOUR SKIN WITH A LARGE QUANTITY OF WATER. | Clean your skin with a considerable quantity of water. |
@@ -270,6 +287,7 @@
 | CONTACT (v), CONTACTS, CONTACTED | TOUCH (v) | TIGHTEN THE FIXTURE SCREW UNTIL IT TOUCHES THE SURFACE. | Tighten the fixture screw until it contacts the surface. |
 
 <!-- Page 193 of 434 -->
+
 |---|---|---|---|
 | CONTAIN (v), CONTAINS, CONTAINED, CONTAINED | To have in something or hold in something | EACH SURVIVAL KIT CONTAINS THESE ITEMS: |  |
 | CONTAINER (n) | Something that holds fluids, materials, or objects | PUT THE CONTAINER BELOW THE DRAIN PLUG. |  |
@@ -283,6 +301,7 @@
 | CONTINUE (v), CONTINUES, CONTINUED, CONTINUED |  |  | IF THE LOW PRESSURE CONDITION CONTINUES, REPLACE THE UNIT. |
 
 <!-- Page 194 of 434 -->
+
 |---|---|---|---|
 | CONTINUOUS (adj) | That continues | MAKE SURE THAT THERE IS CONTINUOUS MOVEMENT OF THE PROBE. |  |
 | CONTINUOUSLY (adv) | In a continuous manner | APPLY PRESSURE CONTINUOUSLY. |  |
@@ -297,6 +316,7 @@
 | COOL (adj) | Moderately cold | WHEN THE AREA IS SUFFICIENTLY COOL, POLISH THE SURFACE. |  |
 
 <!-- Page 195 of 434 -->
+
 |---|---|---|---|
 | cool (v) — UNAPPROVED | DECREASE (v) | LET THE TEMPERATURE OF THE COMPONENT DECREASE UNTIL IT IS THE SAME AS THE AMBIENT TEMPERATURE. | Let the temperature of the component cool to ambient. |
 | cool (v) — UNAPPROVED | COOL (adj) | WHEN THE BRAKES ARE COOL, OPERATE THE PARKING BRAKE | Apply the parking brake when the brakes have cooled. |
@@ -310,6 +330,7 @@
 | CORRECT (v), CORRECTS, CORRECTED, CORRECTED | To make correct | CORRECT THE TENSION. |  |
 
 <!-- Page 196 of 434 -->
+
 |---|---|---|---|
 | CORRECTION (n) | A change to make something correct | DO NOT MAKE THE CORRECTION AT THIS HEADING. |  |
 | CORRECTLY (adv) | In a correct manner | MAKE SURE THAT THE CIRCLIP IS CORRECTLY INSTALLED. |  |
@@ -323,6 +344,7 @@
 | corrosive (adj) — UNAPPROVED | CORROSION (TN) | HYDRAULIC FLUID CAN CAUSE CORROSION. | Hydraulic fluid is corrosive. |
 
 <!-- Page 197 of 434 -->
+
 |---|---|---|---|
 | COUNT (v), COUNTS, COUNTED, COUNTED | To add the number of objects or occurrences to get a total | COUNT THE NUMBER OF TREADS ON THE TIRE. |  |
 | COUNTERCLOCKWISE (adv) | In the opposite direction to clockwise | MAKE SURE THAT YOU TURN THE CONTROL KNOB COUNTERCLOCKWISE. |  |
@@ -337,6 +359,7 @@
 | create (v) — UNNAPPROVED | CAUSE (v) | VIBRATION CAN CAUSE CRACKS. | Vibration can create cracks. |
 
 <!-- Page 198 of 434 -->
+
 |---|---|---|---|
 | critical (adj) — UNNAPPROVED | VERY IMPORTANT | THE CONDITION OF THE UNIT IS VERY IMPORTANT FOR ITS PERFORMANCE. | The condition of the unit is critical to its performance. |
 | critical (adj) — UNNAPPROVED | CAREFUL (adj) | MAKE A CAREFUL ESTIMATE OF THE DAMAGED AREA. | Make a critical estimate of the damaged area. |

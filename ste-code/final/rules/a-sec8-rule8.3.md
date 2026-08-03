@@ -456,6 +456,7 @@ values.
 ```haskell
 map :: (a -> b) -> f a -> f b
 ```
+
 ```
 
 > **Non-STE:** The state monad threads an immutable state value through a sequence of computations, and StateT is the monad transformer version that lets you stack it on top of another monad so you can mix state with IO.

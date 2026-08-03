@@ -68,6 +68,7 @@ The discovery loop mirrors the batch-of-3 pattern from the granular strategy (`.
 ## Expected File Counts (from current disk state)
 
 ### ste-code/artifacts/ — 6 files expected
+
 ```
 ste-code-distilled-system-prompt.txt
 ste-code-self-reading-manual.txt
@@ -80,6 +81,7 @@ README.md
 NOTE: These 6 files are defined by the STE-Code Implementation Protocol (`.agents/references/STE-CODE-IMPLEMENTATION.md`, GATE 4). The protocol lists these as the 6 output artifacts. Do not add or remove files from this list unless the master protocol changes.
 
 ### ste-code/adapted/ — 57 files expected
+
 ```
 a-dictionary.md
 a-categories.md
@@ -96,6 +98,7 @@ a-sec9-gr1.md through a-sec9-gr4.md (4 files)
 ```
 
 ### SCE/narratives/system-prompts/ — 4 files expected
+
 ```
 ste-code-micro.md
 ste-code-full.md
@@ -104,15 +107,18 @@ ste-code-developer.md
 ```
 
 ### SCE/narratives/examples/ — 2 files expected
+
 ```
 example-readme-section.md
 example-commit-message.md
 ```
 
 ### SCE/core/rules/ — growing (1+ files expected)
+
 Currently: `README.md`. More rules added as enrichment progresses.
 
 ### ste-code/v2/narratives/system-prompts/ — 4 files expected
+
 ```
 ste-code-user.md
 ste-code-micro.md
@@ -121,21 +127,25 @@ ste-code-agentic.md
 ```
 
 ### ste-code/v2/narratives/examples/ — 2 files expected
+
 ```
 example-readme.md
 example-commit-message.md
 ```
 
 ### ste-code/v2/core/rules/ — growing (3+ files expected)
+
 Currently: `README.md`, `rule-1.1.md`, `rule-1.11.md`, `rule-1.12.md`
 
 ### SCE/compute/prompts/ — 2 files expected
+
 ```
 rule-adaptation.prompt.md
 compliance-check.prompt.md
 ```
 
 ### ste-code/v2/compute/prompts/ — 4 files expected
+
 ```
 vocabulary-review.prompt.md
 rule-adaptation.prompt.md
@@ -314,6 +324,7 @@ Targets 5 (`SCE/core/rules/`) and 8 (`ste-code/v2/core/rules/`) are marked "grow
 A placeholder file exists at `translations/<locale>/<path>/<file>` but the source file at `<path>/<file>` has been deleted or renamed.
 
 **Detection:** Run the orphan check from Agent #9 §RECOVERY PROTOCOLS:
+
 ```bash
 for placeholder in $(find translations/ -type f -size 0); do
   source_path=$(echo "$placeholder" | sed 's|translations/[^/]*/||')
@@ -399,6 +410,7 @@ A discovery target exists on disk but every file inside matches a skip pattern. 
 **Root cause:** Worker interpreted "mirror the source path" differently. Some workers may flatten the path (replace `/` with `-`). Others may nest incorrectly.
 
 **Detection:** Quality gate G3 (Path Correctness). Run the `diff` validation command:
+
 ```bash
 diff <(cd "$source_dir" && find . -type f | sort) \
      <(cd "translations/$locale/$source_dir" && find . -type f | sort)
@@ -468,9 +480,11 @@ diff <(cd "$source_dir" && find . -type f | sort) \
 2. The catalog is append-only. Accept both entries. Merge the two versions by concatenating the new entries from both sessions.
 3. Run `git add translations/catalog.md` and `git commit` with a merge message.
 4. If the conflict is complex, regenerate the catalog from disk state:
+
    ```bash
    find translations/ -type f -not -name "catalog.md" | sort > /tmp/actual-placeholders.txt
    ```
+
 5. Rebuild the catalog from the actual file list.
 6. Prevention: only one discovery orchestrator runs at a time. Check `.agents/state/TRANSLATIONS-PROGRESS.md` for active sessions before starting.
 

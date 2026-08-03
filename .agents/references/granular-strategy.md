@@ -85,10 +85,13 @@ hermes -z "Read spec/issue-09-2025/page-XXXX.md through page-YYYY.md. Extract AL
 ```
 
 ### Incremental save protocol:
+
 After each batch: `git add ste-code/extracted/ && git gcommit-hermes "Batch N: workers WX-WY (pages A-B)"`
 
 ### Merge protocol:
+
 After all workers complete, concatenate by page range:
+
 ```bash
 cat workers/w*.md > master-extraction.md
 ```

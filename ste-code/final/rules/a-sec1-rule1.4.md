@@ -206,7 +206,7 @@ Functional programming has many technical verbs that describe transformations: "
 - Use "give" instead of "return" when describing what a function produces. Approved forms: give, gives, gave, given.
 - Use "do" instead of "perform" or "execute" for function operations. Approved forms: do, does, did, done.
 - Use "change" instead of "transform" for data modifications. Approved forms: change, changes, changed, changed.
-- Technical verbs like "fold," "reduce," and "compose" follow standard English morphology. Their forms are predictable and do not violate Rule 
+- Technical verbs like "fold," "reduce," and "compose" follow standard English morphology. Their forms are predictable and do not violate Rule
 1.4.
 - The comparative form of adjectives matters for performance comparisons. Use "faster," "slower," "larger," "smaller" (all approved forms). Do not use "more performant," "more efficient" (non-approved adjectives, restructure the sentence).
 

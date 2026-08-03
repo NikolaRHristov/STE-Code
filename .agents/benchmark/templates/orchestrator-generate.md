@@ -1,6 +1,7 @@
 {{system_prompt}}
 
 ## TASK
+
 {{task_input}}
 
 IMPORTANT: Do NOT create any files. Output all code and documentation inline as text.

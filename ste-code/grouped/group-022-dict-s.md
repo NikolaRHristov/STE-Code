@@ -24,6 +24,7 @@
 | SAME (adj) | Agrees in all details | THE SAME PROCEDURE IS APPLICABLE TO THE TWO UNITS. |  |
 
 <!-- Page 359 of 434 -->
+
 |---|---|---|---|
 | SAME (pron) | Agrees in all details | THE ADJUSTMENT OF THE LEFT AND RIGHT ACTUATORS MUST BE THE SAME. |  |
 | SAMPLE (n) | A piece or quantity of something that you use for an inspection or test procedure to show that it has specified qualities | GET A SAMPLE OF THE FUEL. THEN, MEASURE ITS SPECIFIC GRAVITY. |  |
@@ -38,6 +39,7 @@
 | scrap (v) — UNNAPPROVED | DISCARD (v) | DISCARD THE REMOVED SEAL. | Scrap the removed seal. |
 
 <!-- Page 360 of 434 -->
+
 |---|---|---|---|
 | scrape (v) — UNNAPPROVED | REMOVE (v) (WITH A SCRAPER [TN]) | REMOVE THE REMAINING SEALANT WITH AN APPLICABLE SCRAPER. | Scrape off the old sealant. |
 | scratched (adj) — UNNAPPROVED | SCRATCH (TN) | REPAIR THE SURFACES THAT HAVE SCRATCHES. | Repair the scratched surfaces. |
@@ -50,6 +52,7 @@
 | SECONDARY (adj) | Second in importance | THE SECONDARY FILTER REMOVES THE REMAINING CONTAMINATION. |  |
 
 <!-- Page 361 of 434 -->
+
 |---|---|---|---|
 | secure (adj) — UNNAPPROVED | TIGHT (adj) | MAKE SURE THAT THE BOLTS ARE TIGHT. | Make sure that the bolts are secure. |
 |  | SAFE (adj) | BEFORE YOU LIFT THE PLATFORM, MAKE SURE THAT IT IS SAFE. | Make sure that the platform is secure before you lift it. |
@@ -62,6 +65,7 @@
 | security (n) — UNNAPPROVED | CORRECTLY (adv) | MAKE SURE THAT THE COMPONENTS ARE CORRECTLY ATTACHED. | Check the security of the components. |
 
 <!-- Page 362 of 434 -->
+
 |---|---|---|---|
 | SEE (v), SEES, SAW, SEEN | To know with the eyes | MAKE SURE THAT YOU CAN SEE THE CABLE THROUGH THE INSPECTION HOLE. |  |
 |  | For other meanings, use: REFER (v) | REFER TO TABLE 8001 FOR THE APPLICABLE TORQUE VALUES. | See Table 8001 for the applicable torque values. |
@@ -74,6 +78,7 @@
 |  | TURN (v) | IF THE FLAP CONTROL MOTOR CANNOT TURN, USE THE ALTERNATIVE MODE. | If the flap control motor is seized, use the alternate mode. |
 
 <!-- Page 363 of 434 -->
+
 |---|---|---|---|
 | SELECT (v), SELECTS, SELECTED, SELECTED | To make a choice | SELECT THE HYDRAULIC SYSTEM THAT YOU WILL PRESSURIZE. |  |
 |  | SELECT A LANGUAGE FROM THE MENU. |  |  |
@@ -87,6 +92,7 @@
 |  | DISCONNECT (v) | YOU CAN DISCONNECT THESE LINE FITTINGS. | These line fittings are separable. |
 
 <!-- Page 364 of 434 -->
+
 |---|---|---|---|
 | separate (adj) — UNNAPPROVED | ISOLATED (adj) | EACH HYDRAULIC SYSTEM IS FULLY ISOLATED. | All hydraulic systems are completely separate. |
 |  | DIFFERENT (adj) | PUT THE REMAINING PARTS IN A DIFFERENT CONTAINER. | Put the remaining parts in a separate container. |
@@ -101,6 +107,7 @@
 |  | DANGEROUS (adj) | HYDRAULIC FLUID IS DANGEROUS FOR YOUR EYES. | Hydraulic fluid can cause serious eye injury. |
 
 <!-- Page 365 of 434 -->
+
 |---|---|---|---|
 | serrated (adj) — UNNAPPROVED | SERRATION (n) | USE GLOVES WHEN YOU TOUCH PARTS WITH EDGE SERRATIONS. | Use gloves when handling parts with serrated edges. |
 | SERRATION (n) | One or more notches or teeth as in a saw | MAKE MARKS THAT SHOW THE LOCATION OF THE SERRATIONS. |  |
@@ -115,6 +122,7 @@
 | SET (v) |  | THE MANUFACTURER SETS THE LENGTH OF THE ROD IN THE FACTORY. | Setting of the rod length is achieved in the factory. |
 
 <!-- Page 366 of 434 -->
+
 |---|---|---|---|
 | settle (v) — UNNAPPROVED | COLLECT (v) STABLE (adj) | LET THE SEDIMENT COLLECT AT THE BOTTOM OF THE CONTAINER. LET THE INDICATIONS BECOME STABLE. | Let the sediment settle at the bottom of the container. Let the indications settle. |
 | sever (v) — UNNAPPROVED | CUT (v) | MAKE SURE THAT YOU DO NOT CUT THE CONTROL CABLE. | Make sure you do not sever the control cable. |
@@ -127,6 +135,7 @@
 | SHARP (adj) (SHARPER, SHARPEST) | That can cut or make a hole | MAKE A HOLE WITH A SHARP TOOL. |  |
 
 <!-- Page 367 of 434 -->
+
 |---|---|---|---|
 | sharply (adv) — UNNAPPROVED | QUICKLY (adv) SUDDENLY (adv) | QUICKLY PULL THE CABLES TO DISENGAGE THEM. MOVE THE CONTROL COLUMN FORWARD SUDDENLY. | Sharply pull the cables to disengage them. Move the control column forward sharply. |
 | shear (v) — UNNAPPROVED | BREAK (v) CUT (v) | TIGHTEN THE NUT. CONTINUE UNTIL THE NUT BREAKS. DO NOT CUT THE WIRES. | Tighten the nut until it shears. Do not shear the wires. |
@@ -138,6 +147,7 @@
 | SHORT (adj) (SHORTER, (SHORTEST) | That has small length or duration If it is possible, be accurate. | ATTACH THE SHORT ARM OF THE BELLCRANK TO THE ROD. AFTER YOU STOP THE POWER SUPPLY, THE TEMPERATURE DECREASES IN A SHORT TIME. THIS TIME MUST NOT BE MORE THAN 30 SECONDS. |  |
 
 <!-- Page 368 of 434 -->
+
 |---|---|---|---|
 | shorten (v) — UNNAPPROVED | DECREASE (v) | DO NOT DECREASE THE STERILIZATION TIME. | Do not shorten the sterilization time. |
 | should (v) — UNNAPPROVED | MUST (v) IF (conj) | PERSONNEL MUST USE PROTECTIVE CLOTHING. IF A SYSTEM FAILURE OCCURS, STOP OPERATION IMMEDIATELY. | Personnel should wear protective clothing. Should a system failure occur, stop operation immediately. |
@@ -152,6 +162,7 @@
 | silence (v) — UNNAPPROVED | STOP (v) | STOP THE ALARM BELL. | Silence the alarm bell. |
 
 <!-- Page 369 of 434 -->
+
 |---|---|---|---|
 | similar (adj) — UNNAPPROVED | EQUIVALENT (adj) ALMOST THE SAME | USE THE SPECIFIED MATERIAL OR AN EQUIVALENT ONE. THE TWO ITEMS HAVE ALMOST THE SAME SHAPE. | Use the specified material or a similar one. The two items are similar in shape. |
 | SIMULATE (v), SIMULATES, SIMULATED, SIMULATED | To make a condition that is the same as one that can occur in operation | SIMULATE A WHEEL SPEED OF 80 KNOTS. |  |
@@ -162,6 +173,7 @@
 | situation (n) — UNNAPPROVED | CONDITION (n) Use the plural form. | THE ALGORITHM ADAPTS TO THE NEW CONDITIONS. | The algorithm adapts to the new situation. |
 
 <!-- Page 370 of 434 -->
+
 |---|---|---|---|
 | size (n) — UNNAPPROVED | DIMENSION (n) | THESE PARTS HAVE DIFFERENT DIMENSIONS. | These parts are of different sizes. |
 | skid (v) — UNNAPPROVED | SKID (TN) | THIS INDICATOR SHOWS THAT THE CAR IS IN A SKID. | This indicator indicates that the car is skidding. |
@@ -175,6 +187,7 @@
 | slightly (adv) — UNNAPPROVED | SMALL (adj) | MOVE THE ADAPTER A SMALL DISTANCE FORWARD. | Move the adapter slightly forward. |
 
 <!-- Page 371 of 434 -->
+
 |---|---|---|---|
 | slip (v) — UNNAPPROVED | MOVE (v) REMOVE (v) CAUSE TO FALL MOVE ACCIDENTALLY | MOVE THE CARRIAGE ALONG THE TRACK. REMOVE THE CLAMP FROM THE CABLE. IF OIL SPILLS, CLEAN THE AREA IMMEDIATELY. A WET SURFACE IS DANGEROUS AND CAN CAUSE YOU TO fall. MAKE SURE THAT THE CLUTCH DOES NOT MOVE ACCIDENTALLY. | Slip the carriage along the track. Slip the clamp from the cable. If oil spills, clean the area immediately. You can slip and fall. Make sure that the clutch does not slip. |
 | SLOPE (n) | A surface that is not level | IF THE VEHICLE IS PARKED ON A SLOPE, MAKE SURE THAT WHEEL CHOCKS ARE IN POSITION. |  |
@@ -185,6 +198,7 @@
 | sluggish (adj) — UNNAPPROVED | SLOW (adj) | IF THE MOVEMENT OF THE NEEDLE IS TOO SLOW, REPLACE THE SENSOR. | If the movement of the needle is sluggish, replace the sensor. |
 
 <!-- Page 372 of 434 -->
+
 |---|---|---|---|
 | SMALL (adj) (SMALLER, SMALLEST) | Less than average in dimension, quantity, quality, or capacity | IF THE TEMPERATURE INCREASES SUDDENLY, ADD A SMALL QUANTITY OF REAGENT TO GET A STABLE REACTION. |  |
 | smear (v) — UNNAPPROVED | APPLY (v) | APPLY GREASE TO THE TAPER SLEEVE. | Smear grease on the taper sleeve. |
@@ -198,6 +212,7 @@
 | snap (n) — UNNAPPROVED | CLICK (n) | WHEN YOU ATTACH THE SPRING CLIP, MAKE SURE THAT YOU HEAR A CLICK. | Ensure that there is a snap when you fit the spring clip. |
 
 <!-- Page 373 of 434 -->
+
 |---|---|---|---|
 | snap (v) — UNNAPPROVED | MOVE QUICKLY BREAK (v) | THE RETAINING CLIP MUST MOVE QUICKLY INTO ITS POSITION. IF YOU BEND THIS PART TOO MUCH, IT WILL BREAK. | The retaining clip must snap into its position. If you bend this part too much, it will snap. |
 | so (that) (conj) | UNTIL (prep) PREVENT (v) | ADJUST THE LENGTH OF THE ROD UNTIL YOU GET A MINIMUM CLEARANCE OF 0.1 in. LOCK THE WHEEL TO PREVENT MOVEMENT. | Adjust the length of rod so that a minimum gap of 0.1 in. is obtained. Lock the wheel so that it does not move. |
@@ -211,6 +226,7 @@
 | solidify (v) — UNNAPPROVED | SOLID (adj) | DO NOT LET THE FOAM BECOME SOLID. | Do not allow the foam to solidify. |
 
 <!-- Page 374 of 434 -->
+
 |---|---|---|---|
 | SOLUTION (n) | 1. A liquid that includes a dissolved material 2. The answer to a problem | PREPARE THE SOLUTION IN A CONTAINER MADE OF CERAMIC MATERIAL. The team's work was important for the solution of the technical problem. |  |
 | solve (v) — UNNAPPROVED | SOLUTION (n) | IF THE REMOVAL OF THE VALVE WAS NOT THE SOLUTION TO THE PROBLEM, REPLACE THE UNIT. | If the removal of the valve did not solve the problem, replace the unit. |
@@ -222,6 +238,7 @@
 | sound (v) — UNNAPPROVED | OPERATE (v) | THE ALARM BELL OPERATES. | The alarm bell sounds. |
 
 <!-- Page 375 of 434 -->
+
 |---|---|---|---|
 | SOURCE (n) | 1. Something that supplies energy or data 2. The point where something starts | THE SOLAR PANEL IS A SATISFACTORY SOURCE OF ENERGY. FIND THE SOURCE OF THE LEAKAGE. |  |
 | SPACE (n) | A distance, area, or volume | PUT THE SEALANT INTO THE SPACE BEHIND THE FLANGE OF THE WATER INJECTOR. |  |
@@ -235,6 +252,7 @@
 | SPECIAL (adj) | For a specified function | TIGHTEN THE SPECIAL NUT. |  |
 
 <!-- Page 376 of 434 -->
+
 |---|---|---|---|
 | SPECIALLY (adv) | In a special manner | THIS EXTRACTOR IS SPECIALLY MADE TO REMOVE THESE PINS. |  |
 | specific (adj) — UNNAPPROVED | APPROVED (adj) SPECIFIED (adj) | USE APPROVED TOOLS TO PREVENT POSSIBLE DAMAGE. THESE AREAS HAVE SPECIFIED DAMAGE LIMITS. | Use specific tools to preclude the possibility of damage. These areas have specific damage limits. |
@@ -247,6 +265,7 @@
 | SPILL (v), SPILLS, SPILLED, SPILLED | To accidentally flow, or cause to flow, out of a container | IF THE ELECTROLYTE SPILLS, REMOVE IT IMMEDIATELY. IF YOU SPILL THE ELECTROLYTE, REMOVE IT IMMEDIATELY. |  |
 
 <!-- Page 377 of 434 -->
+
 |---|---|---|---|
 | spillage (n) — UNNAPPROVED | CONTAMINATION (n) | FIND THE AREA OF MERCURY CONTAMINATION. | Find the area of the mercury spillage. |
 |  | SPILL (v) | IF ACID SPILLS, CLEAN THE AREA. | After acid spillage, clean the area. |
@@ -262,6 +281,7 @@
 | SPRAY (n) | A jet of very small drops of liquid | THE SEALANT IS RESISTANT TO SALT SPRAY. |  |
 
 <!-- Page 378 of 434 -->
+
 |---|---|---|---|
 | SPRAY (v) SPRAYS, SPRAYED, SPRAYED | To apply as a spray | DO NOT SPRAY DISINFECTANTS DIRECTLY ONTO THE CARPETS OR INSTRUMENT PANELS. |  |
 | spread (v) — UNNAPPROVED | APPLY (v) | APPLY THE COMPOUND EQUALLY. | Spread compound evenly. |
@@ -276,6 +296,7 @@
 |  | STAIN (TN) | IF THERE ARE HYDRAULIC FLUID STAINS ON THE COVER, EXAMINE THE LINE COUPLINGS. | If the cover is stained by hydraulic fluid, check line couplings. |
 
 <!-- Page 379 of 434 -->
+
 |---|---|---|---|
 | stamp (v) — UNNAPPROVED | PUT (v) (WITH A STAMP [TN] OR STAMPS [TN]) | PUT THE TEST DATE ON THE CYLINDER NECK WITH THE APPLICABLE STAMP. | Stamp the test date on the cylinder neck. |
 |  | IDENTIFY (v) (WITH A STAMP [TN] OR STAMPS [TN]) | IDENTIFY THE MANUFACTURING DATE ON THE NAMEPLATE WITH THE APPLICABLE STAMP. | Stamp the manufacturing date on the nameplate. |
@@ -290,6 +311,7 @@
 | station (v) — UNNAPPROVED | PUT (v) | PUT A PERSON NEAR THE FUEL TANK. | Station a person near the fuel tank. |
 
 <!-- Page 380 of 434 -->
+
 |---|---|---|---|
 | stationary (adj) — UNNAPPROVED | STABLE (adj) | WHEN THE PRESSURE IS STABLE, CLOSE THE VALVE. | When the pressure is stationary, close the valve. |
 |  | STOP (v) | WHEN THE FAN STOPS, MEASURE THE TEMPERATURE. | When the fan is stationary, measure the temperature. |
@@ -305,6 +327,7 @@
 | stiff (adj) — UNNAPPROVED | MOVE (v) | IF THE PISTON DOES NOT MOVE EASILY IN THE SLEEVE, DO A DIMENSIONAL INSPECTION OF THE BE PARTS. | If the piston is stiff, check the dimensions of the piston and sleeve. |
 
 <!-- Page 381 of 434 -->
+
 |---|---|---|---|
 | still (adv) — UNNAPPROVED | STAY (v) CONTINUE (v) | MAKE SURE THAT THE “OVHT” LIGHT STAYS ON. MAKE SURE THAT THE ROTOR CONTINUES TO TURN. | Make sure that the “OVHT” light is still illuminated. Make sure that the rotor still turns. |
 | stimulate (v) — UNNAPPROVED | INCREASE (v) | INCREASE THE AIRFLOW. | Stimulate the airflow. |
@@ -314,6 +337,7 @@
 | STOW (v), STOWS, STOWED, STOWED | To move or cause to move into a specified position of storage. | STOW THE LIFE VEST SAFELY BELOW THE PASSENGER SEAT. MAKE SURE THAT THE THRUST REVERSER STOWS WHEN YOU PUSH THE QUADRANT CONTROL FORWARD. |  |
 
 <!-- Page 382 of 434 -->
+
 |---|---|---|---|
 | STRAIGHT (adj) (STRAIGHTER, (STRAIGHTEST) | Without curves or bends | MAKE SURE THAT THE STRAIGHT PART OF THE RIGGING PIN IS SMOOTH. |  |
 | straighten (v) — UNNAPPROVED | STRAIGHT (adj) | DO NOT TRY TO MAKE THE BENDS IN THE CABLE STRAIGHT. | Do not try to straighten the bends in the cable. |
@@ -329,6 +353,7 @@
 | stroke (n) — UNNAPPROVED | TRAVEL (n) | TO BLEED THE BRAKING SYSTEM, OPERATE THE HAND PUMP HANDLE THROUGH ITS FULL TRAVEL. | Bleed the braking system by applying full strokes to the hand pump handle. |
 
 <!-- Page 383 of 434 -->
+
 |---|---|---|---|
 | STRONG (adj) (STRONGER, (STRONGEST) | With much strength, power, or concentration | WHEN WINDS ARE STRONG, MOOR THE AIRCRAFT CAREFULLY. |  |
 | STRUCTURAL (adj) | Related to the structure | THE CHASSIS IS A STRUCTURAL COMPONENT OF THE VEHICLE. |  |
@@ -340,6 +365,7 @@
 | SUBSEQUENT (adj) | Following in an unspecified time or sequence Use NEXT (adj) for the first occurrence that follows immediately in time or sequence. | A SUBSEQUENT REPAIR WILL BE FOR THE NEW CONFIGURATION ONLY. DO THE NEXT INSPECTION. | Do the immediately subsequent inspection. |
 
 <!-- Page 384 of 434 -->
+
 |---|---|---|---|
 | SUBSEQUENTLY (adv) | After an unspecified time Use THEN (adv) for an occurrence that follows immediately in time or sequence. | MAKE SURE THAT THE TOOL IS SUBSEQUENTLY AVAILABLE FOR THE INSTALLATION PROCEDURE. LIFT THE COVER. THEN, PULL THE HANDLE. | Lift the cover and subsequently pull the handle. |
 | subsequent to (prep) | AFTER (conj) | AFTER YOU INSTALL THE COMPONENT, REMOVE THE HANDLING TOOL. | Remove the handling tool subsequent to the installation of the component. |
@@ -350,6 +376,7 @@
 | SUBTRACT (v), SUBTRACTS, SUBTRACTED, SUBTRACTED | To take from a number or quantity | SUBTRACT COEFFICIENT "A" FROM THE INDICATION. |  |
 
 <!-- Page 385 of 434 -->
+
 |---|---|---|---|
 | successful (adj) — UNNAPPROVED | CORRECT (adj) SATISFACTORY (adj) | IF THE TEST RESULTS ARE NOT CORRECT, REPLACE THE UNIT. IF THE TEST RESULTS ARE NOT SATISFACTORY, REPLACE THE UNIT. | If the test is not successful, replace the unit. If the test is not successful, replace the unit. |
 | SUCH (adj) | Of the same group | WHEN YOU DO WORK ON SUCH SYSTEMS, USE GOGGLES. |  |
@@ -362,6 +389,7 @@
 | suitable (adj) — UNNAPPROVED | APPLICABLE (adj) CORRECT (adj) | PUT AN APPLICABLE SCREWDRIVER IN THE SLOT. PUT THE CORRECT PLUGS ON THE DISCONNECTED LINES. | Put a suitable screwdriver in the slot. Put suitable plugs on the disconnected lines. |
 
 <!-- Page 386 of 434 -->
+
 |---|---|---|---|
 | suitably (adv) — UNNAPPROVED | SUFFICIENTLY (adv) | WHEN THE PAINT IS SUFFICIENTLY SOFT, REMOVE IT WITH A PLASTIC SPATULA. | When the paint is suitably soft, remove it with a plastic spatula. |
 | SUM (n) | The result when you add | CALCULATE THE SUM OF THE LOADS FOR EACH AREA. |  |
@@ -373,6 +401,7 @@
 | SURFACE (n) | One or more of the faces of something | CLEAN THE SURFACE WITH A SOFT, DRY CLOTH. |  |
 
 <!-- Page 387 of 434 -->
+
 |---|---|---|---|
 | surplus (adj) — UNNAPPROVED | UNWANTED (adj) | REMOVE THE UNWANTED GREASE. | Wipe off surplus grease. |
 | surrounding (adj) — UNNAPPROVED | ADJACENT (adj) AROUND (prep) | CLEAN THE MOUNTING AND THE ADJACENT AREA. REMOVE ALL SEALANT THAT IS AROUND THE HOLE. | Clean the mounting and the surrounding area. Remove all sealant surrounding the hole. |
@@ -385,6 +414,7 @@
 | sweep (v) — UNNAPPROVED | SCAN (TN) | MAKE A SCAN OF THE FREQUENCY BAND. | Sweep the frequency band. |
 
 <!-- Page 388 of 434 -->
+
 |---|---|---|---|
 | swing (v) — UNNAPPROVED | MOVE (v) CALIBRATE (v) | MOVE THE SHOCK ABSORBERS INTO THEIR CORRECT POSITIONS. YOU CAN CALIBRATE ALL THE COMPASS SYSTEMS AT THE SAME TIME. | Swing the shock absorbers into their correct positions. All compass systems may be swung simultaneously. |
 | switch (v) — UNNAPPROVED | SET (v) | SET THE SELECTOR TO "SYSTEM DISPLAY." | Switch the selector to "SYSTEM DISPLAY." |
@@ -397,6 +427,7 @@
 | synchronize (v) — UNNAPPROVED | ADJUST (v) | ADJUST COMPASS SYSTEM 1 UNTIL IT AGREES WITH COMPASS SYSTEM 2. | Synchronize compass system 1 with compass system 2. |
 
 <!-- Page 389 of 434 -->
+
 |---|---|---|---|
 | SYNCHRONIZED (adj) | 1. That operates at the same time 2. That agrees with | MAKE SURE THAT THE TWO ROTORS ARE SYNCHRONIZED. MAKE SURE THAT THE TIMER IS SYNCHRONIZED WITH THE GPS CLOCK. |  |
 | SYSTEM (n) | An assembly of related parts to do a specified operation | DO NOT FILL THE SYSTEM DIRECTLY FROM A HIGH-PRESSURE CYLINDER. |  |

@@ -453,9 +453,11 @@ Code documentation sometimes contains quoted text inside quoted text — for exa
 A documentation sentence such as "Run `curl -H "Authorization: Bearer $TOKEN" https://api.example.com/v2/status` to check the service" has the entire backtick-quoted command as one word, even though the command itself contains double quotes.
 
 When you write markdown documentation that shows how to use markdown code fences — a meta-documentation scenario — use four-backtick fences to escape three-backtick fences:
+
 ````
 The README must include a ```` ```bash ```` code fence example.
 ````
+
 In the outer sentence, the inner ```` ```bash ```` counts as quoted text (1 word).
 
 ### Edge Case 5: Semantic Version Strings and Complex Identifiers

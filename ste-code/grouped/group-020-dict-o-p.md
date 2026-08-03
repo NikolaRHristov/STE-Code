@@ -29,6 +29,7 @@
 | obtain (v) — UNNAPPROVED | GET (v) | ADD 0.05 mm TO GET THE CORRECT CLEARANCE FOR A STANDARD SPHERICAL COUPLING. | Add 0.05 mm to obtain the correct clearance for a standard spherical coupling. |
 
 <!-- Page 311 of 434 -->
+
 |---|---|---|---|
 | OCCUR (v), OCCURS OCCURRED | To be found or to take place, to come to be | A SUDDEN MOVEMENT OF THE CONTROL SURFACES CAN OCCUR. |  |
 |  |  | IF THE SYMPTOMS OCCUR AGAIN, DO A SYSTEM TEST. |  |
@@ -46,6 +47,7 @@
 |  | EXPIRED (adj) | MAKE SURE THAT THE SHELF LIFE OF THE MATERIAL IS NOT EXPIRED. | Make sure that the material is not too old. |
 
 <!-- Page 312 of 434 -->
+
 |---|---|---|---|
 | omit (v) — UNNAPPROVED | DO NOT DO | DO NOT DO STEPS 3 THRU 5. | Omit steps 3 to 5. |
 |  | IGNORE (v) | IGNORE STEPS 3 THRU 5. | Omit steps 3 to 5. |
@@ -63,6 +65,7 @@
 | OPEN (adj) | That lets something go in or out | PUT A PLUG ON THE OPEN END OF EACH PIPE. |  |
 
 <!-- Page 313 of 434 -->
+
 |---|---|---|---|
 | OPEN (v), OPENS, OPENED, OPENED | 1. To move or cause to move from the closed position 2. To operate a circuit breaker to interrupt an electrical circuit | OPEN THE PRESSURE VALVE. WHEN THE RELIEF VALVE OPENS, THE PRESSURE DECREASES. OPEN THE CIRCUIT BREAKER. |  |
 | OPENING (n) | An aperture or hole in a surface | MAKE SURE THAT THE OPENING IS CLEAR. |  |
@@ -73,6 +76,7 @@
 | opportunity (n) — UNNAPPROVED | If it is possible, be accurate. | REPLACE THE UNIT AT THE NEXT CHECK. | Replace the unit at the first opportunity. |
 
 <!-- Page 314 of 434 -->
+
 |---|---|---|---|
 | OPEN (v), OPENS, OPENED, OPENED | 1. To move or cause to move from the closed position 2. To operate a circuit breaker to interrupt an electrical circuit | OPEN THE PRESSURE VALVE. WHEN THE RELIEF VALVE OPENS, THE PRESSURE DECREASES. OPEN THE CIRCUIT BREAKER. |  |
 | OPENING (n) | An aperture or hole in a surface | MAKE SURE THAT THE OPENING IS CLEAR. |  |
@@ -83,6 +87,7 @@
 | opportunity (n) — UNNAPPROVED | If it is possible, be accurate. | REPLACE THE UNIT AT THE NEXT CHECK. | Replace the unit at the first opportunity. |
 
 <!-- Page 315 of 434 -->
+
 |---|---|---|---|
 | orient (v) — UNNAPPROVED | POINT (v) | MAKE SURE THAT THE BOLT HEADS POINT TO THE REAR. | The bolt heads must be oriented toward the rear. |
 | origin (n) — UNNAPPROVED | SOURCE (n) | THE SOURCE OF THE PROBLEM IS IN THE FUEL SYSTEM. | The origin of the problem is in the fuel system. |
@@ -96,6 +101,7 @@
 | OUT OF (prep) | 1. Through or from the inside to the outside 2. Not in | TILT THE FITTING TO MAKE THE BARREL NUT FALL OUT OF IT. KEEP THE COMPOUND OUT OF THE SUNLIGHT. |  |
 
 <!-- Page 316 of 434 -->
+
 |---|---|---|---|
 | OUTBOARD (adj) | Farther from the longitudinal axis of something | MEASURE THE MOVEMENT OF THE INBOARD AND OUTBOARD FLAPS. |  |
 | OUTBOARD (adv) | In, or to, a position farther from the longitudinal axis of something | MOVE THE JACK OUTBOARD TO DISENGAGE IT FROM THE JACKING POINT. |  |
@@ -108,6 +114,7 @@
 | outside (adj) — UNNAPPROVED | OUTER (adj) | CLEAN THE OUTER SURFACE WITH WARM WATER. | Clean the outside surface with warm water. |
 
 <!-- Page 317 of 434 -->
+
 |---|---|---|---|
 | outside (adv) — UNNAPPROVED | OUTDOORS (adv) | DO THIS PROCEDURE OUTDOORS. | Do this procedure outside. |
 | outside (n) — UNNAPPROVED | EXTERNAL (adj) OUTER (adj) | FOLD THE EDGING AGAINST THE EXTERNAL SIDE OF THE INSULATION BLANKET. FOLD THE EDGING AGAINST THE OUTER SIDE OF THE INSULATION BLANKET. | Fold the edging against the outside of the insulation blankets. Fold the edging against the outside of the insulation blankets. |
@@ -116,6 +123,7 @@
 | over (prep) — UNNAPPROVED | ABOVE (prep) ALONG (prep) ON (prep) MORE THAN For movement above land or water, use a technical noun. | MAKE SURE THAT THE HYDRAULIC FLUID LEVEL IS NOT ABOVE THE "FULL" MARK. APPLY THE WEIGHT EQUALLY ALONG THE STABILIZER SPAN. INSTALL THE STOP SLEEVE ON THE SLIDING MEMBER. DO NOT INSTALL SHIMS WITH A THICKNESS OF MORE THAN 0.1 mm. BEFORE OVER- WATER OPER_A_TION AT LOW ALTITUDES, APPLY CORROSION- PREVENTIVE FLUID TO THE DOOR HINGES OF THE LANDING GEAR. | Make sure the hydraulic fluid level is not over the FULL mark. The weight must be evenly spread over the stabilizer span. Install the stop sleeve over the sliding member. Do not install shims over 0.1 mm thick. |
 
 <!-- Page 318 of 434 -->
+
 |---|---|---|---|
 | OVERBOARD (adv) | Out of a vessel | RELEASE THE AIR OVERBOARD. |  |
 | overfill (v) — UNNAPPROVED | TOO MUCH | DO NOT PUT TOO MUCH FLUID IN THE LUBRICATION HOLE. | Do not overfill the lubrication hole. |
@@ -131,6 +139,7 @@
 Blank Page
 
 <!-- Page 320 of 434 -->
+
 |---|---|---|---|
 | pack (v) — UNNAPPROVED | PUT (v) FILL (v) | PUT THE ASSEMBLY INTO THE BOX. FILL THE GROOVE WITH GREASE. | Pack the assembly into the box. Pack grease into the groove. |
 | PAINT (v), PAINTS, PAINTED, PAINTED | To apply paint to something | PAINT ALL THE SURFACES. |  |
@@ -144,6 +153,7 @@ Blank Page
 | PARTICLE (n) | A very small piece of material | IF THERE ARE METAL PARTICLES IN THE DISASSEMBLED PUMP, FIND THE SOURCE OF CONTAMINATION. |  |
 
 <!-- Page 321 of 434 -->
+
 |---|---|---|---|
 | particular (adj) — UNNAPPROVED | ONLY APPLICABLE VERY (adv) | THIS PROCEDURE IS ONLY APPLICABLE TO TYPE A PARTS. THIS STEP IS VERY IMPORTANT. | This procedure is particular to type A parts. This step is of particular importance. |
 | particularly (adv) — UNNAPPROVED | VERY (adv) | THIS PRECAUTION IS VERY IMPORTANT. | This precaution is particularly important. |
@@ -154,6 +164,7 @@ Blank Page
 | PASTE (n) | A wet, flexible mixture or compound | MIX THE MATERIALS UNTIL THEY MAKE A SOLID PASTE. |  |
 
 <!-- Page 322 of 434 -->
+
 |---|---|---|---|
 | PATCH (n) | A piece of material that you use to repair a surface or hole | BOND THE PATCH TO THE TUBE WITH ADHESIVE. |  |
 | penetrate (v) — UNNAPPROVED | GO THROUGH GO INTO | IF THE SCRATCH DOES NOT GO THROUGH THE PROTECTIVE LAYER, THE UNIT IS SERVICEABLE. MAKE SURE THAT THE HYDRAULIC FLUID DOES NOT GO INTO THE RECEPTACLES. | If the scratch does not penetrate the protective layer, the unit is serviceable. Make sure that the hydraulic fluid does not penetrate the receptacles. |
@@ -163,6 +174,7 @@ Blank Page
 | perform (v) — UNNAPPROVED | DO (v) You can use a more accurate verb. MEASURE (v) | DO THE LEAK TEST. MEASURE THE VOLTAGE BETWEEN PINS A AND B. | Perform the leak test. Perform the voltage measurement between pins A and B. |
 
 <!-- Page 323 of 434 -->
+
 |---|---|---|---|
 | PERFORMANCE (n) | The ability of a part, a mechanism, or system to do its necessary function when you compare it with a standard or specification For other meanings, use: DO (v) | THESE ADJUSTMENTS WILL INCREASE THE PERFORMANCE OF THE ENGINE. DO THE TEST. THEN, GO TO PARAGRAPH C. | After performance of the test, go to paragraph C. |
 | PERIOD (n) | A quantity of time | THE EMERGENCY LOCATOR TRANSMITTER HAS A STANDBY PERIOD OF 30 SECONDS. |  |
@@ -175,6 +187,7 @@ Blank Page
 | PERPENDICULAR (adj) | At a 90 degree angle to a given line or plane | MAKE SURE THAT THE TOOL AND FASTENER ARE PERPENDICULAR TO THE WORK SURFACE. |  |
 
 <!-- Page 324 of 434 -->
+
 |---|---|---|---|
 | persist (v) — UNNAPPROVED | CONTINUE (v) | IF THE FAULT MESSAGE CONTINUES, PUSH THE AUDIO CANCEL SWITCH ON THE TEST PANEL. | If the fault message persists, push the AUDIO CANCEL switch on the test panel. |
 | persistent (adj) — UNNAPPROVED | CONTINUOUS (adj) | IF YOU HEAR CONTINUOUS BACKGROUND NOISE, FIND THE CAUSE. | If you hear persistent background noise, find the cause. |
@@ -188,6 +201,7 @@ Blank Page
 | place (n) — UNNAPPROVED | POSITION (n) AREA (n) | MAKE SURE THAT ALL COVERS ARE IN THEIR POSITION. REPAIR THE BR>DAMAGED AREAS. | Ensure that covers are in place. Repair the damaged places. |
 
 <!-- Page 325 of 434 -->
+
 |---|---|---|---|
 | place (v) — UNNAPPROVED | PUT (v) | PUT THE MANIFOLD IN POSITION. | Place the manifold in position. |
 | PLAY (n) | Free movement, the length or dimension of this movement | THE AXIAL PLAY BETWEEN THE TWO GEARS MUST BE LESS THAN 0.05 mm. |  |
@@ -200,6 +214,7 @@ Blank Page
 | POINT (v), POINTS, POINTED, POINTED | 1. To show the position or direction of 2. To turn something in a specified direction | MAKE SURE THAT THE ARROW ON THE CHECK VALVE POINTS AWAY FROM THE GROUND SUPPLY DUCT. DO NOT POINT THE COMPRESSED AIR NOZZLE AT YOUR SKIN. |  |
 
 <!-- Page 326 of 434 -->
+
 |---|---|---|---|
 | POISONOUS (adj) | That contains poison | DO NOT SWALLOW LUBRICATING OIL. IT IS POISONOUS. |  |
 | POLISH (v), POLISHES, POLISHED, POLISHED | To make smooth or shiny | POLISH THE WINDOW PANE WITH A SOFT CLOTH. |  |
@@ -209,6 +224,7 @@ Blank Page
 | portion (n) — UNNAPPROVED | PIECE (n) PART (n) | REMOVE ALL THE PIECES OF THE DAMAGED INSULATION. ISOLATE THE DEFECTIVE PART OF THE CIRCUIT. | Remove all portions of the damaged insulation. Isolate the defective portion of the circuit. |
 
 <!-- Page 327 of 434 -->
+
 |---|---|---|---|
 | POSITION (n) | The attitude or setting of something that you can adjust, or the place or site where you put something | SET THE SWITCH TO THE CORRECT POSITION. ON THE CENTER PEDESTAL, MAKE SURE THAT THE WARNING NOTICES ARE IN POSITION. |  |
 | position (v) — UNNAPPROVED | PUT (v) SET (v) | PUT THE BRACKET ON THE FRAME. SET THE SWITCH TO "ON." | Position the bracket on the frame. Position the switch to ON. |
@@ -222,6 +238,7 @@ Blank Page
 | precede (v) — UNNAPPROVED | BEFORE (conj) | BEFORE YOU APPLY THE TAPE, CLEAN THE SURFACE. | Application of the tape must be preceded by cleaning of the surface. |
 
 <!-- Page 328 of 434 -->
+
 |---|---|---|---|
 | precise (adj) — UNNAPPROVED | ACCURATE (adj) | THE GYRO ADJUSTMENT MUST BE ACCURATE. | The gyro requires precise adjustment. |
 | precisely (adv) — UNNAPPROVED | ACCURATELY (adv) | ADJUST THE ANGLE OF THE CAMERA ACCURATELY. | The angle of the camera must be adjusted precisely. |
@@ -235,6 +252,7 @@ Blank Page
 | preparation (n) — UNNAPPROVED | PREPARE (v) | PREPARE THE MIXTURE 20 MINUTES BEFORE YOU USE IT. | Mixture preparation must be accomplished 20 minutes before use. |
 
 <!-- Page 329 of 434 -->
+
 |---|---|---|---|
 | PREPARE (v), PREPARES, PREPARED, PREPARED | To make or become ready | PREPARE THE TUBE FOR THE LEAK TEST. PREPARE FOR THE ELECTRICAL BONDING PROCEDURE. |  |
 | prescribed (adj) — UNNAPPROVED | SPECIFIED (adj) | FILL THE CONTAINER WITH THE SPECIFIED COOLANT FLUID. | Fill the container with the prescribed coolant fluid. |
@@ -248,6 +266,7 @@ Blank Page
 | PRESSURIZE (v), PRESSURIZES, PRESSURIZED, PRESSURIZED | To supply pressure | PRESSURIZE THE CHAMBER TO 150 psi. |  |
 
 <!-- Page 330 of 434 -->
+
 |---|---|---|---|
 | PREVENT (v), PREVENTS, PREVENTED, PREVENTED | To make sure that something does not occur | TO PREVENT DAMAGE TO THE ENGINE, IMMEDIATELY INSTALL PROTECTIVE COVERS ON ALL OPENINGS. |  |
 | prevent (from) (v) | LET (v) | DO NOT LET THE DOOR OPEN. | Prevent the door from opening. |
@@ -259,6 +278,7 @@ Blank Page
 | prime (v) — UNNAPPROVED | FILL (v) PUT (v) | FILL THE FILLER HOSE WITH WATER. PUT FUEL IN THE FUEL PUMP. | Prime the filler hose with water. Prime the fuel pump. |
 
 <!-- Page 331 of 434 -->
+
 |---|---|---|---|
 | principal (adj) — UNNAPPROVED | PRIMARY (adj) | THE PRIMARY FUNCTION OF THE SYSTEM IS TO SUPPLY ELECTRICAL POWER TO THE CONTROL PANEL. | The principal function of the system is to supply electrical power to the control panel . |
 | prior to (prep) — UNNAPPROVED | BEFORE (conj) | BEFORE YOU DISCONNECT THE HOSES, DRAIN THE SYSTEM. | Drain the system prior to disconnecting the hoses. |
@@ -269,6 +289,7 @@ Blank Page
 | PROBLEM (n) | Something that is difficult and for which you must find the correct answer | IF YOU FIND A PROBLEM DURING THE TEST, REFER TO THE FAULT ISOLATION TABLE. |  |
 
 <!-- Page 332 of 434 -->
+
 |---|---|---|---|
 | PROCEDURE (n) | Steps that are in a sequence | THIS SECTION GIVES THE PROCEDURE TO DISASSEMBLE THE COMPONENT FULLY. |  |
 | proceed (v) — UNNAPPROVED | CONTINUE (v) | CONTINUE WITH THE ELECTRICAL TEST. | Proceed with the electrical test. |
@@ -278,6 +299,7 @@ Blank Page
 | produce (v) — UNNAPPROVED | CAUSE (v) GIVE (v) MAKE (v) SUPPLY (v) | ELECTRICAL EQUIPMENT CAN CAUSE INTERFERENCE IN COMMUNICATION. A DILUTED SOLUTION WILL NOT GIVE YOU THE CORRECT RESULTS. WHEN THE LEVER ENGAGES, IT MAKES A CLICK THE POWER UNIT SUPPLIES THE SYSTEM WITH A VOLTAGE OF 28 V DC. | Electrical equipment can produce interference in communication. A diluted solution does not produce the correct results. The lever produces a click when engaged. The power unit produces a voltage of 28 V DC. |
 
 <!-- Page 333 of 434 -->
+
 |---|---|---|---|
 | product (n) — UNNAPPROVED | Be accurate. If it is possible, use the name of the product. | WHEN YOU CLEAN THIS UNIT, USE THE CORRECT SOLVENT. TRICHLOROETHANE IS A DANGEROUS MATERIAL. | When you clean this unit, use the correct product. This product is dangerous. |
 | profile (n) — UNNAPPROVED | CONTOUR (n) | MAKE SURE THAT THE CONTOUR OF THE TEMPLATE IS THE SAME. | Make sure that the profile of the template is the same. |
@@ -291,6 +313,7 @@ Blank Page
 | prompt (adj) — UNNAPPROVED | IMMEDIATELY (adv) | IF YOU SWALLOW SOLVENT, DO NOT CAUSE VOMITING. GET MEDICAL AID IMMEDIATELY. | Prompt action is required if you swallow solvent. |
 
 <!-- Page 334 of 434 -->
+
 |---|---|---|---|
 | propagation (n) — UNNAPPROVED | INCREASE (v) If it is possible, give the dimensions or limits. | IF THE DIMENSION OF A CRACK INCREASES, THE PART CAN BREAK. IF THE DEPTH OF A CRACK IS MORE THAN 0.2 mm, REJECT THE PART. IF A CRACK IS LARGER THAN 0.2 mm, REJECT THE PART. | Crack propagation can cause the part to break. Crack propagation can cause the rejection of the part. Crack propagation can cause the rejection of the part. |
 | proper (adj) — UNNAPPROVED | CORRECT (adj) | DO A CHECK FOR THE CORRECT OPERATION OF THE UNIT. | Check the unit for proper operation. |
@@ -300,6 +323,7 @@ Blank Page
 | proportional (adj) — UNNAPPROVED | RELATION (n) PROPORTION (n) | THE CENTER OF GRAVITY MOVES IN RELATION TO THE LOADS ON THE WINGS. MIX THE PIGMENT AND SOLVENT IN THE CORRECT PROPORTIONS. | Movement of the center of gravity is proportional to the loads on the wings. Mix the correct quantity of pigment proportional to the quantity of solvent. |
 
 <!-- Page 335 of 434 -->
+
 |---|---|---|---|
 | proportionally (adv) | RELATION (n) | THE CABLE TENSION CHANGES IN RELATION TO THE TEMPERATURE. | The cable tension changes proportionally with temperature. |
 | protect (v) — UNNAPPROVED | PREVENT (v) PROTECTION (n) | USE CELLOPHANE TO PREVENT DAMAGE TO THE SURFACE. MAKE SURE THAT ALL SHARP EDGES HAVE VINYL TAPE PROTECTION. | Use cellophane to protect the surface from damage. Make sure that all sharp edges are protected with vinyl tape. |
@@ -310,6 +334,7 @@ Blank Page
 | provided (that) (conj) | IF (conj) | IF A REPLACEMENT PART IS AVAILABLE, REPLACE THE DAMAGED SHIELD. | Provided that a replacement part is available, replace the damaged shield. |
 
 <!-- Page 336 of 434 -->
+
 |---|---|---|---|
 | providing (that) (conj) | IF (conj) | IF A NEW PART IS INSTALLED, YOU CAN CONTINUE THE OPERATION OF THE MACHINE. | Providing that a new part is installed, you can continue the operation of the machine. |
 | proximity (n) — UNNAPPROVED | NEAR (prep) | DO NOT DO MAINTENANCE WORK NEAR AN ENGINE THAT IS IN OPERATION. | Do not do maintenance work in proximity to a running engine. |
@@ -320,6 +345,7 @@ Blank Page
 | purify (v) — UNNAPPROVED | CLEAN (v) | CLEAN THE WATER. | Purify the water. |
 
 <!-- Page 337 of 434 -->
+
 |---|---|---|---|
 | PUSH (v), PUSHES, PUSHED, PUSHED | 1.To apply a force to something to move it away from the source of the force 2.To move with a force against something Use this word together with a preposition or an adverb to show direction. | PUSH THE INSERT DOWN UNTIL IT TOUCHES THE BOTTOM OF THE HOLE. THE SPRING UNIT PUSHES AGAINST THE BRAKE PEDAL. |  |
 | PUT (v), PUTS, PUT No other verb forms. | To cause something to move or to be in a specified position or condition | PUT THE ADAPTER IN POSITION AGAINST ITS SUPPORT. PUT THE LEVER BACK TO ITS INITIAL POSITION. |  |

@@ -152,6 +152,7 @@ NOTE: The 30-line threshold is a warning signal, not a hard block. Content-light
 **Rule**: All markdown output MUST follow these rules.
 
 ### Headings
+
 ```
 ✅ # Page N of M          ← Every file starts with this
 ✅ ## Section Title        ← Major sections
@@ -163,6 +164,7 @@ NOTE: The 30-line threshold is a warning signal, not a hard block. Content-light
 ```
 
 ### Spacing
+
 ```
 ✅ ### Heading            ← Heading
 ✅                        ← BLANK LINE (mandatory)
@@ -173,6 +175,7 @@ NOTE: The 30-line threshold is a warning signal, not a hard block. Content-light
 ```
 
 ### Tables
+
 ```
 ✅ | Header | Header |    ← Header row
 ✅ |--------|--------|    ← Separator row  
@@ -183,6 +186,7 @@ NOTE: The 30-line threshold is a warning signal, not a hard block. Content-light
 ```
 
 ### STE/Non-STE Examples
+
 ```
 ✅ > **STE:** [example text]
 ✅ > **Non-STE:** [example text]
@@ -192,6 +196,7 @@ NOTE: The 30-line threshold is a warning signal, not a hard block. Content-light
 ```
 
 ### Dictionary Entries (refined format)
+
 ```
 ✅ #### WORD (POS) — APPROVED
 ✅ - **Meaning:** [text]

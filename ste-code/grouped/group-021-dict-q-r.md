@@ -32,6 +32,7 @@ Non-STE example
 Blank Page
 
 <!-- Page 340 of 434 -->
+
 |---|---|---|---|
 | RADIAL (adj) | Along a radius | DO A CHECK FOR RADIAL CUTS, CRACKS, OR SPLITS. |  |
 | RADIALLY (adv) | Along a radius | THE FAN BLADES ARE INSTALLED RADIALLY. |  |
@@ -47,6 +48,7 @@ Blank Page
 | RATE (n) | A measurement of how frequently or how quickly something occurs | MAKE SURE THAT THE FLOW RATE IS CORRECT. |  |
 
 <!-- Page 341 of 434 -->
+
 |---|---|---|---|
 | re- (prefix) — UNNAPPROVED | In general, use the word AGAIN (adv) or BACK (adv) with the basic word to replace words that have "re-" as a prefix. |  |  |
 | reach (v) — UNNAPPROVED | GET (v) TOUCH (v) BE (v) | WHEN YOU GET THE CORRECT PRESSURE, CLOSE THE VALVE. MAKE SURE THAT THE EXTENSION BAR TOUCHES THE TARGET PLATE. WHEN THE FLAPS ARE AT THE 30 DEGREE POSITION, INSTALL THE RIGGING PIN. | When the correct pressure is reached, close the valve. Make sure that the extension bar reaches the target plate. When the flaps reach the 30 degree position, install the rigging pin. |
@@ -58,6 +60,7 @@ Blank Page
 | ready (v) — UNNAPPROVED | PREPARE (v) | PREPARE THE REMOVAL KIT FOR THE REMOVAL OF THE STRUT. | Ready the removal kit for the removal of the strut. |
 
 <!-- Page 342 of 434 -->
+
 |---|---|---|---|
 | real (adj) — UNNAPPROVED | AGREE (v) | MAKE SURE THAT THE INDICATION ON THE GAUGE AGREES WITH THE QUANTITY OF FUEL THAT IS IN THE TANK. | Make sure that the gauge shows the real quantity of fuel that is in the tank. |
 | REAR (adj) | Away from the person who looks or from a reference point | INSTALL THE TWO BOLTS IN THE REAR FITTINGS. |  |
@@ -70,6 +73,7 @@ Blank Page
 | rebuild (v) — UNNAPPROVED | ASSEMBLE (v) | ASSEMBLE THE UNIT AGAIN. | Rebuild the unit. |
 
 <!-- Page 343 of 434 -->
+
 |---|---|---|---|
 | RECEIVE (v), RECEIVES, RECEIVED, RECEIVED | To get energy, material, or a signal from a different source | MAKE SURE THAT THE CAPTAIN'S BOOMSET RECEIVES THE SIGNALS CORRECTLY. |  |
 | RECESS (n) | An indentation in a surface | WHEN YOU CLEAN THE SURFACES, REMOVE THE STAINS FROM THE RECESSES. |  |
@@ -81,6 +85,7 @@ Blank Page
 | reclose (v) — UNNAPPROVED | CLOSE (v) | AFTER SERVICING, CLOSE THE COMPARTMENT AGAIN. | Reclose the compartment after servicing. |
 
 <!-- Page 344 of 434 -->
+
 |---|---|---|---|
 | recoil (v) — UNNAPPROVED | MOVE BACK WIND (v) RECOIL (TN) | BE CAREFUL WHEN THE SLIDE MOVES BACK. WIND THE PROBE WIRE BACK ON THE SPOOL. THE GUN BARREL HAS A QUICK RECOIL. | Be careful when the slide recoils. Recoil the probe wire back on the spool. The gun barrel recoils quickly. |
 | RECOMMEND (v), RECOMMENDS, RECOMMENDED, RECOMMENDED | To advise that which is best | THE MANUFACTURER RECOMMENDS THAT YOU KEEP THE UNIT IN A DEDICATED AREA. |  |
@@ -92,6 +97,7 @@ Blank Page
 | recur (v) — UNNAPPROVED | OCCUR (v) | IF THE SYMPTOMS OCCUR AGAIN, DO A SYSTEM TEST. | If the symptoms recur, do a system test. |
 
 <!-- Page 345 of 434 -->
+
 |---|---|---|---|
 | RECYCLE (v), RECYCLES, RECYCLED, RECYCLED | To put a used material through a process to make it possible to use it or its components again For other meanings, use: CYCLE (n) | MAKE SURE THAT YOU RECYCLE THE REMOVED INSULATION MATERIAL. DO ONE MORE TEST CYCLE OF THE COMPONENT. | Recycle the component through a test. |
 | reduce (v) — UNNAPPROVED | DECREASE (v) | SLOWLY DECREASE THE SPEED. | Slowly reduce the speed. |
@@ -103,6 +109,7 @@ Blank Page
 | REPAIR (v) | ON THE SUBMARINE, REPAIR ALL DAMAGE AND REPLACE ALL WORN PARTS. | Refit the submarine. |  |
 
 <!-- Page 346 of 434 -->
+
 |---|---|---|---|
 | reflect (v) — UNNAPPROVED | REFLECTION (n) | THE RETICLE IMAGE MAKES A REFLECTION ON THE BOTTOM SURFACE OF THE GLASS. | The reticle image reflects on the bottom surface of the glass. |
 | REFLECTION (n) | Something that occurs when energy comes against a surface which sends it back | A CLEAN SURFACE GIVES A BETTER REFLECTION. |  |
@@ -114,6 +121,7 @@ Blank Page
 | regulate (v) — UNNAPPROVED | CONTROL (v) ADJUST (v) | CONTROL THE ELECTRICAL CURRENT. ADJUST THE TIRE PRESSURE AS NECESSARY. | Regulate the electrical current. Regulate the tire pressure as necessary. |
 
 <!-- Page 347 of 434 -->
+
 |---|---|---|---|
 | regulation (n) — UNNAPPROVED | ADJUSTMENT (n) CONTROL (n) CONTROL (v) | THE TEMPERATURE ADJUSTMENT IS AUTOMATIC. THE TEMPERATURE CONTROL IS AUTOMATIC. A SENSOR CONTROLS THE TEMPERATURE IN THE COMPARTMENT. | The regulation of temperature is automatic. The regulation of temperature is automatic. The regulation of temperature in the compartment is effected by a sensor. |
 | reinflate (v) — UNNAPPROVED | INFLATE (v) | INFLATE THE TIRE AGAIN. | Reinflate the tire. |
@@ -127,6 +135,7 @@ Blank Page
 | RELATION (n) | The connection between two or more things caused by their functions, values, or conditions | THE RELATION BETWEEN THE TWO CONTROL SYSTEMS KEEPS THE AIRCRAFT STABLE. |  |
 
 <!-- Page 348 of 434 -->
+
 |---|---|---|---|
 | relay (v) — UNNAPPROVED | SEND (v) | SEND THE INFORMATION TO THE ENGINEERING DEPARTMENT. | Relay the information to the engineering department. |
 | RELEASE (v), RELEASES, RELEASED, RELEASED | To make free, to let go | RELEASE THE INSTRUMENT PANEL TO GET ACCESS TO THE CONNECTIONS. |  |
@@ -141,6 +150,7 @@ Blank Page
 | render (v) — UNNAPPROVED | MAKE (v) | MAKE THE SYSTEM ELECTRICALLY SAFE. | Render the system electrically safe. |
 
 <!-- Page 349 of 434 -->
+
 |---|---|---|---|
 | renew (v) — UNNAPPROVED | NEW (adj) | USE NEW ADHESIVE TAPE. | Renew the adhesive tape. |
 | renovate (v) — UNNAPPROVED | REPAIR (v) NEW (adj) | REPAIR ALL WORN SURFACES. IF THE PAINT ON THE CONTROL BOX IS DAMAGED, APPLY NEW PAINT. | Renovate all worn surfaces. Renovate any damaged paint on the control box. |
@@ -154,6 +164,7 @@ Blank Page
 | repeatedly (adv) — UNNAPPROVED | AGAIN AND AGAIN | IF THE VOLTAGE DECREASES AGAIN AND AGAIN, ADJUST THE VOLTAGE REGULATOR. | If voltage drops repeatedly, adjust the voltage regulator. |
 
 <!-- Page 350 of 434 -->
+
 |---|---|---|---|
 | REPLACE (v), REPLACES, REPLACED, REPLACED | To remove an item and to install a new or serviceable item of the same type | REPLACE THE RELAY. |  |
 | REPLACEMENT (n) | The item you install when you replace an item | MAKE SURE THAT THE REPLACEMENT HAS THE CORRECT DIMENSIONS. |  |
@@ -165,6 +176,7 @@ Blank Page
 | request (n) — UNNAPPROVED | TELL (v) WRITE (v) | TELL THE FIRE SERVICE TO HELP YOU. IF AID IS NECESSARY, WRITE TO THE MANUFACTURER. | Make a request for external fire support. Any request for assistance should be addressed to the manufacturer. |
 
 <!-- Page 351 of 434 -->
+
 |---|---|---|---|
 | request (v) — UNNAPPROVED | TELL (v) WRITE (v) | TELL THE FIRE SERVICE TO HELP YOU. WRITE TO THE MANUFACTURER FOR REPAIR INSTRUCTIONS. | Request external fire support. Request repair instructions from the manufacturer. |
 | require (v) — UNNAPPROVED | NECESSARY (adj) | DURING THIS PROCEDURE, CLEAN FILTERS ARE NECESSARY. | During this procedure, clean filters are required. |
@@ -179,6 +191,7 @@ Blank Page
 | rest (n) — UNNAPPROVED | REMAINING (adj) | THE REMAINING INSTRUCTIONS ARE APPLICABLE ONLY TO APPROVED PERSONNEL. | The rest of these instructions only apply to approved personnel. |
 
 <!-- Page 352 of 434 -->
+
 |---|---|---|---|
 | rest (v) — UNNAPPROVED | BE (v) PUT (v) | THE VEHICLE MUST BE ON ITS WHEELS. PUT THE REMOVED PART ON A CLEAN SURFACE. | The vehicle must rest on its wheels. Rest the removed part on a clean surface. |
 | restart (v) — UNNAPPROVED | START (v) | START THE UNIT AGAIN. | Restart the unit. |
@@ -188,6 +201,7 @@ Blank Page
 | RESULT (n) | Something that occurs when you do something | IF THESE TESTS DO NOT GIVE THE CORRECT RESULTS, REPLACE THE UNIT. |  |
 
 <!-- Page 353 of 434 -->
+
 |---|---|---|---|
 | result (v) — UNNAPPROVED | CAUSE (v) RESULT (n) | AN INCORRECT CONNECTION WILL CAUSE DAMAGE. REPAIR DAMAGE THAT IS THE RESULT OF CORROSION. | An incorrect connection will result in damage. Repair any damage resulting from corrosion. |
 | resume (v) — UNNAPPROVED | START (v) CONTINUE (v) | INCREASE THE PRESSURE UNTIL THE FLOW STARTS AGAIN. CONTINUE THE TEST. | Increase the pressure until the flow resumes. Resume the test. |
@@ -200,6 +214,7 @@ Blank Page
 | return (n) — UNNAPPROVED | GO (v) | AFTER THE AILERONS GO BACK TO NEUTRAL, MAKE SURE THAT THEY ARE FLUSH WITH THE FLAPS. After the AILERONS GO BACK TO NEUTRAL, MAKE SURE THAT THEY ARE FLUSH WITH THE FLAPS. | After the return of the ailerons to neutral, check that they are flush with the flaps. |
 
 <!-- Page 354 of 434 -->
+
 |---|---|---|---|
 | return (v) — UNNAPPROVED | GO (v) | THE PLUNGERS MUST GO BACK TO THE CLOSED POSITION. | Plungers must return to the closed position. |
 | reusable (adj) — UNNAPPROVED | USE (v) | YOU CAN USE THE MIXTURE AGAIN. | The mixture is reusable. |
@@ -216,6 +231,7 @@ Blank Page
 | RIGID (adj) | That cannot easily bend or change shape | REMOVE THE SCREWS FROM THE RIGID COVER. |  |
 
 <!-- Page 355 of 434 -->
+
 |---|---|---|---|
 | rinse (v) — UNNAPPROVED | FLUSH (v) REMOVE (v) CLEAN (v) | FLUSH THE FILTER WITH HOT WATER. REMOVE THE CLEANING AGENT FROM THE SURFACE. CLEAN THE WINDOW PANE WITH A LARGE QUANTITY OF WATER. | Rinse the filter in hot running water. Rinse the cleaning agent from the surface. Rinse the window pane with a large quantity of water. |
 | ripped (adj) — UNNAPPROVED | DAMAGED (adj) | IF THE SEAT COVER IS DAMAGED, REPLACE IT. | If the seat cover is ripped, replace it. |
@@ -231,6 +247,7 @@ Blank Page
 | roughen (v) — UNNAPPROVED | ROUGH (adj) | MAKE THE FAYING SURFACES ROUGH. | Roughen the faying surfaces. |
 
 <!-- Page 356 of 434 -->
+
 |---|---|---|---|
 | roughness (n) — UNNAPPROVED | ROUGH (adj) | MAKE SURE THAT THE AREA OF THE BOND IS SUFFICIENTLY ROUGH. | Make sure the area of the bond has sufficient roughness. |
 | round (adj) — UNNAPPROVED | CIRCULAR (adj) | REPAIR THE DAMAGE WITH A CIRCULAR PATCH. | Repair the damage with a round patch. |

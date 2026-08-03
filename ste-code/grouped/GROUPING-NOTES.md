@@ -163,6 +163,7 @@ content gates).
 ## Tool improvements (recommended patches to `.agents/tools/grouping/`)
 
 ### 1. Make `corpus_ready()` / `slice_pages()` tolerate the 3 marker patterns
+
 Rather than reject any file whose markers ≠ exact range, add a *reconciliation*
 step BEFORE declaring unsliceable:
 - collapse consecutive duplicate positions (Pattern A: `[29,29,30,30]`→`[29,30]`);
@@ -178,12 +179,14 @@ approach also works and is more auditable — pick one and make it the documente
 path so prompt/skill/gate agree, per exchange.md Lesson #1.)
 
 ### 2. Make the one-table verifier format-aware (see Finding 2, option 2)
+
 `verify-groups.py`: replace the hard `hdrs == 1` with a per-group structural
 check that accepts either a single merged table OR a clean sequence of
 `#### WORD (POS)` blocks, and independently asserts "no letter is split across
 two groups except at an intended page edge".
 
 ### 3. Add a boundary-integrity check for straddler files (closes the parity blind spot)
+
 Because `parity_diff()` uses the same slicer on both sides, it can't catch a
 page-boundary mis-split inside a file that spans two groups. Add a check that,
 for each of the 6 straddler files, the LAST entry before the boundary and the
@@ -192,6 +195,7 @@ r055 boundary: page 218 must still be 'D…', page 219 must be 'E…'). This is 
 cheap alphabetical-monotonicity assertion at the 6 known boundaries.
 
 ### 4. Orchestration (borrowed from exchange.md Lesson #5 + poll-vs-wait.md)
+
 Grouping itself is a single fast deterministic process (no worker fan-out), so
 the free-tier/429 concerns don't apply to Phase C. But when this stage is chained
 into `launch-downstream.sh` (C→D→E→F), the DOWNSTREAM adaptation workers DO fan

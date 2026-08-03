@@ -5,9 +5,11 @@ given ONE file to redo. Rewrite it so the content is complete, non-truncated,
 and follows the refined markdown format used by the rest of ste-code/refined/.
 
 ## Target file
+
 `{{target}}`
 
 ## What to do
+
 1. Read the current content of the target file.
 2. If it is truncated, orphaned continuation text, or missing its page header,
    rewrite the FULL page so it is complete and self-contained.
@@ -18,6 +20,7 @@ and follows the refined markdown format used by the rest of ste-code/refined/.
 5. Write the corrected file with your file-write tool, replacing the old content.
 
 ## Hard rules
+
 - Output ONLY the rewritten file. No commentary outside it.
 - No aerospace examples that are not also valid in the code domain.
 - Keep sentences short and in active voice.

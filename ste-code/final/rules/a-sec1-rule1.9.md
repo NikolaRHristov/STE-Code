@@ -572,6 +572,7 @@ Tools such as JSDoc, Sphinx, and godoc generate documentation from source code. 
  */
 class RateLimiter {}
 ```
+
 The `@description`-equivalent summary ("The rate limiter uses a token bucket algorithm backed by Redis") uses short terms even though the generated parameter table below it is mechanical.
 
 ## Cross-References
@@ -664,7 +665,3 @@ NOTE: This checklist is a guide. Professional judgment is always necessary when 
 > **See also:** Rule 1.11 — Use One Term for One Concept
 > **See also:** Rule 1.13 — Do Not Use Technical Verbs as Nouns
 > **See also:** Rule 1.14 — Use English (American) Spelling
-
-
-
-

@@ -32,12 +32,14 @@ The 19 categories fall into five logical groups. Use these groups to reason abou
 broad classification before assigning a specific category.
 
 ### Group A: Code Structure (Categories 1, 6, 15)
+
 Language primitives, module organization, and specification files that define the codebase.
 - Category 1: Language keywords and reserved words — the atoms of code
 - Category 6: Modules, classes, components, and services — the molecules
 - Category 15: Specification files, configs, and manifests — the blueprints
 
 ### Group B: Ecosystem and Tooling (Categories 2, 3, 4, 5)
+
 External frameworks, tools, dependencies, and deployment surfaces.
 - Category 2: Frameworks, runtimes, and platforms — what code runs on
 - Category 3: Development tools and build systems — what builds and checks code
@@ -45,12 +47,14 @@ External frameworks, tools, dependencies, and deployment surfaces.
 - Category 5: Deployment targets and environments — where code lands
 
 ### Group C: Data and Algorithms (Categories 7, 9, 19)
+
 Computational concepts, formats, and I/O mechanisms.
 - Category 7: Algorithmic and computational terms — how code processes data
 - Category 9: Data sizes, time units, and numeric formats — how code measures
 - Category 19: Network, protocol, API, and I/O terms — how code communicates
 
 ### Group D: Behavior and State (Categories 8, 14, 16, 18)
+
 Navigation, runtime conditions, diagnostics, and failure modes.
 - Category 8: Routing, pathing, and state management — how code navigates
 - Category 14: Error states, diagnostics, and health checks — how code reports problems
@@ -58,6 +62,7 @@ Navigation, runtime conditions, diagnostics, and failure modes.
 - Category 18: Bug, defect, failure, and degradation taxonomy — how code breaks
 
 ### Group E: Human and Surface Concerns (Categories 10, 11, 12, 13, 17)
+
 User-visible output, roles, interaction, preferences, and presentation.
 - Category 10: String literals, error messages, and log output — what code says
 - Category 11: Roles, teams, services, and actors — who uses code

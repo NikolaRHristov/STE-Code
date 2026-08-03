@@ -29,16 +29,20 @@ CRITICAL:
 Write findings to: {{report_dir}}
 
 Format:
+
 ## Batch {{batch_num}} — {{count}} files
 
 ### CONFIRMED
+
 | Claim | Rule File | Line | Notes |
 |-------|-----------|------|-------|
 
 ### CONTRADICTION
+
 | Claim | Rule Says | Layer Says |
 |-------|-----------|------------|
 
 ### NOVEL
+
 | Claim | Description |
 |-------|-------------|

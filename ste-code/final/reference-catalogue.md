@@ -2,7 +2,6 @@
 
 > These external references inform STE-Code's controlled vocabulary. They are NOT part of the standard and are kept in `.agents/reference/` (outside final/) per project rule. Listed here as a catalogue.
 
-
 | Reference | Type | Source |
 |---|---|---|
 | Microsoft Writing Style Guide | page | [https://learn.microsoft.com/en-us/style-guide/welcome/](.agents/reference/microsoft-writing-style-guide.md) |

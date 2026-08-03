@@ -54,11 +54,13 @@ Look up each worker's page range in `.agents/references/section-types.md` (Page 
 If a worker page range crosses a section boundary, use the higher threshold. For example, a worker covering pages 125-128 (RULES) plus pages 129-132 (DICT) uses the DICT threshold (> 8 KB).
 
 ### File Integrity
+
 - [ ] All 3 output files exist in `ste-code/extracted/`
 - [ ] File sizes: W___ (___KB), W___ (___KB), W___ (___KB)
 - [ ] Each size exceeds its section-type threshold (see table above)
 
 ### Truncation Check
+
 - [ ] W___ last 3 lines end cleanly
 - [ ] W___ last 3 lines end cleanly
 - [ ] W___ last 3 lines end cleanly
@@ -118,17 +120,20 @@ If any sampled line is a header or footer boilerplate ("ASD-STE100 Simplified Te
 - [ ] Expected content type matches page range (verify with `.agents/references/section-types.md` Page Range Reference table)
 
 ### Fabrication Detection
+
 - [ ] No modern software terms in spec text ("React", "Docker", "API", "npm", "async/await", "git", "JSON")
 - [ ] No commentary language ("This page describes...", "The key point is...", "In summary...", "Essentially...")
 - [ ] Worker output reads like a spec, not a summary
 - [ ] Exact text matches source when spot-checked
 
 ### State Management
+
 - [ ] `.agents/state/PROGRESS.md` updated with [x] for this batch
 - [ ] `git gcommit-hermes "Batch N: workers W___-W___ (pages ___-___)"` executed
 - [ ] Feedback in `.agents/feedback/exchange.md` if issues found
 
 ## Notes
+
 - Worker: ___
 - Issues found: ___
 - Actions taken: ___
@@ -150,6 +155,7 @@ Do not loop on re-extraction. Follow this protocol:
 If re-extraction fails twice for the same worker:
 
 1. Log full details in `.agents/feedback/exchange.md`:
+
    ```
    ## DEGRADED: Worker W___ (Batch ___, pages ___-___)
    - Section type: ___
@@ -162,6 +168,7 @@ If re-extraction fails twice for the same worker:
    ```
 
 2. Mark the batch as DEGRADED in `.agents/state/PROGRESS.md`:
+
    ```
    Batch NN: DEGRADED — W___ failed after 2 re-extraction rounds. Awaiting auditor triage.
    ```
@@ -178,6 +185,7 @@ If re-extraction fails twice for the same worker:
 When 2 or 3 workers in the same batch fail validation, stop. A cascading failure usually indicates a systemic problem. Follow this diagnostic sequence before retrying:
 
 1. Check that source pages exist and have content:
+
    ```bash
    for pg in $(seq START END); do
      f="spec/issue-09-2025/page-dir/page-$(printf '%04d' $pg).md"
@@ -186,6 +194,7 @@ When 2 or 3 workers in the same batch fail validation, stop. A cascading failure
    ```
 
 2. Check the batch prompt file for corruption:
+
    ```bash
    wc -l .agents/prompts/extraction/batch-prompt.txt
    ```
@@ -209,6 +218,7 @@ This is a fully filled-out example from a real dictionary-zone batch. Use this a
 - [x] W036 covers pages 141-144 (type: DICT, threshold: > 8 KB)
 
 ### File Integrity
+
 - [x] All 3 output files exist in `ste-code/extracted/`
 - [x] File sizes: W034 (11.2 KB), W035 (4.1 KB), W036 (12.8 KB)
 - [x] W034 exceeds DICT threshold (> 8 KB). PASS.
@@ -216,6 +226,7 @@ This is a fully filled-out example from a real dictionary-zone batch. Use this a
 - [x] W036 exceeds DICT threshold (> 8 KB). PASS.
 
 ### Truncation Check
+
 - [x] W034 last 3 lines: end with "Page 136 / 2025-01-15 / Issue 9"
 - [x] W035 last 3 lines: end with complete dictionary entry, then "Page 140 / 2025-01-15 / Issue 9"
 - [x] W036 last 3 lines: end with "Page 144 / 2025-01-15 / Issue 9"
@@ -226,39 +237,47 @@ Red flags:
 ### Content Signals (spot-check with `shuf`)
 
 W034 spot-check:
+
 ```bash
 $ shuf -n 50 ste-code/extracted/w034-p133-136.md | grep -v '^$' | head -n 3
 APPROVED Meaning: To move forward or onward. Forms: advance, advances, advanced, advancing
 Word (adj.) — UNAPPROVED. Alternatives: correct (adj.), right (adj.)
 STE: Make sure that the valve is fully open. Non-STE: Ensure that the valve is fully open.
 ```
+
 Result: 3 of 3 lines match DICT signals (APPROVED, Word (POS), UNAPPROVED, STE/Non-STE). **PASS.**
 
 W035 spot-check:
+
 ```bash
 $ shuf -n 50 ste-code/extracted/w035-p137-140.md | grep -v '^$' | head -n 3
 Word (n.) — APPROVED. Meaning: A device that measures something.
 Part 2 — Dictionary. ASD-STE100 Simplified Technical English.
 The approved word is "close." Do not use "shut" as a verb.
 ```
+
 Result: 2 of 3 lines match DICT signals. Line 2 is a structural header — count it as a signal match. **PASS with note: structural header in sample.**
 
 W036 spot-check:
+
 ```bash
 $ shuf -n 50 ste-code/extracted/w036-p141-144.md | grep -v '^$' | head -n 3
 UNAPPROVED. Alternatives: find (v.), get (v.).
 STE: The temperature must not be more than 100°C. Non-STE: The temperature shall not exceed 100°C.
 Word (v.) — APPROVED. Meaning: To move something to a different position. Forms: move, moves, moved, moving.
 ```
+
 Result: 3 of 3 lines match DICT signals. **PASS.**
 
 ### Fabrication Detection
+
 - [x] No modern software terms in spec text. Grep for "React\|Docker\|API\|npm\|async" returned 0 matches.
 - [x] No commentary language. Grep for "This page describes\|The key point is\|In summary" returned 0 matches.
 - [x] Worker output reads like a spec. Dictionary entries use the standard 4-column format.
 - [x] Spot-check against source: diff of first 20 lines of W034 output vs spec/page-0133.md shows exact match.
 
 ### State Management
+
 - [x] `.agents/state/PROGRESS.md` updated with [x] for Batch 12.
 - [x] `git gcommit-hermes "Batch 12: workers W034-W036 (pages 133-144)"` executed.
 - [x] Feedback in `.agents/feedback/exchange.md`: flagged W035 for manual review due to small file size. No re-extraction needed — content is complete but page range is light.

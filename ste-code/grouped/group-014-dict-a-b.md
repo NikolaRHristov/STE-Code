@@ -26,6 +26,7 @@
 | abrupt (adj) — UNNAPPROVED | SUDDENLY (adv) | IF THE ROTORS STOP SUDDENLY, EXAMINE THE INTAKE FOR UNWANTED MATERIAL. | If the rotors come to an abrupt stop, examine the intake for unwanted material. |
 
 <!-- Page 143 of 434 -->
+
 |---|---|---|---|
 | absence (n) — UNNAPPROVED | NONE (pron) | IF NONE OF THE BRACKETS ARE DAMAGED, CONTINUE THE PROCEDURE. | In the absence of damage to the brackets, continue the procedure. |
 | absence (n) — UNNAPPROVED | NOT (adv) | IF THE BRACKETS ARE NOT DAMAGED, CONTINUE THE PROCEDURE. | In the absence of damage to the brackets, continue the procedure. |
@@ -39,6 +40,7 @@
 | abundant (adj) — UNNAPPROVED | LARGE (adj) | CLEAN YOUR SKIN WITH A LARGE QUANTITY OF CLEAN WATER. | Clean your skin with abundant clean water. |
 
 <!-- Page 144 of 434 -->
+
 |---|---|---|---|
 | abut (v) — UNNAPPROVED | TOUCH (v) | THE BIN TOUCHES THE FORWARD HINGE SURFACE. | The bin abuts the forward hinge surface. |
 | accelerate (v) — UNNAPPROVED | INCREASE (v) | A HIGHER TEMPERATURE INCREASES THE SPEED OF EVAPORATION. | Evaporation is accelerated by a higher temperature. |
@@ -53,6 +55,7 @@
 | ACCIDENT (n) | An occurrence that causes injury or damage | TO PREVENT ACCIDENTS, MAKE SURE THAT THE PINS ARE INSTALLED. |  |
 
 <!-- Page 145 of 434 -->
+
 |---|---|---|---|
 | ACCIDENTAL (adj) | That does not occur on purpose | TO PREVENT ACCIDENTAL OPERATION OF THE SYSTEM, INSTALL THE SAFETY LOCK. |  |
 | ACCIDENTALLY (adv) | That does not occur on purpose | IF YOU ACCIDENTALLY MOVE THE LEVER, SET THE SYSTEM TO THE NEUTRAL POSITION AGAIN. |  |
@@ -66,6 +69,7 @@
 | accumulation (n) — UNNAPPROVED | COLLECT (v) | IF FUEL COLLECTS FREQUENTLY, EXAMINE THE PIPE FOR LEAKS. | If accumulation of fuel is frequent, examine the pipe for leaks. |
 
 <!-- Page 146 of 434 -->
+
 |---|---|---|---|
 | accuracy (n) — UNNAPPROVED | PRECISION (n) | THE PRECISION OF THE ADJUSTMENT CAN CHANGE. | The accuracy of the adjustment can vary. |
 | ACCURATE (adj) | Exact | THE ADJUSTMENT MUST BE ACCURATE. |  |
@@ -83,6 +87,7 @@
 | ACTIVATE (v) | START (v) | START THE MOTOR. | Activate the motor. |
 
 <!-- Page 147 of 434 -->
+
 |---|---|---|---|
 | ACTIVE (adj) | A system, function, or feature in a state of action | DOWNLOAD THE EXPORT FILE FROM THE ACTIVE SERVER UNIT. |  |
 | activity (n) — UNNAPPROVED | TASK (n) | A SUBCONTRACTOR CAN DO THESE MAINTENANCE TASKS. | These maintenance activities can be done by a subcontractor. |
@@ -97,6 +102,7 @@
 | addition (n) — UNNAPPROVED | ADD (v) | TO GET THE CORRECT CLEARANCE, ADD SPECIAL SHIMS, AS NECESSARY. | Adjust the clearance by the addition of special shims, as necessary. |
 
 <!-- Page 148 of 434 -->
+
 |---|---|---|---|
 | additional (adj) — UNNAPPROVED | MORE (adj) | THIS CHAPTER GIVES MORE INFORMATION ABOUT SAFETY. | This chapter gives additional information about safety. |
 | adequate (adj) — UNNAPPROVED | SUFFICIENT (adj) | MAKE SURE THAT CONTAINERS HAVE SUFFICIENT CAPACITY AND DIAMETER. | Make sure that containers have adequate capacity and diameter. |
@@ -111,6 +117,7 @@
 | ADJUSTMENT (n) | The effect of adjusting | MAKE SURE THAT THE ADJUSTMENT IS IN THE LIMITS GIVEN IN TABLE 1. |  |
 
 <!-- Page 149 of 434 -->
+
 |---|---|---|---|
 | admit (v) — UNNAPPROVED | LET (v) | OPEN THE VALVE TO LET NITROGEN GO INTO THE OLEO STRUT. | Open the valve to admit nitrogen into the oleo strut. |
 | adopt (v) — UNNAPPROVED | USE (v) | IF THE UNIT IS DAMAGED, USE THIS PROCEDURE. | Adopt this procedure if the unit is damaged. |
@@ -124,6 +131,7 @@
 | advise (v) — UNNAPPROVED | RECOMMEND (v) | THE SAFETY OFFICER RECOMMENDS THE APPLICABLE PERSONAL PROTECTIVE EQUIPMENT. | The safety officer advises on applicable personal protective equipment. |
 
 <!-- Page 150 of 434 -->
+
 |---|---|---|---|
 | affect (v) — UNNAPPROVED | EFFECT (n) | MAGNETIC TOOLS HAVE AN UNWANTED EFFECT ON THE COMPASS SYSTEM. | Magnetic tools affect the compass system. |
 | affect (v) — UNNAPPROVED | If it is possible, be accurate. | THIS MEDICATION CAN CAUSE DERMATITIS. | This medication can affect your skin. |
@@ -140,6 +148,7 @@
 | agitation (n) — UNNAPPROVED | SHAKE (v) | IF YOU SHAKE THE SOLUTION, DO NOT USE IT FOR ONE HOUR. | After agitation, do not use the solution for one hour. |
 
 <!-- Page 151 of 434 -->
+
 |---|---|---|---|
 | AGREE (v), AGREES, AGREED, AGREED | To be consistent with | THE INDICATIONS MUST AGREE WITH THE VALUES IN TABLE 1001. |  |
 | ahead (adv) — UNNAPPROVED | FORWARD (adv) | WHEN YOU INSTALL THE ANTENNA, THE ALIGNMENT ARROW MUST POINT FORWARD. | When you install the antenna, the alignment arrow must point ahead. |
@@ -154,6 +163,7 @@
 | ALIGN (v), ALIGNS, ALIGNED, ALIGNED |  | ALL THREE BRACKET HOLES MUST ALIGN WITH THE FUEL TUBE. |  |
 
 <!-- Page 152 of 434 -->
+
 |---|---|---|---|
 | alignment (n) — UNNAPPROVED | ALIGN (v) | MAKE SURE THAT THE KEYWAY IS AT THE TOP AND ALIGNS WITH THE PEG. | Ensure that the keyway is at the top and in alignment with the peg. |
 | ALL (adj) | Full quantity | DRAIN ALL THE FLUIDS. |  |
@@ -169,6 +179,7 @@
 | ALSO (adv) | In addition | ALSO DO THE APPLICABLE STEPS OF THIS PROCEDURE. |  |
 
 <!-- Page 153 of 434 -->
+
 |---|---|---|---|
 | alter (v) — UNNAPPROVED | CHANGE (v) | IT IS POSSIBLE THAT THE INSTALLATION OF THE CONNECTOR PINS CHANGED THE ROUTING OF THE CABLE LOOM. | It is possible that the installation of the connector pins altered the routing of the cable loom. |
 | alteration (n) — UNNAPPROVED | CHANGE (v) | IF YOU CHANGE THIS REPAIR PROCEDURE, GET APPROVAL OF THE DESIGN AUTHORITY. | The alteration to this repair procedure must get approval of the Design Authority. |
@@ -183,6 +194,7 @@
 | ALWAYS (adv) | At all times | ALWAYS KEEP THE BRIGHTNESS CONTROL ON THE LCD DISPLAY AT MAXIMUM. |  |
 
 <!-- Page 154 of 434 -->
+
 |---|---|---|---|
 | amend (v) — UNNAPPROVED | CHANGE (v) | IF IT IS NECESSARY TO CHANGE THE REPAIR SCHEME, GET THE APPROVAL OF THE DESIGN AUTHORITY. | If it is necessary to amend the Repair Scheme, get the approval of the Design Authority. |
 | amendment (n) — UNNAPPROVED | CHANGE (n) | THE DESIGN AUTHORITY MUST GIVE APPROVAL TO THE CHANGES THAT YOU MAKE TO THE REPAIR SCHEME. | The Design Authority must approve the amendments that you make to the Repair Scheme. |
@@ -195,6 +207,7 @@
 | anchor (v) — UNNAPPROVED | ATTACH (v) | THE STRAPS ARE ATTACHED TO A FULL-LENGTH RAIL. | The straps are anchored to a full-length rail. |
 
 <!-- Page 155 of 434 -->
+
 |---|---|---|---|
 | ancillary (adj) — UNNAPPROVED | AUXILIARY (adj) | THE ENGINE AND ALL AUXILIARY EQUIPMENT USE THE SAME LUBRICANT. | The engine and all ancillary equipment use the same lubricant. |
 |  | SECONDARY (adj) | DO AN OPERATIONAL CHECK OF THE SECONDARY CONTROLS. | Do an operational check of the ancillary controls. |
@@ -209,6 +222,7 @@
 | anticlockwise (adv) | COUNTERCLOCKWISE (adv) | COUNTERCLOCKWISE. | Turn the cap anticlockwise. |
 
 <!-- Page 156 of 434 -->
+
 |---|---|---|---|
 | any (adj) — UNNAPPROVED | Frequently, an alternative for this word is not necessary. | IF YOU HAVE QUESTIONS ABOUT THIS DOCUMENT, SEND AN E-MAIL TO THE ADDRESS THAT FOLLOWS: | If you have any questions about this document, send an e-mail to the address that follows: |
 | any (pron) — UNNAPPROVED | ONE (TN) | REMOVE ONE OF THE FOUR BOLTS. | Remove any of the four bolts. |
@@ -222,6 +236,7 @@
 |  | POSSIBLE (adj) | IF IT IS POSSIBLE THAT THE TEMPERATURE VALUES ARE INCORRECT, DECREASE THE POWER. | If it appears that the temperature values are incorrect, decrease the power. |
 
 <!-- Page 157 of 434 -->
+
 |---|---|---|---|
 | APPLICABLE (adj) | Correct or satisfactory for the task | REFER TO THE TABLE THAT FOLLOWS FOR THE APPLICABLE TORQUE VALUES. |  |
 | application (n) — UNNAPPROVED | APPLY (v) | APPLY THE SEALANT WITH A WOODEN SPATULA. | The application of sealant must be carried out with a wooden spatula. |
@@ -236,6 +251,7 @@
 | APPROXIMATE (adj) | Almost correct or accurate | AN APPROXIMATE VALUE IS SATISFACTORY. |  |
 
 <!-- Page 158 of 434 -->
+
 |---|---|---|---|
 | APPROXIMATELY (adv) | Almost correct or accurate | DRAIN APPROXIMATELY 2 LITERS OF FUEL. |  |
 | AREA (n) | A specified surface or location | DO NOT SMOKE IN THE WORK AREA. |  |
@@ -252,6 +268,7 @@
 | arrest (v) — UNNAPPROVED | HOLD (v) | A COTTER PIN HOLDS THE ATTACHMENT BAR. | A cotter pin arrests the attachment bar. |
 
 <!-- Page 159 of 434 -->
+
 |---|---|---|---|
 | arrive (v) — UNNAPPROVED | GET (v) | TO GET THE CORRECT VALUE, SET THE SWITCH TO POSITION 2. | To arrive at the correct value, set the switch to position 2. |
 | ARROW (n) | A mark that has a point to show direction | MAKE SURE THAT THE ARROW POINTS IN THE DIRECTION OF THE FUEL FLOW. |  |
@@ -267,6 +284,7 @@
 | ascertain (v) — UNNAPPROVED | MAKE SURE (v) | MAKE SURE THAT THE LIGHT IS OFF. | Ascertain that the light is off. |
 
 <!-- Page 160 of 434 -->
+
 |---|---|---|---|
 | ask (v) — UNNAPPROVED | TELL (v) | TELL THE DRIVER TO SET THE SWITCH TO OFF. | Ask the driver to set the switch to off. |
 | ask (v) — UNNAPPROVED | SPEAK (v) | SPEAK TO THE LOCAL AIR TRAFFIC CONTROLLER. | Ask the local air traffic controller. |
@@ -282,6 +300,7 @@
 | assistance (n) — UNNAPPROVED | HELP (v) | FOR THIS STEP, MAKE SURE THAT ONE PERSON HELPS YOU. | For this step, you must have the assistance of one person. |
 
 <!-- Page 161 of 434 -->
+
 |---|---|---|---|
 | associated (adj) — UNNAPPROVED | CORRECT (adj) | INSTALL THE DUMP VALVE AND THE CORRECT GASKET. | Install the dump valve with the associated gasket. |
 |  | RELATED (adj) | REMOVE THE RELATED DOORS. | Remove the panels from the associated doors. |
@@ -300,6 +319,7 @@
 | assume (v) — UNNAPPROVED | THINK (v) | IF YOU THINK THAT YOU CAN REPAIR THE DAMAGE, REFER TO THE REPAIR SECTION. | If damage is assumed to be repairable, refer to the repair section. |
 
 <!-- Page 162 of 434 -->
+
 |---|---|---|---|
 | ATTACH (v), ATTACHES, ATTACHED, ATTACHED | To stay together or to cause different items to stay together | MAKE SURE THAT THE LABEL FULLY ATTACHES TO THE SURFACE AND THAT THERE ARE NO BUBBLES. |  |
 | ATTACH (v), ATTACHES, ATTACHED, ATTACHED |  | TEMPORARILY ATTACH THE CABLE TO THE ADJACENT STRUCTURE. |  |
@@ -314,6 +334,7 @@
 |  | MONITOR (v) | MONITOR THE RESULTS. | Pay attention to the results. |
 
 <!-- Page 163 of 434 -->
+
 |---|---|---|---|
 | audible (adj) — UNNAPPROVED | HEAR (v) | IF YOU CANNOT HEAR THE ALARM, ADJUST THE VOLUME CONTROL. | If the alarm is not audible, adjust the volume control. |
 |  | LISTEN (v) | LISTEN FOR AIR LEAKAGE FROM THE LINES. | Check the lines for audible air leakage. |
@@ -327,6 +348,7 @@
 | AUTOMATICALLY (adv) | That operates without other input | THE FUEL FLOW STOPS AUTOMATICALLY. |  |
 
 <!-- Page 164 of 434 -->
+
 |---|---|---|---|
 | AUXILIARY (adj) | 1. That operates in a secondary function | LUBRICANTS FOR THE ENGINE AND THE AUXILIARY EQUIPMENT ARE THE SAME. |  |
 | AUXILIARY (adj) | 2. That gives help | USE AUXILIARY SCREWS TO ASSEMBLE THE UNIT TEMPORARILY. |  |
@@ -341,6 +363,7 @@
 | AXIALLY (adv) | Related to an axis | APPLY THE LOAD AXIALLY. |  |
 
 <!-- Page 165 of 434 -->
+
 |---|---|---|---|
 | back (adj) — UNNAPPROVED | REAR (adj) | DISCONNECT THE CABLE FROM THE REAR SIDE OF THE INSTRUMENT. | Disconnect the cable from the back side of the instrument. |
 | BACK (adv) | To an initial condition | MOVE THE ENGINE THROTTLE BACK TO 60% RPM. |  |
@@ -354,6 +377,7 @@
 | BAD (adj) (WORSE, WORST) |  | IF THE LENGTH OF THE CRACK IS MORE THAN THE PERMITTED LIMIT, REPLACE THE PART. | If the crack is bad, replace the part. |
 
 <!-- Page 166 of 434 -->
+
 |---|---|---|---|
 | badly (adv) — UNNAPPROVED | INCORRECTLY (adv) | IF THE SLEEVE IS INCORRECTLY ATTACHED, ADJUST IT. | If the sleeve is badly attached, adjust it. |
 | badly (adv) — UNNAPPROVED | UNSATISFACTORILY (adv) | DISCARD ALL SEALS WHICH ARE UNSATISFACTORILY BONDED. | Discard all seals which are badly bonded. |
@@ -367,6 +391,7 @@
 | BASIC (adj) | Approved minimum | THIS MODIFICATION CHANGES THE BASIC CONFIGURATION OF THE SYSTEM. |  |
 
 <!-- Page 167 of 434 -->
+
 |---|---|---|---|
 | BE (v), IS, WAS, (also ARE, WERE) No other verb forms. | 1. To occur, exist | IF THERE IS CORROSION ON THE PUMP VANES, REPLACE THE PUMP. |  |
 | BE (v), IS, WAS, (also ARE, WERE) No other verb forms. | 2. To have a property, to be equal to | ACID SOLUTIONS ARE DANGEROUS. |  |
@@ -378,6 +403,7 @@
 | begin (v) — UNNAPPROVED | START (v) | INCREASE THE PRESSURE UNTIL THE FLOW STARTS AGAIN. | Increase pressure until the flow begins again. |
 
 <!-- Page 168 of 434 -->
+
 |---|---|---|---|
 | beginning (n) — UNNAPPROVED | START (n) | YOU CAN GET SLOW MOVEMENT AT THE START. | You can get slow movement at the beginning. |
 | beginning (n) — UNNAPPROVED | SOURCE (n) | FIND THE SOURCE OF THE FUEL LEAKAGE. | Find the beginning of the fuel leak. |
@@ -393,6 +419,7 @@
 | beneath (prep) — UNNAPPROVED | BELOW (prep) | PUT THE JACK BELOW THE AXLE. | Put the jack beneath the axle. |
 
 <!-- Page 169 of 434 -->
+
 |---|---|---|---|
 | beside (prep) — UNNAPPROVED | ADJACENT TO | THE FUEL PUMP IS ADJACENT TO THE STRUCTURAL SUPPORT. | The fuel pump is beside the structural support. |
 | BETWEEN (prep) | Related to something before and after in time or position | MAKE SURE THAT THE STOPWATCH INDICATION IS BETWEEN 2 AND 4 MINUTES. |  |
@@ -408,6 +435,7 @@
 | blend (v) — UNNAPPROVED | MIX (v) | MIX THE ADHESIVE WITH THE HARDENER. | Blend the adhesive with the hardener. |
 
 <!-- Page 170 of 434 -->
+
 |---|---|---|---|
 | block (v) — UNNAPPROVED | CAUSE A BLOCKAGE | MAKE SURE THAT THE SEALANT DOES NOT CAUSE A BLOCKAGE OF THE DRAIN. | Check that the sealant does not block the drain. |
 | BLOCKAGE (n) | That which prevents correct operation | MAKE SURE THAT THERE IS NO BLOCKAGE OF THE PIPE. |  |
@@ -421,6 +449,7 @@
 | BOND (n) | 2. A firm connection with another material | MAKE SURE THAT THE BOND BETWEEN THE HONEYCOMB CORE AND THE SKIN IS CORRECT. |  |
 
 <!-- Page 171 of 434 -->
+
 |---|---|---|---|
 | BOND (v), BONDS, BONDED, BONDED | 1. To make an electrical bond | THE STATIC DISCHARGER IS ELECTRICALLY BONDED TO THE FRAME. |  |
 | BOND (v), BONDS, BONDED, BONDED | 2. To attach firmly or become firmly attached with another material | IF THE FILLER BONDS TO THE TOOL, MAKE THE TOOL MOIST WITH COLD WATER. |  |
@@ -436,6 +465,7 @@
 | breadth (n) — UNNAPPROVED | WIDTH (n) | THE WIDTH OF THE MATERIAL MUST BE LARGER THAN 10 mm. | The breadth of the material must be larger than 10 mm. |
 
 <!-- Page 172 of 434 -->
+
 |---|---|---|---|
 | break (n) — UNNAPPROVED | STOP (v) | IF THERE TRANSMISSION STOPS, CANCEL THE TEST. | If there is a break in the transmission, cancel the test. |
 | BREAK (v), BREAKS, BROKE, BROKEN | To cause to separate or become separated into parts by force | BREAK THE BOND OF THE SEALANT. |  |
@@ -449,6 +479,7 @@
 | brilliance (n) — UNNAPPROVED | BRIGHT (adj) | TURN THE BRT CONTROL CLOCKWISE TO MAKE THE DISPLAY BRIGHTER. | Turn the BRT CONTROL clockwise to increase the display brilliance. |
 
 <!-- Page 173 of 434 -->
+
 |---|---|---|---|
 | bring (v) — UNNAPPROVED | MOVE (v) | MOVE THE PANEL INTO POSITION. | Bring the panel into place. |
 | bring (v) — UNNAPPROVED | PUT (v) | PUT THE PANEL IN POSITION. |  |
@@ -466,6 +497,7 @@
 | BURN (v), BURNS, BURNED, BURNED | 2. To cause injury or damage through heat | HOT SURFACES CAN BURN YOU. |  |
 
 <!-- Page 174 of 434 -->
+
 |---|---|---|---|
 | burst (v) — UNNAPPROVED | BREAK (v) | IF THE DISK BREAKS, STOP THE SUPPLY. | If the disk bursts, switch off the supply. |
 | BUT (conj) | On the contrary | TIGHTEN THE NUTS, BUT DO NOT TORQUE THEM AT THIS TIME. |  |

@@ -45,21 +45,25 @@ A noun names a thing; a verb names the work. When you write `validate the token`
 ### Example 1 — Profiler reports latency (development operations)
 
 **Non-STE:**
+
 ```
 # benchmark_report.py
 def report_latency():
     # The profiler gives an indication of 200ms latency.
     return "profiler indicates 200ms"
 ```
+
 > **Non-STE:** The profiler gives an indication of 200ms latency.
 
 **STE:**
+
 ```
 # benchmark_report.py
 def report_latency():
     # The profiler shows 200ms latency.
     return "profiler shows 200ms"
 ```
+
 > **STE:** The profiler shows 200ms latency.
 
 *Adapted from spec pair: "The ohmmeter gives an indication of 450 ohms." / "The ohmmeter shows 450 ohms." The approved verb "show" describes the action more clearly than the noun phrase "gives an indication of."*
@@ -69,19 +73,23 @@ def report_latency():
 ### Example 2 — Service initialization (application actions)
 
 **Non-STE:**
+
 ```
 # deploy.sh
 # Before the initialization of the service, make sure that the config is valid.
 cp config.default.yaml config.yaml
 ```
+
 > **Non-STE:** Before the initialization of the service, make sure that the config is valid.
 
 **STE:**
+
 ```
 # deploy.sh
 # Before you initialize the service, make sure that the config is valid.
 ./init-service.sh
 ```
+
 > **STE:** Before you initialize the service, make sure that the config is valid.
 
 *Adapted from spec pair: "Before the removal of the unit, make sure that the power supply is OFF." / "Before you remove the unit, make sure that the power supply is OFF." Use the approved verb "initialize" instead of the noun "initialization."*
@@ -91,6 +99,7 @@ cp config.default.yaml config.yaml
 ### Example 3 — Caching a response (data + communication actions)
 
 **Non-STE:**
+
 ```
 // cache_client.go
 func Get(r *http.Request) string {
@@ -98,9 +107,11 @@ func Get(r *http.Request) string {
     return upstream(r)
 }
 ```
+
 > **Non-STE:** Cache the response.
 
 **STE:**
+
 ```
 // cache_client.go
 func Get(r *http.Request) string {
@@ -108,6 +119,7 @@ func Get(r *http.Request) string {
     return cache.Do(upstream(r))
 }
 ```
+
 > **STE:** Do a cache of the response.
 
 *Adapted from spec pair: "Check the laptop battery." / "Do a check of the laptop battery." "Cache" is an approved technical noun (category 1.5) but not an approved verb. Use the noun form "Do a cache" instead of the verb "Cache."*
@@ -117,21 +129,25 @@ func Get(r *http.Request) string {
 ### Example 4 — HTTP status from a function (communication actions)
 
 **Non-STE:**
+
 ```
 # handler.py
 def status() -> str:
     # Do not write: The function gives a result of Put 500 OK.
     return "result 500"
 ```
+
 > **Non-STE:** The function gives a result of 500 OK.
 
 **STE:**
+
 ```
 # handler.py
 def status() -> str:
     # The function returns 500 OK.
     return "500 OK"
 ```
+
 > **STE:** The function returns 500 OK.
 
 *Adapted from spec principle: the approved verb "return" describes the action more clearly than the noun phrase "gives a result of."*
@@ -141,19 +157,23 @@ def status() -> str:
 ### Example 5 — Validate input (application actions)
 
 **Non-STE:**
+
 ```
 // validate.go
 // The parser does a verification of the payload.
 func Verify(p []byte) error { /* ... */ }
 ```
+
 > **Non-STE:** The parser does a verification of the payload.
 
 **STE:**
+
 ```
 // validate.go
 // You validate the payload before you store it.
 func Validate(p []byte) error { /* ... */ }
 ```
+
 > **STE:** You validate the payload before you store it.
 
 ---
@@ -161,21 +181,25 @@ func Validate(p []byte) error { /* ... */ }
 ### Example 6 — Read and write config (data actions)
 
 **Non-STE:**
+
 ```
 # config_io.py
 # A read of the config, then a write of the config.
 def load(): ...
 def store(): ...
 ```
+
 > **Non-STE:** A read of the config, then a write of the config.
 
 **STE:**
+
 ```
 # config_io.py
 # Read the config, then write the config.
 def read(): ...
 def write(): ...
 ```
+
 > **STE:** Read the config, then write the config.
 
 ---
@@ -183,21 +207,25 @@ def write(): ...
 ### Example 7 — Send and receive messages (communication actions)
 
 **Non-STE:**
+
 ```
 // bus.go
 // A transmission of the event, then a reception of the event.
 func Transmit(e Event) { ... }
 func Receive(e Event) { ... }
 ```
+
 > **Non-STE:** A transmission of the event, then a reception of the event.
 
 **STE:**
+
 ```
 // bus.go
 // Send the event, then receive the event.
 func Send(e Event) { ... }
 func Receive(e Event) { ... }
 ```
+
 > **STE:** Send the event, then receive the event.
 
 ---

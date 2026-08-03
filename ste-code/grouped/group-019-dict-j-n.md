@@ -26,6 +26,7 @@
 Blank Page
 
 <!-- Page 284 of 434 -->
+
 |---|---|---|---|
 | KEEP (v), (KEEPS, (KEPT, (KEPT | To continue to have or hold | KEEP THE COMPOUND IN A CLOSED CONTAINER. |  |
 | key (v) — UNNAPPROVED | REFER (v) KEY (TN) | THE ILLUSTRATION REFERS TO EACH STEP. INSTALL THE KEY BETWEEN THE PULLEY AND THE SHAFT. | The illustration will be keyed to each of the steps. The pulley must be keyed to the shaft. |
@@ -41,6 +42,7 @@ Non-STE example
 Blank Page
 
 <!-- Page 286 of 434 -->
+
 |---|---|---|---|
 | label (v) — UNNAPPROVED | IDENTIFY (v) LABEL (TN) | IDENTIFY THE COMPONENT WITH A CODE TO HELP YOU INSTALL IT AGAIN CORRECTLY. PUT A LABEL ON THE RELAY ASSEMBLY. | Label the component with a code to help you install it again correctly. Label the relay assembly. |
 | lack (n) — UNNAPPROVED | NOT SUFFICIENT | DAMAGE CAN OCCUR TO THE PUMP IF THERE IS NOT SUFFICIENT OIL IN THE RESERVOIR. | Damage can occur to the pump if there is a lack of oil in the reservoir. |
@@ -54,6 +56,7 @@ Blank Page
 | LATCH (v), LATCHES, LATCHED, LATCHED | To hold something in position with a latching device | MAKE SURE THAT YOU LATCH THE DOOR CORRECTLY. MAKE SURE THAT THE DOOR LATCHES CORRECTLY. |  |
 
 <!-- Page 287 of 434 -->
+
 |---|---|---|---|
 | later (adj) — UNNAPPROVED | SUBSEQUENT (adj) THEN (adv) | A SUBSEQUENT REPAIR WILL BE FOR THE NEW CONFIGURATION. DO THIS STEP FIRST. THEN, DISCONNECT THE CABLES. | A later repair will be for the new configuration. Do this step first. At a later time, disconnect the cables. |
 | later (adv) — UNNAPPROVED | SUBSEQUENTLY (adv) WHEN (conj) If it is possible, give the condition or time. AFTER (prep) | MAKE SURE THAT THE TOOL IS SUBSEQUENTLY AVAILABLE FOR THE INSTALLATION PROCEDURE. DO STEPS (3) THRU (5). DO STEP (6) WHEN THE AILERON MOVEMENT STOPS. THE BAR MOVES DOWN AFTER 20 SECONDS. | Make sure that the tool is available later for the installation procedure. Do steps (3) to (5). Do step (6) later. The bar moves down later. |
@@ -65,6 +68,7 @@ Blank Page
 | LEAK (n) | A crack, gap or hole which lets fluid or light go into or come out of something | EXAMINE THE SWIVEL COUPLINGS FOR LEAKS. |  |
 
 <!-- Page 288 of 434 -->
+
 |---|---|---|---|
 | leak (v) — UNNAPPROVED | LEAK (n) | IF THERE ARE LEAKS IN THE SYSTEM, REPAIR THEM. | If the system is leaking, repair it. |
 | LEAKAGE (n) | The quantity of material that goes through a leak | MEASURE THE LEAKAGE FROM THE OUTLET PORT. |  |
@@ -77,6 +81,7 @@ Blank Page
 | LENGTH (n) | 1. The distance from one end to the other end 2. The longer or longest of the three dimensions of an object | MEASURE THE LENGTH OF THE JACK RAM. THE DIMENSIONS OF THE UNIT ARE: - LENGTH 300 mm - WIDTH 90 mm - THICKNESS 60 mm. |  |
 
 <!-- Page 289 of 434 -->
+
 |---|---|---|---|
 | lengthen (v) — UNNAPPROVED | INCREASE (v) | DO NOT TRY TO INCREASE THE LENGTH OF THIS ROD. | Do not try to lengthen this rod. |
 | LESS (adj) No other forms of this adjective. | Of smaller dimension, value, quantity, volume, or number | THE FLOW RATE MUST NOT BE LESS THAN 4.0 GPM. |  |
@@ -90,6 +95,7 @@ Blank Page
 | lie (v) — UNNAPPROVED | BE (v) | THE OTHER PART OF THE CLIP IS ALONG THE BARREL. | The other part of the clip lies along the barrel. |
 
 <!-- Page 290 of 434 -->
+
 |---|---|---|---|
 | LIFE (n) | The time during which you can use an item or object | THE LIFE OF THE CARTRIDGE IN THE FIRE EXTINGUISHER IS 3 YEARS. |  |
 | LIFT (v), LIFTS, LIFTED, LIFTED | To move something up | LIFT THE COVER CAREFULLY. |  |
@@ -100,6 +106,7 @@ Blank Page
 | LIMIT (n) | A specified maximum or minimum quantity, number, time, or distance | IF THE CLEARANCES ARE NOT IN THE LIMITS GIVEN IN FIG. 4, REFER TO REPAIR SCHEME No. 2. |  |
 
 <!-- Page 291 of 434 -->
+
 |---|---|---|---|
 | limitation (n) — UNNAPPROVED | LIMIT (n) | WHEN YOU LIFT THE AIRCRAFT ON JACKS, KEEP THE CENTER OF GRAVITY BETWEEN THESE LIMITS: | When you lift the aircraft on jacks, observe these center of gravity limitations: |
 | limited (adj) — UNNAPPROVED | SMALL (adj) | THERE IS ONLY A SMALL NUMBER OF REPAIRS THAT YOU CAN DO. | There is only a limited number of repairs that you can do. |
@@ -112,6 +119,7 @@ Blank Page
 | LISTEN (v), LISTENS, LISTENED, LISTENED | To use your ears to hear or find | LISTEN FOR THE SIGNAL. |  |
 
 <!-- Page 292 of 434 -->
+
 |---|---|---|---|
 | little (adj) — UNNAPPROVED | SMALL (adj) SHORT (adj) NOT SUFFICIENT | THE DIAMETER OF THE TUBE IS TOO SMALL. INSTALL A SHORT LENGTH OF NEW TUBE. IF THE PRESSURE IS NOT SUFFICIENT, THE TEST WILL STOP. | The diameter of the tube is too little. Install a little length of new tube. If the pressure is too little, the test will stop. |
 | little (a little) (adj) | SMALL QUANTITY | ADD A SMALL QUANTITY OF DISINFECTANT TO THE SOLUTION. | Add a little disinfectant to the solution. |
@@ -122,6 +130,7 @@ Blank Page
 | LOCALLY (adv) | Applicable to a given location or position | YOU CAN ALSO DO THIS TEST WITH A LOCALLY MADE TOOL. |  |
 
 <!-- Page 293 of 434 -->
+
 |---|---|---|---|
 | locate (v) — UNNAPPROVED | FIND (v) ENGAGE (v) PUT (v) | USE TALCUM POWDER TO FIND EXTERNAL LEAK S. ENGAGE THE GEAR WHEEL ON THE SHAFT. PUT THE CLAMP IN ITS CORRECT POSITION. | Use talcum powder to locate external leaks. Locate the gear wheel on the shaft. Locate the clamp in its correct position. |
 | LOCATION (n) | A place or site that you can find | FIGURES 1 THRU 4 SHOW THE LOCATIONS OF THE WALKWAYS. |  |
@@ -132,6 +141,7 @@ Blank Page
 | long (as long as) (conj) | WHILE (conj) | WHILE THE DC SUPPLY IS ON, THE FAN MUST OPERATE. | As long as the DC supply is ON, the fan must operate. |
 
 <!-- Page 294 of 434 -->
+
 |---|---|---|---|
 | long (no longer) (adv) | NOT… AT THIS TIME UNTIL…NOT | THIS PROCEDURE IS NOT APPLICABLE AT THIS TIME. ADJUST THE POTENTIOMETER UNTIL YOU DO NOT HEAR A HUM FROM THE LOUDSPEAKER. | This procedure is no longer applicable. Adjust the potentiometer until the loudspeaker no longer hums. |
 | LONGITUDINAL (adj) | Related to the longitudinal axis | ADJUST THE LONGITUDINAL TRIM SYSTEM. |  |
@@ -142,6 +152,7 @@ Blank Page
 | LOOSE (adj) | 1. On, in, but not attached 2. Not tight For other meanings, use: TENSION (TN) | MAKE SURE THAT YOU REMOVE ALL TOOLS, EQUIPMENT, AND LOOSE OBJECTS FROM THE AIR INTAKE. DO A CHECK FOR LOOSE FASTENERS. MAKE SURE THAT THERE IS TENSION IN THE CABLES. | Make sure that the cables are not loose. |
 
 <!-- Page 295 of 434 -->
+
 |---|---|---|---|
 | LOOSELY (adv) | Not tightly | MAKE SURE THAT THE PARTS ARE LOOSELY ASSEMBLED. |  |
 | LOOSEN (v), LOOSENS, LOOSENED, LOOSENED | To cause to be not tight | LOOSEN THE SCREWS THAT ATTACH THE CLAMP TO THE SUPPORT. |  |
@@ -154,6 +165,7 @@ Blank Page
 | lukewarm (adj) — UNNAPPROVED | WARM (adj) | SOAK THE AREA WITH WARM WATER. | Soak the area with lukewarm water. |
 
 <!-- Page 296 of 434 -->
+
 |---|---|---|---|
 | MAGNETIC (adj) | Related to the properties of a magnet | REMOVE THE MAGNETIC DRAIN PLUG FROM THE OIL RESERVOIR. |  |
 | MAGNETICALLY (adv) | In a magnetic manner | THE DOOR CLOSES MAGNETICALLY AND LOCKS. |  |
@@ -163,6 +175,7 @@ Blank Page
 | major (adj) — UNNAPPROVED | PRIMARY (adj) | THE PRIMARY FUNCTION OF THE POWER UNIT IS TO SUPPLY ELECTRICAL POWER. | The major function of the power unit is to supply electrical power. |
 
 <!-- Page 297 of 434 -->
+
 |---|---|---|---|
 | MAKE (v), MAKES, MADE, MADE | To manufacture, to cause to occur or to become | MAKE A RECESS FOR THE STUDS OF 5 mm. MAKE THE CLOTH MOIST WITH WATER. TILT THE FITTING TO MAKE THE BARREL NUT FALL OUT OF IT. |  |
 | make certain (v) — UNNAPPROVED | MAKE SURE (v) | MAKE SURE THAT THE VALVE IS OPEN. | Make certain that the valve is open. |
@@ -173,6 +186,7 @@ Blank Page
 | manipulate (v) — UNNAPPROVED | MOVE (v) ADJUST (v) | MOVE THE FLEXIBLE PIPE TO GET ACCESS TO THE BOTTOM BOLTS. ADJUST THE FLEXIBLE PIPE TO GET ACCESS TO THE BOTTOM BOLTS. | Manipulate the flexible pipe to get access to the bottom bolts. |
 
 <!-- Page 298 of 434 -->
+
 |---|---|---|---|
 | MANUAL (adj) | Operated with the hands | IF THE AUTOMATIC CONTROLS DO NOT OPERATE, USE THE MANUAL PROCEDURE. |  |
 | MANUAL (n) | A publication that gives data related to a special subject | THIS MANUAL GIVES PERFORMANCE DATA. |  |
@@ -185,6 +199,7 @@ Blank Page
 | MASS (n) | The quantity of matter that is in an object and relates to its weight. The equivalent of inertia | STRUCTURAL OR EQUIPMENT MODIFICATIONS CAN CHANGE THE BASIC MASS AND THE CENTER-OF-GRAVITY COORDINATES. |  |
 
 <!-- Page 299 of 434 -->
+
 |---|---|---|---|
 | match (v) — UNNABPROVED | ALIGN (v) AGREE (v) | FOLD THE GIRT ONTO THE CONTAINER UNTIL IT IS ALIGNED WITH THE VELCRO TAPE. MAKE SURE THAT THE SEAL AGREES WITH THE SHAPE OF THE PANEL. | Fold the girt over the container so that the Velcro tape matches. Ensure the seal matches the panel shape. |
 | mate (v) — UNNAPPROVED | CONNECT (v) ENGAGE (v) TOGETHER (adv) | CONNECT THE PLUG TO THE RECEPTACLE. ENGAGE THE SPLINES ON THE SHAFT WITH THOSE IN THE GEARBOX. PUT THE SMOOTH SURFACES TOGETHER. | Mate the plug to the receptacle. Mate the splines on the shaft with those in the gearbox. Mate the smooth surfaces. |
@@ -196,6 +211,7 @@ Blank Page
 | MAXIMUM (n) | The largest dimension, quantity, number, or value | MOVE THE LEVER A MAXIMUM OF 45 DEG. |  |
 
 <!-- Page 300 of 434 -->
+
 |---|---|---|---|
 | may (v) — UNNAPPROVED | CAN (v) POSSIBLY (adv) | IF YOU USE INCORRECT EQUIPMENT, YOU CAN CAUSE DAMAGE TO THE VANES. IF YOU CANNOT ENGAGE THE ROD AND THE PISTON, THE LENGTH OF THE NEW ROD IS POSSIBLY INCORRECT. | The vanes may be damaged by using incorrect equipment. If you cannot engage the rod and the piston, the length of the new rod may be incorrect. |
 | MEASURE (v), MEASURES, MEASURED, MEASURED | To find the dimensions, capacity, or quantity of something | MEASURE THE LOAD. |  |
@@ -207,6 +223,7 @@ Blank Page
 | meet (v) — UNNAPPROVED | ENGAGE (v) TOUCH (v) | PUSH THE PIN IN UNTIL IT ENGAGES IN THE RETAINING CLIP. THE ROD MUST TOUCH THE CENTER OF THE STRIP. | Push the pin in until it meets with the retaining clip. The rod should meet the center of the strip. |
 
 <!-- Page 301 of 434 -->
+
 |---|---|---|---|
 | MELT (v), MELTS, MELTED, MELTED | To change or to cause something to change from solid to liquid because of heat | THE FUSIBLE PLUGS MUST MELT IN 20 SECONDS OR LESS. | DO NOT USE A FLAME TO MELT THE ICE. |
 | mention (v) — UNNAPPROVED | GIVE (v) | THE REPAIR LIMITS ARE NOT GIVEN BECAUSE SPECIAL EQUIPMENT IS NECESSARY. | The repair limits are not mentioned as special equipment is required. |
@@ -220,6 +237,7 @@ Blank Page
 | minimize (v) — UNNAPPROVED | MINIMUM (n) | USE A TRESTLE TO KEEP THE LOADS ON THE WING TO A MINIMUM. | Use a trestle to minimize the loads on the wing. |
 
 <!-- Page 302 of 434 -->
+
 |---|---|---|---|
 | MINIMUM (adj) | Related to the smallest dimension, quantity, number, or value | MAKE SURE THAT THE FLUID IN THE RESERVOIR IS ABOVE THE MINIMUM LEVEL. |  |
 | MINIMUM (n) | The smallest dimension, quantity, number, or value | LET THE PAINT DRY FOR A MINIMUM OF 1 HOUR. |  |
@@ -233,6 +251,7 @@ Blank Page
 | MIXTURE (n) | The result that you get when you mix materials | DO NOT USE THIS MIXTURE WHEN THE TEMPERATURE IS LESS THAN 15 °C. |  |
 
 <!-- Page 303 of 434 -->
+
 |---|---|---|---|
 | MOBILE (adj) | That is made to move easily | CONNECT THE MOBILE GROUND POWER UNIT. |  |
 | MODE (n) | A special condition of operation | MAKE SURE THAT THE "HEADING SELECT" MODE OPERATES. |  |
@@ -246,6 +265,7 @@ Blank Page
 | MONITOR (v), MONITORS, MONITORED, MONITORED | To do a check at something for a period of time to find if there is a change | MONITOR THE INDICATORS ON THE OVERHEAD PANEL. HEAT SENSORS MONITOR THE AMBIENT TEMPERATURE. |  |
 
 <!-- Page 304 of 434 -->
+
 |---|---|---|---|
 | MOOR (v), MOORS, MOORED, MOORED | To hold something in position with ropes and cables | IN BAD WEATHER CONDITIONS, MOOR THE BOAT. |  |
 | MORE (adj) | A large quantity of | ADD MORE SHIMS UNTIL YOU GET THE SPECIFIED CLEARANCE. |  |
@@ -258,6 +278,7 @@ Blank Page
 | MOVABLE (adj) | That can move if necessary | TURN THE MOVABLE HALF-COLLAR OF THE SUPPORT. |  |
 
 <!-- Page 305 of 434 -->
+
 |---|---|---|---|
 | MOVE (v), MOVES, MOVED, MOVED | To change or cause to change position or location | MAKE SURE THAT THE POINTER MOVES FREELY. MOVE THE VALVE UNTIL IT ALIGNS WITH THE ACTUATOR SHAFT. |  |
 | MOVEMENT (n) | A change of position or location | SUDDEN OPERATION OF THE GYRO CAN CAUSE UNWANTED MOVEMENT OF THE HORIZONTAL STABILIZER. |  |
@@ -267,6 +288,7 @@ Blank Page
 | MUST (v) | Auxiliary modal verb that shows obligation | THE BAT 1 SWITCH MUST BE IN THE ON POSITION. |  |
 
 <!-- Page 306 of 434 -->
+
 |---|---|---|---|
 | NAME (n) | The identification you give to a person or an object | PUSH THE BUTTON ADJACENT TO THE NAME OF THE SYSTEM. WRITE YOUR NAME ON THE REGISTRATION FORM. |  |
 | NEAR (adj) (NEARER, (NEAREST) | At or to a relatively short distance | PUT THE SYRINGE ON THE NEAREST SURFACE OF THE EXAMINATION TABLE. |  |
@@ -279,6 +301,7 @@ Blank Page
 | NEUTRAL (adj) | 1. That has no effect 2. That is not acid or alkaline | MAKE SURE THAT THE CONTROLS ARE IN THE NEUTRAL POSITION. CLEAN THE SCREEN WITH A NEUTRAL SOLUTION. |  |
 
 <!-- Page 307 of 434 -->
+
 |---|---|---|---|
 | neutralize (v) — UNNAPPROVED | NEUTRAL (adj) | MAKE THE BASIC ELECTROLYTE NEUTRAL WITH VINEGAR OR BORIC ACID. | Neutralize the basic electrolyte with vinegar or boric acid. |
 | never (adv) — UNNAPPROVED | DO NOT | DO NOT LET THE LEVEL IN THE TANK DECREASE TO LESS THAN HALF. | Never allow the level in the tank to drop below half. |
@@ -293,6 +316,7 @@ Blank Page
 | NONE (pron) | Not one, not anyone | IF NONE OF THE BRACKETS ARE DAMAGED, CONTINUE THE INSPECTION. |  |
 
 <!-- Page 308 of 434 -->
+
 |---|---|---|---|
 | nor (conj) — UNNAPPROVED | NOT (adv) | IN THESE CONDITIONS, THE MECHANICAL AND ELECTRICAL PITCH TRIM SYSTEMS WILL NOT OPERATE. | In these conditions, neither the mechanical nor the electrical pitch trim systems will operate. |
 | normal (adj) — UNNAPPROVED | USUAL (adj) CORRECT (adj) | THE "ARMED" POSITION IS THE USUAL POSITION OF THE SWITCH. THE CORRECT PRESSURE FOR OPERATION IS 3000 psi. | The ARMED position is the normal position of the switch. Normal operating pressure is 3000 psi. |
@@ -302,6 +326,7 @@ Blank Page
 | NOTCH (n) | An area in the shape of a "V" | MAKE SURE THAT THE BOGIE ROLLERS ARE ALIGNED WITH THE NOTCHES IN THE TRACK. |  |
 
 <!-- Page 309 of 434 -->
+
 |---|---|---|---|
 | note (v) — UNNAPPROVED | RECORD (v) | RECORD DIMENSION "A." | Note dimension A. |
 | notify (v) — UNNAPPROVED | TELL (v) | IF YOU FIND CRACKS, TELL THE CHIEF INSPECTOR. | If cracks are found, notify the chief inspector. |

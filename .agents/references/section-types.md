@@ -260,6 +260,7 @@ All rights reserved.
 | 1.2 | Clarified part-of-speech restrictions |
 ...
 ```
+
 ANNOTATION: Every line comes from the source. No summary. Legal text is verbatim. The highlights table preserves ALL rows.
 
 ### RULES — Gold Standard (page 43-46 excerpt)
@@ -274,6 +275,7 @@ in procedural and descriptive text must come from the approved dictionary.
 **STE:** Remove the used oil.
 **Non-STE:** Remove the utilized oil.
 ```
+
 ANNOTATION: Rule statement is bold and verbatim. Explanatory text follows. Example pairs are clearly labeled. "Rule X.Y" numbering is preserved.
 
 ### CATEGORIES — Gold Standard (page 47-50 excerpt)
@@ -287,6 +289,7 @@ parts breakdowns.
 Examples: actuator, bracket, filter, gasket, module, sensor, valve
 Notes: Use the exact name from the approved parts catalog. Do not translate.
 ```
+
 ANNOTATION: Category number and name are exact. Description is verbatim. Examples list ALL items from the source.
 
 ### DICT — Gold Standard (page 129-132 excerpt)
@@ -311,6 +314,7 @@ Alternatives: DO (v), COMPLETE (v)
 STE: Do the test.
 Non-STE: Accomplish the test.
 ```
+
 ANNOTATION: UPPERCASE entries are approved. Lowercase entries are unapproved. Every entry has word, POS, status, meaning/alternatives, and both example sentences.
 
 ### APPENDIX — Gold Standard (page 361-364 excerpt)
@@ -327,6 +331,7 @@ ANNOTATION: UPPERCASE entries are approved. Lowercase entries are unapproved. Ev
 ...
 | 9 | 2025-01-15 | Updated approved word list, clarified categories |
 ```
+
 ANNOTATION: Flowchart text is preserved as structured text. Change history table has ALL issues from 1 to 9.
 
 ## Cross-References

@@ -5,6 +5,7 @@ CURRENT PAIRS: {{current_pairs}}
 TARGET: Generate {{needed}} more pairs
 
 RULE CONTENT (first 150 lines):
+
 ```
 {{rule_preview}}
 ```

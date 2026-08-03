@@ -543,6 +543,7 @@ The STE-Code anti-pattern against "-ing" forms as main verbs directly supports R
 (Three implied instructions hidden in gerund phrases before the main instruction.)
 
 **After:**
+
 ```
 (1) Install the package.
 (2) Configure the environment.

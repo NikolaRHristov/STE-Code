@@ -25,11 +25,13 @@ the single source for cross-cutting behaviour; no unit re-implements them.
 - `ste_cli.py` — argparse scaffolding for the entrypoints.
 
 ## Rule
+
 If a script needs to write a file, read a config, resolve a path, or stamp a
 run, it imports from `lib/` — it does not hand-roll `open(...,"w")`,
 `str(Path.home()/".hermes"/...)`, or a timestamp format. This keeps the pipeline
 DRY and the jail boundary honest.
 
 ## See also
+
 - ../../config/defaults.yaml (shared agent + runtime defaults)
 - ../README.md (per-unit index)

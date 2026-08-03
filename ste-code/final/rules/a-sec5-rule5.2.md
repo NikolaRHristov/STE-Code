@@ -89,6 +89,7 @@ The file has this shape:
 connection_string = "postgres://localhost:5432/app"
 pool_size = 10
 ```
+
 ```
 
 > **Non-STE:** Run the test suite with the coverage flag enabled and verify that the total line coverage is above 80 percent across all modules in the project. (27 words)
@@ -169,6 +170,7 @@ Actions that occur at the same time:
 3. Watch the terminal log output for error messages during the startup sequence:
 
        journalctl -u app-server -f
+
 ```
 
 ## Code-Domain Explanation
@@ -499,6 +501,7 @@ Each example below shows a real code documentation scenario, the Non-STE violati
 
 2. Check that the response status code is `201`.
 3. Make sure that the `Location` header contains the URL of the new user resource.
+
 ```
 
 ### Example 2: Docker Compose Quick-Start
@@ -817,6 +820,7 @@ The STE-Code anti-pattern against "-ing" forms as main verbs directly supports R
 (Three implied instructions hidden in gerund phrases before the main instruction.)
 
 **After:**
+
 ```text
 (1) Install the package.
 (2) Configure the environment.

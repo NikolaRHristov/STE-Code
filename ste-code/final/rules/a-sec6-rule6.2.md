@@ -493,10 +493,12 @@ When a repository contains code in multiple languages, the same concept may have
 # Python
 config: dict = load_config()
 ```
+
 ```java
 // Java
 Map<String, String> config = loadConfig();  // HashMap at runtime
 ```
+
 ```go
 // Go
 config := make(map[string]string) // Go calls it a map

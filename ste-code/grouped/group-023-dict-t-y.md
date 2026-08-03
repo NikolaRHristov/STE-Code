@@ -29,6 +29,7 @@
 | TAP (v), TAPS, TAPPED, TAPPED | To hit lightly and quickly | TAP THE BOLT WITH A MALLET. |  |
 
 <!-- Page 391 of 434 -->
+
 |---|---|---|---|
 | tape (v) — UNNAPPROVED | TAPE (TN) | ATTACH THE FOIL WITH TAPE TO KEEP IT IN POSITION. | Tape the foil in position. |
 | TASK (n) | Assigned work or procedure | EACH TASK HAS AN IDENTIFICATION LETTER. |  |
@@ -42,6 +43,7 @@
 | tension (v) — UNNAPPROVED | TENSION (TN) | ADJUST THE TENSION IN THE CABLES TO THE CORRECT VALUE. | Tension cables to the correct value. |
 
 <!-- Page 392 of 434 -->
+
 |---|---|---|---|
 | terminate (v) — UNNAPPROVED | STOP (v) | STOP THE TEST AFTER 2 SECONDS. | Terminate the test after 2 seconds. |
 | TERTIARY (adj) | Third in importance | THERE ARE THREE CLASSES OF STRUCTURE: PRIMARY, SECONDARY, AND TERTIARY. |  |
@@ -56,6 +58,7 @@
 | THEN (adv) | Immediately after in time or sequence | LIFT THE COVER. THEN, PULL THE HANDLE. |  |
 
 <!-- Page 393 of 434 -->
+
 |---|---|---|---|
 | THERE (adv) | In that position | IF THE LABEL IS NOT THERE, ATTACH A NEW ONE. |  |
 | THERE (pron) | Function word that starts a sentence or a subordinate clause | THERE ARE THREE MEASUREMENT POINTS ON THE DIAGRAM. MAKE SURE THAT THERE ARE NO LOOSE OBJECTS. |  |
@@ -67,6 +70,7 @@
 | THICKNESS (n) | The smallest of the three dimensions | THE THICKNESS OF THE PRIMER LAYER MUST BE BETWEEN 0.05 mm AND 0.06 mm. |  |
 
 <!-- Page 394 of 434 -->
+
 |---|---|---|---|
 | THIN (adj) (THINNER, (THINNEST) | That has a small thickness | APPLY A THIN LAYER OF SEALING COMPOUND ON THE BARE METAL. |  |
 | thin (v) — UNNAPPROVED | LIQUID (adj) | ADD SOLVENT TO MAKE THE PAINT MORE LIQUID. | Add solvent to thin the paint. |
@@ -82,6 +86,7 @@
 | THROUGH (prep) | Function word that shows movement into one end or side and out of the other | MAKE SURE THAT THE FLUID THAT GOES THROUGH THE TUBE HAS NO BUBBLES. |  |
 
 <!-- Page 395 of 434 -->
+
 |---|---|---|---|
 | throughout (prep) — UNNAPPROVED | DURING (prep) | MAKE SURE THAT THE DOORS ARE CLOSED DURING THE TEST. | Make sure that the doors are closed throughout the test. |
 | THRU (prep) | From a point in a sequence to another | DO STEPS 4 THRU 10 AGAIN. |  |
@@ -93,6 +98,7 @@
 | till (conj) — UNNAPPROVED | UNTIL (conj) | MOVE THE LEVER UNTIL IT TOUCHES THE STOP. | Move the lever till it hits the stop. |
 
 <!-- Page 396 of 434 -->
+
 |---|---|---|---|
 | TILT (v), TILTS, TILTED, TILTED | To move at an angle or to put something at an angle between the vertical and the horizontal | TO ALIGN THE BOLT, TILT IT TO THE LEFT SIDE. IF THE SHAFT TILTS, STOP THE TEST PROCEDURE. |  |
 | TIME (n) | 1. A duration that you can measure 2. An occurrence | THE TIME BETWEEN CLICKS MUST BE 20 SECONDS. DO STEP 2 THREE TIMES. DO NOT TIGHTEN THE NUTS AT THIS TIME. |  |
@@ -102,6 +108,7 @@
 | TO (prep) | Function word that shows: - The direction of, point of arrival or time, connection, result, cause - That the word that follows is an infinitive | SET THE SWITCH TO "OFF". THIS VALUE IS EQUIVALENT TO THE MAXIMUM. ATTACH THE UNIONS TO THE VALVE. GET ACCESS TO THE SELECTOR VALVES. TRY TO LIFT THE COVER MANUALLY. |  |
 
 <!-- Page 397 of 434 -->
+
 |---|---|---|---|
 | TOGETHER (adv) | In one group or position For other meanings, use: | USE TAPE TO ATTACH THE CABLES TOGETHER. |  |
 | AT THE SAME TIME | DISASSEMBLE THE BYPASS VALVE AND THE DUMP VALVE AT THE SAME TIME. | Disassemble the bypass valve and the dump valve together. |  |
@@ -115,6 +122,7 @@
 | TOTAL (adj) | All of | THE TOTAL QUANTITY OF FUEL IN THE CENTER TANK IS 5000 lb. |  |
 
 <!-- Page 398 of 434 -->
+
 |---|---|---|---|
 | TOTAL (n) | The full quantity | ADD THE VALUES. THE TOTAL MUST NOT BE MORE THAN 15 mm. |  |
 | TOUCH (v), TOUCHES, TOUCHED, TOUCHED | To be in contact | MAKE SURE THAT THE LOCK NUT TOUCHES THE SPRING. |  |
@@ -127,6 +135,7 @@
 | trained (adj) — UNNAPPROVED | APPROVED (adj) | ONLY APPROVED PERSONNEL CAN OPERATE THE BRAKES. | Only trained personnel can operate the brakes. |
 
 <!-- Page 399 of 434 -->
+
 |---|---|---|---|
 | transfer (n) — UNNAPPROVED | MOVEMENT (n) SUPPLY (n) | MAKE SURE THAT THE RATE OF MOVEMENT OF FUEL FROM THE WING TANKS TO THE CENTER TANK IS EQUAL. MAKE SURE THAT THE RATE OF SUPPLY OF FUEL FROM THE WING TANKS TO THE CENTER TANK IS EQUAL. | Make sure the rate of fuel transfer from the wing tanks to the center tank is equal. Make sure the rate of fuel transfer from the wing tanks to the center tank is equal. |
 | transfer (v) — UNNAPPROVED | MOVE (v) INSTALL (v) | MOVE THE COUPLINGS TO THE NEW UNIT. INSTALL THE COUPLINGS ON THE NEW UNIT. | The couplings must be transferred to the new unit. Transfer the couplings to the new unit. |
@@ -138,6 +147,7 @@
 | TRAVEL (n) | The movement of an item | MAKE SURE THAT THE RANGE OF TRAVEL OF THE CONTROL SURFACES IS CLEAR. |  |
 
 <!-- Page 400 of 434 -->
+
 |---|---|---|---|
 | travel (v) — UNNAPPROVED | GO (v) MOVE (v) | THE TURNBUCKLE GOES THROUGH A HOLE IN THE BULKHEAD. THE LEVER MOVES THROUGH A 30-DEG. ARC. | The turnbuckle travels through a hole in the bulkhead. The lever travels through a 30-deg. arc. |
 | treat (v) — UNNAPPROVED | APPLY (v) TOUCH (v) | APPLY WAX TO THE SURFACE. BE CAREFUL WHEN YOU TOUCH PRINTED CIRCUIT BOARDS. | Treat the surface with wax. Be careful when you treat printed circuit boards. |
@@ -148,6 +158,7 @@
 | true (adj) — UNNAPPROVED | CORRECT (adj) AGREE (v) | MAKE SURE THAT THE VALUE SHOWN ON THE INDICATOR IS CORRECT. MAKE SURE THAT THE INDICATION ON THE GAUGE AGREES WITH THE QUANTITY OF FUEL THAT IS IN THE TANK. | Make sure that the indicator reading is true. Make sure that the gauge shows the true quantity of fuel that is in the tank. |
 
 <!-- Page 401 of 434 -->
+
 |---|---|---|---|
 | TRY (v), TRIES, TRIED, TRIED | To make an effort to do something | TRY TO MOVE THE CONTROL COLUMN. |  |
 | tuck (v) — UNNAPPROVED | PUT (v) | PUT THE HEADSTRAP INTO THE FACE PIECE. | Tuck the headstrap into the face piece. |
@@ -160,6 +171,7 @@
 | twice (adv) — UNNAPPROVED | TWO (TN) | DO THIS PROCEDURE TWO TIMES. | Do this procedure twice. |
 
 <!-- Page 402 of 434 -->
+
 |---|---|---|---|
 | TWIST (v), TWISTS, TWISTED, TWISTED | 1. To use a force that turns something and causes a distortion 2. To turn or change shape as a result of torsion | DO NOT TWIST THE CABLES. IF THE CABLE TWISTS, DISCONNECT THE TWO CONNECTORS. |  |
 | TYPE (n) | A specified group | FIND THE TYPE AND DIMENSIONS OF THE DAMAGE. |  |
@@ -169,6 +181,7 @@
 Blank Page
 
 <!-- Page 404 of 434 -->
+
 |---|---|---|---|
 | unable (adj) — UNNAPPROVED | CANNOT (v) | IF YOU CANNOT TURN THE PULLEY, MAKE SURE THAT THE PIN IS REMOVED. | If you are unable to turn the pulley, make sure that the pin is removed. |
 | unauthorized (adj) — UNNAPPROVED | NOT APPROVED | IF YOU ARE NOT APPROVED TO DO THIS WORK, DO NOT DO THIS ENGINE TEST. | If you are unauthorized, do not do this engine test. |
@@ -183,6 +196,7 @@ Blank Page
 | UNDEMANDED (adj) | That occurs without an apparent cause | IF YOU GET AN UNDEMANDED MOVEMENT, DO A TEST OF THE SYSTEM. |  |
 
 <!-- Page 405 of 434 -->
+
 |---|---|---|---|
 | under (prep) — UNNAPPROVED | BELOW (prep) IN (prep) LESS THAN | INSTALL THE CABLE THROUGH THE GUIDE TUBE BELOW THE CABIN FLOOR. THIS RESULT CAN OCCUR IN DIFFERENT CONDITIONS. MAKE SURE THAT THE PRESSURE IS LESS THAN 30 psi. | Install the cable through the guide tube under the cabin floor. This result can occur under different conditions. Make sure the pressure is under 30 psi. |
 | underneath (prep) — UNNAPPROVED | BELOW (prep) | PUT THE CONTAINER BELOW THE DRAIN VALVE. | Place the container underneath the drain valve. |
@@ -193,6 +207,7 @@ Blank Page
 | uneven (adj) — UNNAPPROVED | EQUAL (adj) ROUGH (adj) | MAKE SURE THAT THE FUEL LOAD IS EQUAL ON EACH SIDE OF THE AIRCRAFT CENTERLINE. IF THE SURFACE IS ROUGH, REPLACE THE SLIDE VALVE. | Avoid uneven fuel load about the aircraft centerline. Replace the slide valve if its surface is uneven. |
 
 <!-- Page 406 of 434 -->
+
 |---|---|---|---|
 | UNFOLD (v), UNFOLDS, UNFOLDED, UNFOLDED | To open or to straighten or to cause to open or to straighten from a folded position or condition | UNFOLD THE SHEETING CAREFULLY. MAKE SURE THAT THE INDICATOR LIGHT COMES ON WHEN THE BLADES UNFOLD. |  |
 | uniform (adj) — UNNAPPROVED | CONSTANT (adj) EQUAL (adj) | CURE THE SEALANT AT A CONSTANT TEMPERATURE. THE FUEL LOAD MUST BE EQUAL ON EACH SIDE OF THE AIRCRAFT CENTERLINE. | Cure the sealant at a uniform temperature. The fuel load must be uniform on each side of the aircraft centerline. |
@@ -203,6 +218,7 @@ Blank Page
 | UNKNOWN (adj) | Not known | DO NOT USE FUEL WITH UNKNOWN PROPERTIES. |  |
 
 <!-- Page 407 of 434 -->
+
 |---|---|---|---|
 | unlatch (v) — UNNAPPROVED | RELEASE (v) OPEN (v) | THE SWITCH MUST RELEASE. THE SWITCH MUST OPEN. | Switch must unlatch. Switch must unlatch. |
 | UNLESS (conj) | Except if | DO NOT REMOVE THE ADAPTER FROM THE STABILIZER UNLESS A REPAIR IS NECESSARY. |  |
@@ -214,6 +230,7 @@ Blank Page
 | unpainted (adj) — UNNAPPROVED | BARE (adj) | APPLY PROTECTIVE TREATMENT ON THE BARE SURFACES. | Protect the unpainted surfaces. |
 
 <!-- Page 408 of 434 -->
+
 |---|---|---|---|
 | unplug (v) — UNNAPPROVED | DISCONNECT (v) PLUG (TN) | DISCONNECT THE SOLDERING IRON. REMOVE THE PLUG FROM THE FUEL LINE. | Unplug the soldering iron. Unplug the fuel line. |
 | unprotected (adj) — UNNAPPROVED | PROTECTION (n) | WHEN YOU REMOVE THE COVER, THE CONTACTS HAVE NO PROTECTION. | When you remove the cover, the contacts are unprotected. |
@@ -227,6 +244,7 @@ Blank Page
 | unstable (adj) — UNNAPPROVED | NOT STABLE | IF THE SURFACE IS NOT STABLE, AN ACCIDENT CAN OCCUR. | If the surface is unstable, an accident can occur. |
 
 <!-- Page 409 of 434 -->
+
 |---|---|---|---|
 | UNTIL (conj) | Up to the time that | MOVE THE LEVER UNTIL THE END OF THE LINK TOUCHES THE LOCK BAR. |  |
 | UNTIL (prep) | Up to the time of | KEEP THE FIRE BOTTLE ARMED UNTIL THE END OF THE TEST. |  |
@@ -240,6 +258,7 @@ Blank Page
 | UP (prep) | To a position above | LET THE SLEEVE MOVE UP THE GUIDE TUBE. |  |
 
 <!-- Page 410 of 434 -->
+
 |---|---|---|---|
 | upon (prep) — UNNAPPROVED | ON (prep) WHEN (conj) | PUT THE OHMMETER ON A FLAT SURFACE. WHEN YOU SET THE LEVER TO "UP," THE HYDRAULIC PRESSURE MUST DECREASE. | Put the ohmmeter upon a flat surface. Upon UP selection, the hydraulic pressure must decrease. |
 | upper (adj) — UNNAPPROVED | MAXIMUM (adj) TOP (adj) | FILL THE CONTAINER TO THE MAXIMUM LEVEL. THE AIRFLOW THEN GOES ALONG THE TOP AND BOTTOM SURFACES OF THE SLATS. | Fill the container to the upper level. The airflow then passes over the upper and lower surfaces of the slats. |
@@ -252,6 +271,7 @@ Blank Page
 | upward (adv) — UNNAPPROVED | UP (adv) | MOVE THE LEVER UP. | Move the lever upward. |
 
 <!-- Page 411 of 434 -->
+
 |---|---|---|---|
 | urgently (adv) — UNNAPPROVED | IMMEDIATELY (adv) | GET MEDICAL AID IMMEDIATELY. | Seek medical aid urgently. |
 | usage (n) — UNNAPPROVED | USE (v) | IF YOU USE INCORRECT THINNERS. PROBLEMS CAN OCCUR DURING OPERATION. | The usage of incorrect thinners can cause problems during operation. |
@@ -263,6 +283,7 @@ Blank Page
 | utilize (v) — UNNAPPROVED | USE (v) | THE SOFTWARE USES CACHING TECHNIQUES TO DECREASE DATA RETRIEVAL TIMES. | The software utilizes caching techniques to decrease data retrieval times. |
 
 <!-- Page 412 of 434 -->
+
 |---|---|---|---|
 | valid (adj) — UNNAPPROVED | CORRECT (adj) APPLICABLE (adj) This word becomes part of a technical noun when it refers to an official document. | MAKE SURE THAT THE TEST RESULTS ARE CORRECT. THIS PROCEDURE IS APPLICABLE ONLY IN DIGITAL MODE. NDT PERSONNEL MUST HOLD A VALID CERTIFICATE OF COMPETENCE AT LEVEL 1, 2, OR 3. | Make sure that the test results are valid. This procedure is only valid in digital mode. |
 | validity (n) — UNNAPPROVED | CORRECT (adj) APPLICABLE (adj) | MAKE SURE THAT THE TEST RESULTS ARE CORRECT. THIS STEP IS APPLICABLE ONLY WHEN YOU APPLY THE TOP LAYER OF PAINT. | Check the validity of the test results. The validity of this step is restricted to the application of the paint topcoat. |
@@ -271,6 +292,7 @@ Blank Page
 | various (adj) — UNNAPPROVED | DIFFERENT (adj) | REFER TO TABLE 5 FOR THE DIFFERENT TORQUE VALUES THAT ARE APPLICABLE TO THE UNIT. | Refer to Table 5 for the various torque values that are applicable to the unit. |
 
 <!-- Page 413 of 434 -->
+
 |---|---|---|---|
 | vary (v) — UNNAPPROVED | CHANGE (v) | CHANGE THE FREQUENCY AND RECORD THE RESULTS. | Vary the frequency and record the results. |
 | vent (v) — UNNAPPROVED | RELEASE (v) FLOW (v) OPEN (adj) | RELEASE THE PRESSURE. LET THE FUEL FLOW FREELY OVERBOARD. MAKE SURE THAT THE TANK IS IN AN OPEN AREA THAT HAS A GOOD AIRFLOW. | Vent the pressure. Let the fuel vent freely overboard. Make sure that the tank is in an area that is vented to the atmosphere. |
@@ -283,6 +305,7 @@ Blank Page
 | via (prep) — UNNAPPROVED | THROUGH (prep) | GET ACCESS THROUGH THE No. 6 BREAK-IN PANEL. | Get access via No. 6 break-in panel. |
 
 <!-- Page 414 of 434 -->
+
 |---|---|---|---|
 | vibrate (v) — UNNAPPROVED | VIBRATION (n) | IF THERE IS VIBRATION IN THE UNIT, DISCONNECT THE POWER SUPPLY. | If the unit vibrates, cut the power. |
 | VIBRATION (n) | Regular movement from a center position | PRESSURE SURGES AND VIBRATION CAN CAUSE WEAR ON THE HOSES |  |
@@ -293,6 +316,7 @@ Blank Page
 | vigorously (adv) — UNNAPPROVED | FORCE (TN) | WHEN YOU MOVE THE CONTROL WHEEL, DO NOT APPLY TOO MUCH FORCE. | Do not move the control wheel too vigorously. |
 
 <!-- Page 415 of 434 -->
+
 |---|---|---|---|
 | visible (adj) — UNNAPPROVED | SEE (v) VIEW (n) | MAKE SURE THAT YOU CAN SEE THE OIL LEVEL THROUGH THE SIGHT GAUGE. WHEN THE INDICATOR COMES INTO VIEW, STOP THE TEST PROCEDURE. | Make certain that the oil level is visible through the sight gauge. When the indicator is visible, stop the test procedure. |
 | VISUAL (adj) | That you can see | MAKE SURE THAT THE VISUAL INDICATOR SHOWS THE CORRECT VALUE. |  |
@@ -303,6 +327,7 @@ Blank Page
 | VOLUME (n) | 1. The space that an object fills 2. How loud a sound is | MEASURE THE VOLUME OF THE OIL CAREFULLY. TO ADJUST THE VOLUME, USE THE BUTTONS ON THE SIDE OF THE PHONE. |  |
 
 <!-- Page 416 of 434 -->
+
 |---|---|---|---|
 | WAIT (v), WAITS, WAITED, WAITED | To stop doing something while another thing occurs. | (1) IF THE STATUS OF THE FAULT IS “NOT CONFIRMED”: (a) OPEN THE APPLICABLE CIRCUIT BREAKER. (b) WAIT FOR 4 MINUTES. (c) DO THE BITE TEST. |  |
 | WALK (v), WALKS, WALKED, WALKED | To move on foot from one location to a different location | DO NOT WALK ON THIS AREA. |  |
@@ -313,6 +338,7 @@ Blank Page
 | wash (v) — UNNAPPROVED | CLEAN (v) | CLEAN YOUR HANDS WITH SOAP. | Wash your hands using soap. |
 
 <!-- Page 417 of 434 -->
+
 |---|---|---|---|
 | watch (v) — UNNAPPROVED | MONITOR (v) | MONITOR THE SPEED INDICATION CONTINUOUSLY UNTIL THE END OF THE TEST. | Watch the speed indication for the duration of the test. |
 |  | LOOK (v) | LOOK FOR AIR BUBBLES. | Watch for air bubbles. |
@@ -327,6 +353,7 @@ Blank Page
 | WEATHER (n) | Conditions of the atmosphere: temperature, moisture, winds, and clouds | STEP 2 IS APPLICABLE ONLY IF THE WEATHER IS WET. |  |
 
 <!-- Page 418 of 434 -->
+
 |---|---|---|---|
 | weep (n) — UNNAPPROVED | LEAKAGE (n) | IF THERE IS FUEL LEAKAGE FROM THE COUPLINGS, REJECT THE UNIT. | If there are fuel weeps from the couplings, reject the unit. |
 | WEIGH (v), WEIGHS, WEIGHED, WEIGHED | 1. To measure the weight of something | WEIGH THE TWO PARTS OF THE COMPOUND. |  |
@@ -341,6 +368,7 @@ Blank Page
 | WHERE (conj) | At, to, or in which location | CLEAN THE AREA WHERE YOU APPLIED THE SEALANT. |  |
 
 <!-- Page 419 of 434 -->
+
 |---|---|---|---|
 | whether (conj) — UNNAPPROVED | IF (conj) | THIS LIMIT IS APPLICABLE IF THE AIRCRAFT IS ON THE LANDING GEAR OR ON JACKS. | This limit applies whether the aircraft is on the landing gear or on jacks. |
 | WHICH (pron) | The thing or things that | EXAMINE THE EMERGENCY FUEL PUMP, WHICH IS ON THE LEFT SIDE. |  |
@@ -355,6 +383,7 @@ Blank Page
 | wholly (adv) — UNNAPPROVED | FULLY (adv) | THE SYSTEM IS FULLY AUTOMATIC. | The system is wholly automatic. |
 
 <!-- Page 420 of 434 -->
+
 |---|---|---|---|
 | whose (pron) — UNNAPPROVED | Use a different construction. | THE GENERATORS SUPPLY A THREE- PHASE VOLTAGE. THE FREQUENCY OF THIS VOLTAGE INCREASES WHEN THE GENERATOR ROTOR SPEED INCREASES. | The generators produce a three-phase voltage whose frequency is proportional to the generator rotor speed. |
 | WIDE (adj) (WIDER, (WIDEST) | That has a specified or large width | REPAIR ALL CRACKS THAT ARE WIDER THAN 0,05 mm. |  |
@@ -368,6 +397,7 @@ Blank Page
 |  | SAFETY (v) (WITH SAFETY WIRE [TN]) | SAFETY THE FOUR BOLTS TO EACH OTHER WITH SAFETY WIRE. | Wire-lock the four bolts to each other. |
 
 <!-- Page 421 of 434 -->
+
 |---|---|---|---|
 | WITH (prep) | Function word that shows association or relationship, help or sharing, a means or instrument | ALIGN THE MARK WITH THE LONGITUDINAL AXIS. Refer to section 9, GR-2. ATTACH THE FLANGE (10) WITH THE FOUR BOLTS (15). REMOVE THE VALVE (2) WITH THE EXTRACTOR. |  |
 | withdraw (v) — UNNAPPROVED | REMOVE (v) | REMOVE THE INDICATOR FROM THE INSTRUMENT PANEL. | Withdraw the indicator from the instrument panel. |
@@ -379,6 +409,7 @@ Blank Page
 | would (v) — UNNAPPROVED | CAN (v) | SOLVENTS THAT STAY ON THE PART CAN CAUSE CORROSION. | Solvents left on the part would corrode the part. |
 
 <!-- Page 422 of 434 -->
+
 |---|---|---|---|
 | wrap (v) — UNNAPPROVED | PUT (v) WIND (v) | PUT THE PART IN OILPAPER. WIND MASKING TAPE AROUND THE PART. | Wrap the part in oilpaper. Wrap masking tape around the part. |
 | WRITE (v), WRITES, WROTE, WRITTEN | To record data or information as words, letters, or symbols | WRITE THE TEST DATE ON THE CERTIFICATE. |  |
@@ -389,6 +420,7 @@ Blank Page
 Blank Page
 
 <!-- Page 424 of 434 -->
+
 |---|---|---|---|
 | YES (adv) | Function word that shows the positive answer to a question | DOES THE LIGHT COME ON? YES OR NO? |  |
 | yet (conj) — UNNAPPROVED | BUT (conj) | TIGHTEN THE NUTS, BUT KEEP THEM SUFFICIENTLY LOOSE TO REMOVE THEM WITH YOUR HAND. | The nuts should be tightened, yet loose enough to remove by hand. |

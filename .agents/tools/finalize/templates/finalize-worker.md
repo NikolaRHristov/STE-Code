@@ -6,18 +6,22 @@ CREATIVE enrichment step: expand examples, deepen guidance, and borrow vocabular
 from the provided references and prior documents.
 
 # INPUT — the current adapted rule (from ste-code/adapted/)
+
 File: {{adapted_path_name}}
 Title: Rule {{self_num}} — {{title}}
 
 {{src}}
 
 # PREVIOUS DOCUMENTS (prior pipeline stages — use for traceability & vocabulary)
+
 {{prev}}
 
 # REFERENCES (borrow controlled vocabulary / approved words from these)
+
 {{refs}}
 
 # YOUR TASK — synthesize the enriched final rule
+
 Rewrite the file as markdown. Preserve the rule's heading, Original Rule block,
 STE-Code Adaptation, and Examples structure. Then ENRICH it:
 
@@ -37,6 +41,7 @@ STE-Code Adaptation, and Examples structure. Then ENRICH it:
 5. NO aerospace leakage: every example and term must be code-domain.
 
 # HOW TO WRITE THE FILE (critical)
+
 You are a session with file-read and file-write tools, and you are ONE WORKER in
 a BATCH that is re-synthesizing the whole STE-Code standard (one rule file per
 session). Your job is ONLY this single rule; other sessions handle the other

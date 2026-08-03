@@ -81,6 +81,7 @@ Role-based, self-contained skills for the STE-Code pipeline. Any agent can read 
 ```
 
 ## Configuration (one source of truth)
+
 All tunables live in config, never hardcoded in scripts. Each `tools/<unit>/`
 owns a `config.yaml` declaring its footprint (inputs, outputs, layout, agent
 overrides); `.agents/config/defaults.yaml` supplies shared `agent:` (model,
@@ -89,6 +90,7 @@ merged underneath. Stages read `ste_config.load(__file__)` for footprint and
 `ste_runtime.resolve(__file__)` for pre-flight knobs.
 
 ## Shared helpers (tools/lib/)
+
 The single source for cross-cutting behaviour — no unit re-implements these:
 `ste_io` (the only gated write path), `ste_config` (config resolution),
 `ste_runtime` (pre-flight runtime knobs), `ste_checkpoint` (atomic resume),
@@ -151,6 +153,7 @@ Measured, not estimated. Regenerate with
 **STE-Code: 96.6% pass rate (57/59)** vs Plain Assistant: 11.9% (7/59). +84.7% improvement.
 
 ## See also
+
 - `AGENTS.md` — agent backends, stage detail, skills inventory.
 - `MASTER.md` — launch protocol.
 - `tools/lib/README.md` — shared helper reference.

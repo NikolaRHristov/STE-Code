@@ -16,6 +16,7 @@ trajectory: encode *how the knowledge is received* into the run.
 ---
 
 # SOURCE RULE (read it, then TRANSFORM it)
+
 File: {{src_name}}
 
 {{src_text}}
@@ -23,9 +24,11 @@ File: {{src_name}}
 ---
 
 # MISSION PARAMETERS (this variant)
+
 {{param_block}}
 
 # WHAT "DISTILL" MEANS HERE
+
 Do NOT copy the source with light edits. Re-derive the rule's *intent* and
 re-express it from scratch for the target defined by the parameters:
 - If `target_consumer` is an LLM coding tool or agent, frame the rule as
@@ -51,6 +54,7 @@ re-express it from scratch for the target defined by the parameters:
 - `register` sets the voice (strict spec / friendly tutorial / terse reference).
 
 # RESEARCH FREEDOM (use it — this is a long session)
+
 You have file-read and file-write tools and the whole repo. Spend MANY tool
 calls. You MAY and SHOULD:
 - Read `{{src_name}}` and any related `ste-code/final/rules/*.md` to understand
@@ -65,6 +69,7 @@ calls. You MAY and SHOULD:
   re-read to confirm, refine, repeat. Depth and correctness beat speed.
 
 # OUTPUT REQUIREMENTS
+
 - Write the variant to: `{{out_path}}` (create the directory if needed).
 - Begin with `# Rule {{self_num}} — {{title}}` and be valid, self-contained markdown.
 - Preserve the rule's identity (it is still the same ASD-STE100-derived rule),
@@ -78,6 +83,7 @@ calls. You MAY and SHOULD:
 - NO aerospace leakage: every example and term must be code-domain.
 
 # WHEN DONE
+
 - Re-read the written file; confirm it is complete, correct, and shaped by the
   mission parameters (not a copy of the source).
 - Your ONLY artifact is that one written file. Do not print it to chat, no

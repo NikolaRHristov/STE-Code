@@ -1,6 +1,5 @@
 # Provenance — STE-Code pipeline stages
 
-
 | Stage | Source dir | Role |
 |---|---|---|
 | A Extraction | ste-code/extracted/ | PDF spec -> structured pages |

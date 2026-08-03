@@ -20,28 +20,33 @@
 ## Critical Gaps — Domains With Zero Coverage
 
 ### Mobile Development
+
 - **Languages:** Swift, Kotlin, Dart, Objective-C
 - **Frameworks:** SwiftUI, UIKit, Jetpack Compose, Flutter, React Native
 - **Concepts:** App lifecycle, push notifications, deep linking, store review guidelines
 - **Placeholder prefix:** `[MOBILE: ...]`
 
 ### Data Science & Machine Learning
+
 - **Languages:** Python (pandas, NumPy, scikit-learn, PyTorch, TensorFlow, JAX), R
 - **Concepts:** Model training, inference, feature engineering, MLOps, experiment tracking
 - **Placeholder prefix:** `[ML: ...]`
 
 ### Game Development
+
 - **Languages:** C#, C++ (Unreal), GDScript, Lua
 - **Engines:** Unity, Unreal Engine, Godot
 - **Concepts:** Game loop, physics engine, shaders, asset pipeline, ECS patterns
 - **Placeholder prefix:** `[GAMEDEV: ...]`
 
 ### Embedded Systems & IoT
+
 - **Languages:** C, C++, Rust (embedded), MicroPython, Arduino
 - **Concepts:** RTOS, firmware, bootloader, memory-mapped I/O, interrupts, watchdog timer
 - **Placeholder prefix:** `[EMBEDDED: ...]`
 
 ### Blockchain & Web3
+
 - **Languages:** Solidity, Vyper, Move, Rust (Solana)
 - **Concepts:** Smart contracts, consensus, gas optimization, wallet integration, DeFi protocols
 - **Placeholder prefix:** `[WEB3: ...]`
@@ -51,31 +56,37 @@
 ## High-Priority Gaps — Underrepresented But Important
 
 ### Security Engineering
+
 - **Current:** ~5 mentions (mostly in Category 18 — Damage Terms)
 - **Missing:** OWASP Top 10 examples, threat modeling, SAST/DAST, CVE remediation patterns
 - **Placeholder prefix:** `[SEC: ...]`
 
 ### Accessibility (a11y)
+
 - **Current:** ~8 mentions (Category 12 — UI elements)
 - **Missing:** WCAG 2.1/2.2 conformance examples, screen reader testing, ARIA live regions
 - **Placeholder prefix:** `[A11Y: ...]`
 
 ### Internationalization (i18n) & Localization (L10n)
+
 - **Current:** ~2 mentions
 - **Missing:** RTL layout examples, Unicode normalization, ICU message format, locale data
 - **Placeholder prefix:** `[I18N: ...]`
 
 ### Performance Engineering
+
 - **Current:** ~3 mentions
 - **Missing:** Profiling (flame graphs), SIMD, cache-line optimization, lock-free data structures
 - **Placeholder prefix:** `[PERF: ...]`
 
 ### Testing Methodologies
+
 - **Current:** ~15 mentions (mostly mock/stub in Category 22)
 - **Missing:** Property-based testing, contract testing, fuzzing, mutation testing, TDD/BDD patterns
 - **Placeholder prefix:** `[TEST: ...]`
 
 ### Documentation Process
+
 - **Current:** ~2 mentions
 - **Missing:** Doc review workflows, style guide enforcement, doc versioning, translation pipelines
 - **Placeholder prefix:** `[DOCS: ...]`
@@ -110,14 +121,18 @@
 1. Pick a gap from this file.
 2. Find the relevant adapted rule file(s) in `ste-code/adapted/`.
 3. Add Non-STE/STE example pairs using the canonical format:
+
    ```
    > **Non-STE:** [realistic code doc from the domain that violates the rule]
    > **STE:** [STE-Code compliant correction]
    ```
+
 4. Use the placeholder prefix in a comment line above the pair for tracking:
+
    ```
    > [DOMAIN: domain-name]
    ```
+
 5. Submit a PR with the domain tag in the commit message.
 
 ## Batch Generation (Internal)

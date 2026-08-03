@@ -45,10 +45,12 @@ You can use technical nouns in procedural and descriptive code documentation if 
 ## Category 1 - Official Parts Information
 
 ### Original (master.md line 1710-1714)
+
 Terms that refer to all design items. For example, technical nouns included in illustrated parts catalogs or engineering drawings.
 *bolt, cable, clip, conductor, contact, engine, ferry tank, filter, hatch, hazard lights, indicator, light, logo, oil seal, prelubricated seal, pipe, propeller, retractor link, screw, switch, transceiver*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to all API and library components. For example, technical nouns included in API reference documentation, SDK manifests, or interface definition files.
 *endpoint, method, parameter, query parameter, path parameter, request body, response body, header, status code, module, class, interface, type alias, enum, constant, decorator, middleware, route handler, serializer, DTO, model, schema, callback, hook, plugin*
 
@@ -65,10 +67,12 @@ Terms that refer to all API and library components. For example, technical nouns
 ## Category 2 - Vehicles or Machines, and Locations on Them
 
 ### Original (master.md line 1715-1720)
+
 Terms that refer to all types of vehicles and machines, and the locations that are part of these units.
 *aircraft, aircraft carrier, airframe, airplane, bicycle, cabin, car, cargo compartment, cargo hold, cockpit, deck, engine room, fuselage, helicopter, galley, lifeboat, overhead panel, ship, submarine, tank, train, truck, wing, wing root*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to all types of applications, services, and their subsystems, and the locations that are part of these units.
 *web application, mobile app, desktop client, CLI tool, microservice, monolith, API gateway, load balancer, database server, message broker, cache layer, container, pod, cluster, frontend, backend, admin panel, user dashboard, authentication service, payment service, notification service, search engine, CDN, reverse proxy, serverless function, cron job, worker process*
 
@@ -85,10 +89,12 @@ Terms that refer to all types of applications, services, and their subsystems, a
 ## Category 3 - Tools and Support Equipment, Their Parts, and Locations on Them
 
 ### Original (master.md line 1727-1732)
+
 Terms that refer to all types of tools, support equipment, their parts, and locations that are part of these items.
 *access ladder, blade, brush, cap, chock, clamp, cover, display, drill, file, gauge (gage), graduated beaker, handle, jack, label, rigging pin, roller, rope, rung, shaft, stand, tag, test rig, torque wrench, trestle*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to all types of development tools, SDKs, and their components, and locations that are part of these items.
 *IDE, code editor, terminal emulator, compiler, interpreter, transpiler, bundler, linter, formatter, debugger, profiler, package manager, version control system, CI runner, test framework, assertion library, mocking library, static analyzer, API client, database client, container runtime, orchestration tool, IaC tool, monitoring dashboard, log aggregator, feature flag service, secrets manager*
 
@@ -105,10 +111,12 @@ Terms that refer to all types of development tools, SDKs, and their components, 
 ## Category 4 - Materials, Consumables, and Unwanted Material
 
 ### Original (master.md line 1733-1739)
+
 Terms that refer to materials, consumable items, and other substances that can cause contamination or malfunctions.
 *acid, adhesive, aluminum alloy, ammunition, compound, copper, debris, detergent, dirt, disinfectant, dust, foam, foreign object, fuel, grease, hazardous substances, hazardous waste, metal, metallic coating, oil, paint, penetrant spray, plastic, primer, sealant, sealing, soap, stainless steel, tape, waste, water, wire*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to dependencies, packages, and technical debt that can cause regressions or malfunctions.
 *dependency, transitive dependency, package, library, framework, runtime, polyfill, shim, vendor bundle, dead code, deprecated API, legacy module, orphaned code, code smell, TODO comment, FIXME comment, zombie import, circular dependency, peer dependency, dev dependency, optional dependency, pinned version, lockfile, SBOM, supply chain artifact, third-party script, ad-hoc patch, monkey-patch, workaround code*
 
@@ -125,10 +133,12 @@ Terms that refer to dependencies, packages, and technical debt that can cause re
 ## Category 5 - Facilities, Infrastructure, and Logistic Procedures
 
 ### Original (master.md line 1740-1745)
+
 Terms that refer to the management, structure, and operations of physical facilities, infrastructure systems, and logistic procedures. For example, areas for utility systems, transportation networks, storage, distribution processes, and operational logistic workflows.
 *airport, apron, base, building, camp, dock, engine shop floor, flight simulator, gate, handling, hangar, packaging, packing, port, service bay, shipping, shop, store, storage, transport*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to the management, structure, and operations of hosting, CI/CD, and deployment infrastructure. For example, areas for cloud providers, container registries, deployment pipelines, and operational workflows.
 *cloud provider, region, availability zone, data center, Kubernetes cluster, namespace, Docker registry, artifact repository, build pipeline, deployment pipeline, staging environment, production environment, sandbox environment, on-premise server, virtual machine, bare-metal host, edge location, CDN endpoint, storage bucket, message queue, event bus, API gateway endpoint, load balancer target group, auto-scaling group, service mesh, ingress controller*
 
@@ -145,10 +155,12 @@ Terms that refer to the management, structure, and operations of hosting, CI/CD,
 ## Category 6 - Systems, Components and Circuits, Their Functions, Configurations, and Parts
 
 ### Original (master.md line 1746-1750)
+
 Terms that refer to the structure, operation, composition, and system design.
 *air conditioning, amplifying circuit, armament, audio, aural warning system, collapsed position, exhaust, flight management, hardware, inhibiting signal, injection, inlet, input frequency, latch, pedal, power unit, pump, reverse mode, reverse position, standby mode, upright position, vent*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to the structure, operation, composition, and system design of software.
 *architecture, design pattern, layered architecture, hexagonal architecture, microservice, event-driven architecture, CQRS, event sourcing, pub/sub, message queue, event bus, database shard, read replica, write-ahead log, connection pool, circuit breaker, retry policy, rate limiter, cache layer, CDN edge, feature flag, A/B test variant, canary deployment, blue-green deployment, rolling update, service registry, configuration provider, secret store, reverse proxy, API gateway route, middleware chain, plugin system, dependency injection container, ORM, migration runner*
 
@@ -165,10 +177,12 @@ Terms that refer to the structure, operation, composition, and system design of 
 ## Category 7 - Mathematical, Scientific, Engineering Terms, and Formulas
 
 ### Original (master.md line 1751-1763)
+
 Terms that refer to concepts, design, calculations, or methodologies.
 *acceleration, allowance, astronomy, atom, average, biochemistry, biology, biome, burr, capacitance, carbon, category, cavitation, center, circle, coefficient, combination, configuration, conversion, count, critical temperature, curve, cycle, defect, degree, deceleration, density, diameter, displacement, duty cycle, elapsed time, electricity, energy, exponent, ferry flight, flutter, force, fumes, genetics, geology, geophysics, graph, gravity, hardness, heat treatment, idle speed, ignition, inhibition, instrumentation, interference, issue, light, line replaceable unit, load, loss, measurement, modification, momentum, motoring, overhaul, oversized hole, oxygen, performance, phase, polarity, power, pressure, process, radius, rating, ratio, reduction, relative angular position, resistance, scan, shutdown, signal, specific gravity, stall, standard, steam, stiffness, strength, suction, temperature, tension, thread, tightness, torque, toxic property, vapor, voltage, water vapor, "C = (A - B) - 0.063 mm"*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to algorithms, data structures, computational concepts, and methodologies.
 *algorithm, data structure, Big-O notation, time complexity, space complexity, hash table, binary tree, linked list, graph, trie, bloom filter, LRU cache, consistent hashing, recursion, memoization, dynamic programming, greedy algorithm, backtracking, binary search, quicksort, mergesort, topological sort, Dijkstra, BFS, DFS, A*, Paxos, Raft, two-phase commit, saga pattern, idempotency key, eventual consistency, CAP theorem, ACID, BASE, vector clock, Lamport timestamp, Merkle tree, consistent hashing ring, shard key, partition key, compound index, covering index, query plan, cardinality, selectivity, normalization, denormalization, OLTP, OLAP, ETL, stream processing, batch processing, map-reduce, actor model, CSP, semaphore, mutex, atomic operation, CAS*, `O(n log n)`, `f(x) = x² + 3x - 2`
 
@@ -185,10 +199,12 @@ Terms that refer to algorithms, data structures, computational concepts, and met
 ## Category 8 - Navigation and Geographic Terms
 
 ### Original (master.md line 1764-1769)
+
 Terms that refer to positions, directions, or locations related to mapping, routing, or spatial orientation.
 *air, altitude, attitude, axis, bank, clearance, climb, coordinates, critical approach, datum, delay, deviation, drag, east, France, glideslope, gradient, heading, landing, leeway, Lima, north, pitch, roll, skid, south, west*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to codebase navigation, project structure, and directory/import hierarchy.
 *directory, subdirectory, file path, import path, package root, module root, workspace root, monorepo root, source directory, test directory, build output, entry point, barrel export, index file, re-export, absolute import, relative import, path alias, symlink, Git root, branch, tag, commit, HEAD, upstream, origin, fork, submodule, subtree, vendor directory, node_modules, virtual environment, GOPATH, GOPATH, classpath, namespace, package scope, module scope, public API surface, internal package, private module, exported symbol*
 
@@ -205,10 +221,12 @@ Terms that refer to codebase navigation, project structure, and directory/import
 ## Category 9 - Numbers, Units of Measurement and Time (and Their Symbols)
 
 ### Original (master.md line 1776-1780)
+
 Terms that refer to quantitative data, measurements, or time-related information.
 *92, 303, ampere (A), degree (°), first (1st), half (½), hour (h), kilogram (kg), knot, liter (L or l), meter (m), mile, minute ('), month, ohm (Ω), one, one-quarter (¼), second ("), second (s), second (2nd), square inch (sq.in.), spring, third (3rd), three, year, winter, zero*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to metrics, benchmarks, timing data, and quantitative measurements.
 *latency, throughput, response time, p50, p95, p99, p999, ops/sec, req/sec, RPM, RPS, QPS, TPS, bytes, KB, MB, GB, TB, KiB, MiB, ms, µs, ns, s, min, hr, CPU core, thread count, memory usage, heap size, stack size, GC pause, cold start time, warm start time, bootstrap time, build time, deploy time, MTTR, MTBF, uptime, downtime, error rate, success rate, availability (99.9%, 99.99%), RPO, RTO, SLO, SLI, SLA, concurrency, connection count, pool size, batch size, page size, offset, limit, TTL, timeout, interval, poll interval, retry delay, backoff multiplier, rate limit (tokens/sec), quota, sample rate, cardinality*
 
@@ -225,10 +243,12 @@ Terms that refer to metrics, benchmarks, timing data, and quantitative measureme
 ## Category 10 - Quoted Text
 
 ### Original (master.md line 1781-1786)
+
 Terms that refer to texts that you cannot change in technical writing. For example, texts on placards, labels, signs, markings, and display units.
 *abort button, EXIT sign, INOP system, OXYGEN pushbutton switch, ON position, NEXT button, FAULT legend, NO STEP marking, FASTEN SAFETY BELT sign, WEAR PROTECTIVE CLOTHING sign*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to texts that you cannot change in code documentation. For example, quoted error messages, log output, API responses, UI string literals, and command-line output.
 *error message, stack trace, log line, HTTP response body, JSON payload, XML response, environment variable value, CLI flag, command option, shell command output, status code text, exception message, assertion message, deprecation warning, compiler diagnostic, linter rule ID, test failure message, benchmark output, profiler report, API route pattern, SQL query string, GraphQL query, regex pattern, glob pattern, cron expression, semantic version string, git commit hash, UUID string, JWT token (example), `"Connection refused"`, `"404 Not Found"`, `"TypeError: Cannot read properties of undefined"`, `"--config=./prod.yaml"`, `"npm ERR! code ERESOLVE"`*
 
@@ -245,10 +265,12 @@ Terms that refer to texts that you cannot change in code documentation. For exam
 ## Category 11 - Professional Roles, Individuals, Groups, Organizations, and Geopolitical Entities
 
 ### Original (master.md line 1787-1793)
+
 Terms that refer to professional functions, names of persons, organizations, companies, teams, sovereign states, or entities related to processes, responsibilities, or decision-making.
 *air traffic control, British Broadcasting Corporation (BBC), captain, commander, copilot, crew, crew chief, European Aviation Safety Agency (EASA), Federal Aviation Administration (FAA), John Kirkman, manufacturer, operator, Transport Canada Civil Aviation (TCCA), United States of America (USA)*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to project roles, contributors, teams, organizations, and entities related to processes, responsibilities, or decision-making.
 *maintainer, author, contributor, reviewer, approver, code owner, release manager, on-call engineer, SRE, DevOps engineer, security champion, triage team, core team, steering committee, technical lead, staff engineer, principal engineer, intern, vendor, client, stakeholder, end user, GitHub organization, npm organization, Docker Hub organization, CNCF, Apache Software Foundation, Linux Foundation, Mozilla, Google, Microsoft, OpenAPI Initiative, ECMA, ISO, W3C, IETF, OWASP, `CODEOWNERS` file, `@backend-team`, `@security-reviewers`*
 
@@ -265,10 +287,12 @@ Terms that refer to project roles, contributors, teams, organizations, and entit
 ## Category 12 - Parts of the Body
 
 ### Original (master.md line 1794-1798)
+
 Terms that refer to anatomical features or functions related to medical, biological, or ergonomic contexts.
 *blood, digestive system, ear, eyes, hair, hand, head, lung, mouth, respiratory tract, skin, stomach*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to user interface elements, interaction points, and accessibility features of software.
 *button, text input, checkbox, radio button, dropdown, select menu, toggle, slider, modal, dialog, tooltip, popover, toast, snackbar, banner, tab, accordion, breadcrumb, pagination, carousel, card, table, data grid, form, form field, label, placeholder, icon, avatar, badge, spinner, progress bar, skeleton loader, navbar, sidebar, footer, header, search bar, filter panel, drawer, split pane, context menu, keyboard shortcut, hotkey, focus trap, skip link, screen reader label, ARIA role, ARIA attribute, landmark region, heading hierarchy*
 
@@ -285,10 +309,12 @@ Terms that refer to user interface elements, interaction points, and accessibili
 ## Category 13 - Common Personal Effects, Food, and Beverages
 
 ### Original (master.md line 1799-1802)
+
 Terms that refer to everyday personal items and types of food and beverage.
 *beans, bread, cigarette lighter, clothing, coffee, flour, footwear, high-heeled shoes, jewelry, lipstick, matches, milk, mineral water, nail scissors, perfume, pizza, shampoo, wine*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to user data, preferences, session state, and personalization artifacts.
 *user profile, display name, avatar URL, email address, phone number, billing address, shipping address, payment method, credit card, subscription plan, usage quota, rate limit bucket, API key, access token, refresh token, ID token, session cookie, CSRF token, user preference, theme setting, language locale, timezone, notification setting, opt-in flag, consent record, bookmark, watchlist, shopping cart, wishlist, search history, recently viewed, draft content, clipboard data, localStorage key, IndexedDB store, browser fingerprint, device ID, push notification token*
 
@@ -305,10 +331,12 @@ Terms that refer to user data, preferences, session state, and personalization a
 ## Category 14 - Medical Terms
 
 ### Original (master.md line 1803-1807)
+
 Terms that refer to medical conditions, procedures, or anatomical structures.
 *allergy, aspirin, asthma, blood poisoning, breathing, circulation, dermatitis, diabetes, dizziness, female, hallucination, headache, heart rate, irritation, male, medication, nausea, pneumonia, pregnancy, pulse, skin irritation, virus*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to system health, diagnostics, observability, and failure modes.
 *health check, liveness probe, readiness probe, startup probe, heartbeat, ping, metric, trace, span, log level, structured log, correlation ID, trace ID, span ID, alert, incident, SLO, SLI, error budget, burn rate, on-call rotation, escalation policy, runbook, playbook, postmortem, root cause analysis (RCA), mean time to recovery (MTTR), mean time to detection (MTTD), anomaly detection, threshold breach, saturation, latency tail, error spike, traffic drop, resource exhaustion, memory pressure, disk pressure, CPU throttling, GC thrashing, connection storm, thundering herd, cascading failure, split-brain, partition, degraded state, brownout, blackout*
 
@@ -325,10 +353,12 @@ Terms that refer to system health, diagnostics, observability, and failure modes
 ## Category 15 - Official Documents, Parts of Documentation, Standards, and Guidelines
 
 ### Original (master.md line 1808-1820)
+
 Terms that refer to different types of official documents and their structural parts. For example, manuals, technical records, standards, specifications, and regulations requirements.
 *Acceptance Test, Activation/Deactivation, Allowable Damage, attention, caution, chapter, Checklist, Class, Cleaning, Compass Correction Card, danger, data module, Description and Operation, diagram, engine logbook, Federal Aviation Regulations, Fault Isolation, figure, flowchart, font, Functional Test, Ice and Rain Protection, Inspection/Check, issue, language policy, letter, maintenance planning, maintenance practice, maintenance records, Normal Braking, note, notice, packaging, page, paragraph, parentheses, post-flight report, post-mod, pre-mod, prerequisite, preservation, reference, Removal/Installation, Required Conditions, Repair Scheme, recommendation, revision, section, Service Bulletin, Standard Practices Manual, storage, Structural Repair Manual, table, test procedure, training material, Transportation, valid welding certificate, warning*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to different types of documentation, standards, specifications, and their structural parts in software projects.
 *README, CHANGELOG, CONTRIBUTING, LICENSE, CODE_OF_CONDUCT, SECURITY, GOVERNANCE, ARCHITECTURE, ADR (Architecture Decision Record), RFC (Request for Comments), API reference, OpenAPI spec, GraphQL schema, AsyncAPI spec, style guide, coding standard, linting rules, PR template, issue template, discussion template, release notes, migration guide, upgrade guide, getting started guide, quickstart, tutorial, how-to guide, explanation, reference, concept document, FAQ, glossary, onboarding guide, runbook, playbook, incident report, postmortem, design doc, technical spec, product requirements document (PRD), test plan, test case, acceptance criteria, Definition of Done, Definition of Ready, service level agreement (SLA), terms of service (TOS), privacy policy, cookie policy, data processing agreement (DPA), semantic versioning (SemVer), conventional commits, Git commit message format, doc comment, TSDoc, JSDoc, godoc, docstring, annotation, attribute, decorator doc, heading, subheading, section, subsection, paragraph, code block, table, list, admonition (note, warning, tip, danger, caution, important), hyperlink, cross-reference, footnote, bibliography, index, glossary entry, TOC (table of contents)*
 
@@ -345,10 +375,12 @@ Terms that refer to different types of documentation, standards, specifications,
 ## Category 16 - Environmental and Operational Conditions
 
 ### Original (master.md line 1827-1831)
+
 Terms that refer to external factors and operating parameters that are related to systems or processes.
 *atmosphere, cloud, day, daylight, ice, hail, humidity, lightning, moisture, night, rain, relative humidity, sand, snow, storm, turbulence, volcanic ash, wind*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to runtime environments, execution contexts, and operating parameters that affect software behavior.
 *production, staging, development, testing, CI, localhost, operating system, OS version, kernel version, distribution, CPU architecture (x86_64, arm64), Node.js version, Python version, Java version, Go version, browser, browser version, rendering engine, screen resolution, viewport size, device type, network condition (offline, slow 3G, 4G, WiFi), Docker image, container runtime, Kubernetes version, cloud region, availability zone, environment variable, build flag, feature flag state, A/B test bucket, configuration profile, Spring profile, Rails environment, NODE_ENV, DEBUG mode, verbose logging, trace level, read-only mode, maintenance mode, degraded mode, dark mode, high contrast mode, reduced motion, forced colors, RTL locale, daylight saving time transition, leap second, timezone offset*
 
@@ -365,11 +397,13 @@ Terms that refer to runtime environments, execution contexts, and operating para
 ## Category 17 - Colors
 
 ### Original (master.md line 1832-1838)
+
 Terms that refer to colors that identify color-related properties, or show color attributes in different contexts.
 *beige, black, cyan blue, dark brown, gray, green, magenta, light green, orange, red, white, yellow*
 Colors are adjectives, but STE identifies them as technical nouns. Comparative and superlative forms of colors (for example, blacker, the reddest) are not permitted in STE.
 
 ### Adapted (Code Documentation)
+
 Terms that refer to colors and theme tokens used to identify color-related properties in UI documentation and design system specs.
 *primary, secondary, accent, success, warning, error, info, neutral, background, surface, text, border, divider, shadow, overlay, red, green, blue, yellow, orange, purple, pink, teal, cyan, gray, black, white, transparent, hex code (`#FF5733`, `#1A1A2E`), RGB (`rgb(255, 87, 51)`), RGBA (`rgba(26, 26, 46, 0.8)`), HSL (`hsl(12, 100%, 60%)`), CSS custom property (`--color-primary-500`, `--color-text-on-primary`), design token, color ramp, color scale (50-900), light mode, dark mode, high contrast mode, color blindness safe palette, WCAG contrast ratio, semantic color, Brand Color*
 Colors in design systems are treated as technical nouns in documentation. Comparative forms ("darker", "lightest") are not used - instead, reference the specific design token or color ramp step.
@@ -387,10 +421,12 @@ Colors in design systems are treated as technical nouns in documentation. Compar
 ## Category 18 - Damage Terms
 
 ### Original (master.md line 1839-1843)
+
 Terms that refer to types of defects or degradation and give information about malfunctions.
 *buckle, chafing, corrosion, crack, crack propagation, deformation, dent, discoloration, distortion, erosion, fracture, fraying, galling, kink, nick, score, scratch, stain, spurious fault message*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to bugs, errors, exceptions, and failure modes in software.
 *crash, segfault, null pointer exception, undefined is not a function, type error, reference error, syntax error, range error, stack overflow, buffer overflow, memory leak, resource leak, dangling pointer, use-after-free, double free, race condition, deadlock, livelock, starvation, priority inversion, ABA problem, torn read, torn write, dirty read, non-repeatable read, phantom read, lost update, write skew, serialization anomaly, split-brain, network partition, timeout, connection reset, DNS failure, TLS handshake failure, certificate expiry, HTTP 500, HTTP 502, HTTP 503, HTTP 504, rate limit exceeded, quota exceeded, out of memory (OOM), disk full, inode exhaustion, file descriptor exhaustion, thread pool exhaustion, connection pool exhaustion, GC thrashing, cache stampede, cache penetration, cache avalanche, hot partition, data corruption, bit rot, checksum failure, hash collision, infinite loop, infinite recursion, integer overflow, integer underflow, floating point precision error, off-by-one error, SQL injection, XSS, CSRF, prototype pollution, deserialization vulnerability, dependency confusion, supply chain attack, CVE, CWE, zero-day*
 
@@ -407,10 +443,12 @@ Terms that refer to bugs, errors, exceptions, and failure modes in software.
 ## Category 19 - Computer Science, Information and Communication Technology
 
 ### Original (master.md line 1844-1852)
+
 Terms that refer to technological concepts, systems, or components in this subject field.
 *add-in, add-on, AI, arrow, artificial intelligence, authentication, backup, backup file, bookmark, chatbot, content, cursor, cybersecurity, database, deep learning, dialog check box, digitalization, digitization, e-mail, embedding, field, file, firewall, hallucination, HTML, icon, interface, internet, laptop, large language model, local operation, machine learning, memory, menu, metadata, mouse, network, operating system, phone, plug-in, pre-loaded software, preset value, prompt engineering, remote operation, screen, search engine, smartphone, status bar, store, tablet, token, toolbar, touchscreen, tweet, tuning, update, voice mail, XML*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to computer science, information and communication technology concepts used specifically in documentation about software systems.
 *API, REST, GraphQL, gRPC, WebSocket, SSE, HTTP/2, HTTP/3, TCP, UDP, TLS, mTLS, OAuth 2.0, OIDC, SAML, JWT, API key, CORS, CSP, HSTS, DNS, CDN, IP, IPv4, IPv6, CIDR, VPN, VPC, subnet, firewall rule, WAF, DDoS, load balancing, reverse proxy, forward proxy, caching, compression, serialization (JSON, Protobuf, MessagePack, Avro), encoding (Base64, URL encoding), hashing (SHA-256, bcrypt, Argon2), encryption (AES-256-GCM, RSA, ECDSA), encoding (UTF-8, ASCII), Unicode, emoji, regex, glob pattern, SQL, NoSQL, ORM, migration, seed data, transaction, ACID, BASE, sharding, replication, partitioning, indexing, normalization, denormalization, message queue, pub/sub, event sourcing, CQRS, saga, distributed transaction, consensus, leader election, service discovery, circuit breaker, bulkhead, retry, backoff, idempotency, rate limiting, throttling, API versioning, semantic versioning, feature flag, canary release, blue-green deployment, rolling update, immutable infrastructure, infrastructure as code, configuration as code, GitOps, observability, telemetry, tracing, metrics, logging, profiling, APM, RUM, continuous integration, continuous delivery, continuous deployment, DevOps, DevSecOps, Git, Docker, Kubernetes, Helm, Terraform, Ansible*
 
@@ -427,10 +465,12 @@ Terms that refer to computer science, information and communication technology c
 ## Category 20 - Civil and Military Operations
 
 ### Original (master.md line 1853-1860)
+
 Terms that refer to concepts and activities, service delivery, product management, and customer and life-cycle support in civil and military operations.
 *armed forces, assault, bomb, bullet, checkpoint, combat plan, contractor, customer, customer support, customer service, deployment, echelon, ejection seat, end item, end user, evacuation, formation, ground zero, gun, Integrated Product Support (IPS), know-how, lifecycle, machine gun, maintenance concept, mission, obsolescence, operator, Original Equipment Manufacturer (OEM), patrol*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to DevOps operations, release management, deployment strategies, service delivery, product management, and lifecycle support in software.
 *deployment, release, rollout, rollback, hotfix, patch, minor release, major release, breaking change, deprecation, end-of-life (EOL), sunset, migration, upgrade path, backward compatibility, forward compatibility, downtime, maintenance window, zero-downtime deployment, graceful shutdown, drain, scale up, scale down, scale out, scale in, autoscaling, horizontal scaling, vertical scaling, incident, outage, service disruption, failover, disaster recovery, backup, restore, point-in-time recovery, snapshot, retention policy, runbook execution, playbook, on-call handoff, escalation, war room, status page, SLA breach, SLO violation, error budget policy, change freeze, code freeze, release train, sprint, iteration, milestone, roadmap, epic, user story, bug ticket, triage, priority (P0, P1, P2, P3), severity (SEV0, SEV1, SEV2, SEV3), SL1-SL4, service level objective, operational level agreement (OLA), underpinning contract (UC), vendor management, procurement, onboarding, offboarding, access revocation, audit log, compliance check, penetration test, vulnerability scan, security patch, responsible disclosure, coordinated vulnerability disclosure (CVD)*
 
@@ -447,10 +487,12 @@ Terms that refer to DevOps operations, release management, deployment strategies
 ## Category 21 - Law and Regulations
 
 ### Original (master.md line 1861-1867)
+
 Terms that refer to legal and regulatory texts. For example, contracts, warranty texts, certificates, standards and specifications, and legal papers.
 *action, ambiguity, appeal, arbitration, bankruptcy, communication, competence, compliance, concession, contract, court, damages, explanation, explanatory text, impeachment, jury, law, judgement, jurisdiction, purpose, recommendation, scope, serious incident, serious offense, signature, statute, term, trade, waiver, wording*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to licenses, compliance frameworks, regulatory requirements, and legal texts in software documentation.
 *license, open-source license, proprietary license, MIT License, Apache 2.0 License, GPLv3, LGPL, BSD, AGPL, MPL, Unlicense, Creative Commons, EULA, terms of service (TOS), privacy policy, cookie policy, data processing agreement (DPA), service level agreement (SLA), contributor license agreement (CLA), Developer Certificate of Origin (DCO), copyright, trademark, patent, intellectual property, attribution, copyleft, permissive license, compliance, regulatory compliance, GDPR, CCPA, HIPAA, SOC 2, ISO 27001, PCI DSS, FedRAMP, FISMA, export control, EAR, ITAR, sanctions list, embargo, data residency, data sovereignty, data retention policy, right to erasure, right to access, data subject request (DSR), personal data, PII (Personally Identifiable Information), PHI (Protected Health Information), sensitive data, data classification, data handling policy, acceptable use policy, code of conduct, vendor risk assessment, security questionnaire (CAIQ, SIG), audit report, attestation, SOC report, penetration test report, vulnerability disclosure policy, bug bounty program terms, responsible disclosure policy, indemnification, limitation of liability, warranty disclaimer, governing law, jurisdiction, severability, force majeure, assignment, termination, survival clause, third-party notice, open-source attribution, NOTICE file, SBOM (Software Bill of Materials)*
 
@@ -467,10 +509,12 @@ Terms that refer to licenses, compliance frameworks, regulatory requirements, an
 ## Category 22 - Animals, Plants, and Other Life Forms
 
 ### Original (master.md line 1868-1871)
+
 Terms that refer to biological entities in technical and environmental contexts.
 *bacteria, bird, cassowary, cat, conifer, cow, dog, emu, fern, ferret, fungi, horse, insect, leopard, monkey, moss, mouse, pocket gopher, rose, termite, wombat*
 
 ### Adapted (Code Documentation)
+
 Terms that refer to test fixtures, mock data, sample datasets, and placeholder entities used in code examples, test cases, and documentation demonstrations.
 *test fixture, mock object, stub, spy, fake, dummy, test double, seed data, sample data, example record, placeholder, synthetic data, faker data, lorem ipsum, "John Doe", "Jane Smith", "Acme Corp", "example.com", "test@example.com", "user_12345", "order_abc", "00000000-0000-0000-0000-000000000000", "foo", "bar", "baz", "qux", "quux", "spam", "eggs", "ham", "hello world", "TODO", "FIXME", "HACK", "XXX", "WIP", "tmp", "scratch", "sandbox", "playground", "hello-world-app", "my-first-repo", "boilerplate", "starter-kit", "todo-mvc", "hello-kubernetes", "nginx-hello", "FakeUser", "MockOrderRepository", "StubPaymentGateway", "InMemoryDatabase", "NullLogger", "noop*, `TestUserFactory.create()`, `Fixtures.defaultUser()`, `faker.internet.email()`*
 

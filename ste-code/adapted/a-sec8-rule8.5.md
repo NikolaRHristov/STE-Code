@@ -415,7 +415,7 @@ Guidance: Backtick-delimited code tokens are atomic. A token like `setTimeout(ca
 
 > **STE:** Call the `authenticate()` function. Then call `validate(token)`. (6 words)
 
-> *The parentheses inside the backtick-delimited code tokens are part of the token, not Rule 8.5 parentheticals. The sentence has six prose words. The code tokens count as one word each.* 
+> *The parentheses inside the backtick-delimited code tokens are part of the token, not Rule 8.5 parentheticals. The sentence has six prose words. The code tokens count as one word each.*
 
 ### Edge Case 2 — When Parentheses Contain a URL
 

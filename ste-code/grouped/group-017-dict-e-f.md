@@ -25,6 +25,7 @@
 | ease (v) — UNNAPPROVED | CAREFULLY REMOVE CAREFULLY MOVE | CAREFULLY REMOVE THE TRIM COVER FROM THE ADHESIVE TAPE. CAREFULLY MOVE THE PIPE INTO THE CORRECT POSITION. | Ease the trim cover from the adhesive tape. Ease the pipe into the right position. |
 
 <!-- Page 219 of 434 -->
+
 |---|---|---|---|
 | EASILY (adv) | Without difficulty | OXIDATION OCCURS VERY EASILY. |  |
 | EASY (adj) (EASIER, (EASIEST) | Without difficulty | USE THE LEFT OPENING FOR EASY ACCESS. |  |
@@ -38,6 +39,7 @@
 | efficient (adj) — UNNAPPROVED | SATISFACTORY (adj) | THE TRANSMISSION CONTROL PROTOCOL IS NOT SATISFACTORY FOR THE TRANSMISSION OF INTERACTIVE TRAFFIC. | The Transmission Control Protocol is not efficient for the transmission of interactive traffic. |
 
 <!-- Page 220 of 434 -->
+
 |---|---|---|---|
 | efficiently (adv) — UNNAPPROVED | SATISFACTORILY (adv) | MAKE SURE THAT THE UNIT OPERATES SATISFACTORILY. | Make sure the unit operates efficiently. |
 | efflux (n) — UNNAPPROVED | EXHAUST (n) | MAKE SURE THAT THERE ARE SAFETY BARRIERS AROUND THE ENGINE EXHAUST AREA. | Ensure that there are safety barriers around the engine efflux area. |
@@ -49,6 +51,7 @@
 | ejection (n) — UNNAPPROVED | EJECT (v) | PUSH THE APPLICABLE BUTTON TO EJECT THE DISK DRIVE. | Push the applicable button for disk drive ejection. |
 
 <!-- Page 221 of 434 -->
+
 |---|---|---|---|
 | elapse (v) — UNNAPPROVED | TIME (n) AFTER (prep) INTERVAL (n) | MAKE SURE THAT THE TIME BETWEEN STARTS IS A MINIMUM OF 30 SECONDS. AFTER 30 SECONDS, DO THE TEST AGAIN. AT INTERVALS OF SIX MONTHS, DO THE CHECK OF THE OIL LEVEL. | Check that 30 seconds have elapsed between starts. When 30 seconds have elapsed, do the test again. When six months have elapsed, do the check of the oil level. |
 | ELECTRIC (adj) | Operated by electricity | IF THE HYDRAULIC PUMP DOES NOT SUPPLY A PRESSURE OF 3000psi, USE THE ELECTRIC PUMP. |  |
@@ -60,6 +63,7 @@
 | ELECTRONICALLY (adv) | Related to or operated by electronics | THIS UNIT IS ELECTRONICALLY CONTROLLED. |  |
 
 <!-- Page 222 of 434 -->
+
 |---|---|---|---|
 | eliminate (v) — UNNAPPROVED | REMOVE (v) STOP (v) PREVENT (v) | REMOVE ALL SHARP EDGES. PUT A BAG OF DESICCANT IN THE PACKAGE TO STOP CONDENSATION. PUT A BAG OF DESICCANT IN THE PACKAGE TO PREVENT CONDENSATION. | Eliminate all sharp edges. Put a bag of desiccant in the package to eliminate condensation. Put a bag of desiccant in the package to eliminate condensation. |
 | EMERGENCY (n) | A condition that occurs suddenly and is dangerous | IN AN EMERGENCY, BREAK THE GLASS. |  |
@@ -72,6 +76,7 @@
 | enclosed (adj) — UNNAPPROVED | CLOSED (adj) | IF YOU USE SOLVENT IN A CLOSED SPACE, MAKE SURE THAT THERE IS GOOD AIRFLOW IN THE WORK AREA. | The work area must be well-ventilated if solvent is used in an enclosed space. |
 
 <!-- Page 223 of 434 -->
+
 |---|---|---|---|
 | encounter (v) — UNNAPPROVED | BE (v) FIND (v) | IF THERE ARE ROUGH AREAS, REMOVE THEM WITH EMERY CLOTH. IF YOU FIND ROUGH AREAS, REMOVE THEM WITH EMERY CLOTH. | If rough spots are encountered, remove them with emery cloth. If rough spots are encountered, remove them with emery cloth. |
 | END (n) | Where time, distance, or sequence is completed | EXAMINE THE SHACKLE AT THE END OF THE SLING. |  |
@@ -83,6 +88,7 @@
 | enlarge (v) — UNNAPPROVED | INCREASE (v) LARGE (adj) | INCREASE THE DIAMETER OF THE RIVET HOLE. MAKE THE HOLES LARGER. | Enlarge the rivet hole diameter. Enlarge the holes. |
 
 <!-- Page 224 of 434 -->
+
 |---|---|---|---|
 | enough (adj) — UNNAPPROVED | SUFFICIENT (adj) | MAKE SURE THAT THERE IS SUFFICIENT PRESSURE IN THE ACCUMULATOR. | Make sure that there is enough pressure in the accumulator. |
 | ensue (v) — UNNAPPROVED | CAUSE (v) | INCORRECT INSTALLATION WILL CAUSE DAMAGE. | Damage will ensue from incorrect installation. |
@@ -93,6 +99,7 @@
 | ENTRANCE (n) | An opening to go into a space | PUT SAFETY BARRIERS AT THE ENTRANCE TO THE WORK AREA. |  |
 
 <!-- Page 225 of 434 -->
+
 |---|---|---|---|
 | ENTRY (n) | A record of an occurrence | MAKE AN ENTRY IN THE LOG CARD. |  |
 | EQUAL (adj) | The same dimension, quality, quantity, or number | MAKE SURE THAT THERE IS AN EQUAL DISTANCE BETWEEN THE HOLES. |  |
@@ -106,6 +113,7 @@
 | ERASE (v), ERASES, ERASED, ERASED | To remove data from a medium | ERASE THE TAPE. |  |
 
 <!-- Page 226 of 434 -->
+
 |---|---|---|---|
 | erect (v) — UNNAPPROVED | ASSEMBLE (v) BECOME STABLE | BEFORE YOU LIFT THE GEARBOX, ASSEMBLE THE MOVABLE HOIST. LET THE VERTICAL GYRO BECOME STABLE. | Erect the movable hoist before lifting the gearbox. Give the vertical gyro time to erect. |
 | erratic (adj) — UNNAPPROVED | IRREGULAR (adj) | THE OPERATION OF THE COMPASS IS IRREGULAR. | The compass is erratic. |
@@ -117,6 +125,7 @@
 | evaluate (v) — UNNAPPROVED | EXAMINE (v) ANALYSIS (TN) | EXAMINE THE DAMAGE AFTER AN ACCIDENT. MAKE AN ANALYSIS OF THE TEST RESULTS. | Evaluate the damage after an accident. Evaluate the test results. |
 
 <!-- Page 227 of 434 -->
+
 |---|---|---|---|
 | evaluation (n) — UNNAPPROVED | EXAMINE (v) ANALYSIS (TN) | EXAMINE THE DAMAGE. MAKE AN ANALYSIS OF THE TEST RESULTS. | Do an evaluation of the damage. Do an evaluation of the test results. |
 | evaporate (v) — UNNAPPROVED | DRY (v) | LET THE COMPOUND DRY. | Allow the solvent to evaporate from the compound. |
@@ -126,6 +135,7 @@
 | eventually (adv) — UNNAPPROVED | SOME TIME | IF THE CABLE RUBS, IT WILL BREAK AFTER SOME TIME. | If the cable chafes, it will eventually break. |
 
 <!-- Page 228 of 434 -->
+
 |---|---|---|---|
 | every (adj) — UNNAPPROVED | ALL (adj) EACH (adj) INTERVAL (n) | REMOVE ALL SAFETY PINS BEFORE FLIGHT. SET THE BTRY SWITCH TO "ON" EACH TIME. DO AN INSPECTION AT INTERVALS OF 20 000 FLIGHT HOURS. | Every safety pin must be removed before flight. It is necessary to set the BTRY switch to ON every time. Do an inspection every 20 000 flight hours. |
 | evidence (n) — UNNAPPROVED | INDICATION (n) SIGN (n) | IF THERE IS AN INDICATION OF A LEAK, REPLACE THE VALVE. ONE SIGN OF A LEAK OF HOT AIR FROM A JOINT IS THAT THE TEMPERATURE INDICATION DECREASES. | If there is evidence of a leak, replace the valve. Evidence of a leak of hot air from a joint is that the temperature reading drops. |
@@ -134,6 +144,7 @@
 | exact (adj) — UNNAPPROVED | ACCURATE (adj) CORRECT (adj) | IF THE INDICATION IS NOT ACCURATE, DO THE TEST AGAIN. IF THE INDICATION IS NOT CORRECT, DO THE TEST AGAIN. | If the indication is not exact, do the test again. If the indication is not exact, do the test again. |
 
 <!-- Page 229 of 434 -->
+
 |---|---|---|---|
 | exactly (adv) — UNNAPPROVED | ACCURATELY (adv) | PUT THE REPAIR SHEET ACCURATELY ON THE DAMAGED AREA. | Put the repair sheet exactly on the damaged area. |
 | exactly (adv) — UNNAPPROVED | FULLY (adv) | FIND THE BOLT HOLE THAT ALIGNS FULLY WITH ONE OF THE OUTER SLOTS. | Find the bolt hole that aligns exactly with one of the outer slots. |
@@ -147,6 +158,7 @@
 | except (prep) — UNNAPPROVED |  | REMOVE ALL SCREWS, BUT NOT THE ONE ON THE LEFT SIDE OF THE FLANGE. | Remove all screws except the one on the left side of the flange. |
 
 <!-- Page 230 of 434 -->
+
 |---|---|---|---|
 | exception (n) — UNNAPPROVED | To replace this word, use a different construction. Be accurate. | KEEP ALL THE PARTS THAT ARE SERVICEABLE AND DISCARD THOSE THAT ARE BROKEN. | Keep all parts with the exception of those that are broken. |
 | exception (n) — UNNAPPROVED |  | REMOVE ALL SCREWS, BUT NOT THE ONE ON THE LEFT SIDE OF THE FLANGE. | Remove all screws with the exception of the one on the left side of the flange. |
@@ -160,6 +172,7 @@
 | excess (n) — UNNAPPROVED | MORE THAN | THE HYDRAULIC PRESSURE MUST NOT BE MORE THAN 200 bar. | The hydraulic pressure must not be in excess of 200 bar. |
 
 <!-- Page 231 of 434 -->
+
 |---|---|---|---|
 | excessive (adj) — UNNAPPROVED | TOO MUCH | TOO MUCH FORCE CAN CAUSE DAMAGE TO THE SEAL. | Excessive force can damage the seal. |
 | excessive (adj) — UNNAPPROVED | MORE THAN | IF THE PRESSURE IS MORE THAN 1000 kPa, STOP THE TEST. | If the pressure is excessive, stop the test. |
@@ -175,6 +188,7 @@
 | exempt (adj) — UNNAPPROVED | NOT SHOW | MAKE SURE THAT THE SEALS DO NOT SHOW SIGNS OF DETERIORATION. | Ensure the seals are exempt from signs of deterioration. |
 
 <!-- Page 232 of 434 -->
+
 |---|---|---|---|
 | exercise (v) — UNNAPPROVED | MAKE SURE (v) | MAKE SURE THAT YOU DO NOT GET ACID ON YOUR SKIN. | Exercise caution not to allow acid to contact skin. |
 | exercise (v) — UNNAPPROVED | CAREFUL (adj) | BE CAREFUL THAT YOU DO NOT GET ACID ON YOUR SKIN. | Exercise caution not to allow acid to contact skin. |
@@ -191,6 +205,7 @@
 | EXIT (n) | An opening to go out of a space | MAKE SURE THAT ALL THE EMERGENCY EXITS ARE CLEAR OF UNWANTED OBJECTS. |  |
 
 <!-- Page 233 of 434 -->
+
 |---|---|---|---|
 | EXPAND (v), EXPANDS, EXPANDED, EXPANDED | To increase in dimension, volume, or time | THE BELLOWS MUST EXPAND. HEAT EXPANDS THE GAS IN THE CONTAINER. |  |
 | expect (v) — UNNAPPROVED | POSSIBLE (adj) | IF IT IS POSSIBLE THAT THE TEMPERATURE WILL DECREASE TO -20 DEGREES C, REMOVE THE BATTERIES. | If temperature is expected to drop to -20 degrees C, remove the batteries. |
@@ -203,6 +218,7 @@
 | EXPLOSIVE (adj) | That can cause an explosion | THE SAFETY PRECAUTIONS THAT FOLLOW ARE APPLICABLE TO EXPLOSIVE ITEMS. |  |
 
 <!-- Page 234 of 434 -->
+
 |---|---|---|---|
 | expose (v) — UNNAPPROVED | GET (v) | REMOVE THE COVER ASSEMBLY TO GET ACCESS TO THE LAMP ASSEMBLY. | Remove cover assembly to expose lamp assembly. |
 | EXTEND (v), EXTENDS, EXTENDED, EXTENDED | To increase, or cause something to increase, in dimension or range | FULLY EXTEND THE JACK RAM. MAKE SURE THAT THE RODS EXTEND AND RETRACT. |  |
@@ -216,6 +232,7 @@
 | EXTERNALLY (adv) | Of, or on, the outer side | THE CONTROL BOX IS INSTALLED EXTERNALLY. |  |
 
 <!-- Page 235 of 434 -->
+
 |---|---|---|---|
 | EXTINGUISH (v), EXTINGUISHES, EXTINGUISHED, EXTINGUISHED | To stop burning | TO EXTINGUISH A FIRE IN THE ENGINE, ACTIVATE THE FIRE SUPPRESSION SYSTEM IMMEDIATELY. |  |
 | EXTINGUISH (v), EXTINGUISHES, EXTINGUISHED, EXTINGUISHED | For lights or lamps, use: | WHEN THE FLAME EXTINGUISHES, STOP THE FUEL SUPPLY. |  |
@@ -231,6 +248,7 @@
 | exude (v) — UNNAPPROVED | OUT OF (prep) | MAKE SURE THAT GREASE COMES OUT OF THE JOINT. | Make sure grease exudes from the joint. |
 
 <!-- Page 236 of 434 -->
+
 |---|---|---|---|
 | fabricate (v) — UNNAPPROVED | MAKE (v) | USE COPPER TO MAKE THE CHILL BLOCK. | Use copper to fabricate the chill block. |
 | FACE (n) | The front surface of an object | CLEAN THE FACE OF THE INDICATOR. |  |
@@ -244,6 +262,7 @@
 | factor (n) — UNNAPPROVED | CAUSE (n) | THERE CAN BE MANY CAUSES FOR CORROSION. | Corrosion can be caused by several factors. |
 
 <!-- Page 237 of 434 -->
+
 |---|---|---|---|
 | fail (v) — UNNAPPROVED | IF … NOT | IF YOU DO NOT OBEY THESE INSTRUCTIONS, THERE IS A RISK OF INJURY. | If you fail to comply with these instructions, there is a risk of injury. |
 | fail (v) — UNNAPPROVED | FAILURE (TN) | IF YOU DO NOT OBEY THE PROCEDURE CORRECTLY, FAILURE OF THE EMERGENCY FLOTATION GEAR CAN OCCUR. | If you do not follow the procedure correctly, the emergency flotation gear can fail. |
@@ -256,6 +275,7 @@
 | faint (adj) — UNNAPPROVED | INTENSITY (n) Refer also to BRIGHT (adj). | TURN THE KNOB COUNTERCLOCKWISE TO DECREASE THE INTENSITY OF THE LIGHT. | Turn the knob anticlockwise to make the light fainter. |
 
 <!-- Page 238 of 434 -->
+
 |---|---|---|---|
 | fall (n) — UNNAPPROVED | DECREASE (v) | WHEN THE PRESSURE DECREASES, THE INDICATOR SHOWS THAT THERE IS A LEAK. | When there is a fall in pressure, the indicator shows a leak. |
 | FALL (v), (FALLS, FELL, FALLEN) | To move down by the force of gravity | MAKE SURE THAT THE TOOLS DO NOT FALL INTO THE ENGINE. |  |
@@ -269,6 +289,7 @@
 | fast (adv) — UNNAPPROVED | QUICKLY (adv) | DO NOT LET THE CABIN ALTITUDE CHANGE TOO QUICKLY. | Do not let the cabin altitude change too fast. |
 
 <!-- Page 239 of 434 -->
+
 |---|---|---|---|
 | fasten (v) — UNNAPPROVED | ATTACH (v) | ATTACH THE TWO STRINGERS TOGETHER WITH RIVETS. | Fasten the two stringers together with rivets. |
 | fasten (v) — UNNAPPROVED | CONNECT (v) | CONNECT THE HOSE TO THE TEST EQUIPMENT. | Fasten the hose to the test equipment. |
@@ -283,6 +304,7 @@
 | feasible (adj) — UNNAPPROVED | CAN (CANNOT) (v) | IF YOU CANNOT REMOVE THE BOLT, CUT IT. | If it is not feasible to remove the bolt, you must cut it. |
 
 <!-- Page 240 of 434 -->
+
 |---|---|---|---|
 | FEATHER (v), (FEATHERS, FEATHERED, FEATHERED) | To put a propeller to a position of minimum drag | PUT THE CONDITION LEVER IN THE FTR POSITION TO FEATHER THE PROPELLER. |  |
 | feature (v) — UNNAPPROVED | HAVE (v) | THESE NUTS HAVE A FLAT FLANGE. | These nuts feature a flat flange. |
@@ -298,6 +320,7 @@
 | FILL (v), (FILLS, FILLED, FILLED) |  | MAKE SURE THAT THE RESERVOIR FILLS WITH WATER. |  |
 
 <!-- Page 241 of 434 -->
+
 |---|---|---|---|
 | film (n) — UNNAPPROVED | LAYER (n) | APPLY A LAYER OF COMPOUND ON THE SURFACE OF THE DISC. | Spread a film of compound on the surface of the disc. |
 | filter (v) — UNNAPPROVED | FILTER (TN) | PUT THE OIL THROUGH A FILTER. | Filter the oil. |
@@ -312,6 +335,7 @@
 | FIRE (n) | The light and/or heat from a material when it burns | IF THERE IS A FIRE IN THE ENGINE COMPARTMENT, YOU WILL HEAR THE GONG. |  |
 
 <!-- Page 242 of 434 -->
+
 |---|---|---|---|
 | FIRE (v), FIRES, FIRED, FIRED | To ignite, or to operate items that contain an explosive material | FIRE THE CARTRIDGES. |  |
 | FIRE (v), FIRES, FIRED, FIRED |  | WHEN YOU PUSH THE AGENT PUSHBUTTON, THE FIRE EXTINGUISHER CARTRIDGE FIRES. |  |
@@ -328,6 +352,7 @@
 | FLAME (n) | Burning gas | IF YOU SEE FLAMES FROM THE EXHAUST PIPE, STOP THE ENGINE. |  |
 
 <!-- Page 243 of 434 -->
+
 |---|---|---|---|
 | FLAMMABLE (adj) | That burns easily | THE SOLVENT IS FLAMMABLE. |  |
 | FLANGE (n) | An end surface at an angle | MAKE SURE THAT THE FLANGE IS NOT DAMAGED. |  |
@@ -343,6 +368,7 @@
 | flood (v) — UNNAPPROVED | USE TOO MUCH | DO NOT USE TOO MUCH SOLVENT ON THE AREA. | Do not flood the area with solvent. |
 
 <!-- Page 244 of 434 -->
+
 |---|---|---|---|
 | FLOW (n) | A continuous movement of fluid | AN ARROW ON THE FUEL VALVE SHOWS THE DIRECTION OF THE FLOW. |  |
 | FLOW (v), FLOWS, FLOWED, FLOWED | To move as a fluid moves | THE OIL MUST FLOW OUT OF THE VALVE. |  |
@@ -358,6 +384,7 @@
 | FOLD (v), FOLDS, FOLDED, FOLDED |  | THE BICYCLE CAN FOLD FOR EASY STORAGE. |  |
 
 <!-- Page 245 of 434 -->
+
 |---|---|---|---|
 | FOLLOW (v), FOLLOWS, FOLLOWED, FOLLOWED | To come after, to go after | THIS TEST FOLLOWS THE INSTALLATION OF THE HP PUMP. |  |
 | FOLLOW (v), FOLLOWS, FOLLOWED, FOLLOWED |  | DO THE PROCEDURE THAT FOLLOWS. |  |
@@ -372,6 +399,7 @@
 | forbidden (adj) — UNNAPPROVED | NOT PERMITTED | SHARP OBJECTS ARE NOT PERMITTED IN THIS AREA. | Sharp objects are forbidden in this area. |
 
 <!-- Page 246 of 434 -->
+
 |---|---|---|---|
 | force (v) — UNNAPPROVED | PUSH (v) | PUSH THE CLIP OUT TO REMOVE IT. | Clip may be removed by forcing it out. |
 | force (v) — UNNAPPROVED | FORCE (TN) | DO NOT USE FORCE TO PUSH THE COVER INTO POSITION. | Do not attempt to force the cover into position. |
@@ -386,6 +414,7 @@
 | FORWARD OF (prep) | At a position nearer to the front | THE TENSION REGULATOR IS INSTALLED FORWARD OF THE PRESSURE BULKHEAD. |  |
 
 <!-- Page 247 of 434 -->
+
 |---|---|---|---|
 | foul (v) — UNNAPPROVED | CATCH (v) | MAKE SURE THAT THE RODS CANNOT CATCH ON THE FLAPS. | Make sure that the rods cannot foul the flaps. |
 | foul (v) — UNNAPPROVED | HIT (v) | IF YOU INSTALL THE UPPER DRAG STRUT INCORRECTLY, IT WILL HIT THE LOWER DRAG STRUT DURING RETRACTION. | Do not install the upper drag strut so that it fouls the gear retraction. |
@@ -400,6 +429,7 @@
 | free from (adj) — UNNAPPROVED | NO (adj) | MAKE SURE THAT THERE IS NO DUST ON THE SURFACE. | Make sure that the surface is free from dust. |
 
 <!-- Page 248 of 434 -->
+
 |---|---|---|---|
 | free (v) — UNNAPPROVED | RELEASE (v) | REMOVE THE SLEEVE TO RELEASE THE SLIDING TUBE. | Remove the sleeve to free the sliding tube. |
 | FREELY (adv) | That can move easily | OXYGEN MUST FLOW FREELY FROM THE END OF THE HOSE. |  |
@@ -415,6 +445,7 @@
 | fuel (v) — UNNAPPROVED | REFUEL (v) | REFUEL THE VEHICLE. | Fuel the vehicle. |
 
 <!-- Page 249 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |||fulfill (v) — UNNAPPROVED|ABEY (v)|ABEY THE INSTRUCTIONS IN THE TEST PROCEDURE.|Fulfill the instructions in the test procedure.|

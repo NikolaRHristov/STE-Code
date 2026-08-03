@@ -43,6 +43,7 @@ When a worker rail fails, check the parent process rail for broader recovery act
 □ **RAIL W4 — Boilerplate Control**: Is "ASD-STE100 Simplified Technical English" appearing only where it belongs, not repeated on every line?
 
 □ **RAIL W5 — STE/Non-STE Format**: Are ALL example pairs formatted as:
+
 ```
 > **STE:** [example text]
 > **Non-STE:** [example text]

@@ -27,6 +27,7 @@
 | dangerously (adv) — UNNAPPROVED | DANGEROUS (adj) | DO NOT OPEN THE CARGO DOOR IN STRONG WINDS. STRONG WINDS ARE DANGEROUS. | Do not open the cargo door if the wind-speed is dangerously high. |
 
 <!-- Page 200 of 434 -->
+
 |---|---|---|---|
 | DATA (n) | 1. Known facts | MAKE SURE THAT YOU GET ALL THE DATA ABOUT THE PROBLEM. |  |
 | DATA (n) | 2. Numbers and symbols used by computers | DO A TEST TO FIND IF THE MANAGEMENT UNIT TRANSMITS THESE DATA. |  |
@@ -41,6 +42,7 @@
 | dearm (v) — UNNAPPROVED | REMOVE (v) | REMOVE THE CARTRIDGES FROM THE FIRE BOTTLES. | Dearm the fire bottles. |
 
 <!-- Page 201 of 434 -->
+
 |---|---|---|---|
 | decay (v) — UNNAPPROVED | DECREASE (v) | WHEN THE ENGINE SPEED DECREASES TO 500 RPM, STOP THE ENGINE. | When the engine speed decays to 500 rpm, stop the engine. |
 | decelerate (v) — UNNAPPROVED | DECREASE (v) | MAKE SURE THAT THE ENGINE SPEED DECREASES TO 500 RPM. | Make sure that the engine decelerates to 500 rpm. |
@@ -53,6 +55,7 @@
 | decrease (n) — UNNAPPROVED | DECREASE (v) | THE PRESSURE MUST DECREASE BY MORE THAN 2 bar. | There must be a decrease in pressure of more than 2 bar. |
 
 <!-- Page 202 of 434 -->
+
 |---|---|---|---|
 | DECREASE (v), DECREASES, DECREASED, DECREASED | To make or become smaller or lower | DECREASE THE HEADING INDICATIONS. |  |
 | decrement (n) — UNNAPPROVED | INCREMENT (n) | TURN THE ADJUSTER COUNTERCLOCKWISE IN INCREMENTS OF 60 DEG. | Turn the adjuster anticlockwise in decrements of 60 deg. |
@@ -65,6 +68,7 @@
 | define (v) — UNNAPPROVED | SPECIFIED (adj) | THE FLAP ANGLES ARE SPECIFIED IN TABLE 1. | Table 1 defines the flap angles. |
 
 <!-- Page 203 of 434 -->
+
 |---|---|---|---|
 | DEFLATE (v), DEFLATES, DEFLATED, DEFLATED | To make or become smaller as a result of depressurization | DEFLATE THE TIRE TO A PRESSURE OF 2 bar (29 psi). IF THE WHEEL TEMPERATURE INCREASES TO MORE THAN 177 DEG., THE CORE OF THE FUSIBLE PLUG MELTS AND THE TIRE DEFLATES. |  |
 | deflect (v) — UNNAPPROVED | MOVE (v) | THE BARS MOVE TO THE RIGHT SIDE. | Bars deflect to the right. |
@@ -79,6 +83,7 @@
 | de-ice (v) — UNNAPPROVED | ICE (TN) | REMOVE THE ICE FROM THE WINDOW. | De-ice the window. |
 
 <!-- Page 204 of 434 -->
+
 |---|---|---|---|
 | delay (n) — UNNAPPROVED | INTERVAL (n) | BEFORE YOU CONTINUE THE TEST, AN INTERVAL OF 5 MINUTES IS NECESSARY. | A delay of 5 minutes is necessary before continuing with the test. |
 | delay (n) — UNNAPPROVED | IMMEDIATELY (adv) | THE JAWS OF THE UPLOCK UNIT MUST OPEN IMMEDIATELY. | The jaws of the uplock unit must open with no delay. |
@@ -92,6 +97,7 @@
 | denote (v) — UNNAPPROVED | SHOW (v) | FIGURE 2 SHOWS THAT YOU CAN INSTALL AN ALTERNATIVE RELAY. | Figure 2 denotes that an alternative relay may be installed. |
 
 <!-- Page 205 of 434 -->
+
 |---|---|---|---|
 | dent (v) — UNNAPPROVED | DENT (TN) | DO NOT MAKE DENTS IN THE BELLOWS. | Do not dent the bellows. |
 | depend (v) — UNNAPPROVED | IF (conj) | THE TENSION IN THE CABLES DECREASES IF THE TEMPERATURE INCREASES. | Cable tension changes depending on the temperature. |
@@ -105,6 +111,7 @@
 | deselect (v) — UNNAPPROVED | CANCEL (v) | PUSH THE BUTTON TO CANCEL THE FREEZE MODE. | Press the button to deselect the freeze mode. |
 
 <!-- Page 206 of 434 -->
+
 |---|---|---|---|
 | design (v) — UNNAPPROVED | HAVE (v) | THE MAIN LANDING GEAR DOORS HAVE STEPS FOR ACCESS TO THE LANDING GEAR BAY. | The main landing gear doors are designed with steps for access to the landing gear bay. |
 | desired (adj) — UNNAPPROVED | NECESSARY (adj) CORRECT (adj) | ADD THE NECESSARY QUANTITY OF OIL. TIGHTEN THE TURNBUCKLE UNTIL THE TENSION IN THE CABLE IS CORRECT. | Add the desired quantity of oil. Tighten the turnbuckle until you have the desired tension in the cable. |
@@ -114,6 +121,7 @@
 | detail (v) — UNNAPPROVED | GIVE (v) REFER (v) SPECIFIED (adj) | THIS SECTION GIVES THE REMOVAL/ INSTALLATION INSTRUCTIONS. DO THE LEAK TEST (REFER TO PARAGRAPH 4.0). DO THE LEAK TEST AS SPECIFIED IN PARAGRAPH 4.0. | This section details the Removal / Installation instructions. Do the leak test as detailed in paragraph 4.0. Do the leak test as detailed in paragraph 4.0. |
 
 <!-- Page 207 of 434 -->
+
 |---|---|---|---|
 | detect (v) — UNNAPPROVED | FIND (v) SENSE (v) | TO FIND DAMAGE ON WIRES, RUB A CLOTH ALONG THEM. THE COMPUTER SENSES THE DIFFERENCES BETWEEN THE SIGNALS. | To detect damage to wires, rub a cloth along them. The computer detects discrepancies between the signals. |
 | DETERIORATION (n) | A worse condition | THIS CONDITION WILL CAUSE DETERIORATION OF THE SURFACE. |  |
@@ -121,6 +129,7 @@
 | detrimental (adj) — UNNAPPROVED | DANGEROUS (adj) DAMAGE (n) | HYDRAULIC FLUID IS DANGEROUS FOR YOUR HEALTH. SMALL QUANTITIES OF SURFACE BLOOMING, WHICH CAN OCCUR ON ITEMS IN STORAGE, DO NOT CAUSE DAMAGE TO THE COMPONENT. | Hydraulic fluid is detrimental to health. Light surface blooming, which can occur on items in storage, is not detrimental to the component. |
 
 <!-- Page 208 of 434 -->
+
 |---|---|---|---|
 | develop (v) — UNNAPPROVED | START (v) CAUSE (v) | IF A FIRE STARTS, OPERATE THE FIRE SHUTOFF VALVE. DO NOT LET HYDRAULIC FLUID STAY ON YOUR SKIN. HYDRAULIC FLUID CAN CAUSE DERMATITIS. | If a fire develops, operate the fire shutoff valve. Do not leave hydraulic fluid on your skin, as dermatitis could develop. |
 | deviate (v) — UNNAPPROVED | OBEY (v) | PERSONNEL MUST OBEY THIS PROCEDURE. | Personnel must not deviate from this procedure. |
@@ -133,6 +142,7 @@
 | DIFFERENCE (n) | That which is different between two quantities, numbers, or functions | THE DIFFERENCE BETWEEN THE TWO DIMENSIONS MUST NOT BE MORE THAN 0.10 mm. |  |
 
 <!-- Page 209 of 434 -->
+
 |---|---|---|---|
 | dim (v) — UNNAPPROVED | DECREASE (v) | DECREASE THE LIGHT GRADUALLY. | Dim the light gradually. |
 | DIM (adj) (DIMMER, (DIMMEST) | Not bright | DURING NIGHT OPERATION, MAKE SURE THAT THE PANEL LIGHTS ARE DIM. |  |
@@ -146,6 +156,7 @@
 | DIRTY (adj) (DIRTIER, (DIRTIEST) | Not clean | A DIRTY CONTACT IN THE CONNECTION UNITS WILL CAUSE THEM TO OPERATE INCORRECTLY. |  |
 
 <!-- Page 210 of 434 -->
+
 |---|---|---|---|
 | disappear (v) — UNNAPPROVED | VIEW (n) | THE HORIZONTAL BAR GOES OUT OF VIEW. | The horizontal bar disappears from the window. |
 | DISARM (v), DISARMS, DISARMED, DISARMED | 1. To remove armaments 2. To prevent automatic operation | DISARM THE AIRCRAFT. DISARM THE LIFT DUMPER. |  |
@@ -158,6 +169,7 @@
 | discrepancy (n) — UNNAPPROVED | DIFFERENCE (n) | IF THERE IS A DIFFERENCE OF MORE THAN 5 mm, MAKE SURE THAT THE ADJUSTMENT IS CORRECT. | If the discrepancy is greater than 5 mm, check the adjustment. |
 
 <!-- Page 211 of 434 -->
+
 |---|---|---|---|
 | DISENGAGE (v), DISENGAGES, DISENGAGED, DISENGAGED | To release or become released from something that engages | BEFORE YOU START THE ENGINE, DISENGAGE THE CLUTCH. IF THERE IS A MALFUNCTION, THE GEARS WILL AUTOMATICALLY DISENGAGE. |  |
 | disinfect (v) — UNNAPPROVED | DISINFECTANT (TN) | USE DISINFECTANT TO CLEAN THE MASK ASSEMBLIES. | Disinfect the mask assemblies. |
@@ -170,6 +182,7 @@
 | dispose of (v) — UNNAPPROVED | DISCARD (v) | DISCARD THE USED OIL. REFER TO THE APPLICABLE ENVIRONMENTAL REGULATIONS. | Dispose of the used oil according to the applicable environmental regulations. |
 
 <!-- Page 212 of 434 -->
+
 |---|---|---|---|
 | disposition (n) — UNNAPPROVED | LOCATION (n) POSITION (n) | BEFORE YOU START THE ENGINE, MAKE SURE THAT THE FIRE EXTINGUISHERS ARE IN THEIR CORRECT LOCATIONS. MAKE SURE THAT THE POSITION OF THE SWITCHES IS CORRECT. | Check the disposition of the fire extinguishers before you start the engine. Ensure that the switch disposition is correct. |
 | disregard (v) — UNNAPPROVED | IGNORE (v) | DO THE GENERATOR DRIVE TEST, BUT IGNORE STEPS 16 THRU 20. | Perform the generator drive test, but disregard steps 16 thru 20. |
@@ -182,6 +195,7 @@
 | disturb (v) — UNNAPPROVED | MOVE (v) CHANGE (v) | WHEN YOU INSTALL THE DISTRIBUTOR, DO NOT MOVE THE TIMING. DO NOT CHANGE THE SEQUENCE OF THE WORK STEPS IN THE TEST. | Do not disturb the timing during the distributor installation. Do not disturb the sequence of the work steps in the test. |
 
 <!-- Page 213 of 434 -->
+
 |---|---|---|---|
 | DIVIDE (v), DIVIDES, DIVIDED, DIVIDED | 1. To separate into parts or groups 2. To do mathematical division | YOU CAN DIVIDE THE DRAINS INTO THREE GROUPS. THE PRESSURE LINES DIVIDE AND GO IN DIFFERENT DIRECTIONS. TO FIND THE MIDDLE POINT, DIVIDE THE MEASURED CLEARANCE BY TWO. |  |
 | DO (v), DOES, DID, DONE | 1. To complete a procedure, task, or step 2. As an auxiliary verb a. As part of a negative command or statement b. As part of a question | DO A FUNCTIONAL TEST. DO NOT BREATHE THE SOLVENT FUMES. DOES THE LIGHT COME ON? |  |
@@ -191,6 +205,7 @@
 |  | THINK (v) | IF YOU THINK THAT THE RESULTS ARE INCORRECT, DO THE TEST AGAIN. | If you are in doubt about the results, repeat the test. |
 
 <!-- Page 214 of 434 -->
+
 |---|---|---|---|
 | DOWN (adj) | In a position below | MAKE SURE THAT THE ANCHOR IS DOWN. |  |
 | DOWN (adv) | To a position below | THE POINTER MOVES DOWN. |  |
@@ -205,6 +220,7 @@
 |  | PULL (v) | PULL THE WIRE OUT OF THE CONDUIT. | Draw the wire out of the conduit. |
 
 <!-- Page 215 of 434 -->
+
 |---|---|---|---|
 | dress (v) — UNNAPPROVED | USE (v) | BEFORE YOU GO INTO THE WORK AREA, USE THE NECESSARY PROTECTIVE CLOTHING. | Dress suitably before going into the work area. |
 |  | PUT ON (v) | BEFORE YOU GO NEAR THE TEST RIG, PUT ON THE NECESSARY PROTECTIVE CLOTHING. | Dress appropriately before going near the test rig. |
@@ -220,6 +236,7 @@
 | DROP (n) | A small quantity of liquid in a spherical shape | MAKE SURE THAT NO DROPS OF ADHESIVE FALL ONTO THE MATERIAL. |  |
 
 <!-- Page 216 of 434 -->
+
 |---|---|---|---|
 | drop (v) — UNNAPPROVED | FALL (v) | PARTICLES THAT FALL INTO THE INTAKE CAN CAUSE DAMAGE. | Particles that drop into the intake may cause damage. |
 |  | DECREASE (v) | THE PRESSURE DECREASES WHILE THE TIRES BECOME COOL. | The pressure drops as the tires cool. |
@@ -234,6 +251,8 @@
 | dust (v) — UNNAPPROVED | APPLY (v) | APPLY TALCUM POWDER TO THE AREA. | Dust the area with talcum powder. |
 
 <!-- Page 217 of 434 -->
+
 # Non-STE example
+
 Word Approved meaning/ (part of speech) ALTERNATIVES STE EXAMPLE
 Blank Page

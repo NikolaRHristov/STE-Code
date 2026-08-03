@@ -68,4 +68,3 @@ HOW YOU MUST WORK — MANUAL REFORMATTING ONLY:
 
 The authoritative protocol (9 rules, before/after examples, failure recovery)
 follows. Follow it exactly for every file.
-

@@ -27,6 +27,7 @@
 | **SAFETY (v)** | SAFETY THE FOUR Wire-lock the four bolts (WITH SAFETY WIRE BOLTS TO EACH to each other. [TN]) OTHER WITH SAFETY WIRE. |
 
 <!-- Page 430 of 434 -->
+
 | **WITH (prep)** | Function word that ALIGN THE MARK shows association or WITH THE relationship, help or LONGITUDINAL AXIS. sharing, a means or instrument Refer to ATTACH THE FLANGE section 9, GR-2. (10) WITH THE FOUR BOLTS (15). REMOVE THE VALVE (2) WITH THE EXTRACTOR. |
 | **withdraw (v) — UNNAPROVED** | REMOVE (v) REMOVE THE Withdraw the indicator INDICATOR FROM THE from the instrument INSTRUMENT PANEL. panel. |
 | **within (prep) — UNNAPROVED** | IN (prep) A FILTER PREVENTS A filter prevents CONTAMINATION OF contamination of the THE COMPONENTS IN components within the THE SYSTEM. system. IN ... OR LESS LIGHT L4 COMES ON Light L4 illuminates IN 5 SECONDS OR within 5 seconds. LESS. IN LESS THAN MAKE SURE THAT THE Make sure that the WARNING LIGHT warning light illuminates COMES ON IN LESS within 3 seconds. THAN 3 SECONDS. |
@@ -37,6 +38,7 @@
 | **would (v) — UNNAPROVED** | CAN (v) SOLVENTS THAT STAY Solvents left on the part ON THE PART CAN would corrode the part. CAUSE CORROSION. |
 
 <!-- Page 431 of 434 -->
+
 | **wrap (v) — UNNAPROVED** | PUT (v) PUT THE PART IN Wrap the part in OILPAPER. oilpaper. |
 | **WIND (v)** | WIND MASKING TAPE Wrap masking tape AROUND THE PART. around the part. |
 | **WRITE (v)** | , To record data or WRITE THE TEST WRITES, information as words, DATE ON THE WROTE, letters, or symbols CERTIFICATE. WRITTEN |

@@ -23,6 +23,7 @@
 # A
 
 ## A (art)
+
 - **Original:** Function word: indefinite article. A FUEL PUMP IS INSTALLED IN ZONE 10.
 - **Code-domain:** Function word: indefinite article. A CONFIG FILE IS INCLUDED IN THE ROOT DIRECTORY.
 > **STE:** A config file is included in the root directory.
@@ -33,6 +34,7 @@
 ---
 
 ## ABANDON (v) - UNNAPROVED
+
 - **Original:** GO (v), STOP (v). IF THERE IS A FIRE, IMMEDIATELY GO TO A SAFE AREA. / IF THE VALUES ARE INCORRECT, STOP THE TEST PROCEDURE.
 - **Code-domain:** TERMINATE (v), STOP (v). IF THE BUILD FAILS, STOP THE DEPLOYMENT PIPELINE. / IF THE VALUES ARE INCORRECT, TERMINATE THE TEST RUN.
 > **STE:** If the build fails, stop the deployment pipeline.
@@ -46,6 +48,7 @@
 ---
 
 ## ABILITY (n) - UNNAPROVED
+
 - **Original:** CAN (v). ONE GENERATOR CAN SUPPLY POWER FOR ALL THE SYSTEMS.
 - **Code-domain:** CAN (v). ONE CONFIGURATION CAN HANDLE REQUESTS FOR ALL THE ENDPOINTS.
 > **STE:** One configuration can handle requests for all the endpoints.
@@ -56,6 +59,7 @@
 ---
 
 ## ABLE (adj) - UNNAPROVED
+
 - **Original:** CAN (v). IF YOU CAN START THE ENGINE, DO THE APPLICABLE TESTS.
 - **Code-domain:** CAN (v). IF YOU CAN RUN THE SCRIPT, DO THE APPLICABLE CHECKS.
 > **STE:** If you can run the script, do the applicable checks.
@@ -66,6 +70,7 @@
 ---
 
 ## ABNORMAL (adj) - UNNAPROVED
+
 - **Original:** UNUSUAL (adj), INCORRECT (adj). LISTEN FOR UNUSUAL NOISES. / IF YOU FIND AN INCORRECT QUANTITY OF AIR FROM THE VENT MAST, DO A SYSTEM TEST.
 - **Code-domain:** UNUSUAL (adj), INCORRECT (adj). WATCH FOR UNUSUAL LOG ENTRIES. / IF YOU FIND AN INCORRECT VALUE IN THE OUTPUT, DO A DEBUG RUN.
 > **STE:** Watch for unusual log entries.
@@ -79,6 +84,7 @@
 ---
 
 ## ABNORMALITY (n) - UNNAPROVED
+
 - **Original:** DEFECT (TN). EXAMINE THE SEAL FOR DEFECTS.
 - **Code-domain:** BUG (TN). EXAMINE THE REPORTED STACK TRACE FOR BUGS.
 > **STE:** Examine the reported stack trace for bugs.
@@ -89,6 +95,7 @@
 ---
 
 ## ABOUT (prep)
+
 - **Original:** Concerned with. FOR DATA ABOUT THE LOCATION OF CIRCUIT BREAKERS, REFER TO THE WIRING LIST. For other meanings, use: APPROXIMATELY (adv), AROUND (prep).
 - **Code-domain:** Concerned with. FOR DATA ABOUT THE CONFIGURATION OF THE MODULE, REFER TO THE README. For other meanings, use: APPROXIMATELY (adv), AROUND (prep).
 > **STE:** For data about the configuration of the module, refer to the README.
@@ -105,6 +112,7 @@
 ---
 
 ## ABOVE (prep)
+
 - **Original:** In (or to) a position farther up than something. LIFT THE CYLINDER ABOVE ITS INSTALLED POSITION. For other meanings, use: MORE THAN.
 - **Code-domain:** In (or to) a position higher than something. MOVE THE CURSOR ABOVE THE TARGET LINE. For other meanings, use: MORE THAN.
 > **STE:** Move the cursor above the target line.
@@ -118,6 +126,7 @@
 ---
 
 ## ABRASIVE (adj) - (retained; no STE-code direct equivalent)
+
 - **Original:** That can remove material by friction. POLISH THE SURFACE WITH AN ABRASIVE PAPER.
 - **Code-domain:** Not applicable to code documentation domain. Retained for completeness but not adapted.
 > **Note:** This word has no code-documentation equivalent. Use only if describing physical hardware.
@@ -127,6 +136,7 @@
 ---
 
 ## ABRUPT (adj) - UNNAPROVED
+
 - **Original:** SUDDEN (adj), SUDDENLY (adv). THE DAMPER PREVENTS SUDDEN MOVEMENT OF THE CONTROL. / IF THE ROTORS STOP SUDDENLY, EXAMINE THE INTAKE.
 - **Code-domain:** SUDDEN (adj), SUDDENLY (adv). THE WATCHDOG PREVENTS SUDDEN SHUTDOWN OF THE SERVICE. / IF THE PROCESS STOPS SUDDENLY, EXAMINE THE LOGS.
 > **STE:** The watchdog prevents sudden shutdown of the service.
@@ -140,6 +150,7 @@
 ---
 
 ## ABSENCE (n) - UNNAPROVED
+
 - **Original:** NONE (pron), NOT (adv), NO (adj). IF NONE OF THE BRACKETS ARE DAMAGED, CONTINUE THE PROCEDURE.
 - **Code-domain:** NONE (pron), NOT (adv), NO (adj). IF NONE OF THE TESTS FAIL, CONTINUE THE DEPLOYMENT.
 > **STE:** If none of the tests fail, continue the deployment.
@@ -156,6 +167,7 @@
 ---
 
 ## ABSENT (adj) - UNNAPROVED
+
 - **Original:** MISSING (adj), NO (adj). IF ONE OR MORE BLADES ARE MISSING, MAKE AN ENTRY IN THE ENGINE LOGBOOK.
 - **Code-domain:** MISSING (adj), NO (adj). IF ONE OR MORE FILES ARE MISSING, ADD AN ENTRY IN THE CHANGELOG.
 > **STE:** If one or more files are missing, add an entry in the changelog.
@@ -166,6 +178,7 @@
 ---
 
 ## ABSOLUTELY (adv) - UNNAPROVED
+
 - **Original:** FULLY (adv). MAKE SURE THAT THE LATCH IS FULLY ENGAGED.
 - **Code-domain:** FULLY (adv). MAKE SURE THAT THE CONNECTION IS FULLY ESTABLISHED.
 > **STE:** Make sure that the connection is fully established.
@@ -176,6 +189,7 @@
 ---
 
 ## ABSORB (v)
+
 - **Original:** 1. To take up or into. ABSORB THE FLUID WITH A CLEAN CLOTH. 2. To decrease the effect of. THE SHOCK MOUNT ABSORBS THE VIBRATION.
 - **Code-domain:** 1. To take up or consume. THE BUFFER ABSORBS THE INPUT DATA. 2. To decrease the effect of. THE CACHE LAYER ABSORBS THE LOAD FROM REPEATED QUERIES.
 > **STE:** The buffer absorbs the input data.
@@ -189,6 +203,7 @@
 ---
 
 ## ABSORPTION (n) - UNNAPROVED
+
 - **Original:** ABSORB (v). MEASURE THE TIME THAT IS NECESSARY FOR THE SILICA GEL TO ABSORB THE MOISTURE.
 - **Code-domain:** ABSORB (v). MEASURE THE TIME THAT IS NECESSARY FOR THE LOG SYSTEM TO ABSORB THE INCOMING EVENTS.
 > **STE:** Measure the time that is necessary for the log system to absorb the incoming events.
@@ -199,6 +214,7 @@
 ---
 
 ## ABUNDANT (adj) - UNNAPROVED
+
 - **Original:** LARGE (adj). CLEAN YOUR SKIN WITH A LARGE QUANTITY OF CLEAN WATER.
 - **Code-domain:** LARGE (adj). LOG THE ERRORS WITH A LARGE QUANTITY OF CONTEXT DATA.
 > **STE:** Log the errors with a large quantity of context data.
@@ -209,6 +225,7 @@
 ---
 
 ## ABUT (v) - UNNAPROVED
+
 - **Original:** TOUCH (v). THE BIN TOUCHES THE FORWARD HINGE SURFACE.
 - **Code-domain:** TOUCH (v). THE WIDGET TOUCHES THE BOUNDARY OF THE CONTAINER.
 > **STE:** The widget touches the boundary of the container.
@@ -219,6 +236,7 @@
 ---
 
 ## ACCELERATE (v) - UNNAPROVED
+
 - **Original:** INCREASE (v), FASTER (adj). A HIGHER TEMPERATURE INCREASES THE SPEED OF EVAPORATION.
 - **Code-domain:** INCREASE (v), FASTER (adj). A LARGER BUFFER SIZE INCREASES THE SPEED OF DATA TRANSFER.
 > **STE:** A larger buffer size increases the speed of data transfer.
@@ -232,6 +250,7 @@
 ---
 
 ## ACCEPT (v)
+
 - **Original:** To make a decision that something is satisfactory. ACCEPT THE RELAY IF IT IS SERVICEABLE.
 - **Code-domain:** To make a decision that something is satisfactory. ACCEPT THE PULL REQUEST IF IT PASSES ALL CHECKS.
 > **STE:** Accept the pull request if it passes all checks.
@@ -242,6 +261,7 @@
 ---
 
 ## ACCEPTABLE (adj) - UNNAPROVED
+
 - **Original:** PERMITTED (adj), SATISFACTORY (adj), SERVICEABLE (adj). A VALUE OF 2 mm IS PERMITTED.
 - **Code-domain:** PERMITTED (adj), SATISFACTORY (adj), READY (adj). A RESPONSE TIME OF 200 ms IS PERMITTED.
 > **STE:** A response time of 200 ms is permitted.
@@ -258,6 +278,7 @@
 ---
 
 ## ACCEPTANCE (n) - UNNAPROVED
+
 - **Original:** ACCEPT (v). BEFORE YOU ACCEPT THE UNIT, DO THE SPECIFIED TEST PROCEDURE.
 - **Code-domain:** ACCEPT (v). BEFORE YOU ACCEPT THE MERGE REQUEST, DO THE SPECIFIED REVIEW CHECKLIST.
 > **STE:** Before you accept the merge request, do the specified review checklist.
@@ -268,6 +289,7 @@
 ---
 
 ## ACCESS (n)
+
 - **Original:** The ability to go into or near. GET ACCESS TO THE ACCUMULATOR FOR THE No. 1 HYDRAULIC SYSTEM.
 - **Code-domain:** The ability to read, write, or enter. GET ACCESS TO THE REPOSITORY FOR THE AUTHENTICATION MODULE.
 > **STE:** Get access to the repository for the authentication module.
@@ -278,6 +300,7 @@
 ---
 
 ## ACCESSIBLE (adj) - UNNAPROVED
+
 - **Original:** ACCESS (n). TURN THE COVER UNTIL YOU CAN GET ACCESS TO THE JACKS THAT HAVE + AND - MARKS.
 - **Code-domain:** ACCESS (n). SCROLL THE VIEW UNTIL YOU CAN GET ACCESS TO THE FUNCTIONS THAT HAVE PUBLIC ANNOTATIONS.
 > **STE:** Scroll the view until you can get access to the functions that have public annotations.
@@ -288,6 +311,7 @@
 ---
 
 ## ACCIDENT (n)
+
 - **Original:** An occurrence that causes injury or damage. TO PREVENT ACCIDENTS, MAKE SURE THAT THE PINS ARE INSTALLED.
 - **Code-domain:** An occurrence that causes harm or data loss. TO PREVENT ACCIDENTS, MAKE SURE THAT THE BACKUPS ARE INSTALLED.
 > **STE:** To prevent accidents, make sure that the backups are configured.
@@ -298,6 +322,7 @@
 ---
 
 ## ACCIDENTAL (adj)
+
 - **Original:** That does not occur on purpose. TO PREVENT ACCIDENTAL OPERATION OF THE SYSTEM, INSTALL THE SAFETY LOCK.
 - **Code-domain:** That does not occur on purpose. TO PREVENT ACCIDENTAL DELETION OF THE FILES, CONFIRM THE OPERATION.
 > **STE:** To prevent accidental deletion of the files, confirm the operation.
@@ -308,6 +333,7 @@
 ---
 
 ## ACCIDENTALLY (adv)
+
 - **Original:** That does not occur on purpose. IF YOU ACCIDENTALLY MOVE THE LEVER, SET THE SYSTEM TO THE NEUTRAL POSITION AGAIN.
 - **Code-domain:** That does not occur on purpose. IF YOU ACCIDENTALLY PRESS THE DELETE KEY, RESTORE THE FILE FROM THE RECYCLE BIN.
 > **STE:** If you accidentally press the delete key, restore the file from the recycle bin.
@@ -318,6 +344,7 @@
 ---
 
 ## ACCOMMODATE (v) - UNNAPROVED
+
 - **Original:** LET (v). DIFFERENT LENGTHS OF STUDS LET YOU ATTACH DIFFERENT THICKNESSES OF SKIN.
 - **Code-domain:** LET (v). DIFFERENT CONFIGURATIONS LET YOU HANDLE DIFFERENT TYPES OF INPUT.
 > **STE:** Different configurations let you handle different types of input.
@@ -328,6 +355,7 @@
 ---
 
 ## ACCOMPLISH (v) - UNNAPROVED
+
 - **Original:** DO (v), COMPLETE (v). DO THIS TASK FIRST. THE PERSONNEL MUST COMPLETE THIS TASK IN 30 MINUTES.
 - **Code-domain:** DO (v), COMPLETE (v). DO THIS BUILD STEP FIRST. THE PIPELINE MUST COMPLETE THIS STAGE IN 5 MINUTES.
 > **STE:** Do this build step first.
@@ -341,6 +369,7 @@
 ---
 
 ## ACCORDING TO (prep) - UNNAPROVED
+
 - **Original:** REFER (v) TO. TO CALIBRATE THE TEST SET, REFER TO THE MANUFACTURER'S INSTRUCTIONS.
 - **Code-domain:** REFER (v) TO. TO CONFIGURE THE MODULE, REFER TO THE DEVELOPER'S GUIDE.
 > **STE:** To configure the module, refer to the developer's guide.
@@ -351,6 +380,7 @@
 ---
 
 ## ACCOUNT FOR (v) - UNNAPROVED
+
 - **Original:** MAKE SURE (v). MAKE SURE THAT YOU REMOVE ALL TOOLS AND EQUIPMENT.
 - **Code-domain:** MAKE SURE (v). MAKE SURE THAT YOU TRACK ALL DEPENDENCIES AND PACKAGES.
 > **STE:** Make sure that you track all dependencies and packages.
@@ -361,6 +391,7 @@
 ---
 
 ## ACCUMULATE (v) - UNNAPROVED
+
 - **Original:** COLLECT (v). IF WATER COLLECTS IN THE FILLER LINE, DRAIN IT.
 - **Code-domain:** COLLECT (v). IF LOGS COLLECT IN THE BUFFER, FLUSH THEM.
 > **STE:** If logs collect in the buffer, flush them.
@@ -371,6 +402,7 @@
 ---
 
 ## ACCUMULATION (n) - UNNAPROVED
+
 - **Original:** QUANTITY (n), COLLECT (v). REMOVE LARGE QUANTITIES OF CONTAMINATION. / IF FUEL COLLECTS FREQUENTLY, EXAMINE THE PIPE FOR LEAKS.
 - **Code-domain:** QUANTITY (n), COLLECT (v). REMOVE LARGE QUANTITIES OF OBSOLETE LOGS. / IF ERRORS COLLECT FREQUENTLY, EXAMINE THE CONNECTION FOR ISSUES.
 > **STE:** Remove large quantities of obsolete logs.
@@ -384,6 +416,7 @@
 ---
 
 ## ACCURACY (n) - UNNAPROVED
+
 - **Original:** PRECISION (n). THE PRECISION OF THE ADJUSTMENT CAN CHANGE.
 - **Code-domain:** PRECISION (n). THE PRECISION OF THE CALCULATION CAN CHANGE.
 > **STE:** The precision of the calculation can change.
@@ -394,6 +427,7 @@
 ---
 
 ## ACCURATE (adj) - ACCURATELY (adv)
+
 - **Original:** Exact. THE ADJUSTMENT MUST BE ACCURATE. / PUT THE REPAIR SHEET ACCURATELY ON THE DAMAGED AREA.
 - **Code-domain:** Exact. THE MEASUREMENT MUST BE ACCURATE. / PUT THE PATCH ACCURATELY ON THE TARGET BRANCH.
 > **STE:** The measurement must be accurate.
@@ -407,6 +441,7 @@
 ---
 
 ## ACHIEVE (v) - UNNAPROVED
+
 - **Original:** GET (v). SET THE CONTROL TO GET MAXIMUM THRUST.
 - **Code-domain:** GET (v). SET THE FLAG TO GET MAXIMUM PERFORMANCE.
 > **STE:** Set the flag to get maximum performance.
@@ -417,6 +452,7 @@
 ---
 
 ## ACQUIRE (v) - UNNAPROVED
+
 - **Original:** GET (v). THE COMPUTER GETS THIS DATA FROM FIVE SENSORS.
 - **Code-domain:** GET (v). THE MODULE GETS THIS DATA FROM THREE ENDPOINTS.
 > **STE:** The module gets this data from three endpoints.
@@ -427,6 +463,7 @@
 ---
 
 ## ACRID (adj) - UNNAPROVED
+
 - **Original:** DANGEROUS (adj). THIS MATERIAL RELEASES DANGEROUS FUMES WHEN IT TOUCHES HOT SURFACES.
 - **Code-domain:** Not applicable. Retained for completeness.
 > **Note:** This word is domain-specific; no code-documentation equivalent.
@@ -436,6 +473,7 @@
 ---
 
 ## ACROSS (prep)
+
 - **Original:** From one side to the other side. SAFETY THE CLAMP BLOCK ACROSS THE CONTROL LEVER FORKS WITH SAFETY WIRE.
 - **Code-domain:** From one file to another, spanning boundaries. SEARCH ACROSS ALL MODULES FOR THE DEPRECATED FUNCTION.
 > **STE:** Search across all modules for the deprecated function.
@@ -446,6 +484,7 @@
 ---
 
 ## ACT (v) - UNNAPROVED
+
 - **Original:** Use an accurate verb. THE HYDRAULIC FLUID FLOW OPENS THE VALVE.
 - **Code-domain:** Use an accurate verb. THE EVENT TRIGGER INVOKES THE HANDLER.
 > **STE:** The event trigger invokes the handler.
@@ -456,6 +495,7 @@
 ---
 
 ## ACTION (n) - UNNAPROVED
+
 - **Original:** STEP (n), PROCEDURE (n), TASK (n). DO THE STEPS THAT FOLLOW.
 - **Code-domain:** STEP (n), PROCEDURE (n), TASK (n). DO THE STEPS THAT FOLLOW.
 > **STE:** Do the steps that follow.
@@ -472,6 +512,7 @@
 ---
 
 ## ACTIVATE (v)
+
 - **Original:** To make a system, function, or feature ready for operation. THE AUTOPILOT ACTIVATES THE APPROACH MODE. For other meanings, use: START (v).
 - **Code-domain:** To make a system, function, or feature ready for operation. THE BUILD PIPELINE ACTIVATES THE DEPLOYMENT MODE. For other meanings, use: START (v).
 > **STE:** The build pipeline activates the deployment mode.
@@ -485,6 +526,7 @@
 ---
 
 ## ACTIVE (adj)
+
 - **Original:** A system, function, or feature in a state of action. DOWNLOAD THE EXPORT FILE FROM THE ACTIVE SERVER UNIT.
 - **Code-domain:** A system, function, or feature in a state of action. READ THE CONFIG FROM THE ACTIVE BRANCH.
 > **STE:** Read the config from the active branch.
@@ -495,6 +537,7 @@
 ---
 
 ## ACTIVITY (n) - UNNAPROVED
+
 - **Original:** TASK (n), PROCEDURE (n), WORK (n). A SUBCONTRACTOR CAN DO THESE MAINTENANCE TASKS.
 - **Code-domain:** TASK (n), PROCEDURE (n), WORK (n). A CONTRIBUTOR CAN DO THESE REVIEW TASKS.
 > **STE:** A contributor can do these review tasks.
@@ -511,6 +554,7 @@
 ---
 
 ## ACTUATE (v) - UNNAPROVED
+
 - **Original:** START (v), OPERATE (v), PUSH (v). START THE MOTOR. / OPERATE THE HAND PUMP. / PUSH THE PUSHBUTTON SWITCH.
 - **Code-domain:** START (v), RUN (v), PUSH (v). START THE SERVER. / RUN THE SCRIPT. / PUSH THE COMMIT BUTTON.
 > **STE:** Start the server.
@@ -524,6 +568,7 @@
 ---
 
 ## ACTUATION (n) - UNNAPROVED
+
 - **Original:** OPERATION (n). MONITOR THE OPERATION OF THE STEERING MOTOR.
 - **Code-domain:** OPERATION (n). MONITOR THE OPERATION OF THE BACKGROUND WORKER.
 > **STE:** Monitor the operation of the background worker.
@@ -534,6 +579,7 @@
 ---
 
 ## ADAPT (v)
+
 - **Original:** To change or adjust to that which is necessary. ADAPT THE PRESSURE CONNECTION TO THE PITOT HEAD. THE SYSTEM INTERFACE CIRCUITS ADAPT TO THE PHYSICAL PROPERTIES OF THE CONNECTED SYSTEMS.
 - **Code-domain:** To change or adjust to that which is necessary. ADAPT THE CONNECTOR TO THE DATABASE SCHEMA. THE MIDDLEWARE LAYER ADAPTS TO THE PROTOCOL OF THE CONNECTED SERVICES.
 > **STE:** Adapt the connector to the database schema.
@@ -547,6 +593,7 @@
 ---
 
 ## ADD (v)
+
 - **Original:** To increase the number, dimension, or quantity. ADD 5 ml OF HARDENER TO THE COMPOUND.
 - **Code-domain:** To increase the number, dimension, or quantity. ADD 5 LINES OF CONFIGURATION TO THE FILE.
 > **STE:** Add 5 lines of configuration to the file.
@@ -557,6 +604,7 @@
 ---
 
 ## ADDITION (n) - UNNAPROVED
+
 - **Original:** ADD (v). TO GET THE CORRECT CLEARANCE, ADD SPECIAL SHIMS, AS NECESSARY.
 - **Code-domain:** ADD (v). TO GET THE CORRECT BEHAVIOR, ADD SPECIAL FLAGS, AS NECESSARY.
 > **STE:** To get the correct behavior, add special flags, as necessary.
@@ -567,6 +615,7 @@
 ---
 
 ## ADDITIONAL (adj) - UNNAPROVED
+
 - **Original:** MORE (adj). THIS CHAPTER GIVES MORE INFORMATION ABOUT SAFETY.
 - **Code-domain:** MORE (adj). THIS SECTION GIVES MORE INFORMATION ABOUT DEPLOYMENT.
 > **STE:** This section gives more information about deployment.
@@ -577,6 +626,7 @@
 ---
 
 ## ADEQUATE (adj) - UNNAPROVED
+
 - **Original:** SUFFICIENT (adj). MAKE SURE THAT CONTAINERS HAVE SUFFICIENT CAPACITY AND DIAMETER.
 - **Code-domain:** SUFFICIENT (adj). MAKE SURE THAT BUFFERS HAVE SUFFICIENT CAPACITY AND THROUGHPUT.
 > **STE:** Make sure that buffers have sufficient capacity and throughput.
@@ -587,6 +637,7 @@
 ---
 
 ## ADHERE (v) - UNNAPROVED
+
 - **Original:** BOND (v), OBEY (v). THE SEAL MUST BOND CORRECTLY. / OBEY THE SAFETY INSTRUCTIONS.
 - **Code-domain:** ATTACH (v), OBEY (v). THE PATCH MUST ATTACH CORRECTLY. / OBEY THE CODING STANDARDS.
 > **STE:** The patch must attach correctly.
@@ -600,6 +651,7 @@
 ---
 
 ## ADHESION (n) - UNNAPROVED
+
 - **Original:** BOND (n). CLEAN THE SURFACE TO MAKE SURE THAT THE BOND IS SATISFACTORY.
 - **Code-domain:** Not applicable. Retained for completeness.
 > **Note:** This word is domain-specific; no code-documentation equivalent.
@@ -609,6 +661,7 @@
 ---
 
 ## ADJACENT (adj) - ADJACENT TO (prep)
+
 - **Original:** That which is near to an object, with no other object of the same type between the two. DO NOT OPERATE THE ADJACENT CONTROL. / THE FUEL PUMP IS INSTALLED ADJACENT TO THE BULKHEAD.
 - **Code-domain:** That which is near to an element, with no other element of the same type between the two. DO NOT MODIFY THE ADJACENT FUNCTION. / THE CONFIG FILE IS LOCATED ADJACENT TO THE MAIN MODULE.
 > **STE:** Do not modify the adjacent function.
@@ -622,6 +675,7 @@
 ---
 
 ## ADJOINING (adj) - UNNAPROVED
+
 - **Original:** ADJACENT (adj). ALIGN THE BRACKETS WITH THE ADJACENT COMPONENTS.
 - **Code-domain:** ADJACENT (adj). ALIGN THE IMPORTS WITH THE ADJACENT MODULES.
 > **STE:** Align the imports with the adjacent modules.
@@ -632,6 +686,7 @@
 ---
 
 ## ADJUST (v)
+
 - **Original:** To put in or come to a specified position or value. ADJUST THE FREQUENCY TO THE VALUE GIVEN IN TABLE 1. THE INTERNAL LOGIC ADJUSTS TO SUDDEN CHANGES IN TEMPERATURE.
 - **Code-domain:** To put in or come to a specified position or value. ADJUST THE TIMEOUT TO THE VALUE GIVEN IN TABLE 1. THE AUTO-SCALER ADJUSTS TO SUDDEN CHANGES IN LOAD.
 > **STE:** Adjust the timeout to the value given in Table 1.
@@ -645,6 +700,7 @@
 ---
 
 ## ADJUSTABLE (adj) - ADJUSTMENT (n)
+
 - **Original:** That you can adjust. THE TWO STOP BOLTS ARE ADJUSTABLE. / The effect of adjusting. MAKE SURE THAT THE ADJUSTMENT IS IN THE LIMITS GIVEN IN TABLE 1.
 - **Code-domain:** That you can adjust. THE TWO PARAMETERS ARE ADJUSTABLE. / The effect of adjusting. MAKE SURE THAT THE ADJUSTMENT IS IN THE LIMITS GIVEN IN TABLE 1.
 > **STE:** The two parameters are adjustable.
@@ -658,6 +714,7 @@
 ---
 
 ## ADMIT (v) - UNNAPROVED
+
 - **Original:** LET (v). OPEN THE VALVE TO LET NITROGEN GO INTO THE OLEO STRUT.
 - **Code-domain:** LET (v). OPEN THE PORT TO LET TRAFFIC GO INTO THE CONTAINER.
 > **STE:** Open the port to let traffic go into the container.
@@ -668,6 +725,7 @@
 ---
 
 ## ADOPT (v) - UNNAPROVED
+
 - **Original:** USE (v). IF THE UNIT IS DAMAGED, USE THIS PROCEDURE.
 - **Code-domain:** USE (v). IF THE BUILD FAILS, USE THIS FALLBACK SCRIPT.
 > **STE:** If the build fails, use this fallback script.
@@ -678,6 +736,7 @@
 ---
 
 ## ADVANCE (n) - UNNAPROVED
+
 - **Original:** FORWARD (adj). THE FORWARD MOVEMENT OF THE CONTROL LEVER MUST BE SLOW AND CONTINUOUS.
 - **Code-domain:** FORWARD (adj). THE FORWARD MOVEMENT OF THE ITERATOR MUST BE SEQUENTIAL.
 > **STE:** The forward movement of the iterator must be sequential.
@@ -688,6 +747,7 @@
 ---
 
 ## ADVANCE (v) - UNNAPROVED
+
 - **Original:** SET (v), FORWARD (adv). SET THE THROTTLE TO MAXIMUM POWER. / MOVE THE LEVER FORWARD.
 - **Code-domain:** SET (v), FORWARD (adv). SET THE POINTER TO THE NEXT NODE. / MOVE THE CURSOR FORWARD.
 > **STE:** Set the pointer to the next node.
@@ -701,6 +761,7 @@
 ---
 
 ## ADVERSE (adj) - UNNAPROVED
+
 - **Original:** BAD (adj). REFER TO CHAPTER 6 FOR INSTRUCTIONS ABOUT HOW TO PARK IN BAD WEATHER CONDITIONS. If it is possible, give accurate and correct conditions. THIS MEDICATION CAN CAUSE DERMATITIS.
 - **Code-domain:** BAD (adj). REFER TO SECTION 6 FOR INSTRUCTIONS ABOUT HOW TO HANDLE BAD NETWORK CONDITIONS. If it is possible, give accurate and correct conditions.
 > **STE:** Refer to Section 6 for instructions about how to handle bad network conditions.
@@ -711,6 +772,7 @@
 ---
 
 ## ADVISABLE (adj) - UNNAPROVED
+
 - **Original:** RECOMMEND (v). THE DESIGN AUTHORITY RECOMMENDS THAT YOU TORQUE THE BOLTS AGAIN AT INTERVALS OF SIX MONTHS.
 - **Code-domain:** RECOMMEND (v). THE TECHNICAL LEAD RECOMMENDS THAT YOU REBUILD THE CONTAINERS AT INTERVALS OF TWO WEEKS.
 > **STE:** The technical lead recommends that you rebuild the containers at intervals of two weeks.
@@ -721,6 +783,7 @@
 ---
 
 ## ADVISE (v) - UNNAPROVED
+
 - **Original:** TELL (v), RECOMMEND (v). TELL THE RAMP AGENT THAT THE BRAKES ARE SET. / THE SAFETY OFFICER RECOMMENDS THE APPLICABLE PERSONAL PROTECTIVE EQUIPMENT.
 - **Code-domain:** TELL (v), RECOMMEND (v). TELL THE REVIEWER THAT THE CHANGES ARE READY. / THE SECURITY OFFICER RECOMMENDS THE APPLICABLE AUTHENTICATION PROTOCOL.
 > **STE:** Tell the reviewer that the changes are ready.
@@ -734,6 +797,7 @@
 ---
 
 ## AFFECT (v) - UNNAPROVED
+
 - **Original:** EFFECT (n). MAGNETIC TOOLS HAVE AN UNWANTED EFFECT ON THE COMPASS SYSTEM. If it is possible, be accurate. THIS MEDICATION CAN CAUSE DERMATITIS.
 - **Code-domain:** EFFECT (n). THREAD LOCKS HAVE AN UNWANTED EFFECT ON THE SCHEDULER. If it is possible, be accurate.
 > **STE:** Thread locks have an unwanted effect on the scheduler.
@@ -744,6 +808,7 @@
 ---
 
 ## AFT (adj), AFT (adv)
+
 - **Original:** At or nearer to the rear of an air or sea vehicle. THE PUMP IS IN THE AFT CELL OF THE FUSELAGE TANK. / MOVE THE THROTTLE AFT.
 - **Code-domain:** Not applicable to code documentation. Retained for completeness.
 > **Note:** Domain-specific aerospace term; no code-documentation equivalent.
@@ -753,6 +818,7 @@
 ---
 
 ## AFTER (conj)
+
 - **Original:** That follows a specified time, sequence, or operation. AFTER YOU INSTALL THE COMPONENT, DO A FUNCTIONAL TEST.
 - **Code-domain:** That follows a specified time, sequence, or operation. AFTER YOU DEPLOY THE UPDATE, DO A SMOKE TEST.
 > **STE:** After you deploy the update, do a smoke test.
@@ -763,6 +829,7 @@
 ---
 
 ## AGAIN (adv)
+
 - **Original:** One more time. DO THE TEST AGAIN.
 - **Code-domain:** One more time. RUN THE TEST AGAIN.
 > **STE:** Run the test again.
@@ -779,6 +846,7 @@
 # B
 
 ## BACK (adj), BACK (adv)
+
 - **Original:** In a direction opposite to the front. INSTALL THE BACK PLATE. / MOVE THE LEVER BACK.
 - **Code-domain:** In a direction opposite to forward. REVERT TO THE BACK VERSION. / NAVIGATE BACK TO THE PREVIOUS PAGE.
 > **STE:** Revert to the back version.
@@ -792,6 +860,7 @@
 ---
 
 ## BACK UP (v) - UNNAPROVED
+
 - **Original:** Not in dictionary as approved; use context-specific alternatives.
 - **Code-domain:** Not applicable as standalone verb in STE-Code. Use SAVE (v) or COPY (v) for data; REVERSE (v) for motion.
 > **STE:** Save the database before the migration.
@@ -805,6 +874,7 @@
 ---
 
 ## BAD (adj)
+
 - **Original:** Not satisfactory or safe. REFER TO CHAPTER 6 FOR INSTRUCTIONS ABOUT HOW TO PARK IN BAD WEATHER CONDITIONS.
 - **Code-domain:** Not satisfactory or safe. REFER TO SECTION 6 FOR INSTRUCTIONS ABOUT HOW TO HANDLE BAD BUILD STATES.
 > **STE:** Refer to Section 6 for instructions about how to handle bad build states.
@@ -815,6 +885,7 @@
 ---
 
 ## BALANCE (n), BALANCE (v)
+
 - **Original:** A state of equilibrium. MAKE SURE THAT THE CONTROL SURFACES ARE IN BALANCE. / To bring into equilibrium. BALANCE THE ELEVATOR.
 - **Code-domain:** A state of equilibrium. MAKE SURE THAT THE LOAD IS IN BALANCE ACROSS ALL NODES. / To distribute evenly. BALANCE THE WORKLOAD ACROSS ALL WORKERS.
 > **STE:** Make sure that the load is in balance across all nodes.
@@ -828,6 +899,7 @@
 ---
 
 ## BASE (n) - UNNAPROVED
+
 - **Original:** Not approved alone; use FOUNDATION (n) or BOTTOM (n).
 - **Code-domain:** Use FOUNDATION (n) for conceptual base, ROOT (n) for positional base.
 > **STE:** The foundation of the architecture is the data layer.
@@ -841,6 +913,7 @@
 ---
 
 ## BE (v)
+
 - **Original:** 1. To occur, exist. IF THERE IS CORROSION ON THE PUMP VANES, REPLACE THE PUMP. No other verb forms. 2. To have a property to be equal to. ACID SOLUTIONS ARE DANGEROUS.
 - **Code-domain:** 1. To occur, exist. IF THERE IS AN ERROR IN THE LOG, RESTART THE SERVICE. No other verb forms. 2. To have a property to be equal to. UNHANDLED EXCEPTIONS ARE DANGEROUS.
 > **STE:** If there is an error in the log, restart the service.
@@ -854,6 +927,7 @@
 ---
 
 ## BECAUSE (conj)
+
 - **Original:** Function word that shows a cause or reason. DO NOT USE ALODINE, BECAUSE IT IS A DANGEROUS MATERIAL.
 - **Code-domain:** Function word that shows a cause or reason. DO NOT USE RAW INPUT, BECAUSE IT IS A SECURITY RISK.
 > **STE:** Do not use raw input, because it is a security risk.
@@ -864,6 +938,7 @@
 ---
 
 ## BECOME (v)
+
 - **Original:** To come to be. THE FLUID BECOMES CONTAMINATED.
 - **Code-domain:** To come to be. THE CONNECTION BECOMES UNSTABLE.
 > **STE:** The connection becomes unstable.
@@ -874,6 +949,7 @@
 ---
 
 ## BEFORE (conj)
+
 - **Original:** Earlier than a specified time, sequence, or operation. BEFORE YOU INSTALL THE COMPONENT, READ THE INSTRUCTIONS.
 - **Code-domain:** Earlier than a specified time, sequence, or operation. BEFORE YOU RUN THE MIGRATION, READ THE RELEASE NOTES.
 > **STE:** Before you run the migration, read the release notes.
@@ -884,6 +960,7 @@
 ---
 
 ## BEGIN (v)
+
 - **Original:** To start. BEGIN THE TEST PROCEDURE.
 - **Code-domain:** To start. BEGIN THE BUILD PROCESS.
 > **STE:** Begin the build process.
@@ -894,6 +971,7 @@
 ---
 
 ## BELOW (prep)
+
 - **Original:** In (or to) a position lower than something. PUT THE CONTAINER BELOW THE WORK AREA.
 - **Code-domain:** In (or to) a position lower than something in a hierarchy or list. SEE THE EXAMPLE BELOW THE CODE BLOCK.
 > **STE:** See the example below the code block.
@@ -904,6 +982,7 @@
 ---
 
 ## BEND (v)
+
 - **Original:** To change the shape of something with force. DO NOT BEND THE CABLE.
 - **Code-domain:** Not applicable in pure software context. Retained for hardware docs.
 > **Note:** Domain-specific; no code-documentation equivalent.
@@ -913,6 +992,7 @@
 ---
 
 ## BETWEEN (prep)
+
 - **Original:** In the space that separates two items. PUT THE WASHER BETWEEN THE NUT AND THE BRACKET.
 - **Code-domain:** In the logical space that separates two items. PUT THE MIDDLEWARE BETWEEN THE CLIENT AND THE SERVER.
 > **STE:** Put the middleware between the client and the server.
@@ -923,6 +1003,7 @@
 ---
 
 ## BLOCK (n)
+
 - **Original:** A solid piece of material. PUT A BLOCK BELOW THE JACK.
 - **Code-domain:** A segment of code or data. PUT A COMMENT BLOCK ABOVE THE FUNCTION.
 > **STE:** Put a comment block above the function.
@@ -933,6 +1014,7 @@
 ---
 
 ## BOND (v)
+
 - **Original:** To attach two materials together. BOND THE SEAL TO THE SURFACE.
 - **Code-domain:** Not applicable in pure software. Retained for hardware docs.
 > **Note:** Domain-specific; no code-documentation equivalent.
@@ -942,6 +1024,7 @@
 ---
 
 ## BOTTOM (n), BOTTOM (adj)
+
 - **Original:** The lowest part of something. PUT THE HEAVIER ITEMS AT THE BOTTOM. / The lowest. THE BOTTOM COVER.
 - **Code-domain:** The lowest part or end of a file, list, or stack. SCROLL TO THE BOTTOM OF THE FILE. / The lowest. THE BOTTOM LAYER.
 > **STE:** Scroll to the bottom of the file.
@@ -955,6 +1038,7 @@
 ---
 
 ## BRACKET (n) - (TN)
+
 - **Original:** A support for an item. ATTACH THE BRACKET TO THE STRUCTURE.
 - **Code-domain:** A symbol used in code syntax: `[]`, `{}`, `()`. USE SQUARE BRACKETS FOR ARRAY ACCESS.
 > **STE:** Use square brackets for array access.
@@ -965,6 +1049,7 @@
 ---
 
 ## BREAK (v)
+
 - **Original:** To cause to become damaged and not function. DO NOT BREAK THE SEAL.
 - **Code-domain:** 1. To cause code to stop functioning. DO NOT BREAK THE PUBLIC API. 2. To exit a loop or control structure. BREAK OUT OF THE LOOP WHEN THE CONDITION IS TRUE.
 > **STE:** Do not break the public API.
@@ -978,6 +1063,7 @@
 ---
 
 ## BRING (v) - UNNAPROVED
+
 - **Original:** CARRY (v), GET (v). GET THE TOOLS TO THE WORK AREA.
 - **Code-domain:** GET (v), MOVE (v). GET THE DEPENDENCIES INTO THE CONTAINER.
 > **STE:** Get the dependencies into the container.
@@ -988,6 +1074,7 @@
 ---
 
 ## BROAD (adj) - UNNAPROVED
+
 - **Original:** WIDE (adj). WIDE COVERAGE.
 - **Code-domain:** WIDE (adj). WIDE TEST COVERAGE.
 > **STE:** Wide test coverage.
@@ -998,6 +1085,7 @@
 ---
 
 ## BUG (n) - (TN)
+
 - **Original:** Not in original STE (aerospace term: insect). In code-domain, this is a technical noun for software defects.
 - **Code-domain:** Technical noun for a software defect. USE THE BUG TRACKER TO LOG DEFECTS.
 > **STE:** Use the bug tracker to log defects.
@@ -1008,6 +1096,7 @@
 ---
 
 ## BUILD (v) - UNNAPROVED
+
 - **Original:** ASSEMBLE (v). ASSEMBLE THE UNIT.
 - **Code-domain:** COMPILE (v), MAKE (v). COMPILE THE PROJECT. / MAKE THE TARGET.
 > **STE:** Compile the project.
@@ -1020,6 +1109,7 @@
 ---
 
 ## BURN (v)
+
 - **Original:** To be on fire or to cause fire. DO NOT LET THE MATERIAL BURN.
 - **Code-domain:** To write data to read-only media; retained as technical verb.
 > **STE:** Burn the ISO image to the USB drive.
@@ -1030,6 +1120,7 @@
 ---
 
 ## BUT (conj)
+
 - **Original:** Function word that shows a contrast. THE LIGHT IS ON, BUT THE SYSTEM DOES NOT OPERATE.
 - **Code-domain:** Function word that shows a contrast. THE BUILD PASSES, BUT THE TESTS FAIL.
 > **STE:** The build passes, but the tests fail.
@@ -1040,6 +1131,7 @@
 ---
 
 ## BY (prep)
+
 - **Original:** Function word that shows the means or agent. ATTACH THE FLANGE BY THE FOUR BOLTS. / CLEAN THE SURFACE BY ALCOHOL.
 - **Code-domain:** Function word that shows the means or agent. BUILD THE PROJECT BY THE CMAKE TOOL. / AUTHENTICATE BY OAUTH.
 > **STE:** Build the project by the CMake tool.
@@ -1053,6 +1145,7 @@
 ---
 
 ## BYTE (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A unit of digital information. THE BUFFER HOLDS 1024 BYTES.
 > **STE:** The buffer holds 1024 bytes.
@@ -1069,6 +1162,7 @@
 # C
 
 ## CALCULATE (v)
+
 - **Original:** To find a number or amount using mathematics. CALCULATE THE TOTAL WEIGHT.
 - **Code-domain:** To compute a value algorithmically. CALCULATE THE CHECKSUM OF THE FILE.
 > **STE:** Calculate the checksum of the file.
@@ -1079,6 +1173,7 @@
 ---
 
 ## CALL (v) - UNNAPROVED
+
 - **Original:** Three meanings: 1. NAME (v). NAME THE PROCEDURE "STARTUP." 2. SPEAK (v) or CONTACT (v). CONTACT THE OPERATOR. 3. REFER (v) TO.
 - **Code-domain:** Three meanings: 1. NAME (v). NAME THE FUNCTION "init." 2. INVOKE (TV) - as technical verb. 3. REFER (v) TO.
 > **STE:** Name the function "init."
@@ -1094,6 +1189,7 @@
 ---
 
 ## CAN (v)
+
 - **Original:** Auxiliary modal verb that means to be possible, to be able to, or to be permitted to. A MIXTURE OF FUEL AND OXYGEN CAN CAUSE AN EXPLOSION. YOU CAN OPERATE THE VEHICLE AFTER THE INSPECTION IS COMPLETED. No other verb forms. Do not use COULD.
 - **Code-domain:** Auxiliary modal verb that means to be possible, to be able to, or to be permitted to. A MISCONFIGURATION CAN CAUSE A CRASH. YOU CAN RUN THE SCRIPT AFTER THE BUILD IS COMPLETED. No other verb forms. Do not use COULD.
 > **STE:** A misconfiguration can cause a crash.
@@ -1107,6 +1203,7 @@
 ---
 
 ## CANCEL (v)
+
 - **Original:** To stop an operation. CANCEL THE TEST PROCEDURE.
 - **Code-domain:** To stop an operation. CANCEL THE DEPLOYMENT PIPELINE.
 > **STE:** Cancel the deployment pipeline.
@@ -1117,6 +1214,7 @@
 ---
 
 ## CANNOT (v)
+
 - **Original:** The negative form of CAN. YOU CANNOT USE THIS TOOL.
 - **Code-domain:** The negative form of CAN. YOU CANNOT ACCESS THIS ENDPOINT WITHOUT AUTHENTICATION.
 > **STE:** You cannot access this endpoint without authentication.
@@ -1127,6 +1225,7 @@
 ---
 
 ## CAPABLE (adj) - UNNAPROVED
+
 - **Original:** CAN (v). THE SYSTEM CAN RECOVER FROM FAULTS AUTOMATICALLY.
 - **Code-domain:** CAN (v). THE SERVICE CAN RECOVER FROM FAILURES AUTOMATICALLY.
 > **STE:** The service can recover from failures automatically.
@@ -1137,6 +1236,7 @@
 ---
 
 ## CARE (n) - UNNAPROVED
+
 - **Original:** Not approved; use CAUTION (n), BE CAREFUL.
 - **Code-domain:** BE CAREFUL, CAUTION (n). BE CAREFUL WHEN YOU CHANGE THE CONFIGURATION.
 > **STE:** Be careful when you change the configuration.
@@ -1147,6 +1247,7 @@
 ---
 
 ## CARRY (v) - UNNAPROVED
+
 - **Original:** Not approved; use TAKE (v), MOVE (v), HOLD (v).
 - **Code-domain:** MOVE (v), TRANSMIT (v). MOVE THE DATA TO THE CACHE.
 > **STE:** Move the data to the cache.
@@ -1157,6 +1258,7 @@
 ---
 
 ## CARRY OUT (v) - UNNAPROVED
+
 - **Original:** DO (v). DO THE INSPECTION.
 - **Code-domain:** DO (v). DO THE REVIEW.
 > **STE:** Do the review.
@@ -1167,6 +1269,7 @@
 ---
 
 ## CASE (n) - UNNAPROVED
+
 - **Original:** VARIOUS meanings; use IF (conj), CONTAINER (n), EXAMPLE (n) depending on context.
 - **Code-domain:** For conditional: IF (conj). For coding structure: use SWITCH CASE as technical noun.
 > **STE:** If the flag is true, log the event.
@@ -1180,6 +1283,7 @@
 ---
 
 ## CATCH (v)
+
 - **Original:** To capture or stop something in motion. CATCH THE FLUID WITH A CONTAINER.
 - **Code-domain:** To intercept an exception or event. CATCH THE EXCEPTION AND LOG IT.
 > **STE:** Catch the exception and log it.
@@ -1190,6 +1294,7 @@
 ---
 
 ## CAUSE (v)
+
 - **Original:** To make something occur. THE LEAK CAUSED THE FIRE.
 - **Code-domain:** To make something occur. THE NULL POINTER CAUSED THE CRASH.
 > **STE:** The null pointer caused the crash.
@@ -1200,6 +1305,7 @@
 ---
 
 ## CAUTION (n)
+
 - **Original:** A warning to be careful. OBEY THE CAUTIONS IN THIS MANUAL.
 - **Code-domain:** A warning to be careful. OBEY THE CAUTIONS IN THIS README.
 > **STE:** Obey the cautions in this README.
@@ -1210,6 +1316,7 @@
 ---
 
 ## CENTER (n)
+
 - **Original:** The middle point or part. FIND THE CENTER OF THE HOLE.
 - **Code-domain:** The middle point of alignment. ALIGN THE TEXT TO THE CENTER.
 > **STE:** Align the text to the center.
@@ -1220,6 +1327,7 @@
 ---
 
 ## CHANGE (v), CHANGE (n)
+
 - **Original:** To make different. CHANGE THE FILTER. / An alteration. RECORD THE CHANGES IN THE LOGBOOK.
 - **Code-domain:** To modify code. CHANGE THE FUNCTION SIGNATURE. / A modification. RECORD THE CHANGES IN THE CHANGELOG.
 > **STE:** Change the function signature.
@@ -1233,6 +1341,7 @@
 ---
 
 ## CHECK (n)
+
 - **Original:** An inspection. DO A CHECK OF THE SYSTEM.
 - **Code-domain:** A validation. DO A CHECK OF THE INPUT VALUES.
 > **STE:** Do a check of the input values.
@@ -1243,6 +1352,7 @@
 ---
 
 ## CHECK (v) - UNNAPROVED
+
 - **Original:** Not approved as verb; use CHECK (n) with DO. DO A CHECK OF THE VALUES.
 - **Code-domain:** Not approved as verb; use VERIFY (v) or CHECK (n) with DO.
 > **STE:** Do a check of the values.
@@ -1256,6 +1366,7 @@
 ---
 
 ## CHOOSE (v) - UNNAPROVED
+
 - **Original:** SELECT (v), ALTERNATIVE (adj). SELECT THE CORRECT OPTION. / USE AN ALTERNATIVE APPROACH.
 - **Code-domain:** SELECT (v), ALTERNATIVE (adj). SELECT THE CORRECT CONFIGURATION. / USE AN ALTERNATIVE IMPLEMENTATION.
 > **STE:** Select the correct configuration.
@@ -1266,6 +1377,7 @@
 ---
 
 ## CLEAN (v), CLEAN (adj)
+
 - **Original:** To remove unwanted material. CLEAN THE SURFACE.
 - **Code-domain:** To remove unwanted data or cleanup resources. CLEAN THE TEMPORARY FILES.
 > **STE:** Clean the temporary files.
@@ -1276,6 +1388,7 @@
 ---
 
 ## CLEAR (adj)
+
 - **Original:** 1. That does not have obstacles. A CLEAR PATH. 2. That is easy to understand. CLEAR INSTRUCTIONS.
 - **Code-domain:** 1. That does not have obstacles. A CLEAR CODE PATH. 2. That is easy to understand. CLEAR DOCUMENTATION.
 > **STE:** A clear code path for the request.
@@ -1289,6 +1402,7 @@
 ---
 
 ## CLICK (n), CLICK (v) - (TN/TV)
+
 - **Original:** A short, sharp sound. WHEN YOU ATTACH THE SPRING CLIP, MAKE SURE THAT YOU HEAR A CLICK. / Code-domain: A mouse or interface action. CLICK THE BUTTON.
 - **Code-domain:** Technical verb for UI interaction. CLICK THE "SUBMIT" BUTTON.
 > **STE:** Click the "Submit" button.
@@ -1299,6 +1413,7 @@
 ---
 
 ## CLOSE (v)
+
 - **Original:** To shut or block an opening. CLOSE THE VALVE.
 - **Code-domain:** To terminate a connection or file. CLOSE THE FILE HANDLE.
 > **STE:** Close the file handle.
@@ -1309,6 +1424,7 @@
 ---
 
 ## CODE (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** Instructions in a programming language. THE CODE IS IN THE `src/` DIRECTORY.
 > **STE:** The code is in the `src/` directory.
@@ -1319,6 +1435,7 @@
 ---
 
 ## COLLECT (v)
+
 - **Original:** To gather or accumulate. COLLECT THE FLUID IN A CONTAINER.
 - **Code-domain:** To gather data or metrics. COLLECT THE METRICS FROM ALL NODES.
 > **STE:** Collect the metrics from all nodes.
@@ -1329,6 +1446,7 @@
 ---
 
 ## COME (v)
+
 - **Original:** To move toward. WHEN THE PRESSURE COMES TO THE CORRECT VALUE, STOP THE PUMP.
 - **Code-domain:** To reach a state. WHEN THE SERVICE COMES ONLINE, START THE TESTS.
 > **STE:** When the service comes online, start the tests.
@@ -1339,6 +1457,7 @@
 ---
 
 ## COMMENT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** Explanatory text in code. ADD A COMMENT TO EXPLAIN THE ALGORITHM.
 > **STE:** Add a comment to explain the algorithm.
@@ -1349,6 +1468,7 @@
 ---
 
 ## COMMIT (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb (version control).
 - **Code-domain:** To save changes to version control. COMMIT THE CHANGES TO THE REPOSITORY.
 > **STE:** Commit the changes to the repository.
@@ -1359,6 +1479,7 @@
 ---
 
 ## COMPARE (v)
+
 - **Original:** To look at two or more items and find differences. COMPARE THE MEASURED VALUE WITH THE SPECIFIED VALUE.
 - **Code-domain:** To evaluate two values for equality or difference. COMPARE THE HASH VALUE WITH THE EXPECTED HASH.
 > **STE:** Compare the hash value with the expected hash.
@@ -1369,6 +1490,7 @@
 ---
 
 ## COMPATIBLE (adj)
+
 - **Original:** That can operate with other items. THE TWO UNITS ARE COMPATIBLE.
 - **Code-domain:** That can operate with other items. THE LIBRARY IS COMPATIBLE WITH VERSION 3.0.
 > **STE:** The library is compatible with version 3.0.
@@ -1379,6 +1501,7 @@
 ---
 
 ## COMPILE (v) - UNNAPROVED
+
 - **Original:** Not approved; use MAKE (v), ASSEMBLE (v).
 - **Code-domain:** Technical verb (TV) for translating source code. COMPILE THE SOURCE FILES.
 > **STE:** Compile the source files.
@@ -1389,6 +1512,7 @@
 ---
 
 ## COMPLETE (v)
+
 - **Original:** To finish. COMPLETE THE INSTALLATION.
 - **Code-domain:** To finish. COMPLETE THE SETUP WIZARD.
 > **STE:** Complete the setup wizard.
@@ -1399,6 +1523,7 @@
 ---
 
 ## COMPONENT (n)
+
 - **Original:** A part of a larger system. THE COMPONENT IS INSTALLED IN THE RACK.
 - **Code-domain:** A modular part of a software system. THE COMPONENT IS IMPORTED IN THE MODULE.
 > **STE:** The component is imported in the module.
@@ -1409,6 +1534,7 @@
 ---
 
 ## COMPRESS (v)
+
 - **Original:** To make smaller by pressure. COMPRESS THE SPRING.
 - **Code-domain:** To make data smaller using an algorithm. COMPRESS THE LOG FILES BEFORE ARCHIVING.
 > **STE:** Compress the log files before archiving.
@@ -1419,6 +1545,7 @@
 ---
 
 ## CONDITION (n)
+
 - **Original:** A state of being. THE CONDITION OF THE UNIT IS SATISFACTORY.
 - **Code-domain:** A state or logical expression. THE CONDITION OF THE BUILD IS SATISFACTORY. / IF THE CONDITION IS TRUE, CONTINUE.
 > **STE:** The condition of the build is satisfactory.
@@ -1432,6 +1559,7 @@
 ---
 
 ## CONFIGURATION (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** The set of parameters that define system behavior. THE CONFIGURATION FILE IS IN YAML FORMAT.
 > **STE:** The configuration file is in YAML format.
@@ -1442,6 +1570,7 @@
 ---
 
 ## CONFIRM (v) - UNNAPROVED
+
 - **Original:** MAKE SURE (v). MAKE SURE THAT THE VALUES ARE CORRECT.
 - **Code-domain:** MAKE SURE (v). MAKE SURE THAT THE BUILD IS SUCCESSFUL.
 > **STE:** Make sure that the build is successful.
@@ -1452,6 +1581,7 @@
 ---
 
 ## CONNECT (v)
+
 - **Original:** To join two or more items. CONNECT THE HOSE TO THE VALVE.
 - **Code-domain:** To establish a communication link. CONNECT THE CLIENT TO THE SERVER.
 > **STE:** Connect the client to the server.
@@ -1462,6 +1592,7 @@
 ---
 
 ## CONTAIN (v)
+
 - **Original:** To hold or include. THE TANK CONTAINS FUEL.
 - **Code-domain:** To hold or include. THE MODULE CONTAINS THE HELPER FUNCTIONS.
 > **STE:** The module contains the helper functions.
@@ -1472,6 +1603,7 @@
 ---
 
 ## CONTACT (v)
+
 - **Original:** To communicate with. CONTACT THE OPERATOR. CONTACT THE SERVICE PROVIDER.
 - **Code-domain:** To communicate with. CONTACT THE SYSTEM ADMINISTRATOR.
 > **STE:** Contact the system administrator.
@@ -1482,6 +1614,7 @@
 ---
 
 ## CONTINUE (v)
+
 - **Original:** To keep going. IF THE TEST PASSES, CONTINUE THE PROCEDURE.
 - **Code-domain:** To keep executing. IF THE BUILD PASSES, CONTINUE THE DEPLOYMENT.
 > **STE:** If the build passes, continue the deployment.
@@ -1492,6 +1625,7 @@
 ---
 
 ## CONTROL (n), CONTROL (v)
+
 - **Original:** The ability to operate or direct. THE CONTROL OF THE SYSTEM IS AUTOMATIC. / To operate or direct. CONTROL THE SYSTEM WITH THE SOFTWARE.
 - **Code-domain:** The ability to operate or direct. THE CONTROL OF THE ACCESS IS ROLE-BASED. / To operate or direct. CONTROL THE WORKFLOW WITH THE DASHBOARD.
 > **STE:** The control of the access is role-based.
@@ -1505,6 +1639,7 @@
 ---
 
 ## COPY (v)
+
 - **Original:** To make a duplicate. COPY THE FILE TO THE BACKUP DRIVE.
 - **Code-domain:** To duplicate data. COPY THE CONFIG TO THE STAGING ENVIRONMENT.
 > **STE:** Copy the config to the staging environment.
@@ -1515,6 +1650,7 @@
 ---
 
 ## CORRECT (adj)
+
 - **Original:** Without error. MAKE SURE THAT THE VALUES ARE CORRECT.
 - **Code-domain:** Without error. MAKE SURE THAT THE TEST RESULTS ARE CORRECT.
 > **STE:** Make sure that the test results are correct.
@@ -1525,6 +1661,7 @@
 ---
 
 ## CORRECTLY (adv)
+
 - **Original:** In a correct manner. MAKE SURE THAT THE SEAL IS CORRECTLY INSTALLED.
 - **Code-domain:** In a correct manner. MAKE SURE THAT THE PACKAGE IS CORRECTLY INSTALLED.
 > **STE:** Make sure that the package is correctly installed.
@@ -1535,6 +1672,7 @@
 ---
 
 ## COUNT (v)
+
 - **Original:** To find the total number. COUNT THE PARTS.
 - **Code-domain:** To enumerate items. COUNT THE RECORDS IN THE DATABASE.
 > **STE:** Count the records in the database.
@@ -1545,6 +1683,7 @@
 ---
 
 ## COVER (n)
+
 - **Original:** A thing that goes over another. PUT THE COVER ON THE UNIT.
 - **Code-domain:** Not applicable. Retained for hardware context.
 > **Note:** Domain-specific; no code-documentation equivalent.
@@ -1554,6 +1693,7 @@
 ---
 
 ## CRASH (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To fail suddenly and stop functioning. IF THE APPLICATION CRASHES, READ THE LOGS.
 > **STE:** If the application crashes, read the logs.
@@ -1564,6 +1704,7 @@
 ---
 
 ## CREATE (v)
+
 - **Original:** To make something new. CREATE A NEW FILE.
 - **Code-domain:** To instantiate or generate. CREATE A NEW INSTANCE OF THE CLASS.
 > **STE:** Create a new instance of the class.
@@ -1574,6 +1715,7 @@
 ---
 
 ## CUT (v)
+
 - **Original:** To divide with a sharp tool. CUT THE WIRE TO THE SPECIFIED LENGTH.
 - **Code-domain:** To remove and place. CUT THE TEXT AND PASTE IT IN THE NEW LOCATION.
 > **STE:** Cut the text and paste it in the new location.
@@ -1586,6 +1728,7 @@
 # D
 
 ## DAMAGE (n)
+
 - **Original:** Harm that reduces function. THE DAMAGE TO THE UNIT IS SMALL.
 - **Code-domain:** Harm that reduces function. THE DAMAGE TO THE DATA IS IRREVERSIBLE.
 > **STE:** The damage to the data is irreversible.
@@ -1596,6 +1739,7 @@
 ---
 
 ## DANGER (n) - UNNAPROVED
+
 - **Original:** RISK (n). THIS PROCEDURE HAS A RISK OF FIRE.
 - **Code-domain:** RISK (n). THIS OPERATION HAS A RISK OF DATA LOSS.
 > **STE:** This operation has a risk of data loss.
@@ -1606,6 +1750,7 @@
 ---
 
 ## DANGEROUS (adj)
+
 - **Original:** That can cause injury or damage. THIS CHEMICAL IS DANGEROUS.
 - **Code-domain:** That can cause harm or data loss. THIS COMMAND IS DANGEROUS.
 > **STE:** This command is dangerous.
@@ -1616,6 +1761,7 @@
 ---
 
 ## DATA (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** Information processed or stored by a computer. THE DATA IS STORED IN THE CACHE.
 > **STE:** The data is stored in the cache.
@@ -1626,6 +1772,7 @@
 ---
 
 ## DEACTIVATE (v)
+
 - **Original:** To make a system, function, or feature not ready for operation. DEACTIVATE THE AUTOPILOT.
 - **Code-domain:** To disable a system, function, or feature. DEACTIVATE THE BACKGROUND WORKER.
 > **STE:** Deactivate the background worker.
@@ -1636,6 +1783,7 @@
 ---
 
 ## DEBUG (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To find and fix defects in code. DEBUG THE APPLICATION WITH THE ATTACHED PROFILER.
 > **STE:** Debug the application with the attached profiler.
@@ -1646,6 +1794,7 @@
 ---
 
 ## DECREASE (v)
+
 - **Original:** To become smaller. DECREASE THE PRESSURE.
 - **Code-domain:** To reduce a value. DECREASE THE TIMEOUT VALUE.
 > **STE:** Decrease the timeout value.
@@ -1656,6 +1805,7 @@
 ---
 
 ## DEEP (adj)
+
 - **Original:** Extending far down from the top. DEEP HOLE.
 - **Code-domain:** Extending far in a hierarchy. DEEP DIRECTORY STRUCTURE.
 > **STE:** Deep directory structure.
@@ -1666,6 +1816,7 @@
 ---
 
 ## DEFAULT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** The pre-set value or state. THE DEFAULT VALUE IS 8080.
 > **STE:** The default value is 8080.
@@ -1676,6 +1827,7 @@
 ---
 
 ## DEFECT (n) - (TN)
+
 - **Original:** A shortcoming or flaw. EXAMINE THE SEAL FOR DEFECTS.
 - **Code-domain:** A bug in software. LOG THE DEFECT IN THE TRACKING SYSTEM.
 > **STE:** Log the defect in the tracking system.
@@ -1686,6 +1838,7 @@
 ---
 
 ## DEFINE (v)
+
 - **Original:** To give the meaning or specification. THE STANDARD DEFINES THE PROCEDURE.
 - **Code-domain:** To declare or specify. THE HEADER FILE DEFINES THE INTERFACE.
 > **STE:** The header file defines the interface.
@@ -1696,6 +1849,7 @@
 ---
 
 ## DELETE (v) - UNNAPROVED
+
 - **Original:** Not approved; use REMOVE (v), ERASE (v).
 - **Code-domain:** REMOVE (v). REMOVE THE FILE FROM THE DIRECTORY.
 > **STE:** Remove the file from the directory.
@@ -1708,6 +1862,7 @@
 ---
 
 ## DEPLOY (v)
+
 - **Original:** To put into position for use. DEPLOY THE ANTENNA.
 - **Code-domain:** To release software to a target environment. DEPLOY THE APPLICATION TO PRODUCTION.
 > **STE:** Deploy the application to production.
@@ -1718,6 +1873,7 @@
 ---
 
 ## DEPRECATED (adj) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical adjective.
 - **Code-domain:** Marked as no longer recommended for use. THE DEPRECATED FUNCTION WILL BE REMOVED IN VERSION 4.0.
 > **STE:** The deprecated function will be removed in version 4.0.
@@ -1728,6 +1884,7 @@
 ---
 
 ## DESIGN (n)
+
 - **Original:** A plan and specification. THE DESIGN OF THE SYSTEM IS COMPLEX.
 - **Code-domain:** The architecture and pattern. THE DESIGN OF THE API FOLLOWS REST PRINCIPLES.
 > **STE:** The design of the API follows REST principles.
@@ -1738,6 +1895,7 @@
 ---
 
 ## DESTROY (v) - UNNAPROVED
+
 - **Original:** BREAK (v), REMOVE (v). BREAK THE OLD SEAL. / REMOVE THE CONTAMINATION.
 - **Code-domain:** BREAK (v), REMOVE (v). BREAK THE OLD SESSION. / REMOVE THE OBSOLETE DATA.
 > **STE:** Break the old session.
@@ -1748,6 +1906,7 @@
 ---
 
 ## DEVELOP (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To write and test software. DEVELOP THE FEATURE IN A SEPARATE BRANCH.
 > **STE:** Develop the feature in a separate branch.
@@ -1758,6 +1917,7 @@
 ---
 
 ## DIFFERENT (adj)
+
 - **Original:** Not the same. THE TWO UNITS HAVE DIFFERENT DIMENSIONS.
 - **Code-domain:** Not the same. THE TWO IMPLEMENTATIONS HAVE DIFFERENT PERFORMANCE.
 > **STE:** The two implementations have different performance.
@@ -1768,6 +1928,7 @@
 ---
 
 ## DIMENSION (n)
+
 - **Original:** A measurement of size. MEASURE THE DIMENSIONS OF THE PART.
 - **Code-domain:** A measurement or axis. THE ARRAY HAS THREE DIMENSIONS.
 > **STE:** The array has three dimensions.
@@ -1778,6 +1939,7 @@
 ---
 
 ## DIRECTORY (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A container for files in a filesystem. THE SOURCE FILES ARE IN THE `src/` DIRECTORY.
 > **STE:** The source files are in the `src/` directory.
@@ -1788,6 +1950,7 @@
 ---
 
 ## DISABLE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To turn off or make inactive. DISABLE THE FEATURE FLAG.
 > **STE:** Disable the feature flag.
@@ -1798,6 +1961,7 @@
 ---
 
 ## DISCARD (v)
+
 - **Original:** To throw away. DISCARD THE USED FILTER.
 - **Code-domain:** To throw away. DISCARD THE DEPRECATED CODE.
 > **STE:** Discard the deprecated code.
@@ -1808,6 +1972,7 @@
 ---
 
 ## DISCONNECT (v)
+
 - **Original:** To break a connection. DISCONNECT THE CABLE.
 - **Code-domain:** To break a connection. DISCONNECT THE SOCKET.
 > **STE:** Disconnect the socket.
@@ -1818,6 +1983,7 @@
 ---
 
 ## DISPLAY (v), DISPLAY (n)
+
 - **Original:** To show. THE SCREEN DISPLAYS THE DATA.
 - **Code-domain:** To show output. THE TERMINAL DISPLAYS THE LOG OUTPUT.
 > **STE:** The terminal displays the log output.
@@ -1828,6 +1994,7 @@
 ---
 
 ## DIVIDE (v)
+
 - **Original:** To separate into parts. DIVIDE THE LOAD EQUALLY.
 - **Code-domain:** To split or perform division. DIVIDE THE TASKS AMONG THE WORKERS.
 > **STE:** Divide the tasks among the workers.
@@ -1838,6 +2005,7 @@
 ---
 
 ## DO (v)
+
 - **Original:** To perform an action. DO THE TEST PROCEDURE.
 - **Code-domain:** To perform an action. DO THE BUILD STEP.
 > **STE:** Do the build step.
@@ -1848,6 +2016,7 @@
 ---
 
 ## DOCUMENT (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To write documentation. DOCUMENT THE PUBLIC API.
 > **STE:** Document the public API.
@@ -1858,6 +2027,7 @@
 ---
 
 ## DOWN (adv), DOWN (prep)
+
 - **Original:** In a direction to a lower position. MOVE THE LEVER DOWN.
 - **Code-domain:** In a direction to a lower position or reduced state. SCROLL DOWN THE PAGE. / THE SERVER IS DOWN.
 > **STE:** Scroll down the page.
@@ -1871,6 +2041,7 @@
 ---
 
 ## DOWNLOAD (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To transfer data from a remote source. DOWNLOAD THE PACKAGE FROM THE REGISTRY.
 > **STE:** Download the package from the registry.
@@ -1881,6 +2052,7 @@
 ---
 
 ## DRAIN (v)
+
 - **Original:** To let liquid flow out. DRAIN THE TANK.
 - **Code-domain:** To deplete resources. DRAIN THE CONNECTION POOL.
 > **STE:** Drain the connection pool.
@@ -1891,6 +2063,7 @@
 ---
 
 ## DRAW (v)
+
 - **Original:** To make a picture or diagram. DRAW THE ROUTING.
 - **Code-domain:** To create a visual representation. DRAW THE ARCHITECTURE DIAGRAM.
 > **STE:** Draw the architecture diagram.
@@ -1901,6 +2074,7 @@
 ---
 
 ## DROP (v)
+
 - **Original:** To let fall. DO NOT DROP THE COMPONENT.
 - **Code-domain:** To remove or discard. DROP THE TABLE FROM THE DATABASE.
 > **STE:** Drop the table from the database.
@@ -1911,6 +2085,7 @@
 ---
 
 ## DRY (adj), DRY (v)
+
 - **Original:** Not wet. CLEAN THE SURFACE WITH A DRY CLOTH. / To make dry. DRY THE COMPONENT.
 - **Code-domain:** Not applicable. Retained for hardware context.
 > **Note:** Domain-specific; no code-documentation equivalent.
@@ -1922,6 +2097,7 @@
 # E
 
 ## EACH (adj)
+
 - **Original:** Every one of two or more. EACH UNIT HAS A SERIAL NUMBER.
 - **Code-domain:** Every one of two or more. EACH MODULE HAS A README FILE.
 > **STE:** Each module has a README file.
@@ -1932,6 +2108,7 @@
 ---
 
 ## EASY (adj)
+
 - **Original:** Not difficult. THE INSTALLATION IS EASY.
 - **Code-domain:** Not difficult. THE SETUP IS EASY.
 > **STE:** The setup is easy.
@@ -1942,6 +2119,7 @@
 ---
 
 ## EDIT (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To modify text or code. EDIT THE CONFIGURATION FILE WITH A TEXT EDITOR.
 > **STE:** Edit the configuration file with a text editor.
@@ -1952,6 +2130,7 @@
 ---
 
 ## EFFECT (n)
+
 - **Original:** A result or consequence. THE EFFECT OF THE PRESSURE IS SMALL.
 - **Code-domain:** A result or consequence. THE EFFECT OF THE CHANGE IS SMALL.
 > **STE:** The effect of the change is small.
@@ -1962,6 +2141,7 @@
 ---
 
 ## EJECT (v)
+
 - **Original:** To force out. EJECT THE CASSETTE.
 - **Code-domain:** To remove forcibly. EJECT THE VOLUME.
 > **STE:** Eject the volume.
@@ -1972,6 +2152,7 @@
 ---
 
 ## ELEMENT (n)
+
 - **Original:** A basic part of something. EACH ELEMENT OF THE ARRAY HAS A VALUE.
 - **Code-domain:** A single item in a collection. EACH ELEMENT OF THE LIST HAS AN INDEX.
 > **STE:** Each element of the list has an index.
@@ -1982,6 +2163,7 @@
 ---
 
 ## ELSE (adv) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical adverb.
 - **Code-domain:** Used to specify an alternative branch in conditional logic.
 > **STE:** If the value is null, return 0; else return the value.
@@ -1992,6 +2174,7 @@
 ---
 
 ## EMPTY (adj)
+
 - **Original:** That does not contain anything. AN EMPTY CONTAINER.
 - **Code-domain:** That does not contain data. AN EMPTY STRING.
 > **STE:** An empty string.
@@ -2002,6 +2185,7 @@
 ---
 
 ## ENABLE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To make active. ENABLE THE DEBUG MODE.
 > **STE:** Enable the debug mode.
@@ -2012,6 +2196,7 @@
 ---
 
 ## END (n), END (v)
+
 - **Original:** The final point. THE END OF THE CABLE. / To stop. END THE PROCEDURE.
 - **Code-domain:** The termination point. THE END OF THE FILE. / To stop. END THE SESSION.
 > **STE:** The end of the file.
@@ -2025,6 +2210,7 @@
 ---
 
 ## ENSURE (v) - UNNAPROVED
+
 - **Original:** MAKE SURE (v). MAKE SURE THAT THE LATCH IS ENGAGED.
 - **Code-domain:** MAKE SURE (v). MAKE SURE THAT THE DATABASE IS CONNECTED.
 > **STE:** Make sure that the database is connected.
@@ -2035,6 +2221,7 @@
 ---
 
 ## ENTER (v) - UNNAPROVED
+
 - **Original:** Not approved; use PUT (v), TYPE (v) for data entry.
 - **Code-domain:** PUT (v), TYPE (v). TYPE YOUR PASSWORD.
 > **STE:** Type your password.
@@ -2047,6 +2234,7 @@
 ---
 
 ## ENVIRONMENT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** The set of conditions in which software runs. THE STAGING ENVIRONMENT IS A COPY OF PRODUCTION.
 > **STE:** The staging environment is a copy of production.
@@ -2057,6 +2245,7 @@
 ---
 
 ## EQUAL (adj), EQUAL (v)
+
 - **Original:** The same. THE TWO VALUES ARE EQUAL. / To be the same. THE SUM EQUALS 100.
 - **Code-domain:** Having the same value. THE TWO HASHES ARE EQUAL.
 > **STE:** The two hashes are equal.
@@ -2070,6 +2259,7 @@
 ---
 
 ## ERASE (v)
+
 - **Original:** To remove completely. ERASE THE DATA.
 - **Code-domain:** To remove completely. ERASE THE SENSITIVE DATA FROM MEMORY.
 > **STE:** Erase the sensitive data from memory.
@@ -2080,6 +2270,7 @@
 ---
 
 ## ERROR (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A mistake or problem in software. THE ERROR OCCURRED AT LINE 42.
 > **STE:** The error occurred at line 42.
@@ -2090,6 +2281,7 @@
 ---
 
 ## ESTABLISH (v) - UNNAPROVED
+
 - **Original:** MAKE (v), SET UP (v). MAKE A CONNECTION.
 - **Code-domain:** MAKE (v), START (v). MAKE A CONNECTION. / START A SESSION.
 > **STE:** Make a connection.
@@ -2100,6 +2292,7 @@
 ---
 
 ## EVALUATE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To compute or assess. EVALUATE THE EXPRESSION AT RUNTIME.
 > **STE:** Evaluate the expression at runtime.
@@ -2110,6 +2303,7 @@
 ---
 
 ## EVENT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** An occurrence that a program can respond to. THE EVENT TRIGGERS THE CALLBACK.
 > **STE:** The event triggers the callback.
@@ -2120,6 +2314,7 @@
 ---
 
 ## EXAMINE (v)
+
 - **Original:** To look at carefully. EXAMINE THE SURFACE FOR DAMAGE.
 - **Code-domain:** To review carefully. EXAMINE THE CODE FOR SECURITY ISSUES.
 > **STE:** Examine the code for security issues.
@@ -2130,6 +2325,7 @@
 ---
 
 ## EXAMPLE (n)
+
 - **Original:** A thing that represents a pattern. THIS IS AN EXAMPLE OF A CORRECT PROCEDURE.
 - **Code-domain:** An illustrative instance. THIS IS AN EXAMPLE OF A CORRECT API CALL.
 > **STE:** This is an example of a correct API call.
@@ -2140,6 +2336,7 @@
 ---
 
 ## EXCEPT (prep) - UNNAPROVED
+
 - **Original:** BUT NOT, OTHER THAN. ALL COMPONENTS EXCEPT THE VALVE ARE SERVICEABLE.
 - **Code-domain:** BUT NOT, OTHER THAN. ALL MODULES EXCEPT THE DATABASE ARE AVAILABLE.
 > **STE:** All modules except the database module are available.
@@ -2150,6 +2347,7 @@
 ---
 
 ## EXECUTE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To run a program or command. EXECUTE THE SCRIPT FROM THE TERMINAL.
 > **STE:** Execute the script from the terminal.
@@ -2160,6 +2358,7 @@
 ---
 
 ## EXPAND (v)
+
 - **Original:** To become larger. THE METAL EXPANDS WHEN HEATED.
 - **Code-domain:** To increase in scope or size. EXPAND THE MACRO AT COMPILE TIME.
 > **STE:** Expand the macro at compile time.
@@ -2170,6 +2369,7 @@
 ---
 
 ## EXPLAIN (v) - UNNAPROVED
+
 - **Original:** Not approved; use TELL (v), SHOW (v), DESCRIBE (v).
 - **Code-domain:** DESCRIBE (v), TELL (v). DESCRIBE THE ERROR CONDITION.
 > **STE:** Describe the error condition.
@@ -2180,6 +2380,7 @@
 ---
 
 ## EXPORT (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To make available outside a module. EXPORT THE FUNCTION FROM THE LIBRARY.
 > **STE:** Export the function from the library.
@@ -2190,6 +2391,7 @@
 ---
 
 ## EXTEND (v)
+
 - **Original:** To make longer or larger. EXTEND THE LANDING GEAR.
 - **Code-domain:** To add functionality through inheritance. EXTEND THE BASE CLASS TO ADD NEW METHODS.
 > **STE:** Extend the base class to add new methods.
@@ -2202,6 +2404,7 @@
 # F
 
 ## FAIL (v)
+
 - **Original:** Not in original STE. Imported as technical verb.
 - **Code-domain:** To be unsuccessful. IF THE TEST FAILS, EXAMINE THE LOGS.
 > **STE:** If the test fails, examine the logs.
@@ -2212,6 +2415,7 @@
 ---
 
 ## FAILURE (n) - UNNAPROVED
+
 - **Original:** Not approved; use a descriptive phrase: DOES NOT OPERATE, BREAKS.
 - **Code-domain:** DOES NOT WORK, STOPS. IF THE SERVICE STOPS, RESTART IT.
 > **STE:** If the service stops, restart it.
@@ -2224,6 +2428,7 @@
 ---
 
 ## FALL (v)
+
 - **Original:** To move downward by gravity. IF OIL SPILLS, CLEAN THE AREA IMMEDIATELY. YOU CAN SLIP AND FALL.
 - **Code-domain:** Not directly applicable; retained for safety context.
 > **Note:** Domain-specific; no code-documentation equivalent for physical falling.
@@ -2233,6 +2438,7 @@
 ---
 
 ## FALSE (adj) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical adjective.
 - **Code-domain:** A Boolean value representing untruth. IF THE CONDITION IS FALSE, SKIP THE BLOCK.
 > **STE:** If the condition is false, skip the block.
@@ -2243,6 +2449,7 @@
 ---
 
 ## FAST (adj), FAST (adv)
+
 - **Original:** At high speed. FAST MOVEMENT.
 - **Code-domain:** At high speed or low latency. FAST RESPONSE TIME.
 > **STE:** Fast response time.
@@ -2253,6 +2460,7 @@
 ---
 
 ## FATAL (adj) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical adjective.
 - **Code-domain:** Causing the program to terminate. A FATAL ERROR OCCURRED.
 > **STE:** A fatal error occurred.
@@ -2263,6 +2471,7 @@
 ---
 
 ## FETCH (v)
+
 - **Original:** To go and get. FETCH THE TOOL.
 - **Code-domain:** To retrieve data. FETCH THE RECORDS FROM THE DATABASE.
 > **STE:** Fetch the records from the database.
@@ -2273,6 +2482,7 @@
 ---
 
 ## FIELD (n) - (TN)
+
 - **Original:** An area or space. THE FIELD OF VIEW.
 - **Code-domain:** A data member of a structure or form. THE `email` FIELD OF THE FORM MUST BE VALIDATED.
 > **STE:** The `email` field of the form must be validated.
@@ -2283,6 +2493,7 @@
 ---
 
 ## FILE (n) - (TN)
+
 - **Original:** A tool for smoothing (not applicable). Code-domain: A container of data on disk.
 - **Code-domain:** A named collection of data. THE CONFIGURATION FILE IS IN TOML FORMAT.
 > **STE:** The configuration file is in TOML format.
@@ -2293,6 +2504,7 @@
 ---
 
 ## FILL (v)
+
 - **Original:** To make full. FILL THE TANK.
 - **Code-domain:** To populate with data. FILL THE ARRAY WITH DEFAULT VALUES.
 > **STE:** Fill the array with default values.
@@ -2303,6 +2515,7 @@
 ---
 
 ## FILTER (n), FILTER (v)
+
 - **Original:** A device that removes unwanted material. / To remove unwanted material. FILTER THE FLUID.
 - **Code-domain:** A function that selects data. / To select data. FILTER THE RESULTS BY STATUS.
 > **STE:** Filter the results by status.
@@ -2313,6 +2526,7 @@
 ---
 
 ## FIND (v)
+
 - **Original:** To discover or locate. FIND THE CAUSE OF THE PROBLEM.
 - **Code-domain:** To search for and locate. FIND THE ROOT CAUSE OF THE ERROR.
 > **STE:** Find the root cause of the error.
@@ -2323,6 +2537,7 @@
 ---
 
 ## FINISH (v)
+
 - **Original:** To complete. FINISH THE INSTALLATION.
 - **Code-domain:** To complete. FINISH THE SETUP.
 > **STE:** Finish the setup.
@@ -2333,6 +2548,7 @@
 ---
 
 ## FIRST (adj), FIRST (adv)
+
 - **Original:** Before all others. THE FIRST STEP. / Before all others. DO THIS STEP FIRST.
 - **Code-domain:** Before all others. THE FIRST ITERATION. / DEFINE THE VARIABLE FIRST.
 > **STE:** Define the variable first.
@@ -2343,6 +2559,7 @@
 ---
 
 ## FIT (v) - UNNAPROVED
+
 - **Original:** INSTALL (v), ATTACH (v). INSTALL THE COMPONENT.
 - **Code-domain:** INSTALL (v), ADD (v). INSTALL THE PACKAGE.
 > **STE:** Install the package.
@@ -2353,6 +2570,7 @@
 ---
 
 ## FIX (v)
+
 - **Original:** To attach firmly. FIX THE BRACKET TO THE WALL.
 - **Code-domain:** To repair a bug. FIX THE MEMORY LEAK.
 > **STE:** Fix the memory leak.
@@ -2363,6 +2581,7 @@
 ---
 
 ## FLAG (n) - (TN)
+
 - **Original:** A piece of fabric (not in STE). Code-domain: A marker or switch.
 - **Code-domain:** A variable used as a signal. SET THE DEBUG FLAG TO TRUE.
 > **STE:** Set the debug flag to true.
@@ -2373,6 +2592,7 @@
 ---
 
 ## FLOW (n), FLOW (v)
+
 - **Original:** Movement of a fluid. THE FLOW OF FUEL. / To move as a fluid. THE FUEL FLOWS THROUGH THE PIPE.
 - **Code-domain:** Movement of data or control. THE FLOW OF DATA THROUGH THE PIPELINE. / To pass data through. THE DATA FLOWS THROUGH THE CHANNEL.
 > **STE:** The flow of data through the pipeline.
@@ -2386,6 +2606,7 @@
 ---
 
 ## FOLLOW (v) - UNNAPROVED
+
 - **Original:** OBEY (v). OBEY THE INSTRUCTIONS.
 - **Code-domain:** OBEY (v). OBEY THE CODING GUIDELINES.
 > **STE:** Obey the coding guidelines.
@@ -2396,6 +2617,7 @@
 ---
 
 ## FOR (prep)
+
 - **Original:** Function word that shows purpose or destination. FOR DATA, REFER TO THE MANUAL.
 - **Code-domain:** Function word that shows purpose or destination. FOR EXAMPLES, REFER TO THE README.
 > **STE:** For examples, refer to the README.
@@ -2406,6 +2628,7 @@
 ---
 
 ## FORCE (n)
+
 - **Original:** Strength or energy. APPLY FORCE TO THE LEVER.
 - **Code-domain:** To compel a non-default behavior. FORCE THE APPLICATION TO RESTART.
 > **STE:** Force the application to restart.
@@ -2416,6 +2639,7 @@
 ---
 
 ## FORMAT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** The structure of data representation. THE FILE FORMAT IS JSON.
 > **STE:** The file format is JSON.
@@ -2426,6 +2650,7 @@
 ---
 
 ## FORWARD (adv)
+
 - **Original:** In a direction to the front. MOVE THE LEVER FORWARD.
 - **Code-domain:** In a direction to the front or next. MOVE THE POINTER FORWARD.
 > **STE:** Move the pointer forward.
@@ -2436,6 +2661,7 @@
 ---
 
 ## FREE (adj)
+
 - **Original:** Not occupied or not restricted. THE AREA IS FREE OF CONTAMINATION.
 - **Code-domain:** Not occupied or not restricted. THE CODE IS FREE OF ERRORS.
 > **STE:** The code is free of errors.
@@ -2446,6 +2672,7 @@
 ---
 
 ## FROM (prep)
+
 - **Original:** Function word that shows a source or starting point. REMOVE THE UNIT FROM THE RACK.
 - **Code-domain:** Function word that shows a source or starting point. IMPORT THE MODULE FROM THE PACKAGE.
 > **STE:** Import the module from the package.
@@ -2456,6 +2683,7 @@
 ---
 
 ## FULL (adj)
+
 - **Original:** Containing all that is possible. FULL POWER.
 - **Code-domain:** Complete. FULL TEST SUITE.
 > **STE:** Full test suite.
@@ -2466,6 +2694,7 @@
 ---
 
 ## FUNCTION (n)
+
 - **Original:** The purpose of something. THE FUNCTION OF THE VALVE IS TO CONTROL THE FLOW.
 - **Code-domain:** A named procedure or subroutine. THE FUNCTION RETURNS A STRING. / The purpose of a component. THE FUNCTION OF THE MIDDLEWARE IS TO AUTHENTICATE REQUESTS.
 > **STE:** The function returns a string.
@@ -2481,6 +2710,7 @@
 # G
 
 ## GET (v)
+
 - **Original:** To obtain or receive. GET THE TOOL FROM THE STORE. / Come to be. GET READY.
 - **Code-domain:** To obtain or fetch. GET THE DATA FROM THE API. / To become. THE SERVICE GETS UNSTABLE UNDER LOAD.
 > **STE:** Get the data from the API.
@@ -2494,6 +2724,7 @@
 ---
 
 ## GIVE (v)
+
 - **Original:** To provide. THIS SECTION GIVES THE CLEANING PROCEDURES FOR THE DISASSEMBLED PARTS.
 - **Code-domain:** To provide or yield. THIS SECTION GIVES THE BUILD INSTRUCTIONS FOR THE MODULE.
 > **STE:** This section gives the build instructions for the module.
@@ -2504,6 +2735,7 @@
 ---
 
 ## GO (v)
+
 - **Original:** To move or travel. GO TO THE NEXT STEP.
 - **Code-domain:** To proceed. GO TO THE NEXT PHASE OF THE PIPELINE.
 > **STE:** Go to the next phase of the pipeline.
@@ -2514,6 +2746,7 @@
 ---
 
 ## GOOD (adj)
+
 - **Original:** Satisfactory. GOOD RESULTS.
 - **Code-domain:** Satisfactory. GOOD TEST COVERAGE.
 > **STE:** Good test coverage.
@@ -2524,6 +2757,7 @@
 ---
 
 ## GROUP (n), GROUP (v)
+
 - **Original:** A number of related items. A GROUP OF COMPONENTS. / To put into groups. GROUP THE ITEMS BY SIZE.
 - **Code-domain:** A number of related items. A GROUP OF FUNCTIONS. / To organize. GROUP THE TESTS BY MODULE.
 > **STE:** Group the tests by module.
@@ -2536,6 +2770,7 @@
 # H
 
 ## HANDLE (v) - UNNAPROVED
+
 - **Original:** Not approved; use TOUCH (v), OPERATE (v), USE (v).
 - **Code-domain:** PROCESS (v), MANAGE (v). PROCESS THE EXCEPTION. / MANAGE THE REQUEST.
 > **STE:** Process the exception.
@@ -2548,6 +2783,7 @@
 ---
 
 ## HAPPEN (v) - UNNAPROVED
+
 - **Original:** OCCUR (v). AN ERROR OCCURRED DURING BUILD.
 - **Code-domain:** OCCUR (v). AN EXCEPTION OCCURRED DURING INITIALIZATION.
 > **STE:** An exception occurred during initialization.
@@ -2558,6 +2794,7 @@
 ---
 
 ## HARD (adj)
+
 - **Original:** Not soft; difficult. A HARD SURFACE.
 - **Code-domain:** Difficult. A HARD LIMIT.
 > **STE:** A hard limit on the number of connections.
@@ -2568,6 +2805,7 @@
 ---
 
 ## HAVE (v)
+
 - **Original:** To own or possess. THE UNIT HAS TWO CONNECTORS.
 - **Code-domain:** To possess or contain. THE CLASS HAS TWO METHODS.
 > **STE:** The class has two methods.
@@ -2578,6 +2816,7 @@
 ---
 
 ## HEAD (n)
+
 - **Original:** The top or front part. THE HEAD OF THE BOLT.
 - **Code-domain:** The top or leading element. THE HEAD OF THE QUEUE.
 > **STE:** The head of the queue.
@@ -2588,6 +2827,7 @@
 ---
 
 ## HELP (n), HELP (v)
+
 - **Original:** Aid or assistance. GET HELP. / To give assistance. THIS MANUAL HELPS YOU TO DO THE PROCEDURE.
 - **Code-domain:** Aid or assistance. GET HELP FROM THE DOCS. / To assist. THIS README HELPS YOU TO SET UP THE PROJECT.
 > **STE:** This README helps you to set up the project.
@@ -2598,6 +2838,7 @@
 ---
 
 ## HIGH (adj)
+
 - **Original:** Large in vertical dimension or intensity. HIGH PRESSURE.
 - **Code-domain:** Large in magnitude. HIGH LOAD.
 > **STE:** High load on the server.
@@ -2608,6 +2849,7 @@
 ---
 
 ## HIT (v)
+
 - **Original:** To strike. DO NOT HIT THE SURFACE.
 - **Code-domain:** To access or collide. HIT THE ENDPOINT WITH A GET REQUEST.
 > **STE:** Hit the endpoint with a GET request.
@@ -2618,6 +2860,7 @@
 ---
 
 ## HOLD (v)
+
 - **Original:** To keep in position. HOLD THE COMPONENT IN POSITION.
 - **Code-domain:** To keep in state. HOLD THE LOCK UNTIL THE OPERATION COMPLETES.
 > **STE:** Hold the lock until the operation completes.
@@ -2628,6 +2871,7 @@
 ---
 
 ## HOOK (n) - (TN)
+
 - **Original:** A curved piece of metal. Code-domain: An interception point in a framework.
 - **Code-domain:** A callback or interception mechanism. USE A PRE-COMMIT HOOK TO VALIDATE THE CODE.
 > **STE:** Use a pre-commit hook to validate the code.
@@ -2638,6 +2882,7 @@
 ---
 
 ## HOW (adv)
+
 - **Original:** In what manner. HOW TO INSTALL THE COMPONENT.
 - **Code-domain:** In what manner. HOW TO COMPILE THE PROJECT.
 > **STE:** How to compile the project.
@@ -2650,6 +2895,7 @@
 # I
 
 ## IDENTIFY (v)
+
 - **Original:** To find and recognize. IDENTIFY THE CAUSE OF THE PROBLEM.
 - **Code-domain:** To find and recognize. IDENTIFY THE SOURCE OF THE MEMORY LEAK.
 > **STE:** Identify the source of the memory leak.
@@ -2660,6 +2906,7 @@
 ---
 
 ## IF (conj)
+
 - **Original:** Function word that shows condition. IF THE PRESSURE IS MORE THAN THE LIMIT, STOP THE PUMP.
 - **Code-domain:** Function word that shows condition. IF THE STATUS CODE IS 500, RETRY THE REQUEST.
 > **STE:** If the status code is 500, retry the request.
@@ -2670,6 +2917,7 @@
 ---
 
 ## IGNORE (v)
+
 - **Original:** To not pay attention to. IGNORE THE INITIAL READING.
 - **Code-domain:** To not process or include. IGNORE THE CASE SENSITIVITY.
 > **STE:** Ignore the case sensitivity.
@@ -2680,6 +2928,7 @@
 ---
 
 ## IMMEDIATELY (adv)
+
 - **Original:** Without delay. GET MEDICAL AID IMMEDIATELY.
 - **Code-domain:** Without delay. RESTART THE SERVICE IMMEDIATELY.
 > **STE:** Restart the service immediately.
@@ -2690,6 +2939,7 @@
 ---
 
 ## IMPLEMENT (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To write code that fulfills a specification. IMPLEMENT THE INTERFACE.
 > **STE:** Implement the interface.
@@ -2700,6 +2950,7 @@
 ---
 
 ## IMPORT (v) - (TV)
+
 - **Original:** Not in original STE (bring goods from abroad). Code-domain: To include code from another module.
 - **Code-domain:** To bring code into scope. IMPORT THE MODULE AT THE TOP OF THE FILE.
 > **STE:** Import the module at the top of the file.
@@ -2710,6 +2961,7 @@
 ---
 
 ## IMPORTANT (adj)
+
 - **Original:** Having great significance. IMPORTANT PROCEDURE.
 - **Code-domain:** Having great significance. IMPORTANT SECURITY NOTE.
 > **STE:** Important security note.
@@ -2720,6 +2972,7 @@
 ---
 
 ## IN (prep)
+
 - **Original:** Function word that shows location or inclusion. IN THE CONTAINER.
 - **Code-domain:** Function word that shows location or containment. IN THE DIRECTORY.
 > **STE:** In the directory `src/lib/`.
@@ -2730,6 +2983,7 @@
 ---
 
 ## INCLUDE (v)
+
 - **Original:** To contain as part of a whole. THE KIT INCLUDES THE TOOLS.
 - **Code-domain:** To contain as part of a whole. THE PACKAGE INCLUDES THE DEPENDENCIES.
 > **STE:** The package includes the dependencies.
@@ -2740,6 +2994,7 @@
 ---
 
 ## INCORRECT (adj)
+
 - **Original:** Not correct. INCORRECT VALUES.
 - **Code-domain:** Not correct. INCORRECT SYNTAX.
 > **STE:** Incorrect syntax.
@@ -2750,6 +3005,7 @@
 ---
 
 ## INCREASE (v)
+
 - **Original:** To become larger. INCREASE THE PRESSURE.
 - **Code-domain:** To become larger. INCREASE THE BUFFER SIZE.
 > **STE:** Increase the buffer size.
@@ -2760,6 +3016,7 @@
 ---
 
 ## INDEX (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A numerical position in a collection. THE INDEX OF THE ELEMENT IS 0.
 > **STE:** The index of the element is 0.
@@ -2770,6 +3027,7 @@
 ---
 
 ## INDICATE (v) - UNNAPROVED
+
 - **Original:** SHOW (v), SPECIFIED (adj). THE INDICATOR SHOWS THE LEVEL.
 - **Code-domain:** SHOW (v). THE LOG SHOWS THE ERROR TYPE.
 > **STE:** The log shows the error type.
@@ -2780,6 +3038,7 @@
 ---
 
 ## INITIALIZE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To set a starting value. INITIALIZE THE VARIABLE TO ZERO.
 > **STE:** Initialize the variable to zero.
@@ -2790,6 +3049,7 @@
 ---
 
 ## INPUT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** Data entered into a system. VALIDATE THE USER INPUT.
 > **STE:** Validate the user input.
@@ -2800,6 +3060,7 @@
 ---
 
 ## INSERT (v) - UNNAPROVED
+
 - **Original:** PUT (v). PUT THE COMPONENT INTO THE SLOT.
 - **Code-domain:** PUT (v), ADD (v). PUT THE RECORD INTO THE DATABASE.
 > **STE:** Put the record into the database.
@@ -2812,6 +3073,7 @@
 ---
 
 ## INSPECT (v) - UNNAPROVED
+
 - **Original:** EXAMINE (v), CHECK (v). EXAMINE THE COMPONENT FOR DAMAGE.
 - **Code-domain:** EXAMINE (v), REVIEW (v). REVIEW THE CODE FOR VULNERABILITIES.
 > **STE:** Review the code for vulnerabilities.
@@ -2822,6 +3084,7 @@
 ---
 
 ## INSTALL (v)
+
 - **Original:** To put into position for use. INSTALL THE COMPONENT IN THE RACK.
 - **Code-domain:** To set up software for use. INSTALL THE PACKAGE WITH NPM.
 > **STE:** Install the package with npm.
@@ -2832,6 +3095,7 @@
 ---
 
 ## INSTRUCTION (n)
+
 - **Original:** A direction for action. OBEY THE INSTRUCTIONS IN THE MANUAL.
 - **Code-domain:** A direction for action. OBEY THE INSTRUCTIONS IN THE README.
 > **STE:** Obey the instructions in the README.
@@ -2842,6 +3106,7 @@
 ---
 
 ## INTERFACE (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A contract defining methods a class must implement. THE INTERFACE DEFINES THREE METHODS.
 > **STE:** The interface defines three methods.
@@ -2852,6 +3117,7 @@
 ---
 
 ## INVALID (adj) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical adjective.
 - **Code-domain:** Not valid or acceptable. AN INVALID TOKEN.
 > **STE:** An invalid token.
@@ -2862,6 +3128,7 @@
 ---
 
 ## ISOLATE (v)
+
 - **Original:** To separate from others. ISOLATE THE SYSTEM.
 - **Code-domain:** To separate for testing or security. ISOLATE THE COMPONENT FOR UNIT TESTING.
 > **STE:** Isolate the component for unit testing.
@@ -2872,6 +3139,7 @@
 ---
 
 ## IT (pron)
+
 - **Original:** A pronoun for a thing. THE COMPONENT. IT IS INSTALLED IN THE RACK.
 - **Code-domain:** A pronoun for a thing. THE PACKAGE. IT IS IN THE REGISTRY.
 > **STE:** The package. It is in the registry.
@@ -2884,6 +3152,7 @@
 # J
 
 ## JOIN (v)
+
 - **Original:** To connect. JOIN THE TWO PIPES.
 - **Code-domain:** To concatenate or merge. JOIN THE TWO STRINGS.
 > **STE:** Join the two strings.
@@ -2896,6 +3165,7 @@
 # K
 
 ## KEEP (v)
+
 - **Original:** To continue to have. KEEP THE PART IN A DRY AREA.
 - **Code-domain:** To maintain state. KEEP THE CONNECTION OPEN.
 > **STE:** Keep the connection open.
@@ -2906,6 +3176,7 @@
 ---
 
 ## KEY (n) - (TN)
+
 - **Original:** A piece of metal for locks. Code-domain: An identifier for data access.
 - **Code-domain:** A unique identifier. THE KEY FOR THE CACHE ENTRY IS THE USER ID.
 > **STE:** The key for the cache entry is the user ID.
@@ -2916,6 +3187,7 @@
 ---
 
 ## KILL (v)
+
 - **Original:** To cause to die. Code-domain adaptation: To terminate a process.
 - **Code-domain:** To force-terminate a process. KILL THE PROCESS WITH SIGTERM.
 > **STE:** Kill the process with SIGTERM.
@@ -2926,6 +3198,7 @@
 ---
 
 ## KNOW (v)
+
 - **Original:** To be aware. YOU MUST KNOW THE SPECIFICATION.
 - **Code-domain:** To understand. YOU MUST KNOW THE API SPECIFICATION.
 > **STE:** You must know the API specification.
@@ -2938,6 +3211,7 @@
 # L
 
 ## LARGE (adj)
+
 - **Original:** Big in size or quantity. LARGE QUANTITY.
 - **Code-domain:** Big in size or quantity. LARGE DATASET.
 > **STE:** A large dataset.
@@ -2948,6 +3222,7 @@
 ---
 
 ## LAST (adj), LAST (adv)
+
 - **Original:** After all others. THE LAST STEP. / After all others. DO THIS STEP LAST.
 - **Code-domain:** After all others. THE LAST ITERATION. / EXECUTE THE TEARDOWN LAST.
 > **STE:** Execute the teardown last.
@@ -2958,6 +3233,7 @@
 ---
 
 ## LAYER (n) - (TN)
+
 - **Original:** A thickness of material. Code-domain: A level in an architecture.
 - **Code-domain:** A logical level in a stack. THE DATA ACCESS LAYER HANDLES QUERIES.
 > **STE:** The data access layer handles queries.
@@ -2968,6 +3244,7 @@
 ---
 
 ## LEFT (adj), LEFT (adv)
+
 - **Original:** In a direction opposite to right. THE LEFT SIDE. / MOVE THE LEVER LEFT.
 - **Code-domain:** In a direction opposite to right. THE LEFT PANEL. / ALIGN THE TEXT LEFT.
 > **STE:** Align the text left.
@@ -2978,6 +3255,7 @@
 ---
 
 ## LENGTH (n)
+
 - **Original:** The measurement from end to end. MEASURE THE LENGTH.
 - **Code-domain:** The number of elements. THE LENGTH OF THE ARRAY IS 10.
 > **STE:** The length of the array is 10.
@@ -2988,6 +3266,7 @@
 ---
 
 ## LESS (adj), LESS (adv), LESS (prep)
+
 - **Original:** Smaller in quantity. LESS FUEL. / To a smaller degree. LESS OFTEN. / Minus. 15 LESS 10 IS 5.
 - **Code-domain:** Smaller in quantity. LESS MEMORY. / To a smaller degree. LESS FREQUENTLY.
 > **STE:** Less memory usage.
@@ -2998,6 +3277,7 @@
 ---
 
 ## LET (v)
+
 - **Original:** To permit or allow. LET THE ENGINE COOL.
 - **Code-domain:** To permit or bind. LET THE VARIABLE BE MUTABLE.
 > **STE:** Let the process complete before you restart.
@@ -3008,6 +3288,7 @@
 ---
 
 ## LEVEL (n)
+
 - **Original:** A relative position or height. THE OIL LEVEL.
 - **Code-domain:** A degree or rank. THE LOG LEVEL.
 > **STE:** Set the log level to debug.
@@ -3018,6 +3299,7 @@
 ---
 
 ## LIBRARY (n) - (TN)
+
 - **Original:** A collection of books. Code-domain: A collection of reusable code.
 - **Code-domain:** A package of reusable code. IMPORT THE STANDARD LIBRARY.
 > **STE:** Import the standard library.
@@ -3028,6 +3310,7 @@
 ---
 
 ## LIFT (v)
+
 - **Original:** To raise. LIFT THE COMPONENT.
 - **Code-domain:** To promote or extract. LIFT THE FUNCTION TO A SEPARATE MODULE.
 > **STE:** Lift the function to a separate module.
@@ -3038,6 +3321,7 @@
 ---
 
 ## LIGHT (adj)
+
 - **Original:** Not heavy; not dark. LIGHT FORCE. / LIGHT COLOR.
 - **Code-domain:** Not heavy in resource usage. LIGHT PROCESS. / Not dark. LIGHT THEME.
 > **STE:** A light process with small memory footprint.
@@ -3048,6 +3332,7 @@
 ---
 
 ## LIMIT (n), LIMIT (v)
+
 - **Original:** A boundary or maximum. THE SPEED LIMIT. / To restrict. LIMIT THE FLOW.
 - **Code-domain:** A boundary or maximum. THE RATE LIMIT. / To restrict. LIMIT THE NUMBER OF REQUESTS.
 > **STE:** Limit the number of requests.
@@ -3058,6 +3343,7 @@
 ---
 
 ## LINE (n)
+
 - **Original:** A long thin mark. A STRAIGHT LINE.
 - **Code-domain:** A row of text in a file. THE ERROR IS AT LINE 42. / A connection. THE TRANSMISSION LINE.
 > **STE:** The error is at line 42.
@@ -3068,6 +3354,7 @@
 ---
 
 ## LINK (n), LINK (v)
+
 - **Original:** A connection. / To connect. LINK THE TWO COMPONENTS.
 - **Code-domain:** A reference or URL. THE LINK TO THE DOCUMENTATION. / To connect. LINK THE LIBRARY TO THE PROJECT.
 > **STE:** Link the library to the project.
@@ -3078,6 +3365,7 @@
 ---
 
 ## LIST (n), LIST (v)
+
 - **Original:** A series of items. / To give as a list. LIST THE COMPONENTS.
 - **Code-domain:** A data structure. A LINKED LIST. / To enumerate. LIST THE FILES IN THE DIRECTORY.
 > **STE:** List the files in the directory.
@@ -3088,6 +3376,7 @@
 ---
 
 ## LOAD (n), LOAD (v)
+
 - **Original:** A weight. / To put a load on or into. LOAD THE SOFTWARE.
 - **Code-domain:** Demand on a system. THE SERVER LOAD. / To bring data into memory. LOAD THE CONFIGURATION FILE.
 > **STE:** Load the configuration file.
@@ -3098,6 +3387,7 @@
 ---
 
 ## LOCATE (v) - UNNAPROVED
+
 - **Original:** FIND (v). FIND THE COMPONENT.
 - **Code-domain:** FIND (v). FIND THE ERROR IN THE LOGS.
 > **STE:** Find the error in the logs.
@@ -3108,6 +3398,7 @@
 ---
 
 ## LOCK (v)
+
 - **Original:** To secure with a lock. LOCK THE DOOR.
 - **Code-domain:** To prevent concurrent access. LOCK THE MUTEX.
 > **STE:** Lock the mutex.
@@ -3118,6 +3409,7 @@
 ---
 
 ## LOG (n), LOG (v) - (TN/TV)
+
 - **Original:** A record of events (not in original STE nautical sense). Code-domain.
 - **Code-domain:** A record of system events. READ THE LOG FILE. / To record. LOG THE ERROR.
 > **STE:** Log the error to the file.
@@ -3128,6 +3420,7 @@
 ---
 
 ## LONG (adj)
+
 - **Original:** Having large length. A LONG CABLE.
 - **Code-domain:** Having large length or duration. A LONG PROCESS.
 > **STE:** A long process.
@@ -3138,6 +3431,7 @@
 ---
 
 ## LOOK (v)
+
 - **Original:** To direct eyes toward. LOOK AT THE INDICATOR.
 - **Code-domain:** To examine. LOOK AT THE ERROR MESSAGE.
 > **STE:** Look at the error message.
@@ -3148,6 +3442,7 @@
 ---
 
 ## LOOP (n) - (TN)
+
 - **Original:** A curved shape. Code-domain: A repeating code block.
 - **Code-domain:** A control structure that repeats. THE FOR LOOP ITERATES 10 TIMES.
 > **STE:** The for loop iterates 10 times.
@@ -3158,6 +3453,7 @@
 ---
 
 ## LOOSE (adj)
+
 - **Original:** Not tight. A LOOSE CONNECTION.
 - **Code-domain:** Not tightly coupled. LOOSE COUPLING BETWEEN MODULES.
 > **STE:** Loose coupling between modules.
@@ -3168,6 +3464,7 @@
 ---
 
 ## LOW (adj)
+
 - **Original:** Small in height or intensity. LOW PRESSURE.
 - **Code-domain:** Small in magnitude. LOW LATENCY.
 > **STE:** Low latency.
@@ -3178,6 +3475,7 @@
 ---
 
 ## LOWER (v)
+
 - **Original:** To move something down. LOWER THE COMPONENT.
 - **Code-domain:** To reduce. LOWER THE LOG LEVEL.
 > **STE:** Lower the log level.
@@ -3190,6 +3488,7 @@
 # M
 
 ## MAIN (adj) - UNNAPROVED
+
 - **Original:** PRIMARY (adj). THE PRIMARY CAUSE OF VALVE FAILURE IS CONTAMINATION OF THE FLUID.
 - **Code-domain:** PRIMARY (adj). THE PRIMARY CAUSE OF THE CRASH IS A NULL POINTER.
 > **STE:** The primary cause of the crash is a null pointer.
@@ -3200,6 +3499,7 @@
 ---
 
 ## MAKE (v)
+
 - **Original:** To create or cause. MAKE A HOLE.
 - **Code-domain:** To create or cause. MAKE A COPY OF THE FILE.
 > **STE:** Make a copy of the file.
@@ -3210,6 +3510,7 @@
 ---
 
 ## MAKE SURE (v)
+
 - **Original:** To verify or confirm. MAKE SURE THAT THE VALVE IS CLOSED.
 - **Code-domain:** To verify. MAKE SURE THAT THE TESTS PASS.
 > **STE:** Make sure that the tests pass.
@@ -3220,6 +3521,7 @@
 ---
 
 ## MANAGE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb (e.g., package manager, state manager).
 - **Code-domain:** To control or administer. THE PACKAGE MANAGER MANAGES DEPENDENCIES.
 > **STE:** The package manager manages dependencies.
@@ -3230,6 +3532,7 @@
 ---
 
 ## MANDATORY (adj)
+
 - **Original:** Compulsory. IT IS MANDATORY TO OBEY THE SAFETY INSTRUCTIONS.
 - **Code-domain:** Required, not optional. THE API KEY IS MANDATORY.
 > **STE:** The API key is mandatory.
@@ -3240,6 +3543,7 @@
 ---
 
 ## MANUAL (adj), MANUAL (n)
+
 - **Original:** Done by hand (not automatic). MANUAL OPERATION. / A book. READ THE MANUAL.
 - **Code-domain:** Done by human (not automated). MANUAL REVIEW. / A document. READ THE MANUAL.
 > **STE:** Manual review of the code.
@@ -3253,6 +3557,7 @@
 ---
 
 ## MANY (adj)
+
 - **Original:** A large number. MANY COMPONENTS.
 - **Code-domain:** A large number. MANY REQUESTS.
 > **STE:** Many requests per second.
@@ -3263,6 +3568,7 @@
 ---
 
 ## MAP (v) - (TV)
+
 - **Original:** To make a representation (cartography). Code-domain: To transform data.
 - **Code-domain:** To transform each element. MAP THE ARRAY TO UPPERCASE.
 > **STE:** Map the array to uppercase.
@@ -3273,6 +3579,7 @@
 ---
 
 ## MARK (n), MARK (v)
+
 - **Original:** A visible sign. A REFERENCE MARK. / To make a mark. MARK THE POSITION.
 - **Code-domain:** A visible sign. A BENCHMARK. / To flag. MARK THE FUNCTION AS DEPRECATED.
 > **STE:** Mark the function as deprecated.
@@ -3283,6 +3590,7 @@
 ---
 
 ## MATCH (v)
+
 - **Original:** To be the same or fit together. THE PARTS MUST MATCH.
 - **Code-domain:** To correspond. THE PATTERN MUST MATCH THE INPUT.
 > **STE:** The pattern must match the input.
@@ -3293,6 +3601,7 @@
 ---
 
 ## MATERIAL (n)
+
 - **Original:** Substance. THE MATERIAL IS RESISTANT TO HEAT.
 - **Code-domain:** Reference material. REFER TO THE TRAINING MATERIAL.
 > **STE:** Refer to the training material.
@@ -3303,6 +3612,7 @@
 ---
 
 ## MAXIMUM (adj), MAXIMUM (n)
+
 - **Original:** The greatest possible. MAXIMUM SPEED. / The greatest possible quantity. THE MAXIMUM IS 100.
 - **Code-domain:** The greatest possible. MAXIMUM CONNECTIONS. / The greatest possible quantity. THE MAXIMUM IS 100.
 > **STE:** Maximum connections is 100.
@@ -3313,6 +3623,7 @@
 ---
 
 ## MEASURE (v)
+
 - **Original:** To find the size or quantity. MEASURE THE DISTANCE.
 - **Code-domain:** To quantify metrics. MEASURE THE RESPONSE TIME.
 > **STE:** Measure the response time.
@@ -3323,6 +3634,7 @@
 ---
 
 ## MEMORY (n) - (TN)
+
 - **Original:** The faculty of remembering. Code-domain: Computer storage.
 - **Code-domain:** A system's working storage. THE APPLICATION USES 256 MB OF MEMORY.
 > **STE:** The application uses 256 MB of memory.
@@ -3333,6 +3645,7 @@
 ---
 
 ## MERGE (v) - (TV)
+
 - **Original:** To combine. MERGE THE TWO LISTS.
 - **Code-domain:** To combine branches. MERGE THE FEATURE BRANCH INTO MAIN.
 > **STE:** Merge the feature branch into main.
@@ -3343,6 +3656,7 @@
 ---
 
 ## MESSAGE (n)
+
 - **Original:** A communication. SEND A MESSAGE.
 - **Code-domain:** A unit of communication. THE ERROR MESSAGE DESCRIBES THE ISSUE.
 > **STE:** The error message describes the issue.
@@ -3353,6 +3667,7 @@
 ---
 
 ## METHOD (n) - (TN)
+
 - **Original:** A way of doing something. THE METHOD OF INSTALLATION.
 - **Code-domain:** A function within a class. THE METHOD TAKES TWO PARAMETERS.
 > **STE:** The method takes two parameters.
@@ -3363,6 +3678,7 @@
 ---
 
 ## MINIMUM (adj), MINIMUM (n)
+
 - **Original:** The smallest possible. MINIMUM PRESSURE. / The smallest possible quantity. THE MINIMUM IS 5.
 - **Code-domain:** The smallest possible. MINIMUM PASSWORD LENGTH. / The smallest possible quantity. THE MINIMUM IS 8.
 > **STE:** The minimum password length is 8.
@@ -3373,6 +3689,7 @@
 ---
 
 ## MINUS (prep)
+
 - **Original:** With the subtraction of. 10 MINUS 3 IS 7.
 - **Code-domain:** Mathematical subtraction. THE VALUE IS TOTAL MINUS OVERHEAD.
 > **STE:** The value is total minus overhead.
@@ -3383,6 +3700,7 @@
 ---
 
 ## MISSING (adj)
+
 - **Original:** Not present. A MISSING COMPONENT.
 - **Code-domain:** Not present. A MISSING DEPENDENCY.
 > **STE:** A missing dependency.
@@ -3393,6 +3711,7 @@
 ---
 
 ## MIX (v)
+
 - **Original:** To combine two or more substances. MIX THE COMPOUND.
 - **Code-domain:** To combine. MIX CONCERNS IN A SINGLE MODULE.
 > **STE:** Do not mix concerns in a single module.
@@ -3403,6 +3722,7 @@
 ---
 
 ## MODE (n) - (TN)
+
 - **Original:** A way of operating. THE AUTOPILOT MODE.
 - **Code-domain:** A state of operation. THE DEBUG MODE SHOWS MORE INFORMATION.
 > **STE:** The debug mode shows more information.
@@ -3413,6 +3733,7 @@
 ---
 
 ## MODEL (n) - (TN)
+
 - **Original:** A representation. Code-domain: A data structure or ML artifact.
 - **Code-domain:** A data structure or machine learning artifact. THE USER MODEL HAS THREE FIELDS. / TRAIN THE MODEL.
 > **STE:** The user model has three fields.
@@ -3423,6 +3744,7 @@
 ---
 
 ## MODIFY (v) - UNNAPROVED
+
 - **Original:** CHANGE (v), MODIFICATION (TN). MAKE CHANGES TO THE CONFIGURATION.
 - **Code-domain:** CHANGE (v). CHANGE THE FILE PERMISSIONS.
 > **STE:** Change the file permissions.
@@ -3433,6 +3755,7 @@
 ---
 
 ## MODULE (n) - (TN)
+
 - **Original:** A self-contained unit. Code-domain: A self-contained code unit.
 - **Code-domain:** An independent unit of code. EACH MODULE HAS ITS OWN NAMESPACE.
 > **STE:** Each module has its own namespace.
@@ -3443,6 +3766,7 @@
 ---
 
 ## MONITOR (v)
+
 - **Original:** To watch or observe. MONITOR THE PRESSURE.
 - **Code-domain:** To observe system behavior. MONITOR THE SERVER LOGS.
 > **STE:** Monitor the server logs.
@@ -3453,6 +3777,7 @@
 ---
 
 ## MORE (adj), MORE (adv)
+
 - **Original:** A larger quantity or degree. MORE FUEL. / MORE QUICKLY.
 - **Code-domain:** A larger quantity or degree. MORE MEMORY. / MORE EFFICIENTLY.
 > **STE:** More memory allocation.
@@ -3463,6 +3788,7 @@
 ---
 
 ## MOST (adj), MOST (adv)
+
 - **Original:** The largest quantity or degree. MOST COMPONENTS. / To the greatest degree. MOST FREQUENTLY.
 - **Code-domain:** The largest quantity or degree. MOST ERRORS. / MOST FREQUENTLY.
 > **STE:** Most errors occur at startup.
@@ -3473,6 +3799,7 @@
 ---
 
 ## MOVE (v)
+
 - **Original:** To change position. MOVE THE LEVER.
 - **Code-domain:** To transfer data or code. MOVE THE FILE TO THE ARCHIVE.
 > **STE:** Move the file to the archive.
@@ -3483,6 +3810,7 @@
 ---
 
 ## MUCH (adj), MUCH (adv)
+
 - **Original:** A large amount. NOT MUCH DAMAGE.
 - **Code-domain:** A large amount. NOT MUCH MEMORY.
 > **STE:** Not much memory usage.
@@ -3493,6 +3821,7 @@
 ---
 
 ## MUST (v)
+
 - **Original:** Verb that shows obligation or necessity. YOU MUST OBEY THE SAFETY INSTRUCTIONS.
 - **Code-domain:** Verb that shows obligation or necessity. YOU MUST VALIDATE ALL INPUTS.
 > **STE:** You must validate all inputs.
@@ -3505,6 +3834,7 @@
 # N
 
 ## NAME (n), NAME (v)
+
 - **Original:** A word that identifies a thing. THE NAME OF THE COMPONENT. / To give a name. NAME THE FILE.
 - **Code-domain:** An identifier. THE NAME OF THE FUNCTION. / To assign an identifier. NAME THE VARIABLE `count`.
 > **STE:** Name the variable `count`.
@@ -3515,6 +3845,7 @@
 ---
 
 ## NEAR (adj), NEAR (prep)
+
 - **Original:** At a short distance. THE NEAR COMPONENT. / NEAR THE DOOR.
 - **Code-domain:** At a short logical distance. THE NEAR CACHE. / NEAR THE END OF THE FILE.
 > **STE:** Near the end of the file.
@@ -3525,6 +3856,7 @@
 ---
 
 ## NECESSARY (adj)
+
 - **Original:** Needed. IT IS NECESSARY TO DO THE TEST.
 - **Code-domain:** Needed. IT IS NECESSARY TO RESTART THE SERVICE.
 > **STE:** It is necessary to restart the service.
@@ -3535,6 +3867,7 @@
 ---
 
 ## NEED (v) - UNNAPROVED
+
 - **Original:** NECESSARY (adj). IT IS NECESSARY TO CHANGE THE FILTER.
 - **Code-domain:** MUST (v), NECESSARY (adj). YOU MUST INSTALL THE DEPENDENCIES.
 > **STE:** You must install the dependencies.
@@ -3545,6 +3878,7 @@
 ---
 
 ## NEVER (adv)
+
 - **Original:** Not at any time. NEVER USE THIS TOOL WITHOUT PROTECTION.
 - **Code-domain:** Not at any time. NEVER STORE PASSWORDS IN PLAIN TEXT.
 > **STE:** Never store passwords in plain text.
@@ -3555,6 +3889,7 @@
 ---
 
 ## NEW (adj)
+
 - **Original:** Recently made. A NEW COMPONENT.
 - **Code-domain:** Recently created. A NEW INSTANCE OF THE CLASS.
 > **STE:** A new instance of the class.
@@ -3565,6 +3900,7 @@
 ---
 
 ## NEXT (adj)
+
 - **Original:** That follows immediately. THE NEXT STEP.
 - **Code-domain:** That follows immediately. THE NEXT ITERATION.
 > **STE:** The next iteration.
@@ -3575,6 +3911,7 @@
 ---
 
 ## NO (adj)
+
 - **Original:** Not any. NO DAMAGE.
 - **Code-domain:** Not any. NO ERRORS.
 > **STE:** No errors in the output.
@@ -3585,6 +3922,7 @@
 ---
 
 ## NONE (pron)
+
 - **Original:** Not one. NONE OF THE COMPONENTS ARE DAMAGED.
 - **Code-domain:** Not one. NONE OF THE TESTS FAIL.
 > **STE:** None of the tests fail.
@@ -3595,6 +3933,7 @@
 ---
 
 ## NORMAL (adj) - UNNAPROVED
+
 - **Original:** Not approved; use USUAL (adj), CORRECT (adj), SPECIFIED (adj).
 - **Code-domain:** USUAL (adj). THE USUAL BEHAVIOR IS TO RETURN ZERO.
 > **STE:** The usual behavior is to return zero.
@@ -3605,6 +3944,7 @@
 ---
 
 ## NOT (adv)
+
 - **Original:** Function word that shows negation. DO NOT USE THIS TOOL.
 - **Code-domain:** Function word that shows negation. DO NOT USE DEPRECATED FUNCTIONS.
 > **STE:** Do not use deprecated functions.
@@ -3615,6 +3955,7 @@
 ---
 
 ## NOTE (n), NOTE (v)
+
 - **Original:** A short record. MAKE A NOTE. / To write. NOTE THE VALUE.
 - **Code-domain:** An annotation. ADD A NOTE IN THE CODE. / To record. NOTE THE ERROR CODE.
 > **STE:** Add a note in the code.
@@ -3625,6 +3966,7 @@
 ---
 
 ## NULL (adj) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical adjective.
 - **Code-domain:** Having no value. THE POINTER IS NULL.
 > **STE:** The pointer is null.
@@ -3635,6 +3977,7 @@
 ---
 
 ## NUMBER (n)
+
 - **Original:** A mathematical value. THE NUMBER OF COMPONENTS.
 - **Code-domain:** A numeric value. THE NUMBER OF RECORDS.
 > **STE:** The number of records is 100.
@@ -3647,6 +3990,7 @@
 # O
 
 ## OBJECT (n) - (TN)
+
 - **Original:** A thing. Code-domain: An instance of a class.
 - **Code-domain:** An instance of a class. CREATE A NEW OBJECT OF THE USER CLASS.
 > **STE:** Create a new object of the User class.
@@ -3657,6 +4001,7 @@
 ---
 
 ## OBEY (v)
+
 - **Original:** To follow instructions. OBEY THE SAFETY INSTRUCTIONS.
 - **Code-domain:** To follow instructions. OBEY THE CODING STANDARDS.
 > **STE:** Obey the coding standards.
@@ -3667,6 +4012,7 @@
 ---
 
 ## OCCUR (v)
+
 - **Original:** To happen. AN ERROR OCCURRED DURING OPERATION.
 - **Code-domain:** To happen. AN EXCEPTION OCCURRED AT RUNTIME.
 > **STE:** An exception occurred at runtime.
@@ -3677,6 +4023,7 @@
 ---
 
 ## OF (prep)
+
 - **Original:** Function word that shows belonging or relationship. THE NAME OF THE COMPONENT.
 - **Code-domain:** Function word that shows belonging or relationship. THE NAME OF THE FUNCTION.
 > **STE:** The name of the function.
@@ -3687,6 +4034,7 @@
 ---
 
 ## OFF (adv), OFF (prep)
+
 - **Original:** Not on or not operating. TURN OFF THE POWER.
 - **Code-domain:** Not operating or disabled. TURN OFF THE FEATURE FLAG.
 > **STE:** Turn off the feature flag.
@@ -3697,6 +4045,7 @@
 ---
 
 ## ON (adv), ON (prep)
+
 - **Original:** In operation or in a position above. TURN ON THE POWER. / ON THE SURFACE.
 - **Code-domain:** In operation or applied to. TURN ON THE DEBUG MODE. / ON THE TERMINAL.
 > **STE:** Turn on the debug mode.
@@ -3707,6 +4056,7 @@
 ---
 
 ## ONLY (adv)
+
 - **Original:** And no other. ONLY THE TECHNICIAN CAN DO THIS PROCEDURE.
 - **Code-domain:** Exclusively. ONLY THE ADMIN CAN RUN THIS COMMAND.
 > **STE:** Only the admin can run this command.
@@ -3717,6 +4067,7 @@
 ---
 
 ## OPEN (v), OPEN (adj)
+
 - **Original:** To move so as to give access. OPEN THE DOOR. / Not closed. AN OPEN CONNECTION.
 - **Code-domain:** To initiate access. OPEN THE FILE. / Accessible. AN OPEN PORT.
 > **STE:** Open the file for reading.
@@ -3730,6 +4081,7 @@
 ---
 
 ## OPERATE (v)
+
 - **Original:** To control the function of. OPERATE THE SYSTEM.
 - **Code-domain:** To control or run. OPERATE THE APPLICATION.
 > **STE:** Operate the application through the CLI.
@@ -3740,6 +4092,7 @@
 ---
 
 ## OPERATION (n)
+
 - **Original:** An action or process. THE OPERATION OF THE SYSTEM.
 - **Code-domain:** An action or process. THE OPERATION OF THE REQUEST IS ASYNCHRONOUS.
 > **STE:** The operation of the request is asynchronous.
@@ -3750,6 +4103,7 @@
 ---
 
 ## OPTION (n) - UNNAPROVED
+
 - **Original:** ALTERNATIVE (n), CAN (v). YOU CAN USE AN ALTERNATIVE METHOD.
 - **Code-domain:** ALTERNATIVE (n), CAN (v). YOU CAN USE AN ALTERNATIVE CONFIGURATION.
 > **STE:** You can use an alternative configuration.
@@ -3760,6 +4114,7 @@
 ---
 
 ## OR (conj)
+
 - **Original:** Function word that shows alternatives. USE TOOL A OR TOOL B.
 - **Code-domain:** Function word that shows alternatives. USE PYTHON OR NODE.JS.
 > **STE:** Use Python or Node.js.
@@ -3770,6 +4125,7 @@
 ---
 
 ## ORDER (n)
+
 - **Original:** A sequence. IN THE CORRECT ORDER.
 - **Code-domain:** A sequence. EXECUTE THE STEPS IN THE GIVEN ORDER.
 > **STE:** Execute the steps in the given order.
@@ -3780,6 +4136,7 @@
 ---
 
 ## OTHER (adj)
+
 - **Original:** Different from the one specified. THE OTHER COMPONENT.
 - **Code-domain:** Different from the one specified. THE OTHER ENDPOINT.
 > **STE:** The other endpoint returns JSON.
@@ -3790,6 +4147,7 @@
 ---
 
 ## OUTPUT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** Data produced by a program. THE OUTPUT OF THE COMMAND IS A LIST.
 > **STE:** The output of the command is a list.
@@ -3800,6 +4158,7 @@
 ---
 
 ## OVER (prep) - UNNAPROVED
+
 - **Original:** MORE THAN, ABOVE, ON. MORE THAN THE LIMIT.
 - **Code-domain:** MORE THAN, ABOVE. MORE THAN THE THRESHOLD.
 > **STE:** More than the threshold.
@@ -3810,6 +4169,7 @@
 ---
 
 ## OVERRIDE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To replace a method in a subclass. OVERRIDE THE DEFAULT BEHAVIOR.
 > **STE:** Override the default behavior in the subclass.
@@ -3822,6 +4182,7 @@
 # P
 
 ## PACKAGE (n) - (TN)
+
 - **Original:** A bundle. Code-domain: A distributable unit of software.
 - **Code-domain:** A distributable unit of software. INSTALL THE PACKAGE WITH PIP.
 > **STE:** Install the package with pip.
@@ -3832,6 +4193,7 @@
 ---
 
 ## PAGE (n)
+
 - **Original:** A sheet. A PAGE OF THE MANUAL.
 - **Code-domain:** A view or screen. THE LANDING PAGE OF THE APPLICATION.
 > **STE:** The landing page of the application.
@@ -3842,6 +4204,7 @@
 ---
 
 ## PARAMETER (n) - (TN)
+
 - **Original:** A defining characteristic. Code-domain: A variable in a function signature.
 - **Code-domain:** A variable passed to a function. THE FUNCTION TAKES TWO PARAMETERS.
 > **STE:** The function takes two parameters.
@@ -3852,6 +4215,7 @@
 ---
 
 ## PART (n)
+
 - **Original:** A piece of a whole. A PART OF THE UNIT.
 - **Code-domain:** A section. A PART OF THE DOCUMENTATION.
 > **STE:** A part of the documentation.
@@ -3862,6 +4226,7 @@
 ---
 
 ## PASS (v)
+
 - **Original:** To go past or succeed. PASS THE TOOL THROUGH THE HOLE.
 - **Code-domain:** To succeed in a test. THE TEST PASSES.
 > **STE:** The test passes.
@@ -3872,6 +4237,7 @@
 ---
 
 ## PASTE (v)
+
 - **Original:** Not in original STE (adhesive). Code-domain: To insert copied data.
 - **Code-domain:** To insert copied content. PASTE THE TEXT INTO THE EDITOR.
 > **STE:** Paste the text into the editor.
@@ -3882,6 +4248,7 @@
 ---
 
 ## PATH (n) - (TN)
+
 - **Original:** A route. Code-domain: A filesystem location.
 - **Code-domain:** A filesystem location. THE PATH TO THE CONFIG FILE.
 > **STE:** The path to the config file is `/etc/app/`.
@@ -3892,6 +4259,7 @@
 ---
 
 ## PATTERN (n) - (TN)
+
 - **Original:** A repeated design. Code-domain: A regex or design pattern.
 - **Code-domain:** A reusable design or matching expression. THE REGEX PATTERN MATCHES THE INPUT.
 > **STE:** The regex pattern matches the input.
@@ -3902,6 +4270,7 @@
 ---
 
 ## PERFORM (v) - UNNAPROVED
+
 - **Original:** DO (v). DO THE TEST.
 - **Code-domain:** DO (v). DO THE BUILD.
 > **STE:** Do the build.
@@ -3912,6 +4281,7 @@
 ---
 
 ## PERFORMANCE (n)
+
 - **Original:** How well something operates. THE PERFORMANCE OF THE ENGINE.
 - **Code-domain:** How well software runs. THE PERFORMANCE OF THE QUERY.
 > **STE:** The performance of the query is good.
@@ -3922,6 +4292,7 @@
 ---
 
 ## PERMANENT (adj)
+
 - **Original:** Lasting, not temporary. A PERMANENT MARK.
 - **Code-domain:** Not temporary or volatile. PERMANENT STORAGE.
 > **STE:** Write the data to permanent storage.
@@ -3932,6 +4303,7 @@
 ---
 
 ## PERMIT (v) - UNNAPROVED
+
 - **Original:** LET (v), ALLOW (v). THE RULES LET YOU USE THIS TOOL.
 - **Code-domain:** LET (v), ALLOW (v). THE API LETS YOU SEND 100 REQUESTS PER MINUTE.
 > **STE:** The API lets you send 100 requests per minute.
@@ -3942,6 +4314,7 @@
 ---
 
 ## PERSON (n)
+
 - **Original:** A human being. ONLY ONE PERSON CAN DO THIS TASK.
 - **Code-domain:** A human being (for user-facing docs). ONLY ONE PERSON CAN ACCESS THE ACCOUNT.
 > **STE:** Only one person can access the account.
@@ -3952,6 +4325,7 @@
 ---
 
 ## PIPE (n) - (TN)
+
 - **Original:** A tube. Code-domain: A data channel.
 - **Code-domain:** A data channel or streaming operator. PIPES CONNECT THE COMMANDS.
 > **STE:** Use a pipe to connect the commands.
@@ -3962,6 +4336,7 @@
 ---
 
 ## PLACE (n), PLACE (v)
+
 - **Original:** A location. THE PLACE OF INSTALLATION. / To put. PLACE THE COMPONENT IN THE RACK.
 - **Code-domain:** A location. THE PLACE IN THE CODE. / To insert. PLACE THE HOOK IN THE LIFECYCLE.
 > **STE:** Place the hook in the lifecycle at the right position.
@@ -3972,6 +4347,7 @@
 ---
 
 ## PLUS (prep)
+
 - **Original:** With the addition of. 3 PLUS 4 IS 7.
 - **Code-domain:** Mathematical addition. THE TOTAL IS THE BASE PLUS THE OVERHEAD.
 > **STE:** The total is the base plus the overhead.
@@ -3982,6 +4358,7 @@
 ---
 
 ## POINT (n)
+
 - **Original:** A location or stage. THE POINT OF FAILURE.
 - **Code-domain:** A location or stage. THE ENTRY POINT OF THE APPLICATION.
 > **STE:** The entry point of the application is `main()`.
@@ -3992,6 +4369,7 @@
 ---
 
 ## PORT (n) - (TN)
+
 - **Original:** A harbor. Code-domain: A network endpoint.
 - **Code-domain:** A network communication endpoint. THE APPLICATION LISTENS ON PORT 8080.
 > **STE:** The application listens on port 8080.
@@ -4002,6 +4380,7 @@
 ---
 
 ## POSITION (n)
+
 - **Original:** The location of something. THE POSITION OF THE LEVER.
 - **Code-domain:** A location or placement. THE POSITION OF THE ELEMENT IN THE ARRAY.
 > **STE:** The position of the element in the array is 0.
@@ -4012,6 +4391,7 @@
 ---
 
 ## POSSIBLE (adj)
+
 - **Original:** That can occur. A POSSIBLE CAUSE.
 - **Code-domain:** That can occur. A POSSIBLE SOLUTION.
 > **STE:** A possible solution is to increase the timeout.
@@ -4022,6 +4402,7 @@
 ---
 
 ## POWER (n)
+
 - **Original:** Energy or electricity. THE ELECTRICAL POWER.
 - **Code-domain:** Computing resources. THE PROCESSING POWER OF THE SERVER.
 > **STE:** The processing power of the server is sufficient.
@@ -4032,6 +4413,7 @@
 ---
 
 ## PREPARE (v)
+
 - **Original:** To make ready. PREPARE THE SURFACE.
 - **Code-domain:** To make ready. PREPARE THE ENVIRONMENT FOR DEPLOYMENT.
 > **STE:** Prepare the environment for deployment.
@@ -4042,6 +4424,7 @@
 ---
 
 ## PREVENT (v)
+
 - **Original:** To stop from occurring. PREVENT ACCIDENTS.
 - **Code-domain:** To stop from occurring. PREVENT SQL INJECTION.
 > **STE:** Use parameterized queries to prevent SQL injection.
@@ -4052,6 +4435,7 @@
 ---
 
 ## PREVIOUS (adj)
+
 - **Original:** That came before. THE PREVIOUS STEP.
 - **Code-domain:** That came before. THE PREVIOUS VERSION.
 > **STE:** The previous version had a bug.
@@ -4062,6 +4446,7 @@
 ---
 
 ## PRIMARY (adj)
+
 - **Original:** Most important. THE PRIMARY CAUSE.
 - **Code-domain:** Most important or main. THE PRIMARY KEY OF THE TABLE.
 > **STE:** The primary key of the table is the `id` field.
@@ -4072,6 +4457,7 @@
 ---
 
 ## PROBLEM (n)
+
 - **Original:** A difficulty. FIND THE CAUSE OF THE PROBLEM.
 - **Code-domain:** A difficulty or defect. IDENTIFY THE ROOT CAUSE OF THE PROBLEM.
 > **STE:** Identify the root cause of the problem.
@@ -4082,6 +4468,7 @@
 ---
 
 ## PROCEDURE (n)
+
 - **Original:** A set of steps. DO THE PROCEDURE.
 - **Code-domain:** A set of steps. DO THE DEPLOYMENT PROCEDURE.
 > **STE:** Do the deployment procedure.
@@ -4092,6 +4479,7 @@
 ---
 
 ## PROCESS (n), PROCESS (v) - UNNAPROVED
+
 - **Original:** A series of actions. THE INSTALLATION PROCESS. / Not approved as verb; use a specific verb.
 - **Code-domain:** A running program. THE PROCESS PID IS 1234. / To handle. PROCESS THE REQUEST. (TV)
 > **STE:** Process the request synchronously.
@@ -4104,6 +4492,7 @@
 ---
 
 ## PROVIDE (v) - UNNAPROVED
+
 - **Original:** GIVE (v), SUPPLY (v). GIVE THE INFORMATION.
 - **Code-domain:** GIVE (v), RETURN (v). RETURN THE RESULT.
 > **STE:** The function returns the result.
@@ -4114,6 +4503,7 @@
 ---
 
 ## PULL (v)
+
 - **Original:** To apply force to move toward. PULL THE LEVER.
 - **Code-domain:** To fetch or retrieve. PULL THE LATEST CHANGES FROM THE REPOSITORY.
 > **STE:** Pull the latest changes from the repository.
@@ -4124,6 +4514,7 @@
 ---
 
 ## PUSH (v)
+
 - **Original:** To apply force to move away. PUSH THE BUTTON.
 - **Code-domain:** To send or upload. PUSH THE COMMIT TO THE REMOTE.
 > **STE:** Push the commit to the remote.
@@ -4134,6 +4525,7 @@
 ---
 
 ## PUT (v)
+
 - **Original:** To place. PUT THE COMPONENT IN THE CONTAINER.
 - **Code-domain:** To place or set. PUT THE VALUE IN THE VARIABLE.
 > **STE:** Put the value in the variable.
@@ -4146,6 +4538,7 @@
 # Q
 
 ## QUALITY (n)
+
 - **Original:** The standard of something. THE QUALITY OF THE MATERIAL.
 - **Code-domain:** The standard of code. CODE QUALITY IS IMPORTANT.
 > **STE:** Code quality is important.
@@ -4156,6 +4549,7 @@
 ---
 
 ## QUANTITY (n)
+
 - **Original:** An amount. A LARGE QUANTITY.
 - **Code-domain:** An amount. A QUANTITY OF DATA.
 > **STE:** A large quantity of data.
@@ -4166,6 +4560,7 @@
 ---
 
 ## QUERY (n) - (TN)
+
 - **Original:** A question. Code-domain: A database request.
 - **Code-domain:** A request to a database. THE QUERY RETURNS 10 ROWS.
 > **STE:** The query returns 10 rows.
@@ -4176,6 +4571,7 @@
 ---
 
 ## QUICK (adj), QUICKLY (adv)
+
 - **Original:** At high speed. QUICK MOVEMENT. / MOVE QUICKLY.
 - **Code-domain:** Fast. QUICK RESPONSE. / PROCESS THE REQUEST QUICKLY.
 > **STE:** Process the request quickly.
@@ -4188,6 +4584,7 @@
 # R
 
 ## RAISE (v)
+
 - **Original:** To lift. RAISE THE COMPONENT.
 - **Code-domain:** To throw or increase. RAISE AN EXCEPTION. / RAISE THE LOG LEVEL.
 > **STE:** Raise an exception when the value is null.
@@ -4198,6 +4595,7 @@
 ---
 
 ## RANGE (n)
+
 - **Original:** The area between limits. THE TEMPERATURE RANGE.
 - **Code-domain:** A span of values. THE PORT RANGE IS 8000-8080.
 > **STE:** The port range is 8000-8080.
@@ -4208,6 +4606,7 @@
 ---
 
 ## READ (v)
+
 - **Original:** To look at and understand. READ THE INSTRUCTIONS.
 - **Code-domain:** To access data from storage. READ THE FILE FROM DISK.
 > **STE:** Read the file from disk.
@@ -4218,6 +4617,7 @@
 ---
 
 ## READY (adj)
+
 - **Original:** Prepared for use. THE UNIT IS READY.
 - **Code-domain:** Prepared for use. THE BUILD IS READY FOR DEPLOYMENT.
 > **STE:** The build is ready for deployment.
@@ -4228,6 +4628,7 @@
 ---
 
 ## RECEIVE (v)
+
 - **Original:** To get. RECEIVE THE DATA.
 - **Code-domain:** To accept incoming data. RECEIVE THE HTTP RESPONSE.
 > **STE:** Receive the HTTP response.
@@ -4238,6 +4639,7 @@
 ---
 
 ## RECOMMEND (v)
+
 - **Original:** To suggest as good. THE MANUFACTURER RECOMMENDS THIS PROCEDURE.
 - **Code-domain:** To suggest. THE STYLE GUIDE RECOMMENDS THIS FORMAT.
 > **STE:** The style guide recommends this format.
@@ -4248,6 +4650,7 @@
 ---
 
 ## RECORD (v)
+
 - **Original:** To write down. RECORD THE VALUE.
 - **Code-domain:** To log or persist. RECORD THE ERROR IN THE LOG.
 > **STE:** Record the error in the log.
@@ -4258,6 +4661,7 @@
 ---
 
 ## REDUCE (v) - UNNAPROVED
+
 - **Original:** DECREASE (v). DECREASE THE PRESSURE.
 - **Code-domain:** DECREASE (v). DECREASE THE MEMORY USAGE.
 > **STE:** Decrease the memory usage.
@@ -4268,6 +4672,7 @@
 ---
 
 ## REFER (v)
+
 - **Original:** To direct attention to. REFER TO THE MANUAL.
 - **Code-domain:** To reference. REFER TO THE API DOCUMENTATION.
 > **STE:** Refer to the API documentation for details.
@@ -4278,6 +4683,7 @@
 ---
 
 ## REFRESH (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To reload or update. REFRESH THE PAGE TO SEE THE CHANGES.
 > **STE:** Refresh the page to see the changes.
@@ -4288,6 +4694,7 @@
 ---
 
 ## REJECT (v)
+
 - **Original:** To refuse to accept. REJECT THE COMPONENT.
 - **Code-domain:** To refuse a request or input. REJECT THE COMMIT IF TESTS FAIL.
 > **STE:** Reject the commit if tests fail.
@@ -4298,6 +4705,7 @@
 ---
 
 ## RELEASE (v)
+
 - **Original:** To let go. RELEASE THE LATCH.
 - **Code-domain:** To publish or free. RELEASE THE NEW VERSION. / RELEASE THE MEMORY.
 > **STE:** Release the new version to production.
@@ -4311,6 +4719,7 @@
 ---
 
 ## REMAINING (adj)
+
 - **Original:** Left over. THE REMAINING TIME.
 - **Code-domain:** Left over. THE REMAINING WARNINGS.
 > **STE:** Fix the remaining warnings.
@@ -4321,6 +4730,7 @@
 ---
 
 ## REMOVE (v)
+
 - **Original:** To take away. REMOVE THE OLD FILTER.
 - **Code-domain:** To delete or uninstall. REMOVE THE DEPRECATED FUNCTION.
 > **STE:** Remove the deprecated function.
@@ -4331,6 +4741,7 @@
 ---
 
 ## REPAIR (v)
+
 - **Original:** To fix. REPAIR THE DAMAGED PART.
 - **Code-domain:** To fix. REPAIR THE BROKEN BUILD.
 > **STE:** Repair the broken build.
@@ -4341,6 +4752,7 @@
 ---
 
 ## REPEAT (v)
+
 - **Original:** To do again. REPEAT THE TEST.
 - **Code-domain:** To loop or do again. REPEAT THE OPERATION FOR EACH ITEM.
 > **STE:** Repeat the operation for each item.
@@ -4351,6 +4763,7 @@
 ---
 
 ## REPLACE (v)
+
 - **Original:** To put a new thing in place of the old. REPLACE THE FILTER.
 - **Code-domain:** To substitute. REPLACE THE OLD LIBRARY WITH THE NEW ONE.
 > **STE:** Replace the old library with the new one.
@@ -4361,6 +4774,7 @@
 ---
 
 ## REPORT (n), REPORT (v) - (TN/TV)
+
 - **Original:** An account. GENERATE A REPORT. / To tell. REPORT THE ERROR.
 - **Code-domain:** A summary. GENERATE A COVERAGE REPORT. / To notify. REPORT THE BUG.
 > **STE:** Report the bug in the issue tracker.
@@ -4371,6 +4785,7 @@
 ---
 
 ## REQUEST (n), REQUEST (v) - (TN/TV)
+
 - **Original:** An act of asking. Code-domain: An HTTP or programmatic request.
 - **Code-domain:** A call to a service. THE HTTP REQUEST RETURNS 200 OK.
 > **STE:** The HTTP request returns 200 OK.
@@ -4381,6 +4796,7 @@
 ---
 
 ## REQUIRE (v) - UNNAPROVED
+
 - **Original:** MUST (v), NECESSARY (adj). YOU MUST USE THE CORRECT TOOL.
 - **Code-domain:** MUST (v). YOU MUST INSTALL NODE.JS.
 > **STE:** You must install Node.js.
@@ -4391,6 +4807,7 @@
 ---
 
 ## RESOURCE (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A system asset (memory, CPU, file handle). FREE THE RESOURCES AFTER USE.
 > **STE:** Free the resources after use.
@@ -4401,6 +4818,7 @@
 ---
 
 ## RESPONSE (n) - (TN)
+
 - **Original:** An answer. Code-domain: An HTTP or API response.
 - **Code-domain:** Data returned by a service. THE RESPONSE CONTAINS THE USER DATA.
 > **STE:** The response contains the user data.
@@ -4411,6 +4829,7 @@
 ---
 
 ## RESTART (v)
+
 - **Original:** To start again. RESTART THE ENGINE.
 - **Code-domain:** To start again. RESTART THE SERVICE.
 > **STE:** Restart the service.
@@ -4421,6 +4840,7 @@
 ---
 
 ## RESULT (n)
+
 - **Original:** The outcome. THE RESULT OF THE TEST.
 - **Code-domain:** The output. THE RESULT OF THE QUERY.
 > **STE:** The result of the query is an empty set.
@@ -4431,6 +4851,7 @@
 ---
 
 ## RETRY (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To attempt again. RETRY THE REQUEST AFTER 5 SECONDS.
 > **STE:** Retry the request after 5 seconds.
@@ -4441,6 +4862,7 @@
 ---
 
 ## RETURN (v)
+
 - **Original:** To go or give back. RETURN THE TOOL TO THE STORE.
 - **Code-domain:** To send a value back from a function. RETURN THE RESULT.
 > **STE:** The function returns the computed value.
@@ -4451,6 +4873,7 @@
 ---
 
 ## REVIEW (n) - UNNAPROVED
+
 - **Original:** EXAMINE (v). EXAMINE THE DOCUMENT AGAIN.
 - **Code-domain:** EXAMINE (v). EXAMINE THE CODE FOR ISSUES.
 > **STE:** Examine the code for issues.
@@ -4463,6 +4886,7 @@
 ---
 
 ## RIGHT (adj), RIGHT (adv)
+
 - **Original:** Correct. THE RIGHT VALUE. / In a direction opposite to left. MOVE THE LEVER RIGHT.
 - **Code-domain:** Correct. THE RIGHT SOLUTION. / Right-side. ALIGN THE TEXT RIGHT.
 > **STE:** Align the text right.
@@ -4473,6 +4897,7 @@
 ---
 
 ## RISK (n)
+
 - **Original:** The possibility of a bad result. THE RISK OF FIRE.
 - **Code-domain:** The possibility of a bad result. THE RISK OF DATA LOSS.
 > **STE:** The risk of data loss is small.
@@ -4483,6 +4908,7 @@
 ---
 
 ## ROOT (n) - (TN)
+
 - **Original:** The part of a plant underground. Code-domain: The base of a hierarchy.
 - **Code-domain:** The base directory or top-level access. THE ROOT OF THE PROJECT.
 > **STE:** The config file is in the root of the project.
@@ -4496,6 +4922,7 @@
 ---
 
 ## ROUTE (n) - (TN)
+
 - **Original:** A way. Code-domain: A URL pattern in a web framework.
 - **Code-domain:** A URL endpoint mapping. THE ROUTE `/users` RETURNS THE USER LIST.
 > **STE:** The route `/users` returns the user list.
@@ -4506,6 +4933,7 @@
 ---
 
 ## RULE (n)
+
 - **Original:** A regulation. THE RULES OF THE STANDARD.
 - **Code-domain:** A regulation or validation condition. THE VALIDATION RULE CHECKS THE EMAIL FORMAT.
 > **STE:** The validation rule checks the email format.
@@ -4516,6 +4944,7 @@
 ---
 
 ## RUN (v)
+
 - **Original:** To operate or move fast. RUN THE ENGINE.
 - **Code-domain:** To execute. RUN THE SCRIPT FROM THE TERMINAL.
 > **STE:** Run the script from the terminal.
@@ -4528,6 +4957,7 @@
 # S
 
 ## SAFE (adj), SAFETY (n)
+
 - **Original:** Not dangerous. A SAFE PROCEDURE. / Freedom from danger. FOR YOUR SAFETY, WEAR GOGGLES.
 - **Code-domain:** Secure, not risky. A SAFE DEFAULT. / Security. FOR DATA SAFETY, ENCRYPT THE BACKUP.
 > **STE:** A safe default value prevents crashes.
@@ -4541,6 +4971,7 @@
 ---
 
 ## SAME (adj)
+
 - **Original:** Not different. THE SAME TYPE.
 - **Code-domain:** Not different. THE SAME RESULT.
 > **STE:** The two functions return the same result.
@@ -4551,6 +4982,7 @@
 ---
 
 ## SAMPLE (n)
+
 - **Original:** A small part that shows the quality. A SAMPLE OF THE MATERIAL.
 - **Code-domain:** An example or specimen. A CODE SAMPLE.
 > **STE:** A code sample is in the `examples/` directory.
@@ -4561,6 +4993,7 @@
 ---
 
 ## SAVE (v)
+
 - **Original:** To keep for later use. SAVE THE DATA.
 - **Code-domain:** To persist data. SAVE THE FILE TO DISK.
 > **STE:** Save the file to disk.
@@ -4571,6 +5004,7 @@
 ---
 
 ## SCHEDULE (v)
+
 - **Original:** To plan at a time. SCHEDULE THE MAINTENANCE.
 - **Code-domain:** To plan execution. SCHEDULE THE JOB TO RUN DAILY.
 > **STE:** Schedule the job to run daily.
@@ -4581,6 +5015,7 @@
 ---
 
 ## SEARCH (v) - (TV)
+
 - **Original:** To look for. SEARCH THE AREA.
 - **Code-domain:** To look for data. SEARCH THE LOGS FOR ERROR MESSAGES.
 > **STE:** Search the logs for error messages.
@@ -4591,6 +5026,7 @@
 ---
 
 ## SECTION (n)
+
 - **Original:** A part. A SECTION OF THE MANUAL.
 - **Code-domain:** A part of a document or code. REFER TO THE SECURITY SECTION.
 > **STE:** Refer to the Security section of the README.
@@ -4601,6 +5037,7 @@
 ---
 
 ## SEE (v)
+
 - **Original:** To perceive with eyes. SEE THE INDICATOR.
 - **Code-domain:** To reference. SEE THE DOCUMENTATION.
 > **STE:** See the documentation for details.
@@ -4611,6 +5048,7 @@
 ---
 
 ## SELECT (v)
+
 - **Original:** To choose. SELECT THE CORRECT TOOL.
 - **Code-domain:** To choose or query. SELECT THE DATABASE FROM THE LIST. / SELECT RECORDS FROM THE TABLE.
 > **STE:** Select the database from the list.
@@ -4623,6 +5061,7 @@
 ---
 
 ## SEND (v)
+
 - **Original:** To cause to go. SEND THE DATA.
 - **Code-domain:** To transmit. SEND THE REQUEST TO THE SERVER.
 > **STE:** Send the request to the server.
@@ -4633,6 +5072,7 @@
 ---
 
 ## SEPARATE (adj) - UNNAPROVED
+
 - **Original:** ISOLATED (adj), DIFFERENT (adj), NOT CONNECTED, NOT ATTACHED.
 - **Code-domain:** ISOLATED (adj), DIFFERENT (adj), NOT CONNECTED. KEEP THE MODULES ISOLATED.
 > **STE:** Keep the modules isolated from each other.
@@ -4643,6 +5083,7 @@
 ---
 
 ## SEQUENCE (n)
+
 - **Original:** The relation of items that follow one after the other. TIGHTEN THE BOLTS IN THE SEQUENCE THAT IS GIVEN IN FIGURE 3.
 - **Code-domain:** An ordered series. EXECUTE THE STEPS IN THE GIVEN SEQUENCE.
 > **STE:** Execute the steps in the given sequence.
@@ -4653,6 +5094,7 @@
 ---
 
 ## SERVER (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A computer that provides services. THE SERVER LISTENS ON PORT 443.
 > **STE:** The server listens on port 443.
@@ -4663,6 +5105,7 @@
 ---
 
 ## SERVICE (n) - (TN)
+
 - **Original:** A utility. Code-domain: A background process or API.
 - **Code-domain:** A running application. THE AUTHENTICATION SERVICE IS DOWN.
 > **STE:** The authentication service is down.
@@ -4673,6 +5116,7 @@
 ---
 
 ## SET (n), SET (v)
+
 - **Original:** A group of items. A SET OF TOOLS. / To put into a condition. SET THE SWITCH TO ON.
 - **Code-domain:** A collection. A SET OF CONFIG VALUES. / To assign. SET THE VARIABLE TO 10.
 > **STE:** Set the variable to 10.
@@ -4683,6 +5127,7 @@
 ---
 
 ## SHORT (adj)
+
 - **Original:** Having small length or duration. A SHORT CABLE. / A SHORT TIME.
 - **Code-domain:** Having small length or duration. A SHORT DESCRIPTION. / A SHORT TIMEOUT.
 > **STE:** A short timeout of 1 second.
@@ -4693,6 +5138,7 @@
 ---
 
 ## SHOW (v)
+
 - **Original:** To cause to be seen. THE INDICATOR SHOWS THE VALUE.
 - **Code-domain:** To display. THE COMMAND SHOWS THE FILE CONTENTS.
 > **STE:** The command shows the file contents.
@@ -4703,6 +5149,7 @@
 ---
 
 ## SHUT DOWN (v) - UNNAPROVED
+
 - **Original:** STOP (v). STOP THE ENGINE.
 - **Code-domain:** STOP (v). STOP THE SERVER.
 > **STE:** Stop the server.
@@ -4713,6 +5160,7 @@
 ---
 
 ## SIGNAL (n) - (TN)
+
 - **Original:** A sign. Code-domain: An operating system notification.
 - **Code-domain:** An OS-level notification. SEND A SIGTERM SIGNAL TO THE PROCESS.
 > **STE:** Send a SIGTERM signal to the process.
@@ -4723,6 +5171,7 @@
 ---
 
 ## SIMPLE (adj)
+
 - **Original:** Not complex. A SIMPLE PROCEDURE.
 - **Code-domain:** Not complex. A SIMPLE FUNCTION.
 > **STE:** A simple function with one responsibility.
@@ -4733,6 +5182,7 @@
 ---
 
 ## SINGLE (adj)
+
 - **Original:** One only. A SINGLE COMPONENT.
 - **Code-domain:** One only. A SINGLE INSTANCE.
 > **STE:** A single instance of the application.
@@ -4743,6 +5193,7 @@
 ---
 
 ## SIZE (n)
+
 - **Original:** How large something is. THE SIZE OF THE CONTAINER.
 - **Code-domain:** How large something is. THE SIZE OF THE FILE.
 > **STE:** The size of the file is 2 MB.
@@ -4753,6 +5204,7 @@
 ---
 
 ## SLOW (adj), SLOWLY (adv)
+
 - **Original:** At low speed. SLOW MOVEMENT. / In a slow manner. TURN THE KNOB SLOWLY.
 - **Code-domain:** At low speed. SLOW RESPONSE. / Gradually. INCREASE THE VALUE SLOWLY.
 > **STE:** Slowly increase the timeout value.
@@ -4763,6 +5215,7 @@
 ---
 
 ## SMALL (adj)
+
 - **Original:** Less than average in dimension, quantity, quality, or capacity. IF THE TEMPERATURE INCREASES SUDDENLY, ADD A SMALL QUANTITY OF REAGENT.
 - **Code-domain:** Less than average. A SMALL AMOUNT OF MEMORY.
 > **STE:** A small amount of memory is allocated.
@@ -4773,6 +5226,7 @@
 ---
 
 ## SOCKET (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A network communication endpoint. OPEN A SOCKET ON PORT 3000.
 > **STE:** Open a socket on port 3000.
@@ -4783,6 +5237,7 @@
 ---
 
 ## SOLUTION (n)
+
 - **Original:** 1. A liquid with dissolved material. PREPARE THE SOLUTION. 2. The answer to a problem. THE TEAM'S WORK WAS IMPORTANT FOR THE SOLUTION OF THE TECHNICAL PROBLEM.
 - **Code-domain:** 1. Not applicable. 2. A resolution. THE SOLUTION TO THE MEMORY LEAK IS TO USE WEAK REFERENCES.
 > **STE:** The solution to the memory leak is to use weak references.
@@ -4793,6 +5248,7 @@
 ---
 
 ## SOME (adj), SOME (pron)
+
 - **Original:** Related to a quantity not specified. SOME MODELS DO NOT HAVE THIS FUNCTION.
 - **Code-domain:** An unspecified number. SOME TESTS FAIL UNDER LOAD.
 > **STE:** Some tests fail under load.
@@ -4803,6 +5259,7 @@
 ---
 
 ## SOURCE (n)
+
 - **Original:** 1. Something that supplies energy or data. THE SOLAR PANEL IS A SATISFACTORY SOURCE OF ENERGY. 2. The point where something starts. FIND THE SOURCE OF THE LEAKAGE.
 - **Code-domain:** 1. Origin of data. THE DATABASE IS THE SOURCE OF TRUTH. 2. Point of origin. FIND THE SOURCE OF THE BUG.
 > **STE:** Find the source of the bug.
@@ -4813,6 +5270,7 @@
 ---
 
 ## SPACE (n)
+
 - **Original:** A distance, area, or volume. PUT THE SEALANT INTO THE SPACE BEHIND THE FLANGE.
 - **Code-domain:** Disk or memory capacity. MAKE SURE THAT THERE IS SUFFICIENT DISK SPACE.
 > **STE:** Make sure that there is sufficient disk space.
@@ -4823,6 +5281,7 @@
 ---
 
 ## SPECIAL (adj), SPECIALLY (adv)
+
 - **Original:** For a specified function. TIGHTEN THE SPECIAL NUT. / In a special manner. THIS EXTRACTOR IS SPECIALLY MADE.
 - **Code-domain:** Purpose-specific. USE THE SPECIAL CONFIG FOR STAGING.
 > **STE:** Use the special config for staging.
@@ -4833,6 +5292,7 @@
 ---
 
 ## SPECIFIED (adj)
+
 - **Original:** Given in, identified in, or related to a specification. INFLATE THE TIRE WITH NITROGEN TO THE SPECIFIED PRESSURE.
 - **Code-domain:** Given in a specification or document. USE THE SPECIFIED PORT NUMBER.
 > **STE:** Use the specified port number from the config.
@@ -4843,6 +5303,7 @@
 ---
 
 ## SPEED (n)
+
 - **Original:** The rate of movement. THE MAXIMUM PERMITTED SPEED IS 30 MPH.
 - **Code-domain:** The rate of processing. THE SPEED OF THE QUERY IS FAST.
 > **STE:** The speed of the query is fast.
@@ -4853,6 +5314,7 @@
 ---
 
 ## STACK (n) - (TN)
+
 - **Original:** A pile. Code-domain: A LIFO data structure or technology stack.
 - **Code-domain:** A LIFO data structure. PUSH THE VALUE ONTO THE STACK.
 > **STE:** Push the value onto the stack.
@@ -4863,6 +5325,7 @@
 ---
 
 ## STAGE (n) - UNNAPROVED
+
 - **Original:** STEP (n). DURING THIS STEP, DO NOT REMOVE THE PIN.
 - **Code-domain:** STEP (n). DURING THIS STEP, DO NOT MERGE THE BRANCH.
 > **STE:** During this step, do not merge the branch.
@@ -4875,6 +5338,7 @@
 ---
 
 ## STANDARD (adj)
+
 - **Original:** Related to equipment and procedures that are normally used. IN THIS PROCEDURE, USE STANDARD TOOLS.
 - **Code-domain:** Conforming to norms. FOLLOW THE STANDARD CODING CONVENTIONS.
 > **STE:** Follow the standard coding conventions.
@@ -4885,6 +5349,7 @@
 ---
 
 ## START (n), START (v)
+
 - **Original:** The beginning. MOVEMENT CAN BE SLOW AT THE START. / To begin. START THE ENGINE.
 - **Code-domain:** To begin. START THE APPLICATION.
 > **STE:** Start the application.
@@ -4895,6 +5360,7 @@
 ---
 
 ## STATE (n) - UNNAPROVED
+
 - **Original:** CONDITION (n). EXAMINE THE CONDITION OF THE UNIT.
 - **Code-domain:** CONDITION (n). EXAMINE THE CONDITION OF THE SYSTEM.
 > **STE:** Examine the condition of the system.
@@ -4907,6 +5373,7 @@
 ---
 
 ## STATUS (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** The current condition. THE STATUS OF THE SERVICE IS "HEALTHY."
 > **STE:** The status of the service is "healthy."
@@ -4917,6 +5384,7 @@
 ---
 
 ## STAY (v)
+
 - **Original:** To continue to be in a location or condition. MAKE SURE THAT THE ASSEMBLED PARTS STAY ALIGNED. No other verb forms.
 - **Code-domain:** To remain. MAKE SURE THAT THE CONNECTION STAYS OPEN.
 > **STE:** Make sure that the connection stays open.
@@ -4927,6 +5395,7 @@
 ---
 
 ## STEP (n)
+
 - **Original:** A specified part of a procedure. DO STEPS 13 THRU 16 A MINIMUM OF THREE TIMES.
 - **Code-domain:** A specified part of a procedure. DO STEPS 1 THRU 5 IN THE GIVEN ORDER.
 > **STE:** Do steps 1 through 5 in the given order.
@@ -4937,6 +5406,7 @@
 ---
 
 ## STOP (v)
+
 - **Original:** 1. To cause the end of a procedure, movement, or operation. STOP THE ENGINE. 2. To come to an end. WHEN THE FLOW STOPS, REMOVE THE DRAIN HOSE.
 - **Code-domain:** 1. To terminate. STOP THE PROCESS. 2. To halt. WHEN THE ERRORS STOP, CHECK THE LOGS.
 > **STE:** Stop the process.
@@ -4950,6 +5420,7 @@
 ---
 
 ## STORE (v) - UNNAPROVED
+
 - **Original:** KEEP (v), CONTAIN (v). KEEP THE CARTRIDGES IN A SAFETY AREA.
 - **Code-domain:** KEEP (v), SAVE (v). KEEP THE CONFIG FILES IN VERSION CONTROL.
 > **STE:** Keep the config files in version control.
@@ -4962,6 +5433,7 @@
 ---
 
 ## STREAM (n) - (TN)
+
 - **Original:** A flow of liquid. Code-domain: A sequence of data.
 - **Code-domain:** A continuous flow of data. PROCESS THE DATA AS A STREAM.
 > **STE:** Process the data as a stream.
@@ -4972,6 +5444,7 @@
 ---
 
 ## STRING (n) - (TN)
+
 - **Original:** A cord. Code-domain: A sequence of characters.
 - **Code-domain:** A sequence of characters. THE RESPONSE RETURNS A JSON STRING.
 > **STE:** The response returns a JSON string.
@@ -4982,6 +5455,7 @@
 ---
 
 ## STRONG (adj)
+
 - **Original:** With much strength, power, or concentration. WHEN WINDS ARE STRONG, MOOR THE AIRCRAFT CAREFULLY.
 - **Code-domain:** Robust, high-entropy. USE A STRONG PASSWORD.
 > **STE:** Use a strong password.
@@ -4992,6 +5466,7 @@
 ---
 
 ## STRUCTURE (n)
+
 - **Original:** 1. A construction. ATTACH THE WIRES TO THE STRUCTURE. 2. The arrangement of something. THE INTRODUCTION GIVES YOU THE STRUCTURE OF THE MAINTENANCE MANUAL.
 - **Code-domain:** 1. A data organization. DEFINE THE DATA STRUCTURE. 2. The arrangement. THE STRUCTURE OF THE PROJECT FOLLOWS MVC.
 > **STE:** The structure of the project follows MVC.
@@ -5002,6 +5477,7 @@
 ---
 
 ## SUFFICIENT (adj), SUFFICIENTLY (adv)
+
 - **Original:** Not less (or more) than necessary. ADJUST THE CLAMP UNTIL THERE IS SUFFICIENT FRICTION. / WHEN THE PAINT IS SUFFICIENTLY SOFT, REMOVE IT.
 - **Code-domain:** Enough. MAKE SURE THAT THERE IS SUFFICIENT DISK SPACE. / WHEN THE BUILD IS SUFFICIENTLY STABLE, DEPLOY IT.
 > **STE:** Make sure that there is sufficient disk space.
@@ -5012,6 +5488,7 @@
 ---
 
 ## SUDDEN (adj), SUDDENLY (adv)
+
 - **Original:** That occurs in a short time. SUDDEN MOVEMENT CAN CAUSE DAMAGE. / In a sudden manner. IF THE TEMPERATURE INCREASES SUDDENLY, STOP THE ENGINE.
 - **Code-domain:** Occurring unexpectedly. A SUDDEN SPIKE IN CPU USAGE. / IF THE SERVICE FAILS SUDDENLY, READ THE LOGS.
 > **STE:** If the service fails suddenly, read the logs.
@@ -5022,6 +5499,7 @@
 ---
 
 ## SUPPLY (n), SUPPLY (v)
+
 - **Original:** Something that is supplied. STOP THE ELECTRICAL POWER SUPPLY. / To give. SUPPLY ELECTRICAL POWER TO THE AUXILIARY SYSTEM.
 - **Code-domain:** To provide. SUPPLY THE API KEY AS A QUERY PARAMETER.
 > **STE:** Supply the API key as a query parameter.
@@ -5032,6 +5510,7 @@
 ---
 
 ## SURFACE (n)
+
 - **Original:** One or more of the faces of something. CLEAN THE SURFACE WITH A SOFT, DRY CLOTH.
 - **Code-domain:** The external layer. THE API SURFACE OF THE LIBRARY IS SMALL.
 > **STE:** The API surface of the library is small.
@@ -5042,6 +5521,7 @@
 ---
 
 ## SYSTEM (n)
+
 - **Original:** A set of connected things. THE HYDRAULIC SYSTEM.
 - **Code-domain:** A set of connected software components. THE AUTHENTICATION SYSTEM USES JWT.
 > **STE:** The authentication system uses JWT.
@@ -5054,6 +5534,7 @@
 # T
 
 ## TABLE (n)
+
 - **Original:** A flat surface. Code-domain: A database structure.
 - **Code-domain:** A database structure or HTML element. THE USERS TABLE HAS FOUR COLUMNS.
 > **STE:** The `users` table has four columns.
@@ -5064,6 +5545,7 @@
 ---
 
 ## TAG (n) - (TN)
+
 - **Original:** A label. Code-domain: A version control or HTML marker.
 - **Code-domain:** A marker. ADD A VERSION TAG TO THE COMMIT.
 > **STE:** Add a version tag to the commit.
@@ -5074,6 +5556,7 @@
 ---
 
 ## TAKE (v) - UNNAPROVED
+
 - **Original:** Use more accurate verbs: REMOVE (v), GET (v), DO (v).
 - **Code-domain:** Use more accurate verbs: FETCH (v), CONSUME (v), REQUIRE (v).
 > **STE:** The query consumes 100 ms.
@@ -5084,6 +5567,7 @@
 ---
 
 ## TASK (n)
+
 - **Original:** A piece of work. DO THIS TASK OUTDOORS.
 - **Code-domain:** A unit of work. THE ASYNCHRONOUS TASK RUNS IN THE BACKGROUND.
 > **STE:** The asynchronous task runs in the background.
@@ -5094,6 +5578,7 @@
 ---
 
 ## TELL (v)
+
 - **Original:** To give information. TELL THE RAMP AGENT THAT THE BRAKES ARE SET.
 - **Code-domain:** To inform. THE LOG FILE TELLS YOU THE ERROR LOCATION.
 > **STE:** The log file tells you the error location.
@@ -5104,6 +5589,7 @@
 ---
 
 ## TEMPORARY (adj)
+
 - **Original:** Not permanent. A TEMPORARY SOLUTION.
 - **Code-domain:** Not permanent. A TEMPORARY FILE.
 > **STE:** Create a temporary file for the intermediate data.
@@ -5114,6 +5600,7 @@
 ---
 
 ## TERMINATE (v) - (TV)
+
 - **Original:** To end. Code-domain technical verb.
 - **Code-domain:** To forcefully stop. TERMINATE THE HUNG PROCESS.
 > **STE:** Terminate the hung process.
@@ -5124,6 +5611,7 @@
 ---
 
 ## TEST (n)
+
 - **Original:** An examination. DO THE TEST.
 - **Code-domain:** An automated verification. RUN THE UNIT TESTS.
 > **STE:** Run the unit tests before you merge.
@@ -5134,6 +5622,7 @@
 ---
 
 ## TEST (v) - UNNAPROVED
+
 - **Original:** Not approved as verb; use TEST (n) with DO. DO A TEST OF THE SYSTEM.
 - **Code-domain:** TEST (n) with DO. DO A TEST OF THE MODULE.
 > **STE:** Do a test of the module.
@@ -5146,6 +5635,7 @@
 ---
 
 ## TEXT (n) - (TN)
+
 - **Original:** Written words. Code-domain technical noun.
 - **Code-domain:** String data. THE RESPONSE BODY CONTAINS PLAIN TEXT.
 > **STE:** The response body contains plain text.
@@ -5156,6 +5646,7 @@
 ---
 
 ## THAN (conj)
+
 - **Original:** Used to compare. MORE THAN THE LIMIT.
 - **Code-domain:** Used to compare. FASTER THAN THE PREVIOUS VERSION.
 > **STE:** The new version is faster than the previous version.
@@ -5166,6 +5657,7 @@
 ---
 
 ## THAT (conj), THAT (pron)
+
 - **Original:** Function word. MAKE SURE THAT THE VALVE IS CLOSED. / The thing specified. USE THE TOOL THAT IS IN THE KIT.
 - **Code-domain:** Function word. MAKE SURE THAT THE TESTS PASS. / USE THE CONFIG THAT IS IN THE DEFAULT PROFILE.
 > **STE:** Make sure that the tests pass.
@@ -5176,6 +5668,7 @@
 ---
 
 ## THE (art)
+
 - **Original:** Definite article. THE COMPONENT.
 - **Code-domain:** Definite article. THE FUNCTION.
 > **STE:** The function returns a value.
@@ -5186,6 +5679,7 @@
 ---
 
 ## THEN (adv)
+
 - **Original:** At that time or after that. DO THE FIRST STEP. THEN, DO THE SECOND STEP.
 - **Code-domain:** After that. COMPILE THE CODE. THEN, RUN THE TESTS.
 > **STE:** Compile the code. Then, run the tests.
@@ -5196,6 +5690,7 @@
 ---
 
 ## THICK (adj)
+
 - **Original:** Having large depth or thickness. THICK MATERIAL.
 - **Code-domain:** Not commonly applicable. Retained for hardware context.
 > **Note:** Domain-specific; limited code-documentation equivalent.
@@ -5205,6 +5700,7 @@
 ---
 
 ## THREAD (n) - (TN)
+
 - **Original:** A thin string. Code-domain: An execution context.
 - **Code-domain:** A unit of CPU execution. RUN THE TASK IN A SEPARATE THREAD.
 > **STE:** Run the task in a separate thread.
@@ -5215,6 +5711,7 @@
 ---
 
 ## THROUGH (prep)
+
 - **Original:** From one side to the other. PUSH THE WIRE THROUGH THE HOLE.
 - **Code-domain:** Passing via or by means of. ROUTE THE REQUEST THROUGH THE PROXY.
 > **STE:** Route the request through the proxy.
@@ -5225,6 +5722,7 @@
 ---
 
 ## THROW (v) - (TV)
+
 - **Original:** To send through air. Code-domain: To raise an exception.
 - **Code-domain:** To raise an exception. THE FUNCTION THROWS AN ERROR ON INVALID INPUT.
 > **STE:** The function throws an error on invalid input.
@@ -5235,6 +5733,7 @@
 ---
 
 ## THUS (adv)
+
 - **Original:** As a result. THUS, THE SYSTEM STOPS.
 - **Code-domain:** Therefore. THUS, THE REQUEST FAILS.
 > **STE:** The token expires. Thus, the request fails.
@@ -5245,6 +5744,7 @@
 ---
 
 ## TIME (n)
+
 - **Original:** A duration. A SHORT TIME.
 - **Code-domain:** A duration or point. THE RESPONSE TIME IS 200 ms. / AT COMPILE TIME.
 > **STE:** The response time is 200 ms.
@@ -5255,6 +5755,7 @@
 ---
 
 ## TIMEOUT (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A maximum wait duration. SET THE TIMEOUT TO 30 SECONDS.
 > **STE:** Set the timeout to 30 seconds.
@@ -5265,6 +5766,7 @@
 ---
 
 ## TO (prep)
+
 - **Original:** Function word showing direction, purpose, or connection. GO TO THE NEXT STEP.
 - **Code-domain:** Function word showing direction, purpose, or connection. NAVIGATE TO THE SETTINGS PAGE. / USED TO VALIDATE DATA.
 > **STE:** Navigate to the settings page.
@@ -5275,6 +5777,7 @@
 ---
 
 ## TOKEN (n) - (TN)
+
 - **Original:** A symbol. Code-domain: An authentication or parsing unit.
 - **Code-domain:** An authentication credential. PASS THE TOKEN IN THE AUTHORIZATION HEADER.
 > **STE:** Pass the token in the Authorization header.
@@ -5285,6 +5788,7 @@
 ---
 
 ## TOO (adv)
+
 - **Original:** More than necessary. TOO MUCH FORCE.
 - **Code-domain:** More than necessary. TOO MANY CONNECTIONS.
 > **STE:** Too many open connections.
@@ -5295,6 +5799,7 @@
 ---
 
 ## TOP (adj), TOP (n)
+
 - **Original:** The highest part. THE TOP OF THE PAGE. / The highest. THE TOP COVER.
 - **Code-domain:** The highest or first. THE TOP OF THE FILE. / THE TOP RESULT.
 > **STE:** The top of the file contains the imports.
@@ -5305,6 +5810,7 @@
 ---
 
 ## TOUCH (v)
+
 - **Original:** To make contact. DO NOT TOUCH THE HOT SURFACE.
 - **Code-domain:** To modify file timestamp or access. TOUCH THE FILE TO UPDATE ITS MODIFICATION DATE.
 > **STE:** Touch the file to update its modification date.
@@ -5315,6 +5821,7 @@
 ---
 
 ## TRACK (v) - (TV)
+
 - **Original:** To follow the path of. Code-domain technical verb.
 - **Code-domain:** To monitor version control status. TRACK THE CHANGES WITH GIT.
 > **STE:** Track the changes with git.
@@ -5325,6 +5832,7 @@
 ---
 
 ## TRAIN (v) - (TV)
+
 - **Original:** To teach. Code-domain technical verb (ML).
 - **Code-domain:** To fit a machine learning model. TRAIN THE MODEL ON THE TRAINING SET.
 > **STE:** Train the model on the training set.
@@ -5335,6 +5843,7 @@
 ---
 
 ## TRANSFER (v)
+
 - **Original:** To move from one place to another. TRANSFER THE DATA.
 - **Code-domain:** To move data. TRANSFER THE FILE VIA SCP.
 > **STE:** Transfer the file via SCP.
@@ -5345,6 +5854,7 @@
 ---
 
 ## TRIGGER (v) - (TV)
+
 - **Original:** To cause to occur. Code-domain technical verb.
 - **Code-domain:** To initiate an action. THE EVENT TRIGGERS THE CALLBACK.
 > **STE:** The event triggers the callback.
@@ -5355,6 +5865,7 @@
 ---
 
 ## TRUE (adj) - UNNAPROVED
+
 - **Original:** CORRECT (adj). CORRECT ALIGNMENT.
 - **Code-domain:** A Boolean value. THE CONDITION IS TRUE.
 > **STE:** The condition is true.
@@ -5365,6 +5876,7 @@
 ---
 
 ## TRY (v)
+
 - **Original:** To attempt. TRY THE PROCEDURE AGAIN.
 - **Code-domain:** To attempt. TRY THE REQUEST AGAIN.
 > **STE:** Try the request again.
@@ -5375,6 +5887,7 @@
 ---
 
 ## TURN (v)
+
 - **Original:** To move around an axis. TURN THE KNOB.
 - **Code-domain:** To change state. TURN ON THE FEATURE. / TURN OFF THE LOGGING.
 > **STE:** Turn on the feature flag.
@@ -5385,6 +5898,7 @@
 ---
 
 ## TYPE (n) - (TN)
+
 - **Original:** A category. Code-domain technical noun.
 - **Code-domain:** A data type. THE TYPE OF THE VARIABLE IS STRING.
 > **STE:** The type of the variable is string.
@@ -5397,6 +5911,7 @@
 # U
 
 ## UNDER (prep) - UNNAPROVED
+
 - **Original:** BELOW (prep), IN (prep), LESS THAN. BELOW THE LIMIT.
 - **Code-domain:** BELOW (prep), LESS THAN. BELOW THE THRESHOLD.
 > **STE:** Below the threshold.
@@ -5407,6 +5922,7 @@
 ---
 
 ## UNLOCK (v)
+
 - **Original:** To open a lock. UNLOCK THE DOOR.
 - **Code-domain:** To release a resource. UNLOCK THE MUTEX.
 > **STE:** Unlock the mutex.
@@ -5417,6 +5933,7 @@
 ---
 
 ## UNSTABLE (adj) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical adjective.
 - **Code-domain:** Not stable; likely to fail. THE CONNECTION IS UNSTABLE.
 > **STE:** The connection is unstable.
@@ -5427,6 +5944,7 @@
 ---
 
 ## UNTIL (prep)
+
 - **Original:** Up to the time that. DO THE PROCEDURE UNTIL THE PRESSURE IS STABLE.
 - **Code-domain:** Up to the time that. RETRY THE REQUEST UNTIL IT SUCCEEDS.
 > **STE:** Retry the request until it succeeds.
@@ -5437,6 +5955,7 @@
 ---
 
 ## UNUSUAL (adj)
+
 - **Original:** Not usual. LISTEN FOR UNUSUAL NOISES.
 - **Code-domain:** Not usual. WATCH FOR UNUSUAL LOG ENTRIES.
 > **STE:** Watch for unusual log entries.
@@ -5447,6 +5966,7 @@
 ---
 
 ## UP (adv), UP (prep)
+
 - **Original:** In a higher position. MOVE THE LEVER UP.
 - **Code-domain:** In a higher or running state. BRING THE SERVICE UP. / SCROLL UP.
 > **STE:** Bring the service up.
@@ -5457,6 +5977,7 @@
 ---
 
 ## UPDATE (v) - (TV)
+
 - **Original:** To bring up to date. Code-domain technical verb.
 - **Code-domain:** To change to a newer version. UPDATE THE PACKAGE TO THE LATEST VERSION.
 > **STE:** Update the package to the latest version.
@@ -5467,6 +5988,7 @@
 ---
 
 ## USE (v)
+
 - **Original:** To make something do its specified function. USE THE CORRECT TOOL.
 - **Code-domain:** To make a tool, API, or command do its specified function. USE THE API TO FETCH DATA.
 > **STE:** Use the API to fetch data.
@@ -5477,6 +5999,7 @@
 ---
 
 ## USUAL (adj), USUALLY (adv)
+
 - **Original:** That you use or that occurs most frequently. IF YOU DO NOT GET THE USUAL RESULTS, DO A SYSTEM TEST. / In a usual manner. USUALLY, THE HYDRAULIC FLUID FLOWS INTO THE VALVE THROUGH PORT A.
 - **Code-domain:** That you expect. IF YOU DO NOT GET THE USUAL OUTPUT, CHECK THE LOGS. / MOST TIMES. USUALLY, THE REQUEST RETURNS 200 OK.
 > **STE:** Usually, the request returns 200 OK.
@@ -5489,6 +6012,7 @@
 # V
 
 ## VALID (adj) - UNNAPROVED
+
 - **Original:** CORRECT (adj), APPLICABLE (adj). MAKE SURE THAT THE TEST RESULTS ARE CORRECT.
 - **Code-domain:** CORRECT (adj). MAKE SURE THAT THE INPUT IS CORRECT.
 > **STE:** Make sure that the input is correct.
@@ -5501,6 +6025,7 @@
 ---
 
 ## VALIDATE (v) - (TV)
+
 - **Original:** Not in original STE. Code-domain technical verb.
 - **Code-domain:** To check for correctness. VALIDATE THE USER INPUT BEFORE PROCESSING.
 > **STE:** Validate the user input before processing.
@@ -5511,6 +6036,7 @@
 ---
 
 ## VALUE (n)
+
 - **Original:** A quantity that is calculated or given. MAKE SURE THAT THE VALUES AGREE WITH THE SPECIFIED TOLERANCES.
 - **Code-domain:** An assigned or computed quantity. THE VALUE OF THE ENVIRONMENT VARIABLE IS "production".
 > **STE:** The value of the environment variable is "production".
@@ -5521,6 +6047,7 @@
 ---
 
 ## VARIABLE (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** A named storage location. DECLARE THE VARIABLE BEFORE USE.
 > **STE:** Declare the variable before use.
@@ -5531,6 +6058,7 @@
 ---
 
 ## VERIFY (v) - UNNAPROVED
+
 - **Original:** MAKE SURE (v). MAKE SURE THAT THE FITTINGS ARE TIGHT.
 - **Code-domain:** MAKE SURE (v). MAKE SURE THAT THE SIGNATURE IS CORRECT.
 > **STE:** Make sure that the signature is correct.
@@ -5543,6 +6071,7 @@
 ---
 
 ## VERSION (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** An iteration of software. THE CURRENT VERSION IS 3.2.1.
 > **STE:** The current version is 3.2.1.
@@ -5553,6 +6082,7 @@
 ---
 
 ## VERY (adv)
+
 - **Original:** To a high degree. ADD THE OIL VERY SLOWLY.
 - **Code-domain:** To a high degree. INCREASE THE VALUE VERY SLOWLY.
 > **STE:** Increase the value very slowly.
@@ -5563,6 +6093,7 @@
 ---
 
 ## VIA (prep) - UNNAPROVED
+
 - **Original:** THROUGH (prep). GET ACCESS THROUGH THE No. 6 BREAK-IN PANEL.
 - **Code-domain:** THROUGH (prep), BY (prep). AUTHENTICATE THROUGH OAUTH.
 > **STE:** Authenticate through OAuth.
@@ -5573,6 +6104,7 @@
 ---
 
 ## VIEW (n), VIEW (v) - (TN)
+
 - **Original:** The ability to see. MAKE SURE THAT YOU HAVE A SATISFACTORY VIEW. / To see. THE BOLT WILL BE AT THE 2 O'CLOCK POSITION WHEN SEEN FROM THE REAR.
 - **Code-domain:** A display or perspective. THE LOG VIEW SHOWS RECENT ENTRIES.
 > **STE:** The log view shows recent entries.
@@ -5583,6 +6115,7 @@
 ---
 
 ## VISIBLE (adj) - UNNAPROVED
+
 - **Original:** SEE (v), VIEW (n). MAKE SURE THAT YOU CAN SEE THE OIL LEVEL THROUGH THE SIGHT GAUGE.
 - **Code-domain:** SEE (v). MAKE SURE THAT YOU CAN SEE THE OUTPUT IN THE TERMINAL.
 > **STE:** Make sure that you can see the output in the terminal.
@@ -5593,6 +6126,7 @@
 ---
 
 ## VISUAL (adj)
+
 - **Original:** That you can see. MAKE SURE THAT THE VISUAL INDICATOR SHOWS THE CORRECT VALUE.
 - **Code-domain:** Related to display. DO A VISUAL INSPECTION OF THE UI.
 > **STE:** Do a visual inspection of the UI.
@@ -5603,6 +6137,7 @@
 ---
 
 ## VOLUME (n)
+
 - **Original:** 1. The space that an object fills. MEASURE THE VOLUME OF THE OIL CAREFULLY. 2. How loud a sound is. TO ADJUST THE VOLUME, USE THE BUTTONS.
 - **Code-domain:** A storage unit. MOUNT THE VOLUME TO THE CONTAINER.
 > **STE:** Mount the volume to the container.
@@ -5615,6 +6150,7 @@
 # W
 
 ## WAIT (v)
+
 - **Original:** To stop doing something while another thing occurs. WAIT FOR 4 MINUTES.
 - **Code-domain:** To block execution. WAIT FOR THE ASYNCHRONOUS TASK TO COMPLETE.
 > **STE:** Wait for the asynchronous task to complete.
@@ -5625,6 +6161,7 @@
 ---
 
 ## WANT (v)
+
 - **Original:** To intend, to desire. RECORD THE NAME OF THE FILE THAT YOU WANT TO DOWNLOAD.
 - **Code-domain:** To desire. INSTALL THE PACKAGE THAT YOU WANT.
 > **STE:** Install the package that you want.
@@ -5635,6 +6172,7 @@
 ---
 
 ## WARNING (n) - (TN)
+
 - **Original:** A notice of danger. OBEY THE WARNINGS.
 - **Code-domain:** A non-fatal notification. THE COMPILER SHOWS A WARNING.
 > **STE:** The compiler shows a warning for the deprecated function.
@@ -5645,6 +6183,7 @@
 ---
 
 ## WATCH (v) - UNNAPROVED
+
 - **Original:** MONITOR (v), LOOK (v). MONITOR THE SPEED INDICATION. / LOOK FOR AIR BUBBLES.
 - **Code-domain:** MONITOR (v). MONITOR THE LOG OUTPUT.
 > **STE:** Monitor the log output for errors.
@@ -5657,6 +6196,7 @@
 ---
 
 ## WE (pron)
+
 - **Original:** The manufacturer, company, or organization that releases the documentation. WE DO NOT RECOMMEND OTHER ALTERNATIVES.
 - **Code-domain:** The team that produces the documentation. WE RECOMMEND USING THE LATEST API.
 > **STE:** We recommend using the latest API.
@@ -5667,6 +6207,7 @@
 ---
 
 ## WEAK (adj)
+
 - **Original:** With small strength, power, or concentration. USE A WEAK CLEANING SOLUTION.
 - **Code-domain:** With low strength. A WEAK REFERENCE DOES NOT PREVENT GARBAGE COLLECTION.
 > **STE:** A weak reference does not prevent garbage collection.
@@ -5677,6 +6218,7 @@
 ---
 
 ## WEIGHT (n)
+
 - **Original:** The force caused when gravity acts on the mass of an object. THE BASIC WEIGHT OF THE UNIT DOES NOT INCLUDE THE PROTECTIVE COVERS.
 - **Code-domain:** Priority or importance. THE WEIGHT OF THE CONFIG VALUE IS 0.5.
 > **STE:** The weight of the config value is 0.5.
@@ -5687,6 +6229,7 @@
 ---
 
 ## WHEN (conj)
+
 - **Original:** At the time that or during. WHEN THE PISTON MOVEMENT STOPS, MEASURE THE TRAVEL.
 - **Code-domain:** At the time that. WHEN THE BUILD FINISHES, DEPLOY THE ARTIFACT.
 > **STE:** When the build finishes, deploy the artifact.
@@ -5697,6 +6240,7 @@
 ---
 
 ## WHERE (conj)
+
 - **Original:** At, to, or in which location. CLEAN THE AREA WHERE YOU APPLIED THE SEALANT.
 - **Code-domain:** In which location. FIND THE LINE WHERE THE ERROR OCCURRED.
 > **STE:** Find the line where the error occurred.
@@ -5707,6 +6251,7 @@
 ---
 
 ## WHILE (conj)
+
 - **Original:** At the same time. MAKE SURE THAT A PERSON HOLDS THE ITEM, WHILE YOU DISCONNECT IT.
 - **Code-domain:** During a period. LOG THE PROGRESS WHILE THE SCRIPT RUNS.
 > **STE:** Log the progress while the script runs.
@@ -5717,6 +6262,7 @@
 ---
 
 ## WHOLE (adj) - UNNAPROVED
+
 - **Original:** FULL (adj), ALL (adj). DO THE FULL PROCEDURE. / EXAMINE ALL OF THE SYSTEM.
 - **Code-domain:** ENTIRE (adj). EXAMINE ALL OF THE CODEBASE.
 > **STE:** Examine all of the codebase.
@@ -5727,6 +6273,7 @@
 ---
 
 ## WIDE (adj)
+
 - **Original:** That has a specified or large width. REPAIR ALL CRACKS THAT ARE WIDER THAN 0,05 mm.
 - **Code-domain:** Broad in scope. WIDE TEST COVERAGE.
 > **STE:** Wide test coverage.
@@ -5737,6 +6284,7 @@
 ---
 
 ## WILL (v)
+
 - **Original:** Auxiliary modal verb that shows simple future tense. WARNINGS AND CAUTIONS IN THIS MANUAL WILL HELP YOU TO DO THE WORK SAFELY AND CORRECTLY.
 - **Code-domain:** Auxiliary modal verb for future. THE DOCS WILL HELP YOU TO SET UP THE PROJECT.
 > **STE:** The docs will help you to set up the project.
@@ -5747,6 +6295,7 @@
 ---
 
 ## WITH (prep)
+
 - **Original:** Function word that shows association or relationship, help or sharing, a means or instrument. ALIGN THE MARK WITH THE LONGITUDINAL AXIS.
 - **Code-domain:** Function word for association or means. COMPARE THE RESULT WITH THE EXPECTED VALUE. / RUN THE SCRIPT WITH ADMIN PRIVILEGES.
 > **STE:** Compare the result with the expected value.
@@ -5757,6 +6306,7 @@
 ---
 
 ## WITHOUT (prep)
+
 - **Original:** Not with. SMALL DAMAGE IS PERMITTED WITHOUT REPAIR.
 - **Code-domain:** Not having. RUN THE BUILD WITHOUT CACHING.
 > **STE:** Run the build without caching.
@@ -5767,6 +6317,7 @@
 ---
 
 ## WORK (n)
+
 - **Original:** That which you do when you use physical strength, or mental power. DO THE WORK IN A CLEAN AREA.
 - **Code-domain:** A task or effort. DO THE WORK IN A DEDICATED BRANCH.
 > **STE:** Do the work in a dedicated branch.
@@ -5777,6 +6328,7 @@
 ---
 
 ## WORKER (n) - (TN)
+
 - **Original:** A person who works. Code-domain: A background process.
 - **Code-domain:** A background processing unit. THE WORKER PROCESSES JOBS FROM THE QUEUE.
 > **STE:** The worker processes jobs from the queue.
@@ -5787,6 +6339,7 @@
 ---
 
 ## WRITE (v)
+
 - **Original:** To record data or information as words, letters, or symbols. WRITE THE TEST DATE ON THE CERTIFICATE.
 - **Code-domain:** To output data to storage. WRITE THE RESULT TO A FILE.
 > **STE:** Write the result to a file.
@@ -5797,6 +6350,7 @@
 ---
 
 ## WRONG (adj) - UNNAPROVED
+
 - **Original:** INCORRECT (adj). IDENTIFY THE BELLCRANK AND SHAFT WITH MARKS TO PREVENT AN INCORRECT INSTALLATION.
 - **Code-domain:** INCORRECT (adj). MARK THE VARIABLE TO PREVENT INCORRECT USAGE.
 > **STE:** Mark the variable as private to prevent incorrect usage.
@@ -5817,6 +6371,7 @@
 # Y
 
 ## YES (adv)
+
 - **Original:** Function word that shows the positive answer to a question. DOES THE LIGHT COME ON? YES OR NO?
 - **Code-domain:** Function word for positive confirmation. DOES THE TEST PASS? YES OR NO?
 > **STE:** Does the test pass? Yes or no?
@@ -5827,6 +6382,7 @@
 ---
 
 ## YET (conj) - UNNAPROVED
+
 - **Original:** BUT (conj). TIGHTEN THE NUTS, BUT KEEP THEM SUFFICIENTLY LOOSE TO REMOVE THEM WITH YOUR HAND.
 - **Code-domain:** BUT (conj). COMPILE THE PROJECT, BUT SKIP THE TESTS.
 > **STE:** Compile the project, but skip the tests.
@@ -5837,6 +6393,7 @@
 ---
 
 ## YET (adv) - UNNAPROVED
+
 - **Original:** AT THIS TIME. DO NOT REMOVE THE FIXTURE COVER AT THIS TIME.
 - **Code-domain:** AT THIS TIME. DO NOT DEPLOY THE FEATURE AT THIS TIME.
 > **STE:** Do not deploy the feature at this time.
@@ -5847,6 +6404,7 @@
 ---
 
 ## YOU (pron)
+
 - **Original:** The reader or the user. YOU CAN CONTINUE THE TEST. HOT SURFACES CAN BURN YOU.
 - **Code-domain:** The reader or the user. YOU CAN RUN THE SCRIPT. INCORRECT PERMISSIONS CAN PREVENT YOU FROM DEPLOYING.
 > **STE:** You can run the script from the command line.
@@ -5857,6 +6415,7 @@
 ---
 
 ## YOUR (adj)
+
 - **Original:** Related to the reader or the user. IF YOU GET SOLVENT IN YOUR EYES, FLUSH THEM IMMEDIATELY WITH WATER.
 - **Code-domain:** Related to the reader or the user. IF YOU GET AN ERROR IN YOUR TERMINAL, READ THE LOGS.
 > **STE:** If you get an error in your terminal, read the logs.
@@ -5869,6 +6428,7 @@
 # Z
 
 ## ZERO (n) - (TN)
+
 - **Original:** Not in original STE. Code-domain technical noun.
 - **Code-domain:** The numeric value 0. INITIALIZE THE COUNTER TO ZERO.
 > **STE:** Initialize the counter to zero.

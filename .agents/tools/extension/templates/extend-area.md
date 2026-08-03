@@ -4,6 +4,7 @@ You generate code-domain STE-Code entries to fill a documented gap between
 ASD-STE100 (aerospace) and the code-documentation domain.
 
 ## Output format — MARKDOWN ONLY
+
 Write ONE markdown file to this exact path: `{{out_path}}`
 
 Each entry is a level-3 heading block. Use this structure per entry:
@@ -28,6 +29,7 @@ For domain entries use: `domain`, `term`, `definition`, `replaces`, `source`.
 Generate up to **{{count}}** entries.
 
 ## Rules
+
 - NO JSON. NO markdown code fences around the whole file. Output is plain markdown.
 - Every entry must include all fields for its type (see above).
 - `definition` must be 10+ words.

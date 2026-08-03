@@ -321,6 +321,7 @@ See `launch-workers.sh` for the automated launcher.
 ## Appendix: Quick Reference Card
 
 ### Before Launch
+
 ```
 □ Pre-flight checks pass (spec dir, disk space, API, git clean)
 □ PROGRESS.md initialized with 109 workers [ ]
@@ -328,6 +329,7 @@ See `launch-workers.sh` for the automated launcher.
 ```
 
 ### During Execution (per batch)
+
 ```
 □ Launch 3 workers with background=true
 □ Wait for all 3 to exit (max 120s)
@@ -339,6 +341,7 @@ See `launch-workers.sh` for the automated launcher.
 ```
 
 ### On Failure
+
 ```
 □ Identify failure mode (F1-F10 matrix)
 □ Write to .agents/feedback/exchange.md
@@ -349,6 +352,7 @@ See `launch-workers.sh` for the automated launcher.
 ```
 
 ### On Pipeline Completion
+
 ```
 □ All 109 workers [x] or [SKIP] in PROGRESS.md
 □ Coverage audit: 434 pages accounted for

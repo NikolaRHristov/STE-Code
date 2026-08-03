@@ -964,4 +964,3 @@ This rule is the central quality-control rule in the STE-Code system. It interac
 > **See also:** Rule 9.1 — Use a Different Sentence Construction to Write a Sentence When a Word-for-Word Replacement Is Not Sufficient
 > **See also:** Rule 9.3 — When You Use Two Words Together, Do Not Make Phrasal Verbs
 > **See also:** Rule 9.4 — Consistent Style
-

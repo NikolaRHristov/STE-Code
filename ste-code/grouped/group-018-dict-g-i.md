@@ -12,6 +12,7 @@
 > **Pages:** 250-281 of 434 (32 pages)
 
 <!-- Page 250 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |||gain (n) — UNNAPPROVED|INCREASE (v)|AFTER THE LAST MODIFICATION, THE SYSTEM'S EFFICIENCY INCREASED.|The system's efficiency showed a gain after the last modification.|
@@ -24,6 +25,7 @@
 |||CLEARLY (adv)|MAKE SURE THAT YOU TRANSMIT THE ANNOUNCEMENT CLEARLY.|Make sure that the announcement is not garbled.|
 
 <!-- Page 251 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |||garner (v) — UNNAPPROVED|COLLECT (v)|THESE COMPUTERS COLLECT DATA FROM THE VHF SYSTEM.|These computers garner data from the VHF system.|
@@ -37,6 +39,7 @@
 |||GENERAL (adj)|Of, or related to something as a whole, not detailed|THIS SECTION GIVES GENERAL MAINTENANCE PROCEDURES.|
 
 <!-- Page 252 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |||generally (adv) — UNNAPPROVED|USUALLY (adv)|YOU USUALLY REPLACE MEMORY MODULES DURING MAINTENANCE.|Memory modules are generally replaced during Maintenance.|
@@ -53,6 +56,7 @@
 |||LIGHTLY (adv)|LIGHTLY TAP THE TOP SURFACE UNTIL THE PARTS ALIGN.|Gently tap the top surface until the parts align.|
 
 <!-- Page 253 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |genuine (adj) — UNNAPPROVED|CORRECT (adj)|MAKE SURE THAT THE INDICATION ON THE GAGUE IS CORRECT.|Make sure that the reading on the gauge is genuine.|
@@ -65,6 +69,7 @@
 |get off (v) — UNNAPPROVED|MOVE OFF|BEFORE YOU MOVE THE AILERONS, TELL ALL PERSONS TO MOVE OFF THE WINGS.|Before you move the ailerons, tell all persons to get off the wings.|
 
 <!-- Page 254 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |get to (v) — UNNAPPROVED|BE (v)|THE MOTOR STOPS WHEN THE LIMIT SWITCHES ARE AT THE END OF THEIR TRAVEL.|The motor stops when the limit switches get to the end of their Travel.|
@@ -79,6 +84,7 @@
 |GLOSSY (adj) (GLOSSIER, GLOSSIEST)|Smooth and shiny|APPLY THE PATCH WITH THE MATT SIDE AGAINST THE GLOSSY SURFACE.||
 
 <!-- Page 255 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |glow (v) — UNNAPPROVED|BE (v)|MAKE SURE THAT THE INDICATOR LIGHT IS ON.|Make sure that the indicator light glows.|
@@ -96,6 +102,7 @@
 ||HOLD (v)|HOLD THE HANDLE.|Grab the handle.|
 
 <!-- Page 256 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |gradient (n) — UNNAPPROVED|SLOPE (n)|WHEN YOU PARK THE VEHICLE ON A SLOPE, PUT CHOCKS ON THE WHEELS.|When you park the vehicle on a gradient, put chocks on the wheels.|
@@ -113,6 +120,7 @@
 |grip (n) — UNNAPPROVED|HOLD (v)|HOLD THE JACK BODY TIGHTLY WHILE YOU TURN IT.|Make sure you have a tight grip of the jack body while turning it.|
 
 <!-- Page 257 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |grip (v) — UNNAPPROVED|HOLD (v)|HOLD THE HANDLE LIGHTLY WITH ONE HAND.|Grip the handle lightly with one hand.|
@@ -127,6 +135,7 @@
 |gush (v) — UNNAPPROVED|FLOW (n)|IF YOU TURN THE HANDLE TO "FULL," THERE WILL BE A STRONG FLOW OF WATER FROM THE OUTLET.|If you turn the valve handle to FULL, water will gush from the outlet.|
 
 <!-- Page 258 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |halt (v) — UNNAPPROVED|STOP (v)|IF YOU HEAR AN UNUSUAL NOISE, STOP THE PROCEDURE.|If you hear an unusual noise, halt the procedure.|
@@ -144,6 +153,7 @@
 |HARD (adj) (HARDER, HARDEST)|Not easy to cut, not easy to go into or through|IF THE SURFACE IS HARD, USE A CARBIDE DRILL.|
 
 <!-- Page 259 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |harden (v) — UNNAPPROVED|HARD (adj)|LET THE ADHESIVE BECOME HARD.|Let the adhesive harden.|
@@ -158,6 +168,7 @@
 ||MOVE (v)|BEFORE YOU START THE ENGINE, MOVE THE HYDRAULIC CART AWAY FROM THE AIRCRAFT| Haul the hydraulic cart away from the aircraft before you start the engine.|
 
 <!-- Page 260 of 434 -->
+
 |||Word (part of speech)|Approved meaning/ ALTERNATIVES|STE EXAMPLE|Non-STE example|
 |---|---|---|---|
 |HAVE (v), HAS, HAD No other verb forms.| To possess as a part or quality|THE SYSTEM HAS AN EMERGENCY WARNING DEVICE.|
@@ -188,6 +199,7 @@
 | hesitation (n) — UNNAPPROVED | IMMEDIATELY (adv) | WHEN YOU OPEN THE CIRCUIT BREAKER, THE LIGHT MUST COME ON IMMEDIATELY. | When you open the circuit breaker, the light must come on without hesitation. |
 
 <!-- Page 262 of 434 -->
+
 |---|---|---|---|
 | HIGH (adj) (HIGHER, HIGHEST) | That is of large value | USE THE SPECIAL PROTECTION FOR STORAGE IN HIGH TEMPERATURES. |  |
 | highly (adv) — UNNAPPROVED | VERY (adv) | TOLUENE IS VERY FLAMMABLE. | Toluene is highly flammable. |
@@ -204,6 +216,7 @@
 | HOLD (v), HOLDS, HELD, HELD | 2. To continue to have in a specified location, position, or condition | HOLD THE AIRSPEED INDICATION AT THE SAME VALUE FOR 2 MINUTES. |  |
 
 <!-- Page 263 of 434 -->
+
 |---|---|---|---|
 | hold back (v) — UNNAPPROVED | PREVENT (v) | AT FULL THRUST, the BRAKES MUST PREVENT MOVEMENT OF THE AIRCRAFT. | At full thrust, the brakes must hold the aircraft back. |
 | hold off (v) — UNNAPPROVED | PREVENT (v) | THE PROTECTIVE PAINT WILL PREVENT CORROSION FOR SIX MONTHS. | The protective paint will hold off corrosion for six months. |
@@ -218,6 +231,7 @@
 | however (adv) — UNNAPPROVED | BUT (conj) | THE DRYING TIME IS USUALLY 24 HOURS. BUT THE PROCEDURE IN THIS STEP WILL DECREASE THE DRYING TIME TO 12 HOURS. | The drying time is usually 24 hours. However, the procedure in this step will decrease the drying time to 12 hours. |
 
 <!-- Page 264 of 434 -->
+
 |---|---|---|---|
 | huge (adj) — UNNAPPROVED | LARGE (adj) | TO REMOVE THE PAINT STRIPPER, FLUSH THE SURFACE WITH LARGE QUANTITIES OF WATER. | To remove the paint stripper, flush the surface with huge quantities of water. |
 | hum (v) — UNNAPPROVED | HUM (TN) | ADJUST THE POTENTIOMETER UNTIL YOU DO NOT HEAR A HUM FROM THE LOUDSPEAKER. | Adjust the potentiometer until the loudspeaker no longer hums. |
@@ -229,6 +243,7 @@
 Blank Page
 
 <!-- Page 266 of 434 -->
+
 |---|---|---|---|
 | identical (adj) — UNNAPPROVED | SAME (adj) | THE SAME PROCEDURE IS APPLICABLE TO THE TWO VHF SETS. | The procedure is identical for both VHF sets. |
 | IDENTIFICATION (n) | Something that identifies an object | MAKE SURE THAT THE NAMEPLATE SHOWS THE CORRECT IDENTIFICATION OF THE UNIT. |  |
@@ -242,6 +257,7 @@ Blank Page
 | IGNORE (v), IGNORES, IGNORED, IGNORED |  | SELECT "CANCEL" TO IGNORE ALL CHANGES. |  |
 
 <!-- Page 267 of 434 -->
+
 |---|---|---|---|
 | ILLUMINATE (v), ILLUMINATES, ILLUMINATED, ILLUMINATED | To make something visible with an external light source For lights or lamps, use: | THE EMERGENCY LIGHTS COME ON TO ILLUMINATE THE EVACUATION PATH. |  |
 | ILLUMINATE (v), ILLUMINATES, ILLUMINATED, ILLUMINATED | COME ON | WHEN THE PRESSURE LIGHT COMES ON, READ THE VALUE ON THE PRESSURE GAUGE. | When the pressure light illuminates, read the value on the pressure gauge. |
@@ -256,6 +272,7 @@ Blank Page
 | impact (n) — UNNAPPROVED | HIT (v) | MAKE SURE THAT METAL OBJECTS DO NOT HIT THE MATING SURFACE. | Avoid impact between metal objects and the mating surface. |
 
 <!-- Page 268 of 434 -->
+
 |---|---|---|---|
 | impact (v) — UNNAPPROVED | HIT (v) | DO NOT LET THE VIBRATOR TOOL HIT THE SURFACE OF THE SEAL. | Do not allow the vibrator tool to impact the seal surface. |
 | impact (v) — UNNAPPROVED | EFFECT (n) | THESE REPAIRS HAVE AN EFFECT ON THE PERFORMANCE OF THE ENGINE. | These repairs impact engine performance. |
@@ -267,6 +284,7 @@ Blank Page
 | IMPORTANT (adj) | That has a significant effect | THESE PROCEDURES ARE VERY IMPORTANT. |  |
 
 <!-- Page 269 of 434 -->
+
 |---|---|---|---|
 | impossible (adj) — UNNAPPROVED | NOT POSSIBLE | THUS, IT IS NOT POSSIBLE TO GIVE A STANDARD VALUE. | Thus, it is impossible to give a standard value. |
 | impossible (adj) — UNNAPPROVED | CANNOT (v) | YOU CANNOT FILL THE CONTAINERS WHILE THEY ARE INSTALLED ON THE AIRCRAFT. | It is impossible to recharge containers while installed on aircraft. |
@@ -280,6 +298,7 @@ Blank Page
 | IN (adv) | To, or into a location or position | MAKE SURE THAT THE SWITCHES ARE PUSHED IN. |  |
 
 <!-- Page 270 of 434 -->
+
 |---|---|---|---|
 | IN (prep) | Function word that shows location, position, condition, time, or limits | LET THE SWITCH STAY IN THE SET POSITION. |  |
 | IN (prep) |  | THE COMPENSATORS ARE IN THE WING BAY. |  |
@@ -292,6 +311,7 @@ Blank Page
 | inadvertent (adj) — UNNAPPROVED | ACCIDENTAL (adj) | ACCIDENTAL OPERATION OF THE SYSTEM CAN KILL YOU. | Inadvertent operation of the system could cause fatal injuries. |
 
 <!-- Page 271 of 434 -->
+
 |---|---|---|---|
 | inadvertently (adv) — UNNAPPROVED | ACCIDENTALLY (adv) | IF YOU ACCIDENTALLY PUT TOO MUCH FUEL IN THE TANK, OPEN THE DRAIN VALVE. | If the tank is inadvertently overfilled, open the drain valve. |
 | INBOARD (adj) | Nearer to the longitudinal axis | REMOVE THE INBOARD FAIRING OF THE FLAP HINGE. |  |
@@ -306,6 +326,7 @@ Blank Page
 | incompatible (adj) — UNNAPPROVED |  | THIS COOLANT IS NOT COMPATIBLE WITH ALUMINUM ALLOYS. | This coolant is incompatible with aluminum alloys. |
 
 <!-- Page 272 of 434 -->
+
 |---|---|---|---|
 | incomplete (adj) — UNNAPPROVED | NOT FULL | IF THE ACTUATOR TRAVEL IS NOT FULL, ADJUST THE RODS AGAIN. | If the actuator travel is incomplete, readjust the rods. |
 | incomplete (adj) — UNNAPPROVED | NOT COMPLETED | IF THE ADJUSTMENT IS NOT COMPLETED, THE VALUES SHOWN ON THE INDICATOR WILL BE INCORRECT. | If the adjustment is incomplete, the values shown on the indicator will be incorrect. |
@@ -317,6 +338,7 @@ Blank Page
 | INCORRECTLY (adv) | In an incorrect manner | IF YOU SEE THE RED MARK, THE PART IS INSTALLED INCORRECTLY. |  |
 
 <!-- Page 273 of 434 -->
+
 |---|---|---|---|
 | increase (n) — UNAPPROVED | INCREASE (v) | THE TEMPERATURE MUST INCREASE. | There must be an increase in temperature. |
 | INCREASE (v), INCREASES, INCREASED, INCREASED | To make or become larger or higher in value | INCREASE THE VANE ANGLE TO 90 DEGREES. MAKE SURE THAT THE TEMPERATURE INCREASES TO 30 °C. |  |
@@ -331,6 +353,7 @@ Blank Page
 | induce (v) — UNAPPROVED | CAUSE (v) | SCRATCHES IN THE WINDSCREEN CAN CAUSE CRACKS. | Scratches in the windscren may induce cracks. |
 
 <!-- Page 274 of 434 -->
+
 |---|---|---|---|
 | ineffective (adj) — UNAPPROVED | UNSERVICEABLE (adj) | IF THE PUMP IS UNSERVICEABLE, REPLACE IT. | If the pump is ineffective, replace it. |
 | ineffective (adj) — UNAPPROVED | UNSATISFACTORY (adj) | IF THE OPERATION OF THE PUMP IS UNSATISFACTORY, REPLACE IT. | If the operation of the pump is ineffective, replace it. |
@@ -343,6 +366,7 @@ Blank Page
 | ingress (n) — UNAPPROVED | GO INTO | IF WATER GOES INTO THE COMPONENT, DAMAGE WILL OCCUR. | Water ingress will damage the component. |
 
 <!-- Page 275 of 434 -->
+
 |---|---|---|---|
 | inhale (v) — UNAPPROVED | BREATHE (v) | DO NOT BREATHE THE SOLVENT FUMES. | Do not inhale the solvent fumes. |
 | inhibit (v) — UNAPPROVED | PREVENT (v) | ALODINE PREVENTS CORROSION. | Alodine inhibits corrosion. |
@@ -359,6 +383,7 @@ Blank Page
 | INPUT (n) | The data, power, or energy put into equipment or a system | THE UNIT COMPARES THE INPUTS FROM THE TWO SENSORS TO THE COMPUTER. |  |
 
 <!-- Page 276 of 434 -->
+
 |---|---|---|---|
 | insert (v) — UNAPPROVED | PUT (v) | PUT THE SLEEVE INTO THE OPENING. | Insert the sleeve into the opening. |
 | insert (v) — UNAPPROVED | ENGAGE (v) | MAKE SURE THAT THE SHAFT ENGAGES IN THE MATING PART. | Check that the shaft is inserted in the mating part. |
@@ -374,6 +399,7 @@ Blank Page
 | instead (adv) — UNAPPROVED | ALTERNATIVE (n) | USE A SPATULA AS AN ALTERNATIVE. | Use a spatula instead. |
 
 <!-- Page 277 of 434 -->
+
 |---|---|---|---|
 | instead of (prep) — UNNAPPROVED | ALTERNATIVE (n) | YOU CAN USE A CLEAN PLASTIC BAG AS AN ALTERNATIVE TO THE SPECIFIED CONTAINER. | You can use a clean plastic bag instead of the specified container. |
 | INSTRUCTION (n) | A command that you must obey | IF YOU DO NOT OBEY THIS INSTRUCTION, DAMAGE CAN OCCUR. |  |
@@ -387,6 +413,7 @@ Blank Page
 | INTERCHANGE (v), INTERCHANGES, INTERCHANGED, INTERCHANGED | To put or use each of two things in the place of the other without change | INTERCHANGE THE No. 1 AND No. 2 COMPUTERS. THEN DO THE TEST AGAIN. |  |
 
 <!-- Page 278 of 434 -->
+
 |---|---|---|---|
 | INTERCHANGE- ABLE (adj) | That you can interchange | RELAYS 2YG AND 8YG ARE FULLY INTERCHANGEABLE ITEMS. |  |
 | interconnect (v) — UNNAPPROVED | CONNECT (v) | THE PIPES CONNECT SYSTEM A TO SYSTEM B. | The pipes interconnect system A and system B. |
@@ -397,6 +424,7 @@ Blank Page
 |  | INTERFERENCE (TN) | MAKE SURE THAT THERE IS NO INTERFERENCE BETWEEN THE RADAR AND THE TACTICAL AIR NAVIGATION SYSTEM (TACAN). | Ensure that the radar does not interfere with the Tactical Air Navigation System (TACAN). |
 
 <!-- Page 279 of 434 -->
+
 |---|---|---|---|
 | interference (n) — UNNAPPROVED | HIT (v) | IF YOU INSTALL THE UPPER DRAG STRUT WITH THE HEAD DOWN, IT WILL HIT THE LOWER DRAG STRUT DURING RETRACTION. | Placing the upper drag strut upside down causes interference with the lower drag strut. |
 |  | CATCH (v) | MAKE SURE THAT THE RODS CANNOT CATCH ON THE FLAPS. | Make sure that there is no interference between the rods and the flaps. |
@@ -408,6 +436,7 @@ Blank Page
 |  | BETWEEN (prep) Give the limits. | WHEN THE INPUT LEVER IS BETWEEN 5 AND 10 mm, MEASURE THE PISTON EXTENSION. | When the input lever is in an intermediate position, measure the piston extension. |
 
 <!-- Page 280 of 434 -->
+
 |---|---|---|---|
 | INTERMITTENT (adj) | That stops and starts again, not continuous | THIS CAUSES INTERMITTENT OPERATION OF THE WARNING LIGHTS. |  |
 | INTERMITTENTLY (adv) | In an intermittent manner | THE LIGHT COMES ON INTERMITTENTLY. |  |
@@ -422,6 +451,7 @@ Blank Page
 | INVESTIGATION (n) | An official and accurate inquiry or research | THE TASK TEAM STARTED THE INVESTIGATION TO FIND THE CAUSE OF THE ACCIDENT. |  |
 
 <!-- Page 281 of 434 -->
+
 |---|---|---|---|
 | inward (adj) — UNNAPPROVED | INNER (adj) | MEASURE THE INNER DIAMETER OF THE HOLE. | Measure the inward diameter of the hole. |
 | inward (adv) — UNNAPPROVED | IN (adv) | MOVE THE DOOR IN AND REARWARD. | Move the door inward and rearward. |
