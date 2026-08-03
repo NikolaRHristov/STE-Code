@@ -1,4 +1,4 @@
-# STE-Code Agents — Benchmark & Pipeline
+# STE-Code Agents - Benchmark & Pipeline
 
 > **Project root:** `.agents/` **Pipeline spec:** `ste-code/` (ASD-STE100 →
 > STE-Code adaptation) **Default agent:** Hermes (configured in
@@ -10,7 +10,7 @@
 All scripts use the **agent-agnostic runner** at
 `.agents/tools/lib/agent-runner.py`. Configure backends in
 `.agents/config/agents.yaml`. The default model is declared there and surfaced
-to every stage through `ste_config` (`CFG.model`) — it is never hardcoded in a
+to every stage through `ste_config` (`CFG.model`) - it is never hardcoded in a
 script.
 
 ```bash
@@ -129,22 +129,22 @@ messages** (+0.560), **config files** (+0.520).
 
 ## Key Artifacts
 
-- `ste-code/artifacts/level1/system-prompt.txt` — Level 1: 14 principles +
+- `ste-code/artifacts/level1/system-prompt.txt` - Level 1: 14 principles +
   templates (58 KB, ~14.5K tokens)
-- `ste-code/artifacts/level2/system-prompt.txt` — Level 2: + section grammar (75
+- `ste-code/artifacts/level2/system-prompt.txt` - Level 2: + section grammar (75
   KB, ~18.5K tokens)
-- `ste-code/artifacts/level3/system-prompt.txt` — Level 3: 9-section grammar +
+- `ste-code/artifacts/level3/system-prompt.txt` - Level 3: 9-section grammar +
   full dictionary (388 KB, ~95K tokens)
-- `ste-code/artifacts/level4/system-prompt.txt` — Level 4: 54 rules +
+- `ste-code/artifacts/level4/system-prompt.txt` - Level 4: 54 rules +
   dictionary + catalogue (462 KB, ~116K tokens)
-- `ste-code/artifacts/level5/system-prompt.txt` — Level 5: full standard +
+- `ste-code/artifacts/level5/system-prompt.txt` - Level 5: full standard +
   provenance (539 KB, ~134K tokens)
-- `ste-code/artifacts/llms-full.txt` — every distilled sub-document in one file
-- `ste-code/adapted/` — 60 files of ASD-STE100 rules adapted for code (54
+- `ste-code/artifacts/llms-full.txt` - every distilled sub-document in one file
+- `ste-code/adapted/` - 60 files of ASD-STE100 rules adapted for code (54
   rules + 4 GR + dictionary + categories)
-- `.agents/benchmark/orchestrator.py` — Parallel benchmark runner (59 workers,
+- `.agents/benchmark/orchestrator.py` - Parallel benchmark runner (59 workers,
   CWD-isolated)
-- `.agents/benchmark/orchestrator-control.py` — Control group runner (plain
+- `.agents/benchmark/orchestrator-control.py` - Control group runner (plain
   assistant, no STE-Code)
 
 ## Running
@@ -193,10 +193,10 @@ See [`.agents/GAPS.md`](GAPS.md) for the full domain coverage gap analysis.
 
 Active placeholder tags in adapted files mark where domain content belongs:
 
-- `[CONTRIBUTE]` — General contribution welcome
-- `[MOBILE]`, `[ML]`, `[GAMEDEV]`, `[EMBEDDED]`, `[WEB3]` — Zero coverage
+- `[CONTRIBUTE]` - General contribution welcome
+- `[MOBILE]`, `[ML]`, `[GAMEDEV]`, `[EMBEDDED]`, `[WEB3]` - Zero coverage
   domains
-- `[SEC]`, `[A11Y]`, `[I18N]`, `[PERF]`, `[TEST]`, `[DOCS]` — High-priority gaps
+- `[SEC]`, `[A11Y]`, `[I18N]`, `[PERF]`, `[TEST]`, `[DOCS]` - High-priority gaps
 
 ### Batch Generation (Internal)
 
@@ -208,39 +208,53 @@ python3 .agents/tools/maintenance/fill-gaps.py --domain ML --all-rules --min-pai
 
 ## Skills Inventory
 
-| Skill             | File                                | Description                                                                            |
-| ----------------- | ----------------------------------- | -------------------------------------------------------------------------------------- |
-| Extraction        | `skills/extraction/SKILL.md`        | 109 parallel workers, 4 pages each, 37 batches                                         |
-| Refinement        | `skills/refinement/SKILL.md`        | 9 formatting rules, section-aware v2 workers                                           |
-| Merging           | `skills/grouping/SKILL.md`          | Deterministic grouping (concat+split, MANIFEST-driven, no LLM) → `ste-code/grouped/`   |
-| Adaptation        | `skills/adaptation/SKILL.md`        | 53 source rules → 54 code-domain rules, 22 categories; orchestrated per-section, gated |
-| Artifacts         | `skills/artifacts/SKILL.md`         | Final deliverables assembled from `adapted/`; coverage-verified                        |
-| Auditing          | `skills/auditing/SKILL.md`          | 8-rail verification, fabrication detection                                             |
-| Validation        | `skills/validation/SKILL.md`        | Per-batch quality checks, spot-checks                                                  |
-| Continuation      | `skills/continuation/SKILL.md`      | Multi-agent stages 3-5, any agent perspective                                          |
-| Benchmarking      | `skills/benchmarking/SKILL.md`      | 59 tests, 14 categories, control group                                                 |
-| Level Worker      | `skills/level-worker/SKILL.md`      | 4 parallel workers at levels 1-4 using agent runner                                    |
-| Extension Worker  | `skills/extension-worker/SKILL.md`  | Markdown-first gap-fill generation (orchestrated via `phase-e-run.py`); JSON derived   |
-| Translations      | `skills/translations/SKILL.md`      | Multi-locale placeholder pipeline, 10 locales, ~540 files, batch-of-3 workers          |
-| State Report      | `skills/state-report/SKILL.md`      | Standardized pipeline state format                                                     |
-| Execution Auditor | `skills/execution-auditor/SKILL.md` | Hidden agent for forensic disk verification                                            |
+Skills live in buckets under `skills/<bucket>/<skill>/SKILL.md`, distributed to
+profiles via two-level symlinks (`link-skills.sh`). A profile loads only its
+declared buckets, so the consumer `ste-code` profile is amnesic about
+authoring/dev infrastructure.
+
+| Skill             | Bucket / File                                                  | Description                                                                            |
+| ----------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Apply Standard    | `skills/ste-code-consumer/apply-standard/SKILL.md`            | The only consumer-facing skill: read the standard, apply it to your own code/docs.      |
+| Extraction        | `skills/ste-code-dev/extraction/SKILL.md`                     | 109 parallel workers, 4 pages each, 37 batches                                         |
+| Refinement        | `skills/ste-code-authoring/refinement/SKILL.md`               | 9 formatting rules, section-aware v2 workers                                           |
+| Grouping (Merge)  | `skills/ste-code-dev/grouping/SKILL.md`                       | Deterministic grouping (concat+split, MANIFEST-driven, no LLM) → `ste-code/grouped/`   |
+| Adaptation        | `skills/ste-code-authoring/adaptation/SKILL.md`               | 53 source rules → 54 code-domain rules, 22 categories; orchestrated per-section, gated |
+| Artifacts         | `skills/ste-code-authoring/artifacts/SKILL.md`               | Final deliverables assembled from `adapted/`; coverage-verified                        |
+| Auditing          | `skills/ste-code-authoring/auditing/SKILL.md`                 | 8-rail verification, fabrication detection                                             |
+| Validation        | `skills/ste-code-benchmark/validation/SKILL.md`               | Per-batch quality checks, spot-checks                                                  |
+| Continuation      | `skills/ste-code-authoring/continuation/SKILL.md`             | Multi-agent stages 3-5, any agent perspective                                          |
+| Benchmarking      | `skills/ste-code-benchmark/benchmarking/SKILL.md`             | 59 tests, 14 categories, control group                                                 |
+| Level Worker      | `skills/ste-code-dev/level-worker/SKILL.md`                   | 4 parallel workers at levels 1-4 using agent runner                                    |
+| Extension Worker  | `skills/ste-code-authoring/extension-worker/SKILL.md`         | Markdown-first gap-fill generation (orchestrated via `phase-e-run.py`); JSON derived   |
+| Translations      | `skills/ste-code-authoring/translations/SKILL.md`             | Multi-locale placeholder pipeline, 10 locales, ~540 files, batch-of-3 workers          |
+| State Report      | `skills/ste-code-dev/state-report/SKILL.md`                   | Standardized pipeline state format                                                     |
+| Execution Auditor | `skills/ste-code-dev/execution-auditor/SKILL.md`             | Hidden agent for forensic disk verification                                            |
+| STE-Code Jail Ops | `skills/ste-code-dev/ste-code-jail-ops/SKILL.md`              | Maintain the jail that confines the three STE-Code Hermes profiles.                    |
+| Skill Confinement | `skills/ste-code-dev/hermes-profile-skill-confinement/SKILL.md` | Confine a Hermes profile to a chosen skill set; block default bundled skills.         |
+
+Profile → bucket map (single source, symlinked):
+
+- `dev-ste-code` → `ste-code-dev`, `ste-code-authoring`, `ste-code-benchmark`
+- `ste-code` (consumer) → `ste-code-consumer`
+- `benchmark-ste-code` → `ste-code-benchmark`
 
 ---
 
 ## Feedback & Lessons Learned
 
-- [`feedback/exchange.md`](feedback/exchange.md) — Project-specific adaptations
+- [`feedback/exchange.md`](feedback/exchange.md) - Project-specific adaptations
   (2-chain parallelism, gitignore fix, extract_batch.py notes)
-- [`feedback/poll-vs-wait.md`](feedback/poll-vs-wait.md) — Use
+- [`feedback/poll-vs-wait.md`](feedback/poll-vs-wait.md) - Use
   `process(action='poll')`, never `wait` or blocking timeouts
-- [`feedback/aphrodite-tool-testing.md`](feedback/aphrodite-tool-testing.md) —
+- [`feedback/aphrodite-tool-testing.md`](feedback/aphrodite-tool-testing.md) -
   **Use this when working with aphrodite CCR markers**:
   `aphrodite_retrieve(hash=...)` must be called immediately on every
   `<<<CCR:hash|type|size>>>` marker in tool output. Never re-read a file when
-  you have a live CCR marker — the marker IS the content.
+  you have a live CCR marker - the marker IS the content.
 
 ## See also
 
-- `README.md` — structure + stage table.
-- `tools/lib/README.md` — shared helper reference.
-- `config/defaults.yaml` — shared agent + runtime defaults.
+- `README.md` - structure + stage table.
+- `tools/lib/README.md` - shared helper reference.
+- `config/defaults.yaml` - shared agent + runtime defaults.
