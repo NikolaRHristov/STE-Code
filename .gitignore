@@ -30,6 +30,9 @@ venv/
 .agents/tmp/*
 !.agents/tmp/README.md
 
+.agents/benchmark/tmp/*
+!.agents/benchmark/tmp/README.md
+
 .agents/_scratch/
 .agents/archive/
 .agents/audit/
