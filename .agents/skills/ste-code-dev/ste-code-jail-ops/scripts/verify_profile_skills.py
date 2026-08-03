@@ -3,7 +3,7 @@
 
 Read-only. Reproduces what the Hermes TUI does at session start: it repins
 SKILLS_DIR and HERMES_HOME to the profile directory, so the profile's
-`skills/` dir is the only skill source — the bundled ~/.hermes/skills/ set is
+`skills/` dir is the only skill source - the bundled ~/.hermes/skills/ set is
 NOT scanned. This script checks that every entry in that dir is a symlink into
 the repo's .agents/skills/ tree (plus any STE consumer skill).
 
@@ -21,7 +21,7 @@ import sys
 
 H = os.path.expanduser("~/.hermes")
 # Derived from this file's location, never a hardcoded machine path.
-# scripts/ -> ste-code-jail-ops -> ste-code-apply -> skills -> .agents -> STE-Code (5 ups)
+# scripts/ -> ste-code-jail-ops -> ste-code-dev -> skills -> .agents -> STE-Code (5 ups)
 _HERE = os.path.dirname(os.path.realpath(__file__))
 REPO = os.path.realpath(os.path.join(_HERE, "..", "..", "..", "..", ".."))
 REPO_SKILLS = os.path.realpath(os.path.join(REPO, ".agents", "skills"))
@@ -49,7 +49,7 @@ def check_profile(profile: str) -> int:
         else:
             print(f"  [FAIL] {name}: points outside the repo ({tgt})")
             bad += 1
-    print(f"  result: {'OK — only STE skills' if bad == 0 else f'{bad} problem(s)'}")
+    print(f"  result: {'OK - only STE skills' if bad == 0 else f'{bad} problem(s)'}")
     return 1 if bad else 0
 
 

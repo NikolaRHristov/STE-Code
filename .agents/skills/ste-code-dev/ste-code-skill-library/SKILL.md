@@ -161,7 +161,7 @@ inside a bucket.
   to run." Strip jail/Seatbelt/`STE_CODE_JAIL_POLICY`/`policy.py`/
   `_STRICT_FALLBACK`/`PYTHONPYCACHEPREFIX`/`dev`/`bench` profile names, and
   "sandbox reads the policy map" prose. Keep confinement/environment detail in
-  `ste-code-apply/*` (jail-ops, profile-confinement), where it belongs - a
+  `ste-code-dev/*` (jail-ops, profile-confinement), where it belongs - a
   benchmark skill that leaks the cage teaches the adversarial runner to reason
   about its own jail. (Harness *tooling* may still be told to "compile
   in-process so it is environment-independent" - that is a portability rule, not
