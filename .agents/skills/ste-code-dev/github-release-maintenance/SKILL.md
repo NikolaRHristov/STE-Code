@@ -256,3 +256,78 @@ git tag --list | tail -5                         # three new tags
 gh release view v1.1.0                           # notes published
 head -20 CHANGELOG.md                            # new section on top
 ```
+
+## Hand-authored release notes (no `release.py`)
+
+When the user drives the notes manually (rewriting an existing release's body,
+or composing narrative notes a changelog generator won't produce), use this
+pipeline. It was used to rewrite the v1.0.0 / v1.1.0 / v1.2.0 release bodies as
+story-driven "follow-the-contradictions" notes.
+
+**Measure the tagged range, NOT HEAD.** A checked-out tree drifts after a tag
+(extra commits land via concurrent sessions or later `git commit`). Every
+statistic in the notes must come from `git diff --stat -M <base>..<tagcommit>`
+(e.g. `STANDARD-1.1.0..REPOSITORY-v1.2.0` at commit `0c510d3`), never from
+`..HEAD`. Open the notes with the measurement rule stated explicitly: "all
+numbers taken at tag `<sha>`, not HEAD; post-tag commits are out of scope." If
+HEAD has moved past the tag, say so (e.g. "tag `0c510d3`; HEAD `f6a505a` is 2
+commits later and out of scope"). This prevents the classic error of mixing
+tag facts with working-tree facts.
+
+**The 2-delegate + parent-interjection pipeline:**
+
+1. **Researcher** delegate — re-reads the existing published note, verifies
+   every claim against real git (`git ls-tree <tag>:<path>`, `git show
+   <tag>:<file>`, targeted `git log`), hunts contradictions, and **logs
+   findings to a file written incrementally** (see `delegation-verification`
+   step 6 — survive the 524). No final doc.
+2. **Interjection #1 (parent):** read the findings log; independently re-verify
+   the load-bearing numbers with a couple of `git` calls; accept or send back
+   with corrections. Do NOT trust the delegate's `status=completed` — verify
+   the file on disk (a final-turn 524 can leave it empty).
+3. **Composer** delegate — reads findings + original note + a standing
+   adaptation brief, writes the polished notes **incrementally** (land
+   title+stats+first chapter, then append via `patch`).
+4. **Interjection #2 (parent):** read the composed notes; check every claim
+   against the findings log and re-verify anything suspicious with `git`; patch
+   the file directly for any defect.
+5. **Parent writes the release:** `gh release edit <tag> --notes-file
+   <file>` (creates the release object if only a tag exists), then verify with
+   `gh release view` and `git ls-remote --tags origin 'STANDARD*'` (confirm
+   standard tags untouched).
+
+**Reusable notes tone checklist** (applied as corrections to the v1.2.0 notes
+and inherited by v1.0.0 / v1.1.0):
+
+- **`deploy` wording:** the linguistic decision *preserved* `deploy` as the
+  accepted noun form and removed `deployment` from examples. Never write
+  "deploy -> deployment term fix". Phrase as "a `deploy` noun-form consistency
+  correction".
+- **No duplicated limitations:** keep repo-hygiene items (write gate incomplete,
+  absolute machine paths in skill front-matter, commit-message anomalies) under
+  one "Still open" list; the "Outstanding behavioural limitations" section holds
+  ONLY benchmark-specific items (live route not demonstrated; not a paired
+  control-vs-candidate experiment; WHITE remedies are proposals).
+- **Narrow confinement claims:** never say a test "proves" all write-confinement
+  — "the `jail` target verifies the covered escape cases are blocked; it does
+  not make the shared write gate universal."
+- **Exact live-route distinction:** the code-path repair (live mode now
+  propagates to downstream phases) is verified; a *captured scored live run* is
+  not. Say so: "propagates live mode downstream rather than forcing offline;
+  however, this release does not include a captured scored live run."
+- **Scientific boundary:** distinguish generated / offline-derived /
+  model-scored / implemented-live-propagation / unproven-e2e / scheduling
+  coverage. Coverage thresholds (e.g. 0.95) are "scheduling and progress
+  signals", never proof of robustness or convergence.
+- **Cross-release rule counts:** measure the actual count at EACH tag from
+  `ste-code/adapted/` (e.g. 55 at v1.0.0 -> 58 at v1.1.0, when rules 2.3/6.6/8.7
+  were added). Present the trajectory as a verified fact, not a contradiction.
+  If an earlier note said "54 unchanged for consumers", qualify it "since
+  v1.1.0".
+- **Optional polish:** "The benchmark learns to state its evidence" -> "records
+  its evidence"; "A confined agent environment" -> "A more confined agent
+  environment" (direct write paths remain).
+
+Archive the per-release draft (`release-story-<ver>.md`), findings
+(`research-findings-<ver>.md`), and final notes (`REPOSITORY-<ver>.md`) under
+`.agents/tmp/` so the pipeline is reproducible and the parent can re-verify.

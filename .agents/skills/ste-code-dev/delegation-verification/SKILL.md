@@ -30,6 +30,30 @@ silently ships empty work.
    delegates on overlapping territory (helper boundaries vs config boundaries)
    produce one target architecture only after you read and merge both reports.
 5. **Keep research delegates read-only:** one report file, no `git`, no tree edits.
+6. **For any deliverable that takes >~5 min or a long research sweep, WRITE IT
+   INCREMENTALLY AND EARLY — never in a single final `write_file`.** A delegate
+   that does all its work then writes the whole result at the end will lose
+   EVERYTHING if the final summary/transport call hits HTTP 524 (Cloudflare
+   120 s proxy timeout) or 429. The 524 lands on the LAST turn — exactly the
+   turn that writes the file. **Protocol (proven across repeated 15-min
+   passes):**
+   - First `write_file` = skeleton (range identity + headline stats + first
+     2–3 verified claims). Land it BEFORE the sweep is done.
+   - Then loop: `read_file` the current file -> `patch` (or rewrite) to append
+     the next section -> repeat. Reason between writes (read source -> decide
+     next chunk -> write only that chunk -> reassess). This is iterative, not a
+     single dump.
+   - Keep the final chat message SHORT (a one-line `DONE path=... lines=N`). Do
+     the writing via tool calls, not the final turn.
+   - If the delegate reports `status=completed` but the file is absent, the
+     final-turn 524 ate the write — salvage by reading its live transcript
+     (`grep` for the commands/output it ran) and rebuilding locally, OR
+     re-dispatch with the incremental-write mandate. The prior pass's transcript
+     still contains the verified facts.
+   - The Composer (downstream delegate) inherits the same rule: land
+     title + headline-stats + first chapter first, then append via `patch`.
+   A run that followed this survived two 524s with the file intact; a run that
+   didn't lost its whole 15-minute output.
 
 ## Pitfalls
 
