@@ -316,6 +316,15 @@ def _strip_command_prefixes(tokens: List[str]) -> List[str]:
                 index += 2
             else:
                 index += 1
+        # `timeout` takes a POSITIONAL duration before the real command
+        # (`timeout 5 mkdir -p ../x`). Without stepping past it the segment's
+        # command word is `5`, which is in no write table, so every operand -
+        # including the escaping path - was silently ignored. The duration is
+        # a number with an optional s/m/h/d suffix, so it can never be
+        # confused with a command name.
+        if name == "timeout" and index < limit:
+            if re.fullmatch(r"[0-9]+(?:\.[0-9]+)?[smhd]?", tokens[index]):
+                index += 1
     return tokens[index:]
 
 
@@ -348,7 +357,13 @@ def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
             short_cluster += body[1]
     long_flags = {t.split("=", 1)[0] for t in body[1:] if t.startswith("--")}
     operands = [
-        t for t in body[1:] if not t.startswith("-") and t not in _REDIRECT_TOKENS
+        t
+        for t in body[1:]
+        # A bare `-` means stdin/stdout and IS an operand: `tar -cf - .` names
+        # its archive that way. Filtering it out as a flag made the analyser
+        # fall through to the next positional (`.`) and report the current
+        # directory as the archive - a false positive on a pure pipe.
+        if (t == "-" or not t.startswith("-")) and t not in _REDIRECT_TOKENS
     ]
     if name == "tar" and operands and operands[0] == short_cluster:
         # The dashless flag cluster is not an operand.
@@ -522,6 +537,13 @@ def _analyze_segment(tokens: List[str], cwd: str) -> Tuple[List[Tuple[str, str]]
             for t in body[1:]
             if not t.startswith("-") and t not in _REDIRECT_TOKENS and "://" not in t
         ]
+        # Commands that carry their destination as `key=value` name their
+        # SOURCE the same way (`dd if=../src of=/dev/null`). Their positional
+        # operands are therefore not write targets - the destination was
+        # already collected above - so reporting them makes every `dd` read a
+        # false violation.
+        if name in _KEYVALUE_WRITE_OPERANDS:
+            operands = []
         # Drop the subcommand word for multiplexers.
         if name == "git" and operands:
             operands = operands[1:]

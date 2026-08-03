@@ -176,6 +176,16 @@ def _cases(
             "env prefix plus VAR=value assignment",
         ),
         ("terminal", {"command": "nohup touch ../nohup-escape &"}, "nohup prefix"),
+        (
+            "terminal",
+            {"command": "timeout 5 mkdir -p ../timeout-escape"},
+            "timeout prefix with a POSITIONAL duration",
+        ),
+        (
+            "terminal",
+            {"command": "timeout -s KILL 30s mkdir -p ../timeout-flag-escape"},
+            "timeout prefix with both a flag and a suffixed duration",
+        ),
         # --- destinations that match no other rule -------------------------
         (
             "terminal",
@@ -271,6 +281,22 @@ def _cases(
             "tar LIST is a pure read",
         ),
         ("terminal", {"command": "unzip -l /tmp/x.zip"}, "unzip LIST is a pure read"),
+        # `tar -cf - .` streams the archive to STDOUT. Treating the bare `-`
+        # as a flag made the analyser fall through to the next positional
+        # (`.`) and report the cwd as the archive - a false positive on a
+        # pure pipe.
+        (
+            "terminal",
+            {"command": "tar -cf - . | wc -c"},
+            "tar to stdout names no file target",
+        ),
+        # `dd if=<src>` names its SOURCE as key=value. Reporting positional
+        # operands for a key=value command made every dd read a violation.
+        (
+            "terminal",
+            {"command": "dd if=/etc/hosts of=/dev/null bs=1"},
+            "dd reading an outside file into /dev/null",
+        ),
         # --- `-o` is a read-only format specifier for many commands --------
         # `ps -o` selects columns; `git -o` likewise does not name a write
         # target. Treating `-o` as an output flag for every command once
