@@ -1,26 +1,100 @@
 # ===========================================================================
 # .prettierignore — anchors to .agents/format/ (this file's directory).
+#
 # Patterns are relative to HERE, so:
-#   ..        -> .agents/
-#   ../hermes -> .agents/hermes   (the other agent's verified surface)
-#   ../../ste-code -> ste-code/   (repo root's standard tree)
+#   ..              -> .agents/
+#   ../hermes       -> .agents/hermes    (the other agent's verified surface)
+#   ../../ste-code  -> ste-code/         (repo root's standard tree)
 #
 # Goal: format ../../ste-code/ and .. (the .agents/ tree) with prettier, but
-# NEVER touch the other agent's verified tooling (commits 3756d82 + bbcb052)
-# or this package's own scaffolding / scratch.
+# NEVER touch the other agent's verified tooling, generated/run output, or
+# this package's own scaffolding / scratch.
+#
+# Canonical exclusions — mirrored to:
+#   Format.sh    (find -not -path exclusions for dos2unix / shell stages)
+#   Markdown.py  (the `Exclude` frozenset of path components)
+#
+# Add new generated / vendored / cache paths here AND in the two sibling
+# files so every stage of the formatter agrees.
 # ===========================================================================
 
 # --- this package's own internals (relative to .agents/format/) -------------
 node_modules/
+**/node_modules/
+**/node_modules/**
 pnpm-lock.yaml
 package.json
+../pnpm-lock.yaml
+../package.json
 
-# --- the other agent's verified surface (DO NOT TOUCH) ----------------------
-# install / link scripts + dev-profile memory symlinks (USER.md / MEMORY.md)
+# --- PROTECTED: the other agent's verified surface (DO NOT TOUCH) -----------
+# install / link scripts, jail policy, dev-profile memory symlinks
+# (USER.md / MEMORY.md), and every profile definition. Removing this entry
+# breaks the formatter's contract with the concurrently-running session.
+../hermes
 ../hermes/**
 
-# --- our own scratch / research output --------------------------------------
+# --- PROTECTED: per-run scratch (gitignored, ships nothing) -----------------
+../tmp
 ../tmp/**
 
-# --- generated / vendored content under ste-code ----------------------------
+# --- PROTECTED: generated pipeline artifacts under ste-code -----------------
+# Rebuilt by .agents/tools/refinement/assemble-level*.py — never hand-format.
+../../ste-code/artifacts
 ../../ste-code/artifacts/**
+../../ste-code/audit
+../../ste-code/audit/**
+
+# --- PROTECTED: live Hermes skill surface -----------------------------------
+# .agents/skills/ is the single source of truth that every Hermes profile
+# symlinks into (see Makefile `skills-link`). It is authored and edited by
+# the owning session; the formatter must not rewrite another session's
+# in-flight skill edits.
+../skills
+../skills/**
+
+# --- benchmark run output (gitignored; regenerated per run) -----------------
+../benchmark/tests
+../benchmark/tests/**
+../benchmark/report
+../benchmark/report/**
+../benchmark/sample-session
+../benchmark/sample-session/**
+../benchmark/test-cases-adhoc
+../benchmark/test-cases-adhoc/**
+
+# --- agent run state / scratch / vendored corpora (gitignored) --------------
+../_scratch
+../_scratch/**
+../archive
+../archive/**
+../audit
+../audit/**
+../telemetry
+../telemetry/**
+../vendor
+../vendor/**
+../tools/linkcheck/reports
+../tools/linkcheck/reports/**
+
+# --- language / editor caches ------------------------------------------------
+**/__pycache__
+**/__pycache__/**
+**/.pytest_cache
+**/.pytest_cache/**
+**/.venv
+**/.venv/**
+**/.git
+**/.git/**
+**/dist
+**/dist/**
+**/.cache
+**/.cache/**
+**/.turbo
+**/.turbo/**
+
+# --- binary / non-source noise ------------------------------------------------
+**/*.pyc
+**/.DS_Store
+**/*.log
+**/.lycheecache

@@ -1,15 +1,19 @@
 {
-  "name": "@ste-code/format",
-  "version": "0.0.1",
-  "private": true,
-  "type": "module",
-  "packageManager": "pnpm@11.18.0",
-  "description": "Prettier-based markdown/formatting for STE-Code. Run from this directory; formats ../../ste-code/ and .. (the .agents/ tree) without touching .agents/hermes or .agents/tmp.",
-  "scripts": {
-    "format": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore --write ../../ste-code/ ..",
-    "check": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore --check ../../ste-code/ .."
-  },
-  "devDependencies": {
-    "prettier": "^3.9.5"
-  }
+	"name": "@ste-code/format",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"packageManager": "pnpm@11.18.0",
+	"description": "Prettier-based markdown/formatting for STE-Code. Run from this directory; formats ../../ste-code/ and .. (the .agents/ tree) without touching .agents/hermes, .agents/tmp, .agents/skills, or ste-code/artifacts.",
+	"scripts": {
+		"dryrun": "./Format.sh dryrun",
+		"format": "./Format.sh markdown",
+		"all": "./Format.sh all",
+		"tables": "python3 ./Markdown.py --All",
+		"audit": "./Format.sh audit",
+		"check": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore --check ../../ste-code/ .."
+	},
+	"devDependencies": {
+		"prettier": "^3.9.5"
+	}
 }
