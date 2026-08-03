@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Final cleanup of the JSON output."""
 import json
+from pathlib import Path
 
-PATH = '/Volumes/CORSAIR/Developer/macOS/Application/Manual/ste-code/data/vocabulary/unapproved-entries.json'
+PATH = Path(__file__).resolve().with_name('unapproved-entries.json')
 
 with open(PATH) as f:
     data = json.load(f)

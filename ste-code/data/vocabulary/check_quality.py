@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Check quality of the extracted unapproved entries."""
 import json
+from pathlib import Path
 
-with open('/Volumes/CORSAIR/Developer/macOS/Application/Manual/ste-code/data/vocabulary/unapproved-entries.json') as f:
+PATH = Path(__file__).resolve().with_name('unapproved-entries.json')
+
+with open(PATH) as f:
     data = json.load(f)
 
 print(f'Total entries: {len(data)}')
