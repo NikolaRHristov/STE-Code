@@ -85,16 +85,24 @@ def classify_private(text: str) -> Optional[bool]:
         if key in _CACHE:
             return _CACHE[key]
     try:
-        proc = subprocess.run(
-            ["hermes", "-p", _profile(), "-z", _CLASSIFY_PROMPT + text],
-            capture_output=True,
-            text=True,
+        # Route the Tier-1 classify through the hardened confined launcher so it
+        # runs under STE_CODE_JAIL_POLICY=bench with a stripped env, HOME=/tmp,
+        # and leak-scanned output — never as a bare, unconfined `hermes -z`.
+        import sys
+        _bench = Path(__file__).resolve().parents[4] / "benchmark"
+        if str(_bench) not in sys.path:
+            sys.path.insert(0, str(_bench))
+        from launch_confined_child import launch as _launch_confined
+
+        result = _launch_confined(
+            _CLASSIFY_PROMPT + text,
+            model="tencent/hy3:free",
+            label="privacy-classify",
             timeout=_CLASSIFY_TIMEOUT,
         )
-        out = (proc.stdout or "").strip().lower()
+        out = (result.stdout or "").strip().lower()
         verdict = out.startswith("true")
         if not (verdict or out.startswith("false")):
-            # Unparseable output — treat as uncertain, don't cache.
             logger.warning("privacy: unparseable LLM verdict %r", out[:80])
             return None
     except subprocess.TimeoutExpired:

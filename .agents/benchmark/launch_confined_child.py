@@ -4,18 +4,21 @@ launch_confined_child.py — hardened launcher for benchmark child sessions.
 
 WHY THIS EXISTS
 ---------------
-The stock pipeline launches worker agents two ways:
+The stock benchmark harness launches worker children two ways, both of which hand
+the child the INHERITED environment and never pin a profile, a jail policy, a
+toolset, or wrap the process in the kernel sandbox:
 
-  1. agent-runner.run_agent()  -> subprocess.run([venv_python,
-                                   hermes-oneshot-wrapper.py, prompt, ...])
-  2. launch-worker.sh          -> nohup python3 agent-runner.py ... &
+  1. benchmark/orchestrator.py        -> os.execvp("hermes", ["hermes","-z",...])
+  2. benchmark/orchestrator-control.py -> os.execvp("hermes", ["hermes","-z",...])
 
-Both hand the child the INHERITED environment (env = {**os.environ, **env_vars})
-and never pin a profile, a jail policy, a toolset, or wrap the process in the
-kernel sandbox. hermes-oneshot-wrapper.py hardcodes HERMES_YOLO_MODE=true +
-HERMES_ACCEPT_HOOKS=1 and uses the FULL cli toolset. The result: a "profile-less"
-child inherits the launching session's profile (often `dev` = wide open) and has
-NO jail, NO environment strip, NO redaction. That is the hole this file closes.
+(agent-runner.run_agent() / launch_agent() are PIPELINE-only — extraction,
+refinement, assembly — and must stay opt-in confined, not blanket-confined, so
+they keep running as the dev profile.) The oneshot wrapper
+(.agents/tools/lib/hermes-oneshot-wrapper.py) hardcodes HERMES_YOLO_MODE=true +
+HERMES_ACCEPT_HOOKS=1 and uses the FULL cli toolset. The result: a
+"profile-less" child inherits the launching session's profile (often `dev` = wide
+open) and has NO jail, NO environment strip, NO redaction. That is the hole this
+file closes.
 
 WHAT THIS WRAPPER GUARANTEES (all programmatic, not just `hermes -z`)
 ---------------------------------------------------------------------

@@ -2,7 +2,7 @@
 """
 Markdown.py - Enforce the STE-Code markdown visual standard.
 
-STE-Code analogue of CodeEditorLand/Land/Maintain/Format/Markdown.py. The
+STE-Code analogue of <repo>/Land/Maintain/Format/Markdown.py. The
 upstream tool reindents HTML <table> blocks; this repository has none (verified:
 `grep -rl '<table' ste-code .agents --include=*.md` is empty). What STE-Code
 documents and release notes actually use is *markdown* structure, so this tool
