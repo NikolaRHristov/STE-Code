@@ -1,36 +1,36 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""post_tool_call hook: anonymise + restructure memory writes (dev-ste-code).
+"""post_tool_call hook: anonymise memory writes (dev-ste-code).
 
 Wiring (config.yaml hooks.post_tool_call with matcher: memory):
-  Fires AFTER the agent-loop `memory`/`user` write completes. IMPORTANT: Hermes
+  Fires AFTER the agent-loop `memory`/`user` write completes. NOTE: Hermes
   short-circuits `pre_tool_call` for `_AGENT_LOOP_TOOLS` (memory, todo,
-  session_search, delegate_task) in model_tools.py BEFORE hook dispatch — so a
+  session_search, delegate_task) in model_tools.py BEFORE hook dispatch, so a
   `pre_tool_call` matcher:memory hook NEVER fires. Only `post_tool_call` reaches
   memory writes (emitted via _finish_agent_tool in agent_runtime_helpers.py).
-  The hook's return value is ignored; we act by rewriting the store file.
 
-Why post-write scrub, not pre-block:
-  We cannot block the original write (pre_tool_call is skipped, and modify is
-  discarded for agent-loop tools). Instead we guarantee the on-disk store is
-  ALWAYS anonymised by re-writing it through the anonymiser after every write.
-  Idempotent: re-running anonymise on already-clean content is a no-op, so the
-  file stabilises immediately and PII never persists beyond the current turn.
+Design — anonymise only, NO background LLM:
+  The original design also spawned `hermes -z` to "restructure" the store. That
+  was removed because it was the entire bug surface:
+    * `hermes -z` ALWAYS creates a logged session -> memory-restructure clutter.
+    * spawned with cwd=~/.hermes, the dev jail resolved project_root=None, so the
+      restructure agent's write_file to MEMORY.md was BLOCKED -> it looped
+      25-84 messages diagnosing/retrying the jail.
+    * the LLM rewrote raw PII (e.g. "Nikola Hristov") back into the store,
+      defeating the anonymiser.
+    * it fired on EVERY memory write -> dozens of concurrent sessions.
+  The hook's actual contract is: guarantee the on-disk store is anonymised. That
+  is a pure-Python regex scrub, idempotent, ~50ms, fire-and-forget by nature, and
+  needs no subprocess. PII never persists past the turn. If an LLM-driven
+  restructure is wanted later, do it as a SEPARATE bounded cron job, never
+  synchronously from this hook.
 
-Pipeline:
-  1. FAST local anonymise of the whole target store (MEMORY.md / USER.md).
-  2. Re-write the store with all entries scrubbed (guarantees no PII on disk).
-  3. Fire `hermes -z` IN THE BACKGROUND to restructure/improve the file, merge
-     the result back (re-anonymised). Fire-and-forget. The background process
-     sets HERMES_ACCEPT_HOOKS=0 so its own writes can't re-trigger this hook.
-
-Stdin : JSON {hook_event_name, tool_name:"memory", tool_input{action,target,...}, ...}
-Stdout: {}  (return value ignored; we persist by rewriting the file)
+Stdin : JSON {hook_event_name, tool_name:"memory", tool_input{action,target,...}}
+Stdout: {}  (return value ignored; we act by rewriting the store file)
 """
 import json
 import os
 import re
-import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -48,8 +48,36 @@ MEMORY_STORE = REPO / ".agents" / "hermes" / "memory" / "dev-ste-code" / "MEMORY
 USER_STORE = REPO / ".agents" / "hermes" / "memory" / "dev-ste-code" / "USER.md"
 
 # --------------------------------------------------------------------------- #
-# Anonymiser (regex, deterministic, no network)
+# Anonymiser (regex, deterministic, no network, no subprocess)
 # --------------------------------------------------------------------------- #
+# Known non-person Title-Case tokens — excluded from the person-name heuristic so
+# we don't anonymise product/role names like "Red Hat", "Hermes Agent",
+# "Level Worker", "GitHub Copilot", "Red Hat Linux". Covers common brand-name
+# first words AND continuations that would otherwise look like a "Surname".
+_KNOWN_NON_PERSON = {
+    "STE", "API", "URL", "Red", "Black", "White", "Blue", "Purple", "Green",
+    "Yellow", "Orange", "Level", "Agent", "Hermes", "GitHub", "GitLab", "Nous",
+    "Code", "Tool", "Hook", "Config", "Memory", "User", "Host", "Email", "Person",
+    "Repo", "Home", "Shell", "File", "Path", "Error", "Warning", "Info", "Debug",
+    "Test", "Build", "Run", "Note", "Table", "Figure", "Section", "Chapter",
+    "Make", "Skip", "Pass", "Fail", "True", "False", "None", "Model", "Prompt",
+    "Hat", "Linux", "Mac", "OS", "Server", "Studio", "Hub", "Base", "Stack",
+    "Cloud", "Pro", "Max", "Mini", "Air", "Book", "Pad", "Pen", "TV", "App",
+    "Kit", "Lab", "Soft", "Hard", "Open", "Free", "Dev", "Ops", "Net", "Web",
+    "Data", "Core", "Edge", "Flow", "View", "Docs", "DB", "SQL", "No", "Go",
+}
+# Heuristic: Title-Case "Firstname Lastname" (e.g. "Nikola Hristov") -> <person>.
+# No literal operator name is baked into this file (that would leak PII into the
+# repo single-source); the pattern recognises the SHAPE of a person name. The env
+# var HERMES_OPERATOR_NAMES (set from ~/.hermes/.env, operator-owned, gitignored)
+# handles standalone names. Single responsibility: this is still just anonymising.
+_PERSON_HEURISTIC = re.compile(
+    r"\b(?!(?:"
+    + "|".join(sorted(_KNOWN_NON_PERSON))
+    + r")\s)[A-Z][a-z]{1,20}\s+[A-Z][a-z]{1,20}\b"
+)
+
+
 def build_anon_patterns():
     pats = [
         (re.compile(r"/Users/[A-Za-z0-9_.-]+"), "<user-home>"),
@@ -63,6 +91,7 @@ def build_anon_patterns():
         (re.compile(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b"), "<ip>"),
         (re.compile(r"[A-Za-z0-9.-]+\.(?:nousresearch\.com|local|lan|home)"),
          "<host>"),
+        (_PERSON_HEURISTIC, "<person>"),
     ]
     names = os.environ.get("HERMES_OPERATOR_NAMES", "")
     for nm in [n.strip() for n in names.split(",") if n.strip()]:
@@ -94,42 +123,11 @@ def scrub_store(store: Path) -> bool:
         body = store.read_text(encoding="utf-8")
     except OSError:
         return False
-    # Memory entries are separated by '§' (per the doc format); also handle
-    # double-newline blocks. Simplest robust approach: anonymise the entire file
-    # text (placeholders already present are untouched by the regexes).
     scrubbed = anonymise(body)
     if scrubbed != body:
         store.write_text(scrubbed, encoding="utf-8")
         return True
     return False
-
-
-# --------------------------------------------------------------------------- #
-# Background restructure (fire-and-forget, recursion-guarded)
-# --------------------------------------------------------------------------- #
-def launch_restructure(store: Path) -> None:
-    prompt = (
-        f"You are a memory-hygiene editor for a coding agent. Read the file at "
-        f"this absolute path: {store}\n"
-        "Rewrite it to be concise, declarative, and well-structured "
-        "(one fact per line; group related facts under short ## headings; keep "
-        "existing <placeholders> like <user-home>, <repo>, <person>, <email>, "
-        "<ip>, <host> verbatim — never expand them). Remove duplication. "
-        "Preserve every factual claim. Output ONLY the rewritten markdown, no "
-        "commentary."
-    )
-    env = {**os.environ, "HERMES_ACCEPT_HOOKS": "0"}
-    try:
-        subprocess.Popen(
-            ["hermes", "-z", prompt, "--yolo", "-m", "tencent/hy3:free"],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            start_new_session=True,
-            cwd=str(HERMES_HOME),
-            env=env,
-        )
-    except Exception as e:  # noqa: BLE001
-        _log(f"restructure spawn failed: {e}")
 
 
 def _log(msg: str) -> None:
@@ -162,11 +160,10 @@ def main() -> int:
         store = USER_STORE if target == "user" else MEMORY_STORE
 
         # Guarantee: store on disk is anonymised after this write.
+        # Idempotent — re-running on already-clean content is a no-op, so the
+        # file stabilises immediately and PII never persists past the turn.
         changed = scrub_store(store)
         _log(f"post_memory -> {store.name} (scrub={'yes' if changed else 'no'})")
-
-        # Background LLM restructure (fire-and-forget, recursion-guarded).
-        launch_restructure(store)
     finally:
         print(out)
     return 0
