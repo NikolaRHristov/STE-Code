@@ -5,7 +5,7 @@ description:
     false
 category: benchmark
 capability: running-the-adversarial-benchmark
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/validation/link-checking
+source: .agents/skills/validation/link-checking
 layout: ste-code-canonical-v1
 ---
 

@@ -20,7 +20,10 @@ import os
 import sys
 
 H = os.path.expanduser("~/.hermes")
-REPO = "/Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code"
+# Derived from this file's location, never a hardcoded machine path.
+# scripts/ -> ste-code-jail-ops -> ste-code-apply -> skills -> .agents -> STE-Code (5 ups)
+_HERE = os.path.dirname(os.path.realpath(__file__))
+REPO = os.path.realpath(os.path.join(_HERE, "..", "..", "..", "..", ".."))
 REPO_SKILLS = os.path.realpath(os.path.join(REPO, ".agents", "skills"))
 STATE_FILES = {".bundled_manifest", ".usage.json", ".usage.json.lock"}
 

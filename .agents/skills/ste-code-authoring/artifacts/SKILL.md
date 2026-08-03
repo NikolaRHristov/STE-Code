@@ -3,7 +3,7 @@ name: artifacts
 description: > **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
 category: authoring
 capability: authoring-and-changing-the-standard
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/artifacts
+source: .agents/skills/artifacts
 layout: ste-code-canonical-v1
 ---
 

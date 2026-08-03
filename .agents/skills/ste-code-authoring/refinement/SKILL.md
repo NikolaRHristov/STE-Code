@@ -5,7 +5,7 @@ description:
     (`ste-code/extracted/*.md`)
 category: authoring
 capability: authoring-and-changing-the-standard
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/refinement
+source: .agents/skills/refinement
 layout: ste-code-canonical-v1
 ---
 

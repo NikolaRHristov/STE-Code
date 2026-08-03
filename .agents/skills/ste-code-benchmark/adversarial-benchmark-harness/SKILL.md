@@ -3,7 +3,7 @@ name: adversarial-benchmark-harness
 description: **Load this when** you are asked to build or extend a benchmark where independent
 category: benchmark
 capability: running-the-adversarial-benchmark
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/validation/adversarial-benchmark-harness
+source: .agents/skills/validation/adversarial-benchmark-harness
 layout: ste-code-canonical-v1
 ---
 

@@ -3,7 +3,7 @@ name: github-release-maintenance
 description: One skill that owns everything a release touches: measured project facts,
 category: release
 capability: cutting-releases-and-github-ops
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/github/github-release-maintenance
+source: .agents/skills/github/github-release-maintenance
 layout: ste-code-canonical-v1
 ---
 

@@ -3,7 +3,7 @@ export default {
 	// =========================================================================
 	// STE-Code formatter configuration.
 	//
-	// Lifted from CodeEditorLand/Land/prettier.config.js and reduced to the
+	// Lifted from <repo>/Land/prettier.config.js and reduced to the
 	// languages that actually exist in this repository. The STE-Code repo root
 	// deliberately carries NO package.json and NO prettier config: this file is
 	// always supplied explicitly with `prettier --config`, and every path in

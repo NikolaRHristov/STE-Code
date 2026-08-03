@@ -1,7 +1,7 @@
 # `git gcommit-hermes` hazard under a concurrent committer
 
 `gcommit-hermes` is an alias for the `Save` binary
-(`~/Developer/Maintain/Save/Target/release/Save`), not plain `git commit`. It
+(`~/Developer/<repo>/Maintain/Save/Target/release/Save`), not plain `git commit`. It
 auto-generates a Conventional Commit message.
 
 ## Observed behavior (verified this session)

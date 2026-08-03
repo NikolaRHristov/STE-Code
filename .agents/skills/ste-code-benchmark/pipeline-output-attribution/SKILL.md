@@ -3,7 +3,7 @@ name: pipeline-output-attribution
 description: **Load this when**: auditing whether stage-N output really came from stage-N input,
 category: benchmark
 capability: running-the-adversarial-benchmark
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/validation/pipeline-output-attribution
+source: .agents/skills/validation/pipeline-output-attribution
 layout: ste-code-canonical-v1
 ---
 

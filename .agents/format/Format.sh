@@ -16,7 +16,7 @@
 #   .agents/format/Format.sh prettier     # prettier --write only
 #   .agents/format/Format.sh all          # dos2unix, shell, tables, prettier
 #
-# Ported from CodeEditorLand/Land/Maintain/Format.sh. Two deliberate
+# Ported from <repo>/Land/Maintain/Format.sh. Two deliberate
 # divergences from upstream:
 #
 #   1. DEFAULT IS A DRY RUN. Upstream's no-arg invocation writes every file.

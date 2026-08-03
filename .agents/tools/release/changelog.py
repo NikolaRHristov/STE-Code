@@ -36,7 +36,7 @@ from repo_root import repo_root as _repo_root  # noqa: E402
 PROJECT = _repo_root(__file__)
 from ste_io import write_text  # noqa: E402
 
-REPO = "https://github.com/NikolaRHristov/STE-Code"
+REPO = "https://github.com/<github-org>/STE-Code"
 
 SECTIONS = [
     ("feat", "Added"),

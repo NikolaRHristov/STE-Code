@@ -45,7 +45,7 @@ hardened after a multi-session DRY + config-centralisation refactor.
   `<person>`, `<github-org>`, `<repo-a/b/c>`, etc. Keep the workflow preferences
   (the durable, non-personal part) verbatim.
     - _Verification:_
-      `grep -rniE "nikola|hristov|<real-org>|<real-repo>" .agents/hermes/memory/`
+      `grep -rniE "<person>|<github-org>|<real-org>|<real-repo>" .agents/hermes/memory/`
       must return CLEAN before committing memory files.
 - **Audit for false "ships" claims.** `.agents/tmp/*` is gitignored → it ships
   NOTHING (see §1). A doc that says the repo "ships" content from a gitignored

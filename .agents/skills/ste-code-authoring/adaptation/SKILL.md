@@ -3,7 +3,7 @@ name: adaptation
 description: > **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
 category: authoring
 capability: authoring-and-changing-the-standard
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/adaptation
+source: .agents/skills/adaptation
 layout: ste-code-canonical-v1
 ---
 

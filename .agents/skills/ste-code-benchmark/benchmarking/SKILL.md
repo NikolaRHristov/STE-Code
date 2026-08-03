@@ -3,7 +3,7 @@ name: benchmarking
 description: > **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
 category: benchmark
 capability: running-the-adversarial-benchmark
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/benchmarking
+source: .agents/skills/benchmarking
 layout: ste-code-canonical-v1
 ---
 

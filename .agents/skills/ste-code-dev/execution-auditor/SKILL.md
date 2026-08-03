@@ -3,7 +3,7 @@ name: execution-auditor
 description: > **MANDATORY**: Read `.agents/skills/OPERATING_PRINCIPLES.md` before any work.
 category: dev
 capability: developing-and-changing-the-standard
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/execution-auditor
+source: .agents/skills/execution-auditor
 layout: ste-code-canonical-v1
 ---
 

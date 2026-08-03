@@ -3,7 +3,7 @@ name: gated-batch-orchestration
 description: **Load this when**: you are told to launch an existing batch orchestrator that
 category: benchmark
 capability: running-the-adversarial-benchmark
-source: /Volumes/CORSAIR/Developer/macOS/Application/NikolaRHristov/STE-Code/.agents/skills/validation/gated-batch-orchestration
+source: .agents/skills/validation/gated-batch-orchestration
 layout: ste-code-canonical-v1
 ---
 
