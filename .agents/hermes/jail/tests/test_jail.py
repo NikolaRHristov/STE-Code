@@ -700,6 +700,86 @@ def run_policy(policy: str, verbose: bool) -> int:
     return failures
 
 
+def run_fail_closed(verbose: bool) -> int:
+    """Regression: the group plugin must fail CLOSED (item I1).
+
+    Two paths, both of which used to let a tool call through unjudged:
+
+    1. a component's hook RAISES at run time -> was `except: continue`
+    2. a component fails to LOAD -> was logged and dropped from the chain
+    """
+    import core.policy as core_policy
+
+    os.environ["STE_CODE_JAIL_POLICY"] = "dev"
+    os.environ["HERMES_PROFILE"] = POLICY_PROFILE["dev"]
+    core_policy._context_cache = None
+
+    print(f"\n{'=' * 66}")
+    print("FAIL-CLOSED (I1) - a broken jail must refuse, not allow")
+    print(f"{'=' * 66}")
+
+    failures = 0
+    benign = ("terminal", {"command": "echo hello"}, "benign call")
+    tool, args, label = benign
+
+    # Baseline: with an intact chain the benign call is allowed.
+    group = _load_group_plugin()
+    result = group._on_pre_tool_call(tool_name=tool, args=dict(args))
+    if isinstance(result, dict) and result.get("action") == "block":
+        failures += 1
+        print(f"  [FAIL] baseline {label}: blocked with an intact chain")
+    elif verbose:
+        print(f"  [ok]   baseline {label} allowed with an intact chain")
+
+    # 1. every judging component, in turn, raises -> must block.
+    for name in group.COMPONENTS:
+        group = _load_group_plugin()
+
+        def _boom(*_a: Any, **_k: Any) -> None:
+            raise RuntimeError(f"synthetic crash in {name}")
+
+        target = next(
+            (h for h in group._chain if group._HOOK_NAMES.get(h) == name), None
+        )
+        if target is None:
+            failures += 1
+            print(f"  [FAIL] component {name} is not in the chain")
+            continue
+        setattr(group, "_chain", [_boom if h is target else h for h in group._chain])
+        group._HOOK_NAMES[_boom] = name
+
+        result = group._on_pre_tool_call(tool_name=tool, args=dict(args))
+        blocked = isinstance(result, dict) and result.get("action") == "block"
+        message = str(result.get("message", "")) if isinstance(result, dict) else ""
+        if not blocked:
+            failures += 1
+            print(f"  [HOLE] {name} raised and the call was NOT blocked")
+        elif name not in message:
+            failures += 1
+            print(f"  [FAIL] {name} raised; block message does not name it")
+        elif verbose:
+            print(f"  [ok]   {name} raised -> blocked, message names it")
+
+    # 2. a component fails to load -> the whole jail refuses.
+    group = _load_group_plugin()
+    setattr(group, "_missing", ["jail-fs"])
+    result = group._on_pre_tool_call(tool_name=tool, args=dict(args))
+    blocked = isinstance(result, dict) and result.get("action") == "block"
+    if not blocked:
+        failures += 1
+        print("  [HOLE] incomplete chain did NOT refuse the call")
+    elif "INCOMPLETE" not in str(result.get("message", "")):
+        failures += 1
+        print("  [FAIL] incomplete-chain refusal does not say INCOMPLETE")
+    elif verbose:
+        print("  [ok]   incomplete chain -> every call refused")
+
+    checks = len(group.COMPONENTS) + 2
+    if not verbose:
+        print(f"  {checks - failures}/{checks} fail-closed checks passed")
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-v", "--verbose", action="store_true")
@@ -714,6 +794,7 @@ def main() -> int:
 
     policies = [opts.policy] if opts.policy else ["dev", "user", "bench"]
     total_failures = sum(run_policy(p, opts.verbose) for p in policies)
+    total_failures += run_fail_closed(opts.verbose)
 
     print(f"\n{'=' * 66}")
     if total_failures:
