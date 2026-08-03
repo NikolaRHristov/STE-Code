@@ -1,4 +1,4 @@
-"""ste-code-jail-core.analysis — extract write targets from tool arguments.
+"""ste-code-jail-core.analysis - extract write targets from tool arguments.
 
 Shared by every granular jail plugin and by the shell script packet, so the
 parsing rules live in exactly one place.
@@ -85,7 +85,7 @@ _WRITE_COMMANDS: Dict[str, str] = {
 # Archive tools need mode-dependent analysis: `tar -x` READS the archive and
 # WRITES to the extraction directory, while `tar -c` writes the archive and
 # reads the tree. Treating every operand as a write (the old behaviour) made
-# `tar -tzf repo/x.tar.gz` a policy violation under the locked-down profiles —
+# `tar -tzf repo/x.tar.gz` a policy violation under the locked-down profiles -
 # a false positive on a pure listing. Handled by ``_archive_targets``.
 _ARCHIVE_COMMANDS = frozenset({"tar", "unzip", "zip"})
 
@@ -103,7 +103,7 @@ _INLINE_CODE_FLAGS = {
 }
 
 # Wrappers that run another command. The real command is the first operand
-# after the wrapper's own flags, so analysis must step past them — otherwise
+# after the wrapper's own flags, so analysis must step past them - otherwise
 # `sudo mkdir ../x` is read as a call to `sudo` and its operands are ignored.
 # Each entry maps the wrapper to the flags that consume a following argument.
 _COMMAND_PREFIXES: Dict[str, frozenset] = {
@@ -144,14 +144,39 @@ _SEGMENT_SEPARATORS = {";", "&&", "||", "|", "&", "\n"}
 _REDIRECT_TOKENS = {">", ">>", ">|", "&>", "&>>", "1>", "2>", "1>>", "2>>"}
 
 # Flags that name a directory the command operates in.
-_DIR_FLAGS = {"-C", "--directory", "--cd", "-o", "--output", "--output-dir"}
+#
+# `-o` is deliberately NOT here. It is an output-destination flag for a small
+# set of commands (`sort`, `curl`, `wget`, the C/C++ compilers) but a
+# *read-only format specifier* for many others (`ps -o pid=,command=`,
+# `git -o`, `rsync -o` = owner, `unzip -o` = overwrite). Treating `-o` as a
+# write flag for every command made the jail block harmless read commands such
+# as `ps -o pid=` - the false positive that previously blocked dev sessions.
+# It is scoped to the commands that really write through it in
+# `_EXTRA_DIR_FLAGS` below.
+# `--output`/`--output-dir` stay universal: they are explicit long-form output
+# flags that no common read command repurposes as a format selector.
+_DIR_FLAGS = {"-C", "--directory", "--cd", "--output", "--output-dir"}
 
 # Per-command flags that name a write destination but are too ambiguous to put
-# in the shared set. `-d` means "extract to DIR" for unzip and "delete" for
-# several other tools, so it is scoped to the commands where it is a target.
+# in the shared set.
+#   * `-d` means "extract to DIR" for unzip and "delete" for several other
+#     tools, so it is scoped to unzip.
+#   * `-o` (and `-O`) is an output-file flag ONLY for the commands listed
+#     here; for every other command it is read-only (format/owner/overwrite),
+#     so it must not be interpreted as a write target.
 _EXTRA_DIR_FLAGS: Dict[str, frozenset] = {
     "unzip": frozenset({"-d"}),
     "rsync": frozenset({"--backup-dir"}),
+    "sort": frozenset({"-o", "--output"}),
+    "curl": frozenset({"-o", "--output"}),
+    "wget": frozenset({"-O", "--output-document"}),
+    "gcc": frozenset({"-o", "--output"}),
+    "g++": frozenset({"-o", "--output"}),
+    "cc": frozenset({"-o", "--output"}),
+    "clang": frozenset({"-o", "--output"}),
+    "clang++": frozenset({"-o", "--output"}),
+    "c++": frozenset({"-o", "--output"}),
+    "ld": frozenset({"-o", "--output"}),
 }
 
 # Operands of the form ``key=value`` that name a file the command writes.
@@ -165,7 +190,7 @@ _KEYVALUE_WRITE_OPERANDS: Dict[str, Tuple[str, ...]] = {
 _PATHLIKE_RE = re.compile(r"^(?:[~./]|[A-Za-z0-9_.\-]+/)")
 
 # Character devices and stdio that every shell pipeline writes to. Writing to
-# them mutates no file, so gating them produces pure false positives — the
+# them mutates no file, so gating them produces pure false positives - the
 # `2>/dev/null` on an ordinary read command being the obvious one. This mirrors
 # the device allow-list in the Seatbelt profile emitted by scripts/jail-lib.sh,
 # so both layers agree on what is not a filesystem write.
@@ -262,7 +287,7 @@ def _strip_command_prefixes(tokens: List[str]) -> List[str]:
 
     ``sudo mkdir -p ../x`` must be analysed as ``mkdir -p ../x``. Without this
     the segment's command word is ``sudo``, which is in no write table, and
-    every operand — including the escaping path — is silently ignored.
+    every operand - including the escaping path - is silently ignored.
 
     Also drops ``VAR=value`` assignment prefixes (``HOME=/x mkdir $HOME/y``)
     and, for ``xargs``, the ``-I{}`` placeholder form that attaches its value.
@@ -272,7 +297,7 @@ def _strip_command_prefixes(tokens: List[str]) -> List[str]:
     limit = len(tokens)
     while index < limit:
         word = tokens[index]
-        # `VAR=value cmd ...` — an assignment prefix, not the command.
+        # `VAR=value cmd ...` - an assignment prefix, not the command.
         if re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", word):
             index += 1
             continue
@@ -344,7 +369,7 @@ def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
         explicit = dir_flag_value("-f", "--file")
         if explicit:
             return explicit
-        # `-czf x.tar.gz` — f is inside the cluster, so the archive is the
+        # `-czf x.tar.gz` - f is inside the cluster, so the archive is the
         # first positional operand. Missing this made `tar -czf ../x.tgz .`
         # an unblocked escape.
         if "f" in short_cluster and operands:
@@ -381,7 +406,7 @@ def _archive_targets(name: str, body: List[str]) -> List[Tuple[str, str]]:
         return targets
 
     if name == "zip":
-        # `zip archive.zip files...` — the archive is the first operand.
+        # `zip archive.zip files...` - the archive is the first operand.
         if operands:
             targets.append(("terminal(zip archive)", operands[0]))
         return targets
@@ -524,8 +549,8 @@ def _heredoc_bodies(command: str) -> List[str]:
     """Return the body text of every heredoc in *command*.
 
     ``python3 - <<'EOF' ... EOF`` feeds a whole script through stdin. The
-    tokenizer sees only ``python3 -``, so without this the script body — and
-    any ``os.makedirs('../x')`` inside it — is invisible to the analysis.
+    tokenizer sees only ``python3 -``, so without this the script body - and
+    any ``os.makedirs('../x')`` inside it - is invisible to the analysis.
     """
     return [m.group("bodytext") for m in _HEREDOC_RE.finditer(command)]
 
@@ -601,7 +626,7 @@ def containment_violations(
 
     Checking this separately matters because write roots move. Widening ``dev``
     to cover ``<hermes>/profiles`` (so it can provision sibling profiles) made
-    a skill traversal land inside an allowed root and stop being reported —
+    a skill traversal land inside an allowed root and stop being reported -
     the policy check alone could not tell "wrote to a permitted directory"
     from "climbed out of the skills tree into it".
     """
