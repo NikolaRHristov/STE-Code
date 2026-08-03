@@ -1,11 +1,10 @@
 ---
 name: hermes-profile-skill-confinement
 description:
-    A Hermes profile must load ONLY a chosen skill set and NO default bundled
-    Hermes skills
-category: apply
-capability: applying-the-standard-to-a-codebase
-source: <home>/.hermes/profiles/dev-ste-code/skills/devops/hermes-profile-skill-confinement
+    Confine a Hermes profile to a chosen skill set; block default bundled skills.
+category: dev
+capability: developing-the-standard
+source: <home>/.hermes/profiles/dev-ste-code/skills/ste-code-dev/hermes-profile-skill-confinement
 layout: ste-code-canonical-v1
 ---
 
@@ -28,8 +27,8 @@ skills (e.g. STE-Code authoring/benchmark/consumer profiles).
 
 ## Procedure
 
-1. Canonical source: `REPO/.agents/skills/<name>` (+ consumer skills like
-   `applying-ste-code`).
+1. Canonical source: `REPO/.agents/skills/<name>` (+ the consumer skill
+   `ste-code-consumer/apply-standard`).
 2. Per profile `skills/` dir:
     - KEEP state files: `.bundled_manifest`, `.usage.json`, `.usage.json.lock`,
       `.hub/`.
@@ -44,7 +43,7 @@ skills (e.g. STE-Code authoring/benchmark/consumer profiles).
 - LIVE sessions regenerate `skills/` (e.g. `dev-ste-code/skills/ste-code/` came
   back with `ste-code-jail-ops`, `ste-code-repo-hygiene`). Re-strip only after
   the session goes quiet. If the user explicitly says to leave a regenerated
-  real dir as-is (their active work), do NOT re-symlink it — it is legit STE
+  real dir as-is (their active work), do NOT re-symlink it - it is legit STE
   work, just not yet single-sourced.
 - Do NOT prune `~/.hermes/skills/` (global, shared). Confinement is per-profile.
 - `github-release-maintenance`, `ste-code-continuation`, `ste-code-validate`,
@@ -60,4 +59,4 @@ env -u HERMES_HOME HERMES_PROFILE=<p> HERMES_HOME=~/.hermes/profiles/<p> \
 ```
 
 Confirm zero default skills, only intended STE skills. Static `ls` is NOT enough
-— a live session can change what resolves.
+- a live session can change what resolves.

@@ -1,10 +1,10 @@
 ---
 name: ste-code-release-notes
-description: >-
-    Reformat STE-Code release notes to house visual standard.
+description:
+    Reformat STE-Code release notes to the house visual standard.
 ---
 
-# STE-Code Release Notes — House Visual Standard
+# STE-Code Release Notes - House Visual Standard
 
 ## Trigger
 
@@ -33,11 +33,11 @@ filename, or tag. The job is **structure and whitespace only**:
    siblings:
     - `# STE-Code REPOSITORY vX.Y.Z`
     - `> **Tag family.** …` blockquote at the very top (the scope note).
-    - `## Headline stats (all at \`<hash>\`)` — a table.
-    - thematic `##` chapters (these differ per version — that is fine).
+    - `## Headline stats (all at \`<hash>\`)` - a table.
+    - thematic `##` chapters (these differ per version - that is fine).
     - `## Contradictions resolved (repository view)` (or the v1.0.0 equivalent
-      `## Known repository-level limitations`) — a table, near the end.
-    - `## Version boundary` — bullets.
+      `## Known repository-level limitations`) - a table, near the end.
+    - `## Version boundary` - bullets.
 4. **Choose the right container:**
     - TABLE for tabular / comparison data (stats, commit ranges,
       contradictions).
@@ -46,7 +46,7 @@ filename, or tag. The job is **structure and whitespace only**:
       migration fix sequence).
     - BLOCKQUOTE (`>`) for the tag-family scope note AND for key caveats /
       framing boundaries (e.g. "born, not hardened").
-5. **Keep these structural anchors intact** — they appear in both notes and a
+5. **Keep these structural anchors intact** - they appear in both notes and a
    future reviewer expects them: the tag-family blockquote, the headline-stats
    table, the contradictions/limitations table, the version-boundary section. If
    a version lacks one (v1.0.0 has no contradictions table), use its natural
@@ -59,18 +59,18 @@ Large markdown files read back truncated at ~100 lines, which corrupts a
 single-shot `write_file` + later `read_file` verification. Instead:
 
 1. `write_file` the FIRST chunk only: title + tag-family blockquote +
-   headline-stats table (≈10–30 lines).
+   headline-stats table (≈10-30 lines).
 2. `read_file` the file to confirm it landed.
-3. `patch` (mode=replace, match the last line) to APPEND the next 1–2 sections.
+3. `patch` (mode=replace, match the last line) to APPEND the next 1-2 sections.
 4. Repeat until done. Small, reviewable diffs and no truncation.
 
-For a 2-file batch, do file A fully (chunk by chunk) then file B — or
+For a 2-file batch, do file A fully (chunk by chunk) then file B - or
 interleave; either way each `write_file`/`patch` stays under the truncation
 boundary.
 
 ## Verification
 
-- Line counts: both rewritten files land near 90–100 lines (dense but
+- Line counts: both rewritten files land near 90-100 lines (dense but
   untruncated). Report both counts to the user.
 - Diff-check: every hash, percentage, and filename from the source is present in
   the rewrite. No new sentences introduced.
@@ -79,7 +79,7 @@ boundary.
 
 ## Pitfalls
 
-- Do NOT flatten a table into prose "for readability" — tables are the standard
+- Do NOT flatten a table into prose "for readability" - tables are the standard
   for stats and contradictions.
 - Do NOT move the tag-family note out of the top blockquote; v1.1.0 already uses
   a top blockquote, and v1.0.0 must be converted to match.

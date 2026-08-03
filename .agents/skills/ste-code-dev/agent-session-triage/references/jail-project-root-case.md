@@ -20,7 +20,7 @@ dropped from the write roots.
 Verify the premise before investigating it. Evaluating `load_context()` directly:
 
 ```
-project_root: /Volumes/CORSAIR/.../STE-Code
+project_root: <repo>
 policy: dev
 write_roots: [repo, profile, profiles, /tmp, ...]
 ```

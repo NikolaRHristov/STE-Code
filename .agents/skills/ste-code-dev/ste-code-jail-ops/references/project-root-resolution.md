@@ -38,17 +38,16 @@ With `HERMES_HOME=~/.hermes/profiles/dev-ste-code` and
 
 ```
 profile: dev-ste-code
-project_root: /Volumes/CORSAIR/.../STE-Code
 policy: dev
 write_roots:
-  /Volumes/CORSAIR/.../STE-Code          (the repo)
-  /Users/nikola/.hermes/profiles/dev-ste-code
-  /Users/nikola/.hermes/profiles          (dev may provision siblings)
+  <repo>                                    (the STE-Code checkout)
+  <user-home>/.hermes/profiles/dev-ste-code
+  <user-home>/.hermes/profiles            (dev may provision siblings)
   /private/tmp
   /private/var/folders/...
 deny_roots:
-  /Volumes/CORSAIR/.../NikolaRHristov      (repo PARENT)
-  /Volumes/CORSAIR/.../STE-Code/.git
+  <repo-parent>                            (repo PARENT)
+  <repo>/.git
 ```
 
 So the dev profile correctly lists the repo as a write root **whatever the cwd

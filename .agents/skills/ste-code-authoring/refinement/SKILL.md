@@ -1,8 +1,7 @@
 ---
 name: refinement
 description:
-    Reformat extracted STE-100 simplified-English documentation
-    (`ste-code/extracted/*.md`)
+    Reformat extracted STE-Code docs to simplified-English standard.
 category: authoring
 capability: authoring-and-changing-the-standard
 source: .agents/skills/refinement
@@ -43,7 +42,7 @@ annotation while collapsing per-page boilerplate.
    output. Re-read your file with your eyes to confirm the self-check.
 7. **Rule-7 boilerplate collapse.** Repeated running headers
    (`**Part N - Writing rules**`, `**Subject-to-rule index**`) count as
-   boilerplate, not content — they're normalized out of the word-count gate.
+   boilerplate, not content - they're normalized out of the word-count gate.
 8. **Mark text-coverage, not raw tag count.** Workers legitimately MERGE
    PDF-split `<mark>` fragments (a lone `<mark>Non-STE:</mark>` +
    `<mark>_sentence_</mark>`) into one clean span, preserving 100% of the marked
@@ -77,23 +76,23 @@ the same blockquote.
   safe. Drive workers as SEPARATE background processes (no for-loop, no
   refine_batch.py parent that reaps).
 - **No long foreground sleeps.** Replace `sleep 300` + poll with `ps` +
-  file-mtime checks, then READ the produced file — do not block the session
+  file-mtime checks, then READ the produced file - do not block the session
   waiting.
 - **Poll + read instead of sleep.** After launching,
   `ps aux | grep [h]ermes-oneshot` + check refined mtimes; read a snippet to
   confirm real content (no phantom files).
 - **`<mark>` text-coverage gate.** Skip column-header label fragments
-  (`Column N: STE/Non-STE example`) — preserved as the real
+  (`Column N: STE/Non-STE example`) - preserved as the real
   `| STE example | Non-STE example |` header, not content loss.
 - **Dictionary → markdown table.** Keep 4-col grids; never explode to `####`
   headings.
 
 ## Support files (this skill)
 
-- `references/mark-gate.md` — the `<mark>` merge false-positive case + fix.
-- `references/blockquote-gfm.md` — the soft-wrap GFM bug + quoted-blank fix.
-- `templates/worker-prompt.txt` — known-good batched worker prompt.
-- `scripts/parity_gate.py` — `_word_count` + `_mark_text_coverage` checker.
+- `references/mark-gate.md` - the `<mark>` merge false-positive case + fix.
+- `references/blockquote-gfm.md` - the soft-wrap GFM bug + quoted-blank fix.
+- `templates/worker-prompt.txt` - known-good batched worker prompt.
+- `scripts/parity_gate.py` - `_word_count` + `_mark_text_coverage` checker.
 
 ## Self-check before you finish
 

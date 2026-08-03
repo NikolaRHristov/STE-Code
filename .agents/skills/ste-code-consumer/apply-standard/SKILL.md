@@ -1,8 +1,8 @@
 ---
-name: applying-ste-code
+name: apply-standard
 description:
-    Use when writing or rewriting documentation to the STE-Code standard. Loads
-    the right level artifact and applies the rules.
+    Apply the STE-Code standard to your own code and docs. Read the checked-out
+    rules; rewrite to match.
 ---
 
 # Applying STE-Code to your documentation
@@ -21,7 +21,7 @@ ls ste-code/artifacts/llms.txt
 ```
 
 If that path does not resolve, ask the user where the checkout is. Do not guess,
-and do not reconstruct rules from memory — the standard on disk is the
+and do not reconstruct rules from memory - the standard on disk is the
 authority.
 
 ## 2. Load the right level
