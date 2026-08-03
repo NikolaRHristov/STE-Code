@@ -23,12 +23,36 @@ JAIL_ROOT_MARKERS=(".git" "Makefile" "pyproject.toml")
 
 # --- project root -------------------------------------------------------------
 # Walk up from $1 (default: this library's directory) to the nearest marker.
+#
+# .git is the AUTHORITATIVE repo-root marker: it is scanned first across every
+# ancestor so a weaker marker (package.json, pyproject.toml, Makefile) that
+# lives in a subdirectory such as .agents/ can never hijack root detection.
+# Only when no .git exists (detached, non-git checkout) do the weaker markers
+# apply.
 jail_find_root() {
     local dir="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
     local depth=0
+    # Pass 1 — authoritative .git marker wins regardless of depth.
+    local gdir="$dir"
+    while [ "$depth" -lt 24 ]; do
+        if [ -e "$gdir/.git" ]; then
+            (cd "$gdir" && pwd -P)
+            return 0
+        fi
+        local gparent
+        gparent="$(dirname "$gdir")"
+        [ "$gparent" = "$gdir" ] && break
+        gdir="$gparent"
+        depth=$((depth + 1))
+    done
+    # Pass 2 — weaker markers only when no .git is present.
+    depth=0
     while [ "$depth" -lt 24 ]; do
         local marker
         for marker in "${JAIL_ROOT_MARKERS[@]}"; do
+            if [ "$marker" = ".git" ]; then
+                continue
+            fi
             if [ -e "$dir/$marker" ]; then
                 (cd "$dir" && pwd -P)
                 return 0

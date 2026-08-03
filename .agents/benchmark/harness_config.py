@@ -54,12 +54,27 @@ class ConfigError(RuntimeError):
 def _find_root(start: Path, markers: Sequence[str]) -> Path:
     """Walk upward from ``start`` until a directory containing a marker is found.
 
+    ``.git`` is the *authoritative* repo-root marker: it is scanned first
+    across every ancestor, so a weaker marker (``package.json``,
+    ``pyproject.toml``, ``Makefile``) that happens to live in a subdirectory
+    such as ``.agents/`` can never hijack root detection. Only when no ``.git``
+    exists (e.g. a detached, non-git checkout) do the weaker markers apply.
+
     Falls back to two levels above this file, which is the historical layout,
     rather than raising — a harness that cannot locate its root is still useful
     for pure generation work.
     """
-    for candidate in [start, *start.parents]:
+    candidates = [start, *start.parents]
+    # Pass 1 — authoritative marker wins regardless of depth.
+    if ".git" in markers:
+        for candidate in candidates:
+            if (candidate / ".git").exists():
+                return candidate
+    # Pass 2 — weaker markers only when no .git is present.
+    for candidate in candidates:
         for marker in markers:
+            if marker == ".git":
+                continue
             if (candidate / marker).exists():
                 return candidate
     return _HERE.parent.parent
