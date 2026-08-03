@@ -19,7 +19,7 @@
 
 set -uo pipefail
 
-JAIL_ROOT_MARKERS=(".git" "Makefile" "pyproject.toml" "package.json")
+JAIL_ROOT_MARKERS=(".git" "Makefile" "pyproject.toml")
 
 # --- project root -------------------------------------------------------------
 # Walk up from $1 (default: this library's directory) to the nearest marker.

@@ -8,7 +8,7 @@
     "rule_count": 14
   },
   "paths": {
-    "root_markers": [".git", "pyproject.toml", "package.json"],
+    "root_markers": [".git", "pyproject.toml"],
     "variant_prompt_template": "ste-code/artifacts/{variant_dir}/system-prompt.txt",
     "static_cases": ".agents/benchmark/test-cases",
     "generated_cases": ".agents/benchmark/test-cases-adhoc",
