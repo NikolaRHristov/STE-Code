@@ -1,8 +1,7 @@
 ---
 name: apply-standard
 description:
-    Apply the STE-Code standard to your own code and docs. Read the checked-out
-    rules; rewrite to match.
+    Apply the STE-Code standard to your own code and docs.
 ---
 
 # Applying STE-Code to your documentation
