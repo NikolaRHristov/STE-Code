@@ -1,123 +1,195 @@
 model:
-    default: tencent/hy3:free
-    provider: nous
-    base_url: https://inference-api.nousresearch.com/v1
+  default: tencent/hy3:free
+  provider: nous
+  base_url: https://inference-api.nousresearch.com/v1
 fallback_providers: []
 agent:
-    max_turns: 90
-    api_max_retries: 3
-    tool_use_enforcement: auto
-    task_completion_guidance: true
-    environment_probe: true
-    coding_context: auto
-    clarify_timeout: 600
-    reasoning_effort: high
+  max_turns: 90
+  api_max_retries: 3
+  tool_use_enforcement: auto
+  task_completion_guidance: true
+  environment_probe: true
+  coding_context: auto
+  clarify_timeout: 600
+  reasoning_effort: high
 terminal:
-    backend: local
-    cwd: .
-    timeout: 180
-    auto_source_bashrc: true
-    persistent_shell: true
+  backend: local
+  cwd: .
+  timeout: 180
+  auto_source_bashrc: true
+  persistent_shell: true
 tool_output:
-    max_bytes: 50000
-    max_lines: 2000
-    max_line_length: 2000
+  max_bytes: 50000
+  max_lines: 2000
+  max_line_length: 2000
 compression:
-    enabled: true
-    threshold: 0.5
-    target_ratio: 0.2
-    protect_last_n: 20
-    protect_first_n: 3
+  enabled: true
+  threshold: 0.5
+  target_ratio: 0.2
+  protect_last_n: 20
+  protect_first_n: 3
 display:
-    busy_input_mode: steer
-    show_reasoning: true
-    tool_progress: verbose
-    sections:
-        thinking: expanded
+  busy_input_mode: steer
+  show_reasoning: true
+  tool_progress: verbose
+  sections:
+    thinking: expanded
+stt:
+  enabled: false
 context:
-    engine: compressor
+  engine: compressor
 memory:
-    memory_enabled: true
-    user_profile_enabled: true
-    memory_char_limit: 6000
-    user_char_limit: 6000
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 6000
+  user_char_limit: 6000
 delegation:
-    max_iterations: 120
-    max_concurrent_children: 2
-    max_spawn_depth: 1
-    orchestrator_enabled: true
+  max_iterations: 120
+  max_concurrent_children: 2
+  max_spawn_depth: 1
+  orchestrator_enabled: true
 skills:
-    external_dirs: []
-    template_vars: true
-    inline_shell: false
-    write_approval: false
-    disabled:
-        - airtable
-        - apple-notes
-        - apple-reminders
-        - arxiv
-        - ascii-video
-        - baoyu-infographic
-        - blogwatcher
-        - claude-code
-        - claude-design
-        - codex
-        - comfyui
-        - design-md
-        - evaluating-llms-harness
-        - findmy
-        - gif-search
-        - google-workspace
-        - himalaya
-        - huggingface-hub
-        - humanizer
-        - imessage
-        - inspecting-hermes-desktop-dom
-        - llama-cpp
-        - llm-wiki
-        - manim-video
-        - maps
-        - node-inspect-debugger
-        - notion
-        - obsidian
-        - opencode
-        - openhue
-        - p5js
-        - polymarket
-        - serving-llms-vllm
-        - songsee
-        - songwriting-and-ai-music
-        - teams-meeting-pipeline
-        - touchdesigner-mcp
-        - xurl
-        - youtube-content
-security:
-    redact_secrets: true
-    tirith_enabled: true
-    tirith_fail_open: true
-code_execution:
-    mode: project
-tools:
-    tool_search:
-        enabled: auto
-        threshold_pct: 10
-plugins:
-    enabled:
-        - ste-code-jail
-    disabled: []
-    entries:
-        ste-code-jail:
-            allow_tool_override: false
-        privacy-scrub:
-            enabled: true
-
+  external_dirs: []
+  template_vars: true
+  inline_shell: false
+  write_approval: false
+  disabled:
+    - airtable
+    - apple-notes
+    - apple-reminders
+    - arxiv
+    - ascii-video
+    - baoyu-infographic
+    - blogwatcher
+    - claude-code
+    - claude-design
+    - codex
+    - comfyui
+    - design-md
+    - evaluating-llms-harness
+    - findmy
+    - gif-search
+    - google-workspace
+    - himalaya
+    - huggingface-hub
+    - humanizer
+    - imessage
+    - inspecting-hermes-desktop-dom
+    - llama-cpp
+    - llm-wiki
+    - manim-video
+    - maps
+    - node-inspect-debugger
+    - notion
+    - obsidian
+    - opencode
+    - openhue
+    - p5js
+    - polymarket
+    - serving-llms-vllm
+    - songsee
+    - songwriting-and-ai-music
+    - teams-meeting-pipeline
+    - touchdesigner-mcp
+    - xurl
+    - youtube-content
 hooks:
-    post_tool_call:
-        - matcher: "memory"
-          command: "~/.hermes/profiles/dev-ste-code/hooks/post-memory-anonymise.py"
-          timeout: 60
-    pre_tool_call:
-        - matcher: "terminal"
-          command: "~/.hermes/profiles/dev-ste-code/hooks/pre-tool-call-scrub-commands.py"
-          timeout: 30
+  post_tool_call:
+    - matcher: memory
+      command: ~/.hermes/profiles/dev-ste-code/hooks/post-memory-anonymise.py
+      timeout: 60
+  pre_tool_call:
+    - matcher: terminal
+      command: ~/.hermes/profiles/dev-ste-code/hooks/pre-tool-call-scrub-commands.py
+      timeout: 30
 hooks_auto_accept: true
+security:
+  redact_secrets: true
+  tirith_enabled: true
+  tirith_fail_open: true
+code_execution:
+  mode: project
+tools:
+  tool_search:
+    enabled: auto
+    threshold_pct: 10
+_config_version: 33
+plugins:
+  enabled:
+    - ste-code-jail
+  disabled: []
+  entries:
+    ste-code-jail:
+      allow_tool_override: false
+    privacy-scrub:
+      enabled: true
+platform_toolsets:
+  cli:
+    - aphrodite
+    - clarify
+    - code_execution
+    - computer_use
+    - context_engine
+    - delegation
+    - file
+    - kanban
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+known_plugin_toolsets:
+  cli:
+    - aphrodite
+    - spotify
+known_builtin_toolsets:
+  cli:
+    - bfl
+    - browser
+    - clarify
+    - code_execution
+    - computer_use
+    - context_engine
+    - cronjob
+    - delegation
+    - discord
+    - discord_admin
+    - file
+    - homeassistant
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - spotify
+    - stt
+    - terminal
+    - todo
+    - tts
+    - video
+    - video_gen
+    - vision
+    - web
+    - x_search
+    - yuanbao
+
+# ── Fallback Model ────────────────────────────────────────────────────
+# Automatic provider failover when primary is unavailable.
+# Uncomment and configure to enable. Triggers on rate limits (429),
+# overload (529), service errors (503), or connection failures.
+#
+# Supported providers:
+#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
+#   openai-codex (OAuth — hermes auth) — OpenAI Codex
+#   nous         (OAuth — hermes auth) — Nous Portal
+#   zai          (ZAI_API_KEY)         — Z.AI / GLM
+#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
+#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
+#   minimax      (MINIMAX_API_KEY)     — MiniMax
+#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
+#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
+#
+# For custom OpenAI-compatible endpoints, add base_url and key_env.
+#
+# fallback_model:
+#   provider: openrouter
+#   model: anthropic/claude-sonnet-4
