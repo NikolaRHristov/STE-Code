@@ -8,7 +8,16 @@ import json
 import os
 from pathlib import Path
 
-BASE = "/Volumes/CORSAIR/Developer/macOS/Application/Manual"
+def _repo_root(start):
+    """Walk up from `start` to the checkout root (holds `ste-code/`)."""
+    path = Path(start).resolve()
+    for parent in path.parents:
+        if (parent / "ste-code").is_dir():
+            return str(parent)
+    return str(path.parents[3])
+
+
+BASE = _repo_root(__file__)
 ADAPTED_DICT = os.path.join(BASE, "ste-code/adapted/a-dictionary.md")
 RULES_DIR = os.path.join(BASE, "ste-code/adapted")
 OUTPUT_PATH = os.path.join(BASE, "ste-code/data/vocabulary/unapproved-entries.json")

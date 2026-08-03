@@ -1,7 +1,7 @@
 # The `ste-code` profile: read the standard, write your own documentation.
 #
 # This profile is the CONSUMER view of the repository. It is not the profile
-# the methodology is authored from — that is `dev-ste-code`. Here you read the
+# the methodology is authored from - that is `dev-ste-code`. Here you read the
 # standard and the level artifacts, then apply them to documentation in your
 # own project.
 #
@@ -41,7 +41,7 @@ tool_output:
 
 compression:
     enabled: true
-    threshold: 0.5
+    threshold: 0.7
     target_ratio: 0.2
     protect_last_n: 20
     protect_first_n: 3
