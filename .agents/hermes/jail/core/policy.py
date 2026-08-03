@@ -103,6 +103,24 @@ def resolve_project_root(
     return None
 
 
+# The jail core always ships inside the STE-Code checkout at
+# `<repo>/.agents/hermes/jail/core/policy.py`. Anchoring the project root to that
+# location makes resolution cwd-INDEPENDENT: a `hermes -z` / delegated child
+# spawned with cwd=~/.hermes (or ~) would otherwise walk up from its cwd, find
+# no .git marker, return None, and silently DROP the real repo from every
+# policy's write roots — which is exactly the symptom of a child session that
+# "cannot locate anything." Prefer this anchor; fall back to the cwd-walk only
+# when the core is imported from outside a checkout (e.g. unit tests).
+def resolve_project_root_anchored() -> Optional[str]:
+    anchor = Path(__file__).resolve()
+    # parents[0]=core, [1]=jail, [2]=hermes, [3]=.agents, [4]=<repo>
+    repo = anchor.parents[4] if len(anchor.parents) > 4 else anchor.parent
+    if (repo / ".git").exists() or (repo / "Makefile").exists():
+        return normalize(str(repo))
+    # Not inside a checkout (test import). Defer to the cwd walk.
+    return resolve_project_root(os.getcwd())
+
+
 def temp_roots() -> List[str]:
     roots = ["/tmp", "/private/tmp", "/var/folders", "/private/var/folders"]
     try:
@@ -558,9 +576,12 @@ def load_context(force: bool = False) -> JailContext:
             policy_name,
         )
 
-    project_root = resolve_project_root(
-        cfg.get("project_root") or os.getcwd(),
-        cfg.get("root_markers") or DEFAULT_ROOT_MARKERS,
+    project_root = (
+        cfg.get("project_root")
+        or resolve_project_root_anchored()  # cwd-independent: anchor to the
+        # checkout this core ships inside, so spawned children (cwd=~/.hermes,
+        # ~) still resolve the real repo. Falls back to a cwd walk internally.
+        or resolve_project_root(os.getcwd(), cfg.get("root_markers") or DEFAULT_ROOT_MARKERS)
     )
 
     # Derive the profile directory from the RESOLVED profile name rather than
