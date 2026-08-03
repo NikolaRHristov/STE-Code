@@ -1,0 +1,35 @@
+# Force LF line endings in the working tree on every platform.
+# This repo is edited on macOS where `git config core.autocrlf=true` was
+# converting LF->CRLF on checkout, which broke `bash -n` on shell scripts and
+# risked corrupting them. Declaring text=eol=lf makes Git store and check out
+# LF consistently regardless of the local autocrlf setting.
+
+* text=auto eol=lf
+
+# Scripting / shell — must be LF or bash -n / exec break on some tools.
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Source
+*.py text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.mk text eol=lf
+Makefile text eol=lf
+
+# Binary assets — never touch line endings.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.gz binary
+*.zip binary
+*.ico binary
+*.woff binary
+*.woff2 binary
