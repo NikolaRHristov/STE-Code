@@ -1,14 +1,17 @@
-# STE-Code Linguistic Layer — Master Integration Roadmap
+# STE-Code Linguistic Layer — Master Integration Roadmap 🗺️
 
-> **Version:** FLAVOR-1.1.0
-> **Status:** Plan complete. Phase 0 (state reconciliation) is the blocker — nothing proceeds until it completes.
-> **Rule:** Additive only — nothing deleted, no rule text modified. Appendices, new files, and new directories only.
+> [!NOTE]
+>
+> **Version:** FLAVOR-1.1.0 **Status:** Plan complete. Phase 0 (state
+> reconciliation) is the blocker — nothing proceeds until it completes.
+> **Rule:** Additive only — nothing deleted, no rule text modified. Appendices,
+> new files, and new directories only.
 
 ---
 
-## Phase 0 — Reconcile State (blocker)
+## Phase 0 — Reconcile State (blocker) 🔗
 
-```
+```text
 1. Verify repo state on Current:
    - Confirm merged PRs and current branch state.
    - List ste-code/ tree: adapted/ (57 files), artifacts/ (5 levels),
@@ -39,11 +42,11 @@
 
 ---
 
-## Phase 1 — Grounding (Workflow 1, mandatory)
+## Phase 1 — Grounding (Workflow 1, mandatory) 🌱
 
 Verify every claim in the linguistic layer against actual repo content.
 
-```
+```text
 Read: linguistics/* + all level prompts + all 58 adapted rule files
       + data/synonym-table.json + benchmark_lib.py
 
@@ -58,9 +61,9 @@ Produce docs/roadmap/GROUNDING-REPORT.md:
 
 ---
 
-## Phase 2 — Self-Conformance & Coverage (Workflow 11 + coverage metric)
+## Phase 2 — Self-Conformance & Coverage (Workflow 11 + coverage metric) ✅
 
-```
+```text
 1. Lint: adapted/*.md, all level prompts, all SKILL.md, all READMEs.
 2. Classify findings: doc bug → fix; false positive → spec bug;
    mention-context → use–mention exemption rule.
@@ -70,37 +73,46 @@ Produce docs/roadmap/GROUNDING-REPORT.md:
    API descriptions, comments, CLI help.
 ```
 
-**Deliverables:** `docs/roadmap/SELF-CONFORMANCE.md`, coverage figure, use–mention rule.
+**Deliverables:** `docs/roadmap/SELF-CONFORMANCE.md`, coverage figure,
+use–mention rule.
 
 ---
 
-## Phase 3 — Complete the Specification (Workflows 6–10, 12–13, 15–18)
+## Phase 3 — Complete the Specification (Workflows 6–10, 12–13, 15–18) 📐
 
-### discourse.json
+### discourse.json 💬
+
 - Anaphora table (this/it/they/former-latter/ellipsis)
 - Quantifier table (vague → required precision form)
 - Verb frames (seed 10 → corpus-complete inventory)
 - Negation rules + antonym table
 - Definition discipline (first-use, inventory, graduation)
 
-### semantics.json extensions
+### semantics.json extensions 🧠
+
 - Epistemic rules: Specified / Measured(+date) / Expected classes; modal bans
 - Actor model: 4 actors, one-per-sentence, labeled handoff pattern
-- Lifecycle: per-entry states + changelog (current / deprecated:DATE / obsolete:DATE / emerging)
+- Lifecycle: per-entry states + changelog (current / deprecated:DATE /
+  obsolete:DATE / emerging)
 
-### registers.json
+### registers.json 🎭
+
 - 6 register profiles calibrated against Phase 2 register census
 
-### SPECIFICATION.md + CODE-BLOCK-SPEC.md
+### SPECIFICATION.md + CODE-BLOCK-SPEC.md 📝
+
 - 5-element code-block contract, copy-paste integrity rule
 
-**Method note:** Corpus-mining uses POS-based noun-phrase candidate extraction + C-value/TF-IDF filtering. Requirements-glossary line (GlossEx; Sharma et al. semantic filter) applies for definition inventory. Acrolinx lifecycle (extract → validate → manage → check) is the reference pipeline.
+**Method note:** Corpus-mining uses POS-based noun-phrase candidate extraction +
+C-value/TF-IDF filtering. Requirements-glossary line (GlossEx; Sharma et al.
+semantic filter) applies for definition inventory. Acrolinx lifecycle (extract →
+validate → manage → check) is the reference pipeline.
 
 ---
 
-## Phase 4 — Benchmark Integration (Workflows 4, 14, 17)
+## Phase 4 — Benchmark Integration (Workflows 4, 14, 17) 📊
 
-```
+```text
 1. Minimal-pairs corpus (pairs.jsonl):
    - {dim, bad, good, rule_ref, source}; one dimension per pair
    - ≥3 pairs per semantics table; ≥1 per adapted rule
@@ -118,19 +130,22 @@ Produce docs/roadmap/GROUNDING-REPORT.md:
 
 ---
 
-## Phase 5 — Harden the Checker (Workflow 5.x)
+## Phase 5 — Harden the Checker (Workflow 5.x) 🛡️
 
-1. Per-section referent tracking — heading-delimited scoping, qualification reset.
-2. Compound-form exemptions — `Node.js` ⊃ `node`, `deployment` ⊃ `deploy`; data-driven.
+1. Per-section referent tracking — heading-delimited scoping, qualification
+   reset.
+2. Compound-form exemptions — `Node.js` ⊃ `node`, `deployment` ⊃ `deploy`;
+   data-driven.
 3. Mention-context exemption — quoted/italic terms in normative text exempt.
 4. Register-aware rule gating — violation only within the register profile.
-5. LLM-augmented intent detection — probabilistic, with per-finding confidence logged.
+5. LLM-augmented intent detection — probabilistic, with per-finding confidence
+   logged.
 
 ---
 
-## Phase 6 — Living Standard Loop (continuous)
+## Phase 6 — Living Standard Loop (continuous) 🔄
 
-```
+```text
 1. Term graduation: doc-local term in ≥3 documents → propose (emerging → current).
 2. Lifecycle backfill: scan git history for term transitions.
 3. conform_to front-matter on all docs; linter warns on version drift.
@@ -139,9 +154,9 @@ Produce docs/roadmap/GROUNDING-REPORT.md:
 
 ---
 
-## Final File Map
+## Final File Map 🗺️
 
-```
+```text
 ste-code/linguistics/
   semantics.json        roles, domains, collisions, intents, epistemic, actors, lifecycle
   discourse.json        anaphora, quantifiers, verb frames, negation, definitions
@@ -160,9 +175,9 @@ docs/roadmap/
   BENCHMARK-RESULTS.md
 ```
 
-## Precedence Stack (normative, final)
+## Precedence Stack (normative, final) 📚
 
-```
+```text
 truth/identifiers
   > safety (Warning/Prohibition)
     > reference (SRR + discourse)
@@ -177,12 +192,14 @@ truth/identifiers
                       > brevity
 ```
 
-## Exit Criteria
+## Exit Criteria 🚪
 
 - [ ] Phase 0 reconciliation committed
 - [ ] Grounding report: 0 unresolved contradictions
 - [ ] Coverage metric published; tracked per version
-- [ ] All 3 spec stores complete; every rule class has table + repair + hook + evidence
+- [ ] All 3 spec stores complete; every rule class has table + repair + hook +
+      evidence
 - [ ] Benchmark A/B/C run; minimal-pairs category live; results versioned
 - [ ] Linter hardened through all 5 fixes; false-positive log near-empty
-- [ ] Graduation + lifecycle loop operational; first quarterly coverage re-run scheduled
+- [ ] Graduation + lifecycle loop operational; first quarterly coverage re-run
+      scheduled
