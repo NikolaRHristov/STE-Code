@@ -58,6 +58,7 @@ venv/
 .agents/hermes/jail/tests/DELEGATE-*
 .agents/hermes/jail/tests/*.log
 .agents/hermes/jail/tests/godmode.md
+.agents/hermes/hooks/logs/*.log
 
 # Ad-hoc prompts are generated before a run (deterministic, seed=7).
 .agents/benchmark/test-cases-adhoc/

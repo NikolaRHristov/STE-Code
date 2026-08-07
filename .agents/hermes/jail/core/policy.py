@@ -447,7 +447,9 @@ def _read_deny_roots_for(home: str, profile: str) -> List[str]:
     return roots
 
 
-def _build_dev(project_root: Optional[str], cfg: Dict[str, Any], home: str) -> Policy:
+def _build_dev(
+    project_root: Optional[str], cfg: Dict[str, Any], home: str, profile: str = ""
+) -> Policy:
     """Permissive authoring policy: the repo plus this Hermes profile."""
     write: List[str] = []
     deny: List[str] = []

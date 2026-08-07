@@ -34,6 +34,13 @@ Usage
     write_text(cfg.path("outputs.refined") / "r001.md", body)   # confined
     write_json(path, data, make_parents=True)
     mkdir(cfg.path("outputs.state"))
+
+    # Guarantee the parent tree exists before a raw write elsewhere in the
+    # codebase (a plain ``open(..., "w")`` / ``Path.write_text`` raises
+    # FileNotFoundError when the directory is missing — so an agent that runs
+    # with no directories pre-created would crash exactly at output time):
+    from pathlib import Path as _P
+    ensure_parent_dir(_P("some/deep/new/tree/out.txt"))   # confined, tree made
 """
 
 from __future__ import annotations
@@ -98,6 +105,32 @@ def _confine(target: Path, *, clean: Optional[bool] = None) -> Path:
             "writing through the normal gate"
         )
     return resolved
+
+
+def ensure_parent_dir(
+    path: Union[str, os.PathLike],
+    clean: Optional[bool] = None,
+) -> Path:
+    """Guarantee the parent directory of *path* exists (confined to the repo).
+
+    This is the single point that closes the "no directories existed" gap: a
+    plain ``open(path, "w")`` / ``Path.write_text`` raises FileNotFoundError
+    when the parent tree is missing, so an agent that starts with an empty
+    checkout would crash exactly at the first output write. Call this *before*
+    any raw write in the codebase, or let :func:`write_text`/:func:`write_json`
+    do it for you via ``make_parents=True``.
+
+    The target itself is NOT created — only its parent. The returned path is
+    the confined, resolved target so callers can chain a raw write::
+
+        p = ensure_parent_dir(PROJECT / ".agents" / "prompts" / batch / "x.md")
+        p.write_text(...)   # parent now guaranteed to exist
+
+    Refuses targets outside the repository (same gate as the writers).
+    """
+    target = _confine(Path(path), clean=clean)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    return target
 
 
 def write_text(

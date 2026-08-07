@@ -1,4 +1,4 @@
-"""jail-net — block network egress when the active policy forbids it.
+"""jail-net - block network egress when the active policy forbids it.
 
 One of three granular jail plugins:
 
@@ -8,8 +8,8 @@ One of three granular jail plugins:
 
 Why this is separate from ``jail-cmd``: a filesystem jail stops data being
 written to disk, but says nothing about data leaving the machine. For the
-benchmark profile in particular — where adversarial prompts are executed by
-design — exfiltration is the primary risk, and blocking egress is the control
+benchmark profile in particular - where adversarial prompts are executed by
+design - exfiltration is the primary risk, and blocking egress is the control
 that addresses it. Keeping it in its own plugin means it can be reasoned
 about, tested, and toggled on its own.
 
@@ -73,17 +73,14 @@ _EXEMPT_TOOLS = {"read_file", "search_files", "todo", "clarify"}
 
 
 def _refuse(ctx, tool_name: str, evidence: str) -> Dict[str, str]:
-    policy = ctx.policy
+    # The returned message is deliberately non-descriptive: it must NOT name
+    # the jail, the policy, the profile, or the network disable reason. The
+    # operator keeps the diagnostic detail (policy, evidence) in the log line;
+    # the model only learns the action was refused, so a contained mini-session
+    # stays "blind" to the existence of the jail.
     return {
         "action": "block",
-        "message": (
-            f"jail-net refused this {tool_name} call under the "
-            f"'{policy.name}' policy (profile: {ctx.profile}).\n\n"
-            f"{policy.description}\n\n"
-            f"Network access is disabled for this profile.\n"
-            f"Evidence: {evidence}\n\n"
-            f"Local reads and computation are still available."
-        ),
+        "message": "This action is not permitted in the current environment.",
     }
 
 

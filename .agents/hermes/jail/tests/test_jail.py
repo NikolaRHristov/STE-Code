@@ -245,12 +245,6 @@ def _cases(
     ]
 
     allow: List[Case] = [
-        ("read_file", {"path": "/etc/hosts"}, "read_file is never gated"),
-        (
-            "search_files",
-            {"pattern": "x", "path": "/usr"},
-            "search_files is never gated",
-        ),
         ("terminal", {"command": f"cat {parent}/somefile.md"}, "READ outside the jail"),
         ("terminal", {"command": "ls -la /etc"}, "read-only ls outside"),
         (
@@ -319,6 +313,16 @@ def _cases(
 
     if policy == "dev":
         allow += [
+            (
+                "read_file",
+                {"path": "/etc/hosts"},
+                "reads are open under dev",
+            ),
+            (
+                "search_files",
+                {"pattern": "x", "path": "/usr"},
+                "reads are open under dev",
+            ),
             (
                 "write_file",
                 {"path": os.path.join(root, "ste-code/x.md"), "content": "x"},
@@ -422,6 +426,21 @@ def _cases(
             ),
         ]
         escape += [
+            (
+                "read_file",
+                {"path": "/System/Library/Kernels/kernel"},
+                "read the kernel tree (hidden from locked policies)",
+            ),
+            (
+                "read_file",
+                {"path": os.path.expanduser("~/.hermes/.env")},
+                "read the shared credential store",
+            ),
+            (
+                "search_files",
+                {"pattern": "secret", "path": "/var/db"},
+                "search the OS credential store",
+            ),
             (
                 "write_file",
                 {"path": os.path.join(root, "ste-code/x.md"), "content": "x"},
@@ -548,6 +567,30 @@ def _cases(
             ),
         ]
         escape += [
+            (
+                "read_file",
+                {"path": "/System/Library/Kernels/kernel"},
+                "read the kernel tree (hidden from locked policies)",
+            ),
+            (
+                "read_file",
+                {"path": os.path.expanduser("~/.hermes/profiles/ste-code/auth.json")},
+                "read a SIBLING profile's credentials",
+            ),
+            (
+                "read_file",
+                {
+                    "path": os.path.expanduser(
+                        "~/.hermes/profiles/benchmark-ste-code/.env"
+                    )
+                },
+                "read its own profile control-surface (.env)",
+            ),
+            (
+                "search_files",
+                {"pattern": "x", "path": "/var/db"},
+                "search the OS credential store",
+            ),
             (
                 "write_file",
                 {"path": os.path.join(root, "ste-code/x.md"), "content": "x"},
@@ -694,6 +737,18 @@ def run_policy(policy: str, verbose: bool) -> int:
 
     print(f"\nESCAPE ({len(escape)}) - must ALL be blocked")
     holes = 0
+    leaks = 0
+    _LEAK_WORDS = (
+        "jail",
+        "policy",
+        "bench",
+        "writable",
+        "root",
+        "STE_CODE",
+        "profile",
+        "denied",
+        "confin",
+    )
     for tool, args, label in escape:
         result = group._on_pre_tool_call(tool_name=tool, args=args)
         blocked = isinstance(result, dict) and result.get("action") == "block"
@@ -701,10 +756,21 @@ def run_policy(policy: str, verbose: bool) -> int:
             failures += 1
             holes += 1
             print(f"  [HOLE] {label}: NOT blocked")
-        elif verbose:
-            print(f"  [ok]   {label}")
+        else:
+            # Refusal messages must be opaque to the model: they must not name
+            # the jail, the policy, the profile, or reveal the writable roots.
+            msg = (result.get("message") or "").lower()
+            if any(w in msg for w in _LEAK_WORDS):
+                leaks += 1
+                failures += 1
+                print(f"  [LEAK] {label}: refusal message discloses: {msg!r}")
+            elif verbose:
+                print(f"  [ok]   {label}")
     if not verbose:
-        print(f"  {len(escape) - holes}/{len(escape)} escapes blocked")
+        print(
+            f"  {len(escape) - holes}/{len(escape)} escapes blocked"
+            f"{('; ' + str(leaks) + ' message leak(s)') if leaks else ''}"
+        )
 
     return failures
 
@@ -759,15 +825,11 @@ def run_fail_closed(verbose: bool) -> int:
 
         result = group._on_pre_tool_call(tool_name=tool, args=dict(args))
         blocked = isinstance(result, dict) and result.get("action") == "block"
-        message = str(result.get("message", "")) if isinstance(result, dict) else ""
         if not blocked:
             failures += 1
             print(f"  [HOLE] {name} raised and the call was NOT blocked")
-        elif name not in message:
-            failures += 1
-            print(f"  [FAIL] {name} raised; block message does not name it")
         elif verbose:
-            print(f"  [ok]   {name} raised -> blocked, message names it")
+            print(f"  [ok]   {name} raised -> blocked (operator sees detail in log)")
 
     # 2. a component fails to load -> the whole jail refuses.
     group = _load_group_plugin()
@@ -777,11 +839,10 @@ def run_fail_closed(verbose: bool) -> int:
     if not blocked:
         failures += 1
         print("  [HOLE] incomplete chain did NOT refuse the call")
-    elif "INCOMPLETE" not in str(result.get("message", "")):
-        failures += 1
-        print("  [FAIL] incomplete-chain refusal does not say INCOMPLETE")
     elif verbose:
-        print("  [ok]   incomplete chain -> every call refused")
+        print(
+            "  [ok]   incomplete chain -> every call refused (operator sees detail in log)"
+        )
 
     checks = len(group.COMPONENTS) + 2
     if not verbose:
