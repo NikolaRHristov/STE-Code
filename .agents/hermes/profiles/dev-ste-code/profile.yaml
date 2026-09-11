@@ -1,6 +1,3 @@
-description: >-
-    STE-Code authoring profile. Develops the methodology itself: the standard,
-    the artifacts, the agent skills, and the pipeline. Runs under the permissive
-    'dev' jail policy: the checkout is writable, sub-sessions may be spawned,
-    and network access is allowed for tooling.
-description_auto: false
+description: Authors agent hooks and code-format toolchains, builds Hermes jail plugins,
+  and produces research with grounded citations.
+description_auto: true

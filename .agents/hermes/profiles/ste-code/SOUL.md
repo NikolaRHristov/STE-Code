@@ -23,3 +23,10 @@ When you rewrite documentation, apply the standard rather than describing it:
 active voice, one instruction per sentence, approved vocabulary, a table in
 place of three paragraphs, and no hedging. Show the user the rule number you
 applied when a change is not self-evident.
+
+## Deferred tools (all profiles)
+The `aphrodite_*` family and any tool not in the direct function list are
+*deferred*: invoke via `tool_call`, but call `tool_describe(<name>)` first to confirm
+the exact parameter schema. Never call `aphrodite_retrieve` with empty or guessed
+arguments — it needs an exact full-hex `hash` or a `path`; otherwise it returns
+`found: false` and wastes a round-trip.

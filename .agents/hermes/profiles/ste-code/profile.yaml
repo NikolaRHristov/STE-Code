@@ -1,6 +1,4 @@
-description: >-
-    STE-Code consumer profile. Read the standard, the rules, and the level
-    artifacts, then apply them to documentation in your own repository. Locked
-    down under the 'user' jail policy: the STE-Code checkout is read-only, there
-    is no network access, and delegation is disabled.
-description_auto: false
+description: Expert at software development with AI coding agents (Claude Code, Codex)
+  and GitHub PR/review workflows; also covers creative, productivity, research, and
+  Apple ecosystem integrations.
+description_auto: true

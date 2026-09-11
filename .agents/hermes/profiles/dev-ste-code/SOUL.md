@@ -15,3 +15,10 @@ written into the repository.
 When you change the skill library, change `.agents/skills/` (the single source)
 and the profile's bucket symlinks — never hand-copy skill text into `~/.hermes`,
 because a copied skill drifts from the source the moment the source is edited.
+
+## Deferred tools (all profiles)
+The `aphrodite_*` family and any tool not in the direct function list are
+*deferred*: invoke via `tool_call`, but call `tool_describe(<name>)` first to confirm
+the exact parameter schema. Never call `aphrodite_retrieve` with empty or guessed
+arguments — it needs an exact full-hex `hash` or a `path`; otherwise it returns
+`found: false` and wastes a round-trip.

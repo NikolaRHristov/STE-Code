@@ -14,6 +14,6 @@
 		"check": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore --check ../../ste-code/ .."
 	},
 	"devDependencies": {
-		"prettier": "^3.9.5"
+		"prettier": "^3.9.6"
 	}
 }

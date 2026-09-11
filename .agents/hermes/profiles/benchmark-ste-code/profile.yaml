@@ -1,5 +1,4 @@
-description: >-
-    Adversarial benchmark runs for STE-Code. Locked down under the 'bench' jail
-    policy: writes confined to the benchmark output tree, no network, no
-    delegation.
-description_auto: false
+description: Software-development and LLM-eval agent — inspects GitHub repos, runs
+  code reviews/PRs, debugs Python/Node, and operates autonomous coding tools (Claude
+  Code, Codex). Broad creative/productivity skills.
+description_auto: true
